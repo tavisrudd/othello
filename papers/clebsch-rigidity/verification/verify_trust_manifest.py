@@ -12,6 +12,12 @@ from typing import NoReturn
 
 
 SCHEMA = "clebsch-rigidity-trust-manifest-v1"
+REQUIRED_CITATION_FRAGMENTS = {
+    17: ("Dye 1991",),
+    25: ("Dye 1991", "Brouwer--Cohen--Neumaier", "Abiad--Jabal Ameli--Reijnders"),
+    26: ("discussion preceding Theorem 6",),
+    29: ("Dye 1991", "Brouwer--Cohen--Neumaier", "Abiad--Jabal Ameli--Reijnders"),
+}
 ROWS = [2, *range(11, 27), 29, 58]
 ROUTES = {
     "conceptual-cited-inputs",
@@ -37,6 +43,15 @@ def fail(message: str) -> NoReturn:
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def release_surface_sha256(manifest: dict[str, object]) -> str:
+    projection = json.loads(json.dumps(manifest))
+    projection["verify_all"].pop("output")
+    encoded = json.dumps(
+        projection, separators=(",", ":"), sort_keys=True
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def require_string(value: object, where: str) -> str:
@@ -136,22 +151,44 @@ def validate_computation(
     if not isinstance(value, dict):
         fail(f"{where} must be an object")
     for field in (
-        "checker",
         "coverage",
         "soundness_bridge",
         "independent_replay",
         "residual_trust",
     ):
         require_string(value.get(field), f"{where}.{field}")
+    coverage = require_string(value.get("coverage"), f"{where}.coverage")
+    if coverage.startswith("The script exhausts the finite field"):
+        fail(f"{where}.coverage must state the exact finite domain")
     artifacts = value.get("artifacts")
     if not isinstance(artifacts, list) or not artifacts:
         fail(f"{where}.artifacts must be nonempty")
+    artifact_paths: list[str] = []
     for index, artifact in enumerate(artifacts):
         path = validate_file(
             artifact, repositories, f"{where}.artifacts[{index}]"
         )
         if path.suffix != ".py":
             fail(f"{where}.artifacts[{index}] must be an exact Python checker")
+        artifact_paths.append(require_string(artifact.get("path"), f"{where}.artifacts[{index}].path"))
+    commands = value.get("checker_commands")
+    if not isinstance(commands, list) or not commands:
+        fail(f"{where}.checker_commands must be a nonempty list")
+    command_paths: list[str] = []
+    for index, command in enumerate(commands):
+        if not isinstance(command, dict):
+            fail(f"{where}.checker_commands[{index}] must be an object")
+        argv = command.get("argv")
+        if (
+            not isinstance(argv, list)
+            or len(argv) != 2
+            or argv[0] != "python3"
+            or not isinstance(argv[1], str)
+        ):
+            fail(f"{where}.checker_commands[{index}].argv must be ['python3', path]")
+        command_paths.append(argv[1])
+    if command_paths != artifact_paths:
+        fail(f"{where}.checker_commands must correspond exactly to artifacts")
 
 
 def validate_component(
@@ -183,6 +220,21 @@ def validate_component(
             value.get("unconditional_remainder"),
             f"{where}.unconditional_remainder",
         )
+
+
+def claim_computations(claim: dict[str, object]) -> list[dict[str, object]]:
+    values: list[dict[str, object]] = []
+    computation = claim.get("computation")
+    if isinstance(computation, dict):
+        values.append(computation)
+    components = claim.get("components")
+    if isinstance(components, list):
+        for component in components:
+            if isinstance(component, dict):
+                computation = component.get("computation")
+                if isinstance(computation, dict):
+                    values.append(computation)
+    return values
 
 
 def validate_claim(
@@ -312,6 +364,20 @@ def main() -> int:
     manuscript = args.manuscript.resolve()
     if manifest.get("manuscript_sha256") != digest(manuscript):
         fail("manuscript hash mismatch")
+    validate_file(
+        manifest.get("manuscript_pdf"),
+        repositories,
+        "manifest.manuscript_pdf",
+    )
+    public_documents = manifest.get("public_documents")
+    if not isinstance(public_documents, list) or len(public_documents) != 2:
+        fail("manifest.public_documents must contain both public README files")
+    for index, document in enumerate(public_documents):
+        validate_file(
+            document,
+            repositories,
+            f"manifest.public_documents[{index}]",
+        )
     identity_path = validate_file(
         manifest.get("statement_identity"),
         repositories,
@@ -338,6 +404,11 @@ def main() -> int:
             audit_cache,
             f"manifest.claims[{index}]",
         )
+        row = claim_value["row"]
+        claim_text = json.dumps(claim_value, sort_keys=True)
+        for fragment in REQUIRED_CITATION_FRAGMENTS.get(row, ()):
+            if fragment not in claim_text:
+                fail(f"manifest claim row {row} omits required cited input: {fragment}")
     environment = manifest.get("reproducibility_environment")
     if not isinstance(environment, dict):
         fail("manifest.reproducibility_environment must be an object")
@@ -350,7 +421,9 @@ def main() -> int:
     if "verification/verify_release.py" not in command or "nix develop" not in command:
         fail("manifest.verify_all.command is not the clean release entry point")
     validate_file(verify_all.get("entry_point"), repositories, "manifest.verify_all.entry_point")
-    validate_file(verify_all.get("output"), repositories, "manifest.verify_all.output")
+    release_output_path = validate_file(
+        verify_all.get("output"), repositories, "manifest.verify_all.output"
+    )
     certificate = verify_all.get("checker_output_certificate")
     if not isinstance(certificate, dict):
         fail("manifest.verify_all.checker_output_certificate must be an object")
@@ -364,6 +437,16 @@ def main() -> int:
         repositories,
         "manifest.verify_all.checker_output_certificate.output",
     )
+    release_output = json.loads(release_output_path.read_text(encoding="utf-8"))
+    expected_inputs = {
+        "checker_outputs_sha256": certificate["output"]["sha256"],
+        "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
+        "manuscript_sha256": manifest["manuscript_sha256"],
+        "release_surface_sha256": release_surface_sha256(manifest),
+        "statement_identity_sha256": manifest["statement_identity"]["sha256"],
+    }
+    if release_output.get("inputs") != expected_inputs:
+        fail("release output does not attest the exact release inputs")
     tools = verify_all.get("verification_tools")
     if not isinstance(tools, list) or len(tools) != 5:
         fail("manifest.verify_all.verification_tools must contain five files")
@@ -373,7 +456,22 @@ def main() -> int:
             repositories,
             f"manifest.verify_all.verification_tools[{index}]",
         )
-    validate_checks(verify_all.get("checks"), repositories, "manifest.verify_all.checks")
+    checks = verify_all.get("checks")
+    validate_checks(checks, repositories, "manifest.verify_all.checks")
+    admitted_checker_commands = {
+        tuple(check["argv"])
+        for check in checks
+        if isinstance(check, dict) and str(check.get("id", "")).startswith("check-")
+    }
+    for claim in claims:
+        for computation in claim_computations(claim):
+            for command_spec in computation["checker_commands"]:
+                command = tuple(command_spec["argv"])
+                if command not in admitted_checker_commands:
+                    fail(
+                        f"manifest claim row {claim['row']} checker command is "
+                        f"absent from verify_all.checks: {command}"
+                    )
     lean_repository = manifest.get("lean_repository")
     if not isinstance(lean_repository, dict):
         fail("manifest.lean_repository must be an object")

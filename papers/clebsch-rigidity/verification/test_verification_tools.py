@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -82,6 +83,58 @@ class ReleaseRunnerTests(unittest.TestCase):
         )
         self.assertIsNotNone(match)
         self.assertEqual(match.group(1), "19")
+
+
+class ManifestSemanticTests(unittest.TestCase):
+    def manifest(self) -> dict[str, object]:
+        return json.loads(
+            (VERIFICATION / "trust_manifest.json").read_text(encoding="utf-8")
+        )
+
+    def test_computation_routes_use_structured_admitted_commands(self) -> None:
+        payload = self.manifest()
+        admitted = {
+            tuple(check["argv"])
+            for check in payload["verify_all"]["checks"]
+            if check["id"].startswith("check-")
+        }
+        for claim in payload["claims"]:
+            for computation in release_claim_computations(claim):
+                commands = computation["checker_commands"]
+                self.assertTrue(commands)
+                self.assertNotIn("checker", computation)
+                for command in commands:
+                    self.assertIn(tuple(command["argv"]), admitted)
+
+    def test_computation_routes_state_specific_coverage(self) -> None:
+        for claim in self.manifest()["claims"]:
+            for computation in release_claim_computations(claim):
+                self.assertNotIn(
+                    "finite field, arc, syndrome, conic, or neighbour",
+                    computation["coverage"],
+                )
+
+    def test_transitive_citation_boundaries_are_explicit(self) -> None:
+        claims = {claim["row"]: claim for claim in self.manifest()["claims"]}
+        for row, fragments in {
+            17: ("Dye 1991",),
+            25: ("Dye 1991", "Abiad--Jabal Ameli--Reijnders"),
+            26: ("discussion preceding Theorem 6",),
+            29: ("Dye 1991", "Abiad--Jabal Ameli--Reijnders"),
+        }.items():
+            text = json.dumps(claims[row], sort_keys=True)
+            for fragment in fragments:
+                self.assertIn(fragment, text)
+
+
+def release_claim_computations(claim: dict[str, object]) -> list[dict[str, object]]:
+    computations = []
+    if isinstance(claim.get("computation"), dict):
+        computations.append(claim["computation"])
+    for component in claim.get("components", []):
+        if isinstance(component.get("computation"), dict):
+            computations.append(component["computation"])
+    return computations
 
 
 if __name__ == "__main__":

@@ -28,6 +28,16 @@ LEAN_SCHOLARLY_PATHS = (
 )
 
 
+def release_surface_sha256(manifest: dict[str, object]) -> str:
+    """Hash every manifest field except the hash-pinned release output itself."""
+    projection = json.loads(json.dumps(manifest))
+    projection["verify_all"].pop("output")
+    encoded = json.dumps(
+        projection, separators=(",", ":"), sort_keys=True
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
 def run(
     argv: list[str],
     cwd: Path,
@@ -269,6 +279,15 @@ def main() -> int:
     payload = {
         "check_count": len(summaries),
         "checks": summaries,
+        "inputs": {
+            "checker_outputs_sha256": manifest["verify_all"][
+                "checker_output_certificate"
+            ]["output"]["sha256"],
+            "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
+            "manuscript_sha256": manifest["manuscript_sha256"],
+            "release_surface_sha256": release_surface_sha256(manifest),
+            "statement_identity_sha256": manifest["statement_identity"]["sha256"],
+        },
         "lean_commit": pinned,
         "status": "passed",
     }

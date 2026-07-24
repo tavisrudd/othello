@@ -70,6 +70,10 @@ TERMINALS = {
 CLASSICAL_DYE = [
     "Dye 1991, Theorems 1 and 3, pages 275--278",
 ]
+CLASSICAL_DYE_ASSOCIATED_CONIC = [
+    "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the "
+    "discussion preceding Theorem 6, pages 281--282",
+]
 CLASSICAL_EDGE_DYE = [
     "Edge 1956, Sections 29--32",
     "Dye 1991, Theorems 1 and 3, pages 275--278",
@@ -79,7 +83,10 @@ CLASSICAL_CODE = [
     "Hirschfeld 1998, the plane arc/covering-radius dictionary",
 ]
 CLASSICAL_SYLVESTER = [
-    "The Sylvester graph clique bound, independently formalized from its explicit finite model",
+    "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph "
+    "interpretation",
+    "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two "
+    "clique number five; independently formalized from the explicit finite model",
 ]
 
 
@@ -145,7 +152,9 @@ def replay(
         "route": "exact-replay",
         "subclaim": subclaim,
         "computation": {
-            "checker": " and ".join(f"python3 {script}" for script in scripts),
+            "checker_commands": [
+                {"argv": ["python3", script]} for script in scripts
+            ],
             "coverage": coverage,
             "soundness_bridge": bridge,
             "independent_replay": independent,
@@ -234,9 +243,39 @@ def components_by_row(
         "separate finite enumerations and compare invariant counts; none "
         "imports Lean output."
     )
-    ordinary_exhaustion = (
-        "The script exhausts the finite field, arc, syndrome, conic, or "
-        "neighbour domain stated in the manuscript; no sampling is used."
+    automorphism_coverage = (
+        "Over F_11, the checker tests all 6! coordinate permutations and "
+        "constructs the complete projective and monomial automorphism actions "
+        "of the displayed six-column code."
+    )
+    decoder_coverage = (
+        "Over F_11, the three checkers enumerate every projective syndrome "
+        "direction, every minimum-weight leader support, all displayed "
+        "Brianchon/support strata, and the complete projective and monomial "
+        "automorphism actions; no sampling is used."
+    )
+    support_coverage = (
+        "Over F_11, the two checkers enumerate every ambiguity support and "
+        "its orbit under the complete displayed projective and monomial "
+        "automorphism actions; no sampling is used."
+    )
+    small_q_coverage = (
+        "For every prime power q <= 14, the checker enumerates every "
+        "frame-normalized embedded six-arc, computes its full uncovered "
+        "locus, and tests equality with every nonsingular conic."
+    )
+    q19_coverage = (
+        "Over F_19, the checker constructs the displayed order-60 "
+        "icosahedral action and its six-axis arc, then enumerates all 381 "
+        "projective points and all fifteen secants to compute the complete "
+        "uncovered locus."
+    )
+    small_k_coverage = (
+        "The checker verifies the displayed q=5 four-frame and exhausts all "
+        "frame-normalized seven-arcs obtained from the 1,548 normalized "
+        "six-arcs over F_11 and 4,015 over F_13; multiplicity-three "
+        "deduplication reaches 10,232 and 53,960 distinct seven-arcs, "
+        "respectively."
     )
     direct_coordinates = (
         "The replay reconstructs its domain from explicit coordinates and "
@@ -274,7 +313,7 @@ def components_by_row(
             "The projective action argument is in the manuscript; the executable route checks the displayed automorphism action exactly.",
             [
                 conceptual("deep-hole orbit deduction", CLASSICAL_DYE, "The manuscript transports the twelve-point action through the code--arc dictionary."),
-                replay("code automorphism action", ["check_code_automorphisms.py"], ordinary_exhaustion, "The replay checks the displayed monomial automorphisms and syndrome action.", direct_coordinates),
+                replay("code automorphism action", ["check_code_automorphisms.py"], automorphism_coverage, "The replay checks the displayed monomial automorphisms and syndrome action.", direct_coordinates),
             ],
         ),
         15: (
@@ -282,7 +321,7 @@ def components_by_row(
             [
                 conceptual("syndrome-oracle reduction", CLASSICAL_CODE, "The manuscript proves the quadratic decision rule from the code--arc dictionary."),
                 lean("decoder and ambiguity strata", ["decoder"], axioms),
-                replay("independent decoder census", ["check_decoding.py", "check_chirality.py", "check_code_automorphisms.py"], ordinary_exhaustion, "The replay checks distances, leader multiplicities, and ambiguity supports; the imported support and automorphism modules are hash-pinned alongside it.", direct_coordinates),
+                replay("independent decoder census", ["check_decoding.py", "check_chirality.py", "check_code_automorphisms.py"], decoder_coverage, "The replay checks distances, leader multiplicities, and ambiguity supports; the imported support and automorphism modules are hash-pinned alongside it.", direct_coordinates),
             ],
         ),
         16: (
@@ -290,10 +329,10 @@ def components_by_row(
             [conceptual("six-arc line bound", ["No external input; complete combinatorial proof in the manuscript"], "The entire statement is unconditional.")],
         ),
         17: (
-            "The exact implication is kernel checked relative to Dye's two declared consequences; the classical assumptions are not proved by Lean.",
+            "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences.",
             [
-                conceptual("Dye equality boundary", CLASSICAL_DYE, "The line bound and chord-defect identity are proved independently."),
-                lean("rigidity implication", ["rigidity"], axioms),
+                conceptual("degenerate-conic reduction and Dye equality boundary", CLASSICAL_DYE, "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, and proves the chord-defect identity independently."),
+                lean("nonsingular-conic rigidity implication", ["rigidity"], axioms),
             ],
         ),
         18: (
@@ -323,7 +362,7 @@ def components_by_row(
             "The unordered support bipartition is proved by incidence and independently replayed; no orientation or sign is claimed.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
-                replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], ordinary_exhaustion, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
+                replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
             ],
         ),
         24: (
@@ -334,27 +373,27 @@ def components_by_row(
             ],
         ),
         25: (
-            "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the manuscript cites the classical graph interpretation.",
+            "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the q=11 classification inherits Dye's rigidity boundary.",
             [
-                conceptual("Sylvester graph interpretation", CLASSICAL_SYLVESTER, "The chord arithmetic and explicit finite graph certificate are kernel checked."),
+                conceptual("Sylvester graph interpretation and q=11 rigidity dependency", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The chord arithmetic and explicit finite graph certificate are kernel checked; the manuscript invokes row 17 only for the final q=11 orbit classification."),
                 lean("field-order boundary", ["field_order"], axioms),
-                replay("small-field boundary", ["check_small_q_uniqueness.py"], ordinary_exhaustion, "The replay checks every stated small-field Clebsch specialization.", direct_coordinates),
+                replay("small-field boundary", ["check_small_q_uniqueness.py"], small_q_coverage, "The replay checks every stated small-field Clebsch specialization.", direct_coordinates),
             ],
         ),
         26: (
             "The all-field formula is conceptual; q=19 is checked by an independent exact specialization.",
             [
-                conceptual("Clebsch-family chord count", CLASSICAL_DYE, "The manuscript derives the polynomial from Dye's incidence criterion."),
+                conceptual("Clebsch-family chord count and associated-conic inclusion", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript derives the polynomial from the ten-Brianchon equality and uses Dye's edge criterion for the associated-conic inclusion."),
                 lean("uncovered-locus polynomial", ["clebsch_formula"], axioms),
-                replay("q=19 specialization", ["check_q19_nonexample.py"], ordinary_exhaustion, "The replay independently constructs and checks the q=19 specialization.", direct_coordinates),
+                replay("q=19 specialization", ["check_q19_nonexample.py"], q19_coverage, "The replay independently constructs and checks the q=19 specialization.", direct_coordinates),
             ],
         ),
         29: (
-            "Lean proves the universal moment reductions; the terminal finite leaves are discharged by exhaustive exact replay.",
+            "Lean proves the universal moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 leaves are discharged by exhaustive exact replay.",
             [
-                conceptual("universal chord-moment reduction", ["No external input beyond the projective-plane incidence axioms used in the proof"], "The manuscript derives the moment equations and identifies their geometric fibers."),
+                conceptual("universal chord-moment reduction and k=6 dependency", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and identifies their geometric fibers; only the k=6 branch invokes rows 25 and 17."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
-                replay("terminal small-arc exclusions", ["check_small_k_conic_filling.py"], ordinary_exhaustion, "The checker exhausts the displayed fields and arc sizes after the moment reduction.", direct_coordinates),
+                replay("terminal small-arc exclusions", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes after the moment reduction.", direct_coordinates),
             ],
         ),
         58: (
@@ -467,9 +506,14 @@ def build_manifest() -> dict[str, object]:
     return {
         "schema": "clebsch-rigidity-trust-manifest-v1",
         "manuscript_sha256": sha256(PAPER_ROOT / "clebsch_rigidity.tex"),
+        "manuscript_pdf": file_evidence("paper", "clebsch_rigidity.pdf"),
         "statement_identity": file_evidence(
             "paper", "verification/statement_identity.json"
         ),
+        "public_documents": [
+            file_evidence("paper", "README.md"),
+            file_evidence("paper", "verification/README.md"),
+        ],
         "lean_repository": {
             "url": "https://github.com/tavisrudd/finitegeom",
             "commit": PINNED_LEAN_COMMIT,

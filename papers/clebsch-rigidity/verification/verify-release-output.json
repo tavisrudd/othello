@@ -62,6 +62,13 @@
       "status": "passed"
     }
   ],
+  "inputs": {
+    "checker_outputs_sha256": "d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56",
+    "manuscript_pdf_sha256": "3a58346d083d5fe40df883cc8fc8045ba3a444eb74b076b4f902da2dbcee6209",
+    "manuscript_sha256": "17c6deff3ef29f03d9aeb98fd700cb4a1ef343f0f3f3fd5c19741decd5925c9a",
+    "release_surface_sha256": "f706c852bca42a00ee4cca155a2aee6dc2220d861c38def5c86188f24f5e5804",
+    "statement_identity_sha256": "aa586b5864b3b0a107d87b4307398e35e2cf4b09ceba98392964ebe4dfff61b2"
+  },
   "lean_commit": "bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520",
   "status": "passed"
 }

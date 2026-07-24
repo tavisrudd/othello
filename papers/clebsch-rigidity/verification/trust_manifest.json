@@ -74,7 +74,14 @@
                 "sha256": "c0f9e1021068f7f25cdfa89f05aab765a8cce060658072bca5c2d61b6b3e6895"
               }
             ],
-            "checker": "python3 check_rigidity_degenerate_conic.py",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_rigidity_degenerate_conic.py"
+                ]
+              }
+            ],
             "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
@@ -233,7 +240,14 @@
                 "sha256": "c0f9e1021068f7f25cdfa89f05aab765a8cce060658072bca5c2d61b6b3e6895"
               }
             ],
-            "checker": "python3 check_rigidity_degenerate_conic.py",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_rigidity_degenerate_conic.py"
+                ]
+              }
+            ],
             "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
@@ -290,8 +304,15 @@
                 "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
               }
             ],
-            "checker": "python3 check_code_automorphisms.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_code_automorphisms.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_11, the checker tests all 6! coordinate permutations and constructs the complete projective and monomial automorphism actions of the displayed six-column code.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The replay checks the displayed monomial automorphisms and syndrome action."
@@ -398,8 +419,27 @@
                 "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
               }
             ],
-            "checker": "python3 check_decoding.py and python3 check_chirality.py and python3 check_code_automorphisms.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_decoding.py"
+                ]
+              },
+              {
+                "argv": [
+                  "python3",
+                  "check_chirality.py"
+                ]
+              },
+              {
+                "argv": [
+                  "python3",
+                  "check_code_automorphisms.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_11, the three checkers enumerate every projective syndrome direction, every minimum-weight leader support, all displayed Brianchon/support strata, and the complete projective and monomial automorphism actions; no sampling is used.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The replay checks distances, leader multiplicities, and ambiguity supports; the imported support and automorphism modules are hash-pinned alongside it."
@@ -442,8 +482,8 @@
             "Dye 1991, Theorems 1 and 3, pages 275--278"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "Dye equality boundary",
-          "unconditional_remainder": "The line bound and chord-defect identity are proved independently."
+          "subclaim": "degenerate-conic reduction and Dye equality boundary",
+          "unconditional_remainder": "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, and proves the chord-defect identity independently."
         },
         {
           "lean": {
@@ -498,7 +538,7 @@
             }
           },
           "route": "kernel-checked-lean",
-          "subclaim": "rigidity implication"
+          "subclaim": "nonsingular-conic rigidity implication"
         }
       ],
       "id": "thm-rigidity",
@@ -508,9 +548,9 @@
       "source": {
         "id": "thm:rigidity",
         "kind": "theorem-environment",
-        "sha256": "741740fc8e8007ce335860642b03dc527068cf93034611cc243b9426b2433746"
+        "sha256": "ee582584c018b6697f310e9d87bb4147d34c952aa4a02725871de6e38b2ef545"
       },
-      "trust_boundary": "The exact implication is kernel checked relative to Dye's two declared consequences; the classical assumptions are not proved by Lean."
+      "trust_boundary": "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences."
     },
     {
       "computation": {
@@ -526,14 +566,27 @@
             "sha256": "4a17c22801df0700ef77772613fc6fb41bcc566f13e06b72431b977a43e110fe"
           }
         ],
-        "checker": "python3 check_low_degree_loci.py and python3 check_global_conic_gap.py",
+        "checker_commands": [
+          {
+            "argv": [
+              "python3",
+              "check_low_degree_loci.py"
+            ]
+          },
+          {
+            "argv": [
+              "python3",
+              "check_global_conic_gap.py"
+            ]
+          }
+        ],
         "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
         "independent_replay": "The low-degree checker deliberately reuses the global checker's canonical class generator so both tables have identical keys; there is no second independent enumeration of the fifteen classes. Both programs reconstruct all coordinates and are independent of Lean.",
         "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 658",
+      "paper_location": "source line 657",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -549,7 +602,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 683",
+      "paper_location": "source line 682",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -579,14 +632,33 @@
             "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
           }
         ],
-        "checker": "python3 check_global_conic_gap.py and python3 check_perturbation_gap.py and python3 check_code_automorphisms.py",
+        "checker_commands": [
+          {
+            "argv": [
+              "python3",
+              "check_global_conic_gap.py"
+            ]
+          },
+          {
+            "argv": [
+              "python3",
+              "check_perturbation_gap.py"
+            ]
+          },
+          {
+            "argv": [
+              "python3",
+              "check_code_automorphisms.py"
+            ]
+          }
+        ],
         "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
         "independent_replay": "The global, one-point-neighbour, and automorphism programs use separate finite enumerations and compare invariant counts; none imports Lean output.",
         "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
         "soundness_bridge": "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits."
       },
       "id": "thm-gap",
-      "paper_location": "source line 739",
+      "paper_location": "source line 738",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -602,7 +674,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 900",
+      "paper_location": "source line 899",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -683,7 +755,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 950",
+      "paper_location": "source line 949",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -718,8 +790,21 @@
                 "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
               }
             ],
-            "checker": "python3 check_chirality.py and python3 check_code_automorphisms.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_chirality.py"
+                ]
+              },
+              {
+                "argv": [
+                  "python3",
+                  "check_code_automorphisms.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_11, the two checkers enumerate every ambiguity support and its orbit under the complete displayed projective and monomial automorphism actions; no sampling is used.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The scripts exhaust the ambiguity supports and displayed code automorphisms."
@@ -729,7 +814,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 969",
+      "paper_location": "source line 968",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -790,7 +875,7 @@
         }
       ],
       "id": "lem-chord-defect",
-      "paper_location": "source line 1018",
+      "paper_location": "source line 1017",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -804,11 +889,13 @@
       "components": [
         {
           "cited_inputs": [
-            "The Sylvester graph clique bound, independently formalized from its explicit finite model"
+            "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
+            "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
+            "Dye 1991, Theorems 1 and 3, pages 275--278"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "Sylvester graph interpretation",
-          "unconditional_remainder": "The chord arithmetic and explicit finite graph certificate are kernel checked."
+          "subclaim": "Sylvester graph interpretation and q=11 rigidity dependency",
+          "unconditional_remainder": "The chord arithmetic and explicit finite graph certificate are kernel checked; the manuscript invokes row 17 only for the final q=11 orbit classification."
         },
         {
           "lean": {
@@ -858,8 +945,15 @@
                 "sha256": "cbe028cec3795edb8e2985c4f5aba6fb268260e6ea5183122cb1d040abb2ec01"
               }
             ],
-            "checker": "python3 check_small_q_uniqueness.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_small_q_uniqueness.py"
+                ]
+              }
+            ],
+            "coverage": "For every prime power q <= 14, the checker enumerates every frame-normalized embedded six-arc, computes its full uncovered locus, and tests equality with every nonsingular conic.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The replay checks every stated small-field Clebsch specialization."
@@ -869,7 +963,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1051",
+      "paper_location": "source line 1050",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -877,17 +971,17 @@
         "kind": "theorem-environment",
         "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933"
       },
-      "trust_boundary": "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the manuscript cites the classical graph interpretation."
+      "trust_boundary": "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the q=11 classification inherits Dye's rigidity boundary."
     },
     {
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the discussion preceding Theorem 6, pages 281--282"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "Clebsch-family chord count",
-          "unconditional_remainder": "The manuscript derives the polynomial from Dye's incidence criterion."
+          "subclaim": "Clebsch-family chord count and associated-conic inclusion",
+          "unconditional_remainder": "The manuscript derives the polynomial from the ten-Brianchon equality and uses Dye's edge criterion for the associated-conic inclusion."
         },
         {
           "lean": {
@@ -929,8 +1023,15 @@
                 "sha256": "70afb02e4c4b90ada37f2d8a7515afe019830a255f8d04fe5ad44ce68c449213"
               }
             ],
-            "checker": "python3 check_q19_nonexample.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_q19_nonexample.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_19, the checker constructs the displayed order-60 icosahedral action and its six-axis arc, then enumerates all 381 projective points and all fifteen secants to compute the complete uncovered locus.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The replay independently constructs and checks the q=19 specialization."
@@ -940,7 +1041,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1098",
+      "paper_location": "source line 1097",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -954,11 +1055,13 @@
       "components": [
         {
           "cited_inputs": [
-            "No external input beyond the projective-plane incidence axioms used in the proof"
+            "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
+            "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
+            "Dye 1991, Theorems 1 and 3, pages 275--278"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "universal chord-moment reduction",
-          "unconditional_remainder": "The manuscript derives the moment equations and identifies their geometric fibers."
+          "subclaim": "universal chord-moment reduction and k=6 dependency",
+          "unconditional_remainder": "The manuscript derives the moment equations and identifies their geometric fibers; only the k=6 branch invokes rows 25 and 17."
         },
         {
           "lean": {
@@ -1020,8 +1123,15 @@
                 "sha256": "9d8991c583b0dc9fcc972e6560e41b163d06836cffa6f029dd80d2b5a1c94379"
               }
             ],
-            "checker": "python3 check_small_k_conic_filling.py",
-            "coverage": "The script exhausts the finite field, arc, syndrome, conic, or neighbour domain stated in the manuscript; no sampling is used.",
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_small_k_conic_filling.py"
+                ]
+              }
+            ],
+            "coverage": "The checker verifies the displayed q=5 four-frame and exhausts all frame-normalized seven-arcs obtained from the 1,548 normalized six-arcs over F_11 and 4,015 over F_13; multiplicity-three deduplication reaches 10,232 and 53,960 distinct seven-arcs, respectively.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The checker exhausts the displayed fields and arc sizes after the moment reduction."
@@ -1031,7 +1141,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1158",
+      "paper_location": "source line 1157",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1039,7 +1149,7 @@
         "kind": "theorem-environment",
         "sha256": "acbd20e84f9db0c0014cd4eaf390dd7c6df86e6e8015a0b90b7dd8c87939ceb2"
       },
-      "trust_boundary": "Lean proves the universal moment reductions; the terminal finite leaves are discharged by exhaustive exact replay."
+      "trust_boundary": "Lean proves the universal moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 leaves are discharged by exhaustive exact replay."
     },
     {
       "computation": {
@@ -1055,14 +1165,27 @@
             "sha256": "fab65df95dac888758f28fae19cf1d2ce47ee2a170b73fea5a6cba61ccae16fc"
           }
         ],
-        "checker": "python3 check_global_conic_gap.py and python3 check_low_degree_loci.py",
+        "checker_commands": [
+          {
+            "argv": [
+              "python3",
+              "check_global_conic_gap.py"
+            ]
+          },
+          {
+            "argv": [
+              "python3",
+              "check_low_degree_loci.py"
+            ]
+          }
+        ],
         "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
         "independent_replay": "The low-degree checker deliberately reuses the global checker's canonical class generator so both tables have identical keys; there is no second independent enumeration of the fifteen classes. Both programs reconstruct all coordinates and are independent of Lean.",
         "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 591",
+      "paper_location": "source line 590",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1077,7 +1200,24 @@
     "commit": "bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "21ed256547cea391ec1555bc58e8549d66ce9052e9beee1f9cffe8e3c5e3e56a",
+  "manuscript_pdf": {
+    "path": "clebsch_rigidity.pdf",
+    "repository": "paper",
+    "sha256": "3a58346d083d5fe40df883cc8fc8045ba3a444eb74b076b4f902da2dbcee6209"
+  },
+  "manuscript_sha256": "17c6deff3ef29f03d9aeb98fd700cb4a1ef343f0f3f3fd5c19741decd5925c9a",
+  "public_documents": [
+    {
+      "path": "README.md",
+      "repository": "paper",
+      "sha256": "436e097343d2c64c2a2c2ca277933a79c9e9c3bf03c7ee752d83891205579040"
+    },
+    {
+      "path": "verification/README.md",
+      "repository": "paper",
+      "sha256": "2a73d7ff5aa40afc429097e0260005d9f3b085c7d630967ac9fa67205e379d73"
+    }
+  ],
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
@@ -1105,7 +1245,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "629389ef318fec6d31491020191f6d5617776872f636a8d6da63eb06cda082d8"
+    "sha256": "aa586b5864b3b0a107d87b4307398e35e2cf4b09ceba98392964ebe4dfff61b2"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1310,12 +1450,12 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "25bd088646de27d4cce9acccb18891cf8b9c237a0fa523e9c2a69adaa865f849"
+      "sha256": "94e514d3cc7de42a99280ff779e6a22cd1b93a9bd457b16515f5cf1b2ea65cca"
     },
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "d51911b8b1e61aec3c682d9ab765cfb0cb03639893c30a692d0ff3f2937a1a74"
+      "sha256": "6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a"
     },
     "verification_tools": [
       {
@@ -1326,22 +1466,22 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "d5878d717bf0ba7fb77a92e9027849063a8bdf26e5594775090179699c26f765"
+        "sha256": "cedc0cff95788f7cf8da6319aa4a176af177cf537e0f72292e0c532446a82893"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "2206b491dd324a71caa82f58f65bcc9b27690d45fcee0aa468dd862d2a512d48"
+        "sha256": "377c1051c26fa0c6c9ca76c507e515e83245e4e36df3c23bfa7bfe4dad03a47f"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "28c4194aa759006bdb7813bddb903029c7880add873b55ac673b30be2f58da7d"
+        "sha256": "a95f15723275ff17b292862653fc5efbafd706f4fdf77d06942079999aab5fe3"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "0e96c46a9b4f0755623072e375ab0916b63ce2885ba6a7b0859a06da0c076430"
+        "sha256": "e91236cd2a1942393a9f460bfef4ba2431cf70f148c2db48052b8cd753e1d3c0"
       }
     ]
   }

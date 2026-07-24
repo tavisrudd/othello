@@ -560,7 +560,6 @@ degenerate);
 \item $\cU(A)$ is exactly the set of $\F_{11}$-points of a nonsingular
 conic;
 \item $A$ is $\mathrm{PGL}(3,11)$-equivalent to the Clebsch hexagon;
-\item the stabilizer of $A$ in $\mathrm{PGL}(3,11)$ contains $A_5$.
 \end{enumerate}
 \end{theorem}
 
@@ -584,8 +583,8 @@ pp.~275--276]{Dye1991}. Hence $c(A)\le10$, so $|\cU(A)|\ge12$; equality
 holds throughout, $c(A)=10$, and $A$ is a Clebsch hexagon. This proves
 (i)$\Rightarrow$(iii). Proposition~\ref{prop:deep-holes-conic} and
 projective equivariance give (iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
-stabilizer theorem gives (iii)$\Rightarrow$(iv), and Storme and
-Van~Maldeghem's finite-plane classification gives the converse.
+stabilizer theorem also identifies the stabilizer in these equivalent
+cases with $A_5$.
 \end{proof}
 
 Table~\ref{tab:fifteen-classes} prints the complete census at the level
@@ -696,7 +695,7 @@ to the Clebsch hexagon. A projectivity between two unordered parity-check
 column sets lifts, after choosing column representatives, to a row operation
 together with a coordinate permutation and nonzero coordinate scalings;
 these are exactly a monomial code equivalence. The converse is immediate,
-and the stabilizer statement is clause~(iv) of the theorem.
+and Dye's stabilizer theorem gives the final $A_5$ statement.
 \end{proof}
 
 \begin{remark}[Sharpness of the degree threshold]
@@ -1314,7 +1313,7 @@ Decoding and support bipartition
 & arc--coset dictionary; Edge--Dye triangles
 & \path{RelativeConicArcs/Q11DecodingSynthesis.lean} \\
 Rigidity theorem
-& line bound; chord defect; Dye's Theorem~1
+& line bound; chord defect; Dye's Theorems~1 and~3
 & \path{RelativeConicArcs/Q11DyeAxioms.lean};
 \path{RelativeConicArcs/Q11DyeConsequences.lean};
 \path{RelativeConicArcs/SixArcDefectBridge.lean} \\
