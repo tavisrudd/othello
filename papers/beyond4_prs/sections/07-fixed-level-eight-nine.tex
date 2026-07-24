@@ -43,6 +43,19 @@ branch strata; a finite-field regression is not a substitute for those
 geometric data.
 \end{definition}
 
+The ordered cover retains the marker labels needed for monodromy, but
+the contraction itself descends to the unordered marker cubic.  Indeed,
+for affine markers \(r,s,t\),
+\begin{equation}\label{eq:r8-marker-cubic}
+ a_i^{\langle r,s,t\rangle}
+ =a_{i+3}-(r+s+t)a_{i+2}
+ +(rs+rt+st)a_{i+1}-rst\,a_i .
+\end{equation}
+Thus it depends only on the elementary symmetric functions of the
+markers, equivalently on the monic cubic
+\(T^3-(r+s+t)T^2+(rs+rt+st)T-rst\).  This separates the symmetric
+contraction parameter from the ordered-root cover used below.
+
 \begin{lemma}[Bottom strata]\label{lem:r8-bottom-strata}
 For the two-step contraction of a pointed sextic, the lower rank,
 gcd-one, cyclic, wild, inseparable, and branch strata are exactly the

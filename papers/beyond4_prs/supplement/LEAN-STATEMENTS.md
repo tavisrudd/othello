@@ -19,12 +19,16 @@ threeMarkerContraction_map
 projectiveSequenceContraction_comm
 threeMarkerContraction_swap_first
 threeMarkerContraction_swap_last
+threeMarkerContraction_affine_apply
+threeMarkerContraction_affine_eq_of_elementarySymmetric
 exact_deletion_and_polar_budgets
 threeMarker_genusOne_hasseWeil_bound
 threeMarker_genusOne_hasseWeil_exact_threshold
 primePowerOrder_at_least_fortyThree
+finiteFieldOrder_at_least_fortyThree
 redundancyEightHighFieldSynthesis
 redundancyEightPrimePowerSynthesis
+redundancyEightFiniteFieldSynthesis
 PersistentFamilyData.classified_card
 OrbitArithmetic.seventhPower_sigmaInversionOrbitCount
 OrbitArithmetic.orbit_count_pairs
@@ -48,6 +52,11 @@ theorem primePowerOrder_at_least_fortyThree
     {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q) :
     43 ≤ q
 
+theorem finiteFieldOrder_at_least_fortyThree
+    {K : Type*} [Field K] [Fintype K]
+    (hq : 42 ≤ Fintype.card K) :
+    43 ≤ Fintype.card K
+
 theorem redundancyEightHighFieldSynthesis
     {Syndrome Marker Witness : Type*}
     [Fintype Marker] [DecidableEq Marker]
@@ -62,6 +71,16 @@ theorem redundancyEightPrimePowerSynthesis
     [Fintype Marker] [DecidableEq Marker]
     {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q)
     (input : RedundancyEightInput Syndrome Marker Witness q)
+    (syndrome : Syndrome) :
+    input.fixedLevel.radius.isDeep syndrome ↔
+      input.fixedLevel.polar.persistent syndrome
+
+theorem redundancyEightFiniteFieldSynthesis
+    {K Syndrome Marker Witness : Type*} [Field K] [Fintype K]
+    [Fintype Marker] [DecidableEq Marker]
+    (hq : 42 ≤ Fintype.card K)
+    (input :
+      RedundancyEightInput Syndrome Marker Witness (Fintype.card K))
     (syndrome : Syndrome) :
     input.fixedLevel.radius.isDeep syndrome ↔
       input.fixedLevel.polar.persistent syndrome

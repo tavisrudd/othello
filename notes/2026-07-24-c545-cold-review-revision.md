@@ -324,3 +324,26 @@ bytes, and SHA-256
 - **What still cannot be closed locally?**  Immutable public
   repository/archive identifiers, the clean public replay, author
   confirmation, and the two independent specialist audits.
+
+### Final C542 reconciliation
+
+C542's post-integration closeout added two public terminals.  The first
+computes affine three-marker contraction as
+\[
+a_{i+3}-(r+s+t)a_{i+2}+(rs+rt+st)a_{i+1}-rst\,a_i,
+\]
+so it factors through the monic marker cubic rather than only through
+adjacent-swap invariance.  The second discharges the prime-power
+premise directly from a finite-field structure.  Section 7 now prints
+the marker-cubic factorization at the point where the ordered
+geometric-\(S_3\) cover first appears; Section 10, the theorem map, and
+the Lean statement inventory record both final terminals.
+
+The extra-juice check found no new mathematical gap.  It did expose a
+useful explanatory distinction: contraction is symmetric in the
+markers, while the lower cover remains ordered because its monodromy
+and deletion argument use labelled roots.  The new displayed formula
+makes that distinction auditable without another diagram.  The
+remaining mysteries and release gates are unchanged.  The rebuilt
+canonical PDF has 42 pages, 303273 bytes, and SHA-256
+`4362e132a6ce79955dd3325dca6c93317cab3818c58fe9ba1a092fd3e6a925a0`.
