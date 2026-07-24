@@ -9,6 +9,9 @@ notes, was moved intact to
 [`done/2026-07-08-projective-cap-game-handoff-archive.md`](done/2026-07-08-projective-cap-game-handoff-archive.md).
 Use this file as the canonical current map.
 
+Companion discovery log:
+[`2026-07-23 cap discovery track`](../2026-07-23-cap-discovery-track.md).
+
 ## Current Takeaway
 
 The projective cap/Nofil program is now sharply split.
@@ -689,9 +692,19 @@ residual-hypergraph theorem, isolated `k`-gadget SG 0, the pair budget
 `Σ binom(k_l,2)≤binom(|L|,2)` (hence `g,Φ≤binom(|L|,2)/3`), and the generic SG-height bound
 `SG(S)≤q-1-|S|` for odd-plane residuals.
 Report+cert+`--check`: `../2026-07-23-c528-grundy-conic-census.md`.
-**C547 is queued for a fresh Lean session** to turn this proof harvest into an explanatory theorem
-package and use formalization failures to identify the minimal gadget boundary; it explicitly excludes
-fixed-q table/checker formalization and the unsupported uniform claim SG≤5.
+**C547 is complete (2026-07-23): the explanatory residual theorem package is Lean-checked.**
+`ProjectiveCap.ResidualHypergraph` proves the exact rank-at-most-three decomposition, minimal
+pair/triple obstructions, the no-active-triples static `Y_NK` specialization, generic
+valid-card/SG-height and follower-signature bounds, and isolated-gadget SG zero.
+`ProjectiveCap.ResidualPairBudget` proves the pair budget, gadget-count, large-gadget, and total
+overload bounds, including the requested division forms. The clean-leaf test found the exact first
+boundary failure: with two labelled boundary vertices and two ambient conflict leaves, a 3-gadget
+has SG 1 while the corresponding 4-gadget has SG 0. The corrected minimal signature retains the
+labelled boundary plus private multiplicity `0/1/≥2` and gadget occupancy; the original one-boundary
+truncation is the `≥2`-private special case. No uniform `SG≤5` claim is made. The remaining
+load-bearing crown is a uniform bound on these corrected boundary signatures in the coupled
+projective residual core. Report:
+[`../2026-07-23-c547-cap-grundy-proof-harvest.md`](../2026-07-23-c547-cap-grundy-proof-harvest.md).
 
 **Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
 under all moves ⟹ "drive Φ→0" vacuous) and replaced it with the gadget-Node-Kayles value law

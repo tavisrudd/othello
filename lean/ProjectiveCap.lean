@@ -18,6 +18,8 @@ import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid
 import ProjectiveCap.GridSeed
 import ProjectiveCap.GridGame
+import ProjectiveCap.ResidualHypergraph
+import ProjectiveCap.ResidualPairBudget
 import ProjectiveCap.FrameGridBridge
 import ProjectiveCap.GridMirror
 import ProjectiveCap.GridCounting
