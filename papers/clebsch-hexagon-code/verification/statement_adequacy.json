@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-statement-adequacy-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "552d39e540282acdb5b7a2bc7dbe80fd75ae7c5cec51b921ff47aab47a0b162a",
+  "source_sha256": "07804ac5cd480eee8648a2373d8a34a2c3bb789d95032222dd810b64e643f8c5",
   "statement_count": 24,
   "statements": [
     {
@@ -216,7 +216,7 @@
       "environment": "theorem",
       "label": "thm:torsor-rosetta-close",
       "sha256": "69b93d89d87d63b619846167a919d542441746c36b5eae06cec3d57de72e5675",
-      "source_line": 1683,
+      "source_line": 1680,
       "tex": "\\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]\n\\label{thm:torsor-rosetta-close}\nLet $T_q$ denote the determinant-sign torsor for the split rank-three\nworking primes.  The following statements hold.\n\\begin{enumerate}[label=\\textup{(E\\arabic*)},leftmargin=*]\n\\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free\n$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two\nspin lifts form one Frobenius orbit over $\\F_{25}$, hence one connected\nétale point over $\\F_5$ and no orientation bit.\n\\item The certified dictionary has twelve rows: the two matching sheets,\nthe two nontrivial unipotent classes, the two cyclotomic period factors,\nthe two primes of $\\mathbb Q(\\sqrt{-q})$, the two primes of\n$\\mathbb Z[\\sqrt2]$ or $\\mathbb Z[\\phi]$ above the working prime, the two lower Weil\nconstituents, the two cubic signs, the two QR/Barker polarities, the two\nsigned Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero\n$\\operatorname{Spec}\\mathbb Q(\\sqrt5)$ row, and the Reed--Solomon fixed-child\nextremal fibre.  Each two-valued row available at a given $q$ is\nouter-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting\nface of the same swap, not another two-point carrier; the\ncharacteristic-zero row specializes specifically to $T_{11}$.\n\\item The marked Coxeter matching points all available rows simultaneously\nthrough the single trace rule.  After forgetting it there is no section:\nthe \\v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor\ndescription are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]\n\\item At $q=11$ the Mathieu hinge is forced outer.  Indeed\n$N_{M_{12}}(\\mathrm{PSL}_2(11))=\\mathrm{PSL}_2(11)$,\n$\\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents\nare non-conjugate in $M_{12}$.\n\\item The cubic sign and trace residue co-vary with $T_q$, but their\nnumerical dictionary is convention-dependent between $q=7$ and $q=11$.\nThe uniform datum is the marking, not a residue formula.  No integral\nGalois-odd cubic is assumed: the bit is carried arithmetically by the prime\nfibre.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Torsor Rosetta: one class and one forced outer swap"
     }

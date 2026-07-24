@@ -20,6 +20,12 @@ Run `python3 verify.py`.  It first checks every source and certificate against
 are the displayed fields, projective lines, matching orbits, matrices, and assignment graphs; no
 sampling is used.
 
+`coxeter-phase.py` is retained as an imported arithmetic/permutation helper for
+`matching-module.py`.  Its historical standalone certificate entry point depends on source
+records deliberately omitted from this flattened bundle and is not a public replay command.
+`verify.py` exercises the imported helper through the primary matching-module check and the
+separately written matching-module replay.
+
 The residual trusted boundary consists of the semantic identification of the coordinate tables
 with the named classical Coxeter and projective groups, the cited spinor and number-field
 interpretations, and the interpretation of the explicit descent data as Čech or Hilbert--90
