@@ -63,12 +63,12 @@ absent.  Passing compilation never upgrades a mathematical row.
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
 | E1 | PASS | Abstract is 180--220 words and contains only the dictionary, mechanism, classifications, and one characteristic-two sentence. | Mechanical extraction counts 191 words; retain during theorem edits. |
-| E2 | REVIEW | Notation and terminology tables precede first technical use and cover every stable term. | Notation table begins at `main.tex:116`; cold read required. |
-| E3 | REVIEW | Roadmap visibly shows construction followed by transverse/contained branches and lifting. | Overview table exists; inspect rendered page after source split. |
-| E4 | REVIEW | Paper contains mathematical comparison, not dated search-process narrative or database disclaimers. | Run paragraph-level literature cold read. |
+| E2 | PASS | Notation and terminology tables precede first technical use and cover every stable term. | The rendered introduction defines `r,n,d,s`, all bound indices, carrier terminology, cover terminology, and code-admissibility before the overview and dictionary. |
+| E3 | PASS | Roadmap visibly shows construction followed by transverse/contained branches and lifting. | Rendered page 5 shows the marked-contraction sequence, the transverse/contained fork, the point-count escape, and squarefree lifting. |
+| E4 | PASS | Paper contains mathematical comparison, not dated search-process narrative or database disclaimers. | The relation-to-previous-work paragraph is role-based mathematical comparison; exact source scans contain no search date, citation-graph narrative, or database disclaimer. |
 | E5 | PASS | Every novelty comparison has a verified citation with complete metadata and an archived literature-audit record. | `literature-audit.md` consolidates the claim-specific audits, records read depth for all 15 bibliography entries, verifies every DOI metadata record, qualifies the three absence findings, and removes priority wording from the Hessian/Lucas boundary. |
 | E6 | PASS | Long theorem inventories are upright and the literal phrase `paper spine` is absent. | Exact phrase scan is empty. |
-| E7 | REVIEW | Public verification table is compact, breakable, and does not create a nearly empty preceding page. | Inspect final rendered PDF after all row changes. |
+| E7 | PASS | Public verification table is compact, breakable, and does not create a nearly empty preceding page. | Rendered page 31 contains the complete ten-row public table; page 30 has 43 nonblank lines, so no nearly empty predecessor page is created. |
 | E8 | PASS | Thin driver, one file per major section, and separate appendices all build. | `main.tex` is a 107-line driver; the eleven numbered sections and statement-adequacy appendix expand byte-for-byte to the pre-split source, and `make check` passes. |
 | PR | REVIEW | Titled provenance/responsibility section identifies derivation, computation, formalization, and author responsibility without overstating review. | Section exists; author confirmation remains external. |
 
