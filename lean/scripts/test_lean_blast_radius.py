@@ -93,6 +93,8 @@ class GraphTests(unittest.TestCase):
         graph = make_graph({"A": ["Mathlib.Data.Nat", "Init.Core"], "B": ["A"]})
         self.assertEqual(graph.imports["A"], ())
         self.assertEqual(graph.imports["B"], ("A",))
+        self.assertEqual(graph.external_imports["A"], ("Init.Core", "Mathlib.Data.Nat"))
+        self.assertEqual(graph.external_imports["B"], ())
 
     def test_cycle_is_refused(self):
         with self.assertRaises(br.Refused) as caught:
@@ -124,6 +126,75 @@ class ClosureTests(unittest.TestCase):
         graph = make_graph(DIAMOND)
         everything = (1 << len(graph.modules)) - 1
         self.assertEqual(sorted(br.bits_to_modules(graph, everything)), list(graph.modules))
+
+
+class SourceClosureTests(unittest.TestCase):
+    def test_diamond_includes_each_import_once(self):
+        graph = make_graph(DIAMOND)
+        self.assertEqual(br.source_closure(graph, ["D"]), ["A", "B", "C", "D"])
+
+    def test_union_of_roots_is_reverse_complete(self):
+        graph = make_graph(CHAIN)
+        self.assertEqual(br.source_closure(graph, ["L2", "Sep"]), ["L0", "Sep", "L1", "L2"])
+
+    def test_root_without_project_imports_is_included(self):
+        graph = make_graph(CHAIN)
+        self.assertEqual(br.source_closure(graph, ["Sep"]), ["Sep"])
+
+    def test_unknown_root_is_refused(self):
+        graph = make_graph(CHAIN)
+        with self.assertRaisesRegex(br.Refused, "Missing is not a project-local module"):
+            br.source_closure(graph, ["Missing"])
+
+    def test_inventory_hashes_regular_sources_and_classifies_external_imports(self):
+        graph = make_graph({"A": ["Mathlib.Data.Nat"], "B": ["A"]})
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for module in graph.modules:
+                path = root / graph.relpath[module]
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(f"-- {module}\n", encoding="utf-8")
+            inventory = br.source_inventory(root, graph, ["B"])
+        self.assertEqual(inventory["module_count"], 2)
+        self.assertEqual(inventory["external_imports"], ["Mathlib.Data.Nat"])
+        self.assertEqual([source["path"] for source in inventory["sources"]], [
+            "Fixture/A.lean",
+            "Fixture/B.lean",
+        ])
+        self.assertTrue(all(len(source["sha256"]) == 64 for source in inventory["sources"]))
+
+    def test_inventory_refuses_symlinked_source(self):
+        graph = make_graph({"A": []})
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / graph.relpath["A"]
+            path.parent.mkdir(parents=True)
+            target = root / "target.lean"
+            target.write_text("-- target\n", encoding="utf-8")
+            path.symlink_to(target)
+            with self.assertRaisesRegex(br.Refused, "non-symlink"):
+                br.source_inventory(root, graph, ["A"])
+
+    def test_inventory_refuses_source_changed_after_graph_scan(self):
+        graph = make_graph({"A": []})
+        graph.source_sha256["A"] = "0" * 64
+        graph.source_bytes["A"] = 0
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / graph.relpath["A"]
+            path.parent.mkdir(parents=True)
+            path.write_text("-- changed\n", encoding="utf-8")
+            with self.assertRaisesRegex(br.Refused, "changed while"):
+                br.source_inventory(root, graph, ["A"])
+
+    def test_atomic_json_writer_refuses_implicit_overwrite(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            destination = Path(tmp) / "manifest.json"
+            br.write_json_atomic(destination, {"version": 1}, replace=False)
+            with self.assertRaisesRegex(br.Refused, "pass --replace"):
+                br.write_json_atomic(destination, {"version": 2}, replace=False)
+            br.write_json_atomic(destination, {"version": 2}, replace=True)
+            self.assertEqual(json.loads(destination.read_text()), {"version": 2})
 
 
 class CostTests(unittest.TestCase):

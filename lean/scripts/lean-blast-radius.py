@@ -18,6 +18,7 @@ close the gap.
 
     lean/scripts/lean-blast-radius.py hubs --top 15
     lean/scripts/lean-blast-radius.py radius RelativeConicArcs.Plane
+    lean/scripts/lean-blast-radius.py closure FiniteGeom ProjectiveCap.Mirror
     lean/scripts/lean-blast-radius.py targets
     lean/scripts/lean-blast-radius.py cost-model
 
@@ -29,11 +30,14 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import importlib.util
 import json
+import os
 import re
 import statistics
 import sys
+import tempfile
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
@@ -84,9 +88,12 @@ class Graph:
     modules: tuple[str, ...]
     index: dict[str, int]
     imports: dict[str, tuple[str, ...]]  # project-local only
+    external_imports: dict[str, tuple[str, ...]]
     importers: dict[str, tuple[str, ...]]
     order: tuple[str, ...]  # topological: a module follows everything it imports
     relpath: dict[str, str]
+    source_sha256: dict[str, str | None]
+    source_bytes: dict[str, int | None]
 
 
 def build_graph(lean_root: Path, spine: Any) -> Graph:
@@ -97,6 +104,10 @@ def build_graph(lean_root: Path, spine: Any) -> Graph:
     relpath = {source.module: source.relpath for source in inventory.files}
     imports = {
         source.module: tuple(sorted({i for i in source.imports if i in project}))
+        for source in inventory.files
+    }
+    external_imports = {
+        source.module: tuple(sorted({i for i in source.imports if i not in project}))
         for source in inventory.files
     }
     importers: dict[str, list[str]] = {module: [] for module in modules}
@@ -125,9 +136,12 @@ def build_graph(lean_root: Path, spine: Any) -> Graph:
         modules=modules,
         index={module: i for i, module in enumerate(modules)},
         imports=imports,
+        external_imports=external_imports,
         importers={k: tuple(sorted(v)) for k, v in importers.items()},
         order=tuple(order),
         relpath=relpath,
+        source_sha256={source.module: getattr(source, "sha256", None) for source in inventory.files},
+        source_bytes={source.module: getattr(source, "size", None) for source in inventory.files},
     )
 
 
@@ -154,6 +168,86 @@ def bits_to_modules(graph: Graph, bits: int) -> list[str]:
         out.append(graph.modules[low.bit_length() - 1])
         bits ^= low
     return out
+
+
+def source_closure(graph: Graph, roots: list[str]) -> list[str]:
+    """Return roots and every project-local module they transitively import."""
+    unknown = sorted(set(roots) - set(graph.index))
+    if unknown:
+        raise Refused(f"{unknown[0]} is not a project-local module")
+    seen: set[str] = set()
+    pending = list(reversed(roots))
+    while pending:
+        module = pending.pop()
+        if module in seen:
+            continue
+        seen.add(module)
+        pending.extend(reversed(graph.imports[module]))
+    return [module for module in graph.order if module in seen]
+
+
+def source_inventory(lean_root: Path, graph: Graph, roots: list[str]) -> dict[str, Any]:
+    """Build a content-addressed, repository-relative inventory for a source closure."""
+    modules = source_closure(graph, roots)
+    sources = []
+    for module in modules:
+        relpath = graph.relpath[module]
+        path = lean_root / relpath
+        if path.is_symlink() or not path.is_file():
+            raise Refused(f"{relpath} is not a regular non-symlink source file")
+        resolved = path.resolve()
+        if not resolved.is_relative_to(lean_root):
+            raise Refused(f"{relpath} escapes the Lean source root")
+        payload = path.read_bytes()
+        digest = hashlib.sha256(payload).hexdigest()
+        if graph.source_sha256[module] is not None and (
+            digest != graph.source_sha256[module] or len(payload) != graph.source_bytes[module]
+        ):
+            raise Refused(f"{relpath} changed while its import closure was being inventoried")
+        sources.append(
+            {
+                "module": module,
+                "path": relpath,
+                "bytes": len(payload),
+                "sha256": digest,
+            }
+        )
+    external_imports = sorted(
+        {dependency for module in modules for dependency in graph.external_imports[module]}
+    )
+    return {
+        "schema_version": 1,
+        "roots": roots,
+        "module_count": len(modules),
+        "sources": sorted(sources, key=lambda source: source["path"]),
+        "external_imports": external_imports,
+    }
+
+
+def write_json_atomic(destination: Path, payload: dict[str, Any], replace: bool) -> None:
+    """Write deterministic JSON without exposing a partial manifest."""
+    if destination.exists() and not replace:
+        raise Refused(f"{destination} already exists; pass --replace to update it")
+    if destination.is_symlink():
+        raise Refused(f"{destination} is a symlink")
+    if not destination.parent.is_dir():
+        raise Refused(f"{destination.parent} is not an existing directory")
+    rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=destination.parent,
+            prefix=f".{destination.name}.",
+            delete=False,
+        ) as handle:
+            handle.write(rendered)
+            temporary = Path(handle.name)
+        os.replace(temporary, destination)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
 
 
 # --------------------------------------------------------------------------------------------
@@ -427,6 +521,34 @@ def cmd_radius(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def cmd_closure(args: argparse.Namespace) -> int:
+    lean_root = Path(args.lean_root).resolve()
+    graph = build_graph(lean_root, load_spine_module(lean_root))
+    inventory = source_inventory(lean_root, graph, args.modules)
+    sources = inventory["sources"]
+    paths = [source["path"] for source in sources]
+    external_imports = inventory["external_imports"]
+    if args.replace and args.output is None:
+        raise Refused("--replace requires --output")
+    if args.output is not None:
+        destination = Path(args.output).resolve()
+        write_json_atomic(destination, inventory, args.replace)
+        print(f"wrote {inventory['module_count']} source(s) to {destination}")
+        return EXIT_OK
+    if args.json:
+        print(json.dumps(inventory, indent=2, sort_keys=True))
+        return EXIT_OK
+    print(f"roots: {', '.join(args.modules)}")
+    print(f"project-local source closure: {inventory['module_count']} module(s)")
+    print(f"external imports: {len(external_imports)}")
+    shown = sources[: args.top]
+    for source in shown:
+        print(f"  {source['module']}: {source['path']}")
+    if len(sources) > len(shown):
+        print(f"  ... and {len(sources) - len(shown)} more")
+    return EXIT_OK
+
+
 def cmd_targets(args: argparse.Namespace) -> int:
     """Measured build times for whole targets — closure-level, which is what they actually are."""
     lean_root = Path(args.lean_root).resolve()
@@ -513,6 +635,17 @@ def build_parser() -> argparse.ArgumentParser:
     radius.add_argument("module")
     radius.add_argument("--top", type=int, default=15)
     radius.set_defaults(func=cmd_radius)
+
+    closure = sub.add_parser(
+        "closure",
+        parents=[common],
+        help="exact project-local source closure imported by one or more modules",
+    )
+    closure.add_argument("modules", nargs="+")
+    closure.add_argument("--top", type=int, default=15)
+    closure.add_argument("--output", help="atomically write the JSON source inventory")
+    closure.add_argument("--replace", action="store_true", help="replace an existing --output file")
+    closure.set_defaults(func=cmd_closure)
 
     targets = sub.add_parser("targets", parents=[common], help="measured closure-level build times per target")
     targets.add_argument("--top", type=int, default=15)

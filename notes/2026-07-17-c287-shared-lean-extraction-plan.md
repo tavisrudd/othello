@@ -1,7 +1,7 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; five local fresh-history workspaces scaffolded, source manifests pending
+**Status**: IN PROGRESS; first-tag source inventory frozen, public rewrites pending
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -59,6 +59,13 @@ Certificate payload gates remain open:
 The next safe work while private-tree Lean runs remain active is read-only manifest design and
 dependency classification. Source export, regeneration, elaboration, and builds wait for their
 documented gates and a confirmed quiet build-owner window.
+
+The candidate first-tag contract is now content-addressed in
+`notes/2026-07-23-finitegeom-first-tag-source-inventory.json` and analyzed in
+`notes/2026-07-23-c287-first-tag-source-contract.md`. Its seven declared roots resolve to 51 Lean
+files and 12,987 code lines, with 41 external imports all supplied by Mathlib and no heavyweight
+certificate-family source. Ten closure files still cite private notes or handoffs, including three
+with task IDs, so source-owner public rewrites and the whole-closure referee review precede export.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed

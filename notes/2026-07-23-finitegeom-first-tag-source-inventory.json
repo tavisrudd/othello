@@ -1,0 +1,364 @@
+{
+  "external_imports": [
+    "Mathlib.Algebra.CharP.Defs",
+    "Mathlib.Algebra.Field.Basic",
+    "Mathlib.Algebra.Field.ZMod",
+    "Mathlib.Algebra.Group.Basic",
+    "Mathlib.Algebra.Module.Equiv.Basic",
+    "Mathlib.Algebra.Order.BigOperators.Group.Finset",
+    "Mathlib.Algebra.Polynomial.Eval.SMul",
+    "Mathlib.Algebra.Polynomial.Roots",
+    "Mathlib.Data.Finset.Basic",
+    "Mathlib.Data.Finset.Card",
+    "Mathlib.Data.Fintype.Basic",
+    "Mathlib.Data.Fintype.Card",
+    "Mathlib.Data.Fintype.Pi",
+    "Mathlib.Data.Fintype.Prod",
+    "Mathlib.Data.Matrix.Mul",
+    "Mathlib.Data.Set.Basic",
+    "Mathlib.FieldTheory.Finite.Basic",
+    "Mathlib.FieldTheory.Finite.GaloisField",
+    "Mathlib.FieldTheory.Finiteness",
+    "Mathlib.GroupTheory.Perm.Cycle.Type",
+    "Mathlib.InformationTheory.Hamming",
+    "Mathlib.LinearAlgebra.AffineSpace.FiniteDimensional",
+    "Mathlib.LinearAlgebra.AffineSpace.Midpoint",
+    "Mathlib.LinearAlgebra.Basis.VectorSpace",
+    "Mathlib.LinearAlgebra.Dimension.Constructions",
+    "Mathlib.LinearAlgebra.Dimension.StrongRankCondition",
+    "Mathlib.LinearAlgebra.FiniteDimensional.Basic",
+    "Mathlib.LinearAlgebra.FiniteDimensional.Lemmas",
+    "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
+    "Mathlib.LinearAlgebra.Matrix.DotProduct",
+    "Mathlib.LinearAlgebra.Matrix.Dual",
+    "Mathlib.LinearAlgebra.Matrix.NonsingularInverse",
+    "Mathlib.LinearAlgebra.Matrix.ToLin",
+    "Mathlib.LinearAlgebra.Pi",
+    "Mathlib.LinearAlgebra.Projectivization.Collinear",
+    "Mathlib.LinearAlgebra.Projectivization.Subspace",
+    "Mathlib.LinearAlgebra.Span.Basic",
+    "Mathlib.LinearAlgebra.Vandermonde",
+    "Mathlib.Order.Lattice.Nat",
+    "Mathlib.RingTheory.Polynomial.Basic",
+    "Mathlib.Tactic"
+  ],
+  "module_count": 51,
+  "roots": [
+    "FiniteGeom",
+    "ProjectiveCap.Mirror",
+    "ProjectiveCap.Binary",
+    "ProjectiveCap.EllipticMirror",
+    "ProjectiveCap.HyperbolicQuadricMirror",
+    "ProjectiveCap.PlaneOutcome",
+    "CapGame.Affine"
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "bytes": 19109,
+      "module": "CapGame.Affine",
+      "path": "CapGame/Affine.lean",
+      "sha256": "d90bf38d10c46d2a5e7a4fcdfc6a8fc69f67ecf69124dcd609cf495153835f2c"
+    },
+    {
+      "bytes": 23163,
+      "module": "CapGame.BuildGame",
+      "path": "CapGame/BuildGame.lean",
+      "sha256": "e31e60bf0f2f0984c82811fac02768d90f3a8204ad73cc5e34392cfa502633c9"
+    },
+    {
+      "bytes": 3605,
+      "module": "CapGame.Embedding",
+      "path": "CapGame/Embedding.lean",
+      "sha256": "b1e6687107c97525430a8ebfe82aeb90321db31c7240cc462a5673cb9678891c"
+    },
+    {
+      "bytes": 4735,
+      "module": "CapGame.Mirror",
+      "path": "CapGame/Mirror.lean",
+      "sha256": "b597ff24b013e4a629ee12e8bb1d2d2924c6ee828af02aaf7b8ba8f4bba662b6"
+    },
+    {
+      "bytes": 1338,
+      "module": "FiniteGeom",
+      "path": "FiniteGeom.lean",
+      "sha256": "3065e7e701be1f86cf8cbb193bd26e71181deb11ff7360086aba4d93a009e9d6"
+    },
+    {
+      "bytes": 5205,
+      "module": "FiniteGeom.BaerCompletion.BaerPlane",
+      "path": "FiniteGeom/BaerCompletion/BaerPlane.lean",
+      "sha256": "9354f5aed17b4e4611ac762bca5988791e81fd8f0a14e9eb32fbeb0b1a02439a"
+    },
+    {
+      "bytes": 2352,
+      "module": "FiniteGeom.BaerCompletion.Clutter",
+      "path": "FiniteGeom/BaerCompletion/Clutter.lean",
+      "sha256": "981091c2230c6c4cc2ec93794e82c556611ffa523de76ce3f053ca914d0d83bb"
+    },
+    {
+      "bytes": 12990,
+      "module": "FiniteGeom.BaerCompletion.CollisionProfile",
+      "path": "FiniteGeom/BaerCompletion/CollisionProfile.lean",
+      "sha256": "86c5798546bd4d5f96117420e53f131f11e8ed1259130fb8ccecc6a09eae768b"
+    },
+    {
+      "bytes": 3772,
+      "module": "FiniteGeom.BaerCompletion.Core",
+      "path": "FiniteGeom/BaerCompletion/Core.lean",
+      "sha256": "41fabc8b6486af6bade627df176738d96f39b44d2ecf44dff6ecdb715dba0f4b"
+    },
+    {
+      "bytes": 3965,
+      "module": "FiniteGeom.BaerCompletion.MultiInsertion",
+      "path": "FiniteGeom/BaerCompletion/MultiInsertion.lean",
+      "sha256": "62f61e7f9a7e6643a9154639ccb4d73414894d748cb646c2b3afdc3ebf608c6b"
+    },
+    {
+      "bytes": 3971,
+      "module": "FiniteGeom.BaerCompletion.Obstruction",
+      "path": "FiniteGeom/BaerCompletion/Obstruction.lean",
+      "sha256": "eabdd521ca0d060f46a9c6e9e759539b440e8afb945fca6587c74f0e4f1bca17"
+    },
+    {
+      "bytes": 4927,
+      "module": "FiniteGeom.BaerCompletion.OrbitCounting",
+      "path": "FiniteGeom/BaerCompletion/OrbitCounting.lean",
+      "sha256": "4320c3179b64484f543ffc5908b859ca21f718ab6c261c81077f2f102afe5475"
+    },
+    {
+      "bytes": 1871,
+      "module": "FiniteGeom.BaerCompletion.OrbitSaturation",
+      "path": "FiniteGeom/BaerCompletion/OrbitSaturation.lean",
+      "sha256": "acca11dbfb242a40f6c1388f110815d62ac7e0e81da662409c0b9733916f1966"
+    },
+    {
+      "bytes": 6631,
+      "module": "FiniteGeom.BaerCompletion.PairExtension",
+      "path": "FiniteGeom/BaerCompletion/PairExtension.lean",
+      "sha256": "2b8b1464ecc66567796a52c9537cdccb98f4dbda4372348bfab1a00b11cb7966"
+    },
+    {
+      "bytes": 3707,
+      "module": "FiniteGeom.BaerCompletion.RobustHole",
+      "path": "FiniteGeom/BaerCompletion/RobustHole.lean",
+      "sha256": "43cd08fc6a23894e92d970b1c7a28018b186a83ea17270a826e85b5229b54515"
+    },
+    {
+      "bytes": 4869,
+      "module": "FiniteGeom.BaerCompletion.Secant",
+      "path": "FiniteGeom/BaerCompletion/Secant.lean",
+      "sha256": "c311dd763c7cdafb098b2448eda769cd875dbd23bc5fb0806689eb505053b0b2"
+    },
+    {
+      "bytes": 3413,
+      "module": "FiniteGeom.BaerCompletion.Weighted",
+      "path": "FiniteGeom/BaerCompletion/Weighted.lean",
+      "sha256": "b3b3877bbed9de6ebc14be8c139b96a40f3040d8d90e156c502fc27f825ec714"
+    },
+    {
+      "bytes": 15811,
+      "module": "FiniteGeom.Code",
+      "path": "FiniteGeom/Code.lean",
+      "sha256": "738e381f2eb72298fac0260a0a19e1bbae923a86a047b2c05302d824210773a5"
+    },
+    {
+      "bytes": 16061,
+      "module": "FiniteGeom.ColoredCompleteGraph",
+      "path": "FiniteGeom/ColoredCompleteGraph.lean",
+      "sha256": "3af41b990e82bc42bb6f1f5979ba2b34de5d8821822163e62fc6939a52c78331"
+    },
+    {
+      "bytes": 8556,
+      "module": "FiniteGeom.ColumnCode",
+      "path": "FiniteGeom/ColumnCode.lean",
+      "sha256": "8fa7ea4be19c85f2fa1bd660380ab12c3151bde9cf872d7283755454b85533ed"
+    },
+    {
+      "bytes": 5972,
+      "module": "FiniteGeom.Completion",
+      "path": "FiniteGeom/Completion.lean",
+      "sha256": "d38e4ed5c88ae5156d2231ff2a576babf1272f5dcef62a75ebdcaf0cdc0c010b"
+    },
+    {
+      "bytes": 8390,
+      "module": "FiniteGeom.EvalCode",
+      "path": "FiniteGeom/EvalCode.lean",
+      "sha256": "357c5db5476481b0d4e035bae4e1b47a6d33181df2a0836692e7a9b97083b26e"
+    },
+    {
+      "bytes": 4113,
+      "module": "FiniteGeom.EvalCodeInstance",
+      "path": "FiniteGeom/EvalCodeInstance.lean",
+      "sha256": "4fdc1645f7faa865d50ac27522aebacb4fe389006d874acce244e336ac08b9fb"
+    },
+    {
+      "bytes": 44971,
+      "module": "FiniteGeom.Hypergraph",
+      "path": "FiniteGeom/Hypergraph.lean",
+      "sha256": "e77c774f53a7916c80f603b1ffec996fa4b1be9a9049ca1acd8831b71620776a"
+    },
+    {
+      "bytes": 9171,
+      "module": "FiniteGeom.MomentCurve",
+      "path": "FiniteGeom/MomentCurve.lean",
+      "sha256": "195c703b0d953d42fa31cb59bc09a79535c510c2c0dde67dba3f34ada3df8783"
+    },
+    {
+      "bytes": 38604,
+      "module": "FiniteGeom.Repair",
+      "path": "FiniteGeom/Repair.lean",
+      "sha256": "4674cbe0e870951e4828b2d2417edc7305858c3c0f68e84dd27528e3fbbc59ab"
+    },
+    {
+      "bytes": 2219,
+      "module": "FiniteGeom.Weight",
+      "path": "FiniteGeom/Weight.lean",
+      "sha256": "3b695571b7f83083173d26a1341282dce463fd3bc50673ed9396bf8d869c2e94"
+    },
+    {
+      "bytes": 21471,
+      "module": "FiniteGeom.ZeroSumTriple",
+      "path": "FiniteGeom/ZeroSumTriple.lean",
+      "sha256": "6816536e7fd09409320f50aceb09158d3f1426bc3b8e05fc8b71936765dbc55a"
+    },
+    {
+      "bytes": 1704,
+      "module": "ProjectiveCap.Almost.OddEscape",
+      "path": "ProjectiveCap/Almost/OddEscape.lean",
+      "sha256": "cb13ba321a053f7e8e0a00ff629e0557100443406af28692157e4627593fbcc5"
+    },
+    {
+      "bytes": 9735,
+      "module": "ProjectiveCap.Binary",
+      "path": "ProjectiveCap/Binary.lean",
+      "sha256": "56f6a74a7d82c80a60f57acaf26b7a26237a84f95bd6f867ff36ef5a434e0ce4"
+    },
+    {
+      "bytes": 70642,
+      "module": "ProjectiveCap.ConicLocalization",
+      "path": "ProjectiveCap/ConicLocalization.lean",
+      "sha256": "3fa58eff690ebcb5d01ecd7bafdb8bcf48038e27ab1509fa41caf38062b9bed1"
+    },
+    {
+      "bytes": 4714,
+      "module": "ProjectiveCap.EllipticMirror",
+      "path": "ProjectiveCap/EllipticMirror.lean",
+      "sha256": "722c20d0a82ac7360f4b77ba205b5f0ce55d38460b9a293b8e47d1bf398a70cf"
+    },
+    {
+      "bytes": 3197,
+      "module": "ProjectiveCap.EscapeParity",
+      "path": "ProjectiveCap/EscapeParity.lean",
+      "sha256": "bb8925d27ff7488977f698498d4cdee24181a7b881f6a5134ccd17777d6f84a2"
+    },
+    {
+      "bytes": 20385,
+      "module": "ProjectiveCap.ExtensionCount",
+      "path": "ProjectiveCap/ExtensionCount.lean",
+      "sha256": "4c13b9a820c8b38db96fcc992911a9faf5fd69dacc057b38b3ef43efe4769b41"
+    },
+    {
+      "bytes": 36870,
+      "module": "ProjectiveCap.FrameGridBridge",
+      "path": "ProjectiveCap/FrameGridBridge.lean",
+      "sha256": "0448371cea1563e6b1e5616c96dfaab438b46df6ef542d833bc6bda3182bb566"
+    },
+    {
+      "bytes": 5322,
+      "module": "ProjectiveCap.Grid",
+      "path": "ProjectiveCap/Grid.lean",
+      "sha256": "6adf3652160c4703af0413e432300c48123a0ee4667b92776eed2a14e06331f2"
+    },
+    {
+      "bytes": 3185,
+      "module": "ProjectiveCap.GridCounting",
+      "path": "ProjectiveCap/GridCounting.lean",
+      "sha256": "f2ec19acc3ebb8ba87abb649ff7707fcea0d37ee609ef40323ac53882b5fd58a"
+    },
+    {
+      "bytes": 4082,
+      "module": "ProjectiveCap.GridGame",
+      "path": "ProjectiveCap/GridGame.lean",
+      "sha256": "c6a5ac95dc563f757221e0d32886cae4ada2d61a540d96ac727cc1054be1c285"
+    },
+    {
+      "bytes": 29385,
+      "module": "ProjectiveCap.GridMirror",
+      "path": "ProjectiveCap/GridMirror.lean",
+      "sha256": "fd4f2afc7d063f630568ba5f76113e765c598d93fd27baab4dfb788b11a2b5d4"
+    },
+    {
+      "bytes": 2272,
+      "module": "ProjectiveCap.GridSeed",
+      "path": "ProjectiveCap/GridSeed.lean",
+      "sha256": "195ac5fccf5639172245bdc8749d7929df48abe9ab3f1b15f9bd40300413770f"
+    },
+    {
+      "bytes": 9276,
+      "module": "ProjectiveCap.HyperbolicQuadricMirror",
+      "path": "ProjectiveCap/HyperbolicQuadricMirror.lean",
+      "sha256": "fe4a93b4bd87e7d58d0b539f8ff1ae1b9ae0e927c38653592016f445ed11b2ba"
+    },
+    {
+      "bytes": 31885,
+      "module": "ProjectiveCap.IntrusionCalculus",
+      "path": "ProjectiveCap/IntrusionCalculus.lean",
+      "sha256": "ea6aa1509ed1dec9e8f1d1266b1c0bb77ead92fec4b44a59d5492cd90b13e978"
+    },
+    {
+      "bytes": 15852,
+      "module": "ProjectiveCap.Mirror",
+      "path": "ProjectiveCap/Mirror.lean",
+      "sha256": "8a2ab6a8f69b5f3b0babb20cea9891f084e1baab7fb134efc7e00e53c0be6226"
+    },
+    {
+      "bytes": 8866,
+      "module": "ProjectiveCap.PlaneOutcome",
+      "path": "ProjectiveCap/PlaneOutcome.lean",
+      "sha256": "205fad37d3e9a6bed032289f362d04627d1dc018a00e3a53b914284c7a81ed97"
+    },
+    {
+      "bytes": 50566,
+      "module": "ProjectiveCap.PlaneTransitivity",
+      "path": "ProjectiveCap/PlaneTransitivity.lean",
+      "sha256": "5fc66fd86a5a95549837cabe48b7a52c05435ab8446fdaa95f03c61975c03f37"
+    },
+    {
+      "bytes": 4733,
+      "module": "ProjectiveCap.Projective",
+      "path": "ProjectiveCap/Projective.lean",
+      "sha256": "886f01783902bfaa06244aa7d7762cd16dc8382b21135696bbf6bbdf706c76fe"
+    },
+    {
+      "bytes": 2429,
+      "module": "ProjectiveCap.StableFacts",
+      "path": "ProjectiveCap/StableFacts.lean",
+      "sha256": "f89de4ba0237117e3909e04ed0a6ad9fb50e86eade4d8a2004aaa8d96be201e9"
+    },
+    {
+      "bytes": 45035,
+      "module": "Sumfree.Game",
+      "path": "Sumfree/Game.lean",
+      "sha256": "1eb5613cf2d9775d2ce7e6c5f8244b008a1d700e01ad26094162538e733add07"
+    },
+    {
+      "bytes": 39789,
+      "module": "Sumfree.MirrorLemmas",
+      "path": "Sumfree/MirrorLemmas.lean",
+      "sha256": "421b6ef711175734dee56e76a71b42d2977b518de0b14089529a918c92acf7c4"
+    },
+    {
+      "bytes": 2254,
+      "module": "Sumfree.Nonzero",
+      "path": "Sumfree/Nonzero.lean",
+      "sha256": "5c14e13d58ac30636f60e4675f449aec1ade68f019a87c95825480cbf761ca40"
+    },
+    {
+      "bytes": 11442,
+      "module": "Sumfree.RankCounts",
+      "path": "Sumfree/RankCounts.lean",
+      "sha256": "4270c0be57a4fccc4f8f2a8a75527473204b77b09084891f5b9249234c822783"
+    }
+  ]
+}
