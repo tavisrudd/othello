@@ -717,6 +717,14 @@ q-independent bound here; `SG≤5` must come from mex structure across externall
 signatures, not private leaves or duplicate labels. No q23 computation was run. Report:
 [`../2026-07-23-c549-private-boundary-signatures.md`](../2026-07-23-c549-private-boundary-signatures.md).
 
+**C551 is active (2026-07-23): flagship paper packaging now runs in parallel with C528.**
+The mandate is to build the exact theorem/trust ledger, claim and novelty matrix, normalized
+fixed-q evidence table, classical-variety inclusion/split verdict, and crown/no-crown manuscript
+architecture without freezing the odd-q research or polishing submission prose prematurely. The
+central proposed narrative is global fixed-point-free symmetry versus residual capacity
+degradation; the odd-q crown may strengthen the headline but does not block packaging. Plan:
+[`../2026-07-23-c551-cap-paper-flagship-packaging.md`](../2026-07-23-c551-cap-paper-flagship-packaging.md).
+
 **Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
 under all moves ⟹ "drive Φ→0" vacuous) and replaced it with the gadget-Node-Kayles value law
 (overloaded capacity-two line = independent `k`-set collapsing to a clique on first touch; induct on
