@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active incremental foundation; C505/C507 final reviewed deltas not yet admitted
+**Status:** active incremental foundation; C505 admitted; C507 durable final record not yet admitted
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -11,11 +11,12 @@ conceptual/citation-backed, or mixed.
 
 ## Early-start authorization and current boundary
 
-On 2026-07-23 the user explicitly authorized C320 to begin while C507 is underway, with the C505
+On 2026-07-23 the user explicitly authorized C320 to begin while C507 was underway, with the C505
 and C507 results to be admitted when ready.  This overrides the start-order gate but not the
-release gate: C320 remains live and cannot claim a complete inventory, pin a release commit, run
-its final adequacy comparison, or request its independent review until both slices have delivered
-their final reviewed deltas or the corresponding manuscript claims have been removed.
+release gate.  C505 has now delivered its final reviewed delta and is admitted below.  C320 remains
+live and cannot claim a complete inventory, pin a release commit, run its final adequacy
+comparison, or request its independent review until C507's durable final record is committed and
+admitted or the corresponding manuscript claims have been removed.
 
 The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is still the protected
 19-page baseline.  It is not the replacement-spine manuscript described by
@@ -24,9 +25,10 @@ inventory and the adopted replacement-spine claim inventory are tracked separate
 claim inherits a trust route merely because a related terminal already exists, and no baseline
 statement is silently dropped before the final manuscript edit makes that deletion explicit.
 
-The C507 worktree is active and foreign to this C320 foundation.  Its untracked Lean modules and
-modified report are not read as final evidence, edited, built, staged, or included in a C320
-commit.
+The user reports C507 complete, and its implementation and review-repair commits exist.  Its report
+and queue lifecycle are presently modified by the owning work rather than committed, so C320 does
+not edit, stage, or infer its final terminal/evidence delta from that active foreign state.  C507
+admission occurs after the durable report and queue closure land.
 
 ## Foundation landed before final slice intake
 
@@ -156,9 +158,9 @@ tables.
 | C494 | complete after review repair and explicit user waiver; B3/H3-only scope retained |
 | C503 | final independent-review `GO`; proposed C320 delta available |
 | C504 | final independent-review `GO`; classical Mathieu/cover names remain cited inputs |
-| C505 | initial review `NO-GO`; repairs pinned at `4c01ea83`; user-launched post-fix review pending |
+| C505 | complete; repaired Lean `4c01ea83`, provenance ledger `30c1cd6b`, final user-launched review `GO`; admitted below |
 | C506 | final independent-review `GO` on implementation commit `51b21674` |
-| C507 | implementation underway; no final artifact or reviewed delta admitted |
+| C507 | user reports complete; implementation/review repairs exist, but active report/queue closure is not yet committed; no final delta admitted |
 
 ## First-pass headline adequacy map
 
@@ -214,6 +216,42 @@ negative, the cross-sheet small-module obstruction, the frozen five-space inters
 and the conditional mod-40 partition.  The first three are exact finite-domain negatives, not
 universal nonexistence theorems; the fourth does not formalize reciprocity, prime densities, or the
 golden semantic identification.
+
+### C505 torsor-Rosetta admission
+
+C505 is admitted at repaired Lean commit `4c01ea83`, provenance-ledger commit `30c1cd6b`, and gate
+SHA-256
+`568258c821016bce37ac80583aaef9e1ce586d4d8837475cdd6e6556a7bf7068`.  The current gate bytes
+equal the reviewed `4c01ea83` bytes.  Its eleven explicit probes split as follows:
+
+- two generic free-torsor terminals use exactly `propext` and `Quot.sound`;
+- seven local finite/certificate-interface terminals add only `Classical.choice`; and
+- the forced-outer terminal and aggregate close additionally expose the two declaration-local
+  C504 native-decision axioms for the finite assignment graph and exhaustive no-inner witness.
+
+The final ledger must keep five rows separate:
+
+1. free-`C2` obstruction and exact one-bit sufficiency;
+2. fixed-child quotient and `T_11` bridge;
+3. one sign character/common kernel with three readouts;
+4. rank-three split/inert models plus q=11 outer/Hadamard readouts; and
+5. the characteristic-zero quadratic field/conjugation/reduction interface.
+
+Lean proves the generic deductions, explicit finite root subtypes/swaps, the 22-parent quotient
+model, and consequences of four certificate structures.  The concrete affine/Čech, selector,
+arithmetic-orientation, fixed-child, design/Fourier, torsor/trichotomy, and rational-descent
+semantics come from seven exact JSON/hash/replay bundles.  Classical group names, the inert
+quadratic-algebra interpretation, and Hilbert-90/integral-reduction semantics remain cited inputs.
+Absolute cohomology, an all-prime classification, an integral cubic, genuine-Weil claims, and the
+forbidden embedding claim remain excluded.
+
+C505's seven adopted semantic bundles currently live under dated internal `notes/` paths.  Merely
+hash-pinning those paths in the public manifest would violate the one-way referee-artifact rule.
+C320 therefore chooses the migration route: before the manifest is cut, the adopted JSON,
+generators/checkers, replays, and checksum manifests must move as exact bytes into a stable
+workflow-free verification bundle, with a semantic README and unchanged hashes where filenames or
+embedded paths do not require regeneration.  The already stable
+`lean/verification/clebsch_arithmetic_gluing/` bundle remains in place and is referenced directly.
 
 Two earlier reviewed closing inputs are also admitted:
 
