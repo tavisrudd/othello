@@ -15,6 +15,7 @@ import hashlib
 import itertools
 import json
 from pathlib import Path
+import re
 import subprocess
 from typing import Iterable, Iterator
 
@@ -409,6 +410,62 @@ def run_singular_check(
     return result
 
 
+def singular_lift_program(design: tuple[Matching, ...]) -> str:
+    base = singular_program(design, 0).splitlines()
+    return "\n".join(
+        [
+            base[0],
+            base[1],
+            "ideal K=x9-y9,y9^2+x9-2*y9;",
+            "matrix T=lift(I,K);",
+            "matrix E=matrix(K)-matrix(I)*T;",
+            'print("LIFT_IDENTITY"); print(E);',
+            'print("LIFT_MATRIX"); print(T);',
+            "quit;",
+        ]
+    )
+
+
+def run_singular_lift(design: tuple[Matching, ...]) -> dict[str, object]:
+    completed = subprocess.run(
+        ["Singular", "-q"],
+        input=singular_lift_program(design),
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    prefix, matrix_text = completed.stdout.split("LIFT_MATRIX\n", 1)
+    identity = prefix.split("LIFT_IDENTITY\n", 1)[1].strip()
+    assert set(identity.replace(",", "").replace(" ", "")) <= {"0"}
+    denominator_primes = sorted(
+        {
+            prime
+            for denominator in map(int, re.findall(r"/([0-9]+)", matrix_text))
+            for prime in prime_divisors(denominator)
+        }
+    )
+    return {
+        "identity_verified": True,
+        "matrix_bytes": len(matrix_text.encode()),
+        "matrix_sha256": hashlib.sha256(matrix_text.encode()).hexdigest(),
+        "denominator_primes": denominator_primes,
+    }
+
+
+def prime_divisors(value: int) -> tuple[int, ...]:
+    divisors = []
+    candidate = 2
+    while candidate * candidate <= value:
+        if value % candidate == 0:
+            divisors.append(candidate)
+            while value % candidate == 0:
+                value //= candidate
+        candidate += 1
+    if value > 1:
+        divisors.append(value)
+    return tuple(divisors)
+
+
 def generate() -> dict[str, object]:
     solutions = enumerate_overlarge_sets()
     orbits = overlarge_orbits(solutions)
@@ -450,6 +507,16 @@ def generate() -> dict[str, object]:
         for check in algebraic_checks
         if expected_units[(check["characteristic"], check["class"])]
     )
+    integral_lifts = []
+    for class_index, design in enumerate(designs):
+        lift = run_singular_lift(design)
+        lift["class"] = (
+            "classical-hyperoval"
+            if class_index == 0
+            else "mathon-nonhyperoval"
+        )
+        integral_lifts.append(lift)
+    assert all(lift["denominator_primes"] == [2] for lift in integral_lifts)
     return {
         "schema": "c574-match10-v1",
         "realization_chart": {
@@ -469,6 +536,7 @@ def generate() -> dict[str, object]:
             "singular_version": "4.4.1",
         },
         "algebraic_checks": algebraic_checks,
+        "integral_lifts": integral_lifts,
         "overlarge_solutions_containing_fixed_design": len(solutions),
         "agl32_orbit_sizes": [len(orbit) for orbit in orbits],
         "classes": [

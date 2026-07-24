@@ -5828,6 +5828,26 @@
       9
     ]
   },
+  "integral_lifts": [
+    {
+      "class": "classical-hyperoval",
+      "denominator_primes": [
+        2
+      ],
+      "identity_verified": true,
+      "matrix_bytes": 4725,
+      "matrix_sha256": "dc6b01e3c678dadbb61ab1f68e633261d871f6d6894e3bfb77ea40d4f0a342e7"
+    },
+    {
+      "class": "mathon-nonhyperoval",
+      "denominator_primes": [
+        2
+      ],
+      "identity_verified": true,
+      "matrix_bytes": 4725,
+      "matrix_sha256": "2de0213d9701594e1e41e4c4cdce3dce3c2a433380e686e983f5895514d4c441"
+    }
+  ],
   "overlarge_solutions_containing_fixed_design": 64,
   "realization_chart": {
     "concurrency_equations": 189,

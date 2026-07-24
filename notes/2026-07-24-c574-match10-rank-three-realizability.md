@@ -6,7 +6,8 @@
 
 **Status:** complete. There are exactly two abstract classes. The classical class is realized in
 \(\operatorname{PG}(2,8)\) by the regular hyperoval and is compatible with the prescribed conic;
-the Mathon non-hyperoval class is not rank-three realizable in characteristic two. Neither class is
+the Mathon non-hyperoval class is not rank-three realizable over any field, while the classical
+class is not rank-three realizable in odd characteristic. In particular, neither class is
 rank-three realizable over \(\mathbf F_{37}\).
 
 ## Result
@@ -30,6 +31,14 @@ and \(N=(0:1:0)\) is its nucleus, then \(A=\mathcal C\cup\{N\}\) is the ten-poin
 other \(63\) points of the plane are exactly its five-secant concurrence centres. Consequently
 every point outside \(\mathcal C\) is either \(N\in A\) or lies on an \(A\)-secant, so \(A\) is
 \(\mathcal C\)-complete and has zero relative defect.
+
+The post-completion `ej` pass gives the exact characteristic obstruction:
+
+- \(D_{\mathrm H}\) has no rank-three realization over any field of odd characteristic;
+- \(D_{\mathrm M}\) has no rank-three realization over any field.
+
+The first statement is sharp at the characteristic level because \(D_{\mathrm H}\) is realized
+over \(\mathbf F_8\). The report does not classify which characteristic-two fields admit it.
 
 ## Abstract classification
 
@@ -91,9 +100,17 @@ makes the concurrency ideal the unit ideal. Both degree-reverse-lexicographic an
 replays give the same result. In characteristic two the classical ideal is not the unit ideal,
 and the direct \(\mathbf F_8\) hyperoval construction supplies the surviving realization.
 
-The obstruction for \(D_{\mathrm M}\) is slightly stronger than C574 requires: it excludes that
-class over every field of characteristic two, not merely \(\mathbf F_8\). No
-characteristic-wide claim for all other fields is made.
+The characteristic-two obstruction for \(D_{\mathrm M}\) already excludes that class over every
+field of characteristic two, not merely \(\mathbf F_8\).
+
+The second `ej` pass promotes the odd-characteristic probe to a theorem. Over \(\mathbf Q\),
+Singular's `lift` expresses both forced relations as combinations of the \(189\) integral
+concurrency equations. The two exact \(189\times2\) lift matrices verify the identities, have
+SHA-256 hashes recorded in the JSON certificate, and have no denominator prime except \(2\).
+The identities therefore reduce over every field of odd characteristic. They force the same
+\(P_9=P_2\) or \(P_9=P_3\) degeneration for both abstract classes. Combining this with the
+characteristic-two unit-ideal certificate for \(D_{\mathrm M}\) proves that \(D_{\mathrm M}\)
+has no rank-three realization over any field.
 
 ## Literature record
 
@@ -145,22 +162,24 @@ sha256sum -c ../notes/2026-07-24-c574-match10-rank-three-realizability.sha256
 ```
 
 The JSON contains the two overlarge-design representatives, both \(63\)-block matching designs,
-the direct \(\mathbf F_8\) design and transporter, and both monomial-order algebraic checks in
-characteristics \(2\) and \(37\). The trusted boundary is exact integer/finite-field arithmetic,
-canonical exhaustive enumeration, and Singular Gröbner bases. The second monomial order and the
+the direct \(\mathbf F_8\) design and transporter, both monomial-order algebraic checks in
+characteristics \(2\) and \(37\), and the verified rational lift-matrix hashes and denominator-prime
+sets. The trusted boundary is exact integer/finite-field arithmetic, canonical exhaustive
+enumeration, and Singular Gröbner bases and module lifts. The second monomial order and the
 independent direct \(\mathbf F_8\) incidence construction are the replays. The computation does not
-claim that Mathon's primary proof was read or classify projective realizability in characteristics
-other than those explicitly stated.
+claim that Mathon's primary proof was read or classify which characteristic-two fields realize
+\(D_{\mathrm H}\).
 
 ## `ej` + `tt` closeout
 
-The cheap strengthening exposed by the closeout is the characteristic-two exclusion of
-\(D_{\mathrm M}\), which is now stated above. The Tao-style normalization check removed any need
+The first cheap strengthening exposed by the closeout is the characteristic-two exclusion of
+\(D_{\mathrm M}\). The user-requested second pass extracts rational lift matrices whose only
+denominator prime is \(2\), upgrading the odd-characteristic probe to the exact theorem that both
+classes fail in every odd characteristic and hence that \(D_{\mathrm M}\) fails over every field.
+The Tao-style normalization check removed any need
 to invoke uniqueness of hyperovals in \(\operatorname{PG}(2,8)\): the direct algebraic obstruction
 eliminates the second abstract class, while the explicit regular hyperoval supplies and identifies
-the first. A characteristic-zero probe also produced the same two degeneracy relations, but it was
-not promoted into an all-characteristics theorem because exceptional-prime control lies outside
-C574.
+the first.
 
 ## Mystery ledger
 
@@ -170,5 +189,7 @@ C574.
 - **Rank-three realizability at \(q=8,37\):** settled. Exactly \(D_{\mathrm H}\) at \(q=8\)
   survives.
 - **Conic compatibility:** settled directly for the surviving regular hyperoval.
-- **Wider characteristic spectrum:** not claimed. The characteristic-two nonrealizability of
-  \(D_{\mathrm M}\) is proved; the characteristic-zero probe is only a lead outside this task.
+- **Wider characteristic spectrum:** settled at the characteristic level. Both classes fail in
+  odd characteristic; \(D_{\mathrm M}\) also fails in characteristic two and hence over every
+  field. The exact characteristic-two field-of-definition spectrum of \(D_{\mathrm H}\) remains
+  outside C574.
