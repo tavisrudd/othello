@@ -190,7 +190,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical split maximal-torus identification",
@@ -198,12 +201,12 @@
         }
       ],
       "id": "statement-thm-headline-rigidity-phase",
-      "paper_location": "theorem at source line 249",
+      "paper_location": "theorem at source line 254",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-rigidity-phase",
         "kind": "theorem-environment",
-        "sha256": "9e1cdfb945e632b479b40ad88cc5d50e795f09a4353b867c206748c9168ae165"
+        "sha256": "ace14159907a266e83ec1d62f19ffdf345b39786260702a8af5b44fb35d78a3e"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -302,8 +305,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "261a2caa04a884658f51768f572c60e449e9c09a0614bb08c1e111041d946734",
-        "tex": "Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has length\n\\[\n (q-h/2)(q-h+1)\n\\]\nand minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the\ncomplement in at most $q-h+1$ points."
+        "sha256": "4472d67984a602387ceb85c85a216794b58a6b4937b6b3f55594c237dfff6d82",
+        "tex": "Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has parameters\n\\[\n \\bigl[(q-h/2)(q-h+1),\\,3,\\,\n       (q-h/2-1)(q-h+1)\\bigr]_q;\n\\]\na nonmirror line meets the complement in at most $q-h+1$ points."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -436,7 +439,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical split maximal-torus identification",
@@ -762,7 +768,7 @@
         }
       ],
       "id": "statement-thm-headline-factorization",
-      "paper_location": "theorem at source line 278",
+      "paper_location": "theorem at source line 285",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-factorization",
@@ -1129,7 +1135,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 436",
+      "paper_location": "proposition at source line 443",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:a5-point-orbits",
@@ -1171,7 +1177,7 @@
         }
       ],
       "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 506",
+      "paper_location": "proposition at source line 513",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-holes-conic",
@@ -1187,7 +1193,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 541",
+      "paper_location": "corollary at source line 548",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "cor:named-variety",
@@ -1229,7 +1235,7 @@
         }
       ],
       "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 578",
+      "paper_location": "proposition at source line 585",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-hole-orbit",
@@ -1270,7 +1276,7 @@
         }
       ],
       "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 626",
+      "paper_location": "proposition at source line 633",
       "route": "mixed",
       "source": {
         "claim_key": "prop:decoding-oracle",
@@ -1286,7 +1292,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 713",
+      "paper_location": "lemma at source line 720",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:six-arc-line-bound",
@@ -1328,7 +1334,7 @@
         }
       ],
       "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 748",
+      "paper_location": "theorem at source line 755",
       "route": "mixed",
       "source": {
         "claim_key": "thm:rigidity",
@@ -1353,7 +1359,7 @@
         "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
       },
       "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 877",
+      "paper_location": "proposition at source line 884",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "prop:low-degree-rigidity",
@@ -1369,7 +1375,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 902",
+      "paper_location": "corollary at source line 909",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "corollary:aec192b0d5224cce",
@@ -1400,7 +1406,7 @@
         "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
       "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 951",
+      "paper_location": "theorem at source line 958",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "thm:gap",
@@ -1441,7 +1447,7 @@
         }
       ],
       "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1089",
+      "paper_location": "proposition at source line 1096",
       "route": "mixed",
       "source": {
         "claim_key": "prop:brianchon-support",
@@ -1482,7 +1488,7 @@
         }
       ],
       "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1139",
+      "paper_location": "corollary at source line 1146",
       "route": "mixed",
       "source": {
         "claim_key": "cor:decoder-brianchon",
@@ -1528,7 +1534,7 @@
         }
       ],
       "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1155",
+      "paper_location": "proposition at source line 1162",
       "route": "mixed",
       "source": {
         "claim_key": "prop:chirality",
@@ -1544,7 +1550,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1204",
+      "paper_location": "lemma at source line 1211",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:chord-defect",
@@ -1586,7 +1592,7 @@
         }
       ],
       "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1234",
+      "paper_location": "theorem at source line 1241",
       "route": "mixed",
       "source": {
         "claim_key": "thm:why11",
@@ -1627,7 +1633,7 @@
         }
       ],
       "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1281",
+      "paper_location": "proposition at source line 1288",
       "route": "mixed",
       "source": {
         "claim_key": "prop:clebsch-family-uncovered",
@@ -1668,12 +1674,67 @@
         }
       ],
       "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1351",
+      "paper_location": "proposition at source line 1358",
       "route": "mixed",
       "source": {
         "claim_key": "prop:h3-arrangement",
         "kind": "theorem-environment",
         "sha256": "208749acc65fdb48f43b22ed137ddf6cb6175a212e8429fc0dcc245b6c1a108c"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "determinant-specialization and spanning proof",
+          "unconditional_remainder": "The manuscript defines the finite nonvanishing conditions and proves preservation of the mirror and weighted singular-point matroids."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_distance": [],
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_length": [],
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder": [
+                "propext"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_length",
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_distance",
+              "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder"
+            ],
+            "validation": {
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "rank-three complement and distance identities"
+        }
+      ],
+      "id": "statement-prop-lattice-good",
+      "paper_location": "proposition at source line 1471",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:lattice-good",
+        "kind": "theorem-environment",
+        "sha256": "1de146e633b6f7634259cb1fe2e267efbd33bf052e08ca05d8cc1f16b56f7386"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -1709,12 +1770,79 @@
         }
       ],
       "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1512",
+      "paper_location": "theorem at source line 1587",
       "route": "mixed",
       "source": {
         "claim_key": "thm:small-k-conic-filling",
         "kind": "theorem-environment",
         "sha256": "acbd20e84f9db0c0014cd4eaf390dd7c6df86e6e8015a0b90b7dd8c87939ceb2"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "general matching-secant quotient",
+          "unconditional_remainder": "The manuscript proves pairing independence through Veronese pullback, principal-ideal divisibility, reference translation, and determinant-twisted equivariance."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch": [
+                "propext",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr": [
+                "propext",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ConicMatchingQuotient.secant_switch": [
+                "propext",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ConicMatchingQuotient.secant_veronese": [
+                "propext",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ConicMatchingQuotient.secant_veronese",
+              "RelativeConicArcs.ConicMatchingQuotient.secant_switch",
+              "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch",
+              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr"
+            ],
+            "validation": {
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "four-endpoint quotient and switch interface"
+        }
+      ],
+      "id": "statement-prop-general-matching-quotient",
+      "paper_location": "proposition at source line 1664",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:general-matching-quotient",
+        "kind": "theorem-environment",
+        "sha256": "c25e2c44d32fe152c906e0ffc382bbe3971be88a03baadf23c5ffdc24d88839d"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -1725,7 +1853,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1758",
+      "paper_location": "proposition at source line 1872",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -1868,7 +1996,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group and number-field semantics",
@@ -2005,7 +2136,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group and number-field semantics",
@@ -2142,7 +2276,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric-parent boundary",
@@ -2150,12 +2287,12 @@
         }
       ],
       "id": "statement-thm-headline-gluing",
-      "paper_location": "theorem at source line 1813",
+      "paper_location": "theorem at source line 1927",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-gluing",
         "kind": "theorem-environment",
-        "sha256": "5b674b4dce7b480843f5f0006cf0fa0ef7db7afafda0de06a86c65de364884d3"
+        "sha256": "af6840890b405043c39c90f78efe28ff2deea5b51266bec6bfd076203766decc"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -2292,7 +2429,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group and number-field semantics",
@@ -2442,7 +2582,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group and number-field semantics",
@@ -2454,8 +2597,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "e487c3f748aa2c31b294a8e71bfd30c70161e0275ca0f8661d6c5a53040b060d",
-        "tex": "In the $H_3$ case the two displayed $A_5$ stabilizers meet in\n$A_4$, generate $\\mathrm{PSL}_2(11)$, and are exchanged by an outer\nprojectivity carried by the rational $S_4/A_4$ hinge."
+        "sha256": "9d8c19611a3ceeb6e4caf8bd0fb1dcf7f3efde3ac41398b703d426ffdcebd419",
+        "tex": "In the $H_3$ case the two displayed $A_5$ stabilizers meet in\n$A_4$, generate $\\mathrm{PSL}_2(11)$, and are exchanged by an outer\nprojectivity carried by the rational $S_4/A_4$ hinge\n\\cite{Giudici2007,Atlas1985}."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -2592,7 +2735,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric-parent boundary",
@@ -2615,7 +2761,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "elementary split--inert frame proof",
@@ -2687,7 +2836,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1833",
+      "paper_location": "lemma at source line 1949",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -2702,7 +2851,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "quadratic reciprocity and Chinese-remainder proof",
@@ -2750,7 +2902,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 1940",
+      "paper_location": "proposition at source line 2085",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -2877,7 +3029,7 @@
         }
       ],
       "id": "statement-thm-four-sheet-holonomy",
-      "paper_location": "theorem at source line 1991",
+      "paper_location": "theorem at source line 2142",
       "route": "mixed",
       "source": {
         "claim_key": "thm:four-sheet-holonomy",
@@ -3045,7 +3197,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "abstract quotient-action proof",
@@ -3116,7 +3271,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 2112",
+      "paper_location": "lemma at source line 2263",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -3307,7 +3462,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -3493,7 +3651,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -3679,7 +3840,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -3865,7 +4029,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -4051,7 +4218,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -4059,7 +4229,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 2143",
+      "paper_location": "theorem at source line 2294",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -4250,7 +4420,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -4449,7 +4622,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -4648,7 +4824,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -4847,7 +5026,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -5046,7 +5228,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "torsor, descent, and Mathieu names",
@@ -5527,7 +5712,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "frozen arithmetic hypotheses",
@@ -5834,7 +6022,10 @@
           "cited_inputs": [
             "Determinant square-class character on PGL2 with kernel PSL2",
             "Quadratic-field split and inert factorization at the displayed primes",
-            "Classical Mathieu group names attached after literal finite closure"
+            "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+            "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+            "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+            "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "ambient Weil naming boundary",
@@ -5905,18 +6096,30 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "fb7ceb18e1841ce34d78d7560c5632f5ad8b327ff53364dcc077199380b7c8d3",
+  "manuscript_sha256": "984421e472f1e51612895cc664f547fdefde27116b294eb8e628ff47aff2b9a6",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
       "repository": "paper",
       "sha256": "4990231c512e96f4e55f407b0169c20473428bb7b4b23cf888de2f91ee2760c3"
     },
+    "formal_toolchain": {
+      "lean": "4.32.0-rc1",
+      "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
+    },
     "lock": {
       "path": "flake.lock",
       "repository": "paper",
       "sha256": "b2ab69a7105fe245eb9500a4a72c3793b2c1ecae969c1f1bf743d3efc71167a8"
-    }
+    },
+    "paper_toolchain": {
+      "git": "2.54.0",
+      "nix": "2.34.8",
+      "python": "3.13.14",
+      "singular": "4.4.1",
+      "tectonic": "0.16.9"
+    },
+    "platform": "x86_64-linux"
   },
   "schema": "clebsch-trust-manifest-v1",
   "verify_all": {
@@ -6114,7 +6317,7 @@
         "timeout_seconds": 1800
       }
     ],
-    "command": "python3 verification/verify_release.py --lean-root /path/to/shared-lean",
+    "command": "nix develop --command python3 verification/verify_release.py --lean-root /path/to/finitegeom",
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",

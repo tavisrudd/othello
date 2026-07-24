@@ -159,7 +159,10 @@ MODULAR_INPUTS = [
 TORSOR_INPUTS = [
     "Determinant square-class character on PGL2 with kernel PSL2",
     "Quadratic-field split and inert factorization at the displayed primes",
-    "Classical Mathieu group names attached after literal finite closure",
+    "Giudici 2007, maximal subgroups with socle PSL(2,q), arXiv:math/0703685",
+    "Conway--Curtis--Norton--Parker--Wilson 1985, Atlas of Finite Groups",
+    "Taylor 1992, The Geometry of the Classical Groups, Chapter 11",
+    "Witt 1938, Die 5-fach transitiven Gruppen von Mathieu, pages 256--264",
 ]
 
 
@@ -420,6 +423,24 @@ def generic_components(label: str) -> list[dict[str, object]]:
         return [
             conceptual_component("reflection-arrangement interpretation", CLASSICAL_INPUTS, "The manuscript separates the classical arrangement names from the local transport."),
             baseline_component("reflection coordinate replay", ["check_reflection_arrangements.py"], "The script checks the exact finite projectivity and incidence spectra."),
+        ]
+    if label == "prop:lattice-good":
+        return [
+            conceptual_component(
+                "determinant-specialization and spanning proof",
+                [],
+                "The manuscript defines the finite nonvanishing conditions and proves preservation of the mirror and weighted singular-point matroids.",
+            ),
+            lean_component("rank-three complement and distance identities", ["phase"]),
+        ]
+    if label == "prop:general-matching-quotient":
+        return [
+            conceptual_component(
+                "general matching-secant quotient",
+                [],
+                "The manuscript proves pairing independence through Veronese pullback, principal-ideal divisibility, reference translation, and determinant-twisted equivariance.",
+            ),
+            lean_component("four-endpoint quotient and switch interface", ["quotient"]),
         ]
     if label == "thm:small-k-conic-filling":
         return [
@@ -685,12 +706,24 @@ def main() -> None:
             "commit": PINNED_LEAN_COMMIT,
         },
         "reproducibility_environment": {
+            "platform": "x86_64-linux",
             "flake": file_evidence("paper", "flake.nix"),
             "lock": file_evidence("paper", "flake.lock"),
+            "paper_toolchain": {
+                "python": "3.13.14",
+                "singular": "4.4.1",
+                "tectonic": "0.16.9",
+                "nix": "2.34.8",
+                "git": "2.54.0",
+            },
+            "formal_toolchain": {
+                "lean": "4.32.0-rc1",
+                "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+            },
         },
         "manuscript_sha256": digest_bytes((ROOT / "clebsch_hexagon_code.tex").read_bytes()),
         "verify_all": {
-            "command": "python3 verification/verify_release.py --lean-root /path/to/shared-lean",
+            "command": "nix develop --command python3 verification/verify_release.py --lean-root /path/to/finitegeom",
             "entry_point": file_evidence("paper", "verification/verify_release.py"),
             "output": file_evidence("paper", "verification/verify-release-output.json"),
             "checks": checks(),

@@ -1,16 +1,16 @@
 {
   "schema": "clebsch-statement-identity-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "fb7ceb18e1841ce34d78d7560c5632f5ad8b327ff53364dcc077199380b7c8d3",
-  "statement_count": 27,
+  "source_sha256": "984421e472f1e51612895cc664f547fdefde27116b294eb8e628ff47aff2b9a6",
+  "statement_count": 29,
   "statements": [
     {
       "claim_key": "thm:headline-rigidity-phase",
       "environment": "theorem",
       "label": "thm:headline-rigidity-phase",
-      "sha256": "9e1cdfb945e632b479b40ad88cc5d50e795f09a4353b867c206748c9168ae165",
-      "source_line": 249,
-      "tex": "\\begin{theorem}[Rigidity and the rank-three conic phase]\n\\label{thm:headline-rigidity-phase}\nThe following statements hold.\n\\begin{enumerate}[label=\\textup{(A\\arabic*)},leftmargin=*]\n\\item Among six-arcs of $\\PG(2,11)$, conic containment of the full\nprojective deep-hole locus characterizes the Clebsch class and recovers its\n$A_5$ stabilizer.\n\\item Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has length\n\\[\n (q-h/2)(q-h+1)\n\\]\nand minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the\ncomplement in at most $q-h+1$ points.\n\\item In the three specializations $q=h+1$, namely\n$(A_3,5),(B_3,7),(H_3,11)$, the complement is the full rational conic and\nits projective-system code is extended GRS.\n\\item In those three specializations, the square of a Coxeter element\ngenerates the split maximal torus in $\\mathrm{PSL}_2(q)$, and its two\nmoving point-orbits are the two Legendre cosets.\n\\end{enumerate}\n\\end{theorem}",
+      "sha256": "ace14159907a266e83ec1d62f19ffdf345b39786260702a8af5b44fb35d78a3e",
+      "source_line": 254,
+      "tex": "\\begin{theorem}[Rigidity and the rank-three conic phase]\n\\label{thm:headline-rigidity-phase}\nThe following statements hold.\n\\begin{enumerate}[label=\\textup{(A\\arabic*)},leftmargin=*]\n\\item Among six-arcs of $\\PG(2,11)$, conic containment of the full\nprojective deep-hole locus characterizes the Clebsch class and recovers its\n$A_5$ stabilizer.\n\\item Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has parameters\n\\[\n \\bigl[(q-h/2)(q-h+1),\\,3,\\,\n       (q-h/2-1)(q-h+1)\\bigr]_q;\n\\]\na nonmirror line meets the complement in at most $q-h+1$ points.\n\\item In the three specializations $q=h+1$, namely\n$(A_3,5),(B_3,7),(H_3,11)$, the complement is the full rational conic and\nits projective-system code is extended GRS.\n\\item In those three specializations, the square of a Coxeter element\ngenerates the split maximal torus in $\\mathrm{PSL}_2(q)$, and its two\nmoving point-orbits are the two Legendre cosets.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Rigidity and the rank-three conic phase"
     },
     {
@@ -18,7 +18,7 @@
       "environment": "theorem",
       "label": "thm:headline-factorization",
       "sha256": "1c9dea67a804c997387a2efe3258b6cd1f056cbd01e8df5299123068f7570c70",
-      "source_line": 278,
+      "source_line": 285,
       "tex": "\\begin{theorem}[Factorization recovery]\n\\label{thm:headline-factorization}\n\\begin{enumerate}[label=\\textup{(F\\arabic*)},leftmargin=*]\n\\item All canonically scaled matching-secant products have equal\nrestriction to the conic; every four-endpoint switch difference is\ndivisible by $Q$.  The $A_3,B_3,H_3$ quotient configurations have linear\nranks $3,6,10$, respectively.\n\\item In the $B_3$ and $H_3$ configurations, the two Coxeter\nfactorization sheets are, up to interchange, the unique complementary\nhalves having equal first and second tensor moments.\n\\item With opposite signs on the two sheets, every even signed profile\nmoment vanishes, and the primitive weighted barycentre relation\n$v_1+4v_4+6v_6=0$ kills degree one.  Within the signed tensor-moment\nfamily and its linear functionals, degree three is the first surviving\ndegree; its nonzero tensor transforms by the outer character.\n\\item For $G=\\mathrm{PGL}_2(11)$, $H=A_5$, and the common\n$K=A_4$, the space $K\\backslash G/H$ has six labels in two triples of\nsizes $1,4,6$, with profiles\n$v_1,v_4,v_6,-v_1,-v_4,-v_6$.  The profile map has rank two and\nfour-dimensional linear kernel but separates the six labels.  Its\nsingleton profiles recover the unordered $H_3$ matching pair, and a\nchoice of singleton recovers the corresponding row of the frozen matching\ntable.  No geometric-parent identification is asserted.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Factorization recovery"
     },
@@ -27,7 +27,7 @@
       "environment": "proposition",
       "label": "prop:a5-point-orbits",
       "sha256": "b55e4af0607168f516b0305837cf0f59a895cd4360802630524c76b99304e2db",
-      "source_line": 436,
+      "source_line": 443,
       "tex": "\\begin{proposition}[The $A_5$ point orbits]\n\\label{prop:a5-point-orbits}\nLet $G=\\operatorname{Stab}(A)\\cong A_5$. Its orbits on $\\PG(2,11)$ have\nlengths\n\\[\n 6,\\ 10,\\ 12,\\ 15,\\ 30,\\ 30,\\ 30.\n\\]\nThe first four are respectively $A$, the ten Brianchon points,\n$\\cC(\\F_{11})$, and the fifteen vertices of the five self-polar triangles.\nIn particular, $\\cC(\\F_{11})$ is the unique twelve-point $G$-orbit.\n\\end{proposition}",
       "title": "The $A_5$ point orbits"
     },
@@ -36,7 +36,7 @@
       "environment": "proposition",
       "label": "prop:deep-holes-conic",
       "sha256": "5fb600094c48e7dc65ea98d8ca215de2b2ea89a0109f5ae6760508a99396092d",
-      "source_line": 506,
+      "source_line": 513,
       "tex": "\\begin{proposition}[The uncovered locus is the conic]\n\\label{prop:deep-holes-conic}\nThe covering radius of $C$ is three, and\n\\[\n \\cU(A)=\\mathcal D_{\\mathrm{proj}}(C)=\\cC(\\F_{11}).\n\\]\n\\end{proposition}",
       "title": "The uncovered locus is the conic"
     },
@@ -45,7 +45,7 @@
       "environment": "corollary",
       "label": "cor:named-variety",
       "sha256": "27a3d716a1d4fbaf91368282fee98dfe3a467f200df794326b1cd4c4f34af042",
-      "source_line": 541,
+      "source_line": 548,
       "tex": "\\begin{corollary}[Directions, cosets, leaders, and received words]\n\\label{cor:named-variety}\n$\\cU(A)$ has $12$ directions, exactly the points of $\\cC$. Above them lie\n$12(11-1)=120$ nonzero maximum-distance\nsyndromes, hence $120$ deep-hole cosets. Each such coset has\n$\\binom{6}{3}=20$ minimum-weight leaders, for $2400$ leaders in all, and\ncontains $|C|=11^3=1331$ received words. Consequently $C$ has\n$120\\cdot1331=159720$ received-word deep holes.\n\\end{corollary}",
       "title": "Directions, cosets, leaders, and received words"
     },
@@ -54,7 +54,7 @@
       "environment": "proposition",
       "label": "prop:deep-hole-orbit",
       "sha256": "4c3b29e65f0adc104aee737b7d0e7cfce57b39bc520f62c28ef85fa13aa42961",
-      "source_line": 578,
+      "source_line": 585,
       "tex": "\\begin{proposition}[One orbit on received-word deep holes]\n\\label{prop:deep-hole-orbit}\nThe monomial automorphism group of $C$ is transitive on the $120$ deep-hole\ncosets. Let $\\Gamma$ be the group generated by these automorphisms and by\ntranslations $v\\mapsto v+c$ for $c\\in C$. Then\n\\[\n |\\Gamma|=|C|\\,|\\operatorname{MAut}(C)|=1331\\cdot600=798600,\n\\]\nand $\\Gamma$ is transitive on all $159720$ received-word deep holes. The\nstabilizer of each such word is cyclic of order five.\n\\end{proposition}",
       "title": "One orbit on received-word deep holes"
     },
@@ -63,7 +63,7 @@
       "environment": "proposition",
       "label": "prop:decoding-oracle",
       "sha256": "5aa733b14d96af0204113be8d682f36b1fb06db6f1fee5065dda39da89b182b4",
-      "source_line": 626,
+      "source_line": 633,
       "tex": "\\begin{proposition}[Complete syndrome oracle and ambiguity enumerator]\n\\label{prop:decoding-oracle}\nFor $v\\in\\F_{11}^6$ with syndrome $s=Hv^{\\mathsf T}$,\n\\[\n d(v,C)=\n \\begin{cases}\n 0,&s=0,\\\\\n 1,&[s]\\in A,\\\\\n 3,&s\\ne0\\text{ and }Q(s)=0,\\\\\n 2,&\\text{otherwise}.\n \\end{cases}\n\\]\nAmong the $1330$ nonzero cosets, the numbers having respectively one, two,\nthree, and twenty nearest codewords are\n\\[\n 960,\\qquad150,\\qquad100,\\qquad120.\n\\]\nFor a distance-two syndrome the number of nearest codewords is the secant\nindex of its direction. Every distance-three syndrome has exactly one\nleader on each of the\ntwenty three-element coordinate supports.\n\\end{proposition}",
       "title": "Complete syndrome oracle and ambiguity enumerator"
     },
@@ -72,7 +72,7 @@
       "environment": "lemma",
       "label": "lem:six-arc-line-bound",
       "sha256": "f7093d5e61f7da818bfc8d09a1b3d93fa8be07e08a1035937263d922a313f51f",
-      "source_line": 713,
+      "source_line": 720,
       "tex": "\\begin{lemma}[Six-arc line bound]\n\\label{lem:six-arc-line-bound}\nLet $A$ be a six-arc in $\\PG(2,q)$, where $q$ is odd. Every line contains at\nmost $q-5$ points of $\\cU(A)$.\n\\end{lemma}",
       "title": "Six-arc line bound"
     },
@@ -81,7 +81,7 @@
       "environment": "theorem",
       "label": "thm:rigidity",
       "sha256": "1baf96033b14a99413f702c22140ed8f4758ed61dad4a1b86be5263200f2c2b5",
-      "source_line": 748,
+      "source_line": 755,
       "tex": "\\begin{theorem}[Rigidity theorem]\n\\label{thm:rigidity}\nFor a six-arc $A\\subset\\PG(2,11)$, the following are equivalent:\n\\begin{enumerate}[label=(\\roman*),leftmargin=2em]\n\\item the uncovered locus $\\cU(A)$ lies on some conic (possibly\ndegenerate);\n\\item $\\cU(A)$ is exactly the set of $\\F_{11}$-points of a nonsingular\nconic;\n\\item $|\\cU(A)|\\le15$;\n\\item $|\\cU(A)|=12$;\n\\item $A$ is $\\mathrm{PGL}(3,11)$-equivalent to the Clebsch hexagon;\n\\item the stabilizer of $A$ in $\\mathrm{PGL}(3,11)$ contains $A_5$.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Rigidity theorem"
     },
@@ -90,7 +90,7 @@
       "environment": "proposition",
       "label": "prop:low-degree-rigidity",
       "sha256": "11c7c9029cb3fd9111dfe68a465e69490da1195ee5cea6c04ead9420796e582b",
-      "source_line": 877,
+      "source_line": 884,
       "tex": "\\begin{proposition}[Low-degree algebraic rigidity]\n\\label{prop:low-degree-rigidity}\nFor a six-arc $A\\subset\\PG(2,11)$, the uncovered locus $\\cU(A)$ is\ncontained in the zero set of a nonzero homogeneous form of degree at most\nthree if and only if $A$ is projectively equivalent to the Clebsch\nhexagon. In the Clebsch case the least such degree is two: the quadratic\nvanishing space is spanned by the defining nonsingular conic equation $Q$,\nand the cubic vanishing space is\n\\[\n Q\\cdot\\F_{11}[X,Y,Z]_1.\n\\]\n\\end{proposition}",
       "title": "Low-degree algebraic rigidity"
     },
@@ -99,7 +99,7 @@
       "environment": "corollary",
       "label": null,
       "sha256": "aec192b0d5224cce14f95ef27ab1351f5396c617232ef6476f7462dab8787a47",
-      "source_line": 902,
+      "source_line": 909,
       "tex": "\\begin{corollary}[Monomial characterization]\nUp to monomial equivalence, $C$ is the unique linear $[6,3,4]_{11}$ code of\ncovering radius three whose projective deep-hole syndrome locus is contained\nin a plane curve of degree at most three. In particular, $A_5$ is recovered\nfrom this coding condition, not assumed as a hypothesis.\n\\end{corollary}",
       "title": "Monomial characterization"
     },
@@ -108,7 +108,7 @@
       "environment": "theorem",
       "label": "thm:gap",
       "sha256": "c08cb806be692717e0eb2f9fb8281d6f33f975b32b02795e36ff61f0954e1c3e",
-      "source_line": 951,
+      "source_line": 958,
       "tex": "\\begin{theorem}[Quantitative gaps]\n\\label{thm:gap}\n\\begin{enumerate}[label=(\\alph*),leftmargin=2em]\n\\item There is no six-arc $A\\subset\\PG(2,11)$ with\n$12<|\\cU(A)|<16$. Every arc attaining $|\\cU(A)|=12$ is Clebsch up to\nprojectivity. If $|\\cU(A)|\\ge16$, then $\\cU(A)$ lies on no conic.\n\\item Every non-Clebsch class satisfies $\\delta(A)\\ge12$, and the bound is\nsharp.\n\\item The arc $A$ has $252$ distinct neighbors. Every neighbor $B$ satisfies\n$d_{\\cC}(B)\\ge18$ and $|\\cU(B)\\cap\\cC|\\le7$; none has its uncovered locus\ncontained in a conic, degenerate or otherwise.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Quantitative gaps"
     },
@@ -117,7 +117,7 @@
       "environment": "proposition",
       "label": "prop:brianchon-support",
       "sha256": "caceff90101d0a58f99d5ecd2c6e5f363ae056f1b88b542fb0d0f1fc5bc5240a",
-      "source_line": 1089,
+      "source_line": 1096,
       "tex": "\\begin{proposition}[Brianchon--support dictionary]\n\\label{prop:brianchon-support}\nLet $\\mathcal T$ be the five self-polar triangles of Edge and\nDye~\\cite{Edge1956,Dye1991}, regarded as the five perfect matchings in\ntheir synthematic total, and let $\\mathcal B(A)$ be the set of ten\nBrianchon points of the Clebsch hexagon. For distinct $T,T'\\in\\mathcal T$,\nthe union $T\\cup T'$ is an alternating six-cycle. Let $M(T,T')$ be the\nperfect matching joining opposite vertices of this cycle. Let\n$\\beta(T,T')=\\{S,S^{\\mathsf c}\\}$ be the unordered pair of alternating\nvertex classes of the cycle.\nFor example, $T_0\\cup T_1$ is the cycle\n$0,1,4,5,3,2$, so $M(T_0,T_1)=05|13|24$ and\n$\\beta(T_0,T_1)=\\{\\{0,3,4\\},\\{1,2,5\\}\\}$.\n\nThe three chords indexed by $M(T,T')$ concur at a point $b(T,T')\\in\n\\mathcal B(A)$. The maps\n\\[\n \\binom{\\mathcal T}{2}\\longrightarrow\\mathcal B(A),\n \\qquad \\{T,T'\\}\\longmapsto b(T,T'),\n\\]\nand\n\\[\n \\binom{\\mathcal T}{2}\\longrightarrow\n \\bigl\\{\\{S,S^{\\mathsf c}\\}:|S|=3\\bigr\\},\n \\qquad \\{T,T'\\}\\longmapsto\\beta(T,T'),\n\\]\nare $A_5$-equivariant bijections. They identify the ten Brianchon points\nwith the ten complementary support pairs. Under this identification,\nPetersen adjacency is disjointness of the corresponding two-element\nsubsets of $\\mathcal T$.\n\\end{proposition}",
       "title": "Brianchon--support dictionary"
     },
@@ -126,7 +126,7 @@
       "environment": "corollary",
       "label": "cor:decoder-brianchon",
       "sha256": "94b8ee9cff0623e7afa40325afdbe3a50863f0a1800d3a2402a653632103e5de",
-      "source_line": 1139,
+      "source_line": 1146,
       "tex": "\\begin{corollary}[The decoder reconstructs the Brianchon configuration]\n\\label{cor:decoder-brianchon}\nThe ten projective directions having three nearest weight-two errors are\nexactly the ten Brianchon points.  At each such direction the three error\nsupports are pairwise disjoint and hence form a perfect matching of the six\ncoordinates.  The ten matchings thereby recovered are precisely the ten\nperfect matchings outside the five-matching synthematic total.\n\\end{corollary}",
       "title": "The decoder reconstructs the Brianchon configuration"
     },
@@ -135,7 +135,7 @@
       "environment": "proposition",
       "label": "prop:chirality",
       "sha256": "7a05184b27cd0558b79dc99409d4b6f9e0a6f6b81774ead11b1997d00fe07183",
-      "source_line": 1155,
+      "source_line": 1162,
       "tex": "\\begin{proposition}[Invariant support bipartition]\n\\label{prop:chirality}\nOnly the bipartition is intrinsic: neither part has a canonical sign. The\ntwenty three-element coordinate supports split into two complementary\n$A_5$-orbits $\\mathcal O_+$ and $\\mathcal O_-$ of size ten. For every\nmaximum-distance syndrome $s$, each support determines exactly one\nweight-three leader of the coset $H^{-1}(s)$; hence that coset has ten\nleaders supported in each class. Globally, the $2400$ minimum-weight\nleaders split as $1200+1200$.\n\nEvery monomial automorphism of $C$ preserves this unordered bipartition.\nThe other coset in the exotic normalizer $N_{S_6}(A_5)\\cong S_5$ exchanges\nthe two support classes, but its sixty elements are not automorphisms of the\ndisplayed code. By\nProposition~\\ref{prop:brianchon-support}, the ten complementary support\npairs are canonically both the two-subsets of the five self-polar triangles\nand the ten Brianchon points.\n\\end{proposition}",
       "title": "Invariant support bipartition"
     },
@@ -144,7 +144,7 @@
       "environment": "lemma",
       "label": "lem:chord-defect",
       "sha256": "020b4b13260b54a2c2eba1c44c1cbb7cd717d571c83a043d17deb999cf826ae4",
-      "source_line": 1204,
+      "source_line": 1211,
       "tex": "\\begin{lemma}[Chord-defect identity]\n\\label{lem:chord-defect}\nLet $A$ be a six-arc in $\\PG(2,q)$, and let $c(A)$ be the number of points\noff $A$ incident with three of its fifteen chords. Then\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad 0\\le c(A)\\le15.\n\\]\nConsequently, if $|\\cU(A)|=q+1$, then\n\\[\n c(A)=(q-6)(q-9).\n\\]\n\\end{lemma}",
       "title": "Chord-defect identity"
     },
@@ -153,7 +153,7 @@
       "environment": "theorem",
       "label": "thm:why11",
       "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933",
-      "source_line": 1234,
+      "source_line": 1241,
       "tex": "\\begin{theorem}[Uniqueness of $q=11$]\n\\label{thm:why11}\nLet $q$ be a prime power. If a six-arc $A\\subset\\PG(2,q)$ satisfies\n$\\cU(A)=\\cC(\\F_q)$ for some nonsingular conic $\\cC$, then $q=11$.\nAt $q=11$ every such $A$ is projectively equivalent to the\nClebsch hexagon.\n\\end{theorem}",
       "title": "Uniqueness of $q=11$"
     },
@@ -162,7 +162,7 @@
       "environment": "proposition",
       "label": "prop:clebsch-family-uncovered",
       "sha256": "314d254fbf78b34c2ba3bb2453f810017225e88ee23feb52cd2c38d80d024c3d",
-      "source_line": 1281,
+      "source_line": 1288,
       "tex": "\\begin{proposition}[The Clebsch-family uncovered formula]\n\\label{prop:clebsch-family-uncovered}\nLet $K$ be a Clebsch hexagon over $\\F_q$. Then\n\\[\n |\\cU(K)|=q^2-14q+45.\n\\]\nIf $q\\equiv3\\pmod4$ and $\\cC$ is Dye's associated conic, then\n$\\cC(\\F_q)\\subseteq\\cU(K)$ and\n\\[\n |\\cU(K)\\setminus\\cC(\\F_q)|=(q-4)(q-11).\n\\]\nIn particular, among Clebsch hexagons in this congruence class, the\nassociated conic is the complete projective deep-hole syndrome locus if and\nonly if $q=11$.\n\\end{proposition}",
       "title": "The Clebsch-family uncovered formula"
     },
@@ -171,25 +171,43 @@
       "environment": "proposition",
       "label": "prop:h3-arrangement",
       "sha256": "208749acc65fdb48f43b22ed137ddf6cb6175a212e8429fc0dcc245b6c1a108c",
-      "source_line": 1351,
+      "source_line": 1358,
       "tex": "\\begin{proposition}[The Clebsch secants as reduced $H_3$ mirrors]\n\\label{prop:h3-arrangement}\nThe six fivefold points are\n\\[\n (0,1,1-\\tau),(0,1,\\tau-1),(1,1-\\tau,0),(1,\\tau-1,0),\n (1,0,-\\tau),(1,0,\\tau).\n\\]\nThey form an arc, their fifteen joins are the mirrors, and the other\nsingularities are ten triple and fifteen double points. Over $\\F_{11}$,\ntake $\\tau=8$. The matrix\n\\[\n T=\\begin{pmatrix}2&3&8\\\\10&6&9\\\\2&2&5\\end{pmatrix}\n\\]\nmaps these six column vectors onto the displayed Clebsch hexagon $A$.\nWriting line coefficients as rows, the induced map\n$\\ell\\mapsto\\ell T^{-1}$ carries the mirrors onto the secants of $A$.\n\\end{proposition}",
       "title": "The Clebsch secants as reduced $H_3$ mirrors"
+    },
+    {
+      "claim_key": "prop:lattice-good",
+      "environment": "proposition",
+      "label": "prop:lattice-good",
+      "sha256": "1de146e633b6f7634259cb1fe2e267efbd33bf052e08ca05d8cc1f16b56f7386",
+      "source_line": 1471,
+      "tex": "\\begin{proposition}[Lattice-good reduction]\n\\label{prop:lattice-good}\nA specialization $\\varphi:R_T\\to\\F_q$ is \\emph{lattice-good} if\n$\\varphi$ sends every vector in (7.1) to a nonzero vector and every listed\ndeterminant to a nonzero scalar.  These are finitely many explicit\npolynomial nonvanishing conditions.  Characteristic two is excluded, and an\n$H_3$ specialization includes a chosen\n$\\varphi(\\tau)\\in\\F_q$ satisfying $\\varphi(\\tau)^2-\\varphi(\\tau)-1=0$.\nUnder this condition:\n\\begin{enumerate}[label=\\textup{(\\roman*)},leftmargin=*]\n\\item the reduced normals define the same number of distinct mirrors, the\nsame rank-three intersection lattice, and the same singular\nmultiplicities as $\\mathcal A_T$;\n\\item the weighted collinearity matroid of the singular points is\nunchanged.  In particular, for nonmirror lines\n\\[\n \\max_L\\sum_{P\\in L\\cap\\mathcal S_T}(m(P)-1)=h/2;\n\\]\n\\item if the complement is nonempty, it spans $\\PG(2,q)$.\n\\end{enumerate}\n\\end{proposition}",
+      "title": "Lattice-good reduction"
     },
     {
       "claim_key": "thm:small-k-conic-filling",
       "environment": "theorem",
       "label": "thm:small-k-conic-filling",
       "sha256": "acbd20e84f9db0c0014cd4eaf390dd7c6df86e6e8015a0b90b7dd8c87939ceb2",
-      "source_line": 1512,
+      "source_line": 1587,
       "tex": "\\begin{theorem}[Conic-filling loci for $4\\le k\\le7$]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le7$. If $\\cU(A)$ is the full set of $\\F_q$-rational points of a\nnonsingular conic, then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur.\n\\end{theorem}",
       "title": "Conic-filling loci for $4\\le k\\le7$"
+    },
+    {
+      "claim_key": "prop:general-matching-quotient",
+      "environment": "proposition",
+      "label": "prop:general-matching-quotient",
+      "sha256": "c25e2c44d32fe152c906e0ffc382bbe3971be88a03baadf23c5ffdc24d88839d",
+      "source_line": 1664,
+      "tex": "\\begin{proposition}[The matching-secant quotient]\n\\label{prop:general-matching-quotient}\nFor every $m\\ge2$ and every pair of perfect matchings $M,N$ of $\\Omega$,\n\\[\n P_M|_Q=P_N|_Q,\\qquad P_M-P_N\\in(Q).\n\\]\nConsequently, after choosing a reference matching $M_0$,\n\\[\n \\Phi_{M_0}(M)=\\frac{P_M-P_{M_0}}{Q}\n       \\in H^0(\\mathbb P^2,\\mathcal O(m-2))                 \\tag{8.1}\n\\]\nis an affine configuration.  Replacing $M_0$ by $M_1$ translates it by\n$-\\Phi_{M_0}(M_1)$.  If $g\\in\\mathrm{GL}_2$ preserves $\\Omega$,\n$\\rho(g)$ is its action on binary quadratics, and representatives are\ntransported by $g$, then\n\\[\n \\Phi_{gM_0}(gM)\\circ\\rho(g)\n   =\\det(g)^{\\,2m-2}\\Phi_{M_0}(M).                          \\tag{8.2}\n\\]\nThus the difference space, its rank, and its affine moment conditions are\nindependent of $M_0$ and equivariant under the endpoint stabilizer.\n\\end{proposition}",
+      "title": "The matching-secant quotient"
     },
     {
       "claim_key": "prop:modular-depth-plane",
       "environment": "proposition",
       "label": "prop:modular-depth-plane",
       "sha256": "4bf9a65143de9bc6f63e5fde00925ec384d2f3e4c79089e18c30e91b610545de",
-      "source_line": 1758,
+      "source_line": 1872,
       "tex": "\\begin{proposition}[Modular depth quotient and source boundary]\n\\label{prop:modular-depth-plane}\nOver $\\F_{11}$ the depth plane is\n\\[\n  P(1)^{A_4}/\\operatorname{soc}P(1),\\qquad\n  \\operatorname{Loewy}(P(1))=1\\mid9\\mid1.\n\\]\nSeparately, the three-dimensional relative-cubic invariant space $R$ and\nits coinvariants $M_G$ have canonical maps\n\\[\n R\\xrightarrow{\\ \\pi\\ }M_G\\xrightarrow{\\ N\\ }R\n\\]\nof ranks two and one, with\n$\\operatorname{im}\\pi=\\ker N$ and\n$\\operatorname{im}N=\\ker\\pi=\\langle[1:3:9]\\rangle$.\nInvariant-to-coinvariant projection and contraction by the unique\nrank-one semi-invariant form therefore construct the same canonical Tate\ntwo-plane.  This plane is not naturally identified with the depth plane:\nthe labelled cubic orbit classes have relation $[2,9,1]$, while the depth\nprofiles have relation $[2,8,1]$; divided transfer kills the former\nbalanced relations and fixes the latter socle.\n\\end{proposition}",
       "title": "Modular depth quotient and source boundary"
     },
@@ -197,9 +215,9 @@
       "claim_key": "thm:headline-gluing",
       "environment": "theorem",
       "label": "thm:headline-gluing",
-      "sha256": "5b674b4dce7b480843f5f0006cf0fa0ef7db7afafda0de06a86c65de364884d3",
-      "source_line": 1813,
-      "tex": "\\begin{theorem}[Rank-three arithmetic gluing]\n\\label{thm:headline-gluing}\n\\begin{enumerate}[label=\\textup{(D\\arabic*)},leftmargin=*]\n\\item The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data each\nsplit into two rational sheets.\n\\item In the $H_3$ case the two displayed $A_5$ stabilizers meet in\n$A_4$, generate $\\mathrm{PSL}_2(11)$, and are exchanged by an outer\nprojectivity carried by the rational $S_4/A_4$ hinge.\n\\item The certified fixed-child calculation has a twenty-two-row model whose\nintrinsic two-point quotient is the same free orientation torsor detected\nby the sheet character; choosing a point is exactly one bit of table-row\ndecoration.  No identification of the rows with geometric parents is\nasserted.\n\\end{enumerate}\n\\end{theorem}",
+      "sha256": "af6840890b405043c39c90f78efe28ff2deea5b51266bec6bfd076203766decc",
+      "source_line": 1927,
+      "tex": "\\begin{theorem}[Rank-three arithmetic gluing]\n\\label{thm:headline-gluing}\n\\begin{enumerate}[label=\\textup{(D\\arabic*)},leftmargin=*]\n\\item The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data each\nsplit into two rational sheets.\n\\item In the $H_3$ case the two displayed $A_5$ stabilizers meet in\n$A_4$, generate $\\mathrm{PSL}_2(11)$, and are exchanged by an outer\nprojectivity carried by the rational $S_4/A_4$ hinge\n\\cite{Giudici2007,Atlas1985}.\n\\item The certified fixed-child calculation has a twenty-two-row model whose\nintrinsic two-point quotient is the same free orientation torsor detected\nby the sheet character; choosing a point is exactly one bit of table-row\ndecoration.  No identification of the rows with geometric parents is\nasserted.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Rank-three arithmetic gluing"
     },
     {
@@ -207,7 +225,7 @@
       "environment": "lemma",
       "label": "lem:rank-three-splitting",
       "sha256": "cbc5bc84b2d84836c24e113ac19a553ccfc31ea933679ff5b490532c39c8f556",
-      "source_line": 1833,
+      "source_line": 1949,
       "tex": "\\begin{lemma}[The split--inert frame calculation]\n\\label{lem:rank-three-splitting}\nThe frame polynomials at the three working primes have the following\nfactorizations:\n\\[\n\\begin{array}{c|c|c}\nA_3,\\ q=5&x^2-2&\\text{irreducible},\\\\\nB_3,\\ q=7&x^2-2=(x-3)(x-4)&\\text{split},\\\\\nH_3,\\ q=11&T^2-T-1=(T-4)(T-8)&\\text{split}.\n\\end{array}\n\\]\nIn the first row the two roots form one Frobenius orbit over $\\F_{25}$;\nin the last two rows they are two rational points exchanged by the\nquadratic conjugation.\n\\end{lemma}",
       "title": "The split--inert frame calculation"
     },
@@ -216,7 +234,7 @@
       "environment": "proposition",
       "label": "prop:mod40-reciprocity",
       "sha256": "2a7bef6a056c771655be39bc5667dad4bffe3d2981df0dd94670f615d0df2407",
-      "source_line": 1940,
+      "source_line": 2085,
       "tex": "\\begin{proposition}[The conditional mod-$40$ law]\n\\label{prop:mod40-reciprocity}\nLet $\\ell\\ne2,5$ be an odd prime satisfying the frozen golden-marker\nhypotheses.  Golden splitting is equivalent to\n$(5/\\ell)=+1$.  Among the split classes, the sheets are fused when\n$(2/\\ell)=+1$ and visible when $(2/\\ell)=-1$.  Consequently the\nsplit-visible residue classes modulo $40$ are\n\\[\n  11,\\ 19,\\ 21,\\ 29,\n\\]\nand the split-fused classes are\n\\[\n  1,\\ 9,\\ 31,\\ 39.\n\\]\nThe other eight unit classes modulo $40$ are golden-inert.\n\\end{proposition}",
       "title": "The conditional mod-$40$ law"
     },
@@ -225,7 +243,7 @@
       "environment": "theorem",
       "label": "thm:four-sheet-holonomy",
       "sha256": "d1936ce3004f66829bdf12ccd8e8ae19231920d67d6b9457a12f25900c471065",
-      "source_line": 1991,
+      "source_line": 2142,
       "tex": "\\begin{theorem}[Four-sheet cover holonomy]\n\\label{thm:four-sheet-holonomy}\nLet \\(V\\) be the three-dimensional message space of the admitted non-GRS\npencil in odd characteristic, with coordinate covectors \\(g_0,\\ldots,g_5\\).\nPut\n\\[\n A=-4t(t-1)^2,\\quad\n B=(t^2-t+1)(t^2-3t+1),\\quad\n w=B/A,\\quad z=w^2,\n\\]\nand assume \\(2t(t-1)BG\\ne0\\), where\n\\(G=t^4-4t^3+7t^2-4t+1\\).  Join four left to four right\ncopies by the six matchings \\(\\sigma_0,\\ldots,\\sigma_5\\)\n\\[\n 1,\\ (03)(12),\\ (23),\\ (02)(13),\\ (01)(23),\\ (021).\n\\]\nFor each party assignment \\(p\\in S_6\\), put \\(V\\) on every vertex,\n\\(\\F_q\\) on every edge of color \\(i\\), and use \\(g_{p(i)}\\) as both\nrestriction maps.  Then:\n\\begin{enumerate}[label=\\textup{(\\roman*)},leftmargin=*]\n\\item constant sections form a three-space.  After quotienting them, the\n  \\(24\\)-equation section problem is the kernel of a \\(9\\)-by-\\(9\\)\n  operator on \\(U^3\\), where\n  \\(U=\\F_q^4/\\F_q(1,1,1,1)\\); its nine blocks are two-matching\n  holonomies;\n\\item a nonconstant generic section occurs precisely in one axial\n  relative-frame type, of size \\(96\\), at \\(z=2\\), or in either of two\n  signed six-cycle types, each of size \\(192\\), at\n  \\(w=\\pm2/3\\).  Every generic excess kernel is one-dimensional, so the\n  reduced rank-drop divisor is\n  \\[\n     (z-2)(9z-4)=0.\n  \\]\n  The common derived \\(A_4\\) acts freely, giving \\(8\\) and \\(16\\)\n  quotient classes;\n\\item characteristic \\(7\\) merges the axial divisor with one signed\n  divisor and gives \\(96+192=288\\) active assignments.  Characteristics\n  \\(11,13,41\\) only ramify the pullback to the \\(t\\)-line.  Characteristic\n  \\(3\\) removes both reduced components at the excluded boundary, while\n  in characteristic \\(5\\) the signed component moves to that boundary\n  and the axial component remains.\n\\end{enumerate}\nThe theorem detects these two reduced values; it does not recover the\nwhole pencil or assert four-copy minimality.\n\\end{theorem}",
       "title": "Four-sheet cover holonomy"
     },
@@ -234,7 +252,7 @@
       "environment": "lemma",
       "label": "lem:sign-torsor-no-section",
       "sha256": "295eaaad14721f47fe32aa05acac58d463a31c5ac88f87f2db5558310c4d44ee",
-      "source_line": 2112,
+      "source_line": 2263,
       "tex": "\\begin{lemma}[Determinant-sign transport and the no-section obstruction]\n\\label{lem:sign-torsor-no-section}\nLet $\\chi:G\\to C_2$ be surjective and put $H=\\ker\\chi$.  Then $G/H$ is a\nfree transitive $C_2$-torsor with no $G$-fixed point.  More precisely, if\n$X$ is any two-point $G$-set whose action factors through $\\chi$ and whose\ninduced $C_2$-action is nontrivial, then for each $x\\in X$ there is a\nunique $G$-equivariant bijection\n\\[\n G/H\\longrightarrow X\n\\]\nsending $H$ to $x$.  Thus all such two-valued carriers are realizations of\none torsor: comparing them requires exactly one marking bit, and no\n$G$-equivariant marking exists before that bit is adjoined.\n\\end{lemma}",
       "title": "Determinant-sign transport and the no-section obstruction"
     },
@@ -243,7 +261,7 @@
       "environment": "theorem",
       "label": "thm:torsor-rosetta-close",
       "sha256": "1d9711fd06c0e71c643d59b9b17f7e66c2b1cf47b741917a0487f29d88b05f6a",
-      "source_line": 2143,
+      "source_line": 2294,
       "tex": "\\begin{theorem}[Determinant-sign transport on the certified carriers]\n\\label{thm:torsor-rosetta-close}\nLet $T_q$ denote the determinant-sign torsor for the split rank-three\nworking primes.  The following statements hold.\n\\begin{enumerate}[label=\\textup{(E\\arabic*)},leftmargin=*]\n\\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free\n$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two\nspin lifts form one Frobenius orbit over $\\F_{25}$, hence one connected\nétale point over $\\F_5$ and no orientation bit.\n\\item On the certified fixed-child carrier at $q=11$, the twenty-two\ndecorated table rows form two eleven-element fibres, and the supplied outer\ninvolution induces the nontrivial swap on their two-point quotient.\n\\item For each supplied finite group certificate, determinant sign, the\n\\v{C}ech readout, and the one-bit selector are equal because their kernels\nare the same index-two subgroup.  Thus they are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]\n\\item At $q=11$, the supplied design, signed-Fourier, and Hadamard\nrow--column carriers are equivariantly identified with $T_{11}$.  The\nrow--column hinge has no inner witness; with the cited normalizer and\nsubgroup identifications, it is therefore forced outer.\n\\item The characteristic-zero golden quadratic object carries conjugation\n$\\phi\\mapsto1-\\phi$, and its supplied reduction map identifies the two\nreduction labels with the roots $4,8$ of $T^2-T-1$ in $\\F_{11}$,\nequivariantly for conjugation and the swap on $T_{11}$.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Determinant-sign transport on the certified carriers"
     }

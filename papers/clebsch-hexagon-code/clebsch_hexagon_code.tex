@@ -56,9 +56,6 @@ two complementary factorization sheets up to interchange, a signed cubic
 orients them, and six explicit $H_3$ incidence profiles recover the
 corresponding matching-table row.
 
-The conceptual arguments are separated from exact finite computations.
-The latter have deterministic certificates and independent replay; the
-stated formal boundaries are checked in Lean.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -171,36 +168,44 @@ Reed--Solomon codes have both an algorithmic history
 the projective case~\cite{ZWK2020}. Those results concern GRS codes, whose
 arcs lie on normal rational curves; the code here is not GRS.
 
-\paragraph{What is new and what is not.} The hexagon, its uniqueness and
-stabilizer, and its complete-exterior-set interpretation are classical
-\cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. Sadeh classified the
-six-arcs of $\PG(2,11)$~\cite{SadehThesis1984}; we claim no priority for
-that census or its extension counts, and our frame-normalized replay is
-independent of the thesis. The companion arcs paper records the
-single conic-locus identification of
-Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
-certificate~\cite[Prop.~8.2]{ArcsCompleteOutsideConic}; we reprove it for
-self-containment, and no result below depends on the companion paper. The
-paper-specific contribution begins with the symmetry-free coding criterion
-and its consequences: low-degree rigidity, quantitative gaps, the invariant
-support bipartition, decoder reconstruction, and the finite-field boundary.
-Edge already obtains the real Clebsch hexagons from the six opposite-vertex
-axes of an icosahedron~\cite[\S\S19--20]{Edge1956}; the icosahedral mirror
-arrangement and its $6_5,10_3,15_2$ singularity ledger are likewise
-classical~\cite{Calvo2024}. We claim no priority for this icosahedral
-geometry or its $H_3$ name. The finite-field characteristic-polynomial
-method is classical~\cite{Athanasiadis1996}, and Jurrius and Pellikaan
-already derive coset-leader and list-weight enumerators from the
-intersection lattice of the parity-check derived arrangement, explicitly
-including redundancy-three MDS secant arrangements
-\cite[Prop.~3.11, Thms.~5.3 and~5.7, Ex.~5.10]{JurriusPellikaan2015}.
-Further paper-specific additions are the explicit $\mathrm{PGL}_3(\F_{11})$
-bridge from the reduced $H_3$ fivefold points to the displayed code, its
-specialization to this code's decoder strata, the joint $A_3/B_3/H_3$
-conic phase, and the composition of conic-ideal division, balanced
-recovery, cubic orientation, depth compression, and matching-row recovery.
-Raw one-factorizations, the $5,14,22$ marker fibres, matching-design
-interpretations, and coarse Hadamard orbitals are classical inputs.
+\paragraph{Contribution and dependency boundary.}
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}
+                    >{\raggedright\arraybackslash}p{0.36\textwidth}
+                    >{\raggedright\arraybackslash}p{0.38\textwidth}@{}}
+\toprule
+Layer & Classical or prior input & Contribution here\\
+\midrule
+Clebsch geometry
+& configuration, uniqueness, stabilizer, and complete exterior set
+  \cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}
+& symmetry-free coding criterion; low-degree rigidity, sharp gaps,
+  support bipartition, decoder recovery, and field boundary\\
+Six-arc census
+& Sadeh's classification of six-arcs in $\PG(2,11)$
+  \cite{SadehThesis1984}
+& independent frame-normalized replay; no priority claim for the census
+  or extension counts\\
+Reflection arrangement
+& icosahedral realization and $H_3$ ledger
+  \cite[\S\S19--20]{Edge1956}\cite{Calvo2024}; finite-field method
+  \cite{Athanasiadis1996}; arrangement enumerators
+  \cite[Prop.~3.11, Thms.~5.3, 5.7, Ex.~5.10]{JurriusPellikaan2015}
+& explicit reduced-$H_3$--code bridge, decoder specialization, and common
+  $A_3/B_3/H_3$ conic phase\\
+Matching data
+& one-factorizations, $5,14,22$ marker fibres, matching designs, and
+  coarse Hadamard orbitals
+& conic-ideal quotient, balanced recovery, cubic orientation, depth
+  compression, and matching-row recovery\\
+\bottomrule
+\end{tabular}
+\end{center}
+The companion arcs paper also records
+Proposition~\ref{prop:deep-holes-conic} with a kernel-checked theorem
+\cite[Prop.~8.2]{ArcsCompleteOutsideConic}; we reprove it here, and no
+result depends on that paper.
 
 \section{A guided tour of forgetting and memory}
 \label{sec:tour}
@@ -256,12 +261,12 @@ $A_5$ stabilizer.
 \item Let $T\in\{A_3,B_3,H_3\}$ have Coxeter number $h$, and reduce its
 displayed standard arrangement over a lattice-good finite field $\F_q$ of
 odd characteristic (with the chosen image of $\tau$ for $H_3$).  Whenever
-the complement is nonempty, its projective evaluation code has length
+the complement is nonempty, its projective evaluation code has parameters
 \[
- (q-h/2)(q-h+1)
+ \bigl[(q-h/2)(q-h+1),\,3,\,
+       (q-h/2-1)(q-h+1)\bigr]_q;
 \]
-and minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the
-complement in at most $q-h+1$ points.
+a nonmirror line meets the complement in at most $q-h+1$ points.
 \item In the three specializations $q=h+1$, namely
 $(A_3,5),(B_3,7),(H_3,11)$, the complement is the full rational conic and
 its projective-system code is extended GRS.
@@ -271,9 +276,11 @@ moving point-orbits are the two Legendre cosets.
 \end{enumerate}
 \end{theorem}
 \noindent\emph{Proof mode: mixed.}  The rigidity implication is a human
-proof with one cited classical theorem; the numerical gap is exhaustive.
-The rank-three clauses combine symbolic proofs, Lean checks, and explicit
-coordinate identifications.
+proof with one cited classical theorem; the numerical gap is an exhaustive
+exact enumeration.
+The rank-three clauses combine the human specialization and distance
+proofs of Section~\ref{sec:coxeter-number-phase}, Lean-checked algebra,
+exhaustive exact ledgers, and cited classical group identifications.
 
 \begin{theorem}[Factorization recovery]
 \label{thm:headline-factorization}
@@ -302,7 +309,7 @@ table.  No geometric-parent identification is asserted.
 \end{theorem}
 \noindent\emph{Proof mode: mixed.}  The quotient and moment implications
 are proved in the text and Lean; the three finite configurations, their
-ranks, and the six profile rows are checked exhaustively.
+ranks, and the six profile rows are checked by exhaustive exact replay.
 
 The sequence $22\to6\to2\to1$ is an information ledger, not a chain of
 faithful linear images.  In particular, the two-dimensional profile plane
@@ -325,13 +332,13 @@ The rigidity implication in (A1) is a human proof using Dye's classical
 Brianchon theorem; only its numerical gap uses the exhaustive
 $1548$-representative census.  Clauses (A2)--(A4) are mixed: the uniform
 algebra is proved in the text and Lean, while the coordinate-to-Coxeter
-identifications are cited or certificate-checked.  Clause (F1) combines
+identifications are cited or verified by exhaustive exact replay.  Clause (F1) combines
 the displayed Pl\"ucker proof with exact rank calculations; (F2)--(F4)
 combine the stated moment and double-coset arguments with exhaustive
 finite tables.  The arithmetic-gluing, holonomy, and determinant-sign
 results below are also marked as mixed at their statements: their
 structural implications are proved in the text, while their frozen finite
-hypotheses are certificate-checked.  Section~\ref{sec:verification} gives
+hypotheses are verified by exhaustive exact replay.  Section~\ref{sec:verification} gives
 the terminal- and artifact-level boundaries.
 
 \paragraph{Independence and extension.}
@@ -1380,7 +1387,11 @@ asserted set equalities.
 \end{proof}
 
 Characteristic two is bad because the signs coalesce. In every other
-characteristic containing $\tau$, the displayed lattice survives. In
+characteristic containing $\tau$, the displayed mirror-intersection
+lattice survives.  The stronger ``lattice-good'' condition used in
+Theorem~\ref{thm:headline-rigidity-phase}(A2) also prevents new
+collinearities among its singular points and is defined in
+Proposition~\ref{prop:lattice-good}. In
 characteristic five, the reflection group $W(H_3)$ has order $120$, which
 is divisible by the characteristic, so the modular group algebra is not
 semisimple. This does not collapse the coordinate arrangement:
@@ -1436,6 +1447,69 @@ rank-three argument.  For $B_3$ use the nine normals
  X,Y,Z,\quad X\mathbin{\pm}Y,\quad X\mathbin{\pm}Z,\quad
  Y\mathbin{\pm}Z .
 \]
+We first make the reduction hypothesis precise.  For $A_3$ and $B_3$ let
+$R_T=\mathbb Z[1/2]$; for $H_3$ let
+\[
+ R_{H_3}=\mathbb Z[\tau,1/2]/(\tau^2-\tau-1)
+\]
+and use the fifteen displayed normals of
+Proposition~\ref{prop:h3-arrangement}.  Write $\mathcal A_T$ for the
+arrangement over the fraction field of $R_T$, and $\mathcal S_T$ for its
+rank-two flats, represented by primitive vectors $x_P\in R_T^3$.
+Form the following finite list, omitting a determinant exactly when it is
+zero over the fraction field:
+\[
+\begin{split}
+ &n_i,\quad n_i\wedge n_j,\quad
+   \det(n_i,n_j,n_k)\ \text{when this determinant is nonzero},\\
+ &x_P,\quad x_P\wedge x_{P'},\quad
+   \det(x_P,x_{P'},x_{P''})\
+   \text{when this determinant is nonzero}.
+\end{split}                                                   \tag{7.1}
+\]
+
+\begin{proposition}[Lattice-good reduction]
+\label{prop:lattice-good}
+A specialization $\varphi:R_T\to\F_q$ is \emph{lattice-good} if
+$\varphi$ sends every vector in (7.1) to a nonzero vector and every listed
+determinant to a nonzero scalar.  These are finitely many explicit
+polynomial nonvanishing conditions.  Characteristic two is excluded, and an
+$H_3$ specialization includes a chosen
+$\varphi(\tau)\in\F_q$ satisfying $\varphi(\tau)^2-\varphi(\tau)-1=0$.
+Under this condition:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item the reduced normals define the same number of distinct mirrors, the
+same rank-three intersection lattice, and the same singular
+multiplicities as $\mathcal A_T$;
+\item the weighted collinearity matroid of the singular points is
+unchanged.  In particular, for nonmirror lines
+\[
+ \max_L\sum_{P\in L\cap\mathcal S_T}(m(P)-1)=h/2;
+\]
+\item if the complement is nonempty, it spans $\PG(2,q)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The first line of (7.1) preserves nonzero normals, distinct mirror
+directions, and the zero pattern of every three-normal determinant.
+Hence it preserves rank and the complete intersection lattice.  The
+second line preserves distinct singular points and the zero pattern of
+every determinant of three such points.  It therefore preserves every
+line containing at least two singular points, together with the
+multiplicities used in its weight.  A line containing at most one
+singular point has weight at most the largest single value $m(P)-1$.
+The characteristic-zero ledgers below have maxima $2,3,5=h/2$; these
+maxima and the lines attaining them consequently survive unchanged.
+
+The complement count proved below is
+$(q-h/2)(q-h+1)$.  In a lattice-good specialization, nonemptiness forces
+$q>h-1$ in the three displayed types (the smaller $H_3$ fields admitting
+$\tau$ are $\F_5$ and $\F_9$, where the count is zero).  Its size is
+therefore strictly greater than the maximum $q-h+1$ on one line.  The
+complement is not collinear and its evaluation code has dimension three.
+\end{proof}
+
 Put $e=h/2$ and $N=3h/2$.  The relevant intersection data are
 \[
 \begin{array}{c|c|c|c}
@@ -1443,12 +1517,12 @@ T&(1,e,h-1)&N&\text{projective singular flats}\\ \hline
 A_3&(1,2,3)&6&3\text{ double},\ 4\text{ triple}\\
 B_3&(1,3,5)&9&6\text{ double},\ 4\text{ triple},\ 3\text{ fourfold}\\
 H_3&(1,5,9)&15&15\text{ double},\ 10\text{ triple},\ 6\text{ fivefold}.
-\end{array}                                                    \tag{7.1}
+\end{array}                                                    \tag{7.2}
 \]
 Thus the finite-field method, equivalently inclusion along the flats in
-(7.1), gives
+(7.2), gives
 \[
- |B_T(q)|=(q-e)(q-h+1).                              \tag{7.2}
+ |B_T(q)|=(q-e)(q-h+1).                              \tag{7.3}
 \]
 
 Here is the common distance mechanism.  If $L$ is not a mirror, define
@@ -1459,21 +1533,22 @@ where $m(P)$ is the number of mirrors through $P$.  The $N$ mirror
 intersections on $L$ are distinct except for precisely these collisions,
 so
 \[
- |L\cap B_T(q)|=q+1-N+\delta(L).                     \tag{7.3}
+ |L\cap B_T(q)|=q+1-N+\delta(L).                     \tag{7.4}
 \]
-The associated exact singular-line ledgers give
+Proposition~\ref{prop:lattice-good} transports the exact singular-line
+ledgers and gives
 \[
  \max_{L\ {\rm nonmirror}}\delta(L)=e
 \]
 in all three types: the maxima are respectively $2,3,5$.  Consequently
-(7.3) has maximum $q-h+1$.  A nonzero coefficient vector of the
+(7.4) has maximum $q-h+1$.  A nonzero coefficient vector of the
 dimension-three projective evaluation code vanishes exactly on the
-intersection with its projective line.  Subtracting this maximum from
-(7.2) proves
+intersection with its projective line.  Proposition~\ref{prop:lattice-good}
+supplies dimension three.  Subtracting this maximum from (7.3) proves
 \[
  D_T(q)=
  \bigl[(q-e)(q-h+1),\,3,\,(q-e-1)(q-h+1)\bigr]_q
-                                                               \tag{7.4}
+                                                               \tag{7.5}
 \]
 whenever the complement is nonempty.  This proves
 Theorem~\ref{thm:headline-rigidity-phase}(A2).
@@ -1493,7 +1568,7 @@ H_3&11&\{1,4\};\ \{10,7\},
 \end{array}
 \]
 and every class in the last column is nonsquare.  Hence every rational
-point of $Q$ avoids every mirror.  Formula (7.2) gives
+point of $Q$ avoids every mirror.  Formula (7.3) gives
 $|B_T(h+1)|=h+2=q+1$, so this containment is equality.  Evaluation on a
 full nonsingular conic is the projective/extended GRS code
 $[q+1,3,q-1]_q$, proving (A3).
@@ -1506,8 +1581,8 @@ split maximal torus of $\mathrm{PSL}_2(q)$ and partition the moving points
 into the square and nonsquare, or Legendre, cosets.  The exact
 characteristic polynomials and orders for $q=5,7,11$ are among the finite
 checks in Section~\ref{sec:verification}; the identification of this
-literal subgroup with the classical split torus is the named
-group-theoretic input.  This proves (A4).
+literal subgroup with the classical split torus uses the standard
+subgroup classification~\cite{Giudici2007}.  This proves (A4).
 
 \begin{theorem}[Conic-filling loci for $4\le k\le7$]
 \label{thm:small-k-conic-filling}
@@ -1582,20 +1657,59 @@ so that
  \qquad
  [a,b]=a_0b_1-a_1b_0.
 \]
-For four endpoints, the Pl\"ucker relation gives the polynomial identity
+Let $\Omega$ be any set of $2m$ distinct conic points, with fixed vector
+representatives, and for a perfect matching $M$ of $\Omega$ put
+$P_M=\prod_{\{a,b\}\in M}L_{ab}$.
+
+\begin{proposition}[The matching-secant quotient]
+\label{prop:general-matching-quotient}
+For every $m\ge2$ and every pair of perfect matchings $M,N$ of $\Omega$,
+\[
+ P_M|_Q=P_N|_Q,\qquad P_M-P_N\in(Q).
+\]
+Consequently, after choosing a reference matching $M_0$,
+\[
+ \Phi_{M_0}(M)=\frac{P_M-P_{M_0}}{Q}
+       \in H^0(\mathbb P^2,\mathcal O(m-2))                 \tag{8.1}
+\]
+is an affine configuration.  Replacing $M_0$ by $M_1$ translates it by
+$-\Phi_{M_0}(M_1)$.  If $g\in\mathrm{GL}_2$ preserves $\Omega$,
+$\rho(g)$ is its action on binary quadratics, and representatives are
+transported by $g$, then
+\[
+ \Phi_{gM_0}(gM)\circ\rho(g)
+   =\det(g)^{\,2m-2}\Phi_{M_0}(M).                          \tag{8.2}
+\]
+Thus the difference space, its rank, and its affine moment conditions are
+independent of $M_0$ and equivariant under the endpoint stabilizer.
+\end{proposition}
+
+\begin{proof}
+For $x\in\mathbb P^1$,
+\[
+ P_M(\nu(x))=\prod_{a\in\Omega}[a,x],
+\]
+which is independent of the pairing.  The kernel of the Veronese pullback
+$k[X,Y,Z]\to k[s,t]$, $(X,Y,Z)\mapsto(s^2,st,t^2)$, is the principal
+ideal $(Q)$; hence every difference is divisible by $Q$.  The change of
+reference follows by subtraction.  Finally,
+$L_{ga,gb}\circ\rho(g)=\det(g)^2L_{ab}$ and
+$Q\circ\rho(g)=\det(g)^2Q$, which gives (8.2).
+\end{proof}
+
+For four endpoints, the Pl\"ucker relation makes the divisibility
+especially concrete:
 \[
  L_{ab}L_{cd}-L_{ac}L_{bd}
-   =[a,d][b,c]\,Q.                                      \tag{8.1}
+   =[a,d][b,c]\,Q.                                      \tag{8.3}
 \]
-Thus a switch of two matching edges changes the secant product by a
-multiple of $Q$.  Iterating switches proves equality of the restrictions
-for matchings in the generated component.  The formal statement used here
-proves complete connectivity for the four-endpoint base and reversibility
-for a switch of arbitrary size; the finite Coxeter matching orbits are
-checked separately.  We do not infer unrestricted connectivity of every
-perfect-matching graph from that base case.
+The formal development checks this four-endpoint identity and
+arbitrary-size switch reversibility.  Proposition
+\ref{prop:general-matching-quotient} is the general human proof; it does
+not assert that a selected finite Coxeter orbit contains every perfect
+matching.
 
-Fix a reference matching $M_0$ and define
+For the Coxeter applications, fix a reference matching $M_0$ and write
 \[
  \Phi(M)=\frac{P_M-P_{M_0}}{Q}.
 \]
@@ -1607,19 +1721,19 @@ reduction of the three displayed Coxeter matching orbits gives
  &A_3&B_3&H_3\\ \hline
 \text{matching-orbit size}&5&14&22\\
 \operatorname{rank}\langle\Phi(M)-\Phi(N)\rangle&3&6&10.
-\end{array}                                             \tag{8.2}
+\end{array}                                             \tag{8.4}
 \]
 The symbolic conic Laplacian decomposes the degree-$1,2,4$ homogeneous
-pieces into harmonic and radial parts at the stated characteristics; (8.1)
+pieces into harmonic and radial parts at the stated characteristics; (8.3)
 is the bridge placing switch differences in the radial summand.  The
 symbolic dimension formulas do not imply the finite factorization-image
-ranks in (8.2); those ranks require the displayed coordinate calculation.
+ranks in (8.4); those ranks require the displayed coordinate calculation.
 
 \paragraph{Proof of Theorem \ref{thm:headline-factorization}(F1).}
 The pullback formula and Pl\"ucker identity prove the divisibility statement.  The generic
 augmentation-kernel calculation controls the one-dimensional translation
 lost by choosing $M_0$.  Exact row reduction of the three coordinate
-configurations gives (8.2), proving the rank statement.  The trust table in
+configurations gives (8.4), proving the rank statement.  The trust table in
 Section~\ref{sec:verification} separates the symbolic identity, the
 kernel-checked finite ranks, and the classical identification of the
 coordinate orbits with the named Coxeter matchings.
@@ -1817,7 +1931,8 @@ non-identification.
 split into two rational sheets.
 \item In the $H_3$ case the two displayed $A_5$ stabilizers meet in
 $A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged by an outer
-projectivity carried by the rational $S_4/A_4$ hinge.
+projectivity carried by the rational $S_4/A_4$ hinge
+\cite{Giudici2007,Atlas1985}.
 \item The certified fixed-child calculation has a twenty-two-row model whose
 intrinsic two-point quotient is the same free orientation torsor detected
 by the sheet character; choosing a point is exactly one bit of table-row
@@ -1827,7 +1942,8 @@ asserted.
 \end{theorem}
 \noindent\emph{Proof mode: mixed.}  The split--inert lemma and
 determinant-sign deductions are human proofs; the finite matching actions,
-group closures, and fixed-child row quotient are certificate-checked, with
+group closures, and fixed-child row quotient are verified by exhaustive
+exact replay, with
 the named classical groups supplied as cited identifications.
 
 \begin{lemma}[The split--inert frame calculation]
@@ -1887,15 +2003,43 @@ The frozen reduction polynomials, matching permutations, and group
 closures prove (D1) and the literal finite content of (D2).  The
 determinant-kernel comparison proves equality of the three sign readouts.
 The fixed-child fibre computation gives the two eleven-element orbits and
-the free quotient, proving (D3).  The classical group and rational spinor
-interpretations are precisely the cited-input boundary recorded in
-Section~\ref{sec:verification}.
+the free quotient, proving (D3).  The classical group identifications use
+\cite{Giudici2007,Atlas1985}; the rational spinor terminology uses
+\cite[Ch.~11]{Taylor1992}.  These are precisely the cited-input boundary
+recorded in Section~\ref{sec:verification}.
 
 \section{Retention and loss under finite passages}
 \label{sec:survival}
 
-The orientation torsor is not preserved by every natural passage.  The
-following table states the exact Paper-1 boundary.
+\subsection{The retention question}
+
+The preceding reconstruction produces a two-point orientation torsor from
+matching factorizations.  We ask which subsequent, independently natural
+passages can still detect that bit.  This is relevant to reconstruction:
+an invariant that already identifies the oriented matching row must retain
+the bit, whereas an invariant taking the same value on both sheets cannot
+do so.  None of the comparisons below is used in
+Theorems~\ref{thm:rigidity} or \ref{thm:headline-factorization}; they record
+positive and negative tests of possible further invariants.
+
+The first four rows of the table refer to constructions already defined:
+the unmarked conic code, the affine matching quotient of Proposition
+\ref{prop:general-matching-quotient}, its tensor moments, and the six
+$A_4\backslash G/H$ depth profiles.  The remaining passages are as
+follows.  The \emph{quadratic-residue/Witt design} starts from the cyclic
+$2$-$(11,5,2)$ design whose blocks are translates of the nonzero squares
+in $\F_{11}$ and then takes its displayed ternary span and parity
+extension.  A \emph{golden reduction} is a reduction of the fixed
+$\mathbb Z[\tau]$ matching data at a prime away from $2$ and $5$, together
+with the stated marker hypotheses.  A \emph{finite theta signature} is
+the value histogram of the frozen quadratic refinement on a matching
+Lagrangian.  The \emph{fixed-party quantum passage} assigns the displayed
+six tensor factors to their fixed labels and compares the resulting
+finite stabilizer-state vectors under tensor products of local Clifford
+operators.  The \emph{ambient Fourier matrices} are the two character-sum
+matrices reconstructed from the frozen relation and duality tables.
+
+The following table states the exact scope of these comparisons.
 \[
 \begin{array}{p{0.28\linewidth}p{0.23\linewidth}p{0.40\linewidth}}
 \toprule
@@ -1929,7 +2073,8 @@ their secants, and the order-twelve Hadamard identity.  Parity extension
 gives the Steiner system $S(5,6,12)$; the two degree-twelve $M_{11}$
 parents meet in the frozen $\mathrm{PSL}_2(11)$ and generate $M_{12}$, while
 Hadamard row--column duality exchanges them.  These classical names are
-attached only after the literal finite closures and normalizer checks.
+attached only after the literal finite closures and normalizer checks
+\cite{Witt1938,Atlas1985,ConwaySloane1999}.
 
 The modulo-$40$ statement is conditional on the frozen arithmetic
 predicates: within that domain the two golden sheets are visible or fused
@@ -1963,13 +2108,18 @@ remainder theorem gives the two displayed four-element lists.  The
 remaining eight units modulo $40$ have $(5/\ell)=-1$.
 \end{proof}
 
-The final two rows are likewise bounded.  Their certificates check
-finite quadratic-value histograms and matching-intersection signatures; the
-divisor-theoretic theta interpretation uses the cited classical input.  The
-quantum certificate proves the displayed monomial transport,
+The final rows are likewise bounded.  Their replays check finite
+quadratic-value histograms and matching-intersection signatures; the
+divisor-theoretic theta terminology uses
+\cite[pp.~95--105]{MumfordThetaII}.  The quantum replay proves the
+displayed monomial transport,
 signed-transpose identity, and complete fixed-party kernel--image
 equivalence.  It does not classify arbitrary complex local unitaries or
-assert a canonical geometric reconstruction of every state.
+assert a canonical geometric reconstruction of every state; ``Clifford''
+is used in the standard finite normalizer sense
+\cite[Chs.~6--7]{NebeRainsSloane2006}.  The ambient Fourier terminology
+follows Weil's finite Heisenberg representation~\cite{Weil1964}, but no
+Weil-module identification is asserted.
 
 The fixed four-sheet contraction has a sharper partial-retention boundary.
 It is not a step in the matching-row reconstruction above.  Consider the
@@ -1985,8 +2135,9 @@ coordinate covectors on the message space.  The admitted locus removes the
 degenerate and GRS parameters by the nonvanishing condition in the theorem
 below.  On that locus, the theorem explains exactly what the contraction
 retains: two resonance fibres and their signed refinement.  Since it does
-not recover the pencil parameter, its role in Paper I is to mark a strict
-survival boundary rather than to add another reconstruction mechanism.
+not recover the pencil parameter, its role here is only to exhibit a
+strict survival boundary rather than to add another reconstruction
+mechanism.
 
 \begin{theorem}[Four-sheet cover holonomy]
 \label{thm:four-sheet-holonomy}
@@ -2034,8 +2185,8 @@ The theorem detects these two reduced values; it does not recover the
 whole pencil or assert four-copy minimality.
 \end{theorem}
 \noindent\emph{Proof mode: mixed.}  The constant-section reduction and
-cycle-factor argument are proved below; exhaustive exact certificates
-check the party assignments, rank drops, and exceptional-characteristic
+cycle-factor argument are proved below; exhaustive exact replay checks the
+party assignments, rank drops, and exceptional-characteristic
 specializations.
 
 \begin{proof}
@@ -2239,20 +2390,27 @@ input, kernel-checked formal proof, and exhaustive finite enumeration. Here
 ``kernel-checked'' means that Lean's trusted kernel checks the stated
 implication; executable replays instead enumerate the finite search space
 with exact arithmetic.  The paper repository and the shared Lean repository
-are distributed separately.  Paper paths below are relative to the paper
-root; Lean paths are relative to the shared Lean root.  The
+are distributed separately.  The formal development is
+\url{https://github.com/tavisrudd/finitegeom} at commit
+\texttt{43c403b23e7cb6b9d66dda01bb43a91bec9ea465}; it uses Lean
+4.32.0-rc1 and Mathlib commit
+\texttt{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  Paper paths below are
+relative to the paper root; Lean paths are relative to the shared Lean
+root.  The
 claim-by-claim machine-readable ledger in
 \path{verification/trust_manifest.json} records the exact manuscript hash,
 shared-Lean commit, gate and audit hashes, executable artifacts, cited
 inputs, and residual trust for every published claim.  From the paper root,
 the single release command is
 \[
- \texttt{python3 verification/verify\_release.py
- --lean-root /path/to/shared-lean}.
+ \texttt{nix develop --command python3 verification/verify\_release.py
+ --lean-root /path/to/finitegeom}.
 \]
 It validates the manifest before running any declared check, rejects a
 dirty or mismatched checkout, and verifies that the run changes neither
-repository.
+repository.  On the locked x86-64 Linux environment, success writes
+\path{verification/verify-release-output.json} with status
+\texttt{passed}, eighteen check sentinels, and the pinned Lean commit.
 
 \begin{table}[H]
 \centering
@@ -2435,8 +2593,8 @@ and singular conic forms in characteristic two. A separate $q=9$
 certificate constructs the polarity graph, verifies the passant/distance-two
 dictionary, and computes clique number five.
 
-\section*{Appendix: The relative-cubic Tate plane}
-\addcontentsline{toc}{section}{Appendix: The relative-cubic Tate plane}
+\appendix
+\section{The relative-cubic Tate plane}
 \label{app:tate-plane}
 
 This appendix records the source-side naturality statement kept separate
@@ -2475,8 +2633,7 @@ quadratic-coinvariant, and ordered-rank-flag tests likewise leave no
 canonical bridge.  Thus the positive statement is source intrinsicity;
 the non-identification is a proved scope boundary.
 
-\section*{Appendix: Headline statement extraction and identity}
-\addcontentsline{toc}{section}{Appendix: Headline statement extraction and identity}
+\section{Headline statement extraction and identity}
 \label{app:statement-identity}
 
 The deterministic extraction in
@@ -2499,10 +2656,18 @@ Statement & Formal/computational surface & Clauses kept external or mixed\\
 Theorem~\ref{thm:headline-rigidity-phase}
 & retained rigidity gates; weighted-adjoint and Coxeter-phase terminals
 & Dye equality inputs; coordinate-to-Coxeter and extended-GRS identifications\\
+Proposition~\ref{prop:lattice-good}
+& Coxeter-phase terminals for the finite ledgers and code identities
+& human determinant-specialization proof; nonvanishing hypotheses are not
+  inferred from a field name alone\\
 Theorem~\ref{thm:headline-factorization}
 & conic-matching, harmonic, factorization, and balanced-sheet terminals
 & arbitrary-size matching connectivity beyond the proved boundary;
 classical group identification; no geometric-parent bridge\\
+Proposition~\ref{prop:general-matching-quotient}
+& four-endpoint quotient and switch terminals
+& human Veronese-ideal and equivariance proof; Coxeter-orbit ranks remain
+  separate finite calculations\\
 Theorem~\ref{thm:headline-gluing}
 & arithmetic-gluing and fixed-child terminals plus exact replay
 & classical spinor and number-field interpretations\\
@@ -2517,57 +2682,85 @@ integral cubic, or all-prime classification\\
 axiom, file-hash, citation, and residual-trust data are in the manifest.}
 \end{table}
 
-\section{Conclusion}
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
 
-The projective deep-hole conic of the Clebsch code is both rigid and
-forgetful.  As an unmarked locus it characterizes the parent among
-six-arcs of $\PG(2,11)$, yet as a conic code it retains no preferred secant
-pairing or orientation.  The conic ideal resolves this tension.
-Secant-product differences vanish on the child but survive after division
-by its equation; their quotient configuration recovers the unique
-unordered sheets from second moments, orients them in degree three,
-compresses them to six double-coset profiles, and recovers a decorated
-matching-table row from the singleton fibres.  A further geometric-parent
-identification is neither used nor claimed.
+Theorem~\ref{thm:rigidity} gives the paper's main classification: among
+six-arcs of $\PG(2,11)$, the Clebsch class is characterized by conic
+containment of the full projective deep-hole locus.  Its proof separates a
+geometric mechanism---the line bound, chord defect, and Brianchon
+equality case---from the finite census used for the sharp gap.
+Theorem~\ref{thm:why11} then shows why the phenomenon occurs over
+$\F_{11}$ rather than merely recording it as an exceptional example.  The
+common $A_3/B_3/H_3$ calculation places the resulting conic code in a
+rank-three family with one length and distance law.
 
-The rank-three Coxeter phase explains why this chain belongs to a complete
-small family.  The reflection-complement codes for $A_3,B_3,H_3$ obey one
-distance law and become conic codes at $q=h+1$.  Their matching data fuse in
-the $A_3$ control and split into two rational sheets in the $B_3$ and
-$H_3$ cases.  In the last case the two stabilizers
-meet along $A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged through
-the rational $S_4/A_4$ hinge.
+Passing to the conic code forgets its secant pairing, but the conic ideal
+retains controlled factorization data.  Proposition
+\ref{prop:general-matching-quotient} makes this construction available for
+any even set of conic points: matching-secant products have one
+restriction, and division by the conic equation produces an equivariant
+affine quotient.  For the Coxeter configurations, second moments recover
+the unordered sheets, a signed cubic orients them, and the six depth
+profiles recover a displayed matching-table row.  No geometric-parent
+identification is needed or claimed.
 
-The survival ledger gives a precise boundary.  Quadratic-residue designs
-and perfect-code spans retain finite shadows, and the frozen golden
-reduction data obey the exact modulo-$40$ partition.  The displayed theta
-signatures do not orient the sheets, and the displayed $H_3$ quantum
-states are equivalent even with fixed party labels.  The Fourier matrices
-satisfy the exact restricted identities, but this does not turn the
-quotient spaces into small Weil modules.  Orientation is carried by
-specific comparison data, not by every natural invariant of the objects.
-Likewise, the four-sheet contraction retains only the two resonance fibres
-of Theorem~\ref{thm:four-sheet-holonomy}; it does not recover its pencil and
-does not participate in matching-row reconstruction.
-
-The determinant-sign transport theorem identifies both the object and its
-finite mechanism.  At the split working primes the missing bit is obtained
-by determinant-sign descent: each of the six certified carrier classes in
-Table~\ref{tab:torsor-carriers} is supplied with the same quotient
-character, so the transport lemma identifies its displayed two-point
-realization with $T_q$.  At the inert $A_3$ prime the bit
-fuses.  The characteristic-zero golden resolvent reduces to $T_{11}$, the
-fixed-child fibre is the same finite torsor, and the Mathieu action is
-forced outer.  The one no-section class has cohomological, selector, and
-torsor readouts.  No integral Galois-odd cubic is needed.
-
-The remaining question is therefore deliberately narrow: which arithmetic
-or metaplectic mechanism produces the characteristic-$q$ gluing of this
-torsor while the theta and quantum passages erase it?
+The later finite passages record where that orientation survives and
+where it is erased.  They do not alter the rigidity theorem or the
+matching-row reconstruction.  Their unresolved issue is narrower: find a
+uniform arithmetic construction of the determinant-sign torsor whose
+split specializations give the displayed two-point carriers.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
 \small
+
+\bibitem{Atlas1985}
+J.~H.~Conway, R.~T.~Curtis, S.~P.~Norton, R.~A.~Parker, and R.~A.~Wilson,
+\newblock \emph{Atlas of Finite Groups},
+\newblock Clarendon Press, Oxford, 1985.
+
+\bibitem{ConwaySloane1999}
+J.~H.~Conway and N.~J.~A.~Sloane,
+\newblock \emph{Sphere Packings, Lattices and Groups}, 3rd ed.,
+\newblock Springer, New York, 1999.
+\newblock doi:10.1007/978-1-4757-6568-7.
+
+\bibitem{Giudici2007}
+M.~Giudici,
+\newblock Maximal subgroups of almost simple groups with socle
+$\mathrm{PSL}(2,q)$,
+\newblock arXiv:math/0703685, 2007.
+
+\bibitem{MumfordThetaII}
+D.~Mumford,
+\newblock \emph{Tata Lectures on Theta II},
+\newblock Progress in Mathematics \textbf{43}, Birkh\"auser, Boston, 1984.
+
+\bibitem{NebeRainsSloane2006}
+G.~Nebe, E.~M.~Rains, and N.~J.~A.~Sloane,
+\newblock \emph{Self-Dual Codes and Invariant Theory},
+\newblock Algorithms and Computation in Mathematics \textbf{17},
+Springer, Berlin, 2006.
+\newblock doi:10.1007/3-540-30731-1.
+
+\bibitem{Taylor1992}
+D.~E.~Taylor,
+\newblock \emph{The Geometry of the Classical Groups},
+\newblock Sigma Series in Pure Mathematics \textbf{9}, Heldermann,
+Berlin, 1992.
+
+\bibitem{Weil1964}
+A.~Weil,
+\newblock Sur certains groupes d'op\'erateurs unitaires,
+\newblock \emph{Acta Mathematica} \textbf{111} (1964), 143--211.
+\newblock doi:10.1007/BF02391012.
+
+\bibitem{Witt1938}
+E.~Witt,
+\newblock Die $5$-fach transitiven Gruppen von Mathieu,
+\newblock \emph{Abhandlungen aus dem Mathematischen Seminar der
+Universit\"at Hamburg} \textbf{12} (1938), 256--264.
 
 \bibitem{Athanasiadis1996}
 C.~A.~Athanasiadis,
@@ -2612,7 +2805,7 @@ D.~A.~Drake and K.~Keating,
 \newblock Ovals and hyperovals in Desarguesian nets,
 \newblock \emph{Designs, Codes and Cryptography} \textbf{31} (2004),
 195--212.
-\newblock \url{https://doi.org/10.1023/B:DESI.0000015883.89954.80};
+\newblock doi:10.1023/B:DESI.0000015883.89954.80;
 arXiv:math/0202115.
 
 \bibitem{ArcsCompleteOutsideConic}

@@ -1,8 +1,9 @@
 # The Clebsch hexagon code: reproducibility sources
 
-This directory contains the manuscript sources and the exact executable replays cited in
-Section 13. Python checks use only the standard library unless their module documentation says
-otherwise. The Singular calculation is invoked through its fail-closed shell wrapper.
+This directory contains the manuscript sources and the exact executable replays cited in the
+manuscript's verification section. Python checks use only the standard library unless their module
+documentation says otherwise. The Singular calculation is invoked through its fail-closed shell
+wrapper.
 
 ## Canonical six-arc class labels
 
@@ -46,7 +47,21 @@ python3 verification/verify_release.py --lean-root /path/to/shared-lean
 The runner verifies the Lean checkout against the pinned commit before executing the aggregate
 trust gate.
 
-Expected success sentinels and per-check timeouts are recorded in
-`verification/verify-release-output.json` and `verification/trust_manifest.json`.  Licensing,
-release identifiers, and the immutable archive manifest belong to the separate archival-release
-step; this source checkout does not claim that those publication records already exist.
+The locked paper environment targets `x86_64-linux` and currently supplies Python 3.13.14,
+Singular 4.4.1, Tectonic 0.16.9, Nix 2.34.8, and Git 2.54.0.  The pinned formal checkout uses
+Lean 4.32.0-rc1 and Mathlib commit
+`571b8a8e54219b4d393f75f4b8653fac08197fcc`.  A successful top-level run writes
+`verification/verify-release-output.json` with
+
+```json
+{"status": "passed", "check_count": 18}
+```
+
+and the pinned Lean commit; the full file records all eighteen success sentinels.
+Per-check timeouts are recorded in `verification/trust_manifest.json`.  The release is intended
+for `x86_64-linux`; other platforms have not been tested.  A cold run needs enough disk for the
+Mathlib cache and Lean build products.
+
+The paper archive DOI, release tag, paper-repository commit, measured cold runtime, and licence
+must be inserted by the archival-release step.  This checkout does not claim that those publication
+records already exist.
