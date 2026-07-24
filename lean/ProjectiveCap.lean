@@ -16,6 +16,7 @@ import ProjectiveCap.NearLinearMirror
 import ProjectiveCap.Binary
 import ProjectiveCap.PlaneTransitivity
 import ProjectiveCap.Grid
+import CapGame.PrivateBoundary
 import ProjectiveCap.GridSeed
 import ProjectiveCap.GridGame
 import ProjectiveCap.ResidualHypergraph
