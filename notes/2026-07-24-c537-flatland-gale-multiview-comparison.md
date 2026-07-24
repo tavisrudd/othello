@@ -66,6 +66,22 @@ The verdict is therefore the task's **kill** outcome:
 > gap. They share the one-view labelled `M_0,6` quotient, but their inverse inputs, ambient
 > geometry, equivalence relations, and nondegenerate loci are incompatible.
 
+There is nevertheless an exact geometric residue behind the superficial similarity. On
+Flatland's generic complex locus, every planar six-point configuration `X` determines a
+hexahedral cubic surface
+
+```text
+S_X = T intersect H_X,
+T = {sum z_i=sum z_i^3=0} subset P5,                    (7)
+```
+
+where `T` is the Segre cubic threefold and `H_X` is one hyperplane. Flatland fixes several
+hyperplanes `H_Xj` and seeks a common colour `p in T`; C482 fixes several colours `p_s in T` and
+seeks one hyperplane `H_A` through them. They are the two projections of the same point--hyperplane
+incidence correspondence, but only the former carries Flatland's fixed planar configurations and
+neither construction carries its missing joint `P3` lift. This incidence transpose explains C482's
+residual dimensions and Gale pair without repairing the killed joint-consistency bridge.
+
 No finite-field descent comparison is activated, because the geometric functors already fail to
 match.
 
@@ -202,18 +218,63 @@ repeated row. The pairwise fundamental matrices contain planar ray correspondenc
 but C482's target does not accept those data. Supplying them would define a new inverse problem,
 not an application of C481--C485.
 
-## 5. Camera cubics are different objects
+## 5. Camera cubics and C482 residual families are incidence-dual
 
 For six points, Flatland's map `psi_X` is expressed in pulled-back Joubert coordinates and its
-image is a Cremona hexahedral cubic surface. Given a second fixed configuration `Y`, equality in
-(1) cuts out plane cubic centre loci `C_X` and `C_Y`; a centre on one determines the centre on the
-other. These cubics live in the two fixed camera planes.
+image is the Cremona hexahedral cubic surface `S_X` in (7). Given a second fixed configuration
+`Y`, equality in (1) asks for
+
+```text
+p in S_X intersect S_Y
+  = T intersect H_X intersect H_Y.                     (8)
+```
+
+The inverse image of (8) under `psi_X` and `psi_Y` gives Flatland's plane cubic centre loci
+`C_X` and `C_Y`; a centre on one determines the centre on the other. Thus the centre cubics live
+in the two fixed camera planes, while their common colour lives on the two-hyperplane section of
+`T`.
 
 C482's residual cubic surface and curve instead live in the four parameters of an **unknown
-single planar parent** after two or three prescribed line images. Its four-view involution is
-Gale association of six points in that parent plane. Matching the words “cubic,” “surface,” or
-“curve,” or matching their dimensions, does not identify these varieties: their coordinates,
-fixed data, and moduli interpretations differ.
+single planar parent** after two or three prescribed line images. However, the hexahedral model
+now gives an exact indirect relation. A prescribed colour `p_s` is compatible with a parent `A`
+exactly when
+
+```text
+p_s in S_A, equivalently p_s in H_A.                   (9)
+```
+
+Hyperplanes in the ambient `P4={sum z_i=0}` form a dual `P4`. Therefore `r` linearly independent
+colours impose `r` independent linear conditions on `H_A`, leaving hyperplane-family dimension
+
+```text
+4-r.                                                    (10)
+```
+
+For `r=2,3`, (10) is exactly C482's residual dimensions `2,1`. Four general colours determine
+one hexahedral hyperplane. Its lifts to planar-parent moduli are C483's two Gale-associated
+parents; on the conic locus those lifts coalesce. Indeed C483 shows
+`S_A=S_Gale(A)` on a dense open, while C482's four-view theorem shows that these are generically
+the only two lifts. Thus the map
+
+```text
+{six planar points}/PGL_3  -->>  {hexahedral H_A}
+```
+
+is generically the Gale double cover on this open. This is a conceptual explanation of both the
+quadratic fibre and its conic branch.
+
+The relation is an **incidence transpose**, not an identification of the inverse problems:
+
+```text
+Flatland: fixed H_X1,...,H_Xm; find common p.
+C482:    fixed p_1,...,p_r; find common H_A.            (11)
+```
+
+In particular, a Flatland common image repeats one point `p`, so its conditions on an unknown
+`H_A` still have rank one; the richer dual picture confirms rather than weakens the repeated-row
+kill. The hexahedral argument here is confined to Flatland's generic complex setting. C482's
+all-characteristic theorem remains the source for the integral statement; no naive use of (7) is
+made in characteristic three, where the displayed cubic equations degenerate.
 
 In particular, Flatland's missing joint consistency concerns lifting several planar configurations
 to one `P3` scene. Gale association in C483 exchanges two planar six-point parents with the same
@@ -249,6 +310,13 @@ into an exact algebraic failure: Flatland's common image forces `rank(M_r)=1`, w
 requires rank four. This also rules out the tempting claim that enough pairwise Flatland views
 eventually enter C482's generic four-view regime.
 
+A second free upgrade comes from reading Flatland's hexahedral equations contravariantly. Its
+configuration `X` supplies a hyperplane section `S_X` of the Segre cubic. Flatland fixes such
+hyperplanes and solves for a point; C482 fixes points and solves for such a hyperplane. Linear
+point--hyperplane incidence gives the `4-r` dimension law, and the two lifts of the unique
+four-point hyperplane are exactly the Gale pair. This explains why the dimensions and cubics looked
+related without confusing the two inverse functors.
+
 A further stress test by equivalence groups reaches the same verdict independently. Flatland
 quotients each camera plane separately and seeks a common `P3` lift; C481 quotients one shared
 plane and forgets all relative camera-plane embeddings. No relabelling, field extension, or
@@ -261,7 +329,8 @@ choice of Joubert coordinates can restore information absent from the source fun
 | Why both papers display the labelled six-point `P1` quotient | settled | They use the same bracket-torus quotient for one planar projection; equation (1) is exact. |
 | Whether C481 diagonal compatibility is Flatland joint consistency | settled negative | C481 keeps one parent across generally different colours; Flatland keeps one colour across generally different parents. |
 | Whether four or more Flatland views activate the Gale pair | settled negative | The common colour repeats one C482 row, so `rank(M_r)=1` for every `r`. |
-| Whether Flatland's camera-centre cubics are C482 residual cubics | settled negative | They live in different parameter spaces and solve opposite inverse problems. |
+| Why Flatland's camera-centre cubics and C482's residual dimensions look related | settled | They are opposite projections of point--hyperplane incidence on the Segre cubic: fixed hyperplanes/find a colour versus fixed colours/find a hyperplane. They are not the same varieties. |
+| Why four independent C482 colours give a Gale pair | settled conceptually | Four general points determine one hexahedral hyperplane; its generic planar-parent fibre is the Gale double cover, ramified on the conic locus. |
 | Flatland's actual three-or-more-camera `P3` consistency criterion | open outside C537 | C481--C485 omit the pinhole cameras, world points, and multi-view tensor data needed to test it; no successor is authorized here. |
 
 No mystery remains about the proposed Flatland--Gale bridge itself.

@@ -56,6 +56,13 @@ C482 compatibility rows, hence rank one and a three-dimensional residual cubic f
 the rank-four Gale pair. The proposed bridge is therefore killed without entering finite-field
 descent or opening a paper.
 
+A requested extra-juice pass identifies the exact surviving relation on Flatland's generic
+complex locus. A planar six-set determines a hexahedral hyperplane section of the Segre cubic.
+Flatland fixes several such hyperplanes and finds a common colour; C482 fixes several colours and
+finds a common hyperplane. This incidence transpose gives the `4-r` residual-dimension law and
+identifies the two planar lifts of a four-colour hyperplane with the Gale pair, while leaving the
+joint-`P3` kill unchanged.
+
 ## Owned paths
 
 - `notes/reed-solomon-tasks/c537-flatland-gale-multiview-comparison.md`

@@ -93,7 +93,11 @@ requires one common line image, while C481--C485 fix one planar parent and inver
 different images. The common Flatland image repeats one C482 compatibility row, so every number
 of views has rank one and a three-dimensional residual cubic family rather than the rank-four Gale
 pair. The missing joint `P3` camera/world realization is absent from C481's input; no descent or
-paper claim transfers.
+paper claim transfers. A requested extra-juice pass recovers the exact residual relation over the
+generic complex locus: Flatland fixes hexahedral hyperplane sections of the Segre cubic and finds a
+common colour, while C482 fixes colours and finds their common hexahedral hyperplane. This
+point--hyperplane incidence transpose explains the `4-r` residual dimensions and the Gale double
+cover without supplying Flatland's missing joint `P3` datum.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
 C535 characterizes the strongest characteristic-two Hessian--Arf functoriality theorem:
 the exterior-catalecticant divided Hessian, ordered incidence, twisted-cubic collision pullback,
@@ -696,7 +700,10 @@ line images. The Flatland diagonal tuple gives repeated C482 rows and rank one f
 views, leaving a three-dimensional residual cubic family rather than a Gale pair. Its missing
 joint `P3` pinhole-camera/world-point datum is not present in the C481 functor, and Flatland's
 camera-centre cubics are not C482's parent-residual cubics. No finite-field descent or portfolio
-claim is activated.
+claim is activated. The exact surviving geometry is incidence-dual: Flatland holds hexahedral
+hyperplanes fixed and seeks a common Segre-cubic colour, whereas C482 holds colours fixed and seeks
+their hexahedral hyperplane. Four general colours determine one hyperplane whose two planar lifts
+are the Gale pair; repeated Flatland colours still impose only one condition.
 
 ## Execution ladder
 
