@@ -121,7 +121,7 @@ tables.
 | C494 | complete after review repair and explicit user waiver; B3/H3-only scope retained |
 | C503 | final independent-review `GO`; proposed C320 delta available |
 | C504 | final independent-review `GO`; classical Mathieu/cover names remain cited inputs |
-| C505 | implementation commit `5ec97659`; final independent-review `GO` not recorded |
+| C505 | initial review `NO-GO`; repairs pinned at `4c01ea83`; user-launched post-fix review pending |
 | C506 | final independent-review `GO` on implementation commit `51b21674` |
 | C507 | implementation underway; no final artifact or reviewed delta admitted |
 
