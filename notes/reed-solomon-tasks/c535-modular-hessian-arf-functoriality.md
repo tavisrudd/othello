@@ -1,6 +1,6 @@
 # C535 — modular Hessian--Arf functoriality boundary
 
-**Lane:** `reed-solomon` · **Status:** queued; highest-ranked C534 survivor
+**Lane:** `reed-solomon` · **Status:** complete at the characterized cubic-local exit
 
 ## Objective
 

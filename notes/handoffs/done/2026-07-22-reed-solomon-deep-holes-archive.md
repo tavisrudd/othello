@@ -183,3 +183,21 @@ bidegree forces `(1,1)+(1,1)`; the projectivity normal forms include the identit
 is not conflated with nonreduced total space; split root forms are dense for the complementary
 ruling identity; disjoint interpolation blocks enforce squarefreeness; and the `F4` enumeration is
 only a regression, not the algebraic-closure proof.  No theorem statement changes.
+
+## 2026-07-24 — C535 modular Hessian--Arf functoriality
+
+C535 closes at the characterized cubic-local exit.  Over every characteristic-two base scheme,
+the divided Hessian is the exterior square of the cubic catalecticant; its ordered `(2,2)`
+incidence, twisted-cubic collision pullback, and nonsingular Artin--Schreier/Arf torsor commute
+with arbitrary base change.  Removing a vertical collision factor does not: the residual family
+requires flat or Cartier-preserving, Tor-independent base change.
+
+The first higher-degree test separates the claims sharply.  A quartic's ordinary Hessian is again
+a Frobenius square, and two quartics with the same Hessian can lie on opposite sides of the
+repeated-root boundary.  But du Plessis--Wall already prove that the direct characteristic-two
+quartic invariant `i_3=AD^2+BCD+EB^2` detects repeated roots.  Thus no new direct higher-degree
+modular Hessian is claimed.  The ordered separable construction is intrinsically cubic and becomes
+all-degree through the canonical contraction `Gamma^n E -> Gamma^3 E`; C525's constrained
+consecutive-Hankel pullback remains its nonclassical PRS clause.  The full-text audit also finds
+Reeder--Yu's cubic square-root discriminant, so that classical modular observation is explicitly
+excluded.  C536 is unblocked as the next coherent polar-flag/Fano test.
