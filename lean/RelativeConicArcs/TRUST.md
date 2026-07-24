@@ -157,6 +157,46 @@ factorizations, hit counts `(2,7,2)`, and middle nonsingular model.
 including projective invariance of ordinary uncoveredness and quadratic zero sets. The C++ program and report are reproducible
 provenance only; the theorem depends on the emitted data through kernel-checked local predicates.
 
+## Ten-point matching-design realization provenance
+
+The manuscript's rank-three classification of the two
+`MATCH(10,5,1)` designs is supported by the paper-local bundle:
+
+```text
+papers/arcs_complete_outside_conic/check_match10_rank_three.py
+papers/arcs_complete_outside_conic/check_match10_rank_three.json
+papers/arcs_complete_outside_conic/check_match10_rank_three.sha256
+```
+
+The generator canonically reconstructs representatives of the two published
+abstract classes through the Reichard--Woldar overlarge-`S(3,4,8)` model,
+checks their matching-design axioms and automorphism orders, and forms the
+189 normalized projective concurrency equations for each class.  Singular
+4.4.1 computes two monomial-order certificates in characteristics 2 and 37
+and exact rational module lifts whose only denominator prime is 2.  The JSON
+also records the triangular characteristic-two basis for the regular-hyperoval
+class and an independent direct `GF(8)` incidence construction with an exact
+transporter.
+
+Replay from the paper directory:
+
+```text
+nix shell nixpkgs#singular --command \
+  python3 check_match10_rank_three.py --check
+sha256sum -c check_match10_rank_three.sha256
+```
+
+The script is 21,258 bytes with SHA-256
+`e19d9feee10aac64e881fedd31f6cedbb8523f6865e7210c6089ae5e84dc904a`;
+the 77,767-byte JSON certificate has SHA-256
+`84b9b4beb48fd309d7f7c14bdf40062ae3b0a2d78605468f08d48c602f53970d`.
+Exact Python integer/finite-field arithmetic and Singular Gröbner bases and
+module lifts remain trusted executions.  The second monomial order and direct
+`GF(8)` incidence construction are independent checks.  Abstract completeness
+is Mathon's published two-class theorem, cited through
+Alspach--Heinrich's account because the primary proof was not available for
+direct inspection.  No Lean theorem consumes this certificate.
+
 ## Axiom audit
 
 `#print axioms` for the cap-game localization and parametrized-value bridges, the ordinary

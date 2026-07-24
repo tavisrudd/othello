@@ -101,6 +101,23 @@ to hit the arc (three leaves). The three latter matrices are separately
 proved to have exactly the displayed one-dimensional kernels. The semantic proof transports this
 rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
 
+The ten-point equality refinement is separately computer-assisted.  Abstract
+completeness is Mathon's two-class theorem, imported through
+Alspach--Heinrich's published account because Mathon's primary proof was not
+reached.  The paper-local certificate bundle independently constructs representatives of both
+classes, forms the \(189\) normalized rank-three concurrency equations for
+each, and checks the decisive Gröbner and integral-lift identities.  The
+odd-characteristic lift certificates force a repeated frame point for both
+designs; the characteristic-two certificate does the same for the second
+design.  For the regular-hyperoval design, the nondegenerate triangular basis
+forces \(T^3+T+1=0\), and the direct \(\mathbf F_8\) construction supplies the
+converse and the conic-compatible equality case.  The exact script, JSON
+certificate, and checksum manifest are
+`check_match10_rank_three.{py,json,sha256}`.
+The computation was replayed in two monomial orders and against direct
+incidence over \(\mathbf F_8\); Singular's exact Gröbner bases and module lifts
+remain trusted executions.
+
 The total of 2633 projective eight-arc classes is not a new classification
 claim: it independently reproduces Theorem 3.8.1 of Al-Seraji--Al-Ogali
 (2018). The additional computation partitions those known ordinary classes

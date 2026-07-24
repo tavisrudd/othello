@@ -63,8 +63,11 @@ and, for every prime power $q$,
 At equality, the concurrence points of disjoint secants form a matching
 design: they partition the edges of the Kneser graph $KG(k,2)$ into cliques
 of maximum order.  This gives a global rigidity theorem and a quantitative
-graph-theoretic form of stability.  We also prove an upper transfer by
-projective averaging.  Explicit witnesses
+graph-theoretic form of stability.  For ten points, the only conic equality
+case is the regular hyperoval in $\PG(2,8)$.  We also prove an upper transfer
+by projective averaging.  In the inverse direction, when
+$q+1>\binom{k}{2}$ the complete uncovered locus canonically determines the
+parent $k$-arc and its projective-semilinear automorphism group.  Explicit witnesses
 meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective
 frame.  Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
@@ -190,11 +193,13 @@ interpretation all follow.  Its main consequences and applications are:
 
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
 \item an exact prescribed-hole defect identity, with equality and stability;
-\item a matching-design classification of the global equality structure;
+\item a matching-design classification of the global equality structure,
+      including the unique ten-point conic equality case;
 \item conic lower bounds, including the additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer; and
-\item exact values at $q=5,8,9,11$, and a certificate-checked quadratic
-      obstruction giving $\rhoC(16)=9$.
+\item a canonical inverse from the complete uncovered locus to its parent
+      arc, together with exact values at $q=5,8,9,11$ and a
+      certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
 
 The equality structure belongs to the established theory of matching
@@ -208,12 +213,13 @@ concurrence points of secants in one projective plane.  The local remainder
 also measures the graph edges that fail to lie in such maximum-matching
 cliques.
 
-Sections~\ref{sec:classical}--\ref{sec:examples} form the geometric route:
+Sections~\ref{sec:classical}--\ref{sec:examples} form the forward geometric route:
 exact accounting, lower and upper bounds, the characteristic-two refinement,
 and the finite obstruction.  Section~\ref{sec:coding} then gives a secondary
-coding reading, the $q=11$ application, and a fixed-length reconstruction
-theorem showing when the complete uncovered locus determines its parent arc;
-it may be skipped without affecting the geometric argument.
+coding reading and the $q=11$ application, then closes with the inverse
+geometric statement: above a sharp incidence threshold, the complete
+uncovered locus determines its parent arc and automorphism group.  The coding
+reading may be skipped without affecting either geometric direction.
 
 The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
 correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
@@ -565,6 +571,35 @@ Heinrich~\cite[Theorem~3.1]{AlspachHeinrich1990} proved that no such design
 exists.
 \end{proof}
 
+\begin{theorem}[Rank-three ten-point classification]
+\label{thm:match-ten-realization}
+Let $K$ be a field.  Among the simple
+$\operatorname{MATCH}(10,5,1)$ designs, only the regular-hyperoval design
+can have a rank-three projective realization.  It has one over $K$ if and
+only if
+\[
+ \operatorname{char}K=2,
+ \qquad\text{and}\qquad
+ \F_8\subseteq K.
+\]
+The other abstract design has no rank-three realization over any field.
+\end{theorem}
+
+\begin{proof}
+Mathon's classification~\cite{Mathon1981}, as recorded by Alspach and
+Heinrich~\cite{AlspachHeinrich1990}, gives two abstract designs.  The exact
+enumeration in Appendix~\ref{app:verification} independently constructs
+representatives of both classes.  After four points are normalized to a
+projective frame, their $63$ matching blocks give $189$ integral
+concurrency equations.  For both designs in odd characteristic, exact lift
+identities force a remaining point to repeat a frame point.  In
+characteristic two the same degeneration is forced for the second design.
+For the regular-hyperoval design, the nondegenerate lexicographic basis
+instead forces a root of
+$T^3+T+1$, and hence $\F_8\subseteq K$.  The regular hyperoval over $\F_8$
+and scalar extension prove the converse.
+\end{proof}
+
 The line-hole case now makes the connection with complete affine arcs
 explicit.
 
@@ -649,7 +684,10 @@ exactly $k-1$ conic points have that index.
 
 In particular, no zero-defect $\cC$-complete eight- or twelve-arc exists
 in a Desarguesian plane, while a zero-defect ten-arc can occur only for
-$q=8$ or $q=37$.
+$q=8$ or $q=37$.  In fact, Theorem~\ref{thm:match-ten-realization}
+excludes $q=37$ and shows that the unique ten-point equality case is the
+regular hyperoval $\cC\cup\{N\}$ in $\PG(2,8)$, where $N$ is the nucleus
+of $\cC$.
 
 Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
 $\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
@@ -688,6 +726,13 @@ Since a Desarguesian plane has prime-power order, this proves the stated
 small-size consequences.
 
 For the final assertion, $Q^d\ge Q^2>B+1$ when $Q\ge4$ and $d\ge2$.
+
+For the ten-point refinement, Theorem~\ref{thm:matching-design} produces
+a rank-three $\operatorname{MATCH}(10,5,1)$ design.  Apply
+Theorem~\ref{thm:match-ten-realization}.  Over $\F_8$, the regular
+hyperoval is $\cC\cup\{N\}$ up to projectivity; its other $63$ plane points
+are exactly the five-secant concurrence centres, so it is
+$\cC$-complete and has zero defect.
 \end{proof}
 
 Define
@@ -1487,6 +1532,11 @@ $A$ through at least five distinct four-frames, all with the same literal
 uncovered locus $\cC(\F_5)$.
 \end{remark}
 
+% TODO(C583): Seek a robust inverse theorem.  First prove or refute a
+% field-uniform line-threshold lemma converting |U(A) triangle U(B)| into
+% control of the symmetric difference of the two secant-line sets; only then
+% attempt vertex recovery or a defect-coupled statement.
+
 \section{Conclusion and further questions}
 
 The exact defect identity is the organizing result of the paper.  It
@@ -1539,6 +1589,15 @@ Theorem~\ref{thm:defect}, and determine whether the conic stabilizer yields
 finite-order restrictions not reducible to a bound on $\IC(A)$.
 Remark~\ref{rem:scale} shows that such a bound alone cannot improve the
 asymptotic constant obtained here.
+\end{problem}
+
+\begin{problem}
+Develop a robust form of Proposition~\ref{prop:arc-reconstruction}.
+Determine whether a small symmetric difference between the complete
+uncovered loci of two fixed-size arcs forces most of their secant lines,
+and hence most of their vertices, to agree.  A defect-coupled version
+should distinguish combinatorial bad-edge stability from genuine
+rank-three projective stability.
 \end{problem}
 
 \begin{problem}
@@ -1601,6 +1660,15 @@ written Python and C++ programs regenerate the finite data and include
 coordinate-invariance and mutation controls &
 The NRC/GRS dictionary remains the cited classical input; the two programs
 are independent reproducibility checks \\
+\addlinespace
+Ten-point equality classification &
+Mathon's two-class theorem supplies abstract completeness.  The paper-local
+generator independently constructs both classes, forms all $189$ normalized
+concurrency equations, and records Gröbner and integral-lift certificates &
+The primary classification proof was not reached and is imported through
+Alspach--Heinrich's published account.  Singular~4.4.1 exact arithmetic is
+trusted; two monomial orders and direct $\F_8$ incidence provide independent
+checks \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1878,6 +1946,11 @@ A.~Khare,
 \newblock \emph{Linear Algebra and its Applications} \textbf{431} (2009),
 1681--1686.
 \newblock doi:10.1016/j.laa.2009.06.001.
+
+\bibitem{Mathon1981}
+R.~Mathon,
+\newblock The partial geometries $\operatorname{pg}(5,7,3)$,
+\newblock \emph{Congressus Numerantium} \textbf{31} (1981), 129--139.
 
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
