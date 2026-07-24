@@ -1310,7 +1310,7 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "729d981e572689ae9c9b6dcb54a03ed8c29363a7b81e39cc612d2aa2f6d851ed"
+      "sha256": "25bd088646de27d4cce9acccb18891cf8b9c237a0fa523e9c2a69adaa865f849"
     },
     "output": {
       "path": "verification/verify-release-output.json",

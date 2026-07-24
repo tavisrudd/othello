@@ -12,6 +12,20 @@ from pathlib import Path
 
 
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
+LEAN_SCHOLARLY_PATHS = (
+    "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+    "RelativeConicArcs/Q11A5PointOrbits.lean",
+    "RelativeConicArcs/Q11Coding.lean",
+    "RelativeConicArcs/Q11DecodingSynthesis.lean",
+    "RelativeConicArcs/Q11DyeAxioms.lean",
+    "RelativeConicArcs/SixArcDefectBridge.lean",
+    "RelativeConicArcs/Q11DyeConsequences.lean",
+    "RelativeConicArcs/ClebschChordDefect.lean",
+    "RelativeConicArcs/Q9Sylvester.lean",
+    "RelativeConicArcs/SmallKChordMoments.lean",
+    "RelativeConicArcs/SmallKGeometricBridge.lean",
+    "verification/clebsch_rigidity_trust/axiom-audit.txt",
+)
 
 
 def run(
@@ -31,9 +45,16 @@ def run(
     )
 
 
-def git_snapshot(root: Path) -> str:
+def git_snapshot(root: Path, pathspecs: tuple[str, ...]) -> str:
     result = run(
-        ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", "."],
+        [
+            "git",
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--",
+            *pathspecs,
+        ],
         root,
     )
     if result.returncode != 0:
@@ -109,7 +130,14 @@ def main() -> int:
     if not isinstance(manifest, dict):
         raise ValueError("manifest root must be an object")
 
-    initial = {name: git_snapshot(root) for name, root in repositories.items()}
+    snapshot_paths = {
+        "paper": (".",),
+        "lean": LEAN_SCHOLARLY_PATHS,
+    }
+    initial = {
+        name: git_snapshot(root, snapshot_paths[name])
+        for name, root in repositories.items()
+    }
     require_clean(initial)
 
     lean_repository = manifest.get("lean_repository")
@@ -133,6 +161,14 @@ def main() -> int:
         lean_head = run(["git", "rev-parse", "HEAD"], repositories["lean"])
         if lean_head.returncode != 0 or lean_head.stdout.strip() != pinned:
             raise RuntimeError("the separate Lean repository is not at the pinned commit")
+    lean_identity = run(
+        ["git", "diff", "--quiet", pinned, "--", *LEAN_SCHOLARLY_PATHS],
+        repositories["lean"],
+    )
+    if lean_identity.returncode != 0:
+        raise RuntimeError(
+            "the Paper I Lean source paths differ from the pinned commit"
+        )
 
     validator = run(
         [
@@ -218,7 +254,10 @@ def main() -> int:
                 )
         summaries.append({"id": check_id, "status": "passed"})
 
-    final = {name: git_snapshot(root) for name, root in repositories.items()}
+    final = {
+        name: git_snapshot(root, snapshot_paths[name])
+        for name, root in repositories.items()
+    }
     for name, snapshot in final.items():
         if snapshot != initial[name]:
             changed = snapshot.splitlines()

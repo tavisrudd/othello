@@ -44,8 +44,10 @@ nix develop --command python3 verification/verify_release.py \
   --lean-root /path/to/finitegeom
 ```
 
-The runner validates both repositories, builds the manuscript in an isolated
-temporary directory, executes exactly the fifteen
-admitted checks without a shell, and refuses any scholarly path change.
+The runner validates the paper root and the exact Paper I formal source
+pathset against the pinned commit, while ignoring unrelated worktree paths.
+It builds the manuscript in an isolated temporary directory, executes exactly
+the fifteen admitted checks without a shell, and refuses any scholarly path
+change.
 Successful output is deterministic and must equal
 `verify-release-output.json`.
