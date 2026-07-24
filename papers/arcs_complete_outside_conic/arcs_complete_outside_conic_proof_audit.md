@@ -18,8 +18,11 @@
      per-secant counts follow from the second index equation and the degree of \(KG(k,2)\);
    - the bad-edge estimate is the pointwise bound
      \(\binom r2\le (m-1)(r-1)(m-r)/2\), with the larger hole weight handled separately.
-   The six-point realization is proved by a projective frame normalization. The seven-point
-   nonexistence is not claimed as new: it is Alspach--Heinrich, Theorem 3.1.
+   The six-point realization is proved by a projective frame normalization: the first diagonal
+   determinant is `-2`, and the second quadrangle has diagonal line
+   `t(1+t)x+(1+t)y+tz=0`, whose passage through the remaining frame point gives
+   `t^2+t+1=0`. The seven-point nonexistence is not claimed as new: it is
+   Alspach--Heinrich, Theorem 3.1.
 4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
    inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
    \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
@@ -44,10 +47,9 @@
    complete \(b\)-arc can be moved off any prescribed \(H\) when \(b|H|<q^2+q+1\).
 7. The even-characteristic statements use only the standard nucleus/tangent facts for a
    nonsingular conic; combining the nucleus-in/out cases gives \(I_C(A)\ge1\) universally.
-8. The finite-field evaluation dichotomy is exact for at most \(q\) selected points. Its reverse
-   implication uses the anchored union bound for at most \(q\) proper hyperplanes; the \(q+1\)
-   lines of a two-dimensional quotient prove sharpness. The arbitrary-feature statement includes
-   every Veronese degree.
+8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened
+   manuscript. Its exact \(q\)-hyperplane threshold and checker remain supplementary results; no
+   paper theorem depends on them.
 9. For a projective \(k\)-arc, the transparent parity-check kernel has parameters
    \([k,k-3,4]_q\). Projective syndrome distance is one/two/three on selected/secant/uncovered
    directions; the secant index is the exact weight-two leader count, while a distance-three
@@ -73,7 +75,9 @@
     and `A`. The strict threshold is sharp in general: at `(q,k)=(5,4)`, the frame has conic
     uncovered locus and `q+1=N=6`; the order-120 conic stabilizer has an orbit of at least five
     frames because a frame stabilizer has order 24.
-14. Robust reconstruction separates line recovery from vertex recovery. For two `N`-line unions,
+14. The reconstruction section now states the minimum-distance consequence first:
+    distinct parents have locus distance at least `2*delta`. Quantitative reconstruction then
+    separates line recovery from vertex recovery. For two `N`-line unions,
     put `delta=q+1-N`. Each lost line contains at least `delta` points in the one-sided union
     difference. Bonferroni gives `d >= r*delta-choose(r,2)`, while uniqueness of the line through
     two points gives `r*choose(delta,2) <= choose(d,2)` when `delta>=2`. Applying the latter to
@@ -81,9 +85,10 @@
     `floor(|U(A) triangle U(B)|/2)`. A vertex of `A` absent from `B` has at most `floor(k/2)`
     common secants, because those secants form a matching on `B`; it is therefore incident with
     at least `floor((k-1)/2)` lost secants. Double-counting lost degrees gives the stated vertex
-    bound. Two refinements use the secant realization itself. If a lost-edge degree is `e`, its
-    forced vertex concurrence restores at least `choose(e-1,2)` of the pairwise Bonferroni
-    subtraction. If `a=|A\B|`, a common secant through a missing vertex must use a point of
+    bound. The separate degree-correction lemma partitions lost-line pairs by their unique
+    intersection point; if a lost-edge degree is `e`, its forced vertex concurrence restores at
+    least `choose(e-1,2)` of the pairwise Bonferroni subtraction. If `a=|A\B|`, a common secant
+    through a missing vertex must use a point of
     `B\A`; hence there are at most `min(a,floor(k/2))` such secants and
     `2r>=a*(k-1-min(a,floor(k/2)))`. The no-triple-concurrence example attains the unrestricted
     Bonferroni line bound; concurrency is less adverse. No defect estimate or computational
@@ -183,7 +188,8 @@ dictionary's nonzero-quadratic consequence to the contradiction.
 The named theorem `affine_distanceThree_iff_mem_standardConic` additionally identifies actual
 distance-three affine syndrome rays directly with membership in the incidence-defined standard
 conic, closing the quotient-level code/geometry bridge rather than relying on parallel counts.
-It also proves the extension polynomial `1+12t+36t²+20t³`, zero maximal extensions of sizes zero
+The Lean supplement also retains the extension material cut from the manuscript: the polynomial
+`1+12t+36t²+20t³`, zero maximal extensions of sizes zero
 and one, six of size two, twenty of size three, and none of size four. The determinant-defined
 conflict graph is the 30-edge, degree-five icosahedral graph; its six witness-coloured five-edge
 matchings partition the edges and each misses an antipodal pair.
@@ -259,9 +265,9 @@ exact \(q=16\) value; the paper proves that this route is too weak and uses
 - No claim that the sharp \(q+1\) vector-space covering threshold, the arc--MDS dictionary,
   the \(\binom{k}{3}\) farthest-coset leader count, the deep-hole/MDS-extension dictionary, or the
   Clebsch-hexagon/icosahedral interpretation is new.
-- No unconditional novelty claim for the q=11 conjunction of conic deep-hole locus, refined coset
-  distribution, coloured chord partition, and extension polynomial. The bounded search did not
-  locate that exact conjunction, so it is presented only as a checked synthesis.
+- No unconditional novelty claim for the q=11 conic deep-hole locus and refined coset
+  distribution. The coloured chord partition and extension polynomial have been cut from the
+  manuscript and remain supplementary checked facts.
 - No claim that the q=11 exterior six-arc or the inclusion of its conic in the ordinary uncovered
   locus is new. Dye 1991, p. 281 (discussion preceding Theorem 6), and
   Blokhuis--Seress--Wilbrink 1992, pp. 143 and 146,

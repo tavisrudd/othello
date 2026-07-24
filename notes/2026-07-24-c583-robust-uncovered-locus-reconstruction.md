@@ -119,7 +119,9 @@ improvement must overcome.
 contains:
 
 - the deterministic line-union perturbation lemma;
-- the robust uncovered-locus reconstruction proposition;
+- the minimum-distance theorem for distinct uncovered loci;
+- the separate secant-degree correction lemma;
+- the quantitative lost-secant and lost-vertex proposition;
 - the scale and adverse-arrangement remark;
 - updated abstract, introduction, and conclusion language; and
 - a narrowed open problem asking for a genuinely rank-three,
@@ -138,11 +140,12 @@ The repository paper target passes:
 make -C papers arcs
 ```
 
-The final XeLaTeX pass produces a 27-page PDF with no undefined references,
+The final XeLaTeX pass produces a 22-page PDF with no undefined references,
 undefined citations, or overfull boxes.  The only layout message is the
 pre-existing underfull bibliography paragraph.  A rendered-text inspection
-of pages 19--22 checked every displayed bound, the separation between the
-line and vertex steps, the sharpness remark, and the revised conclusion.
+checked the two-pillar introduction, the relocated equality classification,
+every displayed reconstruction bound, the formal degree-correction proof,
+the revised conclusion, and the compact trust appendix.
 
 ## `ej` + `tt` closeout
 
@@ -181,39 +184,42 @@ line.  Every such matching edge therefore consumes a distinct point of
 inequality above and improves the linear vertex estimate whenever the two
 arcs are already close.
 
-## Cold-read cut disposition
+## Cold-read revision
 
-The independent cold read recommends a 4.5--5.5 page reduction.  The
-strongest cuts have the following honest destinations.
+The independent cold read's 4.5--5.5 page target has been executed: the
+paper fell from 27 to 22 pages while retaining both theorem families.
 
 - The Clebsch hexagon's rigidity, automorphisms, projective deep-hole
   syndrome locus, decoding consequences, support bipartition, and
   factorization memory already belong to
   `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.  The arcs
-  manuscript now foreshadows that companion explicitly and should retain
-  only the \(U(A)=\mathcal C(\mathbf F_{11})\) consequence and the shortest
+  manuscript now foreshadows that companion explicitly and retains only
+  the \(U(A)=\mathcal C(\mathbf F_{11})\) consequence and the shortest
   code/coset corollary needed here.
 - The optional icosahedral extension complex does not occur in that focused
-  companion.  If removed from the arcs manuscript, preserve it as a
-  bounded Clebsch extension note: independence polynomial
+  companion.  It has been removed from the manuscript and remains in the
+  checked supplement and this bounded note record: independence polynomial
   \(1+12t+36t^2+20t^3\), the \(6\) maximal two-column and \(20\) maximal
   three-column extensions, the absence of a ten-arc extension, and the
   six-colour perfect-matching augmentation.  This is a note candidate, not
   an allocated successor or a promised paper.
 - Detailed \(q=16\) commands, hashes, generator/checker boundaries, and
-  exceptional-leaf data belong in the existing paper supplement and trust
-  map.  The body should retain only the completeness contract, terminal
-  profile, and mathematical leaf obstruction.
-- Raw witness coordinates and field encodings belong in the source
-  supplement.  The paper needs only a compact witness table and a stable
-  pointer.
+  exceptional-leaf data now remain in the paper supplement and trust map;
+  the body retains only the completeness contract, terminal profile, and
+  mathematical leaf obstruction.
+- Raw witness coordinates, field encodings, and the removed simultaneous
+  evaluation dichotomy remain in the source supplement and proof audit.
 - The neighboring-notion and priority detail removed from the introduction
   remains recoverable from the C349 and C558 reports; it should not be
   advertised as future mathematical work.
 - The robust inverse, its sharpness example, and its degree correction stay
-  in this paper as the inverse counterpart to the forward defect identity.
-  Only a future defect-coupled strengthening remains an open problem; no
-  companion theorem is currently claimed.
+  in a standalone geometric section as the inverse counterpart to the
+  forward defect identity.  The strongest separation statement now appears
+  first, and the degree correction has its own formal pair-partition proof.
+- The six-point calculation now displays both diagonal lines and the
+  determinant forcing characteristic two.  Equality classifications have
+  moved after the conic theory, and the conclusion has three prioritized
+  problems rather than five coequal ones.
 
 ## Mystery ledger
 

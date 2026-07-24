@@ -68,9 +68,10 @@ case is the regular hyperoval in $\PG(2,8)$.  We also prove an upper transfer
 by projective averaging.  In the inverse direction, when
 $q+1>\binom{k}{2}$ the complete uncovered locus canonically determines the
 parent $k$-arc and its projective-semilinear automorphism group.  We quantify
-this inverse: a small symmetric difference of two uncovered loci bounds first
-the lost secants and then the lost vertices.  Explicit witnesses meet the
-lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective frame.
+this inverse: distinct parent arcs have loci at symmetric-difference distance
+at least \(2(q+1-\binom{k}{2})\), and beyond this gap the locus distance
+bounds first the lost secants and then the lost vertices.  Explicit witnesses
+meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective frame.
 Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
 contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
@@ -117,92 +118,50 @@ $\PG(2,q)\setminus\cC$.  All nonsingular conics in $\PG(2,q)$ are
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
-The problem differs from two nearby standard notions.  A saturating set
-need not be an arc and has no prescribed exceptional locus.  An
-almost-complete subset of a conic, in the sense of
-Bartoli--Davydov--Marcugini--Pambianco~\cite{BartoliEtAl2018}, consists of
-selected points \emph{on} the conic whose chords cover the complementary
-points.  Ng--Wild's arcs covering a line~\cite{NgWild2001} prescribe a
-one-dimensional set that must be covered, rather than an exceptional set
-that may remain uncovered.  Here the selected arc is required to avoid the
-conic.
-
-The arbitrary-hole framework also contains an established line-hole
-problem.  If the prescribed set is a line $L_\infty$ and the arc avoids that
-line, completeness outside $L_\infty$ is exactly completeness as an arc in
-the affine plane $\PG(2,q)\setminus L_\infty$.  Closely related hyperfocused
-arcs were motivated by geometric secret sharing~\cite{GiuliettiMontanucci2006},
-and some constructions are complete in precisely this off-line sense
-\cite{GiuliettiMontanucci2006,KorchmarosSzonyi2008}.  Corollary~\ref{cor:affine}
-below gives the resulting affine defect inequality and exact equality
-criterion.  The conic problem is therefore a curved exceptional-locus
-specialization, rather than the sole reason for the prescribed-hole
-formulation.
-
-Localization of an uncovered locus on a proper subgeometry is also known
-for curve-derived arcs with larger line intersections.  Korchm\'aros,
-Nagy, and Sz\H{o}nyi~\cite[Theorem~7.5]{KorchmarosNagySzonyi2024} prove
-that, for odd $q$ and odd $r\ge5$, the points left uncovered by the
-$(q+1)$-secants of their rational BKS $(k,q+1)$-arc in $\PG(2,q^r)$ are
-exactly the points of the proper subplane $\PG(2,q)$ not belonging to the
-arc.  Thus localization of holes in a prescribed subplane is prior art.
-Their theorem concerns a particular curve-derived $(k,q+1)$-arc; the
-contribution here is instead the exact defect identity for an arbitrary
-prescribed hole set, together with its equality and stability theory and
-its specialization to a prescribed conic for ordinary arcs.
-
-There is also classical work on \emph{complete exterior sets}: sets of
-$(q+1)/2$ exterior points whose pairwise joins miss the
-conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.  This condition constrains
-the joins of the selected points, whereas Definition~\ref{def:relative}
-requires those joins to cover the complementary off-conic locus.  The two
-conditions therefore point in opposite directions:
+Two theorem families organize the paper.  The forward theorem refines the
+classical secant-index equations into an exact prescribed-hole identity
+with a nonnegative local remainder.  It yields the lower bound
 \[
- \begin{aligned}
- \text{complete exteriority}&\quad\Longrightarrow\quad
-     \cC(\F_q)\subseteq U(A),\\
- \text{$\cC$-completeness}&\quad\Longleftrightarrow\quad
-     U(A)\subseteq\cC(\F_q),\\
- \text{both conditions}&\quad\Longrightarrow\quad
-     U(A)=\cC(\F_q).
- \end{aligned}
+ \rhoC(q)\ge\sqrt{2q}+\frac32-\frac8{\sqrt{2q}},
 \]
-Strict containment at $q=7$ and the exceptional equality at $q=11$ return in
-Section~\ref{sec:clebsch-witness}.
+an equality design and a quantitative stability statement.  Its conic
+specialization and a certificate-checked quadratic obstruction give
+\(\rhoC(16)=9\).  The inverse theorem starts from the complete uncovered
+locus.  When \(q+1>\binom{k}{2}\), it canonically recovers the secants and
+then the parent \(k\)-arc; a robust form bounds lost secants and vertices
+from the symmetric difference of two loci.  These are respectively the
+forward accounting and inverse reconstruction of the same secant
+arrangement.
 
-There is also a standard coding formulation.  For a candidate of size
-$k\ge4$, the arc--MDS dictionary identifies its columns with a projective
-$[k,k-3,4]_q$ parity-check system.  Under this dictionary,
-$\cC$-completeness says exactly that every projective syndrome direction
-whose cosets have distance three is confined to the prescribed conic; see
-Proposition~\ref{prop:syndrome-dictionary}.  Thus $\rhoC(q)$ is also a
-minimum-length problem for projective codimension-three MDS systems with a
-prescribed algebraic locus allowed to contain their distance-three syndrome
-directions.
+The surrounding notions differ at the defining containment.  Saturating
+sets need not be arcs, while almost-complete conic subsets select points
+on the conic~\cite{BartoliEtAl2018}.  A line hole recovers affine
+completeness, including the related hyperfocused constructions
+\cite{NgWild2001,GiuliettiMontanucci2006,KorchmarosSzonyi2008}; see
+Corollary~\ref{cor:affine}.  Korchm\'aros--Nagy--Sz\H{o}nyi's
+subgeometry-localized theorem concerns the \((q+1)\)-secants of a
+particular curve-derived arc~\cite[Theorem~7.5]{KorchmarosNagySzonyi2024},
+rather than arbitrary holes and ordinary secants.
 
-The point index with respect to an arc, and the first two double-counting
-equations for its distribution, are classical; compare
-Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and Ball~\cite{Ball1997}.  The
-use of secant counts to bound the smallest complete $(k,n)$-arcs is also
-classical; for a recent explicit lower bound see
-Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The
-main observation is that, after splitting those equations over
-a prescribed exceptional set and its complement, the inequalities normally
-used to control overlap have an exact remainder.  This defect identity is
-the principal result: it turns the usual lower-bound argument into a local
-accounting theorem from which equality, stability, and the later coding
-interpretation all follow.  Its main consequences and applications are:
+Complete exterior sets point in the opposite direction: their joins miss
+the conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.  Thus
+\[
+ \text{complete exteriority}\Rightarrow\cC(\F_q)\subseteq U(A),
+ \qquad
+ \text{$\cC$-completeness}\Longleftrightarrow U(A)\subseteq\cC(\F_q).
+\]
+Equality occurs for the Clebsch witness at \(q=11\).  Under the classical
+arc--MDS dictionary, the same locus is the set of projective
+distance-three syndrome directions of a codimension-three MDS system; the
+coding interpretation in Section~\ref{sec:coding} is secondary to the two
+geometric theorem families.
 
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
-\item an exact prescribed-hole defect identity, with equality and stability;
-\item a matching-design classification of the global equality structure,
-      including the unique ten-point conic equality case;
-\item conic lower bounds, including the additive asymptotic term $3/2$;
-\item a projective-averaging upper-bound transfer; and
-\item a canonical and quantitative inverse from the complete uncovered locus
-      to its parent arc, together with exact values at $q=5,8,9,11$ and a
-      certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
-\end{enumerate}
+The point-index equations themselves are classical; compare
+Hirschfeld~\cite[Chapter~9]{Hirschfeld1998}, Ball~\cite{Ball1997}, and the
+recent explicit complete-arc bound of
+Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The new step is
+the exact local remainder after splitting those equations over a
+prescribed hole and its complement.
 
 The equality structure belongs to the established theory of matching
 designs.  Alspach and Heinrich~\cite{AlspachHeinrich1990} call a family of
@@ -217,12 +176,12 @@ cliques.
 
 Sections~\ref{sec:classical}--\ref{sec:examples} form the forward geometric route:
 exact accounting, lower and upper bounds, the characteristic-two refinement,
-and the finite obstruction.  Section~\ref{sec:coding} then gives a secondary
-coding reading and the $q=11$ application, then closes with the inverse
-geometric statement: above a sharp incidence threshold, the complete
-uncovered locus determines its parent arc and automorphism group, with
-quantitative control under perturbation.  The coding reading may be skipped
-without affecting either geometric direction.
+and the finite obstruction.  Section~\ref{sec:coding} gives the secondary
+coding reading and the $q=11$ application.  The independent geometric route
+resumes in Section~\ref{sec:reconstruction}: above a sharp incidence
+threshold, the complete uncovered locus determines its parent arc and
+automorphism group, with quantitative control under perturbation.  The
+coding section may be skipped without affecting either geometric route.
 
 The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
 correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
@@ -532,77 +491,6 @@ and at a hole centre the defect weight $r(m-r)$ is larger.  Sum these
 inequalities and apply~\eqref{eq:defect}.
 \end{proof}
 
-The first two nontrivial orders illustrate the distinction between an
-abstract matching design and its rank-three projective realization.
-
-\begin{corollary}[Six and seven points]
-\label{cor:six-seven-rigidity}
-\begin{enumerate}[label=(\alph*),leftmargin=2em]
-\item In a Desarguesian plane, if a six-arc has every intersection of two
-disjoint secants on a third secant, then the field has characteristic two,
-contains $\F_4$, and the arc is projectively equivalent to
-\[
- (1,0,0),\ (0,1,0),\ (0,0,1),\ (1,1,1),\
- (1,\omega,\omega^2),\ (1,\omega^2,\omega),
- \qquad \omega^2+\omega+1=0.
-\]
-Conversely, this configuration has the stated concurrence property.
-In particular, every zero-defect six-arc in a Desarguesian plane has this
-form.
-\item In any projective plane, no seven-arc has zero defect with respect to
-any prescribed hole set.
-\end{enumerate}
-\end{corollary}
-
-\begin{proof}
-For six points, the three intersections of opposite sides of any complete
-quadrangle must all lie on the secant through the remaining pair.  Normalize
-four vertices to
-\[
- (1,0,0),\quad(0,1,0),\quad(0,0,1),\quad(1,1,1).
-\]
-Their diagonal points are collinear only in characteristic two; their
-common line is then $x+y+z=0$, and it contains the remaining pair.  Write
-a fifth point as $(1,t,1+t)$.  Applying the same diagonal-line condition
-to the first three frame points and this fifth point gives
-$t^2+t+1=0$; the sixth point is then $(1,t^2,t)$.  Direct substitution
-shows that the displayed configuration has the required concurrences.
-
-For seven points, Theorem~\ref{thm:matching-design} would produce a
-$\operatorname{MATCH}(7,3,1)$ design.  Alspach and
-Heinrich~\cite[Theorem~3.1]{AlspachHeinrich1990} proved that no such design
-exists.
-\end{proof}
-
-\begin{theorem}[Rank-three ten-point classification]
-\label{thm:match-ten-realization}
-Let $K$ be a field.  Among the simple
-$\operatorname{MATCH}(10,5,1)$ designs, only the regular-hyperoval design
-can have a rank-three projective realization.  It has one over $K$ if and
-only if
-\[
- \operatorname{char}K=2,
- \qquad\text{and}\qquad
- \F_8\subseteq K.
-\]
-The other abstract design has no rank-three realization over any field.
-\end{theorem}
-
-\begin{proof}
-Mathon's classification~\cite{Mathon1981}, as recorded by Alspach and
-Heinrich~\cite{AlspachHeinrich1990}, gives two abstract designs.  The exact
-enumeration in Appendix~\ref{app:verification} independently constructs
-representatives of both classes.  After four points are normalized to a
-projective frame, their $63$ matching blocks give $189$ integral
-concurrency equations.  For both designs in odd characteristic, exact lift
-identities force a remaining point to repeat a frame point.  In
-characteristic two the same degeneration is forced for the second design.
-For the regular-hyperoval design, the nondegenerate lexicographic basis
-instead forces a root of
-$T^3+T+1$, and hence $\F_8\subseteq K$.  The regular hyperoval over $\F_8$
-and scalar extension prove the converse.
-\end{proof}
-
 The line-hole case now makes the connection with complete affine arcs
 explicit.
 
@@ -824,6 +712,8 @@ Consequently, as $q$ tends to infinity through prime powers,
 \end{theorem}
 
 \begin{proof}
+For \(q=2\) the right side of~\eqref{eq:asymptotic-lower} is negative, so
+the assertion is immediate.  Assume \(q\ge3\).
 Let $k$ be the size of a $\cC$-complete arc and put $s=\sqrt{2q}$.
 The elementary first-moment inequality
 $q^2-k\le\binom{k}{2}(q-1)$ implies $k\ge s$ for $q\ge2$:
@@ -866,6 +756,88 @@ balanced finite cases, but cannot improve the additive constant $3/2$ in
 Theorem~\ref{thm:asymptotic}.  Any stronger asymptotic result needs an
 additional mechanism, not merely a spectral estimate for $\IC(A)$.
 \end{remark}
+
+\section{Equality classifications}
+\label{sec:equality-classifications}
+
+The first two nontrivial orders illustrate the distinction between an
+abstract matching design and its rank-three projective realization.
+
+\begin{corollary}[Six and seven points]
+\label{cor:six-seven-rigidity}
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item In a Desarguesian plane, if a six-arc has every intersection of two
+disjoint secants on a third secant, then the field has characteristic two,
+contains $\F_4$, and the arc is projectively equivalent to
+\[
+ (1,0,0),\ (0,1,0),\ (0,0,1),\ (1,1,1),\
+ (1,\omega,\omega^2),\ (1,\omega^2,\omega),
+ \qquad \omega^2+\omega+1=0.
+\]
+Conversely, this configuration has the stated concurrence property.
+In particular, every zero-defect six-arc in a Desarguesian plane has this
+form.
+\item In any projective plane, no seven-arc has zero defect with respect to
+any prescribed hole set.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For six points, the three intersections of opposite sides of any complete
+quadrangle must all lie on the secant through the remaining pair.  Normalize
+four vertices to
+\[
+ (1,0,0),\quad(0,1,0),\quad(0,0,1),\quad(1,1,1).
+\]
+Their diagonal points are
+\[
+ (1,1,0),\qquad(1,0,1),\qquad(0,1,1).
+\]
+Their determinant is \(-2\), so they are collinear exactly in
+characteristic two, on \(x+y+z=0\); that line contains the remaining pair.
+Write a fifth point as $(1,t,1+t)$.  Applying the diagonal-line condition
+to the quadrangle formed by the first three frame points and this fifth
+point gives the diagonal line
+\[
+ t(1+t)x+(1+t)y+tz=0.
+\]
+It must contain the remaining frame point \((1,1,1)\), which gives
+$t^2+t+1=0$; its intersection with \(x+y+z=0\) is the sixth point
+$(1,t^2,t)$.  Direct substitution verifies all required concurrences.
+
+For seven points, Theorem~\ref{thm:matching-design} would produce a
+$\operatorname{MATCH}(7,3,1)$ design.  Alspach and
+Heinrich~\cite[Theorem~3.1]{AlspachHeinrich1990} proved that no such design
+exists.
+\end{proof}
+
+\begin{theorem}[Rank-three ten-point classification]
+\label{thm:match-ten-realization}
+Let $K$ be a field.  Among the simple
+$\operatorname{MATCH}(10,5,1)$ designs, only the regular-hyperoval design
+can have a rank-three projective realization.  It has one over $K$ if and
+only if
+\[
+ \operatorname{char}K=2,
+ \qquad\text{and}\qquad
+ \F_8\subseteq K.
+\]
+The other abstract design has no rank-three realization over any field.
+\end{theorem}
+
+\begin{proof}
+Mathon's classification~\cite{Mathon1981}, as recorded by Alspach and
+Heinrich~\cite{AlspachHeinrich1990}, gives two abstract designs.  The exact
+enumeration in Appendix~\ref{app:verification} independently constructs
+representatives of both classes.  After four points are normalized to a
+projective frame, their $63$ matching blocks give $189$ integral
+concurrency equations.  Exact lift identities exclude both designs in odd
+characteristic and exclude the second design in characteristic two.  For
+the regular-hyperoval design, the nondegenerate basis instead forces a root
+of $T^3+T+1$, and hence $\F_8\subseteq K$.  The regular hyperoval over
+$\F_8$ and scalar extension prove the converse.  Appendix~\ref{app:verification}
+records the certificate domains and replay boundary.
+\end{proof}
 
 \section{An upper-bound transfer from complete arcs}
 \label{sec:transfer}
@@ -1075,9 +1047,6 @@ their span.  In particular, for the full degree-$d$ system it is enough to
 exhibit $\binom{d+2}{2}$ uncovered points whose Veronese evaluation matrix is
 invertible.  This formulation is not specific to conics.
 
-The more general problem of avoiding several selected points at once has a
-sharp finite-field answer, recorded in Appendix~\ref{app:evaluation}.
-
 \subsection{Small values and the classification over
 \texorpdfstring{$\F_{16}$}{F16}}
 
@@ -1126,21 +1095,11 @@ classes.  The theorem below adds the datum needed here: the ordinary
 uncovered locus either imposes six independent quadratic conditions or
 forces every containing quadratic to meet the arc.
 
-The argument needs only an exhaustive \emph{covering list}, not a
-classification into pairwise inequivalent representatives.  Lean
-kernel-checks every local transition, every leaf obstruction, frame
-normalization, and the global arbitrary-quadratic consequence.  The C++ program
-generates certificate data but is not trusted for exhaustiveness or
-rejection; the known class count is used only as an external consistency
-check.  Appendix~\ref{app:verification} gives the exact theorem and
-regeneration boundary.
-
-We first state the completeness contract used by the finite certificate.
-Index the $273$ projective points by their unique normalized representatives
-$[0:0:1]$, $[0:1:z]$, and $[1:y:z]$.  The standard four-frame is
-\[
- F=\{[0:0:1],[0:1:0],[1:0:0],[1:1:1]\}.
-\]
+The proof uses an exhaustive covering list, not pairwise inequivalent
+representatives.  The following contract isolates the mathematical
+completeness step; Appendix~\ref{app:verification} records the normalized
+point encoding, generator, certificate checker, and trust boundary.  Let
+\(F\) denote the standard projective four-frame.
 
 \begin{lemma}[Augmentation certificate contract]
 \label{lem:q16-contract}
@@ -1175,37 +1134,22 @@ The assertion includes singular quadratic forms.
 \end{theorem}
 
 \begin{proof}
-\emph{Certified covering lists.}
-Starting from $F$, the checked list lengths are
+\emph{Covering list.}
+The checked list lengths are
 $|\mathcal L_5|=4$, $|\mathcal L_6|=61$, $|\mathcal L_7|=454$, and
-$|\mathcal L_8|=2633$.  For every listed parent, the
-checker tests all $273$ indexed points.  Each legal move carries a child
-index, an invertible $3\times3$ matrix, and pointwise nonzero scalar
-witnesses proving that the induced projectivity maps the enlarged parent
-onto that child.  A separate check matches the certificate books with all
-parents in the current list.  Lemma~\ref{lem:q16-contract} therefore proves
-exhaustiveness without trusting the generator's canonical labels or
-deduplication.  As an external consistency check, the final list length
-agrees with the projective-class count of Al-Seraji--Al-Ogali
-\cite[Theorem~3.8.1]{AlSerajiAlOgali2018}.
+$|\mathcal L_8|=2633$.  Every legal insertion among all \(273\) projective
+points has a checked child and projective transporter, so
+Lemma~\ref{lem:q16-contract} proves exhaustiveness.  The final length agrees
+with the independent class count of Al-Seraji--Al-Ogali
+\cite[Theorem~3.8.1]{AlSerajiAlOgali2018}, but that agreement is not used.
 
 \emph{Leaf obstruction.}
-For $2630$ listed leaves, the certificate gives six ordinarily uncovered
-points and an explicit inverse to their $6\times6$ quadratic evaluation
-matrix.  This is the first alternative of
-Lemma~\ref{lem:evaluation-obstruction}.  For each remaining leaf, a checked
-linear combination expresses evaluation at a selected arc point in the
-span of evaluations at ordinarily uncovered points, giving the second
-alternative.  Thus every listed leaf has the asserted quadratic-avoidance
-property.
-
-\emph{Projective transport.}
-If $gA$ is a listed representative, replace $Q$ by $Q\circ g^{-1}$.  This
-form is nonzero, its zero set is $gZ(Q)$, and projectivities carry secants to
-secants, so $U(gA)=gU(A)$.  A quadratic as in the statement would therefore
-contradict the checked obstruction for the listed leaf.
-Appendix~\ref{app:verification} records the independent regeneration and
-formal trust boundary.
+For \(2630\) leaves, six uncovered points have an invertible quadratic
+evaluation matrix.  For each of the other three, evaluation at an arc
+point lies in the span of evaluations on the uncovered locus.  These are
+the two alternatives of Lemma~\ref{lem:evaluation-obstruction}.
+Projective transport preserves the assertion, so the checked leaf result
+holds for every eight-arc.
 \end{proof}
 
 \begin{corollary}[Exact relative value over $\F_{16}$]
@@ -1223,14 +1167,6 @@ nonzero quadratic defining $\cC$, while the arc is disjoint from that zero
 set.  This contradicts Theorem~\ref{thm:q16-quadratic}.  The nine-point
 witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \end{proof}
-
-\begin{remark}[Scope of the classification certificate]
-The proof requires an exhaustive covering list, not pairwise inequivalence
-of its entries.  Pairwise deduplication and the exact quotient-class count
-belong to the cited ordinary classification; their agreement with the
-$2633$-entry covering list is a consistency check, not part of the trusted
-exhaustiveness argument.
-\end{remark}
 
 \section{Coding interpretation and the
 \texorpdfstring{$q=11$}{q=11} application}
@@ -1332,48 +1268,12 @@ factorization theory of the Clebsch hexagon code.  Here we use only the
 locus equality, its relative-completeness consequence, and the resulting
 coset counts.
 
-This equality is exceptional.  For comparison, every four-arc has three
-repeated off-arc intersections among its six secants, and therefore
-\[
- |U(A)|=(q^2+q+1-4)-\bigl(6(q-1)-3\bigr)=(q-2)(q-3).
-\]
-The exterior four-arc over $\F_7$ has
-$|U(A)|=20>8=|\cC(\F_7)|$, so its conic lies strictly inside the uncovered
-locus~\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.
-
-The verified incidence statistics place the $q=11$ equality among the
-other exact examples:
-\[
-\begin{array}{c|rrrrr}
-q&|A|&\binom{|A|}{2}&q^2-|A|&\IC(A)&\max_{x\notin A}r(x)\\ \hline
-8 &6&15&58 &16&3\\
-9 &6&15&75 &13&3\\
-11&6&15&115&0 &3\\
-16&9&36&247&32&4
-\end{array}
-\]
-
-In every row the last entry equals $m=\lfloor|A|/2\rfloor$, one of the two
-extreme indices singled out by Corollary~\ref{cor:stability}.  The table does
-not assert small defect, but it records that the maximal-multiplicity part of
-the equality pattern is present in each exact witness.
-
-The row at $q=11$ has a stronger geometric interpretation.  Since
-$\IC(A)=0$, none of the 15 secants meets $\cC$: every secant of the witness
-is exterior to the conic.  If $N_i$ denotes the number of required points
-of index $i$, relative completeness and the maximum-index bound give only
-$i=1,2,3$, while the two moment equations give
-\[
- N_1+N_2+N_3=115,\qquad
- N_1+2N_2+3N_3=150,\qquad
- N_2+3N_3=45.
-\]
-Consequently $(N_1,N_2,N_3)=(90,15,10)$.
-
-Under the dictionary above, the equality
-$U(A)=\cC(\F_{11})$ says that the associated code has precisely the conic
-as its projective distance-three syndrome locus.  The next proposition
-records the resulting code and coset data.
+The equality is stronger than complete exteriority: it identifies the
+entire uncovered locus.  By contrast, an exterior four-arc over $\F_7$ has
+$|U(A)|=(q-2)(q-3)=20>8=|\cC(\F_7)|$
+\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  Under the coding
+dictionary, the Clebsch equality says that the associated code has
+precisely the conic as its projective distance-three syndrome locus.
 
 \begin{proposition}[The $q=11$ code and coset spectrum]
 \label{prop:q11-code}
@@ -1417,46 +1317,9 @@ columns form a basis.  Hence the covering radius is three, and these twelve
 directions are exactly the projective deep-hole locus.
 \end{proof}
 
-\paragraph{Optional extension structure.}
-Relative completeness confines every further projective MDS extension to
-the twelve conic points.  On those points, two extensions conflict exactly
-when their chord contains a witness point; the residual extension problem
-is therefore a finite graph-independence problem.
+\section{Uncovered-locus reconstruction}
+\label{sec:reconstruction}
 
-\begin{proposition}[The $q=11$ extension complex]
-\label{prop:q11-extensions}
-For the same witness:
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
- \item the simultaneous one-column MDS extensions form the independence
-       complex of the icosahedral graph, with independence polynomial
-       \[
-        1+12t+36t^2+20t^3;
-       \]
-       exactly six two-column and twenty three-column extensions are
-       maximal, giving six complete eight-arcs and twenty complete nine-arcs
-       containing the fixed seed, and there is no ten-arc extension;
- \item each witness column colours five pairwise disjoint edges of the
-       icosahedron, missing an antipodal pair, and the six colour classes
-       partition its thirty edges.  Adding the six antipodal edges turns
-       them into six perfect matchings of the augmented graph.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-For simultaneous extensions, two conic columns conflict exactly when their
-chord contains a witness column.  No three conic columns are collinear, so
-there is no additional triple obstruction and valid extension sets are
-exactly graph-independent sets.  Exhausting the $2^{12}$ subsets gives the
-displayed polynomial and maximal-set counts.  The same determinant table
-partitions the thirty conflict edges into the six stated matchings.
-Thus maximality in the independence complex upgrades to ordinary completeness.
-The six missing antipodal edges are distinct; adjoining the appropriate one
-to each colour class gives six disjoint perfect matchings of the augmented
-graph.  Appendix~\ref{app:verification} records the two independent
-implementations and the formal checks.
-\end{proof}
-
-\paragraph{Large-field reconstruction from the uncovered locus.}
 At every fixed length, the complete set of one-column MDS extensions
 eventually remembers the projective parity-check system itself.  The inverse
 map has two elementary stages.  Put $N=\binom{k}{2}$ and
@@ -1504,6 +1367,42 @@ points incident with $k-1$ recovered secants, and the same description
 recovers $B$.
 \end{proof}
 
+\begin{corollary}[Canonical inverse and automorphisms]
+\label{cor:arc-reconstruction-algorithm}
+Under the hypotheses of Proposition~\ref{prop:arc-reconstruction}, put
+$S=\PG(2,q)\setminus U(A)$ and $N=\binom{k}{2}$.  The secants of $A$ are
+exactly the lines $\ell$ with $|\ell\cap S|>N$, and $A$ is exactly the set
+of points incident with $k-1$ such lines.  Moreover,
+\[
+ \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(U(A))
+ =
+ \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(A).
+\]
+\end{corollary}
+
+\begin{proof}
+Every secant lies in $S$ and has $q+1>N$ points.  A nonsecant line meets
+each of the $N$ secants in at most one point, so it contains at most $N$
+points of their union $S$.  The vertex-recovery rule is the one proved
+above.  Finally, every semilinear projectivity stabilizing $A$ stabilizes
+$U(A)$.  Conversely, if $gU(A)=U(A)$, then
+$U(gA)=gU(A)=U(A)$, so Proposition~\ref{prop:arc-reconstruction} gives
+$gA=A$.
+\end{proof}
+
+\begin{remark}[Sharpness of the strict threshold]
+\label{rem:arc-reconstruction-sharp}
+The strict inequality cannot in general be weakened to
+$q+1\ge\binom{k}{2}$.  For the projective four-frame $A$ over $\F_5$,
+Proposition~\ref{prop:small-values} gives $U(A)=\cC(\F_5)$, while
+$q+1=\binom{4}{2}=6$.  The stabilizer of $\cC$ in
+$\operatorname{PGL}_3(5)$ has order
+$|\operatorname{PGL}_2(5)|=120$, whereas the setwise stabilizer of a
+projective frame has order $4!=24$.  The conic stabilizer therefore moves
+$A$ through at least five distinct four-frames, all with the same literal
+uncovered locus $\cC(\F_5)$.
+\end{remark}
+
 \begin{lemma}[Perturbing a finite line union]
 \label{lem:line-union-perturbation}
 Let $\mathcal L$ and $\mathcal M$ be two sets of $N<q+1$ lines in
@@ -1541,86 +1440,105 @@ All these pairs lie in $X\setminus Y$.  Interchanging $\mathcal L$ and
 $\mathcal M$ proves the corresponding statements for $d_Y$.
 \end{proof}
 
-\begin{proposition}[Robust uncovered-locus reconstruction]
-\label{prop:robust-arc-reconstruction}
-Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
+\begin{theorem}[Separation of uncovered loci]
+\label{thm:uncovered-locus-separation}
+Let $A$ and $B$ be distinct $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
 \[
- N=\binom{k}{2},\qquad \delta=q+1-N\ge1,\qquad
- t=|U(A)\mathbin{\triangle}U(B)|.
+ \delta=q+1-\binom{k}{2}\ge1.
 \]
-Let $r$ be the number of secants of $A$ that are not secants of $B$, and
-let $e_A(x)$ be the number of these lost secants through $x\in A$.
-Define $e_B(y)$ analogously for the gained secants.  Put
+Then
 \[
- d_A=|(\PG(2,q)\setminus U(A))\setminus(\PG(2,q)\setminus U(B))|,
- \qquad
- d_B=|(\PG(2,q)\setminus U(B))\setminus(\PG(2,q)\setminus U(A))|.
+ |U(A)\mathbin{\triangle}U(B)|\ge2\delta.
 \]
-With $\phi(0)=0$ and $\phi(j)=\binom{j-1}{2}$ for $j\ge1$, one has
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{lem:line-union-perturbation} to the two secant sets.
+If they coincide, the vertex-recovery argument in
+Proposition~\ref{prop:arc-reconstruction} gives $A=B$.  Otherwise each
+one-sided difference of the two line unions has at least $\delta$ points.
+These are the two one-sided differences of the complementary uncovered
+loci.
+\end{proof}
+
+\begin{lemma}[Secant-degree correction]
+\label{lem:secant-degree-correction}
+In the setting of Theorem~\ref{thm:uncovered-locus-separation}, let $r$ be
+the number of secants of $A$ that are not secants of $B$, let $e_A(x)$ be
+the number of these lost secants through $x\in A$, and define $e_B(y)$
+analogously for the gained secants.  Put
+\[
+ d_A=|U(B)\setminus U(A)|,\qquad d_B=|U(A)\setminus U(B)|,
+\]
+and set $\phi(0)=0$ and $\phi(j)=\binom{j-1}{2}$ for $j\ge1$.  Then
 \[
  \begin{split}
  d_A&\ge r\delta-\binom r2+\sum_{x\in A}\phi(e_A(x)),\\
  d_B&\ge r\delta-\binom r2+\sum_{y\in B}\phi(e_B(y)).
  \end{split}
 \]
-Put $h=\lfloor(k-1)/2\rfloor$.  If $\delta\ge2$ and
-$s=\lfloor t/2\rfloor$, then
+\end{lemma}
+
+\begin{proof}
+Let $Y$ be the union of the secants of $B$ and, for every lost secant
+$\ell$, put $E_\ell=\ell\setminus Y$.  Then
+$D_A=U(B)\setminus U(A)$ is the union of the $E_\ell$, each of which has
+at least $\delta$ points.  If $n(p)$ is the number of lost secants through
+$p$, then
+\[
+ |D_A|=\sum_\ell|E_\ell|
+       -\sum_{p\in D_A}(n(p)-1).
+\]
+Every pair of lost secants has one intersection, so
+\[
+ \binom r2=\sum_p\binom{n(p)}2.
+\]
+At an arc vertex $x$, one has $n(x)=e_A(x)$.  If $x\in D_A$, its
+contribution to the difference between these two overlap sums is
+\[
+ \binom{e_A(x)}2-(e_A(x)-1)=\phi(e_A(x));
+\]
+if $x\notin D_A$, it is $\binom{e_A(x)}2\ge\phi(e_A(x))$.
+Pairs meeting at distinct arc vertices are disjoint.  Subtracting the
+remaining pair intersections gives the bound for $d_A$; interchange
+$A$ and $B$ for $d_B$.
+\end{proof}
+
+\begin{proposition}[Quantitative uncovered-locus reconstruction]
+\label{prop:robust-arc-reconstruction}
+Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
+\[
+ N=\binom{k}{2},\qquad \delta=q+1-N\ge2,\qquad
+ t=|U(A)\mathbin{\triangle}U(B)|,\qquad s=\lfloor t/2\rfloor.
+\]
+If $r$ is the number of secants lost from $A$ to $B$, then
 \[
  r\le
- \left\lfloor\frac{s(s-1)}{\delta(\delta-1)}\right\rfloor,
+ \left\lfloor\frac{s(s-1)}{\delta(\delta-1)}\right\rfloor.
+\]
+If $a=|A\setminus B|$ and $h=\lfloor(k-1)/2\rfloor$, then
+\[
+ 2r\ge a\bigl(k-1-\min\{a,\lfloor k/2\rfloor\}\bigr),
  \qquad
  |A\mathbin{\triangle}B|
  \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
 \]
-More precisely, if $a=|A\setminus B|$, then
-\[
- 2r\ge a\bigl(k-1-\min\{a,\lfloor k/2\rfloor\}\bigr).
-\]
-For every $\delta\ge1$, the stronger threshold conclusion
-\[
- t<2\delta\quad\Longrightarrow\quad A=B
-\]
-holds.
 \end{proposition}
 
 \begin{proof}
-Apply Lemma~\ref{lem:line-union-perturbation} to the two sets of $N$
-secants.  Complements preserve symmetric difference, so the two one-sided
-differences of the secant unions have sizes summing to $t$; the smaller has
-size at most $s$.  The pair bound in the lemma gives the displayed estimate
-for $r$.  If $r>0$, each one-sided difference has at least $\delta$ points,
-which proves the threshold conclusion once the vertex step below is used.
+The smaller one-sided difference of the secant unions has size at most
+$s$.  The pair bound in Lemma~\ref{lem:line-union-perturbation} gives the
+estimate for $r$.
 
-The degree correction records the first constraint coming from a secant
-realization.  Start with the Bonferroni subtraction of one for every pair of
-lost lines.  The $e_A(x)$ lost secants through a vertex $x$ have one common
-intersection.  If $x$ lies outside the comparison union, their actual
-overlap correction is $e_A(x)-1$ rather than $\binom{e_A(x)}2$; if $x$ lies
-in the comparison union, none of these intersections contributes to the
-one-sided difference.  In either case Bonferroni over-subtracts by at least
-$\phi(e_A(x))$.  Pairs grouped at distinct vertices are disjoint, which
-proves the bound for $d_A$; interchange $A$ and $B$ for the other bound.
-
-It remains to pass from common secants to common vertices.  For
-$x\in A\setminus B$, the common secants through $x$ are secants of $B$
-through a nonvertex.  They use disjoint pairs of the $k$ points of $B$, so
-there are at most $\lfloor k/2\rfloor$ of them.  Moreover, no such pair can
-use two points of $A\cap B$, since its line would then contain three points
-of $A$.  Each pair therefore uses a point of $B\setminus A$, and the
-matching contains at most $|B\setminus A|=|A\setminus B|$ pairs.
-Writing $a=|A\setminus B|$, every missing vertex is consequently incident
-with at least
-\[
- k-1-\min\{a,\lfloor k/2\rfloor\}
-\]
-lost secants.  Summing these degrees proves the nonlinear estimate.
-In particular, every missing vertex is incident with at least
-\[
- (k-1)-\lfloor k/2\rfloor=h
-\]
-lost secants, so $h|A\setminus B|\le2r$.  Since the two arcs have the same size,
-$|A\mathbin{\triangle}B|=2|A\setminus B|$, proving the second estimate.
-In particular $r=0$ forces $A=B$.
+For $x\in A\setminus B$, common secants through $x$ form a matching on
+$B$.  No matching edge can use two points of $A\cap B$, since its line
+would then contain three points of $A$.  Every edge therefore uses a
+distinct point of $B\setminus A$, so there are at most
+$\min\{a,\lfloor k/2\rfloor\}$ such secants.  Each missing vertex is
+incident with at least
+$k-1-\min\{a,\lfloor k/2\rfloor\}$ lost secants.  Summing lost degrees
+gives the first inequality.  Replacing the minimum by $\lfloor k/2\rfloor$
+gives $ha\le2r$, and $|A\mathbin{\triangle}B|=2a$ gives the second.
 \end{proof}
 
 \begin{remark}[Range and line-arrangement obstruction]
@@ -1640,105 +1558,21 @@ while its intersections with the other lost lines account for the
 $\binom r2$ repetitions.  A pencil is less adverse: concurrency merges
 only $r-1$ of these points.  Any improvement at this scale must therefore
 use the secant realization, not merely the two line unions.  The degree
-correction in Proposition~\ref{prop:robust-arc-reconstruction} is the first
+correction in Lemma~\ref{lem:secant-degree-correction} is the first
 such improvement: whenever the lost-edge graph has vertices of degree at
 least three, its forced concurrence recovers part of the Bonferroni loss.
 \end{remark}
 
-\begin{corollary}[Canonical inverse and automorphisms]
-\label{cor:arc-reconstruction-algorithm}
-Under the hypotheses of Proposition~\ref{prop:arc-reconstruction}, put
-$S=\PG(2,q)\setminus U(A)$ and $N=\binom{k}{2}$.  The secants of $A$ are
-exactly the lines $\ell$ with $|\ell\cap S|>N$, and $A$ is exactly the set
-of points incident with $k-1$ such lines.  Moreover,
-\[
- \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(U(A))
- =
- \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(A).
-\]
-\end{corollary}
-
-\begin{proof}
-Every secant lies in $S$ and has $q+1>N$ points.  A nonsecant line meets
-each of the $N$ secants in at most one point, so it contains at most $N$
-points of their union $S$.  The vertex-recovery rule is the one proved
-above.  Finally, every semilinear projectivity stabilizing $A$ stabilizes
-$U(A)$.  Conversely, if $gU(A)=U(A)$, then
-$U(gA)=gU(A)=U(A)$, so Proposition~\ref{prop:arc-reconstruction} gives
-$gA=A$.
-\end{proof}
-
-\begin{remark}[Sharpness of the strict threshold]
-\label{rem:arc-reconstruction-sharp}
-The strict inequality cannot in general be weakened to
-$q+1\ge\binom{k}{2}$.  For the projective four-frame $A$ over $\F_5$,
-Proposition~\ref{prop:small-values} gives $U(A)=\cC(\F_5)$, while
-$q+1=\binom{4}{2}=6$.  The stabilizer of $\cC$ in
-$\operatorname{PGL}_3(5)$ has order
-$|\operatorname{PGL}_2(5)|=120$, whereas the setwise stabilizer of a
-projective frame has order $4!=24$.  The conic stabilizer therefore moves
-$A$ through at least five distinct four-frames, all with the same literal
-uncovered locus $\cC(\F_5)$.
-\end{remark}
-
 \section{Conclusion and further questions}
 
-The exact defect identity is the organizing result of the paper.  It
-separates the universal overlap forced by the second secant moment from the
-incidence spent on a prescribed exceptional set, and its nonnegative local
-terms retain the equality and stability information lost by a scalar
-counting bound.  Its line-hole specialization recovers complete affine arcs,
-while the conic case supplies a curved exceptional locus.  The coding
-interpretation is another reading of the same remainder,
-rather than a separate source of estimates.
-
-The forward defect identity records how a secant arrangement covers the
-plane; the reconstruction theorem supplies a partial inverse.  The
-uncovered locus is therefore more than an output statistic:
-Proposition~\ref{prop:arc-reconstruction} recovers the unlabelled
-parity-check arc from its complete set of distance-three syndrome directions
-whenever $q+1>\binom{k}{2}$.  Thus the one-column extension locus itself
-becomes a parent fingerprint once every secant contains more points than
-there are competing secants; for six columns this applies when $q\ge16$.
-Corollary~\ref{cor:arc-reconstruction-algorithm} makes the recovery canonical
-and shows that the same locus determines the full projective-semilinear
-automorphism group.  Remark~\ref{rem:arc-reconstruction-sharp} shows that
-the strict incidence threshold is best possible in general.
-Proposition~\ref{prop:robust-arc-reconstruction} quantifies the inverse:
-with \(\delta=q+1-\binom{k}{2}\), distinct parents have uncovered loci at
-distance at least \(2\delta\), and beyond that gap a rich-line estimate
-controls the lost secants before the nonvertex concurrency bound controls
-the lost vertices.
-
-Two further mechanisms complement that identity.  Projective averaging
-transfers ordinary complete arcs to prescribed-hole upper bounds, while the
-evaluation-rank obstruction detects finite configurations invisible to the
-incidence budget.  Over $\F_{16}$ the defect bound reaches eight and the
-quadratic obstruction excludes eight, leaving the checked nine-point
-witness and hence $\rhoC(16)=9$.
-
-These mechanisms leave four concrete directions.
-
-\begin{problem}
-Determine whether the uncovered-quadratic-rank obstruction used at $q=16$
-extends to other even orders or gives useful lower bounds beyond the scalar
-defect inequality.
-\end{problem}
-
-\begin{problem}
-Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
-impossible for an infinite family.  Theorem~\ref{thm:transfer} currently
-supplies only the general complete-arc bound
-$O(\sqrt q(\log q)^c)$.
-\end{problem}
-
-\begin{problem}
-Classify equality and bounded-defect configurations in
-Theorem~\ref{thm:defect}, and determine whether the conic stabilizer yields
-finite-order restrictions not reducible to a bound on $\IC(A)$.
-Remark~\ref{rem:scale} shows that such a bound alone cannot improve the
-asymptotic constant obtained here.
-\end{problem}
+The two main theorems read the same secant arrangement in opposite
+directions.  The defect identity turns its coverage multiplicities into an
+exact local remainder, retaining equality and stability data lost by the
+usual scalar count.  Conversely, the uncovered locus recovers the
+arrangement and then its vertices; distinct parents are separated by at
+least \(2(q+1-\binom{k}{2})\) points, with quantitative control beyond that
+gap.  Projective averaging and the quadratic evaluation obstruction supply
+the principal applications, including \(\rhoC(16)=9\).
 
 \begin{problem}
 Determine whether Proposition~\ref{prop:robust-arc-reconstruction} can be
@@ -1750,16 +1584,17 @@ bound must also go beyond combinatorial bad-edge stability.
 \end{problem}
 
 \begin{problem}
+Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
+impossible for an infinite family.  Theorem~\ref{thm:transfer} currently
+supplies only $O(\sqrt q(\log q)^c)$.
+\end{problem}
+
+\begin{problem}
 Develop the higher-dimensional analogue for caps complete outside a
 prescribed quadric in $\PG(n,q)$.  The evaluation lemma already applies to
 arbitrary feature maps and Veronese degrees; the missing ingredient is an
 appropriate exact secant-moment remainder for caps.
 \end{problem}
-
-Progress beyond the present lower bound will probably require an explicit
-construction, an algebraic obstruction, or a classification of
-near-extremal secant arrangements rather than another application of the
-same incidence budget.
 
 \appendix
 \section{Computational and formal verification}
@@ -1771,203 +1606,28 @@ source supplement's \texttt{TRUST.md} manifest records
 exact commands, toolchain versions, SHA-256 digests, theorem names, and
 frozen outputs.
 
-\begin{center}
-\small
-\begin{tabular}{>{\raggedright\arraybackslash}p{0.19\linewidth}
-                >{\raggedright\arraybackslash}p{0.36\linewidth}
-                >{\raggedright\arraybackslash}p{0.34\linewidth}}
-\toprule
-Claim & Evidence & Trust boundary \\
-\midrule
-Five upper-bound witnesses &
-The dedicated q=5 Lean leaf checks the transported frame; the general
-verifier and Lean leaves check q=8,9,11,16 &
-Every displayed coordinate list has a rules-only Lean certificate; the
-independent Python verifier covers q=8,9,11,16 only; no search-completeness
-claim \\
-\addlinespace
-General theorem chain &
-Companion Lean library formalizes the incidence, defect, conic,
-asymptotic, averaging, nucleus, evaluation, syndrome, and coding arguments &
-Kernel checking with axioms
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}; no
-\texttt{sorry}, custom axiom, or \texttt{native\_decide} \\
-\addlinespace
-$q=16$ classification &
-C++ generator emits local transition and quadratic-evaluation data for
-covering lists of lengths $4/61/454/2633$ &
-Lean checks transition coverage, leaf rejection, the exact $2630+3$ profile,
-the three exceptional kernel lines, and the full arbitrary-eight-arc
-quadratic-avoidance theorem, including coordinate pullback, preservation of
-nonzeroness, and $U(gA)=gU(A)$. Generator assertions,
-canonical labels, and deduplication are not trusted \\
-\addlinespace
-$q=11$ code and extension data &
-Lean checks the stated code, syndrome, graph claims, and the implication from
-the classical NRC/GRS quadratic consequence to non-GRS; independently
-written Python and C++ programs regenerate the finite data and include
-coordinate-invariance and mutation controls &
-The NRC/GRS dictionary remains the cited classical input; the two programs
-are independent reproducibility checks \\
-\addlinespace
-Ten-point equality classification &
-Mathon's two-class theorem supplies abstract completeness.  The paper-local
-generator independently constructs both classes, forms all $189$ normalized
-concurrency equations, and records Gröbner and integral-lift certificates &
-The primary classification proof was not reached and is imported through
-Alspach--Heinrich's published account.  Singular~4.4.1 exact arithmetic is
-trusted; two monomial orders and direct $\F_8$ incidence provide independent
-checks \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-For the additive lower bound, the formal theorem contains the same cubic
-expansion and the same coefficient estimates isolated in the body's
-elementary estimate.  Along unbounded families of finite-field orders, Lean
-proves unconditionally that every number below $3/2$ is eventually a lower
-bound for the centred parameter.  Its literal real-valued \texttt{liminf}
-wrapper assumes the centred family is cobounded, because a real-valued
-\texttt{liminf} does not represent divergence to $+\infty$; the operational
-statement covers that case as well.
-
-The q=5 witness entry point is the dedicated rules-only Lean leaf
-\path{RelativeConicArcs/ExampleChecks/Q5.lean}; the C187 checker independently
-replays the frame's six-point uncovered-conic identity, while Lean also checks
-the displayed invertible coordinate matrix and pullback identity. For q=8,9,11,16,
-the independent witness entry point is
-\path{verify_relative_conic_arcs.py}, and the corresponding Lean leaves
-check the displayed coordinates.  All five Lean certificates verify
-disjointness, the arc condition, and coverage of the canonical projective
-representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a soundness theorem
-transports acceptance to relative completeness.  The q=16 classification
-entry point is \path{search_rhoc16.cpp}; its checked-in report and emitted
-Lean data fix the finite search input.  The finite examples do not depend on
-the external Kim--Vu hypothesis used only for the conditional asymptotic
-upper bound.
-
-\paragraph{The three exceptional leaves.}
-Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
-coefficient order $(X^2,Y^2,Z^2,XY,XZ,YZ)$, the one-dimensional kernels of
-the three exceptional evaluation matrices are generated by
-\[
- (1,1,1,1,1,0),\qquad (0,0,0,5,4,1),\qquad (2,1,1,5,5,1).
-\]
-Lean identifies these with the three forced-hit records in the exhaustive
-list and proves that each displayed line is the exact kernel. The first and third forms split over $\F_{16}$ as
-\[
- (X+6Y+6Z)(X+7Y+7Z)
- \quad\hbox{and}\quad
- 2(X+4Y+15Z)(X+15Y+4Z),
-\]
-and each union of lines contains two selected points.  The middle form is
-nonsingular and contains seven selected points.  Thus two rank defects come
-from reducible quadratics, while the third comes from an arc differing by
-one point from a seven-point conic subset.  These descriptions are not used
-for classification completeness.
-
-\section{A general finite-field evaluation dichotomy}
-\label{app:evaluation}
-
-The one-selected-point obstruction used in Section~\ref{sec:examples} has a
-sharp extension to several selected points.  The vector-space covering
-threshold is classical; see, for example, Khare~\cite{Khare2009}.
-
-\begin{proposition}[Finite-field evaluation dichotomy]
-\label{prop:evaluation-dichotomy}
-Let $W$ be a finite-dimensional vector space over $\F_q$, let
-$\nu:X\to W$ be any feature map, and let $U,A\subseteq X$ be finite with
-$|A|\le q$.  There is a linear form $f\in W^*$ such that
-\[
- f(\nu(u))=0\quad(u\in U),\qquad
- f\ne0,\qquad f(\nu(a))\ne0\quad(a\in A)
-\]
-if and only if
-\[
- \langle\nu(U)\rangle\ne W
- \quad\hbox{and}\quad
- \nu(a)\notin\langle\nu(U)\rangle\quad(a\in A).
-\]
-The uniform threshold is sharp: $q+1$ distinct hyperplanes through a common
-codimension-two subspace can cover $W$.
-\end{proposition}
-
-\begin{proof}
-Put $S=\langle\nu(U)\rangle$.  Necessity follows by applying $f$ to the
-stated span relations.  Conversely, $S\ne W$ makes the annihilator
-$S^\perp\subseteq W^*$ nonzero.  For each $a\in A$, the condition
-$\nu(a)\notin S$ says that evaluation at $\nu(a)$ cuts out a proper
-hyperplane of $S^\perp$.  At most $q$ proper hyperplanes cannot cover a
-nonzero vector space over $\F_q$: their union has size at most
-$1+q(|S^\perp|/q-1)<|S^\perp|$.  Any form outside their union has the
-required properties.  For sharpness, quotient by a common codimension-two
-subspace and use all $q+1$ lines in $\F_q^2$.
-\end{proof}
-
-For the degree-$d$ Veronese map, the proposition gives the same dichotomy
-for homogeneous degree-$d$ forms.
-
-\section{Witness coordinates and field encodings}
-\label{app:witnesses}
-
-All coordinates are homogeneous and use the standard conic $XZ=Y^2$.
-The rules-only Lean checkers in
-\texttt{RelativeConicArcs/ExampleChecks/}---namely
-\texttt{Q5.lean}, \texttt{Q8.lean}, \texttt{Q9.lean}, \texttt{Q11.lean}, and
-\texttt{Q16.lean}---verify the
-displayed coordinates and feed the exact-value theorems in the aggregate
-\texttt{Results.lean}.  The independent Python entry point
-\nolinkurl{verify_relative_conic_arcs.py} regenerates the q=8,9,11,16 witness
-checks but is not part of the Lean trust base.  The q=5 frame identity has the
-separate C187 checker described above.
-
-For $q=5$, coordinates lie in the prime field.  The projective image of the
-standard four-frame used by the certificate is
-\[
- (1,0,3),(2,1,2),(3,3,4),(1,4,4).
-\]
-It is obtained from the frame by the matrix with rows
-$(1,2,3)$, $(0,1,3)$, $(3,2,4)$, whose determinant is $2$; substitution
-carries the displayed frame conic to a nonzero multiple of $XZ-Y^2$.
-
-For $q=8$, write
-$\F_8=\F_2[\alpha]/(\alpha^3+\alpha+1)$ and encode
-$a_0+a_1\alpha+a_2\alpha^2$ by the binary integer
-$a_0+2a_1+4a_2$.  A witness is
-\[
-\begin{split}
- &(0,1,1),(0,1,2),(1,0,1),\\
- &(1,0,2),(1,1,2),(1,1,6).
-\end{split}
-\]
-
-For $q=9$, write
-$\F_9=\F_3[\alpha]/(\alpha^2+1)$ and encode
-$a_0+a_1\alpha$ by $a_0+3a_1$.  A witness is
-\[
-\begin{split}
- &(1,0,4),(1,0,5),(1,1,0),\\
- &(1,1,2),(1,2,3),(1,2,4).
-\end{split}
-\]
-
-For $q=11$, coordinates lie in the prime field.  A witness is
-\[
-\begin{split}
- &(1,10,0),(1,9,1),(1,4,7),\\
- &(1,8,5),(0,1,4),(1,1,7).
-\end{split}
-\]
-
-For $q=16$, write
-$\F_{16}=\F_2[\alpha]/(\alpha^4+\alpha+1)$ and use binary coefficient
-encoding.  A witness of size nine is
-\[
-\begin{split}
- &(1,5,14),(1,5,3),(1,9,2),(1,0,9),(1,13,13),\\
- &(1,6,10),(1,3,9),(0,1,11),(1,10,2).
-\end{split}
-\]
+\begin{itemize}[leftmargin=1.5em]
+\item The companion Lean library checks the general theorem chain with
+the standard axioms \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}, and with no \texttt{sorry}, custom axiom, or
+\texttt{native\_decide}.
+\item For \(q=16\), Lean checks transition coverage for lists of lengths
+\(4/61/454/2633\), the \(2630+3\) leaf profile, and the arbitrary-eight-arc
+theorem.  Generator labels and deduplication are not trusted.
+\item The \(q=11\) code and syndrome claims are kernel-checked; the
+NRC/GRS dictionary is the cited classical input.  Independent programs
+regenerate the finite data.
+\item Mathon's theorem supplies abstract completeness for the ten-point
+classification through Alspach--Heinrich.  The paper-local certificate
+checks both classes and all \(189\) concurrency equations; Singular exact
+arithmetic is trusted.
+\end{itemize}
+Lean also proves the operational asymptotic statement that every constant
+below \(3/2\) is eventually a lower bound; its literal \texttt{liminf}
+wrapper assumes coboundedness.  The rules-only witness files
+\texttt{ExampleChecks/Q5.lean} through \texttt{Q16.lean} contain the
+coordinates and field encodings referenced by Appendix~\ref{app:witnesses}.
+\phantomsection\label{app:witnesses}
 
 \begin{thebibliography}{99}
 
@@ -2088,13 +1748,6 @@ K.~Kaipa,
 \newblock Deep holes and MDS extensions of Reed--Solomon codes,
 \newblock \emph{IEEE Transactions on Information Theory} \textbf{63}
 (2017), 4940--4948.
-
-\bibitem{Khare2009}
-A.~Khare,
-\newblock Vector spaces as unions of proper subspaces,
-\newblock \emph{Linear Algebra and its Applications} \textbf{431} (2009),
-1681--1686.
-\newblock doi:10.1016/j.laa.2009.06.001.
 
 \bibitem{Mathon1981}
 R.~Mathon,
