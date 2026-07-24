@@ -1016,8 +1016,17 @@
       "last": 595,
       "purpose": "Fano-scheme elimination certificate for stable polar components",
       "sequence": 113
+    },
+    {
+      "count": 1,
+      "first": 596,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 596,
+      "purpose": "mod-4 and quadratic refinement discriminator for the conic matching residue",
+      "sequence": 114
     }
   ],
-  "next_id": 596,
+  "next_id": 597,
   "schema": "codex-task-id-allocations-v1"
 }
