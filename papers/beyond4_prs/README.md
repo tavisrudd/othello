@@ -3,11 +3,11 @@
 **Working title:** *Projective Reed--Solomon syndromes beyond redundancy four:
 complete first levels and coherent polar flags.*
 
-**Status:** Scope-reset R5--R8 manuscript under major revision after an
-independent cold read.  R5--R7 form the theorem spine and R8 is one
-fixed-level application.  R9, ordered-Hessian geometry, general Lucas
-carriers, and the distinguished \(e_7\) orbit are reserved for companion
-papers.  The follow-up cold-session queue and release gates are recorded in
+**Status:** Scope-reset R5--R7 manuscript under major revision after
+independent cold reads.  R8 and R9 form the fixed-level companion queue;
+ordered-Hessian geometry, general Lucas carriers, and the distinguished
+\(e_7\) orbit are reserved for separate companion work.  The follow-up
+cold-session queue and release gates are recorded in
 `second-draft-fix-plan.md`; no DOI release is authorized yet.
 
 ## Build
@@ -19,8 +19,8 @@ make check
 make tit-check
 ```
 
-`make check` builds the 29-page canonical preprint.  `make tit-check` builds the
-21-page IEEEtran single-column review manuscript
+`make check` builds the 24-page canonical preprint.  `make tit-check` builds the
+18-page IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
 `main-tit.tex`,
@@ -46,9 +46,7 @@ exact strength of each proved level visible:
 3. the all-field redundancy-six deep-hole classification and the complete
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
-4. the redundancy-eight high-field argument, with its exact threshold,
-   orbit law, modular boundary, and pointed lower package;
-5. the general coherent-polar induction theorem.
+4. the general coherent-polar induction theorem.
 
 The manuscript must distinguish complete classifications from containment, high-field, and
 obstruction statements.  R9 and the modular-carrier branches are companion-paper
@@ -58,8 +56,8 @@ work, not late additions to the submission.
 
 - C481--C490 projection/Gale reconstruction belongs to the separate reconstruction-paper decision.
 - Twisted Reed--Solomon results C510/C514/C515/C518 are not part of the projective-RS spine.
-- R9, ordered-Hessian geometry, general Lucas carriers, and the distinguished
-  `e_7` orbit are reserved for companion papers.
+- R8/R9, ordered-Hessian geometry, general Lucas carriers, and the
+  distinguished `e_7` orbit are reserved for companion papers.
 - No ambient syndrome census substitutes for the proved geometric and arithmetic mechanisms.
 
 ## Verification plan
@@ -68,7 +66,7 @@ work, not late additions to the submission.
 - C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
 - C540 closed the redundancy-five Lean package.
 - C541 closed the coherent-polar engine and redundancy-six/seven applications.
-- C542 closed the redundancy-eight application.
+- C542 supplies the companion-paper redundancy-eight application.
 - C543 supplies the companion-paper characteristic-two ordered-Hessian and
   Lucas-carrier layer.
 - C544 supplies the completed aggregate import gate, axiom audit, referee-facing trust map, and

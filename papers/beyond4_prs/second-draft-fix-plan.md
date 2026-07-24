@@ -183,10 +183,12 @@ Date: 2026-07-24
 An independent full-manuscript cold read found the redundancy-five core
 and the coherent-marker mechanism strong, but judged the combined
 R5--R9/Hessian/Lucas paper too broad for submission.  The submission
-manuscript now stops at R8: R5--R7 form the main paper, and R8 is the
-single fixed-level application.  R9, the ordered Hessian, the general
-Lucas carriers, and the distinguished \(e_7\) orbit are reserved for
-companion papers and are not dependencies of the submission theorems.
+manuscript now stops at R7.  An independent R8 exhaustion cold read
+found that the fixed-level component theorem still needs new
+scheme-theoretic work, so R8 and R9 form the fixed-level companion
+queue.  The ordered Hessian, general Lucas carriers, and distinguished
+\(e_7\) orbit are reserved for separate companion work.  None is a
+dependency of the submission theorems.
 
 Run the following cold sessions independently.  A reader assigned one
 session should not read the earlier review or another session's report
@@ -197,17 +199,20 @@ before delivering a verdict.
 | F1 | Main-theorem hierarchy and synthesis | Each headline theorem has one primary equivalence relation and an explicit proof assembling exhaustion, counts, radius promotion, and Frobenius fusion. | Queued |
 | F2 | R6/R7 exceptional classifications | The printed paper identifies every exceptional class by representative, stabilizer, and fusion, or consistently calls the output a certified census. | Queued |
 | F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | Queued |
-| F4 | R8 component exhaustion | Every local chart, eliminated ideal, boundary component, and completeness step is visible or precisely delegated to a checkable appendix. | Queued |
+| F4 | R8 component exhaustion | Decide whether the printed component argument is independently complete. | Closed: cut R8 to companion |
 | F5 | Computational/formal trust boundary | A frozen archive, exact domains, acceptance criteria, resource envelope, and honest formal coverage are sufficient to audit every retained headline claim. | Queued |
 | F6 | Exposition-only pass | The R5 example appears before the abstract machinery; duplicated roadmaps and audit prose are removed; the marked-factor mechanism remains the narrative spine. | Queued |
-| C1 | R9 carrier consistency and exhaustion | Resolve the characteristic-five line/point contradiction and prove the complete contained-component decomposition before restoring any R9 classification claim. | Companion queue |
-| C2 | R9 binary-quartic slices | Prove the characteristic-seven normal-form atlas, quotient coverage, stabilizers, boundary, and descent of the six principal opens. | Companion queue |
-| C3 | Ordered-Hessian/Lucas/\(e_7\) paper | Establish an independent theorem hierarchy and state exactly which carrier strata remain unclassified; no dependence on the R5--R8 submission narrative. | Companion queue |
+| C1 | R8 homogeneous strata | Produce the complete kernel-chart atlas, eliminated and saturated ideals, infinity charts, and characteristic \(2,3,5\) component decompositions; prove that the displayed rank, gcd, cyclic, wild, inseparable, and branch strata exhaust the bad locus. | Companion queue |
+| C2 | R8 collisions and deletion degrees | Write the marker-collision and moving-gcd incidences, prove containment in the asserted ramification divisors, justify degrees \(6,8,10,30\) with multiplicities, and display the five exact-gcd-one fallback equations. | Companion queue |
+| C3 | R8 modular and final synthesis | Print the complete Lucas row calculation, prove the characteristic-three orbit claim and every shallow witness, then give one exhaustive contained/transverse/marker/radius synthesis proof. | Companion queue |
+| C4 | R9 carrier consistency and exhaustion | Resolve the characteristic-five line/point contradiction and prove the complete contained-component decomposition before restoring any R9 classification claim. | Companion queue |
+| C5 | R9 binary-quartic slices | Prove the characteristic-seven normal-form atlas, quotient coverage, stabilizers, boundary, and descent of the six principal opens. | Companion queue |
+| C6 | Ordered-Hessian/Lucas/\(e_7\) paper | Establish an independent theorem hierarchy and state exactly which carrier strata remain unclassified; no dependence on the R5--R7 submission narrative. | Companion queue |
 
 ## Release rule
 
 C545 is blocked as a **proof-complete Version 1** until the retained
-R5--R8 manuscript passes sessions F1--F6, an independent final reader,
+R5--R7 manuscript passes sessions F1--F3 and F5--F6, an independent final reader,
 the clean public export/replay, immutable repository and archive
 identifiers, and author/account confirmation.  An earlier DOI release
 is not authorized.

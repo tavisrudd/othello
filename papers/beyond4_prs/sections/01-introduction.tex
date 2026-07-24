@@ -7,10 +7,9 @@ Second, it introduces coherent polar flags: a marked contraction
 method that propagates splitting information to higher redundancies
 without forgetting the factor needed for a squarefree lift.  This
 gives complete all-field syndrome classifications at redundancies six
-and seven and, as a fixed-level application, the high-field
-classification at redundancy eight.  We use deep-hole syndromes
-because their Hankel systems make both the base classification and the
-propagation mechanism visible.
+and seven.  We use deep-hole syndromes because their Hankel systems
+make both the base classification and the propagation mechanism
+visible.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -103,9 +102,9 @@ needed for lifting.  This pointed coherence is essential: at $q=19$
 an individual contracted fiber has no split witness avoiding its
 marker, but no consecutive-row polar line is contained in its orbit.
 
-The resulting structural theorem has three outputs.
+The resulting structural theorem has two outputs.
 
-\begin{theorem}[Classification results and explicit gates through eight]
+\begin{theorem}[Classification results and explicit gates beyond five]
 \label{thm:spine}
 The following statements hold.
 \begin{enumerate}[label=\textup{(\alph*)}]
@@ -122,9 +121,6 @@ The following statements hold.
       when $q=2^m$ with $m$ odd, one central nucleus point.  This is a
       deep-hole classification only when $\rho(\PRS(q-6))=6$, in
       particular for $q\geq11$.
-\item For $q\geq43$, the projective deep-hole directions of
-      $\PRS(q-7)$ are exactly the persistent tangent and
-      conjugate-secant families, of total size $q(q+1)^2/2$.
 \end{enumerate}
 At redundancy $r$, the semilinear orbits in the persistent
 conjugate-secant family are parameterized by
@@ -139,12 +135,10 @@ its orbit decomposition changes precisely when
 $\operatorname{char}\F_q$ divides $r-1$.
 \end{theorem}
 
-The three parts have different scopes.  Parts~(a) and~(b) are
-unconditional all-field syndrome classifications, but part~(b)
+The two parts have different scopes.  Both are unconditional
+all-field syndrome classifications, but part~(b)
 becomes a deep-hole classification only when
-$\rho(\PRS(q-6))=6$.  Part~(c) is unconditional in its displayed
-high-field range and makes no classification claim below its
-threshold.  Table~\ref{tab:classification-status} places the
+$\rho(\PRS(q-6))=6$.  Table~\ref{tab:classification-status} places the
 split-free result, radius gate, deep-hole conclusion, and remaining
 field gap in separate columns for each redundancy.
 
@@ -178,9 +172,8 @@ results locate characteristic-dependent kernels, while the present
 work computes which of their coherent lifts meet the PRS splitting
 incidence.  Accordingly, this paper's
 contributions are separated into the
-redundancy-five through seven classifications, the conditional
-transverse induction mechanism, and the first fixed-level high-field
-application.
+redundancy-five through seven classifications and the conditional
+transverse induction mechanism.
 Claim-by-claim novelty and dependency boundaries are recorded in the
 electronic ledger.
 
@@ -188,9 +181,10 @@ electronic ledger.
 Section~\ref{sec:overview} first gives a proof-free guide to the
 argument, and Section~\ref{sec:dictionary} gives the Hankel dictionary.
 Section~\ref{sec:r5} proves Theorem~\ref{thm:r5}.
-Sections~\ref{sec:polar}--\ref{sec:fixed} develop coherent polar
+Sections~\ref{sec:polar} and~\ref{sec:r67} develop coherent polar
 induction and prove Theorem~\ref{thm:spine}.
 Section~\ref{sec:verification} states the computational and formal trust
 boundary, and Section~\ref{sec:boundary} records the exact open boundary.
-Companion papers will treat the redundancy-nine slice analysis and the
-logically separate ordered-Hessian and Lucas-carrier geometry.
+Companion papers will treat the fixed-level redundancy-eight and
+redundancy-nine problems and the logically separate ordered-Hessian
+and Lucas-carrier geometry.
