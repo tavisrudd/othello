@@ -57,7 +57,8 @@ The initial public verification surface is under
   manifest artifact.
 - `test_verification_tools.py` exercises content-addressed statement extraction, uniqueness of
   manuscript claim keys, the embedded 23-terminal arithmetic-gluing gate surface, direct argv
-  acceptance, and shell-command rejection.  It intentionally does not freeze the protected
+  acceptance, shell-command rejection, a tracked gate serving as its own embedded audit, and
+  rejection of a mismatched artifact hash.  It intentionally does not freeze the protected
   baseline's statement count, because replacement-manuscript integration must be accepted through
   exact new statement hashes rather than a stale cardinality.
 
@@ -81,7 +82,7 @@ python3 verification/extract_gate_audits.py <thirteen completed gate paths>
 python3 verification/verify_release.py
   -> fails closed because trust_manifest.json has not yet been admitted
 python3 -m unittest verification/test_verification_tools.py
-  -> 4 tests passed
+  -> 6 tests passed
 ```
 
 The initial gate-surface pass finds that six of the thirteen admitted completed gates have no
