@@ -156,6 +156,17 @@ named hypotheses rather than hidden axioms.  The warning-free import gate,
 trace-only aggregate gate, no-build probes, and native-aware axiom audit
 passed.  See `2026-07-24-c567-ame-lu-lean-marginal-moment.md`.
 
+**C568 closed (2026-07-24): logical phase and exact four-copy separator
+interface complete.**  `RelativeConicArcs.AMELU.LogicalPhase` proves the
+fixed-party kernel is `SL_2` on the conic locus and the diagonal split torus
+off it from four explicit propagation hypotheses.
+`RelativeConicArcs.AMELU.FourCopyContraction` defines the concrete matching
+linear map and rank, exact q=13 generators and four-copy pattern, and the
+party-orbit rank formula; its terminal derives arbitrary-LU inequivalence
+from explicit `720/13^9` and `3024/13^9` certificate inputs.  The import
+gate, exact no-build checks, and standard-axiom audit passed.  See
+`2026-07-24-c568-ame-lu-lean-logical-phase.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -193,8 +204,8 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C568 is next: formalize the logical-Clifford phase and exact four-copy
-contraction separator.  C581 is a
+C569 is next: formalize the transport divisor and characteristic-seven
+merger identity.  C581 is a
 separately queued optional upgrade gate for basis-free phase-space
 reconstruction and quantitative approximate rigidity.
 
