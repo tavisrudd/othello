@@ -23,7 +23,10 @@ user-launched PDF-only post-fix review found one remaining enumeration-boundary
 overstatement; commit `70fb1e7f` repairs it and its clean replay is green.
 A fresh separately user-launched, context-free PDF review returned final
 `GO`, with no blocking or material minor finding. C320 is complete; C182 is
-the active Paper I archive/release task.
+the active Paper I archive/release task. A later editorial review's
+Dye-bound rigor clarification and presentation findings are repaired on
+current `main`; the regenerated nineteen-row release surface and its
+fifteen-check clean replay are green.
 
 The active order is strict:
 
