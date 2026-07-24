@@ -162,9 +162,46 @@ and 24,400 q19 height-five cores can use the nonterminal
 
 For general odd q the missing premise is now crisp: either prove the
 three-move leaf always has continuation height at most two, or prove the two
-displayed bounded incidence conditions directly for the chosen reply. This
-is strictly more proof-shaped than computing an arbitrary Node--Kayles
-nimber and is the highest-value handoff from C528 to C80.
+displayed bounded-arity incidence conditions directly for the chosen reply.
+There are still q-dependent families of instances; “bounded” refers to arity,
+not count. This is strictly more proof-shaped than computing an arbitrary
+Node--Kayles nimber and is the highest-value handoff from C528 to C80.
+
+## `tt` upgrade — pure one-dimensional continuation, not pairing
+
+The cleanest object is the leaf's continuation complex. Under `capOK`, its
+one-skeleton is the compatibility graph: a set of future moves is legal
+exactly when it is a clique. Height at most two says this graph is
+triangle-free. The no-dominating condition says it has no isolated vertex.
+Consequently:
+
+> A height-at-most-two `Y_NK` leaf is P exactly when its continuation
+> complex is empty or pure one-dimensional: every maximal nonempty
+> continuation has exactly two moves.
+
+This removes two tempting overstatements.
+
+- No perfect matching, Hall theorem, or persistent copycat is required.
+  There is only one future response to supply, and it may depend on the
+  opponent's move.
+- The target is not a bounded table. It has the explicit quantifier shape
+
+```text
+exists r, for every o, exists p, such that
+  capOK(leaf)
+  and
+  [leaf is terminal
+   or
+   (every legal x has some compatible y
+    and no three legal cells are pairwise compatible)].
+```
+
+In projective-cap language the two bracketed conditions say “every legal
+one-point extension has a legal mate” and “there is no legal three-point
+extension.” This is the strongest useful C80 transfer: prove a
+two-extendable-but-not-three-extendable leaf, rather than a Grundy identity.
+It also identifies the right counting input for C82: pointwise mate
+existence, not a global matching count.
 
 ## Reproduction and trust boundary
 
@@ -231,8 +268,10 @@ q.
   work uniformly?** q13/q17/q19 computation supports it; no all-q incidence
   proof exists. The `ej` pass sharpens the target: after the third certificate
   move, prove `capOK` plus terminality or the two-move graph law
-  (`alpha=2`, no dominating vertex), equivalently the two bounded incidence
-  conditions above.
+  (`alpha=2`, no dominating vertex). The `tt` pass sharpens this again to an
+  empty or pure one-dimensional continuation complex, with quantifiers
+  `exists r, forall o, exists p`; the conditions are bounded-arity, not
+  bounded-count.
 - **[OPEN, later falsifier] Does any comparable height bound hold at q23 or
   beyond?** No frozen q23 domain was generated. Test only against a candidate
   theorem, not as an unguided census.
@@ -240,10 +279,12 @@ q.
 The first `ej` pass exposed exact residual height as the free invariant
 already consumed by C547's theorem. The follow-up `ej` pass combined it with
 C524's three-move bridge and collapsed every tested `Y_NK` leaf to a
-terminal/two-move graph law. The `tt` pass tested the stronger q17
-height-parity pattern at q19 and killed it, preventing another small-order
-law from becoming the next proof target. No incidental discovery-track entry
-arose: all findings answer C528's planned value-law question directly.
+terminal/two-move graph law. The first `tt` pass tested the stronger q17
+height-parity pattern at q19 and killed it. The follow-up `tt` pass exposed
+the exact quantifier order and the pure one-dimensional continuation-complex
+form, ruling out an unnecessary matching/Hall layer. No incidental
+discovery-track entry arose: all findings answer C528's planned value-law
+question directly.
 
 ## Vibe
 

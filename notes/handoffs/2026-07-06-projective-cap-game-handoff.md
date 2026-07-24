@@ -729,7 +729,10 @@ to C80's direct uniform depth-2 routing theorem into `Y_NK`; q23 remains gated o
 structural law. The `ej` upgrade makes that routing target bounded-incidence: after C524's three
 certificate moves, every tested `Y_NK` leaf has height at most two, so P is equivalent to terminality
 or a conflict graph with `α=2` and no dominating vertex (equivalently, complement triangle-free with
-no isolated vertex). Prove those leaf conditions directly rather than an arbitrary Grundy formula.
+no isolated vertex). The `tt` form is cleaner: the continuation complex is empty or pure
+one-dimensional—every legal move has a mate but no legal triple exists. Preserve the quantifier order
+`∃r ∀o ∃p`; these are bounded-arity conditions, not a bounded number of cases, and no Hall/matching
+layer is needed. Prove those leaf conditions directly rather than an arbitrary Grundy formula.
 Report+certificate:
 [`../2026-07-23-c528-mex-skeleton-probe.md`](../2026-07-23-c528-mex-skeleton-probe.md).
 
@@ -759,7 +762,8 @@ Priority order and why:
 1. **C80 (spine).** Everything gates on it. C528 is closed: the frozen `SG≤5` signal is exact
    residual height, so the live frontier is the uniform-in-`q` depth-2 routing theorem into `Y_NK`,
    not a gadget Grundy formula. Use the C528 `ej` leaf collapse: target `capOK` plus terminality or
-   `α=2`/no-dominating after the third certificate move.
+   an empty/pure-one-dimensional continuation complex after the third certificate move, with
+   `∃r ∀o ∃p`; do not strengthen this to a global pairing.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

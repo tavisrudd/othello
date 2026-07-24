@@ -13,7 +13,9 @@ at q19, and the cheapest local defect signature is value-impure. Return to
 C80's direct uniform depth-2 routing theorem into `Y_NK`. The `ej` upgrade
 further reduces every tested certificate leaf to terminality or the
 height-two Node--Kayles law `α=2` with no dominating vertex; target those
-bounded incidence conditions directly. Final report:
+bounded-arity incidence conditions directly. The `tt` form is an empty or
+pure one-dimensional continuation complex under `∃r ∀o ∃p`; no global
+pairing or Hall condition is needed. Final report:
 [`2026-07-23-c528-mex-skeleton-probe.md`](2026-07-23-c528-mex-skeleton-probe.md).
 
 ## For the cold agent — read first
