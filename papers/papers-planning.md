@@ -111,6 +111,17 @@ adjusted only by the explicit ownership edges below.
 - *What:* N2 demoted to remarks.
 - *Gate:* no manuscript; hardest formalization; collaborator route if it stalls.
 
+**Active unnumbered merger candidate · Beyond redundancy four for PRS** — `beyond4_prs`
+- *What:* C491's complete redundancy-five classification is the headline; C498/C509/C512/C513/
+  C516/C517/C525/C529/C530 supply the coherent-polar transition, exact later-level theorem
+  boundaries, characteristic-two ordered-Hessian replacement, and Lucas arithmetic.
+- *Decision:* the user directed immediate integration, superseding the redundancy-five-only C500
+  manuscript plan.  C538 creates the manuscript; C545 publishes a proof-complete Version 1 of the
+  same work through a target-policy-checked DOI-bearing preprint route; C539--C544 close Lean.
+- *Boundary:* C531/C532 redundancy ten is an optional pre-freeze upgrade, not a gate.  The
+  projection/Gale reconstruction and twisted-RS programmes are excluded.  Assign a ship-order
+  number only after C538's manuscript-level review.
+
 **Publication-ownership seams between papers** (the only two; everything else is independent):
 
 - **3 → 4 fixes publication order, not proof dependence.** `arcs` publishes the shared

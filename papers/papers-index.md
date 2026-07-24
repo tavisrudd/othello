@@ -104,6 +104,18 @@ Geometric Structure
 continuation graphs
 - *Status:* theorem-package plan; N1 headline survives.
 
+**Active unnumbered candidate · `beyond4_prs`** — *Beyond redundancy four: deep holes, polar
+flags, and modular obstructions for projective Reed--Solomon codes*
+- *Status:* user-directed merger admitted to active manuscript staging.  C538 creates the first
+  integrated draft; C545 releases a proof-complete Version 1 preprint with a policy-checked DOI;
+  C539--C544 close the paper-facing Lean package.
+- *Owns:* C491's complete redundancy-five classification as its headline, the C498/C509
+  all-field redundancy-six/seven theorems, C512 coherent polar induction, C513/C516 fixed-level
+  high-field results, C525 ordered-Hessian containment, and C529/C530 Lucas arithmetic.
+- *Boundary:* this supersedes the redundancy-five-only C500 plan.  C481--C490 reconstruction,
+  twisted-RS results, and unfinished redundancy ten remain outside.  Numbering and ship-order
+  admission wait for C538's manuscript-level review.
+
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
 `arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and shares that witness's
@@ -177,6 +189,8 @@ repositories: an evidence-based essay and practical how-to
 - **Focused LaTeX manuscript + PDF + Lean lane:** `equivariant-robust-completion`, with the exact
   coordinate quadratic extension theorem and completed internal referee closeout. Continuation
   rigidity remains theorem-package only.
+- **Active manuscript scaffold:** `beyond4_prs` — C538 owns the integrated draft, C545 the rapid
+  proof-complete DOI-bearing preprint, and C539--C544 the Lean closure.
 - **Sequence packages (ready/draft):** the two `oeis-submissions/` entries.
 
 ## Shared blocker

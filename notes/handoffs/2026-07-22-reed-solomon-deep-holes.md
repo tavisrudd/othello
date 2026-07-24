@@ -16,22 +16,24 @@ constant field `F8` and an order-three component cycle on its `e_7` orbit.  C530
 is only the `AGL_1(F8)` linear section: quotient directions `t^2,t^4` enlarge it to an
 `AGL_3(F2)` additive cover, while the generic framed incidence is a nonconstant Artin--Schreier
 double cover.  Every field of dimension at least three over `F2` contains a three-space subspace
-polynomial, so the full `e_7` orbit is shallow over every admissible field.  C531 is next and owns
-the remaining intrinsic degree-nine carrier strata; C532 packages the resulting redundancy-ten
-theorem.  C533 independently owns C525 threshold/deletion sharpening.
+polynomial, so the full `e_7` orbit is shallow over every admissible field.  By explicit user
+direction C538 is now next and creates the merged `papers/beyond4_prs/` manuscript; C545 then
+releases a proof-complete Version 1 through a policy-checked DOI-bearing preprint route.  C539--C544
+close the paper-facing Lean package.  C531 still owns the remaining intrinsic degree-nine carrier
+strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
+C533 independently owns C525 threshold/deletion sharpening.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
 Characteristic-two Hessian--Arf functoriality and coherent modular polar flags survive as
-independent follow-ups, queued as C535/C536 without displacing C531.  A late theorem-text check of
+independent follow-ups, queued as C535/C536 without displacing C538/C545.  A late theorem-text check of
 Flatland Theorem 6 exposed an explicit three-or-more-view joint-consistency gap that C481--C485
 may resolve; C537 owns only the exact functor comparison before any paper claim.  The pending
 `arcs`/`continuation` portfolio still owns deletion and continuation reconstruction.  Lucas root
 spaces merge into polar flags; simultaneous extension complexes are already owned by `arcs`; and
 the fixed-size equivalence algorithm has no proved complexity advantage.
-C500 remains release-gated.
+C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
-C500 (redundancy-five paper,
-release-gated) queued.  C478's coherence upgrade identifies each
+C538 integrates it with C491 and the later proved PRS theorem spine.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -630,13 +632,21 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
 | C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; C530 owns quotient-cover arithmetic |
 | C530 | degree-nine `e_7` quotient cover | complete (obstruction exit) | nonconstant Artin--Schreier normalization; `AGL_3(F2)` additive subcover; orbit shallow over every admissible field | exact distinguished-orbit arithmetic | closed `e_7` theorem boundary |
-| C531 | full degree-nine Lucas-carrier strata | queued next | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
+| C531 | full degree-nine Lucas-carrier strata | deferred behind C538/C545 paper spine | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | queued after C535 | C512/C529 plus C534 audit | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
+| C538 | beyond-four PRS manuscript integration | queued next; supersedes C500 | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | compilable integrated draft, exact theorem map, proof/novelty/reproducibility ledger | merged PRS paper spine |
+| C545 | rapid proof-complete preprint and DOI | queued immediately after C538 | frozen C538 theorem map and release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
+| C539 | shared beyond-four PRS Lean foundation | queued after C538 theorem freeze | adopted theorem map plus existing C517 API | common Hankel/contraction/synthesis interface and coverage ledger | formalization spine |
+| C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
+| C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
+| C542 | redundancy-eight Lean closure | queued after C541 | C513 theorem package | three-marker `q>=43` synthesis and exact orbit terminal | formal redundancy-eight boundary |
+| C543 | characteristic-two Hessian/Lucas Lean closure | queued after C539 | C519/C525/C529/C530 theorem packages | ordered-Hessian carrier and proved Lucas arithmetic terminals | formal modular boundary |
+| C544 | beyond-four PRS aggregate Lean gate | queued after C540--C543 | all new terminals plus C517 | aggregate build, axiom audit, referee-facing closure, manuscript reconciliation | paper trust boundary |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -697,6 +707,7 @@ history.
 
 ## Next command
 
-`go C531`
+`go C538`
 
-(C531 is next. C500 remains release-gated.)
+(C538 starts the merged manuscript immediately; C545 follows with the proof-complete DOI-bearing
+preprint. C531 remains the deferred research frontier.)
