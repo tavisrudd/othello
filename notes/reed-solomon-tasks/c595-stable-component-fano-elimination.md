@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued for a fresh session
+**Status:** complete at the first unresolved level's non-cyclic input obstruction
 
 ## Objective
 
@@ -71,3 +71,13 @@ For a fixed redundancy \(j\):
 - Do not edit the C545 submission manuscript unless the new result passes an
   independent proof review and the user explicitly reopens that frozen scope.
 
+## Outcome
+
+`notes/2026-07-24-c595-stable-component-fano-elimination.md` constructs the
+integral cyclic coherent-Fano ideal, proves the uniform minimal
+cleared-denominator certificate \(N_j=6\), regresses R6/R7 including infinity
+and characteristics two and three, and applies it at R11.  The cyclic
+residual is empty after the declared saturations.  Full \(\mathrm{SC}(11)\)
+stops because the complete non-cyclic R10 recursively pointed bad scheme is
+not available as one integral generator ideal with proved chart gluing and
+saturation equivalence.

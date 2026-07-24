@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -160,6 +160,17 @@ the NRC case; no third component occurs inside the secant/nucleus functor. The p
 `arcs`/`continuation` portfolio still owns deletion and continuation reconstruction.  Lucas root
 spaces merge into polar flags; simultaneous extension complexes are already owned by `arcs`; and
 the fixed-size equivalence algorithm has no proved complexity advantage.
+C595 constructs the integral coherent-Fano ideal for the universal
+cyclic/wild branch.  Four explicit coefficient identities give the uniform
+minimal cleared-denominator integer \(N_j=6\); after persistent, modular,
+and rank/fixed-factor saturation the cyclic residual is empty at every
+level, including the first unresolved application R11.  The R6/R7
+regressions are scheme-exact over \(\mathbf Q\), \(\mathbf F_2\), and
+\(\mathbf F_3\), with both infinity endpoints retained.  Full
+\(\mathrm{SC}(11)\) remains open at a sharper input gate: the complete
+non-cyclic R10 recursively pointed bad scheme has not been packaged as one
+integral generator ideal with proved chart gluing and saturation
+equivalence.
 C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -809,7 +820,6 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
-| 2 | C595 | queued for a fresh session | build the integral Fano/elimination model for \(\mathrm{SC}(j)\), regress R6/R7, then stop at the first unresolved level or structural obstruction |
 
 ## Unallocated level-ups
 
