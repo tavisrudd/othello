@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** ACTIVE
+**Status:** COMPLETE NEGATIVE
 
 ## Objective
 
@@ -431,6 +431,97 @@ rank-three term and does not open C556.
    complete even equality, but cannot improve the asymptotic constant and is
    therefore deprioritized.
 
+## Four-base cross-ratio gate: density is tautological
+
+The promoted near-net test also closes negatively at its bounded gate.  Choose
+four arc points and projectively normalize their four dual carrier lines to
+\[
+ X=0,\qquad Y=0,\qquad Z=0,\qquad X+Y+Z=0.
+\]
+Away from at most one chart-boundary point on each carrier, parameterize the
+first two groups by
+\[
+ p_1(a)=(0:1:a),\qquad p_2(b)=(1:0:b).
+\]
+The line through them has equation
+\[
+ bX+aY+Z=0.
+\]
+Its intersections with the other two carriers have parameters
+\[
+ c=\frac ba,\qquad d=\frac{b+1}{a+1}.
+\]
+Thus the exact four-group condition is the pair of Möbius tests
+\[
+ \frac ba\in T_3,\qquad \frac{b+1}{a+1}\in T_4.
+\]
+
+This initially looks like an approximate embedded \(4\)-net.  It carries no
+new density rigidity, however.  Every tangent group \(T_i\) has size
+\[
+ h=q+2-k
+\]
+inside a carrier line of size \(q+1\); its complement is exactly the \(k-1\)
+secant directions from the corresponding arc point.  For either Möbius test,
+fixing one input and a forbidden output determines at most one value of the
+other input.  The union bound therefore gives at most
+\[
+ 2h(k-1)
+\]
+failed pairs among the \(h^2\) pairs in \(T_1\times T_2\), already yielding
+success density \(1-O(k/h)=1-O(1/k)\) at \(h\asymp q\), \(k\asymp\sqrt q\).
+
+The zero-defect GDD count merely sharpens the same bookkeeping.  Put
+\[
+ e=\begin{cases}h,&k\text{ even},\\h-1,&k\text{ odd}.\end{cases}
+\]
+There are \(e\) short transversals for each missing pair and
+\[
+ F=h^2-\binom{k-2}{2}e
+\]
+full transversals.  The blocks containing all four selected groups number
+\[
+ F+\binom{k-4}{2}e
+ =h^2-(2k-7)e.
+\]
+The exceptional \(O(kh)\) pairs are precisely the blocks whose missing pair
+contains group three or four.  No cross-ratio concentration beyond the
+co-small complements has appeared.
+
+The Möbius formulas are still an exact coordinate reconstruction of the
+embedded GDD, but extracting a new inequality from their exceptional sets
+would require additional compatibility across many different choices of four
+bases.  That is the original missing rank-three theorem, not a consequence of
+near-net density.
+
+**NO-GO:** a four-base robust-net theorem would return only the already-known
+fact that each tangent group is close to its full carrier line.  It supplies
+no quantitative defect amplification and does not open C556.
+
+## `ej`+`tt` closeout
+
+The closeout pass retained three genuine upgrades:
+
+1. the tangent indicator is an explicit binary projective-plane code-hull
+   word (or its complement is), not merely a generic few-weight codeword;
+2. zero defect is exactly a collinearly embedded mixed-block GDD, and both
+   certified ten-point matching designs possess generalized-hyperfocused
+   resolutions;
+3. Ramanujan--Nagell reduces even characteristic-two square-root equality to
+   the single finite pair \((4096,92)\).
+
+It also closes the standard amplification routes.  Generic few-intersection
+classifications miss the parameters; ordinary incidence and Pless moments
+repackage C554--C555; prescribed-conic spectral energy is exactly C555's
+quadratic form; resolution does not distinguish realizability; and four-base
+near-net density follows from the \(k-1\) missing secant directions on each
+carrier.
+
+The remaining mystery is precise rather than programmatic: one needs a
+many-base rank-three compatibility theorem for the exceptional Möbius sets,
+or a different mechanism altogether.  C593 found no bounded invariant meeting
+that gate.  C556 therefore remains gated.
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -469,4 +560,5 @@ hypotheses have been checked against this tangent-derived set.
 | Which even characteristic-two square-root parameters can attain exact zero defect? | Reduced arithmetically to the single pair \((q,k)=(4096,92)\); hyperoval-scale \(k=q+2\) remains separate. |
 | Does that equality classification improve the asymptotic lower bound? | Not alone: one needs a defect-stability gap, not merely \(\Delta_{\mathcal C}(A)>0\). |
 | Does prescribed-conic incidence have a useful spectral gap? | **Settled negatively:** \(BB^\mathsf T=qI+J\), the real tangent identity gives \(d=k\mathbf1-2r\), and the resulting quadratic form is exactly C555's incidence-only term with a vacuous error at the target scale. |
-| What is the next genuinely mixed gate? | Four-base cross-ratio compatibility for the collinearly embedded mixed-block GDD. |
+| Does four-base cross-ratio compatibility amplify the defect? | **Settled negatively at the density gate:** its \(1-O(1/k)\) success rate follows from each tangent group missing only \(k-1\) carrier points. |
+| What genuinely remains? | A many-base rank-three theorem for the correlated exceptional Möbius sets, with no bounded invariant currently exposed; C556 stays gated. |
