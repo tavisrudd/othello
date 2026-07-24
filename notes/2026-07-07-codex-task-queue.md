@@ -61,7 +61,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `clebsch`
 
-- **C320 `[clebsch]` [QUEUED; EV 3 — PAPER I RELEASE CAPSTONE AFTER C576]** — remap the existing claim-by-claim trust ledger, adequacy extraction, pinned gates, and verify-all entry point to Paper I first; preserve the broad fallback ledger separately, interpose C321 only if the Paper I inventory triggers it, and require issue fixes, post-fix review, and final `GO` → `notes/2026-07-20-c320-clebsch-trust-ledger.md`.
+- **C320 `[clebsch]` [AWAITING USER-LAUNCHED INDEPENDENT REVIEW; EV 3 — PAPER I RELEASE CAPSTONE]** — the nineteen-row Paper I statement identity, manifest, exact formal pin, 24-terminal gate, ten-checker canonical output certificate, and fifteen-check clean replay are green; the fallback surface is unchanged and C321 is not triggered. The implementing agent must not launch the reviewer: require the user-launched cold review, every issue fix, a separately user-launched post-fix review, and final `GO` → `notes/2026-07-20-c320-clebsch-trust-ledger.md`.
 - **C321 `[clebsch]` [CONDITIONAL PAPER I SUBTASK; ONLY IF C320 TRIGGERS IT]** — replace any load-bearing Singular evidence retained by Paper I with independently specified exact certificates/checkers and canonical replay bundles; otherwise close it as not triggered → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.
 - **C182 `[clebsch]` [QUEUED; EV 4 — PAPER I ARCHIVE/RELEASE AFTER C320 FINAL GO]** — archive the focused Paper I source, PDF, exact verification surface, tracked `flake.nix`/`flake.lock` pins for `finitegeom`, certificate packages, toolchain, and system dependencies under a stable DOI/release → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C577 `[clebsch]` [QUEUED; EV 5 — PAPER II ONLY AFTER PAPER I IS SUBMISSION-READY]** — build and referee-test a standalone factorization-memory Paper II around the conic quotient, ranks, balanced sheets, cubic orientation, profiles, modular depth, and arithmetic gluing, while inventorying rather than importing possible Paper III material → `notes/2026-07-24-clebsch-paper-split-trial.md`.
@@ -132,7 +132,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `gateway`
 
 - **C584 `[gateway]` [QUEUED]** — avatar catalogue and field-dependence table for the icosahedral six-arc / `[6,3,4]` gateway object → `notes/handoffs/2026-07-24-gateway.md`.
-- **C585 `[gateway]` [QUEUED; cheap, decisive]** — sporadicity comparison: do `beyond4` r=5 sporadic fields carry the C474 seven-gate carrier, or is the small-`q` overlap coincidental → `notes/handoffs/2026-07-24-gateway.md`.
 - **C586 `[gateway]` [QUEUED; needs C584]** — per-avatar mechanism for why rigidity is sporadic or field-uniform → `notes/handoffs/2026-07-24-gateway.md`.
 - **C589 `[gateway]` [QUEUED; needs C584–C586; C587/C588 done]** — theorem-or-framing verdict and unifying-paper scoping (decision gate); preflight: close Semantic Scholar/MathSciNet on the C588 audit before any hard priority claim → `notes/handoffs/2026-07-24-gateway.md`.
 
@@ -156,6 +155,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
+- **C590 `[ame-lu]` [ACTIVE; follow-up to C565 before theorem packages]** — complete the shared Lean foundation with the CSS stabilizer/support layer and prove the arc-to-MDS, MDS-to-AME, and projective-to-monomial-to-LC coherence bridges → `notes/2026-07-24-c590-ame-lu-lean-dictionary-bridges.md`.
 - **C566 `[ame-lu]` [GATED; after C565]** — formalize the admitted non-GRS pencil, the scalar \(z\), and the algebraic/projective implications needed by the manuscript's local-Clifford classification, exposing every geometric classification input as a named hypothesis when not formalized → `notes/2026-07-24-c566-ame-lu-lean-lc-classification.md`.
 - **C567 `[ame-lu]` [GATED; after C565]** — formalize the stabilizer marginal trace/rank formula, the concurrency-count reduction, and the exact arithmetic implication used in the uniform H3-versus-GRS arbitrary-LU separator → `notes/2026-07-24-c567-ame-lu-lean-marginal-moment.md`.
 - **C568 `[ame-lu]` [GATED; after C565]** — formalize the manuscript-facing algebra for the split-torus versus `SL_2(q)` logical-Clifford phase and the exact four-copy contraction separator, with finite group and contraction evaluations kept as explicit certificate inputs where necessary → `notes/2026-07-24-c568-ame-lu-lean-logical-phase.md`.
