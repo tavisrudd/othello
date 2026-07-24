@@ -30,7 +30,10 @@ Create an immutable release, preferably a GitHub release archived by Zenodo, con
 - the exact manuscript source and rendered PDF;
 - the C168 thirteen-source executable manifest (twelve replay commands), with every source at the
   recorded Git blob, plus the five cited Lean roots and their guarded elaboration commands;
-- the five cited Lean roots and the minimal tracked import closures needed to replay their claims;
+- exact public pins and target lists for `finitegeom` and every required external certificate
+  package; do not duplicate Lean roots or import closures in the paper repository;
+- tracked `flake.nix` and `flake.lock` files whose clean development shell resolves those public
+  pins, the Lean toolchain, and system dependencies without machine-local paths;
 - a top-level `README` giving environment setup, exact commands, expected PASS sentinels, typical
   runtime, and the distinction between strict-kernel Lean results and executable Python checks;
   it must also document the `C01`--`C15` canonical-key order, print or point to the complete class

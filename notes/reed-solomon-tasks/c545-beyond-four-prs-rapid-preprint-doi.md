@@ -61,9 +61,11 @@ These are general policies, not a substitute for the selected journal's current 
 - The public metadata identifies the object as a preprint/technical report, not peer-reviewed
   publication.
 - DOI, timestamp, version, source commit, artifact hashes, and public URLs are recorded.
-- A paper-only fresh-history public export builds and replays from a clean checkout and pins
-  exactly one shared-public-Lean commit plus its target list and axiom audit.  The development
-  monorepo is not published or used as the public release repository.
+- A paper-only fresh-history public export builds and replays from a clean checkout.  It includes
+  tracked `flake.nix` and `flake.lock` files that resolve the exact `finitegeom` commit, every
+  required external certificate-package commit, the Lean toolchain, and system dependencies
+  without machine-local paths; its target lists and axiom audits name those same pins.  The
+  development monorepo is not published or used as the public release repository.
 - The later journal manuscript contains the required disclosure/citation and uses the preprint as
   an earlier version of the same work.
 

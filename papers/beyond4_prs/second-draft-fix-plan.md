@@ -56,6 +56,7 @@ closed.
 | R3 | Give exact commands, working directories, searched domains, stop conditions, and toolchain requirements. | `supplement/REPRODUCING.md` contains literal commands and boundaries. | In this revision |
 | R4 | Create an immutable release manifest with hashes and byte counts without rewriting predecessor manifests. | Manifest names the release commit, archive identifier, and every public artifact. | Scaffolded; final hashes/DOI open until release |
 | R5 | Supply a repository URL, immutable tag/commit, and DOI or permanent archive URL. | All three resolve externally. | Open; must close before C545 |
+| R6 | Add tracked `flake.nix` and `flake.lock` to the fresh paper export, pinning `finitegeom`, every required external certificate package, the Lean toolchain, and system dependencies. | A clean checkout resolves and replays through the locked flake without machine-local paths. | Open; must close before C545 |
 
 ## Exposition and literature gates
 
@@ -156,4 +157,6 @@ completeness.
 The development monorepo is never the publication repository.  Release uses a
 reviewed paper-only fresh-history export containing the manuscript, public
 supplement, minimal verifiers/certificates, adequacy/provenance sources, and a
-pin to one shared-public-Lean commit and target list.
+tracked `flake.nix` and `flake.lock` resolving exact `finitegeom` and required
+external certificate-package commits, target lists, the Lean toolchain, and
+system dependencies without machine-local paths.

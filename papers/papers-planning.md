@@ -410,13 +410,17 @@ preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audi
 This research repo stays private (many leads still open); publish through clean, reviewed
 fresh-history repositories.
 
-- **One shared public Lean repository, incrementally tagged.** Its first reviewed tag contains the
-  exact `FiniteGeom` + mirror closure needed by the first releases. Later tagged commits add exact
-  paper-facing closures. The source is never copied into paper repositories, and the export unit is
-  never the private `lean/` tree.
+- **One human-scale shared public Lean repository, incrementally tagged.** The approved identity is
+  `github.com/tavisrudd/finitegeom`. Its first reviewed tag contains the exact human-scale
+  `FiniteGeom` + mirror closure needed by the first releases. Later tagged commits add exact
+  paper-facing closures. Heavy generated families, beginning with Q16 and Q25, live in separate
+  certificate repositories that depend one-way on pinned `finitegeom` commits. The source is never
+  copied into paper repositories, and no export unit is the private `lean/` tree.
 - **Per-paper public repo** = manuscript + minimal solver/verifier + certificates / b-files / data +
-  reproducibility README + adequacy/provenance sources. It pins one exact shared-Lean commit and
-  public target list; it contains no duplicate Lean library.
+  reproducibility README + adequacy/provenance sources + tracked `flake.nix` and `flake.lock`. The
+  flake resolves the exact pinned `finitegeom` commit, every required certificate-repository
+  commit, Lean toolchain, and system dependency without machine-local paths. The paper records the
+  corresponding public target lists and contains no duplicate Lean library.
 - **Role split:** C270 (`nofil`) owns public repository identity, metadata, release/DOI/OEIS and
   paper coordination. C287 (`build-sys`) owns the reviewed source manifest, extraction, exact target
   gates, builds, axiom audits, clean-checkout validation, and artifact portability. C270 does not
@@ -427,8 +431,9 @@ fresh-history repositories.
   arXiv code links).
 - **Order:** the numbered list is planning priority, not a hidden mathematical dependency graph.
   `arcs -> clebsch` is the hard publication-allocation edge; `nofil <-> arcs` is an ownership seam,
-  not a submission-order dependency. The first shared-Lean tag is the exact `FiniteGeom` + mirror
-  closure, validated by C287 before C270 performs any public release action with explicit authority.
+  not a submission-order dependency. The first `finitegeom` tag is the exact human-scale
+  `FiniteGeom` + mirror closure, validated by C287 before C270 performs any public release action
+  with explicit authority.
 
 ## Novelty gates & loose ends
 

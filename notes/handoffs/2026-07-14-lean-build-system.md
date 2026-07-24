@@ -101,10 +101,15 @@ per gate 5; none is allocated here until that gate is met.
 
 ## Public shared-Lean extraction
 
-C287 owns the fresh-history shared Lean repository's reviewed manifests, incremental source
-extraction, exact target builds, axiom audits, clean-checkout validation, and artifact
-pack/restore portability. The first tag is the exact `FiniteGeom` + mirror closure; later tags add
-reviewed paper-facing closures without copying Lean into paper repositories. C270 (`nofil`) owns
-public identity, metadata, DOI/OEIS and eventual user-authorized remote actions. C287 must not
-create remotes, publish, or push; C270 must not copy sources or run builds. All real validation is
-serialized through the build-owner lock and unattended queue.
+C287 owns the fresh-history shared Lean repositories' reviewed manifests, incremental source
+exports, exact target builds, axiom audits, clean-checkout validation, and artifact pack/restore
+portability. The approved main identity and local path are `github.com/tavisrudd/finitegeom` and
+`~/src/lean/finitegeom`. Heavyweight generated closures stay outside it in one-way-dependent
+certificate packages, beginning with `~/src/lean/finitegeom-q16-certificates` and
+`~/src/lean/finitegeom-q25-certificates`. The first main tag is the exact human-scale `FiniteGeom`
++ mirror closure; later tags add reviewed paper-facing closures without copying Lean into paper
+repositories. C270 (`nofil`) owns metadata, DOI/OEIS and eventual user-authorized remote actions.
+C287 must not create remotes, publish, or push; C270 must not copy sources or run builds. All real
+validation is serialized through the build-owner lock and unattended queue.
+Every paper export directory carries its own tracked `flake.nix` and `flake.lock`, resolving exact
+pins for `finitegeom`, required certificate packages, the Lean toolchain, and system dependencies.

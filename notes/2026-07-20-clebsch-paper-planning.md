@@ -498,7 +498,9 @@ does not meet either standard is banked in
    checker/certificate boundary unless separately promoted.
 5. **External read and release.**  Obtain a cold mathematical/priority read, then perform the
    mixed-verification, exact-commit pinning, provenance, rendering, and immutable-artifact steps in
-   the paper handoff.
+   the paper handoff.  The fresh paper export must carry tracked `flake.nix` and `flake.lock` files
+   that resolve the exact `finitegeom` commit, every required external certificate-package commit,
+   the Lean toolchain, and system dependencies without machine-local paths.
 6. **Survival-ledger audits.**  C464 has landed and closes the perfect-code and ternary
    minimum-support Steiner-design rows.  Its residual `K_11` edge indexing is certified, but the
    expected equivariant bridge to C450's 55 relation supports is not.  Before
