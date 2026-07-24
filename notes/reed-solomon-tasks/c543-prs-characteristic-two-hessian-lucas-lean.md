@@ -21,3 +21,19 @@ Lucas-carrier arithmetic through the degree-nine `e_7` orbit.
 
 Acceptance requires scholarly-public modules, import gates, scoped builds, exact axiom audits, and
 manuscript-ledger reconciliation.  Before any Lean operation, read `lean/AGENTS.md` completely.
+
+## Imported polar contract
+
+Reuse `RelativeConicArcs.PRSPolarInduction`; do not create a second contraction or threshold
+interface.  In particular:
+
+- instantiate `modularContractionKernel` for each Lucas/nucleus target;
+- retain ordered projective markers through
+  `iteratedProjectiveSequenceContraction_map`; and
+- express every lower-cover Hasse--Weil input through
+  `LowerCoverStratum.deletionBelowPointBaseline` and
+  `LowerCoverStratum.squaredHasseWeilDeletionBound`.
+
+The squared condition is
+`4*g^2*q < (q+1-delta)^2`, together with `delta < q+1`.  It replaces the unsound use of
+floor-rounded `Nat.sqrt q` as a sufficient real Hasse--Weil bound.

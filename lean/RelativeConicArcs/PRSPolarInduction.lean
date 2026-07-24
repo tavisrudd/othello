@@ -258,8 +258,9 @@ theorem modularContractionKernel_mono
 
 end ModularKernel
 
-/-- Arithmetic data for one identity-Frobenius splitting-cover stratum.  The displayed inequality
-is the exact Hasse--Weil deletion inequality used by the polar induction. -/
+/-- Arithmetic data for one identity-Frobenius splitting-cover stratum.  The two numerical fields
+give an integer-safe squared form of the Hasse--Weil deletion inequality: the post-deletion
+baseline is positive, and its square exceeds `4g²q`. -/
 structure LowerCoverStratum (q : ℕ) where
   /-- Genus bound for the normalization of the identity-Frobenius twist. -/
   genusBound : ℕ
@@ -267,9 +268,11 @@ structure LowerCoverStratum (q : ℕ) where
   deletionDegree : ℕ
   /-- The identity-Frobenius twist is geometrically integral. -/
   geometricallyIntegralIdentityTwist : Prop
-  /-- The numerical Hasse--Weil inequality after all declared deletions. -/
-  hasseWeilDeletionBound :
-    q + 1 > 2 * genusBound * Nat.sqrt q + deletionDegree
+  /-- At least one point remains in the `q+1` baseline before the genus correction. -/
+  deletionBelowPointBaseline : deletionDegree < q + 1
+  /-- Squared integer form of the strict Hasse--Weil inequality after all declared deletions. -/
+  squaredHasseWeilDeletionBound :
+    4 * genusBound ^ 2 * q < (q + 1 - deletionDegree) ^ 2
 
 /-- Explicit contained-versus-transverse inputs for one coherent polar family.  The finite marker
 type models the rational points of the projective line.  Its cardinality, the lower-cover

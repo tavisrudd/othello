@@ -88,6 +88,11 @@ and passed the aggregate gate without rebuilding it.  The axiom audit reports on
 count-exhaustion terminals are axiom-free.  No project-specific axiom, `sorry`, native evaluator,
 generated oracle, or external certificate is imported.
 
+The integer-safe Hasse--Weil refinement passed independent leaf elaboration and serialized run
+`run-20260724-075759-19dd456e`, including all three source modules, the axiom audit, and the
+trace-only aggregate gate.  Exact-target confirmation
+`run-20260724-080623-5ddb0251` then found the audit current and passed the aggregate trace gate.
+
 The full new Lean modules, gates, names, docstrings, and comments were reviewed for mathematical
 scope, trust-boundary disclosure, stable terminology, and forbidden workflow vocabulary.
 
@@ -107,9 +112,16 @@ family lands in the declared lower nucleus.
 
 The Tao stress test asked where the genus and deletion numbers enter.  A bare threshold would have
 hidden that geometry.  Every coherent polar input now carries explicit identity-Frobenius cover
-strata, each with geometric integrality, genus, deletion degree, and the exact Hasse--Weil deletion
-inequality; a lower witness must name one of those strata.  The finite parameter-count proof then
-uses only the declared carrier and collision budgets.
+strata, each with geometric integrality, genus, deletion degree, positive post-deletion baseline,
+and the integer-safe squared Hasse--Weil inequality; a lower witness must name one of those strata.
+The finite parameter-count proof then uses only the declared carrier and collision budgets.
+
+A user-requested extra-juice pass caught a precision defect in the first version of that arithmetic
+field: using `Nat.sqrt q` rounded downward and therefore did not by itself imply the real
+Hasse--Weil inequality.  The synthesis theorem was unaffected because witness existence was always
+an independent hypothesis.  The public stratum now records
+`deletionDegree < q+1` and
+`4*genusBound^2*q < (q+1-deletionDegree)^2`, the sound integral squared criterion.
 
 No cheap formal strengthening can remove the remaining hypotheses honestly.  Concrete
 catalecticant equations, lower-cover monodromy, group actions, and certificate semantics are
@@ -137,6 +149,9 @@ Open, with exact evidence owners:
   inputs from the R6/R7 proof records, not hidden axioms.
 - **Lower-cover geometry:** identity-twist integrality, genus/deletion calculations, and the
   rational-point theorem remain named inputs.  The formal engine checks their logical use.
+- **Why was floor square root too loose?** `Nat.sqrt q` underestimates the real square root, so the
+  corresponding strict inequality was not a sufficient Hasse--Weil check.  The squared integral
+  criterion removes the rounding direction entirely.
 - **Group-action and certificate semantics:** numerical orbit tables do not construct actions or
   validate the external enumeration.  The aggregate formalization and public replay gates retain
   those obligations.
