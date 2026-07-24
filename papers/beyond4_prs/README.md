@@ -3,7 +3,7 @@
 **Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
 coherent polar flags, and modular carriers.*
 
-**Status:** 42-page proof-complete local manuscript candidate.  The manuscript
+**Status:** 43-page proof-complete local manuscript candidate.  The manuscript
 proofs, claim-level trust map, statement-adequacy boundary, public
 classification records, certificate schema, literature audit, and rendered
 referee-polish gates are closed.  DOI publication remains gated on the

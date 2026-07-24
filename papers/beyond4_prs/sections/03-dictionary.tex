@@ -17,6 +17,29 @@ pairing is characterized by coefficient extraction.  Define
  W_f=\ker H_f\subset\Sym^{r-2}E^\vee.
 \]
 
+\begin{table}[ht]
+\centering
+\small
+\caption{Notation used from the Hankel dictionary onward.}
+\label{tab:notation}
+\begin{tabular}{cl}
+\toprule
+Symbol & Meaning\\
+\midrule
+$q$ & field size; all numerical thresholds are thresholds on prime powers\\
+$k$ & code dimension in $\PRS(k)$\\
+$r=q+1-k$ & redundancy\\
+$n=r-1$ & divided-power degree of a syndrome representative\\
+$E$ & a two-dimensional vector space over the current base field\\
+$f\in\Gamma^nE$ & divided-power representative of a projective syndrome\\
+$W_f\subset\Sym^{n-1}E^\vee$ & Hankel/apolar witness system annihilated by $f$\\
+$g,\delta,\kappa$ & genus, deletion degree, and point-bound correction\\
+$b,c$ & transverse bad-locus and marker-collision degrees\\
+$d=2^s$ & power-of-two degree used only in Section~\ref{sec:lucas}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{lemma}[Hankel criterion]\label{lem:hankel}
 Let $\lambda_1,\ldots,\lambda_{r-2}$ be distinct points of
 $\PP(E^\vee)(\F_q)$ and put $g=\prod_i\lambda_i$.  Then
@@ -51,9 +74,12 @@ covering-radius hypothesis has not been established.  Thus every deep
 syndrome in the radius-$r-1$ range is split-free, while a small-field
 split-free census is not silently promoted to a code deep-hole
 classification.
+We call a direction \emph{shallow} when \(W_f\) does contain a
+completely split squarefree form.
 
-The persistent locus is already visible here.  If every member of
-$W_f$ has a common quadratic factor, then that factor is either a
+The first locus that persists under contraction is already visible
+here.  If every member of $W_f$ has a common quadratic factor, then
+that factor is either a
 rational square, an irreducible quadratic, or a product of two distinct
 rational factors.  These are respectively the tangent deep family, the
 conjugate-secant deep family, and a shallow rational secant.  The common

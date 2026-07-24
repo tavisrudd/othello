@@ -33,11 +33,13 @@ Choose a prospective root $\lambda$, contract $f$ to
 $\iota_\lambda f$, and retain $\lambda$ as a marked forbidden root.
 Iteration gives an ordered polar flag.  Its first-polar line has two
 qualitatively different behaviors.  If it is transverse to the lower
-bad carrier and collision schemes, only finitely many parameters must
+bad locus and collision schemes, only finitely many parameters must
 be removed and a point count produces an escape.  If it is
 scheme-theoretically contained, the point-count argument says nothing:
-the persistent and modular components require a separate
-level-specific classification.
+ordinary catalecticant components and components created in small
+characteristic require a separate level-specific classification.
+Section~\ref{sec:polar} introduces the terms persistent and modular
+carriers only when that distinction enters the proof.
 
 \paragraph{Lifting.}
 On the transverse branch, a rational point of the lower ordered
@@ -113,37 +115,31 @@ normal-rational-curve nuclei and standard finite-field theory\\
 \begin{table}[H]
 \centering
 \small
-\caption{Conclusions, electronic evidence, and scope boundaries.  The
-radius gate is logically separate from the split-free classification,
-and each certificate closes only its displayed finite or algebraic
-domain.}
-\label{tab:dependency-evidence}
-\begin{tabular}{p{0.09\textwidth}p{0.29\textwidth}p{0.50\textwidth}}
+\caption{Classification status by redundancy.  ``Unconditional''
+refers to the displayed field range.  A split-free classification
+becomes a deep-hole classification only after the separate radius
+gate.}
+\label{tab:classification-status}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.05\textwidth}p{0.13\textwidth}
+                p{0.24\textwidth}p{0.27\textwidth}
+                p{0.19\textwidth}}
 \toprule
-Result & Conclusion and radius gate & Evidence and boundary\\
+Red. & Field range & Split-free geometry & Deep holes/MDS extensions
+& Remaining gap\\
 \midrule
-R5 & complete deep-hole classification for every $q\geq7$ &
-The census, canonical representatives, stabilizers, Frobenius links,
-and independent replay close the finite bridge.  They do not supply
-the all-field cubic-cover argument or radius theorem.\\
-R6 & complete deep-hole classification for every $q\geq7$ &
-The finite census and normal-form reconstruction do not replace the
-contained/transverse proof or all-field continuation.\\
-R7 & complete split-free classification; deep where $\rho=6$, in
-particular $q\geq11$ &
-The split-free census closes the finite bridge, not the structural
-continuation or covering-radius promotion.\\
-R8 & persistent-family classification for $q\geq43$ &
-The algebra and nucleus regression are not an ambient census or a
-replacement for the printed component theorem.\\
-R9 & persistent-family classification for $q\geq53$ &
-Residual and R9-49 replays check bounded algebra; Lean checks the
-synthesis implication and integer budgets.  Integrality, rational
-points, PRS identification, exhaustion, and the group action remain
-printed mathematics.\\
-Modular & component and $e_7$ results only; no R10 classification &
-The Hessian, Lucas, and $e_7$ regressions do not replace the geometric
-component proofs.\\
+$5$ & $q\geq7$ & Complete, unconditional & Complete,
+unconditional; $\rho=4$ & None\\
+$6$ & $q\geq7$ & Complete, unconditional & Complete,
+unconditional; $\rho=5$ & None\\
+$7$ & $q\geq7$ & Complete, unconditional & Complete for $q\geq11$;
+conditional on $\rho=6$ at $q=7,8,9$ & Radius at $q=7,8,9$\\
+$8$ & $q\geq43$ & Exactly the tangent and conjugate-secant families,
+unconditional in range & Complete, unconditional in range &
+Fields $7\leq q<43$\\
+$9$ & $q\geq53$ & Exactly the tangent and conjugate-secant families,
+unconditional in range & Complete, unconditional in range &
+Fields $9\leq q<53$; other carrier strata\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -167,7 +163,7 @@ Sections~\ref{sec:hessian} and~\ref{sec:lucas} are logically separate
 after the dictionary and can be read independently of the R8/R9 point
 counts.  Running the supplement is required only to reproduce the
 finite bridges, canonical orbit records, and regression or formal
-checks identified in Table~\ref{tab:dependency-evidence}; it is not a
+checks identified in Section~\ref{sec:verification}; it is not a
 substitute for any printed geometric argument.
 
 The proofs now follow these arrows in order: dictionary, redundancy-five

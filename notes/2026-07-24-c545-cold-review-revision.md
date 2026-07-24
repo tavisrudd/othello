@@ -347,3 +347,43 @@ makes that distinction auditable without another diagram.  The
 remaining mysteries and release gates are unchanged.  The rebuilt
 canonical PDF has 42 pages, 303273 bytes, and SHA-256
 `4362e132a6ce79955dd3325dca6c93317cab3818c58fe9ba1a092fd3e6a925a0`.
+
+### Conceptual-framing cold review
+
+A further cold review asked that the coherent polar flag stand beside
+the complete R5 theorem as a principal contribution, that the
+split-free/radius/deep-hole distinction become visually unavoidable,
+and that the R5-to-R6 propagation and stable conjecture carry more of
+the exposition.  The revision implements those points:
+
+- the first paragraph now names the R5 classification and coherent
+  polar flags as the two principal contributions;
+- the introduction's advance glossary is removed, with notation moved
+  to the Hankel dictionary and carrier terminology introduced only in
+  the polar-induction section;
+- a boxed implication and a five-row status table separate split-free
+  geometry, covering-radius promotion, deep-hole/MDS conclusions, and
+  the remaining gap at each redundancy;
+- the marked-root loss is explained as forgetting the removed point of
+  \(\PP^1\), whose reintroduction creates a double point when the lower
+  divisor passes through it;
+- Example~\ref{ex:q29-r6} now prints the entire contracted R5 cubic
+  pencil, its selected split member, marker avoidance, and the
+  squarefree lift back to R6; and
+- the stable-polar conjecture now opens the scope section as the
+  synthesis suggested by the fixed-level theorems, before the exact
+  gap ledger.
+
+The compact public verification map and the printed R5 representative
+and sanity tables remain in the article.  Moving them would conflict
+with the earlier referee requirement that the finite bridge be locally
+identifiable and independently auditable; exhaustive filenames,
+hashes, and machine records are already confined to the supplement.
+
+The extra-juice pass found that the marked-root explanation and the
+worked example are two forms of the same missing bridge: the former
+states why naïve contraction fails, while the latter shows the datum
+surviving through an actual R5 pencil.  No new theorem hypothesis or
+scope claim was introduced.  The canonical PDF now has 43 pages,
+305365 bytes, and SHA-256
+`eff414eae618484fa195c0dfaa3163949ae8b67b6296c4be7048a081ab0994d6`.
