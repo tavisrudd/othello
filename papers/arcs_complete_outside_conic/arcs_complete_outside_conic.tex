@@ -44,38 +44,24 @@
 \begin{abstract}
 Let $\cC$ be a nonsingular conic in $\PG(2,q)$.  We study arcs
 $A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
-$A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Starting from the
-classical first two equations for the secant-index distribution of an arc,
-we prove an exact defect identity for an arbitrary prescribed set of points
-that may remain uncovered.  Its nonnegative local remainder gives exact
-equality and quantitative stability criteria.  For a conic, writing
-$\IC(A)$ for the total incidence of the secants of $A$ with $\cC$, it gives
+$A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Splitting the
+classical first two secant-index equations over an arbitrary prescribed
+hole and its complement gives an exact defect identity whose remainder is
+a sum of nonnegative local terms.  For a conic this yields an exact integer
+lower bound \(L_2(q)\), and in particular
 \[
- q^2-k\le
- \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
- -\frac{\IC(A)}{\lfloor k/2\rfloor}
+ \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-for every $\cC$-complete $k$-arc, together with an exact equality criterion
-and, for every prime power $q$,
-\[
-\rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
-\]
-At equality, the concurrence points of disjoint secants form a matching
-design: they partition the edges of the Kneser graph $KG(k,2)$ into cliques
-of maximum order.  This gives a global rigidity theorem and a quantitative
-graph-theoretic form of stability.  For ten points, the only conic equality
-case is the regular hyperoval in $\PG(2,8)$.  We also prove an upper transfer
-by projective averaging.  In the inverse direction, when
-$q+1>\binom{k}{2}$ the complete uncovered locus canonically determines the
-parent $k$-arc and its projective-semilinear automorphism group.  We quantify
-this inverse: distinct parent arcs have loci at symmetric-difference distance
-at least \(2(q+1-\binom{k}{2})\), and beyond this gap the locus distance
-bounds first the lost secants and then the lost vertices.  Explicit witnesses
-meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective frame.
-Over $\F_{16}$, a
-certificate-checked exhaustive covering list shows that no nonzero quadratic
-contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
-hence $\rhoC(16)=9$.
+Vanishing defect turns the concurrence points of disjoint secants into a
+matching design, giving equality rigidity and quantitative stability; for
+ten points the only conic equality case is the regular hyperoval in
+\(\PG(2,8)\).  Projective averaging transfers ordinary complete arcs to
+upper bounds in the relative problem.  Explicit witnesses attain \(L_2(q)\)
+for \(q=5,8,9,11\).  Finally, a kernel-checked exhaustive covering
+certificate excludes every eight-arc over \(\F_{16}\): its ordinary
+uncovered locus cannot lie on a quadratic avoiding the arc.  A
+certificate-checked nine-point witness therefore gives
+\(\rhoC(16)=9\).
 \end{abstract}
 
 \section{Introduction}
@@ -118,43 +104,59 @@ $\PG(2,q)\setminus\cC$.  All nonsingular conics in $\PG(2,q)$ are
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
-Two theorem families organize the paper.  The forward theorem refines the
-classical secant-index equations into an exact prescribed-hole identity
-with a nonnegative local remainder.  It yields the lower bound
+The following statement collects the main conclusions.  For a point \(x\)
+outside a \(k\)-arc \(A\), let \(r(x)\) be the number of secants of \(A\)
+through \(x\), and put \(m=\lfloor k/2\rfloor\) and
+\(N=\binom{k}{2}\).  If a set \(\cH\) disjoint from \(A\) is allowed to
+remain uncovered, let \(\cX_{\cH}(A)\) be the covered points outside
+\(A\cup\cH\) and let
+\(\IH(A)=\sum_{y\in\cH}r(y)\).
+
+\begin{theorem}[Defect, lower bound, and \(q=16\)]\label{thm:main}
+For every arc \(A\) and prescribed hole \(\cH\), define
 \[
- \rhoC(q)\ge\sqrt{2q}+\frac32-\frac8{\sqrt{2q}},
+ \Delta_{\cH}(A)=
+ N(q-1)-\frac{6}{m}\binom{k}{4}
+ -\frac{\IH(A)}m-|\cX_{\cH}(A)|.
 \]
-an equality design and a quantitative stability statement.  Its conic
-specialization and a certificate-checked quadratic obstruction give
-\(\rhoC(16)=9\).  The inverse theorem starts from the complete uncovered
-locus.  When \(q+1>\binom{k}{2}\), it canonically recovers the secants and
-then the parent \(k\)-arc; a robust form bounds lost secants and vertices
-from the symmetric difference of two loci.  These are respectively the
-forward accounting and inverse reconstruction of the same secant
-arrangement.
+Then
+\[
+ m\Delta_{\cH}(A)=
+ \sum_{x\in\cX_{\cH}(A)}(r(x)-1)(m-r(x))
+ +\sum_{y\in\cH}r(y)(m-r(y)).
+\]
+In particular, if
+\[
+ L_2(q)=\min\left\{k\ge3:
+ q^2-k\le\binom{k}{2}(q-1)
+ -\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}\right\},
+\]
+then every nonsingular conic satisfies
+\[
+ \rhoC(q)\ge L_2(q)
+ \ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
+\]
+Moreover, \(\rhoC(16)=9\).
+\end{theorem}
+
+The identity is the conceptual step.  Its summands record exactly where a
+secant-index distribution falls short of the extremal pattern.  Their
+vanishing produces the matching design used for equality rigidity, while
+their total gives stability.  The last assertion of
+Theorem~\ref{thm:main} has a separate finite input: a checked augmentation
+certificate reduces all eight-arcs over \(\F_{16}\) to \(2633\) leaves,
+and checked quadratic-evaluation records reject every leaf.
 
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
 on the conic~\cite{BartoliEtAl2018}.  A line hole recovers affine
 completeness, including the related hyperfocused constructions
 \cite{NgWild2001,GiuliettiMontanucci2006,KorchmarosSzonyi2008}; see
-Corollary~\ref{cor:affine}.  Korchm\'aros--Nagy--Sz\H{o}nyi's
-subgeometry-localized theorem concerns the \((q+1)\)-secants of a
-particular curve-derived arc~\cite[Theorem~7.5]{KorchmarosNagySzonyi2024},
-rather than arbitrary holes and ordinary secants.
-
-Complete exterior sets point in the opposite direction: their joins miss
-the conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.  Thus
-\[
- \text{complete exteriority}\Rightarrow\cC(\F_q)\subseteq U(A),
- \qquad
- \text{$\cC$-completeness}\Longleftrightarrow U(A)\subseteq\cC(\F_q).
-\]
-Equality occurs for the Clebsch witness at \(q=11\).  Under the classical
-arc--MDS dictionary, the same locus is the set of projective
-distance-three syndrome directions of a codimension-three MDS system; the
-coding interpretation in Section~\ref{sec:coding} is secondary to the two
-geometric theorem families.
+Corollary~\ref{cor:affine}.  Complete exterior sets point in the opposite
+direction: their joins miss the conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.
+Thus complete exteriority gives
+\(\cC(\F_q)\subseteq U(A)\), whereas \(\cC\)-completeness is equivalent to
+\(U(A)\subseteq\cC(\F_q)\).
 
 The point-index equations themselves are classical; compare
 Hirschfeld~\cite[Chapter~9]{Hirschfeld1998}, Ball~\cite{Ball1997}, and the
@@ -174,24 +176,18 @@ concurrence points of secants in one projective plane.  The local remainder
 also measures the graph edges that fail to lie in such maximum-matching
 cliques.
 
-Sections~\ref{sec:classical}--\ref{sec:examples} form the forward geometric route:
-exact accounting, lower and upper bounds, the characteristic-two refinement,
-and the finite obstruction.  Section~\ref{sec:coding} gives the secondary
-coding reading and the $q=11$ application.  The independent geometric route
-resumes in Section~\ref{sec:reconstruction}: above a sharp incidence
-threshold, the complete uncovered locus determines its parent arc and
-automorphism group, with quantitative control under perturbation.  The
-coding section may be skipped without affecting either geometric route.
+Sections~\ref{sec:classical}--\ref{sec:examples} give the main route:
+exact accounting, equality rigidity, lower and upper bounds, the
+characteristic-two refinement, and the finite obstruction.  The short
+final section records an elementary inverse consequence: above a sharp
+incidence threshold, the complete uncovered locus determines its parent
+arc and automorphism group.
 
-The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
-correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
-claim neither those ingredients nor the known ordinary eight-arc class count.
-The contributions are the prescribed-hole remainder with its equality and
-stability consequences, its explicit conic specialization, the uncovered-locus
-evaluation obstruction, and the certified relative-conic conclusions.  The
-$q=11$ deep-hole equality is an apparently unrecorded synthesis of classical
-geometry with the relative-completeness and coding dictionaries, not a claim
-of priority for the Clebsch configuration itself.
+The secant-index equations and the Lunelli--Sce \(\sqrt{2q}\) scale are
+classical.  The contributions are the prescribed-hole remainder with its
+equality and stability consequences, its conic specialization, the
+uncovered-locus evaluation obstruction, and the certified relative-conic
+conclusions.
 
 \section{The classical secant equations}
 \label{sec:classical}
@@ -626,6 +622,7 @@ are exactly the five-secant concurrence centres, so it is
 $\cC$-complete and has zero defect.
 \end{proof}
 
+\begin{corollary}[Exact integer lower bound]\label{cor:exact-integer-bound}
 Define
 \begin{align*}
  L_1(q)&=\min\left\{k\ge3:q^2-k\le\binom{k}{2}(q-1)\right\},\\
@@ -638,12 +635,16 @@ Then
  \rhoC(q)\ge L_2(q)\ge L_1(q).
 \label{eq:L2}
 \end{equation}
-Indeed, for $q\ge3$ a set of at most two points has at most one secant, and
+\end{corollary}
+
+\begin{proof}
+For $q\ge3$ a set of at most two points has at most one secant, and
 that secant together with the set and the conic contains at most
 $2q+2<q^2+q+1$ points.  Thus a $\cC$-complete arc has at least three points,
 so the moment bound applies to the unrestricted minimum defining $\rhoC(q)$.
 The definition of $L_2(q)$ involves only integer arithmetic after
 multiplication by $\lfloor k/2\rfloor$.
+\end{proof}
 
 For calculation, the corrected capacity has the parity-dependent forms
 \begin{equation}
@@ -829,14 +830,21 @@ The other abstract design has no rank-three realization over any field.
 Mathon's classification~\cite{Mathon1981}, as recorded by Alspach and
 Heinrich~\cite{AlspachHeinrich1990}, gives two abstract designs.  The exact
 enumeration in Appendix~\ref{app:verification} independently constructs
-representatives of both classes.  After four points are normalized to a
-projective frame, their $63$ matching blocks give $189$ integral
-concurrency equations.  Exact lift identities exclude both designs in odd
-characteristic and exclude the second design in characteristic two.  For
-the regular-hyperoval design, the nondegenerate basis instead forces a root
-of $T^3+T+1$, and hence $\F_8\subseteq K$.  The regular hyperoval over
-$\F_8$ and scalar extension prove the converse.  Appendix~\ref{app:verification}
-records the certificate domains and replay boundary.
+representatives of both classes.
+
+Here is the realization test.  Normalize four vertices to a projective
+frame and represent each of the other six by two affine parameters.  For
+each matching block, the first two secants determine its proposed
+concurrence point; requiring each of the other three secants to pass through
+that point gives three determinant equations.  The \(63\) blocks therefore
+give \(189\) integral equations.  Exact module identities exclude both
+systems in odd characteristic and exclude the second design in
+characteristic two.  In the regular-hyperoval system the surviving
+triangular basis instead forces a parameter \(t\) with
+\(t^3+t+1=0\); the nondegeneracy conditions force \(t\notin\F_2\), so
+\(\F_8\subseteq K\).  The regular hyperoval over \(\F_8\) and scalar
+extension prove the converse.  Appendix~\ref{app:verification} records the
+certificate, independent checks, and replay boundary.
 \end{proof}
 
 \section{An upper-bound transfer from complete arcs}
@@ -1168,161 +1176,12 @@ set.  This contradicts Theorem~\ref{thm:q16-quadratic}.  The nine-point
 witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \end{proof}
 
-\section{Coding interpretation and the
-\texorpdfstring{$q=11$}{q=11} application}
-\label{sec:coding}
-
-This section is independent of the geometric proof of $\rhoC(16)=9$.  It
-gives a second reading of the defect identity and then applies that dictionary
-to the $q=11$ witness.
-
-Choose nonzero column representatives of a $k$-arc
-$A\subset\PG(2,q)$ and form a $3\times k$ matrix $H_A$.  For $k\ge4$, the
-code
-\[
- C_A=\{c\in\F_q^k:H_Ac^{\mathsf T}=0\}
-\]
-is a $[k,k-3,4]_q$ maximum-distance-separable (MDS) code: every three
-columns are independent, the columns span $\F_q^3$, and any four columns
-support a dependence.  Conversely, a projective parity-check system for a
-code with these parameters is a $k$-arc.  This correspondence and its
-coset-weight consequences are classical; see
-Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.
-
-We call such a code \emph{projectively GRS} when, after permuting and scaling
-columns and applying a projective coordinate change, its projective
-parity-check columns lie on a normal rational curve.  In $\PG(2,q)$ this is
-a nonsingular conic, by the standard normal-rational-curve/GRS
-correspondence~\cite{StormeThas1991}.  The next proposition translates an
-uncovered point into a distance-three syndrome direction and a secant index
-into a minimum-leader count.
-
-\begin{proposition}[Syndrome form of relative completeness]
-\label{prop:syndrome-dictionary}
-Let $s\ne0$ have projective direction $x=[s]\in\PG(2,q)$.  Then:
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
- \item the minimum weight of a word $c$ with $H_Ac^{\mathsf T}=s$ is one,
-       two, or three according as $x\in A$, $x\notin A$ lies on a secant of
-       $A$, or $x$ is ordinarily uncovered;
- \item if the minimum weight is two, the number of weight-two leaders is
-       exactly $r_A(x)$;
- \item if the minimum weight is three, the number of weight-three leaders is
-       exactly $\binom{k}{3}$; and
- \item adjoining $x$ as one more projective parity-check column preserves
-       the MDS property exactly when $x$ is ordinarily uncovered.
-\end{enumerate}
-Consequently, $A$ is complete outside a prescribed set $\cH$ exactly when
-all its projective distance-three syndrome directions lie in $\cH$ (and
-$A\cap\cH=\varnothing$).  These directions are deep-hole directions only
-when covering radius three has separately been established.
-\end{proposition}
-
-\begin{proof}
-A weight-one representation is a scalar multiple of a selected column.  A
-weight-two representation uses a unique unordered column pair whose
-projective span is a secant through $x$; independence of the pair makes its
-two coefficients unique.
-
-If neither case occurs, any three columns form a basis and represent $s$.
-For each three-subset the representation is unique, and none of its
-coefficients can vanish, so there are exactly $\binom{k}{3}$ weight-three
-leaders.  The extension statement is the same three-column independence
-test.  The leader count also follows as the $d=4$ case of the general
-farthest-coset formula in
-Davydov--Marcugini--Pambianco~\cite[Theorem~7.7]{DavydovEtAl2021}; the
-deep-hole/MDS-extension formulation is standard in the Reed--Solomon
-setting~\cite{Kaipa2017}.
-\end{proof}
-
-Thus $r_A(x)$ is the exact number of minimum weight-two leaders of every
-affine syndrome on direction $x$.  All $q-1$ nonzero scalar multiples of a
-projective syndrome direction have the same distance and leader count:
-scalar multiplication bijects their coefficient words without changing
-Hamming support.  This accounts for every projective-to-affine factor of
-$q-1$ below.
-
-The first moment counts leaders, the second counts collisions between
-distinct leader supports, and Theorem~\ref{thm:defect} is an exact
-leader-collision remainder after prescribed directions are removed.  Thus
-Corollary~\ref{cor:arbitrary-holes} is also a length obstruction for
-projective codimension-three MDS codes whose distance-three syndrome
-directions are confined to the prescribed projective set.
-
-\subsection{The Clebsch witness over
-\texorpdfstring{$\F_{11}$}{F11}}
-\label{sec:clebsch-witness}
-
-The six-point witness over $\F_{11}$ is the classical Clebsch hexagon with
-icosahedral $A_5$ symmetry; see Edge, Dye, and Storme--Van Maldeghem for the
-configuration and its orbit geometry
-\cite{Edge1956,Dye1991,StormeVanMaldeghem1995}.  Dye's edge criterion and
-the complete-exterior formulation of Blokhuis--Seress--Wilbrink show that
-its secants avoid the conic, so $\cC(\F_{11})\subseteq U(A)$
-\cite[discussion preceding Theorem~6, p.~281]{Dye1991}
-\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  The verified relative
-completeness of the witness gives the reverse inclusion and hence
-$U(A)=\cC(\F_{11})$.
-The companion manuscript~\cite{RuddClebsch2026} starts from this syndrome
-locus and develops the intrinsic rigidity, automorphism, decoding, and
-factorization theory of the Clebsch hexagon code.  Here we use only the
-locus equality, its relative-completeness consequence, and the resulting
-coset counts.
-
-The equality is stronger than complete exteriority: it identifies the
-entire uncovered locus.  By contrast, an exterior four-arc over $\F_7$ has
-$|U(A)|=(q-2)(q-3)=20>8=|\cC(\F_7)|$
-\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  Under the coding
-dictionary, the Clebsch equality says that the associated code has
-precisely the conic as its projective distance-three syndrome locus.
-
-\begin{proposition}[The $q=11$ code and coset spectrum]
-\label{prop:q11-code}
-Let $A$ be the six-point witness in Appendix~\ref{app:witnesses}, and let
-$C_A$ be its parity-check code.  Then:
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
- \item $C_A$ is a projectively non-GRS $[6,3,4]_{11}$ MDS code of covering
-       radius three, and its projective deep-hole syndrome locus is exactly
-       the twelve-point conic $\cC$;
- \item the affine cosets of distances $0,1,2,3$ number
-       $(1,60,1150,120)$, and the distance-two cosets split as
-       $(900,150,100)$ according as they have one, two, or three
-       minimum-weight leaders.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-Every witness triple has nonzero determinant and the six columns span
-$\F_{11}^3$, giving the MDS parameters.  The $6\times6$ evaluation matrix
-of the quadratic monomials
-\[
- X^2,\ XY,\ XZ,\ Y^2,\ YZ,\ Z^2
-\]
-is nonsingular, so no conic contains all six
-projective columns; by the preceding definition and the classical
-normal-rational-curve dictionary, the code is not projectively GRS.  Direct
-finite arithmetic gives the secant-index spectrum
-\[
- 0:12,\qquad 1:90,\qquad 2:15,\qquad 3:10,
-\]
-where index zero is precisely the conic.  Multiplying each nonzero
-projective direction by its ten affine scalars gives all nonzero affine
-syndromes bijectively.  Proposition~\ref{prop:syndrome-dictionary} identifies
-the determinant-zero witness pairs with weight-two leader supports;
-uniqueness on an independent support and scalar multiplication then give
-the claimed coset and leader counts.
-
-The twelve index-zero directions yield affine syndromes of distance three.
-Every syndrome has distance at most three because any three parity-check
-columns form a basis.  Hence the covering radius is three, and these twelve
-directions are exactly the projective deep-hole locus.
-\end{proof}
-
 \section{Uncovered-locus reconstruction}
 \label{sec:reconstruction}
 
-At every fixed length, the complete set of one-column MDS extensions
-eventually remembers the projective parity-check system itself.  The inverse
-map has two elementary stages.  Put $N=\binom{k}{2}$ and
+For fixed arc length and sufficiently large \(q\), the ordinary-uncovered
+locus remembers its parent arc.  The inverse map has two elementary stages.
+Put $N=\binom{k}{2}$ and
 $S=\PG(2,q)\setminus U(A)$.  First recover the secant arrangement from the
 gap between $q+1$, the number of points on a genuine secant, and $N$, the
 largest number of points in which a nonsecant line can meet the union.
@@ -1403,185 +1262,16 @@ $A$ through at least five distinct four-frames, all with the same literal
 uncovered locus $\cC(\F_5)$.
 \end{remark}
 
-\begin{lemma}[Perturbing a finite line union]
-\label{lem:line-union-perturbation}
-Let $\mathcal L$ and $\mathcal M$ be two sets of $N<q+1$ lines in
-$\PG(2,q)$.  Put
-\[
- X=\bigcup_{\ell\in\mathcal L}\ell,\qquad
- Y=\bigcup_{\ell\in\mathcal M}\ell,\qquad
- d_X=|X\setminus Y|,\qquad d_Y=|Y\setminus X|,
-\]
-and write $r=|\mathcal L\setminus\mathcal M|
-=|\mathcal M\setminus\mathcal L|$ and $\delta=q+1-N$.
-Then
-\[
- d_X,d_Y\ge r\delta-\binom r2.
-\]
-If $r>0$, then $d_X,d_Y\ge\delta$.  If $\delta\ge2$, then also
-\[
- r\binom{\delta}{2}
- \le \min\left\{\binom{d_X}{2},\binom{d_Y}{2}\right\}.
-\]
-\end{lemma}
-
-\begin{proof}
-For each $\ell\in\mathcal L\setminus\mathcal M$, the $N$ lines of
-$\mathcal M$ cover at most $N$ points of $\ell$.  Thus
-$E_\ell=\ell\setminus Y$ has at least $\delta$ points.  Distinct sets
-$E_\ell$ meet in at most one point, so the first inequality follows from
-the first two terms of inclusion--exclusion; one such set also gives
-$d_X\ge\delta$ when $r>0$.
-
-For the last inequality, each $E_\ell$ contains at least
-$\binom{\delta}{2}$ unordered pairs of points.  Pairs contributed by
-distinct lines are disjoint, since two points determine a unique line.
-All these pairs lie in $X\setminus Y$.  Interchanging $\mathcal L$ and
-$\mathcal M$ proves the corresponding statements for $d_Y$.
-\end{proof}
-
-\begin{theorem}[Separation of uncovered loci]
-\label{thm:uncovered-locus-separation}
-Let $A$ and $B$ be distinct $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
-\[
- \delta=q+1-\binom{k}{2}\ge1.
-\]
-Then
-\[
- |U(A)\mathbin{\triangle}U(B)|\ge2\delta.
-\]
-\end{theorem}
-
-\begin{proof}
-Apply Lemma~\ref{lem:line-union-perturbation} to the two secant sets.
-If they coincide, the vertex-recovery argument in
-Proposition~\ref{prop:arc-reconstruction} gives $A=B$.  Otherwise each
-one-sided difference of the two line unions has at least $\delta$ points.
-These are the two one-sided differences of the complementary uncovered
-loci.
-\end{proof}
-
-\begin{lemma}[Secant-degree correction]
-\label{lem:secant-degree-correction}
-In the setting of Theorem~\ref{thm:uncovered-locus-separation}, let $r$ be
-the number of secants of $A$ that are not secants of $B$, let $e_A(x)$ be
-the number of these lost secants through $x\in A$, and define $e_B(y)$
-analogously for the gained secants.  Put
-\[
- d_A=|U(B)\setminus U(A)|,\qquad d_B=|U(A)\setminus U(B)|,
-\]
-and set $\phi(0)=0$ and $\phi(j)=\binom{j-1}{2}$ for $j\ge1$.  Then
-\[
- \begin{split}
- d_A&\ge r\delta-\binom r2+\sum_{x\in A}\phi(e_A(x)),\\
- d_B&\ge r\delta-\binom r2+\sum_{y\in B}\phi(e_B(y)).
- \end{split}
-\]
-\end{lemma}
-
-\begin{proof}
-Let $Y$ be the union of the secants of $B$ and, for every lost secant
-$\ell$, put $E_\ell=\ell\setminus Y$.  Then
-$D_A=U(B)\setminus U(A)$ is the union of the $E_\ell$, each of which has
-at least $\delta$ points.  If $n(p)$ is the number of lost secants through
-$p$, then
-\[
- |D_A|=\sum_\ell|E_\ell|
-       -\sum_{p\in D_A}(n(p)-1).
-\]
-Every pair of lost secants has one intersection, so
-\[
- \binom r2=\sum_p\binom{n(p)}2.
-\]
-At an arc vertex $x$, one has $n(x)=e_A(x)$.  If $x\in D_A$, its
-contribution to the difference between these two overlap sums is
-\[
- \binom{e_A(x)}2-(e_A(x)-1)=\phi(e_A(x));
-\]
-if $x\notin D_A$, it is $\binom{e_A(x)}2\ge\phi(e_A(x))$.
-Pairs meeting at distinct arc vertices are disjoint.  Subtracting the
-remaining pair intersections gives the bound for $d_A$; interchange
-$A$ and $B$ for $d_B$.
-\end{proof}
-
-\begin{proposition}[Quantitative uncovered-locus reconstruction]
-\label{prop:robust-arc-reconstruction}
-Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
-\[
- N=\binom{k}{2},\qquad \delta=q+1-N\ge2,\qquad
- t=|U(A)\mathbin{\triangle}U(B)|,\qquad s=\lfloor t/2\rfloor.
-\]
-If $r$ is the number of secants lost from $A$ to $B$, then
-\[
- r\le
- \left\lfloor\frac{s(s-1)}{\delta(\delta-1)}\right\rfloor.
-\]
-If $a=|A\setminus B|$ and $h=\lfloor(k-1)/2\rfloor$, then
-\[
- 2r\ge a\bigl(k-1-\min\{a,\lfloor k/2\rfloor\}\bigr),
- \qquad
- |A\mathbin{\triangle}B|
- \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
-\]
-\end{proposition}
-
-\begin{proof}
-The smaller one-sided difference of the secant unions has size at most
-$s$.  The pair bound in Lemma~\ref{lem:line-union-perturbation} gives the
-estimate for $r$.
-
-For $x\in A\setminus B$, common secants through $x$ form a matching on
-$B$.  No matching edge can use two points of $A\cap B$, since its line
-would then contain three points of $A$.  Every edge therefore uses a
-distinct point of $B\setminus A$, so there are at most
-$\min\{a,\lfloor k/2\rfloor\}$ such secants.  Each missing vertex is
-incident with at least
-$k-1-\min\{a,\lfloor k/2\rfloor\}$ lost secants.  Summing lost degrees
-gives the first inequality.  Replacing the minimum by $\lfloor k/2\rfloor$
-gives $ha\le2r$, and $|A\mathbin{\triangle}B|=2a$ gives the second.
-\end{proof}
-
-\begin{remark}[Range and line-arrangement obstruction]
-\label{rem:robust-arc-reconstruction-range}
-The proposition is nonasymptotic and field-uniform.  Along any family for
-which $t=o(\delta\sqrt N)$, it gives $r=o(N)$ and hence
-$|A\mathbin{\triangle}B|=o(k)$.
-The scale of the line-union lemma cannot be improved for arbitrary line
-families.  If two $N$-line families share $N-r$ lines
-and their $N+r$ lines have no triple concurrence, then, whenever
-$N+r\le q+1$,
-\[
- d_X=d_Y=r\delta-\binom r2.
-\]
-Indeed, every lost line meets the $N$ comparison lines in distinct points,
-while its intersections with the other lost lines account for the
-$\binom r2$ repetitions.  A pencil is less adverse: concurrency merges
-only $r-1$ of these points.  Any improvement at this scale must therefore
-use the secant realization, not merely the two line unions.  The degree
-correction in Lemma~\ref{lem:secant-degree-correction} is the first
-such improvement: whenever the lost-edge graph has vertices of degree at
-least three, its forced concurrence recovers part of the Bonferroni loss.
-\end{remark}
-
 \section{Conclusion and further questions}
 
-The two main theorems read the same secant arrangement in opposite
-directions.  The defect identity turns its coverage multiplicities into an
-exact local remainder, retaining equality and stability data lost by the
-usual scalar count.  Conversely, the uncovered locus recovers the
-arrangement and then its vertices; distinct parents are separated by at
-least \(2(q+1-\binom{k}{2})\) points, with quantitative control beyond that
-gap.  Projective averaging and the quadratic evaluation obstruction supply
-the principal applications, including \(\rhoC(16)=9\).
-
-\begin{problem}
-Determine whether Proposition~\ref{prop:robust-arc-reconstruction} can be
-strengthened by using the rank-three secant realization together with the
-prescribed-hole defect.  The lost-edge degree correction already detects
-forced vertex concurrence, but Lemma~\ref{lem:line-union-perturbation} is
-sharp to first order for unrestricted line arrangements; a defect-coupled
-bound must also go beyond combinatorial bad-edge stability.
-\end{problem}
+The prescribed-hole identity retains the local equality and stability data
+discarded by the usual scalar secant count.  At zero defect those local
+conditions assemble into a matching design, while for a conic they sharpen
+the integer lower bound and isolate the finite obstruction at \(q=16\).
+Projective averaging supplies the complementary upper transfer.  The
+reconstruction coda shows that, above the sharp incidence threshold, the
+complete uncovered locus also remembers the secant arrangement and its
+vertices.
 
 \begin{problem}
 Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
@@ -1601,10 +1291,12 @@ appropriate exact secant-moment remainder for caps.
 \label{app:verification}
 
 The body separates mathematical reductions from finite exclusion.  The
-corresponding evidence and trust boundaries are summarized below.  The
-source supplement's \texttt{TRUST.md} manifest records
-exact commands, toolchain versions, SHA-256 digests, theorem names, and
-frozen outputs.
+corresponding evidence and trust boundaries are summarized below.  In the
+source supplement, \path{lean/RelativeConicArcs/TRUST.md} records exact
+commands, toolchain versions, SHA-256 digests, theorem names, and frozen
+outputs.  The import-only gate
+\path{lean/RelativeConicArcs/Gates/Relconic.lean} is the kernel-checking
+entry point for precisely the results used here.
 
 \begin{itemize}[leftmargin=1.5em]
 \item The companion Lean library checks the general theorem chain with
@@ -1614,20 +1306,79 @@ the standard axioms \texttt{propext}, \texttt{Classical.choice}, and
 \item For \(q=16\), Lean checks transition coverage for lists of lengths
 \(4/61/454/2633\), the \(2630+3\) leaf profile, and the arbitrary-eight-arc
 theorem.  Generator labels and deduplication are not trusted.
-\item The \(q=11\) code and syndrome claims are kernel-checked; the
-NRC/GRS dictionary is the cited classical input.  Independent programs
-regenerate the finite data.
 \item Mathon's theorem supplies abstract completeness for the ten-point
 classification through Alspach--Heinrich.  The paper-local certificate
 checks both classes and all \(189\) concurrency equations; Singular exact
 arithmetic is trusted.
 \end{itemize}
+The ten-point bundle consists of
+\texttt{check\_match10\_rank\_three.py}, its JSON certificate, and
+\texttt{check\_match10\_rank\_three.sha256} in the paper directory.
+Running
+\[
+\begin{split}
+&\texttt{nix shell nixpkgs\#singular --command}\\[-2pt]
+&\qquad\texttt{python3 check\_match10\_rank\_three.py --check}
+\end{split}
+\]
+regenerates and checks the certificate.  Singular Gr\"obner bases and
+module lifts remain trusted executions.  A second monomial order and a
+direct \(\F_8\) incidence construction provide independent checks; abstract
+two-class completeness is the cited theorem of Mathon.
+
 Lean also proves the operational asymptotic statement that every constant
 below \(3/2\) is eventually a lower bound; its literal \texttt{liminf}
-wrapper assumes coboundedness.  The rules-only witness files
-\texttt{ExampleChecks/Q5.lean} through \texttt{Q16.lean} contain the
-coordinates and field encodings referenced by Appendix~\ref{app:witnesses}.
-\phantomsection\label{app:witnesses}
+wrapper assumes coboundedness.
+
+For the \(q=16\) exclusion, the supplement contains the source generator
+\path{papers/arcs_complete_outside_conic/search_rhoc16.cpp}, its frozen
+report \path{search_rhoc16_output.txt}, and their SHA-256
+digests.  Each certified transition carries an invertible matrix and
+checked source--target scalar equalities.  The Lean checker separately
+verifies that these transitions cover every legal augmentation of the
+standard four-frame.  At the leaves it checks either six independent
+quadratic evaluation conditions or an explicit linear combination forcing
+a containing quadratic to meet the arc.  Thus the theorem trusts the Lean
+kernel and the stated classical inputs, but neither the generator's
+canonical labels nor an external claim of exhaustive execution.
+
+\section{Finite-field witnesses}\label{app:witnesses}
+
+All coordinates below are relative to the standard conic
+\[
+ \cC:\ XZ=Y^2.
+\]
+For \(q=8\) and \(q=16\), an integer is the binary coefficient vector of
+the polynomial basis \(1,\alpha,\ldots\), with
+\(\alpha^3+\alpha+1=0\) and \(\alpha^4+\alpha+1=0\), respectively.  For
+\(q=9\), the integer \(a_0+3a_1\) denotes \(a_0+a_1\alpha\), where
+\(\alpha^2+1=0\).  Coordinates for \(q=5,11\) are read modulo the prime.
+The checked witnesses are
+\[
+\begin{array}{c|l}
+q& A\\ \hline
+5&
+\{(1,0,3),(2,1,2),(3,3,4),(1,4,4)\}\\[2pt]
+8&
+\{(0,1,1),(0,1,2),(1,0,1),(1,0,2),(1,1,2),(1,1,6)\}\\[2pt]
+9&
+\{(1,0,4),(1,0,5),(1,1,0),(1,1,2),(1,2,3),(1,2,4)\}\\[2pt]
+11&
+\{(1,10,0),(1,9,1),(1,4,7),(1,8,5),(0,1,4),(1,1,7)\}\\[2pt]
+16&
+\begin{gathered}
+\{(1,5,14),(1,5,3),(1,9,2),(1,0,9),(1,13,13),\\
+\phantom{\{}(1,6,10),(1,3,9),(0,1,11),(1,10,2)\}
+\end{gathered}
+\end{array}
+\]
+The files
+\path{lean/RelativeConicArcs/ExampleChecks/Q5.lean} through
+\path{Q16.lean} check disjointness from \(\cC\), the arc condition, and
+relative coverage.  The independent verifier
+\path{papers/arcs_complete_outside_conic/verify_relative_conic_arcs.py}
+regenerates the same coverage data; its digest and frozen output are
+recorded in the trust manifest.
 
 \begin{thebibliography}{99}
 

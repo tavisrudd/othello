@@ -24,15 +24,8 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
 - a general uncovered-evaluation obstruction for exceptional loci drawn from a finite-dimensional
   linear system of homogeneous forms, strengthened to an exact at-most-`q` finite-field
   evaluation-avoidance dichotomy for arbitrary feature maps (hence every Veronese degree);
-- a coding restatement in which plane arcs are codimension-three MDS parity-check systems,
-  secant index is the exact weight-two leader count, and the prescribed-hole defect is an exact
-  leader-collision identity; equivalently, relative completeness confines all projective
-  distance-three syndrome directions to the prescribed algebraic locus;
 - verified small values: ρ_𝒞(5) = 4, ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6, and
   ρ_𝒞(16) = 9;
-- for the `q=11` witness, a non-GRS `[6,3,4]₁₁` MDS code of covering radius three with
-  exact conic deep-hole locus, coset distribution, chord decomposition, and icosahedral extension
-  polynomial `1+12t+36t²+20t³`;
 - the stronger q=16 classification theorem: no nonzero quadratic zero set, singular or
   nonsingular, contains an eight-arc's ordinary-uncovered locus while avoiding the arc.
 
@@ -70,30 +63,7 @@ From this directory, reproduce the report and emitted Lean data with
 report is the combined standard output/error
 stream from that run.
 
-**Small-order structural note.** The `q=11` witness has `I_C=0`, so all 15 of its secants are
-exterior to the conic. Its associated code is a projectively non-GRS `[6,3,4]₁₁` MDS code
-of covering radius three; the twelve conic directions are exactly its projective deep holes. The
-affine coset-distance distribution is `(1,60,1150,120)`, and
-`affine_distanceThree_iff_mem_standardConic` identifies actual distance-three affine syndrome
-rays with the standard conic. The distance-two cosets have one,
-two, or three actual minimum-weight coefficient words in counts `(900,150,100)`. Lean proves the
-133-by-10 ray normalization is a bijection onto all nonzero affine syndromes, characterizes the
-counted sets by actual parity-check distance, and identifies determinant-zero pairs with actual
-word supports before counting. Simultaneous conic-column extensions form the
-icosahedron independence complex, with polynomial `1+12t+36t²+20t³`, six maximal
-two-extensions, and twenty maximal three-extensions; a named theorem upgrades every such maximal
-set to an ordinary complete arc. The six near-perfect chord classes augment by six distinct
-antipodal edges to a certified one-factorization. This six-set is a classical Clebsch hexagon and
-its all-secants-exterior property overlaps the classical exterior-set setting of
-Blokhuis--Seress--Wilbrink (1992). In modern uncovered-locus notation BSW and Dye supply
-`C(F_11) subset U(A)`; Dye's ten-concurrence theorem plus the chord-defect count gives the
-reverse inclusion by cardinality. Thus the equality is an apparently unrecorded short synthesis,
-not a newly discovered classical configuration;
-the exact code/extension conjunction is presented as a checked synthesis, not a novelty claim.
-The two notions are now separated explicitly in the manuscript:
-complete exteriority gives `C(F_q) subset U(A)`, whereas completeness outside the prescribed
-conic is `U(A) subset C(F_q)`. BSW's `q=7` exterior four-arc is a strict foil, since the universal
-four-arc count gives `|U(A)|=(q-2)(q-3)=20>8=|C(F_7)|`.
+**Companion material.** The coding, coset-spectrum, and Clebsch-hexagon consequences of the q=11 witness now belong to the separate Clebsch manuscript; this paper retains only the geometric witness and exact relative value.
 
 **Novelty posture (self-stated):** the ordinary `PG(2,16)` count of 2633 eight-arc classes is
 known. The general evaluation lemma is elementary linear algebra, and quadrics containing arcs
