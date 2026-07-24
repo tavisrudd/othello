@@ -802,10 +802,28 @@ opponent stabilizer is trivial, so transport does not determine the reply. Exact
 counterexample, but all 7,090 lower-kernel targets are already `Ω=0`; q19 likewise has only one
 positive-target layer at the tested root, then boundary absorption. Restoring the fixed pair makes
 the leaf a twelve-cap, so `capOK⇒q≤66` proves this fixed-size absorption cannot be uniform. The only
-live `Rmax` theorem is scale-aware: a growing family `F_s` closed under positive-target exchanges
-until the square-root barrier. No such family is known, and the finite data contain no repeated
-positive-target layer. Report+certificates:
+uniform route must instead use a growing family closed under positive-target exchanges until the
+square-root barrier. The boundary-or-retention family in the next bullet is the first such
+formulation; the finite data still contain no repeated positive-target layer. Report+certificates:
 [`../2026-07-24-c80-marked-head-and-bulk-audit.md`](../2026-07-24-c80-marked-head-and-bulk-audit.md).
+
+**A scale-aware survivor family is now formulated and passes the finite gate (C80,
+2026-07-24), while both load-profile extremes are falsified.**  For `0≤α≤1`, the
+boundary-or-retention packet admits every `Y_NK` target and every positive strict-overload
+target retaining at least an `α` fraction of the maximum available target overload; its
+well-founded restricted kernel is `F_α`.  Then `F_α⊆K_Ω⊆P`, the families are nested, and
+`F_0=K_Ω`.  Exact Bellman replay gives minimum retention strength `1` at q11/q13 and
+`20/51` across the five q17 kernel roots, so `F_{1/4}` contains every tested q11/q13/q17
+root.  The q19 out-of-sample root passes 25%, 40%, 50%, and 75% but fails 90%.  In contrast,
+fastest total descent, lower overload-vector majorization, slowest total descent, and the
+four-coordinate reservoir Pareto family each keep 0/5 q17 roots; upper majorization keeps
+1/5.  Unmarked state profiles remain kernel-membership-mixed (48/57 scalar and 120/690
+full load profiles).  This is the first growing positive-overload family to survive the finite gate,
+but it is still a recursive semantic compression: no q-independent positive lower bound on
+retention strength is proved, and the data do not reach the forced `sqrt(q)`-depth regime.
+Next prove or falsify `inf_q ρ(S_q)>0` using opponent-marked conic/secant algebra; C82 stays
+gated.  Report+script+certificate:
+[`../2026-07-24-c80-scale-survivor-falsifiers.md`](../2026-07-24-c80-scale-survivor-falsifiers.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
@@ -836,17 +854,18 @@ Priority order and why:
    `capOK` does not force P. Total capacity-two overload `Ω` is the exact absorption clock.
    The canonical maximal strict-overload family `K_Ω` is now defined value-independently from the
    `Y_NK` boundary; well-founded induction proves it P, and exact q=5/7/13/17 gates pass. The live
-   first geometric compression is `Rmax`, the maximal-overload-drop packet. Its apparent q17/q19
-   bulk success is now explained as direct twelve-cap `Y_NK` absorption, hence nonuniform beyond
-q=66; the twelve q17 head exceptions still form five marked conic-projective orbits, mostly
-rigid. The live version must be scale-aware: formulate a growing positive-overload survivor
-family `F_s` and prove/falsify repeated `Rmax` exchange closure until the square-root barrier. If
-`s_even(q)` is the least even `s` with `q≤binom(s,2)`, any escape-root strategy needs at least
-`(s_even(q)-8)/2` positive-overload response targets before absorption, asymptotic to
-`sqrt(q/2)-4`.
-   The current finite domains contain only one positive-target layer, so do not mine another
-   bounded-depth selector, stabilizer signature, bounded-gadget patch, or terminal guard. Only a
-   uniform growing-depth head+bulk membership proof releases C82.
+   first geometric compression `Rmax` is nonuniform beyond q=66, and both overload-vector
+   extremes are now closed-negative at q17.  The surviving scale-aware compression is the nested
+   boundary-or-retention family `F_α⊆K_Ω`: `F_{1/4}` contains every tested q11/q13/q17 kernel
+   root, with exact q17 minimum strength `20/51`, and the q19 probe passes through 75%.
+   If `s_even(q)` is the least even `s` with `q≤binom(s,2)`, any escape-root strategy still needs
+   at least `(s_even(q)-8)/2` positive-overload response targets before absorption, asymptotic to
+   `sqrt(q/2)-4`.  The finite data do not enter that growing-depth regime.  The live theorem is
+   now `inf_q ρ(S_q)>0`, or a marked-algebraic refinement if false; use the original conic/frame
+   and opponent--reply secant data, since unmarked overload profiles are
+   kernel-membership-mixed.  Do not mine another bounded-depth selector, stabilizer signature,
+   bounded-gadget patch, terminal guard, or unmarked load potential.  Only a uniform growing-depth
+   membership proof releases C82.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.
