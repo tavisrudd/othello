@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; all reviewed C420--C428, C494, and C503--C507 slices admitted
+**Status:** active; implementation is at the final clean-release run, then user-launched review
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -14,16 +14,16 @@ conceptual/citation-backed, or mixed.
 On 2026-07-23 the user explicitly authorized C320 to begin while C507 was underway, with the C505
 and C507 results to be admitted when ready.  This overrides the start-order gate but not the
 release gate.  Both slices have now delivered final reviewed implementations and are admitted
-below.  C320 remains live: the replacement manuscript, stable evidence migration, complete
-claim manifest, tracked paper audit, deterministic adequacy appendix, final verify-all output, and
-independent review are still required before release.
+below.  The replacement-spine manuscript, stable public evidence bundles, complete claim manifest,
+tracked aggregate paper audit, and deterministic adequacy appendix have now landed.  C320 remains
+live only through the final clean-release output and the mandatory user-launched independent review.
 
-The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is still the protected
-19-page baseline.  It is not the replacement-spine manuscript described by
-`notes/2026-07-21-clebsch-paper-abstract-outline.md`.  Consequently the current baseline statement
-inventory and the adopted replacement-spine claim inventory are tracked separately.  No planned
-claim inherits a trust route merely because a related terminal already exists, and no baseline
-statement is silently dropped before the final manuscript edit makes that deletion explicit.
+The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is now the replacement-spine
+manuscript described by `notes/2026-07-21-clebsch-paper-abstract-outline.md`; the historical
+19-page baseline is no longer the release manuscript.  The manifest derives its identities from
+the final manuscript itself: 27 theorem-like environments and 30 separately hashed prose/table
+claims produce 57 exact claim rows.  No claim inherits a trust route merely because a related
+terminal exists.
 
 The repaired C507 implementation `9a388b41` plus its final user-launched review `GO` provide the
 exact admission boundary below.  Its lifecycle closure is committed, its live-queue row is absent,
@@ -381,6 +381,69 @@ an “independent check” does not satisfy C320's final trust route.
    Lean paths start at the extracted shared-Lean root, and the verifier accepts that root through
    `--lean-root`.  No public command, manifest row, or evidence script may depend on
    `papers/clebsch-hexagon-code`, the monorepo `lean/` prefix, or `notes/`.
+
+## Final implementation and reconciliation record
+
+The release manuscript now follows the selected C406+C411 replacement spine and closes with the
+C480/C486/C487 torsor Rosetta result.  Its five headline blocks are A--D plus the closing theorem
+E.  The survival ledger distinguishes retained finite shadows from proved erasures, C412 is
+included only at its exact projective-cover/Tate-plane boundary, C471's optional degeneration
+shadow is omitted, and C479 remains absent.  The historical smooth/genus-three C02 sentence was
+removed, so the Singular calculation is no longer load-bearing and C321 is not triggered.
+
+The proof hierarchy is explicit.  Headline proofs must reveal a mechanism; exact computations may
+remain second-tier, load-bearing certificates for frozen orbit, rank, and normalizer hypotheses.
+Three computation-facing results earned proof promotion: the split--inert frame lemma, the
+conditional mod-40 reciprocity proposition, and the determinant-sign transport/no-section lemma.
+The last was strengthened to the actual Rosetta mechanism: once a two-point row is verified to
+carry the determinant character, equivariant transport forces its identification with the common
+torsor after one marking.  The conceptual rigidity replacement, a representation-free
+Witt/secant/Mathieu exhaustion, uniform theta/quantum statements, and a general information-lattice
+functor did not meet that bar and are banked with reopening conditions in the discovery track.
+
+Public evidence is now self-contained under the paper root:
+
+- `verification/evidence/torsor_dictionary/` contains the adopted generators, exact artifacts,
+  independent replays, semantic README, and a fail-closed bundle verifier;
+- `verification/evidence/passage_interfaces/` does the same for the theta, Fourier, and
+  fixed-party passage tests;
+- `verification/statement_adequacy.json` records all 27 exact theorem-like environments;
+- `verification/trust_manifest.json` contains 57 claim rows with one explicit route or mixed
+  decomposition per row, the pinned shared-Lean commit
+  `223584997c5691a60c066d865c0a0e449a38cd21`, exact gate/audit hashes, terminal-local axiom
+  lists, cited inputs, residual trust, and the complete release check list; and
+- `verification/verify_release.py` validates both flattened repositories, runs the paper checks,
+  evidence bundles, pinned Mathlib-cache setup, and the exact aggregate Lean target, and rejects
+  any source-tree mutation.
+
+The aggregate Lean gate and durable axiom audit landed in commit
+`223584997c5691a60c066d865c0a0e449a38cd21`.  Paper evidence migration landed in commits
+`be274713` and `c39d2846`; the replacement manuscript and first manifest landed through
+`70c39f78`, and proof promotion/discovery banking through `f67f5f51`.  Planning reconciliation
+landed in `3ee4476f`.  Later release-only commits are recorded below after the final deterministic
+output is cut.
+
+Reconciliation judgments with paper effects:
+
+1. The torsor is the determinant-sign class `T_q` at each split working prime, not an asserted
+   cross-characteristic scheme.  The characteristic-zero resolvent specializes specifically to
+   `T_11`; the `M_12` row is an acting face, not an additional two-point carrier.
+2. `A_3` is the fused connected étale control.  The two geometric roots form one Frobenius orbit;
+   it has no orientation bit over `F_5`.
+3. The mod-40 result is conditional on the frozen golden-marker hypotheses.  Reciprocity and CRT
+   prove the residue partition, but the manuscript makes no all-prime density or common-carrier
+   claim.
+4. The profile plane, sheet torsor, relative-cubic Tate plane, and fixed-child quotient are not
+   silently identified.  Every positive comparison and every proved non-identification is stated
+   at its actual boundary.
+5. The Hofstadter citation and record-player metaphor are mathematical exposition only.  Any
+   physical record is post-acceptance: representative selection and certificate checking must be
+   disclosed to the editor, and the printed ignition line/hash is cut only then.
+6. C471 is omitted because no adopted public replay supports even its optional shadow sentence.
+   Reopen only after an adequate public artifact and a fresh manuscript-value judgment.
+7. The only external release dependency not manufactured by C320 is the immutable C182 archive/DOI.
+   It does not weaken the local trust run, but publication packaging cannot claim an immutable DOI
+   until C182 supplies it.
 
 ## Required outcome
 

@@ -55,7 +55,7 @@
               "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -101,7 +101,7 @@
               "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -175,7 +175,7 @@
               "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -275,7 +275,7 @@
               "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -334,7 +334,7 @@
               "RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -421,7 +421,7 @@
               "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -492,7 +492,7 @@
               "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -548,7 +548,7 @@
               "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -610,7 +610,7 @@
               "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -681,7 +681,7 @@
               "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -750,7 +750,7 @@
               "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -825,7 +825,7 @@
               "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -923,7 +923,7 @@
               "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -998,7 +998,7 @@
               "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1080,7 +1080,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1172,7 +1172,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1264,7 +1264,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1371,7 +1371,7 @@
           "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -1453,7 +1453,7 @@
           "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -1543,7 +1543,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1648,7 +1648,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1753,7 +1753,7 @@
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -1892,7 +1892,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2029,7 +2029,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2166,7 +2166,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2316,7 +2316,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2466,7 +2466,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2616,7 +2616,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -2683,7 +2683,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 414",
+      "paper_location": "proposition at source line 424",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:a5-point-orbits",
@@ -2725,7 +2725,7 @@
         }
       ],
       "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 484",
+      "paper_location": "proposition at source line 494",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-holes-conic",
@@ -2741,7 +2741,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 519",
+      "paper_location": "corollary at source line 529",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "cor:named-variety",
@@ -2783,7 +2783,7 @@
         }
       ],
       "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 556",
+      "paper_location": "proposition at source line 566",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-hole-orbit",
@@ -2824,7 +2824,7 @@
         }
       ],
       "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 604",
+      "paper_location": "proposition at source line 614",
       "route": "mixed",
       "source": {
         "claim_key": "prop:decoding-oracle",
@@ -2840,7 +2840,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 691",
+      "paper_location": "lemma at source line 701",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:six-arc-line-bound",
@@ -2882,7 +2882,7 @@
         }
       ],
       "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 726",
+      "paper_location": "theorem at source line 736",
       "route": "mixed",
       "source": {
         "claim_key": "thm:rigidity",
@@ -2907,7 +2907,7 @@
         "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
       },
       "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 794",
+      "paper_location": "proposition at source line 804",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "prop:low-degree-rigidity",
@@ -2923,7 +2923,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 819",
+      "paper_location": "corollary at source line 829",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "corollary:aec192b0d5224cce",
@@ -2954,7 +2954,7 @@
         "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
       "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 868",
+      "paper_location": "theorem at source line 878",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "thm:gap",
@@ -2995,7 +2995,7 @@
         }
       ],
       "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1006",
+      "paper_location": "proposition at source line 1016",
       "route": "mixed",
       "source": {
         "claim_key": "prop:brianchon-support",
@@ -3036,7 +3036,7 @@
         }
       ],
       "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1056",
+      "paper_location": "corollary at source line 1066",
       "route": "mixed",
       "source": {
         "claim_key": "cor:decoder-brianchon",
@@ -3082,7 +3082,7 @@
         }
       ],
       "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1072",
+      "paper_location": "proposition at source line 1082",
       "route": "mixed",
       "source": {
         "claim_key": "prop:chirality",
@@ -3098,7 +3098,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1121",
+      "paper_location": "lemma at source line 1131",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:chord-defect",
@@ -3140,12 +3140,12 @@
         }
       ],
       "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1151",
+      "paper_location": "theorem at source line 1161",
       "route": "mixed",
       "source": {
         "claim_key": "thm:why11",
         "kind": "theorem-environment",
-        "sha256": "71416d9d18fffda49a93e49966f5af030027e4585f8fdfb31d34c87b802fd2f1"
+        "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -3181,7 +3181,7 @@
         }
       ],
       "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1198",
+      "paper_location": "proposition at source line 1208",
       "route": "mixed",
       "source": {
         "claim_key": "prop:clebsch-family-uncovered",
@@ -3222,7 +3222,7 @@
         }
       ],
       "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1268",
+      "paper_location": "proposition at source line 1278",
       "route": "mixed",
       "source": {
         "claim_key": "prop:h3-arrangement",
@@ -3263,7 +3263,7 @@
         }
       ],
       "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1347",
+      "paper_location": "theorem at source line 1357",
       "route": "mixed",
       "source": {
         "claim_key": "thm:small-k-conic-filling",
@@ -3279,7 +3279,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1556",
+      "paper_location": "proposition at source line 1566",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -3354,7 +3354,7 @@
               "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -3367,7 +3367,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1611",
+      "paper_location": "lemma at source line 1621",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -3417,7 +3417,7 @@
               "RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -3430,7 +3430,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 1717",
+      "paper_location": "proposition at source line 1727",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -3503,7 +3503,7 @@
               "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -3516,12 +3516,12 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 1751",
+      "paper_location": "lemma at source line 1761",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
         "kind": "theorem-environment",
-        "sha256": "2a2699141115cf882d5e0f9a3a73abd46bdf99cb2181bcacbd3e23ea2d501e2b"
+        "sha256": "5a2586f894c80fc85c2931d0e7843b1fbcd5aa5a11d4eb18c4b7a3d7863c3489"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -3664,7 +3664,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -3850,7 +3850,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -4036,7 +4036,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -4222,7 +4222,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -4408,7 +4408,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -4459,7 +4459,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1770",
+      "paper_location": "theorem at source line 1791",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -4607,7 +4607,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -4806,7 +4806,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5005,7 +5005,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5204,7 +5204,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5403,7 +5403,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5516,7 +5516,7 @@
           "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -5575,7 +5575,7 @@
           "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -5657,7 +5657,7 @@
           "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -5746,7 +5746,7 @@
           "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
         ],
         "validation": {
-          "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
           "output": {
             "path": "verification/clebsch_paper_trust/axiom-audit.txt",
             "repository": "lean",
@@ -5831,7 +5831,7 @@
               "RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5912,7 +5912,7 @@
               "RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -5993,7 +5993,7 @@
               "RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -6092,7 +6092,7 @@
               "RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -6191,7 +6191,7 @@
               "RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence"
             ],
             "validation": {
-              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
               "output": {
                 "path": "verification/clebsch_paper_trust/axiom-audit.txt",
                 "repository": "lean",
@@ -6256,7 +6256,7 @@
     "commit": "223584997c5691a60c066d865c0a0e449a38cd21",
     "url": "urn:repository:relative-conic-arcs-lean"
   },
-  "manuscript_sha256": "f0a70b77278c06a8fddd1b42cc6b134a864d80a984b678818443e4ff2b1bb275",
+  "manuscript_sha256": "74091f682e1bc74487928472ad4f84be09c8ed8536d9f2faf92b263b289fd657",
   "schema": "clebsch-trust-manifest-v1",
   "verify_all": {
     "checks": [
@@ -6413,8 +6413,29 @@
       },
       {
         "argv": [
-          "scripts/guarded-lean",
-          "RelativeConicArcs/Gates/ClebschPaperTrust.lean"
+          "nix",
+          "develop",
+          "--command",
+          "lake",
+          "exe",
+          "cache",
+          "get"
+        ],
+        "cwd": ".",
+        "id": "lean-mathlib-cache",
+        "repository": "lean",
+        "timeout_seconds": 900
+      },
+      {
+        "argv": [
+          "nix",
+          "develop",
+          "--command",
+          "env",
+          "LEAN_NUM_THREADS=1",
+          "lake",
+          "build",
+          "RelativeConicArcs.Gates.ClebschPaperTrust"
         ],
         "cwd": ".",
         "id": "lean-paper-trust-gate",

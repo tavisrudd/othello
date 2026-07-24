@@ -1007,6 +1007,13 @@ published open problems and questions newly posed by this project.
 
 ## 2026-07-23 — Paper-I proof-promotion screen
 
+- **Promotion rule.**  Prefer `computation -> mechanism -> theorem`: a
+  headline proof should explain why the phenomenon is forced and should
+  expose a reusable structure.  A finite proof may still certify a
+  load-bearing frozen orbit, rank, or normalizer claim needed by a headline,
+  but it remains second-tier supporting evidence.  Do not demote a supported
+  headline merely because a finite endpoint is needed; first seek and prove
+  the mechanism that organizes that endpoint.
 - Three computation-facing statements earn promotion because they replace trust dependencies in
   the central close with short complete arguments: the A3/B3/H3 split--inert frame calculation
   (squares and quadratic factorization), the conditional mod-40 law (quadratic reciprocity plus

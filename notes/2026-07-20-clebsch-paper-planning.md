@@ -469,6 +469,15 @@ lemmas or scope controls they supply.  C456/C467 enter as the exact quantum-eras
 positive chirality face.  C457/C459/C462/C463/C466/C468 remain sequel pointers even though their
 certificates are complete.
 
+The proof-promotion rule is now explicit: prefer
+`computation -> mechanism -> theorem`.  A headline earns its place by
+revealing why the phenomenon is forced and by exposing reusable structure.
+Exact finite proofs may remain load-bearing second-tier certificates for
+frozen orbit, rank, or normalizer hypotheses; their presence is not a
+reason to demote an otherwise explanatory headline.  A new theorem that
+does not meet either standard is banked in
+`2026-07-14-clebsch-discovery-track.md`, with a condition for reopening it.
+
 ## Remaining decision gates
 
 1. **Conceptual proof — complete and modularly sharpened.**  C411 replaces the 22-matching table by subgroup marks, six

@@ -16,6 +16,11 @@ STATEMENTS = ROOT / "verification" / "statement_adequacy.json"
 OUTPUT = ROOT / "verification" / "trust_manifest.json"
 AUDIT_PATH = "verification/clebsch_paper_trust/axiom-audit.txt"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschPaperTrust.lean"
+GATE_TARGET = "RelativeConicArcs.Gates.ClebschPaperTrust"
+GATE_COMMAND = (
+    "nix develop --command env LEAN_NUM_THREADS=1 "
+    f"lake build {GATE_TARGET}"
+)
 PINNED_LEAN_COMMIT = "223584997c5691a60c066d865c0a0e449a38cd21"
 
 
@@ -172,7 +177,7 @@ def lean_component(subclaim: str, groups: list[str]) -> dict[str, object]:
             "terminals": terminals,
             "axioms": {terminal: AXIOMS[terminal] for terminal in terminals},
             "validation": {
-                "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+                "command": GATE_COMMAND,
                 "output": file_evidence("lean", AUDIT_PATH),
             },
         },
@@ -456,10 +461,34 @@ def checks() -> list[dict[str, object]]:
                 "timeout_seconds": 1800,
             },
             {
+                "id": "lean-mathlib-cache",
+                "repository": "lean",
+                "cwd": ".",
+                "argv": [
+                    "nix",
+                    "develop",
+                    "--command",
+                    "lake",
+                    "exe",
+                    "cache",
+                    "get",
+                ],
+                "timeout_seconds": 900,
+            },
+            {
                 "id": "lean-paper-trust-gate",
                 "repository": "lean",
                 "cwd": ".",
-                "argv": ["scripts/guarded-lean", GATE_PATH],
+                "argv": [
+                    "nix",
+                    "develop",
+                    "--command",
+                    "env",
+                    "LEAN_NUM_THREADS=1",
+                    "lake",
+                    "build",
+                    GATE_TARGET,
+                ],
                 "timeout_seconds": 1800,
             },
         ]

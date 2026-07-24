@@ -329,6 +329,16 @@ is not the two-element sheet set.  Sections
 \ref{sec:factorization}--\ref{sec:survival} prove the new arrows after the
 rigidity and Coxeter inputs have been established.
 
+\paragraph{How the proofs divide.}
+The headline arguments isolate mechanisms: the Pl\"ucker relation remembers
+factorization modulo the conic ideal; an annihilator line forces the
+balanced sheets; antipodality and the primitive $1:4:6$ relation force
+cubic-first orientation; projective-cover structure explains the depth
+plane; and determinant-sign descent identifies the surviving bit.  Exact
+finite computations verify the frozen orbit, rank, and normalizer
+hypotheses used by these arguments.  They are supporting certificates; the
+preceding structures explain the headline theorems.
+
 \paragraph{Independence and extension.}
 The unlabelled child admits no equivariant selector of a parent, whereas a
 marked matching supplies exactly the one bit needed to make the selection.
@@ -1152,7 +1162,7 @@ display follows on setting $|\cU(A)|=q+1$.
 \label{thm:why11}
 Let $q$ be a prime power. If a six-arc $A\subset\PG(2,q)$ satisfies
 $\cU(A)=\cC(\F_q)$ for some nonsingular conic $\cC$, then $q=11$.
-Moreover, at $q=11$ every such $A$ is projectively equivalent to the
+At $q=11$ every such $A$ is projectively equivalent to the
 Clebsch hexagon.
 \end{theorem}
 
@@ -1446,9 +1456,9 @@ reduction of the three displayed Coxeter matching orbits gives
 \]
 The symbolic conic Laplacian decomposes the degree-$1,2,4$ homogeneous
 pieces into harmonic and radial parts at the stated characteristics; (9.1)
-is the bridge placing switch differences in the radial summand.  Equation
-(9.2), however, is a finite factorization-image rank statement, not merely
-a consequence of the symbolic dimension formulas.
+is the bridge placing switch differences in the radial summand.  The
+symbolic dimension formulas do not imply the finite factorization-image
+ranks in (9.2); those ranks require the displayed coordinate calculation.
 
 \paragraph{Proof of Theorem \ref{thm:headline-balanced}(B1--B2).}
 The pullback formula and Pl\"ucker identity prove (B1).  The generic
@@ -1748,13 +1758,18 @@ signed-transpose identity, and complete fixed-party kernel--image
 equivalence.  It does not classify arbitrary complex local unitaries or
 assert a canonical geometric reconstruction of every state.
 
-\begin{lemma}[The sign torsor has no unmarked section]
+\begin{lemma}[Determinant-sign transport and the no-section obstruction]
 \label{lem:sign-torsor-no-section}
 Let $\chi:G\to C_2$ be surjective and put $H=\ker\chi$.  Then $G/H$ is a
-free transitive $C_2$-torsor with no $G$-fixed point.  A $G$-equivariant
-choice of one of its points therefore does not exist, while adjoining one
-chosen point supplies exactly one bit and determines every
-$C_2$-equivariant realization of the same torsor.
+free transitive $C_2$-torsor with no $G$-fixed point.  More precisely, if
+$X$ is any two-point $G$-set on which $G$ acts through $\chi$, then for
+each $x\in X$ there is a unique $G$-equivariant bijection
+\[
+ G/H\longrightarrow X
+\]
+sending $H$ to $x$.  Thus all such two-valued carriers are realizations of
+one torsor: comparing them requires exactly one marking bit, and no
+$G$-equivariant marking exists before that bit is adjoined.
 \end{lemma}
 
 \begin{proof}
@@ -1762,9 +1777,15 @@ The first isomorphism theorem identifies $G/H$ with $C_2$ as a
 $G$-set, where $G$ acts through the surjection $\chi$.  Surjectivity makes
 the nontrivial element exchange the two points, so neither is fixed.  A
 $G$-equivariant choice from an unmarked singleton base would have fixed
-image and is impossible.  Conversely a chosen point labels the two
-elements by $0$ and $1$; equivariance then transports that choice uniquely
-through any torsor isomorphism.
+image and is impossible.  Given $x\in X$, the only possible equivariant
+map is
+\[
+ gH\longmapsto g\cdot x.
+\]
+It is well defined because $H$ acts trivially, and it is bijective because
+the nontrivial coset exchanges the two points.  Its value at $H$ proves
+uniqueness.  The two choices of $x$ are therefore precisely the two
+possible markings.
 \end{proof}
 
 \begin{theorem}[Torsor Rosetta: one class and one forced outer swap]
@@ -1808,11 +1829,16 @@ fibre.
 \end{theorem}
 
 \begin{proof}
-The matching, unipotent, period, split-prime, Weil, and reduction
-dictionaries identify the first seven rows with the determinant-sign
-torsor.  Exact outer-element calculations add the QR/Barker and signed
-Fourier rows.  The normalizer and two-parent computations give the forced
-outer Mathieu clause.  The characteristic-zero resolvent
+For every available row, the finite calculation verifies the same
+structural hypothesis: it is a two-point $G$-set and the action on it is
+the character $\operatorname{sgn}$.  Lemma~\ref{lem:sign-torsor-no-section}
+then forces its identification with $T_q$ after one point is marked.  This
+single quotient-action argument organizes all twelve rows.  The
+matching, unipotent, period, split-prime, Weil, and reduction calculations
+verify that hypothesis for the first seven rows.  Exact outer-element
+calculations verify it for the QR/Barker and signed Fourier rows.  The
+normalizer and two-parent computations give the forced outer Mathieu
+clause.  The characteristic-zero resolvent
 $\operatorname{Spec}\mathbb Q(\sqrt5)$ reduces at eleven to the two golden
 fibres, and the fixed-child computation identifies its two-sheet quotient
 with the same matching orbit.  The two comparison squares identify the
@@ -1874,7 +1900,7 @@ theta, Fourier, and fixed-party passages
 & \path{verification/evidence/passage_interfaces/verify.py}\\
 \bottomrule
 \end{tabular}
-\caption{Verification map for the factorization-memory spine.  Sharing a
+\caption{Verification map for the factorization-memory results.  Sharing a
 gate does not merge claim routes: the trust manifest names the adequate
 terminal and axiom list separately for each row.}
 \label{tab:factorization-verification}
@@ -2137,13 +2163,15 @@ satisfy the exact restricted identities, but this does not turn the
 quotient spaces into small Weil modules.  Orientation is carried by
 specific comparison data, not by every natural invariant of the objects.
 
-The torsor-Rosetta theorem identifies the object before asking for its
-mechanism.  At the split working primes the missing bit is the
-determinant-sign torsor $T_q$; at the inert $A_3$ prime it fuses.  The
-characteristic-zero golden resolvent reduces to $T_{11}$, the fixed-child
-fibre is the same finite torsor, and the Mathieu action is forced outer.
-The one no-section class has cohomological, selector, and torsor readouts.
-No integral Galois-odd cubic is needed.
+The torsor-Rosetta theorem identifies both the object and its finite
+mechanism.  At the split working primes the missing bit is obtained by
+determinant-sign descent: every available two-valued carrier is a
+$G$-set with the same quotient character, so the transport lemma forces
+all of them to be realizations of $T_q$.  At the inert $A_3$ prime the bit
+fuses.  The characteristic-zero golden resolvent reduces to $T_{11}$, the
+fixed-child fibre is the same finite torsor, and the Mathieu action is
+forced outer.  The one no-section class has cohomological, selector, and
+torsor readouts.  No integral Galois-odd cubic is needed.
 
 The remaining question is therefore deliberately narrow: which arithmetic
 or metaplectic mechanism produces the characteristic-$q$ gluing of this
