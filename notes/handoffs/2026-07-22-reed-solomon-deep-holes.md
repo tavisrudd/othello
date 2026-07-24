@@ -735,7 +735,9 @@ history.
 
 ## Next command
 
-`go C545`
+`go C540`
 
-(C545 begins by enforcing the second-draft proof and release gates; it must not publish the current
-research-announcement artifact as proof-complete. C531 remains the deferred research frontier.)
+(C545 has closed the local manuscript, public-record, literature, and rendered
+gates but cannot close the release while C540--C544 remain open.  Begin the
+degree-specific formal package at C540; return to C545 only after the aggregate
+C544 reconciliation.  No external upload is authorized.)
