@@ -1,0 +1,64 @@
+\section{The syndrome--Hankel dictionary}\label{sec:dictionary}
+
+Let $E$ be a two-dimensional vector space.  We use divided powers for
+syndromes and ordinary symmetric powers for root forms.  This avoids
+invalid binomial rescalings in small characteristic.  For
+$f=(a_0:\cdots:a_{r-1})\in\PP(\Gamma^{r-1}E)$, write
+$e_0,\ldots,e_{r-1}$ for the divided-power coordinate basis and
+$\nu(t)=(1,t,\ldots,t^{r-1})$, with
+$\nu(\infty)=e_{r-1}$.  The perfect divided-power/symmetric-power
+pairing is characterized by coefficient extraction.  Define
+\[
+ H_f=
+ \begin{pmatrix}
+ a_0&a_1&\cdots&a_{r-2}\\
+ a_1&a_2&\cdots&a_{r-1}
+ \end{pmatrix},\qquad
+ W_f=\ker H_f\subset\Sym^{r-2}E^\vee.
+\]
+
+\begin{lemma}[Hankel criterion]\label{lem:hankel}
+Let $\lambda_1,\ldots,\lambda_{r-2}$ be distinct points of
+$\PP(E^\vee)(\F_q)$ and put $g=\prod_i\lambda_i$.  Then
+\[
+ f\in\Span\bigl(\nu(\lambda_1),\ldots,\nu(\lambda_{r-2})\bigr)
+ \quad\Longleftrightarrow\quad g\in W_f.
+\]
+The same statement with repeated factors and Hasse derivatives gives
+the corresponding osculating spans.  Both statements commute with
+$\PGammaL_2(q)$.
+\end{lemma}
+
+\begin{proof}
+On an affine chart, $g$ is the characteristic polynomial of an
+order-$(r-2)$ recurrence.  The length-$r$ solutions are spanned by the
+geometric sequences $\nu(\lambda_i)$; their independence is the
+Vandermonde determinant.  A root at infinity gives the reversed-chart
+recurrence.  For repeated roots, the confluent Vandermonde basis is
+formed by Hasse derivatives, so the same argument works in every
+characteristic.  Equivariance follows because substitution transports
+both the normal rational curve and the recurrence.
+\end{proof}
+
+\begin{corollary}[Split-free criterion]\label{cor:splitfree}
+Assume $\rho(\PRS(q+1-r))=r-1$.  A projective syndrome $f$ is deep if
+and only if $W_f$ contains no completely split squarefree form of
+degree $r-2$ over $\F_q$.
+\end{corollary}
+
+We call the latter property \emph{split-free} even when the
+covering-radius hypothesis has not been established.  Thus every deep
+syndrome in the radius-$r-1$ range is split-free, while a small-field
+split-free census is not silently promoted to a code deep-hole
+classification.
+
+The persistent locus is already visible here.  If every member of
+$W_f$ has a common quadratic factor, then that factor is either a
+rational square, an irreducible quadratic, or a product of two distinct
+rational factors.  These are respectively the tangent deep family, the
+conjugate-secant deep family, and a shallow rational secant.  The common
+factor cannot grow with redundancy: since $\dim W_f=r-3$,
+\[
+ r-3\leq r-1-\deg\gcd(W_f),
+\]
+so its degree is at most two.

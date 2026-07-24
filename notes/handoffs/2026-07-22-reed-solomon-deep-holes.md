@@ -20,8 +20,18 @@ polynomial, so the full `e_7` orbit is shallow over every admissible field.  C53
 integrated `papers/beyond4_prs/` manuscript, compiled PDF, theorem map, claim/proof/novelty ledger,
 and exact verification map. Its independent review corrected C509's small-field boundary:
 `q=7,8,9` are certified split-free syndrome tables, not code deep-hole tables without a separate
-covering-radius premise; Seroussi--Roth supplies that premise from `q>=11`. C545 now
-releases a proof-complete Version 1 through a policy-checked DOI-bearing preprint route.  C539--C544
+covering-radius premise; Seroussi--Roth supplies that premise from `q>=11`. A full-draft review then
+identified the fifteen-page artifact as a research announcement rather than a refereeable
+proof-complete paper.  The second-draft plan now separates polar construction, level-specific
+contained components, and transverse induction; normalizes the point-count correction; and requires
+full proof expansion, public classification records, statement adequacy, provenance, literature,
+and immutable-release gates.  Source-report extraction expanded the R5/R6 and Lucas/`e_7` proofs
+but also exposed genuine open gates: the R7/R8 contained-line identity, the printed R9
+six-slice/base-selection algebra, and one global ordered-Hessian bad-union polynomial at the claimed
+degree.  The manuscript now states the affected R7--R9 continuations and effective Hessian
+corollary conditionally rather than treating these as proved certificate inputs.  The development
+monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
+C545 remains the DOI route but is blocked until those gates close.  C539--C544
 close the paper-facing Lean package.  C531 still owns the remaining intrinsic degree-nine carrier
 strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
 C533 independently owns C525 threshold/deletion sharpening.
@@ -645,7 +655,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C536 | coherent polar-flag Fano boundary | queued after C535 | C512/C529 plus C534 audit | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
-| C545 | rapid proof-complete preprint and DOI | queued next | frozen C538 theorem map and release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
+| C545 | proof-complete preprint and DOI after second-draft gates | queued next, release-blocked | expanded refereeable manuscript, public trust/adequacy ledgers, immutable release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | queued after C538 theorem freeze | adopted theorem map plus existing C517 API | common Hankel/contraction/synthesis interface and coverage ledger | formalization spine |
 | C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
 | C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
@@ -714,5 +724,5 @@ history.
 
 `go C545`
 
-(C545 follows the completed merged manuscript with the proof-complete DOI-bearing preprint.
-C531 remains the deferred research frontier.)
+(C545 begins by enforcing the second-draft proof and release gates; it must not publish the current
+research-announcement artifact as proof-complete. C531 remains the deferred research frontier.)

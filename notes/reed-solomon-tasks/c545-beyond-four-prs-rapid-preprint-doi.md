@@ -1,12 +1,15 @@
 # C545 — rapid beyond-four PRS preprint and DOI
 
-**Lane:** `reed-solomon` · **Status:** queued immediately after C538; before the Lean closure chain
+**Lane:** `reed-solomon` · **Status:** queued after the second-draft proof gates; DOI publication
+blocked for the current research-announcement artifact
 
 ## Objective
 
-Publish a concise, proof-complete Version 1 of the merged beyond-redundancy-four PRS work quickly
-enough to create a public priority timestamp and DOI without creating a competing second
-publication or compromising later journal submission.
+Publish a proof-complete Version 1 of the merged beyond-redundancy-four PRS work after the
+referee-response gates in `papers/beyond4_prs/second-draft-fix-plan.md` close, creating a public
+priority timestamp and DOI without creating a competing second publication or compromising later
+journal submission.  The current fifteen-page research-announcement draft is not eligible for a
+proof-complete release.
 
 ## Publication model
 
@@ -26,9 +29,9 @@ These are general policies, not a substitute for the selected journal's current 
 
 ## Work
 
-1. From C538's frozen theorem map, produce a compact proof note containing every priority-bearing
-   theorem and enough proof detail to establish the claimed result independently.  Omit extended
-   exposition, optional sharpening, and unfinished redundancy-ten material.
+1. Verify that the expanded manuscript, not the fifteen-page announcement, contains every
+   priority-bearing theorem with enough proof detail to establish the claimed result independently.
+   The contained-component, degree/deletion, ordered-Hessian, and `e_7` gates must be fully closed.
 2. Run a claim/proof/citation audit and verify every computational statement against its committed
    reproducibility bundle.
 3. Select the likely journal family before release and archive its current preprint/prior-
@@ -45,13 +48,22 @@ These are general policies, not a substitute for the selected journal's current 
 
 ## Release gate
 
+- The second-draft fix plan has no open proof-critical, classification-record, literature, or
+  immutable-archive gate.
 - The note is proof-complete for every theorem in its abstract.
+- The claim-level trust ledger and adversarial proof-evidence audit are green.
+- The statement-adequacy appendix reproduces every adopted Lean headline statement and exact
+  paper-to-formal boundary.
+- The paper contains a titled provenance and responsibility section.
 - No result relies solely on untracked data or an unreviewed generated claim.
 - All authors and affiliations are confirmed.
 - The exact selected-journal policy is checked immediately before upload.
 - The public metadata identifies the object as a preprint/technical report, not peer-reviewed
   publication.
 - DOI, timestamp, version, source commit, artifact hashes, and public URLs are recorded.
+- A paper-only fresh-history public export builds and replays from a clean checkout and pins
+  exactly one shared-public-Lean commit plus its target list and axiom audit.  The development
+  monorepo is not published or used as the public release repository.
 - The later journal manuscript contains the required disclosure/citation and uses the preprint as
   an earlier version of the same work.
 

@@ -3,10 +3,12 @@
 **Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
 coherent polar flags, and modular carriers.*
 
-**Status:** integrated C538 LaTeX draft, bibliography, theorem map, claim/proof/novelty ledger,
-verification map, and compiled PDF are present. C545 owns the proof-complete Version 1 preprint and
-DOI release of this same work. C539--C544 own the paper-facing Lean closure. This merged paper
-supersedes the former plan for a redundancy-five-only manuscript.
+**Status:** integrated research-announcement draft. The theorem spine and computational boundaries
+are frozen, but a refereeable Version 1 requires full manuscript proofs, claim-level trust mapping,
+the statement-adequacy and provenance sections, and an immutable reproducibility release. DOI
+publication remains gated. C545 owns the eventual proof-complete Version 1 release; C539--C544 own
+the paper-facing Lean closure, which does not substitute for missing manuscript proofs. This merged
+paper supersedes the former plan for a redundancy-five-only manuscript.
 
 ## Build
 
@@ -17,7 +19,11 @@ make check
 ```
 
 The principal files are `main.tex`, `main.pdf`, `refs.bib`, `theorem-map.md`,
-`claim-proof-novelty-ledger.md`, and `verification-map.md`.
+`claim-proof-novelty-ledger.md`, `adversarial-proof-evidence-audit.md`,
+`second-draft-fix-plan.md`, and `verification-map.md`.  Major TeX units live
+under `sections/`; `main.tex` is being reduced to the build driver described
+in `sections/README.md`.  Public certificate and release scaffolding is under
+`supplement/`.
 
 ## Paper spine
 
@@ -26,12 +32,13 @@ exact strength of each proved level visible:
 
 1. the complete all-field classification of deep holes of `PRS(q-4)` at redundancy five;
 2. the transition from cubic-pencil exceptional covers to coherent consecutive-polar flags;
-3. the all-field redundancy-six deep-hole classification and redundancy-seven split-free
-   syndrome classification (a deep-hole theorem for `q>=11`);
-4. the high-field redundancy-eight and redundancy-nine theorems, with their exact orbit laws and
-   exceptional modular boundaries;
+3. the all-field redundancy-six deep-hole classification, the certified redundancy-seven finite
+   bridge, and the explicit contained-component gate on its all-field continuation;
+4. the complete transverse redundancy-eight/nine arguments, with their exact high-field
+   thresholds, orbit laws, modular boundaries, and still-open contained/slice gates;
 5. the general coherent-polar induction theorem;
-6. the characteristic-two ordered-Hessian replacement and its persistent/Lucas carrier theorem;
+6. the characteristic-two ordered-Hessian degeneracy theorem and the explicit
+   root-compatible/base-selection gates on its persistent/Lucas corollary;
 7. the proved Lucas-carrier arithmetic through the degree-nine `e_7` orbit.
 
 The manuscript must distinguish complete classifications from containment, high-field, and
@@ -61,14 +68,34 @@ All computational claims retain their committed generators, independent replays,
 certificates, and checksum manifests.  Lean terminals must expose rather than conceal cited
 geometric or arithmetic inputs that are not formalized.
 
+## Release gate
+
+A release described as proof-complete requires:
+
+1. theorem/proof completeness review;
+2. claim-by-claim trust map;
+3. statement-adequacy appendix;
+4. titled provenance section;
+5. exact shared-Lean commit, targets, and axiom audit;
+6. immutable source/certificate manifest;
+7. clean-checkout replay and build;
+8. reviewed paper-only fresh-history repository export and versioned DOI
+   (the development monorepo is never published);
+9. target-policy check;
+10. cold-prose and adversarial review.
+
+The present draft fails the proof-expansion and immutable-release gates.
+
 ## Rapid priority record
 
 The quick note is not a second publication.  It is a concise, proof-complete Version 1 of this
-paper, carrying the same title family, authorship, theorem numbering map, and later-version
-relationship.  C545 will verify the selected journal's current preprint policy, prepare the exact
-release artifact and metadata, and use a recognized preprint route that supplies both a public
-timestamp and DOI.  Later manuscript versions must cite and supersede that record rather than
-presenting overlapping material as an independent paper.
+paper only after the release gate above closes, carrying the same title family, authorship, theorem
+numbering map, and later-version relationship.  C545 will then verify the selected journal's current
+preprint policy, prepare the exact release artifact and metadata, and use a recognized preprint
+route that supplies both a public timestamp and DOI.  Later manuscript versions must cite and
+supersede that record rather than presenting overlapping material as an independent paper.  An
+earlier research-announcement release would require an explicit re-scope and must not claim proof
+completeness.
 
 ## Initial source set
 

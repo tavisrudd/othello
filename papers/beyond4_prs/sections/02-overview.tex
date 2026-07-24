@@ -1,0 +1,143 @@
+\section{Guide to the proof}\label{sec:overview}
+
+This section is a proof-free guided tour.  Its purpose is to install the
+information flow used throughout the paper before coordinates, finite
+exceptional tables, or formal trust boundaries intervene.
+
+\paragraph{Syndrome to splitting system.}
+A syndrome direction $[f]\in\PP(\Gamma^{r-1}E)$ determines its Hankel
+annihilator $W_f\subset\Sym^{r-2}E^\vee$.  A product of $r-2$ distinct
+rational linear factors lies in $W_f$ exactly when $f$ lies in the span
+of the corresponding normal-rational-curve columns.  Thus the geometric
+classification begins with split-free systems.  The separate
+covering-radius theorem is what promotes split-free directions to code
+deep holes; the dictionary alone does not.
+
+\paragraph{The redundancy-five base cover.}
+At redundancy five, $W_f$ is a pencil of binary cubics.  Its root
+incidence is a degree-three map of projective lines.  The off-diagonal
+fiber square separates the cyclic cases, controlled by Frobenius on a
+deck transformation, from the $S_3$ case, controlled by rational points
+on a geometrically integral $(2,2)$ curve.  This is the bottom cover
+used at every later level.
+
+\paragraph{Why independent lower fibers fail.}
+At higher redundancy, choosing one lower witness forgets which factor
+was removed.  If that lower witness contains the chosen factor, then
+multiplication restores it with multiplicity two rather than producing
+a squarefree form.  The lost datum is therefore not auxiliary: it is
+the exact obstruction to lifting.
+
+\paragraph{Coherent replacement and the fork.}
+Choose a prospective root $\lambda$, contract $f$ to
+$\iota_\lambda f$, and retain $\lambda$ as a marked forbidden root.
+Iteration gives an ordered polar flag.  Its first-polar line has two
+qualitatively different behaviors.  If it is transverse to the lower
+bad carrier and collision schemes, only finitely many parameters must
+be removed and a point count produces an escape.  If it is
+scheme-theoretically contained, the point-count argument says nothing:
+the persistent and modular components require a separate
+level-specific classification.
+
+\paragraph{Lifting.}
+On the transverse branch, a rational point of the lower ordered
+splitting cover outside the branch, diagonal, old-marker, new-marker,
+and self-collision divisors produces a split squarefree lower witness
+avoiding all markers.  Multiplying by the marked factors then lifts it
+squarefreely to $W_f$.  Figure~\ref{fig:overview-flow} records this
+sequence and the contained/transverse fork.
+
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{c}
+\boxed{\text{syndrome }f}
+\xrightarrow{\ \text{Hankel dictionary}\ }
+\boxed{\text{split-free system }W_f}\\[5pt]
+\downarrow\ \text{mark }\lambda\text{ and contract}\\[5pt]
+\boxed{W_{\iota_\lambda f}\text{ with forbidden root }\lambda}
+\xrightarrow{\ \text{iterate}\ }
+\boxed{\text{coherent ordered polar flag}}\\[5pt]
+\begin{array}{ccc}
+\swarrow\ \text{transverse}&&\searrow\ \text{contained}\\[2pt]
+\boxed{\begin{array}{c}\text{finite bad parameters}\\
+\text{and point-count escape}\end{array}}
+&&
+\boxed{\begin{array}{c}\text{persistent or modular}\\
+\text{component theorem}\end{array}}\\[7pt]
+\downarrow&&\\[-2pt]
+\boxed{\text{lower split witness avoiding markers}}&&\\[5pt]
+\downarrow\ \text{multiply marked factors}&&\\[2pt]
+\boxed{\text{split squarefree member upstairs}}&&
+\end{array}
+\end{array}
+\]
+\caption{Information flow of coherent polar induction.  Solid arrows
+are the statements proved in the degrees treated here.  The contained
+branch is not a consequence of the transverse sieve.}
+\label{fig:overview-flow}
+\end{figure}
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{The five proved levels.  The marker count is the number present
+at the bottom cubic cover.}
+\label{tab:overview-levels}
+\begin{tabular}{p{0.06\textwidth}p{0.19\textwidth}p{0.07\textwidth}
+                p{0.25\textwidth}p{0.28\textwidth}}
+\toprule
+Level & lower cover & marks & contained & conclusion\\
+\midrule
+R5 & cubic pencil / $(2,2)$ fiber square & 0 &
+tangent, sigma, cyclic families &
+complete all-field deep-hole classification\\
+R6 & pointed R5 cover & 1 &
+persistent plus binary nucleus line &
+complete all-field deep-hole classification\\
+R7 & iterated pointed cover & 2 &
+persistent plus central binary nucleus &
+finite range certified; all-field continuation has contained gate\\
+R8 & three-marker R5 cover & 3 &
+persistent; modular lifts shallow &
+conditional persistent-only target for $q\geq43$\\
+R9 & four-marker R5 cover & 4 &
+persistent plus checked characteristic-seven carrier &
+conditional persistent-only target for $q\geq53$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{What each passage preserves and what it does not prove.}
+\label{tab:overview-survival}
+\begin{tabular}{p{0.20\textwidth}p{0.32\textwidth}p{0.36\textwidth}}
+\toprule
+Passage & What survives & What remains outside the passage\\
+\midrule
+Hankel dictionary & split-free syndrome criterion &
+covering radius and code deepness\\
+Radius promotion & split-free equals deep in stated fields &
+the syndrome classification itself\\
+Transverse induction & witness outside finite bad/deletion loci &
+classification of contained polar lines\\
+Contained analysis & persistent/modular components in proved degrees &
+an arbitrary-degree component theorem\\
+Finite certificates & exact frozen finite domains and orbit records &
+geometric integrality and all-field continuation\\
+C517 Lean synthesis & residual algebra and implication from explicit inputs &
+six-slice geometry, rational points, PRS identification, exhaustion, group action\\
+Ordered Hessian & characteristic-two contained-carrier replacement &
+deepness of every Lucas-carrier point\\
+Lucas arithmetic & the distinguished endpoint and $e_7$ orbit &
+remaining degree-nine strata and redundancy ten\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The proofs now follow these arrows in order: dictionary, redundancy-five
+base cover, polar construction, contained components, transverse point
+count, and fixed-level applications.  This is a scope boundary, not a
+second theorem inventory.

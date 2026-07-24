@@ -1,5 +1,12 @@
 # Verification map
 
+Paper-facing names are the stable labels `Certificate R5`, `Certificate R6`,
+`Certificate R6-NF`, `Certificate R7`, `Certificate R8`, `Certificate R9`,
+`Certificate R9-49`, `Certificate Hessian`, `Certificate Lucas`, and
+`Certificate e7`.  Their schemas are defined in
+`supplement/CERTIFICATE-SCHEMA.md`.  The C-numbers below are immutable internal
+provenance only.
+
 Artifact paths below are relative to `notes/`. Commands are run from the repository root unless a
 subshell says otherwise. The manuscript’s mathematical claims are proved in its
 source reports; these artifacts certify only the finite or symbolic domains stated here. The C538
