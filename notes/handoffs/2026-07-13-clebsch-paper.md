@@ -18,6 +18,9 @@ next task: pin both snapshots and produce the exact split map before C576 builds
 and C577 builds standalone factorization-memory Paper II.  No Paper III task is allocated.**
 The split charter and acceptance gates are
 [`2026-07-24-clebsch-paper-split-trial.md`](../2026-07-24-clebsch-paper-split-trial.md).
+The additive source roots are `papers/clebsch-rigidity/`,
+`papers/clebsch-factorization/`, and the provisional unallocated
+`papers/clebsch-passages/`; `papers/clebsch-hexagon-code/` remains the unchanged fallback.
 
 The preserved fallback is the post-Sol 37-page single-manuscript revision with 29 extracted
 theorem environments, 58 manifest rows, and an unchanged deterministic 18-check release surface.

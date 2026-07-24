@@ -15,6 +15,17 @@ This is a reversible architecture trial.  Preserve the current 37-page manuscrip
 snapshot; do not obtain the pending C320 post-fix review until the split candidates have been
 assessed.
 
+The source layout is additive:
+
+- `papers/clebsch-hexagon-code/` remains the unchanged broad fallback;
+- `papers/clebsch-rigidity/` is the C576 Paper I root;
+- `papers/clebsch-factorization/` is the C577 Paper II root;
+- `papers/clebsch-passages/` is a reserved, provisional Paper III root with no drafting task.
+
+Do not rename, move, or repurpose the fallback.  C575 must populate the new roots from pinned
+source revisions and recorded dispositions rather than treating a working-tree copy as
+provenance.
+
 ## C575 — exact split specification
 
 Identify the exact older and current source snapshots and produce a section-, theorem-, proof-,
