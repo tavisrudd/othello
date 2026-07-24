@@ -131,9 +131,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `gateway`
 
-- **C584 `[gateway]` [QUEUED]** — avatar catalogue and field-dependence table for the icosahedral six-arc / `[6,3,4]` gateway object → `notes/handoffs/2026-07-24-gateway.md`.
-- **C586 `[gateway]` [QUEUED; needs C584]** — per-avatar mechanism for why rigidity is sporadic or field-uniform → `notes/handoffs/2026-07-24-gateway.md`.
-- **C589 `[gateway]` [QUEUED; needs C584–C586; C587/C588 done]** — theorem-or-framing verdict and unifying-paper scoping (decision gate); preflight: close Semantic Scholar/MathSciNet on the C588 audit before any hard priority claim → `notes/handoffs/2026-07-24-gateway.md`.
 
 ### `nofil`
 
