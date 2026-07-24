@@ -191,8 +191,8 @@ arcs are already close.
 - **Arc-specific improvement:** partially settled by the post-completion
   `ej` pass.  Lost-edge degrees at least three force a positive concurrence
   correction, and the vertex loss obeys the sharper nonlinear inequality.
-  What remains open is a restriction on matching-like lost-edge sets, where
-  the degree correction vanishes.
+  What remains open is a restriction on maximum-degree-two lost-edge sets
+  (disjoint paths and cycles), where the degree correction vanishes.
 - **Defect coupling:** open at the same gate.  C558 bounds combinatorial bad
   edges inside one realization and does not compare two realizations.
 - **Computational evidence:** no mystery remains.  The theorem is
