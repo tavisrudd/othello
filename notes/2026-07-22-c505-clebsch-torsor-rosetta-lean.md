@@ -183,18 +183,19 @@ current SHA-256 values of their canonical JSON files.
 | torsor bridge and trichotomy | `notes/2026-07-22-c486-close-upgrade-battery.json`, `3e009659a78b9a282357f833dc1b9af98a557d9034a76f7d0e9116fdf4eb480f` | `python3 notes/2026-07-22-c486-close-upgrade-battery-replay.py` |
 | characteristic-zero row | `notes/2026-07-22-c487-char-zero-realization-row.json`, `65e8067ba69a993a1d54044de4f76719192f7ad10ae154331cb6267d3049fee3` | `python3 notes/2026-07-22-c487-char-zero-realization-row-replay.py` |
 
-Each adjacent `.sha256` manifest checks its complete primary/replay/report bundle. These dated
-paths are current project evidence, not referee-facing Lean artifacts. C320 must either pin them
-as exact external evidence or migrate adopted semantic data into stable workflow-free verification
-paths before the paper artifact is cut.
+Each adjacent `.sha256` manifest checks exactly the entries it lists. In particular, the C480,
+C486, and C487 manifests contain the primary script, replay script, and JSON, but not their
+reports. These dated paths are current project evidence, not referee-facing Lean artifacts. C320
+must either pin them as exact external evidence or migrate adopted semantic data into stable
+workflow-free verification paths before the paper artifact is cut.
 
 The imported C503 stable finite source is under
 `lean/verification/clebsch_arithmetic_gluing/`, with generator `generate.py`, canonical
-`source.json`, normalized `certificate.json`, and `manifest.sha256`. Its checker command is:
+`source_data.json`, normalized `certificate.json`, and `manifest.sha256`. Its checker command is:
 
 ```text
 python3 lean/verification/clebsch_arithmetic_gluing/generate.py --check
-(cd lean/verification/clebsch_arithmetic_gluing && sha256sum -c manifest.sha256)
+(cd lean && sha256sum -c verification/clebsch_arithmetic_gluing/manifest.sha256)
 ```
 
 ## Trust and exclusion ledger
@@ -316,7 +317,7 @@ At the repaired commit, add one claim-level block for
 `RelativeConicArcs.Gates.ClebschTorsorRosetta`:
 
 - exact repaired commit: `4c01ea83`;
-- exact terminal list: the ten fully qualified declarations under **Public gate** above;
+- exact terminal list: the eleven fully qualified declarations under **Public gate** above;
 - imported finite terminals:
   `RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root`,
   `RelativeConicArcs.ClebschArithmeticGluing.sheetCharacter_eq_of_kernel_eq`,
@@ -329,5 +330,35 @@ At the repaired commit, add one claim-level block for
 - cited inputs: classical group names, the quadratic-algebra interpretation of the inert geometric
   orbit, and the Hilbert-90/integral reduction semantics;
 - exclusions: absolute cohomology, all-prime classification, integral cubic, genuine-Weil, and
-  forbidden embedding claims; and
-- exact commit, axiom output, and verify-all entry point to be inserted after repaired validation.
+  forbidden embedding claims.
+
+The exact C505 verify-all entry point, run from the repository root, is:
+
+```bash
+python3 notes/2026-07-23-c417-affine-cocycle-line-bundle.py --check
+python3 notes/2026-07-23-c417-affine-cocycle-line-bundle-replay.py
+sha256sum -c notes/2026-07-23-c417-affine-cocycle-line-bundle.sha256
+python3 notes/2026-07-21-c448-orbit-valued-selector.py --check
+sha256sum -c notes/2026-07-21-c448-orbit-valued-selector.sha256
+python3 notes/2026-07-22-c473-arithmetic-orientation.py --check
+python3 notes/2026-07-22-c473-arithmetic-orientation-replay.py
+sha256sum -c notes/2026-07-22-c473-arithmetic-orientation.sha256
+python3 notes/2026-07-22-c474-reed-solomon-decorated-deep-holes.py --check
+python3 notes/2026-07-22-c474-reed-solomon-decorated-deep-holes-replay.py
+sha256sum -c notes/2026-07-22-c474-reed-solomon-decorated-deep-holes.sha256
+python3 notes/2026-07-22-c480-close-gap-certificates.py --check
+python3 notes/2026-07-22-c480-close-gap-certificates-replay.py
+(cd notes && sha256sum -c 2026-07-22-c480-close-gap-certificates.sha256)
+python3 notes/2026-07-22-c486-close-upgrade-battery.py --check
+python3 notes/2026-07-22-c486-close-upgrade-battery-replay.py
+(cd notes && sha256sum -c 2026-07-22-c486-close-upgrade-battery.sha256)
+python3 notes/2026-07-22-c487-char-zero-realization-row.py --check
+python3 notes/2026-07-22-c487-char-zero-realization-row-replay.py
+(cd notes && sha256sum -c 2026-07-22-c487-char-zero-realization-row.sha256)
+python3 lean/verification/clebsch_arithmetic_gluing/generate.py --check
+(cd lean && sha256sum -c verification/clebsch_arithmetic_gluing/manifest.sha256)
+lean/scripts/lean-build-queue.py run RelativeConicArcs.ClebschTorsorRosettaData \
+  RelativeConicArcs.ClebschTorsorRosetta RelativeConicArcs.Gates.ClebschTorsorRosetta \
+  --profile single --threads 1 --serial-first RelativeConicArcs.ClebschTorsorRosettaData \
+  --aggregate RelativeConicArcs.Gates.ClebschTorsorRosetta --cores 20-23
+```
