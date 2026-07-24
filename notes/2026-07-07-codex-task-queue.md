@@ -146,10 +146,11 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
-- **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
+- **C556 `[relconic]` [ACTIVE]** — test the orthogonal-resolution/maximal-arc invariant exposed by the zero-defect partial geometry: first derive or refute a canonical hole-to-dual-resolution map on the regular \(k=10\) model, compare Mathon's non-realizable class, and test whether the Clebsch hexad outer bit supplies the missing binary choice → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
 
 ### `ame-lu`
 
+- **C594 `[ame-lu]` [IN PROGRESS; external major-revision report]** — close the \(z=1\) bracket-multiplicity and logical-phase propagation proof gaps, repair the Section 7 normalization/index conventions, reposition Theorem 5.1 as the principal application, and complete the self-association/arcs/transversal-gates literature context before recutting the release candidate → `notes/2026-07-24-c594-ame-lu-major-revision.md`.
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`
