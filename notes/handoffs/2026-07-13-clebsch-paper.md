@@ -299,9 +299,11 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone with a sharded 25-terminal gate,
   exact upstream replay, quantified finite assignment/normalizer checks, and final
   independent-review `GO`, with the validated Lean repair pinned at `42683dff`
-  ([report](../2026-07-22-c504-clebsch-witt-hadamard-lean.md)); C505 assembles the
-  C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close; C506 owns the bounded finite
-  survival/erasure negatives and mod-40 law; and C507 owns direct finite witnesses for the
+  ([report](../2026-07-22-c504-clebsch-witt-hadamard-lean.md)); C506 has closed the bounded finite
+  survival/erasure negatives and exact conditional mod-40 law with a definitions-only data leaf,
+  fourteen-terminal standard-axiom gate, complete upstream replay, and final independent-review
+  `GO` ([report](../2026-07-22-c506-clebsch-survival-boundaries-lean.md)); C505 assembles the
+  C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close; and C507 owns direct finite witnesses for the
   interface-heavy theta/Arf, scoped Weil-Weyl, quantum-erasure, and conditionally adopted C471
   rows.  Their exact trust and exclusion boundaries are frozen in
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
