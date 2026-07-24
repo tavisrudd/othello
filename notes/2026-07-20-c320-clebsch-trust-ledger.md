@@ -477,8 +477,8 @@ in the released tree are the intentional, open explanatory paragraph and its bib
 
 The clean release runner used the disk-backed detached Lean checkout at the pinned commit above.
 After the documentation audit, repin, and standalone-flake addition, its fresh complete run returned
-`status: passed` for all 17 checks: six verification-tool tests, statement extraction, eleven
-retained finite paper checkers, both public evidence bundles, pinned Mathlib-cache setup, and the
+`status: passed` for all 18 checks: six verification-tool tests, statement extraction, eleven
+retained finite paper checkers, all three public evidence bundles, pinned Mathlib-cache setup, and the
 exact aggregate Lean target.  The emitted JSON matched the tracked deterministic
 `verification/verify-release-output.json`, which is hash-bound by the trust manifest.
 
@@ -526,20 +526,28 @@ The user-launched post-C552 cold read is
 `notes/2026-07-23-c320-independent-cold-read.md` and returned `NO-GO`.  Its frozen-state finding was
 subsequently settled: the normalized manuscript, 28-statement extraction, 61-claim manifest,
 four-sheet evidence bundle, and deterministic 18-check output are committed, and the current paper
-tree is clean.  The remaining blockers are substantive:
+tree is clean.  The C552-specific exposition finding is settled in
+`c5deec3c`: the manuscript now displays the pencil and coordinate covectors
+before the four-sheet theorem and states, there and in the conclusion, that
+the result is a strict survival boundary rather than a
+parent-reconstruction step.  The remaining blockers are substantive:
 
 1. geometric Clebsch-parent recovery is routed through a terminal that explicitly recovers only a
    frozen matching-table row;
 2. the factorization/balance/depth and Rosetta sections do not expose enough bridge maps and finite
    mechanisms to support the headline wording;
-3. the four-sheet theorem lacks a prior definition of its admitted pencil and a stated Paper-I
-   consequence;
-4. the uniform rank-three headline lacks one locatable `A_3/B_3/H_3` proof path; and
-5. the “statement adequacy” label exceeds what textual extraction and hashes establish.
+3. the uniform rank-three headline lacks one locatable `A_3/B_3/H_3` proof path; and
+4. the “statement adequacy” label exceeds what textual extraction and hashes establish.
 
 The next repair pass must reconcile the user's feedback with those findings, update manuscript and
 trust routes together, rerun all 18 checks on a frozen commit, and stop for user-launched post-fix
 review.
+
+The C552-specific repair's first release rerun was deliberately not
+accepted: it reached the final immutability guard while this broader C320
+manuscript repair was changing `clebsch_hexagon_code.tex`.  Regenerate all
+manuscript-derived artifacts and rerun from the eventual frozen C320
+candidate.
 
 ### Mystery ledger after the `ej`+`tt` closeout
 

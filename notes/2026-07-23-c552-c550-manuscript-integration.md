@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** active; user-launched independent review returned `NO-GO`
+**Status:** task-owned `NO-GO` repair implemented; held open for the C320 post-fix review
 
 ## Goal
 
@@ -100,6 +100,88 @@ explicitly mixed route: the manuscript's conceptual sheaf/cycle/frame
 proof plus the public exact replay.  No Lean claim or novelty claim was
 added, and the shared-Lean pin remains
 `43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.
+
+## Validation
+
+- `python3 verification/evidence/four_sheet_holonomy/verify.py` passed.  It
+  regenerated the `12,184`-byte direct rank-drop certificate with SHA-256
+  `687647e36d614999410b9f320d1cdab73fa980d3f2b46b63673563c707aac137`,
+  regenerated the cover-holonomy certificate, and matched every
+  hash-pinned artifact.
+- The manifest builder produced 61 rows, and
+  `verify_trust_manifest.py` accepted all 28 statement claims against the
+  pinned shared-Lean checkout.  The six verification-tool unit tests
+  passed.
+- `make -B clebsch` rendered the 32-page PDF without a TeX error or
+  undefined reference.  The only warnings remain the known underfull
+  boxes in the narrow survival-ledger table.
+- The pre-review clean release runner passed all 18 declared checks against Lean
+  commit `43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.  Its deterministic
+  output is byte-identical to
+  `verification/verify-release-output.json`, with SHA-256
+  `bc8b58f30bb63ecae39ad42f898899fa39047f95180ab2ff419073c95da5db90`.
+
+The implementation is committed as `d06c1a03`; the post-commit
+source-normalization hash refresh is `0c271cf9`.  The first clean-release
+preflight correctly rejected the stale manuscript hash created by that
+normalization.  Regenerating the adequacy and trust manifests from the
+committed TeX bytes fixed the mismatch before any release check ran.
+
+## Independent-review disposition
+
+The user-launched C320 cold read returned `NO-GO`.  Its C552-specific
+finding was that the theorem began from an undefined admitted pencil and
+did not say whether it advanced the paper's reconstruction.  Commit
+`c5deec3c` repairs both points:
+
+- the paragraph before the theorem now displays all six columns of
+  `H_t`, defines `h_i` and `g_i(x)=h_i^T x`, and identifies the theorem's
+  nonvanishing condition as the admitted non-GRS locus; and
+- that paragraph and the conclusion state the Paper-I consequence
+  explicitly: the contraction retains only two resonance fibres, does not
+  recover its pencil, and is a strict survival boundary rather than a
+  parent-reconstruction mechanism.
+
+The review's other blocking findings concern C320's geometric-parent
+bridge, factorization/depth exposition, twelve Rosetta carriers, uniform
+rank-three proof path, and “statement adequacy” terminology.  They are not
+claims introduced by C552, and repairing them would violate this task's
+stop rule against reopening the paper's global architecture.  C552
+therefore remains unarchived until the owning C320 repair pass resolves
+those findings and the user launches the required post-fix review.
+
+The post-C552-repair release run reached its final immutability guard, which
+correctly rejected the run because the owning C320 repair pass changed
+`clebsch_hexagon_code.tex` concurrently.  The concurrent rewrite preserves
+the displayed pencil and survival-boundary conclusion, but it is not a
+frozen C552 release candidate.  C320 must regenerate the manuscript-derived
+artifacts and rerun the 18 checks after that broader repair is committed;
+this report makes no post-fix clean-release claim.
+
+## `ej`/Tao closeout and mystery ledger
+
+The closeout made three cheap upgrades.  It moved the frozen computation
+into a workflow-free public bundle rather than leaving a reverse reference
+to internal notes; split the theorem into three separately hashed trust
+routes rather than assigning one aggregate label; and checked the actual
+six-point actions rather than inferring geometry from abstract group
+orders.  The last check is what forces the `C4` point stabilizer, the
+axial `2+4` orbit partition, and the distinction between linear-frame and
+bare-graph symmetry.
+
+| feature | disposition |
+|:---|:---|
+| Why the universal kernel has dimension three | **Settled:** it is the constant-section space of the rank-three vertex sheaf. |
+| Whether the `24 x 21` and `9 x 9` systems have only analogous kernels | **Settled:** gauging and systematic elimination give equality of excess kernel dimensions, reversed explicitly in the proof and checked on all finite replay fields. |
+| Where `2` and `4/9` come from | **Settled:** the cycle ledger gives `B^2-2A^2` and `3B+/-2A`; squaring only then forgets the signed sheets. |
+| Why the multiplicities and quotients are `96/192` and `8/16` | **Settled:** the relative-frame seams have orders `8/6`, and the common derived `A4` acts freely. |
+| Whether characteristic 7 is another ramification prime | **Settled negatively:** the axial and signed-union root schemes merge modulo 7, whereas 11, 13, and 41 only double pullback roots. |
+| Whether the octahedral groups act on the bare cover | **Settled negatively:** they act on the reduced linear transport frame; the bare multigraph has smaller symmetry. |
+| Four-copy minimality, uniform `LU=LC`, and Paper 2 | **Outside the stop rule:** no wording or evidence route was added for them. |
+| Final manuscript trust judgment | **Open only at the required process gate:** a user-launched independent review must cover the post-delta manuscript and return `GO`. |
+
+No task-owned mathematical or reproducibility mystery remains before that
+review.
 
 ## Stop rule
 

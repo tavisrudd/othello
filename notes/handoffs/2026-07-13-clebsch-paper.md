@@ -184,10 +184,14 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   split in one proof path.  The public workflow-free evidence bundle and its release check are
   integrated; the adequacy extraction has 28 statements and the trust manifest 61 claim rows.
   The degree-six actions are corrected to the rotational octahedral six-vertex action with
-  `C4` point stabilizer and the axial `2+4` seam.  The review found the theorem's admitted non-GRS
-  pencil undefined in the setup and its role in the reconstruction spine unexplained.  Define and
-  motivate that bridge, or remove the theorem from Paper I, then request post-fix review.  C552
-  does not reopen four-copy minimality, uniform `LU=LC`, or Paper 2.  Task card:
+  `C4` point stabilizer and the axial `2+4` seam.  Commit `c5deec3c` repairs the review's
+  C552-specific finding: the paper now defines the six-column pencil and covectors before the
+  theorem and states there and in the conclusion that the result is a strict survival boundary,
+  not a parent-reconstruction step.  C552's task-owned repair is complete, but it remains
+  unarchived behind C320's other substantive `NO-GO` findings and the required post-fix review.
+  Its first release rerun was invalidated at the immutability guard by the concurrent broader C320
+  manuscript rewrite; rerun all 18 checks only after that owning repair freezes the paper snapshot.
+  It does not reopen four-copy minimality, uniform `LU=LC`, or Paper 2.  Task card:
   [`2026-07-23-c552-c550-manuscript-integration.md`](../2026-07-23-c552-c550-manuscript-integration.md).
 - **C399 selected as the protected upgrade:** integrate the uniform rank-three complement-code
   theorem rather than spawning a separate submission.  The audit found no exact predecessor for
