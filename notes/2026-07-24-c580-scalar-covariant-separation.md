@@ -10,20 +10,20 @@
 
 Fix a positive integer \(M\).  Outside a finite set of rational
 characteristics depending on \(M\), every sufficiently large prime power
-\(q\) has two admitted parameters \(t,u\in\mathbb F_q\) such that
+\(q\) has a packet of at least
 
 \[
- z(t)\ne z(u),
+ \left\lceil\frac{q-d_M}{8}\right\rceil
 \]
 
-but every scalar local-unitary invariant of the associated equal-phase
-six-qudit CSS states of bidegree \((m,m)\), \(m\leq M\), takes the same
-value on \(\Psi_t\) and \(\Psi_u\).
+pairwise LU-inequivalent admitted states, where \(d_M\) is the degree of
+one \(M\)-dependent generic-rank exclusion polynomial, such that every
+scalar local-unitary invariant of bidegree \((m,m)\), \(m\leq M\), takes
+the same value on the entire packet.
 
-Nevertheless \(\Psi_t\) and \(\Psi_u\) are not LU-equivalent, even after
-party permutation.  Their one-copy four-party marginal covariants force
-every hypothetical LU intertwiner to be LC by C560, while C396's scalar
-\(z\) distinguishes their LC classes.
+The states are inequivalent even after party permutation.  Their one-copy
+four-party marginal covariants force every hypothetical LU intertwiner to
+be LC by C560, while C396's scalar \(z\) distinguishes their LC classes.
 
 Equivalently, no copy bound independent of \(q\) makes scalar polynomial
 LU invariants complete on the admitted pencil.  By contrast, the
@@ -86,15 +86,48 @@ If \(d_M=\deg D_M\), then
  |U_M(\mathbb F_q)|\geq q-d_M.
 \]
 
-For all sufficiently large \(q\), this set has more than eight elements.
 The rational map \(t\mapsto z(t)\) has degree eight by C396, and its
 specialization remains nonconstant outside the already excluded finite
-set of characteristics.  No \(z\)-fiber can therefore contain all of
-\(U_M(\mathbb F_q)\).  Choose \(t,u\in U_M(\mathbb F_q)\) with
-\(z(t)\ne z(u)\).  All scalar invariants through degree \(M\) agree, but
-C396 gives LC-inequivalence and C560 upgrades it to LU-inequivalence.
+set of characteristics.  Every \(z\)-fiber has at most eight parameters,
+so \(U_M(\mathbb F_q)\) meets at least
+
+\[
+ \left\lceil |U_M(\mathbb F_q)|/8\right\rceil
+ \geq
+ \left\lceil(q-d_M)/8\right\rceil
+\]
+
+distinct \(z\)-fibers.  Choose one parameter from each.  All scalar
+invariants through degree \(M\) agree across the resulting packet, while
+C396 gives pairwise LC-inequivalence and C560 upgrades it to pairwise
+LU-inequivalence.
 
 This proves the theorem.
+
+## Operational corollary and its boundary
+
+Let \(E\) be an outcome operator of an \(m\)-copy measurement invariant
+under the diagonal action of the local-unitary group.  Its outcome
+probability
+
+\[
+ \operatorname{Tr}\!\left(
+   E\bigl(|\Psi_t\rangle\langle\Psi_t|\bigr)^{\otimes m}
+ \right)
+\]
+
+is a scalar LU invariant of bidegree \((m,m)\).  Therefore no
+LU-invariant measurement using at most \(M\) copies can distinguish any
+two members of the packet above; every outcome distribution agrees.
+Equivalently, the copy complexity of a uniformly complete
+reference-frame-free scalar protocol is unbounded as \(q\) varies.
+
+This is not a lower bound for unrestricted tomography or for a protocol
+allowed to retain basis-dependent, operator-valued output.  The
+four-party marginal is precisely such a covariant output: it transforms
+rather than remaining fixed under local basis changes.  C560 exploits
+that retained frame information, so there is no contradiction between
+the scalar measurement lower bound and one-copy covariant rigidity.
 
 ## What is and is not new in the mechanism
 
@@ -248,8 +281,10 @@ Neither is assumed here.
 The main cheap upgrade is the quantifier order.  C559 says that each fixed
 degree is generically constant; C580 turns this into an orbit-separation
 lower bound by intersecting all degrees through \(M\), counting rational
-points, and using the degree-eight \(z\)-map.  No computation or explicit
-bound on \(\deg D_M\) is required.
+points, and using the degree-eight \(z\)-map.  The same count gives a
+linearly growing packet of at least
+\(\lceil(q-d_M)/8\rceil\) pairwise inequivalent states, not merely one
+hard pair.  No computation or explicit bound on \(\deg D_M\) is required.
 
 The second upgrade is expository: the contrast is not “invariants fail,
 marginals succeed.”  A marginal is itself a low-degree **covariant**.
@@ -257,11 +292,18 @@ The exact lesson is that scalarization destroys the local frame while the
 covariant retains it.  This gives the paper a clean conceptual bridge from
 C559 to C560 without competing with the Rains attribution.
 
+The third free corollary is operational.  Every outcome probability of an
+\(M\)-copy LU-invariant measurement lies in the blind scalar sector, so
+the packet is indistinguishable by any such measurement.  This licenses a
+reference-frame-free copy-complexity statement, but not an unrestricted
+tomography or query-complexity claim.
+
 ## Mystery ledger
 
 | Feature | Closeout status | Remaining gap or owner |
 |---|---|---|
-| Whether bounded scalar copy degree can classify the pencil uniformly in \(q\) | **Settled negatively** by the theorem above | No remaining proof gap |
+| Whether bounded scalar copy degree can classify the pencil uniformly in \(q\) | **Settled negatively** by the theorem above; one invariant vector contains at least \(\lceil(q-d_M)/8\rceil\) LU classes | No remaining proof gap |
+| Whether the failure has an operational copy interpretation | **Settled for LU-invariant scalar measurements:** all outcome distributions agree through \(M\) copies | Unrestricted tomography is explicitly outside the claim |
 | Why a one-copy marginal can outperform every fixed scalar degree | **Settled conceptually:** it retains the moving operator axes as covariant data | C581 may sharpen this to intrinsic phase-space reconstruction |
 | Whether the minimum separating degree has a quantitative growth rate in \(q\) | Open; C580 proves only unboundedness | Not queued; would require effective degree control on the common generic-rank polynomial |
 | Whether C580 has an exact literature predecessor | Open beyond the bounded screen | C571/C572 manual literature gates if novelty wording is ever proposed |

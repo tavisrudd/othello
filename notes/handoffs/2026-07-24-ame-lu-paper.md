@@ -81,13 +81,15 @@ infinitely many LU classes.  See
 
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
-`M`-dependent characteristics and for all sufficiently large `q`, two
-admitted states with different `z` agree on every scalar LU invariant through
-bidegree `(M,M)`.  C559's common generic-rank open and C396's degree-eight
-quotient prove existence, while C560 shows that the states are nevertheless
-LU-inequivalent because the one-copy four-party marginal covariants retain
-the local Weyl axes.  This is an optional synthesis corollary, not a change
-to C561's headline or an independent priority claim.  See
+`M`-dependent characteristics and for all sufficiently large `q`, at least
+`ceil((q-d_M)/8)` admitted LU classes agree on every scalar LU invariant
+through bidegree `(M,M)`, and hence on every outcome distribution of an
+`M`-copy LU-invariant measurement.  C559's common generic-rank open and
+C396's degree-eight quotient give the growing packet, while C560 shows that
+the one-copy four-party marginal covariants nevertheless separate its
+classes by retaining the local Weyl axes.  This is an optional synthesis
+corollary, not a change to C561's headline or an unrestricted tomography
+lower bound.  See
 `2026-07-24-c580-scalar-covariant-separation.md`.
 
 ## Queued completion program
