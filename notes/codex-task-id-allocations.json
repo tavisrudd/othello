@@ -791,8 +791,17 @@
       "last": 544,
       "purpose": "Beyond-redundancy-four PRS manuscript integration and paper-facing Lean closure",
       "sequence": 88
+    },
+    {
+      "count": 1,
+      "first": 545,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 545,
+      "purpose": "Rapid citable preprint and DOI release for beyond-four PRS results",
+      "sequence": 89
     }
   ],
-  "next_id": 545,
+  "next_id": 546,
   "schema": "codex-task-id-allocations-v1"
 }
