@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** initial independent review `NO-GO`; repairs implemented; exact validation and
-user-launched post-fix review pending
+**Status:** initial independent review `NO-GO`; repairs implemented, validated, and pinned at
+`4c01ea83`; user-launched post-fix review pending
 
 ## Outcome and exact trust route
 
@@ -315,6 +315,7 @@ No terminal uses `sorryAx`, a project-local axiom, or an undisclosed opaque orac
 At the repaired commit, add one claim-level block for
 `RelativeConicArcs.Gates.ClebschTorsorRosetta`:
 
+- exact repaired commit: `4c01ea83`;
 - exact terminal list: the ten fully qualified declarations under **Public gate** above;
 - imported finite terminals:
   `RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root`,
