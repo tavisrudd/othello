@@ -146,7 +146,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
-- **C600 `[ame-lu]` [ACTIVE; final local referee corrections]** — apply the characteristic-five vacuity, redundant-witness referent, two-setting clarification, octahedral-attainment qualifier, and bounded literature-search scope sentence; confirm the Dickson and Aharonov--Ben-Or locators and rerun the release gate → `notes/2026-07-24-c600-ame-lu-local-referee-corrections.md`.
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`

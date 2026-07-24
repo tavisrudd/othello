@@ -41,6 +41,11 @@ were judged clear and convincing. The following defects were then repaired.
 | the proof asserted the unsupported exact set \(b\in\{0,1,2,3,4,6\}\) although it established only \(b\leq6\) | Theorem 6.1 now states only the needed bound and records the octahedral equality case | stronger unproved exclusion removed; \(70>66\) argument unchanged |
 | the logical-phase positioning did not separate prior GRS gate constructions from the paper's contribution | the introduction now credits quantum RS encoders, polynomial-code gate procedures, and general stabilizer Clifford gadgets, disclaims priority for the GRS constructions, and identifies the new claim as the fixed-party self-association iff classification | novelty boundary made explicit |
 | Theorem A.1 did not quantify the party assignment | It now states `∃ p∈S₆` for nonconstant sections and follows with the generic number of such assignments | quantifier repaired |
+| Theorem 6.1's characteristic-five vacuity appeared only in the proof | the theorem statement now says explicitly that the non-GRS hypothesis is vacuous in characteristic five | exceptional-field scope visible at first use |
+| the octahedral equality case was phrased as though every field contained the required subgroup | the proof now conditions attainment on the existence of an octahedral \(S_4\subseteq\mathrm{PGL}_2(q)\) | equality case no longer overgeneralized |
+| Proposition 6.3 used one field both as parameter base and local Hilbert-space cardinality without saying so | the proposition names \(k\), identifies \(q=|k|\) with the local dimension under the code--state dictionary, and declares \(X/k\) | the two roles are explicit |
+| “redundant witness” had no local referent | the introduction now says that the appendix witness is redundant specifically by Corollary 1.2 | redundancy claim is theorem-linked |
+| the fixed-party dichotomy novelty sentence lacked a stated search scope | the introduction now lists the quantum RS/polynomial-code, stabilizer-Clifford, and transversal-gate literatures screened | bounded search scope stated without an exhaustive priority claim |
 
 ## Formal-coverage adversarial checklist
 

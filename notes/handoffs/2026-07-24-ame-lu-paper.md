@@ -285,6 +285,17 @@ inert theorem hypothesis.  The warning-free 16-page build, five-page visual
 sweep, seven-bundle replay, and public/formal release checks pass.  See
 `2026-07-24-c599-ame-lu-local-review-closure.md`.
 
+**C600 closed (2026-07-24): final local referee corrections.**  Theorem 6.1
+now exposes characteristic-five vacuity in its statement and conditions the
+octahedral equality example on the required \(S_4\) subgroup.  Proposition
+6.3 separates the parameter field, its cardinality, and local dimension.
+The introduction links the redundant appendix witness to Corollary 1.2 and
+states the bounded literature-search scope for the logical-phase comparison.
+The Aharonov--Ben-Or Section 5 and Dickson §§239--261 locators remain
+confirmed.  The warning-free 16-page build, all seven evidence replays, and
+public/formal release checks pass.  See
+`2026-07-24-c600-ame-lu-local-referee-corrections.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -310,6 +321,8 @@ as C559--C572.  Dependency order is authoritative:
     appendix disposition (complete).
 11. C599: final local field-scope, involution-bound, attribution, existence,
     and transversal-gate positioning closure (complete).
+12. C600: final theorem-local scope, referent, parameter-setting, sharpness,
+    and bounded search-scope corrections (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued

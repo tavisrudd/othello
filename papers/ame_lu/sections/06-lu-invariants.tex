@@ -58,7 +58,8 @@ of the integral H3 (icosahedral) sextuple
 is a six-arc.  Write \(k=\mathbb Z[\tau]/\mathfrak p\).  If the reduced
 arc is non-GRS, its
 equal-phase state is not LU-equivalent, even after party permutation, to
-any six-point GRS state over \(k\).
+any six-point GRS state over \(k\).  (The hypothesis is vacuous in
+characteristic five, where the reduction is itself GRS.)
 \end{theorem}
 
 \begin{proof}
@@ -88,7 +89,8 @@ subfield groups of order dividing \(120\) are
 \(\mathrm{PSL}_2(3)\cong A_4\) and
 \(\mathrm{PGL}_2(3)\cong S_4\), already covered above.  Thus, outside
 characteristic five, there are at most six fixed-point-free
-involutions.  This bound is attained by an octahedral six-set: the six
+involutions.  The bound is attained whenever \(\mathrm{PGL}_2(q)\) contains
+an octahedral \(S_4\), by the corresponding six-set: the six
 half-turns about axes through pairs of opposite edges act without fixed
 vertices.  Thus a GRS state has at most \(66\) copies of \(q^{-4}\), and
 the margin \(70>66\) is sharp for this argument.  In
@@ -159,8 +161,10 @@ claim that four copies are globally minimal.
 \subsection{Why fixed-copy scalars cannot recover the pencil coordinate}
 
 \begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
-Fix \(m\), a field of cardinality \(q\), an irreducible reduced parameter
-variety \(X\), and a regular generator-matrix chart \(G(x)\) of constant
+Fix \(m\) and a field \(k\) of cardinality \(q\), which is also the local
+Hilbert-space dimension under the code--state dictionary.  Fix an
+irreducible reduced parameter variety \(X\) over \(k\), and a regular
+generator-matrix chart \(G(x)\) of constant
 code dimension.  Every degree-\((m,m)\) permutation contraction of the
 associated equal-phase states is constant on a dense open subset of
 \(X\).  The same holds for party-orbit sums and linear combinations.  In
