@@ -1,0 +1,51 @@
+import RelativeConicArcs.Gates.AMELUAggregate
+
+/-!
+# Axiom audit for six-party AME local-unitary results
+
+This audit covers the paper-facing dictionary, admitted-pencil
+classification, marginal-moment separator, fixed-party logical phase,
+four-copy separator, and transport-divisor terminals.  The finite graph
+cardinalities use exhaustive native evaluation; all other listed
+declarations are checked without native evaluation.
+-/
+
+open RelativeConicArcs.AMELU
+
+#print axioms isMDSCode634_arcKernel
+#print axioms isAME_equalPhaseState_arcKernel
+#print axioms projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent
+#print axioms tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace
+#print axioms cssLabelSpace_isPauliLagrangian
+#print axioms mem_cssSupportedLabelSpace_iff_support_subset
+#print axioms equalPhaseState_hasMinimalComputationalSupport
+#print axioms isAME_equalPhaseState_iff_isMDSCode634
+
+#print axioms pencilZ_eq_iff_samePencilYOrbit
+#print axioms admitted_nonGRS_pencil_classified_by_z
+
+#print axioms card_marginalTriples
+#print axioms card_marginalStars
+#print axioms card_perfectMatchings
+#print axioms rankFourMultiplicity_eq_sixty_add_concurrency
+#print axioms not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences
+
+#print axioms fixedPartyKernel_eq_specialLinear_or_splitTorus
+#print axioms contractionMatchingRank_normalizeContractionPattern
+#print axioms contractionRankOrbitSum_permuteContractionPattern
+#print axioms q13_zFour_not_locallyUnitaryEquivalent_zTwelve
+
+#print axioms negativeSignedCyclePolynomial_factor
+#print axioms positiveSignedCyclePolynomial_factor
+#print axioms axialCyclePolynomial_factor
+#print axioms reducedTransportDivisor_eq_zero_iff_three_factors
+#print axioms reducedTransportDivisor_eq_zero_iff_z
+#print axioms signedTransportFactor_sub_two_mul_axial
+#print axioms reducedTransportDivisor_eq_zero_iff_axial_of_charSeven
+#print axioms TransportCycleCoverInputs.negativeSigned_det_factor
+#print axioms TransportCycleCoverInputs.positiveSigned_det_factor
+#print axioms TransportCycleCoverInputs.axial_det_factor
+#print axioms TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight
+#print axioms TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine
+#print axioms TransportOrbitGeometryInputs.card_axial_union_negative
+#print axioms TransportOrbitGeometryInputs.card_axial_union_positive
