@@ -3,6 +3,8 @@
 **Lane:** `reed-solomon` · **Status:** complete; C535--C537 queued without displacing C531
 
 Terminal report: `notes/2026-07-23-c534-non-deep-hole-prs-frontier-triage.md`.
+Conversation/portfolio companion:
+`notes/2026-07-23-c534-frontier-publication-portfolio-companion.md`.
 
 ## 1. Objective and terminal deliverable
 

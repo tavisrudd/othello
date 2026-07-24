@@ -2,6 +2,9 @@
 
 **Lane:** `reed-solomon` · **Date:** 2026-07-23 · **Status:** complete
 
+Conversation/portfolio companion:
+`notes/2026-07-23-c534-frontier-publication-portfolio-companion.md`.
+
 ## Executive verdict
 
 The six proposed directions do not support six new projects.
