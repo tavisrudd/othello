@@ -145,6 +145,17 @@ separately.  Its import gate, trace-only aggregate check, no-build probes,
 and standard-axiom audit passed.  See
 `2026-07-24-c566-ame-lu-lean-lc-classification.md`.
 
+**C567 closed (2026-07-24): marginal-moment separator interface
+complete.**  `RelativeConicArcs.AMELU.MarginalMoment` defines the concrete
+sum of three CSS supported-label spaces and its rank; checks the exact
+455/60/15 six-party graph counts; and proves the `60+b` concurrency
+reduction, rank-four trace specialization, and exact `70>66`
+LU-separation implication.  The density-matrix trace expansion,
+incidence/rank bridge, H3 ten-count, GRS six-bound, and LU covariance are
+named hypotheses rather than hidden axioms.  The warning-free import gate,
+trace-only aggregate gate, no-build probes, and native-aware axiom audit
+passed.  See `2026-07-24-c567-ame-lu-lean-marginal-moment.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -182,8 +193,8 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C567 is next: formalize the marginal trace/rank and concurrency-count
-reduction used by the uniform H3-versus-GRS LU separator.  C581 is a
+C568 is next: formalize the logical-Clifford phase and exact four-copy
+contraction separator.  C581 is a
 separately queued optional upgrade gate for basis-free phase-space
 reconstruction and quantitative approximate rigidity.
 
