@@ -669,6 +669,34 @@ def q13_lu_contraction_certificate() -> dict[str, object]:
             [list(value) for value in tail] for tail in separating_tails
         ],
     }
+    symmetrized_histograms = {}
+    first_tail = separating_tails[0]
+    for name, code in codes.items():
+        histogram = collections.Counter(
+            contraction_rank(
+                code,
+                (identity4,) + permuted_signature_key(first_tail, party_permutation),
+                4,
+                prime,
+            )
+            for party_permutation in itertools.permutations(range(N))
+        )
+        symmetrized_histograms[name] = dict(sorted(histogram.items()))
+    comparisons["4_party_symmetrized"] = {
+        "seed_normalized_sigma_tail": [list(value) for value in first_tail],
+        "party_orbit_size": 720,
+        "rank_histograms": symmetrized_histograms,
+        "orbit_sum_in_units_of_13^-9": {
+            "z4_t2": sum(
+                count * prime ** (21 - rank)
+                for rank, count in symmetrized_histograms["z4_t2"].items()
+            ),
+            "z12_t3": sum(
+                count * prime ** (21 - rank)
+                for rank, count in symmetrized_histograms["z12_t3"].items()
+            ),
+        },
+    }
     return {
         "field_order": prime,
         "classes": {

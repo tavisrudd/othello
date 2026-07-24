@@ -10752,6 +10752,54 @@
           }
         ]
       },
+      "4_party_symmetrized": {
+        "orbit_sum_in_units_of_13^-9": {
+          "z12_t3": 3024,
+          "z4_t2": 720
+        },
+        "party_orbit_size": 720,
+        "rank_histograms": {
+          "z12_t3": {
+            "20": 192,
+            "21": 528
+          },
+          "z4_t2": {
+            "21": 720
+          }
+        },
+        "seed_normalized_sigma_tail": [
+          [
+            3,
+            2,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            3,
+            2
+          ],
+          [
+            2,
+            3,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            3,
+            2
+          ],
+          [
+            2,
+            0,
+            1,
+            3
+          ]
+        ]
+      },
       "4_staged": {
         "elimination_witnesses": [
           {

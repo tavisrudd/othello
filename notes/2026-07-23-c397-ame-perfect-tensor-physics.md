@@ -40,8 +40,10 @@ C397 closes positively on all three required fronts.
    LU-inequivalent, even after every party permutation**.  Complete two-copy contraction data
    leaves all 720 party permutations; complete three-copy data leaves 48.  Two explicit
    four-copy permutation contractions eliminate those 48: the normalized contraction ranks are
-   `21` and `20`, hence their invariant values are respectively `13^-9` and `13^-8`.  This is the
-   theorem exit required by the staged LU ladder, not another pilot statistic.
+   `21` and `20`, hence their invariant values are respectively `13^-9` and `13^-8`.  The `ej`
+   upgrade compresses the proof to one party-symmetric scalar: orbit-summing the first contraction
+   gives `720*13^-9` versus `3024*13^-9`.  This is the theorem exit required by the staged LU
+   ladder, not another pilot statistic.
 
 The positive Stage-A invariant survives Stage B.  The characteristic-17 GRS/`S4` specialization
 retains the full `SL_2(17)` kernel, while the characteristic-31 non-GRS/`A5` specialization retains
@@ -252,6 +254,32 @@ rank `21` on the `t=2,z=4` class and rank `20` on the relabelled `t=3,z=12` clas
 values are `13^(12-21)=13^-9` and `13^(12-20)=13^-8`.  An LU equivalence after party permutation
 would preserve every such contraction, so none exists.
 
+The user-requested `ej` pass removes the indexed-family presentation from the final witness.  For
+the first stored four-copy pattern `sigma`, define the party-orbit sum
+
+```text
+J_sigma(Psi)=sum_(pi in S6) I_(pi.sigma)(Psi).
+```
+
+This is a single arbitrary-LU and party-permutation invariant.  Its exact rank distributions are
+
+```text
+t=2,z=4:    rank 21^720,
+t=3,z=12:   rank 20^192, rank 21^528.
+```
+
+Consequently
+
+```text
+J_sigma(t=2)=720*13^-9,
+J_sigma(t=3)=(192*13+528)*13^-9=3024*13^-9.
+```
+
+Thus one scalar contraction orbit, rather than a comparison of 720 labelled signatures, is the
+portable LU certificate.  The count `192=16*|A4|` is forced to be a multiple of the common
+projective automorphism order 12; identifying the sixteen quotient classes geometrically is an
+invariant-compression curiosity, not a missing C397 gate.
+
 This also explains why the earlier pilots stalled: all subsystem purities (two copies), the full
 three-copy rank histogram, and C396's selected marginal moment collide.  The first exact
 separator occurs here at four copies within the tested contraction hierarchy.  No claim of global
@@ -275,7 +303,8 @@ The deterministic checker imports hash-pinned C374 and C396 arithmetic.  It:
 - verifies the ten symbolic bracket products, fifteen projection brackets, and exact symbolic
   Gale isoduality, with independent finite replay at q=11,13,101; and
 - exhausts all 720 party permutations through the complete two- and three-copy q=13 contraction
-  sets, then checks the two exact four-copy separators on the 48 survivors.
+  sets, checks the two exact four-copy separators on the 48 survivors, and independently evaluates
+  all 720 terms in the single party-symmetrized orbit sum.
 
 The trusted boundary is finite-field Gaussian elimination, exact rational polynomial arithmetic,
 the standard stabilizer/Clifford symplectic dictionary, and the elementary copy-permutation
@@ -320,11 +349,12 @@ dictionary, or new holographic construction.
 
 ## `ej`/Tao closeout and mystery ledger
 
-The closeout produced two upgrades beyond the original pilot.  First, the q=11 numerical kernel
+The closeout produced three upgrades beyond the original pilot.  First, the q=11 numerical kernel
 gap is the specialization of an all-odd-field conic/Gale theorem, so the characteristic-17/31
 phase is explained without a new census.  Second, the q=13 attack ladder did not stop at
 minimal-support rigidity: complete low-copy contractions exposed the first successful rung and
-gave an arbitrary-LU theorem.
+gave an arbitrary-LU theorem.  Third, the user-requested `ej` pass orbit-symmetrized that rung into
+one scalar witness.
 
 | feature | disposition |
 |:---|:---|
@@ -335,7 +365,9 @@ gave an arbitrary-LU theorem.
 | Whether `w` is the Paper-1 determinant or pentad bit | **Settled negatively:** its flip is not parity, and the odd Fourier-isodual pentad swap fixes it. |
 | Whether `w` is operationally readable | **Settled negatively:** explicit monomial local Cliffords exchange the signs. |
 | Whether the q=13 moment collision is an LU collision | **Settled:** the two classes are arbitrarily LU-inequivalent; degree-four copy contractions separate them after all party permutations. |
+| Whether the q=13 theorem needs 720 labelled comparisons | **Settled negatively by `ej`:** one party-orbit sum has values `720*13^-9` and `3024*13^-9`. |
 | Whether degree four is globally minimal | **Open only as an invariant-compression question:** complete copy degrees two and three fail, but another non-copy-contraction invariant of lower polynomial degree was not classified. No successor is required for C397. |
+| Why the second orbit sum has exactly 192 rank-20 terms | **Partly settled:** `192=16*12` follows from the common `A4` symmetry; a geometric interpretation of the sixteen quotient classes is optional and unallocated. |
 
 No exit-condition mystery remains.
 

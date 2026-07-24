@@ -1227,3 +1227,19 @@ differ, so it is not motion in one fixed-incidence stratum.
 **Evidence:** CHECKED by the C419 primary certificate and independent replay.
 **Status:** graduated -> C419 / `notes/2026-07-20-c418-c419-c410-successors.md`; first gate failed,
 and the selected generic fixed-incidence stratum closed bounded-negatively.
+
+### 2026-07-23 — sixteen quotient classes behind the q=13 LU orbit sum
+
+**Provenance:** C397's user-requested `ej` compression of the degree-four copy-contraction witness.
+**Was I looking for this?:** no — the probe sought one party-symmetric LU scalar, not a geometric
+classification of its low-rank terms.
+**Observed / musing:** the separating orbit sum has rank histogram `20^192,21^528` on the
+`t=3,z=12` class, while the `t=2,z=4` class is `21^720`.  The common projective `A4` acts on the
+192 exceptional party relabellings, so they form exactly sixteen `A4`-orbits if the action is free;
+the exact quotient geometry is currently unidentified.
+**Why it may matter / strongest question:** do those sixteen classes admit a classical description
+in the six-point/Gale matching geometry, turning the degree-eight quantum contraction into a
+smaller incidence count?
+**Evidence:** CHECKED for the `192` count and `A4` divisibility by the C397 certificate; freeness
+and the sixteen-class geometric interpretation remain OPEN.
+**Status:** open lead; unallocated.
