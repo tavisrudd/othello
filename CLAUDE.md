@@ -93,6 +93,11 @@ only the applicable routing entry in
 entry. Do not preload unrelated persona material, and do not load any of it for status, routing,
 literature comparison, or ordinary read-only review.
 
+## Paper prose: load on demand
+
+Before any task that works directly on a manuscript under `papers/`, read
+`papers/style-guide.md` completely. This is a routed read, not startup context.
+
 ## Literature cache: load on demand
 
 Before re-fetching a paper for a literature task, read `/tmp/persistent/tavis/lit-search/README.md`
@@ -101,7 +106,7 @@ and query the shared disk-backed cache with
 discover keys and `verify` to recheck the manifest hashes. `/tmp/persistent` is a ZFS mount, not the
 RAM-backed `/tmp` tmpfs. The cache records fetched bytes, not that a paper was read. For user-supplied
 scan sets such as `dye-1991/` and `bsw-1992/`, use the OCR reconstruction only for search and verify
-load-bearing text or formulas against the adjacent authoritative page images and `SHA256SUMS`.
+every cited text or formula against the adjacent authoritative page images and `SHA256SUMS`.
 
 When a deliverable depends on the absence of prior work — a novelty or priority verdict,
 forward-citation closure, a manuscript-bound "to our knowledge" sentence, or a pre-emption check —
@@ -113,7 +118,8 @@ search and every consulted source must be recorded.
 Before any paper-facing computational claim you MUST follow
 `notes/research-reproducibility-conventions.md`: commit the report, the exact script/generator, and
 a compact certificate as one atomic, git-visible bundle, with the exact replay command,
-load-bearing inputs, and SHA-256 hashes, plus an independent replay or a stated reason none exists.
+the inputs needed for the claim, and SHA-256 hashes, plus an independent replay or a stated reason
+none exists.
 An untracked `/tmp` file, local cache entry, or a claimed run is never sole evidence for a
 paper-facing result; state negatives with the exact searched domain and stop condition. That file
 also lists the model reports (C246/C254/C255) to copy.

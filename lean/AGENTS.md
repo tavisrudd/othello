@@ -7,6 +7,8 @@ receive identical guidance.
 
 - For a nontrivial Lean proof, first load the named-expert umbrella and relevant dossier named by
   the parent guide. Discussion or document review alone does not trigger that context.
+- Before any task that adds, edits, or reviews prose in a Lean source or generated Lean artifact,
+  read `../papers/style-guide.md` completely. This is a routed read, not startup context.
 - Treat every other lane's sources, generated files, build tree, and running process as owned state.
   Never edit, build, stop, clean, or regenerate a foreign closure.
 - Never run two heavyweight Lake builds in the shared tree. CPU affinity does not isolate memory or
@@ -247,7 +249,7 @@ cross-lane edits, certificate regeneration, or rebuilds outside the ownership ru
   is a precise restriction on hypotheses, conclusion, coverage, or trusted base, with no plan or
   forecast. Put work history and plans in the owning handoff or report.
 - Generated sources must identify themselves as generated and name the semantic data they encode.
-  Whenever generated content is load-bearing, name its tracked generator and schema. Generation
+  Whenever generated content is needed for a claim, name its tracked generator and schema. Generation
   metadata must not substitute for a mathematical description or contain private workflow
   identifiers. Never hand-edit generated output to repair its prose; fix the generator and
   regenerate it only in the owning, validated build window.
@@ -327,12 +329,12 @@ references. Ordinary mathematical notation can resemble an ID, so automated sear
 backstop rather than a substitute for referee review.
 
 Before claiming that a module or gate backs a paper, apply the same review to every project-owned
-file in its transitive verification closure, including generated modules and load-bearing non-Lean
-artifacts; reviewing only files changed by the current task is insufficient. Legacy violations
-outside the current owner's safe edit scope must be recorded for an explicit cleanup rather than
-silently waived or opportunistically edited. The artifact cannot be declared referee-ready until
-they are resolved. This prose review is required in addition to elaboration, gate builds, and axiom
-audits.
+file in its transitive verification closure, including generated modules and non-Lean artifacts
+needed for the claim; reviewing only files changed by the current task is insufficient. Legacy
+violations outside the current owner's safe edit scope must be recorded for an explicit cleanup
+rather than silently waived or opportunistically edited. The artifact cannot be declared
+referee-ready until they are resolved. This prose review is required in addition to elaboration,
+gate builds, and axiom audits.
 
 ## Failure and ownership discipline
 
