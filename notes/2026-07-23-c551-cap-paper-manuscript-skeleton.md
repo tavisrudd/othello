@@ -30,6 +30,20 @@ corollaries.
 size-three extension count, the rank-three residual-hypergraph theorem, and
 the pair-only Node--Kayles specialization.
 
+Use the following composed statement:
+
+> For every finite field and every rank-three projective model, the initial
+> game is P exactly when every legal residual size-three state has a P-valued
+> legal child.  Every such state has exactly `q²−9q+21` legal children and
+> determines a unique nondegenerate burned-direction conic containing exactly
+> `q−4` legal non-seed cells.  Minimal residual obstructions on legal vertices
+> have size two or three; when the triples vanish, residual validity is
+> exactly pairwise validity.
+
+This theorem is assembled from separately checked terminals.  Its conic
+clause identifies a distinguished candidate set; it does not assert that the
+candidate set contains a P child.
+
 The introduction says that Theorem C identifies the exact obstruction left
 outside Theorems A and B.  It does not present computation as a substitute for
 the missing odd-plane implication.
@@ -175,7 +189,11 @@ Interface theorems:
 1. frame reduction;
 2. `initialPStatement_iff_oddEscapeStatement_finrank`;
 3. `sizeThreeExtensionCount`;
-4. on-conic full-PGL value transport.
+4. `hyperbolaNormalFormStatement`;
+5. `uniqueConicThroughFiveArcStatement`;
+6. `onConicLegalExtensionCountStatement` and
+   `card_onConicLegalExtensions`;
+7. on-conic full-PGL value transport.
 
 Why hypotheses hold: the opening pair burns two parallel classes; a residual
 size-three state plus the burned directions gives the conic-localized escape
@@ -184,12 +202,22 @@ set.
 Consequence: a counterexample is exactly a value trap, not a state with no
 move.
 
+Logical caution: exact escape ranges over all `q²−9q+21` legal children.
+On-conic escape ranges over the distinguished `q−4` subset and is a stronger
+sufficient condition.  Never print an equivalence arrow from the initial game
+to `(ON)`.
+
 Outside: the uniform escape theorem remains open in the no-crown variant.
 
 Milner audit: keep projective, grid, and conic representations connected by
 named transport maps.
 
 Serre audit: one normalized residual picture; no orbit-mining chronology.
+
+Sharpness example: display three individually legal vertices on one
+load-zero line.  Every pair is compatible while the triple is invalid, so
+the pair-conflict graph alone cannot represent the residual until active
+triples are excluded.
 
 ### 6. Capacity degradation and the Node--Kayles boundary
 
@@ -307,3 +335,8 @@ The architecture may be frozen when:
    load-bearing bridge;
 4. the literature audit licenses each historical claim;
 5. the crown/no-crown choice is made from theorem status, not schedule.
+
+For the no-crown version, add a sixth gate: the literature audit must leave a
+defensible contribution in the composed Odd-Plane Structural Theorem or the
+uniform outcome package.  If it does not, do not use fixed-q evidence to
+simulate a structural headline.

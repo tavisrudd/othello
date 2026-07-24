@@ -343,11 +343,55 @@ profile `[propext, Classical.choice, Quot.sound]`; no row relies on
 |---|---|---|---|---|:---:|
 | R1 | In vector rank three, the initial projective position is P iff the residual odd-escape statement holds | `ProjectiveCap/TrapConverse.lean`, `ProjectiveCap.GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank` | `LEAN-THEOREM` | exact falsification equivalence; backbone of the odd-plane section | yes |
 | R2 | Every legal residual size-three state has exactly `q²−9q+21` legal extensions | `ProjectiveCap/ExtensionCount.lean`, `ProjectiveCap.sizeThreeExtensionCount`, proving `ProjectiveCap.Stable.SizeThreeExtensionCountStatement` | `LEAN-THEOREM` | shows that escape is a value problem, not move availability | yes |
+| R2a | Every legal residual size-three state has a unique nondegenerate burned-direction conic, represented by a unique hyperbola normal form | `ProjectiveCap/ConicLocalization.lean`, `ProjectiveCap.hyperbolaNormalFormStatement` and `ProjectiveCap.uniqueConicThroughFiveArcStatement` | `LEAN-THEOREM` | exact conic localization, with no appeal to an unrecorded prose bridge | yes |
+| R2b | Every non-seed cell on that conic is legal, and the on-conic legal-extension set has exactly `q−4` cells | same module, `ProjectiveCap.onConicLegalExtensionCountStatement` and `ProjectiveCap.card_onConicLegalExtensions` | `LEAN-THEOREM` | exact size and legality of the stronger on-conic candidate set | yes |
 | R3 | Full `PGL(2,q)` transport preserves the game value of an on-conic parameter set | `ProjectiveCap/Sym2ConicBridge.lean`, `ProjectiveCap.Sym2Bridge.onconic_value_bridge` | `LEAN-THEOREM` | makes one representative per full-PGL bucket sufficient once bucket values are certified | yes |
 | R4 | Grid-cap validity is rank at most three; every minimal bad extension on legal vertices has size two or three | `ProjectiveCap/ResidualHypergraph.lean`, `gridCap_iff_allSmallSubsetsCap`, `minimal_bad_extension_card` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | exact residual hypergraph theorem |
 | R5 | If no active minimal triples remain, continuation validity is determined by its two-point restrictions | same module, `ProjectiveCap.ResidualHypergraph.gridCap_union_iff_all_pairs` under `NoActiveResidualTriples` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | static `Y_NK`/conflict-graph interface; persistence is stated separately |
 | R6 | The isolated capacity-two gadget has Grundy value zero; follower signatures bound Grundy value | same module, `FiniteBuildGame.grundy_atMostTwo_empty_eq_zero`, `FiniteBuildGame.grundy_le_card_of_follower_signature` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | neutral-bulk lemma and exact location of the missing bounded-signature theorem |
 | R7 | Pair budgets bound gadget count, large-gadget count, and total overload | `ProjectiveCap/ResidualPairBudget.lean`, `pairBudget`, `card_le_pairBudget_div_three`, `largeMembers_card_le_pairBudget_div_choose`, `totalOverload_le_pairBudget_div_three` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | supporting bounds; not an explanation of the observed small SG |
+
+### Odd-plane logical spine
+
+The paper must distinguish an equivalence from a stronger sufficient route:
+
+```text
+initial projective position is P
+  ⇔ every legal residual size-three state
+     has some P-valued legal child
+       [exact escape equivalence, R1]
+
+(ON): every legal residual size-three state
+      has some P-valued on-conic child
+  ⇒ exact escape condition
+  ⇒ initial projective position is P
+       [sufficient strengthening, not an equivalence]
+```
+
+R2 counts all legal children by `q²−9q+21`.  R2a--R2b isolate `q−4` legal
+on-conic candidates inside that larger set.  Computation supports `(ON)` at
+the stated orders, but neither conic uniqueness nor the `q−4` count proves
+that one of those candidates is P.
+
+### Paper-level Odd-Plane Structural Theorem
+
+For a finite field `K` and a rank-three projective model, the checked terminals
+compose into one paper theorem:
+
+1. the initial cap game is P exactly when the residual escape condition holds;
+2. every legal residual size-three state has exactly `|K|²−9|K|+21` legal
+   children;
+3. that state determines a unique nondegenerate burned-direction conic in
+   hyperbola normal form, with exactly `|K|−4` legal non-seed cells;
+4. every minimal obstruction among individually legal residual vertices has
+   cardinality two or three;
+5. if the size-three obstructions vanish, continuation validity is exactly
+   pairwise validity, hence the static residual is its conflict-graph game.
+
+This is an assembled paper theorem, not presently one aggregate Lean
+declaration.  Each clause cites R1, R2, R2a, R2b, R4, or R5.  The open crown is
+the value-sensitive implication routing every seed to a P child, preferably
+through the on-conic or pair-only region.
 
 ### Fixed small-field theorems
 
@@ -449,6 +493,21 @@ M2 makes its ambient-collinearity cap game P.  The quadric rows are decisive
 examples discharging that predicate-preservation obligation.  This schema is
 already exactly formalized by arbitrary `Q`; it requires no new abstraction
 or Lean theorem.
+
+### No-crown viability gate
+
+The no-crown version is not automatically flagship-strength merely because it
+is correct.  It passes only if both conditions hold:
+
+1. the Odd-Plane Structural Theorem is presented as a sharp composed result,
+   with the exact escape equivalence, conic candidate set, and pair/triple
+   boundary carrying real mathematical content; and
+2. a current-compliant literature audit leaves at least one of the outcome
+   families or structured residual reductions as a defensible contribution.
+
+If the structural package is substantially pre-empted, the no-crown material
+should become a shorter formal note or join a later crown paper.  Fixed-q
+computations cannot repair a failed novelty gate.
 
 ## E. Manuscript assets and terminology
 
@@ -557,14 +616,12 @@ Do not put any of the following in the manuscript:
 2. **Dynamic Node--Kayles bridge.**  Package persistence and
    edge-preservation with R5 into one paper-facing game isomorphism theorem;
    R5 currently supplies the exact static half.
-3. **Conic localization API.**  Select and cite the exact formal terminals
-   for five-arc uniqueness and the `q−4` on-conic legal-extension statement,
-   rather than relying on prose aggregation.
-4. **Evidence normalization.**  Produce modern durable bundles for q=3,9,
+3. **Evidence normalization.**  Produce modern durable bundles for q=3,9,
    17,19,23,25 and `PG(4,3)`, or omit the affected numerical claims.
-5. **Referee-facing Lean audit.**  Audit the transitive closures of every
+4. **Referee-facing Lean audit.**  Audit the transitive closures of every
    paper-cited terminal, especially generated Q11/Q13 data.
-6. **Literature audit.**  Complete the six-item queue above before any
+5. **Literature audit and no-crown viability.**  Complete the six-item queue
+   above and apply the no-crown viability gate before any
    historical novelty or priority sentence.
 
 ### Evidence-normalization return on effort
@@ -602,6 +659,13 @@ The closeout `ej`+`tt` pass settled three packaging ambiguities:
   Hermitian, and Baer exclusion classification is a companion paper.
 - **Can the old novelty sentence be reused?** No.  The old audit lacks the
   current mandatory read-depth and citation-graph record.
+- **Was the conic API a missing formal result?** No.  The exact terminals are
+  `hyperbolaNormalFormStatement`, `uniqueConicThroughFiveArcStatement`,
+  `onConicLegalExtensionCountStatement`, and
+  `card_onConicLegalExtensions`; the ledger now records them.
+- **Is on-conic escape equivalent to the plane outcome?** No.  The full legal
+  escape condition is equivalent; `(ON)` is a stronger sufficient route using
+  the distinguished `q−4`-cell subset.
 
 Open genuine mysteries:
 
