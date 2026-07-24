@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; implementation complete and ready for user-launched independent review
+**Status:** active; C552 post-delta implementation complete and awaiting user-launched independent review
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -21,8 +21,8 @@ live only through the final clean-release output and the mandatory user-launched
 The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is now the replacement-spine
 manuscript described by `notes/2026-07-21-clebsch-paper-abstract-outline.md`; the historical
 19-page baseline is no longer the release manuscript.  The manifest derives its identities from
-the final manuscript itself: 27 theorem-like environments and 30 separately hashed prose/table
-claims produce 57 exact claim rows.  No claim inherits a trust route merely because a related
+the final manuscript itself: 28 theorem-like environments and 33 separately hashed theorem-clause
+or prose/table claims produce 61 exact claim rows.  No claim inherits a trust route merely because a related
 terminal exists.
 
 The repaired C507 implementation `9a388b41` plus its final user-launched review `GO` provide the
@@ -407,8 +407,10 @@ Public evidence is now self-contained under the paper root:
   independent replays, semantic README, and a fail-closed bundle verifier;
 - `verification/evidence/passage_interfaces/` does the same for the theta, Fourier, and
   fixed-party passage tests;
-- `verification/statement_adequacy.json` records all 27 exact theorem-like environments;
-- `verification/trust_manifest.json` contains 57 claim rows with one explicit route or mixed
+- `verification/evidence/four_sheet_holonomy/` contains the direct rank-drop and reduced
+  cycle-transport checkers, canonical certificates, semantic README, and fail-closed bundle verifier;
+- `verification/statement_adequacy.json` records all 28 exact theorem-like environments;
+- `verification/trust_manifest.json` contains 61 claim rows with one explicit route or mixed
   decomposition per row, the pinned shared-Lean commit
   `43c403b23e7cb6b9d66dda01bb43a91bec9ea465`, exact gate/audit hashes, terminal-local axiom
   lists, cited inputs, residual trust, and the complete release check list; and
@@ -478,6 +480,48 @@ After the documentation audit, repin, and standalone-flake addition, its fresh c
 retained finite paper checkers, both public evidence bundles, pinned Mathlib-cache setup, and the
 exact aggregate Lean target.  The emitted JSON matched the tracked deterministic
 `verification/verify-release-output.json`, which is hash-bound by the trust manifest.
+
+### C552 cover-holonomy manuscript delta
+
+The pre-review manuscript now imports the C550 linear-sheaf/cycle-holonomy
+theorem.  `thm:four-sheet-holonomy` replaces the certificate-first
+four-copy account by a compact conceptual proof of the constant-section
+kernel, systematic `24 x 21` to `9 x 9` transport reduction, three localized
+cycle obstructions, reduced divisor, relative-frame multiplicities, and
+exceptional-characteristic split.  It explicitly keeps signed
+`w=+/-2/3` sheets distinct before passage to `z=4/9`, restricts itself to
+the admitted odd-characteristic non-GRS pencil, and claims neither complete
+pencil recovery nor four-copy minimality.
+
+The degree-six representation language is corrected throughout the adopted
+passage.  The order-24 group is the rotational octahedral action on six
+vertices with point stabilizer `C4`, not the tetrahedral edge action; the
+axial `C2^3` seam has orbits `2+4`, not `2+2+2`; and the full octahedral
+symmetry acts on the reduced linear transport frame, not the bare
+bipartite multigraph.  The abstract groups, `96/192` double-coset sizes,
+common derived `A4`, and `8/16` quotient counts remain unchanged.
+
+The internal frozen C550 evidence has report/checker/certificate SHA-256
+hashes
+`72896f37c0fc7c410fb3282dc15a007613723d11e3f1145db1f4825ef5359cca`,
+`3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7`,
+and
+`9d3bcb92d97d8fc84d4459cde906894d40e9c542d8ab389b5cf0b4fe29e5bda3`.
+The public paper artifact is the workflow-free
+`verification/evidence/four_sheet_holonomy/` bundle; its checksum-manifest
+hash is
+`c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf`.
+The bundle independently regenerates both the direct `24 x 21`
+rank-drop certificate and the reduced `9 x 9` cycle-transport certificate.
+
+The adequacy extraction now records 28 theorem-like environments, and the
+trust manifest records 61 claims.  The cover-holonomy theorem has one exact
+environment row and three separately hashed clause rows.  Each clause has
+an explicitly mixed route: conceptual proof in the manuscript plus exact
+public replay, with no inherited Lean label.  The shared-Lean pin remains
+`43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.  The pre-C552 independent
+review state is stale; C320 and C552 remain live until a user-launched
+review covers this delta and returns `GO`.
 
 ### Mystery ledger after the `ej`+`tt` closeout
 

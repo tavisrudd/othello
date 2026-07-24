@@ -214,6 +214,12 @@ def computation_component(
             "The bundle rebuilds the finite tables from frozen inputs and checks "
             "their independent transport identities."
         )
+    elif bundle == "holonomy":
+        prefix = "verification/evidence/four_sheet_holonomy"
+        independent = (
+            "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 "
+            "cycle-transport calculation are both regenerated and compared."
+        )
     else:
         raise ValueError(bundle)
     return {
@@ -335,6 +341,21 @@ def components_for_clause(label: str, index: int) -> list[dict[str, object]]:
             lean_component("rank-three arithmetic gluing", ["gluing", "torsor"]),
             computation_component("finite gluing and fixed-child replay", "torsor", "The bundle checks the exact matching orbits, determinant swaps, and fixed-child quotient."),
             conceptual_component("classical group and number-field semantics", TORSOR_INPUTS, "The finite comparison maps are checked exactly."),
+        ]
+    if label == "thm:four-sheet-holonomy":
+        if index == 1:
+            return [
+                conceptual_component("constant sections and systematic transport reduction", CLASSICAL_INPUTS, "The manuscript derives the quotient operator and equality of excess kernel dimensions."),
+                computation_component("section-to-transport finite bridge", "holonomy", "The bundle compares all 720 section and transport matrices in the displayed finite fields."),
+            ]
+        if index == 2:
+            return [
+                conceptual_component("cycle obstructions and relative-frame count", CLASSICAL_INPUTS, "The manuscript derives the three localized factors and the double-coset multiplicities."),
+                computation_component("divisor, cycle ledger, and multiplicity certificate", "holonomy", "The bundle checks the determinant by two arithmetic paths, excludes extra components, and classifies the exact support cells."),
+            ]
+        return [
+            conceptual_component("boundary, merger, and ramification distinction", CLASSICAL_INPUTS, "The manuscript derives the exceptional primes from the unique nonboundary branch point and the integral mod-7 identity."),
+            computation_component("exceptional-characteristic replay", "holonomy", "The bundle checks every stated finite rank histogram and boundary specialization."),
         ]
     if label == "thm:torsor-rosetta-close":
         return [
@@ -461,6 +482,13 @@ def checks() -> list[dict[str, object]]:
                 "timeout_seconds": 1800,
             },
             {
+                "id": "four-sheet-holonomy-evidence",
+                "repository": "paper",
+                "cwd": "verification/evidence/four_sheet_holonomy",
+                "argv": ["python3", "verify.py"],
+                "timeout_seconds": 900,
+            },
+            {
                 "id": "lean-mathlib-cache",
                 "repository": "lean",
                 "cwd": ".",
@@ -505,6 +533,7 @@ def main() -> None:
         "thm:headline-balanced",
         "thm:headline-depth",
         "thm:headline-gluing",
+        "thm:four-sheet-holonomy",
         "thm:torsor-rosetta-close",
     }
     for statement in statements:

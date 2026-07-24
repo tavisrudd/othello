@@ -1,5 +1,5 @@
 {
-  "check_count": 17,
+  "check_count": 18,
   "checks": [
     {
       "id": "verification-tool-tests",
@@ -59,6 +59,10 @@
     },
     {
       "id": "torsor-dictionary-evidence",
+      "status": "passed"
+    },
+    {
+      "id": "four-sheet-holonomy-evidence",
       "status": "passed"
     },
     {

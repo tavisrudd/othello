@@ -198,7 +198,7 @@
         }
       ],
       "id": "statement-thm-headline-rigidity-phase",
-      "paper_location": "theorem at source line 251",
+      "paper_location": "theorem at source line 252",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-rigidity-phase",
@@ -633,7 +633,7 @@
         }
       ],
       "id": "statement-thm-headline-balanced",
-      "paper_location": "theorem at source line 273",
+      "paper_location": "theorem at source line 274",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-balanced",
@@ -1297,7 +1297,7 @@
         }
       ],
       "id": "statement-thm-headline-depth",
-      "paper_location": "theorem at source line 287",
+      "paper_location": "theorem at source line 288",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-depth",
@@ -2217,7 +2217,7 @@
         }
       ],
       "id": "statement-thm-headline-gluing",
-      "paper_location": "theorem at source line 312",
+      "paper_location": "theorem at source line 313",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-gluing",
@@ -2683,7 +2683,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 424",
+      "paper_location": "proposition at source line 425",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:a5-point-orbits",
@@ -2725,7 +2725,7 @@
         }
       ],
       "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 494",
+      "paper_location": "proposition at source line 495",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-holes-conic",
@@ -2741,7 +2741,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 529",
+      "paper_location": "corollary at source line 530",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "cor:named-variety",
@@ -2783,7 +2783,7 @@
         }
       ],
       "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 566",
+      "paper_location": "proposition at source line 567",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-hole-orbit",
@@ -2824,7 +2824,7 @@
         }
       ],
       "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 614",
+      "paper_location": "proposition at source line 615",
       "route": "mixed",
       "source": {
         "claim_key": "prop:decoding-oracle",
@@ -2840,7 +2840,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 701",
+      "paper_location": "lemma at source line 702",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:six-arc-line-bound",
@@ -2882,7 +2882,7 @@
         }
       ],
       "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 736",
+      "paper_location": "theorem at source line 737",
       "route": "mixed",
       "source": {
         "claim_key": "thm:rigidity",
@@ -2907,7 +2907,7 @@
         "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
       },
       "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 804",
+      "paper_location": "proposition at source line 805",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "prop:low-degree-rigidity",
@@ -2923,7 +2923,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 829",
+      "paper_location": "corollary at source line 830",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "corollary:aec192b0d5224cce",
@@ -2954,7 +2954,7 @@
         "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
       "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 878",
+      "paper_location": "theorem at source line 879",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "thm:gap",
@@ -2995,7 +2995,7 @@
         }
       ],
       "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1016",
+      "paper_location": "proposition at source line 1017",
       "route": "mixed",
       "source": {
         "claim_key": "prop:brianchon-support",
@@ -3036,7 +3036,7 @@
         }
       ],
       "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1066",
+      "paper_location": "corollary at source line 1067",
       "route": "mixed",
       "source": {
         "claim_key": "cor:decoder-brianchon",
@@ -3082,7 +3082,7 @@
         }
       ],
       "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1082",
+      "paper_location": "proposition at source line 1083",
       "route": "mixed",
       "source": {
         "claim_key": "prop:chirality",
@@ -3098,7 +3098,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1131",
+      "paper_location": "lemma at source line 1132",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:chord-defect",
@@ -3140,7 +3140,7 @@
         }
       ],
       "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1161",
+      "paper_location": "theorem at source line 1162",
       "route": "mixed",
       "source": {
         "claim_key": "thm:why11",
@@ -3181,7 +3181,7 @@
         }
       ],
       "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1208",
+      "paper_location": "proposition at source line 1209",
       "route": "mixed",
       "source": {
         "claim_key": "prop:clebsch-family-uncovered",
@@ -3222,7 +3222,7 @@
         }
       ],
       "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1278",
+      "paper_location": "proposition at source line 1279",
       "route": "mixed",
       "source": {
         "claim_key": "prop:h3-arrangement",
@@ -3263,7 +3263,7 @@
         }
       ],
       "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1357",
+      "paper_location": "theorem at source line 1358",
       "route": "mixed",
       "source": {
         "claim_key": "thm:small-k-conic-filling",
@@ -3279,7 +3279,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1566",
+      "paper_location": "proposition at source line 1567",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -3367,7 +3367,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1621",
+      "paper_location": "lemma at source line 1622",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -3430,7 +3430,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 1727",
+      "paper_location": "proposition at source line 1728",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -3438,6 +3438,286 @@
         "sha256": "2a7bef6a056c771655be39bc5667dad4bffe3d2981df0dd94670f615d0df2407"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "constant sections and systematic transport reduction",
+          "unconditional_remainder": "The manuscript derives the quotient operator and equality of excess kernel dimensions."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle compares all 720 section and transport matrices in the displayed finite fields."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "section-to-transport finite bridge"
+        },
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "cycle obstructions and relative-frame count",
+          "unconditional_remainder": "The manuscript derives the three localized factors and the double-coset multiplicities."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle checks the determinant by two arithmetic paths, excludes extra components, and classifies the exact support cells."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "divisor, cycle ledger, and multiplicity certificate"
+        },
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "boundary, merger, and ramification distinction",
+          "unconditional_remainder": "The manuscript derives the exceptional primes from the unique nonboundary branch point and the integral mod-7 identity."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle checks every stated finite rank histogram and boundary specialization."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "exceptional-characteristic replay"
+        }
+      ],
+      "id": "statement-thm-four-sheet-holonomy",
+      "paper_location": "theorem at source line 1762",
+      "route": "mixed",
+      "source": {
+        "claim_key": "thm:four-sheet-holonomy",
+        "kind": "theorem-environment",
+        "sha256": "d1936ce3004f66829bdf12ccd8e8ae19231920d67d6b9457a12f25900c471065"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "constant sections and systematic transport reduction",
+          "unconditional_remainder": "The manuscript derives the quotient operator and equality of excess kernel dimensions."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle compares all 720 section and transport matrices in the displayed finite fields."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "section-to-transport finite bridge"
+        }
+      ],
+      "id": "thm-four-sheet-holonomy-clause-1",
+      "paper_location": "thm:four-sheet-holonomy, clause 1",
+      "route": "mixed",
+      "source": {
+        "kind": "verbatim",
+        "sha256": "72d16635fb1ccedd198334802c5079fb1d0ffc13201e2f0cfcfd871f900b5b16",
+        "tex": "constant sections form a three-space.  After quotienting them, the\n  \\(24\\)-equation section problem is the kernel of a \\(9\\)-by-\\(9\\)\n  operator on \\(U^3\\), where\n  \\(U=\\F_q^4/\\F_q(1,1,1,1)\\); its nine blocks are two-matching\n  holonomies;"
+      },
+      "trust_boundary": "This row routes one separately stated numbered subclaim."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "cycle obstructions and relative-frame count",
+          "unconditional_remainder": "The manuscript derives the three localized factors and the double-coset multiplicities."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle checks the determinant by two arithmetic paths, excludes extra components, and classifies the exact support cells."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "divisor, cycle ledger, and multiplicity certificate"
+        }
+      ],
+      "id": "thm-four-sheet-holonomy-clause-2",
+      "paper_location": "thm:four-sheet-holonomy, clause 2",
+      "route": "mixed",
+      "source": {
+        "kind": "verbatim",
+        "sha256": "ce117820634106acb4d1619ae3b929e3f3f198a4fc5f2c465385d9850becf147",
+        "tex": "a nonconstant generic section occurs precisely in one axial\n  relative-frame type, of size \\(96\\), at \\(z=2\\), or in either of two\n  signed six-cycle types, each of size \\(192\\), at\n  \\(w=\\pm2/3\\).  Every generic excess kernel is one-dimensional, so the\n  reduced rank-drop divisor is\n  \\[\n     (z-2)(9z-4)=0.\n  \\]\n  The common derived \\(A_4\\) acts freely, giving \\(8\\) and \\(16\\)\n  quotient classes;"
+      },
+      "trust_boundary": "This row routes one separately stated numbered subclaim."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "boundary, merger, and ramification distinction",
+          "unconditional_remainder": "The manuscript derives the exceptional primes from the unique nonboundary branch point and the integral mod-7 identity."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/evidence/four_sheet_holonomy/verify.py",
+                "repository": "paper",
+                "sha256": "3949d6fcbcf2c606a60d8b0a3860f353422a489ebab580469acc034a18538aa7"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/manifest.sha256",
+                "repository": "paper",
+                "sha256": "c73124261d5584a304aaf3dc52649844a5dae717dc28908f28f29574b96b8fbf"
+              },
+              {
+                "path": "verification/evidence/four_sheet_holonomy/README.md",
+                "repository": "paper",
+                "sha256": "2f6e445fb698ad553401ca8f3e5d0980c4765e76e232c81b08377f4e57152743"
+              }
+            ],
+            "checker": "python3 verification/evidence/four_sheet_holonomy/verify.py",
+            "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
+            "independent_replay": "A direct 24-by-21 rank-drop calculation and the reduced 9-by-9 cycle-transport calculation are both regenerated and compared.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
+            "soundness_bridge": "The bundle checks every stated finite rank histogram and boundary specialization."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "exceptional-characteristic replay"
+        }
+      ],
+      "id": "thm-four-sheet-holonomy-clause-3",
+      "paper_location": "thm:four-sheet-holonomy, clause 3",
+      "route": "mixed",
+      "source": {
+        "kind": "verbatim",
+        "sha256": "616b3701002e985678f4793ab46ea45459790ba4d208a283e09b52e26174136d",
+        "tex": "characteristic \\(7\\) merges the axial divisor with one signed\n  divisor and gives \\(96+192=288\\) active assignments.  Characteristics\n  \\(11,13,41\\) only ramify the pullback to the \\(t\\)-line.  Characteristic\n  \\(3\\) removes both reduced components at the excluded boundary, while\n  in characteristic \\(5\\) the signed component moves to that boundary\n  and the axial component remains."
+      },
+      "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
     {
       "components": [
@@ -3516,7 +3796,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 1761",
+      "paper_location": "lemma at source line 1879",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -4459,7 +4739,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1792",
+      "paper_location": "theorem at source line 1910",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -6256,7 +6536,7 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "3c1269552e6db46a753ab4db97267392b66c156e31dac529dee5bb541e2f90f9",
+  "manuscript_sha256": "5b7771c42380525f869c1be3160314488dbed9956fe64c1dbe0185afcbd5ec3e",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
@@ -6425,6 +6705,16 @@
       },
       {
         "argv": [
+          "python3",
+          "verify.py"
+        ],
+        "cwd": "verification/evidence/four_sheet_holonomy",
+        "id": "four-sheet-holonomy-evidence",
+        "repository": "paper",
+        "timeout_seconds": 900
+      },
+      {
+        "argv": [
           "nix",
           "develop",
           "--command",
@@ -6464,7 +6754,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "549adc5c47e26d33e885717d3b45abd9713babe4a4ec960f53bd6df6f2adda8f"
+      "sha256": "bc8b58f30bb63ecae39ad42f898899fa39047f95180ab2ff419073c95da5db90"
     }
   }
 }

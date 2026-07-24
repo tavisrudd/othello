@@ -220,6 +220,7 @@ code, with no preferred pairing, parent, or orientation.  Figure
 \begin{tikzpicture}[
   every node/.style={align=center,font=\small},
   box/.style={draw,rounded corners,minimum height=8mm,inner xsep=4pt},
+  edge label/.style={font=\scriptsize,fill=white,inner sep=1pt},
   >=stealth]
 \node[box] (p) {parent and\\secant matching};
 \node[box,right=9mm of p] (c) {unmarked\\conic child};
@@ -228,12 +229,12 @@ code, with no preferred pairing, parent, or orientation.  Figure
 \node[box,below=10mm of s] (o) {oriented\\sheet};
 \node[box,left=9mm of o] (d) {six profiles\\$1,4,6/1,4,6$};
 \node[box,left=9mm of d] (r) {decorated\\parent};
-\draw[->] (p) -- node[above]{forgets} (c);
-\draw[->] (c) -- node[above]{divide by $Q$} (q);
-\draw[->] (q) -- node[above]{moments $1,2$} (s);
-\draw[->] (s) -- node[right]{signed cubic} (o);
-\draw[->] (o) -- node[above]{depth map} (d);
-\draw[->] (d) -- node[above]{singleton} (r);
+\draw[->] (p) -- node[edge label,above=6mm]{forgets} (c);
+\draw[->] (c) -- node[edge label,above=6mm]{divide by $Q$} (q);
+\draw[->] (q) -- node[edge label,above=6mm]{moments $1,2$} (s);
+\draw[->] (s) -- node[edge label,right=2mm]{signed cubic} (o);
+\draw[->] (o) -- node[edge label,above=6mm]{depth map} (d);
+\draw[->] (d) -- node[edge label,above=6mm]{singleton} (r);
 \end{tikzpicture}
 \caption{The reconstruction arc.  The arrows are respectively a forgetting
 map, an ideal-quotient construction, intrinsic recovery of an unordered
@@ -1001,7 +1002,7 @@ carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
     \draw (p01)--(p24) (p23)--(p14) (p04)--(p13)
           (p12)--(p03) (p34)--(p02);
     \draw (p24)--(p13)--(p02)--(p14)--(p03)--cycle;
-    \node[font=\small] at (0,2.05) {$KG(5,2)$};
+    \node[font=\small] at (0,2.45) {$KG(5,2)$};
   \end{scope}
 \end{tikzpicture}
 \caption{The synthematic--Petersen dictionary. The five line styles encode
@@ -1758,6 +1759,123 @@ signed-transpose identity, and complete fixed-party kernel--image
 equivalence.  It does not classify arbitrary complex local unitaries or
 assert a canonical geometric reconstruction of every state.
 
+\begin{theorem}[Four-sheet cover holonomy]
+\label{thm:four-sheet-holonomy}
+Let \(V\) be the three-dimensional message space of the admitted non-GRS
+pencil in odd characteristic, with coordinate covectors \(g_0,\ldots,g_5\).
+Put
+\[
+ A=-4t(t-1)^2,\quad
+ B=(t^2-t+1)(t^2-3t+1),\quad
+ w=B/A,\quad z=w^2,
+\]
+and assume \(2t(t-1)BG\ne0\), where
+\(G=t^4-4t^3+7t^2-4t+1\).  Join four left to four right
+copies by the six matchings \(\sigma_0,\ldots,\sigma_5\)
+\[
+ 1,\ (03)(12),\ (23),\ (02)(13),\ (01)(23),\ (021).
+\]
+For each party assignment \(p\in S_6\), put \(V\) on every vertex,
+\(\F_q\) on every edge of color \(i\), and use \(g_{p(i)}\) as both
+restriction maps.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item constant sections form a three-space.  After quotienting them, the
+  \(24\)-equation section problem is the kernel of a \(9\)-by-\(9\)
+  operator on \(U^3\), where
+  \(U=\F_q^4/\F_q(1,1,1,1)\); its nine blocks are two-matching
+  holonomies;
+\item a nonconstant generic section occurs precisely in one axial
+  relative-frame type, of size \(96\), at \(z=2\), or in either of two
+  signed six-cycle types, each of size \(192\), at
+  \(w=\pm2/3\).  Every generic excess kernel is one-dimensional, so the
+  reduced rank-drop divisor is
+  \[
+     (z-2)(9z-4)=0.
+  \]
+  The common derived \(A_4\) acts freely, giving \(8\) and \(16\)
+  quotient classes;
+\item characteristic \(7\) merges the axial divisor with one signed
+  divisor and gives \(96+192=288\) active assignments.  Characteristics
+  \(11,13,41\) only ramify the pullback to the \(t\)-line.  Characteristic
+  \(3\) removes both reduced components at the excluded boundary, while
+  in characteristic \(5\) the signed component moves to that boundary
+  and the axial component remains.
+\end{enumerate}
+The theorem detects these two reduced values; it does not recover the
+whole pencil or assert four-copy minimality.
+\end{theorem}
+
+\begin{proof}
+A section is a tuple \((x_a,y_b)\in V^8\) satisfying
+\[
+ g_{p(i)}(x_a-y_{\sigma_i(a)})=0.
+\]
+The diagonal tuples are the constant three-space.  Subtract \(y_0\) from
+all vertex values and then use code coordinates \(3,4,5\) as free
+coordinates.  If \(\rho_i\) is the action of the \(i\)-th matching on
+\(U\), the remaining equations are
+\[
+ \sum_{k=0}^2 Q_{ik}(\rho_i-\rho_{3+k})Y_k=0,\qquad
+ Q=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
+\]
+where
+\[
+ a=-2(t-1)^2,\quad b=-(t^2-t+1),\quad
+ c=-(t^2-3t+1),\quad d=-2(t-1).
+\]
+Thus each block is the transport around the even cycles in the union of
+two matchings.  Reversing the elimination recovers the original
+\(24\)-by-\(21\) quotient matrix, with the same excess kernel dimension.
+
+The identities
+\[
+ a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc
+\]
+reduce the signed cycle-cover ledger of this operator to
+\[
+\begin{aligned}
+ P_-&=AB(3B-2A),\\
+ P_+&=AB(3B+2A),\\
+ P_2&=A(B^2-2A^2).
+\end{aligned}
+\]
+The remaining determinant factors are units on the admitted pencil.
+Hence the three localized obstructions are one-dimensional and give
+\(w=2/3,-2/3\) and \(z=2\).  This derives the constants from the
+transport cycles rather than fitting them to the \(720\) ranks.
+
+It remains to count the supporting assignments.  The code columns and
+the reduced transport each carry a frame of three opposite pairs.  The
+axial type is the relative-frame double coset with one marked common
+axis; its seam has order \(8\), so its size is
+\(48\cdot16/8=96\).  The two orientations of disjoint frames have seams
+of order \(6\), and each has size \(24\cdot48/6=192\).  The order-\(24\)
+action here is the rotational octahedral action on six vertices, with
+point stabilizer \(C_4\), and the axial \(C_2^3\) seam has orbits
+\(2+4\).  These octahedral symmetries belong to the reduced linear
+transport frame, not to the bare bipartite multigraph.  The common
+derived \(A_4\) acts freely, proving the two quotient counts.
+
+Finally put \(r=b/c=(t+t^{-1}-1)/(t+t^{-1}-3)\).  The three nonboundary
+root orbits are
+\[
+ r\in\{1/2,-2\},\qquad r\in\{-1/2,2\},\qquad
+ r^2\in\{1/2,2\}.
+\]
+The sole nonboundary branch point is \(t=-1\), where \(r=3/5\).
+Substitution gives the collision primes \(7,11,13,41\).  In characteristic
+\(7\),
+\[
+ (3B-2A)(3B+2A)-2(B^2-2A^2)=7B^2,
+\]
+so the axial and signed-union root schemes coincide after localizing at
+\(B\), while their assignment supports remain disjoint.  The other
+three primes double one pullback root without changing its reduced
+divisor or kernel dimension.  Direct specialization puts both
+obstructions on the excluded boundary in characteristic \(3\), and only
+the signed obstruction there in characteristic \(5\).
+\end{proof}
+
 \begin{lemma}[Determinant-sign transport and the no-section obstruction]
 \label{lem:sign-torsor-no-section}
 Let $\chi:G\to C_2$ be surjective and put $H=\ker\chi$.  Then $G/H$ is a
@@ -1899,6 +2017,9 @@ Witt--Hadamard shadow and survival boundaries
 theta, Fourier, and fixed-party passages
 & same paper trust gate
 & \path{verification/evidence/passage_interfaces/verify.py}\\
+four-sheet cover holonomy
+& conceptual sheaf and cycle proof in Theorem~\ref{thm:four-sheet-holonomy}
+& \path{verification/evidence/four_sheet_holonomy/verify.py}\\
 \bottomrule
 \end{tabular}
 \caption{Verification map for the factorization-memory results.  Sharing a
