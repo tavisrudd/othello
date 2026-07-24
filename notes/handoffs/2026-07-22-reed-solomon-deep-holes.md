@@ -809,6 +809,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
+| 2 | C595 | queued for a fresh session | build the integral Fano/elimination model for \(\mathrm{SC}(j)\), regress R6/R7, then stop at the first unresolved level or structural obstruction |
 
 ## Unallocated level-ups
 
