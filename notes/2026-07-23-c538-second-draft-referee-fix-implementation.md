@@ -27,6 +27,13 @@ ordered Hessian, and `e_7`.  It recommended an intrinsic polar construction,
 a separately named degree-specific contained-component assertion, and a
 conditional transverse theorem.
 
+A follow-up adversarial read closed the first of those component assertions.
+For a rank-three upper catalecticant, lower rank drop forces the entire upper
+kernel into the factor hyperplane; containment for every geometric factor
+would put that kernel in the zero intersection of all factor hyperplanes.
+This characteristic-free rank--nullity proof closes `CC(6,1)` and the
+ordinary persistent rank-two carrier in every later degree.
+
 The editorial/reproducibility read confirmed that the source already used
 `q>=43` consistently, isolated the real `kappa` inconsistency, recommended a
 shorter abstract, notation/terminology, stable public certificate names, a
@@ -111,18 +118,19 @@ explicit inputs.
 
 ## Remaining proof-critical work
 
-The proof extraction exposed three genuine gaps beyond the referee's
-presentation critique:
+The proof extraction initially exposed three gaps beyond the referee's
+presentation critique.  The first is now closed:
 
-- the R7/R8 kernel--hyperplane sentence does not prove the required
-  contained-line classification;
+- the R7/R8 kernel--hyperplane sentence was incomplete as written; the
+  missing nullity calculation now proves the ordinary rank-two
+  contained-line classification and closes R7;
 - R9 does not yet print the six-slice Bézout data or the nonzero
   rational-base polynomial and degree calculation;
 - the Hessian argument bounds individual degeneracy generators but does not
   exhibit one polynomial of the same degree containing the whole bad union.
 
-The manuscript now makes the affected continuation/classification statements
-conditional instead of presenting these inputs as proved consequences.
+The manuscript retains conditional language only for the later marker,
+slice, and Hessian gates not discharged by the rank-two proposition.
 
 The revision does not manufacture the missing mathematics.  Before a
 proof-complete release:

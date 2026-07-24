@@ -69,12 +69,10 @@ genus one.
 For higher redundancy we introduce coherent polar flags: iterated
 contractions in which every selected factor remains a marked forbidden
 root.  After separating the level-specific contained-component problem
-from the transverse point-count argument, this method gives a complete
-all-field deep-hole classification at redundancy six.  At redundancy
-seven the finite range is certified and the all-field continuation is
-reduced to one explicit contained-component gate; after that gate, the
-split-free list is a deep-hole classification whenever the covering
-radius is six, in particular for $q\geq11$.  The analogous transverse
+from the transverse point-count argument, this method gives complete
+all-field classifications at redundancies six and seven; the
+redundancy-seven split-free list is a deep-hole classification whenever
+the covering radius is six, in particular for $q\geq11$.  The analogous transverse
 arguments at redundancies eight and nine leave only the persistent
 families for $q\geq43$ and $q\geq53$, conditional on their printed
 component and slice gates.
@@ -221,8 +219,7 @@ The following statements hold.
       characteristic-two nucleus orbit.
 \item The displayed finite domains through $q=32$ have the certified
       split-free classification stated in Section~\ref{sec:r67}.
-      Conditional on the printed degree-six contained-component gate,
-      the same list continues over every field: for $q\geq13$ it is the
+      The same list continues over every field: for $q\geq13$ it is the
       persistent families plus one central nucleus point when
       $q=2^m$ and $m$ is odd.  The list is a deep-hole classification
       only when $\rho(\PRS(q-6))=6$, in particular for $q\geq11$.
@@ -246,11 +243,11 @@ its orbit decomposition changes precisely when
 $\operatorname{char}\F_q$ divides $r-1$.
 \end{theorem}
 
-The three parts have different scopes.  Part~(a) is an unconditional
-all-field deep-hole classification.  Parts~(b) and~(c) isolate the
-remaining mathematical gates rather than treating them as certificate
-inputs.  Even after those gates close, part~(b) becomes a deep-hole
-classification only when $\rho(\PRS(q-6))=6$, and part~(c) makes no
+The three parts have different scopes.  Parts~(a) and~(b) are
+unconditional all-field syndrome classifications, but part~(b)
+becomes a deep-hole classification only when
+$\rho(\PRS(q-6))=6$.  Part~(c) isolates the remaining mathematical
+gates rather than treating them as certificate inputs and makes no
 classification claim below its displayed high-field thresholds.
 
 \paragraph{Relation to previous work.}
@@ -772,22 +769,68 @@ R9 four-marker cover & $1$ & $36$ & $1$ & $q\geq50$ & $53$\\
 
 \subsection{Contained-component calculations}
 
-The contained-component calculation is the load-bearing structural
-input.  At redundancy six it is the explicit cubic-minor calculation
-of Proposition~\ref{prop:r6-secant}.  At later levels the desired
-analogue is a scheme-theoretic equivalence
+The ordinary rank-two carrier admits a uniform contained-line
+calculation.  This does not classify other lower bad schemes, but it
+closes the persistent part of every level-specific component gate.
+
+\begin{proposition}[Contained rank-two polar lines]
+\label{prop:contained-rank-two}
+Let $n\geq5$, let $f\in\PP(\Gamma^nE)$, and let
 \[
-\Phi_f(\PP^1)\subset\{\operatorname{rank}C^{(2)}\leq2\}
-\quad\Longleftrightarrow\quad
-f\text{ lies in the stated persistent carrier}.
+ A=C_f^{(2)}:\Sym^{n-2}E^\vee\longrightarrow\Gamma^2E
 \]
-This is not a formal consequence of consecutive rows: the degree-six
-kernel--hyperplane argument in the landed report is incomplete.
-Accordingly the later applications name this equivalence as a
-level-specific $\mathrm{CC}(n,j)$ gate.  Once a persistent fiber has
-been identified, its nonsplit torus acts by $z\mapsto z^n$, giving
-$T/T^n$ modulo inversion and Frobenius, while the tangent unipotent
-cocycle is $z\mapsto z+nu$.
+be the three-row catalecticant.  Assume the contraction map
+$E^\vee\to\Gamma^{n-1}E$ is injective, so the first-polar map is
+defined on all of $\PP(E^\vee)$.  Then
+\[
+\Phi_f(\PP(E^\vee))\subset
+\{b:\operatorname{rank}C_b^{(2)}\leq2\}
+\quad\Longleftrightarrow\quad
+\operatorname{rank}A\leq2
+\]
+scheme-theoretically and in every characteristic.  If
+$\operatorname{rank}A=3$, the rank-drop parameters form a subscheme of
+$\PP(E^\vee)$ of degree at most three.
+\end{proposition}
+
+\begin{proof}
+For a nonzero $\lambda\in E^\vee$, multiplication identifies
+$\Sym^{n-3}E^\vee$ with the hyperplane
+\[
+ H_\lambda=\lambda\Sym^{n-3}E^\vee\subset\Sym^{n-2}E^\vee,
+\]
+and functoriality gives
+\[
+ C_{\iota_\lambda f}^{(2)}=A|_{H_\lambda}.
+\]
+The forward implication is immediate.  Conversely, suppose
+$\operatorname{rank}A=3$ and put $K=\ker A$, so
+$\dim K=n-4$.  If the lower rank is at most two, rank--nullity on the
+$(n-2)$-dimensional space $H_\lambda$ gives
+\[
+ \dim(K\cap H_\lambda)\geq(n-2)-2=n-4=\dim K.
+\]
+Thus $K\subset H_\lambda$.  Containment for every geometric
+$[\lambda]$ would imply
+\[
+ K\subset\bigcap_{[\lambda]\in\PP(E^\vee_{\bar k})}
+ \lambda\Sym^{n-3}E^\vee_{\bar k}=0,
+\]
+because a nonzero binary form cannot be divisible by every linear
+form.  This contradicts $\dim K=n-4>0$.
+
+The maximal minors of $C_{\iota_\lambda f}^{(2)}$ are homogeneous
+cubics in $\lambda$.  Vanishing at every geometric point is therefore
+identical vanishing, proving the scheme-theoretic assertion.  In the
+noncontained case at least one cubic is nonzero, and the common
+rank-drop scheme lies in its degree-three zero divisor.
+\end{proof}
+
+After rank one and rational split secants are removed as shallow, the
+upper rank-two locus consists of the persistent tangent and
+conjugate-secant carriers.  On a persistent fiber the nonsplit torus
+acts by $z\mapsto z^n$, giving $T/T^n$ modulo inversion and Frobenius,
+while the tangent unipotent cocycle is $z\mapsto z+nu$.
 
 Modular carriers are equally explicit.  If $\cN$ is a nucleus in the
 lower divided-power module, the complete space whose first-polar line
@@ -804,10 +847,11 @@ kernel computes every coherent lift without an ambient syndrome census.
 
 \begin{remark}[Scope of the contained calculations]
 The modular contraction kernel is an exact finite linear-algebra
-construction.  The ordinary persistent component still requires a
-separate scheme-theoretic proof at each later degree.  Neither the
-kernel formula nor Theorem~\ref{thm:induction} supplies that proof, and
-no uniform arbitrary-degree contained-component theorem is asserted.
+construction.  Proposition~\ref{prop:contained-rank-two} supplies the
+ordinary persistent component uniformly, but other lower bad schemes
+and marker collisions still require level-specific calculations.
+Neither the proposition nor Theorem~\ref{thm:induction} classifies
+those additional components.
 \end{remark}
 
 \section{Redundancies six and seven: complete and gated results}
@@ -1137,25 +1181,29 @@ even $m$, $\F_4\subset\F_q$ and the homogenization of $t^4+t$ has its
 four affine $\F_4$ roots and the simple root at infinity.
 \end{proof}
 
-\begin{remark}[Contained secant gate]\label{rem:r7-contained}
-The transverse argument also needs a scheme-theoretic classification
-of sextics whose complete first-polar line lies in the lower
-rank-two catalecticant carrier.  The landed report states the desired
-equivalence with $\operatorname{rank}C_f^{(2)}\leq2$, but its
-kernel--hyperplane sentence is not a proof: a two-dimensional pencil of
-forms may meet every root hyperplane without lying in their total
-intersection.  We therefore retain this as an explicit
-$\mathrm{CC}(6,1)$ proof gate rather than silently invoking
-Theorem~\ref{thm:induction}.
-\end{remark}
+\begin{corollary}[Degree-six contained component]
+\label{cor:r7-contained}
+The assertion $\mathrm{CC}(6,1)$ for the lower rank-two carrier holds
+in every characteristic.  Its contained sextics have upper
+catalecticant rank at most two; after the shallow rank-one and rational
+secant loci are removed, they are exactly the persistent tangent and
+conjugate-secant families.
+\end{corollary}
 
-\begin{theorem}[Redundancy-seven classification with contained gate]
+\begin{proof}
+Apply Proposition~\ref{prop:contained-rank-two} with $n=6$.  The three
+rational types of the quadratic recurrence are split squarefree,
+repeated rational, and irreducible.  They give respectively the shallow
+rational secant, tangent, and conjugate-secant loci.  The remaining
+lower binary nucleus line has the separate complete lift computed in
+Proposition~\ref{prop:r7-central}.
+\end{proof}
+
+\begin{theorem}[Redundancy-seven classification]
 \label{thm:r7}
 Certificate R7 unconditionally classifies every prime power
-$q\leq32$ in its displayed domain.  Assume in addition that the
-contained secant assertion $\mathrm{CC}(6,1)$ of
-Remark~\ref{rem:r7-contained} holds over every field of size at least
-$37$.  Then, for every prime power $q\geq13$, the split-free syndromes
+$q\leq32$ in its displayed domain.  For every prime power $q\geq13$,
+the split-free syndromes
 at redundancy seven are the persistent stratum, together with the
 central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
 split-free orbit-size profiles are:
@@ -1167,8 +1215,7 @@ split-free orbit-size profiles are:
 11&264^2,\ 440,\ 660^2 .
 \end{array}
 \]
-Under the displayed contained-component gate, this is the complete
-all-field split-free classification.  Since
+This is the complete all-field split-free classification.  Since
 Seroussi--Roth gives $\rho(\PRS(q-6))=6$ for every prime power
 $q\geq11$, it is also the complete deep-hole classification in that
 range.  At $q=7,8,9$ the table is not promoted to a code deep-hole
@@ -1181,8 +1228,8 @@ tangent splitting in characteristics two and three.
 For $q\geq37$, Propositions~\ref{prop:r7-pointed}--\ref{prop:r7-collision}
 give the transverse witness after at most three catalecticant
 intersections, eight self-collisions, and, in characteristic two, one
-intersection with the nucleus line.  The assumed contained assertion
-then leaves exactly the persistent locus and
+intersection with the nucleus line.
+Corollary~\ref{cor:r7-contained} leaves exactly the persistent locus and
 Proposition~\ref{prop:r7-central}.  Certificate R7 covers
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}
@@ -1291,12 +1338,15 @@ required elementary-symmetric coefficients vanish.
 \end{proof}
 
 \begin{remark}[R8 contained gate]\label{rem:r8-contained}
-The report imports, but does not prove scheme-theoretically, that a
-degree-seven first-polar line contained in the lower bad carrier is
-exactly persistent and that the third marker creates no additional
-contained component.  Proposition~\ref{prop:r8-bottom} proves the
-transverse calculation, not this assertion.  We denote the missing
-level-specific statement by $\mathrm{CC}(7,1)$.
+Proposition~\ref{prop:contained-rank-two} proves
+scheme-theoretically that a degree-seven first-polar line contained in
+the lower rank-two carrier is itself on the upper rank-two carrier.
+Thus the ordinary persistent identity is no longer a gate.  What
+remains unproved is that the other lower bad strata and the third
+marker create no additional contained component.
+Proposition~\ref{prop:r8-bottom} proves the transverse calculation, not
+that residual assertion; we retain it as the reduced
+$\mathrm{CC}(7,1)$ gate.
 \end{remark}
 
 \begin{theorem}[Conditional redundancy eight]\label{thm:r8}
@@ -1995,9 +2045,8 @@ classification.
 \begin{enumerate}[leftmargin=2em]
 \item Redundancy five is complete for every $q\geq7$.
 \item Redundancy six is a complete all-field deep-hole classification.
-      Redundancy seven is certified throughout its finite bridge; its
-      all-field continuation retains the explicit
-      $\mathrm{CC}(6,1)$ gate, and its $q=7,8,9$ radius gate remains
+      Redundancy seven has a complete all-field split-free
+      classification; its $q=7,8,9$ covering-radius gate remains
       separate.
 \item Redundancies eight and nine have complete transverse arguments
       in the displayed high-field ranges, but their contained and

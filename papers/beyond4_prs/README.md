@@ -32,8 +32,9 @@ exact strength of each proved level visible:
 
 1. the complete all-field classification of deep holes of `PRS(q-4)` at redundancy five;
 2. the transition from cubic-pencil exceptional covers to coherent consecutive-polar flags;
-3. the all-field redundancy-six deep-hole classification, the certified redundancy-seven finite
-   bridge, and the explicit contained-component gate on its all-field continuation;
+3. the all-field redundancy-six deep-hole classification and the complete
+   all-field redundancy-seven split-free classification, with its separate
+   small-field covering-radius boundary;
 4. the complete transverse redundancy-eight/nine arguments, with their exact high-field
    thresholds, orbit laws, modular boundaries, and still-open contained/slice gates;
 5. the general coherent-polar induction theorem;

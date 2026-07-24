@@ -32,7 +32,7 @@ closed.
 |---|---|---|---|
 | P1 | Define the syndrome scheme, contraction strata, ordered marker spaces, lower splitting incidence, bad schemes, collision divisors, and all numerical indices before the induction theorem. | Every symbol and quantified object in the theorem is introduced in the definitions subsection. | In this revision |
 | P2 | State and prove an intrinsic polar-flag construction theorem, including base change, equivariance, infinity, and marker propagation. | The construction is independent of the contained/transverse dichotomy. | Scaffolded in this revision |
-| P3 | Replace the hidden contained-case hypothesis by degree-specific contained-component theorems. | No general theorem concludes `P_n union M_n` merely from an assumed implication; every proved degree points to a named component result. | Scaffolded; full degree-by-degree proofs open |
+| P3 | Replace the hidden contained-case hypothesis by proved contained-component theorems. | No general theorem concludes `P_n union M_n` merely from an assumed implication; every proved degree points to a named component result. | Ordinary rank-two carrier and `CC(6,1)` closed; later marker/modular components open |
 | P4 | State the effective transverse theorem conditionally and visibly. | Its conclusion uses only named lower-cover, point-bound, and deletion hypotheses. | In this revision |
 | P5 | Expand every asserted intersection degree, containment, ramification degree, genus, and deletion budget into a lemma or proposition. | Assertion audit maps each numerical claim to a proof or immutable certificate. | Open |
 | P6 | Replace the ordered-Hessian proof outline by a complete proof. | The ambient scheme, factorization types, ruling conics, pullbacks, selection polynomial, and `3n-4` budget are all proved. | Open |
@@ -116,11 +116,12 @@ and a no-overcount proof.
 The source-report extraction found three gaps that must not be hidden behind
 the original theorem synopsis:
 
-1. **R7/R8 contained lines.**  The claimed kernel--hyperplane argument does
-   not prove that every polar line contained in the lower rank-two carrier
-   comes from the persistent locus.  The all-field R7 continuation and R8
-   theorem are conditional on new scheme-theoretic contained-component
-   proofs.
+1. **Later contained flags.**  The rank--nullity argument now proves
+   scheme-theoretically, in every characteristic, that a first-polar line
+   contained in the lower rank-two carrier comes from the upper rank-two
+   carrier.  This closes `CC(6,1)` and the ordinary persistent part in later
+   degrees.  R8 still requires the level-specific marker and nonpersistent
+   bad-component exclusions.
 2. **R9 slices and base selection.**  The six reduced discriminants, their
    Bézout identity, the multiple-root branch polynomials, and the nonzero
    rational-base polynomial with its degree accounting must be printed.
@@ -130,8 +131,8 @@ the original theorem synopsis:
    polynomial vanishing on the whole bad union.  Either exhibit such a
    polynomial, prove a componentwise hitting lemma, or weaken the threshold.
 
-Until these close, the manuscript states R7--R9 continuation and the
-effective Hessian corollary conditionally.  This is a mathematical
+Until the remaining gates close, the manuscript states the R8--R9
+continuation and the effective Hessian corollary conditionally.  This is a mathematical
 correction, not merely an expositional downgrade.
 
 ## Release rule

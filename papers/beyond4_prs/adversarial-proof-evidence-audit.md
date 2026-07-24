@@ -31,7 +31,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 
 | Attack | Evidence tested | Verdict | Required repair |
 |---|---|---|---|
-| The contained cases are assumed rather than classified. | Original Theorem 4.1 and its proof | **Survived against the first draft.** | The revision separates polar construction, `CC(n,j)`, and transverse induction.  Full degree-specific `CC` proofs remain a sharp blocker. |
+| The contained cases are assumed rather than classified. | Original Theorem 4.1 and its proof | **Partly rejected after repair.** | The revision separates polar construction, `CC(n,j)`, and transverse induction.  The characteristic-free rank--nullity proposition closes the ordinary rank-two carrier and `CC(6,1)`; later marker, modular, and slice components remain gates. |
 | Orbit counts are used as orbit identifiers. | R5--R7 tables | **Survived against the first draft.** | Public records must expose canonical representatives, stabilizers, invariants/histograms, Frobenius fusion, and exhaustion. |
 | Split-free is silently promoted to deep. | R7 statement, summary, certificate schema | **Rejected after repair.** | Preserve the separate radius field and the `q>=11` gate. |
 | A finite regression is used as a geometric-integrality proof. | Hessian and R9 evidence rows | **Rejected after repair.** | The manuscript and schema now say explicitly that bounded algebra does not replace the geometric proof. |
@@ -50,8 +50,8 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | TI | Green conditional theorem | L2 | Requires a lower package and proved `CC(n,j)`. |
 | R5 | Open mixed theorem | L1 | Normal forms, stabilizers, degenerations, and cubic-cover geometry need expansion; finite residue is certified. |
 | R6 | Open mixed theorem | L1 | Degree/containment propositions need expansion; finite bridge is certified. |
-| R7 | Open mixed theorem | L1 | Finite bridge and transverse proof are landed; all-field continuation has an unproved contained-line gate, plus a separate radius gate. |
-| R8 | Open mathematical theorem | L1 | Three-marker and modular proofs are expanded; the degree-seven contained-component identity remains open. |
+| R7 | Green mixed theorem | L1 | The contained and transverse proofs plus finite bridge give the all-field split-free classification; deep-hole promotion is only for `q>=11`. |
+| R8 | Open mathematical theorem | L1 | Three-marker, uniform rank-two containment, and modular proofs are expanded; the residual marker/nonpersistent component exclusion remains open. |
 | R9 | Open mathematical theorem | L1 | Residual and deletion proofs are expanded; six-slice Bézout data, rational-base polynomial, and component exhaustion remain open. |
 | R9-kernel | Green kernel-checked conditional theorem | L3 | Does not close geometric hypotheses. |
 | Hessian | Sharp blocker | L1 | Geometric strata are separated; root-compatible persistent pullback and the global bad-union degree bound remain open. |

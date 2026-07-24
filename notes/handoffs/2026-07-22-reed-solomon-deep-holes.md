@@ -26,9 +26,11 @@ proof-complete paper.  The second-draft plan now separates polar construction, l
 contained components, and transverse induction; normalizes the point-count correction; and requires
 full proof expansion, public classification records, statement adequacy, provenance, literature,
 and immutable-release gates.  Source-report extraction expanded the R5/R6 and Lucas/`e_7` proofs
-but also exposed genuine open gates: the R7/R8 contained-line identity, the printed R9
+but also exposed genuine open gates.  A follow-up rank--nullity argument has now closed
+the characteristic-free rank-two contained-line identity and the R7 all-field continuation.
+The residual R8 marker/nonpersistent component assertion, the printed R9
 six-slice/base-selection algebra, and one global ordered-Hessian bad-union polynomial at the claimed
-degree.  The manuscript now states the affected R7--R9 continuations and effective Hessian
+degree remain open.  The manuscript states the affected R8--R9 continuations and effective Hessian
 corollary conditionally rather than treating these as proved certificate inputs.  The development
 monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
 C545 remains the DOI route but is blocked until those gates close.  C539 establishes the shared
