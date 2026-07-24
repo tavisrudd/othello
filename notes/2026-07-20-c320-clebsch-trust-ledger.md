@@ -43,7 +43,9 @@ The initial public verification surface is under
   prose/table claims, one final route per claim, terminal-by-terminal axiom lists for Lean routes,
   full checker/artifact/coverage/replay/residual-trust fields for computational routes, pinpointed
   inputs and an unconditional remainder for conceptual routes, and explicit subclaim
-  decomposition for mixed routes.
+  decomposition for mixed routes.  Every referenced gate, audit module, validation output,
+  verify-all entry point, verify-all output, checker, generator, schema, data file, and certificate
+  is a safe repository-relative path whose current bytes must match the recorded SHA-256.
 - `extract_gate_audits.py` records each import-only gate's exact SHA-256, imports, declared
   `#print axioms` terminals, and whether the audit is embedded in that gate.  It does not mistake
   an import-only module name for an audited terminal surface.
@@ -83,6 +85,22 @@ This is not yet an axiom-evidence failure: harmonic quotient and factorization a
 separate audit modules, and task reports record committed harnesses for other early slices.  C320
 must resolve each route against the actual tracked module and final verify-all invocation.  It may
 not infer an axiom list from a report or treat a bare re-export as an audit.
+
+The first direct binding pass resolves the six cases as follows:
+
+| import gate | durable audit source now present | C320 release action |
+|---|---|---|
+| `ClebschMomentTrade` | none; the report records a manual reproduction recipe and reported result | add the selected terminals to the final tracked paper audit |
+| `ClebschConicMatchingQuotient` | ten `#print axioms` commands at the end of `ClebschConicMatchingQuotient.lean` | bind the manifest directly to that hashed content module |
+| `ClebschHarmonicQuotient` | `Gates/ClebschHarmonicQuotientAxiomAudit.lean`, 34 terminals | bind and replay the separate audit gate |
+| `ClebschFactorization` | `Gates/ClebschFactorizationAxiomAudit.lean` | bind and replay the separate audit gate |
+| `ClebschBalancedSheets` | none; the 52-terminal audit wrapper and output were ephemeral | add every paper-selected balanced-sheet terminal to the final tracked paper audit |
+| `ClebschSchemeFourier` | none; the twelve-terminal audit wrapper was transient | add every adopted Fourier terminal to the final tracked paper audit |
+
+The strengthened public manifest validator now rejects a Lean route unless it supplies a tracked,
+hashed audit module containing a literal `#print axioms` command for every claimed terminal and a
+tracked, hashed validation output with its exact command.  This converts the three ephemeral/report
+only cases into concrete C320 work rather than undocumented trust inheritance.
 
 ## Adopted release-claim partition before manuscript integration
 
