@@ -35,11 +35,15 @@ the redundancy-eight theorem is unconditional for `q>=43`.  The universal
 R9 good-base open, its principal-open cover of quartic moduli, the rational
 Hermite-subdiscriminant selection, and `CC(8,1)` make R9 unconditional for
 `q>=53`.  The ordered-Hessian corollary now uses an honest degree-eight
-global-union polynomial and its revised threshold.  The remaining
-proof-complete manuscript blockers are the R5/R6 proposition expansions
-and cold reads, not R8/R9 or the Hessian/Lucas layer.  The development
-monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
-C545 remains the DOI route but is blocked until those gates close.  C539 establishes the shared
+global-union polynomial and its revised threshold.  The local mathematical
+manuscript gates are now green through R9 and the Hessian/Lucas layer.  C545
+has also closed the public R5--R7 records, field-range ledger, stable
+certificate schema, role-based literature audit, sectioned source, and
+rendered exposition gates.  The development monorepo is not published; any
+eventual release is a reviewed paper-only fresh-history export.  C545 remains
+active but release is blocked on C540--C544 aggregate formalization, an
+independent final reader, a clean public replay/export, immutable identifiers,
+and author/account confirmation.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger; C540--C544 close the degree-specific and
 aggregate package.  C531 still owns the remaining intrinsic degree-nine carrier
 strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
@@ -664,7 +668,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C536 | coherent polar-flag Fano boundary | queued after C535 | C512/C529 plus C534 audit | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
-| C545 | proof-complete preprint and DOI after second-draft gates | queued next, release-blocked | expanded refereeable manuscript, public trust/adequacy ledgers, immutable release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
+| C545 | proof-complete preprint and DOI after second-draft gates | active; local manuscript/literature/public-record gates closed; release blocked | C540--C544 aggregate, independent reader, clean export/replay, immutable release bundle, author confirmation | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, separate radius- and witness-based classification routes, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
 | C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
 | C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
