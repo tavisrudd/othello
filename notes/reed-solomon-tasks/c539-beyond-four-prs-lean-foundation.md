@@ -1,6 +1,6 @@
 # C539 — shared Lean foundation for the beyond-four PRS paper
 
-**Lane:** `reed-solomon` · **Status:** queued after C538 theorem-adoption freeze
+**Lane:** `reed-solomon` · **Status:** complete
 
 ## Objective
 
