@@ -1025,8 +1025,17 @@
       "last": 596,
       "purpose": "mod-4 and quadratic refinement discriminator for the conic matching residue",
       "sequence": 114
+    },
+    {
+      "count": 1,
+      "first": 597,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 597,
+      "purpose": "construct the complete non-cyclic R10 integral bad scheme and test SC(11)",
+      "sequence": 115
     }
   ],
-  "next_id": 597,
+  "next_id": 598,
   "schema": "codex-task-id-allocations-v1"
 }
