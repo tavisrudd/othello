@@ -1,6 +1,6 @@
 # C540 — Lean closure for PRS redundancy five
 
-**Lane:** `reed-solomon` · **Status:** queued after C539
+**Lane:** `reed-solomon` · **Status:** complete
 
 ## Objective
 
