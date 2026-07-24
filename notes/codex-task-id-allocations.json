@@ -818,8 +818,17 @@
       "last": 547,
       "purpose": "Lean formalize the C528 residual-hypergraph proof harvest: rank-three equivalence, Y_NK bridge, pair-budget bounds, and gadget boundary lemmas; exclude empirical SG<=5",
       "sequence": 91
+    },
+    {
+      "count": 1,
+      "first": 548,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 548,
+      "purpose": "prove the C397 four-copy contraction rank-drop divisor and explain its 96/192 multiplicities",
+      "sequence": 92
     }
   ],
-  "next_id": 548,
+  "next_id": 549,
   "schema": "codex-task-id-allocations-v1"
 }
