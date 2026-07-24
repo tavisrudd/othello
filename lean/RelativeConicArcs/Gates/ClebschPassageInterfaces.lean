@@ -1,0 +1,34 @@
+import RelativeConicArcs.ClebschPassageInterfaces
+
+/-!
+# Import gate for finite passage interfaces
+
+This gate exports finite theta-value counts and matching-intersection signatures, exact Fourier
+matrix square and weighted-adjoint identities, explicit monomial and signed-dual code transports,
+and the regular sixty-element bitorsor interface.
+
+The gate does not export superspeciality, a theta-characteristic classification theorem, a Weil
+or Schrodinger normalization, arbitrary local-unitary classification, a canonical geometric
+identification of the sixty bitorsor elements, or any Golay, Hadamard, or Lagrangian uniqueness
+statement.  Those semantic names remain external inputs.
+-/
+
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.genusThree_theta_value_counts
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.genusFive_theta_value_counts
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.seven_matching_lagrangian_signature
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.eleven_matching_lagrangian_signature
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.theta_signature_erases_sheet
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankEightFourier_square
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankSixteenFourier_square
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.signedFourier_square
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.signedFourier_weighted_adjoint
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.Fourier_restriction_traces_zero
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.common_finite_operator_restriction_witness
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_bijective
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.monomial_column_intertwiner
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_kernel_equivalence
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.fourierSupportParam_injective
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.markedSymmetry_card
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.marked_actions_commute
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.marked_actions_free_transitive
