@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** C395 complete with theorem/certificate bundle; C396 remains queued
+**Status:** C395 and C396 complete with theorem/certificate bundles
 
 ## Starting point
 
@@ -135,6 +135,21 @@ itself is the useful theorem. Do not promote LC separation to LU separation, do 
 continuous-unitary search, and do not claim classification beyond this one-parameter pencil.
 
 ## Dependency and ownership
+
+### C396 close
+
+C396 proves that the q=13 pencil has two projective classes but only one triple-marginal-moment
+bucket `((4,66),(6,389))`. Over every odd finite field, put
+
+```text
+z(t) = ((t^2-t+1)(t^2-3t+1)/(-4t(t-1)^2))^2.
+```
+
+For admitted non-GRS parameters, projective, monomial, local-Clifford, equal-holonomy, and
+equal-`z` equivalence coincide. Equality of `z` factors into four explicit
+`y(u)=±y(t)^±1` projectivities for `y=(t-1)^2/t`. The 450-entry holonomy signature recovers `z`
+from one multiplicity-marked ratio bin; the sharp degeneration `z=-1/4` is exactly C395's GRS
+quartic. See `notes/2026-07-23-c396-holonomy-completeness.md`.
 
 - C384 owns the exact q=11 two-class theorem and its evidence bundle.
 - C374 owns the definitions and invariance proofs for the holonomy and marginal moments.

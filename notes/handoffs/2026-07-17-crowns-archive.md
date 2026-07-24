@@ -363,3 +363,15 @@ enumeration recovers the complete 60-element odd isodual coset. Thus the `A5` or
 electric/magnetic presentation choice, the intrinsic quantum pentad symmetry is `S5`, and C397
 inherits only the internal Clifford/logical/operator-pushing questions. Evidence:
 `notes/2026-07-23-c546-h3-pentad-orientation-lu.md`.
+
+## 2026-07-23 — C396 holonomy completeness close
+
+C396 certified the q=13 triple-marginal-moment collision and then proved the positive all-field
+holonomy gate. On every admitted non-GRS odd-field fibre, the scalar
+`z=((t²-t+1)(t²-3t+1)/(-4t(t-1)²))²` is simultaneously the exact projective/monomial/LC
+parameter quotient and the information recovered by C374's 450-entry holonomy signature. The
+four relations `y(u)=±y(t)^±1` give literal projectivities, while the derived holonomy ratio
+histogram recovers `-1/z` through every modular bin merger. Its exact degeneration at `z=-1/4`
+is C395's GRS quartic. The signature therefore adds no extra quantum modulus on this pencil, and
+it proves no arbitrary-LU separation at q=13. Evidence:
+`notes/2026-07-23-c396-holonomy-completeness.md`.
