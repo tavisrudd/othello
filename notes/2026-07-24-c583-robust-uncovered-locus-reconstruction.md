@@ -181,6 +181,40 @@ line.  Every such matching edge therefore consumes a distinct point of
 inequality above and improves the linear vertex estimate whenever the two
 arcs are already close.
 
+## Cold-read cut disposition
+
+The independent cold read recommends a 4.5--5.5 page reduction.  The
+strongest cuts have the following honest destinations.
+
+- The Clebsch hexagon's rigidity, automorphisms, projective deep-hole
+  syndrome locus, decoding consequences, support bipartition, and
+  factorization memory already belong to
+  `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.  The arcs
+  manuscript now foreshadows that companion explicitly and should retain
+  only the \(U(A)=\mathcal C(\mathbf F_{11})\) consequence and the shortest
+  code/coset corollary needed here.
+- The optional icosahedral extension complex does not occur in that focused
+  companion.  If removed from the arcs manuscript, preserve it as a
+  bounded Clebsch extension note: independence polynomial
+  \(1+12t+36t^2+20t^3\), the \(6\) maximal two-column and \(20\) maximal
+  three-column extensions, the absence of a ten-arc extension, and the
+  six-colour perfect-matching augmentation.  This is a note candidate, not
+  an allocated successor or a promised paper.
+- Detailed \(q=16\) commands, hashes, generator/checker boundaries, and
+  exceptional-leaf data belong in the existing paper supplement and trust
+  map.  The body should retain only the completeness contract, terminal
+  profile, and mathematical leaf obstruction.
+- Raw witness coordinates and field encodings belong in the source
+  supplement.  The paper needs only a compact witness table and a stable
+  pointer.
+- The neighboring-notion and priority detail removed from the introduction
+  remains recoverable from the C349 and C558 reports; it should not be
+  advertised as future mathematical work.
+- The robust inverse, its sharpness example, and its degree correction stay
+  in this paper as the inverse counterpart to the forward defect identity.
+  Only a future defect-coupled strengthening remains an open problem; no
+  companion theorem is currently claimed.
+
 ## Mystery ledger
 
 - **Field-uniform robust inverse:** settled.  The theorem gives explicit
