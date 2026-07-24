@@ -415,12 +415,18 @@ fresh-history repositories.
   `FiniteGeom` + mirror closure needed by the first releases. Later tagged commits add exact
   paper-facing closures. Heavy generated families, beginning with Q16 and Q25, live in separate
   certificate repositories that depend one-way on pinned `finitegeom` commits. The source is never
-  copied into paper repositories, and no export unit is the private `lean/` tree.
+  copied into paper repositories, and no export unit is the private `lean/` tree. The first tag is
+  capped at 100 Lean files / 25,000 code lines; the initial planned human-scale union is capped at
+  500 / 75,000. Larger generated families are repartitioned rather than allowed to make the shared
+  repository reviewer-hostile.
 - **Per-paper public repo** = manuscript + minimal solver/verifier + certificates / b-files / data +
   reproducibility README + adequacy/provenance sources + tracked `flake.nix` and `flake.lock`. The
   flake resolves the exact pinned `finitegeom` commit, every required certificate-repository
   commit, Lean toolchain, and system dependency without machine-local paths. The paper records the
-  corresponding public target lists and contains no duplicate Lean library.
+  corresponding public target lists and contains no duplicate Lean library. Certificate packages
+  are opt-in leaves: a paper that does not use Q25, Q16, or another generated family has no input,
+  lock entry, fetch, build, or validation target for that family. There is no portfolio-wide
+  certificate umbrella.
 - **Role split:** C270 (`nofil`) owns public repository identity, metadata, release/DOI/OEIS and
   paper coordination. C287 (`build-sys`) owns the reviewed source manifest, extraction, exact target
   gates, builds, axiom audits, clean-checkout validation, and artifact portability. C270 does not

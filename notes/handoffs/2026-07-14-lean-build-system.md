@@ -106,10 +106,16 @@ exports, exact target builds, axiom audits, clean-checkout validation, and artif
 portability. The approved main identity and local path are `github.com/tavisrudd/finitegeom` and
 `~/src/lean/finitegeom`. Heavyweight generated closures stay outside it in one-way-dependent
 certificate packages, beginning with `~/src/lean/finitegeom-q16-certificates` and
-`~/src/lean/finitegeom-q25-certificates`. The first main tag is the exact human-scale `FiniteGeom`
-+ mirror closure; later tags add reviewed paper-facing closures without copying Lean into paper
-repositories. C270 (`nofil`) owns metadata, DOI/OEIS and eventual user-authorized remote actions.
-C287 must not create remotes, publish, or push; C270 must not copy sources or run builds. All real
+`~/src/lean/finitegeom-q25-certificates`, with ProjectiveCap Q11 and Q13 staged as separate
+field-specific certificate packages. The first main tag is the exact human-scale `FiniteGeom` +
+mirror closure; later tags add reviewed paper-facing closures without copying Lean into paper
+repositories. Its first-tag size gate is at most 100 Lean files / 25,000 code lines, and the initial
+planned human-scale union is at most 500 / 75,000; larger generated families are external by
+default. C270 (`nofil`) owns metadata, DOI/OEIS and eventual user-authorized remote actions. C287
+must not create remotes, publish, or push; C270 must not copy sources or run builds. All real
 validation is serialized through the build-owner lock and unattended queue.
 Every paper export directory carries its own tracked `flake.nix` and `flake.lock`, resolving exact
 pins for `finitegeom`, required certificate packages, the Lean toolchain, and system dependencies.
+Certificate packages are opt-in leaves: unused families are absent from that paper's inputs, lock
+graph, fetches, build closure, and validation targets; no portfolio-wide certificate umbrella is
+allowed.

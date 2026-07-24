@@ -76,6 +76,10 @@ would otherwise make the body follow discovery order.
 
 ### Phase discipline
 
+C309's locked flake declares only certificate packages used by the adopted Dihedral theorem set.
+Unused Q16, Q25, or later certificate families must be absent from its inputs, lock graph, fetches,
+build closure, and validation targets.
+
 - Start a phase only when its predecessor is committed and the handoff names that commit.
 - At session start, read this plan, the lane handoff, and the predecessor's closing report/diff.
 - Before editing, inventory dirty state for the owned paths and leave all foreign state untouched.

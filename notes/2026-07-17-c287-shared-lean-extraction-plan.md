@@ -10,8 +10,10 @@ Create a separately maintained, fresh-history Lean source repository at
 `~/src/lean/finitegeom`, intended for `github.com/tavisrudd/finitegeom`, and separately maintained
 certificate packages for heavyweight generated closures. The first packages are staged at
 `~/src/lean/finitegeom-q16-certificates` and
-`~/src/lean/finitegeom-q25-certificates`. These are state exports, not publications, forks,
-subtrees, or history-filtered copies of the private monorepo, and they are not per-paper Lean
+`~/src/lean/finitegeom-q25-certificates`; the ProjectiveCap Q11 and Q13 data are staged separately
+at `~/src/lean/finitegeom-projective-cap-q11-certificates` and
+`~/src/lean/finitegeom-projective-cap-q13-certificates`. These are state exports, not publications,
+forks, subtrees, or history-filtered copies of the private monorepo, and they are not per-paper Lean
 bundles. Each paper records exact repository commit pins, exact public target lists, public proof
 ledger entries, and artifact provenance.
 
@@ -33,6 +35,25 @@ such family has an explicit package boundary, depends one-way on a pinned `finit
 owns its generators, schemas, generated leaves, terminal theorems, trust manifest, and
 reproducibility metadata. `finitegeom` never imports a certificate package; a paper-facing
 aggregate that needs certificates pins and imports both packages above that one-way boundary.
+There is no universal certificate umbrella. A paper export declares only the certificate packages
+used by its adopted theorem set; an unused package must be absent from its flake inputs, lock graph,
+source fetches, build closure, and validation targets.
+
+## Reviewer-facing size gate
+
+The 2026-07-23 `tokei ../lean/` baseline is 13,198 Lean files and 1,858,312 Lean code lines. Q16,
+Q25, and `ProjectiveCap/CertData` account for nearly all of that scale. Excluding those generated
+families leaves 438 Lean files and 63,861 code lines across the entire current Lean portfolio. The
+first-tag `FiniteGeom` + ProjectiveCap + CapGame upper bound, excluding `ProjectiveCap/CertData`, is
+74 Lean files and 17,688 code lines before exact closure reduction.
+
+- The first `finitegeom` tag must remain at most 100 Lean files and 25,000 Lean code lines.
+- The initial reviewed union of currently planned human-scale closures must remain at most 500 Lean
+  files and 75,000 Lean code lines.
+- A generated or certificate family exceeding 100 files or 10,000 code lines is external by
+  default. Keeping one in `finitegeom` requires an explicit reviewed exception.
+- Every tag records `tokei` file/code/comment/blank counts and the delta from the preceding tag.
+  Exceeding a budget stops the export for repartitioning or explicit user approval.
 
 ## Preconditions
 
@@ -65,6 +86,8 @@ aggregate that needs certificates pins and imports both packages above that one-
   undeclared files.
 - Record canonical source paths, destination paths, SHA-256 hashes, and byte counts in a tracked
   manifest. Private handoffs, notes, caches, logs, credentials, and build products are excluded.
+- Record `tokei` counts for the reviewed main closure and each external certificate family; fail the
+  main export when the reviewer-facing size gate is exceeded.
 
 ### 2. Stage the fresh source tree
 
@@ -104,6 +127,9 @@ aggregate that needs certificates pins and imports both packages above that one-
 - Give every paper export directory its own tracked `flake.nix` and `flake.lock`. Its development
   shell and verification entry point must resolve the exact pinned `finitegeom`, certificate
   package, Lean toolchain, and system dependencies without machine-local paths.
+- Check the flake input and lock graphs against the paper's adopted theorem manifest. Reject an
+  undeclared or unused certificate package rather than accepting the reproducibility cost of a
+  portfolio-wide aggregate.
 - Keep all Lean sources and compiled artifacts out of individual paper repositories.
 - Release a paper only after its pinned commit and target gates pass independently in the public
   layout.

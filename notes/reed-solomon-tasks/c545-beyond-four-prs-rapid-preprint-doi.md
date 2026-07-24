@@ -65,7 +65,9 @@ These are general policies, not a substitute for the selected journal's current 
   tracked `flake.nix` and `flake.lock` files that resolve the exact `finitegeom` commit, every
   required external certificate-package commit, the Lean toolchain, and system dependencies
   without machine-local paths; its target lists and axiom audits name those same pins.  The
-  development monorepo is not published or used as the public release repository.
+  development monorepo is not published or used as the public release repository.  Certificate
+  families unused by the adopted theorem set are absent from the flake inputs, lock graph, fetches,
+  build closure, and validation targets.
 - The later journal manuscript contains the required disclosure/citation and uses the preprint as
   an earlier version of the same work.
 

@@ -34,6 +34,8 @@ Create an immutable release, preferably a GitHub release archived by Zenodo, con
   package; do not duplicate Lean roots or import closures in the paper repository;
 - tracked `flake.nix` and `flake.lock` files whose clean development shell resolves those public
   pins, the Lean toolchain, and system dependencies without machine-local paths;
+- no flake input, lock entry, fetch, build, or validation target for a certificate family unused by
+  the Clebsch adopted theorem set;
 - a top-level `README` giving environment setup, exact commands, expected PASS sentinels, typical
   runtime, and the distinction between strict-kernel Lean results and executable Python checks;
   it must also document the `C01`--`C15` canonical-key order, print or point to the complete class
