@@ -125,6 +125,37 @@ tables.
 | C506 | final independent-review `GO` on implementation commit `51b21674` |
 | C507 | implementation underway; no final artifact or reviewed delta admitted |
 
+## First-pass headline adequacy map
+
+This is an internal routing map, not the final trust manifest.  “Candidate route” means the
+strongest route whose actual theorem type and axiom closure C320 still has to inspect; it is not a
+paper label.
+
+| planned subclaim | candidate formal/evidence owner | unresolved adequacy question |
+|---|---|---|
+| Clebsch deep-hole conic rigidity and `A5` recovery | retained rigidity gates plus exact census | reconcile the two Dye inputs and the unconditional remainder |
+| common A3/B3/H3 length and distance law | `Gates.ClebschWeightedAdjoint` plus Coxeter identification input | separate conditional weighted-adjoint algebra from coordinate/Coxeter naming |
+| `q=h+1` full-conic extended-GRS phase | retained Coxeter-phase gate and replay | verify exact support/conic and code-equivalence terminals |
+| Coxeter-square split-torus/Legendre blocks | `Gates.ClebschArithmeticGluing` | Lean checks literal orders, orbits, and square determinants; classical torus naming remains input |
+| conic restriction forgets the matching product | `Gates.ClebschConicMatchingQuotient` | retain the `Fin 4` switch base/arbitrary reversibility boundary |
+| quotient ranks `3,6,10` | harmonic quotient plus factorization leaves | distinguish symbolic harmonic dimensions from finite factorization-image ranks |
+| unique balanced B3/H3 complementary halves | `Gates.ClebschBalancedSheets` | verify whether H3 uniqueness is theorem-native or still uses the declared finite fallback |
+| even signed moments and degree-one cancellation | moment-trade/factorization/depth gates | split general symbolic parity from finite profile barycentre |
+| first surviving cubic and outer orientation | factorization/balanced-sheet gates | “first” is only for the stated signed tensor/functional family |
+| two `1,4,6` triples and six depth profiles | `Gates.ClebschDoubleCosetDepth` | abstract `A4/PGL/A5` names remain external to the literal orbit tables |
+| rank-two depth map, four-dimensional kernel, label separation | `Gates.ClebschDoubleCosetDepth` | terminals are explicit; paper must not identify the profile plane with the sheet set |
+| projective-cover explanation and distinct relative-cubic Tate plane | C412 conceptual proof and selected formal descendants | determine which part has an adequate Lean terminal and route the remainder conceptually |
+| singleton profiles recover pair/decorated parent | `Gates.ClebschDoubleCosetDepth` and replacement-spine gate | separate unordered-pair recovery from the additional decoration hypothesis |
+| A3 fused/B3 split/H3 golden split row | `Gates.ClebschArithmeticGluing` | classical spin/projective-matching interpretation remains cited input |
+| H3 intersection, generation, `S4/A4` hinge, and outer transporter | arithmetic-gluing gate plus exact finite certificate | decompose literal subgroup/action checks from classical group and rational-spinor names |
+
+The depth gate already exposes separate terminals for range rank, kernel rank, profile injectivity,
+the cubic-first pushforward, unordered singleton recovery, and decorated-parent recovery.  Those
+must remain separate claim rows even if the manuscript groups them under one theorem letter.
+Likewise the arithmetic-gluing gate exposes separate no-root/root, fused/split, Coxeter-orbit,
+outer-transporter, and bounded trichotomy terminals; the final ledger may not collapse them into a
+single “rank-three formalized” label.
+
 ## Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly
