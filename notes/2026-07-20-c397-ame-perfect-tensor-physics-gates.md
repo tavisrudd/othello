@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued; C395 dependency complete, Stage B still gated on a positive Stage-A invariant
+**Status:** queued; C395/C396/C546 dependencies complete; mandatory signed-cover/LU mystery
+workstream added 2026-07-23; Stage B remains gated on a positive operational invariant
 
 ## Purpose
 
@@ -22,8 +23,72 @@ The inputs are deliberately separated:
 - C384 gives the two non-GRS monomial/LU classes in the `q=11` pencil.
 - C395 proves the all-odd-field admissibility/GRS counts and the extension-stable `t=-1` towers:
   GRS/`S4` in characteristic 17 and non-GRS/`A5` in characteristic 31.
-- C396 owns pencil-internal holonomy completeness or its first exact failure; C397 does not absorb
-  that classification problem.
+- C396 proves pencil-internal holonomy completeness through
+  `z=(B/A)^2`, exposes the signed refinement `w=B/A`, and identifies the exact `17/31`
+  branch/spectral collisions. C397 does not redo that classification; it owns the operational
+  meaning of the signed sheet and its relation to the other reconstruction torsors.
+- C546 proves that the H3 pentad orientation is local-Clifford-forgettable. C397 must distinguish
+  that settled marking from the new `w`-sheet rather than assuming that every two-sheeted
+  refinement is the same orientation bit.
+
+## Mandatory mystery workstream — solve the signed sheet, not one attack
+
+This workstream is part of C397, not a suggestion for a successor. Its target is to determine
+exactly what the double cover
+
+```text
+w=B/A=-(y-y^-1)/4,                z=w^2
+```
+
+means geometrically and operationally. A failed invariant, a bounded numerical search, or a
+formal resemblance between two double covers does not discharge it.
+
+### M0 — identify or separate the three covers
+
+1. Write the C396 pencil in the five classical six-point bracket/mystic-pentagon coordinates and
+   in C481's labelled projection-sextic coordinates.
+2. Compute the Gale transform on the parameter line and its exact action on `t,y,w,z`, including
+   the conic branch divisor and all exceptional characteristics.
+3. Compare the resulting quadratic cover as a Čech/Kummer class with:
+   - C483/C484's PRS four-view Gale sheet;
+   - the Clebsch Paper-1 determinant-sign torsor assembled in C480/C486/C487; and
+   - C546's already-settled pentad-orientation marking.
+4. Prove an explicit isomorphism of covers/torsors, or prove a mismatch by a concrete invariant
+   such as branch divisor, deck action, stabilizer character, or descent class. “Same shape” is
+   not an acceptable conclusion.
+
+### M1 — determine whether the sheet is quantum-readable
+
+1. Compute how the exact party-permuting local-Clifford stabilizer and all six encoder-view
+   logical Clifford groups act on the `w`-sheet.
+2. Decide whether `w` is:
+   - intrinsic LC/LU data;
+   - a marking exchanged by an allowed local Clifford, as in C546;
+   - the PRS Gale sheet selected only by coherent ambient-child data; or
+   - a classical refinement with no operational quantum readout.
+3. Resolve the q=13 pair with equal arbitrary-LU moment but different `z`. The target is an exact
+   LU-equivalence or LU-inequivalence theorem, not another separating-invariant pilot.
+
+The q=13 attack ladder is deliberately plural:
+
+- first derive the local-unitary tangent/Fourier rigidity supplied by overlapping minimal
+  supports;
+- then normalize the residual one-site unitaries and solve their exact polynomial equations;
+- in parallel derive higher trace-word or transition-algebra constraints if they reduce the
+  residual system; and
+- if a non-Clifford solution survives, construct and certify it exactly.
+
+Failure of one rung triggers the next. C397 may stop this ladder only with a theorem, an explicit
+counterexample, or a proved reduction to a precisely named external open problem whose missing
+lemma is stated.
+
+### M2 — integrate with the physics gate
+
+Interpret the M0/M1 answer through the Stage-A logical Clifford and operator-pushing data. If the
+signed sheet is readable, exhibit the encoder view, logical action, or pushing orbit that reads
+it. If it is forgettable, exhibit the exact allowed operation exchanging sheets and prove the
+factorization. This operational statement, rather than the bare cover comparison, is the C397
+physics output.
 
 ## Stage A — exact Clifford and encoder pilot
 
@@ -44,9 +109,11 @@ projective/monomial code automorphisms, local Clifford equivalence, arbitrary LU
 party permutation.  A code automorphism is not automatically a transversal logical gate; the map
 to the selected encoder and its logical action must be exhibited.
 
-**First stop rule.**  If the Clifford and operator-pushing data are determined entirely by the
-known projective stabilizer and AME parameters, record the exact factorization and close Stage A as
-a bounded negative.  Do not build tensor networks or launch an all-field census.
+**First stop rule.** If the Clifford and operator-pushing data are determined entirely by the
+known projective stabilizer and AME parameters, record the exact factorization and close the
+original Stage-A pilot as a bounded negative. This does **not** close the mandatory M0/M1 mystery
+workstream: the cover comparison and q=13 LU disposition still require their exact exits. Do not
+build tensor networks or launch an all-field census.
 
 ## Stage B — arithmetic symmetry phase
 
@@ -123,5 +190,8 @@ These candidates remain behind explicit promotion gates.  C397 allocates none of
 ## Exit condition
 
 C397 closes positively only with an exact, literature-audited operational theorem and its evidence
-bundle.  Otherwise it records the sharpest factorization/collision and leaves the five adjacent
-doors unallocated.
+bundle. The signed-cover comparison must end in an exact identification or separation, and the
+q=13 LU ladder must reach one of its stated theorem/counterexample/reduction exits. A single failed
+attack or another finite collision table is not an exit. Otherwise C397 records the sharpest
+proved factorization, states the precise external open lemma blocking the LU decision, and leaves
+the five adjacent doors unallocated.
