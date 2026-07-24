@@ -89,7 +89,7 @@ therefore has at most three zeros.
 \begin{proposition}[Cyclic and collision degrees]\label{prop:r6-degrees}
 For a trivial-gcd net:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item in characteristic different from two, the lower tame cyclic
+\item in characteristic different from two and three, the lower tame cyclic
 carrier is a binomially rescaled Veronese surface of degree four and
 contains no polar line;
 \item the pointed ramification condition has degree at most six and
@@ -105,8 +105,10 @@ In syndrome coordinates the tame cyclic surface is
 \left\{\operatorname{diag}(1,4,6,4,1)^{-1}[Q^2]:
 [Q]\in\PP(\Sym^2E^\vee)\right\}.
 \]
-Outside characteristic two it is the Veronese surface, of degree four,
-and contains no line.  For a basis $F_0,F_1,F_2$ of the $g^2_4=W_f$,
+When $2$ and $3$ are invertible this is the Veronese surface, of degree
+four, and contains no line.  Characteristic three has a different
+wild closure, treated in Proposition~\ref{prop:r6-modular}.  For a
+basis $F_0,F_1,F_2$ of the $g^2_4=W_f$,
 pointed collision is the rank-one condition
 \[
 \operatorname{rank}
@@ -116,11 +118,19 @@ F_0'(r)&F_1'(r)&F_2'(r)
 \end{pmatrix}\leq1.
 \]
 Its Wronskian divisor has degree six.  In characteristic at least five
-it cannot vanish identically because the degrees are below the
-characteristic.  In characteristics two and three, either all
-derivatives vanish or the derivative row is a rational multiple of the
-value row; the Hankel overlap excludes the first alternative, and a
-gcd argument forces a common factor in the second.
+it cannot vanish identically because the order sequence is classical.
+In characteristic three an identically zero first-derivative minor
+would make the net a pullback from a series of degree at most one, hence
+of vector dimension at most two.  In characteristic two the only
+dimension-three equality case is the pure-square space
+$\langle1,t^2,t^4\rangle$.  If two consecutive Hankel rows had this
+common kernel, comparison of the overlapping coefficients would force
+$a_0=\cdots=a_5=0$.  Thus some derivative minor is nonzero in both
+modular characteristics.  If instead the derivative row is everywhere
+proportional to the value row, the corresponding rational map is
+inseparable; after cancelling its pencil gcd, the same dimension
+argument places it on the fixed-factor boundary.  Hence the
+ramification scheme is a genuine divisor of degree at most six.
 
 Finally the R5 off-diagonal curve has the original deletion degree
 twelve.  The unique cubic through a specified marker contributes at
@@ -148,10 +158,16 @@ whose unique contained polar-line component is
 \end{proposition}
 
 \begin{proof}
-Every line on the wild cone is a ruling.  If two consecutive Hankel
-rows lie in a ruling $\langle e_2,\nu(t)\rangle$, the overlap equations
-give $f=\mu\nu(t)$, including $f=\mu e_5$ at infinity.  Thus no
-trivial-gcd polar line is contained.
+Every line on the wild cone is a ruling.  By equivariance it suffices
+to compare the two consecutive rows on one ruling; in the frame
+$\langle e_2,e_4\rangle$ the conditions
+\[
+(a_0,\ldots,a_4),\ (a_1,\ldots,a_5)\in\langle e_2,e_4\rangle
+\]
+force the overlapping coordinates successively to vanish.  Undoing
+the frame gives $f=\mu\nu(t)$, including $f=\mu e_5$ at infinity.
+These are fixed-factor/rank-boundary syndromes, so no trivial-gcd
+polar line is contained in the wild cone.
 
 In characteristic two, direct substitution gives
 \[
@@ -159,9 +175,14 @@ g\cdot e_2=
 [0:\delta\gamma:\alpha\delta+\beta\gamma:\alpha\beta:0],
 \]
 whose closure is $\Pi_{\mathrm{cyc}}$.  The consecutive-row overlap
-places a polar line in this plane exactly when
-$a_0=a_1=a_4=a_5=0$, namely when
-$f\in\PP\langle e_2,e_3\rangle$.
+is now literal: the first row lies in the plane exactly when
+$a_0=a_4=0$, and the second exactly when $a_1=a_5=0$.  Hence a polar
+line lies in the plane exactly when
+\[
+a_0=a_1=a_4=a_5=0,
+\]
+namely when $f\in\PP\langle e_2,e_3\rangle$.  This proves both
+existence and uniqueness of the contained binary component.
 \end{proof}
 
 \begin{proposition}[Binary nucleus arithmetic]\label{prop:r6-nucleus}
@@ -421,4 +442,3 @@ deep-hole directions uses the separate covering-radius gate and is
 made only for $q\geq11$.  The public certificate schema and exact
 replay boundaries are given in the supplement; the table does not
 promote orbit-size profiles to identifiers.
-
