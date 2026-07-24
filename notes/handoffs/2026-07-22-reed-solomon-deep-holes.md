@@ -55,10 +55,12 @@ follow-up typography pass splits the central dependency map into two readable
 tables, adds a compact referee roadmap, bounds the fixed-redundancy recognition
 complexity precisely, completes recent-preprint metadata, and removes the sparse
 last bibliography page.  The clean manuscript is now 43 pages.  The development monorepo is not published; any
-eventual release is a reviewed paper-only fresh-history export.  C545 remains
-active but release is blocked on an independent final reader, a clean public
-replay/export, immutable identifiers,
-and author/account confirmation.  C539 establishes the shared
+eventual release is a reviewed paper-only fresh-history export.  C545's
+deterministic paper-only archive now rebuilds and passes the 57-artifact local
+gate, and its public release checker is fail-closed.  Release remains blocked
+on two independent specialist readers, a publicly fetchable flake-pinned Lean
+revision, the immutable public export and identifiers, and author/account
+confirmation.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel
 algebra and projective scaling, family/count arithmetic from stated hypotheses, the transcribed
 candidate sporadic table and its internal arithmetic, and a finite-field-bound conditional
@@ -826,5 +828,6 @@ history.
 `go C545`
 
 (C537 has killed the Flatland--Gale multi-view bridge by an exact inverse-input and repeated-row
-comparison. C545 remains externally blocked on its final reader, clean export/replay, immutable
-identifiers, and author/account confirmation. No external upload is authorized.)
+comparison. C545 remains externally blocked on two independent specialist
+readers, the public Lean/export revisions and identifiers, and author/account
+confirmation. No external upload is authorized.)

@@ -140,7 +140,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `reed-solomon`
 
-- **C545 `[reed-solomon]` [QUEUED; NEXT AFTER PROOF-EXPANSION GATES; DOI RELEASE BLOCKED FOR CURRENT ANNOUNCEMENT DRAFT]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after the second-draft plan closes the full manuscript-proof, public classification-record, statement-adequacy, provenance, immutable-manifest, clean-replay, literature, cold-review, and fresh-export tracked `flake.nix`/`flake.lock` pin gates; then perform the exact claim/proof/certificate audit, target-journal policy check, immutable release, and explicit version relationship so the priority record does not become a competing publication.  The current research-announcement draft must not be released as proof-complete → `papers/beyond4_prs/second-draft-fix-plan.md`, `notes/reed-solomon-tasks/c545-beyond-four-prs-rapid-preprint-doi.md`.
+- **C545 `[reed-solomon]` [ACTIVE; LOCAL PROOF/FORMAL/DETERMINISTIC-EXPORT GATES GREEN; PUBLIC RELEASE EXTERNALLY BLOCKED]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after two independent specialist readers, the publicly fetchable flake-pinned Lean revision, author/account confirmation, immutable paper-export repository and archive identifiers, and the live DOI-bearing submission route are green.  The release checker now fails closed on every public field; no external upload is authorized → `notes/2026-07-24-c545-final-reader-export-doi-gates.md`, `notes/reed-solomon-tasks/c545-beyond-four-prs-rapid-preprint-doi.md`.
 
 ### `relconic`
 
