@@ -12,6 +12,19 @@ are expected deliverables when they identify the true boundary object.
 This is **not** a fixed-q certificate task and does not formalize the empirical
 claim `SG≤5` as though it were uniform.
 
+Evidence hierarchy:
+
+```text
+computation discovers the phenomenon
+→ certificates secure the finite headline and prevent regression
+→ mechanisms/theorems explain it and support generalization.
+```
+
+The C528 certificates remain load-bearing evidence for the q17/q19 SG≤5
+headline and should not be removed or discounted. They are the second tier:
+C547 may consume them as falsifiers, examples, and theorem regression tests,
+but its primary output is the third-tier explanatory mathematics.
+
 ## Cold start
 
 Read, in order:
@@ -106,6 +119,8 @@ Python checker, or adding definitions with no explanatory theorem.
 ## Guardrails
 
 - Do not formalize the empirical q17/q19 SG ceiling as a general theorem.
+- Preserve and cite the fixed-q certificates where they support finite
+  headlines; do not substitute their formal verification for a mechanism.
 - Do not start a broad generic hypergraph-game library unless the existing
   `BuildGame` abstractions provably cannot express A.
 - Do not use ordinary homotopy/collapse arguments as value preservation without
