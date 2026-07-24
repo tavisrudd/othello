@@ -576,6 +576,12 @@ Let $k\ge6$ be even.  If a $\cC$-complete $k$-arc has zero defect, then
 In the first two cases every point of $\cC$ has index $k/2$; in the third,
 exactly $k-1$ conic points have that index.
 
+If, in addition, \(q\) is a power of two, then either \(k=q+2\) or the
+sole remaining arithmetic candidate is
+\[
+ (q,k)=(4096,92).
+\]
+
 In particular, no zero-defect $\cC$-complete eight- or twelve-arc exists
 in a Desarguesian plane, while a zero-defect ten-arc can occur only for
 $q=8$ or $q=37$.  In fact, Theorem~\ref{thm:match-ten-realization}
@@ -612,6 +618,19 @@ For $t\ge2$, already at $t=2$ the subtracted term exceeds $q+1$ by
 \]
 and the excess increases with $t$.  Hence $t\in\{0,1\}$.  The displayed
 values of $s$ at $q=Q,B,B+1$ are respectively $q+1,q+1,Q+1$.
+
+Suppose now that \(q=2^n\).  The case \(q=B\) is impossible: since
+\(Q\) is even, the coprime factors \(Q\) and \(Q+1\) could have product
+a power of two only if \(Q+1=1\).  In the case \(q=B+1\), put
+\(x=2k-3\).  Then
+\[
+ x^2+7=8q=2^{n+3}.
+\]
+The Ramanujan--Nagell theorem~\cite{Banwait2026}, together with \(k\ge6\)
+even, leaves only \(x=181\), hence \((q,k)=(4096,92)\).  The remaining
+case \(q=Q\) is \(k=q+2\).  This argument supplies only a necessary
+parameter pair; it does not assert that the corresponding matching design
+has a rank-three realization.
 
 For $k=8,10,12$, the three candidate orders are respectively
 \[
@@ -1369,7 +1388,10 @@ vertices.
 \begin{problem}
 Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
 impossible for an infinite family.  Theorem~\ref{thm:transfer} currently
-supplies only $O(\sqrt q(\log q)^c)$.
+supplies only $O(\sqrt q(\log q)^c)$.  On the lower-bound side,
+Remark~\ref{rem:scale} shows that improving the additive constant \(3/2\)
+requires a mechanism coupling rank-three realization to the matching
+structure, rather than a sharper estimate of the conic-incidence term.
 \end{problem}
 
 \begin{problem}
@@ -1541,6 +1563,11 @@ B.~Alspach and K.~Heinrich,
 \newblock Matching designs,
 \newblock \emph{Australasian Journal of Combinatorics} \textbf{2} (1990),
 39--55.
+
+\bibitem{Banwait2026}
+B.~Banwait,
+\newblock A formal proof of the Ramanujan--Nagell theorem in Lean 4,
+arXiv:2604.09808 (2026).
 
 \bibitem{Ball1997}
 S.~Ball,
