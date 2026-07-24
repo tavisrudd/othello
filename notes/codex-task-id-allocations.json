@@ -809,8 +809,17 @@
       "last": 546,
       "purpose": "H3 pentad orientation arbitrary-LU lift and minimal contraction detector",
       "sequence": 90
+    },
+    {
+      "count": 1,
+      "first": 547,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 547,
+      "purpose": "Lean formalize the C528 residual-hypergraph proof harvest: rank-three equivalence, Y_NK bridge, pair-budget bounds, and gadget boundary lemmas; exclude empirical SG<=5",
+      "sequence": 91
     }
   ],
-  "next_id": 547,
+  "next_id": 548,
   "schema": "codex-task-id-allocations-v1"
 }
