@@ -590,8 +590,9 @@ equality pair has the regular-hyperoval concurrence design.  Such pairs
 exist in \(\PG(2,8)\), but this statement does not classify either their
 projective realizations or the prescribed conics disjoint from them.
 
-Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
-$\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
+Thus a hyperoval over $\F_Q$ retains its secant-concurrence matching design
+after scalar extension but cannot attain equality
+in~\eqref{eq:conic-complete} over the larger field.
 \end{corollary}
 
 \begin{proof}
@@ -624,8 +625,13 @@ a power of two only if \(Q+1=1\).  In the case \(q=B+1\), put
  x^2+7=8q=2^{n+3}.
 \]
 Nagell's theorem~\cite{Nagell1948}, independently formalized in Lean by
-Banwait~\cite{Banwait2026}, together with \(k\ge6\) even, leaves only
-\(x=181\), hence \((q,k)=(4096,92)\).  The remaining
+Banwait~\cite{Banwait2026}, gives the positive solutions
+\[
+ x\in\{1,3,5,11,181\}.
+\]
+Here \(k\ge6\) gives \(x=2k-3\ge9\), excluding \(1,3,5\), while evenness
+of \(k\) gives \(x\equiv1\pmod4\), excluding \(11\).  Hence \(x=181\)
+and \((q,k)=(4096,92)\).  The remaining
 case \(q=Q\) is \(k=q+2\).  This argument supplies only a necessary
 parameter pair; it does not assert that the corresponding matching design
 has a rank-three realization.
@@ -1599,17 +1605,17 @@ A.~Blokhuis, A.~Seress, and H.~A. Wilbrink,
 \newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
 \newblock doi:10.1007/BF01204717.
 
-\bibitem{Glynn1994}
-D.~G. Glynn,
-\newblock On the construction of arcs using quadrics,
-\newblock \emph{Australasian Journal of Combinatorics} \textbf{9} (1994),
-3--19.
-
 \bibitem{GiuliettiMontanucci2006}
 M.~Giulietti and E.~Montanucci,
 \newblock On hyperfocused arcs in $\PG(2,q)$,
 \newblock \emph{Discrete Mathematics} \textbf{306}(24) (2006), 3307--3314.
 \newblock doi:10.1016/j.disc.2006.06.009.
+
+\bibitem{Glynn1994}
+D.~G. Glynn,
+\newblock On the construction of arcs using quadrics,
+\newblock \emph{Australasian Journal of Combinatorics} \textbf{9} (1994),
+3--19.
 
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,
