@@ -98,6 +98,14 @@ manifest and green aggregate closure. For `complete-ports`, the logical requests
 and `RepairPorts.FunctionalCost`; C287 must replace those names with exact public module closures
 and aggregate gates before those sources are copied.
 
+Later paper-bound intakes now also include the green beyond-four PRS aggregate, the developing
+AME--LU aggregate, and possible revisions to the immutable Clebsch Paper I boundary. Their exact
+roots, source-owner gates, ordering, and no-umbrella rule are recorded in
+`notes/2026-07-24-c287-new-paper-export-intake.md`. None enlarges the frozen 26-file first tag:
+PRS enters from its two aggregate/audit gates when C545 requests a public pin; AME--LU waits for
+C570; and any Clebsch change must arrive as a replayed manifest delta rather than a monorepo
+refresh.
+
 Heavyweight generated certificate trees are not members of the `finitegeom` source union. Each
 such family has an explicit package boundary, depends one-way on a pinned `finitegeom` commit, and
 owns its generators, schemas, generated leaves, terminal theorems, trust manifest, and

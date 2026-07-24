@@ -157,6 +157,9 @@ generated regions remain unchanged until a coherent quiet-tree regeneration. Rep
 **Next:** after C553 lands the approved source rewrite and semantic docstring pass, regenerate
 C287's source inventory and trust-spine module list, audit every changed hash and public
 declaration, and repeat the referee gate.
+The later-tag roadmap has also registered the beyond-four PRS aggregate, the developing AME--LU
+aggregate, and possible Clebsch manifest revisions without enlarging the first tag; intake gates
+are in `../2026-07-24-c287-new-paper-export-intake.md`.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.
