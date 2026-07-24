@@ -410,11 +410,14 @@ Public evidence is now self-contained under the paper root:
 - `verification/statement_adequacy.json` records all 27 exact theorem-like environments;
 - `verification/trust_manifest.json` contains 57 claim rows with one explicit route or mixed
   decomposition per row, the pinned shared-Lean commit
-  `223584997c5691a60c066d865c0a0e449a38cd21`, exact gate/audit hashes, terminal-local axiom
+  `43c403b23e7cb6b9d66dda01bb43a91bec9ea465`, exact gate/audit hashes, terminal-local axiom
   lists, cited inputs, residual trust, and the complete release check list; and
 - `verification/verify_release.py` validates both flattened repositories, runs the paper checks,
   evidence bundles, pinned Mathlib-cache setup, and the exact aggregate Lean target, and rejects
-  any source-tree mutation.
+  any source-tree mutation; and
+- `flake.nix` and `flake.lock` define the standalone paper repository's NixOS 26.05 environment
+  for Python, Singular, Tectonic, Nix, Git, and core utilities.  The manifest hash-binds both
+  environment files, while the separate Lean checkout remains independently pinned.
 
 The aggregate Lean gate and durable axiom audit landed in commit
 `223584997c5691a60c066d865c0a0e449a38cd21`.  Paper evidence migration landed in commits
@@ -423,6 +426,20 @@ The aggregate Lean gate and durable axiom audit landed in commit
 landed in `3ee4476f`; the style-guide, proof-mechanism, and dependency-aware release revision landed
 in `d98b858f`.  The tracked deterministic output and its manifest hash record the final release
 state.
+
+The Paper I Lean prose audit was repaired in the separate documentation-only commit
+`43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.  It adds all 42 missing declaration docstrings,
+promotes the four mathematical overviews to valid module documentation, replaces workflow-relative
+language with named interfaces, attaches classical/semantic boundaries to exact manifest rows,
+compresses the five longest introductions, and neutralizes the overstrong torsor title.  The exact
+aggregate command then completed all 8,734 jobs at that pin.  One first attempt was killed by the
+host at the large B3 kernel reduction; serially prebuilding that unchanged leaf and rerunning the
+unchanged aggregate command from cache succeeded.
+
+The standalone environment, real `finitegeom` repository URL, new Lean pin, and regenerated
+manifest landed in `6f9fca2c`.  A final public-tree scan then found and removed two stale internal
+workflow references from export prose; the checker hash and manifest were refreshed in `195f0aa7`.
+The post-cleanup 17-check release replay passed with the same deterministic output.
 
 Reconciliation judgments with paper effects:
 
@@ -455,10 +472,11 @@ text, hidden hash, editor procedure, or representative selection.  The only Hofs
 in the released tree are the intentional, open explanatory paragraph and its bibliography entry.
 
 The clean release runner used the disk-backed detached Lean checkout at the pinned commit above.
-Its first complete run returned `status: passed` for all 17 checks: six verification-tool tests,
-statement extraction, eleven retained finite paper checkers, both public evidence bundles, pinned
-Mathlib-cache setup, and the exact aggregate Lean target.  The complete deterministic JSON is
-tracked at `verification/verify-release-output.json` and hash-bound by the trust manifest.
+After the documentation audit, repin, and standalone-flake addition, its fresh complete run returned
+`status: passed` for all 17 checks: six verification-tool tests, statement extraction, eleven
+retained finite paper checkers, both public evidence bundles, pinned Mathlib-cache setup, and the
+exact aggregate Lean target.  The emitted JSON matched the tracked deterministic
+`verification/verify-release-output.json`, which is hash-bound by the trust manifest.
 
 ### Mystery ledger after the `ej`+`tt` closeout
 
@@ -474,6 +492,14 @@ tracked at `verification/verify-release-output.json` and hash-bound by the trust
   only the intentional open Hofstadter paragraph and bibliography entry.  No record-production
   instruction, ignition line, representative-selection rule, editor procedure, or hidden
   commitment is present.
+- **Settled — Lean prose audit.**  Every issue in the 2026-07-23 audit is repaired in the separate
+  documentation-only commit above.  The aggregate trust gate is green at that exact pin.
+- **Settled — standalone export environment.**  The paper root now carries a stable, locked Nix
+  flake and names `https://github.com/tavisrudd/finitegeom` as its separate Lean repository.  The
+  q25 certificate repository is not imported by Paper I and is therefore outside this manifest.
+- **Settled — public workflow references.**  The export contains no `C###` task reference.  The
+  former archive-task sentence and one checker reference to an internal report were replaced by
+  stable archival and manuscript boundaries, and the affected checker hash was revalidated.
 - **Open, deliberately sequel-owned — arithmetic origin of the sign gluing.**  Paper I proves that
   every available two-point carrier has the same determinant-sign action and therefore the same
   torsor.  It does not construct a uniform arithmetic or metaplectic object producing that gluing

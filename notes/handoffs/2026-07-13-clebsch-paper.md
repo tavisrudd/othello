@@ -343,14 +343,20 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 - **C320 is implementation-complete and awaiting the required user-launched independent
   review.**  The replacement manuscript, 57-row claim manifest, 27-statement adequacy extraction,
   stable torsor and passage evidence bundles, aggregate Lean gate/axiom audit, and deterministic
-  17-check release output are tracked.  The final clean replay passed against pinned Lean commit
-  `223584997c5691a60c066d865c0a0e449a38cd21`.  The manuscript now states the proof hierarchy
-  directly: conceptual mechanisms carry the headlines; frozen orbit, rank, and normalizer
-  calculations remain supporting certificates.  The determinant-sign transport lemma supplies
-  the Rosetta mechanism, and candidates that did not earn theorem status are banked in the
-  discovery track.  The released paper tree contains no operational hint about the post-acceptance
-  record plan; its only Hofstadter references are the intentional open paragraph and bibliography
-  entry.  The user, not the implementing agent, must now launch Codex with `go C320`.
+  17-check release output are tracked.  The Paper I export root now has a NixOS 26.05
+  `flake.nix`/`flake.lock`, and the manifest names the future standalone Lean repository
+  `https://github.com/tavisrudd/finitegeom`.  The 2026-07-23 Lean prose audit was addressed in the
+  separate documentation-only commit `43c403b2`: all declaration docstrings, module-doc
+  promotion, stable references, compact introductions, and title repairs are present.  The exact
+  aggregate gate completed all 8,734 jobs at that pinned commit, and the final clean 17-check
+  release replay passed with byte-identical deterministic output.  The manuscript states the proof
+  hierarchy directly: conceptual mechanisms carry the headlines; frozen orbit, rank, and
+  normalizer calculations remain supporting certificates.  The determinant-sign transport lemma
+  supplies the Rosetta mechanism, and candidates that did not earn theorem status are banked in
+  the discovery track.  The released paper tree contains no operational hint about the
+  post-acceptance record plan; its only Hofstadter references are the intentional open paragraph
+  and bibliography entry.  The user, not the implementing agent, must now launch Codex with
+  `go C320`.
 - **C321 is not triggered.**  The replacement manuscript removes the smooth/genus-three `C02`
   quartic sentence, so the former Singular Jacobian calculation is not load-bearing.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
