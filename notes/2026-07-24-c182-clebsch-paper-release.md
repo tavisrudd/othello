@@ -11,8 +11,9 @@ $k$-arc, the sharp moment bound on its defect, and the stronger consequence
 that $|\mathcal U(A)|=q+1$ forces both an explicit quadratic field-size
 barrier and $q<\binom{k}{2}$.  The quadratic gives the sharp sieve bounds
 $q\le5,11,15,22$ at $k=4,6,7,8$.  A passant count supplies the complementary
-bound $q\ge2k-3$.  Hirschfeld's nucleus characterization shows that conic
-filling is impossible in even characteristic.  The theorem and its
+bound $q\ge2k-3$.  Hirschfeld's nucleus characterization shows more
+generally that in even order a $(q+1)$-point uncovered locus cannot itself
+be an arc, so conic filling is impossible.  The theorem and its
 corollary subsume the four separate
 $k=4,5,6,7$ counts.  The classification is complete through seven points,
 and the rederived eight-point sieve leaves exactly
@@ -62,8 +63,9 @@ inserted in the manuscript.
   one moment identity.  Comparing its forced defect with the universal
   defect ceiling yields the stronger quadratic barrier, which explains all
   four small-$k$ upper bounds at once; counting passants through a vertex
-  supplies the matching lower window, and the even-characteristic nucleus
-  excludes every even field.
+  supplies the matching lower window.  The nucleus proof in fact excludes
+  any even-order $(q+1)$-point uncovered locus that is itself an arc, not
+  only conics.
 - **Open:** characterize equality or near-equality in the universal defect
   ceiling.  The proof shows that extremality constrains chord multiplicities
   to the largest possible concurrence, but turning that into geometry is a

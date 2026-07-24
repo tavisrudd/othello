@@ -165,7 +165,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 323",
+      "paper_location": "source line 325",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -259,7 +259,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 390",
+      "paper_location": "source line 392",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -275,7 +275,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 407",
+      "paper_location": "source line 409",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -323,7 +323,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 444",
+      "paper_location": "source line 446",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -450,7 +450,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 495",
+      "paper_location": "source line 497",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -497,7 +497,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 577",
+      "paper_location": "source line 579",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -574,7 +574,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 619",
+      "paper_location": "source line 621",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -618,7 +618,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 726",
+      "paper_location": "source line 728",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -634,7 +634,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 751",
+      "paper_location": "source line 753",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -668,7 +668,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 780",
+      "paper_location": "source line 782",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -684,7 +684,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 893",
+      "paper_location": "source line 895",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -765,7 +765,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 943",
+      "paper_location": "source line 945",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -824,7 +824,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 959",
+      "paper_location": "source line 961",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -838,11 +838,11 @@
       "components": [
         {
           "cited_inputs": [
-            "Complete double count in the manuscript; the standard even-characteristic conic nucleus is cited from Hirschfeld"
+            "Complete double count in the manuscript; the standard even-order oval nucleus is cited from Hirschfeld"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "universal secant moments and conic-filling window",
-          "unconditional_remainder": "The identity, defect bound, quadratic barrier, odd-characteristic obstruction, and two-sided field-size window are proved for every k in the manuscript."
+          "unconditional_remainder": "The identity, defect bound, quadratic barrier, even-order oval obstruction, and two-sided field-size window are proved for every k in the manuscript."
         },
         {
           "cited_inputs": [
@@ -947,9 +947,9 @@
       "source": {
         "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "8c6441bc18c263a4b4bba1555d2f671a4387d3fce280b30189dda79670769286"
+        "sha256": "dfeb5ad5a3f819fa112aedee5fcde08bacb1c8780ba95b11787ac7843b0b0c69"
       },
-      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, odd-characteristic obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
+      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
     {
       "components": [
@@ -1029,7 +1029,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1045",
+      "paper_location": "source line 1047",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1107,7 +1107,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1072",
+      "paper_location": "source line 1074",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1207,7 +1207,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1128",
+      "paper_location": "source line 1130",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1251,7 +1251,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 664",
+      "paper_location": "source line 666",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "e96b5a7a1906ce95a95ab7c3b54d6f53b4e0eb3aeeec023f1d59d539ec930c84"
+    "sha256": "38e3074cd73cc0c38ff7b8ad12a69254724879e416f98e4d5e3a34d884ed9510"
   },
-  "manuscript_sha256": "9745e9cd0ae458c7343b95723156dbc9a095e48fd6c2a03f3c8ea337fd6000ea",
+  "manuscript_sha256": "4ca7f72a3963b1e73ed396314e98275405289d0025c8e70771aa330b0ebe0a3e",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "94ce973a8fff7e9deeb5ca8a33d393d27689ce8feed5235aa0b2e12e2c5bb217"
+    "sha256": "4f376b947c6af4c1746bbfdf0fc094574a3a4cd55850a24432d14879cbb156d9"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1532,7 +1532,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "c2ce14c9d2c90fdf1f932946f6d9d245cd576309571607fe9b815381d73d3c89"
+        "sha256": "6583461a0b00b3a91949a1dd4a9ead2ae2d5a11144031f36d91792c926aab37a"
       },
       {
         "path": "verification/verify_trust_manifest.py",

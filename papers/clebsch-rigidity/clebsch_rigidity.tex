@@ -239,7 +239,8 @@ If $|\cU(A)|=q+1$, then
  t(A)=q^2-mq+m+3\binom{k}{4}-k,\qquad
  q^2-mq+m-k+\frac{6}{r}\binom{k}{4}\le0,
 \]
-and $q<m$. If moreover $\cU(A)$ is a nonsingular conic, then $q$ is odd and
+and $q<m$. If $q$ is even, then $\cU(A)$ is not an arc. Hence if
+$\cU(A)$ is a nonsingular conic, then $q$ is odd and
 \[
  2k-3\le q<\binom{k}{2}.
 \]
@@ -261,14 +262,15 @@ comparison with the defect bound gives the quadratic inequality. There are
 $q^2-k$ covered off-arc points, so $q^2-k\le m(q-1)$; if $q\ge m$, then
 $0\le q(q-m)\le k-m<0$, a contradiction.
 
-If the uncovered locus is a conic, every chord is passant to it. Suppose
-$q$ were even, and let $N$ be the nucleus, the common point of all tangent
-lines~\cite[Cor.~7.12]{Hirschfeld1998}. Since $\cC$ is nonsingular,
-$N\notin\cC$~\cite[Thm.~7.16]{Hirschfeld1998}. No passant contains $N$, so
-$N$ is neither a vertex nor a point of a chord. Thus $N\in\cU(A)$, a
-contradiction. Hence $q$ is odd. An off-conic point then lies on at most
-$(q+1)/2$ passants, so the $k-1$ chords through a vertex give
-$q\ge2k-3$.
+Suppose $q$ is even and $\cU(A)$ is an arc. Since it has $q+1$ points, it
+has a nucleus $N\notin\cU(A)$ through which every line is tangent
+\cite[p.~177]{Hirschfeld1998}. Every chord of $A$ is disjoint from
+$\cU(A)$, so no chord contains $N$; nor can $N$ be a vertex. Thus
+$N\in\cU(A)$, a contradiction.
+
+In the conic case, $q$ is therefore odd and every chord is passant. An
+off-conic point lies on at most $(q+1)/2$ passants, so the $k-1$ chords
+through a vertex give $q\ge2k-3$.
 
 For $k=6$, one has $r=3$ and $t(A)=n_3=c(A)$, giving the displayed
 specialization. For the displayed arc, Dye's Brianchon theorem gives
