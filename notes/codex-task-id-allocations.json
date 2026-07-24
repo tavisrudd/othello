@@ -899,8 +899,17 @@
       "last": 572,
       "purpose": "AME local-unitary paper theorem, evidence, literature, drafting, Lean, audit, and release completion program",
       "sequence": 100
+    },
+    {
+      "count": 2,
+      "first": 573,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 574,
+      "purpose": "verify primary matching-design exclusions at k=8,12 and then classify rank-three realizability of the two MATCH(10,5,1) designs",
+      "sequence": 101
     }
   ],
-  "next_id": 573,
+  "next_id": 575,
   "schema": "codex-task-id-allocations-v1"
 }
