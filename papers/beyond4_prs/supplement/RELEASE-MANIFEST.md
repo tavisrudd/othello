@@ -34,9 +34,9 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `ea5b6e42c07530e88172a4f8033ed08dc571da0f09d5102937ce90031ecc1c43` | 15236 |
-| `EVIDENCE-ROWS.md` | `2b218eaa230e99523692b8d660f61f525fbc497263583b455771ca3043bec8f9` | 10043 |
-| `package_evidence_bundle.py` | `2a727bc2f7a76b3c1b65bb62ef25002f6064b6570d5e9c256c2425aa28b26855` | 14124 |
+| `EVIDENCE-MANIFEST.json` | `043649e7ae7b50a9f3a5cd6f10770a1d8e38f3afbd0bde4912e676015df93599` | 15869 |
+| `EVIDENCE-ROWS.md` | `71aeb5c1ce6490715a80bc036439dd955e7c99ba594e133ea98a498a009545a0` | 10472 |
+| `package_evidence_bundle.py` | `40c3483185f9c21c41af5140a634f8ea422e2f163689d787f65577384a0607c6` | 14583 |
 
 Verify the complete local bundle from the paper directory:
 

@@ -137,6 +137,20 @@ PUBLIC_SUPPLEMENT_FILES = (
 
 AUXILIARY_COPIES = (
     (
+        "Certificate R6-NF",
+        "dependency-replay",
+        "notes/2026-07-22-c498-prs-deep-hole-replay.py",
+        "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-replay.py",
+        "reconstruct",
+    ),
+    (
+        "Certificate R6-NF",
+        "dependency-certificate",
+        "notes/2026-07-22-c498-prs-deep-hole-census.json",
+        "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-census.json",
+        "compare",
+    ),
+    (
         "Certificate R7",
         "dependency-replay",
         "notes/2026-07-22-c498-prs-deep-hole-replay.py",

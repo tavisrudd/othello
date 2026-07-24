@@ -129,6 +129,22 @@
       "sha256": "49b3130a35fc8ada7d87074c3f464754876e6ad6ed0ae2a82268eb8659e30377"
     },
     {
+      "bytes": 27077,
+      "path": "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-census.json",
+      "public_label": "Certificate R6-NF",
+      "replay_class": "compare",
+      "role": "dependency-certificate",
+      "sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3"
+    },
+    {
+      "bytes": 16760,
+      "path": "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-replay.py",
+      "public_label": "Certificate R6-NF",
+      "replay_class": "reconstruct",
+      "role": "dependency-replay",
+      "sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
+    },
+    {
       "bytes": 58730,
       "path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.json",
       "public_label": "Certificate R6-NF",
@@ -369,12 +385,12 @@
       "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
     },
     {
-      "bytes": 14124,
+      "bytes": 14583,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "2a727bc2f7a76b3c1b65bb62ef25002f6064b6570d5e9c256c2425aa28b26855"
+      "sha256": "40c3483185f9c21c41af5140a634f8ea422e2f163689d787f65577384a0607c6"
     },
     {
       "bytes": 17225,
