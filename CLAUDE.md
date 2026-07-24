@@ -56,6 +56,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | Alias | Entry handoff |
 |---|---|
 | `alt-orbit-repair` | `notes/handoffs/2026-07-14-alternate-orbit-repair.md` |
+| `ame-lu` | `notes/handoffs/2026-07-24-ame-lu-paper.md` |
 | `baer` | `notes/handoffs/2026-07-14-baer-equivariant-robust-completion.md` |
 | `build-sys` | `notes/handoffs/2026-07-14-lean-build-system.md` |
 | `cap` | `notes/handoffs/2026-07-06-projective-cap-game-handoff.md` |

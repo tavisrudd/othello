@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\hbadness=10000
+\hfuzz=3pt
+
+\newtheoremstyle{upright}
+  {6pt}{6pt}{\normalfont}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{upright}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\LU}{\mathrm{LU}}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\AME}{\mathrm{AME}}
+\newcommand{\GRS}{\mathrm{GRS}}
+
+\title{Clifford Geometry and Local-Unitary Invariants of
+Six-Qudit AME Tensors}
+\author{Tavis Rudd}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This preparation draft organizes exact results on six-qudit,
+minimal-support absolutely maximally entangled stabilizer tensors arising
+from six-point projective arcs.  The present proved package classifies
+local-Clifford equivalence in a non-Reed--Solomon pencil by one projective
+scalar, detects a sharp change in the logical Clifford group at the
+Reed--Solomon locus, and constructs exact local-unitary invariants that
+separate the distinguished non-Reed--Solomon tensors from Reed--Solomon
+tensors.  A restricted equality of local-unitary and local-Clifford orbit
+partitions remains a theorem gate and is not asserted here.
+\end{abstract}
+
+\input{sections/01-introduction}
+\input{sections/02-geometry-ame-dictionary}
+\input{sections/03-lc-classification}
+\input{sections/04-lu-invariants}
+\input{sections/05-logical-clifford-phase}
+\input{sections/06-transport-sheaf}
+\input{sections/07-verification-boundary}
+
+\end{document}
