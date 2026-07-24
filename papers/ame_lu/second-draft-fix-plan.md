@@ -2,12 +2,11 @@
 
 ## Phase 0 — theorem decision
 
-- Run the generic invariant-field gate for party-symmetrized four-copy
-  contractions.
-- Decide whether the paper proves restricted LU/LC orbit coincidence, a generic
-  theorem with explicit exceptional fibres, or only the already proved
-  separation package.
-- Freeze the title after that decision.
+- C559 closed the fixed-copy invariant-field route and identified
+  rank-divisor rather than coordinate information.
+- C560 proved the stronger all-MDS/CSS LU-intertwiner rigidity theorem.
+- C561 must now freeze the exact theorem hierarchy, title, exception table,
+  and section architecture.
 
 ## Phase 1 — evidence and literature
 

@@ -14,7 +14,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
 | C559 | every fixed-copy LU contraction is generically constant on an algebraic equal-phase code family | adopted as a mechanism boundary | every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
-| C560 | LU and LC orbit partitions coincide inside the admitted pencil | **open theorem gate** | target: odd finite fields with explicit exceptional clauses | support/flattening rigidity or finite-component classification; no present claim |
+| C560 | every LU intertwiner between equal-phase CSS states of linear `[6,3,4]_q` MDS codes is LC; hence `LU iff LC iff z` on the admitted pencil | adopted headline theorem | every prime power for intertwiner rigidity; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity |
 
 ## Stable source labels
 
@@ -25,4 +25,5 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:q13-lu`: exact four-copy `q=13` separator.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
-- `thm:lu-lc-pencil`: reserved; must not be used before the open gate closes.
+- `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
+- `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.

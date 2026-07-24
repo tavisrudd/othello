@@ -13,7 +13,7 @@ artifact.
 | `thm:q13-lu` | C397 | contraction invariance | complete two-/three-/four-copy evaluation | not imported |
 | `thm:transport-divisor` | C548/C550 | transport-sheaf and cycle-cover derivation | divisor and orbit certificates | not imported |
 | `thm:fixed-copy-boundary` | C559 | contraction-rank formula and generic-minor argument | no computation required | conceptual proof available |
-| `thm:lu-lc-pencil` | open | proposed support/flattening rigidity or finite-component classification | none | forbidden |
+| `thm:lu-lc-rigidity` and `cor:lu-lc-pencil` | C560 plus C396 | MDS shortening and diagonal Weyl-tensor axis rigidity; C396 supplies `z` classification | no new computation for rigidity | conceptual proof available; C396 evidence not imported |
 
 ## Required import record
 

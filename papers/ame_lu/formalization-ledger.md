@@ -8,7 +8,7 @@ No Lean theorem is presently adopted by this paper.
 | LC classification by `z` | none adopted | projective invariant theory and exceptional fibres | candidate only |
 | marginal-moment LU invariant | none adopted | stabilizer trace formula and geometric count | candidate only |
 | transport-sheaf divisor | none adopted | cycle-cover algebra and orbit geometry | candidate only |
-| restricted LU/LC orbit theorem | unproved | entire theorem | no formalization before proof |
+| all-MDS/CSS LU-intertwiner rigidity | proved in C560; not formalized | diagonal-tensor axis lemma, Weyl normalization, and MDS shortening bridge | route after C561 freeze |
 
 Any Lean action requires an allocated `ame-lu` task and the nested Lean guide.
 A future ledger must state exact theorem names, imports, toolchain, axioms,

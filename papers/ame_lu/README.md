@@ -5,10 +5,11 @@ Six-Qudit AME Tensors.*
 
 **Lane:** `ame-lu`
 
-**Status:** preparation scaffold.  The adopted source theorems are proved in
-the crowns reports, but the manuscript theorem package, paper-local evidence
-bundle, literature audit, and prose are not yet complete.  Uniform `LU=LC` is
-a theorem gate, not a present claim.
+**Status:** preparation scaffold with the headline theorem proved.  C560
+shows that every local-unitary intertwiner between equal-phase CSS states of
+linear `[6,3,4]_q` MDS codes is local Clifford.  The manuscript theorem
+package and title await C561 freeze; the paper-local evidence bundle,
+claim-specific literature audit, and complete prose are not yet closed.
 
 The completion program is queued as C559--C572: theorem decision, theorem
 freeze, literature and reproducibility audits, first draft, four Lean theorem
@@ -58,9 +59,10 @@ coordinate: on an equal-phase linear-code state each is a power of `q`
 determined by a linear-system rank.  Their maximal minors detect special
 rank-jump divisors, but their values are generically constant.
 
-The flagship upgrade under investigation is equality of LU and LC orbit
-partitions inside the admitted pencil.  The paper will not use the global
-LU--LC conjecture or claim that every LU symmetry is Clifford.
+For the admitted odd non-GRS pencil, C560 and C396 give
+`LU iff LC iff z equality`.  The all-MDS/CSS theorem is stronger: every LU
+intertwiner is Clifford.  This is a theorem for the stated six-qudit
+MDS/CSS family, not a revival of the false global LU--LC conjecture.
 
 ## Initial source set
 
