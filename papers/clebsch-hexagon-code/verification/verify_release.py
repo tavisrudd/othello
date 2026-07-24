@@ -6,6 +6,8 @@ it never invokes a shell.  It requires a clean Git worktree, verifies that
 the pinned evidence commit is an ancestor of the checked-out source, runs
 the manifest validator, executes every declared check in order, and confirms
 that no tracked or untracked repository path changed during verification.
+Its success JSON omits timing and machine-local paths so the same manifest
+and successful check set produce byte-identical scholarly output.
 
 Build caches and other ignored files are outside the Git cleanliness check.
 Every scholarly output consumed by the trust ledger is instead a tracked,
@@ -18,7 +20,6 @@ import argparse
 import json
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 
@@ -173,7 +174,6 @@ def main() -> int:
                 f"{where}.timeout_seconds must be an integer from 1 to 86400"
             )
 
-        started = time.monotonic()
         try:
             result = subprocess.run(
                 argv,
@@ -192,16 +192,13 @@ def main() -> int:
                 f"verification check {check_id!r} timed out after "
                 f"{timeout} seconds:\n{detail}"
             ) from error
-        elapsed = round(time.monotonic() - started, 3)
         if result.returncode != 0:
             detail = bounded_failure_output(result.stderr or result.stdout)
             raise RuntimeError(
                 f"verification check {check_id!r} failed with "
                 f"exit {result.returncode}:\n{detail}"
             )
-        summaries.append(
-            {"id": check_id, "elapsed_seconds": elapsed, "status": "passed"}
-        )
+        summaries.append({"id": check_id, "status": "passed"})
 
     final_snapshot = git_snapshot(repository_root)
     if final_snapshot != initial_snapshot:

@@ -54,7 +54,8 @@ The initial public verification surface is under
   uniquely named check with an explicit bounded timeout, reports only bounded failure tails, and
   verifies that no tracked or untracked repository path changed during the run.  Ignored build
   caches are outside the Git snapshot; every scholarly output is instead a tracked hash-pinned
-  manifest artifact.
+  manifest artifact.  Success output omits timings and machine-local paths, making it
+  byte-reproducible for a fixed manifest and passing check set.
 - `test_verification_tools.py` exercises content-addressed statement extraction, uniqueness of
   manuscript claim keys, the embedded 23-terminal arithmetic-gluing gate surface, direct argv
   acceptance, shell-command rejection, a tracked gate serving as its own embedded audit, and
