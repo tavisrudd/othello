@@ -460,20 +460,51 @@
       "trust_boundary": "Lean checks the exact syndrome branches and leader-support strata; the separate replay independently exhausts every projective syndrome direction."
     },
     {
-      "cited_inputs": [
-        "No external input; complete combinatorial proof in the manuscript"
+      "components": [
+        {
+          "cited_inputs": [
+            "No external input; complete combinatorial proof in the manuscript"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "six-arc line bound",
+          "unconditional_remainder": "The line bound is unconditional."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_rigidity_degenerate_conic.py",
+                "repository": "paper",
+                "sha256": "c0f9e1021068f7f25cdfa89f05aab765a8cce060658072bca5c2d61b6b3e6895"
+              }
+            ],
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_rigidity_degenerate_conic.py"
+                ]
+              }
+            ],
+            "coverage": "All 1,548 frame-normalized six-arcs over F_11 are canonically reduced to the fifteen projective classes; no sampling is used.",
+            "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
+            "soundness_bridge": "The replay enumerates every frame-normalized six-arc and filters the arcs contained in a nonsingular conic."
+          },
+          "route": "exact-replay",
+          "subclaim": "conic-inscribed subcensus"
+        }
       ],
       "id": "lem-six-arc-line-bound",
       "paper_location": "source line 509",
-      "route": "conceptual-cited-inputs",
+      "route": "mixed",
       "row": 16,
       "source": {
         "id": "lem:six-arc-line-bound",
         "kind": "theorem-environment",
         "sha256": "840ab87722acfa9044ed68465bc83f8d3cd88b92da764d40df94ac3d7e9aa714"
       },
-      "trust_boundary": "The line bound is a complete human combinatorial proof and claims no computational or Lean route.",
-      "unconditional_remainder": "The entire statement is unconditional."
+      "trust_boundary": "The line bound is a complete human combinatorial proof; the displayed conic-inscribed values are backed by the exact normalized census."
     },
     {
       "components": [
@@ -872,6 +903,54 @@
           },
           "route": "kernel-checked-lean",
           "subclaim": "chord-defect algebra and geometric bridge"
+        },
+        {
+          "cited_inputs": [
+            "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
+            "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "Sylvester graph and distance-two interpretation",
+          "unconditional_remainder": "The explicit distance-two clique certificate is kernel checked."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
+              "repository": "lean",
+              "sha256": "ef031beeb322b7bd217651aec0b1822b231a01991c1652e21e048bc9f5305767"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "lean",
+              "sha256": "dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
+              "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
+            ],
+            "validation": {
+              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "toolchain": {
+                "lean": "4.32.0-rc1",
+                "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
+              }
+            }
+          },
+          "route": "kernel-checked-lean",
+          "subclaim": "Sylvester distance-two clique obstruction"
         }
       ],
       "id": "lem-chord-defect",
@@ -883,7 +962,7 @@
         "kind": "theorem-environment",
         "sha256": "b8c616f76684f9980354959e8cfd3c5b86cf0e88858f8b9b2905719e37f298f9"
       },
-      "trust_boundary": "Lean checks the exact chord-defect algebra; the manuscript supplies the secant-moment interpretation."
+      "trust_boundary": "Lean checks the exact chord-defect algebra and an explicit Sylvester distance-two clique certificate; the manuscript supplies the secant-moment and polarity interpretations."
     },
     {
       "components": [
@@ -1466,7 +1545,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "cedc0cff95788f7cf8da6319aa4a176af177cf537e0f72292e0c532446a82893"
+        "sha256": "7b9830e4aaea95bb11829e082f00368419f3b882d9821a04e3340329d7c0d555"
       },
       {
         "path": "verification/verify_trust_manifest.py",

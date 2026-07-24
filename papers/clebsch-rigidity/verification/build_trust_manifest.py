@@ -325,8 +325,11 @@ def components_by_row(
             ],
         ),
         16: (
-            "The line bound is a complete human combinatorial proof and claims no computational or Lean route.",
-            [conceptual("six-arc line bound", ["No external input; complete combinatorial proof in the manuscript"], "The entire statement is unconditional.")],
+            "The line bound is a complete human combinatorial proof; the displayed conic-inscribed values are backed by the exact normalized census.",
+            [
+                conceptual("six-arc line bound", ["No external input; complete combinatorial proof in the manuscript"], "The line bound is unconditional."),
+                replay("conic-inscribed subcensus", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay enumerates every frame-normalized six-arc and filters the arcs contained in a nonsingular conic.", direct_coordinates),
+            ],
         ),
         17: (
             "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences.",
@@ -366,10 +369,12 @@ def components_by_row(
             ],
         ),
         24: (
-            "Lean checks the exact chord-defect algebra; the manuscript supplies the secant-moment interpretation.",
+            "Lean checks the exact chord-defect algebra and an explicit Sylvester distance-two clique certificate; the manuscript supplies the secant-moment and polarity interpretations.",
             [
                 conceptual("secant-moment double count", ["No external input; complete double count in the manuscript"], "The geometric identification of the variables is proved in the manuscript."),
                 lean("chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
+                conceptual("Sylvester graph and distance-two interpretation", CLASSICAL_SYLVESTER, "The explicit distance-two clique certificate is kernel checked."),
+                lean("Sylvester distance-two clique obstruction", ["field_order"], axioms),
             ],
         ),
         25: (
