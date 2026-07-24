@@ -4,8 +4,8 @@
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
 awaits a quiet Lean worktree; C287 declared its reviewer-scale 26-file first-tag boundary in the
-trust spine, and its first referee pass expanded the public-prose blocker beyond the original seven
-files; C162 blast radius and the restart-guard failure
+trust spine and prepared the expanded 17-module source-owner packet with two API decisions; C162
+blast radius and the restart-guard failure
 suite landed, and the remaining
 C162 streams need a quiet window
 
@@ -139,7 +139,8 @@ modules with public-prose failures, two workflow-bearing public path/name famili
 source-owner decisions, and a separate module-wide docstring gate. Source owners must resolve them
 before C287 exports the closure. Reports:
 [`../2026-07-23-c287-first-tag-source-contract.md`](../2026-07-23-c287-first-tag-source-contract.md),
-`../2026-07-24-c287-first-tag-referee-review.md`.
+`../2026-07-24-c287-first-tag-referee-review.md`, and
+`../2026-07-24-c287-source-owner-rewrite-packet.md`.
 
 The theorem audit selects the 26-file manuscript claim closure for reviewers and defers both the
 uncited hyperbolic module and the disjoint 24-file `FiniteGeom` component. `FiniteGeom.lean` has no
@@ -154,8 +155,9 @@ all units but refuses the current seven-foreign-path worktree. The global graph 
 generated regions remain unchanged until a coherent quiet-tree regeneration. Report:
 [`../2026-07-24-c287-first-tag-trust-spine.md`](../2026-07-24-c287-first-tag-trust-spine.md).
 
-**Next:** coordinate the expanded 17-module source-owner rewrite packet and two public API naming
-decisions, then complete the 26-file closure's semantic declaration/docstring review.
+**Next:** obtain source-owner approval for the packet's deletion-first API recommendations (or its
+named fallbacks), dispatch the 17-module rewrite in the owning mathematical lane, then complete the
+resulting closure's semantic declaration/docstring review.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.

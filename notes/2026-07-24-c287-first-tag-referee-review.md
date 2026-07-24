@@ -90,3 +90,7 @@ Source owners should rewrite the 17 files above, decide the two public path/name
 complete the module-wide declaration/docstring review. C287 then regenerates the content-addressed
 inventory, verifies that every hash change is owned and reviewed, and repeats this gate before any
 fresh-history source commit.
+
+The dispatch-ready ownership split, deletion-first API recommendations, fallback names, and
+per-module acceptance contract are recorded in
+`notes/2026-07-24-c287-source-owner-rewrite-packet.md`.

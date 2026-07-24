@@ -68,8 +68,10 @@ files and 8,954 code lines, with 18 external imports all supplied by Mathlib and
 certificate-family source. The first whole-closure referee pass showed that the earlier seven-file
 workflow-residue scan was too narrow. At least 17 modules need source-owner prose work, two public
 path/name families need API decisions, and the closure still needs a semantic scholarly-public
-docstring review before export. The failed gate and exact rewrite packet are recorded in
-`notes/2026-07-24-c287-first-tag-referee-review.md`.
+docstring review before export. The failed gate is recorded in
+`notes/2026-07-24-c287-first-tag-referee-review.md`; the source-owner dispatch contract and
+deletion-first API recommendations are in
+`notes/2026-07-24-c287-source-owner-rewrite-packet.md`.
 
 The theorem-level audit in `notes/2026-07-23-c287-first-tag-theorem-ledger.md` shows that the adopted
 human manuscript terminals need 26 files / 8,954 code lines; the advertised but uncited
