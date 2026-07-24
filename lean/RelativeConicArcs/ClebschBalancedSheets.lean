@@ -81,6 +81,7 @@ def equalSheetSum : Submodule K (SheetPair q K) where
 def hadamardSquare (L : Submodule K (SheetPair q K)) : Submodule K (SheetPair q K) :=
   Submodule.span K {z | ∃ x ∈ L, ∃ y ∈ L, z = hadamard x y}
 
+/-- The coordinatewise product of two members of `L` belongs to its Hadamard square. -/
 theorem hadamard_mem_hadamardSquare {L : Submodule K (SheetPair q K)}
     {x y : SheetPair q K} (hx : x ∈ L) (hy : y ∈ L) :
     hadamard x y ∈ hadamardSquare L := by
@@ -729,6 +730,7 @@ def signedSubgroupAction {n : ℕ} {epsilon : Fin n → K}
     {H : Subgroup (signedSymmetryGroup epsilon)} (g : H) : (Fin n → K) →ₗ[K] K :=
   signedFunctionalAction g.1
 
+/-- On a generated signed subgroup, functional transport is multiplication by its character. -/
 theorem signedSubgroupAction_eq_character_smul {n : ℕ} {epsilon : Fin n → K}
     {H : Subgroup (signedSymmetryGroup epsilon)} (g : H) :
     signedSubgroupAction g =

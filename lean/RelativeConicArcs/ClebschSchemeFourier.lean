@@ -1,4 +1,9 @@
-/-
+import RelativeConicArcs.ClebschSchemeFourierData
+import Mathlib.Tactic
+import Mathlib.RingTheory.RootsOfUnity.Basic
+import Mathlib.Algebra.BigOperators.Fin
+
+/-!
 # Character sums and checks of frozen q = 11 Fourier tables
 
 This development proves an abstract scalar-line character identity over `F_11` and
@@ -20,10 +25,6 @@ identification. The generator, schema data, pinned construction, and
 comparison certificate are under `lean/verification/clebsch_scheme_fourier/`; the
 theorems below are kernel-checked consequences of their frozen output.
 -/
-import RelativeConicArcs.ClebschSchemeFourierData
-import Mathlib.Tactic
-import Mathlib.RingTheory.RootsOfUnity.Basic
-import Mathlib.Algebra.BigOperators.Fin
 
 namespace RelativeConicArcs
 namespace ClebschSchemeFourier

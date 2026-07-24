@@ -1,4 +1,8 @@
-/-
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Data.Fin.Tuple.Basic
+import Mathlib.Data.Matrix.Basic
+
+/-!
 # Frozen data for the six-block Clebsch chirality calculation
 
 This module records six projective directions over `F_11`, two permutations generating
@@ -7,14 +11,13 @@ normalizing permutation that exchanges the two ten-element orbits.  The tracked 
 and semantic certificate are `ClebschSchemeChirality.py` and `ClebschSchemeChirality.json` in this
 directory.  The mathematical checks of the displayed tables are in `ClebschSchemeChirality.lean`.
 -/
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Data.Fin.Tuple.Basic
-import Mathlib.Data.Matrix.Basic
 
 namespace RelativeConicArcs
 namespace ClebschSchemeChirality
 
+/-- Three-coordinate representatives over the eleven-element field model. -/
 abbrev SchemeVector := Fin 3 → Fin 11
+/-- Indices for the sixty direction-neighbor pairs. -/
 abbrev NeighborIndex := Fin 6 × Fin 10
 
 /-- Representatives of the six scalar-line directions, normalized by their first nonzero

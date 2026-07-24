@@ -283,6 +283,7 @@ abbrev MarkedSymmetry := alternatingGroup (Fin 5)
 
 /-- Left and right regular actions on the equivalence index set. -/
 def leftMarkedAction (g e : MarkedSymmetry) : MarkedSymmetry := g * e
+/-- The commuting right regular action, written with an inverse so it is a left action in `h`. -/
 def rightMarkedAction (e h : MarkedSymmetry) : MarkedSymmetry := e * h⁻¹
 
 /-- The abstract indexing group has exactly sixty elements. -/

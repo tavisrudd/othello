@@ -23,6 +23,7 @@ characteristic-zero interpretations are deliberately not encoded here.
 namespace RelativeConicArcs
 namespace ClebschSurvivalBoundary
 
+/-- The characteristic-eleven coefficient field for the frozen boundary tables. -/
 abbrev F11 := ZMod 11
 
 /-- Rows are the reductions `ζ = 3,4,5,9`; columns are the four companion orbits.

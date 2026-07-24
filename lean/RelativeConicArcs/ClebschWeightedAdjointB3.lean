@@ -11,7 +11,8 @@ This file exhaustively checks, by Lean kernel reduction over all 133 normalized 
 their incidence multiplicities, weighted two-adjoint depths, complement line sections, and the
 punctured depth spectrum.  No generated data, external certificate, `native_decide`, or opaque
 oracle is used.  Calling this coordinate model the projectivized `B3` reflection arrangement uses
-the classical identification of these nine normals; Lean checks the displayed finite model itself.
+the semantic identification recorded by Paper I trust-manifest claim
+`thm-headline-rigidity-phase-clause-2`; Lean checks the displayed finite model itself.
 -/
 
 namespace RelativeConicArcs

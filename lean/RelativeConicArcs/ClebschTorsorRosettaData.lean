@@ -12,9 +12,10 @@ and `x ↦ 1-x`.
 
 The characteristic-five control is represented by a geometric two-point fibre with
 Frobenius exchanging its points and a single Frobenius orbit.  Its identification with
-the geometric roots of the irreducible quadratic `x²-2` is a standard quadratic-algebra
-input; the downstream theorem separately checks that the polynomial has no root in
-`F₅`.
+the geometric roots of the irreducible quadratic `x²-2` is the quadratic-field input
+recorded in the companion Paper I trust-manifest row
+`thm-torsor-rosetta-close-clause-1`.  The theorem `a3_two_has_no_root` checks the
+corresponding no-root statement in `F₅`.
 
 The 22-element fixed-child indexing below has two explicit fibres of size eleven and
 an involution exchanging paired indices.  A semantic fixed-child certificate must

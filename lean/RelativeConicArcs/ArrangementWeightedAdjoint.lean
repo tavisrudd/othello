@@ -7,8 +7,8 @@ import Mathlib.RingTheory.Polynomial.Basic
 # Weighted two-adjoint depth and rank-three arrangement codes
 
 Let an arrangement of `N` distinct projective lines be given in a finite projective plane of order
-`q`.  A non-arrangement test line meets the arrangement in a finite set of points.  If `m(P)` is
-the number of arrangement lines through an intersection point, its weighted two-adjoint depth is
+`q`.  On a non-arrangement test line, let `m(P)` count arrangement lines through an intersection
+point and set
 
 `δ = ∑ₚ (m(P) - 1)`.
 
@@ -16,22 +16,16 @@ Counting the arrangement lines by their unique intersections with the test line 
 
 `|B ∩ L| + N = q + 1 + δ`,
 
-where `B` is the arrangement complement.  The first layer proves the underlying finite-cardinality
-identity from an explicit section profile; it does not construct projective incidence from those
-hypotheses.  A second, numeric profile layer derives the punctured depth polynomial and the formal
-projective-direction regrading, conditional on its recorded section and spanning inequalities.
+where `B` is the arrangement complement.  The section-profile layer proves this count and derives
+the punctured depth polynomial under explicit inequalities.  The code layer evaluates vectors in
+`K^3` on displayed projective representatives; positivity of every nonzero word proves
+injectivity, so the finite coefficient counts are genuine Hamming enumerators.
 
-The actual code layer is separate.  It evaluates vectors in `K^3`, for an explicit field `K`, on a
-finite set of displayed projective representatives and uses ordinary Hamming weight.  Positivity
-of every nonzero coefficient word is proved to make this evaluation injective.  The finite
-`A3/F_5`, `B3/F_11`, and `H3/F_11` terminals count these actual coefficient vectors by weight and
-prove attained minimum weights; their counts therefore give Hamming enumerators of distinct
-codewords.
-
-The final section checks the `A3` model over `F_5` and the `H3` model over `F_11` from the public
-coordinate tables in `RelativeConicArcs.ReflectionArrangements`.  Those labels describe the
-displayed finite models; identifying them with abstract reflection arrangements is a separate
-classical input.  All finite checks in this file use kernel reduction by `decide`.
+The `A3/F_5`, `B3/F_11`, and `H3/F_11` results concern the displayed coordinate models.  Their
+identification with the named reflection arrangements is the cited semantic input recorded by
+Paper I trust-manifest claims `thm-headline-rigidity-phase-clause-2` and
+`thm-headline-rigidity-phase-clause-3`.  The file does not construct projective incidence from an
+abstract section profile.  Its finite checks use kernel reduction by `decide`.
 -/
 
 open scoped BigOperators

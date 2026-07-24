@@ -10,9 +10,11 @@ bounded split/fused trichotomy.
 
 The finite theorems use kernel reduction through `decide`.  Abstract octahedral,
 icosahedral, tetrahedral, dihedral, orthogonal, spinor-norm, and number-field terminology
-is not asserted by this gate; those names remain cited-input boundaries.  The imported
-replacement-spine character theorem is reused only as an abstract equal-kernel interface.
-No all-prime statement is asserted.
+is not asserted by this gate.  Paper I trust-manifest claims
+`thm-headline-gluing-clause-1`, `thm-headline-gluing-clause-2`, and
+`thm-headline-gluing-clause-3` record the corresponding cited semantic inputs.  The imported
+replacement-spine character theorem is reused only as an abstract equal-kernel interface.  No
+all-prime statement is asserted.
 -/
 
 #print axioms RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective

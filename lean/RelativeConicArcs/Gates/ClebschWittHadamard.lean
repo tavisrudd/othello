@@ -14,8 +14,8 @@ degree-twelve generator actions.
 
 No classical Mathieu-group, projective-linear-group, nonsplit-cover, or abstract outer-group
 identification is asserted.  The gate does expose the literal finite normalizer and non-inner
-witness checks; classical names require a separate cited-input boundary unless exact
-finite-group identification terminals are added.
+witness checks.  Paper I trust-manifest claims `survival-design-shadow` and
+`thm-torsor-rosetta-close-clause-4` record the semantic identifications used by the paper.
 
 The independently compiled exhaustive certificate leaves use `native_decide`; this toolchain
 prints a declaration-local `_native.native_decide.ax_1_1` dependency for each such leaf.  The small

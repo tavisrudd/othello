@@ -19,10 +19,15 @@ and exhaustive projective-space coverage remain trusted external inputs.
 namespace RelativeConicArcs
 namespace ClebschDoubleCosetDepth
 
+/-- Indices for the twenty-two frozen matching parents. -/
 abbrev Parent := ClebschGateway.Q11Matching.Parent
+/-- Indices for the twelve endpoints of the fixed conic child. -/
 abbrev Endpoint := ClebschGateway.Q11Matching.ChildPoint
+/-- Indices for the 133 normalized projective points over `ZMod 11`. -/
 abbrev ProjectivePoint := Fin 133
+/-- Indices for the sixteen frozen relation cells. -/
 abbrev RelationCell := Fin 16
+/-- Indices for the two displayed subgroup generators. -/
 abbrev Generator := Fin 2
 
 /-- The 133 frozen normalized coordinate representatives over `ZMod 11`. -/
@@ -45,7 +50,8 @@ def subgroupGeneratorMatrix : Generator → Matrix (Fin 3) (Fin 3) (ZMod 11) :=
 def subgroupGeneratorEndpoint : Generator → Endpoint → Endpoint :=
   ![![1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10], ![3, 10, 8, 4, 0, 7, 2, 11, 6, 1, 9, 5]]
 
-/-- The point permutations proved downstream to be induced by the two linear maps. -/
+/-- The frozen point permutations; `subgroupGeneratorPoint_represents_matrix` proves that the
+displayed linear maps induce them. -/
 def subgroupGeneratorPoint : Generator → ProjectivePoint → ProjectivePoint :=
   ![![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 122, 132, 131, 130, 129, 128, 127, 126, 125, 124, 123, 111, 121, 120, 119, 118, 117, 116, 115, 114, 113, 112, 100, 110, 109, 108, 107, 106, 105, 104, 103, 102, 101, 89, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 78, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 67, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 56, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 45, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 34, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 23, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24], ![1, 12, 122, 111, 100, 89, 78, 67, 56, 45, 34, 23, 0, 11, 6, 8, 9, 3, 10, 4, 5, 7, 2, 13, 123, 112, 101, 90, 79, 68, 57, 46, 35, 24, 18, 73, 128, 62, 117, 51, 106, 40, 95, 29, 84, 16, 93, 49, 126, 82, 38, 115, 71, 27, 104, 60, 15, 103, 70, 37, 125, 92, 59, 26, 114, 81, 48, 21, 43, 65, 87, 109, 131, 32, 54, 76, 98, 120, 14, 113, 91, 69, 47, 25, 124, 102, 80, 58, 36, 20, 53, 86, 119, 31, 64, 97, 130, 42, 75, 108, 19, 63, 107, 30, 74, 118, 41, 85, 129, 52, 96, 17, 83, 28, 94, 39, 105, 50, 116, 61, 127, 72, 22, 33, 44, 55, 66, 77, 88, 99, 110, 121, 132]]
 
@@ -59,7 +65,8 @@ def sheetInvolutionMatrix : Matrix (Fin 3) (Fin 3) (ZMod 11) := ![![1, 0, 0], ![
 /-- The displayed sheet-exchanging endpoint permutation. -/
 def sheetInvolutionEndpoint : Endpoint → Endpoint := ![2, 3, 0, 1, 5, 4, 11, 10, 8, 9, 7, 6]
 
-/-- The point permutation proved downstream to be induced by the displayed linear involution. -/
+/-- The frozen point involution; `sheetInvolutionPoint_represents_matrix` proves that the displayed
+linear involution induces it. -/
 def sheetInvolutionPoint : ProjectivePoint → ProjectivePoint := ![1, 0, 2, 7, 5, 4, 10, 3, 9, 8, 6, 11, 12, 122, 111, 100, 89, 78, 67, 56, 45, 34, 23, 22, 132, 121, 110, 99, 88, 77, 66, 55, 44, 33, 21, 131, 120, 109, 98, 87, 76, 65, 54, 43, 32, 20, 130, 119, 108, 97, 86, 75, 64, 53, 42, 31, 19, 129, 118, 107, 96, 85, 74, 63, 52, 41, 30, 18, 128, 117, 106, 95, 84, 73, 62, 51, 40, 29, 17, 127, 116, 105, 94, 83, 72, 61, 50, 39, 28, 16, 126, 115, 104, 93, 82, 71, 60, 49, 38, 27, 15, 125, 114, 103, 92, 81, 70, 59, 48, 37, 26, 14, 124, 113, 102, 91, 80, 69, 58, 47, 36, 25, 13, 123, 112, 101, 90, 79, 68, 57, 46, 35, 24]
 
 /-- The displayed sheet-exchanging matching-row permutation. -/

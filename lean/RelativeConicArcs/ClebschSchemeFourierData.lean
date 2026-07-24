@@ -1,7 +1,14 @@
 /-
 Generated source -- do not edit by hand.
+-/
 
-Frozen integer tables reconstructed from the reduced projective icosahedral action on
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Data.Matrix.Basic
+
+/-!
+# Frozen integer Fourier tables
+
+These tables are reconstructed from the reduced projective icosahedral action on
 `F_11^3`. The tracked generator
 `lean/verification/clebsch_scheme_fourier/generate.py` reads the pinned exhaustive orbit
 construction `lean/verification/clebsch_scheme_fourier/orbit_construction.py`, checks its
@@ -34,8 +41,6 @@ Semantic content:
   nonidentity relations (indexed by a seven-bit mask and the explicit relation list),
   a pair of scheme vectors lying in the union whose sum is nonzero and lies outside it.
 -/
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Data.Matrix.Basic
 
 namespace RelativeConicArcs
 namespace ClebschSchemeFourier

@@ -181,9 +181,13 @@ def constantLabel (_ : MatchingIndex) : Fin 1 := 0
 /-- The singleton label at the top of the information lattice. -/
 def singletonLabel (p : MatchingIndex) : MatchingIndex := p
 
+/-- The one-point constant-label quotient is attained. -/
 theorem constantLabel_surjective : Function.Surjective constantLabel := by decide
+/-- Both `H3` sheet labels occur. -/
 theorem sheet_surjective : Function.Surjective sheet := by decide
+/-- All six `K`-orbit labels occur in the frozen `H3` action. -/
 theorem kOrbitLabel_surjective : Function.Surjective kOrbitLabel := by decide
+/-- Every matching index occurs as a singleton label. -/
 theorem singletonLabel_surjective : Function.Surjective singletonLabel := by decide
 
 /-- Every `K`-orbit lies in a single sheet. -/
@@ -204,18 +208,22 @@ theorem invariantSubalgebra_inclusions :
       intro p r h
       simpa [singletonLabel] using congrArg kOrbitLabel h)
 
+/-- Constant functions form a one-dimensional invariant subalgebra. -/
 theorem constantInvariant_finrank :
     Module.finrank ℚ (fibreSubalgebra constantLabel) = 1 := by
   simpa using fibreSubalgebra_finrank constantLabel constantLabel_surjective
 
+/-- Functions constant on each sheet form a two-dimensional invariant subalgebra. -/
 theorem sheetInvariant_finrank :
     Module.finrank ℚ (fibreSubalgebra sheet) = 2 := by
   simpa using fibreSubalgebra_finrank sheet sheet_surjective
 
+/-- Functions constant on `K`-orbits form a six-dimensional invariant subalgebra. -/
 theorem kOrbitInvariant_finrank :
     Module.finrank ℚ (fibreSubalgebra kOrbitLabel) = 6 := by
   simpa using fibreSubalgebra_finrank kOrbitLabel kOrbitLabel_surjective
 
+/-- The full function algebra on the twenty-two `H3` matchings has dimension twenty-two. -/
 theorem fullFunctionAlgebra_finrank :
     Module.finrank ℚ (fibreSubalgebra singletonLabel) = 22 := by
   simpa using fibreSubalgebra_finrank singletonLabel singletonLabel_surjective

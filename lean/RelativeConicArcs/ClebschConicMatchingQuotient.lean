@@ -5,42 +5,32 @@ import Mathlib.FieldTheory.Finite.Basic
 # The conic pairing-forgetting quotient
 
 On the standard conic `C : XZ − Y² = 0` in the projective plane, parametrized by the Veronese
-embedding `ν : P¹ → C`, `ν(s,t) = [s² : st : t²]`, two distinct conic points `ν(sᵢ,tᵢ), ν(sⱼ,tⱼ)`
-span a secant line.  With the canonical scaling
+embedding `ν(s,t) = [s² : st : t²]`, the canonically scaled secant through two parametrized points is
 
 ```
 L_ij = tᵢtⱼ X − (sᵢtⱼ + tᵢsⱼ) Y + sᵢsⱼ Z,
 ```
 
-the secant restricts on the conic to a product of two linear forms on `P¹`:
+and its pullback factors:
 
 ```
 ν*L_ij = (tᵢ s − sᵢ t)(tⱼ s − sⱼ t).
 ```
 
-Two structural polynomial identities, valid over any commutative ring, organize the section algebra:
-this pullback factorization, and the Plücker straightening identity
+Together with the Plücker straightening identity
 
 ```
 L_ab L_cd − L_ac L_bd = [a,d][b,c] (XZ − Y²),      [i,j] = sᵢ tⱼ − tᵢ sⱼ,
 ```
 
-which is the plane lift of the four-endpoint switch `{ab,cd} ↦ {ac,bd}` on a matching and writes each
-switch difference as an explicit multiple of the conic form.
+this shows algebraically why restriction forgets how a flattened endpoint list was paired: every
+four-endpoint switch changes the product by a multiple of the conic equation.  The file also
+computes the kernel of the generic rank-one map `a ↦ (∑ᵢ aᵢ)·F` and proves the finite-field
+factor criterion behind `s^q t − s t^q`.
 
-The first theorem family proves that secant products with permutation-equivalent flattened endpoint
-lists have the same Veronese pullback: restriction forgets the pairing at that precise list level.
-A separate linear-algebra lemma computes the kernel and dimension of the explicitly defined generic
-rank-one map `a ↦ (∑ᵢ aᵢ)·F`.  This file does not identify that generic map with a geometric section
-map, count perfect matchings, or prove that switch differences span its kernel.
-
-The finite-field family proves pointwise factor-zero/nonzero criteria and that the binary form
-`s^q t − s t^q` vanishes on every pair over `𝔽_q`.  It does not identify factor zero sets with a
-distinct projective endpoint set, compute word weights, or prove that a full-endpoint matching
-product is proportional to the boundary form.
-
-Perfect matchings are presented by their fixed-point-free involution (mate map).  This development is
-symbolic and enumerates no matching data.
+The arguments are symbolic over the stated rings and fields.  They neither identify the generic
+rank-one map with a geometric section map nor count matchings, prove switch-generation of its
+kernel, compute word weights, or identify factor zero sets with a chosen projective endpoint set.
 -/
 
 namespace RelativeConicArcs
@@ -277,7 +267,9 @@ def SwitchConnected : (Fin m → Fin m) → (Fin m → Fin m) → Prop :=
 
 /-- The three perfect matchings of the `4`-endpoint set, as mate maps. -/
 def m0123 : Fin 4 → Fin 4 := ![1, 0, 3, 2]   -- `{01, 23}`
+/-- The mate map for the matching `{02, 13}` on four endpoints. -/
 def m0213 : Fin 4 → Fin 4 := ![2, 3, 0, 1]   -- `{02, 13}`
+/-- The mate map for the matching `{03, 12}` on four endpoints. -/
 def m0312 : Fin 4 → Fin 4 := ![3, 2, 1, 0]   -- `{03, 12}`
 
 /-- The three mate maps are perfect matchings. -/

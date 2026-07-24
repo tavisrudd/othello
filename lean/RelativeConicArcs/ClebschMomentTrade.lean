@@ -10,37 +10,20 @@ import Mathlib.Tactic
 # Signed moments and the trade filtration
 
 Let `R` be a commutative ring, `ι` a finite index set, `ε : ι → R` a weight, and `φ : ι → R` a
-scalar feature.  The associated *signed moments* are the weighted power sums
+scalar feature.  Their signed moments are the weighted power sums
 
     Mⱼ(ε, φ) = ∑ᵢ εᵢ · φᵢ ^ j        (`signedMoment`),   j ∈ ℕ.
 
-We say the pair `(ε, φ)` is *balanced through degree `s`* when `M₀ = ⋯ = M_s = 0`, and that it has
-*exact strength `s`* when in addition `M_{s+1} ≠ 0`.  When `ε` is `±1`-valued these are signed
-power-sum conditions; the vector-valued refinement of the final section is the one that specializes,
-for an incidence feature, to the classical strength-`s` combinatorial trade.
-
-This file develops the elementary algebra of these moments.
-
-* `signedMoment_affine` — the binomial identity expressing the moments of an affinely
-  reparametrized feature `a·φ + b` as a lower-triangular combination of the original moments.
-* `signedMoment_affine_vanish` and `signedMoment_affine_succ` — **affine covariance**: an affine
-  reparametrization preserves balance through degree `s`, and multiplies the leading moment
-  `M_{s+1}` by the scalar `a^(s+1)`, independently of the translation `b`.  Hence exact strength is
-  invariant under an invertible affine reparametrization.
-* `signedMoment_one_translate` and `signedMoment_barycentre_cancel` — recentring the feature at a
-  weighted barycentre annihilates the first moment.
-* `signedMoment_antipodal_even` — a fixed-point-free involution under which the weight and the
-  feature are both odd annihilates every even moment.
-* `witness_exact_strength_two` — an explicit four-point configuration over `ℤ` that is balanced
-  through degree two but has `M₃ = 12 ≠ 0`, showing the degree bounds above are sharp: balance
-  through degree two does not force `M₃ = 0`.
+Balance through degree `s` means `M₀ = ⋯ = M_s = 0`; exact strength `s` also requires
+`M_{s+1} ≠ 0`.  The binomial formula makes affine reparametrization lower triangular on moments:
+balance is preserved, while the first surviving moment is multiplied by `a^(s+1)`.  Recentering
+and an odd fixed-point-free involution give two further cancellation mechanisms.  An explicit
+four-point integer witness has moments `0,0,0,12`, so strength two is sharp.
 
 For a vector-valued feature `φ : ι → V` the `j`-th moment is naturally a symmetric tensor in
-`Sym^j V`.  Rather than construct symmetric powers, the final section represents it by its
-associated symmetric `j`-linear form, evaluated on a tuple of linear functionals
-(`vectorMomentForm`), and records that a single functional whose scalar shadow `ℓ ∘ φ` has nonzero
-`j`-th moment already certifies the vector moment to be nonzero, even though a given functional may
-fail to detect it.
+`Sym^j V`.  Here `vectorMomentForm` represents it through evaluations on tuples of linear
+functionals.  A nonzero scalar shadow certifies a nonzero vector moment; the converse for a
+particular functional is not asserted.
 -/
 
 namespace RelativeConicArcs.ClebschMomentTrade
@@ -165,15 +148,19 @@ def witnessWeight : Fin 4 → ℤ := ![-1, 2, -2, 1]
 /-- Feature values `1, 2, 4, 5` of the four-point sharpness example. -/
 def witnessValue : Fin 4 → ℤ := ![1, 2, 4, 5]
 
+/-- The sharpness example has vanishing total signed weight. -/
 theorem witness_moment_zero : signedMoment witnessWeight witnessValue 0 = 0 := by
   simp only [signedMoment, Fin.sum_univ_four]; decide
 
+/-- The sharpness example has vanishing first signed moment. -/
 theorem witness_moment_one : signedMoment witnessWeight witnessValue 1 = 0 := by
   simp only [signedMoment, Fin.sum_univ_four]; decide
 
+/-- The sharpness example has vanishing second signed moment. -/
 theorem witness_moment_two : signedMoment witnessWeight witnessValue 2 = 0 := by
   simp only [signedMoment, Fin.sum_univ_four]; decide
 
+/-- The sharpness example has third signed moment equal to `12`, so it does not vanish. -/
 theorem witness_moment_three : signedMoment witnessWeight witnessValue 3 = 12 := by
   simp only [signedMoment, Fin.sum_univ_four]; decide
 

@@ -24,6 +24,7 @@ separate geometric and representation-theoretic inputs from which the tables wer
 namespace RelativeConicArcs
 namespace ClebschPassageInterfaces
 
+/-- The characteristic-eleven coefficient field for the frozen passage matrices. -/
 abbrev F11 := ZMod 11
 
 /-- Parity of the first `bits` binary digits of `m`. -/

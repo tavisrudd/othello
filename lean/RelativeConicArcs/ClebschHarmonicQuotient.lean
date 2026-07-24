@@ -9,30 +9,25 @@ import Mathlib.LinearAlgebra.Finsupp.Supported
 # The conic Laplacian and the low-degree harmonic/radial decomposition
 
 Working in the polynomial ring `R[X₀, X₁, X₂]`, write the standard conic form as
-`Q = X₀ X₂ − X₁²` (the polynomial whose evaluation is `conicForm` of the pairing-forgetting
-quotient).  The **conic Laplacian** is the constant-coefficient second-order operator dual to `Q`,
+`Q = X₀ X₂ − X₁²` and its dual constant-coefficient operator as
 
 ```
 Δ = 4 ∂₀∂₂ − ∂₁².
 ```
 
-Its central algebraic property is the commutator identity with multiplication by `Q`: for every
-polynomial `P`,
+The central commutator identity is
 
 ```
 Δ(Q · P) = 6 • P + 4 • 𝔈 P + Q · Δ P,        𝔈 P = ∑ᵢ Xᵢ · ∂ᵢ P    (the Euler operator).
 ```
 
-On a homogeneous polynomial of degree `m`, `𝔈 P = m • P`, so `Δ(Q·P) = (6 + 4m) • P + Q · Δ P`.
-This single identity drives the harmonic/radial (Fischer) decomposition of the space of homogeneous
-polynomials of a given degree into the kernel of `Δ` (the harmonic part) and the `Q`-multiples of
-lower-degree polynomials (the radial part).  Whether that decomposition holds is governed entirely
-by the invertibility in `R` of the integer scalars `6 + 4m` that appear along the radial ladder, so
-the statement is genuinely characteristic-dependent and every division is carried as an explicit
-hypothesis.
+For homogeneous `P` of degree `m`, the Euler term is `m • P`, so the coefficient of `P` is
+`6 + 4m`.  Iterating this identity splits low-degree homogeneous polynomials into the kernel of
+`Δ` and multiples of `Q`.
 
-This module develops the identity over an arbitrary commutative ring and the decomposition over a
-field with the relevant scalars invertible, in the degrees needed downstream.
+The commutator is proved over any commutative ring.  The decomposition is proved over a field only
+when the required scalars `6 + 4m` are invertible; every characteristic-sensitive division appears
+as an explicit hypothesis.
 -/
 
 namespace RelativeConicArcs

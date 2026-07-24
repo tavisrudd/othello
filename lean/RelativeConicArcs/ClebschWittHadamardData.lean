@@ -17,9 +17,13 @@ literals.  The classical names of the permutation groups are not encoded here.
 namespace RelativeConicArcs
 namespace ClebschWittHadamard
 
+/-- The ternary coefficient field used by the length-twelve code. -/
 abbrev F3 := ZMod 3
+/-- Ternary words on the twelve displayed coordinates. -/
 abbrev Word12 := Fin 12 → F3
+/-- Integral sign rows on the twelve displayed coordinates. -/
 abbrev SignRow12 := Fin 12 → Int
+/-- Endomaps of the twelve-coordinate index set used for explicit permutations. -/
 abbrev Perm12 := Fin 12 → Fin 12
 
 /-- A systematic generator matrix for the extended ternary `[12,6]` code. -/

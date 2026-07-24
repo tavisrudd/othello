@@ -1,4 +1,8 @@
-/-
+import RelativeConicArcs.ClebschSchemeChiralityData
+import RelativeConicArcs.ClebschGateway
+import Mathlib.Tactic
+
+/-!
 # Intrinsic six-block decomposition and unordered Clebsch chirality
 
 The column-neighbor graph at the origin has sixty vertices, parametrized here by a direction and
@@ -14,9 +18,6 @@ prove the full color-preserving automorphism group, completeness of a projective
 absence of an outer lift to a scheme automorphism, rank-sixteen eigenmatrix identities, or
 minimality of a coherent refinement.
 -/
-import RelativeConicArcs.ClebschSchemeChiralityData
-import RelativeConicArcs.ClebschGateway
-import Mathlib.Tactic
 
 namespace RelativeConicArcs
 namespace ClebschSchemeChirality
