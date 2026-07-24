@@ -2,6 +2,11 @@
 
 The public labels below are stable paper identifiers.  Internal dated
 filenames remain immutable provenance, but are not mathematical identifiers.
+The complete R5--R7 electronic tables are
+`CLASSIFICATION-RECORDS.json`.  They are deterministically extracted from
+the frozen certificates by `build_classification_records.py`; the public
+JSON records the hash and byte count of every input generator, certificate,
+and replay.
 
 | Public label | Paper claim | Internal provenance |
 |---|---|---|
@@ -33,6 +38,21 @@ A finite classification record is complete only when it contains all of:
 
 Repeated orbit sizes never identify an orbit.  They are distinguished by the
 canonical representative, stabilizer, histogram/invariant, and Frobenius link.
+
+For R5--R7, projective vectors are normalized by scaling the first nonzero
+coordinate to one.  Their point index is the base-\(q\) radix index with
+coordinate zero most significant, and the canonical projective-orbit
+representative is the minimum such index in the orbit.  Rows are sorted by
+orbit size and then canonical index.  The R6 semilinear normal form is the
+lexicographically first frozen representative in its coefficient-Frobenius
+cycle.  These rules are repeated in machine-readable form in the electronic
+record.
+
+Each field row states the actual searched domain, the classified split-free
+count, the sum of the listed orbit sizes, and whether the resulting exhaustion
+identity holds.  Persistent, modular, split-free, and code-deep flags are
+separate.  In particular, the R7 code-deep flag is `null`, not `true`, at
+\(q=7,8,9\), where the certificate supplies no covering-radius premise.
 
 ## Algebra record
 
