@@ -1,6 +1,6 @@
 # C549 — private-boundary truncation and residual signature quotient
 
-**Lane:** `cap`. **Status:** active. **Predecessors:** C528/C547.
+**Lane:** `cap`. **Status:** queued for a cold session. **Predecessors:** C528/C547.
 
 ## Objective
 

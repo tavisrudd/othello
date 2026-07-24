@@ -706,7 +706,7 @@ load-bearing crown is a uniform bound on these corrected boundary signatures in 
 projective residual core. Report:
 [`../2026-07-23-c547-cap-grundy-proof-harvest.md`](../2026-07-23-c547-cap-grundy-proof-harvest.md).
 
-**C549 is active (2026-07-23): corrected private-boundary bisimulation and quotient test.**
+**C549 is queued for a cold session (2026-07-23): corrected private-boundary bisimulation and quotient test.**
 Prove the C547 correction that a gadget with ambient attachment only through labelled boundary
 `B` depends on its private vertices through `min(2,|U|)` plus occupancy, then measure the induced
 boundary-signature quotient on the frozen q17/q19 coupled residual cores. A bounded quotient would
