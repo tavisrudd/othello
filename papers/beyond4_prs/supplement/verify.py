@@ -63,6 +63,7 @@ def check_release_manifest() -> None:
         "EVIDENCE-ROWS.md",
         "package_evidence_bundle.py",
         "verify.py",
+        "build_r6_paper_table.py",
     ):
         match = re.search(
             rf"^\| `{re.escape(relative)}` \| `([0-9a-f]{{64}})` \| ([0-9]+) \|$",
@@ -127,6 +128,7 @@ def check_public_release_gate() -> None:
 def check_bundle() -> None:
     run([sys.executable, "supplement/package_evidence_bundle.py", "--check"])
     run([sys.executable, "supplement/build_classification_records.py", "--check"])
+    run([sys.executable, "supplement/build_r6_paper_table.py", "--check"])
     check_classification_hashes()
     check_release_manifest()
 

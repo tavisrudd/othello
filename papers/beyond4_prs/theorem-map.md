@@ -28,9 +28,8 @@ paper makes no claim below the displayed threshold.
 - `thm:r5`: complete redundancy-five classification.
 - `thm:spine`: classification spine, with all-field and high-field clauses separated.
 - `thm:polar-construction`: intrinsic polar-flag construction and squarefree lifting.
-- `thm:induction`: witness-producing effective transverse polar induction
-  from a lower splitting package and a separately proved level-specific
-  contained-component assertion.
+- `thm:induction`: one-step polar escape from an explicit lower package;
+  multistep flags require a new package at each intermediate level.
 - `thm:r6`: complete redundancy-six classification.
 - `thm:r7`: complete redundancy-seven split-free classification and the `q>=11` deep-hole corollary.
 - `thm:r8`: redundancy-eight high-field classification.

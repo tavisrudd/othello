@@ -19,8 +19,8 @@ make check
 make tit-check
 ```
 
-`make check` builds the 24-page canonical preprint.  `make tit-check` builds the
-18-page IEEEtran single-column review manuscript
+`make check` builds the 26-page canonical preprint.  `make tit-check` builds the
+19-page IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
 `main-tit.tex`,
@@ -46,7 +46,7 @@ exact strength of each proved level visible:
 3. the all-field redundancy-six deep-hole classification and the complete
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
-4. the general coherent-polar induction theorem.
+4. the one-step polar-escape theorem and its explicit R6/R7 iterations.
 
 The manuscript must distinguish complete classifications from containment, high-field, and
 obstruction statements.  R9 and the modular-carrier branches are companion-paper

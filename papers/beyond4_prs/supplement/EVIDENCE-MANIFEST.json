@@ -401,20 +401,28 @@
       "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
     },
     {
-      "bytes": 14755,
+      "bytes": 3872,
+      "path": "build_r6_paper_table.py",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "R6 paper-table builder",
+      "sha256": "ba209d0a7199a08166837155bc958678e1299bf7b89b058e54b9b9b36329067b"
+    },
+    {
+      "bytes": 14814,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "e5e61b53c6a17c5a670131132e86cb07e6b5dcffe02aaedcee11a03f543dbc70"
+      "sha256": "2a741041f1928ec4be1ad67dbdd0a124670abd58e68acb18959869e7231e6924"
     },
     {
-      "bytes": 7663,
+      "bytes": 7773,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "da2b76a7302b6eeb52a7902a61806e696c4c5cb17221ea1f0964464e0b7126b0"
+      "sha256": "d36ab8f00856cd15404f72f0591aaca83dd1792d4482932282bfcf5c7d28755b"
     },
     {
       "bytes": 17225,

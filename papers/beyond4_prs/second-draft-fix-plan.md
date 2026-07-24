@@ -197,8 +197,8 @@ before delivering a verdict.
 | Session | Cold-read target | Acceptance gate | Status |
 |---|---|---|---|
 | F1 | Main-theorem hierarchy and synthesis | Each headline theorem has one primary equivalence relation and an explicit proof assembling exhaustion, counts, radius promotion, and Frobenius fusion. | Queued |
-| F2 | R6/R7 exceptional classifications | The printed paper identifies every exceptional class by representative, stabilizer, and fusion, or consistently calls the output a certified census. | Queued |
-| F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | Queued |
+| F2 | R6/R7 exceptional classifications | The printed paper identifies every exceptional class by representative, stabilizer, and fusion, or consistently calls the output a certified census. | R6 closed in source; R7 queued |
+| F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | General claim replaced by one-step theorem; R6 instantiated, R7 queued |
 | F4 | R8 component exhaustion | Decide whether the printed component argument is independently complete. | Closed: cut R8 to companion |
 | F5 | Computational/formal trust boundary | A frozen archive, exact domains, acceptance criteria, resource envelope, and honest formal coverage are sufficient to audit every retained headline claim. | Queued |
 | F6 | Exposition-only pass | The R5 example appears before the abstract machinery; duplicated roadmaps and audit prose are removed; the marked-factor mechanism remains the narrative spine. | Queued |

@@ -109,32 +109,35 @@ supplies such a pencil parameter after deleting the marked fibers; the
 displayed parameter \([9:28]\) is one complete instance of that step.
 \end{example}
 
-\begin{definition}[Lower splitting package]\label{def:lower-package}
-At level $(n,j)$ a lower splitting package consists of:
+\begin{definition}[One-step lower package]\label{def:lower-package}
+Fix \(f\in S_n(\F_q)\) with injective contraction map, so that
+\(\Phi_f:\PP(E^\vee)\to S_{n-1}\) is defined everywhere.  A one-step
+lower package for \(f\) consists of:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item a finite stratification
-  $X_{n-j}^{\mathrm{split}}=\coprod_\alpha X_\alpha$ of the ordered
-  squarefree splitting incidence over $S_{n-j}$;
-\item for each $\alpha$, a specified identity or Frobenius-twisted
-  geometrically integral root cover
-  $Y_\alpha\to X_\alpha$, with genus bound $g_\alpha$ and point bound
+\item a closed bad scheme \(B_{n-1}\subset S_{n-1}\) and a finite
+  stratification \(S_{n-1}\setminus B_{n-1}=\coprod_\alpha X_\alpha\);
+\item for every
+  \(\lambda\in\PP(E^\vee)(\F_q)\) with
+  \(b=\iota_\lambda f\in X_\alpha(\F_q)\), a specified proper
+  geometrically integral curve \(Y_{\alpha,b}\), defined over
+  \(\F_q\), with genus bound \(g_\alpha\) and point bound
   \[
-       \#Y_\alpha(\F_q)\geq
+       \#Y_{\alpha,b}(\F_q)\geq
        q+\kappa_\alpha-2g_\alpha\sqrt q;
   \]
-\item a closed bad scheme $B_{n-j}\subset S_{n-j}$ containing the
-  loci on which the chosen cover is not available;
-\item branch, diagonal, old-marker, new-marker, and self-collision
-  divisors whose total degree on $Y_\alpha$ is at most
-  $\delta_\alpha$;
-\item bounds $b$ and $c$ for the pullbacks of $B_{n-j}$ and the finite
-  self-collision divisor to a noncontained first-polar line.
+\item a divisor \(D_{\alpha,b,\lambda}\) on \(Y_{\alpha,b}\), of
+  degree at most \(\delta_\alpha\), containing the branch, diagonal,
+  marker, and self-collision points, such that every rational point
+  outside \(D_{\alpha,b,\lambda}\) determines an ordered rational
+  split squarefree \(g\in W_b\) with \(\lambda\nmid g\);
+\item a finite parameter scheme \(Z_f\subset\PP(E^\vee)\), of degree
+  at most \(d\), containing
+  \(\Phi_f^{-1}(B_{n-1})\) and every parameter at which the preceding
+  construction is unavailable.
 \end{enumerate}
-The index $\alpha$ names a geometric stratum together with its constant
-field and Frobenius twist.  All degrees are geometric degrees after
-the displayed pullback.  ``Computed'' means that equations for
-$B_{n-j}$ and every divisor are obtained by finite contraction,
-elimination, factorization, and rank tests over the coefficient ring.
+The index \(\alpha\) includes any constant-field or Frobenius twist;
+the assertion in (iii) is the required descent statement.  All degrees
+are geometric degrees on the displayed curve or parameter line.
 \end{definition}
 
 The construction is summarized in Figure~\ref{fig:polar-flow}.  The
@@ -184,75 +187,60 @@ formula at infinity follows by evaluating $C_f$ on the second basis
 covector.
 \end{proof}
 
-\begin{definition}[Contained-component assertion]\label{def:contained}
-For a specified lower package, $\mathrm{CC}(n,j)$ is the
-scheme-theoretic assertion that every $f\in S_n$ for which
-$\Phi_f^*B_{n-j}$ or a marker-collision section vanishes identically
-belongs to the explicitly listed closed subscheme
-$\cP_n\cup\cM_n$.  An identically zero collision differential is part
-of $\cM_n$; it is never counted as a finite divisor.
+\begin{definition}[One-step contained-component assertion]
+\label{def:contained}
+For a specified bad scheme \(B_{n-1}\), collision section, and explicit
+closed list \(\mathcal C_n\subset S_n\), the assertion
+\(\mathrm{CC}(n,1;\mathcal C_n)\) says that every \(f\) for which the
+contraction map is noninjective, \(\Phi_f^*B_{n-1}\) is the whole
+parameter line, or the collision section vanishes identically belongs
+to \(\mathcal C_n\).  When the list is clear we write
+\(\mathrm{CC}(n,1)\).
 \end{definition}
 
 This is a level-specific theorem obligation, not an assumption hidden
 inside the point-count argument.  Section~\ref{sec:r67} states the
 contained-component calculations used at redundancies six and seven.
-No assertion $\mathrm{CC}(n,j)$ is made for an arbitrary degree.
+No assertion \(\mathrm{CC}(n,1)\) is made for an arbitrary degree.
 
-\begin{theorem}[Effective transverse polar induction]\label{thm:induction}
-Fix a level $(n,j)$ and a lower splitting package as in
-Definition~\ref{def:lower-package}.  Its reusable inputs are:
-\begin{enumerate}[label=\textup{(\roman*)}]
-\item the package's geometrically integral root covers and their
-      triples $(g_\alpha,\delta_\alpha,\kappa_\alpha)$;
-\item the two parameter-line degrees $b,c$;
-\item the level-specific contained-component theorem
-      $\mathrm{CC}(n,j)$.
-\end{enumerate}
-Put
+\begin{theorem}[One-step polar escape]\label{thm:induction}
+Let \(f\in S_n(\F_q)\) have a one-step lower package as in
+Definition~\ref{def:lower-package}.  Put
 \[
 \mathcal H_\kappa(g,\delta)=
 \left\lfloor
 \left(g+\sqrt{g^2+\delta-\kappa}\right)^2
 \right\rfloor+1
 \]
-and assume $\delta\geq\kappa-g^2$.  If
+and assume
+\(\delta_\alpha\geq\kappa_\alpha-g_\alpha^2\) for every \(\alpha\).
+If
 \[
 q\geq \max_\alpha
 \mathcal H_{\kappa_\alpha}(g_\alpha,\delta_\alpha)
-\quad\text{and}\quad q+1>b+c,
+\quad\text{and}\quad q+1>d,
 \]
-then every $\F_q$-rational Hankel system outside
-$\cP_n\cup\cM_n$ admits a rational marked polar flag whose lower
-squarefree witness avoids every marker.  Its coherent lift is a split
-squarefree member of the original system.  Equivalently,
-\[
- \{\text{split-free systems in }S_n(\F_q)\}
- \subseteq(\cP_n\cup\cM_n)(\F_q).
-\]
+then \(W_f\) contains a split squarefree member.
 \end{theorem}
 
 \begin{proof}
-For a system outside $\cP_n\cup\cM_n$, the assertion
-$\mathrm{CC}(n,j)$ makes the pulled-back bad and self-collision schemes
-finite of total degree at most $b+c$.  Since
-$\#\PP^1(\F_q)=q+1$, choose a rational contraction parameter outside
-them.  On the corresponding lower stratum the recorded point bound
+Since \(\#\PP^1(\F_q)=q+1>d\), choose
+\(\lambda\notin Z_f(\F_q)\).  On the corresponding lower stratum the
+recorded point bound
 gives
 \[
  q+\kappa_\alpha-2g_\alpha\sqrt q>\delta_\alpha,
 \]
 so there is a rational point outside all deletions.  It yields a split
-squarefree lower member avoiding every marker.  Equation
+squarefree lower member avoiding \(\lambda\).  Equation
 \eqref{eq:lift} lifts it to a split squarefree member upstairs,
-so the original system is shallow.  Taking the contrapositive gives
-the displayed inclusion.
+so the original system is shallow.
 \end{proof}
 
-The theorem is uniform in the numerical point-count argument and in
-the coherent lifting step.  What must be supplied anew at each level
-is exactly the geometric package in (i) and the contained-component
-calculation in (iii); finite computation may close bounded fields but
-cannot replace either input.
+The theorem isolates only the numerical escape and one-step lifting
+argument.  A multistep polar flag is obtained by proving and applying
+a new one-step package at each intermediate level; no arbitrary-\(j\)
+component theorem is asserted.
 
 \begin{remark}[Point-count convention]\label{rem:thresholds}
 The correction $\kappa$ records the exact lower bound available for the
@@ -274,8 +262,8 @@ first prime power is $53$.
 Application & $g$ & $\delta$ & $\kappa$ & integer lower bound & first prime power\\
 \midrule
 R5 cubic fiber square & $1$ & $12$ & $0$ & $q\geq22$ & $23$\\
-R6 marked cover & $1$ & $18$ & $1$ & $q\geq28$ & $29$\\
-R7 marked cover & $1$ & $24$ & $1$ & $q\geq35$ & $37$\\
+R6 marked cover & $1$ & $18$ & $0$ & $q\geq29$ & $29$\\
+R7 marked cover & $1$ & $24$ & $0$ & $q\geq37$ & $37$\\
 \bottomrule
 \end{tabular}
 \end{table}
