@@ -89,8 +89,10 @@ The checker constructs an integral Gale basis
 ```
 
 and verifies the same ten determinant identities on both sides. Because the basis and identities
-are integral, all ten survive every good reduction; extra modular concurrences can only raise
-the `q^-4` count. Thus the `H3` count is uniformly at least 70. At `q=19` it is exactly 70.
+are integral, all ten survive every good reduction. The Tao exactness check also evaluates the
+five remaining matching determinants: their norms are `-64` on the arc and `-4` on its Gale
+dual. They therefore remain nonzero in every odd characteristic. Thus the `H3` count is exactly
+70 in every odd good reduction, not merely bounded below by 70.
 
 ## Uniform GRS bound
 
@@ -207,6 +209,27 @@ the index-two orientation bit. That is a structural boundary, not a reason to re
 The closeout literature audit finds this pentad/S5/A5 combinatorial core classical; the
 novel-looking contribution is its canonical recovery from arbitrary-LU-covariant marginal data.
 
+The final Tao pass tests whether a higher-degree word in the same marginal operators recovers the
+lost bit. At q=19 the checker evaluates the ranks for all `2^15=32,768` subsets of the fifteen
+shortened stabilizer planes. This is complete for trace words in the `A_T`: the stabilizer
+marginals commute, and repetitions change only known projector scalars. The exact rank profile is
+
+```text
+degree 1: rank 2 on 15 subsets
+degree 2: rank 4 on 105 subsets
+degree 3: rank 4/6 on 70/385 subsets
+degree 4: rank 4/6 on 30/1335 subsets
+degree 5: rank 4/6 on 6/2997 subsets
+degree 6--15: rank 6 on every subset
+```
+
+The cubic rank tensor has 120 party automorphisms, and the complete subset-rank function still has
+exactly the same 120, with 60 even. Thus, at q=19, **no trace word of any degree in these commuting
+four-party marginals can recover the H3 orientation bit**. A successful orientation detector
+would need genuinely different noncommuting LU-covariant data, not a higher-degree marginal word.
+This is a sharp bounded operator-family no-go, not an all-field assertion and not needed for the
+H3/GRS separation theorem.
+
 There is also a direct hand-back to C396. Its recorded q=13 collision
 `((4,66),(6,389))` says geometrically that both non-GRS pencil classes have six common concurrent
 matchings with their Gale duals. C396 should compare those six-match configurations before doing
@@ -225,17 +248,22 @@ The Tao stress test checks the possible hidden freedoms:
 - characteristic five is excluded by the theorem's own non-GRS hypothesis, not by a computational
   convenience.
 
-No continuous-unitary, moduli, or arithmetic-phase mystery remains for C402.
+The final Tao exactness pass removes the last slack in the statement: all five nonconcurrent
+matching determinants have norms supported only at two, so no odd modular fibre can acquire an
+eleventh common concurrence. No continuous-unitary, moduli, or arithmetic-phase mystery remains
+for C402.
 
 ## Mystery ledger
 
 | feature | disposition |
 |:---|:---|
 | Why the q=11 and q=19 `H3` histograms both contain 70 rank-four triples | **Settled:** 60 star triples plus ten integral common Brianchon matchings. |
+| Whether an odd modular H3 fibre can have more than 70 | **Settled by the Tao exactness pass:** the other five determinant norms are `-64` and `-4`, so only characteristic two can create an extra concurrence. |
 | Why GRS histograms stop below `H3` and skip 65 | **Settled:** the projective six-point permutation lemma allows `b=0,1,2,3,4,6`, but not 5. |
 | Why a ten-matching GRS collision appears exactly at the excluded boundary | **Settled:** ten forces a sharply three-transitive six-set and hence characteristic five, exactly C341's GRS prime. |
 | What the ten-versus-five H3 matching split intrinsically carries | **Settled by `ej2`:** the five nonconcurrent matchings are a one-factorization pentad with `S5` stabilizer and even `A5` half. |
 | Which H3 datum the marginal incidence forgets | **Settled by `ej2`:** it recovers the `S5` pentad roof but not the index-two orientation selecting the marked `A5` half. |
+| Whether higher-degree words in the same marginals recover that bit | **Settled negatively at q=19 by the final Tao pass:** all 32,768 subset ranks retain the same 120-element `S5` party symmetry. |
 | What C396's q=13 moment collision is remembering | **Settled at the invariant level:** both classes have six common arc/Gale matching concurrences; identifying the two six-match configurations remains C396-owned. |
 | Whether C400's fine scalar-orbit eigenrows admit a separate arbitrary-LU-covariant operator | **Not needed for C402:** the uniform theorem closes before that construction. No successor is required by this task. |
 
@@ -251,8 +279,8 @@ sha256sum -c notes/2026-07-23-c402-h3-ame-uniform-lu-separation.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 24,101 | `8dd31f4ce4335b8c9c360f88f96a4e4ee89e954da5ec394d969991ff74eca439` |
-| certificate `.json` | 8,166 | `708249061ba8879f2ea4b9f2835715e641a2e28fa8b49fed3c1f3dada13c2949` |
+| checker `.py` | 28,651 | `914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627` |
+| certificate `.json` | 12,677 | `f324ea645f9ac10e8dee150b9d5e5c321547f23d3925dda78d556f31db521320` |
 
 The deterministic standard-library checker uses exact rational arithmetic in
 `Q(tau)`, exact permutation closure in `S_6`, integer arithmetic modulo 19, and canonical JSON.
@@ -277,7 +305,7 @@ claim-specific search, no predecessor was located for either
 # {rank-four triple marginal moments} = 60+b(A,A*)
 ```
 
-or the uniform good-characteristic inequality `H3 >=70 > 66 >= GRS`. These are the
+or the uniform good-characteristic inequality `H3 =70 > 66 >= GRS`. These are the
 novel-looking, publishable claims. Polynomial LU invariants themselves remain standard prior art.
 
 The pentad conclusion must be split sharply. The `K_6` one-factorization, its exotic `S5`

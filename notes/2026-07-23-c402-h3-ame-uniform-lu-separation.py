@@ -220,6 +220,26 @@ def h3_golden_certificate() -> dict[str, object]:
         for matching in MATCHINGS
         if matching_name(matching) not in set(primal)
     )
+    nonconcurrent_determinants: list[dict[str, object]] = []
+    for matching in MATCHINGS:
+        name = matching_name(matching)
+        if name not in set(nonconcurrent):
+            continue
+        primal_determinant = det3(tuple(cross(points[a], points[b]) for a, b in matching))
+        gale_determinant = det3(
+            tuple(cross(gale_points[a], gale_points[b]) for a, b in matching)
+        )
+        if primal_determinant.norm() != -64 or gale_determinant.norm() != -4:
+            raise AssertionError("unexpected nonconcurrent determinant norm")
+        nonconcurrent_determinants.append(
+            {
+                "matching": name,
+                "primal_determinant": primal_determinant.display(),
+                "primal_norm": int(primal_determinant.norm()),
+                "gale_determinant": gale_determinant.display(),
+                "gale_norm": int(gale_determinant.norm()),
+            }
+        )
     nonconcurrent_edges = [
         edge
         for matching in MATCHINGS
@@ -255,11 +275,17 @@ def h3_golden_certificate() -> dict[str, object]:
         "gale_dual_concurrent_matchings": list(gale),
         "common_concurrent_matchings": len(primal),
         "nonconcurrent_matching_pentad": list(nonconcurrent),
+        "nonconcurrent_determinants": nonconcurrent_determinants,
+        "nonconcurrent_determinant_norms": {
+            "primal": -64,
+            "gale_dual": -4,
+            "consequence": "no extra concurrent matching occurs in any odd reduction",
+        },
         "nonconcurrent_pentad_is_one_factorization": True,
         "one_factorization_S6_orbit_size": len(orbit),
         "one_factorization_party_stabilizer_order": len(stabilizer),
         "even_party_stabilizer_order": even_stabilizer,
-        "rank_four_marginal_triples": 60 + len(primal),
+        "rank_four_marginal_triples_every_odd_reduction": 60 + len(primal),
         "rank_six_marginal_triples": 455 - 60 - len(primal),
     }
 
@@ -449,6 +475,23 @@ def stabilizer_space(code: Sequence[Sequence[int]]) -> tuple[tuple[int, ...], ..
 def direct_marginal_distribution(
     code: Sequence[Sequence[int]],
 ) -> tuple[tuple[int, int], ...]:
+    shortenings = marginal_shortenings(code)
+    ranks = collections.Counter(
+        len(
+            mod_rowspace(
+                coefficient
+                for shortening_index in triple
+                for coefficient in shortenings[shortening_index]
+            )
+        )
+        for triple in itertools.combinations(range(len(shortenings)), 3)
+    )
+    return tuple(sorted(ranks.items()))
+
+
+def marginal_shortenings(
+    code: Sequence[Sequence[int]],
+) -> tuple[tuple[tuple[int, ...], ...], ...]:
     stabilizer = stabilizer_space(code)
     shortenings: list[tuple[tuple[int, ...], ...]] = []
     for omitted in itertools.combinations(range(N), 2):
@@ -461,17 +504,78 @@ def direct_marginal_distribution(
         if len(coefficients) != 2:
             raise AssertionError("four-party stabilizer shortening must have dimension two")
         shortenings.append(coefficients)
-    ranks = collections.Counter(
-        len(
+    return tuple(shortenings)
+
+
+def full_marginal_word_certificate(
+    code: Sequence[Sequence[int]],
+) -> dict[str, object]:
+    """All distinct-word ranks for the fifteen commuting four-party marginals."""
+
+    omitted_pairs = tuple(itertools.combinations(range(N), 2))
+    pair_index = {pair: index for index, pair in enumerate(omitted_pairs)}
+    shortenings = marginal_shortenings(code)
+    ranks: dict[int, int] = {0: 0}
+    histograms: dict[int, collections.Counter[int]] = {
+        degree: collections.Counter() for degree in range(1, len(omitted_pairs) + 1)
+    }
+    for mask in range(1, 1 << len(omitted_pairs)):
+        indices = tuple(index for index in range(len(omitted_pairs)) if mask >> index & 1)
+        rank = len(
             mod_rowspace(
-                coefficient
-                for shortening_index in triple
-                for coefficient in shortenings[shortening_index]
+                coefficient for index in indices for coefficient in shortenings[index]
             )
         )
-        for triple in itertools.combinations(range(len(shortenings)), 3)
+        ranks[mask] = rank
+        histograms[len(indices)][rank] += 1
+
+    def image_mask(mask: int, permutation: Sequence[int]) -> int:
+        image = 0
+        for index, pair in enumerate(omitted_pairs):
+            if not (mask >> index & 1):
+                continue
+            transformed = tuple(sorted((permutation[pair[0]], permutation[pair[1]])))
+            image |= 1 << pair_index[transformed]
+        return image
+
+    cubic_masks = tuple(mask for mask in ranks if mask.bit_count() == 3)
+    cubic_automorphisms = tuple(
+        permutation
+        for permutation in itertools.permutations(range(N))
+        if all(ranks[image_mask(mask, permutation)] == ranks[mask] for mask in cubic_masks)
     )
-    return tuple(sorted(ranks.items()))
+    full_automorphisms = tuple(
+        permutation
+        for permutation in cubic_automorphisms
+        if all(ranks[image_mask(mask, permutation)] == rank for mask, rank in ranks.items())
+    )
+    if len(cubic_automorphisms) != 120 or len(full_automorphisms) != 120:
+        raise AssertionError("the q=19 marginal rank data must retain exactly the S5 pentad roof")
+    return {
+        "field": "F_19",
+        "distinct_marginal_subsets_checked": len(ranks),
+        "rank_histogram_by_number_of_distinct_marginals": [
+            {
+                "degree": degree,
+                "ranks": [
+                    {"sum_rank": rank, "subsets": count}
+                    for rank, count in sorted(histograms[degree].items())
+                ],
+            }
+            for degree in sorted(histograms)
+        ],
+        "cubic_rank_tensor_party_automorphisms": len(cubic_automorphisms),
+        "full_rank_function_party_automorphisms": len(full_automorphisms),
+        "full_rank_function_even_automorphisms": sum(
+            permutation_even(permutation) for permutation in full_automorphisms
+        ),
+        "orientation_boundary": (
+            "Every trace word in the commuting identity-extended four-party marginals "
+            "reduces, up to repetition scalars, to this subset-rank function. Its party "
+            "symmetry is S5, not the even A5 half, so no such marginal trace word "
+            "recovers the H3 orientation bit at q=19."
+        ),
+    }
 
 
 def mobius_image(matrix: tuple[int, int, int, int], value: int) -> int:
@@ -533,7 +637,8 @@ def mod_matching_count(evaluation_set: Sequence[int]) -> int:
 
 
 def q19_pilot_certificate() -> dict[str, object]:
-    target = direct_marginal_distribution(h3_code_mod_19())
+    h3_code = h3_code_mod_19()
+    target = direct_marginal_distribution(h3_code)
     if target != ((4, 70), (6, 385)):
         raise AssertionError("unexpected H3 q=19 marginal distribution")
     rows: list[dict[str, object]] = []
@@ -579,6 +684,7 @@ def q19_pilot_certificate() -> dict[str, object]:
             "Each orbit is checked both by conic chord determinants and by direct ranks "
             "of sums of shortened six-dimensional Pauli-label Lagrangians."
         ),
+        "full_h3_marginal_word_boundary": full_marginal_word_certificate(h3_code),
     }
 
 

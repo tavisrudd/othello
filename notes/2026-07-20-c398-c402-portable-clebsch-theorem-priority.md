@@ -223,7 +223,8 @@ C402 closes with verdict `THEOREM; ONE UNIFORM MARGINAL-MOMENT INVARIANT SEPARAT
 NON-GRS H3 REDUCTION FROM EVERY SIX-POINT GRS AME CLASS`. For any six-arc and its Gale dual,
 C374's rank-four marginal-moment count is `60+b(A,A*)`, where `b` counts perfect matchings whose
 three chords concur in both arcs. The integral H3 pair has ten such matchings and therefore at
-least 70 after every good reduction. A complete six-point permutation lemma bounds every GRS
+exactly 70 after every odd good reduction: the other five determinant norms are supported only at
+two. A complete six-point permutation lemma bounds every GRS
 six-set by six matchings and 66 moments outside characteristic five; the exceptional ten-matching
 case is exactly a projective `F_5`-subline, coinciding with C341's GRS transition. The prescribed
 q=19 full-moduli pilot covers all 38,760 evaluation sets in 13 `PGL_2(19)` orbits with zero
@@ -233,6 +234,9 @@ a canonical one-factorization pentad: its party stabilizer is `S5`, its even hal
 and the indexed marginal incidence forgets exactly that index-two orientation bit. A bounded
 claim-specific audit located no predecessor for the exact moment formula or uniform LU separator;
 the pentad/S5/A5 core is classical, so novelty wording is restricted to its LU-readable recovery.
+The final Tao pass checks all 32,768 marginal subsets at q=19: the complete trace-word rank function
+still has `S5`, not `A5`, party symmetry, so higher-degree words in the same commuting marginals
+cannot recover the lost orientation bit.
 
 ### Target theorem
 

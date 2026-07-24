@@ -41,6 +41,48 @@
         "1"
       ]
     ],
+    "nonconcurrent_determinant_norms": {
+      "consequence": "no extra concurrent matching occurs in any odd reduction",
+      "gale_dual": -4,
+      "primal": -64
+    },
+    "nonconcurrent_determinants": [
+      {
+        "gale_determinant": "0+(-2)*tau",
+        "gale_norm": -4,
+        "matching": "01|23|45",
+        "primal_determinant": "-8+(8)*tau",
+        "primal_norm": -64
+      },
+      {
+        "gale_determinant": "0+(2)*tau",
+        "gale_norm": -4,
+        "matching": "02|15|34",
+        "primal_determinant": "8+(-8)*tau",
+        "primal_norm": -64
+      },
+      {
+        "gale_determinant": "0+(2)*tau",
+        "gale_norm": -4,
+        "matching": "03|14|25",
+        "primal_determinant": "8+(-8)*tau",
+        "primal_norm": -64
+      },
+      {
+        "gale_determinant": "0+(-2)*tau",
+        "gale_norm": -4,
+        "matching": "04|12|35",
+        "primal_determinant": "-8+(8)*tau",
+        "primal_norm": -64
+      },
+      {
+        "gale_determinant": "0+(-2)*tau",
+        "gale_norm": -4,
+        "matching": "05|13|24",
+        "primal_determinant": "-8+(8)*tau",
+        "primal_norm": -64
+      }
+    ],
     "nonconcurrent_matching_pentad": [
       "01|23|45",
       "02|15|34",
@@ -64,7 +106,7 @@
       "05|12|34",
       "05|14|23"
     ],
-    "rank_four_marginal_triples": 70,
+    "rank_four_marginal_triples_every_odd_reduction": 70,
     "rank_six_marginal_triples": 385
   },
   "invariant": "The multiset of Tr(A_T A_U A_V), with A_T=rho_T tensor I_(T^c), over unordered triples of four-party subsets.",
@@ -72,6 +114,163 @@
     "collisions": 0,
     "evaluation_sets": 38760,
     "field": "F_19",
+    "full_h3_marginal_word_boundary": {
+      "cubic_rank_tensor_party_automorphisms": 120,
+      "distinct_marginal_subsets_checked": 32768,
+      "field": "F_19",
+      "full_rank_function_even_automorphisms": 60,
+      "full_rank_function_party_automorphisms": 120,
+      "orientation_boundary": "Every trace word in the commuting identity-extended four-party marginals reduces, up to repetition scalars, to this subset-rank function. Its party symmetry is S5, not the even A5 half, so no such marginal trace word recovers the H3 orientation bit at q=19.",
+      "rank_histogram_by_number_of_distinct_marginals": [
+        {
+          "degree": 1,
+          "ranks": [
+            {
+              "subsets": 15,
+              "sum_rank": 2
+            }
+          ]
+        },
+        {
+          "degree": 2,
+          "ranks": [
+            {
+              "subsets": 105,
+              "sum_rank": 4
+            }
+          ]
+        },
+        {
+          "degree": 3,
+          "ranks": [
+            {
+              "subsets": 70,
+              "sum_rank": 4
+            },
+            {
+              "subsets": 385,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 4,
+          "ranks": [
+            {
+              "subsets": 30,
+              "sum_rank": 4
+            },
+            {
+              "subsets": 1335,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 5,
+          "ranks": [
+            {
+              "subsets": 6,
+              "sum_rank": 4
+            },
+            {
+              "subsets": 2997,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 6,
+          "ranks": [
+            {
+              "subsets": 5005,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 7,
+          "ranks": [
+            {
+              "subsets": 6435,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 8,
+          "ranks": [
+            {
+              "subsets": 6435,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 9,
+          "ranks": [
+            {
+              "subsets": 5005,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 10,
+          "ranks": [
+            {
+              "subsets": 3003,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 11,
+          "ranks": [
+            {
+              "subsets": 1365,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 12,
+          "ranks": [
+            {
+              "subsets": 455,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 13,
+          "ranks": [
+            {
+              "subsets": 105,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 14,
+          "ranks": [
+            {
+              "subsets": 15,
+              "sum_rank": 6
+            }
+          ]
+        },
+        {
+          "degree": 15,
+          "ranks": [
+            {
+              "subsets": 1,
+              "sum_rank": 6
+            }
+          ]
+        }
+      ]
+    },
     "grs_matching_count_census_by_evaluation_set": [
       {
         "concurrent_matchings": 0,
