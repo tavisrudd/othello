@@ -234,10 +234,28 @@ Ranked routes:
   vanishing loci of one Gauss/Jacobi-sum identity. Must avoid the closed theta/Weil sign detectors;
   use ordinary Gauss-sum congruences only. Flagged low-EV given the dead metaplectic roof.
 
-Recommendation: **A + E together** are the near-term move (both essentially provable/checkable now and
-mutually reinforcing); **D** is the real prize but is the C589-gated first-order-transfer probe; **B**
-is a targeted long shot; **C** is a backstop. None re-opens a closed idea. No IDs allocated — A/E/B
-feed C586, D feeds the C589 gate.
+**The transport machine for B/D already exists — and it is foreign-owned.** The named category Routes
+B and D want is the `crowns`-lane **equivariant information lattice** G5 / `22→6→2→1` (C434), which now
+carries exact operators at every arrow — `N` with `N²=q` and the mod-`q` socle filtration (C415), the
+twisted power-sum/pole-delta intertwiner with the isolation-nullity law (C416) — i.e. a Blackwell/
+**sufficiency** engine ("which observation levels preserve recovery at which moment degree") statable
+with named maps (ASG `9dc96886:215`). So Route D need not invent its transfer machinery; it consumes
+G5. But G5 overlaps C434's existing ownership and the transport scaffolding is `crowns`/`clebsch`
+material — a gateway-lane task may **read** it, not rebuild or extend it. Any B/D attempt is therefore
+a cross-lane allocation against the G5 lattice, not a gateway action; the gateway lane's own ownable
+deliverable is Route A.
+
+**Novelty bar (sets the C589 verdict).** The program standard is "**novelty = a new closed walk, not a
+new vertex**" (ASG `9dc96886:215`). The two-tower divergence is a *new vertex* (a juxtaposition) until
+something connects the towers; **Route A's separation no-go is a closed walk** — a theorem that the two
+towers are *not* transport-connected — so it is the move that clears the bar and yields a theorem-
+shaped object rather than a framing. This is the concrete reason A outranks the unification routes.
+
+Recommendation: **A + E together** are the near-term, gateway-ownable move (both provable/checkable now
+and mutually reinforcing, and A clears the closed-walk bar); **D** is the real prize but rides the
+foreign G5 lattice and is the C589-gated first-order-transfer probe — a cross-lane allocation, not a
+gateway action; **B** is a targeted long shot on the same foreign machine; **C** is a backstop. None
+re-opens a closed idea. No IDs allocated — A/E feed C586, D/B feed the C589 gate as cross-lane probes.
 
 ## Provenance and reproducibility
 
