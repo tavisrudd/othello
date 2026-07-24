@@ -61,7 +61,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `clebsch`
 
-- **C576 `[clebsch]` [QUEUED; EV 2 — PAPER I MANUSCRIPT AFTER C575 GO]** — build and referee-test a roughly 19--21 page rigidity/decoder Paper I from the older coherent base, backporting only the approved auditability improvements and at most a compact `H_3` explanation → `notes/2026-07-24-clebsch-paper-split-trial.md`.
 - **C320 `[clebsch]` [QUEUED; EV 3 — PAPER I RELEASE CAPSTONE AFTER C576]** — remap the existing claim-by-claim trust ledger, adequacy extraction, pinned gates, and verify-all entry point to Paper I first; preserve the broad fallback ledger separately, interpose C321 only if the Paper I inventory triggers it, and require issue fixes, post-fix review, and final `GO` → `notes/2026-07-20-c320-clebsch-trust-ledger.md`.
 - **C321 `[clebsch]` [CONDITIONAL PAPER I SUBTASK; ONLY IF C320 TRIGGERS IT]** — replace any load-bearing Singular evidence retained by Paper I with independently specified exact certificates/checkers and canonical replay bundles; otherwise close it as not triggered → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.
 - **C182 `[clebsch]` [QUEUED; EV 4 — PAPER I ARCHIVE/RELEASE AFTER C320 FINAL GO]** — archive the focused Paper I source, PDF, exact verification surface, tracked `flake.nix`/`flake.lock` pins for `finitegeom`, certificate packages, toolchain, and system dependencies under a stable DOI/release → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
