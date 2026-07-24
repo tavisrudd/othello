@@ -199,7 +199,10 @@ checks their matching-design axioms and automorphism orders, and forms the
 and exact rational module lifts whose only denominator prime is 2.  The JSON
 also records the triangular characteristic-two basis for the regular-hyperoval
 class and an independent direct `GF(8)` incidence construction with an exact
-transporter.
+transporter.  The same finite-field checker records the regular hyperoval
+and the nonsingular conic
+`X²+Y²+Z²+3YZ=0`, verifies that their point sets are disjoint, and checks
+the conic's nine points and nonvanishing gradient.
 
 Four vertices are normalized to `(1,0,0)`, `(0,1,0)`, `(0,0,1)`, and
 `(1,1,1)`; the remaining vertices are `(xi,yi,1)`.  Every arc realization
@@ -219,10 +222,10 @@ nix shell nixpkgs#singular --command \
 sha256sum -c check_match10_rank_three.sha256
 ```
 
-The script is 21,258 bytes with SHA-256
-`e19d9feee10aac64e881fedd31f6cedbb8523f6865e7210c6089ae5e84dc904a`;
-the 77,767-byte JSON certificate has SHA-256
-`84b9b4beb48fd309d7f7c14bdf40062ae3b0a2d78605468f08d48c602f53970d`.
+The script is 23,229 bytes with SHA-256
+`700ab7ba7a7606249448d8e6569f4638bee3c4b1354da80334cff49cd3613ed5`;
+the 79,326-byte JSON certificate has SHA-256
+`c2c3619a1c074bd28a9e0b967a4ac1762496589ede0cc636431f484d67fba357`.
 Exact Python integer/finite-field arithmetic and Singular Gröbner bases and
 module lifts remain trusted executions.  The second monomial order and direct
 `GF(8)` incidence construction are independent checks.  Abstract completeness
@@ -230,8 +233,15 @@ is Mathon's published two-class theorem.  Alspach and Heinrich, “Matching
 Designs,” *Australasian Journal of Combinatorics* 2 (1990), 39--55, define
 `MATCH(n,k,λ)` designs on pp. 39--40 and record there that Mathon proved
 precisely two nonisomorphic `MATCH(10,5,1)` designs.  Their definition allows
-repeated matchings, but `λ=1` makes repetition impossible.  No Lean theorem
-consumes this certificate.
+repeated matchings, but `λ=1` makes repetition impossible.  Reichard and
+Woldar, “Constructing partial geometries from overlarge sets of Steiner
+systems,” *Beiträge zur Algebra und Geometrie* 63 (2022),
+doi:10.1007/s13366-021-00570-7, Section 6, identify Mathon's result as the
+full classification of `pg(5,7,3)` and construct both classes in
+Proposition 5.1.5 and Corollary 5.1.6.  The paper-local enumeration
+reconstructs and checks representatives of those two external classes; it
+does not certify abstract completeness.  No Lean theorem consumes this
+certificate.
 
 ## Axiom audit
 

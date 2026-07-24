@@ -255,15 +255,61 @@ def gf8_projective_points() -> tuple[tuple[int, int, int], ...]:
     )
 
 
-def hyperoval_design() -> tuple[Matching, ...]:
+def gf8_regular_hyperoval() -> tuple[tuple[int, int, int], ...]:
     square = lambda value: gf8_multiply(value, value)
-    hyperoval = tuple(
+    return tuple(
         canonical_projective(point)
         for point in (
             [(square(value), value, 1) for value in range(8)]
             + [(1, 0, 0), (0, 1, 0)]
         )
     )
+
+
+def gf8_disjoint_conic_certificate(
+    hyperoval: tuple[tuple[int, int, int], ...],
+) -> dict[str, object]:
+    # Coefficients of X²+Y²+Z²+3YZ in binary polynomial-basis encoding.
+    coefficients = (1, 1, 1, 0, 0, 3)
+
+    def value(point: tuple[int, int, int]) -> int:
+        x, y, z = point
+        a, b, c, d, e, f = coefficients
+        terms = (
+            gf8_multiply(a, gf8_multiply(x, x)),
+            gf8_multiply(b, gf8_multiply(y, y)),
+            gf8_multiply(c, gf8_multiply(z, z)),
+            gf8_multiply(d, gf8_multiply(x, y)),
+            gf8_multiply(e, gf8_multiply(x, z)),
+            gf8_multiply(f, gf8_multiply(y, z)),
+        )
+        result = 0
+        for term in terms:
+            result ^= term
+        return result
+
+    zero_points = tuple(point for point in gf8_projective_points() if value(point) == 0)
+    assert len(zero_points) == 9
+    assert not set(zero_points).intersection(hyperoval)
+    # In characteristic two the gradient is (0,3z,3y); it has no projective
+    # zero on the conic, because y=z=0 would force x=0.
+    assert all(point[1] != 0 or point[2] != 0 for point in zero_points)
+    affine_values = tuple(value(point) for point in hyperoval[:8])
+    infinite_values = tuple(value(point) for point in hyperoval[8:])
+    assert all(affine_values)
+    assert all(infinite_values)
+    return {
+        "coefficients_X2_Y2_Z2_XY_XZ_YZ": coefficients,
+        "equation": "X^2+Y^2+Z^2+3*Y*Z",
+        "zero_points": zero_points,
+        "values_on_affine_hyperoval_points": affine_values,
+        "values_on_infinite_hyperoval_points": infinite_values,
+        "gradient": ["0", "3*Z", "3*Y"],
+    }
+
+
+def hyperoval_design() -> tuple[Matching, ...]:
+    hyperoval = gf8_regular_hyperoval()
     hyperoval_set = set(hyperoval)
     assert len(hyperoval_set) == 10
     projective_points = gf8_projective_points()
@@ -498,6 +544,8 @@ def generate() -> dict[str, object]:
     representatives = [orbit[0] for orbit in orbits]
     designs = [matching_design(representative) for representative in representatives]
     hyperoval = hyperoval_design()
+    hyperoval_points = gf8_regular_hyperoval()
+    disjoint_conic = gf8_disjoint_conic_certificate(hyperoval_points)
     hyperoval_to_classical = find_design_isomorphism(hyperoval, designs[0])
     assert hyperoval_to_classical is not None
     assert find_design_isomorphism(hyperoval, designs[1]) is None
@@ -593,9 +641,11 @@ def generate() -> dict[str, object]:
             for index, representative in enumerate(representatives)
         ],
         "gf8_hyperoval": {
+            "points": hyperoval_points,
             "matching_design": hyperoval,
             "matching_design_sha256": digest_object(hyperoval),
             "transporter_to_classical": hyperoval_to_classical,
+            "disjoint_prescribed_conic": disjoint_conic,
         },
     }
 

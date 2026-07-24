@@ -54,8 +54,8 @@ lower bound \(L_2(q)\), and in particular
 \]
 Vanishing defect turns the concurrence points of disjoint secants into a
 matching design, giving equality rigidity and quantitative stability; for
-ten points the only conic equality case is the regular hyperoval in
-\(\PG(2,8)\).  Projective averaging transfers ordinary complete arcs to
+ten points equality occurs only in \(\PG(2,8)\), and the concurrence
+design is the regular-hyperoval design.  Projective averaging transfers ordinary complete arcs to
 upper bounds in the relative problem.  Explicit witnesses attain \(L_2(q)\)
 for \(q=5,8,9,11\).  Finally, a kernel-checked exhaustive covering
 certificate excludes every eight-arc over \(\F_{16}\): its ordinary
@@ -572,9 +572,10 @@ exactly $k-1$ conic points have that index.
 In particular, no zero-defect $\cC$-complete eight- or twelve-arc exists
 in a Desarguesian plane, while a zero-defect ten-arc can occur only for
 $q=8$ or $q=37$.  In fact, Theorem~\ref{thm:match-ten-realization}
-excludes $q=37$ and shows that the unique ten-point equality case is the
-regular hyperoval $\cC\cup\{N\}$ in $\PG(2,8)$, where $N$ is the nucleus
-of $\cC$.
+excludes $q=37$ and shows that the underlying arc in every ten-point
+equality pair has the regular-hyperoval concurrence design.  Such pairs
+exist in \(\PG(2,8)\), but this statement does not classify either their
+projective realizations or the prescribed conics disjoint from them.
 
 Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
 $\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
@@ -616,13 +617,34 @@ For the final assertion, $Q^d\ge Q^2>B+1$ when $Q\ge4$ and $d\ge2$.
 
 For the ten-point refinement, Theorem~\ref{thm:matching-design} produces
 a rank-three $\operatorname{MATCH}(10,5,1)$ design.  Apply
-Theorem~\ref{thm:match-ten-realization}.  Over $\F_8$, the regular
-hyperoval is $\cC\cup\{N\}$ up to projectivity; its other $63$ plane points
-are exactly the five-secant concurrence centres, so it is
-$\cC$-complete and has zero defect.
+Theorem~\ref{thm:match-ten-realization}.
+
+For existence over \(\F_8=\F_2(\alpha)\), where
+\(\alpha^3+\alpha+1=0\), distinguish the constituent conic
+\[
+ \mathcal D:\ XZ=Y^2
+\]
+from the prescribed conic.  Let
+\[
+ A=\mathcal D\cup\{(0,1,0)\},\qquad
+ \cC:\ X^2+Y^2+Z^2+(1+\alpha)YZ=0.
+\]
+The gradient of the latter quadratic is
+\((0,(1+\alpha)Z,(1+\alpha)Y)\), so \(\cC\) is nonsingular.  Its values on
+the eight affine points \((t^2,t,1)\) of \(A\), in the polynomial-basis
+order \(t=0,1,\alpha,1+\alpha,\ldots,1+\alpha+\alpha^2\), are
+\[
+ 1,\ \alpha,\ 1+\alpha^2,\ \alpha+\alpha^2,\
+ \alpha,\ 1,\ \alpha+\alpha^2,\ 1+\alpha^2,
+\]
+and its value at each of the two infinite points of \(A\) is \(1\).
+Hence \(A\cap\cC=\varnothing\).  Every point outside a hyperoval in
+\(\PG(2,8)\) lies on five of its secants: the ten hyperoval points pair on
+the secants through that point.  Thus every point of \(\cC\) has index
+five, so \(A\) is \(\cC\)-complete and has zero defect.
 \end{proof}
 
-\begin{corollary}[Exact integer lower bound]\label{cor:exact-integer-bound}
+\begin{corollary}[Explicit integer-valued lower bound]\label{cor:exact-integer-bound}
 Define
 \begin{align*}
  L_1(q)&=\min\left\{k\ge3:q^2-k\le\binom{k}{2}(q-1)\right\},\\
@@ -843,9 +865,14 @@ of edges and is therefore impossible.  Thus their statement that Mathon
 found precisely two nonisomorphic
 \(\operatorname{MATCH}(10,5,1)\) designs applies to
 Definition~\ref{def:rank-three-realization}
-\cite[pp.~39--40]{AlspachHeinrich1990}.  The exact enumeration in
-Appendix~\ref{app:verification} independently constructs representatives
-of both classes.
+\cite[pp.~39--40]{AlspachHeinrich1990}.  Equivalently, these are the two
+partial geometries \(\operatorname{pg}(5,7,3)\): Reichard and Woldar
+identify Mathon's result as a full classification and construct models of
+both classes in Proposition~5.1.5 and Corollary~5.1.6
+\cite[Sec.~6]{ReichardWoldar2022}.  This published two-class completeness
+is an external input.  The paper-local enumeration in
+Appendix~\ref{app:verification} reconstructs and checks representatives of
+the two classes, but is not used to prove that the list is complete.
 
 Here is the realization test.  Relabel and normalize four vertices to
 \[
@@ -1350,19 +1377,31 @@ host.  A fresh replay should allow \(30\) minutes, \(8\) GiB of RAM, and
 \(10\) GiB of free disk.  The largest generated \(q=16\) leaves have a
 measured peak of approximately \(1.3\) GiB each.
 
-\begin{itemize}[leftmargin=1.5em]
-\item The companion Lean library checks the general theorem chain with
-the standard axioms \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound}, and with no \texttt{sorry}, custom axiom, or
-\texttt{native\_decide}.
-\item For \(q=16\), Lean checks transition coverage for lists of lengths
-\(4/61/454/2633\), the \(2630+3\) leaf profile, and the arbitrary-eight-arc
-theorem.  Generator labels and deduplication are not trusted.
-\item Mathon's theorem supplies abstract completeness for the ten-point
-classification through Alspach--Heinrich.  The paper-local certificate
-checks both classes and all \(189\) concurrency equations; Singular exact
-arithmetic is trusted.
-\end{itemize}
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.18\textwidth}
+                >{\raggedright\arraybackslash}p{0.35\textwidth}
+                >{\raggedright\arraybackslash}p{0.36\textwidth}}
+\hline
+Claim & Certificate and checker & Remaining trust\\ \hline
+Defect, bounds, transfer, and reconstruction&
+\texttt{Gates.Relconic}; named declarations in the trust manifest&
+Lean kernel, Mathlib, and
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
+\(q=16\) exclusion&
+augmentation transitions, \(2630+3\) leaf records, and
+\texttt{Q16QuadraticTransport}, imported by the gate&
+Lean kernel and Mathlib; generator labels and deduplication are not trusted\\
+Ten-point realization&
+\texttt{check\_match10\_\allowbreak rank\_three.py} and its JSON certificate&
+Mathon's external two-class classification; Python integer arithmetic and
+Singular exact arithmetic\\
+Small-field witnesses&
+\texttt{ExampleChecks/\allowbreak Q5.lean} through \texttt{Q16.lean}&
+Lean kernel and the explicit finite-field implementations\\ \hline
+\end{tabular}
+\end{center}
+
 The ten-point bundle consists of
 \texttt{check\_match10\_rank\_three.py}, its JSON certificate, and
 \texttt{check\_match10\_rank\_three.sha256} in the paper directory.
@@ -1373,8 +1412,10 @@ nix shell nixpkgs#singular --command \
 \end{verbatim}
 regenerates and checks the certificate.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
-direct \(\F_8\) incidence construction provide independent checks; abstract
-two-class completeness is the cited theorem of Mathon.  The
+direct \(\F_8\) incidence construction provide independent checks; the
+same record checks the regular hyperoval, the disjoint prescribed conic
+used in Corollary~\ref{cor:even-equality-spectrum}, and its nonvanishing
+gradient.  Abstract two-class completeness remains the cited external theorem.  The
 odd-characteristic computation saturates by
 \(x_9(x_9-1)\), the product of the two necessary arc determinants
 displayed in the proof of Theorem~\ref{thm:match-ten-realization}, and the checked
@@ -1531,6 +1572,13 @@ Z.~L.~Nagy,
 S.-L. Ng and P.~R. Wild,
 \newblock On $k$-arcs covering a line in finite projective planes,
 \newblock \emph{Ars Combinatoria} \textbf{58} (2001), 289--300.
+
+\bibitem{ReichardWoldar2022}
+S.~Reichard and A.~J. Woldar,
+\newblock Constructing partial geometries from overlarge sets of Steiner
+systems,
+\newblock \emph{Beitr\"age zur Algebra und Geometrie} \textbf{63} (2022).
+\newblock doi:10.1007/s13366-021-00570-7.
 
 \end{thebibliography}
 
