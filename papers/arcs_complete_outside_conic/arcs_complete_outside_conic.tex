@@ -635,6 +635,33 @@ The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
 concurrence among secants; the last accounts for secant incidence spent on
 the exempt conic.
 
+\begin{corollary}[No scalar-extension equality]
+\label{cor:no-scalar-extension-equality}
+Let $Q\ge4$ be an even prime power, let $q=Q^d$ with $d\ge2$, and put
+$k=Q+2$.  No $\cC$-complete $k$-arc in $\PG(2,q)\setminus\cC$ has zero
+defect.  In particular, although a hyperoval in $\PG(2,Q)$ retains its
+secant-concurrence matching design after scalar extension, it cannot attain
+equality in~\eqref{eq:conic-complete} over $\F_q$.
+\end{corollary}
+
+\begin{proof}
+Suppose equality holds and let $Z=\{x\notin A:r(x)=m\}$.  By
+Theorem~\ref{thm:matching-design},
+\[
+ m=\frac Q2+1,\qquad |Z|=Q^2-1.
+\]
+Put $s=|Z\cap\cC|$.  Every positive conic index equals $m$, so
+$\IC(A)=ms$.  Substitution in the zero-defect identity gives
+\[
+ 2s=-2q^2+(Q^2+3Q+2)q-Q^3-Q^2+2.
+\]
+The right side is decreasing for $q\ge Q^2$, and at $q=Q^2$ it equals
+\[
+ -Q^4+2Q^3+Q^2+2<0
+\]
+for $Q\ge4$.  Hence $s<0$, a contradiction.
+\end{proof}
+
 Define
 \begin{align*}
  L_1(q)&=\min\left\{k\ge3:q^2-k\le\binom{k}{2}(q-1)\right\},\\

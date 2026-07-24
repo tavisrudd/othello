@@ -22,7 +22,9 @@ global incidence theorem:
 4. at nonzero defect, at most \(m(m-1)\Delta_{\mathcal H}(A)/2\) Kneser edges lie in
    nonmaximum concurrence cliques;
 5. a projective normalization classifies the six-point realization, while the seven-point
-   abstract obstruction is credited to prior matching-design theory.
+   abstract obstruction is credited to prior matching-design theory;
+6. if \(Q\ge4\), \(q=Q^d\), and \(d\ge2\), no \((Q+2)\)-arc can attain zero relative defect,
+   so scalar-extended hyperovals never supply equality over the larger field.
 
 The abstract, introduction, theorem spine, bibliography, and proof audit have been revised around
 this identity--rigidity--stability progression. The finite value \(\rho_{\mathcal C}(16)=9\)
@@ -125,6 +127,26 @@ rank-three star--matching pairwise-balanced design explicitly. It rejected a raw
 excursion, because C555 proves that such moments are subordinate to the existing defect and would
 weaken the paper's hierarchy.
 
+## Post-completion `ej` upgrade
+
+The explicit user-requested `ej` pass combined the hyperoval matching-design family with the conic
+equality count. For \(k=Q+2\), zero defect would force
+
+\[
+2|Z\cap\mathcal C|
+ =-2q^2+(Q^2+3Q+2)q-Q^3-Q^2+2.
+\]
+
+For every scalar extension \(q=Q^d\), \(Q\ge4\), \(d\ge2\), this is already negative at
+\(q=Q^2\) and decreases thereafter. The manuscript now records the stronger conclusion that no
+\(\mathcal C\)-complete \((Q+2)\)-arc attains zero defect in this range; the statement does not
+assume the arc itself is a scalar-extended hyperoval.
+
+An independent exact-integer substitution into the original centre-count formula agrees with the
+closed polynomial and gives \(s=-55,-1503,-28543\) for
+\((Q,q)=(4,16),(8,64),(16,256)\), respectively. The manuscript rebuild still passes with the same
+two non-blocking log messages, and rendered pages 8--9 show the new corollary and proof cleanly.
+
 ## Mystery ledger
 
 - **Priority:** settled for the matching-design name, hyperoval construction, and \(k=7\)
@@ -135,5 +157,8 @@ weaken the paper's hierarchy.
   application.
 - **Higher even sizes:** known abstract nonexistence at \(k=8,12\) may yield later corollaries,
   but primary-source verification is outside this bounded integration.
+- **Scalar extension:** settled by the post-completion `ej` pass at the equality level. The
+  matching design survives field extension, but the required number of maximum-index conic
+  centres becomes negative for every \(Q\ge4\), \(d\ge2\).
 - **Mixed rank-three invariant:** still open and remains the unmet C556 gate; C558 makes no claim
   beyond the exact equality and stability consequences already proved.

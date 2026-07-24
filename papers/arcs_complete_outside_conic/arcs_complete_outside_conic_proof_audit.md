@@ -25,6 +25,11 @@
    \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
    so `I_L(A)=choose(k,2)` and the general theorem gives the displayed complete-affine-arc bound
    and its equality pattern.
+   The scalar-extension corollary combines conic equality with the matching-design counts:
+   for \(k=Q+2\), \(m=Q/2+1\), and \(q=Q^d\), the number \(s\) of maximum-index conic
+   centres would satisfy
+   \(2s=-2q^2+(Q^2+3Q+2)q-Q^3-Q^2+2\). This quadratic is decreasing from
+   \(q=Q^2\), where it is already negative for \(Q\ge4\).
 5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),
