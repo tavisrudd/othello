@@ -177,11 +177,12 @@ contrary to \(f\ne0\).  Thus the collision scheme is contained in the
 zero divisor of one nonzero \(M_{ij}\), and has degree at most six in
 every characteristic.
 
-Finally the R5 off-diagonal curve has the original deletion degree
-twelve.  The unique cubic through a specified marker contributes at
-most six ordered pairs, giving $\delta=18$ and
+Finally the R5 off-diagonal curve has deletion degree thirteen,
+including its possible rational singular point.  The unique cubic
+through a specified marker contributes at most six ordered pairs,
+giving $(g,\delta,\kappa)=(1,19,1)$ and
 \[
-       q-2\sqrt q>18.
+       q+1-2\sqrt q>19.
 \]
 Its first prime-power solution is $29$.
 \end{proof}
@@ -249,21 +250,50 @@ its lower-unipotent transforms and endpoint are precisely
 $\cN_3(\F_q)$.
 \end{proof}
 
+\begin{proposition}[Exhaustive R6 contained-component classification]
+\label{prop:r6-contained}
+For a redundancy-six syndrome, the alternatives in
+Definition~\ref{def:contained} are exhausted as follows:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a noninjective contraction map is the rank-one normal-rational-
+      curve boundary and is shallow;
+\item a polar line contained in the lower secant cubic comes from the
+      upper rank-two catalecticant locus; after its shallow rational
+      secants are removed, this is the persistent tangent and
+      conjugate-secant locus;
+\item no trivial-gcd polar line is contained in the tame cyclic
+      surface or the characteristic-three wild cone;
+\item in characteristic two, containment in the cyclic plane occurs
+      exactly for \(f\in\cN_3=\PP\langle e_2,e_3\rangle\);
+\item on the remaining trivial-gcd locus the pointed-collision section
+      is not identically zero.
+\end{enumerate}
+Consequently the complete nonshallow contained list is the persistent
+locus together with \(\cN_3\) in characteristic two.  There is no
+unlisted contained component.
+\end{proposition}
+
+\begin{proof}
+The noninjective and secant-cubic alternatives are
+Proposition~\ref{prop:contained-rank-two} and
+Proposition~\ref{prop:r6-secant}.  The tame cyclic and collision
+assertions are Proposition~\ref{prop:r6-degrees}; the wild and binary
+specializations are Proposition~\ref{prop:r6-modular}.  These are all
+the clauses of Definition~\ref{def:contained}: contraction
+indeterminacy, containment in each component of the lower bad scheme,
+and identical collision.  Hence the list is exhaustive.
+\end{proof}
+
 \begin{proposition}[R6 one-step exhaustion]\label{prop:r6-one-step}
-Assume one of
-\[
-\operatorname{char}\F_q\geq5,\ q\geq29;\qquad
-\operatorname{char}\F_q=3,\ q\geq81;\qquad
-\operatorname{char}\F_q=2,\ q\geq32.
-\]
+Assume \(q\geq29\).
 Then every split-free redundancy-six syndrome lies in the persistent
 quadratic-gcd locus or, when \(q=2^m\) with odd \(m\), in
 \(\cN_3(\F_q)\).
 \end{proposition}
 
 \begin{proof}
-The contraction map is noninjective only on the normal rational curve,
-which is shallow, by Proposition~\ref{prop:contained-rank-two}.
+The complete contained branch is
+Proposition~\ref{prop:r6-contained}.
 The common-factor trichotomy is exhaustive.  A quadratic gcd gives the
 persistent tangent and conjugate-secant loci, together with the shallow
 rational secant; an exact linear gcd is shallow by
@@ -290,20 +320,20 @@ besides its eight original deletions, remove the at most two graph
 points whose split quadratic contains the new marker.  Since
 \(q+1>10\), a split squarefree cubic avoiding that marker remains.
 In the \(S_3\) case, Lemma~\ref{lem:s3} supplies the geometrically
-integral off-diagonal curve.  Its original diagonal and branch
-deletions have degree at most twelve, and deleting the unique cubic
+integral off-diagonal curve.  Its singular, diagonal, and branch
+deletions have degree at most thirteen, and deleting the unique cubic
 through the marker removes at most six ordered pairs.  Thus
 \[
- (g,\delta,\kappa)=(1,18,0),\qquad q-2\sqrt q>18
+ (g,\delta,\kappa)=(1,19,1),\qquad q+1-2\sqrt q>19
 \]
 for every \(q\geq29\).  These data form the one-step package of
 Definition~\ref{def:lower-package}, with \(d=13\), so
 Theorem~\ref{thm:induction} produces a split squarefree quartic.
 
-The displayed characteristic ranges are exactly the fields at or above
-this point-count threshold after the bounded fields in the theorem
-below: the next characteristic-three field is \(81\), and the next
-characteristic-two field is \(32\).  On \(\cN_3\),
+This is one field-order threshold, not three characteristic-dependent
+estimates: the first characteristic-three and characteristic-two
+prime powers above it happen to be \(81\) and \(32\), respectively.
+On \(\cN_3\),
 Proposition~\ref{prop:r6-nucleus} gives the asserted odd-degree
 split-free orbit and proves shallowness in even extension degree.
 \end{proof}
@@ -335,10 +365,8 @@ and the corresponding total numbers of deep syndrome directions are
 \end{theorem}
 
 \begin{proof}
-Proposition~\ref{prop:r6-one-step} gives the complete conceptual
-exhaustion in characteristic at least five from \(q\geq29\),
-characteristic three from \(q=81\), and characteristic two from
-\(q=32\).
+Propositions~\ref{prop:r6-contained} and~\ref{prop:r6-one-step} give
+the complete conceptual exhaustion for every prime power \(q\geq29\).
 Certificate R6 exhausts
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27\},
@@ -387,19 +415,26 @@ the lift is squarefree exactly when $g(r)\ne0$.
 \begin{proposition}[Two-marker lower cover]\label{prop:r7-pointed}
 Let $x$ be a forbidden root on a trivial-gcd quartic net.  On the
 generic $S_3$ bottom fiber, the diagonal and branch divisors and the
-two marked-root fibers have total degree at most
+possible singular point and two marked-root fibers have total degree
+at most
 \[
-       12+6+6=24.
+       13+6+6=25.
 \]
-Hence $q-2\sqrt q>24$, and in particular every prime power $q\geq37$,
-produces a split lower quartic avoiding $x$.
+Hence \(q+1-2\sqrt q>25\), and in particular every prime power
+\(q\geq37\), produces a split lower quartic avoiding \(x\).
 \end{proposition}
 
 \begin{proof}
 The R5 off-diagonal curve is geometrically integral of arithmetic genus
-one and has base deletion degree twelve.  Each marker belongs to a
-unique cubic fiber, which contains at most six ordered pairs.  Delete
-those two fibers and apply the $\kappa=0$ bound.
+one and has base deletion degree thirteen, including its possible
+rational singular point.  Each marker belongs to a unique cubic fiber,
+which contains at most six ordered pairs.  Deleting those two fibers
+gives
+\[
+ (g,\delta,\kappa)=(1,25,1),\qquad
+ q+1-2\sqrt q>25,
+\]
+whose first prime-power solution is \(37\).
 \end{proof}
 
 \begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
@@ -460,13 +495,18 @@ even $m$, $\F_4\subset\F_q$ and the homogenization of $t^4+t$ has its
 four affine $\F_4$ roots and the simple root at infinity.
 \end{proof}
 
-\begin{corollary}[Degree-six contained component]
+\begin{corollary}[Exhaustive R7 contained-component classification]
 \label{cor:r7-contained}
-The assertion $\mathrm{CC}(6,1)$ for the lower rank-two carrier holds
-in every characteristic.  Its contained sextics have upper
-catalecticant rank at most two; after the shallow rank-one and rational
-secant loci are removed, they are exactly the persistent tangent and
-conjugate-secant families.
+The assertion $\mathrm{CC}(6,1)$ is exhaustive in every
+characteristic.  A noninjective contraction is the shallow rank-one
+boundary.  Containment in the lower rank-two carrier gives upper
+catalecticant rank at most two; after the shallow rational secants are
+removed, these are exactly the persistent tangent and conjugate-secant
+families.  The complete lift of the only additional lower component,
+the characteristic-two nucleus line, is the central point \(e_3\).
+The remaining self-collision section is a nonzero divisor.  Thus the
+nonshallow contained list is precisely the persistent locus and, in
+characteristic two, \(e_3\); there is no further contained component.
 \end{corollary}
 
 \begin{proof}
@@ -475,7 +515,11 @@ rational types of the quadratic recurrence are split squarefree,
 repeated rational, and irreducible.  They give respectively the shallow
 rational secant, tangent, and conjugate-secant loci.  The remaining
 lower binary nucleus line has the separate complete lift computed in
-Proposition~\ref{prop:r7-central}.
+Proposition~\ref{prop:r7-central}.  Proposition~\ref{prop:r7-collision}
+shows that the collision section is nonzero.  These are respectively
+the contraction-indeterminacy, lower-component-containment, and
+identical-collision alternatives of Definition~\ref{def:contained},
+so the list is exhaustive.
 \end{proof}
 
 \begin{theorem}[Redundancy-seven classification]

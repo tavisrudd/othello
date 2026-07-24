@@ -125,11 +125,13 @@ lower package for \(f\) consists of:
        \#Y_{\alpha,b}(\F_q)\geq
        q+\kappa_\alpha-2g_\alpha\sqrt q;
   \]
-\item a divisor \(D_{\alpha,b,\lambda}\) on \(Y_{\alpha,b}\), of
-  degree at most \(\delta_\alpha\), containing the branch, diagonal,
-  marker, and self-collision points, such that every rational point
-  outside \(D_{\alpha,b,\lambda}\) determines an ordered rational
-  split squarefree \(g\in W_b\) with \(\lambda\nmid g\);
+\item a zero-dimensional closed deletion scheme
+  \(D_{\alpha,b,\lambda}\subset Y_{\alpha,b}\), of degree at most
+  \(\delta_\alpha\), containing the singular, branch, diagonal,
+  marker, and self-collision points, such that every
+  rational point outside \(D_{\alpha,b,\lambda}\) determines an
+  ordered rational split squarefree \(g\in W_b\) with
+  \(\lambda\nmid g\);
 \item a finite parameter scheme \(Z_f\subset\PP(E^\vee)\), of degree
   at most \(d\), containing
   \(\Phi_f^{-1}(B_{n-1})\) and every parameter at which the preceding
@@ -244,13 +246,11 @@ component theorem is asserted.
 
 \begin{remark}[Point-count convention]\label{rem:thresholds}
 The correction $\kappa$ records the exact lower bound available for the
-chosen model.  The singular cubic fiber square of
-Lemma~\ref{lem:s3} uses $\kappa=0$.  The normalized genus-one covers in
-the fixed-level applications use $\kappa=1$.  Thus the redundancy-eight
-triple $(g,\delta,\kappa)=(1,30,1)$ gives the real cutoff
-$(1+\sqrt{30})^2<42$, whose first prime power is $43$; the
-redundancy-nine triple $(1,36,1)$ gives the strict cutoff $q>49$, whose
-first prime power is $53$.
+chosen model.  Every genus-one curve retained in this paper uses the
+Aubry--Perret bound with \(\kappa=1\); a possible rational singular
+point is included instead in the deletion degree.  The three retained
+applications and their resulting prime-power thresholds are listed
+below.
 \end{remark}
 
 \begin{table}[ht]
@@ -261,9 +261,9 @@ first prime power is $53$.
 \toprule
 Application & $g$ & $\delta$ & $\kappa$ & integer lower bound & first prime power\\
 \midrule
-R5 cubic fiber square & $1$ & $12$ & $0$ & $q\geq22$ & $23$\\
-R6 marked cover & $1$ & $18$ & $0$ & $q\geq29$ & $29$\\
-R7 marked cover & $1$ & $24$ & $0$ & $q\geq37$ & $37$\\
+R5 cubic fiber square & $1$ & $13$ & $1$ & $q\geq22$ & $23$\\
+R6 marked cover & $1$ & $19$ & $1$ & $q\geq29$ & $29$\\
+R7 marked cover & $1$ & $25$ & $1$ & $q\geq37$ & $37$\\
 \bottomrule
 \end{tabular}
 \end{table}

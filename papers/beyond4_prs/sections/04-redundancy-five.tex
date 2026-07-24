@@ -200,10 +200,19 @@ contains a completely split squarefree cubic.
 By Proposition~\ref{prop:r5-incidence}, components of $Y_f$ correspond
 to monodromy orbits on distinct ordered roots.  The $S_3$ action is
 two-transitive, so $Y_f$ is geometrically integral and has arithmetic
-genus one.  Aubry--Perret gives
+genus one.  The Aubry--Perret singular-curve bound, in the form
 \[
-       \#Y_f(\F_q)\geq q-2\sqrt q.
+ \bigl|\#C(\F_q)-(q+1)\bigr|\leq 2\pi_C\sqrt q
 \]
+for a reduced geometrically integral projective curve of arithmetic
+genus \(\pi_C\), gives
+\[
+       \#Y_f(\F_q)\geq q+1-2\sqrt q
+\]
+\cite[p.~468]{AubryPerret1995}.  An integral curve of arithmetic genus
+one has at most one geometric singular point: if it is singular, its
+normalization has genus zero and the total delta invariant is one.
+We therefore delete at most one rational singular point.
 The diagonal costs
 \[
        Y_f\cdot\Delta=(2,2)\cdot(1,1)=4.
@@ -212,9 +221,10 @@ Riemann--Hurwitz gives different degree four for the separable cubic
 map, hence at most four branch values.  A singular cubic has at most
 two distinct roots and at most two ordered off-diagonal pairs, so the
 branch deletion costs at most eight.  If
-$q-2\sqrt q>12$, a rational off-diagonal unramified point remains.  It
-gives two distinct rational roots of a squarefree cubic, whose third
-root is rational.  The inequality holds for every prime power
+$q+1-2\sqrt q>13$, a smooth rational point remains outside the
+diagonal and branch fibers.  It gives two distinct rational roots of
+a squarefree cubic, whose third root is rational.  This inequality is
+equivalent to \(q-2\sqrt q>12\) and holds for every prime power
 $q\geq23$.
 \end{proof}
 

@@ -23,7 +23,7 @@ closed.
 | N1 | Use `q >= 43` consistently for redundancy eight. | Abstract, Theorems 1.2 and 6.1 | No `q>43` occurrence; all three statements say `q\ge 43`. | Closed in source |
 | N2 | Replace the mixed point-count conventions by `q+kappa-2g sqrt(q)>delta`. | Section 4 and threshold table | A single definition of `H_kappa`; every application records `kappa`. | Closed in source |
 | N3 | Recompute the displayed redundancy-eight and nine thresholds from that convention. | Sections 6.1--6.2 | The table gives `(g,delta,kappa)=(1,30,1)` and `(1,36,1)` and first prime powers 43 and 53. | Closed in source |
-| N4 | Preserve the singular cubic-cover correction separately. | Section 3 | The cubic argument explicitly uses `kappa=0`, or absorbs the normalization defect into `delta`. | Closed in source |
+| N4 | Preserve the singular cubic-cover correction separately. | Section 3 | The cubic argument quotes the exact `q+1-2 sqrt(q)` Aubry--Perret bound, deletes the possible rational singular point, and records `(g,delta,kappa)=(1,13,1)`. | Closed in source |
 | N5 | Remove the duplicated `and and`. | Section 6.2 | Literal search is empty. | Closed in source |
 
 ## Proof-architecture gates
