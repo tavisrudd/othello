@@ -41,10 +41,13 @@ The reusable terminals are:
 - `RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree`;
 - `RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member`;
+- `RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member`;
+- `RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card`;
 - `RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent`;
+- `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible`;
 - `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent`.
 
 The exact manuscript-facing coverage and remaining hypotheses are recorded in
@@ -71,6 +74,10 @@ The extra-juice additions passed independent single-file elaboration and the sam
 gate sequence in `run-20260724-031428-d84df6ca`.  The two witness-to-shallow terminals are
 axiom-free.  The constructive double-negation terminal depends only on `propext`, while the
 separate existence terminal retains its disclosed classical dependencies.
+
+The extensional Tao-pass terminals passed independent elaboration and the complete managed
+foundation, redundancy-nine, legacy-gate, axiom-audit, and aggregate sequence in
+`run-20260724-032611-79d0a17d`.
 
 The complete changed Lean modules and gates were reviewed for mathematical scope, trust-boundary
 disclosure, stable naming, and forbidden workflow vocabulary.  No task identifiers, internal
@@ -102,6 +109,13 @@ split-freeness gives double-negated kernel-member existence without classical ch
 existence requires decidability or classical logic.  Both versions are public, so finite
 certificate modules can retain a constructive route instead of importing choice accidentally.
 
+The requested Tao stress test then found an unnecessary rigidity in the first interface: composition
+required literal equality of predicate functions and kernel relations.  Concrete coordinate,
+projective-quotient, and certificate models normally prove pointwise equivalence instead.  The
+checked extensional terminals now accept exactly those pointwise `iff` hypotheses.  Equality-based
+theorems remain as compatibility wrappers, so the upgrade weakens hypotheses without breaking the
+established API.
+
 No projective group action was fabricated merely to strengthen the interface.  The orbit structure
 records counts and exhaustion as visible inputs until the degree-specific developments construct
 the actual actions and stabilizers.
@@ -120,6 +134,9 @@ Settled:
 - **Is the converse extraction of a kernel member constructive?** Exactly up to double negation.
   The constructive theorem is axiom-audited separately; removing the double negation requires
   decidability or classical logic.
+- **Must the geometric, Hankel, radius, and exhaustion predicates be definitionally identical?**
+  No.  Pointwise logical equivalence suffices for both witness-to-shallow and complete synthesis;
+  the formal interface now matches that weaker mathematical requirement.
 - **Could geometric existence or orbit exhaustion enter as a hidden axiom?** No.  Each is a named
   structure field, and the audit contains no project-specific axioms.
 - **Can the established redundancy-nine package consume the common interface?** Yes.  Its adapter
@@ -133,6 +150,10 @@ Open, with exact owners:
 - **Do the numerical orbit-count fields themselves certify a group action?** No.  They are visible
   inputs, not a substitute for actions, stabilizers, representatives, or quotient-cardinality
   proofs.  Those semantic links belong to the degree-specific formalizations.
+- **Where is projective scaling invariance proved?** Not in the abstract foundation.  A concrete
+  module may instantiate `S` with a projective quotient, or must prove that its vector-level
+  predicates descend.  The projective quotient/action bridge is a degree-specific obligation,
+  not a consequence of the logical interfaces.
 - **Component, rational-point, and finite exhaustion inputs:** these remain visible mathematical or
   certificate obligations in the corresponding degree-specific modules.
 - **Aggregate manuscript closure:** the final aggregate gate must reconcile every paper theorem

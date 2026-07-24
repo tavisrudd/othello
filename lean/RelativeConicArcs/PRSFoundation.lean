@@ -173,6 +173,28 @@ theorem exceptional_has_kernel_member {S P : Type*} {q threshold : ℕ}
 
 end GeometricWitnessInput
 
+/-- A geometric kernel-member construction makes every exceptional syndrome non-split-free when
+its kernel incidence and split-squarefree predicates are pointwise equivalent to those in the
+Hankel dictionary.  Definitional equality of the predicates is not required. -/
+theorem exceptional_not_splitFree_of_compatible_geometric_kernel_member
+    {S P : Type*} {q threshold : ℕ}
+    (dictionary : HankelKernelDictionary S P)
+    (geometry : GeometricWitnessInput S P q threshold)
+    (hq : q ≥ threshold)
+    (hcomponent : ∀ s, geometry.exceptional s → geometry.componentCondition s)
+    (hpoint : ∀ s (_hs : geometry.exceptional s),
+      geometry.rationalPointOutsideDeletedDivisors hq s)
+    (hkernel : ∀ s p,
+      geometry.inHankelKernel s p ↔ dictionary.inHankelKernel s p)
+    (hsplit : ∀ p,
+      geometry.isSplitSquarefree p ↔ dictionary.isSplitSquarefree p) :
+    ∀ s, geometry.exceptional s → ¬ dictionary.isSplitFree s := by
+  intro s hs
+  obtain ⟨p, hpKernel, hpSplit⟩ :=
+    geometry.exceptional_has_kernel_member hq hcomponent hpoint s hs
+  exact dictionary.not_splitFree_of_kernel_member
+    ((hkernel s p).1 hpKernel) ((hsplit p).1 hpSplit)
+
 /-- A geometric kernel-member construction makes every exceptional syndrome non-split-free once
 its kernel incidence and split-squarefree predicates are identified with the Hankel dictionary. -/
 theorem exceptional_not_splitFree_of_geometric_kernel_member
@@ -186,12 +208,35 @@ theorem exceptional_not_splitFree_of_geometric_kernel_member
     (hkernel : geometry.inHankelKernel = dictionary.inHankelKernel)
     (hsplit : geometry.isSplitSquarefree = dictionary.isSplitSquarefree) :
     ∀ s, geometry.exceptional s → ¬ dictionary.isSplitFree s := by
-  intro s hs
-  obtain ⟨p, hpKernel, hpSplit⟩ :=
-    geometry.exceptional_has_kernel_member hq hcomponent hpoint s hs
-  rw [hkernel] at hpKernel
-  rw [hsplit] at hpSplit
-  exact dictionary.not_splitFree_of_kernel_member hpKernel hpSplit
+  exact exceptional_not_splitFree_of_compatible_geometric_kernel_member
+    dictionary geometry hq hcomponent hpoint
+    (fun s p => by rw [hkernel])
+    (fun p => by rw [hsplit])
+
+/-- Pointwise compatibility of the geometric, Hankel, and coding predicates suffices to prove
+shallowness.  This is the extensional form used when concrete models have propositionally
+equivalent but definitionally different predicates. -/
+theorem exceptional_not_deep_of_compatible_geometric_kernel_member
+    {S P : Type*} {q threshold : ℕ}
+    (dictionary : HankelKernelDictionary S P)
+    (radius : CoveringRadiusInput S)
+    (geometry : GeometricWitnessInput S P q threshold)
+    (hq : q ≥ threshold)
+    (hcomponent : ∀ s, geometry.exceptional s → geometry.componentCondition s)
+    (hpoint : ∀ s (_hs : geometry.exceptional s),
+      geometry.rationalPointOutsideDeletedDivisors hq s)
+    (hkernel : ∀ s p,
+      geometry.inHankelKernel s p ↔ dictionary.inHankelKernel s p)
+    (hsplit : ∀ p,
+      geometry.isSplitSquarefree p ↔ dictionary.isSplitSquarefree p)
+    (hsplitFree : ∀ s, radius.isSplitFree s ↔ dictionary.isSplitFree s) :
+    ∀ s, geometry.exceptional s → ¬ radius.isDeep s := by
+  have hnotSplitFree :=
+    exceptional_not_splitFree_of_compatible_geometric_kernel_member dictionary geometry hq
+      hcomponent hpoint hkernel hsplit
+  intro s hs hdeep
+  apply hnotSplitFree s hs
+  exact (hsplitFree s).1 (radius.deep_implies_splitFree hdeep)
 
 /-- A geometric split squarefree Hankel-kernel member proves coding-theoretic shallowness without
 using the covering-radius promotion theorem.  Covering radius is needed for the converse direction,
@@ -209,13 +254,11 @@ theorem exceptional_not_deep_of_geometric_kernel_member
     (hsplit : geometry.isSplitSquarefree = dictionary.isSplitSquarefree)
     (hsplitFree : radius.isSplitFree = dictionary.isSplitFree) :
     ∀ s, geometry.exceptional s → ¬ radius.isDeep s := by
-  have hnotSplitFree :=
-    exceptional_not_splitFree_of_geometric_kernel_member dictionary geometry hq
-      hcomponent hpoint hkernel hsplit
-  intro s hs hdeep
-  apply hnotSplitFree s hs
-  rw [← hsplitFree]
-  exact radius.deep_implies_splitFree hdeep
+  exact exceptional_not_deep_of_compatible_geometric_kernel_member
+    dictionary radius geometry hq hcomponent hpoint
+    (fun s p => by rw [hkernel])
+    (fun p => by rw [hsplit])
+    (fun s => by rw [hsplitFree])
 
 /-- Persistent tangent and sigma families, recorded as finite subsets with their exact union.
 No claim that this union exhausts split-free or deep syndromes is built into the data. -/
@@ -271,9 +314,24 @@ theorem splitFree_iff_mem_persistent {S OrbitCase : Type*} [DecidableEq S]
 
 end OrbitExhaustionInput
 
-/-- Common synthesis theorem: a Hankel dictionary, an explicit covering-radius input, and an
-explicit orbit-exhaustion input yield the coding-theoretic classification without identifying
-the three hypotheses. -/
+/-- Common extensional synthesis theorem: pointwise compatibility of the Hankel dictionary,
+covering-radius input, and orbit-exhaustion input yields the coding-theoretic classification. -/
+theorem deep_iff_mem_persistent_of_compatible
+    {S P OrbitCase : Type*} [DecidableEq S]
+    (dictionary : HankelKernelDictionary S P)
+    (radius : CoveringRadiusInput S)
+    (exhaustion : OrbitExhaustionInput S OrbitCase)
+    (hradiusPredicate : ∀ s, radius.isSplitFree s ↔ dictionary.isSplitFree s)
+    (hexhaustionPredicate : ∀ s,
+      exhaustion.isSplitFree s ↔ dictionary.isSplitFree s)
+    (hradius : radius.radiusRange) (s : S) :
+    radius.isDeep s ↔ s ∈ exhaustion.persistent := by
+  rw [radius.deep_iff_splitFree hradius]
+  exact (hradiusPredicate s).trans
+    ((hexhaustionPredicate s).symm.trans
+      (exhaustion.splitFree_iff_mem_persistent s))
+
+/-- Compatibility wrapper for concrete models whose split-free predicates are literally equal. -/
 theorem deep_iff_mem_persistent {S P OrbitCase : Type*} [DecidableEq S]
     (dictionary : HankelKernelDictionary S P)
     (radius : CoveringRadiusInput S)
@@ -282,8 +340,9 @@ theorem deep_iff_mem_persistent {S P OrbitCase : Type*} [DecidableEq S]
     (hexhaustionPredicate : exhaustion.isSplitFree = dictionary.isSplitFree)
     (hradius : radius.radiusRange) (s : S) :
     radius.isDeep s ↔ s ∈ exhaustion.persistent := by
-  rw [radius.deep_iff_splitFree hradius]
-  rw [hradiusPredicate, ← hexhaustionPredicate]
-  exact exhaustion.splitFree_iff_mem_persistent s
+  exact deep_iff_mem_persistent_of_compatible dictionary radius exhaustion
+    (fun s => by rw [hradiusPredicate])
+    (fun s => by rw [hexhaustionPredicate])
+    hradius s
 
 end RelativeConicArcs.PRSFoundation
