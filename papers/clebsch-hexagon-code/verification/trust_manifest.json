@@ -206,7 +206,7 @@
       "source": {
         "claim_key": "thm:headline-rigidity-phase",
         "kind": "theorem-environment",
-        "sha256": "ace14159907a266e83ec1d62f19ffdf345b39786260702a8af5b44fb35d78a3e"
+        "sha256": "db75b2fa0a2e11fef1103dd504e2581b1ff672c041fb73dd0b9f3dcecf45a8b7"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -305,8 +305,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "4472d67984a602387ceb85c85a216794b58a6b4937b6b3f55594c237dfff6d82",
-        "tex": "Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has parameters\n\\[\n \\bigl[(q-h/2)(q-h+1),\\,3,\\,\n       (q-h/2-1)(q-h+1)\\bigr]_q;\n\\]\na nonmirror line meets the complement in at most $q-h+1$ points."
+        "sha256": "bf4d440f35511b70fedb46745a706eaf561f72230e665d9747f5eaf9fd585dde",
+        "tex": "Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ in\nthe determinant sense of Proposition~\\ref{prop:lattice-good}.  Thus the\ncharacteristic is odd, with a chosen image of $\\tau$ for $H_3$.  Whenever\nthe complement is nonempty, its projective evaluation code has parameters\n\\[\n \\bigl[(q-h/2)(q-h+1),\\,3,\\,\n       (q-h/2-1)(q-h+1)\\bigr]_q;\n\\]\na nonmirror line meets the complement in at most $q-h+1$ points."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -768,7 +768,7 @@
         }
       ],
       "id": "statement-thm-headline-factorization",
-      "paper_location": "theorem at source line 285",
+      "paper_location": "theorem at source line 286",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-factorization",
@@ -1135,7 +1135,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 443",
+      "paper_location": "proposition at source line 444",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:a5-point-orbits",
@@ -1177,7 +1177,7 @@
         }
       ],
       "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 513",
+      "paper_location": "proposition at source line 514",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-holes-conic",
@@ -1193,7 +1193,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 548",
+      "paper_location": "corollary at source line 549",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "cor:named-variety",
@@ -1235,7 +1235,7 @@
         }
       ],
       "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 585",
+      "paper_location": "proposition at source line 586",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-hole-orbit",
@@ -1276,7 +1276,7 @@
         }
       ],
       "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 633",
+      "paper_location": "proposition at source line 634",
       "route": "mixed",
       "source": {
         "claim_key": "prop:decoding-oracle",
@@ -1292,7 +1292,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 720",
+      "paper_location": "lemma at source line 721",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:six-arc-line-bound",
@@ -1334,7 +1334,7 @@
         }
       ],
       "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 755",
+      "paper_location": "theorem at source line 756",
       "route": "mixed",
       "source": {
         "claim_key": "thm:rigidity",
@@ -1359,7 +1359,7 @@
         "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
       },
       "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 884",
+      "paper_location": "proposition at source line 885",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "prop:low-degree-rigidity",
@@ -1375,7 +1375,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 909",
+      "paper_location": "corollary at source line 910",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "corollary:aec192b0d5224cce",
@@ -1406,7 +1406,7 @@
         "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
       "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 958",
+      "paper_location": "theorem at source line 959",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "thm:gap",
@@ -1447,7 +1447,7 @@
         }
       ],
       "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1096",
+      "paper_location": "proposition at source line 1097",
       "route": "mixed",
       "source": {
         "claim_key": "prop:brianchon-support",
@@ -1488,7 +1488,7 @@
         }
       ],
       "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1146",
+      "paper_location": "corollary at source line 1147",
       "route": "mixed",
       "source": {
         "claim_key": "cor:decoder-brianchon",
@@ -1534,7 +1534,7 @@
         }
       ],
       "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1162",
+      "paper_location": "proposition at source line 1163",
       "route": "mixed",
       "source": {
         "claim_key": "prop:chirality",
@@ -1550,7 +1550,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1211",
+      "paper_location": "lemma at source line 1212",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:chord-defect",
@@ -1592,7 +1592,7 @@
         }
       ],
       "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1241",
+      "paper_location": "theorem at source line 1242",
       "route": "mixed",
       "source": {
         "claim_key": "thm:why11",
@@ -1633,7 +1633,7 @@
         }
       ],
       "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1288",
+      "paper_location": "proposition at source line 1289",
       "route": "mixed",
       "source": {
         "claim_key": "prop:clebsch-family-uncovered",
@@ -1674,7 +1674,7 @@
         }
       ],
       "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1358",
+      "paper_location": "proposition at source line 1359",
       "route": "mixed",
       "source": {
         "claim_key": "prop:h3-arrangement",
@@ -1731,7 +1731,7 @@
         }
       ],
       "id": "statement-prop-lattice-good",
-      "paper_location": "proposition at source line 1471",
+      "paper_location": "proposition at source line 1472",
       "route": "mixed",
       "source": {
         "claim_key": "prop:lattice-good",
@@ -1772,7 +1772,7 @@
         }
       ],
       "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1587",
+      "paper_location": "theorem at source line 1588",
       "route": "mixed",
       "source": {
         "claim_key": "thm:small-k-conic-filling",
@@ -1841,7 +1841,7 @@
         }
       ],
       "id": "statement-prop-general-matching-quotient",
-      "paper_location": "proposition at source line 1664",
+      "paper_location": "proposition at source line 1665",
       "route": "mixed",
       "source": {
         "claim_key": "prop:general-matching-quotient",
@@ -1857,7 +1857,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1872",
+      "paper_location": "proposition at source line 1873",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -2291,7 +2291,7 @@
         }
       ],
       "id": "statement-thm-headline-gluing",
-      "paper_location": "theorem at source line 1927",
+      "paper_location": "theorem at source line 1928",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-gluing",
@@ -2840,7 +2840,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1949",
+      "paper_location": "lemma at source line 1950",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -2906,7 +2906,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 2085",
+      "paper_location": "proposition at source line 2086",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -3033,7 +3033,7 @@
         }
       ],
       "id": "statement-thm-four-sheet-holonomy",
-      "paper_location": "theorem at source line 2142",
+      "paper_location": "theorem at source line 2143",
       "route": "mixed",
       "source": {
         "claim_key": "thm:four-sheet-holonomy",
@@ -3275,7 +3275,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 2263",
+      "paper_location": "lemma at source line 2264",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -4233,7 +4233,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 2294",
+      "paper_location": "theorem at source line 2295",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -6100,7 +6100,7 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "e175ccf36897fae2ee38749aa70a5e13e538786b8db76f7757130f8e75270596",
+  "manuscript_sha256": "5cfe7362b4cdbc4b4ffee6e8b3ab2e683c3fc40e78d8c6815e96e7a2a6408ad2",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
