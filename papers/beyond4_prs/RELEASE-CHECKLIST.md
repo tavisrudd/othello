@@ -17,7 +17,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | N3 | PASS | R8/R9 table records `(g,delta,kappa)=(1,30,1)` and `(1,36,1)`, with first prime powers 43 and 53. | Threshold table and preceding calculation at lines 748--764. |
 | N4 | PASS | The singular cubic-cover correction is separately assigned `kappa=0`. | `main.tex:745` and `main.tex:1123`. |
 | N5 | PASS | Literal `and and` scan is empty. | Exact source scan is empty. |
-| SCOPE | PASS | Every theorem advertised in the abstract is unconditional, or the abstract explicitly presents the object as a research announcement rather than proof-complete Version 1. | R5--R9 and the stated Hessian/`e_7` claims now have printed unconditional proofs at their exact boundaries; remaining failures concern public records, formal reconciliation, literature, packaging, and release metadata. |
+| SCOPE | PASS | Every theorem advertised in the abstract is unconditional, or the abstract explicitly presents the object as a research announcement rather than proof-complete Version 1. | R5--R9 and the stated Hessian/`e_7` claims have printed unconditional proofs at their exact boundaries; remaining release gates are the independent reader, clean export/replay, immutable metadata, and author/venue confirmation. |
 
 ## 2. Proof architecture
 
@@ -55,8 +55,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 | R3 | PASS | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/verify.py` is the single entry point; its quick check verifies all 56 manifest rows, the generated public classifications, and their hashes. |
 | R4 | REVIEW | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | The complete local bundle and built PDF have exact hashes and byte counts; final public commit, archive, and DOI fields require the external release step. |
 | R5 | FAIL | Public paper-only repository URL, immutable tag/commit, and DOI/permanent archive URL resolve. | No public release exists. |
-| F1 | REVIEW | Statement-adequacy appendix reproduces each adopted Lean headline and states the exact paper-to-formal boundary. | Appendix and formalization ledger exist; C539--C542 are complete and C543--C544 remain. |
-| F2 | FAIL | Aggregate C544 import, axiom, target, and manuscript-reconciliation gates pass on one pinned shared-public-Lean commit. | C544 is not complete. |
+| F1 | PASS | Statement-adequacy appendix maps every numbered manuscript claim to its exact Lean, manuscript, cited-input, or certificate route. | `supplement/LEAN-STATEMENTS.md` reconciles all 47 labels and records every explicit unformalized input. |
+| F2 | PASS | Aggregate import, axiom, exact-target, and manuscript-reconciliation gates pass in the pinned local Lean toolchain. | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour` and its 103-terminal audit pass; the audit reports only `propext`, `Classical.choice`, and `Quot.sound`.  The immutable public revision remains an export gate under R4/X1. |
 
 ## 5. Exposition, literature, and responsibility
 
@@ -87,8 +87,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 ## Work order
 
-1. Complete C543--C544 and reconcile F1--F2.
-2. Obtain the independent final-reader signoff for A2.
-3. Build/replay the clean paper-only export and fill the public fields in R4/X1.
-4. Confirm authors and venue, recheck policy, then prepare the exact upload
+1. Obtain the independent final-reader signoff for A2.
+2. Build/replay the clean paper-only export and fill the public fields in R4/X1.
+3. Confirm authors and venue, recheck policy, then prepare the exact upload
    artifact.  External publication remains a separate irreversible action.

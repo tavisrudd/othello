@@ -6,7 +6,7 @@ import RelativeConicArcs.PRSPolarInduction
 This module transcribes the compact field summaries used by the projective Reed--Solomon
 redundancy-six and redundancy-seven classifications.  The source is
 `papers/beyond4_prs/supplement/CLASSIFICATION-RECORDS.json`, SHA-256
-`0a6c4066dff9983a9c2124bca27fbbe4e273b9868125a04c30071df3783b6725`.
+`b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`.
 The source artifact specifies the finite-field models, normalization, exhaustive search domains,
 orbit records, and independent replay.
 

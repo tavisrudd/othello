@@ -176,12 +176,15 @@ theorem redundancyNineSynthesis {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S
     intro s hs
     exact slice.exceptional_has_splitSquarefreeWitness hq hslice hpoint s
       ((exceptional_iff s).2 hs)
-  refine ⟨?_, witnessOutside, families.deep_card, orbit_count_pair families.orbitCase⟩
-  intro s
-  constructor
-  · intro hsDeep
-    by_contra hsMem
-    exact slice.witnessMakesShallow (witnessOutside s hsMem) hsDeep
-  · exact persistentDeep s
+  have exceptionalShallow : ∀ s, slice.exceptional s → ¬ slice.isDeep s := by
+    intro s hs
+    exact slice.witnessMakesShallow
+      (slice.exceptional_has_splitSquarefreeWitness hq hslice hpoint s hs)
+  have deepClassification : ∀ s, slice.isDeep s ↔ s ∈ families.deep :=
+    PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow
+      slice.isDeep slice.exceptional families.deep exceptional_iff
+      persistentDeep exceptionalShallow
+  exact ⟨deepClassification, witnessOutside, families.deep_card,
+    orbit_count_pair families.orbitCase⟩
 
 end RelativeConicArcs.PRSRedundancyNine

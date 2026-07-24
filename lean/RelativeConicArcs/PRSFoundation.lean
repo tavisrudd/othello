@@ -298,6 +298,21 @@ theorem splitFree_iff_mem_persistent {S OrbitCase : Type*} [DecidableEq S]
 
 end OrbitExhaustionInput
 
+/-- Persistent syndromes are exactly the deep ones when the complement is shallow. -/
+theorem deep_iff_mem_persistent_of_exceptional_shallow
+    {S : Type*} [DecidableEq S]
+    (isDeep exceptional : S → Prop) (persistent : Finset S)
+    (exceptional_iff : ∀ s, exceptional s ↔ s ∉ persistent)
+    (persistentDeep : ∀ s, s ∈ persistent → isDeep s)
+    (exceptionalShallow : ∀ s, exceptional s → ¬ isDeep s) :
+    ∀ s, isDeep s ↔ s ∈ persistent := by
+  intro s
+  constructor
+  · intro hdeep
+    by_contra hmem
+    exact exceptionalShallow s ((exceptional_iff s).2 hmem) hdeep
+  · exact persistentDeep s
+
 /-- Pointwise-compatible dictionary, radius, and exhaustion inputs classify deep syndromes. -/
 theorem deep_iff_mem_persistent_of_compatible
     {S P OrbitCase : Type*} [DecidableEq S]

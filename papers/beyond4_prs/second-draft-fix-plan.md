@@ -178,13 +178,12 @@ Lucas strata remain open.
 
 ## Release rule
 
-C545 is blocked as a **proof-complete Version 1** until the aggregate
-C541--C544 formalization/reconciliation gate, an independent final
-reader, the clean public export/replay, immutable repository and
+C545 is blocked as a **proof-complete Version 1** until an independent
+final reader, the clean public export/replay, immutable repository and
 archive identifiers, and author/account confirmation are complete.
 The local proof, classification-record, literature, supplement-schema,
-and rendered-exposition gates are closed.  An earlier DOI release is
-not authorized.
+formalization/reconciliation, and rendered-exposition gates are closed.
+An earlier DOI release is not authorized.
 
 The development monorepo is never the publication repository.  Release uses a
 reviewed paper-only fresh-history export containing the manuscript, public

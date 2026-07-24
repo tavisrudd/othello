@@ -40,7 +40,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | The `q=53` endpoint is an unexplained rounding artifact. | R9 threshold | **Rejected after repair.** | The strict real cutoff is 49, integer lower bound 50, first prime power 53. |
 | The R5 singular curve uses the smooth `+1` convention. | Lemma 3.2 and threshold table | **Rejected after repair.** | R5 is explicitly assigned `kappa=0`. |
 | The verification package is externally reproducible. | Repository-relative paths and predecessor manifests | **Survived.** | The release manifest still lacks URL, tag, commit, DOI, hashes, byte counts, and toolchains. |
-| The mathematical manuscript is proof-complete at its stated boundaries. | All headline theorem proofs | **Rejected after repair.** | The proposition-level assertion-map cold read is green through R9, ordered Hessian, and `e_7`.  Literature, formal reconciliation, clean-export, metadata, and author/venue confirmation remain release gates rather than hidden proof hypotheses. |
+| The mathematical manuscript is proof-complete at its stated boundaries. | All headline theorem proofs | **Rejected after repair.** | The proposition-level assertion-map cold read is green through R9, ordered Hessian, and `e_7`; the aggregate formal reconciliation is also green.  The independent final reader, clean export, metadata, and author/venue confirmation remain release gates rather than hidden proof hypotheses. |
 
 ## Result audit
 
@@ -72,8 +72,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 
 ## Remaining release work
 
-- Finish the role-based literature audit and bibliography metadata check.
-- Reconcile the aggregate public Lean target and statement-adequacy boundary.
+- Obtain the independent final-reader signoff.
 - Split the source, execute the public replays in a clean paper-only export,
   and fill the immutable manifest.
 - Confirm authorship and the selected venue policy immediately before any

@@ -11,7 +11,7 @@ histogram, and coefficient-Frobenius target.
 
 The source is the public electronic artifact
 `papers/beyond4_prs/supplement/CLASSIFICATION-RECORDS.json`, SHA-256
-`0a6c4066dff9983a9c2124bca27fbbe4e273b9868125a04c30071df3783b6725`.
+`b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`.
 That artifact specifies normalization, field models, exhaustive domains, generators,
 and independent replay.  Lean kernel reduction checks the transcribed table and its arithmetic
 consistency, but does not establish that these rows are the sporadic orbits or rerun the external

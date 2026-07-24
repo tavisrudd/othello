@@ -96,8 +96,17 @@ do not record byte counts. This is a predecessor packaging defect, not hidden ev
 
 ## Lean boundary
 
-- `RelativeConicArcs.Gates.PRSRedundancyNine`
-- `RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit`
+- aggregate import closure:
+  `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`;
+- aggregate tracked audit:
+  `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`;
+- declaration-level manuscript reconciliation and supported replay command:
+  `supplement/LEAN-STATEMENTS.md`.
 
-The fourteen-terminal audit contains no project-specific axioms or opaque computational oracles.
-Only the standard `propext`, `Classical.choice`, and `Quot.sound` dependencies occur.
+The aggregate gate imports the shared foundation, redundancy-five through redundancy-nine, and
+characteristic-two Hessian/Lucas gates.  Its audit covers the paper-adopted algebraic, contraction,
+arithmetic, finite-table, and conditional synthesis terminals.  It reports no project-specific
+axiom or opaque computational oracle; only the standard `propext`, `Classical.choice`, and
+`Quot.sound` dependencies occur.  The R5--R7 transcription modules name the current public
+classification record, SHA-256
+`b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`.

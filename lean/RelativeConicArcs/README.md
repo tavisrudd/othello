@@ -1,9 +1,10 @@
 # RelativeConicArcs
 
-Finite-geometry developments for the arcs-outside-a-conic and equivariant-robust-completion papers.
+Finite-geometry developments for the arcs-outside-a-conic, equivariant-robust-completion, and
+projective Reed--Solomon papers.
 The trust boundary, axiom audits, provenance, and named classical inputs are in
 [`TRUST.md`](TRUST.md); the portfolio-wide model those follow is in
-[`../CERTIFICATES.md`](../CERTIFICATES.md).
+[`../TRUST.md`](../TRUST.md).
 
 ## Layers
 
@@ -53,6 +54,7 @@ library.
 | `Gates/AlternateOrbitRepairQ25.lean` | Q25 alternate-orbit repair |
 | `Gates/AlternateOrbitRepairParameterized.lean` | parameterized exchange |
 | `Gates/AlternateOrbitRepairProfileEnvelope.lean` | general-`s` profile envelope |
+| `Gates/PRSBeyondRedundancyFour.lean` | projective Reed--Solomon redundancies five through nine and the characteristic-two ordered-Hessian/Lucas boundary |
 
 Build them through the queue rather than a bare `lake build`; see [`../AGENTS.md`](../AGENTS.md)
 for the shared-build-tree discipline.

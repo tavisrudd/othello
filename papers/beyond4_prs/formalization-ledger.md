@@ -3,7 +3,9 @@
 This ledger records the exact Lean boundary of the projective Reed--Solomon results used in this
 paper.  A row marked `kernel checked` means that the named declaration elaborates in the pinned
 Lean and mathlib toolchain.  It does not mean that hypotheses supplied to the declaration have
-also been proved in Lean.
+also been proved in Lean.  The declaration-level reconciliation for every numbered manuscript
+theorem, proposition, and corollary is
+`supplement/LEAN-STATEMENTS.md`.
 
 ## Shared interfaces
 
@@ -20,7 +22,8 @@ also been proved in Lean.
 | Divided-power marker contraction | `RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm` and `RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply` | marker contractions commute and have the displayed two-marker coordinate formula over every commutative ring | identification of the chosen coordinates with a particular projective Reed--Solomon parity check |
 | Persistent tangent/sigma union | `RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card` | the cardinality of a disjoint declared union is the sum of the two cardinalities | parametrization, disjointness, and degree-specific family counts |
 | Split-free exhaustion | `RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent` | equivalence from two separately named exhaustion implications | the projective and projective-semilinear group actions, stabilizers, orbit representatives, and exhaustion proofs |
-| Coding synthesis | `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible` | the Hankel, radius, and exhaustion interfaces compose under pointwise equivalence of their split-free predicates | every concrete input named in the preceding rows |
+| Witness-based coding synthesis | `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow` | persistent syndromes are deep and every exceptional syndrome is shallow imply exact classification | the positive persistent theorem, complement identification, and negative witness theorem; no covering-radius or split-free-exhaustion input is used |
+| Radius-based coding synthesis | `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible` | the Hankel, radius, and exhaustion interfaces compose under pointwise equivalence of their split-free predicates | every concrete input named in the preceding rows |
 
 The import gate is `RelativeConicArcs.Gates.PRSFoundation`.  Its axiom audit is
 `RelativeConicArcs.Gates.PRSFoundationAxiomAudit`.  The reusable logical terminals introduce no
@@ -42,13 +45,25 @@ Lean/mathlib axioms `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Trust boundary
 
-The gates import no generated certificate, native evaluator, external oracle, or project-local
-axiom.  Finite classification records and externally proved covering-radius or rational-point
-theorems require separate public artifacts and citations.  A constructed split squarefree kernel
-member proves shallowness without a covering-radius theorem; covering radius is needed to promote
-the absence of such witnesses to deepness.  Numerical orbit tables supplied as structure fields are
-checked only as hypotheses unless a later module constructs the corresponding group actions and
-proves their exhaustion.  The import gate
-`RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven` and its adjacent axiom audit contain
-only the standard Lean/mathlib dependencies `propext`, `Classical.choice`, and `Quot.sound`; the
-two finite count-exhaustion terminals are axiom-free.
+The paper-facing closure is
+`RelativeConicArcs.Gates.PRSBeyondRedundancyFour`, with tracked audit
+`RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`.  It imports the foundation,
+redundancy-five through redundancy-nine, and characteristic-two Hessian/Lucas gates and no
+unrelated paper gate.
+
+The closure imports no generated Lean certificate, native evaluator, external oracle, or
+project-local axiom.  The aggregate audit reports only the standard Lean/mathlib dependencies
+`propext`, `Classical.choice`, and `Quot.sound`; many algebraic and finite-table terminals are
+axiom-free.  Finite classification records and externally proved covering-radius or rational-point
+theorems require separate public artifacts and citations.  The R5--R7 transcription modules name
+`supplement/CLASSIFICATION-RECORDS.json`, SHA-256
+`b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`;
+Lean checks the transcribed arithmetic but keeps semantic validation and exhaustive-search
+coverage as explicit structure fields.
+
+A constructed split squarefree kernel member proves shallowness without a covering-radius theorem;
+covering radius is needed to promote the absence of such witnesses to deepness.  Consequently,
+exact classification may follow either from a radius-plus-exhaustion theorem or from positive
+deepness on the persistent locus together with explicit shallow witnesses on its complement.
+Numerical orbit tables supplied as structure fields are checked only as hypotheses unless a module
+constructs the corresponding group actions and proves their exhaustion.

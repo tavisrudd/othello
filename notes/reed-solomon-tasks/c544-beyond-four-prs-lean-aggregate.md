@@ -1,6 +1,6 @@
 # C544 — aggregate Lean and trust gate for the beyond-four PRS paper
 
-**Lane:** `reed-solomon` · **Status:** queued after C540--C543
+**Lane:** `reed-solomon` · **Status:** complete 2026-07-24
 
 ## Objective
 
@@ -23,3 +23,5 @@ redundancy-nine C517 terminal and reconciling every manuscript claim with its ex
   than silently promoted.
 
 Before any Lean operation, read `lean/AGENTS.md` completely.
+
+Result: `notes/2026-07-24-c544-beyond-four-prs-lean-aggregate.md`.
