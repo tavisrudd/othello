@@ -12,29 +12,30 @@ claim its exact trust route.
 
 The first levels and the contained/transverse fork point to one stable
 picture.  The bottom-cover point count is uniform and linear:
-Theorem~\ref{thm:uniform-transverse} gives its exact threshold, subject
-to an explicit nonbinding bound on the modular pullback degree.  The
-possible quadratic scale below is therefore allowance for the
-contained and modular component problem, not for rational points on
-the bottom cover.
+Theorem~\ref{thm:uniform-transverse} gives its exact threshold.  The
+remaining question is geometric containment.
 
-\begin{conjecture}[Stable polar classification]\label{conj:stable-polar}
-There is an absolute constant $C$ such that, at redundancy $r$, every
-split-free projective syndrome over $\F_q$ with $q\geq Cr^2$ lies
-either in the persistent locus or in a nonshallow component
-of the level-$r$ Lucas contraction kernel.  Equivalently, transverse
-arithmetic exceptions disappear uniformly, and the contained locus has
-no further stable component.
-In every characteristic for which that Lucas kernel has no nonshallow
-component, the persistent tangent and conjugate-secant families are
-the complete high-field list.
+\begin{conjecture}[Stable-component classification]
+\label{conj:stable-polar}
+The assertion \(\mathrm{SC}(j)\) holds at every redundancy \(j\geq6\):
+the recursively pointed contained bad scheme has no component outside
+\(\mathcal P_j\cup\mathcal M_j\).
 \end{conjecture}
 
-The Lucas clause is forced by the binary nucleus families at
-redundancies six and seven, which persist over infinitely many fields.
-The conjecture predicts that rank-two persistence and digit-controlled
-contraction kernels exhaust the stable locus, with the coherent polar
-flag eliminating everything transverse.
+This is not the conclusion of Theorem~\ref{thm:uniform-transverse}:
+the conjecture is a scheme-theoretic component assertion with no
+field-size conclusion.  If it holds through redundancy \(r\), the
+theorem supplies the arithmetic statement
+\[
+ q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor
+ \quad\Longrightarrow\quad
+ \text{split-free locus}\subset\mathcal P_r\cup\mathcal M_r.
+\]
+Proposition~\ref{prop:r6-contained} and
+Corollary~\ref{cor:r7-contained} prove the first two assertions
+unconditionally.  The modular term is necessary in small
+characteristic, but is empty when \(\operatorname{char}\F_q>r-1\);
+this does not remove the large-characteristic R5 cyclic carrier.
 
 The present results establish the first levels of this picture but do
 not constitute an arbitrary-redundancy classification.
@@ -44,15 +45,21 @@ not constitute an arbitrary-redundancy classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item At higher redundancy the remaining input is the chain of
-      level-specific contained-component assertions.  The bottom
-      monodromy and point count are the uniform R5 calculation.
+\item At higher redundancy the remaining input is
+      \(\mathrm{SC}(j)\).  The bottom monodromy, point count,
+      collision alternative, and transverse degree budget are uniform.
 \end{enumerate}
 
 Thus Theorem~\ref{thm:uniform-transverse} is conditional rather than an
-arbitrary-redundancy classification: higher-level persistent and
-modular contained loci remain open here.  In particular, the paper
-does not settle the general Reed--Solomon deep-hole conjecture.
+arbitrary-redundancy classification: exclusion of additional
+higher-level contained components remains open.  In particular, the
+paper does not settle the general Reed--Solomon deep-hole conjecture.
+
+The last sporadic fields at redundancies five, six, and seven are
+\(19,13,11\), while the corresponding point-count gates are
+\(23,29,37\).  These opposite trends ask whether sufficiently high
+redundancy has any sporadic fields outside the persistent and modular
+loci.
 
 The structural conclusion is nevertheless stable.  Beyond redundancy
 four, deepness is no longer controlled by one invariant or by isolated

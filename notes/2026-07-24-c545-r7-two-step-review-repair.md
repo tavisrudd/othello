@@ -2,12 +2,13 @@
 
 **Lane:** `reed-solomon`  
 **Date:** 2026-07-24  
-**Status:** repaired and independently confirmed
+**Status:** repaired; final referee grade A (93)
 
 ## Result
 
 The retained R5--R7 manuscript now answers the second correctness review without
-using a new finite certificate.
+using a new finite certificate.  The final referee recommends banking the
+uniform component upgrade recorded below and stopping mathematical expansion.
 
 - The threshold function is printed as
   \[
@@ -71,19 +72,18 @@ marker contributes at most \(6\), so
  Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor .
 \]
 At an intermediate redundancy \(j\), with \(s=r-j\) old markers, the
-parameter budget is
+bottom stage has
 \[
- d_j\leq3+m+(2j-6)+3s=3r+m-j-3,
+ d_6\leq3+4+6+3(r-6)=3r-5.
 \]
-where \(m\) bounds the modular pullback degrees at every stage.  Hence
-\(q+1>d_j\) is automatic whenever \(q\geq Q_r\) and
+At every \(j\geq7\), the modular pullback is linear and the collision
+series is separable, so
 \[
- m<3r-6+\lfloor2\sqrt{6r-17}\rfloor .
+ d_j\leq3+1+(2j-6)+3(r-j)=3r-j-2<3r-5.
 \]
-The theorem
-assumes the whole recursively pointed chain
-\(\mathrm{CC}(j-1,1)\), \(6\leq j\leq r\); it does not promote the
-proved R6/R7 contained classifications to arbitrary degree.
+Hence \(q+1>d_j\) is automatic whenever \(q\geq Q_r\).  The theorem
+assumes only the stable-component assertions \(\mathrm{SC}(j)\),
+\(6\leq j\leq r\); it does not assert them in arbitrary degree.
 
 The same pass factors the two marker-equals-fixed-root computations
 through one marker--ramification lemma, expands the syndrome/recurrence
@@ -123,21 +123,28 @@ outside \(\mathcal P_j\cup\mathcal M_j\); the corresponding
 line, after which the finite parameter scheme supplies the next marker.  The
 manuscript now says this before the uniform theorem.
 
-The final review found one overreach in the first uniform budget: the degree
-four cyclic/wild pullback is proved at the redundancy-five lower carrier, not
-uniformly at every higher intermediate level.  The theorem now writes \(m_j\)
-for the modular pullback degree at stage \(j\), assumes finiteness, and puts
-\(m=\max_jm_j\).  Its marker bound is
+The final review first isolated the degree-four term correctly: it belongs only
+to the R5 cyclic/wild carrier.  A further structural pass then removed the
+temporary arbitrary modular-degree hypothesis.  Every modular nucleus is
+linear, and the polar map is linear, so a transverse modular pullback has
+degree at most one.  Meanwhile an inseparable
+\(g^{j-4}_{j-2}\) forces
 \[
- d_j\leq3r+m-j-3\leq3r+m-9.
+ p\mid(j-2),\qquad p(j-4)\leq j-2.
 \]
-Consequently the bottom threshold \(Q_r\) also makes the parameter line
-nonbinding whenever
-\[
- m<3r-6+\lfloor2\sqrt{6r-17}\rfloor .
-\]
-For R6 and R7, \(m=4\), so the independently verified degree-\(13\) and
-degree-\(16\) packages and both headline classifications are unchanged.
+The only solutions are \((j,p)=(5,3),(6,2)\), exactly the two special
+arguments already printed; collision is separable for \(j\geq7\).  Thus the
+sharp uniform parameter bound is again \(3r-5\), attained at the bottom
+stage.  The independently verified degree-\(13\) and degree-\(16\) packages
+and both headline classifications are unchanged.
+
+Four alternatives in the contained-component assertion are therefore uniform.
+The remaining assertion, denoted \(\mathrm{SC}(j)\), is that no additional
+contained component occurs outside the persistent and modular loci.  This is
+not circular: \(\mathrm{SC}(j)\) is scheme-theoretic and contains no
+field-size conclusion, while the uniform theorem converts its validity through
+level \(r\) into the classification for \(q\geq Q_r\).  R6 and R7 prove their
+instances unconditionally.
 
 ## Editorial truth table
 
@@ -160,8 +167,12 @@ degree-\(16\) packages and both headline classifications are unchanged.
 | Whether a lower fixed factor can equal an old or new marker | settled | Equality with the new marker is in the pointed collision divisor; equality with the old marker is the nonzero degree-at-most-two evaluation-minor locus. |
 | Whether the repaired R7 proof is independently referee-clear | settled | The next reader reconstructed the degree-\(16\) package and independently checked the fixed-factor exclusion, marker--gcd equivalence, threshold arithmetic, and sample census invariants. |
 | Why the transverse thresholds differ by \(7,8,\ldots\) | settled | They are evaluations of \(Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor\); the point-count scale is linear. |
-| Whether the uniform theorem proves the stable-polar conjecture | open | No.  Its exact hypothesis is the chain of recursively pointed contained-component assertions.  Establishing that chain, including every modular locus, is the remaining mathematical gate. |
-| Whether the uniform theorem assumes inverse-image stability of the declared loci | settled | No.  Each current contraction is selected outside the next declared bad locus; the next \(\mathrm{CC}\) assertion excludes a wholly bad polar line and permits another transverse choice.  The manuscript now prints this induction invariant. |
-| Which numerical inequality can bind at arbitrary redundancy | settled with explicit hypothesis | The marker scheme has \(d_j\leq3r+m-j-3\).  The bottom point count remains binding provided \(m<3r-6+\lfloor2\sqrt{6r-17}\rfloor\); controlling the modular pullback degree is an additional arbitrary-level gate. |
+| Whether the uniform theorem is circular with the stable-component conjecture | settled | No.  \(\mathrm{SC}(j)\) has no field-size conclusion; it excludes additional scheme-theoretic contained components.  The theorem supplies the arithmetic threshold \(Q_r\). |
+| Whether \(\mathrm{SC}(j)\) holds in arbitrary degree | open | This is the remaining component problem.  Cyclic-type carriers are not identified uniformly; no arbitrary-level proof is claimed. |
+| Whether the uniform theorem assumes inverse-image stability of the declared loci | settled | No.  Each current contraction is selected outside the next declared bad locus; \(\mathrm{SC}(j)\) excludes a wholly bad polar line and permits another transverse choice.  The manuscript prints this induction invariant. |
+| Which numerical inequality can bind at arbitrary redundancy | settled | Linear modular pullbacks and uniform collision separability give \(d_j\leq3r-5<Q_r\).  Only the bottom point count binds. |
+| When the modular locus vanishes | settled sharpening | If \(p>r-1\), Lucas' theorem leaves no nucleus coordinate, hence \(\mathcal M_r=\varnothing\).  The R5 cyclic carrier is not modular and survives this observation. |
+| Whether marker clustering lowers \(\delta_r\) | rejected | At most three markers can share a fiber, and the same parameter freedom must avoid a bad scheme of degree on the order of \(3r\); clustering cannot spend that freedom a second time. |
+| Why the last sporadic fields decrease \(19,13,11\) while the point-count gates increase \(23,29,37\) | open | The tables establish the trend through R7.  Whether sufficiently high redundancy has no sporadic fields is a sharper component/arithmetic question, not answered here. |
 | Why \(\langle1,t^3,t^4\rangle\) is pointed-bad specifically at \(q=19\) | open | The six split members and their common infinity root are exact, but the intrinsic branch-divisor explanation remains the separately recorded C509 exceptional-cover question. |
 | External certificate and release packaging | separately owned | No certificate, replay, manifest, or release identifier was changed in this repair. |

@@ -77,14 +77,17 @@ pointed-collision exclusions.  The exact repair and mystery ledger are in
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
 next referee pass promotes the already uniform transverse argument:
-conditional on the full chain
-`\(\mathrm{CC}(j-1,1)\)` for `6<=j<=r` and the explicit bound
-`m < 3r-6+floor(2 sqrt(6r-17))` on the maximum modular pullback degree,
+conditional on the stable-component assertions `SC(j)` for
+`6<=j<=r`,
 every split-free redundancy-`r` syndrome above
 `6r-15+floor(2 sqrt(6r-17))` lies in the declared persistent/modular
-list.  The second specialist graded the paper A overall and identified
-this modular-degree hypothesis as the only substantive residual issue;
-the revised theorem now prints it.  The verified R6/R7 budgets and
+list.  The second specialist graded the paper A (93) overall.  Its final
+structural pass proves collision separability outside exactly
+`(j,p)=(5,3),(6,2)`, proves that transverse modular pullbacks have
+degree at most one, and restores the uniform sharp parameter bound
+`3r-5`.  Thus `SC(j)`---no additional contained component---is the
+only arbitrary-level hypothesis.  It has no field threshold, so the
+conditional theorem is not circular.  The verified R6/R7 budgets and
 headlines are unchanged.
 The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
 marker--ramification lemma.  The recurrence interpretation and exact
