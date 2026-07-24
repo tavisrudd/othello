@@ -881,8 +881,17 @@
       "last": 557,
       "purpose": "zero-defect matching classification, conic-sensitive moments, and coverage-first square-root constructions",
       "sequence": 98
+    },
+    {
+      "count": 1,
+      "first": 558,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 558,
+      "purpose": "audit and integrate zero-defect rigidity capstone into arcs-complete-outside-conic manuscript",
+      "sequence": 99
     }
   ],
-  "next_id": 558,
+  "next_id": 559,
   "schema": "codex-task-id-allocations-v1"
 }
