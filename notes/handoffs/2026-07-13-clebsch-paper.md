@@ -324,7 +324,10 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   replacement manuscript, and publish one claim-by-claim ledger with exact
   theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
-  replacement-spine claim is called Lean-formalized before this reconciliation and independent
+  public path may assume the unpublished monorepo layout: the paper repository and shared Lean
+  repository will be extracted separately with flattened roots, and verification accepts the
+  latter explicitly through `--lean-root`.
+  No replacement-spine claim is called Lean-formalized before this reconciliation and independent
   review. The user, not the implementing agent, launches Codex for the initial and post-fix reviews;
   the implementer stops and requests each review and may not spawn or simulate its reviewer. In
   particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
