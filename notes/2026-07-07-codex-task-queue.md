@@ -146,7 +146,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
-- **C592 `[relconic]` [ACTIVE]** — test whether the six-point arc/Gale common-concurrency statistic supplies a mixed rank-three matching invariant independent of the C554--C555 defect hierarchy, with an exact bounded falsifier and a go/no-go gate for C556 → `notes/2026-07-24-c592-gale-common-concurrency-falsifier.md`.
 - **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
 
 ### `ame-lu`
