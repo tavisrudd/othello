@@ -281,6 +281,19 @@ identification can explain why `q=11` belongs to a small family, but its proof
 and checker remain Paper II-owned.  Paper I therefore gains context without a
 new dependency or a second research program.
 
+The outward applications obey the same rule.  The prescribed-hole arcs
+paper supplies the general defect/reconstruction setting.  The cap-game
+lane is both origin and consumer: its conic-localized odd-plane escape
+exposed the `q=11` object, and it now uses the `q=5/q=11` conic-filling
+classification, the Clebsch icosahedral continuation complex, and the
+resulting orbit/response packets as finite inputs to C80's strict-overload
+kernel program.  The AME/LU paper sends the same
+`[6,3,4]_{11}` MDS object through the code--state dictionary; and the
+beyond-redundancy-four PRS paper extends the syndrome/uncovered-point method
+with a different higher-degree mechanism.  The first three are concrete
+interfaces to the rigidity object.  The last is methodological reach, not a
+Clebsch corollary.  None changes theorem ownership or the split manifests.
+
 From the standpoint of a demanding referee, the strongest Paper I is the
 17-page proof order plus auditability backports, not the current proof order
 with later sections removed.  The complete census earns space because it makes

@@ -154,6 +154,102 @@ common restriction to a conic. This is motivation, not proof inheritance.
 Paper II defines its marked-conic objects and quotient independently and
 must cite the final Paper I release rather than changing or extending it.
 
+### Outward-consequence bridge
+
+The introduction may use one compact paragraph to show that the rigidity
+geometry has mathematical consequences outside the three-paper sequence.
+Keep the interfaces and their strengths distinct:
+
+| Destination | Exact earned connection | Placement and boundary |
+|---|---|---|
+| prescribed-hole arcs | Paper I's conic-filling equality and uncovered-locus reconstruction are the exceptional small-arc face of the general defect and forward/inverse reconstruction theory | Paper I keeps its existing proposition-level citation; C182 must resolve the public provenance target. Paper II may name the general framework as context, not import a proof from it. |
+| projective cap game / CGT | This is the source problem as well as a consumer. Frame reduction and conic localization of the odd-plane game exposed the exceptional `q=11` six-arc. The `4<=k<=7` equality classification then leaves only the `q=5` frame and `q=11` Clebsch hexagon as full-conic seals. The `q=11` seed is a certified P-position whose conic extension complex is the icosahedron independence complex `1+12t+36t^2+20t^3`. | Present this as an origin-and-return loop, not a one-way application. It is a finite base case and response-packet template, not a proof of the all-odd-`q` cap-game kernel or the `(ON)` response theorem. |
+| AME/LU | The `H_3` six-arc gives an `[6,3,4]_{11}` MDS code and hence a minimum-support stabilizer `AME(6,11)` state. Projective rigidity fixes the discrete geometric input; the separate AME/LU theorem proves the LU-to-LC and scalar-invariant conclusions. | Use the arc--MDS--AME dictionary as a genuine application. Do not suggest that Paper I proves LU rigidity, or that Paper II's quotient theorem is needed by the AME/LU paper. The detailed backward citation belongs in the AME/LU introduction when both releases are citable. |
+| PRS beyond redundancy four | Both programs begin from projective syndromes as uncovered points/MDS extensions. The beyond-four paper shows that this geometric viewpoint scales to normal rational curves via Hankel systems and coherent polar flags. | This is reach of the method, not a corollary of Clebsch rigidity. Mention only as a continuation of the syndrome/uncovered-point mechanism; do not claim that the Clebsch equality or decoder proves a higher-redundancy classification. |
+
+Paper II's working introduction now contains this paragraph. Add exact
+bibliographic citations when its bibliography is integrated. Do not reopen
+the final-GO Paper I bytes to add a program survey. Paper III may synthesize
+these four avatars only if C579 first produces a principal theorem that makes
+them consequences or applications; otherwise retain this map as editorial
+routing rather than manuscript prose.
+
+The projective cap game has no citable public paper yet. Any manuscript
+mention must therefore be self-contained: define the normal-play rule
+(players alternately adjoin a point while keeping an arc; no legal move
+loses), state only the exact finite consequence proved in the local
+argument, and do not ask the reader to recognize `C80`, `(ON)`, `K_Omega`,
+or any internal program name. Those identifiers belong only in routing and
+verification records.
+
+The exact cap-lane return path is:
+
+```text
+odd-plane frame reduction and conic-localized escape
+  -> exceptional q=11 six-arc / full-conic seal
+  -> Clebsch rigidity and icosahedral continuation geometry
+  -> A5 orbitals, edge-to-pair packets, and marked-response compression
+  -> C80 strict-overload kernel K_Omega and the Rmax incidence packet
+```
+
+The proved C80 payoff is finite but substantial: `K_Omega` agrees with exact
+P/N values on the exhaustive `q=5,7` residual domains, selects exactly the
+135 P roots among all 210 raw `q=11` on-conic roots, and passes the stated
+`q=13,17` frozen gates. On the 135 `q=11` P roots, `Rmax` contains a
+lower-kernel response on all 2,720 certified marked edges. The Clebsch
+geometry supplies the exceptional seed, symmetry, and compression language;
+C80 separately supplies the game-value kernel and finite certificates.
+
+Do not promote the return path to the uniform crown. The current C80 records
+also prove that fixed-depth `capOK` absorption cannot scale: an `s`-cap with
+`capOK` forces `q<=binom(s,2)`, so response depth must grow with `q` or use a
+different P-guard. The q=17 marked-head exceptions split into five orbits,
+and the observed `Rmax` bulk is boundary absorption rather than a proved
+positive-overload exchange law. C82 therefore remains gated on a uniform
+membership/response theorem.
+
+### Paper I “teeth” candidate audit
+
+Paper I already contains its two strongest broadly legible consequences:
+decoder ambiguity reconstructs the Brianchon geometry, and a degree-at-most-
+three vanishing test recognizes the Clebsch class. If the introduction or
+conclusion is ever reopened, foreground those existing theorems before
+adding another research program.
+
+The only new outward examples strong enough to merit a Paper I sentence are:
+
+1. **Simultaneous MDS extensions / complete arcs.** The twelve deep-hole
+   directions have icosahedral conflict graph, with independence polynomial
+   `1+12t+36t^2+20t^3`; its maximal faces give exactly six complete
+   eight-arcs and twenty complete nine-arcs over the fixed seed. This is a
+   direct, certified continuation consequence and has a public provenance
+   route through the prescribed-hole arcs paper.
+2. **Self-contained cap-game origin.** Define the placement game in one
+   sentence, then say that the Clebsch seed localizes play to the icosahedral
+   continuation graph and is a P-position by antipodal pairing. This is
+   mathematically clean and explains why the object was studied, but because
+   the cap-game paper is unpublished it must include its own definitions and
+   the short argument.
+3. **AME state.** The displayed `[6,3,4]_{11}` code gives the equal-phase
+   minimum-support stabilizer `AME(6,11)` state by the standard MDS--AME
+   dictionary. This fact is immediate and citable independently of the
+   separate LU paper. Stop there: LU-to-LC rigidity and marginal separators
+   are the AME/LU paper's theorems, not Paper I consequences.
+4. **Algorithmic recognition / robustness.** Recast the existing
+   low-degree and gap theorems as an exact recognition certificate: compute
+   the uncovered syndrome locus and its cubic evaluation rank; acceptance
+   identifies the Clebsch class, while a one-point perturbation changes at
+   least eighteen locus points. This adds no claim and may communicate the
+   strength better than another external application.
+
+Do not use the following in Paper I: beyond-redundancy-four PRS (method
+reach only), the Paper II Coxeter/reflection theorem (wrong owner),
+Mathieu-hexad transversality (correct but decorative/negative), checked
+isoduality (minor side fact), or repair-code transfer (still an open agenda).
+Any new cap, extension-complex, or AME theorem-like statement would change
+Paper I's nineteen-row trust surface and require a fresh release review; a
+pure motivation sentence or reframing of an existing theorem would not.
+
 Use C399 as the conic-phase prelude and C403/C406/C411 with selective C412
 upgrades. Credit Edge and Dye for the exceptional configurations and avoid
 novelty claims for the raw `5/14/22` marker spaces, parent ambiguity, the
