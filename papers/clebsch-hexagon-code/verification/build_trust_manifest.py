@@ -382,6 +382,21 @@ def generic_components(label: str) -> list[dict[str, object]]:
         ]
     if label == "prop:modular-depth-plane":
         return [conceptual_component("modular depth quotient and Tate boundary", MODULAR_INPUTS, "Every rank, kernel, relation, and transfer calculation is printed or derived in the proof and appendix.")]
+    if label == "lem:rank-three-splitting":
+        return [
+            conceptual_component("elementary split--inert frame proof", TORSOR_INPUTS, "The proof lists the squares and multiplies the three displayed quadratic factorizations."),
+            lean_component("finite split--inert interface", ["gluing"]),
+        ]
+    if label == "prop:mod40-reciprocity":
+        return [
+            conceptual_component("quadratic reciprocity and Chinese-remainder proof", TORSOR_INPUTS, "The residue lists follow from the supplementary law for two and reciprocity for five."),
+            lean_component("conditional residue-partition interface", ["survival"]),
+        ]
+    if label == "lem:sign-torsor-no-section":
+        return [
+            conceptual_component("abstract quotient-action proof", TORSOR_INPUTS, "The first isomorphism theorem identifies the transitive two-point action and proves the fixed-point obstruction."),
+            lean_component("finite no-section and one-class interfaces", ["torsor"]),
+        ]
     return [conceptual_component("retained conceptual statement", CLASSICAL_INPUTS, "The unconditional local deduction is supplied in the manuscript.")]
 
 

@@ -3279,7 +3279,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1552",
+      "paper_location": "proposition at source line 1556",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -3288,6 +3288,242 @@
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
       "unconditional_remainder": "Every rank, kernel, relation, and transfer calculation is printed or derived in the proof and appendix."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Determinant square-class character on PGL2 with kernel PSL2",
+            "Quadratic-field split and inert factorization at the displayed primes",
+            "Classical Mathieu group names attached after literal finite closure"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "elementary split--inert frame proof",
+          "unconditional_remainder": "The proof lists the squares and multiplies the three displayed quadratic factorizations."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused",
+              "RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings",
+              "RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings",
+              "RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data",
+              "RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer",
+              "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy"
+            ],
+            "validation": {
+              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "finite split--inert interface"
+        }
+      ],
+      "id": "statement-lem-rank-three-splitting",
+      "paper_location": "lemma at source line 1611",
+      "route": "mixed",
+      "source": {
+        "claim_key": "lem:rank-three-splitting",
+        "kind": "theorem-environment",
+        "sha256": "cbc5bc84b2d84836c24e113ac19a553ccfc31ea933679ff5b490532c39c8f556"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Determinant square-class character on PGL2 with kernel PSL2",
+            "Quadratic-field split and inert factorization at the displayed primes",
+            "Classical Mathieu group names attached after literal finite closure"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "quadratic reciprocity and Chinese-remainder proof",
+          "unconditional_remainder": "The residue lists follow from the supplementary law for two and reciprocity for five."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschSurvivalBoundary.exact_mod40_residue_partition": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschSurvivalBoundary.exact_mod40_residue_partition",
+              "RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses"
+            ],
+            "validation": {
+              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "conditional residue-partition interface"
+        }
+      ],
+      "id": "statement-prop-mod40-reciprocity",
+      "paper_location": "proposition at source line 1717",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:mod40-reciprocity",
+        "kind": "theorem-environment",
+        "sha256": "2a7bef6a056c771655be39bc5667dad4bffe3d2981df0dd94670f615d0df2407"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Determinant square-class character on PGL2 with kernel PSL2",
+            "Quadratic-field split and inert factorization at the displayed primes",
+            "Classical Mathieu group names attached after literal finite closure"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "abstract quotient-action proof",
+          "unconditional_remainder": "The first isomorphism theorem identifies the transitive two-point action and proves the fixed-point obstruction."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_t11": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschTorsorRosetta.no_invariant_point": [
+                "propext",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_three_readouts": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschTorsorRosetta.q11_outer_readouts_agree": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschTorsorRosetta.no_invariant_point",
+              "RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_t11",
+              "RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_three_readouts",
+              "RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation",
+              "RelativeConicArcs.ClebschTorsorRosetta.q11_outer_readouts_agree",
+              "RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary"
+            ],
+            "validation": {
+              "command": "scripts/guarded-lean RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "finite no-section and one-class interfaces"
+        }
+      ],
+      "id": "statement-lem-sign-torsor-no-section",
+      "paper_location": "lemma at source line 1751",
+      "route": "mixed",
+      "source": {
+        "claim_key": "lem:sign-torsor-no-section",
+        "kind": "theorem-environment",
+        "sha256": "2a2699141115cf882d5e0f9a3a73abd46bdf99cb2181bcacbd3e23ea2d501e2b"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
       "components": [
@@ -4223,7 +4459,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1680",
+      "paper_location": "theorem at source line 1770",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -6020,7 +6256,7 @@
     "commit": "223584997c5691a60c066d865c0a0e449a38cd21",
     "url": "urn:repository:relative-conic-arcs-lean"
   },
-  "manuscript_sha256": "07804ac5cd480eee8648a2373d8a34a2c3bb789d95032222dd810b64e643f8c5",
+  "manuscript_sha256": "f0a70b77278c06a8fddd1b42cc6b134a864d80a984b678818443e4ff2b1bb275",
   "schema": "clebsch-trust-manifest-v1",
   "verify_all": {
     "checks": [

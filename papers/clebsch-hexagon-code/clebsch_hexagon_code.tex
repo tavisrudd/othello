@@ -1512,9 +1512,13 @@ $\mathrm{PGL}_2(q)$ is a named group-theoretic input.
 Theorem \ref{thm:headline-depth}(C1--C2).}
 Equation (10.1) and its annihilator calculation prove balanced uniqueness.
 The antipodal identity and (10.2) prove the even and linear cancellations.
-The exact cubic evaluations prove nonvanishing, and the relative-invariant
-lemma gives the kernel stabilizer.  All statements remain valid after an
-affine change of the quotient coordinates by the first-survival formula.
+For the displayed profile coordinate, the first possible odd survivor is
+\[
+  2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0\pmod {11},
+\]
+so degree three survives.  The relative-invariant lemma gives the kernel
+stabilizer.  All statements remain valid after an affine change of the
+quotient coordinates by the first-survival formula.
 
 \section{Six depth profiles and parent reconstruction}
 \label{sec:depth}
@@ -1581,12 +1585,53 @@ direct comparison proves set-theoretic separation.  The two singleton
 recovery maps give the unordered matching pair, after which the
 matching-decorated recovery theorem returns the parent.  Projectivity,
 the local two-dimensional commuting algebra, and exactness of
-$A_4$-fixed points give the $1\mid9\mid1$ quotient.  Exact matrices give
-the Tate cycle, the contraction kernel, the two distinct labelled
-relations, and the divided-transfer obstruction.
+$A_4$-fixed points give the $1\mid9\mid1$ quotient: the $A_5$ stabilizer
+has order prime to eleven, so its induced degree-eleven permutation module
+is projective; two-transitivity makes its commuting algebra
+$\F_{11}[I,J]$, and $J^2=11J=0$ makes that algebra local.  The module is
+therefore the indecomposable projective cover $P(1)$.  Its three
+$A_4$-orbit sums have one-dimensional all-ones socle, and quotienting by
+it gives the rank-two depth plane.  Since (10.2) spans the rational
+relation space and $\gcd(1,4,6)=1$, it is the unique primitive positive
+dependence.
+
+For the source boundary, the exact matrices give $N\pi=0$ with ranks two
+and one on three-spaces.  Hence
+$\operatorname{im}\pi\subseteq\ker N$ and both sides have dimension two,
+so they are equal; the displayed one-dimensional image of $N$ is the
+kernel of $\pi$.  Finally, in the orbit-sum basis put
+$s=(1,1,1)^t$ and $B=s(1,4,6)$.  Then $B^2=11B$; $B$ kills every
+balanced relation and satisfies $Bs=11s$.  Divided transfer therefore
+kills the source relation but fixes the depth socle, proving the stated
+non-identification.
 
 \section{Rank-three arithmetic gluing}
 \label{sec:gluing}
+
+\begin{lemma}[The split--inert frame calculation]
+\label{lem:rank-three-splitting}
+The frame polynomials at the three working primes have the following
+factorizations:
+\[
+\begin{array}{c|c|c}
+A_3,\ q=5&x^2-2&\text{irreducible},\\
+B_3,\ q=7&x^2-2=(x-3)(x-4)&\text{split},\\
+H_3,\ q=11&T^2-T-1=(T-4)(T-8)&\text{split}.
+\end{array}
+\]
+In the first row the two roots form one Frobenius orbit over $\F_{25}$;
+in the last two rows they are two rational points exchanged by the
+quadratic conjugation.
+\end{lemma}
+
+\begin{proof}
+The nonzero squares modulo five are $1$ and $4$, so $2$ is not a square.
+If $u^2=2$ in $\F_{25}$, the nontrivial automorphism of
+$\F_{25}/\F_5$ sends $u$ to $-u$; it is Frobenius, hence the two roots
+form one orbit.  Direct multiplication gives the two displayed split
+factorizations modulo seven and eleven.  In each split quadratic the
+nontrivial algebra involution exchanges its two roots.
+\end{proof}
 
 The factorization split has a uniform arithmetic description at the three
 conic fields.  The $A_3$ marker polynomial is inert over $\F_5$, and its two
@@ -1669,6 +1714,32 @@ according to the exact residue partition checked by the certificate.  It
 is not an all-prime reciprocity theorem, a density statement, or a
 construction of a common quadratic-character carrier.
 
+\begin{proposition}[The conditional mod-$40$ law]
+\label{prop:mod40-reciprocity}
+Let $\ell\ne2,5$ be an odd prime satisfying the frozen golden-marker
+hypotheses.  Golden splitting is equivalent to
+$(5/\ell)=+1$.  Among the split classes, the sheets are fused when
+$(2/\ell)=+1$ and visible when $(2/\ell)=-1$.  Consequently the
+split-visible residue classes modulo $40$ are
+\[
+  11,\ 19,\ 21,\ 29,
+\]
+and the split-fused classes are
+\[
+  1,\ 9,\ 31,\ 39.
+\]
+The other eight unit classes modulo $40$ are golden-inert.
+\end{proposition}
+
+\begin{proof}
+Quadratic reciprocity gives $(5/\ell)=(\ell/5)$, so golden splitting means
+$\ell\equiv\pm1\pmod5$.  The supplementary law gives
+$(2/\ell)=+1$ exactly for $\ell\equiv\pm1\pmod8$ and $-1$ exactly for
+$\ell\equiv\pm3\pmod8$.  Combining the two congruences by the Chinese
+remainder theorem gives the two displayed four-element lists.  The
+remaining eight units modulo $40$ have $(5/\ell)=-1$.
+\end{proof}
+
 The final two rows are likewise bounded.  Their certificates check
 finite quadratic-value histograms and matching-intersection signatures; the
 divisor-theoretic theta interpretation uses the cited classical input.  The
@@ -1676,6 +1747,25 @@ quantum certificate proves the displayed monomial transport,
 signed-transpose identity, and complete fixed-party kernel--image
 equivalence.  It does not classify arbitrary complex local unitaries or
 assert a canonical geometric reconstruction of every state.
+
+\begin{lemma}[The sign torsor has no unmarked section]
+\label{lem:sign-torsor-no-section}
+Let $\chi:G\to C_2$ be surjective and put $H=\ker\chi$.  Then $G/H$ is a
+free transitive $C_2$-torsor with no $G$-fixed point.  A $G$-equivariant
+choice of one of its points therefore does not exist, while adjoining one
+chosen point supplies exactly one bit and determines every
+$C_2$-equivariant realization of the same torsor.
+\end{lemma}
+
+\begin{proof}
+The first isomorphism theorem identifies $G/H$ with $C_2$ as a
+$G$-set, where $G$ acts through the surjection $\chi$.  Surjectivity makes
+the nontrivial element exchange the two points, so neither is fixed.  A
+$G$-equivariant choice from an unmarked singleton base would have fixed
+image and is impossible.  Conversely a chosen point labels the two
+elements by $0$ and $1$; equivariance then transports that choice uniquely
+through any torsor isomorphism.
+\end{proof}
 
 \begin{theorem}[Torsor Rosetta: one class and one forced outer swap]
 \label{thm:torsor-rosetta-close}
@@ -1956,6 +2046,13 @@ an outer-odd covector.  Contraction against that covector has matrix
 \]
 in the frozen relative basis, so it has the same kernel and constructs the
 same plane.
+
+Indeed $N\pi=0$ makes $\operatorname{im}\pi$ a subspace of $\ker N$;
+the two spaces have the same dimension two, proving equality.  The first
+isomorphism theorem then identifies
+$R/\operatorname{im}N=R/\ker\pi$ with $\operatorname{im}\pi=\ker N$.
+The contraction matrix has rank two and kernel $[1:3:9]$, giving the
+second construction without fitting an isomorphism.
 
 These two source constructions do not identify the Tate plane with the
 depth plane.  The three canonical $A_4$ orbit-cube classes have sole

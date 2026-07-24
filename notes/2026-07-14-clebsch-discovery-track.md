@@ -1004,3 +1004,32 @@ published open problems and questions newly posed by this project.
   solution of `tau^2=tau+1`, while the complete characteristic-five projective spectrum reduces in
   a 31-point transparent check. **Disposition:** retain both as named theorems rather than leaving
   the modular caveat solely in prose.
+
+## 2026-07-23 — Paper-I proof-promotion screen
+
+- Three computation-facing statements earn promotion because they replace trust dependencies in
+  the central close with short complete arguments: the A3/B3/H3 split--inert frame calculation
+  (squares and quadratic factorization), the conditional mod-40 law (quadratic reciprocity plus
+  CRT), and the determinant-sign no-section/one-bit lemma
+  (`G/ker(chi) ~= C2`).  Exact computation remains only as independent replay.
+- The cubic-first and C412 Tate rows do not become additional theorems.  Their existing statements
+  are strengthened by proof: one displayed cubic coordinate is nonzero; equal dimensions plus
+  `N*pi=0` prove the Tate image/kernel equality; and
+  `B=s(1,4,6)`, `B^2=11B` proves the divided-transfer obstruction.
+- **Banked, not promoted — conceptual rigidity census replacement.**  A proof avoiding the
+  frame-normalized numerical clauses would require a new classification or stability theorem.
+  Reopen only if it removes the remaining global/perturbation enumeration without importing a
+  theorem at least as strong as the result.
+- **Banked, not promoted — Witt/secant/Mathieu exhaustion.**  QR difference-set identities explain
+  part of the table, but a proof of all 66 secants, the two `M11` parents, and the forced-outer
+  `M12` normalizer boundary would either reproduce a substantial finite-group classification or
+  cite it wholesale.  Keep the exact certificate unless a short representation-free derivation
+  of the literal frozen action is found.
+- **Banked, not promoted — theta and fixed-party quantum erasure.**  The current statements are
+  deliberately finite passage tests.  Promote only if a uniform invariant-theoretic theorem
+  explains the equal signatures/transport for the whole golden family; a reformatted table or
+  another exhaustive search does not earn manuscript space.
+- **Banked, not promoted — a general information-lattice functor.**  The H3
+  `22 -> 6 -> 2 -> 1` instance is proved, but mixed-Hecke coordinates need not separate double
+  cosets and may acquire further modular kernels.  No general theorem is claimed until hypotheses
+  controlling both failures are identified.

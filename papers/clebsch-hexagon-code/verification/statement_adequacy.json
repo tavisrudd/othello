@@ -1,8 +1,8 @@
 {
   "schema": "clebsch-statement-adequacy-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "07804ac5cd480eee8648a2373d8a34a2c3bb789d95032222dd810b64e643f8c5",
-  "statement_count": 24,
+  "source_sha256": "f0a70b77278c06a8fddd1b42cc6b134a864d80a984b678818443e4ff2b1bb275",
+  "statement_count": 27,
   "statements": [
     {
       "claim_key": "thm:headline-rigidity-phase",
@@ -207,16 +207,43 @@
       "environment": "proposition",
       "label": "prop:modular-depth-plane",
       "sha256": "4bf9a65143de9bc6f63e5fde00925ec384d2f3e4c79089e18c30e91b610545de",
-      "source_line": 1552,
+      "source_line": 1556,
       "tex": "\\begin{proposition}[Modular depth quotient and source boundary]\n\\label{prop:modular-depth-plane}\nOver $\\F_{11}$ the depth plane is\n\\[\n  P(1)^{A_4}/\\operatorname{soc}P(1),\\qquad\n  \\operatorname{Loewy}(P(1))=1\\mid9\\mid1.\n\\]\nSeparately, the three-dimensional relative-cubic invariant space $R$ and\nits coinvariants $M_G$ have canonical maps\n\\[\n R\\xrightarrow{\\ \\pi\\ }M_G\\xrightarrow{\\ N\\ }R\n\\]\nof ranks two and one, with\n$\\operatorname{im}\\pi=\\ker N$ and\n$\\operatorname{im}N=\\ker\\pi=\\langle[1:3:9]\\rangle$.\nInvariant-to-coinvariant projection and contraction by the unique\nrank-one semi-invariant form therefore construct the same canonical Tate\ntwo-plane.  This plane is not naturally identified with the depth plane:\nthe labelled cubic orbit classes have relation $[2,9,1]$, while the depth\nprofiles have relation $[2,8,1]$; divided transfer kills the former\nbalanced relations and fixes the latter socle.\n\\end{proposition}",
       "title": "Modular depth quotient and source boundary"
+    },
+    {
+      "claim_key": "lem:rank-three-splitting",
+      "environment": "lemma",
+      "label": "lem:rank-three-splitting",
+      "sha256": "cbc5bc84b2d84836c24e113ac19a553ccfc31ea933679ff5b490532c39c8f556",
+      "source_line": 1611,
+      "tex": "\\begin{lemma}[The split--inert frame calculation]\n\\label{lem:rank-three-splitting}\nThe frame polynomials at the three working primes have the following\nfactorizations:\n\\[\n\\begin{array}{c|c|c}\nA_3,\\ q=5&x^2-2&\\text{irreducible},\\\\\nB_3,\\ q=7&x^2-2=(x-3)(x-4)&\\text{split},\\\\\nH_3,\\ q=11&T^2-T-1=(T-4)(T-8)&\\text{split}.\n\\end{array}\n\\]\nIn the first row the two roots form one Frobenius orbit over $\\F_{25}$;\nin the last two rows they are two rational points exchanged by the\nquadratic conjugation.\n\\end{lemma}",
+      "title": "The split--inert frame calculation"
+    },
+    {
+      "claim_key": "prop:mod40-reciprocity",
+      "environment": "proposition",
+      "label": "prop:mod40-reciprocity",
+      "sha256": "2a7bef6a056c771655be39bc5667dad4bffe3d2981df0dd94670f615d0df2407",
+      "source_line": 1717,
+      "tex": "\\begin{proposition}[The conditional mod-$40$ law]\n\\label{prop:mod40-reciprocity}\nLet $\\ell\\ne2,5$ be an odd prime satisfying the frozen golden-marker\nhypotheses.  Golden splitting is equivalent to\n$(5/\\ell)=+1$.  Among the split classes, the sheets are fused when\n$(2/\\ell)=+1$ and visible when $(2/\\ell)=-1$.  Consequently the\nsplit-visible residue classes modulo $40$ are\n\\[\n  11,\\ 19,\\ 21,\\ 29,\n\\]\nand the split-fused classes are\n\\[\n  1,\\ 9,\\ 31,\\ 39.\n\\]\nThe other eight unit classes modulo $40$ are golden-inert.\n\\end{proposition}",
+      "title": "The conditional mod-$40$ law"
+    },
+    {
+      "claim_key": "lem:sign-torsor-no-section",
+      "environment": "lemma",
+      "label": "lem:sign-torsor-no-section",
+      "sha256": "2a2699141115cf882d5e0f9a3a73abd46bdf99cb2181bcacbd3e23ea2d501e2b",
+      "source_line": 1751,
+      "tex": "\\begin{lemma}[The sign torsor has no unmarked section]\n\\label{lem:sign-torsor-no-section}\nLet $\\chi:G\\to C_2$ be surjective and put $H=\\ker\\chi$.  Then $G/H$ is a\nfree transitive $C_2$-torsor with no $G$-fixed point.  A $G$-equivariant\nchoice of one of its points therefore does not exist, while adjoining one\nchosen point supplies exactly one bit and determines every\n$C_2$-equivariant realization of the same torsor.\n\\end{lemma}",
+      "title": "The sign torsor has no unmarked section"
     },
     {
       "claim_key": "thm:torsor-rosetta-close",
       "environment": "theorem",
       "label": "thm:torsor-rosetta-close",
       "sha256": "69b93d89d87d63b619846167a919d542441746c36b5eae06cec3d57de72e5675",
-      "source_line": 1680,
+      "source_line": 1770,
       "tex": "\\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]\n\\label{thm:torsor-rosetta-close}\nLet $T_q$ denote the determinant-sign torsor for the split rank-three\nworking primes.  The following statements hold.\n\\begin{enumerate}[label=\\textup{(E\\arabic*)},leftmargin=*]\n\\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free\n$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two\nspin lifts form one Frobenius orbit over $\\F_{25}$, hence one connected\nétale point over $\\F_5$ and no orientation bit.\n\\item The certified dictionary has twelve rows: the two matching sheets,\nthe two nontrivial unipotent classes, the two cyclotomic period factors,\nthe two primes of $\\mathbb Q(\\sqrt{-q})$, the two primes of\n$\\mathbb Z[\\sqrt2]$ or $\\mathbb Z[\\phi]$ above the working prime, the two lower Weil\nconstituents, the two cubic signs, the two QR/Barker polarities, the two\nsigned Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero\n$\\operatorname{Spec}\\mathbb Q(\\sqrt5)$ row, and the Reed--Solomon fixed-child\nextremal fibre.  Each two-valued row available at a given $q$ is\nouter-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting\nface of the same swap, not another two-point carrier; the\ncharacteristic-zero row specializes specifically to $T_{11}$.\n\\item The marked Coxeter matching points all available rows simultaneously\nthrough the single trace rule.  After forgetting it there is no section:\nthe \\v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor\ndescription are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]\n\\item At $q=11$ the Mathieu hinge is forced outer.  Indeed\n$N_{M_{12}}(\\mathrm{PSL}_2(11))=\\mathrm{PSL}_2(11)$,\n$\\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents\nare non-conjugate in $M_{12}$.\n\\item The cubic sign and trace residue co-vary with $T_q$, but their\nnumerical dictionary is convention-dependent between $q=7$ and $q=11$.\nThe uniform datum is the marking, not a residue formula.  No integral\nGalois-odd cubic is assumed: the bit is carried arithmetically by the prime\nfibre.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Torsor Rosetta: one class and one forced outer swap"
     }
