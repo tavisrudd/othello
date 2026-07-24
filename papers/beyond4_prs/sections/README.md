@@ -15,9 +15,10 @@ are numbered by reading order:
 10. `10-verification.tex`
 11. `11-provenance-boundary.tex`
 
-Appendices live under `appendices/`.  Files are extracted only after the
-corresponding proof expansion stabilizes, so line-level mathematical review
-does not chase simultaneous content and path churn.
+Appendices live under `appendices/`; the statement-adequacy appendix is
+`appendices/statement-adequacy.tex`.  The section extraction is complete, and
+`main.tex` is now only the preamble, ordered inputs, bibliography, and document
+terminator.
 
 The eventual paper-only export preserves this layout.  It does not publish
 the development monorepo.

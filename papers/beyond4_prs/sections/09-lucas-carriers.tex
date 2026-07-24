@@ -1,0 +1,235 @@
+\section{Lucas carriers and their arithmetic}\label{sec:lucas}
+
+Let $d=2^s$ with $s\geq2$ in characteristic two.  Lucas' theorem gives the top
+nucleus of the degree-$d$ normal rational curve as
+\[
+ \PP\langle e_1,\ldots,e_{d-1}\rangle,
+\]
+whose coherent degree-$(d+1)$ lift is
+\[
+ \cM_{d+1}=\PP\langle e_2,\ldots,e_{d-1}\rangle.
+\]
+At the distinguished Borel endpoint $e_{d-1}$ the Hankel kernel
+contains
+\[
+       \cU_s=\langle1,t,t^d\rangle.
+\]
+
+\begin{proposition}[Lucas overlap kernel]\label{prop:lucas-kernel}
+For $d=2^s$, the lower nucleus and its coherent lift are exactly
+\[
+\PP\langle e_1,\ldots,e_{d-1}\rangle,\qquad
+\PP\langle e_2,\ldots,e_{d-1}\rangle.
+\]
+At $e_{d-1}$, $\cU_s$ is endpoint-specific; the intersection common to
+the full carrier is only $\langle1,t^d\rangle$.
+\end{proposition}
+
+\begin{proof}
+Lucas' theorem gives
+$\binom di\equiv0\pmod2$ for $0<i<d$.  Applying this support condition
+to the two consecutive contraction rows removes the two endpoint
+coordinates and gives the displayed lift.  For a basis point $e_i$,
+the Hankel equations kill the adjacent coefficients $b_{i-1},b_i$.
+At $i=d-1$, the monomials $1,t,t^d$ survive.  Varying $i$ over the
+carrier leaves only $1,t^d$ in the intersection.
+\end{proof}
+
+\begin{proposition}[Linearized root cover]\label{prop:linearized}
+On the generic locus $BC\ne0$, the normalized ordered-root cover of
+$A+Bt+Ct^d$ has geometric
+monodromy $\operatorname{AGL}_1(\F_d)$, minimal constant field
+$\F_d$, and based deck group $C_{d-1}$.  Coefficientwise Frobenius acts
+on the based group by multiplication by two, with exact order $s$.
+The net contains a split squarefree member over $\F_{2^m}$ if and only
+if $s\mid m$.
+\end{proposition}
+
+\begin{proof}
+After dividing by $C$, choose
+\[
+ \beta^{d-1}=B/C,\qquad y^d+y=A/(C\beta^d).
+\]
+The roots are $\{\beta(y+c):c\in\F_d\}$.  Their affine symmetries give
+$\operatorname{AGL}_1(\F_d)$.  The Kummer extension has degree $d-1$
+because the valuation of $B/C$ at its simple zero is one.  After
+adjoining $\beta$, the right side of the Artin--Schreier equation has a
+simple pole in $A/C$; an element of the form $z^d+z$ has pole order
+divisible by $d$.  Hence the additive extension has degree $d$, the
+cover is connected, and its geometric monodromy is the full affine
+group.
+
+Ratios of nonzero root differences recover $\F_d$, so this is the
+minimal constant field.  Boundary members with $C=0$ have degree at
+most one, while those with $B=0$ have zero derivative; neither is split
+squarefree of degree $d$.  Thus a split member forces
+$\F_d\subset\F_{2^m}$, equivalently $s\mid m$.  Conversely $t^d+t$
+splits simply under that inclusion.  The equality
+$\operatorname{ord}_{2^s-1}(2)=s$ follows from
+\[
+\gcd(2^r-1,2^s-1)=2^{\gcd(r,s)}-1.
+\]
+\end{proof}
+
+At $s=2$ this recovers the odd/even extension law at redundancies six
+and seven.  The first fresh carrier is $s=3$, in syndrome degree nine.
+The $\F_8$-linear section has order-three component Frobenius, but its
+four quotient directions change the full answer.
+
+\begin{proposition}[The $e_7$ orbit]\label{prop:e7-orbit}
+The stabilizer of $e_7\in\PP(\Gamma^9E)$ is the upper Borel, so its
+$\PGL_2$-orbit is $\PP^1$.  At the distinguished point,
+\[
+W_{e_7}=\langle1,t,t^2,t^3,t^4,t^5,t^8\rangle.
+\]
+\end{proposition}
+
+\begin{proof}
+Lucas parity and extraction of the $x^2y^7$ coefficient give
+\[
+g e_7=(ad+bc)^2
+\bigl(b^5e_2+b^4d\,e_3+bd^4e_6+d^5e_7\bigr).
+\]
+This is proportional to $e_7$ exactly when $b=0$.  The apolar action is
+contragredient, so it transports both $W_f$ and split root divisors.
+The displayed kernel follows from the two Hankel equations.
+\end{proof}
+
+\begin{proposition}[Framed Artin--Schreier quotient]
+\label{prop:e7-as}
+Order roots $0,1,a,b,c,d,u,v$ and put
+\[
+S=a+b+c+d,\quad E=ab+ac+ad+bc+bd+cd,\quad
+h=1+S,\quad p=1+E+S+S^2.
+\]
+On the open set where the six fixed roots are distinct,
+$h,p,1+h+p$ are nonzero, and
+$x^2+hx+p\ne0$ for $x=a,b,c,d$, the remaining pair is the
+geometrically integral Artin--Schreier cover
+\[
+       y^2+y=p/h^2.
+\]
+Its rational lifting law is
+$\Tr_{\F_{2^m}/\F_2}(p/h^2)=0$.
+\end{proposition}
+
+\begin{proof}
+The first elementary-symmetric equation gives
+$u+v=1+S=h$.  In the second equation the root $1$ contributes
+$S+u+v=1$, so
+\[
+ 0=E+S(u+v)+uv+S+u+v
+   =E+Sh+uv+1,
+\]
+and hence $uv=p$.  Thus $u,v$ are the roots of
+$z^2+hz+p$.  The divisor $h=0$ is exactly their collision divisor.
+On $h\ne0$, putting $y=u/h$ gives the displayed
+Artin--Schreier equation.
+
+It remains to prove that its class is geometric, rather than a
+constant-field artifact.  Write $B=b+c+d$, so $h=a+1+B$.  Along the
+prime divisor $h=0$, the leading coefficient of the order-two pole of
+$p/h^2$ is
+\[
+D=1+bc+bd+cd+B+B^2,
+\]
+in the residue field $\overline{\F}_2(b,c,d)$.  Its derivative
+$\partial D/\partial b=1+c+d$ is a nonzero rational function, so $D$
+is not a square there.  If $p/h^2=g^2+g$, the order-two pole would
+force $g$ to have a simple pole whose principal coefficient squares
+to $D$, a contradiction.  The class therefore stays nonzero after
+algebraic extension of the constants, proving geometric integrality
+and geometric monodromy $C_2$.
+
+The remaining open conditions have exact collision meanings:
+$p\ne0$ excludes $u,v=0$, $1+h+p\ne0$ excludes $u,v=1$, and
+$x^2+hx+p\ne0$ excludes $u,v=x$ for
+$x\in\{a,b,c,d\}$.  Over $\F_{2^m}$ the standard
+Artin--Schreier criterion gives a rational pair precisely when
+$\Tr_{\F_{2^m}/\F_2}(p/h^2)=0$.
+\end{proof}
+
+\begin{proposition}[Additive frame cover]\label{prop:e7-additive}
+The family
+\[
+t^8+A_4t^4+A_2t^2+A_1t+A_0,\qquad A_1\ne0,
+\]
+has a connected affine-frame cover with geometric monodromy
+$\operatorname{AGL}_3(\F_2)$.
+\end{proposition}
+
+\begin{proof}
+For an $\F_2$-space $U$ and $w\notin U$,
+\[
+L_{U+\langle w\rangle}=L_U^2+L_U(w)L_U.
+\]
+Induction gives exponents $8,4,2,1$ and
+$A_1=\prod_{v\ne0}v\ne0$.  An affine frame is an origin plus three
+independent differences.
+
+Let $\mathcal F$ be the open affine frame space of tuples
+$(a;v_1,v_2,v_3)$ with independent $v_i$.  It is geometrically
+integral.  Sending a frame to the monic polynomial with root set
+\[
+ a+\langle v_1,v_2,v_3\rangle_{\F_2}
+\]
+lands in the displayed coefficient family.  Conversely, the eight
+geometric roots of a generic member form an affine three-space: the
+difference set is the kernel of its additive part, and any root is an
+origin.  Its ordered affine frames are therefore exactly one free
+orbit of
+\[
+ \F_2^3\rtimes\operatorname{GL}_3(\F_2).
+\]
+Thus the generic fiber has exactly
+$8|\operatorname{GL}_3(\F_2)|=1344$ points, every two of them differ
+by one affine transformation, and the invariant function field is the
+coefficient field.  The normalization is connected and has exact
+geometric deck group $\operatorname{AGL}_3(\F_2)$.
+\end{proof}
+
+\begin{remark}[Logical boundary]
+The generic Artin--Schreier cover describes the full framed quotient,
+and Proposition~\ref{prop:e7-additive} identifies a proper additive
+subcover.  The shallowness theorem below does not require a rational
+point on the generic cover: its witnesses are constructed directly
+from rational three-dimensional subspaces.
+\end{remark}
+
+\begin{theorem}[Shallowness of the degree-nine $e_7$ orbit]
+\label{thm:e7}
+For every $m\geq3$, the entire $\PGL_2$-orbit of $e_7$ is shallow over
+$\F_{2^m}$.  The number of monic additive-affine witnesses is
+\[
+\frac{q(q-1)(q-2)(q-4)}{1344}.
+\]
+\end{theorem}
+
+\begin{proof}
+Every three-dimensional $\F_2$-subspace $V\subset\F_{2^m}$ gives
+\[
+L_V(t)=\prod_{v\in V}(t-v)
+      =t^8+A_4t^4+A_2t^2+A_1t.
+\]
+The $t^7,t^6$ coefficients vanish, so $L_V\in W_{e_7}$, and
+$A_1\ne0$ makes its roots simple.  Every admissible binary
+field in the statement contains such a three-space.
+Proposition~\ref{prop:e7-orbit} transports the witness around the
+orbit.
+
+There are
+\[
+\binom m3_2=\frac{(q-1)(q-2)(q-4)}{168}
+\]
+three-spaces.  Each has $q/8$ affine cosets, and
+$L_{a+V}(t)=L_V(t)+L_V(a)$.  A split polynomial recovers its root
+coset, whose difference set recovers $V$; hence distinct cosets or
+three-spaces cannot be counted twice.  Multiplying the two factors
+gives the displayed formula.
+\end{proof}
+
+Thus the order-three law of Proposition~\ref{prop:linearized} belongs
+to a proper $\F_8$-linear section, not to deepness of the full
+$e_7$ kernel.  The other intrinsic strata of the six-dimensional
+degree-nine carrier are not classified here.
+

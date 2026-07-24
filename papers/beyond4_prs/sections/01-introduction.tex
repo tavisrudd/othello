@@ -1,0 +1,209 @@
+\section{Introduction}
+
+Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
+obtained by evaluating homogeneous binary forms of degree $k-1$ on
+$\PP^1(\F_q)$.  If the redundancy is
+\[
+  r=q+1-k,
+\]
+a parity-check matrix has as columns the $\F_q$-points of the
+degree-$(r-1)$ normal rational curve
+\[
+  \NRC_{r-1}=\{(1,t,\ldots,t^{r-1}):t\in\F_q\}
+              \cup\{(0,\ldots,0,1)\}\subset\PP^{r-1}.
+\]
+Call a projective syndrome direction \emph{split-free} if it is not
+contained in the span of $r-2$ distinct columns.  When
+$\rho(\PRS(q+1-r))=r-1$, the split-free directions are precisely the
+projective syndrome directions of deep-hole cosets.  The correspondence between deep holes,
+one-symbol MDS extensions, and uncovered points of a normal rational
+curve was developed in \cite{Kaipa2017,ZWK2020}.  Zhang, Wan, and Kaipa
+classified projective Reed--Solomon deep-hole directions through
+redundancy four and identified redundancy five as the next case
+\cite{ZWK2020}.  Our first theorem gives the corresponding all-field
+redundancy-five classification.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Notation used throughout the paper.}
+\label{tab:notation}
+\begin{tabular}{cl}
+\toprule
+Symbol & Meaning\\
+\midrule
+$q$ & field size; all numerical thresholds are thresholds on prime powers\\
+$k$ & code dimension in $\PRS(k)$\\
+$r=q+1-k$ & redundancy\\
+$n=r-1$ & divided-power degree of a syndrome representative\\
+$E$ & a two-dimensional vector space over the current base field\\
+$f\in\Gamma^nE$ & divided-power representative of a projective syndrome\\
+$W_f\subset\Sym^{n-1}E^\vee$ & Hankel/apolar witness system annihilated by $f$\\
+$g,\delta,\kappa$ & genus, deletion degree, and point-bound correction\\
+$b,c$ & transverse bad-carrier and marker-collision degrees\\
+$d=2^s$ & power-of-two Lucas degree; used only in Section~\ref{sec:lucas}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{definition}[Working terminology]\label{def:terminology}
+A \emph{carrier} is a closed subvariety of a syndrome space on which
+the generic transverse splitting argument degenerates.  A
+\emph{persistent carrier} is a catalecticant component propagated by
+ordinary contraction; a \emph{modular} or \emph{Lucas carrier} is a
+component created by a positive-characteristic contraction kernel.
+A direction is \emph{shallow} when it has a split squarefree witness.
+A pullback is \emph{root-compatible} when the chosen contraction
+factor remains a marked forbidden root on every lower incidence.  An
+\emph{ordered-root cover} remembers an ordering of the roots over the
+squarefree splitting locus.  A field is \emph{code-admissible} for a
+displayed statement when it satisfies both that statement's field
+bound and its covering-radius hypothesis.
+\end{definition}
+
+\paragraph{Status of this draft.}
+This integrated version is a proof-complete pre-release candidate, not
+a refereed publication.  The public classification records, formal
+statement boundary, literature audit, immutable external supplement,
+and release metadata remain independent release gates.  No DOI-bearing
+Version~1 is authorized until the release checklist closes them.
+
+\begin{theorem}[Complete redundancy-five classification]\label{thm:r5}
+Let $q\geq7$ be a prime power.  The covering radius of $\PRS(q-4)$ is
+$4$.  Its projective deep-hole syndromes are exactly the following
+disjoint families:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the tangent family $\mathrm T$, of size $q(q+1)$;
+\item the conjugate-secant family $\mathrm S$, of size
+      $q(q^2-1)/2$;
+\item if $\operatorname{char}\F_q\ne3$, the rational osculating-pair
+      family $\mathrm O^+$ when $q\equiv2\pmod3$, of size $q(q+1)/2$,
+      or the conjugate osculating-pair family $\mathrm O^-$ when
+      $q\equiv1\pmod3$, of size $q(q-1)/2$;
+\item in characteristic three, one $\PGL_2(q)$-fixed nucleus point and
+      one wild Artin--Schreier orbit $\mathrm W$ of size $(q^2-1)/2$;
+\item the sporadic $\PGL_2(q)$-orbits in Table~\ref{tab:r5sporadic},
+      occurring exactly for
+      $q\in\{7,8,9,11,13,17,19\}$.
+\end{enumerate}
+There are no other deep-hole syndromes.  The three corresponding
+nonsporadic totals are
+\[
+\frac{q^2(q+3)}2,\qquad
+\frac{q(q+1)(q+2)}2,\qquad
+\frac{q^3+3q^2+q+1}{2},
+\]
+according as $q\equiv1\pmod3$ with characteristic not three,
+$q\equiv2\pmod3$, or $\operatorname{char}\F_q=3$.
+\end{theorem}
+
+The main mechanism is a characteristic-free Hankel dictionary.  A
+syndrome at redundancy $r$ annihilates a linear system of binary forms
+of degree $r-2$.  It is split-free if and only if this system contains
+no completely split squarefree form; it is a deep-hole direction when,
+in addition, $\rho(\PRS(q+1-r))=r-1$.  At redundancy five the system is a
+pencil of cubics.  Its induced degree-three map of projective lines is
+either cyclic or has geometric monodromy $S_3$.  Cyclic descent gives
+the arithmetic families in Theorem~\ref{thm:r5}; in the $S_3$ case the
+off-diagonal fiber square is an integral curve of arithmetic genus one,
+and the singular-curve Weil bound \cite{AubryPerret1995} forces a split
+fiber for $q\geq23$.  The certified finite computations in
+Section~\ref{sec:verification} handle the remaining fields.
+
+Starting at redundancy six, the Hankel system is no longer a pencil.
+The useful replacement is the coherently parameterized line of
+contractions obtained by choosing one prospective root.  Iteration
+produces a \emph{polar flag}; every chosen root remains marked because
+a lower witness containing it would lift with multiplicity two.  The
+pointed coherence is essential: at $q=19$ an individual contracted
+fiber has no split witness avoiding its marker, but no consecutive-row
+polar line is contained in its orbit.
+
+The resulting structural theorem has three outputs.
+
+\begin{theorem}[Classification results and explicit gates beyond five]
+\label{thm:spine}
+The following statements hold.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item For every prime power $q\geq7$, the projective deep-hole
+      directions of $\PRS(q-5)$ are exactly the persistent tangent and
+      conjugate-secant families, the exceptional orbits listed for
+      $q=7,8,9,11,13$, and, when $q=2^m$ with odd $m\geq5$, one
+      characteristic-two nucleus orbit.
+\item The displayed finite domains through $q=32$ have the certified
+      split-free classification stated in Section~\ref{sec:r67}.
+      The same list continues over every field: for $q\geq13$ it is the
+      persistent families plus one central nucleus point when
+      $q=2^m$ and $m$ is odd.  The list is a deep-hole classification
+      only when $\rho(\PRS(q-6))=6$, in particular for $q\geq11$.
+\item For $q\geq43$, the projective deep-hole directions of
+      $\PRS(q-7)$ are exactly the persistent tangent and
+      conjugate-secant families.  The same conclusion holds for
+      $\PRS(q-8)$ when $q\geq53$.  In either case the asserted
+      families have total size $q(q+1)^2/2$.
+\end{enumerate}
+At redundancy $r$, the semilinear orbits in the persistent
+conjugate-secant family are parameterized by
+\[
+       T/T^{\,r-1}\quad\text{modulo inversion and Frobenius},
+\]
+where
+$T=\{z\in\F_{q^2}^{\times}:z^{q+1}=1\}$ is the norm-one torus and
+Frobenius is coefficient Frobenius.  On the tangent family the
+unipotent coordinate transforms as $z\mapsto z+(r-1)u$; consequently
+its orbit decomposition changes precisely when
+$\operatorname{char}\F_q$ divides $r-1$.
+\end{theorem}
+
+The three parts have different scopes.  Parts~(a) and~(b) are
+unconditional all-field syndrome classifications, but part~(b)
+becomes a deep-hole classification only when
+$\rho(\PRS(q-6))=6$.  Part~(c) is unconditional in its two displayed
+high-field ranges.  Neither clause makes a classification claim below
+its threshold.
+
+\paragraph{Relation to previous work.}
+The tangent and conjugate-secant families and the coding/normal-rational
+curve dictionary come from \cite{Kaipa2017,ZWK2020}; the covering-radius
+input in the high-rate range is due to Seroussi and Roth
+\cite{SeroussiRoth1986}.  The broader arc/MDS and code-automorphism
+background is surveyed or established in
+\cite{BallLavrauw2019,Dur1987}.  Classical apolarity, catalecticants,
+and binary-form rank strata are treated in
+\cite{IarrobinoKanev1999,ComasSeiguer2011}; our use of divided powers
+keeps the small-characteristic contraction formulas explicit.
+Binary-quartic orbit theory in characteristic different from two and
+three \cite{KPP2025}, factorization statistics in linear families
+\cite{CMP2017}, normal-rational-curve nuclei
+\cite{GmainerHavlicek2013}, and the general Frobenius/monodromy
+semantics of splitting families \cite{Wang2026} are inputs.  The first
+two references identify deep syndromes with uncovered points of a
+normal rational curve and settle the lower-redundancy families; they do
+not classify the redundancy-five cubic pencils.  The orbit-theoretic
+and factorization references supply normal forms and distribution
+tools, but not the coherent marked contraction used here.  The nucleus
+results locate characteristic-dependent kernels, while the present
+work computes which of their coherent lifts meet the PRS splitting
+incidence.  Standard function-field, Artin--Schreier, and linearized
+polynomial background is taken from
+\cite{Stichtenoth2009,LidlNiederreiter1996}; the characteristic-two
+orbit and component exhaustions themselves are proved internally, not
+imported from the quartic-orbit reference.  Thus the new assertions are separated into the
+redundancy-five through seven classifications, the conditional
+transverse induction mechanism, the fixed-level high-field
+applications, and the characteristic-two contained-carrier results.
+Claim-by-claim novelty and dependency boundaries are recorded in the
+electronic ledger; no database-search procedure is part of the
+mathematical argument.
+
+\paragraph{Organization.}
+Section~\ref{sec:overview} first gives a proof-free guide to the
+argument, and Section~\ref{sec:dictionary} gives the Hankel dictionary.
+Section~\ref{sec:r5} proves Theorem~\ref{thm:r5}.
+Sections~\ref{sec:polar}--\ref{sec:fixed} develop coherent polar
+induction and prove Theorem~\ref{thm:spine}.
+Section~\ref{sec:hessian} gives the characteristic-two ordered-Hessian
+replacement.  Section~\ref{sec:lucas} treats Lucas-carrier arithmetic.
+Section~\ref{sec:verification} states the computational and formal trust
+boundary, and Section~\ref{sec:boundary} records the exact open boundary.
+

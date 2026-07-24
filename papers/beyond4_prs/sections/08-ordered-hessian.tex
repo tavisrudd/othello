@@ -1,0 +1,167 @@
+\section{Characteristic two: the ordered Hessian}\label{sec:hessian}
+
+In characteristic two the divided binary-cubic discriminant becomes
+the doubled quadric $(AD+BC)^2$, so its pullback cannot distinguish
+generic splitting.  The correct replacement retains an ordered
+residual root.
+
+Let $\ell=\PP\langle U,V\rangle\subset\PP(\Gamma^3E)$ and write
+\[
+\Hess^{\mathrm{div}}(uU+vV)
+ =N_u(u,v)X^2+N_s(u,v)XY+D(u,v)Y^2.
+\]
+The ordered-Hessian incidence
+\begin{equation}\label{eq:hessian}
+N_u(u,v)X^2+N_s(u,v)XY+D(u,v)Y^2=0
+\end{equation}
+has bidegree $(2,2)$ and arithmetic genus one.  Off $N_s=0$, its
+Artin--Schreier class is $DN_u/N_s^2$.
+
+The parameter space of cubic lines is
+$G(1,\Gamma^3E)$.  Let
+\[
+\Sigma=\{\PP(QE):[Q]\in\PP(\Sym^2E)\}\subset G(1,\Gamma^3E)
+\]
+be the Veronese surface of common-quadratic lines.  In the ambient
+cubic space, let $\mathcal Q_0=\{AD+BC=0\}\subset\PP(\Gamma^3E)$.
+Its two families of lines give two Fano ruling conics in the
+Grassmannian; one is the tangent-conic boundary of $\Sigma$, and we
+call the other $\cN$.  A root-compatible pullback is the family of
+lines obtained by fixing a split factor $R$ and varying the final two
+linear factors in the consecutive Hankel contraction of a syndrome.
+
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{ccccc}
+G(1,\Gamma^3E)
+&\supset&
+\text{degenerate ordered-Hessian locus}
+&=&
+\Sigma\ \cup\ \operatorname{Fano}_1(\mathcal Q_0)\\[4pt]
+&&\downarrow\ \text{root-compatible pullback}&&\\[4pt]
+&&
+\begin{array}{c}
+\text{persistent component}\\
+\cup\\
+\text{Lucas-nucleus component}
+\end{array}
+&&
+\cN:\ \text{no rank-two pullback}.
+\end{array}
+\]
+\caption{Ordered-Hessian geometry.  The degeneracy locus is computed
+in the Grassmannian first; root compatibility then selects the
+contained syndrome carriers and eliminates the complementary ruling.}
+\label{fig:hessian-flow}
+\end{figure}
+
+\begin{theorem}[Ordered-Hessian geometric degeneracy]
+\label{thm:hessian}
+After removing the forced vertical factors from intersections with the
+twisted cubic, the complete geometric degeneracy locus of
+\eqref{eq:hessian} consists of:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the Veronese surface $\Sigma$ of lines $\PP(QE)$, on which the incidence is
+      separably reducible; and
+\item the two Fano ruling conics of $\mathcal Q_0$, on which the root
+      projection of \eqref{eq:hessian} is inseparable.
+\end{enumerate}
+The complementary ruling $\cN$ has no nontrivial rank-two root-compatible
+Hankel pullback.
+\end{theorem}
+
+\begin{proof}
+Once vertical and horizontal factors are removed, any separable
+factorization of a $(2,2)$ curve must be
+$(1,1)+(1,1)$.  The two factors are graphs of projectivities.
+Semisimple and unipotent normal forms show that only the lines $QE$
+occur.  The ambient equation $AD+BC=0$ gives two quadric rulings.
+Substituting
+the consecutive Hankel contraction forms into the complementary ruling
+forces overlapping triples of linear forms to be proportional, so the
+root-compatible line has rank at most one.
+\end{proof}
+
+\begin{proposition}[Root-compatible pullback]\label{prop:hessian-pullback}
+On the root-compatible Hankel parameter space, the reduced pullback of
+$\Sigma$ is exactly the persistent catalecticant/Lucas-nucleus union.
+The complementary ruling $\cN$ has no nontrivial rank-two pullback.
+Intersections with the twisted cubic contribute only the vertical
+factors removed before the reduced incidence is formed.
+\end{proposition}
+
+\begin{proof}
+The Veronese ideal is the prime ideal of $2\times2$ minors of the
+symmetric matrix in the ordered-Hessian Pl\"ucker coordinates.
+At the generic point of any irreducible pullback component, those
+minors say that every iterated contraction pencil has a common
+quadratic.  The ordinary rank--nullity argument of
+Proposition~\ref{prop:contained-rank-two} gives the persistent
+rank-two carrier.  When a consecutive contraction coefficient
+vanishes in the ground characteristic, Lucas' theorem gives precisely
+the contraction-kernel nucleus flags.  Conversely the displayed
+catalecticant and Lucas kernels make all those minors vanish.
+Equality on geometric points over every algebraically closed
+extension therefore gives equality of the reduced closed subschemes.
+
+For $\cN$, its first and last equations give consecutive identities
+\[
+h_{-1}(R)^2=h_{-2}(R)h_0(R),\qquad
+h_1(R)^2=h_0(R)h_2(R).
+\]
+Unique factorization of the linear contraction forms, including the
+cases in which one vanishes, makes each nonzero consecutive triple
+proportional.  The overlap propagates across all five forms, so the
+root-compatible line has rank at most one.  Finally, the divided
+Hessian vanishes on a cubic exactly on the twisted cubic; hence a
+line--twisted-cubic intersection is exactly a common vertical factor.
+Removing that factor commutes with base change and does not create a
+reduced moving component.
+\end{proof}
+
+\begin{proposition}[Effective Hessian corollary]
+\label{prop:hessian-effective}
+For syndrome degree $n\geq5$, outside the persistent/Lucas union an
+integral reduced slice exists whenever
+\[
+q\geq
+\min\left\{\frac{(n-4)(n+11)}2+1,\ 9(n-4)\right\}.
+\]
+Its deletion degree is at most $3n-4$.  If also
+$q+1-2\sqrt q>3n-4$, every split-free syndrome lies in that union.
+\end{proposition}
+
+\begin{proof}
+For a split base $R$ of degree $n-4$, the root-compatible Pl\"ucker
+coordinates are quadratic in its coefficients.  Outside the contained
+union, choose one nonzero pulled-back equation $A$ of $\Sigma$ and one
+nonzero pulled-back equation $B$ of $\cN$.  Each has individual
+root degree at most four, and the single product $AB$ vanishes on the
+whole reduced bad union and has individual root degree at most eight.
+Vertical factors have already been removed by
+Proposition~\ref{prop:hessian-pullback}.
+
+Put $m=n-4$.  Schwartz--Zippel applied to $AB$ after adjoining the
+Vandermonde requires
+\[
+q>8m+\binom m2=\frac{m(m+15)}2,
+\]
+which gives the first bound.  Alternatively partition $9m$ field
+elements into disjoint nine-element blocks.  Successive univariate
+interpolation shows that a nonzero polynomial of individual degree at
+most eight cannot vanish on their product, giving the second bound.
+The moving diagonal, determinant, branch, fixed-root collision, and
+final collision divisors have degrees
+\[
+       n-4,\ 2,\ 2,\ 2(n-4),\ 4,
+\]
+whose sum is $3n-4$.  The normalized integral $(2,2)$ slice has genus at
+most one, so the point bound leaves a rational ordered residual root
+outside every deletion, and contraction lifts it squarefreely.
+\end{proof}
+
+Theorem~\ref{thm:hessian} is a containment theorem.  It does not assert
+that every Lucas-carrier point is deep; that remains an arithmetic
+question for each level.
+

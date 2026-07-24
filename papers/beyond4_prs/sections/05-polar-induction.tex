@@ -1,0 +1,293 @@
+\section{Coherent polar induction}\label{sec:polar}
+
+\subsection{Spaces, markers, and bad schemes}
+
+Fix a field $k$, a two-dimensional $k$-space $E$, and
+\[
+  S_n=\PP(\Gamma^nE).
+\]
+For $\lambda\in E^\vee$, define divided-power contraction by
+\[
+ \langle\iota_\lambda f,g\rangle=\langle f,\lambda g\rangle.
+\]
+Then
+\begin{equation}\label{eq:lift}
+ g\in W_{\iota_\lambda f}\quad\Longleftrightarrow\quad
+ \lambda g\in W_f.
+\end{equation}
+The lower witness lifts squarefreely only when $\lambda\nmid g$.
+Thus the factor selected for contraction must remain as a marked
+forbidden root.
+
+\begin{definition}[Contraction and marker spaces]\label{def:polar-spaces}
+Let $C_f:E^\vee\to\Gamma^{n-1}E$ be
+$\lambda\mapsto\iota_\lambda f$, and put
+$U_f=\PP(E^\vee)\setminus\PP(\ker C_f)$.  The first-polar rational map
+is
+\[
+ \Phi_f:U_f\longrightarrow S_{n-1},\qquad
+ [\lambda]\longmapsto[\iota_\lambda f]
+.
+\]
+Its image is a point or a line.  For $j\geq1$, let
+\[
+\operatorname{Conf}_j(\PP(E^\vee))
+=\{(\lambda_1,\ldots,\lambda_j):\lambda_i\ne\lambda_\ell
+  \text{ for }i\ne\ell\}.
+\]
+The ordered marker space $U_{f,j}$ is the open subset on which every
+successive contraction is nonzero.  The universal $j$-step polar flag
+is the map
+\[
+(\lambda_1,\ldots,\lambda_j)\longmapsto
+\bigl([\iota_{\lambda_1}f],\ldots,
+[\iota_{\lambda_j}\cdots\iota_{\lambda_1}f]\bigr).
+\]
+\end{definition}
+
+In an affine coordinate $r$ the first map is
+\[
+\Phi_f(r)=(a_1-ra_0,\ldots,a_n-ra_{n-1}),\qquad
+\Phi_f(\infty)=(a_0,\ldots,a_{n-1}).
+\]
+
+\begin{definition}[Lower splitting package]\label{def:lower-package}
+At level $(n,j)$ a lower splitting package consists of:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a finite stratification
+  $X_{n-j}^{\mathrm{split}}=\coprod_\alpha X_\alpha$ of the ordered
+  squarefree splitting incidence over $S_{n-j}$;
+\item for each $\alpha$, a specified identity or Frobenius-twisted
+  geometrically integral root cover
+  $Y_\alpha\to X_\alpha$, with genus bound $g_\alpha$ and point bound
+  \[
+       \#Y_\alpha(\F_q)\geq
+       q+\kappa_\alpha-2g_\alpha\sqrt q;
+  \]
+\item a closed bad scheme $B_{n-j}\subset S_{n-j}$ containing the
+  loci on which the chosen cover is not available;
+\item branch, diagonal, old-marker, new-marker, and self-collision
+  divisors whose total degree on $Y_\alpha$ is at most
+  $\delta_\alpha$;
+\item bounds $b$ and $c$ for the pullbacks of $B_{n-j}$ and the finite
+  self-collision divisor to a noncontained first-polar line.
+\end{enumerate}
+The index $\alpha$ names a geometric stratum together with its constant
+field and Frobenius twist.  All degrees are geometric degrees after
+the displayed pullback.  ``Computed'' means that equations for
+$B_{n-j}$ and every divisor are obtained by finite contraction,
+elimination, factorization, and rank tests over the coefficient ring.
+\end{definition}
+
+The construction is summarized in Figure~\ref{fig:polar-flow}.  The
+upper branch is the level-specific component calculation; the lower
+branch is the general transverse argument.
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{ccccc}
+[f]\in S_n&\dashrightarrow&\Phi_f(U_f)\subset S_{n-1}
+ &\longrightarrow&\text{lower ordered splitting cover}\\
+&&\begin{array}{c}
+\searrow\ \text{contained}\\[-2pt]
+\nearrow\ \text{transverse}
+\end{array}
+&&\begin{array}{l}
+\text{persistent/Lucas component},\\
+\text{delete branch, diagonal, and markers}
+\end{array}\\
+&&&&\downarrow\ \text{lift by \eqref{eq:lift}}\\
+&&&&\text{split squarefree witness in }W_f .
+\end{array}
+\]
+\caption{Coherent polar induction.  The contained branch is a
+level-specific component theorem; only the transverse branch is
+controlled by the general point-count argument.}
+\label{fig:polar-flow}
+\end{figure}
+
+\begin{theorem}[Polar-flag construction]\label{thm:polar-construction}
+The maps of Definition~\ref{def:polar-spaces} commute with field
+extension and the natural $\operatorname{GL}(E)$ action.  They include
+the infinity chart displayed above.  If
+$g\in W_{\iota_{\lambda_j}\cdots\iota_{\lambda_1}f}$, then
+$\lambda_1\cdots\lambda_jg\in W_f$; the lift is squarefree exactly
+when $g$ is squarefree and avoids every marker $\lambda_i$.
+\end{theorem}
+
+\begin{proof}
+Contraction is defined by the perfect divided-power/symmetric-power
+pairing, so it commutes with base change and change of basis.  Repeated
+application of \eqref{eq:lift} gives the membership assertion.  Since
+the $\lambda_i$ are distinct on the configuration space, their product
+is squarefree; the product with $g$ is squarefree precisely when $g$
+is squarefree and none of the $\lambda_i$ divides it.  The coordinate
+formula at infinity follows by evaluating $C_f$ on the second basis
+covector.
+\end{proof}
+
+\begin{definition}[Contained-component assertion]\label{def:contained}
+For a specified lower package, $\mathrm{CC}(n,j)$ is the
+scheme-theoretic assertion that every $f\in S_n$ for which
+$\Phi_f^*B_{n-j}$ or a marker-collision section vanishes identically
+belongs to the explicitly listed closed subscheme
+$\cP_n\cup\cM_n$.  An identically zero collision differential is part
+of $\cM_n$; it is never counted as a finite divisor.
+\end{definition}
+
+This is a level-specific theorem obligation, not an assumption hidden
+inside the point-count argument.  Sections~\ref{sec:r67} and
+\ref{sec:fixed} state the contained-component calculations used at
+redundancies six through nine.  No assertion $\mathrm{CC}(n,j)$ is
+made for an arbitrary degree.
+
+\begin{theorem}[Effective transverse induction]\label{thm:induction}
+Fix a lower splitting package as in Definition~\ref{def:lower-package}
+and suppose $\mathrm{CC}(n,j)$ has been proved for that package.  Put
+\[
+\mathcal H_\kappa(g,\delta)=
+\left\lfloor
+\left(g+\sqrt{g^2+\delta-\kappa}\right)^2
+\right\rfloor+1
+\]
+and assume $\delta\geq\kappa-g^2$.  If
+\[
+q\geq \max_\alpha
+\mathcal H_{\kappa_\alpha}(g_\alpha,\delta_\alpha)
+\quad\text{and}\quad q+1>b+c,
+\]
+then every split-free Hankel system belongs to the contained scheme
+$\cP_n\cup\cM_n$.
+\end{theorem}
+
+\begin{proof}
+For a system outside $\cP_n\cup\cM_n$, the assertion
+$\mathrm{CC}(n,j)$ makes the pulled-back bad and self-collision schemes
+finite of total degree at most $b+c$.  Since
+$\#\PP^1(\F_q)=q+1$, choose a rational contraction parameter outside
+them.  On the corresponding lower stratum the recorded point bound
+gives
+\[
+ q+\kappa_\alpha-2g_\alpha\sqrt q>\delta_\alpha,
+\]
+so there is a rational point outside all deletions.  It yields a split
+squarefree lower member avoiding every marker.  Equation
+\eqref{eq:lift} lifts it to a split squarefree member upstairs,
+contradicting split-freeness.
+\end{proof}
+
+\begin{remark}[Point-count convention]\label{rem:thresholds}
+The correction $\kappa$ records the exact lower bound available for the
+chosen model.  The singular cubic fiber square of
+Lemma~\ref{lem:s3} uses $\kappa=0$.  The normalized genus-one covers in
+the fixed-level applications use $\kappa=1$.  Thus the redundancy-eight
+triple $(g,\delta,\kappa)=(1,30,1)$ gives the real cutoff
+$(1+\sqrt{30})^2<42$, whose first prime power is $43$; the
+redundancy-nine triple $(1,36,1)$ gives the strict cutoff $q>49$, whose
+first prime power is $53$.
+\end{remark}
+
+\begin{table}[ht]
+\centering
+\caption{Normalized point-count thresholds used in this paper.}
+\label{tab:thresholds}
+\begin{tabular}{lccccc}
+\toprule
+Application & $g$ & $\delta$ & $\kappa$ & integer lower bound & first prime power\\
+\midrule
+R5 cubic fiber square & $1$ & $12$ & $0$ & $q\geq22$ & $23$\\
+R6 marked cover & $1$ & $18$ & $1$ & $q\geq28$ & $29$\\
+R7 marked cover & $1$ & $24$ & $1$ & $q\geq35$ & $37$\\
+R8 three-marker cover & $1$ & $30$ & $1$ & $q\geq42$ & $43$\\
+R9 four-marker cover & $1$ & $36$ & $1$ & $q\geq50$ & $53$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Contained-component calculations}
+
+The ordinary rank-two carrier admits a uniform contained-line
+calculation.  This does not classify other lower bad schemes, but it
+closes the persistent part of every level-specific component gate.
+
+\begin{proposition}[Contained rank-two polar lines]
+\label{prop:contained-rank-two}
+Let $n\geq5$, let $f\in\PP(\Gamma^nE)$, and let
+\[
+ A=C_f^{(2)}:\Sym^{n-2}E^\vee\longrightarrow\Gamma^2E
+\]
+be the three-row catalecticant.  Assume the contraction map
+$E^\vee\to\Gamma^{n-1}E$ is injective, so the first-polar map is
+defined on all of $\PP(E^\vee)$.  Then
+\[
+\Phi_f(\PP(E^\vee))\subset
+\{b:\operatorname{rank}C_b^{(2)}\leq2\}
+\quad\Longleftrightarrow\quad
+\operatorname{rank}A\leq2
+\]
+scheme-theoretically and in every characteristic.  If
+$\operatorname{rank}A=3$, the rank-drop parameters form a subscheme of
+$\PP(E^\vee)$ of degree at most three.
+\end{proposition}
+
+\begin{proof}
+For a nonzero $\lambda\in E^\vee$, multiplication identifies
+$\Sym^{n-3}E^\vee$ with the hyperplane
+\[
+ H_\lambda=\lambda\Sym^{n-3}E^\vee\subset\Sym^{n-2}E^\vee,
+\]
+and functoriality gives
+\[
+ C_{\iota_\lambda f}^{(2)}=A|_{H_\lambda}.
+\]
+The forward implication is immediate.  Conversely, suppose
+$\operatorname{rank}A=3$ and put $K=\ker A$, so
+$\dim K=n-4$.  If the lower rank is at most two, rank--nullity on the
+$(n-2)$-dimensional space $H_\lambda$ gives
+\[
+ \dim(K\cap H_\lambda)\geq(n-2)-2=n-4=\dim K.
+\]
+Thus $K\subset H_\lambda$.  Containment for every geometric
+$[\lambda]$ would imply
+\[
+ K\subset\bigcap_{[\lambda]\in\PP(E^\vee_{\bar k})}
+ \lambda\Sym^{n-3}E^\vee_{\bar k}=0,
+\]
+because a nonzero binary form cannot be divisible by every linear
+form.  This contradicts $\dim K=n-4>0$.
+
+The maximal minors of $C_{\iota_\lambda f}^{(2)}$ are homogeneous
+cubics in $\lambda$.  Vanishing at every geometric point is therefore
+identical vanishing, proving the scheme-theoretic assertion.  In the
+noncontained case at least one cubic is nonzero, and the common
+rank-drop scheme lies in its degree-three zero divisor.
+\end{proof}
+
+After rank one and rational split secants are removed as shallow, the
+upper rank-two locus consists of the persistent tangent and
+conjugate-secant carriers.  On a persistent fiber the nonsplit torus
+acts by $z\mapsto z^n$, giving $T/T^n$ modulo inversion and Frobenius,
+while the tangent unipotent cocycle is $z\mapsto z+nu$.
+
+Modular carriers are equally explicit.  If $\cN$ is a nucleus in the
+lower divided-power module, the complete space whose first-polar line
+lies in $\cN$ is
+\[
+\cM_n(\cN)=
+\PP\ker\left(
+\Gamma^nE\longrightarrow
+\operatorname{Hom}(E^\vee,\Gamma^{n-1}E/\widetilde{\cN})
+\right).
+\]
+Lucas' theorem computes the nucleus coordinates, and this displayed
+kernel computes every coherent lift without an ambient syndrome census.
+
+\begin{remark}[Scope of the contained calculations]
+The modular contraction kernel is an exact finite linear-algebra
+construction.  Proposition~\ref{prop:contained-rank-two} supplies the
+ordinary persistent component uniformly, but other lower bad schemes
+and marker collisions still require level-specific calculations.
+Neither the proposition nor Theorem~\ref{thm:induction} classifies
+those additional components.
+\end{remark}
+

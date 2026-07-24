@@ -1,0 +1,424 @@
+\section{Redundancies six and seven: complete and gated results}
+\label{sec:r67}
+
+\subsection{Redundancy six}
+
+For
+\[
+ f=(a_0:\cdots:a_5)\in\PP(\Gamma^5E),\qquad
+ W_f=\ker
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4\\
+ a_1&a_2&a_3&a_4&a_5
+ \end{pmatrix},
+\]
+the system $W_f$ is a net of quartics off the quintic normal rational
+curve.  It is split-free exactly when it has no completely split
+squarefree quartic.
+
+\begin{proposition}[Persistent net and orbit law]\label{prop:r6-persistent}
+If $\gcd(W_f)=Q$ has degree two, then
+\[
+       W_f=Q\Sym^2E^\vee.
+\]
+The deep persistent locus has size $q(q+1)^2/2$.  On the tangent fiber
+the unipotent coordinate is $x\mapsto x+5u$; on the irreducible
+quadratic fiber the norm-one torus acts through $z\mapsto z^5$, with
+inversion and coefficient Frobenius acting on $T/T^5$.
+\end{proposition}
+
+\begin{proof}
+For fixed $Q$, the syndromes annihilating
+$Q\Sym^3E^\vee$ form a projective line.  If $Q$ is irreducible, all
+$q+1$ points remain; if $Q=\lambda^2$, one endpoint has dependent
+Hankel rows, leaving $q$ points.  Hence
+\[
+ q(q+1)+\frac{q(q-1)}2(q+1)=\frac{q(q+1)^2}{2}.
+\]
+Normalize a square to $U^2$.  The nondegenerate fiber is
+$[e_4+xe_5]$, and direct degree-five substitution gives
+$x\mapsto x+5u$.  For an irreducible $Q$, its stabilizer identifies
+the $q+1$-point fiber with
+$T=\{z\in\F_{q^2}^\times:z^{q+1}=1\}$ and acts by fifth powers; the
+normalizer inverts $z$, while coefficient Frobenius multiplies
+$T/T^5$ by the characteristic.  This proves the stated orbit law and
+the characteristic-five tangent splitting.
+\end{proof}
+
+\begin{proposition}[First-polar line and secant degree]
+\label{prop:r6-secant}
+For $r\in\F_q$ put
+\[
+ b(r)=(a_1-ra_0,\ldots,a_5-ra_4),\qquad
+ b(\infty)=(a_0,\ldots,a_4).
+\]
+Then
+\[
+ (T-rU)g\in W_f\quad\Longleftrightarrow\quad g\in W_{b(r)}.
+\]
+If $W_f$ has trivial gcd, its polar line meets the lower secant cubic
+in degree at most three.
+\end{proposition}
+
+\begin{proof}
+The first equivalence follows by expanding the two Hankel equations of
+$(T-rU)g$.  Let
+\[
+C_f=\begin{pmatrix}
+a_0&a_1&a_2&a_3\\
+a_1&a_2&a_3&a_4\\
+a_2&a_3&a_4&a_5
+\end{pmatrix}.
+\]
+The lower catalecticant equals
+\[
+C_f\begin{pmatrix}
+-r&0&0\\1&-r&0\\0&1&-r\\0&0&1
+\end{pmatrix}.
+\]
+Cauchy--Binet gives the secant determinant
+\[
+D_f(r)=-\Delta_{012}r^3+\Delta_{013}r^2
+       -\Delta_{023}r+\Delta_{123}.
+\]
+It vanishes identically exactly when $\operatorname{rank}C_f\leq2$,
+equivalently when $W_f$ has quadratic gcd.  In the trivial-gcd case it
+therefore has at most three zeros.
+\end{proof}
+
+\begin{proposition}[Cyclic and collision degrees]\label{prop:r6-degrees}
+For a trivial-gcd net:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item in characteristic different from two, the lower tame cyclic
+carrier is a binomially rescaled Veronese surface of degree four and
+contains no polar line;
+\item the pointed ramification condition has degree at most six and
+does not vanish identically;
+\item an $S_3$ lower pencil with the marked root deleted has total
+deletion degree at most eighteen.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+In syndrome coordinates the tame cyclic surface is
+\[
+\left\{\operatorname{diag}(1,4,6,4,1)^{-1}[Q^2]:
+[Q]\in\PP(\Sym^2E^\vee)\right\}.
+\]
+Outside characteristic two it is the Veronese surface, of degree four,
+and contains no line.  For a basis $F_0,F_1,F_2$ of the $g^2_4=W_f$,
+pointed collision is the rank-one condition
+\[
+\operatorname{rank}
+\begin{pmatrix}
+F_0(r)&F_1(r)&F_2(r)\\
+F_0'(r)&F_1'(r)&F_2'(r)
+\end{pmatrix}\leq1.
+\]
+Its Wronskian divisor has degree six.  In characteristic at least five
+it cannot vanish identically because the degrees are below the
+characteristic.  In characteristics two and three, either all
+derivatives vanish or the derivative row is a rational multiple of the
+value row; the Hankel overlap excludes the first alternative, and a
+gcd argument forces a common factor in the second.
+
+Finally the R5 off-diagonal curve has the original deletion degree
+twelve.  The unique cubic through a specified marker contributes at
+most six ordered pairs, giving $\delta=18$ and
+\[
+       q-2\sqrt q>18.
+\]
+Its first prime-power solution is $29$.
+\end{proof}
+
+\begin{proposition}[Modular contained components]\label{prop:r6-modular}
+In characteristic three the lower wild carrier is the degree-four cone
+\[
+       \operatorname{Join}(e_2,C_4),
+\]
+and no polar line of a trivial-gcd net is contained in it.  In
+characteristic two the cyclic carrier is the plane
+\[
+       \Pi_{\mathrm{cyc}}=\PP\langle e_1,e_2,e_3\rangle,
+\]
+whose unique contained polar-line component is
+\[
+       \cN_3=\PP\langle e_2,e_3\rangle.
+\]
+\end{proposition}
+
+\begin{proof}
+Every line on the wild cone is a ruling.  If two consecutive Hankel
+rows lie in a ruling $\langle e_2,\nu(t)\rangle$, the overlap equations
+give $f=\mu\nu(t)$, including $f=\mu e_5$ at infinity.  Thus no
+trivial-gcd polar line is contained.
+
+In characteristic two, direct substitution gives
+\[
+g\cdot e_2=
+[0:\delta\gamma:\alpha\delta+\beta\gamma:\alpha\beta:0],
+\]
+whose closure is $\Pi_{\mathrm{cyc}}$.  The consecutive-row overlap
+places a polar line in this plane exactly when
+$a_0=a_1=a_4=a_5=0$, namely when
+$f\in\PP\langle e_2,e_3\rangle$.
+\end{proof}
+
+\begin{proposition}[Binary nucleus arithmetic]\label{prop:r6-nucleus}
+The scheme $\cN_3(\F_q)$ is one projective-semilinear orbit of $q+1$
+points.  It is split-free over $q=2^m$ exactly when $m$ is odd.
+\end{proposition}
+
+\begin{proof}
+For the representative $e_3$,
+\[
+       W_{e_3}=\langle1,t,t^4\rangle.
+\]
+The root differences of $A+Bt+Ct^4$ lie in the kernel of
+$u\mapsto u^4+(B/C)u$.  Four distinct rational roots exist exactly
+when all roots of $u^3=B/C$ are rational, equivalently when
+$3\mid q-1$, which for $q=2^m$ means $m$ is even.  The stabilizer of
+$e_3$ is the Borel of order $q(q-1)$, so the orbit has $q+1$ points;
+its lower-unipotent transforms and endpoint are precisely
+$\cN_3(\F_q)$.
+\end{proof}
+
+The covering-radius gate is complete: Seroussi--Roth gives
+$\rho(\PRS(q-5))=5$ for $q\geq9$, while Certificate R6 checks it
+directly at $q=7,8$.
+
+\begin{theorem}[Redundancy six]\label{thm:r6}
+For every prime power $q\geq7$, the deep syndromes of $\PRS(q-5)$ are
+the persistent stratum of size $q(q+1)^2/2$, together with:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item respectively $18,11,4,2,1$ exceptional $\PGL_2(q)$ orbits at
+      $q=7,8,9,11,13$;
+\item one characteristic-two nucleus orbit of size $q+1$ when
+      $q=2^m$ and odd $m\geq5$.
+\end{enumerate}
+There are no other exceptional orbits.  The complete persistent orbit
+law is $T/T^5$ modulo inversion and Frobenius, with a tangent
+fixed/nonzero split exactly in characteristic five.
+\end{theorem}
+
+\begin{proof}
+Propositions~\ref{prop:r6-persistent}--\ref{prop:r6-nucleus} classify
+the common-factor and contained components and exclude a trivial-gcd
+exception in the conceptual ranges: characteristic at least five from
+$q\geq29$, characteristic three from its next unchecked field
+$q=81$, and characteristic two outside $\cN_3$ from $q\geq32$.
+Certificate R6 exhausts
+\[
+q\in\{7,8,9,11,13,16,17,19,23,25,27\},
+\]
+finds exceptional projective-orbit counts $18,11,4,2,1$ only at the
+five displayed fields, and no further orbit at the remaining fields.
+Together with the separate radius gate, this covers every prime power
+$q\geq7$.
+\end{proof}
+
+The five small tables are exhaustive computations.  Their semilinear
+orbit counts are $18,5,2,2,1$; a collision-energy invariant plus, in
+odd characteristic, the quintic root-divisor type separates the
+classes up to precisely Frobenius fusion.
+Certificate R6 supplies a canonical representative,
+stabilizer, member histogram, and Frobenius link for every projective
+orbit, while Certificate R6-NF supplies the collision-energy and
+root-divisor fingerprint.  Orbit counts alone are not used as identifiers.
+
+\subsection{Redundancy seven}
+
+For
+\[
+f=(a_0:\ldots:a_6)\in\PP(\Gamma^6E),\qquad
+W_f=\ker
+\begin{pmatrix}
+a_0&a_1&a_2&a_3&a_4&a_5\\
+a_1&a_2&a_3&a_4&a_5&a_6
+\end{pmatrix},
+\]
+the system $W_f$ is a four-dimensional web of quintics.  For an affine
+marker $r$ the contractions are
+\[
+ b(r)=(a_1-ra_0,\ldots,a_6-ra_5).
+\]
+Coefficient collection gives
+\[
+(t-r)g\in W_f\quad\Longleftrightarrow\quad g\in W_{b(r)};
+\]
+the lift is squarefree exactly when $g(r)\ne0$.
+
+\begin{proposition}[Two-marker lower cover]\label{prop:r7-pointed}
+Let $x$ be a forbidden root on a trivial-gcd quartic net.  On the
+generic $S_3$ bottom fiber, the diagonal and branch divisors and the
+two marked-root fibers have total degree at most
+\[
+       12+6+6=24.
+\]
+Hence $q-2\sqrt q>24$, and in particular every prime power $q\geq37$,
+produces a split lower quartic avoiding $x$.
+\end{proposition}
+
+\begin{proof}
+The R5 off-diagonal curve is geometrically integral of arithmetic genus
+one and has base deletion degree twelve.  Each marker belongs to a
+unique cubic fiber, which contains at most six ordered pairs.  Delete
+those two fibers and apply the $\kappa=0$ bound.
+\end{proof}
+
+\begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
+Suppose the lower net is $\ell_xU$, where
+$U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three and $x\ne r$.
+For $q\geq16$ it contains a split cubic avoiding both $x$ and $r$.
+\end{proposition}
+
+\begin{proof}
+Put $S=\PP^1(\F_q)\setminus\{x,r\}$.  For ordered distinct
+$u,v\in S$, the map
+$w\mapsto\lambda(\ell_u\ell_v\ell_w)$ is linear.  If it vanishes
+identically, choose any remaining $w$; otherwise it has one rational
+zero.  The equations $w=x,r,u,v$ have respective bidegrees
+$(1,1),(1,1),(2,1),(1,2)$ in $(u,v)$.  None is identically zero:
+the first two would add a common factor, and the last two are excluded
+because double-root cubics span $\Sym^3E^\vee$.  A nonzero
+bidegree-$(a,b)$ divisor on $\PP^1\times\PP^1$ has at most
+$(a+b)(q+1)$ rational points.  Thus the bad pairs number at most
+$10(q+1)$, whereas $(q-1)(q-2)>10(q+1)$ for $q\geq16$.
+\end{proof}
+
+\begin{proposition}[Marked self-collision]\label{prop:r7-collision}
+After fixed factors are removed, the self-collision divisor of the
+moving $g^3_5$ has degree at most eight.
+\end{proposition}
+
+\begin{proof}
+It is the ramification divisor of a separable $g^3_5$, whose degree is
+$(3+1)(5-3)=8$.  If the series were inseparable, it would factor
+through Frobenius and lie in the $p$-th-power subspace of quintics;
+that subspace has dimension at most three, smaller than the
+four-dimensional Hankel series.
+\end{proof}
+
+The characteristic-two nucleus line at redundancy six has exactly one
+coherent lift, the central point $e_3$, with
+\[
+ W_{e_3}=\langle1,t,t^4,t^5\rangle.
+\]
+It is deep for odd $m$; for even $m$, the homogenization of $t^4+t$
+has the five roots $\PP^1(\F_4)$.
+
+\begin{proposition}[Central binary lift]\label{prop:r7-central}
+The complete inverse image of the R6 nucleus line under consecutive
+sextic contraction is $[e_3]$.  It is split-free over $\F_{2^m}$
+exactly when $m$ is odd.
+\end{proposition}
+
+\begin{proof}
+Putting both consecutive rows in
+$\PP\langle e_2,e_3\rangle$ gives
+$a_0=a_1=a_2=a_4=a_5=a_6=0$.  Thus only $e_3$ remains, with
+$W_{e_3}=\langle1,t,t^4,t^5\rangle$.  For odd $m$, contraction at a
+root of a hypothetical split quintic would give a split quartic on the
+R6 nucleus line, contradicting Proposition~\ref{prop:r6-nucleus}.  For
+even $m$, $\F_4\subset\F_q$ and the homogenization of $t^4+t$ has its
+four affine $\F_4$ roots and the simple root at infinity.
+\end{proof}
+
+\begin{corollary}[Degree-six contained component]
+\label{cor:r7-contained}
+The assertion $\mathrm{CC}(6,1)$ for the lower rank-two carrier holds
+in every characteristic.  Its contained sextics have upper
+catalecticant rank at most two; after the shallow rank-one and rational
+secant loci are removed, they are exactly the persistent tangent and
+conjugate-secant families.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:contained-rank-two} with $n=6$.  The three
+rational types of the quadratic recurrence are split squarefree,
+repeated rational, and irreducible.  They give respectively the shallow
+rational secant, tangent, and conjugate-secant loci.  The remaining
+lower binary nucleus line has the separate complete lift computed in
+Proposition~\ref{prop:r7-central}.
+\end{proof}
+
+\begin{theorem}[Redundancy-seven classification]
+\label{thm:r7}
+Certificate R7 unconditionally classifies every prime power
+$q\leq32$ in its displayed domain.  For every prime power $q\geq13$,
+the split-free syndromes
+at redundancy seven are the persistent stratum, together with the
+central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
+split-free orbit-size profiles are:
+\[
+\begin{array}{c|l}
+7&56,\ 84^5,\ 112^2,\ 168^{45},\ 336^{141}\\
+8&63,\ 72,\ 84^3,\ 168^4,\ 252^{24},\ 504^{86}\\
+9&180^3,\ 240^6,\ 360^{18},\ 720^{27}\\
+11&264^2,\ 440,\ 660^2 .
+\end{array}
+\]
+This is the complete all-field split-free classification.  Since
+Seroussi--Roth gives $\rho(\PRS(q-6))=6$ for every prime power
+$q\geq11$, it is also the complete deep-hole classification in that
+range.  At $q=7,8,9$ the table is not promoted to a code deep-hole
+classification without a separate covering-radius calculation.  The
+persistent orbit law is $T/T^6$ modulo inversion and Frobenius, with
+tangent splitting in characteristics two and three.
+\end{theorem}
+
+\begin{proof}
+For $q\geq37$, Propositions~\ref{prop:r7-pointed}--\ref{prop:r7-collision}
+give the transverse witness after at most three catalecticant
+intersections, eight self-collisions, and, in characteristic two, one
+intersection with the nucleus line.
+Corollary~\ref{cor:r7-contained} leaves exactly the persistent locus and
+Proposition~\ref{prop:r7-central}.  Certificate R7 covers
+\[
+q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}
+\]
+by an independent five-secant replay.  The radius theorem promotes the
+split-free list only from $q\geq11$.
+\end{proof}
+
+For the four finite rows Certificate R7 contains the canonical
+representative, stabilizer, persistent/central flags, and Frobenius link
+of every orbit.  The displayed size profile is only a compact summary;
+repeated sizes are distinguished by those canonical records.
+
+The $q=19$ lower net $\langle1,t^3,t^4\rangle$ has six split members,
+all containing the marked point at infinity, yet no coherent sextic
+polar line lies in its orbit.  This is the concrete reason
+Theorem~\ref{thm:induction} is formulated for parameterized flags rather
+than a set of bad lower fibers.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Field-range closure ledger.  ``Certificate'' means a complete
+finite classification with canonical representatives, not merely an
+orbit count.}
+\label{tab:field-ranges}
+\begin{tabular}{lll}
+\toprule
+Result & prime powers & closure mechanism\\
+\midrule
+R5 & $7,8,9,11,13,16,17,19$ & direct census and independent replay\\
+   & $q\geq23$ & cubic-cover geometry, Lemma~\ref{lem:s3}\\
+R6 & $7,8,9,11,13,16$ & direct syndrome/radius census\\
+   & $17,19,23,25,27$ & finite structural bridge certificate\\
+   & $q\geq29$ & marked-cover point bound and contained components\\
+R7 & $7,8,9,11$ & direct split-free census\\
+   & $13,16,17,19,23,25,27,29,31,32$ &
+       coherent-polar finite bridge certificate\\
+   & $q\geq37$ & marked-cover point bound and contained components\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The R7 rows classify split-free syndromes.  Conversion to code
+deep-hole directions uses the separate covering-radius gate and is
+made only for $q\geq11$.  The public certificate schema and exact
+replay boundaries are given in the supplement; the table does not
+promote orbit-size profiles to identifiers.
+

@@ -1,0 +1,262 @@
+\section{Redundancy five: exceptional cubic covers}\label{sec:r5}
+
+Here $f=(a_0:\cdots:a_4)$ and $W_f$ is the pencil annihilated by
+\[
+ \begin{pmatrix}a_0&a_1&a_2&a_3\\a_1&a_2&a_3&a_4\end{pmatrix}.
+\]
+These are divided-power coordinates; the coefficients of a cubic in
+$W_f$ are ordinary symmetric-power coordinates.  Factoring the formal
+quartic $\sum a_iT^iU^{4-i}$ would therefore be noninvariant in
+characteristics two and three.
+
+\begin{proposition}[Radius gate]\label{prop:r5-radius}
+For every prime power $q\geq7$,
+\[
+       \rho(\PRS(q-4))=4.
+\]
+\end{proposition}
+
+\begin{proof}
+The coding/arc criterion identifies radius four with completeness of
+the quartic normal rational curve.  Seroussi--Roth prove completeness
+when
+\[
+       k\geq\left\lfloor\frac{q-1}{2}\right\rfloor
+\]
+apart from the even-field dimensions $k=2,q-2$
+\cite{SeroussiRoth1986}.  Here $k=q-4$, the inequality holds for
+$q\geq7$, and neither exceptional dimension occurs.  Thus
+Corollary~\ref{cor:splitfree} applies.  The finite certificate
+independently checks the same conclusion only in its declared finite
+domain; it is not the all-field radius proof.
+\end{proof}
+
+\subsection{Gcd strata}
+
+\begin{proposition}[Quadratic gcd]\label{prop:r5-gcd2}
+If $\deg\gcd(W_f)=2$, then
+\[
+       W_f=Q\langle T,U\rangle.
+\]
+If $Q$ is split squarefree, $f$ is shallow.  If $Q$ is irreducible,
+$f$ belongs to the conjugate-secant family; if $Q=\lambda^2$, it
+belongs to the tangent family.  Conversely every point in those
+families has the displayed gcd.  Their deep-family sizes are
+\[
+       |\mathrm T|=q(q+1),\qquad
+       |\mathrm S|=\frac{q(q^2-1)}2.
+\]
+\end{proposition}
+
+\begin{proof}
+The equality follows by dimension.  A split $Q$ and a linear cofactor
+avoiding its two roots give a split squarefree cubic.  An irreducible
+$Q$ survives in every member, while a square $Q$ forces a repeated
+root in every member.  Lemma~\ref{lem:hankel}, including its confluent
+and conjugate-root forms, identifies the corresponding syndromes with
+the secant and tangent spans.  The sizes are the established
+tangent/conjugate-secant counts from the lower-redundancy
+classification \cite{Kaipa2017,ZWK2020}.
+\end{proof}
+
+\begin{proposition}[Linear gcd]\label{prop:r5-gcd1}
+Suppose $\deg\gcd(W_f)=1$.  Then $f$ is shallow for $q\geq8$.  At
+$q=7$ the same conclusion is part of Certificate R5.
+\end{proposition}
+
+\begin{proof}
+Write $W_f=\lambda_0V$ with $V$ a basepoint-free quadratic pencil.  If
+its degree-two map $\psi:\PP^1\to\PP^1$ is separable, its rational deck
+involution gives $q+1$ ordered same-fiber pairs.  Delete at most two
+fixed points, four points over branch values, and the at most two pairs
+whose selected member contains $\lambda_0$.  For $q\geq8$ a surviving
+pair gives a split quadratic whose roots avoid $\lambda_0$, and hence a
+split squarefree cubic in $W_f$.  In characteristic two an inseparable
+quadratic pencil is equivalent to $\langle T^2,U^2\rangle$; the two
+overlapping Hankel equations then force $f$ onto the normal rational
+curve, contrary to the rank-two pencil hypothesis.
+\end{proof}
+
+\subsection{The trivial-gcd cubic cover}
+
+Choose a basis $c_1,c_2$ of a trivial-gcd pencil and put
+\[
+ X_f=\{([u:v],t):uc_1(t)+vc_2(t)=0\}
+       \subset\PP^1\times\PP^1.
+\]
+
+\begin{proposition}[Cubic incidence and off-diagonal fiber square]
+\label{prop:r5-incidence}
+The curve $X_f$ is geometrically integral of bidegree $(1,3)$ and
+arithmetic genus zero.  Projection to the root coordinate is
+birational, while projection to the pencil coordinate gives a
+degree-three morphism
+\[
+       \phi_f:\PP^1\longrightarrow\PP^1.
+\]
+If $\phi_f$ is separable, division of
+\[
+ c_1(t_1)c_2(t_2)-c_2(t_1)c_1(t_2)
+\]
+by the diagonal bracket defines a residual curve
+$Y_f\subset\PP^1\times\PP^1$ of bidegree $(2,2)$ and arithmetic genus
+one.  Its geometric components are the geometric-monodromy orbits on
+ordered pairs of distinct roots.
+\end{proposition}
+
+\begin{proof}
+A component of $X_f$ of bidegree $(0,e)$ would be a common factor of
+$c_1,c_2$; hence none exists.  The bidegree genus formula gives genus
+zero.  A root determines the unique pencil member containing it, so the
+root projection is birational.  For a separable map the diagonal factor
+in the fiber-square determinant has multiplicity one.  Removing its
+bidegree $(1,1)$ from the fiber square leaves bidegree $(2,2)$, whose
+arithmetic genus is one.  The standard fiber-square/monodromy
+correspondence identifies its components with orbits on distinct
+ordered sheets.
+\end{proof}
+
+\begin{lemma}[Cyclic stratum]\label{lem:cyclic}
+Suppose $\phi_f$ is geometrically cyclic.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item In characteristic different from three there are two ramification
+      points.  If they are rational, the corresponding osculating-plane
+      intersection is deep exactly when $q\equiv2\pmod3$; if they are
+      conjugate, it is deep exactly when $q\equiv1\pmod3$.
+\item In characteristic three all osculating planes meet in
+      $n=(0:0:1:0:0)$, whose pencil is
+      $\langle T^3,U^3\rangle$; this fixed point is deep.
+\item The remaining wild characteristic-three pencils have the form
+      $\langle U^3,T^3+aTU^2\rangle$.  They are deep exactly when $-a$
+      is nonsquare, forming one orbit of size $(q^2-1)/2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Assume first that the characteristic is not three.  Riemann--Hurwitz
+gives two totally ramified points $t_1,t_2$.  The confluent Hankel
+criterion places $f$ in
+$\operatorname{Osc}(t_1)\cap\operatorname{Osc}(t_2)$; after transporting
+the pair to $\{0,\infty\}$, the pencil is
+$\langle T^3,U^3\rangle$ and a geometric deck generator is
+$t\mapsto\zeta t$.
+
+For a rational ramification pair, Frobenius fixes the points and the
+deck map descends exactly when $\zeta^q=\zeta$, namely
+$q\equiv1\pmod3$.  Thus its complement is deep exactly for
+$q\equiv2\pmod3$.  The setwise stabilizer of the ordered normal form is
+the split dihedral group of order $2(q-1)$, so the orbit size is
+\[
+       \frac{q(q^2-1)}{2(q-1)}=\frac{q(q+1)}2.
+\]
+For a conjugate pair Frobenius interchanges the fixed points and
+inverts the multiplier; descent is instead $q\equiv2\pmod3$.  The
+nonsplit dihedral stabilizer has order $2(q+1)$ and the orbit size is
+$q(q-1)/2$.
+
+Now suppose the characteristic is three.  The second Hasse derivative
+of
+\[
+       \nu(t)=(1,t,t^2,t^3,t^4)
+\]
+is $(0,0,1,3t,6t^2)=e_2$, including in the reversed infinity chart.
+Thus every osculating plane contains $n=[e_2]$.  Substitution shows that
+$n$ is $\PGL_2(q)$-fixed and
+$W_n=\langle T^3,U^3\rangle$, so it is deep.
+
+A remaining separable cyclic cover has one wild totally ramified
+point.  Sending it to infinity and comparing coefficients under a
+nontrivial translation gives
+\[
+ W_f=\langle U^3,T^3+\alpha T^2U+\beta TU^2\rangle,\qquad
+ \alpha=0,\quad \kappa^2=-\beta.
+\]
+It is therefore represented by
+\[
+ f_a=e_2-ae_4,\qquad
+ W_{f_a}=\langle U^3,T^3+aTU^2\rangle.
+\]
+The affine members are $z^3+az+s$.  Such a member has three rational
+roots exactly when the additive map $z\mapsto z^3+az$ has a nonzero
+rational kernel, equivalently when $-a$ is a square.  Hence the
+nonsquare parameters form the deep orbit.  Its stabilizer is
+$t\mapsto\pm t+\beta$, of order $2q$, and orbit--stabilizer gives
+$(q^2-1)/2$.
+\end{proof}
+
+\begin{lemma}[$S_3$ stratum]\label{lem:s3}
+If $\phi_f$ has geometric monodromy $S_3$ and $q\geq23$, then the pencil
+contains a completely split squarefree cubic.
+\end{lemma}
+
+\begin{proof}
+By Proposition~\ref{prop:r5-incidence}, components of $Y_f$ correspond
+to monodromy orbits on distinct ordered roots.  The $S_3$ action is
+two-transitive, so $Y_f$ is geometrically integral and has arithmetic
+genus one.  Aubry--Perret gives
+\[
+       \#Y_f(\F_q)\geq q-2\sqrt q.
+\]
+The diagonal costs
+\[
+       Y_f\cdot\Delta=(2,2)\cdot(1,1)=4.
+\]
+Riemann--Hurwitz gives different degree four for the separable cubic
+map, hence at most four branch values.  A singular cubic has at most
+two distinct roots and at most two ordered off-diagonal pairs, so the
+branch deletion costs at most eight.  If
+$q-2\sqrt q>12$, a rational off-diagonal unramified point remains.  It
+gives two distinct rational roots of a squarefree cubic, whose third
+root is rational.  The inequality holds for every prime power
+$q\geq23$.
+\end{proof}
+
+\begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}
+The preceding cases exhaust every redundancy-five pencil for
+$q\geq23$.  Certificate R5 closes exactly
+\[
+       q\in\{7,8,9,11,13,16,17,19\}.
+\]
+It finds sporadic $S_3$-stratum orbits exactly at
+$q=7,8,9,11,13,17,19$ and none at $q=16$.
+\end{proposition}
+
+\begin{proof}
+The gcd degree is zero, one, or two.  Propositions
+\ref{prop:r5-gcd2} and \ref{prop:r5-gcd1} settle the positive-gcd
+cases.  In the trivial-gcd case the cubic map is inseparable or
+separable.  The inseparable case occurs only in characteristic three
+and the overlap equations give the all-cube nucleus pencil.  A
+separable transitive cubic has geometric monodromy $C_3$ or $S_3$,
+settled by Lemmas~\ref{lem:cyclic} and \ref{lem:s3}.  The stated finite
+residue, canonical representatives, stabilizers, histograms, and
+Frobenius links are exactly the domain of Certificate R5.
+\end{proof}
+
+\begin{table}[ht]
+\centering
+\caption{Complete sporadic orbit inventory at redundancy five.  Entries
+are $\PGL_2(q)$ orbit sizes; exponents denote multiplicity.}
+\label{tab:r5sporadic}
+\begin{tabular}{ccl}
+\toprule
+$q$ & number of sporadic points & orbit sizes\\
+\midrule
+7  & 644 & $28,112,168^3$\\
+8  & 756 & $252^3$\\
+9  & 900 & $180,360^2$\\
+11 & 990 & $330,660$\\
+13 & 728 & $182,546$\\
+17 & 1224& $1224$\\
+19 & 570 & $570$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The orbit sizes in Table~\ref{tab:r5sporadic} are a compact inventory,
+not orbit identifiers.  The electronic Certificate R5 records for
+each row a canonical normalized representative, stabilizer, complete
+cubic-pencil member histogram, and Frobenius image; equality with one
+of those canonical $\PGL_2$ orbits is the finite classification
+criterion.  Thus repeated sizes denote distinct certified orbits.
+

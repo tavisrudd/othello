@@ -1,0 +1,128 @@
+\section{Verification and formal boundary}\label{sec:verification}
+
+The conceptual theorems above are accompanied by deterministic,
+committed evidence bundles.  Table~\ref{tab:evidence} records which
+claims use exhaustive computation.  Every named bundle contains the
+primary generator, a compact JSON or text certificate, an independent
+replay where stated, and a SHA-256 manifest.
+The load-bearing generator, certificate, and replay hashes were
+rechecked during manuscript integration.  Two predecessor manifests
+also include living theorem reports whose report-only hashes became
+stale after later proof expansions.  No computational artifact hash is
+stale, and no predecessor manifest is silently rewritten here.  Stable
+public labels refer to the bundles through the release-level schema;
+dated internal filenames are retained only in the provenance record.
+
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{ccc}
+&\text{manuscript proof}\ \downarrow&\\[2pt]
+\text{classical import}
+&\longrightarrow\ \boxed{\text{paper claim}}\ \longleftarrow&
+\text{certificate/replay}\\[2pt]
+&\text{kernel implication}\ \uparrow&
+\end{array}
+\]
+\caption{Claim-level trust routes.  A mixed theorem may use several
+routes, but each route keeps its own boundary: certificates close
+finite domains, imports retain their hypotheses, and Lean proves only
+the printed implication.}
+\label{fig:trust-routes}
+\end{figure}
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.19\textwidth}
+                  >{\raggedright\arraybackslash}p{0.25\textwidth}
+                  >{\raggedright\arraybackslash}p{0.47\textwidth}}
+\caption{Public verification map.  Exact filenames, commands, hashes,
+domains, and stop conditions belong to the electronic supplement.}
+\label{tab:evidence}\\
+\toprule
+Public label & Verified domain & Replay and trust boundary\\
+\midrule
+\endfirsthead
+\toprule
+Public label & Verified domain & Replay and trust boundary\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Certificate R5 & nineteen finite fields & independent pointwise and
+orbitwise replay; canonical representatives and exhaustion records\\
+Certificate R6 & direct scan through $q=16$; finite bridge below $29$ &
+independent syndrome replay and separate radius gate\\
+Certificate R6-NF & small exceptional normal forms & deterministic
+normal-form reconstruction; not a second implementation\\
+Certificate R7 & $q=7,8,9,11$ and finite bridge below $37$ &
+independent five-secant/orbit checks; split-free and radius flags remain
+separate\\
+Certificate R8 & fixed-level characteristic cases and bounds &
+independent algebra/nucleus replay; not an ambient census\\
+Certificate R9 & residual algebra and transported slices & independent
+residual/slice replay; geometric integrality remains a paper proof\\
+Certificate R9-49 & characteristic-seven carrier at $q=49$ & one
+exhaustive carrier implementation; not a whole-code census\\
+Certificate Hessian & bounded ordered-Hessian algebra & regression
+only; does not replace the geometric component proof\\
+Certificate Lucas & recorded Lucas parameter domain & independent
+arithmetic replay\\
+Certificate e7 & quotient-cover open set and additive specialization &
+independent quotient-cover replay\\
+\end{longtable}
+\normalsize
+
+The public labels are defined by
+\texttt{supplement/CERTIFICATE-SCHEMA.md}.  Literal development commands
+and working directories are recorded in
+\texttt{supplement/REPRODUCING.md} and
+\texttt{verification-map.md}.  The release manifest is intentionally
+marked incomplete until it contains a repository URL, immutable tag and
+commit, archive identifier, DOI, byte counts, and hashes.  Consequently
+the present development draft is not an externally archived
+proof-complete release.
+
+The redundancy-nine residual algebra and synthesis implication are
+also formalized in Lean.  The import gate and its axiom-audit module are
+\[
+\begin{split}
+&\texttt{RelativeConicArcs.Gates.PRSRedundancyNine},\\
+&\texttt{RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit}.
+\end{split}
+\]
+Lean checks divided-power contraction, both residual Hankel identities,
+the determinant and branch formulas, the residual roots and their
+sum/product, the witness-to-shallow implication, the persistent-family
+cardinality, and the orbit-count table from explicit arithmetic-case
+and family-count inputs.  It does not derive that table from a formal
+$\PGL_2/\PGammaL_2$ action.  Geometric integrality,
+Hasse--Weil existence after deletions, identification of geometric
+families with PRS syndromes, and exhaustion remain explicit structure
+fields rather than hidden axioms.  The audit reports only the standard
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}
+dependencies.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Separation of mathematical input from kernel-checked
+formalization.}
+\label{tab:formal-trust}
+\begin{tabular}{p{0.19\textwidth}p{0.34\textwidth}p{0.37\textwidth}}
+\toprule
+Result & Mathematical input & Kernel-checked content\\
+\midrule
+R9 residual synthesis &
+six-slice component theorem, genus/deletion bounds, coding
+identification, and exhaustion &
+divided-power contraction, residual identities, determinant/branch
+formulas, roots, and witness-to-shallow implication\\
+R9 family inventory &
+the actual $\PGL_2/\PGammaL_2$ action and geometric family
+identification &
+arithmetic case inputs, family-count inputs, and the resulting numerical
+table\\
+\bottomrule
+\end{tabular}
+\end{table}
+

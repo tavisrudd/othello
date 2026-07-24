@@ -69,7 +69,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | E5 | FAIL | Every novelty comparison has a verified citation with complete metadata and an archived literature-audit record. | Source audit remains open. |
 | E6 | PASS | Long theorem inventories are upright and the literal phrase `paper spine` is absent. | Exact phrase scan is empty. |
 | E7 | REVIEW | Public verification table is compact, breakable, and does not create a nearly empty preceding page. | Inspect final rendered PDF after all row changes. |
-| E8 | FAIL | Thin driver, one file per major section, and separate appendices all build. | Most of the manuscript remains in the monolithic `main.tex`. |
+| E8 | PASS | Thin driver, one file per major section, and separate appendices all build. | `main.tex` is a 107-line driver; the eleven numbered sections and statement-adequacy appendix expand byte-for-byte to the pre-split source, and `make check` passes. |
 | PR | REVIEW | Titled provenance/responsibility section identifies derivation, computation, formalization, and author responsibility without overstating review. | Section exists; author confirmation remains external. |
 
 ## 6. Adversarial and release gates
