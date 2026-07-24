@@ -1,0 +1,19 @@
+import RelativeConicArcs.Gates.PRSFoundation
+
+/-!
+# Axiom audit for projective Reed--Solomon syndrome foundations
+
+This reproducible audit prints the axiom dependencies of the reusable logical terminals exported
+by `RelativeConicArcs.Gates.PRSFoundation`.  It adds no definitions or theorems.
+-/
+
+#print axioms RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member
+#print axioms RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member
+#print axioms RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree
+#print axioms RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member
+#print axioms RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member
+#print axioms RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card
+#print axioms RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent
+#print axioms RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent
+#print axioms RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm
+#print axioms RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis

@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-23
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, and C538 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, C538, and C539 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -31,8 +31,9 @@ six-slice/base-selection algebra, and one global ordered-Hessian bad-union polyn
 degree.  The manuscript now states the affected R7--R9 continuations and effective Hessian
 corollary conditionally rather than treating these as proved certificate inputs.  The development
 monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
-C545 remains the DOI route but is blocked until those gates close.  C539--C544
-close the paper-facing Lean package.  C531 still owns the remaining intrinsic degree-nine carrier
+C545 remains the DOI route but is blocked until those gates close.  C539 establishes the shared
+paper-facing Lean foundation and exact coverage ledger; C540--C544 close the degree-specific and
+aggregate package.  C531 still owns the remaining intrinsic degree-nine carrier
 strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
 C533 independently owns C525 threshold/deletion sharpening.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
@@ -656,7 +657,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
 | C545 | proof-complete preprint and DOI after second-draft gates | queued next, release-blocked | expanded refereeable manuscript, public trust/adequacy ledgers, immutable release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
-| C539 | shared beyond-four PRS Lean foundation | queued after C538 theorem freeze | adopted theorem map plus existing C517 API | common Hankel/contraction/synthesis interface and coverage ledger | formalization spine |
+| C539 | shared beyond-four PRS Lean foundation | complete | common Hankel/contraction/synthesis interface, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
 | C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
 | C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
 | C542 | redundancy-eight Lean closure | queued after C541 | C513 theorem package | three-marker `q>=43` synthesis and exact orbit terminal | formal redundancy-eight boundary |

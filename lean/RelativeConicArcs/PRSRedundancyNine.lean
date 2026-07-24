@@ -1,4 +1,4 @@
-import Mathlib
+import RelativeConicArcs.PRSFoundation
 
 /-!
 # Redundancy-nine projective Reed--Solomon synthesis interface
@@ -41,6 +41,17 @@ structure ResidualSliceInput (S : Type*) (q : ℕ) where
 
 namespace ResidualSliceInput
 
+/-- The redundancy-nine residual-slice hypotheses as an instance of the reusable
+predicate-level geometric witness interface. -/
+def toWitnessConstructionInput {S : Type*} {q : ℕ}
+    (input : ResidualSliceInput S q) :
+    PRSFoundation.WitnessConstructionInput S q 53 where
+  exceptional := input.exceptional
+  componentCondition := input.integralGenusAtMostOneSlice
+  rationalPointOutsideDeletedDivisors := input.rationalPointOutsideDeletedDivisors
+  hasKernelMember := input.splitSquarefreeWitness
+  pointGivesKernelMember := input.pointGivesWitness
+
 /-- Once the component and deleted-divisor estimates are supplied, every exceptional syndrome has
 a split squarefree witness. -/
 theorem exceptional_has_splitSquarefreeWitness {S : Type*} {q : ℕ}
@@ -49,8 +60,7 @@ theorem exceptional_has_splitSquarefreeWitness {S : Type*} {q : ℕ}
     (hpoint : ∀ s (_hs : input.exceptional s),
       input.rationalPointOutsideDeletedDivisors hq s) :
     ∀ s, input.exceptional s → input.splitSquarefreeWitness s := by
-  intro s hs
-  exact input.pointGivesWitness hq hs (hslice s hs) (hpoint s hs)
+  exact input.toWitnessConstructionInput.exceptional_has_kernel_member hq hslice hpoint
 
 end ResidualSliceInput
 
