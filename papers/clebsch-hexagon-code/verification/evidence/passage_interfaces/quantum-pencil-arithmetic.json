@@ -1,0 +1,646 @@
+{
+  "finite_field_replays": [
+    {
+      "arc_count": 4,
+      "characteristic": 3,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
+      "grs_count": 0,
+      "grs_phase": "fully_split_0",
+      "modulus_ascending": [
+        1,
+        0,
+        1
+      ],
+      "order": 9,
+      "predicted_arc_count": 4,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 20,
+      "characteristic": 5,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
+      "grs_count": 4,
+      "grs_phase": "fully_split_4",
+      "modulus_ascending": [
+        2,
+        0,
+        1
+      ],
+      "order": 25,
+      "predicted_arc_count": 20,
+      "reciprocal_quartic_character_count": 4
+    },
+    {
+      "arc_count": 24,
+      "characteristic": 3,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        2,
+        2,
+        0,
+        1
+      ],
+      "order": 27,
+      "predicted_arc_count": 24,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 43,
+      "characteristic": 7,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
+      "grs_count": 0,
+      "grs_phase": "fully_split_0",
+      "modulus_ascending": [
+        1,
+        0,
+        1
+      ],
+      "order": 49,
+      "predicted_arc_count": 43,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 3,
+      "characteristic": 7,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 7,
+      "predicted_arc_count": 3,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 7,
+      "characteristic": 11,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 11,
+      "predicted_arc_count": 7,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 9,
+      "characteristic": 13,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
+      "grs_count": 0,
+      "grs_phase": "fully_split_0",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 13,
+      "predicted_arc_count": 9,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 15,
+      "characteristic": 17,
+      "chi_minus_one": 1,
+      "chi_seventeen": 0,
+      "grs_count": 3,
+      "grs_phase": "characteristic_17_double_root",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 17,
+      "predicted_arc_count": 15,
+      "reciprocal_quartic_character_count": 3
+    },
+    {
+      "arc_count": 13,
+      "characteristic": 19,
+      "chi_minus_one": -1,
+      "chi_seventeen": 1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 19,
+      "predicted_arc_count": 13,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 21,
+      "characteristic": 23,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 23,
+      "predicted_arc_count": 21,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 25,
+      "characteristic": 29,
+      "chi_minus_one": 1,
+      "chi_seventeen": -1,
+      "grs_count": 2,
+      "grs_phase": "seventeen_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 29,
+      "predicted_arc_count": 25,
+      "reciprocal_quartic_character_count": 2
+    },
+    {
+      "arc_count": 25,
+      "characteristic": 31,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
+      "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 31,
+      "predicted_arc_count": 25,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 33,
+      "characteristic": 37,
+      "chi_minus_one": 1,
+      "chi_seventeen": -1,
+      "grs_count": 2,
+      "grs_phase": "seventeen_nonsquare",
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 37,
+      "predicted_arc_count": 33,
+      "reciprocal_quartic_character_count": 2
+    }
+  ],
+  "schema": "pencil-clebsch-ame-pencil-arithmetic-v2",
+  "symbolic": {
+    "arc_radical_product_coefficients_ascending": [
+      0,
+      -1,
+      5,
+      -9,
+      9,
+      -5,
+      1
+    ],
+    "conic_determinant_coefficients_ascending": [
+      0,
+      8,
+      -48,
+      128,
+      -176,
+      128,
+      -48,
+      8
+    ],
+    "minor_count": 20,
+    "quartic_discriminant": 272,
+    "reciprocal_quartic_coefficients_ascending": [
+      1,
+      -4,
+      7,
+      -4,
+      1
+    ],
+    "reciprocal_quartic_root_phases": {
+      "characteristic_17": 3,
+      "chi_minus_one_equals_minus_one": 0,
+      "chi_minus_one_equals_one_and_chi_seventeen_equals_minus_one": 2,
+      "conjugate_discriminant_product": 17,
+      "remaining_split_case": "2+2*chi(-1+4i), hence 0 or 4, for i^2=-1"
+    },
+    "resultants": {
+      "t2_minus_3t_plus_1": 4,
+      "t2_minus_t_plus_1": 4
+    },
+    "t_minus_one_specialization": {
+      "admissible_odd_characteristics_excluded": [
+        3,
+        5
+      ],
+      "arc_quadratic_values": [
+        3,
+        5
+      ],
+      "extension_towers": {
+        "characteristic_17": "S4 and GRS over every finite extension",
+        "characteristic_31": "A5 and non-GRS over every finite extension"
+      },
+      "grs_transition_characteristic": 17,
+      "reciprocal_quartic_value": 17
+    },
+    "three_column_minors": [
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          4,
+          -2
+        ],
+        "triple": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          3,
+          -1
+        ],
+        "triple": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          1,
+          -1
+        ],
+        "triple": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -1,
+          1
+        ],
+        "triple": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -3,
+          1
+        ],
+        "triple": [
+          0,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2
+        ],
+        "triple": [
+          0,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          2,
+          -4,
+          2
+        ],
+        "triple": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -1,
+          1
+        ],
+        "triple": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -3,
+          1
+        ],
+        "triple": [
+          1,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          3,
+          -1
+        ],
+        "triple": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          1,
+          -1
+        ],
+        "triple": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2
+        ],
+        "triple": [
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          2,
+          -2
+        ],
+        "triple": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2,
+          2
+        ],
+        "triple": [
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2,
+          2
+        ],
+        "triple": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          2,
+          -2
+        ],
+        "triple": [
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  "tetrahedral_stabilizer": {
+    "admissible_odd_enhancement_primes": [
+      17,
+      31
+    ],
+    "alternate_frame_replay": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "full_stabilizers": {
+      "17": {
+        "abstract_group": "S4",
+        "element_order_profile": {
+          "1": 1,
+          "2": 9,
+          "3": 8,
+          "4": 6
+        },
+        "extra_generator_matrix_mod_p": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15
+          ],
+          [
+            0,
+            9,
+            0
+          ]
+        ],
+        "extra_generator_permutation": [
+          0,
+          1,
+          4,
+          5,
+          3,
+          2
+        ],
+        "order": 24
+      },
+      "31": {
+        "abstract_group": "A5",
+        "element_order_profile": {
+          "1": 1,
+          "2": 15,
+          "3": 20,
+          "5": 24
+        },
+        "extra_generator_matrix_mod_p": [
+          [
+            1,
+            15,
+            8
+          ],
+          [
+            22,
+            11,
+            22
+          ],
+          [
+            19,
+            24,
+            12
+          ]
+        ],
+        "extra_generator_permutation": [
+          0,
+          2,
+          1,
+          4,
+          3,
+          5
+        ],
+        "order": 60
+      },
+      "7": {
+        "abstract_group": "A4",
+        "element_order_profile": {
+          "1": 1,
+          "2": 3,
+          "3": 8
+        },
+        "extra_generator_matrix_mod_p": null,
+        "extra_generator_permutation": null,
+        "order": 12
+      }
+    },
+    "generic_generator_matrices_over_Z": {
+      "[1, 0, 2, 3, 5, 4]": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "[2, 3, 4, 5, 0, 1]": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ]
+    },
+    "generic_group": "A4",
+    "generic_order": 12,
+    "nonzero_obstruction_gcd_counts": {
+      "1": 632,
+      "16": 4,
+      "17": 8,
+      "2": 4,
+      "31": 48,
+      "34": 4,
+      "8": 8
+    },
+    "permutations_checked": 720,
+    "prime_divisor_permutation_counts": {
+      "17": 12,
+      "2": 20,
+      "31": 48
+    }
+  }
+}

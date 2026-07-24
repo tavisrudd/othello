@@ -1,0 +1,789 @@
+{
+  "all_grs_obstruction": {
+    "all_signatures_differ": true,
+    "clebsch_cycle_signature": [
+      {
+        "determinant": 10,
+        "multiplicity": 120,
+        "trace": 1
+      },
+      {
+        "determinant": 1,
+        "multiplicity": 60,
+        "trace": 2
+      },
+      {
+        "determinant": 1,
+        "multiplicity": 120,
+        "trace": 3
+      },
+      {
+        "determinant": 1,
+        "multiplicity": 30,
+        "trace": 9
+      },
+      {
+        "determinant": 10,
+        "multiplicity": 120,
+        "trace": 10
+      }
+    ],
+    "evaluation_set_orbits": 4,
+    "evaluation_sets_checked_via_orbits": 924,
+    "grs_orbit_results": [
+      {
+        "cycle_signature": [
+          {
+            "determinant": 3,
+            "multiplicity": 40,
+            "trace": 1
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 12,
+            "trace": 2
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 48,
+            "trace": 3
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 40,
+            "trace": 4
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 48,
+            "trace": 5
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 57,
+            "trace": 6
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 52,
+            "trace": 7
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 57,
+            "trace": 8
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 44,
+            "trace": 9
+          },
+          {
+            "determinant": 3,
+            "multiplicity": 52,
+            "trace": 10
+          }
+        ],
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "matches_clebsch_cycle_signature": false,
+        "pgl2_orbit_size": 330
+      },
+      {
+        "cycle_signature": [
+          {
+            "determinant": 3,
+            "multiplicity": 50,
+            "trace": 1
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 55,
+            "trace": 3
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 50,
+            "trace": 4
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 55,
+            "trace": 5
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 45,
+            "trace": 6
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 50,
+            "trace": 7
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 45,
+            "trace": 8
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 50,
+            "trace": 9
+          },
+          {
+            "determinant": 3,
+            "multiplicity": 50,
+            "trace": 10
+          }
+        ],
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "matches_clebsch_cycle_signature": false,
+        "pgl2_orbit_size": 264
+      },
+      {
+        "cycle_signature": [
+          {
+            "determinant": 3,
+            "multiplicity": 60,
+            "trace": 1
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 18,
+            "trace": 2
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 42,
+            "trace": 3
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 60,
+            "trace": 4
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 42,
+            "trace": 5
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 45,
+            "trace": 6
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 45,
+            "trace": 7
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 45,
+            "trace": 8
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 48,
+            "trace": 9
+          },
+          {
+            "determinant": 3,
+            "multiplicity": 45,
+            "trace": 10
+          }
+        ],
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "matches_clebsch_cycle_signature": false,
+        "pgl2_orbit_size": 220
+      },
+      {
+        "cycle_signature": [
+          {
+            "determinant": 3,
+            "multiplicity": 48,
+            "trace": 1
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 24,
+            "trace": 2
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 48,
+            "trace": 3
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 48,
+            "trace": 4
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 48,
+            "trace": 5
+          },
+          {
+            "determinant": 9,
+            "multiplicity": 42,
+            "trace": 6
+          },
+          {
+            "determinant": 4,
+            "multiplicity": 45,
+            "trace": 7
+          },
+          {
+            "determinant": 5,
+            "multiplicity": 42,
+            "trace": 8
+          },
+          {
+            "determinant": 1,
+            "multiplicity": 60,
+            "trace": 9
+          },
+          {
+            "determinant": 3,
+            "multiplicity": 45,
+            "trace": 10
+          }
+        ],
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          9
+        ],
+        "matches_clebsch_cycle_signature": false,
+        "pgl2_orbit_size": 110
+      }
+    ],
+    "independent_lagrangian_replay": {
+      "agrees_with_css_signature": true,
+      "clebsch_signature_matches": 0,
+      "construction": "Recompute every four-party shortening directly inside the 6-dimensional Lagrangian stabilizer row space, project its 2-dimensional kernel to each party, and form the same holonomies without using the CSS code/dual decomposition.",
+      "distinct_grs_cycle_signatures": 4,
+      "grs_evaluation_sets_checked_individually": 924
+    },
+    "invariant_reason": "Four-party minimal stabilizer projections define party-to-party maps. A two-support cycle is conjugated at its base party by LC; recording trace/determinant for both orientations H and H^(-1) makes the multiset invariant under LC and party permutation.",
+    "multiplier_boundary": "Nonzero GRS column multipliers are local computational-basis scalings and hence local Clifford; no multiplier enumeration is needed.",
+    "pgl2_order": 1320
+  },
+  "clebsch": {
+    "code_rref": [
+      [
+        1,
+        0,
+        0,
+        3,
+        7,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        1,
+        7
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        10,
+        10
+      ]
+    ],
+    "dual_minimum_distance": 4,
+    "dual_rref": [
+      [
+        8,
+        8,
+        10,
+        1,
+        0,
+        0
+      ],
+      [
+        4,
+        10,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        10,
+        4,
+        1,
+        0,
+        0,
+        1
+      ]
+    ],
+    "minimum_distance": 4,
+    "stabilizer_rref": [
+      [
+        1,
+        0,
+        0,
+        3,
+        7,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        1,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        10,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        7,
+        8,
+        10
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        7,
+        10,
+        8
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "tau": 8
+  },
+  "field": "F_11",
+  "general_local_unitary_obstruction": {
+    "all_grs_orbits_differ": true,
+    "clebsch_moment_distribution": [
+      {
+        "moment": "11^-4",
+        "sum_rank": 4,
+        "triple_count": 70
+      },
+      {
+        "moment": "11^-6",
+        "sum_rank": 6,
+        "triple_count": 385
+      }
+    ],
+    "grs_orbit_results": [
+      {
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "matches_clebsch": false,
+        "moment_distribution": [
+          {
+            "moment": "11^-4",
+            "sum_rank": 4,
+            "triple_count": 62
+          },
+          {
+            "moment": "11^-6",
+            "sum_rank": 6,
+            "triple_count": 393
+          }
+        ],
+        "pgl2_orbit_size": 330
+      },
+      {
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "matches_clebsch": false,
+        "moment_distribution": [
+          {
+            "moment": "11^-4",
+            "sum_rank": 4,
+            "triple_count": 60
+          },
+          {
+            "moment": "11^-6",
+            "sum_rank": 6,
+            "triple_count": 395
+          }
+        ],
+        "pgl2_orbit_size": 264
+      },
+      {
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6
+        ],
+        "matches_clebsch": false,
+        "moment_distribution": [
+          {
+            "moment": "11^-4",
+            "sum_rank": 4,
+            "triple_count": 63
+          },
+          {
+            "moment": "11^-6",
+            "sum_rank": 6,
+            "triple_count": 392
+          }
+        ],
+        "pgl2_orbit_size": 220
+      },
+      {
+        "evaluation_set": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          9
+        ],
+        "matches_clebsch": false,
+        "moment_distribution": [
+          {
+            "moment": "11^-4",
+            "sum_rank": 4,
+            "triple_count": 64
+          },
+          {
+            "moment": "11^-6",
+            "sum_rank": 6,
+            "triple_count": 391
+          }
+        ],
+        "pgl2_orbit_size": 110
+      }
+    ],
+    "independent_all_evaluation_set_sweep": {
+      "clebsch_distribution_matches": 0,
+      "distinct_moment_distributions": 4,
+      "distribution_multiplicities": [
+        {
+          "evaluation_set_count": 264,
+          "moment_distribution": [
+            {
+              "moment": "11^-4",
+              "sum_rank": 4,
+              "triple_count": 60
+            },
+            {
+              "moment": "11^-6",
+              "sum_rank": 6,
+              "triple_count": 395
+            }
+          ]
+        },
+        {
+          "evaluation_set_count": 330,
+          "moment_distribution": [
+            {
+              "moment": "11^-4",
+              "sum_rank": 4,
+              "triple_count": 62
+            },
+            {
+              "moment": "11^-6",
+              "sum_rank": 6,
+              "triple_count": 393
+            }
+          ]
+        },
+        {
+          "evaluation_set_count": 220,
+          "moment_distribution": [
+            {
+              "moment": "11^-4",
+              "sum_rank": 4,
+              "triple_count": 63
+            },
+            {
+              "moment": "11^-6",
+              "sum_rank": 6,
+              "triple_count": 392
+            }
+          ]
+        },
+        {
+          "evaluation_set_count": 110,
+          "moment_distribution": [
+            {
+              "moment": "11^-4",
+              "sum_rank": 4,
+              "triple_count": 64
+            },
+            {
+              "moment": "11^-6",
+              "sum_rank": 6,
+              "triple_count": 391
+            }
+          ]
+        }
+      ],
+      "grs_evaluation_sets_checked_individually": 924
+    },
+    "invariant": "Multiset of Tr((rho_T tensor I)(rho_U tensor I)(rho_V tensor I)) over the 455 unordered triples of four-party subsets.",
+    "invariant_reason": "Party-local unitaries conjugate every identity-extended marginal by the same global product unitary, and party permutations only permute the 15 marginals. For a stabilizer state the moment is 11^(-rank(K_T+K_U+K_V)), where K_T is the stabilizer-label subspace supported in T.",
+    "scope": "Separates the Clebsch stabilizer state from every six-point generalized Reed--Solomon minimal-support AME state over F_11, allowing party permutation. It is not a classification against arbitrary non-GRS AME states."
+  },
+  "local_clifford_test": {
+    "allows_party_permutation": true,
+    "complete_reason": "Each four-party support has a two-dimensional stabilizer projection invertible at every supported party; a permutation and one local SL(2,11) block force the other five, after which all support relations and the full row space are checked.",
+    "counts": {
+      "anchor_sl2_blocks_checked": 950400,
+      "permutations_checked": 720,
+      "relation_consistent_candidates": 0,
+      "sl2_order": 1320
+    },
+    "equivalent": false,
+    "map": null
+  },
+  "pauli_convention": "X(a)|x>=|x+a>; Z(b)|x>=omega^(b*x)|x>",
+  "schema": "base_state-clebsch-ame-equivalence-v1",
+  "standard_extended_rs": {
+    "code_rref": [
+      [
+        1,
+        0,
+        0,
+        1,
+        3,
+        6
+      ],
+      [
+        0,
+        1,
+        0,
+        8,
+        3,
+        10
+      ],
+      [
+        0,
+        0,
+        1,
+        3,
+        6,
+        6
+      ]
+    ],
+    "dual_minimum_distance": 4,
+    "dual_rref": [
+      [
+        10,
+        3,
+        8,
+        1,
+        0,
+        0
+      ],
+      [
+        8,
+        8,
+        5,
+        0,
+        1,
+        0
+      ],
+      [
+        5,
+        1,
+        5,
+        0,
+        0,
+        1
+      ]
+    ],
+    "evaluation_points": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      "infinity"
+    ],
+    "minimum_distance": 4,
+    "stabilizer_rref": [
+      [
+        1,
+        0,
+        0,
+        1,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        8,
+        3,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        3,
+        6,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        7,
+        3,
+        10
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        8,
+        2,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        9,
+        1,
+        9
+      ]
+    ]
+  },
+  "state_convention": "|Psi_C>=11^(-3/2) sum_{c in C}|c>; labels ordered (x_0,...,x_5|z_0,...,z_5)"
+}
