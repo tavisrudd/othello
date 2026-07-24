@@ -65,7 +65,7 @@ closed.
 | E2 | Add notation and terminology tables before first technical use. | `r,n,d,s`, carrier terminology, and cover terminology are stable. | In this revision |
 | E3 | Add a contraction/deletion/lifting roadmap diagram. | Both contained and transverse branches are visible. | In this revision |
 | E4 | Replace the dated search-process paragraph by mathematical comparison. | No search date, citation-graph narrative, or database disclaimer remains in the paper. | In this revision |
-| E5 | Expand the bibliography by role and complete metadata after a source audit. | Every novelty comparison has an appropriate citation and verified metadata. | Open; no unverified citations will be invented |
+| E5 | Expand the bibliography by role and complete metadata after a source audit. | Every novelty comparison has an appropriate citation and verified metadata. | Closed by the role-based audit and DOI metadata reconciliation |
 | E6 | Use upright long-theorem text and replace “paper spine.” | Long theorem inventories are roman; literal phrase is absent. | In this revision |
 | E7 | Replace the floating filename table by a compact breakable public verification table. | The verification table begins without leaving a nearly empty preceding page. | In this revision |
 | E8 | Split the growing source into a thin driver, one file per major section, and separate appendices. | Section reviews and trust-ledger anchors do not depend on one monolithic file. | Closed; exact expanded-source equivalence and `make check` pass |

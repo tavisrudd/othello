@@ -66,7 +66,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | E2 | REVIEW | Notation and terminology tables precede first technical use and cover every stable term. | Notation table begins at `main.tex:116`; cold read required. |
 | E3 | REVIEW | Roadmap visibly shows construction followed by transverse/contained branches and lifting. | Overview table exists; inspect rendered page after source split. |
 | E4 | REVIEW | Paper contains mathematical comparison, not dated search-process narrative or database disclaimers. | Run paragraph-level literature cold read. |
-| E5 | FAIL | Every novelty comparison has a verified citation with complete metadata and an archived literature-audit record. | Source audit remains open. |
+| E5 | PASS | Every novelty comparison has a verified citation with complete metadata and an archived literature-audit record. | `literature-audit.md` consolidates the claim-specific audits, records read depth for all 15 bibliography entries, verifies every DOI metadata record, qualifies the three absence findings, and removes priority wording from the Hessian/Lucas boundary. |
 | E6 | PASS | Long theorem inventories are upright and the literal phrase `paper spine` is absent. | Exact phrase scan is empty. |
 | E7 | REVIEW | Public verification table is compact, breakable, and does not create a nearly empty preceding page. | Inspect final rendered PDF after all row changes. |
 | E8 | PASS | Thin driver, one file per major section, and separate appendices all build. | `main.tex` is a 107-line driver; the eleven numbered sections and statement-adequacy appendix expand byte-for-byte to the pre-split source, and `make check` passes. |

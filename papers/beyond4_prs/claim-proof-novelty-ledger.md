@@ -79,10 +79,10 @@ No row with `OPEN-MATH` or `REVIEW-GATE` is called proof-complete.
 
 | Claim under comparison | Status | Permitted wording |
 |---|---|---|
-| R5--R7 classifications | `NONE-FOUND / REVIEW-GATE` | “We did not locate a prior classification in the recorded search boundary.” |
-| Coherent marked contraction | `NONE-FOUND / REVIEW-GATE` | “The construction used here differs from the cited unmarked splitting-family semantics.” |
-| R8/R9 fixed-level bounds | `NONE-FOUND / REVIEW-GATE` | “We did not locate these fixed-level PRS bounds.” |
-| Ordered-Hessian and Lucas-carrier results | `NONE-FOUND / REVIEW-GATE` | No priority wording until the role-based literature audit is complete. |
+| R5--R7 classifications | `NONE-FOUND / QUALIFIED` | “To our knowledge, no prior classification was located in the recorded search boundary.” |
+| Coherent marked contraction | `NONE-FOUND / QUALIFIED` | “The construction used here differs from the cited unmarked splitting-family semantics.” |
+| R8/R9 fixed-level bounds | `NONE-FOUND / QUALIFIED` | “To our knowledge, the recorded search located no such fixed-level PRS bounds.” |
+| Ordered-Hessian and Lucas-carrier results | `NO PRIORITY CLAIM` | State the proved boundaries; do not claim first discovery or absence of predecessors. |
 
 The search method and database limitations belong in an adversarial novelty
 ledger, not in the mathematical manuscript.
