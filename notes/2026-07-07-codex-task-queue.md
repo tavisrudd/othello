@@ -146,6 +146,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
+- **C593 `[relconic]` [ACTIVE]** — classify or obstruct the tangent-derived four-intersection set forced by zero relative-conic defect, auditing tangent-envelope and few-weight-code literature and testing incidence/code constraints before reopening C556 → `notes/2026-07-24-c593-tangent-four-intersection-gate.md`.
 - **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
 
 ### `ame-lu`
