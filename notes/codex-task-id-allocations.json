@@ -845,8 +845,17 @@
       "last": 550,
       "purpose": "derive C548 four-copy divisor and multiplicities from the permutation-cover/sheaf holonomy mechanism",
       "sequence": 94
+    },
+    {
+      "count": 1,
+      "first": 551,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 551,
+      "purpose": "package the cap-game results for a flagship paper target while odd-q research remains active",
+      "sequence": 95
     }
   ],
-  "next_id": 551,
+  "next_id": 552,
   "schema": "codex-task-id-allocations-v1"
 }
