@@ -64,6 +64,12 @@ native evaluator, generated oracle, or external certificate in the imported clos
 
 Implementation commits: `a368682f`, `67d1e104`.
 
+The extra-juice upgrade passed serialized run `run-20260724-080649-dbb85a50` for the source,
+expanded axiom audit, and trace-only aggregate gate.  Its exact-target `--no-build` check also
+reported the import gate current.  The new commutation terminals use only `propext` and
+`Quot.sound`; the prime-power and synthesis terminals remain within the same three standard
+Lean/mathlib axioms.
+
 ## Extra-juice and Tao closeout
 
 The numerical stress test separated two cutoffs that prose can easily conflate.  The genus-one
