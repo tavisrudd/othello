@@ -11,6 +11,11 @@ background.
 The primary model is Milnor's reader-first transparency, held inside Serre's
 structural and verbal discipline.
 
+At sentence level, add Strunk and White's injunction to “make every word tell”:
+omit needless words, prefer direct and concrete language, and revise until each
+sentence advances the argument. Economy must serve clarity; never compress away
+a load-bearing mathematical bridge.
+
 - Make the central idea visible early. Give the reader the right picture,
   illuminating special case, or governing mechanism before asking them to carry
   technical detail.
