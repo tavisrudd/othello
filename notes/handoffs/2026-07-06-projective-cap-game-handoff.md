@@ -741,8 +741,12 @@ The C524 three-move leaf is a twelve-cap.  In `PG(2,67)`, secant coverage forces
 to have at least 189 legal points, while point-line incidence plus `capOK` forces at most 135.
 Thus no witness choice can yield even `capOK`, before terminality or purity is considered.
 More generally, every fixed leaf size fails for sufficiently large `q`; a uniform `Y_NK` route
-must have growing depth (secant coverage already requires square-root scale) or use a P-guard
-that permits active triples.  Report and proof:
+must have growing depth or use a P-guard that permits active triples.  The exact obstruction is
+`capOK` for an `s`-cap implies `q≤binom(s,2)`, giving selected-size floor
+`ceil((1+sqrt(1+8q))/2)` and a square-root exchange-depth floor.  The `ej2`
+upgrade shows the first forbidden order already forces overload excess `6binom(s,4)` on at least
+`binom(s-2,2)` lines (for `s=12,q=67`: excess 2970 on at least 45 lines), so a bounded
+active-triple patch is also impossible.  Report and proof:
 [`../2026-07-24-c80-capok-depth-obstruction.md`](../2026-07-24-c80-capok-depth-obstruction.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
@@ -769,10 +773,11 @@ C523/C524 report+cert+`--check` (q13/q17 and a separate q19 cert):
 Priority order and why:
 
 1. **C80 (spine).** Everything gates on it. The fixed-depth frontier is closed-negative:
-   no twelve-cap can be `capOK` once `q≥67`, and the same incidence inequality kills every
-   fixed leaf size asymptotically.  The live frontier is a variable-depth P-preserving descent
-   into `Y_NK`, with state-dependent stopping time, or a new P-guard that permits controlled
-   active triples.  Do not spend another probe on a bounded-depth witness selector.
+   no twelve-cap can be `capOK` once `q≥67`; generally `capOK` for an `s`-cap forces
+   `q≤binom(s,2)`.  The live frontier is a variable-depth P-preserving descent
+   into `Y_NK`, with state-dependent stopping time, or a new P-guard that handles an extensive
+   active-triple residual.  Do not spend another probe on a bounded-depth witness selector or
+   bounded-gadget patch.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

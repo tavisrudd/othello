@@ -21,6 +21,24 @@ all field orders.  Any uniform descent into `Y_NK` must have depth growing with
 `q`, or C80 must replace `capOK` by a P-guard that permits genuine
 capacity-two lines.
 
+The exact size obstruction is particularly clean:
+
+```text
+capOK for an s-cap (s ≥ 4)  ⟹  q ≤ binom(s,2).       (2)
+```
+
+Thus the required selected-set size is not just unbounded but at least
+
+```text
+ceil((1 + sqrt(1+8q))/2).
+```
+
+The failure beyond this threshold is also quantitatively large.  At the first
+forbidden order `q=binom(s,2)+1`, every `s`-cap has total capacity-two
+overload excess at least `6 binom(s,4)`, spread across at least
+`binom(s-2,2)` disjoint-from-cap lines.  Thus a bounded active-triple patch
+cannot repair the fixed-depth guard.
+
 ## Counting theorem
 
 Let `A` be an `s`-cap in `PG(2,q)`, let `U` be its legal continuation locus,
@@ -71,6 +89,35 @@ Double-count incidences `(u,ℓ)` with `u ∈ U`, `ℓ ∈ E₀`, and `u ∈ ℓ
 The point count is `|U|(q+1-s)`.  The `capOK` hypothesis makes the line count
 at most `2|E₀|`.  This proves the upper bound in (1).
 
+### Exact consequence: `q ≤ binom(s,2)`
+
+Put `B=binom(s,2)` and
+
+```text
+c = B+1-s = (s-1)(s-2)/2.
+```
+
+Suppose for contradiction that `q ≥ B+1`.  The lower bound in (1) becomes
+
+```text
+|U| ≥ q(q+1-B)+c ≥ 2q+c ≥ 2q+3,
+```
+
+where the last inequality uses `s≥4`.  Meanwhile
+
+```text
+|E₀| = q(q+1-s)+c,
+```
+
+so the upper bound becomes
+
+```text
+|U| ≤ 2q + 2c/(q+1-s).
+```
+
+But `q≥B+1` gives `q+1-s≥c+1`, hence the final fraction is strictly less
+than two.  Thus `|U|<2q+2`, contradicting `|U|≥2q+3`.  This proves (2).
+
 ## The q=67 contradiction
 
 The C524 leaf starts with the two burned-direction points, four further conic
@@ -95,16 +142,58 @@ reply `p` can produce a `capOK` leaf in this fixed-depth shape at `q=67`.
 In particular, it cannot produce an empty or pure-one-dimensional `capOK`
 continuation complex.
 
-For completeness, substituting `s=12` into (1) yields the necessary
-polynomial inequality
+Equivalently, the exact theorem gives `q≤binom(12,2)=66`.  The obstruction
+therefore holds for every field order `q≥67`, not only for the first odd
+prime example.
+
+## `ej2` — unavoidable overload is extensive
+
+For each line `ℓ` disjoint from `A`, put `m_ℓ=|U∩ℓ|` and define its
+capacity-two overload excess by
 
 ```text
-q³ - 78q² + 792q - 715 ≤ 0.
+Ω(A) = Σ_ℓ max(0,m_ℓ-2).
 ```
 
-Its left side is `2970` at `q=67` and is strictly increasing thereafter
-(its derivative is positive for `q ≥ 67`).  The obstruction therefore holds
-for every field order `q ≥ 67`, not only for the first odd prime example.
+The same incidence count gives a quantitative lower bound even without
+`capOK`:
+
+```text
+Ω(A)
+  ≥ |U|(q+1-s) - 2|E₀|
+  ≥ [N-s-B(q-1)](q+1-s) - 2[N-s(q+1)+B].          (3)
+```
+
+Indeed, `Σm_ℓ=|U|(q+1-s)` and
+`Σ max(0,m_ℓ-2) ≥ Σ(m_ℓ-2)`.
+
+At the first forbidden order `q=B+1`, the final expression in (3) simplifies
+exactly to
+
+```text
+s(s-1)(s-2)(s-3)/4 = 6 binom(s,4).
+```
+
+Since a projective line has at most `q+1` legal points, one overloaded line
+contributes at most `q-1=B` to `Ω`.  Therefore at least
+
+```text
+ceil(6 binom(s,4)/B) = binom(s-2,2)
+```
+
+different disjoint-from-cap lines are overloaded.
+
+For the C524 leaf (`s=12`, `q=67`), every possible leaf has
+
+```text
+Ω(A) ≥ 6 binom(12,4) = 2970
+```
+
+and at least `binom(10,2)=45` active capacity-two lines.  The obstruction is
+therefore not a single exceptional triple gadget.  It is an extensive
+rank-three residual, matching C528's observation that gadget count grows
+with `q` and ruling out a fixed-depth repair by adding a bounded number of
+controlled active triples.
 
 ## Consequence for C80
 
@@ -114,12 +203,27 @@ independent of witness selection, minimax value, conic type, and the
 pure-one-dimensional refinement: `capOK` itself is impossible at the fixed
 leaf size.
 
-The same inequality shows the scale of any repaired route.  If `s` stays
-fixed while `q` grows, its lower bound is `q²-O(q)` whereas its upper bound is
-`O(q)`.  Consequently a uniform `Y_NK` descent must select an unbounded
-number of points; at the level of secant coverage, one needs
-`binom(s,2)` on the order of `q`, hence at least square-root scale.  A bounded
-number of opponent-response exchanges cannot suffice.
+The exact theorem gives the scale of any repaired route.  A uniform `Y_NK`
+descent must reach
+
+```text
+s ≥ s_min(q) := ceil((1 + sqrt(1+8q))/2).
+```
+
+In the C524 architecture the residual child has size nine, the first
+responder move produces size ten, and each later opponent-response exchange
+adds two selected points.  If `k` is the number of those exchanges, any
+`capOK` stopping leaf must satisfy
+
+```text
+10 + 2k ≥ s_min(q),
+k ≥ ceil((s_min(q)-10)/2).                         (4)
+```
+
+Hence `k ≥ sqrt(q/2)-5+O(1)`.  A bounded number of exchanges cannot suffice;
+the obstruction is a quantitative depth floor, not only a fixed-depth
+counterexample.  At `q=67`, (4) already forces `k≥2`, whereas C524 uses
+`k=1`.
 
 The viable C80 alternatives are therefore:
 
@@ -134,11 +238,10 @@ carry game value through an unbounded number of exchanges.
 
 ## `ej` + `tt` closeout
 
-The cheap upgrade is the general inequality (1), not merely the q=67
+The cheap upgrade is the exact corollary `q≤binom(s,2)`, not merely the q=67
 counterexample.  It explains *why* the finite depth-2 signal cannot
-stabilize: fixed-size secants cover only `O(q)` points, leaving a quadratic
-legal reservoir, while `capOK` permits only a linear reservoir by
-point-line incidence counting.
+stabilize and supplies an explicit square-root selected-size floor and the
+exchange-depth lower bound (3).
 
 The proof-design correction is also sharper than “try depth 3.”  Every fixed
 depth fails eventually.  The right quantifier shape must include a stopping
@@ -154,8 +257,15 @@ time or induction depth depending on the state and on `q`; preserving
   No.  The obstruction applies to every twelve-cap and uses no witness
   features.
 - **[SETTLED] Would any other fixed routing depth suffice?** Not uniformly.
-  Inequality (1) rules out every fixed leaf size for all sufficiently large
-  `q`.
+  In fact `capOK` forces `q≤binom(s,2)`, so the C524 exchange count obeys the
+  explicit lower bound (4).
+- **[SETTLED] What scale must a repaired `Y_NK` descent reach?** At least
+  `s_min(q)=ceil((1+sqrt(1+8q))/2)` selected points, or
+  `sqrt(q/2)-5+O(1)` opponent-response exchanges in the current architecture.
+- **[SETTLED by ej2] Could a bounded family of active-triple gadgets patch
+  the fixed-depth guard?** No.  At `q=binom(s,2)+1`, every `s`-cap has
+  overload excess at least `6binom(s,4)` on at least `binom(s-2,2)` lines;
+  the twelve-cap instance forces excess 2970 on at least 45 lines.
 - **[OPEN — owner C80] Can a variable-depth responder strategy reach
   `Y_NK` while preserving P after every opponent move?** No invariant or
   stopping-time proof is known.  This is now the highest-EV continuation.
@@ -167,8 +277,10 @@ time or induction depth depending on the state and on `q`; preserving
 
 The requested theorem is decisively false, but the failure is unusually
 useful: a two-line incidence count removes the entire bounded-depth search
-space and explains the small-order illusion.  C80 now needs a genuinely
-asymptotic game strategy, not a better finite witness selector.
+space and explains the small-order illusion.  The `ej2` overload count also
+removes bounded-gadget patching.  C80 now needs a genuinely asymptotic
+game strategy over an extensive rank-three residual, not a better finite
+witness selector.
 
 go C80 cap prove a variable-depth P-preserving descent to `Y_NK`, with a
 state-dependent stopping time and the secant-coverage bound as the depth
