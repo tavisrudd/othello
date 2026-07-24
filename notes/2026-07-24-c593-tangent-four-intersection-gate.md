@@ -40,6 +40,30 @@ or
 Moreover the number of zero-secants in even size is \((k-1)(k-3)\), and the
 number of one-secants in odd size is \(k(k-2)\).
 
+## Stable reformulation
+
+The tangent set retains the full defect, not only its zero locus.  For a dual
+line \(\ell=x^*\), put \(j(\ell)=|\ell\cap\mathcal T_A|=\tau_A(x)\), so
+\[
+ r(x)=\frac{k-j(\ell)}2.
+\]
+The exact defect identity becomes
+\[
+ m\Delta_{\mathcal C}(A)=
+ \sum_{x\in\mathcal X_{\mathcal C}(A)}
+ \left(\frac{k-j(x^*)}{2}-1\right)
+ \left(m-\frac{k-j(x^*)}{2}\right)
+ \sum_{y\in\mathcal C}
+ \frac{k-j(y^*)}{2}
+ \left(m-\frac{k-j(y^*)}{2}\right).
+\]
+Thus \(\Delta_{\mathcal C}(A)\) is a weighted distance from a
+four-intersection spectrum, with a distinguished \(q+1\)-line family
+\(\{y^*:y\in\mathcal C\}\) carrying the shifted weight.  A useful theorem must
+exploit either this tangent-derived contact structure or stability of this
+almost-few-intersection set.  An exact zero-defect classification alone cannot
+improve the asymptotic bound unless it supplies a quantitative stability gap.
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -68,5 +92,6 @@ hypotheses have been checked against this tangent-derived set.
 | Feature | Disposition |
 |---|---|
 | Does the four-intersection spectrum have a known classification at \(k\asymp\sqrt{2q}\)? | Open; primary-source audit in progress. |
-| Do ordinary incidence or Pless moments improve C558's arithmetic alternatives? | Open; derive before attempting stronger tools. |
+| Do ordinary incidence or Pless moments improve C558's arithmetic alternatives? | Likely no: the first two moments are the existing clique decomposition; higher code coefficients must be separated from automatic collinearity counts. |
 | Does tangent contact impose more than the abstract spectrum? | Open; this is the likely source of any genuine carrier obstruction. |
+| Can exact rigidity improve the asymptotic lower bound by itself? | No: a quantitative stability gap for the displayed weighted distance is required. |
