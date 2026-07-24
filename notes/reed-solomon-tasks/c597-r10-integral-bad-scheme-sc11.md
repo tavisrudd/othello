@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** active
+**Status:** complete; \(\mathrm{SC}(j)\) holds for every \(j\geq6\)
 
 ## Objective
 
@@ -54,3 +54,13 @@ The C545 submission manuscript, Lean tree, and all other lanes remain frozen.
   charts cover the intended recursively pointed functor.
 - Stop at the first surviving non-cyclic component or failed chart/saturation
   equivalence; arbitrary higher-level continuation requires another task.
+
+## Outcome
+
+`notes/2026-07-24-c597-r10-integral-bad-scheme-sc11.md` constructs the
+integral ordered-root incidence over the cubic-pencil Grassmannian, proves
+the exhaustive symmetric/exchanged factorization dichotomy, and gives a
+cleared-denominator bridge from the noncollision Pluecker ideal to C595's
+cyclic syndrome ideal.  The vertical fibres are exactly the C525/C595
+modular and rank/fixed-factor cases.  Hence \(\mathrm{SC}(11)\), and more
+strongly \(\mathrm{SC}(j)\) for every \(j\geq6\), is proved with \(N_j=6\).

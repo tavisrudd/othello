@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -166,11 +166,21 @@ minimal cleared-denominator integer \(N_j=6\); after persistent, modular,
 and rank/fixed-factor saturation the cyclic residual is empty at every
 level, including the first unresolved application R11.  The R6/R7
 regressions are scheme-exact over \(\mathbf Q\), \(\mathbf F_2\), and
-\(\mathbf F_3\), with both infinity endpoints retained.  Full
-\(\mathrm{SC}(11)\) remains open at a sharper input gate: the complete
-non-cyclic R10 recursively pointed bad scheme has not been packaged as one
-integral generator ideal with proved chart gluing and saturation
-equivalence.
+\(\mathbf F_3\), with both infinity endpoints retained.  C597 closes the
+remaining non-cyclic gate.  Its integral ordered-root incidence on
+\(\operatorname{Gr}(2,4)\) has an exhaustive symmetric/exchanged
+factorization dichotomy; after collision and persistent saturation the
+only exchanged branch is C595's cyclic carrier.  A six-generator
+Pluecker-to-syndrome bridge satisfies \(J\subset V\) and
+\(6DV\subset J\), while the binary and ternary fibres are exactly C525's
+ordered-Hessian persistent/Lucas locus and C595's wild rank/fixed-factor
+locus.  Therefore \(\mathrm{SC}(j)\) holds for every \(j\geq6\), with
+uniform \(N_j=6\).  The printed uniform transverse theorem is now
+unconditional: above
+\(6r-15+\lfloor2\sqrt{6r-17}\rfloor\), every split-free
+redundancy-\(r\) syndrome is persistent or modular.  Paper promotion
+remains gated on a claim-specific literature audit, independent specialist
+review, and explicit reopening of C545.
 C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -820,7 +830,6 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
-| 2 | C597 | active continuation of C595 | construct the complete non-cyclic R10 integral bad scheme and test \(\mathrm{SC}(11)\) |
 
 ## Unallocated level-ups
 

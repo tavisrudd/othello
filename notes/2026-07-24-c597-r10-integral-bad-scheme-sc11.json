@@ -1,0 +1,63 @@
+{
+  "finite_factor_controls": {
+    "2": {
+      "classified_union_images": 19,
+      "cyclic_swapped_images": 4,
+      "rational_symmetric_factorization_images": 19,
+      "swapped_collision_images": 6,
+      "symmetric_collision_images": 18
+    },
+    "3": {
+      "classified_union_images": 51,
+      "cyclic_swapped_images": 9,
+      "rational_symmetric_factorization_images": 51,
+      "swapped_collision_images": 10,
+      "symmetric_collision_images": 46
+    },
+    "5": {
+      "classified_union_images": 181,
+      "cyclic_swapped_images": 16,
+      "rational_symmetric_factorization_images": 181,
+      "swapped_collision_images": 21,
+      "symmetric_collision_images": 171
+    }
+  },
+  "inputs": {
+    "c595_integer_N": 6,
+    "c595_json_sha256": "ddfd860084a822aeae362a40fbac02d8053ae92546cd8214bc432dc681f5981c"
+  },
+  "integral_bridge": {
+    "certificate": [
+      "J is contained in V integrally",
+      "6*D*V is contained in J integrally",
+      "(J:D^infinity)=V over Z[1/6]"
+    ],
+    "cleared_denominator": 6,
+    "persistent_equation": "det Hankel_3(c)",
+    "pluecker_pullback_generators": 6,
+    "syndrome_cyclic_generators": 7
+  },
+  "sc11": {
+    "combined_integer_N11": 6,
+    "reason": "rank/persistent and Lucas branches are C536; collision and fixed-factor branches are uniform; the factorization dichotomy leaves only collision or cyclic branches; C595 eliminates cyclic/wild residues; C525 closes characteristic 2.",
+    "status": "proved"
+  },
+  "schema": "c597-r10-integral-bad-scheme-sc11-v1",
+  "uniform_upgrade": {
+    "scope": "the recursively pointed component assertion SC(j), not arithmetic deepness of points on the Lucas carrier",
+    "status": "proved for every j>=6"
+  },
+  "universal_ordered_root_model": {
+    "base": "Gr(2,Gamma^3 E)_Z",
+    "equation": "z0+z1(t+s)+z2(t^2+ts+s^2)+z3*ts+z4*ts(t+s)+z5*t^2*s^2",
+    "factorization_dichotomy": {
+      "swapped_factors": "(ad-bc)(ad-b^2+bc-c^2)=0",
+      "symmetric_factors": "(ac-b^2)(AC-B^2)=0"
+    },
+    "pluecker_relation": "z0*z5-z1*z4+z2*z3"
+  },
+  "vertical_fibres": {
+    "2": "Pluecker pullback has the binary cyclic plane c0=c4=0 plus a component contained in the persistent determinant; C525 closes the remaining ordered-Hessian inseparable locus.",
+    "3": "Use the true wild cone rather than the non-flat primitive specialization; C595 confines its coherent-Fano pullback to the rank/fixed-factor boundary."
+  }
+}
