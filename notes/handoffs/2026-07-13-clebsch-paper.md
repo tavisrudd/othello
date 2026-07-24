@@ -16,7 +16,7 @@
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 20-page candidate with a complete nineteen-row release surface.
+warning-free 19-page candidate with a complete nineteen-row release surface.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary
@@ -25,8 +25,11 @@ A fresh separately user-launched, context-free PDF review returned final
 `GO`, with no blocking or material minor finding. C320 is complete; C182 is
 the active Paper I archive/release task. A later editorial review's
 Dye-bound rigor clarification and presentation findings are repaired on
-current `main`; the regenerated nineteen-row release surface and its
-fifteen-check clean replay are green.
+current `main`. A subsequent elevation pass replaces four separate
+small-arc counts by a universal chord-defect theorem, proves
+$|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$, classifies conic filling
+through seven points, and reduces the eight-point case to
+$q\in\{13,16,17,19\}$ while cutting a page of non-feeding census material.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has
@@ -60,6 +63,8 @@ The authoritative split records are:
   partition;
 - `notes/2026-07-24-c576-clebsch-rigidity-candidate.md` — Paper I build,
   hashes, and referee assessment.
+- `notes/2026-07-24-c182-clebsch-paper-release.md` — universal-bound
+  elevation, release verification, and remaining archive blocker.
 
 ## Source roots and status
 
