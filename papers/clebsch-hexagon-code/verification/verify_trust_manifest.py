@@ -34,6 +34,15 @@ ROUTES = {
 COMPONENT_ROUTES = ROUTES - {"mixed"}
 HEX_64 = re.compile(r"^[0-9a-f]{64}$")
 HEX_40 = re.compile(r"^[0-9a-f]{40}$")
+SHELL_EXECUTABLES = {
+    "bash",
+    "dash",
+    "fish",
+    "powershell",
+    "pwsh",
+    "sh",
+    "zsh",
+}
 
 
 def fail(message: str) -> NoReturn:
@@ -81,6 +90,47 @@ def validate_file(
     if expected_digest != actual_digest:
         fail(f"{where}.sha256 does not match {path_text}")
     return path, path_text
+
+
+def validate_checks(
+    checks: object, where: str, repository_root: Path
+) -> None:
+    if not isinstance(checks, list) or not checks:
+        fail(f"{where} must be a nonempty list")
+    seen_ids: set[str] = set()
+    for index, check in enumerate(checks):
+        check_where = f"{where}[{index}]"
+        if not isinstance(check, dict):
+            fail(f"{check_where} must be an object")
+        check_id = require_nonempty_string(check.get("id"), f"{check_where}.id")
+        if check_id in seen_ids:
+            fail(f"{where} contains duplicate ID {check_id!r}")
+        seen_ids.add(check_id)
+        cwd_text = require_nonempty_string(check.get("cwd"), f"{check_where}.cwd")
+        cwd_relative = Path(cwd_text)
+        if cwd_relative.is_absolute() or ".." in cwd_relative.parts:
+            fail(f"{check_where}.cwd must be a safe repository-relative path")
+        cwd = (repository_root / cwd_relative).resolve()
+        if not cwd.is_relative_to(repository_root.resolve()) or not cwd.is_dir():
+            fail(f"{check_where}.cwd does not name a repository directory")
+        argv = check.get("argv")
+        if (
+            not isinstance(argv, list)
+            or not argv
+            or any(not isinstance(item, str) or not item for item in argv)
+        ):
+            fail(
+                f"{check_where}.argv must be a nonempty array of nonempty strings"
+            )
+        if Path(argv[0]).name in SHELL_EXECUTABLES:
+            fail(f"{check_where}.argv may not invoke a shell")
+        timeout = check.get("timeout_seconds")
+        if (
+            not isinstance(timeout, int)
+            or isinstance(timeout, bool)
+            or not 1 <= timeout <= 86400
+        ):
+            fail(f"{check_where}.timeout_seconds must be an integer from 1 to 86400")
 
 
 def validate_lean(evidence: object, where: str, repository_root: Path) -> None:
@@ -279,6 +329,9 @@ def main() -> int:
     )
     validate_file(
         verify_all.get("output"), "manifest.verify_all.output", repository_root
+    )
+    validate_checks(
+        verify_all.get("checks"), "manifest.verify_all.checks", repository_root
     )
 
     manuscript_bytes = manuscript_path.read_bytes()

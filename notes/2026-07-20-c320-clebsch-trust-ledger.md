@@ -49,6 +49,12 @@ The initial public verification surface is under
 - `extract_gate_audits.py` records each import-only gate's exact SHA-256, imports, declared
   `#print axioms` terminals, and whether the audit is embedded in that gate.  It does not mistake
   an import-only module name for an audited terminal surface.
+- `verify_release.py` is the single argv-only release runner.  It rejects shell commands, requires
+  a clean Git worktree and pinned-commit ancestry, validates the manifest first, runs every
+  uniquely named check with an explicit bounded timeout, reports only bounded failure tails, and
+  verifies that no tracked or untracked repository path changed during the run.  Ignored build
+  caches are outside the Git snapshot; every scholarly output is instead a tracked hash-pinned
+  manifest artifact.
 
 The final `trust_manifest.json` is deliberately absent at this foundation stage.  The validator
 therefore fails loudly rather than accepting an incomplete or baseline-only ledger as a release
@@ -67,6 +73,8 @@ python3 verification/verify_trust_manifest.py
   -> fails closed because trust_manifest.json has not yet been admitted
 python3 verification/extract_gate_audits.py <thirteen completed gate paths>
   -> 13 gates, 162 embedded audit terminals
+python3 verification/verify_release.py
+  -> fails closed because trust_manifest.json has not yet been admitted
 ```
 
 The initial gate-surface pass finds that six of the thirteen admitted completed gates have no
