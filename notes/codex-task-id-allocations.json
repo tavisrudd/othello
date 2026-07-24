@@ -980,8 +980,17 @@
       "last": 591,
       "purpose": "complete the six-party Weyl stabilizer action, CSS Lagrangian and minimum-support clauses, and prove the AME-to-[6,3,4] converse",
       "sequence": 109
+    },
+    {
+      "count": 1,
+      "first": 592,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 592,
+      "purpose": "six-point Gale common-concurrency invariant falsifier for the relative-conic lower-bound ceiling",
+      "sequence": 110
     }
   ],
-  "next_id": 592,
+  "next_id": 593,
   "schema": "codex-task-id-allocations-v1"
 }
