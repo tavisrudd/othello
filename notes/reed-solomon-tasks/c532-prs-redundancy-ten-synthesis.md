@@ -1,6 +1,6 @@
 # C532 — PRS redundancy-ten synthesis
 
-**Lane:** `reed-solomon` · **Status:** queued after C531
+**Lane:** `reed-solomon` · **Status:** complete 2026-07-24
 
 ## Objective
 
@@ -14,6 +14,11 @@ domain and stop condition; do not substitute an ambient syndrome census.
 
 Eventual report:
 `notes/2026-07-23-c532-prs-redundancy-ten-synthesis.md`.
+
+Outcome: exact persistent-only classification for odd `q>=59`; in
+characteristic two, exact persistent/Lucas containment from `q>=64`, with
+the rank-two nonconstant Artin--Schreier cover and two-dimensional carrier
+quotient retained as the honest residue.
 
 ## Entry gate
 

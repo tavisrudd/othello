@@ -1,0 +1,92 @@
+{
+  "characteristic_two_residue_bound": {
+    "candidate_upper_bound": "q*(q^2-1)+q^4*(q+1)",
+    "outside_U_points": "q^4*(q+1)",
+    "rank_two_U_points": "q*(q^2-1)"
+  },
+  "characteristic_two_slice": {
+    "base_selection_threshold": 45,
+    "deletion_degrees": {
+      "inseparability_branch": 2,
+      "moving_fixed_diagonal": 5,
+      "residual_determinant": 2,
+      "residual_through_fixed_root": 10,
+      "residual_through_moving_root": 4
+    },
+    "deletion_total": 23,
+    "first_power_of_two": 64
+  },
+  "generic_spine": {
+    "base_deletion": 12,
+    "collision_degree": 14,
+    "deletion_per_marker": 6,
+    "deletion_total": 42,
+    "first_prime_power": 59,
+    "genus_bound": 1,
+    "marker_count": 5,
+    "modular_transverse_degree_bound": 2,
+    "persistent_transverse_degree": 3,
+    "transverse_plus_collision": 19,
+    "transverse_total_bound": 5
+  },
+  "kernel_member_degree": 8,
+  "persistent": {
+    "cardinality": "q*(q+1)^2/2",
+    "orbit_rows": [
+      {
+        "case": "p=3",
+        "d": 1,
+        "pgamma": 3,
+        "pgl": 3
+      },
+      {
+        "case": "p!=2,3; d=1",
+        "d": 1,
+        "pgamma": 2,
+        "pgl": 2
+      },
+      {
+        "case": "p!=2,3; d=3",
+        "d": 3,
+        "pgamma": 3,
+        "pgl": 3
+      },
+      {
+        "case": "p!=2,3; d=9; p mod 9 = 8",
+        "d": 9,
+        "pgamma": 6,
+        "pgl": 6
+      },
+      {
+        "case": "p!=2,3; d=9; p mod 9 in {2,5}",
+        "d": 9,
+        "pgamma": 4,
+        "pgl": 6
+      },
+      {
+        "case": "p=2; m even",
+        "d": 1,
+        "pgamma": 2,
+        "pgl": 2
+      },
+      {
+        "case": "p=2; m mod 6 in {1,5}",
+        "d": 3,
+        "pgamma": 3,
+        "pgl": 3
+      },
+      {
+        "case": "p=2; m mod 6 = 3",
+        "d": 9,
+        "pgamma": 4,
+        "pgl": 6
+      }
+    ],
+    "sigma_cardinality": "q*(q^2-1)/2",
+    "sigma_law": "C_gcd(9,q+1) modulo inversion and multiplication by p",
+    "tangent_cardinality": "q*(q+1)",
+    "tangent_law": "z -> z + 9*u"
+  },
+  "schema": "c532-redundancy-ten-synthesis-v1",
+  "syndrome_degree": 9
+}

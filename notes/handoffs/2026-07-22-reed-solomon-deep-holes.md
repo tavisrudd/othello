@@ -4,7 +4,14 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C531, C538--C544 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C532, C538--C544 complete. C532 gives
+the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
+persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
+`T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
+persistent/Lucas union; both rank-one Lucas strata are shallow, while the rank-two nonconstant
+Artin--Schreier cover and the complementary two-dimensional quotient remain explicit residues.
+The generic five-marker deletion/transverse budgets are `42/19`, and the characteristic-two
+ordered-Hessian base/deletion thresholds are `45/23`.  C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -682,7 +689,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; C530 owns quotient-cover arithmetic |
 | C530 | degree-nine `e_7` quotient cover | complete (obstruction exit) | nonconstant Artin--Schreier normalization; `AGL_3(F2)` additive subcover; orbit shallow over every admissible field | exact distinguished-orbit arithmetic | closed `e_7` theorem boundary |
 | C531 | full degree-nine Lucas-carrier strata | complete (obstruction exit) | tensor filtration; three finite geometric strata; uniform rank-one shallowness; rank-two \(A_5\) twists plus nonconstant Artin--Schreier cover; two-dimensional complement quotient | exact carrier theorem boundary |
-| C532 | PRS redundancy-ten synthesis | queued; C531 gate green | explicit degree-nine carrier boundary | effective high-field deep set, threshold, and orbit law with honest residues | fixed-level theorem |
+| C532 | PRS redundancy-ten synthesis | complete | odd `q>=59` persistent-only; binary `q>=64` persistent/Lucas containment; exact orbit law and explicit rank-two/positive-moduli residues | strongest honest fixed-level theorem without a carrier census | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
@@ -757,9 +764,10 @@ history.
 
 ## Next command
 
-`go C532`
+`go C533`
 
-(C531 has closed the finite carrier-stratum gate. C532 should determine the strongest honest
-redundancy-ten synthesis before any new carrier-cover task is allocated. C545 remains externally
+(C532 has closed the strongest honest redundancy-ten synthesis. C533 is the next allocated
+reed-solomon task and independently sharpens the C525 threshold/deletion constants; the
+higher-EV rank-two Artin--Schreier avoidance successor remains behind allocation. C545 remains externally
 blocked on its final reader, clean export/replay, immutable identifiers, and author/account
 confirmation. No external upload is authorized.)
