@@ -39,9 +39,9 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
-| C1-R5 | FAIL | Public table gives canonical representatives, invariants, stabilizers, Frobenius fusion, and completeness for every R5 orbit, including equal-size classes. | Certificate schema exists; public records are incomplete and manuscript still names internal C491 data. |
-| C1-R6 | FAIL | Same public record for R6. | Manuscript still names internal C498 data. |
-| C1-R7 | FAIL | Same public record for R7, with split-free versus code-deep status separated. | Manuscript still names internal C509 data. |
+| C1-R5 | PASS | Public table gives canonical representatives, invariants, stabilizers, Frobenius fusion, and completeness for every R5 orbit, including equal-size classes. | `supplement/CLASSIFICATION-RECORDS.{json,md}` is generated from the hash-pinned frozen R5 certificate and checks every orbit-size sum. |
+| C1-R6 | PASS | Same public record for R6. | The same generated record exposes every R6 representative, factor/invariant record, stabilizer, Frobenius link, and completeness sum. |
+| C1-R7 | PASS | Same public record for R7, with split-free versus code-deep status separated. | The generated record labels `q<11` as `split_free_only`, labels the radius-supported range `code_deep_hole`, and preserves every representative and Frobenius link. |
 | C2 | REVIEW | Every prime power below every geometric threshold is assigned to geometry, a direct certificate, radius exclusion, or an explicit open gate. | Field-range tables exist; cross-check them against certificate domains and radius premises. |
 | C3 | PASS | Every R7 code-deep statement retains the `q>=11` covering-radius premise. | Closed in manuscript; retain during proof edits. |
 | C4 | PASS | The characteristic-seven carrier is separate from whole-code R9 classification. | Separate proposition and non-classification warning are present. |
@@ -50,7 +50,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
-| R1 | FAIL | Public-facing manuscript uses stable `Certificate R5`--`Certificate e7` labels, with no internal C-number artifact references. | Exact scan finds four C-number lines. |
+| R1 | PASS | Public-facing manuscript uses stable `Certificate R5`--`Certificate e7` labels, with no internal C-number artifact references. | Exact manuscript scan is empty after replacing the four internal C-number references. |
 | R2 | REVIEW | Certificate schema lets an external implementer identify inputs, outputs, orbit convention, stop condition, and independent replay class. | `supplement/CERTIFICATE-SCHEMA.md` exists; cold implementer read required. |
 | R3 | REVIEW | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/REPRODUCING.md` exists; execute every public command from the export. |
 | R4 | FAIL | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | Development template has 12 `TBD` lines. |

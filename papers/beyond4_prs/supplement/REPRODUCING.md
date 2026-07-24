@@ -47,5 +47,33 @@ described as an independent derivation.
 | Certificate Lucas | recorded Lucas arithmetic parameter domain | independent arithmetic replay |
 | Certificate e7 | recorded quotient-cover open set and additive specialization | independent quotient-cover replay |
 
+The public R5--R7 orbit tables are a deterministic projection of the
+hash-pinned frozen certificates.  From the development repository root run:
+
+```text
+python3 papers/beyond4_prs/supplement/build_classification_records.py --check
+```
+
+This verifies the embedded source hashes, every projected record, and every
+orbit-size completeness sum.  It does not rerun the classifications.
+
 Literal commands and internal artifact names remain in
 `../verification-map.md` until the release archive supplies stable paths.
+
+## Public classification-record extraction
+
+From `papers/beyond4_prs/` in the development checkout:
+
+```text
+python3 supplement/build_classification_records.py
+git diff --exit-code -- supplement/CLASSIFICATION-RECORDS.json
+jq -e 'all(.records[].fields[]; .exhaustion_identity == true)' \
+  supplement/CLASSIFICATION-RECORDS.json
+```
+
+The first command reads only the frozen R5, R6, R6-NF, and R7 certificates
+named by the builder.  It stops after serializing all 19 R5 fields, 11 R6
+fields, and 14 R7 fields.  The second command proves byte-for-byte agreement
+with the committed public record; the third independently checks every
+recorded orbit-size exhaustion identity.  This extraction does not rerun the
+underlying finite classifications.

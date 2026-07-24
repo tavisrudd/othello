@@ -42,7 +42,7 @@ closed.
 
 | Gate | Required change | Acceptance test | Status |
 |---|---|---|---|
-| C1 | Give public canonical representatives, stabilizers, invariants, Frobenius fusion, and completeness records for R5--R7. | Repeated orbit sizes are distinguishable without internal task reports. | Schema added in this revision; records open |
+| C1 | Give public canonical representatives, stabilizers, invariants, Frobenius fusion, and completeness records for R5--R7. | Repeated orbit sizes are distinguishable without internal task reports. | Closed by generated, hash-pinned public JSON and Markdown records |
 | C2 | Add a field-range ledger for every prime power below each geometric threshold. | Every field is assigned to geometry, direct certificate, radius exclusion, or an explicitly open gate. | In this revision |
 | C3 | Keep split-free syndrome and code deep-hole classifications distinct at redundancy seven. | Every summary retains the `q>=11` covering-radius gate. | Closed in source |
 | C4 | Separate the characteristic-seven carrier calibration from whole-code redundancy-nine classification. | The carrier result is a separate proposition with an explicit non-classification warning. | Closed in source; exposition strengthened in this revision |

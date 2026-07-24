@@ -150,11 +150,11 @@ bound and its covering-radius hypothesis.
 \end{definition}
 
 \paragraph{Status of this draft.}
-This integrated version freezes the theorem spine and the computational
-trust boundaries.  It is a research-announcement draft: the
-degree-specific proof expansions and immutable external supplement
-listed in the proof ledger remain release gates.  In particular, this
-version is not described as a proof-complete submission.
+This integrated version is a proof-complete pre-release candidate, not
+a refereed publication.  The public classification records, formal
+statement boundary, literature audit, immutable external supplement,
+and release metadata remain independent release gates.  No DOI-bearing
+Version~1 is authorized until the release checklist closes them.
 
 \begin{theorem}[Complete redundancy-five classification]\label{thm:r5}
 Let $q\geq7$ be a prime power.  The covering radius of $\PRS(q-4)$ is
@@ -555,7 +555,7 @@ $q$ & number of sporadic points & orbit sizes\\
 \end{table}
 
 The orbit sizes in Table~\ref{tab:r5sporadic} are a compact inventory,
-not orbit identifiers.  The electronic C491 certificate records for
+not orbit identifiers.  The electronic Certificate R5 records for
 each row a canonical normalized representative, stabilizer, complete
 cubic-pencil member histogram, and Frobenius image; equality with one
 of those canonical $\PGL_2$ orbits is the finite classification
@@ -1077,11 +1077,10 @@ The five small tables are exhaustive computations.  Their semilinear
 orbit counts are $18,5,2,2,1$; a collision-energy invariant plus, in
 odd characteristic, the quintic root-divisor type separates the
 classes up to precisely Frobenius fusion.
-The C498 census certificate supplies a canonical representative,
+Certificate R6 supplies a canonical representative,
 stabilizer, member histogram, and Frobenius link for every projective
-orbit, while the normal-form certificate supplies the collision-energy
-and root-divisor fingerprint.  Orbit counts alone are not used as
-identifiers.
+orbit, while Certificate R6-NF supplies the collision-energy and
+root-divisor fingerprint.  Orbit counts alone are not used as identifiers.
 
 \subsection{Redundancy seven}
 
@@ -1238,7 +1237,7 @@ by an independent five-secant replay.  The radius theorem promotes the
 split-free list only from $q\geq11$.
 \end{proof}
 
-For the four finite rows the C509 certificate contains the canonical
+For the four finite rows Certificate R7 contains the canonical
 representative, stabilizer, persistent/central flags, and Frobenius link
 of every orbit.  The displayed size profile is only a compact summary;
 repeated sizes are distinguished by those canonical records.
@@ -2281,13 +2280,12 @@ claims use exhaustive computation.  Every named bundle contains the
 primary generator, a compact JSON or text certificate, an independent
 replay where stated, and a SHA-256 manifest.
 The load-bearing generator, certificate, and replay hashes were
-rechecked during manuscript integration.  The C491 and C498 manifests
-also include their living theorem reports; those two report-only hashes
-became stale after later closeout expansions.  No computational
-artifact hash is stale, and no predecessor manifest is silently
-rewritten here.  The public names Certificate R5 and Certificate R6
-refer to those bundles through the release-level schema; the C-numbers
-are retained only as provenance.
+rechecked during manuscript integration.  Two predecessor manifests
+also include living theorem reports whose report-only hashes became
+stale after later proof expansions.  No computational artifact hash is
+stale, and no predecessor manifest is silently rewritten here.  Stable
+public labels refer to the bundles through the release-level schema;
+dated internal filenames are retained only in the provenance record.
 
 \begin{figure}[H]
 \centering
