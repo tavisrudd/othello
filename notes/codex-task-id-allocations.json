@@ -800,8 +800,17 @@
       "last": 545,
       "purpose": "Rapid citable preprint and DOI release for beyond-four PRS results",
       "sequence": 89
+    },
+    {
+      "count": 1,
+      "first": 546,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 546,
+      "purpose": "H3 pentad orientation arbitrary-LU lift and minimal contraction detector",
+      "sequence": 90
     }
   ],
-  "next_id": 546,
+  "next_id": 547,
   "schema": "codex-task-id-allocations-v1"
 }
