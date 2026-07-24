@@ -549,6 +549,116 @@ manuscript repair was changing `clebsch_hexagon_code.tex`.  Regenerate all
 manuscript-derived artifacts and rerun from the eventual frozen C320
 candidate.
 
+### Sol structural-review repair
+
+The 2026-07-24 Sol report assessed the rigidity core as close to
+submission-ready and requested one concentrated structural pass.  Commits
+`00e5b19b`, `220f973f`, `3836c302`, and `5a82e80d` implement the task-owned portion:
+
+1. Theorem 2.1(A2) now states all three code parameters.  Proposition
+   `prop:lattice-good` defines the reduction boundary by finite
+   nonvanishing conditions on the mirror matroid and the weighted
+   singular-point collinearity matroid.  Its proof transports the exact
+   `2,3,5=h/2` collision maxima and proves that every nonempty complement
+   spans the plane.
+2. Proposition `prop:general-matching-quotient` separates the reusable
+   construction from the three Coxeter applications.  For arbitrary
+   `2m` conic points it proves pairing-independent restriction, divisibility
+   by the conic equation, reference-translation independence, and the
+   determinant-twisted equivariance law.  The `3,6,10` rank calculations
+   remain separate finite applications.
+3. The 157-word abstract drops its verification sentence.  The
+   contribution inventory is now a contribution/dependency table; proof
+   modes consistently name human proof, cited input, exhaustive exact
+   replay, and Lean-checked algebra.  The conclusion now centers Theorems
+   5.3 and 7.2 and the factorization-recovery mechanism.
+4. The appendices are labelled A and B, the Drake--Keating DOI is formatted
+   as a DOI rather than a malformed-looking URL, and the rebuilt 37-page
+   PDF has no TeX error or overfull box.  Direct page inspection found the
+   formerly sparse pages 25 and 31 fully occupied.
+5. Because the user retained the single-paper architecture, Section 12 was
+   not silently deleted.  It now opens with the retention question,
+   defines every passage in the comparison table, states that none is used
+   by the rigidity or matching-recovery theorems, replaces the internal
+   “Paper-1 boundary” phrase, and cites the split-torus, subgroup, spinor,
+   Witt--Mathieu, Hadamard, theta, Clifford, and Weil terminology.
+6. The verification section and public README now give the finitegeom URL
+   and Lean pin, Mathlib pin, locked paper tool versions, exact clean
+   command, expected eighteen-check sentinel, and platform assumptions.
+   The paper archive DOI, paper-repository URL/tag/commit, measured cold
+   runtime, and licence do not yet exist and remain C182/user-supplied
+   publication-package blockers; the public files say so rather than
+   inventing identifiers.
+
+The exact extraction now contains 29 theorem-like environments and the
+regenerated trust manifest contains 58 rows, including explicit mixed
+routes for both new propositions.  Manifest validation and all six
+verification-tool tests pass.
+
+The first clean detached replay was placed on the disk-backed but
+non-executable `/tmp/persistent` mount.  It passed the paper-facing stages
+and built the Mathlib cache helper, then failed closed when the operating
+system refused to execute that helper.  This is an environment-placement
+failure, not a failed mathematical check.  The unchanged committed
+snapshot was restarted from executable disk storage.
+
+The executable-disk cold run then reached the aggregate Lean gate but
+exceeded that check's 1,800-second timeout after 40 minutes 41 seconds of
+total release-runner wall time.  It reported no theorem or checker
+failure.  This is measured evidence that the current cold-build timeout is
+too small on this host; changing that release gate requires explicit user
+approval.  The unchanged command was rerun in the same clean snapshot
+against the artifacts produced before timeout, matching the previously
+accepted prebuild-then-gate validation route.
+
+That unchanged rerun passed all eighteen checks in 25 minutes 10 seconds
+at detached paper commit `5a82e80d` and Lean pin
+`43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.  Its terminal JSON reports
+`"status": "passed"` and the pinned Lean commit.  The successful run used
+only artifacts produced by the immediately preceding timed-out cold
+build; no source, target, timeout, manifest, or command changed between
+attempts.
+
+### Sol-round `ej` and Tao closeout
+
+The highest-value free generalization was latent in the referee request:
+the endpoint-product identity proves matching-independent conic
+restriction for every perfect matching.  The paper therefore needs no
+connectivity hypothesis to define the general quotient.  Proposition 8.1
+now states the natural construction, while the Lean route remains
+explicitly bounded to its four-endpoint and switch interfaces.
+
+The other cheap conceptual repair was to separate two specialization
+questions.  Odd reduction preserves the displayed `H_3` mirror lattice,
+but the distance theorem also needs the weighted collinearity matroid of
+the singular points.  Proposition 7.1 names and proves exactly that
+stronger condition; the headline theorem points to it before using the
+term.
+
+The closeout leaves three genuine non-correctness items:
+
+- **Open presentation optimization — factor the determinant boundary.**
+  The current finite nonvanishing definition is exact and sufficient, but
+  it does not print a minimal numerical list of bad primes for the
+  singular-line matroid.  Adding that list would require a paper-facing
+  generator/certificate/replay bundle under the research-reproducibility
+  policy.  It is not a hidden hypothesis or current correctness gap;
+  reopen only if the post-fix reviewer finds the determinant definition
+  insufficiently auditable.
+- **Open editorial choice — Section 12.**  The retained section now has
+  motivation, definitions, citations, and an explicit nondependence
+  statement.  Sol still recommends removing it.  The user owns that scope
+  decision; no further mathematical evidence will settle a venue-fit
+  preference.
+- **External publication packaging.**  C182 or the user must supply the
+  archive DOI, paper repository and release identifier, licence, and a
+  cold-runtime policy.  The measured cold attempt shows that the current
+  1,800-second aggregate timeout is too small on this host; changing that
+  validation gate requires explicit approval.
+
+No mathematical correctness mystery remains from the Sol-round repair.
+The next evidence gate is the user-launched independent post-fix review.
+
 ### Mystery ledger after the `ej`+`tt` closeout
 
 - **Settled — transport-lemma quantifier.**  The first strengthened wording said only that a

@@ -6,6 +6,36 @@
 **Purpose:** Convert the user-supplied referee report and the independent C320 cold read into an
 expected-value-ordered repair queue.
 
+## Sol-round disposition
+
+The 2026-07-24 structural report is implemented in commits `00e5b19b`,
+`220f973f`, `3836c302`, and `5a82e80d` except for publication identifiers that do not
+yet exist.  The new lattice-good proposition gives the finite
+nonvanishing boundary and stability proof, Theorem 2.1(A2) prints
+dimension three, the general matching-secant quotient is separated from
+the `A_3/B_3/H_3` rank applications, classical late-section names now
+have references, and the abstract/conclusion/appendices/page balance have
+been revised.  The public README and verification section now pin the
+available repository, toolchain, command, output, and platform data.
+
+The user retained the single-paper architecture, so the recommendation to
+cut Section 12 was not silently treated as authorization to change scope.
+The section instead received the requested motivating question,
+operational definitions, citations, and an explicit statement that it is
+not used in rigidity or matching-row reconstruction.  Its continued
+presence remains the principal editorial-risk item for post-fix review.
+
+The archive DOI, paper-repository release/tag/commit, measured cold
+runtime, and licence remain external packaging inputs.  C320 must not call
+the candidate submission-ready until those are supplied.
+
+The unchanged eighteen-check release command passes on detached commit
+`5a82e80d` and Lean pin `43c403b2`.  The successful artifact-warm run took
+25 minutes 10 seconds.  A preceding cold attempt reached the aggregate
+Lean gate but exceeded its 1,800-second timeout after 40 minutes 41
+seconds total, so the cold-runtime policy and timeout remain an explicit
+release-packaging decision rather than an unrecorded assumption.
+
 The ranking weighs editorial impact, release-blocker removal, effort, and risk. The first batch is
 deliberately composed of low-risk changes that remain useful whether the manuscript is ultimately
 split or retained as one paper.

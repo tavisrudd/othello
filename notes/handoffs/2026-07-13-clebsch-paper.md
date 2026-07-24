@@ -13,27 +13,38 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, exactly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **the submission candidate is the 32-page C552-expanded replacement-spine
-manuscript, with 28 extracted theorem environments, 61 manifest claims, and a deterministic
-18-check release replay.  The user-launched independent cold read returned `NO-GO`, so C320 and
-C552 remain active.**  The frozen-state blocker observed during that concurrent read is now
-settled by the committed normalized source/manifest and clean 18-check output.  The substantive
-blockers remain:
+Current assessment: **the post-Sol candidate is a 37-page single-manuscript revision with 29
+extracted theorem environments, 58 manifest rows, and an unchanged deterministic 18-check release
+surface.  C320 and C552 remain active behind the clean replay and user-launched post-fix review.**
+The mathematical and trust-language blockers from the first cold read are repaired: recovery is
+explicitly table-row only, factorization/profile maps and carrier bridges are exposed, the
+four-sheet pencil and boundary are defined, the full `A_3/B_3/H_3` proof path is locatable, and
+statement extraction is no longer called semantic adequacy.  Sol's later report judged the
+rigidity core close to submission-ready and triggered commits `00e5b19b`, `220f973f`,
+`3836c302`, and `5a82e80d`: a precise lattice-good proposition, the general matching-secant quotient theorem,
+classical citations, a 157-word abstract, a rigidity-centered conclusion, labelled appendices,
+rebalanced pages, and pinned toolchain/replay instructions.
 
-1. geometric Clebsch-parent recovery outruns the formal table-row recovery terminal unless an
-   exact row-to-geometry bridge is supplied or the claim is downgraded;
-2. factorization/balance/depth needs a worked configuration, displayed profiles, and an explicit
-   recovery map;
-3. the torsor Rosetta close must expose each carrier, action, and semantic bridge;
-4. four-sheet holonomy needs its admitted pencil and role in Paper I defined, or it should leave;
-5. the uniform `A_3/B_3/H_3` headline needs one locatable proof path, including `B_3`; and
-6. “statement adequacy” must become semantic or be renamed statement extraction/identity.
+The unchanged release command passed all eighteen checks from detached
+commit `5a82e80d` in 25 minutes 10 seconds after the immediately preceding
+cold build populated its artifacts.  The cold attempt itself exceeded the
+aggregate gate's 1,800-second timeout after 40 minutes 41 seconds total;
+changing that timeout requires explicit user approval.
+
+The remaining gates are:
+
+1. obtain the C182 archive DOI, paper-repository release/tag/commit,
+   cold-runtime policy, and user-selected licence; and
+2. stop for the user to launch the required post-fix independent review.
+
+The user retained the single-paper architecture.  Section 12 now satisfies the conditional
+motivation/definition/citation requirements, but Sol's recommendation to remove it remains an
+editorial-risk warning rather than a silently executed scope change.
 
 The independent review is
 [`2026-07-23-c320-independent-cold-read.md`](../2026-07-23-c320-independent-cold-read.md).
-The next session should take the user's paper feedback first, reconcile it with those blockers,
-make one coherent manuscript/trust repair, rerun all 18 checks on a frozen commit, and stop for a
-user-launched post-fix review.  Read `papers/style-guide.md` before manuscript edits; load the C320
+The next session should take the user-launched post-fix review.  Read
+`papers/style-guide.md` before any further manuscript edit; load the C320
 ledger and C552 card only for their exact trust and holonomy boundaries.
 
 The current decision and novelty map is
@@ -182,7 +193,8 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   linear-sheaf/cycle-holonomy theorem, with the constant-section reduction, cycle-derived
   resonances, `96/192` relative-frame counts, `8/16` quotients, and exceptional-prime boundary
   split in one proof path.  The public workflow-free evidence bundle and its release check are
-  integrated; the adequacy extraction has 28 statements and the trust manifest 61 claim rows.
+  integrated; the current statement-identity extraction has 29 environments and the trust
+  manifest 58 claim rows.
   The degree-six actions are corrected to the rotational octahedral six-vertex action with
   `C4` point stabilizer and the axial `2+4` seam.  Commit `c5deec3c` repairs the review's
   C552-specific finding: the paper now defines the six-column pencil and covectors before the
@@ -340,7 +352,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
   and their task reports.  C503--C507 were reserved as one block in commit `5fa7dc97`.
 - **C320 independent review returned `NO-GO`; feedback-driven repair and post-fix review are
-  required.**  The replacement manuscript, 61-row claim manifest, 28-statement extraction,
+  required.**  The post-Sol manuscript, 58-row claim manifest, 29-statement extraction,
   stable torsor, passage, and four-sheet evidence bundles, aggregate Lean gate/axiom audit, and
   deterministic 18-check release output are tracked.  The Paper I export root has a NixOS 26.05
   `flake.nix`/`flake.lock`, and the manifest names the future standalone Lean repository
@@ -348,15 +360,12 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   separate documentation-only commit `43c403b2`: all declaration docstrings, module-doc
   promotion, stable references, compact introductions, and title repairs are present.  The exact
   aggregate gate completed all 8,734 jobs at that pinned commit, and the clean 18-check
-  release replay passed with byte-identical deterministic output.  The manuscript states the proof
+  earlier release replay passed with byte-identical deterministic output.  The manuscript states the proof
   hierarchy directly: conceptual mechanisms carry the headlines; frozen orbit, rank, and
   normalizer calculations remain supporting certificates.  The determinant-sign transport lemma
-  supplies the Rosetta mechanism, and candidates that did not earn theorem status are banked in
-  the discovery track.  The released paper tree contains no operational hint about the
-  post-acceptance record plan; its only Hofstadter references are the intentional open paragraph
-  and bibliography entry.  The exact blocking findings and strengths are in the independent
-  cold-read note linked above.  After repairs and a fresh clean replay, stop and ask the user to
-  launch the post-fix reviewer.
+  supplies the common-torsor mechanism.  The exact first-review findings and strengths are in the
+  independent cold-read note linked above; the Sol repair and passing fresh replay are recorded in
+  the C320 ledger.  Stop and ask the user to launch the post-fix reviewer.
 - **C321 is not triggered.**  The replacement manuscript removes the smooth/genus-three `C02`
   quartic sentence, so the former Singular Jacobian calculation is not load-bearing.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
@@ -368,7 +377,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 
 - Computation inventory, hashes, clean-source replay, Lean gates, and PDF audit: C168 report above
   (**reported 2026-07-15**).
-- The 32-page manuscript uses layered exposition for the finite-geometry/coding
+- The 37-page manuscript uses layered exposition for the finite-geometry/coding
   interface and includes a compact frame-normalized census argument, a grayscale-safe
   synthematic--Petersen figure, split trust/verification tables, the exact two-axiom Dye
   boundary, bounded open problems, and the correct hyperfocused-arc priority chain.
