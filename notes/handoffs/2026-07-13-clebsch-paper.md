@@ -16,7 +16,7 @@
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 19-page candidate with a complete nineteen-row release surface.
+warning-free 20-page candidate with a complete nineteen-row release surface.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary
@@ -27,6 +27,14 @@ the active Paper I archive/release task. A later editorial review's
 Dye-bound rigor clarification and presentation findings are repaired on
 current `main`; the regenerated nineteen-row release surface and its
 fifteen-check clean replay are green.
+
+The remaining C182 blocker is external publication packaging. The previously
+cited GitHub artifact URL is not publicly reachable, and this workspace has
+no GitHub or Zenodo publication credential. The manuscript now gives the
+exact Git-bundle replay command, stable checker and Lean-gate hashes, and the
+two principal results with no Lean coverage; it must not ship until that
+bundle has an immutable DOI or Software Heritage identifier and the
+identifier is added to the paper.
 
 The active order is strict:
 
