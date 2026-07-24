@@ -56,7 +56,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | R9-kernel | Green kernel-checked conditional theorem | L3 | Does not close geometric hypotheses. |
 | Hessian | Sharp blocker | L1 | Geometric strata are separated; root-compatible persistent pullback and the global bad-union degree bound remain open. |
 | Lucas | Green mixed supporting theorem, pending cold read | L2 | Distinguished endpoint only. |
-| e7 | Open mixed theorem | L1/L2 | Direct shallowness is cleaner than the still-compressed cover analysis. |
+| e7 | Green mixed theorem | L1/L2 | The source derives the full collision open, proves geometric Artin--Schreier integrality and the trace law, identifies the connected affine-frame quotient and exact `AGL_3(F_2)` deck group, and gives the direct translated-subspace witness count with no overcount. |
 
 ## Cross-cutting findings
 

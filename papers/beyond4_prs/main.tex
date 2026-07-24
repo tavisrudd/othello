@@ -2028,17 +2028,39 @@ $\Tr_{\F_{2^m}/\F_2}(p/h^2)=0$.
 \end{proposition}
 
 \begin{proof}
-The equations $e_1=e_2=0$ give $u+v=h$ and $uv=p$.  On $h\ne0$, put
-$y=u/h$.  Along $h=0$, the leading coefficient of $p/h^2$ is
+The first elementary-symmetric equation gives
+$u+v=1+S=h$.  In the second equation the root $1$ contributes
+$S+u+v=1$, so
+\[
+ 0=E+S(u+v)+uv+S+u+v
+   =E+Sh+uv+1,
+\]
+and hence $uv=p$.  Thus $u,v$ are the roots of
+$z^2+hz+p$.  The divisor $h=0$ is exactly their collision divisor.
+On $h\ne0$, putting $y=u/h$ gives the displayed
+Artin--Schreier equation.
+
+It remains to prove that its class is geometric, rather than a
+constant-field artifact.  Write $B=b+c+d$, so $h=a+1+B$.  Along the
+prime divisor $h=0$, the leading coefficient of the order-two pole of
+$p/h^2$ is
 \[
 D=1+bc+bd+cd+B+B^2,
 \]
-and $\partial D/\partial b=1+c+d\ne0$, so $D$ is not a square in the
-residue field.  If $g^2+g$ has a pole of order two, its leading
-coefficient is the square of the principal coefficient of $g$.
-Therefore the Artin--Schreier class remains nonzero after extending
-constants, proving geometric integrality.  The trace criterion gives
-the rational lifting law.
+in the residue field $\overline{\F}_2(b,c,d)$.  Its derivative
+$\partial D/\partial b=1+c+d$ is a nonzero rational function, so $D$
+is not a square there.  If $p/h^2=g^2+g$, the order-two pole would
+force $g$ to have a simple pole whose principal coefficient squares
+to $D$, a contradiction.  The class therefore stays nonzero after
+algebraic extension of the constants, proving geometric integrality
+and geometric monodromy $C_2$.
+
+The remaining open conditions have exact collision meanings:
+$p\ne0$ excludes $u,v=0$, $1+h+p\ne0$ excludes $u,v=1$, and
+$x^2+hx+p\ne0$ excludes $u,v=x$ for
+$x\in\{a,b,c,d\}$.  Over $\F_{2^m}$ the standard
+Artin--Schreier criterion gives a rational pair precisely when
+$\Tr_{\F_{2^m}/\F_2}(p/h^2)=0$.
 \end{proof}
 
 \begin{proposition}[Additive frame cover]\label{prop:e7-additive}
@@ -2057,12 +2079,36 @@ L_{U+\langle w\rangle}=L_U^2+L_U(w)L_U.
 \]
 Induction gives exponents $8,4,2,1$ and
 $A_1=\prod_{v\ne0}v\ne0$.  An affine frame is an origin plus three
-independent differences.  The coefficient map is generically finite
-with exactly
-$8|\operatorname{GL}_3(\F_2)|=1344$ frames in a fiber.  Its frame
-function field therefore has degree $1344$ over the coefficient field
-and invariant field equal to that coefficient field.
+independent differences.
+
+Let $\mathcal F$ be the open affine frame space of tuples
+$(a;v_1,v_2,v_3)$ with independent $v_i$.  It is geometrically
+integral.  Sending a frame to the monic polynomial with root set
+\[
+ a+\langle v_1,v_2,v_3\rangle_{\F_2}
+\]
+lands in the displayed coefficient family.  Conversely, the eight
+geometric roots of a generic member form an affine three-space: the
+difference set is the kernel of its additive part, and any root is an
+origin.  Its ordered affine frames are therefore exactly one free
+orbit of
+\[
+ \F_2^3\rtimes\operatorname{GL}_3(\F_2).
+\]
+Thus the generic fiber has exactly
+$8|\operatorname{GL}_3(\F_2)|=1344$ points, every two of them differ
+by one affine transformation, and the invariant function field is the
+coefficient field.  The normalization is connected and has exact
+geometric deck group $\operatorname{AGL}_3(\F_2)$.
 \end{proof}
+
+\begin{remark}[Logical boundary]
+The generic Artin--Schreier cover describes the full framed quotient,
+and Proposition~\ref{prop:e7-additive} identifies a proper additive
+subcover.  The shallowness theorem below does not require a rational
+point on the generic cover: its witnesses are constructed directly
+from rational three-dimensional subspaces.
+\end{remark}
 
 \begin{theorem}[Shallowness of the degree-nine $e_7$ orbit]
 \label{thm:e7}
@@ -2081,16 +2127,19 @@ L_V(t)=\prod_{v\in V}(t-v)
 \]
 The $t^7,t^6$ coefficients vanish, so $L_V\in W_{e_7}$, and
 $A_1\ne0$ makes its roots simple.  Every admissible binary
-redundancy-ten field has $m\geq4$.  Proposition~\ref{prop:e7-orbit}
-transports the witness around the orbit.
+field in the statement contains such a three-space.
+Proposition~\ref{prop:e7-orbit} transports the witness around the
+orbit.
 
 There are
 \[
 \binom m3_2=\frac{(q-1)(q-2)(q-4)}{168}
 \]
-three-spaces, each with $q/8$ affine translates.  Since
-$L_{a+V}(t)=L_V(t)+L_V(a)$ and the affine root set recovers its
-difference space and coset, there is no overcount.
+three-spaces.  Each has $q/8$ affine cosets, and
+$L_{a+V}(t)=L_V(t)+L_V(a)$.  A split polynomial recovers its root
+coset, whose difference set recovers $V$; hence distinct cosets or
+three-spaces cannot be counted twice.  Multiplying the two factors
+gives the displayed formula.
 \end{proof}
 
 Thus the order-three law of Proposition~\ref{prop:linearized} belongs

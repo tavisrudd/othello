@@ -31,7 +31,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | P4 | PASS | Effective transverse theorem is visibly conditional only on named lower-cover, point-bound, deletion, and contained-component hypotheses. | The induction theorem exposes these inputs. |
 | P5 | FAIL | Every intersection, containment, ramification, genus, and deletion number maps to a named proof or immutable public certificate. | Assertion audit still has open R5--R9 degree/deletion rows. |
 | P6 | FAIL | Ordered-Hessian section proves the ambient incidence, factorization strata, ruling conics, pullbacks, selection argument, and deletion budget; the global bad-union bound is valid. | Root-compatible pullback and one global bad-union argument remain open. |
-| P7 | REVIEW | `e_7` is split into proved Artin--Schreier normalization, additive subcover, and direct shallow-orbit propositions, including translation and no-overcount. | Three propositions exist in source; cover proofs remain compressed in the trust audit. |
+| P7 | PASS | `e_7` is split into proved Artin--Schreier normalization, additive subcover, and direct shallow-orbit propositions, including translation and no-overcount. | The source derives every collision open, proves the nonconstant geometric Artin--Schreier class and trace law, constructs the connected affine-frame normalization with exact `AGL_3(F_2)` group, and counts translated three-spaces without overcount. |
 
 ## 3. Classification and finite ranges
 
