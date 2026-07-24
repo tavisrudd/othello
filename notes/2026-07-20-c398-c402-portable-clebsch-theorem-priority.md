@@ -236,7 +236,8 @@ claim-specific audit located no predecessor for the exact moment formula or unif
 the pentad/S5/A5 core is classical, so novelty wording is restricted to its LU-readable recovery.
 The final Tao pass checks all 32,768 marginal subsets at q=19: the complete trace-word rank function
 still has `S5`, not `A5`, party symmetry, so higher-degree words in the same commuting marginals
-cannot recover the lost orientation bit.
+cannot recover the lost orientation bit. C546 is allocated behind C397 to solve—not merely probe—
+whether that orientation is intrinsic under arbitrary party-permuting LU.
 
 ### Target theorem
 
