@@ -3521,7 +3521,7 @@
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
         "kind": "theorem-environment",
-        "sha256": "5a2586f894c80fc85c2931d0e7843b1fbcd5aa5a11d4eb18c4b7a3d7863c3489"
+        "sha256": "295eaaad14721f47fe32aa05acac58d463a31c5ac88f87f2db5558310c4d44ee"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -4459,7 +4459,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1791",
+      "paper_location": "theorem at source line 1792",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -6256,7 +6256,7 @@
     "commit": "223584997c5691a60c066d865c0a0e449a38cd21",
     "url": "urn:repository:relative-conic-arcs-lean"
   },
-  "manuscript_sha256": "74091f682e1bc74487928472ad4f84be09c8ed8536d9f2faf92b263b289fd657",
+  "manuscript_sha256": "3c1269552e6db46a753ab4db97267392b66c156e31dac529dee5bb541e2f90f9",
   "schema": "clebsch-trust-manifest-v1",
   "verify_all": {
     "checks": [

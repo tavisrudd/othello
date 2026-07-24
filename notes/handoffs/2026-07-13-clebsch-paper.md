@@ -334,28 +334,19 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   exclusion boundaries are frozen in
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
   and their task reports.  C503--C507 were reserved as one block in commit `5fa7dc97`.
-- **C320 is active as an early incremental foundation and remains the release-blocking
-  trust-ledger capstone:** by explicit user authorization it has begun deterministic manuscript
-  statement extraction, fail-closed manifest validation, and reviewed-slice intake.  All
-  Paper-adopted C420--C428, C494, and C503--C507 slices are now final and admitted.  C320 must next
-  migrate the adopted dated-note evidence into stable workflow-free bundles, reconcile the
-  replacement manuscript, and publish one claim-by-claim ledger with exact
-  theorem/gate/axiom evidence, external
-  certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
-  public path may assume the unpublished monorepo layout: the paper repository and shared Lean
-  repository will be extracted separately with flattened roots, and verification accepts the
-  latter explicitly through `--lean-root`.
-  No replacement-spine claim is called Lean-formalized before this reconciliation and independent
-  review. The user, not the implementing agent, launches Codex for the initial and post-fix reviews;
-  the implementer stops and requests each review and may not spawn or simulate its reviewer. In
-  particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
-  C426 treats Krein/intersection equality and the 877-fusion census as external exact certificates
-  unless their separate kernel checker leaves actually land.
-- **C321 has one conditional mandatory target identified by C320:** if the protected manuscript's
-  smooth genus-three `C02` quartic sharpness sentence survives, replace the sole load-bearing
-  Singular Jacobian-ideal smoothness check with an independently specified exact
-  certificate/checker.  The Python replay already owns irreducibility and the 18-point equality;
-  deleting or weakening the smooth/genus clause removes this mandatory target.
+- **C320 is implementation-complete and awaiting the required user-launched independent
+  review.**  The replacement manuscript, 57-row claim manifest, 27-statement adequacy extraction,
+  stable torsor and passage evidence bundles, aggregate Lean gate/axiom audit, and deterministic
+  17-check release output are tracked.  The final clean replay passed against pinned Lean commit
+  `223584997c5691a60c066d865c0a0e449a38cd21`.  The manuscript now states the proof hierarchy
+  directly: conceptual mechanisms carry the headlines; frozen orbit, rank, and normalizer
+  calculations remain supporting certificates.  The determinant-sign transport lemma supplies
+  the Rosetta mechanism, and candidates that did not earn theorem status are banked in the
+  discovery track.  The released paper tree contains no operational hint about the post-acceptance
+  record plan; its only Hofstadter references are the intentional open paragraph and bibliography
+  entry.  The user, not the implementing agent, must now launch Codex with `go C320`.
+- **C321 is not triggered.**  The replacement manuscript removes the smooth/genus-three `C02`
+  quartic sentence, so the former Singular Jacobian calculation is not load-bearing.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
   reproducible incidence/conic certificates are the entry boundary. Every new finite leaf requires
   a checker theorem, provenance, hash, independent replay, and explicit axiom audit; otherwise its

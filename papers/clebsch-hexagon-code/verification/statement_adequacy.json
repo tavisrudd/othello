@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-statement-adequacy-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "74091f682e1bc74487928472ad4f84be09c8ed8536d9f2faf92b263b289fd657",
+  "source_sha256": "3c1269552e6db46a753ab4db97267392b66c156e31dac529dee5bb541e2f90f9",
   "statement_count": 27,
   "statements": [
     {
@@ -233,9 +233,9 @@
       "claim_key": "lem:sign-torsor-no-section",
       "environment": "lemma",
       "label": "lem:sign-torsor-no-section",
-      "sha256": "5a2586f894c80fc85c2931d0e7843b1fbcd5aa5a11d4eb18c4b7a3d7863c3489",
+      "sha256": "295eaaad14721f47fe32aa05acac58d463a31c5ac88f87f2db5558310c4d44ee",
       "source_line": 1761,
-      "tex": "\\begin{lemma}[Determinant-sign transport and the no-section obstruction]\n\\label{lem:sign-torsor-no-section}\nLet $\\chi:G\\to C_2$ be surjective and put $H=\\ker\\chi$.  Then $G/H$ is a\nfree transitive $C_2$-torsor with no $G$-fixed point.  More precisely, if\n$X$ is any two-point $G$-set on which $G$ acts through $\\chi$, then for\neach $x\\in X$ there is a unique $G$-equivariant bijection\n\\[\n G/H\\longrightarrow X\n\\]\nsending $H$ to $x$.  Thus all such two-valued carriers are realizations of\none torsor: comparing them requires exactly one marking bit, and no\n$G$-equivariant marking exists before that bit is adjoined.\n\\end{lemma}",
+      "tex": "\\begin{lemma}[Determinant-sign transport and the no-section obstruction]\n\\label{lem:sign-torsor-no-section}\nLet $\\chi:G\\to C_2$ be surjective and put $H=\\ker\\chi$.  Then $G/H$ is a\nfree transitive $C_2$-torsor with no $G$-fixed point.  More precisely, if\n$X$ is any two-point $G$-set whose action factors through $\\chi$ and whose\ninduced $C_2$-action is nontrivial, then for each $x\\in X$ there is a\nunique $G$-equivariant bijection\n\\[\n G/H\\longrightarrow X\n\\]\nsending $H$ to $x$.  Thus all such two-valued carriers are realizations of\none torsor: comparing them requires exactly one marking bit, and no\n$G$-equivariant marking exists before that bit is adjoined.\n\\end{lemma}",
       "title": "Determinant-sign transport and the no-section obstruction"
     },
     {
@@ -243,7 +243,7 @@
       "environment": "theorem",
       "label": "thm:torsor-rosetta-close",
       "sha256": "69b93d89d87d63b619846167a919d542441746c36b5eae06cec3d57de72e5675",
-      "source_line": 1791,
+      "source_line": 1792,
       "tex": "\\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]\n\\label{thm:torsor-rosetta-close}\nLet $T_q$ denote the determinant-sign torsor for the split rank-three\nworking primes.  The following statements hold.\n\\begin{enumerate}[label=\\textup{(E\\arabic*)},leftmargin=*]\n\\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free\n$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two\nspin lifts form one Frobenius orbit over $\\F_{25}$, hence one connected\nétale point over $\\F_5$ and no orientation bit.\n\\item The certified dictionary has twelve rows: the two matching sheets,\nthe two nontrivial unipotent classes, the two cyclotomic period factors,\nthe two primes of $\\mathbb Q(\\sqrt{-q})$, the two primes of\n$\\mathbb Z[\\sqrt2]$ or $\\mathbb Z[\\phi]$ above the working prime, the two lower Weil\nconstituents, the two cubic signs, the two QR/Barker polarities, the two\nsigned Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero\n$\\operatorname{Spec}\\mathbb Q(\\sqrt5)$ row, and the Reed--Solomon fixed-child\nextremal fibre.  Each two-valued row available at a given $q$ is\nouter-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting\nface of the same swap, not another two-point carrier; the\ncharacteristic-zero row specializes specifically to $T_{11}$.\n\\item The marked Coxeter matching points all available rows simultaneously\nthrough the single trace rule.  After forgetting it there is no section:\nthe \\v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor\ndescription are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]\n\\item At $q=11$ the Mathieu hinge is forced outer.  Indeed\n$N_{M_{12}}(\\mathrm{PSL}_2(11))=\\mathrm{PSL}_2(11)$,\n$\\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents\nare non-conjugate in $M_{12}$.\n\\item The cubic sign and trace residue co-vary with $T_q$, but their\nnumerical dictionary is convention-dependent between $q=7$ and $q=11$.\nThe uniform datum is the marking, not a residue formula.  No integral\nGalois-odd cubic is assumed: the bit is carried arithmetically by the prime\nfibre.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Torsor Rosetta: one class and one forced outer swap"
     }

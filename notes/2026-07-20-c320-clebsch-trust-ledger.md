@@ -460,6 +460,30 @@ statement extraction, eleven retained finite paper checkers, both public evidenc
 Mathlib-cache setup, and the exact aggregate Lean target.  The complete deterministic JSON is
 tracked at `verification/verify-release-output.json` and hash-bound by the trust manifest.
 
+### Mystery ledger after the `ej`+`tt` closeout
+
+- **Settled — transport-lemma quantifier.**  The first strengthened wording said only that a
+  two-point action factors through `chi`; that condition also admits the trivial action.  The
+  theorem now requires the induced `C2` action to be nontrivial, exactly the hypothesis used to
+  obtain a free transitive torsor and the unique marked equivariant bijection.
+- **Settled — clean-build failure.**  The first detached Lean checkout was mistakenly placed on
+  the host's RAM-backed `/tmp`; project artifacts then exhausted that temporary filesystem during
+  `Q11Residual`.  Rebuilding the same pinned commit in the required disk-backed cache completed all
+  8,734 jobs.  No proof or source change was needed.
+- **Settled — released-file leakage.**  A case-insensitive scan of the released paper tree found
+  only the intentional open Hofstadter paragraph and bibliography entry.  No record-production
+  instruction, ignition line, representative-selection rule, editor procedure, or hidden
+  commitment is present.
+- **Open, deliberately sequel-owned — arithmetic origin of the sign gluing.**  Paper I proves that
+  every available two-point carrier has the same determinant-sign action and therefore the same
+  torsor.  It does not construct a uniform arithmetic or metaplectic object producing that gluing
+  across characteristics.  The conclusion states this single scoped question; a new theorem
+  requires such a construction, not another table.
+- **External packaging item — immutable archive.**  C182 still owns the DOI/archive.  This is not a
+  mathematical or trust-manifest gap, but release prose must not claim the DOI before it exists.
+
+No other genuine C320 correctness mystery remains before independent review.
+
 ## Required outcome
 
 Create the Clebsch per-paper trust manifest and one documented verify-all entry point after every
