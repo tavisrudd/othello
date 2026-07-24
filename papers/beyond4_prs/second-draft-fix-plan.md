@@ -30,11 +30,11 @@ closed.
 
 | Gate | Required change | Acceptance test | Status |
 |---|---|---|---|
-| P1 | Define the syndrome scheme, contraction strata, ordered marker spaces, lower splitting incidence, bad schemes, collision divisors, and all numerical indices before the induction theorem. | Every symbol and quantified object in the theorem is introduced in the definitions subsection. | In this revision |
-| P2 | State and prove an intrinsic polar-flag construction theorem, including base change, equivariance, infinity, and marker propagation. | The construction is independent of the contained/transverse dichotomy. | Scaffolded in this revision |
+| P1 | Define the syndrome scheme, contraction strata, ordered marker spaces, lower splitting incidence, bad schemes, collision divisors, and all numerical indices before the induction theorem. | Every symbol and quantified object in the theorem is introduced in the definitions subsection. | Closed by symbol audit |
+| P2 | State and prove an intrinsic polar-flag construction theorem, including base change, equivariance, infinity, and marker propagation. | The construction is independent of the contained/transverse dichotomy. | Closed and cold-read |
 | P3 | Replace the hidden contained-case hypothesis by proved contained-component theorems. | No general theorem concludes `P_n union M_n` merely from an assumed implication; every proved degree points to a named component result. | Closed through `CC(8,1)`: ordinary rank two, modular overlaps, and collision finiteness are printed |
 | P4 | State the effective transverse theorem conditionally and visibly. | Its conclusion uses only named lower-cover, point-bound, and deletion hypotheses. | In this revision |
-| P5 | Expand every asserted intersection degree, containment, ramification degree, genus, and deletion budget into a lemma or proposition. | Assertion audit maps each numerical claim to a proof or immutable certificate. | Open |
+| P5 | Expand every asserted intersection degree, containment, ramification degree, genus, and deletion budget into a lemma or proposition. | Assertion audit maps each numerical claim to a proof or immutable certificate. | Closed through R9 by the assertion-map cold read |
 | P6 | Replace the ordered-Hessian proof outline by a complete proof. | The ambient scheme, factorization types, ruling conics, pullbacks, selection polynomial, and `3n-4` budget are all proved. | Closed with the honest degree-eight global-union polynomial and correspondingly revised threshold |
 | P7 | Split the degree-nine `e_7` theorem into Artin--Schreier normalization, additive subcover, and shallow-orbit propositions and prove each. | No theorem-strength assertion is supported only by a synopsis paragraph. | Closed in source and cold-read |
 

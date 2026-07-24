@@ -57,8 +57,9 @@ The named proposition `prop:r9-contained` closes `CC(8,1)`:
 - the resulting ramification divisor has degree at most 12, so collision
   cannot be a contained component.
 
-Together with the four-marker genus/deletion argument and the residual
-deletion total 22, this removes every assumption from the R9 theorem.
+Together with the four-marker genus/deletion argument and the corrected
+normalized-cover deletion total 32, this removes every assumption from the
+R9 theorem.
 
 ## Reproducibility
 
@@ -116,4 +117,3 @@ the residual formulas.
 - **Open but outside the theorem:** classifications below `q=53` are not
   supplied.  This bounded-field question is not used by the Version 1
   abstract or R9 theorem.
-

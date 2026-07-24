@@ -48,8 +48,8 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 |---|---|---|---|
 | PF | Green mathematical infrastructure | L2 | Construction and lifting only. |
 | TI | Green conditional theorem | L2 | Requires a lower package and proved `CC(n,j)`. |
-| R5 | Open mixed theorem | L1 | Normal forms, stabilizers, degenerations, and cubic-cover geometry need expansion; finite residue is certified. |
-| R6 | Open mixed theorem | L1 | Degree/containment propositions need expansion; finite bridge is certified. |
+| R5 | Green mixed theorem | L1 | Gcd strata, cyclic/wild normal forms, stabilizers, degenerations, off-diagonal integrality/genus/deletion, and the finite bridge are printed; the certificate is used only for the declared low-field residue. |
+| R6 | Green mixed theorem | L1 | Persistent orbit law, secant intersection degree, cyclic and ramification degrees, modular contained components, nucleus arithmetic, and the finite bridge are named and proved. |
 | R7 | Green mixed theorem | L1 | The contained and transverse proofs plus finite bridge give the all-field split-free classification; deep-hole promotion is only for `q>=11`. |
 | R8 | Green mathematical theorem | L1 | `CC(7,1)` and `LP(6,1)` are closed; the cold read checked the recursive rank/gcd/cyclic/wild/inseparable/branch exhaustion, the geometric-`S3` identity twist, both parameter-degree budgets, the direct gcd-one counts, and the marker-collision bounds. |
 | R9 | Green mathematical theorem | L1 | Residual and deletion proofs, six explicit slice polynomials and checked Bezout identity, four multiple-root controls, the rational-base polynomial with degree accounting, and `CC(8,1)` are printed.  The theorem makes no bounded-field claim below 53. |
