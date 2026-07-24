@@ -935,8 +935,17 @@
       "last": 579,
       "purpose": "exploratory Clebsch passages and holonomy Paper III spine and standalone-value gate",
       "sequence": 104
+    },
+    {
+      "count": 2,
+      "first": 580,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 581,
+      "purpose": "scalar-versus-covariant separation theorem; intrinsic phase-space and robust-rigidity follow-up gate",
+      "sequence": 105
     }
   ],
-  "next_id": 580,
+  "next_id": 582,
   "schema": "codex-task-id-allocations-v1"
 }
