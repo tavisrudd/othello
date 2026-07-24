@@ -123,15 +123,20 @@ article-number, and DOI fields were repaired. The second draft adds:
 warnings. The final PDF has:
 
 ```text
-pages: 14
-bytes: 155933
-SHA-256: 1deacfd0e4536952c4cc184163df33525e66f350eaeef031ab0e5743f72a61fc
+pages: 15
+bytes: 156697
+SHA-256: 9a649442eac1266f276a8bf30a651327cd271879be409b00cf3387e69c3cad18
 ```
 
 Every page and table was rendered and inspected. The theorem hierarchy is
 visible, the long projectivity and detector tables fit, the new Frobenius
 boundary and logical multiplier equations break cleanly, and the references
 fit on the final page.
+
+A final Milnor/Serre-style localized sweep compressed the abstract around the
+operator/scalar distinction, promoted the fixed-party kernel to a displayed
+definition, and removed audit vocabulary from the logical-phase transition.
+The affected pages were rendered again after the clean build.
 
 ## Evidence replay
 

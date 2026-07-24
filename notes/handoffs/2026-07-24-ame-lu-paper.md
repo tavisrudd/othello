@@ -206,11 +206,13 @@ read complete.** The proof/evidence audit repaired the LC-holonomy,
 logical-phase, marginal-incidence, generic-constancy, and party-dependent
 transport arguments; mapped every conditional formal input field to exact
 prose/evidence; replayed all seven evidence bundles; and produced a
-warning-free, visually inspected 14-page PDF. The independent reader found
+warning-free, visually inspected 15-page PDF. The independent reader found
 the release-blocking extension-field Frobenius counterexample: Theorem 1.1
 remains all-prime-power, while `LC iff LU iff z` and the full logical-phase
 theorem are now restricted to odd prime fields. A final cold read returned
-GO. See `2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
+GO. A localized Milnor/Serre-style sweep then tightened the abstract and
+logical-phase transition without changing theorem scope. See
+`2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
 
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many

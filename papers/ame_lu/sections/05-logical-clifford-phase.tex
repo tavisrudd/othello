@@ -2,12 +2,13 @@
 
 Regard any one party of an \(\AME(6,q)\) stabilizer tensor as an input and
 the other five as outputs.  This is a \([[5,1,3]]_q\) encoding isometry.
-A tensor symmetry fixing every party setwise induces local blocks
-\((F_1,\ldots,F_6)\in\mathrm{SL}_2(q)^6\) preserving \(L_C\).  Fixing an
-encoder view, define the \emph{fixed-party symplectic kernel} to be the
-image of this stabilizer on the input block.  It is the kernel, projected
-to one party, of the homomorphism from party-permuting Clifford
-symmetries to \(S_6\).
+The kernel of the party action on Clifford tensor symmetries is
+\[
+ \mathcal K_C=\{(F_1,\ldots,F_6)\in\mathrm{SL}_2(q)^6:
+                 (\bigoplus_iF_i)L_C=L_C\}.
+\]
+For an encoder view, the \emph{fixed-party symplectic kernel} means the
+image of \(\mathcal K_C\) on its input block.
 
 \begin{theorem}[Logical phase]\label{thm:logical-phase}
 For an equal-phase CSS state from a six-arc over an odd prime field, the
@@ -84,12 +85,12 @@ Finally, an isoduality interchanges the two summands \(C_X\) and
 party-moving symmetry is present.
 \end{proof}
 
-The distinction is operational rather than a classical automorphism
-count.  Including logical Paulis, the projective logical Clifford group
-has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\) on the GRS locus.  At
-\(q=11\), the two non-GRS pencil classes have certificate-checked
-party-moving isodualities, so their logical group is \(q^2N(T)\); the GRS
-and non-GRS orders are \(159720\) and \(2420\), respectively.
+This is an operational distinction, not a classical automorphism count.
+Including logical Paulis, the projective logical Clifford group has order
+\(q^2\lvert\mathrm{SL}_2(q)\rvert\) on the GRS locus.  At \(q=11\), the
+two non-GRS pencil classes have party-moving isodualities, so their
+logical group is \(q^2N(T)\); the GRS and non-GRS orders are \(159720\)
+and \(2420\), respectively.
 
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
