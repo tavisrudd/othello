@@ -1,6 +1,6 @@
 # C551 — flagship packaging for the cap-game program
 
-**Lane:** `cap`. **Status:** active. **Mode:** packaging in parallel with active research.
+**Lane:** `cap`. **Status:** complete. **Mode:** packaging in parallel with active research.
 
 ## Mandate
 
@@ -221,3 +221,308 @@ C551 succeeds when the repository contains:
 
 It does not require a frozen abstract, journal selection, submission schedule,
 or completed odd-q proof.
+
+## Packaging result
+
+The paper package is viable without the odd-order-plane crown, provided the
+main result is stated as a structural theorem package rather than as a
+classification of all projective spaces.  The stable headline is:
+
+> Fixed-point-free incidence symmetry gives uniform second-player wins on
+> several infinite affine, projective, and quadric families; the first family
+> outside that mechanism, odd-order projective planes, reduces exactly to a
+> rank-three residual game whose pair-only region is Node--Kayles.
+
+The crown version replaces the final reduction clause by the uniform odd-plane
+outcome theorem.  No fixed-\(q\) computation is needed to state the stable
+headline.
+
+The section-level manuscript skeleton and its two headline variants are in
+`notes/2026-07-23-c551-cap-paper-manuscript-skeleton.md`.
+
+## Trust vocabulary
+
+The manuscript must keep two independent axes.
+
+| Mathematical status | Meaning |
+|---|---|
+| `LEAN-THEOREM` | the quantified statement is checked by Lean |
+| `LEAN-CERTIFICATE` | Lean checks finite data and the theorem transporting it |
+| `RULES-CERTIFIED` | an independent native checker validates the game equations and coverage |
+| `EXHAUSTIVE-COMPUTATION` | an exact solver exhausts the stated finite domain |
+| `EXPLORATORY` | a partial, sampled, or sizing computation |
+| `OPEN` | conjecture or missing uniform implication |
+
+| Publication-evidence readiness | Meaning |
+|---|---|
+| `READY-FORMAL` | exact terminal, module, and axiom audit are repository-visible |
+| `READY-BUNDLE` | report, generator/checker, compact certificate or approved manifest, replay command, hashes, and independent check are committed |
+| `NORMALIZATION-DEBT` | the mathematical result may be sound, but the current record predates or misses one of those bundle requirements |
+
+`LEAN-THEOREM` and `READY-FORMAL` are deliberately not synonyms: a paper-facing
+formal claim still needs a referee-facing dependency-closure prose audit.
+Likewise `RULES-CERTIFIED` does not imply `READY-BUNDLE` when the checked raw
+tables are machine-local and lack a committed hash manifest.
+
+## A. Theorem and trust ledger
+
+All Lean declarations below have the ordinary specification-match boundary:
+Lean proves the formal game stated in `FiniteBuildGame`, `CapGame`, and
+`ProjectiveCap`; the independent grid engines and certificate checkers are the
+external adequacy checks for the intended rules.  Unless a row says otherwise,
+the repository's terminal audits report the standard non-project-specific
+profile `[propext, Classical.choice, Quot.sound]`; no row relies on
+`native_decide`.
+
+### Headline family theorems
+
+| ID | Exact mathematical statement | Formal terminal | Trust / gate | Manuscript role | Crown-independent? |
+|---|---|---|---|---|:---:|
+| F1 | Every positive-dimensional finite affine space `AG(n,K)` is P | `CapGame/Affine.lean`, `CapGame.Affine.initialP_fin`; representation-independent form `CapGame.Affine.initialP_of_nontrivial` | `LEAN-THEOREM`; theorem is symbolic, with characteristic-two translation and odd-characteristic point-reflection branches | first infinite family; introduces adaptive blocking of a fixed mirror centre | yes |
+| F2 | `PG(n,2)` is P for every `n≥1` | `ProjectiveCap/Binary.lean`, `ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one`; rank form `initialPStatement_binary_of_finrank_ge_two` | `LEAN-THEOREM`; transported through `binaryPointEquivNonzero` and `binary_nonzeroValid_iff_cap` | binary projective family and exact Nofil/STS specialization | yes |
+| F3 | `PG(2m−1,q)` is P for every `m≥1` and odd finite-field order `q` | `ProjectiveCap/EllipticMirror.lean`, `ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul` | `LEAN-THEOREM`; symbolic nonsquare elliptic-block mirror | strongest whole-board projective family | yes |
+| F4 | `PG(2,q)` is P for every even finite-field order `q` | `ProjectiveCap/PlaneOutcome.lean`, `ProjectiveCap.initialPStatement_of_even_card_finrank` | `LEAN-THEOREM`; characteristic-two residual-grid mirror | closes the even-plane half and marks the odd-plane boundary | yes |
+
+### Mechanism and subboard theorems
+
+| ID | Exact statement | Formal terminal | Trust / gate | Manuscript role |
+|---|---|---|---|---|
+| M1 | A fixed-point-free collinearity-preserving involution of projective points makes the empty cap game P | `ProjectiveCap/Mirror.lean`, `ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution` | `LEAN-THEOREM` | central whole-board interface theorem |
+| M2 | The same conclusion holds on any invariant projective subboard `Q` | `ProjectiveCap/HyperbolicQuadricMirror.lean`, `ProjectiveCap.Projective.initialSubCapP_of_fpf_collinearity_preserving` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | one theorem from which the included quadric corollaries follow |
+| M3 | If a linear equivalence squares to a nonsquare scalar and preserves `Q`, the subboard cap game is P | same module, `initialSubCapP_of_linearEquiv_sq_scalar_nonsquare` | `LEAN-THEOREM` | coordinate-friendly corollary interface |
+| Q+ | The hyperbolic quadric subboard `Q⁺(2m−1,q)` is P for odd `q` in the displayed block model | same module, `initialSubCapP_blockQuadric_of_odd_card` | `LEAN-THEOREM`; terminal audit `[propext, Classical.choice, Quot.sound]` | included one-page classical-variety corollary |
+| Q− | The displayed standard/norm-block elliptic quadric subboards admit the same P mirror over odd finite fields | `ProjectiveCap/EllipticQuadricMirror.lean`, `initialSubCapP_standardEllipticQuadric_of_nonsquare`, `exists_standardEllipticQuadric_initialSubCapP`, and `initialSubCapP_normBlockQuadric_of_odd_card` | `LEAN-THEOREM`; coordinate-exact, not an unqualified classification of all presentations | included as a second corollary only with the coordinate/equivalence qualification visible |
+
+### Odd-plane reductions and residual structure
+
+| ID | Exact statement | Formal terminal | Trust / gate | Manuscript role | Crown-independent? |
+|---|---|---|---|---|:---:|
+| R1 | In vector rank three, the initial projective position is P iff the residual odd-escape statement holds | `ProjectiveCap/TrapConverse.lean`, `ProjectiveCap.GridGame.TrapConverse.initialPStatement_iff_oddEscapeStatement_finrank` | `LEAN-THEOREM` | exact falsification equivalence; backbone of the odd-plane section | yes |
+| R2 | Every legal residual size-three state has exactly `q²−9q+21` legal extensions | `ProjectiveCap/ExtensionCount.lean`, `ProjectiveCap.sizeThreeExtensionCount`, proving `ProjectiveCap.Stable.SizeThreeExtensionCountStatement` | `LEAN-THEOREM` | shows that escape is a value problem, not move availability | yes |
+| R3 | Full `PGL(2,q)` transport preserves the game value of an on-conic parameter set | `ProjectiveCap/Sym2ConicBridge.lean`, `ProjectiveCap.Sym2Bridge.onconic_value_bridge` | `LEAN-THEOREM` | makes one representative per full-PGL bucket sufficient once bucket values are certified | yes |
+| R4 | Grid-cap validity is rank at most three; every minimal bad extension on legal vertices has size two or three | `ProjectiveCap/ResidualHypergraph.lean`, `gridCap_iff_allSmallSubsetsCap`, `minimal_bad_extension_card` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | exact residual hypergraph theorem |
+| R5 | If no active minimal triples remain, continuation validity is determined by its two-point restrictions | same module, `ProjectiveCap.ResidualHypergraph.gridCap_union_iff_all_pairs` under `NoActiveResidualTriples` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | static `Y_NK`/conflict-graph interface; persistence is stated separately |
+| R6 | The isolated capacity-two gadget has Grundy value zero; follower signatures bound Grundy value | same module, `FiniteBuildGame.grundy_atMostTwo_empty_eq_zero`, `FiniteBuildGame.grundy_le_card_of_follower_signature` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | neutral-bulk lemma and exact location of the missing bounded-signature theorem |
+| R7 | Pair budgets bound gadget count, large-gadget count, and total overload | `ProjectiveCap/ResidualPairBudget.lean`, `pairBudget`, `card_le_pairBudget_div_three`, `largeMembers_card_le_pairBudget_div_choose`, `totalOverload_le_pairBudget_div_three` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | supporting bounds; not an explanation of the observed small SG |
+
+### Fixed small-field theorems
+
+| q | Exact terminal | Mathematical trust | Publication readiness | Role |
+|---:|---|---|---|---|
+| 5 | `ProjectiveCap.initialPStatement_of_card_eq_five_finrank` in `ProjectiveCap/PlaneOutcome.lean` | `LEAN-THEOREM`, symbolic mechanism | `READY-FORMAL` after dependency-closure prose audit | finite base theorem |
+| 7 | `ProjectiveCap.initialPStatement_of_card_eq_seven_finrank` in the same module | `LEAN-THEOREM`, symbolic mechanism | `READY-FORMAL` after dependency-closure prose audit | finite base theorem |
+| 11 | `ProjectiveCap.Certificate.CertData.Q11.initialPStatement_finrank` in `ProjectiveCap/CertData/Q11Assembly.lean` | `LEAN-CERTIFICATE`; terminal `#print axioms` is present | `READY-FORMAL` only after the generated closure receives the referee-facing artifact audit required by `lean/AGENTS.md` | flagship finite formal certificate |
+| 13 | `ProjectiveCap.Certificate.CertData.Q13.initialPStatement_finrank` in `ProjectiveCap/CertData/Q13Assembly.lean` | `LEAN-CERTIFICATE`; terminal `#print axioms` is present | same generated-closure audit required | flagship finite formal certificate |
+
+## B. Normalized fixed-q trust table
+
+The `claim` column states only what the listed evidence supports.  In
+particular, an all-P on-conic bucket census is not silently promoted to a
+fully formal plane theorem.
+
+| q | Claim permitted now | Mathematical status | Exact provenance | Publication readiness / missing gate |
+|---:|---|---|---|---|
+| 3 | `PG(2,3)` computed P | `EXHAUSTIVE-COMPUTATION` | `notes/2026-07-06-grid-cap-solver.rs` and the tracked early solver record summarized in the cap handoff | `NORMALIZATION-DEBT`: isolate the exact run, domain, output, hashes, and an independent replay |
+| 5 | `PG(2,5)` is P | `LEAN-THEOREM` | F5 terminal above | formal dependency-closure prose audit |
+| 7 | `PG(2,7)` is P | `LEAN-THEOREM` | F7 terminal above | formal dependency-closure prose audit |
+| 9 | `PG(2,9)` computed P | `EXHAUSTIVE-COMPUTATION`; the terminal-reply kernel is not assembled into a plane theorem | solver plus `notes/2026-07-07-codex-q9-intrusion-probe.md` | `NORMALIZATION-DEBT`: commit a compact replay/certificate bundle or close C13 in Lean |
+| 11 | `PG(2,11)` is P | `LEAN-CERTIFICATE` | Q11 assembly terminal above | generated dependency-closure prose audit |
+| 13 | `PG(2,13)` is P | `LEAN-CERTIFICATE` | Q13 assembly terminal above | generated dependency-closure prose audit |
+| 17 | `PG(2,17)` computed P; anchored books passed the independent rules checker (`210/210`), and a canonical book passed `21/21` with `100,526` nodes | `RULES-CERTIFIED`, not Lean-unconditional | `notes/2026-07-08-codex-route-c-phase5.md`; exact solver/checker source `notes/2026-07-06-grid-cap-solver.rs` | `NORMALIZATION-DEBT`: the cited cert books were left under `/tmp`; produce an approved compact certificate or durable hash/storage manifest before manuscript use |
+| 19 | `PG(2,19)` computed P; anchored books passed the independent rules checker (`272/272`) | `RULES-CERTIFIED`, not Lean-unconditional | same C30 report and solver/checker | `NORMALIZATION-DEBT`: same missing durable certificate/manifest; no Lean assembly |
+| 23 | every one of the 22 full-PGL on-conic S4 buckets is P and its early-break proof DAG is rules-certified (`241,627,613` records, zero failures); the full-PGL transport theorem is Lean-checked | `RULES-CERTIFIED` at the S4 bucket layer; not a Lean initial-position theorem | `notes/2026-07-09-codex-q23-bucket-certification.md`, `rust/scripts/s4-c54-check-suite.sh`, R3 | `NORMALIZATION-DEBT`: add approved durable raw-table manifest with hashes/byte counts/storage and a fixed-q Lean consumer or carefully state the native trust boundary |
+| 25 | all 28 full-PGL on-conic S4 bucket representatives were exhaustively labeled P; this is evidence for `(ON)`, not a claimed full-plane theorem | `EXHAUSTIVE-COMPUTATION` at the on-conic bucket layer | `notes/2026-07-09-codex-q25-baer-census.md`, `notes/data/c68b-onconic-buckets-q25.txt`, solver | `NORMALIZATION-DEBT`: no C54-style independent rules check, no durable proof-DAG bundle, and no fixed-q assembly |
+| all odd q | conjectural P | `OPEN` | R1--R7 delimit the exact structural gap | prove uniform descent/bounded residual signature; fixed-q data cannot replace it |
+
+`PG(4,3)=P` belongs in the evidence section, not the plane table:
+`EXHAUSTIVE-COMPUTATION`, 25,258 orbit-canonical memo states, with forward and
+reverse move order and an independent canonicalization agreeing, as recorded
+in `notes/2026-07-09-codex-pg43-sizing.md`.  It has
+`NORMALIZATION-DEBT` under the current paper-facing reproducibility convention.
+
+## C. Claim and novelty matrix
+
+This task issues no new absence-of-prior-work verdict.  Zero external sources
+were newly characterized at full-text depth.  The 2026-07-08 projective-Nofil
+audit predates the mandatory read-depth, cache-hash, three-graph
+forward-citation, and unreachable-source fields in
+`notes/literature-audit-conventions.md`; its proposed “to our knowledge”
+sentence is therefore not manuscript-licensed.
+
+| Object | Classification for packaging | Permitted manuscript treatment | Audit action |
+|---|---|---|---|
+| normal-play impartial hypergraph building avoidance / Nofil | known infrastructure | define and attribute; do not rename as a new game class | refresh primary-source full-text record and exact ruleset pin |
+| Node--Kayles and graph-independence play | known infrastructure | cite for the pair-only residual; do not claim the bare collapse | full-text theorem/page pin |
+| generic pairing and involution strategies | known method | present as mechanism, not novelty | identify the closest general theorem or label as standard folklore with sources |
+| caps, arcs, frames, conics, quadrics, Hermitian varieties | standard finite geometry | use standard definitions and separately identify project-owned game conclusions | source each imported classification/bound |
+| finite-field fixed-point-free elliptic projective involutions | classical geometric ingredient | state that the game application is the contribution candidate, not the involution | pin a standard source for the construction/classification |
+| affine and projective infinite P-family outcomes F1--F4 | candidate contribution | exact theorem statements are safe; historical novelty sentence remains gated | new full novelty audit, including identifier-pinned citation graphs |
+| exact pair-extension mirror obligation / capacity-mirror obstruction | candidate structural contribution, wording-sensitive | claim the exact formal criterion; describe the obstruction as the reason naive copycat fails | search general impartial building games and pairing-strategy literature |
+| residual capacity degradation and rank-three decomposition R4--R5 | candidate structural contribution | claim exact projective residual theorems; do not claim generic Nofil-to-graph collapse | audit structured finite-incidence antecedents |
+| conic localization and involution residual | mixed: standard conic geometry plus candidate game reduction | separate the classical five-arc/conic facts from the game-semantic reduction | audit finite-geometry games and conic graph constructions |
+| fixed-q solver/certificate methodology | software/verification contribution, not a new mathematical game | describe trust interfaces and replay material in verification appendix | compare proof-carrying game solvers only if headlined |
+| odd-q all-P theorem | open crown | conjecture only until terminal theorem exists | novelty audit only after proof shape stabilizes |
+
+### Literature audit queue
+
+1. Rebuild the Nofil/ruleset audit with full-text markers, cache keys and
+   SHA-256 values for every named source.
+2. Pin the closest general pairing/involution theorem and determine whether
+   the pair-extension obstruction is already explicit.
+3. Audit the four infinite outcome families by identifiers, including
+   OpenAlex, Crossref, and Semantic Scholar forward graphs for every seed used
+   in a negative.
+4. Audit structured residual-capacity/Node--Kayles antecedents; keep the bare
+   hypergraph-to-graph collapse out of the contribution column.
+5. Retrieve the inaccessible colored finite-geometry avoidance source before
+   drawing any ruleset comparison.
+6. Do not add “first,” “new,” “apparently,” or “to our knowledge” to the
+   manuscript until the resulting report satisfies the current convention.
+
+## D. Classical-variety inclusion/split verdict
+
+| Result group | Same mechanism? | Paper-readable without classification detour? | Material if removed? | Verdict |
+|---|:---:|:---:|:---:|---|
+| invariant-subboard mirror theorem M2/M3 | yes | yes | yes | include in the mechanism section |
+| hyperbolic quadric `Q⁺(2m−1,q)` P corollary | yes | yes | yes: demonstrates that the mechanism is not confined to full spaces | include, one theorem plus one proof paragraph |
+| coordinate-exact elliptic quadric P corollaries | yes | yes if qualifications remain explicit | moderately: overturns the false impression that elliptic type is excluded | include one representative corollary; move coordinate variants to appendix/formal companion |
+| parabolic linear and scalar-square exclusions | boundary of the mechanism | no: requires eigenspace/isotropy case analysis | no for the flagship theorem package | split to a mirror-boundary companion |
+| Hermitian linear exclusions | boundary only | no | no | split |
+| Baer-semilinear parabolic/Hermitian stabilizer routes | boundary only | no: substantial Frobenius descent and null-cone rigidity | no | split |
+| finite modeled checks `H(2,9)`, `H(3,4)`, and trivial ovoid rows | illustrative catalogue | yes individually, but not load-bearing | no | omit from flagship; retain in companion/table |
+
+The flagship therefore includes the general subboard theorem and two positive
+quadric corollaries.  `MirrorBoundary.lean`, `BaerSemilinear.lean`,
+`BaerQuadraticUntwist.lean`, `QuadraticNullCone.lean`, and
+`BaerQuadraticStabilizer.lean` support a coherent companion paper about the
+classification boundary of the mirror method.  They should receive one
+forward pointer, not an appendix dump.
+
+## E. Manuscript assets and terminology
+
+### Mechanism theorem table
+
+| Mechanism | Hypothesis contract | Consequence | Families |
+|---|---|---|---|
+| translation copycat | fixed-point-free affine involution with pair-extension validity | initial P | characteristic-two affine spaces |
+| blocked-centre reflection | fixed centre is made illegal by the opening exchange; later pair extensions stay valid | initial P | odd-characteristic affine spaces |
+| whole-board elliptic mirror | fpf collinearity-preserving projective involution | initial P | odd-dimensional projective spaces over odd fields |
+| residual translation | frame/grid transport plus characteristic-two translation | initial P | even-order projective planes |
+| invariant-subboard mirror | whole-board contract plus `Q(x)⇒Q(σx)` | empty subboard P | included quadric families |
+| capacity degradation | fixed old state; minimal residual obstructions have rank two or three | mixed conflict graph/triple game; Node--Kayles when active triples vanish | odd-plane residual |
+
+### Notation sheet
+
+| Paper notation | Meaning | Lean name |
+|---|---|---|
+| `P`, `N` | previous-player / next-player win under normal play | `FiniteBuildGame.IsP`, `FiniteBuildGame.Win` |
+| `G(S)` | Grundy value of position `S` | `FiniteBuildGame.Grundy Valid S` |
+| `Cap_K(V)` | projective cap-validity predicate | `ProjectiveCap.Projective.Cap K V` |
+| `GridCap_K` | residual row/column-sparse affine cap | `ProjectiveCap.GridCap` |
+| `L(S)` | legal residual extensions | `ProjectiveCap.GridGame.LegalExtensions S` |
+| `NoTriples(S)` | no inclusion-minimal bad legal extension of size three | `ResidualHypergraph.NoActiveResidualTriples S` |
+| `(ON)` | every residual size-three state has a P-valued on-conic child | `OnConicEscapeStatement` |
+| `Q|_B` | cap game restricted to a point predicate `B` | `Projective.SubCap B` |
+
+Use “P-position” only for normal-play outcome, “computed P” for an exact native
+result, and “Lean theorem/certificate” only when the terminal implication is
+kernel-checked.  Use “on-conic bucket layer” rather than “plane outcome” for
+q=25.
+
+### Diagram specifications
+
+```text
+global symmetry
+incidence-preserving involution
+        │
+        ├─ fixed-point-free ───────────────┐
+        │                                  ▼
+        └─ fixed locus blocked + pair-extension valid
+                                           │
+                                           ▼
+                                  second-player copycat
+                                           │
+                         ┌─────────────────┼──────────────┐
+                         ▼                 ▼              ▼
+                    affine P       projective P      subboard P
+```
+
+```text
+PG(2,q) initial game
+        ⇕  frame transitivity
+residual q×q grid
+        ⇕  size-three escape equivalence
+five-arc + two burned directions
+        ↓  unique conic / q−4 on-conic candidates
+rank-three residual hypergraph
+        ├─ pair obstructions ── conflict graph
+        └─ triple obstructions ─ capacity-two gadgets
+                     │
+        NoActiveResidualTriples
+                     ▼
+               static Node--Kayles
+                     │
+         uniform routing theorem OPEN
+```
+
+### Exclusion ledger
+
+Do not put any of the following in the manuscript:
+
+- task IDs, lane names, agent/model names, dates as theorem labels, handoff
+  chronology, failed build transcripts, or superseded plans;
+- internal names such as `Y_NK`, `capOK`, “C80(b),” “Route C,” “A5 anchor,” or
+  “score-9” without replacing them by mathematical definitions;
+- memo-table sizes in a theorem statement;
+- claims that q=25 proves `PG(2,25)=P`;
+- claims that q=23 is Lean-unconditional;
+- claims that a native solver log is a durable certificate;
+- claims that line-capacity avoidance is a new ambient game class;
+- claims that fixed-point-free involutions, pairing, Nofil, Node--Kayles, or
+  the bare hypergraph-to-graph collapse are new;
+- negative-route catalogues.  Retain only the mirror-chord counterexample
+  because it explains the exact positive hypothesis.
+
+## F. Load-bearing missing results
+
+1. **Uniform odd-plane routing.**  Prove that every residual state arising in
+   the escape kernel reaches a pair-only P guard, or prove an equivalent
+   bounded corrected-signature/mex theorem.  Current q=13,17,19 depth-two
+   coverage is computation, not a uniform theorem.
+2. **Dynamic Node--Kayles bridge.**  Package persistence and
+   edge-preservation with R5 into one paper-facing game isomorphism theorem;
+   R5 currently supplies the exact static half.
+3. **Conic localization API.**  Select and cite the exact formal terminals
+   for five-arc uniqueness and the `q−4` on-conic legal-extension statement,
+   rather than relying on prose aggregation.
+4. **Evidence normalization.**  Produce modern durable bundles for q=3,9,
+   17,19,23,25 and `PG(4,3)`, or omit the affected numerical claims.
+5. **Referee-facing Lean audit.**  Audit the transitive closures of every
+   paper-cited terminal, especially generated Q11/Q13 data.
+6. **Literature audit.**  Complete the six-item queue above before any
+   historical novelty or priority sentence.
+
+## Mystery ledger
+
+The closeout `ej`+`tt` pass settled three packaging ambiguities:
+
+- **Could fixed-q evidence carry a no-crown paper?** No.  It belongs in a
+  delimited evidence section; the stable headline must be F1--F4 + M1--M3 +
+  R1--R7.
+- **Do all classical-variety results belong?** No.  The positive invariant
+  subboard corollaries reinforce the central mechanism; the parabolic,
+  Hermitian, and Baer exclusion classification is a companion paper.
+- **Can the old novelty sentence be reused?** No.  The old audit lacks the
+  current mandatory read-depth and citation-graph record.
+
+Open genuine mysteries:
+
+| Mystery | Exact evidence gap / gate | Owner |
+|---|---|---|
+| Why does the coupled residual have very small observed Grundy values despite growing gadget complexity? | no uniform bound on corrected rooted boundary signatures or mex image | C528 |
+| Is depth-two descent uniform in odd `q`? | checked only at q=13,17,19; no proof or q≥23 falsifier | C80/C528 |
+| Are the four infinite outcome families absent from prior literature? | current-compliant novelty audit missing | successor literature audit under `cap` |
+| Which computational rows can be made referee-ready without importing huge raw tables? | approved compact certificates/manifests missing | fixed-q evidence-normalization successors |
+
+No other packaging mystery remains: the stable theorem package, split line,
+trust vocabulary, and crown/no-crown architecture are fixed.
