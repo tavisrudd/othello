@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued task brief
+**Status:** complete; repaired implementation `9a388b41`; final user-launched review `GO`
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, artifacts, validation, axiom evidence, trust boundaries, judgment
