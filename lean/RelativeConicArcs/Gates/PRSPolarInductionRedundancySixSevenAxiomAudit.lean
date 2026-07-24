@@ -1,0 +1,25 @@
+import RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven
+
+/-!
+# Axiom audit for polar induction and redundancies six and seven
+
+The commands below print the dependencies of the public algebraic, synthesis, arithmetic, and
+finite-record terminals.  The imported modules contain no project-local axioms, generated native
+evaluators, or external oracles; all geometric and computational trust boundaries occur as theorem
+hypotheses or structure fields.
+-/
+
+#print axioms RelativeConicArcs.PRSPolarInduction.sequenceContraction_map
+#print axioms RelativeConicArcs.PRSPolarInduction.iteratedSequenceContraction_map
+#print axioms RelativeConicArcs.PRSPolarInduction.iteratedProjectiveSequenceContraction_map
+#print axioms RelativeConicArcs.PRSPolarInduction.PointedKernelLift.lift_splitSquarefreeKernelMember
+#print axioms RelativeConicArcs.PRSPolarInduction.mem_modularContractionKernel_iff
+#print axioms RelativeConicArcs.PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular
+#print axioms RelativeConicArcs.PRSPolarInduction.tangentTranslate_surjective
+#print axioms RelativeConicArcs.PRSRedundancySixSeven.redundancySixHighFieldSynthesis
+#print axioms RelativeConicArcs.PRSRedundancySixSeven.redundancySevenHighFieldSynthesis
+#print axioms RelativeConicArcs.PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled
+#print axioms RelativeConicArcs.PRSRedundancySixSeven.redundancySixAllFieldSynthesis
+#print axioms RelativeConicArcs.PRSRedundancySixSeven.redundancySevenAllFieldSynthesis
+#print axioms RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion
+#print axioms RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion
