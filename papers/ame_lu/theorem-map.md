@@ -7,13 +7,13 @@ still depends on the claim, evidence, literature, and prose gates.
 | Source | Candidate manuscript result | Status | Exact boundary | Evidence type |
 |---|---|---|---|---|
 | C374 | Clebsch `AME(6,11)` is LC- and LU-inequivalent to every six-point GRS AME class | adopted | `q=11`, arbitrary party permutation | conceptual dictionary plus exact LC and marginal-moment certificates |
-| C396 | `z` classifies projective, monomial-code, holonomy, and LC classes in the admitted non-GRS pencil | adopted | every odd finite field; exclusions exactly as stated in C396 | symbolic invariant theory plus exact finite checks |
-| C397 | logical-Clifford phase and exact `q=13` arbitrary-LU separation | adopted, to split into two manuscript results | uniform kernel theorem; explicit `q=13` collision pair | conceptual kernel proof plus exact four-copy contractions |
+| C396 | `z` classifies projective and monomial-code classes in the admitted non-GRS pencil; over odd prime fields it also classifies LC classes | adopted with C571 correction | classical quotient over every odd finite field; quantum LC statement only over odd prime fields because Frobenius is an additional extension-field Clifford | symbolic invariant theory plus exact finite checks |
+| C397 | logical-Clifford phase and exact `q=13` arbitrary-LU separation | adopted, to split into two manuscript results | fixed-party kernel theorem over odd prime fields; party-moving normalizer only when an isoduality is present; explicit `q=13` collision pair | conceptual kernel proof plus exact four-copy contractions |
 | C402 | one marginal moment uniformly separates every good non-GRS H3 reduction from the GRS locus | adopted | every odd good non-GRS H3 reduction | geometric concurrency formula and exact permutation lemma |
 | C546 | H3 pentad orientation is uniformly LC-forgettable | adopted as boundary/remark | every odd reduction in its stated domain | explicit integral isoduality and local Fourier lift |
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
-| C559 | every fixed-copy LU contraction is generically constant on an algebraic equal-phase code family | adopted as a mechanism boundary | every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
+| C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
 | C560 | every LU intertwiner between equal-phase CSS states of linear `[6,3,4]_q` MDS codes is LC; hence `LU iff LC iff z` on the admitted pencil | adopted headline theorem | every prime power for intertwiner rigidity; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity |
 
 ## Stable source labels
@@ -34,11 +34,13 @@ still depends on the claim, evidence, literature, and prose gates.
    and every pair of linear `[6,3,4]_q` MDS codes, every LU intertwiner of
    the associated equal-phase CSS states is LC.
 2. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
-   odd non-GRS pencil, projective, monomial-code, LC, and LU equivalence are
-   all equivalent to equality of `z`.
+   odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
+   equivalence are all equivalent to equality of `z`. Over extension
+   fields, Frobenius already identifies unequal `z` values.
 3. **Operational phase theorem (`thm:logical-phase`).** The fixed-party
-   logical group is `SL_2(q)` on the GRS locus and the split-torus
-   normalizer off it, in the exact odd-field domain of C397.
+   logical group is `SL_2(q)` on the GRS locus and the split torus off it,
+   over odd prime fields.  A party-moving isoduality, when
+   present, extends the torus to its normalizer.
 4. **Explicit LU witnesses.** C402's marginal moment uniformly separates
    good H3 reductions from GRS; C397's four-copy scalar resolves its q=13
    collision.
@@ -51,12 +53,12 @@ still depends on the claim, evidence, literature, and prose gates.
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
 | LU-intertwiner rigidity | every prime power `q`; linear `[6,3,4]_q` MDS/CSS states | none | nonlinear orthogonal arrays and non-MDS/non-CSS AME tensors |
-| Pencil classification by `z` | odd finite fields on C396's admitted non-GRS locus | none beyond C396 | zeros of `2t(t-1)BG` and the GRS boundary |
-| Logical-Clifford phase | C397's odd-field six-arc domain | characteristic-17/31 symmetry jumps retain the phase | characteristic two and non-stabilizer AME tensors |
+| Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
+| Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |
 | q=13 four-copy separator | the two exact q=13 classes in C397's collision bucket | exact party orbit included | no completeness claim beyond the pair |
 | Four-copy divisor | C548's admitted pencil | characteristic seven merges the two reduced components; 11/13/41 are ramification phenomena | characteristics 3/5 are boundary coincidences |
-| Fixed-copy generic constancy | every fixed copy number; stable diagram basis for `q` at least that number | rank-jump strata remain detectable | no growing-with-`q` degree bound |
+| Fixed-copy generic constancy | each irreducible component of a regular constant-dimension generator chart; every fixed copy number; stable diagram basis for `q` at least that number | rank-jump strata remain detectable; the dense open need not have a point over a small base field | no growing-with-`q` degree bound |
 
 ## Deliberate exclusions
 

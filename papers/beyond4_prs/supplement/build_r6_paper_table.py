@@ -33,7 +33,7 @@ def render() -> str:
         r"projective-semilinear class.  The columns give a canonical syndrome",
         r"representative, the size and stabilizer order of each constituent",
         r"\(\PGL_2(q)\)-orbit, the number \(\phi\) of such orbits fused by",
-        r"coefficient Frobenius, the collision energy \(E\), and the binary-quintic",
+        r"coefficient Frobenius, the shared-root pair count \(E\), and the binary-quintic",
         r"factor type \(\tau_5\) in odd characteristic.}",
         r"\label{tab:r6-exceptional}\\",
         r"\toprule",

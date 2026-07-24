@@ -21,7 +21,7 @@ closed.
 | Gate | Required change | Destination | Acceptance test | Status |
 |---|---|---|---|---|
 | N1 | Use `q >= 43` consistently for redundancy eight. | Abstract, Theorems 1.2 and 6.1 | No `q>43` occurrence; all three statements say `q\ge 43`. | Closed in source |
-| N2 | Replace the mixed point-count conventions by `q+kappa-2g sqrt(q)>delta`. | Section 4 and threshold table | A single definition of `H_kappa`; every application records `kappa`. | Closed in source |
+| N2 | Replace the mixed point-count conventions by `q+kappa-2g sqrt(q)>delta`. | Polar-induction section | A single definition of `H_kappa`; the retained applications are evaluations of the uniform \(Q_r\) formula. | Closed in source |
 | N3 | Recompute the displayed redundancy-eight and nine thresholds from that convention. | Sections 6.1--6.2 | The table gives `(g,delta,kappa)=(1,30,1)` and `(1,36,1)` and first prime powers 43 and 53. | Closed in source |
 | N4 | Preserve the singular cubic-cover correction separately. | Section 3 | The cubic argument quotes the exact `q+1-2 sqrt(q)` Aubry--Perret bound, deletes the possible rational singular point, and records `(g,delta,kappa)=(1,13,1)`. | Closed in source |
 | N5 | Remove the duplicated `and and`. | Section 6.2 | Literal search is empty. | Closed in source |
@@ -198,7 +198,7 @@ before delivering a verdict.
 |---|---|---|---|
 | F1 | Main-theorem hierarchy and synthesis | Each headline theorem has one primary equivalence relation and an explicit proof assembling exhaustion, counts, radius promotion, and Frobenius fusion. | Queued |
 | F2 | R6/R7 exceptional classifications | The printed paper identifies every exceptional class by representative, stabilizer, and fusion, or consistently calls the output a certified census. | Closed: R7 prints one representative per size block and the complete Markdown-record locator; the reader reproduced sample \(E_f\) and \(\tau_5\) entries |
-| F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | Closed: the reader independently reconstructed the degree-\(16\) R7 second-marker scheme, both bottom strata, and the fixed-factor exclusion |
+| F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | Closed: the uniform theorem states the full \(\mathrm{CC}(j-1,1)\) chain, \(\delta_r=6r-17\), and \(d_r\leq3r-5\); R6/R7 discharge the required contained assertions |
 | F4 | R8 component exhaustion | Decide whether the printed component argument is independently complete. | Closed: cut R8 to companion |
 | F5 | Computational/formal trust boundary | A frozen archive, exact domains, acceptance criteria, resource envelope, and honest formal coverage are sufficient to audit every retained headline claim. | Queued |
 | F6 | Exposition-only pass | The R5 example appears before the abstract machinery; duplicated roadmaps and audit prose are removed; the marked-factor mechanism remains the narrative spine. | Queued |

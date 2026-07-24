@@ -56,7 +56,7 @@ tables, adds a compact referee roadmap, bounds the fixed-redundancy recognition
 complexity precisely, completes recent-preprint metadata, and removes the sparse
 last bibliography page.  A subsequent cold scope review cut the submission to
 the R5--R7 spine; R8/R9 and the Hessian/Lucas material now belong
-to companion queues.  The retained canonical/IEEE review builds are 29/22 pages.
+to companion queues.  The retained canonical/IEEE review builds are 28/22 pages.
 The first fresh correctness review led to source repairs: the Aubry--Perret
 constant and possible singular rational point are explicit, all retained genus-one rows
 use \(\kappa=1\), R6 has the single field-order threshold \(q\geq29\), the R6/R7
@@ -76,6 +76,17 @@ pointed-collision exclusions.  The exact repair and mystery ledger are in
 `notes/2026-07-24-c545-r7-two-step-review-repair.md`.  External
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
+next referee pass promotes the already uniform transverse argument:
+conditional on the full chain
+`\(\mathrm{CC}(j-1,1)\)` for `6<=j<=r`, every split-free
+redundancy-`r` syndrome above
+`6r-15+floor(2 sqrt(6r-17))` lies in the declared persistent/modular
+list, and the marker-parameter bound `3r-5` is automatically weaker.
+The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
+marker--ramification lemma.  The recurrence interpretation and exact
+q=19 pointed example are now visible, while the duplicate overview
+figure, referee roadmap, complexity defense, threshold table, detailed
+Lean inventory, and R8/R9 preview are removed.  C545's
 deterministic paper-only archive now rebuilds and passes the 57-artifact local
 gate, and its public release checker is fail-closed.  Release remains blocked
 on two independent specialist readers, a publicly fetchable flake-pinned Lean

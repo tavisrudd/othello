@@ -19,12 +19,12 @@ The lower witness lifts squarefreely only when $\lambda\nmid g$.
 Thus the factor selected for contraction must remain as a marked
 forbidden root.
 
-\begin{definition}[Carriers]\label{def:carriers}
-A \emph{carrier} is a closed locus on which the transverse splitting
-argument degenerates.  A \emph{persistent carrier} is an ordinary
-catalecticant component propagated by contraction; a \emph{modular
-carrier} is an additional component created by a
-positive-characteristic contraction kernel.
+\begin{definition}[Persistent and modular loci]\label{def:carriers}
+The \emph{persistent locus} is the ordinary rank-two catalecticant
+locus propagated by contraction.  The \emph{modular locus} is the
+additional contraction-kernel locus that can appear in positive
+characteristic.  A \emph{collision divisor} records parameters at
+which the marked factor becomes a repeated root.
 \end{definition}
 
 \begin{definition}[Contraction and marker spaces]\label{def:polar-spaces}
@@ -112,7 +112,9 @@ displayed parameter \([9:28]\) is one complete instance of that step.
 \begin{definition}[One-step lower package]\label{def:lower-package}
 Fix \(f\in S_n(\F_q)\) with injective contraction map, so that
 \(\Phi_f:\PP(E^\vee)\to S_{n-1}\) is defined everywhere.  A one-step
-lower package for \(f\) consists of:
+lower package abstracts the R6 argument: a lower bad locus, the R5
+ordered-root curve with its deletions, and the finite set of markers
+where that construction is unavailable.  It consists of:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item a closed bad scheme \(B_{n-1}\subset S_{n-1}\) and a finite
   stratification \(S_{n-1}\setminus B_{n-1}=\coprod_\alpha X_\alpha\);
@@ -125,10 +127,10 @@ lower package for \(f\) consists of:
        \#Y_{\alpha,b}(\F_q)\geq
        q+\kappa_\alpha-2g_\alpha\sqrt q;
   \]
-\item a zero-dimensional closed deletion scheme
+  together with a zero-dimensional closed deletion scheme
   \(D_{\alpha,b,\lambda}\subset Y_{\alpha,b}\), of degree at most
   \(\delta_\alpha\), containing the singular, branch, diagonal,
-  marker, and self-collision points, such that every
+  marker, and collision points, such that every
   rational point outside \(D_{\alpha,b,\lambda}\) determines an
   ordered rational split squarefree \(g\in W_b\) with
   \(\lambda\nmid g\);
@@ -190,14 +192,41 @@ formula at infinity follows by evaluating $C_f$ on the second basis
 covector.
 \end{proof}
 
+\begin{lemma}[Three readings of the collision divisor]
+\label{lem:marker-collision}
+Assume \(W_f\) has trivial gcd, and let \(\lambda\in\PP(E^\vee)\).
+The following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item every member of \(W_f\) divisible by \(\lambda\) is divisible
+  by \(\lambda^2\);
+\item \(\lambda\) is a fixed factor of \(W_{\iota_\lambda f}\);
+\item \(\lambda\) lies on the collision divisor of the linear series
+  \(W_f\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Equation~\eqref{eq:lift} gives the equality of subspaces
+\[
+ \lambda W_{\iota_\lambda f}
+ =W_f\cap\lambda\Sym^{n-2}E^\vee.
+\]
+Thus (i) and (ii) are the same statement after dividing by
+\(\lambda\).  Since \(W_f\) is base-point-free, (i) says exactly that
+the morphism defined by \(W_f\) has zero differential at \(\lambda\),
+which is (iii).
+\end{proof}
+
 \begin{definition}[One-step contained-component assertion]
 \label{def:contained}
-For a specified bad scheme \(B_{n-1}\), collision section, and explicit
+For a specified bad scheme \(B_{n-1}\), collision divisor, and explicit
 closed list \(\mathcal C_n\subset S_n\), the assertion
 \(\mathrm{CC}(n,1;\mathcal C_n)\) says that every \(f\) for which the
-contraction map is noninjective, \(\Phi_f^*B_{n-1}\) is the whole
-parameter line, or the collision section vanishes identically belongs
-to \(\mathcal C_n\).  When the list is clear we write
+contraction map is noninjective and hence supplies no polar line,
+\(\Phi_f^*B_{n-1}\) is the whole parameter line and hence supplies no
+transverse marker, or the collision divisor is the whole line and
+hence every lift repeats its marked root, belongs to \(\mathcal C_n\).
+When the list is clear we write
 \(\mathrm{CC}(n,1)\).
 \end{definition}
 
@@ -240,38 +269,82 @@ squarefree lower member avoiding \(\lambda\).  Equation
 so the original system is shallow.
 \end{proof}
 
-The theorem isolates only the numerical escape and one-step lifting
-argument.  A multistep polar flag is obtained by proving and applying
-a new one-step package at each intermediate level; no arbitrary-\(j\)
-component theorem is asserted.
+The theorem isolates the numerical escape and one-step lifting
+argument.  Iterating it requires the contained-component assertion at
+every intermediate level, not only at the top.
 
 \begin{remark}[Point-count convention]\label{rem:thresholds}
 The correction $\kappa$ records the exact lower bound available for the
 chosen model.  Every genus-one curve retained in this paper uses the
 Aubry--Perret bound with \(\kappa=1\); a possible rational singular
-point is included instead in the deletion degree.  The three retained
-applications and their resulting prime-power thresholds are listed
-below.
+point is included instead in the deletion degree.
 \end{remark}
 
-\begin{table}[ht]
-\centering
-\caption{Normalized point-count thresholds used in this paper.}
-\label{tab:thresholds}
-\begin{tabular}{lccccc}
-\toprule
-Application & $g$ & $\delta$ & $\kappa$ & integer lower bound & first prime power\\
-\midrule
-R5 cubic fiber square & $1$ & $13$ & $1$ & $q\geq22$ & $23$\\
-R6 marked cover & $1$ & $19$ & $1$ & $q\geq29$ & $29$\\
-R7 marked cover & $1$ & $25$ & $1$ & $q\geq37$ & $37$\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{theorem}[Uniform transverse threshold]
+\label{thm:uniform-transverse}
+Fix a redundancy \(r\geq6\).  At every intermediate redundancy
+\(6\leq j\leq r\), assume the assertion
+\[
+ \mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)
+\]
+for the recursively pointed lower bad scheme, where \(\mathcal P_j\)
+is the persistent rank-two locus and \(\mathcal M_j\) is the declared
+nonshallow modular list.  Then, for every prime power
+\[
+ q\geq Q_r:=
+ 6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
+\]
+every split-free redundancy-\(r\) syndrome belongs to
+\(\mathcal P_r\cup\mathcal M_r\).
+\end{theorem}
+
+\begin{proof}
+Iterate the pointed contraction to the R5 cubic pencil.  Its
+off-diagonal curve always has \((g,\kappa)=(1,1)\), and its singular,
+diagonal, and branch deletions cost thirteen.  Each of the \(r-5\)
+retained markers removes at most six further ordered pairs.  Hence
+\[
+ \delta_r=13+6(r-5)=6r-17,\qquad
+ \mathcal H_1(1,\delta_r)
+ =6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
+\]
+At a stage of redundancy \(j\) with \(s=r-j\) old markers, the
+ordinary and cyclic/wild transverse terms cost at most \(3+4\), the
+moving \(g^{\,j-4}_{\,j-2}\) collision divisor has ramification degree
+\(2j-6\), and each old
+marker adds one diagonal value and a degree-at-most-two fixed-factor
+condition.  Thus every marker-selection scheme has degree at most
+\[
+ 3+4+(2j-6)+3s=2r+s+1\leq3r-5.
+\]
+The final inequality is sharpest at the last, redundancy-six, marker
+selection.
+Since \(Q_r>3r-5\), the parameter-line inequality \(q+1>d_r\) is
+automatic.  The exact-linear-gcd graph has only eight base deletions
+and at most two per marker, so it is weaker as well.
+
+Apply Theorem~\ref{thm:induction} successively.  If a recursively
+pointed bad scheme contains the whole polar line, the corresponding
+assertion \(\mathrm{CC}(j-1,1)\) places the syndrome in the declared
+persistent or modular list.  Otherwise a marker remains outside its
+finite scheme.  After reaching the R5 pencil, the displayed point
+bound supplies a split squarefree cubic avoiding every marker, and
+Theorem~\ref{thm:polar-construction} lifts it to the original system.
+\end{proof}
+
+For \(r=5,6,7\), the integer cutoffs supplied by the same formula are
+\[
+ Q_5=22,\qquad Q_6=29,\qquad Q_7=37;
+\]
+the first prime powers meeting them are \(23,29,37\).  Thus the former
+threshold table consisted of three evaluations of one linear-scale
+formula.  Propositions~\ref{prop:r6-contained} and
+Corollary~\ref{cor:r7-contained} discharge the required chains at
+redundancies six and seven.
 
 \subsection{Contained-component calculations}
 
-The ordinary rank-two carrier admits a uniform contained-line
+The ordinary persistent locus admits a uniform contained-line
 calculation.  This does not classify other lower bad schemes, but it
 closes the persistent part of every level-specific component gate.
 
@@ -338,11 +411,11 @@ non-rank-boundary locus on which the first-polar line is defined; the
 excluded noninjective locus is the rank-one normal-rational-curve
 locus just identified.  After rank one and rational split secants are removed as shallow, the
 upper rank-two locus consists of the persistent tangent and
-conjugate-secant carriers.  On a persistent fiber the nonsplit torus
+conjugate-secant families.  On a persistent fiber the nonsplit torus
 acts by $z\mapsto z^n$, giving $T/T^n$ modulo inversion and Frobenius,
 while the tangent unipotent cocycle is $z\mapsto z+nu$.
 
-Modular carriers are equally explicit.  If $\cN$ is a nucleus in the
+Modular loci are equally explicit.  If $\cN$ is a nucleus in the
 lower divided-power module, the complete space whose first-polar line
 lies in $\cN$ is
 \[
@@ -359,7 +432,7 @@ kernel computes every coherent lift without an ambient syndrome census.
 The modular contraction kernel is an exact finite linear-algebra
 construction.  Proposition~\ref{prop:contained-rank-two} supplies the
 ordinary persistent component uniformly, but other lower bad schemes
-and marker collisions still require level-specific calculations.
+and collision divisors still require level-specific calculations.
 Neither the proposition nor Theorem~\ref{thm:induction} classifies
 those additional components.
 \end{remark}

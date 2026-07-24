@@ -9,8 +9,10 @@ The admitted non-GRS condition is
 \[
 t(t-1)(t^2-t+1)(t^2-3t+1)G(t)\ne0.                    \tag{4.1}
 \]
-The first four factors keep the displayed arc and quotient coordinates
-nondegenerate; \(G=0\) is the conic, hence GRS, boundary.  Write
+Factoring the twenty \(3\)-by-\(3\) column minors gives the first four
+factors, which keep the arc and quotient coordinates nondegenerate.
+The determinant for a conic through the six columns is a unit times
+\(G\), so \(G=0\) is exactly the GRS boundary.  Write
 \(C_t=\ker H_t\) and \(\Psi_t=\Psi_{C_t}\), and let \(A,B,z\) be as in
 \((1.3)\).
 
@@ -18,10 +20,10 @@ nondegenerate; \(G=0\) is the conic, hence GRS, boundary.  Write
 For admitted \(t,u\), the following are equivalent:
 \[
 H_t\sim_{\mathrm{proj}}H_u,\qquad
-C_t\sim_{\mathrm{mon}}C_u,\qquad
-\Psi_t\sim_{\LC}\Psi_u,\qquad z(t)=z(u),
+C_t\sim_{\mathrm{mon}}C_u,\qquad z(t)=z(u),
 \]
-allowing arbitrary party permutations.
+allowing arbitrary party permutations.  If \(q\) is prime, these are
+also equivalent to \(\Psi_t\sim_{\LC}\Psi_u\).
 \end{theorem}
 
 \begin{proof}
@@ -67,22 +69,52 @@ The equivalence with monomial codes follows from
 Section~\ref{sec:dictionary}, and projective equivalence supplies an LC
 equivalence.
 
-For the remaining direction, shorten the Pauli-label Lagrangian to every
-four-set.  Projection between the local two-dimensional label planes
-defines transition maps; comparing two supports gives a holonomy matrix.
-The multiset of conjugacy-and-inversion invariants
-\(\Tr(M)^2/\det M\) is preserved by LC and party permutation.  Its 450
-entries have exact values
+For the remaining direction assume that \(q\) is prime.  Then a local
+Clifford induces a block \(F_i\in\mathrm{SL}_2(q)\) on each local
+Pauli-label plane.  Put \(K_T=L_{C_t}(T)\) for every four-set
+\(T\).  If \(i,j\in T\), projection
+\(p_i:K_T\to\F_q^2\) onto the Pauli-label plane at \(i\) is an
+isomorphism by \((3.2)\).  Define the transition
+\[
+ M_T(i,j)=p_jp_i^{-1}:(\F_q^2)_i\longrightarrow(\F_q^2)_j
+\]
+and, for distinct four-sets \(T,U\) containing \(i,j\), the holonomy
+\[
+ \operatorname{Hol}(T,U;i,j)=M_U(j,i)M_T(i,j).          \tag{4.4}
+\]
+Local symplectic blocks \(F_i\) send this endomorphism to
+\(F_i\operatorname{Hol}F_i^{-1}\).  Reversing \(T,U\) takes its inverse,
+and a party permutation only relabels the data.  Thus the multiset of
+\[
+ r(M)=\Tr(M)^2/\det M
+\]
+over the \(15\cdot6\cdot5=450\) choices is an LC and party-permutation
+invariant.
+
+Direct substitution of the shortened generators into \((4.4)\) gives
+the following rational-function multiset; the symbolic identities and a
+direct-Lagrangian reconstruction are independently replayed by the C396
+bundle described in Section~\ref{sec:verification}:
 \[
 \begin{array}{c|c}
 4&90\\
 -1/z&144\\
 (2z+1)^2/z^2&24\\
 \text{each root of }X^2-8X+(8-16z-1/z)&96.
-\end{array}                                             \tag{4.4}
+\end{array}                                             \tag{4.5}
 \]
-Away from the GRS value \(z=-1/4\), the multiplicity pattern identifies
-\(-1/z\), including every modular collision.  Thus LC equivalence forces
+Here \(96\) is the multiplicity of each root before specialization;
+coincident values have their multiplicities added.  The identity
+\[
+ 4B(t)^2+A(t)^2=4G(t)^2
+\]
+shows that the excluded GRS locus is exactly \(z=-1/4\).  Away from it,
+the constant \(4\) bin is isolated and the two quadratic roots are
+distinct.  The bin containing \(-1/z\) can merge with neither, one, or
+both of the weight-\(24\) and one weight-\(96\) contributions, so its
+multiplicity is \(144,168,240\), or \(264\).  No other bin has one of
+these multiplicities.  Hence the multiset canonically recovers
+\(-1/z\), including every modular collision, and LC equivalence forces
 equality of \(z\).
 \end{proof}
 
@@ -98,3 +130,17 @@ Theorem~\ref{thm:lc-pencil} gives all equivalences except LU.  Every LC is
 an LU, while Theorem~\ref{thm:lu-lc-rigidity} turns every LU intertwiner
 between the states \(\Psi_t,\Psi_u\) into an LC intertwiner.
 \end{proof}
+
+The prime-field hypothesis is necessary for this scalar classification.
+Over \(\F_{p^e}\), the basis permutation
+\(\lvert x\rangle\mapsto\lvert x^p\rangle\) is a local Clifford and sends
+\(\Psi_t\) to \(\Psi_{t^p}\), while \(z(t^p)=z(t)^p\) need not equal
+\(z(t)\).  Concretely, in
+\(\F_{25}=\F_5[s]/(s^2-2)\), both \(s\) and \(-s=s^5\) are admitted, but
+\[
+ z(s)=3+3s,\qquad z(-s)=3+2s.
+\]
+Thus extension-field LC/LU classification requires at least a Frobenius
+quotient and, for the full Weyl normalizer, potentially further
+\(\F_5\)-symplectic identifications.  No such classification is claimed
+here.

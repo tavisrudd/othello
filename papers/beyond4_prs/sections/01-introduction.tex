@@ -11,6 +11,24 @@ and seven.  We use deep-hole syndromes because their Hankel systems
 make both the base classification and the propagation mechanism
 visible.
 
+The mechanism is the elementary identity
+\[
+ g\in W_{\iota_\lambda f}
+ \quad\Longleftrightarrow\quad
+ \lambda g\in W_f,
+ \qquad
+ \lambda g\ \hbox{squarefree}
+ \quad\Longleftrightarrow\quad
+ \lambda\nmid g
+\]
+when \(g\) is squarefree.  Retaining \(\lambda\) is therefore the
+essential coherence condition.  Conditional on the contained-component
+assertions at every intermediate level, the transverse branch is
+uniform: at redundancy \(r\) it closes for
+\[
+ q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
+\]
+
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
 $\PP^1(\F_q)$.  If the redundancy is
@@ -159,7 +177,9 @@ here.  Classical apolarity, catalecticants,
 and binary-form rank strata are treated in
 \cite{IarrobinoKanev1999,ComasSeiguer2011}; our use of divided powers
 keeps the small-characteristic contraction formulas explicit.
-Factorization statistics in linear families \cite{CMP2017} and
+From the viewpoint of binary forms, the question is which linear
+systems contain a totally split squarefree member.  Factorization
+statistics in linear families \cite{CMP2017} and
 normal-rational-curve nuclei \cite{GmainerHavlicek2013} are inputs.
 For splitting families, we use Wang's Theorem~3.6
 \cite{Wang2026}: on the \'etale locus, the factorization type of a
@@ -187,6 +207,3 @@ Sections~\ref{sec:polar} and~\ref{sec:r67} develop coherent polar
 induction and prove Theorem~\ref{thm:spine}.
 Section~\ref{sec:verification} states the computational and formal trust
 boundary, and Section~\ref{sec:boundary} records the exact open boundary.
-Companion papers will treat the fixed-level redundancy-eight and
-redundancy-nine problems and the logically separate ordered-Hessian
-and Lucas-carrier geometry.

@@ -2,11 +2,15 @@
 
 Regard any one party of an \(\AME(6,q)\) stabilizer tensor as an input and
 the other five as outputs.  This is a \([[5,1,3]]_q\) encoding isometry.
-A tensor symmetry fixing every party induces a one-qudit logical
-symplectic transformation in that view.
+A tensor symmetry fixing every party setwise induces local blocks
+\((F_1,\ldots,F_6)\in\mathrm{SL}_2(q)^6\) preserving \(L_C\).  Fixing an
+encoder view, define the \emph{fixed-party symplectic kernel} to be the
+image of this stabilizer on the input block.  It is the kernel, projected
+to one party, of the homomorphism from party-permuting Clifford
+symmetries to \(S_6\).
 
 \begin{theorem}[Logical phase]\label{thm:logical-phase}
-For an equal-phase CSS state from a six-arc over a field of odd order, the
+For an equal-phase CSS state from a six-arc over an odd prime field, the
 fixed-party symplectic kernel is
 \[
 \begin{cases}
@@ -16,45 +20,89 @@ T=\{\diag(a,a^{-1}):a\in\F_q^\times\},&\text{if the arc is nonconic}.
 \]
 Thus every encoder view of a GRS tensor realizes the full one-qudit
 logical Clifford group from fixed-party symmetries.  Off the GRS locus,
-the fixed-party logical group is the split torus; adding party-moving
-isodualities gives its normalizer.
+the fixed-party logical group is the split torus.  Any party-moving
+isoduality that exchanges the CSS \(X\)- and \(Z\)-spaces acts by the
+nontrivial Weyl-group element and generates the normalizer of \(T\)
+together with \(T\).
 \end{theorem}
 
 \begin{proof}
 Every four-party support carries the two-dimensional shortened label
 plane \((3.2)\), and projection to the Pauli plane of any retained party
-is an isomorphism.  For a fixed party permutation, one anchor block in
-\(\mathrm{SL}_2(q)\) therefore forces the other five local symplectic
-blocks through overlaps of the shortened supports.  Satisfying all
-support relations is necessary and sufficient for preserving the full
-Lagrangian.
+is an isomorphism.  If \(F_i\) is fixed at one party, requiring
+\(\bigoplus_iF_i\) to carry each shortened plane to itself therefore
+determines the other five blocks through overlapping four-sets.  These
+conditions are also sufficient: the shortened planes span \(L_C\),
+because the weight-four shortened words span both three-dimensional MDS
+codes \(C\) and \(C^\perp\).
 
-Diagonal anchor blocks always propagate and give \(T\).  If an anchor has
-a nonzero off-diagonal entry, the overlap equations force a
-coordinatewise scaling equivalence between \(C\) and \(C^\perp\).  In the
-arc language, the labelled six-arc must be fixed by Gale association.
-For six points in \(\PP^2\), that fixed divisor is precisely the conic
-locus.  On a conic, the usual GRS dual multipliers propagate every anchor
-in \(\mathrm{SL}_2(q)\); off the conic, only diagonal anchors survive.
+The common diagonal anchor \(\diag(a,a^{-1})\) preserves
+\(C_X\oplus C^\perp_Z\), so \(T\) is always present.  Write a propagated
+collection as
+\[
+ F_i=\begin{pmatrix}\alpha_i&\beta_i\\
+                     \gamma_i&\delta_i\end{pmatrix},
+ \qquad
+ D_\alpha=\diag(\alpha_1,\ldots,\alpha_6),
+ \quad\text{and similarly for }D_\beta,D_\gamma,D_\delta .
+\]
+Preservation of \(L_C=C_X\oplus C^\perp_Z\) is equivalent to
+\[
+\begin{array}{ll}
+D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
+D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
+\end{array}                                             \tag{5.2}
+\]
+Apply these inclusions to the unique shortened word on each four-set.
+On two four-sets meeting in three parties, comparison through the
+projection isomorphisms shows that an off-diagonal coefficient vanishes
+at one party if and only if it vanishes at all parties.  Hence a
+nondiagonal propagated collection makes \(D_\gamma\) or \(D_\beta\)
+nonsingular, and \((5.2)\), together with equality of dimensions, gives
+\(D_\gamma C=C^\perp\) or \(D_\beta C^\perp=C\).  Conversely, such a
+diagonal code--dual equivalence satisfies \((5.2)\) for the two
+elementary unipotent anchors; together with \(T\) they generate
+\(\mathrm{SL}_2(q)\).
+
+It remains to identify when the diagonal equivalence
+\(C\sim C^\perp\) occurs.  A parity-check matrix for \(C\) and a kernel
+basis for it represent associated, or Gale-dual, ordered six-arcs.
+The classical self-association theorem for six points in
+\(\PP^2\) says that these two sextuples are projectively equivalent
+exactly when the six original columns lie on a conic
+\cite[Section~2.3]{HowardMillsonSnowdenVakil2008}.  Equivalently, solving
+the multipliers in \((5.2)\) leaves the determinant of the six quadratic
+evaluation vectors.  Since the columns form an arc, the conic is
+nonsingular.  On it, the standard GRS dual multipliers realize the
+code--dual equivalence and hence every anchor in
+\(\mathrm{SL}_2(q)\); off it, the preceding implication excludes every
+nondiagonal anchor.
+
+Finally, an isoduality interchanges the two summands \(C_X\) and
+\(C^\perp_Z\), so its input block swaps the two Weyl axes.  It conjugates
+\(a\) to \(a^{-1}\) in \(T\), giving \(N(T)\) whenever such a
+party-moving symmetry is present.
 \end{proof}
 
 The distinction is operational rather than a classical automorphism
 count.  Including logical Paulis, the projective logical Clifford group
-has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\) on the GRS locus, whereas
-the non-GRS encoder view has \(q^2\cdot2(q-1)\) after the party-moving
-normalizer is included.  At \(q=11\), these orders are \(159720\) and
-\(2420\), respectively.
+has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\) on the GRS locus.  At
+\(q=11\), the two non-GRS pencil classes have certificate-checked
+party-moving isodualities, so their logical group is \(q^2N(T)\); the GRS
+and non-GRS orders are \(159720\) and \(2420\), respectively.
 
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
 containing that party gives a unique stabilizer representative supported
 there.  Removing the input leaves a weight-three output Pauli.  Thus each
 input Pauli has exactly ten minimum-support pushes, although the symmetry
-orbits of those pushes can distinguish finer projective classes.
+orbits of those pushes can distinguish finer projective classes.  This
+uses only the projection isomorphism for the shortened planes, not the
+finite group calculation.
 
 Arithmetic symmetry jumps do not change the phase.  The
 characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
-and retains the full \(\mathrm{SL}_2(17)\) kernel.  The
-characteristic-\(31\) non-GRS \(A_5\) specialization retains only the
-split torus.  These are symmetry enhancements inside the two phases, not
-exceptions to \((5.1)\).
+and therefore retains the full \(\mathrm{SL}_2(17)\) kernel.  The
+characteristic-\(31\) \(A_5\) specialization is non-GRS and therefore
+retains only the split torus.  These are symmetry enhancements inside the
+two phases, not exceptions to \((5.1)\).

@@ -38,47 +38,16 @@ be removed and a point count produces an escape.  If it is
 scheme-theoretically contained, the point-count argument says nothing:
 ordinary catalecticant components and components created in small
 characteristic require a separate level-specific classification.
-Section~\ref{sec:polar} introduces the terms persistent and modular
-carriers only when that distinction enters the proof.
+Section~\ref{sec:polar} introduces the persistent and modular loci
+only when that distinction enters the proof.
 
 \paragraph{Lifting.}
 On the transverse branch, a rational point of the lower ordered
-splitting cover outside the branch, diagonal, old-marker, new-marker,
-and self-collision divisors produces a split squarefree lower witness
+splitting cover outside the branch, diagonal, marker, and collision
+divisors produces a split squarefree lower witness
 avoiding all markers.  Multiplying by the marked factors then lifts it
-squarefreely to $W_f$.  Figure~\ref{fig:overview-flow} records this
-sequence and the contained/transverse fork.
-
-\begin{figure}[H]
-\centering
-\[
-\begin{array}{c}
-\boxed{\text{syndrome }f}
-\xrightarrow{\ \text{Hankel dictionary}\ }
-\boxed{\text{split-free system }W_f}\\[5pt]
-\downarrow\ \text{mark }\lambda\text{ and contract}\\[5pt]
-\boxed{W_{\iota_\lambda f}\text{ with forbidden root }\lambda}
-\xrightarrow{\ \text{iterate}\ }
-\boxed{\text{coherent ordered polar flag}}\\[5pt]
-\begin{array}{ccc}
-\swarrow\ \text{transverse}&&\searrow\ \text{contained}\\[2pt]
-\boxed{\begin{array}{c}\text{finite bad parameters}\\
-\text{and point-count escape}\end{array}}
-&&
-\boxed{\begin{array}{c}\text{persistent or modular}\\
-\text{component theorem}\end{array}}\\[7pt]
-\downarrow&&\\[-2pt]
-\boxed{\text{lower split witness avoiding markers}}&&\\[5pt]
-\downarrow\ \text{multiply marked factors}&&\\[2pt]
-\boxed{\text{split squarefree member upstairs}}&&
-\end{array}
-\end{array}
-\]
-\caption{Information flow of coherent polar induction.  Solid arrows
-are the statements proved in the degrees treated here.  The contained
-branch is not a consequence of the transverse sieve.}
-\label{fig:overview-flow}
-\end{figure}
+squarefreely to $W_f$.  Figure~\ref{fig:polar-flow} records this
+sequence at the point where the construction is formalized.
 
 \begin{table}[H]
 \centering
@@ -129,30 +98,3 @@ conditional on $\rho=6$ at $q=7,8,9$ & Radius at $q=7,8,9$\\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\paragraph{Referee roadmap.}
-The shortest route to the headline R5 theorem is
-Lemma~\ref{lem:hankel} and Corollary~\ref{cor:splitfree}, followed by
-the radius gate and gcd strata in Propositions
-\ref{prop:r5-radius}--\ref{prop:r5-gcd1}, the cubic incidence in
-Proposition~\ref{prop:r5-incidence}, the cyclic and $S_3$ analyses in
-Lemmas~\ref{lem:cyclic}--\ref{lem:s3}, and the finite bridge in
-Proposition~\ref{prop:r5-bridge}.  Tables~\ref{tab:r5sporadic} and
-\ref{tab:r5-sanity} make the bounded-field output locally identifiable
-and numerically auditable.
-
-The later R6 and R7 proofs use the R5 splitting cover as their bottom
-package.
-Section~\ref{sec:polar} may be read as the abstract mechanism linking
-these levels.  Running the supplement is required only to reproduce the
-finite bridges, canonical orbit records, and regression or formal
-checks identified in Section~\ref{sec:verification}; it is not a
-substitute for any printed geometric argument.  In particular, the
-Lean layer checks coordinate algebra and conditional synthesis
-interfaces; it does not formalize the geometric component
-classifications or the rational-point arguments.
-
-The proofs now follow these arrows in order: dictionary, redundancy-five
-base cover, polar construction, contained components, transverse point
-count, and fixed-level applications.  This is a scope boundary, not a
-second theorem inventory.

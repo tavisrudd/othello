@@ -150,7 +150,7 @@ In syndrome coordinates the tame cyclic surface is
 When $2$ and $3$ are invertible this is the Veronese surface, of degree
 four, and contains no line.  Characteristic three has a different
 wild closure, treated in Proposition~\ref{prop:r6-modular}.  For a
-basis \(F_0,F_1,F_2\) of the \(g^2_4=W_f\), pointed collision is the
+basis \(F_0,F_1,F_2\) of the \(g^2_4=W_f\), the collision divisor is the
 rank-one condition on the value and derivative rows.  Equivalently,
 all three binary Wronskians
 \[
@@ -265,7 +265,7 @@ Definition~\ref{def:contained} are exhausted as follows:
       surface or the characteristic-three wild cone;
 \item in characteristic two, containment in the cyclic plane occurs
       exactly for \(f\in\cN_3=\PP\langle e_2,e_3\rangle\);
-\item on the remaining trivial-gcd locus the pointed-collision section
+\item on the remaining trivial-gcd locus the collision divisor
       is not identically zero.
 \end{enumerate}
 Consequently the complete nonshallow contained list is the persistent
@@ -306,7 +306,7 @@ no polar line.  In characteristic three its wild replacement has the
 same degree and no contained trivial-gcd polar line; in characteristic
 two the replacement is a plane, whose only contained component is
 \(\cN_3\), by Proposition~\ref{prop:r6-modular}.  Finally,
-Proposition~\ref{prop:r6-degrees} gives a nonzero pointed-collision
+Proposition~\ref{prop:r6-degrees} gives a nonzero collision
 divisor of degree at most six.  Outside the contained binary component,
 the excluded parameter scheme therefore has degree
 \[
@@ -322,19 +322,9 @@ points whose split quadratic contains the new marker.  Since
 Here the fixed gcd \(\lambda_0\) differs from the marker \(r\).
 Indeed, \(\lambda_0=r\) says that every cubic in \(W_{b(r)}\)
 vanishes at \(r\), so every lifted quartic has a double root there;
-this is one of the pointed-collision parameters already placed in
-\(Z_f\).  On an affine chart it is cut out by the \(3\)-minors of
-\[
-\begin{pmatrix}
-b_0(r)&b_1(r)&b_2(r)&b_3(r)\\
-b_1(r)&b_2(r)&b_3(r)&b_4(r)\\
-1&r&r^2&r^3
-\end{pmatrix}.
-\]
-Each minor has degree at most five in \(r\), and their common zero
-scheme is contained in the degree-six collision divisor of
-Proposition~\ref{prop:r6-degrees}; no additional deletion budget is
-needed.  Homogenizing gives the same statement at infinity.
+by Lemma~\ref{lem:marker-collision}, this is exactly a point of the
+degree-six collision divisor already placed in \(Z_f\), so no
+additional deletion budget is needed.
 In the \(S_3\) case, Lemma~\ref{lem:s3} supplies the geometrically
 integral off-diagonal curve.  Its singular, diagonal, and branch
 deletions have degree at most thirteen, and deleting the unique cubic
@@ -366,7 +356,7 @@ directly at $q=7,8$.
 
 \begin{theorem}[Redundancy six]\label{thm:r6}
 For every prime power $q\geq7$, the deep syndromes of $\PRS(q-5)$ are
-the persistent stratum of size $q(q+1)^2/2$, together with:
+the persistent locus of size $q(q+1)^2/2$, together with:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item respectively $18,11,4,2,1$ exceptional $\PGL_2(q)$ orbits at
       $q=7,8,9,11,13$;
@@ -406,7 +396,7 @@ nucleus term occurs only for binary fields beyond the finite table.
 The five small tables are exhaustive computations.  For an exceptional
 net \(W_f\), let \(I_f(r)\) be the number of irreducible cubic members
 of the quotient pencil \(W_{b(r)}\), including the infinity chart, and
-define its shared-root collision energy by
+define its shared-root pair count by
 \[
                  E_f=\sum_{r\in\PP^1(\F_q)}\binom{I_f(r)}2.
 \]
@@ -472,7 +462,7 @@ Choose the second contraction marker \(s\).  The unavailable values of
 with the lower secant cubic, by
 Proposition~\ref{prop:r6-secant}; at most four intersections with the
 cyclic surface or its characteristic-three wild replacement; and at
-most six pointed self-collisions, by
+most six points of the collision divisor, by
 Propositions~\ref{prop:r6-degrees} and~\ref{prop:r6-modular}.  In
 characteristic two the cyclic
 replacement is a plane, so its pullback has degree at most one unless
@@ -501,7 +491,7 @@ The resulting cubic pencil is neither persistent nor cyclic.  If it
 has exact linear gcd \(\lambda_0\), then
 \(\lambda_0\notin\{x,s\}\): equality with \(x\) is excluded by the
 fixed-factor minors above, while equality with \(s\) is the pointed
-self-collision excluded by Proposition~\ref{prop:r6-degrees}.  The
+collision excluded by Proposition~\ref{prop:r6-degrees}.  The
 graph proof of Proposition~\ref{prop:r5-gcd1} has eight original deletions; avoiding
 the two additional markers costs at most two graph points each.
 Since \(q+1>12\), a split squarefree cubic avoiding \(x\) and \(s\)
@@ -524,26 +514,17 @@ lifts through \(s\) to a split squarefree quartic in \(W_h\) avoiding
 \begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
 Suppose the lower net is $\ell_xU$, where
 $U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three.  If \(x=r\),
-the parameter belongs to the marked self-collision scheme.  If
+the parameter belongs to the collision divisor.  If
 \(x\ne r\) and \(q\geq16\), then \(U\) contains a split cubic avoiding
 both \(x\) and \(r\).
 \end{proposition}
 
 \begin{proof}
 If \(x=r\), every lifted quintic has the repeated factor
-\((t-r)^2\).  On an affine chart this equality is cut out by the
-\(3\)-minors of
-\[
-\begin{pmatrix}
-b_0(r)&b_1(r)&b_2(r)&b_3(r)&b_4(r)\\
-b_1(r)&b_2(r)&b_3(r)&b_4(r)&b_5(r)\\
-1&r&r^2&r^3&r^4
-\end{pmatrix}.
-\]
-Each minor has degree at most six in \(r\); after homogenization their
-common zero scheme is contained in the degree-eight marked
-self-collision divisor of Proposition~\ref{prop:r7-collision}.  This
-is the unavailable branch.  Hence assume \(x\ne r\).
+\((t-r)^2\).  Lemma~\ref{lem:marker-collision} identifies this with
+the degree-eight collision divisor of
+Proposition~\ref{prop:r7-collision}.  This is the unavailable branch,
+so assume \(x\ne r\).
 Put $S=\PP^1(\F_q)\setminus\{x,r\}$.  For ordered distinct
 $u,v\in S$, the map
 $w\mapsto\lambda(\ell_u\ell_v\ell_w)$ is linear.  If it vanishes
@@ -557,8 +538,8 @@ $(a+b)(q+1)$ rational points.  Thus the bad pairs number at most
 $10(q+1)$, whereas $(q-1)(q-2)>10(q+1)$ for $q\geq16$.
 \end{proof}
 
-\begin{proposition}[Marked self-collision]\label{prop:r7-collision}
-After fixed factors are removed, the self-collision divisor of the
+\begin{proposition}[Collision divisor]\label{prop:r7-collision}
+After fixed factors are removed, the collision divisor of the
 moving $g^3_5$ has degree at most eight.
 \end{proposition}
 
@@ -599,12 +580,12 @@ four affine $\F_4$ roots and the simple root at infinity.
 \label{cor:r7-contained}
 The assertion $\mathrm{CC}(6,1)$ is exhaustive in every
 characteristic.  A noninjective contraction is the shallow rank-one
-boundary.  Containment in the lower rank-two carrier gives upper
+boundary.  Containment in the lower persistent locus gives upper
 catalecticant rank at most two; after the shallow rational secants are
 removed, these are exactly the persistent tangent and conjugate-secant
 families.  The complete lift of the only additional lower component,
 the characteristic-two nucleus line, is the central point \(e_3\).
-The remaining self-collision section is a nonzero divisor.  Thus the
+The remaining collision divisor is nonzero.  Thus the
 nonshallow contained list is precisely the persistent locus and, in
 characteristic two, \(e_3\); there is no further contained component.
 \end{corollary}
@@ -616,7 +597,7 @@ repeated rational, and irreducible.  They give respectively the shallow
 rational secant, tangent, and conjugate-secant loci.  The remaining
 lower binary nucleus line has the separate complete lift computed in
 Proposition~\ref{prop:r7-central}.  Proposition~\ref{prop:r7-collision}
-shows that the collision section is nonzero.  These are respectively
+shows that the collision divisor is nonzero.  These are respectively
 the contraction-indeterminacy, lower-component-containment, and
 identical-collision alternatives of Definition~\ref{def:contained},
 so the list is exhaustive.
@@ -627,10 +608,10 @@ so the list is exhaustive.
 Certificate R7 unconditionally classifies every prime power
 $q\leq32$ in its displayed domain.  For every prime power $q\geq13$,
 the split-free syndromes
-at redundancy seven are the persistent stratum of size
+at redundancy seven are the persistent locus of size
 \(q(q+1)^2/2\), together with the
 central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
-split-free orbit-size profiles, after removing the persistent stratum
+split-free orbit-size profiles, after removing the persistent locus
 and also the central nucleus singleton at \(q=8\), are:
 \[
 \begin{array}{c|l}
@@ -658,7 +639,7 @@ rational squares.  Hence the persistent count is
  \frac{q(q-1)}2(q+1)+(q+1)q=\frac{q(q+1)^2}{2}.
 \]
 For \(q\geq37\), choose a first marker outside the at most three
-catalecticant intersections, eight marked self-collisions, and, in
+catalecticant intersections, eight collision parameters, and, in
 characteristic two, one intersection with the nucleus line.  If the
 contracted quartic net has trivial gcd,
 Proposition~\ref{prop:r7-pointed} supplies the complete second
@@ -666,7 +647,7 @@ one-step package: it excludes the cyclic/wild carrier and
 fixed-gcd/marker coincidences before applying either the pointed
 linear-gcd graph or the \(S_3\) cover.  If the contracted net has exact
 linear gcd, Proposition~\ref{prop:r7-gcd1} applies; its excluded
-\(x=r\) case is already among the eight self-collisions.
+\(x=r\) case is already among the eight collision parameters.
 Corollary~\ref{cor:r7-contained} leaves exactly the persistent locus and
 Proposition~\ref{prop:r7-central}.  Certificate R7 covers
 \[
@@ -713,11 +694,22 @@ q&|\mathcal O|&\text{representative}\\ \hline
 For \(q=8,9\), the coordinates use the same polynomial-basis encoding
 specified below Table~\ref{tab:r6-exceptional}.
 
-The $q=19$ lower net $\langle1,t^3,t^4\rangle$ has six split members,
-all containing the marked point at infinity, yet no coherent sextic
-polar line lies in its orbit.  This is the concrete reason
-the R7 proof must apply Theorem~\ref{thm:induction} twice with the old
-marker retained, rather than classify only a set of bad lower fibers.
+The \(q=19\) lower net
+\[
+                 W=\langle1,t^3,t^4\rangle
+\]
+shows why the parameter must remain marked.  Its split squarefree
+members are exactly
+\[
+ U(T^3-uU^3),\qquad
+ u\in(\F_{19}^{\times})^3=\{1,7,8,11,12,18\}.
+\]
+All six contain the marked point at infinity.  The obstruction is
+pointed rather than intrinsic to \(W\): at the marker \(0\), for
+example, \(U(T^3-U^3)\) is an admissible member.  No coherent sextic
+polar line lies in the infinity-pointed orbit.  Thus the R7 proof
+escapes over the marker parameter; classifying unpointed bad lower
+fibers would retain a false exception.
 
 \begin{table}[ht]
 \centering

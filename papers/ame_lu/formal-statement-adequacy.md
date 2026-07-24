@@ -17,13 +17,13 @@ Lean `v4.32.0-rc1`.
 |---|---|---|---|
 | `thm:dictionary` | `isMDSCode634_arcKernel`, `isAME_equalPhaseState_arcKernel`, `tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace`, `cssLabelSpace_isPauliLagrangian`, `mem_cssSupportedLabelSpace_iff_support_subset`, `equalPhaseState_hasMinimalComputationalSupport`, `isAME_equalPhaseState_iff_isMDSCode634`, and `projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent` | **Unconditional statement coverage.**  The six-arc/MDS, stabilizer, AME, minimal-support, and projective-to-LC clauses in the proposition are all represented. | The paper still explains why its notation agrees with the formal ordered-arc, trace-phase, and party-action conventions. |
 | `thm:lu-lc-rigidity` | none | **Not formalized.** | The diagonal tensor-axis lemma, MDS shortening argument, and deduction that every local unitary normalizes the finite-field Weyl system remain a conceptual paper proof. |
-| `thm:lc-pencil` | `pencilZ_eq_iff_samePencilYOrbit` and `admitted_nonGRS_pencil_classified_by_z` | **Algebraic quotient unconditional; classification conditional.** | `PencilClassificationInputs` requires the six-arc property, explicit projectivities for the four deck branches, bracket invariance, and LC-holonomy recovery.  The manuscript supplies these steps. |
-| `cor:lu-lc-pencil` | no single declaration | **Not formalized as a composition.** | The LC classification has the conditional interface above; the LU-to-LC implication uses the unformalized rigidity theorem. |
-| `thm:logical-phase` | `fixedPartyKernel_eq_specialLinear_or_splitTorus` | **Conditional coverage of the fixed-party clause only.** | `LogicalPhaseInputs` requires special-linearity, torus propagation, conic propagation of every `SL₂` block, and the off-diagonal-to-conic implication.  The party-moving isodualities and resulting normalizer are not formalized. |
+| `thm:lc-pencil` | `pencilZ_eq_iff_samePencilYOrbit` and `admitted_nonGRS_pencil_classified_by_z` | **Algebraic quotient unconditional; field-linear classification conditional.** | `PencilClassificationInputs` requires the six-arc property, explicit projectivities for the four deck branches, bracket invariance, and LC-holonomy recovery. The manuscript identifies this field-linear interface with the full quantum Clifford group only over prime fields. |
+| `cor:lu-lc-pencil` | no single declaration | **Not formalized as a composition.** | The prime-field LC classification has the conditional interface above; the LU-to-LC implication uses the unformalized rigidity theorem. Extension-field Frobenius Cliffords are explicitly outside the corollary. |
+| `thm:logical-phase` | `fixedPartyKernel_eq_specialLinear_or_splitTorus` | **Conditional coverage of the field-linear fixed-party clause only.** | `LogicalPhaseInputs` requires special-linearity, torus propagation, conic propagation of every `SL₂` block, and the off-diagonal-to-conic implication. The manuscript theorem is restricted to prime fields; extension-field full Clifford blocks and the party-moving normalizer are not formalized. |
 | `thm:lu-h3-grs` | `card_marginalTriples`, `card_marginalStars`, `card_perfectMatchings`, `rankFourMultiplicity_eq_sixty_add_concurrency`, and `not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences` | **Finite graph core unconditional; separator conditional.** | `MarginalMomentModel` and `MarginalLUSeparatorInputs` require the density-matrix trace formula, concurrency/rank equivalence, the H3 ten-count, the GRS six-bound, and LU covariance.  The three finite graph cardinalities use exhaustive native evaluation. |
 | `thm:q13-lu` | `contractionMatchingRank_normalizeContractionPattern`, `contractionRankOrbitSum_permuteContractionPattern`, and `q13_zFour_not_locallyUnitaryEquivalent_zTwelve` | **Concrete witness data with a conditional terminal implication.** | `FourCopySeparatorInputs` requires the contraction/rank identities, LU covariance, and exact `720/13^9` and `3024/13^9` rank-orbit evaluations. |
 | `thm:transport-divisor` | `negativeSignedCyclePolynomial_factor`, `positiveSignedCyclePolynomial_factor`, `axialCyclePolynomial_factor`, `reducedTransportDivisor_eq_zero_iff_three_factors`, `reducedTransportDivisor_eq_zero_iff_z`, `signedTransportFactor_sub_two_mul_axial`, `reducedTransportDivisor_eq_zero_iff_axial_of_charSeven`, the three `TransportCycleCoverInputs.*_det_factor` declarations, the two `TransportRankBridgeInputs.*` rank declarations, and the two `TransportOrbitGeometryInputs.card_axial_union_*` declarations | **Polynomial and characteristic-seven algebra unconditional; complete transport theorem conditional.** | The six fixed copy actions are parameters rather than instantiated quotient matrices.  The three determinant expansions, systematic rank bridge, generic one-dimensional kernel, and double-coset construction/cardinalities/disjointness remain named inputs.  The formal artifact must not be cited as an unconditional proof of the full divisor-and-multiplicity theorem. |
-| `thm:fixed-copy-boundary` | none | **Not formalized.** | The contraction-rank formula, generic-minor argument, and stable-range invariant spanning remain a conceptual paper proof. |
+| `thm:fixed-copy-boundary` | none | **Not formalized.** | The componentwise irreducible-family scope, contraction-rank formula, generic-minor argument, and stable-range invariant spanning remain a conceptual paper proof. |
 
 ## Trust summary
 
@@ -44,3 +44,48 @@ The axiom audit therefore answers a different question from statement
 adequacy: it records the logical trust dependencies of each implication,
 while this ledger records whether the hypotheses needed to match a
 manuscript theorem have themselves been constructed in Lean.
+
+## Field-by-field closure of conditional inputs
+
+The reverse map below closes the conditional interfaces field by field.
+“Constructed” means that the cited manuscript passage supplies the
+mathematical argument. “Certificate-supported” means that the paper-local
+evidence package checks the exact finite or symbolic input. Some rows have
+both statuses because the prose gives the proof mechanism and the certificate
+replays its load-bearing algebra.
+
+| Structure field | Manuscript source | Evidence source | Status |
+|---|---|---|---|
+| `PencilClassificationInputs.oddCharacteristic` | Section 4 opening and (4.1) | C396 row of `supplement/EVIDENCE.md` | domain hypothesis |
+| `.admitted_isSixArc` | Section 4, explanation after (4.1) | C396 symbolic and twelve-field replay | constructed and certificate-supported |
+| `.equal_z_implies_projectivelyEquivalent` | Section 4, (4.2) and the four-row projectivity table | C396 explicit-projectivity replay | constructed and certificate-supported |
+| `.projectivelyEquivalent_implies_equal_z` | Section 4, bracket multiset (4.3) and its multiplicity argument | C396 symbolic bracket replay | constructed and certificate-supported |
+| `.locallyCliffordEquivalent_implies_equal_z` | Section 4, shortened-plane holonomy paragraph and (4.4) | C396 direct-Lagrangian holonomy replay | constructed and certificate-supported |
+| `LogicalPhaseInputs.kernel_specialLinear` | Section 5, first paragraph and first proof paragraph | C397 full-Lagrangian row-space replay | constructed and certificate-supported |
+| `.splitTorus_subset_kernel` | Section 5, “Diagonal anchor blocks always propagate” | C397 group-closure replay | constructed and certificate-supported |
+| `.conic_specialLinear_subset_kernel` | Section 5, GRS dual-multiplier propagation paragraph | C397 Gale and group-closure replays | constructed and certificate-supported |
+| `.offDiagonal_kernel_implies_conic` | Section 5, coordinatewise scaling/Gale-fixed paragraph | C397 symbolic Gale replay | constructed and certificate-supported |
+| `MarginalMomentModel.traceMoment` and `.commonConcurrent` | Section 6, first two paragraphs of the marginal-moment subsection | C402 row | constructed definitions |
+| `.trace_eq_card_pow_rank` | Section 6, stabilizer expansion (6.1) | C402 direct Lagrangian-rank replay | constructed and certificate-supported |
+| `.rank_eq_four_iff` | Section 6, star/perfect-matching reduction through (6.2) | C402 chord/rank replay | constructed and certificate-supported |
+| `MarginalLUSeparatorInputs.source` and `.target` | Theorem 6.1 and its proof: H3 and arbitrary same-field GRS states | C402 exact-domain row | constructed instances |
+| `.source_concurrency` | Theorem 6.1 proof, ten integral H3 determinants | C402 exact `Q(τ)` certificate | certificate-supported mathematical input |
+| `.target_concurrency` | Theorem 6.1 proof, projective involution classification | C402 finite-permutation replay; Faber citation for the modular classification | constructed and independently certificate-supported |
+| `.lu_implies_equal_rankFourMultiplicity` | Section 6 opening: simultaneous reduced-operator conjugation and party relabelling | no computation required | constructed implication |
+| `FourCopySeparatorInputs.sourceContractionOrbitSum` and `.targetContractionOrbitSum` | Section 6, definition of `J_σ` and (6.4) | C397 row | constructed definitions |
+| `.source_contraction_eq_rankOrbitSum` and `.target_contraction_eq_rankOrbitSum` | solution-counting identity (6.3) and the proof of Theorem 6.2 | C397 independent orbit-sum replay | constructed and certificate-supported |
+| `.source_rankOrbitSum_evaluation` and `.target_rankOrbitSum_evaluation` | rank histograms and values in (6.4) | C397 exhaustive 720-permutation evaluation | certificate-supported inputs |
+| `.lu_implies_equal_contractionOrbitSum` | Section 6 copy-contraction definition and party-orbit symmetrization | no finite computation required | constructed implication |
+| `TransportCycleCoverInputs.*Actions` | Section 7, the six copy permutations, systematic matrices `Q_p`, quotient actions `ρ_i`, and block operator (7.2)--(7.3) | C550 section/transport replay | constructed and certificate-supported |
+| `.negativeSigned_det_cycleCover`, `.positiveSigned_det_cycleCover`, `.axial_det_cycleCover` | Theorem 7.1 proof, three displayed determinant formulas | C550 signed cycle-cover and fraction-free determinant paths | constructed and certificate-supported |
+| `TransportRankBridgeInputs.matchingRank`, `.transportRank`, `.matchingRank_le`, `.transportRank_le`, `.kernelExcess_eq` | Section 7, the `24×21` and `9×9` constructions and (7.4) | C550 comparison at all 720 assignments for six exact points | constructed; identity certificate-supported |
+| `TransportOrbitGeometryInputs.*Support` | Theorem 7.1 proof, three active party-assignment double cosets | C550 double-coset certificate | constructed and certificate-supported |
+| `.axial_card`, `.negativeSigned_card`, `.positiveSigned_card` | The two orbit-stabilizer quotients in the proof of Theorem 7.1 | C550 exact orbit enumeration | constructed and certificate-supported |
+| `.axial_disjoint_negative`, `.axial_disjoint_positive`, `.negative_disjoint_positive` | Theorem 7.1 proof, signed-sheet and axial type separation | C550 exact support sets | certificate-supported inputs |
+
+This table also supplies the reverse check: each paper-facing conditional
+declaration in the aggregate audit appears above, and each cited manuscript
+passage maps to the declaration listed for its theorem in the main adequacy
+table. The aggregate import and
+`RelativeConicArcs.Gates.AMELUAggregateAxioms` remain release artifacts;
+C572 owns their immutable public identity.

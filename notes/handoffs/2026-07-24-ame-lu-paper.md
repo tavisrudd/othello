@@ -52,20 +52,24 @@ four parties, MDS shortening gives a `q^2` stabilizer subgroup whose
 nonidentity correlation tensor is diagonal on the full `q^2-1` local Weyl
 basis.  The rank-one contraction axes of this four-way tensor are intrinsic,
 so a product-unitary equivalence forces every local adjoint action to permute
-Weyl axes and hence be Clifford.  This holds for equal-phase CSS states of
-all linear `[6,3,4]_q` MDS codes over every prime power.  Combined with C396,
-the admitted odd pencil satisfies `LU iff LC iff z equality`, with no new
-exceptional characteristics.  Two four-party marginals covering all six
-parties suffice.  See `2026-07-24-c560-ame-lu-orbit-rigidity.md`.
+Weyl axes and hence be Clifford. This holds for equal-phase CSS states of
+all linear `[6,3,4]_q` MDS codes over every prime power. Combined with C396
+and C571's full-Clifford correction, the admitted odd-prime-field pencil
+satisfies `LU iff LC iff z equality`; over extension fields Frobenius is
+already an additional local Clifford and the scalar classification is not
+claimed. Two four-party marginals covering all six parties suffice. See
+`2026-07-24-c560-ame-lu-orbit-rigidity.md` and
+`2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
 
 **C561 closed (2026-07-24): theorem package and architecture frozen.**  The
 title is *Local-Unitary Rigidity and Clifford Geometry of Six-Qudit AME
 Stabilizer Tensors*.  C560 is the headline theorem; C396's `LU iff LC iff z`
 is its admitted-pencil corollary.  Logical operations, explicit LU
 certificates, fixed-copy generic constancy, and the transport divisor are
-subordinate results.  The synchronized boundary table distinguishes the
-all-prime-power rigidity theorem, the odd admitted pencil, and detector-only
-exceptional characteristics.  See
+subordinate results. The synchronized boundary table now distinguishes the
+all-prime-power rigidity theorem, the odd-prime-field quantum pencil
+classification, the all-odd-field classical quotient, and detector-only
+exceptional characteristics. See
 `2026-07-24-c561-ame-lu-theorem-freeze.md`.
 
 **C562 closed (2026-07-24): qualified LU-rigidity novelty boundary.**
@@ -197,6 +201,17 @@ ledgers now use the same boundary.  The measured aggregate/no-build gates
 and warning-free `make check` passed.  See
 `2026-07-24-c570-ame-lu-lean-aggregate-audit.md`.
 
+**C571 closed (2026-07-24): adversarial second draft and independent cold
+read complete.** The proof/evidence audit repaired the LC-holonomy,
+logical-phase, marginal-incidence, generic-constancy, and party-dependent
+transport arguments; mapped every conditional formal input field to exact
+prose/evidence; replayed all seven evidence bundles; and produced a
+warning-free, visually inspected 14-page PDF. The independent reader found
+the release-blocking extension-field Frobenius counterexample: Theorem 1.1
+remains all-prime-power, while `LC iff LU iff z` and the full logical-phase
+theorem are now restricted to odd prime fields. A final cold read returned
+GO. See `2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -232,20 +247,17 @@ as C559--C572.  Dependency order is authoritative:
    packages (complete).
 6. C570: aggregate import, axiom audit, and manuscript reconciliation
    (complete).
-7. C571: adversarial audit, second draft, PDF inspection, and cold read.
+7. C571: adversarial audit, second draft, PDF inspection, and cold read
+   (complete).
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C571 is next: run the adversarial proof/evidence audit, second-draft
-revision, PDF inspection, and independent mathematical cold read.  C581 is a
-separately queued optional upgrade gate for basis-free phase-space
-reconstruction and quantitative approximate rigidity.
-
-C571 must begin with the five-item formal-coverage adversarial checklist in
-`papers/ame_lu/second-draft-fix-plan.md`: two-way manuscript/declaration
-coverage, field-by-field sourcing of every conditional input, full transitive
-referee-prose review, strict separation of implication versus constructed or
-certificate-supported hypotheses, and release inclusion of the adequacy
-ledger plus exact aggregate axiom gate.
+C572 is next: produce the release candidate with a clean-checkout build and
+full replay, immutable source/evidence manifest, reviewed paper-only public
+export plan, target-policy check, and final author/account gates. C581 remains
+a separately queued optional upgrade gate. C571's Frobenius counterexample
+sharpens its first question: determine whether the shortened marginal planes
+recover the Desarguesian `F_q`-spread inside the additive `F_p` phase space
+before attempting extension-field or approximate rigidity.
 
 ## Completion gates
 

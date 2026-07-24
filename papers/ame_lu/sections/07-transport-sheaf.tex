@@ -20,10 +20,18 @@ always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
 matrix in \((6.3)\).
 
 Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
-\(\sigma_i\) on \(U\).  In systematic code coordinates the first three
-rows are
+\(\sigma_i\) on \(U\).  For each \(p\), the MDS property makes
+\(g_{p(3)},g_{p(4)},g_{p(5)}\) a basis of \(V^*\).  Define \(Q_p\) by
 \[
- Q=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
+ g_{p(i)}=\sum_{k=0}^2(Q_p)_{ik}g_{p(3+k)}
+ \qquad(0\leq i<3).                                   \tag{7.2}
+\]
+Thus \(Q_p\) is the left block obtained by systematizing the
+party-reordered generator matrix on its last three columns; no pivot can
+vanish because every three coordinate covectors are independent.  For
+the identity assignment,
+\[
+Q_1=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
 \quad
 \begin{array}{ll}
 a=-2(t-1)^2,&b=-(t^2-t+1),\\
@@ -33,23 +41,29 @@ c=-(t^2-3t+1),&d=-2(t-1).
 If \(Y_k\in U\) are the three free copy vectors, then \((7.1)\) reduces
 to the \(9\)-by-\(9\) block transport operator
 \[
- T_p=\bigl(Q_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.  \tag{7.2}
+ T_p=\bigl((Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
+                                                               \tag{7.3}
 \]
 The dimension identity
 \[
- 21-\rank M_p=9-\rank T_p                              \tag{7.3}
+ 21-\rank M_{\pi\boldsymbol\sigma}(G(t))=9-\rank T_p    \tag{7.4}
 \]
-holds over every field where the pencil is defined.
+holds over the field \(k\), where \(p=\pi^{-1}\) in the convention of
+Section~\ref{sec:invariants}.  It follows by quotienting the
+three-dimensional constant-section kernel and then eliminating the three
+free systematic coordinates.  Both steps are invertible on the six-arc
+locus.
 
 \begin{theorem}[Transport divisor]\label{thm:transport-divisor}
-On the admitted odd non-GRS pencil, the sheaf \((7.1)\) has a
-nonconstant section exactly on
+For a parameter on the admitted odd non-GRS pencil, there exists a party
+assignment \(p\in S_6\) for which the sheaf \((7.1)\) has a nonconstant
+section if and only if
 \[
  (B^2-2A^2)(9B^2-4A^2)=0,
 \]
 or equivalently
 \[
- (z-2)(9z-4)=0.                                       \tag{7.4}
+ (z-2)(9z-4)=0.                                       \tag{7.5}
 \]
 At a generic point above \(z=2\), exactly \(96\) party assignments have
 rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
@@ -57,12 +71,18 @@ Every other assignment has rank \(21\).
 \end{theorem}
 
 \begin{proof}
-The coefficients satisfy
+For the identity systematic chart, the coefficients satisfy
 \[
  a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
 \]
-Expanding \(\det T_p\) by signed cycle covers gives three nonboundary
-relative-cover types:
+Common copy relabelling, a change of basis in \(V\), and rescaling a
+coordinate covector act on \(T_p\) by invertible row and column
+operations.  Modulo these operations, the \(720\) party assignments
+split into boundary types and three nonboundary relative-cover types.
+Here the type records the six relative copy permutations
+\(\rho_j^{-1}\rho_i\), equivalently the even-cycle pattern in each pair
+of colored matchings.  Expanding a representative determinant by signed
+cycle covers gives
 \[
 \begin{split}
 P_-&=AB(3B-2A),\\
@@ -76,25 +96,35 @@ With integral bases the determinants are respectively
 64d^3AB(3B+2A),\quad
 64d^3A(B^2-2A^2).
 \]
-All omitted factors are units on the admitted odd pencil.  The two signed
-types lie above \(w=B/A=\pm2/3\), hence \(z=4/9\); the third lies above
-\(z=2\).  Fraction-free elimination independently gives the same
-determinants and shows that the generic kernel is one-dimensional.
+All omitted factors are units on the admitted odd pencil.  Every
+assignment outside these three types has a determinant that is a unit
+there.  The signed cycle-cover ledger, the exhaustion of the \(720\)
+assignments, and a fraction-free determinant path are recorded in the
+C550 certificate.  The two signed types lie above
+\(w=B/A=\pm2/3\), hence \(z=4/9\); the axial type lies above \(z=2\).
+Fraction-free elimination also gives a nonzero \(8\)-minor on each
+component, so the generic kernel is exactly one-dimensional.
 
-The active party assignments form single double cosets.  For \(z=2\),
-their size is
+The row/column equivalences act on assignments from the left by copy
+symmetries and from the right by color stabilizers.  The axial support is
+one double coset with groups \(S_4\times C_2\) and \(D_8\times C_2\)
+and intersection \(C_2^3\).  Its size is
 \[
 \frac{|S_4\times C_2|\,|D_8\times C_2|}{|C_2^3|}
  =\frac{48\cdot16}{8}=96.
 \]
-For either signed \(z=4/9\) sheet, their size is
+Each signed support is one double coset with groups \(S_4\) and
+\(S_4\times C_2\) and intersection \(S_3\), hence has size
 \[
 \frac{|S_4|\,|S_4\times C_2|}{|S_3|}
  =\frac{24\cdot48}{6}=192.
 \]
-The two signed double cosets are disjoint.  Equation~\((7.3)\) turns the
-one-dimensional transport kernels into rank \(20\) of the matching
-matrix and completes the proof.
+The signed types are distinguished by the sign of \(w\), and the axial
+cycle pattern differs from both, so the three supports are disjoint.
+The C550 orbit certificate supplies explicit representatives,
+stabilizers, intersections, and the complete support sets.  Equation
+\((7.4)\) turns the one-dimensional transport kernels into rank \(20\)
+of the matching matrix and completes the proof.
 \end{proof}
 
 The exceptional arithmetic belongs to this detector, not to
@@ -107,7 +137,7 @@ Theorem~\ref{thm:lu-lc-rigidity}.  The exact boundary is:
 5&z=4/9\text{ lies on the excluded GRS boundary; }z=2\text{ remains}\\
 7&\text{the two components merge; the rank histogram is }20^{288}21^{432}\\
 11,13,41&\text{pullback ramification only; no further rank drop.}
-\end{array}                                             \tag{7.5}
+\end{array}                                             \tag{7.6}
 \]
 At \(t=-1\), \(A=16\), \(B=15\), and the nonboundary exceptional primes
 are already visible in
@@ -115,6 +145,15 @@ are already visible in
 B^2-2A^2=-7\cdot41,\qquad
 9B^2-4A^2=7\cdot11\cdot13.
 \]
+In characteristic \(3\), the axial factor becomes \(G^2\) and the signed
+factors lie on \(t(t-1)=0\), so no admitted component remains.  In
+characteristic \(5\), \(9B^2-4A^2\) is a unit times \(G^2\), removing
+only the signed component.  In characteristic \(7\),
+\(9B^2-4A^2=2(B^2-2A^2)\); the disjoint \(96\)- and \(192\)-element
+supports merge, and exact \(8\)-minors exclude a larger kernel.
+At \(11,13,41\) the indicated pullback component has a double root at
+\(t=-1\), but the same minors keep the rank drop equal to one.
+
 The divisor records where one scalar contraction changes rank.  It is
 not an LU-orbit boundary and, by
 Proposition~\ref{thm:fixed-copy-boundary}, cannot be promoted to a

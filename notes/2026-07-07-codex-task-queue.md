@@ -152,7 +152,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
-- **C571 `[ame-lu]` [GATED; after C564 and C570]** — run the adversarial proof/evidence audit and second-draft revision, close every claim/proof/novelty and trust-map row, inspect the rendered PDF, and obtain an independent mathematical cold read → `notes/2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
 - **C572 `[ame-lu]` [GATED; after C571]** — produce the release candidate: clean-checkout build and full replay, immutable source/evidence manifest, reviewed paper-only public export plan, target-policy check, and final author/account gates → `notes/2026-07-24-c572-ame-lu-release-candidate.md`.
 
 ### `rp-next`

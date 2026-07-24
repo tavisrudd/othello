@@ -2,10 +2,16 @@
 
 The rigidity theorem, the arc--AME dictionary, and generic constancy are
 conceptual proofs in the text.  The projective quotient uses displayed
-bracket identities and projectivities; its modular collision closure,
-the finite logical-group checks, the H3 incidence counts, the \(q=13\)
-contractions, and the transport multiplicities also have exact
-paper-local certificates.
+bracket identities and projectivities.  Its transition-map invariance and
+collision argument are proved in Section 4, while the 450 exact rational
+functions are certificate-supported.  Section 5 proves the propagation
+and Gale-fixed implications; its \(q=11,17,31\) group evaluations are
+certificate-supported examples, not inputs to the uniform theorem.
+Section 6 proves the marginal trace/rank and incidence bridges; the H3
+determinants and \(q=13\) contractions are certificate-supported.
+Section 7 proves the systematic transport reduction; the cycle-cover
+determinants, assignment exhaustion, exact minors, and double-coset
+support sets are certificate-supported.
 
 The reproducibility package is in \texttt{supplement/}.  From that
 directory,
@@ -45,13 +51,24 @@ marginal graph counts, the contraction normalization and party-orbit
 identities, and the transport polynomial and characteristic-seven
 identities in one environment.  The geometric classification,
 marginal-trace, logical propagation, finite contraction, and transport
-orbit steps enter separate hypothesis structures; importing the terminal
-does not make them unconditional formal theorems.  In particular, the
+orbit steps enter separate hypothesis structures; the paper constructs
+or certificate-supports them as specified above, but the Lean modules do
+not.  Importing the terminal therefore does not make them unconditional
+formal theorems.  In particular, the
 headline LU-to-LC rigidity theorem, the fixed-copy generic-constancy
 proposition, the party-moving logical normalizer, and the determinant and
 double-coset inputs of the complete transport theorem are not formalized.
 The companion \texttt{AMELUAggregateAxioms} terminal separates the three
 native finite graph counts from the ordinary kernel-checked declarations.
+For each conditional structure, the statement-adequacy ledger records
+its fields individually.  Some fields are constructed in the displayed
+paper proof, such as the four deck projectivities and the marginal
+trace/rank reduction; some are mathematical implications supported by a
+paper-local certificate, such as the H3 determinant count and the
+four-copy rank evaluations; and some combine a prose construction with a
+certificate replay, such as the transport determinant and double-coset
+inputs.  These are hypotheses of formalized implications, not additional
+Lean theorems.
 
 The LU-to-LC mechanism has direct qubit ancestry.  Rains recovered the
 three Pauli axes of distance-two code projectors
@@ -69,7 +86,18 @@ arbitrary minimal-support AME tensors, non-MDS stabilizer states, or all
 stabilizer states over prime-power dimensions.  We do not claim that four
 copies are globally minimal, that \(z=2,4/9\) are orbit exceptions, or
 that a fixed copy degree separates all classes as \(q\) varies.  The
-logical-group theorem is restricted to the stated odd-field six-arc
-domain, the H3 theorem to odd good non-GRS reductions, and the detector
-exceptions in \((7.5)\) do not alter the characteristic-uniform rigidity
-theorem.
+logical-group theorem and the quantum part of the pencil classification
+are restricted to odd prime fields.  Over extension fields, Frobenius
+basis permutations are additional local Cliffords and the scalar \(z\)
+is only Frobenius-covariant.  The H3 theorem is restricted to the stated
+odd residue-field reductions, and
+the detector exceptions in \((7.6)\) do not alter the
+characteristic-uniform rigidity theorem.
+
+The central distinction is therefore between covariant and scalar data.
+A four-party marginal retains the full configuration of local Weyl axes,
+and that configuration rigidifies every product-unitary intertwiner.
+Fixed-copy scalar contractions discard those axes and are generically
+constant, although their rank-jump strata still reveal exact divisors.
+For the admitted pencil, the covariant rigidity returns the classical
+degree-eight quotient \(z\) as the complete LU coordinate.

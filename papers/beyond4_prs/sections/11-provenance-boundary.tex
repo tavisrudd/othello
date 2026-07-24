@@ -11,17 +11,18 @@ claim its exact trust route.
 \section{Scope and open problems}\label{sec:boundary}
 
 The first levels and the contained/transverse fork point to one stable
-picture.  Their point-count thresholds are compatible with a
-quadratic uniform scale in the redundancy, while every surviving
-infinite family comes from one of the two component mechanisms isolated
-by the polar flag.
+picture.  The transverse point count is already uniform and linear:
+Theorem~\ref{thm:uniform-transverse} gives its exact threshold.  The
+possible quadratic scale below is therefore allowance for the
+contained-component problem, not for rational points on the bottom cover.
 
 \begin{conjecture}[Stable polar classification]\label{conj:stable-polar}
 There is an absolute constant $C$ such that, at redundancy $r$, every
 split-free projective syndrome over $\F_q$ with $q\geq Cr^2$ lies
-either in a persistent rank-two carrier or in a nonshallow component
+either in the persistent locus or in a nonshallow component
 of the level-$r$ Lucas contraction kernel.  Equivalently, transverse
-arithmetic exceptions disappear above a quadratic field threshold.
+arithmetic exceptions disappear uniformly, and the contained locus has
+no further stable component.
 In every characteristic for which that Lucas kernel has no nonshallow
 component, the persistent tangent and conjugate-secant families are
 the complete high-field list.
@@ -41,25 +42,15 @@ not constitute an arbitrary-redundancy classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item Each use of one-step polar escape requires a new level-specific
-      monodromy/component calculation.  A field census cannot replace
-      this input.
+\item At higher redundancy the remaining input is the chain of
+      level-specific contained-component assertions.  The bottom
+      monodromy and point count are the uniform R5 calculation.
 \end{enumerate}
 
-Thus the one-step theorem does not give an arbitrary-redundancy
-classification, and higher-level component and modular-carrier strata
-remain open here.  In particular, the paper does not settle the general
-Reed--Solomon deep-hole conjecture.
-
-Two companion papers will take up the branches deliberately left out
-here.  The first develops the fixed-level redundancy-eight and
-redundancy-nine problems.  It will state no classification until the
-homogeneous component, marker-collision, and modular-carrier
-exhaustions are complete; at redundancy nine this also includes the
-binary-quartic slices and characteristic-five carrier.  The second
-treats the logically separate ordered-Hessian, Lucas-carrier, and
-distinguished \(e_7\) geometry.  These forthcoming analyses are not
-inputs to any theorem in the present paper.
+Thus Theorem~\ref{thm:uniform-transverse} is conditional rather than an
+arbitrary-redundancy classification: higher-level persistent and
+modular contained loci remain open here.  In particular, the paper
+does not settle the general Reed--Solomon deep-hole conjecture.
 
 The structural conclusion is nevertheless stable.  Beyond redundancy
 four, deepness is no longer controlled by one invariant or by isolated
