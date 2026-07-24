@@ -255,6 +255,10 @@ editorial controls, not reasons to compress mathematical bottlenecks.
 
 - Paper I proves its code, rigidity, decoder, reconstruction, and small-arc
   results without invoking a Paper II or Paper III statement.
+- Paper II may motivate its question by contrasting Paper I's reconstruction
+  from syndrome and decoder data with reconstruction after conic restriction.
+  This forward/backward bridge is expository and creates no theorem
+  dependency.
 - Paper II may reuse marked-conic notation but must state its quotient
   construction independently.  It does not cite Paper I for a proof.
 - Paper III may use named carriers supplied by Paper II only after restating

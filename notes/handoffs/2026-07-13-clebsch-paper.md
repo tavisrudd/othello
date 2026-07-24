@@ -147,6 +147,13 @@ in a conic ideal: the `A_3`, `B_3`, and `H_3` configurations*. Its spine is:
 5. modular depth quotient and arithmetic splitting/gluing;
 6. a Paper II-specific verification architecture.
 
+The opening bridge is fixed: Paper I reconstructs the Clebsch configuration
+from its uncovered syndrome locus and decoding data; Paper II asks the
+complementary reconstruction question of what marked secant data survives
+common restriction to a conic. This is motivation, not proof inheritance.
+Paper II defines its marked-conic objects and quotient independently and
+must cite the final Paper I release rather than changing or extending it.
+
 Use C399 as the conic-phase prelude and C403/C406/C411 with selective C412
 upgrades. Credit Edge and Dye for the exceptional configurations and avoid
 novelty claims for the raw `5/14/22` marker spaces, parent ambiguity, the
