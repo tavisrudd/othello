@@ -89,7 +89,11 @@ C396's degree-eight quotient give the growing packet, while C560 shows that
 the one-copy four-party marginal covariants nevertheless separate its
 classes by retaining the local Weyl axes.  This is an optional synthesis
 corollary, not a change to C561's headline or an unrestricted tomography
-lower bound.  See
+lower bound.  Equivalently, the packet is a linearly growing family of
+pairwise monomially inequivalent MDS codes with identical complete
+contraction-rank profiles through copy degree `M`; a uniform class label has
+zero mutual information with every `M`-copy LU-invariant scalar transcript.
+See
 `2026-07-24-c580-scalar-covariant-separation.md`.
 
 ## Queued completion program

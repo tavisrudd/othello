@@ -129,6 +129,43 @@ rather than remaining fixed under local basis changes.  C560 exploits
 that retained frame information, so there is no contradiction between
 the scalar measurement lower bound and one-copy covariant rigidity.
 
+If the supplied state is chosen uniformly from the packet, every such
+\(M\)-copy invariant measurement has the same conditional outcome
+distribution for every class.  Its transcript therefore has exactly zero
+mutual information with the class label.  The residual ambiguity contains
+at least
+\(\log_2\lceil(q-d_M)/8\rceil\) bits.  This is a zero-information
+statement for the stated invariant protocol class, not a quantitative
+lower bound for frame-sensitive tomography.
+
+## Classical coding corollary
+
+The same packet consists of pairwise monomially inequivalent linear
+\([6,3,4]_q\) codes.  For every diagram
+\(\boldsymbol{\sigma}\in S_m^6\), \(m\leq M\), its complete contraction
+system rank
+
+\[
+ \operatorname{rank}
+ M_{\boldsymbol{\sigma}}(G(t))
+\]
+
+is identical across the packet.  Thus, outside the same finite
+characteristic set and for sufficiently large \(q\), there are at least
+
+\[
+ \left\lceil\frac{q-d_M}{8}\right\rceil
+\]
+
+pairwise monomially inequivalent MDS codes having the same entire
+bounded-copy contraction-rank profile.
+
+This classical corollary is stronger than equality of selected quantum
+invariants: it identifies the exact finite-field data discarded by every
+scalar contraction through \(M\) copies.  No claim is made that these
+profiles coincide with a standard coding-theoretic equivalence notion or
+with all bounded-size code statistics.
+
 ## What is and is not new in the mechanism
 
 The rank-one diagonal-axis argument itself remains the
@@ -298,12 +335,23 @@ the packet is indistinguishable by any such measurement.  This licenses a
 reference-frame-free copy-complexity statement, but not an unrestricted
 tomography or query-complexity claim.
 
+The `ej2` pass adds two consequences without another proof.  Uniformly
+sampling the packet makes every allowed scalar transcript statistically
+independent of the class label, leaving logarithmically growing class
+ambiguity.  Forgetting the quantum interpretation entirely gives
+\(\Omega(q)\) pairwise monomially inequivalent MDS codes with identical
+full contraction-rank profiles through copy degree \(M\).  This is the
+cleanest indication that the phenomenon belongs to the finite-field
+solution-count geometry, not only to quantum invariant terminology.
+
 ## Mystery ledger
 
 | Feature | Closeout status | Remaining gap or owner |
 |---|---|---|
 | Whether bounded scalar copy degree can classify the pencil uniformly in \(q\) | **Settled negatively** by the theorem above; one invariant vector contains at least \(\lceil(q-d_M)/8\rceil\) LU classes | No remaining proof gap |
 | Whether the failure has an operational copy interpretation | **Settled for LU-invariant scalar measurements:** all outcome distributions agree through \(M\) copies | Unrestricted tomography is explicitly outside the claim |
+| How much class information such a protocol retains on the packet | **Settled:** zero mutual information under the uniform prior, with at least \(\log_2\lceil(q-d_M)/8\rceil\) bits of residual ambiguity | No claim for covariant or frame-sensitive protocols |
+| Whether the blindness has a purely classical shadow | **Settled:** the packet gives pairwise monomially inequivalent MDS codes with identical complete contraction-rank profiles through \(M\) copies | Relation to standard code-statistic hierarchies is not claimed |
 | Why a one-copy marginal can outperform every fixed scalar degree | **Settled conceptually:** it retains the moving operator axes as covariant data | C581 may sharpen this to intrinsic phase-space reconstruction |
 | Whether the minimum separating degree has a quantitative growth rate in \(q\) | Open; C580 proves only unboundedness | Not queued; would require effective degree control on the common generic-rank polynomial |
 | Whether C580 has an exact literature predecessor | Open beyond the bounded screen | C571/C572 manual literature gates if novelty wording is ever proposed |
