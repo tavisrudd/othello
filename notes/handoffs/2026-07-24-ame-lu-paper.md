@@ -171,6 +171,18 @@ changing rank.  Its terminal derives arbitrary-LU inequivalence from explicit
 no-build checks, and standard-axiom audit passed.  See
 `2026-07-24-c568-ame-lu-lean-logical-phase.md`.
 
+**C569 closed (2026-07-24): transport divisor interface complete.**
+`RelativeConicArcs.AMELU.TransportDivisor` defines the concrete reduced
+`9 × 9` block operator; proves all three cycle-polynomial factorizations,
+the exact `(B^2-2A^2)(9B^2-4A^2)` and `(z-2)(9z-4)` divisor identities,
+the rank-excess arithmetic, and the characteristic-seven doubled scheme and
+zero-set merger; and derives the `96+192=288` merged support count from
+explicit orbit-geometry inputs.  The determinant expansions, systematic
+rank bridge, generic kernel dimension, and double-coset recognition remain
+named hypotheses.  The import gate, exact no-build checks, and standard-axiom
+audit passed.  See
+`2026-07-24-c569-ame-lu-lean-transport-divisor.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -202,14 +214,14 @@ as C559--C572.  Dependency order is authoritative:
 3. C562--C563: claim-specific literature audit and paper-local evidence import.
 4. C564: first complete manuscript draft and warning-free PDF.
 5. C565, C590, and C591: shared Lean foundation and complete dictionary;
-   C566: pencil classification interface (complete); C567--C569: three
-   remaining theorem packages.
+   C566: pencil classification interface; C567--C569: remaining theorem
+   packages (complete).
 6. C570: aggregate import, axiom audit, and manuscript reconciliation.
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C569 is next: formalize the transport divisor and characteristic-seven
-merger identity.  C581 is a
+C570 is next: close the aggregate Lean import, axiom audit, declaration-level
+manuscript reconciliation, and statement-adequacy ledger.  C581 is a
 separately queued optional upgrade gate for basis-free phase-space
 reconstruction and quantitative approximate rigidity.
 
