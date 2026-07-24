@@ -172,7 +172,9 @@ remaining non-cyclic gate.  Its integral ordered-root incidence on
 factorization dichotomy; after collision and persistent saturation the
 only exchanged branch is C595's cyclic carrier.  A six-generator
 Pluecker-to-syndrome bridge satisfies \(J\subset V\) and
-\(6DV\subset J\), while the binary and ternary fibres are exactly C525's
+\(3DV\subset J\), with \(3\) minimal; the factor \(2\) enters only in
+C525/C595, so the combined integer remains \(6\).  The binary and ternary
+fibres are exactly C525's
 ordered-Hessian persistent/Lucas locus and C595's wild rank/fixed-factor
 locus.  Therefore \(\mathrm{SC}(j)\) holds for every \(j\geq6\), with
 uniform \(N_j=6\).  The printed uniform transverse theorem is now

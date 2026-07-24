@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
+from math import prod
 from pathlib import Path
 
 
@@ -84,6 +85,17 @@ class Ring:
                 result, self.scale(term, -1 if inversions % 2 else 1)
             )
         return result
+
+    def evaluate(self, poly: Poly, values: tuple[int, ...], modulus: int) -> int:
+        assert len(values) == self.n
+        return sum(
+            coefficient
+            * prod(
+                pow(value, exponent, modulus)
+                for value, exponent in zip(values, monomial)
+            )
+            for monomial, coefficient in poly.items()
+        ) % modulus
 
 
 def verify_factor_branches() -> None:
@@ -280,8 +292,7 @@ def verify_bridge_certificate() -> None:
     ]
     assert bridge == bridge_from_cyclic
 
-    # 6*D*V = J*B.  This is the compact cleared-denominator saturation
-    # certificate proving (J:D^infinity)=V over Z[1/6].
+    # First replay the original 6*D*V = J*B matrix certificate.
     multipliers: list[list[Poly]] = [[{} for _ in range(6)] for _ in range(7)]
     multipliers[0] = [
         {},
@@ -366,6 +377,87 @@ def verify_bridge_certificate() -> None:
             *(ring.mul(multiplier, generator) for multiplier, generator in zip(row, bridge))
         )
         assert ring.scale(ring.mul(determinant, cyclic_generator), 6) == right
+
+    # A second explicit matrix sharpens this to the minimal 3*D*V = J*B.
+    multipliers = [
+        [
+            {},
+            ring.power(c4, 2),
+            ring.mul(c3, c4),
+            {},
+            ring.add(ring.scale(ring.power(c3, 2), 2), ring.mul(c2, c4)),
+            ring.mul(c2, c3),
+        ],
+        [
+            ring.power(c4, 2),
+            {},
+            ring.scale(ring.power(c3, 2), -2),
+            {},
+            ring.scale(ring.mul(c1, c4), -8),
+            ring.add(
+                ring.scale(ring.power(c2, 2), 3),
+                ring.scale(ring.mul(c1, c3), -2),
+                ring.scale(ring.mul(c0, c4), -4),
+            ),
+        ],
+        [
+            {},
+            ring.mul(c2, c4),
+            ring.mul(c1, c4),
+            {},
+            ring.add(ring.scale(ring.mul(c1, c3), 2), ring.mul(c0, c4)),
+            ring.mul(c1, c2),
+        ],
+        [
+            {},
+            ring.add(ring.mul(c2, c3), ring.scale(ring.mul(c1, c4), -1)),
+            {},
+            {},
+            ring.add(ring.mul(c0, c3), ring.scale(ring.mul(c1, c2), -1)),
+            {},
+        ],
+        [
+            ring.mul(c1, c4),
+            ring.add(
+                ring.scale(ring.power(c2, 2), -3),
+                ring.scale(ring.mul(c1, c3), 5),
+                ring.mul(c0, c4),
+            ),
+            ring.mul(c0, c3),
+            {},
+            ring.power(c1, 2),
+            {},
+        ],
+        [
+            ring.scale(ring.power(c2, 2), 3),
+            ring.scale(ring.mul(c1, c2), 6),
+            {},
+            {},
+            ring.scale(ring.mul(c0, c1), -6),
+            ring.scale(ring.power(c0, 2), -3),
+        ],
+        [
+            ring.mul(c1, c2),
+            ring.add(ring.scale(ring.power(c1, 2), 2), ring.mul(c0, c2)),
+            ring.mul(c0, c1),
+            {},
+            ring.power(c0, 2),
+            {},
+        ],
+    ]
+    for cyclic_generator, row in zip(cyclic, multipliers):
+        right = ring.add(
+            *(ring.mul(multiplier, generator) for multiplier, generator in zip(row, bridge))
+        )
+        assert ring.scale(ring.mul(determinant, cyclic_generator), 3) == right
+
+    # The factor 3 is necessary: this F_3 point lies on J with D nonzero,
+    # but not on V.  Together with the integer Singular containment
+    # 3*D*V subset J, this proves that 3 is the bridge's minimal integer.
+    witness = (1, 0, 0, 1, 0)
+    assert all(ring.evaluate(generator, witness, 3) == 0 for generator in bridge)
+    assert ring.evaluate(determinant, witness, 3) != 0
+    assert any(ring.evaluate(generator, witness, 3) != 0 for generator in cyclic)
 
 
 def projective_points(prime: int, dimension: int):
@@ -502,10 +594,15 @@ def payload() -> dict[str, object]:
             "persistent_equation": "det Hankel_3(c)",
             "certificate": [
                 "J is contained in V integrally",
-                "6*D*V is contained in J integrally",
+                "3*D*V is contained in J integrally",
+                "D*V is not contained in J integrally",
+                "J[D^-1]=V[D^-1] over Z[1/3]",
                 "(J:D^infinity)=V over Z[1/6]",
             ],
-            "cleared_denominator": 6,
+            "minimal_cleared_denominator": 3,
+            "necessity_witness_mod_3": [1, 0, 0, 1, 0],
+            "explicit_matrix_multiplier": 3,
+            "combined_with_c595_integer": 6,
         },
         "finite_factor_controls": {
             str(prime): finite_factor_control(prime) for prime in (2, 3, 5)

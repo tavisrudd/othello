@@ -94,7 +94,7 @@ C535 proves that (4)--(5) commute with arbitrary base change, while
 removing (5) commutes only with flat or Cartier-preserving base change.
 Accordingly, C597 does not assert a false globally base-change-compatible
 colon ideal.  It uses the integral incidence first, then residualizes on
-\(\mathbf Z[1/6]\) and treats the two vertical fibres separately.
+\(\mathbf Z[1/6]\) and treats the two exceptional fibres separately.
 
 ## 2. Exhaustive factorization lemma
 
@@ -212,27 +212,46 @@ K_6&=4c_1V_1-c_2V_2+c_4V_4.                                \tag{11}
 Thus \(J\subset V\) over \(\mathbf Z\).
 
 For the converse, the certificate contains a \(6\times7\) polynomial
-matrix \(B\) satisfying
+matrix \(B\) giving the compact explicit identity
 \[
-                     6D(V_1,\ldots,V_7)
+                     3D(V_1,\ldots,V_7)
                     =(K_1,\ldots,K_6)B.                    \tag{12}
 \]
-Its nonzero rows are
+Explicitly,
 \[
 \scriptsize
 \begin{pmatrix}
-0&0&0&-c_2c_4&-3c_1c_4&6c_2^2&2c_1c_2\\
-2c_4^2&0&3c_2c_4&-2c_1c_4&-6c_2^2-3c_0c_4&12c_1c_2&
- 4c_1^2+2c_0c_2\\
-2c_3c_4&0&3c_1c_4&0&-3c_0c_3&0&2c_0c_1\\
+0&c_4^2&0&0&c_1c_4&3c_2^2&c_1c_2\\
+c_4^2&0&c_2c_4&c_2c_3-c_1c_4&
+ -3c_2^2+5c_1c_3+c_0c_4&6c_1c_2&2c_1^2+c_0c_2\\
+c_3c_4&-2c_3^2&c_1c_4&0&c_0c_3&0&c_0c_1\\
 0&0&0&0&0&0&0\\
-4c_3^2+2c_2c_4&12(c_2c_3-c_1c_4)&-6c_2^2+12c_1c_3+3c_0c_4&
-2c_0c_3&12c_1^2-15c_0c_2&-12c_0c_1&2c_0^2\\
-2c_2c_3&6(c_2^2-c_0c_4)&3c_0c_3&c_0c_2&0&-6c_0^2&0
+2c_3^2+c_2c_4&-8c_1c_4&2c_1c_3+c_0c_4&
+ -c_1c_2+c_0c_3&c_1^2&-6c_0c_1&c_0^2\\
+c_2c_3&3c_2^2-2c_1c_3-4c_0c_4&c_1c_2&0&0&-3c_0^2&0
 \end{pmatrix}.
 \]
-The projected Veronese \(V\) is prime over \(\mathbf Z[1/6]\), and
-\(D\notin V\).  Equations (11)--(12) therefore prove
+An independent integer-coefficient standard-basis calculation confirms
+\[
+                         3DV\subset J,\qquad DV\not\subset J. \tag{12a}
+\]
+The factor \(3\) is necessary even set-theoretically: over \(\mathbf F_3\),
+the point
+\[
+                         (c_0,\ldots,c_4)=(1,0,0,1,0)
+\]
+annihilates \(J\), has \(D=2\), and does not annihilate \(V\).  Thus \(3\)
+is the minimal cleared-denominator integer for this bridge.  The projected
+schemes defined by \(J\) and \(V\) are therefore equal on the
+\(D\)-open over \(\mathbf Z[1/3]\), or equivalently
+\[
+                (J:D^\infty)=(V:D^\infty)
+                \quad\text{over }\mathbf Z[1/3].
+\]
+The characteristic-two specialization of \(V\) itself retains a
+\(D\)-supported component, so it would be false to replace the right-hand
+side by \(V\) over this base.  Over \(\mathbf Z[1/6]\), the projected
+Veronese \(V\) is prime and \(D\notin V\).  Consequently
 \[
                   (J:D^\infty)=V
                   \quad\text{over }\mathbf Z[1/6].          \tag{13}
@@ -276,9 +295,12 @@ consecutive-Hankel equations force the rank/fixed-factor boundary.  This
 is the characteristic-three fibre checked in C595.  No ternary component
 remains.
 
-All other characteristics lie on \(\mathbf Z[1/6]\) and are covered by
-(13).  Hence (2) confines every possible vertical failure and the two
-fibres both close.
+Every characteristic other than three lies on the bridge's
+\(\mathbf Z[1/3]\) locus.  Characteristic two is nevertheless retained as
+a separate fibre because the ordered-Hessian chart and C595's
+coherent-Fano certificate introduce their own inseparable and
+denominator-two phenomena.  Hence the combined integer in (2) remains
+\(6\), although the Grassmannian bridge itself needs only \(3\).
 
 ## 5. R10 chart and saturation ledger
 
@@ -411,8 +433,8 @@ ledger and the nonflat characteristic-two residualization boundary.
 |---|---|---|
 | Whether a non-cyclic R10 component survives | settled negatively | The UFD symmetry dichotomy gives only collision or exchanged cyclic factors; (13) identifies the latter with C595's carrier. |
 | Whether the missing integral model exists | settled | The unreduced ordered-root incidence (4) and collision fibre product (5) are integral and commute with arbitrary base change. |
-| Whether one global residual colon ideal commutes with every fibre | settled negatively, without blocking the theorem | C535's nonflat-base-change obstruction is real; C597 residualizes over \(\mathbf Z[1/6]\) and treats fibres \(2,3\) before saturation. |
-| Why the same integer \(6\) reappears | settled | Both the Pluecker-to-syndrome bridge (12) and the cyclic coherent-Fano certificate use only denominators \(2,3\); their composition still localizes once at \(6\). |
+| Whether one global residual colon ideal commutes with every fibre | settled negatively, without blocking the theorem | C535's nonflat-base-change obstruction is real.  C597 gets equality on the \(D\)-open over \(\mathbf Z[1/3]\), but the literal saturated equality with \(V\) holds over \(\mathbf Z[1/6]\); fibres \(2,3\) remain separate. |
+| Where the factors \(2\) and \(3\) originate | settled sharply | The Pluecker-to-syndrome bridge has minimal integer \(3\), witnessed in characteristic three.  The factor \(2\) enters only through C525/C595's inseparable/coherent-Fano step, so the composition still uses \(6\). |
 | Whether characteristic two has a hidden inseparable component | settled | C525's complete ordered-Hessian degeneracy package pulls back only to persistent/Lucas or rank one. |
 | Whether characteristic three has a hidden wild component | settled | The true wild rulings force rank/fixed factor; the nonflat primitive Pluecker specialization is not used. |
 | Whether \(\mathrm{SC}(11)\) holds | settled | Section 6 proves the stronger \(\mathrm{SC}(j)\) for all \(j\geq6\). |
