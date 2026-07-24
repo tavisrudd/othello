@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** initial independent review `NO-GO`; repairs implemented, validated, and pinned at
-`4c01ea83`; user-launched post-fix review pending
+**Status:** complete; repaired Lean surface pinned at `4c01ea83`, exact provenance ledger at
+`30c1cd6b`, and final user-launched independent review `GO`
 
 ## Outcome and exact trust route
 
@@ -309,7 +309,19 @@ No terminal uses `sorryAx`, a project-local axiom, or an undisclosed opaque orac
 - [x] Exact external artifacts, hashes, replay commands, and imported theorem names are recorded.
 - [x] Repaired exact-target gate and trace-only aggregate are green.
 - [x] Repaired gate axiom output is recorded.
-- [ ] User-launched post-fix review returns final `GO`.
+- [x] User-launched post-fix review returns final `GO`.
+
+## Final independent review
+
+The first post-fix review accepted every substantive Lean repair and returned `NO-GO` only for five
+report-level provenance defects: one filename, one manifest working directory, overbroad manifest
+coverage wording, a ten-versus-eleven terminal count, and a deferred verify-all entry point.
+
+Commit `30c1cd6b` corrected all five. The same user-launched reviewer then reran every newly listed
+primary check and manifest command, confirmed the previously green seven independent replays,
+ran the exact documented three-target Lean queue with its aggregate gate, and returned final
+`GO` with no blocking or non-blocking findings. The reviewer found the report internally
+consistent with the accepted Lean surface at `4c01ea83`.
 
 ## Proposed C320 ledger delta
 
