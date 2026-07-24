@@ -14,9 +14,9 @@ polar induction.  Its public boundary contains:
 - a normalized geometric-`S3` identity-twist interface with three distinct markers, genus one,
   branch-and-diagonal deletion degree `12`, marker contribution `3*6`, and total deletion degree
   `30`;
-- the exact Hasse--Weil integer threshold: the strict deletion inequality starts at `42` and fails
-  at `41`, while a checked prime-power exclusion proves that `43` is the first finite-field order
-  used by the theorem;
+- the exact Hasse--Weil integer threshold, expressed without square-root rounding: the positive
+  baseline and squared deletion inequality hold at `42` and fail at `41`, while a checked
+  prime-power exclusion proves that `43` is the first finite-field order used by the theorem;
 - the upper transverse/collision budget `4+10=14` and the conditional `q>=43` synthesis theorem;
 - a finite-field synthesis terminal that derives the prime-power premise from the field structure;
 - exact persistent-family cardinality `q(q+1)^2/2`;
@@ -78,12 +78,18 @@ expanded audit, and aggregate gate, followed by an exact-target currentness chec
 elementary-symmetric terminals use only `propext` and `Quot.sound`; the finite-field terminals use
 only the same standard three-axiom boundary.
 
+The downstream arithmetic correction replaces the floor-square-root surrogate by the two fields
+used in `LowerCoverStratum`: deletion degree below `q+1`, and
+`4g^2q < (q+1-d)^2`.  For `g=1` and `d=30`, the squared test is `168<169` at `q=42` and fails at
+`q=41`.  This preserves the threshold while stating the real Hasse--Weil criterion without an
+off-by-one rounding gap.
+
 ## Extra-juice and Tao closeout
 
-The numerical stress test separated two cutoffs that prose can easily conflate.  The genus-one
-inequality is already true at integer `42` and false at `41`; the coding theorem starts at `43`
-because that is the first relevant prime power.  A follow-up terminal now proves the prime-power
-jump itself and derives synthesis directly from `IsPrimePow q` and `42<=q`.
+The numerical stress test separated two cutoffs that prose can easily conflate.  The squared
+genus-one inequality is already true at integer `42` and false at `41`; the coding theorem starts
+at `43` because that is the first relevant prime power.  A follow-up terminal now proves the
+prime-power jump itself and derives synthesis directly from `IsPrimePow q` and `42<=q`.
 
 The ordered-marker stress test separated labels from algebra.  The geometric cover retains an
 ordered root triple, but projective contraction itself commutes for every affine/infinity pair.
@@ -109,9 +115,9 @@ records these two facts without manufacturing a larger-field rootlessness criter
 
 Settled:
 
-- **Does the exact deletion inequality really begin at the theorem threshold?** It begins one
-  integer earlier, at `42`; `43` is the first prime-power field order.  Both assertions and their
-  synthesis composition are checked.
+- **Does the exact deletion inequality really begin at the theorem threshold?** The positive
+  baseline and squared inequality begin one integer earlier, at `42`; `43` is the first
+  prime-power field order.  Both assertions and their synthesis composition are checked.
 - **Does ordered-marker normalization make contraction order-dependent?** No.  Affine and infinite
   projective contractions commute pairwise, and the two checked adjacent swaps generate `S3`.
 - **Is permutation invariance only an extensional accident?** No.  The checked affine formula
