@@ -134,9 +134,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C584 `[gateway]` [QUEUED]** — avatar catalogue and field-dependence table for the icosahedral six-arc / `[6,3,4]` gateway object → `notes/handoffs/2026-07-24-gateway.md`.
 - **C585 `[gateway]` [QUEUED; cheap, decisive]** — sporadicity comparison: do `beyond4` r=5 sporadic fields carry the C474 seven-gate carrier, or is the small-`q` overlap coincidental → `notes/handoffs/2026-07-24-gateway.md`.
 - **C586 `[gateway]` [QUEUED; needs C584]** — per-avatar mechanism for why rigidity is sporadic or field-uniform → `notes/handoffs/2026-07-24-gateway.md`.
-- **C587 `[gateway]` [QUEUED; needs C586]** — candidate general statement: which transported invariants are field-uniform vs exceptional-field-sporadic → `notes/handoffs/2026-07-24-gateway.md`.
-- **C588 `[gateway]` [QUEUED]** — literature audit for the cross-avatar gateway field-dependence framing (novelty verdict + claim boundary) → `notes/handoffs/2026-07-24-gateway.md`.
-- **C589 `[gateway]` [QUEUED; needs C584–C588]** — theorem-or-framing verdict and unifying-paper scoping (decision gate) → `notes/handoffs/2026-07-24-gateway.md`.
+- **C589 `[gateway]` [QUEUED; needs C584–C586; C587/C588 done]** — theorem-or-framing verdict and unifying-paper scoping (decision gate); preflight: close Semantic Scholar/MathSciNet on the C588 audit before any hard priority claim → `notes/handoffs/2026-07-24-gateway.md`.
 
 ### `nofil`
 
