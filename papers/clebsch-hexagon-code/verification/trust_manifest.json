@@ -203,7 +203,7 @@
       "source": {
         "claim_key": "thm:headline-rigidity-phase",
         "kind": "theorem-environment",
-        "sha256": "167615486188cc5c0229350eb5f248f1a8420d68182f26e641266a7b41265024"
+        "sha256": "9e1cdfb945e632b479b40ad88cc5d50e795f09a4353b867c206748c9168ae165"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -302,8 +302,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "cea4acafee27331332d79b6e589e8d405f2769382457c854a27ba5c137e48f49",
-        "tex": "For $A_3,B_3,H_3$, with Coxeter number $h$, the\nreflection-complement code has length\n\\[\n (q-h/2)(q-h+1)\n\\]\nand minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the\ncomplement in at most $q-h+1$ points."
+        "sha256": "261a2caa04a884658f51768f572c60e449e9c09a0614bb08c1e111041d946734",
+        "tex": "Let $T\\in\\{A_3,B_3,H_3\\}$ have Coxeter number $h$, and reduce its\ndisplayed standard arrangement over a lattice-good finite field $\\F_q$ of\nodd characteristic (with the chosen image of $\\tau$ for $H_3$).  Whenever\nthe complement is nonempty, its projective evaluation code has length\n\\[\n (q-h/2)(q-h+1)\n\\]\nand minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the\ncomplement in at most $q-h+1$ points."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -361,8 +361,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "77f692a2ec0abc7d2199a1f0d3bc4db63496d166da53c0402c688d934f38d855",
-        "tex": "At $q=h+1$ the complement is the full rational conic and its\nprojective-system code is extended GRS."
+        "sha256": "32dad214833557a919d7e56b938fe02d15d29ccbe7aecc16961c76c1d4d4be94",
+        "tex": "In the three specializations $q=h+1$, namely\n$(A_3,5),(B_3,7),(H_3,11)$, the complement is the full rational conic and\nits projective-system code is extended GRS."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -448,8 +448,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "faf24469008e0928db672aa15523805053cb84dd32e52732ce256d7229f18a13",
-        "tex": "The square of a Coxeter element generates the split maximal torus in\n$\\mathrm{PSL}_2(q)$, and its two moving point-orbits are the two Legendre\ncosets."
+        "sha256": "35ba1030aaa1428a7f49dfd1b555c36784572d67544c7ffe652a42a08ce9f1e9",
+        "tex": "In those three specializations, the square of a Coxeter element\ngenerates the split maximal torus in $\\mathrm{PSL}_2(q)$, and its two\nmoving point-orbits are the two Legendre cosets."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -463,6 +463,21 @@
               "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
             },
             "axioms": {
+              "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
               "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch": [
                 "propext",
                 "Quot.sound"
@@ -489,60 +504,7 @@
               "RelativeConicArcs.ConicMatchingQuotient.secant_veronese",
               "RelativeConicArcs.ConicMatchingQuotient.secant_switch",
               "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch",
-              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
-        },
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
-        },
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
+              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr",
               "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank",
               "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank",
               "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank"
@@ -557,7 +519,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
+          "subclaim": "conic quotient and factorization ranks"
         },
         {
           "cited_inputs": [
@@ -567,7 +529,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
+          "unconditional_remainder": "The divisibility implication and displayed finite ranks are kernel checked."
         },
         {
           "lean": {
@@ -619,7 +581,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
+          "subclaim": "balanced-sheet recovery"
         },
         {
           "cited_inputs": [
@@ -629,16 +591,183 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
+          "unconditional_remainder": "The uniqueness statement is kernel checked on the displayed configurations."
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
+                "propext",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
+              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
+              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
+              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
+              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
+              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
+              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
+              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
+            ],
+            "validation": {
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "signed-moment filtration"
+        },
+        {
+          "lean": {
+            "audit": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "axioms": {
+              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ]
+            },
+            "gate": {
+              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+              "repository": "lean",
+              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+            },
+            "terminals": [
+              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
+              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
+            ],
+            "validation": {
+              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
+              "output": {
+                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+                "repository": "lean",
+                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+              }
+            }
+          },
+          "route": "full-trust-lean",
+          "subclaim": "six-profile compression and singleton matching-row recovery"
+        },
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "double-coset group names",
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked; the terminal recovers a frozen matching-table row only, with no row-to-geometric-parent bridge."
         }
       ],
-      "id": "statement-thm-headline-balanced",
-      "paper_location": "theorem at source line 271",
+      "id": "statement-thm-headline-factorization",
+      "paper_location": "theorem at source line 278",
       "route": "mixed",
       "source": {
-        "claim_key": "thm:headline-balanced",
+        "claim_key": "thm:headline-factorization",
         "kind": "theorem-environment",
-        "sha256": "11e677e6b03500278dd8018917c8de563f1cc759469d7a99715634632c49060d"
+        "sha256": "1c9dea67a804c997387a2efe3258b6cd1f056cbd01e8df5299123068f7570c70"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -652,6 +781,21 @@
               "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
             },
             "axioms": {
+              "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
+              "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank": [
+                "propext",
+                "Classical.choice",
+                "Quot.sound"
+              ],
               "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch": [
                 "propext",
                 "Quot.sound"
@@ -678,73 +822,7 @@
               "RelativeConicArcs.ConicMatchingQuotient.secant_veronese",
               "RelativeConicArcs.ConicMatchingQuotient.secant_switch",
               "RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch",
-              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
-        },
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
-        }
-      ],
-      "id": "thm-headline-balanced-clause-1",
-      "paper_location": "thm:headline-balanced, clause 1",
-      "route": "mixed",
-      "source": {
-        "kind": "verbatim",
-        "sha256": "1d499394217bf9bc01c26b6c6ce9a65e5df7fcba9682ccea81ef00988b465d02",
-        "tex": "All canonically scaled matching-secant products have equal\nrestriction to the conic; every four-endpoint switch difference is\ndivisible by $Q$."
-      },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
-    },
-    {
-      "components": [
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
+              "RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr",
               "RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank",
               "RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank",
               "RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank"
@@ -759,7 +837,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
+          "subclaim": "conic quotient and factorization ranks"
         },
         {
           "cited_inputs": [
@@ -769,16 +847,16 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
+          "unconditional_remainder": "The divisibility implication and displayed finite ranks are kernel checked."
         }
       ],
-      "id": "thm-headline-balanced-clause-2",
-      "paper_location": "thm:headline-balanced, clause 2",
+      "id": "thm-headline-factorization-clause-1",
+      "paper_location": "thm:headline-factorization, clause 1",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "5d7cd024efe0ddea6cba50f68188a129228ae0b06fbb20ac75cabc0d3f9ed5ee",
-        "tex": "The $A_3,B_3,H_3$ quotient configurations have linear ranks\n$3,6,10$, respectively."
+        "sha256": "400bc32fdd3ae8e7ff69ec6ed98e612f860bd3c09770a17bf7df8dc4bd1a9165",
+        "tex": "All canonically scaled matching-secant products have equal\nrestriction to the conic; every four-endpoint switch difference is\ndivisible by $Q$.  The $A_3,B_3,H_3$ quotient configurations have linear\nranks $3,6,10$, respectively."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -834,7 +912,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "conic quotient or balanced-sheet statement"
+          "subclaim": "balanced-sheet recovery"
         },
         {
           "cited_inputs": [
@@ -844,11 +922,11 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "geometric meaning of the frozen coordinates",
-          "unconditional_remainder": "The algebraic implication is kernel checked."
+          "unconditional_remainder": "The uniqueness statement is kernel checked on the displayed configurations."
         }
       ],
-      "id": "thm-headline-balanced-clause-3",
-      "paper_location": "thm:headline-balanced, clause 3",
+      "id": "thm-headline-factorization-clause-2",
+      "paper_location": "thm:headline-factorization, clause 2",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -858,6 +936,88 @@
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
     {
+      "id": "thm-headline-factorization-clause-3",
+      "lean": {
+        "audit": {
+          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "repository": "lean",
+          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+        },
+        "axioms": {
+          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
+            "propext",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        "gate": {
+          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
+          "repository": "lean",
+          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+        },
+        "terminals": [
+          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
+          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
+          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
+          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
+          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
+          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
+          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
+          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
+        ],
+        "validation": {
+          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
+          "output": {
+            "path": "verification/clebsch_paper_trust/axiom-audit.txt",
+            "repository": "lean",
+            "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+          }
+        }
+      },
+      "paper_location": "thm:headline-factorization, clause 3",
+      "route": "full-trust-lean",
+      "source": {
+        "kind": "verbatim",
+        "sha256": "c674a8d377233efe1a4238cca70064e52f73b9a583db0eabf581c251a220ffda",
+        "tex": "With opposite signs on the two sheets, every even signed profile\nmoment vanishes, and the primitive weighted barycentre relation\n$v_1+4v_4+6v_6=0$ kills degree one.  Within the signed tensor-moment\nfamily and its linear functionals, degree three is the first surviving\ndegree; its nonzero tensor transforms by the outer character."
+      },
+      "trust_boundary": "This row routes one separately stated numbered subclaim."
+    },
+    {
       "components": [
         {
           "lean": {
@@ -867,156 +1027,6 @@
               "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
             },
             "axioms": {
-              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
-                "propext",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
-              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
-              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
-              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
-              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
-              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
-              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "signed-moment filtration"
-        },
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
-                "propext",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
-              "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
-              "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
-              "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
-              "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
-              "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
-              "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
-              "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "signed-moment filtration"
-        },
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
               "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
                 "propext",
                 "Classical.choice",
@@ -1089,7 +1099,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression"
+          "subclaim": "six-profile compression and singleton matching-row recovery"
         },
         {
           "cited_inputs": [
@@ -1099,461 +1109,308 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
-        },
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "six-profile compression"
-        },
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
-        },
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "singleton matching-row recovery"
-        },
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "double-coset group names",
-          "unconditional_remainder": "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted."
-        },
-        {
-          "cited_inputs": [
-            "Degree-eleven two-transitive permutation module commuting algebra calculation",
-            "Characteristic-eleven projective-cover Loewy structure 1|9|1",
-            "Exact displayed Tate-cycle and divided-transfer matrix calculations"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "projective-cover and primitive-ray statement",
-          "unconditional_remainder": "The manuscript gives the projectivity, locality, fixed-point, and orbit--stabilizer deductions."
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked; the terminal recovers a frozen matching-table row only, with no row-to-geometric-parent bridge."
         }
       ],
-      "id": "statement-thm-headline-depth",
-      "paper_location": "theorem at source line 285",
+      "id": "thm-headline-factorization-clause-4",
+      "paper_location": "thm:headline-factorization, clause 4",
       "route": "mixed",
       "source": {
-        "claim_key": "thm:headline-depth",
+        "kind": "verbatim",
+        "sha256": "7488f34a1af464b0e53cb502568a9c20a7ea975f2f691dc128a237a5a0b9f3a3",
+        "tex": "For $G=\\mathrm{PGL}_2(11)$, $H=A_5$, and the common\n$K=A_4$, the space $K\\backslash G/H$ has six labels in two triples of\nsizes $1,4,6$, with profiles\n$v_1,v_4,v_6,-v_1,-v_4,-v_6$.  The profile map has rank two and\nfour-dimensional linear kernel but separates the six labels.  Its\nsingleton profiles recover the unordered $H_3$ matching pair, and a\nchoice of singleton recovers the corresponding row of the frozen matching\ntable.  No geometric-parent identification is asserted."
+      },
+      "trust_boundary": "This row routes one separately stated numbered subclaim."
+    },
+    {
+      "cited_inputs": [
+        "Dye 1991 Theorems 1 and 3, pages 275--278",
+        "Edge 1956 Sections 29--32, finite Clebsch configuration",
+        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+      ],
+      "id": "statement-prop-a5-point-orbits",
+      "paper_location": "proposition at source line 436",
+      "route": "conceptual-cited-inputs",
+      "source": {
+        "claim_key": "prop:a5-point-orbits",
         "kind": "theorem-environment",
-        "sha256": "0331bde4b84148b9455276b64f0b774d6d04893d4dfb166a72914e2cddb2a977"
+        "sha256": "b55e4af0607168f516b0305837cf0f59a895cd4360802630524c76b99304e2db"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "finite-geometric rigidity proof",
+          "unconditional_remainder": "The manuscript proves the line-bound and chord-defect remainder."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_rigidity_degenerate_conic.py",
+                "repository": "paper",
+                "sha256": "deaf503932b444d03a084c1954678fa993846696350524a198ccaa1e1d47c054"
+              }
+            ],
+            "checker": "python3 check_rigidity_degenerate_conic.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts all normalized six-arcs."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "frame-normalized rigidity census"
+        }
+      ],
+      "id": "statement-prop-deep-holes-conic",
+      "paper_location": "proposition at source line 506",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:deep-holes-conic",
+        "kind": "theorem-environment",
+        "sha256": "5fb600094c48e7dc65ea98d8ca215de2b2ea89a0109f5ae6760508a99396092d"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
-      "id": "thm-headline-depth-clause-1",
-      "lean": {
-        "audit": {
-          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-          "repository": "lean",
-          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+      "cited_inputs": [
+        "Dye 1991 Theorems 1 and 3, pages 275--278",
+        "Edge 1956 Sections 29--32, finite Clebsch configuration",
+        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+      ],
+      "id": "statement-cor-named-variety",
+      "paper_location": "corollary at source line 541",
+      "route": "conceptual-cited-inputs",
+      "source": {
+        "claim_key": "cor:named-variety",
+        "kind": "theorem-environment",
+        "sha256": "27a3d716a1d4fbaf91368282fee98dfe3a467f200df794326b1cd4c4f34af042"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "decoding and Brianchon geometry",
+          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
         },
-        "axioms": {
-          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_decoding.py",
+                "repository": "paper",
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
+              }
+            ],
+            "checker": "python3 check_decoding.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "decoder census"
+        }
+      ],
+      "id": "statement-prop-deep-hole-orbit",
+      "paper_location": "proposition at source line 578",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:deep-hole-orbit",
+        "kind": "theorem-environment",
+        "sha256": "4c3b29e65f0adc104aee737b7d0e7cfce57b39bc520f62c28ef85fa13aa42961"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
           ],
-          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
-            "propext",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ]
+          "route": "conceptual-cited-inputs",
+          "subclaim": "decoding and Brianchon geometry",
+          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
         },
-        "gate": {
-          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-          "repository": "lean",
-          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_decoding.py",
+                "repository": "paper",
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
+              }
+            ],
+            "checker": "python3 check_decoding.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "decoder census"
+        }
+      ],
+      "id": "statement-prop-decoding-oracle",
+      "paper_location": "proposition at source line 626",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:decoding-oracle",
+        "kind": "theorem-environment",
+        "sha256": "5aa733b14d96af0204113be8d682f36b1fb06db6f1fee5065dda39da89b182b4"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "cited_inputs": [
+        "Dye 1991 Theorems 1 and 3, pages 275--278",
+        "Edge 1956 Sections 29--32, finite Clebsch configuration",
+        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+      ],
+      "id": "statement-lem-six-arc-line-bound",
+      "paper_location": "lemma at source line 713",
+      "route": "conceptual-cited-inputs",
+      "source": {
+        "claim_key": "lem:six-arc-line-bound",
+        "kind": "theorem-environment",
+        "sha256": "f7093d5e61f7da818bfc8d09a1b3d93fa8be07e08a1035937263d922a313f51f"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "finite-geometric rigidity proof",
+          "unconditional_remainder": "The manuscript proves the line-bound and chord-defect remainder."
         },
-        "terminals": [
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
-          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
-          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
-          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
-          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
-          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
-          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
-        ],
-        "validation": {
-          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-          "output": {
-            "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-            "repository": "lean",
-            "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_rigidity_degenerate_conic.py",
+                "repository": "paper",
+                "sha256": "deaf503932b444d03a084c1954678fa993846696350524a198ccaa1e1d47c054"
+              }
+            ],
+            "checker": "python3 check_rigidity_degenerate_conic.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts all normalized six-arcs."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "frame-normalized rigidity census"
+        }
+      ],
+      "id": "statement-thm-rigidity",
+      "paper_location": "theorem at source line 748",
+      "route": "mixed",
+      "source": {
+        "claim_key": "thm:rigidity",
+        "kind": "theorem-environment",
+        "sha256": "1baf96033b14a99413f702c22140ed8f4758ed61dad4a1b86be5263200f2c2b5"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "computation": {
+        "artifacts": [
+          {
+            "path": "check_low_degree_loci.py",
+            "repository": "paper",
+            "sha256": "fab65df95dac888758f28fae19cf1d2ce47ee2a170b73fea5a6cba61ccae16fc"
           }
-        }
-      },
-      "paper_location": "thm:headline-depth, clause 1",
-      "route": "full-trust-lean",
-      "source": {
-        "kind": "verbatim",
-        "sha256": "b7ed756c7c36ef67123159b75804c5b254efda2d746f94b8d0e52c930b420660",
-        "tex": "With opposite signs on the two sheets, every even signed profile\nmoment vanishes, and the primitive weighted barycentre relation\n$v_1+4v_4+6v_6=0$ kills degree one."
-      },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
-    },
-    {
-      "id": "thm-headline-depth-clause-2",
-      "lean": {
-        "audit": {
-          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-          "repository": "lean",
-          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-        },
-        "axioms": {
-          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel": [
-            "propext",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ],
-          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two": [
-            "propext",
-            "Classical.choice",
-            "Quot.sound"
-          ]
-        },
-        "gate": {
-          "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-          "repository": "lean",
-          "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-        },
-        "terminals": [
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even",
-          "RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel",
-          "RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two",
-          "RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow",
-          "RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique",
-          "RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique",
-          "RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel",
-          "RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel"
         ],
-        "validation": {
-          "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-          "output": {
-            "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-            "repository": "lean",
-            "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
+        "checker": "python3 check_low_degree_loci.py",
+        "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+        "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+        "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+        "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
+      },
+      "id": "statement-prop-low-degree-rigidity",
+      "paper_location": "proposition at source line 877",
+      "route": "exact-replay-certificate",
+      "source": {
+        "claim_key": "prop:low-degree-rigidity",
+        "kind": "theorem-environment",
+        "sha256": "11c7c9029cb3fd9111dfe68a465e69490da1195ee5cea6c04ead9420796e582b"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "cited_inputs": [
+        "Dye 1991 Theorems 1 and 3, pages 275--278",
+        "Edge 1956 Sections 29--32, finite Clebsch configuration",
+        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+      ],
+      "id": "statement-corollary-aec192b0d5224cce",
+      "paper_location": "corollary at source line 902",
+      "route": "conceptual-cited-inputs",
+      "source": {
+        "claim_key": "corollary:aec192b0d5224cce",
+        "kind": "theorem-environment",
+        "sha256": "aec192b0d5224cce14f95ef27ab1351f5396c617232ef6476f7462dab8787a47"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
+    },
+    {
+      "computation": {
+        "artifacts": [
+          {
+            "path": "check_global_conic_gap.py",
+            "repository": "paper",
+            "sha256": "bb989b90c2dffe2d8bf71dce8c9b5aa879ddcf2d1abed724934dc24f4cbeea18"
+          },
+          {
+            "path": "check_perturbation_gap.py",
+            "repository": "paper",
+            "sha256": "0af4aa625539a8d317079276eacbc9364d1d0f653ea7c2362a4e59e22b7b6756"
           }
-        }
+        ],
+        "checker": "python3 check_global_conic_gap.py and python3 check_perturbation_gap.py",
+        "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+        "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+        "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+        "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
-      "paper_location": "thm:headline-depth, clause 2",
-      "route": "full-trust-lean",
+      "id": "statement-thm-gap",
+      "paper_location": "theorem at source line 951",
+      "route": "exact-replay-certificate",
       "source": {
-        "kind": "verbatim",
-        "sha256": "6f0e1e7602fccfa870ba5392f3350214d821f6c8739f0ead554233ba04ee7775",
-        "tex": "Within the signed tensor-moment family and its linear functionals,\ndegree three is the first surviving degree.  Its nonzero tensor transforms\nby the outer character and has kernel stabilizer."
+        "claim_key": "thm:gap",
+        "kind": "theorem-environment",
+        "sha256": "c08cb806be692717e0eb2f9fb8281d6f33f975b32b02795e36ff61f0954e1c3e"
       },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
       "components": [
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "six-profile compression"
-        },
         {
           "cited_inputs": [
             "Dye 1991 Theorems 1 and 3, pages 275--278",
@@ -1561,104 +1418,40 @@
             "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
+          "subclaim": "decoding and Brianchon geometry",
+          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_decoding.py",
+                "repository": "paper",
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
+              }
+            ],
+            "checker": "python3 check_decoding.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "decoder census"
         }
       ],
-      "id": "thm-headline-depth-clause-3",
-      "paper_location": "thm:headline-depth, clause 3",
+      "id": "statement-prop-brianchon-support",
+      "paper_location": "proposition at source line 1089",
       "route": "mixed",
       "source": {
-        "kind": "verbatim",
-        "sha256": "c54036d4c357758bb637a908b42c2c01ec18125ecbffae0042c520800a8e70eb",
-        "tex": "For $G=\\mathrm{PGL}_2(11)$, $H=A_5$, and the common\n$K=A_4$, the space $K\\backslash G/H$ has six labels in two triples of\nsizes $1,4,6$, with profiles\n$v_1,v_4,v_6,-v_1,-v_4,-v_6$."
+        "claim_key": "prop:brianchon-support",
+        "kind": "theorem-environment",
+        "sha256": "caceff90101d0a58f99d5ecd2c6e5f363ae056f1b88b542fb0d0f1fc5bc5240a"
       },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
       "components": [
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "six-profile compression"
-        },
         {
           "cited_inputs": [
             "Dye 1991 Theorems 1 and 3, pages 275--278",
@@ -1666,104 +1459,40 @@
             "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
+          "subclaim": "decoding and Brianchon geometry",
+          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_decoding.py",
+                "repository": "paper",
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
+              }
+            ],
+            "checker": "python3 check_decoding.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "decoder census"
         }
       ],
-      "id": "thm-headline-depth-clause-4",
-      "paper_location": "thm:headline-depth, clause 4",
+      "id": "statement-cor-decoder-brianchon",
+      "paper_location": "corollary at source line 1139",
       "route": "mixed",
       "source": {
-        "kind": "verbatim",
-        "sha256": "c6a7c1d0766cacfb784cd381d63982d9713251cc58d85a29f6def7515f1a55a4",
-        "tex": "The profile map has rank two and four-dimensional linear kernel,\nwhile separating all six labels as a set."
+        "claim_key": "cor:decoder-brianchon",
+        "kind": "theorem-environment",
+        "sha256": "94b8ee9cff0623e7afa40325afdbe3a50863f0a1800d3a2402a653632103e5de"
       },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
       "components": [
-        {
-          "lean": {
-            "audit": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "axioms": {
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ],
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair": [
-                "propext",
-                "Classical.choice",
-                "Quot.sound"
-              ]
-            },
-            "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
-              "repository": "lean",
-              "sha256": "839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb"
-            },
-            "terminals": [
-              "RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair",
-              "RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent"
-            ],
-            "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschPaperTrust",
-              "output": {
-                "path": "verification/clebsch_paper_trust/axiom-audit.txt",
-                "repository": "lean",
-                "sha256": "93265a40add9e0c8e9125dbbf92fcb8a7e8882bf084142c7bdeb20c1bb5c2aef"
-              }
-            }
-          },
-          "route": "full-trust-lean",
-          "subclaim": "singleton matching-row recovery"
-        },
         {
           "cited_inputs": [
             "Dye 1991 Theorems 1 and 3, pages 275--278",
@@ -1771,19 +1500,223 @@
             "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "double-coset group names",
-          "unconditional_remainder": "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted."
+          "subclaim": "intrinsic support bipartition",
+          "unconditional_remainder": "The reconstruction argument is stated in the manuscript."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_chirality.py",
+                "repository": "paper",
+                "sha256": "200cbd604c7e9aa942d1e3b54c372b97c69b8ebcb42220e710d1141131f9cca5"
+              },
+              {
+                "path": "check_code_automorphisms.py",
+                "repository": "paper",
+                "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
+              }
+            ],
+            "checker": "python3 check_chirality.py and python3 check_code_automorphisms.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The scripts exhaust the ambiguity supports and affine automorphisms."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "support bipartition replay"
         }
       ],
-      "id": "thm-headline-depth-clause-5",
-      "paper_location": "thm:headline-depth, clause 5",
+      "id": "statement-prop-chirality",
+      "paper_location": "proposition at source line 1155",
       "route": "mixed",
       "source": {
-        "kind": "verbatim",
-        "sha256": "346eeaa1195a66c1ed3a38314a7929440cc3aef21f8afd8baf165e7c9c8f9265",
-        "tex": "The singleton profiles recover the unordered $H_3$ matching pair.\nA choice of sheet and its singleton decoration recovers the corresponding\nrow of the frozen matching table.  No geometric-parent identification\nis asserted."
+        "claim_key": "prop:chirality",
+        "kind": "theorem-environment",
+        "sha256": "7a05184b27cd0558b79dc99409d4b6f9e0a6f6b81774ead11b1997d00fe07183"
       },
-      "trust_boundary": "This row routes one separately stated numbered subclaim."
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "cited_inputs": [
+        "Dye 1991 Theorems 1 and 3, pages 275--278",
+        "Edge 1956 Sections 29--32, finite Clebsch configuration",
+        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+      ],
+      "id": "statement-lem-chord-defect",
+      "paper_location": "lemma at source line 1204",
+      "route": "conceptual-cited-inputs",
+      "source": {
+        "claim_key": "lem:chord-defect",
+        "kind": "theorem-environment",
+        "sha256": "020b4b13260b54a2c2eba1c44c1cbb7cd717d571c83a043d17deb999cf826ae4"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "chord-moment uniqueness argument",
+          "unconditional_remainder": "The manuscript proves the all-field formula and uses the cited small-field bound."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_small_q_uniqueness.py",
+                "repository": "paper",
+                "sha256": "cbe028cec3795edb8e2985c4f5aba6fb268260e6ea5183122cb1d040abb2ec01"
+              }
+            ],
+            "checker": "python3 check_small_q_uniqueness.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker verifies every stated small-field case."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "small-field boundary replay"
+        }
+      ],
+      "id": "statement-thm-why11",
+      "paper_location": "theorem at source line 1234",
+      "route": "mixed",
+      "source": {
+        "claim_key": "thm:why11",
+        "kind": "theorem-environment",
+        "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "all-field uncovered-locus formula",
+          "unconditional_remainder": "The chord count gives the displayed polynomial."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_q19_nonexample.py",
+                "repository": "paper",
+                "sha256": "8a70fe91a64dab8b94d75188ab90d688a82515a016d48382fab3cecdd02d41e6"
+              }
+            ],
+            "checker": "python3 check_q19_nonexample.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The script independently checks the q=19 specialization."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "q=19 independent specialization"
+        }
+      ],
+      "id": "statement-prop-clebsch-family-uncovered",
+      "paper_location": "proposition at source line 1281",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:clebsch-family-uncovered",
+        "kind": "theorem-environment",
+        "sha256": "314d254fbf78b34c2ba3bb2453f810017225e88ee23feb52cd2c38d80d024c3d"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "reflection-arrangement interpretation",
+          "unconditional_remainder": "The manuscript separates the classical arrangement names from the local transport."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_reflection_arrangements.py",
+                "repository": "paper",
+                "sha256": "96c0f54014a8e472dbc98236eebf4b8984def2db965404db00dc221633989bfe"
+              }
+            ],
+            "checker": "python3 check_reflection_arrangements.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The script checks the exact finite projectivity and incidence spectra."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "reflection coordinate replay"
+        }
+      ],
+      "id": "statement-prop-h3-arrangement",
+      "paper_location": "proposition at source line 1351",
+      "route": "mixed",
+      "source": {
+        "claim_key": "prop:h3-arrangement",
+        "kind": "theorem-environment",
+        "sha256": "208749acc65fdb48f43b22ed137ddf6cb6175a212e8429fc0dcc245b6c1a108c"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
+    },
+    {
+      "components": [
+        {
+          "cited_inputs": [
+            "Dye 1991 Theorems 1 and 3, pages 275--278",
+            "Edge 1956 Sections 29--32, finite Clebsch configuration",
+            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "universal chord-moment reduction",
+          "unconditional_remainder": "The proof reduces the classification to the finite leaves."
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_small_k_conic_filling.py",
+                "repository": "paper",
+                "sha256": "9d8991c583b0dc9fcc972e6560e41b163d06836cffa6f029dd80d2b5a1c94379"
+              }
+            ],
+            "checker": "python3 check_small_k_conic_filling.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The checker exhausts the displayed fields and sizes."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "small-k finite leaves"
+        }
+      ],
+      "id": "statement-thm-small-k-conic-filling",
+      "paper_location": "theorem at source line 1512",
+      "route": "mixed",
+      "source": {
+        "claim_key": "thm:small-k-conic-filling",
+        "kind": "theorem-environment",
+        "sha256": "acbd20e84f9db0c0014cd4eaf390dd7c6df86e6e8015a0b90b7dd8c87939ceb2"
+      },
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
     {
       "cited_inputs": [
@@ -1791,16 +1724,16 @@
         "Characteristic-eleven projective-cover Loewy structure 1|9|1",
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
-      "id": "thm-headline-depth-clause-6",
-      "paper_location": "thm:headline-depth, clause 6",
+      "id": "statement-prop-modular-depth-plane",
+      "paper_location": "proposition at source line 1758",
       "route": "conceptual-cited-inputs",
       "source": {
-        "kind": "verbatim",
-        "sha256": "20c38d74d95c1dba40e73aa307da1f92489d5102d0ba902e27c683a1efb9a1c6",
-        "tex": "In characteristic eleven the depth plane is\n$P(1)^{A_4}/\\operatorname{soc}P(1)$, where the projective cover $P(1)$\nhas Loewy dimensions $1\\mid9\\mid1$.  The three positive profile rays\nintrinsically recover the orbit sizes $1,4,6$ and stabilizer orders\n$12,3,2$."
+        "claim_key": "prop:modular-depth-plane",
+        "kind": "theorem-environment",
+        "sha256": "4bf9a65143de9bc6f63e5fde00925ec384d2f3e4c79089e18c30e91b610545de"
       },
-      "trust_boundary": "This row routes one separately stated numbered subclaim.",
-      "unconditional_remainder": "The manuscript gives the projectivity, locality, fixed-point, and orbit--stabilizer deductions."
+      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
+      "unconditional_remainder": "Every rank, kernel, relation, and transfer calculation is printed or derived in the proof and appendix."
     },
     {
       "components": [
@@ -2217,12 +2150,12 @@
         }
       ],
       "id": "statement-thm-headline-gluing",
-      "paper_location": "theorem at source line 312",
+      "paper_location": "theorem at source line 1813",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-gluing",
         "kind": "theorem-environment",
-        "sha256": "4601831954ce174f8a85ecf5f74adf4c472c39d21fe7f65df6b5b732711c234e"
+        "sha256": "5b674b4dce7b480843f5f0006cf0fa0ef7db7afafda0de06a86c65de364884d3"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -2371,8 +2304,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "b18f93cfa3dd12acdb37c4ac184cce7718ebdc1b67898768c20e5464335b8f2c",
-        "tex": "The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data split into\ntwo silver and two golden sheets, respectively."
+        "sha256": "28f6ec69cc684ac278167e917c3fbe1f8779da4cae978190de01e67cb67dde45",
+        "tex": "The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data each\nsplit into two rational sheets."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -2671,623 +2604,10 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "f28dd588eea3830014019606676c09e2ff4286a2850ac18c47c01abb97835925",
-        "tex": "The fixed-child certificate has a twenty-two-row model whose\nintrinsic two-point quotient is the same free orientation torsor detected\nby the sheet character; choosing a point is exactly one bit of table-row\ndecoration.  No identification of the rows with geometric parents is\nasserted."
+        "sha256": "3d1fcc38c4c6835472b645e1058e0642d38ebcc355c7ea8106c9b1dec3192a0c",
+        "tex": "The certified fixed-child calculation has a twenty-two-row model whose\nintrinsic two-point quotient is the same free orientation torsor detected\nby the sheet character; choosing a point is exactly one bit of table-row\ndecoration.  No identification of the rows with geometric parents is\nasserted."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
-    },
-    {
-      "cited_inputs": [
-        "Dye 1991 Theorems 1 and 3, pages 275--278",
-        "Edge 1956 Sections 29--32, finite Clebsch configuration",
-        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-      ],
-      "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 443",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "prop:a5-point-orbits",
-        "kind": "theorem-environment",
-        "sha256": "b55e4af0607168f516b0305837cf0f59a895cd4360802630524c76b99304e2db"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "finite-geometric rigidity proof",
-          "unconditional_remainder": "The manuscript proves the line-bound and chord-defect remainder."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_rigidity_degenerate_conic.py",
-                "repository": "paper",
-                "sha256": "deaf503932b444d03a084c1954678fa993846696350524a198ccaa1e1d47c054"
-              }
-            ],
-            "checker": "python3 check_rigidity_degenerate_conic.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts all normalized six-arcs."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "frame-normalized rigidity census"
-        }
-      ],
-      "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 513",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:deep-holes-conic",
-        "kind": "theorem-environment",
-        "sha256": "5fb600094c48e7dc65ea98d8ca215de2b2ea89a0109f5ae6760508a99396092d"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "cited_inputs": [
-        "Dye 1991 Theorems 1 and 3, pages 275--278",
-        "Edge 1956 Sections 29--32, finite Clebsch configuration",
-        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-      ],
-      "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 548",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "cor:named-variety",
-        "kind": "theorem-environment",
-        "sha256": "27a3d716a1d4fbaf91368282fee98dfe3a467f200df794326b1cd4c4f34af042"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "decoding and Brianchon geometry",
-          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_decoding.py",
-                "repository": "paper",
-                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
-              }
-            ],
-            "checker": "python3 check_decoding.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "decoder census"
-        }
-      ],
-      "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 585",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:deep-hole-orbit",
-        "kind": "theorem-environment",
-        "sha256": "4c3b29e65f0adc104aee737b7d0e7cfce57b39bc520f62c28ef85fa13aa42961"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "decoding and Brianchon geometry",
-          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_decoding.py",
-                "repository": "paper",
-                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
-              }
-            ],
-            "checker": "python3 check_decoding.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "decoder census"
-        }
-      ],
-      "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 633",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:decoding-oracle",
-        "kind": "theorem-environment",
-        "sha256": "5aa733b14d96af0204113be8d682f36b1fb06db6f1fee5065dda39da89b182b4"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "cited_inputs": [
-        "Dye 1991 Theorems 1 and 3, pages 275--278",
-        "Edge 1956 Sections 29--32, finite Clebsch configuration",
-        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-      ],
-      "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 720",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "lem:six-arc-line-bound",
-        "kind": "theorem-environment",
-        "sha256": "f7093d5e61f7da818bfc8d09a1b3d93fa8be07e08a1035937263d922a313f51f"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "finite-geometric rigidity proof",
-          "unconditional_remainder": "The manuscript proves the line-bound and chord-defect remainder."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_rigidity_degenerate_conic.py",
-                "repository": "paper",
-                "sha256": "deaf503932b444d03a084c1954678fa993846696350524a198ccaa1e1d47c054"
-              }
-            ],
-            "checker": "python3 check_rigidity_degenerate_conic.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts all normalized six-arcs."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "frame-normalized rigidity census"
-        }
-      ],
-      "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 755",
-      "route": "mixed",
-      "source": {
-        "claim_key": "thm:rigidity",
-        "kind": "theorem-environment",
-        "sha256": "1baf96033b14a99413f702c22140ed8f4758ed61dad4a1b86be5263200f2c2b5"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "computation": {
-        "artifacts": [
-          {
-            "path": "check_low_degree_loci.py",
-            "repository": "paper",
-            "sha256": "fab65df95dac888758f28fae19cf1d2ce47ee2a170b73fea5a6cba61ccae16fc"
-          }
-        ],
-        "checker": "python3 check_low_degree_loci.py",
-        "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-        "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-        "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-        "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
-      },
-      "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 825",
-      "route": "exact-replay-certificate",
-      "source": {
-        "claim_key": "prop:low-degree-rigidity",
-        "kind": "theorem-environment",
-        "sha256": "11c7c9029cb3fd9111dfe68a465e69490da1195ee5cea6c04ead9420796e582b"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "cited_inputs": [
-        "Dye 1991 Theorems 1 and 3, pages 275--278",
-        "Edge 1956 Sections 29--32, finite Clebsch configuration",
-        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-      ],
-      "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 850",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "corollary:aec192b0d5224cce",
-        "kind": "theorem-environment",
-        "sha256": "aec192b0d5224cce14f95ef27ab1351f5396c617232ef6476f7462dab8787a47"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
-    },
-    {
-      "computation": {
-        "artifacts": [
-          {
-            "path": "check_global_conic_gap.py",
-            "repository": "paper",
-            "sha256": "bb989b90c2dffe2d8bf71dce8c9b5aa879ddcf2d1abed724934dc24f4cbeea18"
-          },
-          {
-            "path": "check_perturbation_gap.py",
-            "repository": "paper",
-            "sha256": "0af4aa625539a8d317079276eacbc9364d1d0f653ea7c2362a4e59e22b7b6756"
-          }
-        ],
-        "checker": "python3 check_global_conic_gap.py and python3 check_perturbation_gap.py",
-        "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-        "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-        "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-        "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
-      },
-      "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 899",
-      "route": "exact-replay-certificate",
-      "source": {
-        "claim_key": "thm:gap",
-        "kind": "theorem-environment",
-        "sha256": "c08cb806be692717e0eb2f9fb8281d6f33f975b32b02795e36ff61f0954e1c3e"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "decoding and Brianchon geometry",
-          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_decoding.py",
-                "repository": "paper",
-                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
-              }
-            ],
-            "checker": "python3 check_decoding.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "decoder census"
-        }
-      ],
-      "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1037",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:brianchon-support",
-        "kind": "theorem-environment",
-        "sha256": "caceff90101d0a58f99d5ecd2c6e5f363ae056f1b88b542fb0d0f1fc5bc5240a"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "decoding and Brianchon geometry",
-          "unconditional_remainder": "The syndrome-weight dictionary and deductions are in the manuscript."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_decoding.py",
-                "repository": "paper",
-                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
-              }
-            ],
-            "checker": "python3 check_decoding.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts syndrome and leader incidences."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "decoder census"
-        }
-      ],
-      "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1087",
-      "route": "mixed",
-      "source": {
-        "claim_key": "cor:decoder-brianchon",
-        "kind": "theorem-environment",
-        "sha256": "94b8ee9cff0623e7afa40325afdbe3a50863f0a1800d3a2402a653632103e5de"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "intrinsic support bipartition",
-          "unconditional_remainder": "The reconstruction argument is stated in the manuscript."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_chirality.py",
-                "repository": "paper",
-                "sha256": "200cbd604c7e9aa942d1e3b54c372b97c69b8ebcb42220e710d1141131f9cca5"
-              },
-              {
-                "path": "check_code_automorphisms.py",
-                "repository": "paper",
-                "sha256": "82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb"
-              }
-            ],
-            "checker": "python3 check_chirality.py and python3 check_code_automorphisms.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The scripts exhaust the ambiguity supports and affine automorphisms."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "support bipartition replay"
-        }
-      ],
-      "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1103",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:chirality",
-        "kind": "theorem-environment",
-        "sha256": "7a05184b27cd0558b79dc99409d4b6f9e0a6f6b81774ead11b1997d00fe07183"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "cited_inputs": [
-        "Dye 1991 Theorems 1 and 3, pages 275--278",
-        "Edge 1956 Sections 29--32, finite Clebsch configuration",
-        "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-      ],
-      "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1152",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "lem:chord-defect",
-        "kind": "theorem-environment",
-        "sha256": "020b4b13260b54a2c2eba1c44c1cbb7cd717d571c83a043d17deb999cf826ae4"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "The unconditional local deduction is supplied in the manuscript."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "chord-moment uniqueness argument",
-          "unconditional_remainder": "The manuscript proves the all-field formula and uses the cited small-field bound."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_small_q_uniqueness.py",
-                "repository": "paper",
-                "sha256": "cbe028cec3795edb8e2985c4f5aba6fb268260e6ea5183122cb1d040abb2ec01"
-              }
-            ],
-            "checker": "python3 check_small_q_uniqueness.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker verifies every stated small-field case."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "small-field boundary replay"
-        }
-      ],
-      "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1182",
-      "route": "mixed",
-      "source": {
-        "claim_key": "thm:why11",
-        "kind": "theorem-environment",
-        "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "all-field uncovered-locus formula",
-          "unconditional_remainder": "The chord count gives the displayed polynomial."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_q19_nonexample.py",
-                "repository": "paper",
-                "sha256": "8a70fe91a64dab8b94d75188ab90d688a82515a016d48382fab3cecdd02d41e6"
-              }
-            ],
-            "checker": "python3 check_q19_nonexample.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The script independently checks the q=19 specialization."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "q=19 independent specialization"
-        }
-      ],
-      "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1229",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:clebsch-family-uncovered",
-        "kind": "theorem-environment",
-        "sha256": "314d254fbf78b34c2ba3bb2453f810017225e88ee23feb52cd2c38d80d024c3d"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "reflection-arrangement interpretation",
-          "unconditional_remainder": "The manuscript separates the classical arrangement names from the local transport."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_reflection_arrangements.py",
-                "repository": "paper",
-                "sha256": "96c0f54014a8e472dbc98236eebf4b8984def2db965404db00dc221633989bfe"
-              }
-            ],
-            "checker": "python3 check_reflection_arrangements.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The script checks the exact finite projectivity and incidence spectra."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "reflection coordinate replay"
-        }
-      ],
-      "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1299",
-      "route": "mixed",
-      "source": {
-        "claim_key": "prop:h3-arrangement",
-        "kind": "theorem-environment",
-        "sha256": "208749acc65fdb48f43b22ed137ddf6cb6175a212e8429fc0dcc245b6c1a108c"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "components": [
-        {
-          "cited_inputs": [
-            "Dye 1991 Theorems 1 and 3, pages 275--278",
-            "Edge 1956 Sections 29--32, finite Clebsch configuration",
-            "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
-          ],
-          "route": "conceptual-cited-inputs",
-          "subclaim": "universal chord-moment reduction",
-          "unconditional_remainder": "The proof reduces the classification to the finite leaves."
-        },
-        {
-          "computation": {
-            "artifacts": [
-              {
-                "path": "check_small_k_conic_filling.py",
-                "repository": "paper",
-                "sha256": "9d8991c583b0dc9fcc972e6560e41b163d06836cffa6f029dd80d2b5a1c94379"
-              }
-            ],
-            "checker": "python3 check_small_k_conic_filling.py",
-            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
-            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
-            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
-            "soundness_bridge": "The checker exhausts the displayed fields and sizes."
-          },
-          "route": "exact-replay-certificate",
-          "subclaim": "small-k finite leaves"
-        }
-      ],
-      "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1378",
-      "route": "mixed",
-      "source": {
-        "claim_key": "thm:small-k-conic-filling",
-        "kind": "theorem-environment",
-        "sha256": "acbd20e84f9db0c0014cd4eaf390dd7c6df86e6e8015a0b90b7dd8c87939ceb2"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
-    },
-    {
-      "cited_inputs": [
-        "Degree-eleven two-transitive permutation module commuting algebra calculation",
-        "Characteristic-eleven projective-cover Loewy structure 1|9|1",
-        "Exact displayed Tate-cycle and divided-transfer matrix calculations"
-      ],
-      "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1614",
-      "route": "conceptual-cited-inputs",
-      "source": {
-        "claim_key": "prop:modular-depth-plane",
-        "kind": "theorem-environment",
-        "sha256": "4bf9a65143de9bc6f63e5fde00925ec384d2f3e4c79089e18c30e91b610545de"
-      },
-      "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present.",
-      "unconditional_remainder": "Every rank, kernel, relation, and transfer calculation is printed or derived in the proof and appendix."
     },
     {
       "components": [
@@ -3367,7 +2687,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1669",
+      "paper_location": "lemma at source line 1833",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -3430,7 +2750,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 1776",
+      "paper_location": "proposition at source line 1940",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -3557,7 +2877,7 @@
         }
       ],
       "id": "statement-thm-four-sheet-holonomy",
-      "paper_location": "theorem at source line 1827",
+      "paper_location": "theorem at source line 1991",
       "route": "mixed",
       "source": {
         "claim_key": "thm:four-sheet-holonomy",
@@ -3796,7 +3116,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 1944",
+      "paper_location": "lemma at source line 2112",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -4739,12 +4059,12 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1975",
+      "paper_location": "theorem at source line 2143",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
         "kind": "theorem-environment",
-        "sha256": "8be4278175a8cfd92048052a96b99d51e55b0c4440ba5b0b68ee797f2fedd0a7"
+        "sha256": "1d9711fd06c0e71c643d59b9b17f7e66c2b1cf47b741917a0487f29d88b05f6a"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -5141,8 +4461,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "d8cb1de5541bb4dd79c45c20363f42f41f13eb8bfa037c7f83e9fb1814ec5349",
-        "tex": "The certified dictionary has twelve rows: the two matching sheets,\nthe two nontrivial unipotent classes, the two cyclotomic period factors,\nthe two primes of $\\mathbb Q(\\sqrt{-q})$, the two primes of\n$\\mathbb Z[\\sqrt2]$ or $\\mathbb Z[\\phi]$ above the working prime, the two lower Weil\nconstituents, the two cubic signs, the two QR/Barker polarities, the two\nsigned Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero\n$\\operatorname{Spec}\\mathbb Q(\\sqrt5)$ row, and the Reed--Solomon fixed-child\nextremal fibre.  Each two-valued row available at a given $q$ is\nouter-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting\nface of the same swap, not another two-point carrier; the\ncharacteristic-zero row specializes specifically to $T_{11}$."
+        "sha256": "c94783509a00e711286fc64c590becece102856af0dad7bb7fd965c0b2381adb",
+        "tex": "On the certified fixed-child carrier at $q=11$, the twenty-two\ndecorated table rows form two eleven-element fibres, and the supplied outer\ninvolution induces the nontrivial swap on their two-point quotient."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -5340,8 +4660,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "a54cdaaeee8128e45a9fcb2b49b9487b9dd3f1696a548aae86659dc4b8e2f078",
-        "tex": "The marked Coxeter matching points all available rows simultaneously\nthrough the single trace rule.  After forgetting it there is no section:\nthe \\v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor\ndescription are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]"
+        "sha256": "e8abefda7a3249cbfa15c35d4ab769630d0270a17d43918ab3212b0ee653737e",
+        "tex": "For each supplied finite group certificate, determinant sign, the\n\\v{C}ech readout, and the one-bit selector are equal because their kernels\nare the same index-two subgroup.  Thus they are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]"
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -5539,8 +4859,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "6fc4ceabae6ba04bbb48071066913d3c4ef69cbb5ef8d486de5df1109d33c5c2",
-        "tex": "At $q=11$ the Mathieu hinge is forced outer.  Indeed\n$N_{M_{12}}(\\mathrm{PSL}_2(11))=\\mathrm{PSL}_2(11)$,\n$\\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents\nare non-conjugate in $M_{12}$."
+        "sha256": "6ad6173e64aa14ee365c5fba98b3af4a8e7cd0947c0505d590eda36743b517f6",
+        "tex": "At $q=11$, the supplied design, signed-Fourier, and Hadamard\nrow--column carriers are equivariantly identified with $T_{11}$.  The\nrow--column hinge has no inner witness; with the cited normalizer and\nsubgroup identifications, it is therefore forced outer."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -5738,8 +5058,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "1bb3c202c0cf442142e83684d6520cc0c114ecf11c5d968b13bc203d4cc464fb",
-        "tex": "The cubic sign and trace residue co-vary with $T_q$, but their\nnumerical dictionary is convention-dependent between $q=7$ and $q=11$.\nThe uniform datum is the marking, not a residue formula.  No integral\nGalois-odd cubic is assumed: the bit is carried arithmetically by the prime\nfibre."
+        "sha256": "6613666e26f637c2f0fb72d1932acd4e87b40c38b2350a56af35a0716dc09ce4",
+        "tex": "The characteristic-zero golden quadratic object carries conjugation\n$\\phi\\mapsto1-\\phi$, and its supplied reduction map identifies the two\nreduction labels with the roots $4,8$ of $T^2-T-1$ in $\\F_{11}$,\nequivariantly for conjugation and the swap on $T_{11}$."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -6530,13 +5850,62 @@
         "tex": "ambient Fourier matrices&finite shadow&exact square, trace, and"
       },
       "trust_boundary": "The row is bounded to its displayed finite or conditional scope."
+    },
+    {
+      "components": [
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_global_conic_gap.py",
+                "repository": "paper",
+                "sha256": "bb989b90c2dffe2d8bf71dce8c9b5aa879ddcf2d1abed724934dc24f4cbeea18"
+              }
+            ],
+            "checker": "python3 check_global_conic_gap.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "All 1,548 frame-normalized six-arcs are canonically reduced to fifteen projective classes."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "projective classes, stabilizers, uncovered counts, and nearest-conic discrepancies"
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_low_degree_loci.py",
+                "repository": "paper",
+                "sha256": "fab65df95dac888758f28fae19cf1d2ce47ee2a170b73fea5a6cba61ccae16fc"
+              }
+            ],
+            "checker": "python3 check_low_degree_loci.py",
+            "coverage": "The checker exhausts the stated frame-normalized finite domain over F_11 or the explicitly listed small fields.",
+            "independent_replay": "The computation reconstructs its finite objects from coordinates and imports neither Lean proofs nor generated certificate outputs.",
+            "residual_trust": "Exact Python finite-field arithmetic and the manuscript's stated coordinate-to-geometric dictionary.",
+            "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus attached to the same fifteen canonical keys."
+          },
+          "route": "exact-replay-certificate",
+          "subclaim": "least vanishing degree for each canonical class"
+        }
+      ],
+      "id": "fifteen-class-census-table",
+      "paper_location": "complete fifteen-class census table",
+      "route": "mixed",
+      "source": {
+        "kind": "verbatim",
+        "sha256": "eda701f0aa7e105263c2b892beee8cdafc49bf5ffb37d6a1539d08a2e05939ca",
+        "tex": "Table~\\ref{tab:fifteen-classes} prints the complete census at the level\nused by the rigidity and low-degree arguments."
+      },
+      "trust_boundary": "The two exact replays independently regenerate the shared canonical class keys; the table prints only fields checked by those replays."
     }
   ],
   "lean_repository": {
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "4d1067754da20a4535b90601751a840f6ae7fb3443da02c3ae39e7419a006df8",
+  "manuscript_sha256": "fb7ceb18e1841ce34d78d7560c5632f5ad8b327ff53364dcc077199380b7c8d3",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
@@ -6565,7 +5934,7 @@
       {
         "argv": [
           "python3",
-          "verification/extract_statement_adequacy.py",
+          "verification/extract_statement_identity.py",
           "clebsch_hexagon_code.tex"
         ],
         "cwd": ".",

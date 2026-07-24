@@ -6,9 +6,9 @@ environments used by the manuscript.  It emits a deterministic JSON inventory
 whose statement text is copied byte-for-byte (apart from the trailing newline)
 from the TeX source.  Each row includes its source line and a SHA-256 digest.
 
-This is an adequacy aid, not a proof checker: the inventory identifies the
-paper statement that a trust manifest must compare with a formal terminal,
-certificate, replay, or cited mathematical input.
+This is an identity inventory, not a proof checker: it identifies the paper
+statement that a trust manifest must compare semantically with a formal
+terminal, certificate, replay, or cited mathematical input.
 """
 
 from __future__ import annotations
@@ -113,7 +113,7 @@ def extract(source: Path) -> list[Statement]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Extract theorem-like statements for adequacy comparison."
+        description="Extract theorem-like statements for identity comparison."
     )
     parser.add_argument(
         "source",
@@ -122,18 +122,27 @@ def main() -> int:
         default=Path(__file__).resolve().parents[1] / "clebsch_hexagon_code.tex",
         help="manuscript TeX source",
     )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        help="write the deterministic JSON inventory to this path",
+    )
     args = parser.parse_args()
 
     source = args.source.resolve()
     statements = extract(source)
     payload = {
-        "schema": "clebsch-statement-adequacy-v1",
+        "schema": "clebsch-statement-identity-v1",
         "source": source.name,
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "statement_count": len(statements),
         "statements": [statement.as_json() for statement in statements],
     }
-    print(json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True))
+    rendered = json.dumps(payload, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
+    if args.output is None:
+        print(rendered, end="")
+    else:
+        args.output.write_text(rendered, encoding="utf-8")
     return 0
 
 

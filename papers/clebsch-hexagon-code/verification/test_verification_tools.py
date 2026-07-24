@@ -17,7 +17,7 @@ REPOSITORIES = {"paper": PAPER_ROOT, "lean": LEAN_ROOT}
 sys.path.insert(0, str(VERIFICATION_ROOT))
 
 from extract_gate_audits import extract_gate  # noqa: E402
-from extract_statement_adequacy import extract  # noqa: E402
+from extract_statement_identity import extract  # noqa: E402
 from verify_release import command_argv  # noqa: E402
 from verify_trust_manifest import (  # noqa: E402
     validate_checks,
@@ -60,7 +60,7 @@ class CommandValidationTests(unittest.TestCase):
                 "cwd": ".",
                 "argv": [
                     "python3",
-                    "verification/extract_statement_adequacy.py",
+                    "verification/extract_statement_identity.py",
                 ],
                 "timeout_seconds": 60,
             }

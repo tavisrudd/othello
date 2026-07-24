@@ -253,77 +253,56 @@ The following statements hold.
 \item Among six-arcs of $\PG(2,11)$, conic containment of the full
 projective deep-hole locus characterizes the Clebsch class and recovers its
 $A_5$ stabilizer.
-\item For $A_3,B_3,H_3$, with Coxeter number $h$, the
-reflection-complement code has length
+\item Let $T\in\{A_3,B_3,H_3\}$ have Coxeter number $h$, and reduce its
+displayed standard arrangement over a lattice-good finite field $\F_q$ of
+odd characteristic (with the chosen image of $\tau$ for $H_3$).  Whenever
+the complement is nonempty, its projective evaluation code has length
 \[
  (q-h/2)(q-h+1)
 \]
 and minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the
 complement in at most $q-h+1$ points.
-\item At $q=h+1$ the complement is the full rational conic and its
-projective-system code is extended GRS.
-\item The square of a Coxeter element generates the split maximal torus in
-$\mathrm{PSL}_2(q)$, and its two moving point-orbits are the two Legendre
-cosets.
+\item In the three specializations $q=h+1$, namely
+$(A_3,5),(B_3,7),(H_3,11)$, the complement is the full rational conic and
+its projective-system code is extended GRS.
+\item In those three specializations, the square of a Coxeter element
+generates the split maximal torus in $\mathrm{PSL}_2(q)$, and its two
+moving point-orbits are the two Legendre cosets.
 \end{enumerate}
 \end{theorem}
+\noindent\emph{Proof mode: mixed.}  The rigidity implication is a human
+proof with one cited classical theorem; the numerical gap is exhaustive.
+The rank-three clauses combine symbolic proofs, Lean checks, and explicit
+coordinate identifications.
 
-\begin{theorem}[Forgetting and balanced recovery]
-\label{thm:headline-balanced}
-\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=*]
+\begin{theorem}[Factorization recovery]
+\label{thm:headline-factorization}
+\begin{enumerate}[label=\textup{(F\arabic*)},leftmargin=*]
 \item All canonically scaled matching-secant products have equal
 restriction to the conic; every four-endpoint switch difference is
-divisible by $Q$.
-\item The $A_3,B_3,H_3$ quotient configurations have linear ranks
-$3,6,10$, respectively.
+divisible by $Q$.  The $A_3,B_3,H_3$ quotient configurations have linear
+ranks $3,6,10$, respectively.
 \item In the $B_3$ and $H_3$ configurations, the two Coxeter
 factorization sheets are, up to interchange, the unique complementary
 halves having equal first and second tensor moments.
-\end{enumerate}
-\end{theorem}
-
-\begin{theorem}[Cubic orientation and depth]
-\label{thm:headline-depth}
-\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=*]
 \item With opposite signs on the two sheets, every even signed profile
 moment vanishes, and the primitive weighted barycentre relation
-$v_1+4v_4+6v_6=0$ kills degree one.
-\item Within the signed tensor-moment family and its linear functionals,
-degree three is the first surviving degree.  Its nonzero tensor transforms
-by the outer character and has kernel stabilizer.
+$v_1+4v_4+6v_6=0$ kills degree one.  Within the signed tensor-moment
+family and its linear functionals, degree three is the first surviving
+degree; its nonzero tensor transforms by the outer character.
 \item For $G=\mathrm{PGL}_2(11)$, $H=A_5$, and the common
 $K=A_4$, the space $K\backslash G/H$ has six labels in two triples of
 sizes $1,4,6$, with profiles
-$v_1,v_4,v_6,-v_1,-v_4,-v_6$.
-\item The profile map has rank two and four-dimensional linear kernel,
-while separating all six labels as a set.
-\item The singleton profiles recover the unordered $H_3$ matching pair.
-A choice of sheet and its singleton decoration recovers the corresponding
-row of the frozen matching table.  No geometric-parent identification
-is asserted.
-\item In characteristic eleven the depth plane is
-$P(1)^{A_4}/\operatorname{soc}P(1)$, where the projective cover $P(1)$
-has Loewy dimensions $1\mid9\mid1$.  The three positive profile rays
-intrinsically recover the orbit sizes $1,4,6$ and stabilizer orders
-$12,3,2$.
+$v_1,v_4,v_6,-v_1,-v_4,-v_6$.  The profile map has rank two and
+four-dimensional linear kernel but separates the six labels.  Its
+singleton profiles recover the unordered $H_3$ matching pair, and a
+choice of singleton recovers the corresponding row of the frozen matching
+table.  No geometric-parent identification is asserted.
 \end{enumerate}
 \end{theorem}
-
-\begin{theorem}[Rank-three arithmetic gluing]
-\label{thm:headline-gluing}
-\begin{enumerate}[label=\textup{(D\arabic*)},leftmargin=*]
-\item The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data split into
-two silver and two golden sheets, respectively.
-\item In the $H_3$ case the two displayed $A_5$ stabilizers meet in
-$A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged by an outer
-projectivity carried by the rational $S_4/A_4$ hinge.
-\item The fixed-child certificate has a twenty-two-row model whose
-intrinsic two-point quotient is the same free orientation torsor detected
-by the sheet character; choosing a point is exactly one bit of table-row
-decoration.  No identification of the rows with geometric parents is
-asserted.
-\end{enumerate}
-\end{theorem}
+\noindent\emph{Proof mode: mixed.}  The quotient and moment implications
+are proved in the text and Lean; the three finite configurations, their
+ranks, and the six profile rows are checked exhaustively.
 
 The sequence $22\to6\to2\to1$ is an information ledger, not a chain of
 faithful linear images.  In particular, the two-dimensional profile plane
@@ -340,6 +319,20 @@ plane; and determinant-sign descent identifies the surviving bit.  Exact
 finite computations verify the frozen orbit, rank, and normalizer
 hypotheses used by these arguments.  They are supporting certificates; the
 preceding structures explain the headline theorems.
+
+\paragraph{Proof modes for the headline results.}
+The rigidity implication in (A1) is a human proof using Dye's classical
+Brianchon theorem; only its numerical gap uses the exhaustive
+$1548$-representative census.  Clauses (A2)--(A4) are mixed: the uniform
+algebra is proved in the text and Lean, while the coordinate-to-Coxeter
+identifications are cited or certificate-checked.  Clause (F1) combines
+the displayed Pl\"ucker proof with exact rank calculations; (F2)--(F4)
+combine the stated moment and double-coset arguments with exhaustive
+finite tables.  The arithmetic-gluing, holonomy, and determinant-sign
+results below are also marked as mixed at their statements: their
+structural implications are proved in the text, while their frozen finite
+hypotheses are certificate-checked.  Section~\ref{sec:verification} gives
+the terminal- and artifact-level boundaries.
 
 \paragraph{Independence and extension.}
 The unlabelled child admits no equivariant selector of a matching row,
@@ -818,6 +811,65 @@ This completes the equivalence. The exhaustive
 calculation is therefore used for the size-gap clause, not for the conic
 containment implication.
 \end{proof}
+
+Table~\ref{tab:fifteen-classes} prints the complete census at the level
+used by the rigidity and low-degree arguments.  Every representative
+contains the standard frame
+\[
+ (0,0,1),\ (0,1,0),\ (1,0,0),\ (1,1,1);
+\]
+the table gives its remaining two points.  Here $\delta$ is the
+nearest-conic discrepancy and $d_{\min}$ is the least degree of a nonzero
+form vanishing on the uncovered locus.
+
+\begin{table}[H]
+\centering
+\scriptsize
+In the second column, \(xy/uv\) abbreviates the remaining points
+\((1,x,y),(1,u,v)\).
+\smallskip
+
+\begin{tabular}{@{}c c r r r r@{}}
+\toprule
+class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+\midrule
+\texttt{C01}&23/32& 2&20&12&5\\
+\texttt{C02}&23/34& 6&18&14&4\\
+\texttt{C03}&23/36& 3&19&13&5\\
+\texttt{C04}&23/37& 3&19&17&5\\
+\texttt{C05}&23/39& 4&20&16&5\\
+\bottomrule
+\end{tabular}
+\hfill
+\begin{tabular}{@{}c c r r r r@{}}
+\toprule
+class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+\midrule
+\texttt{C06}&23/42& 2&20&16&5\\
+\texttt{C07}&23/48& 1&21&17&5\\
+\texttt{C08}&23/49& 4&20&16&5\\
+\texttt{C09}&23/56& 4&20&16&5\\
+\texttt{C10}&23/62& 6&19&15&5\\
+\bottomrule
+\end{tabular}
+\hfill
+\begin{tabular}{@{}c c r r r r@{}}
+\toprule
+class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+\midrule
+\texttt{C11}&23/67&12&16&12&4\\
+\texttt{C12}&23/74& 5&22&18&6\\
+\texttt{C13}&23/89& 6&18&14&4\\
+\texttt{C14}&23/(9,10)&12&18&14&4\\
+\texttt{C15}&34/45&60&12& 0&2\\
+\bottomrule
+\end{tabular}
+\caption{The fifteen projective classes of six-arcs in $\PG(2,11)$.
+Class \texttt{C15} is the Clebsch class.  Both replay programs regenerate
+the same canonical keys; the global-gap replay supplies the middle three
+columns, and the low-degree replay supplies $d_{\min}$.}
+\label{tab:fifteen-classes}
+\end{table}
 
 The same census supports a strengthening in which a cubic, rather than a
 conic, is allowed.
@@ -1375,6 +1427,88 @@ regime, where the displayed $H_3$ reduction degenerates. Thus, in the
 faithful-reduction range, the arrangement factorizations leave precisely
 $q=5$ and $q=11$.
 
+\subsection{The common Coxeter-number calculation}
+\label{sec:coxeter-number-phase}
+
+The preceding $A_3$ and $H_3$ calculations are the end members of one
+rank-three argument.  For $B_3$ use the nine normals
+\[
+ X,Y,Z,\quad X\mathbin{\pm}Y,\quad X\mathbin{\pm}Z,\quad
+ Y\mathbin{\pm}Z .
+\]
+Put $e=h/2$ and $N=3h/2$.  The relevant intersection data are
+\[
+\begin{array}{c|c|c|c}
+T&(1,e,h-1)&N&\text{projective singular flats}\\ \hline
+A_3&(1,2,3)&6&3\text{ double},\ 4\text{ triple}\\
+B_3&(1,3,5)&9&6\text{ double},\ 4\text{ triple},\ 3\text{ fourfold}\\
+H_3&(1,5,9)&15&15\text{ double},\ 10\text{ triple},\ 6\text{ fivefold}.
+\end{array}                                                    \tag{7.1}
+\]
+Thus the finite-field method, equivalently inclusion along the flats in
+(7.1), gives
+\[
+ |B_T(q)|=(q-e)(q-h+1).                              \tag{7.2}
+\]
+
+Here is the common distance mechanism.  If $L$ is not a mirror, define
+\[
+ \delta(L)=\sum_{\substack{P\in L\\P\text{ singular}}}(m(P)-1),
+\]
+where $m(P)$ is the number of mirrors through $P$.  The $N$ mirror
+intersections on $L$ are distinct except for precisely these collisions,
+so
+\[
+ |L\cap B_T(q)|=q+1-N+\delta(L).                     \tag{7.3}
+\]
+The associated exact singular-line ledgers give
+\[
+ \max_{L\ {\rm nonmirror}}\delta(L)=e
+\]
+in all three types: the maxima are respectively $2,3,5$.  Consequently
+(7.3) has maximum $q-h+1$.  A nonzero coefficient vector of the
+dimension-three projective evaluation code vanishes exactly on the
+intersection with its projective line.  Subtracting this maximum from
+(7.2) proves
+\[
+ D_T(q)=
+ \bigl[(q-e)(q-h+1),\,3,\,(q-e-1)(q-h+1)\bigr]_q
+                                                               \tag{7.4}
+\]
+whenever the complement is nonempty.  This proves
+Theorem~\ref{thm:headline-rigidity-phase}(A2).
+
+At $q=h+1$, the invariant form
+\[
+ Q=X^2+Y^2+Z^2
+\]
+is nonsingular.  For a mirror with pole $r$, externality to $Q$ is the
+condition that $-Q(r)$ be a nonsquare.  The root-norm classes are
+\[
+\begin{array}{c|c|c}
+T&q&Q(r)\text{ classes};\ -Q(r)\text{ classes}\\ \hline
+A_3&5&\{2\};\ \{3\}\\
+B_3&7&\{1,2\};\ \{6,5\}\\
+H_3&11&\{1,4\};\ \{10,7\},
+\end{array}
+\]
+and every class in the last column is nonsquare.  Hence every rational
+point of $Q$ avoids every mirror.  Formula (7.2) gives
+$|B_T(h+1)|=h+2=q+1$, so this containment is equality.  Evaluation on a
+full nonsingular conic is the projective/extended GRS code
+$[q+1,3,q-1]_q$, proving (A3).
+
+Finally, in the same displayed coordinates the Coxeter transformations
+have two rational eigenlines on the conic.  On the remaining affine
+coordinate their squares act by generators of the square subgroup
+$\F_q^{\times2}$, of order $(q-1)/2=h/2$.  They therefore generate the
+split maximal torus of $\mathrm{PSL}_2(q)$ and partition the moving points
+into the square and nonsquare, or Legendre, cosets.  The exact
+characteristic polynomials and orders for $q=5,7,11$ are among the finite
+checks in Section~\ref{sec:verification}; the identification of this
+literal subgroup with the classical split torus is the named
+group-theoretic input.  This proves (A4).
+
 \begin{theorem}[Conic-filling loci for $4\le k\le7$]
 \label{thm:small-k-conic-filling}
 Let $A$ be a $k$-arc in $\PG(2,q)$, where $q$ is a prime power and
@@ -1481,11 +1615,11 @@ is the bridge placing switch differences in the radial summand.  The
 symbolic dimension formulas do not imply the finite factorization-image
 ranks in (8.2); those ranks require the displayed coordinate calculation.
 
-\paragraph{Proof of Theorem \ref{thm:headline-balanced}(B1--B2).}
-The pullback formula and Pl\"ucker identity prove (B1).  The generic
+\paragraph{Proof of Theorem \ref{thm:headline-factorization}(F1).}
+The pullback formula and Pl\"ucker identity prove the divisibility statement.  The generic
 augmentation-kernel calculation controls the one-dimensional translation
 lost by choosing $M_0$.  Exact row reduction of the three coordinate
-configurations gives (8.2), proving (B2).  The trust table in
+configurations gives (8.2), proving the rank statement.  The trust table in
 Section~\ref{sec:verification} separates the symbolic identity, the
 kernel-checked finite ranks, and the classical identification of the
 coordinate orbits with the named Coxeter matchings.
@@ -1502,7 +1636,9 @@ of the $j$th signed tensor moment by
  M_j(\ell)=\sum_{\omega\in\Omega}
    \epsilon(\omega)\,\ell(x_\omega)^j .
 \]
-The tensor moment is zero exactly when every multilinear shadow is zero.
+For $j\le3$ over the working fields $\F_7$ and $\F_{11}$, polarization is
+valid because $j!$ is invertible.  Thus the symmetric tensor moment is
+zero exactly when all its scalar pure-power shadows $M_j(\ell)$ vanish.
 An affine change $x\mapsto Ax+c$ changes the first surviving degree-$j$
 moment by $A^{\otimes j}$; lower vanishing removes the translation.
 
@@ -1514,6 +1650,15 @@ decoders on each sheet prove
  L^{\circ2}=
  \left\{(u,v):\sum_{\Omega_+}u=\sum_{\Omega_-}v\right\}. \tag{9.1}
 \]
+The target is a codimension-one subspace of the $2q$-dimensional function
+space, hence has dimension $13$ for $B_3$ and $21$ for $H_3$.  For the
+forward inclusion, equality of the two sheet sums is checked on every
+product of affine evaluations and hence on their span.  Conversely, the
+finite decoders show that $L$ restricts surjectively onto the zero-sum
+hyperplane on each sheet (dimensions $6$ and $10$), contains both sheet
+indicators, and contains a product with nonzero common sheet sum.  These
+three facts generate the two zero-sum summands and one remaining common-sum
+direction, proving the reverse inclusion in (9.1).
 The annihilator of the hyperplane on the right is the line spanned by the
 sheet-sign vector.  Therefore a pointwise $\{\pm1\}$ weight annihilates all
 quadratic products precisely when it is the sheet sign or its negative.
@@ -1539,8 +1684,7 @@ action with the kernel of the sign character.  Identifying that generated
 action with the classical $\mathrm{PSL}_2(q)$ subgroup of
 $\mathrm{PGL}_2(q)$ is a named group-theoretic input.
 
-\paragraph{Proof of Theorem \ref{thm:headline-balanced}(B3) and
-Theorem \ref{thm:headline-depth}(C1--C2).}
+\paragraph{Proof of Theorem \ref{thm:headline-factorization}(F2--F3).}
 Equation (9.1) and its annihilator calculation prove balanced uniqueness.
 The antipodal identity and (9.2) prove the even and linear cancellations.
 For the displayed profile coordinate, the first possible odd survivor is
@@ -1634,7 +1778,7 @@ profiles have relation $[2,8,1]$; divided transfer kills the former
 balanced relations and fixes the latter socle.
 \end{proposition}
 
-\paragraph{Proof of Theorem \ref{thm:headline-depth}(C3--C6) and
+\paragraph{Proof of Theorem \ref{thm:headline-factorization}(F4) and
 Proposition~\ref{prop:modular-depth-plane}.}
 The exact generator permutations partition all twenty-two matchings into
 the six orbits of (10.1); the representative recounts are constant on
@@ -1666,6 +1810,26 @@ non-identification.
 \section{Rank-three arithmetic gluing}
 \label{sec:gluing}
 
+\begin{theorem}[Rank-three arithmetic gluing]
+\label{thm:headline-gluing}
+\begin{enumerate}[label=\textup{(D\arabic*)},leftmargin=*]
+\item The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data each
+split into two rational sheets.
+\item In the $H_3$ case the two displayed $A_5$ stabilizers meet in
+$A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged by an outer
+projectivity carried by the rational $S_4/A_4$ hinge.
+\item The certified fixed-child calculation has a twenty-two-row model whose
+intrinsic two-point quotient is the same free orientation torsor detected
+by the sheet character; choosing a point is exactly one bit of table-row
+decoration.  No identification of the rows with geometric parents is
+asserted.
+\end{enumerate}
+\end{theorem}
+\noindent\emph{Proof mode: mixed.}  The split--inert lemma and
+determinant-sign deductions are human proofs; the finite matching actions,
+group closures, and fixed-child row quotient are certificate-checked, with
+the named classical groups supplied as cited identifications.
+
 \begin{lemma}[The split--inert frame calculation]
 \label{lem:rank-three-splitting}
 The frame polynomials at the three working primes have the following
@@ -1695,7 +1859,7 @@ The factorization split has a uniform arithmetic description at the three
 conic fields.  The $A_3$ marker polynomial is inert over $\F_5$, and its two
 geometric roots form one Frobenius orbit; projectively the matching datum
 is fused.  The $B_3$ and $H_3$ polynomials split over $\F_7$ and $\F_{11}$,
-producing the two silver and two golden sheets.  Exact projective
+producing two rational sheets in each case.  Exact projective
 permutation closure verifies these three cases and the fixed-point-free
 matching involutions.
 
@@ -1710,7 +1874,7 @@ Theorem~\ref{thm:headline-gluing}(D2).  The exact finite closure does not by
 itself prove the spinor-norm or number-field names attached to the rational
 model.
 
-In the fixed-child certificate, the twenty-two table rows form two
+In the certified fixed-child calculation, the twenty-two table rows form two
 eleven-element orbits under the determinant character.
 The quotient by the kernel action is a free two-point set.  The same sign
 character controls the matching sheets, the outer transporter, and the
@@ -1869,6 +2033,10 @@ restriction maps.  Then:
 The theorem detects these two reduced values; it does not recover the
 whole pencil or assert four-copy minimality.
 \end{theorem}
+\noindent\emph{Proof mode: mixed.}  The constant-section reduction and
+cycle-factor argument are proved below; exhaustive exact certificates
+check the party assignments, rank drops, and exceptional-characteristic
+specializations.
 
 \begin{proof}
 A section is a tuple \((x_a,y_b)\in V^8\) satisfying
@@ -1972,7 +2140,7 @@ uniqueness.  The two choices of $x$ are therefore precisely the two
 possible markings.
 \end{proof}
 
-\begin{theorem}[Determinant-sign transport and the forced outer swap]
+\begin{theorem}[Determinant-sign transport on the certified carriers]
 \label{thm:torsor-rosetta-close}
 Let $T_q$ denote the determinant-sign torsor for the split rank-three
 working primes.  The following statements hold.
@@ -1981,54 +2149,85 @@ working primes.  The following statements hold.
 $C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two
 spin lifts form one Frobenius orbit over $\F_{25}$, hence one connected
 étale point over $\F_5$ and no orientation bit.
-\item The certified dictionary has twelve rows: the two matching sheets,
-the two nontrivial unipotent classes, the two cyclotomic period factors,
-the two primes of $\mathbb Q(\sqrt{-q})$, the two primes of
-$\mathbb Z[\sqrt2]$ or $\mathbb Z[\phi]$ above the working prime, the two lower Weil
-constituents, the two cubic signs, the two QR/Barker polarities, the two
-signed Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero
-$\operatorname{Spec}\mathbb Q(\sqrt5)$ row, and the Reed--Solomon fixed-child
-extremal fibre.  Each two-valued row available at a given $q$ is
-outer-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting
-face of the same swap, not another two-point carrier; the
-characteristic-zero row specializes specifically to $T_{11}$.
-\item The marked Coxeter matching points all available rows simultaneously
-through the single trace rule.  After forgetting it there is no section:
-the \v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor
-description are three readouts of
+\item On the certified fixed-child carrier at $q=11$, the twenty-two
+decorated table rows form two eleven-element fibres, and the supplied outer
+involution induces the nontrivial swap on their two-point quotient.
+\item For each supplied finite group certificate, determinant sign, the
+\v{C}ech readout, and the one-bit selector are equal because their kernels
+are the same index-two subgroup.  Thus they are three readouts of
 \[
  [T_q]=\operatorname{sgn}\colon\mathrm{PGL}_2(q)\longrightarrow C_2,
  \qquad \ker(\operatorname{sgn})=\mathrm{PSL}_2(q).
 \]
-\item At $q=11$ the Mathieu hinge is forced outer.  Indeed
-$N_{M_{12}}(\mathrm{PSL}_2(11))=\mathrm{PSL}_2(11)$,
-$\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents
-are non-conjugate in $M_{12}$.
-\item The cubic sign and trace residue co-vary with $T_q$, but their
-numerical dictionary is convention-dependent between $q=7$ and $q=11$.
-The uniform datum is the marking, not a residue formula.  No integral
-Galois-odd cubic is assumed: the bit is carried arithmetically by the prime
-fibre.
+\item At $q=11$, the supplied design, signed-Fourier, and Hadamard
+row--column carriers are equivariantly identified with $T_{11}$.  The
+row--column hinge has no inner witness; with the cited normalizer and
+subgroup identifications, it is therefore forced outer.
+\item The characteristic-zero golden quadratic object carries conjugation
+$\phi\mapsto1-\phi$, and its supplied reduction map identifies the two
+reduction labels with the roots $4,8$ of $T^2-T-1$ in $\F_{11}$,
+equivariantly for conjugation and the swap on $T_{11}$.
 \end{enumerate}
 \end{theorem}
+\noindent\emph{Proof mode: mixed.}  The torsor and equal-kernel
+implications are proved in Lean; the displayed semantic carriers and
+equivariant maps are supplied by exact replayed certificates, and the
+classical group names remain cited identifications.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}p{0.17\textwidth}p{0.21\textwidth}
+                    p{0.25\textwidth}p{0.28\textwidth}@{}}
+\toprule
+Carrier & Involution/action & Bridge asserted & Evidence boundary\\
+\midrule
+$B_3$ binary roots; $H_3$ golden roots
+& $x\mapsto-x$; $x\mapsto1-x$
+& literal root carriers $\simeq T_7,T_{11}$
+& kernel-checked finite roots and equivariance\\
+$A_3$ geometric root pair
+& Frobenius swap
+& one inert orbit, not an $\F_5$ orientation
+& finite no-root/orbit check plus the quadratic-algebra identification\\
+fixed-child table rows
+& supplied paired-parent involution
+& $22\to11+11\to T_{11}$
+& conditional Lean consequence of the replayed semantic indexing\\
+determinant, \v{C}ech, selector
+& three actions on a two-point set
+& equal kernels force equal characters
+& abstract Lean deduction from the supplied finite-group certificate\\
+design, Fourier, Hadamard
+& supplied outer swaps
+& three equivariant maps to $T_{11}$
+& replayed maps; finite row--column/no-inner check; classical group names cited\\
+golden characteristic-zero object
+& $\phi\mapsto1-\phi$
+& reduction to $\{4,8\}\simeq T_{11}$
+& degree-two/conjugation interface plus independent arithmetic replay\\
+\bottomrule
+\end{tabular}
+\caption{The carrier/action/bridge ledger used by
+Theorem~\ref{thm:torsor-rosetta-close}.  A row asserts only the displayed
+bridge; it is not an all-prime or cross-characteristic dictionary.}
+\label{tab:torsor-carriers}
+\end{table}
 
 \begin{proof}
-For every available row, the finite calculation verifies the same
-structural hypothesis: it is a two-point $G$-set and the action on it is
-the character $\operatorname{sgn}$.  Lemma~\ref{lem:sign-torsor-no-section}
-then forces its identification with $T_q$ after one point is marked.  This
-single quotient-action argument organizes all twelve rows.  The
-matching, unipotent, period, split-prime, Weil, and reduction calculations
-verify that hypothesis for the first seven rows.  Exact outer-element
-calculations verify it for the QR/Barker and signed Fourier rows.  The
-normalizer and two-parent computations give the forced outer Mathieu
-clause.  The characteristic-zero resolvent
-$\operatorname{Spec}\mathbb Q(\sqrt5)$ reduces at eleven to the two golden
-fibres, and the fixed-child computation identifies its two-sheet quotient
-with the same matching orbit.  The two comparison squares identify the
-\v{C}ech and selector certificates with the sign character.  Finally, the
-explicit residues at seven and eleven prove the per-case-dictionary
-boundary.  Every finite comparison and its independent replay is listed
+The literal root calculations and Frobenius orbit prove (E1).
+The certified fixed-child calculation supplies the actual twenty-two-element carrier,
+its paired-parent involution, and an equivariant indexing; taking its
+two-point quotient proves (E2).  In (E3), homomorphisms to the permutation
+group of a two-point set with the same index-two kernel are equal, so the
+three readouts reduce to the sign character.  The three equivariance
+squares in the $q=11$ readout certificate identify the carriers in (E4);
+the finite row--column theorem excludes an inner witness, while the
+normalizer and subgroup names are the cited classical input.  Finally, the
+degree-two generated field, its conjugation, and the equivariant reduction
+map prove (E5).  These are exactly the six carrier classes in
+Table~\ref{tab:torsor-carriers}; no omitted semantic row inherits this
+theorem.  Every external comparison and its independent replay is listed
 in Section~\ref{sec:verification}.
 \end{proof}
 
@@ -2278,13 +2477,13 @@ the non-identification is a proved scope boundary.
 
 \section*{Appendix: Headline statement extraction and identity}
 \addcontentsline{toc}{section}{Appendix: Headline statement extraction and identity}
-\label{app:adequacy}
+\label{app:statement-identity}
 
 The deterministic extraction in
-\path{verification/statement_adequacy.json} preserves the exact \TeX{}
+\path{verification/statement_identity.json} preserves the exact \TeX{}
 of every theorem-like environment, its label or content-addressed key,
 source line, and SHA-256 digest.  This artifact establishes textual identity,
-not semantic adequacy.  The following printed summary records the intended
+not semantic validation.  The following printed summary records the intended
 trust boundary of the headline blocks; the machine-readable trust manifest
 splits every numbered clause into its own route.
 
@@ -2300,14 +2499,10 @@ Statement & Formal/computational surface & Clauses kept external or mixed\\
 Theorem~\ref{thm:headline-rigidity-phase}
 & retained rigidity gates; weighted-adjoint and Coxeter-phase terminals
 & Dye equality inputs; coordinate-to-Coxeter and extended-GRS identifications\\
-Theorem~\ref{thm:headline-balanced}
+Theorem~\ref{thm:headline-factorization}
 & conic-matching, harmonic, factorization, and balanced-sheet terminals
 & arbitrary-size matching connectivity beyond the proved boundary;
-classical group identification\\
-Theorem~\ref{thm:headline-depth}
-& moment-trade, balanced-sheet, double-coset depth, and modular-depth terminals
-& named $A_4,A_5,\mathrm{PGL}_2(11)$ semantics; no identification of the
-depth plane with the relative-cubic plane\\
+classical group identification; no geometric-parent bridge\\
 Theorem~\ref{thm:headline-gluing}
 & arithmetic-gluing and fixed-child terminals plus exact replay
 & classical spinor and number-field interpretations\\
@@ -2338,15 +2533,15 @@ identification is neither used nor claimed.
 The rank-three Coxeter phase explains why this chain belongs to a complete
 small family.  The reflection-complement codes for $A_3,B_3,H_3$ obey one
 distance law and become conic codes at $q=h+1$.  Their matching data fuse in
-the $A_3$ control, split through the silver roots in $B_3$, and split
-through the golden roots in $H_3$.  In the last case the two stabilizers
+the $A_3$ control and split into two rational sheets in the $B_3$ and
+$H_3$ cases.  In the last case the two stabilizers
 meet along $A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged through
 the rational $S_4/A_4$ hinge.
 
 The survival ledger gives a precise boundary.  Quadratic-residue designs
 and perfect-code spans retain finite shadows, and the frozen golden
 reduction data obey the exact modulo-$40$ partition.  The displayed theta
-signatures do not orient the sheets, and the displayed golden quantum
+signatures do not orient the sheets, and the displayed $H_3$ quantum
 states are equivalent even with fixed party labels.  The Fourier matrices
 satisfy the exact restricted identities, but this does not turn the
 quotient spaces into small Weil modules.  Orientation is carried by
@@ -2355,11 +2550,12 @@ Likewise, the four-sheet contraction retains only the two resonance fibres
 of Theorem~\ref{thm:four-sheet-holonomy}; it does not recover its pencil and
 does not participate in matching-row reconstruction.
 
-The determinant-sign transport theorem identifies both the object and its finite
-mechanism.  At the split working primes the missing bit is obtained by
-determinant-sign descent: every available two-valued carrier is a
-$G$-set with the same quotient character, so the transport lemma forces
-all of them to be realizations of $T_q$.  At the inert $A_3$ prime the bit
+The determinant-sign transport theorem identifies both the object and its
+finite mechanism.  At the split working primes the missing bit is obtained
+by determinant-sign descent: each of the six certified carrier classes in
+Table~\ref{tab:torsor-carriers} is supplied with the same quotient
+character, so the transport lemma identifies its displayed two-point
+realization with $T_q$.  At the inert $A_3$ prime the bit
 fuses.  The characteristic-zero golden resolvent reduces to $T_{11}$, the
 fixed-child fibre is the same finite torsor, and the Mathieu action is
 forced outer.  The one no-section class has cohomological, selector, and

@@ -8,12 +8,13 @@
 polar induction.  Its public boundary contains:
 
 - ordered contraction by three affine or infinite projective markers, with scalar-extension
-  compatibility;
+  compatibility and adjacent-swap invariance;
 - a normalized geometric-`S3` identity-twist interface with three distinct markers, genus one,
   branch-and-diagonal deletion degree `12`, marker contribution `3*6`, and total deletion degree
   `30`;
 - the exact Hasse--Weil integer threshold: the strict deletion inequality starts at `42` and fails
-  at `41`, while `43` is the first prime-power field order used by the theorem;
+  at `41`, while a checked prime-power exclusion proves that `43` is the first finite-field order
+  used by the theorem;
 - the upper transverse/collision budget `4+10=14` and the conditional `q>=43` synthesis theorem;
 - exact persistent-family cardinality `q(q+1)^2/2`;
 - the seventh-power sigma quotient, tangent cocycle `z -> z+7u`, and the four exact
@@ -36,8 +37,8 @@ Theorem `thm:r8`:
 | Manuscript clause | Lean declaration |
 |---|---|
 | field order `q>=43` and persistent-only classification | `RelativeConicArcs.PRSRedundancyEight.redundancyEightHighFieldSynthesis` |
-| three-marker geometric-`S3` lower package and deletion degree `30` | `ThreeMarkerGeometricS3Slice`, `exact_deletion_and_polar_budgets`, and `threeMarker_genusOne_hasseWeil_bound` |
-| exact threshold arithmetic | `threeMarker_genusOne_hasseWeil_exact_threshold` |
+| three-marker geometric-`S3` lower package and deletion degree `30` | `ThreeMarkerGeometricS3Slice`, `projectiveSequenceContraction_comm`, the two `threeMarkerContraction_swap_*` theorems, `exact_deletion_and_polar_budgets`, and `threeMarker_genusOne_hasseWeil_bound` |
+| exact integer and prime-power threshold arithmetic | `threeMarker_genusOne_hasseWeil_exact_threshold`, `primePowerOrder_at_least_fortyThree`, and `redundancyEightPrimePowerSynthesis` |
 | size `q(q+1)^2/2` | `PersistentFamilyData.classified_card` |
 | orbit law `T/T^7` modulo inversion and Frobenius | `OrbitArithmetic.seventhPower_sigmaInversionOrbitCount` and `OrbitArithmetic.orbit_count_pairs` |
 | tangent split exactly when the scalar seven vanishes | `tangentTranslateSeven_of_cast_eq_zero` and `tangentTranslateSeven_surjective` |
@@ -67,7 +68,13 @@ Implementation commits: `a368682f`, `67d1e104`.
 
 The numerical stress test separated two cutoffs that prose can easily conflate.  The genus-one
 inequality is already true at integer `42` and false at `41`; the coding theorem starts at `43`
-because that is the first relevant prime power.  This strengthening is now kernel checked.
+because that is the first relevant prime power.  A follow-up terminal now proves the prime-power
+jump itself and derives synthesis directly from `IsPrimePow q` and `42<=q`.
+
+The ordered-marker stress test separated labels from algebra.  The geometric cover retains an
+ordered root triple, but projective contraction itself commutes for every affine/infinity pair.
+The two adjacent-swap theorems therefore generate the full `S3` invariance of the contracted
+coefficient sequence without quotienting the ordered cover.
 
 The carrier stress test kept the characteristic-seven statement deliberately asymmetric.  At
 `q=7`, rootlessness is exactly the carrier deepness condition and has count `819`; at `q=49`, a
@@ -79,7 +86,10 @@ records these two facts without manufacturing a larger-field rootlessness criter
 Settled:
 
 - **Does the exact deletion inequality really begin at the theorem threshold?** It begins one
-  integer earlier, at `42`; `43` is the first prime-power field order.  Both assertions are checked.
+  integer earlier, at `42`; `43` is the first prime-power field order.  Both assertions and their
+  synthesis composition are checked.
+- **Does ordered-marker normalization make contraction order-dependent?** No.  Affine and infinite
+  projective contractions commute pairwise, and the two checked adjacent swaps generate `S3`.
 - **Can the characteristic-seven carrier be promoted by root type?** No.  The `q=49` shallow
   witness blocks that promotion, and the formal interface states no larger-field sufficiency.
 - **Are the four orbit cases merely prose?** No.  Their numerical pairs and seventh-power

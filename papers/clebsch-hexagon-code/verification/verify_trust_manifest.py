@@ -2,7 +2,7 @@
 """Validate the claim-by-claim trust manifest against the manuscript.
 
 The manifest has one final route for each claim.  The verifier checks that
-theorem-like statements agree with the deterministic adequacy extraction,
+theorem-like statements agree with the deterministic identity extraction,
 that separately stated prose/table claims occur verbatim in the manuscript,
 and that each route supplies the evidence fields needed for that route.
 Artifacts are resolved against either the flattened paper repository or a
@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 from typing import NoReturn
 
-from extract_statement_adequacy import extract
+from extract_statement_identity import extract
 
 
 SCHEMA = "clebsch-trust-manifest-v1"

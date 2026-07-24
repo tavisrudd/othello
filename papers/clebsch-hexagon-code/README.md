@@ -46,5 +46,7 @@ python3 verification/verify_release.py --lean-root /path/to/shared-lean
 The runner verifies the Lean checkout against the pinned commit before executing the aggregate
 trust gate.
 
-The immutable archival release will extend this file with expected success sentinels, typical
-runtimes, licenses, release identifiers, and the archive manifest.
+Expected success sentinels and per-check timeouts are recorded in
+`verification/verify-release-output.json` and `verification/trust_manifest.json`.  Licensing,
+release identifiers, and the immutable archive manifest belong to the separate archival-release
+step; this source checkout does not claim that those publication records already exist.

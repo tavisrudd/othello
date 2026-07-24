@@ -46,6 +46,51 @@ theorem threeMarkerContraction_map
     iteratedProjectiveSequenceContraction_map φ
       [first, second, third] coefficients
 
+/-- Two projective sequence contractions commute, including every affine/infinity combination. -/
+theorem projectiveSequenceContraction_comm
+    (first second : Option R) (coefficients : ℕ → R) :
+    projectiveSequenceContraction second
+        (projectiveSequenceContraction first coefficients) =
+      projectiveSequenceContraction first
+        (projectiveSequenceContraction second coefficients) := by
+  cases first with
+  | none =>
+      cases second <;> rfl
+  | some first =>
+      cases second with
+      | none => rfl
+      | some second =>
+          exact sequenceContraction_comm first second coefficients
+
+/-- Swapping the first two retained markers does not change the contracted coefficient sequence. -/
+theorem threeMarkerContraction_swap_first
+    (first second third : Option R) (coefficients : ℕ → R) :
+    threeMarkerContraction first second third coefficients =
+      threeMarkerContraction second first third coefficients := by
+  change
+    projectiveSequenceContraction third
+        (projectiveSequenceContraction second
+          (projectiveSequenceContraction first coefficients)) =
+      projectiveSequenceContraction third
+        (projectiveSequenceContraction first
+          (projectiveSequenceContraction second coefficients))
+  rw [projectiveSequenceContraction_comm first second coefficients]
+
+/-- Swapping the last two retained markers does not change the contracted coefficient sequence. -/
+theorem threeMarkerContraction_swap_last
+    (first second third : Option R) (coefficients : ℕ → R) :
+    threeMarkerContraction first second third coefficients =
+      threeMarkerContraction first third second coefficients := by
+  change
+    projectiveSequenceContraction third
+        (projectiveSequenceContraction second
+          (projectiveSequenceContraction first coefficients)) =
+      projectiveSequenceContraction second
+        (projectiveSequenceContraction third
+          (projectiveSequenceContraction first coefficients))
+  exact projectiveSequenceContraction_comm second third
+    (projectiveSequenceContraction first coefficients)
+
 end ThreeMarkerContraction
 
 /-- Number of retained markers on the redundancy-eight lower splitting slice. -/
@@ -95,6 +140,16 @@ theorem threeMarker_genusOne_hasseWeil_exact_threshold :
       ¬(41 + 1 > 2 * Nat.sqrt 41 + threeMarkerDeletionDegree) := by
   norm_num [threeMarkerDeletionDegree, branchAndDiagonalDeletionDegree,
     retainedMarkerCount, deletionDegreePerMarker, Nat.sqrt]
+
+/-- A prime-power field order satisfying the exact integer Hasse--Weil threshold is at least `43`,
+because `42` is not a prime power. -/
+theorem primePowerOrder_at_least_fortyThree
+    {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q) :
+    43 ≤ q := by
+  by_cases hq42 : q = 42
+  · subst q
+    exact False.elim ((by decide : ¬ IsPrimePow 42) hprimePower)
+  · omega
 
 /-- A normalized geometric-`S3` lower slice has three ordered distinct markers and identifies its
 identity-Frobenius component with the genus-one, degree-thirty stratum used by synthesis.
@@ -146,6 +201,18 @@ theorem redundancyEightHighFieldSynthesis
       input.fixedLevel.polar.persistent syndrome := by
   rw [input.fixedLevel.deep_iff_persistent_or_modular hq (by omega)]
   exact or_iff_left (input.modularEmpty syndrome)
+
+/-- Prime-power form of redundancy-eight synthesis.  The geometric inequality may be stated at
+its exact integer threshold `42`; prime-power arithmetic supplies the coding threshold `43`. -/
+theorem redundancyEightPrimePowerSynthesis
+    {Syndrome Marker Witness : Type*} [Fintype Marker] [DecidableEq Marker]
+    {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q)
+    (input : RedundancyEightInput Syndrome Marker Witness q)
+    (syndrome : Syndrome) :
+    input.fixedLevel.radius.isDeep syndrome ↔
+      input.fixedLevel.polar.persistent syndrome :=
+  redundancyEightHighFieldSynthesis
+    (primePowerOrder_at_least_fortyThree hprimePower hq) input syndrome
 
 /-- Persistent tangent and conjugate-sigma family data with no modular contribution. -/
 structure PersistentFamilyData

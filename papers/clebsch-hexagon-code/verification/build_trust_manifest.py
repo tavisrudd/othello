@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = ROOT.parents[1]
 LEAN_ROOT = REPOSITORY / "lean"
-STATEMENTS = ROOT / "verification" / "statement_adequacy.json"
+STATEMENTS = ROOT / "verification" / "statement_identity.json"
 OUTPUT = ROOT / "verification" / "trust_manifest.json"
 AUDIT_PATH = "verification/clebsch_paper_trust/axiom-audit.txt"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschPaperTrust.lean"
@@ -321,30 +321,27 @@ def components_for_clause(label: str, index: int) -> list[dict[str, object]]:
             lean_component("split-torus finite character data", ["gluing"]),
             conceptual_component("classical split maximal-torus identification", TORSOR_INPUTS, "The finite determinant and order checks are kernel checked."),
         ]
-    if label == "thm:headline-balanced":
-        groups = ["quotient"] if index == 1 else ["factorization"] if index == 2 else ["balanced"]
-        return [
-            lean_component("conic quotient or balanced-sheet statement", groups),
-            conceptual_component("geometric meaning of the frozen coordinates", CLASSICAL_INPUTS, "The algebraic implication is kernel checked."),
-        ]
-    if label == "thm:headline-depth":
-        if index in (1, 2):
+    if label == "thm:headline-factorization":
+        if index == 1:
+            return [
+                lean_component("conic quotient and factorization ranks", ["quotient", "factorization"]),
+                conceptual_component("geometric meaning of the frozen coordinates", CLASSICAL_INPUTS, "The divisibility implication and displayed finite ranks are kernel checked."),
+            ]
+        if index == 2:
+            return [
+                lean_component("balanced-sheet recovery", ["balanced"]),
+                conceptual_component("geometric meaning of the frozen coordinates", CLASSICAL_INPUTS, "The uniqueness statement is kernel checked on the displayed configurations."),
+            ]
+        if index == 3:
             return [lean_component("signed-moment filtration", ["moments", "balanced"])]
-        if index in (3, 4):
-            return [
-                lean_component("six-profile compression", ["depth"]),
-                conceptual_component("double-coset group names", CLASSICAL_INPUTS, "The orbit arrays, ranks, and label separation are kernel checked."),
-            ]
-        if index == 5:
-            return [
-                lean_component("singleton matching-row recovery", ["depth"]),
-                conceptual_component(
-                    "double-coset group names",
-                    CLASSICAL_INPUTS,
-                    "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted.",
-                ),
-            ]
-        return [conceptual_component("projective-cover and primitive-ray statement", MODULAR_INPUTS, "The manuscript gives the projectivity, locality, fixed-point, and orbit--stabilizer deductions.")]
+        return [
+            lean_component("six-profile compression and singleton matching-row recovery", ["depth"]),
+            conceptual_component(
+                "double-coset group names",
+                CLASSICAL_INPUTS,
+                "The orbit arrays, ranks, and label separation are kernel checked; the terminal recovers a frozen matching-table row only, with no row-to-geometric-parent bridge.",
+            ),
+        ]
     if label == "thm:headline-gluing":
         if index == 3:
             return [
@@ -462,7 +459,7 @@ def checks() -> list[dict[str, object]]:
             "id": "statement-extraction",
             "repository": "paper",
             "cwd": ".",
-            "argv": ["python3", "verification/extract_statement_adequacy.py", "clebsch_hexagon_code.tex"],
+            "argv": ["python3", "verification/extract_statement_identity.py", "clebsch_hexagon_code.tex"],
             "timeout_seconds": 60,
         },
     ]
@@ -553,8 +550,7 @@ def main() -> None:
     claims: list[dict[str, object]] = []
     headlines = {
         "thm:headline-rigidity-phase",
-        "thm:headline-balanced",
-        "thm:headline-depth",
+        "thm:headline-factorization",
         "thm:headline-gluing",
         "thm:four-sheet-holonomy",
         "thm:torsor-rosetta-close",
@@ -654,6 +650,33 @@ def main() -> None:
                 components,
             )
         )
+
+    census_snippet = (
+        "Table~\\ref{tab:fifteen-classes} prints the complete census at the level\n"
+        "used by the rigidity and low-degree arguments."
+    )
+    if manuscript.count(census_snippet) != 1:
+        raise RuntimeError("fifteen-class census snippet count is not one")
+    claims.append(
+        claim(
+            "fifteen-class-census-table",
+            verbatim_source(census_snippet),
+            "complete fifteen-class census table",
+            "The two exact replays independently regenerate the shared canonical class keys; the table prints only fields checked by those replays.",
+            [
+                baseline_component(
+                    "projective classes, stabilizers, uncovered counts, and nearest-conic discrepancies",
+                    ["check_global_conic_gap.py"],
+                    "All 1,548 frame-normalized six-arcs are canonically reduced to fifteen projective classes.",
+                ),
+                baseline_component(
+                    "least vanishing degree for each canonical class",
+                    ["check_low_degree_loci.py"],
+                    "The replay evaluates homogeneous forms degree by degree on every uncovered locus attached to the same fifteen canonical keys.",
+                ),
+            ],
+        )
+    )
 
     manifest = {
         "schema": "clebsch-trust-manifest-v1",
