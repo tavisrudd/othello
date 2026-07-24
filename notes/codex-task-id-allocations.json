@@ -998,8 +998,17 @@
       "last": 593,
       "purpose": "tangent-derived four-intersection and few-weight-code obstruction gate",
       "sequence": 111
+    },
+    {
+      "count": 1,
+      "first": 594,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 594,
+      "purpose": "major revision: close referee proof gaps, repair transport conventions, and reposition logical phase with literature context",
+      "sequence": 112
     }
   ],
-  "next_id": 594,
+  "next_id": 595,
   "schema": "codex-task-id-allocations-v1"
 }
