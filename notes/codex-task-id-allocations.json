@@ -890,8 +890,17 @@
       "last": 558,
       "purpose": "audit and integrate zero-defect rigidity capstone into arcs-complete-outside-conic manuscript",
       "sequence": 99
+    },
+    {
+      "count": 14,
+      "first": 559,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 572,
+      "purpose": "AME local-unitary paper theorem, evidence, literature, drafting, Lean, audit, and release completion program",
+      "sequence": 100
     }
   ],
-  "next_id": 559,
+  "next_id": 573,
   "schema": "codex-task-id-allocations-v1"
 }
