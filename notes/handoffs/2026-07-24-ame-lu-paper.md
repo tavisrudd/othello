@@ -240,6 +240,13 @@ revision, PDF inspection, and independent mathematical cold read.  C581 is a
 separately queued optional upgrade gate for basis-free phase-space
 reconstruction and quantitative approximate rigidity.
 
+C571 must begin with the five-item formal-coverage adversarial checklist in
+`papers/ame_lu/second-draft-fix-plan.md`: two-way manuscript/declaration
+coverage, field-by-field sourcing of every conditional input, full transitive
+referee-prose review, strict separation of implication versus constructed or
+certificate-supported hypotheses, and release inclusion of the adequacy
+ledger plus exact aggregate axiom gate.
+
 ## Completion gates
 
 1. Freeze the adopted theorem package and honest exceptional set.

@@ -12,20 +12,35 @@
   built an eleven-page warning-free PDF, and visually inspected the title,
   middle theorem, and bibliography pages.
 
-## Remaining proof reconciliation
+## Closed formal reconciliation
 
-- C565--C569 must formalize the shared definitions and the four queued theorem
-  packages.  Until then, Section 8 correctly describes every Lean result as
-  future work rather than adopted evidence.
-- C570 must compare the formal statements with the manuscript definitions,
-  especially the finite-field Weyl phase convention, the shortened-stabilizer
-  plane, the projective quotient's admitted factors, and the transport
-  rank/determinant correspondence.
-- During C570, expand any manuscript bridge whose formal proof reveals a
-  hidden convention or stronger hypothesis.  The highest-risk bridges are the
-  labelled Gale-fixed/conic step in Theorem 5.1 and the passage from the
-  finite-subgroup classification to the exact H3/GRS involution bound in
-  Theorem 6.1.
+- C565--C570 completed the shared definitions, theorem interfaces, aggregate
+  import and axiom audit, and declaration-level manuscript reconciliation.
+- `formal-statement-adequacy.md` distinguishes unconditional coverage,
+  conditional interfaces, and unformalized paper proofs for every stable
+  manuscript label.
+- Section 8 names the pinned toolchain and aggregate import/audit terminals
+  without presenting conditional interfaces as unconditional formal proofs.
+
+## C571 formal-coverage adversarial checklist
+
+C571 must not treat a successful aggregate import as a completeness
+certificate.  It must close all of the following explicitly:
+
+1. Run a two-way coverage check: every manuscript claim maps to the exact
+   audited Lean declarations, and every declaration claimed as paper-facing
+   maps back to exact manuscript wording.
+2. Map every field of each conditional input structure to a specific proof
+   paragraph, theorem, or paper-local evidence-manifest entry.
+3. Review the full project-owned transitive verification closure for
+   referee-facing prose, trust disclosures, forbidden workflow references,
+   and statement/name adequacy; reviewing only the aggregate modules is
+   insufficient.
+4. Keep “formalized implication,” “constructed hypothesis,” and
+   “certificate-supported hypothesis” distinct in the manuscript and ledgers.
+5. Verify that the release plan includes the statement-adequacy ledger and
+   exact aggregate axiom-audit module; C572 owns their immutable public
+   identity.
 
 ## Remaining exposition work
 
@@ -41,7 +56,8 @@
 
 ## Adversarial and release gates
 
-- C571: run the adversarial audit against the rendered second draft, inspect
+- C571: close the five-item formal-coverage checklist above, run the broader
+  adversarial proof/evidence audit against the rendered second draft, inspect
   every page and float, and obtain a mathematically qualified cold read.
 - C572: replay from a clean public export, freeze the immutable evidence
   manifest, verify source/PDF hashes, and close release metadata.
