@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-statement-identity-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "984421e472f1e51612895cc664f547fdefde27116b294eb8e628ff47aff2b9a6",
+  "source_sha256": "e175ccf36897fae2ee38749aa70a5e13e538786b8db76f7757130f8e75270596",
   "statement_count": 29,
   "statements": [
     {
