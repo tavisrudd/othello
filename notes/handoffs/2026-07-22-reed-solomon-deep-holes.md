@@ -54,14 +54,22 @@ named proof pressure points, and supplies a single supplement verifier.  A
 follow-up typography pass splits the central dependency map into two readable
 tables, adds a compact referee roadmap, bounds the fixed-redundancy recognition
 complexity precisely, completes recent-preprint metadata, and removes the sparse
-last bibliography page.  The clean manuscript is now 43 pages.  The development monorepo is not published; any
+last bibliography page.  A subsequent cold scope review cut the submission to
+the proof-complete R5--R7 spine; R8/R9 and the Hessian/Lucas material now belong
+to companion queues.  The retained canonical/IEEE review builds are 27/20 pages.
+A fresh correctness review is now repaired in source: the Aubry--Perret constant
+and possible singular rational point are explicit, all retained genus-one rows
+use \(\kappa=1\), R6 has the single field-order threshold \(q\geq29\), the R6/R7
+contained alternatives are stated exhaustively, the divided-power pairing is
+printed, and the Lean boundary expressly excludes the geometric core.  External
+certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
 deterministic paper-only archive now rebuilds and passes the 57-artifact local
 gate, and its public release checker is fail-closed.  Release remains blocked
 on two independent specialist readers, a publicly fetchable flake-pinned Lean
 revision, the immutable public export and identifiers, and author/account
 confirmation.  IEEE Transactions on Information Theory is now the selected
-journal target; its shared-source IEEEtran review build is 32 single-column
+journal target; its shared-source IEEEtran review build is 20 single-column
 pages, and the venue-specific cover letter, checklist, manifest, and
 supplement README are prepared with author-only fields left explicit.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel
