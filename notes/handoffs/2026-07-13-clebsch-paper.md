@@ -319,8 +319,9 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 - **C320 is active as an early incremental foundation and remains the release-blocking
   trust-ledger capstone:** by explicit user authorization it has begun deterministic manuscript
   statement extraction, fail-closed manifest validation, and reviewed-slice intake.  All
-  Paper-adopted C420--C428, C494, and C503--C507 slices are now final; C320 must publish one
-  claim-by-claim ledger with exact
+  Paper-adopted C420--C428, C494, and C503--C507 slices are now final and admitted.  C320 must next
+  migrate the adopted dated-note evidence into stable workflow-free bundles, reconcile the
+  replacement manuscript, and publish one claim-by-claim ledger with exact
   theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
   replacement-spine claim is called Lean-formalized before this reconciliation and independent

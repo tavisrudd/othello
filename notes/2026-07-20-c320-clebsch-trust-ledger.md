@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active incremental foundation; C505 admitted; C507 durable final record not yet admitted
+**Status:** active; all reviewed C420--C428, C494, and C503--C507 slices admitted
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -13,10 +13,10 @@ conceptual/citation-backed, or mixed.
 
 On 2026-07-23 the user explicitly authorized C320 to begin while C507 was underway, with the C505
 and C507 results to be admitted when ready.  This overrides the start-order gate but not the
-release gate.  C505 has now delivered its final reviewed delta and is admitted below.  C320 remains
-live and cannot claim a complete inventory, pin a release commit, run its final adequacy
-comparison, or request its independent review until C507's durable final record is committed and
-admitted or the corresponding manuscript claims have been removed.
+release gate.  Both slices have now delivered final reviewed implementations and are admitted
+below.  C320 remains live: the replacement manuscript, stable evidence migration, complete
+claim manifest, tracked paper audit, deterministic adequacy appendix, final verify-all output, and
+independent review are still required before release.
 
 The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is still the protected
 19-page baseline.  It is not the replacement-spine manuscript described by
@@ -25,10 +25,10 @@ inventory and the adopted replacement-spine claim inventory are tracked separate
 claim inherits a trust route merely because a related terminal already exists, and no baseline
 statement is silently dropped before the final manuscript edit makes that deletion explicit.
 
-The user reports C507 complete, and its implementation and review-repair commits exist.  Its report
-and queue lifecycle are presently modified by the owning work rather than committed, so C320 does
-not edit, stage, or infer its final terminal/evidence delta from that active foreign state.  C507
-admission occurs after the durable report and queue closure land.
+The repaired C507 implementation `9a388b41` plus its final user-launched review `GO` provide the
+exact admission boundary below.  Its lifecycle closure is committed, its live-queue row is absent,
+and its handoff records the final boundary.  C320 corrected one stale report-header status line
+that still said “queued task brief”; no source, evidence, or review content changed.
 
 ## Foundation landed before final slice intake
 
@@ -160,7 +160,7 @@ tables.
 | C504 | final independent-review `GO`; classical Mathieu/cover names remain cited inputs |
 | C505 | complete; repaired Lean `4c01ea83`, provenance ledger `30c1cd6b`, final user-launched review `GO`; admitted below |
 | C506 | final independent-review `GO` on implementation commit `51b21674` |
-| C507 | user reports complete; implementation/review repairs exist, but active report/queue closure is not yet committed; no final delta admitted |
+| C507 | complete; repaired commit `9a388b41`, final user-launched review `GO`, queue lifecycle closed; admitted below |
 
 ## First-pass headline adequacy map
 
@@ -252,6 +252,42 @@ generators/checkers, replays, and checksum manifests must move as exact bytes in
 workflow-free verification bundle, with a semantic README and unchanged hashes where filenames or
 embedded paths do not require regeneration.  The already stable
 `lean/verification/clebsch_arithmetic_gluing/` bundle remains in place and is referenced directly.
+
+### C507 mixed-passage admission
+
+C507 is admitted at repaired commit `9a388b41` and gate SHA-256
+`0297f429b1488dbcd2d1516569052443a23d5ca48c2fe24e8963f265be62778d`; the current gate bytes
+equal the reviewed commit bytes.  Its twenty-two probes use only `propext`,
+`Classical.choice`, and `Quot.sound`, or a subset; the two matching-signature terminals use no
+axioms.  No native-decision or project-local axiom enters this block.
+
+The final ledger must separate at least five routes:
+
+1. genus-three/genus-five finite theta-quadratic value histograms;
+2. frozen q=7/q=11 same-sheet Lagrangian signatures and exact sheet erasure;
+3. rank-eight, rank-sixteen, and signed integer Fourier square/trace/weighted-adjoint identities;
+4. monomial parity-check transport, signed-transpose identity, and complete fixed-party
+   kernel--image equivalence; and
+5. the regular left/right `alternatingGroup (Fin 5)` bitorsor laws.
+
+The Lean route recomputes the finite histograms and incidence summaries, all displayed integer
+matrices, inverse/intertwining/decomposition certificates, and the abstract sixty-element bitorsor.
+Projective reconstruction of the matching tables and 60 geometric maps, divisor-theoretic theta
+semantics and superspeciality, ambient Schrodinger/Weil normalization, common-ambient restriction
+and eigenspace multiplicities, complex state normalization, arbitrary-LU classification, and
+geometric parent canonicity remain exact certificate or cited-input boundaries.
+
+The C471 mod-three Hadamard degeneration sentence was not adopted in Paper 1 and is not exported by
+this gate.  It remains Paper-2 certificate evidence unless the manuscript owner makes a new
+adoption decision, in which case C320 must open a new row and validation route rather than inherit
+it from C507.
+
+C507's four adopted semantic checkers and checksum manifests also currently live under dated
+internal `notes/` paths.  They join C505's bundles in the required workflow-free evidence migration
+before the public trust manifest is cut.  The migrated bundle must preserve the independent routes:
+theta quotient-space ranks versus alternating-cycle components, reconstructed Fourier matrices,
+complete parity-check/codeword support transport, and character-sum support versus exhaustive
+local-Clifford search.
 
 Two earlier reviewed closing inputs are also admitted:
 
