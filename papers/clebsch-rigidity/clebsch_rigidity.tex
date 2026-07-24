@@ -485,25 +485,17 @@ paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
 Clebsch hexagon uniquely, and does so in a way that recovers its projective
 stabilizer from the coding condition rather than assuming it.
 
-\begin{lemma}[Conic-inscribed six-arcs]
-\label{rem:not-the-usual-condition}
+\paragraph{Two conditions, one word apart.}
 The condition studied here is that $\cU(A)$ --- the projective uncovered,
 or projective deep-hole syndrome, locus --- lies on a conic. It is
 \emph{not} the familiar condition that the arc $A$ itself
 lies on a conic, which is the standing hypothesis throughout the arc
 literature and which the Clebsch hexagon famously fails. The two are
 logically unrelated: they constrain different point sets, and the arcs
-satisfying them are disjoint. More precisely, every six-arc lying
-\emph{on} a conic in $\PG(2,11)$ satisfies
-\[
- |\cU(A)|\in\{18,19,20,22\}.
-\]
-In particular, none belongs
-to the Clebsch class in clause~(iii) of Theorem~\ref{thm:rigidity}. This
-four-value assertion is
-the conic-inscribed subcensus of the independent rigidity replay listed in
-Table~\ref{tab:replays}.
-\end{lemma}
+satisfying them are disjoint. Lemma~\ref{lem:six-arc-line-bound} gives the
+exact four-value subcensus for six-arcs lying on a conic; in particular,
+none belongs to the Clebsch class in clause~(iii) of
+Theorem~\ref{thm:rigidity}.
 
 We first isolate the geometric input that removes degenerate conics from the
 computer-assisted part of the argument.
@@ -514,10 +506,14 @@ $k-1$ points on an external line
 \cite{BicharaKorchmaros1982,DrakeKeating2004,NgWild2001}. We give a direct
 proof because the three possible line positions are then handled together.
 
-\begin{lemma}[Six-arc line bound]
+\begin{lemma}[Line bound and conic-inscribed subcensus]
 \label{lem:six-arc-line-bound}
 Let $A$ be a six-arc in $\PG(2,q)$, where $q$ is odd. Every line contains at
 most $q-5$ points of $\cU(A)$.
+Moreover, if $q=11$ and $A$ lies on a nonsingular conic, then
+\[
+ |\cU(A)|\in\{18,19,20,22\}.
+\]
 \end{lemma}
 
 \begin{proof}
@@ -547,6 +543,9 @@ $p_4=(x,b)$ and $p_5=(a,b)$. Parallelism of $03$ with $15$ and with $24$
 gives two determinant equations whose difference is $2xy=0$, impossible
 for odd $q$. Thus a disjoint line has at least six covered points, and in
 all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
+
+The final assertion is the conic-inscribed subcensus of the independent
+rigidity replay listed in Table~\ref{tab:replays}.
 \end{proof}
 
 The line bound and chord-defect identity are proved here and in
@@ -1019,7 +1018,7 @@ without a symmetry hypothesis on the arc. A universal chord-multiplicity
 identity makes this a four-field question, and the only nontrivial residue
 is a classical exact-distance problem in the Sylvester graph.
 
-\begin{lemma}[Chord-defect identity]
+\begin{lemma}[Chord-defect identity and the $q=9$ obstruction]
 \label{lem:chord-defect}
 Let $A$ be a six-arc in $\PG(2,q)$, and let $c(A)$ be the number of points
 off $A$ incident with three of its fifteen chords. Then
@@ -1029,6 +1028,23 @@ off $A$ incident with three of its fifteen chords. Then
 Consequently, if $|\cU(A)|=q+1$, then
 \[
  c(A)=(q-6)(q-9).
+\]
+
+For a nonsingular conic $\cC\subset\PG(2,9)$, let $\Sigma$ be the graph on
+the $36$ internal points in which
+\[
+ P\sim Q\quad\Longleftrightarrow\quad Q\in P^\perp
+\]
+for the conic polarity. Then $\Sigma$ is the Sylvester graph, with
+intersection array
+\[
+ \{5,4,2;1,1,4\}.
+\]
+For distinct internal points $P,Q$, the line $PQ$ is passant to $\cC$ if
+and only if $P$ and $Q$ are at distance two in $\Sigma$, and the graph
+joining pairs at distance two has clique number
+\[
+ \omega(\Sigma_2)=5.
 \]
 \end{lemma}
 
@@ -1047,29 +1063,7 @@ $q^2+q-5$ points off $A$ proves the identity. Each triple concurrence
 uses one of the fifteen perfect matchings of the six endpoints, and a fixed
 matching can be concurrent at only one point; hence $c(A)\le15$. The last
 display follows on setting $|\cU(A)|=q+1$.
-\end{proof}
 
-\begin{lemma}[The Sylvester distance-two obstruction]
-\label{lem:sylvester-distance-two}
-Let $\cC$ be a nonsingular conic in $\PG(2,9)$, and let $\Sigma$ be the
-graph on the $36$ internal points in which
-\[
- P\sim Q\quad\Longleftrightarrow\quad Q\in P^\perp
-\]
-for the conic polarity. Then $\Sigma$ is the Sylvester graph, with
-intersection array
-\[
- \{5,4,2;1,1,4\}.
-\]
-For distinct internal points $P,Q$, the line $PQ$ is passant to $\cC$ if
-and only if $P$ and $Q$ are at distance two in $\Sigma$. The graph joining
-pairs at distance two in $\Sigma$ has clique number
-\[
- \omega(\Sigma_2)=5.
-\]
-\end{lemma}
-
-\begin{proof}
 The standard conic counts give the displayed intersection array and hence
 identify $\Sigma$ as the Sylvester graph
 \cite[\S13.1.2]{BrouwerCohenNeumaier1989}; see also the combinatorial
@@ -1105,7 +1099,7 @@ It remains to exclude $q=9$. Since every point of $\cC$ is uncovered, no
 chord of $A$ meets $\cC$; every chord is therefore passant. A point off
 $\cC$ lies on five passants if it is internal and four if it is external,
 so the five chords through each vertex force all six vertices of $A$ to be
-internal. Lemma~\ref{lem:sylvester-distance-two} would then make $A$ a
+internal. Lemma~\ref{lem:chord-defect} would then make $A$ a
 six-clique in the distance-two graph of the Sylvester graph, whose clique
 number is five. This is impossible.
 

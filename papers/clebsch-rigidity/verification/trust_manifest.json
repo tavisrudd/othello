@@ -92,7 +92,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 110",
+      "paper_location": "source line 113",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -165,7 +165,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 235",
+      "paper_location": "source line 236",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -258,7 +258,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 305",
+      "paper_location": "source line 306",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -274,7 +274,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 340",
+      "paper_location": "source line 341",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -322,7 +322,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 377",
+      "paper_location": "source line 378",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -449,7 +449,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 428",
+      "paper_location": "source line 426",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -464,13 +464,13 @@
         "No external input; complete combinatorial proof in the manuscript"
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 515",
+      "paper_location": "source line 509",
       "route": "conceptual-cited-inputs",
       "row": 16,
       "source": {
         "id": "lem:six-arc-line-bound",
         "kind": "theorem-environment",
-        "sha256": "f7093d5e61f7da818bfc8d09a1b3d93fa8be07e08a1035937263d922a313f51f"
+        "sha256": "840ab87722acfa9044ed68465bc83f8d3cd88b92da764d40df94ac3d7e9aa714"
       },
       "trust_boundary": "The line bound is a complete human combinatorial proof and claims no computational or Lean route.",
       "unconditional_remainder": "The entire statement is unconditional."
@@ -586,7 +586,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 658",
+      "paper_location": "source line 666",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -602,7 +602,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 683",
+      "paper_location": "source line 691",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -658,7 +658,7 @@
         "soundness_bridge": "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits."
       },
       "id": "thm-gap",
-      "paper_location": "source line 739",
+      "paper_location": "source line 745",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -674,7 +674,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 900",
+      "paper_location": "source line 906",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -755,7 +755,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 950",
+      "paper_location": "source line 956",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -814,7 +814,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 969",
+      "paper_location": "source line 972",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -875,13 +875,13 @@
         }
       ],
       "id": "lem-chord-defect",
-      "paper_location": "source line 1018",
+      "paper_location": "source line 1021",
       "route": "mixed",
       "row": 24,
       "source": {
         "id": "lem:chord-defect",
         "kind": "theorem-environment",
-        "sha256": "020b4b13260b54a2c2eba1c44c1cbb7cd717d571c83a043d17deb999cf826ae4"
+        "sha256": "b8c616f76684f9980354959e8cfd3c5b86cf0e88858f8b9b2905719e37f298f9"
       },
       "trust_boundary": "Lean checks the exact chord-defect algebra; the manuscript supplies the secant-moment interpretation."
     },
@@ -963,7 +963,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1051",
+      "paper_location": "source line 1078",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1041,7 +1041,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1098",
+      "paper_location": "source line 1111",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1141,7 +1141,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1158",
+      "paper_location": "source line 1170",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1185,7 +1185,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 591",
+      "paper_location": "source line 600",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1203,9 +1203,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "362e947a842958c6208aed479708e2926077c6b7e2a3ba01a3080787760e1247"
+    "sha256": "4ea6c394efb02b6410a844bb060d5a0562ebf1d771e8d270d6d78986f648252d"
   },
-  "manuscript_sha256": "d2f8b362237eb627166d7bb032cfbaa14375350dd5f9bd07ce1a3f5a0ec797d9",
+  "manuscript_sha256": "830e1a6e33dc16ca424681473c26f8a2c2aab83cda6df905f6dd6c5d1312271f",
   "public_documents": [
     {
       "path": "README.md",
@@ -1215,7 +1215,7 @@
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "2a73d7ff5aa40afc429097e0260005d9f3b085c7d630967ac9fa67205e379d73"
+      "sha256": "7ecfede87631b4a6edbd281a01b23fa4a7d7429ad8431e038a84afd5765b0741"
     }
   ],
   "reproducibility_environment": {
@@ -1245,7 +1245,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "4fcf539118f616963ec441e7f1fdce54b9c4539a365beaf3d988bc3896e997c7"
+    "sha256": "e4b6153a400c29839d45df95380d8b9027ba6cb225dc42c0abb1000512802d22"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1450,7 +1450,7 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "94e514d3cc7de42a99280ff779e6a22cd1b93a9bd457b16515f5cf1b2ea65cca"
+      "sha256": "6aee5bbbee2b73aceccf059532cbfd20d288ca2bb62cf993913ac4591ca6f2ae"
     },
     "output": {
       "path": "verification/verify-release-output.json",

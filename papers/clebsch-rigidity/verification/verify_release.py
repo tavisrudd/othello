@@ -130,6 +130,11 @@ def main() -> int:
         default=paper_root / "verification" / "trust_manifest.json",
     )
     parser.add_argument("--lean-root", type=Path, required=True)
+    parser.add_argument(
+        "--update-output",
+        action="store_true",
+        help="replace the deterministic release-output certificate after all checks pass",
+    )
     args = parser.parse_args()
     repositories = {
         "paper": paper_root.resolve(),
@@ -293,7 +298,9 @@ def main() -> int:
     }
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     expected_output = paper_root / "verification" / "verify-release-output.json"
-    if expected_output.read_text(encoding="utf-8") != rendered:
+    if args.update_output:
+        expected_output.write_text(rendered, encoding="utf-8")
+    elif expected_output.read_text(encoding="utf-8") != rendered:
         raise RuntimeError(f"stale deterministic release output: {expected_output}")
     print(rendered, end="")
     return 0
