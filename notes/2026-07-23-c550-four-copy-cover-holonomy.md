@@ -4,86 +4,528 @@
 
 **Date:** 2026-07-23
 
-**Status:** queued; highest-EV conceptual successor to C548
+**Status:** complete; positive linear-sheaf and cycle-transport theorem
 
-## Goal
+## The theorem
 
-Replace C548's 720-matrix rank-drop proof by one intrinsic four-sheeted cover theorem.  The six
-party permutations define six perfect matchings between four ket-copy vertices and four bra-copy
-vertices.  Equip this bipartite multigraph with the rank-three data carried by the six code
-columns.  Prove that the contraction kernel is its space of global sections, with the universal
-three-dimensional diagonal kernel as the constant sections.
-
-Use this object to derive, rather than recognize afterward,
+Let \(V\) be the three-dimensional message space of the admitted six-column pencil, and let
+\(g_i:V\to k\), \(0\leq i<6\), be its six coordinate covectors.  Fix the six matchings between
+four ket copies and four bra copies
 
 ```text
-(z-2)(9z-4)=0
+sigma = (1, (03)(12), (23), (02)(13), (01)(23), (021)).
 ```
 
-and the tetrahedral/octahedral double-coset multiplicities `96/192`.
+For a party assignment \(p\in S_6\), form the bipartite four-sheeted cover with vertices
+\(L_a,R_b\), \(0\leq a,b<4\), and a color-\(i\) edge
 
-## Required proof shape
+```text
+L_a ---- R_{sigma_i(a)}
+```
 
-The proof must transfer the mechanism, not merely shorten the computation.
+for every \(a\).  Put stalk \(V\) at every vertex, stalk \(k\) at every edge, and use \(g_{p(i)}\)
+as both restriction maps to a color-\(i\) edge.  A global section is therefore a tuple
+\((x_a,y_b)\in V^8\) satisfying
 
-1. Begin with one concrete four-sheeted cover and show how its constant sections produce the
-   universal kernel.
-2. State the section-obstruction theorem before introducing coordinates.  A reader should know at
-   this point what structural feature can create one extra section.
-3. Gauge away the constant sections, decompose the remaining equations by cycles or transport
-   paths, and reduce the obstruction to the smallest natural holonomy blocks.
-4. Read `z=2,4/9` from those blocks.  Then classify the corresponding cover automorphisms and
-   obtain `96/192`; do not present the counts before the objects they count.
-5. Put the 720-term certificate in a verification paragraph or appendix whose only role is to
-   check the conceptual reduction and exceptional fibres.
+```text
+g_{p(i)}(x_a-y_{sigma_i(a)}) = 0
+```
 
-The successful exposition should let an adjacent expert answer, without consulting the checker:
-why four sheets are the first useful size, why there are two resonances, why their multiplicities
-differ by a factor of two, and why characteristic 7 merges them.
+on all 24 edges.  The three-dimensional space
 
-## Acceptance gate
+```text
+x_0=x_1=x_2=x_3=y_0=y_1=y_2=y_3
+```
 
-1. Define the cover or linear sheaf functorially under common copy relabelling, party relabelling,
-   and projective code equivalence.  Prove that its section operator is row/column equivalent to
-   C548's `24 x 21` quotient matrix.
-2. Identify the intrinsic cover types supporting an extra section.  Recover their automorphism
-   groups and seams as
+is the constant-section space.  Subtracting \(y_0\) from all eight vertex values gauges it away
+and leaves exactly C548's 24 equations in 21 variables.
 
-   ```text
-   (S4 x C2, D8 x C2; C2^3)
-   and
-   (S4, S4 x C2; S3),
-   ```
+Put
 
-   and derive `48*16/8=96` and `24*48/6=192`.
-3. Reduce the section obstruction to small cycle-transport or holonomy blocks and derive the two
-   resonance values `z=2,4/9` without using the 720 maximal-minor calculations as the
-   load-bearing proof.
-4. Explain the signed `4/9` sheets, the common `A4` quotients `8/16`, and the characteristic-7
-   merger from the same construction.  Keep boundary and ramification phenomena separate from
-   the reduced `z`-line theorem.
-5. Give an exact verification bridge back to C548's certificate.  Follow
-   `papers/style-guide.md`: lead with the cover and theorem, expose the point where understanding
-   is won, and keep verification mechanics out of the conceptual proof.  The acceptance judgment
-   is based primarily on whether the proof clarifies the mechanism.
+```text
+A = -4t(t-1)^2,
+B = (t^2-t+1)(t^2-3t+1),
+w = B/A,
+z = w^2.
+```
 
-## Stop rule
+On the admitted pencil \(2t(t-1)BG\ne0\), the sheaf has a nonconstant global section precisely in
+the following three intrinsic relative-cover types:
 
-Stop positively when one intrinsic cover/holonomy theorem implies both the divisor and the
-multiplicities.  Stop sharply negatively if the proposed cover language only renames the original
-matrix or if the constants still require the full Fitting computation.
+| transport type | localized obstruction | reduced value | party assignments |
+|:---|:---|:---|---:|
+| common marked axis | \(B^2-2A^2\) | \(z=2\) | 96 |
+| negative signed six-cycle | \(3B-2A\) | \(w=2/3\) | 192 |
+| positive signed six-cycle | \(3B+2A\) | \(w=-2/3\) | 192 |
 
-Do not launch a larger contraction census, higher-copy search, general AME classification, or
-paper rewrite.  Four-copy minimality and the uniform `LU iff LC iff equal z` conjecture remain
-separate gated successors.
+The two signed types lie over the single reduced value \(z=4/9\).  Each active sheaf has exactly
+one nonconstant section at the generic point of its component.  Consequently the reduced
+rank-drop divisor is
 
-## Frozen inputs
+```text
+(z-2)(9z-4)=0.
+```
 
-- `notes/2026-07-23-c548-c397-contraction-rank-drop-divisor.md`
-- `notes/2026-07-23-c548-c397-contraction-rank-drop-divisor.py`
-- `notes/2026-07-23-c548-c397-contraction-rank-drop-divisor.json`
-- `notes/2026-07-23-c397-ame-perfect-tensor-physics.md`
-- `notes/2026-07-23-c396-holonomy-completeness.md`
-- `papers/style-guide.md`
+One transport object therefore determines both values and both multiplicities.  C548's
+maximal-minor calculation is no longer load-bearing.
 
-Any new paper-facing computation must use a report/script/canonical-certificate/checksum bundle.
+## From sections to a nine-dimensional transport operator
+
+Let \(C\subset k^6\) be the code generated by the covectors \(g_i\).  Applying the generator map
+at each copy identifies a section with two arrays in \(k^4\otimes C\), whose \(i\)-th coordinate
+columns differ by the copy permutation \(\sigma_i\).  Quotient the copy space by its constant line:
+
+```text
+U = k^4 / k(1,1,1,1).
+```
+
+The six matchings act on the rank-three space \(U\).  Write their actions as \(\rho_i\).  Choose
+code coordinates 3, 4, and 5 as the free coordinates.  The first three generator rows, in those
+free coordinates, are
+
+```text
+Q = [a b c]
+    [a c b]
+    [d d d],
+
+a = -2(t-1)^2,
+b = -(t^2-t+1),
+c = -(t^2-3t+1),
+d = -2(t-1).
+```
+
+If \(Y_k\in U\) is the free copy-vector at coordinate \(3+k\), the remaining section equations
+are
+
+```text
+sum_k Q_ik (rho_i-rho_{3+k}) Y_k = 0,       i=0,1,2.
+```
+
+Thus the section obstruction is the kernel of the \(3\)-by-\(3\) block operator
+
+```text
+T_p = (Q_ik (rho_i-rho_{3+k}))_{i,k=0}^2
+```
+
+on \(U^3\).  Each block is a two-matching holonomy:
+
+```text
+rho_i-rho_j = rho_j(rho_j^-1 rho_i-I).
+```
+
+The relative permutation \(\rho_j^{-1}\rho_i\) is read from the even cycles in the union of the
+two matchings.  The original 24 edge equations have become a \(9\)-by-\(9\) transport operator
+whose nine \(3\)-by-\(3\) blocks depend only on the four-sheeted cover.
+
+This reduction is functorial.  Common ket or bra copy relabelling conjugates the \(\rho_i\) and
+changes bases in \(U\); party relabelling reindexes the six colors; a message-space basis change
+changes bases in the vertex stalks; and projective rescaling of a code column rescales the
+corresponding edge equations.  All induce row and column equivalences of \(T_p\).  Reintroducing
+the constant copy line and undoing the systematic elimination gives C548's `24 x 21` quotient
+matrix.  In particular,
+
+```text
+21-rank(M_p) = 9-rank(T_p)
+```
+
+over every field where the displayed pencil is defined.
+
+Four copies matter because their quotient by constants is the three-dimensional standard
+\(S_4\)-module, the first copy quotient that carries the faithful three-axis reflection geometry
+used below.  Two and three copies give quotient ranks one and two and cannot carry this
+octahedral transport frame.  Four sheets are therefore the first useful size for this mechanism;
+this is not a claim of global invariant-degree minimality.
+
+## The cycle ledger derives the resonance values
+
+The pencil coefficients satisfy
+
+```text
+a = b+c,
+d^2 = -2a,
+A = a(c-b),
+B = bc.
+```
+
+Expand \(\det T_p\) by permutations, but group terms by their occupation numbers in the nine
+holonomy blocks before substituting the pencil.  The integer coefficient of each monomial is the
+signed count of the corresponding cycle covers of those blocks.  After using \(a=b+c\), the three
+supporting relative-cover types give
+
+```text
+P_- =
+  -2bc^5 + 3b^2c^4 + 4b^3c^3 - 3b^4c^2 - 2b^5c
+  = A B (3B-2A),
+
+P_+ =
+   2bc^5 + 3b^2c^4 - 4b^3c^3 - 3b^4c^2 + 2b^5c
+  = A B (3B+2A),
+
+P_2 =
+  -2c^6 + 7b^2c^4 - 7b^4c^2 + 2b^6
+  = A (B^2-2A^2).
+```
+
+With the chosen integral bases, the exact determinant identities are
+
+```text
+det T_- = 64 d^3 A B (3B-2A),
+det T_+ = 64 d^3 A B (3B+2A),
+det T_2 = 64 d^3 A   (B^2-2A^2).
+```
+
+The factors \(64d^3A\), and \(B\) in the signed cases, are units on the admitted odd pencil.
+Hence the smallest localized holonomy blocks are the one-dimensional obstructions
+
+```text
+[3B-2A], [3B+2A], [B^2-2A^2].
+```
+
+The integers 2 and 3 in the resonance values are therefore signed cycle-cover multiplicities.
+They are not fitted from the 720 rank calculations.  The certificate obtains the displayed
+polynomials by a direct Leibniz cycle ledger and independently obtains the same determinants by
+fraction-free elimination.
+
+### The reciprocal root spectrum
+
+Set \(r=b/c\).  After the boundary roots \(r=0,\infty,\pm1\) are removed, the three cycle
+polynomials have the root orbits
+
+```text
+P_-:   r in { 1/2,-2  },       paired by r -> -1/r,
+P_+:   r in {-1/2, 2  },       paired by r -> -1/r,
+P_2:   r^2 in {1/2,2},         paired by r^2 -> 1/r^2.
+```
+
+Since
+
+```text
+w = B/A = r/(1-r^2),
+z = r^2/(1-r^2)^2,
+```
+
+the first two orbits map immediately to \(w=2/3\) and \(w=-2/3\), while the last maps to
+\(z=2\).  Thus the signed sheets are reciprocal root orbits before they are components of the
+\(t\)-pencil.  The anti-reciprocal shape of the transport ledger forces the pairing; translating
+the roots through \(r\mapsto w\) produces the resonance values.
+
+### Identification with C396's quotient
+
+C396 used
+
+```text
+y = (t-1)^2/t,
+w = -(y-y^-1)/4.
+```
+
+The two systematic coefficients satisfy
+
+```text
+b/t = -(y+1),
+c/t = -(y-1).
+```
+
+Consequently
+
+```text
+r = b/c = (y+1)/(y-1),
+y = (r+1)/(r-1).
+```
+
+Thus \(r\) is the Cayley transform of C396's coordinate.  Its deck dictionary is
+
+```text
+y ->  1/y    becomes    r -> -r,
+y -> -y      becomes    r ->  1/r,
+y -> -1/y    becomes    r -> -1/r.
+```
+
+The reciprocal symmetries forced by the transport cycles are exactly the four deck
+transformations in C396's projective quotient.  In particular, the transport frame determines
+\(r\) only up to \(\{r,-r,r^{-1},-r^{-1}\}\), while \(z\) is its intrinsic quotient.  This
+identifies the C550 linear-sheaf cover with the C396 moduli cover rather than merely reproducing
+its scalar.
+
+### Ramification and the exceptional primes
+
+The \(r\)-coordinate depends only on \(s=t+t^{-1}\):
+
+```text
+r = (s-1)/(s-3).
+```
+
+Hence \(t\mapsto r\) has branch points at \(t=\pm1\).  The point \(t=1\) gives the excluded
+boundary root \(r=-1\).  The unique nonboundary branch is
+
+```text
+t=-1,       r_* = 3/5.
+```
+
+Evaluate the three pairs of nonboundary transport factors at \(r_*\):
+
+```text
+axial:
+  2r_*^2-1 = -7/25,       r_*^2-2 = -41/25;
+
+negative signed:
+  2r_*-1   =  1/5,        r_*+2   =  13/5;
+
+positive signed:
+  2r_*+1   = 11/5,        r_*-2   =  -7/5.
+```
+
+Thus \(7,11,13,41\) are exactly the primes at which the sole nonboundary ramification point
+collides with a transport resonance root.  Characteristic seven hits both an axial and a signed
+factor and produces the merger.  Characteristics 11, 13, and 41 hit only one factor, so they
+double a root in the \(t\)-pullback without changing the section dimension or reduced divisor.
+This recovers C548's full nonboundary exceptional-prime list from the holonomy root picture.
+
+## Relative octahedral frames and the multiplicities
+
+The code columns carry the opposite-pair frame
+
+```text
+M0 = {{0,1},{2,3},{4,5}}.
+```
+
+The reduced transport ledger carries the frame
+
+```text
+M1 = {{0,4},{1,3},{2,5}},
+```
+
+obtained from \(M_0\) by
+
+```text
+q = (0,4,1,3,2,5).
+```
+
+For the axial transport type, the pair \(\{0,4\}\) of \(M_1\) is marked.  Relabelling the
+construction conjugates these frames, so their relative position is intrinsic.
+
+Let
+
+```text
+O  = Stab(M0)                         ~= C2 wr S3 ~= S4 x C2,
+O+ = orientation-preserving part     ~= S4,
+E  = Stab_O({0,1})                    ~= D8 x C2.
+```
+
+Here \(O\) is the full octahedral action on the six vertices \(\{\pm e_1,\pm e_2,\pm e_3\}\),
+\(O^+\) is its rotation subgroup, and \(E\) preserves one opposite pair and its equatorial
+square.
+
+There are only four relative positions in either relevant double-coset problem:
+
+```text
+O  \ S6 / qEq^-1:    sizes 48, 96, 192, 384,
+O+ \ S6 / qOq^-1:   sizes 48, 192, 192, 288.
+```
+
+For the first line the types are, respectively: equal frames; one shared pair with the marked
+axis shared; one shared pair with another axis marked; and disjoint frames.  Only the second type
+supports \(B^2-2A^2\).  A representative is
+
+```text
+g2 = (0,2,3,4,1,5).
+```
+
+Its common automorphism group is
+
+```text
+O intersect g2(qEq^-1)g2^-1 ~= C2^3.
+```
+
+This subgroup has a two-point axial orbit and a four-point equatorial orbit.  Hence
+
+```text
+|O g2 qEq^-1| = 48*16/8 = 96.
+```
+
+For the second line, equal frames give the 48-cell and one shared pair gives the 288-cell.
+Disjoint frames have two relative orientations, represented by
+
+```text
+g- = identity,
+g+ = (4 5).
+```
+
+They are exactly the two signed holonomy types.  In each case the common automorphism group is a
+regular triangular \(S_3\):
+
+```text
+O+ intersect g±(qOq^-1)g±^-1 ~= S3.
+```
+
+Therefore each signed support has size
+
+```text
+|O+ g± qOq^-1| = 24*48/6 = 192.
+```
+
+This also explains the factor of two between the multiplicities.  The signed type keeps the full
+transport octahedral group but orients the code frame; the axial type keeps the full code
+octahedral group but marks one transport axis.  Their seam orders are 6 and 8.
+
+The derived subgroup
+
+```text
+[O+,O+] ~= A4
+```
+
+is the common tetrahedral rotation group.  It acts freely by left multiplication on every
+support, giving the exact quotients
+
+```text
+96/12 = 8,
+192/12 = 16.
+```
+
+### Representation correction to C548
+
+C548's abstract group orders and double-coset counts are correct, but two descriptions of their
+actual six-point actions need correction.
+
+- The order-24 left group is the rotational octahedral action on six vertices.  Its point
+  stabilizer is \(C_4\).  It is not the tetrahedral edge action of \(S_4\), whose point stabilizer
+  is \(V_4\); those two degree-six \(S_4\)-actions are not conjugate in \(S_6\).
+- The axial \(C_2^3\) seam has orbit sizes \(2+4\), not \(2+2+2\).  It is the axial swap times an
+  equatorial Klein four, not the coordinate-sign subgroup.
+
+The common derived \(A_4\), the abstract isomorphism types, all support sizes, and the `8/16`
+quotients are unchanged.
+
+There is a second useful boundary.  The unweighted colored bipartite multigraph by itself has
+only four party automorphisms after allowing bipartition swaps.  The octahedral groups above are
+automorphisms of the reduced **linear transport frame**—the cover together with its rank-three
+sheaf and systematic holonomy—not of the bare multigraph.  This distinction prevents the cover
+language from hiding the linear mechanism that creates the resonance.
+
+## Signed sheets and characteristic seven
+
+The two disjoint chiral relative-frame cells carry
+
+```text
+3B-2A=0  <=>  w= 2/3,
+3B+2A=0  <=>  w=-2/3.
+```
+
+Squaring forgets their relative orientation and gives \(z=4/9\).  The common \(A_4\) forgets no
+further signed cell: each 192-cell remains a union of sixteen free \(A_4\)-orbits.
+
+In characteristic seven,
+
+```text
+9B^2-4A^2 = 2(B^2-2A^2).
+```
+
+Equivalently \(4/9=2\).  At an admitted point of the merged divisor, one of the two signed
+one-dimensional holonomy blocks and the axial block vanish simultaneously.  Their party
+double cosets are disjoint, so their kernel counts add:
+
+```text
+96+192 = 288.
+```
+
+This derives C548's characteristic-seven histogram from the same transport construction.  It is
+an arithmetic collision of two obstruction blocks, not an enlargement of either cover
+automorphism group.
+
+More precisely, the following integral scheme identity holds:
+
+```text
+(3B-2A)(3B+2A) - 2(B^2-2A^2) = 7B^2.
+```
+
+Thus the signed union and axial root schemes themselves coincide modulo seven after localization
+at \(B\).  In the \(r\)-coordinate, both become the four-point set
+\(\{\pm2,\pm1/2\}\) over \(\mathbf F_7\); the merger occurs before passage to \(z\).
+
+Characteristics 3 and 5 remain boundary coincidences: the relevant obstruction specializes to
+the excluded pencil boundary.  The root calculation shows that characteristics 11, 13, and 41
+affect only ramification of the \(t\)-pullback.  None changes the reduced transport theorem.
+
+## Exact evidence and replay
+
+From the repository root:
+
+```bash
+python3 notes/2026-07-23-c550-four-copy-cover-holonomy.py --check
+sha256sum -c notes/2026-07-23-c550-four-copy-cover-holonomy.sha256
+```
+
+The dependency-free checker hash-pins and consumes C548's frozen checker and certificate.  It:
+
+- constructs the \(9\)-by-\(9\) two-matching transport operator from the six copy permutations;
+- expands its determinant independently as a signed cycle-cover ledger and verifies the three
+  displayed factorizations;
+- classifies the four axial and four oriented relative-frame cells, testing only one transport
+  representative per double coset;
+- constructs \(O,O^+,E\), both seams, and the common derived \(A_4\) as exact permutation groups;
+- matches the three conceptual double cosets exactly to all six C548 component masks; and
+- independently compares the kernels of the `24 x 21` section matrix and `9 x 9` transport matrix
+  for all 720 party assignments at
+  \((q,t)=(7,2),(7,4),(7,6),(11,10),(13,12),(41,40)\).
+
+The finite bridge recovers
+
+```text
+q=7:       transport ranks 8^288, 9^432
+q=11,13:   transport ranks 8^192, 9^528
+q=41:      transport ranks 8^96,  9^624,
+```
+
+exactly matching C548's quotient ranks \(20/21\).  The trusted boundary is exact integer
+polynomial arithmetic, deterministic finite-field Gaussian elimination, the elementary
+section-to-systematic-transport elimination above, and exact permutation-group closure.  The
+Leibniz cycle ledger and fraction-free determinant are independent arithmetic paths; the finite
+section/transport replay is a third evaluation path.
+
+The adjacent checksum manifest records byte counts and SHA-256 hashes for this report, checker,
+and canonical JSON certificate.
+
+## `ej`/Tao closeout and mystery ledger
+
+The closeout supplied six cheap upgrades.  It replaced the order-histogram group labels by one
+relative-opposite-frame classification, identified the two signed supports as the two
+orientations of a disjoint six-cycle, recovered all three resonance values from reciprocal
+\(r=b/c\) root orbits, identified \(r\) as the Cayley transform of C396's moduli-cover
+coordinate, recovered all four nonboundary exceptional primes as collisions with the unique
+nonboundary ramification point, and separated automorphisms of the linear transport frame from
+automorphisms of the bare cover.  The last point also exposed and corrected the two degree-six
+representation descriptions inherited from C548.
+
+The Tao stress test asked whether the octahedral language was intrinsic or inferred from abstract
+orders.  Constructing the actual six-point groups answers this sharply: the order-24 point
+stabilizer is \(C_4\), the axial seam has orbit partition \(2+4\), and the bare-cover party image
+is only \(V_4\).  It also asked whether \(r\) was a new coordinate choice; the Cayley identity
+shows that it is C396's existing cover in the basis selected by transport.  No recognition step
+remains load-bearing.
+
+| feature | disposition |
+|:---|:---|
+| Why the universal kernel has dimension three | **Settled:** it is the constant-section space of the rank-three vertex sheaf. |
+| Whether the `24 x 21` matrix is only analogous to the sheaf operator | **Settled:** gauging one bra stalk gives that matrix exactly; systematic code elimination gives the `9 x 9` transport operator with equal excess kernel dimension. |
+| Why four sheets are useful | **Settled for this mechanism:** \(k^4/k1\) is the rank-three standard \(S_4\)-module carrying the faithful octahedral frame.  No global invariant-degree minimality is claimed. |
+| Why there are two reduced resonances | **Settled:** the three one-dimensional localized obstruction blocks are \(B^2-2A^2\) and \(3B\mp2A\); the latter pair squares to one reduced value. |
+| Where the constants 2 and 3 come from | **Settled:** they are the signed cycle-cover coefficients in the displayed transport polynomials. |
+| Whether the resonance values can be read before returning to the \(t\)-pencil | **Settled by `ej`:** the reciprocal \(r=b/c\) root orbits map directly to \(w=\pm2/3\) and \(z=2\). |
+| Whether the transport cover is separate from C396's projective cover | **Settled by `ej2`:** \(r=(y+1)/(y-1)\) conjugates C396's deck transformations to the transport reciprocal symmetries. |
+| Why exactly \(7,11,13,41\) are the nonboundary exceptional primes | **Settled by `ej3`:** at the sole nonboundary branch \(r_*=3/5\), the axial factors evaluate to \(-7/25,-41/25\) and the signed factors to \(1/5,13/5,11/5,-7/5\). |
+| Why the multiplicities are `96/192` | **Settled:** one marked-axis and two chiral relative-frame double cosets have seams \(C_2^3\) and \(S_3\). |
+| Why the signed sheets are distinct | **Settled:** they are the two orientations of disjoint opposite-pair frames, exchanged by `(4 5)`. |
+| Why the `A4` quotients are `8/16` | **Settled:** the common derived tetrahedral group acts freely on the supports. |
+| Why characteristic 7 gives 288 | **Settled and sharpened by `ej2`:** the integral identity with residual \(7B^2\) makes the axial and signed-union root schemes coincide modulo seven, while their double cosets remain disjoint. |
+| Whether the full octahedral groups act on the bare graph | **Settled negatively:** the bare cover has party image \(V_4\); the octahedral symmetry belongs to the linear transport frame. |
+| C548's tetrahedral-edge and coordinate-reflection descriptions | **Settled by correction:** the actual actions are rotational octahedral with \(C_4\) point stabilizer and axial/equatorial \(C_2^3\) with orbit sizes \(2+4\). |
+| Four-copy minimality among all LU invariants | **Outside the stop rule:** C397's complete two-/three-copy failure remains the available bounded evidence; C550 proves no general minimality theorem. |
+| Uniform `LU=LC` on the pencil | **Outside the stop rule:** no claim or computation here addresses it. |
+
+No task-owned mystery remains.
+
+## Vibe check
+
+Excellent.  The 720-matrix divisor has collapsed to a nine-block cycle-transport calculation, the
+resonance constants are visible in five- and four-term polynomials, and one relative octahedral
+frame explains both multiplicities.  The representation correction makes the result sharper
+rather than changing any count.
