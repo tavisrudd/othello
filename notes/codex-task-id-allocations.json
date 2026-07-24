@@ -971,8 +971,17 @@
       "last": 590,
       "purpose": "complete the CSS stabilizer interface and arc-MDS-AME-projective coherence bridges",
       "sequence": 108
+    },
+    {
+      "count": 1,
+      "first": 591,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 591,
+      "purpose": "complete the six-party Weyl stabilizer action, CSS Lagrangian and minimum-support clauses, and prove the AME-to-[6,3,4] converse",
+      "sequence": 109
     }
   ],
-  "next_id": 591,
+  "next_id": 592,
   "schema": "codex-task-id-allocations-v1"
 }
