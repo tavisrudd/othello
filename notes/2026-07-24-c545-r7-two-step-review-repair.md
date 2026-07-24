@@ -53,7 +53,11 @@ the central nucleus singleton; Proposition 6.10 cites both lower exclusions;
 its lower-net variable is no longer overloaded; the quadratic-gcd
 catalecticant clause is explicit; and the R7 \(x=r\) branch is controlled by
 the degree-at-most-six evaluation minors inside the marked
-self-collision divisor.
+self-collision divisor.  A final referee check caught one remaining
+presentation defect inside Proposition 6.10: its conclusion
+\(\lambda_0\notin\{x,s\}\) was still bare.  The invocation now points
+locally to both preceding ingredients---the fixed-\(x\) minors and the
+pointed self-collision exclusion for \(s\).
 
 ## EJ + TT closeout
 
@@ -79,7 +83,8 @@ geometric threshold or open a new finite-field interval.
 | R7 uses the lower secant and cyclic/wild exclusions | Proposition 6.10 cites Propositions 6.3 and 6.4/6.5 at the two uses | none |
 | The lower-net letter collides with the ambient syndrome \(f\) | Proposition 6.10 uses \(h\) for the lower syndrome and \(g\) for a member | none |
 | A contraction has quadratic gcd | The rank-at-most-two three-row catalecticant clause points to the transverse degree-three and contained alternatives | none |
-| The exact-linear-gcd root equals the retained marker | Degree-at-most-six evaluation minors place the branch inside the existing degree-eight marked self-collision divisor | no new deletion term |
+| The R7 exact-gcd-one root equals the first marker \(r\) | Degree-at-most-six evaluation minors place the branch inside the existing degree-eight marked self-collision divisor | no new deletion term |
+| The Proposition 6.10 lower gcd equals \(x\) or \(s\) | The invocation now cites the fixed-\(x\) minors immediately above and Proposition 6.4's pointed self-collision exclusion for \(s\) | no new deletion term |
 
 ## Mystery ledger
 

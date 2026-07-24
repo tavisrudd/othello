@@ -70,7 +70,9 @@ representative index, and field-gap sentence.  A third reader independently
 reconstructed the degree-16 package, verified the fixed-factor and
 marker--gcd branches, and reproduced sample census invariants; the R7
 `REVIEW-GATE` is closed.  Its six remaining editorial findings are repaired,
-and the exact repair and mystery ledger are in
+and the final missing cross-reference at
+\(\lambda_0\notin\{x,s\}\) now names both the fixed-factor-minor and
+pointed-collision exclusions.  The exact repair and mystery ledger are in
 `notes/2026-07-24-c545-r7-two-step-review-repair.md`.  External
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
