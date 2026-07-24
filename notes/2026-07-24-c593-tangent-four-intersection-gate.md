@@ -288,6 +288,69 @@ forward-citation graphs were not queried because this bounded mechanism check
 does not claim citation-graph or priority closure.  No located load-bearing
 primary source was inaccessible.
 
+## Characteristic-two equality arithmetic
+
+The even-\(k\) equality alternatives from C558 collapse almost completely
+when the plane order is a power of two.
+
+### Theorem
+
+Let \(q=2^n\) and let \(k\ge6\) be even.  If a
+\(\mathcal C\)-complete \(k\)-arc has zero defect, then
+\[
+ k=q+2
+ \qquad\text{or}\qquad
+ (q,k)=(4096,92).
+\]
+Thus \((4096,92)\) is the only even, square-root-scale zero-defect parameter
+pair in a Desarguesian plane of characteristic two.
+
+### Proof
+
+Put \(Q=k-2\).  C558 gives exactly
+\[
+ q=Q,\qquad q=\frac{Q(Q+1)}2,\qquad
+ q=\frac{Q(Q+1)}2+1.
+\]
+The first alternative is \(k=q+2\).  In the second,
+\[
+ Q(Q+1)=2^{n+1}.
+\]
+Since \(Q\) is even and \(\gcd(Q,Q+1)=1\), the odd factor \(Q+1\) would have
+to equal one, impossible for \(Q\ge4\).
+
+In the third alternative, set \(x=2Q+1=2k-3\).  Then
+\[
+ x^2+7=8q=2^{n+3}.
+\]
+The Ramanujan--Nagell theorem says that the only positive solutions of
+\(x^2+7=2^N\) have
+\[
+ (N,x)=(3,1),(4,3),(5,5),(7,11),(15,181).
+\]
+Here \(N=n+3\ge5\).  The remaining values give
+\[
+ (q,k)=(4,4),(16,7),(4096,92),
+\]
+and only the last has even \(k\ge6\).
+
+For the Diophantine input, Banwait,
+[*A Formal Proof of the Ramanujan--Nagell Theorem in Lean
+4*](https://arxiv.org/abs/2604.09808), arXiv:2604.09808 (2026), was read at
+`partial` depth: Introduction, the theorem statement, Sections 2.1--2.2, and
+Section 2.8.  The cached arXiv PDF was fetched 2026-07-24, has 18 pages and
+SHA-256
+`a138007f55d02c3440e4697490ca43753d8b4750eb472c84e7992b24c5256508`.
+It supplies both a conventional proof exposition and a machine-checked Lean 4
+formalization of the complete solution list.
+
+This is an exact equality classification, not the requested asymptotic gain.
+Excluding zero defect supplies only the smallest positive local defect unless
+a stability theorem amplifies it.  The robust mixed-block GDD / tangent-contact
+problem therefore remains the load-bearing C593 gate; the arithmetic result
+removes every even square-root-scale exact equality case except one finite
+parameter pair.
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -323,3 +386,5 @@ hypotheses have been checked against this tangent-derived set.
 | Does the binary hull identity hit a classified weight range? | Open: the relevant word has weight \(k(q+2-k)\asymp q^{3/2}\), so small-weight results may not reach it. |
 | Must the regular focus family contain a generalized-hyperfocused resolution? | Open in general; both certified \(k=10\) classes pass the bounded existence test, so resolution alone does not detect rank-three realizability. |
 | Can the mixed-block GDD be completed to a genuine embedded net? | No: the embedded-net pencil theorem would force the noncollinear arc bases to be collinear.  A new near-net stability theorem would be required. |
+| Which even characteristic-two square-root parameters can attain exact zero defect? | Reduced arithmetically to the single pair \((q,k)=(4096,92)\); hyperoval-scale \(k=q+2\) remains separate. |
+| Does that equality classification improve the asymptotic lower bound? | Not alone: one needs a defect-stability gap, not merely \(\Delta_{\mathcal C}(A)>0\). |
