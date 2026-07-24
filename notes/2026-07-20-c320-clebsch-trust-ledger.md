@@ -220,6 +220,29 @@ cannot upgrade C425's rank-two depth plane to the full information lattice by na
 coordinate bridge remains a separately routed semantic input unless the manuscript states only the
 intrinsic finite profile theorem C494 actually checks.
 
+## Admitted replacement-spine core
+
+The eight F1--F8 gates are now admitted at their bounded theorem surfaces.  The hashes below are
+the current import-gate bytes; final pinning still requires the release aggregate and manuscript
+adequacy pass.
+
+| slice / gate hash | audited surface | admitted boundary |
+|---|---:|---|
+| C420 MomentTrade / `9fcf52697e5db82e044306da48f179c32b44d36e19d57cfd14eb650bb0771a77` | 14 selected symbolic terminals; final tracked paper audit required | affine covariance, antipodal even cancellation, barycentre cancellation, exact-strength-two witness, and functional shadows only; no concrete Clebsch sheet hypotheses |
+| C421 ConicMatchingQuotient / `bf378789f1b2f3fd5b6e2a0731a2f153e3b819bffba55c85aafeb946ea6c4d03` | 10 inline-audited terminals | exact switch identity/divisibility, list-permutation pullback equality, generic augmentation kernel, pointwise boundary identities, arbitrary-size switch reversibility, and `Fin 4` connectivity; no general matching graph connectivity, switch span, geometric restriction kernel, or word-weight theorem |
+| C422 HarmonicQuotient / `cc4f8617ebe4e5fa46e66ca142a6c3adeec021679f6c96aab2f391c93f856e51` | 34-terminal tracked audit gate | symbolic degree-`1/2/4` harmonic/radial decompositions, dimensions, exact characteristic obstructions, prime-field instances, and the F2 switch-radial bridge; no unrestricted-degree decomposition |
+| C423 Factorization / `3b2cc11aeae1cfa9b7cc8b8d05d1a2c292337266d9c8a4ac0d45d46bbcb36d02` | 16-terminal tracked audit gate | checked A3/B3/H3 image ranks `3/6/10`, lower signed cancellations, and named B3/H3 cubic witnesses; literal coordinate binding remains tied to its generated evidence bundle |
+| C424 BalancedSheets / `9ea2ba12de452fb6eef09f34d4c204c6e3bc9573f4b317108dea7fe3b714d5c8` | 52 reported terminals; final tracked paper audit required | abstract radical--Hadamard recovery, concrete B3/H3 balanced-sheet uniqueness, affine signed actions, nonzero cubics, relative invariance, exact stabilizers, and plane syzygies; classical `PSL/PGL` identification remains input |
+| C425 DoubleCosetDepth / `a1113d23bf3ba65b74f4e8528960870da54e38618aa53029c7ceb31c94ee36d4` | 34 embedded probes | literal orbit/profile tables, `1,4,6 / 1,4,6`, involution, rank two/four-kernel, label separation, cubic-first pushforward, singleton pair recovery, and decorated-parent recovery; named double-coset/group and scheme-Fourier semantics remain external |
+| C426 SchemeFourier / `6a17f12f095aade20e5887d0c951da273febbcc9f23f8ea4ea025f8189cbebfa` | 12 reported terminals; final tracked paper audit required | abstract character/scalar-line identities, frozen `P=Q`, product/shape/valency rows, and all 126 additive-nonclosure witnesses; association-scheme rank, geometric Fourier self-duality, intersection/Krein equality, and the 877-fusion census remain exact external certificate/replay unless separately upgraded |
+| C427 ReplacementSpine / `17edb28f4b4c77929973eada93eacb92ea03bb17b8c2b7604fcfa567d0134e3a` | 13 embedded probes | committed intrinsic support-chirality/replacement-spine endpoint at its exact types; rank-16 and automorphism semantics remain external, and completion used the recorded user waiver after prose repairs |
+
+All admitted C420--C428 full-trust terminals use only the recorded standard Lean axioms or a
+subset; none of these rows imports C504's native-decision axioms.  This table deliberately keeps
+the C423 rank statements, C424 sheet-recovery statements, C425 profile statements, and C426
+Fourier-table statements separate: their composition is the paper mechanism, not a single theorem
+whose import upgrades every semantic bridge.
+
 ## Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly
