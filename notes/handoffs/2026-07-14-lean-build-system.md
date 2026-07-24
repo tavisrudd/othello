@@ -3,9 +3,9 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-awaits a quiet Lean worktree; C287 first-tag source inventory is frozen with public rewrites
-pending; C162 blast radius and the restart-guard failure suite landed, and the remaining C162
-streams need a quiet window
+awaits a quiet Lean worktree; C287 source inventory and theorem ledger are frozen with adoption
+decisions pending; C162 blast radius and the restart-guard failure suite landed, and the remaining
+C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -136,8 +136,14 @@ found ten files with private note or handoff references and seven more with defi
 residue; source owners must rewrite and review those 17 modules before C287 exports them. Report:
 [`../2026-07-23-c287-first-tag-source-contract.md`](../2026-07-23-c287-first-tag-source-contract.md).
 
-**Next:** while existing Lean runs remain active, finish the 51-file referee review and coordinate
-the 17 source-owner public rewrites. Do not export certificate payloads before C318/C319/C324 and
-the recorded Q16/Q11/Q13 trust gates; do not elaborate or build until a confirmed quiet build-owner
-window. The first commits must include reviewed source manifests and public rewrites, not
-scaffold-only history.
+The theorem audit separates a 26-file adopted human claim closure, a 27-file advertised mirror
+closure, and the disjoint 24-file `FiniteGeom` library-seeding component. `FiniteGeom.lean` has no
+terminal declaration. The audit also exposes a missing final sum-free terminal and the external
+Q11/Q13 terminals whose package provenance and authoritative axiom facts remain unresolved. Report:
+[`../2026-07-23-c287-first-tag-theorem-ledger.md`](../2026-07-23-c287-first-tag-theorem-ledger.md).
+
+**Next:** decide claim-minimal versus library-seeding first tag and hyperbolic-quadric adoption;
+then finish only the adopted closure's referee review and coordinate its source-owner rewrites.
+Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
+do not elaborate or build until a confirmed quiet build-owner window. The first commits must
+include reviewed source manifests and public rewrites, not scaffold-only history.

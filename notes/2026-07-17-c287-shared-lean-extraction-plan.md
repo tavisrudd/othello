@@ -1,7 +1,7 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; first-tag source inventory frozen, public rewrites pending
+**Status**: IN PROGRESS; source inventory and theorem ledger frozen, adoption decisions pending
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -67,6 +67,13 @@ files and 12,987 code lines, with 41 external imports all supplied by Mathlib an
 certificate-family source. Ten closure files still cite private notes or handoffs, including three
 with task IDs; seven more contain other definite workflow residue. All 17 need source-owner public
 rewrites, and the whole-closure referee review precedes export.
+
+The theorem-level audit in `notes/2026-07-23-c287-first-tag-theorem-ledger.md` shows that the adopted
+human manuscript terminals need 26 files / 8,954 code lines; the advertised hyperbolic-quadric
+result adds one file; and the `FiniteGeom` umbrella contributes a completely disjoint 24-file
+component with no first-release terminal declaration. It also records the missing final sum-free
+terminal and the still-unverified external Q11/Q13 assembly terminals. The 51-file inventory is
+therefore a valid size-bounded candidate, not yet the final paper claim manifest.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed

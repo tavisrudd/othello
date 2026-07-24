@@ -3,6 +3,12 @@
 **Lane**: `build-sys`
 **Status**: CANDIDATE SOURCE INVENTORY FROZEN; public prose review and rewrites remain
 
+The theorem-level adoption and axiom boundary are analyzed separately in
+`notes/2026-07-23-c287-first-tag-theorem-ledger.md`. That audit distinguishes the 26-file adopted
+human claim closure, the 27-file advertised mirror closure, and the disjoint 24-file `FiniteGeom`
+library-seeding component. This 51-file inventory remains the approved candidate contract until the
+user decides whether the first tag is claim-minimal or deliberately library-seeding.
+
 ## Contract
 
 The first `finitegeom` tag uses the shared-library umbrella plus the positive mirror outcomes
@@ -90,7 +96,10 @@ against all 51 source files.
 
 ## Next gate
 
-Obtain source-owner rewrites for the 17 workflow-bearing modules and complete the whole-closure
-referee review. Then regenerate the inventory, verify that only reviewed changes altered hashes,
-stage the exact source set with its public infrastructure rewrites, and run the clean public build
-only in a confirmed quiet build-owner window.
+First resolve the source-boundary decisions in the theorem ledger: claim-minimal versus
+library-seeding, adoption of the hyperbolic-quadric theorem, the missing sum-free terminal, and the
+external Q11/Q13 trust manifests. Then obtain source-owner rewrites for the workflow-bearing modules
+inside the adopted boundary and complete its whole-closure referee review. Regenerate the inventory,
+verify that only reviewed changes altered hashes, stage the exact source set with its public
+infrastructure rewrites, and run the clean public build only in a confirmed quiet build-owner
+window.
