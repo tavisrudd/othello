@@ -768,6 +768,20 @@ the opponent made no progress). Induction on `Ω` would prove P. Without such an
 “P-preserving survival” is circular and equivalent to the desired game result.
 Report: [`../2026-07-24-c80-secbarrier-survival-absorption.md`](../2026-07-24-c80-secbarrier-survival-absorption.md).
 
+**The canonical strict-overload kernel is identified and passes the finite escape gate (C80,
+2026-07-24), but still needs geometric compression.** Define `K_Ω` well-foundedly from the
+`Y_NK` overload-zero boundary by requiring every opponent move to have a reply in a strictly lower
+`Ω` layer. This is value-independent, proves `K_Ω⊆P` by induction, and is maximal: every family
+satisfying the corrected C80 clauses lies inside it. Exact replay finds `K_Ω=P` on every reachable
+fixed-pair residual state at q=5/7, on all 210 raw mixed q=11 escape roots (135 P), and exactly on
+the P roots in the frozen size-four q=13/17 escape domains (q17: 5/10, initial overload up to 844).
+This validates strict-overload descent
+semantically but does not release C82: recursive kernel membership is not an algebraic packet.
+The live crown is to compress the q17 response map into an opponent-marked incidence or
+residual-hypergraph rule and prove uniform escape-root membership without evaluating `K_Ω`.
+Report+script+certificate:
+[`../2026-07-24-c80-strict-overload-kernel.md`](../2026-07-24-c80-strict-overload-kernel.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -794,13 +808,13 @@ Priority order and why:
 1. **C80 (spine).** Everything gates on it. The fixed-depth frontier is closed-negative:
    no twelve-cap can be `capOK` once `q≥67`; generally `capOK` for an `s`-cap forces
    `q≤binom(s,2)`. The secant barrier is only necessary, not sufficient, and even post-barrier
-   `capOK` does not force P. The exact absorption clock is total capacity-two overload `Ω`,
-   which is monotone and strictly controllable by an overloaded-line move. The live frontier is
-   therefore to identify a value-independent survivor family `F` containing the chosen escape
-   child, prove `F∩{Ω=0}⊆Y_NK`, and prove strict-overload response closure back into `F` after
-   every opponent move (using an overloaded-line reply when needed); induction on `Ω` then supplies the P-value. Do not define `F` by P-value,
-   and do not spend another probe on a bounded-depth witness selector, bounded-gadget patch, or
-   bounded-dimensional terminal guard.
+   `capOK` does not force P. Total capacity-two overload `Ω` is the exact absorption clock.
+   The canonical maximal strict-overload family `K_Ω` is now defined value-independently from the
+   `Y_NK` boundary; well-founded induction proves it P, and exact q=5/7/13/17 gates pass. The live
+   frontier is geometric compression: extract an opponent-marked incidence/residual-hypergraph
+   response packet from the q17 kernel certificate and prove the chosen odd-q escape child belongs
+   to `K_Ω` uniformly. Recursive membership alone does not release C82. Do not spend another probe
+   on a bounded-depth witness selector, bounded-gadget patch, or bounded-dimensional terminal guard.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

@@ -1,0 +1,251 @@
+{
+  "claim_scope": "The recursively defined strict-overload kernel is value-independent and supplies a well-founded response certificate into its Y_NK boundary. The finite checks establish membership only on the listed exact domains; they do not prove uniform odd-q membership.",
+  "exhaustive_small_orders": [
+    {
+      "certified_response_edges": 25,
+      "domain": "every reachable residual cap state after the fixed opening pair",
+      "exact_p_states": 301,
+      "kernel_states_visited": 726,
+      "q": 5,
+      "response_map_sha256": "c8d550026c8e74d8da073d0593129473af8a3a9ac17eb28e90e9e62cb36efcdd",
+      "states": 726,
+      "strict_kernel_equals_exact_p": true,
+      "strict_kernel_states": 301,
+      "symmetric_difference": 0,
+      "ynk_boundary_states": 300
+    },
+    {
+      "certified_response_edges": 17689,
+      "domain": "every reachable residual cap state after the fixed opening pair",
+      "exact_p_states": 11467,
+      "kernel_states_visited": 19160,
+      "q": 7,
+      "response_map_sha256": "f6c38da02214eaf6a8d27c01f2daf4a97a4ae582fb7b4c262e533070e0b2f7bd",
+      "states": 19160,
+      "strict_kernel_equals_exact_p": true,
+      "strict_kernel_states": 11467,
+      "symmetric_difference": 0,
+      "ynk_boundary_states": 10584
+    }
+  ],
+  "frozen_escape_orders": [
+    {
+      "certified_response_edges": 446,
+      "domain": "unique size-four on-conic escape roots in the frozen C20 P-reply corpus",
+      "exact_p_roots": 5,
+      "kernel_states_visited": 733,
+      "omega_max": 108,
+      "omega_min": 72,
+      "q": 13,
+      "records": [
+        {
+          "exact_cap_value": "P",
+          "omega": 108,
+          "strict_kernel": true,
+          "t4": [
+            1,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 102,
+          "strict_kernel": true,
+          "t4": [
+            3,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 72,
+          "strict_kernel": true,
+          "t4": [
+            4,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 90,
+          "strict_kernel": true,
+          "t4": [
+            7,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 92,
+          "strict_kernel": true,
+          "t4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "response_map_sha256": "6741118268a2badd2f6e4b30c83128e0a78a7061fded9817bc13b9dec4917608",
+      "roots": 5,
+      "strict_kernel_iff_exact_p_on_domain": true,
+      "strict_kernel_roots": 5,
+      "ynk_boundary_states": 279
+    },
+    {
+      "certified_response_edges": 59419,
+      "domain": "unique size-four on-conic escape roots in the frozen C20 P-reply corpus",
+      "exact_p_roots": 5,
+      "kernel_states_visited": 138221,
+      "omega_max": 844,
+      "omega_min": 772,
+      "q": 17,
+      "records": [
+        {
+          "exact_cap_value": "N",
+          "omega": 832,
+          "strict_kernel": false,
+          "t4": [
+            1,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "omega": 832,
+          "strict_kernel": false,
+          "t4": [
+            2,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 772,
+          "strict_kernel": true,
+          "t4": [
+            3,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "omega": 832,
+          "strict_kernel": false,
+          "t4": [
+            3,
+            4,
+            5,
+            9
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 808,
+          "strict_kernel": true,
+          "t4": [
+            4,
+            5,
+            7,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "omega": 832,
+          "strict_kernel": false,
+          "t4": [
+            4,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 820,
+          "strict_kernel": true,
+          "t4": [
+            6,
+            7,
+            8,
+            14
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "omega": 844,
+          "strict_kernel": false,
+          "t4": [
+            6,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 796,
+          "strict_kernel": true,
+          "t4": [
+            11,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "omega": 820,
+          "strict_kernel": true,
+          "t4": [
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      ],
+      "response_map_sha256": "0ae6aec57d596451023ea663c179ed4b2b86da10232f0fee8f8b8a37ca326028",
+      "roots": 10,
+      "strict_kernel_iff_exact_p_on_domain": true,
+      "strict_kernel_roots": 5,
+      "ynk_boundary_states": 30909
+    }
+  ],
+  "mixed_escape_crosscheck": {
+    "certified_response_edges": 3013,
+    "domain": "every raw size-four on-conic root after fixing conic parameters 0 and infinity",
+    "exact_p_roots": 135,
+    "kernel_states_visited": 4201,
+    "omega_max": 14,
+    "omega_min": 10,
+    "q": 11,
+    "response_map_sha256": "fabfe22a72418aa49e4fb5e69b1695af6a5c159571e18abd489c5201b6874c23",
+    "roots": 210,
+    "strict_kernel_iff_exact_p": true,
+    "strict_kernel_roots": 135,
+    "symmetric_difference": 0,
+    "ynk_boundary_states": 1713
+  },
+  "schema": "c80-strict-overload-kernel-v1",
+  "source": {
+    "bytes": 654965,
+    "path": "notes/data/c20-q13-q17-states.jsonl.gz",
+    "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+  }
+}
