@@ -436,10 +436,11 @@ aggregate command then completed all 8,734 jobs at that pin.  One first attempt 
 host at the large B3 kernel reduction; serially prebuilding that unchanged leaf and rerunning the
 unchanged aggregate command from cache succeeded.
 
-The standalone environment, real `finitegeom` repository URL, new Lean pin, and regenerated
-manifest landed in `6f9fca2c`.  A final public-tree scan then found and removed two stale internal
-workflow references from export prose; the checker hash and manifest were refreshed in `195f0aa7`.
-The post-cleanup 17-check release replay passed with the same deterministic output.
+The standalone flake definition was captured in `5dc8f50a`; its lock, the real `finitegeom`
+repository URL, the new Lean pin, and regenerated manifest landed in `6f9fca2c`.  A final
+public-tree scan then found and removed two stale internal workflow references from export prose;
+the checker hash and manifest were refreshed in `195f0aa7`.  The post-cleanup 17-check release
+replay passed with the same deterministic output.
 
 Reconciliation judgments with paper effects:
 
