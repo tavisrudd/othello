@@ -319,6 +319,22 @@ argument of Proposition~\ref{prop:r5-gcd1} is pointed as follows:
 besides its eight original deletions, remove the at most two graph
 points whose split quadratic contains the new marker.  Since
 \(q+1>10\), a split squarefree cubic avoiding that marker remains.
+Here the fixed gcd \(\lambda_0\) differs from the marker \(r\).
+Indeed, \(\lambda_0=r\) says that every cubic in \(W_{b(r)}\)
+vanishes at \(r\), so every lifted quartic has a double root there;
+this is one of the pointed-collision parameters already placed in
+\(Z_f\).  On an affine chart it is cut out by the \(3\)-minors of
+\[
+\begin{pmatrix}
+b_0(r)&b_1(r)&b_2(r)&b_3(r)\\
+b_1(r)&b_2(r)&b_3(r)&b_4(r)\\
+1&r&r^2&r^3
+\end{pmatrix}.
+\]
+Each minor has degree at most five in \(r\), and their common zero
+scheme is contained in the degree-six collision divisor of
+Proposition~\ref{prop:r6-degrees}; no additional deletion budget is
+needed.  Homogenizing gives the same statement at infinity.
 In the \(S_3\) case, Lemma~\ref{lem:s3} supplies the geometrically
 integral off-diagonal curve.  Its singular, diagonal, and branch
 deletions have degree at most thirteen, and deleting the unique cubic
@@ -326,7 +342,13 @@ through the marker removes at most six ordered pairs.  Thus
 \[
  (g,\delta,\kappa)=(1,19,1),\qquad q+1-2\sqrt q>19
 \]
-for every \(q\geq29\).  These data form the one-step package of
+for every \(q\geq29\).  Explicitly,
+\[
+\mathcal H_1(1,19)
+ =1+\left\lfloor(1+\sqrt{19})^2\right\rfloor=29,
+\qquad 30-2\sqrt{29}>19.
+\]
+These data form the one-step package of
 Definition~\ref{def:lower-package}, with \(d=13\), so
 Theorem~\ref{thm:induction} produces a split squarefree quartic.
 
@@ -381,10 +403,24 @@ The listed sources are disjoint.  The persistent locus has quadratic
 gcd, every finite exceptional row has trivial gcd, and the separate
 nucleus term occurs only for binary fields beyond the finite table.
 
-The five small tables are exhaustive computations.  Their semilinear
-orbit counts are \(18,5,2,2,1\); collision energy plus, in odd
-characteristic, the quintic root-divisor type separates the classes up
-to precisely Frobenius fusion.  Table~\ref{tab:r6-exceptional} prints
+The five small tables are exhaustive computations.  For an exceptional
+net \(W_f\), let \(I_f(r)\) be the number of irreducible cubic members
+of the quotient pencil \(W_{b(r)}\), including the infinity chart, and
+define its shared-root collision energy by
+\[
+                 E_f=\sum_{r\in\PP^1(\F_q)}\binom{I_f(r)}2.
+\]
+In odd characteristic let
+\[
+                 F_f(T,U)=\sum_{i=0}^5a_iT^{5-i}U^i
+\]
+be the binary quintic attached to \(f=(a_0:\cdots:a_5)\), and let
+\(\tau_5(f)\) be its rational factorization type; for example,
+\(1^3+2\) denotes a triple rational factor and an irreducible
+quadratic factor.  Their semilinear orbit counts are
+\(18,5,2,2,1\); \(E_f\), together in odd characteristic with
+\(\tau_5(f)\), separates the classes up to precisely Frobenius fusion.
+Table~\ref{tab:r6-exceptional} prints
 the canonical representatives, stabilizers, orbit sizes, and fusion
 lengths.
 
@@ -412,29 +448,64 @@ Coefficient collection gives
 \]
 the lift is squarefree exactly when $g(r)\ne0$.
 
-\begin{proposition}[Two-marker lower cover]\label{prop:r7-pointed}
-Let $x$ be a forbidden root on a trivial-gcd quartic net.  On the
-generic $S_3$ bottom fiber, the diagonal and branch divisors and the
-possible singular point and two marked-root fibers have total degree
-at most
-\[
-       13+6+6=25.
-\]
-Hence \(q+1-2\sqrt q>25\), and in particular every prime power
-\(q\geq37\), produces a split lower quartic avoiding \(x\).
+\begin{proposition}[Complete two-marker lower package]
+\label{prop:r7-pointed}
+Let \(W_f\) be a trivial-gcd quartic net and let \(x\) be a prescribed
+forbidden root.  Assume in characteristic two that \(f\notin\cN_3\).
+For every prime power \(q\geq37\), the net contains a split squarefree
+quartic avoiding \(x\).
 \end{proposition}
 
 \begin{proof}
-The R5 off-diagonal curve is geometrically integral of arithmetic genus
-one and has base deletion degree thirteen, including its possible
-rational singular point.  Each marker belongs to a unique cubic fiber,
-which contains at most six ordered pairs.  Deleting those two fibers
-gives
+By equivariance choose coordinates in which \(x\) is finite; all
+parameter equations below are then homogenized in \(s\), so the
+infinity chart is included.
+Choose the second contraction marker \(s\).  The unavailable values of
+\(s\) comprise: \(s=x\), of degree one; at most three intersections
+with the lower secant cubic; at most four intersections with the
+cyclic surface or its characteristic-three wild replacement; and at
+most six pointed self-collisions.  In characteristic two the cyclic
+replacement is a plane, so its pullback has degree at most one unless
+the polar line is contained in it, the excluded case
+\(f\in\cN_3\).  We must also exclude the parameters for which the
+lower pencil has fixed factor \(x\).  They are cut out by the
+\(3\)-minors obtained by appending the fixed evaluation row
+\((1,x,x^2,x^3)\) to the two Hankel rows of \(b(s)\), and hence have
+degree at most two in \(s\).  These minors are not all zero.  If they
+vanished identically, then
+\[
+  W_f\cap\{h:h(s)=0\}\subseteq\{h:h(x)=0\}
+\]
+for every geometric \(s\).  Given \(h\in W_f\), choose a geometric
+root \(s\) of \(h\); then \(h(x)=0\).  Thus \(x\) would divide every
+member of \(W_f\), contradicting the trivial-gcd hypothesis.  Hence
+the complete second-step parameter
+scheme has degree at most
+\[
+                         1+3+4+6+2=16<q+1.
+\]
+Choose \(s\) outside it.
+
+The resulting cubic pencil is neither persistent nor cyclic.  If it
+has exact linear gcd \(\lambda_0\), then
+\(\lambda_0\notin\{x,s\}\).  The graph proof of
+Proposition~\ref{prop:r5-gcd1} has eight original deletions; avoiding
+the two additional markers costs at most two graph points each.
+Since \(q+1>12\), a split squarefree cubic avoiding \(x\) and \(s\)
+remains.
+
+Otherwise the bottom cover has geometric monodromy \(S_3\).  Its
+off-diagonal curve is geometrically integral of arithmetic genus one.
+The singular, diagonal, and branch deletions cost at most thirteen,
+and the fibers through \(x\) and \(s\) cost at most six ordered pairs
+each.  Hence
 \[
  (g,\delta,\kappa)=(1,25,1),\qquad
  q+1-2\sqrt q>25,
 \]
-whose first prime-power solution is \(37\).
+whose first prime-power solution is \(37\).  In either case the cubic
+lifts through \(s\) to a split squarefree quartic in \(W_f\) avoiding
+\(x\).
 \end{proof}
 
 \begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
@@ -444,6 +515,10 @@ For $q\geq16$ it contains a split cubic avoiding both $x$ and $r$.
 \end{proposition}
 
 \begin{proof}
+If \(x=r\), every lifted quintic has the repeated factor
+\((t-r)^2\); this is exactly a marked self-collision and is removed by
+Proposition~\ref{prop:r7-collision}.  Thus the hypothesis \(x\ne r\)
+is the complementary branch, not an unproved genericity assumption.
 Put $S=\PP^1(\F_q)\setminus\{x,r\}$.  For ordered distinct
 $u,v\in S$, the map
 $w\mapsto\lambda(\ell_u\ell_v\ell_w)$ is linear.  If it vanishes
@@ -527,7 +602,8 @@ so the list is exhaustive.
 Certificate R7 unconditionally classifies every prime power
 $q\leq32$ in its displayed domain.  For every prime power $q\geq13$,
 the split-free syndromes
-at redundancy seven are the persistent stratum, together with the
+at redundancy seven are the persistent stratum of size
+\(q(q+1)^2/2\), together with the
 central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
 split-free orbit-size profiles are:
 \[
@@ -548,10 +624,23 @@ tangent splitting in characteristics two and three.
 \end{theorem}
 
 \begin{proof}
-For $q\geq37$, Propositions~\ref{prop:r7-pointed}--\ref{prop:r7-collision}
-give the transverse witness after at most three catalecticant
-intersections, eight self-collisions, and, in characteristic two, one
-intersection with the nucleus line.
+For fixed irreducible quadratic \(Q\), the persistent fiber has
+\(q+1\) points, while for \(Q=\lambda^2\) it has \(q\) non-rank-one
+points.  There are \(q(q-1)/2\) irreducible quadratics and \(q+1\)
+rational squares.  Hence the persistent count is
+\[
+ \frac{q(q-1)}2(q+1)+(q+1)q=\frac{q(q+1)^2}{2}.
+\]
+For \(q\geq37\), choose a first marker outside the at most three
+catalecticant intersections, eight marked self-collisions, and, in
+characteristic two, one intersection with the nucleus line.  If the
+contracted quartic net has trivial gcd,
+Proposition~\ref{prop:r7-pointed} supplies the complete second
+one-step package: it excludes the cyclic/wild carrier and
+fixed-gcd/marker coincidences before applying either the pointed
+linear-gcd graph or the \(S_3\) cover.  If the contracted net has exact
+linear gcd, Proposition~\ref{prop:r7-gcd1} applies; its excluded
+\(x=r\) case is already among the eight self-collisions.
 Corollary~\ref{cor:r7-contained} leaves exactly the persistent locus and
 Proposition~\ref{prop:r7-central}.  Certificate R7 covers
 \[
@@ -564,7 +653,39 @@ split-free list only from $q\geq11$.
 For the four finite rows Certificate R7 contains the canonical
 representative, stabilizer, persistent/central flags, and Frobenius link
 of every orbit.  The displayed size profile is only a compact summary;
-repeated sizes are distinguished by those canonical records.
+repeated sizes are distinguished by those canonical records.  There
+are respectively \(194,119,54,5\) exceptional representatives at
+\(q=7,8,9,11\); the complete lists are printed in
+\texttt{supplement/CLASSIFICATION-RECORDS.md}, while the matching JSON
+is the machine-readable record.  The following gives one printed
+canonical representative for every orbit-size block in the displayed
+profile; repeated orbits within a block are distinguished in the full
+list:
+\[
+\begin{array}{c|c|l}
+q&|\mathcal O|&\text{representative}\\ \hline
+7&56 &[0:0:0:0:1:0:0]\\
+ &84 &[0:1:0:0:0:1:0]\\
+ &112&[0:0:1:0:0:2:0]\\
+ &168&[0:0:0:0:1:0:1]\\
+ &336&[0:0:0:1:0:1:1]\\
+8&63 &[0:0:0:1:0:0:1]\\
+ &72 &[0:0:0:0:1:0:0]\\
+ &84 &[0:1:1:1:1:3:6]\\
+ &168&[1:0:1:1:3:7:7]\\
+ &252&[0:0:1:0:1:0:0]\\
+ &504&[0:0:1:0:1:0:1]\\
+9&180&[0:1:0:0:0:4:0]\\
+ &240&[0:0:1:0:1:1:1]\\
+ &360&[0:1:0:1:3:3:2]\\
+ &720&[0:0:1:1:0:2:2]\\
+11&264&[0:1:0:0:0:0:2]\\
+  &440&[1:0:1:1:4:3:3]\\
+  &660&[1:0:1:0:1:4:8].
+\end{array}
+\]
+For \(q=8,9\), the coordinates use the same polynomial-basis encoding
+specified below Table~\ref{tab:r6-exceptional}.
 
 The $q=19$ lower net $\langle1,t^3,t^4\rangle$ has six split members,
 all containing the marked point at infinity, yet no coherent sextic
@@ -601,3 +722,8 @@ deep-hole directions uses the separate covering-radius gate and is
 made only for $q\geq11$.  The public certificate schema and exact
 replay boundaries are given in the supplement; the table does not
 promote orbit-size profiles to identifiers.
+
+There is no prime power in any of the open numerical intervals
+\((19,23)\), \((27,29)\), or \((32,37)\).  Thus adjacent finite and
+geometric rows in Table~\ref{tab:field-ranges} leave no unlisted field
+order.

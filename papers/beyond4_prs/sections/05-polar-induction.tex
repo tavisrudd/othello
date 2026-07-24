@@ -135,7 +135,8 @@ lower package for \(f\) consists of:
 \item a finite parameter scheme \(Z_f\subset\PP(E^\vee)\), of degree
   at most \(d\), containing
   \(\Phi_f^{-1}(B_{n-1})\) and every parameter at which the preceding
-  construction is unavailable.
+  construction is unavailable, including parameters where a fixed
+  factor of the lower system equals a retained marker.
 \end{enumerate}
 The index \(\alpha\) includes any constant-field or Frobenius twist;
 the assertion in (iii) is the required descent statement.  All degrees
@@ -210,9 +211,9 @@ Let \(f\in S_n(\F_q)\) have a one-step lower package as in
 Definition~\ref{def:lower-package}.  Put
 \[
 \mathcal H_\kappa(g,\delta)=
-\left\lfloor
+1+\left\lfloor
 \left(g+\sqrt{g^2+\delta-\kappa}\right)^2
-\right\rfloor+1
+\right\rfloor
 \]
 and assume
 \(\delta_\alpha\geq\kappa_\alpha-g_\alpha^2\) for every \(\alpha\).
