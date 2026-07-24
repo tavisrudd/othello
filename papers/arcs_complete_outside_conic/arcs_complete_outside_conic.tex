@@ -50,7 +50,7 @@ hole and its complement gives an exact defect identity whose remainder is
 a sum of nonnegative local terms.  For a conic this yields an exact integer
 lower bound \(L_2(q)\), and in particular
 \[
- \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
+ \rhoC(q)\ge \sqrt{2q}+\frac32-4\sqrt{\frac2q}.
 \]
 Vanishing defect turns the concurrence points of disjoint secants into a
 matching design, giving equality rigidity and quantitative stability; for
@@ -764,6 +764,16 @@ additional mechanism, not merely a spectral estimate for $\IC(A)$.
 The first two nontrivial orders illustrate the distinction between an
 abstract matching design and its rank-three projective realization.
 
+\begin{definition}\label{def:rank-three-realization}
+A \emph{rank-three projective realization} of a
+\(\operatorname{MATCH}(k,m,1)\) design \(\mathcal D\) over a field \(K\)
+is an injective assignment \(i\mapsto p_i\in\PG(2,K)\) whose image is a
+\(k\)-arc and such that, for every matching \(M\in\mathcal D\), the \(m\)
+lines \(p_ip_j\), \(\{i,j\}\in M\), are concurrent.  Two matching designs
+are \emph{isomorphic} when a permutation of their \(k\) vertices carries
+the matching collection of one onto that of the other.
+\end{definition}
+
 \begin{corollary}[Six and seven points]
 \label{cor:six-seven-rigidity}
 \begin{enumerate}[label=(\alph*),leftmargin=2em]
@@ -827,24 +837,51 @@ The other abstract design has no rank-three realization over any field.
 \end{theorem}
 
 \begin{proof}
-Mathon's classification~\cite{Mathon1981}, as recorded by Alspach and
-Heinrich~\cite{AlspachHeinrich1990}, gives two abstract designs.  The exact
-enumeration in Appendix~\ref{app:verification} independently constructs
-representatives of both classes.
+Alspach and Heinrich allow repeated matchings in their definition, but
+when \(\lambda=1\) a repeated five-matching would repeat each of its pairs
+of edges and is therefore impossible.  Thus their statement that Mathon
+found precisely two nonisomorphic
+\(\operatorname{MATCH}(10,5,1)\) designs applies to
+Definition~\ref{def:rank-three-realization}
+\cite[pp.~39--40]{AlspachHeinrich1990}.  The exact enumeration in
+Appendix~\ref{app:verification} independently constructs representatives
+of both classes.
 
-Here is the realization test.  Normalize four vertices to a projective
-frame and represent each of the other six by two affine parameters.  For
-each matching block, the first two secants determine its proposed
-concurrence point; requiring each of the other three secants to pass through
-that point gives three determinant equations.  The \(63\) blocks therefore
-give \(189\) integral equations.  Exact module identities exclude both
-systems in odd characteristic and exclude the second design in
-characteristic two.  In the regular-hyperoval system the surviving
-triangular basis instead forces a parameter \(t\) with
-\(t^3+t+1=0\); the nondegeneracy conditions force \(t\notin\F_2\), so
-\(\F_8\subseteq K\).  The regular hyperoval over \(\F_8\) and scalar
-extension prove the converse.  Appendix~\ref{app:verification} records the
-certificate, independent checks, and replay boundary.
+Here is the realization test.  Relabel and normalize four vertices to
+\[
+ p_0=(1,0,0),\quad p_1=(0,1,0),\quad
+ p_2=(0,0,1),\quad p_3=(1,1,1).
+\]
+No remaining point lies on \(p_0p_1\), so write
+\(p_i=(x_i,y_i,1)\) for \(4\le i\le9\).  For each matching block, the
+first two secants determine its proposed concurrence point; requiring each
+of the other three secants to pass through that point gives three
+determinant equations.  The \(63\) blocks therefore give \(189\) integral
+equations, and together with the arc inequations they are necessary and
+sufficient for a realization.
+
+Only a necessary part of the arc open set is needed for the exclusions.
+Indeed,
+\[
+ \det(p_1,p_2,p_9)=x_9,\qquad
+ \det(p_1,p_3,p_9)=x_9-1,
+\]
+so every arc realization has \(x_9(x_9-1)\ne0\).  The certificate
+saturates the concurrency ideal by this product.  This enlarges, rather
+than shrinks, the locus that must be excluded: a unit saturated ideal
+therefore rules out every arc realization without claiming that this one
+product encodes all arc inequations.
+
+Exact rational module identities make both saturated ideals the unit ideal
+after inverting \(2\); because their only denominator prime is \(2\), the
+same identities exclude both designs in every odd characteristic.  In
+characteristic two the second design again has unit saturated ideal.  For
+the regular-hyperoval design, the surviving triangular basis instead forces
+a parameter \(t\) with \(t^3+t+1=0\); the arc inequations force
+\(t\notin\F_2\), so \(\F_8\subseteq K\).  The regular hyperoval over
+\(\F_8\) and scalar extension prove the converse.
+Appendix~\ref{app:verification} records the certificate, independent
+checks, and replay boundary.
 \end{proof}
 
 \section{An upper-bound transfer from complete arcs}
@@ -1300,14 +1337,12 @@ entry point for precisely the results used here.
 The pinned versions are Lean \(4.32.0\)-rc1, Lake
 \texttt{5.0.0-src+b4812ae}, and Mathlib revision
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  From the supplement's
-\path{lean/} directory, the exact replay is
-\[
-\begin{split}
-&\texttt{nix develop --command lake exe cache get},\\[-2pt]
-&\texttt{nix develop --command env LEAN\_NUM\_THREADS=1}\\[-2pt]
-&\qquad\texttt{lake build RelativeConicArcs.Gates.Relconic}.
-\end{split}
-\]
+\path{lean/} directory, the exact replay is:
+\begin{verbatim}
+nix develop --command lake exe cache get
+nix develop --command env LEAN_NUM_THREADS=1 \
+  lake build RelativeConicArcs.Gates.Relconic
+\end{verbatim}
 Success is exit status zero with a final Lake success report for the named
 gate; the gate itself has no runtime output.  With fetched dependencies, a
 direct single-thread elaboration took \(26\) seconds on the development
@@ -1332,18 +1367,17 @@ The ten-point bundle consists of
 \texttt{check\_match10\_rank\_three.py}, its JSON certificate, and
 \texttt{check\_match10\_rank\_three.sha256} in the paper directory.
 Running
-\[
-\begin{split}
-&\texttt{nix shell nixpkgs\#singular --command}\\[-2pt]
-&\qquad\texttt{python3 check\_match10\_rank\_three.py --check}
-\end{split}
-\]
+\begin{verbatim}
+nix shell nixpkgs#singular --command \
+  python3 check_match10_rank_three.py --check
+\end{verbatim}
 regenerates and checks the certificate.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
 direct \(\F_8\) incidence construction provide independent checks; abstract
 two-class completeness is the cited theorem of Mathon.  The
 odd-characteristic computation saturates by
-\(x_9(x_9-1)\), the normalized arc-nondegeneracy factor, and the checked
+\(x_9(x_9-1)\), the product of the two necessary arc determinants
+displayed in the proof of Theorem~\ref{thm:match-ten-realization}, and the checked
 rational module lifts have no denominator prime other than \(2\); hence
 their unit relations survive in every odd characteristic.
 
@@ -1457,27 +1491,6 @@ A.~Blokhuis, A.~Seress, and H.~A. Wilbrink,
 \newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
 \newblock doi:10.1007/BF01204717.
 
-\bibitem{Edge1956}
-W.~L.~Edge,
-\newblock Conics and orthogonal projectivities in a finite plane,
-\newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956), 362--382.
-
-\bibitem{DavydovEtAl2021}
-A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
-\newblock On the weight distribution of the cosets of MDS codes,
-\newblock \emph{Advances in Mathematics of Communications} \textbf{17}(5)
-(2023), 1115--1138.
-\newblock doi:10.3934/amc.2021042.
-\newblock arXiv:2101.12722v2.
-\newblock (Numbered results are cited by their arXiv~v2 numbering.)
-
-\bibitem{Dye1991}
-R.~H. Dye,
-\newblock Hexagons, conics, $A_5$ and $\operatorname{PSL}_2(K)$,
-\newblock \emph{Journal of the London Mathematical Society} (2)
-\textbf{44} (1991), 270--286.
-\newblock doi:10.1112/jlms/s2-44.2.270.
-
 \bibitem{Glynn1994}
 D.~G. Glynn,
 \newblock On the construction of arcs using quadrics,
@@ -1508,26 +1521,6 @@ G.~Korchm\'aros and T.~Sz\H{o}nyi,
 (2008), 20--38.
 \newblock doi:10.55016/ojs/cdm.v3i1.62767.
 
-\bibitem{KorchmarosNagySzonyi2024}
-G.~Korchm\'aros, G.~P. Nagy, and T.~Sz\H{o}nyi,
-\newblock Algebraic approach to the completeness problem for $(k,n)$-arcs
-in planes over finite fields,
-\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{204}
-(2024), 105851.
-\newblock doi:10.1016/j.jcta.2023.105851.
-\newblock arXiv:2302.10162.
-
-\bibitem{Kaipa2017}
-K.~Kaipa,
-\newblock Deep holes and MDS extensions of Reed--Solomon codes,
-\newblock \emph{IEEE Transactions on Information Theory} \textbf{63}
-(2017), 4940--4948.
-
-\bibitem{Mathon1981}
-R.~Mathon,
-\newblock The partial geometries $\operatorname{pg}(5,7,3)$,
-\newblock \emph{Congressus Numerantium} \textbf{31} (1981), 129--139.
-
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
 \newblock Saturating sets in projective planes and hypergraph covers,
@@ -1538,21 +1531,6 @@ Z.~L.~Nagy,
 S.-L. Ng and P.~R. Wild,
 \newblock On $k$-arcs covering a line in finite projective planes,
 \newblock \emph{Ars Combinatoria} \textbf{58} (2001), 289--300.
-
-\bibitem{StormeVanMaldeghem1995}
-L.~Storme and H.~Van Maldeghem,
-\newblock Primitive arcs in $\PG(2,q)$,
-\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
-(1995), 200--216.
-\newblock doi:10.1016/0097-3165(95)90051-9.
-
-\bibitem{StormeThas1991}
-L.~Storme and J.~A. Thas,
-\newblock Generalized Reed--Solomon codes and normal rational curves: an
-improvement of results by Seroussi and Roth,
-\newblock in \emph{Advances in Finite Geometries and Designs}, Oxford
-University Press, 1991, 369--389.
-\newblock doi:10.1093/oso/9780198535928.003.0031.
 
 \end{thebibliography}
 

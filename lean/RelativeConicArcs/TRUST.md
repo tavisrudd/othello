@@ -201,6 +201,16 @@ also records the triangular characteristic-two basis for the regular-hyperoval
 class and an independent direct `GF(8)` incidence construction with an exact
 transporter.
 
+Four vertices are normalized to `(1,0,0)`, `(0,1,0)`, `(0,0,1)`, and
+`(1,1,1)`; the remaining vertices are `(xi,yi,1)`.  Every arc realization
+has `x9 ≠ 0` and `x9 ≠ 1`, since these are the determinants of the triples
+formed by vertices `(1,2,9)` and `(1,3,9)`.  The Singular ideals are
+saturated by `x9*(x9-1)`.  This is deliberately only a necessary open
+condition, not a replacement for all arc inequations: proving the relaxed
+saturated ideal is the unit ideal is sufficient to exclude the smaller
+arc-realization locus.  The characteristic-two regular-hyperoval converse
+is checked separately by the direct `GF(8)` arc and incidence construction.
+
 Replay from the paper directory:
 
 ```text
@@ -216,9 +226,12 @@ the 77,767-byte JSON certificate has SHA-256
 Exact Python integer/finite-field arithmetic and Singular Gröbner bases and
 module lifts remain trusted executions.  The second monomial order and direct
 `GF(8)` incidence construction are independent checks.  Abstract completeness
-is Mathon's published two-class theorem, cited through
-Alspach--Heinrich's account because the primary proof was not available for
-direct inspection.  No Lean theorem consumes this certificate.
+is Mathon's published two-class theorem.  Alspach and Heinrich, “Matching
+Designs,” *Australasian Journal of Combinatorics* 2 (1990), 39--55, define
+`MATCH(n,k,λ)` designs on pp. 39--40 and record there that Mathon proved
+precisely two nonisomorphic `MATCH(10,5,1)` designs.  Their definition allows
+repeated matchings, but `λ=1` makes repetition impossible.  No Lean theorem
+consumes this certificate.
 
 ## Axiom audit
 
