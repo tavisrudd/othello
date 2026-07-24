@@ -14,7 +14,7 @@ structural and verbal discipline.
 At sentence level, add Strunk and White's injunction to “make every word tell”:
 omit needless words, prefer direct and concrete language, and revise until each
 sentence advances the argument. Economy must serve clarity; never compress away
-a load-bearing mathematical bridge.
+an essential mathematical step.
 
 - Make the central idea visible early. Give the reader the right picture,
   illuminating special case, or governing mechanism before asking them to carry
@@ -31,18 +31,15 @@ a load-bearing mathematical bridge.
   proved and let its content carry the emphasis.
 - Expand the point where understanding is won. Compress what is genuinely
   routine. Terseness is not a virtue when it hides the mechanism or makes a
-  referee reconstruct a load-bearing bridge.
+  referee reconstruct an essential step.
 
-The governing test is not merely whether a proof can be checked, but whether a
-qualified reader can say why it works, where the difficulty lies, and what the
-result changes. This is especially important when formal or computational
-artifacts settle correctness: the prose should spend its scarce space on
-meaning, mechanism, and significance while still exposing the exact trust
-boundary.
+A qualified reader should be able to say why the proof works, where the
+difficulty lies, and what the result changes. When formal or computational
+artifacts settle correctness, use the prose to explain the mathematics and mark
+the exact trust boundary.
 
 For proof-strategy sections, Thurston's *On Proof and Progress in Mathematics*
-offers a useful diagnostic: the goal is to transfer understanding, not merely
-to transmit a sequence of verifiable deductions.
+offers a useful diagnostic: exposition should transfer understanding.
 
 ## Governing principles
 
@@ -135,8 +132,8 @@ shape:
    give a roadmap only if it helps readers separate the main path from optional
    applications.
 
-This sequence is a default, not a demand for five labeled subsections. In a short
-paper, it may occupy a few well-shaped paragraphs.
+Treat this sequence as the default. In a short paper, it may occupy a few
+well-shaped paragraphs instead of five labeled subsections.
 
 ## Theorem and proof architecture
 
@@ -147,8 +144,8 @@ paper, it may occupy a few well-shaped paragraphs.
 - Keep one theorem focused on one conceptual scale. Split global classification,
   local stability, and embedded perturbation results when combining them hides
   the headline.
-- Before a proof, identify any classical load-bearing input and any exhaustive
-  finite step. Inside the proof, say exactly where each enters.
+- Before a proof, identify any classical result on which it depends and any
+  exhaustive finite step. Inside the proof, say exactly where each enters.
 - For a substantial proof, provide a strategy paragraph or section that gives
   the honest causal picture rather than a list of lemma numbers. Name the step
   at which a plausible naive argument fails or the genuine bottleneck begins.
@@ -173,7 +170,7 @@ A computer-assisted paper should distinguish:
 4. certificate-checked computations; and
 5. trusted program executions or symbolic calculations.
 
-State explicitly when these categories interact. For every load-bearing finite
+State explicitly when these categories interact. For every essential finite
 computation, record the mathematical search domain, completeness or termination
 argument, symmetry reduction, deduplication, exact-arithmetic assumptions, and
 acceptance criterion. Identify the artifact and entry point, toolchain version,
@@ -201,18 +198,18 @@ Formalization changes the division of labor but does not remove authorial
 responsibility. The artifact checks a formal statement within an explicit trust
 base; the paper must still communicate the idea and justify the correspondence
 between its definitions and the formal ones. When machine or AI assistance was
-used, required disclosures should be factual and brief. The strongest evidence
-of mathematical command is in the exposition itself: the right example, the
-correct warning, an honest account of the bottleneck, and a proof structure that
-reveals why the result is true.
+used, required disclosures should be factual and brief. Mathematical command
+should be evident in the exposition. Choose the right example, warn the reader
+at the right place, describe the difficulty honestly, and arrange the proof so
+that its idea is visible.
 
 ## Literature, novelty, and tone
 
 - Cite the source that proves the statement actually used, preferably at theorem
   or page level.
-- Verify load-bearing citations against the original source, including hypotheses
-  and conventions. Cite secondary accounts for exposition, not as evidence for a
-  stronger theorem than they establish.
+- Verify citations used in a proof against the original source, including
+  hypotheses and conventions. Cite secondary accounts for exposition, not as
+  evidence for a stronger theorem than they establish.
 - Distinguish “known object,” “known classification,” “known raw data,” and “new
   interpretation or consequence.”
 - Treat related work as part of the proof of relevance. Search it
@@ -239,10 +236,10 @@ reveals why the result is true.
   defensive remarks around similar terms.
 - Define acronyms at first use unless they are universal for the target venue.
 - Prefer semantic notation over notation tied to an implementation.
-- Before they become load-bearing, state domains, quantifiers, equivalence
-  relations, action conventions, projectivization conventions, and excluded
-  degenerate cases. Keep theorem statements, examples, tables, computations, and
-  formal definitions synchronized.
+- Before they are needed, state domains, quantifiers, equivalence relations,
+  action conventions, projectivization conventions, and excluded degenerate
+  cases. Keep theorem statements, examples, tables, computations, and formal
+  definitions synchronized.
 
 ## Figures, tables, and exact data
 
@@ -270,6 +267,26 @@ Check float placement and accessibility in the rendered PDF, not only the source
 - Remove phrases such as “it is worth noting,” “for completeness,” “in the best
   possible way,” and “we emphasize that” unless the emphasis changes how the
   result must be read.
+- Avoid the generic register common in chatbot output. Corpus studies repeatedly
+  single out “delve,” “intricate,” “meticulous,” “pivotal,” and “underscore.”
+  Other excess words include “comprehensive,” “crucial,” “enhance,” “insights,”
+  “nuanced,” “showcase,” “realm,” “seamless,” “unveil,” and “utilize.” None is
+  forbidden when it is exact. Clusters, repetition, and ornamental use call for
+  revision.
+- Check the syntax as well as the vocabulary. Instruction-tuned models favor
+  noun-heavy prose, nominalizations, present-participial clauses, and phrasal
+  coordination. Rewrite stacked abstractions; repeated “..., highlighting ...”
+  endings; uniform sentence and paragraph shapes; automatic transitions such as
+  “Moreover” and “Furthermore”; and stage labels that tell readers what the
+  section is doing after its structure has made that plain.
+- Cut canned rhetorical moves: corrective “not merely X but Y” contrasts,
+  habitual groups of three, symmetric mini-slogans, and generic closing claims
+  about broad significance. State the point directly.
+- Use these features as revision prompts, never as an authorship detector. The
+  corpus evidence describes population-level patterns; a word or construction
+  cannot establish how an individual passage was written.
+- Avoid architectural metaphors for logical dependence. Name the theorem,
+  hypothesis, computation, or inference that is actually needed.
 - Parentheses should clarify locally, not contain a second argument.
 - Lists should reveal parallel structure; they should not substitute for
   hierarchy.
@@ -305,6 +322,12 @@ Before submission:
 6. Address high-impact hierarchy and comprehension problems before polishing
    isolated sentences.
 
-The final test is simple: an expert in either primary discipline should be able to
-find the main theorem quickly, follow every language change, identify the trust
-boundary, and skip secondary detail without losing the argument.
+Before submission, ask an expert in either primary discipline to find the main
+theorem, follow every language change, identify the trust boundary, and skip
+secondary detail without losing the argument.
+
+The checklist for chatbot-like prose draws on corpus work by
+[Kobak et al.](https://doi.org/10.1126/sciadv.adt3813),
+[Juzek and Ward](https://aclanthology.org/2025.coling-main.426/),
+[Reinhart et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC11874169/), and
+[Kousha and Thelwall](https://doi.org/10.1007/s11192-026-05601-5).
