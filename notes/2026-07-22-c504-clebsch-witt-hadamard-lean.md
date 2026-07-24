@@ -137,9 +137,9 @@ The exact predecessor crosswalk is:
 | input | primary / replay / certificate / manifest | Lean literals or boundary consumed |
 |:--|:--|:--|
 | C452 | `notes/2026-07-21-c452-qr-barker.py`; `notes/2026-07-21-c452-qr-barker-replay.py`; `notes/2026-07-21-c452-qr-barker.json`; `notes/2026-07-21-c452-qr-barker.sha256` | `residueBlock`, `barkerWord`, cyclic incidence and correlation conventions |
-| C464 | `notes/2026-07-21-c464-perfect-code-spans.py`; `notes/2026-07-21-c464-perfect-code-spans-replay.py`; `notes/2026-07-21-c464-perfect-code-spans.json`; `notes/2026-07-21-c464-perfect-code-spans.sha256` | extended-code generator matrix, punctured and extended weight targets |
-| C469 | `notes/2026-07-21-c469-witt-golay-equivariance.py`; `notes/2026-07-21-c469-witt-golay-equivariance-replay.py`; `notes/2026-07-21-c469-witt-golay-equivariance.json`; `notes/2026-07-21-c469-witt-golay-equivariance.sha256` | Hadamard rows, secant shadow, frozen coordinate and full-support actions |
-| C470 | `notes/2026-07-22-c470-golay-hadamard-automorphisms.py`; `notes/2026-07-22-c470-golay-hadamard-automorphisms-replay.py`; `notes/2026-07-22-c470-golay-hadamard-automorphisms.json`; `notes/2026-07-22-c470-golay-hadamard-automorphisms.sha256` | parent/design/row generators, carrier relabelling, square conjugator; classical names remain cited-input only |
+| C464 | `notes/2026-07-21-c464-perfect-code-spans.py`; `notes/2026-07-21-c464-perfect-code-spans-replay.py`; `notes/2026-07-21-c464-perfect-code-spans.json`; `notes/2026-07-21-c464-perfect-code-spans.sha256` | punctured `[11,6,5]` row space, punctured weight distribution, and radius-two packing data |
+| C469 | `notes/2026-07-21-c469-witt-golay-equivariance.py`; `notes/2026-07-21-c469-witt-golay-equivariance-replay.py`; `notes/2026-07-21-c469-witt-golay-equivariance.json`; `notes/2026-07-21-c469-witt-golay-equivariance.sha256` | parity-extension/Hadamard boundary, Hadamard rows, secant shadow, frozen coordinate and full-support actions |
+| C470 | `notes/2026-07-22-c470-golay-hadamard-automorphisms.py`; `notes/2026-07-22-c470-golay-hadamard-automorphisms-replay.py`; `notes/2026-07-22-c470-golay-hadamard-automorphisms.json`; `notes/2026-07-22-c470-golay-hadamard-automorphisms.sha256` | exact 6×12 extended generator and extended targets; parent/design/row generators, carrier relabelling, square conjugator; classical names remain cited-input only |
 
 Replay from the repository root:
 
