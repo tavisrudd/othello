@@ -174,6 +174,30 @@ Likewise the arithmetic-gluing gate exposes separate no-root/root, fused/split, 
 outer-transporter, and bounded trichotomy terminals; the final ledger may not collapse them into a
 single “rank-three formalized” label.
 
+## Admitted closing-slice evidence blocks
+
+The following three reviewed slices are sufficiently stable for C320 to admit their exact evidence
+blocks now.  Admission means their gate identity and boundary are frozen for later claim rows; it
+does not mean that the replacement manuscript wording has passed adequacy comparison.
+
+| slice | reviewed implementation | gate SHA-256 / audited terminals | admitted route boundary |
+|---|---|---|---|
+| C503 arithmetic gluing | final `GO` on `983ba783` | `7519ec19b26e18869593cf24a883f8927ed887f35edb3e548dcc69e157cceaaa` / 23 | full-trust literal finite reductions, roots, matching actions, Coxeter orbits, bounded subgroup data, and transporters; external exact certificate for H3 stabilizer/coset/660-word semantics; cited classical group, spinor, and number-field names; no all-prime or descent claim |
+| C504 Witt--Hadamard | repaired gate pinned at `42683dff12835cef50094f2495a5a9103bb30d02` with final `GO` | `192570efea371c4f33fe48008f273d98588de512c34628945b4ad2e6d207d72e` / 25 | native-checked finite QR/code/design/Hadamard/closure/outer-hinge clauses with each declaration-local native axiom disclosed; `M11`, `M12`, `2.M12`, and `PSL_2(11)` remain cited names |
+| C506 survival boundaries | final `GO` on `51b21674` | `a4b992e61232a29e3c7eb1a56d0f028dcbca4e2fccb940c9d127d258778508b8` / 14 | standard-axiom finite hit/minor/inverse/intersection/residue-partition checks; semantic coordinate, character/Weil, five-space, golden-splitting, and transporter identifications remain certificate/cited inputs; universal impossibility, reciprocity, density, and parent claims excluded |
+
+C504's proposed single “F11 row” is rejected as a final ledger shape: its own report requires
+separate entries for QR incidence, code parameters, Steiner supports, full-support points, secant
+exhaustion, Hadamard identity, parent intersection/join, carrier inverse, closure/normalizer,
+inner-square, and non-inner row/column clauses.  Those clauses have different statement-adequacy
+targets even though they share one gate and native trust route.
+
+C506 likewise splits at least into four paper rows: the permitted lower-moment/integral-weight
+negative, the cross-sheet small-module obstruction, the frozen five-space intersection negative,
+and the conditional mod-40 partition.  The first three are exact finite-domain negatives, not
+universal nonexistence theorems; the fourth does not formalize reciprocity, prime densities, or the
+golden semantic identification.
+
 ## Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly
