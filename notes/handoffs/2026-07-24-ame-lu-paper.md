@@ -172,7 +172,7 @@ no-build checks, and standard-axiom audit passed.  See
 `2026-07-24-c568-ame-lu-lean-logical-phase.md`.
 
 **C569 closed (2026-07-24): transport divisor interface complete.**
-`RelativeConicArcs.AMELU.TransportDivisor` defines the concrete reduced
+`RelativeConicArcs.AMELU.TransportDivisor` defines the parametric reduced
 `9 × 9` block operator; proves all three cycle-polynomial factorizations,
 the exact `(B^2-2A^2)(9B^2-4A^2)` and `(z-2)(9z-4)` divisor identities,
 the rank-excess arithmetic, and the characteristic-seven doubled scheme and
@@ -182,6 +182,20 @@ rank bridge, generic kernel dimension, and double-coset recognition remain
 named hypotheses.  The import gate, exact no-build checks, and standard-axiom
 audit passed.  See
 `2026-07-24-c569-ame-lu-lean-transport-divisor.md`.
+
+**C570 closed (2026-07-24): aggregate formal audit and statement
+adequacy complete.**  `RelativeConicArcs.Gates.AMELUAggregate` imports all
+seven adopted AME formal packages in one environment, and
+`AMELUAggregateAxioms` audits 33 paper-facing declarations.  Outside the
+three native marginal graph counts, the audit reports only `propext`,
+`Classical.choice`, and `Quot.sound`; the native declarations expose their
+three exact toolchain-local axioms.  The new
+`formal-statement-adequacy.md` maps every manuscript label to exact Lean
+declarations and distinguishes unconditional coverage, conditional
+interfaces, and unformalized paper proofs.  Section 8 and all formal trust
+ledgers now use the same boundary.  The measured aggregate/no-build gates
+and warning-free `make check` passed.  See
+`2026-07-24-c570-ame-lu-lean-aggregate-audit.md`.
 
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
@@ -216,12 +230,13 @@ as C559--C572.  Dependency order is authoritative:
 5. C565, C590, and C591: shared Lean foundation and complete dictionary;
    C566: pencil classification interface; C567--C569: remaining theorem
    packages (complete).
-6. C570: aggregate import, axiom audit, and manuscript reconciliation.
+6. C570: aggregate import, axiom audit, and manuscript reconciliation
+   (complete).
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C570 is next: close the aggregate Lean import, axiom audit, declaration-level
-manuscript reconciliation, and statement-adequacy ledger.  C581 is a
+C571 is next: run the adversarial proof/evidence audit, second-draft
+revision, PDF inspection, and independent mathematical cold read.  C581 is a
 separately queued optional upgrade gate for basis-free phase-space
 reconstruction and quantitative approximate rigidity.
 
