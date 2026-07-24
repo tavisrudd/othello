@@ -25,10 +25,18 @@ Steiner system has a sparse Poisson repair window at the nucleus and a compulsor
 bottleneck at curve targets. The cubic family supplies exact matching/transversal rows and the
 natural strict weighted-transfer example.
 
+The prescribed-port theorem is also instantiated on the Clebsch
+`[6,3,4]_11` code. Its full coefficient-valued radius-five port has
+`z_x=8`, reconstructs the inner code from one pointed coefficient port, and
+therefore occurs at density `1/6` in an asymptotically good fixed-`GF(11)`
+family. The support clutter alone is the generic complete three-uniform
+hypergraph on five helpers; the manuscript does not present generic MDS
+locality as Clebsch-specific.
+
 The C286 correction pass repaired the exact transfer statement's zero-functional branch,
 normalized the coefficient fibers correctly, completed the random/AG and Poisson proof chain,
 and reconciled three context-light paragraph-by-paragraph cold reads. The private PDF remains an
-11-page draft.
+12-page draft.
 
 ## Evidence boundary
 
@@ -42,6 +50,9 @@ Classical ingredients remain labeled as such: concatenated-dual decomposition, S
 random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner systems,
 deletion--contraction reliability, BEC EXIT, Chen--Stein approximation, and the Las Vergnas
 perspective polynomial. A none-found search is not a priority certificate.
+The Clebsch specialization is a manuscript corollary of the MDS dual
+parameters and the prescribed-port theorem; it is not represented as a
+separate Lean terminal.
 
 C220's optional cubic blocker-stability strengthening is omitted by scope decision. Sequential
 composition, service regions, coefficient optimization, log-concavity,

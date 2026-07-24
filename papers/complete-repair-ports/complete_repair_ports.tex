@@ -288,6 +288,58 @@ Theorem~\ref{thm:transfer} leaves precisely the fixed zero-sector cost
 $z_x(I)$.  Each outer block contains one copy of the target coordinate.
 \end{proof}
 
+\begin{corollary}[Positive-density Clebsch repair ports]
+\label{cor:clebsch-port}
+Let $I$ be the $[6,3,4]_{11}$ Clebsch hexagon code
+\cite{RuddClebschRigidity2026}, and fix a coordinate $x$.
+The minimal radius-three repair clutter at $x$ is the complete
+three-uniform hypergraph on the other five coordinates.  Hence it has ten
+minimal repair supports,
+\[
+ \nu_x^{(\leq3)}=1,\qquad \tau_x^{(\leq3)}=3,
+\]
+and homogeneous helper-survival reliability
+\[
+ 10s^3(1-s)^2+5s^4(1-s)+s^5.
+\]
+The full radius-five coefficient port at $x$ determines $I$.
+Moreover $z_x(I)=8$, so this entire coefficient-valued port occurs with
+density $1/6$ in an asymptotically good fixed-$\F_{11}$ family.
+\end{corollary}
+
+\begin{proof}
+The dual $I^\perp$ is again an $[6,3,4]_{11}$ MDS code.  Every four-set
+containing $x$ is therefore the support of a dual word, unique up to scalar.
+The minimal helper sets are consequently all $\binom53=10$ triples on the
+other coordinates.  Their matching and transversal numbers are one and
+three, and recovery succeeds exactly when at least three of the five
+helpers survive, giving the displayed polynomial.
+
+At radius five the coefficient fibers contain every normalized dual word
+with nonzero $x$-coordinate.  These vectors span $I^\perp$: after
+normalizing the $x$-coordinate to one, their differences span the kernel of
+evaluation at $x$, and any one normalized vector supplies the remaining
+direction.  Thus the coefficient port recovers $I^\perp$ and hence $I$.
+
+Finally, the minimum dual-word weight through $x$ is four, so
+\[
+ z_x(I)=\mu_x(0)+d(I^\perp)=4+4=8.
+\]
+Taking $r=5$ gives $r+1=6<8$.  Theorem~\ref{thm:prescribed} therefore
+confines every full pointed witness to its inner block and reproduces the
+coefficient fibers at one of the six coordinate types in every block.
+Choosing asymptotically good outer codes over $\F_{11^3}$ gives the claimed
+fixed-$\F_{11}$ family and density.
+\end{proof}
+
+\begin{remark}
+The support clutter and reliability polynomial in
+Corollary~\ref{cor:clebsch-port} are shared by every $[6,3,4]$ MDS code.
+The Clebsch-specific information lies in the scalar coefficient fibers:
+they recover the inner code that is characterized geometrically in
+\cite{RuddClebschRigidity2026}.
+\end{remark}
+
 This is a represented-port theorem: it does not say that every abstract
 hypergraph is linearly representable.  It yields standard scaled asymptotic
 regions.  If $Q=q^k$, random $L$-linear outer codes of rate $R$ can have

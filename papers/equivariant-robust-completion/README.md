@@ -24,6 +24,12 @@ alternatives whenever
 `floor((k-1)^2/4) + r + 1 ≤ s(s-1)/2`. The obstruction term is the exact maximum over compatible
 profiles. For `s≥4`, the convenient rectangle `1≤k≤s+1` always supplies at least one alternative;
 the excluded point `(s,k)=(3,4)` misses by exactly one candidate.
+The manuscript now also gives the exact Clebsch specialization: after
+scalar extension from `GF(11)` to `GF(121)`, the Clebsch hexagon has
+`76*55=4180` legal Frobenius-paired two-column MDS extensions, and any
+selected extension has `4179` alternate pair repairs. This is a
+manuscript-level corollary of the general carrier count, not a new Lean
+terminal; the count holds for every `GF(11)`-rational six-arc.
 
 **Publication status:** focused LaTeX submission source, bibliography, and PDF complete; bounded
 general-criterion priority search and direct Dye/Blokhuis–Seress–Wilbrink checks complete. The

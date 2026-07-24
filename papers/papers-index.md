@@ -104,6 +104,10 @@ Geometric Structure
   exact weighted-functional transfer and prescribed realization connect the local object to
   asymptotically good families; reliability/EXIT and pointed-Tutte structure culminate in a cubic
   versus quartic-nucleus/harmonic comparison.
+- *Clebsch application:* the full pointed coefficient port of the
+  `[6,3,4]_11` Clebsch code reconstructs the inner code and occurs with
+  density `1/6` in an asymptotically good fixed-`F_11` family; its
+  support-only clutter is explicitly identified as generic MDS data.
 - *Trust and scope:* the finite transfer/cubic core is kernel-checked; prescribed asymptotics,
   reliability/EXIT, pointed-Tutte specialization, and all-field harmonic proofs are manuscript
   arguments backed where finite by committed deterministic certificates. The concrete TVZ family
@@ -115,6 +119,10 @@ Geometric Structure
 `PG(2,25)`
 - *Status:* focused LaTeX submission source + bibliography + cleanly compiled PDF; exact quadratic
   criterion, semantic global count, collision inverse, and uniform Q25 theorem Lean-built.
+- *Clebsch application:* scalar extension to `F_121` gives exactly `4180`
+  Frobenius-paired two-column MDS extensions of the Clebsch hexagon and
+  `4179` alternate repairs after deletion of a selected pair; this
+  manuscript corollary applies to every `F_11`-rational six-arc.
 - *Staging/library views, not themselves papers:* `baer-equivariant-extension` feeds this paper;
   `completion-core-rigidity` is reusable generic infrastructure outside the submission.
 
@@ -366,6 +374,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-clebsch-mathieu | The two icosahedral hexads are transverse to `S(5,6,12)` | the six fixed-point chords partition the conic's twelve points into complementary hexads, neither among the 132 Mathieu hexads; both have intersection histogram `{1:6,2:30,3:60,4:30,5:6}` with the Steiner blocks | clebsch side computation | `check_mathieu_hexads.py`; deliberately omitted from the current manuscript |
 | comp-clebsch-ten-arc-foil | Ten-arc foil: same `A₅`, empty deep holes | the unique size-ten orbit in the Clebsch stabilizer's point action is a ten-arc with empty uncovered locus, showing that conic filling is not forced by icosahedral symmetry alone | clebsch side computation | `check_ten_arc_foil.py`; deliberately omitted from the current manuscript |
 | thm-baer-criterion  | Orbit-valued extension criterion         | plausibly unrecorded assembled quadratic-Frobenius criterion; exact coordinate theorem constructs an arc extension; heterogeneous support count specializes to uniform `E(N−M)` | baer | lean `FiniteGeom/BaerCompletion/PairExtension.lean` `PairExtensionData.sum_card_sub_le_legalCount`; `RelativeConicArcs/QuadraticForbidden.lean` `exists_quadratic_pair_extension`; novelty audit `notes/2026-07-13-baer-completion-adversarial-novelty-review.md` |
+| comp-baer-clebsch-pairs | Clebsch quadratic pair-extension count | viewing the `F_11`-rational Clebsch hexagon in `PG(2,121)` gives exactly `76·55=4180` legal nonfixed Frobenius-pair extensions and `4179` alternate repairs after deletion of a selected pair; equivalently, `4180` paired extensions to `[8,5,4]_121` MDS codes | baer | manuscript Corollary `cor:clebsch-pair-extension`, derived from the semantic carrier count at `(s,f,e)=(11,6,0)`; manuscript-level arithmetic, not a separate Lean terminal; the count holds for every rational six-arc |
 | lem-baer-linewise-correction | Exact carrier correction          | subtraction-free `legal(ℓ)+M=N+B_ℓ+Σ_q(μ_ℓ(q)−1)` separates invisible orbit mass from collision redundancy, linewise and in aggregate | baer | lean `FiniteGeom/BaerCompletion/CollisionProfile.lean`, `RelativeConicArcs/QuadraticCollision.lean`, `RelativeConicArcs/QuadraticInvisible.lean`; paper Theorem B.1; fixed-center interpretation kernel-checked |
 | thm-baer-q25-f2 | Exceptional `PG(2,25)` pair extension | every Frobenius-invariant eight-arc with exactly two fixed selected points admits a fresh conjugate-pair extension, with both new points explicitly outside the old arc | baer | lean `RelativeConicArcs/Q25PairResult.lean` `f2_pair_extension`; concrete field, both normalizations, all 46,056 reflected rows, semantic transport, and axiom profile are kernel-checked and adversarially reviewed; census/minimum 32 not claimed |
 | thm-baer-q25-f4 | Four-fixed-point `PG(2,25)` pair extension | every Frobenius-invariant eight-arc with exactly four fixed selected points admits a fresh conjugate-pair extension; aggregate legal-pair count is at least four | baer | certificate-free lean `RelativeConicArcs/Q25ProfileFour.lean` `profile_four_pair_extension`, `four_le_sum_card_legal_profile_four`; center incidence, exact balance, focused build, and axiom profile kernel-checked |
@@ -391,6 +400,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-frame-rigidity  | Frame-graph semilinear rigidity (N1)     | Aut = ambient semilinear group, q ≥ 13             | continuation        | note (Thm 7.4) [plan] |
 | thm-complex-recon   | Continuation-complex reconstruction (N2) | recovers plane + secants + arc                     | continuation        | note (Thm 8.4) [plan; SOFTEN] |
 | lem-transfer        | Complete repair-hypergraph transfer      | exact blockwise preservation when `r+1<2d(I⊥)` and the outer functional-dual gate holds; every exact locality `s≤r` is preserved | coding | lean `RepairCodes/SeedLift.lean` `repairHypergraph_concatenatedCode_eq_embed`, `hasExactLocalityAt_concatenatedCode_iff_of_le` |
+| comp-clebsch-complete-port | Positive-density Clebsch coefficient port | the Clebsch `[6,3,4]_11` code has full pointed confinement cost `z_x=8`; its radius-five coefficient port reconstructs the inner code and occurs with density `1/6` in an asymptotically good fixed-`F_11` family; the minimal support clutter is the generic complete three-uniform hypergraph on five helpers with `(ν,τ)=(1,3)` | coding | complete-ports Corollary `cor:clebsch-port` and proof-ledger row T9c; manuscript-derived from dual MDS parameters and the prescribed-port theorem, not a separate Lean terminal |
 | thm-transfer-boundary | Uniform boundary of both transfer gates | nondegenerate `GF(3)` examples give literal complete-hypergraph failure at `r+1=2d(I⊥)` and at outer functional-dual distance `r+1`; no fixed-code necessity claim | coding | paper Proposition `prop:transfer-boundary`; lean `RepairCodes/TransferBoundary.lean` `innerDualDistanceGate_boundary_counterexample`, `outerFunctionalDualDistanceGate_boundary_counterexample` |
 | thm-gf9-seed10      | GF9 seed `[10,4,6]₉`                     | exact minimum distance 6 and dual distance 4; formal-library result, not used in the manuscript | coding (library-only) | lean `RepairCodes/Q9Seed.lean` `q9InnerCode_minDist`, `q9InnerCode_dualDist` |
 | thm-axis-uniform-code | Uniform axis–twisted-cubic code       | `[2q+1,4,q−1]₍q₎` in finite characteristic three  | coding    | lean `FiniteGeom/AxisTwistedCubic.lean` `axisTwistedCubic_code_parameters` |

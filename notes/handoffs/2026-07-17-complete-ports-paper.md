@@ -52,6 +52,14 @@ the full coefficient-optimization programme, log-concavity history, product arch
 generic tract/foundation exposition. The user chose to omit C220's optional cubic
 blocker-stability strengthening.
 
+The manuscript now includes one bounded cross-paper application. For the
+Clebsch `[6,3,4]_11` code, its full pointed coefficient port reconstructs
+the inner code, has `z_x=8`, and occurs with density `1/6` in an
+asymptotically good fixed-`F_11` family. The support-only clutter is generic
+MDS data; the scalar coefficient layer is the exact Clebsch-bearing part.
+The proof ledger records this as manuscript-derived rather than a new Lean
+terminal.
+
 ## Next step
 
 The corrected private draft has passed three independent paragraph-by-paragraph cold reads and

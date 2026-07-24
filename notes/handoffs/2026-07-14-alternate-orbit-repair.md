@@ -52,6 +52,12 @@ minimum of 32 legal pairs and the classification of equality cases.
 
 ## Current theorem map
 
+- **Clebsch specialization:** the `F_11`-rational Clebsch hexagon, viewed in
+  `PG(2,11^2)`, has exactly `4180` legal nonfixed Frobenius-pair extensions;
+  after selecting one, deletion leaves exactly `4179` alternate pair
+  repairs. The proof is the `(s,f,e)=(11,6,0)` carrier count and applies to
+  every rational six-arc; it is a manuscript corollary, not a new Lean
+  terminal or a Clebsch characterization.
 - **General repair:** for every prime power `s ≥ 7`, deletion from an invariant ten-arc leaves at
   least eight alternate repairs; the exact profile envelope strengthens the uniform bound to 318.
 - **Parameterized exchange:** if

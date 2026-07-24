@@ -255,6 +255,42 @@ distinct fixed lines are disjoint because a nonfixed pair has a unique mate
 line.  Summing over the $E$ carriers proves \eqref{eq:uniform-lower}.
 \end{proof}
 
+\begin{corollary}[The Clebsch hexagon over the quadratic extension]
+\label{cor:clebsch-pair-extension}
+Let $H\subseteq\PG(2,11)$ be a Clebsch hexagon, viewed as a
+Frobenius-invariant six-arc in $\PG(2,11^2)$
+\cite{RuddClebschRigidity2026}.  Then
+\[
+  \Npair(H)=76\cdot55=4180.
+\]
+Consequently every invariant eight-arc $H\cup Q$ obtained by adjoining one
+such pair has exactly $4179$ alternate conjugate-pair repairs after $Q$ is
+deleted.  In coding language, the scalar extension of the Clebsch
+$[6,3,4]_{11}$ code has $4180$ Frobenius-paired two-column extensions to
+$[8,5,4]_{121}$ MDS codes.
+\end{corollary}
+
+\begin{proof}
+Here $(s,f,e)=(11,6,0)$.  There are
+\[
+ E=11^2+11+1-\left(6\cdot12-\binom62\right)=76
+\]
+fixed lines disjoint from $H$, and each contains
+$N=(11^2-11)/2=55$ nonfixed conjugate pairs.  Every old secant is fixed, so
+$M=0$ and every one of these pairs is legal.  Conversely, the mate line of
+any legal nonfixed pair is a fixed line disjoint from $H$, which proves
+equality rather than only the lower bound.  Excluding the selected pair
+$Q$ leaves $4180-1$ alternatives.
+\end{proof}
+
+\begin{remark}
+The count in Corollary~\ref{cor:clebsch-pair-extension} uses only that $H$
+is a six-arc rational over $\F_{11}$; it is not another characterization of
+the Clebsch class.  Its role is to show how the exceptional code studied in
+\cite{RuddClebschRigidity2026} enters the equivariant extension and repair
+theory developed here.
+\end{remark}
+
 The preceding proof deliberately uses only the uniform upper bound $M$ on
 the number of forbidden candidates per carrier.  Retaining the actual
 forbidden support gives both a sharper bound and an exact identity.
@@ -730,6 +766,11 @@ mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
       $2s(s-1)\le(k-1)^2$ used in Corollary~\ref{cor:saturation}.  The final
       ceiling notation and the geometric case split are paper proofs.
 \end{enumerate}
+
+Corollary~\ref{cor:clebsch-pair-extension} is a manuscript-level
+specialization of the semantic carrier count to $(s,f,e)=(11,6,0)$.  Its
+arithmetic and the observation $M=0$ are printed in full; no separate Lean
+terminal is claimed for the number $4180$.
 
 The scoped builds and declaration-level axiom audits report exactly
 \[

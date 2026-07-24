@@ -276,18 +276,18 @@ theorem-like statement would change Paper I's nineteen-row trust surface
 and require a fresh release review; a pure motivation sentence or reframing
 of an existing theorem would not.
 
-Queue, in the owning lanes rather than C182:
+Forwarded to the owning papers on 2026-07-24:
 
-- **complete-ports:** prove that the full normalized pointed coefficient
-  port of the Clebsch code reconstructs `C^perp`, instantiate `z_x=8` and
-  the density-`1/6` theorem, and decide whether the application belongs in
-  the complete-ports manuscript or only its outlook;
-- **Baer/Frobenius:** record the exact `4180/4179` Clebsch-over-`F_121`
-  extension/repair corollary and decide whether it earns a short example in
-  the equivariant-completion manuscript.
+- **complete-ports:** the manuscript proves that the full normalized
+  pointed coefficient port reconstructs `C^perp`, instantiates `z_x=8`,
+  and derives density `1/6` in an asymptotically good fixed-`F_11` family;
+- **Baer/Frobenius:** the manuscript proves the exact `4180/4179`
+  Clebsch-over-`F_121` extension/repair corollary.
 
-Neither queued bridge changes Paper I unless the user explicitly reopens
-its final-GO release surface.
+Both papers cite *Deep-hole rigidity of the Clebsch hexagon code* as a
+working paper and state their generic-MDS/generic-six-arc boundaries.
+Neither forward bridge changes Paper I or reopens its final-GO release
+surface.
 
 Use C399 as the conic-phase prelude and C403/C406/C411 with selective C412
 upgrades. Credit Edge and Dye for the exceptional configurations and avoid
