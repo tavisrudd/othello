@@ -11,12 +11,13 @@
 
 ## Goal and current verdict
 
-Test a two-paper Clebsch architecture while preserving the current broad manuscript as a fallback.
+Produce and release focused Paper I before drafting the lower-priority split papers, while
+preserving the current broad manuscript as a fallback.
 Current assessment: **repeated reviewers find the post-section-12 material too broad and dense,
 while the older 17-page rigidity/decoder version is already a coherent paper.  C575 is now the
-next task: pin both snapshots and produce the exact split map before C576 builds focused Paper I,
-C577 builds standalone factorization-memory Paper II, and C579 tests whether the passage/holonomy
-package has a single standalone theorem.**
+next task: pin both snapshots and produce the exact split map.  Then C576 builds focused Paper I,
+C320 closes its trust/review surface, and C182 archives/releases it.  C577 and C579 remain behind
+Paper I submission readiness.**
 The split charter and acceptance gates are
 [`2026-07-24-clebsch-paper-split-trial.md`](../2026-07-24-clebsch-paper-split-trial.md).
 The additive source roots and compilable spines are `papers/clebsch-rigidity/`,
@@ -158,11 +159,18 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 1. **C575: specify the split exactly.**  Pin the older focused and current fallback snapshots;
    classify every theorem, proof, figure, checker, and citation; map the C320 evidence surface; and
-   require a no-circularity/no-material-duplication gate before drafting.
+   freeze the Paper I source plan before any lower-priority drafting.
 2. **C576: build focused Paper I from the older base.**  Backport the explicit matrix, complete
    census, proof-mode and trust-boundary improvements, and support-bipartition terminology.  Keep
    the rigidity/decoder/classification spine and at most a compact `H_3` explanation.
-3. **C577: build standalone Paper II.**  Use C399 as the phase prelude and C403/C406/C411 plus
+3. **C320: close the Paper I verification and review surface.**  Remap only the claims adopted by
+   Paper I, preserve the broad fallback ledger, interpose C321 only if its Singular boundary is
+   triggered, and obtain the required post-fix independent `GO`.
+4. **C182: archive and release Paper I.**  Pin the source, PDF, verification surface, Lean commit,
+   toolchain, certificates, DOI, licence, and repository release.  Paper I is submission-ready
+   before lower-priority drafting begins; a wait solely for user-controlled release metadata need
+   not idle the lane.
+5. **C577: build standalone Paper II.**  Use C399 as the phase prelude and C403/C406/C411 plus
    selective C412 upgrades as the forgetting-and-memory spine.  Credit Edge and Dye for the
    exceptional conic geometry and avoid novelty claims for `5/14/22`, parent ambiguity, the B3
    `3+6` split, or conic--GRS.  Inventory passage/holonomy/torsor material as a possible Paper III
@@ -170,15 +178,15 @@ Detailed result/proof history is preserved in the archive and in reports C180–
    [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md),
    [`2026-07-20-c406-matching-module.md`](../2026-07-20-c406-matching-module.md), and the C406
    priority audit above.
-4. Apply the repository mixed-verification policy separately to each candidate: keep the existing conceptual/replay/Lean
+6. **C579: test Paper III after Paper II.**  Require one principal theorem before expanding the
+   passage/holonomy comparison spine.
+7. Apply the repository mixed-verification policy separately to each candidate: keep the existing conceptual/replay/Lean
    boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
    final AI/provenance disclosure.
-5. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+8. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
    sources into the paper repository.
-6. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+9. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
    this paper's release pass.
-7. **Immutable artifact — C182.** Re-scope the archive only after the architecture decision; then
-   archive code, certificates, sources, and rendered PDFs under stable identifiers.
 
 ## Completed bounded paper upgrade
 

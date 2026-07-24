@@ -131,8 +131,20 @@ inventory.  Do not lengthen Paper II to absorb it automatically.
 
 ## Decision gate
 
-After C575, execute C576, C577, and C579 only where the exact dependency map shows that a candidate
-can state its headline theorem without circular cross-reference or substantial proof duplication.
-Compare every rendered candidate against the preserved 37-page fallback on exposition,
-organization, referee assessability, verification burden, and submission readiness.  The final
-architecture remains a user decision.
+Paper I has priority.  The execution order is:
+
+1. C575 pins and dispositions the sources.
+2. C576 builds and referee-tests Paper I.
+3. C320 remaps and closes the Paper I trust/review surface, with C321 interposed only if triggered.
+4. C182 archives and releases Paper I.
+5. C577 begins Paper II only after Paper I is submission-ready.
+6. C579 tests Paper III only after Paper II.
+
+If C182 is waiting only on a user-controlled DOI, licence, or repository-release input after every
+local gate has passed, that external wait does not force the lane to remain idle.  Otherwise no
+Paper II or Paper III drafting displaces unfinished Paper I work.
+
+Each later candidate must state its headline theorem without circular cross-reference or
+substantial proof duplication.  Compare every rendered candidate against the preserved 37-page
+fallback on exposition, organization, referee assessability, verification burden, and submission
+readiness.  The final architecture remains a user decision.
