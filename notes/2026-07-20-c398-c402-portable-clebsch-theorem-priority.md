@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398--C401 and C403--C411 complete; C399 remains the protected portable synthesis;
-C406+C411 is the recommended factorization-memory replacement whose composite claim is likely new
-within bounded audit coverage; C402 remains an independent queued pilot
+**Status:** C398--C411 complete; C399 remains the protected portable synthesis; C406+C411 is the
+recommended factorization-memory replacement whose composite claim is likely new within bounded
+audit coverage; C402 closes positively with a uniform arbitrary-LU separator
 
 ## Decision
 
@@ -216,6 +216,23 @@ bound follows, or if finite-geometry/blocking-set literature already owns the cl
 owns the nonsingular-conic subcase and must be consumed rather than duplicated.
 
 ## C402 — uniform `H3` AME separation from GRS
+
+### Result
+
+C402 closes with verdict `THEOREM; ONE UNIFORM MARGINAL-MOMENT INVARIANT SEPARATES EVERY ODD GOOD
+NON-GRS H3 REDUCTION FROM EVERY SIX-POINT GRS AME CLASS`. For any six-arc and its Gale dual,
+C374's rank-four marginal-moment count is `60+b(A,A*)`, where `b` counts perfect matchings whose
+three chords concur in both arcs. The integral H3 pair has ten such matchings and therefore at
+least 70 after every good reduction. A complete six-point permutation lemma bounds every GRS
+six-set by six matchings and 66 moments outside characteristic five; the exceptional ten-matching
+case is exactly a projective `F_5`-subline, coinciding with C341's GRS transition. The prescribed
+q=19 full-moduli pilot covers all 38,760 evaluation sets in 13 `PGL_2(19)` orbits with zero
+collisions. See `notes/2026-07-23-c402-h3-ame-uniform-lu-separation.md` and its exact
+Python/JSON/checksum bundle. The `ej2` pass further recovers the five nonconcurrent H3 matchings as
+a canonical one-factorization pentad: its party stabilizer is `S5`, its even half is the H3 `A5`,
+and the indexed marginal incidence forgets exactly that index-two orientation bit. A bounded
+claim-specific audit located no predecessor for the exact moment formula or uniform LU separator;
+the pentad/S5/A5 core is classical, so novelty wording is restricted to its LU-readable recovery.
 
 ### Target theorem
 
