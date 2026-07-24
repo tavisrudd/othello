@@ -36,6 +36,59 @@ projective planes expose its exact boundary and motivate the second.
 The active odd-q crown can strengthen this thesis but is not allowed to hold
 the packaging work hostage.
 
+## Expository frame — Milner / Serre
+
+The exposition should combine two disciplines.
+
+### Milner: interfaces before implementations
+
+- Define the game semantics once: positions, legal extension, normal-play
+  value, Grundy value, and value transport.
+- Present every geometric mechanism through an explicit contract:
+  hypotheses, induced move correspondence, and outcome conclusion.
+- Keep mathematical semantics separate from representations: coordinates,
+  canonicalization, solvers, certificates, and Lean encodings implement or
+  verify an interface but do not define the result.
+- Make composition visible. The reader should be able to see exactly how
+  incidence symmetry gives a game bisimulation, and how frame reduction,
+  capacity degradation, conic localization, and residual play compose.
+- Use dependency diagrams and small commuting squares where they replace
+  repeated prose; do not expose internal proof-engineering chronology.
+
+### Serre: economy, decisive examples, and a single main line
+
+- Introduce each abstraction only after the smallest example that forces it:
+  one successful fixed-point-free mirror, one failed mirror chord, and one
+  residual conic/defect position.
+- Use the minimum notation needed to state the theorem cleanly. Coordinate
+  formulas appear only when they perform work.
+- Put the strongest theorem first, then the mechanism, then the necessary
+  lemmas. Do not make the reader reconstruct the result from a development
+  diary.
+- Separate the conceptual proof from finite verification. Main text states
+  what the certificate establishes and why it is sufficient; schemas,
+  hashes, checker mechanics, and large tables live in dedicated verification
+  material.
+- Prefer one sharp counterexample to a taxonomy of failed attacks. Negative
+  results enter only when they reveal the exact boundary of a positive
+  theorem.
+
+### Combined page-level rule
+
+Every main section should answer, in this order:
+
+```text
+What is the mathematical phenomenon?
+What is the exact interface theorem?
+Why do its hypotheses hold here?
+What new family or reduction follows?
+What remains outside the theorem?
+```
+
+This keeps the formal precision compositional without making the paper read
+like software documentation, and keeps the geometry elegant without hiding
+the game-semantic or computational trust boundary.
+
 ## Provisional architecture
 
 1. **Cap achievement games and finite-incidence semantics**
@@ -118,6 +171,7 @@ appendix dump.
 - one diagram of the frame/grid/conic/residual reduction;
 - one diagram contrasting global mirror and local capacity degradation;
 - a terminology/notation sheet shared with the Lean theorem names;
+- a Milner/Serre exposition audit for every main section;
 - an explicit exclusion ledger preventing internal task history, solver
   transcripts, and superseded attacks from leaking into the paper.
 
@@ -162,6 +216,7 @@ C551 succeeds when the repository contains:
 - a claim/novelty matrix and audit queue;
 - an inclusion/split verdict for the classical-variety material;
 - a flagship manuscript architecture with crown/no-crown variants;
+- a section-level Milner/Serre exposition map;
 - a short list of genuinely load-bearing missing results.
 
 It does not require a frozen abstract, journal selection, submission schedule,
