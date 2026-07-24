@@ -76,8 +76,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
-| A1 | FAIL | Claim/proof ledger has no `OPEN-MATH` or `REVIEW-GATE` row for an abstract theorem. | R5 and R6 retain review/open-math rows; R8/R9 and the modular layers are green. |
-| A2 | FAIL | Independent cold reader marks every L1 claim green or supplies a closed correction. | R5 and R6 still require independent proposition-level cold reads. |
+| A1 | PASS | Claim/proof ledger has no `OPEN-MATH` or `REVIEW-GATE` row for an abstract theorem. | R5--R9, Hessian, Lucas, and `e_7` are green at their exact stated boundaries; remaining open rows concern bounded extensions or formal/public release work. |
+| A2 | FAIL | Independent cold reader marks every L1 claim green or supplies a closed correction. | The internal proposition-level cold reads are green, but the required independent final reader has not yet signed off. |
 | A3 | REVIEW | Every paper-facing computational statement replays from committed public inputs by a structurally independent check. | Verification map exists; execute after public-export assembly. |
 | X1 | FAIL | Paper-only fresh-history export builds and replays from a clean checkout and pins exactly one public Lean commit, target list, and axiom audit. | Export not yet created. |
 | X2 | FAIL | All authors, order, affiliations, acknowledgements, and account authority are confirmed. | Requires author confirmation immediately before release. |
