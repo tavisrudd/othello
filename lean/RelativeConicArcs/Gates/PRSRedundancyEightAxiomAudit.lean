@@ -11,6 +11,7 @@ and coding trust boundaries are theorem hypotheses and structure fields.
 
 #print axioms RelativeConicArcs.PRSRedundancyEight.threeMarkerContraction_map
 #print axioms RelativeConicArcs.PRSRedundancyEight.threeMarker_genusOne_hasseWeil_bound
+#print axioms RelativeConicArcs.PRSRedundancyEight.threeMarker_genusOne_hasseWeil_exact_threshold
 #print axioms RelativeConicArcs.PRSRedundancyEight.redundancyEightHighFieldSynthesis
 #print axioms RelativeConicArcs.PRSRedundancyEight.PersistentFamilyData.classified_card
 #print axioms RelativeConicArcs.PRSRedundancyEight.OrbitArithmetic.orbit_count_pairs

@@ -75,10 +75,10 @@ theorem exact_deletion_and_polar_budgets :
     retainedMarkerCount, deletionDegreePerMarker, transverseCarrierBudget,
     markedCollisionBudget]
 
-/-- Exact genus-one Hasse--Weil deletion inequality for every integer field order at least `43`.
-The first prime-power interpretation is supplied by the finite-field instance using this lemma. -/
+/-- Exact genus-one Hasse--Weil deletion inequality for every integer at least `42`.  Redundancy
+eight uses the first prime-power field order in this range, namely `43`. -/
 theorem threeMarker_genusOne_hasseWeil_bound
-    {q : ℕ} (hq : 43 ≤ q) :
+    {q : ℕ} (hq : 42 ≤ q) :
     q + 1 > 2 * Nat.sqrt q + threeMarkerDeletionDegree := by
   have hsquare : Nat.sqrt q * Nat.sqrt q ≤ q := Nat.sqrt_le q
   rw [show threeMarkerDeletionDegree = 30 by
@@ -87,6 +87,14 @@ theorem threeMarker_genusOne_hasseWeil_bound
   · omega
   · have hsqrtLower : 7 ≤ Nat.sqrt q := by omega
     nlinarith
+
+/-- The integer Hasse--Weil deletion threshold is exact: the strict inequality holds at `42` and
+fails at `41`. -/
+theorem threeMarker_genusOne_hasseWeil_exact_threshold :
+    42 + 1 > 2 * Nat.sqrt 42 + threeMarkerDeletionDegree ∧
+      ¬(41 + 1 > 2 * Nat.sqrt 41 + threeMarkerDeletionDegree) := by
+  norm_num [threeMarkerDeletionDegree, branchAndDiagonalDeletionDegree,
+    retainedMarkerCount, deletionDegreePerMarker, Nat.sqrt]
 
 /-- A normalized geometric-`S3` lower slice has three ordered distinct markers and identifies its
 identity-Frobenius component with the genus-one, degree-thirty stratum used by synthesis.
