@@ -554,6 +554,14 @@ def finite_factor_control(prime: int) -> dict[str, int]:
             assert z is not None
             symmetric_collision.add(z)
 
+    diagonal_anti_invariant = set()
+    anti = (0, -1 % prime, 1, 0)
+    anti_z = z_from_symmetric_product(product_form(anti, anti, prime), prime)
+    if anti_z is not None:
+        diagonal_anti_invariant.add(anti_z)
+    assert len(diagonal_anti_invariant) == (1 if prime == 3 else 0)
+    assert diagonal_anti_invariant <= cyclic
+
     classified = cyclic | swapped_collision | symmetric_collision
     assert all_factorizations == classified
     return {
@@ -561,8 +569,21 @@ def finite_factor_control(prime: int) -> dict[str, int]:
         "cyclic_swapped_images": len(cyclic),
         "swapped_collision_images": len(swapped_collision),
         "symmetric_collision_images": len(symmetric_collision),
+        "anti_invariant_diagonal_images": len(diagonal_anti_invariant),
         "classified_union_images": len(classified),
     }
+
+
+def binary_marker_regression(field_order: int = 4) -> list[int]:
+    counts = []
+    for j in range(6, 10):
+        marker_count = j - 5
+        forced = set(range(marker_count + 1))
+        forced.update(range(4, marker_count + 5))
+        free_coordinates = j - len(forced)
+        counts.append(field_order**free_coordinates - 1)
+    assert counts == [15, 3, 0, 0]
+    return counts
 
 
 def digest(path: Path) -> str:
@@ -586,6 +607,10 @@ def payload() -> dict[str, object]:
             "factorization_dichotomy": {
                 "symmetric_factors": "(ac-b^2)(AC-B^2)=0",
                 "swapped_factors": "(ad-bc)(ad-b^2+bc-c^2)=0",
+                "anti_invariant_diagonal": (
+                    "tau(L)=-L gives L proportional to s-t; its product "
+                    "has Pluecker value -3*mu^2 and survives only in F_3"
+                ),
             },
         },
         "integral_bridge": {
@@ -600,6 +625,10 @@ def payload() -> dict[str, object]:
                 "(J:D^infinity)=V over Z[1/6]",
             ],
             "minimal_cleared_denominator": 3,
+            "minimality_scope": (
+                "minimal for this elimination presentation, not asserted "
+                "as an intrinsic invariant"
+            ),
             "necessity_witness_mod_3": [1, 0, 0, 1, 0],
             "explicit_matrix_multiplier": 3,
             "combined_with_c595_integer": 6,
@@ -620,21 +649,27 @@ def payload() -> dict[str, object]:
             ),
         },
         "sc11": {
-            "status": "proved",
+            "status": "not proved",
             "reason": (
-                "rank/persistent and Lucas branches are C536; collision and "
-                "fixed-factor branches are uniform; the factorization "
-                "dichotomy leaves only collision or cyclic branches; C595 "
-                "eliminates cyclic/wild residues; C525 closes characteristic 2."
+                "bottom identities remain on syndrome-marker space; retained "
+                "marker variables were not eliminated to obtain a condition "
+                "on the upper syndrome"
             ),
-            "combined_integer_N11": 6,
+            "formal_substitution_integer_N11": 6,
         },
         "uniform_upgrade": {
-            "status": "proved for every j>=6",
+            "status": "withdrawn",
             "scope": (
-                "the recursively pointed component assertion SC(j), not "
-                "arithmetic deepness of points on the Lucas carrier"
+                "requires the catalecticant-rowspace closure and componentwise "
+                "line-containment theorem"
             ),
+        },
+        "transport_gate": {
+            "attainable_bottom_closure": (
+                "P(rowspace Cat_{j-4,5}(f)); proposed, not certified here"
+            ),
+            "binary_affine_F4_regression_j_6_to_9": binary_marker_regression(),
+            "predicted_binary_modular_boundary": "empty for r>=8",
         },
         "inputs": {
             "c595_json_sha256": digest(C595_JSON),
@@ -665,8 +700,8 @@ def check_bundle() -> None:
     if MANIFEST_PATH.read_bytes() != manifest_bytes():
         raise SystemExit(f"stale manifest: {MANIFEST_PATH}")
     print(
-        "C597 Python certificate OK: integral factor dichotomy, "
-        "bridge saturation, F_2/F_3/F_5 controls"
+        "C597 Python certificate OK: bottom factor trichotomy, "
+        "bridge saturation, F_2/F_3/F_5 controls; marker transport unproved"
     )
 
 

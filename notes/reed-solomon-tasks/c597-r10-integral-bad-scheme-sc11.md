@@ -2,7 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** complete; \(\mathrm{SC}(j)\) holds for every \(j\geq6\)
+**Status:** partial after specialist review; bottom elimination closed,
+marker transport open
 
 ## Objective
 
@@ -59,10 +60,21 @@ The C545 submission manuscript, Lean tree, and all other lanes remain frozen.
 
 `notes/2026-07-24-c597-r10-integral-bad-scheme-sc11.md` constructs the
 integral ordered-root incidence over the cubic-pencil Grassmannian, proves
-the exhaustive symmetric/exchanged factorization dichotomy, and gives a
+the corrected symmetric/exchanged/anti-invariant factorization trichotomy,
+and gives a
 minimal-denominator-\(3\) bridge from the noncollision Pluecker ideal to
-C595's cyclic syndrome ideal.  The factor \(2\) enters only in the
+C595's cyclic syndrome ideal.  Minimality is specific to this elimination
+presentation, not an intrinsic invariant.  The factor \(2\) enters only in the
 C525/C595 vertical-fibre step, so the combined integer remains \(6\).
 The vertical fibres are exactly the C525/C595
-modular and rank/fixed-factor cases.  Hence \(\mathrm{SC}(11)\), and more
-strongly \(\mathrm{SC}(j)\) for every \(j\geq6\), is proved with \(N_j=6\).
+modular and rank/fixed-factor cases.
+
+The original conclusion \(\mathrm{SC}(j)\) for all \(j\geq6\) is withdrawn.
+Substitution preserves bottom identities on syndrome--marker space but does
+not eliminate retained markers to obtain a condition on the upper syndrome.
+The repair gate is to prove that the closure of attainable bottom syndromes is
+the projectivized rowspace of the \((j-4)\times5\) catalecticant of \(f\),
+then classify its containment in each irreducible level-five bad component.
+The characteristic-two cyclic-plane equations recover \(N_3\) at \(j=6\),
+\([e_3]\) at \(j=7\), and become empty from \(j=8\) onward; this is the
+required regression target, not yet a promoted manuscript theorem.

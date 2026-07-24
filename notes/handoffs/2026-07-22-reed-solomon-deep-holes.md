@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595 complete; C597 is partial after specialist review. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -166,23 +166,29 @@ minimal cleared-denominator integer \(N_j=6\); after persistent, modular,
 and rank/fixed-factor saturation the cyclic residual is empty at every
 level, including the first unresolved application R11.  The R6/R7
 regressions are scheme-exact over \(\mathbf Q\), \(\mathbf F_2\), and
-\(\mathbf F_3\), with both infinity endpoints retained.  C597 closes the
-remaining non-cyclic gate.  Its integral ordered-root incidence on
-\(\operatorname{Gr}(2,4)\) has an exhaustive symmetric/exchanged
-factorization dichotomy; after collision and persistent saturation the
-only exchanged branch is C595's cyclic carrier.  A six-generator
+\(\mathbf F_3\), with both infinity endpoints retained.  C597 gives a
+valid bottom-component result but does not close the remaining transport
+gate.  Its integral ordered-root incidence on \(\operatorname{Gr}(2,4)\)
+has a corrected symmetric/exchanged/anti-invariant factorization
+trichotomy; the anti-invariant diagonal survives only in characteristic
+three and lies in collision.  A six-generator
 Pluecker-to-syndrome bridge satisfies \(J\subset V\) and
-\(3DV\subset J\), with \(3\) minimal; the factor \(2\) enters only in
-C525/C595, so the combined integer remains \(6\).  The binary and ternary
-fibres are exactly C525's
-ordered-Hessian persistent/Lucas locus and C595's wild rank/fixed-factor
-locus.  Therefore \(\mathrm{SC}(j)\) holds for every \(j\geq6\), with
-uniform \(N_j=6\).  The printed uniform transverse theorem is now
-unconditional: above
-\(6r-15+\lfloor2\sqrt{6r-17}\rfloor\), every split-free
-redundancy-\(r\) syndrome is persistent or modular.  Paper promotion
-remains gated on a claim-specific literature audit, independent specialist
-review, and explicit reopening of C545.
+\(3DV\subset J\), with \(3\) minimal for this elimination presentation;
+the factor \(2\) enters only in C525/C595, so the combined formal
+coefficient identity still uses \(6\).
+
+C597's failed step substitutes marker symmetric functions into bottom
+identities but never eliminates the marker variables to obtain a condition
+on the upper syndrome.  It cannot reproduce the known \(N_3\) and
+\([e_3]\) components at redundancies six and seven.  Thus
+\(\mathrm{SC}(j)\) remains proved only for \(j=6,7\), and the printed
+uniform transverse theorem correctly remains conditional.  The repair gate
+is the projectivized catalecticant-rowspace closure of attainable bottom
+syndromes, followed by componentwise line containment.  In characteristic
+two the cyclic-plane coefficient blocks recover \(N_3,[e_3]\) and cover
+all coefficients from \(j=8\) onward, predicting
+\(\mathcal M_r=\varnothing\) for \(r\geq8\); promotion awaits the transport
+proof.  C545 remains unchanged.
 C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;

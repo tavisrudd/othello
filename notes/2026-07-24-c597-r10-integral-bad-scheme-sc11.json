@@ -1,6 +1,7 @@
 {
   "finite_factor_controls": {
     "2": {
+      "anti_invariant_diagonal_images": 0,
       "classified_union_images": 19,
       "cyclic_swapped_images": 4,
       "rational_symmetric_factorization_images": 19,
@@ -8,6 +9,7 @@
       "symmetric_collision_images": 18
     },
     "3": {
+      "anti_invariant_diagonal_images": 1,
       "classified_union_images": 51,
       "cyclic_swapped_images": 9,
       "rational_symmetric_factorization_images": 51,
@@ -15,6 +17,7 @@
       "symmetric_collision_images": 46
     },
     "5": {
+      "anti_invariant_diagonal_images": 0,
       "classified_union_images": 181,
       "cyclic_swapped_images": 16,
       "rational_symmetric_factorization_images": 181,
@@ -37,6 +40,7 @@
     "combined_with_c595_integer": 6,
     "explicit_matrix_multiplier": 3,
     "minimal_cleared_denominator": 3,
+    "minimality_scope": "minimal for this elimination presentation, not asserted as an intrinsic invariant",
     "necessity_witness_mod_3": [
       1,
       0,
@@ -49,19 +53,30 @@
     "syndrome_cyclic_generators": 7
   },
   "sc11": {
-    "combined_integer_N11": 6,
-    "reason": "rank/persistent and Lucas branches are C536; collision and fixed-factor branches are uniform; the factorization dichotomy leaves only collision or cyclic branches; C595 eliminates cyclic/wild residues; C525 closes characteristic 2.",
-    "status": "proved"
+    "formal_substitution_integer_N11": 6,
+    "reason": "bottom identities remain on syndrome-marker space; retained marker variables were not eliminated to obtain a condition on the upper syndrome",
+    "status": "not proved"
   },
   "schema": "c597-r10-integral-bad-scheme-sc11-v1",
+  "transport_gate": {
+    "attainable_bottom_closure": "P(rowspace Cat_{j-4,5}(f)); proposed, not certified here",
+    "binary_affine_F4_regression_j_6_to_9": [
+      15,
+      3,
+      0,
+      0
+    ],
+    "predicted_binary_modular_boundary": "empty for r>=8"
+  },
   "uniform_upgrade": {
-    "scope": "the recursively pointed component assertion SC(j), not arithmetic deepness of points on the Lucas carrier",
-    "status": "proved for every j>=6"
+    "scope": "requires the catalecticant-rowspace closure and componentwise line-containment theorem",
+    "status": "withdrawn"
   },
   "universal_ordered_root_model": {
     "base": "Gr(2,Gamma^3 E)_Z",
     "equation": "z0+z1(t+s)+z2(t^2+ts+s^2)+z3*ts+z4*ts(t+s)+z5*t^2*s^2",
     "factorization_dichotomy": {
+      "anti_invariant_diagonal": "tau(L)=-L gives L proportional to s-t; its product has Pluecker value -3*mu^2 and survives only in F_3",
       "swapped_factors": "(ad-bc)(ad-b^2+bc-c^2)=0",
       "symmetric_factors": "(ac-b^2)(AC-B^2)=0"
     },
