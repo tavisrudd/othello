@@ -989,8 +989,17 @@
       "last": 592,
       "purpose": "six-point Gale common-concurrency invariant falsifier for the relative-conic lower-bound ceiling",
       "sequence": 110
+    },
+    {
+      "count": 1,
+      "first": 593,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 593,
+      "purpose": "tangent-derived four-intersection and few-weight-code obstruction gate",
+      "sequence": 111
     }
   ],
-  "next_id": 593,
+  "next_id": 594,
   "schema": "codex-task-id-allocations-v1"
 }
