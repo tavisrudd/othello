@@ -75,7 +75,7 @@ redundancy-seven split-free list is a deep-hole classification whenever
 the covering radius is six, in particular for $q\geq11$.  The analogous transverse
 arguments at redundancies eight and nine leave only the persistent
 families for $q\geq43$ and $q\geq53$, conditional on their printed
-component and slice gates.
+lower-package and slice gates.
 
 In characteristic two we determine the geometric degeneracy strata of
 an ordered Hessian pullback and isolate the remaining root-compatible
@@ -223,7 +223,7 @@ The following statements hold.
       persistent families plus one central nucleus point when
       $q=2^m$ and $m$ is odd.  The list is a deep-hole classification
       only when $\rho(\PRS(q-6))=6$, in particular for $q\geq11$.
-\item Conditional on the degree-seven contained-component gate and the
+\item Conditional on the degree-seven pointed lower-package gate and the
       degree-eight six-slice/base-selection gates printed in
       Section~\ref{sec:fixed}, the projective deep-hole directions of
       $\PRS(q-7)$ for $q\geq43$ and of $\PRS(q-8)$ for $q\geq53$ are
@@ -1283,7 +1283,7 @@ promote orbit-size profiles to identifiers.
 
 \subsection{Redundancy eight}
 
-\begin{proposition}[Three-marker bottom cover]\label{prop:r8-bottom}
+\begin{proposition}[Generic three-marker bottom cover]\label{prop:r8-bottom}
 After three contractions, the generic bottom object is the R5
 off-diagonal $(2,2)$ curve.  The diagonal and branch deletion costs
 twelve and three marked roots cost eighteen, so
@@ -1312,6 +1312,18 @@ $p$-th-power subspace has dimension smaller than the five-dimensional
 series.
 \end{proof}
 
+\begin{definition}[Three-marker lower-package gate]
+\label{def:r8-lower-package}
+The assertion $\mathrm{LP}(6,1)$ says that the pointed R7 splitting
+incidence, after the persistent rank-two carrier, the binary central
+point, and the marked-collision divisor are removed, has the
+geometrically integral identity twists and deletion bounds used in
+Proposition~\ref{prop:r8-bottom}.  It includes equations and
+monodromy checks for the recursive cyclic, wild, inseparable, gcd, and
+branch strata; a finite-field regression is not a substitute for those
+geometric data.
+\end{definition}
+
 \begin{proposition}[Modular lifts at degree seven]\label{prop:r8-modular}
 The consecutive-row Lucas calculation leaves no nonzero lift in
 characteristic two, the line $\PP\langle e_2,e_5\rangle$ in
@@ -1337,20 +1349,57 @@ $\pm a^{-1},\pm b^{-1},\pm c^{-1}$ give six distinct roots and the two
 required elementary-symmetric coefficients vanish.
 \end{proof}
 
-\begin{remark}[R8 contained gate]\label{rem:r8-contained}
-Proposition~\ref{prop:contained-rank-two} proves
-scheme-theoretically that a degree-seven first-polar line contained in
-the lower rank-two carrier is itself on the upper rank-two carrier.
-Thus the ordinary persistent identity is no longer a gate.  What
-remains unproved is that the other lower bad strata and the third
-marker create no additional contained component.
-Proposition~\ref{prop:r8-bottom} proves the transverse calculation, not
-that residual assertion; we retain it as the reduced
-$\mathrm{CC}(7,1)$ gate.
+\begin{proposition}[Degree-seven contained components]
+\label{prop:r8-contained}
+The assertion $\mathrm{CC}(7,1)$ for the structural components of
+Definition~\ref{def:r8-lower-package} holds in every characteristic.
+The rank-two component lifts to the upper rank-two carrier; the lower
+binary central point has no nonzero coherent lift; and the
+marked-collision scheme is never the whole polar line.  The only
+additional nucleus lifts are
+\[
+ \PP\langle e_2,e_5\rangle\quad\text{in characteristic three},
+ \qquad
+ \PP\langle e_3,e_4\rangle\quad\text{in characteristic five},
+\]
+and both are shallow in the range $q\geq43$.
+\end{proposition}
+
+\begin{proof}
+The rank-two assertion is
+Proposition~\ref{prop:contained-rank-two} with $n=7$.  For the binary
+central point $e_3$, requiring both consecutive septic rows to be
+supported at its single coordinate permits $a_3$ in the first row and
+$a_4$ in the second; their overlap is zero.  Thus its projective
+coherent lift is empty.  The full nucleus-support overlap is exactly
+Proposition~\ref{prop:r8-modular}, which also supplies the shallow
+witnesses in characteristics three and five.
+
+It remains to exclude an identically colliding series.  Remove the
+fixed divisor from the five-dimensional $W_f$ and let the moving
+degree be $d\leq6$.  If its projective map were inseparable in
+characteristic $p$, it would factor through Frobenius, so its section
+space would have dimension at most
+\[
+ \left\lfloor d/p\right\rfloor+1\leq4,
+\]
+contrary to $\dim W_f=5$.  A generic pencil projection is therefore a
+separable map of degree at most six.  Every marked self-collision is a
+ramification point of that projection, so Riemann--Hurwitz bounds the
+collision divisor by $2d-2\leq10$.  It is finite and cannot be an
+additional contained component.
+\end{proof}
+
+\begin{remark}[Exact remaining R8 gate]\label{rem:r8-contained}
+Proposition~\ref{prop:r8-contained} closes the contained-component
+problem.  The remaining hypothesis is $\mathrm{LP}(6,1)$, not another
+contained-line identity: the current certificate checks the nucleus
+overlaps, witnesses, and numerical budgets, but it does not print
+equations and monodromy proofs for every recursive lower stratum.
 \end{remark}
 
 \begin{theorem}[Conditional redundancy eight]\label{thm:r8}
-Assume $\mathrm{CC}(7,1)$.  For every prime power $q\geq43$, the deep
+Assume $\mathrm{LP}(6,1)$.  For every prime power $q\geq43$, the deep
 syndromes of $\PRS(q-7)$ are
 exactly the persistent tangent and conjugate-secant families, of total
 size $q(q+1)^2/2$.  Their orbit law is $T/T^7$ modulo inversion and
@@ -1359,11 +1408,11 @@ Frobenius.  The tangent family splits exactly in characteristic seven.
 
 \begin{proof}
 Outside the contained locus, Proposition~\ref{prop:r8-bottom} chooses a
-good first contraction and supplies a three-marker lower witness.
-Proposition~\ref{prop:r8-modular} eliminates every modular lift.  The
-assumed contained statement leaves only the persistent families, and
-the imported covering-radius theorem promotes split-free directions to
-deep holes.
+good first contraction, and the assumed lower package supplies a
+three-marker witness.  Propositions~\ref{prop:r8-modular} and
+\ref{prop:r8-contained} eliminate every nonpersistent contained lift.
+The imported covering-radius theorem promotes the resulting split-free
+classification to deep holes.
 \end{proof}
 
 This theorem makes no assertion about additional deep orbits for
@@ -2049,8 +2098,9 @@ classification.
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
 \item Redundancies eight and nine have complete transverse arguments
-      in the displayed high-field ranges, but their contained and
-      slice/base-selection gates remain explicit.  No unconditional or
+      in the displayed high-field ranges.  R8 retains its pointed
+      lower-package gate, while R9 retains its
+      slice/base-selection and residual component gates.  No unconditional or
       bounded-field completion is inferred.
 \item The characteristic-two ordered-Hessian theorem classifies the
       geometric degeneracy strata.  Its root-compatible pullback and

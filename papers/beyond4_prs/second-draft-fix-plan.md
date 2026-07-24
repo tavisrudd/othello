@@ -120,8 +120,8 @@ the original theorem synopsis:
    scheme-theoretically, in every characteristic, that a first-polar line
    contained in the lower rank-two carrier comes from the upper rank-two
    carrier.  This closes `CC(6,1)` and the ordinary persistent part in later
-   degrees.  R8 still requires the level-specific marker and nonpersistent
-   bad-component exclusions.
+   degrees.  The central, collision, and modular calculations now also close
+   `CC(7,1)`; R8 still requires the full pointed lower package `LP(6,1)`.
 2. **R9 slices and base selection.**  The six reduced discriminants, their
    Bézout identity, the multiple-root branch polynomials, and the nonzero
    rational-base polynomial with its degree accounting must be printed.

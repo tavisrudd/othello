@@ -36,7 +36,8 @@ exact strength of each proved level visible:
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
 4. the complete transverse redundancy-eight/nine arguments, with their exact high-field
-   thresholds, orbit laws, modular boundaries, and still-open contained/slice gates;
+   thresholds, orbit laws, modular boundaries, and still-open
+   lower-package/slice gates;
 5. the general coherent-polar induction theorem;
 6. the characteristic-two ordered-Hessian degeneracy theorem and the explicit
    root-compatible/base-selection gates on its persistent/Lucas corollary;

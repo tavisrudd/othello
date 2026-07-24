@@ -39,7 +39,8 @@ Editorial disposition is one of `main theorem`, `supporting theorem`,
 | CC7 | Redundancy-seven contained components | `MANUSCRIPT` | C541 planned | The characteristic-free rank--nullity proof closes `CC(6,1)`; the binary central lift is Proposition R7-central; `supporting theorem`; L2 |
 | R7-sf | Redundancy-seven split-free classification | `MANUSCRIPT / CERTIFIED` | Certificate R7; C541 planned | Geometry closes `q>=37`, the certificate closes the finite bridge, and public representatives remain required in the release artifact; `main theorem`; L1 |
 | R7-dh | Redundancy-seven deep-hole classification | `DERIVED / IMPORTED-1` | Seroussi–Roth radius theorem | Valid for `q>=11`; `q=7,8,9` are not promoted without a separate radius result; `boundary`; L1 |
-| R8 | Redundancy-eight classification for `q>=43` | `MANUSCRIPT / CERTIFIED / OPEN-MATH` | Certificate R8; C542 planned | Three-stage degrees, contained components, and characteristic table require full proof; no claim below 43; `main theorem`; L1 |
+| CC8 | Degree-seven contained components | `MANUSCRIPT / CERTIFIED` | Certificate R8; C542 planned | Uniform rank-two containment, empty binary central lift, finite collision divisor, and shallow characteristic-three/five lifts; `supporting theorem`; L2 |
+| R8 | Redundancy-eight classification for `q>=43` | `MANUSCRIPT / CERTIFIED / OPEN-MATH` | Certificate R8; C542 planned | Conditional only on the full pointed lower package `LP(6,1)`: equations and monodromy for every recursive lower stratum remain open; no claim below 43; `main theorem`; L1 |
 | R9 | Redundancy-nine classification for `q>=53` | `MANUSCRIPT / CERTIFIED / OPEN-MATH` | Certificate R9; C544 planned | Slice integrality, deletion degrees, and component exhaustion remain manuscript obligations; `main theorem`; L1 |
 | R9-kernel | Residual quadratic algebra and synthesis implication | `KERNEL` | `RelativeConicArcs.Gates.PRSRedundancyNine` and axiom audit | Does not formalize geometric integrality, rational points, coding identification, exhaustion, or the group action; `supporting theorem`; L3 |
 | R9-49 | Characteristic-seven carrier closure at `q=49` | `CERTIFIED` | Certificate R9-49 | Carrier result only, not a whole-code classification; `supplement-only`; L1 |
@@ -90,7 +91,7 @@ ledger, not in the mathematical manuscript.
 
 | Direction | Status | Present boundary |
 |---|---|---|
-| Uniform arbitrary-degree contained-component theorem | `OPEN-MATH` | Only degrees used for R6--R9 are claimed. |
+| Uniform arbitrary-degree all-carrier contained-component theorem | `OPEN-MATH` | The ordinary rank-two carrier is uniform; marker, modular, and residual carriers remain degree-specific. |
 | Bounded-field completion of R8/R9 | `OPEN-MATH` | Theorems begin at 43 and 53. |
 | Remaining degree-nine Lucas strata / redundancy ten | `OPEN-MATH` | Only the distinguished `e_7` orbit is closed. |
 | Full Lean proof of R9 | `OPEN-MATH` | C517 checks algebra and a conditional implication only. |

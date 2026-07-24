@@ -33,6 +33,12 @@ kernel into the factor hyperplane; containment for every geometric factor
 would put that kernel in the zero intersection of all factor hyperplanes.
 This characteristic-free rank--nullity proof closes `CC(6,1)` and the
 ordinary persistent rank-two carrier in every later degree.
+The next contained-component pass closes `CC(7,1)` as well: the binary
+central lift is empty, an identically colliding five-dimensional
+$g^4_6$ is impossible, and the characteristic-three/five nucleus lifts
+are shallow.  The remaining R8 hypothesis is now the explicitly named
+pointed lower package `LP(6,1)`, whose recursive equations and monodromy
+checks are not supplied by the C513 certificate.
 
 The editorial/reproducibility read confirmed that the source already used
 `q>=43` consistently, isolated the real `kappa` inconsistency, recommended a

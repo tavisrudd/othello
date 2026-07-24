@@ -28,7 +28,8 @@ full proof expansion, public classification records, statement adequacy, provena
 and immutable-release gates.  Source-report extraction expanded the R5/R6 and Lucas/`e_7` proofs
 but also exposed genuine open gates.  A follow-up rank--nullity argument has now closed
 the characteristic-free rank-two contained-line identity and the R7 all-field continuation.
-The residual R8 marker/nonpersistent component assertion, the printed R9
+The central-lift, collision, and modular arguments now also close `CC(7,1)`.
+The full R8 pointed lower package `LP(6,1)`, the printed R9
 six-slice/base-selection algebra, and one global ordered-Hessian bad-union polynomial at the claimed
 degree remain open.  The manuscript states the affected R8--R9 continuations and effective Hessian
 corollary conditionally rather than treating these as proved certificate inputs.  The development
