@@ -944,8 +944,17 @@
       "last": 581,
       "purpose": "scalar-versus-covariant separation theorem; intrinsic phase-space and robust-rigidity follow-up gate",
       "sequence": 105
+    },
+    {
+      "count": 2,
+      "first": 582,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 583,
+      "purpose": "arcs paper equality/reconstruction spine and robust uncovered-locus reconstruction successor",
+      "sequence": 106
     }
   ],
-  "next_id": 582,
+  "next_id": 584,
   "schema": "codex-task-id-allocations-v1"
 }
