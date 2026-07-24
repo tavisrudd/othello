@@ -10,6 +10,16 @@ evidence boundary, and current paper disposition.  This is an allocation ledger,
 outline and not a novelty audit.  A row marked `paper 2` remains crowns-owned until the paper-2
 planning report adopts it.
 
+**Paper-1 close update 2026-07-23:** this inventory stops at C471.  Its ranking of C440--C471
+components remains useful, but the closing theorem is now the later C480/C486/C487 torsor-Rosetta
+assembly governed by `2026-07-20-clebsch-paper-planning.md` (Close revision).  C445 is the
+arithmetic-gluing flagship inside that close; C469+C470 are its principal projective capstone.
+The later theorem identifies twelve specifically certified dictionary rows with the
+determinant-sign torsor class `T_q` and forced outer swap.  The characteristic-zero row specializes
+to `T_11`, and the `M12` row is the acting face rather than an extra two-point carrier.  This
+update supersedes any sentence below that treats all torsor/descent interfaces as
+sequel-only or says Paper 1 merely juxtaposes the positive rows.
+
 ## Disposition key
 
 - **P1 spine:** theorem or proof mechanism in Paper 1's central arc.
@@ -29,7 +39,7 @@ below is the current manuscript priority, not a mathematical claim.
 
 ### Ranked manuscript intake from the Weil-roof battery
 
-**Paper 1 close:** (1) C445 arithmetic gluing; (2) C469+C470
+**C440--C471 contribution to the Paper 1 close:** (1) C445 arithmetic gluing; (2) C469+C470
 full-support/secant-shadow/Hadamard--Mathieu capstone; (3) C449 split-torus mechanism; (4)
 C452+C464 QR/perfect-code substrate; (5) C453
 mod-40 law; (6) C444+C460 rank-three hinge geometry; (7) C455 scoped Weil-Weyl shadow.  The
@@ -89,8 +99,7 @@ the novelty cautions in the dedicated audits.
 
 ## Paper-1 intake rule
 
-Paper 1 does not present these rows as uniformly equivalent manifestations of one bit.  Its
-paper-facing synthesis is the exact **survival/forgetting ledger**:
+Paper 1 first presents the exact **survival/forgetting ledger**:
 
 ```text
 unmarked conic child                 forgets the pairing and orientation;
@@ -99,15 +108,22 @@ cubic signed memory                  orients the sheets;
 decorated depth profiles             recover the parent;
 QR/perfect-code passage              retains a certified structural shadow;
 full-support/secant passage          recovers the complete Witt design shadow;
-Hadamard degeneration                recovers the Golay and Lagrangian carriers;
+integral Hadamard degeneration       is at most one Paper-1 shadow sentence; its mechanism is P2;
 golden reduction                     is visible or fused by the mod-40 law;
 theta parity and quantum LU          provably fail to detect the sheet;
 ambient Fourier restriction          retains only a scoped Weil-Weyl shadow.
 ```
 
-The main manuscript imports the minimum theorem statements needed for that ledger.  Quaternion
-orders, rational descent, companion torsors, the Dickson proof, and Klein-cubic zeta functions
-remain sequel material even though they make the closing conjecture evidence-based.
+The later C480/C486/C487 close then identifies exactly the certified positive dictionary legs as
+one free `C2` torsor: matching sheets, unipotent classes, period factors, split-prime pairs,
+silver/golden prime pairs, lower Weil constituents, cubic signs, QR/Barker polarities, signed
+Fourier sectors, the forced-outer `M12` hinge, the characteristic-zero `Spec Q(sqrt5)` row, and
+the Reed--Solomon fixed-child fibre.  It does not identify the theta or quantum erasure rows with
+the torsor, does not promote the C471 mechanism into Paper 1, and does not assert that every
+analogy is a canonical realization.  Quaternion orders, the general rational-descent mechanism,
+companion torsors beyond the adopted comparison interfaces, the Dickson proof, modular
+contraction, and Klein-cubic zeta functions remain sequel material.  C479's integral cubic is
+optional and paused.
 
 ## Reconciliation notes
 

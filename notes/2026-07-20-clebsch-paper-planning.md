@@ -87,6 +87,12 @@ theorem, assembled entirely from certified parts, is:
 > `Q(sqrt5)` realization above its two finite reductions; certified at the sheet level by C442/C445
 > with no dependence on an integral cubic lift.
 
+Here “one torsor” means the single determinant-sign torsor class `T_q` at each split working
+prime, with outer-equivariant comparison maps among the certified rows at that `q`; it does not
+assert an unconstructed scheme simultaneously living over all characteristics.  C487's
+characteristic-zero row specializes specifically to `T_11`.  Of the twelve dictionary rows, the
+`M12` hinge is the acting-face realization of the same swap, not an additional two-point carrier.
+
 The B falsifier fired exactly at its flagged risk: residue conventions differ between `q=7` and
 `q=11`, so the cubic-sign readout is a per-case dictionary and appears as one marking sentence
 inside the closing theorem, not a separate stroke.  The C443/C461 obstructions (and any future
@@ -113,6 +119,15 @@ The high-level generalist compression test, possible unseen connections, adopted
 changes, and remaining theorem-xref TODOs are recorded in
 `2026-07-21-clebsch-high-level-reader-cold-read.md`.  This is an internal checklist, not an
 external review or an attribution to the named reader who motivated the thought experiment.
+
+**Presentation-layer update 2026-07-23:** the adopted Hofstadter/GEB apparatus is governed by
+`2026-07-22-clebsch-geb-design.md` together with its adopted red-team dispositions.  It does not
+change the theorem architecture.  The open “Contracrostipunctus” citation and the audited
+independence/extension metaphor may enter the main text.  The hidden record is pressed only after
+acceptance, using certificate-consistent representative-selection gauge, with proactive editor
+disclosure and an end-to-end extraction check.  The ignition line and printed commitment hash are
+cut.  C320 freezes the mathematical paper and records this later camera-ready gate; it does not
+press the record.
 
 ## Executive decision
 
@@ -217,7 +232,7 @@ A second compact rank-three panel displays only the complete input frame:
 
 | type | `h` | `q=h+1` | projective matching behaviour | certified carrier |
 |:---|---:|---:|:---|:---|
-| A3 | 4 | 5 | antipodal marker fused | fused control; companion `C2` torsor is a sequel pointer |
+| A3 | 4 | 5 | two spin lifts form one Frobenius orbit | fused connected étale control; no bit |
 | B3 | 6 | 7 | two `PSL_2(7)` sheets | silver/spin reduction and cubic sign |
 | H3 | 10 | 11 | two golden `PSL_2(11)` sheets | matching, cubic orientation, and arithmetic gluing |
 
@@ -509,6 +524,9 @@ Read in this order:
 4. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
    narrative and section plan, then `notes/2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`
    for copy-ready opening and closing prose;
+   for the separate post-acceptance presentation layer, read
+   `notes/2026-07-22-clebsch-geb-design.md` and its red-team companion, with the updated status and
+   adopted dispositions overriding the original proposal language;
 5. for a high-level generalist cold read or theorem-compression pass,
    `notes/2026-07-21-clebsch-high-level-reader-cold-read.md`;
 6. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`

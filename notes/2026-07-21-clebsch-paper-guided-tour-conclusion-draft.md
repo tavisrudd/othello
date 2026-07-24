@@ -8,6 +8,11 @@
 not edit or supersede the protected manuscript.  The final source pass must insert theorem,
 section, figure, artifact, and bibliography references and conform notation to the manuscript.
 
+**Close update 2026-07-23:** the C480/C486/C487 torsor-Rosetta theorem below is the certified
+Paper-1 close.  It supersedes the older ending in this file that treated the torsor itself as a
+sequel mechanism.  C445 remains the arithmetic-gluing flagship inside the arc; C479 remains an
+optional future realization.
+
 ## A guided tour: what the conic forgets
 
 The reconstruction problem of this paper begins with a tension.  On one hand, the projective
@@ -78,6 +83,13 @@ which the outer coset acts freely.  An orientation is a choice of one sheet, and
 is the data of such a choice.  The cubic below detects the corresponding quotient character.  No
 entropy interpretation is intended without an additional probability distribution, and the term
 does not assert that every functorial image of the parent retains the torsor.
+
+The unlabelled child has no equivariant parent selector; adjoining a marked matching supplies
+exactly the missing one-bit extension.  In Hofstadter's
+“Contracrostipunctus” language, this makes the child a record that no equivariant record player
+can play, decorations into styli, and the different levels of the information lattice into
+different tracks.  This is an expository metaphor for the certified independence/extension
+statement, not a hidden instruction and not an undecidability claim.
 
 The first orientation appears one degree later.  Give the two sheets opposite signs and form their
 signed tensor moments.  The moments in degrees one and two vanish, while the degree-three moment
@@ -158,8 +170,9 @@ reduces at the two primes above eleven to the two singleton matchings.  Their `A
 meet in the same `A4` and together generate `PSL_2(11)`.  A rational rotation of spinor norm two
 reduces to the outer element exchanging them; the common octahedral `S4`, with determinant kernel
 `A4`, is the local gluing hinge.  The A3 and B3 controls show respectively projective fusion and
-silver splitting.  This gives the rank-three story a closing arithmetic theorem without requiring
-the quaternionic and descent mechanisms developed in the sequel.
+silver splitting.  This gives the rank-three story its arithmetic flagship without requiring the
+quaternionic mechanism developed in the sequel.  It is not, however, the last theorem: the
+completed ledger is followed by the torsor synthesis below.
 
 Not every natural passage preserves the oriented bit, and this is part of the result.  The
 cross-sheet incidence designs retain exact quadratic-residue shadows and generate perfect binary
@@ -171,12 +184,31 @@ restricted spaces are not small Weil modules.  These positive and negative state
 the bit more sharply than a list of analogies could: the paper identifies which structures retain
 orientation, which retain only an unordered shadow, and which erase it completely.
 
+The closing theorem now rereads the positive rows as one object.  At the split working primes,
+B3 at seven and H3 at eleven carry a free `C2` orientation torsor; at the inert A3 prime the two
+spin lifts form one Frobenius orbit, a connected étale point with no bit.  Twelve certified
+dictionary rows realize the torsor class from characteristic zero through finite: the matching sheets, unipotent
+classes, cyclotomic period factors, split primes of `Q(sqrt(-q))`, the silver or golden prime
+pair, lower Weil constituents, cubic signs, QR/Barker polarities, signed Fourier sectors, the
+outer `M12` hinge, the `Spec Q(sqrt5)` descent row, and the Reed--Solomon fixed-child extremal
+fibre.  The `M12` entry is the acting face of the same swap rather than another two-point carrier,
+and the characteristic-zero entry specializes specifically to `T_11`.
+
+The marked Coxeter matching points every row at once through the trace rule.  After the marking is
+forgotten there is no section: the Čech cocycle, the one-bit selector cost, and the free-torsor
+description are three readouts of the single determinant-sign class
+`sgn:PGL_2(q)->C2`, whose kernel is exactly `PSL_2(q)`.  At eleven the Mathieu realization is
+forced outer because `PSL_2(11)` is self-normalizing in `M12`, `PGL_2(11)` is not a subgroup of
+`M12`, and the two `M11` parents are non-conjugate.  The residue convention for reading the cubic
+sign differs between seven and eleven, so it remains a per-case marking dictionary.  The bit is
+carried by the prime fibre, not by an assumed integral cubic tensor.
+
 The remainder of the paper proves the arrows in this order.  We first establish the Clebsch
 rigidity theorem and the rank-three Coxeter phase.  We then construct the conic-ideal quotient,
 prove balanced-sheet uniqueness and cubic-first orientation, derive the six profiles from double
 cosets, and reconstruct the parent.  The final sections prove the arithmetic gluing theorem,
-record the survival/forgetting ledger, and give the formal and computational trust map for every
-claim.
+record the survival/forgetting ledger, state the torsor-Rosetta close, and give the formal and
+computational trust map for every claim.
 
 ## Conclusion: from reconstruction to mechanism
 
@@ -206,21 +238,14 @@ Weil modules, and no Klein five-space supplies the missing linear bridge.  These
 exceptions to be repaired inside the present argument.  They show that orientation is carried by
 specific comparison data rather than by every natural invariant of the objects involved.
 
-This is the point of departure for the sequel.  Several parts of the arithmetic mechanism are
-already exact.  The two H3 sheets arise as reductions of one icosian maximal order at the two
-golden primes; the B3 sheets have the analogous binary-octahedral description.  The golden
-six-arc has a unique quadratic descent with rational stabilizer `S3`, while its missing choice is
-encoded by a resolvent and by companion torsors.  The mod-forty law is realized on the tested
-golden-split primes by the rational octahedral hinge: the sheets fuse precisely when that `S4`
-lies in `PSL_2(q)`, equivalently when `(2/q)=+1`.  At prime 31, the Klein cubic supplies a separate
-arithmetic carrier in which the golden cyclotomic field and `Q(sqrt(-11))` act together on one
-irreducible octic factor, but its zeta data are blind to the fusion bit.
+The final theorem identifies the object before asking for its mechanism.  The decoder's missing
+bit is one free `C2` torsor and one forced outer swap, realized in twelve certified ways from
+`Gal(Q(sqrt5)/Q)` to the finite sheet and fixed-child fibres.  Its no-section obstruction is one
+determinant-sign class with three certificates.  The A3/B3/H3 split--inert trichotomy is complete,
+and no integral Galois-odd cubic is needed.
 
-Paper 2 therefore does not begin by asserting that all these structures are the same.  The
-literal incidence-module, theta, Klein-five-space, and quantum-identification versions of that
-claim are false.  Its problem is narrower and more structural: to determine which arithmetic or
-metaplectic comparison maps carry the orientation character, how the quaternionic reductions,
-descent torsors, quadratic characters, and ambient Weil operator fit into one functorial picture,
-and why other natural passages erase the same bit.  The present paper supplies the object to be
-explained, its minimal signed-moment detector, its reconstruction theorem, and a certified list of
-the shadows that any such explanation must preserve or deliberately forget.
+This is the point of departure for the sequel.  The icosian and binary-octahedral reductions, the
+tested-prime Dickson fusion law, the modular contraction, and the Klein-cubic zeta package give
+exact local mechanisms, but no single characteristic-`q` construction yet explains why all
+certified comparison maps glue this torsor while the theta and quantum passages erase it.  Which
+arithmetic or metaplectic mechanism produces that characteristic-`q` gluing?

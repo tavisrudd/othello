@@ -13,19 +13,26 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, exactly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **the existing 19-page manuscript and local reproducibility package remain the
-protected baseline.  C399 is the selected portable upgrade for that version.  The new-paper plan
-uses the C406+C411 replacement spine, selectively sharpened by C412's all-degree parity theorem,
-intrinsic `1:4:6` recovery, and projective-cover explanation of the depth rank drop.  C412's
-relative-cubic Tate plane is appendix-level naturality machinery and is not identified with the
-depth plane.  The opening exposition is now a proof-free graphic sweep of the
-forgetting--balanced-recovery--cubic-orientation--parent-reconstruction arc.  Paper 1 closes with an
-exact survival/forgetting ledger and the C445 arithmetic-gluing theorem; C469+C470 upgrade C464's
-perfect-code row to the full-support/secant-shadow/Hadamard--Mathieu capstone, while C465+C471 form
-the top-ranked Paper-2 modular-sandwich/Hadamard-degeneration mechanism and quaternion, descent,
-torsor, Dickson, signed-Weil, and zeta mechanisms remain Paper-2
-pointers.  The user has selected the replacement spine for Lean formalization, queued as
-C420--C428, while manuscript integration remains a separate owner action before release.
+Current assessment: **the existing 19-page manuscript and local reproducibility package are an
+emergency fallback only; the submission candidate is the upgraded replacement-spine manuscript.
+It uses C406+C411, selectively sharpened by C412's all-degree parity theorem, intrinsic `1:4:6`
+recovery, and projective-cover explanation of the depth rank drop.  C412's relative-cubic Tate
+plane is appendix-level naturality machinery and is not identified with the depth plane.  The
+opening exposition is a proof-free graphic sweep of the
+forgetting--balanced-recovery--cubic-orientation--parent-reconstruction arc.  C445 supplies the
+rank-three arithmetic-gluing flagship, C469+C470 supply the
+full-support/secant-shadow/Hadamard--Mathieu capstone, and the exact survival/forgetting ledger is
+reread by the final C480/C486/C487 torsor-Rosetta theorem: the single determinant-sign torsor
+class `T_q` at each split working prime, one forced outer swap, twelve certified dictionary rows
+from characteristic zero through finite, a complete
+split/inert rank-three trichotomy, one determinant-sign class with three no-section certificates,
+and a Reed--Solomon fixed-child realization.  C479's integral Galois-odd cubic is paused and
+optional, not a dependency or carrier.  C465+C471 remain the top-ranked Paper-2
+modular-sandwich/Hadamard-degeneration mechanism; quaternion, Dickson, signed-Weil, and zeta
+mechanisms remain Paper-2 pointers, while only the specifically certified descent and torsor
+interfaces used by C480/C486/C487 enter the Paper-1 close.  The replacement-spine Lean campaign is
+complete through its adopted slices, and C320 owns manuscript reconciliation and the final
+claim-by-claim release ledger.
 C485's proof-only six-arc uncovered-locus reconstruction lemma is now imported into the arcs paper,
 strengthened there to `q+1 > binom(k,2)` for arbitrary fixed `k`, upgraded to a canonical
 reconstruction/stabilizer theorem with a sharp `q=5` equality-boundary counterexample, and used
@@ -60,6 +67,13 @@ Use the later exact reports and the updated result ledger for C465 and C469--C47
 proof-audit addendum is requested.
 The ranked runner-up novelty spot-check is
 [`2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`](../2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md).
+The adopted presentation layer and its governing red-team dispositions are
+[`2026-07-22-clebsch-geb-design.md`](../2026-07-22-clebsch-geb-design.md) and
+[`2026-07-22-clebsch-geb-design-red-team.md`](../2026-07-22-clebsch-geb-design-red-team.md).
+The main-text independence/extension remark and open GEB citation may be integrated with the
+mathematical draft.  The hidden record is not pressed until post-acceptance camera-ready:
+representative-selection gauge only, certificate-checked, independently removable, and proactively
+disclosed to the editor.  The ignition line and printed commitment hash are cut.
 The red-team-approved formalization campaign is
 [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 
@@ -125,8 +139,10 @@ canonical relative-cubic Tate plane belong in an appendix, together with the pro
 divided transfer and the other natural routes do not identify it with the depth plane.  See
 [`2026-07-20-c412-relative-cubic-depth-plane.md`](../2026-07-20-c412-relative-cubic-depth-plane.md).
 
-This version should replace weaker descriptive material and compress the cubic, quantum, and free
-arrangement-code consequences; it must not enlarge the paper into parallel coequal spines.
+This version replaces weaker descriptive material and compresses the cubic, quantum, and free
+arrangement-code consequences; it does not enlarge the paper into parallel coequal spines.
+C445 and the torsor-Rosetta close are the arithmetic close of this same reconstruction spine, not
+additional competing spines.
 
 Detailed result/proof history is preserved in the archive and in reports C180–C187.
 
@@ -185,8 +201,9 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   priority audit support likely-new wording only for the conic-quotient/moment/Fourier composition.
   C411 supplies the source-surviving conceptual double-coset/mixed-bi-Hecke proof and is the one
   successor admitted under the single-promotion rule.  C412 contributes a selective proof upgrade,
-  not a coequal spine; C413--C417 remain companions.  No manuscript source edit is implicit in this
-  planning decision.
+  not a coequal spine.  C413--C416 remain companions; C417 enters Paper 1 only through the
+  C486-certified identification of its Čech obstruction with the single determinant-sign torsor
+  class.  Manuscript integration is owned by C320.
 - **C407--C409 are not additional flagships:** C407 consists of conventional free corollaries;
   C408 is a companion limitation theorem showing global data forget pointed repair; and C409 is a
   classical/formal exact-strength-two normalization.  C410 now closes every spanning q=7
@@ -311,7 +328,8 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   theta/Arf, scoped Fourier, monomial/fixed-party quantum-erasure, and `A5` bitorsor interfaces
   with a repaired twenty-two-terminal standard-axiom gate and final post-fix independent-review
   `GO`.  Scalar-extended eigenspace multiplicities, the true common ambient Weil restriction,
-  arbitrary LU classification, and the unadopted C471 Paper-1 shadow remain explicitly external
+  arbitrary LU classification, and the optional at-most-one-sentence C471 Paper-1 shadow remain
+  explicitly external and are not Lean-adopted
   ([report](../2026-07-22-c507-clebsch-passage-interfaces-lean.md)).  Their exact trust and
   exclusion boundaries are frozen in
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)

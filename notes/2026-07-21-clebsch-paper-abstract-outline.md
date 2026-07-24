@@ -9,6 +9,12 @@ contains exposition architecture, not a manuscript edit.  The exact result alloc
 by `2026-07-20-clebsch-paper-planning.md` and
 `2026-07-21-clebsch-weil-roof-results-ledger.md`.
 
+**Close update 2026-07-23:** the abstract and outline below include the certified
+C480/C486/C487 torsor-Rosetta closing theorem.  C445 remains the arithmetic-gluing flagship inside
+the proof arc; it is not the last theorem of the paper.  C479 is an optional future realization,
+not a dependency.  This update supersedes every older sentence in this file that treated the full
+torsor dictionary as sequel-only.
+
 The copy-ready prose pass for the proof-free opening and conclusion is
 `2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`.
 
@@ -43,10 +49,16 @@ all-degree parity identity and the projective cover `P(1)` explain the cubic thr
 rank-two depth quotient.
 
 We finally determine which natural passages retain this bit and which erase it.  Cross-sheet
-designs yield certified quadratic-residue and perfect-code shadows, and golden reduction obeys an
-exact visible/fused law modulo `40`, whereas theta parity and quantum local-unitary equivalence do
-not distinguish the sheets.  The structural proofs are Lean-formalized, and the finite claims have
-deterministic certificates and independent replay.
+designs yield certified quadratic-residue, perfect-code, Witt, Hadamard, and Mathieu shadows, and
+golden reduction obeys an exact visible/fused law modulo `40`, whereas theta parity and quantum
+local-unitary equivalence do not distinguish the sheets.  The closing theorem identifies the
+surviving bit as the determinant-sign `C2`-torsor `T_q` at each split working prime, with twelve
+certified dictionary rows from
+`Spec Q(sqrt5)` to the finite matching and Reed--Solomon fibres.  Its class is the determinant-sign
+character `PGL_2(q) -> C2`, its marked Coxeter matching is a universal pointing, and after
+forgetting the marking it has no section.  Split working primes give the free torsor in B3 and H3;
+the inert A3 prime gives one fused connected étale point.  The structural proofs are
+Lean-formalized, and the finite claims have deterministic certificates and independent replay.
 
 ## Opening guided tour
 
@@ -75,12 +87,13 @@ sequel question.
 
 | type | Coxeter number | conic phase | projective matching behaviour | bit carrier |
 |:---|---:|---:|:---|:---|
-| A3 | 4 | `F_5` | antipodal marker fused | fused control; companion `C2` torsor is a sequel pointer |
+| A3 | 4 | `F_5` | two spin lifts form one Frobenius orbit | fused connected étale control; no bit |
 | B3 | 6 | `F_7` | two `PSL_2(7)` sheets | silver reduction and cubic sign |
 | H3 | 10 | `F_11` | two `PSL_2(11)` sheets | golden matching, cubic sign, arithmetic gluing |
 
-The body proves only the rows needed for the common Coxeter phase and Paper-1 close.  The full
-torsor and quaternion mechanisms are sequel pointers.
+The body proves the complete split/inert rank-three trichotomy used by the Paper-1 close.
+Quaternion maximal-order mechanism and the general continuation remain sequel pointers; the
+certified torsor dictionary itself is Paper 1.
 
 ### Figure 3: survival and erasure
 
@@ -93,7 +106,8 @@ erases orientation:        unmarked conic child; theta/Arf; fixed-party quantum 
 ```
 
 This figure prevents the closing synthesis from being read as a claim that every carrier is
-canonically the same object.
+canonically the same object.  The subsequent torsor theorem lists exactly the passages for which
+an outer-equivariant identification has been certified; the erasure rows remain erasures.
 
 ## Headline theorem hierarchy
 
@@ -138,6 +152,27 @@ Sources: C406, C411, C412, C420, C423--C425.
    the rational `S4/A4` hinge by the reduction of the spinor-norm-2 rotation `Rz`.
 
 Sources: C379, C444, C445, C460.
+
+### Theorem E: one torsor, one forced outer swap
+
+1. At the split working primes, B3 and H3 carry one free `C2` orientation torsor; at the inert A3
+   prime the two spin lifts form one Frobenius orbit and one connected étale point, with no bit.
+2. Twelve certified dictionary rows realize the same torsor class: matching sheets; nontrivial unipotent classes;
+   cyclotomic period factors; primes of `Q(sqrt(-q))`; primes of `Z[sqrt2]` or `Z[phi]`; lower Weil
+   constituents; cubic signs; QR/Barker polarities; signed Fourier sectors; the outer `M12` hinge;
+   `Spec Q(sqrt5)`; and the Reed--Solomon fixed-child extremal fibre.  The `M12` row is the
+   acting face of the swap, not an additional two-point carrier; the characteristic-zero row
+   specializes specifically to `T_11`.
+3. The marked Coxeter matching points all realizations through the trace rule.  Unmarked, the
+   single class is `sgn:PGL_2(q)->C2`, with kernel `PSL_2(q)`; the Čech cocycle, one-bit selector,
+   and free-torsor descriptions are three certificates of that class.
+4. At q=11 the swap is forced outer in the Mathieu layer:
+   `N_{M12}(PSL_2(11))=PSL_2(11)`, `PGL_2(11)` is not a subgroup of `M12`, and the two `M11`
+   parents are non-conjugate.
+5. The cubic residue readout is a per-case marking dictionary, not a convention-free arithmetic
+   formula.  The prime fibre carries the bit; no integral Galois-odd cubic is assumed.
+
+Sources: C417, C448, C473, C474, C480, C486, C487, with the earlier dictionary legs cited there.
 
 ## Section-by-section outline
 
@@ -211,8 +246,9 @@ Sources: C379, C444, C445, C460.
 - State the A3 fused, B3 silver-split, and H3 golden-split matching theorem.
 - For H3, prove the two `11`-sheet orbit halves, `A5` intersection/generation, and `S4/A4` hinge.
 - State the rational spinor-norm-2 transporter and its outer reduction.
-- Point to quaternion maximal-order reduction and companion torsors as sequel mechanisms; do not
-  reproduce C457/C462/C463.
+- Point to quaternion maximal-order reduction and the unadopted C462/C463 companion-torsor
+  mechanisms as sequel material; do not reproduce them.  This does not defer the C480/C486/C487
+  torsor dictionary used by Theorem E.
 
 ### 10. The survival/forgetting ledger
 
@@ -226,7 +262,17 @@ Sources: C379, C444, C445, C460.
 - End the section with the exact advice statement: choosing a parent is one bit of geometric
   decoration, not an unlabeled or fixed-party quantum invariant.
 
-### 11. Verification and trust architecture
+### 11. The torsor-Rosetta closing theorem
+
+- State Theorem E immediately after the completed ledger.
+- Print the twelve-row realization dictionary compactly and distinguish realizations from erasure
+  rows.
+- State the universal pointing, one-class/three-certificates no-section clause, and forced-outer
+  `M12` boundary.
+- State the B falsifier as a scope sentence: cubic residue conventions are per-case.
+- State explicitly that C479 is optional and no integral tensor carries the proof.
+
+### 12. Verification and trust architecture
 
 - Give a claim-by-claim table: conceptual proof, Lean theorem/gate, finite certificate, replay, and
   classical cited input.
@@ -234,15 +280,18 @@ Sources: C379, C444, C445, C460.
 - Pin the shared Lean commit and the immutable artifact DOI.
 - State the AI/provenance disclosure and the exact external-certificate boundary.
 
-### 12. Conclusion: the scoped roof question
+### 13. Conclusion: the scoped mechanism question
 
 - Reprise the solid reconstruction chain in one paragraph.
+- Reprise the torsor-Rosetta theorem as the object already found, not a conjectural roof.
 - State the mod-40 law and the scoped ambient Weil-Weyl fact as evidence, not identification.
 - Mention that the literal small Weil module, theta detector, Klein-five-space map, and quantum LU
   detector have been ruled out.
-- Point once to the sequel mechanisms: quaternion reduction, rational descent, torsors, Dickson
-  fusion, and Klein-cubic zeta.
-- End with one precise metaplectic/arithmetic question; add no second conclusion after it.
+- Point once to the sequel mechanisms: quaternion reduction, Dickson fusion, modular contraction,
+  and Klein-cubic zeta.  Do not list rational descent or torsors as wholly sequel-only: the exact
+  C487 descent row and C480/C486 torsor interfaces are already in the close.
+- End with one precise question asking for the characteristic-`q` gluing mechanism; the object
+  itself is no longer open.  Add no second conclusion after it.
 
 ## Appendices and supplements
 
@@ -272,3 +321,8 @@ Sources: C379, C444, C445, C460.
    a history of failed attempts.
 9. The main paper targets one proof spine.  The sequel mechanisms remain pointers even when their
    certificates are complete.
+10. The open GEB citation and independence/extension metaphor may appear in the main text.  The
+    hidden record is a post-acceptance camera-ready operation governed by
+    `2026-07-22-clebsch-geb-design.md`: genuine representative-selection gauge only, verified,
+    removable, and proactively disclosed to the editor.  Do not print the cut ignition line or
+    commitment hash.
