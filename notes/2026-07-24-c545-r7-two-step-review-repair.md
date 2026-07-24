@@ -110,6 +110,20 @@ The numerical cutoff has slack at the outer level:
 \(S_3\) point count \(q+1-2\sqrt q>25\), so the repair does not raise the
 geometric threshold or open a new finite-field interval.
 
+The extra-juice pass also tested the quantifiers in the conditional uniform
+theorem.  The chain does not require an unstated inverse-image property for the
+persistent or modular loci.  At stage \(j\), the current contraction was chosen
+outside \(\mathcal P_j\cup\mathcal M_j\); the corresponding
+\(\mathrm{CC}(j-1,1)\) assertion therefore rules out a wholly bad next polar
+line, after which the finite parameter scheme supplies the next marker.  The
+manuscript now says this before the uniform theorem.  It also records the free
+consequence
+\[
+ Q_r=6r+O(\sqrt r),\qquad d_r\leq3r-5.
+\]
+Thus the bottom point count is the only numerical gate in the uniform argument;
+the contained-component chain is the only arbitrary-level mathematical gate.
+
 ## Editorial truth table
 
 | Review condition | Printed resolution | Budget or census effect |
@@ -132,5 +146,7 @@ geometric threshold or open a new finite-field interval.
 | Whether the repaired R7 proof is independently referee-clear | settled | The next reader reconstructed the degree-\(16\) package and independently checked the fixed-factor exclusion, marker--gcd equivalence, threshold arithmetic, and sample census invariants. |
 | Why the transverse thresholds differ by \(7,8,\ldots\) | settled | They are evaluations of \(Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor\); the point-count scale is linear. |
 | Whether the uniform theorem proves the stable-polar conjecture | open | No.  Its exact hypothesis is the chain of recursively pointed contained-component assertions.  Establishing that chain, including every modular locus, is the remaining mathematical gate. |
+| Whether the uniform theorem assumes inverse-image stability of the declared loci | settled | No.  Each current contraction is selected outside the next declared bad locus; the next \(\mathrm{CC}\) assertion excludes a wholly bad polar line and permits another transverse choice.  The manuscript now prints this induction invariant. |
+| Which numerical inequality can bind at arbitrary redundancy | settled | The marker scheme has \(d_r\leq3r-5\), whereas \(Q_r=6r+O(\sqrt r)\).  Only the R5 bottom-cover point count binds; arbitrary-level difficulty is contained-component classification. |
 | Why \(\langle1,t^3,t^4\rangle\) is pointed-bad specifically at \(q=19\) | open | The six split members and their common infinity root are exact, but the intrinsic branch-divisor explanation remains the separately recorded C509 exceptional-cover question. |
 | External certificate and release packaging | separately owned | No certificate, replay, manifest, or release identifier was changed in this repair. |

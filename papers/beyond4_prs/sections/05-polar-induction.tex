@@ -273,6 +273,16 @@ The theorem isolates the numerical escape and one-step lifting
 argument.  Iterating it requires the contained-component assertion at
 every intermediate level, not only at the top.
 
+Here is the recursive meaning of that hypothesis.  At redundancy
+\(j\), the current contraction is chosen outside
+\(\mathcal P_j\cup\mathcal M_j\).  The assertion
+\(\mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)\) then prevents its
+next polar line from being wholly bad, so a new marker can be chosen
+off the finite pullback while all earlier markers remain forbidden.
+Thus the iteration does not assume that inverse images of
+\(\mathcal P_j\cup\mathcal M_j\) lie in
+\(\mathcal P_r\cup\mathcal M_r\).
+
 \begin{remark}[Point-count convention]\label{rem:thresholds}
 The correction $\kappa$ records the exact lower bound available for the
 chosen model.  Every genus-one curve retained in this paper uses the
@@ -337,8 +347,11 @@ For \(r=5,6,7\), the integer cutoffs supplied by the same formula are
  Q_5=22,\qquad Q_6=29,\qquad Q_7=37;
 \]
 the first prime powers meeting them are \(23,29,37\).  Thus the former
-threshold table consisted of three evaluations of one linear-scale
-formula.  Propositions~\ref{prop:r6-contained} and
+threshold table consisted of three evaluations of one formula with
+\(Q_r=6r+O(\sqrt r)\).  The parameter budget is at most \(3r-5\), so
+the only numerical constraint is the bottom point count; the
+arbitrary-redundancy obstruction is the contained-component chain.
+Propositions~\ref{prop:r6-contained} and
 Corollary~\ref{cor:r7-contained} discharge the required chains at
 redundancies six and seven.
 
