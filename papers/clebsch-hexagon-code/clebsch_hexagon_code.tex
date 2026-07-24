@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{positioning}
 \usepackage[hidelinks]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -28,7 +29,8 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{The Clebsch hexagon code:\\rigidity from a conic deep-hole locus}
+\title{Factorization memory in the Clebsch hexagon code:\\
+forgetting, cubic orientation, and parent reconstruction}
 \author{Tavis Rudd}
 \date{Working draft --- July 2026}
 
@@ -36,23 +38,37 @@
 \maketitle
 
 \begin{abstract}
-Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
-maximum-distance syndrome directions of its associated MDS code contained
-in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
-projective stabilizer $A_5$. The resulting non-GRS $[6,3,4]_{11}$ code has
-covering radius three, with the twelve points of that conic as its
-projective deep-hole directions. A quadratic syndrome test gives a complete
-distance oracle, while nearest-word ambiguity recovers the Brianchon
-geometry and an invariant unordered bipartition of leader supports. The same
-class is characterized by low-degree containment of its deep-hole locus.
-A line bound, chord identities, and small-field exclusions isolate $q=11$;
-for arc sizes four through seven, the only other conic-filling case is a
-four-frame in $\PG(2,5)$.
-Their secant arrangements are the finite reductions of $H_3$ and $A_3$.
+We study when the maximum-distance syndrome geometry of a projective MDS
+code remembers the projective system that produced it.  Among six-arcs of
+$\PG(2,11)$, conic containment of the projective deep-hole locus
+characterizes the Clebsch hexagon and recovers its $A_5$ stabilizer.  We
+place this rigidity theorem in the rank-three Coxeter family $A_3,B_3,H_3$:
+for Coxeter number $h$, the reflection-complement code has a common exact
+distance law, and at $q=h+1$ its support is the full rational conic.
+
+The conic child nevertheless forgets how its points were paired into
+secants.  Differences of canonically scaled secant products are divisible
+by the conic equation and define quotient configurations of ranks
+$3,6,10$.  For $B_3$ and $H_3$, the two factorization sheets are the unique
+complementary halves with equal first and second moments.  Their signed
+moments vanish in degrees one and two, while the first surviving moment is
+cubic and realizes the outer orientation character.  In the $H_3$ case,
+$A_4\backslash\mathrm{PGL}_2(11)/A_5$ yields six depth profiles of sizes
+$1,4,6/1,4,6$; the singleton profiles recover the matching and, with its
+decoration, the Clebsch parent.
+
+We finally determine which natural passages retain this orientation and
+which erase it.  Cross-sheet designs yield certified quadratic-residue and
+perfect-code shadows, and golden reduction obeys an exact visible/fused law
+modulo $40$, whereas finite theta signatures and fixed-party quantum
+equivalence do not distinguish the sheets.  The structural statements are
+Lean-formalized at their stated boundaries, and the finite claims have
+deterministic certificates and independent replay.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
-projective plane; arc; conic; reflection arrangement.
+projective plane; arc; conic; reflection arrangement; factorization;
+orientation torsor.
 
 \smallskip
 \noindent\textbf{2020 Mathematics Subject Classification.} 51E21, 94B05,
@@ -118,22 +134,34 @@ the \emph{Clebsch hexagon}, a six-arc in $\PG(2,11)$. Thus a natural
 property of the covering-radius structure, with no assumed symmetry or
 conic construction, singles out a classical configuration.
 
-The main theorem starts from no symmetry or conic construction. Among all
-six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
-syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer.
-A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
-conceptual implication; the census is needed only for the numerical clause.
-We then prove quantitative gaps, reconstruct the Brianchon geometry and an
-invariant support bipartition from decoder ambiguity, and isolate $q=11$.
-The word \emph{chirality} below refers only to this unordered bipartition;
-no sign or preferred half is part of the structure. For a Clebsch hexagon
-$K$, the same chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
-$(q-4)(q-11)$ when $q\equiv3\pmod4$. A reflection-arrangement model
-organizes this factorization and the full decoder ambiguity spectrum: the
-fifteen chords are reduced projectivized $H_3$ mirrors. The six joins of a
-four-frame are similarly the projectivized $A_3$ mirrors, placing the two
-conic-filling cases in one framework; separate geometry identifies the
-two complements as conics.
+The first main theorem starts from no symmetry or conic construction.
+Among all six-arcs of $\PG(2,11)$, conic containment of the projective
+deep-hole syndrome locus reconstructs the Clebsch hexagon and its $A_5$
+stabilizer.  A line bound, a chord-defect identity, and Dye's Brianchon
+theorem give the conceptual implication; the census is needed only for the
+numerical clause.  We prove quantitative gaps, reconstruct the Brianchon
+geometry and an invariant support bipartition from decoder ambiguity, and
+isolate $q=11$.
+
+The second main theorem asks what remains after passing from the parent to
+the full conic child.  The unmarked conic code forgets its secant matching.
+The lost data reappears in the conic ideal: differences of matching-secant
+products, divided by the conic equation, form a finite quotient
+configuration.  Its first two moments recover the unique unordered pair of
+factorization sheets, its signed cubic orients that pair, and a six-profile
+double-coset compression recovers a decorated parent from either singleton
+profile.  Here \emph{orientation} means a choice in a two-element
+$C_2$-torsor of sheets.  It is distinct from the intrinsic unordered
+support bipartition recovered by decoder ambiguity, and has no implied
+quantum-information or chiral-polytope meaning.
+
+The reflection-arrangement model places this reconstruction in the complete
+rank-three family.  For a Clebsch hexagon $K$, the chord identity gives
+$|\cU(K)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
+$q\equiv3\pmod4$.  The fifteen chords are reduced projectivized $H_3$
+mirrors.  The six joins of a four-frame are similarly projectivized $A_3$
+mirrors, and $B_3$ supplies the intermediate root-length-defect case.  At
+$q=h+1=5,7,11$ the three reflection complements are full rational conics.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -154,15 +182,11 @@ that census or its extension counts, and our frame-normalized replay is
 independent of the thesis. The companion arcs paper records the
 single conic-locus identification of
 Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
-% NB: re-pinned 2026-07-16 after the companion's architecture revision:
-% prop:q11-code is now Proposition 8.2.  The companion ships first, so verify
-% this citation once more against its release PDF before submission.
 certificate~\cite[Prop.~8.2]{ArcsCompleteOutsideConic}; we reprove it for
 self-containment, and no result below depends on the companion paper. The
-new contribution is the symmetry-free coding
-criterion and its consequences: low-degree rigidity, quantitative gaps,
-the invariant support bipartition, decoder reconstruction, and the
-finite-field boundary.
+paper-specific contribution begins with the symmetry-free coding criterion
+and its consequences: low-degree rigidity, quantitative gaps, the invariant
+support bipartition, decoder reconstruction, and the finite-field boundary.
 Edge already obtains the real Clebsch hexagons from the six opposite-vertex
 axes of an icosahedron~\cite[\S\S19--20]{Edge1956}; the icosahedral mirror
 arrangement and its $6_5,10_3,15_2$ singularity ledger are likewise
@@ -173,10 +197,146 @@ already derive coset-leader and list-weight enumerators from the
 intersection lattice of the parity-check derived arrangement, explicitly
 including redundancy-three MDS secant arrangements
 \cite[Prop.~3.11, Thms.~5.3 and~5.7, Ex.~5.10]{JurriusPellikaan2015}.
-Our paper-specific additions are the explicit $\mathrm{PGL}_3(\F_{11})$
+Further paper-specific additions are the explicit $\mathrm{PGL}_3(\F_{11})$
 bridge from the reduced $H_3$ fivefold points to the displayed code, its
-specialization to this code's decoder strata, and the joint $A_3/H_3$
-organization of the two conic-filling exceptions.
+specialization to this code's decoder strata, the joint $A_3/B_3/H_3$
+conic phase, and the composition of conic-ideal division, balanced
+recovery, cubic orientation, depth compression, and parent reconstruction.
+Raw one-factorizations, the $5,14,22$ marker fibres, matching-design
+interpretations, and coarse Hadamard orbitals are classical inputs.
+
+\section{A guided tour of forgetting and memory}
+\label{sec:tour}
+
+The reconstruction problem begins with a tension.  The projective
+deep-hole locus of the Clebsch code is exceptionally rigid: its containment
+in a conic determines the Clebsch class.  The conic itself is familiar and
+forgetful: its twelve rational points support the extended Reed--Solomon
+code, with no preferred pairing, parent, or orientation.  Figure
+\ref{fig:reconstruction-arc} records how the missing information returns.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  every node/.style={align=center,font=\small},
+  box/.style={draw,rounded corners,minimum height=8mm,inner xsep=4pt},
+  >=stealth]
+\node[box] (p) {parent and\\secant matching};
+\node[box,right=9mm of p] (c) {unmarked\\conic child};
+\node[box,right=9mm of c] (q) {$22$ quotient\\points};
+\node[box,right=9mm of q] (s) {unordered\\$11+11$ sheets};
+\node[box,below=10mm of s] (o) {oriented\\sheet};
+\node[box,left=9mm of o] (d) {six profiles\\$1,4,6/1,4,6$};
+\node[box,left=9mm of d] (r) {decorated\\parent};
+\draw[->] (p) -- node[above]{forgets} (c);
+\draw[->] (c) -- node[above]{divide by $Q$} (q);
+\draw[->] (q) -- node[above]{moments $1,2$} (s);
+\draw[->] (s) -- node[right]{signed cubic} (o);
+\draw[->] (o) -- node[above]{depth map} (d);
+\draw[->] (d) -- node[above]{singleton} (r);
+\end{tikzpicture}
+\caption{The reconstruction arc.  The arrows are respectively a forgetting
+map, an ideal-quotient construction, intrinsic recovery of an unordered
+partition, a torsor orientation, a profile map, and decorated
+reconstruction; they are not all linear quotients.}
+\label{fig:reconstruction-arc}
+\end{figure}
+
+For a perfect matching $M$ of the conic points, let $P_M$ be the product of
+its secant equations under the canonical bracket scaling of
+Section~\ref{sec:factorization}.  All $P_M$ have the same restriction to the
+conic, so $(P_M-P_N)/Q$ is a polynomial.  The Coxeter-selected matchings
+give the finite quotient configurations used below.
+
+\begin{theorem}[Rigidity and the rank-three conic phase]
+\label{thm:headline-rigidity-phase}
+The following statements hold.
+\begin{enumerate}[label=\textup{(A\arabic*)},leftmargin=*]
+\item Among six-arcs of $\PG(2,11)$, conic containment of the full
+projective deep-hole locus characterizes the Clebsch class and recovers its
+$A_5$ stabilizer.
+\item For $A_3,B_3,H_3$, with Coxeter number $h$, the
+reflection-complement code has length
+\[
+ (q-h/2)(q-h+1)
+\]
+and minimum distance $(q-h/2-1)(q-h+1)$; a nonmirror line meets the
+complement in at most $q-h+1$ points.
+\item At $q=h+1$ the complement is the full rational conic and its
+projective-system code is extended GRS.
+\item The square of a Coxeter element generates the split maximal torus in
+$\mathrm{PSL}_2(q)$, and its two moving point-orbits are the two Legendre
+cosets.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Forgetting and balanced recovery]
+\label{thm:headline-balanced}
+\begin{enumerate}[label=\textup{(B\arabic*)},leftmargin=*]
+\item All canonically scaled matching-secant products have equal
+restriction to the conic; every four-endpoint switch difference is
+divisible by $Q$.
+\item The $A_3,B_3,H_3$ quotient configurations have linear ranks
+$3,6,10$, respectively.
+\item In the $B_3$ and $H_3$ configurations, the two Coxeter
+factorization sheets are, up to interchange, the unique complementary
+halves having equal first and second tensor moments.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Cubic orientation and depth]
+\label{thm:headline-depth}
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=*]
+\item With opposite signs on the two sheets, every even signed profile
+moment vanishes, and the primitive weighted barycentre relation
+$v_1+4v_4+6v_6=0$ kills degree one.
+\item Within the signed tensor-moment family and its linear functionals,
+degree three is the first surviving degree.  Its nonzero tensor transforms
+by the outer character and has kernel stabilizer.
+\item For $G=\mathrm{PGL}_2(11)$, $H=A_5$, and the common
+$K=A_4$, the space $K\backslash G/H$ has six labels in two triples of
+sizes $1,4,6$, with profiles
+$v_1,v_4,v_6,-v_1,-v_4,-v_6$.
+\item The profile map has rank two and four-dimensional linear kernel,
+while separating all six labels as a set.
+\item The singleton profiles recover the unordered golden matching pair;
+a choice of sheet and its singleton decoration recovers a Clebsch parent.
+\item In characteristic eleven the depth plane is
+$P(1)^{A_4}/\operatorname{soc}P(1)$, where the projective cover $P(1)$
+has Loewy dimensions $1\mid9\mid1$.  The three positive profile rays
+intrinsically recover the orbit sizes $1,4,6$ and stabilizer orders
+$12,3,2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Rank-three arithmetic gluing]
+\label{thm:headline-gluing}
+\begin{enumerate}[label=\textup{(D\arabic*)},leftmargin=*]
+\item The $A_3$ matching datum fuses.  The $B_3$ and $H_3$ data split into
+two silver and two golden sheets, respectively.
+\item In the $H_3$ case the two displayed $A_5$ stabilizers meet in
+$A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged by an outer
+projectivity carried by the rational $S_4/A_4$ hinge.
+\item The fixed conic child has a twenty-two-parent fibre whose intrinsic
+two-point quotient is the same free orientation torsor detected by the
+sheet character; choosing a point is exactly one bit of decoration.
+\end{enumerate}
+\end{theorem}
+
+The sequence $22\to6\to2\to1$ is an information ledger, not a chain of
+faithful linear images.  In particular, the two-dimensional profile plane
+is not the two-element sheet set.  Sections
+\ref{sec:factorization}--\ref{sec:survival} prove the new arrows after the
+rigidity and Coxeter inputs have been established.
+
+\paragraph{Independence and extension.}
+The unlabelled child admits no equivariant selector of a parent, whereas a
+marked matching supplies exactly the one bit needed to make the selection.
+In Hofstadter's terms~\cite[``Contracrostipunctus'']{Hofstadter1979}, the
+unlabelled child is a record that no equivariant record player can play:
+decorations are styli, and the lattice $22\to6\to2\to1$ lets different
+styli play different tracks.  This is independence from the unlabelled
+theory and decidability in a one-bit extension, not undecidability.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -677,11 +837,11 @@ and the stabilizer statement is clause~(v) of the theorem.
 \begin{remark}[Sharpness of the degree threshold]
 \label{rem:degree-threshold}
 The cutoff cannot be raised from three to four: one non-Clebsch class has
-an $18$-point uncovered locus equal to the rational points of a smooth
-absolutely irreducible quartic of genus three. It is normalized class
-\texttt{C02} in the low-degree replay of Table~\ref{tab:replays}, which
-prints its exact quartic equation; the companion Singular calculation
-certifies smoothness and genus three.
+an $18$-point uncovered locus equal to the rational zero set of a quartic.
+It is normalized class \texttt{C02} in the low-degree replay of
+Table~\ref{tab:replays}, which prints the exact equation and verifies the
+equality point by point.  No smoothness, irreducibility, or genus assertion
+is used here.
 \end{remark}
 
 The rigidity theorem has quantitative consequences at three scales: the
@@ -1245,6 +1405,336 @@ evaluation matrix has full rank six, so none lies on a conic.
 For $k\ge8$ the second moment leaves additional concurrency parameters, so
 the analogous classification remains open.
 
+\section{Factorization memory in the conic ideal}
+\label{sec:factorization}
+
+Write the standard conic as $Q=XZ-Y^2$ and parametrize it by
+$\nu(s:t)=(s^2:st:t^2)$.  For $a=(a_0:a_1)$ and $b=(b_0:b_1)$ on
+$\PG(1,q)$, let $L_{ab}$ denote the secant through $\nu(a),\nu(b)$, scaled
+so that
+\[
+ L_{ab}(\nu(s:t))=[a,(s:t)]\,[b,(s:t)],
+ \qquad
+ [a,b]=a_0b_1-a_1b_0.
+\]
+For four endpoints, the Pl\"ucker relation gives the polynomial identity
+\[
+ L_{ab}L_{cd}-L_{ac}L_{bd}
+   =[a,d][b,c]\,Q.                                      \tag{9.1}
+\]
+Thus a switch of two matching edges changes the secant product by a
+multiple of $Q$.  Iterating switches proves equality of the restrictions
+for matchings in the generated component.  The formal statement used here
+proves complete connectivity for the four-endpoint base and reversibility
+for a switch of arbitrary size; the finite Coxeter matching orbits are
+checked separately.  We do not infer unrestricted connectivity of every
+perfect-matching graph from that base case.
+
+Fix a reference matching $M_0$ and define
+\[
+ \Phi(M)=\frac{P_M-P_{M_0}}{Q}.
+\]
+Changing $M_0$ translates every point by the same vector, so affine moment
+statements and difference ranks are independent of that choice.  Kernel
+reduction of the three displayed Coxeter matching orbits gives
+\[
+\begin{array}{c|ccc}
+ &A_3&B_3&H_3\\ \hline
+\text{matching-orbit size}&5&14&22\\
+\operatorname{rank}\langle\Phi(M)-\Phi(N)\rangle&3&6&10.
+\end{array}                                             \tag{9.2}
+\]
+The symbolic conic Laplacian decomposes the degree-$1,2,4$ homogeneous
+pieces into harmonic and radial parts at the stated characteristics; (9.1)
+is the bridge placing switch differences in the radial summand.  Equation
+(9.2), however, is a finite factorization-image rank statement, not merely
+a consequence of the symbolic dimension formulas.
+
+\paragraph{Proof of Theorem \ref{thm:headline-balanced}(B1--B2).}
+The pullback formula and Pl\"ucker identity prove (B1).  The generic
+augmentation-kernel calculation controls the one-dimensional translation
+lost by choosing $M_0$.  Exact row reduction of the three coordinate
+configurations gives (9.2), proving (B2).  The trust table in
+Section~\ref{sec:verification} separates the symbolic identity, the
+kernel-checked finite ranks, and the classical identification of the
+coordinate orbits with the named Coxeter matchings.
+
+\section{Balanced sheets and cubic-first orientation}
+\label{sec:balanced}
+
+Let $\Omega=\Omega_+\sqcup\Omega_-$ be the $B_3$ or $H_3$
+factorization orbit, with $|\Omega_+|=|\Omega_-|=q$, and let
+$x_\omega=\Phi(\omega)$.  For a signed weight
+$\epsilon=+1$ on $\Omega_+$ and $-1$ on $\Omega_-$, define a scalar shadow
+of the $j$th signed tensor moment by
+\[
+ M_j(\ell)=\sum_{\omega\in\Omega}
+   \epsilon(\omega)\,\ell(x_\omega)^j .
+\]
+The tensor moment is zero exactly when every multilinear shadow is zero.
+An affine change $x\mapsto Ax+c$ changes the first surviving degree-$j$
+moment by $A^{\otimes j}$; lower vanishing removes the translation.
+
+The degree-two recovery is most transparent in the function space on the
+two sheets.  Let $L$ be the affine-evaluation subspace and $L^{\circ2}$ the
+span of coordinatewise products of pairs of functions in $L$.  The finite
+decoders on each sheet prove
+\[
+ L^{\circ2}=
+ \left\{(u,v):\sum_{\Omega_+}u=\sum_{\Omega_-}v\right\}. \tag{10.1}
+\]
+The annihilator of the hyperplane on the right is the line spanned by the
+sheet-sign vector.  Therefore a pointwise $\{\pm1\}$ weight annihilates all
+quadratic products precisely when it is the sheet sign or its negative.
+This proves that the two displayed sheets are the unique balanced
+complementary halves, up to interchange.
+
+An involution exchanges $\Omega_+$ and $\Omega_-$ and negates the six
+compressed profile vectors.  Consequently every even signed profile
+moment vanishes.  On the positive profiles the primitive relation is
+\[
+ v_1+4v_4+6v_6=0,                                      \tag{10.2}
+\]
+which kills the signed barycentre.  A displayed cubic coordinate is
+nonzero in both the $B_3$ and $H_3$ configurations.  Hence degrees one and
+two vanish while degree three survives.  This is the exact meaning of
+``cubic-first'': it concerns signed tensor moments and their linear
+functionals, not all conceivable invariants.
+
+The signed cubic is fixed by the subgroup preserving each sheet and
+negated by the outer generator.  The finite affine-action checks, together
+with nonvanishing, identify its stabilizer inside the displayed generated
+action with the kernel of the sign character.  Identifying that generated
+action with the classical $\mathrm{PSL}_2(q)$ subgroup of
+$\mathrm{PGL}_2(q)$ is a named group-theoretic input.
+
+\paragraph{Proof of Theorem \ref{thm:headline-balanced}(B3) and
+Theorem \ref{thm:headline-depth}(C1--C2).}
+Equation (10.1) and its annihilator calculation prove balanced uniqueness.
+The antipodal identity and (10.2) prove the even and linear cancellations.
+The exact cubic evaluations prove nonvanishing, and the relative-invariant
+lemma gives the kernel stabilizer.  All statements remain valid after an
+affine change of the quotient coordinates by the first-survival formula.
+
+\section{Six depth profiles and parent reconstruction}
+\label{sec:depth}
+
+Put $G=\mathrm{PGL}_2(11)$, let $H=A_5$ stabilize one golden matching, and
+let $K=A_4$ be the common subgroup selected by an edge decoration.  The
+finite two-sided action has six $K$--$H$ relation cells.  Its $K$-orbits
+on each $H$-sheet have sizes $1,4,6$.  One secant-incidence recount on a
+representative of each cell gives the six distinct profiles
+\[
+ v_1,\ v_4,\ v_6,\ -v_1,\ -v_4,\ -v_6.                \tag{11.1}
+\]
+The positive three satisfy (10.2) and two plane equations.  The resulting
+linear map from the six relation indicators has rank two and kernel
+dimension four, but (11.1) shows that its restriction to the set of six
+labels is injective.  Linear rank loss therefore does not imply loss of the
+finite label.
+
+The singleton cells supply the reconstruction.  The positive and negative
+singletons identify the two golden matchings, so without a choice the
+profile data recover their unordered pair.  Choosing a sheet and its
+singleton selects the matching decoration required by the explicit parent
+reconstruction map.  The conclusion is a parent with that decoration; an
+unmarked conic alone supplies neither the sheet nor the singleton.
+
+The characteristic-eleven permutation module gives an intrinsic
+explanation of the rank drop.  On one sheet the degree-eleven permutation
+module is the projective cover $P(1)$ with Loewy dimensions $1\mid9\mid1$.
+Its $A_4$-fixed space has orbit-sum basis of sizes $1,4,6$, and quotienting
+by the all-ones socle gives precisely the depth plane.  The unique primitive
+positive dependence of the three rays is $1:4:6$, so the rays themselves
+recover both those orbit sizes and, by orbit--stabilizer, the orders
+$12,3,2$.
+
+\begin{proposition}[Modular depth quotient and source boundary]
+\label{prop:modular-depth-plane}
+Over $\F_{11}$ the depth plane is
+\[
+  P(1)^{A_4}/\operatorname{soc}P(1),\qquad
+  \operatorname{Loewy}(P(1))=1\mid9\mid1.
+\]
+Separately, the three-dimensional relative-cubic invariant space $R$ and
+its coinvariants $M_G$ have canonical maps
+\[
+ R\xrightarrow{\ \pi\ }M_G\xrightarrow{\ N\ }R
+\]
+of ranks two and one, with
+$\operatorname{im}\pi=\ker N$ and
+$\operatorname{im}N=\ker\pi=\langle[1:3:9]\rangle$.
+Invariant-to-coinvariant projection and contraction by the unique
+rank-one semi-invariant form therefore construct the same canonical Tate
+two-plane.  This plane is not naturally identified with the depth plane:
+the labelled cubic orbit classes have relation $[2,9,1]$, while the depth
+profiles have relation $[2,8,1]$; divided transfer kills the former
+balanced relations and fixes the latter socle.
+\end{proposition}
+
+\paragraph{Proof of Theorem \ref{thm:headline-depth}(C3--C6) and
+Proposition~\ref{prop:modular-depth-plane}.}
+The exact generator permutations partition all twenty-two matchings into
+the six orbits of (11.1); the representative recounts are constant on
+those orbits.  Row reduction gives the rank and kernel dimensions, and
+direct comparison proves set-theoretic separation.  The two singleton
+recovery maps give the unordered matching pair, after which the
+matching-decorated recovery theorem returns the parent.  Projectivity,
+the local two-dimensional commuting algebra, and exactness of
+$A_4$-fixed points give the $1\mid9\mid1$ quotient.  Exact matrices give
+the Tate cycle, the contraction kernel, the two distinct labelled
+relations, and the divided-transfer obstruction.
+
+\section{Rank-three arithmetic gluing}
+\label{sec:gluing}
+
+The factorization split has a uniform arithmetic description at the three
+conic fields.  The $A_3$ marker polynomial is inert over $\F_5$, and its two
+geometric roots form one Frobenius orbit; projectively the matching datum
+is fused.  The $B_3$ and $H_3$ polynomials split over $\F_7$ and $\F_{11}$,
+producing the two silver and two golden sheets.  Exact projective
+permutation closure verifies these three cases and the fixed-point-free
+matching involutions.
+
+In the golden case, the two displayed stabilizers have order $60$, their
+intersection has order $12$, and the subgroup they generate has order
+$660$.  The rational rotation denoted $R_z$ reduces to a projectivity of
+nonsquare determinant that exchanges the two matchings.  Its common
+octahedral carrier has determinant kernel of order $12$.  With the
+classical identifications of these literal groups, this is the
+$A_5,A_4,\mathrm{PSL}_2(11),S_4$ gluing stated in
+Theorem~\ref{thm:headline-gluing}(D2).  The exact finite closure does not by
+itself prove the spinor-norm or number-field names attached to the rational
+model.
+
+Above the fixed full-conic child, the twenty-two explicitly reconstructed
+parents form two eleven-element orbits under the determinant character.
+The quotient by the kernel action is a free two-point set.  The same sign
+character controls the matching sheets, the outer transporter, and the
+fixed-child quotient.  There is no invariant point, while a chosen point
+selects one sheet and hence one decorated parent.
+
+\paragraph{Proof of Theorem \ref{thm:headline-gluing}.}
+The frozen reduction polynomials, matching permutations, and group
+closures prove (D1) and the literal finite content of (D2).  The
+determinant-kernel comparison proves equality of the three sign readouts.
+The fixed-child fibre computation gives the two eleven-element orbits and
+the free quotient, proving (D3).  The classical group and rational spinor
+interpretations are precisely the cited-input boundary recorded in
+Section~\ref{sec:verification}.
+
+\section{The survival and erasure ledger}
+\label{sec:survival}
+
+The orientation torsor is not preserved by every natural passage.  The
+following table states the exact Paper-1 boundary.
+\[
+\begin{array}{p{0.28\linewidth}p{0.23\linewidth}p{0.40\linewidth}}
+\toprule
+\textbf{passage}&\textbf{retained data}&\textbf{verified scope}\\
+\midrule
+unmarked conic child&none&no preferred matching, parent, or orientation\\
+quotient moments $1,2$&unordered sheets&unique balanced complementary
+halves in the displayed $B_3,H_3$ configurations\\
+signed cubic&orientation&first survivor among signed tensor moments and
+their linear shadows\\
+singleton depth profile&decorated parent&the six displayed
+$A_4\backslash G/H$ labels\\
+quadratic-residue/Witt design&finite shadow&exact incidence, code,
+full-support, secant, and Hadamard tables\\
+integral Hadamard degeneration&module shadow&one structural sentence:
+the mod-$3$ rank-six complex has the extended Golay code as kernel and
+image; its mechanism is reserved for the sequel\\
+golden reduction&conditional split/fusion&the exact frozen residue classes
+modulo $40$\\
+finite theta signatures&erased&equal sheet signatures in the displayed
+genus-three and genus-five tables\\
+fixed-party quantum transport&erased&complete support transport and
+transition-forced local-Clifford search for the displayed states\\
+ambient Fourier matrices&finite shadow&exact square, trace, and
+weighted-adjoint identities; no small-Weil-module identification\\
+\bottomrule
+\end{array}
+\]
+
+The design row includes the cyclic quadratic-residue two-design, the
+displayed ternary weight distribution, the Steiner $5$-design on minimum
+supports, the twelve full-support projective points and all sixty-six of
+their secants, and the order-twelve Hadamard identity.  Parity extension
+gives the Steiner system $S(5,6,12)$; the two degree-twelve $M_{11}$
+parents meet in the frozen $\mathrm{PSL}_2(11)$ and generate $M_{12}$, while
+Hadamard row--column duality exchanges them.  These classical names are
+attached only after the literal finite closures and normalizer checks.
+
+The modulo-$40$ statement is conditional on the frozen arithmetic
+predicates: within that domain the two golden sheets are visible or fused
+according to the exact residue partition checked by the certificate.  It
+is not an all-prime reciprocity theorem, a density statement, or a
+construction of a common quadratic-character carrier.
+
+The final two rows are likewise bounded.  Their certificates check
+finite quadratic-value histograms and matching-intersection signatures; the
+divisor-theoretic theta interpretation uses the cited classical input.  The
+quantum certificate proves the displayed monomial transport,
+signed-transpose identity, and complete fixed-party kernel--image
+equivalence.  It does not classify arbitrary complex local unitaries or
+assert a canonical geometric reconstruction of every state.
+
+\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]
+\label{thm:torsor-rosetta-close}
+Let $T_q$ denote the determinant-sign torsor for the split rank-three
+working primes.  The following statements hold.
+\begin{enumerate}[label=\textup{(E\arabic*)},leftmargin=*]
+\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free
+$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two
+spin lifts form one Frobenius orbit over $\F_{25}$, hence one connected
+étale point over $\F_5$ and no orientation bit.
+\item The certified dictionary has twelve rows: the two matching sheets,
+the two nontrivial unipotent classes, the two cyclotomic period factors,
+the two primes of $\mathbb Q(\sqrt{-q})$, the two primes of
+$\mathbb Z[\sqrt2]$ or $\mathbb Z[\phi]$ above the working prime, the two lower Weil
+constituents, the two cubic signs, the two QR/Barker polarities, the two
+signed Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero
+$\operatorname{Spec}\mathbb Q(\sqrt5)$ row, and the Reed--Solomon fixed-child
+extremal fibre.  Each two-valued row available at a given $q$ is
+outer-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting
+face of the same swap, not another two-point carrier; the
+characteristic-zero row specializes specifically to $T_{11}$.
+\item The marked Coxeter matching points all available rows simultaneously
+through the single trace rule.  After forgetting it there is no section:
+the \v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor
+description are three readouts of
+\[
+ [T_q]=\operatorname{sgn}\colon\mathrm{PGL}_2(q)\longrightarrow C_2,
+ \qquad \ker(\operatorname{sgn})=\mathrm{PSL}_2(q).
+\]
+\item At $q=11$ the Mathieu hinge is forced outer.  Indeed
+$N_{M_{12}}(\mathrm{PSL}_2(11))=\mathrm{PSL}_2(11)$,
+$\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents
+are non-conjugate in $M_{12}$.
+\item The cubic sign and trace residue co-vary with $T_q$, but their
+numerical dictionary is convention-dependent between $q=7$ and $q=11$.
+The uniform datum is the marking, not a residue formula.  No integral
+Galois-odd cubic is assumed: the bit is carried arithmetically by the prime
+fibre.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The matching, unipotent, period, split-prime, Weil, and reduction
+dictionaries identify the first seven rows with the determinant-sign
+torsor.  Exact outer-element calculations add the QR/Barker and signed
+Fourier rows.  The normalizer and two-parent computations give the forced
+outer Mathieu clause.  The characteristic-zero resolvent
+$\operatorname{Spec}\mathbb Q(\sqrt5)$ reduces at eleven to the two golden
+fibres, and the fixed-child computation identifies its two-sheet quotient
+with the same matching orbit.  The two comparison squares identify the
+\v{C}ech and selector certificates with the sign character.  Finally, the
+explicit residues at seven and eleven prove the per-case-dictionary
+boundary.  Every finite comparison and its independent replay is listed
+in Section~\ref{sec:verification}.
+\end{proof}
+
 \section{Verification architecture}
 \label{sec:verification}
 
@@ -1252,18 +1742,67 @@ Tables~\ref{tab:verification} and~\ref{tab:replays} separate mathematical
 input, kernel-checked formal proof, and exhaustive finite enumeration. Here
 ``kernel-checked'' means that Lean's trusted kernel checks the stated
 implication; executable replays instead enumerate the finite search space
-with exact arithmetic. Paths are relative to
-\path{lean/RelativeConicArcs/} and the paper directory.
+with exact arithmetic.  The paper repository and the shared Lean repository
+are distributed separately.  Paper paths below are relative to the paper
+root; Lean paths are relative to the shared Lean root.  The
+claim-by-claim machine-readable ledger in
+\path{verification/trust_manifest.json} records the exact manuscript hash,
+shared-Lean commit, gate and audit hashes, executable artifacts, cited
+inputs, and residual trust for every published claim.  From the paper root,
+the single release command is
+\[
+ \texttt{python3 verification/verify\_release.py
+ --lean-root /path/to/shared-lean}.
+\]
+It validates the manifest before running any declared check, rejects a
+dirty or mismatched checkout, and verifies that the run changes neither
+repository.
 
-% C182 RELEASE GATE: after the immutable archive is published, replace the
-% bracketed DOI, remove \iffalse/\fi, and rebuild the manuscript.
-\iffalse
-\paragraph{Data and code availability.}
-The manuscript source, rendered PDF, executable replays, and Lean development
-are archived at \emph{[C182 DOI]}. The paths in
-Tables~\ref{tab:verification} and~\ref{tab:replays} are relative to that
-archived release.
-\fi
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}
+                    >{\raggedright\arraybackslash}p{0.31\textwidth}
+                    >{\raggedright\arraybackslash}p{0.35\textwidth}@{}}
+\toprule
+Result & Formal gate & External semantic boundary or replay\\
+\midrule
+pairing forgetting and harmonic quotient
+& \path{RelativeConicArcs/Gates/ClebschPaperTrust.lean}
+& standard conic identification; four-endpoint connectivity boundary\\
+factorization ranks and balanced sheets
+& same paper trust gate
+& exact finite Coxeter coordinate identification\\
+cubic and six-profile depth
+& same paper trust gate
+& classical $A_4,A_5,\mathrm{PGL}_2(11)$ names; finite relation-cell replay\\
+arithmetic gluing and torsor dictionary
+& same paper trust gate
+& \path{verification/evidence/torsor_dictionary/verify.py}\\
+Witt--Hadamard shadow and survival boundaries
+& same paper trust gate
+& literal finite actions; classical Mathieu and spinor names remain cited inputs\\
+theta, Fourier, and fixed-party passages
+& same paper trust gate
+& \path{verification/evidence/passage_interfaces/verify.py}\\
+\bottomrule
+\end{tabular}
+\caption{Verification map for the factorization-memory spine.  Sharing a
+gate does not merge claim routes: the trust manifest names the adequate
+terminal and axiom list separately for each row.}
+\label{tab:factorization-verification}
+\end{table}
+
+\paragraph{Provenance and assistance disclosure.}
+The author selected the mathematical claims, checked the cited sources, and
+accepts responsibility for the manuscript.  Language models assisted with
+proof exploration, formal-code drafting, executable-checker drafting, and
+editorial revision.  No model output is treated as evidence.  Every
+paper-facing claim is routed in the trust manifest to a kernel-checked Lean
+statement, an exact executable replay, a mathematical proof with pinpointed
+classical inputs, or an explicit decomposition of those routes.  Generated
+finite data are retained only when their generator, schema, coverage,
+hashes, replay, and residual trusted boundary are recorded.
 
 \begin{table}[H]
 \centering
@@ -1276,30 +1815,34 @@ Result & Mathematical input & Kernel-checked formalization \\
 \midrule
 $A_5$ orbits and syndrome conic
 & Dye; Proposition~\ref{prop:a5-point-orbits}
-& \path{Q11A5PointOrbits.lean}; \path{Q11Coding.lean} \\
+& \path{RelativeConicArcs/Q11A5PointOrbits.lean};
+  \path{RelativeConicArcs/Q11Coding.lean} \\
 $A_3/H_3$ arrangement synthesis
 & exact root coordinates; intersection lattices
-& \path{ReflectionArrangements.lean};
-  \path{ReflectionArrangementDecoding.lean} \\
+& \path{RelativeConicArcs/ReflectionArrangements.lean};
+  \path{RelativeConicArcs/ReflectionArrangementDecoding.lean} \\
 Decoding and support bipartition
 & arc--coset dictionary; Edge--Dye triangles
-& \path{Q11DecodingSynthesis.lean} \\
+& \path{RelativeConicArcs/Q11DecodingSynthesis.lean} \\
 Rigidity theorem
 & line bound; chord defect; Dye's Theorem~1
-& \path{Q11DyeAxioms.lean}; \path{Q11DyeConsequences.lean};
-\path{SixArcDefectBridge.lean} \\
+& \path{RelativeConicArcs/Q11DyeAxioms.lean};
+  \path{RelativeConicArcs/Q11DyeConsequences.lean};
+  \path{RelativeConicArcs/SixArcDefectBridge.lean} \\
 Gap and low-degree loci
 & finite linear algebra over $\F_{11}$
 & --- \\
 Uniqueness of $q=11$
 & chord moments; cited Sylvester bound
-& \path{ClebschChordDefect.lean}; \path{Q9Sylvester.lean} \\
+& \path{RelativeConicArcs/ClebschChordDefect.lean};
+  \path{RelativeConicArcs/Q9Sylvester.lean} \\
 Clebsch-family formula
 & Dye's ten Brianchon points and edge criterion
 & --- \\
 The range $4\le k\le7$
 & two universal chord moments
-& \path{SmallKChordMoments.lean}; \path{SmallKGeometricBridge.lean}
+& \path{RelativeConicArcs/SmallKChordMoments.lean};
+  \path{RelativeConicArcs/SmallKGeometricBridge.lean}
 \\
 \bottomrule
 \end{tabular}
@@ -1393,35 +1936,124 @@ and singular conic forms in characteristic two. A separate $q=9$
 certificate constructs the polarity graph, verifies the passant/distance-two
 dictionary, and computes clique number five.
 
+\section*{Appendix: The relative-cubic Tate plane}
+\addcontentsline{toc}{section}{Appendix: The relative-cubic Tate plane}
+\label{app:tate-plane}
+
+This appendix records the source-side naturality statement kept separate
+from the reconstruction proof.  Put $G=\mathrm{PGL}_2(11)$ and
+$M=\operatorname{Sym}^3(W)\otimes\chi$, where $\chi$ is the outer sign.
+The invariant space $R=M^G$ and the coinvariant space $M_G$ both have
+dimension three.  Canonical projection and group norm form the cycle
+\[
+ R\xrightarrow{\ \pi\ }M_G\xrightarrow{\ N\ }R,\qquad
+ \operatorname{rank}\pi=2,\quad\operatorname{rank}N=1,
+\]
+with $\operatorname{im}\pi=\ker N$ and
+$\operatorname{im}N=\ker\pi=\langle[1:3:9]\rangle$.  Hence
+$R/\ker\pi$ is a canonical Tate two-plane.  Independently, the invariant
+symmetric-form pencil on $W$ has a unique rank-one member, the square of
+an outer-odd covector.  Contraction against that covector has matrix
+\[
+ \begin{pmatrix}8&1&0\\0&8&1\end{pmatrix}
+\]
+in the frozen relative basis, so it has the same kernel and constructs the
+same plane.
+
+These two source constructions do not identify the Tate plane with the
+depth plane.  The three canonical $A_4$ orbit-cube classes have sole
+relation $[2,9,1]$, whereas the labelled depth profiles have relation
+$[2,8,1]$.  The integral divided-transfer operator kills the balanced
+source relations but fixes the depth socle.  Orbital, invariant-correlation,
+quadratic-coinvariant, and ordered-rank-flag tests likewise leave no
+canonical bridge.  Thus the positive statement is source intrinsicity;
+the non-identification is a proved scope boundary.
+
+\section*{Appendix: Headline statement adequacy}
+\addcontentsline{toc}{section}{Appendix: Headline statement adequacy}
+\label{app:adequacy}
+
+The deterministic extraction in
+\path{verification/statement_adequacy.json} preserves the exact \TeX{}
+of every theorem-like environment, its label or content-addressed key,
+source line, and SHA-256 digest.  The following printed summary records the
+intended adequacy boundary of the headline blocks; the machine-readable
+trust manifest splits every numbered clause into its own route.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}
+                    >{\raggedright\arraybackslash}p{0.31\textwidth}
+                    >{\raggedright\arraybackslash}p{0.40\textwidth}@{}}
+\toprule
+Statement & Formal/computational surface & Clauses kept external or mixed\\
+\midrule
+Theorem~\ref{thm:headline-rigidity-phase}
+& retained rigidity gates; weighted-adjoint and Coxeter-phase terminals
+& Dye equality inputs; coordinate-to-Coxeter and extended-GRS identifications\\
+Theorem~\ref{thm:headline-balanced}
+& conic-matching, harmonic, factorization, and balanced-sheet terminals
+& arbitrary-size matching connectivity beyond the proved boundary;
+classical group identification\\
+Theorem~\ref{thm:headline-depth}
+& moment-trade, balanced-sheet, double-coset depth, and modular-depth terminals
+& named $A_4,A_5,\mathrm{PGL}_2(11)$ semantics; no identification of the
+depth plane with the relative-cubic plane\\
+Theorem~\ref{thm:headline-gluing}
+& arithmetic-gluing and fixed-child terminals plus exact replay
+& classical spinor and number-field interpretations\\
+Theorem~\ref{thm:torsor-rosetta-close}
+& torsor dictionary, survival-boundary, and Mathieu-hinge terminals plus
+independent exact replay
+& classical group and cohomological names; no cross-characteristic scheme,
+integral cubic, or all-prime classification\\
+\bottomrule
+\end{tabular}
+\caption{Human-readable headline adequacy summary.  The exact terminal,
+axiom, file-hash, citation, and residual-trust data are in the manifest.}
+\end{table}
+
 \section{Conclusion}
 
-The Clebsch code shows that covering-radius data can recover geometry that
-was not built into the code: conic containment of the deep-hole directions
-forces the Clebsch hexagon and hence its $A_5$ symmetry. The proof separates
-the mechanism from the census. A line bound and a chord-defect identity
-reduce the geometric condition to Dye's equality case; enumeration is
-needed only for the sharp numerical gap and its refinements.
+The projective deep-hole conic of the Clebsch code is both rigid and
+forgetful.  As an unmarked locus it characterizes the parent among
+six-arcs of $\PG(2,11)$, yet as a conic code it retains no preferred secant
+pairing or orientation.  The conic ideal resolves this tension.
+Secant-product differences vanish on the child but survive after division
+by its equation; their quotient configuration recovers the unique
+unordered sheets from second moments, orients them in degree three,
+compresses them to six double-coset profiles, and recovers a decorated
+parent from the singleton fibres.
 
-The same chord moments explain both the isolation of $q=11$ and the
-classification for $4\le k\le7$. The paired $A_3$ and $H_3$ reductions
-organize the two surviving conic-filling cases at arrangement level, while
-the conic equations remain separate geometry. For $k\ge8$, further
-concurrency moments are needed. A second problem is to connect fixed-$k$
-rigidity with the large-arc conic-forcing regime.
+The rank-three Coxeter phase explains why this chain belongs to a complete
+small family.  The reflection-complement codes for $A_3,B_3,H_3$ obey one
+distance law and become conic codes at $q=h+1$.  Their matching data fuse in
+the $A_3$ control, split through the silver roots in $B_3$, and split
+through the golden roots in $H_3$.  In the last case the two stabilizers
+meet along $A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged through
+the rational $S_4/A_4$ hinge.
 
-There are two distinct inverse problems here. The companion arcs paper starts
-from the exact embedded set $U(A)$. In the six-column case and for $q\ge16$,
-two incidence gaps recover first its fifteen secants and then their six
-fivefold points; hence $U(A)$ determines the literal unlabelled arc and its
-full projective-semilinear stabilizer~\cite{ArcsCompleteOutsideConic}. The
-present theorem starts from less coordinate-specific information---only
-that the deep-hole locus is contained in some conic---and works at $q=11$,
-below that sharp line-count range. The conic itself has a larger ambient
-stabilizer than the hexagon, so its symmetry group does not simply reveal
-$A_5$. The rigidity theorem instead recovers the projective Clebsch class,
-from which the $A_5$ stabilizer follows. Thus the large-field result inverts
-an exact locus, whereas the Clebsch result rigidifies a low-degree
-containment condition.
+The survival ledger gives a precise boundary.  Quadratic-residue designs
+and perfect-code spans retain finite shadows, and the frozen golden
+reduction data obey the exact modulo-$40$ partition.  The displayed theta
+signatures do not orient the sheets, and the displayed golden quantum
+states are equivalent even with fixed party labels.  The Fourier matrices
+satisfy the exact restricted identities, but this does not turn the
+quotient spaces into small Weil modules.  Orientation is carried by
+specific comparison data, not by every natural invariant of the objects.
+
+The torsor-Rosetta theorem identifies the object before asking for its
+mechanism.  At the split working primes the missing bit is the
+determinant-sign torsor $T_q$; at the inert $A_3$ prime it fuses.  The
+characteristic-zero golden resolvent reduces to $T_{11}$, the fixed-child
+fibre is the same finite torsor, and the Mathieu action is forced outer.
+The one no-section class has cohomological, selector, and torsor readouts.
+No integral Galois-odd cubic is needed.
+
+The remaining question is therefore deliberately narrow: which arithmetic
+or metaplectic mechanism produces the characteristic-$q$ gluing of this
+torsor while the theta and quantum passages erase it?
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
@@ -1533,6 +2165,11 @@ V.~Guruswami and A.~Vardy,
 \newblock Maximum-likelihood decoding of Reed--Solomon codes is NP-hard,
 \newblock \emph{IEEE Transactions on Information Theory} \textbf{51}(7)
 (2005), 2249--2256.
+
+\bibitem{Hofstadter1979}
+D.~R.~Hofstadter,
+\newblock \emph{G\"odel, Escher, Bach: An Eternal Golden Braid},
+\newblock Basic Books, New York, 1979.
 
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,
