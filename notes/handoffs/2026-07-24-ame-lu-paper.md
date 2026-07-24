@@ -68,6 +68,17 @@ all-prime-power rigidity theorem, the odd admitted pencil, and detector-only
 exceptional characteristics.  See
 `2026-07-24-c561-ame-lu-theorem-freeze.md`.
 
+**C562 closed (2026-07-24): qualified LU-rigidity novelty boundary.**
+Rains's qubit `[[2m,2m-2,2]]` theorem already uses rank-one recovery of a
+diagonal three-Pauli tensor, and Van den Nest--Dehaene--De Moor turn it into
+a minimal-support LU-to-LC criterion.  No screened source states C560's
+full `q^2-1` Weyl-axis extension or its all-prime-power linear
+`[6,3,4]_q` MDS/CSS theorem.  The manuscript may claim this exact scope
+only with “to our knowledge,” must credit the Rains--Van den Nest mechanism,
+and must retain “equal-phase CSS”; arbitrary phased `AME(6,d)` states have
+infinitely many LU classes.  See
+`2026-07-24-c562-ame-lu-literature-audit.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -83,9 +94,9 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C562 is next; C563 is independently ready.  C562 audits the frozen headline
-and portable diagonal-tensor criterion before any novelty wording.  C563
-imports only the computations retained by C561's hierarchy.
+C563 is next.  It imports only the computations retained by C561's
+hierarchy.  C562's qualified wording is the binding novelty boundary for
+the first manuscript draft.
 
 ## Completion gates
 

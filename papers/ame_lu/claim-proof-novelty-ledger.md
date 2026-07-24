@@ -14,7 +14,7 @@ future related-work or novelty statement must carry the read depth required by
 | Pentad and signed-sheet forgetfulness | proved in C397/C546 | not yet imported | classical core must be credited | boundary result |
 | Four-copy divisor and transport sheaf | proved in C548/C550 | not yet imported | no paper-level audit | mechanism theorem after evidence import |
 | Generic constancy of fixed-copy contractions | proved in C559 | no new computation | unaudited; no priority claim | mechanism boundary explaining why the divisor is not a coordinate |
-| All-MDS/CSS LU-intertwiner rigidity and pencil `LU iff LC iff z` | proved in C560 | no computation required | claim-specific audit queued as C562 | headline theorem after C561 freeze |
+| All-MDS/CSS LU-intertwiner rigidity and pencil `LU iff LC iff z` | proved in C560 | no computation required | C562 complete: Rains and Van den Nest et al. pre-empt the qubit axis-rigidity mechanism; no full-Weyl all-prime-power MDS/CSS predecessor located; qualified wording only | headline theorem with Rains--Van den Nest ancestry and “to our knowledge” |
 
 ## Promotion rule
 
