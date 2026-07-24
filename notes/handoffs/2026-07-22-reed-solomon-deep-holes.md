@@ -4,12 +4,13 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C532, C538--C544 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C532, C538--C544, C578 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
-persistent/Lucas union; both rank-one Lucas strata are shallow, while the rank-two nonconstant
-Artin--Schreier cover and the complementary two-dimensional quotient remain explicit residues.
+persistent/Lucas union; every stratum in the finite-orbit block `P(U)` is shallow, and only the
+complementary two-dimensional quotient remains as an explicit residue, with
+`0 <= rho_q <= q^4(q+1)`.
 The generic five-marker deletion/transverse budgets are `42/19`, and the characteristic-two
 ordered-Hessian base/deletion thresholds are `45/23`.  C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
@@ -76,9 +77,14 @@ multiplicities are `1/2/3/0/1`, so the `(2)(3)`-twisted orbit is the unique zero
 The carrier complement has a two-dimensional quotient.  C532's
 entry gate is green with both residues explicit, but neither task is a manuscript or preprint gate.
 C533 independently owns C525 threshold/deletion sharpening.
-C578 is now the highest-EV open task: it owns only the rank-two nonconstant
-Artin--Schreier residue from C531/C532 and must stop before the generic
-two-dimensional carrier quotient.
+C578 closes the rank-two nonconstant Artin--Schreier residue from C531/C532.
+Every rational rank-two twist is shallow in every admissible binary field:
+the direct rational-syndrome descent has genus at most one, five-root bad
+degree at most `102`, and deletion `23/48`; the uniform theorem starts at
+`q=128`, a complete five-twist certificate closes `q=64`, and C531 supplies
+the frozen `q=16,32` controls.  C532's remaining characteristic-two residue
+is confined to the generic two-dimensional carrier quotient, with
+`0 <= rho_q <= q^4(q+1)`.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
 Characteristic-two Hessian--Arf functoriality and coherent modular polar flags survive as
 independent follow-ups, queued as C535/C536 without displacing C538/C545.  A late theorem-text check of
@@ -693,7 +699,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C530 | degree-nine `e_7` quotient cover | complete (obstruction exit) | nonconstant Artin--Schreier normalization; `AGL_3(F2)` additive subcover; orbit shallow over every admissible field | exact distinguished-orbit arithmetic | closed `e_7` theorem boundary |
 | C531 | full degree-nine Lucas-carrier strata | complete (obstruction exit) | tensor filtration; three finite geometric strata; uniform rank-one shallowness; rank-two \(A_5\) twists plus nonconstant Artin--Schreier cover; two-dimensional complement quotient | exact carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | complete | odd `q>=59` persistent-only; binary `q>=64` persistent/Lucas containment; exact orbit law and explicit rank-two/positive-moduli residues | strongest honest fixed-level theorem without a carrier census | fixed-level theorem |
-| C578 | degree-nine rank-two Artin--Schreier avoidance | queued; highest EV after C532 | frozen C531 cover/twists and C532 residue | uniform rank-two shallowness or exact surviving field/twist obstruction | first reduction of the binary redundancy-ten residue |
+| C578 | degree-nine rank-two Artin--Schreier avoidance | complete | direct all-twist descent; genus at most one; bad-base degree `102`; exact `23/48` deletion; `q>=128` theorem plus complete `q=64` certificate and frozen `q=16,32` controls | every admissible rank-two twist shallow; C532 residue bound reduced to `q^4(q+1)` | rank-two binary redundancy-ten residue closed |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
@@ -720,12 +726,11 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C578 | executable after C532 | attacks the first explicit proper residue in the newest fixed-level theorem through a concrete nonconstant cover |
-| 2 | C535 | executable independently | tests the best surviving route to a reusable modular replacement theorem |
-| 3 | C536 | after C535 | could replace repeated level-specific contained-component calculations by a coherent Fano-boundary theorem |
-| 4 | C533 | executable independently | cheap uniform constant improvement, valuable but does not change the classification architecture |
-| 5 | C537 | after C536 | high-upside reconstruction comparison, but downstream of the modular theorem spine |
-| 6 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
+| 1 | C535 | executable independently | tests the best surviving route to a reusable modular replacement theorem |
+| 2 | C536 | after C535 | could replace repeated level-specific contained-component calculations by a coherent Fano-boundary theorem |
+| 3 | C533 | executable independently | cheap uniform constant improvement, valuable but does not change the classification architecture |
+| 4 | C537 | after C536 | high-upside reconstruction comparison, but downstream of the modular theorem spine |
+| 5 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -751,9 +756,11 @@ gates remain binding.
   level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
   C530 closes the distinguished `e_7` quotient: a nonconstant Artin--Schreier generic layer and
   larger `AGL_3(F2)` additive cover make that full orbit shallow over every admissible field.
-  C531 closes the finite tensor-block strata and stops at the rank-two nonconstant
-  Artin--Schreier cover and the complementary two-dimensional quotient.  C532 owns the resulting
-  redundancy-ten synthesis with those residues visible.  C533 separately sharpens C525's bound.
+  C531 closes the finite tensor-block strata and isolates the rank-two
+  nonconstant Artin--Schreier cover and the complementary two-dimensional
+  quotient.  C578 closes the former uniformly across every admissible field
+  and rational twist; C532's remaining redundancy-ten residue is exactly the
+  latter.  C533 separately sharpens C525's bound.
   No ambient census substitutes for any of these calculations.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
@@ -782,10 +789,10 @@ history.
 
 ## Next command
 
-`go C578`
+`go C535`
 
-(C532 has closed the strongest honest redundancy-ten synthesis. C578 is the
-highest-EV successor and attacks its rank-two Artin--Schreier residue without
-opening the two-dimensional quotient. C545 remains externally
+(C578 has closed C532's rank-two Artin--Schreier residue without opening the
+two-dimensional quotient. C535 is now the highest-EV executable successor
+and tests the reusable Hessian--Arf functoriality boundary. C545 remains externally
 blocked on its final reader, clean export/replay, immutable identifiers, and author/account
 confirmation. No external upload is authorized.)

@@ -1,6 +1,6 @@
 # C578 — degree-nine rank-two Artin--Schreier avoidance
 
-**Lane:** `reed-solomon` · **Status:** queued; highest EV after C532
+**Lane:** `reed-solomon` · **Status:** complete
 
 ## Objective
 
@@ -14,8 +14,15 @@ Prove uniform rational avoidance on C531's geometrically integral
 Artin--Schreier six-root cover across every rational \(A_5\)-twist in the
 admissible binary coding range, or isolate the exact field/twist obstruction.
 
-Eventual report:
+Report:
 `notes/2026-07-24-c578-degree-nine-rank-two-artin-schreier-avoidance.md`.
+
+Every rational rank-two twist is shallow in every admissible binary field.
+The direct rational-syndrome descent gives genus at most one, five-root bad
+degree at most `102`, and deletion `23/48`; the theorem starts at `q=128`,
+while a complete five-twist certificate closes `q=64` and C531 already
+closes `q=16,32`.  C532's residual bound improves to
+`0 <= rho_q <= q^4(q+1)`.
 
 ## Entry gate
 

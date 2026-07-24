@@ -154,7 +154,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
-- **C562 `[ame-lu]` [QUEUED; HIGHEST EV; after C561 theorem freeze]** — complete the claim-specific literature and forward-citation audit for the frozen theorem package, with source read depths, exact search records, coverage gaps, and defensible novelty wording → `notes/2026-07-24-c562-ame-lu-literature-audit.md`.
 - **C563 `[ame-lu]` [QUEUED; PARALLEL AFTER C561]** — import every adopted paper-facing computation as a paper-local reproducibility bundle with exact generator, compact certificate, independent replay, manifest entry, and SHA-256 hashes → `notes/2026-07-24-c563-ame-lu-evidence-package.md`.
 - **C564 `[ame-lu]` [GATED; after C561--C563]** — write the first complete manuscript draft, synchronize theorem labels and boundaries with the ledgers, build a warning-free PDF, and record all remaining proof and exposition gaps → `notes/2026-07-24-c564-ame-lu-first-draft.md`.
 - **C565 `[ame-lu]` [GATED; after C561 theorem freeze]** — build the shared Lean interface for six-arcs, `[6,3,4]` MDS kernels, equal-phase CSS states, AME conditions, party actions, and the exact manuscript convention dictionary → `notes/2026-07-24-c565-ame-lu-lean-foundation.md`.
