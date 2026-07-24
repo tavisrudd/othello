@@ -149,6 +149,10 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
+- **C554 `[relconic]` [ACTIVE]** — derive the exact zero-defect star–matching line arrangement, its parity/divisibility and conic-polarity constraints, and classify the first nontrivial \(k=6,7\) gates without reopening the closed four-layer construction → `notes/2026-07-24-c554-zero-defect-star-matching-classification.md`.
+- **C555 `[relconic]` [QUEUED; after C554]** — turn stability into an approximate matching design and seek a conic-sensitive third-moment or polarity inequality that quantitatively obstructs small defect → `notes/2026-07-24-c555-small-defect-third-moment.md`.
+- **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
+- **C557 `[relconic]` [QUEUED; after the C554 global-coverage gate]** — design a genuinely new \(O(\sqrt q)\) candidate architecture whose secants first pass a full direction/carrier coverage audit; the closed constant-height bounded-layer repair-coset family is excluded from scope → `notes/2026-07-24-c557-coverage-first-square-root-construction.md`.
 
 ### `rp-next`
 
