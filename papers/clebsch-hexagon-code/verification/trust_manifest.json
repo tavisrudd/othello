@@ -3557,7 +3557,7 @@
         }
       ],
       "id": "statement-thm-four-sheet-holonomy",
-      "paper_location": "theorem at source line 1762",
+      "paper_location": "theorem at source line 1779",
       "route": "mixed",
       "source": {
         "claim_key": "thm:four-sheet-holonomy",
@@ -3796,7 +3796,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 1879",
+      "paper_location": "lemma at source line 1896",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -4739,7 +4739,7 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1910",
+      "paper_location": "theorem at source line 1927",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
@@ -6536,7 +6536,7 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "f3aa6fc87d777a4f1fb53ff7774fbe5b71798e43446ff4822e365350f8448782",
+  "manuscript_sha256": "c74034e72389080c29a3300c0fd5f86abc9aa0e3e854c2aa45ed53bfa3a86568",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",

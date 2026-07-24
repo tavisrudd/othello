@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-statement-adequacy-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "f3aa6fc87d777a4f1fb53ff7774fbe5b71798e43446ff4822e365350f8448782",
+  "source_sha256": "c74034e72389080c29a3300c0fd5f86abc9aa0e3e854c2aa45ed53bfa3a86568",
   "statement_count": 28,
   "statements": [
     {
@@ -234,7 +234,7 @@
       "environment": "theorem",
       "label": "thm:four-sheet-holonomy",
       "sha256": "d1936ce3004f66829bdf12ccd8e8ae19231920d67d6b9457a12f25900c471065",
-      "source_line": 1762,
+      "source_line": 1779,
       "tex": "\\begin{theorem}[Four-sheet cover holonomy]\n\\label{thm:four-sheet-holonomy}\nLet \\(V\\) be the three-dimensional message space of the admitted non-GRS\npencil in odd characteristic, with coordinate covectors \\(g_0,\\ldots,g_5\\).\nPut\n\\[\n A=-4t(t-1)^2,\\quad\n B=(t^2-t+1)(t^2-3t+1),\\quad\n w=B/A,\\quad z=w^2,\n\\]\nand assume \\(2t(t-1)BG\\ne0\\), where\n\\(G=t^4-4t^3+7t^2-4t+1\\).  Join four left to four right\ncopies by the six matchings \\(\\sigma_0,\\ldots,\\sigma_5\\)\n\\[\n 1,\\ (03)(12),\\ (23),\\ (02)(13),\\ (01)(23),\\ (021).\n\\]\nFor each party assignment \\(p\\in S_6\\), put \\(V\\) on every vertex,\n\\(\\F_q\\) on every edge of color \\(i\\), and use \\(g_{p(i)}\\) as both\nrestriction maps.  Then:\n\\begin{enumerate}[label=\\textup{(\\roman*)},leftmargin=*]\n\\item constant sections form a three-space.  After quotienting them, the\n  \\(24\\)-equation section problem is the kernel of a \\(9\\)-by-\\(9\\)\n  operator on \\(U^3\\), where\n  \\(U=\\F_q^4/\\F_q(1,1,1,1)\\); its nine blocks are two-matching\n  holonomies;\n\\item a nonconstant generic section occurs precisely in one axial\n  relative-frame type, of size \\(96\\), at \\(z=2\\), or in either of two\n  signed six-cycle types, each of size \\(192\\), at\n  \\(w=\\pm2/3\\).  Every generic excess kernel is one-dimensional, so the\n  reduced rank-drop divisor is\n  \\[\n     (z-2)(9z-4)=0.\n  \\]\n  The common derived \\(A_4\\) acts freely, giving \\(8\\) and \\(16\\)\n  quotient classes;\n\\item characteristic \\(7\\) merges the axial divisor with one signed\n  divisor and gives \\(96+192=288\\) active assignments.  Characteristics\n  \\(11,13,41\\) only ramify the pullback to the \\(t\\)-line.  Characteristic\n  \\(3\\) removes both reduced components at the excluded boundary, while\n  in characteristic \\(5\\) the signed component moves to that boundary\n  and the axial component remains.\n\\end{enumerate}\nThe theorem detects these two reduced values; it does not recover the\nwhole pencil or assert four-copy minimality.\n\\end{theorem}",
       "title": "Four-sheet cover holonomy"
     },
@@ -243,7 +243,7 @@
       "environment": "lemma",
       "label": "lem:sign-torsor-no-section",
       "sha256": "295eaaad14721f47fe32aa05acac58d463a31c5ac88f87f2db5558310c4d44ee",
-      "source_line": 1879,
+      "source_line": 1896,
       "tex": "\\begin{lemma}[Determinant-sign transport and the no-section obstruction]\n\\label{lem:sign-torsor-no-section}\nLet $\\chi:G\\to C_2$ be surjective and put $H=\\ker\\chi$.  Then $G/H$ is a\nfree transitive $C_2$-torsor with no $G$-fixed point.  More precisely, if\n$X$ is any two-point $G$-set whose action factors through $\\chi$ and whose\ninduced $C_2$-action is nontrivial, then for each $x\\in X$ there is a\nunique $G$-equivariant bijection\n\\[\n G/H\\longrightarrow X\n\\]\nsending $H$ to $x$.  Thus all such two-valued carriers are realizations of\none torsor: comparing them requires exactly one marking bit, and no\n$G$-equivariant marking exists before that bit is adjoined.\n\\end{lemma}",
       "title": "Determinant-sign transport and the no-section obstruction"
     },
@@ -252,7 +252,7 @@
       "environment": "theorem",
       "label": "thm:torsor-rosetta-close",
       "sha256": "69b93d89d87d63b619846167a919d542441746c36b5eae06cec3d57de72e5675",
-      "source_line": 1910,
+      "source_line": 1927,
       "tex": "\\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]\n\\label{thm:torsor-rosetta-close}\nLet $T_q$ denote the determinant-sign torsor for the split rank-three\nworking primes.  The following statements hold.\n\\begin{enumerate}[label=\\textup{(E\\arabic*)},leftmargin=*]\n\\item For $B_3$ at $q=7$ and $H_3$ at $q=11$, $T_q$ is a free\n$C_2$-torsor.  For $A_3$ at $q=5$, the marker polynomial is inert: the two\nspin lifts form one Frobenius orbit over $\\F_{25}$, hence one connected\nétale point over $\\F_5$ and no orientation bit.\n\\item The certified dictionary has twelve rows: the two matching sheets,\nthe two nontrivial unipotent classes, the two cyclotomic period factors,\nthe two primes of $\\mathbb Q(\\sqrt{-q})$, the two primes of\n$\\mathbb Z[\\sqrt2]$ or $\\mathbb Z[\\phi]$ above the working prime, the two lower Weil\nconstituents, the two cubic signs, the two QR/Barker polarities, the two\nsigned Fourier sectors, the outer $M_{12}$ hinge, the characteristic-zero\n$\\operatorname{Spec}\\mathbb Q(\\sqrt5)$ row, and the Reed--Solomon fixed-child\nextremal fibre.  Each two-valued row available at a given $q$ is\nouter-equivariantly identified with $T_q$.  The $M_{12}$ row is the acting\nface of the same swap, not another two-point carrier; the\ncharacteristic-zero row specializes specifically to $T_{11}$.\n\\item The marked Coxeter matching points all available rows simultaneously\nthrough the single trace rule.  After forgetting it there is no section:\nthe \\v{C}ech cocycle, the exact one-bit selector cost, and the free-torsor\ndescription are three readouts of\n\\[\n [T_q]=\\operatorname{sgn}\\colon\\mathrm{PGL}_2(q)\\longrightarrow C_2,\n \\qquad \\ker(\\operatorname{sgn})=\\mathrm{PSL}_2(q).\n\\]\n\\item At $q=11$ the Mathieu hinge is forced outer.  Indeed\n$N_{M_{12}}(\\mathrm{PSL}_2(11))=\\mathrm{PSL}_2(11)$,\n$\\mathrm{PGL}_2(11)$ is not a subgroup of $M_{12}$, and the two $M_{11}$ parents\nare non-conjugate in $M_{12}$.\n\\item The cubic sign and trace residue co-vary with $T_q$, but their\nnumerical dictionary is convention-dependent between $q=7$ and $q=11$.\nThe uniform datum is the marking, not a residue formula.  No integral\nGalois-odd cubic is assumed: the bit is carried arithmetically by the prime\nfibre.\n\\end{enumerate}\n\\end{theorem}",
       "title": "Torsor Rosetta: one class and one forced outer swap"
     }
