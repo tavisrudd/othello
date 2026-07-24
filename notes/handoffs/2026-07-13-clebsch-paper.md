@@ -188,6 +188,12 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 
 ## Selected crowns import
 
+- **C552 is queued as the pre-C320-final-review C550 import delta.**  It replaces the
+  four-copy certificate-first passage by C550's linear-sheaf/cycle-holonomy proof, corrects the
+  degree-six octahedral-action wording, updates the C320 trust/adequacy ledgers, and reruns the
+  manuscript release gates before the required final independent review.  It does not reopen
+  four-copy minimality, uniform `LU=LC`, or Paper 2.  Task card:
+  [`2026-07-23-c552-c550-manuscript-integration.md`](../2026-07-23-c552-c550-manuscript-integration.md).
 - **C399 selected as the protected upgrade:** integrate the uniform rank-three complement-code
   theorem rather than spawning a separate submission.  The audit found no exact predecessor for
   the uniform nonmirror maximum/distance law or `q=h+1` package, but strong pre-emption for the
