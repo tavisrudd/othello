@@ -22,11 +22,20 @@ Read [`../TRUST.md`](../TRUST.md) for the trust model itself and the per-paper m
 | `RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope` | 0                  | **not extracted** |
 <!-- trust-spine:end area=relconic section=gates -->
 
+<!-- trust-spine:begin area=finitegeom_first_tag section=gates version=1 -->
+| Gate                           | Terminals declared | Facts             |
+|--------------------------------|--------------------|-------------------|
+| `CapGame.Affine`               | 1                  | **not extracted** |
+| `ProjectiveCap.Binary`         | 1                  | **not extracted** |
+| `ProjectiveCap.EllipticMirror` | 2                  | **not extracted** |
+| `ProjectiveCap.PlaneOutcome`   | 3                  | **not extracted** |
+<!-- trust-spine:end area=finitegeom_first_tag section=gates -->
+
 ## Terminal axiom sets
 
-The declared column is what a reviewer asserts in `trust/areas/relconic.toml`. The observed column
-is what Lean reports. A row where the two differ is a `terminal-axiom-mismatch` failure; a row where
-observed is empty means nobody has extracted that gate yet.
+The declared column is what a reviewer asserts in the corresponding per-area TOML file. The
+observed column is what Lean reports. A row where the two differ is a `terminal-axiom-mismatch`
+failure; a row where observed is empty means nobody has extracted that gate yet.
 
 <!-- trust-spine:begin area=relconic section=terminal-axioms version=1 -->
 | Terminal                                          | Declared axioms                             | Observed |
@@ -34,6 +43,18 @@ observed is empty means nobody has extracted that gate yet.
 | `RelativeConicArcs.Certificate.check_sound`       | `Classical.choice`, `Quot.sound`, `propext` | —        |
 | `RelativeConicArcs.Q25AllProfiles.pair_extension` | `Classical.choice`, `Quot.sound`, `propext` | —        |
 <!-- trust-spine:end area=relconic section=terminal-axioms -->
+
+<!-- trust-spine:begin area=finitegeom_first_tag section=terminal-axioms version=1 -->
+| Terminal                                                                                          | Declared axioms                             | Observed |
+|---------------------------------------------------------------------------------------------------|---------------------------------------------|----------|
+| `CapGame.Affine.initialP_fin`                                                                     | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one`                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution` | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul`                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.initialPStatement_of_even_card_finrank`                                            | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank`                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank`                      | `Classical.choice`, `Quot.sound`, `propext` | —        |
+<!-- trust-spine:end area=finitegeom_first_tag section=terminal-axioms -->
 
 ## Generated data trees
 

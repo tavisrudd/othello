@@ -1,0 +1,102 @@
+# Trust spine for the first reviewer-facing finite-geometry release.
+#
+# This area owns exactly the tracked Lean modules in the four manuscript-cited terminal closures.
+# The declaration is intentionally claim-minimal: a module belongs here because one of the gates
+# imports it, not because it may be useful in a later release.
+
+schema_version = 1
+area = "finitegeom_first_tag"
+manifest = "trust/FIRST_TAG.md"
+
+owns = [
+  "CapGame.Affine",
+  "CapGame.BuildGame",
+  "CapGame.Embedding",
+  "CapGame.Mirror",
+  "ProjectiveCap.Almost.OddEscape",
+  "ProjectiveCap.Binary",
+  "ProjectiveCap.ConicLocalization",
+  "ProjectiveCap.EllipticMirror",
+  "ProjectiveCap.EscapeParity",
+  "ProjectiveCap.ExtensionCount",
+  "ProjectiveCap.FrameGridBridge",
+  "ProjectiveCap.Grid",
+  "ProjectiveCap.GridCounting",
+  "ProjectiveCap.GridGame",
+  "ProjectiveCap.GridMirror",
+  "ProjectiveCap.GridSeed",
+  "ProjectiveCap.IntrusionCalculus",
+  "ProjectiveCap.Mirror",
+  "ProjectiveCap.PlaneOutcome",
+  "ProjectiveCap.PlaneTransitivity",
+  "ProjectiveCap.Projective",
+  "ProjectiveCap.StableFacts",
+  "Sumfree.Game",
+  "Sumfree.MirrorLemmas",
+  "Sumfree.Nonzero",
+  "Sumfree.RankCounts",
+]
+
+permitted_axioms = []
+
+[[gate]]
+module = "CapGame.Affine"
+terminals = ["CapGame.Affine.initialP_fin"]
+coverage_rule = "closure"
+
+[[gate]]
+module = "ProjectiveCap.Binary"
+terminals = ["ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one"]
+coverage_rule = "closure"
+
+[[gate]]
+module = "ProjectiveCap.EllipticMirror"
+terminals = [
+  "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution",
+  "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "ProjectiveCap.PlaneOutcome"
+terminals = [
+  "ProjectiveCap.initialPStatement_of_even_card_finrank",
+  "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank",
+  "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank",
+]
+coverage_rule = "closure"
+
+[[terminal]]
+declaration = "CapGame.Affine.initialP_fin"
+gates = ["CapGame.Affine"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.Projective.initialPStatement_binary_of_projectiveDim_ge_one"
+gates = ["ProjectiveCap.Binary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.Projective.initialPStatement_of_fixedPointFree_collinearity_preserving_involution"
+gates = ["ProjectiveCap.EllipticMirror"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.Projective.initialPStatement_of_odd_card_finrank_eq_two_mul"
+gates = ["ProjectiveCap.EllipticMirror"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.initialPStatement_of_even_card_finrank"
+gates = ["ProjectiveCap.PlaneOutcome"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank"
+gates = ["ProjectiveCap.PlaneOutcome"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank"
+gates = ["ProjectiveCap.PlaneOutcome"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]

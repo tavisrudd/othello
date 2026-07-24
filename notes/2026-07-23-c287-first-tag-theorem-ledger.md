@@ -1,7 +1,7 @@
 # C287 first-tag theorem and axiom ledger
 
 **Lane**: `build-sys`
-**Status**: 26-FILE REVIEWER BOUNDARY SELECTED; authoritative axiom extraction pending
+**Status**: 26-FILE REVIEWER BOUNDARY DECLARED IN TRUST SPINE; extraction pending
 
 ## Evidence boundary
 
@@ -10,10 +10,15 @@ the declared paper claims, tracked Lean source, and the exact project-local impo
 not infer trust from a successful historical build or from the absence of `sorry`.
 
 No Lean, Lake, generator, or build command was run. Consequently the axiom column below is not an
-authoritative `#print axioms` result. A source scan of the 51-file candidate main closure found no
+authoritative `#print axioms` result. A source scan of the 26-file selected main closure found no
 project-owned `axiom`, `sorry`, `admit`, `unsafe`, or `native_decide`. That negative establishes
 only the visible source boundary. Exact terminal axiom sets remain `facts-missing` until each
 terminal is extracted under the pinned toolchain in a quiet build-owner window.
+
+The exact gates, terminals, and expected standard axiom sets are now declared in
+`lean/trust/areas/finitegeom_first_tag.toml` and rendered in `lean/trust/PORTFOLIO.md`. The
+area-filtered audit reports exactly four `facts-missing` findings and no structural error. These
+declarations remain expectations until the four extraction artifacts exist.
 
 ## Adopted human-scale claims
 
@@ -72,8 +77,9 @@ adopts them.
 1. Add the eventual sum-free terminal before calling the paper target map complete.
 2. Give Q11 and Q13 separate package manifests naming their generator, semantic schema, checker,
    assembly terminal, exact gate, and source-regeneration command.
-3. In a quiet window, extract authoritative `#print axioms` facts for every adopted main and
-   certificate terminal. A source scan or a checked-in `#print` command is not its output.
+3. In a quiet window, run the already-declared four trust-spine extraction units to obtain
+   authoritative `#print axioms` facts for every adopted main terminal. A source scan or a
+   checked-in `#print` command is not its output.
 4. Rewrite and referee-review the seven workflow-bearing files in the fixed 26-file boundary.
 5. C270 must align the older `papers/papers-planning.md` “`FiniteGeom` + mirror” wording with this
    reviewer-scale boundary before any public release action.

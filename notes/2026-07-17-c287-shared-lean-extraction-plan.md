@@ -1,7 +1,7 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; reviewer-scale 26-file first-tag boundary selected, rewrites pending
+**Status**: IN PROGRESS; 26-file boundary declared in trust spine, rewrites and facts pending
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -76,6 +76,13 @@ selects the 26-file boundary and defers both additions. The ledger also records 
 sum-free terminal and the still-unverified external Q11/Q13 assembly terminals.
 C270 must align the older public-planning wording with this reviewer-scale boundary before release;
 C287 does not edit that lane's metadata or perform the public action.
+
+The existing C326 trust spine now owns the machine-readable gate and terminal contract:
+`lean/trust/areas/finitegeom_first_tag.toml` declares the exact 26 modules, four extraction units,
+seven terminals, and expected standard axiom sets. `lean/trust/FIRST_TAG.md` is the public prose
+manifest. The area-filtered audit has exactly four `facts-missing` findings and no structural
+finding; extraction planning resolves all units but refuses the current seven-foreign-path
+worktree. Report: `notes/2026-07-24-c287-first-tag-trust-spine.md`.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed

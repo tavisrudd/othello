@@ -7,6 +7,8 @@ The theorem-level adoption and axiom boundary are analyzed separately in
 `notes/2026-07-23-c287-first-tag-theorem-ledger.md`. The selected first tag is the 26-file closure
 of the terminals actually cited by the manuscript. The uncited hyperbolic-quadric module and the
 disjoint 24-file `FiniteGeom` umbrella are deferred to later tags with explicit claim contracts.
+The four module gates and seven exact terminals are declared in the existing trust-spine registry;
+`notes/2026-07-24-c287-first-tag-trust-spine.md` records the integration and validation.
 
 ## Contract
 
@@ -73,10 +75,12 @@ default target list.
   `ProjectiveCap/GridMirror.lean`, and `Sumfree/RankCounts.lean`. These references must be replaced
   with self-contained mathematical prose or stable public literature by the source owners before
   export.
-- **Infrastructure rewrite:** the public `lakefile.toml` must declare only the four libraries above
+- **Infrastructure rewrite:** the public `lakefile.toml` must declare only the three libraries above
   and the exact Mathlib pin. The matching `lean-toolchain` is an exact copy. README, license,
-  public gate map, proof ledger, provenance document, and final source manifest are new public
-  metadata. Repository visibility and license remain user decisions.
+  provenance document, and final source manifest are new public metadata. The public gate map and
+  proof ledger have reusable sources in `lean/trust/FIRST_TAG.md` and
+  `lean/trust/areas/finitegeom_first_tag.toml`. Repository visibility and license remain user
+  decisions.
 - **Excluded:** private notes, handoffs, scripts, caches, logs, build products, credentials,
   portfolio-only Lake targets, the uncited hyperbolic-quadric module, the disjoint `FiniteGeom`
   umbrella, and all heavyweight generated certificate families.

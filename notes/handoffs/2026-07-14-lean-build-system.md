@@ -3,8 +3,9 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-awaits a quiet Lean worktree; C287 selected its reviewer-scale 26-file first-tag boundary with
-public rewrites pending; C162 blast radius and the restart-guard failure suite landed, and the remaining
+awaits a quiet Lean worktree; C287 declared its reviewer-scale 26-file first-tag boundary in the
+trust spine, with public rewrites and facts pending; C162 blast radius and the restart-guard failure
+suite landed, and the remaining
 C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
@@ -141,6 +142,13 @@ uncited hyperbolic module and the disjoint 24-file `FiniteGeom` component. `Fini
 terminal declaration. The audit also exposes a missing final sum-free terminal and the external
 Q11/Q13 terminals whose package provenance and authoritative axiom facts remain unresolved. Report:
 [`../2026-07-23-c287-first-tag-theorem-ledger.md`](../2026-07-23-c287-first-tag-theorem-ledger.md).
+
+The C287 boundary now reuses the C326 trust spine rather than introducing another manifest format.
+Its area declaration owns exactly 26 modules and names four extraction units and seven terminals;
+the scoped audit has only four intentional `facts-missing` findings. The extraction plan recognizes
+all units but refuses the current seven-foreign-path worktree. The global graph manifest and shared
+generated regions remain unchanged until a coherent quiet-tree regeneration. Report:
+[`../2026-07-24-c287-first-tag-trust-spine.md`](../2026-07-24-c287-first-tag-trust-spine.md).
 
 **Next:** finish the 26-file closure's referee review and coordinate its seven source-owner rewrites.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
