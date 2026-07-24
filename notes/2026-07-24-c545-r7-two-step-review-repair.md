@@ -163,10 +163,13 @@ recursively pointed bad ideal, set every coefficient in \(\lambda\) to zero,
 and saturate by the persistent, modular, rank-boundary, and collision ideals.
 Emptiness of the residual generic fiber proves \(\mathrm{SC}(j)\) in
 characteristic zero; the vertical support records the characteristics needing
-separate treatment.  This is a Fano-scheme/elimination route that could bypass
-normal forms for every carrier point.  It is not a paper claim or an allocated
-successor: the universal bad ideal, correct saturations, infinity chart, and
-vertical-component certificate remain to be constructed.
+separate treatment.  More effectively, clearing denominators in a
+Nullstellensatz unit-ideal certificate produces a nonzero integer \(N_j\);
+only primes dividing \(N_j\) can support a vertical exception.  This is a
+Fano-scheme/elimination route that could bypass normal forms for every carrier
+point and return an explicit finite characteristic list.  It is not a paper
+claim or an allocated successor: the universal bad ideal, correct saturations,
+infinity chart, and vertical-component certificate remain to be constructed.
 
 ## Editorial truth table
 
@@ -196,7 +199,7 @@ vertical-component certificate remain to be constructed.
 | When the modular locus vanishes | settled sharpening | If \(p>r-1\), Lucas' theorem leaves no nucleus coordinate, hence \(\mathcal M_r=\varnothing\).  The R5 cyclic carrier is not modular and survives this observation. |
 | What the uniform theorem says in large characteristic | settled | Under \(\mathrm{SC}(6),\ldots,\mathrm{SC}(r)\), \(p>r-1\), and \(q\geq Q_r\), only the persistent tangent and conjugate-secant families remain; the radius gate promotes this to the deep-hole list. |
 | Whether a characteristic-zero proof of \(\mathrm{SC}(j)\) controls large primes | open, exact gate identified | For fixed \(j\), spreading out should leave only finitely many vertical characteristics once the recursively pointed bad scheme is realized as one finite-type integral model.  That integral model, its saturations, and control of vertical components are not printed, so no such corollary is claimed. |
-| Whether the cyclic-type residue requires a full carrier classification | promising alternative, unallocated | Possibly not.  \(\mathrm{SC}(j)\) is a Fano-scheme question for universal polar lines.  Coefficient elimination in the line parameter followed by saturation may prove the needed containment statement without classifying all carrier points; the missing universal ideal and vertical-component certificate are the exact gate. |
+| Whether the cyclic-type residue requires a full carrier classification | promising alternative, unallocated | Possibly not.  \(\mathrm{SC}(j)\) is a Fano-scheme question for universal polar lines.  Coefficient elimination and saturation may prove containment without classifying all carrier points; a cleared-denominator unit certificate would confine exceptional characteristics to the prime divisors of one integer \(N_j\).  The missing universal ideal and certificate are the exact gate. |
 | Whether marker clustering lowers \(\delta_r\) | rejected | At most three markers can share a fiber, and the same parameter freedom must avoid a bad scheme of degree on the order of \(3r\); clustering cannot spend that freedom a second time. |
 | Why the last sporadic fields decrease \(19,13,11\) while the point-count gates increase \(23,29,37\) | open | The tables establish the trend through R7.  Whether sufficiently high redundancy has no sporadic fields is a sharper component/arithmetic question, not answered here. |
 | Why \(\langle1,t^3,t^4\rangle\) is pointed-bad specifically at \(q=19\) | open | The six split members and their common infinity root are exact, but the intrinsic branch-divisor explanation remains the separately recorded C509 exceptional-cover question. |
