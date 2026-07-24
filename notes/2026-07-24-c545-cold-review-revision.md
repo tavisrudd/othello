@@ -207,5 +207,40 @@ erase the current theorem/provenance boundary.
 The follow-up build passes `make check` and the supplement verifier.
 The rendered example, named-lemma sequence, scope boundary, appendix,
 and two-column bibliography were inspected.  The canonical PDF now
-has 42 pages, 301739 bytes, and SHA-256
-`067ec3bdc178cdd1687a2a3ee41f589ad45bd35b98b8e17930a841d9517c3296`.
+has 42 pages.
+
+## Prior-version review reconciliation
+
+The older eight-point revision plan now has the following status.
+
+1. **Classification matrix — closed.**  Tables 2 and 3 separate
+   mathematical dependencies from conclusions, evidence, radius
+   gates, and scope boundaries.
+2. **Frozen public certificate repository — external release gate.**
+   The complete local bundle, locks, hashes, schemas, records, and
+   one-command verifier exist; immutable publication identifiers do
+   not yet exist and are not claimed.
+3. **Completeness pressure points — closed editorially.**  The five
+   named proof transitions were expanded, the R8 exhaustiveness table
+   was added, and the longest R8 package is now four named lemmas.
+4. **Detailed example — closed.**  Example 5.2 traces an explicit
+   `q=29`, redundancy-six syndrome through the complete marked
+   contraction and lift.
+5. **Sections 8--9 decision — closed for the preprint.**  They remain
+   in the integrated DOI record; a companion-paper split is a
+   post-audit venue decision.
+6. **Coding corollaries — closed.**  The article now leads with
+   one-column MDS extensions and states exact projective counts and
+   the fixed-redundancy recognition procedure.
+7. **Reusable Theorem 5.5 — closed.**  The theorem now lists its three
+   reusable inputs, produces a rational marked flag and squarefree
+   witness, states the split-free inclusion as a corollary, and
+   isolates the two genuinely level-specific inputs.
+8. **Independent specialist audits — open external gate.**  One
+   finite-field/algebraic-geometric reader and one
+   coding/computational reader are still required.
+
+After the theorem recast, `make check` and the supplement verifier
+still pass.  The rendered theorem was inspected on page 14.  The
+canonical PDF has 42 pages, 302474 bytes, and SHA-256
+`5a5ecc732ec223ffca78afaed77f63ab42d589196cc13d920ac20ff56491e37d`.
