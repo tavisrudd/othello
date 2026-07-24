@@ -153,7 +153,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 - **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
 - **C573 `[relconic]` [QUEUED; independent arbitrary-plane strengthening]** — obtain and verify the primary sources behind the known `MATCH(8,4,1)` and `MATCH(12,6,1)` nonexistence results and determine their exact hypotheses and proof trust boundary; C558's equality spectrum already excludes zero-defect eight- and twelve-arcs in Desarguesian planes, so import only a genuinely stronger arbitrary-plane corollary → `notes/2026-07-24-c573-matching-design-k8-k12-primary-audit.md`.
-- **C574 `[relconic]` [QUEUED; NEXT]** — obtain the primary classification of the two abstract `MATCH(10,5,1)` designs and decide their rank-three projective realizability as secant-concurrence designs at the only surviving Desarguesian orders `q=8,37`, with conic compatibility tested only for surviving realizations → `notes/2026-07-24-c574-match10-rank-three-realizability.md`.
 
 ### `ame-lu`
 
