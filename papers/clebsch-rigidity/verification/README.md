@@ -60,4 +60,7 @@ After an intentional scholarly-source change, regenerate the statement
 identity and trust manifest, commit the resulting clean release surface, and
 then refresh the final certificate by adding `--update-output` to the command
 above. Commit that certificate and rerun the command without
-`--update-output`; the final run is the clean-source release gate.
+`--update-output`; the final run is the clean-source release gate. The update
+mode tolerates a pre-existing modification only at
+`verification/verify-release-output.json`, so an interrupted or superseded
+refresh can be replaced without admitting any other dirty scholarly path.

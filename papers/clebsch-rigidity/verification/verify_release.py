@@ -153,7 +153,17 @@ def main() -> int:
         name: git_snapshot(root, snapshot_paths[name])
         for name, root in repositories.items()
     }
-    require_clean(initial)
+    clean_initial = dict(initial)
+    if args.update_output:
+        release_output_path = (
+            "papers/clebsch-rigidity/verification/verify-release-output.json"
+        )
+        clean_initial["paper"] = "\n".join(
+            line
+            for line in initial["paper"].splitlines()
+            if line[3:] != release_output_path
+        )
+    require_clean(clean_initial)
 
     lean_repository = manifest.get("lean_repository")
     if not isinstance(lean_repository, dict):
