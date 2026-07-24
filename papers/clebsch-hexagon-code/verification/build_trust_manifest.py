@@ -428,7 +428,7 @@ def generic_components(label: str) -> list[dict[str, object]]:
         return [
             conceptual_component(
                 "determinant-specialization and spanning proof",
-                [],
+                ["No external input; complete determinant-specialization proof in the manuscript"],
                 "The manuscript defines the finite nonvanishing conditions and proves preservation of the mirror and weighted singular-point matroids.",
             ),
             lean_component("rank-three complement and distance identities", ["phase"]),
@@ -437,7 +437,7 @@ def generic_components(label: str) -> list[dict[str, object]]:
         return [
             conceptual_component(
                 "general matching-secant quotient",
-                [],
+                ["No external input; complete Veronese-ideal and equivariance proof in the manuscript"],
                 "The manuscript proves pairing independence through Veronese pullback, principal-ideal divisibility, reference translation, and determinant-twisted equivariance.",
             ),
             lean_component("four-endpoint quotient and switch interface", ["quotient"]),

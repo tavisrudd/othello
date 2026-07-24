@@ -1686,7 +1686,9 @@
     {
       "components": [
         {
-          "cited_inputs": [],
+          "cited_inputs": [
+            "No external input; complete determinant-specialization proof in the manuscript"
+          ],
           "route": "conceptual-cited-inputs",
           "subclaim": "determinant-specialization and spanning proof",
           "unconditional_remainder": "The manuscript defines the finite nonvanishing conditions and proves preservation of the mirror and weighted singular-point matroids."
@@ -1782,7 +1784,9 @@
     {
       "components": [
         {
-          "cited_inputs": [],
+          "cited_inputs": [
+            "No external input; complete Veronese-ideal and equivariance proof in the manuscript"
+          ],
           "route": "conceptual-cited-inputs",
           "subclaim": "general matching-secant quotient",
           "unconditional_remainder": "The manuscript proves pairing independence through Veronese pullback, principal-ideal divisibility, reference translation, and determinant-twisted equivariance."
