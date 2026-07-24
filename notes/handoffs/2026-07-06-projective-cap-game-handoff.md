@@ -651,14 +651,27 @@ residual core (132/132 perfect matchings), but the **q19 scale-test breaks the c
 even-`|O|` witnesses with no single-level first-witness matching) — so the pairing law is itself a
 small-`q` phenomenon, like depth-2. The route survives only with a **witness-selection or multi-level
 (persistent) copycat** argument plus odd-`|O|` pairing-plus-one; it still makes the gadget count
-irrelevant and is cleaner than the gadget Grundy calculus, but is no longer a cheap win. Next cheap
-de-risking probe before reserving a proof C-ID: does an *alternative* depth-2 witness restore a
-matching for the 1,104 q19 failures? (whole-board pairing stays dead; this is the post-intrusion
-residual layer). Report+cert+`--check`:
-[`../2026-07-23-c528-overload-profile.md`](../2026-07-23-c528-overload-profile.md).
-Remaining C528 steps (ON-alignment check, gadget law, octal Piece 3, symmetry reduction, q23
-out-of-sample) and the reshaped attack are in
-[`../2026-07-23-c80-gadget-nk-plan.md`](../2026-07-23-c80-gadget-nk-plan.md).
+irrelevant and is cleaner than the gadget Grundy calculus, but is no longer a cheap win.
+Report+cert+`--check`: `../2026-07-23-c528-overload-profile.md`.
+
+**Alt-witness de-risking probe RUN (2026-07-23) — witness selection does NOT rescue single-level
+copycat; the pairing route is not a cheap win.** Searching *every* legal responder move for each of the
+1,104 q19 first-witness failures, under the correct **legal-reply** pairing graph (edge = a move whose
+response is a *legal* reply into `Y_NK`), only **380/1,104 (34%)** are restored by an alternative
+depth-2 witness; **724 (66%) have no matchable witness at all**. So single-level copycat is genuinely
+insufficient at q19 even with free witness choice — the route needs a **multi-level (persistent)
+copycat** (track the copycat across the ≥2 plies, not one witness) plus odd-`|O|` handling, no longer
+demonstrably cleaner than the multi-gadget Grundy calculus. The run also reproduces the pairing failure
+set exactly (48,084 residual / 22,932 matched / 1,104 failures). **Correctness note:** `is_ynk =
+capOK∧Grundy0` accepts non-cap masks, so the pairing probe's `H` (is_ynk-only) admits illegal-reply
+edges — under that loose `H` the count spuriously reads "1,104 restored"; the legal-reply `H` is the
+sound test. This also **corrects the "132/132 literal copycat" q17 claim above**: under the legal-reply
+`H` it is **126/132** (`c528_q17_legal_h_audit.py`, `--check` PASS), so the clean copycat law fails at
+q17 too — prior *negative* counts are unaffected (loose `H` edge-superset), only the *positive*
+matchings were inflated. Report+cert+`--check`:
+`../2026-07-23-c528-alt-witness-probe.md`. Remaining C528 steps (ON-alignment check, gadget law, octal
+Piece 3, symmetry reduction, q23 out-of-sample) and the reshaped attack are in
+`../2026-07-23-c80-gadget-nk-plan.md`.
 
 **Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
 under all moves ⟹ "drive Φ→0" vacuous) and replaced it with the gadget-Node-Kayles value law

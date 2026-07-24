@@ -34,10 +34,18 @@ involution** on the even-`|O|` q17 core (132/132) — but the **q19 scale-test b
 route is *not* the cheap two-line win it looked like at q17; it survives only with a
 **witness-selection or multi-level (persistent) copycat** argument, plus odd-`|O|`
 pairing-plus-one-free-move. It still makes the gadget count irrelevant and is cleaner than the
-gadget Grundy calculus (retained as fallback), but both routes now need real work. **Before
-committing a proof lane (reserve a `[cap]` C-ID), the cheap de-risking probe is: does an
-*alternative* depth-2 witness `r` restore a perfect matching for the 1,104 q19 failures?** If yes,
-the route is a witness-selection lemma; if no, it needs multi-level pairing or is dead.
+gadget Grundy calculus (retained as fallback), but both routes now need real work.
+
+**Witness-selection RESOLVED — NO (2026-07-23, `c528_alt_witness_probe.py`).** The de-risking probe
+ran: searching *every* legal responder move for each of the 1,104 q19 failures under the correct
+**legal-reply** pairing graph, only **380/1,104 (34%)** are restored by an alternative depth-2
+witness; **724 (66%) have no matchable witness**. Single-level copycat is genuinely insufficient at
+q19 even with free witness choice, so the **witness-selection lemma is dead** — the pairing route
+now needs a **multi-level (persistent) copycat** (track the copycat across the ≥2 plies) plus
+odd-`|O|` handling, and is no longer demonstrably cleaner than the multi-gadget Grundy calculus.
+Correctness note: `is_ynk = capOK∧Grundy0` accepts non-cap masks, so the pairing probe's
+`is_ynk`-only `H` over-counts via illegal-reply edges (reads a spurious "1,104 restored"); use the
+legal-reply `H`. Report+cert: [`2026-07-23-c528-alt-witness-probe.md`].
 
 ## Target (Piece 2): the gadget-Node-Kayles value law
 

@@ -1,0 +1,22 @@
+{
+  "claim_scope": "q17 residual capOVER-core, first valid depth-2 witness per child. Compares the single-level copycat perfect-matching count under the loose pairing-probe H (is_ynk only) vs the correct legal-reply H (edge {o,p} additionally requires p a legal reply to o). matched_loose_only_inflated counts witnesses matchable ONLY via illegal-reply edges. legal_H_parity_clean flags whether the correct H still matches EXACTLY the even-|O| witnesses (the pairing report's 132/132 'parity-clean' claim).",
+  "order": {
+    "even_O_first_witnesses": 132,
+    "first_witness_matched_legal_H": 126,
+    "first_witness_matched_loose_H": 132,
+    "legal_H_parity_clean": false,
+    "matched_both": 126,
+    "matched_loose_only_inflated": 6,
+    "q": 17,
+    "residual_children": 349,
+    "rows": "notes/data/c20-q13-q17-states.jsonl.gz"
+  },
+  "sources": {
+    "notes/data/c20-q13-q17-states.jsonl.gz": {
+      "bytes": 654965,
+      "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+    }
+  },
+  "task": "C528",
+  "verdict": "The loose H reports 132 matched even-|O| witnesses ('132/132 literal copycat'), but the legal-reply H matches only 126: 6 are inflated (matchable only via illegal-reply edges). So legal_H_parity_clean is FALSE -- the clean copycat law breaks already at q17, not only at q19. The pairing probe's NEGATIVE counts (failures) are unaffected (loose H has a superset of edges, so no-matching-under-loose => no-matching-under-legal); only its POSITIVE matched counts were inflated."
+}
