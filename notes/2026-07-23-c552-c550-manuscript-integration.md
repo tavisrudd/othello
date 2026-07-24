@@ -2,9 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Date:** 2026-07-23
+**Date:** 2026-07-24
 
-**Status:** implementation complete; awaiting user-launched independent review
+**Status:** active; user-launched independent review returned `NO-GO`
 
 ## Goal
 
@@ -123,3 +123,16 @@ post-delta independent-review `GO`.
 The C550 bundle is authoritative for the conceptual proof and representation correction.  C548
 remains the independent exhaustive certificate.  C320 owns the final manuscript trust ledger and
 release review.
+
+## Independent-review disposition
+
+The user-launched C320/C552 cold read is
+`notes/2026-07-23-c320-independent-cold-read.md` and returned `NO-GO`.  For C552 specifically, the
+four-sheet theorem enters from an admitted non-GRS pencil that is not defined before use, and the
+manuscript does not explain how the theorem advances the Paper-I reconstruction spine.  This is a
+paper-shape blocker, not a reported failure of the cycle calculation or public certificate.
+
+Repair by defining the pencil and its bridge before the theorem and explaining the consequence in
+the conclusion, or remove the theorem from Paper I.  Preserve the exact stop boundaries above.
+After any repair, regenerate the 28-statement/61-claim artifacts as applicable, rerun the complete
+18-check release entry point on a frozen commit, and request a user-launched post-fix review.
