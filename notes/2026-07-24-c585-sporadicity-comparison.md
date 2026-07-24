@@ -257,6 +257,51 @@ foreign G5 lattice and is the C589-gated first-order-transfer probe — a cross-
 gateway action; **B** is a targeted long shot on the same foreign machine; **C** is a backstop. None
 re-opens a closed idea. No IDs allocated — A/E feed C586, D/B feed the C589 gate as cross-lane probes.
 
+## Method check — three cheap questions (ASG `9dc96886:217`)
+
+The `crowns` "what was missed" retrospective prescribes, before chasing famous destinations, three
+cheap questions per certified structure — **what is its dual, what is its linearization, what does the
+canonical transform do to its generators** — and makes **negatives first-class output** (the EV model
+scores new edges but has no term for sharp vanishing theorems, yet half the branch's structural
+insight came from exact negatives). **The `crowns` lane has since addressed the polar-side questions**
+(per the user, 2026-07-24): the dual is the conic polarity / secant-pole configuration, the
+linearization is the additive power-sum form (C416), and the canonical transform is diagonal on line
+sections with a Gauss-free scalar (C416), inside the `N`-operator / information-lattice machinery
+(C415/C434). So for C585 those are **settled inputs, not open leads**. What remains for the gateway
+synthesis:
+
+- **Negatives first-class ⇒ Route A is the undervalued win, not a consolation.** The separation no-go
+  (`Φ_deep ⊥ Φ_mod`) is precisely the sharp-vanishing/negative theorem the EV model underweights.
+  Elevate it, and have C586 bank negatives explicitly.
+- **The still-open move is porting the settled crowns lens to the *modular* avatar and the comparison.**
+  The dual/linearization/transform questions are answered for the deep-hole/polar side; whether the
+  modular carrier (perfect-code + index) has an analogous power-sum linearization and generator-level
+  diagonalization is the genuinely open comparison C586 owns — read the C415/C416/C434 conclusions,
+  do not rebuild them.
+- **Dual question ⇒ the organizing structure is *self-duality*, and there are three conditions, not
+  two towers.** The two-tower framing (ej item 1) undercounts; this juxtaposition is a gateway-lane
+  synthesis of `crowns`/`clebsch`-settled facts (check the crowns reports before treating it as new).
+  The certified self-duality conditions are: (i) code **self-dual-extendable** `{7,11,23}`;
+  (ii) exceptional-index / biplane `{7,11,19}`; (iii) **A₅ self-polar conic** `{5,11,19}` (Dye 1991;
+  Storme–Van Maldeghem). Their incidence:
+
+  | `q` | code s.d.-ext. | biplane/index | A₅ self-polar conic | type |
+  |-----|:---:|:---:|:---:|------|
+  | 7  | ✓ | ✓ | ✗ | double (code+index) |
+  | 11 | ✓ | ✓ | ✓ | **triple** |
+  | 19 | ✗ | ✓ | ✓ | double (index+conic) |
+  | 23 | ✓ | ✗ | ✗ | single (code) |
+
+  **`q=11` is the unique triple self-duality point** — the sharp "why the six-arc at `q=11` is *the*
+  gateway," strictly stronger than "two towers meet." The modular carrier `{7,11}` = "code ∧ index" =
+  the triple plus the code+index double `{7}`. This is the elementary polarity/self-duality structure
+  #217 warns is overlooked when one enumerates Mathieu/E₆/moduli destinations instead.
+Net: crowns has already answered the polar-side dual/linearization/transform questions (C415/C416/
+C434); C585 refines ej item 1 (two towers → three self-duality conditions, `q=11` the triple point)
+and the route ranking holds — **A (a first-class negative) is the gateway-ownable prize**; the open
+comparison (does the modular avatar linearize/diagonalize the same way?) and B/D remain cross-lane
+probes that *read* the settled crowns machinery rather than rebuild it.
+
 ## Provenance and reproducibility
 
 This is a comparison of already-established finite `q`-sets, not a new census. No new computation is
