@@ -351,3 +351,15 @@ and leaves no Mathieu successor. A second `ej` pass packages the complete two-ob
 groupoid as the split exact sequence `1 → PSL_2(11) → PGL_2(11) → C2 → 1`: the sheet swap is a
 faithful realization of the outer character, with no extra `Sym(12)` morphisms. Full report:
 `notes/2026-07-23-c436-mathieu-adjacency.md`.
+
+## 2026-07-23 — C546 H3 pentad orientation close
+
+C546 solved the branch-complete arbitrary-LU mystery by the constructive branch. Full local
+Fourier sends the equal-phase H3 code state to its dual-code state, and an exact integral
+monomial isoduality returns it through an odd Sylvester-pentad permutation. Its determinant norm
+is `-4` and all coordinate multipliers have unit norm, so the symmetry exists in every odd
+reduction and fails at the stated integral gate only in characteristic two. Exact q=11/q=19
+enumeration recovers the complete 60-element odd isodual coset. Thus the `A5` orientation is a CSS
+electric/magnetic presentation choice, the intrinsic quantum pentad symmetry is `S5`, and C397
+inherits only the internal Clifford/logical/operator-pushing questions. Evidence:
+`notes/2026-07-23-c546-h3-pentad-orientation-lu.md`.
