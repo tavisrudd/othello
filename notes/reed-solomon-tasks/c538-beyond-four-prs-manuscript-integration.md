@@ -42,4 +42,3 @@ explain the structural phase transition beyond the previously classified range.
 - `papers/beyond4_prs/`
 - the paper-specific C538 report and verification/claim ledgers
 - the `reed-solomon` handoff and lifecycle rows
-

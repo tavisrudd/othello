@@ -63,4 +63,3 @@ bundle first; publish only the exact reviewed artifact through the authorized ac
 - `papers/beyond4_prs/`
 - the C545 policy/release report and immutable release manifest
 - the `reed-solomon` handoff and lifecycle rows
-

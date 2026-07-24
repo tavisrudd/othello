@@ -21,4 +21,3 @@ exceptional-cover case split, family/orbit/count synthesis, and checked sporadic
 Acceptance requires kernel-checked symbolic algebra and certificate semantics, an import-only gate,
 an exact axiom audit, and manuscript ledger reconciliation.  Before any Lean operation, read
 `lean/AGENTS.md` completely.
-

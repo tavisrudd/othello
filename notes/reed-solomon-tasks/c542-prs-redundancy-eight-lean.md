@@ -19,4 +19,3 @@ high-field redundancy-eight classification.
 Acceptance requires an import-only terminal, scoped build, axiom audit, and exact reconciliation
 with the manuscript theorem statement.  Before any Lean operation, read `lean/AGENTS.md`
 completely.
-

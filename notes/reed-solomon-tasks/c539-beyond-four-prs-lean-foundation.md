@@ -26,4 +26,3 @@ Before any Lean operation, read `lean/AGENTS.md` completely.
 - new stable PRS foundation modules and gates under `lean/RelativeConicArcs/`
 - `notes/2026-07-23-c539-beyond-four-prs-lean-foundation.md`
 - the paper formalization ledger and `reed-solomon` handoff
-

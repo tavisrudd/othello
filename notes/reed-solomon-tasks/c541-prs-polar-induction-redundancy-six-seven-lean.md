@@ -20,4 +20,3 @@ redundancy-seven applications at their exact all-field theorem boundaries.
 
 Acceptance requires stable public modules, import gates, scoped builds, exact axiom audits, and
 paper-ledger reconciliation.  Before any Lean operation, read `lean/AGENTS.md` completely.
-

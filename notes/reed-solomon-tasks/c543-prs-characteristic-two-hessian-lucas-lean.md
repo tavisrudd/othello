@@ -21,4 +21,3 @@ Lucas-carrier arithmetic through the degree-nine `e_7` orbit.
 
 Acceptance requires scholarly-public modules, import gates, scoped builds, exact axiom audits, and
 manuscript-ledger reconciliation.  Before any Lean operation, read `lean/AGENTS.md` completely.
-

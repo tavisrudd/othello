@@ -23,4 +23,3 @@ redundancy-nine C517 terminal and reconciling every manuscript claim with its ex
   than silently promoted.
 
 Before any Lean operation, read `lean/AGENTS.md` completely.
-
