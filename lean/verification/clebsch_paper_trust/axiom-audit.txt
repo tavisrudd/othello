@@ -1,0 +1,209 @@
+'RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_length' does not depend on any axioms
+'RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_distance' does not depend on any axioms
+'RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder' depends on axioms: [propext]
+'RelativeConicArcs.ClebschMomentTrade.signedMoment_affine_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicMatchingQuotient.secant_veronese' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ConicMatchingQuotient.secant_switch' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ConicMatchingQuotient.isSwitch_symm' does not depend on any axioms
+'RelativeConicArcs.ConicMatchingQuotient.base_switchConnected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.decomposition_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.decomposition_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod5' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod7' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod11' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_four_zmod11' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ConicHarmonicQuotient.secant_switch_radial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.hadamardSquare_eq_equalSheetSum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.annihilates_equalSheetSum_iff_eq_sheetSignLine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orders_and_square_determinants' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschWittHadamard.residueBlocks_two_design' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedSequences._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.code_weight_distribution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedExtendedCode._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.punctured_perfect_parameter_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedPuncturedCode._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.hexads_steiner_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedGeometry._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.fullSupportPoints_complete' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedGeometry._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.secant_exhaustion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedGeometry._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.hadamard_gram' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.checkedGeometry._native.native_decide.ax_1_1✝]
+'RelativeConicArcs.ClebschWittHadamard.parent_intersection_and_join' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.parent_intersection_and_join._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschWittHadamard.row_column_assignment_normalizes_design_closure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.row_column_assignment_finite_graph_certificate._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness._native.native_decide.ax_1_1]
+'RelativeConicArcs.ClebschTorsorRosetta.no_invariant_point' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.point_or_swapped_point' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_t11' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_three_readouts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.q11_outer_readouts_agree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschSurvivalBoundary.no_nonzero_descended_weight_passes_lowerMoment_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschSurvivalBoundary.tested_fiveSpace_relativeCubic_intersection_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschSurvivalBoundary.exact_mod40_residue_partition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.genusThree_theta_value_counts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.genusFive_theta_value_counts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.theta_signature_erases_sheet' depends on axioms: [propext]
+'RelativeConicArcs.ClebschPassageInterfaces.rankEightFourier_square' depends on axioms: [propext]
+'RelativeConicArcs.ClebschPassageInterfaces.rankSixteenFourier_square' depends on axioms: [propext]
+'RelativeConicArcs.ClebschPassageInterfaces.Fourier_restriction_traces_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_kernel_equivalence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.marked_actions_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschPassageInterfaces.marked_actions_free_transitive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

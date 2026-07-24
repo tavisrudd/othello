@@ -1,0 +1,127 @@
+import RelativeConicArcs.Gates.ClebschGatewayConicDeepHole
+import RelativeConicArcs.Gates.ClebschGatewayCoxeterPhase
+import RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding
+import RelativeConicArcs.Gates.ClebschMomentTrade
+import RelativeConicArcs.Gates.ClebschConicMatchingQuotient
+import RelativeConicArcs.Gates.ClebschHarmonicQuotient
+import RelativeConicArcs.Gates.ClebschFactorization
+import RelativeConicArcs.Gates.ClebschBalancedSheets
+import RelativeConicArcs.Gates.ClebschDoubleCosetDepth
+import RelativeConicArcs.Gates.ClebschSchemeFourier
+import RelativeConicArcs.Gates.ClebschReplacementSpine
+import RelativeConicArcs.Gates.ClebschWeightedAdjoint
+import RelativeConicArcs.Gates.ClebschInformationLattice
+import RelativeConicArcs.Gates.ClebschArithmeticGluing
+import RelativeConicArcs.Gates.ClebschWittHadamard
+import RelativeConicArcs.Gates.ClebschTorsorRosetta
+import RelativeConicArcs.Gates.ClebschSurvivalBoundary
+import RelativeConicArcs.Gates.ClebschPassageInterfaces
+
+/-!
+# Paper-level trust gate for the Clebsch factorization-memory results
+
+This import-only module is the formal verification surface for the Clebsch
+factorization-memory paper.  It imports the structural, finite, and boundary gates used by the
+manuscript and records an axiom query for every terminal cited by its trust ledger.
+
+The imports preserve their stated boundaries.  In particular, literal coordinate and finite-table
+checks do not identify the tables with classical Coxeter, projective-group, association-scheme,
+Mathieu-group, Weil-representation, theta-characteristic, or quantum-state objects.  Those
+identifications require the separately cited mathematical inputs and exact replay artifacts named
+by the ledger.
+-/
+
+-- Rank-three phase.
+#print axioms RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_length
+#print axioms RelativeConicArcs.ClebschGateway.CoxeterPhase.conicPhase_distance
+#print axioms RelativeConicArcs.ClebschGateway.CoxeterPhase.recordedFullConicOrder
+
+-- Signed-moment filtration.
+#print axioms RelativeConicArcs.ClebschMomentTrade.signedMoment_affine_succ
+#print axioms RelativeConicArcs.ClebschMomentTrade.signedMoment_antipodal_even
+#print axioms RelativeConicArcs.ClebschMomentTrade.signedMoment_barycentre_cancel
+#print axioms RelativeConicArcs.ClebschMomentTrade.witness_exact_strength_two
+#print axioms RelativeConicArcs.ClebschMomentTrade.vectorMomentForm_ne_zero_of_shadow
+
+-- Pairing-forgetting and harmonic quotient.
+#print axioms RelativeConicArcs.ConicMatchingQuotient.secant_veronese
+#print axioms RelativeConicArcs.ConicMatchingQuotient.secant_switch
+#print axioms RelativeConicArcs.ConicMatchingQuotient.conicForm_dvd_secant_switch
+#print axioms RelativeConicArcs.ConicMatchingQuotient.matchingProduct_veronese_congr
+#print axioms RelativeConicArcs.ConicMatchingQuotient.isSwitch_symm
+#print axioms RelativeConicArcs.ConicMatchingQuotient.base_switchConnected
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod5
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod7
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_four_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.secant_switch_radial
+
+-- Finite factorization ranks and balanced sheets.
+#print axioms RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschBalancedSheets.hadamardSquare_eq_equalSheetSum
+#print axioms RelativeConicArcs.ClebschBalancedSheets.annihilates_equalSheetSum_iff_eq_sheetSignLine
+#print axioms RelativeConicArcs.ClebschBalancedSheets.b3_balancedHalf_unique
+#print axioms RelativeConicArcs.ClebschBalancedSheets.h3_balancedHalf_unique
+#print axioms RelativeConicArcs.ClebschBalancedSheets.b3_signedCubic_stabilizer_eq_characterKernel
+#print axioms RelativeConicArcs.ClebschBalancedSheets.h3_signedCubic_stabilizer_eq_characterKernel
+
+-- Six-profile compression and parent recovery.
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent
+
+-- Arithmetic gluing.
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orders_and_square_determinants
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer
+#print axioms RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy
+
+-- Design, code, and Hadamard shadows.
+#print axioms RelativeConicArcs.ClebschWittHadamard.residueBlocks_two_design
+#print axioms RelativeConicArcs.ClebschWittHadamard.code_weight_distribution
+#print axioms RelativeConicArcs.ClebschWittHadamard.punctured_perfect_parameter_identity
+#print axioms RelativeConicArcs.ClebschWittHadamard.hexads_steiner_five
+#print axioms RelativeConicArcs.ClebschWittHadamard.fullSupportPoints_complete
+#print axioms RelativeConicArcs.ClebschWittHadamard.secant_exhaustion
+#print axioms RelativeConicArcs.ClebschWittHadamard.hadamard_gram
+#print axioms RelativeConicArcs.ClebschWittHadamard.parent_intersection_and_join
+#print axioms RelativeConicArcs.ClebschWittHadamard.row_column_assignment_normalizes_design_closure
+#print axioms RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness
+
+-- Torsor dictionary and finite survival boundaries.
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.no_invariant_point
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.point_or_swapped_point
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_t11
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_three_readouts
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.q11_outer_readouts_agree
+#print axioms RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary
+#print axioms RelativeConicArcs.ClebschSurvivalBoundary.no_nonzero_descended_weight_passes_lowerMoment_gate
+#print axioms RelativeConicArcs.ClebschSurvivalBoundary.tested_fiveSpace_relativeCubic_intersection_zero
+#print axioms RelativeConicArcs.ClebschSurvivalBoundary.exact_mod40_residue_partition
+#print axioms RelativeConicArcs.ClebschSurvivalBoundary.mod40_prediction_of_frozen_hypotheses
+
+-- Theta, Fourier, code transport, and bitorsor passages.
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.genusThree_theta_value_counts
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.genusFive_theta_value_counts
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.theta_signature_erases_sheet
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankEightFourier_square
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankSixteenFourier_square
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.Fourier_restriction_traces_zero
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_kernel_equivalence
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.marked_actions_commute
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.marked_actions_free_transitive
