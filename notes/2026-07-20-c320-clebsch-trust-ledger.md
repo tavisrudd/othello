@@ -206,6 +206,20 @@ and the conditional mod-40 partition.  The first three are exact finite-domain n
 universal nonexistence theorems; the fourth does not formalize reciprocity, prime densities, or the
 golden semantic identification.
 
+Two earlier reviewed closing inputs are also admitted:
+
+| slice | reviewed implementation | gate SHA-256 / audited terminals | admitted route boundary |
+|---|---|---|---|
+| C428 weighted adjoint | final independent-review `GO`; repaired source `a00f9062f3d807e2da563fc431b5ab5cd70f69c8` | `c39228cec02cce07a304bec3d8f39ee9f533dad3f9628ba16716b188f886c6a1` / 22 | seven conditional symbolic depth/enumerator implications, generic evaluation injectivity, table completeness, and displayed finite specializations are standard-axiom Lean; actual enumerators/minima come only from the explicit finite evaluation terminals; coordinate-to-Coxeter and geometric model identifications remain inputs |
+| C494 B3/H3 information lattice | code commit `9e7eeec7`; final prose repair accepted by explicit user waiver | `f6423e1200dd70608e52c0c6c8d955784c32231cf4deafd8bffcf882c01e5d7d` / 31 | standard-axiom finite matching/action/profile checks and exact strict rational-function towers `1 < 2 < 6 < 14/22`; the displayed shared-edge coordinates are not identified with C425's depth coordinates; no general double-coset theorem, arbitrary field/`q`, or canonical maximal-subgroup claim |
+
+For both slices the current gate bytes equal the bytes at the recorded reviewed code commit.  C428
+cannot by itself carry the paper's whole common Coxeter distance law: its symbolic theorems are
+conditional, and its finite specializations have the exact displayed fields and tables.  C494
+cannot upgrade C425's rank-two depth plane to the full information lattice by name alone; the
+coordinate bridge remains a separately routed semantic input unless the manuscript states only the
+intrinsic finite profile theorem C494 actually checks.
+
 ## Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly
