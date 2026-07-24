@@ -1052,8 +1052,17 @@
       "last": 599,
       "purpose": "close C571 re-review field-scope, GRS bound, Dickson credit, and transversal-gate positioning",
       "sequence": 117
+    },
+    {
+      "count": 1,
+      "first": 600,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 600,
+      "purpose": "Apply final local referee exposition corrections and validate release",
+      "sequence": 118
     }
   ],
-  "next_id": 600,
+  "next_id": 601,
   "schema": "codex-task-id-allocations-v1"
 }
