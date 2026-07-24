@@ -42,7 +42,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | C1-R5 | PASS | Public table gives canonical representatives, invariants, stabilizers, Frobenius fusion, and completeness for every R5 orbit, including equal-size classes. | `supplement/CLASSIFICATION-RECORDS.{json,md}` is generated from the hash-pinned frozen R5 certificate and checks every orbit-size sum. |
 | C1-R6 | PASS | Same public record for R6. | The same generated record exposes every R6 representative, factor/invariant record, stabilizer, Frobenius link, and completeness sum. |
 | C1-R7 | PASS | Same public record for R7, with split-free versus code-deep status separated. | The generated record labels `q<11` as `split_free_only`, labels the radius-supported range `code_deep_hole`, and preserves every representative and Frobenius link. |
-| C2 | REVIEW | Every prime power below every geometric threshold is assigned to geometry, a direct certificate, radius exclusion, or an explicit open gate. | Field-range tables exist; cross-check them against certificate domains and radius premises. |
+| C2 | PASS | Every prime power below every geometric threshold is assigned to geometry, a direct certificate, radius exclusion, or an explicit open gate. | The field ledger exactly matches the frozen domains: all prime powers below 23 for R5, below 29 for R6, and below 37 for R7; the R7 `q=7,8,9` rows remain split-free-only. |
 | C3 | PASS | Every R7 code-deep statement retains the `q>=11` covering-radius premise. | Closed in manuscript; retain during proof edits. |
 | C4 | PASS | The characteristic-seven carrier is separate from whole-code R9 classification. | Separate proposition and non-classification warning are present. |
 
@@ -51,7 +51,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
 | R1 | PASS | Public-facing manuscript uses stable `Certificate R5`--`Certificate e7` labels, with no internal C-number artifact references. | Exact manuscript scan is empty after replacing the four internal C-number references. |
-| R2 | REVIEW | Certificate schema lets an external implementer identify inputs, outputs, orbit convention, stop condition, and independent replay class. | `supplement/CERTIFICATE-SCHEMA.md` exists; cold implementer read required. |
+| R2 | PASS | Certificate schema lets an external implementer identify inputs, outputs, orbit convention, stop condition, and independent replay class. | The schema gives normalization and tie-break rules and trust classes; the generated record gives searched domains, separate flags, exhaustion identities, and input hashes; the reproduction guide gives the deterministic extraction check. |
 | R3 | REVIEW | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/REPRODUCING.md` exists; execute every public command from the export. |
 | R4 | FAIL | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | Development template has 12 `TBD` lines. |
 | R5 | FAIL | Public paper-only repository URL, immutable tag/commit, and DOI/permanent archive URL resolve. | No public release exists. |
@@ -81,7 +81,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | A3 | REVIEW | Every paper-facing computational statement replays from committed public inputs by a structurally independent check. | Verification map exists; execute after public-export assembly. |
 | X1 | FAIL | Paper-only fresh-history export builds and replays from a clean checkout and pins exactly one public Lean commit, target list, and axiom audit. | Export not yet created. |
 | X2 | FAIL | All authors, order, affiliations, acknowledgements, and account authority are confirmed. | Requires author confirmation immediately before release. |
-| X3 | FAIL | Selected journal family and its current preprint/prior-publication policy are archived with date and stable URL. | Defer exact policy check until the artifact and venue choice are final. |
+| X3 | REVIEW | Selected journal family and its current preprint/prior-publication policy are archived with date and stable URL. | The 2026-07-23 C545 policy report selects IEEE Transactions on Information Theory provisionally and archives the journal/IEEE primary pages.  TechRxiv's direct service returned 403, and the mandatory account-level/same-day recheck remains open. |
 | X4 | FAIL | Exact same-file preprint records are cross-linked, visibly unrefereed, and use one title/abstract/claim set. | No upload attempted. |
 | X5 | FAIL | DOI, timestamp, version, source commit, hashes, and public URLs are recorded and resolve. | No upload attempted. |
 

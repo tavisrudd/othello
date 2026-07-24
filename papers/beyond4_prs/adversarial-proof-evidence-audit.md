@@ -32,7 +32,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | Attack | Evidence tested | Verdict | Required repair |
 |---|---|---|---|
 | The contained cases are assumed rather than classified. | Original Theorem 4.1 and its proof | **Rejected through R9 after repair.** | The revision separates polar construction, `CC(n,j)`, and transverse induction.  The rank--nullity, central-lift, collision, and modular calculations close `CC(6,1)`, `CC(7,1)`, and `CC(8,1)`; the pointed recursion closes `LP(6,1)`; and the universal R9 good-base open closes the residual carrier. |
-| Orbit counts are used as orbit identifiers. | R5--R7 tables | **Survived against the first draft.** | Public records must expose canonical representatives, stabilizers, invariants/histograms, Frobenius fusion, and exhaustion. |
+| Orbit counts are used as orbit identifiers. | R5--R7 tables | **Rejected after repair.** | The generated public records expose canonical representatives, stabilizers, invariants/histograms, Frobenius fusion, separate status flags, and exact exhaustion identities. |
 | Split-free is silently promoted to deep. | R7 statement, summary, certificate schema | **Rejected after repair.** | Preserve the separate radius field and the `q>=11` gate. |
 | A finite regression is used as a geometric-integrality proof. | Hessian and R9 evidence rows | **Rejected after repair.** | The manuscript and schema now say explicitly that bounded algebra does not replace the geometric proof. |
 | C517 proves the full redundancy-nine theorem. | Lean import gate and axiom audit | **Rejected.** | C517 is recorded only as residual algebra plus conditional synthesis, with five geometric/group-theoretic inputs outside Lean. |
@@ -40,7 +40,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | The `q=53` endpoint is an unexplained rounding artifact. | R9 threshold | **Rejected after repair.** | The strict real cutoff is 49, integer lower bound 50, first prime power 53. |
 | The R5 singular curve uses the smooth `+1` convention. | Lemma 3.2 and threshold table | **Rejected after repair.** | R5 is explicitly assigned `kappa=0`. |
 | The verification package is externally reproducible. | Repository-relative paths and predecessor manifests | **Survived.** | The release manifest still lacks URL, tag, commit, DOI, hashes, byte counts, and toolchains. |
-| The manuscript is proof-complete. | All headline theorem proofs | **Survived.** | R5 and R6 still require their proposition-level expansions and independent cold reads; public classification, literature, formalization, and release gates also remain.  R8/R9, ordered Hessian, and `e_7` are no longer the mathematical blockers. |
+| The mathematical manuscript is proof-complete at its stated boundaries. | All headline theorem proofs | **Rejected after repair.** | The proposition-level assertion-map cold read is green through R9, ordered Hessian, and `e_7`.  Literature, formal reconciliation, clean-export, metadata, and author/venue confirmation remain release gates rather than hidden proof hypotheses. |
 
 ## Result audit
 
@@ -55,7 +55,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | R9 | Green mathematical theorem | L1 | Residual and deletion proofs, six explicit slice polynomials and checked Bezout identity, four multiple-root controls, the rational-base polynomial with degree accounting, and `CC(8,1)` are printed.  The theorem makes no bounded-field claim below 53. |
 | R9-kernel | Green kernel-checked conditional theorem | L3 | Does not close geometric hypotheses. |
 | Hessian | Green mathematical theorem | L1 | The reduced root-compatible pullback is proved to be the persistent/Lucas union, the complementary ruling is excluded, vertical factors are removed before reduction, and a product of two nonzero component equations gives the honest degree-eight global bad polynomial and revised threshold. |
-| Lucas | Green mixed supporting theorem, pending cold read | L2 | Distinguished endpoint only. |
+| Lucas | Green mixed supporting theorem | L2 | Distinguished endpoint only; no claim about the remaining degree-nine carrier strata. |
 | e7 | Green mixed theorem | L1/L2 | The source derives the full collision open, proves geometric Artin--Schreier integrality and the trace law, identifies the connected affine-frame quotient and exact `AGL_3(F_2)` deck group, and gives the direct translated-subspace witness count with no overcount. |
 
 ## Cross-cutting findings
@@ -70,20 +70,18 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 5. A single larger paper remains coherent, provided the ordered-Hessian and
    Lucas sections are integrated as level-specific contained geometry.
 
-## Remaining manuscript work
+## Remaining release work
 
-- Prove one named proposition for every load-bearing degree, genus,
-  integrality, ramification, collision, and containment assertion.
-- Replace the ordered-Hessian outline and split the `e_7` theorem into three
-  proofs.
-- Complete the public classification records and field-range bridge records.
-- Finish the role-based literature audit and immutable release package.
-- Repeat this adversarial audit after expansion; only then may an open result
-  row become green.
+- Finish the role-based literature audit and bibliography metadata check.
+- Reconcile the aggregate public Lean target and statement-adequacy boundary.
+- Split the source, execute the public replays in a clean paper-only export,
+  and fill the immutable manifest.
+- Confirm authorship and the selected venue policy immediately before any
+  upload.
 
 ## Bottom line
 
-The revision repairs the logical presentation of the induction theorem and
-the numerical point-bound convention.  It does not yet repair the central
-proof-completeness deficit.  The manuscript remains a development draft until
-the sharp blockers above are closed.
+The mathematical proof boundary is green, including the mixed finite
+residues.  The object remains a pre-release development draft because the
+literature, formal aggregate, clean-export, immutable-manifest, and external
+confirmation gates are still open.

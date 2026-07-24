@@ -43,7 +43,7 @@ closed.
 | Gate | Required change | Acceptance test | Status |
 |---|---|---|---|
 | C1 | Give public canonical representatives, stabilizers, invariants, Frobenius fusion, and completeness records for R5--R7. | Repeated orbit sizes are distinguishable without internal task reports. | Closed by generated, hash-pinned public JSON and Markdown records |
-| C2 | Add a field-range ledger for every prime power below each geometric threshold. | Every field is assigned to geometry, direct certificate, radius exclusion, or an explicitly open gate. | In this revision |
+| C2 | Add a field-range ledger for every prime power below each geometric threshold. | Every field is assigned to geometry, direct certificate, radius exclusion, or an explicitly open gate. | Closed against the frozen certificate domains and radius premises |
 | C3 | Keep split-free syndrome and code deep-hole classifications distinct at redundancy seven. | Every summary retains the `q>=11` covering-radius gate. | Closed in source |
 | C4 | Separate the characteristic-seven carrier calibration from whole-code redundancy-nine classification. | The carrier result is a separate proposition with an explicit non-classification warning. | Closed in source; exposition strengthened in this revision |
 
@@ -51,8 +51,8 @@ closed.
 
 | Gate | Required change | Acceptance test | Status |
 |---|---|---|---|
-| R1 | Replace paper-facing C-numbers by stable labels `Certificate R5`, ..., `Certificate e7`. | The manuscript table uses only public labels. | In this revision |
-| R2 | Document the certificate schema and what each replay independently rederives. | `supplement/CERTIFICATE-SCHEMA.md` is complete enough for an external implementer. | In this revision |
+| R1 | Replace paper-facing C-numbers by stable labels `Certificate R5`, ..., `Certificate e7`. | The manuscript table uses only public labels. | Closed in source |
+| R2 | Document the certificate schema and what each replay independently rederives. | `supplement/CERTIFICATE-SCHEMA.md` is complete enough for an external implementer. | Closed with normalization, flags, exhaustion, trust classes, and extraction check |
 | R3 | Give exact commands, working directories, searched domains, stop conditions, and toolchain requirements. | `supplement/REPRODUCING.md` contains literal commands and boundaries. | In this revision |
 | R4 | Create an immutable release manifest with hashes and byte counts without rewriting predecessor manifests. | Manifest names the release commit, archive identifier, and every public artifact. | Scaffolded; final hashes/DOI open until release |
 | R5 | Supply a repository URL, immutable tag/commit, and DOI or permanent archive URL. | All three resolve externally. | Open; must close before C545 |
