@@ -1,0 +1,251 @@
+{
+  "schema": "ame-lu-release-manifest-v1",
+  "release": "ame-lu-rc1",
+  "date": "2026-07-24",
+  "title": "Local-Unitary Rigidity and Clifford Geometry of Six-Qudit AME Stabilizer Tensors",
+  "public_export": {
+    "artifacts": [
+      {
+        "bytes": 994,
+        "path": "Makefile",
+        "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
+      },
+      {
+        "bytes": 156688,
+        "path": "ame-lu.pdf",
+        "sha256": "a8ce4867d3999a6bba4c8f5590a6e11de046d7100ecf318e1450f99ed683b3b1"
+      },
+      {
+        "bytes": 11802,
+        "path": "formal-statement-adequacy.md",
+        "sha256": "0c024d2195560e65901c6ccf86ef44cc6a122e169a7c519b7dc6411ca5263d83"
+      },
+      {
+        "bytes": 2880,
+        "path": "main.tex",
+        "sha256": "3bbb0ba1df347d9ad9db815ef11eb281981a7e6600f32cf31d677dd992dcefc4"
+      },
+      {
+        "bytes": 2872,
+        "path": "refs.bib",
+        "sha256": "5356c84c6369f03ab1893345adea4bb09a79c69b28dc79933a353dbab4ae95f7"
+      },
+      {
+        "bytes": 2124,
+        "path": "release/PUBLIC-EXPORT.md",
+        "sha256": "46525f873be448bd064e010dbb23f701f7fe4f31a6b0a90a9877ac1fac8fad93"
+      },
+      {
+        "bytes": 2299,
+        "path": "release/QUANTUM-CHECKLIST.md",
+        "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
+      },
+      {
+        "bytes": 6951,
+        "path": "release/verify_release.py",
+        "sha256": "410b412d0b3f4af99444c632704e2ceeac1d92f2bffa7870dce63f26f448c994"
+      },
+      {
+        "bytes": 4724,
+        "path": "sections/01-introduction.tex",
+        "sha256": "03dbc707199305c98d6b3f076179002bc27204e3b9347983dc4953b08c15ca37"
+      },
+      {
+        "bytes": 4031,
+        "path": "sections/02-geometry-ame-dictionary.tex",
+        "sha256": "0c5b908a4b9610b4bd6fb8c0d2bff8204090b4abaadc23a43dd796060aa71d85"
+      },
+      {
+        "bytes": 3865,
+        "path": "sections/03-lu-rigidity.tex",
+        "sha256": "844bdcb643b3871ea05fcd34324a62d310ac1ffc3d3e233be0f3d931645d64fe"
+      },
+      {
+        "bytes": 5651,
+        "path": "sections/04-pencil-classification.tex",
+        "sha256": "e23bdfc16005d8985ccf74aa5f9989549ec42ef832cff9e689ba3cede38ed2da"
+      },
+      {
+        "bytes": 5361,
+        "path": "sections/05-logical-clifford-phase.tex",
+        "sha256": "acf5ee95ceee2b09d68a320043a8065705b73ba0f948edcc5f19f80fe9084bbd"
+      },
+      {
+        "bytes": 8717,
+        "path": "sections/06-lu-invariants.tex",
+        "sha256": "58b2cb0d734631273548fe918b3b17d228e00265b0bbe0641e88926e3c24613f"
+      },
+      {
+        "bytes": 6490,
+        "path": "sections/07-transport-sheaf.tex",
+        "sha256": "bba94a54d51dbbef42f303f1ab93ff4013cc6c48064a34691df63f60b2819128"
+      },
+      {
+        "bytes": 5922,
+        "path": "sections/08-verification-boundary.tex",
+        "sha256": "03b17715bca02a20051a2846c227317e5ae4da40389ba608acfdb15d2b004010"
+      },
+      {
+        "bytes": 3473,
+        "path": "supplement/EVIDENCE-MANIFEST.json",
+        "sha256": "71920b115b32e6f3e77bc026a9882a7cc63b2a7bf4a2bdbaa207317338fb3b1e"
+      },
+      {
+        "bytes": 5044,
+        "path": "supplement/EVIDENCE.md",
+        "sha256": "32654958b9e37b8e354d2751a8708eb33c1f8bd27b6d5ad06c55e24eeeb15e44"
+      },
+      {
+        "bytes": 916,
+        "path": "supplement/README.md",
+        "sha256": "951f5dcc96d7813f7df51afb898c1138477cd92eed529c8d703fe0160ef41bd8"
+      },
+      {
+        "bytes": 15469,
+        "path": "supplement/evidence/2026-07-19-c374-clebsch-ame-equivalence.json",
+        "sha256": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d"
+      },
+      {
+        "bytes": 24690,
+        "path": "supplement/evidence/2026-07-19-c374-clebsch-ame-equivalence.py",
+        "sha256": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694"
+      },
+      {
+        "bytes": 24069,
+        "path": "supplement/evidence/2026-07-20-c395-clebsch-ame-pencil-arithmetic.py",
+        "sha256": "a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52"
+      },
+      {
+        "bytes": 749580,
+        "path": "supplement/evidence/2026-07-23-c396-holonomy-completeness.json",
+        "sha256": "04b791acae107d24c81c589059c8a310c01e6feaac9c4713bdb1e9d323e29031"
+      },
+      {
+        "bytes": 41305,
+        "path": "supplement/evidence/2026-07-23-c396-holonomy-completeness.py",
+        "sha256": "b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49"
+      },
+      {
+        "bytes": 225468,
+        "path": "supplement/evidence/2026-07-23-c397-ame-perfect-tensor-physics.json",
+        "sha256": "c0a2df44ad991f59bb95182544bf4ac8d39d7a997c6bd1ea987e4020266c1dfd"
+      },
+      {
+        "bytes": 30099,
+        "path": "supplement/evidence/2026-07-23-c397-ame-perfect-tensor-physics.py",
+        "sha256": "360ded0f7e07fdac30e575474336645e05909ad15a1e0e6729a071e7a88cddf3"
+      },
+      {
+        "bytes": 12677,
+        "path": "supplement/evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.json",
+        "sha256": "f324ea645f9ac10e8dee150b9d5e5c321547f23d3925dda78d556f31db521320"
+      },
+      {
+        "bytes": 28651,
+        "path": "supplement/evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py",
+        "sha256": "914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627"
+      },
+      {
+        "bytes": 14294,
+        "path": "supplement/evidence/2026-07-23-c546-h3-pentad-orientation-lu.json",
+        "sha256": "c335a719a59c93e6ef4ce62812b142261f2c5d2724baf2d5a68348f25a64bf8c"
+      },
+      {
+        "bytes": 9836,
+        "path": "supplement/evidence/2026-07-23-c546-h3-pentad-orientation-lu.py",
+        "sha256": "ef0b439b31c1f764247d8766474004d11211c6148a66ce702ffc373c5fe3aee6"
+      },
+      {
+        "bytes": 12178,
+        "path": "supplement/evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.json",
+        "sha256": "31f0ad316e1f8c199d502b3da050fd4371083330c89854790b693c262452c3ca"
+      },
+      {
+        "bytes": 31948,
+        "path": "supplement/evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py",
+        "sha256": "1ded3f75a2100c6f53b62498fa7a84c99d91b477b9f9ee3734d68a8c9b19d6f1"
+      },
+      {
+        "bytes": 12197,
+        "path": "supplement/evidence/2026-07-23-c550-four-copy-cover-holonomy.json",
+        "sha256": "9d3bcb92d97d8fc84d4459cde906894d40e9c542d8ab389b5cf0b4fe29e5bda3"
+      },
+      {
+        "bytes": 27591,
+        "path": "supplement/evidence/2026-07-23-c550-four-copy-cover-holonomy.py",
+        "sha256": "3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7"
+      },
+      {
+        "bytes": 2476,
+        "path": "supplement/verify.py",
+        "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
+      }
+    ],
+    "tree_sha256": "640a51ff2d4154b948b9e0b10ed8f12f45ec0bc600027877f650ffc7cb790b40"
+  },
+  "formal_companion": {
+    "artifacts": [
+      {
+        "bytes": 3591,
+        "path": "lean/RelativeConicArcs/AMELU/CSS.lean",
+        "sha256": "1ef42d91d72f7940b7c985c0cf736bb0af93541f99101115269fe7c410cddb66"
+      },
+      {
+        "bytes": 15935,
+        "path": "lean/RelativeConicArcs/AMELU/Definitions.lean",
+        "sha256": "448250f26b854c9a591fcc8605508a24fd747919eed833b62df371d7ea7e29cf"
+      },
+      {
+        "bytes": 29657,
+        "path": "lean/RelativeConicArcs/AMELU/Dictionary.lean",
+        "sha256": "67292ca7f120da8751879dae958c430d8eeab803549e0fb0b865abe41fa0f8dc"
+      },
+      {
+        "bytes": 12000,
+        "path": "lean/RelativeConicArcs/AMELU/FourCopyContraction.lean",
+        "sha256": "79fa1dfba9bc977b04a6f992b45131b0d3761a569a341579264ad71e43a137bf"
+      },
+      {
+        "bytes": 4924,
+        "path": "lean/RelativeConicArcs/AMELU/LogicalPhase.lean",
+        "sha256": "54f41ec8d5e8d1c472d39604ece04862afc7f1c5e4d5ca89b6144ac91a8ea332"
+      },
+      {
+        "bytes": 11040,
+        "path": "lean/RelativeConicArcs/AMELU/MarginalMoment.lean",
+        "sha256": "7c4694e22871cde777964f1b4dabecd628ee72b6163a23b795a69202a1777264"
+      },
+      {
+        "bytes": 13784,
+        "path": "lean/RelativeConicArcs/AMELU/PencilClassification.lean",
+        "sha256": "b206fa70999f160b9985580414ce925c6a7a6d4141828a46e0bba2eafc690060"
+      },
+      {
+        "bytes": 19267,
+        "path": "lean/RelativeConicArcs/AMELU/StabilizerDictionary.lean",
+        "sha256": "9d2e8c97fc9bb19c86be838ac3376f29ccfad3d9ba8556d72a9d25505a212bfd"
+      },
+      {
+        "bytes": 15570,
+        "path": "lean/RelativeConicArcs/AMELU/TransportDivisor.lean",
+        "sha256": "70cd0db6d3026d0d0ae0ed39d78da8f9cc89aaa8f3d829b4583f07414fece42b"
+      },
+      {
+        "bytes": 1130,
+        "path": "lean/RelativeConicArcs/Gates/AMELUAggregate.lean",
+        "sha256": "53ee1946202f9250aa058107a03505f7aa87ca2948d55ba45d574b94bf3fb123"
+      },
+      {
+        "bytes": 2398,
+        "path": "lean/RelativeConicArcs/Gates/AMELUAggregateAxioms.lean",
+        "sha256": "3d8eec6a93167e849aeaa81d048fa76979f863c1415afc3165fa65e812191b01"
+      },
+      {
+        "bytes": 29,
+        "path": "lean/lean-toolchain",
+        "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
+      }
+    ],
+    "tree_sha256": "91c8ba3c885a65e71adb0cf5cf3491086c3f810cec11673435112852983399de"
+  }
+}

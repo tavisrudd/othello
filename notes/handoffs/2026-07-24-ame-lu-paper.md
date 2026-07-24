@@ -234,6 +234,17 @@ This remains an optional synthesis corollary, not a change to C561's
 headline.  See
 `2026-07-24-c580-scalar-covariant-separation.md`.
 
+**C572 closed (2026-07-24): reproducible local release candidate.** The
+paper-only public tree and formal Lean companion have separate immutable
+SHA-256 identities. A deterministic exporter produces a complete scholarly
+bundle and a minimal arXiv source bundle; clean source rebuilds the tracked
+15-page PDF byte for byte, and the complete evidence replay passes from the
+extracted public bundle. Quantum and arXiv policy checks leave only author
+decisions: public identifier, name/affiliation/ORCID, funding and
+contribution/AI disclosure, license/category, rights, account readiness, and
+explicit upload or submission authorization. No external action was taken.
+See `2026-07-24-c572-ame-lu-release-candidate.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -251,15 +262,14 @@ as C559--C572.  Dependency order is authoritative:
    (complete).
 7. C571: adversarial audit, second draft, PDF inspection, and cold read
    (complete).
-8. C572: clean replay, immutable manifest, public export, and release gates.
+8. C572: clean replay, immutable manifest, public export, and release gates
+   (complete).
 
-C572 is next: produce the release candidate with a clean-checkout build and
-full replay, immutable source/evidence manifest, reviewed paper-only public
-export plan, target-policy check, and final author/account gates. C581 remains
-a separately queued optional upgrade gate. C571's Frobenius counterexample
-sharpens its first question: determine whether the shortened marginal planes
-recover the Desarguesian `F_q`-spread inside the additive `F_p` phase space
-before attempting extension-field or approximate rigidity.
+The core paper program is complete at a local release candidate. Public release
+now waits on the author gates listed above. C581 remains a separately queued
+optional manuscript upgrade: first determine whether the shortened marginal
+planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
+space before attempting extension-field or approximate rigidity.
 
 ## Completion gates
 

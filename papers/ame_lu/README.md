@@ -5,18 +5,11 @@ Six-Qudit AME Stabilizer Tensors.*
 
 **Lane:** `ame-lu`
 
-**Status:** complete first draft.  C560
-shows that every local-unitary intertwiner between equal-phase CSS states of
-linear `[6,3,4]_q` MDS codes is local Clifford.  C561 fixes the title,
-theorem hierarchy, exception table, and section order.  The paper-local
-evidence bundle and claim-specific literature audit are closed by C563 and
-C562.  C564 supplies an eleven-page warning-free first draft; formalization,
-adversarial revision, and release gates remain.
-
-The completion program is queued as C559--C572: theorem decision, theorem
-freeze, literature and reproducibility audits, first draft, four Lean theorem
-packages plus their shared and aggregate gates, adversarial second draft, and
-release candidate.
+**Status:** local release candidate. Every local-unitary intertwiner between
+equal-phase CSS states of linear `[6,3,4]_q` MDS codes is local Clifford. The
+paper-local evidence bundle, formal companion, adversarial read, and release
+manifest are complete. Public identifiers, author metadata, license choice,
+and submission authorization remain author gates.
 
 ## Build
 
@@ -40,6 +33,11 @@ The `supplement/` directory contains the paper-local report, exact generators,
 compact certificates, load-bearing input, SHA-256 manifest, and deterministic
 replay driver for every adopted computation.  Run `make evidence` for the
 integrity gate or `python3 supplement/verify.py --replay` for full regeneration.
+
+The `release/` directory contains the immutable release manifest, deterministic
+paper-only export driver, public-export plan, and target-policy checklist. Run
+`make release-check` for the warning-free manuscript build, full evidence
+replay, and release-manifest verification.
 
 ## Mathematical scope
 
