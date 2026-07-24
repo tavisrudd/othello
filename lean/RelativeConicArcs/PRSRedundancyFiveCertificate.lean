@@ -3,9 +3,9 @@ import RelativeConicArcs.PRSFoundation
 /-!
 # Finite certificate interface for redundancy-five cubic pencils
 
-This module records the compact finite data used by the redundancy-five projective
-Reed--Solomon classification.  The seventeen records are precisely the sporadic
-`PGL₂`-orbits at field orders `7, 8, 9, 11, 13, 17, 19`.  Each record contains a
+The compact finite table used by the redundancy-five projective Reed--Solomon classification
+contains seventeen candidate sporadic `PGL₂`-orbit rows at field orders
+`7, 8, 9, 11, 13, 17, 19`.  Each row contains a
 canonical projective point index, orbit size, stabilizer order, complete pencil-member
 histogram, and coefficient-Frobenius target.
 
@@ -13,9 +13,9 @@ The source is the public electronic artifact
 `papers/beyond4_prs/supplement/CLASSIFICATION-RECORDS.json`, SHA-256
 `0a6c4066dff9983a9c2124bca27fbbe4e273b9868125a04c30071df3783b6725`.
 That artifact specifies normalization, field models, exhaustive domains, generators,
-and independent replay.  Lean kernel reduction checks the arithmetic consistency and
-the exact table transcribed here.  It does not rerun the external finite-field
-enumeration.  `CertificateValidation` therefore exposes representative, stabilizer,
+and independent replay.  Lean kernel reduction checks the transcribed table and its arithmetic
+consistency, but does not establish that these rows are the sporadic orbits or rerun the external
+finite-field enumeration.  `CertificateValidation` exposes representative, stabilizer,
 histogram, Frobenius, and exhaustion validation as separate hypotheses.
 -/
 
@@ -56,7 +56,7 @@ private def orbit (q rep size stabilizer : ℕ) (h : MemberHistogram)
     (frobeniusTarget semilinearRepresentative : ℕ) : SporadicOrbitRecord :=
   ⟨q, rep, size, stabilizer, h, frobeniusTarget, semilinearRepresentative⟩
 
-/-- Complete sporadic orbit inventory.  Repeated orbit sizes remain distinct because
+/-- Transcribed candidate sporadic orbit inventory.  Repeated orbit sizes remain distinct because
 the canonical index, stabilizer, histogram, and Frobenius target are retained. -/
 def sporadicOrbitRecords : List SporadicOrbitRecord := [
   orbit 7 346 28 12 (hist 0 0 4 0 4) 346 346,

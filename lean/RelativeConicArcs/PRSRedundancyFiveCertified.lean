@@ -4,15 +4,15 @@ import RelativeConicArcs.PRSRedundancyFiveCertificate
 /-!
 # Certified redundancy-five projective Reed--Solomon synthesis
 
-This module joins two independently elaborated leaves: the characteristic-free
-Hankel and family synthesis in `RelativeConicArcs.PRSRedundancyFive`, and the
-exact finite sporadic records and semantic checker interface in
+The characteristic-free Hankel and family synthesis is specialized to the public finite
+certificate's semantic evidence interface.  The algebra is in
+`RelativeConicArcs.PRSRedundancyFive`; the candidate finite rows and validation predicates are in
 `RelativeConicArcs.PRSRedundancyFiveCertificate`.
 
 The wrapper fixes the generic certificate-evidence type to
 `RelativeConicArcs.PRSRedundancyFiveCertificate.CertificateValidation`.
-Consequently, a finite-bridge classification cannot reach this paper-facing
-terminal by supplying an unrelated evidence type.
+Consequently, a finite-bridge classification cannot reach this paper-facing theorem by supplying
+an unrelated evidence type.
 -/
 
 namespace RelativeConicArcs.PRSRedundancyFiveCertified

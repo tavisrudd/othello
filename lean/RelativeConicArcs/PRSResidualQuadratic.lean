@@ -3,9 +3,9 @@ import Mathlib
 /-!
 # Consecutive contraction and residual quadratics
 
-This module formalizes the algebraic core of a residual-quadratic argument for a degree-eight
-normal-rational-curve syndrome.  Coordinates use the divided-power convention: contraction at a
-finite marker `r` sends consecutive coordinates `aᵢ, aᵢ₊₁` to `aᵢ₊₁ - r aᵢ`.
+The algebraic core of a residual-quadratic argument for a degree-eight
+normal-rational-curve syndrome uses divided-power coordinates: contraction at a finite marker
+`r` sends consecutive coordinates `aᵢ, aᵢ₊₁` to `aᵢ₊₁ - r aᵢ`.
 
 For a binary quartic syndrome and a quintic coefficient vector, four consecutive Hankel
 contractions determine a homogeneous residual quadratic.  Lean checks the two Hankel equations,

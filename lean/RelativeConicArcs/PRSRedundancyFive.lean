@@ -3,13 +3,13 @@ import RelativeConicArcs.PRSFoundation
 /-!
 # Redundancy-five projective Reed--Solomon cubic pencils
 
-This module formalizes the characteristic-free `2 × 4` Hankel matrix attached to a
-five-coordinate syndrome, homogeneous split-squarefree binary cubics, the tangent,
+The characteristic-free `2 × 4` Hankel matrix attached to a five-coordinate syndrome is developed
+alongside homogeneous split squarefree binary cubics, the tangent,
 conjugate-secant, osculating-pair, characteristic-three nucleus, and wild-family
-count synthesis, and the exact finite-certificate boundary.
+count synthesis, and the finite-certificate boundary.
 
-The concrete algebra and all numerical consequences are checked by the Lean kernel.
-The following mathematical inputs remain visible structure fields:
+Lean checks the displayed algebra and derives the numerical formulas from stated cardinality and
+orbit-count hypotheses.  Four further inputs remain visible:
 
 * Seroussi and Roth, *On MDS Extensions of Generalized Reed--Solomon Codes*,
   IEEE Transactions on Information Theory 32 (1986), 349--354,
@@ -20,7 +20,7 @@ The following mathematical inputs remain visible structure fields:
 * the geometric classification of the separable cubic-cover strata;
 * semantic validation of the public finite certificate.
 
-No external result or finite-field computation is declared as an axiom.  The terminal
+No external result or finite-field computation is declared as an axiom.  The synthesis
 theorem consumes these inputs as hypotheses and keeps split-free syndrome
 classification separate from coding-theoretic covering-radius promotion.
 -/
@@ -191,8 +191,7 @@ theorem inHankelKernel_scale_iff {K : Type*} [Field K]
               ring
         _ = 0 := by rw [h1, mul_zero]
 
-/-- Split-freeness descends from nonzero syndrome vectors to projective
-syndrome directions. -/
+/-- Split-freeness is invariant under nonzero scaling of a syndrome representative. -/
 theorem isSplitFree_scale_iff {K : Type*} [Field K]
     (u : K) (hu : u ≠ 0) (a : Syndrome K) :
     IsSplitFree (scaleSyndrome u a) ↔ IsSplitFree a := by
@@ -203,9 +202,8 @@ theorem isSplitFree_scale_iff {K : Type*} [Field K]
   · intro hfree ⟨c, hkernel, hsplit⟩
     exact hfree ⟨c, (inHankelKernel_scale_iff u hu a c).1 hkernel, hsplit⟩
 
-/-- The converse span criterion and projective equivariance needed to identify
-the concrete Hankel predicate with projective Reed--Solomon span avoidance.
-The forward polynomial identities are the two kernel-checked theorems above. -/
+/-- Converse span criterion identifying the Hankel predicate with three-column span incidence.
+The forward polynomial identities are the two preceding theorems. -/
 structure HankelSpanCriterionInput (K : Type*) [Field K] where
   liesInThreeColumnSpan : Syndrome K → Prop
   span_iff_hasSplitSquarefreeKernelMember :
@@ -248,7 +246,7 @@ def cyclicFamilyCardDoubled (c : CyclicFamilyCase) (q : ℕ) : ℕ :=
   | .osculatingRational => q * (q + 1)
   | .characteristicThree => q ^ 2 + 1
 
-/-- Twice the closed-form nonsporadic deep-syndrome count. -/
+/-- Twice the closed-form nonsporadic deep syndrome count. -/
 def nonsporadicDeepCardDoubled (c : CyclicFamilyCase) (q : ℕ) : ℕ :=
   match c with
   | .osculatingConjugate => q ^ 2 * (q + 3)
@@ -341,7 +339,7 @@ theorem family_arithmetic {q : ℕ} (hq : 0 < q) (c : CyclicFamilyCase) :
   rw [hsquare]
   cases c <;> simp [cyclicFamilyCardDoubled, nonsporadicDeepCardDoubled] <;> ring
 
-/-- Twice the exact deep-syndrome cardinality is the appropriate closed form
+/-- Twice the deep syndrome cardinality is the appropriate closed form
 plus twice the certified sporadic contribution. -/
 theorem deep_card_doubled {S : Type*} {q : ℕ} [DecidableEq S]
     (data : FamilyData S q) :
@@ -443,9 +441,8 @@ def nonsporadicOrbitCount : OrbitArithmeticCase → ℕ
   | .characteristicThreeModFourOne => 5
   | .characteristicThreeModFourThree => 6
 
-/-- Visible orbit input: numerical consequences are returned only after the
-concrete projective and projective-semilinear action arguments have supplied
-the two orbit counts. -/
+/-- Numerical projective and projective-semilinear orbit-count hypotheses.
+Their group-action justification lies outside this structure. -/
 structure OrbitData (case : OrbitArithmeticCase) where
   sporadicProjectiveOrbitCount : ℕ
   sporadicSemilinearOrbitCount : ℕ
@@ -463,8 +460,8 @@ supplied by the finite certificate. -/
 def finiteBridgeFieldOrders : List ℕ :=
   [7, 8, 9, 11, 13, 16, 17, 19]
 
-/-- Explicit external theorem boundary for the exceptional-cover classification.
-Each load-bearing imported result or finite validation has its own proposition. -/
+/-- External inputs for covering-radius promotion, high-field geometry, finite-certificate
+validation, and agreement with the concrete split-free predicate. -/
 structure ExceptionalCoverClassificationInput
     (K CertificateEvidence : Type*) (q : ℕ)
     [Field K] [Fintype K] [DecidableEq K] where

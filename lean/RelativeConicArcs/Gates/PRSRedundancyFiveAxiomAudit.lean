@@ -3,9 +3,9 @@ import RelativeConicArcs.Gates.PRSRedundancyFive
 /-!
 # Axiom audit for redundancy-five cubic-pencil classification
 
-This reproducible audit prints the axiom dependencies of the algebraic,
-certificate, arithmetic, and synthesis terminals exported by
-`RelativeConicArcs.Gates.PRSRedundancyFive`.  It adds no definitions or theorems.
+The commands below print the axiom dependencies of the algebraic, certificate, arithmetic, and
+synthesis theorems exported by `RelativeConicArcs.Gates.PRSRedundancyFive`; this file adds no
+declarations.
 -/
 
 #print axioms RelativeConicArcs.PRSRedundancyFive.affine_span_product_mem_hankelKernel

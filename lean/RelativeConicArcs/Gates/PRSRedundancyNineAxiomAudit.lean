@@ -3,8 +3,8 @@ import RelativeConicArcs.Gates.PRSRedundancyNine
 /-!
 # Axiom audit for the redundancy-nine residual-quadratic theorem
 
-This reproducible audit prints the axiom dependencies of the algebraic and synthesis terminals
-exported by `RelativeConicArcs.Gates.PRSRedundancyNine`. It adds no definitions or theorems.
+The commands below print the axiom dependencies of the algebraic and synthesis theorems exported
+by `RelativeConicArcs.Gates.PRSRedundancyNine`; this file adds no declarations.
 -/
 
 #print axioms RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm
