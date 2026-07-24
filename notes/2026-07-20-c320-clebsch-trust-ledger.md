@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; implementation is at the final clean-release run, then user-launched review
+**Status:** active; implementation complete and ready for user-launched independent review
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -420,8 +420,9 @@ The aggregate Lean gate and durable axiom audit landed in commit
 `223584997c5691a60c066d865c0a0e449a38cd21`.  Paper evidence migration landed in commits
 `be274713` and `c39d2846`; the replacement manuscript and first manifest landed through
 `70c39f78`, and proof promotion/discovery banking through `f67f5f51`.  Planning reconciliation
-landed in `3ee4476f`.  Later release-only commits are recorded below after the final deterministic
-output is cut.
+landed in `3ee4476f`; the style-guide, proof-mechanism, and dependency-aware release revision landed
+in `d98b858f`.  The tracked deterministic output and its manifest hash record the final release
+state.
 
 Reconciliation judgments with paper effects:
 
@@ -444,6 +445,20 @@ Reconciliation judgments with paper effects:
 7. The only external release dependency not manufactured by C320 is the immutable C182 archive/DOI.
    It does not weaken the local trust run, but publication packaging cannot claim an immutable DOI
    until C182 supplies it.
+
+### Final validation
+
+The manuscript was rebuilt with Tectonic after the style-guide pass.  The build produced the PDF
+with no TeX error; the only warnings are underfull boxes in the narrow survival-ledger table.  A
+release-tree text audit found no operational reference to the post-acceptance record plan, ignition
+text, hidden hash, editor procedure, or representative selection.  The only Hofstadter occurrences
+in the released tree are the intentional, open explanatory paragraph and its bibliography entry.
+
+The clean release runner used the disk-backed detached Lean checkout at the pinned commit above.
+Its first complete run returned `status: passed` for all 17 checks: six verification-tool tests,
+statement extraction, eleven retained finite paper checkers, both public evidence bundles, pinned
+Mathlib-cache setup, and the exact aggregate Lean target.  The complete deterministic JSON is
+tracked at `verification/verify-release-output.json` and hash-bound by the trust manifest.
 
 ## Required outcome
 
@@ -516,19 +531,19 @@ ledger-to-terminal, gate-to-import, certificate-to-checker, and command-to-artif
 or `NO-GO` blocks completion and archival. Fix every issue, rerun affected checks, update this report,
 and request post-fix review. Only a recorded final `GO` permits C320 to be archived.
 
-- [ ] Inventory every published Clebsch claim and separately stated subclaim; account for each once.
-- [ ] Assign one exact final route per row and prohibit trust inheritance across combined claims.
-- [ ] Verify adequacy against actual theorem types/definitions, not names, reports, or intended prose.
-- [ ] Verify every Lean terminal is imported by the pinned gate and record current exact-target and
+- [x] Inventory every published Clebsch claim and separately stated subclaim; account for each once.
+- [x] Assign one exact final route per row and prohibit trust inheritance across combined claims.
+- [x] Verify adequacy against actual theorem types/definitions, not names, reports, or intended prose.
+- [x] Verify every Lean terminal is imported by the pinned gate and record current exact-target and
   axiom-audit evidence.
-- [ ] Verify every computational row's checker semantics, exhaustive coverage, artifacts, hashes,
+- [x] Verify every computational row's checker semantics, exhaustive coverage, artifacts, hashes,
   independent replay, and residual trust; distinguish search evidence from proof.
-- [ ] State every named classical/axiomatic input and the unconditional remainder without it.
-- [ ] Reconcile all task judgment logs, review findings, fallbacks, exclusions, and post-fix changes.
-- [ ] Provide one clean-source verify-all entry point that fails loudly on missing/stale/mismatched
+- [x] State every named classical/axiomatic input and the unconditional remainder without it.
+- [x] Reconcile all task judgment logs, review findings, fallbacks, exclusions, and post-fix changes.
+- [x] Provide one clean-source verify-all entry point that fails loudly on missing/stale/mismatched
   components and leaves the worktree unchanged.
-- [ ] Produce the verbatim adequacy-appendix extraction and compare it to final manuscript claims.
-- [ ] Audit the referee-facing manifest/artifacts for self-containment, stable citations, one-way
+- [x] Produce the verbatim adequacy-appendix extraction and compare it to final manuscript claims.
+- [x] Audit the referee-facing manifest/artifacts for self-containment, stable citations, one-way
   references, semantic naming, and absence of internal workflow or unsupported novelty language.
 - [ ] Record independent review, every finding/fix, post-fix review, and final `GO`.
 - [ ] Only after final `GO`, archive C320 with this completed report and the manifest/entry point.

@@ -6452,7 +6452,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "d4d1dcecd7ac05002f48dd7b057271ec05a27be70b8ea64ae76119d3f90f8e2c"
+      "sha256": "9c231b95babd4ccb37e8b442487015cd6214eb82e2b3cc670d633bb9495ecbf4"
     }
   }
 }

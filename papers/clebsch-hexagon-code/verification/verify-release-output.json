@@ -1,3 +1,75 @@
 {
-  "status": "pending"
+  "check_count": 17,
+  "checks": [
+    {
+      "id": "verification-tool-tests",
+      "status": "passed"
+    },
+    {
+      "id": "statement-extraction",
+      "status": "passed"
+    },
+    {
+      "id": "check-rigidity-degenerate-conic",
+      "status": "passed"
+    },
+    {
+      "id": "check-reflection-arrangements",
+      "status": "passed"
+    },
+    {
+      "id": "check-decoding",
+      "status": "passed"
+    },
+    {
+      "id": "check-chirality",
+      "status": "passed"
+    },
+    {
+      "id": "check-code-automorphisms",
+      "status": "passed"
+    },
+    {
+      "id": "check-global-conic-gap",
+      "status": "passed"
+    },
+    {
+      "id": "check-perturbation-gap",
+      "status": "passed"
+    },
+    {
+      "id": "check-low-degree-loci",
+      "status": "passed"
+    },
+    {
+      "id": "check-small-q-uniqueness",
+      "status": "passed"
+    },
+    {
+      "id": "check-q19-nonexample",
+      "status": "passed"
+    },
+    {
+      "id": "check-small-k-conic-filling",
+      "status": "passed"
+    },
+    {
+      "id": "passage-interface-evidence",
+      "status": "passed"
+    },
+    {
+      "id": "torsor-dictionary-evidence",
+      "status": "passed"
+    },
+    {
+      "id": "lean-mathlib-cache",
+      "status": "passed"
+    },
+    {
+      "id": "lean-paper-trust-gate",
+      "status": "passed"
+    }
+  ],
+  "lean_commit": "223584997c5691a60c066d865c0a0e449a38cd21",
+  "status": "passed"
 }
