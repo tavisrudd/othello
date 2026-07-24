@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued; C395/C396/C546 dependencies complete; mandatory signed-cover/LU mystery
-workstream added 2026-07-23; Stage B remains gated on a positive operational invariant
+**Status:** complete 2026-07-23; exact logical-Clifford phase, signed-cover separation, and q=13
+arbitrary-LU theorem in `2026-07-23-c397-ame-perfect-tensor-physics.md`
 
 ## Purpose
 
