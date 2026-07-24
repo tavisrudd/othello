@@ -67,9 +67,11 @@ graph-theoretic form of stability.  For ten points, the only conic equality
 case is the regular hyperoval in $\PG(2,8)$.  We also prove an upper transfer
 by projective averaging.  In the inverse direction, when
 $q+1>\binom{k}{2}$ the complete uncovered locus canonically determines the
-parent $k$-arc and its projective-semilinear automorphism group.  Explicit witnesses
-meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective
-frame.  Over $\F_{16}$, a
+parent $k$-arc and its projective-semilinear automorphism group.  We quantify
+this inverse: a small symmetric difference of two uncovered loci bounds first
+the lost secants and then the lost vertices.  Explicit witnesses meet the
+lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective frame.
+Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
 contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
 hence $\rhoC(16)=9$.
@@ -197,8 +199,8 @@ interpretation all follow.  Its main consequences and applications are:
       including the unique ten-point conic equality case;
 \item conic lower bounds, including the additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer; and
-\item a canonical inverse from the complete uncovered locus to its parent
-      arc, together with exact values at $q=5,8,9,11$ and a
+\item a canonical and quantitative inverse from the complete uncovered locus
+      to its parent arc, together with exact values at $q=5,8,9,11$ and a
       certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
 
@@ -218,8 +220,9 @@ exact accounting, lower and upper bounds, the characteristic-two refinement,
 and the finite obstruction.  Section~\ref{sec:coding} then gives a secondary
 coding reading and the $q=11$ application, then closes with the inverse
 geometric statement: above a sharp incidence threshold, the complete
-uncovered locus determines its parent arc and automorphism group.  The coding
-reading may be skipped without affecting either geometric direction.
+uncovered locus determines its parent arc and automorphism group, with
+quantitative control under perturbation.  The coding reading may be skipped
+without affecting either geometric direction.
 
 The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
 correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
@@ -1496,6 +1499,108 @@ points incident with $k-1$ recovered secants, and the same description
 recovers $B$.
 \end{proof}
 
+\begin{lemma}[Perturbing a finite line union]
+\label{lem:line-union-perturbation}
+Let $\mathcal L$ and $\mathcal M$ be two sets of $N<q+1$ lines in
+$\PG(2,q)$.  Put
+\[
+ X=\bigcup_{\ell\in\mathcal L}\ell,\qquad
+ Y=\bigcup_{\ell\in\mathcal M}\ell,\qquad
+ d_X=|X\setminus Y|,\qquad d_Y=|Y\setminus X|,
+\]
+and write $r=|\mathcal L\setminus\mathcal M|
+=|\mathcal M\setminus\mathcal L|$ and $\delta=q+1-N$.
+Then
+\[
+ d_X,d_Y\ge r\delta-\binom r2.
+\]
+If $r>0$, then $d_X,d_Y\ge\delta$.  If $\delta\ge2$, then also
+\[
+ r\binom{\delta}{2}
+ \le \min\left\{\binom{d_X}{2},\binom{d_Y}{2}\right\}.
+\]
+\end{lemma}
+
+\begin{proof}
+For each $\ell\in\mathcal L\setminus\mathcal M$, the $N$ lines of
+$\mathcal M$ cover at most $N$ points of $\ell$.  Thus
+$E_\ell=\ell\setminus Y$ has at least $\delta$ points.  Distinct sets
+$E_\ell$ meet in at most one point, so the first inequality follows from
+the first two terms of inclusion--exclusion; one such set also gives
+$d_X\ge\delta$ when $r>0$.
+
+For the last inequality, each $E_\ell$ contains at least
+$\binom{\delta}{2}$ unordered pairs of points.  Pairs contributed by
+distinct lines are disjoint, since two points determine a unique line.
+All these pairs lie in $X\setminus Y$.  Interchanging $\mathcal L$ and
+$\mathcal M$ proves the corresponding statements for $d_Y$.
+\end{proof}
+
+\begin{proposition}[Robust uncovered-locus reconstruction]
+\label{prop:robust-arc-reconstruction}
+Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
+\[
+ N=\binom{k}{2},\qquad \delta=q+1-N\ge1,\qquad
+ t=|U(A)\mathbin{\triangle}U(B)|.
+\]
+Let $r$ be the number of secants of $A$ that are not secants of $B$, and
+put $h=\lfloor(k-1)/2\rfloor$.  If $\delta\ge2$ and
+$s=\lfloor t/2\rfloor$, then
+\[
+ r\le
+ \left\lfloor\frac{s(s-1)}{\delta(\delta-1)}\right\rfloor,
+ \qquad
+ |A\mathbin{\triangle}B|
+ \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
+\]
+For every $\delta\ge1$, the stronger threshold conclusion
+\[
+ t<2\delta\quad\Longrightarrow\quad A=B
+\]
+holds.
+\end{proposition}
+
+\begin{proof}
+Apply Lemma~\ref{lem:line-union-perturbation} to the two sets of $N$
+secants.  Complements preserve symmetric difference, so the two one-sided
+differences of the secant unions have sizes summing to $t$; the smaller has
+size at most $s$.  The pair bound in the lemma gives the displayed estimate
+for $r$.  If $r>0$, each one-sided difference has at least $\delta$ points,
+which proves the threshold conclusion once the vertex step below is used.
+
+It remains to pass from common secants to common vertices.  For
+$a\in A\setminus B$, the common secants through $a$ are secants of $B$
+through a nonvertex.  They use disjoint pairs of the $k$ points of $B$, so
+there are at most $\lfloor k/2\rfloor$ of them.  At least
+\[
+ (k-1)-\lfloor k/2\rfloor=h
+\]
+of the secants of $A$ through $a$ are therefore among the $r$ lost
+secants.  Summing lost degrees over $A\setminus B$ gives
+$h|A\setminus B|\le2r$.  Since the two arcs have the same size,
+$|A\mathbin{\triangle}B|=2|A\setminus B|$, proving the second estimate.
+In particular $r=0$ forces $A=B$.
+\end{proof}
+
+\begin{remark}[Range and line-arrangement obstruction]
+\label{rem:robust-arc-reconstruction-range}
+The proposition is nonasymptotic and field-uniform.  Along any family for
+which $t=o(\delta\sqrt N)$, it gives $r=o(N)$ and hence
+$|A\mathbin{\triangle}B|=o(k)$.
+The scale of the line-union estimate cannot be improved by an argument for
+arbitrary line families alone.  If two $N$-line families share $N-r$ lines
+and their $N+r$ lines have no triple concurrence, then, whenever
+$N+r\le q+1$,
+\[
+ d_X=d_Y=r\delta-\binom r2.
+\]
+Indeed, every lost line meets the $N$ comparison lines in distinct points,
+while its intersections with the other lost lines account for the
+$\binom r2$ repetitions.  A pencil is less adverse: concurrency merges
+only $r-1$ of these points.  Any improvement at this scale must therefore
+use the secant realization, not merely the two line unions.
+\end{remark}
+
 \begin{corollary}[Canonical inverse and automorphisms]
 \label{cor:arc-reconstruction-algorithm}
 Under the hypotheses of Proposition~\ref{prop:arc-reconstruction}, put
@@ -1532,11 +1637,6 @@ $A$ through at least five distinct four-frames, all with the same literal
 uncovered locus $\cC(\F_5)$.
 \end{remark}
 
-% TODO(C583): Seek a robust inverse theorem.  First prove or refute a
-% field-uniform line-threshold lemma converting |U(A) triangle U(B)| into
-% control of the symmetric difference of the two secant-line sets; only then
-% attempt vertex recovery or a defect-coupled statement.
-
 \section{Conclusion and further questions}
 
 The exact defect identity is the organizing result of the paper.  It
@@ -1560,6 +1660,11 @@ Corollary~\ref{cor:arc-reconstruction-algorithm} makes the recovery canonical
 and shows that the same locus determines the full projective-semilinear
 automorphism group.  Remark~\ref{rem:arc-reconstruction-sharp} shows that
 the strict incidence threshold is best possible in general.
+Proposition~\ref{prop:robust-arc-reconstruction} quantifies the inverse:
+with \(\delta=q+1-\binom{k}{2}\), distinct parents have uncovered loci at
+distance at least \(2\delta\), and beyond that gap a rich-line estimate
+controls the lost secants before the nonvertex concurrency bound controls
+the lost vertices.
 
 Two further mechanisms complement that identity.  Projective averaging
 transfers ordinary complete arcs to prescribed-hole upper bounds, while the
@@ -1592,12 +1697,11 @@ asymptotic constant obtained here.
 \end{problem}
 
 \begin{problem}
-Develop a robust form of Proposition~\ref{prop:arc-reconstruction}.
-Determine whether a small symmetric difference between the complete
-uncovered loci of two fixed-size arcs forces most of their secant lines,
-and hence most of their vertices, to agree.  A defect-coupled version
-should distinguish combinatorial bad-edge stability from genuine
-rank-three projective stability.
+Determine whether Proposition~\ref{prop:robust-arc-reconstruction} can be
+strengthened by using the rank-three secant realization together with the
+prescribed-hole defect.  Lemma~\ref{lem:line-union-perturbation} is sharp to
+first order for unrestricted line arrangements, so a stronger bound must
+go beyond combinatorial bad-edge stability.
 \end{problem}
 
 \begin{problem}

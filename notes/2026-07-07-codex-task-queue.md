@@ -145,7 +145,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `relconic`
 
 - **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
-- **C583 `[relconic]` [QUEUED; NEXT AFTER C582 PAPER-SPINE INTEGRATION]** — develop a robust uncovered-locus reconstruction theorem: quantify when small symmetric difference of complete uncovered loci, or small prescribed-hole defect, forces agreement of most secants and structural proximity of the parent arcs; begin with a deterministic line-threshold lemma and stop if adversarial line arrangements defeat any field-uniform statement → `notes/2026-07-24-c583-robust-uncovered-locus-reconstruction.md`.
 
 ### `ame-lu`
 

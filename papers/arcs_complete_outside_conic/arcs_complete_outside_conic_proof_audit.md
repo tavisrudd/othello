@@ -73,6 +73,16 @@
     and `A`. The strict threshold is sharp in general: at `(q,k)=(5,4)`, the frame has conic
     uncovered locus and `q+1=N=6`; the order-120 conic stabilizer has an orbit of at least five
     frames because a frame stabilizer has order 24.
+14. Robust reconstruction separates line recovery from vertex recovery. For two `N`-line unions,
+    put `delta=q+1-N`. Each lost line contains at least `delta` points in the one-sided union
+    difference. Bonferroni gives `d >= r*delta-choose(r,2)`, while uniqueness of the line through
+    two points gives `r*choose(delta,2) <= choose(d,2)` when `delta>=2`. Applying the latter to
+    the smaller one-sided difference bounds the number `r` of lost secants in terms of
+    `floor(|U(A) triangle U(B)|/2)`. A vertex of `A` absent from `B` has at most `floor(k/2)`
+    common secants, because those secants form a matching on `B`; it is therefore incident with
+    at least `floor((k-1)/2)` lost secants. Double-counting lost degrees gives the stated vertex
+    bound. The no-triple-concurrence example attains the Bonferroni line bound; concurrency is
+    less adverse. No defect estimate or computational classification enters this theorem.
 
 ## Computer-assisted claims
 

@@ -2,52 +2,166 @@
 
 **Lane:** `relconic`
 
-**Status:** queued after C582.
+**Date:** 2026-07-24
 
-## Goal
+**Status:** complete.  A field-uniform line-union theorem and a separate
+rank-three vertex-recovery step now give quantitative reconstruction in the
+manuscript.
 
-Turn the exact inverse theorem in
-`papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex` into a
-quantitative statement.  For fixed-size arcs \(A,B\subseteq\operatorname{PG}(2,q)\),
-test whether small symmetric difference \(U(A)\mathbin{\triangle}U(B)\) forces
-agreement of most secant lines and then structural proximity of the parent
-arcs.  A second formulation may couple this inverse problem to the
-prescribed-hole defect and C558's bad-edge stability.
+## Result
 
-## First discriminator
-
-Prove the sharpest deterministic line-threshold lemma available from the
-identity
+Let \(A,B\) be \(k\)-arcs in \(\operatorname{PG}(2,q)\), and put
 \[
- \operatorname{PG}(2,q)\setminus U(A)
-   =\bigcup_{\ell\in\operatorname{Sec}(A)}\ell .
+ N=\binom{k}{2},\qquad
+ \delta=q+1-N\ge1,\qquad
+ t=|U(A)\mathbin{\triangle}U(B)|.
 \]
-The lemma must quantify how many secant lines can be lost or gained when the
-two unions differ in \(t\) points.  Test it against adversarial arrangements
-with many concurrent lines before using arc structure.
+Let \(r\) be the number of secants of \(A\) that are not secants of \(B\);
+the number gained on the other side is also \(r\).  If \(\delta\ge2\), set
+\(s=\lfloor t/2\rfloor\).  Then
+\[
+ r\le
+ \left\lfloor\frac{s(s-1)}{\delta(\delta-1)}\right\rfloor.
+\]
+Writing \(h=\lfloor(k-1)/2\rfloor\), the parent arcs satisfy
+\[
+ |A\mathbin{\triangle}B|
+ \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
+\]
+For the entire exact-reconstruction range, including the boundary
+\(\delta=1\),
+\[
+ t<2\delta\quad\Longrightarrow\quad A=B.
+\]
+Thus \(t=o(\delta\sqrt N)\) forces agreement of all but \(o(N)\) secants
+and all but \(o(k)\) vertices.  No assumption on the characteristic or on
+the relative growth of \(k\) and \(q\) is suppressed.
 
-## Acceptance gates
+## Deterministic line threshold
 
-1. State all scale assumptions in \(q,k,t\); do not hide a requirement stronger
-   than the exact threshold \(q+1>\binom{k}{2}\).
-2. Separate recovery of secant lines from recovery of vertices.
-3. Prove a field-uniform theorem, or close the proposed robust inverse
-   negatively with an explicit family showing why no useful uniform bound can
-   hold.
-4. Treat C558's bad-edge estimate as combinatorial input only.  Any claimed
-   projective stability must use a genuinely rank-three compatibility step.
-5. Do not substitute a table of finite-field reconstructions for a structural
-   discriminator.
+The line-recovery step is independent of arc structure.  For two \(N\)-line
+families \(\mathcal L,\mathcal M\), let
+\[
+ X=\bigcup\mathcal L,\qquad Y=\bigcup\mathcal M,\qquad
+ d_X=|X\setminus Y|,\qquad d_Y=|Y\setminus X|,
+\]
+and let \(r=|\mathcal L\setminus\mathcal M|
+=|\mathcal M\setminus\mathcal L|\).  Every lost line contains at least
+\(\delta=q+1-N\) points of \(X\setminus Y\).  Bonferroni and the uniqueness
+of the line through two points give the complementary bounds
+\[
+ d_X,d_Y\ge r\delta-\binom r2
+\]
+and, for \(\delta\ge2\),
+\[
+ r\binom{\delta}{2}
+ \le
+ \min\left\{\binom{d_X}{2},\binom{d_Y}{2}\right\}.
+\]
+The second inequality is the useful global estimate: the unordered point
+pairs contributed by two distinct lost lines cannot coincide.
 
-## Paper TODO
+The comparison with adverse arrangements is exact.  Suppose the two
+families share \(N-r\) lines and all \(N+r\) lines have no triple
+concurrence.  When \(N+r\le q+1\), such a family can be selected from a
+dual \((q+1)\)-arc, and
+\[
+ d_X=d_Y=r\delta-\binom r2.
+\]
+This attains the Bonferroni bound.  A pencil is less adverse: its common
+centre merges only \(r-1\) points, whereas general position realizes all
+\(\binom r2\) pairwise repetitions.  Hence no arbitrary-line argument can
+improve the first-order scale; an improvement must use the secant
+realization.
 
-The manuscript contains a source TODO adjacent to the exact reconstruction
-theorem and an open problem in the conclusion.  Replace them only after this
-task proves a theorem with an honest quantitative range; otherwise revise the
-problem to record the exact obstruction.
+## Vertex recovery
 
-## Evidence boundary
+The second step uses projective rank-three compatibility rather than the
+line-union count.  If \(a\in A\setminus B\), then every common secant
+through \(a\) is a secant of \(B\) through a nonvertex.  Such secants use
+disjoint pairs of the \(k\) vertices of \(B\), so at most
+\(\lfloor k/2\rfloor\) can pass through \(a\).  At least
+\[
+ (k-1)-\lfloor k/2\rfloor=\lfloor(k-1)/2\rfloor=h
+\]
+of the secants through \(a\) are therefore lost.  Summing lost degrees
+over \(A\setminus B\) yields
+\[
+ h|A\setminus B|\le2r,
+\]
+which is the displayed vertex bound.  This step is logically separate from
+line recovery and is the required geometric compatibility input.
 
-No robust theorem is claimed at allocation.  C582 contributes only the exact
-reconstruction theorem, its sharp threshold, and the already proved C558
-bad-edge bound.
+## Defect boundary
+
+C558's bad-edge inequality was not needed to prove the robust inverse.  It
+controls failures of maximum matching concurrence in one prescribed-hole
+configuration; it does not by itself compare two rank-three secant
+realizations.  The remaining manuscript problem now asks whether combining
+that defect with the secant realization can improve the arbitrary-line
+scale.  The no-triple-concurrence example shows exactly what such an
+improvement must overcome.
+
+## Manuscript integration
+
+`papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex` now
+contains:
+
+- the deterministic line-union perturbation lemma;
+- the robust uncovered-locus reconstruction proposition;
+- the scale and adverse-arrangement remark;
+- updated abstract, introduction, and conclusion language; and
+- a narrowed open problem asking for a genuinely rank-three,
+  defect-coupled strengthening.
+
+The former source TODO has been removed.
+`arcs_complete_outside_conic_proof_audit.md` records the complete proof
+boundary and notes that no computation or defect estimate enters the
+theorem.
+
+## Validation
+
+The repository paper target passes:
+
+```text
+make -C papers arcs
+```
+
+The final XeLaTeX pass produces a 27-page PDF with no undefined references,
+undefined citations, or overfull boxes.  The only layout message is the
+pre-existing underfull bibliography paragraph.  A rendered-text inspection
+of pages 19--22 checked every displayed bound, the separation between the
+line and vertex steps, the sharpness remark, and the revised conclusion.
+
+## `ej` + `tt` closeout
+
+The cheap strengthening is the gap theorem
+\(t<2(q+1-\binom{k}{2})\Rightarrow A=B\): robust inversion is locally
+constant on an explicit Hamming ball, even at \(\delta=1\), where the
+quadratic rich-line estimate itself degenerates.  Keeping both the
+Bonferroni and point-pair inequalities also records the honest line-only
+boundary instead of presenting one convenient but scale-blind estimate.
+
+The Tao-style discriminator is where geometry first becomes indispensable.
+General-position lines, not pencils, minimize the visible one-sided
+difference to first order.  The only available improvement must exploit
+that the lines are the edges of two complete graphs realized in one
+projective plane.  The vertex estimate supplies one such compatibility
+step; C558's bad-edge count does not yet supply another.
+
+## Mystery ledger
+
+- **Field-uniform robust inverse:** settled.  The theorem gives explicit
+  secant and vertex bounds for every \(q,k,t\) with
+  \(q+1>\binom{k}{2}\), and a gap theorem throughout that exact range.
+- **Adversarial concurrency:** settled.  Pencils are not extremal;
+  no-triple-concurrence line families attain the Bonferroni bound.
+- **Arc-specific improvement:** open, but not required for C583.  The exact
+  missing input is a rank-three restriction on how the lost-secant graph
+  can realize the general-position line obstruction, possibly coupled to
+  the prescribed-hole defect.
+- **Defect coupling:** open at the same gate.  C558 bounds combinatorial bad
+  edges inside one realization and does not compare two realizations.
+- **Computational evidence:** no mystery remains.  The theorem is
+  proof-only and uses no finite census, symbolic identity, or trusted
+  execution.
