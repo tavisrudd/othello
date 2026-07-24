@@ -1,0 +1,16 @@
+schema=c516-q49-carrier-v1
+field=F49_tau2_eq_3
+projective_quartics=5884901
+quintics_tested=194584
+survivors=0
+first_singleton=31396;quartic=1,0,0,0,0
+milestone=1;roots=0,1,2,3,4;survivors=3702392
+milestone=2;roots=0,1,2,3,5;survivors=2392328
+milestone=3;roots=0,1,2,3,6;survivors=1548940
+milestone=4;roots=0,1,2,3,7;survivors=1013958
+milestone=5;roots=0,1,2,3,8;survivors=675074
+milestone=10;roots=0,1,2,3,13;survivors=150137
+milestone=20;roots=0,1,2,3,23;survivors=80557
+milestone=100;roots=0,1,2,5,16;survivors=1574
+milestone=1000;roots=0,1,2,40,41;survivors=1547
+milestone=194584;roots=1,2,3,4,8;survivors=0

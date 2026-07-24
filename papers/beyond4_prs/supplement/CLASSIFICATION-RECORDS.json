@@ -4,18 +4,18 @@
     "R5": {
       "artifact_integrity": [
         {
+          "artifact_path": "evidence/r5/2026-07-22-c491-prs-deep-hole-census.py",
           "bytes": 33884,
-          "provenance_filename": "2026-07-22-c491-prs-deep-hole-census.py",
           "sha256": "0b55dd5aaddfbac56e3c59d25ba0864454e0b712ed7baee77ba0ab0df476c16d"
         },
         {
+          "artifact_path": "evidence/r5/2026-07-22-c491-prs-deep-hole-census.json",
           "bytes": 62107,
-          "provenance_filename": "2026-07-22-c491-prs-deep-hole-census.json",
           "sha256": "7055b428ef0738921ddc472173e6d51da1c36660caa56d2e4dc1add156733283"
         },
         {
+          "artifact_path": "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
           "bytes": 21749,
-          "provenance_filename": "2026-07-22-c491-prs-deep-hole-replay.py",
           "sha256": "53cb8cfc9158cc4ed505245500a01f380fdd3ef89c29fc27d7cad326c4579f08"
         }
       ],
@@ -3693,18 +3693,18 @@
     "R6": {
       "artifact_integrity": [
         {
+          "artifact_path": "evidence/r6/2026-07-22-c498-prs-deep-hole-census.rs",
           "bytes": 37556,
-          "provenance_filename": "2026-07-22-c498-prs-deep-hole-census.rs",
           "sha256": "72f2f9a4eee6791dfe02f49716a569ac334d147b131630d8a8096d7b4e6e4412"
         },
         {
+          "artifact_path": "evidence/r6/2026-07-22-c498-prs-deep-hole-census.json",
           "bytes": 27077,
-          "provenance_filename": "2026-07-22-c498-prs-deep-hole-census.json",
           "sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3"
         },
         {
+          "artifact_path": "evidence/r6/2026-07-22-c498-prs-deep-hole-replay.py",
           "bytes": 16760,
-          "provenance_filename": "2026-07-22-c498-prs-deep-hole-replay.py",
           "sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
         }
       ],
@@ -8337,13 +8337,13 @@
       ],
       "normal_form_artifact_integrity": [
         {
+          "artifact_path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.py",
           "bytes": 22092,
-          "provenance_filename": "2026-07-23-c498-small-exceptional-normal-forms.py",
           "sha256": "397ec7645232fbdcfe5a7a3e877daa0d20b81de0f2082e2d9a54e49fbb76a74a"
         },
         {
+          "artifact_path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.json",
           "bytes": 58730,
-          "provenance_filename": "2026-07-23-c498-small-exceptional-normal-forms.json",
           "sha256": "84d4db1e939c62e65ac8df7e43a312aca317c8610cdcafb3ead9769ba4ff9880"
         }
       ],
@@ -8361,18 +8361,18 @@
     "R7": {
       "artifact_integrity": [
         {
+          "artifact_path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.py",
           "bytes": 21396,
-          "provenance_filename": "2026-07-23-c509-prs-deep-hole-calibration.py",
           "sha256": "b5da2754ffa56177228036c4c775bfee086d76e24a4e9a03f5b27cb625df73a8"
         },
         {
+          "artifact_path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.json",
           "bytes": 175422,
-          "provenance_filename": "2026-07-23-c509-prs-deep-hole-calibration.json",
           "sha256": "9034befae239a1d578556e78a06df1d04dccc828a7f6cb08f874533c84c50906"
         },
         {
+          "artifact_path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration-replay.py",
           "bytes": 6265,
-          "provenance_filename": "2026-07-23-c509-prs-deep-hole-calibration-replay.py",
           "sha256": "9d21e10a262f203a01f902db19c820cd9c1574819833e95a51f50ca1eb67d63f"
         }
       ],

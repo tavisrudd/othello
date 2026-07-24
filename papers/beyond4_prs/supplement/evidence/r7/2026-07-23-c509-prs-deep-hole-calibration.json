@@ -1,0 +1,7735 @@
+{
+  "fields": [
+    {
+      "affine_orbit_count": null,
+      "candidate_count": 77281,
+      "central_nucleus_expected": false,
+      "deep_count": 55860,
+      "exceptional_count": 55636,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 7,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 7,
+          "size": 56,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 49,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "representative_index": 49,
+          "size": 56,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16814,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 16814,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17164,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "representative_index": 17164,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17178,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 17178,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17850,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            2,
+            0
+          ],
+          "representative_index": 17850,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118087,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            6,
+            4
+          ],
+          "representative_index": 118087,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120517,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            2,
+            3,
+            5
+          ],
+          "representative_index": 120517,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 121288,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            3,
+            4,
+            1,
+            6
+          ],
+          "representative_index": 121288,
+          "size": 84,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2415,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "representative_index": 2415,
+          "size": 112,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2422,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "representative_index": 2422,
+          "size": 112,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 50,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "representative_index": 50,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 350,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 350,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2402,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "representative_index": 2402,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2425,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            3
+          ],
+          "representative_index": 2425,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2460,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            3
+          ],
+          "representative_index": 2460,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2566,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            2,
+            4
+          ],
+          "representative_index": 2566,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16883,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            6
+          ],
+          "representative_index": 16883,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17171,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "representative_index": 17171,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17172,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            3,
+            1
+          ],
+          "representative_index": 17172,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17192,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            6,
+            0
+          ],
+          "representative_index": 17192,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17216,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            2,
+            3
+          ],
+          "representative_index": 17216,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17237,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            5,
+            3
+          ],
+          "representative_index": 17237,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17268,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            6
+          ],
+          "representative_index": 17268,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17273,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "representative_index": 17273,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17282,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            4,
+            6
+          ],
+          "representative_index": 17282,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17293,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            6,
+            3
+          ],
+          "representative_index": 17293,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17323,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            3,
+            5
+          ],
+          "representative_index": 17323,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17879,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            6,
+            1
+          ],
+          "representative_index": 17879,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17910,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            3,
+            4
+          ],
+          "representative_index": 17910,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17929,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            6,
+            2
+          ],
+          "representative_index": 17929,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17944,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            1,
+            3
+          ],
+          "representative_index": 17944,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17967,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            4,
+            5
+          ],
+          "representative_index": 17967,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17984,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            0,
+            1
+          ],
+          "representative_index": 17984,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17993,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            1,
+            3
+          ],
+          "representative_index": 17993,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 18003,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            2,
+            6
+          ],
+          "representative_index": 18003,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117699,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "representative_index": 117699,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117813,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            3,
+            2,
+            3
+          ],
+          "representative_index": 117813,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118043,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "representative_index": 118043,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118169,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            3,
+            4,
+            2
+          ],
+          "representative_index": 118169,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118348,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            0,
+            1,
+            6
+          ],
+          "representative_index": 118348,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118415,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            1,
+            4,
+            3
+          ],
+          "representative_index": 118415,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118492,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            3,
+            1,
+            3
+          ],
+          "representative_index": 118492,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118690,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            0,
+            1,
+            5
+          ],
+          "representative_index": 118690,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118731,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            1,
+            0,
+            4
+          ],
+          "representative_index": 118731,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120202,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            3,
+            0,
+            5
+          ],
+          "representative_index": 120202,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120269,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            4,
+            3,
+            2
+          ],
+          "representative_index": 120269,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120546,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            0,
+            6
+          ],
+          "representative_index": 120546,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120557,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            2,
+            3
+          ],
+          "representative_index": 120557,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120654,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            5,
+            2,
+            2
+          ],
+          "representative_index": 120654,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120702,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            6,
+            2,
+            1
+          ],
+          "representative_index": 120702,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120838,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            2,
+            0,
+            4
+          ],
+          "representative_index": 120838,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120937,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            4,
+            0,
+            5
+          ],
+          "representative_index": 120937,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 121076,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            6,
+            6,
+            4
+          ],
+          "representative_index": 121076,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 121322,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            3,
+            4,
+            6,
+            5
+          ],
+          "representative_index": 121322,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 124906,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            3,
+            0,
+            1,
+            0,
+            5
+          ],
+          "representative_index": 124906,
+          "size": 168,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 351,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 351,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 353,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            3
+          ],
+          "representative_index": 353,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2418,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ],
+          "representative_index": 2418,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2423,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            1
+          ],
+          "representative_index": 2423,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2457,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "representative_index": 2457,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2458,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "representative_index": 2458,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2459,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "representative_index": 2459,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2462,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            5
+          ],
+          "representative_index": 2462,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2472,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 2472,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2474,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 2474,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2475,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            4
+          ],
+          "representative_index": 2475,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2476,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            5
+          ],
+          "representative_index": 2476,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2477,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            6
+          ],
+          "representative_index": 2477,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2556,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            1,
+            1
+          ],
+          "representative_index": 2556,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2558,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            1,
+            3
+          ],
+          "representative_index": 2558,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2559,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            1,
+            4
+          ],
+          "representative_index": 2559,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2560,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            1,
+            5
+          ],
+          "representative_index": 2560,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2561,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            1,
+            6
+          ],
+          "representative_index": 2561,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2562,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            2,
+            0
+          ],
+          "representative_index": 2562,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2563,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            2,
+            1
+          ],
+          "representative_index": 2563,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2564,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            2,
+            2
+          ],
+          "representative_index": 2564,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2568,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            3,
+            2,
+            6
+          ],
+          "representative_index": 2568,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16808,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "representative_index": 16808,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16816,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "representative_index": 16816,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16817,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "representative_index": 16817,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16878,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 16878,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16879,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            2
+          ],
+          "representative_index": 16879,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16880,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 16880,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16881,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            4
+          ],
+          "representative_index": 16881,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16906,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "representative_index": 16906,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16908,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            2,
+            0,
+            3
+          ],
+          "representative_index": 16908,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16955,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            3,
+            0,
+            1
+          ],
+          "representative_index": 16955,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16962,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            3,
+            1,
+            1
+          ],
+          "representative_index": 16962,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16964,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            3,
+            1,
+            3
+          ],
+          "representative_index": 16964,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16965,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            3,
+            1,
+            4
+          ],
+          "representative_index": 16965,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16966,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            3,
+            1,
+            5
+          ],
+          "representative_index": 16966,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17151,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "representative_index": 17151,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17153,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            0,
+            3
+          ],
+          "representative_index": 17153,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17165,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "representative_index": 17165,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17166,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            2,
+            2
+          ],
+          "representative_index": 17166,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17173,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            3,
+            2
+          ],
+          "representative_index": 17173,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17180,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            4,
+            2
+          ],
+          "representative_index": 17180,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17181,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            4,
+            3
+          ],
+          "representative_index": 17181,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17194,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            6,
+            2
+          ],
+          "representative_index": 17194,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17213,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            2,
+            0
+          ],
+          "representative_index": 17213,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17217,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            2,
+            4
+          ],
+          "representative_index": 17217,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17218,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            2,
+            5
+          ],
+          "representative_index": 17218,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17219,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            2,
+            6
+          ],
+          "representative_index": 17219,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17221,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 17221,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17222,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            3,
+            2
+          ],
+          "representative_index": 17222,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17223,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 17223,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17225,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            3,
+            5
+          ],
+          "representative_index": 17225,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17235,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            5,
+            1
+          ],
+          "representative_index": 17235,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17236,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            5,
+            2
+          ],
+          "representative_index": 17236,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17238,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            5,
+            4
+          ],
+          "representative_index": 17238,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17239,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 17239,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17255,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            1,
+            0
+          ],
+          "representative_index": 17255,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17259,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            1,
+            4
+          ],
+          "representative_index": 17259,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17260,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            1,
+            5
+          ],
+          "representative_index": 17260,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17264,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            2
+          ],
+          "representative_index": 17264,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17265,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            3
+          ],
+          "representative_index": 17265,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17266,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            4
+          ],
+          "representative_index": 17266,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17267,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            5
+          ],
+          "representative_index": 17267,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17270,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            3,
+            1
+          ],
+          "representative_index": 17270,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17274,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            3,
+            5
+          ],
+          "representative_index": 17274,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17275,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            3,
+            6
+          ],
+          "representative_index": 17275,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17278,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            4,
+            2
+          ],
+          "representative_index": 17278,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17279,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            4,
+            3
+          ],
+          "representative_index": 17279,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17280,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            4,
+            4
+          ],
+          "representative_index": 17280,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17290,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            6,
+            0
+          ],
+          "representative_index": 17290,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17291,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            6,
+            1
+          ],
+          "representative_index": 17291,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17295,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            2,
+            6,
+            5
+          ],
+          "representative_index": 17295,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17298,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            0,
+            1
+          ],
+          "representative_index": 17298,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17300,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            0,
+            3
+          ],
+          "representative_index": 17300,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17303,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            0,
+            6
+          ],
+          "representative_index": 17303,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17319,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            3,
+            1
+          ],
+          "representative_index": 17319,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17321,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            3,
+            3
+          ],
+          "representative_index": 17321,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17322,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            3,
+            4
+          ],
+          "representative_index": 17322,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17334,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            5,
+            2
+          ],
+          "representative_index": 17334,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17337,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            5,
+            5
+          ],
+          "representative_index": 17337,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17340,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            6,
+            1
+          ],
+          "representative_index": 17340,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17343,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            6,
+            4
+          ],
+          "representative_index": 17343,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17345,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            6,
+            6
+          ],
+          "representative_index": 17345,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17852,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            2,
+            2
+          ],
+          "representative_index": 17852,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17853,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            2,
+            3
+          ],
+          "representative_index": 17853,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17872,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            5,
+            1
+          ],
+          "representative_index": 17872,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17873,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            5,
+            2
+          ],
+          "representative_index": 17873,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17880,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            6,
+            2
+          ],
+          "representative_index": 17880,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17881,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            6,
+            3
+          ],
+          "representative_index": 17881,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17894,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            1,
+            2
+          ],
+          "representative_index": 17894,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17896,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            1,
+            4
+          ],
+          "representative_index": 17896,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17898,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            1,
+            6
+          ],
+          "representative_index": 17898,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17906,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            3,
+            0
+          ],
+          "representative_index": 17906,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17907,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 17907,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17909,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 17909,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17911,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            3,
+            5
+          ],
+          "representative_index": 17911,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17923,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            5,
+            3
+          ],
+          "representative_index": 17923,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17925,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 17925,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17937,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            0,
+            3
+          ],
+          "representative_index": 17937,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17938,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            0,
+            4
+          ],
+          "representative_index": 17938,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17943,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            1,
+            2
+          ],
+          "representative_index": 17943,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17947,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            1,
+            6
+          ],
+          "representative_index": 17947,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17948,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            2,
+            0
+          ],
+          "representative_index": 17948,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17949,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            2,
+            1
+          ],
+          "representative_index": 17949,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17953,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            2,
+            5
+          ],
+          "representative_index": 17953,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17963,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            4,
+            1
+          ],
+          "representative_index": 17963,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17964,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            4,
+            2
+          ],
+          "representative_index": 17964,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17979,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            6,
+            3
+          ],
+          "representative_index": 17979,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17981,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            6,
+            5
+          ],
+          "representative_index": 17981,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17982,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            2,
+            6,
+            6
+          ],
+          "representative_index": 17982,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17987,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            0,
+            4
+          ],
+          "representative_index": 17987,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17988,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            0,
+            5
+          ],
+          "representative_index": 17988,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17991,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            1,
+            1
+          ],
+          "representative_index": 17991,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17995,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            1,
+            5
+          ],
+          "representative_index": 17995,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17998,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            2,
+            1
+          ],
+          "representative_index": 17998,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 18001,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            2,
+            4
+          ],
+          "representative_index": 18001,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 18019,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            5,
+            1
+          ],
+          "representative_index": 18019,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 18021,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            3,
+            5,
+            3
+          ],
+          "representative_index": 18021,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117662,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            6
+          ],
+          "representative_index": 117662,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117714,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "representative_index": 117714,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117723,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            3,
+            4
+          ],
+          "representative_index": 117723,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117724,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            3,
+            5
+          ],
+          "representative_index": 117724,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 117804,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            3,
+            1,
+            1
+          ],
+          "representative_index": 117804,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118005,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            6
+          ],
+          "representative_index": 118005,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118017,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            3,
+            4
+          ],
+          "representative_index": 118017,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118052,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            4
+          ],
+          "representative_index": 118052,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118144,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            3,
+            0,
+            5
+          ],
+          "representative_index": 118144,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118157,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            3,
+            2,
+            4
+          ],
+          "representative_index": 118157,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118358,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            0,
+            3,
+            2
+          ],
+          "representative_index": 118358,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118359,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            0,
+            3,
+            3
+          ],
+          "representative_index": 118359,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118395,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            1,
+            1,
+            4
+          ],
+          "representative_index": 118395,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118491,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            3,
+            1,
+            2
+          ],
+          "representative_index": 118491,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118530,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            2,
+            3,
+            6,
+            6
+          ],
+          "representative_index": 118530,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118730,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            1,
+            0,
+            3
+          ],
+          "representative_index": 118730,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118767,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 118767,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118827,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            3,
+            0,
+            2
+          ],
+          "representative_index": 118827,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 118851,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            3,
+            3,
+            3,
+            5
+          ],
+          "representative_index": 118851,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120123,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 120123,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120307,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            5,
+            1,
+            5
+          ],
+          "representative_index": 120307,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120412,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            0,
+            2,
+            5
+          ],
+          "representative_index": 120412,
+          "size": 336,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 120627,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            4,
+            5,
+            3
+          ],
+          "representative_index": 120627,
+          "size": 336,
+          "stabilizer_order": 1
+        }
+      ],
+      "p": 7,
+      "persistent_count": 224,
+      "pgammal_orbit_count": 197,
+      "pgl_orbit_count": 197,
+      "pointed_bad_affine_orbit_count": null,
+      "pointed_bad_affine_representatives": null,
+      "pointed_bad_count": 11040,
+      "pointed_method": "full pointed complement",
+      "q": 7
+    },
+    {
+      "affine_orbit_count": null,
+      "candidate_count": 113329,
+      "central_nucleus_expected": true,
+      "deep_count": 50776,
+      "exceptional_count": 50451,
+      "m": 3,
+      "orbits": [
+        {
+          "central_nucleus": true,
+          "frobenius_to_representative_index": 512,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "representative_index": 512,
+          "size": 1,
+          "stabilizer_order": 504
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 8,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 8,
+          "size": 9,
+          "stabilizer_order": 56
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 9,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 9,
+          "size": 63,
+          "stabilizer_order": 8
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 513,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "representative_index": 513,
+          "size": 63,
+          "stabilizer_order": 8
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 64,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "representative_index": 64,
+          "size": 72,
+          "stabilizer_order": 7
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 36936,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "representative_index": 36936,
+          "size": 84,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37482,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            6
+          ],
+          "representative_index": 37470,
+          "size": 84,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37500,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            5,
+            2
+          ],
+          "representative_index": 37482,
+          "size": 84,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37470,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            7,
+            4
+          ],
+          "representative_index": 37500,
+          "size": 84,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267099,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            7,
+            7
+          ],
+          "representative_index": 267007,
+          "size": 168,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267245,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            5,
+            3,
+            3
+          ],
+          "representative_index": 267099,
+          "size": 168,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267007,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            7,
+            5,
+            5
+          ],
+          "representative_index": 267245,
+          "size": 168,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267611,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            5,
+            3,
+            3
+          ],
+          "representative_index": 267611,
+          "size": 168,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267757,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            7,
+            5,
+            5
+          ],
+          "representative_index": 267757,
+          "size": 168,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4160,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "representative_index": 4160,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 36937,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "representative_index": 36937,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 36940,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "representative_index": 36938,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 36942,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            4
+          ],
+          "representative_index": 36940,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 36938,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            6
+          ],
+          "representative_index": 36942,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37189,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            3
+          ],
+          "representative_index": 37059,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37319,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            5,
+            0,
+            5
+          ],
+          "representative_index": 37189,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37059,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            7,
+            0,
+            7
+          ],
+          "representative_index": 37319,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37441,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "representative_index": 37441,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37445,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            3
+          ],
+          "representative_index": 37443,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37447,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            5
+          ],
+          "representative_index": 37445,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37443,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            7
+          ],
+          "representative_index": 37447,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37481,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 37465,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37484,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            2
+          ],
+          "representative_index": 37466,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37485,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 37467,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37483,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            3,
+            7
+          ],
+          "representative_index": 37471,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37497,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            5,
+            1
+          ],
+          "representative_index": 37481,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37501,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            5,
+            3
+          ],
+          "representative_index": 37483,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37502,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            5,
+            4
+          ],
+          "representative_index": 37484,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37503,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 37485,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37465,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            7,
+            1
+          ],
+          "representative_index": 37497,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37471,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            7,
+            5
+          ],
+          "representative_index": 37501,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37466,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            7,
+            6
+          ],
+          "representative_index": 37502,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37467,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            1,
+            7,
+            7
+          ],
+          "representative_index": 37503,
+          "size": 252,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4161,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "representative_index": 4161,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4200,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            0
+          ],
+          "representative_index": 4184,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4201,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 4185,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4202,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            3,
+            6
+          ],
+          "representative_index": 4190,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4216,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            5,
+            0
+          ],
+          "representative_index": 4200,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4217,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            5,
+            1
+          ],
+          "representative_index": 4201,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4220,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            5,
+            2
+          ],
+          "representative_index": 4202,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4184,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            7,
+            0
+          ],
+          "representative_index": 4216,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4185,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            7,
+            1
+          ],
+          "representative_index": 4217,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4190,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            7,
+            4
+          ],
+          "representative_index": 4220,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32769,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "representative_index": 32769,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32873,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            1
+          ],
+          "representative_index": 32857,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32877,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            3
+          ],
+          "representative_index": 32859,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32878,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            4
+          ],
+          "representative_index": 32860,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32874,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            3,
+            6
+          ],
+          "representative_index": 32862,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32889,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            5,
+            1
+          ],
+          "representative_index": 32873,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32892,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            5,
+            2
+          ],
+          "representative_index": 32874,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32895,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 32877,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32890,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            5,
+            6
+          ],
+          "representative_index": 32878,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32857,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            7,
+            1
+          ],
+          "representative_index": 32889,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32860,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            7,
+            2
+          ],
+          "representative_index": 32890,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32862,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            7,
+            4
+          ],
+          "representative_index": 32892,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32859,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            7,
+            7
+          ],
+          "representative_index": 32895,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37032,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            1,
+            0
+          ],
+          "representative_index": 37000,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37067,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            5,
+            0
+          ],
+          "representative_index": 37032,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37140,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            5,
+            1
+          ],
+          "representative_index": 37033,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37139,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            5,
+            4
+          ],
+          "representative_index": 37036,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37142,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            2,
+            5,
+            7
+          ],
+          "representative_index": 37039,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37190,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            4
+          ],
+          "representative_index": 37060,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37191,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            5
+          ],
+          "representative_index": 37061,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37000,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            1,
+            3
+          ],
+          "representative_index": 37067,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37199,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            1,
+            5
+          ],
+          "representative_index": 37069,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37195,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            3,
+            1,
+            7
+          ],
+          "representative_index": 37071,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37274,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            4,
+            2,
+            3
+          ],
+          "representative_index": 37139,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37273,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            4,
+            2,
+            4
+          ],
+          "representative_index": 37140,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37277,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            4,
+            2,
+            6
+          ],
+          "representative_index": 37142,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37314,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            5,
+            0,
+            6
+          ],
+          "representative_index": 37190,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37315,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            5,
+            0,
+            7
+          ],
+          "representative_index": 37191,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37325,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            5,
+            1,
+            3
+          ],
+          "representative_index": 37195,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37323,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            5,
+            1,
+            7
+          ],
+          "representative_index": 37199,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37033,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            6,
+            3,
+            1
+          ],
+          "representative_index": 37273,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37036,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            6,
+            3,
+            2
+          ],
+          "representative_index": 37274,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37039,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            6,
+            3,
+            5
+          ],
+          "representative_index": 37277,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37060,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            7,
+            0,
+            2
+          ],
+          "representative_index": 37314,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37061,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            7,
+            0,
+            3
+          ],
+          "representative_index": 37315,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37069,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            7,
+            1,
+            3
+          ],
+          "representative_index": 37323,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37071,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            7,
+            1,
+            5
+          ],
+          "representative_index": 37325,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37633,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            0,
+            1
+          ],
+          "representative_index": 37505,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37638,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            0,
+            4
+          ],
+          "representative_index": 37508,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37635,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            0,
+            7
+          ],
+          "representative_index": 37511,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37761,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            4,
+            0,
+            1
+          ],
+          "representative_index": 37633,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37765,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            4,
+            0,
+            3
+          ],
+          "representative_index": 37635,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37762,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            4,
+            0,
+            6
+          ],
+          "representative_index": 37638,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37505,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            6,
+            0,
+            1
+          ],
+          "representative_index": 37761,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37508,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            6,
+            0,
+            2
+          ],
+          "representative_index": 37762,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 37511,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            1,
+            1,
+            6,
+            0,
+            5
+          ],
+          "representative_index": 37765,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262252,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            3,
+            2
+          ],
+          "representative_index": 262234,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262270,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            5,
+            4
+          ],
+          "representative_index": 262252,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262234,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            7,
+            6
+          ],
+          "representative_index": 262270,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262918,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            0,
+            4
+          ],
+          "representative_index": 262788,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262788,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            1,
+            5
+          ],
+          "representative_index": 262797,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262845,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            2,
+            4
+          ],
+          "representative_index": 262804,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262937,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            7,
+            1
+          ],
+          "representative_index": 262841,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262943,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            7,
+            5
+          ],
+          "representative_index": 262845,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262841,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            3,
+            4,
+            3
+          ],
+          "representative_index": 262883,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262797,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            0,
+            6
+          ],
+          "representative_index": 262918,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262883,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            3,
+            1
+          ],
+          "representative_index": 262937,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 262804,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            3,
+            7
+          ],
+          "representative_index": 262943,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266535,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            2,
+            5
+          ],
+          "representative_index": 266389,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266530,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            2,
+            6
+          ],
+          "representative_index": 266390,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266676,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            4,
+            4,
+            2
+          ],
+          "representative_index": 266530,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266675,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            4,
+            4,
+            7
+          ],
+          "representative_index": 266535,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266389,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            6,
+            6,
+            3
+          ],
+          "representative_index": 266675,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266390,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            6,
+            6,
+            4
+          ],
+          "representative_index": 266676,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267098,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            2,
+            7
+          ],
+          "representative_index": 266967,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266967,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            5,
+            2
+          ],
+          "representative_index": 266986,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 266986,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            5,
+            3,
+            2
+          ],
+          "representative_index": 267098,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267635,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            0,
+            1,
+            2
+          ],
+          "representative_index": 267274,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 268114,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            0,
+            1,
+            6
+          ],
+          "representative_index": 267278,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267732,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            0,
+            6,
+            2
+          ],
+          "representative_index": 267314,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267278,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            2,
+            4,
+            1
+          ],
+          "representative_index": 267425,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267314,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            3,
+            7,
+            2
+          ],
+          "representative_index": 267514,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267774,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            5,
+            6,
+            3
+          ],
+          "representative_index": 267635,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267514,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            7,
+            2,
+            4
+          ],
+          "representative_index": 267732,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267274,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            7,
+            7,
+            6
+          ],
+          "representative_index": 267774,
+          "size": 504,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 267425,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            3,
+            5,
+            2,
+            2
+          ],
+          "representative_index": 268114,
+          "size": 504,
+          "stabilizer_order": 1
+        }
+      ],
+      "p": 2,
+      "persistent_count": 324,
+      "pgammal_orbit_count": 50,
+      "pgl_orbit_count": 124,
+      "pointed_bad_affine_orbit_count": null,
+      "pointed_bad_affine_representatives": null,
+      "pointed_bad_count": 14166,
+      "pointed_method": "full pointed complement",
+      "q": 8
+    },
+    {
+      "affine_orbit_count": null,
+      "candidate_count": 130312,
+      "central_nucleus_expected": false,
+      "deep_count": 28350,
+      "exceptional_count": 27900,
+      "m": 2,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 9,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 9,
+          "size": 10,
+          "stabilizer_order": 72
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 10,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 10,
+          "size": 80,
+          "stabilizer_order": 9
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59085,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 59085,
+          "size": 180,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59832,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "representative_index": 59805,
+          "size": 180,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59805,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            0,
+            6,
+            0
+          ],
+          "representative_index": 59832,
+          "size": 180,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 62019,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            4,
+            0,
+            6,
+            0
+          ],
+          "representative_index": 62019,
+          "size": 180,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 558178,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            4,
+            0,
+            6,
+            0,
+            7
+          ],
+          "representative_index": 558178,
+          "size": 180,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6652,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "representative_index": 6652,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6653,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "representative_index": 6653,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6657,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            3
+          ],
+          "representative_index": 6654,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6659,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            5
+          ],
+          "representative_index": 6656,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6654,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            6
+          ],
+          "representative_index": 6657,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6656,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            8
+          ],
+          "representative_index": 6659,
+          "size": 240,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60076,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            3,
+            2
+          ],
+          "representative_index": 60050,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60050,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            6,
+            1
+          ],
+          "representative_index": 60076,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60202,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            4,
+            2,
+            2
+          ],
+          "representative_index": 60122,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60122,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            5,
+            2,
+            1
+          ],
+          "representative_index": 60202,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 62427,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            4,
+            3,
+            6,
+            4
+          ],
+          "representative_index": 62266,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 62266,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            4,
+            5,
+            6,
+            3
+          ],
+          "representative_index": 62427,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531850,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            4,
+            0,
+            4
+          ],
+          "representative_index": 531769,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531851,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            4,
+            0,
+            5
+          ],
+          "representative_index": 531770,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531769,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            5,
+            0,
+            4
+          ],
+          "representative_index": 531850,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531770,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            5,
+            0,
+            5
+          ],
+          "representative_index": 531851,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532236,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            4,
+            6
+          ],
+          "representative_index": 532212,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532212,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            7,
+            3
+          ],
+          "representative_index": 532236,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532760,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            2,
+            8
+          ],
+          "representative_index": 532520,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532520,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            7,
+            2,
+            5
+          ],
+          "representative_index": 532760,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 538217,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            4,
+            5
+          ],
+          "representative_index": 538205,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 538205,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            2,
+            5,
+            8
+          ],
+          "representative_index": 538217,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 541798,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            4,
+            1,
+            8,
+            4
+          ],
+          "representative_index": 541075,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 541075,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            5,
+            1,
+            7,
+            7
+          ],
+          "representative_index": 541798,
+          "size": 360,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 7310,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            2,
+            2
+          ],
+          "representative_index": 7310,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 7353,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 7326,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 7326,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            1,
+            1,
+            0,
+            7,
+            0
+          ],
+          "representative_index": 7353,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59210,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            5,
+            5
+          ],
+          "representative_index": 59180,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59180,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            1,
+            8,
+            8
+          ],
+          "representative_index": 59210,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59917,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            3,
+            7
+          ],
+          "representative_index": 59893,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 59893,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            6,
+            4
+          ],
+          "representative_index": 59917,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60029,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            0,
+            7
+          ],
+          "representative_index": 60028,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60028,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            3,
+            0,
+            8
+          ],
+          "representative_index": 60029,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60207,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            4,
+            2,
+            6
+          ],
+          "representative_index": 60126,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 60126,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            1,
+            5,
+            2,
+            6
+          ],
+          "representative_index": 60207,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 62375,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            4,
+            3,
+            0,
+            2
+          ],
+          "representative_index": 62210,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 62210,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            4,
+            5,
+            0,
+            5
+          ],
+          "representative_index": 62375,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531458,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            5
+          ],
+          "representative_index": 531455,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 531455,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            8
+          ],
+          "representative_index": 531458,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532275,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3
+          ],
+          "representative_index": 532272,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532272,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            1,
+            2,
+            6
+          ],
+          "representative_index": 532275,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532797,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            3,
+            3
+          ],
+          "representative_index": 532524,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532796,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            4,
+            3,
+            8
+          ],
+          "representative_index": 532529,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532529,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            7,
+            6,
+            5
+          ],
+          "representative_index": 532796,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 532524,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            0,
+            1,
+            7,
+            6,
+            6
+          ],
+          "representative_index": 532797,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 538136,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            4,
+            5
+          ],
+          "representative_index": 538124,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 538124,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            5,
+            8
+          ],
+          "representative_index": 538136,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 539142,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            5,
+            6
+          ],
+          "representative_index": 539025,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 539294,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            3,
+            5,
+            8
+          ],
+          "representative_index": 539027,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 539025,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            5,
+            0,
+            6
+          ],
+          "representative_index": 539142,
+          "size": 720,
+          "stabilizer_order": 1
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 539027,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            6,
+            8,
+            5
+          ],
+          "representative_index": 539294,
+          "size": 720,
+          "stabilizer_order": 1
+        }
+      ],
+      "p": 3,
+      "persistent_count": 450,
+      "pgammal_orbit_count": 33,
+      "pgl_orbit_count": 58,
+      "pointed_bad_affine_orbit_count": null,
+      "pointed_bad_affine_representatives": null,
+      "pointed_bad_count": 14479,
+      "pointed_method": "full pointed complement",
+      "q": 9
+    },
+    {
+      "affine_orbit_count": null,
+      "candidate_count": 89431,
+      "central_nucleus_expected": false,
+      "deep_count": 3080,
+      "exceptional_count": 2288,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 163757,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 163757,
+          "size": 110,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1791415,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            3,
+            10,
+            0,
+            10
+          ],
+          "representative_index": 1791415,
+          "size": 110,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 11,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 11,
+          "size": 132,
+          "stabilizer_order": 10
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1789487,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            5,
+            1,
+            7
+          ],
+          "representative_index": 1789487,
+          "size": 220,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1805262,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            2,
+            3,
+            3,
+            5,
+            8
+          ],
+          "representative_index": 1805262,
+          "size": 220,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 161053,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "representative_index": 161053,
+          "size": 264,
+          "stabilizer_order": 5
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 161056,
+          "persistent": false,
+          "representative": [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            5
+          ],
+          "representative_index": 161056,
+          "size": 264,
+          "stabilizer_order": 5
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1788053,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            4,
+            3,
+            3
+          ],
+          "representative_index": 1788053,
+          "size": 440,
+          "stabilizer_order": 3
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1786375,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            4,
+            8
+          ],
+          "representative_index": 1786375,
+          "size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1787608,
+          "persistent": false,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            0,
+            6,
+            9
+          ],
+          "representative_index": 1787608,
+          "size": 660,
+          "stabilizer_order": 2
+        }
+      ],
+      "p": 11,
+      "persistent_count": 792,
+      "pgammal_orbit_count": 10,
+      "pgl_orbit_count": 10,
+      "pointed_bad_affine_orbit_count": null,
+      "pointed_bad_affine_representatives": null,
+      "pointed_bad_count": 8130,
+      "pointed_method": "full pointed complement",
+      "q": 11
+    },
+    {
+      "affine_orbit_count": null,
+      "candidate_count": 40912,
+      "central_nucleus_expected": false,
+      "deep_count": 1274,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 13,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 13,
+          "size": 182,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 375739,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 375739,
+          "size": 546,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 4884615,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            2,
+            0,
+            4,
+            0,
+            8
+          ],
+          "representative_index": 4884615,
+          "size": 546,
+          "stabilizer_order": 4
+        }
+      ],
+      "p": 13,
+      "persistent_count": 1274,
+      "pgammal_orbit_count": 3,
+      "pgl_orbit_count": 3,
+      "pointed_bad_affine_orbit_count": null,
+      "pointed_bad_affine_representatives": null,
+      "pointed_bad_count": 3147,
+      "pointed_method": "full pointed complement",
+      "q": 13
+    },
+    {
+      "affine_orbit_count": 4693,
+      "candidate_count": 40849,
+      "central_nucleus_expected": false,
+      "deep_count": 2312,
+      "exceptional_count": 0,
+      "m": 4,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 16,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 16,
+          "size": 17,
+          "stabilizer_order": 240
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 17,
+          "size": 255,
+          "stabilizer_order": 16
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1147228,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            1,
+            8,
+            1,
+            5,
+            12
+          ],
+          "representative_index": 1147228,
+          "size": 2040,
+          "stabilizer_order": 2
+        }
+      ],
+      "p": 2,
+      "persistent_count": 2312,
+      "pgammal_orbit_count": 3,
+      "pgl_orbit_count": 3,
+      "pointed_bad_affine_orbit_count": 18,
+      "pointed_bad_affine_representatives": [
+        1,
+        16,
+        65536,
+        71701,
+        1048577,
+        1048578,
+        1048579,
+        1048580,
+        1048581,
+        1052688,
+        1053272,
+        1053519,
+        1053740,
+        1054010,
+        1054938,
+        1055391,
+        1055976,
+        1056700
+      ],
+      "pointed_bad_count": 2553,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 16
+    },
+    {
+      "affine_orbit_count": 5594,
+      "candidate_count": 51460,
+      "central_nucleus_expected": false,
+      "deep_count": 2754,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 17,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 17,
+          "size": 306,
+          "stabilizer_order": 16
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1434749,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            9,
+            0
+          ],
+          "representative_index": 1434749,
+          "size": 408,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 24390743,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            3,
+            0,
+            9,
+            0,
+            10
+          ],
+          "representative_index": 24390743,
+          "size": 408,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 24226637,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            2,
+            3,
+            5
+          ],
+          "representative_index": 24226637,
+          "size": 816,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 24397524,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            3,
+            1,
+            15,
+            8,
+            8
+          ],
+          "representative_index": 24397524,
+          "size": 816,
+          "stabilizer_order": 6
+        }
+      ],
+      "p": 17,
+      "persistent_count": 2754,
+      "pgammal_orbit_count": 5,
+      "pgl_orbit_count": 5,
+      "pointed_bad_affine_orbit_count": 15,
+      "pointed_bad_affine_representatives": [
+        1,
+        17,
+        83521,
+        84397,
+        1419858,
+        1425096,
+        1425930,
+        1426384,
+        1426562,
+        1427321,
+        1434749,
+        1435148,
+        1435457,
+        1435819,
+        1436151
+      ],
+      "pointed_bad_count": 3027,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 17
+    },
+    {
+      "affine_orbit_count": 7696,
+      "candidate_count": 79079,
+      "central_nucleus_expected": false,
+      "deep_count": 3800,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 19,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 19,
+          "size": 380,
+          "stabilizer_order": 18
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 2489893,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 2489893,
+          "size": 1710,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 47191963,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            2,
+            5,
+            12,
+            10
+          ],
+          "representative_index": 47191963,
+          "size": 1710,
+          "stabilizer_order": 4
+        }
+      ],
+      "p": 19,
+      "persistent_count": 3800,
+      "pgammal_orbit_count": 3,
+      "pgl_orbit_count": 3,
+      "pointed_bad_affine_orbit_count": 17,
+      "pointed_bad_affine_representatives": [
+        1,
+        19,
+        6859,
+        130321,
+        131047,
+        2476100,
+        2483787,
+        2484245,
+        2484898,
+        2485466,
+        2485728,
+        2489893,
+        2490453,
+        2491256,
+        2491502,
+        2491773,
+        2493384
+      ],
+      "pointed_bad_count": 4162,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 19
+    },
+    {
+      "affine_orbit_count": 13354,
+      "candidate_count": 164014,
+      "central_nucleus_expected": false,
+      "deep_count": 6624,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 23,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 23,
+          "size": 552,
+          "stabilizer_order": 22
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 6497224,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            5,
+            0,
+            2,
+            0
+          ],
+          "representative_index": 6497224,
+          "size": 1012,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 148373466,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            4,
+            17,
+            3,
+            6
+          ],
+          "representative_index": 148373466,
+          "size": 1012,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 148329029,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            2,
+            3,
+            5
+          ],
+          "representative_index": 148329029,
+          "size": 2024,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 149465818,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            5,
+            2,
+            12,
+            1,
+            19
+          ],
+          "representative_index": 149465818,
+          "size": 2024,
+          "stabilizer_order": 6
+        }
+      ],
+      "p": 23,
+      "persistent_count": 6624,
+      "pgammal_orbit_count": 5,
+      "pgl_orbit_count": 5,
+      "pointed_bad_affine_orbit_count": 18,
+      "pointed_bad_affine_representatives": [
+        1,
+        23,
+        279841,
+        282488,
+        6436344,
+        6449088,
+        6451020,
+        6452027,
+        6452317,
+        6453201,
+        6454509,
+        6497224,
+        6498513,
+        6499734,
+        6499993,
+        6500359,
+        6501364,
+        6503393
+      ],
+      "pointed_bad_count": 7131,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 23
+    },
+    {
+      "affine_orbit_count": 17025,
+      "candidate_count": 226276,
+      "central_nucleus_expected": false,
+      "deep_count": 8450,
+      "exceptional_count": 0,
+      "m": 2,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 25,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 25,
+          "size": 650,
+          "stabilizer_order": 24
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 9843800,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            5,
+            0,
+            2,
+            0
+          ],
+          "representative_index": 9843800,
+          "size": 3900,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 246095010,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            5,
+            0,
+            2,
+            0,
+            10
+          ],
+          "representative_index": 246095010,
+          "size": 3900,
+          "stabilizer_order": 4
+        }
+      ],
+      "p": 5,
+      "persistent_count": 8450,
+      "pgammal_orbit_count": 3,
+      "pgl_orbit_count": 3,
+      "pointed_bad_affine_orbit_count": 20,
+      "pointed_bad_affine_representatives": [
+        1,
+        25,
+        26,
+        390625,
+        393752,
+        9765626,
+        9781928,
+        9786184,
+        9786431,
+        9788632,
+        9789220,
+        9789720,
+        9790133,
+        9843800,
+        9844813,
+        9845324,
+        9848534,
+        9849893,
+        9850918,
+        9851396
+      ],
+      "pointed_bad_count": 9051,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 25
+    },
+    {
+      "affine_orbit_count": 21291,
+      "candidate_count": 304750,
+      "central_nucleus_expected": false,
+      "deep_count": 10584,
+      "exceptional_count": 0,
+      "m": 3,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 27,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 27,
+          "size": 28,
+          "stabilizer_order": 702
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 28,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 28,
+          "size": 728,
+          "stabilizer_order": 27
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 14388300,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 14388300,
+          "size": 4914,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 387973073,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            2,
+            0,
+            2
+          ],
+          "representative_index": 387973073,
+          "size": 4914,
+          "stabilizer_order": 4
+        }
+      ],
+      "p": 3,
+      "persistent_count": 10584,
+      "pgammal_orbit_count": 4,
+      "pgl_orbit_count": 4,
+      "pointed_bad_affine_orbit_count": 20,
+      "pointed_bad_affine_representatives": [
+        1,
+        27,
+        531441,
+        532900,
+        14348908,
+        14369373,
+        14371049,
+        14371967,
+        14372615,
+        14377315,
+        14377962,
+        14380016,
+        14388300,
+        14389004,
+        14395450,
+        14396639,
+        14397444,
+        14398310,
+        14399531,
+        14400637
+      ],
+      "pointed_bad_count": 11287,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 27
+    },
+    {
+      "affine_orbit_count": 26234,
+      "candidate_count": 402028,
+      "central_nucleus_expected": false,
+      "deep_count": 13050,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 29,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 29,
+          "size": 870,
+          "stabilizer_order": 28
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 20560043,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            2,
+            0,
+            4,
+            0
+          ],
+          "representative_index": 20560043,
+          "size": 2030,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 596241255,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            2,
+            0,
+            4,
+            0,
+            8
+          ],
+          "representative_index": 596241255,
+          "size": 2030,
+          "stabilizer_order": 12
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 595684402,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            6,
+            8,
+            25,
+            13
+          ],
+          "representative_index": 595684402,
+          "size": 4060,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 596331174,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            2,
+            3,
+            23,
+            26,
+            27
+          ],
+          "representative_index": 596331174,
+          "size": 4060,
+          "stabilizer_order": 6
+        }
+      ],
+      "p": 29,
+      "persistent_count": 13050,
+      "pgammal_orbit_count": 5,
+      "pgl_orbit_count": 5,
+      "pointed_bad_affine_orbit_count": 21,
+      "pointed_bad_affine_representatives": [
+        1,
+        29,
+        707281,
+        708967,
+        20511150,
+        20537377,
+        20540516,
+        20540841,
+        20542475,
+        20543825,
+        20544359,
+        20545642,
+        20547996,
+        20560043,
+        20563143,
+        20563642,
+        20565631,
+        20567533,
+        20569794,
+        20570557,
+        20571338
+      ],
+      "pointed_bad_count": 13863,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 29
+    },
+    {
+      "affine_orbit_count": 31892,
+      "candidate_count": 520894,
+      "central_nucleus_expected": false,
+      "deep_count": 15872,
+      "exceptional_count": 0,
+      "m": 1,
+      "orbits": [
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 31,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 31,
+          "size": 992,
+          "stabilizer_order": 30
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 28718803,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            0,
+            3,
+            0,
+            9,
+            0
+          ],
+          "representative_index": 28718803,
+          "size": 7440,
+          "stabilizer_order": 4
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 888526263,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            3,
+            10,
+            2,
+            16
+          ],
+          "representative_index": 888526263,
+          "size": 7440,
+          "stabilizer_order": 4
+        }
+      ],
+      "p": 31,
+      "persistent_count": 15872,
+      "pgammal_orbit_count": 3,
+      "pgl_orbit_count": 3,
+      "pointed_bad_affine_orbit_count": 26,
+      "pointed_bad_affine_representatives": [
+        1,
+        31,
+        923521,
+        926413,
+        28629152,
+        28629153,
+        28629154,
+        28629155,
+        28629159,
+        28662137,
+        28664564,
+        28666274,
+        28666724,
+        28668214,
+        28668828,
+        28671141,
+        28673662,
+        28718803,
+        28721800,
+        28722499,
+        28726837,
+        28727339,
+        28728188,
+        28729364,
+        28731780,
+        28733621
+      ],
+      "pointed_bad_count": 16803,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 31
+    },
+    {
+      "affine_orbit_count": 34955,
+      "candidate_count": 590401,
+      "central_nucleus_expected": true,
+      "deep_count": 17425,
+      "exceptional_count": 0,
+      "m": 5,
+      "orbits": [
+        {
+          "central_nucleus": true,
+          "frobenius_to_representative_index": 32768,
+          "persistent": false,
+          "representative": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "representative_index": 32768,
+          "size": 1,
+          "stabilizer_order": 32736
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 32,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "representative_index": 32,
+          "size": 33,
+          "stabilizer_order": 992
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 33,
+          "persistent": true,
+          "representative": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 33,
+          "size": 1023,
+          "stabilizer_order": 32
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 34604064,
+          "persistent": true,
+          "representative": [
+            0,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "representative_index": 34604064,
+          "size": 5456,
+          "stabilizer_order": 6
+        },
+        {
+          "central_nucleus": false,
+          "frobenius_to_representative_index": 1074823201,
+          "persistent": true,
+          "representative": [
+            1,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "representative_index": 1074823201,
+          "size": 10912,
+          "stabilizer_order": 3
+        }
+      ],
+      "p": 2,
+      "persistent_count": 17424,
+      "pgammal_orbit_count": 5,
+      "pgl_orbit_count": 5,
+      "pointed_bad_affine_orbit_count": 24,
+      "pointed_bad_affine_representatives": [
+        1,
+        32,
+        1024,
+        32768,
+        1048576,
+        1081377,
+        33554433,
+        33587232,
+        33588225,
+        33590415,
+        33592863,
+        33594039,
+        33595012,
+        33600361,
+        33605042,
+        33608600,
+        33609648,
+        33610517,
+        33611579,
+        33611970,
+        33613052,
+        33613899,
+        33616589,
+        33617639
+      ],
+      "pointed_bad_count": 18450,
+      "pointed_method": "exact affine-stabilizer orbit reduction",
+      "q": 32
+    }
+  ],
+  "schema": "c509-prs-redundancy-seven-calibration-v1"
+}

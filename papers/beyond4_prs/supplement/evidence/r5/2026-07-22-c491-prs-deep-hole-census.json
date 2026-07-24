@@ -1,0 +1,2745 @@
+{
+  "fields": {
+    "11": {
+      "deep_hole_count": 1848,
+      "excess_count": 1056,
+      "hankel_crosscheck": "pass",
+      "pg4_points": 16105,
+      "pgammal_orbit_count": 7,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 121,
+          "member_stats": {
+            "1.2": 10,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 121,
+          "size": 66,
+          "stab_order": 20
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 11,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 11,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 11,
+          "size": 132,
+          "stab_order": 10
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 1353,
+          "member_stats": {
+            "1.2": 12,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 1353,
+          "size": 165,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 14887,
+          "member_stats": {
+            "1.2": 12,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 14887,
+          "size": 165,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 14662,
+          "member_stats": {
+            "1.2": 4,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            1,
+            10
+          ],
+          "rep_index": 14662,
+          "size": 330,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 14789,
+          "member_stats": {
+            "1.2": 12,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            2,
+            5
+          ],
+          "rep_index": 14789,
+          "size": 330,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 14653,
+          "member_stats": {
+            "1.2": 8,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "rep_index": 14653,
+          "size": 660,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 1320,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 660,
+      "tangent_count": 132
+    },
+    "13": {
+      "deep_hole_count": 2080,
+      "excess_count": 806,
+      "hankel_crosscheck": null,
+      "pg4_points": 30941,
+      "pgammal_orbit_count": 6,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1+1+1+1",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 28909,
+          "member_stats": {
+            "1.2": 14,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            10
+          ],
+          "rep_index": 28909,
+          "size": 78,
+          "stab_order": 28
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 13,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 13,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 13,
+          "size": 182,
+          "stab_order": 12
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 2201,
+          "member_stats": {
+            "1.2": 6,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            0,
+            4
+          ],
+          "rep_index": 2201,
+          "size": 182,
+          "stab_order": 12
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 2223,
+          "member_stats": {
+            "1.2": 14,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 2223,
+          "size": 546,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 28620,
+          "member_stats": {
+            "1.2": 6,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            4,
+            7
+          ],
+          "rep_index": 28620,
+          "size": 546,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 28903,
+          "member_stats": {
+            "1.2": 14,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 28903,
+          "size": 546,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 2184,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 1092,
+      "tangent_count": 182
+    },
+    "16": {
+      "deep_hole_count": 2432,
+      "excess_count": 120,
+      "hankel_crosscheck": null,
+      "pg4_points": 69905,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 16,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 16,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 16,
+          "size": 17,
+          "stab_order": 240
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 4480,
+          "member_stats": {
+            "1.2": 17,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            1,
+            8,
+            0
+          ],
+          "rep_index": 4480,
+          "size": 120,
+          "stab_order": 34
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 17,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 16,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "rep_index": 17,
+          "size": 255,
+          "stab_order": 16
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 4481,
+          "member_stats": {
+            "1.2": 17,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            1,
+            8,
+            1
+          ],
+          "rep_index": 4481,
+          "size": 2040,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 4080,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 2040,
+      "tangent_count": 272
+    },
+    "17": {
+      "deep_hole_count": 4131,
+      "excess_count": 1377,
+      "hankel_crosscheck": null,
+      "pg4_points": 88741,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 289,
+          "member_stats": {
+            "1.2": 16,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 289,
+          "size": 153,
+          "stab_order": 32
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 17,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 17,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 17,
+          "size": 306,
+          "stab_order": 16
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 4964,
+          "member_stats": {
+            "1.2": 18,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "rep_index": 4964,
+          "size": 1224,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 83543,
+          "member_stats": {
+            "1.2": 10,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            1,
+            5
+          ],
+          "rep_index": 83543,
+          "size": 1224,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 84397,
+          "member_stats": {
+            "1.2": 18,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            3,
+            0,
+            9
+          ],
+          "rep_index": 84397,
+          "size": 1224,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 4896,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 2448,
+      "tangent_count": 306
+    },
+    "19": {
+      "deep_hole_count": 4541,
+      "excess_count": 741,
+      "hankel_crosscheck": null,
+      "pg4_points": 137561,
+      "pgammal_orbit_count": 6,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 131060,
+          "member_stats": {
+            "1.2": 20,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            17
+          ],
+          "rep_index": 131060,
+          "size": 171,
+          "stab_order": 40
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 19,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 19,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 19,
+          "size": 380,
+          "stab_order": 18
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 6863,
+          "member_stats": {
+            "1.2": 12,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            0,
+            4
+          ],
+          "rep_index": 6863,
+          "size": 570,
+          "stab_order": 12
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 6897,
+          "member_stats": {
+            "1.2": 20,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 6897,
+          "size": 855,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 131047,
+          "member_stats": {
+            "1.2": 20,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 131047,
+          "size": 855,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1^2+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 130725,
+          "member_stats": {
+            "1.2": 20,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            2,
+            5
+          ],
+          "rep_index": 130725,
+          "size": 1710,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 6840,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 3420,
+      "tangent_count": 380
+    },
+    "23": {
+      "deep_hole_count": 6900,
+      "excess_count": 276,
+      "hankel_crosscheck": null,
+      "pg4_points": 292561,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 529,
+          "member_stats": {
+            "1.2": 22,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 529,
+          "size": 276,
+          "stab_order": 44
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 23,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 23,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 23,
+          "size": 552,
+          "stab_order": 22
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 12282,
+          "member_stats": {
+            "1.2": 24,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            5,
+            0
+          ],
+          "rep_index": 12282,
+          "size": 1518,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 282544,
+          "member_stats": {
+            "1.2": 24,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            5,
+            2,
+            12
+          ],
+          "rep_index": 282544,
+          "size": 1518,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 280395,
+          "member_stats": {
+            "1.2": 24,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "rep_index": 280395,
+          "size": 3036,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 12144,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 6072,
+      "tangent_count": 552
+    },
+    "25": {
+      "deep_hole_count": 8750,
+      "excess_count": 300,
+      "hankel_crosscheck": null,
+      "pg4_points": 406901,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 393753,
+          "member_stats": {
+            "1.2": 26,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            5,
+            0,
+            3
+          ],
+          "rep_index": 393753,
+          "size": 300,
+          "stab_order": 52
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 25,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 25,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 25,
+          "size": 650,
+          "stab_order": 24
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 15750,
+          "member_stats": {
+            "1.2": 26,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            5,
+            0
+          ],
+          "rep_index": 15750,
+          "size": 3900,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 393752,
+          "member_stats": {
+            "1.2": 26,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            5,
+            0,
+            2
+          ],
+          "rep_index": 393752,
+          "size": 3900,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 15600,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 7800,
+      "tangent_count": 650
+    },
+    "27": {
+      "deep_hole_count": 10949,
+      "excess_count": 365,
+      "hankel_crosscheck": null,
+      "pg4_points": 551881,
+      "pgammal_orbit_count": 6,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 729,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 28,
+            "3": 0
+          },
+          "osc_rational_points": 28,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 729,
+          "size": 1,
+          "stab_order": 19656
+        },
+        {
+          "factor_type": "1^2+1+1",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 731,
+          "member_stats": {
+            "1.2": 27,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "rep_index": 731,
+          "size": 364,
+          "stab_order": 54
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 27,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 27,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 27,
+          "size": 756,
+          "stab_order": 26
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 19737,
+          "member_stats": {
+            "1.2": 28,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 19737,
+          "size": 2457,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "2^2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 532900,
+          "member_stats": {
+            "1.2": 28,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            1
+          ],
+          "rep_index": 532900,
+          "size": 2457,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 532199,
+          "member_stats": {
+            "1.2": 28,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "rep_index": 532199,
+          "size": 4914,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 19656,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 9828,
+      "tangent_count": 756
+    },
+    "29": {
+      "deep_hole_count": 13485,
+      "excess_count": 435,
+      "hankel_crosscheck": null,
+      "pg4_points": 732541,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 841,
+          "member_stats": {
+            "1.2": 28,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 841,
+          "size": 435,
+          "stab_order": 56
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 29,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 29,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 29,
+          "size": 870,
+          "stab_order": 28
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 24447,
+          "member_stats": {
+            "1.2": 30,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 24447,
+          "size": 6090,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 708967,
+          "member_stats": {
+            "1.2": 30,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 708967,
+          "size": 6090,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 24360,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 12180,
+      "tangent_count": 870
+    },
+    "31": {
+      "deep_hole_count": 16337,
+      "excess_count": 465,
+      "hankel_crosscheck": null,
+      "pg4_points": 954305,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 926423,
+          "member_stats": {
+            "1.2": 32,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            3,
+            0,
+            19
+          ],
+          "rep_index": 926423,
+          "size": 465,
+          "stab_order": 64
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 31,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 31,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 31,
+          "size": 992,
+          "stab_order": 30
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 29884,
+          "member_stats": {
+            "1.2": 32,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "rep_index": 29884,
+          "size": 3720,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 926672,
+          "member_stats": {
+            "1.2": 32,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            3,
+            8,
+            20
+          ],
+          "rep_index": 926672,
+          "size": 3720,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 924585,
+          "member_stats": {
+            "1.2": 32,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            3,
+            10
+          ],
+          "rep_index": 924585,
+          "size": 7440,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 29760,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 14880,
+      "tangent_count": 992
+    },
+    "32": {
+      "deep_hole_count": 17952,
+      "excess_count": 528,
+      "hankel_crosscheck": null,
+      "pg4_points": 1082401,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 32,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 32,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 32,
+          "size": 33,
+          "stab_order": 992
+        },
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 1024,
+          "member_stats": {
+            "1.2": 31,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 1024,
+          "size": 528,
+          "stab_order": 62
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 33,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 32,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "rep_index": 33,
+          "size": 1023,
+          "stab_order": 32
+        },
+        {
+          "factor_type": "1+3",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 33793,
+          "member_stats": {
+            "1.2": 33,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "rep_index": 33793,
+          "size": 16368,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 32736,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 16368,
+      "tangent_count": 1056
+    },
+    "37": {
+      "deep_hole_count": 27380,
+      "excess_count": 666,
+      "hankel_crosscheck": null,
+      "pg4_points": 1926221,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 1876935,
+          "member_stats": {
+            "1.2": 38,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            36
+          ],
+          "rep_index": 1876935,
+          "size": 666,
+          "stab_order": 76
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 37,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 37,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 37,
+          "size": 1406,
+          "stab_order": 36
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 50727,
+          "member_stats": {
+            "1.2": 38,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 50727,
+          "size": 12654,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 1876903,
+          "member_stats": {
+            "1.2": 38,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 1876903,
+          "size": 12654,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 50616,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 25308,
+      "tangent_count": 1406
+    },
+    "41": {
+      "deep_hole_count": 37023,
+      "excess_count": 861,
+      "hankel_crosscheck": null,
+      "pg4_points": 2896405,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 1681,
+          "member_stats": {
+            "1.2": 40,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 1681,
+          "size": 861,
+          "stab_order": 80
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 41,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 41,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 41,
+          "size": 1722,
+          "stab_order": 40
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 69044,
+          "member_stats": {
+            "1.2": 42,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "rep_index": 69044,
+          "size": 17220,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 2830813,
+          "member_stats": {
+            "1.2": 42,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            3,
+            0,
+            9
+          ],
+          "rep_index": 2830813,
+          "size": 17220,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 68880,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 34440,
+      "tangent_count": 1722
+    },
+    "43": {
+      "deep_hole_count": 42527,
+      "excess_count": 903,
+      "hankel_crosscheck": null,
+      "pg4_points": 3500201,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 3422535,
+          "member_stats": {
+            "1.2": 44,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            36
+          ],
+          "rep_index": 3422535,
+          "size": 903,
+          "stab_order": 88
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 43,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 43,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 43,
+          "size": 1892,
+          "stab_order": 42
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 79593,
+          "member_stats": {
+            "1.2": 44,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            2,
+            0
+          ],
+          "rep_index": 79593,
+          "size": 9933,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 3422503,
+          "member_stats": {
+            "1.2": 44,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            2,
+            0,
+            4
+          ],
+          "rep_index": 3422503,
+          "size": 9933,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 3420695,
+          "member_stats": {
+            "1.2": 44,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "rep_index": 3420695,
+          "size": 19866,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 79464,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 39732,
+      "tangent_count": 1892
+    },
+    "47": {
+      "deep_hole_count": 55272,
+      "excess_count": 1128,
+      "hankel_crosscheck": null,
+      "pg4_points": 4985761,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 2209,
+          "member_stats": {
+            "1.2": 46,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 2209,
+          "size": 1128,
+          "stab_order": 92
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 47,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 47,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 47,
+          "size": 2256,
+          "stab_order": 46
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 104058,
+          "member_stats": {
+            "1.2": 48,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            5,
+            0
+          ],
+          "rep_index": 104058,
+          "size": 12972,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1+3",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 4890875,
+          "member_stats": {
+            "1.2": 48,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            5,
+            3,
+            8
+          ],
+          "rep_index": 4890875,
+          "size": 12972,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 4881939,
+          "member_stats": {
+            "1.2": 48,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "rep_index": 4881939,
+          "size": 25944,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 103776,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 51888,
+      "tangent_count": 2256
+    },
+    "49": {
+      "deep_hole_count": 62426,
+      "excess_count": 1176,
+      "hankel_crosscheck": null,
+      "pg4_points": 5884901,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "factor_type": "2^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 5784038,
+          "member_stats": {
+            "1.2": 50,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            8,
+            0,
+            29
+          ],
+          "rep_index": 5784038,
+          "size": 1176,
+          "stab_order": 100
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 49,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 49,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 49,
+          "size": 2450,
+          "stab_order": 48
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 118041,
+          "member_stats": {
+            "1.2": 50,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            8,
+            0
+          ],
+          "rep_index": 118041,
+          "size": 29400,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 5784027,
+          "member_stats": {
+            "1.2": 50,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            8,
+            0,
+            18
+          ],
+          "rep_index": 5784027,
+          "size": 29400,
+          "stab_order": 4
+        }
+      ],
+      "pgl2_order": 117600,
+      "rho_le_4_verified": null,
+      "sigma_secant_count": 58800,
+      "tangent_count": 2450
+    },
+    "7": {
+      "deep_hole_count": 889,
+      "excess_count": 665,
+      "hankel_crosscheck": "pass",
+      "pg4_points": 2801,
+      "pgammal_orbit_count": 10,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 2552,
+          "member_stats": {
+            "1.2": 8,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            3,
+            0,
+            4
+          ],
+          "rep_index": 2552,
+          "size": 21,
+          "stab_order": 16
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 346,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            0,
+            3
+          ],
+          "rep_index": 346,
+          "size": 28,
+          "stab_order": 12
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 364,
+          "member_stats": {
+            "1.2": 8,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            3,
+            0
+          ],
+          "rep_index": 364,
+          "size": 42,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 2574,
+          "member_stats": {
+            "1.2": 8,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            3,
+            3,
+            5
+          ],
+          "rep_index": 2574,
+          "size": 42,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 7,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 7,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 7,
+          "size": 56,
+          "stab_order": 6
+        },
+        {
+          "factor_type": "4",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 2459,
+          "member_stats": {
+            "1.2": 8,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            1,
+            1,
+            2
+          ],
+          "rep_index": 2459,
+          "size": 84,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 345,
+          "member_stats": {
+            "1.2": 6,
+            "111": 0,
+            "1^2.1": 1,
+            "1^3": 0,
+            "3": 1
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            0,
+            2
+          ],
+          "rep_index": 345,
+          "size": 112,
+          "stab_order": 3
+        },
+        {
+          "factor_type": "1^2+1+1",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 52,
+          "member_stats": {
+            "1.2": 3,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 1,
+            "3": 2
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            3
+          ],
+          "rep_index": 52,
+          "size": 168,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 366,
+          "member_stats": {
+            "1.2": 4,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            3,
+            2
+          ],
+          "rep_index": 366,
+          "size": 168,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 2416,
+          "member_stats": {
+            "1.2": 4,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "rep_index": 2416,
+          "size": 168,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 336,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 168,
+      "tangent_count": 56
+    },
+    "8": {
+      "deep_hole_count": 1116,
+      "excess_count": 792,
+      "hankel_crosscheck": "pass",
+      "pg4_points": 4681,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 8,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 8,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 8,
+          "size": 9,
+          "stab_order": 56
+        },
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 64,
+          "member_stats": {
+            "1.2": 7,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 2,
+            "3": 0
+          },
+          "osc_rational_points": 2,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 64,
+          "size": 36,
+          "stab_order": 14
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 9,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 8,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "rep_index": 9,
+          "size": 63,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1+1+1+1",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 577,
+          "member_stats": {
+            "1.2": 9,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "rep_index": 577,
+          "size": 252,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 580,
+          "member_stats": {
+            "1.2": 5,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "rep_index": 578,
+          "size": 252,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 582,
+          "member_stats": {
+            "1.2": 5,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            1,
+            0,
+            4
+          ],
+          "rep_index": 580,
+          "size": 252,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+3",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 578,
+          "member_stats": {
+            "1.2": 5,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            1,
+            0,
+            6
+          ],
+          "rep_index": 582,
+          "size": 252,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 504,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 252,
+      "tangent_count": 72
+    },
+    "9": {
+      "deep_hole_count": 1391,
+      "excess_count": 941,
+      "hankel_crosscheck": "pass",
+      "pg4_points": 7381,
+      "pgammal_orbit_count": 7,
+      "pgl2_orbits": [
+        {
+          "factor_type": "1^2+1^2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 81,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 10,
+            "3": 0
+          },
+          "osc_rational_points": 10,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "rep_index": 81,
+          "size": 1,
+          "stab_order": 720
+        },
+        {
+          "factor_type": "1^2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 85,
+          "member_stats": {
+            "1.2": 9,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            0,
+            1,
+            0,
+            4
+          ],
+          "rep_index": 85,
+          "size": 40,
+          "stab_order": 18
+        },
+        {
+          "factor_type": "1^3+1",
+          "family": "tangent",
+          "frobenius_maps_to_rep_index": 9,
+          "member_stats": {
+            "1.2": 0,
+            "111": 0,
+            "1^2.1": 9,
+            "1^3": 1,
+            "3": 0
+          },
+          "osc_rational_points": 1,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "rep_index": 9,
+          "size": 90,
+          "stab_order": 8
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 765,
+          "member_stats": {
+            "1.2": 10,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            0,
+            1,
+            0,
+            4,
+            0
+          ],
+          "rep_index": 765,
+          "size": 180,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 6572,
+          "member_stats": {
+            "1.2": 2,
+            "111": 0,
+            "1^2.1": 4,
+            "1^3": 0,
+            "3": 4
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "rep_index": 6572,
+          "size": 180,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "2^2",
+          "family": "sigma_secant",
+          "frobenius_maps_to_rep_index": 6891,
+          "member_stats": {
+            "1.2": 10,
+            "111": 0,
+            "1^2.1": 0,
+            "1^3": 0,
+            "3": 0
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 2,
+          "rep": [
+            1,
+            0,
+            4,
+            0,
+            6
+          ],
+          "rep_index": 6891,
+          "size": 180,
+          "stab_order": 4
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 769,
+          "member_stats": {
+            "1.2": 6,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            4,
+            1
+          ],
+          "rep_index": 766,
+          "size": 360,
+          "stab_order": 2
+        },
+        {
+          "factor_type": "1+1+2",
+          "family": "excess",
+          "frobenius_maps_to_rep_index": 766,
+          "member_stats": {
+            "1.2": 6,
+            "111": 0,
+            "1^2.1": 2,
+            "1^3": 0,
+            "3": 2
+          },
+          "osc_rational_points": 0,
+          "pencil_gcd_deg": 0,
+          "rep": [
+            0,
+            1,
+            0,
+            4,
+            4
+          ],
+          "rep_index": 769,
+          "size": 360,
+          "stab_order": 2
+        }
+      ],
+      "pgl2_order": 720,
+      "rho_le_4_verified": true,
+      "sigma_secant_count": 360,
+      "tangent_count": 90
+    }
+  },
+  "moduli": {
+    "11": "GF(11) prime",
+    "13": "GF(13) prime",
+    "16": "t^4 = t + 1  (t^4+t+1)",
+    "17": "GF(17) prime",
+    "19": "GF(19) prime",
+    "23": "GF(23) prime",
+    "25": "t^2 = 2  (t^2-2, 2 nonsquare mod 5)",
+    "27": "t^3 = t - 1  (t^3-t+1)",
+    "29": "GF(29) prime",
+    "31": "GF(31) prime",
+    "32": "t^5 = t^2 + 1  (t^5+t^2+1)",
+    "37": "GF(37) prime",
+    "41": "GF(41) prime",
+    "43": "GF(43) prime",
+    "47": "GF(47) prime",
+    "49": "t^2 = 3  (t^2-3, 3 nonsquare mod 7)",
+    "7": "GF(7) prime",
+    "8": "t^3 = t + 1  (t^3+t+1)",
+    "9": "t^2 = -1  (t^2+1)"
+  },
+  "schema": "c491-prs-deep-hole-census-v1"
+}

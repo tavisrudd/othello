@@ -1,0 +1,434 @@
+{
+  "even_degree_characteristic7_square_quartic_family": {
+    "checked_rows": [
+      {
+        "elliptic_points": 64,
+        "elliptic_trace": -14,
+        "m": 1,
+        "q": 49,
+        "rootless_shallow_parameters": 16
+      },
+      {
+        "elliptic_points": 2304,
+        "elliptic_trace": 98,
+        "m": 2,
+        "q": 2401,
+        "rootless_shallow_parameters": 576
+      },
+      {
+        "elliptic_points": 118336,
+        "elliptic_trace": -686,
+        "m": 3,
+        "q": 117649,
+        "rootless_shallow_parameters": 29584
+      },
+      {
+        "elliptic_points": 5760000,
+        "elliptic_trace": 4802,
+        "m": 4,
+        "q": 5764801,
+        "rootless_shallow_parameters": 1440000
+      }
+    ],
+    "counting_curve": "E: y^2=x^3-x",
+    "fields": "q=7^(2m)",
+    "parameter_count": "#E(F_q)/4",
+    "quartics": "h_nu=(t^2-nu)^2 with nu nonsquare",
+    "splitting_condition": "nu^2-1 is nonsquare",
+    "witness_template": "(t^5-t)(t^2+u), u=2nu/(nu^2-1)"
+  },
+  "five_root_residual_quadratic_detector": {
+    "denominator": "D=A^2+B*C",
+    "discriminant_numerator": "(A*C+B*E)^2-4*(C^2-A*E)*(A^2+B*C)",
+    "fixed_quintic": "P=t^5-t",
+    "full_family_gate": "quadratic double cover over Conf_5(P1), off determinant, collision, and diagonal divisors",
+    "linear_system": "[[A,B],[C,-A]]*[s,u]=[C,E]",
+    "quartic_coordinates": "A=a2-a6, B=a5, C=a3, E=a4",
+    "solution_s": "(A*C+B*E)/D",
+    "solution_u": "(C^2-A*E)/D"
+  },
+  "generic_all_degree_spine": {
+    "bottom_marker_count": "n-4",
+    "deletion_degree_bound": "6*n-12",
+    "exact_normalized_hasse_integer_bound": "floor((1+sqrt(6*n-12))^2)+1",
+    "expanded_integer_bound": "6*n-10+floor(2*sqrt(6*n-12))",
+    "scope": "generic S3 bottom stratum only; contained carrier pullbacks remain level-specific"
+  },
+  "lower_cover": {
+    "arithmetic_genus": 1,
+    "base_deletion_degree": 12,
+    "bidegree": [
+      2,
+      2
+    ],
+    "c512_closed_integer_bound": 44,
+    "deletion_per_marker": 6,
+    "exact_normalization_inequality_first_integer": 42,
+    "first_prime_power_at_least_c512_bound": 47,
+    "first_prime_power_at_least_exact_inequality": 43,
+    "geometric_monodromy": "S3 on ordered distinct root pairs",
+    "marker_count": 3,
+    "total_deletion_degree": 30
+  },
+  "lower_degree6_nuclei_and_lifts": [
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        3
+      ],
+      "order": 3
+    },
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        3
+      ],
+      "order": 4
+    },
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        1,
+        3,
+        5
+      ],
+      "order": 5
+    },
+    {
+      "characteristic": 3,
+      "degree7_lift_support": [
+        2,
+        5
+      ],
+      "lower_support": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "order": 5
+    },
+    {
+      "characteristic": 5,
+      "degree7_lift_support": [
+        3,
+        4
+      ],
+      "lower_support": [
+        2,
+        3,
+        4
+      ],
+      "order": 4
+    },
+    {
+      "characteristic": 5,
+      "degree7_lift_support": [
+        3,
+        4
+      ],
+      "lower_support": [
+        2,
+        3,
+        4
+      ],
+      "order": 5
+    }
+  ],
+  "modular_disposition": {
+    "characteristic2_central_e3_lift_dimension": 0,
+    "characteristic3_conic_bad_point_bound": 18,
+    "characteristic3_lift_support": [
+      2,
+      5
+    ],
+    "characteristic3_projective_module": "det^2 tensor Frobenius^1(E)",
+    "characteristic3_shallow_for_q_at_least": 27,
+    "characteristic5_lift_support": [
+      3,
+      4
+    ],
+    "characteristic5_projective_module": "det^3 tensor E",
+    "characteristic5_universal_roots": "P1(F5)",
+    "characteristic5_universal_split_sextic_coefficients": [
+      0,
+      -1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  },
+  "persistent": {
+    "sigma_nonzero_class_cycle_lengths_by_p_mod_7": {
+      "1": [
+        1,
+        1,
+        1
+      ],
+      "2": [
+        3
+      ],
+      "3": [
+        3
+      ],
+      "4": [
+        3
+      ],
+      "5": [
+        3
+      ],
+      "6": [
+        1,
+        1,
+        1
+      ]
+    },
+    "sigma_pgamma_fusion_when_7_divides_q_plus_1": {
+      "p_congruent_to_plus_or_minus_1_mod_7": "three nonzero inversion classes remain separate",
+      "p_otherwise": "three nonzero inversion classes form one Frobenius 3-cycle"
+    },
+    "sigma_quotient": "T/T^7 modulo inversion and Frobenius",
+    "tangent_cocycle_coefficient": 7,
+    "tangent_split_characteristic": 7,
+    "total_deep_orbit_counts": {
+      "7_divides_q_plus_1_and_p_is_plus_or_minus_1_mod_7": {
+        "PGL2": 5,
+        "PGammaL2": 5
+      },
+      "7_divides_q_plus_1_and_p_is_plus_or_minus_2_or_3_mod_7": {
+        "PGL2": 5,
+        "PGammaL2": 3
+      },
+      "gcd_7_q_plus_1_is_1_and_p_not_7": {
+        "PGL2": 2,
+        "PGammaL2": 2
+      },
+      "p_is_7": {
+        "PGL2": 3,
+        "PGammaL2": 3
+      }
+    }
+  },
+  "prime_diagonal_nucleus_series": {
+    "checked_primes": [
+      {
+        "characteristic": 3,
+        "common_kernel_is_pth_power_pencil": true,
+        "common_kernel_support": [
+          0,
+          3
+        ],
+        "lift_support": [
+          2
+        ],
+        "lower_nrc_degree": 3,
+        "lower_top_nucleus_support": [
+          1,
+          2
+        ],
+        "projective_module": "det^2 tensor Sym^0(E)",
+        "syndrome_degree": 4,
+        "universal_squarefree_witness": false
+      },
+      {
+        "characteristic": 5,
+        "common_kernel_is_pth_power_pencil": true,
+        "common_kernel_support": [
+          0,
+          5
+        ],
+        "lift_support": [
+          2,
+          3,
+          4
+        ],
+        "lower_nrc_degree": 5,
+        "lower_top_nucleus_support": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "projective_module": "det^2 tensor Sym^2(E)",
+        "syndrome_degree": 6,
+        "universal_squarefree_witness": false
+      },
+      {
+        "characteristic": 7,
+        "common_kernel_is_pth_power_pencil": true,
+        "common_kernel_support": [
+          0,
+          7
+        ],
+        "lift_support": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "lower_nrc_degree": 7,
+        "lower_top_nucleus_support": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "projective_module": "det^2 tensor Sym^4(E)",
+        "syndrome_degree": 8,
+        "universal_squarefree_witness": false
+      }
+    ],
+    "consequence": "no universal squarefree witness; modular analysis must be orbitwise",
+    "general_common_kernel": "<x^p,y^p>, a p-th-power pencil",
+    "general_lift_support": "e2,...,e_(p-1)",
+    "general_projective_module": "det^2 tensor Sym^(p-3)(E)"
+  },
+  "q49_rootless_shallow_witness": {
+    "field": "F7[tau]/(tau^2-3)",
+    "hankel_first_row": [
+      0,
+      0
+    ],
+    "hankel_second_row": [
+      0,
+      0
+    ],
+    "norm_nu": 6,
+    "nu_as_a_plus_b_tau": [
+      3,
+      1
+    ],
+    "quadratic_root_encodings": [
+      3,
+      4
+    ],
+    "quartic": "(t^2-nu)^2",
+    "quartic_has_rational_root": false,
+    "quintic_root_encodings": [
+      0,
+      1,
+      6,
+      21,
+      28
+    ],
+    "root_sets_disjoint": true,
+    "split_septic": "(t^5-t)(t^2+5)"
+  },
+  "q7_prime_diagonal_calibration": {
+    "deep_rootless_quartics": 819,
+    "kernel_criterion": "complement septic at r lies in W_f iff h(r)=0",
+    "projective_binary_quartics": 2801,
+    "shallow_quartics": 1982,
+    "split_squarefree_septics": 8
+  },
+  "redundancy": 8,
+  "redundancy9_preview": {
+    "characteristic5_disposition": "shallow for q>5 via (t^5-t), infinity, and one extra affine root",
+    "characteristic5_lift_support": [
+      4
+    ],
+    "characteristic7_lift_support": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "characteristic7_projective_module": "det^2 tensor Sym^4(E)",
+    "characteristic7_universal_witness": "none: common annihilator forces d1=...=d6=0, hence a seventh power",
+    "collision_degree": 12,
+    "deletion_degree_bound": 36,
+    "exact_normalization_inequality_first_integer": 50,
+    "first_prime_power_at_least_exact_inequality": 53,
+    "lower_degree7_nuclei_and_lifts": [
+      {
+        "characteristic": 3,
+        "degree8_lift_support": [],
+        "lower_support": [
+          2,
+          5
+        ],
+        "order": 5
+      },
+      {
+        "characteristic": 3,
+        "degree8_lift_support": [],
+        "lower_support": [
+          2,
+          5
+        ],
+        "order": 6
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 4
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 5
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 6
+      },
+      {
+        "characteristic": 7,
+        "degree8_lift_support": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "lower_support": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "order": 6
+      }
+    ],
+    "marker_count": 4,
+    "syndrome_degree": 8
+  },
+  "schema": "c513-prs-redundancy-eight-v1",
+  "syndrome_degree": 7,
+  "top_level": {
+    "collision_degree": 10,
+    "lower_central_intersection_degree": 1,
+    "secant_intersection_degree": 3,
+    "total_transverse_collision_budget": 14
+  }
+}

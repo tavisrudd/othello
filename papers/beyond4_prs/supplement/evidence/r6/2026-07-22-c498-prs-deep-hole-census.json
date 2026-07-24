@@ -1,0 +1,808 @@
+{
+  "schema": "c498-prs-deep-hole-census-v1",
+  "fields": {
+    "7": {
+      "pg5_points": 19608,
+      "deep_hole_count": 5376,
+      "covering_radius": 5,
+      "pgl2_order": 336,
+      "pgl2_orbit_count": 20,
+      "pgammal_orbit_count": 20,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 7,
+          "size": 56,
+          "stab_order": 6,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 21, "1^2+1^2": 7, "1^2+2": 21, "1^3+1": 7, "1^4": 1},
+          "frobenius_maps_to_rep_index": 7
+        },
+        {
+          "rep": [0, 1, 0, 0, 2, 0],
+          "rep_index": 2415,
+          "size": 112,
+          "stab_order": 3,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 9, "1+3": 26, "1^2+1+1": 6, "1^2+1^2": 1, "2+2": 6, "4": 9},
+          "frobenius_maps_to_rep_index": 2415
+        },
+        {
+          "rep": [0, 0, 0, 1, 0, 1],
+          "rep_index": 50,
+          "size": 168,
+          "stab_order": 2,
+          "quintic_factor_type": "1^3+2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 11, "1+3": 14, "1^2+1+1": 3, "1^2+1^2": 1, "1^2+2": 2, "1^3+1": 7, "1^4": 1, "2+2": 4, "4": 14},
+          "frobenius_maps_to_rep_index": 50
+        },
+        {
+          "rep": [0, 1, 0, 0, 0, 1],
+          "rep_index": 2402,
+          "size": 168,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 9, "1+3": 14, "1^2+1+1": 8, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 4, "4": 16},
+          "frobenius_maps_to_rep_index": 2402
+        },
+        {
+          "rep": [0, 1, 0, 3, 0, 2],
+          "rep_index": 2550,
+          "size": 168,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 28, "1^2+2": 8, "2+2": 20, "2^2": 1},
+          "frobenius_maps_to_rep_index": 2550
+        },
+        {
+          "rep": [0, 1, 0, 3, 0, 5],
+          "rep_index": 2553,
+          "size": 168,
+          "stab_order": 2,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 16, "1+3": 16, "1^2+1+1": 3, "1^2+1^2": 1, "1^2+2": 1, "1^3+1": 2, "2+2": 5, "2^2": 1, "4": 12},
+          "frobenius_maps_to_rep_index": 2553
+        },
+        {
+          "rep": [0, 1, 0, 3, 0, 6],
+          "rep_index": 2554,
+          "size": 168,
+          "stab_order": 2,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 13, "1+3": 20, "1^2+1+1": 5, "1^2+2": 3, "2+2": 5, "2^2": 2, "4": 9},
+          "frobenius_maps_to_rep_index": 2554
+        },
+        {
+          "rep": [0, 0, 1, 0, 3, 1],
+          "rep_index": 365,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1^2+1+2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 12, "1+3": 21, "1^2+1+1": 5, "1^2+2": 1, "1^3+1": 1, "1^4": 1, "2+2": 4, "4": 12},
+          "frobenius_maps_to_rep_index": 365
+        },
+        {
+          "rep": [0, 0, 1, 0, 3, 2],
+          "rep_index": 366,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1^2+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 8, "1+3": 16, "1^2+1+1": 8, "1^2+1^2": 2, "1^2+2": 1, "1^3+1": 1, "1^4": 1, "2+2": 6, "4": 14},
+          "frobenius_maps_to_rep_index": 366
+        },
+        {
+          "rep": [0, 1, 0, 1, 1, 2],
+          "rep_index": 2459,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 16, "1+3": 15, "1^2+1+1": 3, "1^2+2": 2, "1^3+1": 3, "2+2": 5, "4": 13},
+          "frobenius_maps_to_rep_index": 2459
+        },
+        {
+          "rep": [0, 1, 0, 1, 1, 5],
+          "rep_index": 2462,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 18, "1+3": 13, "1^2+1+1": 3, "1^2+2": 4, "1^3+1": 1, "2+2": 3, "4": 15},
+          "frobenius_maps_to_rep_index": 2462
+        },
+        {
+          "rep": [0, 1, 0, 1, 3, 0],
+          "rep_index": 2471,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+1+2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 12, "1+3": 22, "1^2+1+1": 5, "1^2+1^2": 1, "1^2+2": 1, "2+2": 4, "4": 12},
+          "frobenius_maps_to_rep_index": 2471
+        },
+        {
+          "rep": [0, 1, 0, 1, 3, 3],
+          "rep_index": 2474,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 18, "1+3": 13, "1^2+1+1": 3, "1^2+2": 4, "1^3+1": 1, "2+2": 3, "4": 15},
+          "frobenius_maps_to_rep_index": 2474
+        },
+        {
+          "rep": [0, 1, 0, 1, 3, 6],
+          "rep_index": 2477,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 16, "1+3": 16, "1^2+1+1": 4, "1^2+2": 4, "2+2": 4, "4": 13},
+          "frobenius_maps_to_rep_index": 2477
+        },
+        {
+          "rep": [0, 1, 0, 3, 2, 1],
+          "rep_index": 2563,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 8, "1+3": 15, "1^2+1+1": 8, "1^2+1^2": 1, "1^2+2": 3, "1^3+1": 2, "2+2": 4, "2^2": 2, "4": 14},
+          "frobenius_maps_to_rep_index": 2563
+        },
+        {
+          "rep": [1, 0, 0, 0, 1, 2],
+          "rep_index": 16816,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 10, "1+3": 12, "1^2+1+1": 7, "1^2+1^2": 1, "1^2+2": 3, "1^3+1": 3, "2+2": 4, "4": 17},
+          "frobenius_maps_to_rep_index": 16816
+        },
+        {
+          "rep": [1, 0, 0, 0, 1, 3],
+          "rep_index": 16817,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "5",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 5, "1+3": 19, "1^2+1+1": 9, "1^2+1^2": 1, "1^2+2": 2, "1^3+1": 2, "2+2": 7, "4": 12},
+          "frobenius_maps_to_rep_index": 16817
+        },
+        {
+          "rep": [1, 0, 0, 3, 1, 3],
+          "rep_index": 16964,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 15, "1+3": 17, "1^2+1+1": 4, "1^2+2": 3, "1^3+1": 1, "2+2": 5, "4": 12},
+          "frobenius_maps_to_rep_index": 16964
+        },
+        {
+          "rep": [1, 0, 1, 0, 5, 2],
+          "rep_index": 17187,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 18, "1+3": 14, "1^2+1+1": 3, "1^2+1^2": 1, "1^2+2": 3, "2+2": 3, "2^2": 1, "4": 14},
+          "frobenius_maps_to_rep_index": 17187
+        },
+        {
+          "rep": [1, 0, 1, 0, 6, 2],
+          "rep_index": 17194,
+          "size": 336,
+          "stab_order": 1,
+          "quintic_factor_type": "5",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 18, "1+3": 14, "1^2+1+1": 3, "1^2+1^2": 1, "1^2+2": 3, "2+2": 3, "2^2": 1, "4": 14},
+          "frobenius_maps_to_rep_index": 17194
+        }
+      ]
+    },
+    "8": {
+      "pg5_points": 37449,
+      "deep_hole_count": 5037,
+      "covering_radius": 5,
+      "pgl2_order": 504,
+      "pgl2_orbit_count": 13,
+      "pgammal_orbit_count": 7,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 1, 0, 0],
+          "rep_index": 64,
+          "size": 9,
+          "stab_order": 56,
+          "quintic_factor_type": "1^3+1^2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 28, "1^3+1": 8, "1^4": 9, "4": 28},
+          "frobenius_maps_to_rep_index": 64
+        },
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 8,
+          "size": 72,
+          "stab_order": 7,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 28, "1^2+1^2": 8, "1^2+2": 28, "1^3+1": 8, "1^4": 1},
+          "frobenius_maps_to_rep_index": 8
+        },
+        {
+          "rep": [1, 0, 1, 3, 5, 2],
+          "rep_index": 33514,
+          "size": 168,
+          "stab_order": 3,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 9, "1+3": 36, "1^2+1+1": 9, "2+2": 9, "2^2": 1, "4": 9},
+          "frobenius_maps_to_rep_index": 33514
+        },
+        {
+          "rep": [0, 1, 1, 0, 1, 1],
+          "rep_index": 4617,
+          "size": 252,
+          "stab_order": 2,
+          "quintic_factor_type": "1^2+1+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 36, "1^2+2": 9, "2+2": 27, "2^2": 1},
+          "frobenius_maps_to_rep_index": 4617
+        },
+        {
+          "rep": [0, 1, 1, 0, 2, 1],
+          "rep_index": 4625,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 20, "1+3": 21, "1^2+1+1": 5, "1^2+2": 3, "1^3+1": 1, "2+2": 6, "2^2": 1, "4": 16},
+          "frobenius_maps_to_rep_index": 4641
+        },
+        {
+          "rep": [0, 1, 1, 0, 2, 5],
+          "rep_index": 4629,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 12, "1+3": 19, "1^2+1+1": 10, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 6, "4": 20},
+          "frobenius_maps_to_rep_index": 4642
+        },
+        {
+          "rep": [0, 1, 1, 0, 4, 1],
+          "rep_index": 4641,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 20, "1+3": 21, "1^2+1+1": 5, "1^2+2": 3, "1^3+1": 1, "2+2": 6, "2^2": 1, "4": 16},
+          "frobenius_maps_to_rep_index": 4657
+        },
+        {
+          "rep": [0, 1, 1, 0, 4, 2],
+          "rep_index": 4642,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 12, "1+3": 19, "1^2+1+1": 10, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 6, "4": 20},
+          "frobenius_maps_to_rep_index": 4659
+        },
+        {
+          "rep": [0, 1, 1, 0, 6, 1],
+          "rep_index": 4657,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 20, "1+3": 21, "1^2+1+1": 5, "1^2+2": 3, "1^3+1": 1, "2+2": 6, "2^2": 1, "4": 16},
+          "frobenius_maps_to_rep_index": 4625
+        },
+        {
+          "rep": [0, 1, 1, 0, 6, 3],
+          "rep_index": 4659,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+1+3",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 12, "1+3": 19, "1^2+1+1": 10, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 6, "4": 20},
+          "frobenius_maps_to_rep_index": 4629
+        },
+        {
+          "rep": [1, 0, 0, 1, 3, 6],
+          "rep_index": 32862,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 22, "1+3": 19, "1^2+1+1": 4, "1^2+1^2": 1, "1^2+2": 2, "1^3+1": 1, "2+2": 6, "4": 18},
+          "frobenius_maps_to_rep_index": 32874
+        },
+        {
+          "rep": [1, 0, 0, 1, 5, 2],
+          "rep_index": 32874,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 22, "1+3": 19, "1^2+1+1": 4, "1^2+1^2": 1, "1^2+2": 2, "1^3+1": 1, "2+2": 6, "4": 18},
+          "frobenius_maps_to_rep_index": 32892
+        },
+        {
+          "rep": [1, 0, 0, 1, 7, 4],
+          "rep_index": 32892,
+          "size": 504,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 22, "1+3": 19, "1^2+1+1": 4, "1^2+1^2": 1, "1^2+2": 2, "1^3+1": 1, "2+2": 6, "4": 18},
+          "frobenius_maps_to_rep_index": 32862
+        }
+      ]
+    },
+    "9": {
+      "pg5_points": 66430,
+      "deep_hole_count": 2250,
+      "covering_radius": 5,
+      "pgl2_order": 720,
+      "pgl2_orbit_count": 8,
+      "pgammal_orbit_count": 5,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 1, 0, 4, 0, 6],
+          "rep_index": 6891,
+          "size": 72,
+          "stab_order": 10,
+          "quintic_factor_type": "1+2^2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 45, "1^2+2": 10, "2+2": 35, "2^2": 1},
+          "frobenius_maps_to_rep_index": 6891
+        },
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 9,
+          "size": 90,
+          "stab_order": 8,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 36, "1^2+1^2": 9, "1^2+2": 36, "1^3+1": 9, "1^4": 1},
+          "frobenius_maps_to_rep_index": 9
+        },
+        {
+          "rep": [1, 0, 1, 4, 7, 3],
+          "rep_index": 60168,
+          "size": 144,
+          "stab_order": 5,
+          "quintic_factor_type": "2+3",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 45, "1^2+2": 10, "2+2": 35, "2^2": 1},
+          "frobenius_maps_to_rep_index": 60222
+        },
+        {
+          "rep": [1, 0, 1, 5, 4, 3],
+          "rep_index": 60222,
+          "size": 144,
+          "stab_order": 5,
+          "quintic_factor_type": "2+3",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 45, "1^2+2": 10, "2+2": 35, "2^2": 1},
+          "frobenius_maps_to_rep_index": 60168
+        },
+        {
+          "rep": [0, 1, 0, 0, 0, 4],
+          "rep_index": 6565,
+          "size": 180,
+          "stab_order": 4,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 16, "1+3": 24, "1^2+1+1": 12, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 8, "4": 25},
+          "frobenius_maps_to_rep_index": 6566
+        },
+        {
+          "rep": [0, 1, 0, 0, 0, 5],
+          "rep_index": 6566,
+          "size": 180,
+          "stab_order": 4,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 16, "1+3": 24, "1^2+1+1": 12, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 8, "4": 25},
+          "frobenius_maps_to_rep_index": 6565
+        },
+        {
+          "rep": [0, 1, 0, 1, 4, 2],
+          "rep_index": 6680,
+          "size": 720,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 15, "1+3": 25, "1^2+1+1": 12, "1^2+1^2": 1, "1^2+2": 3, "1^3+1": 2, "2+2": 9, "4": 24},
+          "frobenius_maps_to_rep_index": 6689
+        },
+        {
+          "rep": [0, 1, 0, 1, 5, 2],
+          "rep_index": 6689,
+          "size": 720,
+          "stab_order": 1,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 15, "1+3": 25, "1^2+1+1": 12, "1^2+1^2": 1, "1^2+2": 3, "1^3+1": 2, "2+2": 9, "4": 24},
+          "frobenius_maps_to_rep_index": 6680
+        }
+      ]
+    },
+    "11": {
+      "pg5_points": 177156,
+      "deep_hole_count": 1584,
+      "covering_radius": 5,
+      "pgl2_order": 1320,
+      "pgl2_orbit_count": 4,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 11,
+          "size": 132,
+          "stab_order": 10,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 55, "1^2+1^2": 11, "1^2+2": 55, "1^3+1": 11, "1^4": 1},
+          "frobenius_maps_to_rep_index": 11
+        },
+        {
+          "rep": [0, 0, 0, 1, 0, 0],
+          "rep_index": 121,
+          "size": 132,
+          "stab_order": 10,
+          "quintic_factor_type": "1^3+1^2",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 25, "1+3": 40, "1^2+1+1": 10, "1^3+1": 11, "1^4": 2, "2+2": 15, "4": 30},
+          "frobenius_maps_to_rep_index": 121
+        },
+        {
+          "rep": [0, 1, 0, 2, 0, 4],
+          "rep_index": 14887,
+          "size": 660,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 66, "1^2+2": 12, "2+2": 54, "2^2": 1},
+          "frobenius_maps_to_rep_index": 14887
+        },
+        {
+          "rep": [0, 1, 0, 2, 0, 10],
+          "rep_index": 14893,
+          "size": 660,
+          "stab_order": 2,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 44, "1+3": 30, "1^2+1+1": 7, "1^2+1^2": 1, "1^2+2": 3, "2+2": 9, "2^2": 1, "4": 38},
+          "frobenius_maps_to_rep_index": 14893
+        }
+      ]
+    },
+    "13": {
+      "pg5_points": 402234,
+      "deep_hole_count": 1820,
+      "covering_radius": 5,
+      "pgl2_order": 2184,
+      "pgl2_orbit_count": 3,
+      "pgammal_orbit_count": 3,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 13,
+          "size": 182,
+          "stab_order": 12,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 78, "1^2+1^2": 13, "1^2+2": 78, "1^3+1": 13, "1^4": 1},
+          "frobenius_maps_to_rep_index": 13
+        },
+        {
+          "rep": [0, 1, 0, 0, 0, 2],
+          "rep_index": 28563,
+          "size": 546,
+          "stab_order": 4,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 0,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 42, "1+3": 44, "1^2+1+1": 20, "1^2+1^2": 1, "1^2+2": 4, "1^3+1": 1, "2+2": 16, "4": 55},
+          "frobenius_maps_to_rep_index": 28563
+        },
+        {
+          "rep": [0, 1, 0, 2, 0, 4],
+          "rep_index": 28903,
+          "size": 1092,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 91, "1^2+2": 14, "2+2": 77, "2^2": 1},
+          "frobenius_maps_to_rep_index": 28903
+        }
+      ]
+    },
+    "16": {
+      "pg5_points": 1118481,
+      "deep_hole_count": 2312,
+      "covering_radius": 5,
+      "pgl2_order": 4080,
+      "pgl2_orbit_count": 2,
+      "pgammal_orbit_count": 2,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 16,
+          "size": 272,
+          "stab_order": 15,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 120, "1^2+1^2": 16, "1^2+2": 120, "1^3+1": 16, "1^4": 1},
+          "frobenius_maps_to_rep_index": 16
+        },
+        {
+          "rep": [0, 1, 1, 8, 1, 5],
+          "rep_index": 71701,
+          "size": 2040,
+          "stab_order": 2,
+          "quintic_factor_type": "1+1+1+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 136, "1^2+2": 17, "2+2": 119, "2^2": 1},
+          "frobenius_maps_to_rep_index": 71701
+        }
+      ]
+    },
+    "17": {
+      "pg5_points": 1508598,
+      "deep_hole_count": 2754,
+      "covering_radius": 5,
+      "pgl2_order": 4896,
+      "pgl2_orbit_count": 2,
+      "pgammal_orbit_count": 2,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 17,
+          "size": 306,
+          "stab_order": 16,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 136, "1^2+1^2": 17, "1^2+2": 136, "1^3+1": 17, "1^4": 1},
+          "frobenius_maps_to_rep_index": 17
+        },
+        {
+          "rep": [0, 1, 0, 3, 0, 9],
+          "rep_index": 84397,
+          "size": 2448,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 153, "1^2+2": 18, "2+2": 135, "2^2": 1},
+          "frobenius_maps_to_rep_index": 84397
+        }
+      ]
+    },
+    "19": {
+      "pg5_points": 2613660,
+      "deep_hole_count": 3800,
+      "covering_radius": 5,
+      "pgl2_order": 6840,
+      "pgl2_orbit_count": 4,
+      "pgammal_orbit_count": 4,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 19,
+          "size": 380,
+          "stab_order": 18,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 171, "1^2+1^2": 19, "1^2+2": 171, "1^3+1": 19, "1^4": 1},
+          "frobenius_maps_to_rep_index": 19
+        },
+        {
+          "rep": [0, 1, 0, 2, 0, 4],
+          "rep_index": 131047,
+          "size": 684,
+          "stab_order": 10,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 190, "1^2+2": 20, "2+2": 170, "2^2": 1},
+          "frobenius_maps_to_rep_index": 131047
+        },
+        {
+          "rep": [1, 0, 1, 2, 5, 12],
+          "rep_index": 2483787,
+          "size": 1368,
+          "stab_order": 5,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 190, "1^2+2": 20, "2+2": 170, "2^2": 1},
+          "frobenius_maps_to_rep_index": 2483787
+        },
+        {
+          "rep": [1, 0, 1, 3, 10, 14],
+          "rep_index": 2484245,
+          "size": 1368,
+          "stab_order": 5,
+          "quintic_factor_type": "1+4",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 190, "1^2+2": 20, "2+2": 170, "2^2": 1},
+          "frobenius_maps_to_rep_index": 2484245
+        }
+      ]
+    },
+    "23": {
+      "pg5_points": 6728904,
+      "deep_hole_count": 6624,
+      "covering_radius": 5,
+      "pgl2_order": 12144,
+      "pgl2_orbit_count": 2,
+      "pgammal_orbit_count": 2,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 23,
+          "size": 552,
+          "stab_order": 22,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 253, "1^2+1^2": 23, "1^2+2": 253, "1^3+1": 23, "1^4": 1},
+          "frobenius_maps_to_rep_index": 23
+        },
+        {
+          "rep": [0, 1, 0, 5, 0, 2],
+          "rep_index": 282488,
+          "size": 6072,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 276, "1^2+2": 24, "2+2": 252, "2^2": 1},
+          "frobenius_maps_to_rep_index": 282488
+        }
+      ]
+    },
+    "25": {
+      "pg5_points": 10172526,
+      "deep_hole_count": 8450,
+      "covering_radius": 5,
+      "pgl2_order": 15600,
+      "pgl2_orbit_count": 3,
+      "pgammal_orbit_count": 3,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 25,
+          "size": 26,
+          "stab_order": 600,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 300, "1^2+1^2": 25, "1^2+2": 300, "1^3+1": 25, "1^4": 1},
+          "frobenius_maps_to_rep_index": 25
+        },
+        {
+          "rep": [0, 0, 0, 0, 1, 1],
+          "rep_index": 26,
+          "size": 624,
+          "stab_order": 25,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 300, "1^2+1^2": 25, "1^2+2": 300, "1^3+1": 25, "1^4": 1},
+          "frobenius_maps_to_rep_index": 26
+        },
+        {
+          "rep": [0, 1, 0, 5, 0, 2],
+          "rep_index": 393752,
+          "size": 7800,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2+2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 325, "1^2+2": 26, "2+2": 299, "2^2": 1},
+          "frobenius_maps_to_rep_index": 393752
+        }
+      ]
+    },
+    "27": {
+      "pg5_points": 14900788,
+      "deep_hole_count": 10584,
+      "covering_radius": 5,
+      "pgl2_order": 19656,
+      "pgl2_orbit_count": 2,
+      "pgammal_orbit_count": 2,
+      "pgl2_orbits": [
+        {
+          "rep": [0, 0, 0, 0, 1, 0],
+          "rep_index": 27,
+          "size": 756,
+          "stab_order": 26,
+          "quintic_factor_type": "1^4+1",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1^2+1+1": 351, "1^2+1^2": 27, "1^2+2": 351, "1^3+1": 27, "1^4": 1},
+          "frobenius_maps_to_rep_index": 27
+        },
+        {
+          "rep": [0, 1, 0, 2, 0, 1],
+          "rep_index": 532900,
+          "size": 9828,
+          "stab_order": 2,
+          "quintic_factor_type": "1+2^2",
+          "net_gcd_deg": 2,
+          "totalsplit_members": 0,
+          "member_hist": {"1+1+2": 378, "1^2+2": 28, "2+2": 350, "2^2": 1},
+          "frobenius_maps_to_rep_index": 532900
+        }
+      ]
+    }
+  }
+}

@@ -1,29 +1,50 @@
 # Reproducing the computational supplement
 
-The exact current artifact paths, working directories, commands, searched
-domains, stop conditions, and trust boundaries are recorded in
-`../verification-map.md`.  That file is the source of truth during manuscript
-development.  Before release, this document will be generated into a
-self-contained archive view with the same literal commands and no
-repository-relative ambiguity.
+The complete local evidence bundle is under this `supplement/` directory.
+`EVIDENCE-MANIFEST.json` records every stable path, SHA-256 value, byte count,
+and replay class; `EVIDENCE-ROWS.md` is its human-readable rendering.  Verify
+the bundle without access to the development monorepo by running, from the
+paper directory:
 
-## Required release environment
+```text
+python3 supplement/package_evidence_bundle.py --check
+python3 supplement/build_classification_records.py --check
+(cd supplement && sha256sum -c CLASSIFICATION-RECORDS.sha256)
+```
 
-The monorepo is development infrastructure and is not a publication
-artifact.  The immutable release must be built from a reviewed,
-paper-specific fresh-history export and record:
+## Pinned environment
 
-- public paper-export repository URL, tag, and commit;
-- archive identifier and DOI;
-- operating-system and architecture;
-- Python, Rust, Lean, and Lake versions where applicable;
-- exact working directory for every command;
-- generator, certificate, replay, and manifest SHA-256 values and byte counts.
+The exact Lean, Lake, Nix, and Rust dependency locks used by the development
+tree are copied into `supplement/toolchain/` and hashed in the evidence
+manifest:
 
-The export contains only the manuscript, public supplement, minimal
-verifiers/certificates, adequacy/provenance sources, and a pin to one
-shared-public-Lean commit with an exact target list.  It does not contain or
-link to the private monorepo as the release repository.
+- `lean-toolchain`;
+- `lake-manifest.json`;
+- `export-flake.lock` and `export-flake.nix`;
+- `Cargo.lock`.
+
+The Python replays use only the standard library.  The two Rust generators
+require a Rust compiler compatible with the copied lock.  External repository,
+tag, archive, and DOI fields belong to the immutable publication step and are
+listed separately in `RELEASE-MANIFEST.md`.
+
+The paper-export root also contains `flake.nix`, `flake.lock`, and
+`lean-toolchain`.  Enter the pinned environment before building or replaying:
+
+```text
+nix develop
+```
+
+In the export layout, `../lean` is the repository root of the public
+formal-verification checkout
+`https://github.com/tavisrudd/finitegeom`.  The separately distributed Q25
+certificate payload is assigned to
+`https://github.com/tavisrudd/finitegeom-q25-certificates`.  Their immutable
+commit revisions are release metadata in `RELEASE-MANIFEST.md`.  They are not
+silently replaced by paths into the development monorepo.  Until those
+repositories and revisions are published, the local bundle checks the
+paper-local evidence and Lean interface described in the manuscript but does
+not claim an externally fetchable formal replay.
 
 ## Replay semantics
 
@@ -32,7 +53,7 @@ The release manifest assigns every replay one of the schema labels
 `CERTIFICATE-SCHEMA.md`.  A successful comparison-only replay is never
 described as an independent derivation.
 
-## Development replay map
+## Replay map
 
 | Public label | Domain/stop condition | Replay boundary |
 |---|---|---|
@@ -47,33 +68,56 @@ described as an independent derivation.
 | Certificate Lucas | recorded Lucas arithmetic parameter domain | independent arithmetic replay |
 | Certificate e7 | recorded quotient-cover open set and additive specialization | independent quotient-cover replay |
 
-The public R5--R7 orbit tables are a deterministic projection of the
-hash-pinned frozen certificates.  From the development repository root run:
+## Exact replay commands
+
+Run these from the paper directory.  Each subshell changes only to the
+paper-local directory containing the named certificate.
 
 ```text
-python3 papers/beyond4_prs/supplement/build_classification_records.py --check
+(cd supplement/evidence/r5 && python3 2026-07-22-c491-prs-deep-hole-replay.py --json 2026-07-22-c491-prs-deep-hole-census.json)
+(cd supplement/evidence/r6 && python3 2026-07-22-c498-prs-deep-hole-replay.py --json 2026-07-22-c498-prs-deep-hole-census.json)
+(cd supplement/evidence/r6-normal-forms && python3 2026-07-23-c498-small-exceptional-normal-forms.py --summary)
+(cd supplement/evidence/r7 && python3 2026-07-23-c509-prs-deep-hole-calibration-replay.py)
+(cd supplement/evidence/r8 && python3 2026-07-23-c513-prs-redundancy-eight-replay.py)
+(cd supplement/evidence/r9 && python3 2026-07-23-c516-prs-redundancy-nine-replay.py)
+(cd supplement/evidence/hessian && python3 2026-07-23-c525-ordered-hessian-arf-pullback-replay.py)
+(cd supplement/evidence/lucas && python3 2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py)
+(cd supplement/evidence/e7 && python3 2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py)
+```
+
+The R9-49 generator is the sole exhaustive implementation of that carrier,
+not an independent replay.  Compile it into a disposable build directory and
+compare its complete output:
+
+```text
+mkdir -p .replay-build
+rustc -O supplement/evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.rs -o .replay-build/r9-q49
+.replay-build/r9-q49 > .replay-build/r9-q49.txt
+cmp .replay-build/r9-q49.txt supplement/evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.txt
+```
+
+The public R5--R7 orbit tables are a deterministic projection of the
+hash-pinned frozen certificates.  From the paper directory run:
+
+```text
+python3 supplement/build_classification_records.py --check
 ```
 
 This verifies the embedded source hashes, every projected record, and every
 orbit-size completeness sum.  It does not rerun the classifications.
 
-Literal commands and internal artifact names remain in
-`../verification-map.md` until the release archive supplies stable paths.
-
 ## Public classification-record extraction
 
-From `papers/beyond4_prs/` in the development checkout:
+From the paper directory:
 
 ```text
-python3 supplement/build_classification_records.py
-git diff --exit-code -- supplement/CLASSIFICATION-RECORDS.json
+python3 supplement/build_classification_records.py --check
 jq -e 'all(.records[].fields[]; .exhaustion_identity == true)' \
   supplement/CLASSIFICATION-RECORDS.json
 ```
 
-The first command reads only the frozen R5, R6, R6-NF, and R7 certificates
-named by the builder.  It stops after serializing all 19 R5 fields, 11 R6
-fields, and 14 R7 fields.  The second command proves byte-for-byte agreement
-with the committed public record; the third independently checks every
-recorded orbit-size exhaustion identity.  This extraction does not rerun the
-underlying finite classifications.
+The builder reads only the bundled R5, R6, R6-NF, and R7 certificates.  It
+stops after serializing all 19 R5 fields, 11 R6 fields, and 14 R7 fields, and
+proves byte-for-byte agreement with the committed public record.  The `jq`
+command independently checks every recorded orbit-size exhaustion identity.
+This extraction does not rerun the underlying finite classifications.

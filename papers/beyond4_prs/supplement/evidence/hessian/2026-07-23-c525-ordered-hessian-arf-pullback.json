@@ -1,0 +1,107 @@
+{
+  "bounds": {
+    "best_integer_threshold": "min((n-4)*(n+3)/2+1,5*(n-4))",
+    "deletion_formula": "3*n-4",
+    "disjoint_block_formula": "q>=5*(n-4)",
+    "quadratic_strict_formula": "q>(n-4)*(n+3)/2",
+    "table": [
+      {
+        "base_selection_threshold": 5,
+        "degree": 5,
+        "deletion": 11,
+        "disjoint_five_blocks": 5,
+        "quadratic_strict_bound": 4
+      },
+      {
+        "base_selection_threshold": 10,
+        "degree": 6,
+        "deletion": 14,
+        "disjoint_five_blocks": 10,
+        "quadratic_strict_bound": 9
+      },
+      {
+        "base_selection_threshold": 15,
+        "degree": 7,
+        "deletion": 17,
+        "disjoint_five_blocks": 15,
+        "quadratic_strict_bound": 15
+      },
+      {
+        "base_selection_threshold": 20,
+        "degree": 8,
+        "deletion": 20,
+        "disjoint_five_blocks": 20,
+        "quadratic_strict_bound": 22
+      },
+      {
+        "base_selection_threshold": 25,
+        "degree": 9,
+        "deletion": 23,
+        "disjoint_five_blocks": 25,
+        "quadratic_strict_bound": 30
+      },
+      {
+        "base_selection_threshold": 30,
+        "degree": 10,
+        "deletion": 26,
+        "disjoint_five_blocks": 30,
+        "quadratic_strict_bound": 39
+      },
+      {
+        "base_selection_threshold": 35,
+        "degree": 11,
+        "deletion": 29,
+        "disjoint_five_blocks": 35,
+        "quadratic_strict_bound": 49
+      },
+      {
+        "base_selection_threshold": 40,
+        "degree": 12,
+        "deletion": 32,
+        "disjoint_five_blocks": 40,
+        "quadratic_strict_bound": 60
+      }
+    ]
+  },
+  "complementary_ruling_conic": {
+    "contained_root_line_pullback": "rank at most one by consecutive-linear-form proportionality",
+    "ideal": [
+      "z0",
+      "z5",
+      "z2+z3",
+      "z1*z4+z2^2"
+    ]
+  },
+  "field_check": {
+    "all_lines": 357,
+    "complementary_conic": 5,
+    "field": "F4=x^2+x+1",
+    "inseparable": 10,
+    "persistent_surface": 21,
+    "reducible_separable": 20,
+    "reducible_separable_without_rational_vertical": 10,
+    "unexplained_reducible_separable_without_rational_vertical": 0
+  },
+  "normal_forms": {
+    "semisimple": "g(t)=c*t forces c^2+c+1=0 and line <X^2Y,XY^2>=XY*E",
+    "unipotent": "g(t)=t+1 forces delta=gamma=0 and a*gamma=1, contradiction"
+  },
+  "persistent_surface": {
+    "ideal": "2x2 minors of [[z0,z1,z2],[z1,z3+z2,z4],[z2,z4,z5]]",
+    "meaning": "line q*E for q=a*X^2+b*X*Y+c*Y^2",
+    "parametrization": "[a^2,a*b,a*c,b^2+a*c,b*c,c^2]"
+  },
+  "schema": "c525-ordered-hessian-arf-pullback-v1",
+  "universal": {
+    "arithmetic_genus": 1,
+    "bidegree": [
+      2,
+      2
+    ],
+    "incidence": "Nu(u,v)*X^2+Ns(u,v)*X*Y+D(u,v)*Y^2",
+    "inseparable_locus": "two rulings of Q: Ns=0",
+    "line": "U*u+V*v in P(Gamma^3 E)",
+    "separable_external_factorization": "persistent surface q*E",
+    "vertical_factor": "line meets the twisted cubic"
+  }
+}

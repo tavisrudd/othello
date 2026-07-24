@@ -9,45 +9,44 @@ import json
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[3]
-NOTES = ROOT / "notes"
-OUT = Path(__file__).with_name("CLASSIFICATION-RECORDS.json")
+SUPPLEMENT = Path(__file__).resolve().parent
+OUT = SUPPLEMENT / "CLASSIFICATION-RECORDS.json"
 
 ARTIFACTS = {
     "R5": (
-        "2026-07-22-c491-prs-deep-hole-census.py",
-        "2026-07-22-c491-prs-deep-hole-census.json",
-        "2026-07-22-c491-prs-deep-hole-replay.py",
+        "evidence/r5/2026-07-22-c491-prs-deep-hole-census.py",
+        "evidence/r5/2026-07-22-c491-prs-deep-hole-census.json",
+        "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
     ),
     "R6": (
-        "2026-07-22-c498-prs-deep-hole-census.rs",
-        "2026-07-22-c498-prs-deep-hole-census.json",
-        "2026-07-22-c498-prs-deep-hole-replay.py",
+        "evidence/r6/2026-07-22-c498-prs-deep-hole-census.rs",
+        "evidence/r6/2026-07-22-c498-prs-deep-hole-census.json",
+        "evidence/r6/2026-07-22-c498-prs-deep-hole-replay.py",
     ),
     "R6-NF": (
-        "2026-07-23-c498-small-exceptional-normal-forms.py",
-        "2026-07-23-c498-small-exceptional-normal-forms.json",
+        "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.py",
+        "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.json",
     ),
     "R7": (
-        "2026-07-23-c509-prs-deep-hole-calibration.py",
-        "2026-07-23-c509-prs-deep-hole-calibration.json",
-        "2026-07-23-c509-prs-deep-hole-calibration-replay.py",
+        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.py",
+        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.json",
+        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration-replay.py",
     ),
 }
 
 
 def load(name: str) -> dict:
-    return json.loads((NOTES / name).read_text())
+    return json.loads((SUPPLEMENT / name).read_text())
 
 
 def integrity(names: tuple[str, ...]) -> list[dict]:
     rows = []
     for name in names:
-        path = NOTES / name
+        path = SUPPLEMENT / name
         data = path.read_bytes()
         rows.append(
             {
-                "provenance_filename": name,
+                "artifact_path": name,
                 "sha256": hashlib.sha256(data).hexdigest(),
                 "bytes": len(data),
             }

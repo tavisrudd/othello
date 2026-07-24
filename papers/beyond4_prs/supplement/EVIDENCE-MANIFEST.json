@@ -1,0 +1,423 @@
+{
+  "entries": [
+    {
+      "bytes": 3139,
+      "path": "evidence/hessian/2026-07-23-c525-ordered-hessian-arf-pullback-replay.py",
+      "public_label": "Certificate Hessian",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "47d7d11187ad0146cd2d40809b17e607b4b19f8d8597e13b25e73e70ed7ac200"
+    },
+    {
+      "bytes": 2948,
+      "path": "evidence/hessian/2026-07-23-c525-ordered-hessian-arf-pullback.json",
+      "public_label": "Certificate Hessian",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "6986987fc4bdcc070c272e3b012d7489a25ac26be1146c0c6687b4fb0e881802"
+    },
+    {
+      "bytes": 8566,
+      "path": "evidence/hessian/2026-07-23-c525-ordered-hessian-arf-pullback.py",
+      "public_label": "Certificate Hessian",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "31b6d03088e98022d6d0cc5638c68aa196b6d094b375e56022ec71c075eb3777"
+    },
+    {
+      "bytes": 596,
+      "path": "evidence/hessian/2026-07-23-c525-ordered-hessian-arf-pullback.sha256",
+      "public_label": "Certificate Hessian",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "39b6a79a3b136cb0cc4ae2cd34f97666eacbbcd6e072c01bd3c3ba7efe68bff0"
+    },
+    {
+      "bytes": 3712,
+      "path": "evidence/lucas/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py",
+      "public_label": "Certificate Lucas",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "7aeda99cfd1e422b758385d831cdf4c897032db7fda84f2d7d9b21541296282a"
+    },
+    {
+      "bytes": 6003,
+      "path": "evidence/lucas/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.json",
+      "public_label": "Certificate Lucas",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "a15b7c42e31deb1e040837c7512ae27128c5d3763729fc5fc1517647f451f2a5"
+    },
+    {
+      "bytes": 6498,
+      "path": "evidence/lucas/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.py",
+      "public_label": "Certificate Lucas",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "311fa542b294153913eeaba1bb7c24859fa943e8942640397fdac16a9fc9d532"
+    },
+    {
+      "bytes": 525,
+      "path": "evidence/lucas/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.sha256",
+      "public_label": "Certificate Lucas",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "8beea4285ce2440e77a19b236bde1bd1a95023a4f0fe904e24961215b51f99b6"
+    },
+    {
+      "bytes": 62107,
+      "path": "evidence/r5/2026-07-22-c491-prs-deep-hole-census.json",
+      "public_label": "Certificate R5",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "7055b428ef0738921ddc472173e6d51da1c36660caa56d2e4dc1add156733283"
+    },
+    {
+      "bytes": 33884,
+      "path": "evidence/r5/2026-07-22-c491-prs-deep-hole-census.py",
+      "public_label": "Certificate R5",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "0b55dd5aaddfbac56e3c59d25ba0864454e0b712ed7baee77ba0ab0df476c16d"
+    },
+    {
+      "bytes": 21749,
+      "path": "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
+      "public_label": "Certificate R5",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "53cb8cfc9158cc4ed505245500a01f380fdd3ef89c29fc27d7cad326c4579f08"
+    },
+    {
+      "bytes": 425,
+      "path": "evidence/r5/2026-07-22-c491-prs-redundancy-five.sha256",
+      "public_label": "Certificate R5",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "a8fc82d2341de7ff6594075da8bc0aa2bb3309272b9bb5977baf635b7f3ebbb6"
+    },
+    {
+      "bytes": 27077,
+      "path": "evidence/r6/2026-07-22-c498-prs-deep-hole-census.json",
+      "public_label": "Certificate R6",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3"
+    },
+    {
+      "bytes": 37556,
+      "path": "evidence/r6/2026-07-22-c498-prs-deep-hole-census.rs",
+      "public_label": "Certificate R6",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "72f2f9a4eee6791dfe02f49716a569ac334d147b131630d8a8096d7b4e6e4412"
+    },
+    {
+      "bytes": 16760,
+      "path": "evidence/r6/2026-07-22-c498-prs-deep-hole-replay.py",
+      "public_label": "Certificate R6",
+      "replay_class": "reconstruct",
+      "role": "replay",
+      "sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
+    },
+    {
+      "bytes": 424,
+      "path": "evidence/r6/2026-07-22-c498-prs-redundancy-six.sha256",
+      "public_label": "Certificate R6",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "49b3130a35fc8ada7d87074c3f464754876e6ad6ed0ae2a82268eb8659e30377"
+    },
+    {
+      "bytes": 58730,
+      "path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.json",
+      "public_label": "Certificate R6-NF",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "84d4db1e939c62e65ac8df7e43a312aca317c8610cdcafb3ead9769ba4ff9880"
+    },
+    {
+      "bytes": 22092,
+      "path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.py",
+      "public_label": "Certificate R6-NF",
+      "replay_class": "rederive",
+      "role": "generator-checker",
+      "sha256": "397ec7645232fbdcfe5a7a3e877daa0d20b81de0f2082e2d9a54e49fbb76a74a"
+    },
+    {
+      "bytes": 388,
+      "path": "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.sha256",
+      "public_label": "Certificate R6-NF",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "e7299f8ff0ffed3137fc58d20c15dad27ace429583c217ccaf3c0c0cb497b66a"
+    },
+    {
+      "bytes": 16760,
+      "path": "evidence/r7/2026-07-22-c498-prs-deep-hole-replay.py",
+      "public_label": "Certificate R7",
+      "replay_class": "reconstruct",
+      "role": "dependency-replay",
+      "sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
+    },
+    {
+      "bytes": 6265,
+      "path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration-replay.py",
+      "public_label": "Certificate R7",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "9d21e10a262f203a01f902db19c820cd9c1574819833e95a51f50ca1eb67d63f"
+    },
+    {
+      "bytes": 175422,
+      "path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.json",
+      "public_label": "Certificate R7",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "9034befae239a1d578556e78a06df1d04dccc828a7f6cb08f874533c84c50906"
+    },
+    {
+      "bytes": 21396,
+      "path": "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.py",
+      "public_label": "Certificate R7",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "b5da2754ffa56177228036c4c775bfee086d76e24a4e9a03f5b27cb625df73a8"
+    },
+    {
+      "bytes": 766,
+      "path": "evidence/r7/2026-07-23-c509-prs-redundancy-seven.sha256",
+      "public_label": "Certificate R7",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "4536e6ad8ac3bf398650abefd97b3757d6aca15e613141c0e20fd27f787ee642"
+    },
+    {
+      "bytes": 7978,
+      "path": "evidence/r8/2026-07-23-c513-prs-redundancy-eight-replay.py",
+      "public_label": "Certificate R8",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "c229ff61e9dad1149e9ee38a221f6a58e64dbd20cb36bdd1173bca23767dcf84"
+    },
+    {
+      "bytes": 9843,
+      "path": "evidence/r8/2026-07-23-c513-prs-redundancy-eight.json",
+      "public_label": "Certificate R8",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "57dfc82e07579a166522f21684e610d463ce231e223da46eb7fd8908f14efd4e"
+    },
+    {
+      "bytes": 15003,
+      "path": "evidence/r8/2026-07-23-c513-prs-redundancy-eight.py",
+      "public_label": "Certificate R8",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "857491a5d08ead1fe4f5355a621d935d518039dcc8b8ae38487dd8120a38426d"
+    },
+    {
+      "bytes": 586,
+      "path": "evidence/r8/2026-07-23-c513-prs-redundancy-eight.sha256",
+      "public_label": "Certificate R8",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "0d461bb7cc7850293408d1f1408ffcd8442b55a0426d369bee67f3602bac091b"
+    },
+    {
+      "bytes": 5436,
+      "path": "evidence/papers/beyond4_prs/supplement/R9-SLICE-DATA.md",
+      "public_label": "Certificate R9",
+      "replay_class": "compare",
+      "role": "slice-data mirror",
+      "sha256": "ba780a919786b1797a884658080282632ec33a9c6dc675b5d77d6083f566e922"
+    },
+    {
+      "bytes": 11046,
+      "path": "evidence/r9/2026-07-23-c516-prs-redundancy-nine-replay.py",
+      "public_label": "Certificate R9",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "4d5ba7a790bd5ca328948bd1c4f49f4d9fb8eb9b97d3ce514acb2fb8be83f807"
+    },
+    {
+      "bytes": 9514,
+      "path": "evidence/r9/2026-07-23-c516-prs-redundancy-nine.json",
+      "public_label": "Certificate R9",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "f54361ad80c0b79acc4496b50dbb558ba5ce070b28337115647f4bd17d288f1f"
+    },
+    {
+      "bytes": 19006,
+      "path": "evidence/r9/2026-07-23-c516-prs-redundancy-nine.py",
+      "public_label": "Certificate R9",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "4dee64e8e466f3a1c2e5df0c30135cbd4274a277663becd080aa33a2b0912ae9"
+    },
+    {
+      "bytes": 996,
+      "path": "evidence/r9/2026-07-23-c516-prs-redundancy-nine.sha256",
+      "public_label": "Certificate R9",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "61af25fb586737477f6421016f1f89a534f14372d8a3409bf7640fe0bed8e578"
+    },
+    {
+      "bytes": 6344,
+      "path": "evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.rs",
+      "public_label": "Certificate R9-49",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "83968afe15b547ef8ccbd9fc7cf148aa21101ebad522eb51bcc965bd3552a4e6"
+    },
+    {
+      "bytes": 611,
+      "path": "evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.txt",
+      "public_label": "Certificate R9-49",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "d7574cad8fa9bc7f3cd73ce1055f7ea606256cf7f5f40c7ef547c5eed2967ad9"
+    },
+    {
+      "bytes": 3537,
+      "path": "evidence/e7/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py",
+      "public_label": "Certificate e7",
+      "replay_class": "rederive",
+      "role": "replay",
+      "sha256": "21f3d5cb055a27ad91e60c1b423c2ac07907014d05bf95de734c47ae39bcb6b2"
+    },
+    {
+      "bytes": 8738,
+      "path": "evidence/e7/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.json",
+      "public_label": "Certificate e7",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "2c609f88af9a009322738b5b35235d5d61a7114dd1a20c1d7e42a1dac8476245"
+    },
+    {
+      "bytes": 6841,
+      "path": "evidence/e7/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.py",
+      "public_label": "Certificate e7",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "ee93149b0abb27bdd7c910e205d729730461a7fe0e84ea0ab42da979fdfff5cd"
+    },
+    {
+      "bytes": 493,
+      "path": "evidence/e7/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.sha256",
+      "public_label": "Certificate e7",
+      "replay_class": "compare",
+      "role": "checksum",
+      "sha256": "ec8667b39b9f253600c1fa164fa8143018c9395f2152fe847ac0dd78a3a1104c"
+    },
+    {
+      "bytes": 4199,
+      "path": "CERTIFICATE-SCHEMA.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Certificate schema",
+      "sha256": "780019fccf5db182d1323550615bbfae90495f446cdb9dddc456453234e475e2"
+    },
+    {
+      "bytes": 545912,
+      "path": "CLASSIFICATION-RECORDS.json",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Classification records",
+      "sha256": "b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2"
+    },
+    {
+      "bytes": 96416,
+      "path": "CLASSIFICATION-RECORDS.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Classification-record guide",
+      "sha256": "26da2b22a753fdbcb7f5a23fa09cc414fb0c8ac83a896920bcb0259b8867660d"
+    },
+    {
+      "bytes": 649,
+      "path": "CLASSIFICATION-RECORDS.sha256",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Classification-record checksums",
+      "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
+    },
+    {
+      "bytes": 5436,
+      "path": "R9-SLICE-DATA.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Residual-slice data",
+      "sha256": "ba780a919786b1797a884658080282632ec33a9c6dc675b5d77d6083f566e922"
+    },
+    {
+      "bytes": 5997,
+      "path": "REPRODUCING.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Reproduction guide",
+      "sha256": "6e43ff34dd912d93bf8d8dfbc11f6f1e82dcfe3cdd5f7a929cee4b8773a6f644"
+    },
+    {
+      "bytes": 12059,
+      "path": "build_classification_records.py",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Classification-record builder",
+      "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
+    },
+    {
+      "bytes": 14124,
+      "path": "package_evidence_bundle.py",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Bundle verifier",
+      "sha256": "2a727bc2f7a76b3c1b65bb62ef25002f6064b6570d5e9c256c2425aa28b26855"
+    },
+    {
+      "bytes": 17225,
+      "path": "toolchain/Cargo.lock",
+      "public_label": "Toolchain",
+      "replay_class": "compare",
+      "role": "Rust dependency lock",
+      "sha256": "8b5372b758f4dd69c0e4ba23eb437e2ed69a2c8865a46a3cb57399e8dd54badd"
+    },
+    {
+      "bytes": 567,
+      "path": "toolchain/export-flake.lock",
+      "public_label": "Toolchain",
+      "replay_class": "compare",
+      "role": "Nix dependency lock",
+      "sha256": "c19a4806fc3da5ee8889787e0bc7b25cabdb5d7aed580742ac7411e660468bdf"
+    },
+    {
+      "bytes": 988,
+      "path": "toolchain/export-flake.nix",
+      "public_label": "Toolchain",
+      "replay_class": "compare",
+      "role": "Nix environment",
+      "sha256": "36f955548aa3ea98b098cb8fe48084978a0f61e4ae1b0ec483c8bd269029d1da"
+    },
+    {
+      "bytes": 3161,
+      "path": "toolchain/lake-manifest.json",
+      "public_label": "Toolchain",
+      "replay_class": "compare",
+      "role": "Lake dependency lock",
+      "sha256": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e"
+    },
+    {
+      "bytes": 29,
+      "path": "toolchain/lean-toolchain",
+      "public_label": "Toolchain",
+      "replay_class": "compare",
+      "role": "Lean toolchain",
+      "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
+    }
+  ],
+  "hash": "sha256",
+  "path_base": "supplement",
+  "schema": "beyond-four-prs-evidence-manifest-v1"
+}
