@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** implemented and clean-replayed; awaiting the user-launched
-independent review required before final `GO`
+**Status:** repaired after the user-launched independent `NO-GO`; awaiting
+the separately user-launched post-fix review required before final `GO`
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -52,21 +52,21 @@ review and post-fix `GO` specified in the closing protocol below.
 The focused Paper I surface was built from the manuscript rather than by
 filtering the fallback manifest. It is committed in
 `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`,
-`3d1eac40`, and `573e0ef8`. The first commit is the exact pinned formal
-source commit; the later commits only repin and harden the Paper I release
-surface.
+`3d1eac40`, `573e0ef8`, and post-review repair `3ed43a0d`. The first commit
+is the exact pinned formal source commit; the later commits repin, harden,
+and repair the Paper I release surface.
 
 ### Frozen artifacts
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `papers/clebsch-rigidity/clebsch_rigidity.tex` | 68,072 | `21ed256547cea391ec1555bc58e8549d66ce9052e9beee1f9cffe8e3c5e3e56a` |
-| `papers/clebsch-rigidity/clebsch_rigidity.pdf` | 175,777 | `eb661537689069d88ae0d295246eef1d9bd3f9eb5be301ce7964467baf63c7b3` |
-| `papers/clebsch-rigidity/verification/statement_identity.json` | 15,522 | `629389ef318fec6d31491020191f6d5617776872f636a8d6da63eb06cda082d8` |
-| `papers/clebsch-rigidity/verification/trust_manifest.json` | 55,944 | `b3af1f7cefeafa0b7e69b260e1f898bbf89b254a88f767955756ece99c853560` |
+| `papers/clebsch-rigidity/clebsch_rigidity.tex` | 67,973 | `17c6deff3ef29f03d9aeb98fd700cb4a1ef343f0f3f3fd5c19741decd5925c9a` |
+| `papers/clebsch-rigidity/clebsch_rigidity.pdf` | 175,664 | `3a58346d083d5fe40df883cc8fc8045ba3a444eb74b076b4f902da2dbcee6209` |
+| `papers/clebsch-rigidity/verification/statement_identity.json` | 15,451 | `aa586b5864b3b0a107d87b4307398e35e2cf4b09ceba98392964ebe4dfff61b2` |
+| `papers/clebsch-rigidity/verification/trust_manifest.json` | 60,055 | `a885307fc0295e0226259c3990a3e0a79bfeb1d5020814fe81c7a48cca1ffb87` |
 | `papers/clebsch-rigidity/verification/checker_outputs.json` | 1,716 | `d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56` |
-| `papers/clebsch-rigidity/verification/verify-release-output.json` | 1,263 | `d51911b8b1e61aec3c682d9ab765cfb0cb03639893c30a692d0ff3f2937a1a74` |
-| `papers/clebsch-rigidity/verification/verify_release.py` | 10,275 | `25bd088646de27d4cce9acccb18891cf8b9c237a0fa523e9c2a69adaa865f849` |
+| `papers/clebsch-rigidity/verification/verify-release-output.json` | 1,768 | `6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a` |
+| `papers/clebsch-rigidity/verification/verify_release.py` | 11,136 | `94e514d3cc7de42a99280ff779e6a22cd1b93a9bd457b16515f5cf1b2ea65cca` |
 | `lean/RelativeConicArcs/Gates/ClebschRigidityTrust.lean` | 3,436 | `dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69` |
 | `lean/verification/clebsch_rigidity_trust/axiom-audit.txt` | 3,365 | `ef031beeb322b7bd217651aec0b1822b231a01991c1652e21e048bc9f5305767` |
 
@@ -201,6 +201,53 @@ independent review, not another implementing-agent polish pass.
   this gate. The user must launch the cold reviewer, and any finding requires
   a fix followed by a separately user-launched post-fix review. C320 stays
   live until that reviewer records final `GO`.
+
+## User-launched independent review and repair
+
+**Review date:** 2026-07-24
+
+**Review verdict:** `NO-GO`.
+
+The cold review sampled paper-to-manifest, manifest-to-terminal,
+gate-to-import, checker-to-coverage, and command-to-artifact links. The
+mechanical release command was green, but the review found semantic omissions
+that the original validator did not reject:
+
+1. theorem row 17 omitted the human degenerate-conic reduction from its
+   decomposition and described a nonsingular-conic Lean terminal as the exact
+   implication;
+2. the fourth stabilizer clause required an unrecorded
+   Storme--Van Maldeghem converse;
+3. row 26 omitted Dye's associated-conic edge criterion preceding his
+   Theorem 6;
+4. rows 25 and 29 omitted the classical inputs inherited through their
+   rigidity and field-uniqueness dependencies;
+5. six replay routes used generic coverage prose and five multi-checker
+   routes encoded English-composed commands;
+6. the deterministic release result did not attest the exact source,
+   statement identity, PDF, checker certificate, or semantic release
+   surface.
+
+Commit `3ed43a0d` repairs every finding. The principal theorem now has the
+three geometric equivalences; Dye's stabilizer theorem is a consequence, so
+no load-bearing Storme--Van Maldeghem converse remains. Row 17 separates the
+human degenerate-conic argument from the kernel-checked nonsingular
+implication. Rows 25, 26, and 29 name their complete transitive classical
+inputs. Every replay gives its exact finite domain and structured checker
+argv, and the validator rejects generic coverage, missing required citations,
+or checker commands absent from the fifteen-check runner. The release output
+now attests the source, PDF, statement identity, checker-output certificate,
+and a canonical self-reference-free release-surface hash. The public
+manuscript PDF and both public README files are manifest-pinned.
+
+The verification-tool suite increased from eight to eleven tests. The
+repaired source builds to 19 pages with no warning. The clean fifteen-check
+replay passed in 3 minutes 1 second at Paper I commit `3ed43a0d` and Lean pin
+`bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`; its stdout exactly matches the
+tracked release-output hash
+`6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a`.
+C320 now stops for a separately user-launched post-fix cold review. This
+repairing session cannot supply the final `GO`.
 
 ## Preserved mega-paper ledger — fallback evidence only
 

@@ -8,20 +8,24 @@
 > path. The 37-page mega-paper and its evidence surface are preserved
 > unchanged as a fallback, not as the active release target. Historical
 > planning and review records are linked at the end.
+>
+> **ROUTING AUTHORITY.** This handoff is the single entry point for all active
+> Clebsch paper work. No dated planning note, archived mega-paper verdict, or
+> completed task report may override the order stated here.
 
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 19-page candidate with a complete nineteen-row release surface
-and a green clean replay. It lives in `papers/clebsch-rigidity/`. C320 is
-still live at the mandatory user-launched independent-review gate; the
-implementing agent's pre-review verdict is `READY FOR INDEPENDENT REVIEW`,
-not final `GO`.
+warning-free 19-page candidate with a complete nineteen-row release surface.
+It lives in `papers/clebsch-rigidity/`. The user-launched independent C320
+review returned `NO-GO`; commit `3ed43a0d` repairs every finding. C320 is
+still live and now waits for the separately user-launched post-fix review.
+Only that review may return final `GO`.
 
 The active order is strict:
 
-1. **C320:** obtain the user-launched independent review, repair every
-   finding, and obtain the separately launched post-fix `GO`.
+1. **C320:** obtain the separately user-launched post-fix `GO`; the repaired
+   clean replay is green.
 2. **C182:** archive and release Paper I.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
@@ -50,7 +54,7 @@ The authoritative split records are:
 
 | role | root | status |
 |---|---|---|
-| Paper I | `papers/clebsch-rigidity/` | release surface green; C320 independent review next |
+| Paper I | `papers/clebsch-rigidity/` | review findings repaired and clean replay green; separate C320 post-fix review next |
 | Paper II | `papers/clebsch-factorization/` | compilable spine; C577 gated behind Paper I |
 | Paper III | `papers/clebsch-passages/` | exploratory spine; C579 gated behind Paper II |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
@@ -98,7 +102,7 @@ in `notes/2026-07-20-c320-clebsch-trust-ledger.md`. The exact formal source
 pin is `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`; the manifest is
 `papers/clebsch-rigidity/verification/trust_manifest.json`.
 
-The independent reviewer starts from:
+The post-fix reviewer starts from:
 
 - `papers/clebsch-rigidity/clebsch_rigidity.tex`;
 - the nineteen rows `2, 11--26, 29, 58` in
@@ -116,10 +120,11 @@ C320's implemented surface:
 4. pins hashes, toolchains, the exact formal source commit, and manuscript
    correspondence while preserving the fallback surface byte-for-byte.
 
-The implementing agent must not launch or simulate the reviewer. The user
-now launches the independent cold review. Any finding blocks completion and
-requires a fix plus a separately user-launched post-fix review; only its final
-`GO` advances to C182.
+The user-launched independent cold review returned `NO-GO`, commit
+`3ed43a0d` repairs its findings, and the repaired fifteen-check clean replay
+is green. The implementing agent must not launch or simulate the post-fix
+reviewer. The user now launches that separate review; only its final `GO`
+advances to C182.
 
 The previous C320 `NO-GO`, 58-row manifest, 29-statement extraction, and
 18-check replay belong to the mega-paper fallback. They are provenance and
@@ -196,8 +201,10 @@ not add it to any paper or allocate work.
 
 ## Historical records
 
-- Mega-paper decision map:
-  `notes/2026-07-20-clebsch-paper-planning.md` — fallback only.
+- Retired mega-paper planning redirect:
+  `notes/2026-07-20-clebsch-paper-planning.md`; the full superseded record is
+  `notes/2026-07-20-clebsch-paper-planning-archive.md`. Neither is an active
+  routing source.
 - Mega-paper independent cold read:
   `notes/2026-07-23-c320-independent-cold-read.md` — fallback only.
 - Former replacement-spine abstract and presentation drafts:

@@ -5,12 +5,15 @@
 
 ## Active status
 
-This three-paper program is the active publication path. The 37-page
+This document is the architecture charter, not the live task router.
+`notes/handoffs/2026-07-13-clebsch-paper.md` is the single routing authority.
+The three-paper program is the active publication path. The 37-page
 `papers/clebsch-hexagon-code/` manuscript and its evidence surface remain
 preserved unchanged as a fallback.
 
 C575 and C576 are complete. Paper I is the warning-free 19-page candidate in
-`papers/clebsch-rigidity/`; C320 is the current task, followed by C182.
+`papers/clebsch-rigidity/`; C320 is the current task and waits for a separate
+user-launched post-fix review after repair commit `3ed43a0d`, followed by C182.
 C577 remains gated behind Paper I submission readiness, and C579 remains
 gated behind Paper II.
 
@@ -22,9 +25,9 @@ the rigidity/decoder paper already had a complete editorial spine, while the lat
 factorization-memory and passage/holonomy layers are distinct theorem complexes rather than
 supporting detail.
 
-This is a reversible architecture trial.  Preserve the current 37-page manuscript as a fallback
-snapshot; do not obtain the pending C320 post-fix review until the split candidates have been
-assessed.
+The split assessment was completed by C575 and C576. Preserve the current
+37-page manuscript as a fallback snapshot; the live handoff now governs the
+C320 post-fix review and later-paper gates.
 
 The source layout is additive:
 
