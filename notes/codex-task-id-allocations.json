@@ -863,8 +863,17 @@
       "last": 552,
       "purpose": "integrate C550 four-copy sheaf theorem and representation corrections into the manuscript",
       "sequence": 96
+    },
+    {
+      "count": 1,
+      "first": 553,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 553,
+      "purpose": "apply C287 first-tag 17-module public rewrite and deletion-first API normalization",
+      "sequence": 97
     }
   ],
-  "next_id": 553,
+  "next_id": 554,
   "schema": "codex-task-id-allocations-v1"
 }
