@@ -45,9 +45,12 @@ automorphisms of qubit distance-two codes \cite[Theorem~13]{Rains1999},
 and Van den Nest, Dehaene, and De Moor used that rigidity in their
 minimal-support criterion for qubit stabilizer states
 \cite{VanDenNestDehaeneDeMoor2005}.  Our argument is a finite-field
-extension of this axis-recovery mechanism.  To our knowledge, it gives
-the first LU-to-LC theorem in the exact scope of equal-phase CSS states
-from linear \([6,3,4]_q\) MDS codes, uniformly over prime-power \(q\).
+extension of this axis-recovery mechanism.  Our literature search covered
+LU--LC equivalence for stabilizer and AME states, minimal-support
+rigidity, and automorphisms and transversal gates of quantum MDS and
+polynomial codes.  Within that scope, we found no earlier LU-to-LC
+theorem for equal-phase CSS states from linear \([6,3,4]_q\) MDS codes,
+uniformly over prime-power \(q\).
 The qualifier is essential: arbitrary phased minimal-support
 \(\AME(6,d)\) states form infinitely many LU classes
 \cite{RamadasLakshminarayan2025}, and neither nonlinear orthogonal arrays
@@ -87,15 +90,32 @@ odd, the following are equivalent:
 where party permutations are allowed.
 \end{corollary}
 
+The second main result gives this geometry a direct coding-theoretic
+interpretation.  Regard any one tensor leg as the input of the associated
+\([[5,1,3]]_q\) encoder.  The fixed-party product-Clifford symmetries
+induce the full logical \(\mathrm{SL}_2(q)\) precisely when the six-arc is
+conic/GRS; otherwise they induce only the split torus.  Thus the
+nineteenth-century self-association condition for six points controls
+which one-qudit logical Clifford gates are available without moving
+parties.  This places Theorem~\ref{thm:logical-phase} in the fault-tolerant
+gate tradition of polynomial and quantum Reed--Solomon codes
+\cite{AharonovBenOr1999,GrasslGeiselmannBeth1999} and transversal-gate
+restrictions \cite{EastinKnill2009}.  Classically, we use Coble's
+association theory \cite{Coble1922} through the modern treatment of
+Dolgachev and Ortland \cite[Chapter~III]{DolgachevOrtland1988}; for
+finite-projective arc background see Segre, Hirschfeld, and the modern
+survey of Ball and Lavrauw
+\cite{Segre1955,Hirschfeld1998,BallLavrauw2020}.
+
 The rest of the paper separates classification from explicit scalar
 certificates.  Section~\ref{sec:dictionary} fixes the arc, code, Weyl, and
 AME conventions.  Section~\ref{sec:rigidity} proves the headline theorem.
 Section~\ref{sec:pencil} proves the \(z\)-classification, and
-Section~\ref{sec:logical} determines the logical-Clifford phase:
+Section~\ref{sec:logical} proves the logical-Clifford phase theorem:
 \(\mathrm{SL}_2(q)\) on the GRS locus and a split torus off it.
 Section~\ref{sec:invariants} gives a uniform H3/GRS marginal separator, an
 exact four-copy \(q=13\) witness, and the generic-constancy obstruction for
-fixed-copy scalars.  Section~\ref{sec:transport} derives the exceptional
-divisor of the four-copy witness from a nine-dimensional transport
-operator.  Section~\ref{sec:verification} records the computational trust
+fixed-copy scalars.  Section~\ref{sec:transport} gives a compact
+explanation of the exceptional divisor of that redundant witness; it is
+not part of the classification.  Section~\ref{sec:verification} records the computational trust
 boundary and the precise scope of all results.

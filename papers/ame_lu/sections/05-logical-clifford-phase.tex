@@ -10,7 +10,7 @@ The kernel of the party action on Clifford tensor symmetries is
 For an encoder view, the \emph{fixed-party symplectic kernel} means the
 image of \(\mathcal K_C\) on its input block.
 
-\begin{theorem}[Logical phase]\label{thm:logical-phase}
+\begin{theorem}[Fixed-party logical phase]\label{thm:logical-phase}
 For an equal-phase CSS state from a six-arc over an odd prime field, the
 fixed-party symplectic kernel is
 \[
@@ -54,16 +54,32 @@ D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
 D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
 \end{array}                                             \tag{5.2}
 \]
-Apply these inclusions to the unique shortened word on each four-set.
-On two four-sets meeting in three parties, comparison through the
-projection isomorphisms shows that an off-diagonal coefficient vanishes
-at one party if and only if it vanishes at all parties.  Hence a
-nondiagonal propagated collection makes \(D_\gamma\) or \(D_\beta\)
-nonsingular, and \((5.2)\), together with equality of dimensions, gives
-\(D_\gamma C=C^\perp\) or \(D_\beta C^\perp=C\).  Conversely, such a
-diagonal code--dual equivalence satisfies \((5.2)\) for the two
-elementary unipotent anchors; together with \(T\) they generate
-\(\mathrm{SL}_2(q)\).
+We use the following elementary MDS fact to control the off-diagonal
+blocks.  If \(E,F\leq\F_q^6\) are \([6,3,4]\) MDS codes and a diagonal
+matrix \(D\) satisfies \(DE\subseteq F\), then either \(D=0\) or \(D\)
+is nonsingular and \(DE=F\).  Indeed, if \(D\ne0\) and its diagonal
+support had size at most three, choose \(e\in E\) nonzero at a supported
+coordinate.  Then \(De\) would be a nonzero word of \(F\) of weight at
+most three.  Thus \(D\) has at least four nonzero entries.  Its kernel on
+\(E\) consists of words supported on at most the two remaining
+coordinates, so the distance-four property makes this kernel zero.
+Consequently \(DE=F\).  If a diagonal entry of \(D\) were zero, every
+word of \(F\) would vanish in that coordinate, which is impossible for
+an MDS code.
+
+Apply this fact to \(D_\gamma C\subseteq C^\perp\) and
+\(D_\beta C^\perp\subseteq C\).  A nondiagonal input block has a nonzero
+off-diagonal entry, hence the corresponding diagonal matrix is nonzero,
+nonsingular, and gives
+\[
+ D_\gamma C=C^\perp\qquad\text{or}\qquad
+ D_\beta C^\perp=C.                                   \tag{5.3}
+\]
+Conversely, if a nonsingular diagonal \(S\) satisfies \(SC=C^\perp\),
+then \(S^{-1}C^\perp=C\).  Taking \(D_\gamma=S\), respectively
+\(D_\beta=S^{-1}\), with identity diagonal blocks in \((5.2)\) realizes
+the lower and upper elementary unipotent input anchors.  Together with
+\(T\), these generate \(\mathrm{SL}_2(q)\).
 
 It remains to identify when the diagonal equivalence
 \(C\sim C^\perp\) occurs.  A parity-check matrix for \(C\) and a kernel
@@ -71,6 +87,7 @@ basis for it represent associated, or Gale-dual, ordered six-arcs.
 The classical self-association theorem for six points in
 \(\PP^2\) says that these two sextuples are projectively equivalent
 exactly when the six original columns lie on a conic
+\cite{Coble1922}\cite[Chapter~III]{DolgachevOrtland1988}
 \cite[Section~2.3]{HowardMillsonSnowdenVakil2008}.  Equivalently, solving
 the multipliers in \((5.2)\) leaves the determinant of the six quadratic
 evaluation vectors.  Since the columns form an arc, the conic is

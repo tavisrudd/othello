@@ -2,8 +2,8 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper titled *Local-Unitary Rigidity and Clifford
-Geometry of Six-Qudit AME Stabilizer Tensors*.
+**Purpose:** complete the paper titled *Local-Unitary Rigidity and Logical
+Clifford Phases of Six-Qudit AME Stabilizer Tensors*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
@@ -245,6 +245,20 @@ contribution/AI disclosure, license/category, rights, account readiness, and
 explicit upload or submission authorization. No external action was taken.
 See `2026-07-24-c572-ame-lu-release-candidate.md`.
 
+**C594 closed (2026-07-24): external major revision adopted.**  The C572
+candidate is superseded pending a second independent review.  Theorem 4.1 now
+handles the \(A^2=B^2\), \(z=1\) collapsed bracket multiset explicitly.
+Theorem 5.1 replaces its asserted propagation step by a proved
+distance-four diagonal-multiplier lemma and explicit elementary-unipotent
+generation.  Section 7 now distinguishes the exact \(Q_p\) from its
+\(2(t-1)\)-scaled polynomial representative and uses the correct \(p=\pi\)
+index convention.  The logical phase is promoted to the title and abstract,
+the transport material is compressed, and the literature now includes
+Coble/Dolgachev--Ortland, Segre/Hirschfeld/Ball--Lavrauw, and
+polynomial/quantum Reed--Solomon and transversal-gate context.  The
+warning-free 15-page build and all seven evidence replays pass.  See
+`2026-07-24-c594-ame-lu-major-revision.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -263,10 +277,13 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read
    (complete).
 8. C572: clean replay, immutable manifest, public export, and release gates
-   (complete).
+   (complete, superseded by C594).
+9. C594: external major-revision proof, convention, positioning, and
+   literature sweep (complete; independent re-review pending).
 
-The core paper program is complete at a local release candidate. Public release
-now waits on the author gates listed above. C581 remains a separately queued
+The revision is complete locally, but release-candidate status now waits on an
+independent read of the repaired Theorems 4.1 and 5.1.  Public release also
+waits on the author gates listed above. C581 remains a separately queued
 optional manuscript upgrade: first determine whether the shortened marginal
 planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
 space before attempting extension-field or approximate rigidity.

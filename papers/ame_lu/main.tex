@@ -39,7 +39,7 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\diag}{\operatorname{diag}}
 
-\title{Local-Unitary Rigidity and Clifford Geometry of
+\title{Local-Unitary Rigidity and Logical Clifford Phases of
 Six-Qudit AME Stabilizer Tensors}
 \author{Tavis Rudd}
 \date{July 2026}
@@ -52,14 +52,19 @@ Let \(C\) be a linear \([6,3,4]_q\) MDS code and let
 \(\lvert\Psi_C\rangle=q^{-3/2}\sum_{c\in C}\lvert c\rangle\) be its
 equal-phase Calderbank--Shor--Steane (CSS) state.  We prove that every product-unitary intertwiner
 between two such states is local Clifford, for every prime power \(q\).
+Viewing any party as the input of a \([[5,1,3]]_q\) encoder, we classify
+its fixed-party logical Clifford symmetries: the symplectic logical group
+is \(\mathrm{SL}_2(q)\) exactly for conic/generalized Reed--Solomon arcs
+and is the split torus otherwise.  Thus the classical self-association
+condition for six points controls the availability of fixed-party
+transversal logical gates.
 The proof shortens the stabilizer to four parties.  Its nonidentity
 correlation tensor is diagonal on all \(q^2-1\) local Weyl axes, and the
 rank-one contraction locus recovers those axes intrinsically.  We apply
 this rigidity to an odd-prime-field non-Reed--Solomon pencil of
 six-point arcs.  Projective, monomial-code, local-Clifford, and
 local-unitary equivalence are all classified there by one degree-eight
-quotient \(z\).  We also determine the split-torus versus
-\(\mathrm{SL}_2(q)\) logical-Clifford phase.  The same distinction between
+quotient \(z\).  The same distinction between
 operator and scalar data governs the remaining results: fixed-copy scalar
 contractions are generically constant, but exact marginal and four-copy
 witnesses still detect special strata.  A four-sheet transport operator

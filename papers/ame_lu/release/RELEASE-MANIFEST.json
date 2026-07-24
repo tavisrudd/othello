@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 156688,
+        "bytes": 161093,
         "path": "ame-lu.pdf",
-        "sha256": "a8ce4867d3999a6bba4c8f5590a6e11de046d7100ecf318e1450f99ed683b3b1"
+        "sha256": "51fc002ba810f78d685be711fbf335676b16c2618794f5bc34cf5928f32104c6"
       },
       {
         "bytes": 11802,
@@ -21,14 +21,14 @@
         "sha256": "0c024d2195560e65901c6ccf86ef44cc6a122e169a7c519b7dc6411ca5263d83"
       },
       {
-        "bytes": 2880,
+        "bytes": 3183,
         "path": "main.tex",
-        "sha256": "3bbb0ba1df347d9ad9db815ef11eb281981a7e6600f32cf31d677dd992dcefc4"
+        "sha256": "b1640b1afc5c142c7a26cb88de70f36058c04e97b429f0de5bea258bbc4dd9b8"
       },
       {
-        "bytes": 2872,
+        "bytes": 5156,
         "path": "refs.bib",
-        "sha256": "5356c84c6369f03ab1893345adea4bb09a79c69b28dc79933a353dbab4ae95f7"
+        "sha256": "b56537b2c725c3b02a78b790075a8ee71c525e8088495fc07d85d9234568596d"
       },
       {
         "bytes": 2124,
@@ -46,9 +46,9 @@
         "sha256": "410b412d0b3f4af99444c632704e2ceeac1d92f2bffa7870dce63f26f448c994"
       },
       {
-        "bytes": 4724,
+        "bytes": 5964,
         "path": "sections/01-introduction.tex",
-        "sha256": "03dbc707199305c98d6b3f076179002bc27204e3b9347983dc4953b08c15ca37"
+        "sha256": "cf14efed481541429034df5d4071e630f7995bfa829ba678581bce18042df780"
       },
       {
         "bytes": 4031,
@@ -61,14 +61,14 @@
         "sha256": "844bdcb643b3871ea05fcd34324a62d310ac1ffc3d3e233be0f3d931645d64fe"
       },
       {
-        "bytes": 5651,
+        "bytes": 6002,
         "path": "sections/04-pencil-classification.tex",
-        "sha256": "e23bdfc16005d8985ccf74aa5f9989549ec42ef832cff9e689ba3cede38ed2da"
+        "sha256": "16b9fed5643847986930fbc5c80c8470013130928b47d5ab1d87df86c561a7a6"
       },
       {
-        "bytes": 5361,
+        "bytes": 6234,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "acf5ee95ceee2b09d68a320043a8065705b73ba0f948edcc5f19f80fe9084bbd"
+        "sha256": "68805fab8871df29b2c92762af05a0dbc2bcf65b7e50d64ba443e3e373954a1e"
       },
       {
         "bytes": 8717,
@@ -76,14 +76,14 @@
         "sha256": "58b2cb0d734631273548fe918b3b17d228e00265b0bbe0641e88926e3c24613f"
       },
       {
-        "bytes": 6490,
+        "bytes": 5638,
         "path": "sections/07-transport-sheaf.tex",
-        "sha256": "bba94a54d51dbbef42f303f1ab93ff4013cc6c48064a34691df63f60b2819128"
+        "sha256": "6a31515ba4bc53fdc07bdfdffe611aa2f2625244e346b1e602327870dfac7a5a"
       },
       {
-        "bytes": 5922,
+        "bytes": 5936,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "03b17715bca02a20051a2846c227317e5ae4da40389ba608acfdb15d2b004010"
+        "sha256": "c75c81197d0c6ce445cfec53d5d1786da342d63a28f4798e65ac15da64ff9706"
       },
       {
         "bytes": 3473,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "640a51ff2d4154b948b9e0b10ed8f12f45ec0bc600027877f650ffc7cb790b40"
+    "tree_sha256": "e8aa3d8f5b5969046bfe2e2b1144f2601f440567873acc0a4818c62f848cd2d6"
   },
   "formal_companion": {
     "artifacts": [

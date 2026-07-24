@@ -28,10 +28,11 @@ Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
 \]
 Thus \(Q_p\) is the left block obtained by systematizing the
 party-reordered generator matrix on its last three columns; no pivot can
-vanish because every three coordinate covectors are independent.  For
-the identity assignment,
+vanish because every three coordinate covectors are independent.  Put
+\(\widetilde Q_p=2(t-1)Q_p\).  This scalar is a unit on the admitted
+locus.  For the identity assignment, the polynomial representative is
 \[
-Q_1=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
+\widetilde Q_1=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
 \quad
 \begin{array}{ll}
 a=-2(t-1)^2,&b=-(t^2-t+1),\\
@@ -41,18 +42,21 @@ c=-(t^2-3t+1),&d=-2(t-1).
 If \(Y_k\in U\) are the three free copy vectors, then \((7.1)\) reduces
 to the \(9\)-by-\(9\) block transport operator
 \[
- T_p=\bigl((Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
+ \widetilde T_p
+ =\bigl((\widetilde Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
                                                                \tag{7.3}
 \]
 The dimension identity
 \[
- 21-\rank M_{\pi\boldsymbol\sigma}(G(t))=9-\rank T_p    \tag{7.4}
+ 21-\rank M_{\pi\boldsymbol\sigma}(G(t))
+   =9-\rank\widetilde T_p                              \tag{7.4}
 \]
-holds over the field \(k\), where \(p=\pi^{-1}\) in the convention of
+holds over the field \(k\), where \(p=\pi\) in the convention of
 Section~\ref{sec:invariants}.  It follows by quotienting the
 three-dimensional constant-section kernel and then eliminating the three
-free systematic coordinates.  Both steps are invertible on the six-arc
-locus.
+free systematic coordinates.  Multiplying the resulting operator by
+the unit \(2(t-1)\) does not change its rank.  All steps are invertible
+on the admitted six-arc locus.
 
 \begin{theorem}[Transport divisor]\label{thm:transport-divisor}
 For a parameter on the admitted odd non-GRS pencil, there exists a party
@@ -76,7 +80,7 @@ For the identity systematic chart, the coefficients satisfy
  a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
 \]
 Common copy relabelling, a change of basis in \(V\), and rescaling a
-coordinate covector act on \(T_p\) by invertible row and column
+coordinate covector act on \(\widetilde T_p\) by invertible row and column
 operations.  Modulo these operations, the \(720\) party assignments
 split into boundary types and three nonboundary relative-cover types.
 Here the type records the six relative copy permutations
@@ -105,54 +109,24 @@ paper-local certificate.  The two signed types lie above
 Fraction-free elimination also gives a nonzero \(8\)-minor on each
 component, so the generic kernel is exactly one-dimensional.
 
-The row/column equivalences act on assignments from the left by copy
-symmetries and from the right by color stabilizers.  The axial support is
-one double coset with groups \(S_4\times C_2\) and \(D_8\times C_2\)
-and intersection \(C_2^3\).  Its size is
-\[
-\frac{|S_4\times C_2|\,|D_8\times C_2|}{|C_2^3|}
- =\frac{48\cdot16}{8}=96.
-\]
-Each signed support is one double coset with groups \(S_4\) and
-\(S_4\times C_2\) and intersection \(S_3\), hence has size
-\[
-\frac{|S_4|\,|S_4\times C_2|}{|S_3|}
- =\frac{24\cdot48}{6}=192.
-\]
-The signed types are distinguished by the sign of \(w\), and the axial
-cycle pattern differs from both, so the three supports are disjoint.
-The orbit certificate supplies explicit representatives, stabilizers,
-intersections, and the complete support sets.  Equation \((7.4)\) turns
+The row/column equivalences organize the exceptional assignments into
+double cosets.  Orbit--stabilizer gives \(96\) assignments for the axial
+type and \(192\) for each signed type; the two signed types occur on the
+opposite sheets \(w=\pm2/3\), so only \(192\) occur over either generic
+parameter.  Explicit representatives, stabilizer intersections, and
+complete support sets are in the certificate.  Equation \((7.4)\) turns
 the one-dimensional transport kernels into rank \(20\) of the matching
-matrix and completes the proof.
+matrix.
 \end{proof}
 
 The exceptional arithmetic belongs to this detector, not to
-Theorem~\ref{thm:lu-lc-rigidity}.  The exact boundary is:
-\[
-\begin{array}{c|l}
-\operatorname{char}k&\text{effect on the transport divisor}\\ \hline
-2&\text{outside the odd-field pencil}\\
-3&\text{both admitted detector components disappear}\\
-5&z=4/9\text{ lies on the excluded GRS boundary; }z=2\text{ remains}\\
-7&\text{the two components merge; the rank histogram is }20^{288}21^{432}\\
-11,13,41&\text{pullback ramification only; no further rank drop.}
-\end{array}                                             \tag{7.6}
-\]
-At \(t=-1\), \(A=16\), \(B=15\), and the nonboundary exceptional primes
-are already visible in
-\[
-B^2-2A^2=-7\cdot41,\qquad
-9B^2-4A^2=7\cdot11\cdot13.
-\]
-In characteristic \(3\), the axial factor becomes \(G^2\) and the signed
-factors lie on \(t(t-1)=0\), so no admitted component remains.  In
-characteristic \(5\), \(9B^2-4A^2\) is a unit times \(G^2\), removing
-only the signed component.  In characteristic \(7\),
-\(9B^2-4A^2=2(B^2-2A^2)\); the disjoint \(96\)- and \(192\)-element
-supports merge, and exact \(8\)-minors exclude a larger kernel.
-At \(11,13,41\) the indicated pullback component has a double root at
-\(t=-1\), but the same minors keep the rank drop equal to one.
+Theorem~\ref{thm:lu-lc-rigidity}.  In characteristic \(3\) both admitted
+components disappear; in characteristic \(5\) the \(z=4/9\) component
+lies on the excluded GRS boundary; and in characteristic \(7\) the two
+components merge, giving the exact histogram \(20^{288}21^{432}\).
+Characteristics \(11,13,41\) introduce only pullback ramification, with
+no further rank drop.  These reductions and the nonzero \(8\)-minors
+that control them are replayed in the certificate.
 
 The divisor records where one scalar contraction changes rank.  It is
 not an LU-orbit boundary and, by
