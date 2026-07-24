@@ -88,7 +88,9 @@ degree at most one, and restores the uniform sharp parameter bound
 `3r-5`.  Thus `SC(j)`---no additional contained component---is the
 only arbitrary-level hypothesis.  It has no field threshold, so the
 conditional theorem is not circular.  The verified R6/R7 budgets and
-headlines are unchanged.
+headlines are unchanged.  Its large-characteristic corollary says that,
+when `char(F_q)>r-1`, `SC(6),...,SC(r)` and the threshold leave exactly
+the persistent tangent/conjugate-secant list.
 The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
 marker--ramification lemma.  The recurrence interpretation and exact
 q=19 pointed example are now visible, while the duplicate overview

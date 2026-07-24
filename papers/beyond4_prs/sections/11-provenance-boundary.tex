@@ -24,18 +24,29 @@ the recursively pointed contained bad scheme has no component outside
 
 This is not the conclusion of Theorem~\ref{thm:uniform-transverse}:
 the conjecture is a scheme-theoretic component assertion with no
-field-size conclusion.  If it holds through redundancy \(r\), the
-theorem supplies the arithmetic statement
-\[
- q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor
- \quad\Longrightarrow\quad
- \text{split-free locus}\subset\mathcal P_r\cup\mathcal M_r.
-\]
+field-size conclusion; the theorem supplies the arithmetic threshold.
+
+\begin{corollary}[Large-characteristic stable list]
+\label{cor:large-characteristic-stable}
+Assume \(\mathrm{SC}(j)\) for \(6\leq j\leq r\), let
+\(\operatorname{char}\F_q>r-1\), and let \(q\geq Q_r\).  Then the
+split-free directions are exactly the persistent tangent and
+conjugate-secant families.  If the covering radius is \(r-1\), this is
+also the projective deep-hole list.  In particular, the conclusion
+applies over every prime field with \(q\geq Q_r\).
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:uniform-transverse} leaves
+\(\mathcal P_r\cup\mathcal M_r\), and Lucas' theorem makes
+\(\mathcal M_r\) empty.  The persistent families are split-free.
+\end{proof}
+
 Proposition~\ref{prop:r6-contained} and
 Corollary~\ref{cor:r7-contained} prove the first two assertions
-unconditionally.  The modular term is necessary in small
-characteristic, but is empty when \(\operatorname{char}\F_q>r-1\);
-this does not remove the large-characteristic R5 cyclic carrier.
+unconditionally.  The characteristic hypothesis removes the modular
+term, not the large-characteristic R5 cyclic carrier; the theorem
+eliminates that carrier on the transverse branch.
 
 The present results establish the first levels of this picture but do
 not constitute an arbitrary-redundancy classification.
