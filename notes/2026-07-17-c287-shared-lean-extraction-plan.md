@@ -1,7 +1,7 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; 26-file boundary declared in trust spine, rewrites and facts pending
+**Status**: IN PROGRESS; 26-file boundary declared, referee prose gate and facts pending
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -65,8 +65,11 @@ The candidate first-tag contract is now content-addressed in
 `notes/2026-07-23-finitegeom-first-tag-source-inventory.json` and analyzed in
 `notes/2026-07-23-c287-first-tag-source-contract.md`. Its four declared roots resolve to 26 Lean
 files and 8,954 code lines, with 18 external imports all supplied by Mathlib and no heavyweight
-certificate-family source. Seven closure files contain definite workflow residue and need
-source-owner public rewrites before the whole-closure referee review and export.
+certificate-family source. The first whole-closure referee pass showed that the earlier seven-file
+workflow-residue scan was too narrow. At least 17 modules need source-owner prose work, two public
+path/name families need API decisions, and the closure still needs a semantic scholarly-public
+docstring review before export. The failed gate and exact rewrite packet are recorded in
+`notes/2026-07-24-c287-first-tag-referee-review.md`.
 
 The theorem-level audit in `notes/2026-07-23-c287-first-tag-theorem-ledger.md` shows that the adopted
 human manuscript terminals need 26 files / 8,954 code lines; the advertised but uncited

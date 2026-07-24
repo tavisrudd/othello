@@ -717,6 +717,18 @@ q-independent bound here; `SG≤5` must come from mex structure across externall
 signatures, not private leaves or duplicate labels. No q23 computation was run. Report:
 [`../2026-07-23-c549-private-boundary-signatures.md`](../2026-07-23-c549-private-boundary-signatures.md).
 
+**C528 is CLOSED (2026-07-23): exact residual height, not a hidden defect-skeleton law, explains
+the frozen `SG≤5` signal.** Exhaustive continuation of all 349 q17 and 48,084 q19 `capOVER` cores
+finds maximum remaining game height exactly 5 at both orders, so C547's general `SG≤height` theorem
+already proves the observed ceiling. Root heights are q17 `3^205 4^78 5^66` and q19
+`4^23684 5^24400`; descendant SG maxima fall `5,4,3,2,1,0` by ply. The attractive q17 refinement
+`SG∈{height,height−2}` with parity agreement fails at q19 (13,056 parity violations; gaps 0–4), and
+the cheapest local `(triple incidence, pair degree)` move signature is value-impure. Thus no
+q-uniform Dawson/gadget calculus is evidenced or needed for this finite ceiling. The crown returns
+to C80's direct uniform depth-2 routing theorem into `Y_NK`; q23 remains gated on a candidate
+structural law. Report+certificate:
+[`../2026-07-23-c528-mex-skeleton-probe.md`](../2026-07-23-c528-mex-skeleton-probe.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -740,8 +752,9 @@ C523/C524 report+cert+`--check` (q13/q17 and a separate q19 cert):
 
 Priority order and why:
 
-1. **C80 (spine).** Everything gates on it; the recursion-stability probe is done (negative above);
-   the reshaped frontier is the level-indexed object + a deeper (q17 `Y_NK0`) test bed.
+1. **C80 (spine).** Everything gates on it. C528 is closed: the frozen `SG≤5` signal is exact
+   residual height, so the live frontier is the uniform-in-`q` depth-2 routing theorem into `Y_NK`,
+   not a gadget Grundy formula.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

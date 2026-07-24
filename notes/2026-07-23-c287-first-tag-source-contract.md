@@ -1,7 +1,7 @@
 # C287 first-tag source contract
 
 **Lane**: `build-sys`
-**Status**: REVIEWER-SCALE 26-FILE SOURCE INVENTORY FROZEN; seven public rewrites remain
+**Status**: REVIEWER-SCALE 26-FILE SOURCE INVENTORY FROZEN; referee prose gate failed
 
 The theorem-level adoption and axiom boundary are analyzed separately in
 `notes/2026-07-23-c287-first-tag-theorem-ledger.md`. The selected first tag is the 26-file closure
@@ -67,13 +67,14 @@ default target list.
 
 - **Candidate exact copies:** all 26 inventoried Lean sources are content-addressed candidates, but
   none is admitted as referee-ready until its whole-file public-prose review passes.
-- **Required public rewrites:** seven files contain definite private workflow residue. Four cite
-  private notes: `ProjectiveCap/ConicLocalization.lean`,
-  `ProjectiveCap/EscapeParity.lean`, `ProjectiveCap/IntrusionCalculus.lean`, and
-  `ProjectiveCap/PlaneOutcome.lean`; the last two also contain task IDs. Three more use workflow
-  labels or unfinished-task prose: `ProjectiveCap/FrameGridBridge.lean`,
-  `ProjectiveCap/GridMirror.lean`, and `Sumfree/RankCounts.lean`. These references must be replaced
-  with self-contained mathematical prose or stable public literature by the source owners before
+- **Required public rewrites:** the first whole-closure referee pass found that the earlier
+  seven-file residue scan understated the blocker. At least 17 modules contain private provenance,
+  workflow labels, status prose, or retrospective implementation language. Two of those modules
+  also expose workflow-bearing public paths/namespaces that require a source-owner API decision,
+  and the closure has a separate module-wide scholarly-public docstring gate. The exact rewrite
+  packet and evidence boundary are in
+  `notes/2026-07-24-c287-first-tag-referee-review.md`. These failures must be replaced with
+  self-contained mathematical prose or stable public literature by the source owners before
   export.
 - **Infrastructure rewrite:** the public `lakefile.toml` must declare only the three libraries above
   and the exact Mathlib pin. The matching `lean-toolchain` is an exact copy. README, license,
@@ -91,9 +92,10 @@ against all 26 source files.
 
 ## Next gate
 
-Obtain source-owner rewrites for the seven workflow-bearing modules and complete the whole-closure
-referee review. The final paper target map also still needs the eventual sum-free terminal and the
-external Q11/Q13 trust manifests, but those do not enlarge this main-repository tag. Regenerate the
-inventory, verify that only reviewed changes altered hashes, stage the exact source set with its
-public infrastructure rewrites, and run the clean public build only in a confirmed quiet
-build-owner window.
+Obtain the expanded source-owner rewrite and API decisions, then complete the whole-closure
+declaration/docstring review recorded in
+`notes/2026-07-24-c287-first-tag-referee-review.md`. The final paper target map also still needs the
+eventual sum-free terminal and the external Q11/Q13 trust manifests, but those do not enlarge this
+main-repository tag. Regenerate the inventory, verify that only reviewed changes altered hashes,
+stage the exact source set with its public infrastructure rewrites, and run the clean public build
+only in a confirmed quiet build-owner window.

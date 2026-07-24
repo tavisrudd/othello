@@ -3,6 +3,16 @@
 **Lane:** `cap`. **Owner spine:** C80. **Successor task:** **C528** (reserved 2026-07-23, `[cap]`).
 Planning doc, not a state map — the live map is the [cap handoff](handoffs/2026-07-06-projective-cap-game-handoff.md).
 
+## Closure (C528, 2026-07-23)
+
+This route is closed. Exact continuation of all frozen q17/q19 `capOVER` cores
+shows remaining game height at most five, so the general SG-height theorem
+already explains the observed `SG≤5`; no Dawson/gadget calculus is evidenced
+or needed for that finite signal. The q17 near-height/parity refinement fails
+at q19, and the cheapest local defect signature is value-impure. Return to
+C80's direct uniform depth-2 routing theorem into `Y_NK`. Final report:
+[`2026-07-23-c528-mex-skeleton-probe.md`](2026-07-23-c528-mex-skeleton-probe.md).
+
 ## For the cold agent — read first
 
 Read, in order: the cap handoff bullets "Companion guard BUILT (C523)" and "q17 descent CLOSED
