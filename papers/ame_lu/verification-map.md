@@ -6,12 +6,12 @@ artifact.
 
 | Result label | Conceptual proof | Exact computation | Independent replay | Paper-local artifact status |
 |---|---|---|---|---|
-| `thm:dictionary` | Section 2 plus `RelativeConicArcs.AMELU.Dictionary` and `RelativeConicArcs.AMELU.StabilizerDictionary` | C374 code and stabilizer checks | direct-Lagrangian replay, complete GRS enumeration, and kernel-checked import/axiom gates | C374 bundle imported; symbolic Lean coverage complete pending aggregate adoption |
-| `thm:lc-pencil` | C396 | projective quotient and holonomy recovery | symbolic identities plus twelve-field direct replay | imported; C396 bundle and C395 input |
-| `thm:lu-h3-grs` | C402 | concurrency formula and permutation lemma | direct q=19 Lagrangian-rank replay | imported; C402 bundle |
-| `thm:logical-phase` | C397 | fixed-party kernel theorem | full-row-space, group-closure, and Gale replays | imported; C397 bundle |
-| `thm:q13-lu` | C397 | contraction invariance | complete two-/three-/four-copy evaluation and orbit sum | imported; C397 bundle |
-| `thm:transport-divisor` | C548/C550 | transport-sheaf and cycle-cover derivation | quotient/finite-field and section/transport replays | imported; C548/C550 bundles |
+| `thm:dictionary` | Section 2 plus `RelativeConicArcs.AMELU.Dictionary` and `RelativeConicArcs.AMELU.StabilizerDictionary` | C374 code and stabilizer checks | direct-Lagrangian replay, complete GRS enumeration, and kernel-checked import/axiom gates | C374 bundle imported; unconditional statement coverage passes the aggregate Lean gate |
+| `thm:lc-pencil` | C396 plus `pencilZ_eq_iff_samePencilYOrbit` and the conditional `admitted_nonGRS_pencil_classified_by_z` | projective quotient and holonomy recovery | symbolic identities plus twelve-field direct replay | imported; C396 bundle and C395 input; Lean classification hypotheses remain explicit |
+| `thm:lu-h3-grs` | C402 plus the finite graph core and conditional separator in `RelativeConicArcs.AMELU.MarginalMoment` | concurrency formula and permutation lemma | direct q=19 Lagrangian-rank replay | imported; C402 bundle; native graph counts are separated from geometric and LU hypotheses |
+| `thm:logical-phase` | C397 plus conditional `fixedPartyKernel_eq_specialLinear_or_splitTorus` | fixed-party kernel theorem | full-row-space, group-closure, and Gale replays | imported; C397 bundle; party-moving normalizer is outside formal coverage |
+| `thm:q13-lu` | C397 plus conditional `q13_zFour_not_locallyUnitaryEquivalent_zTwelve` | contraction invariance | complete two-/three-/four-copy evaluation and orbit sum | imported; C397 bundle; contraction/rank, LU covariance, and rank evaluations remain explicit inputs |
+| `thm:transport-divisor` | C548/C550 plus the unconditional polynomial core and conditional transport interfaces in `RelativeConicArcs.AMELU.TransportDivisor` | transport-sheaf and cycle-cover derivation | quotient/finite-field and section/transport replays | imported; C548/C550 bundles; determinant, rank-bridge, and orbit-geometry inputs remain explicit |
 | `thm:fixed-copy-boundary` | C559 | contraction-rank formula and generic-minor argument | no computation required | conceptual proof available |
 | `thm:lu-lc-rigidity` and `cor:lu-lc-pencil` | C560 plus C396 | MDS shortening and diagonal Weyl-tensor axis rigidity; C396 supplies `z` classification | no new computation for rigidity; C396 replay for `z` | conceptual rigidity proof available; C396 evidence imported |
 

@@ -37,6 +37,22 @@ the conceptual correspondence between the implemented objects and the
 paper definitions; that correspondence is supplied in the preceding
 sections.
 
+The accompanying Lean~4 artifact uses toolchain
+\texttt{v4.32.0-rc1}.  Its aggregate terminal
+\texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
+arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
+marginal graph counts, the contraction normalization and party-orbit
+identities, and the transport polynomial and characteristic-seven
+identities in one environment.  The geometric classification,
+marginal-trace, logical propagation, finite contraction, and transport
+orbit steps enter separate hypothesis structures; importing the terminal
+does not make them unconditional formal theorems.  In particular, the
+headline LU-to-LC rigidity theorem, the fixed-copy generic-constancy
+proposition, the party-moving logical normalizer, and the determinant and
+double-coset inputs of the complete transport theorem are not formalized.
+The adjacent axiom audit identifies the three exhaustive native finite
+graph counts separately from the ordinary kernel-checked declarations.
+
 The LU-to-LC mechanism has direct qubit ancestry.  Rains recovered the
 three Pauli axes of distance-two code projectors
 \cite{Rains1999}; Van den Nest, Dehaene, and De Moor used minimal
