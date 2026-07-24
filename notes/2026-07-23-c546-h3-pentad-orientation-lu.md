@@ -43,6 +43,20 @@ finite search is not enough.
 
 The attacks are staged but none is individually the task.
 
+### 0. Prove and package the scalar-only tangent lemma
+
+C402's `ej3` pass gives the hand proof: distance four kills every off-diagonal infinitesimal local
+generator, and additive Fourier support on the six distinct coordinate-functional lines kills
+every nonconstant diagonal generator. Reprove this in C546's exact tensor conventions and package
+it as the first theorem:
+
+```text
+Lie(Stab_LU(Psi_H3)) / Lie(local scalar gauge) = 0.
+```
+
+This makes the projective LU stabilizer finite and rules out a positive-dimensional lift family.
+It does not identify the finite components or imply LU=`LC`; those remain the decision problem.
+
 ### 1. Consume the Clifford gate
 
 Use C397's exact party-permuting local-Clifford stabilizer as the first falsifier.
@@ -62,13 +76,13 @@ Write the exact tensor equation for an odd pentad permutation
 
 Quotient local scalar gauge and the known even stabilizer. Use the minimal-support/critical-state
 constraints, the six `3|3` unitary flattenings, and support-intersection algebra to reduce the
-continuous unitary variables to a finite algebraic problem if possible. Acceptable routes include:
+unitary equations to the finite components left by Gate 0. Acceptable routes include:
 
 - a proof that every lift is monomial or Clifford in a canonically recovered local basis;
 - exact elimination of the unitary/tensor equations with a compact certificate;
 - a rigidity theorem from simultaneous flattening intertwiners; or
-- a complete positive-dimensional solution description if a continuous lift family genuinely
-  exists.
+- an exact component decomposition of the resulting zero-dimensional real-algebraic unitary
+  locus.
 
 Do not assume LU=`LC`, use Pauli labels as an LU invariant, or infer nonexistence from optimizer
 failure.
@@ -118,12 +132,11 @@ are factored.
 - Success is Alternative A or B with the arithmetic boundary closed.
 - Failure of LC, marginal traces, partial transpose, one contraction degree, or one elimination
   order does not close the task; move to the next attack family.
-- Do not launch an unbounded continuous-unitary search. If exact reduction leaves a
-  positive-dimensional variety, describe it algebraically and decide whether it meets the unitary
-  locus.
-- If all planned exact attacks reduce the question to one explicit unresolved real-algebraic
-  locus, C546 remains open with that locus as its sole blocker; it is not reported as a bounded
-  negative.
+- Do not launch an unbounded continuous-unitary search. Gate 0 proves that any apparent
+  positive-dimensional projective unitary component is an error or an unremoved scalar gauge.
+- If all planned exact attacks reduce the question to one explicit unresolved finite
+  zero-dimensional real-algebraic scheme, C546 remains open with that scheme as its sole blocker;
+  it is not reported as a bounded negative.
 
 ## Evidence and literature gates
 

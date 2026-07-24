@@ -289,6 +289,34 @@ classification before escalating, if necessary, to general contraction invariant
 a real adjacent mystery with a sharp gate and allocated solver, not unfinished work needed by
 C402.
 
+The `ej3` pass removes the main continuous-search hazard before C546 starts. For any equal-phase
+state of a linear `[6,3,4]_q` code, let `(X_1,...,X_6)` be an infinitesimal local-unitary
+stabilizer:
+
+```text
+sum_i X_i^(i)|Psi_C> = lambda|Psi_C>.
+```
+
+If an off-diagonal entry `X_i[a,b]` were nonzero, evaluate the coefficient of the basis word
+obtained from a codeword with coordinate `b` by changing only that coordinate to `a`. Distance
+four makes this radius-one neighbor belong to no other codeword/coordinate contribution, so the
+entry must vanish. Hence every `X_i` is diagonal. Writing its diagonal as `f_i:k->C` and
+parameterizing `C` by six pairwise nonproportional linear forms `ell_i:k^3->k` gives
+
+```text
+sum_i f_i(ell_i(v)) = lambda.
+```
+
+Fourier expansion on the additive group of `k` places every nonconstant coefficient of `f_i` on
+the projective frequency line spanned by `ell_i`. The six lines are distinct by the MDS property,
+so no nonzero frequency can cancel across coordinates. Every `f_i` is constant.
+
+Therefore the connected local-unitary stabilizer consists only of local scalar phases, which act
+as one global phase. After quotienting that gauge, the H3 local-unitary stabilizer is finite in
+every field covered by C402. C546 is consequently a discrete component/lift classification, not a
+positive-dimensional unitary search. This Fourier tangent lemma is a task-owned feasibility
+reduction; no novelty wording is attached before C546's audit.
+
 There is also a direct hand-back to C396. Its recorded q=13 collision
 `((4,66),(6,389))` says geometrically that both non-GRS pencil classes have six common concurrent
 matchings with their Gale duals. C396 should compare those six-match configurations before doing
@@ -324,6 +352,7 @@ for C402.
 | Which H3 datum the marginal incidence forgets | **Settled by `ej2`:** it recovers the `S5` pentad roof but not the index-two orientation selecting the marked `A5` half. |
 | Whether higher-degree words in the same marginals recover that bit | **Settled negatively at q=19 by the final Tao pass:** all 32,768 subset ranks retain the same 120-element `S5` party symmetry. |
 | Whether the orientation is LU-intrinsic at all | **Open adjacent mystery, allocated to C546:** C397 supplies the first party-permuting LC-lift falsifier; C546 then owns the full arbitrary-LU lift classification and, if no lift exists, a finite general contraction/flattening detector. |
+| Whether C546 faces a positive-dimensional continuous stabilizer | **Settled negatively by `ej3`:** the radius-one/Fourier tangent lemma leaves only local scalar gauge, so the projective LU stabilizer is finite. |
 | What C396's q=13 moment collision is remembering | **Settled at the invariant level:** both classes have six common arc/Gale matching concurrences; identifying the two six-match configurations remains C396-owned. |
 | Whether C400's fine scalar-orbit eigenrows admit a separate arbitrary-LU-covariant operator | **Not needed for C402:** the uniform theorem closes before that construction. No successor is required by this task. |
 
