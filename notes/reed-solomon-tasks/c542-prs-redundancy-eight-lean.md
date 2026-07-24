@@ -1,6 +1,6 @@
 # C542 — Lean closure for PRS redundancy eight
 
-**Lane:** `reed-solomon` · **Status:** queued after C541
+**Lane:** `reed-solomon` · **Status:** complete
 
 ## Objective
 
@@ -19,3 +19,5 @@ high-field redundancy-eight classification.
 Acceptance requires an import-only terminal, scoped build, axiom audit, and exact reconciliation
 with the manuscript theorem statement.  Before any Lean operation, read `lean/AGENTS.md`
 completely.
+
+Result: `notes/2026-07-24-c542-prs-redundancy-eight-lean.md`.

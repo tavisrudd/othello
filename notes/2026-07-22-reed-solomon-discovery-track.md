@@ -151,3 +151,17 @@ gates.
 **Evidence:** CHECKED linear support, universal-witness, and `q=7` inclusion--exclusion
 calculations; larger-field rootless sufficiency remains untested.
 **Status:** open lead.
+
+### 2026-07-24 — correction to the characteristic-seven collision warning
+
+The preceding warning is false over `F_49`: the roots of `t^5-t` and `t^2+5` are disjoint there,
+so their product is a valid split squarefree septic.  The associated rootless quartic is shallow,
+which disproves rootless sufficiency already at `q=49`; the later redundancy-nine theorem makes
+the entire characteristic-seven carrier shallow at that field order.
+
+**Provenance:** exact boundary reconciliation in
+`notes/2026-07-24-c542-prs-redundancy-eight-lean.md`, using the checked witness recorded in
+`notes/2026-07-23-c513-prs-redundancy-eight.md` and the closed theorem boundary in
+`notes/2026-07-23-c516-prs-redundancy-nine.md`.
+**Evidence:** CHECKED witness; LEAN boundary record keeps only the q=7/q=49 statements.
+**Status:** retired -> q=49 rootless sufficiency is false.
