@@ -6536,7 +6536,7 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "5b7771c42380525f869c1be3160314488dbed9956fe64c1dbe0185afcbd5ec3e",
+  "manuscript_sha256": "f3aa6fc87d777a4f1fb53ff7774fbe5b71798e43446ff4822e365350f8448782",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",

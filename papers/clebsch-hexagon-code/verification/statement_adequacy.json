@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-statement-adequacy-v1",
   "source": "clebsch_hexagon_code.tex",
-  "source_sha256": "5b7771c42380525f869c1be3160314488dbed9956fe64c1dbe0185afcbd5ec3e",
+  "source_sha256": "f3aa6fc87d777a4f1fb53ff7774fbe5b71798e43446ff4822e365350f8448782",
   "statement_count": 28,
   "statements": [
     {
