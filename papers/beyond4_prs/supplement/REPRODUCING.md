@@ -51,14 +51,14 @@ Build the manuscript with `make check`.  The canonical output is
 
 In the export layout, `../lean` is the repository root of the public
 formal-verification checkout
-`https://github.com/tavisrudd/finitegeom`.  The separately distributed Q25
-certificate payload is assigned to
-`https://github.com/tavisrudd/finitegeom-q25-certificates`.  Their immutable
-commit revisions are release metadata in `RELEASE-MANIFEST.md`.  They are not
-silently replaced by paths into the development monorepo.  Until those
-repositories and revisions are published, the local bundle checks the
-paper-local evidence and Lean interface described in the manuscript but does
-not claim an externally fetchable formal replay.
+`https://github.com/tavisrudd/finitegeom`.  Its immutable commit revision is
+release metadata in `RELEASE-MANIFEST.md` and must also be resolved by the
+release flake and lock.  It is not silently replaced by a path into the
+development monorepo.  Every certificate consumed by the adopted theorem set
+is already paper-local; no separate certificate-package input belongs in the
+release flake.  Until the public Lean repository and revision are published,
+the local bundle checks the paper-local evidence and Lean interface described
+in the manuscript but does not claim an externally fetchable formal replay.
 
 ## Replay semantics
 

@@ -97,7 +97,6 @@ def check_public_release_gate() -> None:
         "Release tag": r"\S+",
         "Release commit": r"[0-9a-f]{40}",
         "Public Lean revision": r"[0-9a-f]{40}",
-        "Public Q25 certificate revision": r"[0-9a-f]{40}",
         "Archive identifier": r"\S+",
         "DOI": r"10\.\d{4,9}/\S+",
         "Source archive SHA-256": r"[0-9a-f]{64}",
@@ -113,6 +112,11 @@ def check_public_release_gate() -> None:
         raise SystemExit("public PDF hash differs from the reviewed local candidate")
     if field("PDF bytes") != field("Local built PDF bytes"):
         raise SystemExit("public PDF byte count differs from the reviewed local candidate")
+    lean_revision = field("Public Lean revision")
+    flake = (PAPER / "flake.nix").read_text(encoding="utf-8")
+    lock = (PAPER / "flake.lock").read_text(encoding="utf-8")
+    if "finitegeom" not in flake or lean_revision not in lock:
+        raise SystemExit("release flake does not resolve the public Lean revision")
     if "pending" in signoff.lower() or signoff.lower().count("verdict: green.") != 2:
         raise SystemExit("independent final-reader signoff is incomplete")
     if "Unrefereed preprint" not in main:

@@ -14,8 +14,6 @@ claimed by this local bundle.
 | Release commit | set from the final paper-export commit |
 | Public Lean repository / export path | `https://github.com/tavisrudd/finitegeom` / `../lean` |
 | Public Lean revision | set from the immutable public verification commit |
-| Public Q25 certificate repository | `https://github.com/tavisrudd/finitegeom-q25-certificates` |
-| Public Q25 certificate revision | set from the immutable public certificate commit |
 | Archive identifier | external publication step |
 | DOI | external publication step |
 | Source archive SHA-256 | computed from the immutable export archive |
@@ -37,10 +35,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `132d006e87022c01cd230d728fcd87294707372ad05673e47d5038e52f0c0014` | 16666 |
-| `EVIDENCE-ROWS.md` | `600a52518d7bb6d2eda1669acdcfb84fc06f92710c79f6e251703f1942eda69f` | 10963 |
+| `EVIDENCE-MANIFEST.json` | `11ac3c808c5ae8fff20f470fce3b83fab6b3d01fb0a448d14a5c4a238384a115` | 16666 |
+| `EVIDENCE-ROWS.md` | `aaf54617ecab1607eb2f3da9a9bbb823e96f6e283155850fc7d3b738bd8efc6a` | 10963 |
 | `package_evidence_bundle.py` | `e5e61b53c6a17c5a670131132e86cb07e6b5dcffe02aaedcee11a03f543dbc70` | 14755 |
-| `verify.py` | `7a945645742e8f5e3f3db3056bafb3e7638450bbfc212ae058a2efac22cf88c5` | 7402 |
+| `verify.py` | `da2b76a7302b6eeb52a7902a61806e696c4c5cb17221ea1f0964464e0b7126b0` | 7663 |
 
 Verify the complete local bundle from the paper directory:
 
