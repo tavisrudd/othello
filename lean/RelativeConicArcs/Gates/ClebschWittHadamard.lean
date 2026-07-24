@@ -12,8 +12,9 @@ distribution, the Steiner `5-(12,6,1)` minimum-support design, the twelve full-s
 points, their complete 66-secant shadow, the order-twelve Hadamard identity, and literal
 degree-twelve generator actions.
 
-No classical Mathieu-group, projective-linear-group, nonsplit-cover, normalizer, or outer-group
-identification is asserted.  Those names require a separate cited-input boundary unless exact
+No classical Mathieu-group, projective-linear-group, nonsplit-cover, or abstract outer-group
+identification is asserted.  The gate does expose the literal finite normalizer and non-inner
+witness checks; classical names require a separate cited-input boundary unless exact
 finite-group identification terminals are added.
 
 The independently compiled exhaustive certificate leaves use `native_decide`; this toolchain
@@ -41,7 +42,9 @@ parent-orbit discriminator uses kernel `decide` and has only `propext`, `Classic
 #print axioms RelativeConicArcs.ClebschWittHadamard.parent_generators_preserve_hexads
 #print axioms RelativeConicArcs.ClebschWittHadamard.parent_action_discriminator
 #print axioms RelativeConicArcs.ClebschWittHadamard.row_column_hinge
+#print axioms RelativeConicArcs.ClebschWittHadamard.rowCarrierRelabelling_twoSidedInverse
 #print axioms RelativeConicArcs.ClebschWittHadamard.parent_intersection_and_join
 #print axioms RelativeConicArcs.ClebschWittHadamard.row_action_has_design_closure
-#print axioms RelativeConicArcs.ClebschWittHadamard.row_column_assignment_is_automorphism_graph
+#print axioms RelativeConicArcs.ClebschWittHadamard.row_column_assignment_finite_graph_certificate
+#print axioms RelativeConicArcs.ClebschWittHadamard.row_column_assignment_normalizes_design_closure
 #print axioms RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness

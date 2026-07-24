@@ -265,6 +265,22 @@ def rowColumnAssignmentClosure : GeneratorAssignmentClosure :=
   generatorAssignmentClosure (generatorKeys designGenerators)
     (generatorKeys alignedRowGenerator)
 
+/-- Finite carrier extracted from a work-list hash set without quadratic `Finset` insertion. -/
+def closureArray (s : Std.HashSet PermutationKey) : Array PermutationKey :=
+  s.toList.toArray
+
+/-- The simultaneous-word graph as an indexable finite array. -/
+def rowColumnAssignmentGraph : Array (PermutationKey × PermutationKey) :=
+  rowColumnAssignmentClosure.pairs.toList.toArray
+
+/-- Totalized forward lookup in the simultaneous-word graph. -/
+def rowColumnImage (x : PermutationKey) : PermutationKey :=
+  rowColumnAssignmentClosure.forward[x]?.getD identityKey
+
+/-- Totalized reverse lookup in the simultaneous-word graph. -/
+def rowColumnPreimage (x : PermutationKey) : PermutationKey :=
+  rowColumnAssignmentClosure.reverse[x]?.getD identityKey
+
 /-- Preimage of one point, with malformed missing images sent to zero. -/
 def keyPreimage (x : PermutationKey) (i : Nat) : Nat :=
   if keyAt x 0 = i then 0 else if keyAt x 1 = i then 1 else
@@ -293,22 +309,53 @@ def inverseKey (x : PermutationKey) : PermutationKey :=
 def conjugateKey (x g : PermutationKey) : PermutationKey :=
   composeKey x (composeKey g (inverseKey x))
 
-/-- Finite graph criterion for the row/column generator assignment to be a bijective
-automorphism whose square is the displayed inner conjugation. -/
+/-- Finite graph criterion for the row/column generator assignment.
+
+The quantified clauses range over `Fin` indices of the exact graph and closure arrays.  They state
+total mutually inverse lookups, right-generator compatibility, generator correspondence, and the
+square on every recorded graph element.  Membership of the square conjugator in the design
+closure makes the square a literal inner conjugation on this certificate.  The theorem does not
+identify an abstract named outer automorphism. -/
 abbrev rowColumnAssignmentChecks : Prop :=
   let assignment := rowColumnAssignmentClosure
-  let image := fun x =>
-    match assignment.forward[x]? with
-    | some y => y
-    | none => identityKey
-  assignment.pairs.size = 95040 ∧
+  let graph := rowColumnAssignmentGraph
+  let source := closureArray designClosure
+  let target := closureArray alignedRowClosure
+  let sourceGenerators := generatorKeys designGenerators
+  let targetGenerators := generatorKeys alignedRowGenerator
+  graph.size = 95040 ∧
+    source.size = 95040 ∧
+    target.size = 95040 ∧
     assignment.forward.size = 95040 ∧
     assignment.reverse.size = 95040 ∧
     assignment.consistent = true ∧
-    ∀ g : Fin 2,
-      image (image (permutationKey (designGenerators g))) =
-        conjugateKey (permutationKey dualitySquareConjugator)
-          (permutationKey (designGenerators g))
+    assignment.pairs.contains (identityKey, identityKey) = true ∧
+    (∀ i : Fin graph.size,
+      let p := graph[i.val]!
+      designClosure.contains p.1 = true ∧
+      alignedRowClosure.contains p.2 = true ∧
+      rowColumnImage p.1 = p.2 ∧
+      rowColumnPreimage p.2 = p.1 ∧
+      (∀ g : Fin 2,
+        assignment.pairs.contains
+          (composeKey p.1 sourceGenerators[g.val]!,
+            composeKey p.2 targetGenerators[g.val]!) = true) ∧
+      rowColumnImage p.2 =
+        conjugateKey (permutationKey dualitySquareConjugator) p.1) ∧
+    (∀ i : Fin source.size,
+      let x := source[i.val]!
+      alignedRowClosure.contains (rowColumnImage x) = true ∧
+      designClosure.contains (rowColumnImage x) = true ∧
+      rowColumnPreimage (rowColumnImage x) = x) ∧
+    (∀ i : Fin target.size,
+      let y := target[i.val]!
+      designClosure.contains (rowColumnPreimage y) = true ∧
+      alignedRowClosure.contains (rowColumnPreimage y) = true ∧
+      rowColumnImage (rowColumnPreimage y) = y) ∧
+    (∀ g : Fin 2,
+      rowColumnImage (permutationKey (designGenerators g)) =
+        permutationKey (alignedRowGenerator g)) ∧
+    designClosure.contains (permutationKey dualitySquareConjugator) = true
 
 /-- Exact closure orders, intersection inclusions, and parent-join equality. -/
 abbrev parentClosureChecks : Prop :=

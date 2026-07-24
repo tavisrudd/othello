@@ -22,11 +22,31 @@ theorem parent_intersection_and_join : parentClosureChecks := by
 theorem row_action_has_design_closure : rowClosureChecks := by
   native_decide
 
-/-- The simultaneous word closure is the graph of a bijective generator assignment whose square
-is the displayed inner conjugation. -/
-theorem row_column_assignment_is_automorphism_graph :
+/-- The simultaneous-word graph has exact 95,040-element source and target carriers, mutually
+inverse lookups, generator-step compatibility, a square given by a closure element on every
+recorded pair, and the displayed generator correspondence. -/
+theorem row_column_assignment_finite_graph_certificate :
     rowColumnAssignmentChecks := by
   native_decide
+
+/-- The certified row/column lookup and its inverse preserve the design closure on every indexed
+carrier element.  This is the literal finite normalizer statement; no named-group identification
+is inferred. -/
+theorem row_column_assignment_normalizes_design_closure :
+    let source := closureArray designClosure
+    let target := closureArray alignedRowClosure
+    (∀ i : Fin source.size,
+      designClosure.contains (rowColumnImage source[i.val]!) = true ∧
+      rowColumnPreimage (rowColumnImage source[i.val]!) = source[i.val]!) ∧
+    (∀ i : Fin target.size,
+      designClosure.contains (rowColumnPreimage target[i.val]!) = true ∧
+      rowColumnImage (rowColumnPreimage target[i.val]!) = target[i.val]!) := by
+  have certificate := row_column_assignment_finite_graph_certificate
+  dsimp [rowColumnAssignmentChecks] at certificate
+  rcases certificate with
+    ⟨_, _, _, _, _, _, _, _, source_total, target_total, _, _⟩
+  exact ⟨fun i => ⟨(source_total i).2.1, (source_total i).2.2⟩,
+    fun i => ⟨(target_total i).1, (target_total i).2.2⟩⟩
 
 /-- No element of the coordinate closure simultaneously conjugates its two displayed generators
 to the aligned row generators. -/
