@@ -349,6 +349,11 @@ def main() -> int:
         default=paper_root / "clebsch_rigidity.tex",
     )
     parser.add_argument("--lean-root", type=Path, required=True)
+    parser.add_argument(
+        "--allow-stale-release-output",
+        action="store_true",
+        help="validate all release inputs while permitting certificate regeneration",
+    )
     args = parser.parse_args()
     repositories = {
         "paper": paper_root.resolve(),
@@ -445,7 +450,10 @@ def main() -> int:
         "release_surface_sha256": release_surface_sha256(manifest),
         "statement_identity_sha256": manifest["statement_identity"]["sha256"],
     }
-    if release_output.get("inputs") != expected_inputs:
+    if (
+        not args.allow_stale_release_output
+        and release_output.get("inputs") != expected_inputs
+    ):
         fail("release output does not attest the exact release inputs")
     tools = verify_all.get("verification_tools")
     if not isinstance(tools, list) or len(tools) != 5:

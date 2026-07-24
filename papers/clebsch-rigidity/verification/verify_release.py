@@ -185,18 +185,18 @@ def main() -> int:
             "the Paper I Lean source paths differ from the pinned commit"
         )
 
-    validator = run(
-        [
-            sys.executable,
-            str(paper_root / "verification" / "verify_trust_manifest.py"),
-            str(manifest_path),
-            "--manuscript",
-            str(paper_root / "clebsch_rigidity.tex"),
-            "--lean-root",
-            str(repositories["lean"]),
-        ],
-        paper_root,
-    )
+    validator_command = [
+        sys.executable,
+        str(paper_root / "verification" / "verify_trust_manifest.py"),
+        str(manifest_path),
+        "--manuscript",
+        str(paper_root / "clebsch_rigidity.tex"),
+        "--lean-root",
+        str(repositories["lean"]),
+    ]
+    if args.update_output:
+        validator_command.append("--allow-stale-release-output")
+    validator = run(validator_command, paper_root)
     if validator.returncode != 0:
         raise RuntimeError(
             "trust-manifest validation failed:\n"
