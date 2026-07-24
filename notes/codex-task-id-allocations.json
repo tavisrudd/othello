@@ -854,8 +854,17 @@
       "last": 551,
       "purpose": "package the cap-game results for a flagship paper target while odd-q research remains active",
       "sequence": 95
+    },
+    {
+      "count": 1,
+      "first": 552,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 552,
+      "purpose": "integrate C550 four-copy sheaf theorem and representation corrections into the manuscript",
+      "sequence": 96
     }
   ],
-  "next_id": 552,
+  "next_id": 553,
   "schema": "codex-task-id-allocations-v1"
 }
