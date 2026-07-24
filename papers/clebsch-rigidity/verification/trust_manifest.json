@@ -938,7 +938,7 @@
       "source": {
         "id": "lem:chord-defect+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "44c31f3ca2106c498d8eb2cd17d743d5c683bdb8eece2f14123a2f1615cd830b"
+        "sha256": "93886b22d42886dbe86130275ef0e47c94b47eb2c0bec93c53bfba79e1837455"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity and bound; Lean checks its six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -1260,9 +1260,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "aa624ceafe6d28502ba1fa179384db9e6640c706a7374a1559b282292eac789c"
+    "sha256": "9511d3509c786b0f0e888f2b3cc197946831dfca911af10559fd1c616edbd38a"
   },
-  "manuscript_sha256": "3d51415df2b4b8dfc2d2791df77177996103da41db3cfcde2ce1df22f4869acf",
+  "manuscript_sha256": "fc3a441e1821b78d49a37ef7a7700447f0cea701ea0ed084987505486f2d094c",
   "public_documents": [
     {
       "path": "README.md",
@@ -1302,7 +1302,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "1e690c0ae49134ee87886baca3e378698c8f9d60c94955d71a43d0c7739089a4"
+    "sha256": "8c1086ffd48976eca7e48a4674d858a70758b004f317cb38ca6a5566449ccb49"
   },
   "verify_all": {
     "checker_output_certificate": {

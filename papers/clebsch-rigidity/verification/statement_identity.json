@@ -144,9 +144,9 @@
       "id": "lem:chord-defect+lem:q9-polarity",
       "kind": "theorem-environment",
       "row": 24,
-      "sha256": "44c31f3ca2106c498d8eb2cd17d743d5c683bdb8eece2f14123a2f1615cd830b",
+      "sha256": "93886b22d42886dbe86130275ef0e47c94b47eb2c0bec93c53bfba79e1837455",
       "source_line": 949,
-      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\]\nand\n\\[\n 0\\le t(A)\\le\n 3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\nIf $\\cU(A)$ is the rational point set of a nonsingular conic, then\n\\[\n q<\\binom{k}{2}.\n\\]\nFor $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,\nso\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad 0\\le c(A)\\le15.\n\\]\nConsequently, if $|\\cU(A)|=q+1$, then\n\\[\n c(A)=(q-6)(q-9).\n\\]\n\\end{theorem}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
+      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\]\nand\n\\[\n 0\\le t(A)\\le\n 3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\nIf merely $|\\cU(A)|=q+1$, then\n\\[\n q<\\binom{k}{2}.\n\\]\nFor $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,\nso\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad 0\\le c(A)\\le15.\n\\]\nConsequently, if $|\\cU(A)|=q+1$, then\n\\[\n c(A)=(q-6)(q-9).\n\\]\n\\end{theorem}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
       "title": "Universal chord defect; $q=9$ polarity graph"
     },
     {
@@ -190,5 +190,5 @@
   ],
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "3d51415df2b4b8dfc2d2791df77177996103da41db3cfcde2ce1df22f4869acf"
+  "source_sha256": "fc3a441e1821b78d49a37ef7a7700447f0cea701ea0ed084987505486f2d094c"
 }
