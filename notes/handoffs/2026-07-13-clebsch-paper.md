@@ -39,7 +39,11 @@ $c(A)=10$ value to Dye, restores the point-orbit subtraction, and uses that
 orbit proposition in the uncovered-conic proof.
 The closing copy-edit removes the unused discrepancy column and stale
 perturbation-checker reference and adds the exact secant-covering
-reformulation.
+reformulation.  The final referee pass adds its necessary
+$A\cap\mathcal Q(\mathbb F_q)=\varnothing$ clause, aligns the two dependency
+tables, records all four non-Clebsch degree-four classes, and uses Dye's
+existence theorem to identify the complete $q=9$ Clebsch specialization of
+$|\mathcal U(K)|=q^2-14q+45$.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has

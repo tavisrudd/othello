@@ -616,7 +616,7 @@ for odd $q$. Thus a disjoint line has at least six covered points, and in
 all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
 
 The final assertion is the conic-inscribed subcensus of the independent
-rigidity replay listed in Table~\ref{tab:replays}.
+replay in the ``Rigidity theorem'' row of Table~\ref{tab:replays}.
 \end{proof}
 
 \begin{theorem}[Rigidity theorem]
@@ -653,13 +653,14 @@ $|\cU(A)|\ge12$; equality holds throughout, $c(A)=10$, and $A$ is a
 Clebsch hexagon.
 
 The degenerate-conic branch is therefore vacuous. Indeed,
-Proposition~\ref{prop:deep-holes-conic} identifies $\cU(A)$ with the twelve
-rational points of a nonsingular conic. A degenerate conic cannot contain
-those same twelve points: it has no component in common with the
-nonsingular conic, so B\'ezout's theorem bounds their intersection by four.
-Thus the original containing conic is nonsingular. This proves
-(i)$\Rightarrow$(iii). Proposition~\ref{prop:deep-holes-conic} and
-projective equivariance give (iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
+Proposition~\ref{prop:deep-holes-conic} and projective equivariance identify
+$\cU(A)$ with the twelve rational points of a nonsingular conic. A
+degenerate conic cannot contain those same twelve points: it has no
+component in common with the nonsingular conic, so B\'ezout's theorem
+bounds their intersection by four. Thus the original containing conic is
+nonsingular. This proves (i)$\Rightarrow$(iii).
+Proposition~\ref{prop:deep-holes-conic} gives
+(iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
 stabilizer theorem also identifies the stabilizer in these equivalent
 cases with $A_5$.
 \end{proof}
@@ -772,12 +773,13 @@ and Dye's stabilizer theorem gives the final $A_5$ statement.
 
 \begin{remark}[Sharpness of the degree threshold]
 \label{rem:degree-threshold}
-The cutoff cannot be raised from three to four: one non-Clebsch class has
-an $18$-point uncovered locus equal to the rational zero set of a quartic.
-It is normalized class \texttt{C02} in the low-degree replay of
-Table~\ref{tab:replays}, which prints the exact equation and verifies the
-equality point by point.  No smoothness, irreducibility, or genus assertion
-is used here.
+The cutoff cannot be raised from three to four: the four non-Clebsch
+classes \texttt{C02}, \texttt{C11}, \texttt{C13}, and \texttt{C14} have
+$d_{\min}=4$, so the failure is not isolated. For \texttt{C02}, the
+low-degree replay in Table~\ref{tab:replays} prints a quartic whose rational
+zero set is exactly the $18$-point uncovered locus and verifies the equality
+point by point. No smoothness, irreducibility, or genus assertion is used
+here.
 \end{remark}
 
 \begin{theorem}[Numerical gap]
@@ -1002,8 +1004,9 @@ that quotient $A_5$.
 \label{sec:why11}
 
 Call an arc $A$ \emph{conic-filling} if $\cU(A)=\mathcal Q(\F_q)$ for some
-nonsingular conic $\mathcal Q$. Equivalently, its chords cover every point
-outside $A\cup\mathcal Q(\F_q)$ and no point of $\mathcal Q(\F_q)$.
+nonsingular conic $\mathcal Q$. Equivalently,
+$A\cap\mathcal Q(\F_q)=\varnothing$, its chords cover every point outside
+$A\cup\mathcal Q(\F_q)$, and no chord meets $\mathcal Q(\F_q)$.
 The conic-filling syndrome phenomenon of
 Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
 without a symmetry hypothesis on the arc. A universal chord-multiplicity
@@ -1112,7 +1115,15 @@ Dye's Theorem~1, and the inclusion above is then an equality because both
 sets have twelve points.
 \end{proof}
 
-\begin{remark}[The next admissible field]
+\begin{remark}[Three Clebsch-family regimes]
+The polynomial $q^2-14q+45=(q-5)(q-9)$ vanishes exactly at $q=5,9$.
+Dye's existence criterion applies in both fields; in particular,
+$5=-1$ is a square in $\F_9$. Thus the formula recovers a complete
+Clebsch six-arc at $q=9$. Independently, Lemma~\ref{lem:q9-polarity}
+excludes every six-arc over $\F_9$ from conic filling by the Sylvester-graph
+clique bound. At $q=11$ the uncovered locus is instead exactly the
+associated conic.
+
 At $q=19$, the same icosahedral construction still produces a Clebsch
 six-arc disjoint from its associated conic, but the covering fails. The
 twenty conic points remain uncovered~\cite[p.~281]{Dye1991}, while
@@ -1291,20 +1302,22 @@ load-bearing checks, not independent supplements to a formal proof.
 Result & Exhaustive or independent executable check \\
 \midrule
 $A_5$ orbits and syndrome conic
-& \path{check_rigidity_degenerate_conic.py} \\
+& \path{check_rigidity_degenerate_conic.py} (syndrome-conic clause) \\
 Decoding and support bipartition
 & \path{check_decoding.py}; \path{check_chirality.py};
 \path{check_code_automorphisms.py} \\
-Numerical gap and complete census
-& \path{check_global_conic_gap.py};
+Rigidity theorem
+& \path{check_rigidity_degenerate_conic.py};
 $1548$-representative frame-normalized enumeration \\
-Low-degree loci
-& \path{check_low_degree_loci.py} \\
+Universal defect and conic-filling window
+& conceptual double counting; no separate executable check \\
+Gap and low-degree loci
+& \path{check_global_conic_gap.py}; \path{check_low_degree_loci.py} \\
 Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula
 & \path{check_q19_nonexample.py} \\
-Classification through seven
+Classification through seven; eight-point sieve
 & \path{check_small_k_conic_filling.py}; the eight-point sieve is human algebra \\
 \bottomrule
 \end{tabular}

@@ -618,7 +618,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 729",
+      "paper_location": "source line 730",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -634,7 +634,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 754",
+      "paper_location": "source line 755",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -668,7 +668,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 783",
+      "paper_location": "source line 785",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -684,7 +684,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 896",
+      "paper_location": "source line 898",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -765,7 +765,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 946",
+      "paper_location": "source line 948",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -824,7 +824,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 962",
+      "paper_location": "source line 964",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1029,7 +1029,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1050",
+      "paper_location": "source line 1053",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1107,7 +1107,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1077",
+      "paper_location": "source line 1080",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1207,7 +1207,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1133",
+      "paper_location": "source line 1144",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1251,7 +1251,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 667",
+      "paper_location": "source line 668",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "0e77b034b94426a1be52e2b50952933491661cbc79a14ecb67b3ed09b1f530a5"
+    "sha256": "e92604300ecbdf9b622db5dc64b0da6c9fd67072dc303bd82bb49bbac03b66e4"
   },
-  "manuscript_sha256": "81b71028ae081c5557aff30de53662af8589a30d1f02f8cdcafd208d16433c56",
+  "manuscript_sha256": "e72eca09b75e7d4f404068e9c5a458b734a8d91894faa0a8d7502e74e7b60649",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "c68da1b31f3e595025921e085e62378501046fff49498a5932f9aa875658d132"
+    "sha256": "5926fdb757fe30b1493243650a100e71dbae250476ed05d9019e14bc700a7f15"
   },
   "verify_all": {
     "checker_output_certificate": {
