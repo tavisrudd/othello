@@ -241,14 +241,53 @@ The only new outward examples strong enough to merit a Paper I sentence are:
    identifies the Clebsch class, while a one-point perturbation changes at
    least eighteen locus points. This adds no claim and may communicate the
    strength better than another external application.
+5. **Quadratic-Frobenius pair extension.** Regard the displayed
+   `F_11`-rational hexagon as an invariant six-arc in `PG(2,11^2)`. Exactly
+   76 `F_11`-lines avoid it, and each carries
+   `(11^2-11)/2=55` nonfixed conjugate pairs. Because every old secant is
+   fixed, all `76*55=4180` pairs are legal; after selecting one extension,
+   the remaining `4179` are alternate pair repairs. This is a clean direct
+   corollary of the Baer/Frobenius pair-extension mechanism. Its numerical
+   count is shared by every `F_11`-rational six-arc, so present it as reach
+   of the arc/MDS object, not as another Clebsch characterization.
+6. **Positive-density complete repair ports.** For the Clebsch
+   `[6,3,4]_{11}` code, the dual is `[6,3,4]`; at every target coordinate
+   the minimum pointed dual word has weight four and
+   `z_x=4+4=8`. The prescribed-port theorem therefore transfers the entire
+   radius-five coefficient-valued port (`6<8`) to density `1/6` in an
+   asymptotically good fixed-`F_11` concatenated family. Its minimal support
+   clutter is the generic complete three-uniform hypergraph on five helpers
+   (ten locality-three supports, matching number one, transversal number
+   three). The potentially Clebsch-specific content is the coefficient
+   layer: the normalized repair vectors through one target span `C^perp`
+   and hence recover the inner code. Prove and trust-map that reconstruction
+   lemma before claiming that Clebsch rigidity, rather than only generic MDS
+   locality, survives transfer.
 
 Do not use the following in Paper I: beyond-redundancy-four PRS (method
 reach only), the Paper II Coxeter/reflection theorem (wrong owner),
 Mathieu-hexad transversality (correct but decorative/negative), checked
-isoduality (minor side fact), or repair-code transfer (still an open agenda).
-Any new cap, extension-complex, or AME theorem-like statement would change
-Paper I's nineteen-row trust surface and require a fresh release review; a
-pure motivation sentence or reframing of an existing theorem would not.
+isoduality (minor side fact), or the still-open orbit-labelled repair
+hypergraph agenda. The exact complete-port transfer theorem exists, but its
+Clebsch-specific coefficient-reconstruction specialization is not yet a
+paper result.
+Any new cap, extension-complex, AME, Baer-extension, or repair-port
+theorem-like statement would change Paper I's nineteen-row trust surface
+and require a fresh release review; a pure motivation sentence or reframing
+of an existing theorem would not.
+
+Queue, in the owning lanes rather than C182:
+
+- **complete-ports:** prove that the full normalized pointed coefficient
+  port of the Clebsch code reconstructs `C^perp`, instantiate `z_x=8` and
+  the density-`1/6` theorem, and decide whether the application belongs in
+  the complete-ports manuscript or only its outlook;
+- **Baer/Frobenius:** record the exact `4180/4179` Clebsch-over-`F_121`
+  extension/repair corollary and decide whether it earns a short example in
+  the equivariant-completion manuscript.
+
+Neither queued bridge changes Paper I unless the user explicitly reopens
+its final-GO release surface.
 
 Use C399 as the conic-phase prelude and C403/C406/C411 with selective C412
 upgrades. Credit Edge and Dye for the exceptional configurations and avoid
