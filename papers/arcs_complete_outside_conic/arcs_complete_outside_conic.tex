@@ -576,7 +576,7 @@ Let $k\ge6$ be even.  If a $\cC$-complete $k$-arc has zero defect, then
 In the first two cases every point of $\cC$ has index $k/2$; in the third,
 exactly $k-1$ conic points have that index.
 
-If, in addition, \(q\) is a power of two, then either \(k=q+2\) or the
+If \(q\) is also a power of two, then either \(k=q+2\) or the
 sole remaining arithmetic candidate is
 \[
  (q,k)=(4096,92).
@@ -592,9 +592,6 @@ projective realizations or the prescribed conics disjoint from them.
 
 Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
 $\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
-Thus a hyperoval over $\F_Q$ retains its secant-concurrence matching design
-after scalar extension but cannot attain equality
-in~\eqref{eq:conic-complete} over the larger field.
 \end{corollary}
 
 \begin{proof}
@@ -626,8 +623,9 @@ a power of two only if \(Q+1=1\).  In the case \(q=B+1\), put
 \[
  x^2+7=8q=2^{n+3}.
 \]
-The Ramanujan--Nagell theorem~\cite{Banwait2026}, together with \(k\ge6\)
-even, leaves only \(x=181\), hence \((q,k)=(4096,92)\).  The remaining
+Nagell's theorem~\cite{Nagell1948}, independently formalized in Lean by
+Banwait~\cite{Banwait2026}, together with \(k\ge6\) even, leaves only
+\(x=181\), hence \((q,k)=(4096,92)\).  The remaining
 case \(q=Q\) is \(k=q+2\).  This argument supplies only a necessary
 parameter pair; it does not assert that the corresponding matching design
 has a rank-three realization.
@@ -1452,6 +1450,11 @@ Ten-point realization&
 \texttt{check\_match10\_\allowbreak rank\_three.py} and its JSON certificate&
 Mathon's external two-class classification; Python integer arithmetic and
 Singular exact arithmetic\\
+Ramanujan--Nagell classification&
+Nagell's proof~\cite{Nagell1948}; independent Lean formalization
+by Banwait~\cite{Banwait2026}&
+Nagell's published argument; for the formal cross-check, the Lean kernel
+and Mathlib\\
 Small-field witnesses&
 \texttt{ExampleChecks/\allowbreak Q5.lean} through \texttt{Q16.lean}&
 Lean kernel and the explicit finite-field implementations\\ \hline
@@ -1564,11 +1567,6 @@ B.~Alspach and K.~Heinrich,
 \newblock \emph{Australasian Journal of Combinatorics} \textbf{2} (1990),
 39--55.
 
-\bibitem{Banwait2026}
-B.~Banwait,
-\newblock A formal proof of the Ramanujan--Nagell theorem in Lean 4,
-arXiv:2604.09808 (2026).
-
 \bibitem{Ball1997}
 S.~Ball,
 \newblock On small complete arcs in a finite plane,
@@ -1581,6 +1579,11 @@ S.~Ball,
 \newblock in \emph{Arithmetic of Finite Fields---WAIFI 2016}, Lecture Notes
 in Computer Science \textbf{10064}, Springer, 2017, 95--102.
 \newblock doi:10.1007/978-3-319-55227-9\_7.
+
+\bibitem{Banwait2026}
+B.~Banwait,
+\newblock A formal proof of the Ramanujan--Nagell theorem in Lean 4,
+arXiv:2604.09808 (2026).
 
 \bibitem{BartoliEtAl2018}
 D.~Bartoli, A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
@@ -1625,6 +1628,13 @@ G.~Korchm\'aros and T.~Sz\H{o}nyi,
 \newblock \emph{Contributions to Discrete Mathematics} \textbf{3}(1)
 (2008), 20--38.
 \newblock doi:10.55016/ojs/cdm.v3i1.62767.
+
+\bibitem{Nagell1948}
+T.~Nagell,
+\newblock The Diophantine equation \(x^2+7=2^n\),
+\newblock \emph{Norsk Matematisk Tidsskrift} \textbf{30} (1948), 62--64;
+English version, \emph{Arkiv f\"or Matematik} \textbf{4} (1960), 185--187.
+\newblock doi:10.1007/BF02592006.
 
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
