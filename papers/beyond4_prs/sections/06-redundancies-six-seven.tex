@@ -149,33 +149,18 @@ In syndrome coordinates the tame cyclic surface is
 \]
 When $2$ and $3$ are invertible this is the Veronese surface, of degree
 four, and contains no line.  Characteristic three has a different
-wild closure, treated in Proposition~\ref{prop:r6-modular}.  For a
-basis \(F_0,F_1,F_2\) of the \(g^2_4=W_f\), the collision divisor is the
-rank-one condition on the value and derivative rows.  Equivalently,
-all three binary Wronskians
-\[
-             M_{ij}=F_i\,dF_j-F_j\,dF_i\qquad(0\leq i<j\leq2)
-\]
-vanish at the marker.  Each \(M_{ij}\) is a binary form of degree six:
-on an affine chart the apparent degree-seven leading terms cancel,
-and homogenization includes the point at infinity.
-
-At least one \(M_{ij}\) is nonzero.  Otherwise the morphism
-\(\PP^1\to\PP^2\) defined by the base-point-free net \(W_f\) would have
-zero differential and hence factor through absolute Frobenius.  In
-characteristic three this is impossible because its pullback line
-bundle has degree four, not divisible by three.  In characteristic
-two the factorization would identify \(W_f\), after a change of
-coordinates, with the full pure-square space
+wild closure, treated in Proposition~\ref{prop:r6-modular}.
+For (ii), Lemma~\ref{lem:uniform-collision} with \(j=6\) gives the
+degree-six bound except possibly in characteristic two.  In that
+characteristic, inseparability would identify \(W_f\), after a change
+of coordinates, with the full pure-square space
 \(\langle T^4,T^2U^2,U^4\rangle\).  Its annihilator is
 \(\langle e_1^\vee,e_3^\vee\rangle\).  For the two consecutive Hankel
 rows this would require simultaneously
 \[
  a_0=a_2=a_4=0,\qquad a_1=a_3=a_5=0,
 \]
-contrary to \(f\ne0\).  Thus the collision scheme is contained in the
-zero divisor of one nonzero \(M_{ij}\), and has degree at most six in
-every characteristic.
+contrary to \(f\ne0\).  Thus the bound holds in every characteristic.
 
 Finally the R5 off-diagonal curve has deletion degree thirteen,
 including its possible rational singular point.  The unique cubic
@@ -544,11 +529,8 @@ moving $g^3_5$ has degree at most eight.
 \end{proposition}
 
 \begin{proof}
-It is the ramification divisor of a separable $g^3_5$, whose degree is
-$(3+1)(5-3)=8$.  If the series were inseparable, it would factor
-through Frobenius and lie in the $p$-th-power subspace of quintics;
-that subspace has dimension at most three, smaller than the
-four-dimensional Hankel series.
+This is Lemma~\ref{lem:uniform-collision} with \(j=7\):
+the series is separable and \(2j-6=8\).
 \end{proof}
 
 The characteristic-two nucleus line at redundancy six has exactly one
