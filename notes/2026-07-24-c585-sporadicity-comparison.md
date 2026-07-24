@@ -126,12 +126,19 @@ independent exceptional conditions happen to coincide.
   mechanisms**, not one — arithmetic factorization (M1), S₃-monodromy census (M2), self-dual-perfect-
   code classification + PSL₂ index (M3) — plus the field-independent MDS-shortening for the uniform
   quantum avatar. C586 should not seek a single Φ.
-- **Feeds C589.** Since the sporadic avatars are sporadic for genuinely different classified/census
-  reasons, the "one defect identity" cannot be the headline theorem. This pushes C589 toward
-  **program-identity / framing** for the sporadic side and **theorem** only for the uniform (quantum)
-  side, unless C587's transport-category / first-order-transfer core (still open) can exhibit the
-  three obstructions as shadows of one transport-natural obstruction — which this comparison gives no
-  evidence for and one structural reason against (different finiteness types).
+- **Feeds C589 — and the placement is now determined.** Since the sporadic avatars are sporadic for
+  genuinely different classified/census reasons, the "one defect identity" cannot be the headline
+  theorem; C589 lands on **program-identity / framing**, not a standalone gateway paper. Three facts
+  fix this: (i) the confluence framing and its red team are already clebsch-lane work banked in the
+  Jul 21 Weil-roof program; (ii) the *theorem-route* that would elevate the confluence — **D6, the
+  information-lattice / mixed-Hecke depth functor over prime-degree 2-transitive groups with p-prime
+  stabilizer** (instances include Mathieu `M₁₁`/`M₂₃`, reaching Golay "through the front door") — is
+  **open and clebsch/crowns-owned**, slated for the emerging 3-paper architecture (1 rigidity /
+  2 factorization / 3 foundations), not for a gateway manuscript; (iii) the gateway lane's *unique*
+  value-add, absent from the clebsch red team, is the **cross-avatar sporadic-vs-uniform contrast**
+  with the quantum avatar (`ame-lu`, field-uniform LU=LC) — a framing/paragraph tying the incidence,
+  module, and entanglement papers together, not a theorem. The `(c)-later` escape to a standalone
+  theorem is exactly "D6 lands," which is foreign-owned and gated on the clebsch battery.
 
 ## Mystery ledger (post `ej`+`tt` closeout)
 
@@ -278,10 +285,16 @@ synthesis:
   modular carrier (perfect-code + index) has an analogous power-sum linearization and generator-level
   diagonalization is the genuinely open comparison C586 owns — read the C415/C416/C434 conclusions,
   do not rebuild them.
-- **Dual question ⇒ the organizing structure is *self-duality*, and there are three conditions, not
-  two towers.** The two-tower framing (ej item 1) undercounts; this juxtaposition is a gateway-lane
-  synthesis of `crowns`/`clebsch`-settled facts (check the crowns reports before treating it as new).
-  The certified self-duality conditions are: (i) code **self-dual-extendable** `{7,11,23}`;
+- **Dual question ⇒ the organizing structure is *self-duality*, three conditions not two towers —
+  but this is *pre-existing clebsch work*, not gateway-new.** The `q=11` **confluence of three
+  independent classifications** (rank-3 Coxeter groups; the two exceptional perfect codes; self-dual
+  regular polytopes), the code-vs-polytope **tower divergence at `q=19`**, the **Paley / `q≡3 mod 4`**
+  correction, and the **M₁₂ refutation** were all assembled in the Jul 21 clebsch gateway exploration
+  (`notes/2026-07-20-cocycle-gateway-explorations.md`, banked into
+  `notes/2026-07-21-clebsch-weil-roof-program.md` and its conversation report), **including a red team**
+  (the "n=2 in a three-point costume" and Paley-deflation critiques). C585 does not originate any of
+  it; it *reuses* the confluence, credited, for the cross-avatar comparison. Restated for reference,
+  the three self-duality conditions are: (i) code **self-dual-extendable** `{7,11,23}`;
   (ii) exceptional-index / biplane `{7,11,19}`; (iii) **A₅ self-polar conic** `{5,11,19}` (Dye 1991;
   Storme–Van Maldeghem). Their incidence:
 
