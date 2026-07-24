@@ -57,6 +57,20 @@ FiniteBuildGame semantics
             └─ uniform routing theorem [OPEN or CROWN]
 ```
 
+## Three-interface proof organization
+
+Use three boxed contracts throughout the paper:
+
+| Interface | Input | Output | Principal uses |
+|---|---|---|---|
+| symmetry | involution, incidence preservation, pair-extension validity | P-position | affine, odd-dimensional projective, even-plane residual, invariant subboards |
+| transport | equivalence preserving valid positions and moves | equal P/N value | binary representatives, frame normalization, coordinate/projective-linear changes |
+| residual rank | fixed old state and cap legality | minimal new obstructions have size two or three | odd-plane conflict graph plus active triples |
+
+The named geometric families are corollaries below these boxes.  Do not give
+each family a new proof vocabulary when it merely discharges an existing
+contract.
+
 ## Section map
 
 ### 1. The game and the result
@@ -136,6 +150,11 @@ projective linear equivalence.
 
 Consequence: one hyperbolic-quadric and one coordinate-exact
 elliptic-quadric corollary.
+
+Conceptual compression: state the invariant zero-locus schema first.  An
+arbitrary preserved point predicate is already accepted by the formal
+subboard theorem; quadrics are examples where form similarity proves
+preservation.
 
 Outside: point to a companion for parabolic, Hermitian, and Baer-semilinear
 method-boundary classification.
@@ -249,6 +268,10 @@ Avoid a list of abandoned mechanisms.
 
 ## Verification-material split
 
+The formal-core paper consists of the uniform family, mirror/subboard, and
+residual-reduction theorems.  It has no logical dependency on the fixed-q
+computations.  Treat the evidence section as a detachable annex:
+
 Main paper:
 
 - exact theorem statements and proof ideas;
@@ -268,6 +291,10 @@ Internal only:
 
 - task chronology, handoffs, solver transcripts, failed build experiments,
   superseded selectors, and performance tuning.
+
+If normalization or generated-source review is incomplete at freeze time,
+drop the annex rather than weakening the trust vocabulary.  The headline and
+all uniform proofs survive unchanged.
 
 ## Freeze gates
 

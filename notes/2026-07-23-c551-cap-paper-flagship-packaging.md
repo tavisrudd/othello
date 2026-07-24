@@ -240,6 +240,50 @@ headline.
 The section-level manuscript skeleton and its two headline variants are in
 `notes/2026-07-23-c551-cap-paper-manuscript-skeleton.md`.
 
+### Three-interface compression
+
+The theorem package compresses further than the family list suggests.  The
+paper has only three genuinely different interfaces:
+
+1. **Symmetry interface:** an involutive incidence automorphism satisfying the
+   pair-extension contract gives a P-position.  Whole spaces and invariant
+   subboards are instances.
+2. **Transport interface:** an equivalence preserving legal positions and
+   moves preserves P/N value.  Binary representatives, coordinate changes,
+   frame normalization, and projective-linear transport are instances.
+3. **Residual-rank interface:** after fixing an old cap state, minimal new
+   obstructions have size two or three; eliminating the triples leaves the
+   conflict-graph game.
+
+The affine/projective/quadric theorem table should be presented as the
+corollary surface of these interfaces.  This avoids making the main result
+look like four unrelated tricks and gives the odd-plane reduction a natural
+place in the same theorem package.
+
+### Formal-core submission cut
+
+The main mathematical paper can be made independent of every native solver,
+raw table, and generated fixed-q certificate:
+
+```text
+formal core
+  F1--F4
+  + M1--M3
+  + Q+/Q−
+  + R1--R7
+
+optional evidence annex
+  q-specific rows
+  + PG(4,3)
+  + checker and certificate architecture
+```
+
+Deleting the optional annex changes motivation and conjectural evidence but
+does not remove a premise from any main theorem or proof.  Q11/Q13 may remain
+as formal illustrations, but they are not needed for the headline.  This is
+the safest first release shape if evidence normalization or generated-source
+review becomes the schedule bottleneck.
+
 ## Trust vocabulary
 
 The manuscript must keep two independent axes.
@@ -398,6 +442,14 @@ quadric corollaries.  `MirrorBoundary.lean`, `BaerSemilinear.lean`,
 classification boundary of the mirror method.  They should receive one
 forward pointer, not an appendix dump.
 
+The conceptual statement in the flagship is the **invariant zero-locus
+schema**, not a list of named varieties: whenever a fixed-point-free
+projective involution preserves the zero locus (or any other point predicate),
+M2 makes its ambient-collinearity cap game P.  The quadric rows are decisive
+examples discharging that predicate-preservation obligation.  This schema is
+already exactly formalized by arbitrary `Q`; it requires no new abstraction
+or Lean theorem.
+
 ## E. Manuscript assets and terminology
 
 ### Mechanism theorem table
@@ -428,6 +480,19 @@ Use “P-position” only for normal-play outcome, “computed P” for an exact
 result, and “Lean theorem/certificate” only when the terminal implication is
 kernel-checked.  Use “on-conic bucket layer” rather than “plane outcome” for
 q=25.
+
+### Working title fork
+
+No title is frozen, but the architecture supports two honest forms:
+
+- no crown: *Symmetry and residual capacity in cap-building games on finite
+  geometries*;
+- crown: *Cap-building games on finite geometries: symmetry, residual
+  capacity, and odd projective planes*.
+
+Both titles lead with the structural contribution rather than a catalogue of
+boards.  The first remains correct if every optional computational row is
+removed.
 
 ### Diagram specifications
 
