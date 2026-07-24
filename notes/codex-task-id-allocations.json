@@ -917,8 +917,26 @@
       "last": 577,
       "purpose": "trial split into focused rigidity Paper I, factorization-memory Paper II, and editorial boundary review",
       "sequence": 102
+    },
+    {
+      "count": 1,
+      "first": 578,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 578,
+      "purpose": "degree-nine Lucas rank-two Artin--Schreier rational-avoidance theorem",
+      "sequence": 103
+    },
+    {
+      "count": 1,
+      "first": 579,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 579,
+      "purpose": "exploratory Clebsch passages and holonomy Paper III spine and standalone-value gate",
+      "sequence": 104
     }
   ],
-  "next_id": 578,
+  "next_id": 580,
   "schema": "codex-task-id-allocations-v1"
 }
