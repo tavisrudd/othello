@@ -309,9 +309,12 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   rows.  Their exact trust and exclusion boundaries are frozen in
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
   and their queued task briefs.  C503--C507 were reserved as one block in commit `5fa7dc97`.
-- **C320 is the release-blocking trust-ledger capstone:** after every paper-adopted C420--C428,
-  C494, and C503--C507 slice,
-  it must publish one claim-by-claim ledger with exact theorem/gate/axiom evidence, external
+- **C320 is active as an early incremental foundation and remains the release-blocking
+  trust-ledger capstone:** by explicit user authorization it has begun deterministic manuscript
+  statement extraction, fail-closed manifest validation, and reviewed-slice intake while C505
+  awaits its final review and C507 is underway.  After every paper-adopted C420--C428, C494, and
+  C503--C507 slice is final, it must publish one claim-by-claim ledger with exact
+  theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
   replacement-spine claim is called Lean-formalized before this reconciliation and independent
   review. The user, not the implementing agent, launches Codex for the initial and post-fix reviews;
