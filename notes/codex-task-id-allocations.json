@@ -1034,8 +1034,17 @@
       "last": 597,
       "purpose": "construct the complete non-cyclic R10 integral bad scheme and test SC(11)",
       "sequence": 115
+    },
+    {
+      "count": 1,
+      "first": 598,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 598,
+      "purpose": "second referee revision: restore logical-phase scope and self-contained exceptional arithmetic",
+      "sequence": 116
     }
   ],
-  "next_id": 598,
+  "next_id": 599,
   "schema": "codex-task-id-allocations-v1"
 }

@@ -76,12 +76,12 @@ replays its load-bearing algebra.
 | `.source_contraction_eq_rankOrbitSum` and `.target_contraction_eq_rankOrbitSum` | solution-counting identity (6.3) and the proof of Theorem 6.2 | C397 independent orbit-sum replay | constructed and certificate-supported |
 | `.source_rankOrbitSum_evaluation` and `.target_rankOrbitSum_evaluation` | rank histograms and values in (6.4) | C397 exhaustive 720-permutation evaluation | certificate-supported inputs |
 | `.lu_implies_equal_contractionOrbitSum` | Section 6 copy-contraction definition and party-orbit symmetrization | no finite computation required | constructed implication |
-| `TransportCycleCoverInputs.*Actions` | Section 7, the six copy permutations, systematic matrices `Q_p`, quotient actions `ρ_i`, and block operator (7.2)--(7.3) | C550 section/transport replay | constructed and certificate-supported |
-| `.negativeSigned_det_cycleCover`, `.positiveSigned_det_cycleCover`, `.axial_det_cycleCover` | Theorem 7.1 proof, three displayed determinant formulas | C550 signed cycle-cover and fraction-free determinant paths | constructed and certificate-supported |
-| `TransportRankBridgeInputs.matchingRank`, `.transportRank`, `.matchingRank_le`, `.transportRank_le`, `.kernelExcess_eq` | Section 7, the `24×21` and `9×9` constructions and (7.4) | C550 comparison at all 720 assignments for six exact points | constructed; identity certificate-supported |
-| `TransportOrbitGeometryInputs.*Support` | Theorem 7.1 proof, three active party-assignment double cosets | C550 double-coset certificate | constructed and certificate-supported |
-| `.axial_card`, `.negativeSigned_card`, `.positiveSigned_card` | The two orbit-stabilizer quotients in the proof of Theorem 7.1 | C550 exact orbit enumeration | constructed and certificate-supported |
-| `.axial_disjoint_negative`, `.axial_disjoint_positive`, `.negative_disjoint_positive` | Theorem 7.1 proof, signed-sheet and axial type separation | C550 exact support sets | certificate-supported inputs |
+| `TransportCycleCoverInputs.*Actions` | Appendix A, the six copy permutations, systematic matrices `Q_p`, quotient actions `ρ_i`, and block operator (A.2)--(A.3) | C550 section/transport replay | constructed and certificate-supported |
+| `.negativeSigned_det_cycleCover`, `.positiveSigned_det_cycleCover`, `.axial_det_cycleCover` | Theorem A.1 proof, three displayed determinant formulas | C550 signed cycle-cover and fraction-free determinant paths | constructed and certificate-supported |
+| `TransportRankBridgeInputs.matchingRank`, `.transportRank`, `.matchingRank_le`, `.transportRank_le`, `.kernelExcess_eq` | Appendix A, the `24×21` and `9×9` constructions and (A.4) | C550 comparison at all 720 assignments for six exact points | constructed; identity certificate-supported |
+| `TransportOrbitGeometryInputs.*Support` | Theorem A.1 proof, three active party-assignment double cosets | C550 double-coset certificate | constructed and certificate-supported |
+| `.axial_card`, `.negativeSigned_card`, `.positiveSigned_card` | The two orbit-stabilizer quotients in the proof of Theorem A.1 | C550 exact orbit enumeration | constructed and certificate-supported |
+| `.axial_disjoint_negative`, `.axial_disjoint_positive`, `.negative_disjoint_positive` | Theorem A.1 proof, signed-sheet and axial type separation | C550 exact support sets | certificate-supported inputs |
 
 This table also supplies the reverse check: each paper-facing conditional
 declaration in the aggregate audit appears above, and each cited manuscript

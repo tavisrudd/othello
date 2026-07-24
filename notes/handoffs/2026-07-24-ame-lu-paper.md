@@ -259,6 +259,18 @@ polynomial/quantum Reed--Solomon and transversal-gate context.  The
 warning-free 15-page build and all seven evidence replays pass.  See
 `2026-07-24-c594-ame-lu-major-revision.md`.
 
+**C598 closed (2026-07-24): scope and self-containedness revision.**  The
+promoted logical-phase claim now carries its odd-prime-field restriction in
+both the abstract and introduction, while the LU-to-LC theorem remains
+all-prime-power.  Theorem 6.1 now proves its characteristic-\(3,5\) clauses by
+explicit subgroup and polynomial arguments.  The redundant transport
+calculation has moved to Appendix A; its orbit--stabilizer quotients,
+support-disjointness argument, and characteristic-\(3,5,7\) identities are
+restored.  The novelty-search sentence is narrowed to its actual coverage,
+and the Aharonov--Ben-Or and Ball--Lavrauw records are corrected.  The
+warning-free 16-page build, rendered-page inspection, and seven-bundle replay
+pass.  See `2026-07-24-c598-ame-lu-scope-self-containedness.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -280,6 +292,8 @@ as C559--C572.  Dependency order is authoritative:
    (complete, superseded by C594).
 9. C594: external major-revision proof, convention, positioning, and
    literature sweep (complete; independent re-review pending).
+10. C598: front-matter scope, self-contained exceptional arithmetic, and
+    appendix disposition (complete; independent re-review pending).
 
 The revision is complete locally, but release-candidate status now waits on an
 independent read of the repaired Theorems 4.1 and 5.1.  Public release also

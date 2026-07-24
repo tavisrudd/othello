@@ -147,7 +147,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
-- **C598 `[ame-lu]` [IN PROGRESS; second referee revision]** — restore the odd-prime-field scope of the promoted logical-phase claim, make Theorem 6.1's characteristic-\(3,5\) cases explicit, move the redundant transport calculation to an appendix while restoring its checkable orbit/characteristic arithmetic, and correct the literature-search and bibliography records → `notes/2026-07-24-c598-ame-lu-scope-self-containedness.md`.
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`

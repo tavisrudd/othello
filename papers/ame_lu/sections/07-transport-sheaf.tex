@@ -1,4 +1,4 @@
-\section{The four-copy transport operator}\label{sec:transport}
+\section{Transport calculation for the four-copy witness}\label{sec:transport}
 
 We now explain the rank jump behind \((6.4)\).  Fix the six copy
 permutations
@@ -13,7 +13,7 @@ vertex and \(k\) at each edge, using \(g_{p(i)}\) as both restriction
 maps for a party assignment \(p\in S_6\).  A global section is a tuple
 \((x_a,y_b)\in V^8\) satisfying
 \[
- g_{p(i)}(x_a-y_{\sigma_i(a)})=0                       \tag{7.1}
+ g_{p(i)}(x_a-y_{\sigma_i(a)})=0                       \tag{A.1}
 \]
 on all \(24\) edges.  The three-dimensional constant-section space is
 always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
@@ -24,7 +24,7 @@ Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
 \(g_{p(3)},g_{p(4)},g_{p(5)}\) a basis of \(V^*\).  Define \(Q_p\) by
 \[
  g_{p(i)}=\sum_{k=0}^2(Q_p)_{ik}g_{p(3+k)}
- \qquad(0\leq i<3).                                   \tag{7.2}
+ \qquad(0\leq i<3).                                   \tag{A.2}
 \]
 Thus \(Q_p\) is the left block obtained by systematizing the
 party-reordered generator matrix on its last three columns; no pivot can
@@ -39,17 +39,18 @@ a=-2(t-1)^2,&b=-(t^2-t+1),\\
 c=-(t^2-3t+1),&d=-2(t-1).
 \end{array}
 \]
-If \(Y_k\in U\) are the three free copy vectors, then \((7.1)\) reduces
+If \(Y_k\in U\) are the three free copy vectors, then
+\((\mathrm{A}.1)\) reduces
 to the \(9\)-by-\(9\) block transport operator
 \[
  \widetilde T_p
  =\bigl((\widetilde Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
-                                                               \tag{7.3}
+                                                               \tag{A.3}
 \]
 The dimension identity
 \[
  21-\rank M_{\pi\boldsymbol\sigma}(G(t))
-   =9-\rank\widetilde T_p                              \tag{7.4}
+   =9-\rank\widetilde T_p                              \tag{A.4}
 \]
 holds over the field \(k\), where \(p=\pi\) in the convention of
 Section~\ref{sec:invariants}.  It follows by quotienting the
@@ -60,14 +61,15 @@ on the admitted six-arc locus.
 
 \begin{theorem}[Transport divisor]\label{thm:transport-divisor}
 For a parameter on the admitted odd non-GRS pencil, there exists a party
-assignment \(p\in S_6\) for which the sheaf \((7.1)\) has a nonconstant
+assignment \(p\in S_6\) for which the sheaf
+\((\mathrm{A}.1)\) has a nonconstant
 section if and only if
 \[
  (B^2-2A^2)(9B^2-4A^2)=0,
 \]
 or equivalently
 \[
- (z-2)(9z-4)=0.                                       \tag{7.5}
+ (z-2)(9z-4)=0.                                       \tag{A.5}
 \]
 At a generic point above \(z=2\), exactly \(96\) party assignments have
 rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
@@ -110,20 +112,41 @@ Fraction-free elimination also gives a nonzero \(8\)-minor on each
 component, so the generic kernel is exactly one-dimensional.
 
 The row/column equivalences organize the exceptional assignments into
-double cosets.  Orbit--stabilizer gives \(96\) assignments for the axial
-type and \(192\) for each signed type; the two signed types occur on the
-opposite sheets \(w=\pm2/3\), so only \(192\) occur over either generic
-parameter.  Explicit representatives, stabilizer intersections, and
-complete support sets are in the certificate.  Equation \((7.4)\) turns
+double cosets.  The axial stabilizers have orders \(48\) and \(16\),
+with intersection of order \(8\), so its support has size
+\[
+ 48\cdot16/8=96.
+\]
+For either signed type the corresponding orders are \(24\), \(48\), and
+\(6\), giving
+\[
+ 24\cdot48/6=192.
+\]
+The two signed types are distinguished by the sign of \(w\), while the
+axial cycle pattern differs from both; hence their support sets are
+disjoint.  Explicit representatives, stabilizer intersections, and
+complete support sets are in the certificate.
+Equation \((\mathrm{A}.4)\) turns
 the one-dimensional transport kernels into rank \(20\) of the matching
 matrix.
 \end{proof}
 
 The exceptional arithmetic belongs to this detector, not to
-Theorem~\ref{thm:lu-lc-rigidity}.  In characteristic \(3\) both admitted
-components disappear; in characteristic \(5\) the \(z=4/9\) component
-lies on the excluded GRS boundary; and in characteristic \(7\) the two
-components merge, giving the exact histogram \(20^{288}21^{432}\).
+Theorem~\ref{thm:lu-lc-rigidity}.  The identity
+\(4B^2+A^2=4G^2\) gives, respectively,
+\[
+\begin{array}{c|c}
+\operatorname{char}k&\text{specialized identities}\\ \hline
+3&B^2-2A^2=G^2,\quad 9B^2-4A^2=-A^2,\\
+5&9B^2-4A^2=4G^2,\\
+7&9B^2-4A^2=2(B^2-2A^2).
+\end{array}
+\]
+Thus in characteristic \(3\) both admitted components disappear; in
+characteristic \(5\) the \(z=4/9\) component lies on the excluded GRS
+boundary; and in characteristic \(7\) the two components merge.  The
+disjoint \(96\)- and \(192\)-element supports then give the exact
+histogram \(20^{288}21^{432}\).
 Characteristics \(11,13,41\) introduce only pullback ramification, with
 no further rank drop.  These reductions and the nonzero \(8\)-minors
 that control them are replayed in the certificate.
