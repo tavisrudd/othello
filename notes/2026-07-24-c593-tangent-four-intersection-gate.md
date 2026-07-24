@@ -351,6 +351,86 @@ problem therefore remains the load-bearing C593 gate; the arithmetic result
 removes every even square-root-scale exact equality case except one finite
 parameter pair.
 
+## Prescribed-conic spectral gate: exact no-go
+
+The proposed polarity--spectral amplification does not survive its first
+structural test.  In characteristic two, the bilinear polar form of a conic
+has the nucleus as radical, so the conic does not supply a nondegenerate
+orthogonal polarity.  The surviving real operator is ordinary incidence
+between the \(q+1\) conic points and all projective lines.
+
+Let \(B\) be that \(0\)-\(1\) incidence matrix and let \(f\) be the indicator
+of the tangent-line set \(\mathcal T_A\), viewed on primal lines.  Put
+\(d=Bf\), so \(d_y=\tau_A(y)\) for \(y\in\mathcal C\).  Since two distinct
+conic points determine one line,
+\[
+ BB^\mathsf T=qI+J.
+\]
+Thus the only singular values are \(\sqrt{2q+1}\) on constants and
+\(\sqrt q\) on their orthogonal complement.
+
+The apparent extra structure of \(f\) also collapses over the reals.  If
+\(\mathcal S_A\) is the set of secant lines of \(A\), then the arc property
+gives the exact lift of the binary hull identity
+\[
+ f=\sum_{a\in A}\mathbf 1_{a^*}-2\mathbf 1_{\mathcal S_A}.
+\]
+Applying \(B\) yields only
+\[
+ d=k\mathbf 1-2r,
+\]
+because each conic point and \(a\in A\) determine one line, while
+\((B\mathbf 1_{\mathcal S_A})_y=r(y)\).
+
+For even \(k=2m\), the conic part of the defect is consequently
+\[
+ D_{\mathcal C}
+ =\sum_{y\in\mathcal C}r(y)(m-r(y))
+ =\frac m2\mathbf 1^\mathsf T d-\frac14\lVert d\rVert^2.
+\]
+This is exactly C555's conic incidence quadratic form.  The centered spectral
+estimate
+\[
+ \left\|d-\frac{\mathbf 1^\mathsf T d}{q+1}\mathbf 1\right\|^2
+ \le q\,|\mathcal T_A|
+ =qk(q+2-k)
+\]
+has an error of order \(q^{5/2}\) at \(k\asymp\sqrt q\), larger than the
+order-\(q^2\) defect scale one would need to control.  Its induced lower bound
+on \(D_{\mathcal C}\) is therefore vacuous.
+
+Refining by the conic line orbits does not repair this.  Secant lines of
+\(\mathcal C\) are chords on its \(q+1\) points and tangent lines are vertex
+flags; C555 already proves that an arbitrary chord graph plus arbitrary
+tangent flags is realizable before requiring all selected lines to arise from
+one common arc.  Hence every spectral kernel using only conic--line incidence
+remains below the established incidence-only ceiling.  The binary hull word
+adds parity but no real spectral gap.
+
+**NO-GO:** the prescribed-conic incidence spectrum supplies no new
+rank-three term and does not open C556.
+
+## Alternative attacks after the spectral no-go
+
+1. **Four-base cross-ratio kernel (promoted).**  Normalize four arc points
+   and encode mixed-block transversals by Möbius/cross-ratio maps between the
+   corresponding tangent groups.  Search first for a forced rank or minor
+   relation coming from the rule that every short block misses exactly two
+   prescribed groups.  This is the smallest gate that genuinely couples the
+   embedded GDD to rank-three realization.
+2. **Approximate-design repair.**  Combine C554's bad-edge bound with a
+   matching-design removal/stability theorem, then test whether a nearly
+   resolved embedded design must approach a generalized hyperfocused arc.
+   This is asymptotically relevant but risks ineffective constants and an
+   abstract/geometric gap.
+3. **Segre-polynomial stability.**  Ask whether near-extreme tangent
+   multiplicities force repeated factors or derivative collapse in the Segre
+   tangent polynomial.  The immediate risk is the envelope degree
+   \(q+2-k\sim q\).
+4. **The finite \((4096,92)\) exception.**  Exact rank-three exclusion would
+   complete even equality, but cannot improve the asymptotic constant and is
+   therefore deprioritized.
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -388,3 +468,5 @@ hypotheses have been checked against this tangent-derived set.
 | Can the mixed-block GDD be completed to a genuine embedded net? | No: the embedded-net pencil theorem would force the noncollinear arc bases to be collinear.  A new near-net stability theorem would be required. |
 | Which even characteristic-two square-root parameters can attain exact zero defect? | Reduced arithmetically to the single pair \((q,k)=(4096,92)\); hyperoval-scale \(k=q+2\) remains separate. |
 | Does that equality classification improve the asymptotic lower bound? | Not alone: one needs a defect-stability gap, not merely \(\Delta_{\mathcal C}(A)>0\). |
+| Does prescribed-conic incidence have a useful spectral gap? | **Settled negatively:** \(BB^\mathsf T=qI+J\), the real tangent identity gives \(d=k\mathbf1-2r\), and the resulting quadratic form is exactly C555's incidence-only term with a vacuous error at the target scale. |
+| What is the next genuinely mixed gate? | Four-base cross-ratio compatibility for the collinearly embedded mixed-block GDD. |
