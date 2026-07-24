@@ -1,14 +1,25 @@
 # Evidence supplement
 
-The manifest is intentionally empty at paper setup.  Add an entry only when a
-paper-facing computational claim has its exact report, generator, compact
-certificate, replay command, independent check, and SHA-256 hash committed
-together.
+This directory is the paper-local reproducibility package for every
+computational result retained by `theorem-map.md`.  `EVIDENCE.md` gives the
+claim, exact domain, certificate meaning, independent check, and trust boundary
+for each bundle.  The imported generators and canonical JSON certificates are
+under `evidence/`; they are byte-identical to the frozen source artifacts.
 
-Run:
+From this directory, verify all sizes and SHA-256 hashes without changing the
+worktree:
 
 ```text
 python3 verify.py
 ```
 
-from this directory, or `make evidence` from the paper root.
+Regenerate every certificate in memory and compare it with the tracked bytes:
+
+```text
+python3 verify.py --replay
+```
+
+Both commands use only Python 3's standard library.  The full replay is
+deterministic and may take several minutes.  The manifest also includes C395's
+hash-pinned arithmetic module because it is a load-bearing input to C396, though
+C395 is not itself an adopted paper result.

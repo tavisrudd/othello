@@ -9,8 +9,8 @@ Six-Qudit AME Stabilizer Tensors.*
 shows that every local-unitary intertwiner between equal-phase CSS states of
 linear `[6,3,4]_q` MDS codes is local Clifford.  C561 fixes the title,
 theorem hierarchy, exception table, and section order.  The paper-local
-evidence bundle, claim-specific literature audit, and complete prose are not
-yet closed.
+evidence bundle and claim-specific literature audit are closed by C563 and
+C562.  The complete prose is not yet closed.
 
 The completion program is queued as C559--C572: theorem decision, theorem
 freeze, literature and reproducibility audits, first draft, four Lean theorem
@@ -35,10 +35,10 @@ control lives in:
 - `adversarial-proof-evidence-audit.md`; and
 - `second-draft-fix-plan.md`.
 
-The `supplement/` directory is initially an empty evidence package with a
-manifest checker.  No computational claim is adopted into the manuscript
-until its report, exact generator, compact certificate, replay command, and
-hashes have been imported and independently checked.
+The `supplement/` directory contains the paper-local report, exact generators,
+compact certificates, load-bearing input, SHA-256 manifest, and deterministic
+replay driver for every adopted computation.  Run `make evidence` for the
+integrity gate or `python3 supplement/verify.py --replay` for full regeneration.
 
 ## Mathematical scope
 

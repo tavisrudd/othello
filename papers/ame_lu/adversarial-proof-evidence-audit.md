@@ -12,6 +12,6 @@ specific proof location or evidence record.
 | Exceptional characteristics are silently removed | open | one synchronized exception table across theorem, proof, and supplement |
 | The H3/GRS theorem is generalized to the whole pencil | blocked by theorem map | preserve its exact arithmetic family boundary |
 | Four-copy rank drop is mistaken for a complete coordinate | blocked by theorem map | state only the proved divisor until a generator theorem closes |
-| Computational evidence lacks a public replay | open | paper-local report/script/certificate/hash bundle and independent replay |
+| Computational evidence lacks a public replay | closed by C563 | `supplement/EVIDENCE.md`, manifest, exact generators/certificates, and `verify.py --replay` |
 | Classical six-point invariant theory is presented as new | open literature gate | claim-specific full-text audit and precise attribution |
 | The manuscript inherits report terminology without defining conventions | open | dictionary section freezes projective, code, LC, LU, and party actions |

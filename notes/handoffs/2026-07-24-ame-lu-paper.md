@@ -79,6 +79,16 @@ and must retain “equal-phase CSS”; arbitrary phased `AME(6,d)` states have
 infinitely many LU classes.  See
 `2026-07-24-c562-ame-lu-literature-audit.md`.
 
+**C563 closed (2026-07-24): paper-local computational evidence complete.**
+The seven adopted computational bundles C374, C396, C397, C402, C546, C548,
+and C550 now have byte-identical generators and canonical JSON certificates
+under `papers/ame_lu/supplement/evidence/`.  The manifest checks fifteen
+load-bearing files, including C396's previously hidden hash-pinned C395 input.
+`verify.py --replay` checks all hashes and regenerates all seven certificates
+in memory; the complete standard-library replay passed under Python 3.13.12.
+The claim-level report records every domain, independent path, negative scope,
+and trust boundary.  See `2026-07-24-c563-ame-lu-evidence-package.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -114,9 +124,9 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C563 is next.  It imports only the computations retained by C561's
-hierarchy.  C562's qualified wording is the binding novelty boundary for
-the first manuscript draft.  C581 is a separately queued optional upgrade
+C564 is next: write the first complete manuscript draft against the frozen
+theorem hierarchy, C562 novelty boundary, and C563 evidence package.  C581 is a
+separately queued optional upgrade
 gate for basis-free phase-space reconstruction and quantitative approximate
 rigidity; neither is assumed by the completion program.
 

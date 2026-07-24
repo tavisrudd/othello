@@ -1,4 +1,89 @@
 {
-  "schema": "ame-lu-evidence-manifest-v1",
-  "artifacts": []
+  "schema": "ame-lu-evidence-manifest-v2",
+  "artifacts": [
+    {
+      "bytes": 15469,
+      "path": "evidence/2026-07-19-c374-clebsch-ame-equivalence.json",
+      "sha256": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d"
+    },
+    {
+      "bytes": 24690,
+      "path": "evidence/2026-07-19-c374-clebsch-ame-equivalence.py",
+      "sha256": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694"
+    },
+    {
+      "bytes": 24069,
+      "path": "evidence/2026-07-20-c395-clebsch-ame-pencil-arithmetic.py",
+      "sha256": "a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52"
+    },
+    {
+      "bytes": 749580,
+      "path": "evidence/2026-07-23-c396-holonomy-completeness.json",
+      "sha256": "04b791acae107d24c81c589059c8a310c01e6feaac9c4713bdb1e9d323e29031"
+    },
+    {
+      "bytes": 41305,
+      "path": "evidence/2026-07-23-c396-holonomy-completeness.py",
+      "sha256": "b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49"
+    },
+    {
+      "bytes": 225468,
+      "path": "evidence/2026-07-23-c397-ame-perfect-tensor-physics.json",
+      "sha256": "c0a2df44ad991f59bb95182544bf4ac8d39d7a997c6bd1ea987e4020266c1dfd"
+    },
+    {
+      "bytes": 30099,
+      "path": "evidence/2026-07-23-c397-ame-perfect-tensor-physics.py",
+      "sha256": "360ded0f7e07fdac30e575474336645e05909ad15a1e0e6729a071e7a88cddf3"
+    },
+    {
+      "bytes": 12677,
+      "path": "evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.json",
+      "sha256": "f324ea645f9ac10e8dee150b9d5e5c321547f23d3925dda78d556f31db521320"
+    },
+    {
+      "bytes": 28651,
+      "path": "evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py",
+      "sha256": "914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627"
+    },
+    {
+      "bytes": 14294,
+      "path": "evidence/2026-07-23-c546-h3-pentad-orientation-lu.json",
+      "sha256": "c335a719a59c93e6ef4ce62812b142261f2c5d2724baf2d5a68348f25a64bf8c"
+    },
+    {
+      "bytes": 9836,
+      "path": "evidence/2026-07-23-c546-h3-pentad-orientation-lu.py",
+      "sha256": "ef0b439b31c1f764247d8766474004d11211c6148a66ce702ffc373c5fe3aee6"
+    },
+    {
+      "bytes": 12178,
+      "path": "evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.json",
+      "sha256": "31f0ad316e1f8c199d502b3da050fd4371083330c89854790b693c262452c3ca"
+    },
+    {
+      "bytes": 31948,
+      "path": "evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py",
+      "sha256": "1ded3f75a2100c6f53b62498fa7a84c99d91b477b9f9ee3734d68a8c9b19d6f1"
+    },
+    {
+      "bytes": 12197,
+      "path": "evidence/2026-07-23-c550-four-copy-cover-holonomy.json",
+      "sha256": "9d3bcb92d97d8fc84d4459cde906894d40e9c542d8ab389b5cf0b4fe29e5bda3"
+    },
+    {
+      "bytes": 27591,
+      "path": "evidence/2026-07-23-c550-four-copy-cover-holonomy.py",
+      "sha256": "3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7"
+    }
+  ],
+  "replays": [
+    ["evidence/2026-07-19-c374-clebsch-ame-equivalence.py", "--check"],
+    ["evidence/2026-07-23-c396-holonomy-completeness.py", "--check"],
+    ["evidence/2026-07-23-c397-ame-perfect-tensor-physics.py", "--check"],
+    ["evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py", "--check"],
+    ["evidence/2026-07-23-c546-h3-pentad-orientation-lu.py", "--check"],
+    ["evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py", "--check"],
+    ["evidence/2026-07-23-c550-four-copy-cover-holonomy.py", "--check"]
+  ]
 }
