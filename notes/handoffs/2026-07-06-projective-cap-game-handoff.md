@@ -706,12 +706,15 @@ load-bearing crown is a uniform bound on these corrected boundary signatures in 
 projective residual core. Report:
 [`../2026-07-23-c547-cap-grundy-proof-harvest.md`](../2026-07-23-c547-cap-grundy-proof-harvest.md).
 
-**C549 is queued for a cold session (2026-07-23): corrected private-boundary bisimulation and quotient test.**
-Prove the C547 correction that a gadget with ambient attachment only through labelled boundary
-`B` depends on its private vertices through `min(2,|U|)` plus occupancy, then measure the induced
-boundary-signature quotient on the frozen q17/q19 coupled residual cores. A bounded quotient would
-feed C547's follower-signature SG bound; growth identifies the additional coupling data the defect
-skeleton must retain. No q23 computation is in scope. Report:
+**C549 is complete (2026-07-23): the private-boundary theorem is true, but its strict hypothesis
+compresses none of the frozen coupled cores.** `CapGame.PrivateBoundary` Lean-proves by two-sided
+move bisimulation that private multiplicity truncates to `0/1/≥2` plus occupancy under arbitrary
+ambient boundary constraints. Exact q17/q19 measurement finds **zero private gadget vertices**:
+every gadget vertex has an external pair or triple attachment. The exact label-free rooted-game
+quotient grows sharply: per-root follower types `max 10→21`, global child types `21→654`, and root
+types `8→2,881`. Hence C547's follower-signature theorem combines conditionally but yields no
+q-independent bound here; `SG≤5` must come from mex structure across externally coupled defect
+signatures, not private leaves or duplicate labels. No q23 computation was run. Report:
 [`../2026-07-23-c549-private-boundary-signatures.md`](../2026-07-23-c549-private-boundary-signatures.md).
 
 **Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
