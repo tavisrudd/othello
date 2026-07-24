@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** `IMPLEMENTED AND VALIDATED; AWAITING INDEPENDENT REVIEW`
+**Status:** `COMPLETE — FINAL INDEPENDENT REVIEW GO`
 
 **Date:** 2026-07-23
 
@@ -143,10 +143,15 @@ The terminal recomputes:
 - the socle relation and exact one-dimensional depth kernel, square-zero identities,
   contracting-homotopy identity, split depth basis, depth factorization, and complementary
   projectors;
+- the internal matrix-unit products, grading relations, an ordered depth-plus-radical basis, and
+  uniqueness of the operator that kills the depth basis and inverts Fourier on its image;
 - `im(Fbar)=ker(Fbar)` with `h` supplying the reverse witness;
-- valency self-adjointness and a rank-two zero-Gram basis with an explicit left inverse;
+- valency self-adjointness, a nondegenerate depth-plane Gram matrix with two-sided inverse, and a
+  rank-two zero-Gram basis with an explicit left inverse;
 - projective scalarity of every target isometry fixing both ordered target lines; and
-- zero source cross-pairing versus nonzero target cross-pairing under every nonzero rescaling.
+- target cross-pairings `2` and `5` in the vector and dual conventions; and
+- zero source cross-pairing plus a surviving nontrivial source reflection versus the projectively
+  scalar target stabilizer.
 
 The finite leaf freezes matrices, not conclusions: every exported identity reduces from matrix
 multiplication or imported depth-profile values.  It uses no project-local axiom.  The source Tate
@@ -159,10 +164,10 @@ reformalized as general Tate or Brauer theory.
 | Paper clause | Exact Lean terminal | Residual evidence boundary |
 |:--|:--|:--|
 | divided integral Fourier, `Fbar^2=0` | `eleven_smul_dividedFourierInt`, `dividedFourier_sq` | identification with the odd relation Fourier operator is the imported C425/C433 exact-data boundary |
-| depth contraction and direct sum | `depthMatrix_values`, `depthMatrix_socle`, `depthMatrix_kernel`, `contraction_sq`, `contraction_identity`, `depthBasis_split`, `depthMatrix_factorization`, `complementary_projectors`, `mem_range_dividedFourier_iff` | C411/C412 interpretation of the profile kernel as the fixed socle is conceptual/external |
-| valency geometry | `dividedFourier_selfAdjoint`, `radicalBasis_lagrangian_certificate` | valencies and scheme semantics remain the C426/C433 external exact-enumeration boundary |
-| rigid ordered target flag | `targetFlag_projectivelyRigid`, `targetFlag_crossPairing` | coordinates of the doubled/residual flag come from the C433 certificate |
-| negative Tate/source boundary | `sourceFlag_crossPairing_zero`, `source_target_flag_orbits_disjoint` | C526's proof that the complete functorially induced source pairing space is diagonal is conceptual proof plus exact certificate |
+| depth contraction and direct sum | `depthMatrix_values`, `depthMatrix_socle`, `depthMatrix_kernel`, `contraction_sq`, `contraction_identity`, `depthBasis_split`, `depthMatrix_factorization`, `complementary_projectors`, `matrixUnit_products`, `grading_relations`, `mem_range_dividedFourier_iff`, `carrierBasis_inverse`, `contraction_on_carrierBasis`, `contraction_unique` | C411/C412 interpretation of the profile kernel as the fixed socle is conceptual/external |
+| valency geometry | `dividedFourier_selfAdjoint`, `depthBasis_nondegenerate`, `radicalBasis_lagrangian_certificate` | valencies and scheme semantics remain the C426/C433 external exact-enumeration boundary |
+| rigid ordered target flag | `targetFlag_projectivelyRigid`, `targetMetric_inverse`, `targetFlag_crossPairing`, `targetFlag_dualCrossPairing` | coordinates of the doubled/residual flag come from the C433 certificate |
+| negative Tate/source boundary | `sourceFlag_crossPairing_zero`, `sourceReflection_residual_symmetry`, `source_target_flag_orbits_disjoint` | C526's proof that the complete functorially induced source pairing space is diagonal is conceptual proof plus exact certificate |
 | degree-`5/6` `A5` semisimplicity | no new Lean claim | ordinary Maschke argument; the terminal makes no abstract-group identification |
 
 C320 should add these rows only to the Paper-2 trust ledger.  It must label the first four routes
@@ -189,8 +194,8 @@ lean/scripts/lean-build-queue.py run \
   --aggregate RelativeConicArcs.Gates.ClebschModularFourierContraction
 ```
 
-The C433 and C526 primary checkers, independent replays, and checksum manifests pass.  Scoped
-single-file elaboration of the new terminal passes.  Build queue
+The C433 and C526 primary checkers, independent replays, and checksum manifests pass.  The original
+scoped terminal and gate bundle passed build queue
 `/home/tavis/.cache/othello-lean-build/run-20260723-231705-ee87a9d4` built the terminal and gate,
 then passed the exact trace-only aggregate gate.  Peak RSS was `1,913,600` KiB for the terminal and
 `1,809,852` KiB for the gate.  All 17 selected C527 terminals report exactly `propext`,
@@ -198,14 +203,23 @@ then passed the exact trace-only aggregate gate.  Peak RSS was `1,913,600` KiB f
 opaque external oracle occurs.  The validated artifact and editorial bundle is pinned at
 `050120356688242b0872b928e0973b53e7ce4296`.
 
+The subsequent `ej`+`tt` upgrade expands the gate to 27 terminals.  Exact aggregate revalidation
+passed at
+`/home/tavis/.cache/othello-lean-build/run-20260723-233344-56ce854d`: the terminal and gate built,
+the trace-only aggregate gate passed, and peak RSS was `1,930,356` KiB and `1,811,008` KiB
+respectively.  All 27 selected terminals report exactly `propext`, `Classical.choice`, and
+`Quot.sound`; no `sorryAx`, native-decision axiom, project-local axiom, or opaque external oracle
+occurs.  The upgraded Lean artifact is pinned at
+`bf01d4156811cf0715ac6775efa0cab45d3ff818`.
+
 The new Lean source is itself the compact kernel-checked certificate, so no generated data file is
 introduced.  C433 and C526 supply independent implementations and canonical JSON evidence for the
 same load-bearing matrices and flag pairings.
 
 | source | bytes | SHA-256 |
 |:--|--:|:--|
-| `lean/RelativeConicArcs/ClebschModularFourierContraction.lean` | 12,341 | `715b8fd74a62dba22a41ffe88a951619c35e6e9c7baeb60ca1d804caac007b7f` |
-| `lean/RelativeConicArcs/Gates/ClebschModularFourierContraction.lean` | 2,478 | `52a2f57f9723022e09f9a2070fde0c606b51424d4a646a475e94bf002e35fa57` |
+| `lean/RelativeConicArcs/ClebschModularFourierContraction.lean` | 17,168 | `850c532b1d3157fed6369960380db4cced84725d34d7df1153af0582173d9fc7` |
+| `lean/RelativeConicArcs/Gates/ClebschModularFourierContraction.lean` | 3,504 | `fb4286b1c64fe90ce2399b370bf4482f5cb62151ded2bb51cf8b3de7f92de860` |
 | `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md` | 11,337 | `3e39d37e7828f74cd95c51c34abd919c671bc313e46dbbb57ada6b4ea9513352` |
 | `notes/2026-07-23-c526-tate-pairing-rigid-target-bridge.md` | 10,518 | `a1eb543e98d86484bff3e5ce569ee2a5094eebb1c791025ba6c763a00333ca76` |
 
@@ -214,14 +228,38 @@ same load-bearing matrices and flag pairings.
 The `ej`+`tt` pass exposed one cheap strengthening and one firm stop.
 
 - **Settled:** the Lean leaf does not merely check `Fbar^2=0`; it checks a split depth basis,
-  complementary projectors, an explicit Lagrangian basis with left inverse, and the complete
-  target-rigidity/source-orbit obstruction.
+  complementary projectors, matrix-unit and grading identities, uniqueness of the contraction from
+  its depth/radical action, a nondegenerate depth Gram matrix, and an explicit Lagrangian basis with
+  left inverse.
 - **Settled:** metric type alone is insufficient.  The ordered flag is the decisive invariant:
-  source cross-pairing is zero, target cross-pairing is nonzero.
-- **Open only as a release gate:** independent referee review must be recorded before archival.
+  source cross-pairing is zero and retains a nontrivial projective reflection, while the target
+  cross-pairings are nonzero in both vector and dual conventions and its ordered-flag stabilizer is
+  projectively scalar.
+- **Settled by the Tao pass:** “canonical contraction” and “automorphism mismatch” no longer rest
+  only on prose.  The formal ordered carrier basis proves uniqueness of `h`, and the formal source
+  reflection makes the residual-`C2` versus trivial-projective-stabilizer mismatch explicit.
+- **Free portability test:** any proposed continuation or uniform-family seam can now be rejected
+  by either of two one-line invariants before a module census: source/target flag cross-pairing
+  `0` versus nonzero, or residual projective `C2` versus scalar stabilizer.  C439 may use either
+  falsifier without reconstructing the full contraction.
+- **Settled numerical curiosity:** the displayed depth-basis Gram determinant is `1`, whereas the
+  C412 target-coordinate Gram determinant is `3=5^2` in `F_11`.  Their ratio is therefore a square,
+  as required for two coordinate descriptions of the same anisotropic plane; the discrepancy is
+  basis normalization, not another invariant.
+- **Open as validation/release gates:** the queued 27-terminal aggregate gate and axiom audit must
+  pass, the upgraded bundle must be pinned, and independent referee review must be recorded before
+  archival.
 - **No theorem-level mystery remains:** the source and target occupy different ordered-flag
   orbits.  A basis-free explanation of the polarization-space collapse is not needed for this
   theorem and is not allocated.
+
+## Independent review
+
+Final independent review returned `GO` on 2026-07-23 with no repair request.  The review read both
+touched Lean modules in full, checked the theorem block against the C433 and C526 source boundaries,
+reran both primary checkers, both independent replays, and both checksum manifests, verified the
+exact source hashes, and inspected the successful 27-terminal aggregate build and axiom output.
+The imported C425/C426 boundary modules were unchanged from their completed referee review.
 
 ## Closing review checklist
 
@@ -230,7 +268,7 @@ The `ej`+`tt` pass exposed one cheap strengthening and one firm stop.
 - [x] The finite terminal recomputes identities rather than freezing propositions.
 - [x] C425/C426 trust boundaries remain explicit.
 - [x] C433/C526 primary and independent replays pass.
-- [x] Import-only gate build and exact terminal axiom audit pass.
+- [x] Upgraded import-only gate build and exact 27-terminal axiom audit pass.
 - [x] Source hashes are recorded.
-- [x] Final validated commit is recorded.
-- [ ] Independent referee review returns `GO`; any repairs receive post-fix review.
+- [x] Final upgraded validated commit is recorded.
+- [x] Independent referee review returns `GO`; no repair was requested.

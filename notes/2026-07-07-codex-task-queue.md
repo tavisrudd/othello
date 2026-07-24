@@ -65,7 +65,6 @@ current highest-EV step is C528 — the gadget-Node-Kayles value law (cold-start
 - **C321 `[clebsch]` [QUEUED; after C320 inventory]** — replace load-bearing Singular evidence with independently specified exact certificates/checkers and canonical replay bundles; no completion/archive before the local checklist, issue fixes, post-fix review, and final `GO` → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.
 - **C505 `[clebsch]` [QUEUED; PAPER-1 F12 AFTER C503+C504]** — formalize the common free-`C2` torsor, C474=`T_11` bridge, one sign-character class with three readouts, rank-three split/inert trichotomy, forced-outer hinge, and characteristic-zero reduction row → `notes/2026-07-22-c505-clebsch-torsor-rosetta-lean.md`.
 - **C507 `[clebsch]` [QUEUED; PAPER-1 F14 MIXED INTERFACES]** — formalize the direct finite theta/Arf, scoped Fourier, quantum-erasure, and conditionally adopted Hadamard-degeneration witnesses while retaining superspecial, Weil, LU-classification, and classical naming boundaries explicitly external → `notes/2026-07-22-c507-clebsch-passage-interfaces-lean.md`.
-- **C527 `[clebsch]` [IMPLEMENTED+VALIDATED; AWAITING INDEPENDENT REVIEW]** — package C433's divided-Fourier contraction/metric rigidity and C526's final source-pairing disposition as one bounded Paper-2 Modular Gateway theorem block plus a compact import-only Lean gate; do not widen Paper 1, draft all of Paper 2, or formalize general Brauer/Tate theory → `notes/2026-07-23-c527-modular-contraction-paper-lean-packaging.md`.
 
 ### `complete-ports`
 
