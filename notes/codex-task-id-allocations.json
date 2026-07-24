@@ -782,8 +782,17 @@
       "last": 537,
       "purpose": "C534 closeout survivor: compare C481-C485 Gale reconstruction with 2026 Flatland multi-view consistency gap",
       "sequence": 87
+    },
+    {
+      "count": 7,
+      "first": 538,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 544,
+      "purpose": "Beyond-redundancy-four PRS manuscript integration and paper-facing Lean closure",
+      "sequence": 88
     }
   ],
-  "next_id": 538,
+  "next_id": 545,
   "schema": "codex-task-id-allocations-v1"
 }
