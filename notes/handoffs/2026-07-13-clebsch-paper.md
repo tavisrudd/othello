@@ -11,11 +11,16 @@
 
 ## Goal and current verdict
 
-Finish the Clebsch-hexagon paper as a self-contained, exactly attributed,
-computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **the post-Sol candidate is a 37-page single-manuscript revision with 29
-extracted theorem environments, 58 manifest rows, and an unchanged deterministic 18-check release
-surface.  C320 and C552 remain active behind the clean replay and user-launched post-fix review.**
+Test a two-paper Clebsch architecture while preserving the current broad manuscript as a fallback.
+Current assessment: **repeated reviewers find the post-section-12 material too broad and dense,
+while the older 17-page rigidity/decoder version is already a coherent paper.  C575 is now the
+next task: pin both snapshots and produce the exact split map before C576 builds focused Paper I
+and C577 builds standalone factorization-memory Paper II.  No Paper III task is allocated.**
+The split charter and acceptance gates are
+[`2026-07-24-clebsch-paper-split-trial.md`](../2026-07-24-clebsch-paper-split-trial.md).
+
+The preserved fallback is the post-Sol 37-page single-manuscript revision with 29 extracted
+theorem environments, 58 manifest rows, and an unchanged deterministic 18-check release surface.
 The mathematical and trust-language blockers from the first cold read are repaired: recovery is
 explicitly table-row only, factorization/profile maps and carrier bridges are exposed, the
 four-sheet pencil and boundary are defined, the full `A_3/B_3/H_3` proof path is locatable, and
@@ -31,29 +36,28 @@ cold build populated its artifacts.  The cold attempt itself exceeded the
 aggregate gate's 1,800-second timeout after 40 minutes 41 seconds total;
 changing that timeout requires explicit user approval.
 
-The remaining gates are:
+The fallback's remaining gates are:
 
 1. obtain the C182 archive DOI, paper-repository release/tag/commit,
    cold-runtime policy, and user-selected licence; and
-2. stop for the user to launch the required post-fix independent review.
+2. obtain the required post-fix independent review only if the split trial does not supersede that
+   manuscript surface.
 
-The user retained the single-paper architecture.  Section 12 now satisfies the conditional
-motivation/definition/citation requirements, but Sol's recommendation to remove it remains an
-editorial-risk warning rather than a silently executed scope change.
+The user reopened the single-paper architecture on 2026-07-24.  Preserve its source and evidence
+surface during C575; do not treat prior integration work as permission to copy every result into
+one of the split papers.
 
-The independent review is
+The fallback independent review is
 [`2026-07-23-c320-independent-cold-read.md`](../2026-07-23-c320-independent-cold-read.md).
-The next session should take the user-launched post-fix review.  Read
+The next session should execute C575, not launch the post-fix review.  Read
 `papers/style-guide.md` before any further manuscript edit; load the C320
 ledger and C552 card only for their exact trust and holonomy boundaries.
 
-The current decision and novelty map is
-[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md); its Verdict,
-Shipping revision, and Close revision are authoritative for what ships — the upgraded
-replacement-spine manuscript ending in the certified torsor-Rosetta closing theorem (C480, upgraded
-to a complete rank-three trichotomy with a characteristic-zero realization row by C486/C487). A
-cold session takes the manuscript shipping decision and close from those blocks, not from the
-protected-baseline framing above.
+The fallback's decision and novelty map is
+[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).  Its Verdict,
+Shipping revision, and Close revision remain authoritative descriptions of that preserved
+single-paper candidate, not of the split trial.  C575 must disposition its replacement spine and
+certified torsor-Rosetta close explicitly rather than inheriting their old placement.
 The copy-ready abstract and section plan are
 [`2026-07-21-clebsch-paper-abstract-outline.md`](../2026-07-21-clebsch-paper-abstract-outline.md),
 the proof-free opening and conclusion prose draft is
@@ -148,27 +152,29 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 ## Submission-critical work, in order
 
-1. **Freeze the selected new-paper spine.**  Preserve the C399-led manuscript as a fallback, but
-   plan the new paper around C406+C411 with only the selective C412 upgrades stated above.  Extend
-   only the claim-specific source gaps needed for manuscript wording.  Do not wait for C405, C401,
-   C402, C413--C419, or other companion gates.
-2. **Integrate one spine.**  In the baseline version, integrate C399 as the rank-three explanation
-   of the q=11 phase.  In the replacement version, use C399 as the phase prelude and C403/C406 as
-   the central forgetting-and-memory theorem.  In either case credit Edge and Dye for the
+1. **C575: specify the split exactly.**  Pin the older focused and current fallback snapshots;
+   classify every theorem, proof, figure, checker, and citation; map the C320 evidence surface; and
+   require a no-circularity/no-material-duplication gate before drafting.
+2. **C576: build focused Paper I from the older base.**  Backport the explicit matrix, complete
+   census, proof-mode and trust-boundary improvements, and support-bipartition terminology.  Keep
+   the rigidity/decoder/classification spine and at most a compact `H_3` explanation.
+3. **C577: build standalone Paper II.**  Use C399 as the phase prelude and C403/C406/C411 plus
+   selective C412 upgrades as the forgetting-and-memory spine.  Credit Edge and Dye for the
    exceptional conic geometry and avoid novelty claims for `5/14/22`, parent ambiguity, the B3
-   `3+6` split, or conic--GRS.  Sources of truth are
+   `3+6` split, or conic--GRS.  Inventory passage/holonomy/torsor material as a possible Paper III
+   but do not import it without a standalone-value decision.  Sources of truth are
    [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md),
    [`2026-07-20-c406-matching-module.md`](../2026-07-20-c406-matching-module.md), and the C406
    priority audit above.
-3. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
+4. Apply the repository mixed-verification policy separately to each candidate: keep the existing conceptual/replay/Lean
    boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
    final AI/provenance disclosure.
-4. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+5. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
    sources into the paper repository.
-5. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+6. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
    this paper's release pass.
-6. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
-   stable DOI; cite the artifact from the paper.
+7. **Immutable artifact — C182.** Re-scope the archive only after the architecture decision; then
+   archive code, certificates, sources, and rendered PDFs under stable identifiers.
 
 ## Completed bounded paper upgrade
 
