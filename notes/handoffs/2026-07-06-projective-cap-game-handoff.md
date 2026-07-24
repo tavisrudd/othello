@@ -639,7 +639,7 @@ depth-boundedness, or uniformity, and three primes cannot exclude a depth-3 tail
 **C528 decisive step RUN (2026-07-23) — the gadget census is BRANCH (b), sharpened: gadget
 complexity is unbounded in `q` on both axes.** The overload-profile tabulation over the frozen
 q13/q17/q19 residual children (each is itself `capOVER` — a `capOK` responder-win would have a `Y_NK`
-reply) shows: q17 has `g∈1..7` gadgets/state (`max k=4`); **q19 has 100% `g≥2`, mean 19.2, max
+reply) shows: q17 has `g∈1..7` gadgets/state (`max k=4`); **q19 has 100% `g≥3`, mean 19.2, max
 `g=47`, `max k=7`.** Both the gadget count `g` and the per-gadget overload `k` grow with `q`, so
 **the "`g=1` law + depth-2 corollary" plan is dead and no finite bounded-gadget base family exists.**
 The plan's "`g=1` covers ~93%" premise conflated the overload magnitude `k` (small, C523's "minimal
@@ -672,6 +672,26 @@ matchings were inflated. Report+cert+`--check`:
 `../2026-07-23-c528-alt-witness-probe.md`. Remaining C528 steps (ON-alignment check, gadget law, octal
 Piece 3, symmetry reduction, q23 out-of-sample) and the reshaped attack are in
 `../2026-07-23-c80-gadget-nk-plan.md`.
+
+**C528 Grundy-by-conic-type census RUN (2026-07-23) — the missed invariant is tiny, but conic type
+does not explain it.** Exact full residual SG over every frozen capOVER-core child is bounded by
+**5** at both nonempty orders: q17 `1^5 2^26 3^263 4^52 5^3`; q19
+`1^20142 2^4629 4^11933 5^11380` (no SG 3), despite q19 `g=3..47`, `k≤7`, and 14–37 legal points.
+The two `g=47` states have SG 2. This strongly confirms that C528 had measured static complexity
+instead of game value. The proposed shortcut is false: deleting all external gadget constraints
+changes SG in **31,871/48,074** q19 states containing them and flips N→P in **8,771**; secant/tangent
+counts are not bounded either (q19 maxima 22/7 per state). Because overlapping gadgets are not
+disjunctive summands, the per-line number is explicitly a contextual XOR-ablation diagnostic, not
+an additive “contribution.” The live target is now Piece 3: explain the whole residual's observed
+SG≤5 through Dawson/path-cycle defect skeletons; q23 remains the later out-of-sample falsifier.
+The report also harvests four proof-grade statements available now: an exact static rank-≤3
+residual-hypergraph theorem, isolated `k`-gadget SG 0, the pair budget
+`Σ binom(k_l,2)≤binom(|L|,2)` (hence `g,Φ≤binom(|L|,2)/3`), and the generic SG-height bound
+`SG(S)≤q-1-|S|` for odd-plane residuals.
+Report+cert+`--check`: `../2026-07-23-c528-grundy-conic-census.md`.
+**C547 is queued for a fresh Lean session** to turn this proof harvest into an explanatory theorem
+package and use formalization failures to identify the minimal gadget boundary; it explicitly excludes
+fixed-q table/checker formalization and the unsupported uniform claim SG≤5.
 
 **Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
 under all moves ⟹ "drive Φ→0" vacuous) and replaced it with the gadget-Node-Kayles value law

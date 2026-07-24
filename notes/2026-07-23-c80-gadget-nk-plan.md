@@ -47,6 +47,16 @@ Correctness note: `is_ynk = capOK∧Grundy0` accepts non-cap masks, so the pairi
 `is_ynk`-only `H` over-counts via illegal-reply edges (reads a spurious "1,104 restored"); use the
 legal-reply `H`. Report+cert: [`2026-07-23-c528-alt-witness-probe.md`].
 
+**Grundy-by-conic-type census RUN — bounded full value, conic-type shortcut NO (2026-07-23).**
+The full hypergraph residual, not isolated gadgets, has exact SG≤5 on every frozen q17/q19
+capOVER-core child: q17 values 1–5; q19 values `{1,2,4,5}` despite `g=3..47`, `k≤7`, and 14–37
+legal points (the two `g=47` states have SG 2). This is the strongest evidence yet that unbounded
+static gadget complexity hides a bounded defect value. But external gadgets do not cancel
+contextually: deleting all external constraints changes q19 SG in 31,871/48,074 states containing
+them and flips N→P in 8,771; secant/tangent counts also grow (max 22/7 per q19 state). So the live
+route is Piece 3's whole-residual Dawson/path-cycle decomposition, not a conic-type sum law.
+Report+certificate: [`2026-07-23-c528-grundy-conic-census.md`].
+
 ## Target (Piece 2): the gadget-Node-Kayles value law
 
 Model `capOVER` states as `NK⁺(G, gadgets)` = Node-Kayles on `G_S` plus one **gadget** per overloaded
@@ -58,7 +68,7 @@ because Φ never increases and `|L|` strictly decreases each move.
 
 - **Base case Φ=0:** `NK⁺ = NK` = the proven `Y_NK` theorem.
 - **~~First real case: `g=1, k∈{3,4}`~~ — REFUTED by Step 1 (2026-07-23).** `g=1` never occurs at
-  q19 (100% `g≥2`, mean 19.2, max 47), and `k` reaches 7. There is **no finite bounded-gadget base
+  q19 (100% `g≥3`, mean 19.2, max 47), and `k` reaches 7. There is **no finite bounded-gadget base
   family** to induct into — both `g` and `k` grow with `q`. The `(Φ,|L|)` measure is still
   well-founded, but any induction step must handle **arbitrary `g` with interacting gadgets** (32% of
   gadget pairs share a vertex), not a single small gadget. Depth-2 is therefore **not** explained by a
@@ -73,7 +83,7 @@ because Φ never increases and `|L|` strictly decreases each move.
    `rust/scripts/c528_overload_profile.py` + `notes/2026-07-23-c528-overload-profile.json` (`--check`
    PASS); report `notes/2026-07-23-c528-overload-profile.md`. **Result: branch (b), sharpened —
    gadget complexity is unbounded in `q` on both axes.** q17: 349 residual, `g∈1..7` (258/349 have
-   `g≥2`), `max k=4`. q19: 48,084 residual, **100% `g≥2`** (mean 19.2, **max g=47**), **max k=7**
+   `g≥2`), `max k=4`. q19: 48,084 residual, **100% `g≥3`** (mean 19.2, **max g=47**), **max k=7**
    (8,189 states with `k≥5`). Both `g` and `k` grow with `q`. The `g=1, k≤4` special-case premise
    below is **dead** — see the correction. Gadget pairs at q19: 68% disjoint, 32% share exactly one
    legal vertex (forced — two projective lines meet in one point). Overloaded-line conic type: mostly

@@ -1,0 +1,2672 @@
+{
+  "claim_scope": "Exact full residual SG and overloaded-line ablation census on every capOVER-core residual child in the frozen q=13/17/19 three-intruder domains. The q19 domain is in-sample frozen data, not an out-of-sample larger-order test.",
+  "metric": "Contextual marginal = full residual SG XOR SG after deleting exactly one overloaded line's capacity-two triple constraint. Collective type ablation deletes all overloaded constraints of that conic-incidence type at the root. Because gadgets overlap and are not disjunctive summands, this is an ablation influence diagnostic, not a canonical additive Grundy contribution.",
+  "orders": [
+    {
+      "collective_type_ablation": [],
+      "collective_type_summary": {
+        "external": {
+          "nonzero_delta": 0,
+          "p_after_ablation": 0,
+          "states_present": 0,
+          "zero_delta": 0
+        },
+        "secant": {
+          "nonzero_delta": 0,
+          "p_after_ablation": 0,
+          "states_present": 0,
+          "zero_delta": 0
+        },
+        "tangent": {
+          "nonzero_delta": 0,
+          "p_after_ablation": 0,
+          "states_present": 0,
+          "zero_delta": 0
+        }
+      },
+      "direct_geometry_sg_crosscheck": {
+        "disagreements": 0,
+        "states": 0
+      },
+      "full_grundy_distribution": {},
+      "gadget_count_distribution": {},
+      "gadget_count_full_grundy": [],
+      "gadget_type_summary": {
+        "external": {
+          "lines": 0,
+          "max_per_state": 0,
+          "states_present": 0
+        },
+        "secant": {
+          "lines": 0,
+          "max_per_state": 0,
+          "states_present": 0
+        },
+        "tangent": {
+          "lines": 0,
+          "max_per_state": 0,
+          "states_present": 0
+        }
+      },
+      "legal_point_distribution": {},
+      "limited": false,
+      "line_context_full_grundy": [],
+      "q": 13,
+      "single_line_by_type_k": [],
+      "single_line_joint": [],
+      "state_rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "states": 0
+    },
+    {
+      "collective_type_ablation": [
+        {
+          "states": 130,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "states": 52,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "states": 20,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "states": 1,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "states": 45,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "states": 48,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "states": 61,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "states": 2,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "states": 112,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "states": 26,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "states": 2,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "states": 12,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "states": 64,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "states": 87,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "states": 4,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "states": 2,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "states": 4,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "states": 10,
+          "type": "tangent",
+          "xor_delta": 7
+        }
+      ],
+      "collective_type_summary": {
+        "external": {
+          "nonzero_delta": 166,
+          "p_after_ablation": 72,
+          "states_present": 296,
+          "zero_delta": 130
+        },
+        "secant": {
+          "nonzero_delta": 218,
+          "p_after_ablation": 140,
+          "states_present": 279,
+          "zero_delta": 61
+        },
+        "tangent": {
+          "nonzero_delta": 20,
+          "p_after_ablation": 6,
+          "states_present": 107,
+          "zero_delta": 87
+        }
+      },
+      "direct_geometry_sg_crosscheck": {
+        "disagreements": 0,
+        "states": 349
+      },
+      "full_grundy_distribution": {
+        "1": 5,
+        "2": 26,
+        "3": 263,
+        "4": 52,
+        "5": 3
+      },
+      "gadget_count_distribution": {
+        "1": 91,
+        "2": 35,
+        "3": 54,
+        "4": 25,
+        "5": 53,
+        "6": 69,
+        "7": 22
+      },
+      "gadget_count_full_grundy": [
+        {
+          "full_grundy": 3,
+          "g": 1,
+          "states": 77
+        },
+        {
+          "full_grundy": 4,
+          "g": 1,
+          "states": 14
+        },
+        {
+          "full_grundy": 2,
+          "g": 2,
+          "states": 26
+        },
+        {
+          "full_grundy": 3,
+          "g": 2,
+          "states": 6
+        },
+        {
+          "full_grundy": 5,
+          "g": 2,
+          "states": 3
+        },
+        {
+          "full_grundy": 3,
+          "g": 3,
+          "states": 38
+        },
+        {
+          "full_grundy": 4,
+          "g": 3,
+          "states": 16
+        },
+        {
+          "full_grundy": 1,
+          "g": 4,
+          "states": 5
+        },
+        {
+          "full_grundy": 3,
+          "g": 4,
+          "states": 20
+        },
+        {
+          "full_grundy": 3,
+          "g": 5,
+          "states": 53
+        },
+        {
+          "full_grundy": 3,
+          "g": 6,
+          "states": 69
+        },
+        {
+          "full_grundy": 4,
+          "g": 7,
+          "states": 22
+        }
+      ],
+      "gadget_type_summary": {
+        "external": {
+          "lines": 718,
+          "max_per_state": 6,
+          "states_present": 296
+        },
+        "secant": {
+          "lines": 423,
+          "max_per_state": 4,
+          "states_present": 279
+        },
+        "tangent": {
+          "lines": 115,
+          "max_per_state": 2,
+          "states_present": 107
+        }
+      },
+      "legal_point_distribution": {
+        "8": 31,
+        "10": 38,
+        "11": 16,
+        "12": 44,
+        "13": 60,
+        "14": 72,
+        "15": 64,
+        "16": 18,
+        "17": 6
+      },
+      "limited": false,
+      "line_context_full_grundy": [
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 11,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 3,
+          "lines": 25,
+          "type": "external"
+        },
+        {
+          "full_grundy": 3,
+          "k": 3,
+          "lines": 494,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 146,
+          "type": "external"
+        },
+        {
+          "full_grundy": 5,
+          "k": 3,
+          "lines": 6,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 4,
+          "lines": 2,
+          "type": "external"
+        },
+        {
+          "full_grundy": 3,
+          "k": 4,
+          "lines": 34,
+          "type": "external"
+        },
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 7,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 3,
+          "k": 3,
+          "lines": 312,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 56,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 2,
+          "k": 4,
+          "lines": 24,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 3,
+          "k": 4,
+          "lines": 24,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 2,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 2,
+          "k": 3,
+          "lines": 1,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 3,
+          "k": 3,
+          "lines": 74,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 14,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 3,
+          "k": 4,
+          "lines": 24,
+          "type": "tangent"
+        }
+      ],
+      "q": 17,
+      "single_line_by_type_k": [
+        {
+          "k": 3,
+          "lines": 682,
+          "nonzero_delta": 210,
+          "p_after_ablation": 141,
+          "type": "external",
+          "xor_delta_distribution": {
+            "0": 472,
+            "1": 1,
+            "3": 68,
+            "4": 72,
+            "6": 50,
+            "7": 19
+          },
+          "zero_delta": 472
+        },
+        {
+          "k": 4,
+          "lines": 36,
+          "nonzero_delta": 36,
+          "p_after_ablation": 31,
+          "type": "external",
+          "xor_delta_distribution": {
+            "3": 31,
+            "7": 5
+          },
+          "zero_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 375,
+          "nonzero_delta": 212,
+          "p_after_ablation": 150,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 163,
+            "1": 4,
+            "3": 120,
+            "4": 26,
+            "6": 12,
+            "7": 50
+          },
+          "zero_delta": 163
+        },
+        {
+          "k": 4,
+          "lines": 48,
+          "nonzero_delta": 34,
+          "p_after_ablation": 10,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 14,
+            "3": 10,
+            "7": 24
+          },
+          "zero_delta": 14
+        },
+        {
+          "k": 3,
+          "lines": 91,
+          "nonzero_delta": 24,
+          "p_after_ablation": 10,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 67,
+            "3": 8,
+            "4": 2,
+            "6": 4,
+            "7": 10
+          },
+          "zero_delta": 67
+        },
+        {
+          "k": 4,
+          "lines": 24,
+          "nonzero_delta": 0,
+          "p_after_ablation": 0,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 24
+          },
+          "zero_delta": 24
+        }
+      ],
+      "single_line_joint": [
+        {
+          "k": 3,
+          "lines": 472,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 1,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "k": 3,
+          "lines": 68,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 72,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 50,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 19,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 31,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 4,
+          "lines": 5,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 3,
+          "lines": 163,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 4,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "k": 3,
+          "lines": 120,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 26,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 12,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 50,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 14,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 4,
+          "lines": 10,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 4,
+          "lines": 24,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 3,
+          "lines": 67,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 8,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 2,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 4,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 10,
+          "type": "tangent",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 24,
+          "type": "tangent",
+          "xor_delta": 0
+        }
+      ],
+      "state_rows_sha256": "429177496094f1915ffcdd215d285cf7bf43e7e556ec13d7d21870e2b5bac573",
+      "states": 349
+    },
+    {
+      "collective_type_ablation": [
+        {
+          "states": 16203,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "states": 7620,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "states": 1107,
+          "type": "external",
+          "xor_delta": 2
+        },
+        {
+          "states": 3349,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "states": 11682,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "states": 4009,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "states": 1136,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "states": 2968,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "states": 23837,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "states": 5411,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "states": 776,
+          "type": "secant",
+          "xor_delta": 2
+        },
+        {
+          "states": 2386,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "states": 8733,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "states": 3872,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "states": 905,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "states": 2049,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "states": 24838,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "states": 1069,
+          "type": "tangent",
+          "xor_delta": 1
+        },
+        {
+          "states": 105,
+          "type": "tangent",
+          "xor_delta": 2
+        },
+        {
+          "states": 493,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "states": 1639,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "states": 1157,
+          "type": "tangent",
+          "xor_delta": 5
+        },
+        {
+          "states": 140,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "states": 382,
+          "type": "tangent",
+          "xor_delta": 7
+        }
+      ],
+      "collective_type_summary": {
+        "external": {
+          "nonzero_delta": 31871,
+          "p_after_ablation": 8771,
+          "states_present": 48074,
+          "zero_delta": 16203
+        },
+        "secant": {
+          "nonzero_delta": 24132,
+          "p_after_ablation": 6452,
+          "states_present": 47969,
+          "zero_delta": 23837
+        },
+        "tangent": {
+          "nonzero_delta": 4985,
+          "p_after_ablation": 1225,
+          "states_present": 29823,
+          "zero_delta": 24838
+        }
+      },
+      "direct_geometry_sg_crosscheck": {
+        "disagreements": 0,
+        "states": 100
+      },
+      "full_grundy_distribution": {
+        "1": 20142,
+        "2": 4629,
+        "4": 11933,
+        "5": 11380
+      },
+      "gadget_count_distribution": {
+        "3": 6,
+        "4": 8,
+        "5": 63,
+        "6": 219,
+        "7": 204,
+        "8": 607,
+        "9": 673,
+        "10": 1060,
+        "11": 1302,
+        "12": 1659,
+        "13": 2063,
+        "14": 2611,
+        "15": 2621,
+        "16": 3150,
+        "17": 3088,
+        "18": 2975,
+        "19": 3426,
+        "20": 3047,
+        "21": 3298,
+        "22": 2887,
+        "23": 2469,
+        "24": 2177,
+        "25": 1766,
+        "26": 1300,
+        "27": 1196,
+        "28": 1072,
+        "29": 880,
+        "30": 619,
+        "31": 439,
+        "32": 298,
+        "33": 276,
+        "34": 170,
+        "35": 169,
+        "36": 92,
+        "37": 54,
+        "38": 46,
+        "39": 32,
+        "40": 28,
+        "41": 14,
+        "42": 4,
+        "43": 14,
+        "47": 2
+      },
+      "gadget_count_full_grundy": [
+        {
+          "full_grundy": 4,
+          "g": 3,
+          "states": 6
+        },
+        {
+          "full_grundy": 1,
+          "g": 4,
+          "states": 8
+        },
+        {
+          "full_grundy": 1,
+          "g": 5,
+          "states": 10
+        },
+        {
+          "full_grundy": 4,
+          "g": 5,
+          "states": 53
+        },
+        {
+          "full_grundy": 1,
+          "g": 6,
+          "states": 53
+        },
+        {
+          "full_grundy": 4,
+          "g": 6,
+          "states": 166
+        },
+        {
+          "full_grundy": 1,
+          "g": 7,
+          "states": 55
+        },
+        {
+          "full_grundy": 4,
+          "g": 7,
+          "states": 141
+        },
+        {
+          "full_grundy": 5,
+          "g": 7,
+          "states": 8
+        },
+        {
+          "full_grundy": 1,
+          "g": 8,
+          "states": 211
+        },
+        {
+          "full_grundy": 2,
+          "g": 8,
+          "states": 8
+        },
+        {
+          "full_grundy": 4,
+          "g": 8,
+          "states": 375
+        },
+        {
+          "full_grundy": 5,
+          "g": 8,
+          "states": 13
+        },
+        {
+          "full_grundy": 1,
+          "g": 9,
+          "states": 224
+        },
+        {
+          "full_grundy": 2,
+          "g": 9,
+          "states": 15
+        },
+        {
+          "full_grundy": 4,
+          "g": 9,
+          "states": 399
+        },
+        {
+          "full_grundy": 5,
+          "g": 9,
+          "states": 35
+        },
+        {
+          "full_grundy": 1,
+          "g": 10,
+          "states": 377
+        },
+        {
+          "full_grundy": 2,
+          "g": 10,
+          "states": 1
+        },
+        {
+          "full_grundy": 4,
+          "g": 10,
+          "states": 514
+        },
+        {
+          "full_grundy": 5,
+          "g": 10,
+          "states": 168
+        },
+        {
+          "full_grundy": 1,
+          "g": 11,
+          "states": 549
+        },
+        {
+          "full_grundy": 2,
+          "g": 11,
+          "states": 17
+        },
+        {
+          "full_grundy": 4,
+          "g": 11,
+          "states": 507
+        },
+        {
+          "full_grundy": 5,
+          "g": 11,
+          "states": 229
+        },
+        {
+          "full_grundy": 1,
+          "g": 12,
+          "states": 584
+        },
+        {
+          "full_grundy": 2,
+          "g": 12,
+          "states": 61
+        },
+        {
+          "full_grundy": 4,
+          "g": 12,
+          "states": 776
+        },
+        {
+          "full_grundy": 5,
+          "g": 12,
+          "states": 238
+        },
+        {
+          "full_grundy": 1,
+          "g": 13,
+          "states": 783
+        },
+        {
+          "full_grundy": 2,
+          "g": 13,
+          "states": 103
+        },
+        {
+          "full_grundy": 4,
+          "g": 13,
+          "states": 861
+        },
+        {
+          "full_grundy": 5,
+          "g": 13,
+          "states": 316
+        },
+        {
+          "full_grundy": 1,
+          "g": 14,
+          "states": 1223
+        },
+        {
+          "full_grundy": 2,
+          "g": 14,
+          "states": 67
+        },
+        {
+          "full_grundy": 4,
+          "g": 14,
+          "states": 769
+        },
+        {
+          "full_grundy": 5,
+          "g": 14,
+          "states": 552
+        },
+        {
+          "full_grundy": 1,
+          "g": 15,
+          "states": 1161
+        },
+        {
+          "full_grundy": 2,
+          "g": 15,
+          "states": 148
+        },
+        {
+          "full_grundy": 4,
+          "g": 15,
+          "states": 747
+        },
+        {
+          "full_grundy": 5,
+          "g": 15,
+          "states": 565
+        },
+        {
+          "full_grundy": 1,
+          "g": 16,
+          "states": 1336
+        },
+        {
+          "full_grundy": 2,
+          "g": 16,
+          "states": 145
+        },
+        {
+          "full_grundy": 4,
+          "g": 16,
+          "states": 1049
+        },
+        {
+          "full_grundy": 5,
+          "g": 16,
+          "states": 620
+        },
+        {
+          "full_grundy": 1,
+          "g": 17,
+          "states": 1181
+        },
+        {
+          "full_grundy": 2,
+          "g": 17,
+          "states": 190
+        },
+        {
+          "full_grundy": 4,
+          "g": 17,
+          "states": 877
+        },
+        {
+          "full_grundy": 5,
+          "g": 17,
+          "states": 840
+        },
+        {
+          "full_grundy": 1,
+          "g": 18,
+          "states": 1381
+        },
+        {
+          "full_grundy": 2,
+          "g": 18,
+          "states": 161
+        },
+        {
+          "full_grundy": 4,
+          "g": 18,
+          "states": 734
+        },
+        {
+          "full_grundy": 5,
+          "g": 18,
+          "states": 699
+        },
+        {
+          "full_grundy": 1,
+          "g": 19,
+          "states": 1552
+        },
+        {
+          "full_grundy": 2,
+          "g": 19,
+          "states": 269
+        },
+        {
+          "full_grundy": 4,
+          "g": 19,
+          "states": 759
+        },
+        {
+          "full_grundy": 5,
+          "g": 19,
+          "states": 846
+        },
+        {
+          "full_grundy": 1,
+          "g": 20,
+          "states": 1391
+        },
+        {
+          "full_grundy": 2,
+          "g": 20,
+          "states": 218
+        },
+        {
+          "full_grundy": 4,
+          "g": 20,
+          "states": 593
+        },
+        {
+          "full_grundy": 5,
+          "g": 20,
+          "states": 845
+        },
+        {
+          "full_grundy": 1,
+          "g": 21,
+          "states": 1440
+        },
+        {
+          "full_grundy": 2,
+          "g": 21,
+          "states": 376
+        },
+        {
+          "full_grundy": 4,
+          "g": 21,
+          "states": 560
+        },
+        {
+          "full_grundy": 5,
+          "g": 21,
+          "states": 922
+        },
+        {
+          "full_grundy": 1,
+          "g": 22,
+          "states": 1370
+        },
+        {
+          "full_grundy": 2,
+          "g": 22,
+          "states": 330
+        },
+        {
+          "full_grundy": 4,
+          "g": 22,
+          "states": 513
+        },
+        {
+          "full_grundy": 5,
+          "g": 22,
+          "states": 674
+        },
+        {
+          "full_grundy": 1,
+          "g": 23,
+          "states": 1043
+        },
+        {
+          "full_grundy": 2,
+          "g": 23,
+          "states": 348
+        },
+        {
+          "full_grundy": 4,
+          "g": 23,
+          "states": 455
+        },
+        {
+          "full_grundy": 5,
+          "g": 23,
+          "states": 623
+        },
+        {
+          "full_grundy": 1,
+          "g": 24,
+          "states": 912
+        },
+        {
+          "full_grundy": 2,
+          "g": 24,
+          "states": 245
+        },
+        {
+          "full_grundy": 4,
+          "g": 24,
+          "states": 331
+        },
+        {
+          "full_grundy": 5,
+          "g": 24,
+          "states": 689
+        },
+        {
+          "full_grundy": 1,
+          "g": 25,
+          "states": 690
+        },
+        {
+          "full_grundy": 2,
+          "g": 25,
+          "states": 257
+        },
+        {
+          "full_grundy": 4,
+          "g": 25,
+          "states": 236
+        },
+        {
+          "full_grundy": 5,
+          "g": 25,
+          "states": 583
+        },
+        {
+          "full_grundy": 1,
+          "g": 26,
+          "states": 628
+        },
+        {
+          "full_grundy": 2,
+          "g": 26,
+          "states": 191
+        },
+        {
+          "full_grundy": 4,
+          "g": 26,
+          "states": 156
+        },
+        {
+          "full_grundy": 5,
+          "g": 26,
+          "states": 325
+        },
+        {
+          "full_grundy": 1,
+          "g": 27,
+          "states": 483
+        },
+        {
+          "full_grundy": 2,
+          "g": 27,
+          "states": 301
+        },
+        {
+          "full_grundy": 4,
+          "g": 27,
+          "states": 70
+        },
+        {
+          "full_grundy": 5,
+          "g": 27,
+          "states": 342
+        },
+        {
+          "full_grundy": 1,
+          "g": 28,
+          "states": 341
+        },
+        {
+          "full_grundy": 2,
+          "g": 28,
+          "states": 351
+        },
+        {
+          "full_grundy": 4,
+          "g": 28,
+          "states": 78
+        },
+        {
+          "full_grundy": 5,
+          "g": 28,
+          "states": 302
+        },
+        {
+          "full_grundy": 1,
+          "g": 29,
+          "states": 379
+        },
+        {
+          "full_grundy": 2,
+          "g": 29,
+          "states": 175
+        },
+        {
+          "full_grundy": 4,
+          "g": 29,
+          "states": 90
+        },
+        {
+          "full_grundy": 5,
+          "g": 29,
+          "states": 236
+        },
+        {
+          "full_grundy": 1,
+          "g": 30,
+          "states": 221
+        },
+        {
+          "full_grundy": 2,
+          "g": 30,
+          "states": 172
+        },
+        {
+          "full_grundy": 4,
+          "g": 30,
+          "states": 19
+        },
+        {
+          "full_grundy": 5,
+          "g": 30,
+          "states": 207
+        },
+        {
+          "full_grundy": 1,
+          "g": 31,
+          "states": 184
+        },
+        {
+          "full_grundy": 2,
+          "g": 31,
+          "states": 113
+        },
+        {
+          "full_grundy": 4,
+          "g": 31,
+          "states": 29
+        },
+        {
+          "full_grundy": 5,
+          "g": 31,
+          "states": 113
+        },
+        {
+          "full_grundy": 1,
+          "g": 32,
+          "states": 79
+        },
+        {
+          "full_grundy": 2,
+          "g": 32,
+          "states": 64
+        },
+        {
+          "full_grundy": 4,
+          "g": 32,
+          "states": 26
+        },
+        {
+          "full_grundy": 5,
+          "g": 32,
+          "states": 129
+        },
+        {
+          "full_grundy": 1,
+          "g": 33,
+          "states": 98
+        },
+        {
+          "full_grundy": 2,
+          "g": 33,
+          "states": 58
+        },
+        {
+          "full_grundy": 4,
+          "g": 33,
+          "states": 16
+        },
+        {
+          "full_grundy": 5,
+          "g": 33,
+          "states": 104
+        },
+        {
+          "full_grundy": 1,
+          "g": 34,
+          "states": 24
+        },
+        {
+          "full_grundy": 2,
+          "g": 34,
+          "states": 75
+        },
+        {
+          "full_grundy": 4,
+          "g": 34,
+          "states": 20
+        },
+        {
+          "full_grundy": 5,
+          "g": 34,
+          "states": 51
+        },
+        {
+          "full_grundy": 1,
+          "g": 35,
+          "states": 55
+        },
+        {
+          "full_grundy": 2,
+          "g": 35,
+          "states": 68
+        },
+        {
+          "full_grundy": 5,
+          "g": 35,
+          "states": 46
+        },
+        {
+          "full_grundy": 1,
+          "g": 36,
+          "states": 32
+        },
+        {
+          "full_grundy": 2,
+          "g": 36,
+          "states": 25
+        },
+        {
+          "full_grundy": 4,
+          "g": 36,
+          "states": 8
+        },
+        {
+          "full_grundy": 5,
+          "g": 36,
+          "states": 27
+        },
+        {
+          "full_grundy": 1,
+          "g": 37,
+          "states": 24
+        },
+        {
+          "full_grundy": 2,
+          "g": 37,
+          "states": 17
+        },
+        {
+          "full_grundy": 5,
+          "g": 37,
+          "states": 13
+        },
+        {
+          "full_grundy": 1,
+          "g": 38,
+          "states": 28
+        },
+        {
+          "full_grundy": 2,
+          "g": 38,
+          "states": 18
+        },
+        {
+          "full_grundy": 1,
+          "g": 39,
+          "states": 1
+        },
+        {
+          "full_grundy": 2,
+          "g": 39,
+          "states": 18
+        },
+        {
+          "full_grundy": 5,
+          "g": 39,
+          "states": 13
+        },
+        {
+          "full_grundy": 1,
+          "g": 40,
+          "states": 24
+        },
+        {
+          "full_grundy": 2,
+          "g": 40,
+          "states": 4
+        },
+        {
+          "full_grundy": 1,
+          "g": 41,
+          "states": 7
+        },
+        {
+          "full_grundy": 2,
+          "g": 41,
+          "states": 7
+        },
+        {
+          "full_grundy": 2,
+          "g": 42,
+          "states": 4
+        },
+        {
+          "full_grundy": 2,
+          "g": 43,
+          "states": 7
+        },
+        {
+          "full_grundy": 5,
+          "g": 43,
+          "states": 7
+        },
+        {
+          "full_grundy": 2,
+          "g": 47,
+          "states": 2
+        }
+      ],
+      "gadget_type_summary": {
+        "external": {
+          "lines": 554832,
+          "max_per_state": 32,
+          "states_present": 48074
+        },
+        "secant": {
+          "lines": 324195,
+          "max_per_state": 22,
+          "states_present": 47969
+        },
+        "tangent": {
+          "lines": 45958,
+          "max_per_state": 7,
+          "states_present": 29823
+        }
+      },
+      "legal_point_distribution": {
+        "14": 8,
+        "16": 27,
+        "17": 52,
+        "18": 298,
+        "19": 617,
+        "20": 1093,
+        "21": 2326,
+        "22": 3399,
+        "23": 4699,
+        "24": 6299,
+        "25": 7142,
+        "26": 6815,
+        "27": 5754,
+        "28": 3897,
+        "29": 2995,
+        "30": 1565,
+        "31": 747,
+        "32": 208,
+        "33": 117,
+        "34": 23,
+        "36": 1,
+        "37": 2
+      },
+      "limited": false,
+      "line_context_full_grundy": [
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 200547,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 3,
+          "lines": 55587,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 102425,
+          "type": "external"
+        },
+        {
+          "full_grundy": 5,
+          "k": 3,
+          "lines": 121354,
+          "type": "external"
+        },
+        {
+          "full_grundy": 1,
+          "k": 4,
+          "lines": 29908,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 4,
+          "lines": 8553,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 4,
+          "lines": 13635,
+          "type": "external"
+        },
+        {
+          "full_grundy": 5,
+          "k": 4,
+          "lines": 17510,
+          "type": "external"
+        },
+        {
+          "full_grundy": 1,
+          "k": 5,
+          "lines": 2266,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 5,
+          "lines": 665,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 5,
+          "lines": 890,
+          "type": "external"
+        },
+        {
+          "full_grundy": 5,
+          "k": 5,
+          "lines": 1314,
+          "type": "external"
+        },
+        {
+          "full_grundy": 1,
+          "k": 6,
+          "lines": 60,
+          "type": "external"
+        },
+        {
+          "full_grundy": 2,
+          "k": 6,
+          "lines": 40,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 6,
+          "lines": 31,
+          "type": "external"
+        },
+        {
+          "full_grundy": 5,
+          "k": 6,
+          "lines": 39,
+          "type": "external"
+        },
+        {
+          "full_grundy": 4,
+          "k": 7,
+          "lines": 8,
+          "type": "external"
+        },
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 116154,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 2,
+          "k": 3,
+          "lines": 32646,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 59669,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 5,
+          "k": 3,
+          "lines": 70595,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 1,
+          "k": 4,
+          "lines": 18479,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 2,
+          "k": 4,
+          "lines": 5150,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 4,
+          "lines": 8266,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 5,
+          "k": 4,
+          "lines": 10146,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 1,
+          "k": 5,
+          "lines": 1341,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 2,
+          "k": 5,
+          "lines": 435,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 5,
+          "lines": 505,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 5,
+          "k": 5,
+          "lines": 701,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 1,
+          "k": 6,
+          "lines": 40,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 2,
+          "k": 6,
+          "lines": 23,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 6,
+          "lines": 31,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 5,
+          "k": 6,
+          "lines": 13,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 4,
+          "k": 7,
+          "lines": 1,
+          "type": "secant"
+        },
+        {
+          "full_grundy": 1,
+          "k": 3,
+          "lines": 16832,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 2,
+          "k": 3,
+          "lines": 4603,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 4,
+          "k": 3,
+          "lines": 8422,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 5,
+          "k": 3,
+          "lines": 9945,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 1,
+          "k": 4,
+          "lines": 2454,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 2,
+          "k": 4,
+          "lines": 731,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 4,
+          "k": 4,
+          "lines": 1157,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 5,
+          "k": 4,
+          "lines": 1335,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 1,
+          "k": 5,
+          "lines": 194,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 2,
+          "k": 5,
+          "lines": 52,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 4,
+          "k": 5,
+          "lines": 86,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 5,
+          "k": 5,
+          "lines": 130,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 1,
+          "k": 6,
+          "lines": 8,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 4,
+          "k": 6,
+          "lines": 2,
+          "type": "tangent"
+        },
+        {
+          "full_grundy": 5,
+          "k": 6,
+          "lines": 7,
+          "type": "tangent"
+        }
+      ],
+      "q": 19,
+      "single_line_by_type_k": [
+        {
+          "k": 3,
+          "lines": 479913,
+          "nonzero_delta": 43767,
+          "p_after_ablation": 11485,
+          "type": "external",
+          "xor_delta_distribution": {
+            "0": 436146,
+            "1": 8508,
+            "2": 1040,
+            "3": 3653,
+            "4": 14273,
+            "5": 11405,
+            "6": 1667,
+            "7": 3221
+          },
+          "zero_delta": 436146
+        },
+        {
+          "k": 4,
+          "lines": 69606,
+          "nonzero_delta": 17413,
+          "p_after_ablation": 3583,
+          "type": "external",
+          "xor_delta_distribution": {
+            "0": 52193,
+            "1": 4823,
+            "2": 351,
+            "3": 1702,
+            "4": 5656,
+            "5": 3128,
+            "6": 391,
+            "7": 1362
+          },
+          "zero_delta": 52193
+        },
+        {
+          "k": 5,
+          "lines": 5135,
+          "nonzero_delta": 2119,
+          "p_after_ablation": 200,
+          "type": "external",
+          "xor_delta_distribution": {
+            "0": 3016,
+            "1": 782,
+            "2": 19,
+            "3": 226,
+            "4": 673,
+            "5": 78,
+            "6": 67,
+            "7": 274
+          },
+          "zero_delta": 3016
+        },
+        {
+          "k": 6,
+          "lines": 170,
+          "nonzero_delta": 115,
+          "p_after_ablation": 2,
+          "type": "external",
+          "xor_delta_distribution": {
+            "0": 55,
+            "1": 37,
+            "2": 2,
+            "3": 39,
+            "4": 20,
+            "5": 2,
+            "6": 6,
+            "7": 9
+          },
+          "zero_delta": 55
+        },
+        {
+          "k": 7,
+          "lines": 8,
+          "nonzero_delta": 8,
+          "p_after_ablation": 8,
+          "type": "external",
+          "xor_delta_distribution": {
+            "4": 8
+          },
+          "zero_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 279064,
+          "nonzero_delta": 25247,
+          "p_after_ablation": 6867,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 253817,
+            "1": 4758,
+            "2": 677,
+            "3": 2314,
+            "4": 8499,
+            "5": 6301,
+            "6": 996,
+            "7": 1702
+          },
+          "zero_delta": 253817
+        },
+        {
+          "k": 4,
+          "lines": 42041,
+          "nonzero_delta": 10645,
+          "p_after_ablation": 2406,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 31396,
+            "1": 2896,
+            "2": 240,
+            "3": 1051,
+            "4": 3321,
+            "5": 2033,
+            "6": 321,
+            "7": 783
+          },
+          "zero_delta": 31396
+        },
+        {
+          "k": 5,
+          "lines": 2982,
+          "nonzero_delta": 1208,
+          "p_after_ablation": 115,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 1774,
+            "1": 449,
+            "2": 17,
+            "3": 111,
+            "4": 413,
+            "5": 52,
+            "6": 22,
+            "7": 144
+          },
+          "zero_delta": 1774
+        },
+        {
+          "k": 6,
+          "lines": 107,
+          "nonzero_delta": 74,
+          "p_after_ablation": 5,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "0": 33,
+            "1": 19,
+            "2": 6,
+            "3": 14,
+            "4": 16,
+            "5": 7,
+            "6": 2,
+            "7": 10
+          },
+          "zero_delta": 33
+        },
+        {
+          "k": 7,
+          "lines": 1,
+          "nonzero_delta": 1,
+          "p_after_ablation": 1,
+          "type": "secant",
+          "xor_delta_distribution": {
+            "4": 1
+          },
+          "zero_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 39802,
+          "nonzero_delta": 3622,
+          "p_after_ablation": 926,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 36180,
+            "1": 680,
+            "2": 70,
+            "3": 316,
+            "4": 1236,
+            "5": 968,
+            "6": 96,
+            "7": 256
+          },
+          "zero_delta": 36180
+        },
+        {
+          "k": 4,
+          "lines": 5677,
+          "nonzero_delta": 1519,
+          "p_after_ablation": 366,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 4158,
+            "1": 400,
+            "2": 51,
+            "3": 154,
+            "4": 446,
+            "5": 312,
+            "6": 39,
+            "7": 117
+          },
+          "zero_delta": 4158
+        },
+        {
+          "k": 5,
+          "lines": 462,
+          "nonzero_delta": 195,
+          "p_after_ablation": 12,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 267,
+            "1": 71,
+            "3": 29,
+            "4": 61,
+            "6": 8,
+            "7": 26
+          },
+          "zero_delta": 267
+        },
+        {
+          "k": 6,
+          "lines": 17,
+          "nonzero_delta": 15,
+          "p_after_ablation": 0,
+          "type": "tangent",
+          "xor_delta_distribution": {
+            "0": 2,
+            "1": 8,
+            "3": 7
+          },
+          "zero_delta": 2
+        }
+      ],
+      "single_line_joint": [
+        {
+          "k": 3,
+          "lines": 436146,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 8508,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "k": 3,
+          "lines": 1040,
+          "type": "external",
+          "xor_delta": 2
+        },
+        {
+          "k": 3,
+          "lines": 3653,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 14273,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 11405,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "k": 3,
+          "lines": 1667,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 3221,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 52193,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "k": 4,
+          "lines": 4823,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "k": 4,
+          "lines": 351,
+          "type": "external",
+          "xor_delta": 2
+        },
+        {
+          "k": 4,
+          "lines": 1702,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 4,
+          "lines": 5656,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 4,
+          "lines": 3128,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "k": 4,
+          "lines": 391,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "k": 4,
+          "lines": 1362,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 5,
+          "lines": 3016,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "k": 5,
+          "lines": 782,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "k": 5,
+          "lines": 19,
+          "type": "external",
+          "xor_delta": 2
+        },
+        {
+          "k": 5,
+          "lines": 226,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 5,
+          "lines": 673,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 5,
+          "lines": 78,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "k": 5,
+          "lines": 67,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "k": 5,
+          "lines": 274,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 6,
+          "lines": 55,
+          "type": "external",
+          "xor_delta": 0
+        },
+        {
+          "k": 6,
+          "lines": 37,
+          "type": "external",
+          "xor_delta": 1
+        },
+        {
+          "k": 6,
+          "lines": 2,
+          "type": "external",
+          "xor_delta": 2
+        },
+        {
+          "k": 6,
+          "lines": 39,
+          "type": "external",
+          "xor_delta": 3
+        },
+        {
+          "k": 6,
+          "lines": 20,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 6,
+          "lines": 2,
+          "type": "external",
+          "xor_delta": 5
+        },
+        {
+          "k": 6,
+          "lines": 6,
+          "type": "external",
+          "xor_delta": 6
+        },
+        {
+          "k": 6,
+          "lines": 9,
+          "type": "external",
+          "xor_delta": 7
+        },
+        {
+          "k": 7,
+          "lines": 8,
+          "type": "external",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 253817,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 4758,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "k": 3,
+          "lines": 677,
+          "type": "secant",
+          "xor_delta": 2
+        },
+        {
+          "k": 3,
+          "lines": 2314,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 8499,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 6301,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "k": 3,
+          "lines": 996,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 1702,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 31396,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 4,
+          "lines": 2896,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "k": 4,
+          "lines": 240,
+          "type": "secant",
+          "xor_delta": 2
+        },
+        {
+          "k": 4,
+          "lines": 1051,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 4,
+          "lines": 3321,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 4,
+          "lines": 2033,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "k": 4,
+          "lines": 321,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "k": 4,
+          "lines": 783,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 5,
+          "lines": 1774,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 5,
+          "lines": 449,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "k": 5,
+          "lines": 17,
+          "type": "secant",
+          "xor_delta": 2
+        },
+        {
+          "k": 5,
+          "lines": 111,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 5,
+          "lines": 413,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 5,
+          "lines": 52,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "k": 5,
+          "lines": 22,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "k": 5,
+          "lines": 144,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 6,
+          "lines": 33,
+          "type": "secant",
+          "xor_delta": 0
+        },
+        {
+          "k": 6,
+          "lines": 19,
+          "type": "secant",
+          "xor_delta": 1
+        },
+        {
+          "k": 6,
+          "lines": 6,
+          "type": "secant",
+          "xor_delta": 2
+        },
+        {
+          "k": 6,
+          "lines": 14,
+          "type": "secant",
+          "xor_delta": 3
+        },
+        {
+          "k": 6,
+          "lines": 16,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 6,
+          "lines": 7,
+          "type": "secant",
+          "xor_delta": 5
+        },
+        {
+          "k": 6,
+          "lines": 2,
+          "type": "secant",
+          "xor_delta": 6
+        },
+        {
+          "k": 6,
+          "lines": 10,
+          "type": "secant",
+          "xor_delta": 7
+        },
+        {
+          "k": 7,
+          "lines": 1,
+          "type": "secant",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 36180,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "k": 3,
+          "lines": 680,
+          "type": "tangent",
+          "xor_delta": 1
+        },
+        {
+          "k": 3,
+          "lines": 70,
+          "type": "tangent",
+          "xor_delta": 2
+        },
+        {
+          "k": 3,
+          "lines": 316,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "k": 3,
+          "lines": 1236,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "k": 3,
+          "lines": 968,
+          "type": "tangent",
+          "xor_delta": 5
+        },
+        {
+          "k": 3,
+          "lines": 96,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "k": 3,
+          "lines": 256,
+          "type": "tangent",
+          "xor_delta": 7
+        },
+        {
+          "k": 4,
+          "lines": 4158,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "k": 4,
+          "lines": 400,
+          "type": "tangent",
+          "xor_delta": 1
+        },
+        {
+          "k": 4,
+          "lines": 51,
+          "type": "tangent",
+          "xor_delta": 2
+        },
+        {
+          "k": 4,
+          "lines": 154,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "k": 4,
+          "lines": 446,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "k": 4,
+          "lines": 312,
+          "type": "tangent",
+          "xor_delta": 5
+        },
+        {
+          "k": 4,
+          "lines": 39,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "k": 4,
+          "lines": 117,
+          "type": "tangent",
+          "xor_delta": 7
+        },
+        {
+          "k": 5,
+          "lines": 267,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "k": 5,
+          "lines": 71,
+          "type": "tangent",
+          "xor_delta": 1
+        },
+        {
+          "k": 5,
+          "lines": 29,
+          "type": "tangent",
+          "xor_delta": 3
+        },
+        {
+          "k": 5,
+          "lines": 61,
+          "type": "tangent",
+          "xor_delta": 4
+        },
+        {
+          "k": 5,
+          "lines": 8,
+          "type": "tangent",
+          "xor_delta": 6
+        },
+        {
+          "k": 5,
+          "lines": 26,
+          "type": "tangent",
+          "xor_delta": 7
+        },
+        {
+          "k": 6,
+          "lines": 2,
+          "type": "tangent",
+          "xor_delta": 0
+        },
+        {
+          "k": 6,
+          "lines": 8,
+          "type": "tangent",
+          "xor_delta": 1
+        },
+        {
+          "k": 6,
+          "lines": 7,
+          "type": "tangent",
+          "xor_delta": 3
+        }
+      ],
+      "state_rows_sha256": "8dafc638ad04c9e6413550315d375c409a9878ad416dd0b3d471f00046c897ba",
+      "states": 48084
+    }
+  ],
+  "schema_version": 1,
+  "sources": {
+    "notes/2026-07-08-intrusion-census.py": {
+      "bytes": 26023,
+      "sha256": "6f1f7e1e36ff3a3ed5d5f0c410b8d6bacb5be23a73503e669489e4cf06f14c83"
+    },
+    "notes/2026-07-08-zone-repair-geometry.py": {
+      "bytes": 11002,
+      "sha256": "5eb096b8eecc872fb961c5f9c385073b32133194f35ed1580b91c537ec8347f8"
+    },
+    "notes/2026-07-08-zone-steering-census.py": {
+      "bytes": 9976,
+      "sha256": "f84fd2474ada8b917a73ca094fd5265ced4040501e9f3459ebe16694a90aa406"
+    },
+    "notes/data/c20-q13-q17-states.jsonl.gz": {
+      "bytes": 654965,
+      "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+    },
+    "notes/data/c20-q19-states.jsonl.gz": {
+      "bytes": 2423200,
+      "sha256": "5ddea78f59898c194b2fdedda9871d7787dac577bef0aa44e5483e5109589e8a"
+    },
+    "rust/scripts/c528_overload_profile.py": {
+      "bytes": 9182,
+      "sha256": "73a66e23638d34819f04fecccaf58b395fea3465db27fd092366a92f562e9358"
+    },
+    "rust/scripts/c80_response_fibre_census.py": {
+      "bytes": 12433,
+      "sha256": "d70136673d947f89259a6dab214fee7450505c10580a842c6bd9d51ab69633ce"
+    }
+  },
+  "task": "C528"
+}

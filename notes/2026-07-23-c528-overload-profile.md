@@ -30,9 +30,9 @@ their overload profiles decide the branch directly.
 |----|-------------------|---------------------------|------------------|-------------------|
 | 13 | 0                 | — (`Y_NK` closes depth-0) | —                | —                 |
 | 17 | 349               | 1 … 7 (258/349 have g≥2)  | 4                | 0                 |
-| 19 | 48,084            | 2 … **47** (mean 19.2)    | **7**            | 8,189             |
+| 19 | 48,084            | **3** … **47** (mean 19.2)| **7**            | 8,189             |
 
-At q19, **100% of residual children have `g ≥ 2`** — not a single `g=1` case — and the
+At q19, **100% of residual children have `g ≥ 3`** — not a single `g≤2` case — and the
 per-gadget overload magnitude `k` itself reaches 7. Both the number of gadgets and their
 size **grow with `q`** (g: 7→47, k: 4→7 across q17→q19).
 
