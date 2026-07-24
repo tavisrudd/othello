@@ -116,8 +116,8 @@ check.  No manuscript theorem is assumed by the data structure.  See
 `[6,3,4]`, `[6,3,4]` to AME, projective to monomial, and monomial to
 local-Clifford coherence with explicit multiplier matrices.  The final
 import gate and standard-axiom audit passed.  The full manuscript dictionary
-still needs the stabilizer-action, Lagrangian, and minimum-support clauses
-before formal adoption.  See
+still needs the stabilizer-action, Lagrangian, minimum-support, and AME
+converse clauses before formal adoption; these are now queued as C591.  See
 `2026-07-24-c590-ame-lu-lean-dictionary-bridges.md`.
 
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
@@ -150,16 +150,18 @@ as C559--C572.  Dependency order is authoritative:
 2. C561: theorem, title, exception-table, and architecture freeze.
 3. C562--C563: claim-specific literature audit and paper-local evidence import.
 4. C564: first complete manuscript draft and warning-free PDF.
-5. C565--C569: shared Lean foundation and four theorem packages.
+5. C565, C590, and C591: shared Lean foundation and complete dictionary;
+   C566--C569: four theorem packages.
 6. C570: aggregate import, axiom audit, and manuscript reconciliation.
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C566 is next: formalize the admitted non-GRS pencil, the scalar `z`, and
-the algebraic/projective implications used by the local-Clifford
-classification.  C581 is a separately queued optional upgrade gate for
-basis-free phase-space reconstruction and quantitative approximate rigidity;
-neither is assumed by the completion program.
+C591 is next: close the six-party Weyl stabilizer action, CSS Lagrangian and
+support formulas, minimum-support statement, and the AME-to-`[6,3,4]`
+converse needed for full adoption of the dictionary.  C566 follows with the
+admitted non-GRS pencil, scalar `z`, and local-Clifford classification
+interface.  C581 is a separately queued optional upgrade gate for basis-free
+phase-space reconstruction and quantitative approximate rigidity.
 
 ## Completion gates
 
