@@ -58,6 +58,16 @@ the admitted odd pencil satisfies `LU iff LC iff z equality`, with no new
 exceptional characteristics.  Two four-party marginals covering all six
 parties suffice.  See `2026-07-24-c560-ame-lu-orbit-rigidity.md`.
 
+**C561 closed (2026-07-24): theorem package and architecture frozen.**  The
+title is *Local-Unitary Rigidity and Clifford Geometry of Six-Qudit AME
+Stabilizer Tensors*.  C560 is the headline theorem; C396's `LU iff LC iff z`
+is its admitted-pencil corollary.  Logical operations, explicit LU
+certificates, fixed-copy generic constancy, and the transport divisor are
+subordinate results.  The synchronized boundary table distinguishes the
+all-prime-power rigidity theorem, the odd admitted pencil, and detector-only
+exceptional characteristics.  See
+`2026-07-24-c561-ame-lu-theorem-freeze.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -73,10 +83,9 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C561 is next.  It must freeze the strengthened theorem package and title,
-separate the all-MDS/CSS intertwiner theorem from C396's odd admitted-pencil
-classification, and keep C559's scalar-invariant obstruction as the mechanism
-contrast rather than a failed branch.
+C562 is next; C563 is independently ready.  C562 audits the frozen headline
+and portable diagonal-tensor criterion before any novelty wording.  C563
+imports only the computations retained by C561's hierarchy.
 
 ## Completion gates
 

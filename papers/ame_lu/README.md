@@ -1,15 +1,16 @@
-# Paper: Clifford geometry and local-unitary invariants of six-qudit AME tensors
+# Paper: Local-unitary rigidity and Clifford geometry of six-qudit AME stabilizer tensors
 
-**Working title:** *Clifford Geometry and Local-Unitary Invariants of
-Six-Qudit AME Tensors.*
+**Frozen title:** *Local-Unitary Rigidity and Clifford Geometry of
+Six-Qudit AME Stabilizer Tensors.*
 
 **Lane:** `ame-lu`
 
-**Status:** preparation scaffold with the headline theorem proved.  C560
+**Status:** theorem package and architecture frozen.  C560
 shows that every local-unitary intertwiner between equal-phase CSS states of
-linear `[6,3,4]_q` MDS codes is local Clifford.  The manuscript theorem
-package and title await C561 freeze; the paper-local evidence bundle,
-claim-specific literature audit, and complete prose are not yet closed.
+linear `[6,3,4]_q` MDS codes is local Clifford.  C561 fixes the title,
+theorem hierarchy, exception table, and section order.  The paper-local
+evidence bundle, claim-specific literature audit, and complete prose are not
+yet closed.
 
 The completion program is queued as C559--C572: theorem decision, theorem
 freeze, literature and reproducibility audits, first draft, four Lean theorem

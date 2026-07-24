@@ -5,8 +5,8 @@ specific proof location or evidence record.
 
 | Risk | Present status | Closure gate |
 |---|---|---|
-| “LU=LC” is read as the false global conjecture | open wording risk | define restricted orbit coincidence on the pencil at first use |
-| Equality of orbit partitions is confused with classification of all LU intertwiners | open wording risk | keep the two statements separate in theorem and introduction |
+| “LU=LC” is read as the false global conjecture | open wording risk | state the all-MDS/CSS family in the title-page theorem and repeat the exclusion once |
+| Equality of orbit partitions is confused with classification of all LU intertwiners | closed mathematically by C560 | lead with the stronger intertwiner theorem; derive orbit coincidence as a corollary |
 | A Pauli or holonomy signature is used as an arbitrary-LU invariant | blocked by design | every LU invariant receives a basis-free tensor-contraction proof |
 | The scalar `z` is claimed LU-complete from finite samples | blocked by design | exact invariant-field proof plus exceptional-fibre analysis |
 | Exceptional characteristics are silently removed | open | one synchronized exception table across theorem, proof, and supplement |
