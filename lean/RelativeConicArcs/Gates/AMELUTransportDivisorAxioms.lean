@@ -18,6 +18,7 @@ open RelativeConicArcs.AMELU
 #print axioms signedTransportFactor_sub_two_mul_axial
 #print axioms signedTransportFactor_eq_two_mul_axial_of_charSeven
 #print axioms reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven
+#print axioms reducedTransportDivisor_eq_zero_iff_axial_of_charSeven
 #print axioms TransportCycleCoverInputs.negativeSigned_det_factor
 #print axioms TransportCycleCoverInputs.positiveSigned_det_factor
 #print axioms TransportCycleCoverInputs.axial_det_factor

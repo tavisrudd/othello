@@ -166,6 +166,21 @@ theorem reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven
     signedTransportFactor_eq_two_mul_axial_of_charSeven]
   ring
 
+/-- Over a field of characteristic seven, the reduced divisor and the axial
+factor have exactly the same zero set. -/
+theorem reducedTransportDivisor_eq_zero_iff_axial_of_charSeven
+    {K : Type*} [Field K] [CharP K 7] (A B : K) :
+    reducedTransportDivisor A B = 0 ↔ axialTransportFactor A B = 0 := by
+  have htwo : (2 : K) ≠ 0 := by
+    intro htwo
+    have hseven : (7 : K) = 0 := CharP.cast_eq_zero K 7
+    have hone : (1 : K) = 0 := calc
+      (1 : K) = 7 - 3 * 2 := by norm_num
+      _ = 0 := by rw [hseven, htwo]; ring
+    exact one_ne_zero hone
+  rw [reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven]
+  simp [htwo]
+
 /-- The constrained party indexed by a systematic row. -/
 def constrainedTransportParty (i : Fin 3) : Party :=
   ⟨i, by omega⟩
