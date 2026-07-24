@@ -3,8 +3,8 @@ import RelativeConicArcs.Gates.PRSFoundation
 /-!
 # Axiom audit for projective Reed--Solomon syndrome foundations
 
-This reproducible audit prints the axiom dependencies of the reusable logical terminals exported
-by `RelativeConicArcs.Gates.PRSFoundation`.  It adds no definitions or theorems.
+The commands below print the axiom dependencies of the reusable logical theorems exported by
+`RelativeConicArcs.Gates.PRSFoundation`; this file adds no declarations.
 -/
 
 #print axioms RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member

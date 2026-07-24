@@ -3,12 +3,12 @@ import RelativeConicArcs.PRSResidualQuadratic
 /-!
 # Projective Reed--Solomon syndrome interfaces
 
-This module supplies common logical interfaces for projective Reed--Solomon syndrome
-classifications.  It separates four assertions that require different mathematical inputs:
+These common interfaces separate four assertions used in projective Reed--Solomon syndrome
+classifications:
 
 * a Hankel kernel contains no split squarefree polynomial;
 * the corresponding projective syndrome is split-free;
-* a covering-radius statement promotes split-freeness to coding-theoretic deepness;
+* a covering-radius statement promotes split-freeness to the deep syndrome property;
 * geometric component and rational-point arguments construct a split squarefree kernel member.
 
 The syndrome and polynomial types are abstract.  Concrete degrees may use coefficient vectors,
@@ -17,20 +17,19 @@ marker contraction is the definition
 `RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction`; no second contraction
 hierarchy is introduced here.
 
-All geometric, rational-point, covering-radius, and orbit-exhaustion assertions are structure
-fields.  The terminal theorems only combine these visible hypotheses.
+Here a deep syndrome represents a deep-hole coset under the projective syndrome/coset dictionary;
+a shallow syndrome represents a coset that is not deep.  Geometric, rational-point,
+covering-radius, and exhaustion assertions remain structure fields.
 -/
 
 namespace RelativeConicArcs.PRSFoundation
 
-/-- A syndrome has a split squarefree kernel member when some polynomial satisfies both the
-specified Hankel-kernel relation and the specified split-squarefree predicate. -/
+/-- Existence of a polynomial satisfying the kernel and split squarefree predicates. -/
 def HasSplitSquarefreeKernelMember {S P : Type*}
     (inHankelKernel : S → P → Prop) (isSplitSquarefree : P → Prop) (s : S) : Prop :=
   ∃ p, inHankelKernel s p ∧ isSplitSquarefree p
 
-/-- Exact dictionary between split-free syndromes and split squarefree members of their Hankel
-kernels.  The predicates deliberately do not mention coding-theoretic covering radius. -/
+/-- Dictionary between split-freeness and absence of a split squarefree kernel member. -/
 structure HankelKernelDictionary (S P : Type*) where
   /-- The Hankel-kernel incidence relation between syndromes and polynomials. -/
   inHankelKernel : S → P → Prop
@@ -64,8 +63,7 @@ theorem not_splitFree_iff_not_not_has_kernel_member {S P : Type*}
         dictionary.isSplitSquarefree s := by
   rw [dictionary.splitFree_iff_no_kernel_member]
 
-/-- Failure of split-freeness is equivalent to existence of a split squarefree Hankel-kernel
-member. -/
+/-- Classically, failure of split-freeness is equivalent to a split squarefree kernel member. -/
 theorem not_splitFree_iff_has_kernel_member {S P : Type*}
     (dictionary : HankelKernelDictionary S P) (s : S) :
     ¬ dictionary.isSplitFree s ↔
@@ -77,24 +75,22 @@ theorem not_splitFree_iff_has_kernel_member {S P : Type*}
 
 end HankelKernelDictionary
 
-/-- Covering-radius input that relates the split-free syndrome predicate to the
-coding-theoretic deep-syndrome predicate.  The forward implication is structural; the reverse
-implication is required only on the explicitly stated radius range. -/
+/-- Covering-radius input relating split-freeness to the deep syndrome predicate. -/
 structure CoveringRadiusInput (S : Type*) where
   /-- Projective syndromes whose Hankel kernels have no split squarefree member. -/
   isSplitFree : S → Prop
-  /-- Coding-theoretic deepest-syndrome predicate. -/
+  /-- Coding-theoretic deep syndrome predicate. -/
   isDeep : S → Prop
-  /-- The field-length-radius condition under which split-free syndromes are deepest. -/
+  /-- The field-length-radius condition under which split-free syndromes are deep. -/
   radiusRange : Prop
-  /-- A deepest syndrome is split-free independently of the radius-promotion theorem. -/
+  /-- A deep syndrome is split-free independently of the radius-promotion theorem. -/
   deep_implies_splitFree : ∀ {s}, isDeep s → isSplitFree s
-  /-- In the declared radius range, split-freeness promotes to coding-theoretic deepness. -/
+  /-- In the declared radius range, split-freeness implies that a syndrome is deep. -/
   splitFree_implies_deep : radiusRange → ∀ {s}, isSplitFree s → isDeep s
 
 namespace CoveringRadiusInput
 
-/-- On the stated covering-radius range, coding-theoretic deepness is exactly split-freeness. -/
+/-- On the stated radius range, a syndrome is deep exactly when it is split-free. -/
 theorem deep_iff_splitFree {S : Type*} (input : CoveringRadiusInput S)
     (hradius : input.radiusRange) (s : S) :
     input.isDeep s ↔ input.isSplitFree s :=
@@ -102,9 +98,7 @@ theorem deep_iff_splitFree {S : Type*} (input : CoveringRadiusInput S)
 
 end CoveringRadiusInput
 
-/-- Predicate-level geometric witness construction.  This is the common interface when a
-degree-specific development has already packaged “there exists a split squarefree Hankel-kernel
-member” as one proposition. -/
+/-- Predicate-level input for a geometric kernel-member construction. -/
 structure WitnessConstructionInput (S : Type*) (q threshold : ℕ) where
   /-- Syndromes to which the transverse construction is applied. -/
   exceptional : S → Prop
@@ -136,9 +130,7 @@ theorem exceptional_has_kernel_member {S : Type*} {q threshold : ℕ}
 
 end WitnessConstructionInput
 
-/-- Explicit geometric inputs for constructing a split squarefree Hankel-kernel member outside a
-distinguished locus.  The threshold, component assertion, rational-point assertion, and
-point-to-witness bridge remain separate fields. -/
+/-- Component, rational-point, and bridge inputs for a geometric kernel member. -/
 structure GeometricWitnessInput (S P : Type*) (q threshold : ℕ) where
   /-- Syndromes to which the transverse geometric construction is applied. -/
   exceptional : S → Prop
@@ -148,7 +140,7 @@ structure GeometricWitnessInput (S P : Type*) (q threshold : ℕ) where
   rationalPointOutsideDeletedDivisors : q ≥ threshold → S → Prop
   /-- Hankel-kernel incidence for the constructed polynomial. -/
   inHankelKernel : S → P → Prop
-  /-- Split-squarefree predicate for the constructed polynomial. -/
+  /-- Split squarefree predicate for the constructed polynomial. -/
   isSplitSquarefree : P → Prop
   /-- The geometric point supplies a polynomial with both required properties. -/
   pointGivesKernelMember :
@@ -173,9 +165,7 @@ theorem exceptional_has_kernel_member {S P : Type*} {q threshold : ℕ}
 
 end GeometricWitnessInput
 
-/-- A geometric kernel-member construction makes every exceptional syndrome non-split-free when
-its kernel incidence and split-squarefree predicates are pointwise equivalent to those in the
-Hankel dictionary.  Definitional equality of the predicates is not required. -/
+/-- Pointwise-compatible geometric witnesses make exceptional syndromes non-split-free. -/
 theorem exceptional_not_splitFree_of_compatible_geometric_kernel_member
     {S P : Type*} {q threshold : ℕ}
     (dictionary : HankelKernelDictionary S P)
@@ -195,8 +185,7 @@ theorem exceptional_not_splitFree_of_compatible_geometric_kernel_member
   exact dictionary.not_splitFree_of_kernel_member
     ((hkernel s p).1 hpKernel) ((hsplit p).1 hpSplit)
 
-/-- A geometric kernel-member construction makes every exceptional syndrome non-split-free once
-its kernel incidence and split-squarefree predicates are identified with the Hankel dictionary. -/
+/-- Identified geometric and dictionary predicates make exceptional syndromes non-split-free. -/
 theorem exceptional_not_splitFree_of_geometric_kernel_member
     {S P : Type*} {q threshold : ℕ}
     (dictionary : HankelKernelDictionary S P)
@@ -213,9 +202,7 @@ theorem exceptional_not_splitFree_of_geometric_kernel_member
     (fun s p => by rw [hkernel])
     (fun p => by rw [hsplit])
 
-/-- Pointwise compatibility of the geometric, Hankel, and coding predicates suffices to prove
-shallowness.  This is the extensional form used when concrete models have propositionally
-equivalent but definitionally different predicates. -/
+/-- Pointwise-compatible geometric, Hankel, and coding predicates prove a syndrome shallow. -/
 theorem exceptional_not_deep_of_compatible_geometric_kernel_member
     {S P : Type*} {q threshold : ℕ}
     (dictionary : HankelKernelDictionary S P)
@@ -238,9 +225,7 @@ theorem exceptional_not_deep_of_compatible_geometric_kernel_member
   apply hnotSplitFree s hs
   exact (hsplitFree s).1 (radius.deep_implies_splitFree hdeep)
 
-/-- A geometric split squarefree Hankel-kernel member proves coding-theoretic shallowness without
-using the covering-radius promotion theorem.  Covering radius is needed for the converse direction,
-from split-freeness to deepness, not for this witness-to-shallow implication. -/
+/-- A geometric split squarefree kernel member proves that an exceptional syndrome is shallow. -/
 theorem exceptional_not_deep_of_geometric_kernel_member
     {S P : Type*} {q threshold : ℕ}
     (dictionary : HankelKernelDictionary S P)
@@ -285,9 +270,8 @@ theorem persistent_card {S : Type*} [DecidableEq S]
 
 end PersistentFamilies
 
-/-- Visible exhaustion and orbit-count inputs for a persistent family classification.  The
-projective and projective-semilinear counts are supplied by the concrete group-action argument;
-this structure does not infer them from a numerical table. -/
+/-- Exhaustion predicates and numerical orbit-count hypotheses for a persistent classification.
+Any group-action justification for the supplied numbers is external to this structure. -/
 structure OrbitExhaustionInput (S OrbitCase : Type*) [DecidableEq S] where
   /-- The persistent finite subset whose orbits are classified. -/
   persistent : Finset S
@@ -314,8 +298,7 @@ theorem splitFree_iff_mem_persistent {S OrbitCase : Type*} [DecidableEq S]
 
 end OrbitExhaustionInput
 
-/-- Common extensional synthesis theorem: pointwise compatibility of the Hankel dictionary,
-covering-radius input, and orbit-exhaustion input yields the coding-theoretic classification. -/
+/-- Pointwise-compatible dictionary, radius, and exhaustion inputs classify deep syndromes. -/
 theorem deep_iff_mem_persistent_of_compatible
     {S P OrbitCase : Type*} [DecidableEq S]
     (dictionary : HankelKernelDictionary S P)
@@ -331,7 +314,7 @@ theorem deep_iff_mem_persistent_of_compatible
     ((hexhaustionPredicate s).symm.trans
       (exhaustion.splitFree_iff_mem_persistent s))
 
-/-- Compatibility wrapper for concrete models whose split-free predicates are literally equal. -/
+/-- Compatibility wrapper for models whose split-free predicates are literally equal. -/
 theorem deep_iff_mem_persistent {S P OrbitCase : Type*} [DecidableEq S]
     (dictionary : HankelKernelDictionary S P)
     (radius : CoveringRadiusInput S)

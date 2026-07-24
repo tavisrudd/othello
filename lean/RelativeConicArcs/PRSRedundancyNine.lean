@@ -3,14 +3,14 @@ import RelativeConicArcs.PRSFoundation
 /-!
 # Redundancy-nine projective Reed--Solomon synthesis interface
 
-This module states the exact logical boundary of the high-field redundancy-nine argument.  The
-residual-quadratic algebra is kernel-checked in `RelativeConicArcs.PRSResidualQuadratic`.
+The high-field redundancy-nine interface builds on the residual-quadratic algebra in
+`RelativeConicArcs.PRSResidualQuadratic`.
 Geometric integrality of a suitable binary-quartic slice, the rational-point estimate after
 deleting determinant/branch/diagonal/collision divisors, and exhaustion by the persistent
-tangent and conjugate-sigma families are explicit hypotheses here.  They are not implemented as
+tangent and conjugate-sigma families remain hypotheses.  They are not implemented as
 axioms or inferred from a finite census.
 
-The terminal theorem combines those hypotheses and checks the orbit-count arithmetic.  Its
+The synthesis theorem combines those hypotheses and checks the orbit-count arithmetic.  Its
 conclusion is deliberately restricted to field orders at least `53`.
 -/
 
@@ -19,7 +19,7 @@ namespace RelativeConicArcs.PRSRedundancyNine
 /-- The geometric and arithmetic inputs required to turn the residual-quadratic construction into
 a split squarefree septic witness outside the persistent locus. -/
 structure ResidualSliceInput (S : Type*) (q : ℕ) where
-  /-- The coding-theoretic deep-syndrome predicate. -/
+  /-- The coding-theoretic deep syndrome predicate. -/
   isDeep : S → Prop
   /-- Syndromes outside the persistent tangent and conjugate-sigma families. -/
   exceptional : S → Prop
@@ -145,7 +145,7 @@ theorem deep_card_doubled {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
   rw [hsquare]
   ring
 
-/-- Exact persistent deep-syndrome cardinality. -/
+/-- Persistent deep syndrome cardinality. -/
 theorem deep_card {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
     (data : PersistentFamilyData S q) :
     data.deep.card = q * (q + 1) ^ 2 / 2 := by
@@ -155,7 +155,7 @@ theorem deep_card {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
 end PersistentFamilyData
 
 /-- Complete high-field synthesis.  The conclusion packages witness existence off the persistent
-locus, the exact deep-syndrome classification, persistent cardinality, and the
+locus, the deep syndrome classification, persistent cardinality, and the
 projective/projective-semilinear orbit counts. -/
 theorem redundancyNineSynthesis {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
     (hq : q ≥ 53)
