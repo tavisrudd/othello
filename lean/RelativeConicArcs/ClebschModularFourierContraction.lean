@@ -176,6 +176,27 @@ theorem complementary_projectors :
     depthProjector + radicalProjector = 1 := by
   constructor <;> decide
 
+/-- The grading involution whose positive and negative eigenspaces are the depth and radical
+planes. -/
+def grading : Matrix (Fin 4) (Fin 4) F11 := depthProjector - radicalProjector
+
+/-- The contraction algebra contains the displayed matrix-unit products. -/
+theorem matrixUnit_products :
+    depthProjector * contraction = contraction ∧
+    contraction * radicalProjector = contraction ∧
+    radicalProjector * dividedFourier = dividedFourier ∧
+    dividedFourier * depthProjector = dividedFourier ∧
+    contraction * dividedFourier = depthProjector ∧
+    dividedFourier * contraction = radicalProjector := by
+  constructor <;> decide
+
+/-- The grading squares to one and anticommutes with both off-diagonal matrix units. -/
+theorem grading_relations :
+    grading * grading = 1 ∧
+    grading * dividedFourier + dividedFourier * grading = 0 ∧
+    grading * contraction + contraction * grading = 0 := by
+  constructor <;> decide
+
 /-- Coordinate form of `im(F) = ker(F)`, with the contraction providing the reverse witness. -/
 theorem mem_range_dividedFourier_iff (y : Vec 4) :
     (∃ x : Vec 4, dividedFourier *ᵥ x = y) ↔ dividedFourier *ᵥ y = 0 := by
@@ -197,6 +218,19 @@ theorem dividedFourier_selfAdjoint :
     dividedFourier.transpose * valencyForm = valencyForm * dividedFourier := by
   decide
 
+/-- The valency Gram matrix on the displayed depth basis. -/
+def depthGram : Matrix (Fin 2) (Fin 2) F11 := ![![7, 4], ![4, 4]]
+
+/-- An inverse for the depth-plane Gram matrix. -/
+def depthGramInverse : Matrix (Fin 2) (Fin 2) F11 := ![![4, 7], ![7, 7]]
+
+/-- The depth plane is nondegenerate for the valency form. -/
+theorem depthBasis_nondegenerate :
+    depthBasis.transpose * valencyForm * depthBasis = depthGram ∧
+    depthGram * depthGramInverse = 1 ∧
+    depthGramInverse * depthGram = 1 := by
+  constructor <;> decide
+
 /-- A two-column basis of the Fourier image. -/
 def radicalBasis : Matrix (Fin 4) (Fin 2) F11 := dividedFourier * depthBasis
 
@@ -213,8 +247,68 @@ theorem radicalBasis_lagrangian_certificate :
       radicalBasis.transpose * valencyForm * radicalBasis = 0 := by
   constructor <;> decide
 
+/-- The ordered basis formed by the depth basis followed by its Fourier image. -/
+def carrierBasis : Matrix (Fin 4) (Fin 4) F11 := ![
+  ![5, 10, 1, 10],
+  ![0, 1, 9, 3],
+  ![1, 0, 0, 10],
+  ![10, 1, 5, 4]
+]
+
+/-- The inverse of the ordered depth-plus-radical basis. -/
+def carrierBasisInverse : Matrix (Fin 4) (Fin 4) F11 := ![
+  ![8, 10, 3, 9],
+  ![9, 10, 10, 0],
+  ![0, 3, 8, 8],
+  ![8, 10, 2, 9]
+]
+
+/-- The ordered depth and radical columns form a basis of the carrier. -/
+theorem carrierBasis_inverse :
+    carrierBasis * carrierBasisInverse = 1 ∧
+    carrierBasisInverse * carrierBasis = 1 := by
+  constructor <;> decide
+
+/-- In the ordered carrier basis, the contraction kills the depth columns and sends the radical
+columns to their corresponding depth columns. -/
+theorem contraction_on_carrierBasis :
+    contraction * carrierBasis = ![
+      ![0, 0, 5, 10],
+      ![0, 0, 0, 1],
+      ![0, 0, 1, 0],
+      ![0, 0, 10, 1]
+    ] := by
+  decide
+
+/-- A linear operator with the displayed depth-killing and radical-inverting action is the
+displayed contraction. -/
+theorem contraction_unique (A : Matrix (Fin 4) (Fin 4) F11)
+    (hA : A * carrierBasis = contraction * carrierBasis) :
+    A = contraction := by
+  calc
+    A = A * 1 := (mul_one A).symm
+    _ = A * (carrierBasis * carrierBasisInverse) := by rw [carrierBasis_inverse.1]
+    _ = (A * carrierBasis) * carrierBasisInverse := by rw [mul_assoc]
+    _ = (contraction * carrierBasis) * carrierBasisInverse := by rw [hA]
+    _ = contraction * (carrierBasis * carrierBasisInverse) := by rw [mul_assoc]
+    _ = contraction := by rw [carrierBasis_inverse.1, mul_one]
+
 /-- The target metric on the depth-plane coordinates. -/
 def targetMetric : Matrix (Fin 2) (Fin 2) F11 := ![![3, 7], ![7, 10]]
+
+/-- The inverse target metric, used when the ordered flag is read dually. -/
+def targetMetricInverse : Matrix (Fin 2) (Fin 2) F11 := ![![7, 5], ![5, 1]]
+
+/-- The displayed inverse is two-sided. -/
+theorem targetMetric_inverse :
+    targetMetric * targetMetricInverse = 1 ∧
+    targetMetricInverse * targetMetric = 1 := by
+  constructor <;> decide
+
+/-- The two displayed depth-coordinate metrics have determinants in the same square class. -/
+theorem depth_target_gram_determinants :
+    depthGram.det = 1 ∧ targetMetric.det = 3 ∧ (5 : F11) ^ 2 = 3 := by
+  constructor <;> decide
 
 /-- The ordered doubled and residual target lines. -/
 def doubledLine : Vec 2 := ![1, 10]
@@ -277,6 +371,11 @@ theorem targetFlag_crossPairing :
     dotProduct doubledLine (targetMetric *ᵥ residualLine) = 2 := by
   decide
 
+/-- Reading the same displayed flag in the dual metric also gives a nonzero cross-pairing. -/
+theorem targetFlag_dualCrossPairing :
+    dotProduct doubledLine (targetMetricInverse *ᵥ residualLine) = 5 := by
+  decide
+
 /-- The complete source polarization image is diagonal in its ordered flag basis. -/
 def sourceMetric (a b : F11) : Matrix (Fin 2) (Fin 2) F11 := ![![a, 0], ![0, b]]
 
@@ -285,6 +384,31 @@ def sourceRankOneLine : Vec 2 := ![1, 0]
 
 /-- The rank-nine member of the ordered source flag, in its intrinsic flag basis. -/
 def sourceRankNineLine : Vec 2 := ![0, 1]
+
+/-- The nontrivial reflection fixing both ordered source flag lines. -/
+def sourceReflection : Matrix (Fin 2) (Fin 2) F11 := ![![1, 0], ![0, -1]]
+
+/-- The source reflection is an involutory isometry for every diagonal source pairing, fixes both
+ordered flag lines, and is not scalar. -/
+theorem sourceReflection_residual_symmetry (a b : F11) :
+    sourceReflection * sourceReflection = 1 ∧
+    sourceReflection.transpose * sourceMetric a b * sourceReflection = sourceMetric a b ∧
+    fixesLine sourceReflection sourceRankOneLine ∧
+    fixesLine sourceReflection sourceRankNineLine ∧
+    sourceReflection 0 0 ≠ sourceReflection 1 1 := by
+  constructor
+  · decide
+  constructor
+  · ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [sourceReflection, sourceMetric, Matrix.mul_apply, Fin.sum_univ_succ]
+  constructor
+  · unfold fixesLine
+    decide
+  constructor
+  · unfold fixesLine
+    decide
+  · decide
 
 /-- Every induced source pairing makes the ordered source flag orthogonal. -/
 theorem sourceFlag_crossPairing_zero (a b : F11) :
