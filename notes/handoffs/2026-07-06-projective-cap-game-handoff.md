@@ -746,7 +746,12 @@ must have growing depth or use a P-guard that permits active triples.  The exact
 `ceil((1+sqrt(1+8q))/2)` and a square-root exchange-depth floor.  The `ej2`
 upgrade shows the first forbidden order already forces overload excess `6binom(s,4)` on at least
 `binom(s-2,2)` lines (for `s=12,q=67`: excess 2970 on at least 45 lines), so a bounded
-active-triple patch is also impossible.  Report and proof:
+active-triple patch is also impossible.  The `ej3`+`tt` greedy-extension upgrade kills every
+bounded-dimensional relaxation: every `t`-cap extends when `q≥binom(t,2)`; at `q=97`, every
+twelve-cap extends to a fifteen-cap, and for fixed size the guaranteed continuation dimension
+grows as `sqrt(2q)`.  The `tt` reformulation supplies the deterministic barrier clock
+`δ_q(s)=max(0,q-binom(s,2))`, dropping by `2s+1` per opponent-response exchange: prove
+P-preserving survival below the barrier, then `Y_NK` absorption after crossing it.  Report and proof:
 [`../2026-07-24-c80-capok-depth-obstruction.md`](../2026-07-24-c80-capok-depth-obstruction.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
@@ -775,9 +780,10 @@ Priority order and why:
 1. **C80 (spine).** Everything gates on it. The fixed-depth frontier is closed-negative:
    no twelve-cap can be `capOK` once `q≥67`; generally `capOK` for an `s`-cap forces
    `q≤binom(s,2)`.  The live frontier is a variable-depth P-preserving descent
-   into `Y_NK`, with state-dependent stopping time, or a new P-guard that handles an extensive
-   active-triple residual.  Do not spend another probe on a bounded-depth witness selector or
-   bounded-gadget patch.
+   into `Y_NK`, split as survival below the deterministic secant barrier
+   `δ_q(s)=max(0,q-binom(s,2))` and absorption after crossing it; the lower-EV alternative is a
+   new P-guard for an extensive growing-dimensional rank-three residual.  Do not spend another probe on a bounded-depth
+   witness selector, bounded-gadget patch, or bounded-dimensional terminal guard.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.
