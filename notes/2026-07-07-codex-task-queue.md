@@ -146,12 +146,12 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
+- **C592 `[relconic]` [ACTIVE]** — test whether the six-point arc/Gale common-concurrency statistic supplies a mixed rank-three matching invariant independent of the C554--C555 defect hierarchy, with an exact bounded falsifier and a go/no-go gate for C556 → `notes/2026-07-24-c592-gale-common-concurrency-falsifier.md`.
 - **C556 `[relconic]` [GATED; after C554--C555 expose a carrier or rank invariant]** — test whether the resulting invariant yields an infinite characteristic-two low-degree-carrier obstruction extending the structural mechanism behind \(q=16\), using finite computations only as certificate-backed reconnaissance → `notes/2026-07-24-c556-even-family-carrier-obstruction.md`.
 
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
-- **C570 `[ame-lu]` [GATED; after C566--C569]** — close the aggregate Lean import, standard-axiom audit, declaration-level manuscript reconciliation, and referee-facing statement-adequacy ledger for the complete adopted formal package → `notes/2026-07-24-c570-ame-lu-lean-aggregate-audit.md`.
 - **C571 `[ame-lu]` [GATED; after C564 and C570]** — run the adversarial proof/evidence audit and second-draft revision, close every claim/proof/novelty and trust-map row, inspect the rendered PDF, and obtain an independent mathematical cold read → `notes/2026-07-24-c571-ame-lu-adversarial-second-draft.md`.
 - **C572 `[ame-lu]` [GATED; after C571]** — produce the release candidate: clean-checkout build and full replay, immutable source/evidence manifest, reviewed paper-only public export plan, target-policy check, and final author/account gates → `notes/2026-07-24-c572-ame-lu-release-candidate.md`.
 
