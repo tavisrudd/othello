@@ -1203,9 +1203,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "4ea6c394efb02b6410a844bb060d5a0562ebf1d771e8d270d6d78986f648252d"
+    "sha256": "e9e41e942f6d34bb9ee5ad68aaca9600aa68cf405927e46f49a113fc342251ba"
   },
-  "manuscript_sha256": "830e1a6e33dc16ca424681473c26f8a2c2aab83cda6df905f6dd6c5d1312271f",
+  "manuscript_sha256": "03cb354b9b306e90950798676a9cfaeb1618381c7def16c549ec036a2b35e5f5",
   "public_documents": [
     {
       "path": "README.md",
@@ -1245,7 +1245,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "e4b6153a400c29839d45df95380d8b9027ba6cb225dc42c0abb1000512802d22"
+    "sha256": "17c7b0dd3e5a5a3602a40d8af9f9bf4729f1fd8bb01e89f08b0e6b314433e0ae"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1455,7 +1455,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "607a8b75ffbbbdc8405e1a96374e690173bb39ab790b86112c0284a5d2106ca3"
+      "sha256": "9b56ea56338df1c48f083fc3b3c573eea42a2e454fe207962c2209e1eec0df37"
     },
     "verification_tools": [
       {
