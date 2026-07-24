@@ -273,15 +273,10 @@ The theorem isolates the numerical escape and one-step lifting
 argument.  Iterating it requires the contained-component assertion at
 every intermediate level, not only at the top.
 
-Here is the recursive meaning of that hypothesis.  At redundancy
-\(j\), the current contraction is chosen outside
-\(\mathcal P_j\cup\mathcal M_j\).  The assertion
-\(\mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)\) then prevents its
-next polar line from being wholly bad, so a new marker can be chosen
-off the finite pullback while all earlier markers remain forbidden.
-Thus the iteration does not assume that inverse images of
-\(\mathcal P_j\cup\mathcal M_j\) lie in
-\(\mathcal P_r\cup\mathcal M_r\).
+Recursively, the current contraction is chosen outside
+\(\mathcal P_j\cup\mathcal M_j\); the next \(\mathrm{CC}\) assertion
+makes its polar line transverse, so a new marker exists off the finite
+pullback.  No inverse-image stability of the declared loci is assumed.
 
 \begin{remark}[Point-count convention]\label{rem:thresholds}
 The correction $\kappa$ records the exact lower bound available for the
@@ -299,8 +294,12 @@ Fix a redundancy \(r\geq6\).  At every intermediate redundancy
 \]
 for the recursively pointed lower bad scheme, where \(\mathcal P_j\)
 is the persistent rank-two locus and \(\mathcal M_j\) is the declared
-nonshallow modular list.  Then, for every prime power
+nonshallow modular list.  Let \(m\) be the maximum degree of the
+stagewise modular pullbacks, taking zero for an empty pullback, and
+assume they are finite.  If
 \[
+ m<3r-6+\left\lfloor2\sqrt{6r-17}\right\rfloor
+ \quad\text{and}\quad
  q\geq Q_r:=
  6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
 \]
@@ -319,19 +318,19 @@ retained markers removes at most six further ordered pairs.  Hence
  =6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
 \]
 At a stage of redundancy \(j\) with \(s=r-j\) old markers, the
-ordinary and cyclic/wild transverse terms cost at most \(3+4\), the
-moving \(g^{\,j-4}_{\,j-2}\) collision divisor has ramification degree
-\(2j-6\), and each old
-marker adds one diagonal value and a degree-at-most-two fixed-factor
-condition.  Thus every marker-selection scheme has degree at most
+ordinary transverse term costs at most \(3\), the modular pullback
+costs at most \(m\), the moving \(g^{\,j-4}_{\,j-2}\) collision
+divisor has degree \(2j-6\), and each old marker costs at most three.
+Thus every marker-selection scheme has degree at most
 \[
- 3+4+(2j-6)+3s=2r+s+1\leq3r-5.
+ d_j\leq3+m+(2j-6)+3s
+     =3r+m-j-3\leq3r+m-9.
 \]
-The final inequality is sharpest at the last, redundancy-six, marker
-selection.
-Since \(Q_r>3r-5\), the parameter-line inequality \(q+1>d_r\) is
-automatic.  The exact-linear-gcd graph has only eight base deletions
-and at most two per marker, so it is weaker as well.
+The final inequality is sharpest at the redundancy-six marker
+selection.  The displayed hypothesis on \(m\) gives \(d_j<Q_r\), so
+the parameter-line inequality \(q+1>d_j\) is automatic.  The
+exact-linear-gcd graph has only eight base deletions and at most two
+per marker, so it is weaker as well.
 
 Apply Theorem~\ref{thm:induction} successively.  If a recursively
 pointed bad scheme contains the whole polar line, the corresponding
@@ -348,8 +347,11 @@ For \(r=5,6,7\), the integer cutoffs supplied by the same formula are
 \]
 the first prime powers meeting them are \(23,29,37\).  Thus the former
 threshold table consisted of three evaluations of one formula with
-\(Q_r=6r+O(\sqrt r)\).  The parameter budget is at most \(3r-5\), so
-the only numerical constraint is the bottom point count; the
+\(Q_r=6r+O(\sqrt r)\).  At redundancies six and seven the modular
+pullback degree is \(m=4\), recovering the verified bounds \(13\) and
+\(16\) (the displayed conditions are \(m<20\) and \(m<25\)).
+In general the parameter line remains nonbinding under the
+modular-degree hypothesis; the other
 arbitrary-redundancy obstruction is the contained-component chain.
 Propositions~\ref{prop:r6-contained} and
 Corollary~\ref{cor:r7-contained} discharge the required chains at

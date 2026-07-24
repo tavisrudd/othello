@@ -73,9 +73,14 @@ marker contributes at most \(6\), so
 At an intermediate redundancy \(j\), with \(s=r-j\) old markers, the
 parameter budget is
 \[
- 3+4+(2j-6)+3s\leq3r-5.
+ d_j\leq3+m+(2j-6)+3s=3r+m-j-3,
 \]
-Hence \(q+1>d\) is automatic whenever \(q\geq Q_r\).  The theorem
+where \(m\) bounds the modular pullback degrees at every stage.  Hence
+\(q+1>d_j\) is automatic whenever \(q\geq Q_r\) and
+\[
+ m<3r-6+\lfloor2\sqrt{6r-17}\rfloor .
+\]
+The theorem
 assumes the whole recursively pointed chain
 \(\mathrm{CC}(j-1,1)\), \(6\leq j\leq r\); it does not promote the
 proved R6/R7 contained classifications to arbitrary degree.
@@ -116,13 +121,23 @@ persistent or modular loci.  At stage \(j\), the current contraction was chosen
 outside \(\mathcal P_j\cup\mathcal M_j\); the corresponding
 \(\mathrm{CC}(j-1,1)\) assertion therefore rules out a wholly bad next polar
 line, after which the finite parameter scheme supplies the next marker.  The
-manuscript now says this before the uniform theorem.  It also records the free
-consequence
+manuscript now says this before the uniform theorem.
+
+The final review found one overreach in the first uniform budget: the degree
+four cyclic/wild pullback is proved at the redundancy-five lower carrier, not
+uniformly at every higher intermediate level.  The theorem now writes \(m_j\)
+for the modular pullback degree at stage \(j\), assumes finiteness, and puts
+\(m=\max_jm_j\).  Its marker bound is
 \[
- Q_r=6r+O(\sqrt r),\qquad d_r\leq3r-5.
+ d_j\leq3r+m-j-3\leq3r+m-9.
 \]
-Thus the bottom point count is the only numerical gate in the uniform argument;
-the contained-component chain is the only arbitrary-level mathematical gate.
+Consequently the bottom threshold \(Q_r\) also makes the parameter line
+nonbinding whenever
+\[
+ m<3r-6+\lfloor2\sqrt{6r-17}\rfloor .
+\]
+For R6 and R7, \(m=4\), so the independently verified degree-\(13\) and
+degree-\(16\) packages and both headline classifications are unchanged.
 
 ## Editorial truth table
 
@@ -147,6 +162,6 @@ the contained-component chain is the only arbitrary-level mathematical gate.
 | Why the transverse thresholds differ by \(7,8,\ldots\) | settled | They are evaluations of \(Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor\); the point-count scale is linear. |
 | Whether the uniform theorem proves the stable-polar conjecture | open | No.  Its exact hypothesis is the chain of recursively pointed contained-component assertions.  Establishing that chain, including every modular locus, is the remaining mathematical gate. |
 | Whether the uniform theorem assumes inverse-image stability of the declared loci | settled | No.  Each current contraction is selected outside the next declared bad locus; the next \(\mathrm{CC}\) assertion excludes a wholly bad polar line and permits another transverse choice.  The manuscript now prints this induction invariant. |
-| Which numerical inequality can bind at arbitrary redundancy | settled | The marker scheme has \(d_r\leq3r-5\), whereas \(Q_r=6r+O(\sqrt r)\).  Only the R5 bottom-cover point count binds; arbitrary-level difficulty is contained-component classification. |
+| Which numerical inequality can bind at arbitrary redundancy | settled with explicit hypothesis | The marker scheme has \(d_j\leq3r+m-j-3\).  The bottom point count remains binding provided \(m<3r-6+\lfloor2\sqrt{6r-17}\rfloor\); controlling the modular pullback degree is an additional arbitrary-level gate. |
 | Why \(\langle1,t^3,t^4\rangle\) is pointed-bad specifically at \(q=19\) | open | The six split members and their common infinity root are exact, but the intrinsic branch-divisor explanation remains the separately recorded C509 exceptional-cover question. |
 | External certificate and release packaging | separately owned | No certificate, replay, manifest, or release identifier was changed in this repair. |

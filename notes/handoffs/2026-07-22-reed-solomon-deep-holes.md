@@ -78,10 +78,14 @@ certificate/replay packaging remains separately owned.  The development monorepo
 eventual release is a reviewed paper-only fresh-history export.  C545's
 next referee pass promotes the already uniform transverse argument:
 conditional on the full chain
-`\(\mathrm{CC}(j-1,1)\)` for `6<=j<=r`, every split-free
-redundancy-`r` syndrome above
+`\(\mathrm{CC}(j-1,1)\)` for `6<=j<=r` and the explicit bound
+`m < 3r-6+floor(2 sqrt(6r-17))` on the maximum modular pullback degree,
+every split-free redundancy-`r` syndrome above
 `6r-15+floor(2 sqrt(6r-17))` lies in the declared persistent/modular
-list, and the marker-parameter bound `3r-5` is automatically weaker.
+list.  The second specialist graded the paper A overall and identified
+this modular-degree hypothesis as the only substantive residual issue;
+the revised theorem now prints it.  The verified R6/R7 budgets and
+headlines are unchanged.
 The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
 marker--ramification lemma.  The recurrence interpretation and exact
 q=19 pointed example are now visible, while the duplicate overview
@@ -799,7 +803,7 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | reader and external gates | the repaired R7 two-step proof is cold-confirmed; release still awaits the second specialist reader and export/identifier/author gates |
+| 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
 
 ## Unallocated level-ups
 
