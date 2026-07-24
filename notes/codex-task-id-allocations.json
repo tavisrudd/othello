@@ -1007,8 +1007,17 @@
       "last": 594,
       "purpose": "major revision: close referee proof gaps, repair transport conventions, and reposition logical phase with literature context",
       "sequence": 112
+    },
+    {
+      "count": 1,
+      "first": 595,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 595,
+      "purpose": "Fano-scheme elimination certificate for stable polar components",
+      "sequence": 113
     }
   ],
-  "next_id": 595,
+  "next_id": 596,
   "schema": "codex-task-id-allocations-v1"
 }
