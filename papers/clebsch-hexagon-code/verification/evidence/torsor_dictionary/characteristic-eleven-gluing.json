@@ -1,0 +1,256 @@
+{
+  "exact_S4_A4_gluing_hinge": {
+    "common_matching_stabilizer": "A4",
+    "common_matching_stabilizer_order": 12,
+    "deduction": "The transporter swaps the base and J-mate matchings, hence by Fr\u00e9gier-cloud equivariance swaps their clouds and preserves their common triangle. arithmetic gluing identifies that triangle stabilizer as S4.",
+    "determinant_kernel": "S4 intersection PSL2(11) = A4",
+    "exact_diagram": "A4 = a5(8) intersection a5(4) = S4 intersection PSL2(11); the nontrivial S4/A4 coset exchanges the two golden matchings and contains Rz mod 11.",
+    "outer_transporter_lies_in_triangle_stabilizer": true,
+    "quotient": "S4/A4 = C2",
+    "triangle_setwise_stabilizer": "S4",
+    "triangle_setwise_stabilizer_order": 24
+  },
+  "exact_gluing_theorem": {
+    "characteristic_11": {
+      "PGL2_orbit_is_union_of_two_PSL2_orbits": true,
+      "PGL2_orbit_size": 22,
+      "PSL2_orbit_sizes": [
+        11,
+        11
+      ],
+      "base_matching": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "common_point_set": "P1(F_11)",
+      "common_point_set_size": 12,
+      "generated_closure": "PSL2(11)",
+      "generated_closure_order": 660,
+      "gluing_statement": "The two Galois-conjugate reductions are the two PSL2(11) halves of one 22-element PGL2(11) orbit; their A5 stabilizers generate PSL2(11), while the rational spinor-norm-2 transporter reduces to the outer element exchanging the halves.",
+      "jmate_matching": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          6,
+          9
+        ]
+      ],
+      "matching_stabilizer_orders": [
+        60,
+        60
+      ],
+      "outer_transporter": {
+        "determinant_mod_11": 2,
+        "legendre_symbol": -1,
+        "maps_base_to_jmate": true,
+        "matrix_mod_11": [
+          1,
+          10,
+          1,
+          1
+        ],
+        "mobius": "(x+10)/(x+1)"
+      },
+      "stabilizer_intersection_order": 12,
+      "stabilizer_intersection_type": "A4",
+      "stabilizers_contained_in_PSL2_11": true
+    },
+    "upstairs": {
+      "boundary": "Rz exists over Q, but there is no characteristic-zero 22-point PGL2 orbit or split P1 model asserted",
+      "field": "Q(sqrt(5))",
+      "galois_conjugate_six_arcs_disjoint": true,
+      "object": "one golden six-arc with its unique A5-invariant polar-pair matching",
+      "rational_transporter_Rz": [
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "reflection_factorization": {
+        "Rz": "r_u r_v",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          1,
+          -1,
+          0
+        ]
+      },
+      "sigma_exchanges_prime_reductions": true,
+      "spinor_norm": 2
+    }
+  },
+  "inputs": {
+    "antipodal_reduction-antipodal-singleton-reduction": {
+      "certificate": {
+        "bytes": 14377,
+        "sha256": "72d312ac4e6a9b4237c36e1921e3d3015d783a356b40d12928f31539a49a3943"
+      },
+      "report": {
+        "bytes": 13052,
+        "sha256": "f72fe7139e18eac04d428d172784b97f47ae5855ae9f6847e52a2f5e370de496"
+      }
+    },
+    "golden_orbit-commuting-with-reduction": {
+      "certificate": {
+        "bytes": 30417,
+        "sha256": "39c0bed812099469f9daf2fbec85b187e3bb3de8b89f2dd53d40ececaf3c7a4a"
+      },
+      "report": {
+        "bytes": 6744,
+        "sha256": "d0a0bfcd9c2c5ee7148bb0327e97fefbd290fc914069132505a6c77f9a08d34c"
+      }
+    },
+    "silver-fusion": {
+      "certificate": {
+        "bytes": 14331,
+        "sha256": "311dd3eba6ad7b2926cb4aa38dc240093f9611ffbcd0640d69becc7112dfa465"
+      },
+      "report": {
+        "bytes": 9160,
+        "sha256": "5691a62626d021b6e597f1b919fcfe16055513c7c266900eed7fed2d74b132e9"
+      }
+    },
+    "quaternion_reduction-quaternion-order-reduction": {
+      "certificate": {
+        "bytes": 19482,
+        "sha256": "61a32057863870ffb2ed95d50d92656cadb404d3c02d9a59ffd151a8a1332545"
+      },
+      "report": {
+        "bytes": 5472,
+        "sha256": "adf276f61c6040ab8f4f7fa9b204cd79c970614b4b60aeedd4eb240819e929ab"
+      }
+    },
+    "quadratic_descent-golden-sheet-frame-freeze": {
+      "certificate": {
+        "bytes": 13379,
+        "sha256": "9e93de4567443726896bf613971d2b7e3c7054874b4bf4810ca74a08384ff620"
+      },
+      "report": {
+        "bytes": 12252,
+        "sha256": "218e607b019a9b372588b00fcd9fd2be1d2a1810ad5e24d86ac9fac0029c0ad3"
+      }
+    },
+    "arithmetic_gluing-golden-fregier-cloud-bridge": {
+      "certificate": {
+        "bytes": 79313,
+        "sha256": "91b14e042c7655290a72e799b4d1c5fe853a1eec47cc0061dd9ba4e69b076031"
+      },
+      "report": {
+        "bytes": 8984,
+        "sha256": "18ebbf1dbb307712da4b68b1433f69cf0dd3c70cfba754634035155e91b57a69"
+      }
+    },
+    "orientation_character-four-companion-weight-line": {
+      "certificate": {
+        "bytes": 112014,
+        "sha256": "4ed0246e63ca8de56800b5cac89963f91d481c51568f1bea39681f5bee3bfbf8"
+      },
+      "report": {
+        "bytes": 4175,
+        "sha256": "cff2446fb229ec0079c517bbbcc7fac0b698a5907b869d37583e6a7d46595529"
+      }
+    }
+  },
+  "paper_1_closing_theorem": {
+    "mandatory_cut": "No integral secant-product tensor, commuting-with-reduction mu_i theorem, or +/-6 characteristic-zero lift is asserted.",
+    "statement": "In the frozen A3, B3, and H3 vertex systems the invariant antipodal datum is controlled at matching level: A3's Frobenius-conjugate spin lifts fuse to one projective marker fibre over F5; B3's two sqrt(2)-reductions occupy opposite PSL2(7) fibres and carry opposite cubic orientations; H3's one golden polar matching reduces at the two primes above 11 to the two singleton fibres, which form one PGL2(11) orbit and whose A5 stabilizers generate PSL2(11). The H3 sheet exchange is the mod-11 shadow of the rational spinor-norm-2 rotation Rz.",
+    "status": "provable now"
+  },
+  "paper_2_boundary": {
+    "failed_route": "golden orbit found four companion sheets, not one; orientation character proved the full descended lower-moment weight map has zero kernel mod 11. The secant-sheet tensor route is closed.",
+    "mechanism_status": "CERTIFIED_POST_quaternion reduction",
+    "mechanism_theorem": "quaternion reduction exhibits the maximal icosian order with unit reduced-trace discriminant and proves that its reductions at (11,phi-8) and (11,phi-4) are M2(F_11), with projective spin images exactly a5(8) and a5(4). Since (-1,-1) over the two real embeddings of Q(sqrt5) is Hamiltonian, this certifies the Schur-index-2 obstruction and its splitting at both primes above 11.",
+    "placement": "The mechanism belongs in paper 2 and is not needed for the paper-1 matching theorem, but it is no longer merely interpretive.",
+    "provable_now": [
+      "two-frame sheet/matching theorem",
+      "characteristic-11 collision on one P1(F_11)",
+      "11+11 PSL halves forming one 22-element PGL orbit",
+      "closure <a5(8),a5(4)> = PSL2(11)",
+      "rational Rz and its outer mod-11 transporter",
+      "arithmetic gluing perpendicularity/common-triangle shadow"
+    ]
+  },
+  "perpendicularity_germ": {
+    "char0_perpendicular_axis_pairs": 6,
+    "common_cloud_triangle": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "does_not_prove": "the group gluing or quaternion mechanism by itself",
+    "exact_strength": "the six perpendicular golden/conjugate axis pairs reduce two-by-two to exactly the common Fr\u00e9gier-cloud triangle",
+    "pairing_sigma_stable": true,
+    "reduced_intersections": 3
+  },
+  "schema": "characteristic_eleven_gluing-characteristic-11-gluing-v1",
+  "artifact": "characteristic-eleven gluing",
+  "trusted_boundary": "Exact enumeration of PGL2(11), PSL2(11), matching stabilizers/orbits/closure, and an exact reflection factorization of Rz; hash-pinned antipodal reduction/quadratic descent/golden orbit/orientation character/arithmetic gluing/silver fusion/quaternion reduction reports and certificates supply the frozen char-0, perpendicularity, failed-tensor, M4, and maximal-order splitting facts.",
+  "verdict": "GREEN \u2014 exact matching/orbit gluing theorem proved; quaternion reduction certifies the quaternion-splitting mechanism for paper 2"
+}

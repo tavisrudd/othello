@@ -1,0 +1,658 @@
+{
+  "A3": {
+    "matching_module_fusion_criterion": {
+      "one_fused_marker_fibre": true,
+      "parent_is_subgroup_of_psl": false,
+      "pgl_marker_orbit_size": 5,
+      "psl_marker_orbit_sizes": [
+        5
+      ],
+      "sheet_sign_exists": false,
+      "statement": "The A3 parent S4 is not contained in PSL_2(5), so its PGL_2(5)/S4 marker orbit does not split on restriction to PSL_2(5)"
+    },
+    "char0_antipodal_rule": "0<->inf, 1<->-1, i<->-i",
+    "labeling_table": [
+      {
+        "char0": "0",
+        "point_i_2": 0,
+        "point_i_3": 0,
+        "vertex": "v0"
+      },
+      {
+        "char0": "inf",
+        "point_i_2": "inf",
+        "point_i_3": "inf",
+        "vertex": "vinf"
+      },
+      {
+        "char0": "1",
+        "point_i_2": 1,
+        "point_i_3": 1,
+        "vertex": "+1"
+      },
+      {
+        "char0": "-1",
+        "point_i_2": 4,
+        "point_i_3": 4,
+        "vertex": "-1"
+      },
+      {
+        "char0": "i",
+        "point_i_2": 2,
+        "point_i_3": 3,
+        "vertex": "+i"
+      },
+      {
+        "char0": "-i",
+        "point_i_2": 3,
+        "point_i_3": 2,
+        "vertex": "-i"
+      }
+    ],
+    "matching_at_i_2": [
+      [
+        0,
+        "inf"
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "matching_at_i_3": [
+      [
+        0,
+        "inf"
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "matching_is_prime_independent": true,
+    "spin_model": {
+      "binary_octahedral_order": 48,
+      "field": "F_25 = F_5[u]/(u^2-2)",
+      "frobenius": "a+b*u -> a-b*u; u^5=-u",
+      "frobenius_swaps_orientations": true,
+      "orientation_minus_R": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      ],
+      "orientation_plus_R": [
+        [
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      ],
+      "parent_intersection_psl_is_A4": true,
+      "parent_intersection_psl_order": 12,
+      "parent_is_subgroup_of_psl": false,
+      "parent_nonsquare_determinants": [
+        2,
+        3
+      ],
+      "pgl_and_psl_marker_orbits_equal": true,
+      "pgl_marker_orbit_size": 5,
+      "projective_group_defined_over_F5": true,
+      "projective_group_is_full_matching_stabilizer": true,
+      "projective_group_order": 24,
+      "psl_marker_orbit_size": 5,
+      "sheet_sign_exists": false,
+      "spin_to_projective_kernel": [
+        "+I",
+        "-I"
+      ],
+      "spin_to_projective_kernel_order": 2,
+      "unique_invariant_matching": [
+        [
+          0,
+          "inf"
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    }
+  },
+  "B3": {
+    "matching_module_moment_comparison": {
+      "coordinate_pivots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "cubic_nonzero": true,
+      "lower_signed_moments_vanish": true,
+      "moments": [
+        {
+          "degree": 1,
+          "dimension": 6,
+          "nonzero": false,
+          "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44",
+          "support": 0,
+          "vector": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "degree": 2,
+          "dimension": 21,
+          "nonzero": false,
+          "sha256": "c90232586b801f9558a76f2f963eccd831d9fe6775e4c8f1446b2331aa2132f2",
+          "support": 0,
+          "vector": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "degree": 3,
+          "dimension": 56,
+          "nonzero": true,
+          "sha256": "28e104605093c1145468df8f3c65d86cfc51b55e2c48d54592b5e2f3b75590bf",
+          "support": 9,
+          "vector": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            4,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "orientation_scalar_law": "mu_3(sqrt2) = 2*sqrt2*mu_3(sqrt2=4) in F_7",
+      "orientation_scalars": {
+        "sqrt2_3": 6,
+        "sqrt2_4": 1
+      },
+      "sqrt2_4_is_positive_and_sqrt2_3_is_negative": true
+    },
+    "matching_module_split_criterion": {
+      "parent_is_subgroup_of_psl": true,
+      "pgl_marker_orbit_size": 14,
+      "psl_marker_orbit_sizes": [
+        7,
+        7
+      ],
+      "statement": "A transitive PGL_2(q)/H marker orbit splits into two PSL_2(q) orbits iff H is contained in PSL_2(q)",
+      "two_antipodal_reductions_are_in_opposite_psl_fibres": true
+    },
+    "char0_antipodal_rule": "0<->inf and (sqrt2/2)*omega^k <-> -sqrt2*omega^k for k=0,1,2",
+    "labeling_table": [
+      {
+        "char0": "0",
+        "point_sqrt2_3": 0,
+        "point_sqrt2_4": 0,
+        "vertex": "v0"
+      },
+      {
+        "char0": "inf",
+        "point_sqrt2_3": "inf",
+        "point_sqrt2_4": "inf",
+        "vertex": "vinf"
+      },
+      {
+        "char0": "sqrt2/2*omega^0",
+        "point_sqrt2_3": 5,
+        "point_sqrt2_4": 2,
+        "vertex": "upper_0"
+      },
+      {
+        "char0": "sqrt2/2*omega^1",
+        "point_sqrt2_3": 3,
+        "point_sqrt2_4": 4,
+        "vertex": "upper_1"
+      },
+      {
+        "char0": "sqrt2/2*omega^2",
+        "point_sqrt2_3": 6,
+        "point_sqrt2_4": 1,
+        "vertex": "upper_2"
+      },
+      {
+        "char0": "-sqrt2*omega^0",
+        "point_sqrt2_3": 4,
+        "point_sqrt2_4": 3,
+        "vertex": "lower_0"
+      },
+      {
+        "char0": "-sqrt2*omega^1",
+        "point_sqrt2_3": 1,
+        "point_sqrt2_4": 6,
+        "vertex": "lower_1"
+      },
+      {
+        "char0": "-sqrt2*omega^2",
+        "point_sqrt2_3": 2,
+        "point_sqrt2_4": 5,
+        "vertex": "lower_2"
+      }
+    ],
+    "reductions": {
+      "sqrt2_3": {
+        "matching_module_sheet_index": 1,
+        "cubic_orientation": "negative",
+        "ideal": "(3-sqrt2)",
+        "matching": [
+          [
+            0,
+            "inf"
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "projective_parent_order": 24,
+        "signed_cubic_vector": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0,
+          6,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          3,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          6,
+          2,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "spin_group_order": 48
+      },
+      "sqrt2_4": {
+        "matching_module_sheet_index": 0,
+        "cubic_orientation": "positive",
+        "ideal": "(3+sqrt2)",
+        "matching": [
+          [
+            0,
+            "inf"
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            6
+          ]
+        ],
+        "projective_parent_order": 24,
+        "signed_cubic_vector": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0,
+          4,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          1,
+          5,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "spin_group_order": 48
+      }
+    },
+    "spin_model": {
+      "description": "I^2=J^2=-1, IJ=-JI; Q=(1+I+J+IJ)/2, R=(1+I)/sqrt2; conjugate by C=[[1,sqrt2],[0,1]] into the frozen vertex labels",
+      "each_binary_octahedral_order": 48,
+      "each_projective_parent_is_full_matching_stabilizer": true,
+      "each_projective_parent_order": 24,
+      "each_spin_to_projective_kernel": [
+        "+I",
+        "-I"
+      ],
+      "each_spin_to_projective_kernel_order": 2,
+      "silver_conjugation_determinant_class": "nonsquare",
+      "silver_conjugation_is_outer": true,
+      "silver_conjugation_maps_matchings_and_conjugates_parents": true,
+      "silver_conjugation_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "silver_conjugation_on_frozen_labels": "J_silver(x)=-x",
+      "silver_conjugation_swaps_reductions": true,
+      "two_parent_intersection_element_orders": [
+        1,
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "two_parent_intersection_is_S3": true,
+      "two_parent_intersection_order": 6
+    }
+  },
+  "boundary": {
+    "certifies": "the full M4 split/fusion reduction theory in the frozen labeling and matching module moment convention",
+    "does_not_certify": "quaternion maximal-order reduction (quaternion reduction/T10), M5 gluing, or an integral tensor lift"
+  },
+  "inputs": {
+    "matching-module.json": {
+      "bytes": 21996,
+      "sha256": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2"
+    },
+    "matching-module.md": {
+      "bytes": 23783,
+      "sha256": "3080451b39dcc7a4b309856580bdf5e086ecc6187c5ee4fdc253432ae67c49d6"
+    },
+    "matching-module.py": {
+      "bytes": 48589,
+      "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
+    },
+    "matching-module.sha256": {
+      "bytes": 330,
+      "sha256": "0d4a69a51fa3e86df70f8f50fb2bfa9ececabdea908b973e913b08746440c878"
+    },
+    "matching-orbits.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "conventions-freeze.md": {
+      "bytes": 8384,
+      "sha256": "43eca694b5f48dc88204493ea24dbadfa8905824b07c739af3fe82ee6abf12ec"
+    },
+    "conventions-freeze.py": {
+      "bytes": 29193,
+      "sha256": "8dd5a690129f8437a447d40df4e6cdac8f47fcf481987b95bfe817c074af6bb7"
+    },
+    "conventions-freeze.sha256": {
+      "bytes": 239,
+      "sha256": "mod_three_weil_golay649bedcf3fc4efdcc623fabcace6fcac13d5235d4fcdd0b50c08a990a9b5"
+    },
+    "vertex-reduction-bijection.json": {
+      "bytes": 14664,
+      "sha256": "783a731b0dfebdd055b72f9b90dff4b54de4560d990481b97caa8c4a56551c87"
+    },
+    "vertex-reduction-bijection.md": {
+      "bytes": 7430,
+      "sha256": "ea974ede298fc58dbae7e0a9433ed73beb3f9ce92a846db78d3ca203f1e5aa4e"
+    },
+    "vertex-reduction-bijection.py": {
+      "bytes": 32375,
+      "sha256": "908e3afe8ba755b112349e8fc57fc20768555bb3d0df25fa36612696270adb0f"
+    },
+    "vertex-reduction-bijection.sha256": {
+      "bytes": 256,
+      "sha256": "e90793a5a1a5edbf0bbb0f970b118f41317c30726ad3a764fa3467106bd62735"
+    },
+    "antipodal_reduction-antipodal-singleton-reduction.md": {
+      "bytes": 13052,
+      "sha256": "f72fe7139e18eac04d428d172784b97f47ae5855ae9f6847e52a2f5e370de496"
+    },
+    "antipodal_reduction-m2-fable-review.md": {
+      "bytes": 18719,
+      "sha256": "0b9dd220d8d1bc8ace6f4c63e5c42b8874491617bbe6db77302a6a8b58c1c7a3"
+    }
+  },
+  "prime_ideals_and_residue_maps": {
+    "A3": {
+      "frobenius": "u -> -u",
+      "ideal": "(5)",
+      "inert": true,
+      "map": "a+b*sqrt2 -> a+b*u",
+      "norm": 25,
+      "residue_field": "F_25=F_5[u]/(u^2-2)"
+    },
+    "B3": [
+      {
+        "ideal": "(3-sqrt2)",
+        "map": "a+b*sqrt2 -> a+3b mod 7",
+        "norm": 7,
+        "residue_field": "F_7",
+        "sqrt2": 3
+      },
+      {
+        "ideal": "(3+sqrt2)",
+        "map": "a+b*sqrt2 -> a+4b mod 7",
+        "norm": 7,
+        "residue_field": "F_7",
+        "sqrt2": 4
+      }
+    ]
+  },
+  "schema": "silver_fusion-silver-fusion-v1",
+  "artifact": "silver fusion / M4 -- B3 silver split and A3 inert fusion",
+  "trusted_boundary": "exact enumeration in F_5, F_7 and F_25; frozen M0/M1 labels and frozen matching module scout/moment certificates; standard quaternion-to-binary-octahedral formulas are verified by closure rather than assumed",
+  "verdict": "GREEN -- B3 split-prime sheet criterion and cubic orientation reproduced; A3 inert Frobenius fusion certified"
+}

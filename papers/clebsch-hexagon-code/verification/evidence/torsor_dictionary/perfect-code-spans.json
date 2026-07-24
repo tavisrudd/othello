@@ -1,0 +1,2260 @@
+{
+  "cases": [
+    {
+      "design_complement_pair": {
+        "all_one_quotient_coset_distributions": [
+          {
+            "all_one_scalar": 0,
+            "weight_distribution_all_weights": {
+              "0": 1,
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 7,
+              "5": 0,
+              "6": 0,
+              "7": 0
+            }
+          },
+          {
+            "all_one_scalar": 1,
+            "weight_distribution_all_weights": {
+              "0": 0,
+              "1": 0,
+              "2": 0,
+              "3": 7,
+              "4": 0,
+              "5": 0,
+              "6": 0,
+              "7": 1
+            }
+          }
+        ],
+        "all_one_word_generates_quotient": true,
+        "dimensions_sum_to_length": true,
+        "direct_sum_with_all_one_line": true,
+        "dual_is_subcode_of_disjoint_span": true,
+        "macwilliams_disjoint_to_shared_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          7,
+          0,
+          0,
+          0
+        ],
+        "macwilliams_shared_to_disjoint_coefficients": [
+          1,
+          0,
+          0,
+          7,
+          7,
+          0,
+          0,
+          1
+        ],
+        "macwilliams_transforms_agree": true,
+        "quotient_cosets_exhaust_disjoint_span": true,
+        "quotient_dimension": 1,
+        "shared_edge_span_equals_disjoint_dual": true,
+        "spans_are_mutually_orthogonal": true
+      },
+      "field_order": 2,
+      "frozen_cross_disjointness_difference_set": [
+        3,
+        4,
+        6
+      ],
+      "hamming_7_4_3_generator_equivalence": {
+        "coordinate_permutation_new_to_old_zero_based": [
+          0,
+          1,
+          3,
+          2,
+          6,
+          4,
+          5
+        ],
+        "equation": "row_operation_matrix * permuted_source_generator = standard_generator_matrix over F_2",
+        "permuted_source_generator": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        ],
+        "row_operation_matrix": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "source_generator_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1
+          ]
+        ],
+        "standard_generator_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "standard_parity_check_columns_are_binary_1_through_7": [
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ],
+        "verified_product": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "projective_weight_support_spectrum": null,
+      "q": 7,
+      "rank_cross_check_against_c450": {
+        "disjoint": {
+          "agreement": true,
+          "c450_certified_modular_nullity": 3,
+          "c450_certified_modular_rank": 4,
+          "computed_nullity": 3,
+          "computed_rank": 4
+        },
+        "shared_edge": {
+          "agreement": true,
+          "c450_certified_modular_nullity": 4,
+          "c450_certified_modular_rank": 3,
+          "computed_nullity": 4,
+          "computed_rank": 3
+        }
+      },
+      "relations": {
+        "disjoint": {
+          "code_size": 16,
+          "enumeration": "all 2^4 coefficient tuples in lexicographic order",
+          "field_order": 2,
+          "generator_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "incidence_matrix": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0
+            ]
+          ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_minimum_word_supports": 7,
+            "distinct_nonzero_scalar_multiples": 7,
+            "exhausts_all_minimum_words": true,
+            "fraction_of_minimum_words": [
+              1,
+              1
+            ],
+            "incidence_row_supports": 7,
+            "remaining_minimum_word_supports": 0,
+            "total_minimum_words": 7
+          },
+          "length": 7,
+          "minimum_distance": 3,
+          "parity_check_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          ],
+          "rank": 4,
+          "sphere_packing": {
+            "ambient_size": 128,
+            "code_size": 16,
+            "code_size_times_sphere_volume": 128,
+            "equality": true,
+            "radius": 1,
+            "sphere_terms": [
+              1,
+              7
+            ],
+            "sphere_volume": 8
+          },
+          "weight_distribution_all_weights": {
+            "0": 1,
+            "1": 0,
+            "2": 0,
+            "3": 7,
+            "4": 7,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          }
+        },
+        "shared_edge": {
+          "code_size": 8,
+          "enumeration": "all 2^3 coefficient tuples in lexicographic order",
+          "field_order": 2,
+          "generator_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          ],
+          "incidence_matrix": [
+            [
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_minimum_word_supports": 7,
+            "distinct_nonzero_scalar_multiples": 7,
+            "exhausts_all_minimum_words": true,
+            "fraction_of_minimum_words": [
+              1,
+              1
+            ],
+            "incidence_row_supports": 7,
+            "remaining_minimum_word_supports": 0,
+            "total_minimum_words": 7
+          },
+          "length": 7,
+          "minimum_distance": 4,
+          "parity_check_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "rank": 3,
+          "sphere_packing": {
+            "ambient_size": 128,
+            "code_size": 8,
+            "code_size_times_sphere_volume": 64,
+            "equality": false,
+            "radius": 1,
+            "sphere_terms": [
+              1,
+              7
+            ],
+            "sphere_volume": 8
+          },
+          "weight_distribution_all_weights": {
+            "0": 1,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 7,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          }
+        }
+      },
+      "third_order_minimum_support_structure": null,
+      "type": "B3"
+    },
+    {
+      "design_complement_pair": {
+        "all_one_quotient_coset_distributions": [
+          {
+            "all_one_scalar": 0,
+            "weight_distribution_all_weights": {
+              "0": 1,
+              "1": 0,
+              "10": 0,
+              "11": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0,
+              "6": 132,
+              "7": 0,
+              "8": 0,
+              "9": 110
+            }
+          },
+          {
+            "all_one_scalar": 1,
+            "weight_distribution_all_weights": {
+              "0": 0,
+              "1": 0,
+              "10": 0,
+              "11": 12,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 66,
+              "6": 0,
+              "7": 0,
+              "8": 165,
+              "9": 0
+            }
+          },
+          {
+            "all_one_scalar": 2,
+            "weight_distribution_all_weights": {
+              "0": 0,
+              "1": 0,
+              "10": 0,
+              "11": 12,
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 66,
+              "6": 0,
+              "7": 0,
+              "8": 165,
+              "9": 0
+            }
+          }
+        ],
+        "all_one_word_generates_quotient": true,
+        "dimensions_sum_to_length": true,
+        "direct_sum_with_all_one_line": true,
+        "dual_is_subcode_of_disjoint_span": true,
+        "macwilliams_disjoint_to_shared_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          132,
+          0,
+          0,
+          110,
+          0,
+          0
+        ],
+        "macwilliams_shared_to_disjoint_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          132,
+          132,
+          0,
+          330,
+          110,
+          0,
+          24
+        ],
+        "macwilliams_transforms_agree": true,
+        "quotient_cosets_exhaust_disjoint_span": true,
+        "quotient_dimension": 1,
+        "shared_edge_span_equals_disjoint_dual": true,
+        "spans_are_mutually_orthogonal": true
+      },
+      "field_order": 3,
+      "frozen_cross_disjointness_difference_set": [
+        3,
+        4,
+        5,
+        7,
+        10
+      ],
+      "hamming_7_4_3_generator_equivalence": null,
+      "projective_weight_support_spectrum": {
+        "11": {
+          "projective_scalar_orbits": 12,
+          "support_count": 1,
+          "word_count": 24,
+          "words_per_support_histogram": {
+            "24": 1
+          }
+        },
+        "5": {
+          "projective_scalar_orbits": 66,
+          "support_count": 66,
+          "word_count": 132,
+          "words_per_support_histogram": {
+            "2": 66
+          }
+        },
+        "6": {
+          "projective_scalar_orbits": 66,
+          "support_count": 66,
+          "word_count": 132,
+          "words_per_support_histogram": {
+            "2": 66
+          }
+        },
+        "8": {
+          "projective_scalar_orbits": 165,
+          "support_count": 165,
+          "word_count": 330,
+          "words_per_support_histogram": {
+            "2": 165
+          }
+        },
+        "9": {
+          "projective_scalar_orbits": 55,
+          "support_count": 55,
+          "word_count": 110,
+          "words_per_support_histogram": {
+            "2": 55
+          }
+        },
+        "forced_support_families": {
+          "weight_11_has_full_support": true,
+          "weight_6_are_complements_of_weight_5": true,
+          "weight_8_are_all_8_subsets": true,
+          "weight_9_are_all_9_subsets": true
+        }
+      },
+      "q": 11,
+      "rank_cross_check_against_c450": {
+        "disjoint": {
+          "agreement": true,
+          "c450_certified_modular_nullity": 5,
+          "c450_certified_modular_rank": 6,
+          "computed_nullity": 5,
+          "computed_rank": 6
+        },
+        "shared_edge": {
+          "agreement": true,
+          "c450_certified_modular_nullity": 6,
+          "c450_certified_modular_rank": 5,
+          "computed_nullity": 6,
+          "computed_rank": 5
+        }
+      },
+      "relations": {
+        "disjoint": {
+          "code_size": 729,
+          "enumeration": "all 3^6 coefficient tuples in lexicographic order",
+          "field_order": 3,
+          "generator_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              2,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              1,
+              2,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              1,
+              2,
+              2
+            ]
+          ],
+          "incidence_matrix": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_minimum_word_supports": 66,
+            "distinct_nonzero_scalar_multiples": 22,
+            "exhausts_all_minimum_words": false,
+            "fraction_of_minimum_words": [
+              1,
+              6
+            ],
+            "incidence_row_supports": 11,
+            "remaining_minimum_word_supports": 55,
+            "total_minimum_words": 132
+          },
+          "length": 11,
+          "minimum_distance": 5,
+          "parity_check_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              1,
+              2,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1
+            ]
+          ],
+          "rank": 6,
+          "sphere_packing": {
+            "ambient_size": 177147,
+            "code_size": 729,
+            "code_size_times_sphere_volume": 177147,
+            "equality": true,
+            "radius": 2,
+            "sphere_terms": [
+              1,
+              22,
+              220
+            ],
+            "sphere_volume": 243
+          },
+          "weight_distribution_all_weights": {
+            "0": 1,
+            "1": 0,
+            "10": 0,
+            "11": 24,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 132,
+            "6": 132,
+            "7": 0,
+            "8": 330,
+            "9": 110
+          }
+        },
+        "shared_edge": {
+          "code_size": 243,
+          "enumeration": "all 3^5 coefficient tuples in lexicographic order",
+          "field_order": 3,
+          "generator_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              1,
+              2,
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1
+            ]
+          ],
+          "incidence_matrix": [
+            [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_minimum_word_supports": 66,
+            "distinct_nonzero_scalar_multiples": 22,
+            "exhausts_all_minimum_words": false,
+            "fraction_of_minimum_words": [
+              1,
+              6
+            ],
+            "incidence_row_supports": 11,
+            "remaining_minimum_word_supports": 55,
+            "total_minimum_words": 132
+          },
+          "length": 11,
+          "minimum_distance": 6,
+          "parity_check_matrix_rref": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              2,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              1,
+              2,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              1,
+              2,
+              2
+            ]
+          ],
+          "rank": 5,
+          "sphere_packing": {
+            "ambient_size": 177147,
+            "code_size": 243,
+            "code_size_times_sphere_volume": 59049,
+            "equality": false,
+            "radius": 2,
+            "sphere_terms": [
+              1,
+              22,
+              220
+            ],
+            "sphere_volume": 243
+          },
+          "weight_distribution_all_weights": {
+            "0": 1,
+            "1": 0,
+            "10": 0,
+            "11": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 132,
+            "7": 0,
+            "8": 0,
+            "9": 110
+          }
+        }
+      },
+      "third_order_minimum_support_structure": {
+        "all_four_subsets_covered_once": 330,
+        "all_minimum_support_count": 66,
+        "all_minimum_supports_form_steiner_4_11_5_1": true,
+        "k11_edge_bijection_formula": "support(1 - row_i - row_j) = complement(support(row_i) symmetric_difference support(row_j)) over F_3",
+        "k11_edge_to_residual_support": [
+          {
+            "residual_support": [
+              1,
+              2,
+              4,
+              5,
+              9
+            ],
+            "row_pair": [
+              0,
+              1
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              5,
+              7,
+              8
+            ],
+            "row_pair": [
+              0,
+              2
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              7,
+              9,
+              10
+            ],
+            "row_pair": [
+              0,
+              3
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              3,
+              6,
+              7
+            ],
+            "row_pair": [
+              0,
+              4
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              4,
+              6,
+              10
+            ],
+            "row_pair": [
+              0,
+              5
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              5,
+              6,
+              8,
+              10
+            ],
+            "row_pair": [
+              0,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              3,
+              8,
+              9,
+              10
+            ],
+            "row_pair": [
+              0,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              4,
+              6,
+              7,
+              8,
+              9
+            ],
+            "row_pair": [
+              0,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              3,
+              5,
+              6,
+              9
+            ],
+            "row_pair": [
+              0,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              3,
+              4,
+              8
+            ],
+            "row_pair": [
+              0,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              3,
+              5,
+              6,
+              10
+            ],
+            "row_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              3,
+              6,
+              8,
+              9
+            ],
+            "row_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              2,
+              8,
+              10
+            ],
+            "row_pair": [
+              1,
+              4
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              3,
+              4,
+              7,
+              8
+            ],
+            "row_pair": [
+              1,
+              5
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              3,
+              5,
+              7
+            ],
+            "row_pair": [
+              1,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              6,
+              7,
+              9
+            ],
+            "row_pair": [
+              1,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              3,
+              4,
+              9,
+              10
+            ],
+            "row_pair": [
+              1,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              5,
+              7,
+              8,
+              9,
+              10
+            ],
+            "row_pair": [
+              1,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              4,
+              6,
+              7,
+              10
+            ],
+            "row_pair": [
+              1,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "row_pair": [
+              2,
+              3
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              4,
+              7,
+              9,
+              10
+            ],
+            "row_pair": [
+              2,
+              4
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              2,
+              3,
+              9
+            ],
+            "row_pair": [
+              2,
+              5
+            ]
+          },
+          {
+            "residual_support": [
+              3,
+              4,
+              5,
+              8,
+              9
+            ],
+            "row_pair": [
+              2,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              4,
+              6,
+              8
+            ],
+            "row_pair": [
+              2,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              3,
+              7,
+              8,
+              10
+            ],
+            "row_pair": [
+              2,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              4,
+              5,
+              10
+            ],
+            "row_pair": [
+              2,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              6,
+              8,
+              9,
+              10
+            ],
+            "row_pair": [
+              2,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              4,
+              5,
+              7,
+              8
+            ],
+            "row_pair": [
+              3,
+              4
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              3,
+              5,
+              8,
+              10
+            ],
+            "row_pair": [
+              3,
+              5
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              3,
+              4,
+              10
+            ],
+            "row_pair": [
+              3,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              4,
+              5,
+              6,
+              9,
+              10
+            ],
+            "row_pair": [
+              3,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              3,
+              5,
+              7,
+              9
+            ],
+            "row_pair": [
+              3,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              4,
+              8,
+              9
+            ],
+            "row_pair": [
+              3,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              2,
+              5,
+              6
+            ],
+            "row_pair": [
+              3,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              5,
+              6,
+              8,
+              9
+            ],
+            "row_pair": [
+              4,
+              5
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              4,
+              6,
+              9
+            ],
+            "row_pair": [
+              4,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              3,
+              4,
+              5
+            ],
+            "row_pair": [
+              4,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              5,
+              6,
+              7,
+              10
+            ],
+            "row_pair": [
+              4,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              3,
+              4,
+              6,
+              8,
+              10
+            ],
+            "row_pair": [
+              4,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              3,
+              5,
+              9,
+              10
+            ],
+            "row_pair": [
+              4,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              3,
+              6,
+              7,
+              9,
+              10
+            ],
+            "row_pair": [
+              5,
+              6
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              5,
+              7,
+              10
+            ],
+            "row_pair": [
+              5,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              3,
+              4,
+              5,
+              6
+            ],
+            "row_pair": [
+              5,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              6,
+              7,
+              8
+            ],
+            "row_pair": [
+              5,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              4,
+              5,
+              7,
+              9
+            ],
+            "row_pair": [
+              5,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              4,
+              7,
+              8,
+              10
+            ],
+            "row_pair": [
+              6,
+              7
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              3,
+              6,
+              8
+            ],
+            "row_pair": [
+              6,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              4,
+              5,
+              6,
+              7
+            ],
+            "row_pair": [
+              6,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              7,
+              8,
+              9
+            ],
+            "row_pair": [
+              6,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              1,
+              5,
+              8,
+              9
+            ],
+            "row_pair": [
+              7,
+              8
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              3,
+              4,
+              7,
+              9
+            ],
+            "row_pair": [
+              7,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              3,
+              5,
+              6,
+              7,
+              8
+            ],
+            "row_pair": [
+              7,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              1,
+              2,
+              6,
+              9,
+              10
+            ],
+            "row_pair": [
+              8,
+              9
+            ]
+          },
+          {
+            "residual_support": [
+              2,
+              4,
+              5,
+              8,
+              10
+            ],
+            "row_pair": [
+              8,
+              10
+            ]
+          },
+          {
+            "residual_support": [
+              0,
+              2,
+              3,
+              7,
+              10
+            ],
+            "row_pair": [
+              9,
+              10
+            ]
+          }
+        ],
+        "residual_intersections_with_selected_rows": {
+          "1": 3,
+          "2": 2,
+          "3": 6
+        },
+        "residual_support_count": 55,
+        "residual_supports_form_2_11_5_10": true,
+        "selected_rows_form_2_11_5_2": true
+      },
+      "type": "H3"
+    }
+  ],
+  "inputs": {
+    "matching-orbits.json": "eb0b809fc9c843a2dc29a93f2fa0597fed34d65be58c39f6fb7a8a4f8cc3e275",
+    "weil-cross-sheet.json": "8fdc066794f0a2cfbce652184e58cdfc0d836b9f394b8cf08d496ab699c9a00c",
+    "qr-barker.json": "f2c80377740261552ea645ea8269f1230997195e55e99d060bf74fb9bd80506a"
+  },
+  "method": "exact prime-field row reduction and exhaustive enumeration of every codeword",
+  "schema": "perfect_code_spans-perfect-code-spans-v1",
+  "scope": {
+    "classification_claims": false,
+    "equivariance_certified": false,
+    "named_identifications": [
+      "binary [7,4,3] Hamming",
+      "ternary [11,6,5] Golay"
+    ]
+  },
+  "artifact": "perfect-code spans"
+}

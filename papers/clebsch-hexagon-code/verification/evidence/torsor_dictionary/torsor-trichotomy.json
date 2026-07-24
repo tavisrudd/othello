@@ -1,0 +1,148 @@
+{
+  "L1": {
+    "Rz": {
+      "det": 2,
+      "matrix_mod_11": [
+        1,
+        10,
+        1,
+        1
+      ],
+      "nonsquare": true,
+      "swaps_sheets": true
+    },
+    "arithmetic_orientation_dictionary": {
+      "alpha_residues": [
+        0,
+        2
+      ],
+      "outer_coset_realises_alpha_to_minus1_minus_alpha": true,
+      "two_split_primes_Q_sqrt_minus_11": [
+        "(3,alpha)",
+        "(3,alpha+1)"
+      ]
+    },
+    "explicit_torsor_iso": {
+      "aligning_pgl_element": [
+        1,
+        10,
+        6,
+        1
+      ],
+      "child_is_conic": true,
+      "parts_map_to_sheets": true,
+      "transported_matchings_equal_characteristic_eleven_gluing_orbit": true
+    },
+    "fibre_size": 22,
+    "pgl_order": 1320,
+    "psl_order": 660,
+    "sheet_sizes": [
+      11,
+      11
+    ],
+    "statement": "the fixed_child q=11 22-parent fixed_child has a two-element quotient (its two sheets of 11); it is torsor-isomorphic to T_11 (two PSL_2(11) orbits of one 22-element PGL_2(11) orbit) and the reduction of Rz (outer coset, det 2 nonsquare mod 11) exchanges its two points, compatibly with the arithmetic_orientation dictionary.",
+    "verdict": "TORSOR-ISOMORPHIC"
+  },
+  "L2": {
+    "conclusion": "affine_cocycle (Cech cocycle), orbit_selector (one-bit selector), and arithmetic_orientation (free C2 torsor) are three functors of the single class [T_q] = sgn: PGL_2(q) -> PGL_2(q)/PSL_2(q).",
+    "per_prime": {
+      "11": {
+        "pgl_order": 1320,
+        "psl_order": 660,
+        "sgn_kernel_is_PSL": true,
+        "sgn_surjective": true
+      },
+      "7": {
+        "pgl_order": 336,
+        "psl_order": 168,
+        "sgn_kernel_is_PSL": true,
+        "sgn_surjective": true
+      }
+    },
+    "square_a_affine_cocycle": {
+      "C2_shadow_equals_sgn": true,
+      "claim": "affine_cocycle cocycle class = image of [T_q] under the sheet dictionary",
+      "holds": true,
+      "no_equivariant_point_section": true,
+      "sgn_torsor_is_T_q": true
+    },
+    "square_b_orbit_selector": {
+      "claim": "orbit_selector one-bit selector cost attained exactly by [T_q] nontriviality",
+      "cost_bits": 1,
+      "cost_zero_iff_T_q_trivial": true,
+      "holds": true,
+      "stabiliser_character_equals_sgn": true
+    },
+    "verdict": "ONE TORSOR CLASS, THREE CERTIFICATES"
+  },
+  "L3": {
+    "A3_q5": {
+      "R_minus_equals_neg_R_plus": true,
+      "connected": true,
+      "etale_C2_algebra": "connected (F_25)",
+      "field": "F_25 = F_5[u]/(u^2-2)",
+      "frobenius_orbit_is_one_closed_point": true,
+      "frobenius_swaps_lifts": true,
+      "marker_fibre": "one projective F_5 point (Frobenius orbit of the two spin lifts)",
+      "u_squared": 2
+    },
+    "M12_clause": "At the extended Hadamard / M12 layer the orientation bit is invisible to every inner symmetry: N_{M12}(PSL_2(11)) = PSL_2(11) is self-normalising (design_fourier_hinge-F), PGL_2(11) is not a subgroup of M12, and the two M11 parents are non-conjugate in M12, so the sheet swap is realised only by the outer, row/column-exchanging class of M12 - the same free C2 torsor forced outer one layer up.",
+    "M12_source": "design_fourier_hinge-F (cited, no new computation)",
+    "design_fourier_hinge_sha16": "2574550bd5155627",
+    "trichotomy": {
+      "A3_q5": {
+        "disposition": "inert -> connected F_25 -> fused point (no bit)",
+        "frame_field": "Q(sqrt2)",
+        "prime": 5,
+        "symbol": -1
+      },
+      "B3_q7": {
+        "disposition": "split -> F_7 x F_7 -> free C2 torsor",
+        "frame_field": "Q(sqrt2)",
+        "prime": 7,
+        "symbol": 1
+      },
+      "H3_q11": {
+        "disposition": "split -> F_11 x F_11 -> free C2 torsor",
+        "frame_field": "Q(sqrt5)",
+        "prime": 11,
+        "symbol": 1
+      }
+    },
+    "trichotomy_statement": "split => free C2 torsor (B3 q=7, H3 q=11); inert => fused connected point (A3 q=5).",
+    "verdict": "RANK-THREE COMPLETION HOLDS"
+  },
+  "artifact": "torsor_trichotomy",
+  "schema": "torsor_trichotomy-close-upgrade-battery/1",
+  "upstream": {
+    "affine_cocycle": {
+      "artifact": "affine-cocycle.json",
+      "sha256_16": "26e1fc427c84e3a0"
+    },
+    "arithmetic_orientation": {
+      "artifact": "arithmetic-orientation.json",
+      "sha256_16": "609a15bfc6cae8f3"
+    },
+    "characteristic_eleven_gluing": {
+      "artifact": "characteristic-eleven-gluing.json",
+      "sha256_16": "9f649c40b4649f2d"
+    },
+    "design_fourier_hinge": {
+      "artifact": "design-fourier-hinge.json",
+      "sha256_16": "2574550bd5155627"
+    },
+    "fixed_child": {
+      "artifact": "fixed-child.json",
+      "sha256_16": "897efcd5002f36eb"
+    },
+    "orbit_selector": {
+      "artifact": "orbit-selector.json",
+      "sha256_16": "0372196c28ba7111"
+    },
+    "silver_fusion": {
+      "artifact": "silver-fusion.json",
+      "sha256_16": "7426903b59c0d045"
+    }
+  },
+  "verdict": "L1 TORSOR-ISOMORPHIC | L2 ONE TORSOR CLASS (THREE CERTIFICATES) | L3 RANK-THREE COMPLETION HOLDS (+ forced-outer M12 clause)"
+}

@@ -1,0 +1,2278 @@
+{
+  "arithmetic_gluing_secondary_control": {
+    "cross_relation_nullities_mod_2_3": {
+      "disjoint": {
+        "2": 0,
+        "3": 5
+      },
+      "shared_edge": {
+        "2": 1,
+        "3": 6
+      }
+    },
+    "modular_verdict": "the extra characteristic-2/3 kernels are not ordinary-character constituents because 2 and 3 divide |PSL2(11)|; no same-constituent explanation is promoted",
+    "ordinary_image": "1+2*10b",
+    "ordinary_kernel": "one trivial sheet-sign line",
+    "ordinary_left_module": "2*(1+10b)",
+    "rank_over_Q": 21,
+    "ranks_mod_2_3": {
+      "2": 11,
+      "3": 20
+    },
+    "same_rank_drop_profile_as_cross_relations": false,
+    "shape": [
+      22,
+      55
+    ]
+  },
+  "central_idempotents": {
+    "11": [
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)"
+        ],
+        "degree": 1,
+        "degree_over_group_order": "1/660",
+        "irreducible_index": 1
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(5)",
+          "conjugate(E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9)",
+          "conjugate(E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10)",
+          "conjugate(1)",
+          "conjugate(-1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)"
+        ],
+        "degree": 5,
+        "degree_over_group_order": "5/660",
+        "irreducible_index": 2
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(5)",
+          "conjugate(E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10)",
+          "conjugate(E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9)",
+          "conjugate(1)",
+          "conjugate(-1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)"
+        ],
+        "degree": 5,
+        "degree_over_group_order": "5/660",
+        "irreducible_index": 3
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(10)",
+          "conjugate(-1)",
+          "conjugate(-1)",
+          "conjugate(-2)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)"
+        ],
+        "degree": 10,
+        "degree_over_group_order": "10/660",
+        "irreducible_index": 4
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(10)",
+          "conjugate(-1)",
+          "conjugate(-1)",
+          "conjugate(2)",
+          "conjugate(1)",
+          "conjugate(-1)",
+          "conjugate(0)",
+          "conjugate(0)"
+        ],
+        "degree": 10,
+        "degree_over_group_order": "10/660",
+        "irreducible_index": 5
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(11)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(-1)",
+          "conjugate(-1)",
+          "conjugate(-1)",
+          "conjugate(1)",
+          "conjugate(1)"
+        ],
+        "degree": 11,
+        "degree_over_group_order": "11/660",
+        "irreducible_index": 6
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(12)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(E(5)^2+E(5)^3)",
+          "conjugate(E(5)+E(5)^4)"
+        ],
+        "degree": 12,
+        "degree_over_group_order": "12/660",
+        "irreducible_index": 7
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(12)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(E(5)+E(5)^4)",
+          "conjugate(E(5)^2+E(5)^3)"
+        ],
+        "degree": 12,
+        "degree_over_group_order": "12/660",
+        "irreducible_index": 8
+      }
+    ],
+    "7": [
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(1)"
+        ],
+        "degree": 1,
+        "degree_over_group_order": "1/168",
+        "irreducible_index": 1
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(3)",
+          "conjugate(0)",
+          "conjugate(E(7)^3+E(7)^5+E(7)^6)",
+          "conjugate(E(7)+E(7)^2+E(7)^4)",
+          "conjugate(-1)",
+          "conjugate(1)"
+        ],
+        "degree": 3,
+        "degree_over_group_order": "3/168",
+        "irreducible_index": 2
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(3)",
+          "conjugate(0)",
+          "conjugate(E(7)+E(7)^2+E(7)^4)",
+          "conjugate(E(7)^3+E(7)^5+E(7)^6)",
+          "conjugate(-1)",
+          "conjugate(1)"
+        ],
+        "degree": 3,
+        "degree_over_group_order": "3/168",
+        "irreducible_index": 3
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(6)",
+          "conjugate(0)",
+          "conjugate(-1)",
+          "conjugate(-1)",
+          "conjugate(2)",
+          "conjugate(0)"
+        ],
+        "degree": 6,
+        "degree_over_group_order": "6/168",
+        "irreducible_index": 4
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(7)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)",
+          "conjugate(-1)",
+          "conjugate(-1)"
+        ],
+        "degree": 7,
+        "degree_over_group_order": "7/168",
+        "irreducible_index": 5
+      },
+      {
+        "central_idempotent_formula": "(degree/|G|) * sum_classes conjugate(chi(C))*ClassSum(C)",
+        "class_coefficients_before_degree_over_group_order": [
+          "conjugate(8)",
+          "conjugate(-1)",
+          "conjugate(1)",
+          "conjugate(1)",
+          "conjugate(0)",
+          "conjugate(0)"
+        ],
+        "degree": 8,
+        "degree_over_group_order": "8/168",
+        "irreducible_index": 6
+      }
+    ]
+  },
+  "characters": {
+    "11": {
+      "outer_action": {
+        "class_permutation_1_based": [
+          1,
+          3,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "irreducible_permutation_1_based": [
+          1,
+          3,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "psl_classes": {
+        "orders": [
+          1,
+          11,
+          11,
+          2,
+          3,
+          6,
+          5,
+          5
+        ],
+        "sizes": [
+          1,
+          60,
+          60,
+          55,
+          110,
+          110,
+          132,
+          132
+        ]
+      },
+      "psl_irreducibles": [
+        {
+          "degree": 1,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 1,
+          "values": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "degree": 5,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 2,
+          "values": [
+            "5",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "1",
+            "-1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "degree": 5,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 3,
+          "values": [
+            "5",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "1",
+            "-1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "degree": 10,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 4,
+          "values": [
+            "10",
+            "-1",
+            "-1",
+            "-2",
+            "1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "degree": 10,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 5,
+          "values": [
+            "10",
+            "-1",
+            "-1",
+            "2",
+            "1",
+            "-1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "degree": 11,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 6,
+          "values": [
+            "11",
+            "0",
+            "0",
+            "-1",
+            "-1",
+            "-1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "degree": 12,
+          "field_conductor": 5,
+          "field_degree": 2,
+          "index": 7,
+          "values": [
+            "12",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "E(5)^2+E(5)^3",
+            "E(5)+E(5)^4"
+          ]
+        },
+        {
+          "degree": 12,
+          "field_conductor": 5,
+          "field_degree": 2,
+          "index": 8,
+          "values": [
+            "12",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "E(5)+E(5)^4",
+            "E(5)^2+E(5)^3"
+          ]
+        }
+      ],
+      "psl_torus_restrictions": [
+        {
+          "cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "degree": 5,
+          "irreducible_index": 2
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "degree": 5,
+          "irreducible_index": 3
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "degree": 10,
+          "irreducible_index": 4
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "degree": 10,
+          "irreducible_index": 5
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            3,
+            2,
+            2,
+            2,
+            2
+          ],
+          "degree": 11,
+          "irreducible_index": 6
+        }
+      ],
+      "sl_candidate_weil_characters": [
+        {
+          "central_minus_identity_value": "5",
+          "degree": 5,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 2,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "5",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "5",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "1",
+            "-1",
+            "1",
+            "-1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "central_minus_identity_value": "5",
+          "degree": 5,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 3,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "5",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "5",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "1",
+            "-1",
+            "1",
+            "-1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "central_minus_identity_value": "-6",
+          "degree": 6,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 4,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "6",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "-6",
+            "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+            "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "-1",
+            "1",
+            "-1"
+          ]
+        },
+        {
+          "central_minus_identity_value": "-6",
+          "degree": 6,
+          "field_conductor": 11,
+          "field_degree": 2,
+          "index": 5,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "6",
+            "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+            "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+            "-6",
+            "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+            "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "-1",
+            "1",
+            "-1"
+          ]
+        }
+      ],
+      "sl_classes": {
+        "central_minus_identity_class_index_1_based": 4,
+        "orders": [
+          1,
+          22,
+          22,
+          2,
+          11,
+          11,
+          4,
+          3,
+          12,
+          6,
+          12,
+          5,
+          10,
+          5,
+          10
+        ],
+        "sizes": [
+          1,
+          60,
+          60,
+          1,
+          60,
+          60,
+          110,
+          110,
+          110,
+          110,
+          110,
+          132,
+          132,
+          132,
+          132
+        ]
+      },
+      "subgroup_permutation_characters": [
+        {
+          "degree": 66,
+          "irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            0,
+            2,
+            1,
+            1,
+            1
+          ],
+          "structure": "D10",
+          "subgroup_order": 10
+        },
+        {
+          "degree": 55,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            1,
+            2,
+            0,
+            1,
+            1
+          ],
+          "structure": "A4",
+          "subgroup_order": 12
+        },
+        {
+          "degree": 55,
+          "irreducible_multiplicities": [
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            1,
+            1
+          ],
+          "structure": "D12",
+          "subgroup_order": 12
+        },
+        {
+          "degree": 11,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "structure": "A5",
+          "subgroup_order": 60
+        },
+        {
+          "degree": 11,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "structure": "A5",
+          "subgroup_order": 60
+        }
+      ]
+    },
+    "7": {
+      "outer_action": {
+        "class_permutation_1_based": [
+          1,
+          2,
+          4,
+          3,
+          5,
+          6
+        ],
+        "irreducible_permutation_1_based": [
+          1,
+          3,
+          2,
+          4,
+          5,
+          6
+        ]
+      },
+      "psl_classes": {
+        "orders": [
+          1,
+          3,
+          7,
+          7,
+          2,
+          4
+        ],
+        "sizes": [
+          1,
+          56,
+          24,
+          24,
+          21,
+          42
+        ]
+      },
+      "psl_irreducibles": [
+        {
+          "degree": 1,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 1,
+          "values": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "degree": 3,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 2,
+          "values": [
+            "3",
+            "0",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "E(7)+E(7)^2+E(7)^4",
+            "-1",
+            "1"
+          ]
+        },
+        {
+          "degree": 3,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 3,
+          "values": [
+            "3",
+            "0",
+            "E(7)+E(7)^2+E(7)^4",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "-1",
+            "1"
+          ]
+        },
+        {
+          "degree": 6,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 4,
+          "values": [
+            "6",
+            "0",
+            "-1",
+            "-1",
+            "2",
+            "0"
+          ]
+        },
+        {
+          "degree": 7,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 5,
+          "values": [
+            "7",
+            "1",
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ]
+        },
+        {
+          "degree": 8,
+          "field_conductor": 1,
+          "field_degree": 1,
+          "index": 6,
+          "values": [
+            "8",
+            "-1",
+            "1",
+            "1",
+            "0",
+            "0"
+          ]
+        }
+      ],
+      "psl_torus_restrictions": [
+        {
+          "cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1
+          ],
+          "degree": 3,
+          "irreducible_index": 2
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1
+          ],
+          "degree": 3,
+          "irreducible_index": 3
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            2,
+            2,
+            2
+          ],
+          "degree": 6,
+          "irreducible_index": 4
+        },
+        {
+          "cyclic_irreducible_multiplicities": [
+            3,
+            2,
+            2
+          ],
+          "degree": 7,
+          "irreducible_index": 5
+        }
+      ],
+      "sl_candidate_weil_characters": [
+        {
+          "central_minus_identity_value": "3",
+          "degree": 3,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 2,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "3",
+            "E(7)+E(7)^2+E(7)^4",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "3",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "E(7)+E(7)^2+E(7)^4",
+            "-1",
+            "1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "central_minus_identity_value": "3",
+          "degree": 3,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 3,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            1,
+            1,
+            1
+          ],
+          "values": [
+            "3",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "E(7)+E(7)^2+E(7)^4",
+            "3",
+            "E(7)+E(7)^2+E(7)^4",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "-1",
+            "1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "central_minus_identity_value": "-4",
+          "degree": 4,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 4,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            2,
+            1,
+            1
+          ],
+          "values": [
+            "4",
+            "E(7)+E(7)^2+E(7)^4",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "-4",
+            "-E(7)^3-E(7)^5-E(7)^6",
+            "-E(7)-E(7)^2-E(7)^4",
+            "0",
+            "0",
+            "0",
+            "1",
+            "-1"
+          ]
+        },
+        {
+          "central_minus_identity_value": "-4",
+          "degree": 4,
+          "field_conductor": 7,
+          "field_degree": 2,
+          "index": 5,
+          "split_torus_cyclic_irreducible_multiplicities": [
+            2,
+            1,
+            1
+          ],
+          "values": [
+            "4",
+            "E(7)^3+E(7)^5+E(7)^6",
+            "E(7)+E(7)^2+E(7)^4",
+            "-4",
+            "-E(7)-E(7)^2-E(7)^4",
+            "-E(7)^3-E(7)^5-E(7)^6",
+            "0",
+            "0",
+            "0",
+            "1",
+            "-1"
+          ]
+        }
+      ],
+      "sl_classes": {
+        "central_minus_identity_class_index_1_based": 4,
+        "orders": [
+          1,
+          14,
+          14,
+          2,
+          7,
+          7,
+          4,
+          8,
+          8,
+          3,
+          6
+        ],
+        "sizes": [
+          1,
+          24,
+          24,
+          1,
+          24,
+          24,
+          42,
+          42,
+          42,
+          56,
+          56
+        ]
+      },
+      "subgroup_permutation_characters": [
+        {
+          "degree": 28,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            2,
+            1,
+            1
+          ],
+          "structure": "S3",
+          "subgroup_order": 6
+        },
+        {
+          "degree": 21,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "structure": "D8",
+          "subgroup_order": 8
+        },
+        {
+          "degree": 7,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "structure": "S4",
+          "subgroup_order": 24
+        },
+        {
+          "degree": 7,
+          "irreducible_multiplicities": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "structure": "S4",
+          "subgroup_order": 24
+        }
+      ]
+    }
+  },
+  "finite_actions": [
+    {
+      "coxeter_torus_torus_baseline": {
+        "candidate_1_plus_two_weil_halves_multiplicities": [
+          4,
+          2,
+          2
+        ],
+        "candidate_passes_torus_test_but_not_full_group_test": true,
+        "fixed_point_character_on_powers": [
+          8,
+          2,
+          2
+        ],
+        "invariant_dimension": 4,
+        "matches_frozen_coxeter_torus": true,
+        "nontrivial_multiplicities": [
+          2,
+          2
+        ],
+        "restriction_formula": "2*trivial + 2*regular(C_e)",
+        "trivial_multiplicity": 4
+      },
+      "canonical_sheets": [
+        [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              4,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              6
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              4,
+              5
+            ]
+          ]
+        ]
+      ],
+      "group_orders": {
+        "PGL2": 336,
+        "PSL2": 168
+      },
+      "q": 7,
+      "relations": {
+        "disjoint": {
+          "column_sum_histogram": {
+            "3": 7
+          },
+          "gram_diagonal_values": [
+            3
+          ],
+          "gram_off_diagonal_values": [
+            1
+          ],
+          "rank_over_Q": 7,
+          "ranks_mod_2_3": {
+            "2": 4,
+            "3": 6
+          },
+          "row_sum_histogram": {
+            "3": 7
+          },
+          "shape": [
+            7,
+            7
+          ],
+          "stabilizer_element_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "stabilizer_order": 8,
+          "support_size": 21
+        },
+        "shared_edge": {
+          "column_sum_histogram": {
+            "4": 7
+          },
+          "gram_diagonal_values": [
+            4
+          ],
+          "gram_off_diagonal_values": [
+            2
+          ],
+          "rank_over_Q": 7,
+          "ranks_mod_2_3": {
+            "2": 3,
+            "3": 7
+          },
+          "row_sum_histogram": {
+            "4": 7
+          },
+          "shape": [
+            7,
+            7
+          ],
+          "stabilizer_element_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "stabilizer_order": 6,
+          "support_size": 28
+        }
+      },
+      "sheet_module_dimension": 7,
+      "sheet_sizes": [
+        7,
+        7
+      ],
+      "type": "B3"
+    },
+    {
+      "coxeter_torus_torus_baseline": {
+        "candidate_1_plus_two_weil_halves_multiplicities": [
+          4,
+          2,
+          2,
+          2,
+          2
+        ],
+        "candidate_passes_torus_test_but_not_full_group_test": true,
+        "fixed_point_character_on_powers": [
+          12,
+          2,
+          2,
+          2,
+          2
+        ],
+        "invariant_dimension": 4,
+        "matches_frozen_coxeter_torus": true,
+        "nontrivial_multiplicities": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "restriction_formula": "2*trivial + 2*regular(C_e)",
+        "trivial_multiplicity": 4
+      },
+      "canonical_sheets": [
+        [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              8,
+              11
+            ],
+            [
+              9,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              9
+            ]
+          ],
+          [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              8
+            ]
+          ],
+          [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          [
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              10
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              11
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              9
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              7,
+              9
+            ]
+          ],
+          [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              6,
+              8
+            ]
+          ],
+          [
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              10
+            ]
+          ],
+          [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              11
+            ]
+          ],
+          [
+            [
+              0,
+              10
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          [
+            [
+              0,
+              11
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              9,
+              10
+            ]
+          ]
+        ]
+      ],
+      "group_orders": {
+        "PGL2": 1320,
+        "PSL2": 660
+      },
+      "outer_action": {
+        "D1_shared_edge_graph_equals_arithmetic_gluing_overlap5_graph": true,
+        "Rz_mobius_matrix": [
+          1,
+          10,
+          1,
+          1
+        ],
+        "comparison": "same outer quotient bit, but Rz conjugates the split torus instead of normalizing Coxeter torus's fixed-pole torus",
+        "determinant": 2,
+        "determinant_is_nonsquare": true,
+        "literally_swaps_coxeter_torus_fixed_frame_legendre_blocks": false,
+        "preserves_shared_edge_relation": true,
+        "same_PGL_over_PSL_bit_as_coxeter_torus_generic_outer": true,
+        "swaps_sheets": true
+      },
+      "q": 11,
+      "relations": {
+        "disjoint": {
+          "column_sum_histogram": {
+            "5": 11
+          },
+          "gram_diagonal_values": [
+            5
+          ],
+          "gram_off_diagonal_values": [
+            2
+          ],
+          "rank_over_Q": 11,
+          "ranks_mod_2_3": {
+            "2": 11,
+            "3": 6
+          },
+          "row_sum_histogram": {
+            "5": 11
+          },
+          "shape": [
+            11,
+            11
+          ],
+          "stabilizer_element_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 8
+          },
+          "stabilizer_order": 12,
+          "support_size": 55
+        },
+        "shared_edge": {
+          "column_sum_histogram": {
+            "6": 11
+          },
+          "gram_diagonal_values": [
+            6
+          ],
+          "gram_off_diagonal_values": [
+            3
+          ],
+          "rank_over_Q": 11,
+          "ranks_mod_2_3": {
+            "2": 10,
+            "3": 5
+          },
+          "row_sum_histogram": {
+            "6": 11
+          },
+          "shape": [
+            11,
+            11
+          ],
+          "stabilizer_element_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "5": 4
+          },
+          "stabilizer_order": 10,
+          "support_size": 66
+        }
+      },
+      "sheet_module_dimension": 11,
+      "sheet_sizes": [
+        11,
+        11
+      ],
+      "type": "H3"
+    }
+  ],
+  "inputs": {
+    "coxeter_phase": {
+      "bytes": 16824,
+      "path": "coxeter_phase-coxeter-number-conic-phase.json",
+      "sha256": "993b9f7c9da5b79e474aa0f2a38919352de135844cdbe35a3c89a8430da4f65e"
+    },
+    "matching_module_module": {
+      "bytes": 21996,
+      "path": "matching-module.json",
+      "sha256": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2"
+    },
+    "matching_module_scout": {
+      "bytes": 25443,
+      "path": "matching-orbits.json",
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "characteristic_eleven_gluing": {
+      "bytes": 8566,
+      "path": "characteristic-eleven-gluing.json",
+      "sha256": "0ce94294e6e3e190460353419f178b472fae772f785ab0273460e7f74e9f1421"
+    },
+    "coxeter_torus": {
+      "bytes": 14653,
+      "path": "coxeter_torus-split-coxeter-torus.json",
+      "sha256": "529e7af7a6a2d440f3c62850e0c811ef52fc9e71322b13e036e25f82cf20e2fb"
+    },
+    "arithmetic_gluing": {
+      "bytes": 79313,
+      "path": "arithmetic_gluing-golden-fregier-cloud-bridge.json",
+      "sha256": "91b14e042c7655290a72e799b4d1c5fe853a1eec47cc0061dd9ba4e69b076031"
+    },
+    "weil_reference": {
+      "bytes": 262126,
+      "path": "10.1090_S0002-9904-1976-14017-7.pdf",
+      "sha256": "010d33d76214ba58404847f4bfba39f3a469b80ceb68a41e012b65e42f5c59e3"
+    }
+  },
+  "module_decompositions": {
+    "11": {
+      "disjoint": {
+        "degree": 55,
+        "irreducible_multiplicities": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          0,
+          1,
+          1
+        ],
+        "structure": "A4",
+        "subgroup_order": 12
+      },
+      "shared_edge": {
+        "degree": 66,
+        "irreducible_multiplicities": [
+          1,
+          1,
+          1,
+          0,
+          2,
+          1,
+          1,
+          1
+        ],
+        "structure": "D10",
+        "subgroup_order": 10
+      },
+      "sheet": {
+        "degree": 11,
+        "irreducible_multiplicities": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "structure": "A5",
+        "subgroup_order": 60
+      }
+    },
+    "7": {
+      "disjoint": {
+        "degree": 21,
+        "irreducible_multiplicities": [
+          1,
+          0,
+          0,
+          2,
+          0,
+          1
+        ],
+        "structure": "D8",
+        "subgroup_order": 8
+      },
+      "shared_edge": {
+        "degree": 28,
+        "irreducible_multiplicities": [
+          1,
+          0,
+          0,
+          2,
+          1,
+          1
+        ],
+        "structure": "S3",
+        "subgroup_order": 6
+      },
+      "sheet": {
+        "degree": 7,
+        "irreducible_multiplicities": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "structure": "S4",
+        "subgroup_order": 24
+      }
+    }
+  },
+  "quadratic_character_field": {
+    "discriminant": -11,
+    "field": "Q(sqrt(-11))",
+    "galois_pair_exchanged_by_outer_PGL2": true,
+    "gap_period_values": [
+      "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+      "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10"
+    ],
+    "minimal_polynomial": "x^2+x+3",
+    "order_11_values": [
+      "(-1+sqrt(-11))/2",
+      "(-1-sqrt(-11))/2"
+    ]
+  },
+  "schema": "cross_sheet-weil-cross-sheet-v1",
+  "artifact": "cross-sheet comparison",
+  "verdict": {
+    "coxeter_torus_mandatory_baseline": "PASS for q=7 and q=11: 2*trivial+2*regular(C_e), invariant dimension 4, every nontrivial torus character multiplicity 2",
+    "cross_incidence_maps": "both complementary q-by-q matrices are full rank; their row/image module is 1+6 at q=7 and 1+10b at q=11",
+    "outer_exchange": "GREEN: Rz is determinant-nonsquare, swaps sheets and relation endpoints, exchanges the two 5-dimensional Galois-conjugate characters, and confirms D1; it represents Coxeter torus's quotient bit but does not normalize the frozen split torus",
+    "relation_support_modules": "the q=11 shared-edge 66-set contains both 5-dimensional Q(sqrt(-11)) Weil characters once, but this does not identify the 11-dimensional incidence image with 5+6",
+    "roof": "SHARP NEGATIVE for the proposed cross-incidence module identification; certified sheet geometry survives",
+    "weil_3_plus_4_q7": "NEGATIVE: the q=7 module is 1+6, not 3+4",
+    "weil_5_plus_6_q11": "NEGATIVE: the q=11 module is 1+10b, not 5+6; the torus baseline alone is non-discriminating"
+  },
+  "weil_reference": {
+    "cache_sha256": "010d33d76214ba58404847f4bfba39f3a469b80ceb68a41e012b65e42f5c59e3",
+    "citation": "Paul Gerardin, Three Weil representations associated to finite fields, Bull. AMS 82 (1976), 268-270",
+    "doi": "10.1090/S0002-9904-1976-14017-7",
+    "load_bearing_statement": "the q-dimensional symplectic Weil representation splits into irreducibles of dimensions (q+1)/2 and (q-1)/2"
+  }
+}

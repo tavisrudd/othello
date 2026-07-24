@@ -1,0 +1,61 @@
+{
+  "artifact": "characteristic_zero",
+  "char_zero_object": {
+    "S3_resolvent_quotient": "Spec Q(sqrt5)  = (K x K x K)^S3, K=Q(sqrt5)",
+    "no_rational_section": true,
+    "structural_swap": "Galois sigma of Q(sqrt5), phi -> 1-phi",
+    "two_character_machine": "Z[1/5,T]/(T^2-T-1)"
+  },
+  "conclusion": "The characteristic-zero golden descent (golden_six_arc) is a genuine realization row of the orientation torsor T_q: its structural swap sigma (Galois of Q(sqrt5)) is exchanged with the outer PGL_2(11)/PSL_2(11) coset under reduction at 11, via the certified characteristic_eleven_gluing (Rz) and arithmetic_orientation (alpha -> -1-alpha) dictionaries. First non-finite entry on the torsor list.",
+  "descended_decoration_is_rational": {
+    "note": "the bit is carried by the S3-resolvent / Hilbert-90 transport, not by the reduced Q-form decoration (matches golden_six_arc/affine_cocycle)",
+    "single_matching_at_both_primes": true
+  },
+  "hilbert90_transport": {
+    "hT_h_equals_G_mod_11": true,
+    "sqrt5_reduction": {
+      "are_galois_conjugate_mod_11": true,
+      "phi4": 7,
+      "phi8": 4
+    },
+    "two_distinct_sheets": true
+  },
+  "outer_swap": {
+    "explicit_transporter": [
+      1,
+      4,
+      10,
+      4
+    ],
+    "sheets_different_PSL_orbits": true,
+    "sheets_same_PGL_orbit": true,
+    "sigma_corresponds_to_outer_coset": true,
+    "transporter_determinant": 8,
+    "transporter_is_nonsquare_outer": true
+  },
+  "reduction_at_11": {
+    "phi8_is_pi_phi4_is_pibar": true,
+    "roots_of_T2_minus_T_minus_1": [
+      4,
+      8
+    ],
+    "sheets_are_two_points_of_T_11": true,
+    "sigma_swaps_roots": true
+  },
+  "schema": "characteristic_zero-char-zero-realization-row/1",
+  "upstream": {
+    "arithmetic_orientation": {
+      "artifact": "arithmetic-orientation.json",
+      "sha256_16": "609a15bfc6cae8f3"
+    },
+    "characteristic_eleven_gluing": {
+      "artifact": "characteristic-eleven-gluing.json",
+      "sha256_16": "9f649c40b4649f2d"
+    },
+    "golden_six_arc": {
+      "artifact": "golden-six-arc.json",
+      "sha256_16": "d4e037ce13702b42"
+    }
+  },
+  "verdict": "POSITIVE - the outer swap exchanges golden_six_arc's descent cocycle pair; the torsor list gains a characteristic-zero realization row (the S3-resolvent Spec Q(sqrt5))"
+}

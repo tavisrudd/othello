@@ -1,0 +1,172 @@
+{
+  "artifact": "design_fourier_hinge",
+  "leg_A1_design_polarity": {
+    "cases": [
+      {
+        "col0_design": [
+          1,
+          3,
+          4
+        ],
+        "cross_disjointness_matrix_matches_qr_design": true,
+        "determinant_is_nonsquare": true,
+        "leg_pass": true,
+        "outer_determinant": 6,
+        "outer_element": "silver outer J = (x -> -x)",
+        "q": 7,
+        "row0_design": [
+          3,
+          4,
+          6
+        ],
+        "sheet_swap": true,
+        "transpose_design_equals_negation": true,
+        "transpose_intertwining_equivariant": true,
+        "type": "B3"
+      },
+      {
+        "col0_design": [
+          1,
+          4,
+          6,
+          7,
+          8
+        ],
+        "cross_disjointness_matrix_matches_qr_design": true,
+        "determinant_is_nonsquare": true,
+        "leg_pass": true,
+        "outer_determinant": 2,
+        "outer_element": "reduction of Rz = (x+10)/(x+1)",
+        "q": 11,
+        "row0_design": [
+          3,
+          4,
+          5,
+          7,
+          10
+        ],
+        "sheet_swap": true,
+        "transpose_design_equals_negation": true,
+        "transpose_intertwining_equivariant": true,
+        "type": "H3"
+      }
+    ],
+    "claim": "the reduction of Rz (q=11) and the silver outer element (q=7) each swap the two qr_design sheets and intertwine the cross-disjointness design with its transpose (= negation), a C2 torsor map whose nonsquare determinant lands in the outer coset of arithmetic_orientation's normalization-change table",
+    "verdict": "PASS"
+  },
+  "leg_A2_fourier_sector": {
+    "a4_order": 12,
+    "claim": "Rz permutes the 16 rank-16 scalar-A4 relations exactly as common_duality's involution J, exchanging the four signed-sector pairs (1,10),(3,13),(6,14),(9,11); Rz o J^-1 fixes all 16 relations, so Rz and J act identically on the signed Fourier sector torsor",
+    "j_relation_permutation_matches_common_duality": true,
+    "rz_after_j_inverse_is_identity": true,
+    "rz_equals_j_on_all_relations": true,
+    "rz_exchanges_signed_sector_pairs": true,
+    "rz_is_scheme_automorphism": true,
+    "rz_relation_permutation": [
+      0,
+      10,
+      2,
+      13,
+      4,
+      5,
+      14,
+      7,
+      8,
+      11,
+      1,
+      9,
+      12,
+      3,
+      6,
+      15
+    ],
+    "valencies_match_common_duality": true,
+    "verdict": "PASS"
+  },
+  "leg_B_modular_cubic_falsifier": {
+    "candidate_rules": {
+      "function_of_trace_residue_value": {
+        "obstruction": "residue value 0 is the opposite sheet at q=7 but the marked sheet at q=11",
+        "reads_from": "trace residue value r (= period -c_{d-1})",
+        "requires_per_case_sign": true,
+        "uniform": false
+      },
+      "quadratic_character_of_trace_difference_2r_plus_1": {
+        "marked_sheet_value_q11": 1,
+        "marked_sheet_value_q7": -1,
+        "reads_from": "Legendre symbol of 2r+1 (a lift of the trace difference)",
+        "requires_per_case_sign": true,
+        "uniform": false
+      },
+      "quadratic_character_of_unipotent_parameter": {
+        "derives_pm6_from_arithmetic": false,
+        "note": "restates A's marking; +1 on the marked square-class sheet at both q",
+        "reads_from": "square class of the unipotent parameter (the Coxeter marking itself)",
+        "uniform": true
+      }
+    },
+    "claim": "no convention-free rule reads the cubic sign from the trace residue uniformly at q=7 and q=11; every residue/period rule needs a per-case sign, and the only uniform rule is the quadratic character of the unipotent parameter, which is the Coxeter marking, not an arithmetic origin for the +-6",
+    "cubic_sign_is_outer_odd_silver_fusion": true,
+    "disposition": "B DEGRADES TO A PER-CASE DICTIONARY -- covariation is intrinsic but the +-6 readout is not convention-free uniform; B folds into A as the marking",
+    "every_residue_rule_needs_per_case_sign": true,
+    "falsifier_fires": true,
+    "only_uniform_rule_is_the_marking": true,
+    "per_prime_marked_data": {
+      "7": {
+        "char": 2,
+        "marked_is_square_class": true,
+        "marked_residue": 1,
+        "opposite_residue": 0,
+        "outer_swap_r_to_minus1_minus_r": 0
+      },
+      "11": {
+        "char": 3,
+        "marked_is_square_class": true,
+        "marked_residue": 0,
+        "opposite_residue": 2,
+        "outer_swap_r_to_minus1_minus_r": 2
+      }
+    },
+    "residue0_collision": true,
+    "role_of_residue_value_0": {
+      "7": "opposite",
+      "11": "marked"
+    },
+    "verdict": "FALSIFIER FIRES (B loses master-stroke strength)"
+  },
+  "leg_F_outer_hinge": {
+    "K_order": 7920,
+    "L_order": 660,
+    "M12_order": 95040,
+    "P_cap_K_equals_L": true,
+    "P_order": 7920,
+    "claim": "N_{M12}(frozen PSL2(11)) = frozen PSL2(11); the reduction of Rz induces the diagonal (non-inner) automorphism of PSL2(11); since no element of M12 realizes that automorphism and the two M11 parents are non-conjugate in M12, the sheet swap is realized only by the outer, row/column-exchanging class of M12",
+    "disposition": "OUTER -- F merges into A",
+    "m12_elements_inducing_noninner_auto_of_L": 0,
+    "normalizer_M12_of_L_order": 660,
+    "normalizer_equals_L": true,
+    "pgl2_11_order": 1320,
+    "rz_induces_diagonal_noninner_auto": true,
+    "rz_normalizes_psl2_11": true,
+    "structure_ok": true,
+    "two_M11_parents_conjugate_in_M12": false,
+    "verdict": "PASS"
+  },
+  "purpose": "gap-closing battery for the banked Paper-1 close 'A merged with F' with B tested; four independent bounded finite legs in exact arithmetic",
+  "schema": "design_fourier_hinge-close-gap-1",
+  "summary": {
+    "A1": "PASS",
+    "A2": "PASS",
+    "B": "FALSIFIER FIRES (B loses master-stroke strength)",
+    "F": "PASS -> OUTER -- F merges into A"
+  },
+  "upstream_pins": {
+    "arithmetic-orientation.json": "609a15bfc6cae8f3bdf6ff9acdfe6b93c8b6fe5f1dbbae4c3766b38edc3b3bc0",
+    "characteristic-eleven-gluing.json": "9f649c40b4649f2d5c59b6b7f9a2e4f93485dcdcd33bb9f44e0da5fb5f9f157e",
+    "common-duality.json": "6de0c88fcb651d00c0e576b817487a8cbf89eb53318d4b6f7d087becef97c304",
+    "golay-hadamard-automorphisms.json": "16cf4323234fc155095083d65c6bc5d50126b91d92d522a82b15c96fcaa53eb5",
+    "qr-barker.json": "f2c80377740261552ea645ea8269f1230997195e55e99d060bf74fb9bd80506a",
+    "silver-fusion.json": "7426903b59c0d0458baf09270c417871806a035f72d9e516332fb5862763a810",
+    "subgroup-decoder.py": "24a5fcc759cb49ad4c4433649c60606cd22981ce416ca6b0a7532a08431a6667"
+  }
+}

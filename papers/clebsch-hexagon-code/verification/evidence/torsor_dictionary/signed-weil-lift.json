@@ -1,0 +1,1151 @@
+{
+  "all_scalar_twists_audit": {
+    "abelianization_order": 2,
+    "all_same_preimage_linearizations_exhausted": true,
+    "characters": [
+      "trivial",
+      "central sign"
+    ],
+    "effect_on_carrier": "both twists restrict to the same reducible 1+5 module on the complement; twisting cannot create an irreducible genuine six-space",
+    "linear_character_count_over_F3": 2,
+    "reason": "the derived subgroup is the perfect PSL_2(11) complement, so every linear character is trivial on it and only toggles the central C2"
+  },
+  "alternate_attack_stress_test": {
+    "all_attacks_agree": true,
+    "generator_lift_conclusion": "among all four central choices for lifts of T and S, only the pure pair generates a 660-element complement; every other pair generates the full preimage and fails T^11=1 or (ST)^3=1",
+    "generator_lift_exhaustion": [
+      {
+        "central_on_S": 0,
+        "central_on_T": 0,
+        "generated_order": 660,
+        "is_complement": true,
+        "order_S": 2,
+        "order_S_times_T": 3,
+        "order_T": 11
+      },
+      {
+        "central_on_S": 1,
+        "central_on_T": 0,
+        "generated_order": 1320,
+        "is_complement": false,
+        "order_S": 2,
+        "order_S_times_T": 6,
+        "order_T": 11
+      },
+      {
+        "central_on_S": 0,
+        "central_on_T": 1,
+        "generated_order": 1320,
+        "is_complement": false,
+        "order_S": 2,
+        "order_S_times_T": 6,
+        "order_T": 22
+      },
+      {
+        "central_on_S": 1,
+        "central_on_T": 1,
+        "generated_order": 1320,
+        "is_complement": false,
+        "order_S": 2,
+        "order_S_times_T": 3,
+        "order_T": 22
+      }
+    ],
+    "independent_attacks": [
+      "geometric: the oriented signed-pair stabilizer is a bijective 660-element lift",
+      "cohomological: the literal pure section has zero cocycle on all 435600 pairs",
+      "group-theoretic: center 2, derived subgroup 660, and 110 noncentral involutions force the split profile",
+      "representation-theoretic: the invariant line plus simple five-space gives reducible 1_-+5_epsilon,-",
+      "Brauer/order: genuine modules live on order-four involution lifts and have value 0, while the split lifts have order 2 and values +/-2"
+    ]
+  },
+  "alternative_inputs_audit": [
+    {
+      "candidate": "different central lifts of frozen T and S",
+      "reason": "all four choices are exhausted; only the pure pair is a complement",
+      "rescues_genuine_six_space": false
+    },
+    {
+      "candidate": "different linear character twist of the same split preimage",
+      "reason": "there are only the trivial and central-sign twists, and both restrict as 1+5",
+      "rescues_genuine_six_space": false
+    },
+    {
+      "candidate": "other signed-pair orbit or either M11 parent",
+      "reason": "both 288-orbits have the same hinge complement and both parent preimages split",
+      "rescues_genuine_six_space": false
+    },
+    {
+      "candidate": "conjugate frozen base-cell stabilizer",
+      "reason": "conjugation preserves the restricted extension class and module decomposition",
+      "rescues_genuine_six_space": false
+    },
+    {
+      "candidate": "abstract nonsplit Schur cover SL_2(11) with a genuine degree-six module",
+      "reason": "this changes the extension class and representation input; it cannot embed as the certified frozen preimage because projective involutions must lift with order four",
+      "rescues_genuine_six_space": true
+    },
+    {
+      "candidate": "canonical five-dimensional shortened quotient/core",
+      "reason": "it gives the positive lower-Weil constituent, now arithmetically oriented by arithmetic orientation, but is not an upper/genuine degree-six module",
+      "rescues_genuine_six_space": false
+    },
+    {
+      "candidate": "characteristic two control",
+      "reason": "the central sign collapses and the q=7 Hamming comparison is positive, but this is a different characteristic and group case",
+      "rescues_genuine_six_space": false
+    }
+  ],
+  "downstream_impact": {
+    "Hadamard degeneration_operator_complex": "unchanged and strengthened by canonical signed kernel/cokernel transport",
+    "arithmetic orientation_arithmetic_orientation": "unchanged; the central lift supplies no orientation bit, while the lower five-space survives",
+    "fixed-child fibre_Ext_carrier": "unchanged; it concerns the lower-Weil augmentation extension, not the absent genuine upper six-space",
+    "logical_damage": "localized to the optional upper-Weil branch; no code, Hadamard, lower-Weil, arithmetic-orientation, or Ext conclusion is invalidated",
+    "paper_2": "remove any same-space genuine/metaplectic six-action claim; retain the bad-prime lower-Weil carrier and the split-on-pieces/nonsplit-on-gluing theorem as the sharper boundary narrative",
+    "quantum_or_metaplectic": "the certified signed monomial symmetry remains, but no genuine metaplectic/Weil symmetry of the twelve-qutrit carrier follows from signed Weil lift"
+  },
+  "extension_decision": {
+    "cocycle_formula": "c(g,h)=s(g)s(h)s(gh)^(-1)=0 for every ordered pair",
+    "cohomological_restriction": "the nonzero ambient central-extension class restricts to zero on the frozen PSL_2(11) hinge; the alternative nonsplit class exists abstractly but is not realized by this embedding",
+    "multiplication_map_C2_times_section_is_bijective": true,
+    "nonsplit_2_PSL2_11": false,
+    "nonsplit_order_discriminator": "the preimage has 110 noncentral involutions; in SL_2(11) the 110 lifts of projective involutions have order 4",
+    "nonzero_cocycle_pairs": 0,
+    "ordered_pairs_checked": 435600,
+    "pure_section_size": 660,
+    "section_formula": "s(g)=(g,0), the literal pure coordinate lift",
+    "type": "split direct product C2 x PSL_2(11)",
+    "uniqueness_of_complement": "PSL_2(11) is perfect, so Hom(PSL_2(11),C2)=0; the direct product has no second graph complement"
+  },
+  "full_preimage": {
+    "ambient_signed_group_order": 190080,
+    "center_order": 2,
+    "central_generator": {
+      "coordinate_signs": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "sign_mask": 4095
+    },
+    "concrete_relation_profile": "with a=S and b=S*T: a^2=b^3=(ab)^11=[a,b]^5=1; the generated complement has exactly 660 elements",
+    "construction": "enumerate the 190080 literal signed monomial elements generated by Golay--Hadamard and retain exactly those whose coordinate permutation lies in Golay--Hadamard's frozen 660-set",
+    "derived_subgroup_equals_complement": true,
+    "derived_subgroup_order": 660,
+    "element_order_census": {
+      "1": 1,
+      "10": 264,
+      "11": 120,
+      "2": 111,
+      "22": 120,
+      "3": 110,
+      "5": 264,
+      "6": 330
+    },
+    "kernel": [
+      {
+        "permutation": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "sign_mask": 0
+      },
+      {
+        "permutation": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "sign_mask": 4095
+      }
+    ],
+    "literal_complement_generators": {
+      "S": {
+        "permutation": [
+          8,
+          2,
+          1,
+          7,
+          5,
+          4,
+          6,
+          3,
+          0,
+          9,
+          10,
+          11
+        ],
+        "sign_mask": 0
+      },
+      "T": {
+        "permutation": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          0,
+          11
+        ],
+        "sign_mask": 0
+      }
+    },
+    "preimage_order": 1320,
+    "projective_frozen_group_order": 660,
+    "relation_orders": {
+      "S": 2,
+      "S*(S*T)=T": 11,
+      "S*T": 3,
+      "T": 11,
+      "[S,S*T]": 5,
+      "central_z": 2
+    }
+  },
+  "genuine_Weil_comparison": {
+    "Fourier normalization_consistency": "the central -I requirement is necessary and passes, but the extension and irreducibility discriminators fail",
+    "mod-three Weil--Golay_genuine_degree_six_rows": [
+      {
+        "index": 7,
+        "values": [
+          "6",
+          "-6",
+          "0",
+          "1",
+          "-1",
+          "1",
+          "-1",
+          "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+          "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+          "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+          "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10"
+        ]
+      },
+      {
+        "index": 8,
+        "values": [
+          "6",
+          "-6",
+          "0",
+          "1",
+          "-1",
+          "1",
+          "-1",
+          "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+          "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+          "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+          "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9"
+        ]
+      }
+    ],
+    "both_genuine_rows_central_value": "-6",
+    "both_genuine_rows_irreducible": true,
+    "central_value_matches_but_is_not_sufficient": true,
+    "comparison_verdict": "neither genuine Gerardin reduction matches",
+    "group_level_obstruction": "C2 x PSL_2(11) is not SL_2(11): projective involutions lift to involutions, not order-four elements",
+    "module_level_obstruction": "1_- direct-sum 5_epsilon,- is reducible, while both genuine degree-six Brauer rows are irreducible",
+    "nonsplit_genuine_value_on_order_4_lift": "0",
+    "split_carrier_value_on_central_times_projective_involution": "-2",
+    "split_carrier_value_on_pure_projective_involution": "2"
+  },
+  "inputs": {
+    "weil-cross-sheet.json": {
+      "bytes": 46770,
+      "sha256": "a6fc2d854732011c82b6b5c1440b407b64041bd31f4bac59adec15c1f127353f"
+    },
+    "fourier_normalization-fourier-weil.json": {
+      "bytes": 4056,
+      "sha256": "7fa8d433190b8bcac53127ce4d36fde0620f4048bbcdf74a7096217d018a46f9"
+    },
+    "mod-three-weil-golay.json": {
+      "bytes": 51127,
+      "sha256": "62dc3855782f570699d534907a91028523d393863a8b45189782a13a44614958"
+    },
+    "golay-hadamard-automorphisms.json": {
+      "bytes": 17878,
+      "sha256": "694ddb709dce8b4b513b33fa899d23fe538528d76a0d82ec6b8779305e6f9a07"
+    },
+    "hadamard-degeneration.json": {
+      "bytes": 69824,
+      "sha256": "3676e3b8b1c7c92f9c74b80c90b572d3322c73a2509cd96b5718e769fb0e5a15"
+    }
+  },
+  "missing_ingredient": {
+    "best_candidate_supplier": "a quadratic refinement or Maslov/metaplectic phase of the Bockstein-Tor pairing; unlike the bilinear transport, such phase data can carry the Schur cocycle",
+    "flag_boundary": "any genuine irreducible action must fail to preserve the canonical all-one line and lower five-space individually; it can retain only coarser H/Bockstein data or act on a larger phase space",
+    "geometry_level": "a canonical refinement of the Hadamard degeneration carrier structure that produces the nonzero cocycle and identifies the genuine module with the Hadamard/Bockstein six-space",
+    "group_level": "the nonzero Schur-multiplier class in H^2(PSL_2(11),C2), forcing projective involutions to lift with order four",
+    "module_level": "an irreducible six-dimensional F3 action of that nonsplit cover, rather than the split complement action 1+5",
+    "not_supplied_by": "signed monomial coordinates, oriented signed pairs, either M11 parent, central scalar alone, or the bilinear Bockstein transport"
+  },
+  "projective_obstruction": {
+    "consequence": "allowing scalar or projective equivalence does not rescue the comparison; a genuine action cannot be an automorphism of the full pointed Golay flag",
+    "genuine_action_has_proper_invariant_projective_subspace": false,
+    "projective_conjugacy_possible": false,
+    "split_action_invariant_projective_hyperplane": "the five-dimensional extended-shortened core",
+    "split_action_invariant_projective_point": "the all-one line"
+  },
+  "rough_objective_alt_attacks": [
+    {
+      "attack": "construct literal generators for a genuine six-dimensional F3 representation of SL_2(11), place them on the Hadamard degeneration six-space, and search for an H-derived tensor or refinement that makes the identification canonical",
+      "route": "direct modular Weil model",
+      "status": "viable new construction"
+    },
+    {
+      "attack": "upgrade Hadamard degeneration's kernel-cokernel pairing from bilinear transport to a quadratic refinement; compute its automorphism extension and test whether the frozen PSL action acquires the nonzero metaplectic cocycle",
+      "route": "Bockstein quadratic refinement",
+      "status": "strongest intrinsic candidate"
+    },
+    {
+      "attack": "search PGL_6(3) for a projective PSL_2(11) action preserving a coarser H/Bockstein structure whose inverse image in GL_6(3) is SL_2(11); it cannot be confined to Golay--Hadamard's signed monomial stabilizer",
+      "route": "projective rather than monomial carrier",
+      "status": "bounded finite search"
+    },
+    {
+      "attack": "seek the nonsplit action on the qutrit Pauli symplectic phase space and its metaplectic lift, rather than on the six-dimensional codeword carrier",
+      "route": "Clifford/stabilizer phase space",
+      "status": "viable quantum reframing"
+    },
+    {
+      "attack": "enumerate nonconjugate PSL_2(11) subgroups and test restriction of the signed extension; any nonsplit class would necessarily abandon the frozen base-cell stabilizer unless it preserves equivalent geometry",
+      "route": "different PSL_2(11) subgroup class in the ambient projective group",
+      "status": "open bounded subgroup census"
+    },
+    {
+      "attack": "take the canonical shortened five-space, arithmetic orientation trace orientation, and fixed-child fibre Ext carrier as the exact bad-prime Weil survivor instead of demanding the absent upper six-space",
+      "route": "lower-Weil replacement objective",
+      "status": "already achieved"
+    }
+  ],
+  "schema": "signed_weil-signed-weil-lift-v1",
+  "scope": {
+    "Ext_group_claimed": false,
+    "arithmetic_orientation_claimed": false,
+    "full_Mathieu_classification_extended": false,
+    "imports_abstract_2M12_label_for_extension_decision": false
+  },
+  "sharp_alternative": {
+    "mod-three Weil--Golay_frozen_action_negative_unchanged": true,
+    "door_closed": "the unique frozen complement gives only the central-sign twist of mod-three Weil--Golay's 1+5 permutation carrier; no different signed six-dimensional action remains inside Golay--Hadamard's exact preimage",
+    "signed_genuine_Weil_realization_exists": false
+  },
+  "signed_pair_geometry": {
+    "all_signed_pair_count": 576,
+    "base_pair": {
+      "Hadamard_row": "+h_0",
+      "coordinate": "+e_11"
+    },
+    "geometric_cocycle_trivialization": "orientation of a signed coordinate/Hadamard-row pair selects the order-660 complement; simultaneous global sign preserves its inner-product orbit but does not fix the oriented pair",
+    "interpretation": "choosing both signs lifts Golay--Hadamard's projective base cell and supplies the explicit complement",
+    "orbit_partition": [
+      {
+        "integral_inner_product": 1,
+        "size": 288,
+        "stabilizer_order": 660
+      },
+      {
+        "integral_inner_product": -1,
+        "size": 288,
+        "stabilizer_order": 660
+      }
+    ],
+    "orbits_exhaust_all_signed_pairs": true,
+    "projection_to_frozen_group_bijective": true,
+    "stabilizer_equals_pure_section": true,
+    "stabilizer_order": 660
+  },
+  "six_dimensional_action": {
+    "brauer_character_formula": "chi(z^e,g)=(-1)^e*(1+chi_5_epsilon(g))",
+    "carrier_basis_rref": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        2,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        1,
+        2,
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        2,
+        1,
+        2,
+        2,
+        1
+      ]
+    ],
+    "central_Brauer_value": "-6",
+    "central_scalar_over_F3": 2,
+    "complement_decomposition": "1 direct-sum 5_epsilon",
+    "five_space_basis": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        1,
+        0,
+        1,
+        0
+      ]
+    ],
+    "full_preimage_composition_factors": [
+      "1_-",
+      "5_epsilon,-"
+    ],
+    "full_signed_Mathieu_action_irreducible": true,
+    "full_signed_Mathieu_cyclic_submodule_dimensions": [
+      6
+    ],
+    "full_signed_Mathieu_generator_matrices": [
+      [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      ]
+    ],
+    "invariant_line_generator": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "literal_generator_matrices": {
+      "S": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          1,
+          0
+        ]
+      ],
+      "T": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "central_z": [
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ]
+    },
+    "p_regular_class_records": [
+      {
+        "brauer_value": "6",
+        "central_exponent": 0,
+        "class_size": 1,
+        "lift_order": 1,
+        "projective_order": 1
+      },
+      {
+        "brauer_value": "2",
+        "central_exponent": 0,
+        "class_size": 55,
+        "lift_order": 2,
+        "projective_order": 2
+      },
+      {
+        "brauer_value": "1",
+        "central_exponent": 0,
+        "class_size": 132,
+        "lift_order": 5,
+        "projective_order": 5
+      },
+      {
+        "brauer_value": "1",
+        "central_exponent": 0,
+        "class_size": 132,
+        "lift_order": 5,
+        "projective_order": 5
+      },
+      {
+        "brauer_value": "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+        "central_exponent": 0,
+        "class_size": 60,
+        "lift_order": 11,
+        "projective_order": 11
+      },
+      {
+        "brauer_value": "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+        "central_exponent": 0,
+        "class_size": 60,
+        "lift_order": 11,
+        "projective_order": 11
+      },
+      {
+        "brauer_value": "-(6)",
+        "central_exponent": 1,
+        "class_size": 1,
+        "lift_order": 2,
+        "projective_order": 1
+      },
+      {
+        "brauer_value": "-(2)",
+        "central_exponent": 1,
+        "class_size": 55,
+        "lift_order": 2,
+        "projective_order": 2
+      },
+      {
+        "brauer_value": "-(1)",
+        "central_exponent": 1,
+        "class_size": 132,
+        "lift_order": 10,
+        "projective_order": 5
+      },
+      {
+        "brauer_value": "-(1)",
+        "central_exponent": 1,
+        "class_size": 132,
+        "lift_order": 10,
+        "projective_order": 5
+      },
+      {
+        "brauer_value": "-(-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9)",
+        "central_exponent": 1,
+        "class_size": 60,
+        "lift_order": 22,
+        "projective_order": 11
+      },
+      {
+        "brauer_value": "-(-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10)",
+        "central_exponent": 1,
+        "class_size": 60,
+        "lift_order": 22,
+        "projective_order": 11
+      }
+    ],
+    "relation_to_Hadamard degeneration": "the signed Bockstein transports this same split action canonically between the kernel and cokernel carriers",
+    "semisimple": true
+  },
+  "tao_global_gluing_reframing": {
+    "claim_boundary": "this is a certified global signed irreducible carrier and a precise metaplectic analogy, not yet an identification with the SL_2(11) Weil representation",
+    "computed_answer": "the full signed Mathieu action on the same six-space is irreducible, although its frozen hinge restriction is split 1+5; both parent extensions split but their complements generate the nonsplit group and a closed length-eight word yields the center",
+    "interpretation": "irreducibility and the central cocycle are restored globally by row/coordinate gluing, not locally on the hinge",
+    "missing_exact_comparison": "rewrite the central witness as holonomy in the signed coordinate-row cell groupoid and compare its scalar with a standard Maslov/metaplectic cocycle",
+    "question": "is the split restriction analogous to splitting a metaplectic cover on polarization stabilizers, with the genuine phase appearing only in Fourier gluing between polarizations?"
+  },
+  "artifact": "signed Weil lift",
+  "two_parent_signed_gluing": {
+    "central_witness_BFS_states": 41146,
+    "central_witness_word_generator_indices": [
+      0,
+      0,
+      7,
+      1,
+      7,
+      0,
+      2,
+      6
+    ],
+    "central_witness_word_length": 8,
+    "coordinate_oriented_parent": {
+      "description": "stabilizer of +e_11; a signed complement over Golay--Hadamard's parity-coordinate M11",
+      "full_preimage_order": 15840,
+      "generators": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            4,
+            9,
+            8,
+            10,
+            3,
+            6,
+            7,
+            5,
+            11
+          ],
+          "sign_mask": 237
+        },
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            5,
+            10,
+            9,
+            3,
+            8,
+            4,
+            6,
+            7,
+            11
+          ],
+          "sign_mask": 1142
+        },
+        {
+          "permutation": [
+            0,
+            1,
+            3,
+            2,
+            6,
+            8,
+            4,
+            10,
+            5,
+            9,
+            7,
+            11
+          ],
+          "sign_mask": 0
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3,
+            10,
+            6,
+            5,
+            8,
+            7,
+            9,
+            4,
+            11
+          ],
+          "sign_mask": 1142
+        },
+        {
+          "permutation": [
+            1,
+            0,
+            2,
+            3,
+            6,
+            7,
+            4,
+            5,
+            10,
+            9,
+            8,
+            11
+          ],
+          "sign_mask": 1443
+        }
+      ],
+      "order": 7920,
+      "pure_elements": 660
+    },
+    "interpretation": "both M11 parent preimages split and agree on the split PSL_2(11) hinge, but their chosen complements generate the globally nonsplit signed group and recover its center",
+    "intersection_equals_frozen_pure_complement": true,
+    "intersection_order": 660,
+    "join_equals_full_signed_group": true,
+    "join_order": 190080,
+    "row_oriented_parent": {
+      "description": "stabilizer of +h_0; the literal pure complement over Golay--Hadamard's transitive M11",
+      "full_preimage_order": 15840,
+      "generators": [
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            3,
+            6,
+            10,
+            4,
+            8,
+            7,
+            11,
+            5,
+            9
+          ],
+          "sign_mask": 0
+        },
+        {
+          "permutation": [
+            0,
+            1,
+            2,
+            5,
+            7,
+            10,
+            9,
+            11,
+            6,
+            8,
+            3,
+            4
+          ],
+          "sign_mask": 0
+        },
+        {
+          "permutation": [
+            0,
+            1,
+            3,
+            2,
+            4,
+            7,
+            6,
+            5,
+            10,
+            11,
+            8,
+            9
+          ],
+          "sign_mask": 0
+        },
+        {
+          "permutation": [
+            0,
+            2,
+            1,
+            3,
+            4,
+            10,
+            6,
+            11,
+            9,
+            8,
+            5,
+            7
+          ],
+          "sign_mask": 0
+        },
+        {
+          "permutation": [
+            1,
+            0,
+            2,
+            3,
+            9,
+            5,
+            11,
+            8,
+            7,
+            4,
+            10,
+            6
+          ],
+          "sign_mask": 0
+        }
+      ],
+      "order": 7920,
+      "pure_elements": 7920
+    }
+  },
+  "unqualified_green_reframing": {
+    "local_to_global_theorem": "the central extension splits on the frozen hinge and on both M11 parents with compatible hinge complements, but the two parent complements generate the globally nonsplit signed Mathieu group",
+    "negative_retained": "the proposed same-carrier genuine signed-Weil realization does not exist inside Golay--Hadamard's exact preimage",
+    "replacement_theorem": "the Hadamard degeneration Bockstein six-space has a canonical signed C2 x PSL_2(11) transport with central scalar -1, unique pure complement, and decomposition 1_- direct-sum 5_epsilon,-",
+    "why_unqualified": "these are exact positive structure theorems; they do not identify the reducible carrier with a genuine irreducible Weil module"
+  },
+  "verdict": "sharp negative: the frozen preimage is the split direct product C2 x PSL_2(11), and its signed six-space is reducible 1_- + 5_epsilon,- rather than either irreducible genuine Weil six-space"
+}
