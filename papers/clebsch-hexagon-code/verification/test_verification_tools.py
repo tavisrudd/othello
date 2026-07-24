@@ -12,6 +12,8 @@ from pathlib import Path
 VERIFICATION_ROOT = Path(__file__).resolve().parent
 PAPER_ROOT = VERIFICATION_ROOT.parent
 REPOSITORY_ROOT = PAPER_ROOT.parents[1]
+LEAN_ROOT = REPOSITORY_ROOT / "lean"
+REPOSITORIES = {"paper": PAPER_ROOT, "lean": LEAN_ROOT}
 sys.path.insert(0, str(VERIFICATION_ROOT))
 
 from extract_gate_audits import extract_gate  # noqa: E402
@@ -37,9 +39,9 @@ class StatementExtractionTests(unittest.TestCase):
 class GateExtractionTests(unittest.TestCase):
     def test_arithmetic_gluing_gate_has_complete_embedded_surface(self) -> None:
         path = Path(
-            "lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean"
+            "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean"
         )
-        gate = extract_gate(REPOSITORY_ROOT / path)
+        gate = extract_gate(LEAN_ROOT / path)
         self.assertTrue(gate["audit_embedded"])
         self.assertEqual(gate["terminal_count"], 23)
         self.assertEqual(len(gate["terminals"]), len(set(gate["terminals"])))
@@ -54,7 +56,8 @@ class CommandValidationTests(unittest.TestCase):
         checks = [
             {
                 "id": "statement-extraction",
-                "cwd": "papers/clebsch-hexagon-code",
+                "repository": "paper",
+                "cwd": ".",
                 "argv": [
                     "python3",
                     "verification/extract_statement_adequacy.py",
@@ -62,42 +65,46 @@ class CommandValidationTests(unittest.TestCase):
                 "timeout_seconds": 60,
             }
         ]
-        validate_checks(checks, "checks", REPOSITORY_ROOT)
+        validate_checks(checks, "checks", REPOSITORIES)
 
 
 class EvidenceBindingTests(unittest.TestCase):
     gate_path = Path(
-        "lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean"
+        "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean"
     )
 
-    def file_evidence(self, path: Path) -> dict[str, str]:
+    def file_evidence(
+        self, repository: str, path: Path
+    ) -> dict[str, str]:
+        root = REPOSITORIES[repository]
         return {
+            "repository": repository,
             "path": path.as_posix(),
             "sha256": hashlib.sha256(
-                (REPOSITORY_ROOT / path).read_bytes()
+                (root / path).read_bytes()
             ).hexdigest(),
         }
 
     def test_tracked_gate_can_serve_as_its_embedded_audit(self) -> None:
-        gate = extract_gate(REPOSITORY_ROOT / self.gate_path)
+        gate = extract_gate(LEAN_ROOT / self.gate_path)
         terminal = str(gate["terminals"][0])
         evidence = {
-            "gate": self.file_evidence(self.gate_path),
-            "audit": self.file_evidence(self.gate_path),
+            "gate": self.file_evidence("lean", self.gate_path),
+            "audit": self.file_evidence("lean", self.gate_path),
             "terminals": [terminal],
             "axioms": {terminal: []},
             "validation": {
                 "command": "exact-target gate validation",
-                "output": self.file_evidence(self.gate_path),
+                "output": self.file_evidence("lean", self.gate_path),
             },
         }
-        validate_lean(evidence, "lean", REPOSITORY_ROOT)
+        validate_lean(evidence, "lean", REPOSITORIES)
 
     def test_hash_mismatch_is_rejected(self) -> None:
-        evidence = self.file_evidence(self.gate_path)
+        evidence = self.file_evidence("lean", self.gate_path)
         evidence["sha256"] = "0" * 64
         with self.assertRaisesRegex(ValueError, "does not match"):
-            validate_file(evidence, "gate", REPOSITORY_ROOT)
+            validate_file(evidence, "gate", REPOSITORIES)
 
 
 if __name__ == "__main__":

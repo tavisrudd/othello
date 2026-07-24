@@ -47,17 +47,20 @@ The initial public verification surface is under
   inputs and an unconditional remainder for conceptual routes, and explicit subclaim
   decomposition for mixed routes.  Every referenced gate, audit module, validation output,
   verify-all entry point, verify-all output, checker, generator, schema, data file, and certificate
-  is a safe repository-relative path whose current bytes must match the recorded SHA-256.
+  names either the flattened paper repository or the separately supplied flattened shared Lean
+  repository and uses a safe path relative to that root; current bytes must match the recorded
+  SHA-256.
 - `extract_gate_audits.py` records each import-only gate's exact SHA-256, imports, declared
   `#print axioms` terminals, and whether the audit is embedded in that gate.  It does not mistake
   an import-only module name for an audited terminal surface.
 - `verify_release.py` is the single argv-only release runner.  It rejects shell commands, requires
-  a clean Git worktree and pinned-commit ancestry, validates the manifest first, runs every
-  uniquely named check with an explicit bounded timeout, reports only bounded failure tails, and
-  verifies that no tracked or untracked repository path changed during the run.  Ignored build
-  caches are outside the Git snapshot; every scholarly output is instead a tracked hash-pinned
-  manifest artifact.  Success output omits timings and machine-local paths, making it
-  byte-reproducible for a fixed manifest and passing check set.
+  clean paper and Lean scopes, validates the separately supplied flattened Lean root against its
+  pinned commit, validates the manifest first, runs every uniquely named check in its declared
+  repository with an explicit bounded timeout, reports only bounded failure tails, and verifies
+  that no tracked or untracked paper or Lean path changed during the run.  Ignored build caches are
+  outside the Git snapshot; every scholarly output is instead a tracked hash-pinned manifest
+  artifact.  Success output omits timings and machine-local paths, making it byte-reproducible for
+  a fixed manifest and passing check set.
 - `test_verification_tools.py` exercises content-addressed statement extraction, uniqueness of
   manuscript claim keys, the embedded 23-terminal arithmetic-gluing gate surface, direct argv
   acceptance, shell-command rejection, a tracked gate serving as its own embedded audit, and
@@ -78,11 +81,11 @@ python3 -m py_compile verification/extract_statement_adequacy.py \
   verification/verify_trust_manifest.py
 python3 verification/extract_statement_adequacy.py
   -> schema clebsch-statement-adequacy-v1, 18 statements, one unlabelled
-python3 verification/verify_trust_manifest.py
+python3 verification/verify_trust_manifest.py --lean-root <shared-lean-checkout>
   -> fails closed because trust_manifest.json has not yet been admitted
 python3 verification/extract_gate_audits.py <thirteen completed gate paths>
   -> 13 gates, 162 embedded audit terminals
-python3 verification/verify_release.py
+python3 verification/verify_release.py --lean-root <shared-lean-checkout>
   -> fails closed because trust_manifest.json has not yet been admitted
 python3 -m unittest verification/test_verification_tools.py
   -> 6 tests passed
@@ -371,6 +374,13 @@ an “independent check” does not satisfy C320's final trust route.
 5. **Make incompleteness fail closed.**  No placeholder trust route is allowed in the public
    manifest.  Until every row has its final evidence, the manifest is absent and the validator
    reports failure.  Internal intake state remains in this report only.
+6. **Design for two flattened published repositories.**  The user states that the monorepo will
+   not be published: each paper and the shared Lean development will be extracted to separate
+   repositories with flattened roots.  The manifest therefore tags every artifact and check with
+   repository identity `paper` or `lean`; paper-local paths start at the extracted paper root,
+   Lean paths start at the extracted shared-Lean root, and the verifier accepts that root through
+   `--lean-root`.  No public command, manifest row, or evidence script may depend on
+   `papers/clebsch-hexagon-code`, the monorepo `lean/` prefix, or `notes/`.
 
 ## Required outcome
 

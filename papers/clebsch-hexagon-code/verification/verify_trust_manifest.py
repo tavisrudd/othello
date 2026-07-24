@@ -5,6 +5,8 @@ The manifest has one final route for each claim.  The verifier checks that
 theorem-like statements agree with the deterministic adequacy extraction,
 that separately stated prose/table claims occur verbatim in the manuscript,
 and that each route supplies the evidence fields needed for that route.
+Artifacts are resolved against either the flattened paper repository or a
+separately supplied flattened shared Lean repository.
 
 This validator checks completeness and internal consistency of the ledger.
 It does not itself elaborate Lean modules or replay finite certificates; the
@@ -74,10 +76,16 @@ def require_sha256(value: object, where: str) -> str:
 
 
 def validate_file(
-    evidence: object, where: str, repository_root: Path
+    evidence: object, where: str, repositories: dict[str, Path]
 ) -> tuple[Path, str]:
     if not isinstance(evidence, dict):
         fail(f"{where} must be an object")
+    repository = require_nonempty_string(
+        evidence.get("repository"), f"{where}.repository"
+    )
+    if repository not in repositories:
+        fail(f"{where}.repository must be one of {sorted(repositories)}")
+    repository_root = repositories[repository].resolve()
     path_text = require_nonempty_string(evidence.get("path"), f"{where}.path")
     relative_path = Path(path_text)
     if relative_path.is_absolute() or ".." in relative_path.parts:
@@ -93,7 +101,7 @@ def validate_file(
 
 
 def validate_checks(
-    checks: object, where: str, repository_root: Path
+    checks: object, where: str, repositories: dict[str, Path]
 ) -> None:
     if not isinstance(checks, list) or not checks:
         fail(f"{where} must be a nonempty list")
@@ -106,6 +114,15 @@ def validate_checks(
         if check_id in seen_ids:
             fail(f"{where} contains duplicate ID {check_id!r}")
         seen_ids.add(check_id)
+        repository = require_nonempty_string(
+            check.get("repository"), f"{check_where}.repository"
+        )
+        if repository not in repositories:
+            fail(
+                f"{check_where}.repository must be one of "
+                f"{sorted(repositories)}"
+            )
+        repository_root = repositories[repository].resolve()
         cwd_text = require_nonempty_string(check.get("cwd"), f"{check_where}.cwd")
         cwd_relative = Path(cwd_text)
         if cwd_relative.is_absolute() or ".." in cwd_relative.parts:
@@ -133,12 +150,14 @@ def validate_checks(
             fail(f"{check_where}.timeout_seconds must be an integer from 1 to 86400")
 
 
-def validate_lean(evidence: object, where: str, repository_root: Path) -> None:
+def validate_lean(
+    evidence: object, where: str, repositories: dict[str, Path]
+) -> None:
     if not isinstance(evidence, dict):
         fail(f"{where} must be an object")
-    validate_file(evidence.get("gate"), f"{where}.gate", repository_root)
+    validate_file(evidence.get("gate"), f"{where}.gate", repositories)
     audit_path, _ = validate_file(
-        evidence.get("audit"), f"{where}.audit", repository_root
+        evidence.get("audit"), f"{where}.audit", repositories
     )
     require_string_list(evidence.get("terminals"), f"{where}.terminals")
     axioms = evidence.get("axioms")
@@ -164,12 +183,12 @@ def validate_lean(evidence: object, where: str, repository_root: Path) -> None:
         validation.get("command"), f"{where}.validation.command"
     )
     validate_file(
-        validation.get("output"), f"{where}.validation.output", repository_root
+        validation.get("output"), f"{where}.validation.output", repositories
     )
 
 
 def validate_computation(
-    evidence: object, where: str, repository_root: Path
+    evidence: object, where: str, repositories: dict[str, Path]
 ) -> None:
     if not isinstance(evidence, dict):
         fail(f"{where} must be an object")
@@ -189,7 +208,7 @@ def validate_computation(
         fail(f"{where}.artifacts must be a nonempty list")
     for index, artifact in enumerate(artifacts):
         artifact_where = f"{where}.artifacts[{index}]"
-        validate_file(artifact, artifact_where, repository_root)
+        validate_file(artifact, artifact_where, repositories)
 
 
 def validate_citations(evidence: object, where: str) -> None:
@@ -203,7 +222,7 @@ def validate_citations(evidence: object, where: str) -> None:
 
 
 def validate_component(
-    component: object, where: str, repository_root: Path
+    component: object, where: str, repositories: dict[str, Path]
 ) -> None:
     if not isinstance(component, dict):
         fail(f"{where} must be an object")
@@ -211,17 +230,17 @@ def validate_component(
     if route not in COMPONENT_ROUTES:
         fail(f"{where}.route must be one of {sorted(COMPONENT_ROUTES)}")
     require_nonempty_string(component.get("subclaim"), f"{where}.subclaim")
-    validate_route_evidence(route, component, where, repository_root)
+    validate_route_evidence(route, component, where, repositories)
 
 
 def validate_route_evidence(
-    route: str, row: dict[str, object], where: str, repository_root: Path
+    route: str, row: dict[str, object], where: str, repositories: dict[str, Path]
 ) -> None:
     if route == "full-trust-lean":
-        validate_lean(row.get("lean"), f"{where}.lean", repository_root)
+        validate_lean(row.get("lean"), f"{where}.lean", repositories)
     elif route == "exact-replay-certificate":
         validate_computation(
-            row.get("computation"), f"{where}.computation", repository_root
+            row.get("computation"), f"{where}.computation", repositories
         )
     elif route == "conceptual-cited-inputs":
         validate_citations(row.get("cited_inputs"), f"{where}.cited_inputs")
@@ -235,7 +254,7 @@ def validate_claim(
     index: int,
     extracted: dict[str, dict[str, object]],
     manuscript_text: str,
-    repository_root: Path,
+    repositories: dict[str, Path],
 ) -> str:
     where = f"claims[{index}]"
     if not isinstance(claim, dict):
@@ -280,10 +299,10 @@ def validate_claim(
             validate_component(
                 component,
                 f"{where}.components[{component_index}]",
-                repository_root,
+                repositories,
             )
     else:
-        validate_route_evidence(route, claim, where, repository_root)
+        validate_route_evidence(route, claim, where, repositories)
     return claim_id
 
 
@@ -291,33 +310,48 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Validate the Clebsch claim trust manifest."
     )
-    default_root = Path(__file__).resolve().parents[1]
-    repository_root = default_root.parents[1]
+    paper_root = Path(__file__).resolve().parents[1]
     parser.add_argument(
         "manifest",
         nargs="?",
         type=Path,
-        default=default_root / "verification" / "trust_manifest.json",
+        default=paper_root / "verification" / "trust_manifest.json",
     )
     parser.add_argument(
         "--manuscript",
         type=Path,
-        default=default_root / "clebsch_hexagon_code.tex",
+        default=paper_root / "clebsch_hexagon_code.tex",
+    )
+    parser.add_argument(
+        "--lean-root",
+        type=Path,
+        required=True,
+        help="root of the separately checked-out, flattened shared Lean repository",
     )
     args = parser.parse_args()
 
     manifest_path = args.manifest.resolve()
     manuscript_path = args.manuscript.resolve()
+    repositories = {
+        "paper": paper_root.resolve(),
+        "lean": args.lean_root.resolve(),
+    }
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):
         fail("manifest root must be an object")
     if manifest.get("schema") != SCHEMA:
         fail(f"manifest.schema must equal {SCHEMA!r}")
+    lean_repository = manifest.get("lean_repository")
+    if not isinstance(lean_repository, dict):
+        fail("manifest.lean_repository must be an object")
+    require_nonempty_string(
+        lean_repository.get("url"), "manifest.lean_repository.url"
+    )
     pinned_commit = require_nonempty_string(
-        manifest.get("pinned_commit"), "manifest.pinned_commit"
+        lean_repository.get("commit"), "manifest.lean_repository.commit"
     )
     if HEX_40.fullmatch(pinned_commit) is None:
-        fail("manifest.pinned_commit must be a full lowercase Git commit")
+        fail("manifest.lean_repository.commit must be a full lowercase Git commit")
     verify_all = manifest.get("verify_all")
     if not isinstance(verify_all, dict):
         fail("manifest.verify_all must be an object")
@@ -325,13 +359,13 @@ def main() -> int:
     validate_file(
         verify_all.get("entry_point"),
         "manifest.verify_all.entry_point",
-        repository_root,
+        repositories,
     )
     validate_file(
-        verify_all.get("output"), "manifest.verify_all.output", repository_root
+        verify_all.get("output"), "manifest.verify_all.output", repositories
     )
     validate_checks(
-        verify_all.get("checks"), "manifest.verify_all.checks", repository_root
+        verify_all.get("checks"), "manifest.verify_all.checks", repositories
     )
 
     manuscript_bytes = manuscript_path.read_bytes()
@@ -350,7 +384,7 @@ def main() -> int:
         fail("manifest.claims must be a nonempty list")
     claim_ids = [
         validate_claim(
-            claim, index, extracted, manuscript_text, repository_root
+            claim, index, extracted, manuscript_text, repositories
         )
         for index, claim in enumerate(claims)
     ]

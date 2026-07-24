@@ -3,9 +3,10 @@
 
 The runner accepts only argv-form commands from the tracked trust manifest;
 it never invokes a shell.  It requires a clean Git worktree, verifies that
-the pinned evidence commit is an ancestor of the checked-out source, runs
-the manifest validator, executes every declared check in order, and confirms
-that no tracked or untracked repository path changed during verification.
+the pinned shared-Lean commit matches the separately supplied flattened Lean
+repository, runs the manifest validator, executes every declared check in
+order, and confirms that no tracked or untracked paper or Lean path changed
+during verification.
 Its success JSON omits timing and machine-local paths so the same manifest
 and successful check set produce byte-identical scholarly output.
 
@@ -52,7 +53,7 @@ def run(
 
 def git_snapshot(repository_root: Path) -> str:
     result = run(
-        ["git", "status", "--porcelain=v1", "--untracked-files=all"],
+        ["git", "status", "--porcelain=v1", "--untracked-files=all", "--", "."],
         repository_root,
     )
     if result.returncode != 0:
@@ -60,15 +61,25 @@ def git_snapshot(repository_root: Path) -> str:
     return result.stdout
 
 
-def safe_cwd(repository_root: Path, value: object, where: str) -> Path:
+def safe_cwd(
+    repositories: dict[str, Path],
+    repository: object,
+    value: object,
+    where: str,
+) -> Path:
+    if not isinstance(repository, str) or repository not in repositories:
+        raise ValueError(
+            f"{where}.repository must be one of {sorted(repositories)}"
+        )
+    repository_root = repositories[repository].resolve()
     if not isinstance(value, str) or not value:
-        raise ValueError(f"{where} must be a nonempty repository-relative path")
+        raise ValueError(f"{where}.cwd must be a nonempty repository-relative path")
     relative = Path(value)
     if relative.is_absolute() or ".." in relative.parts:
-        raise ValueError(f"{where} must be a safe repository-relative path")
+        raise ValueError(f"{where}.cwd must be a safe repository-relative path")
     resolved = (repository_root / relative).resolve()
     if not resolved.is_relative_to(repository_root.resolve()) or not resolved.is_dir():
-        raise ValueError(f"{where} does not name a repository directory")
+        raise ValueError(f"{where}.cwd does not name a repository directory")
     return resolved
 
 
@@ -94,38 +105,70 @@ def main() -> int:
         description="Run the complete Clebsch release verification."
     )
     paper_root = Path(__file__).resolve().parents[1]
-    repository_root = paper_root.parents[1]
     parser.add_argument(
         "manifest",
         nargs="?",
         type=Path,
         default=paper_root / "verification" / "trust_manifest.json",
     )
+    parser.add_argument(
+        "--lean-root",
+        type=Path,
+        required=True,
+        help="root of the separately checked-out, flattened shared Lean repository",
+    )
     args = parser.parse_args()
 
     manifest_path = args.manifest.resolve()
+    repositories = {
+        "paper": paper_root.resolve(),
+        "lean": args.lean_root.resolve(),
+    }
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):
         raise ValueError("manifest root must be an object")
 
-    initial_snapshot = git_snapshot(repository_root)
-    if initial_snapshot:
-        changed = initial_snapshot.splitlines()
-        preview = "\n".join(changed[:10])
-        raise RuntimeError(
-            f"release verification requires a clean worktree; "
-            f"found {len(changed)} changed paths:\n{preview}"
-        )
+    initial_snapshots = {
+        name: git_snapshot(root) for name, root in repositories.items()
+    }
+    for name, snapshot in initial_snapshots.items():
+        if snapshot:
+            changed = snapshot.splitlines()
+            preview = "\n".join(changed[:10])
+            raise RuntimeError(
+                f"release verification requires a clean {name} worktree; "
+                f"found {len(changed)} changed paths:\n{preview}"
+            )
 
-    pinned_commit = manifest.get("pinned_commit")
+    lean_repository = manifest.get("lean_repository")
+    if not isinstance(lean_repository, dict):
+        raise ValueError("manifest.lean_repository must be an object")
+    pinned_commit = lean_repository.get("commit")
     if not isinstance(pinned_commit, str) or not pinned_commit:
-        raise ValueError("manifest.pinned_commit must be a nonempty string")
-    ancestry = run(
-        ["git", "merge-base", "--is-ancestor", pinned_commit, "HEAD"],
-        repository_root,
+        raise ValueError("manifest.lean_repository.commit must be a nonempty string")
+    paper_git_root = run(
+        ["git", "rev-parse", "--show-toplevel"], paper_root
     )
-    if ancestry.returncode != 0:
-        raise RuntimeError("the pinned evidence commit is not an ancestor of HEAD")
+    lean_git_root = run(
+        ["git", "rev-parse", "--show-toplevel"], repositories["lean"]
+    )
+    if paper_git_root.returncode != 0 or lean_git_root.returncode != 0:
+        raise RuntimeError("paper and Lean roots must both belong to Git repositories")
+    if paper_git_root.stdout.strip() == lean_git_root.stdout.strip():
+        ancestry = run(
+            ["git", "merge-base", "--is-ancestor", pinned_commit, "HEAD"],
+            repositories["lean"],
+        )
+        if ancestry.returncode != 0:
+            raise RuntimeError(
+                "the pinned shared-Lean commit is not an ancestor of HEAD"
+            )
+    else:
+        lean_head = run(["git", "rev-parse", "HEAD"], repositories["lean"])
+        if lean_head.returncode != 0 or lean_head.stdout.strip() != pinned_commit:
+            raise RuntimeError(
+                "the separate shared-Lean repository is not at the pinned commit"
+            )
 
     manifest_check = run(
         [
@@ -134,8 +177,10 @@ def main() -> int:
             str(manifest_path),
             "--manuscript",
             str(paper_root / "clebsch_hexagon_code.tex"),
+            "--lean-root",
+            str(repositories["lean"]),
         ],
-        repository_root,
+        paper_root,
     )
     if manifest_check.returncode != 0:
         detail = bounded_failure_output(
@@ -162,7 +207,12 @@ def main() -> int:
         if check_id in seen_ids:
             raise ValueError(f"duplicate verification check ID {check_id!r}")
         seen_ids.add(check_id)
-        cwd = safe_cwd(repository_root, check.get("cwd"), f"{where}.cwd")
+        cwd = safe_cwd(
+            repositories,
+            check.get("repository"),
+            check.get("cwd"),
+            where,
+        )
         argv = command_argv(check.get("argv"), f"{where}.argv")
         timeout = check.get("timeout_seconds")
         if (
@@ -200,20 +250,23 @@ def main() -> int:
             )
         summaries.append({"id": check_id, "status": "passed"})
 
-    final_snapshot = git_snapshot(repository_root)
-    if final_snapshot != initial_snapshot:
-        changed = final_snapshot.splitlines()
-        preview = "\n".join(changed[:10])
-        raise RuntimeError(
-            f"verification changed {len(changed)} repository paths:\n{preview}"
-        )
+    final_snapshots = {
+        name: git_snapshot(root) for name, root in repositories.items()
+    }
+    for name, final_snapshot in final_snapshots.items():
+        if final_snapshot != initial_snapshots[name]:
+            changed = final_snapshot.splitlines()
+            preview = "\n".join(changed[:10])
+            raise RuntimeError(
+                f"verification changed {len(changed)} {name} paths:\n{preview}"
+            )
 
     print(
         json.dumps(
             {
                 "check_count": len(summaries),
                 "checks": summaries,
-                "pinned_commit": pinned_commit,
+                "lean_commit": pinned_commit,
                 "status": "passed",
             },
             indent=2,
