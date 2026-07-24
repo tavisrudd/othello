@@ -213,6 +213,7 @@ and write $m=\binom{k}{2}$. Then
 \qquad
  0\le t(A)\le3\binom{k}{4}\frac{r-2}{r}.
 \]
+For $k\le5$, the defining sum is empty and $t(A)=0$.
 \end{theorem}
 
 \begin{proof}
@@ -669,9 +670,9 @@ contains the standard frame
 \[
  (0,0,1),\ (0,1,0),\ (1,0,0),\ (1,1,1);
 \]
-the table gives its remaining two points.  Here $\delta$ is the
-nearest-conic discrepancy and $d_{\min}$ is the least degree of a nonzero
-form vanishing on the uncovered locus.
+the table gives the remaining two points of each representative.
+Here $d_{\min}$ is the least degree of a nonzero form vanishing on the
+uncovered locus.
 
 \begin{table}[H]
 \centering
@@ -680,45 +681,45 @@ In the second column, \(xy/uv\) abbreviates the remaining points
 \((1,x,y),(1,u,v)\).
 \smallskip
 
-\begin{tabular}{@{}c c r r r r@{}}
+\begin{tabular}{@{}c c r r r@{}}
 \toprule
-class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
 \midrule
-\texttt{C01}&23/32& 2&20&12&5\\
-\texttt{C02}&23/34& 6&18&14&4\\
-\texttt{C03}&23/36& 3&19&13&5\\
-\texttt{C04}&23/37& 3&19&17&5\\
-\texttt{C05}&23/39& 4&20&16&5\\
+\texttt{C01}&23/32& 2&20&5\\
+\texttt{C02}&23/34& 6&18&4\\
+\texttt{C03}&23/36& 3&19&5\\
+\texttt{C04}&23/37& 3&19&5\\
+\texttt{C05}&23/39& 4&20&5\\
 \bottomrule
 \end{tabular}
 \hfill
-\begin{tabular}{@{}c c r r r r@{}}
+\begin{tabular}{@{}c c r r r@{}}
 \toprule
-class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
 \midrule
-\texttt{C06}&23/42& 2&20&16&5\\
-\texttt{C07}&23/48& 1&21&17&5\\
-\texttt{C08}&23/49& 4&20&16&5\\
-\texttt{C09}&23/56& 4&20&16&5\\
-\texttt{C10}&23/62& 6&19&15&5\\
+\texttt{C06}&23/42& 2&20&5\\
+\texttt{C07}&23/48& 1&21&5\\
+\texttt{C08}&23/49& 4&20&5\\
+\texttt{C09}&23/56& 4&20&5\\
+\texttt{C10}&23/62& 6&19&5\\
 \bottomrule
 \end{tabular}
 \hfill
-\begin{tabular}{@{}c c r r r r@{}}
+\begin{tabular}{@{}c c r r r@{}}
 \toprule
-class & pair & $|G|$ & $|\cU|$ & $\delta$ & $d_{\min}$\\
+class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
 \midrule
-\texttt{C11}&23/67&12&16&12&4\\
-\texttt{C12}&23/74& 5&22&18&6\\
-\texttt{C13}&23/89& 6&18&14&4\\
-\texttt{C14}&23/(9,10)&12&18&14&4\\
-\texttt{C15}&34/45&60&12& 0&2\\
+\texttt{C11}&23/67&12&16&4\\
+\texttt{C12}&23/74& 5&22&6\\
+\texttt{C13}&23/89& 6&18&4\\
+\texttt{C14}&23/(9,10)&12&18&4\\
+\texttt{C15}&34/45&60&12&2\\
 \bottomrule
 \end{tabular}
 \caption{The fifteen projective classes of six-arcs in $\PG(2,11)$.
 Class \texttt{C15} is the Clebsch class.  Both replay programs regenerate
-the same canonical keys; the global-gap replay supplies the middle three
-columns, and the low-degree replay supplies $d_{\min}$.}
+the same canonical keys; the global-gap replay supplies $|G|$ and
+$|\cU|$, and the low-degree replay supplies $d_{\min}$.}
 \label{tab:fifteen-classes}
 \end{table}
 
@@ -1001,7 +1002,9 @@ that quotient $A_5$.
 \label{sec:why11}
 
 Call an arc $A$ \emph{conic-filling} if $\cU(A)=\mathcal Q(\F_q)$ for some
-nonsingular conic $\mathcal Q$. The conic-filling syndrome phenomenon of
+nonsingular conic $\mathcal Q$. Equivalently, its chords cover every point
+outside $A\cup\mathcal Q(\F_q)$ and no point of $\mathcal Q(\F_q)$.
+The conic-filling syndrome phenomenon of
 Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
 without a symmetry hypothesis on the arc. A universal chord-multiplicity
 identity and the passant window leave only $q=9,11$; the former is excluded
@@ -1293,10 +1296,10 @@ Decoding and support bipartition
 & \path{check_decoding.py}; \path{check_chirality.py};
 \path{check_code_automorphisms.py} \\
 Numerical gap and complete census
-& $1548$-representative frame-normalized enumeration \\
-Gap and low-degree loci
-& \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
-\path{check_low_degree_loci.py} \\
+& \path{check_global_conic_gap.py};
+$1548$-representative frame-normalized enumeration \\
+Low-degree loci
+& \path{check_low_degree_loci.py} \\
 Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula

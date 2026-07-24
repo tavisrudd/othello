@@ -37,6 +37,9 @@ clean replay are green.
 The final dependency audit explicitly attributes the Clebsch-only
 $c(A)=10$ value to Dye, restores the point-orbit subtraction, and uses that
 orbit proposition in the uncovered-conic proof.
+The closing copy-edit removes the unused discrepancy column and stale
+perturbation-checker reference and adds the exact secant-covering
+reformulation.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has

@@ -404,7 +404,7 @@ def components_by_row(
         ),
         58: (
             "Two exact replays share canonical class keys and regenerate every printed census field used by the proofs.",
-            [replay("complete fifteen-class census", ["check_global_conic_gap.py", "check_low_degree_loci.py"], frame_coverage, "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees.", frame_shared)],
+            [replay("complete fifteen-class census", ["check_global_conic_gap.py", "check_low_degree_loci.py"], frame_coverage, "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees.", frame_shared)],
         ),
     }
 

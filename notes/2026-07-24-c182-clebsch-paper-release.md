@@ -35,6 +35,10 @@ $A_5$ orbit table, and routes the conic identification through that orbit
 proposition.  The $K_2$ identification again immediately follows the
 displayed hexagon it names.
 
+The closing copy-edit records $t(A)=0$ for $k\le5$, removes the unused
+nearest-conic column and perturbation-checker reference, and states the exact
+secant-covering reformulation of conic filling.
+
 ## Verification
 
 - The universal identity and the $k=8$ sieve were independently rederived
