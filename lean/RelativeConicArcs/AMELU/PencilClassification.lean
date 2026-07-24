@@ -237,6 +237,31 @@ theorem samePencilYOrbit_iff_pencilZFromY_eq [Field 𝔽] {y v : 𝔽}
         _ = 1 * y⁻¹ := by rw [hvy]
         _ = y⁻¹ := one_mul _
 
+/-- The manuscript's exact algebraic quotient: on the admitted odd locus,
+`z(t)=z(u)` precisely when `y(u)` is one of
+`y(t), -y(t), y(t)⁻¹, -y(t)⁻¹`. -/
+theorem pencilZ_eq_iff_samePencilYOrbit [Field 𝔽] {t u : 𝔽}
+    (hodd : HasOddCharacteristic (𝔽 := 𝔽))
+    (ht : IsAdmittedNonGRSParameter t)
+    (hu : IsAdmittedNonGRSParameter u) :
+    pencilZ t = pencilZ u ↔ SamePencilYOrbit (pencilY t) (pencilY u) := by
+  have hyt : pencilY t ≠ 0 := by
+    exact div_ne_zero
+      (pow_ne_zero 2 (admitted_parameter_sub_one_ne_zero ht))
+      (admitted_parameter_ne_zero ht)
+  have hyu : pencilY u ≠ 0 := by
+    exact div_ne_zero
+      (pow_ne_zero 2 (admitted_parameter_sub_one_ne_zero hu))
+      (admitted_parameter_ne_zero hu)
+  rw [pencilZ_eq_pencilZFromY hodd ht,
+    pencilZ_eq_pencilZFromY hodd hu]
+  constructor
+  · intro hz
+    exact (samePencilYOrbit_iff_pencilZFromY_eq hodd hyt hyu).mpr hz.symm
+  · intro horbit
+    exact
+      ((samePencilYOrbit_iff_pencilZFromY_eq hodd hyt hyu).mp horbit).symm
+
 /-- Explicit inputs for the admitted-pencil classification.  Each field
 is a mathematical hypothesis with its quantifiers and direction exposed:
 arc nondegeneracy, construction of a projectivity from equal quotient
