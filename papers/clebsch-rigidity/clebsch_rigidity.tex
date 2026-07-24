@@ -491,11 +491,10 @@ or projective deep-hole syndrome, locus --- lies on a conic. It is
 \emph{not} the familiar condition that the arc $A$ itself
 lies on a conic, which is the standing hypothesis throughout the arc
 literature and which the Clebsch hexagon famously fails. The two are
-logically unrelated: they constrain different point sets, and the arcs
-satisfying them are disjoint. Lemma~\ref{lem:six-arc-line-bound} gives the
-exact four-value subcensus for six-arcs lying on a conic; in particular,
-none belongs to the Clebsch class in clause~(iii) of
-Theorem~\ref{thm:rigidity}.
+mutually exclusive for six-arcs in $\PG(2,11)$:
+Lemma~\ref{lem:six-arc-line-bound} gives the exact four-value subcensus for
+six-arcs lying on a conic, so none belongs to the Clebsch class in
+clause~(iii) of Theorem~\ref{thm:rigidity}.
 
 We first isolate the geometric input that removes degenerate conics from the
 computer-assisted part of the argument.
@@ -547,10 +546,6 @@ all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
 The final assertion is the conic-inscribed subcensus of the independent
 rigidity replay listed in Table~\ref{tab:replays}.
 \end{proof}
-
-The line bound and chord-defect identity are proved here and in
-Lemma~\ref{lem:chord-defect}; the equality classification is Dye's
-Theorem~1. No exhaustive search is used in this implication.
 
 \begin{theorem}[Rigidity theorem]
 \label{thm:rigidity}
@@ -659,10 +654,6 @@ columns, and the low-degree replay supplies $d_{\min}$.}
 The same census supports a strengthening in which a cubic, rather than a
 conic, is allowed.
 
-The replay evaluates every one of the fifteen projective classes in
-Table~\ref{tab:fifteen-classes}; the proof records the finite domain and
-acceptance criterion.
-
 \begin{proposition}[Low-degree algebraic rigidity]
 \label{prop:low-degree-rigidity}
 For a six-arc $A\subset\PG(2,11)$, the uncovered locus $\cU(A)$ is
@@ -737,10 +728,6 @@ Clebsch arc $A$ and its standard conic $\cC$, and put
  d_{\cC}(B)=|\cU(B)\mathbin{\triangle}\cC|
 \]
 for every embedded six-arc $B$.
-
-Clause~(a) is the complete frame-normalized census; clauses~(b) and~(c)
-enumerate, respectively, all projective classes and all one-point
-replacements of the displayed Clebsch arc.
 
 \begin{theorem}[Quantitative gaps]
 \label{thm:gap}
@@ -1064,13 +1051,18 @@ uses one of the fifteen perfect matchings of the six endpoints, and a fixed
 matching can be concurrent at only one point; hence $c(A)\le15$. The last
 display follows on setting $|\cU(A)|=q+1$.
 
-The standard conic counts give the displayed intersection array and hence
-identify $\Sigma$ as the Sylvester graph
-\cite[\S13.1.2]{BrouwerCohenNeumaier1989}; see also the combinatorial
-uniqueness proof in~\cite[Thm.~6]{JurisicVidali2019}. For distinct internal
-points, the only possible common neighbor is
-$P^\perp\cap Q^\perp=(PQ)^\perp$, which gives the asserted
-passant--distance correspondence. The final value is
+Counting internal points on polar lines and their intersections gives
+$b_0=5$, $b_1=4$, $b_2=2$, $c_1=c_2=1$, and $c_3=4$, hence the displayed
+intersection array. This is the Sylvester graph
+\cite[\S13.1.2]{BrouwerCohenNeumaier1989}; uniqueness for this intersection
+array is proved in~\cite[Thm.~6]{JurisicVidali2019}.
+
+For distinct internal points $P,Q$, put
+$R=P^\perp\cap Q^\perp=(PQ)^\perp$. If $PQ$ is passant, then its pole $R$
+is internal and adjacent to both $P$ and $Q$; since the intersection array
+has $a_1=0$, these vertices are at distance two. Conversely, a common
+neighbor of $P$ and $Q$ must equal $R$, so distance two makes the pole of
+$PQ$ internal and hence makes $PQ$ passant. The final value is
 $\operatorname{eq}_2(\Sigma)=5$ in
 \cite[Table~1]{AbiadJabalAmeliReijnders2025}.
 \end{proof}
@@ -1086,8 +1078,10 @@ Clebsch hexagon.
 \begin{proof}
 Lemma~\ref{lem:chord-defect} gives
 $c(A)=(q-6)(q-9)$ with $0\le c(A)\le15$. The prime-power condition therefore
-leaves only $q\in\{4,5,9,11\}$: the values at $7$ and $8$ are negative,
-while every integer $q\ge12$ gives $c(A)\ge18$.
+leaves only $q\in\{4,5,9,11\}$: at $q=2,3$ the displayed value is,
+respectively, $28$ and $18$; the values at $7$ and $8$ are negative;
+$6$ and $10$ are not prime powers; and every integer $q\ge12$ gives
+$c(A)\ge18$.
 
 At $q=4$, every six-arc is a hyperoval. Each point off it lies on three
 secants (count the six hyperoval points on the five lines through the
@@ -1164,9 +1158,6 @@ is what the factorization isolates at $q=11$.
 The chord moments also put the six-point theorem into a short classification
 for all smaller neighboring arc sizes.
 
-The chord-moment reduction is human and Lean-checked; the final
-$k=7$, $q\in\{11,13\}$ exclusion is an exact exhaustive replay.
-
 \begin{theorem}[Conic-filling loci for $4\le k\le7$]
 \label{thm:small-k-conic-filling}
 Let $A$ be a $k$-arc in $\PG(2,q)$, where $q$ is a prime power and
@@ -1239,13 +1230,13 @@ claims, mathematical input, kernel-checked formal proof, and exhaustive
 finite enumeration. Here
 ``kernel-checked'' means that Lean's trusted kernel checks the stated
 implication; executable replays instead enumerate the finite search space
-with exact arithmetic. The formal development is
-\url{https://github.com/tavisrudd/finitegeom} at commit
-\path{bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520}; it uses Lean
-4.32.0-rc1 and Mathlib commit
+with exact arithmetic. The formal source tree supplied with the release
+artifact is pinned at commit
+\path{bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520}; it uses Lean 4.32.0-rc1
+and Mathlib commit
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}. Manifest, release, and
 executable checker paths are relative to this paper root; Lean paths are
-relative to the shared Lean root.
+relative to the formal source root.
 These tables are the paper's consolidated proof-mode ledger; the theorem
 statements and proofs do not carry separate ``Proof mode'' tags.
 Table~\ref{tab:paper-one-claims} is the Paper~I claim/evidence map. Its
@@ -1253,6 +1244,20 @@ claim-by-claim manifest is \path{verification/trust_manifest.json}; the
 aggregate formal gate is
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}. The clean replay
 entry point is \path{verification/verify_release.py}.
+
+From the root of the archival Git-bundle clone, the exact replay command is
+\begin{verbatim}
+VERIFY=papers/clebsch-rigidity/verification/verify_release.py
+nix develop --command python3 "$VERIFY" --lean-root lean
+\end{verbatim}
+The SHA-256 digest of \path{verification/checker_outputs.json} is
+\begin{center}
+\small\path{d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56}.
+\end{center}
+The digest of the aggregate Lean gate is
+\begin{center}
+\small\path{dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69}.
+\end{center}
 \par
 \endgroup
 
@@ -1352,6 +1357,10 @@ The range $4\le k\le7$
 \caption{Mathematical and formal dependencies of the principal results.}
 \label{tab:verification}
 \end{table}
+
+The gap/low-degree result and the Clebsch-family formula have no Lean
+coverage. Their executable routes in Table~\ref{tab:replays} are
+load-bearing checks, not independent supplements to a formal proof.
 
 \begin{table}[H]
 \centering

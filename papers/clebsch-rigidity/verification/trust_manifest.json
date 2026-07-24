@@ -496,7 +496,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 509",
+      "paper_location": "source line 508",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -573,7 +573,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 555",
+      "paper_location": "source line 550",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -617,7 +617,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 666",
+      "paper_location": "source line 657",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -633,7 +633,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 691",
+      "paper_location": "source line 682",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -689,7 +689,7 @@
         "soundness_bridge": "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits."
       },
       "id": "thm-gap",
-      "paper_location": "source line 745",
+      "paper_location": "source line 732",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -705,7 +705,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 906",
+      "paper_location": "source line 893",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -786,7 +786,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 956",
+      "paper_location": "source line 943",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -845,7 +845,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 972",
+      "paper_location": "source line 959",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -954,7 +954,7 @@
         }
       ],
       "id": "lem-chord-defect",
-      "paper_location": "source line 1021",
+      "paper_location": "source line 1008",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1042,7 +1042,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1078",
+      "paper_location": "source line 1070",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1120,7 +1120,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1111",
+      "paper_location": "source line 1105",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1220,7 +1220,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1170",
+      "paper_location": "source line 1161",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1264,7 +1264,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 600",
+      "paper_location": "source line 595",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1282,9 +1282,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "e9e41e942f6d34bb9ee5ad68aaca9600aa68cf405927e46f49a113fc342251ba"
+    "sha256": "a200aa881f629b3d031ebf1e4d08eef41b39f4bfbaa55d3d769576450ceb6d84"
   },
-  "manuscript_sha256": "03cb354b9b306e90950798676a9cfaeb1618381c7def16c549ec036a2b35e5f5",
+  "manuscript_sha256": "40ec05a808b886f00ece06d3df94ae9c1f991d222a5fd553c1f50ba87203a533",
   "public_documents": [
     {
       "path": "README.md",
@@ -1324,7 +1324,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "17c7b0dd3e5a5a3602a40d8af9f9bf4729f1fd8bb01e89f08b0e6b314433e0ae"
+    "sha256": "df5c94bd4019eff0a4df8bf3d3a7a399de72c0b7862d116d592ecafe2a438be7"
   },
   "verify_all": {
     "checker_output_certificate": {
