@@ -49,9 +49,12 @@ and the terminal $k=7$ exclusions.
 
 The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS; the
 code has covering radius three. Its twelve projective deep-hole directions are the
-$\F_{11}$-points of a conic. A quadratic syndrome test is a complete
-distance oracle; its ambiguity data recover the classical Brianchon points,
-self-polar triangles, and an invariant support bipartition. The chord identity
+$\F_{11}$-points of a conic. Among nonzero syndromes outside the six arc
+columns, the quadratic test separates exactly the deep holes; together with
+the zero-syndrome and arc-column cases, it gives the complete distance oracle
+of Proposition~\ref{prop:decoding-oracle}. Its ambiguity data recover the
+classical Brianchon points, self-polar triangles, and an invariant support
+bipartition. The chord identity
 and the Sylvester graph show that $q=11$ is the only conic-filling field for
 six-arcs. For arc sizes four through seven, the only cases are a four-frame
 in $\PG(2,5)$ and the Clebsch hexagon.
@@ -132,11 +135,9 @@ arcs lie on normal rational curves; the code here is not GRS.
 stabilizer, and its complete-exterior-set interpretation are classical
 \cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. Sadeh classified the
 six-arcs of $\PG(2,11)$~\cite{SadehThesis1984}; we claim no priority for
-that census or its extension counts. The companion arcs paper records the
-single conic-locus identification of
-Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
-certificate~\cite[Prop.~8.7]{ArcsCompleteOutsideConic}; we reprove it for
-self-containment. The new contribution is the symmetry-free coding
+that census or its extension counts. We prove the conic-locus identification
+of Proposition~\ref{prop:deep-holes-conic} directly here. The new
+contribution is the symmetry-free coding
 criterion and its consequences: low-degree rigidity, quantitative gaps,
 leader-support bipartition, decoder reconstruction, and the finite-field boundary.
 
@@ -422,9 +423,6 @@ For a point $x\notin A$, its \emph{secant index} is the number of chords of
 $A$ through $x$; by the dictionary above, this is the number of
 weight-two leaders for each nonzero syndrome on the ray $x$.
 
-\noindent\emph{Proof mode: human derivation with an independent exact
-replay of the finite counts.}
-
 \begin{proposition}[Complete syndrome oracle and ambiguity enumerator]
 \label{prop:decoding-oracle}
 For $v\in\F_{11}^6$ with syndrome $s=Hv^{\mathsf T}$,
@@ -487,7 +485,7 @@ paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
 Clebsch hexagon uniquely, and does so in a way that recovers its projective
 stabilizer from the coding condition rather than assuming it.
 
-\begin{remark}[Two conditions, one word apart]
+\begin{lemma}[Conic-inscribed six-arcs]
 \label{rem:not-the-usual-condition}
 The condition studied here is that $\cU(A)$ --- the projective uncovered,
 or projective deep-hole syndrome, locus --- lies on a conic. It is
@@ -495,13 +493,17 @@ or projective deep-hole syndrome, locus --- lies on a conic. It is
 lies on a conic, which is the standing hypothesis throughout the arc
 literature and which the Clebsch hexagon famously fails. The two are
 logically unrelated: they constrain different point sets, and the arcs
-satisfying them are disjoint. Indeed every six-arc lying \emph{on} a conic in
-$\PG(2,11)$ has $|\cU(A)|\in\{18,19,20,22\}$; in particular, none belongs
+satisfying them are disjoint. More precisely, every six-arc lying
+\emph{on} a conic in $\PG(2,11)$ satisfies
+\[
+ |\cU(A)|\in\{18,19,20,22\}.
+\]
+In particular, none belongs
 to the Clebsch class in clause~(iii) of Theorem~\ref{thm:rigidity}. This
 four-value assertion is
 the conic-inscribed subcensus of the independent rigidity replay listed in
 Table~\ref{tab:replays}.
-\end{remark}
+\end{lemma}
 
 We first isolate the geometric input that removes degenerate conics from the
 computer-assisted part of the argument.
@@ -547,7 +549,6 @@ for odd $q$. Thus a disjoint line has at least six covered points, and in
 all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
 \end{proof}
 
-\noindent\emph{Proof mode: human proof with named cited input.}
 The line bound and chord-defect identity are proved here and in
 Lemma~\ref{lem:chord-defect}; the equality classification is Dye's
 Theorem~1. No exhaustive search is used in this implication.
@@ -577,11 +578,20 @@ of Lemma~\ref{lem:chord-defect} says
 \]
 where $c(A)$ is the number of nonvertex triple-edge concurrences. In Dye's
 terminology these are precisely the Brianchon points of the hexagon $A$.
-Over a field of characteristic different from two, Dye proves that a
-hexagon has at most ten Brianchon points and that the equality cases form a
+Over a field of characteristic different from two, Dye proves that every
+six-arc has at most ten Brianchon points and that the equality cases form a
 single $\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
-pp.~275--276]{Dye1991}. Hence $c(A)\le10$, so $|\cU(A)|\ge12$; equality
-holds throughout, $c(A)=10$, and $A$ is a Clebsch hexagon. This proves
+pp.~275--276]{Dye1991}. This bound has no symmetry, conic, or genericity
+hypothesis beyond the six-arc assumption. Hence $c(A)\le10$, so
+$|\cU(A)|\ge12$; equality holds throughout, $c(A)=10$, and $A$ is a
+Clebsch hexagon.
+
+The degenerate-conic branch is therefore vacuous. Indeed,
+Proposition~\ref{prop:deep-holes-conic} identifies $\cU(A)$ with the twelve
+rational points of a nonsingular conic. A degenerate conic cannot contain
+those same twelve points: it has no component in common with the
+nonsingular conic, so B\'ezout's theorem bounds their intersection by four.
+Thus the original containing conic is nonsingular. This proves
 (i)$\Rightarrow$(iii). Proposition~\ref{prop:deep-holes-conic} and
 projective equivariance give (iii)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
 stabilizer theorem also identifies the stabilizer in these equivalent
@@ -650,7 +660,6 @@ columns, and the low-degree replay supplies $d_{\min}$.}
 The same census supports a strengthening in which a cubic, rather than a
 conic, is allowed.
 
-\noindent\emph{Proof mode: exact exhaustive replay.}
 The replay evaluates every one of the fifteen projective classes in
 Table~\ref{tab:fifteen-classes}; the proof records the finite domain and
 acceptance criterion.
@@ -730,8 +739,6 @@ Clebsch arc $A$ and its standard conic $\cC$, and put
 \]
 for every embedded six-arc $B$.
 
-\noindent\emph{Proof mode: exact exhaustive replay after the conceptual
-rigidity theorem.}
 Clause~(a) is the complete frame-normalized census; clauses~(b) and~(c)
 enumerate, respectively, all projective classes and all one-point
 replacements of the displayed Clebsch arc.
@@ -963,9 +970,6 @@ identifies the ten triple concurrences with the ten Brianchon points and
 their chords with exactly the ten matchings complementary to the total.
 \end{proof}
 
-\noindent\emph{Proof mode: human proof from the Edge--Dye triangle
-geometry, with the support census independently replayed.}
-
 \begin{proposition}[Invariant support bipartition]
 \label{prop:invariant-support-bipartition}
 Only the bipartition is intrinsic: neither part has a canonical sign. The
@@ -1045,8 +1049,37 @@ matching can be concurrent at only one point; hence $c(A)\le15$. The last
 display follows on setting $|\cU(A)|=q+1$.
 \end{proof}
 
-\noindent\emph{Proof mode: human chord-moment argument with one named
-Sylvester bound; the small-field replay is an independent check.}
+\begin{lemma}[The Sylvester distance-two obstruction]
+\label{lem:sylvester-distance-two}
+Let $\cC$ be a nonsingular conic in $\PG(2,9)$, and let $\Sigma$ be the
+graph on the $36$ internal points in which
+\[
+ P\sim Q\quad\Longleftrightarrow\quad Q\in P^\perp
+\]
+for the conic polarity. Then $\Sigma$ is the Sylvester graph, with
+intersection array
+\[
+ \{5,4,2;1,1,4\}.
+\]
+For distinct internal points $P,Q$, the line $PQ$ is passant to $\cC$ if
+and only if $P$ and $Q$ are at distance two in $\Sigma$. The graph joining
+pairs at distance two in $\Sigma$ has clique number
+\[
+ \omega(\Sigma_2)=5.
+\]
+\end{lemma}
+
+\begin{proof}
+The standard conic counts give the displayed intersection array and hence
+identify $\Sigma$ as the Sylvester graph
+\cite[\S13.1.2]{BrouwerCohenNeumaier1989}; see also the combinatorial
+uniqueness proof in~\cite[Thm.~6]{JurisicVidali2019}. For distinct internal
+points, the only possible common neighbor is
+$P^\perp\cap Q^\perp=(PQ)^\perp$, which gives the asserted
+passant--distance correspondence. The final value is
+$\operatorname{eq}_2(\Sigma)=5$ in
+\cite[Table~1]{AbiadJabalAmeliReijnders2025}.
+\end{proof}
 
 \begin{theorem}[Uniqueness of $q=11$]
 \label{thm:why11}
@@ -1068,27 +1101,13 @@ point), so $\cU(A)$ is empty. At $q=5$, every six-arc is an oval and hence a
 nonsingular conic; the standard internal/external point counts show that
 every off-conic point lies on a secant, so again $\cU(A)$ is empty.
 
-It remains to exclude $q=9$. The argument has three steps: the six arc
-points must be internal to $\cC$; passant joins of internal points become
-distance-two pairs in the Sylvester graph; and that distance graph has
-clique number five. Since every point of $\cC$ is uncovered, no chord of
-$A$ meets $\cC$; every chord is therefore passant. A point off $\cC$ lies on five passants if it
-is internal and four if it is external; hence the five chords through each
-vertex force all six vertices of $A$ to be internal. Let $\Sigma$ be the graph
-on the $36$ internal points, with $P\sim Q$ when $Q\in P^\perp$ under the
-conic polarity. Standard conic counts give the intersection array
-\[
- \{5,4,2;1,1,4\},
-\]
-so $\Sigma$ is the Sylvester graph
-\cite[\S13.1.2]{BrouwerCohenNeumaier1989}; see also the combinatorial
-uniqueness proof in~\cite[Thm.~6]{JurisicVidali2019}. For distinct internal
-points, the unique possible common neighbor is
-$P^\perp\cap Q^\perp=(PQ)^\perp$; consequently $PQ$ is passant exactly when
-$P,Q$ are at distance two in $\Sigma$. Thus $A$ would be a six-clique in the
-graph joining pairs at distance exactly two in $\Sigma$. But its clique number, denoted
-$\operatorname{eq}_2(\Sigma)$ in
-\cite[Table~1]{AbiadJabalAmeliReijnders2025}, is five, a contradiction.
+It remains to exclude $q=9$. Since every point of $\cC$ is uncovered, no
+chord of $A$ meets $\cC$; every chord is therefore passant. A point off
+$\cC$ lies on five passants if it is internal and four if it is external,
+so the five chords through each vertex force all six vertices of $A$ to be
+internal. Lemma~\ref{lem:sylvester-distance-two} would then make $A$ a
+six-clique in the distance-two graph of the Sylvester graph, whose clique
+number is five. This is impossible.
 
 Therefore $q=11$. The final assertion follows from
 Theorem~\ref{thm:rigidity}, which puts every matching $q=11$ representative
@@ -1151,7 +1170,6 @@ is what the factorization isolates at $q=11$.
 The chord moments also put the six-point theorem into a short classification
 for all smaller neighboring arc sizes.
 
-\noindent\emph{Proof mode: mixed.}
 The chord-moment reduction is human and Lean-checked; the final
 $k=7$, $q\in\{11,13\}$ exclusion is an exact exhaustive replay.
 
@@ -1234,6 +1252,8 @@ with exact arithmetic. The formal development is
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}. Manifest, release, and
 executable checker paths are relative to this paper root; Lean paths are
 relative to the shared Lean root.
+These tables are the paper's consolidated proof-mode ledger; the theorem
+statements and proofs do not carry separate ``Proof mode'' tags.
 Table~\ref{tab:paper-one-claims} is the Paper~I claim/evidence map. Its
 claim-by-claim manifest is \path{verification/trust_manifest.json}; the
 aggregate formal gate is
@@ -1462,12 +1482,6 @@ D.~A.~Drake and K.~Keating,
 195--212.
 \newblock \url{https://doi.org/10.1023/B:DESI.0000015883.89954.80};
 arXiv:math/0202115.
-
-\bibitem{ArcsCompleteOutsideConic}
-T.~Rudd,
-\newblock Arcs complete outside a prescribed conic: a prescribed-hole
-defect identity and a certified classification over $\F_{16}$,
-\newblock working paper, 2026.
 
 \bibitem{ChengMurray2007}
 Q.~Cheng and E.~Murray,
