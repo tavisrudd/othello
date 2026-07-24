@@ -64,6 +64,40 @@ exploit either this tangent-derived contact structure or stability of this
 almost-few-intersection set.  An exact zero-defect classification alone cannot
 improve the asymptotic bound unless it supplies a quantitative stability gap.
 
+## Characteristic-two code bridge
+
+There is an elementary identity stronger than the generic few-weight-code
+translation.  Work over \(\mathbb F_2\), and write
+\(\mathbf 1_{a^*}\) for the incidence vector of the dual line corresponding
+to \(a\in A\).  At a dual point representing a primal line \(\ell\),
+\[
+ \sum_{a\in A}\mathbf 1_{a^*}(\ell)
+ =|A\cap\ell|\pmod2.
+\]
+An arc line contains zero, one, or two points of \(A\), so its odd
+intersection lines are exactly its tangents.  Therefore
+\[
+ \boxed{\quad
+ \mathbf 1_{\mathcal T_A}=\sum_{a\in A}\mathbf 1_{a^*}
+ \quad\text{in }\mathbb F_2^{q^2+q+1}. \quad}
+\]
+In particular \(\mathbf 1_{\mathcal T_A}\) belongs to the binary line code
+\(C_2(\PG(2,q)^*)\).  Its scalar product with a dual line \(x^*\) is
+\(\tau_A(x)\bmod2=k\bmod2\), both for \(x\notin A\) by
+\(k=2r(x)+\tau_A(x)\) and for \(x\in A\) because
+\(\tau_A(x)=q+2-k\).  Hence, for even \(q\),
+\[
+ \begin{cases}
+ \mathbf 1_{\mathcal T_A}\in C_2\cap C_2^\perp,&k\text{ even},\\
+ \mathbf 1_{\PG(2,q)^*\setminus\mathcal T_A}\in
+ C_2\cap C_2^\perp,&k\text{ odd},
+ \end{cases}
+\]
+using that the all-one vector belongs to \(C_2\).  The even-\(k\) hull word
+has exact weight \(k(q+2-k)\).  This supplies a precise code-classification
+target; it is not yet an obstruction, since existing hull weight ranges must
+be checked at the target scale \(k\asymp\sqrt{2q}\).
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -72,8 +106,9 @@ improve the asymptotic bound unless it supplies a quantitative stability gap.
 2. Derive the full line-intersection distribution and associated projective
    code weight enumerator, marking every consequence already equivalent to
    C554--C558.
-3. Test the first genuinely new feasibility constraints: dual-code
-   coefficients, polynomial/tangent-envelope identities, and any applicable
+3. Test the first genuinely new feasibility constraints: the binary
+   projective-plane code hull identity above, dual-code coefficients,
+   polynomial/tangent-envelope identities, and any applicable
    characteristic-two classification.
 4. **GO:** expose a carrier, forbidden spectrum, or quantitative positive
    defect on an infinite target family.  **NO-GO:** prove that the standard
@@ -95,3 +130,4 @@ hypotheses have been checked against this tangent-derived set.
 | Do ordinary incidence or Pless moments improve C558's arithmetic alternatives? | Likely no: the first two moments are the existing clique decomposition; higher code coefficients must be separated from automatic collinearity counts. |
 | Does tangent contact impose more than the abstract spectrum? | Open; this is the likely source of any genuine carrier obstruction. |
 | Can exact rigidity improve the asymptotic lower bound by itself? | No: a quantitative stability gap for the displayed weighted distance is required. |
+| Does the binary hull identity hit a classified weight range? | Open: the relevant word has weight \(k(q+2-k)\asymp q^{3/2}\), so small-weight results may not reach it. |
