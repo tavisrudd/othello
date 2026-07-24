@@ -782,6 +782,18 @@ residual-hypergraph rule and prove uniform escape-root membership without evalua
 Report+script+certificate:
 [`../2026-07-24-c80-strict-overload-kernel.md`](../2026-07-24-c80-strict-overload-kernel.md).
 
+**The first opponent-marked incidence compression is extracted (C80, 2026-07-24), but the head
+remains open.** The equivariant packet `Rmax(S,o)=argmin_p Ω(S+o+p)` contains a lower-`K_Ω` reply on
+all tested q11/q13 certified edges and 16,857/17,355 q17 edges; all 498 q17 failures are at selected
+size 4 or 6, while coverage is exact from size 8 onward. One q19 root reproduces the split
+(size 4: 116/148; size 6: 7,140/7,423; size 8: 21,743/21,743). Five elementary incidence-maximizing
+fallbacks leave twelve q17 transitions, each with a unique lower-kernel reply. The seven-coordinate
+marked incidence score has 25 value-mixed collisions, so a q17 lookup table is not a uniform packet.
+Next: canonicalize the twelve exceptions under the marked-state stabilizer and prove or falsify an
+exchange/orbit-intersection lemma for `Rmax` on a structurally defined bulk family. C82 stays gated.
+Report+certificate:
+[`../2026-07-24-c80-incidence-packet-compression.md`](../2026-07-24-c80-incidence-packet-compression.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -811,10 +823,13 @@ Priority order and why:
    `capOK` does not force P. Total capacity-two overload `Ω` is the exact absorption clock.
    The canonical maximal strict-overload family `K_Ω` is now defined value-independently from the
    `Y_NK` boundary; well-founded induction proves it P, and exact q=5/7/13/17 gates pass. The live
-   frontier is geometric compression: extract an opponent-marked incidence/residual-hypergraph
-   response packet from the q17 kernel certificate and prove the chosen odd-q escape child belongs
-   to `K_Ω` uniformly. Recursive membership alone does not release C82. Do not spend another probe
-   on a bounded-depth witness selector, bounded-gadget patch, or bounded-dimensional terminal guard.
+   first geometric compression is `Rmax`, the maximal-overload-drop packet: it is exact on the
+   tested q11/q13 bulk and from selected size 8 onward at q17 and one q19 root, but it misses the
+   size-4/6 head. Twelve q17 marked transitions evade the union of five elementary incidence
+   maxima. Canonicalize those exceptions under the marked stabilizer, then prove or falsify a bulk
+   exchange/orbit-intersection lemma for `Rmax`; only a uniform head+bulk membership proof releases
+   C82. Do not spend another probe on a bounded-depth witness selector, bounded-gadget patch, or
+   bounded-dimensional terminal guard.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

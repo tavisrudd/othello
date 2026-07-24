@@ -1,0 +1,1816 @@
+{
+  "orders": [
+    {
+      "certified_positive_overload_states": 135,
+      "chosen_score_maxima": {
+        "legal_kills": {
+          "count": 2021,
+          "of": 2720
+        },
+        "max_line_load_through_reply": {
+          "count": 699,
+          "of": 2720
+        },
+        "negative_target_legal": {
+          "count": 2021,
+          "of": 2720
+        },
+        "omega_drop": {
+          "count": 2720,
+          "of": 2720
+        },
+        "opponent_reply_line_legal": {
+          "count": 1580,
+          "of": 2720
+        },
+        "overload_mass_through_reply": {
+          "count": 2670,
+          "of": 2720
+        },
+        "overloaded_lines_through_reply": {
+          "count": 2670,
+          "of": 2720
+        }
+      },
+      "chosen_score_ranks": {
+        "legal_kills:rank=1": 2021,
+        "legal_kills:rank=2": 543,
+        "legal_kills:rank=3": 156,
+        "max_line_load_through_reply:rank=1": 699,
+        "max_line_load_through_reply:rank=2": 2021,
+        "negative_target_legal:rank=1": 2021,
+        "negative_target_legal:rank=2": 543,
+        "negative_target_legal:rank=3": 156,
+        "omega_drop:rank=1": 2720,
+        "opponent_reply_line_legal:rank=1": 1580,
+        "opponent_reply_line_legal:rank=2": 1140,
+        "overload_mass_through_reply:rank=1": 2670,
+        "overload_mass_through_reply:rank=2": 50,
+        "overloaded_lines_through_reply:rank=1": 2670,
+        "overloaded_lines_through_reply:rank=2": 50
+      },
+      "max_drop_packet": {
+        "best_kernel_drop_deficit_histogram": {
+          "0": 2720
+        },
+        "best_kernel_drop_rank_histogram": {
+          "1": 2720
+        },
+        "edges_with_kernel_member": 2720,
+        "failures_by_selected_size": {},
+        "fallback_coverage_patterns": {},
+        "fallback_score_maximum_coverage": {
+          "legal_kills": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "max_line_load_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "negative_target_legal": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "opponent_reply_line_legal": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "overload_mass_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "overloaded_lines_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          }
+        },
+        "first_failures": [],
+        "global_score_vectors": {
+          "failure_transitions_covered_by_pure_kernel_vector": 0,
+          "mixed": 0,
+          "most_used_pure_kernel_vectors": [],
+          "pure_kernel": 0,
+          "pure_nonkernel": 0,
+          "total": 0
+        },
+        "kernel_member_count_histogram": {
+          "1": 210,
+          "2": 900,
+          "3": 50,
+          "4": 300,
+          "5": 150,
+          "6": 210,
+          "7": 900
+        },
+        "local_score_class_status": {},
+        "packet_size_histogram": {
+          "11": 60,
+          "12": 50,
+          "4": 450,
+          "5": 300,
+          "6": 210,
+          "7": 1650
+        },
+        "uncovered_fallbacks": []
+      },
+      "opponent_omega_drop": {
+        "10": 2670,
+        "9": 50
+      },
+      "opponent_reply_line_profile": {
+        "selected_load=0,parent_legal=2,child_legal=1": 1200,
+        "selected_load=0,parent_legal=3,child_legal=2": 1247,
+        "selected_load=0,parent_legal=4,child_legal=3": 234,
+        "selected_load=0,parent_legal=6,child_legal=5": 39
+      },
+      "q": 11,
+      "response_edges": 2720,
+      "roots": 135
+    },
+    {
+      "certified_positive_overload_states": 32,
+      "chosen_score_maxima": {
+        "legal_kills": {
+          "count": 171,
+          "of": 355
+        },
+        "max_line_load_through_reply": {
+          "count": 259,
+          "of": 355
+        },
+        "negative_target_legal": {
+          "count": 171,
+          "of": 355
+        },
+        "omega_drop": {
+          "count": 324,
+          "of": 355
+        },
+        "opponent_reply_line_legal": {
+          "count": 237,
+          "of": 355
+        },
+        "overload_mass_through_reply": {
+          "count": 205,
+          "of": 355
+        },
+        "overloaded_lines_through_reply": {
+          "count": 208,
+          "of": 355
+        }
+      },
+      "chosen_score_ranks": {
+        "legal_kills:rank=1": 171,
+        "legal_kills:rank=2": 64,
+        "legal_kills:rank=3": 28,
+        "legal_kills:rank=4": 31,
+        "legal_kills:rank=5": 30,
+        "legal_kills:rank=6": 8,
+        "legal_kills:rank=7": 10,
+        "legal_kills:rank=8": 13,
+        "max_line_load_through_reply:rank=1": 259,
+        "max_line_load_through_reply:rank=2": 67,
+        "max_line_load_through_reply:rank=3": 25,
+        "max_line_load_through_reply:rank=4": 4,
+        "negative_target_legal:rank=1": 171,
+        "negative_target_legal:rank=2": 64,
+        "negative_target_legal:rank=3": 28,
+        "negative_target_legal:rank=4": 31,
+        "negative_target_legal:rank=5": 30,
+        "negative_target_legal:rank=6": 8,
+        "negative_target_legal:rank=7": 10,
+        "negative_target_legal:rank=8": 13,
+        "omega_drop:rank=1": 324,
+        "omega_drop:rank=2": 24,
+        "omega_drop:rank=3": 7,
+        "opponent_reply_line_legal:rank=1": 237,
+        "opponent_reply_line_legal:rank=2": 70,
+        "opponent_reply_line_legal:rank=3": 32,
+        "opponent_reply_line_legal:rank=4": 16,
+        "overload_mass_through_reply:rank=1": 205,
+        "overload_mass_through_reply:rank=2": 44,
+        "overload_mass_through_reply:rank=3": 70,
+        "overload_mass_through_reply:rank=4": 33,
+        "overload_mass_through_reply:rank=5": 3,
+        "overloaded_lines_through_reply:rank=1": 208,
+        "overloaded_lines_through_reply:rank=2": 52,
+        "overloaded_lines_through_reply:rank=3": 67,
+        "overloaded_lines_through_reply:rank=4": 27,
+        "overloaded_lines_through_reply:rank=5": 1
+      },
+      "max_drop_packet": {
+        "best_kernel_drop_deficit_histogram": {
+          "0": 355
+        },
+        "best_kernel_drop_rank_histogram": {
+          "1": 355
+        },
+        "edges_with_kernel_member": 355,
+        "failures_by_selected_size": {},
+        "fallback_coverage_patterns": {},
+        "fallback_score_maximum_coverage": {
+          "legal_kills": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "max_line_load_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "negative_target_legal": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "opponent_reply_line_legal": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "overload_mass_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          },
+          "overloaded_lines_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 0,
+            "of_failures": 0
+          }
+        },
+        "first_failures": [],
+        "global_score_vectors": {
+          "failure_transitions_covered_by_pure_kernel_vector": 0,
+          "mixed": 0,
+          "most_used_pure_kernel_vectors": [],
+          "pure_kernel": 0,
+          "pure_nonkernel": 0,
+          "total": 0
+        },
+        "kernel_member_count_histogram": {
+          "1": 54,
+          "12": 6,
+          "13": 6,
+          "2": 69,
+          "3": 78,
+          "4": 73,
+          "5": 32,
+          "6": 21,
+          "7": 11,
+          "8": 2,
+          "9": 3
+        },
+        "local_score_class_status": {},
+        "packet_size_histogram": {
+          "1": 33,
+          "11": 12,
+          "12": 4,
+          "13": 12,
+          "14": 25,
+          "15": 12,
+          "16": 29,
+          "17": 50,
+          "18": 17,
+          "19": 8,
+          "2": 52,
+          "20": 14,
+          "22": 1,
+          "3": 49,
+          "4": 16,
+          "6": 9,
+          "9": 12
+        },
+        "uncovered_fallbacks": []
+      },
+      "opponent_omega_drop": {
+        "1": 81,
+        "100": 1,
+        "101": 3,
+        "102": 6,
+        "103": 8,
+        "104": 6,
+        "105": 2,
+        "106": 2,
+        "2": 78,
+        "62": 12,
+        "63": 20,
+        "66": 4,
+        "77": 2,
+        "80": 6,
+        "81": 6,
+        "82": 8,
+        "83": 12,
+        "84": 2,
+        "85": 4,
+        "86": 24,
+        "87": 12,
+        "89": 2,
+        "90": 2,
+        "93": 7,
+        "94": 5,
+        "95": 2,
+        "96": 3,
+        "97": 10,
+        "98": 6,
+        "99": 19
+      },
+      "opponent_reply_line_profile": {
+        "selected_load=0,parent_legal=2,child_legal=1": 101,
+        "selected_load=0,parent_legal=3,child_legal=2": 140,
+        "selected_load=0,parent_legal=4,child_legal=3": 54,
+        "selected_load=0,parent_legal=5,child_legal=4": 25,
+        "selected_load=0,parent_legal=6,child_legal=5": 33,
+        "selected_load=0,parent_legal=8,child_legal=7": 2
+      },
+      "q": 13,
+      "response_edges": 355,
+      "roots": 5
+    },
+    {
+      "certified_positive_overload_states": 1083,
+      "chosen_score_maxima": {
+        "legal_kills": {
+          "count": 6170,
+          "of": 17355
+        },
+        "max_line_load_through_reply": {
+          "count": 8899,
+          "of": 17355
+        },
+        "negative_target_legal": {
+          "count": 6170,
+          "of": 17355
+        },
+        "omega_drop": {
+          "count": 16040,
+          "of": 17355
+        },
+        "opponent_reply_line_legal": {
+          "count": 9186,
+          "of": 17355
+        },
+        "overload_mass_through_reply": {
+          "count": 8131,
+          "of": 17355
+        },
+        "overloaded_lines_through_reply": {
+          "count": 8280,
+          "of": 17355
+        }
+      },
+      "chosen_score_ranks": {
+        "legal_kills:rank=1": 6170,
+        "legal_kills:rank=10": 33,
+        "legal_kills:rank=11": 7,
+        "legal_kills:rank=12": 2,
+        "legal_kills:rank=2": 2976,
+        "legal_kills:rank=3": 3111,
+        "legal_kills:rank=4": 2456,
+        "legal_kills:rank=5": 1445,
+        "legal_kills:rank=6": 714,
+        "legal_kills:rank=7": 276,
+        "legal_kills:rank=8": 79,
+        "legal_kills:rank=9": 86,
+        "max_line_load_through_reply:rank=1": 8899,
+        "max_line_load_through_reply:rank=2": 7146,
+        "max_line_load_through_reply:rank=3": 1252,
+        "max_line_load_through_reply:rank=4": 55,
+        "max_line_load_through_reply:rank=5": 3,
+        "negative_target_legal:rank=1": 6170,
+        "negative_target_legal:rank=10": 33,
+        "negative_target_legal:rank=11": 7,
+        "negative_target_legal:rank=12": 2,
+        "negative_target_legal:rank=2": 2976,
+        "negative_target_legal:rank=3": 3111,
+        "negative_target_legal:rank=4": 2456,
+        "negative_target_legal:rank=5": 1445,
+        "negative_target_legal:rank=6": 714,
+        "negative_target_legal:rank=7": 276,
+        "negative_target_legal:rank=8": 79,
+        "negative_target_legal:rank=9": 86,
+        "omega_drop:rank=1": 16040,
+        "omega_drop:rank=10": 33,
+        "omega_drop:rank=11": 21,
+        "omega_drop:rank=12": 20,
+        "omega_drop:rank=13": 18,
+        "omega_drop:rank=14": 34,
+        "omega_drop:rank=15": 14,
+        "omega_drop:rank=16": 29,
+        "omega_drop:rank=17": 19,
+        "omega_drop:rank=18": 25,
+        "omega_drop:rank=19": 19,
+        "omega_drop:rank=2": 789,
+        "omega_drop:rank=20": 27,
+        "omega_drop:rank=21": 7,
+        "omega_drop:rank=22": 15,
+        "omega_drop:rank=23": 17,
+        "omega_drop:rank=24": 16,
+        "omega_drop:rank=25": 16,
+        "omega_drop:rank=26": 6,
+        "omega_drop:rank=27": 6,
+        "omega_drop:rank=28": 1,
+        "omega_drop:rank=29": 5,
+        "omega_drop:rank=3": 60,
+        "omega_drop:rank=30": 4,
+        "omega_drop:rank=32": 1,
+        "omega_drop:rank=4": 23,
+        "omega_drop:rank=5": 27,
+        "omega_drop:rank=6": 8,
+        "omega_drop:rank=7": 18,
+        "omega_drop:rank=8": 18,
+        "omega_drop:rank=9": 19,
+        "opponent_reply_line_legal:rank=1": 9186,
+        "opponent_reply_line_legal:rank=2": 5375,
+        "opponent_reply_line_legal:rank=3": 2594,
+        "opponent_reply_line_legal:rank=4": 175,
+        "opponent_reply_line_legal:rank=5": 24,
+        "opponent_reply_line_legal:rank=6": 1,
+        "overload_mass_through_reply:rank=1": 8131,
+        "overload_mass_through_reply:rank=10": 28,
+        "overload_mass_through_reply:rank=11": 11,
+        "overload_mass_through_reply:rank=12": 1,
+        "overload_mass_through_reply:rank=13": 1,
+        "overload_mass_through_reply:rank=14": 1,
+        "overload_mass_through_reply:rank=2": 5709,
+        "overload_mass_through_reply:rank=3": 2601,
+        "overload_mass_through_reply:rank=4": 539,
+        "overload_mass_through_reply:rank=5": 87,
+        "overload_mass_through_reply:rank=6": 104,
+        "overload_mass_through_reply:rank=7": 56,
+        "overload_mass_through_reply:rank=8": 68,
+        "overload_mass_through_reply:rank=9": 18,
+        "overloaded_lines_through_reply:rank=1": 8280,
+        "overloaded_lines_through_reply:rank=2": 6029,
+        "overloaded_lines_through_reply:rank=3": 2774,
+        "overloaded_lines_through_reply:rank=4": 232,
+        "overloaded_lines_through_reply:rank=5": 40
+      },
+      "max_drop_packet": {
+        "best_kernel_drop_deficit_histogram": {
+          "0": 16857,
+          "1": 112,
+          "10": 26,
+          "11": 12,
+          "12": 11,
+          "13": 22,
+          "14": 6,
+          "15": 8,
+          "16": 10,
+          "17": 10,
+          "18": 6,
+          "2": 44,
+          "20": 12,
+          "22": 4,
+          "23": 12,
+          "24": 12,
+          "3": 10,
+          "31": 4,
+          "4": 77,
+          "6": 26,
+          "7": 24,
+          "8": 38,
+          "9": 12
+        },
+        "best_kernel_drop_rank_histogram": {
+          "1": 16857,
+          "10": 30,
+          "11": 4,
+          "12": 16,
+          "13": 8,
+          "15": 6,
+          "16": 4,
+          "18": 22,
+          "19": 4,
+          "2": 201,
+          "20": 12,
+          "26": 4,
+          "3": 43,
+          "4": 65,
+          "5": 20,
+          "6": 15,
+          "7": 22,
+          "8": 14,
+          "9": 8
+        },
+        "edges_with_kernel_member": 16857,
+        "failures_by_selected_size": {
+          "4": 401,
+          "6": 97
+        },
+        "fallback_coverage_patterns": {
+          "legal_kills+max_line_load_through_reply+negative_target_legal": 4,
+          "legal_kills+max_line_load_through_reply+negative_target_legal+opponent_reply_line_legal": 16,
+          "legal_kills+negative_target_legal": 6,
+          "legal_kills+negative_target_legal+opponent_reply_line_legal": 10,
+          "legal_kills+overload_mass_through_reply+overloaded_lines_through_reply+max_line_load_through_reply+negative_target_legal": 4,
+          "legal_kills+overload_mass_through_reply+overloaded_lines_through_reply+max_line_load_through_reply+negative_target_legal+opponent_reply_line_legal": 22,
+          "legal_kills+overloaded_lines_through_reply+max_line_load_through_reply+negative_target_legal+opponent_reply_line_legal": 21,
+          "legal_kills+overloaded_lines_through_reply+negative_target_legal+opponent_reply_line_legal": 5,
+          "max_line_load_through_reply": 27,
+          "max_line_load_through_reply+opponent_reply_line_legal": 86,
+          "none": 12,
+          "opponent_reply_line_legal": 45,
+          "overload_mass_through_reply+overloaded_lines_through_reply": 3,
+          "overload_mass_through_reply+overloaded_lines_through_reply+max_line_load_through_reply": 11,
+          "overload_mass_through_reply+overloaded_lines_through_reply+max_line_load_through_reply+opponent_reply_line_legal": 52,
+          "overload_mass_through_reply+overloaded_lines_through_reply+opponent_reply_line_legal": 4,
+          "overloaded_lines_through_reply": 24,
+          "overloaded_lines_through_reply+max_line_load_through_reply": 14,
+          "overloaded_lines_through_reply+max_line_load_through_reply+opponent_reply_line_legal": 66,
+          "overloaded_lines_through_reply+opponent_reply_line_legal": 66
+        },
+        "fallback_score_maximum_coverage": {
+          "legal_kills": {
+            "all_members_in_kernel": 29,
+            "has_kernel_member": 88,
+            "of_failures": 498
+          },
+          "max_line_load_through_reply": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 323,
+            "of_failures": 498
+          },
+          "negative_target_legal": {
+            "all_members_in_kernel": 29,
+            "has_kernel_member": 88,
+            "of_failures": 498
+          },
+          "opponent_reply_line_legal": {
+            "all_members_in_kernel": 0,
+            "has_kernel_member": 393,
+            "of_failures": 498
+          },
+          "overload_mass_through_reply": {
+            "all_members_in_kernel": 28,
+            "has_kernel_member": 96,
+            "of_failures": 498
+          },
+          "overloaded_lines_through_reply": {
+            "all_members_in_kernel": 3,
+            "has_kernel_member": 292,
+            "of_failures": 498
+          }
+        },
+        "first_failures": [
+          {
+            "child_omega": 254,
+            "chosen_drop": 746,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 0,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 731,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 1,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 747,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 8,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 254,
+            "chosen_drop": 738,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 9,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 740,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 10,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 254,
+            "chosen_drop": 731,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 12,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 254,
+            "chosen_drop": 754,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 14,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 736,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 16,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 731,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 17,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 252,
+            "chosen_drop": 738,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 18,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 266,
+            "chosen_drop": 747,
+            "maximum_drop": 751,
+            "old_omega": 772,
+            "opponent": 21,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 292,
+            "chosen_drop": 748,
+            "maximum_drop": 752,
+            "old_omega": 772,
+            "opponent": 25,
+            "packet_size": 3,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 254,
+            "chosen_drop": 746,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 27,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 266,
+            "chosen_drop": 736,
+            "maximum_drop": 751,
+            "old_omega": 772,
+            "opponent": 28,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 266,
+            "chosen_drop": 736,
+            "maximum_drop": 751,
+            "old_omega": 772,
+            "opponent": 29,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 740,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 34,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 730,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 35,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 266,
+            "chosen_drop": 744,
+            "maximum_drop": 751,
+            "old_omega": 772,
+            "opponent": 38,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 247,
+            "chosen_drop": 728,
+            "maximum_drop": 750,
+            "old_omega": 772,
+            "opponent": 39,
+            "packet_size": 2,
+            "state": 2854495385411919767070749947823855818787258368
+          },
+          {
+            "child_omega": 252,
+            "chosen_drop": 733,
+            "maximum_drop": 758,
+            "old_omega": 772,
+            "opponent": 43,
+            "packet_size": 1,
+            "state": 2854495385411919767070749947823855818787258368
+          }
+        ],
+        "global_score_vectors": {
+          "failure_transitions_covered_by_pure_kernel_vector": 498,
+          "mixed": 25,
+          "most_used_pure_kernel_vectors": [
+            {
+              "scores": [
+                727,
+                25,
+                21,
+                9,
+                6,
+                -32,
+                4
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                747,
+                31,
+                16,
+                8,
+                6,
+                -26,
+                7
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                738,
+                29,
+                17,
+                8,
+                6,
+                -28,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                744,
+                30,
+                17,
+                8,
+                6,
+                -27,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                736,
+                28,
+                18,
+                9,
+                5,
+                -29,
+                7
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                739,
+                28,
+                18,
+                10,
+                6,
+                -29,
+                7
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                740,
+                30,
+                17,
+                10,
+                5,
+                -27,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                733,
+                27,
+                19,
+                9,
+                5,
+                -30,
+                5
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                731,
+                26,
+                20,
+                7,
+                8,
+                -31,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                728,
+                27,
+                19,
+                9,
+                6,
+                -30,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                730,
+                26,
+                20,
+                9,
+                6,
+                -31,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                742,
+                29,
+                17,
+                8,
+                6,
+                -28,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                740,
+                30,
+                16,
+                8,
+                5,
+                -27,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                748,
+                33,
+                13,
+                7,
+                5,
+                -24,
+                6
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                744,
+                30,
+                18,
+                7,
+                6,
+                -29,
+                9
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                747,
+                33,
+                16,
+                8,
+                5,
+                -26,
+                7
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                728,
+                28,
+                20,
+                9,
+                5,
+                -31,
+                4
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                736,
+                29,
+                19,
+                10,
+                6,
+                -30,
+                7
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                736,
+                30,
+                18,
+                10,
+                5,
+                -29,
+                5
+              ],
+              "transitions": 24
+            },
+            {
+              "scores": [
+                736,
+                30,
+                19,
+                10,
+                6,
+                -29,
+                7
+              ],
+              "transitions": 24
+            }
+          ],
+          "pure_kernel": 388,
+          "pure_nonkernel": 3551,
+          "total": 3964
+        },
+        "kernel_member_count_histogram": {
+          "0": 498,
+          "1": 3108,
+          "10": 148,
+          "11": 41,
+          "12": 13,
+          "13": 60,
+          "14": 1,
+          "16": 4,
+          "17": 4,
+          "2": 4181,
+          "21": 6,
+          "3": 3306,
+          "4": 2306,
+          "5": 1740,
+          "6": 907,
+          "7": 510,
+          "8": 389,
+          "9": 133
+        },
+        "local_score_class_status": {
+          "has_pure_good=True,all_good_pure=False": 23,
+          "has_pure_good=True,all_good_pure=True": 475
+        },
+        "packet_size_histogram": {
+          "1": 1079,
+          "10": 1971,
+          "11": 2422,
+          "12": 2495,
+          "13": 1837,
+          "14": 959,
+          "15": 556,
+          "16": 324,
+          "17": 98,
+          "18": 27,
+          "19": 47,
+          "2": 1521,
+          "20": 6,
+          "21": 6,
+          "22": 1,
+          "3": 991,
+          "4": 216,
+          "5": 94,
+          "6": 121,
+          "7": 353,
+          "8": 759,
+          "9": 1472
+        },
+        "uncovered_fallbacks": [
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  1,
+                  1
+                ],
+                "kind": "conic",
+                "scores": [
+                  43,
+                  5,
+                  0,
+                  0,
+                  2,
+                  -5,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              16,
+              8
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              6,
+              7,
+              8,
+              14
+            ],
+            "selected_intruder_cells": [
+              [
+                2,
+                0
+              ],
+              [
+                10,
+                16
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  3,
+                  6
+                ],
+                "kind": "conic",
+                "scores": [
+                  43,
+                  5,
+                  0,
+                  0,
+                  2,
+                  -5,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              13,
+              2
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              6,
+              7,
+              8,
+              14
+            ],
+            "selected_intruder_cells": [
+              [
+                1,
+                4
+              ],
+              [
+                11,
+                7
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  11,
+                  14
+                ],
+                "kind": "conic",
+                "scores": [
+                  43,
+                  5,
+                  0,
+                  0,
+                  2,
+                  -5,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              2,
+              7
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              6,
+              7,
+              8,
+              14
+            ],
+            "selected_intruder_cells": [
+              [
+                1,
+                2
+              ],
+              [
+                15,
+                1
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  2,
+                  14
+                ],
+                "kind": "intruder",
+                "scores": [
+                  41,
+                  8,
+                  0,
+                  0,
+                  2,
+                  -5,
+                  4
+                ]
+              }
+            ],
+            "opponent_cell": [
+              11,
+              4
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              4,
+              5,
+              7,
+              15
+            ],
+            "selected_intruder_cells": [
+              [
+                1,
+                16
+              ],
+              [
+                13,
+                2
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  2,
+                  6
+                ],
+                "kind": "intruder",
+                "scores": [
+                  41,
+                  8,
+                  0,
+                  0,
+                  2,
+                  -5,
+                  4
+                ]
+              }
+            ],
+            "opponent_cell": [
+              10,
+              9
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              4,
+              5,
+              7,
+              15
+            ],
+            "selected_intruder_cells": [
+              [
+                0,
+                2
+              ],
+              [
+                14,
+                1
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  1,
+                  0
+                ],
+                "kind": "intruder",
+                "scores": [
+                  39,
+                  4,
+                  0,
+                  0,
+                  2,
+                  -3,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              2,
+              9
+            ],
+            "opponent_kind": "conic",
+            "selected_conic_parameters": [
+              4,
+              5,
+              7,
+              15
+            ],
+            "selected_intruder_cells": [
+              [
+                0,
+                6
+              ],
+              [
+                16,
+                10
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  7,
+                  1
+                ],
+                "kind": "intruder",
+                "scores": [
+                  780,
+                  25,
+                  21,
+                  10,
+                  6,
+                  -32,
+                  5
+                ]
+              }
+            ],
+            "opponent_cell": [
+              4,
+              0
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [],
+            "selected_size": 4
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  4,
+                  10
+                ],
+                "kind": "intruder",
+                "scores": [
+                  780,
+                  25,
+                  21,
+                  10,
+                  6,
+                  -32,
+                  5
+                ]
+              }
+            ],
+            "opponent_cell": [
+              5,
+              0
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [],
+            "selected_size": 4
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  4,
+                  10
+                ],
+                "kind": "intruder",
+                "scores": [
+                  780,
+                  25,
+                  21,
+                  10,
+                  6,
+                  -32,
+                  5
+                ]
+              }
+            ],
+            "opponent_cell": [
+              8,
+              14
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [],
+            "selected_size": 4
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  7,
+                  1
+                ],
+                "kind": "intruder",
+                "scores": [
+                  780,
+                  25,
+                  21,
+                  10,
+                  6,
+                  -32,
+                  5
+                ]
+              }
+            ],
+            "opponent_cell": [
+              11,
+              9
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [],
+            "selected_size": 4
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  12,
+                  15
+                ],
+                "kind": "intruder",
+                "scores": [
+                  39,
+                  4,
+                  0,
+                  0,
+                  2,
+                  -3,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              10,
+              5
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [
+              [
+                0,
+                13
+              ],
+              [
+                4,
+                12
+              ]
+            ],
+            "selected_size": 6
+          },
+          {
+            "good_replies": [
+              {
+                "cell": [
+                  8,
+                  7
+                ],
+                "kind": "intruder",
+                "scores": [
+                  39,
+                  4,
+                  0,
+                  0,
+                  2,
+                  -3,
+                  2
+                ]
+              }
+            ],
+            "opponent_cell": [
+              1,
+              3
+            ],
+            "opponent_kind": "intruder",
+            "selected_conic_parameters": [
+              13,
+              14,
+              15,
+              16
+            ],
+            "selected_intruder_cells": [
+              [
+                0,
+                6
+              ],
+              [
+                11,
+                2
+              ]
+            ],
+            "selected_size": 6
+          }
+        ]
+      },
+      "opponent_omega_drop": {
+        "1": 2948,
+        "11": 14,
+        "12": 36,
+        "13": 5,
+        "15": 36,
+        "16": 44,
+        "17": 128,
+        "18": 212,
+        "19": 124,
+        "2": 331,
+        "20": 206,
+        "21": 181,
+        "22": 133,
+        "23": 233,
+        "24": 347,
+        "25": 419,
+        "26": 291,
+        "27": 391,
+        "28": 437,
+        "29": 343,
+        "3": 70,
+        "30": 634,
+        "31": 524,
+        "32": 626,
+        "33": 496,
+        "34": 547,
+        "35": 486,
+        "36": 509,
+        "37": 451,
+        "38": 441,
+        "39": 492,
+        "4": 64,
+        "40": 611,
+        "41": 594,
+        "42": 472,
+        "43": 429,
+        "44": 360,
+        "45": 317,
+        "46": 259,
+        "47": 259,
+        "48": 237,
+        "480": 4,
+        "49": 141,
+        "499": 6,
+        "50": 148,
+        "500": 3,
+        "501": 3,
+        "506": 26,
+        "508": 2,
+        "51": 115,
+        "517": 6,
+        "518": 12,
+        "52": 136,
+        "520": 28,
+        "521": 6,
+        "523": 5,
+        "524": 14,
+        "525": 27,
+        "526": 4,
+        "527": 14,
+        "529": 18,
+        "53": 102,
+        "531": 16,
+        "533": 32,
+        "534": 10,
+        "535": 6,
+        "536": 12,
+        "537": 4,
+        "538": 12,
+        "539": 9,
+        "54": 152,
+        "540": 6,
+        "541": 12,
+        "542": 5,
+        "543": 10,
+        "544": 29,
+        "545": 10,
+        "546": 12,
+        "547": 2,
+        "548": 2,
+        "549": 2,
+        "55": 100,
+        "550": 4,
+        "551": 12,
+        "552": 11,
+        "553": 4,
+        "554": 4,
+        "555": 8,
+        "56": 75,
+        "560": 4,
+        "561": 12,
+        "562": 4,
+        "563": 9,
+        "564": 4,
+        "565": 8,
+        "566": 6,
+        "567": 8,
+        "568": 2,
+        "57": 34,
+        "570": 6,
+        "573": 8,
+        "574": 8,
+        "575": 6,
+        "577": 6,
+        "58": 15,
+        "581": 4,
+        "582": 4,
+        "586": 2,
+        "59": 9,
+        "6": 2,
+        "60": 28,
+        "62": 8,
+        "64": 2,
+        "65": 8,
+        "66": 12,
+        "7": 2,
+        "8": 16
+      },
+      "opponent_reply_line_profile": {
+        "selected_load=0,parent_legal=10,child_legal=9": 67,
+        "selected_load=0,parent_legal=2,child_legal=1": 6749,
+        "selected_load=0,parent_legal=3,child_legal=2": 6602,
+        "selected_load=0,parent_legal=4,child_legal=3": 2707,
+        "selected_load=0,parent_legal=5,child_legal=4": 568,
+        "selected_load=0,parent_legal=6,child_legal=5": 480,
+        "selected_load=0,parent_legal=7,child_legal=6": 117,
+        "selected_load=0,parent_legal=8,child_legal=7": 34,
+        "selected_load=0,parent_legal=9,child_legal=8": 31
+      },
+      "q": 17,
+      "response_edges": 17355,
+      "roots": 5
+    }
+  ],
+  "q19_single_root_head_probe": {
+    "max_drop_edges_covered_by_size": {
+      "4": 116,
+      "6": 7140,
+      "8": 21743
+    },
+    "opponent_omega_drop": {
+      "0": 29,
+      "1": 13081,
+      "101": 2,
+      "102": 2,
+      "103": 4,
+      "104": 2,
+      "105": 2,
+      "106": 7,
+      "107": 6,
+      "108": 4,
+      "109": 5,
+      "110": 6,
+      "111": 8,
+      "112": 11,
+      "113": 14,
+      "114": 20,
+      "115": 17,
+      "116": 18,
+      "117": 29,
+      "118": 33,
+      "119": 31,
+      "120": 34,
+      "121": 24,
+      "122": 40,
+      "123": 51,
+      "124": 42,
+      "125": 31,
+      "126": 36,
+      "127": 49,
+      "128": 42,
+      "129": 56,
+      "130": 41,
+      "131": 49,
+      "132": 75,
+      "133": 69,
+      "134": 66,
+      "135": 91,
+      "136": 76,
+      "137": 87,
+      "138": 91,
+      "139": 73,
+      "140": 101,
+      "141": 123,
+      "142": 116,
+      "143": 120,
+      "144": 133,
+      "145": 141,
+      "146": 111,
+      "147": 135,
+      "148": 140,
+      "149": 141,
+      "150": 162,
+      "151": 139,
+      "152": 150,
+      "153": 157,
+      "154": 157,
+      "155": 160,
+      "156": 186,
+      "157": 146,
+      "158": 166,
+      "159": 165,
+      "160": 141,
+      "161": 174,
+      "162": 174,
+      "163": 139,
+      "164": 157,
+      "165": 144,
+      "166": 139,
+      "167": 124,
+      "168": 145,
+      "169": 132,
+      "170": 121,
+      "171": 101,
+      "172": 106,
+      "173": 96,
+      "174": 94,
+      "175": 80,
+      "176": 89,
+      "177": 73,
+      "178": 73,
+      "179": 77,
+      "180": 75,
+      "181": 64,
+      "182": 64,
+      "183": 58,
+      "184": 48,
+      "185": 42,
+      "186": 43,
+      "187": 38,
+      "188": 48,
+      "189": 38,
+      "190": 29,
+      "191": 28,
+      "192": 28,
+      "193": 30,
+      "194": 33,
+      "195": 30,
+      "196": 23,
+      "197": 10,
+      "198": 18,
+      "199": 19,
+      "2": 6082,
+      "200": 21,
+      "201": 8,
+      "202": 10,
+      "203": 7,
+      "204": 8,
+      "205": 4,
+      "206": 3,
+      "207": 6,
+      "208": 4,
+      "209": 3,
+      "210": 2,
+      "211": 3,
+      "212": 2,
+      "214": 2,
+      "3": 1844,
+      "4": 547,
+      "5": 77,
+      "6": 67,
+      "7": 16,
+      "795": 4,
+      "796": 8,
+      "806": 2,
+      "808": 4,
+      "809": 28,
+      "818": 4,
+      "820": 4,
+      "821": 12,
+      "822": 8,
+      "832": 2,
+      "833": 6,
+      "834": 12,
+      "835": 16,
+      "845": 4,
+      "846": 4,
+      "848": 12,
+      "860": 14,
+      "873": 4,
+      "99": 2
+    },
+    "q": 19,
+    "response_edges_by_size": {
+      "4": 148,
+      "6": 7423,
+      "8": 21743
+    },
+    "root": [
+      15,
+      16,
+      17,
+      18
+    ],
+    "scope": "chosen strict-kernel DAG through selected size eight",
+    "states_by_size": {
+      "4": 1,
+      "6": 145,
+      "8": 2160
+    }
+  },
+  "schema": "c80-incidence-packet-mine-v2"
+}
