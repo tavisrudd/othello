@@ -330,6 +330,12 @@ The compact theorem certificate is:
 - `2026-07-23-c516-prs-redundancy-nine.json`;
 - `2026-07-23-c516-prs-redundancy-nine-replay.py`.
 
+The Version 1 proof expansion adds the six explicit discriminant vectors
+and one checked Bezout coefficient family to the JSON.  The independent
+replay multiplies those vectors directly over `F_7` and verifies that their
+sum is `1`.  The paper-facing transcription and the rational-base degree
+derivation are in `papers/beyond4_prs/supplement/R9-SLICE-DATA.md`.
+
 The q=49 closure is:
 
 - `2026-07-23-c516-prs-redundancy-nine-q49.rs`;

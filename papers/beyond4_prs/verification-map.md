@@ -51,7 +51,9 @@ as written. C538 does not silently refresh predecessor evidence bundles.
 - C516’s `q=49` pass is one exhaustive carrier implementation. It is deliberately not described
   as independently exhaustive. It stops when all `5,884,901` projective carrier quartics have a
   witness. The component certificate covers the six squarefree normal slices, four multiple-root
-  normal forms, the `q=7` count, and the displayed thresholds.
+  normal forms, their explicit Bezout identity, the `q=7` count, and the displayed thresholds.
+  Its replay also checks that the vectors transcribed in
+  `supplement/R9-SLICE-DATA.md` equal the certificate.
 - C525 enumerates all `357` lines of `PG(3,4)` as a regression test, not the algebraic-closure
   proof.
 - C529 computes every nucleus/overlap through lower degree eight and records the power-of-two

@@ -52,7 +52,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | R6 | Open mixed theorem | L1 | Degree/containment propositions need expansion; finite bridge is certified. |
 | R7 | Green mixed theorem | L1 | The contained and transverse proofs plus finite bridge give the all-field split-free classification; deep-hole promotion is only for `q>=11`. |
 | R8 | Green mathematical theorem | L1 | `CC(7,1)` and `LP(6,1)` are closed; the cold read checked the recursive rank/gcd/cyclic/wild/inseparable/branch exhaustion, the geometric-`S3` identity twist, both parameter-degree budgets, the direct gcd-one counts, and the marker-collision bounds. |
-| R9 | Open mathematical theorem | L1 | Residual and deletion proofs are expanded; six-slice Bézout data, rational-base polynomial, and component exhaustion remain open. |
+| R9 | Green mathematical theorem | L1 | Residual and deletion proofs, six explicit slice polynomials and checked Bezout identity, four multiple-root controls, the rational-base polynomial with degree accounting, and `CC(8,1)` are printed.  The theorem makes no bounded-field claim below 53. |
 | R9-kernel | Green kernel-checked conditional theorem | L3 | Does not close geometric hypotheses. |
 | Hessian | Sharp blocker | L1 | Geometric strata are separated; root-compatible persistent pullback and the global bad-union degree bound remain open. |
 | Lucas | Green mixed supporting theorem, pending cold read | L2 | Distinguished endpoint only. |

@@ -74,9 +74,9 @@ all-field classifications at redundancies six and seven; the
 redundancy-seven split-free list is a deep-hole classification whenever
 the covering radius is six, in particular for $q\geq11$.  The
 three-marker argument at redundancy eight leaves only the persistent
-families for $q\geq43$.  At redundancy nine the analogous conclusion
-for $q\geq53$ remains conditional on the printed slice and
-base-selection gates.
+families for $q\geq43$; the four-marker and binary-quartic slice
+arguments give the analogous conclusion at redundancy nine for
+$q\geq53$.
 
 In characteristic two we determine the geometric degeneracy strata of
 an ordered Hessian pullback and isolate the remaining root-compatible
@@ -226,9 +226,7 @@ The following statements hold.
       only when $\rho(\PRS(q-6))=6$, in particular for $q\geq11$.
 \item For $q\geq43$, the projective deep-hole directions of
       $\PRS(q-7)$ are exactly the persistent tangent and
-      conjugate-secant families.  Conditional on the degree-eight
-      six-slice and base-selection gates printed in
-      Section~\ref{sec:fixed}, the same conclusion holds for
+      conjugate-secant families.  The same conclusion holds for
       $\PRS(q-8)$ when $q\geq53$.  In either case the asserted
       families have total size $q(q+1)^2/2$.
 \end{enumerate}
@@ -248,11 +246,9 @@ $\operatorname{char}\F_q$ divides $r-1$.
 The three parts have different scopes.  Parts~(a) and~(b) are
 unconditional all-field syndrome classifications, but part~(b)
 becomes a deep-hole classification only when
-$\rho(\PRS(q-6))=6$.  In part~(c) the redundancy-eight clause is
-unconditional, while the redundancy-nine clause isolates its remaining
-mathematical gates rather than treating them as certificate inputs.
-Neither clause makes a classification claim below its displayed
-high-field threshold.
+$\rho(\PRS(q-6))=6$.  Part~(c) is unconditional in its two displayed
+high-field ranges.  Neither clause makes a classification claim below
+its threshold.
 
 \paragraph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational
@@ -1663,18 +1659,82 @@ hyperelliptic genus formula gives
 $\lfloor(\deg K_{\mathrm{red}}-1)/2\rfloor\leq1$.
 \end{proof}
 
-\begin{remark}[Six-slice and base-selection gates]\label{rem:r9-gates}
-Certificate R9 records six reduced discriminant polynomials for the
-squarefree quartic normal form, their unit gcd, and four multiple-root
-controls.  The development report also states a nonzero rational
-base-selection polynomial of individual degree at most $24$ and total
-degree at most $96$.  A refereeable proof must print the transporter,
-the six polynomials and a B\'ezout identity, the four reduced branch
-polynomials, and the nonzero base polynomial with its degree accounting.
-Until those data appear in the paper or immutable supplement, the
-six-slice component theorem and the $q\geq343$ base selection are
-explicit gates rather than consequences of the certificate.
-\end{remark}
+\begin{proposition}[Binary-quartic slices and rational base selection]
+\label{prop:r9-components}
+Every nonzero geometric binary quartic has a four-root slice whose
+reduced residual cover is geometrically integral of genus at most one.
+If the quartic is rational over a characteristic-seven field
+$\F_q$ with $q>102$, the four roots may be chosen distinct and
+rational.
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+ \mathcal H=\PP(\Sym^4E),\qquad
+ \mathcal B=\operatorname{Conf}_4(\PP^1).
+\]
+Over $\mathcal H\times\mathcal B$, the residual formulas define a
+universal branch quartic $K_{h,\mathbf r}(x)$.  Its subdiscriminants
+cut out the locus where the squarefree part drops degree.  Hence the
+good-slice incidence
+\[
+ \mathcal U=\{(h,\mathbf r):K_{h,\mathbf r,\mathrm{red}}
+ \text{ is nonconstant and separable}\}
+\]
+is a $\PGL_2$-stable open set.  The geometric component problem is the
+surjectivity of $\mathcal U\to\mathcal H$.  One successful
+specialization would show only generic nonemptiness; fiberwise
+surjectivity requires an open cover of quartic moduli.
+
+The quotient has one one-dimensional squarefree stratum and four
+multiple-root boundary strata.  On the standard even normal-form atlas
+for the squarefree stratum, write $h_L=[1,0,L,0,1]$.  The six four-point
+sets in \texttt{supplement/R9-SLICE-DATA.md} are six test sections of
+the universal base family over this atlas.  Pullback of the branch
+discriminant gives $\Delta_i(L)$, and the printed $b_i(L)$ satisfy
+\[
+             \sum_{i=1}^6 b_i(L)\Delta_i(L)=1
+             \quad\text{in }\F_7[L].                     \tag{33}
+\]
+Thus the principal opens $D(\Delta_i)$ cover the normal-form atlas;
+these are six sections, not six isolated successful tests.  Transport
+moves the quartic and its four-point base together, so the existence
+statement descends despite the many-to-one normal form.  On the
+boundary, root multiplicity gives exactly the partitions
+$4,3+1,2+2,2+1+1$: there are at most three support points, and triple
+transitivity gives one orbit per partition.  Their reduced branch
+discriminants are $3,3,1,5$, respectively.  Thus every boundary orbit
+also meets $\mathcal U$, proving surjectivity.
+
+Now fix $h\in\mathcal H(\F_q)$.  Over
+$\F_q(\mathbf r)$ let $d(h)\geq1$ be the number of distinct roots of
+the generic $K_{h,\mathbf r}$.  Define $B_h(\mathbf r)$ to be its
+$d(h)$-th subdiscriminant, equivalently the corresponding nonzero
+Hermite principal minor.  This is a polynomial, not a discriminant
+after an unspecified gcd division.  Its nonvanishing after
+specialization guarantees a nonconstant separable squarefree part.
+Surjectivity over the algebraic closure proves $B_h\ne0$.
+The bad affine base locus is contained in
+\[
+ B_h(\mathbf r)\prod_{i<j}(r_i-r_j)=0,                    \tag{34}
+\]
+so rational selection is avoidance of a proper divisor in configuration
+space, not a second monodromy assertion.
+
+Every coefficient of $R_{\mathbf r}(t)(t-x)$ is affine in $x$, of
+degree at most one in each $r_i$ and total $\mathbf r$-degree at most
+four.  Hence $D,N_s,N_u$ have individual degree at most two and total
+degree at most eight; $K$ has individual degree at most four and total
+degree at most sixteen.  Every quartic subdiscriminant is a Hermite
+minor of coefficient-degree at most six.  Therefore
+\[
+ \deg_{r_i}B_h\leq24,\qquad \deg B_h\leq96.                \tag{35}
+\]
+Multiplying by the four-root Vandermonde gives a nonzero polynomial of
+total degree at most $102$.  Schwartz--Zippel leaves a rational
+ordered base with distinct roots whenever $q>102$.
+\end{proof}
 
 \begin{proposition}[Good-slice deletion]\label{prop:r9-deletion}
 Once a rational base with an integral slice is fixed, the moving/fixed
@@ -1752,10 +1812,36 @@ $a\notin\F_5$.  The seven roots are distinct and the two required
 Hankel coefficients vanish.  Such an $a$ exists for every $q>5$.
 \end{proof}
 
-\begin{theorem}[Conditional redundancy nine]\label{thm:r9}
-Assume the six-slice and rational-base assertions of
-Remark~\ref{rem:r9-gates}, together with the degree-eight
-contained-component assertion.  For every prime power $q\geq53$, the
+\begin{proposition}[Degree-eight contained components]
+\label{prop:r9-contained}
+The assertion $\mathrm{CC}(8,1)$ holds.  The ordinary contained
+component is the upper rank-two carrier.  The only modular lifts are
+the characteristic-five point and the characteristic-seven
+binary-quartic carrier of Proposition~\ref{prop:r9-components}; the
+former is shallow for every field in the theorem range.  The marked
+self-collision scheme is never the whole polar line.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:contained-rank-two} gives the ordinary component,
+and Proposition~\ref{prop:r9-other-modular} gives the complete Lucas
+overlap and the characteristic-five witness.
+
+For collision, remove the fixed divisor from the six-dimensional
+Hankel series and let its moving degree be $d\leq7$.  If the associated
+map were inseparable in characteristic $p$, its sections would lie in
+the pullback of a series of degree $\lfloor d/p\rfloor$, of dimension
+at most
+\[
+             \lfloor d/p\rfloor+1\leq4<6.
+\]
+Thus the moving series is separable.  Its ramification divisor has
+degree at most $(5+1)(7-5)=12$, so collision is finite and supplies no
+additional contained component.
+\end{proof}
+
+\begin{theorem}[Redundancy nine]\label{thm:r9}
+For every prime power $q\geq53$, the
 deep syndromes of $\PRS(q-8)$ are
 exactly the persistent tangent and conjugate-secant families, of total
 size $q(q+1)^2/2$.  Their orbit law is $T/T^8$ modulo inversion and
@@ -1764,12 +1850,12 @@ Frobenius; the tangent family splits exactly in characteristic two.
 
 \begin{proof}
 Proposition~\ref{prop:r9-budgets} handles every transverse
-nonmodular point.  The assumed contained assertion leaves the
+nonmodular point.  Proposition~\ref{prop:r9-contained} leaves the
 persistent and modular supports.  Proposition
 \ref{prop:r9-other-modular} eliminates characteristic five.  For
 characteristic seven, the only powers below $343$ are $7$ and $49$,
-both below the headline range; at every $q=7^m\geq343$, the assumed
-base-selection assertion and Proposition~\ref{prop:r9-deletion}
+both below the headline range; at every $q=7^m\geq343$,
+Propositions~\ref{prop:r9-components} and \ref{prop:r9-deletion}
 produce a witness.  The covering-radius theorem completes the
 promotion to deep holes.
 \end{proof}
@@ -2300,10 +2386,9 @@ classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item Redundancy eight is complete for $q\geq43$; no bounded-field
-      completion is inferred.  Redundancy nine has a complete
-      transverse argument for $q\geq53$ but retains its
-      slice/base-selection and residual component gates.
+\item Redundancies eight and nine are complete for $q\geq43$ and
+      $q\geq53$, respectively.  No bounded-field completion is
+      inferred.
 \item The characteristic-two ordered-Hessian theorem classifies the
       geometric degeneracy strata.  Its root-compatible pullback and
       effective base-selection constant retain the stated gates, and

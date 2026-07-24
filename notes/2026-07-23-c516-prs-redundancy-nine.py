@@ -202,6 +202,35 @@ def gcd(left, right):
     return left.monic()
 
 
+def extended_gcd(left, right):
+    """Return monic gcd and Bezout coefficients over F_7[L]."""
+    old_r, r = left, right
+    old_s, s = UniPoly([1]), UniPoly()
+    old_t, t = UniPoly(), UniPoly([1])
+    while r.c:
+        quotient, remainder = old_r.divmod(r)
+        old_r, r = r, remainder
+        old_s, s = s, old_s - quotient * s
+        old_t, t = t, old_t - quotient * t
+    scale = pow(old_r.c[-1], -1, P)
+    return (
+        old_r * scale,
+        old_s * scale,
+        old_t * scale,
+    )
+
+
+def bezout_family(polynomials):
+    """Return gcd and one coefficient per polynomial."""
+    common = polynomials[0]
+    coefficients = [UniPoly([1])]
+    for polynomial in polynomials[1:]:
+        common, left, right = extended_gcd(common, polynomial)
+        coefficients = [left * coefficient for coefficient in coefficients]
+        coefficients.append(right)
+    return common, coefficients
+
+
 def product_linear_roots(roots):
     """Coefficients of prod(T-r)*(T-x), low first, as polynomials in x."""
     fixed = [1]
@@ -403,11 +432,13 @@ def build_certificate():
         (1, 2, 3, 4),
     ]
     discriminants = []
+    discriminant_polynomials = []
     common = None
     for roots in bases:
         determinant, trace, norm, branch = residual_data(roots, normal_h)
         discriminant = quartic_discriminant(branch)
         common = discriminant if common is None else gcd(common, discriminant)
+        discriminant_polynomials.append(discriminant)
         discriminants.append(
             {
                 "fixed_roots": list(roots),
@@ -418,6 +449,10 @@ def build_certificate():
                 "discriminant_coefficients_low_first": discriminant.c,
             }
         )
+    bezout_gcd, bezout_coefficients = bezout_family(
+        discriminant_polynomials
+    )
+    assert bezout_gcd.c == [1]
 
     degenerate_forms = {}
     forms = {
@@ -480,6 +515,9 @@ def build_certificate():
             "base_fibres": discriminants,
             "discriminant_gcd_coefficients_low_first": common.c,
             "expected_gcd_coefficients_low_first": [1],
+            "bezout_coefficients_low_first": [
+                coefficient.c for coefficient in bezout_coefficients
+            ],
         },
         "multiple_root_normal_forms": degenerate_forms,
         "divisor_degrees_on_modular_curve": {

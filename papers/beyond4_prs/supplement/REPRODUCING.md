@@ -41,7 +41,7 @@ described as an independent derivation.
 | Certificate R6-NF | recorded small exceptional normal forms | same-file deterministic checker |
 | Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | independent five-secant and orbit checks |
 | Certificate R8 | characteristic cases and numerical bounds, not an ambient census | independent algebra/nucleus replay |
-| Certificate R9 | residual algebra and all recorded slice normal forms | independent residual/slice replay |
+| Certificate R9 | residual algebra, all recorded slice normal forms, and the public Bezout vectors | independent residual/slice replay plus exact supplement transcription check |
 | Certificate R9-49 | the characteristic-seven carrier at \(q=49\) | one exhaustive carrier implementation |
 | Certificate Hessian | bounded algebra regression | does not replace the geometric proof |
 | Certificate Lucas | recorded Lucas arithmetic parameter domain | independent arithmetic replay |

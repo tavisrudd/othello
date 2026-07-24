@@ -11,6 +11,13 @@ HERE = Path(__file__).resolve().parent
 DATA = json.loads(
     (HERE / "2026-07-23-c516-prs-redundancy-nine.json").read_text()
 )
+PAPER_DATA = (
+    HERE.parent
+    / "papers"
+    / "beyond4_prs"
+    / "supplement"
+    / "R9-SLICE-DATA.md"
+)
 
 
 # F_49 = F_7[tau]/(tau^2-3), encoded as a+7b.
@@ -165,6 +172,33 @@ def quartic_discriminant(poly):
     return out
 
 
+def trim7(coefficients):
+    coefficients = [value % 7 for value in coefficients]
+    while coefficients and coefficients[-1] == 0:
+        coefficients.pop()
+    return coefficients
+
+
+def add_poly7(left, right):
+    out = [0] * max(len(left), len(right))
+    for index in range(len(out)):
+        out[index] = (
+            (left[index] if index < len(left) else 0)
+            + (right[index] if index < len(right) else 0)
+        ) % 7
+    return trim7(out)
+
+
+def multiply_poly7(left, right):
+    out = [0] * (len(left) + len(right) - 1)
+    for i, left_value in enumerate(left):
+        for j, right_value in enumerate(right):
+            out[i + j] = (
+                out[i + j] + left_value * right_value
+            ) % 7
+    return trim7(out)
+
+
 def replay_discriminants():
     rows = DATA["normal_squarefree_family"]["base_fibres"]
     for row in rows:
@@ -177,6 +211,65 @@ def replay_discriminants():
             assert len(norm) - 1 <= 2
             assert len(branch) - 1 <= 4
             assert quartic_discriminant(branch) == peval(recorded, ell)
+    coefficients = DATA["normal_squarefree_family"][
+        "bezout_coefficients_low_first"
+    ]
+    total = []
+    for row, coefficient in zip(rows, coefficients, strict=True):
+        total = add_poly7(
+            total,
+            multiply_poly7(
+                row["discriminant_coefficients_low_first"],
+                coefficient,
+            ),
+        )
+    assert total == [1]
+    paper_text = PAPER_DATA.read_text()
+    coefficients = DATA["normal_squarefree_family"][
+        "bezout_coefficients_low_first"
+    ]
+    for index, (row, coefficient) in enumerate(
+        zip(rows, coefficients, strict=True),
+        start=1,
+    ):
+        roots_text = json.dumps(
+            row["fixed_roots"],
+            separators=(",", ":"),
+        )
+        discriminant_text = json.dumps(
+            row["discriminant_coefficients_low_first"],
+            separators=(",", ":"),
+        )
+        coefficient_text = json.dumps(
+            coefficient,
+            separators=(",", ":"),
+        )
+        assert (
+            f"| {index} | `{roots_text}` | `{discriminant_text}` |"
+            in paper_text
+        )
+        assert (
+            f"| {index} | `{coefficient_text}` |"
+            in paper_text
+        )
+    quartic_vectors = {
+        "partition_4": [1, 0, 0, 0, 0],
+        "partition_31": [0, 1, 0, 0, 0],
+        "partition_22": [0, 0, 1, 0, 0],
+        "partition_211": [0, 1, 6, 0, 0],
+    }
+    for name, row in DATA["multiple_root_normal_forms"].items():
+        values = [
+            quartic_vectors[name],
+            row["fixed_roots"],
+            row["reduced_branch_coefficients_x_low_first"],
+        ]
+        rendered = [
+            json.dumps(value, separators=(",", ":"))
+            for value in values
+        ]
+        assert all(f"`{value}`" in paper_text for value in rendered)
+        assert f"| {row['reduced_branch_discriminant']} |" in paper_text
 
 
 def replay_residual_linear_system():
@@ -280,8 +373,8 @@ def main():
     replay_thresholds_and_counts()
     replay_orbits()
     print(
-        "C516 replay passed: F49 discriminant interpolation, residual equations, "
-        "thresholds, q=7 count, and orbit fusion"
+        "C516 replay passed: F49 discriminant interpolation, Bezout identity, "
+        "residual equations, thresholds, q=7 count, and orbit fusion"
     )
 
 
