@@ -1651,6 +1651,11 @@
       "6": 7140,
       "8": 21743
     },
+    "max_kernel_target_status_by_size": {
+      "size=4,has_boundary=False,has_positive=True": 116,
+      "size=6,has_boundary=True,has_positive=False": 7140,
+      "size=8,has_boundary=True,has_positive=False": 21743
+    },
     "opponent_omega_drop": {
       "0": 29,
       "1": 13081,

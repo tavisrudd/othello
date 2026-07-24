@@ -1,0 +1,873 @@
+{
+  "action": "PGL(2,q) symmetric-square action on the conic-marked projective plane",
+  "all_unique_replies_fixed_by_marked_opponent_stabilizer": true,
+  "group_order": 4896,
+  "marked_object_orbits": 5,
+  "marked_object_stabilizer_histogram": {
+    "1": 12
+  },
+  "marked_opponent_stabilizer_histogram": {
+    "1": 12
+  },
+  "marked_orbit_members": [
+    {
+      "opponent_kinds": [
+        "intruder"
+      ],
+      "orbit": 0,
+      "records": [
+        0,
+        1,
+        2
+      ],
+      "reply_kinds": [
+        "conic"
+      ],
+      "selected_sizes_projective": [
+        8
+      ]
+    },
+    {
+      "opponent_kinds": [
+        "intruder"
+      ],
+      "orbit": 1,
+      "records": [
+        3,
+        4
+      ],
+      "reply_kinds": [
+        "intruder"
+      ],
+      "selected_sizes_projective": [
+        8
+      ]
+    },
+    {
+      "opponent_kinds": [
+        "conic"
+      ],
+      "orbit": 2,
+      "records": [
+        5
+      ],
+      "reply_kinds": [
+        "intruder"
+      ],
+      "selected_sizes_projective": [
+        8
+      ]
+    },
+    {
+      "opponent_kinds": [
+        "intruder"
+      ],
+      "orbit": 3,
+      "records": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "reply_kinds": [
+        "intruder"
+      ],
+      "selected_sizes_projective": [
+        6
+      ]
+    },
+    {
+      "opponent_kinds": [
+        "intruder"
+      ],
+      "orbit": 4,
+      "records": [
+        10,
+        11
+      ],
+      "reply_kinds": [
+        "intruder"
+      ],
+      "selected_sizes_projective": [
+        8
+      ]
+    }
+  ],
+  "orbit_rows": [
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          13
+        ],
+        "reply": [
+          1,
+          0,
+          0
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            13,
+            8
+          ],
+          [
+            1,
+            14,
+            3
+          ],
+          [
+            1,
+            15,
+            10
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 0,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          13
+        ],
+        "reply": [
+          1,
+          0,
+          0
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            13,
+            8
+          ],
+          [
+            1,
+            14,
+            3
+          ],
+          [
+            1,
+            15,
+            10
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 1,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          13
+        ],
+        "reply": [
+          1,
+          0,
+          0
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            13,
+            8
+          ],
+          [
+            1,
+            14,
+            3
+          ],
+          [
+            1,
+            15,
+            10
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 2,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          0,
+          8
+        ],
+        "reply": [
+          1,
+          11,
+          12
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            3,
+            15
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            13,
+            9
+          ],
+          [
+            1,
+            15,
+            7
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 3,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          0,
+          8
+        ],
+        "reply": [
+          1,
+          11,
+          12
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            3,
+            15
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            13,
+            9
+          ],
+          [
+            1,
+            15,
+            7
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 4,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          13,
+          8
+        ],
+        "reply": [
+          1,
+          11,
+          3
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            11
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            7,
+            6
+          ],
+          [
+            1,
+            9,
+            14
+          ],
+          [
+            1,
+            16,
+            13
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 5,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          15
+        ],
+        "reply": [
+          1,
+          2,
+          13
+        ],
+        "selected": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            16
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            9,
+            3
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 4,
+      "record": 6,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 6,
+      "selected_state_stabilizer_size": 4
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          15
+        ],
+        "reply": [
+          1,
+          2,
+          13
+        ],
+        "selected": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            16
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            9,
+            3
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 4,
+      "record": 7,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 6,
+      "selected_state_stabilizer_size": 4
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          15
+        ],
+        "reply": [
+          1,
+          2,
+          13
+        ],
+        "selected": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            16
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            9,
+            3
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 4,
+      "record": 8,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 6,
+      "selected_state_stabilizer_size": 4
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          3,
+          15
+        ],
+        "reply": [
+          1,
+          2,
+          13
+        ],
+        "selected": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            16
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            9,
+            3
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 4,
+      "record": 9,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 6,
+      "selected_state_stabilizer_size": 4
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          10,
+          14
+        ],
+        "reply": [
+          1,
+          7,
+          12
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            8,
+            15
+          ],
+          [
+            1,
+            15,
+            10
+          ],
+          [
+            1,
+            16,
+            13
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 10,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    },
+    {
+      "canonical": {
+        "opponent": [
+          1,
+          10,
+          14
+        ],
+        "reply": [
+          1,
+          7,
+          12
+        ],
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            8,
+            15
+          ],
+          [
+            1,
+            15,
+            10
+          ],
+          [
+            1,
+            16,
+            13
+          ]
+        ]
+      },
+      "marked_opponent_stabilizer_size": 1,
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "opponent_orbit_size_in_state": 1,
+      "record": 11,
+      "reply_fixed_by_marked_opponent_stabilizer": true,
+      "selected_size_projective": 8,
+      "selected_state_stabilizer_size": 1
+    }
+  ],
+  "q": 17,
+  "records": 12,
+  "schema": "c80-marked-head-orbits-v1",
+  "selected_state_orbit_members": [
+    {
+      "orbit": 0,
+      "records": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "orbit": 1,
+      "records": [
+        3,
+        4
+      ]
+    },
+    {
+      "orbit": 2,
+      "records": [
+        5
+      ]
+    },
+    {
+      "orbit": 3,
+      "records": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "orbit": 4,
+      "records": [
+        10,
+        11
+      ]
+    }
+  ],
+  "selected_state_orbits": 5,
+  "selected_state_stabilizer_histogram": {
+    "1": 8,
+    "4": 4
+  }
+}

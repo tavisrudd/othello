@@ -44,6 +44,14 @@ bulk**, not the requested uniform theorem.  The naive claim
 `Rmax` always contains a lower-kernel reply is already false on 498 q=17
 head transitions and 315 transitions in the stated q=19 probe.
 
+The subsequent all-response closure audit sharpens what “bulk” means here.
+At q=17 every one of the 7,090 lower-kernel targets from the selected-size-eight
+frontier already has `Ω=0`; at the tested q=19 root, every covered
+selected-size-six or selected-size-eight edge has a boundary target as well.
+Thus these rows test direct absorption into `Y_NK`, not a recursive
+positive-overload exchange law.  The latter remains open and essentially
+untested by this finite ceiling.
+
 ## 1. Why this is an incidence packet
 
 Let `L(S)` be the legal-point set and let `A(S)` be the lines carrying no
@@ -128,7 +136,12 @@ The strongest proved finite statement is:
 The selected-size-eight boundary is empirical.  It is not asserted for
 every eight-cap, every kernel state, every q=19 root, or every odd field.
 The q=19 scope is exactly one root and the chosen strict-kernel DAG through
-selected size eight.
+selected size eight.  Moreover, the observed boundary targets are
+twelve-caps after restoring the two fixed points.  The previously proved
+inequality `capOK` for an `s`-cap implies `q≤binom(s,2)` makes this exact
+one-exchange absorption impossible for `q≥67`.  Any uniform `Rmax` theorem
+must therefore continue through positive-overload targets for growing depth;
+the present data do not test that mechanism.
 
 There is also a useful quantifier warning.  On every certified q=11/q=13/q=17
 edge, the marked opponent move alone already decreases `Ω` (minimum observed
@@ -161,13 +174,13 @@ python3 rust/scripts/c80_incidence_packet_mine.py --check
 Evidence bundle:
 
 - script: `rust/scripts/c80_incidence_packet_mine.py`,
-  18,178 bytes,
+  19,040 bytes,
   SHA-256
-  `98f00b5e1dab408153aef55525abae8831b2e6a1f3b641e9604fabefee09daad`;
+  `d3f54392e77834bda771c16c3ad7489ac2c188187bc359405ac52b5cc6767a6c`;
 - output: `notes/2026-07-24-c80-incidence-packet-mine.json`,
-  45,660 bytes,
+  45,885 bytes,
   SHA-256
-  `d873e1b2b7a57fa69185ebcacd16e39d20109d80cee6a1e3bf9c5a9be2268e84`;
+  `4832f6465bb6e6e8bba017f378a5a99054fb051ef35eda189ddbca7649f9c924`;
 - strict-kernel implementation:
   `rust/scripts/c80_strict_overload_kernel.py`,
   SHA-256
@@ -223,10 +236,13 @@ monotonicity cannot supply it.
 - **[OPEN — C80] Why does the tested bulk admit `Rmax` responses?** Exact
   evidence gap: no exchange, orbit-intersection, or residual-hypergraph
   theorem turns maximal overload drop into lower-kernel membership.
-- **[OPEN — C80] Why selected size eight?** It may reflect a genuine
-  rank-three residual threshold or only the chosen finite DAGs.  The gate is
-  a canonical all-root q=19 head/bulk replay followed by an isomorphism-level
-  statement; no universal eight-cap claim is licensed.
+- **[SETTLED finite] Why selected size eight in the tested q=17/q=19 rows?**
+  It is the direct `Ω=0` absorption ceiling: every recorded lower-kernel
+  target there is already boundary.  This cannot persist uniformly past
+  `q=66` for twelve-cap targets.
+- **[OPEN — C80] Does a positive-target `Rmax` exchange theorem hold on a
+  growing-depth survivor family?** The finite bulk rows do not test it.
+  A structural family and a P-preserving exchange argument are both absent.
 - **[OPEN — C80] What are the twelve q=17 exceptions intrinsically?** The
   certificate gives coordinates and unique replies, but their
   marked-stabilizer orbit count is not yet computed.

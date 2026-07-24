@@ -794,6 +794,19 @@ exchange/orbit-intersection lemma for `Rmax` on a structurally defined bulk fami
 Report+certificate:
 [`../2026-07-24-c80-incidence-packet-compression.md`](../2026-07-24-c80-incidence-packet-compression.md).
 
+**The marked-head quotient and apparent bulk law are now resolved negatively as uniform routes
+(C80, 2026-07-24).** The twelve q17 head exceptions form five full conic-`PGL₂(17)` marked
+state/opponent/reply orbits; eight records have trivial selected-state stabilizer and every marked
+opponent stabilizer is trivial, so transport does not determine the reply. Exact branching from all
+10,212 q17 selected-size-eight frontier states through every lower-kernel reply finds no `Rmax`
+counterexample, but all 7,090 lower-kernel targets are already `Ω=0`; q19 likewise has only one
+positive-target layer at the tested root, then boundary absorption. Restoring the fixed pair makes
+the leaf a twelve-cap, so `capOK⇒q≤66` proves this fixed-size absorption cannot be uniform. The only
+live `Rmax` theorem is scale-aware: a growing family `F_s` closed under positive-target exchanges
+until the square-root barrier. No such family is known, and the finite data contain no repeated
+positive-target layer. Report+certificates:
+[`../2026-07-24-c80-marked-head-and-bulk-audit.md`](../2026-07-24-c80-marked-head-and-bulk-audit.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -823,13 +836,17 @@ Priority order and why:
    `capOK` does not force P. Total capacity-two overload `Ω` is the exact absorption clock.
    The canonical maximal strict-overload family `K_Ω` is now defined value-independently from the
    `Y_NK` boundary; well-founded induction proves it P, and exact q=5/7/13/17 gates pass. The live
-   first geometric compression is `Rmax`, the maximal-overload-drop packet: it is exact on the
-   tested q11/q13 bulk and from selected size 8 onward at q17 and one q19 root, but it misses the
-   size-4/6 head. Twelve q17 marked transitions evade the union of five elementary incidence
-   maxima. Canonicalize those exceptions under the marked stabilizer, then prove or falsify a bulk
-   exchange/orbit-intersection lemma for `Rmax`; only a uniform head+bulk membership proof releases
-   C82. Do not spend another probe on a bounded-depth witness selector, bounded-gadget patch, or
-   bounded-dimensional terminal guard.
+   first geometric compression is `Rmax`, the maximal-overload-drop packet. Its apparent q17/q19
+   bulk success is now explained as direct twelve-cap `Y_NK` absorption, hence nonuniform beyond
+q=66; the twelve q17 head exceptions still form five marked conic-projective orbits, mostly
+rigid. The live version must be scale-aware: formulate a growing positive-overload survivor
+family `F_s` and prove/falsify repeated `Rmax` exchange closure until the square-root barrier. If
+`s_even(q)` is the least even `s` with `q≤binom(s,2)`, any escape-root strategy needs at least
+`(s_even(q)-8)/2` positive-overload response targets before absorption, asymptotic to
+`sqrt(q/2)-4`.
+   The current finite domains contain only one positive-target layer, so do not mine another
+   bounded-depth selector, stabilizer signature, bounded-gadget patch, or terminal guard. Only a
+   uniform growing-depth head+bulk membership proof releases C82.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

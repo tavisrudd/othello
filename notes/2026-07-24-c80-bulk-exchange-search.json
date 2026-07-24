@@ -1,0 +1,50 @@
+{
+  "boundary_states_by_selected_size": {
+    "10": 3057,
+    "8": 9594
+  },
+  "counterexample": null,
+  "counterexample_found": false,
+  "domain": "breadth-first closure from the chosen-DAG selected-size-eight frontier through every strict lower-K reply",
+  "exhaustive_small_orders": [
+    {
+      "counterexample_found": false,
+      "first_counterexample": null,
+      "kernel_states_checked": 301,
+      "marked_edges_checked": 25,
+      "positive_kernel_states_checked": 1,
+      "q": 5,
+      "reachable_states": 726,
+      "search_complete": true
+    },
+    {
+      "counterexample_found": false,
+      "first_counterexample": null,
+      "kernel_states_checked": 11467,
+      "marked_edges_checked": 17689,
+      "positive_kernel_states_checked": 883,
+      "q": 7,
+      "reachable_states": 19160,
+      "search_complete": true
+    }
+  ],
+  "frontier_states": 10212,
+  "lower_kernel_target_omega_histogram": {
+    "0": 7090
+  },
+  "lower_kernel_targets_seen": 7090,
+  "marked_edges_checked": 3413,
+  "max_states": 20000,
+  "positive_states_by_selected_size": {
+    "8": 618
+  },
+  "processed_states": 13269,
+  "q": 17,
+  "queue_remaining": 0,
+  "schema": "c80-bulk-exchange-search-v1",
+  "search_complete": true,
+  "states_by_selected_size": {
+    "10": 3057,
+    "8": 10212
+  }
+}

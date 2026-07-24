@@ -384,6 +384,7 @@ def run_q19_head_probe() -> dict:
     edges_by_size = Counter()
     covered_by_size = Counter()
     opponent_drops = Counter()
+    max_kernel_target_status_by_size = Counter()
     while stack:
         state = stack.pop()
         if state in seen or state.bit_count() > 8 or kernel.omega(state) == 0:
@@ -403,12 +404,24 @@ def run_q19_head_probe() -> dict:
                 for candidate in candidates
             }
             maximum_drop = max(drops.values())
-            if any(
-                kernel.contains(child | (1 << candidate))
+            max_kernel_targets = [
+                child | (1 << candidate)
                 for candidate, drop in drops.items()
                 if drop == maximum_drop
-            ):
+                and kernel.contains(child | (1 << candidate))
+            ]
+            if max_kernel_targets:
                 covered_by_size[state.bit_count()] += 1
+                target_omegas = [
+                    kernel.omega(target) for target in max_kernel_targets
+                ]
+                max_kernel_target_status_by_size[
+                    (
+                        state.bit_count(),
+                        any(omega == 0 for omega in target_omegas),
+                        any(omega > 0 for omega in target_omegas),
+                    )
+                ] += 1
             chosen = kernel.responses[(state, opponent)]
             stack.append(child | (1 << chosen))
 
@@ -420,6 +433,15 @@ def run_q19_head_probe() -> dict:
         "response_edges_by_size": histogram(edges_by_size),
         "max_drop_edges_covered_by_size": histogram(covered_by_size),
         "opponent_omega_drop": histogram(opponent_drops),
+        "max_kernel_target_status_by_size": {
+            (
+                f"size={key[0]},has_boundary={key[1]},"
+                f"has_positive={key[2]}"
+            ): count
+            for key, count in sorted(
+                max_kernel_target_status_by_size.items()
+            )
+        },
     }
 
 
