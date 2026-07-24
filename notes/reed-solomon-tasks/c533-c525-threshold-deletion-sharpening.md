@@ -1,6 +1,6 @@
 # C533 — C525 threshold and deletion sharpening
 
-**Lane:** `reed-solomon` · **Status:** queued independently after C525
+**Lane:** `reed-solomon` · **Status:** complete 2026-07-24
 
 ## Objective
 
@@ -52,3 +52,18 @@ Use C525's frozen universal equations, generator, certificate, and replay.  Do n
 - `notes/2026-07-23-c533-c525-threshold-deletion-sharpening*`
 - `notes/reed-solomon-tasks/c533-c525-threshold-deletion-sharpening.md`
 - the `reed-solomon` handoff, archive, discovery track, and task lifecycle rows
+
+## Outcome
+
+The carrier theorem is unchanged.  On the Grassmannian the complementary conic is cut out by
+three linear Pluecker equations, so a nonzero Veronese quadric times a nonzero complementary
+linear form cuts out the complete bad union with separate root degree six.  This improves the
+base-selection threshold to
+`min((n-4)*(n+7)/2+1, 7*(n-4))`.  Restriction to the complementary conic proves that the only
+common Pluecker quadric is the Grassmannian relation, so cubic Pluecker degree is the sharp
+universal method boundary.
+
+After one fixed root is moved to a coordinate endpoint, `D=0` is scheme-theoretically that
+root's residual-collision divisor and was counted twice.  The deletion budget is therefore
+`3*n-6`.  The report and atomic generator/JSON/replay/checksum bundle record the proof boundary
+and the exact before/after binary prime-power table.

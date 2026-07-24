@@ -11,12 +11,12 @@ persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 persistent/Lucas union; every stratum in the finite-orbit block `P(U)` is shallow, and only the
 complementary two-dimensional quotient remains as an explicit residue, with
 `0 <= rho_q <= q^4(q+1)`.
-The generic five-marker deletion/transverse budgets are `42/19`, and the characteristic-two
-ordered-Hessian base/deletion thresholds are `45/23`.  C519 found the
+The generic five-marker deletion/transverse budgets are `42/19`, and C533 sharpens the
+characteristic-two ordered-Hessian base/deletion thresholds to `35/21` at redundancy ten.  C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
-`q >= min((n-4)(n+11)/2+1, 9(n-4))`, with deletion budget `3n-4`.  C529 proves the infinite
+`q >= min((n-4)(n+7)/2+1, 7(n-4))`, with deletion budget `3n-6`.  C529 proves the infinite
 power-of-two top-nucleus carrier family and normalizes the linearized root cover on its
 distinguished Borel-endpoint orbit.  The
 C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine carrier has minimal
@@ -76,7 +76,8 @@ q=16,32 has a certified witness.  At q=8 the exact graph/off-graph/rank-two comp
 multiplicities are `1/2/3/0/1`, so the `(2)(3)`-twisted orbit is the unique zero incidence fibre.
 The carrier complement has a two-dimensional quotient.  C532's
 entry gate is green with both residues explicit, but neither task is a manuscript or preprint gate.
-C533 independently owns C525 threshold/deletion sharpening.
+C533 sharpens C525 uniformly: the bad union has a minimal cubic Pluecker covariant, giving
+`q >= min((n-4)(n+7)/2+1,7(n-4))`, and exact divisor overlap lowers deletion to `3n-6`.
 C578 closes the rank-two nonconstant Artin--Schreier residue from C531/C532.
 Every rational rank-two twist is shallow in every admissible binary field:
 the direct rational-syndrome descent has genus at most one, five-root bad
@@ -711,7 +712,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C531 | full degree-nine Lucas-carrier strata | complete (obstruction exit) | tensor filtration; three finite geometric strata; uniform rank-one shallowness; rank-two \(A_5\) twists plus nonconstant Artin--Schreier cover; two-dimensional complement quotient | exact carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | complete | odd `q>=59` persistent-only; binary `q>=64` persistent/Lucas containment; exact orbit law and explicit rank-two/positive-moduli residues | strongest honest fixed-level theorem without a carrier census | fixed-level theorem |
 | C578 | degree-nine rank-two Artin--Schreier avoidance | complete | direct all-twist descent; genus at most one; bad-base degree `102`; exact `23/48` deletion; `q>=128` theorem plus complete `q=64` certificate and frozen `q=16,32` controls | every admissible rank-two twist shallow; C532 residue bound reduced to `q^4(q+1)` | rank-two binary redundancy-ten residue closed |
-| C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
+| C533 | C525 threshold/deletion sharpening | complete | cubic union covariant and fixed-root divisor overlap | threshold `min((n-4)(n+7)/2+1,7(n-4))`; deletion `3n-6`; quadratic Pluecker obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | complete (characterized stop) | maximal base-scheme naturality; Arf torsor; quartic `i_3` prior-art boundary; cubic-local all-degree contraction theorem | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | complete | integral secant pullback from degree five; sharp degree-four failure; Lucas adjacent-run theorem; C498/C509/C513/C516 corollaries | no third component in the componentwise secant/nucleus functor | abstract modular flag theorem boundary |
@@ -737,9 +738,8 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C533 | executable independently | cheap uniform constant improvement, valuable but does not change the classification architecture |
-| 2 | C537 | executable; C536 gate green | high-upside reconstruction comparison, now unblocked by the modular theorem spine |
-| 3 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
+| 1 | C537 | executable; C536 gate green | high-upside reconstruction comparison, now unblocked by the modular theorem spine |
+| 2 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -769,7 +769,8 @@ gates remain binding.
   nonconstant Artin--Schreier cover and the complementary two-dimensional
   quotient.  C578 closes the former uniformly across every admissible field
   and rational twist; C532's remaining redundancy-ten residue is exactly the
-  latter.  C533 separately sharpens C525's bound.
+  latter.  C533 sharpens C525's bound to
+  `min((n-4)(n+7)/2+1,7(n-4))` and deletion `3n-6`; no further constant task is allocated.
   No ambient census substitutes for any of these calculations.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
@@ -798,11 +799,10 @@ history.
 
 ## Next command
 
-`go C533`
+`go C537`
 
-(C536 has closed the coherent polar-flag/Fano boundary with an integral
-secant-pullback theorem and exact Lucas adjacent-run rule. C533 is now the
-highest-EV executable successor and sharpens C525's threshold/deletion constants;
-C537's Flatland--Gale comparison is also unblocked. C545 remains externally
+(C533 has closed the C525 constant sharpening with a minimal cubic Pluecker
+union covariant and exact fixed-root deletion overlap. C537's Flatland--Gale
+comparison is now the highest-EV executable successor. C545 remains externally
 blocked on its final reader, clean export/replay, immutable identifiers, and author/account
 confirmation. No external upload is authorized.)

@@ -1,0 +1,166 @@
+{
+  "deletion": {
+    "after": "3*n-6",
+    "before": "3*n-4",
+    "overlap": "after sending one fixed root to [0:1], D=0 is that fixed-root incidence divisor",
+    "remaining_degrees": {
+      "inseparability_Ns": 2,
+      "moving_fixed_diagonal": "n-4",
+      "residual_fixed_union_including_D": "2*(n-4)",
+      "residual_moving": 4
+    }
+  },
+  "field": "characteristic two",
+  "schema": "c533-threshold-deletion-v1",
+  "threshold": {
+    "after": "min((n-4)*(n+7)/2+1,7*(n-4))",
+    "before": "min((n-4)*(n+11)/2+1,9*(n-4))",
+    "representative_table": [
+      {
+        "after_base": 7,
+        "after_deletion": 9,
+        "after_first_binary_q": 32,
+        "before_base": 9,
+        "before_deletion": 11,
+        "before_first_binary_q": 32,
+        "n": 5
+      },
+      {
+        "after_base": 14,
+        "after_deletion": 12,
+        "after_first_binary_q": 32,
+        "before_base": 18,
+        "before_deletion": 14,
+        "before_first_binary_q": 32,
+        "n": 6
+      },
+      {
+        "after_base": 21,
+        "after_deletion": 15,
+        "after_first_binary_q": 32,
+        "before_base": 27,
+        "before_deletion": 17,
+        "before_first_binary_q": 32,
+        "n": 7
+      },
+      {
+        "after_base": 28,
+        "after_deletion": 18,
+        "after_first_binary_q": 32,
+        "before_base": 36,
+        "before_deletion": 20,
+        "before_first_binary_q": 64,
+        "n": 8
+      },
+      {
+        "after_base": 35,
+        "after_deletion": 21,
+        "after_first_binary_q": 64,
+        "before_base": 45,
+        "before_deletion": 23,
+        "before_first_binary_q": 64,
+        "n": 9
+      },
+      {
+        "after_base": 42,
+        "after_deletion": 24,
+        "after_first_binary_q": 64,
+        "before_base": 54,
+        "before_deletion": 26,
+        "before_first_binary_q": 64,
+        "n": 10
+      },
+      {
+        "after_base": 56,
+        "after_deletion": 30,
+        "after_first_binary_q": 64,
+        "before_base": 72,
+        "before_deletion": 32,
+        "before_first_binary_q": 128,
+        "n": 12
+      },
+      {
+        "after_base": 84,
+        "after_deletion": 42,
+        "after_first_binary_q": 128,
+        "before_base": 108,
+        "before_deletion": 44,
+        "before_first_binary_q": 128,
+        "n": 16
+      },
+      {
+        "after_base": 112,
+        "after_deletion": 54,
+        "after_first_binary_q": 128,
+        "before_base": 144,
+        "before_deletion": 56,
+        "before_first_binary_q": 256,
+        "n": 20
+      },
+      {
+        "after_base": 140,
+        "after_deletion": 66,
+        "after_first_binary_q": 256,
+        "before_base": 180,
+        "before_deletion": 68,
+        "before_first_binary_q": 256,
+        "n": 24
+      },
+      {
+        "after_base": 196,
+        "after_deletion": 90,
+        "after_first_binary_q": 256,
+        "before_base": 252,
+        "before_deletion": 92,
+        "before_first_binary_q": 256,
+        "n": 32
+      }
+    ]
+  },
+  "union_covariant": {
+    "N_linear_generators_on_Grassmannian": [
+      "z0",
+      "z5",
+      "z2+z3"
+    ],
+    "minimum_nontrivial_common_degree_in_plucker_coordinates": 3,
+    "quadratic_kernel": [
+      "q2+q3"
+    ],
+    "quadratic_kernel_identity": "z0*z5+z1*z4+z2*z3 (Pluecker)",
+    "root_separate_degrees": {
+      "N_linear": 2,
+      "plucker": 2,
+      "sigma_quadric": 4,
+      "union_product": 6
+    },
+    "sharp_degree_witness": {
+      "A_bits": "0001",
+      "B_bits": "0010",
+      "C_bits": "0101",
+      "degrees": [
+        4,
+        2,
+        6
+      ],
+      "n_generator": "g0",
+      "sigma_generator": "q0"
+    },
+    "sigma_generators": [
+      "z0*z2+z0*z3+z1^2",
+      "z0*z4+z1*z2",
+      "z1*z4+z2^2+z2*z3",
+      "z0*z5+z2^2",
+      "z1*z5+z2*z4",
+      "z2*z5+z3*z5+z4^2"
+    ],
+    "sigma_restrictions_to_N": [
+      "s^4",
+      "s^3*t",
+      "s^2*t^2",
+      "s^2*t^2",
+      "s*t^3",
+      "t^4"
+    ]
+  }
+}
