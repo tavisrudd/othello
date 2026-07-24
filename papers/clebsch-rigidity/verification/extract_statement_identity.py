@@ -37,7 +37,11 @@ ROW_LABELS = {
     21: "prop:brianchon-support",
     22: "cor:decoder-brianchon",
     23: "prop:invariant-support-bipartition",
-    24: ("lem:chord-defect", "lem:q9-polarity"),
+    24: (
+        "lem:chord-defect",
+        "cor:conic-filling-window",
+        "lem:q9-polarity",
+    ),
     25: "thm:why11",
     26: "prop:clebsch-family-uncovered",
     29: "thm:small-k-conic-filling",
@@ -133,9 +137,9 @@ def build_payload(source: Path) -> dict[str, object]:
         for labels in ROW_LABELS.values()
         for label in (labels if isinstance(labels, tuple) else (labels,))
     ]
-    if list(by_label) != expected_labels:
+    if set(by_label) != set(expected_labels) or len(by_label) != len(expected_labels):
         raise ValueError(
-            "the theorem-like statement order does not match the published claim map"
+            "the theorem-like statements do not match the published claim map"
         )
 
     claims: list[dict[str, object]] = [

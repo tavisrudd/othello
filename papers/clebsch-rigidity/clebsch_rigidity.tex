@@ -44,7 +44,7 @@ projective stabilizer $A_5$. More generally, containment of the syndrome
 locus in the zero set of any nonzero form of degree at most three
 characterizes the same class. A line bound, a chord-defect identity, and
 Dye's Brianchon theorem give the core conic-rigidity implication.
-Enumeration proves the low-degree strengthening, the sharp numerical gaps,
+Enumeration proves the low-degree strengthening, the sharp numerical gap,
 and the terminal $k=7$ exclusions.
 
 The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS; the
@@ -56,8 +56,9 @@ of Proposition~\ref{prop:decoding-oracle}. Its ambiguity data recover the
 classical Brianchon points, self-polar triangles, and an invariant support
 bipartition. The chord identity
 and the Sylvester graph show that $q=11$ is the only conic-filling field for
-six-arcs. A universal chord-defect identity shows that conic filling by a
-$k$-arc forces $q<\binom{k}{2}$. Through seven points the only cases are a
+six-arcs. A universal chord-defect identity and passant count show that
+conic filling by a $k$-arc forces
+$2k-3\le q<\binom{k}{2}$, with a sharper quadratic barrier. Through seven points the only cases are a
 four-frame in $\PG(2,5)$ and the Clebsch hexagon; for eight points only
 $q\in\{13,16,17,19\}$ remain.
 \end{abstract}
@@ -71,6 +72,14 @@ projective plane; arc; conic.
 
 \section{Introduction}
 \label{sec:intro}
+
+In $\PG(2,11)$ there is a six-point set whose fifteen chords miss exactly
+twelve points, and those twelve points are the points of a conic. This paper
+shows that the property characterizes the set: it is the Clebsch hexagon.
+In coding language, the conic is the projective deep-hole syndrome locus of
+a non-GRS $[6,3,4]_{11}$ MDS code. This is an instance of a broader
+question: when does the projective deep-hole locus determine an MDS code,
+and when can that locus be algebraically degenerate?
 
 Let $C$ be a linear $[n,k,d]_q$ code with covering radius $\rho$ and
 full-rank parity-check matrix $H$. For a received word $v$, write
@@ -105,15 +114,6 @@ Marcugini, and Pambianco~\cite{DMP2021}; their Theorem~6.3 supplies the
 leader count used in Section~\ref{sec:code}. See also
 Hirschfeld~\cite{Hirschfeld1998} for the plane arc/covering-radius setting.
 
-The paper studies one small exception to the GRS picture: a non-GRS
-$[6,3,4]_{11}$ MDS code whose projective deep-hole locus is exactly the
-$\F_{11}$-point set of a nonsingular conic. Its parity-check columns form
-the \emph{Clebsch hexagon}, a six-arc in $\PG(2,11)$. Thus a natural
-property of the covering-radius structure, with no assumed symmetry or
-conic construction, singles out a classical configuration. This is an
-instance of a broader question: when does the projective deep-hole locus
-determine an MDS code, and when can that locus be algebraically degenerate?
-
 The main theorem starts from no symmetry or conic construction. Among all
 six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
 syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer.
@@ -124,7 +124,8 @@ decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
 chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
 $(q-4)(q-11)$ when $q\equiv3\pmod4$. In general the same moment calculation
 shows that a conic-filling $k$-arc must satisfy
-$q<\binom{k}{2}$; we classify the cases through seven points and reduce the
+$2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier; we
+classify the cases through seven points and reduce the
 eight-point case to four fields.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
@@ -186,6 +187,83 @@ configuration, but its four collinear triples prevent it from defining an
 MDS code. Thus exteriority alone gives only
 $\cC(\F_{11})\subseteq\cU(A)$; the arc hypothesis selects the Clebsch
 branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
+
+\begin{theorem}[Universal chord defect]
+\label{lem:chord-defect}
+Let $A$ be a $k$-arc in $\PG(2,q)$ with $k\ge4$. Let $n_i$ count the
+off-arc points incident with exactly $i$ chords, put
+\[
+ r=\lfloor k/2\rfloor,\qquad
+ t(A)=\sum_{i=3}^{r}\binom{i-1}{2}n_i,
+\]
+and write $m=\binom{k}{2}$. Then
+\[
+ |\cU(A)|=q^2-(m-1)q+
+ \left(m+3\binom{k}{4}-k+1\right)-t(A),
+\qquad
+ 0\le t(A)\le3\binom{k}{4}\frac{r-2}{r}.
+\]
+\end{theorem}
+
+\begin{proof}
+At a point off $A$, concurrent chords have pairwise disjoint endpoint
+pairs, so at most $r$ chords occur. Counting chord--point incidences and
+pairs of disjoint chords gives
+\[
+ \sum_i i n_i=m(q-1),\qquad
+ \sum_i\binom{i}{2}n_i=3\binom{k}{4}.
+\]
+Since $\binom{i}{2}=(i-1)+\binom{i-1}{2}$, the number of covered off-arc
+points is $m(q-1)-3\binom{k}{4}+t(A)$. Subtraction from the
+$q^2+q+1-k$ off-arc points proves the identity. Finally,
+\[
+ \binom{i-1}{2}\le\frac{r-2}{r}\binom{i}{2}\qquad(3\le i\le r),
+\]
+and the second moment gives the defect bound.
+\end{proof}
+
+\begin{corollary}[Conic-filling window and six-arcs]
+\label{cor:conic-filling-window}
+If $|\cU(A)|=q+1$, then
+\[
+ t(A)=q^2-mq+m+3\binom{k}{4}-k,\qquad
+ q^2-mq+m-k+\frac{6}{r}\binom{k}{4}\le0,
+\]
+and $q<m$. If moreover $\cU(A)$ is a nonsingular conic, then
+\[
+ 2k-3\le q<\binom{k}{2}.
+\]
+For even $q$, the lower bound strengthens to $q\ge2k-2$.
+For $k=6$, writing $c(A)=n_3$ gives
+\[
+ |\cU(A)|=q^2-14q+55-c(A),\qquad
+ 0\le c(A)\le15,\qquad
+ c(A)=(q-6)(q-9)
+\]
+when $|\cU(A)|=q+1$. In particular, at $q=11$ the fifteen chords have
+$45$ disjoint pairs and ten triple concurrences; they cover $115$ of the
+$127$ off-arc points and leave exactly twelve uncovered.
+\end{corollary}
+
+\begin{proof}
+The first formula is Theorem~\ref{lem:chord-defect} rearranged, and its
+comparison with the defect bound gives the quadratic inequality. There are
+$q^2-k$ covered off-arc points, so $q^2-k\le m(q-1)$; if $q\ge m$, then
+$0\le q(q-m)\le k-m<0$, a contradiction.
+
+If the uncovered locus is a conic, every chord is passant to it. Through an
+off-conic point there are at most $(q+1)/2$ passants when $q$ is odd and
+$q/2$ when $q$ is even: in odd characteristic these are the standard
+internal/external counts, while in even characteristic every off-conic
+point other than the nucleus has a unique tangent and its remaining $q$
+lines split equally into secants and passants (the nucleus has none). The
+$k-1$ chords through a vertex therefore give $q\ge2k-3$.
+
+For $k=6$, one has $r=3$ and $t(A)=n_3=c(A)$, giving the displayed
+specialization. At $q=11$, the two moments read
+$\sum i n_i=150$ and $\sum\binom{i}{2}n_i=45$; the forced value $c(A)=10$
+then gives $n_1+n_2+n_3=115$.
+\end{proof}
 
 This is the arc $K_2$ of Storme and Van~Maldeghem
 \cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
@@ -292,12 +370,6 @@ H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
 \]
 By orbit--stabilizer, the third row already gives the orbits of lengths
 $6$, $10$, $12$, and $15$; only points with exact stabilizer $C_2$ remain.
-To spell out the subtraction in the last row: the normalizer $D_5$ fixes
-one of the three $C_5$ eigenlines and interchanges the other two, giving
-$6$ points with stabilizer $D_5$ and $12$ with stabilizer $C_5$; the unique
-$C_3$-fixed line is already fixed by its $S_3$ normalizer; and $A_4$ cycles
-the three $V_4$ eigenlines, leaving all fifteen with exact stabilizer $V_4$.
-
 It remains to account for exact $C_2$ stabilizers. Each involution lies in
 two $D_5$ subgroups, two $S_3$ subgroups, and one $V_4$. Of its thirteen
 fixed points, these contribute respectively $2$, $2$, and $3$ points from
@@ -319,30 +391,12 @@ The covering radius of $C$ is three, and
 \end{proposition}
 
 \begin{proof}
-The set $\cU(A)$ is $G$-invariant. Dye's Clebsch classification gives
-exactly ten Brianchon points. The relevant double count is short.
-The fifteen edges contribute $150$ off-arc incidences. The $45$ pairs of
-disjoint edges meet once, so if $n_i$ counts off-arc points lying on exactly
-$i$ edges, then a point on three edges accounts for
-$\binom{3}{2}=3$ such pairs and
-\[
- n_1+2n_2+3n_3=150,
- \qquad n_2+3n_3=45,
- \qquad n_3=10.
-\]
-Thus the edges cover $n_1+n_2+n_3=115$ of the $127$ off-arc points, leaving
-$|\cU(A)|=12$. This is the $q=11$ specialization of the chord-defect
-identity in Lemma~\ref{lem:chord-defect}.
-By definition $\cU(A)$ is disjoint from the unique six-point orbit $A$.
-The orbit lengths in Proposition~\ref{prop:a5-point-orbits} therefore force
-this invariant twelve-set to be the unique twelve-point orbit
-$\cC(\F_{11})$. By the dictionary above this is exactly the projective
-deep-hole syndrome locus, and its nonemptiness gives covering radius three
-rather than two. Dye's edge criterion and the complete-exterior-set
-description of Blokhuis--Seress--Wilbrink independently supply the classical
-inclusion $\cC(\F_{11})\subseteq\cU(A)$
+Corollary~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$, while Dye's
+edge criterion gives $\cC(\F_{11})\subseteq\cU(A)$
 \cite[discussion preceding Theorem~6, p.~281]{Dye1991}; see also
-\cite[pp.~143, 146]{BSW1992}.
+\cite[pp.~143, 146]{BSW1992}. Since $|\cC(\F_{11})|=12$, equality follows.
+The arc--coset dictionary identifies this set with the projective deep-hole
+syndrome locus, and its nonemptiness gives covering radius three.
 \end{proof}
 
 \begin{corollary}[Directions, cosets, leaders, and received words]
@@ -482,8 +536,8 @@ Edge's finite-plane construction
 \cite[\S\S30.2--31]{Edge1956} and Dye's general-field synthetic theory
 \cite[Theorem~2, pp.~277--278]{Dye1991} exhibit five triangles on the six
 vertices, self-polar for $\cC$. Their vertex-pair matchings partition the
-fifteen pairs into a \emph{synthematic total}, that is, a partition of the
-edges of $K_6$ into five perfect matchings. Section~\ref{sec:support-bipartition}
+fifteen pairs into five perfect matchings of $K_6$.
+Section~\ref{sec:support-bipartition}
 turns its ten pairs of matchings into the Brianchon--support dictionary.
 
 \section{The rigidity theorem}
@@ -576,7 +630,7 @@ or two rational lines when it splits; in the nonsplit rank-two case its
 only rational point is the singular point. Thus
 Lemma~\ref{lem:six-arc-line-bound} again gives $|\cU(A)|\le12$. On the
 other hand, the chord-defect identity
-of Lemma~\ref{lem:chord-defect} says
+of Theorem~\ref{lem:chord-defect} says
 \[
  |\cU(A)|=22-c(A),
 \]
@@ -785,7 +839,7 @@ carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
   \draw[violet!80!black,thick,dash dot] (v0)--(v4) (v1)--(v3) (v2)--(v5);
   \draw[black,thick,loosely dashed] (v0)--(v5) (v1)--(v2) (v3)--(v4);
   \foreach \i in {0,...,5} \node[vertex] at (v\i) {\i};
-  \node[font=\small] at (0,2.05) {synthematic total $\mathcal T$};
+  \node[font=\small] at (0,2.05) {the five matchings};
   \begin{scope}[yshift=-2.0cm,font=\scriptsize]
     \draw[blue!70!black,thick] (-1.65,0)--(-1.3,0);
     \node[anchor=west] at (-1.2,0) {$T_0=01|23|45$};
@@ -822,7 +876,7 @@ carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
     \node[font=\small] at (0,2.45) {$KG(5,2)$};
   \end{scope}
 \end{tikzpicture}
-\caption{The synthematic--Petersen dictionary. The five line styles encode
+\caption{The five-matchings--Petersen dictionary. The line styles encode
 the five self-polar triangles as perfect matchings of the six coordinates.
 For each pair $\{T_i,T_j\}$, their union is an alternating six-cycle: its
 opposite-edge matching gives a Brianchon point, and its alternating vertex
@@ -834,8 +888,8 @@ Petersen vertex $ij$; adjacency means that the index pairs are disjoint.}
 \begin{proposition}[Brianchon--support dictionary]
 \label{prop:brianchon-support}
 Let $\mathcal T$ be the five self-polar triangles of Edge and
-Dye~\cite{Edge1956,Dye1991}, regarded as the five perfect matchings in
-their synthematic total, and let $\mathcal B(A)$ be the set of ten
+Dye~\cite{Edge1956,Dye1991}, regarded as five perfect matchings, and let
+$\mathcal B(A)$ be the set of ten
 Brianchon points of the Clebsch hexagon. For distinct $T,T'\in\mathcal T$,
 the union $T\cup T'$ is an alternating six-cycle. Let $M(T,T')$ be the
 perfect matching joining opposite vertices of this cycle. Let
@@ -865,10 +919,10 @@ subsets of $\mathcal T$.
 
 \begin{proof}
 The opposite-vertex matching is disjoint from $T$ and $T'$ and contains
-one edge from each of the other three members of the synthematic total.
+one edge from each of the other three members of $\mathcal T$.
 Hence $\{T,T'\}$ is recovered as the two members of $\mathcal T$ disjoint
 from $M(T,T')$, so the ten triangle pairs give exactly the ten perfect
-matchings outside the total. Applying the alternating-class rule to the
+matchings outside $\mathcal T$. Applying the alternating-class rule to the
 five displayed matchings gives ten distinct complementary support pairs,
 hence all ten such pairs. Edge's Clebsch construction says that the
 three chords of each such matching concur, at the ten distinct Brianchon
@@ -877,7 +931,7 @@ Petersen assertion are the alternating-cycle construction above.
 
 The ten outside matchings give the ten triple concurrences. The remaining
 fifteen intersections of disjoint chords have multiplicity one. Since every
-step uses only the invariant total and incidence, both bijections and their
+step uses only the five invariant matchings and incidence, both bijections and their
 compatibility with the support map are $A_5$-equivariant.
 \end{proof}
 
@@ -887,14 +941,14 @@ The ten projective directions having three nearest weight-two errors are
 exactly the ten Brianchon points.  At each such direction the three error
 supports are pairwise disjoint and hence form a perfect matching of the six
 coordinates.  The ten matchings thereby recovered are precisely the ten
-perfect matchings outside the five-matching synthematic total.
+perfect matchings outside the five matchings in $\mathcal T$.
 \end{corollary}
 
 \begin{proof}
 The three weight-two representations of a secant-index-three direction use
 the three chords through it.  Proposition~\ref{prop:brianchon-support}
 identifies the ten triple concurrences with the ten Brianchon points and
-their chords with exactly the ten matchings complementary to the total.
+their chords with exactly the ten matchings outside $\mathcal T$.
 \end{proof}
 
 \begin{proposition}[Invariant support bipartition]
@@ -919,7 +973,7 @@ and the ten Brianchon points.
 \begin{proof}
 The degree-six action of $A_5$ on the twenty three-subsets has two
 ten-element orbits, exchanged by complementation. It preserves a unique
-synthematic total, also preserved by
+set of five perfect matchings, also preserved by
 its full $S_5$ normalizer. The alternating-cycle construction of
 Figure~\ref{fig:synthematic-petersen} is therefore equivariant, and the
 outside normalizer coset exchanges the two support orbits. Fix a
@@ -943,76 +997,8 @@ Call an arc $A$ \emph{conic-filling} if $\cU(A)=\mathcal Q(\F_q)$ for some
 nonsingular conic $\mathcal Q$. The conic-filling syndrome phenomenon of
 Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
 without a symmetry hypothesis on the arc. A universal chord-multiplicity
-identity makes this a four-field question, and the only nontrivial residue
-is a classical exact-distance problem in the Sylvester graph.
-
-\begin{theorem}[Universal chord defect]
-\label{lem:chord-defect}
-Let $A$ be a $k$-arc in $\PG(2,q)$ with $k\ge4$. Let $n_i$ count the
-off-arc points incident with exactly $i$ chords, put
-\[
- r=\lfloor k/2\rfloor,\qquad
- t(A)=\sum_{i=3}^{r}\binom{i-1}{2}n_i,
-\]
-and write $m=\binom{k}{2}$. Then
-\[
- |\cU(A)|=q^2-(m-1)q+
- \left(m+3\binom{k}{4}-k+1\right)-t(A),
-\]
-and
-\[
- 0\le t(A)\le
- 3\binom{k}{4}\frac{r-2}{r}.
-\]
-If merely $|\cU(A)|=q+1$, then
-\[
- t(A)=q^2-mq+m+3\binom{k}{4}-k
-\]
-and hence
-\[
- q^2-mq+m-k+\frac{6}{r}\binom{k}{4}\le0;
-\]
-in particular,
-\[
- q<\binom{k}{2}.
-\]
-For $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,
-so
-\[
- |\cU(A)|=q^2-14q+55-c(A),\qquad 0\le c(A)\le15.
-\]
-Consequently, if $|\cU(A)|=q+1$, then
-\[
- c(A)=(q-6)(q-9).
-\]
-\end{theorem}
-
-\begin{proof}
-At a point off $A$, concurrent chords have pairwise disjoint endpoint
-pairs, so at most $r$ chords occur. Counting chord--point incidences and
-pairs of disjoint chords gives
-\[
- \sum_i i n_i=m(q-1),\qquad
- \sum_i\binom{i}{2}n_i=3\binom{k}{4}.
-\]
-Since
-$\binom{i}{2}=(i-1)+\binom{i-1}{2}$, the number of covered off-arc
-points is $m(q-1)-3\binom{k}{4}+t(A)$. Subtracting it from the
-$q^2+q+1-k$ off-arc points proves the identity. Moreover,
-\[
- \binom{i-1}{2}\le\frac{r-2}{r}\binom{i}{2}
- \qquad(3\le i\le r),
-\]
-which proves the bound on $t(A)$.
-
-If $|\cU(A)|=q+1$, rearranging the identity gives the displayed value of
-$t(A)$; comparing it with the upper bound gives the quadratic inequality.
-There are also $q^2-k$ covered off-arc points, so
-$q^2-k\le m(q-1)$. Were $q\ge m$, this would give
-$0\le q(q-m)\le k-m<0$, a contradiction. For $k=6$, one has $r=3$,
-$t(A)=n_3=c(A)$, and the displayed specialization follows; setting its
-left side equal to $q+1$ gives $c(A)=(q-6)(q-9)$.
-\end{proof}
+identity and the passant window leave only $q=9,11$; the former is excluded
+by a classical exact-distance problem in the Sylvester graph.
 
 \begin{lemma}[$q=9$ polarity graph]
 \label{lem:q9-polarity}
@@ -1060,18 +1046,10 @@ Clebsch hexagon.
 \end{theorem}
 
 \begin{proof}
-Lemma~\ref{lem:chord-defect} gives
-$c(A)=(q-6)(q-9)$ with $0\le c(A)\le15$. The prime-power condition therefore
-leaves only $q\in\{4,5,9,11\}$: at $q=2,3$ the displayed value is,
-respectively, $28$ and $18$; the values at $7$ and $8$ are negative;
-$6$ and $10$ are not prime powers; and every integer $q\ge12$ gives
-$c(A)\ge18$.
-
-At $q=4$, every six-arc is a hyperoval. Each point off it lies on three
-secants (count the six hyperoval points on the five lines through the
-point), so $\cU(A)$ is empty. At $q=5$, every six-arc is an oval and hence a
-nonsingular conic; the standard internal/external point counts show that
-every off-conic point lies on a secant, so again $\cU(A)$ is empty.
+Corollary~\ref{cor:conic-filling-window} gives $q\ge9$ and
+$c(A)=(q-6)(q-9)$ with $0\le c(A)\le15$. Thus the only prime-power
+candidates are $q=9,11$: $q=10$ is not a prime power, and every
+$q\ge12$ gives $c(A)\ge18$.
 
 It remains to exclude $q=9$. Since every point of $\cC$ is uncovered, no
 chord of $A$ meets $\cC$; every chord is therefore passant. A point off
@@ -1107,7 +1085,7 @@ Dye defines a Clebsch hexagon by the occurrence of exactly ten Brianchon
 points, and his Theorem~1 classifies their existence and projective orbit
 \cite[p.~271; Theorem~1, pp.~275--276]{Dye1991}. These points are precisely the off-vertex
 triple-chord concurrences counted by $c(K)$. Thus $c(K)=10$, and
-Lemma~\ref{lem:chord-defect} gives
+Theorem~\ref{lem:chord-defect} gives
 \[
  |\cU(K)|=q^2-14q+55-10=q^2-14q+45.
 \]
@@ -1158,33 +1136,31 @@ Clebsch hexagon. Conversely, both cases occur. If $k=8$, then
 \end{theorem}
 
 \begin{proof}[Proof with exhaustive finite verification]
-For $k=4$, Lemma~\ref{lem:chord-defect} gives
-$|\cU(A)|=(q-2)(q-3)$. Equating this with $q+1$ gives $q=5$. Every
-four-arc is a projective frame, and for the standard frame a direct
+For $k=4$, Corollary~\ref{cor:conic-filling-window} gives
+$5\le q<6$, hence $q=5$. Every four-arc is a projective frame, and for the
+standard frame a direct
 substitution gives
 \[
  \cU(A)=V(X^2+Y^2+Z^2+XY+XZ+YZ),
 \]
 where $V(f)$ denotes the projective zero set of $f$; this is a nonsingular
-six-point conic. For $k=5$, the lemma gives
+six-point conic. For $k=5$, the theorem gives
 $|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
 $q^2-10q+20=0$, which has no integral root. The case $k=6$ is
 Theorem~\ref{thm:why11} together with Theorem~\ref{thm:rigidity}.
 
-For $k=7$, Lemma~\ref{lem:chord-defect} gives
+For $k=7$, Theorem~\ref{lem:chord-defect} gives
 \[
  |\cU(A)|=q^2-20q+120-n_3.
 \]
 If this equals $q+1$, then
 \[
  n_3=q^2-21q+119,\quad
- n_2=105-3n_3,\quad
+n_2=105-3n_3,\quad
  n_1=3(q^2-14q+42).
 \]
-The standard arc-size bound gives $q\ge7$.  The condition $n_2\ge0$ gives
-$q\le15$, so the prime-power candidates are
-$q\in\{7,8,9,11,13\}$; then $n_1\ge0$ eliminates $7,8,9$.
-Thus only $q=11$ and $q=13$ remain, with forced spectra
+The conic-filling window gives $q\ge11$, while $n_2\ge0$ gives $q\le15$.
+Thus only the prime powers $q=11,13$ remain, with forced spectra
 $(n_1,n_2,n_3)=(27,78,9)$ and $(87,60,15)$ respectively. An exhaustive
 four-frame-normalized enumeration now supplies the finite exclusion. It
 finds $10232$ distinct normalized seven-arcs at $q=11$, of which $140$ have
@@ -1195,20 +1171,9 @@ seven-arc exactly three times, according to which non-frame point is
 deleted. For all $1820$ candidates of the required size, the quadratic
 evaluation matrix has full rank six, so none lies on a conic.
 
-Finally let $k=8$. Here
-$t(A)=n_3+3n_4$, and Lemma~\ref{lem:chord-defect} gives
-\[
- t(A)=q^2-28q+230,\qquad t(A)\le105.
-\]
-The second moment gives
-$n_2=210-3t(A)+3n_4$. Since the number of covered off-arc points is
-$q^2-8$, the condition $n_1\ge0$ then gives
-\[
- n_4\le 28q-448+3t(A).
-\]
-The arc-size bound gives $q\ge7$. The last inequality excludes
-$q\in\{7,8,9,11\}$, while $t(A)\le105$ excludes every $q\ge23$.
-The remaining prime powers are exactly $13,16,17,19$.
+Finally let $k=8$. The conic-filling window and its quadratic inequality
+give $q\ge13$ and $q^2-28q+125\le0$, hence $q\le22$. The prime powers in
+this interval are exactly $13,16,17,19$.
 \end{proof}
 
 Thus conic filling is finite at every fixed arc size; the classification is
@@ -1277,11 +1242,15 @@ Rigidity theorem
 & \path{RelativeConicArcs/Q11DyeAxioms.lean};
 \path{RelativeConicArcs/Q11DyeConsequences.lean};
 \path{RelativeConicArcs/SixArcDefectBridge.lean} \\
+Universal defect and conic-filling window
+& two chord moments; passant counts
+& six-arc specialization only:
+\path{RelativeConicArcs/ClebschChordDefect.lean} \\
 Gap and low-degree loci
 & finite linear algebra over $\F_{11}$
 & --- \\
 Uniqueness of $q=11$
-& chord moments; cited Sylvester bound
+& conic-filling window; cited Sylvester bound
 & \path{RelativeConicArcs/ClebschChordDefect.lean};
 \path{RelativeConicArcs/Q9Sylvester.lean} \\
 Clebsch-family formula
@@ -1341,21 +1310,20 @@ $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
 
 \section{Conclusion}
 
-The Clebsch code shows that covering-radius data can recover geometry that
-was not built into the code: conic containment of the deep-hole directions
-forces the Clebsch hexagon and hence its $A_5$ symmetry. The proof separates
-the mechanism from the census. A line bound and a chord-defect identity
-reduce the geometric condition to Dye's equality case. Enumeration proves
-the low-degree strengthening, the sharp numerical gap, and the terminal
-$k=7$ exclusions.
-
 The universal defect identity makes conic filling finite at every fixed arc
 size. It explains both the isolation of $q=11$ and the classification for
-$4\le k\le7$, while reducing the eight-point case to four fields. Closing
-those fields will require further concurrency or extension information. A
-second problem is to connect fixed-$k$ rigidity with the large-arc
-conic-forcing regime. Both ask how far a syndrome locus can reconstruct the
-projective system that produced it.
+$4\le k\le7$, while the two-sided conic-filling window reduces the
+eight-point case to four fields. The Clebsch code realizes a sharp endpoint:
+covering-radius data recover geometry that was not built into the code,
+forcing the Clebsch hexagon and hence its $A_5$ symmetry. A line bound and
+the defect identity reduce that rigidity to Dye's equality case;
+enumeration is reserved for the low-degree strengthening, the numerical
+gap, and the terminal $k=7$ exclusions.
+
+Closing the four eight-point fields will require further concurrency or
+extension information. A second problem is to connect fixed-$k$ rigidity
+with the large-arc conic-forcing regime. Both ask how far a syndrome locus
+can reconstruct the projective system that produced it.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}

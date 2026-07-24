@@ -16,7 +16,7 @@
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 19-page candidate with a complete nineteen-row release surface.
+warning-free 18-page candidate with a complete nineteen-row release surface.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary
@@ -28,8 +28,8 @@ Dye-bound rigor clarification and presentation findings are repaired on
 current `main`. A subsequent elevation pass replaces four separate
 small-arc counts by a universal chord-defect theorem, proves
 $|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$ together with a sharper
-quadratic field-size barrier, classifies conic filling through seven
-points, and reduces the eight-point case to
+quadratic field-size barrier and the passant lower bound $q\ge2k-3$,
+classifies conic filling through seven points, and reduces the eight-point case to
 $q\in\{13,16,17,19\}$ while cutting a page of non-feeding census material.
 
 The remaining C182 blocker is external publication packaging. The previously

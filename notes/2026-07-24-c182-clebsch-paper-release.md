@@ -10,9 +10,10 @@ Paper I now states and proves the universal chord-defect identity for a
 $k$-arc, the sharp moment bound on its defect, and the stronger consequence
 that $|\mathcal U(A)|=q+1$ forces both an explicit quadratic field-size
 barrier and $q<\binom{k}{2}$.  The quadratic gives the sharp sieve bounds
-$q\le5,11,15,22$ at $k=4,6,7,8$.  The same theorem subsumes the four
-separate $k=4,5,6,7$ counts.  The classification is complete through seven
-points, and the rederived eight-point moment sieve leaves exactly
+$q\le5,11,15,22$ at $k=4,6,7,8$.  A passant count supplies the complementary
+bound $q\ge2k-3$.  The theorem and its corollary subsume the four separate
+$k=4,5,6,7$ counts.  The classification is complete through seven points,
+and the rederived eight-point sieve leaves exactly
 $q\in\{13,16,17,19\}$.
 
 The introduction now poses reconstruction and algebraic degeneracy for
@@ -20,7 +21,9 @@ projective deep-hole loci as the general problem, and connects the
 coset-leader distribution to the Davydov--Marcugini--Pambianco coset-weight
 framework.  The unused nearest-conic and one-point-neighbour census,
 internal claim-map table, and duplicated small-field table were removed.
-The result is a warning-free 19-page manuscript, one page shorter than the
+The engine now appears in Section 2, its $k=6,q=11$ specialization is
+worked there, and the later uncovered-locus proof delegates to it.  The
+result is a warning-free 18-page manuscript, two pages shorter than the
 preceding release candidate.
 
 ## Verification
@@ -49,7 +52,8 @@ inserted in the manuscript.
 - **Settled in the Tao-style pass:** the apparent four-case phenomenon is
   one moment identity.  Comparing its forced defect with the universal
   defect ceiling yields the stronger quadratic barrier, which explains all
-  four small-$k$ upper bounds at once.
+  four small-$k$ upper bounds at once; counting passants through a vertex
+  supplies the matching lower window.
 - **Open:** characterize equality or near-equality in the universal defect
   ceiling.  The proof shows that extremality constrains chord multiplicities
   to the largest possible concurrence, but turning that into geometry is a

@@ -165,7 +165,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 243",
+      "paper_location": "source line 321",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -258,7 +258,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 313",
+      "paper_location": "source line 385",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -274,7 +274,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 348",
+      "paper_location": "source line 402",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -322,7 +322,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 385",
+      "paper_location": "source line 439",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -449,7 +449,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 436",
+      "paper_location": "source line 490",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -496,7 +496,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 518",
+      "paper_location": "source line 572",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -573,7 +573,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 560",
+      "paper_location": "source line 614",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -617,7 +617,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 667",
+      "paper_location": "source line 721",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -633,7 +633,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 692",
+      "paper_location": "source line 746",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -667,7 +667,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 721",
+      "paper_location": "source line 775",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -683,13 +683,13 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 834",
+      "paper_location": "source line 888",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
         "id": "prop:brianchon-support",
         "kind": "theorem-environment",
-        "sha256": "caceff90101d0a58f99d5ecd2c6e5f363ae056f1b88b542fb0d0f1fc5bc5240a"
+        "sha256": "d7b0fe5c351928bfea000c685822de9b16ce30022c2f904d4c900011ba8da591"
       },
       "trust_boundary": "The incidence dictionary is a human consequence of the cited Edge--Dye geometry.",
       "unconditional_remainder": "The manuscript identifies the support sets through the displayed incidence configuration."
@@ -764,13 +764,13 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 884",
+      "paper_location": "source line 938",
       "route": "mixed",
       "row": 22,
       "source": {
         "id": "cor:decoder-brianchon",
         "kind": "theorem-environment",
-        "sha256": "94b8ee9cff0623e7afa40325afdbe3a50863f0a1800d3a2402a653632103e5de"
+        "sha256": "c1ea61b02bd14425b18655fee79a57d9b654ecdf8f6715e77071105f55b75fbe"
       },
       "trust_boundary": "The manuscript gives the conceptual corollary; Lean checks the exact Brianchon leader-support rows for the displayed witness."
     },
@@ -823,7 +823,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 900",
+      "paper_location": "source line 954",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -837,11 +837,11 @@
       "components": [
         {
           "cited_inputs": [
-            "No external input; complete double count in the manuscript"
+            "No external input; complete double count and standard passant counts in the manuscript"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "universal secant-moment double count and finiteness bound",
-          "unconditional_remainder": "The identity, defect bound, and q < binom(k,2) consequence are proved for every k in the manuscript."
+          "subclaim": "universal secant moments and conic-filling window",
+          "unconditional_remainder": "The identity, defect bound, quadratic barrier, and two-sided field-size window are proved for every k in the manuscript."
         },
         {
           "lean": {
@@ -931,16 +931,16 @@
           "subclaim": "Sylvester distance-two clique obstruction"
         }
       ],
-      "id": "lem-chord-defect+lem-q9-polarity",
-      "paper_location": "source line 949",
+      "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
+      "paper_location": "source line 191",
       "route": "mixed",
       "row": 24,
       "source": {
-        "id": "lem:chord-defect+lem:q9-polarity",
+        "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "216365a4ac620a5360b482b63cf501ab17b13dce14737fd3dfd237484f46c427"
+        "sha256": "2ca335259b601381e649f0c975cd25326e0b5f031b2fbe3e40758a0a1be760d2"
       },
-      "trust_boundary": "The manuscript proves the universal chord-defect identity and bound; Lean checks its six-arc specialization and an explicit Sylvester distance-two clique certificate."
+      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
     {
       "components": [
@@ -1020,7 +1020,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1054",
+      "paper_location": "source line 1040",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1098,7 +1098,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1089",
+      "paper_location": "source line 1067",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1118,7 +1118,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "small-arc reductions, k=6 dependency, and k=8 sieve",
-          "unconditional_remainder": "The manuscript derives the moment equations, identifies their geometric fibers, and proves the k=8 sieve; only the k=6 branch invokes rows 25 and 17."
+          "unconditional_remainder": "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."
         },
         {
           "lean": {
@@ -1198,7 +1198,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1145",
+      "paper_location": "source line 1123",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1206,7 +1206,7 @@
         "kind": "theorem-environment",
         "sha256": "edd781a0e473f7e85c8aadb75e682db903119693fd26a860affa895144f64ed7"
       },
-      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 four-field sieve is human algebra."
+      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 four-field sieve follows from the human-proved conic-filling window."
     },
     {
       "computation": {
@@ -1242,7 +1242,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 605",
+      "paper_location": "source line 659",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1260,9 +1260,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "924fd13ae73d544d551d6e266db5c0aba654bb3a322e254520345be45436f669"
+    "sha256": "969e2a90608c7b4069c0a4f6e281d26d4f9e9275ab0d6ce11790b1071fdef079"
   },
-  "manuscript_sha256": "dc7af4cf98816d356578771de7ebdc7337550e8611719a8e76f04ab0f904922f",
+  "manuscript_sha256": "a78db93fbeee065bc887b5789f9162490bb39cd8d8ef19ca91e5039d7f1d9977",
   "public_documents": [
     {
       "path": "README.md",
@@ -1302,7 +1302,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "2caf5c67a2b2677798892228c75d3d9f8b791f0ac8a2c776d9af7169802f427b"
+    "sha256": "a2259a2536aae7cd9dec2e88715d98aa982aea63ba645d0a7e3c047ee6b2d61c"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1518,12 +1518,12 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "7d9fc03764f629c3ea4d2addb8bea9f6b48604c906000e71d54595246513d623"
+        "sha256": "0be7d9b8ce9d708a61288b1d982d2b8eceaefb2119b55aa5832817f84b758a44"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "9b5327e41635984c48091525c5376a41a1062dc5729b6c86db8156926a158d8a"
+        "sha256": "dcc9c32b4e5cd19c59b5c2a9c36be429ec9c44ce518117586bca28206a3e67b6"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -1533,12 +1533,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "a95f15723275ff17b292862653fc5efbafd706f4fdf77d06942079999aab5fe3"
+        "sha256": "5327c10f1c5d6690716f25955e745e69982663dc7c9cff6ffa87d64228598940"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "e91236cd2a1942393a9f460bfef4ba2431cf70f148c2db48052b8cd753e1d3c0"
+        "sha256": "5a4bd591ca77c0651d69cfd9ba8d4d04696d34c20e3ebda577e5ffc2daf0ef96"
       }
     ]
   }
