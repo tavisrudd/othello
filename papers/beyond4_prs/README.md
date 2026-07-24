@@ -3,12 +3,14 @@
 **Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
 coherent polar flags, and modular carriers.*
 
-**Status:** integrated research-announcement draft. The theorem spine and computational boundaries
-are frozen, but a refereeable Version 1 requires full manuscript proofs, claim-level trust mapping,
-the statement-adequacy and provenance sections, and an immutable reproducibility release. DOI
-publication remains gated. C545 owns the eventual proof-complete Version 1 release; C539--C544 own
-the paper-facing Lean closure, which does not substitute for missing manuscript proofs. This merged
-paper supersedes the former plan for a redundancy-five-only manuscript.
+**Status:** 41-page proof-complete local manuscript candidate.  The manuscript
+proofs, claim-level trust map, statement-adequacy boundary, public
+classification records, certificate schema, literature audit, and rendered
+referee-polish gates are closed.  DOI publication remains gated on the
+C541--C544 aggregate formalization/reconciliation, an independent final
+reader, a clean public export/replay, immutable identifiers, and author/account
+confirmation.  This merged paper supersedes the former plan for a
+redundancy-five-only manuscript.
 
 ## Build
 
@@ -23,11 +25,12 @@ The principal files are `main.tex`,
 `refs.bib`, `theorem-map.md`,
 `claim-proof-novelty-ledger.md`, `adversarial-proof-evidence-audit.md`,
 `second-draft-fix-plan.md`, and `verification-map.md`.  Major TeX units live
-under `sections/`; `main.tex` is being reduced to the build driver described
-in `sections/README.md`.  Public certificate and release scaffolding is under
-`supplement/`.
+under `sections/`; `main.tex` is the build driver described in
+`sections/README.md`.  Public certificates and release material are under
+`supplement/`.  Run `python3 supplement/verify.py` for the local manifest and
+classification-record check, or add `--replay` for every paper-local replay.
 
-## Paper spine
+## Results
 
 The paper begins immediately beyond the published redundancy-at-most-four frontier and keeps the
 exact strength of each proved level visible:
@@ -37,8 +40,8 @@ exact strength of each proved level visible:
 3. the all-field redundancy-six deep-hole classification and the complete
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
-4. the complete transverse redundancy-eight/nine arguments, with their exact high-field
-   thresholds, orbit laws, modular boundaries, and still-open
+4. the complete redundancy-eight/nine high-field arguments, with their exact
+   thresholds, orbit laws, modular boundaries, and closed pointed
    lower-package/slice gates;
 5. the general coherent-polar induction theorem;
 6. the characteristic-two ordered-Hessian degeneracy theorem and the explicit
@@ -79,7 +82,7 @@ A release described as proof-complete requires:
 1. theorem/proof completeness review;
 2. claim-by-claim trust map;
 3. statement-adequacy appendix;
-4. titled provenance section;
+4. data/code availability and assistance disclosure;
 5. exact shared-Lean commit, targets, and axiom audit;
 6. immutable source/certificate manifest;
 7. clean-checkout replay and build;
@@ -88,7 +91,9 @@ A release described as proof-complete requires:
 9. target-policy check;
 10. cold-prose and adversarial review.
 
-The present draft fails the proof-expansion and immutable-release gates.
+The present draft passes the local proof and supplement-schema gates but not
+the aggregate formalization, clean public replay, immutable-release, or
+author/account gates.
 
 ## Rapid priority record
 

@@ -98,8 +98,15 @@ boundary.
 After removing those factors, bidegree additivity forces any separable
 factorization to be $(1,1)+(1,1)$.  Both factors are graphs of
 projectivities.  Make the first graph the identity by independent
-changes of coordinate on the parameter and root lines.  For a
-semisimple second graph $g(t)=ct$, normalize the two cubics at its fixed
+changes of coordinate on the parameter and root lines.  Over an
+algebraically closed field of characteristic two, the second
+projectivity is exactly one of the following: the identity; a
+semisimple element with two fixed points, conjugate to $g(t)=ct$ with
+$c\ne1$; or a nontrivial unipotent element with one fixed point,
+conjugate to $g(t)=t+1$.  This is the Jordan classification of
+$2\times2$ matrices modulo scalars, so the comparisons below exhaust
+all pairs of projectivity graphs.  For a semisimple second graph
+$g(t)=ct$, normalize the two cubics at its fixed
 parameters to
 \[
              U=(a,1,0,0),\qquad V=(0,0,\gamma,d).
@@ -123,7 +130,11 @@ $g(t)=t+1$, comparison with
 instead gives $d=\gamma=0$ and $a\gamma=1$, a contradiction.  The
 identity case is included in the semisimple comparison and fails the
 same equations.  Thus $\Sigma$ is the complete separable external
-locus.
+locus.  The parameter and root coordinate changes used above are
+precisely basis changes on $\ell$ and $E$; the ordered-Hessian
+incidence and the family $\{\PP(QE)\}$ are equivariant for these
+changes.  Undoing the normalization therefore returns a line in
+$\Sigma$ and introduces no additional component.
 
 For the inseparable locus, $N_s$ vanishes identically exactly when
 $\ell$ is a line on the smooth quadric
@@ -154,39 +165,43 @@ For $Q=aX^2+bXY+cY^2$, the line $QE$ has coordinates
 \]
 Consequently $\Sigma$ is cut out scheme-theoretically by the
 $2\times2$ minors of
-\[
+\begin{equation}\label{eq:hessian-veronese-ideal}
 \begin{pmatrix}
 z_0&z_1&z_2\\
 z_1&z_3+z_2&z_4\\
 z_2&z_4&z_5
-\end{pmatrix}.                                             \tag{38}
-\]
+\end{pmatrix}.
+\end{equation}
 The tangent ruling conic is
 \[
  z_1=z_4=0,\quad z_2=z_3,\quad z_0z_5=z_2^2,
 \]
 the square-quadratic boundary of the displayed parametrization.  The
 complementary ruling is
-\[
- \cN:\quad z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2.      \tag{39}
-\]
-Together with the Chow equation for lines meeting $C_3$, (38)--(39)
+\begin{equation}\label{eq:hessian-complementary-ruling}
+ \cN:\quad z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2.
+\end{equation}
+Together with the Chow equation for lines meeting $C_3$,
+\eqref{eq:hessian-veronese-ideal}--\eqref{eq:hessian-complementary-ruling}
 are the complete universal degeneracy ideal found in the theorem.
 
 For a split base $R$, the root-compatible line
 $\ell_{f,R}=L_f(\PP(RE^\vee))$ has Pl\"ucker coordinates quadratic
 in the coefficients of $R$.  If its generic point lies in $\Sigma$,
-the minors (38) say that every iterated contraction pencil has a common
-quadratic.  Proposition~\ref{prop:contained-rank-two}, applied to the
+the minors \eqref{eq:hessian-veronese-ideal} say that every iterated
+contraction pencil has a common quadratic.
+Proposition~\ref{prop:contained-rank-two}, applied to the
 overlapping contraction flags, gives the persistent rank-two carrier;
 when a consecutive contraction coefficient vanishes in the ground
 characteristic, the same overlap equations and Lucas' theorem give
 exactly the contraction-kernel nucleus flags.  Conversely, the
-catalecticant and Lucas kernels make every minor in (38) vanish.
+catalecticant and Lucas kernels make every minor in
+\eqref{eq:hessian-veronese-ideal} vanish.
 This proves equality of the reduced pullback with the stated union,
 not only set-theoretic containment in one direction.
 
-For $\cN$, the linear equations in (39), after substitution, give
+For $\cN$, the linear equations in
+\eqref{eq:hessian-complementary-ruling}, after substitution, give
 the consecutive identities
 \[
 h_{-1}(R)^2=h_{-2}(R)h_0(R),\qquad

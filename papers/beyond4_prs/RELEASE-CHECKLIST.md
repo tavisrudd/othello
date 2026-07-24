@@ -52,8 +52,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 |---|---|---|---|
 | R1 | PASS | Public-facing manuscript uses stable `Certificate R5`--`Certificate e7` labels, with no internal C-number artifact references. | Exact manuscript scan is empty after replacing the four internal C-number references. |
 | R2 | PASS | Certificate schema lets an external implementer identify inputs, outputs, orbit convention, stop condition, and independent replay class. | The schema gives normalization and tie-break rules and trust classes; the generated record gives searched domains, separate flags, exhaustion identities, and input hashes; the reproduction guide gives the deterministic extraction check. |
-| R3 | REVIEW | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/REPRODUCING.md` exists; execute every public command from the export. |
-| R4 | FAIL | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | Development template has 12 `TBD` lines. |
+| R3 | PASS | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/verify.py` is the single entry point; its quick check verifies all 56 manifest rows, the generated public classifications, and their hashes. |
+| R4 | REVIEW | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | The complete local bundle and built PDF have exact hashes and byte counts; final public commit, archive, and DOI fields require the external release step. |
 | R5 | FAIL | Public paper-only repository URL, immutable tag/commit, and DOI/permanent archive URL resolve. | No public release exists. |
 | F1 | REVIEW | Statement-adequacy appendix reproduces each adopted Lean headline and states the exact paper-to-formal boundary. | Appendix and formalization ledger exist; C540--C544 remain queued. |
 | F2 | FAIL | Aggregate C544 import, axiom, target, and manuscript-reconciliation gates pass on one pinned shared-public-Lean commit. | C544 is not complete. |
@@ -70,7 +70,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | E6 | PASS | Long theorem inventories are upright and the literal phrase `paper spine` is absent. | Exact phrase scan is empty. |
 | E7 | PASS | Public verification table is compact, breakable, and does not create a nearly empty preceding page. | Rendered page 31 contains the complete ten-row public table; page 30 has 43 nonblank lines, so no nearly empty predecessor page is created. |
 | E8 | PASS | Thin driver, one file per major section, and separate appendices all build. | `main.tex` is a 107-line driver; the eleven numbered sections and statement-adequacy appendix expand byte-for-byte to the pre-split source, and `make check` passes. |
-| PR | REVIEW | Titled provenance/responsibility section identifies derivation, computation, formalization, and author responsibility without overstating review. | Section exists; author confirmation remains external. |
+| PR | REVIEW | Data/code availability and assistance disclosure identify computation, formalization, AI assistance, and author responsibility without overstating review. | The conventional unnumbered statement is in source; exact system/version wording and author confirmation remain external journal-policy items. |
 
 ## 6. Adversarial and release gates
 
@@ -87,11 +87,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 ## Work order
 
-1. Close P3-R6 and the remaining R5/R6 portions of P5 without weakening
-   the advertised theorem scope.
-2. Publish the R5--R7 classification records and close C2/R1--R3.
-3. Complete C540--C544 and reconcile F1--F2.
-4. Close E5 and perform the symbol, rendered, and adversarial cold reads.
-5. Split the source, build/replay the clean paper-only export, and fill R4/X1.
-6. Confirm authors and venue, recheck policy, then prepare the exact upload
+1. Complete C541--C544 and reconcile F1--F2.
+2. Obtain the independent final-reader signoff for A2.
+3. Build/replay the clean paper-only export and fill the public fields in R4/X1.
+4. Confirm authors and venue, recheck policy, then prepare the exact upload
    artifact.  External publication remains a separate irreversible action.

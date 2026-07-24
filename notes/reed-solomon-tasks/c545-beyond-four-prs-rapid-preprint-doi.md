@@ -1,7 +1,9 @@
 # C545 — rapid beyond-four PRS preprint and DOI
 
-**Lane:** `reed-solomon` · **Status:** queued after the second-draft proof gates; DOI publication
-blocked for the current research-announcement artifact
+**Lane:** `reed-solomon` · **Status:** active; local proof, classification-record,
+supplement-schema, literature, and referee-polish gates closed; DOI publication
+blocked on C541--C544 aggregation, independent final read, clean public
+export/replay, immutable identifiers, and author/account confirmation
 
 ## Objective
 

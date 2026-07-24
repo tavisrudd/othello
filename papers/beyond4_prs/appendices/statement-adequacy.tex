@@ -1,83 +1,35 @@
 \section{Statement-adequacy ledger}\label{app:adequacy}
 
-This appendix reproduces verbatim the formal statements on which the
-manuscript places Lean-level trust.  It is intended to make statement
-adequacy refereeable without requiring the reader to inspect the full
-development.  The source anchors are
+This appendix records the formal statement boundary on which the
+manuscript places Lean-level trust.  The verbatim declarations are in
+\texttt{supplement/LEAN-STATEMENTS.md}; the source anchors are
 \path{RelativeConicArcs/PRSResidualQuadratic.lean} and
 \path{RelativeConicArcs/PRSRedundancyNine.lean}; the import and audit
 gates are those named in Section~\ref{sec:verification}.
 
 \paragraph{Bottom definitions.}
-\begingroup\footnotesize
-\begin{verbatim}
-def dividedPowerContraction {n : ℕ} (r : R)
-    (a : Fin (n + 2) → R) : Fin (n + 1) → R :=
-  fun i => a i.succ - r * a i.castSucc
-
-structure ResidualSliceInput (S : Type*) (q : ℕ) where
-  isDeep : S → Prop
-  exceptional : S → Prop
-  integralGenusAtMostOneSlice : S → Prop
-  rationalPointOutsideDeletedDivisors :
-    q ≥ 53 → S → Prop
-  splitSquarefreeWitness : S → Prop
-  witnessMakesShallow :
-    ∀ {s}, splitSquarefreeWitness s → ¬ isDeep s
-  pointGivesWitness :
-    ∀ (hq : q ≥ 53) {s}, exceptional s →
-      integralGenusAtMostOneSlice s →
-      rationalPointOutsideDeletedDivisors hq s →
-      splitSquarefreeWitness s
-
-structure PersistentFamilyData (S : Type*) (q : ℕ)
-    [Fintype S] [DecidableEq S] where
-  tangent : Finset S
-  sigma : Finset S
-  deep : Finset S
-  tangent_sigma_disjoint : Disjoint tangent sigma
-  deep_eq : deep = tangent ∪ sigma
-  fieldOrderPositive : 0 < q
-  tangent_card : tangent.card = q * (q + 1)
-  sigma_card_doubled : 2 * sigma.card = q * (q ^ 2 - 1)
-  orbitCase : OrbitArithmeticCase
-\end{verbatim}
-\endgroup
-
-The first definition is the paper's contraction.  The two structures
+The formal contraction is the coefficient operation
+\[
+ a_i\longmapsto a_{i+1}-ra_i,
+\]
+which is exactly the paper's affine divided-power contraction.
+The structures
+\texttt{Residual\allowbreak Slice\allowbreak Input} and
+\texttt{Persistent\allowbreak Family\allowbreak Data}
 make geometric integrality, deleted-divisor rational points,
 witness production, family identification, and family counts explicit
 inputs rather than axioms hidden inside a Boolean certificate.
 
 \paragraph{Headline synthesis terminal.}
-\begingroup\footnotesize
-\begin{verbatim}
-theorem redundancyNineSynthesis {S : Type*} {q : ℕ}
-    [Fintype S] [DecidableEq S]
-    (hq : q ≥ 53)
-    (slice : ResidualSliceInput S q)
-    (families : PersistentFamilyData S q)
-    (exceptional_iff :
-      ∀ s, slice.exceptional s ↔ s ∉ families.deep)
-    (persistentDeep :
-      ∀ s, s ∈ families.deep → slice.isDeep s)
-    (hslice :
-      ∀ s, slice.exceptional s →
-        slice.integralGenusAtMostOneSlice s)
-    (hpoint :
-      ∀ s (_hs : slice.exceptional s),
-        slice.rationalPointOutsideDeletedDivisors hq s) :
-    (∀ s, slice.isDeep s ↔ s ∈ families.deep) ∧
-      (∀ s, s ∉ families.deep →
-        slice.splitSquarefreeWitness s) ∧
-      families.deep.card = q * (q + 1) ^ 2 / 2 ∧
-      (projectiveOrbitCount families.orbitCase,
-        semilinearOrbitCount families.orbitCase) =
-      orbitCountPair families.orbitCase
-\end{verbatim}
-\endgroup
+The theorem \texttt{redundancyNineSynthesis} takes $q\geq53$, the two
+structures above, and four named paper inputs:
+\texttt{exceptional\_iff}, \texttt{persistentDeep},
+\texttt{hslice}, and \texttt{hpoint}.  It concludes the exact
+deep-set equivalence, a split squarefree witness outside that set, the
+cardinality $q(q+1)^2/2$, and the stated projective/semilinear
+orbit-count pair.
 
-This terminal is adequate for the final synthesis implication once the paper supplies
+This is adequate for the final synthesis implication once the paper supplies
 the arguments \texttt{exceptional\_iff}, \texttt{persistentDeep},
 \texttt{hslice}, and \texttt{hpoint}.  It does not prove those
 geometric and coding inputs, nor does it derive the orbit table from a
@@ -92,4 +44,3 @@ only \texttt{propext}, \texttt{Classical.choice}, and
 and the headline synthesis theorem.  It uses no project-specific
 axiom, native evaluator, finite-data import, or opaque computational
 oracle.
-

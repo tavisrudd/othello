@@ -361,6 +361,14 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
+      "bytes": 2361,
+      "path": "LEAN-STATEMENTS.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Lean statement-adequacy source",
+      "sha256": "80d2d2d59bb59b3fcf82d05d4238e76491215dd87d924c5f93d2dd263660e412"
+    },
+    {
       "bytes": 5436,
       "path": "R9-SLICE-DATA.md",
       "public_label": "Supplement",
@@ -369,12 +377,12 @@
       "sha256": "ba780a919786b1797a884658080282632ec33a9c6dc675b5d77d6083f566e922"
     },
     {
-      "bytes": 6135,
+      "bytes": 6130,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "f45243ccd35c1db0306c423424e5057e4db934258b00285150394e323878dab4"
+      "sha256": "bb14b83aa0ec74e7a604dd1f8552701b031f69c855bcbb00619e425c1fb74106"
     },
     {
       "bytes": 12059,
@@ -385,12 +393,20 @@
       "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
     },
     {
-      "bytes": 14583,
+      "bytes": 14686,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "40c3483185f9c21c41af5140a634f8ea422e2f163689d787f65577384a0607c6"
+      "sha256": "63800ade4708f681c20090587035013fb5bd53efaad133ba39a317182f4bab55"
+    },
+    {
+      "bytes": 3536,
+      "path": "verify.py",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Top-level verifier",
+      "sha256": "249a048015c1aadc018ae1d546c6e7300c163454d60da79720eb4e19ef6904ec"
     },
     {
       "bytes": 17225,

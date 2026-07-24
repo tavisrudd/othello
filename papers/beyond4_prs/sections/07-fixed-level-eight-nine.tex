@@ -67,41 +67,42 @@ For $c=(c_0,\ldots,c_4)$ put
 \]
 On the rank-two-kernel chart, if $p_0,p_1$ span $\ker H_c$, the bottom
 ordered-root curve is
-\[
+\begin{equation}\label{eq:r8-bottom-cover}
  G_c(u,v)=
- \frac{p_0(u)p_1(v)-p_1(u)p_0(v)}{[u,v]}=0.                \tag{25}
-\]
+ \frac{p_0(u)p_1(v)-p_1(u)p_0(v)}{[u,v]}=0.
+\end{equation}
 The rank-at-most-two secant carrier, including the gcd-two and
 rank-drop boundary strata, is
-\[
+\begin{equation}\label{eq:r8-secant-carrier}
  D(c)=\det\begin{pmatrix}
  c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
- \end{pmatrix}=0.                                         \tag{26}
-\]
+ \end{pmatrix}=0.
+\end{equation}
 For an exact common root $z$, the gcd-one incidence is cut out by
-\[
+\begin{equation}\label{eq:r8-gcd-one}
  \operatorname{rank}
- \begin{pmatrix}H_c\\1&z&z^2&z^3\end{pmatrix}\leq2,       \tag{27}
-\]
+ \begin{pmatrix}H_c\\1&z&z^2&z^3\end{pmatrix}\leq2.
+\end{equation}
 with the evident homogeneous row at infinity.  After substitution,
-(26) has degree at most three in $s$, while each $3$-minor in
-(27) has degree at most two for fixed $z$.
+\eqref{eq:r8-secant-carrier} has degree at most three in $s$, while
+each $3$-minor in \eqref{eq:r8-gcd-one} has degree at most two for
+fixed $z$.
 
 The remaining reducible-monodromy carriers are explicit.  Put
 $z_i=\binom4i c_i$.  Outside characteristics two and three the cyclic
 closure is
-\[
+\begin{equation}\label{eq:r8-cyclic-veronese}
  [u:v:w]\longmapsto
- [u^2:2uv:v^2+2uw:2vw:w^2],                               \tag{28}
-\]
+ [u^2:2uv:v^2+2uw:2vw:w^2],
+\end{equation}
 a degree-four projected Veronese surface containing no line.  In
 characteristic three it is the degree-four cone
 $\Join(e_2,C_4)$; its only lines are rulings, and the consecutive-row
 overlap excludes every ruling as a polar line.  In characteristic two
 it is
-\[
- \Pi_{\rm cyc}=\PP\langle e_1,e_2,e_3\rangle,\qquad c_0=c_4=0, \tag{29}
-\]
+\begin{equation}\label{eq:r8-cyclic-binary}
+ \Pi_{\rm cyc}=\PP\langle e_1,e_2,e_3\rangle,\qquad c_0=c_4=0.
+\end{equation}
 whose unique contained polar-line component is
 $\cN_3=\PP\langle e_2,e_3\rangle$.  The inseparable degeneration is
 the derivative-minor locus of $p_0,p_1$ and introduces no further
@@ -122,15 +123,17 @@ Thus these are closed strata over the coefficient ring, not a
 classification only of their rational points.
 
 \emph{Geometric monodromy and the three-marker cover.}
-Off (26)--(29), the separable cubic map is noncyclic, so its geometric
+Off \eqref{eq:r8-secant-carrier}--\eqref{eq:r8-cyclic-binary}, the
+separable cubic map is noncyclic, so its geometric
 monodromy is $S_3$.  Transitivity on ordered pairs of distinct roots
-makes (25) geometrically integral.  It has arithmetic genus one.
+makes \eqref{eq:r8-bottom-cover} geometrically integral.  It has
+arithmetic genus one.
 The diagonal costs four, the degree-four different costs at most
 eight off-diagonal ordered pairs, and each of the three marker fibers
 $x,r,s$ costs at most six.  Thus
-\[
- \delta\leq4+8+3\cdot6=30.                                \tag{30}
-\]
+\begin{equation}\label{eq:r8-deletion}
+ \delta\leq4+8+3\cdot6=30.
+\end{equation}
 Hasse--Weil supplies a surviving rational point for every $q\geq43$.
 
 It remains to show that the strata removed above do not hide another
@@ -149,22 +152,25 @@ removed stratum.  The complete divisor table on the $s$-line is
 \begin{array}{c|c|c}
 \text{failure}&\text{defining mechanism}&\text{degree}\\\hline
 \text{rank at most two}&D(c(s))&3\\
-\text{cyclic/wild monodromy}&\text{pullback of (28)--(29)}&4\\
+\text{cyclic/wild monodromy}&\text{pullback of
+\eqref{eq:r8-cyclic-veronese}--\eqref{eq:r8-cyclic-binary}}&4\\
 \text{new gcd root }s&\operatorname{Ram}(g^2_d),\ d\le4&6\\
-\text{gcd root }x\text{ or }r&\text{one nonzero minor in (27)}&2+2\\
+\text{gcd root }x\text{ or }r&\text{one nonzero minor in
+\eqref{eq:r8-gcd-one}}&2+2\\
 \text{marker collision}&s=x,\ s=r&2
 \end{array}
 \]
 In characteristic two the cyclic entry has degree one, so degree four
 is a uniform bound.  The total is
-\[
- 3+4+6+2+2+2=19<q+1.                                     \tag{31}
-\]
+\begin{equation}\label{eq:r8-inner-budget}
+ 3+4+6+2+2+2=19<q+1.
+\end{equation}
 The rank pullback cannot be the whole line:
 Proposition~\ref{prop:r6-secant} identifies that containment exactly
 with quadratic gcd of the original net.  The only possible contained
 cyclic line is the declared binary nucleus.  For a fixed marker, not
-all minors in (27) can vanish identically without giving the original
+all minors in \eqref{eq:r8-gcd-one} can vanish identically without
+giving the original
 quartic net that fixed factor: otherwise the hyperplanes
 $W\cap\ker(\operatorname{ev}_s)$ and
 $W\cap\ker(\operatorname{ev}_x)$ agree for dense $s$, making
@@ -186,13 +192,14 @@ parameters and the binary nucleus costs one.  If a contracted net has
 exact gcd $\ell_z$, the condition $z=r$ maps into the ramification of
 a generic separable pencil projection of the moving $g^3_d$, $d\leq5$.
 Riemann--Hurwitz bounds it by $2d-2\leq8$.  The condition $z=x$ is
-again (27), now with the quartic evaluation row, and costs at most two
+again \eqref{eq:r8-gcd-one}, now with the quartic evaluation row, and
+costs at most two
 because not all of its quadratic minors vanish off the fixed-marker
 boundary, by the same evaluation-hyperplane argument.  Together
 with $r=x$, the internal divisor has degree
-\[
- 3+1+8+2+1=15.                                            \tag{32}
-\]
+\begin{equation}\label{eq:r8-outer-budget}
+ 3+1+8+2+1=15.
+\end{equation}
 If the contracted net has trivial gcd, the two-old-marker lemma applies.
 If it has exact gcd with $z\notin\{x,r\}$, the ordered-pair argument has three
 $(1,1)$ and two $(2,1)/(1,2)$ bad equations, at most
@@ -201,6 +208,37 @@ quadratic and ramification divisors.
 Lifting first by $\ell_s$ and then by $\ell_r$ gives a split
 squarefree quintic avoiding $x$.
 
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.12\textwidth}p{0.21\textwidth}p{0.08\textwidth}
+                p{0.19\textwidth}p{0.21\textwidth}}
+\toprule
+Stratum & Defining equation & Degree & Contained case &
+Transverse conclusion\\
+\midrule
+rank at most two & \eqref{eq:r8-secant-carrier} &
+$3$ in the marker & quadratic-gcd persistent carrier &
+finite intersection of degree at most $3$\\
+cyclic or wild & \eqref{eq:r8-cyclic-veronese} or
+\eqref{eq:r8-cyclic-binary} & at most $4$ &
+only the binary nucleus line & finite intersection of degree at most
+$4$\\
+exact gcd one & minors in \eqref{eq:r8-gcd-one} &
+$2$ per fixed marker & fixed-factor boundary &
+the residual deck graph supplies a squarefree pair\\
+inseparable & derivative minors of $p_0,p_1$ & absorbed above &
+wild vertex, rank drop, or binary nucleus & no additional stratum\\
+geometric $S_3$ & \eqref{eq:r8-bottom-cover} &
+bidegree $(2,2)$ & only the preceding carriers &
+integral genus-one cover with deletion degree $30$\\
+marker collision & diagonals and ramification &
+$1$ per diagonal; at most $6$ for self-collision &
+declared collision boundary & finite divisor on the marker line\\
+\bottomrule
+\end{tabular}
+\end{center}
+
 \emph{Exhaustion and threshold.}
 The gcd has degree zero, one, or at least two, and a separable
 gcd-zero cubic cover has monodromy $S_3$ or $C_3$; hence the displayed
@@ -208,7 +246,8 @@ list is exhaustive.  No certificate or finite-field regression is
 used for this integrality assertion.  Notice also that the outer and
 recursive parameter budgets $15$ and $19$ are already strictly below
 $q+1$ for $q\geq19$; the threshold $43$ is imposed solely by the
-genus-one deletion inequality~(30), not by a hidden parameter-choice
+genus-one deletion inequality~\eqref{eq:r8-deletion}, not by a hidden
+parameter-choice
 bound.
 \end{proof}
 
@@ -325,22 +364,23 @@ The assertion $\mathrm{LP}(7,1)$ holds for every $q\geq53$.
 Its bottom identity twist is the geometrically integral off-diagonal
 $(2,2)$ curve of Proposition~\ref{prop:r8-lp61}, now with four
 forbidden markers and deletion degree
-\[
-       4+8+4\cdot6=36.                                   \tag{33}
-\]
+\begin{equation}\label{eq:r9-deletion}
+       4+8+4\cdot6=36.
+\end{equation}
 The three recursive parameter-line budgets, from the bottom upward,
 are at most $22$, $18$, and $18$.  At the top degree-eight
 first-polar line the transverse/component budget is at most
-\[
-       3+2+12=17.                                        \tag{34}
-\]
+\begin{equation}\label{eq:r9-top-budget}
+       3+2+12=17.
+\end{equation}
 No geometric-integrality, gcd, or contained-component assertion is
 included merely as a number in these budgets.
 \end{proposition}
 
 \begin{proof}
 We retain the notation and the scheme-theoretic strata
-(25)--(29).  Their homogeneous incidence ideals commute with further
+\eqref{eq:r8-bottom-cover}--\eqref{eq:r8-cyclic-binary}.  Their
+homogeneous incidence ideals commute with further
 contraction, so adding a marker changes only the corresponding
 evaluation and diagonal pullbacks; it does not change the bottom
 cover.  We prove the package in three steps.
@@ -348,33 +388,40 @@ cover.  We prove the package in three steps.
 \emph{Three-pointed quartic net.}
 Let $W$ be a trivial-gcd Hankel net of quartics, let
 $x_1,x_2,x_3$ be distinct prescribed markers, and exclude the
-characteristic-two nucleus already listed in (29).  Contract at a
+characteristic-two nucleus already listed in
+\eqref{eq:r8-cyclic-binary}.  Contract at a
 fourth parameter $s$.  On the resulting cubic pencil the rank
-pullback (26), the cyclic/wild pullback (28)--(29), and self-collision
+pullback \eqref{eq:r8-secant-carrier}, the cyclic/wild pullback
+\eqref{eq:r8-cyclic-veronese}--\eqref{eq:r8-cyclic-binary}, and
+self-collision
 have degrees at most $3$, $4$, and $6$, respectively.  For each
-$x_i$, choose a nonzero quadratic minor in (27); the three fixed-root
+$x_i$, choose a nonzero quadratic minor in \eqref{eq:r8-gcd-one}; the
+three fixed-root
 pullbacks cost at most $6$, and the three equations $s=x_i$ cost $3$.
 Thus the parameter divisor has degree at most
-\[
-             3+4+6+3\cdot2+3=22.                         \tag{35}
-\]
+\begin{equation}\label{eq:r9-three-point-budget}
+             3+4+6+3\cdot2+3=22.
+\end{equation}
 None of these equations vanishes identically.  For the rank and
 cyclic carriers this is the no-contained-line calculation following
-(31).  For a fixed marker, identical vanishing of all the minors in
-(27) would make the kernels of
+\eqref{eq:r8-inner-budget}.  For a fixed marker, identical vanishing
+of all the minors in \eqref{eq:r8-gcd-one} would make the kernels of
 $\operatorname{ev}_{s}|_W$ and $\operatorname{ev}_{x_i}|_W$ agree
 for dense $s$.  The two nonzero functionals would then be
 proportional, making the projective evaluation map of the
 three-dimensional trivial-gcd net $W$ constant, a contradiction.
 For self-collision, a generic pencil projection of the moving
 $g^2_d$, $d\leq4$, is separable by the pure-power dimension argument
-following (31), and Riemann--Hurwitz gives degree at most $6$.
+following \eqref{eq:r8-inner-budget}, and Riemann--Hurwitz gives
+degree at most $6$.
 
 Away from this divisor, a gcd-zero cubic pencil is on the geometric
-$S_3$ stratum.  Its ordered-pair cover (25) is geometrically integral
+$S_3$ stratum.  Its ordered-pair cover \eqref{eq:r8-bottom-cover} is
+geometrically integral
 of genus at most one.  The diagonal and different delete at most
 $4+8$ points, and each of $x_1,x_2,x_3,s$ deletes at most the six
-ordered pairs in its cubic fiber.  This proves (33).  If instead the
+ordered pairs in its cubic fiber.  This proves
+\eqref{eq:r9-deletion}.  If instead the
 cubic pencil has exact gcd $\ell_z$, cancel it and use the graph of
 the rational deck involution of the residual quadratic pencil.  The
 graph has $q+1$ rational points; at most two are fixed, and at most two
@@ -391,7 +438,8 @@ The two overlapping Hankel rows give successively
  c_1=zc_0,\quad c_2=z^2c_0,\quad
  c_3=z^3c_0,\quad c_4=z^4c_0.
 \]
-Hence the determinant (26) vanishes; the homogeneous $z=\infty$
+Hence the determinant \eqref{eq:r8-secant-carrier} vanishes; the
+homogeneous $z=\infty$
 chart gives the endpoint.  Thus the inseparable case really lies on
 the rank-drop carrier.  Multiplication by $\ell_s$ gives a split
 squarefree quartic avoiding $x_1,x_2,x_3$.
@@ -405,11 +453,12 @@ $3+1$.  If the contracted quartic net has exact gcd $\ell_z$, the
 condition $z=r$ lies in the ramification divisor of a generic
 separable projection of the moving $g^3_d$, $d\leq5$, and costs at
 most $8$.  The conditions $z=x_i$ are the two fixed-evaluation
-incidences (27), each of degree at most two; $r=x_i$ contributes two
+incidences \eqref{eq:r8-gcd-one}, each of degree at most two;
+$r=x_i$ contributes two
 diagonals.  Hence
-\[
-             3+1+8+2\cdot2+2=18.                         \tag{36}
-\]
+\begin{equation}\label{eq:r9-two-point-budget}
+             3+1+8+2\cdot2+2=18.
+\end{equation}
 The same rank, evaluation-hyperplane, and separable-projection
 arguments show that no listed pullback is the whole $r$-line off the
 declared boundary.
@@ -445,9 +494,9 @@ $\lfloor6/p\rfloor+1<5$.  Its ramification degree is at most
 $2d-2\leq10$, and it contains the collision in which the new gcd root
 equals $r$.  The fixed-root incidence at $x$ costs at most two, and
 $r=x$ costs one.  The total is
-\[
-             3+2+10+2+1=18.                              \tag{37}
-\]
+\begin{equation}\label{eq:r9-one-point-budget}
+             3+2+10+2+1=18.
+\end{equation}
 Choose $r$ off this divisor and apply the two-pointed quintic result
 with markers $x,r$.  Its quintic avoids both, so multiplication by
 $\ell_r$ gives a split squarefree sextic in $W_f$ avoiding $x$.
@@ -460,24 +509,29 @@ rank-two carrier in degree at most three and the complete linear
 nucleus support in degree at most two.  The new-marker collision is
 ramification of a separable $g^5_d$, $d\leq7$: an inseparable series
 would have dimension at most $\lfloor7/p\rfloor+1<6$, and
-Riemann--Hurwitz gives at most $2d-2\leq12$.  This proves (34) and
+Riemann--Hurwitz gives at most $2d-2\leq12$.  This proves
+\eqref{eq:r9-top-budget} and
 excludes an additional contained collision component.
 
 The gcd at every recursive level has degree zero, one, or at least
 two.  The last case lies in the degree-appropriate rank-two
-catalecticant carrier, whose bottom equation is (26) and whose
+catalecticant carrier, whose bottom equation is
+\eqref{eq:r8-secant-carrier} and whose
 contained-line pullback is
 Proposition~\ref{prop:contained-rank-two}; the degree-one case is
 treated after cancellation.  A separable gcd-zero cubic map has geometric
 monodromy $S_3$ or $C_3$, with the latter and every inseparable case
-in (28)--(29) or the derivative-minor boundary.  Hence the strata are
+in \eqref{eq:r8-cyclic-veronese}--\eqref{eq:r8-cyclic-binary} or the
+derivative-minor boundary.  Hence the strata are
 exhaustive.  Since
 \[
              q+1-2\sqrt q>36
 \]
-at $q=53$ and the left side is increasing for $q>1$, (33) leaves a
+at $q=53$ and the left side is increasing for $q>1$,
+\eqref{eq:r9-deletion} leaves a
 rational point for every $q\geq53$.  The parameter budgets
-(35)--(37) and (34) are all smaller than $q+1$.  The first prime
+\eqref{eq:r9-three-point-budget}--\eqref{eq:r9-one-point-budget} and
+\eqref{eq:r9-top-budget} are all smaller than $q+1$.  The first prime
 power satisfying the genus-one inequality is $53$.
 \end{proof}
 
@@ -575,16 +629,39 @@ surjectivity of $\mathcal U\to\mathcal H$.  One successful
 specialization would show only generic nonemptiness; fiberwise
 surjectivity requires an open cover of quartic moduli.
 
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{ccccc}
+h_L
+&\xrightarrow{\ \text{six sections}\ }&
+(\Delta_1,\ldots,\Delta_6)
+&\xrightarrow{\ \sum b_i\Delta_i=1\ }&
+\displaystyle\bigcup_iD(\Delta_i)=\mathbb A^1_L\\[6pt]
+\{4,\ 3+1,\ 2+2,\ 2+1+1\}
+&\xrightarrow{\ \operatorname{disc}=3,3,1,5\ }&
+\multicolumn{3}{c}{\text{good slices on every boundary stratum}.}
+\end{array}
+\]
+\caption{The redundancy-nine good-slice argument.  The B\'ezout
+identity covers the entire squarefree normal-form atlas; four
+root-partition calculations cover its boundary.  The conclusion is
+fiberwise surjectivity, not generic success of one specialization.}
+\label{fig:r9-slice-cover}
+\end{figure}
+
 The quotient has one one-dimensional squarefree stratum and four
 multiple-root boundary strata.  On the standard even normal-form atlas
-for the squarefree stratum, write $h_L=[1,0,L,0,1]$.  The six four-point
-sets in \texttt{supplement/R9-SLICE-DATA.md} are six test sections of
-the universal base family over this atlas.  Pullback of the branch
-discriminant gives $\Delta_i(L)$, and the printed $b_i(L)$ satisfy
-\[
+for the squarefree stratum, write $h_L=[1,0,L,0,1]$.  The six
+four-point sets and the coefficient vectors of $\Delta_i(L)$ and
+$b_i(L)$ are printed in Appendix~\ref{app:r9-slices}.  They are six
+test sections of the universal base family over this atlas.  Pullback
+of the branch discriminant gives $\Delta_i(L)$, and direct
+multiplication gives
+\begin{equation}\label{eq:r9-bezout}
              \sum_{i=1}^6 b_i(L)\Delta_i(L)=1
-             \quad\text{in }\F_7[L].                     \tag{33}
-\]
+             \quad\text{in }\F_7[L].
+\end{equation}
 Thus the principal opens $D(\Delta_i)$ cover the normal-form atlas;
 these are six sections, not six isolated successful tests.  Transport
 moves the quartic and its four-point base together, so the existence
@@ -606,9 +683,9 @@ Surjectivity over the algebraic closure proves $B_h\ne0$.
 The affine chart of four finite roots is dense in $\mathcal B$, so this
 nonempty good open meets the chart used below.
 The bad affine base locus is contained in
-\[
- B_h(\mathbf r)\prod_{i<j}(r_i-r_j)=0,                    \tag{34}
-\]
+\begin{equation}\label{eq:r9-base-bad}
+ B_h(\mathbf r)\prod_{i<j}(r_i-r_j)=0,
+\end{equation}
 so rational selection is avoidance of a proper divisor in configuration
 space, not a second monodromy assertion.
 
@@ -618,9 +695,9 @@ four.  Hence $D,N_s,N_u$ have individual degree at most two and total
 degree at most eight; $K$ has individual degree at most four and total
 degree at most sixteen.  Every quartic subdiscriminant is a Hermite
 minor of coefficient-degree at most six.  Therefore
-\[
- \deg_{r_i}B_h\leq24,\qquad \deg B_h\leq96.                \tag{35}
-\]
+\begin{equation}\label{eq:r9-base-degree}
+ \deg_{r_i}B_h\leq24,\qquad \deg B_h\leq96.
+\end{equation}
 Multiplying by the four-root Vandermonde gives a nonzero polynomial of
 total degree at most $102$.  Schwartz--Zippel leaves a rational
 ordered base with distinct roots whenever $q>102$.

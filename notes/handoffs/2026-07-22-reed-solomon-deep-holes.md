@@ -39,7 +39,11 @@ global-union polynomial and its revised threshold.  The local mathematical
 manuscript gates are now green through R9 and the Hessian/Lucas layer.  C545
 has also closed the public R5--R7 records, field-range ledger, stable
 certificate schema, role-based literature audit, sectioned source, and
-rendered exposition gates.  The development monorepo is not published; any
+rendered exposition gates.  Its final local referee-polish pass removes all
+manual equation tags, prints the full R9 six-section cover in Appendix A,
+adds the R8 exhaustiveness table and two hard-step diagrams, expands the five
+named proof pressure points, and supplies a single supplement verifier.  The
+clean manuscript is now 41 pages.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545 remains
 active but release is blocked on C541--C544 aggregate formalization, an
 independent final reader, a clean public replay/export, immutable identifiers,

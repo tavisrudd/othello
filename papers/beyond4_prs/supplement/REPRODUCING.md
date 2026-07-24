@@ -7,9 +7,14 @@ the bundle without access to the development monorepo by running, from the
 paper directory:
 
 ```text
-python3 supplement/package_evidence_bundle.py --check
-python3 supplement/build_classification_records.py --check
-(cd supplement && sha256sum -c CLASSIFICATION-RECORDS.sha256)
+python3 supplement/verify.py
+```
+
+Run every paper-local independent replay, including the compiled R9-49
+comparison, with:
+
+```text
+python3 supplement/verify.py --replay
 ```
 
 ## Pinned environment

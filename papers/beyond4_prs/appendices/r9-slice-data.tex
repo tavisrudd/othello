@@ -1,0 +1,81 @@
+\section{Explicit redundancy-nine slice cover}\label{app:r9-slices}
+
+This appendix prints the finite polynomial data used in
+Proposition~\ref{prop:r9-components}.  All coefficients lie in $\F_7$.
+For a vector $[c_0,\ldots,c_m]$, write
+\[
+ [c_0,\ldots,c_m](L)=\sum_{j=0}^m c_jL^j.
+\]
+On the squarefree quartic atlas $h_L=[1,0,L,0,1]$, the following
+ordered four-point bases give the residual branch discriminants
+$\Delta_i(L)$.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{c p{0.14\textwidth} p{0.65\textwidth}}
+\toprule
+$i$ & fixed roots & coefficients of $\Delta_i$, constant term first\\
+\midrule
+\endfirsthead
+\toprule
+$i$ & fixed roots & coefficients of $\Delta_i$, constant term first\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & \texttt{[0, 1, 2, 3]} &
+\ttfamily[6, 0, 6, 0, 3, 4, 5, 5, 0, 0, 2, 6, 1, 3, 3, 0, 0, 4, 5, 2, 6, 0, 0, 1, 1]\\
+2 & \texttt{[0, 1, 2, 4]} &
+\ttfamily[0, 0, 4, 5, 1, 5, 2, 3, 1, 6, 1, 5, 4, 6, 0, 3, 0, 0, 4, 1, 2, 0, 6, 0, 4]\\
+3 & \texttt{[0, 1, 2, 5]} &
+\ttfamily[2, 6, 2, 1, 1, 3, 0, 1, 6, 5, 0, 2, 3, 4, 4, 4, 5, 4, 0, 4, 6, 3, 1, 5, 5]\\
+4 & \texttt{[0, 1, 2, 6]} &
+\ttfamily[0, 0, 0, 0, 0, 0, 3, 0, 0, 6, 5, 0, 0, 1, 0, 0, 2, 4, 0, 0, 3, 0, 0, 6, 5]\\
+5 & \texttt{[0, 1, 3, 4]} &
+\ttfamily[6, 1, 3, 4, 6, 5, 4, 6, 6, 4, 0, 0, 2, 6, 1, 0, 1, 2, 5, 4, 1, 5, 4, 3, 5]\\
+6 & \texttt{[1, 2, 3, 4]} &
+\ttfamily[6, 5, 5, 6, 0, 4, 0, 5, 6, 3, 6, 6, 0, 3, 4, 1, 4, 2, 3]\\
+\end{longtable}
+
+The B\'ezout coefficients in \eqref{eq:r9-bezout} are:
+\begin{longtable}{c p{0.84\textwidth}}
+\toprule
+$i$ & coefficients of $b_i$, constant term first\\
+\midrule
+\endfirsthead
+\toprule
+$i$ & coefficients of $b_i$, constant term first\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1 & \ttfamily[6, 4, 1, 2, 3, 5, 5, 1, 6, 5, 0, 0, 4, 5, 3, 6, 2, 1, 1, 4, 3, 1, 2, 6, 4, 2, 6, 4, 6, 3, 0, 5, 5, 2, 6]\\
+2 & \ttfamily[1, 0, 5, 1, 1, 5, 4, 2, 6, 5, 0, 4, 6, 4, 4, 4, 1, 3, 0, 1, 3, 3, 5, 1, 6, 4, 3, 6, 5, 0, 2, 4, 4, 5, 2]\\
+3 & \ttfamily[]\\
+4 & \ttfamily[]\\
+5 & \ttfamily[]\\
+6 & \ttfamily[0, 3, 5, 4, 0, 1]\\
+\end{longtable}
+\endgroup
+
+Only $b_1,b_2,b_6$ are nonzero, but all six sections are retained as
+regression controls.  Direct multiplication in $\F_7[L]$ gives
+\eqref{eq:r9-bezout}, so the principal opens $D(\Delta_i)$ cover the
+squarefree atlas.
+
+For completeness, the multiple-root boundary has the following four
+normal forms.  The branch vector is again written constant term first.
+\[
+\begin{array}{c|c|c|c|c}
+\text{partition}&h&\text{fixed roots}&\text{reduced branch}&
+\text{discriminant}\\ \hline
+4 &[1,0,0,0,0]&[1,2,3,4]&[2,2,1]&3\\
+3+1 &[0,1,0,0,0]&[0,2,4,6]&[4,4,3]&3\\
+2+2 &[0,0,1,0,0]&[0,1,2,3]&[5,5,2,1]&1\\
+2+1+1 &[0,1,6,0,0]&[0,1,2,3]&[3,5,6,6,6]&5
+\end{array}
+\]
+Every reduced discriminant is nonzero.  The squarefree atlas and
+these four boundary strata therefore exhaust all nonzero geometric
+binary quartics used in the surjectivity argument.

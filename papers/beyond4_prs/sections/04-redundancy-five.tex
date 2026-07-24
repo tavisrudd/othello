@@ -67,11 +67,18 @@ $q=7$ the same conclusion is part of Certificate R5.
 \begin{proof}
 Write $W_f=\lambda_0V$ with $V$ a basepoint-free quadratic pencil.  If
 its degree-two map $\psi:\PP^1\to\PP^1$ is separable, its rational deck
-involution gives $q+1$ ordered same-fiber pairs.  Delete at most two
-fixed points, four points over branch values, and the at most two pairs
-whose selected member contains $\lambda_0$.  For $q\geq8$ a surviving
-pair gives a split quadratic whose roots avoid $\lambda_0$, and hence a
-split squarefree cubic in $W_f$.  In characteristic two an inseparable
+involution $\iota$ gives the graph
+\[
+ \Gamma_\iota(\F_q)=\{(t,\iota(t)):t\in\PP^1(\F_q)\},
+\]
+which has exactly $q+1$ rational points.  A safe union bound deletes at
+most two fixed graph points, at most four graph points over the branch
+fibers, and at most the two graph points
+$(\lambda_0,\iota(\lambda_0))$ and
+$(\iota(\lambda_0),\lambda_0)$.  Thus fewer than $q+1$ graph points
+are deleted when $q\geq8$.  A surviving point gives a split quadratic
+with two distinct roots avoiding $\lambda_0$, and hence a split
+squarefree cubic in $W_f$.  In characteristic two an inseparable
 quadratic pencil is equivalent to $\langle T^2,U^2\rangle$; the two
 overlapping Hankel equations then force $f$ onto the normal rational
 curve, contrary to the rank-two pencil hypothesis.
@@ -259,4 +266,3 @@ each row a canonical normalized representative, stabilizer, complete
 cubic-pencil member histogram, and Frobenius image; equality with one
 of those canonical $\PGL_2$ orbits is the finite classification
 criterion.  Thus repeated sizes denote distinct certified orbits.
-

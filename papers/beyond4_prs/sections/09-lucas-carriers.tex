@@ -45,22 +45,75 @@ The net contains a split squarefree member over $\F_{2^m}$ if and only
 if $s\mid m$.
 \end{proposition}
 
-\begin{proof}
-After dividing by $C$, choose
+\begin{figure}[ht]
+\centering
 \[
- \beta^{d-1}=B/C,\qquad y^d+y=A/(C\beta^d).
+\begin{array}{ccccc}
+K=\overline{\F}_2(a,b)
+&\subset&
+K_1=K(\beta),\quad \beta^{d-1}=b
+&\subset&
+K_1(y),\quad y^d+y=a/\beta^d\\[3pt]
+&&\underbrace{\F_d^\times}_{\text{scalings},\ d-1}
+&&\underbrace{(\F_d,+)}_{\text{translations},\ d}\\[5pt]
+&&\multicolumn{3}{c}{
+(\F_d,+)\rtimes\F_d^\times=\operatorname{AGL}_1(\F_d)}
+\end{array}
 \]
-The roots are $\{\beta(y+c):c\in\F_d\}$.  Their affine symmetries give
-$\operatorname{AGL}_1(\F_d)$.  The Kummer extension has degree $d-1$
-because the valuation of $B/C$ at its simple zero is one.  After
-adjoining $\beta$, the right side of the Artin--Schreier equation has a
-simple pole in $A/C$; an element of the form $z^d+z$ has pole order
-divisible by $d$.  Hence the additive extension has degree $d$, the
-cover is connected, and its geometric monodromy is the full affine
-group.
+\caption{The linearized ordered-root cover.  The Kummer scaling layer
+and connected additive layer have coprime roles; their explicit
+semidirect action accounts for the full geometric monodromy.}
+\label{fig:lucas-monodromy}
+\end{figure}
 
-Ratios of nonzero root differences recover $\F_d$, so this is the
-minimal constant field.  Boundary members with $C=0$ have degree at
+\begin{proof}
+Work first over the geometric coefficient field
+\[
+ k=\overline{\F}_2,\qquad K=k(A/C,B/C),
+\]
+on the open set $BC\ne0$.  Put $a=A/C$ and $b=B/C$.  The Kummer
+extension
+\[
+ K_1=K(\beta),\qquad \beta^{d-1}=b,
+\]
+has degree $d-1$: the valuation of $b$ at its simple zero is one.
+Since $k$ contains $\F_d$, this is the scaling part of the geometric
+root cover, not an extension of constants.  Over $K_1$ choose
+\[
+ y^d+y=a/\beta^d.
+\]
+The roots are $\{\beta(y+c):c\in\F_d\}$.  The right side has a simple
+pole at the pole of $a$.  If the $\F_d$-torsor were disconnected, its
+geometric translation group would lie in a proper additive subgroup
+of $\F_d$.  A nonzero $\F_2$-linear functional annihilating that
+subgroup would then give an Artin--Schreier equation
+$w^2+w=\gamma a/\beta^d$ with $\gamma\in\F_d^\times$.  This is
+impossible: the right side has a simple pole, whereas every pole of
+$w^2+w$ has even order.  Thus $K_1(y)/K_1$ is connected of degree
+$d$.
+Its translations $y\mapsto y+c$ give the normal subgroup
+$(\F_d,+)$.  The $d-1$ Kummer conjugates act by
+\[
+ (\beta,y)\longmapsto(\zeta\beta,\zeta^{-1}y),
+ \qquad \zeta\in\F_d^\times,
+\]
+and conjugate translations by multiplication by $\zeta$.  We have
+thus exhibited $d(d-1)$ automorphisms of an extension of degree
+$d(d-1)$.  Consequently the full geometric group, rather than a
+proper subgroup, is
+\[
+ (\F_d,+)\rtimes\F_d^\times
+   =\operatorname{AGL}_1(\F_d).
+\]
+
+Return now to the arithmetic coefficient field
+$\F_2(A/C,B/C)$.  Ratios of nonzero root differences recover every
+element of $\F_d$, so any splitting field contains $\F_d$ in its
+constant field.  The preceding regular construction over $\F_d$
+introduces no larger constants, proving minimality.  Coefficient
+Frobenius acts on $\F_d^\times$ by $c\mapsto c^2$, and hence has exact
+order $s$ on the based component group $C_{d-1}$.  Boundary members
+with $C=0$ have degree at
 most one, while those with $B=0$ have zero derivative; neither is split
 squarefree of degree $d$.  Thus a split member forces
 $\F_d\subset\F_{2^m}$, equivalently $s\mid m$.  Conversely $t^d+t$
@@ -232,4 +285,3 @@ Thus the order-three law of Proposition~\ref{prop:linearized} belongs
 to a proper $\F_8$-linear section, not to deepness of the full
 $e_7$ kernel.  The other intrinsic strata of the six-dimensional
 degree-nine carrier are not classified here.
-

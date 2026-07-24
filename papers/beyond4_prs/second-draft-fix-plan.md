@@ -21,10 +21,10 @@ closed.
 | Gate | Required change | Destination | Acceptance test | Status |
 |---|---|---|---|---|
 | N1 | Use `q >= 43` consistently for redundancy eight. | Abstract, Theorems 1.2 and 6.1 | No `q>43` occurrence; all three statements say `q\ge 43`. | Closed in source |
-| N2 | Replace the mixed point-count conventions by `q+kappa-2g sqrt(q)>delta`. | Section 4 and threshold table | A single definition of `H_kappa`; every application records `kappa`. | In this revision |
-| N3 | Recompute the displayed redundancy-eight and nine thresholds from that convention. | Sections 6.1--6.2 | The table gives `(g,delta,kappa)=(1,30,1)` and `(1,36,1)` and first prime powers 43 and 53. | In this revision |
-| N4 | Preserve the singular cubic-cover correction separately. | Section 3 | The cubic argument explicitly uses `kappa=0`, or absorbs the normalization defect into `delta`. | In this revision |
-| N5 | Remove the duplicated `and and`. | Section 6.2 | Literal search is empty. | In this revision |
+| N2 | Replace the mixed point-count conventions by `q+kappa-2g sqrt(q)>delta`. | Section 4 and threshold table | A single definition of `H_kappa`; every application records `kappa`. | Closed in source |
+| N3 | Recompute the displayed redundancy-eight and nine thresholds from that convention. | Sections 6.1--6.2 | The table gives `(g,delta,kappa)=(1,30,1)` and `(1,36,1)` and first prime powers 43 and 53. | Closed in source |
+| N4 | Preserve the singular cubic-cover correction separately. | Section 3 | The cubic argument explicitly uses `kappa=0`, or absorbs the normalization defect into `delta`. | Closed in source |
+| N5 | Remove the duplicated `and and`. | Section 6.2 | Literal search is empty. | Closed in source |
 
 ## Proof-architecture gates
 
@@ -33,7 +33,7 @@ closed.
 | P1 | Define the syndrome scheme, contraction strata, ordered marker spaces, lower splitting incidence, bad schemes, collision divisors, and all numerical indices before the induction theorem. | Every symbol and quantified object in the theorem is introduced in the definitions subsection. | Closed by symbol audit |
 | P2 | State and prove an intrinsic polar-flag construction theorem, including base change, equivariance, infinity, and marker propagation. | The construction is independent of the contained/transverse dichotomy. | Closed and cold-read |
 | P3 | Replace the hidden contained-case hypothesis by proved contained-component theorems. | No general theorem concludes `P_n union M_n` merely from an assumed implication; every proved degree points to a named component result. | Closed through `CC(8,1)`: ordinary rank two, modular overlaps, and collision finiteness are printed |
-| P4 | State the effective transverse theorem conditionally and visibly. | Its conclusion uses only named lower-cover, point-bound, and deletion hypotheses. | In this revision |
+| P4 | State the effective transverse theorem conditionally and visibly. | Its conclusion uses only named lower-cover, point-bound, and deletion hypotheses. | Closed in source |
 | P5 | Expand every asserted intersection degree, containment, ramification degree, genus, and deletion budget into a lemma or proposition. | Assertion audit maps each numerical claim to a proof or immutable certificate. | Closed through R9 by the assertion-map cold read |
 | P6 | Replace the ordered-Hessian proof outline by a complete proof. | The ambient scheme, factorization types, ruling conics, pullbacks, selection polynomial, and `3n-4` budget are all proved. | Closed with the honest degree-eight global-union polynomial and correspondingly revised threshold |
 | P7 | Split the degree-nine `e_7` theorem into Artin--Schreier normalization, additive subcover, and shallow-orbit propositions and prove each. | No theorem-strength assertion is supported only by a synopsis paragraph. | Closed in source and cold-read |
@@ -53,7 +53,7 @@ closed.
 |---|---|---|---|
 | R1 | Replace paper-facing C-numbers by stable labels `Certificate R5`, ..., `Certificate e7`. | The manuscript table uses only public labels. | Closed in source |
 | R2 | Document the certificate schema and what each replay independently rederives. | `supplement/CERTIFICATE-SCHEMA.md` is complete enough for an external implementer. | Closed with normalization, flags, exhaustion, trust classes, and extraction check |
-| R3 | Give exact commands, working directories, searched domains, stop conditions, and toolchain requirements. | `supplement/REPRODUCING.md` contains literal commands and boundaries. | In this revision |
+| R3 | Give exact commands, working directories, searched domains, stop conditions, and toolchain requirements. | `supplement/REPRODUCING.md` contains literal commands and boundaries. | Closed; `supplement/verify.py` is the single entry point |
 | R4 | Create an immutable release manifest with hashes and byte counts without rewriting predecessor manifests. | Manifest names the release commit, archive identifier, and every public artifact. | Scaffolded; final hashes/DOI open until release |
 | R5 | Supply a repository URL, immutable tag/commit, and DOI or permanent archive URL. | All three resolve externally. | Open; must close before C545 |
 | R6 | Add tracked `flake.nix` and `flake.lock` to the fresh paper export, pinning `finitegeom`, every required external certificate package, the Lean toolchain, and system dependencies. | A clean checkout resolves and replays through the locked flake without machine-local paths. | Open; must close before C545 |
@@ -62,12 +62,12 @@ closed.
 
 | Gate | Required change | Acceptance test | Status |
 |---|---|---|---|
-| E1 | Reduce the abstract to the dictionary, mechanism, classifications, and one characteristic-two sentence. | Roughly 180--220 words; no orbit-size inventory or quotient formula. | In this revision |
+| E1 | Reduce the abstract to the dictionary, mechanism, classifications, and one characteristic-two sentence. | Roughly 180--220 words; no orbit-size inventory or quotient formula. | Closed in source |
 | E2 | Add notation and terminology tables before first technical use. | `r,n,d,s`, carrier terminology, and cover terminology are stable. | Closed by source and rendered cold read |
 | E3 | Add a contraction/deletion/lifting roadmap diagram. | Both contained and transverse branches are visible. | Closed by rendered page-5 cold read |
 | E4 | Replace the dated search-process paragraph by mathematical comparison. | No search date, citation-graph narrative, or database disclaimer remains in the paper. | Closed by paragraph and exact-source cold read |
 | E5 | Expand the bibliography by role and complete metadata after a source audit. | Every novelty comparison has an appropriate citation and verified metadata. | Closed by the role-based audit and DOI metadata reconciliation |
-| E6 | Use upright long-theorem text and replace “paper spine.” | Long theorem inventories are roman; literal phrase is absent. | In this revision |
+| E6 | Use upright long-theorem text and replace “paper spine.” | Long theorem inventories are roman; literal phrase is absent. | Closed in source |
 | E7 | Replace the floating filename table by a compact breakable public verification table. | The verification table begins without leaving a nearly empty preceding page. | Closed by rendered page-31 cold read |
 | E8 | Split the growing source into a thin driver, one file per major section, and separate appendices. | Section reviews and trust-ledger anchors do not depend on one monolithic file. | Closed; exact expanded-source equivalence and `make check` pass |
 
@@ -146,13 +146,45 @@ All three exposed mathematical blockers are now closed in source.  The
 weaker Hessian constant is a mathematical correction, not merely an
 expositional change.
 
+## Third-draft referee polish
+
+The 39-page cold review judged the mathematical architecture
+substantially repaired and identified a final submission-polish pass.
+That pass is now closed locally:
+
+- every displayed equation uses automatic numbering and labels;
+- Theorem 1.3(b) states the all-field redundancy-seven classification
+  without suggesting that the exceptional small-field list persists;
+- the six R9 sections, every $\Delta_i$, and every B\'ezout coefficient
+  are printed in Appendix A;
+- Propositions 4.3, 5.7, 7.3, and 9.2 and Theorem 8.1 contain the
+  requested counting, boundary, exhaustiveness, normal-form, and
+  monodromy details;
+- the R8 proof has a final stratum/equation/degree/contained/transverse
+  table;
+- the draft-status paragraph is removed, the disclosure is framed as
+  assistance plus authorial responsibility, and data/code availability
+  is stated conventionally;
+- verbatim Lean source is in the electronic supplement while the
+  statement-adequacy appendix retains the exact paper-to-formal
+  boundary;
+- `supplement/verify.py` is the single verification entry point.
+
+The rendered paper is 41 pages.  Two additional diagrams explain the
+R9 open-cover surjectivity and the Kummer/additive monodromy tower.
+No new mathematical scope is claimed: arbitrary redundancy remains
+level-specific, R8/R9 remain high-field results, and the unclassified
+Lucas strata remain open.
+
 ## Release rule
 
-C545 is blocked as a **proof-complete Version 1** until P5--P7, C1--C2,
-R4--R5, and E5 are closed and an independent cold read confirms the assertion
-audit.  An earlier DOI release is permissible only if it is labelled
-unambiguously as a research announcement and does not claim proof
-completeness.
+C545 is blocked as a **proof-complete Version 1** until the aggregate
+C541--C544 formalization/reconciliation gate, an independent final
+reader, the clean public export/replay, immutable repository and
+archive identifiers, and author/account confirmation are complete.
+The local proof, classification-record, literature, supplement-schema,
+and rendered-exposition gates are closed.  An earlier DOI release is
+not authorized.
 
 The development monorepo is never the publication repository.  Release uses a
 reviewed paper-only fresh-history export containing the manuscript, public

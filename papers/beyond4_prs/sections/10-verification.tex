@@ -78,9 +78,10 @@ literal replay commands, toolchain locks, hashes, byte counts, and
 working directories are recorded in
 \texttt{supplement/REPRODUCING.md},
 \texttt{supplement/EVIDENCE-MANIFEST.json}, and
-\texttt{supplement/RELEASE-MANIFEST.md}.  Repository tag, immutable
-public verification revisions, archive identifier, and DOI remain
-external-publication metadata; no such publication is claimed here.
+\texttt{supplement/RELEASE-MANIFEST.md}.  The single entry point
+\texttt{python3 supplement/verify.py} checks the bundle manifest,
+classification records, and their expected hashes; its
+\texttt{--replay} option runs the paper-local Python replays.
 
 The redundancy-nine residual algebra and synthesis implication are
 also formalized in Lean.  The import gate and its axiom-audit module are

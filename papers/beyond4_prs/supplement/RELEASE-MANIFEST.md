@@ -21,8 +21,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `4772419076563339f466737e5d3a42319a4fb93b92c872742eabc02955027dd7` |
-| Local built PDF bytes | `280554` |
+| Local built PDF SHA-256 | `8c7e8ec1c355918ae3554a4f7474a0f427dac62274ded1641174220e8276054b` |
+| Local built PDF bytes | `294534` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -37,17 +37,19 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `d6efa629650949a85f8578ff2ad69ff42c35733d5fab0dd80829fbaae54147e2` | 15869 |
-| `EVIDENCE-ROWS.md` | `be9b2d94dc67827b1248bf43d0cad2ee689d52d640adc1c0dd19235a43a3569d` | 10472 |
-| `package_evidence_bundle.py` | `40c3483185f9c21c41af5140a634f8ea422e2f163689d787f65577384a0607c6` | 14583 |
+| `EVIDENCE-MANIFEST.json` | `b6ea00955c0d0beae716778f37e4a7c7b4dd6ce94f5db3f5dd7fbbc592edbe7c` | 16388 |
+| `EVIDENCE-ROWS.md` | `f2a9dfd198a0c5d1cfca73cf64c71ff165b4be3002b4ff18659c19d0ca64996c` | 10787 |
+| `package_evidence_bundle.py` | `63800ade4708f681c20090587035013fb5bd53efaad133ba39a317182f4bab55` | 14686 |
+| `verify.py` | `249a048015c1aadc018ae1d546c6e7300c163454d60da79720eb4e19ef6904ec` | 3536 |
 
 Verify the complete local bundle from the paper directory:
 
 ```text
-python3 supplement/package_evidence_bundle.py --check
-python3 supplement/build_classification_records.py --check
-sha256sum -c supplement/CLASSIFICATION-RECORDS.sha256
+python3 supplement/verify.py
 ```
+
+Add `--replay` to run every paper-local replay, including the compiled
+R9-49 comparison.
 
 Predecessor manifests are historical evidence and are not rewritten.  This
 release-level manifest supersedes their packaging defects by hashing the exact
