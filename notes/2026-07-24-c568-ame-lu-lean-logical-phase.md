@@ -40,6 +40,13 @@ argument remain named hypotheses rather than hidden assumptions.
 - its finite-field rank and the rational value `q^(3m-rank)`; and
 - the party-symmetrized rank orbit sum.
 
+The theorem
+`contractionRankOrbitSum_permuteContractionPattern` proves that the orbit
+sum is unchanged when its seed pattern is relabelled by any party
+permutation.  Thus the exact scalar does not retain the arbitrary
+party-labelled representative used to write the five nonidentity copy
+permutations.
+
 The module records the exact normalized four-copy pattern and the two
 `𝔽₁₃` generator matrices for the `z=4` and `z=12` pencil classes.
 `FourCopySeparatorInputs` keeps the solution-counting contraction/rank
@@ -81,13 +88,16 @@ declaration, or unsafe/native execution.
 
 ## `ej` / Tao closeout and mystery ledger
 
-The closeout made two cheap upgrades.  First, it formalized the general
+The closeout made three cheap upgrades.  First, it formalized the general
 matching linear map rather than exposing an uninterpreted contraction rank.
 Second, it placed the exact q=13 matrices and five nontrivial copy
 permutations in the scholarly API, so the conditional finite evaluations
-refer to a unique contraction rather than an unnamed witness.
+refer to a unique contraction rather than an unnamed witness.  Third, the
+post-closeout `ej` pass proved that the party-orbit sum is independent of
+the party-labelled seed pattern.
 
-No genuine algebraic mystery remains in the proved interface.  The evidence
+No genuine algebraic or seed-representation mystery remains in the proved
+interface.  The evidence
 boundary is exact: the conic/Gale propagation facts, the analytic
 contraction/rank identity, LU covariance, and the two exhaustive rank sums
 are hypotheses.  C570 owns manuscript-level reconciliation of these

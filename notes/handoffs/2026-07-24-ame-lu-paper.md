@@ -162,9 +162,10 @@ fixed-party kernel is `SL_2` on the conic locus and the diagonal split torus
 off it from four explicit propagation hypotheses.
 `RelativeConicArcs.AMELU.FourCopyContraction` defines the concrete matching
 linear map and rank, exact q=13 generators and four-copy pattern, and the
-party-orbit rank formula; its terminal derives arbitrary-LU inequivalence
-from explicit `720/13^9` and `3024/13^9` certificate inputs.  The import
-gate, exact no-build checks, and standard-axiom audit passed.  See
+party-orbit rank formula; it also proves the orbit sum is independent of
+party relabelling of the seed pattern.  Its terminal derives arbitrary-LU
+inequivalence from explicit `720/13^9` and `3024/13^9` certificate inputs.
+The import gate, exact no-build checks, and standard-axiom audit passed.  See
 `2026-07-24-c568-ame-lu-lean-logical-phase.md`.
 
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal

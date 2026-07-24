@@ -120,6 +120,13 @@ def permuteContractionPattern {m : ℕ} (π : Equiv.Perm Party)
     (σ : ContractionPattern m) : ContractionPattern m :=
   fun i => σ (π.symm i)
 
+/-- Successive party relabellings combine by permutation composition. -/
+theorem permuteContractionPattern_trans {m : ℕ}
+    (π ρ : Equiv.Perm Party) (σ : ContractionPattern m) :
+    permuteContractionPattern π (permuteContractionPattern ρ σ) =
+      permuteContractionPattern (ρ.trans π) σ := by
+  rfl
+
 /-- The rational value `q^(3m-rank)` supplied by the solution-counting
 formula for a normalized equal-phase code state. -/
 def contractionValueFromRank (q m rank : ℕ) : ℚ :=
@@ -132,6 +139,34 @@ noncomputable def contractionRankOrbitSum [Field 𝔽] [Fintype 𝔽]
   ∑ π : Equiv.Perm Party,
     contractionValueFromRank q m
       (contractionMatchingRank G (permuteContractionPattern π σ))
+
+/-- Summing over the complete party orbit removes the choice of a
+party-labelled representative of the contraction pattern. -/
+theorem contractionRankOrbitSum_permuteContractionPattern
+    [Field 𝔽] [Fintype 𝔽]
+    (q m : ℕ) (G : Matrix PlaneCoordinate Party 𝔽)
+    (ρ : Equiv.Perm Party) (σ : ContractionPattern m) :
+    contractionRankOrbitSum q m G (permuteContractionPattern ρ σ) =
+      contractionRankOrbitSum q m G σ := by
+  let e : Equiv.Perm Party ≃ Equiv.Perm Party := {
+    toFun := fun π => ρ.trans π
+    invFun := fun π => ρ.symm.trans π
+    left_inv := by
+      intro π
+      ext i
+      simp
+    right_inv := by
+      intro π
+      ext i
+      simp
+  }
+  rw [contractionRankOrbitSum, contractionRankOrbitSum]
+  simp_rw [permuteContractionPattern_trans]
+  simpa [e] using
+    (Equiv.sum_comp e
+      (fun π =>
+        contractionValueFromRank q m
+          (contractionMatchingRank G (permuteContractionPattern π σ))))
 
 private noncomputable def finFourEquiv
     (f : Fin 4 → Fin 4) (h : Function.Bijective f) :
