@@ -146,7 +146,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `ame-lu`
 
-- **C599 `[ame-lu]` [ACTIVE; C571 RE-REVIEW CLOSURE]** — close the last local scope and positioning defects: restrict the displayed fixed-party kernel to odd prime fields at its definition, replace the unsupported exact involution-value set by the needed sharp bound and octahedral equality case, distinguish prior Reed--Solomon gate constructions from the new self-association iff obstruction, credit Dickson alongside Faber, and state the \(q\geq4\) nonvacuity boundary → `notes/2026-07-24-c599-ame-lu-local-review-closure.md`.
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`

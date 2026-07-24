@@ -1,12 +1,18 @@
 \section{The logical-Clifford phase}\label{sec:logical}
 
-Regard any one party of an \(\AME(6,q)\) stabilizer tensor as an input and
-the other five as outputs.  This is a \([[5,1,3]]_q\) encoding isometry.
-The kernel of the party action on Clifford tensor symmetries is
+Throughout this section \(q\) is an odd prime.  Regard any one party of
+an \(\AME(6,q)\) stabilizer tensor as an input and the other five as
+outputs.  This is a \([[5,1,3]]_q\) encoding isometry.  In prime local
+dimension, the symplectic action of a one-qudit Clifford is a block in
+\(\mathrm{SL}_2(q)\), so the kernel of the party action on Clifford
+tensor symmetries is
 \[
  \mathcal K_C=\{(F_1,\ldots,F_6)\in\mathrm{SL}_2(q)^6:
                  (\bigoplus_iF_i)L_C=L_C\}.
 \]
+For \(q=p^e\) with \(e>1\), the full local Clifford group acts instead
+through \(\mathrm{Sp}_{2e}(\F_p)\); the displayed field-linear block
+group is then not the full local Clifford kernel.
 For an encoder view, the \emph{fixed-party symplectic kernel} means the
 image of \(\mathcal K_C\) on its input block.
 

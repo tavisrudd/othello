@@ -96,10 +96,28 @@ induce the full logical \(\mathrm{SL}_2(q)\) precisely when the six-arc is
 conic/GRS; otherwise they induce only the split torus.  Thus the
 nineteenth-century self-association condition for six points controls
 which one-qudit logical Clifford gates are available without moving
-parties.  This places Theorem~\ref{thm:logical-phase} in the fault-tolerant
-gate tradition of polynomial and quantum Reed--Solomon codes
-\cite{AharonovBenOr2008,GrasslGeiselmannBeth1999} and transversal-gate
-restrictions \cite{EastinKnill2009}.  Classically, we use Coble's
+parties.
+
+Quantum Reed--Solomon codes and their encoding circuits were developed
+by Grassl, Geiselmann, and Beth
+\cite{GrasslGeiselmannBeth1999}.  Aharonov and Ben-Or constructed
+fault-tolerant coordinatewise gates for polynomial codes, with degree
+reduction when a gate changes the polynomial degree
+\cite[Section~5]{AharonovBenOr2008}; Gottesman constructed the full
+logical Clifford group for any prime-dimensional stabilizer code using
+ancillas and Pauli measurements \cite{Gottesman1999}.  These results
+establish that GRS and polynomial encoders support fault-tolerant
+logical gates, but they do not identify the fixed-party product-Clifford
+kernel.  The GRS half of Theorem~\ref{thm:logical-phase} upgrades those
+constructions to the whole fixed-party \(\mathrm{SL}_2(q)\) symmetry.
+Its converse classifies the obstruction among all six-arcs:
+self-association is exactly the condition for the kernel to exceed the
+split torus.  We claim this equivalence, not priority for the GRS gate
+constructions themselves.  Eastin and Knill's
+restriction on universal transversal sets gives the general boundary
+\cite{EastinKnill2009}.
+
+Classically, we use Coble's
 association theory \cite{Coble1922} through the modern treatment of
 Dolgachev and Ortland \cite[Chapter~III]{DolgachevOrtland1988}; for
 finite-projective arc background see Segre, Hirschfeld, and the modern

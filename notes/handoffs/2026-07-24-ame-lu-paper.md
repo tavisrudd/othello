@@ -271,6 +271,20 @@ and the Aharonov--Ben-Or and Ball--Lavrauw records are corrected.  The
 warning-free 16-page build, rendered-page inspection, and seven-bundle replay
 pass.  See `2026-07-24-c598-ame-lu-scope-self-containedness.md`.
 
+**C599 closed (2026-07-24): local re-review closure.**  Section 5 now
+restricts the displayed \(\mathcal K_C\subseteq\mathrm{SL}_2(q)^6\) kernel at
+first use and contrasts the full extension-field
+\(\mathrm{Sp}_{2e}(\mathbb F_p)\) action.  Theorem 6.1 uses only the proved
+sharp bound \(b\leq6\) and records its octahedral equality case.  The
+introduction credits established quantum Reed--Solomon, polynomial-code, and
+general stabilizer gate constructions while identifying the paper's
+contribution as the fixed-party self-association iff classification.  Dickson
+and Faber now receive their exact finite-field/general-field roles, and
+Section 2 proves that six-arcs exist exactly for \(q\geq4\) without adding an
+inert theorem hypothesis.  The warning-free 16-page build, five-page visual
+sweep, seven-bundle replay, and public/formal release checks pass.  See
+`2026-07-24-c599-ame-lu-local-review-closure.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -293,11 +307,12 @@ as C559--C572.  Dependency order is authoritative:
 9. C594: external major-revision proof, convention, positioning, and
    literature sweep (complete; independent re-review pending).
 10. C598: front-matter scope, self-contained exceptional arithmetic, and
-    appendix disposition (complete; independent re-review pending).
+    appendix disposition (complete).
+11. C599: final local field-scope, involution-bound, attribution, existence,
+    and transversal-gate positioning closure (complete).
 
-The revision is complete locally, but release-candidate status now waits on an
-independent read of the repaired Theorems 4.1 and 5.1.  Public release also
-waits on the author gates listed above. C581 remains a separately queued
+The revision has cleared the independent re-review findings and is complete
+locally.  Public release waits on the author gates listed above. C581 remains a separately queued
 optional manuscript upgrade: first determine whether the shortened marginal
 planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
 space before attempting extension-field or approximate rigidity.

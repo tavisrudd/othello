@@ -70,7 +70,7 @@ replays its load-bearing algebra.
 | `.rank_eq_four_iff` | Section 6, star/perfect-matching reduction through (6.2) | C402 chord/rank replay | constructed and certificate-supported |
 | `MarginalLUSeparatorInputs.source` and `.target` | Theorem 6.1 and its proof: H3 and arbitrary same-field GRS states | C402 exact-domain row | constructed instances |
 | `.source_concurrency` | Theorem 6.1 proof, ten integral H3 determinants | C402 exact `Q(τ)` certificate | certificate-supported mathematical input |
-| `.target_concurrency` | Theorem 6.1 proof, projective involution classification | C402 finite-permutation replay; Faber citation for the modular classification | constructed and independently certificate-supported |
+| `.target_concurrency` | Theorem 6.1 proof, projective involution classification | C402 finite-permutation replay; Dickson for the finite-field families and Faber for the modern classification over general fields | constructed and independently certificate-supported |
 | `.lu_implies_equal_rankFourMultiplicity` | Section 6 opening: simultaneous reduced-operator conjugation and party relabelling | no computation required | constructed implication |
 | `FourCopySeparatorInputs.sourceContractionOrbitSum` and `.targetContractionOrbitSum` | Section 6, definition of `J_σ` and (6.4) | C397 row | constructed definitions |
 | `.source_contraction_eq_rankOrbitSum` and `.target_contraction_eq_rankOrbitSum` | solution-counting identity (6.3) and the proof of Theorem 6.2 | C397 independent orbit-sum replay | constructed and certificate-supported |

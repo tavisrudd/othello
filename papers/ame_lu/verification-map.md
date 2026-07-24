@@ -13,7 +13,7 @@ artifact.
 | `thm:q13-lu` | C397 plus conditional `q13_zFour_not_locallyUnitaryEquivalent_zTwelve` | contraction invariance | complete two-/three-/four-copy evaluation and orbit sum | imported; C397 bundle; contraction/rank, LU covariance, and rank evaluations remain explicit inputs |
 | `thm:transport-divisor` | C548/C550 plus the unconditional polynomial core and conditional transport interfaces in `RelativeConicArcs.AMELU.TransportDivisor` | transport-sheaf and cycle-cover derivation | quotient/finite-field and section/transport replays | imported; C548/C550 bundles; determinant, rank-bridge, and orbit-geometry inputs remain explicit |
 | `thm:fixed-copy-boundary` | C559 | contraction-rank formula and generic-minor argument | no computation required | conceptual proof available |
-| `thm:lu-lc-rigidity` and `cor:lu-lc-pencil` | C560 plus corrected C396 scope | MDS shortening and diagonal Weyl-tensor axis rigidity for every prime power; C396 supplies the prime-field `z` classification | no new computation for rigidity; C396 replay for `z`; C571 records an exact `q=25` Frobenius counterexample outside the corollary | conceptual rigidity proof available; prime-field corollary only |
+| `thm:lu-lc-rigidity` and `cor:lu-lc-pencil` | C560 plus corrected C396 scope | MDS shortening and diagonal Weyl-tensor axis rigidity for every prime power, with existence exactly for \(q\geq4\); C396 supplies the prime-field `z` classification | no new computation for rigidity; C396 replay for `z`; C571 records an exact `q=25` Frobenius counterexample outside the corollary | conceptual rigidity proof available; prime-field corollary only |
 
 ## Required import record
 

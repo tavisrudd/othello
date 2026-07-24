@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-24",
-  "title": "Local-Unitary Rigidity and Clifford Geometry of Six-Qudit AME Stabilizer Tensors",
+  "title": "Local-Unitary Rigidity and Logical Clifford Phases of Six-Qudit AME Stabilizer Tensors",
   "public_export": {
     "artifacts": [
       {
@@ -11,14 +11,14 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 162499,
+        "bytes": 165596,
         "path": "ame-lu.pdf",
-        "sha256": "04c578bf297458801bea54c168f1d12f883b308e240d58b49fde059deb98cef5"
+        "sha256": "aec136cb9587d3c2ac6125a33bf835e29b461d86d83113adc9ad0487bb11638b"
       },
       {
-        "bytes": 11804,
+        "bytes": 11856,
         "path": "formal-statement-adequacy.md",
-        "sha256": "196fed41584ab6ee950ef005beae9f2c87cee5dd7507f92da4e3cb328d36db67"
+        "sha256": "9137cab2431ddc422a0a58ec6c86ea83c656d3c6e98de7381ac87fc9067ffe93"
       },
       {
         "bytes": 3128,
@@ -26,9 +26,9 @@
         "sha256": "656694a52dd77d4be240b80a5d2f9ee16ad3d363e9b4673be64a8b0e300531ae"
       },
       {
-        "bytes": 5294,
+        "bytes": 5941,
         "path": "refs.bib",
-        "sha256": "7a26d0c08b4b9d99e1a3c3813ad1e682453b0c583b577ad9b781f6acc513ed4d"
+        "sha256": "92711dab24c084f282bd90dda1aceda5aa5bf6227f374cbe5f1906adf546b9fb"
       },
       {
         "bytes": 2124,
@@ -41,19 +41,19 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 6951,
+        "bytes": 6957,
         "path": "release/verify_release.py",
-        "sha256": "410b412d0b3f4af99444c632704e2ceeac1d92f2bffa7870dce63f26f448c994"
+        "sha256": "24d710e80057bf6544e9b4a143e28933970ab83abc44df53a9bd270fe61eadf8"
       },
       {
-        "bytes": 5919,
+        "bytes": 6805,
         "path": "sections/01-introduction.tex",
-        "sha256": "fa36a2da9729ef48eeabf5463b293ff780c1f4676bcdf9d5300dc1dea312d577"
+        "sha256": "e5778939cab839730468f859e31197e47f2bca30c611609e3906f8696ac875ee"
       },
       {
-        "bytes": 4031,
+        "bytes": 4299,
         "path": "sections/02-geometry-ame-dictionary.tex",
-        "sha256": "0c5b908a4b9610b4bd6fb8c0d2bff8204090b4abaadc23a43dd796060aa71d85"
+        "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
         "bytes": 3865,
@@ -66,14 +66,14 @@
         "sha256": "16b9fed5643847986930fbc5c80c8470013130928b47d5ab1d87df86c561a7a6"
       },
       {
-        "bytes": 6234,
+        "bytes": 6584,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "68805fab8871df29b2c92762af05a0dbc2bcf65b7e50d64ba443e3e373954a1e"
+        "sha256": "002e3d632891797487a90e2748233939f4c7fd3b375b36c9c701862a9e343e0b"
       },
       {
-        "bytes": 8976,
+        "bytes": 9291,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "603f30a6b190c859e11f23d67fe4a3ea87e3e6b53f0455b5a9362f67dbe38614"
+        "sha256": "b1c49180e49e751baaf602c1b533c6b2e5ec064ae500efdfc7e12fa96d9d206e"
       },
       {
         "bytes": 6151,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "d7e62a9a24a7f9021fab56d91b7571b0ccea080aa9570405e33d1d76573330d8"
+    "tree_sha256": "1ea32110a443fff7e3ea2fe8a016b0f0d1ca1dcc55eb4a19942927ba47e1df35"
   },
   "formal_companion": {
     "artifacts": [

@@ -14,7 +14,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
 | C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
-| C560 | every LU intertwiner between equal-phase CSS states of linear `[6,3,4]_q` MDS codes is LC; hence `LU iff LC iff z` on the admitted pencil | adopted headline theorem | every prime power for intertwiner rigidity; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity |
+| C560 | every LU intertwiner between equal-phase CSS states of linear `[6,3,4]_q` MDS codes is LC; hence `LU iff LC iff z` on the admitted pencil | adopted headline theorem | every prime power for intertwiner rigidity; the objects exist exactly for \(q\geq4\); C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity |
 
 ## Stable source labels
 
@@ -52,7 +52,7 @@ still depends on the claim, evidence, literature, and prose gates.
 
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
-| LU-intertwiner rigidity | every prime power `q`; linear `[6,3,4]_q` MDS/CSS states | none | nonlinear orthogonal arrays and non-MDS/non-CSS AME tensors |
+| LU-intertwiner rigidity | every prime power `q`; linear `[6,3,4]_q` MDS/CSS states, which exist exactly for `q≥4` | none | nonlinear orthogonal arrays and non-MDS/non-CSS AME tensors |
 | Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
 | Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |

@@ -1,6 +1,6 @@
-# Paper: Local-unitary rigidity and Clifford geometry of six-qudit AME stabilizer tensors
+# Paper: Local-unitary rigidity and logical Clifford phases of six-qudit AME stabilizer tensors
 
-**Frozen title:** *Local-Unitary Rigidity and Clifford Geometry of
+**Frozen title:** *Local-Unitary Rigidity and Logical Clifford Phases of
 Six-Qudit AME Stabilizer Tensors.*
 
 **Lane:** `ame-lu`
