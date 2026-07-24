@@ -39,11 +39,55 @@ classification.
       redundancy.  A field census cannot replace this input.
 \end{enumerate}
 
+The exact bounded-field census gap is finite but presently uncomputed.
+For redundancy eight it consists of
+\[
+  q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41\};
+\]
+for redundancy nine, after excluding the inadmissible $q=7,8$
+parameters, it consists of
+\[
+ q\in\{9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49\}.
+\]
+The existing R8 and R9 certificates do not enumerate these ambient
+syndrome spaces.  A direct scan at the upper endpoints would visit
+\[
+ \#\PP^7(\F_{41})=199623130728,\qquad
+ \#\PP^8(\F_{49})=33925283289801
+\]
+directions.  Even quotienting by the maximum possible
+$\PGL_2(q)$ orbit size leaves at least $2898130$ and $288480301$
+orbit representatives, respectively.  Thus a bounded completion
+requires a new canonical-orbit enumerator, measured resource bounds,
+and an independent replay; it is not obtained by merely extending the
+current regression field list.  The R9-49 computation closes only the
+characteristic-seven carrier named in Section~\ref{sec:verification},
+not the ambient $q=49$ row.
+
 Thus the induction theorem is not an arbitrary-redundancy
 classification, the redundancy-eight and redundancy-nine results are
 high-field theorems, and bounded-field and Lucas-carrier strata remain
 open.  In particular, the paper does not settle the general
 Reed--Solomon deep-hole conjecture.
+
+\begin{conjecture}[Stable polar classification]\label{conj:stable-polar}
+There is an absolute constant $C$ such that, at redundancy $r$, every
+split-free projective syndrome over $\F_q$ with $q\geq Cr^2$ lies
+either in a persistent rank-two carrier or in a nonshallow component
+of the level-$r$ Lucas contraction kernel.  Equivalently, transverse
+arithmetic exceptions disappear above a quadratic field threshold.
+In every characteristic for which that Lucas kernel has no nonshallow
+component, the persistent tangent and conjugate-secant families are
+the complete high-field list.
+\end{conjecture}
+
+The Lucas clause is essential: the binary nucleus families at
+redundancies six and seven persist over infinitely many fields, so a
+``persistent families only'' conjecture would already be false.
+Conjecture~\ref{conj:stable-polar} predicts instead that the two
+mechanisms isolated in this paper---rank-two persistence and
+digit-controlled contraction kernels---exhaust the stable locus, with
+the polar flag eliminating everything transverse.
 
 The structural conclusion is nevertheless stable.  Beyond redundancy
 four, deepness is no longer controlled by one invariant or by isolated

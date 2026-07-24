@@ -152,3 +152,60 @@ highest-value overview material is visually easy to scan.  The dominant
 risk has shifted to independent audit and release discipline, with the
 one-paper/two-paper choice a strategic upside rather than a manuscript
 defect.
+
+## Fable follow-up
+
+The next review produced four safe manuscript changes and three new
+computational programmes.
+
+- The abstract and introduction now lead with the classification and
+  exact projective counts of one-column MDS extensions, while retaining
+  the syndrome formulation used by the proofs.
+- Section 5 contains a fully worked redundancy-six example over
+  `F_29`: it computes the Hankel kernel, rules out a persistent common
+  factor, contracts at the marker zero, factors the lower cubic, checks
+  marker avoidance, and lifts a squarefree quartic.
+- The former long R8 lower-package proof is split into named bottom
+  strata, monodromy/deletion, two-marker selection, and outer-marker
+  selection lemmas.  The proposition statement and all numerical
+  budgets are unchanged, so the concurrently owned C542 formalization target is
+  not strengthened.
+- The open-boundary section lists every unclassified R8 and R9 field
+  and quantifies the census scale.  At the upper missing endpoints a
+  direct scan has `199623130728` and `33925283289801` projective
+  directions; even division by the maximum `PGL_2` orbit size leaves
+  at least `2898130` and `288480301` representatives.
+- A stable-polar conjecture predicts a quadratic field threshold for
+  disappearance of transverse exceptions.  It explicitly retains
+  nonshallow Lucas-kernel components, since the known binary nucleus
+  families make a persistent-only conjecture false.
+
+The finite completions were not started inside C545.  They require
+separate, resource-bounded tasks:
+
+1. finish the separately owned C542 R8 Lean gate without manuscript or
+   ledger overlap;
+2. compute the covering radii of `PRS(q-6)` at `q=7,8,9`, with an
+   independent replay;
+3. build and benchmark a canonical-orbit R8 enumerator, starting at
+   the smallest missing fields and stopping before any unmeasured
+   large run; only then open the analogous R9 pilot;
+4. independently reimplement the R5 bridge in a different CAS or
+   finite-field stack.
+
+The requested Proposition 7.9 budget arithmetic is already within the
+paper's stated Lean boundary: the four-marker integer budgets are
+formalized, while geometric integrality and point existence remain
+printed inputs.  The aggregate trust task should audit that
+correspondence rather than silently enlarge it.
+
+The integrated manuscript remains the correct immutable preprint.
+Whether Sections 8--9 become a companion journal paper remains a
+post-audit venue decision; removing them during the DOI freeze would
+erase the current theorem/provenance boundary.
+
+The follow-up build passes `make check` and the supplement verifier.
+The rendered example, named-lemma sequence, scope boundary, appendix,
+and two-column bibliography were inspected.  The canonical PDF now
+has 42 pages, 301739 bytes, and SHA-256
+`067ec3bdc178cdd1687a2a3ee41f589ad45bd35b98b8e17930a841d9517c3296`.

@@ -43,17 +43,14 @@ branch strata; a finite-field regression is not a substitute for those
 geometric data.
 \end{definition}
 
-\begin{proposition}[Pointed lower package]\label{prop:r8-lp61}
-The assertion $\mathrm{LP}(6,1)$ holds.  On the outer first-marker
-line its exceptional divisor has degree at most fifteen; on the
-recursive second-marker line the corresponding divisor has degree at
-most nineteen.  Its only positive-genus identity twist is the
-geometrically integral off-diagonal $(2,2)$ curve of genus at most one
-with deletion degree $30$.
-\end{proposition}
+\begin{lemma}[Bottom strata]\label{lem:r8-bottom-strata}
+For the two-step contraction of a pointed sextic, the lower rank,
+gcd-one, cyclic, wild, inseparable, and branch strata are exactly the
+closed schemes displayed below.  The reversed homogeneous chart
+introduces no additional stratum.
+\end{lemma}
 
 \begin{proof}
-\emph{Universal bottom strata.}
 For a pointed sextic
 $f=(a_0,\ldots,a_6)$ with old marker $x$, contract successively:
 \[
@@ -121,8 +118,17 @@ scheme-theoretic images of the displayed incidences (equivalently their
 Fitting-minor ideals); the reversed homogeneous chart supplies infinity.
 Thus these are closed strata over the coefficient ring, not a
 classification only of their rational points.
+\end{proof}
 
-\emph{Geometric monodromy and the three-marker cover.}
+\begin{lemma}[Bottom monodromy and deletion]\label{lem:r8-monodromy}
+Off the strata of Lemma~\ref{lem:r8-bottom-strata}, the bottom
+ordered-root curve is geometrically integral of arithmetic genus one
+and has deletion degree at most $30$.  On the exact-gcd-one stratum,
+the residual deck graph supplies a squarefree pair avoiding the three
+markers for $q\geq43$.
+\end{lemma}
+
+\begin{proof}
 Off \eqref{eq:r8-secant-carrier}--\eqref{eq:r8-cyclic-binary}, the
 separable cubic map is noncyclic, so its geometric
 monodromy is $S_3$.  Transitivity on ordered pairs of distinct roots
@@ -144,10 +150,17 @@ has $q+1$ rational points.  At most two are fixed and at most two
 ordered graph points involve each of $z,x,r,s$.  A point remains for
 $q\geq43$, giving three distinct roots outside the markers.  The
 inseparable degree-two case is on the rank/boundary carrier.
+\end{proof}
 
-\emph{Two-old-marker quartic lemma.}
-It remains to select the internal parameter $s$ without entering a
-removed stratum.  The complete divisor table on the $s$-line is
+\begin{lemma}[Two-marker selection]\label{lem:r8-two-marker}
+Fix two old markers $x,r$.  Outside the declared contained strata,
+the bad divisor on the internal $s$-line has degree at most $19$.
+For $q\geq43$ one can choose $s$ so that the lower package supplies a
+split squarefree quartic avoiding $x$ and $r$.
+\end{lemma}
+
+\begin{proof}
+The complete divisor table on the $s$-line is
 \[
 \begin{array}{c|c|c}
 \text{failure}&\text{defining mechanism}&\text{degree}\\\hline
@@ -185,8 +198,17 @@ every self-collision maps into this ramification divisor.
 Choosing $s$ outside this divisor and applying the preceding
 gcd-zero or gcd-one bottom analysis gives a split squarefree quartic
 avoiding the two old markers.  This proves the two-old-marker lemma.
+\end{proof}
 
-\emph{Outer pointed-sextic selection.}
+\begin{lemma}[Outer marker selection]\label{lem:r8-outer-selection}
+For a pointed sextic outside the persistent and modular contained
+strata, the bad divisor on the outer first-marker line has degree at
+most $15$.  A surviving outer marker lifts the witness of
+Lemma~\ref{lem:r8-two-marker} to a split squarefree quintic avoiding
+the original marker.
+\end{lemma}
+
+\begin{proof}
 The lower rank-two pullback costs three
 parameters and the binary nucleus costs one.  If a contracted net has
 exact gcd $\ell_z$, the condition $z=r$ maps into the ramification of
@@ -207,6 +229,23 @@ $12(q+1)<(q-2)(q-3)$.  The cases $z=x,r$ are precisely the excluded
 quadratic and ramification divisors.
 Lifting first by $\ell_s$ and then by $\ell_r$ gives a split
 squarefree quintic avoiding $x$.
+\end{proof}
+
+\begin{proposition}[Pointed lower package]\label{prop:r8-lp61}
+The assertion $\mathrm{LP}(6,1)$ holds.  On the outer first-marker
+line its exceptional divisor has degree at most fifteen; on the
+recursive second-marker line the corresponding divisor has degree at
+most nineteen.  Its only positive-genus identity twist is the
+geometrically integral off-diagonal $(2,2)$ curve of genus at most one
+with deletion degree $30$.
+\end{proposition}
+
+\begin{proof}
+Lemmas~\ref{lem:r8-bottom-strata} and \ref{lem:r8-monodromy} identify
+the bottom strata and the unique positive-genus identity twist.
+Lemmas~\ref{lem:r8-two-marker} and \ref{lem:r8-outer-selection} give
+the two parameter-line budgets and the coherent squarefree lift.  For
+auditability, the complete exhaustion is summarized here.
 
 \begin{center}
 \scriptsize
@@ -239,7 +278,6 @@ declared collision boundary & finite divisor on the marker line\\
 \end{tabular}
 \end{center}
 
-\emph{Exhaustion and threshold.}
 The gcd has degree zero, one, or at least two, and a separable
 gcd-zero cubic cover has monodromy $S_3$ or $C_3$; hence the displayed
 list is exhaustive.  No certificate or finite-field regression is

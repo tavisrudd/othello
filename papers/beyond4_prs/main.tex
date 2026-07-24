@@ -10,6 +10,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{multicol}
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -26,8 +27,10 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
@@ -58,13 +61,16 @@ deep holes, coherent polar flags, and modular carriers}
 \maketitle
 
 \begin{abstract}
-We classify the projective Reed--Solomon deep-hole syndrome directions
-at redundancy five over every prime power $q\geq7$, resolving the first
-case left open by the classification through redundancy four.  A
-syndrome determines a Hankel linear system of binary forms and is deep
-exactly when that system contains no completely split squarefree member.
-The generic redundancy-five case is controlled by an integral
-off-diagonal fiber-square curve of arithmetic genus one.
+We classify, up to projective-semilinear equivalence, the one-column
+MDS extensions arising from projective Reed--Solomon codes at
+redundancy five over every prime power $q\geq7$, and give their exact
+projective counts.  Equivalently, we classify the projective deep-hole
+syndrome directions in the first case left open by the classification
+through redundancy four.  A syndrome determines a Hankel linear
+system of binary forms and is deep exactly when that system contains
+no completely split squarefree member.  The generic redundancy-five
+case is controlled by an integral off-diagonal fiber-square curve of
+arithmetic genus one.
 
 For higher redundancy we introduce coherent polar flags: iterated
 contractions in which every selected factor remains a marked forbidden
@@ -101,9 +107,12 @@ redundancy-ten deep holes are not classified.
 \input{sections/11-provenance-boundary}
 \input{appendices/r9-slice-data}
 \begingroup
-\small
+\scriptsize
+\raggedright
+\begin{multicols}{2}
 \bibliographystyle{alpha}
 \bibliography{refs}
+\end{multicols}
 \endgroup
 
 \end{document}

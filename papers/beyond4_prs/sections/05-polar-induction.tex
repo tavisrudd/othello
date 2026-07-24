@@ -51,6 +51,44 @@ In an affine coordinate $r$ the first map is
 \Phi_f(\infty)=(a_0,\ldots,a_{n-1}).
 \]
 
+\begin{example}[A complete contraction at $q=29$]\label{ex:q29-r6}
+Work over $\F_{29}$ at redundancy six and take
+\[
+ f=(6:1:0:0:5:1).
+\]
+The Hankel kernel is the net of quartics
+\[
+ W_f=\ker
+ \begin{pmatrix}6&1&0&0&5\\1&0&0&5&1\end{pmatrix}
+ =
+ \left\langle
+ (0,0,1,0,0),(24,1,0,1,0),(28,1,0,0,1)
+ \right\rangle .
+\]
+The displayed basis has no common factor, so the persistent test does
+not decide the syndrome.  Choose the first marker $r=0$.  Then
+\[
+ \iota_0f=(1:0:0:5:1),\qquad
+ h(t)=4+9t-t^2+5t^3\in W_{\iota_0f},
+\]
+because the two Hankel products are $4+5\cdot5=0$ and
+$5(-1)+5=0$ in $\F_{29}$.  Direct factorization gives
+\[
+ h(t)=5(t-2)(t-6)(t-27).
+\]
+None of these roots is the marked root $0$.  Equation~\eqref{eq:lift}
+therefore lifts $h$ to
+\[
+ t\,h(t)=(0,4,9,28,5)\in W_f,
+\]
+a squarefree quartic with roots $0,2,6,27$.  The Hankel criterion now
+places $f$ in the span of the corresponding four normal-rational-curve
+columns, so $f$ is shallow.  This one calculation exhibits every
+interface used later: Hankel kernel, persistent test, marked
+contraction, lower factorization, marker avoidance, and squarefree
+lifting.
+\end{example}
+
 \begin{definition}[Lower splitting package]\label{def:lower-package}
 At level $(n,j)$ a lower splitting package consists of:
 \begin{enumerate}[label=\textup{(\roman*)}]
