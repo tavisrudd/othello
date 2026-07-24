@@ -1,0 +1,71 @@
+'RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.witness_mds_columns' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschDye.dye1991_brianchon_bound]
+'RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschDye.dye1991_brianchon_bound]
+'RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RelativeConicArcs.ClebschDye.dye1991_brianchon_bound,
+ RelativeConicArcs.ClebschDye.dye1991_equality_classification]
+'RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula' depends on axioms: [propext]
+'RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.SmallKGeometricBridge.fourArc_conic_card_order' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (8781 jobs).

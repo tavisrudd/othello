@@ -134,10 +134,6 @@ six-arcs of $\PG(2,11)$~\cite{SadehThesis1984}; we claim no priority for
 that census or its extension counts. The companion arcs paper records the
 single conic-locus identification of
 Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
-% NB: the three \cite[Prop.~8.7]{ArcsCompleteOutsideConic} references (here, §3,
-% §8) were 4.6 and are re-pinned to the companion's current numbering, verified
-% 2026-07-14: prop:q11-code is the 7th numbered environment of its §8. That
-% paper is in another lane and ships first, so re-verify these before submission.
 certificate~\cite[Prop.~8.7]{ArcsCompleteOutsideConic}; we reprove it for
 self-containment. The new contribution is the symmetry-free coding
 criterion and its consequences: low-degree rigidity, quantitative gaps,
@@ -1235,11 +1231,14 @@ with exact arithmetic. The formal development is
 \url{https://github.com/tavisrudd/finitegeom} at commit
 \path{43c403b23e7cb6b9d66dda01bb43a91bec9ea465}; it uses Lean
 4.32.0-rc1 and Mathlib commit
-\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}. Paper paths are relative
-to this paper root; Lean paths are relative to the shared Lean root.
+\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}. Manifest, release, and
+executable checker paths are relative to this paper root; Lean paths are
+relative to the shared Lean root.
 Table~\ref{tab:paper-one-claims} is the Paper~I claim/evidence map. Its
-claim-by-claim release manifest and aggregate Paper~I gate are deliberately
-left to the independent verification pass after the statements freeze.
+claim-by-claim manifest is \path{verification/trust_manifest.json}; the
+aggregate formal gate is
+\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}. The clean replay
+entry point is \path{verification/verify_release.py}.
 \par
 \endgroup
 

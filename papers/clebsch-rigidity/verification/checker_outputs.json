@@ -1,0 +1,55 @@
+{
+  "checks": {
+    "check_chirality.py": {
+      "bytes": 2457,
+      "lines": 61,
+      "sha256": "57584df55bf172b385a91665d732af9bcab33a895cf423215a25121d83f7743d"
+    },
+    "check_code_automorphisms.py": {
+      "bytes": 636,
+      "lines": 18,
+      "sha256": "445605d6bb2b140ee6bbee1f95c59cb0a13c91ce2c60453e09915b6733e23c8e"
+    },
+    "check_decoding.py": {
+      "bytes": 1199,
+      "lines": 30,
+      "sha256": "423bd95dd7bcdb51784efa468a1dc8183ac1ae75ca95bb58e67be6016ac30c67"
+    },
+    "check_global_conic_gap.py": {
+      "bytes": 1988,
+      "lines": 31,
+      "sha256": "fdd0b0f389110860ab535d0228d4bac1c9ca780995cfe7efaab829d38e219775"
+    },
+    "check_low_degree_loci.py": {
+      "bytes": 2310,
+      "lines": 28,
+      "sha256": "2f88bb38942425b9cdb3d1f0d9e2293ac4d6202d5fb004602e29649560bd2719"
+    },
+    "check_perturbation_gap.py": {
+      "bytes": 2824,
+      "lines": 24,
+      "sha256": "c30bc8247f1015b4f5077499345d25fb307a585f64f1aceced7b0bfdcc69e198"
+    },
+    "check_q19_nonexample.py": {
+      "bytes": 915,
+      "lines": 22,
+      "sha256": "fe73b5c5906e059ea83045ca09022b854239d281f9ff121f15ee11340373d21f"
+    },
+    "check_rigidity_degenerate_conic.py": {
+      "bytes": 498,
+      "lines": 12,
+      "sha256": "e90ad77bcc9d96f7e0094c4ccd56cd6b154df5db8398f992a2493113488d491b"
+    },
+    "check_small_k_conic_filling.py": {
+      "bytes": 691,
+      "lines": 6,
+      "sha256": "17207a9827e6e961123950e34881a6e63533903cf3fc226e3234f71abdb8866e"
+    },
+    "check_small_q_uniqueness.py": {
+      "bytes": 1162,
+      "lines": 16,
+      "sha256": "380ca51dce260f0794de15bf0c3a710139c2fe2734b84475bd638b8413471979"
+    }
+  },
+  "schema": "clebsch-rigidity-checker-output-v1"
+}

@@ -1,0 +1,67 @@
+{
+  "check_count": 15,
+  "checks": [
+    {
+      "id": "verification-tool-tests",
+      "status": "passed"
+    },
+    {
+      "id": "statement-identity",
+      "status": "passed"
+    },
+    {
+      "id": "manuscript-build",
+      "status": "passed"
+    },
+    {
+      "id": "trust-manifest-regeneration",
+      "status": "passed"
+    },
+    {
+      "id": "check-rigidity-degenerate-conic",
+      "status": "passed"
+    },
+    {
+      "id": "check-decoding",
+      "status": "passed"
+    },
+    {
+      "id": "check-chirality",
+      "status": "passed"
+    },
+    {
+      "id": "check-code-automorphisms",
+      "status": "passed"
+    },
+    {
+      "id": "check-global-conic-gap",
+      "status": "passed"
+    },
+    {
+      "id": "check-perturbation-gap",
+      "status": "passed"
+    },
+    {
+      "id": "check-low-degree-loci",
+      "status": "passed"
+    },
+    {
+      "id": "check-small-q-uniqueness",
+      "status": "passed"
+    },
+    {
+      "id": "check-q19-nonexample",
+      "status": "passed"
+    },
+    {
+      "id": "check-small-k-conic-filling",
+      "status": "passed"
+    },
+    {
+      "id": "lean-rigidity-trust-gate",
+      "status": "passed"
+    }
+  ],
+  "lean_commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
+  "status": "passed"
+}

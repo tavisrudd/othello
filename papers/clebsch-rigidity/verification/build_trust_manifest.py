@@ -1,0 +1,551 @@
+#!/usr/bin/env python3
+"""Build the deterministic nineteen-row Clebsch rigidity trust manifest."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+
+
+PAPER_ROOT = Path(__file__).resolve().parents[1]
+REPOSITORY_ROOT = PAPER_ROOT.parents[1]
+LEAN_ROOT = REPOSITORY_ROOT / "lean"
+IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
+OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
+GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
+PINNED_LEAN_COMMIT = "43c403b23e7cb6b9d66dda01bb43a91bec9ea465"
+
+
+TERMINALS = {
+    "orbits": [
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit",
+    ],
+    "code_locus": [
+        "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
+        "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic",
+        "RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three",
+    ],
+    "decoder": [
+        "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
+        "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound",
+        "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts",
+        "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
+        "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
+    ],
+    "rigidity": [
+        "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
+        "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card",
+        "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic",
+        "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic",
+    ],
+    "defect_bridge": [
+        "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
+    ],
+    "chord_identity": [
+        "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments",
+    ],
+    "clebsch_formula": [
+        "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula",
+    ],
+    "field_order": [
+        "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
+        "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five",
+    ],
+    "small": [
+        "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
+        "RelativeConicArcs.SmallKGeometricBridge.fourArc_conic_card_order",
+        "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card",
+        "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra",
+    ],
+}
+
+CLASSICAL_DYE = [
+    "Dye 1991, Theorems 1 and 3, pages 275--278",
+]
+CLASSICAL_EDGE_DYE = [
+    "Edge 1956, Sections 29--32",
+    "Dye 1991, Theorems 1 and 3, pages 275--278",
+]
+CLASSICAL_CODE = [
+    "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
+    "Hirschfeld 1998, the plane arc/covering-radius dictionary",
+]
+CLASSICAL_SYLVESTER = [
+    "The Sylvester graph clique bound, independently formalized from its explicit finite model",
+]
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def file_evidence(repository: str, path: str) -> dict[str, str]:
+    roots = {
+        "paper": PAPER_ROOT,
+        "lean": LEAN_ROOT,
+    }
+    return {
+        "repository": repository,
+        "path": path,
+        "sha256": sha256(roots[repository] / path),
+    }
+
+
+def parse_axioms() -> dict[str, list[str]]:
+    text = (LEAN_ROOT / AUDIT_PATH).read_text(encoding="utf-8")
+    pattern = re.compile(
+        r"'([^']+)' (does not depend on any axioms|depends on axioms: \[(.*?)\])",
+        re.DOTALL,
+    )
+    result: dict[str, list[str]] = {}
+    for match in pattern.finditer(text):
+        body = match.group(3)
+        result[match.group(1)] = (
+            []
+            if body is None
+            else [item.strip() for item in body.replace("\n", " ").split(",")]
+        )
+    expected = {terminal for group in TERMINALS.values() for terminal in group}
+    if set(result) != expected:
+        missing = sorted(expected - set(result))
+        extra = sorted(set(result) - expected)
+        raise ValueError(f"axiom audit terminal mismatch: missing={missing}, extra={extra}")
+    return result
+
+
+def conceptual(
+    subclaim: str,
+    cited_inputs: list[str],
+    remainder: str,
+) -> dict[str, object]:
+    return {
+        "route": "conceptual-cited-inputs",
+        "subclaim": subclaim,
+        "cited_inputs": cited_inputs,
+        "unconditional_remainder": remainder,
+    }
+
+
+def replay(
+    subclaim: str,
+    scripts: list[str],
+    coverage: str,
+    bridge: str,
+    independent: str,
+) -> dict[str, object]:
+    return {
+        "route": "exact-replay",
+        "subclaim": subclaim,
+        "computation": {
+            "checker": " and ".join(f"python3 {script}" for script in scripts),
+            "coverage": coverage,
+            "soundness_bridge": bridge,
+            "independent_replay": independent,
+            "residual_trust": (
+                "Exact Python integer and finite-field arithmetic, plus the "
+                "manuscript's coordinate-to-geometric correspondence."
+            ),
+            "artifacts": [
+                file_evidence("paper", script) for script in scripts
+            ],
+        },
+    }
+
+
+def lean(
+    subclaim: str,
+    groups: list[str],
+    axioms: dict[str, list[str]],
+) -> dict[str, object]:
+    terminals = list(
+        dict.fromkeys(
+            terminal for group in groups for terminal in TERMINALS[group]
+        )
+    )
+    return {
+        "route": "kernel-checked-lean",
+        "subclaim": subclaim,
+        "lean": {
+            "gate": file_evidence("lean", GATE_PATH),
+            "audit": file_evidence("lean", AUDIT_PATH),
+            "terminals": terminals,
+            "axioms": {terminal: axioms[terminal] for terminal in terminals},
+            "validation": {
+                "command": (
+                    "scripts/guarded-lean "
+                    "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+                ),
+                "toolchain": {
+                    "lean": "4.32.0-rc1",
+                    "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+                },
+            },
+        },
+    }
+
+
+def claim(
+    identity: dict[str, object],
+    boundary: str,
+    components: list[dict[str, object]],
+) -> dict[str, object]:
+    source = {
+        "kind": identity["kind"],
+        "id": identity["id"],
+        "sha256": identity["sha256"],
+    }
+    base: dict[str, object] = {
+        "row": identity["row"],
+        "id": str(identity["id"]).replace(":", "-"),
+        "source": source,
+        "paper_location": f"source line {identity['source_line']}",
+        "trust_boundary": boundary,
+    }
+    if len(components) == 1:
+        component = dict(components[0])
+        component.pop("subclaim", None)
+        return {**base, **component}
+    return {**base, "route": "mixed", "components": components}
+
+
+def components_by_row(
+    axioms: dict[str, list[str]],
+) -> dict[int, tuple[str, list[dict[str, object]]]]:
+    frame_coverage = (
+        "All 1,548 frame-normalized six-arcs over F_11 are canonically "
+        "reduced to the fifteen projective classes; no sampling is used."
+    )
+    frame_shared = (
+        "The low-degree checker deliberately reuses the global checker's "
+        "canonical class generator so both tables have identical keys; there "
+        "is no second independent enumeration of the fifteen classes. Both "
+        "programs reconstruct all coordinates and are independent of Lean."
+    )
+    complementary_replays = (
+        "The global, one-point-neighbour, and automorphism programs use "
+        "separate finite enumerations and compare invariant counts; none "
+        "imports Lean output."
+    )
+    ordinary_exhaustion = (
+        "The script exhausts the finite field, arc, syndrome, conic, or "
+        "neighbour domain stated in the manuscript; no sampling is used."
+    )
+    direct_coordinates = (
+        "The replay reconstructs its domain from explicit coordinates and "
+        "does not import Lean output."
+    )
+    return {
+        2: (
+            "Lean proves the conic-containment implication through the explicit Dye axiom seam; the stabilizer identification remains a cited classical and coordinate result.",
+            [
+                conceptual("classical equality and stabilizer identification", CLASSICAL_DYE, "The line bound and chord-defect deduction are proved in the manuscript."),
+                lean("symmetry-free rigidity implication", ["rigidity"], axioms),
+                replay("finite witness and orbit census", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay checks the explicit Clebsch witness and normalized class census.", direct_coordinates),
+            ],
+        ),
+        11: (
+            "The gate checks the explicit order-sixty action and its point-orbit partition; its identification with the classical A5 action uses Dye.",
+            [
+                conceptual("classical group identification", CLASSICAL_DYE, "The displayed matrices and their finite action are checked exactly."),
+                lean("explicit finite point orbits", ["orbits"], axioms),
+            ],
+        ),
+        12: (
+            "Lean checks the displayed witness and syndrome-conic equality; the exhaustive replay supplies an independent coordinate reconstruction.",
+            [
+                conceptual("code--arc dictionary", CLASSICAL_CODE, "The displayed witness calculation is kernel checked."),
+                lean("witness MDS code and projective distance-three locus", ["code_locus"], axioms),
+                replay("independent coordinate witness", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay verifies the displayed Clebsch class and uncovered conic.", direct_coordinates),
+            ],
+        ),
+        13: (
+            "This is a conceptual dictionary and exact counting corollary; it does not inherit a formalization label from adjacent rows.",
+            [conceptual("directions, cosets, leaders, and received words", CLASSICAL_CODE, "The manuscript gives the exact projectivization and coset counts.")],
+        ),
+        14: (
+            "The projective action argument is in the manuscript; the executable route checks the displayed automorphism action exactly.",
+            [
+                conceptual("deep-hole orbit deduction", CLASSICAL_DYE, "The manuscript transports the twelve-point action through the code--arc dictionary."),
+                replay("code automorphism action", ["check_code_automorphisms.py"], ordinary_exhaustion, "The replay checks the displayed monomial automorphisms and syndrome action.", direct_coordinates),
+            ],
+        ),
+        15: (
+            "Lean checks the exact syndrome branches and leader-support strata; the separate replay independently exhausts every projective syndrome direction.",
+            [
+                conceptual("syndrome-oracle reduction", CLASSICAL_CODE, "The manuscript proves the quadratic decision rule from the code--arc dictionary."),
+                lean("decoder and ambiguity strata", ["decoder"], axioms),
+                replay("independent decoder census", ["check_decoding.py", "check_chirality.py", "check_code_automorphisms.py"], ordinary_exhaustion, "The replay checks distances, leader multiplicities, and ambiguity supports; the imported support and automorphism modules are hash-pinned alongside it.", direct_coordinates),
+            ],
+        ),
+        16: (
+            "The line bound is a complete human combinatorial proof and claims no computational or Lean route.",
+            [conceptual("six-arc line bound", ["No external input; complete combinatorial proof in the manuscript"], "The entire statement is unconditional.")],
+        ),
+        17: (
+            "The exact implication is kernel checked relative to Dye's two declared consequences; the classical assumptions are not proved by Lean.",
+            [
+                conceptual("Dye equality boundary", CLASSICAL_DYE, "The line bound and chord-defect identity are proved independently."),
+                lean("rigidity implication", ["rigidity"], axioms),
+            ],
+        ),
+        18: (
+            "The statement is backed by complete exact evaluation-rank enumeration, not by a Lean theorem.",
+            [replay("degree-at-most-three loci", ["check_low_degree_loci.py", "check_global_conic_gap.py"], frame_coverage, "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it.", frame_shared)],
+        ),
+        19: (
+            "This is a conceptual corollary of the code--arc dictionary and the preceding replay-backed proposition.",
+            [conceptual("monomial characterization", CLASSICAL_CODE, "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18.")],
+        ),
+        20: (
+            "Every numerical clause is exact-replay-backed; the qualitative rigidity implication remains separately routed in row 17.",
+            [replay("global, neighbour, and automorphism gaps", ["check_global_conic_gap.py", "check_perturbation_gap.py", "check_code_automorphisms.py"], frame_coverage, "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits.", complementary_replays)],
+        ),
+        21: (
+            "The incidence dictionary is a human consequence of the cited Edge--Dye geometry.",
+            [conceptual("Brianchon--support dictionary", CLASSICAL_EDGE_DYE, "The manuscript identifies the support sets through the displayed incidence configuration.")],
+        ),
+        22: (
+            "The manuscript gives the conceptual corollary; Lean checks the exact Brianchon leader-support rows for the displayed witness.",
+            [
+                conceptual("decoder reconstruction", CLASSICAL_EDGE_DYE, "The reconstruction follows from the preceding dictionary."),
+                lean("Brianchon leader supports", ["decoder"], axioms),
+            ],
+        ),
+        23: (
+            "The unordered support bipartition is proved by incidence and independently replayed; no orientation or sign is claimed.",
+            [
+                conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
+                replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], ordinary_exhaustion, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
+            ],
+        ),
+        24: (
+            "Lean checks the exact chord-defect algebra; the manuscript supplies the secant-moment interpretation.",
+            [
+                conceptual("secant-moment double count", ["No external input; complete double count in the manuscript"], "The geometric identification of the variables is proved in the manuscript."),
+                lean("chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
+            ],
+        ),
+        25: (
+            "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the manuscript cites the classical graph interpretation.",
+            [
+                conceptual("Sylvester graph interpretation", CLASSICAL_SYLVESTER, "The chord arithmetic and explicit finite graph certificate are kernel checked."),
+                lean("field-order boundary", ["field_order"], axioms),
+                replay("small-field boundary", ["check_small_q_uniqueness.py"], ordinary_exhaustion, "The replay checks every stated small-field Clebsch specialization.", direct_coordinates),
+            ],
+        ),
+        26: (
+            "The all-field formula is conceptual; q=19 is checked by an independent exact specialization.",
+            [
+                conceptual("Clebsch-family chord count", CLASSICAL_DYE, "The manuscript derives the polynomial from Dye's incidence criterion."),
+                lean("uncovered-locus polynomial", ["clebsch_formula"], axioms),
+                replay("q=19 specialization", ["check_q19_nonexample.py"], ordinary_exhaustion, "The replay independently constructs and checks the q=19 specialization.", direct_coordinates),
+            ],
+        ),
+        29: (
+            "Lean proves the universal moment reductions; the terminal finite leaves are discharged by exhaustive exact replay.",
+            [
+                conceptual("universal chord-moment reduction", ["No external input beyond the projective-plane incidence axioms used in the proof"], "The manuscript derives the moment equations and identifies their geometric fibers."),
+                lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
+                replay("terminal small-arc exclusions", ["check_small_k_conic_filling.py"], ordinary_exhaustion, "The checker exhausts the displayed fields and arc sizes after the moment reduction.", direct_coordinates),
+            ],
+        ),
+        58: (
+            "Two exact replays share canonical class keys and regenerate every printed census field used by the proofs.",
+            [replay("complete fifteen-class census", ["check_global_conic_gap.py", "check_low_degree_loci.py"], frame_coverage, "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees.", frame_shared)],
+        ),
+    }
+
+
+def checks() -> list[dict[str, object]]:
+    output_certificate = json.loads(
+        (PAPER_ROOT / "verification" / "checker_outputs.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    output_checks = output_certificate.get("checks")
+    if not isinstance(output_checks, dict):
+        raise ValueError("checker-output certificate has no checks object")
+    result = [
+        {
+            "id": "verification-tool-tests",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": ["python3", "verification/test_verification_tools.py"],
+            "timeout_seconds": 120,
+        },
+        {
+            "id": "statement-identity",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": [
+                "python3",
+                "verification/extract_statement_identity.py",
+                "--output",
+                "verification/statement_identity.json",
+                "--check",
+            ],
+            "timeout_seconds": 60,
+        },
+        {
+            "id": "manuscript-build",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": ["python3", "verification/check_manuscript_build.py"],
+            "timeout_seconds": 300,
+        },
+        {
+            "id": "trust-manifest-regeneration",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": ["python3", "verification/build_trust_manifest.py", "--check"],
+            "timeout_seconds": 60,
+        },
+    ]
+    for script in (
+        "check_rigidity_degenerate_conic.py",
+        "check_decoding.py",
+        "check_chirality.py",
+        "check_code_automorphisms.py",
+        "check_global_conic_gap.py",
+        "check_perturbation_gap.py",
+        "check_low_degree_loci.py",
+        "check_small_q_uniqueness.py",
+        "check_q19_nonexample.py",
+        "check_small_k_conic_filling.py",
+    ):
+        output = output_checks.get(script)
+        if not isinstance(output, dict):
+            raise ValueError(f"checker-output certificate omits {script}")
+        result.append(
+            {
+                "id": script.removesuffix(".py").replace("_", "-"),
+                "repository": "paper",
+                "cwd": ".",
+                "argv": ["python3", script],
+                "timeout_seconds": 900,
+                "stdout_bytes": output["bytes"],
+                "stdout_lines": output["lines"],
+                "stdout_sha256": output["sha256"],
+            }
+        )
+    result.append(
+        {
+            "id": "lean-rigidity-trust-gate",
+            "repository": "lean",
+            "cwd": ".",
+            "argv": [
+                "scripts/guarded-lean",
+                "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+            ],
+            "timeout_seconds": 1800,
+        }
+    )
+    return result
+
+
+def build_manifest() -> dict[str, object]:
+    identity = json.loads(IDENTITY_PATH.read_text(encoding="utf-8"))
+    if identity.get("claim_count") != 19:
+        raise ValueError("statement identity must contain exactly nineteen claims")
+    axioms = parse_axioms()
+    routes = components_by_row(axioms)
+    claims = []
+    for source in identity["claims"]:
+        row = source["row"]
+        boundary, components = routes[row]
+        claims.append(claim(source, boundary, components))
+    if len(claims) != 19 or set(routes) != {claim["row"] for claim in claims}:
+        raise ValueError("claim-route map is incomplete")
+    return {
+        "schema": "clebsch-rigidity-trust-manifest-v1",
+        "manuscript_sha256": sha256(PAPER_ROOT / "clebsch_rigidity.tex"),
+        "statement_identity": file_evidence(
+            "paper", "verification/statement_identity.json"
+        ),
+        "lean_repository": {
+            "url": "https://github.com/tavisrudd/finitegeom",
+            "commit": PINNED_LEAN_COMMIT,
+        },
+        "reproducibility_environment": {
+            "platform": "x86_64-linux",
+            "flake": file_evidence("paper", "flake.nix"),
+            "lock": file_evidence("paper", "flake.lock"),
+            "paper_toolchain": {
+                "python": "3.13.14",
+                "texlive": "scheme-full from the pinned nixpkgs input",
+                "nix": "2.34.8",
+                "git": "2.54.0",
+            },
+            "formal_toolchain": {
+                "lean": "4.32.0-rc1",
+                "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+            },
+        },
+        "verify_all": {
+            "command": (
+                "nix develop --command python3 "
+                "verification/verify_release.py "
+                "--lean-root /path/to/finitegeom"
+            ),
+            "entry_point": file_evidence(
+                "paper", "verification/verify_release.py"
+            ),
+            "output": file_evidence(
+                "paper", "verification/verify-release-output.json"
+            ),
+            "checker_output_certificate": {
+                "generator": file_evidence(
+                    "paper", "verification/capture_checker_outputs.py"
+                ),
+                "output": file_evidence(
+                    "paper", "verification/checker_outputs.json"
+                ),
+            },
+            "verification_tools": [
+                file_evidence("paper", f"verification/{name}")
+                for name in (
+                    "extract_statement_identity.py",
+                    "build_trust_manifest.py",
+                    "verify_trust_manifest.py",
+                    "test_verification_tools.py",
+                    "check_manuscript_build.py",
+                )
+            ],
+            "checks": checks(),
+        },
+        "claims": claims,
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--stdout", action="store_true")
+    parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
+    args = parser.parse_args()
+    rendered = json.dumps(build_manifest(), indent=2, sort_keys=True) + "\n"
+    if args.check:
+        if args.output.read_text(encoding="utf-8") != rendered:
+            raise ValueError(f"stale trust manifest: {args.output}")
+    elif args.stdout:
+        print(rendered, end="")
+    else:
+        args.output.write_text(rendered, encoding="utf-8")
+        print(f"wrote {args.output}: 19 claim rows", file=sys.stderr)
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, UnicodeError, ValueError) as error:
+        print(f"manifest construction failed: {error}")
+        raise SystemExit(1)

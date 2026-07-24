@@ -8,6 +8,11 @@ The paper needs two consequences of Dye's equality classification for six-arcs. 
 here, specialized to `PG(2,11)` and to the project's actual incidence model, so every downstream
 `#print axioms` exposes the precise external input.  No other geometric or computational claim is
 imported through this boundary.
+
+The external source is R. H. Dye, “Hexagons, conics, \(A_5\) and
+\(\mathrm{PSL}_2(K)\),” *Journal of the London Mathematical Society* (2) 44
+(1991), 270--286, doi:10.1112/jlms/s2-44.2.270.  The two declarations below
+specialize Theorems 1 and 3 on pages 275--278.
 -/
 
 namespace RelativeConicArcs.ClebschDye
@@ -36,14 +41,16 @@ noncomputable def IsClebschHexagon (A : Finset Point11) : Prop :=
   ∃ g : Space11 ≃ₗ[K11] Space11,
     A.map (ProjectiveCap.Projective.mapEquiv g).toEmbedding = clebschWitness
 
-/-- Dye's triple-point bound, specialized to the exact field and arc size used by the paper. -/
+/-- Dye's triple-point bound, specialized to the exact field and arc size used here; the external
+input is Dye 1991, Theorem 1, doi:10.1112/jlms/s2-44.2.270. -/
 axiom dye1991_brianchon_bound
     {A : Finset Point11}
     (hA : Arc (L := Point11) A)
     (hcard : A.card = 6) :
     (brianchonPoints A).card ≤ 10
 
-/-- Dye's equality classification, specialized to `PG(2,11)`. -/
+/-- Dye's equality classification, specialized to `PG(2,11)`; the external input is Dye 1991,
+Theorem 3, doi:10.1112/jlms/s2-44.2.270. -/
 axiom dye1991_equality_classification
     {A : Finset Point11}
     (hA : Arc (L := Point11) A)

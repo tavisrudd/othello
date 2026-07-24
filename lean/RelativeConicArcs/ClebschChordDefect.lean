@@ -118,7 +118,9 @@ theorem clebsch_uncovered_formula
     (hten : c = 10) :
     (u : ℤ) = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 45 := by
   subst c
-  linarith
+  calc
+    (u : ℤ) = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 55 - 10 := hidentity
+    _ = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 45 := by ring
 
 /-- If the Clebsch uncovered-cardinality formula has conic cardinality `q + 1`, then the only
 integer orders are `4` and `11`.  In the geometric application Dye's existence theorem excludes
