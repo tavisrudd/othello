@@ -146,14 +146,14 @@ field-size conclusion, while the uniform theorem converts its validity through
 level \(r\) into the classification for \(q\geq Q_r\).  R6 and R7 prove their
 instances unconditionally.
 
-The final extra-juice pass banks the immediate large-characteristic corollary.
-If \(\mathrm{SC}(j)\) holds through \(r\), \(q\geq Q_r\), and
-\(\operatorname{char}\F_q>r-1\), Lucas makes \(\mathcal M_r\) empty;
-the split-free list is exactly the persistent tangent and
-conjugate-secant families.  Under the separate radius gate this is also the
-deep-hole list; in particular, the conclusion applies over every prime field
-meeting \(q\geq Q_r\).  This is a sharpening of the conditional theorem, not
-progress on the unidentified cyclic-type contained residue.
+The final extra-juice pass banks the immediate empty-modular corollary.  If
+\(\mathrm{SC}(j)\) holds through \(r\), \(q\geq Q_r\), and
+\(\mathcal M_r=\varnothing\), the split-free list is exactly the persistent
+tangent and conjugate-secant families.  Under the separate radius gate this is
+also the deep-hole list.  Lucas gives the sufficient condition
+\(\operatorname{char}\F_q>r-1\), so the conclusion applies over every prime
+field meeting \(q\geq Q_r\).  This is a sharpening of the conditional theorem,
+not progress on the unidentified cyclic-type contained residue.
 
 ## Editorial truth table
 
@@ -182,6 +182,7 @@ progress on the unidentified cyclic-type contained residue.
 | Which numerical inequality can bind at arbitrary redundancy | settled | Linear modular pullbacks and uniform collision separability give \(d_j\leq3r-5<Q_r\).  Only the bottom point count binds. |
 | When the modular locus vanishes | settled sharpening | If \(p>r-1\), Lucas' theorem leaves no nucleus coordinate, hence \(\mathcal M_r=\varnothing\).  The R5 cyclic carrier is not modular and survives this observation. |
 | What the uniform theorem says in large characteristic | settled | Under \(\mathrm{SC}(6),\ldots,\mathrm{SC}(r)\), \(p>r-1\), and \(q\geq Q_r\), only the persistent tangent and conjugate-secant families remain; the radius gate promotes this to the deep-hole list. |
+| Whether a characteristic-zero proof of \(\mathrm{SC}(j)\) controls large primes | open, exact gate identified | For fixed \(j\), spreading out should leave only finitely many vertical characteristics once the recursively pointed bad scheme is realized as one finite-type integral model.  That integral model, its saturations, and control of vertical components are not printed, so no such corollary is claimed. |
 | Whether marker clustering lowers \(\delta_r\) | rejected | At most three markers can share a fiber, and the same parameter freedom must avoid a bad scheme of degree on the order of \(3r\); clustering cannot spend that freedom a second time. |
 | Why the last sporadic fields decrease \(19,13,11\) while the point-count gates increase \(23,29,37\) | open | The tables establish the trend through R7.  Whether sufficiently high redundancy has no sporadic fields is a sharper component/arithmetic question, not answered here. |
 | Why \(\langle1,t^3,t^4\rangle\) is pointed-bad specifically at \(q=19\) | open | The six split members and their common infinity root are exact, but the intrinsic branch-divisor explanation remains the separately recorded C509 exceptional-cover question. |
