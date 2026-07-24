@@ -35,6 +35,10 @@ The paper-export root also contains `flake.nix`, `flake.lock`, and
 nix develop
 ```
 
+Build the manuscript with `make check`.  The canonical output is
+`prs-beyond-redundancy-four.pdf`;
+`main.pdf` is not part of the export.
+
 In the export layout, `../lean` is the repository root of the public
 formal-verification checkout
 `https://github.com/tavisrudd/finitegeom`.  The separately distributed Q25

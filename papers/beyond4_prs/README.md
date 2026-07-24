@@ -18,7 +18,9 @@ From this directory:
 make check
 ```
 
-The principal files are `main.tex`, `main.pdf`, `refs.bib`, `theorem-map.md`,
+The principal files are `main.tex`,
+`prs-beyond-redundancy-four.pdf`,
+`refs.bib`, `theorem-map.md`,
 `claim-proof-novelty-ledger.md`, `adversarial-proof-evidence-audit.md`,
 `second-draft-fix-plan.md`, and `verification-map.md`.  Major TeX units live
 under `sections/`; `main.tex` is being reduced to the build driver described

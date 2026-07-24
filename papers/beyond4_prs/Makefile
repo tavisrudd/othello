@@ -1,17 +1,20 @@
 LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 TEX_SOURCES := main.tex $(wildcard sections/*.tex) $(wildcard appendices/*.tex)
+PDF_BASENAME := prs-beyond-redundancy-four
+PDF := $(PDF_BASENAME).pdf
 
 .PHONY: all check clean
 
-all: main.pdf
+all: $(PDF)
 
-main.pdf: $(TEX_SOURCES) refs.bib
-	$(LATEXMK) $(LATEXMK_FLAGS) main.tex
+$(PDF): $(TEX_SOURCES) refs.bib
+	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(PDF_BASENAME) main.tex
 
 check:
-	$(LATEXMK) $(LATEXMK_FLAGS) main.tex
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' main.log; then exit 1; fi
+	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(PDF_BASENAME) main.tex
+	@test -f $(PDF_BASENAME).log
+	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' $(PDF_BASENAME).log; then exit 1; fi
 
 clean:
-	$(LATEXMK) -c main.tex
+	$(LATEXMK) -c -jobname=$(PDF_BASENAME) main.tex
