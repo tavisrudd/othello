@@ -16,26 +16,51 @@ There are further major proof-completeness problems in the redundancy-six compon
 
 This verdict is not “the results look false.” The residual algebra, point-count arithmetic, Hankel dictionary, coherent-marker mechanism, rank-two containment argument, and degree-nine \(e_7\) witness construction mostly check out. The verdict is that several load-bearing classifications are not established by the prose printed at this SHA.
 
-### Explicit pass criteria
+## Style-guide reconciliation
 
-A release pass requires all of the following:
+The repository style guide strengthens the hold without changing any mathematical finding. Its central test is whether a qualified reader can say why the proof works, where the difficulty lies, and which claims depend on computation or formalization. The manuscript passes that test at the global level: the abstract names the object, principal results, mechanism, and open boundary; the proof guide makes the marked-root construction and contained/transverse fork visible; and the verification section distinguishes conceptual, imported, finite, and formal inputs.
+
+The same test fails at the load-bearing local transitions identified in D1, D2, D5, and D6. These are not requests for more routine detail. They are the points where completeness is won: passing from a budget to a lower package, exhausting Hessian components, excluding small-characteristic contained lines, and proving that no inseparable or collision stratum remains. The style guide says to expand precisely these bottlenecks. It therefore moves the R8 and R6 proof gaps ahead of release packaging in the worst-five ranking, although the incomplete release remains a separate blocker.
+
+The guide also sharpens the editorial diagnosis:
+
+- The opening is mathematically sound but delays the first headline theorem with a notation table, working terminology, and an administrative draft-status paragraph (`01-introduction.tex:26-69`). State the R5 theorem first; move notation to first use and draft status to the verification section.
+- `02-overview.tex:7-48` is the manuscript's best language-change roadmap: syndrome \(\to\) splitting system \(\to\) marked contraction \(\to\) contained/transverse fork \(\to\) lifted witness. Keep it near the front and reuse that causal vocabulary in the long proofs.
+- The R8 lower-package proof (`07-fixed-level-eight-nine.tex:55-194`) performs too many paragraph jobs. Its component classification, inseparability analysis, marker avoidance, collision bound, and two parameter selections should be separate lemmas with one orientation sentence each.
+- The paper marks conceptual versus computational/formal trust unusually well, but repeats release administration in the introduction, verification section, provenance section, and final appendix. Consolidate it once. The paper should end with the mathematical boundary and concrete open problems, not the Lean statement/axiom appendix.
+- The tone is calm and generally direct. Reader enjoyment is earned where a compact mechanism resolves an apparent complication: the rank--nullity containment lemma, the fiber-square picture, and the direct \(e_7\) subspace witness. Preserve those passages; do not add ornamental motivation.
+
+The revised top-five ranking therefore prioritizes governing mechanism, language transfer, proof economy, and trust boundaries. The revised worst-five ranking prioritizes hidden mathematical bottlenecks before release mechanics. The overall verdict remains **HOLD / NOT RELEASE-READY**.
+
+## Explicit pass criteria
+
+### Mathematical/referee pass
+
+A mathematical pass requires all of the following:
 
 1. Add and prove the actual pointed degree-seven/four-marker lower package needed by `thm:r9`, or weaken the R9 theorem to the conditional statement currently shown in the overview table.
 2. Expand `thm:hessian` and `prop:hessian-pullback` into checkable component proofs: equations/ideals, all characteristic-two normal-form cases, vertical-factor removal, both ruling conics, scheme/reduced semantics, and the root-compatible overlap calculation.
 3. Expand the R6 and R8 component arguments identified below, with explicit equations or precise supporting lemmas. Correct the characteristic restriction in `prop:r6-degrees`.
 4. Reconcile every theorem/overview/boundary statement and state characteristic and covering-radius hypotheses at the declaration where they are used.
-5. Ship a self-contained paper-only supplement containing the actual generators, certificates, replays, commands, hashes, byte counts, Lean pin/targets, repository URL, tag, commit, archive identifier, and DOI; make the release manifest complete.
-6. Re-run the immutable-source build and every declared replay, and obtain an independent proof cold read with no BLOCKER and no unresolved MAJOR affecting a headline theorem.
+5. Give every substantial proof a causal roadmap, and split the R6, R8, R9, and Hessian arguments at their actual completeness bottlenecks rather than at implementation stages.
+6. Obtain an independent proof cold read with no BLOCKER and no unresolved MAJOR affecting a headline theorem.
+
+### Immutable-release pass
+
+After the mathematical pass:
+
+1. Ship a self-contained paper-only supplement containing the actual generators, certificates, replays, commands, hashes, byte counts, Lean pin/targets, repository URL, tag, commit, archive identifier, and DOI; make the release manifest complete.
+2. Re-run the immutable-source build and every declared replay from the released archive, and make the mathematical conclusion—not release administration or an axiom listing—the reader's final impression.
 
 The exact snapshot compiled successfully with `make check` in an immutable `git archive` extraction (35 pages, no warning selected by the Makefile gate). That is a typesetting pass, not a proof pass. The checked-out historical `main.pdf` had a different byte hash from the rebuilt PDF, plausibly because the build is not reproducible at the byte level; the release bundle must either make the build reproducible or record and explain the build metadata.
 
 ## Ranked top five standouts
 
-1. **The syndrome/Hankel/radius separation is exceptionally clear.** `03-dictionary.tex:20-53` cleanly distinguishes split-free systems from code deep holes and prevents the small-field R7 certificate from being silently promoted.
-2. **The marked-root mechanism is the conceptual center and is genuinely persuasive.** Equation `eq:lift` and `thm:polar-construction` (`05-polar-induction.tex:9-20,109-127`) explain exactly why an unmarked lower witness is insufficient and how squarefree lifting works.
-3. **The contained rank-two line lemma is the strongest self-contained proof in the paper.** `prop:contained-rank-two` (`05-polar-induction.tex:213-264`) turns the geometric claim into a short rank--nullity and hyperplane-intersection argument valid in every characteristic.
-4. **The R9 residual algebra and rational base-selection architecture are unusually explicit.** `07-fixed-level-eight-nine.tex:315-458`, together with `supplement/R9-SLICE-DATA.md`, separates identities, geometric coverage, rational selection, and deletion degrees. The Bézout identity is used as a family cover rather than misrepresented as six point tests.
-5. **The \(e_7\) endpoint closes with a simple constructive witness.** `09-lucas-carriers.tex:199-229` bypasses the generic Artin--Schreier cover and uses three-dimensional \(\mathbb F_2\)-subspaces directly; the count and orbit transport check cleanly.
+1. **The marked-root roadmap exposes the governing mechanism early.** `02-overview.tex:24-48` and `05-polar-induction.tex:9-20,109-127` explain why an independent lower witness fails, what datum must be retained, and exactly when multiplication lifts squarefreely. A reader can predict the later contained/transverse fork from this passage.
+2. **The syndrome/Hankel/radius interface is reader-first and logically disciplined.** `03-dictionary.tex:20-53` translates projective span membership into a split polynomial in \(W_f\), then separates that conceptual criterion from the covering-radius input. This prevents the R7 finite record from being promoted beyond its trust boundary.
+3. **The proof guide gives the paper a visible structural hierarchy.** `02-overview.tex:31-79,111-138` separates the general transverse sieve, the level-specific contained problem, the finite certificates, and the formal implication. The two flow figures carry mathematical information rather than decoration.
+4. **The contained rank-two lemma expands the point where understanding is won.** `prop:contained-rank-two` (`05-polar-induction.tex:213-264`) reduces a geometric containment question to rank--nullity and the intersection of divisibility hyperplanes. It is short because the mechanism is complete, not because a case split is hidden.
+5. **The \(e_7\) endpoint earns its clean finish through a concrete construction.** `09-lucas-carriers.tex:199-229` bypasses the generic Artin--Schreier cover with three-dimensional \(\mathbb F_2\)-subspaces. The witness, orbit transport, and count are visible in one proof. The verification section's explicit trust categories (`10-verification.tex:16-31,85-103`) are a close editorial sixth.
 
 ## Ranked worst five issues and actionable repairs
 
@@ -49,20 +74,20 @@ The exact snapshot compiled successfully with `make check` in an immutable `git 
    The complete degeneracy locus of a family of \((2,2)\) curves and the exact reduced root-compatible pullback are headline results. The proof gives no normal forms, equations, ideal decomposition, or exhaustive characteristic-two case analysis. The phrases “Semisimple and unipotent normal forms show” and “Lucas' theorem gives precisely” are the missing theorem. The paper itself says Certificate Hessian is only a \(PG(3,4)\) regression and does not replace this proof.  
    **Repair:** print the Plücker-coordinate equations, factor/component ideals, vertical-factor saturation, both Fano rulings, the scheme/reduced distinction, and the consecutive-Hankel elimination. A compact appendix is preferable to prose assurances.
 
-3. **BLOCKER (release) — the public trust route is not self-contained or immutable.**  
-   **Anchors:** `10-verification.tex:75-83`; `supplement/REPRODUCING.md:1-26,60-79`; `supplement/RELEASE-MANIFEST.md:1-36`.  
-   The paper-local supplement points back to development-monorepo `notes/` paths for the actual artifacts, while the release manifest contains only `TBD`. This is candidly disclosed, but it means no DOI-bearing release can presently satisfy the paper's own verification claims.  
-   **Repair:** create the fresh-history export, include minimal artifacts and replay code, fill every manifest row from released bytes, pin the Lean commit, and test the archive from a clean environment.
+3. **MAJOR — the R8 lower-package proof hides the paper's main proof bottleneck.**
+   **Anchors:** `07-fixed-level-eight-nine.tex:46-194`.
+   The proposition has at least five distinct jobs: classify bottom strata, exclude inseparability, control exact gcd one, prove two marker-parameter selections, and bound collision. It asserts that Fitting-minor images are complete, that the inseparable degeneration adds no stratum, that several pulled-back minors cannot vanish identically, and that every collision maps into a chosen ramification divisor without enough local algebra to verify those implications. This is exactly where the style guide requires expansion and orientation.
+   **Repair:** split the proof into named lemmas for gcd strata, cyclic/wild/inseparable strata, marker divisors, collision separability, and outer/recursive parameter selection. Begin with a causal roadmap and end each lemma with the exclusion or witness it supplies.
 
 4. **MAJOR — the R6 all-field proof rests on underproved and once incorrectly scoped component claims.**  
    **Anchors:** `06-redundancies-six-seven.tex:89-165,190-218`.  
    `prop:r6-degrees(i)` says “characteristic different from two” but writes \(\operatorname{diag}(1,4,6,4,1)^{-1}\), which is undefined in characteristic three. Parts (ii), the wild-cone overlap, and the binary-plane uniqueness are dispatched by one-line assertions without the promised overlap equations. These claims are then used to bridge finite certificates to every field.  
-   **Repair:** change (i) to characteristic different from two **and three** (or explicitly say the tame stratum is empty in characteristic three), print the derivative-minor/gcd argument, and give the consecutive-row eliminations for the wild cone and binary plane.
+   **Repair:** give a one-paragraph characteristic roadmap; change (i) to characteristic different from two **and three** (or explicitly say the tame stratum is empty in characteristic three); then print the derivative-minor/gcd argument and the consecutive-row eliminations for the wild cone and binary plane.
 
-5. **MAJOR — the R8 lower-package proof is too compressed to audit its claimed exhaustiveness.**  
-   **Anchors:** `07-fixed-level-eight-nine.tex:46-194`.  
-   The proposition is load-bearing and much improved over an announcement, but it still asserts that Fitting-minor images are the complete strata, that the inseparable degeneration adds no stratum, that several pulled-back minors cannot vanish identically, and that every collision maps into a chosen ramification divisor without enough local algebra to verify those implications.  
-   **Repair:** split this proof into named lemmas (gcd strata, cyclic/wild/inseparable strata, marker divisors, collision separability, outer and recursive parameter selection), with one explicit ideal or coefficient calculation per noncontainment claim.
+5. **BLOCKER (release) — the public trust route is not self-contained or immutable.**
+   **Anchors:** `10-verification.tex:75-83`; `supplement/REPRODUCING.md:1-26,60-79`; `supplement/RELEASE-MANIFEST.md:1-36`.
+   The manuscript distinguishes conceptual, formal, and computational evidence well, but the paper-local supplement points back to development-monorepo `notes/` paths for the actual artifacts and the release manifest contains only `TBD`. No DOI-bearing release can presently satisfy the manuscript's own trust statement.
+   **Repair:** create the fresh-history export, include the minimal artifacts and replay code, fill every manifest row from released bytes, pin the Lean commit, and test the archive from a clean environment. Keep this administration in the verification/release material rather than before the first theorem.
 
 ## Compact defect table
 
@@ -85,6 +110,11 @@ The exact snapshot compiled successfully with `make check` in an immutable `git 
 | D15 | QUERY | clarification request | `08-ordered-hessian.tex:135-153` | the two selected equations \(A,B\) depend on the syndrome; this is valid pointwise but not stated | state the quantifier order and why both pullbacks are nonzero |
 | D16 | PRAISE | robust boundary | `03-dictionary.tex:43-53`; R7 records | split-free and code-deep flags are kept separate | preserve this wording |
 | D17 | PRAISE | robust mechanism | `05-polar-induction.tex:109-127` | marker avoidance exactly characterizes squarefree lifting | retain as the organizing lemma |
+| D18 | MAJOR | hierarchy/reader entry | `01-introduction.tex:26-69` | notation, terminology, and draft administration delay the first headline theorem | state the theorem after the object/question; move notation to first use and status to verification |
+| D19 | MAJOR | paragraph architecture | `07-fixed...tex:55-194` | one proof paragraph sequence performs five independent completeness jobs | split at mathematical bottlenecks and add a causal roadmap |
+| D20 | MINOR | trust-boundary repetition | `01-introduction.tex:64-69`; `10-verification.tex:75-83`; `11-provenance...tex:3-13`; appendix | release and provenance boundaries recur more often than needed | consolidate the full trust statement once and cross-reference it |
+| D21 | MINOR | conclusion order | `11-provenance...tex:15-47`; `appendices/statement-adequacy.tex:1-95` | the rendered paper ends with formal statement/axiom administration after its mathematical boundary | move adequacy earlier or add a short mathematical conclusion after it |
+| D22 | PRAISE | language-change roadmap | `02-overview.tex:7-48` | each change of language has an operational gloss and a visible mathematical gain | reuse this structure in R6--R9 and Hessian proofs |
 
 “Demonstrated gap” means the printed implication is absent or the printed formula is invalid in part of its stated characteristic range. “Query” means the argument may be correct but the manuscript should clarify the quantifier or trust boundary; it is not asserted here to be false.
 
@@ -94,19 +124,19 @@ I read the source in include order, not by topic search. The twelve included fil
 
 | Order | Immutable source and complete line coverage | Sequential notes |
 |---:|---|---|
-| 0 | `main.tex:1-106` | Preamble and include order compile. Abstract `60-87` accurately distinguishes R7's radius gate and the open degree-nine strata, but overstates R9 until D1 closes. |
-| 1 | `01-introduction.tex:1-209` (13 source blocks) | `3-24` dictionary/context clear; `49-62` terminology useful; `64-69` candid release status; `71-111` R5 headline inherits P06/P08 gaps; `124-163` spine inherits D1/D4-D6; `165-197` prior-work boundary is well organized; `199-209` organization accurate except for proof-completeness status. |
-| 2 | `02-overview.tex:1-143` (11 blocks) | `7-48` is the best prose explanation of the mechanism; `81-109` contains the stale conditional/unconditional conflict D8; `111-138` trust-boundary table is excellent; `140-143` is accurate as an intended flow, not as a completed R9 proof. |
+| 0 | `main.tex:1-106` | Preamble and include order compile. Abstract `60-87` answers the style guide's four opening questions and accurately distinguishes R7's radius gate and the open degree-nine strata, but overstates R9 until D1 closes. |
+| 1 | `01-introduction.tex:1-209` (13 source blocks) | `3-24` names the object and question clearly. The notation table, terminology block, and draft status at `26-69` postpone the first theorem and flatten the hierarchy (D18). `71-111` R5 headline inherits P06/P08 gaps; `124-163` spine inherits D1/D4-D6; `165-197` combines imported results, novelty boundary, and trust language in one long paragraph and should be split by job; `199-209` organization is accurate except for proof-completeness status. |
+| 2 | `02-overview.tex:1-143` (11 blocks) | `7-48` is the best prose explanation of the governing mechanism and language changes; `31-48` states the failure of the naive unmarked argument before its repair. `81-109` contains the stale conditional/unconditional conflict D8; `111-138` gives an excellent skippable trust-boundary table; `140-143` is accurate as an intended flow, not as a completed R9 proof. |
 | 3 | `03-dictionary.tex:1-64` (7 blocks) | Coordinates and split-free/radius distinction checked; proof P01 below; `55-64` persistent gcd bound correct. |
 | 4 | `04-redundancy-five.tex:1-262` (24 blocks) | Coordinates, radius, gcd strata, cubic cover, cyclic and \(S_3\) cases, finite bridge, and table all traversed. Arithmetic totals and sporadic table reconcile with the paper-local classification records. D9 is the main missing proof step. |
 | 5 | `05-polar-induction.tex:1-293` (23 blocks) | Definitions, figures, transverse theorem, threshold table, rank-two containment, orbit paragraph, and scope remark all checked. Threshold algebra is correct. The rank-two proof is notably economical. |
 | 6 | `06-redundancies-six-seven.tex:1-424` (38 blocks) | R6 persistent, secant, cyclic/collision, modular, nucleus, theorem/certificate bridge; then R7 pointed/gcd/collision/central/contained/theorem and field ledger. D4-D5 affect the R6 bridge. R7's field coverage has no numerical gap: the certificate ends at 32 and the theorem range begins at the next prime power 37. |
-| 7 | `07-fixed-level-eight-nine.tex:1-592` (50 blocks) | All R8 lower-package equations and budgets, modular/contained claims, R8 theorem; all R9 residual formulas, slice data, rational selection, deletion, finite bridges, orbit laws, modular/contained claims, and R9 theorem. D1, D6, and D7 are the main findings. |
+| 7 | `07-fixed-level-eight-nine.tex:1-592` (50 blocks) | All R8 lower-package equations and budgets, modular/contained claims, R8 theorem; all R9 residual formulas, slice data, rational selection, deletion, finite bridges, orbit laws, modular/contained claims, and R9 theorem. D1, D6, D7, and D19 are the main findings. The R9 residual passage has a useful language roadmap; the R8 proof needs the same hierarchy. |
 | 8 | `08-ordered-hessian.tex:1-167` (14 blocks) | Setup, figure, geometric theorem, pullback, effective corollary, and boundary all checked. Degree arithmetic in the effective corollary is correct conditional on the missing component theorem; D2 is load-bearing. |
 | 9 | `09-lucas-carriers.tex:1-235` (22 blocks) | Lucas overlap, linearized cover, \(e_7\) orbit, Artin--Schreier quotient, additive cover, witness count, and final boundary checked. The direct witness count is correct. |
-| 10 | `10-verification.tex:1-128` (7 blocks) | Trust routes, ten certificate labels, release boundary, Lean limits, and formal table checked. It is admirably candid, but the release route is not yet self-contained (D3). |
-| 11 | `11-provenance-boundary.tex:1-49` (6 blocks) | Provenance and six boundary items checked. R9 completeness in `25-27` must follow the resolution of D1. |
-| 12 | `appendices/statement-adequacy.tex:1-95` (9 blocks) | Verbatim definitions, synthesis terminal, explanatory boundary, and axiom audit checked. The terminal is logically adequate only because the geometric/coding inputs are explicit hypotheses; it does not strengthen the manuscript proofs. |
+| 10 | `10-verification.tex:1-128` (7 blocks) | Trust routes, ten certificate labels, release boundary, Lean limits, and formal table checked. The conceptual/computational/formal categories are unusually precise. The release route is not yet self-contained (D3), and administrative details repeated elsewhere should be consolidated here (D20). |
+| 11 | `11-provenance-boundary.tex:1-49` (6 blocks) | Provenance and six boundary items checked. R9 completeness in `25-27` must follow the resolution of D1. The mathematical boundary at `15-47` is a suitable conclusion if it is allowed to remain the paper's final substantive passage. |
+| 12 | `appendices/statement-adequacy.tex:1-95` (9 blocks) | Verbatim definitions, synthesis terminal, explanatory boundary, and axiom audit checked. The terminal is logically adequate only because the geometric/coding inputs are explicit hypotheses; it does not strengthen the manuscript proofs. Its position after the mathematical boundary makes formal administration the final impression (D21). |
 | 13 | `refs.bib:1-176` | All 13 entries traversed. DOI/arXiv fields are syntactically consistent and the bibliography compiles. The key `GmainerHavlicek2013` names an article whose journal year is 2000 and whose arXiv posting is 2013; harmless internally but worth renaming for human clarity. |
 
 Paper-local records additionally checked at the same SHA:
@@ -200,12 +230,13 @@ Each entry records the claim, mechanism, correctness verdict, hidden assumptions
 
 ### Simplest high-EV revision sequence
 
-1. Reconcile the overview and theorem claims today: mark R9 conditional until its package exists.
+1. Reconcile the overview and theorem claims today: mark R9 conditional until its package exists. Move the draft-status paragraph out of the reader's path to the first theorem.
 2. Add the two missing characteristic qualifiers (D4, D7) and name the covering-radius specialization in R8/R9.
-3. Expand R6 matrices; this is likely the cheapest headline-proof repair.
-4. Formalize/print the R9 lower package.
-5. Print the Hessian ideal decomposition and pullback elimination.
-6. Run a second independent cold read, then build the paper-only immutable release and fill its manifest.
+3. Give R6 one roadmap—persistent component, characteristic-specific contained components, transverse escape, finite bridge—then print the small matrices. This is likely the cheapest headline-proof repair.
+4. Split R8's lower package into its five mathematical jobs. Reuse those lemma boundaries when formalizing and printing the missing R9 package.
+5. Print the Hessian ideal decomposition and pullback elimination after a one-paragraph language roadmap from cubic line to \((2,2)\) incidence to Grassmannian degeneracy to root-compatible carrier.
+6. Consolidate verification/provenance administration and restore a mathematical final paragraph after the formal adequacy material.
+7. Run a second independent cold read, then build the paper-only immutable release and fill its manifest.
 
 ## Extra-juice / Tao closeout and mystery ledger
 
