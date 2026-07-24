@@ -60,7 +60,10 @@ deterministic paper-only archive now rebuilds and passes the 57-artifact local
 gate, and its public release checker is fail-closed.  Release remains blocked
 on two independent specialist readers, a publicly fetchable flake-pinned Lean
 revision, the immutable public export and identifiers, and author/account
-confirmation.  C539 establishes the shared
+confirmation.  IEEE Transactions on Information Theory is now the selected
+journal target; its shared-source IEEEtran review build is 32 single-column
+pages, and the venue-specific cover letter, checklist, manifest, and
+supplement README are prepared with author-only fields left explicit.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel
 algebra and projective scaling, family/count arithmetic from stated hypotheses, the transcribed
 candidate sporadic table and its internal arithmetic, and a finite-field-bound conditional

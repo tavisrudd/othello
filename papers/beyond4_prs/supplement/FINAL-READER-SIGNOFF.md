@@ -6,7 +6,8 @@ Record the paper-export commit and PDF SHA-256 before either review begins.
 | Candidate field | Value |
 |---|---|
 | Paper-export commit | pending immutable export |
-| PDF SHA-256 | pending immutable export |
+| Canonical preprint PDF SHA-256 | pending immutable export |
+| TIT submission PDF SHA-256 | pending author metadata and venue freeze |
 | Title and author metadata | pending author confirmation |
 
 ## Finite-field and algebraic-geometry reader

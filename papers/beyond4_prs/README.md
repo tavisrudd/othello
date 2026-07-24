@@ -18,14 +18,20 @@ From this directory:
 
 ```text
 make check
+make tit-check
 ```
 
-The principal files are `main.tex`,
+`make check` builds the canonical preprint.  `make tit-check` builds the
+32-page IEEEtran single-column review manuscript
+`prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
+*IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
+`main-tit.tex`,
 `prs-beyond-redundancy-four.pdf`,
 `refs.bib`, `theorem-map.md`,
 `claim-proof-novelty-ledger.md`, `adversarial-proof-evidence-audit.md`,
 `second-draft-fix-plan.md`, and `verification-map.md`.  Major TeX units live
-under `sections/`; `main.tex` is the build driver described in
+under `sections/`; shared abstract, index terms, and acknowledgment text live
+under `frontmatter/`.  The build drivers are described in
 `sections/README.md`.  Public certificates and release material are under
 `supplement/`.  Run `python3 supplement/verify.py` for the local manifest and
 classification-record check, or add `--replay` for every paper-local replay.

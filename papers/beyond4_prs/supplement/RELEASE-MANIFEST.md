@@ -19,8 +19,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `fb3dd8d477e96af1854d51d0a6153f8046d9f11519ad0d92abcf6b21c675cf3e` |
-| Local built PDF bytes | `306748` |
+| Local built PDF SHA-256 | `5550dee775672c3574bb1d786fd541e301a402b3295988c97f5599a8133adfb1` |
+| Local built PDF bytes | `307452` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -35,8 +35,8 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `11ac3c808c5ae8fff20f470fce3b83fab6b3d01fb0a448d14a5c4a238384a115` | 16666 |
-| `EVIDENCE-ROWS.md` | `aaf54617ecab1607eb2f3da9a9bbb823e96f6e283155850fc7d3b738bd8efc6a` | 10963 |
+| `EVIDENCE-MANIFEST.json` | `7cac947532f6d4d7b56cc7d2a627f49d995f796dcaf336d14395fb5a5ca0a882` | 16666 |
+| `EVIDENCE-ROWS.md` | `457d90d76db6710fd9f99256164b1e858371dc45850c447cc00727082150f920` | 10963 |
 | `package_evidence_bundle.py` | `e5e61b53c6a17c5a670131132e86cb07e6b5dcffe02aaedcee11a03f543dbc70` | 14755 |
 | `verify.py` | `da2b76a7302b6eeb52a7902a61806e696c4c5cb17221ea1f0964464e0b7126b0` | 7663 |
 

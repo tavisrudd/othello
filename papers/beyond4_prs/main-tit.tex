@@ -1,16 +1,10 @@
-\documentclass[11pt]{article}
+\documentclass[10pt,journal,onecolumn]{IEEEtran}
 
-\usepackage[a4paper,margin=27mm]{geometry}
-\usepackage{fontspec}
-\setmainfont{Latin Modern Roman}
-\setsansfont{Latin Modern Sans}
-\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{multicol}
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -52,10 +46,9 @@
 \newcommand{\cW}{\mathcal W}
 \newcommand{\NRC}{\mathcal R}
 
-\title{Projective Reed--Solomon syndromes beyond redundancy four:
-deep holes, coherent polar flags, and modular carriers}
+\title{Projective Reed--Solomon Syndromes Beyond Redundancy Four:
+Deep Holes, Coherent Polar Flags, and Modular Carriers}
 \author{Tavis Rudd}
-\date{Unrefereed preprint, Version 1\\July 2026}
 
 \begin{document}
 \maketitle
@@ -63,13 +56,14 @@ deep holes, coherent polar flags, and modular carriers}
 \begin{abstract}
 \input{frontmatter/abstract}
 \end{abstract}
-\noindent\textbf{Index Terms---}\input{frontmatter/index-terms}
+
+\begin{IEEEkeywords}
+\input{frontmatter/index-terms}
+\end{IEEEkeywords}
 
 \input{sections/01-introduction}
 \input{sections/02-overview}
-
 \input{sections/03-dictionary}
-
 \input{sections/04-redundancy-five}
 \input{sections/05-polar-induction}
 \input{sections/06-redundancies-six-seven}
@@ -80,13 +74,8 @@ deep holes, coherent polar flags, and modular carriers}
 \input{sections/11-provenance-boundary}
 \input{appendices/r9-slice-data}
 \input{frontmatter/acknowledgment}
-\begingroup
-\scriptsize
-\raggedright
-\begin{multicols}{2}
-\bibliographystyle{alpha}
+
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
-\end{multicols}
-\endgroup
 
 \end{document}

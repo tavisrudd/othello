@@ -1,7 +1,9 @@
 # TeX source layout
 
-`main.tex` is being reduced to a thin build driver.  Stable section filenames
-are numbered by reading order:
+`main.tex` is the canonical preprint driver and `main-tit.tex` is the
+single-column IEEEtran review driver.  Both consume the same `frontmatter/`,
+section, appendix, and bibliography sources.  Stable section filenames are
+numbered by reading order:
 
 1. `01-introduction.tex`
 2. `02-overview.tex`
@@ -16,9 +18,9 @@ are numbered by reading order:
 11. `11-provenance-boundary.tex`
 
 Appendices live under `appendices/`; the statement-adequacy appendix is
-`appendices/statement-adequacy.tex`.  The section extraction is complete, and
-`main.tex` is now only the preamble, ordered inputs, bibliography, and document
-terminator.
+`appendices/statement-adequacy.tex`.  The section extraction is complete.
+Each driver now contains only its venue-specific preamble, ordered inputs,
+bibliography style, and document terminator.
 
 The eventual paper-only export preserves this layout.  It does not publish
 the development monorepo.

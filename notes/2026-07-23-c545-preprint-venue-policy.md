@@ -29,12 +29,12 @@ alone remains policy-compatible but does not satisfy C545's DOI objective.
 
 ## Decision boundary
 
-The provisional journal family is **IEEE Transactions on Information
-Theory**.  This is a reversible planning choice, not an authorized
-submission: the paper is about coding theory, its closest predecessor papers
-appeared in that journal, and the journal's current scope expressly includes
-coding theory.  Author confirmation, account authority, and a same-day policy
-recheck remain mandatory before upload.
+The selected target is **IEEE Transactions on Information Theory**.  This is
+an author-directed venue choice, not an authorized submission: the paper is
+about coding theory, its closest predecessor papers appeared in that journal,
+and the journal's current scope expressly includes coding theory.  Author
+metadata, account authority, and a same-day policy recheck remain mandatory
+before upload.
 
 No external upload was attempted.  The proof-complete candidate still fails
 the literature, aggregate-formalization, clean-export, immutable-manifest,

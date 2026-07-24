@@ -149,7 +149,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `reed-solomon`
 
-- **C545 `[reed-solomon]` [ACTIVE; LOCAL PROOF/FORMAL/DETERMINISTIC-EXPORT GATES GREEN; PUBLIC RELEASE EXTERNALLY BLOCKED]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after two independent specialist readers, the publicly fetchable flake-pinned Lean revision, author/account confirmation, immutable paper-export repository and archive identifiers, and the live DOI-bearing submission route are green.  The release checker now fails closed on every public field; no external upload is authorized → `notes/2026-07-24-c545-final-reader-export-doi-gates.md`, `notes/reed-solomon-tasks/c545-beyond-four-prs-rapid-preprint-doi.md`.
+- **C545 `[reed-solomon]` [ACTIVE; TIT PACKET + LOCAL PROOF/FORMAL/DETERMINISTIC-EXPORT GATES GREEN; PUBLIC RELEASE EXTERNALLY BLOCKED]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after two independent specialist readers, the publicly fetchable flake-pinned Lean revision, author/account confirmation, immutable paper-export repository and archive identifiers, and the live DOI-bearing submission route are green.  IEEE Transactions on Information Theory is the selected journal target; its 32-page single-column review build and submission packet are locally green.  The release checker fails closed on every public field; no external upload or ScholarOne submission is authorized → `notes/2026-07-24-c545-tit-submission-prep.md`, `notes/2026-07-24-c545-final-reader-export-doi-gates.md`.
 
 ### `relconic`
 

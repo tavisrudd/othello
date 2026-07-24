@@ -3,8 +3,9 @@
 **Lane:** `reed-solomon` · **Status:** active; local proof, classification-record,
 supplement-schema, literature, referee-polish, and C539--C544 aggregate-formal
 gates closed; DOI publication blocked on two independent specialist reads,
-public Lean/certificate revisions, clean public export/replay, immutable
-identifiers, and author/account confirmation
+the public Lean revision, clean public export/replay, immutable
+identifiers, and author/account confirmation; TIT is the selected journal
+target and its 32-page IEEEtran review packet is locally green
 
 ## Objective
 

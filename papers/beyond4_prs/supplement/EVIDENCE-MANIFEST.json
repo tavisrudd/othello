@@ -361,12 +361,12 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
-      "bytes": 1990,
+      "bytes": 2083,
       "path": "FINAL-READER-SIGNOFF.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Independent final-reader signoff",
-      "sha256": "fee499c8ddfd37227a24c901998b42cd4aa7dee1ca4dff45150d5781550e387a"
+      "sha256": "4c14e20d228e51e3cec55566cc87e428ecfad40953b74932ebe18f9965e7434d"
     },
     {
       "bytes": 12797,
