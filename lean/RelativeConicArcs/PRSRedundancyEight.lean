@@ -91,6 +91,36 @@ theorem threeMarkerContraction_swap_last
   exact projectiveSequenceContraction_comm second third
     (projectiveSequenceContraction first coefficients)
 
+/-- On the affine chart, three-marker contraction depends only on the elementary symmetric
+functions of the retained markers. -/
+theorem threeMarkerContraction_affine_apply
+    (first second third : R) (coefficients : ℕ → R) (i : ℕ) :
+    threeMarkerContraction (some first) (some second) (some third) coefficients i =
+      coefficients (i + 3) -
+        (first + second + third) * coefficients (i + 2) +
+        (first * second + first * third + second * third) * coefficients (i + 1) -
+        first * second * third * coefficients i := by
+  simp [threeMarkerContraction, iteratedProjectiveSequenceContraction,
+    projectiveSequenceContraction, sequenceContraction, Nat.add_assoc]
+  ring
+
+/-- Affine marker triples with the same three elementary symmetric functions induce the same
+contracted coefficient sequence.  Equivalently, the contraction factors through the monic cubic
+having the retained markers as roots. -/
+theorem threeMarkerContraction_affine_eq_of_elementarySymmetric
+    {first second third first' second' third' : R}
+    (hsum : first + second + third = first' + second' + third')
+    (hpairs :
+      first * second + first * third + second * third =
+        first' * second' + first' * third' + second' * third')
+    (hproduct : first * second * third = first' * second' * third')
+    (coefficients : ℕ → R) :
+    threeMarkerContraction (some first) (some second) (some third) coefficients =
+      threeMarkerContraction (some first') (some second') (some third') coefficients := by
+  funext i
+  rw [threeMarkerContraction_affine_apply, threeMarkerContraction_affine_apply,
+    hsum, hpairs, hproduct]
+
 end ThreeMarkerContraction
 
 /-- Number of retained markers on the redundancy-eight lower splitting slice. -/
@@ -120,26 +150,31 @@ theorem exact_deletion_and_polar_budgets :
     retainedMarkerCount, deletionDegreePerMarker, transverseCarrierBudget,
     markedCollisionBudget]
 
-/-- Exact genus-one Hasse--Weil deletion inequality for every integer at least `42`.  Redundancy
-eight uses the first prime-power field order in this range, namely `43`. -/
+/-- Integer-safe squared form of the genus-one Hasse--Weil deletion inequality for every integer
+at least `42`.  Redundancy eight uses the first prime-power field order in this range, namely
+`43`. -/
 theorem threeMarker_genusOne_hasseWeil_bound
     {q : ℕ} (hq : 42 ≤ q) :
-    q + 1 > 2 * Nat.sqrt q + threeMarkerDeletionDegree := by
-  have hsquare : Nat.sqrt q * Nat.sqrt q ≤ q := Nat.sqrt_le q
+    threeMarkerDeletionDegree < q + 1 ∧
+      4 * 1 ^ 2 * q < (q + 1 - threeMarkerDeletionDegree) ^ 2 := by
   rw [show threeMarkerDeletionDegree = 30 by
     exact exact_deletion_and_polar_budgets.1]
-  by_cases hsqrt : Nat.sqrt q ≤ 6
+  constructor
   · omega
-  · have hsqrtLower : 7 ≤ Nat.sqrt q := by omega
+  · have hsub : q + 1 - 30 = q - 29 := by omega
+    rw [hsub]
+    have hqsub : q - 29 + 29 = q := by omega
     nlinarith
 
-/-- The integer Hasse--Weil deletion threshold is exact: the strict inequality holds at `42` and
-fails at `41`. -/
+/-- The squared integer Hasse--Weil deletion threshold is exact: it holds at `42` and fails at
+`41`. -/
 theorem threeMarker_genusOne_hasseWeil_exact_threshold :
-    42 + 1 > 2 * Nat.sqrt 42 + threeMarkerDeletionDegree ∧
-      ¬(41 + 1 > 2 * Nat.sqrt 41 + threeMarkerDeletionDegree) := by
+    (threeMarkerDeletionDegree < 42 + 1 ∧
+      4 * 1 ^ 2 * 42 < (42 + 1 - threeMarkerDeletionDegree) ^ 2) ∧
+    ¬(threeMarkerDeletionDegree < 41 + 1 ∧
+      4 * 1 ^ 2 * 41 < (41 + 1 - threeMarkerDeletionDegree) ^ 2) := by
   norm_num [threeMarkerDeletionDegree, branchAndDiagonalDeletionDegree,
-    retainedMarkerCount, deletionDegreePerMarker, Nat.sqrt]
+    retainedMarkerCount, deletionDegreePerMarker]
 
 /-- A prime-power field order satisfying the exact integer Hasse--Weil threshold is at least `43`,
 because `42` is not a prime power. -/
@@ -150,6 +185,15 @@ theorem primePowerOrder_at_least_fortyThree
   · subst q
     exact False.elim ((by decide : ¬ IsPrimePow 42) hprimePower)
   · omega
+
+/-- A finite field whose order satisfies the exact integer Hasse--Weil threshold has at least
+forty-three elements. -/
+theorem finiteFieldOrder_at_least_fortyThree
+    {K : Type*} [Field K] [Fintype K]
+    (hq : 42 ≤ Fintype.card K) :
+    43 ≤ Fintype.card K :=
+  primePowerOrder_at_least_fortyThree
+    Fintype.isPrimePow_card_of_field hq
 
 /-- A normalized geometric-`S3` lower slice has three ordered distinct markers and identifies its
 identity-Frobenius component with the genus-one, degree-thirty stratum used by synthesis.
@@ -213,6 +257,20 @@ theorem redundancyEightPrimePowerSynthesis
       input.fixedLevel.polar.persistent syndrome :=
   redundancyEightHighFieldSynthesis
     (primePowerOrder_at_least_fortyThree hprimePower hq) input syndrome
+
+/-- Finite-field form of redundancy-eight synthesis, with the prime-power premise discharged from
+the field structure. -/
+theorem redundancyEightFiniteFieldSynthesis
+    {K Syndrome Marker Witness : Type*} [Field K] [Fintype K]
+    [Fintype Marker] [DecidableEq Marker]
+    (hq : 42 ≤ Fintype.card K)
+    (input :
+      RedundancyEightInput Syndrome Marker Witness (Fintype.card K))
+    (syndrome : Syndrome) :
+    input.fixedLevel.radius.isDeep syndrome ↔
+      input.fixedLevel.polar.persistent syndrome :=
+  redundancyEightHighFieldSynthesis
+    (finiteFieldOrder_at_least_fortyThree hq) input syndrome
 
 /-- Persistent tangent and conjugate-sigma family data with no modular contribution. -/
 structure PersistentFamilyData

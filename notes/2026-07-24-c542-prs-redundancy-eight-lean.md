@@ -9,6 +9,8 @@ polar induction.  Its public boundary contains:
 
 - ordered contraction by three affine or infinite projective markers, with scalar-extension
   compatibility and adjacent-swap invariance;
+- the affine contraction formula in the marker sum, pair-sum, and product, together with an exact
+  factorization through those three elementary symmetric functions;
 - a normalized geometric-`S3` identity-twist interface with three distinct markers, genus one,
   branch-and-diagonal deletion degree `12`, marker contribution `3*6`, and total deletion degree
   `30`;
@@ -16,6 +18,7 @@ polar induction.  Its public boundary contains:
   at `41`, while a checked prime-power exclusion proves that `43` is the first finite-field order
   used by the theorem;
 - the upper transverse/collision budget `4+10=14` and the conditional `q>=43` synthesis theorem;
+- a finite-field synthesis terminal that derives the prime-power premise from the field structure;
 - exact persistent-family cardinality `q(q+1)^2/2`;
 - the seventh-power sigma quotient, tangent cocycle `z -> z+7u`, and the four exact
   `PGL2/PGammaL2` orbit-count pairs `2/2`, `3/3`, `5/5`, and `5/3`; and
@@ -36,8 +39,8 @@ Theorem `thm:r8`:
 
 | Manuscript clause | Lean declaration |
 |---|---|
-| field order `q>=43` and persistent-only classification | `RelativeConicArcs.PRSRedundancyEight.redundancyEightHighFieldSynthesis` |
-| three-marker geometric-`S3` lower package and deletion degree `30` | `ThreeMarkerGeometricS3Slice`, `projectiveSequenceContraction_comm`, the two `threeMarkerContraction_swap_*` theorems, `exact_deletion_and_polar_budgets`, and `threeMarker_genusOne_hasseWeil_bound` |
+| field order `q>=43` and persistent-only classification | `RelativeConicArcs.PRSRedundancyEight.redundancyEightHighFieldSynthesis` and `redundancyEightFiniteFieldSynthesis` |
+| three-marker geometric-`S3` lower package and deletion degree `30` | `ThreeMarkerGeometricS3Slice`, `projectiveSequenceContraction_comm`, the two `threeMarkerContraction_swap_*` theorems, `threeMarkerContraction_affine_apply`, `threeMarkerContraction_affine_eq_of_elementarySymmetric`, `exact_deletion_and_polar_budgets`, and `threeMarker_genusOne_hasseWeil_bound` |
 | exact integer and prime-power threshold arithmetic | `threeMarker_genusOne_hasseWeil_exact_threshold`, `primePowerOrder_at_least_fortyThree`, and `redundancyEightPrimePowerSynthesis` |
 | size `q(q+1)^2/2` | `PersistentFamilyData.classified_card` |
 | orbit law `T/T^7` modulo inversion and Frobenius | `OrbitArithmetic.seventhPower_sigmaInversionOrbitCount` and `OrbitArithmetic.orbit_count_pairs` |
@@ -70,6 +73,11 @@ reported the import gate current.  The new commutation terminals use only `prope
 `Quot.sound`; the prime-power and synthesis terminals remain within the same three standard
 Lean/mathlib axioms.
 
+The second-order upgrade passed serialized run `run-20260724-081339-daa59e8a` for the source,
+expanded audit, and aggregate gate, followed by an exact-target currentness check.  The affine
+elementary-symmetric terminals use only `propext` and `Quot.sound`; the finite-field terminals use
+only the same standard three-axiom boundary.
+
 ## Extra-juice and Tao closeout
 
 The numerical stress test separated two cutoffs that prose can easily conflate.  The genus-one
@@ -81,6 +89,16 @@ The ordered-marker stress test separated labels from algebra.  The geometric cov
 ordered root triple, but projective contraction itself commutes for every affine/infinity pair.
 The two adjacent-swap theorems therefore generate the full `S3` invariance of the contracted
 coefficient sequence without quotienting the ordered cover.
+
+The second-order pass identifies the quotient explicitly.  On the affine chart, contraction by
+markers `r,s,t` has coefficients
+
+`a_(i+3) - (r+s+t)a_(i+2) + (rs+rt+st)a_(i+1) - rst*a_i`.
+
+Thus the contraction factors through the monic cubic with roots `r,s,t`, not merely through a
+sequence of swap lemmas.  This gives aggregate reconciliation a canonical bridge from the ordered
+root cover to the symmetric-cubic parameter space.  A separate finite-field terminal removes the
+abstract `IsPrimePow` premise from applications.
 
 The carrier stress test kept the characteristic-seven statement deliberately asymmetric.  At
 `q=7`, rootlessness is exactly the carrier deepness condition and has count `819`; at `q=49`, a
@@ -96,6 +114,9 @@ Settled:
   synthesis composition are checked.
 - **Does ordered-marker normalization make contraction order-dependent?** No.  Affine and infinite
   projective contractions commute pairwise, and the two checked adjacent swaps generate `S3`.
+- **Is permutation invariance only an extensional accident?** No.  The checked affine formula
+  factors the contraction through the three elementary symmetric functions, equivalently through
+  the monic marker cubic.
 - **Can the characteristic-seven carrier be promoted by root type?** No.  The `q=49` shallow
   witness blocks that promotion, and the formal interface states no larger-field sufficiency.
 - **Are the four orbit cases merely prose?** No.  Their numerical pairs and seventh-power
