@@ -64,7 +64,9 @@ C531 closes the finite intrinsic degree-nine carrier strata.  The invariant tens
 Frobenius-graph, off-graph rank-one, and rank-two \(A_5\)-stabilized strata; both rank-one strata
 are shallow over every admissible field.  Rank two has an exact nonconstant Artin--Schreier root
 cover and one split-free q=8 twist outside the coding range, while every tensor-block orbit at
-q=16,32 has a certified witness.  The carrier complement has a two-dimensional quotient.  C532's
+q=16,32 has a certified witness.  At q=8 the exact graph/off-graph/rank-two complement-divisor
+multiplicities are `1/2/3/0/1`, so the `(2)(3)`-twisted orbit is the unique zero incidence fibre.
+The carrier complement has a two-dimensional quotient.  C532's
 entry gate is green with both residues explicit, but neither task is a manuscript or preprint gate.
 C533 independently owns C525 threshold/deletion sharpening.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.

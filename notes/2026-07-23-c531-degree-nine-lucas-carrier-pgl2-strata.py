@@ -385,6 +385,7 @@ def orbit_control(m: int) -> dict[str, object]:
     }
     missing = set(range(len(orbits)))
     witnesses: dict[int, dict[str, object]] = {}
+    divisor_counts = [0] * len(orbits)
     subsets_tested = 0
     root_sets: object
     if m == 3:
@@ -397,18 +398,22 @@ def orbit_control(m: int) -> dict[str, object]:
         subsets_tested += 1
         finite_roots = tuple(root for root in root_set if root != INF)
         coefficients = roots_to_polynomial(finite_roots, modulus)
-        for index in tuple(sorted(missing)):
+        candidates = range(len(orbits)) if m == 3 else tuple(sorted(missing))
+        for index in candidates:
             representative = tuple(
                 int(x, 16) for x in orbits[index]["representative_hex"]
             )
             if in_kernel(representative, coefficients, modulus):
-                witnesses[index] = {
-                    "roots_hex": [fmt_field_element(x) for x in root_set],
-                    "coefficients_low_to_high_hex": [
-                        hex(x) for x in coefficients
-                    ],
-                }
-                missing.remove(index)
+                if m == 3:
+                    divisor_counts[index] += 1
+                if index in missing:
+                    witnesses[index] = {
+                        "roots_hex": [fmt_field_element(x) for x in root_set],
+                        "coefficients_low_to_high_hex": [
+                            hex(x) for x in coefficients
+                        ],
+                    }
+                    missing.remove(index)
         if not missing and m != 3:
             break
     if m != 3:
@@ -417,6 +422,13 @@ def orbit_control(m: int) -> dict[str, object]:
         orbits[index]["split_squarefree_witness"] = witness
     for index in missing:
         orbits[index]["split_squarefree_witness"] = None
+    if m == 3:
+        for index, count in enumerate(divisor_counts):
+            orbits[index]["split_divisor_count"] = count
+        assert sum(
+            orbit["orbit_size"] * count
+            for orbit, count in zip(orbits, divisor_counts)
+        ) == (q + 1) * (q * q + q + 1)
     orbits.sort(
         key=lambda row: (
             {"graph": 0, "rank1_off_graph": 1, "rank2": 2}[row["kind"]],

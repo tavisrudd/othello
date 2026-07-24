@@ -58,9 +58,16 @@ extra-monodromy stop.
 There is one exact small-field warning.  The complete nine-divisor scan in
 \(\mathbf P^1(\mathbf F_8)\) finds one split-free rank-two orbit, of size \(168\)
 and stabilizer \(3\).  It is the \((2)(3)\)-twisted class.  This is outside the
-admissible full-length redundancy-ten range.  Every rational carrier orbit at
-\(q=16\) and \(q=32\) has a certified split witness, but these bounded controls
-are not promoted to an all-field theorem.
+admissible full-length redundancy-ten range.  Every rational
+\(\mathbf P(U)\)-orbit at \(q=16\) and \(q=32\) has a certified split witness,
+but these bounded controls are not promoted to an all-field theorem.  At
+\(q=8\), the exact graph/off-graph/rank-two complement-divisor multiplicities
+are
+\[
+ 1,\quad2,\quad3,\quad0,\quad1.
+\]
+Thus the exceptional orbit is the unique zero fibre of the complete
+complement-divisor incidence, not merely an orbit missed by the first witness.
 
 Finally, \(\mathbf P(\mathcal M_9)\setminus\mathbf P(U)\) has dimension five,
 while \(PGL_2\) has dimension three.  Its geometric quotient is therefore
@@ -153,6 +160,18 @@ The three types are a transposition, a \(4\)-cycle, and a product
  6,\quad2,\quad3.                                           \tag{12}
 \]
 An orbit has size \(q(q^2-1)/|C|\) for the corresponding centralizer \(C\).
+The two cocycle mass identities
+\[
+ \frac1{60}+\frac14+\frac13+\frac15+\frac15=1,\qquad
+ \frac16+\frac12+\frac13=1
+\]
+explain the otherwise striking equality
+\[
+ |\{[A]\in\mathbf P(U)(k):\det A\ne0\}|
+ =q(q^2-1)=|PGL_2(k)|.
+\]
+The equality does not mean that rank two is a free orbit: it is the sum of
+the five or three twisted homogeneous orbits with their exact stabilizers.
 
 Coefficientwise Frobenius supplies the semilinear transport.  In the even case
 its outer automorphism fixes \(1A,2A,3A\) and exchanges \(5A,5B\).  In the odd
@@ -283,6 +302,20 @@ stabilizer \(3\), is split-free.  Deterministic explicit divisors certify a
 split squarefree member for every \(\mathbf P(U)\)-orbit at \(q=16\) and
 \(q=32\).
 
+There is also a compressed structural check of the complete \(q=8\) negative.
+Every split degree-eight divisor is the complement of one of the nine rational
+points.  For a fixed complement, its kernel intersection with
+\(\mathbf P(U)\) is a projective plane of \(73\) points.  Hence the total
+incidence mass is
+\[
+ 9\cdot73
+ =9\cdot1+72\cdot2+84\cdot3+168\cdot0+252\cdot1.
+\]
+The five multiplicities are respectively the graph, off-graph, and the three
+rank-two orbits ordered by sizes \(84,168,252\).  In particular the
+\((2)(3)\)-twisted orbit is intrinsically disjoint from every rational
+complement divisor.
+
 The computations certify the displayed bounded orbit decompositions, every
 recorded witness, and the complete \(q=8\) negative.  They do not prove
 rank-two shallowness for any untested field; that gap is exactly the
@@ -352,6 +385,15 @@ The closeout changes the carrier picture in four useful ways:
   splitting, while the complete \(q=16,32\) witness tables show that the
   obstruction is not automatically persistent into the coding range.
 
+The second-order pass adds two free compressions:
+
+- The reciprocal-centralizer sums explain why the total rank-two point count
+  equals \(|PGL_2(k)|\) despite nontrivial \(A_5\) stabilizers and rational
+  twisting.
+- The \(q=8\) exception is the zero entry of the complete multiplicity profile
+  \(1,2,3,0,1\).  The negative is therefore an orbitwise
+  complement-divisor theorem, not nine unrelated subset checks.
+
 The highest-value next mathematical move is therefore not a generic invariant
 ring computation on the two-dimensional quotient.  It is C532's bounded
 synthesis using the exact residue above: determine how much of redundancy ten
@@ -374,6 +416,9 @@ Settled:
   is a geometrically integral nonconstant \(C_2\)-cover.
 - **Is there a concrete obstruction value?**  Yes; the complete \(q=8\)
   \((2)(3)\)-twisted orbit is split-free.
+- **Why is that \(q=8\) orbit exceptional?**  Its complement-divisor
+  multiplicity is exactly zero; the other four strata have multiplicities
+  \(1,2,3,1\), and the complete incidence mass is \(9\cdot73\).
 
 Open, with exact boundary:
 

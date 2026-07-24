@@ -140,6 +140,24 @@ def check_q8_negative(control: dict[str, object]) -> None:
         int(coordinate, 16) for coordinate in orbit["representative_hex"]
     ]
     checked = 0
+    counts = []
+    for orbit_row in control["orbits"]:
+        representative_row = [
+            int(coordinate, 16)
+            for coordinate in orbit_row["representative_hex"]
+        ]
+        count = 0
+        for roots in combinations(list(range(8)) + [INF], 8):
+            finite_roots = [root for root in roots if root != INF]
+            coefficients = polynomial_from_roots(finite_roots, modulus)
+            count += kernel_test(representative_row, coefficients, modulus)
+        assert count == orbit_row["split_divisor_count"]
+        counts.append(count)
+    assert counts == [1, 2, 3, 0, 1]
+    assert sum(
+        orbit_row["orbit_size"] * count
+        for orbit_row, count in zip(control["orbits"], counts)
+    ) == 9 * 73
     for roots in combinations(list(range(8)) + [INF], 8):
         finite_roots = [root for root in roots if root != INF]
         coefficients = polynomial_from_roots(finite_roots, modulus)
@@ -180,6 +198,8 @@ def main() -> None:
     odd = data["rank_two_rational_twists"]["m_odd"]
     assert sorted(even["centralizer_orders"]) == [3, 4, 5, 5, 60]
     assert sorted(odd["centralizer_orders"]) == [2, 3, 6]
+    assert sum(60 // c for c in even["centralizer_orders"]) == 60
+    assert sum(6 // c for c in odd["centralizer_orders"]) == 6
     for control, centralizers in (
         (controls[0], odd["centralizer_orders"]),
         (controls[1], even["centralizer_orders"]),

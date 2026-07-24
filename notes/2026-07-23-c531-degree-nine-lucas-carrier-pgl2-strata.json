@@ -15,6 +15,7 @@
             "0x0",
             "0x0"
           ],
+          "split_divisor_count": 1,
           "split_squarefree_witness": {
             "coefficients_low_to_high_hex": [
               "0x1",
@@ -49,6 +50,7 @@
             "0x1",
             "0x0"
           ],
+          "split_divisor_count": 2,
           "split_squarefree_witness": {
             "coefficients_low_to_high_hex": [
               "0x0",
@@ -83,6 +85,7 @@
             "0x1",
             "0x1"
           ],
+          "split_divisor_count": 3,
           "split_squarefree_witness": {
             "coefficients_low_to_high_hex": [
               "0x0",
@@ -117,6 +120,7 @@
             "0x1",
             "0x2"
           ],
+          "split_divisor_count": 0,
           "split_squarefree_witness": null,
           "stabilizer_order": 3
         },
@@ -129,6 +133,7 @@
             "0x0",
             "0x1"
           ],
+          "split_divisor_count": 1,
           "split_squarefree_witness": {
             "coefficients_low_to_high_hex": [
               "0x0",
