@@ -1255,4 +1255,4 @@ contraction into a two-divisor incidence detector, though not a complete pencil 
 **Evidence:** CHECKED for the `192` count and `A4` divisibility by the C397 certificate; BOUNDED
 EXACT REPLAY for the eight displayed prime fields and the rational reconstruction `4/9`; the
 all-field factorization, freeness, and sixteen-class geometric interpretation remain OPEN.
-**Status:** open lead; unallocated.
+**Status:** graduated -> C548 / `notes/2026-07-23-c548-c397-contraction-rank-drop-divisor.md`.

@@ -278,7 +278,7 @@ J_sigma(t=3)=(192*13+528)*13^-9=3024*13^-9.
 Thus one scalar contraction orbit, rather than a comparison of 720 labelled signatures, is the
 portable LU certificate.  The count `192=16*|A4|` is forced to be a multiple of the common
 projective automorphism order 12; identifying the sixteen quotient classes geometrically is an
-invariant-compression curiosity, not a missing C397 gate.
+invariant-compression question now owned by bounded successor C548, not a missing C397 gate.
 
 This also explains why the earlier pilots stalled: all subsystem purities (two copies), the full
 three-copy rank histogram, and C396's selected marginal moment collide.  The first exact
@@ -366,10 +366,26 @@ one scalar witness.
 | Whether `w` is operationally readable | **Settled negatively:** explicit monomial local Cliffords exchange the signs. |
 | Whether the q=13 moment collision is an LU collision | **Settled:** the two classes are arbitrarily LU-inequivalent; degree-four copy contractions separate them after all party permutations. |
 | Whether the q=13 theorem needs 720 labelled comparisons | **Settled negatively by `ej`:** one party-orbit sum has values `720*13^-9` and `3024*13^-9`. |
-| Whether degree four is globally minimal | **Open only as an invariant-compression question:** complete copy degrees two and three fail, but another non-copy-contraction invariant of lower polynomial degree was not classified. No successor is required for C397. |
-| Why the second orbit sum has exactly 192 rank-20 terms | **Partly settled:** `192=16*12` follows from the common `A4` symmetry; a geometric interpretation of the sixteen quotient classes is optional and unallocated. |
+| Whether degree four is globally minimal | **Outside C548 and still open:** complete copy degrees two and three fail, but another non-copy-contraction invariant of lower polynomial degree was not classified. |
+| Why the second orbit sum has exactly 192 rank-20 terms | **C548-owned:** `192=16*12` follows from the common `A4` symmetry; C548 must prove the exact two-divisor scheme and seek the sixteen-class geometry. |
 
 No exit-condition mystery remains.
+
+## Highest-EV bounded successor
+
+C548 owns the post-closeout Tao observation.  Across exact prime-field replay at
+`q=7,11,13,17,19,23,29,31`, the fixed party-orbit contraction has rank-20 terms only at
+
+```text
+z=2       with multiplicity 96,
+z=4/9     with multiplicity 192,
+```
+
+and characteristic seven merges the divisors and adds the multiplicities to 288.  C548's precise
+gate is to prove or refute the all-field factorization `(z-2)(9z-4)=0`, including its scheme and
+exceptional-characteristic structure, then explain `96/192` by exact group/incidence geometry.
+The bounded replay is not itself the theorem, and C548 must stop before claiming this scalar is a
+complete LU coordinate.
 
 ## Vibe check
 
