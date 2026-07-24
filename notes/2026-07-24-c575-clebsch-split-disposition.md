@@ -4,8 +4,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete; C576 subsequently built and referee-tested Paper I.
-The active next task is C320; this file remains the exact disposition record.
+**Status:** complete; C576 built Paper I and C320 obtained final independent
+`GO`. C182 is the active Paper I task; this file remains the exact
+disposition record, not a live router.
 
 ## Verdict
 
@@ -137,9 +138,9 @@ fallback with sections deleted.  Apply these backports in order:
    “invariant support bipartition.”  Historical checker filenames may remain.
 7. Filter the current trust and verification tables to the 19 Paper I rows.
    Do not mention the factorization, passage, torsor, or common-Rosetta gates.
-8. State that exhaustive enumeration is load-bearing only for the numerical
-   gap and low-degree strengthening.  Other finite checks audit coordinates,
-   counts, or consequences.
+8. State that exhaustive enumeration is load-bearing for the numerical gaps,
+   low-degree strengthening, and terminal `k=7`, `q=11,13` exclusions. Other
+   finite checks audit coordinates, counts, or consequences.
 9. Default to omitting an `H_3` theorem.  At most one short contextual
    paragraph may identify the Clebsch secants with the reduced `H_3`
    arrangement and print the compact complement formula; it must not be used
@@ -294,9 +295,8 @@ do not.
   checker.  Paper I gets at most a non-load-bearing contextual paragraph.
 - **Settled — Singular dependency.**  The removed smooth-quartic claim stays
   removed, so C321 is not triggered by the focused disposition.
-- **Open, C320-owned — per-paper trust gate.**  The current 58-row manifest and
-  aggregate Lean gate certify the fallback.  C320 must construct and review the
-  nineteen-row Paper I surface after C576 freezes the statements.
+- **Settled — Paper I trust gate.** C320 constructed and independently
+  reviewed the nineteen-row Paper I surface; final verdict `GO`.
 - **Open, C579-owned — Paper III unity.**  The row partition identifies its
   material but does not show that the passages have one principal theorem.
 
