@@ -6,6 +6,39 @@ The aim is expert-speed exposition: accessible across adjacent disciplines
 without diluting the mathematics or making specialists wade through textbook
 background.
 
+## Stylistic model
+
+The primary model is Milnor's reader-first transparency, held inside Serre's
+structural and verbal discipline.
+
+- Make the central idea visible early. Give the reader the right picture,
+  illuminating special case, or governing mechanism before asking them to carry
+  technical detail.
+- Use that guidance to transfer understanding, not to add warmth for its own
+  sake. An intuition, example, or transition earns its place only if it changes
+  how the argument is understood.
+- Give the paper a severe skeleton: state the main theorem precisely and early,
+  at its natural level of generality; introduce definitions where they become
+  useful; and cut throat-clearing, inflated context, and secondary branches that
+  compete with the main line.
+- Keep the tone calm. Do not advertise one's own result as “remarkable,”
+  “surprising,” or “powerful,” and do not hedge a precise claim. State what is
+  proved and let its content carry the emphasis.
+- Expand the point where understanding is won. Compress what is genuinely
+  routine. Terseness is not a virtue when it hides the mechanism or makes a
+  referee reconstruct a load-bearing bridge.
+
+The governing test is not merely whether a proof can be checked, but whether a
+qualified reader can say why it works, where the difficulty lies, and what the
+result changes. This is especially important when formal or computational
+artifacts settle correctness: the prose should spend its scarce space on
+meaning, mechanism, and significance while still exposing the exact trust
+boundary.
+
+For proof-strategy sections, Thurston's *On Proof and Progress in Mathematics*
+offers a useful diagnostic: the goal is to transfer understanding, not merely
+to transmit a sequence of verifiable deductions.
+
 ## Governing principles
 
 1. Lead with the mathematical object, question, and result. Literature,
@@ -65,8 +98,12 @@ abstract into a table of contents.
 In the introduction:
 
 - establish notation only as needed to state the problem;
-- present the object and main result before an extended literature survey;
-- explain why the result is memorable or structurally surprising;
+- present the object and a precise main theorem on page 1 or 2 when the format
+  permits, before an extended literature survey;
+- follow the theorem with a plain-language paragraph identifying the key new
+  idea, the obstruction it overcomes, and the honest scope of the result;
+- identify the structural contrast or consequence that makes the result worth
+  remembering, without announcing that it is surprising;
 - give an authoritative novelty account proportionate to the theorem structure;
 - distinguish conceptual proofs from finite verification clearly, without
   repeating the same trust statement after every result;
@@ -74,6 +111,27 @@ In the introduction:
 
 Do not repeat novelty disclaimers in later sections unless a local result has a
 genuinely separate priority boundary.
+
+### Default opening sequence
+
+Unless the venue or subject demands another order, the opening should have this
+shape:
+
+1. Name the object and question with only the notation needed to understand
+   them.
+2. State the principal theorem precisely, including the hypotheses and the
+   honest level of generality.
+3. Explain the key idea in plain mathematical terms. A reader who stops here
+   should know what is new besides the conclusion.
+4. Give a short strategy of proof: identify the conceptual stages, say where the
+   real difficulty lives, and distinguish conceptual reduction from formal or
+   finite verification.
+5. Situate the result accurately and generously in the closest literature, then
+   give a roadmap only if it helps readers separate the main path from optional
+   applications.
+
+This sequence is a default, not a demand for five labeled subsections. In a short
+paper, it may occupy a few well-shaped paragraphs.
 
 ## Theorem and proof architecture
 
@@ -86,9 +144,15 @@ genuinely separate priority boundary.
   the headline.
 - Before a proof, identify any classical load-bearing input and any exhaustive
   finite step. Inside the proof, say exactly where each enters.
+- For a substantial proof, provide a strategy paragraph or section that gives
+  the honest causal picture rather than a list of lemma numbers. Name the step
+  at which a plausible naive argument fails or the genuine bottleneck begins.
 - Separate conceptual reduction from finite exclusion with visible paragraphs,
   lemmas, or proof headings.
 - Expand genuine bottlenecks. Compress routine algebra and standard reductions.
+- Before a subtle step, give one sentence of orientation; after it, state the
+  mathematical gain if that gain is not already visible. Give routine steps no
+  ceremonial commentary.
 - Avoid “clearly,” “obviously,” and “it follows” when the omitted bridge is the
   point a referee is likely to test.
 - Do not interrupt proofs with checker filenames, hashes, archive promises, or
@@ -122,7 +186,20 @@ For a formal result, name the formal theorem and toolchain; report axioms,
 admitted declarations, unsafe or native execution, external computation, and
 generated certificates. Explain the lemma or correspondence that connects formal
 definitions to the paper statement. “Verified in Lean” is not a trust statement.
-Avoid repeating the same verification note after every result.
+Avoid repeating the same verification note after every result. Mention a
+substantial formalization once in the abstract or introduction, matter-of-factly;
+link a stable repository or archival release and say exactly which paper
+statements it covers. Do not use the artifact rhetorically as proof that doubt is
+impossible.
+
+Formalization changes the division of labor but does not remove authorial
+responsibility. The artifact checks a formal statement within an explicit trust
+base; the paper must still communicate the idea and justify the correspondence
+between its definitions and the formal ones. When machine or AI assistance was
+used, required disclosures should be factual and brief. The strongest evidence
+of mathematical command is in the exposition itself: the right example, the
+correct warning, an honest account of the bottleneck, and a proof structure that
+reveals why the result is true.
 
 ## Literature, novelty, and tone
 
@@ -133,6 +210,10 @@ Avoid repeating the same verification note after every result.
   stronger theorem than they establish.
 - Distinguish “known object,” “known classification,” “known raw data,” and “new
   interpretation or consequence.”
+- Treat related work as part of the proof of relevance. Search it
+  scrupulously, describe neighboring results at their strongest accurate level,
+  and be generous about precedence and influence. Never manufacture contrast by
+  weakening another paper's theorem or omitting a close predecessor.
 - State priority boundaries once and neutrally. Repeated disclaimers sound
   defensive and obscure the contribution.
 - Do not describe neighboring work at length merely to explain that it studies a
