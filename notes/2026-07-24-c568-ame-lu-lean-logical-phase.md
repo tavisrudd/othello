@@ -29,6 +29,10 @@ dichotomy: the kernel is all of `SL₂` on the conic locus and precisely the
 split torus off it.  The Gale-fixed/conic theorem and block-propagation
 argument remain named hypotheses rather than hidden assumptions.
 
+This module does not formalize the separate party-moving claim that explicit
+isodualities enlarge the nonconic torus to its normalizer.  C570 must adopt
+the Lean theorem only for the fixed-party clause of `thm:logical-phase`.
+
 ## Four-copy contraction
 
 `RelativeConicArcs.AMELU.FourCopyContraction` defines:
@@ -46,6 +50,15 @@ sum is unchanged when its seed pattern is relabelled by any party
 permutation.  Thus the exact scalar does not retain the arbitrary
 party-labelled representative used to write the five nonidentity copy
 permutations.
+
+The common bra-copy change of variables is also formalized.
+`normalizeContractionPattern` composes every local copy permutation with
+the inverse of the first one,
+`normalizeContractionPattern_zero` proves that the first party then uses
+the identity, and
+`contractionMatchingRank_normalizeContractionPattern` proves that this
+normalization preserves the matching rank.  This discharges the
+normalization step preceding the manuscript's contraction ladder.
 
 The module records the exact normalized four-copy pattern and the two
 `𝔽₁₃` generator matrices for the `z=4` and `z=12` pencil classes.
@@ -88,16 +101,25 @@ declaration, or unsafe/native execution.
 
 ## `ej` / Tao closeout and mystery ledger
 
-The closeout made three cheap upgrades.  First, it formalized the general
+The closeout made four cheap upgrades.  First, it formalized the general
 matching linear map rather than exposing an uninterpreted contraction rank.
 Second, it placed the exact q=13 matrices and five nontrivial copy
 permutations in the scholarly API, so the conditional finite evaluations
 refer to a unique contraction rather than an unnamed witness.  Third, the
 post-closeout `ej` pass proved that the party-orbit sum is independent of
-the party-labelled seed pattern.
+the party-labelled seed pattern.  Fourth, the `tt` pass proved that common
+bra-copy relabelling normalizes the first permutation to the identity without
+changing rank.
 
-No genuine algebraic or seed-representation mystery remains in the proved
-interface.  The evidence
+No genuine copy- or party-labelling mystery remains in the proved interface.
+Generator-row-basis invariance is not formalized, but the q=13 theorem fixes
+the two displayed matrices and therefore does not depend on it; C570 should
+promote that reusable statement only if manuscript reconciliation needs a
+basis-free generator interface.  The party-moving normalizer clause is also
+outside the Lean interface; its exact gap is the construction and closure of
+the isoduality-generated logical group, and C570 must retain it as a
+manuscript proof input rather than cite
+`fixedPartyKernel_eq_specialLinear_or_splitTorus`.  The evidence
 boundary is exact: the conic/Gale propagation facts, the analytic
 contraction/rank identity, LU covariance, and the two exhaustive rank sums
 are hypotheses.  C570 owns manuscript-level reconciliation of these

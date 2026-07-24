@@ -120,12 +120,62 @@ def permuteContractionPattern {m : ℕ} (π : Equiv.Perm Party)
     (σ : ContractionPattern m) : ContractionPattern m :=
   fun i => σ (π.symm i)
 
+/-- Apply one common relabelling to the bra-copy index at every party. -/
+def relabelBraCopies {m : ℕ} (τ : Equiv.Perm (Fin m))
+    (σ : ContractionPattern m) : ContractionPattern m :=
+  fun i => (σ i).trans τ
+
 /-- Successive party relabellings combine by permutation composition. -/
 theorem permuteContractionPattern_trans {m : ℕ}
     (π ρ : Equiv.Perm Party) (σ : ContractionPattern m) :
     permuteContractionPattern π (permuteContractionPattern ρ σ) =
       permuteContractionPattern (ρ.trans π) σ := by
   rfl
+
+/-- A common bra-copy relabelling is a change of variables in the matching
+system and therefore preserves its rank. -/
+theorem contractionMatchingRank_relabelBraCopies
+    [Field 𝔽] [Fintype 𝔽] {m : ℕ}
+    (G : Matrix PlaneCoordinate Party 𝔽)
+    (τ : Equiv.Perm (Fin m)) (σ : ContractionPattern m) :
+    contractionMatchingRank G (relabelBraCopies τ σ) =
+      contractionMatchingRank G σ := by
+  rw [contractionMatchingRank, contractionMatchingRank]
+  have hrange :
+      LinearMap.range (contractionMatchingMap G (relabelBraCopies τ σ)) =
+        LinearMap.range (contractionMatchingMap G σ) := by
+    ext y
+    constructor
+    · rintro ⟨x, rfl⟩
+      refine ⟨(x.1, fun b => x.2 (τ b)), ?_⟩
+      rfl
+    · rintro ⟨x, rfl⟩
+      refine ⟨(x.1, fun b => x.2 (τ.symm b)), ?_⟩
+      ext i a
+      simp [contractionMatchingMap, relabelBraCopies]
+  rw [hrange]
+
+/-- Normalize a contraction pattern so that the first party uses the
+identity copy permutation. -/
+def normalizeContractionPattern {m : ℕ}
+    (σ : ContractionPattern m) : ContractionPattern m :=
+  relabelBraCopies (σ 0).symm σ
+
+/-- The first party of the normalized pattern uses the identity. -/
+@[simp]
+theorem normalizeContractionPattern_zero {m : ℕ}
+    (σ : ContractionPattern m) :
+    normalizeContractionPattern σ 0 = Equiv.refl (Fin m) := by
+  ext a
+  simp [normalizeContractionPattern, relabelBraCopies]
+
+/-- Normalizing the first copy permutation preserves the matching rank. -/
+theorem contractionMatchingRank_normalizeContractionPattern
+    [Field 𝔽] [Fintype 𝔽] {m : ℕ}
+    (G : Matrix PlaneCoordinate Party 𝔽) (σ : ContractionPattern m) :
+    contractionMatchingRank G (normalizeContractionPattern σ) =
+      contractionMatchingRank G σ :=
+  contractionMatchingRank_relabelBraCopies G (σ 0).symm σ
 
 /-- The rational value `q^(3m-rank)` supplied by the solution-counting
 formula for a normalized equal-phase code state. -/
