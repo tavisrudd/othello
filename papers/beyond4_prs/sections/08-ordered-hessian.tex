@@ -10,6 +10,19 @@ Let $\ell=\PP\langle U,V\rangle\subset\PP(\Gamma^3E)$ and write
 \Hess^{\mathrm{div}}(uU+vV)
  =N_u(u,v)X^2+N_s(u,v)XY+D(u,v)Y^2.
 \]
+For
+\[
+ U=(A,B,C,D_3),\qquad V=(a,b,c,d),
+\]
+the three coefficient quadratics are
+\[
+\begin{aligned}
+N_u&=(AC+B^2)u^2+(Ac+aC)uv+(ac+b^2)v^2,\\
+N_s&=(AD_3+BC)u^2
+ +(Ad+aD_3+Bc+bC)uv+(ad+bc)v^2,\\[-6pt]
+D&=(BD_3+C^2)u^2+(Bd+bD_3)uv+(bd+c^2)v^2.
+\end{aligned}
+\]
 The ordered-Hessian incidence
 \begin{equation}\label{eq:hessian}
 N_u(u,v)X^2+N_s(u,v)XY+D(u,v)Y^2=0
@@ -72,15 +85,53 @@ Hankel pullback.
 \end{theorem}
 
 \begin{proof}
-Once vertical and horizontal factors are removed, any separable
-factorization of a $(2,2)$ curve must be
-$(1,1)+(1,1)$.  The two factors are graphs of projectivities.
-Semisimple and unipotent normal forms show that only the lines $QE$
-occur.  The ambient equation $AD+BC=0$ gives two quadric rulings.
-Substituting
-the consecutive Hankel contraction forms into the complementary ruling
-forces overlapping triples of linear forms to be proportional, so the
-root-compatible line has rank at most one.
+A vertical factor divides $N_u,N_s,D$ exactly when the divided Hessian
+vanishes at the corresponding point of $\ell$.  Its base scheme is the
+twisted cubic, so the vertical factors are precisely
+$\ell\cap C_3$.  A horizontal factor fixes one Hessian root for every
+cubic on $\ell$.  The cubics with that root form the rank-three quadric
+cone swept by secants through the corresponding point of $C_3$; every
+line on the cone is a generator through its vertex.  Thus a horizontal
+factor is already a chord/tangent line in $\Sigma$, or its collision
+boundary.
+
+After removing those factors, bidegree additivity forces any separable
+factorization to be $(1,1)+(1,1)$.  Both factors are graphs of
+projectivities.  Make the first graph the identity by independent
+changes of coordinate on the parameter and root lines.  For a
+semisimple second graph $g(t)=ct$, normalize the two cubics at its fixed
+parameters to
+\[
+             U=(a,1,0,0),\qquad V=(0,0,\gamma,d).
+\]
+Comparison with
+\[
+ (uX+vY)(uX+cvY)
+ =u^2X^2+(1+c)uvXY+cv^2Y^2
+\]
+gives
+\[
+ d=0,\qquad a=0,\qquad\gamma=1+c,\qquad\gamma^2=c.
+\]
+Hence $c^2+c+1=0$, and the normalized line is
+$\PP\langle X^2Y,XY^2\rangle=XY\cdot\PP(E)$.  Undoing the
+normalization gives exactly $\PP(QE)$.  In the unipotent normal form
+$g(t)=t+1$, comparison with
+\[
+             (uX+vY)((u+v)X+vY)
+\]
+instead gives $d=\gamma=0$ and $a\gamma=1$, a contradiction.  The
+identity case is included in the semisimple comparison and fails the
+same equations.  Thus $\Sigma$ is the complete separable external
+locus.
+
+For the inseparable locus, $N_s$ vanishes identically exactly when
+$\ell$ is a line on the smooth quadric
+$\mathcal Q_0=\{AD+BC=0\}$.  Its Fano scheme has the two stated
+ruling conics.  This classifies inseparable root projection, whether
+or not the total $(2,2)$ curve is reduced.  The exact Pl\"ucker
+equations and the constrained calculation excluding the complementary
+ruling are given in Proposition~\ref{prop:hessian-pullback}.
 \end{proof}
 
 \begin{proposition}[Root-compatible pullback]\label{prop:hessian-pullback}
@@ -92,32 +143,71 @@ factors removed before the reduced incidence is formed.
 \end{proposition}
 
 \begin{proof}
-The Veronese ideal is the prime ideal of $2\times2$ minors of the
-symmetric matrix in the ordered-Hessian Pl\"ucker coordinates.
-At the generic point of any irreducible pullback component, those
-minors say that every iterated contraction pencil has a common
-quadratic.  The ordinary rank--nullity argument of
-Proposition~\ref{prop:contained-rank-two} gives the persistent
-rank-two carrier.  When a consecutive contraction coefficient
-vanishes in the ground characteristic, Lucas' theorem gives precisely
-the contraction-kernel nucleus flags.  Conversely the displayed
-catalecticant and Lucas kernels make all those minors vanish.
-Equality on geometric points over every algebraically closed
-extension therefore gives equality of the reduced closed subschemes.
+Use Pl\"ucker coordinates
+\[
+ (z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23}).
+\]
+For $Q=aX^2+bXY+cY^2$, the line $QE$ has coordinates
+\[
+ [z_0:\cdots:z_5]
+ =[a^2:ab:ac:b^2+ac:bc:c^2].
+\]
+Consequently $\Sigma$ is cut out scheme-theoretically by the
+$2\times2$ minors of
+\[
+\begin{pmatrix}
+z_0&z_1&z_2\\
+z_1&z_3+z_2&z_4\\
+z_2&z_4&z_5
+\end{pmatrix}.                                             \tag{38}
+\]
+The tangent ruling conic is
+\[
+ z_1=z_4=0,\quad z_2=z_3,\quad z_0z_5=z_2^2,
+\]
+the square-quadratic boundary of the displayed parametrization.  The
+complementary ruling is
+\[
+ \cN:\quad z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2.      \tag{39}
+\]
+Together with the Chow equation for lines meeting $C_3$, (38)--(39)
+are the complete universal degeneracy ideal found in the theorem.
 
-For $\cN$, its first and last equations give consecutive identities
+For a split base $R$, the root-compatible line
+$\ell_{f,R}=L_f(\PP(RE^\vee))$ has Pl\"ucker coordinates quadratic
+in the coefficients of $R$.  If its generic point lies in $\Sigma$,
+the minors (38) say that every iterated contraction pencil has a common
+quadratic.  Proposition~\ref{prop:contained-rank-two}, applied to the
+overlapping contraction flags, gives the persistent rank-two carrier;
+when a consecutive contraction coefficient vanishes in the ground
+characteristic, the same overlap equations and Lucas' theorem give
+exactly the contraction-kernel nucleus flags.  Conversely, the
+catalecticant and Lucas kernels make every minor in (38) vanish.
+This proves equality of the reduced pullback with the stated union,
+not only set-theoretic containment in one direction.
+
+For $\cN$, the linear equations in (39), after substitution, give
+the consecutive identities
 \[
 h_{-1}(R)^2=h_{-2}(R)h_0(R),\qquad
 h_1(R)^2=h_0(R)h_2(R).
 \]
-Unique factorization of the linear contraction forms, including the
-cases in which one vanishes, makes each nonzero consecutive triple
-proportional.  The overlap propagates across all five forms, so the
-root-compatible line has rank at most one.  Finally, the divided
-Hessian vanishes on a cubic exactly on the twisted cubic; hence a
-line--twisted-cubic intersection is exactly a common vertical factor.
-Removing that factor commutes with base change and does not create a
-reduced moving component.
+If these hold for every split $R$, they hold polynomially because
+split forms are Zariski dense over the algebraic closure.  The
+contraction forms $h_i$ are linear forms in the coefficients of $R$.
+In their UFD, an identity $L_1^2=L_0L_2$ implies either a zero form or
+proportionality of the three nonzero forms: every irreducible factor
+of $L_0$ or $L_2$ must be associated to $L_1$.  Applying this to the
+two overlapping triples propagates proportionality across
+$h_{-2},\ldots,h_2$.  Zero-form cases only lower the same contraction
+rank.  Hence $\operatorname{rank}\ell_{f,R}\leq1$, so $\cN$ has no
+nontrivial rank-two pullback.
+
+Finally, the divided Hessian vanishes exactly on $C_3$.
+A line--twisted-cubic intersection is therefore exactly the common
+vertical factor removed above.  Scheme-theoretic division by that
+factor commutes with field extension and cannot create a reduced
+moving component.
 \end{proof}
 
 \begin{proposition}[Effective Hessian corollary]
@@ -164,4 +254,3 @@ outside every deletion, and contraction lifts it squarefreely.
 Theorem~\ref{thm:hessian} is a containment theorem.  It does not assert
 that every Lucas-carrier point is deep; that remains an arithmetic
 question for each level.
-

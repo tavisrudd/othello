@@ -73,14 +73,14 @@ independent quotient-cover replay\\
 \normalsize
 
 The public labels are defined by
-\texttt{supplement/CERTIFICATE-SCHEMA.md}.  Literal development commands
-and working directories are recorded in
-\texttt{supplement/REPRODUCING.md} and
-\texttt{verification-map.md}.  The release manifest is intentionally
-marked incomplete until it contains a repository URL, immutable tag and
-commit, archive identifier, DOI, byte counts, and hashes.  Consequently
-the present development draft is not an externally archived
-proof-complete release.
+\texttt{supplement/CERTIFICATE-SCHEMA.md}.  The paper-local bundle,
+literal replay commands, toolchain locks, hashes, byte counts, and
+working directories are recorded in
+\texttt{supplement/REPRODUCING.md},
+\texttt{supplement/EVIDENCE-MANIFEST.json}, and
+\texttt{supplement/RELEASE-MANIFEST.md}.  Repository tag, immutable
+public verification revisions, archive identifier, and DOI remain
+external-publication metadata; no such publication is claimed here.
 
 The redundancy-nine residual algebra and synthesis implication are
 also formalized in Lean.  The import gate and its axiom-audit module are
@@ -102,6 +102,22 @@ fields rather than hidden axioms.  The audit reports only the standard
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}
 dependencies.
 
+The four-marker package has a separate exact formal boundary in
+\[
+\texttt{RelativeConicArcs.PRSFourMarkerLowerPackage}.
+\]
+The declaration
+\texttt{three\_pointed\_steps\_have\_witness} kernel-checks composition
+of three admissible pointed contractions.  The declarations
+\texttt{exact\_deletion\_and\_parameter\_degrees},
+\texttt{parameter\_degrees\_lt\_projectiveLine\_cardinality}, and
+\texttt{fourMarker\_genusOne\_squared\_margin} check the constants
+$36,22,18,18,17$ and the $q\ge53$ integer inequalities.  This module
+does not claim to formalize geometric integrality, the explicit
+gcd/monodromy strata, divisor-degree calculations, or Hasse--Weil;
+those are the printed proof of
+Proposition~\ref{prop:r9-budgets}, not implicit Lean axioms.
+
 \begin{table}[ht]
 \centering
 \small
@@ -122,7 +138,11 @@ the actual $\PGL_2/\PGammaL_2$ action and geometric family
 identification &
 arithmetic case inputs, family-count inputs, and the resulting numerical
 table\\
+R9 four-marker package &
+explicit recursive strata, noncontainment, monodromy, divisor degrees,
+and Hasse--Weil &
+three-step witness composition, exact budgets, parameter-line
+inequalities, and the squared genus-one margin\\
 \bottomrule
 \end{tabular}
 \end{table}
-
