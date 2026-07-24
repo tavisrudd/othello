@@ -1245,10 +1245,11 @@ aggregate formal gate is
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}. The clean replay
 entry point is \path{verification/verify_release.py}.
 
-From the root of the archival Git-bundle clone, the exact replay command is
+From the root of the archival Git-bundle clone, the exact replay commands are
 \begin{verbatim}
-VERIFY=papers/clebsch-rigidity/verification/verify_release.py
-nix develop --command python3 "$VERIFY" --lean-root lean
+cd papers/clebsch-rigidity
+nix develop --command python3 verification/verify_release.py \
+  --lean-root ../../lean
 \end{verbatim}
 The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
