@@ -34,7 +34,7 @@
 \newcommand{\tmin}{t_2(2,q)}
 
 \title{Arcs complete outside a prescribed conic\\
-\large An exact defect identity and $\rho_{\mathcal C}(16)=9$}
+\large Exact defect, equality rigidity, and $\rho_{\mathcal C}(16)=9$}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -58,9 +58,13 @@ $\IC(A)$ for the total incidence of the secants of $A$ with $\cC$, it gives
 for every $\cC$-complete $k$-arc, together with an exact equality criterion
 and, for every prime power $q$,
 \[
- \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
+\rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-We also prove an upper transfer by projective averaging.  Explicit witnesses
+At equality, the concurrence points of disjoint secants form a matching
+design: they partition the edges of the Kneser graph $KG(k,2)$ into cliques
+of maximum order.  This gives a global rigidity theorem and a quantitative
+graph-theoretic form of stability.  We also prove an upper transfer by
+projective averaging.  Explicit witnesses
 meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective
 frame.  Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
@@ -186,11 +190,23 @@ interpretation all follow.  Its main consequences and applications are:
 
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
 \item an exact prescribed-hole defect identity, with equality and stability;
+\item a matching-design classification of the global equality structure;
 \item conic lower bounds, including the additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer; and
 \item exact values at $q=5,8,9,11$, and a certificate-checked quadratic
       obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
+
+The equality structure belongs to the established theory of matching
+designs.  Alspach and Heinrich~\cite{AlspachHeinrich1990} call a family of
+$s$-edge matchings in $K_n$ a $\operatorname{MATCH}(n,s,\lambda)$ design
+when every pair of independent edges occurs in exactly $\lambda$ members.
+Our contribution at this interface is the geometric implication: vanishing
+of the prescribed-hole defect canonically produces a simple
+$\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)$ design, represented by
+concurrence points of secants in one projective plane.  The local remainder
+also measures the graph edges that fail to lie in such maximum-matching
+cliques.
 
 Sections~\ref{sec:classical}--\ref{sec:examples} form the geometric route:
 exact accounting, lower and upper bounds, the characteristic-two refinement,
@@ -425,6 +441,129 @@ Thus small defect forces almost every multiply covered required point to
 have the maximum possible multiplicity $m$, while almost every hole point
 met by a secant also has multiplicity $m$.  This is the precise stability
 content behind the equality heuristic.
+
+\subsection{Concurrency designs at equality}
+\label{subsec:matching-design}
+
+The equality criterion has a global incidence interpretation.  Label the
+vertices of $K_k$ by the points of $A$, so that its edges label the secants
+of $A$.  Two such edges are adjacent in the Kneser graph $KG(k,2)$ exactly
+when the corresponding secants have disjoint endpoint pairs.
+
+\begin{theorem}[Concurrency decomposition and equality rigidity]
+\label{thm:matching-design}
+Suppose $k\ge4$.
+For each $x\notin A$ with $r(x)\ge2$, the secants through $x$ form an
+$r(x)$-edge matching $M_x$ in $K_k$, and
+\[
+ E\bigl(KG(k,2)\bigr)
+   =\mathop{\dot\bigcup}_{x\notin A,\ r(x)\ge2} E(K_{M_x}).
+\]
+Here $K_{M_x}$ is the clique whose vertices are the edges of $M_x$.
+
+If $\Delta_{\cH}(A)=0$, every $M_x$ in this decomposition has
+$m=\lfloor k/2\rfloor$ edges.  Thus the family $(M_x)_{r(x)=m}$ is a simple
+$\operatorname{MATCH}(k,m,1)$ design.  If
+$Z=\{x\notin A:r(x)=m\}$, then
+\[
+ |Z|=\frac{3\binom{k}{4}}{\binom{m}{2}}
+ =\begin{cases}
+   (k-1)(k-3),&k\ \text{even},\\
+   k(k-2),&k\ \text{odd},
+  \end{cases}
+\]
+and every secant of $A$ contains $k-3$ points of $Z$ when $k$ is even and
+$k-2$ points of $Z$ when $k$ is odd.
+\end{theorem}
+
+\begin{proof}
+Secants through a point outside an arc have pairwise disjoint endpoint
+pairs, so they form a matching.  Conversely, two secants with disjoint
+endpoint pairs meet in a unique point outside $A$.  Their edge in
+$KG(k,2)$ therefore belongs to exactly one concurrence clique, proving the
+decomposition.
+
+If the defect vanishes, Theorem~\ref{thm:defect} gives
+$r(x)\in\{1,m\}$ off $\cH$ and $r(x)\in\{0,m\}$ on $\cH$.  Every
+concurrence point has index at least two, so all the cliques above have
+order $m$.  The second index equation now gives
+$|Z|\binom m2=3\binom k4$.
+
+Fix a secant.  It is disjoint from $\binom{k-2}{2}$ other secants, and each
+point of $Z$ on it accounts for $m-1$ of them.  Hence it contains
+$\binom{k-2}{2}/(m-1)$ points of $Z$, which has the two displayed values.
+\end{proof}
+
+After any projective duality, the $\binom{k}{2}$ secants become points.
+They lie on $k$ star lines of size $k-1$, one for each point of $A$, and
+on the $|Z|$ matching lines of size $m$.  Two dual secant-points lie on a
+star line when their endpoint pairs meet and on a unique matching line
+when they are disjoint.  Thus zero defect does not merely prescribe the
+indices: it gives a rank-three projective realization of the star--matching
+pairwise-balanced design on the edges of $K_k$.
+
+The same decomposition strengthens Corollary~\ref{cor:stability} from a
+count of nonextremal centres to a count of affected pairs of secants.
+
+\begin{corollary}[Bad-edge stability]
+\label{cor:bad-edge-stability}
+Let $E_{\rm bad}$ be the set of edges of $KG(k,2)$ lying in a concurrence
+clique of order $2\le r(x)\le m-1$.  Then
+\[
+ |E_{\rm bad}|\le \frac{m(m-1)}2\,\Delta_{\cH}(A).
+\]
+\end{corollary}
+
+\begin{proof}
+At an off-hole centre of index $r$,
+\[
+ \binom r2\le\frac{m-1}{2}(r-1)(m-r),
+\]
+and at a hole centre the defect weight $r(m-r)$ is larger.  Sum these
+inequalities and apply~\eqref{eq:defect}.
+\end{proof}
+
+The first two nontrivial orders illustrate the distinction between an
+abstract matching design and its rank-three projective realization.
+
+\begin{corollary}[Six and seven points]
+\label{cor:six-seven-rigidity}
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item In a Desarguesian plane, if a six-arc has every intersection of two
+disjoint secants on a third secant, then the field has characteristic two,
+contains $\F_4$, and the arc is projectively equivalent to
+\[
+ (1,0,0),\ (0,1,0),\ (0,0,1),\ (1,1,1),\
+ (1,\omega,\omega^2),\ (1,\omega^2,\omega),
+ \qquad \omega^2+\omega+1=0.
+\]
+Conversely, this configuration has the stated concurrence property.
+In particular, every zero-defect six-arc in a Desarguesian plane has this
+form.
+\item In any projective plane, no seven-arc has zero defect with respect to
+any prescribed hole set.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For six points, the three intersections of opposite sides of any complete
+quadrangle must all lie on the secant through the remaining pair.  Normalize
+four vertices to
+\[
+ (1,0,0),\quad(0,1,0),\quad(0,0,1),\quad(1,1,1).
+\]
+Their diagonal points are collinear only in characteristic two; their
+common line is then $x+y+z=0$, and it contains the remaining pair.  Write
+a fifth point as $(1,t,1+t)$.  Applying the same diagonal-line condition
+to the first three frame points and this fifth point gives
+$t^2+t+1=0$; the sixth point is then $(1,t^2,t)$.  Direct substitution
+shows that the displayed configuration has the required concurrences.
+
+For seven points, Theorem~\ref{thm:matching-design} would produce a
+$\operatorname{MATCH}(7,3,1)$ design.  Alspach and
+Heinrich~\cite[Theorem~3.1]{AlspachHeinrich1990} proved that no such design
+exists.
+\end{proof}
 
 The line-hole case now makes the connection with complete affine arcs
 explicit.
@@ -1578,6 +1717,12 @@ N.~A.~M. Al-Seraji and R.~A.~B. Al-Ogali,
 \newblock \emph{Al-Mustansiriyah Journal of Science} \textbf{29}(1) (2018),
 138--149.
 \newblock doi:10.23851/mjs.v29i1.184.
+
+\bibitem{AlspachHeinrich1990}
+B.~Alspach and K.~Heinrich,
+\newblock Matching designs,
+\newblock \emph{Australasian Journal of Combinatorics} \textbf{2} (1990),
+39--55.
 
 \bibitem{Ball1997}
 S.~Ball,

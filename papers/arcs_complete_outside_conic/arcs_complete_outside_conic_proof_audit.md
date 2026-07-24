@@ -10,6 +10,16 @@
    \sum_{y\in H}r(y)(m-r(y)).
    \]
 3. Coverage, uncovered-locus, equality, and quantitative stability statements are immediate corollaries of the exact identity.
+   The new equality capstone adds three checked consequences:
+   - concurrence points canonically partition \(E(KG(k,2))\) into matching cliques, because each
+     pair of disjoint secants has one projective intersection;
+   - zero defect makes every nontrivial clique a maximum matching and hence a simple
+     \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; the high-index-centre and
+     per-secant counts follow from the second index equation and the degree of \(KG(k,2)\);
+   - the bad-edge estimate is the pointwise bound
+     \(\binom r2\le (m-1)(r-1)(m-r)/2\), with the larger hole weight handled separately.
+   The six-point realization is proved by a projective frame normalization. The seven-point
+   nonexistence is not claimed as new: it is Alspach--Heinrich, Theorem 3.1.
 4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
    inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
    \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
