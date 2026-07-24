@@ -2,25 +2,26 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation and local review complete; user-launched independent review pending
+**Status:** initial independent review `NO-GO`; repairs implemented; exact validation and
+user-launched post-fix review pending
 
-## Required outcome and trust route
+## Outcome and exact trust route
 
-Define a reusable free-`C2` torsor interface and formalize the adopted closing theorem assembled
-from C417, C448, C473, C474, C480, C486, and C487:
+C505 provides a mixed-verification assembly theorem for the Paper-1 torsor close. The formal
+surface now distinguishes three kinds of evidence:
 
-- C474's q=11 fixed-child quotient is torsor-isomorphic to `T_11`;
-- the Čech/base-point obstruction, one-bit selector, and free torsor are three readouts of the
-  determinant-square sign character with kernel `PSL_2(q)`;
-- split working primes give a free two-point torsor at B3/H3, while the A3 prime is an inert,
-  connected quadratic point with no bit;
-- the q=11 swap agrees with the design polarity, signed Fourier-sector swap, and the forced-outer
-  Hadamard/Mathieu hinge at the exact boundary delivered by C504;
-- `Spec Q(sqrt5)` supplies the characteristic-zero row, whose two reductions at 11 map to the two
-  finite sheets.
+1. **Full-trust Lean deductions:** the reusable free-`C2` interface, actual split-root torsors,
+   fixed-child quotient consequences, equal-kernel character uniqueness, inert Frobenius-orbit
+   control, and every equivariance consequence of a supplied certificate.
+2. **Imported finite Lean terminals:** the characteristic-five no-root row and the current
+   degree-twelve row/column finite-graph and no-inner-witness checks.
+3. **Explicit external certificate inputs:** the semantic indexing of actual fixed-child parents,
+   the three concrete character actions and their kernel, the design/Fourier/Hadamard readout
+   maps, and the characteristic-zero golden descent/reduction object.
 
-The theorem is an assembly of certified dictionaries, not a claim that all carriers are naturally
-identical before the named maps are supplied.
+The closing theorem no longer manufactures semantic bridges by retagging fresh copies of `Fin 2`.
+Every semantic bridge is an argument whose structure records the actual carrier, action, and
+equivariance map that external replay must supply.
 
 ## Owned surface and dependencies
 
@@ -29,265 +30,303 @@ identical before the named maps are supplied.
 - `lean/RelativeConicArcs/Gates/ClebschTorsorRosetta.lean`
 - this report
 
-The theorem module imports the committed F8 replacement-spine gate, C503/F10 arithmetic-gluing
-gate, and C504/F11 Witt--Hadamard gate. It consumes the C417/C448/C473/C474/C480/C486/C487
-evidence bundles read-only. No upstream Lean source, generator, certificate, or manifest is
-modified.
+The theorem module imports:
 
-## Required theorem and exclusion boundary
+- `RelativeConicArcs.Gates.ClebschReplacementSpine`;
+- `RelativeConicArcs.Gates.ClebschArithmeticGluing`; and
+- `RelativeConicArcs.Gates.ClebschWittHadamard`.
 
-The owned gate proves the explicit two-point actions, maps, equivariance squares, equal-kernel
-sign-character theorem, bounded splitting checks, and reduction dictionary. The characteristic-zero
-row separates what Lean checks after reduction at 11 from the external identification with
-`Spec Q(sqrt5)`.
+No upstream Lean source, generator, certificate, or manifest is modified.
 
-Excluded are an absolute-`H^1` classification, universal all-prime trichotomy, integral cubic
-carrier, uniform period-to-cubic rule, signed genuine-Weil restriction, and any claim that
-`PGL_2(11)` embeds in `M12`.
+## Formal result
 
-## Result
+### Reusable torsor API
 
-The implementation lands the requested three-module gate with no generated finite table.
-`ClebschTorsorRosettaData` defines one phantom-tagged two-element carrier for each readout:
+`FreeC2Torsor X` contains:
+
+- a permutation `swap`;
+- involutivity;
+- fixed-point freeness;
+- transitivity in the exact form `y=x or y=swap x`; and
+- cardinality two.
+
+`TorsorEquiv` is an explicit equivalence commuting with the two swaps. The public consequences
+`no_invariant_point` and `point_or_swapped_point` formalize respectively why zero advice is
+impossible and why one bit suffices.
+
+### Actual finite split and inert carriers
+
+The split carriers are subtypes of finite fields:
 
 ```text
-fixed-child quotient
-determinant sign
-Čech obstruction
-selector bit
-design polarity
-signed Fourier sector
-Hadamard parent
-golden reduction
-B3 sheet
-H3 sheet.
+BinaryRoot = {x : F_7  | x^2 = 2}
+GoldenRoot = {x : F_11 | x^2 - x - 1 = 0}.
 ```
 
-The phantom tags are load-bearing. They prevent the theorem from proving agreement by definitional
-equality. Every comparison uses a displayed equivalence, and every equivalence is proved to commute
-with the nontrivial involution.
+Their swaps are `x -> -x` and `x -> 1-x`. The displayed equivalences
+`binaryRootToOrientation` and `goldenRootToOrientation` label the literal roots
+`{3,4}` and `{8,4}` and are proved equivariant. Thus the B3/H3 torsors are root-derived, not
+unrelated two-element carriers. `splitRoot_values` exports both literal root sets.
 
-`ClebschTorsorRosetta` defines:
+The A3 control consists of:
 
-- `FreeC2Torsor`, a two-element carrier with an involutive fixed-point-free permutation;
-- `TorsorEquiv`, an explicit equivariant equivalence between two such carriers;
-- the canonical tagged torsor and a general retagging equivalence;
-- the no-invariant-point theorem and the exact “chosen point or swapped partner” sufficiency
-  theorem;
-- the fixed-child/sign torsor bridge;
-- the Čech/selector/sign three-readout dictionary;
-- the abstract equal-kernel theorem proving that three `G -> Perm(Fin 2)` actions are one
-  character, with a variant that names the common subgroup;
-- the exact finite rank-three row at `5`, `7`, and `11`;
-- the two-root golden reduction and its `r -> 1-r` swap;
-- the design/Fourier/Hadamard outer-readout dictionary;
-- the exact C504 forced-outer boundary; and
-- one paper-facing conjunction assembling all of these statements.
+- imported no-root evidence for `x^2=2` over `F_5`;
+- a two-point geometric label set;
+- Frobenius acting by the nontrivial swap; and
+- a single displayed Frobenius orbit.
 
-The result is deliberately mixed-verification. Lean proves the reusable torsor logic and the
-complete displayed two-point dictionaries. The upstream finite-action gates prove the root rows
-and the absence of an inner row/column witness. The semantic maps from the tagged carriers to the
-fixed-child signatures, cocycle obstruction, selector cost, design polarity, Fourier sector, and
-golden descent object remain the exact replay/certificate boundary.
+The standard identification of that geometric pair with the roots of the irreducible quadratic
+algebra is a named arithmetic input; Lean checks the exact finite no-root and one-orbit statements.
 
-## Exact public surface
+### Fixed-child to `T_11`
 
-The import gate is `RelativeConicArcs.Gates.ClebschTorsorRosetta`. Its audited terminals are:
+`FixedChildCertificate Parent` requires:
+
+- an actual finite parent carrier `Parent`;
+- an equivalence `Parent ≃ Fin 22`;
+- its actual outer permutation; and
+- proof that the indexing carries that permutation to the explicit paired-parent involution.
+
+The theorem `fixedChildQuotient_is_t11` then proves:
+
+- the parent carrier has size 22;
+- each quotient fibre has size 11;
+- both quotient values occur; and
+- the actual outer permutation induces the nontrivial swap on the quotient.
+
+This is the exact formal consequence of the C474/C486 semantic indexing. The certificate premise,
+not a phantom tag, owns the external identification with deletion-trace signatures.
+
+### One sign character, three readouts
+
+`SignCharacterCertificate G` requires:
+
+- a supplied subgroup `inner`;
+- determinant-sign, Čech, and selector homomorphisms `G -> Perm(Fin 2)`; and
+- proofs that all three kernels equal `inner`.
+
+`one_sign_character_three_readouts` proves both readout homomorphisms equal the determinant
+homomorphism and re-exports its exact kernel. In the intended application, the external finite
+group dictionary names `G=PGL_2(q)` and `inner=PSL_2(q)`. Lean does not infer those classical names
+from cardinalities.
+
+Unlike the initial implementation, this character theorem is a conjunct of
+`torsor_rosetta_closing_theorem`.
+
+### q=11 design/Fourier/Hadamard and forced outer
+
+`Q11OuterReadoutCertificate Design Fourier Hadamard` requires the actual three carriers, their
+actual involutions, three equivalences to the determinant-sign carrier, and all three equivariance
+squares. The theorem `q11_outer_readouts_agree` extracts those certified squares.
+
+The separate full-trust finite terminal `q11_hadamard_hinge_is_forced_outer` uses the current
+upstream declarations:
+
+```text
+RelativeConicArcs.ClebschWittHadamard.row_column_assignment_finite_graph_certificate
+RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness.
+```
+
+It proves the exact row/column finite-graph and no-inner-witness boundary. The external q=11
+readout certificate is responsible for identifying its `hadamardSwap` with that row/column
+operation. Classical `M11/M12` names and self-normalizer language remain cited inputs.
+
+### Characteristic-zero row
+
+`GoldenCharacteristicZeroCertificate K` now contains an actual characteristic-zero field:
+
+- `[Field K] [Algebra Q K] [FiniteDimensional Q K]`;
+- a generator `phi` satisfying `phi^2-phi-1=0`;
+- `Q(phi)=K`;
+- degree two;
+- a `Q`-algebra conjugation carrying `phi` to `1-phi`; and
+- an equivariant equivalence from the two reduction labels to the actual `GoldenRoot` subtype.
+
+Thus `golden_characteristic_zero_reduction_dictionary` mentions and constrains the
+characteristic-zero object, its conjugation, and the finite reduction map. The intended
+`K=Q(sqrt5)` identification and the Hilbert-90 transport are exact external C487 evidence rather
+than an unstated interpretation of a hand-defined finite function.
+
+## Public gate
+
+The import gate is `RelativeConicArcs.Gates.ClebschTorsorRosetta`. It audits:
 
 1. `RelativeConicArcs.ClebschTorsorRosetta.no_invariant_point`
 2. `RelativeConicArcs.ClebschTorsorRosetta.point_or_swapped_point`
-3. `RelativeConicArcs.ClebschTorsorRosetta.retag_intertwines_swap`
-4. `RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_signTorsor`
-5. `RelativeConicArcs.ClebschTorsorRosetta.three_readout_dictionaries`
+3. `RelativeConicArcs.ClebschTorsorRosetta.splitRoot_values`
+4. `RelativeConicArcs.ClebschTorsorRosetta.pairedParentSwap_exchanges_sheets`
+5. `RelativeConicArcs.ClebschTorsorRosetta.fixedChildQuotient_is_t11`
 6. `RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_three_readouts`
-7. `RelativeConicArcs.ClebschTorsorRosetta.one_sign_character_with_named_kernel`
-8. `RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation_row`
-9. `RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary`
-10. `RelativeConicArcs.ClebschTorsorRosetta.q11_three_outer_readouts`
-11. `RelativeConicArcs.ClebschTorsorRosetta.q11_hadamard_hinge_is_forced_outer`
-12. `RelativeConicArcs.ClebschTorsorRosetta.torsor_rosetta_closing_theorem`
+7. `RelativeConicArcs.ClebschTorsorRosetta.rankThree_split_inert_orientation`
+8. `RelativeConicArcs.ClebschTorsorRosetta.q11_outer_readouts_agree`
+9. `RelativeConicArcs.ClebschTorsorRosetta.q11_hadamard_hinge_is_forced_outer`
+10. `RelativeConicArcs.ClebschTorsorRosetta.golden_characteristic_zero_reduction_dictionary`
+11. `RelativeConicArcs.ClebschTorsorRosetta.torsor_rosetta_closing_theorem`
 
-The aggregate theorem contains six blocks:
+The aggregate theorem takes all four semantic certificates explicitly and includes every one of
+the five required rows: fixed-child quotient, three-character equality/kernel, rank-three
+split/inert models, q=11 outer readouts plus finite no-inner boundary, and characteristic-zero
+golden reduction.
+
+## External evidence, hashes, and replay
+
+The semantic certificate fields are supplied by the following exact bundles. Hashes below are the
+current SHA-256 values of their canonical JSON files.
+
+| semantic input | canonical certificate and SHA-256 | replay command |
+|---|---|---|
+| affine/Čech obstruction | `notes/2026-07-23-c417-affine-cocycle-line-bundle.json`, `524ef0b1d8c0ba773ac8bdc3ed2763999be703d1272adf5365746997201b9786` | `python3 notes/2026-07-23-c417-affine-cocycle-line-bundle-replay.py` |
+| selector obstruction | `notes/2026-07-21-c448-orbit-valued-selector.json`, `02f8d75f4972732126fe583510cc6ef99e090cf4c1f1133a97e3d89de2ee1233` | `python3 notes/2026-07-21-c448-orbit-valued-selector.py --check` |
+| arithmetic orientation | `notes/2026-07-22-c473-arithmetic-orientation.json`, `0f7c8e94d68640d85e8a91c1b973b5e12e728a568742fa4334a20af7b8834765` | `python3 notes/2026-07-22-c473-arithmetic-orientation-replay.py` |
+| fixed-child fibre | `notes/2026-07-22-c474-reed-solomon-decorated-deep-holes.json`, `02cb69e2d26deb9f9ab8c2953de4fa244f45d1f190336ac075f3a5c6fdffd8b1` | `python3 notes/2026-07-22-c474-reed-solomon-decorated-deep-holes-replay.py` |
+| design/Fourier/outer hinge | `notes/2026-07-22-c480-close-gap-certificates.json`, `08a89e884b1b1a6bdc0ebd6ddf64375bd6d75feb5ab4324d40228d3e50bce942` | `python3 notes/2026-07-22-c480-close-gap-certificates-replay.py` |
+| torsor bridge and trichotomy | `notes/2026-07-22-c486-close-upgrade-battery.json`, `3e009659a78b9a282357f833dc1b9af98a557d9034a76f7d0e9116fdf4eb480f` | `python3 notes/2026-07-22-c486-close-upgrade-battery-replay.py` |
+| characteristic-zero row | `notes/2026-07-22-c487-char-zero-realization-row.json`, `65e8067ba69a993a1d54044de4f76719192f7ad10ae154331cb6267d3049fee3` | `python3 notes/2026-07-22-c487-char-zero-realization-row-replay.py` |
+
+Each adjacent `.sha256` manifest checks its complete primary/replay/report bundle. These dated
+paths are current project evidence, not referee-facing Lean artifacts. C320 must either pin them
+as exact external evidence or migrate adopted semantic data into stable workflow-free verification
+paths before the paper artifact is cut.
+
+The imported C503 stable finite source is under
+`lean/verification/clebsch_arithmetic_gluing/`, with generator `generate.py`, canonical
+`source.json`, normalized `certificate.json`, and `manifest.sha256`. Its checker command is:
 
 ```text
-fixed child ≃ determinant-sign torsor
-three obstruction/readout dictionaries and no fixed point
-rank-three split/inert finite reduction row
-design/Fourier/Hadamard swap dictionaries
-forced-outer row/column boundary
-golden quadratic reduction dictionary.
+python3 lean/verification/clebsch_arithmetic_gluing/generate.py --check
+(cd lean/verification/clebsch_arithmetic_gluing && sha256sum -c manifest.sha256)
 ```
-
-The separate abstract character terminals are intentionally not hidden inside the finite
-conjunction: a concrete classical `PGL/PSL` identification requires a named group action and
-subgroup supplied by the cited input. Given that input, the theorem proves all three readout
-homomorphisms equal and proves their common kernel is the supplied subgroup.
-
-## Source evidence and exact certificate boundary
-
-No new normalized certificate is required. The owned data module contains only ten tagged copies
-of `Fin 2`, their swaps, explicit retagging equivalences, and the two literal roots in `ZMod 11`.
-All of those data are transparent and checked by Lean.
-
-The semantic sources are:
-
-| source | consumed conclusion | route in this gate |
-|---|---|---|
-| C417 | base-point obstruction has a two-sheet sign shadow and no equivariant origin | external exact certificate; represented by the tagged Čech carrier and abstract no-fixed-point theorem |
-| C448 | the selector obstruction costs one bit on a freely swapped two-fibre | deductive selector lemma plus external q=11 identification; represented by the tagged selector carrier |
-| C473 | determinant-square sign, sheets, split primes, and lower constituents form one torsor | external exact certificate; abstract equal-kernel theorem checks the character comparison once the actions are supplied |
-| C474/C486 L1 | q=11 fixed-child 22-parent fibre has a `11+11` quotient identified with the golden matching torsor | external exact conic/signature replay; Lean checks the resulting tagged torsor equivalence |
-| C480 A1/A2 | design polarity and signed Fourier sector carry the same outer swap | external exact finite certificate; Lean checks both displayed two-point equivariance squares |
-| C504/C480 F | row/column hinge has no inner realization | full imported Lean native terminal over the checked 95,040-element closure |
-| C486 L3/C503 | inert row at 5 and split rows at 7 and 11 | exact imported Lean root/no-root terminals; Coxeter/spin interpretation remains cited input |
-| C487 | the golden descent involution reduces to the two sheets at 11 | external exact descent certificate; Lean checks roots `8,4` and the complete `r -> 1-r` finite dictionary |
-
-The C504 terminal proves a finite group-action boundary, not a Mathieu naming theorem. In
-particular the gate says that the displayed row/column generator assignment is an automorphism
-graph, has the checked inner square, and has no inner conjugating witness in the finite closure.
-The classical `M12`, `M11`, and normalizer names remain cited inputs.
-
-The characteristic-zero wording is similarly exact: Lean does not construct a number field or
-absolute Galois torsor. It checks that the two finite golden roots are `8` and `4`, that the
-involution exchanges them by `r -> 1-r`, and that the reduction carrier maps equivariantly to the
-sign carrier. C487's exact rational descent and Hilbert-90 replay supplies the identification of
-the source as `Spec Q(sqrt5)`.
 
 ## Trust and exclusion ledger
 
-| claim | final route |
+| claim | route |
 |---|---|
-| reusable free two-point torsor and equivariant-map API | full-trust Lean |
-| no invariant point on a free torsor | full-trust Lean |
-| one bit suffices to select either a point or its swapped partner | full-trust Lean |
-| every displayed retagging intertwines the swap | full-trust Lean |
-| equal-kernel actions on `Fin 2` are one character | full-trust Lean, reusing the F8 theorem |
-| common kernel equals a supplied named subgroup | full-trust conditional theorem; the concrete classical subgroup identification is cited input |
-| A3 finite inert check at 5 | full-trust imported Lean |
-| B3/H3 finite split checks at 7/11 | full-trust imported Lean |
-| interpretation as connected spin marker/free Coxeter sheets | exact certificate plus cited number-field/spin input |
-| fixed-child quotient is `T_11` | external exhaustive conic/signature certificate; Lean checks the resulting torsor dictionary |
-| Čech, selector, and determinant sign are the same concrete class | external finite action maps plus full-trust equal-kernel theorem |
-| design and signed Fourier swaps agree | external exact certificate; Lean checks the two-point dictionary |
-| row/column hinge is forced outer in the checked degree-twelve closure | imported native Lean terminals |
-| `M12/M11/PSL_2/PGL_2` names and self-normalizer interpretation | cited-input boundary |
-| golden roots and finite reduction swap | full-trust Lean |
-| source of the reduction is `Spec Q(sqrt5)` | external exact rational-descent certificate and standard number-field interpretation |
-| absolute Galois classification, integral cubic, all-prime trichotomy, genuine-Weil restriction, `PGL_2(11) < M12` | excluded |
+| free-`C2` API, zero-bit obstruction, one-bit sufficiency | full-trust Lean |
+| B3/H3 root carriers and swaps | full-trust Lean over explicit subtypes |
+| A3 no root and one geometric Frobenius orbit | imported/full-trust finite Lean; quadratic-algebra interpretation cited |
+| fixed-child quotient is the sign torsor | full-trust consequence of `FixedChildCertificate`; certificate populated by C474/C486 replay |
+| one sign character and common kernel | full-trust consequence of `SignCharacterCertificate`; concrete actions/kernel populated by C417/C448/C473/C486 |
+| design/Fourier/Hadamard swaps | full-trust consequence of `Q11OuterReadoutCertificate`; concrete maps populated by C480 |
+| finite row/column assignment and no inner witness | imported native Lean terminals |
+| `M11/M12/PGL_2/PSL_2` classical names | cited-input boundary |
+| characteristic-zero degree-two golden field and reduction | full-trust consequence of `GoldenCharacteristicZeroCertificate`; concrete field/descent data populated by C487 |
+| absolute `H^1`, universal all-prime theorem, integral cubic, uniform period-to-cubic rule, genuine-Weil restriction, `PGL_2(11)<M12` | excluded |
 
-The owned modules contain no `sorry`, project-local axiom, opaque oracle, generated code, JSON
-reader, or ad hoc native computation. The only native-decision dependencies arise through the
-imported C504 closure terminals and remain visible in the gate axiom audit.
+## Initial independent review and repairs
+
+The user-launched independent reviewer returned `NO-GO` with one critical, six major, and one
+minor finding.
+
+1. **Current build failure:** replaced the removed upstream assignment theorem with
+   `row_column_assignment_finite_graph_certificate`; current direct elaboration is green.
+2. **Tautological fixed-child/readout tags:** removed all phantom tags and retagging maps.
+   Fixed-child and q=11 readouts now require actual carriers and explicit semantic certificates.
+3. **Character row absent from the close:** introduced `SignCharacterCertificate` and made its
+   equality/kernel conclusion a conjunct of the aggregate theorem.
+4. **Disconnected rank-three facts:** B3/H3 carriers are now the actual polynomial-root subtypes,
+   with explicit equivariant torsor equivalences; A3 records no rational root and one geometric
+   Frobenius orbit.
+5. **Hadamard swap disconnected from forced outer:** the q=11 certificate now designates its
+   `hadamardSwap` as the externally certified row/column readout; the aggregate consumes that
+   certificate alongside the exact finite no-inner terminal.
+6. **No characteristic-zero object:** added the degree-two generated field, conjugation, and
+   reduction equivalence to the formal certificate and theorem type.
+7. **Imprecise trust/C320 route:** added exact artifacts, current hashes, replay commands, imported
+   theorem names, and the stable C503 verification path.
+8. **Undocumented public tags:** all ten tags were deleted; every remaining public declaration has
+   an individual docstring.
+
+A user-launched post-fix review is required after final validation and commit.
 
 ## Judgment calls
 
-1. **Tagged rather than aliased carriers.** Using aliases of `Fin 2` would make every dictionary
-   true by definitional equality and contradict the theorem's stated boundary. Phantom-tagged
-   structures keep the carriers distinct while retaining a tiny transparent checker.
-2. **No duplicate finite certificate.** Re-encoding the 22 fixed-child signatures, rank-16
-   relations, or degree-twelve action would duplicate upstream owners and weaken provenance.
-   C505 checks only the Rosetta maps; semantic completeness remains with the hash-pinned upstream
-   bundles and the existing C503/C504 Lean gates.
-3. **Character theorem kept abstract.** The exact square-determinant kernel comparison is expressed
-   as a theorem parameterized by a group, three homomorphisms, and their common subgroup. This
-   avoids inferring the classical `PSL_2(q)` name from a finite cardinality or silently trusting a
-   generated action table.
-4. **Characteristic-zero source remains external.** Building a new number-field/descent library
-   would exceed the bounded finite task and would not internalize C459/C487's Hilbert-90 geometry.
-   The gate therefore proves the full mod-11 reduction dictionary and states the `Spec Q(sqrt5)`
-   source as an exact external row.
-5. **Forced outer means the proved finite boundary.** The formal statement is absence of an inner
-   conjugating witness for the checked row/column assignment. It does not promote the classical
-   Mathieu labels or assert a nonexistent `PGL_2(11)` embedding.
+1. **Certificate structures instead of axioms or duplicated tables.** External semantic maps are
+   explicit theorem parameters. This prevents Lean from claiming it reconstructed upstream
+   geometry while allowing it to check every downstream implication. Duplicating the 22-parent,
+   rank-16, or 95,040-element tables would violate upstream ownership.
+2. **Actual roots for the split rows.** Root subtypes connect splitting to the torsor carrier
+   definitionally and eliminate the earlier unrelated-cardinality defect.
+3. **Characteristic-zero field, finite reduction as evidence.** There is no ring homomorphism
+   `Q(sqrt5) -> F_11`; reduction passes through an integral model at a prime. The certificate
+   therefore records the characteristic-zero generated field and an equivariant labelling of its
+   two prime reductions by `GoldenRoot`, leaving Hilbert-90/integral transport to C487.
+4. **Classical group names remain external.** The formal kernel is a supplied subgroup and the
+   finite row/column result is stated on its literal closure. No abstract group name is inferred
+   from order.
 
-## Mystery ledger / extra-juice and Tao closeout
+## Mystery ledger / post-gate `ej`+`tt`
 
-- **Settled — how to prevent a tautological Rosetta theorem.** Distinct phantom-tagged carriers
-  force every comparison through an explicit equivalence and equivariance square.
-- **Settled by the post-gate `ej`+`tt` pass — exact one-bit sufficiency.** The reusable interface
-  now proves that relative to any point every target is either that point or its swapped partner;
-  together with the no-fixed-point theorem this captures the precise two-choice boundary instead
-  of relying on the carrier cardinality in prose.
-- **Settled — what “one class, three readouts” means formally.** On a two-sheet carrier, equality
-  of kernels forces equality of the permutation characters. The named-kernel theorem records the
-  exact common subgroup rather than merely comparing three booleans.
-- **Settled — where the A3 row differs.** The exact finite statement is no root in `F_5` and one
-  fused marker, versus two roots and a free two-point carrier at 7 and 11. The broader connected
-  étale and spin-language interpretation remains outside Lean.
-- **Settled — the strongest honest forced-outer statement.** C504 already proves the generator
-  assignment and exhaustive no-inner-witness result. C505 reuses that terminal instead of
-  rebuilding or overstating it as a classical group embedding theorem.
-- **Settled — what survives from characteristic zero in Lean.** The complete two-root reduction,
-  Galois-form involution `r -> 1-r`, and sheet dictionary are formal. The rational descent object
-  itself remains the exact C487 certificate boundary.
-- **No genuine bounded mathematical mystery remains.** The remaining gaps are deliberately named
-  semantic identifications or excluded generalizations, each assigned to the external evidence
-  row or C320 reconciliation rather than left unexplained.
+- **Settled by the post-gate pass — are the split carriers only abstractly two-element?** No.
+  `splitRoot_values` now exposes the literal field elements `{3,4}` and `{8,4}` in addition to
+  the torsor equivalences.
+- **Settled by the post-gate pass — does the fixed-child quotient prove the exact `11+11`
+  profile?** Yes. `fixedChildFiberEquiv` transports every actual fibre to the finite indexed
+  fibre, and `fixedChildQuotient_is_t11` proves both have cardinality eleven.
+- **Settled — what remains external?** The four certificate structures must still be populated
+  from the pinned semantic bundles. This is an explicit mixed-verification boundary, not an
+  unexplained theorem gap.
+- **No genuine bounded formal mystery remains.** Absolute cohomology, classical group naming,
+  Hilbert-90 transport, and integral reduction semantics are assigned external or excluded routes.
 
 ## Validation and axiom evidence
 
-Exact current-source validation:
+Exact repaired current-source validation:
 
-- definitions-only data module: green (`0:03.52`, peak 1,028,648 kB);
-- `RelativeConicArcs.ClebschTorsorRosetta`: green (`0:21.43`, peak 3,397,696 kB);
-- `RelativeConicArcs.Gates.ClebschTorsorRosetta`: green (`0:09.10`, peak
-  3,373,808 kB);
-- trace-only aggregate gate: passed;
-- the serialized runner's exact-target `--no-build` probes passed before each current build;
-- source/prose audit over all three owned Lean modules found no internal task ID, workflow status,
-  private path, agent/session reference, or unresolved status marker; and
-- `git diff --check` is clean on the four owned paths.
+- `RelativeConicArcs.ClebschTorsorRosettaData`: green (`0:04.39`, peak
+  1,751,616 kB);
+- guarded direct elaboration of `RelativeConicArcs/ClebschTorsorRosetta.lean`: green;
+- `RelativeConicArcs.ClebschTorsorRosetta`: green (`0:14.06`, peak
+  3,425,472 kB);
+- `RelativeConicArcs.Gates.ClebschTorsorRosetta`: green (`0:13.32`, peak
+  3,343,536 kB);
+- exact-target trace probes and the trace-only aggregate gate: passed; and
+- `git diff --check` plus the owned-module workflow/prose scan: clean.
 
-The gate audits twelve terminals. Two (`no_invariant_point`,
-`point_or_swapped_point`) use exactly `[propext, Quot.sound]`. Eight use exactly
-`[propext, Classical.choice, Quot.sound]`. The forced-outer terminal and aggregate closing theorem
-add exactly the two declaration-local native-decision axioms already exposed by C504:
+The repaired gate audits eleven terminals:
+
+- `no_invariant_point` and `point_or_swapped_point` use exactly
+  `[propext, Quot.sound]`;
+- seven terminals use exactly `[propext, Classical.choice, Quot.sound]`; and
+- `q11_hadamard_hinge_is_forced_outer` and `torsor_rosetta_closing_theorem`
+  additionally expose exactly:
 
 ```text
-row_column_assignment_is_automorphism_graph._native.native_decide.ax_1_1
-row_column_hinge_has_no_inner_witness._native.native_decide.ax_1_1
+row_column_assignment_finite_graph_certificate._native.native_decide.ax_1_1
+row_column_hinge_has_no_inner_witness._native.native_decide.ax_1_1.
 ```
 
 No terminal uses `sorryAx`, a project-local axiom, or an undisclosed opaque oracle.
 
 ## Referee-facing checklist
 
-- [x] Every owned public definition and theorem has a self-contained mathematical docstring.
-- [x] No Lean source mentions an internal task, lane, report, agent, session, private path, or
-      workflow status.
-- [x] No strength-bearing name claims more than its theorem type.
-- [x] Separate tagged carriers prevent definitional identification of distinct objects.
-- [x] Every computational statement names its finite domain and trust route.
-- [x] Imported native-decision dependencies are disclosed.
-- [x] Classical group and number-field semantic names remain explicit inputs.
-- [x] Absolute cohomology, all-prime, integral-cubic, genuine-Weil, and embedding claims are
-      excluded.
-- [x] Exact-target gate build is green.
-- [x] Gate terminal axiom output is recorded below.
-- [ ] User-launched independent referee review has returned `GO`.
-
-## Independent review
-
-Pending. Per the campaign protocol, the implementer does not select, spawn, simulate, or stand in
-for the reviewer. After the artifact, validation record, checklist, and proposed ledger delta are
-complete, the user should launch an independent Codex review. Any finding will be repaired or the
-claimed exit narrowed, followed by a user-launched post-fix review if the artifact changes.
+- [x] Every owned public declaration has a self-contained mathematical docstring.
+- [x] No owned Lean source mentions an internal task, lane, report, agent, session, or private path.
+- [x] Semantic bridges are explicit certificate inputs, not fresh tagged carriers.
+- [x] Split torsors use actual finite root subtypes.
+- [x] The character equality/kernel row occurs in the aggregate theorem.
+- [x] The characteristic-zero object and reduction equivalence occur in the theorem type.
+- [x] Exact external artifacts, hashes, replay commands, and imported theorem names are recorded.
+- [x] Repaired exact-target gate and trace-only aggregate are green.
+- [x] Repaired gate axiom output is recorded.
+- [ ] User-launched post-fix review returns final `GO`.
 
 ## Proposed C320 ledger delta
 
-Add one claim-level block for `RelativeConicArcs.Gates.ClebschTorsorRosetta`:
+At the repaired commit, add one claim-level block for
+`RelativeConicArcs.Gates.ClebschTorsorRosetta`:
 
-- **full-trust symbolic terminals:** free two-point torsor, no-fixed-point and exact one-bit
-  sufficiency theorems, torsor equivalences, all explicit two-point equivariance squares, and
-  equal-kernel character uniqueness;
-- **full-trust finite terminals:** A3 no-root row, B3/H3 root rows, golden reduction roots and
-  `r -> 1-r` swap;
-- **imported mixed terminal:** C504 row/column assignment and exhaustive no-inner-witness closure
-  check, retaining the gate's declaration-local native-decision axioms;
-- **external exact certificate/replay:** fixed-child signature to golden-matching bridge,
-  concrete Čech/selector/sign maps, design and Fourier identifications, and the rational
-  `Spec Q(sqrt5)` descent source;
-- **cited inputs:** classical `PSL_2/PGL_2/M11/M12` names, determinant-square kernel naming,
-  number-field splitting language, and Coxeter/spin interpretation;
-- **excluded:** absolute `H^1`, universal all-prime trichotomy, integral cubic carrier, uniform
-  period-to-cubic rule, signed genuine-Weil restriction, and `PGL_2(11) < M12`.
+- exact terminal list: the ten fully qualified declarations under **Public gate** above;
+- imported finite terminals:
+  `RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root`,
+  `RelativeConicArcs.ClebschArithmeticGluing.sheetCharacter_eq_of_kernel_eq`,
+  `RelativeConicArcs.ClebschWittHadamard.row_column_assignment_finite_graph_certificate`, and
+  `RelativeConicArcs.ClebschWittHadamard.row_column_hinge_has_no_inner_witness`;
+- full-trust local route: generic torsor deductions, explicit root subtypes and swaps, finite
+  22-parent quotient model, and consequences of the four certificate structures;
+- external certificate route: the seven exact JSON/hash/replay rows under **External evidence**;
+- stable finite source: `lean/verification/clebsch_arithmetic_gluing/`;
+- cited inputs: classical group names, the quadratic-algebra interpretation of the inert geometric
+  orbit, and the Hilbert-90/integral reduction semantics;
+- exclusions: absolute cohomology, all-prime classification, integral cubic, genuine-Weil, and
+  forbidden embedding claims; and
+- exact commit, axiom output, and verify-all entry point to be inserted after repaired validation.
