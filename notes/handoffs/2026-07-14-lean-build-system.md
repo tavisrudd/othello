@@ -119,3 +119,16 @@ pins for `finitegeom`, required certificate packages, the Lean toolchain, and sy
 Certificate packages are opt-in leaves: unused families are absent from that paper's inputs, lock
 graph, fetches, build closure, and validation targets; no portfolio-wide certificate umbrella is
 allowed.
+
+**Current C287 state (2026-07-23):** five `main`-branch workspaces exist under `~/src/lean/`:
+`finitegeom`, Q16 certificates, Q25 certificates, and separate ProjectiveCap Q11/Q13 certificate
+packages. Each has no commit and no remote, with only `.gitignore`, `flake.nix`, `flake.lock`, and
+the matching `lean-toolchain` staged. All pass `nix flake check --no-build`; none contains Lean
+source or Lake targets. No Lean/Lake command or process intervention was performed. The exact
+workspace list, nixpkgs pin, measured size gates, and payload blockers are recorded in the C287
+plan.
+
+**Next:** while existing Lean runs remain active, design manifests and classify dependencies
+read-only. Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13
+trust gates; do not elaborate or build until a confirmed quiet build-owner window. The first commits
+must include reviewed source manifests and public rewrites, not scaffold-only history.

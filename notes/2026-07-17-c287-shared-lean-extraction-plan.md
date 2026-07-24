@@ -1,8 +1,8 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: QUEUED; planning complete, execution not authorized
-**Requested destination**: `~/src/papers/lean`
+**Status**: IN PROGRESS; five local fresh-history workspaces scaffolded, source manifests pending
+**Local root**: `~/src/lean/`
 
 ## Outcome and boundary
 
@@ -23,6 +23,42 @@ closures of further papers. C287 owns manifests, extraction, builds, axiom audit
 validation, and artifact portability. C270 owns public repository identity, metadata,
 release/DOI/OEIS coordination, and any eventual user-authorized remote action. C287 does not create
 remotes, publish, or push; C270 does not copy sources or run builds.
+
+## Current local state — 2026-07-23
+
+The following `main`-branch Git workspaces exist:
+
+- `~/src/lean/finitegeom`
+- `~/src/lean/finitegeom-q16-certificates`
+- `~/src/lean/finitegeom-q25-certificates`
+- `~/src/lean/finitegeom-projective-cap-q11-certificates`
+- `~/src/lean/finitegeom-projective-cap-q13-certificates`
+
+Each has no commit and no remote. Exactly `.gitignore`, `flake.nix`, `flake.lock`, and
+`lean-toolchain` are staged. The toolchain matches the private source tree at
+`leanprover/lean4:v4.32.0-rc1`; the lockfiles pin nixpkgs
+`e2587caef70cea85dd97d7daab492899902dbf5d`. All five pass
+`nix flake check --no-build`. The flakes currently expose development shells only: no Lean source,
+Lake configuration, package dependency, build target, or flake check has been exported.
+
+No Lean or Lake command was run for this staging, and no active private-tree Lean run was inspected,
+stopped, restarted, or otherwise interrupted. Do not create an initial commit until the reviewed
+source manifest and public rewrites for that workspace are staged together.
+
+Certificate payload gates remain open:
+
+- C318 must define the Q25 trust surface.
+- C319 must decide verified canonicalizer versus reduction plus reproducible computation before the
+  Q25 payload shape is frozen.
+- C324 must complete clean pinned-toolchain regeneration before C287 copies frozen artifacts.
+- The Q16 generated families are currently recorded as `legacy-unverified` in
+  `lean/trust/PORTFOLIO.md`; staging a workspace does not promote that trust status.
+- ProjectiveCap Q11/Q13 need exact generator, checker, terminal, and gate classification before
+  their manifests are admitted.
+
+The next safe work while private-tree Lean runs remain active is read-only manifest design and
+dependency classification. Source export, regeneration, elaboration, and builds wait for their
+documented gates and a confirmed quiet build-owner window.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed
@@ -97,8 +133,9 @@ first-tag `FiniteGeom` + ProjectiveCap + CapGame upper bound, excluding `Project
   C-task references or host paths.
 - Compare the complete staged regular-file set with the manifest and scan staged bytes for private
   paths, credentials, internal hostnames, and monorepo-only references.
-- Initialize fresh Git history only after the source set and rewrites pass review. Attaching a
-  remote and pushing remain separate user-authorized actions.
+- The empty workspaces may remain Git-initialized, but create each root commit only after its source
+  set and rewrites pass review. Attaching a remote and pushing remain separate user-authorized
+  actions.
 
 ### 3. Validate public sources
 
