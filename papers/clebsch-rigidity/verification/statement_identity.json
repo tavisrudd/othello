@@ -144,9 +144,9 @@
       "id": "lem:chord-defect+lem:q9-polarity",
       "kind": "theorem-environment",
       "row": 24,
-      "sha256": "93886b22d42886dbe86130275ef0e47c94b47eb2c0bec93c53bfba79e1837455",
+      "sha256": "216365a4ac620a5360b482b63cf501ab17b13dce14737fd3dfd237484f46c427",
       "source_line": 949,
-      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\]\nand\n\\[\n 0\\le t(A)\\le\n 3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\nIf merely $|\\cU(A)|=q+1$, then\n\\[\n q<\\binom{k}{2}.\n\\]\nFor $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,\nso\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad 0\\le c(A)\\le15.\n\\]\nConsequently, if $|\\cU(A)|=q+1$, then\n\\[\n c(A)=(q-6)(q-9).\n\\]\n\\end{theorem}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
+      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\]\nand\n\\[\n 0\\le t(A)\\le\n 3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\nIf merely $|\\cU(A)|=q+1$, then\n\\[\n t(A)=q^2-mq+m+3\\binom{k}{4}-k\n\\]\nand hence\n\\[\n q^2-mq+m-k+\\frac{6}{r}\\binom{k}{4}\\le0;\n\\]\nin particular,\n\\[\n q<\\binom{k}{2}.\n\\]\nFor $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,\nso\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad 0\\le c(A)\\le15.\n\\]\nConsequently, if $|\\cU(A)|=q+1$, then\n\\[\n c(A)=(q-6)(q-9).\n\\]\n\\end{theorem}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
       "title": "Universal chord defect; $q=9$ polarity graph"
     },
     {
@@ -155,7 +155,7 @@
       "kind": "theorem-environment",
       "row": 25,
       "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933",
-      "source_line": 1044,
+      "source_line": 1054,
       "tex": "\\begin{theorem}[Uniqueness of $q=11$]\n\\label{thm:why11}\nLet $q$ be a prime power. If a six-arc $A\\subset\\PG(2,q)$ satisfies\n$\\cU(A)=\\cC(\\F_q)$ for some nonsingular conic $\\cC$, then $q=11$.\nAt $q=11$ every such $A$ is projectively equivalent to the\nClebsch hexagon.\n\\end{theorem}",
       "title": "Uniqueness of $q=11$"
     },
@@ -165,7 +165,7 @@
       "kind": "theorem-environment",
       "row": 26,
       "sha256": "314d254fbf78b34c2ba3bb2453f810017225e88ee23feb52cd2c38d80d024c3d",
-      "source_line": 1079,
+      "source_line": 1089,
       "tex": "\\begin{proposition}[The Clebsch-family uncovered formula]\n\\label{prop:clebsch-family-uncovered}\nLet $K$ be a Clebsch hexagon over $\\F_q$. Then\n\\[\n |\\cU(K)|=q^2-14q+45.\n\\]\nIf $q\\equiv3\\pmod4$ and $\\cC$ is Dye's associated conic, then\n$\\cC(\\F_q)\\subseteq\\cU(K)$ and\n\\[\n |\\cU(K)\\setminus\\cC(\\F_q)|=(q-4)(q-11).\n\\]\nIn particular, among Clebsch hexagons in this congruence class, the\nassociated conic is the complete projective deep-hole syndrome locus if and\nonly if $q=11$.\n\\end{proposition}",
       "title": "The Clebsch-family uncovered formula"
     },
@@ -175,7 +175,7 @@
       "kind": "theorem-environment",
       "row": 29,
       "sha256": "edd781a0e473f7e85c8aadb75e682db903119693fd26a860affa895144f64ed7",
-      "source_line": 1135,
+      "source_line": 1145,
       "tex": "\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. If $k\\le7$, then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur. If $k=8$, then\n\\[\n q\\in\\{13,16,17,19\\}.\n\\]\n\\end{theorem}",
       "title": "Conic-filling loci through eight points"
     },
@@ -190,5 +190,5 @@
   ],
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "574b5e11a991429abd23205805b28daa452f15bd7d2a63660d3ef3c93c91b024"
+  "source_sha256": "dc7af4cf98816d356578771de7ebdc7337550e8611719a8e76f04ab0f904922f"
 }

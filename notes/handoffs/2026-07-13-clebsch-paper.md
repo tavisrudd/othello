@@ -27,8 +27,9 @@ the active Paper I archive/release task. A later editorial review's
 Dye-bound rigor clarification and presentation findings are repaired on
 current `main`. A subsequent elevation pass replaces four separate
 small-arc counts by a universal chord-defect theorem, proves
-$|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$, classifies conic filling
-through seven points, and reduces the eight-point case to
+$|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$ together with a sharper
+quadratic field-size barrier, classifies conic filling through seven
+points, and reduces the eight-point case to
 $q\in\{13,16,17,19\}$ while cutting a page of non-feeding census material.
 
 The remaining C182 blocker is external publication packaging. The previously

@@ -938,7 +938,7 @@
       "source": {
         "id": "lem:chord-defect+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "93886b22d42886dbe86130275ef0e47c94b47eb2c0bec93c53bfba79e1837455"
+        "sha256": "216365a4ac620a5360b482b63cf501ab17b13dce14737fd3dfd237484f46c427"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity and bound; Lean checks its six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -1020,7 +1020,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1044",
+      "paper_location": "source line 1054",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1098,7 +1098,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1079",
+      "paper_location": "source line 1089",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1198,7 +1198,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1135",
+      "paper_location": "source line 1145",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1260,9 +1260,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "a2db8b03867dacdd86e03520eeb30e6f6f70dc19186608ba364fc747e5843bdb"
+    "sha256": "924fd13ae73d544d551d6e266db5c0aba654bb3a322e254520345be45436f669"
   },
-  "manuscript_sha256": "574b5e11a991429abd23205805b28daa452f15bd7d2a63660d3ef3c93c91b024",
+  "manuscript_sha256": "dc7af4cf98816d356578771de7ebdc7337550e8611719a8e76f04ab0f904922f",
   "public_documents": [
     {
       "path": "README.md",
@@ -1302,7 +1302,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "2e593379912f5bca09b6e694ea5081c4c692d03be71c1f2dff231a04790849f1"
+    "sha256": "2caf5c67a2b2677798892228c75d3d9f8b791f0ac8a2c776d9af7169802f427b"
   },
   "verify_all": {
     "checker_output_certificate": {
