@@ -1,0 +1,737 @@
+{
+  "bounded_controls": [
+    {
+      "PGL2_order": 504,
+      "complete_projective_8_subset_scan": true,
+      "m": 3,
+      "modulus_hex": "0xb",
+      "orbits": [
+        {
+          "kind": "graph",
+          "orbit_size": 9,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x1",
+              "0x0",
+              "0x0",
+              "0x0",
+              "0x0",
+              "0x0",
+              "0x0",
+              "0x1",
+              "0x0"
+            ],
+            "roots_hex": [
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x5",
+              "0x6",
+              "0x7",
+              "inf"
+            ]
+          },
+          "stabilizer_order": 56
+        },
+        {
+          "kind": "rank1_off_graph",
+          "orbit_size": 72,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x0"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x5",
+              "0x6",
+              "0x7",
+              "inf"
+            ]
+          },
+          "stabilizer_order": 7
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 84,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x4",
+              "0x6",
+              "0x5",
+              "0x2",
+              "0x3",
+              "0x7",
+              "0x1",
+              "0x0"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x5",
+              "0x6",
+              "inf"
+            ]
+          },
+          "stabilizer_order": 6
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 168,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x2"
+          ],
+          "split_squarefree_witness": null,
+          "stabilizer_order": 3
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 252,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x1",
+              "0x0"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x5",
+              "0x6",
+              "0x7",
+              "inf"
+            ]
+          },
+          "stabilizer_order": 2
+        }
+      ],
+      "projective_tensor_points": 585,
+      "q": 8,
+      "split_free_orbit_count": 1,
+      "subsets_tested_until_all_orbits_witnessed": 9
+    },
+    {
+      "PGL2_order": 4080,
+      "complete_projective_8_subset_scan": false,
+      "m": 4,
+      "modulus_hex": "0x13",
+      "orbits": [
+        {
+          "kind": "graph",
+          "orbit_size": 17,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x9",
+              "0x0",
+              "0x0",
+              "0x0",
+              "0xb",
+              "0x0",
+              "0xe",
+              "0xd",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x7",
+              "0x9",
+              "0xb",
+              "0xc"
+            ]
+          },
+          "stabilizer_order": 240
+        },
+        {
+          "kind": "rank1_off_graph",
+          "orbit_size": 272,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xb",
+              "0x1",
+              "0x5",
+              "0x2",
+              "0xb",
+              "0x1",
+              "0x6",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x7",
+              "0x9",
+              "0xc"
+            ]
+          },
+          "stabilizer_order": 15
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 68,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xa",
+              "0x4",
+              "0x0",
+              "0xd",
+              "0xc",
+              "0xa",
+              "0x4",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x7",
+              "0xa",
+              "0xd"
+            ]
+          },
+          "stabilizer_order": 60
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 816,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x2"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x4",
+              "0xc",
+              "0xc",
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x6",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x6",
+              "0xa",
+              "0xe"
+            ]
+          },
+          "stabilizer_order": 5
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 816,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x4"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xa",
+              "0x9",
+              "0xe",
+              "0x5",
+              "0xd",
+              "0xb",
+              "0xf",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x5",
+              "0xb",
+              "0xc",
+              "0xd"
+            ]
+          },
+          "stabilizer_order": 5
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 1020,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x2"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x7",
+              "0xb",
+              "0x8",
+              "0xe",
+              "0x7",
+              "0x0",
+              "0xc",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x6",
+              "0xb",
+              "0xe",
+              "0xf"
+            ]
+          },
+          "stabilizer_order": 4
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 1360,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x6",
+              "0x6",
+              "0x1",
+              "0x1",
+              "0x7",
+              "0x1",
+              "0x7",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x6",
+              "0x7",
+              "0xa",
+              "0xc"
+            ]
+          },
+          "stabilizer_order": 3
+        }
+      ],
+      "projective_tensor_points": 4369,
+      "q": 16,
+      "split_free_orbit_count": 0,
+      "subsets_tested_until_all_orbits_witnessed": 7
+    },
+    {
+      "PGL2_order": 32736,
+      "complete_projective_8_subset_scan": false,
+      "m": 5,
+      "modulus_hex": "0x25",
+      "orbits": [
+        {
+          "kind": "graph",
+          "orbit_size": 33,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x1c",
+              "0x0",
+              "0x0",
+              "0x9",
+              "0x0",
+              "0x10",
+              "0x1e",
+              "0x1a",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x5",
+              "0x6",
+              "0xc",
+              "0x11"
+            ]
+          },
+          "stabilizer_order": 992
+        },
+        {
+          "kind": "rank1_off_graph",
+          "orbit_size": 1056,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x0"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xe",
+              "0xa",
+              "0x9",
+              "0x16",
+              "0xe",
+              "0xa",
+              "0x1e",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x6",
+              "0xa",
+              "0x16"
+            ]
+          },
+          "stabilizer_order": 31
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 5456,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x7"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xc",
+              "0x0",
+              "0x2",
+              "0x11",
+              "0x19",
+              "0x7",
+              "0x1",
+              "0x0"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0x8",
+              "0xb",
+              "inf"
+            ]
+          },
+          "stabilizer_order": 6
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 10912,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x1",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0xa",
+              "0x1c",
+              "0x15",
+              "0xc",
+              "0x12",
+              "0x18",
+              "0x4",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0xa",
+              "0x16",
+              "0x1c"
+            ]
+          },
+          "stabilizer_order": 3
+        },
+        {
+          "kind": "rank2",
+          "orbit_size": 16368,
+          "representative_hex": [
+            "0x1",
+            "0x0",
+            "0x0",
+            "0x1"
+          ],
+          "split_squarefree_witness": {
+            "coefficients_low_to_high_hex": [
+              "0x0",
+              "0x3",
+              "0x2",
+              "0x2",
+              "0x2",
+              "0x1",
+              "0x3",
+              "0x2",
+              "0x1"
+            ],
+            "roots_hex": [
+              "0x0",
+              "0x1",
+              "0x2",
+              "0x3",
+              "0x4",
+              "0xd",
+              "0x10",
+              "0x1b"
+            ]
+          },
+          "stabilizer_order": 2
+        }
+      ],
+      "projective_tensor_points": 33825,
+      "q": 32,
+      "split_free_orbit_count": 0,
+      "subsets_tested_until_all_orbits_witnessed": 5
+    }
+  ],
+  "field_characteristic": 2,
+  "geometric_strata": [
+    {
+      "arithmetic": "shallow for every q=2^m, m>=3 (C530)",
+      "closure": "closed",
+      "dimension": 1,
+      "name": "Frobenius graph",
+      "stabilizer": "Borel"
+    },
+    {
+      "arithmetic": "shallow for every q=2^m, m>=3 by reciprocal subspace polynomial",
+      "closure": "adds the Frobenius graph",
+      "dimension": 2,
+      "name": "rank-one off graph",
+      "stabilizer": "split torus"
+    },
+    {
+      "arithmetic": "nonconstant Artin-Schreier C2 layer; global deepness unresolved",
+      "closure": "adds the full rank-one quadric",
+      "dimension": 3,
+      "name": "rank two",
+      "stabilizer": "PGL2(F4)"
+    }
+  ],
+  "rank_two_rational_twists": {
+    "m_even": {
+      "centralizer_orders": [
+        60,
+        4,
+        3,
+        5,
+        5
+      ],
+      "classes": [
+        "1A",
+        "2A",
+        "3A",
+        "5A",
+        "5B"
+      ],
+      "coefficient_Frobenius": "fixes 1A,2A,3A and swaps 5A,5B"
+    },
+    "m_odd": {
+      "centralizer_orders": [
+        6,
+        3,
+        2
+      ],
+      "classes": [
+        "transposition-twisted",
+        "(2)(3)-twisted",
+        "4-cycle-twisted"
+      ]
+    }
+  },
+  "rank_two_six_root_normalization": {
+    "A": [
+      "A0=h0+h3",
+      "A1=h1+h4",
+      "A2=h2+h5",
+      "A3=h3+1"
+    ],
+    "Delta": "A1*A3+A2^2",
+    "Np": "A1^2+A0*A2",
+    "Ns": "A0*A3+A1*A2",
+    "artin_schreier_rhs": "Np*Delta/Ns^2",
+    "geometric_deck_group": "C2",
+    "kernel_equations": [
+      "b2+b5=0",
+      "b3+b6=0"
+    ],
+    "p": "Np/Delta",
+    "rational_lift": "Tr_Fq/F2(Np*Delta/Ns^2)=0",
+    "representative": "e3+e6",
+    "residue_on_Ns": "Delta^2*A1/A3",
+    "s": "Ns/Delta"
+  },
+  "representation": {
+    "action_target_support": {
+      "2": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "3": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "4": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "5": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "6": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "7": [
+        2,
+        3,
+        6,
+        7
+      ]
+    },
+    "carrier_basis": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "invariant_tensor_block": [
+      2,
+      3,
+      6,
+      7
+    ],
+    "quotient_identity": "M/U = det^4 tensor E",
+    "rank_one_graph": "[u^(4) tensor u] for [u] in P1",
+    "rank_two_geometric_stabilizer": "PGL2(F4), order 60",
+    "rank_two_representative": "e3+e6 (alternating matrix J)",
+    "tensor_identity": "U = det^2 tensor (E^(4) tensor E); A -> det(g)^2 g^(4) A g^T"
+  },
+  "schema": "c531-degree-nine-lucas-carrier-strata-v1"
+}

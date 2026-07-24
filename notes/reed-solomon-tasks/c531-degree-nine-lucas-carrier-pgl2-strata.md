@@ -1,6 +1,6 @@
 # C531 — degree-nine Lucas-carrier \(PGL_2\) strata
 
-**Lane:** `reed-solomon` · **Status:** queued after C530
+**Lane:** `reed-solomon` · **Status:** complete at the nonconstant-cover/positive-moduli stop
 
 ## Objective
 
@@ -14,6 +14,13 @@ positive-dimensional quotient until the smaller strata and C530's \(e_7\) orbit 
 
 Eventual report:
 `notes/2026-07-23-c531-degree-nine-lucas-carrier-pgl2-strata.md`.
+
+## Outcome
+
+The invariant tensor block has exactly three geometric strata.  Both rank-one strata are
+uniformly shallow; the rank-two stratum has finite \(A_5\)-twist classes but a geometrically
+integral nonconstant Artin--Schreier root cover.  The complementary carrier quotient has dimension
+two.  These are the task's exact authorized obstruction boundaries.
 
 ## Entry gate
 

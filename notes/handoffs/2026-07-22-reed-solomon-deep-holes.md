@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, C538--C544 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C531, C538--C544 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -60,8 +60,12 @@ the effective contained/transverse engine, exact R6/R7 thresholds and orbit arit
 checked finite-summary bridges; C542 closes redundancy eight; C543 checks the characteristic-two
 Hessian/Lucas modular layer and its distinguished degree-nine endpoint boundary; C544 closes the
 103-terminal aggregate audit, exact paper import gate, and 47-label manuscript reconciliation.
-C531 still owns the remaining intrinsic degree-nine carrier
-strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
+C531 closes the finite intrinsic degree-nine carrier strata.  The invariant tensor block has
+Frobenius-graph, off-graph rank-one, and rank-two \(A_5\)-stabilized strata; both rank-one strata
+are shallow over every admissible field.  Rank two has an exact nonconstant Artin--Schreier root
+cover and one split-free q=8 twist outside the coding range, while every tensor-block orbit at
+q=16,32 has a certified witness.  The carrier complement has a two-dimensional quotient.  C532's
+entry gate is green with both residues explicit, but neither task is a manuscript or preprint gate.
 C533 independently owns C525 threshold/deletion sharpening.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
 Characteristic-two Hessian--Arf functoriality and coherent modular polar flags survive as
@@ -675,8 +679,8 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
 | C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; C530 owns quotient-cover arithmetic |
 | C530 | degree-nine `e_7` quotient cover | complete (obstruction exit) | nonconstant Artin--Schreier normalization; `AGL_3(F2)` additive subcover; orbit shallow over every admissible field | exact distinguished-orbit arithmetic | closed `e_7` theorem boundary |
-| C531 | full degree-nine Lucas-carrier strata | deferred behind C538/C545 paper spine | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
-| C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
+| C531 | full degree-nine Lucas-carrier strata | complete (obstruction exit) | tensor filtration; three finite geometric strata; uniform rank-one shallowness; rank-two \(A_5\) twists plus nonconstant Artin--Schreier cover; two-dimensional complement quotient | exact carrier theorem boundary |
+| C532 | PRS redundancy-ten synthesis | queued; C531 gate green | explicit degree-nine carrier boundary | effective high-field deep set, threshold, and orbit law with honest residues | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
@@ -720,9 +724,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
   C530 closes the distinguished `e_7` quotient: a nonconstant Artin--Schreier generic layer and
   larger `AGL_3(F2)` additive cover make that full orbit shallow over every admissible field.
-  C531 owns extension to other intrinsic `PGL2` normal forms, and C532 owns the resulting
-  redundancy-ten synthesis.  C533 separately sharpens C525's bound.  No ambient census substitutes
-  for any of these calculations.
+  C531 closes the finite tensor-block strata and stops at the rank-two nonconstant
+  Artin--Schreier cover and the complementary two-dimensional quotient.  C532 owns the resulting
+  redundancy-ten synthesis with those residues visible.  C533 separately sharpens C525's bound.
+  No ambient census substitutes for any of these calculations.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -750,8 +755,9 @@ history.
 
 ## Next command
 
-`go C545`
+`go C532`
 
-(C544 has closed the aggregate formal and manuscript-reconciliation gate. Continue C545 with the
-independent final reader, clean paper-only replay/export, immutable public identifiers, and
-author/account confirmation. No external upload is authorized.)
+(C531 has closed the finite carrier-stratum gate. C532 should determine the strongest honest
+redundancy-ten synthesis before any new carrier-cover task is allocated. C545 remains externally
+blocked on its final reader, clean export/replay, immutable identifiers, and author/account
+confirmation. No external upload is authorized.)
