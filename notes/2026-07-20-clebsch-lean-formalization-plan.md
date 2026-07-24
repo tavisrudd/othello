@@ -4,8 +4,13 @@
 
 **Date:** 2026-07-20
 
-**Status:** C420--C427 complete; C428, C494, and C503--C507 queued; C320 remains the
-release-blocking reconciliation capstone
+**Split status (2026-07-24):** retained as the formalization inventory for
+the preserved mega-paper and possible Paper II/III inputs. C320 now closes
+only focused Paper I's nineteen-row surface; no replacement-spine terminal
+enters Paper I unless C575 assigned its claim there.
+
+**Historical status:** C420--C427 complete; C428, C494, and C503--C507 were
+the mega-paper reconciliation campaign.
 
 ## Decision and scope
 

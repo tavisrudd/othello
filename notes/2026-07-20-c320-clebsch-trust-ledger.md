@@ -2,36 +2,60 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; user-launched independent review returned `NO-GO`; repair and post-fix review required
+**Status:** queued; active scope reset to focused Paper I after C576 `GO`
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
 determines which Clebsch paper statements may be labelled Lean-formalized, certificate/replay-backed,
 conceptual/citation-backed, or mixed.
 
-## Early-start authorization and current boundary
+## Authoritative current scope — Paper I only
 
-On 2026-07-23 the user explicitly authorized C320 to begin while C507 was underway, with the C505
-and C507 results to be admitted when ready.  This overrides the start-order gate but not the
-release gate.  Both slices have now delivered final reviewed implementations and are admitted
-below.  The replacement-spine manuscript, stable public evidence bundles, complete claim manifest,
-tracked aggregate paper audit, and deterministic adequacy appendix have now landed.  C320 remains
-live through feedback-driven repair, a fresh clean-release output, and the mandatory user-launched
-post-fix review.
+C576 superseded the former mega-paper release path. The active manuscript is
+`papers/clebsch-rigidity/clebsch_rigidity.tex`, a 19-page focused rigidity
+candidate. C320 must construct and review a new Paper I surface from exactly
+the nineteen C575 rows `2, 11--26, 29, 58`.
 
-The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is now the replacement-spine
-manuscript described by `notes/2026-07-21-clebsch-paper-abstract-outline.md`; the historical
-19-page baseline is no longer the release manuscript.  The manifest derives its identities from
-the final manuscript itself: 28 theorem-like environments and 33 separately hashed theorem-clause
-or prose/table claims produce 61 exact claim rows.  No claim inherits a trust route merely because a related
-terminal exists.
+Required inputs:
 
-The repaired C507 implementation `9a388b41` plus its final user-launched review `GO` provide the
-exact admission boundary below.  Its lifecycle closure is committed, its live-queue row is absent,
-and its handoff records the final boundary.  C320 corrected one stale report-header status line
-that still said “queued task brief”; no source, evidence, or review content changed.
+- `notes/2026-07-24-c575-clebsch-split-disposition.md`;
+- `notes/2026-07-24-c575-clebsch-trust-disposition.csv`;
+- `notes/2026-07-24-c576-clebsch-rigidity-candidate.md`;
+- the Paper I manuscript and its printed nineteen-row claim map.
 
-## Foundation landed before final slice intake
+C320 must generate a Paper I-specific statement extraction, manifest,
+aggregate Lean gate, axiom audit, release runner, toolchain/hash pins, and
+clean replay. It may reuse an existing proof, checker, or certificate only
+after verifying that it establishes the adopted Paper I claim. It must not
+filter the fallback manifest and call the result certified, overwrite the
+fallback evidence surface, or import any Paper II/III claim.
+
+The broad manuscript in `papers/clebsch-hexagon-code/`, its previous
+58-row manifest and earlier 61-row ledger, 29-statement extraction,
+aggregate gate, deterministic
+18-check replay, independent `NO-GO`, and subsequent repairs are preserved
+fallback evidence. They are not the active C320 acceptance state. The old
+instruction to launch a post-fix reviewer for that manuscript is retired.
+
+C321 is expected not to trigger because Paper I retains no load-bearing
+Singular claim; close that condition only after checking the final nineteen
+rows. The final Paper I surface still requires the user-launched independent
+review and post-fix `GO` specified in the closing protocol below.
+
+## Preserved mega-paper ledger — fallback evidence only
+
+Everything below this heading through the historical checklist records the
+former 37-page integration and review surface. Consult it only to recover
+candidate evidence routes and exact provenance. Do not execute its
+manuscript, row-count, review-launch, or release instructions as current
+C320 work.
+
+The former early-start authorization admitted C505/C507 and the complete
+replacement-spine surface. The checked-in
+`papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` remains that preserved
+fallback manuscript; none of its compound claims inherits into Paper I.
+
+### Foundation landed before final slice intake
 
 The initial public verification surface is under
 `papers/clebsch-hexagon-code/verification/`:
@@ -125,7 +149,7 @@ hashed audit module containing a literal `#print axioms` command for every claim
 tracked, hashed validation output with its exact command.  This converts the three ephemeral/report
 only cases into concrete C320 work rather than undocumented trust inheritance.
 
-## Adopted release-claim partition before manuscript integration
+### Adopted release-claim partition before manuscript integration
 
 The copy-ready replacement outline currently supplies four headline theorem blocks with fifteen
 separately stated subclaims:
@@ -146,7 +170,7 @@ gap, low-degree, and small-arc statements from the protected baseline remain sep
 accountable, as do load-bearing claims in the eventual abstract, figures, captions, and trust
 tables.
 
-## Slice-intake state
+### Slice-intake state
 
 | slice | current C320 intake state |
 |---|---|
@@ -166,7 +190,7 @@ tables.
 | C506 | final independent-review `GO` on implementation commit `51b21674` |
 | C507 | complete; repaired commit `9a388b41`, final user-launched review `GO`, queue lifecycle closed; admitted below |
 
-## First-pass headline adequacy map
+### First-pass headline adequacy map
 
 This is an internal routing map, not the final trust manifest.  “Candidate route” means the
 strongest route whose actual theorem type and axiom closure C320 still has to inspect; it is not a
@@ -197,7 +221,7 @@ Likewise the arithmetic-gluing gate exposes separate no-root/root, fused/split, 
 outer-transporter, and bounded trichotomy terminals; the final ledger may not collapse them into a
 single “rank-three formalized” label.
 
-## Admitted closing-slice evidence blocks
+### Admitted closing-slice evidence blocks
 
 The following three reviewed slices are sufficiently stable for C320 to admit their exact evidence
 blocks now.  Admission means their gate identity and boundary are frozen for later claim rows; it
@@ -307,7 +331,7 @@ cannot upgrade C425's rank-two depth plane to the full information lattice by na
 coordinate bridge remains a separately routed semantic input unless the manuscript states only the
 intrinsic finite profile theorem C494 actually checks.
 
-## Admitted replacement-spine core
+### Admitted replacement-spine core
 
 The eight F1--F8 gates are now admitted at their bounded theorem surfaces.  The hashes below are
 the current import-gate bytes; final pinning still requires the release aggregate and manuscript
@@ -330,7 +354,7 @@ the C423 rank statements, C424 sheet-recovery statements, C425 profile statement
 Fourier-table statements separate: their composition is the paper mechanism, not a single theorem
 whose import upgrades every semantic bridge.
 
-## C321 trigger audit: current Singular dependency
+### C321 trigger audit: fallback Singular dependency
 
 The protected manuscript has exactly one load-bearing Singular-dependent statement.  The
 sharpness remark after low-degree rigidity says that class `C02` has an 18-point uncovered locus
@@ -355,7 +379,7 @@ replay already checks those without Singular.  Removing or weakening the smooth/
 release is the only route that makes this C321 item non-load-bearing; merely retaining Singular as
 an “independent check” does not satisfy C320's final trust route.
 
-## Initial reconciliation judgments
+### Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly
    idle.  The user authorized early work, so source extraction, schema enforcement, baseline versus
@@ -383,14 +407,16 @@ an “independent check” does not satisfy C320's final trust route.
    `--lean-root`.  No public command, manifest row, or evidence script may depend on
    `papers/clebsch-hexagon-code`, the monorepo `lean/` prefix, or `notes/`.
 
-## Final implementation and reconciliation record
+### Final fallback implementation and reconciliation record
 
 The release manuscript now follows the selected C406+C411 replacement spine and closes with the
 C480/C486/C487 torsor Rosetta result.  Its five headline blocks are A--D plus the closing theorem
 E.  The survival ledger distinguishes retained finite shadows from proved erasures, C412 is
 included only at its exact projective-cover/Tate-plane boundary, C471's optional degeneration
 shadow is omitted, and C479 remains absent.  The historical smooth/genus-three C02 sentence was
-removed, so the Singular calculation is no longer load-bearing and C321 is not triggered.
+removed, so the Singular calculation is no longer load-bearing for the
+fallback. This historical conclusion predicts but does not replace the
+nineteen-row Paper I C321 audit.
 
 The proof hierarchy is explicit.  Headline proofs must reveal a mechanism; exact computations may
 remain second-tier, load-bearing certificates for frozen orbit, rank, and normalizer hypotheses.
@@ -691,7 +717,7 @@ The next evidence gate is the user-launched independent post-fix review.
 
 No other genuine C320 correctness mystery remains before independent review.
 
-## Required outcome
+### Historical required outcome
 
 Create the Clebsch per-paper trust manifest and one documented verify-all entry point after every
 paper-adopted formalization/evidence task has delivered its reviewed ledger delta. The manifest has
@@ -720,7 +746,7 @@ claims, C506's exact searched domains, C507's external superspecial/Weil/LU/Gola
 any later review disposition. C320 starts only after C428, C494, and C503--C507 have supplied final
 reviewed ledger deltas, or after the manuscript has explicitly removed the corresponding claims.
 
-## Referee-facing standards and guarded failure modes
+### Historical referee-facing standards and guarded failure modes
 
 - A paper claim is Lean-formalized only if its adequate terminal statement is in the pinned gate,
   current validation is green, and its axiom closure satisfies the full trust policy.
@@ -738,7 +764,7 @@ reviewed ledger deltas, or after the manuscript has explicitly removed the corre
 - Include a deterministic extraction of the headline theorem statements and load-bearing definitions
   for the paper's verbatim adequacy appendix.
 
-## Required judgment-call record
+### Historical required judgment-call record
 
 Record every reconciliation choice: competing task claims, adequacy mismatch, route downgrade or
 upgrade, conditional decomposition, omitted claim, accepted classical input, verify-all scope, and
@@ -746,7 +772,7 @@ packaging exclusion. For each give alternatives, evidence, effect on paper wordi
 routes, and reopening condition. Never resolve conflict by choosing the strongest label or by
 leaving “if feasible” in the final ledger.
 
-## Required closing review and archival checklist
+### Historical mega-paper closing review and archival checklist
 
 **Reviewer-launch authority:** the implementing agent must not spawn, delegate to, select, simulate,
 or substitute for the independent reviewer. After completing the artifact, durable report, checklist,
@@ -778,3 +804,29 @@ and request post-fix review. Only a recorded final `GO` permits C320 to be archi
   references, semantic naming, and absence of internal workflow or unsupported novelty language.
 - [ ] Record independent review, every finding/fix, post-fix review, and final `GO`.
 - [ ] Only after final `GO`, archive C320 with this completed report and the manifest/entry point.
+
+The checklist above is retained as the fallback's review record. Its checked
+items do not satisfy the focused Paper I gate.
+
+## Current Paper I closing checklist
+
+- [ ] Extract and hash every Paper I theorem-like environment and separately
+  published claim from `papers/clebsch-rigidity/clebsch_rigidity.tex`.
+- [ ] Reconcile the extraction exactly with C575 rows
+  `2, 11--26, 29, 58`; account for every adopted claim once.
+- [ ] Assign one exact conceptual, cited, Lean, certificate, replay, or mixed
+  route per row; admit no Paper II/III route.
+- [ ] Verify theorem adequacy against actual Lean types and definitions,
+  including axioms, imports, and the paper-to-formal correspondence.
+- [ ] Verify every executable row's finite domain, completeness argument,
+  checker semantics, hashes, independent replay, and residual trust.
+- [ ] Build a Paper I aggregate gate, axiom audit, clean verify-all command,
+  and deterministic output without changing either source repository.
+- [ ] Preserve the mega-paper manifest, gate, extraction, and release output
+  byte-for-byte as a separate fallback surface.
+- [ ] Confirm C321 is not triggered, or interpose it before release if a
+  load-bearing Singular route appears.
+- [ ] Repair every issue found by the user-launched independent reviewer and
+  obtain the required post-fix `GO`.
+- [ ] Only after final `GO`, archive C320 and hand the exact Paper I surface
+  to C182.

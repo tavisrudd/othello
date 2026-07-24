@@ -4,6 +4,11 @@
 
 **Date:** 2026-07-20
 
+**Split status (2026-07-24):** historical planning for the preserved
+37-page mega-paper. It is not the active publication plan. The authoritative
+three-paper allocation and order are in
+`2026-07-24-clebsch-paper-split-trial.md` and the live Clebsch handoff.
+
 **Verdict:** `SHIPPING THE UPGRADED REPLACEMENT-SPINE MANUSCRIPT: C406+C411 SPINE, SELECTIVE C412
 MODULAR UPGRADE, C445 ARITHMETIC-GLUING FLAGSHIP, EXACT SURVIVAL/FORGETTING LEDGER, AND THE
 CERTIFIED TORSOR-ROSETTA CLOSING THEOREM (C480, UPGRADED TO A COMPLETE RANK-THREE TRICHOTOMY WITH A

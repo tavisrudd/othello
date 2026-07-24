@@ -4,7 +4,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete; Paper I population may proceed under C576
+**Status:** complete; C576 subsequently built and referee-tested Paper I.
+The active next task is C320; this file remains the exact disposition record.
 
 ## Verdict
 

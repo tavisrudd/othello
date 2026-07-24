@@ -2,13 +2,18 @@
 
 Publication-track staging. Each subdirectory is a **candidate paper**: a curated view (symlinks
 into `../notes/`) of the source notes for one result, plus a `README.md` status map. A directory
-is a staging area, **not** a commitment to a separate publication. The Fable review (2026-07-12)
-resolved the decomposition to five papers (+1 conditional) + two OEIS. The provisional Baer +
-completion merge was superseded by the focused Baer/Q25 ruling on 2026-07-14,
-dihedral bundles the D₂ₘ family, continuation is N1-only, and coding proceeded after its internal
-audit. **Clebsch was added 2026-07-13, after that review, bringing it to six (+1)** — it spun out of
-the `arcs` q=11 material, and the 2026-07-14 seam ruling makes it ship after `arcs`. See
-`papers-planning.md` for the rulings, the ship order, and per-paper guardrails.
+is a staging area, **not** a commitment to a separate publication. The
+Fable review (2026-07-12) supplied the original decomposition; later
+paper-specific rulings supersede its count where stated below. The
+provisional Baer + completion merge was superseded by the focused Baer/Q25
+ruling on 2026-07-14, dihedral bundles the D₂ₘ family, continuation is
+N1-only, and coding proceeded after its internal audit. **Clebsch is now an
+active three-paper program:** focused rigidity Paper I,
+factorization-memory Paper II, and a gated passages/holonomy Paper III. The
+former 37-page mega-paper is retained unchanged as a fallback. Paper I spun
+out of the `arcs` q=11 material and ships after `arcs`. See
+`notes/handoffs/2026-07-13-clebsch-paper.md` for the current order and
+`papers-planning.md` for the older decomposition rulings.
 
 Likely expert readers, referee-fit cautions, paper-specific questions, and high-excitement upgrade
 targets are maintained in [`expert-profiles/`](expert-profiles/README.md).
@@ -57,24 +62,37 @@ defect identity and ρ_𝒞(16) = 9*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
-**4 · `clebsch-hexagon-code`** — *The Clebsch hexagon code: rigidity from a conic deep-hole locus*
-(an MDS code over 𝔽₁₁ whose deep holes are exactly a conic)
-- *Status:* self-contained 19-page LaTeX manuscript + PDF. Its verification map names eleven Python
-  replays, one Singular calculation, and eleven Lean roots; the formal development isolates exactly
-  two consequences of Dye's theorem as axioms. Conceptual rigidity, low-degree rigidity,
-  quantitative gaps, decoder reconstruction, the invariant support bipartition, the `A₃/H₃`
-  reflection-arrangement
-  synthesis, the all-field Clebsch formula, and the `4≤k≤7` classification are integrated. Local
-  reproducibility is closed; the remaining gate is an immutable artifact release.  The broader
-  `A3/B3/H3` C399 complement-code theorem is the selected paper-facing upgrade but is not yet
-  manuscript-integrated.  Its audit credits Edge and Dye for the classical q=5,7,11 configurations,
-  `5,14,22` marker fibres, and relation geometry; the surviving claim is the exact uniform
-  nonmirror-line/distance law and Coxeter-number phase.
-- **Ships after `arcs` by publication-allocation ruling, not mathematical dependency.** `arcs`
-  publishes the shared deep-holes=conic identification first; `clebsch` cites it for provenance but
-  reproves it and depends on no unpublished companion result. Its claims are the rigidity and
-  low-degree characterizations, gaps, decoding/support-bipartition structure, and finite-field boundary.
-  *Added 2026-07-13, after the Fable decomposition ruling, so not among its five+1.*
+**4 · `clebsch-rigidity`** — *Deep-hole rigidity of the Clebsch hexagon code*
+(Paper I of the active Clebsch program)
+- *Status:* warning-free 19-page LaTeX manuscript + PDF with 17 theorem-like
+  environments and an exact nineteen-row claim/evidence map. C320 is
+  constructing the Paper I-specific manifest, aggregate gate, release runner,
+  and independent review surface; C182 then archives/releases it.
+- *Scope:* conceptual and low-degree rigidity, quantitative gaps, decoder and
+  automorphism structure, invariant support bipartition, Brianchon
+  reconstruction, `q=11` uniqueness, and the `4≤k≤7` classification.
+- **Ships after `arcs` by publication-allocation ruling, not mathematical
+  dependency.** It reproves the shared deep-holes=conic input while citing
+  `arcs` for public provenance.
+
+**Clebsch Paper II candidate · `clebsch-factorization`** —
+*Factorization memory in a conic ideal: the `A_3`, `B_3`, and `H_3`
+configurations*
+- *Status:* compilable spine; C577 begins only after Paper I is
+  submission-ready.
+- *Scope:* conic matching quotient, ranks `3,6,10`, balanced sheets,
+  cubic-first orientation, six-profile reconstruction, modular depth, and
+  arithmetic splitting/gluing.
+
+**Clebsch Paper III gate · `clebsch-passages`** — *Finite passages and
+holonomy in Clebsch matching geometry*
+- *Status:* exploratory spine; C579 begins only after Paper II and proceeds
+  only if one principal theorem organizes the comparison package.
+
+**Preserved fallback · `clebsch-hexagon-code`** — the 37-page integrated
+mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
+18-check release surface. It remains immutable as a fallback and is not the
+active `clebsch` release target.
 
 **5 · `complete-repair-ports`** — Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure
@@ -117,9 +135,11 @@ flags, and modular obstructions for projective Reed--Solomon codes*
   admission wait for C538's manuscript-level review.
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
-and share the `lean/FiniteGeom/` base. `clebsch-hexagon-code` is the exception: it descends from the
-`arcs` q=11 witness (`comp-q11-mds-deep-holes`) rather than from Package 2, and shares that witness's
-`lean/RelativeConicArcs/` library rather than owning one.
+and share the `lean/FiniteGeom/` base. The Clebsch program is the exception:
+Paper I descends from the `arcs` q=11 witness
+(`comp-q11-mds-deep-holes`) rather than from Package 2, and the three
+Clebsch candidates share that witness's `lean/RelativeConicArcs/` library
+rather than owning one.
 Primary venue fit is Designs, Codes and Cryptography / Finite Fields and Their Applications, with
 JCTA's shorter-paper format or J. Geometry as secondary fits; explicitly **not** IEEE-TIT. Lane map
 — the single live doc to read first (status, verification map, remaining work):
@@ -172,17 +192,18 @@ repositories: an evidence-based essay and practical how-to
   complete; C220 is omitted. Specialist citation-chain review, immutable checker/archive identity,
   shared-Lean public closure, adequacy/provenance integration, and the deferred aggregate rebuild
   remain submission preflight gates.
-- **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
-  `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
-  calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding and the
-  support bipartition,
-  synthesis, the finite `A₃/H₃` reductions, the chord-defect bridge, the two-axiom Dye consequence
-  layer, `q=9`, and the universal `4≤k≤7` moments. The global/local gaps, low-degree census,
-  Clebsch-family specialization, and finite seven-arc exclusions remain explicitly checker- or
-  citation-backed rather than Lean claims. This is the paper's declared trust boundary, not an open
-  local gate. C399's audited `A3/B3/H3` complement-code theorem is the next manuscript integration;
-  its exact distance law is paper-facing, while Edge/Dye's classical configurations and `5,14,22`
-  geometry are citation context. Builds with texliveFull — texliveSmall/Medium lack `enumitem`.
+- **Focused LaTeX manuscript (+ PDF; verification surface in progress):**
+  `clebsch-rigidity` — the active 19-page Paper I. It contains the explicit
+  code, complete fifteen-class census, conceptual rigidity proof, decoder
+  reconstruction, support bipartition, field uniqueness, and small-arc
+  classification. Its printed nineteen-row trust map is authoritative;
+  C320 must still freeze the exact gate/checker/replay surface.
+- **Preserved integrated fallback:** `clebsch-hexagon-code` — the 37-page
+  mega-paper with its matched 58-row/18-check evidence surface. Its
+  factorization and passage material is a source for C575's dispositions,
+  not an active release or a trust shortcut for any split paper.
+- **Compilable Clebsch spines:** `clebsch-factorization` for gated Paper II
+  and `clebsch-passages` for the still-conditional Paper III.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -211,7 +232,8 @@ paper's remaining adequacy/provenance, scholarly review, immutable-release, or b
   exact-transfer, asymptotic, projective-completion, and operational-coefficient theorem chain
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
-- **Partially formalized with an explicit classical boundary — `clebsch-hexagon-code`:**
+- **Partially formalized with an explicit classical boundary —
+  `clebsch-rigidity`:**
   `Q11Coding.lean` and `Q11A5PointOrbits.lean` certify the syndrome conic and concrete point-orbit
   data; `Q11DecodingSynthesis.lean` certifies the decoding/Brianchon/support-bipartition synthesis;
   `ReflectionArrangements.lean` certifies the finite `A₃/H₃` coordinate bridges, intersection
@@ -221,10 +243,14 @@ paper's remaining adequacy/provenance, scholarly review, immutable-release, or b
   classification as the formal development's axiomatized inputs. `ClebschChordDefect.lean` and
   `Q9Sylvester.lean` support field uniqueness, while `SmallKChordMoments.lean` and
   `SmallKGeometricBridge.lean` certify the universal small-arc moment consequences. All eleven are
-  manuscript-named kernel-checked roots. The two gap censuses, low-degree finite linear algebra,
+  available kernel-checked roots for Paper I. C320 must admit and name only
+  those actually used by the nineteen-row Paper I surface. The two gap
+  censuses, low-degree finite linear algebra,
   Clebsch-family use of Dye, and finite `k=7` exclusions are intentionally outside Lean and mapped
   to exact replays or citations in the paper's verification tables. Lane map:
-  `notes/handoffs/2026-07-13-clebsch-paper.md`.
+  `notes/handoffs/2026-07-13-clebsch-paper.md`. The broader replacement-spine
+  Lean campaign belongs to Paper II/III inventories unless their separate
+  manifests adopt it.
 - **Planned, not built:** `ContinuationRigidity`. The exact quadratic Baer pair-extension data and
   semantic arc extension are Lean-proved; see `lean/FiniteGeom/BaerCompletion/TRUST.md`.
 - **Axiom-clean bar:** `KleinFourBridge.explicit_pairProducts` now uses kernel `decide`; the former
@@ -233,9 +259,11 @@ paper's remaining adequacy/provenance, scholarly review, immutable-release, or b
 - **Release gates are paper-specific:** every claim presented as Lean-formalized must meet the full
   `lean/TRUST.md` standard — `sorry`-free, axiom-audited, and free of `native_decide` — but a paper
   may instead declare a mixed boundary of conceptual proof, classical citation, exact replay, and
-  kernel-checked consequence. The arcs library is complete; Clebsch's mixed trust map is closed;
-  the remaining planned libraries and dihedral paper-level theorems are release-blocking only where
-  their own lane requires them.
+  kernel-checked consequence. The arcs library is complete; focused Clebsch
+  Paper I has a frozen nineteen-row manuscript map but its C320 release
+  surface is still open. Paper II and Paper III require separate maps if
+  built. The remaining planned libraries and dihedral paper-level theorems
+  are release-blocking only where their own lane requires them.
   The queens and S₄/A₅ nimber enumerations follow the `getK` pattern: a Lean-proved recurrence plus
   a differential-tested reproducible solver, not `native_decide`. The ρ_𝒞 values instead enter
   through kernel-checked coordinate witnesses; at q=16 the lower bound uses locally checked
@@ -251,14 +279,18 @@ Key computational results and proven lemmas/theorems, mapped to their paper and 
 `dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` =
 `equivariant-robust-completion`; `completion` is library-only; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
-`oeis-submissions/*`; `complete-ports` = `complete-repair-ports`; `clebsch` = `clebsch-hexagon-code`.
+`oeis-submissions/*`; `complete-ports` = `complete-repair-ports`; `clebsch` =
+active program rooted at `clebsch-rigidity`; `clebsch-fallback` =
+`clebsch-hexagon-code`.
 
 **Proof-location key:** `lean <file>:<line> <ident>` = formalized, `sorry`-clean (paths under
 `lean/`); `paper §N` = proven in that manuscript; `note <file>` = proven in a research note
 (plan-stage, Lean deferred); `solver <path>` = computed by a cross-checked solver; `checker <path>`
-= re-verified by a standalone script in the paper directory (independent of Lean and of the
-manuscript's own computation). The `clebsch` rows use this grade for finite censuses and distinguish
-it explicitly from kernel-checked formalization.
+= re-verified by a standalone script in the paper directory (independent of
+Lean and of the manuscript's own computation). Clebsch rows distinguish
+this grade from kernel-checked formalization; until C320 freezes Paper I,
+their checker names identify candidate evidence in the preserved fallback
+surface rather than a completed Paper I release bundle.
 
 **Result-ID prefixes:** `thm-` = proven theorem/proposition (hand- or Lean-proven) · `lem-` =
 supporting lemma · `comp-` = solver-computed value or machine-verified finite example. The ID
@@ -317,16 +349,16 @@ encodes result *type*; formalization status is in the proof-location column.
 | comp-q11-icosahedral | q=11 icosahedral seeded P-position     | all 12 conic points live; every seeded continuation is exactly an independent set of the icosahedral graph; the actual projective seed is P by antipodal mirror and exact localization | nofil (the icosahedral identification itself is `arcs`') | Lean `RelativeConicArcs/Q11Residual.lean` `continuation_rawArc_iff`, `isP`, `seed_isP`. The underlying graph identification `adj_iff_icosahedron` is `arcs`' (paper Proposition `prop:q11-extensions`); it is not part of the current Clebsch manuscript. `nofil` owns only the P-position reading |
 | thm-clebsch-deep-holes | Deep holes of the Clebsch hexagon code are exactly a conic | projectively non-GRS `[6,3,4]₁₁` code of covering radius three; the fifteen secants cover all of `PG(2,11)` except the twelve points of the `A₅`-invariant conic `XZ=Y²`, so the complete deep-hole set *is* `𝒞(𝔽₁₁)`; affine count `120=12×10`, each deep-hole coset has `C(6,3)=20` leaders. Dye/BSW give the classical inclusion `𝒞⊂U`; equality is an apparently unrecorded synthesis with Dye's ten concurrences and the chord-defect count. **Owned for publication by `arcs`**, which holds the shared Lean certificate and ships first; `clebsch` gives a self-contained conceptual reproof as setup and claims no priority for the identification | arcs (clebsch restates) | `arcs` paper Proposition 8.2(i) + Lean `RelativeConicArcs/Q11Coding.lean`; restated at `clebsch` paper §3 Prop 3.2 + Cor 3.3 via the `A₅` orbit ledger, Dye/BSW, and the DMP dictionary |
 | comp-clebsch-a5-point-orbits | Full `A₅` point-orbit profile in `PG(2,11)` | the Clebsch stabilizer has orbit lengths `[6,10,12,15,30,30,30]`; the first four are the arc, Brianchon points, associated conic, and self-polar-triangle vertices. The subgroup/fixed-line ledger derives uniqueness of the twelve-orbit and conceptually forces the deep-hole conic | clebsch | paper §3 Prop `prop:a5-point-orbits`; Dye 1991 identifies the classical orbits; concrete sixty-element action and all seven blocks in `Q11A5PointOrbits.lean` |
-| thm-clebsch-rigidity | Rigidity theorem (five-way TFAE)         | for a six-arc `A⊂PG(2,11)`: `U(A)` lies on some conic ⟺ `U(A)` is all `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A)≤15` (in fact `12`) ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A)⊇A₅`. `A₅` is *recovered* from a purely coding-theoretic hypothesis, not assumed | clebsch | paper §4 Thm 4.3; `(i)⇒(iv)` is conceptual via the six-arc line bound, chord defect, and Dye's equality classification; the 1548-representative census supplies only condition `(iii)` and the numerical gap. Checker: `check_rigidity_degenerate_conic.py`. Lean: `SixArcDefectBridge.lean`, `Q11DyeAxioms.lean`, and `Q11DyeConsequences.lean`, with Dye's bound and equality case as the two declared axioms |
+| thm-clebsch-rigidity | Conceptual rigidity theorem | for a six-arc `A⊂PG(2,11)`: `U(A)` lies on some conic ⟺ `U(A)` is all `𝔽₁₁`-points of a nonsingular conic ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A)⊇A₅`. `A₅` is recovered from a coding-theoretic hypothesis, not assumed. The separate gap theorem states that `#U(A)≤15` characterizes this class and its exact value is `12` | clebsch | Paper I §4; the rigidity implication is conceptual via the six-arc line bound, chord defect, and Dye's equality classification. The 1548-representative census belongs only to the numerical gap. Lean inputs: `SixArcDefectBridge.lean`, `Q11DyeAxioms.lean`, and `Q11DyeConsequences.lean`, with Dye's bound and equality case as the two declared axioms |
 | thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.7; `check_global_conic_gap.py` and `check_perturbation_gap.py` cover the global and 252-neighbour claims. These finite gap censuses are replayed, not Lean-formalized |
-| comp-clebsch-low-degree-loci | Low-degree rigidity and quartic sharpness | a nonzero form of degree at most three contains `U(A)` exactly for the Clebsch class; there the minimum degree is two, the quadratic kernel is the conic equation, and the cubic kernel is that equation times the linear forms. One non-Clebsch class has an 18-point uncovered locus equal to the rational points of a smooth absolutely irreducible genus-three quartic, showing degree four is sharp | clebsch | paper §4 Prop 4.4 and Remark 4.6; `check_low_degree_loci.py` and the Singular replay. The archived quintic/sextic computations are deliberately not claims of the current manuscript |
+| comp-clebsch-low-degree-loci | Low-degree rigidity and quartic sharpness | a nonzero form of degree at most three contains `U(A)` exactly for the Clebsch class; there the minimum degree is two, the quadratic kernel is the conic equation, and the cubic kernel is that equation times the linear forms. One non-Clebsch class has an 18-point uncovered locus equal to the rational zero set of a quartic, showing degree four is sharp; no smoothness, irreducibility, or genus claim is made | clebsch | Paper I §4 Prop. 4.4 and the following sharpness remark; `check_low_degree_loci.py`. The fallback-only Singular wrapper and archived quintic/sextic computations are not Paper I dependencies |
 | comp-clebsch-u-spectrum | Six-arc extension-count spectrum in `PG(2,11)` | `#U(A) ∈ {12,16,18,19,20,21,22}` with frame-normalized multiplicities `{6,30,150,300,630,360,72}` (Σ=1548); `#U=12` is attained by exactly one `PGL(3,11)` orbit (multiplicity `6=360/60`, consistent with `#Aut=60`) | clebsch | **priority granted outright to Hirschfeld–Sadeh 1984 / Sadeh thesis — recomputed here, claimed by us for neither the numbers nor the classification**; ours is only the deep-hole/covering *reading* of `U`. paper §4; verified by two independent code paths |
 | thm-clebsch-chirality | Invariant support bipartition of deep-hole leaders | the twenty support triples split into two complementary `A₅`-orbits of ten. Only the unordered bipartition is intrinsic: the outside `S₅` normalizer coset exchanges its parts, while code automorphisms preserve them. Each deep-hole coset has ten leaders in each class, globally `1200+1200`; complementary support pairs are canonically the ten Brianchon points | clebsch | paper §5 Props 5.1 and 5.3; `check_chirality.py`, `check_code_automorphisms.py`, and `check_decoding.py`; kernel-checked finite synthesis in `Q11DecodingSynthesis.lean` |
 | thm-clebsch-decoding | Complete distance oracle and ambiguity geometry | for syndrome `s`, distance is 0 at zero, 1 on an arc-column ray, 3 exactly when `s≠0` and `s₀s₂-s₁²=0`, and 2 otherwise; nearest-word multiplicities are `1^960 2^150 3^100 20^120`. The ten Brianchon points and five triangles are classical (Edge/Dye); the new layer reconstructs them from decoder ambiguity and identifies their supports with the complementary matchings; every deep hole has all twenty triple supports | clebsch | paper §3 Prop 3.5 and §5 Cor 5.2; `check_decoding.py`; kernel-checked synthesis in `Q11DecodingSynthesis.lean` |
 | thm-clebsch-why11   | Classification-free uniqueness of `q=11` for six-arcs | the chord-defect identity and universal matching bound `c≤15` reduce a conic-filling six-arc to `q∈{4,5,9,11}`; hyperoval completeness excludes q=4, every six-cap is maximal at q=5, and the exact-distance-two Sylvester graph has clique number five at q=9, leaving q=11 | clebsch | paper §6 Thm 6.2; `check_small_q_uniqueness.py` and an independent q=9 construction; kernel-checked support in `ClebschChordDefect.lean` and `Q9Sylvester.lean` |
 | thm-clebsch-family-uncovered | All-field uncovered formula for Clebsch hexagons | every finite-field Clebsch hexagon has `#U=q²−14q+45`; for `q≡3 (mod 4)`, Dye's associated conic lies in `U` with exact off-conic excess `(q−4)(q−11)`, so exact conic filling is isolated at q=11 | clebsch | paper §6 Prop 6.3; hand proof from the chord-defect identity and Dye's ten Brianchon points/non-secant criterion. The `q=19` instance is independently replayed by `check_q19_nonexample.py`; the family specialization itself is not claimed as Lean-formalized |
-| thm-clebsch-reflection-arrangements | Paired `A₃/H₃` organization of the two conic-filling exceptions | the q=5 frame joins are the reduced `A₃` mirrors; an exact projectivity identifies the q=11 Clebsch secants with the reduced `H₃` mirrors; their intersection spectra give complement counts `(q−2)(q−3)` and `(q−5)(q−9)` and transport pointwise to the Clebsch secant-index strata | clebsch | paper §6 Prop `prop:h3-arrangement` and the following synthesis; independent `check_reflection_arrangements.py`; finite reductions, characteristic boundary, projectivity, spectra, factorizations, and pointwise index transport in Lean `RelativeConicArcs/ReflectionArrangements.lean` |
-| thm-rank3-reflection-complement-code | Uniform rank-three Coxeter complement-code phase | for `T=A3,B3,H3` with Coxeter number `h`, the mirror-complement code has parameters `[(q-h/2)(q-h+1),3,(q-h/2-1)(q-h+1)]`; at `q=h+1` it is the full-conic extended GRS code; the exact maximum nonmirror intersection is `q-h+1` | clebsch candidate upgrade | note `2026-07-20-c399-coxeter-number-conic-phase.md`; exact Python/JSON/checksum replay and green dedicated/umbrella Lean gates. Edge/Dye own the individual small-field configurations and marker counts; see `2026-07-20-c399-literature-audit.md` |
+| thm-clebsch-reflection-arrangements | Paired `A₃/H₃` organization of the two conic-filling exceptions | the q=5 frame joins are the reduced `A₃` mirrors; an exact projectivity identifies the q=11 Clebsch secants with the reduced `H₃` mirrors; their intersection spectra give complement counts `(q−2)(q−3)` and `(q−5)(q−9)` and transport pointwise to the Clebsch secant-index strata | clebsch-factorization | assigned to Paper II by C575; preserved fallback §7 contains the earlier integrated statement. Evidence: `check_reflection_arrangements.py` and `RelativeConicArcs/ReflectionArrangements.lean` |
+| thm-rank3-reflection-complement-code | Uniform rank-three Coxeter complement-code phase | for `T=A3,B3,H3` with Coxeter number `h`, the mirror-complement code has parameters `[(q-h/2)(q-h+1),3,(q-h/2-1)(q-h+1)]`; at `q=h+1` it is the full-conic extended GRS code; the exact maximum nonmirror intersection is `q-h+1` | clebsch-factorization | Paper II input; note `2026-07-20-c399-coxeter-number-conic-phase.md`, exact Python/JSON/checksum replay, and green dedicated/umbrella Lean gates. Edge/Dye own the individual small-field configurations and marker counts; see `2026-07-20-c399-literature-audit.md` |
 | thm-conic-filling-kle7 | Conic-filling extension loci for `4≤k≤7` | if a `k`-arc has uncovered locus equal to all rational points of a nonsingular conic, then `(k,q)` is exactly `(4,5)` or `(6,11)`; the former is the projective frame and the latter the Clebsch hexagon. Exact chord moments rule out k=5 and reduce k=7 to q=11,13; exhaustive normalized searches find no seven-arc hit in either field | clebsch | paper §6 Thm 6.6; `check_small_k_conic_filling.py`; universal projective moments in `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean`; finite seven-arc exclusions remain checker-certified. The elementary `(4,5)` instance is priority-neutral; downstream consumers are C188 (`relconic`) and C189 (`cap`/Nofil) |
 | comp-q9-exclusion   | `q=9` icosahedral six-arc is complete    | `#U=0` at `q=9`: the analogous `A₅`-invariant six-arc has covering radius two, so its deep-hole locus is empty and the phenomenon is vacuous | clebsch side computation | `check_q9_exclusion.py` independently re-verifies SVM 1995 Prop. 13 over the Lean-certified GF(9) tables. This checker-only side result is not a claim or dependency of the current manuscript, whose `q=9` exclusion instead uses the Sylvester graph |
 | comp-q19-nonexample | `q=19` icosahedral six-arc has exactly 140 deep holes | the recipe still yields a genuine six-arc disjoint from the conic — at `q=19`, `5∣q+1` so order-five elements are non-split and fix *no* rational conic point, but their `𝔽₃₆₁`-conjugate fixed pairs span Galois-stable rational chords, hence rational poles. The Clebsch-family formula gives `#U=140=20+120` and Dye's edge criterion gives the conic inclusion; the checker independently reconstructs the arc, count, and full quadratic rank | clebsch | paper §6 Remark 6.4 following Prop 6.3; Dye 1991 pp. 281–282; `check_q19_nonexample.py` is independent verification |

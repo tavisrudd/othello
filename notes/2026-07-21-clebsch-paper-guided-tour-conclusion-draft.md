@@ -4,6 +4,10 @@
 
 **Date:** 2026-07-21
 
+**Split status (2026-07-24):** historical prose for the preserved
+mega-paper. It is not an active split-paper draft; C575's disposition
+controls any later reuse.
+
 **Status:** manuscript-facing prose draft for the selected factorization-memory paper.  It does
 not edit or supersede the protected manuscript.  The final source pass must insert theorem,
 section, figure, artifact, and bibliography references and conform notation to the manuscript.

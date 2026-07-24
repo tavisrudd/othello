@@ -4,6 +4,11 @@
 
 **Date:** 2026-07-23
 
+**Split status (2026-07-24):** retained as a result inventory. Its former
+paper numbering and placements are superseded by C575's Paper I/II/III
+disposition; no row enters a split paper without that assignment or a later
+explicit decision.
+
 **Purpose:** keep the complete C440--C471 result inventory and adopted later Paper-2 local models
 out of the main Clebsch planning document while preserving every landed result, sharp negative,
 evidence boundary, and current paper disposition.  This is an allocation ledger, not a manuscript

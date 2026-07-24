@@ -1,47 +1,57 @@
-# C182 — Immutable Clebsch computation artifact
+# C182 — Immutable Paper I release artifact
 
 **Date**: 2026-07-15
-**Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **QUEUED — EXTERNAL ARCHIVE GATE**. Local preparation belongs to C168; minting a DOI
-or publishing a release requires the user's external action or explicit authority.
+**Lane**: `clebsch` — see `AGENTS.md` § Lane routing.
+**Status**: **QUEUED AFTER C320 FINAL GO**. The active target is focused
+Paper I in `papers/clebsch-rigidity/`. Minting a DOI or publishing a release
+requires the user's external action or explicit authority.
+
+The 37-page manuscript in `papers/clebsch-hexagon-code/` and its existing
+archive evidence remain preserved as a fallback. They are not the C182
+release target unless the user explicitly reverses the three-paper plan.
 
 ## Referee trigger
 
-A PDF-only adversarial review graded reproducibility `B`: the manuscript names every checker and a
-Lean root, but does not tell a reader where an immutable copy can be obtained. This criticism is
-correct. A repository-relative path is useful inside the source tree but is not a citable research
-artifact.
+A PDF-only adversarial review of the earlier manuscript correctly identified
+the need for an immutable, citable artifact. C576 has since produced the
+focused Paper I candidate. C320 must first freeze its exact nineteen-row
+verification surface; C182 packages that approved surface without importing
+the mega-paper's unused claims.
 
-The same review made three adjacent editorial requests. Two are already handled locally:
+The active Paper I already absorbs the useful editorial outcomes: its
+rigidity implication is a complete conceptual proof separated from the
+computer-assisted numerical gap; syndrome transitivity is proved from the
+`A5` action and scalar action; and the hexad working note is not a
+mathematical dependency.
 
-- the rigidity theorem now has a **Computer-assisted proof**, not a “Proof sketch”;
-- Proposition 3.3 now proves syndrome transitivity from the `A5` action on the twelve conic rays
-  and the scalar action within each ray; checker attestations have been moved outside proof
-  environments;
-- the hexad working note is no longer a mathematical dependency: the only identity used from it
-  is derived directly from the manuscript's chord-defect lemma.
-
-The archive/DOI request cannot be honestly simulated by prose and remains this task.
+The archive/DOI request cannot be simulated by prose and remains this task.
 
 ## Required artifact
 
 Create an immutable release, preferably a GitHub release archived by Zenodo, containing:
 
-- the exact manuscript source and rendered PDF;
-- the C168 thirteen-source executable manifest (twelve replay commands), with every source at the
-  recorded Git blob, plus the five cited Lean roots and their guarded elaboration commands;
+- the exact focused Paper I source and rendered PDF from
+  `papers/clebsch-rigidity/`;
+- C320's final nineteen-row manifest, statement extraction, aggregate gate,
+  axiom audit, executable allowlist, deterministic release output, and every
+  admitted source at its recorded Git blob;
 - exact public pins and target lists for `finitegeom` and every required external certificate
   package; do not duplicate Lean roots or import closures in the paper repository;
 - tracked `flake.nix` and `flake.lock` files whose clean development shell resolves those public
   pins, the Lean toolchain, and system dependencies without machine-local paths;
-- no flake input, lock entry, fetch, build, or validation target for a certificate family unused by
-  the Clebsch adopted theorem set;
+- no flake input, lock entry, fetch, build, or validation target for a
+  certificate family unused by Paper I's adopted nineteen rows;
 - a top-level `README` giving environment setup, exact commands, expected PASS sentinels, typical
   runtime, and the distinction between strict-kernel Lean results and executable Python checks;
-  it must also document the `C01`--`C15` canonical-key order, print or point to the complete class
-  listing, and map any renamed artifact paths;
+  it must also document the `C01`--`C15` canonical-key order, print or point
+  to the complete class listing, and map any renamed artifact paths;
 - license files covering code and manuscript/source redistribution;
 - the commit hash, release tag, and machine-readable SHA-256 manifest.
+
+The release must state that the mega-paper fallback is preserved separately
+and is not certified by the Paper I DOI. Do not bundle Paper II or Paper III
+spines, claims, gates, or certificates merely because they occur in the
+fallback repository.
 
 After Zenodo mints the DOI, add a short **Data and code availability** paragraph to the manuscript
 and cite the archived release, not a mutable branch URL.
@@ -49,12 +59,12 @@ and cite the archived release, not a mutable branch URL.
 ## Exit gate
 
 - C153/C161 have fixed final claim and attribution wording;
-- C168 has passed its clean-source thirteen-file executable replay, five-root Lean gate, and PDF
-  audit;
+- C320 has final independent `GO` on the exact Paper I manifest, statement
+  extraction, aggregate gate, clean replay, and PDF audit;
 - release tag points to that exact clean commit;
 - archive download is independently unpacked and replayed in a fresh directory;
-- the availability paragraph's paths match the frozen archive layout, including
-  `check_low_degree_loci.sh` and `check_low_degree_loci.sing`;
+- the availability paragraph's paths match the frozen Paper I archive
+  allowlist; no fallback-only Singular wrapper is included;
 - the primary scan confirms that Clebsch's configuration is correctly pinpointed at p. 336;
 - the companion-paper citation is updated from “working paper, 2026” if an arXiv identifier or
   other stable public record exists at freeze time;

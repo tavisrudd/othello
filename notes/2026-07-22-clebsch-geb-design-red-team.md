@@ -4,6 +4,10 @@
 
 **Date:** 2026-07-22
 
+**Split status (2026-07-24):** retained as the red-team record for the
+historical mega-paper presentation proposal. It supplies constraints only
+if a split paper later adopts that apparatus explicitly.
+
 This is an adversarial review of the presentation-design proposal in
 `2026-07-22-clebsch-geb-design.md`, produced by a delegated reviewer working only from that
 design doc and the frozen paper plan `2026-07-20-clebsch-paper-planning.md`. It attacks each

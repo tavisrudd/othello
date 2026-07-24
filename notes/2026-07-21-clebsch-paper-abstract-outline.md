@@ -4,6 +4,10 @@
 
 **Date:** 2026-07-21
 
+**Split status (2026-07-24):** historical opening/outline for the preserved
+mega-paper. Do not use it as Paper I, II, or III architecture. C575's
+disposition and the split charter govern all reuse.
+
 **Status:** copy-ready planning draft for the selected C406+C411 replacement spine.  This file
 contains exposition architecture, not a manuscript edit.  The exact result allocation is governed
 by `2026-07-20-clebsch-paper-planning.md` and

@@ -4,6 +4,10 @@
 
 **Date:** 2026-07-22
 
+**Split status (2026-07-24):** historical presentation design for the
+preserved mega-paper. It is not adopted by any split paper. Any later use
+requires a paper-specific editorial decision after acceptance.
+
 **Status (updated 2026-07-23):** adopted presentation plan subject to the red-team dispositions
 and calibration corrections in this file.  The open GEB citation and the audited
 independence/extension metaphor may enter the mathematical draft.  The hidden record is a distinct

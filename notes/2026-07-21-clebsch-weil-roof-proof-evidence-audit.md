@@ -4,6 +4,10 @@
 
 **Lane:** `clebsch`, auditing the read-only `crowns` Weil-roof battery
 
+**Split status (2026-07-24):** evidence inventory only. The active
+three-paper allocation is C575's disposition; this audit does not assign a
+claim to Paper I, II, or III.
+
 **Scope:** final landed state of C440--C468 during the preceding 24 hours, excluding the Clebsch
 Lean campaign C420--C428.  C465 has no landed result.  The later C469 allocation is an open task,
 not evidence audited here.

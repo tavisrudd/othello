@@ -3,6 +3,17 @@
 **Date:** 2026-07-24  
 **Lane:** `clebsch`
 
+## Active status
+
+This three-paper program is the active publication path. The 37-page
+`papers/clebsch-hexagon-code/` manuscript and its evidence surface remain
+preserved unchanged as a fallback.
+
+C575 and C576 are complete. Paper I is the warning-free 19-page candidate in
+`papers/clebsch-rigidity/`; C320 is the current task, followed by C182.
+C577 remains gated behind Paper I submission readiness, and C579 remains
+gated behind Paper II.
+
 ## Editorial trigger
 
 Repeated reviewer feedback identifies the current post-section-12 manuscript as too broad and
@@ -55,6 +66,11 @@ Acceptance:
 Non-goal: rewrite either manuscript.
 
 ## C576 — focused Paper I candidate
+
+**Result:** complete with a fresh referee-style `GO` to C320. The candidate
+has 19 pages, 17 theorem-like environments, the exact nineteen-row Paper I
+claim map, no optional `H_3` paragraph, and no Paper II/III dependency. See
+`notes/2026-07-24-c576-clebsch-rigidity-candidate.md`.
 
 Using the exact older version as the base, build a submission candidate provisionally titled
 *Deep-hole rigidity of the Clebsch hexagon code*.
@@ -140,7 +156,7 @@ inventory.  Do not lengthen Paper II to absorb it automatically.
 
 Paper I has priority.  The execution order is:
 
-1. C576 builds and referee-tests Paper I from C575's pinned source and disposition.
+1. C575 and C576 are complete.
 2. C320 remaps and closes the Paper I trust/review surface, with C321 interposed only if triggered.
 3. C182 archives and releases Paper I.
 4. C577 begins Paper II only after Paper I is submission-ready.
