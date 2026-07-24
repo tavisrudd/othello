@@ -208,12 +208,13 @@ off-arc points incident with exactly $i$ chords, put
 \]
 and write $m=\binom{k}{2}$. Then
 \[
- |\cU(A)|=q^2-(m-1)q+
- \left(m+3\binom{k}{4}-k+1\right)-t(A),
-\qquad
- 0\le t(A)\le3\binom{k}{4}\frac{r-2}{r}.
+\begin{aligned}
+ |\cU(A)|&=q^2-(m-1)q+
+ \left(m+3\binom{k}{4}-k+1\right)-t(A),\\
+ 0\le t(A)&\le3\binom{k}{4}\frac{r-2}{r},
+ \qquad k\le5\Longrightarrow t(A)=0.
+\end{aligned}
 \]
-For $k\le5$, the defining sum is empty and $t(A)=0$.
 \end{theorem}
 
 \begin{proof}
@@ -602,8 +603,9 @@ them: chords sharing an endpoint meet only at that arc vertex, not on
 $\ell$, so all chords through one point of $\ell$ have disjoint endpoint
 pairs. Hence there are at least five covered points. Equality would give a
 proper five-edge-colouring of
-$K_6$, necessarily a one-factorization. After relabelling, three factors
-are
+$K_6$, necessarily a one-factorization. The one-factorization of $K_6$ is
+unique up to isomorphism~\cite{MendelsohnRosa1985}; after relabelling,
+three factors are
 \[
   01|23|45,\qquad 02|14|35,\qquad 03|15|24.
 \]
@@ -669,7 +671,7 @@ Table~\ref{tab:fifteen-classes} prints the complete census at the level
 used by the rigidity and low-degree arguments.  Every representative
 contains the standard frame
 \[
- (0,0,1),\ (0,1,0),\ (1,0,0),\ (1,1,1);
+ (1,0,0),\ (0,1,0),\ (0,0,1),\ (1,1,1);
 \]
 the table gives the remaining two points of each representative.
 Here $d_{\min}$ is the least degree of a nonzero form vanishing on the
@@ -678,10 +680,6 @@ uncovered locus.
 \begin{table}[H]
 \centering
 \scriptsize
-In the second column, \(xy/uv\) abbreviates the remaining points
-\((1,x,y),(1,u,v)\).
-\smallskip
-
 \begin{tabular}{@{}c c r r r@{}}
 \toprule
 class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
@@ -718,6 +716,8 @@ class & pair & $|G|$ & $|\cU|$ & $d_{\min}$\\
 \bottomrule
 \end{tabular}
 \caption{The fifteen projective classes of six-arcs in $\PG(2,11)$.
+In the pair column, \(xy/uv\) abbreviates
+\((1,x,y),(1,u,v)\).
 Class \texttt{C15} is the Clebsch class.  Both replay programs regenerate
 the same canonical keys; the global-gap replay supplies $|G|$ and
 $|\cU|$, and the low-degree replay supplies $d_{\min}$.}
@@ -1009,7 +1009,7 @@ $A\cap\mathcal Q(\F_q)=\varnothing$, its chords cover every point outside
 $A\cup\mathcal Q(\F_q)$, and no chord meets $\mathcal Q(\F_q)$.
 The conic-filling syndrome phenomenon of
 Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
-without a symmetry hypothesis on the arc. A universal chord-multiplicity
+without a symmetry hypothesis on the arc. A universal chord-defect
 identity and the passant window leave only $q=9,11$; the former is excluded
 by a classical exact-distance problem in the Sylvester graph.
 
@@ -1117,12 +1117,12 @@ sets have twelve points.
 
 \begin{remark}[Three Clebsch-family regimes]
 The polynomial $q^2-14q+45=(q-5)(q-9)$ vanishes exactly at $q=5,9$.
-The root $q=5$ lies in the exceptional characteristic, where the
+The root $q=5$ lies in characteristic five, where the
 associated-conic construction of Definition~\ref{def:hexagon} is
 not available. At $q=9$, however, Dye's construction applies:
 $5=-1$ is a square in $\F_9$, and the characteristic is three. Thus the
 formula recovers a complete Clebsch six-arc at $q=9$. Independently,
-Lemma~\ref{lem:q9-polarity}
+Theorem~\ref{thm:why11}
 excludes every six-arc over $\F_9$ from conic filling by the Sylvester-graph
 clique bound. At $q=11$ the uncovered locus is instead exactly the
 associated conic.
@@ -1453,6 +1453,12 @@ V.~Guruswami and A.~Vardy,
 J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
 \newblock Oxford University Press, 1998.
+
+\bibitem{MendelsohnRosa1985}
+E.~Mendelsohn and A.~Rosa,
+\newblock One-factorizations of the complete graph---a survey,
+\newblock \emph{Journal of Graph Theory} \textbf{9}(1) (1985), 43--65.
+\newblock doi:10.1002/jgt.3190090104.
 
 \bibitem{NgWild2001}
 S.-L.~Ng and P.~R.~Wild,

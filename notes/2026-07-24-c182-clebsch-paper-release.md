@@ -51,6 +51,11 @@ Sylvester-graph exclusion of conic filling.  The other root $q=5$ lies in
 the exceptional characteristic and is not an instance of the paper's
 associated-conic construction.
 
+The deposit copy also cites the uniqueness of the $K_6$ one-factorization,
+puts the $k\le5$ zero-defect case inside Theorem 2.2's display, harmonizes
+the two standard-frame orderings, and corrects the $q=9$ exclusion pointer
+to Theorem 6.2.
+
 ## Verification
 
 - The universal identity and the $k=8$ sieve were independently rederived

@@ -45,7 +45,9 @@ tables, records all four non-Clebsch degree-four classes, and identifies the
 complete $q=9$ Clebsch specialization of
 $|\mathcal U(K)|=q^2-14q+45$.  The $q=5$ root is explicitly separated as
 an exceptional-characteristic counting degeneration, not an instance of
-the associated-conic construction.
+the associated-conic construction.  The final consistency pass cites the
+unique $K_6$ one-factorization, folds the $k\le5$ clause into Theorem 2.2,
+harmonizes frame order, and routes the $q=9$ exclusion to Theorem 6.2.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has

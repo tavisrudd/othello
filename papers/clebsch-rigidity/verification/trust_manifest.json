@@ -165,7 +165,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 326",
+      "paper_location": "source line 327",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -259,7 +259,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 393",
+      "paper_location": "source line 394",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -275,7 +275,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 410",
+      "paper_location": "source line 411",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -323,7 +323,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 447",
+      "paper_location": "source line 448",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -450,7 +450,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 498",
+      "paper_location": "source line 499",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -497,7 +497,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 580",
+      "paper_location": "source line 581",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -574,7 +574,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 622",
+      "paper_location": "source line 624",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -947,7 +947,7 @@
       "source": {
         "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "a8d6d711f24b8343d9fa523370182a0579fbb91ceec0411ed64a9998ba2162b5"
+        "sha256": "b60903009be018f9bc160c6e8a45755919f99e681fda978f383f0f026258a5d9"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -1251,7 +1251,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 668",
+      "paper_location": "source line 670",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "e2cce9781555e849f04e3d7669f639980f04d6284f64a87c3507ca3e8becb7f4"
+    "sha256": "b2a98b9ba809cacae286cc87a58d0cb20947fba7aba943c33320d83a8bdffbdc"
   },
-  "manuscript_sha256": "b3092c09b36df0f160982694a9550473d1373cf69fa3c66218b08e1d8d72a72a",
+  "manuscript_sha256": "bc62ab7f7308636bf56976000b29466dedde3e123f7df100db20fa86ca6fa058",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "95c8dcb341c22b85f757bf9ad170222449d91fcca13af3f0c862d127d41e6181"
+    "sha256": "8bcc2378072fbe0befb4c070da8eeef449fde37ccc5a9313aa437430c7b307f7"
   },
   "verify_all": {
     "checker_output_certificate": {
