@@ -176,14 +176,41 @@ No new mathematical scope is claimed: arbitrary redundancy remains
 level-specific, R8/R9 remain high-field results, and the unclassified
 Lucas strata remain open.
 
+## Scope reset and cold-session queue
+
+Date: 2026-07-24
+
+An independent full-manuscript cold read found the redundancy-five core
+and the coherent-marker mechanism strong, but judged the combined
+R5--R9/Hessian/Lucas paper too broad for submission.  The submission
+manuscript now stops at R8: R5--R7 form the main paper, and R8 is the
+single fixed-level application.  R9, the ordered Hessian, the general
+Lucas carriers, and the distinguished \(e_7\) orbit are reserved for
+companion papers and are not dependencies of the submission theorems.
+
+Run the following cold sessions independently.  A reader assigned one
+session should not read the earlier review or another session's report
+before delivering a verdict.
+
+| Session | Cold-read target | Acceptance gate | Status |
+|---|---|---|---|
+| F1 | Main-theorem hierarchy and synthesis | Each headline theorem has one primary equivalence relation and an explicit proof assembling exhaustion, counts, radius promotion, and Frobenius fusion. | Queued |
+| F2 | R6/R7 exceptional classifications | The printed paper identifies every exceptional class by representative, stabilizer, and fusion, or consistently calls the output a certified census. | Queued |
+| F3 | Effective polar induction | A reader can reconstruct the full marker iteration, indeterminacy budget, and hypotheses without importing the fixed-level examples. | Queued |
+| F4 | R8 component exhaustion | Every local chart, eliminated ideal, boundary component, and completeness step is visible or precisely delegated to a checkable appendix. | Queued |
+| F5 | Computational/formal trust boundary | A frozen archive, exact domains, acceptance criteria, resource envelope, and honest formal coverage are sufficient to audit every retained headline claim. | Queued |
+| F6 | Exposition-only pass | The R5 example appears before the abstract machinery; duplicated roadmaps and audit prose are removed; the marked-factor mechanism remains the narrative spine. | Queued |
+| C1 | R9 carrier consistency and exhaustion | Resolve the characteristic-five line/point contradiction and prove the complete contained-component decomposition before restoring any R9 classification claim. | Companion queue |
+| C2 | R9 binary-quartic slices | Prove the characteristic-seven normal-form atlas, quotient coverage, stabilizers, boundary, and descent of the six principal opens. | Companion queue |
+| C3 | Ordered-Hessian/Lucas/\(e_7\) paper | Establish an independent theorem hierarchy and state exactly which carrier strata remain unclassified; no dependence on the R5--R8 submission narrative. | Companion queue |
+
 ## Release rule
 
-C545 is blocked as a **proof-complete Version 1** until an independent
-final reader, the clean public export/replay, immutable repository and
-archive identifiers, and author/account confirmation are complete.
-The local proof, classification-record, literature, supplement-schema,
-formalization/reconciliation, and rendered-exposition gates are closed.
-An earlier DOI release is not authorized.
+C545 is blocked as a **proof-complete Version 1** until the retained
+R5--R8 manuscript passes sessions F1--F6, an independent final reader,
+the clean public export/replay, immutable repository and archive
+identifiers, and author/account confirmation.  An earlier DOI release
+is not authorized.
 
 The development monorepo is never the publication repository.  Release uses a
 reviewed paper-only fresh-history export containing the manuscript, public

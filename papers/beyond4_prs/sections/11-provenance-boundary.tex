@@ -41,16 +41,8 @@ not constitute an arbitrary-redundancy classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item Redundancies eight and nine are complete for $q\geq43$ and
-      $q\geq53$, respectively.  No bounded-field completion is
-      inferred.
-\item The characteristic-two ordered-Hessian theorem classifies the
-      geometric degeneracy strata, root-compatible pullback, and
-      effective base-selection bound.  It does not classify arithmetic
-      deepness on every Lucas carrier.
-\item The $e_7$ orbit is only one intrinsic stratum of the degree-nine
-      Lucas carrier.  The other strata, and therefore a redundancy-ten
-      synthesis, remain open.
+\item Redundancy eight is complete for $q\geq43$.  No bounded-field
+      completion is inferred.
 \item The effective polar-induction theorem requires a new
       level-specific monodromy/component calculation at each
       redundancy.  A field census cannot replace this input.
@@ -61,31 +53,32 @@ For redundancy eight it consists of
 \[
   q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32,37,41\};
 \]
-for redundancy nine, after excluding the inadmissible $q=7,8$
-parameters, it consists of
+the existing R8 certificate does not enumerate these ambient syndrome
+spaces.  A direct scan at the upper endpoint would visit
 \[
- q\in\{9,11,13,16,17,19,23,25,27,29,31,32,37,41,43,47,49\}.
-\]
-The existing R8 and R9 certificates do not enumerate these ambient
-syndrome spaces.  A direct scan at the upper endpoints would visit
-\[
- \#\PP^7(\F_{41})=199623130728,\qquad
- \#\PP^8(\F_{49})=33925283289801
+ \#\PP^7(\F_{41})=199623130728
 \]
 directions.  Even quotienting by the maximum possible
-$\PGL_2(q)$ orbit size leaves at least $2898130$ and $288480301$
-orbit representatives, respectively.  Thus a bounded completion
+$\PGL_2(q)$ orbit size leaves at least $2898130$ orbit representatives.
+Thus a bounded completion
 requires a new canonical-orbit enumerator, measured resource bounds,
 and an independent replay; it is not obtained by merely extending the
-current regression field list.  The R9-49 computation closes only the
-characteristic-seven carrier named in Section~\ref{sec:verification},
-not the ambient $q=49$ row.
+current regression field list.
 
 Thus the induction theorem is not an arbitrary-redundancy
-classification, the redundancy-eight and redundancy-nine results are
-high-field theorems, and bounded-field and Lucas-carrier strata remain
-open.  In particular, the paper does not settle the general
-Reed--Solomon deep-hole conjecture.
+classification, the redundancy-eight result is a high-field theorem,
+and bounded-field and modular-carrier strata remain open.  In
+particular, the paper does not settle the general Reed--Solomon
+deep-hole conjecture.
+
+Two companion papers will take up the branches deliberately left out
+here.  The first begins with the four-marker redundancy-nine problem
+and its binary-quartic slices; it will state no classification until
+the characteristic-five carrier and the component exhaustion are
+reconciled.  The second treats the logically separate
+ordered-Hessian, Lucas-carrier, and distinguished \(e_7\) geometry.
+These forthcoming analyses are not inputs to any theorem in the
+present paper.
 
 The structural conclusion is nevertheless stable.  Beyond redundancy
 four, deepness is no longer controlled by one invariant or by isolated

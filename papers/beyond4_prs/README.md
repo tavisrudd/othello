@@ -1,16 +1,14 @@
 # Paper: Beyond redundancy four for projective Reed--Solomon codes
 
-**Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
-coherent polar flags, and modular carriers.*
+**Working title:** *Projective Reed--Solomon syndromes beyond redundancy four:
+complete first levels and coherent polar flags.*
 
-**Status:** 43-page proof-complete local manuscript candidate.  The manuscript
-proofs, claim-level trust map, statement-adequacy boundary, public
-classification records, certificate schema, literature audit, and rendered
-referee-polish gates are closed.  The aggregate Lean import, axiom-audit, and
-manuscript-reconciliation gates are also closed.  DOI publication remains
-gated on two independent specialist readers, a clean public export/replay,
-immutable identifiers, and author/account confirmation.  This merged paper supersedes the former plan for a
-redundancy-five-only manuscript.
+**Status:** Scope-reset R5--R8 manuscript under major revision after an
+independent cold read.  R5--R7 form the theorem spine and R8 is one
+fixed-level application.  R9, ordered-Hessian geometry, general Lucas
+carriers, and the distinguished \(e_7\) orbit are reserved for companion
+papers.  The follow-up cold-session queue and release gates are recorded in
+`second-draft-fix-plan.md`; no DOI release is authorized yet.
 
 ## Build
 
@@ -21,8 +19,8 @@ make check
 make tit-check
 ```
 
-`make check` builds the canonical preprint.  `make tit-check` builds the
-32-page IEEEtran single-column review manuscript
+`make check` builds the 29-page canonical preprint.  `make tit-check` builds the
+21-page IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
 `main-tit.tex`,
@@ -48,34 +46,31 @@ exact strength of each proved level visible:
 3. the all-field redundancy-six deep-hole classification and the complete
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
-4. the complete redundancy-eight/nine high-field arguments, with their exact
-   thresholds, orbit laws, modular boundaries, and closed pointed
-   lower-package/slice gates;
-5. the general coherent-polar induction theorem;
-6. the characteristic-two ordered-Hessian degeneracy theorem and the explicit
-   root-compatible/base-selection gates on its persistent/Lucas corollary;
-7. the proved Lucas-carrier arithmetic through the degree-nine `e_7` orbit.
+4. the redundancy-eight high-field argument, with its exact threshold,
+   orbit law, modular boundary, and pointed lower package;
+5. the general coherent-polar induction theorem.
 
 The manuscript must distinguish complete classifications from containment, high-field, and
-obstruction statements.  Redundancy ten is not a gate: C531/C532 may be incorporated only if their
-theorem closes before manuscript freeze.
+obstruction statements.  R9 and the modular-carrier branches are companion-paper
+work, not late additions to the submission.
 
 ## Deliberate exclusions
 
 - C481--C490 projection/Gale reconstruction belongs to the separate reconstruction-paper decision.
 - Twisted Reed--Solomon results C510/C514/C515/C518 are not part of the projective-RS spine.
-- A standalone modular-Hessian paper is considered only if C535 proves naturality beyond the
-  contraction/PRS setting.
+- R9, ordered-Hessian geometry, general Lucas carriers, and the distinguished
+  `e_7` orbit are reserved for companion papers.
 - No ambient syndrome census substitutes for the proved geometric and arithmetic mechanisms.
 
 ## Verification plan
 
-- C517 already supplies the redundancy-nine residual-quadratic algebra and synthesis gate.
+- C517 supplies companion-paper redundancy-nine residual-quadratic algebra.
 - C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
 - C540 closed the redundancy-five Lean package.
 - C541 closed the coherent-polar engine and redundancy-six/seven applications.
 - C542 closed the redundancy-eight application.
-- C543 closed the characteristic-two ordered-Hessian and Lucas-carrier layer.
+- C543 supplies the companion-paper characteristic-two ordered-Hessian and
+  Lucas-carrier layer.
 - C544 supplies the completed aggregate import gate, axiom audit, referee-facing trust map, and
   manuscript-to-formalization reconciliation.
 

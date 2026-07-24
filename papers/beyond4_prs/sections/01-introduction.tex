@@ -5,12 +5,12 @@ complete all-field classification at redundancy five, the first case
 left open by the known classification through redundancy four.
 Second, it introduces coherent polar flags: a marked contraction
 method that propagates splitting information to higher redundancies
-without forgetting the factor needed for a squarefree lift.  The
-coding output is an exact classification, up to
-projective-semilinear equivalence, of the corresponding one-column MDS
-extensions, together with exact projective extension counts.  We use
-deep-hole syndromes because their Hankel systems make both the base
-classification and the propagation mechanism visible.
+without forgetting the factor needed for a squarefree lift.  This
+gives complete all-field syndrome classifications at redundancies six
+and seven and, as a fixed-level application, the high-field
+classification at redundancy eight.  We use deep-hole syndromes
+because their Hankel systems make both the base classification and the
+propagation mechanism visible.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -105,7 +105,7 @@ marker, but no consecutive-row polar line is contained in its orbit.
 
 The resulting structural theorem has three outputs.
 
-\begin{theorem}[Classification results and explicit gates beyond five]
+\begin{theorem}[Classification results and explicit gates through eight]
 \label{thm:spine}
 The following statements hold.
 \begin{enumerate}[label=\textup{(\alph*)}]
@@ -124,9 +124,7 @@ The following statements hold.
       particular for $q\geq11$.
 \item For $q\geq43$, the projective deep-hole directions of
       $\PRS(q-7)$ are exactly the persistent tangent and
-      conjugate-secant families.  The same conclusion holds for
-      $\PRS(q-8)$ when $q\geq53$.  In either case the asserted
-      families have total size $q(q+1)^2/2$.
+      conjugate-secant families, of total size $q(q+1)^2/2$.
 \end{enumerate}
 At redundancy $r$, the semilinear orbits in the persistent
 conjugate-secant family are parameterized by
@@ -144,9 +142,9 @@ $\operatorname{char}\F_q$ divides $r-1$.
 The three parts have different scopes.  Parts~(a) and~(b) are
 unconditional all-field syndrome classifications, but part~(b)
 becomes a deep-hole classification only when
-$\rho(\PRS(q-6))=6$.  Part~(c) is unconditional in its two displayed
-high-field ranges.  Neither clause makes a classification claim below
-its threshold.  Table~\ref{tab:classification-status} places the
+$\rho(\PRS(q-6))=6$.  Part~(c) is unconditional in its displayed
+high-field range and makes no classification claim below its
+threshold.  Table~\ref{tab:classification-status} places the
 split-free result, radius gate, deep-hole conclusion, and remaining
 field gap in separate columns for each redundancy.
 
@@ -167,27 +165,22 @@ here.  Classical apolarity, catalecticants,
 and binary-form rank strata are treated in
 \cite{IarrobinoKanev1999,ComasSeiguer2011}; our use of divided powers
 keeps the small-characteristic contraction formulas explicit.
-Binary-quartic orbit theory in characteristic different from two and
-three \cite{KPP2025}, factorization statistics in linear families
-\cite{CMP2017}, normal-rational-curve nuclei
-\cite{GmainerHavlicek2013}, and the general Frobenius/monodromy
-semantics of splitting families \cite{Wang2026} are inputs.  The first
-two references identify deep syndromes with uncovered points of a
+Factorization statistics in linear families \cite{CMP2017},
+normal-rational-curve nuclei \cite{GmainerHavlicek2013}, and the
+general Frobenius/monodromy semantics of splitting families
+\cite{Wang2026} are inputs.  The coding-theory references above
+identify deep syndromes with uncovered points of a
 normal rational curve and settle the lower-redundancy families; they do
 not classify the redundancy-five cubic pencils.  The orbit-theoretic
 and factorization references supply normal forms and distribution
 tools, but not the coherent marked contraction used here.  The nucleus
 results locate characteristic-dependent kernels, while the present
 work computes which of their coherent lifts meet the PRS splitting
-incidence.  Standard function-field, Artin--Schreier, and linearized
-polynomial background is taken from
-\cite{Stichtenoth2009,LidlNiederreiter1996}; the characteristic-two
-orbit and component exhaustions themselves are proved internally, not
-imported from the quartic-orbit reference.  Accordingly, this paper's
+incidence.  Accordingly, this paper's
 contributions are separated into the
 redundancy-five through seven classifications, the conditional
-transverse induction mechanism, the fixed-level high-field
-applications, and the characteristic-two contained-carrier results.
+transverse induction mechanism, and the first fixed-level high-field
+application.
 Claim-by-claim novelty and dependency boundaries are recorded in the
 electronic ledger.
 
@@ -197,7 +190,7 @@ argument, and Section~\ref{sec:dictionary} gives the Hankel dictionary.
 Section~\ref{sec:r5} proves Theorem~\ref{thm:r5}.
 Sections~\ref{sec:polar}--\ref{sec:fixed} develop coherent polar
 induction and prove Theorem~\ref{thm:spine}.
-Section~\ref{sec:hessian} gives the characteristic-two ordered-Hessian
-replacement.  Section~\ref{sec:lucas} treats Lucas-carrier arithmetic.
 Section~\ref{sec:verification} states the computational and formal trust
 boundary, and Section~\ref{sec:boundary} records the exact open boundary.
+Companion papers will treat the redundancy-nine slice analysis and the
+logically separate ordered-Hessian and Lucas-carrier geometry.

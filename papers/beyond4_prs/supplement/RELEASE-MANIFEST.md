@@ -19,8 +19,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `5550dee775672c3574bb1d786fd541e301a402b3295988c97f5599a8133adfb1` |
-| Local built PDF bytes | `307452` |
+| Local built PDF SHA-256 | `267ce3c81f1487011f633fd8750a9d8f56667cbd7719cd25ae9cac24a7af81de` |
+| Local built PDF bytes | `229562` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |

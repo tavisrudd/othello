@@ -1,8 +1,15 @@
-# Proof-complete Version 1 checklist
+# Historical pre-scope-reset Version 1 checklist
 
 Date: 2026-07-23
 
-This is the operative C545 checklist.  A row is `PASS` only when its
+This checklist was superseded on 2026-07-24 when the submission scope
+was reduced to R5--R8.  Its statuses record the earlier merged
+R5--R9/Hessian/Lucas candidate and do not authorize release of the
+narrowed manuscript.  The operative cold-session and release gates are
+in `second-draft-fix-plan.md`, under “Scope reset and cold-session
+queue.”
+
+A row is `PASS` only when its
 acceptance test has reproducible evidence in the paper tree.  `REVIEW` means
 that candidate material exists but still needs a mathematical or rendered
 cold read.  `FAIL` means that a required proof, record, or release artifact is
