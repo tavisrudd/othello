@@ -101,6 +101,15 @@ pages 1, 6, and 11 passed visual inspection.  The remaining proof-
 reconciliation and exposition risks are assigned to C565--C571 in the
 second-draft plan.  See `2026-07-24-c564-ame-lu-first-draft.md`.
 
+**C565 closed (2026-07-24): shared Lean convention interface complete.**
+`RelativeConicArcs.AMELU.Definitions` now fixes ordered six-arcs, exact
+`[6,3,4]` kernels, normalized equal-phase states, subsystem marginals and
+AME, all projective/monomial/party/LU/LC action directions, the
+`X(a)Z(b)` Weyl convention, and the exact finite-field trace phase.  Its
+import-only gate passed guarded elaboration and the trace-only aggregate
+check.  No manuscript theorem is assumed by the data structure.  See
+`2026-07-24-c565-ame-lu-lean-foundation.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -136,10 +145,11 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C565 is next: build the shared Lean convention and definition interface used
-by all four formal theorem packages.  C581 is a separately queued optional upgrade
-gate for basis-free phase-space reconstruction and quantitative approximate
-rigidity; neither is assumed by the completion program.
+C566 is next: formalize the admitted non-GRS pencil, the scalar `z`, and
+the algebraic/projective implications used by the local-Clifford
+classification.  C581 is a separately queued optional upgrade gate for
+basis-free phase-space reconstruction and quantitative approximate rigidity;
+neither is assumed by the completion program.
 
 ## Completion gates
 

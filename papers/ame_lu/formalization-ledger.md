@@ -1,10 +1,13 @@
 # Formalization ledger
 
-No Lean theorem is presently adopted by this paper.
+The shared definitions are now fixed in
+`RelativeConicArcs.AMELU.Definitions`, with import-only terminal
+`RelativeConicArcs.Gates.AMELUDefinitions`.  No manuscript theorem is yet
+adopted from Lean.
 
 | Manuscript result | Formal status | Unformalized boundary | Action |
 |---|---|---|---|
-| `thm:dictionary` | none adopted | full dictionary and convention matching | C565 shared interface |
+| `thm:dictionary` | shared statement vocabulary complete; theorem not adopted | arc-to-kernel parameter proof and MDS-to-AME implication | downstream dictionary proof |
 | `thm:lc-pencil` and `cor:lu-lc-pencil` | none adopted | projective invariant theory, exceptional fibres, and rigidity composition | C567 candidate package |
 | `thm:lu-h3-grs` and `thm:q13-lu` | none adopted | stabilizer trace formula, geometric count, and exact contraction bridge | C568 candidate package |
 | `thm:transport-divisor` | none adopted | cycle-cover algebra, rank bridge, and orbit geometry | C569 candidate package |
