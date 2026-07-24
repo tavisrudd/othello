@@ -20,10 +20,17 @@ namespace RelativeConicArcs.PRSRedundancyFiveCertified
 open PRSRedundancyFive
 open PRSRedundancyFiveCertificate
 
+/-- The algebraic synthesis and public certificate use the same exact finite
+bridge field band. -/
+theorem finiteBridgeFieldOrders_agree :
+    PRSRedundancyFive.finiteBridgeFieldOrders =
+      PRSRedundancyFiveCertificate.finiteBridgeFieldOrders := by
+  rfl
+
 /-- Redundancy-five synthesis with the exact public-certificate validation
 interface as its finite evidence type. -/
 theorem redundancyFiveSynthesisWithCertificate
-    {K : Type*} {q : ℕ} [Field K] [DecidableEq K]
+    {K : Type*} {q : ℕ} [Field K] [Fintype K] [DecidableEq K]
     (input : ExceptionalCoverClassificationInput K CertificateValidation q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)

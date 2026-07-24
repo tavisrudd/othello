@@ -466,9 +466,12 @@ def finiteBridgeFieldOrders : List ℕ :=
 /-- Explicit external theorem boundary for the exceptional-cover classification.
 Each load-bearing imported result or finite validation has its own proposition. -/
 structure ExceptionalCoverClassificationInput
-    (K CertificateEvidence : Type*) (q : ℕ) [Field K] [DecidableEq K] where
+    (K CertificateEvidence : Type*) (q : ℕ)
+    [Field K] [Fintype K] [DecidableEq K] where
   coveringRadius : PRSFoundation.CoveringRadiusInput (Syndrome K)
   families : FamilyData (Syndrome K) q
+  fieldOrder_eq_card : q = Fintype.card K
+  fieldCharacteristic : CharP K families.characteristic
   orbitCase : OrbitArithmeticCase
   orbitCaseCondition : orbitCase.FieldCondition families.characteristic q
   fieldOrderAtLeastSeven : q ≥ 7
@@ -496,7 +499,8 @@ classification, exact total count including the sporadic contribution, and the
 projective/projective-semilinear orbit consequences, while retaining every
 external mathematical input as a theorem hypothesis. -/
 theorem redundancyFiveSynthesis
-    {K CertificateEvidence : Type*} {q : ℕ} [Field K] [DecidableEq K]
+    {K CertificateEvidence : Type*} {q : ℕ}
+    [Field K] [Fintype K] [DecidableEq K]
     (input : ExceptionalCoverClassificationInput K CertificateEvidence q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)

@@ -20,6 +20,7 @@ certificate, arithmetic, and synthesis terminals exported by
 #print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingRational
 #print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_characteristicThree
 #print axioms RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertified.finiteBridgeFieldOrders_agree
 #print axioms RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate
 #print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_field_orders
 #print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts
