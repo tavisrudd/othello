@@ -53,6 +53,11 @@ six-point projective arcs and their `[6,3,4]_q` MDS kernels.  Its proved core is
 5. a transport-sheaf explanation of the exceptional contraction divisor and
    its multiplicities.
 
+Fixed-copy permutation contractions cannot supply a generic pencil
+coordinate: on an equal-phase linear-code state each is a power of `q`
+determined by a linear-system rank.  Their maximal minors detect special
+rank-jump divisors, but their values are generically constant.
+
 The flagship upgrade under investigation is equality of LU and LC orbit
 partitions inside the admitted pencil.  The paper will not use the global
 LU--LC conjecture or claim that every LU symmetry is Clifford.

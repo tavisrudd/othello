@@ -37,12 +37,22 @@ Psi_t ~LU Psi_u  iff  Psi_t ~LC Psi_u  iff  z(t)=z(u).
 This means equality of equivalence relations on the family, not that every
 local-unitary intertwiner is Clifford.
 
+**C559 closed negatively (2026-07-24): fixed-copy contraction invariants
+cannot recover the pencil coordinate generically.**  For an equal-phase
+linear-code state every permutation contraction has the exact value
+`q^(km-rank M_sigma(G))`.  Hence every fixed-copy party-orbit invariant is
+constant on the common generic-rank stratum; at four copies its generated
+subfield of `Q(t)` is the constant field, not `Q(z)`.  C548/C550's
+`(z-2)(9z-4)` remains an exact rank-jump divisor, not a rational coordinate.
+This closes only the proposed proof route.  See
+`2026-07-24-c559-ame-lu-invariant-field-gate.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
 as C559--C572.  Dependency order is authoritative:
 
-1. C559--C560: invariant-field gate and exact restricted LU/LC disposition.
+1. C559--C560: fixed-copy obstruction and exact restricted LU/LC disposition.
 2. C561: theorem, title, exception-table, and architecture freeze.
 3. C562--C563: claim-specific literature audit and paper-local evidence import.
 4. C564: first complete manuscript draft and warning-free PDF.
@@ -51,10 +61,12 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C559 is the next task.  If its gate fails, C560 must retain the proved paper
-title and organize the manuscript around LC classification, operational
-Clifford phases, and exact LU separators.  Do not weaken “uniform `LU=LC`”
-into a census claim.
+C560 is next.  It must use simultaneous-flattening/support rigidity or exact
+finite-component classification, not another fixed-copy rank signature.  If
+the rigidity theorem fails, retain the proved paper title and organize the
+manuscript around LC classification, operational Clifford phases, the C559
+fixed-copy obstruction, and exact LU separators.  Do not weaken “uniform
+`LU=LC`” into a census claim.
 
 ## Completion gates
 

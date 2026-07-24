@@ -13,6 +13,7 @@ future related-work or novelty statement must carry the read depth required by
 | `q=13` arbitrary-LU separator | proved in C397 | not yet imported | no priority claim | exact exceptional example |
 | Pentad and signed-sheet forgetfulness | proved in C397/C546 | not yet imported | classical core must be credited | boundary result |
 | Four-copy divisor and transport sheaf | proved in C548/C550 | not yet imported | no paper-level audit | mechanism theorem after evidence import |
+| Generic constancy of fixed-copy contractions | proved in C559 | no new computation | unaudited; no priority claim | mechanism boundary explaining why the divisor is not a coordinate |
 | Restricted LU/LC orbit coincidence | unproved | none | unaudited | do not state as theorem |
 
 ## Promotion rule

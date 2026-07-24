@@ -13,7 +13,8 @@ still depends on the claim, evidence, literature, and prose gates.
 | C546 | H3 pentad orientation is uniformly LC-forgettable | adopted as boundary/remark | every odd reduction in its stated domain | explicit integral isoduality and local Fourier lift |
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
-| C559--C560 | LU and LC orbit partitions coincide inside the admitted pencil | **open theorem gate** | target: odd finite fields with explicit exceptional clauses | proposed invariant-field proof; no present claim |
+| C559 | every fixed-copy LU contraction is generically constant on an algebraic equal-phase code family | adopted as a mechanism boundary | every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
+| C560 | LU and LC orbit partitions coincide inside the admitted pencil | **open theorem gate** | target: odd finite fields with explicit exceptional clauses | support/flattening rigidity or finite-component classification; no present claim |
 
 ## Stable source labels
 
@@ -23,4 +24,5 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:logical-phase`: split-torus versus `SL_2(q)` logical phase.
 - `thm:q13-lu`: exact four-copy `q=13` separator.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
+- `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-pencil`: reserved; must not be used before the open gate closes.
