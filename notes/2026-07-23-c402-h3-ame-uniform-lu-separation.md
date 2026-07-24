@@ -257,37 +257,15 @@ would need genuinely different noncommuting LU-covariant data, not a higher-degr
 This is a sharp bounded operator-family no-go, not an all-field assertion and not needed for the
 H3/GRS separation theorem.
 
-### Orientation frontier: what “different data” means
+### Orientation frontier: resolved by C546
 
-There is one genuine adjacent mystery: is the `A5` orientation LU-intrinsic at all? An odd element
-of the recovered pentad `S5` might lift to a party permutation followed by local unitaries. If it
-does, no LU invariant can recover the orientation. If it does not, compact-group invariant theory
-guarantees that some general tensor-contraction invariant separates the two finite orbits.
-
-The concrete candidate data, in increasing order of breadth, are:
-
-1. **General multi-copy permutation contractions.** Take `m` copies of `Psi` and `m` copies of
-   `conj(Psi)` and contract the local indices at party `i` by an independently chosen permutation
-   `sigma_i in S_m`. These are honest polynomial LU invariants and strictly extend traces of words
-   in reduced density matrices. The cheapest detector would be a contraction whose value changes
-   under an odd pentad symmetry.
-2. **Partially transposed or realigned marginal projectors.** A fixed partial-transpose pattern
-   transforms covariantly with `U`/`conj(U)` on the appropriate legs and need not commute with a
-   differently wired operator. Spectra or closed contraction networks are LU invariant when the
-   conjugate-leg bookkeeping is consistent. Covariance must be proved for the complete network;
-   a raw basis-dependent transpose is not admissible.
-3. **Cut-to-cut flattening holonomies.** Every `3|3` flattening of an AME tensor is a scaled
-   unitary. Closed products that transport between several cuts can cancel the local basis
-   changes and retain an oriented spectrum. This is the arbitrary-LU analogue of C374's useful
-   stabilizer holonomy, but it requires a canonical contraction pattern rather than Pauli labels.
-
-The first falsifier is group-theoretic, not a search over these invariants: test whether an odd
-pentad symmetry already lifts to a party-permuting local Clifford. C397 owns that exact Clifford
-stabilizer gate. A positive lift kills the orientation question immediately. A negative result
-does **not** exclude a non-Clifford LU lift; C546 therefore owns the full LU-stabilizer
-classification before escalating, if necessary, to general contraction invariants. Thus this is
-a real adjacent mystery with a sharp gate and allocated solver, not unfinished work needed by
-C402.
+C546 proves that the `A5` orientation is not LU-intrinsic. Full local Fourier sends the equal-phase
+code state `|Psi_C>` to `|Psi_(C^perp)>`, and an exact integral H3 isoduality returns it through an
+odd pentad permutation. Its projectivity determinant has norm `-4` and its coordinate-multiplier
+norms are units, so the lift exists in every odd reduction. Thus no LU invariant can orient the
+pentad: the marking selects a CSS electric/magnetic half, not an extra quantum orbit. The
+party-permutation image of the full LU stabilizer is exactly `S5`; C397 retains only the internal
+local-Clifford/logical/operator-pushing classification.
 
 The `ej3` pass removes the main continuous-search hazard before C546 starts. For any equal-phase
 state of a linear `[6,3,4]_q` code, let `(X_1,...,X_6)` be an infinitesimal local-unitary
@@ -358,7 +336,7 @@ for C402.
 | What the ten-versus-five H3 matching split intrinsically carries | **Settled by `ej2`:** the five nonconcurrent matchings are a one-factorization pentad with `S5` stabilizer and even `A5` half. |
 | Which H3 datum the marginal incidence forgets | **Settled by `ej2`:** it recovers the `S5` pentad roof but not the index-two orientation selecting the marked `A5` half. |
 | Whether higher-degree words in the same marginals recover that bit | **Settled negatively at q=19 by the final Tao pass:** all 32,768 subset ranks retain the same 120-element `S5` party symmetry. |
-| Whether the orientation is LU-intrinsic at all | **Open adjacent mystery, allocated to C546:** C397 supplies the first party-permuting LC-lift falsifier; C546 then owns the full arbitrary-LU lift classification and, if no lift exists, a finite general contraction/flattening detector. |
+| Whether the orientation is LU-intrinsic at all | **Settled negatively by C546:** full local Fourier exchanges `C` and `C^perp`, and an integral odd-pentad isoduality returns the H3 state in every odd reduction. No LU invariant can orient it. |
 | Whether C546 faces a positive-dimensional continuous stabilizer | **Settled negatively by `ej3`:** the radius-one/Fourier tangent lemma leaves only local scalar gauge, so the projective LU stabilizer is finite. |
 | What C396's q=13 moment collision is remembering | **Settled at the invariant level:** both classes have six common arc/Gale matching concurrences; identifying the two six-match configurations remains C396-owned. |
 | Whether C400's fine scalar-orbit eigenrows admit a separate arbitrary-LU-covariant operator | **Not needed for C402:** the uniform theorem closes before that construction. No successor is required by this task. |

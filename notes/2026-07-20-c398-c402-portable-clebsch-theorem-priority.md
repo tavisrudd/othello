@@ -236,10 +236,10 @@ claim-specific audit located no predecessor for the exact moment formula or unif
 the pentad/S5/A5 core is classical, so novelty wording is restricted to its LU-readable recovery.
 The final Tao pass checks all 32,768 marginal subsets at q=19: the complete trace-word rank function
 still has `S5`, not `A5`, party symmetry, so higher-degree words in the same commuting marginals
-cannot recover the lost orientation bit. C546 is allocated behind C397 to solve—not merely probe—
-whether that orientation is intrinsic under arbitrary party-permuting LU. The `ej3`
-radius-one/Fourier tangent lemma proves that the connected LU stabilizer is only local scalar
-gauge, reducing C546 to a finite projective component classification.
+cannot recover the lost orientation bit. C546 has now settled the apparent mystery: full local
+Fourier exchanges the CSS halves `C` and `C^perp`, and an exact integral H3 isoduality returns the
+state through an odd pentad permutation in every odd reduction. Hence the orientation is
+LU-forgettable—indeed local-Clifford-forgettable—and the full party image is exactly `S5`.
 
 ### Target theorem
 
