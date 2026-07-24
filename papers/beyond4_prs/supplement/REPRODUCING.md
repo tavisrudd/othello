@@ -75,7 +75,6 @@ described as an independent derivation.
 | Certificate R6 | direct scan through \(q=16\); structural bridge thereafter | independent replay plus radius gate |
 | Certificate R6-NF | recorded small exceptional normal forms | same-file deterministic checker |
 | Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | independent five-secant and orbit checks |
-| Certificate SC | integral factorization and bridge identities in every characteristic; saturation over \(\mathbf Z[1/6]\); fibres \(2,3\) | dependency-free identity/factorization replay plus trusted Singular primary decomposition |
 | Certificate R8 | characteristic cases and numerical bounds, not an ambient census | independent algebra/nucleus replay |
 | Certificate R9 | residual algebra, all recorded slice normal forms, and the public Bezout vectors | independent residual/slice replay plus exact supplement transcription check |
 | Certificate R9-49 | the characteristic-seven carrier at \(q=49\) | one exhaustive carrier implementation |
@@ -93,10 +92,6 @@ paper-local directory containing the named certificate.
 (cd supplement/evidence/r6 && python3 2026-07-22-c498-prs-deep-hole-replay.py --json 2026-07-22-c498-prs-deep-hole-census.json)
 (cd supplement/evidence/r6-normal-forms && python3 2026-07-23-c498-small-exceptional-normal-forms.py --summary)
 (cd supplement/evidence/r7 && python3 2026-07-23-c509-prs-deep-hole-calibration-replay.py)
-(cd supplement/evidence/stable-components && python3 2026-07-24-c597-r10-integral-bad-scheme-sc11.py --check)
-(cd supplement/evidence/stable-components && python3 2026-07-24-c595-stable-component-fano-elimination.py --check)
-(cd supplement/evidence/stable-components && Singular -q 2026-07-24-c597-r10-integral-bad-scheme-sc11.sing)
-(cd supplement/evidence/stable-components && Singular -q 2026-07-24-c595-stable-component-fano-elimination.sing)
 (cd supplement/evidence/r8 && python3 2026-07-23-c513-prs-redundancy-eight-replay.py)
 (cd supplement/evidence/r9 && python3 2026-07-23-c516-prs-redundancy-nine-replay.py)
 (cd supplement/evidence/hessian && python3 2026-07-23-c525-ordered-hessian-arf-pullback-replay.py)

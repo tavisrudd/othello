@@ -297,70 +297,6 @@
       "sha256": "d7574cad8fa9bc7f3cd73ce1055f7ea606256cf7f5f40c7ef547c5eed2967ad9"
     },
     {
-      "bytes": 5468,
-      "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.json",
-      "public_label": "Certificate SC",
-      "replay_class": "compare",
-      "role": "fano-certificate",
-      "sha256": "ddfd860084a822aeae362a40fbac02d8053ae92546cd8214bc432dc681f5981c"
-    },
-    {
-      "bytes": 14319,
-      "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.py",
-      "public_label": "Certificate SC",
-      "replay_class": "rederive",
-      "role": "fano-generator-checker",
-      "sha256": "059cf24d1ba925505c2bc82fd735bacc3d7e4ef49c6b49fb8e56ef9bc765bcd9"
-    },
-    {
-      "bytes": 380,
-      "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.sha256",
-      "public_label": "Certificate SC",
-      "replay_class": "compare",
-      "role": "fano-checksum",
-      "sha256": "434034f78a578db01a22e77de1129d991fbe20354ceeb05c483a0002a3cdeaa7"
-    },
-    {
-      "bytes": 4921,
-      "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.sing",
-      "public_label": "Certificate SC",
-      "replay_class": "rederive",
-      "role": "fano-scheme-checker",
-      "sha256": "fa1a525170759ee44d41d13373a98a488fc6feee365a8d315d8771f9bef82b78"
-    },
-    {
-      "bytes": 2676,
-      "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.json",
-      "public_label": "Certificate SC",
-      "replay_class": "compare",
-      "role": "certificate",
-      "sha256": "4b24ae53ea4b18941df642df4db1677d6afaa47d68814ed348144a7fe2536756"
-    },
-    {
-      "bytes": 22983,
-      "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.py",
-      "public_label": "Certificate SC",
-      "replay_class": "rederive",
-      "role": "generator-checker",
-      "sha256": "4c1a74dae9e31a14199271826609a61e233312eb4fa22e76e9e88124ebb85576"
-    },
-    {
-      "bytes": 365,
-      "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256",
-      "public_label": "Certificate SC",
-      "replay_class": "compare",
-      "role": "checksum",
-      "sha256": "64455e3044fc9cf0bb2ecd8469c88a193d03e110a105e392f29bfa99b85b5f91"
-    },
-    {
-      "bytes": 4516,
-      "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.sing",
-      "public_label": "Certificate SC",
-      "replay_class": "rederive",
-      "role": "scheme-checker",
-      "sha256": "3fbb98c10798e5fc28b14585f0e27a8292a7594b0ed05cc27fa1ed1ce4fde2f6"
-    },
-    {
       "bytes": 3537,
       "path": "evidence/e7/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py",
       "public_label": "Certificate e7",
@@ -393,12 +329,12 @@
       "sha256": "ec8667b39b9f253600c1fa164fa8143018c9395f2152fe847ac0dd78a3a1104c"
     },
     {
-      "bytes": 4303,
+      "bytes": 4199,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "7799d86b2783b00c1ea556fc41329191895846746635df19d74637502367f17e"
+      "sha256": "780019fccf5db182d1323550615bbfae90495f446cdb9dddc456453234e475e2"
     },
     {
       "bytes": 545912,
@@ -449,12 +385,12 @@
       "sha256": "ba780a919786b1797a884658080282632ec33a9c6dc675b5d77d6083f566e922"
     },
     {
-      "bytes": 7144,
+      "bytes": 6464,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "1ba71447b8fbb07c0c9463b276df95204439dd6d148cc1ab6861e9b2d36d60a2"
+      "sha256": "a7f6bbb3d61a9a59875e9790328f689ed6229dd5d3f88b0a7af3576a4a44f0d3"
     },
     {
       "bytes": 12059,
@@ -465,28 +401,28 @@
       "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
     },
     {
-      "bytes": 3878,
+      "bytes": 3872,
       "path": "build_r6_paper_table.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "R6 paper-table builder",
-      "sha256": "b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98"
+      "sha256": "ba209d0a7199a08166837155bc958678e1299bf7b89b058e54b9b9b36329067b"
     },
     {
-      "bytes": 16147,
+      "bytes": 14814,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "27ba821f7422d1c684f82e2bf8de1176f1dcf113be812c151a0e965d9920d441"
+      "sha256": "2a741041f1928ec4be1ad67dbdd0a124670abd58e68acb18959869e7231e6924"
     },
     {
-      "bytes": 8038,
+      "bytes": 7773,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "f6be6e7791badf14158f5d6e81239f87dc4e380e07ddadf40c3d33bffcad0723"
+      "sha256": "d36ab8f00856cd15404f72f0591aaca83dd1792d4482932282bfcf5c7d28755b"
     },
     {
       "bytes": 17225,

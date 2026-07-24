@@ -10,15 +10,26 @@ claim its exact trust route.
 
 \section{Scope and open problems}\label{sec:boundary}
 
-The contained/transverse fork gives a uniform all-level theorem.
-Theorem~\ref{thm:stable-component} supplies the scheme-theoretic
-component classification with no field-size hypothesis, and
-Theorem~\ref{thm:uniform-transverse} supplies the arithmetic threshold.
+The first levels and the contained/transverse fork point to one stable
+picture.  The bottom-cover point count is uniform and linear:
+Theorem~\ref{thm:uniform-transverse} gives its exact threshold.  The
+remaining question is geometric containment.
 
-\begin{corollary}[Large-characteristic uniform list]
+\begin{conjecture}[Stable-component classification]
+\label{conj:stable-polar}
+The assertion \(\mathrm{SC}(j)\) holds at every redundancy \(j\geq6\):
+the recursively pointed contained bad scheme has no component outside
+\(\mathcal P_j\cup\mathcal M_j\).
+\end{conjecture}
+
+This is not the conclusion of Theorem~\ref{thm:uniform-transverse}:
+the conjecture is a scheme-theoretic component assertion with no
+field-size conclusion; the theorem supplies the arithmetic threshold.
+
+\begin{corollary}[Large-characteristic stable list]
 \label{cor:large-characteristic-stable}
-Let \(r\geq6\) and \(q\geq Q_r\), and suppose
-\(\mathcal M_r\) is empty.  Then the split-free directions
+Assume \(\mathrm{SC}(j)\) for \(6\leq j\leq r\), let \(q\geq Q_r\),
+and suppose \(\mathcal M_r\) is empty.  Then the split-free directions
 are exactly the persistent tangent and conjugate-secant families.  If
 the covering radius is \(r-1\), this is also the projective deep-hole
 list.  The modular locus is empty when
@@ -38,24 +49,23 @@ unconditionally.  The characteristic hypothesis removes the modular
 term, not the large-characteristic R5 cyclic carrier; the theorem
 eliminates that carrier on the transverse branch.
 
-The result is an arbitrary-redundancy containment theorem, not by
-itself a complete deep-hole classification.
+The present results establish the first levels of this picture but do
+not constitute an arbitrary-redundancy classification.
 \begin{enumerate}[leftmargin=2em]
 \item Redundancy five is complete for every $q\geq7$.
 \item Redundancy six is a complete all-field deep-hole classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item At every redundancy \(r\geq6\) and \(q\geq Q_r\), every
-      split-free direction lies in the persistent or modular locus.
-      Exact modular arithmetic, fields below \(Q_r\), and the
-      covering-radius premise remain separate.
+\item At higher redundancy the remaining input is
+      \(\mathrm{SC}(j)\).  The bottom monodromy, point count,
+      collision alternative, and transverse degree budget are uniform.
 \end{enumerate}
 
-In particular, the paper does not settle the general Reed--Solomon
-deep-hole conjecture: the theorem neither proves the covering-radius
-premise nor classifies every modular direction or the fields below its
-threshold.
+Thus Theorem~\ref{thm:uniform-transverse} is conditional rather than an
+arbitrary-redundancy classification: exclusion of additional
+higher-level contained components remains open.  In particular, the
+paper does not settle the general Reed--Solomon deep-hole conjecture.
 
 The last sporadic fields at redundancies five, six, and seven are
 \(19,13,11\), while the corresponding point-count gates are

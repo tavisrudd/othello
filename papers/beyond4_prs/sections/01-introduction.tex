@@ -1,17 +1,15 @@
 \section{Introduction}
 
-This paper has three principal contributions.  First, it gives the
+This paper has two principal contributions.  First, it gives the
 complete all-field classification at redundancy five, the first case
 left open by the known classification through redundancy four.
 Second, it introduces coherent polar flags: a marked contraction
 method that propagates splitting information to higher redundancies
 without forgetting the factor needed for a squarefree lift.  This
 gives complete all-field syndrome classifications at redundancies six
-and seven.  Third, an integral model of the recursively pointed bad
-scheme proves that its only contained components at every higher level
-are the persistent and modular ones.  We use deep-hole syndromes because
-their Hankel systems make the base classification, propagation mechanism,
-and contained-component geometry visible.
+and seven.  We use deep-hole syndromes because their Hankel systems
+make both the base classification and the propagation mechanism
+visible.
 
 The mechanism is the elementary identity
 \[
@@ -24,9 +22,10 @@ The mechanism is the elementary identity
  \lambda\nmid g
 \]
 when \(g\) is squarefree.  Retaining \(\lambda\) is therefore the
-essential coherence condition.  Theorem~\ref{thm:stable-component}
-classifies the contained components, and
-Theorem~\ref{thm:uniform-transverse} closes the transverse branch for
+essential coherence condition.  If the contained bad scheme has no
+component outside the persistent and modular loci through redundancy
+\(r\), Theorem~\ref{thm:uniform-transverse} closes the transverse branch
+for
 \[
  q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
 \]
@@ -195,9 +194,9 @@ tools, but not the coherent marked contraction used here.  The nucleus
 results locate characteristic-dependent kernels, while the present
 work computes which of their coherent lifts meet the PRS splitting
 incidence.  Accordingly, this paper's
-contributions are separated into the redundancy-five through seven
-classifications, the coherent transverse induction, and the integral
-stable-component theorem.
+contributions are separated into the
+redundancy-five through seven classifications and the conditional
+transverse induction mechanism.
 Claim-by-claim novelty and dependency boundaries are recorded in the
 electronic ledger.
 
@@ -206,7 +205,6 @@ Section~\ref{sec:overview} first gives a proof-free guide to the
 argument, and Section~\ref{sec:dictionary} gives the Hankel dictionary.
 Section~\ref{sec:r5} proves Theorem~\ref{thm:r5}.
 Sections~\ref{sec:polar} and~\ref{sec:r67} develop coherent polar
-induction, prove the uniform component theorem, and establish
-Theorem~\ref{thm:spine}.
+induction and prove Theorem~\ref{thm:spine}.
 Section~\ref{sec:verification} states the computational and formal trust
 boundary, and Section~\ref{sec:boundary} records the exact open boundary.
