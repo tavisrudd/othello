@@ -147,6 +147,98 @@ independent exceptional conditions happen to coincide.
 No manufactured mystery: the genuine open item is the transport-category unification, correctly the
 C589/first-order-transfer question, not a C585 gap.
 
+## Extra juice — second-order closeout (2026-07-24)
+
+The first-order closeout separated the mechanisms. Looking at the *structure* of the two exceptional
+sequences yields more. Cross-checked against prior `crowns`-lane gateway work to avoid reinventing or
+re-treading closed ground (`notes/2026-07-21-cocycle-gateway-novelty-consolidated.md`,
+`notes/handoffs/2026-07-17-crowns.md`, `notes/2026-07-20-c437-c438-gateway-chain-spikes.md`).
+
+**1. The `{7,11}` overlap is a two-tower intersection — *prior framing*, sharpened here.** The
+"**code-tower `(7,11)` vs polytope-tower `(7,11,19)` divergence**" is already on record as a novelty
+*falsifier* ("facts classical; the juxtaposition new as framing, not theorem" —
+`cocycle-gateway-novelty-consolidated`, which also names the Galois/Kostant `L_2(5,7,11)` trinity vs
+the Arnold–Coxeter trinity). C585 does **not** claim this framing. What C585 adds on top:
+
+```
+{7,11,23}   self-dual-extendable perfect codes   (extended [8,4,4],[12,6,6],[24,12,8]; Mathieu-adjacent)
+  ∩ {index sheet available}   =  {7,11}   =  the C474 modular carrier.
+```
+
+i.e. the sharpening of the *code tower* to the classified trio `{7,11,23}` and the identification of
+the modular carrier as `code-tower ∩ index-sheet`. Two provenance corrections the prior work forces:
+the strict **A₅ / self-polar-conic tower is `{5,11,19}`** (Dye 1991; Storme–Van Maldeghem,
+`q ≡ ±1 mod 10`), *not* `{7,11,19}` — `q=7` enters only via the Fano/biplane (PSL₂(7)≅PSL₃(2), `S₄`)
+route, a different tower that happens to share `7,11`. And the code tower's top `q=23` is **carrier-
+only**: its perfect-code *permutation* family was refuted (`crowns` C488), leaving exactly the C474
+index-gate boundary this report derived. So "gateway = intersection of two exceptional towers" is a
+*candidate organizing definition to float at the C589 gate*, credited to the two-tower framing — not
+a C585 theorem.
+
+**2. `(19, 23)` are the two complementary half-gateway witnesses.** The conjunction "perfect code AND
+index sheet" fails in exactly two ways, each realized once at a tower top:
+
+- `q = 19`: index sheet exists (57-cell), **no** self-dual-extendable perfect code → sheet-only.
+- `q = 23`: binary Golay exists, **no** PSL₂(23) index sheet → code-only.
+
+C587 called `q=23` "the diagnostic"; C585 upgrades it to a *diagnostic pair* `(19,23)` bracketing the
+carriers `{7,11}`, one witness per failed half. Free, and concrete for the C589 exposition.
+
+**3. The census contains the biplane sequence and adds exactly `{8,9,13,17}` — a cheap C586 check.**
+`{7,11,19} ⊆ {7,8,9,11,13,17,19}`. Forced (every exceptional-index `q` lands in the S₃-census) or
+accidental? Probably accidental — the extras are non-A₅ (`8≡3`, `13,17≡2 mod 5`; only `9≡−1 mod 5`
+gives `A₅<A₆`) — but a *forced* containment would mean the deep-hole avatar carries the modular
+**index** half everywhere, isolating the carry-failure entirely on the **perfect-code** half. One
+finite scan for C586; either answer sharpens the verdict.
+
+**4. A `q ≡ 3 (mod 4)` thread runs through the design-heavy avatars, not the raw census.** All of
+`{7,11,19,23} ≡ 3 (mod 4)`; M1 (conic-fill) *requires* `q ≡ 3 (mod 4)`, and prior work has the same
+congruence in the Klein-frame robust-rate crown ("`q ≥ 7, q ≡ 3 mod 4`", C358) and in the outer-
+stabilizer being outer at `q=11` (`−1` nonsquare, `11≡3 mod 4`; `c498` review). The census strays
+`{8,9,13,17}` are the only exceptions — consistent with M2 being the *loosest* avatar (soft bound,
+fewest congruence constraints). Suggestive, not proven; a cheap congruence check for C586.
+
+## Alt-attack routes (`aa`) to make the `{7,11}` overlap a theorem
+
+The direct route — a transport-natural obstruction with vanishing set `{7,11}` unifying M2 and M3 —
+is *doubly discouraged*: C585 shows different finiteness types, and `crowns` **C438 already closed**
+the adjacent "one category-correct commuting square" for `q=9/q=11` ("no obstruction square survives;
+Frobenius fusion lives on the wrong fibre"). Also dead, do not re-propose: the single metaplectic/
+theta roof (C472/C489/C501, "theta parity dead as a bit detector"), the M₁₂-at-`q=11` enlargement
+(C436, false), and the `q=23` perfect-code permutation family (C488, refuted). Live scaffolding to
+build on instead: the one-torsor `[T_q]=sgn: PGL₂(q)→C₂`, the C434 double-coset information-lattice
+transport theorem, the three functors (C486), and the based golden-pair groupoid (C492).
+
+Ranked routes:
+
+- **A — Flip the objective: prove the *separation* is a theorem (highest EV, provable now).** Instead
+  of unifying M2 and M3, prove **no transport-natural map identifies `Φ_deep` with `Φ_mod`**, using
+  C585's two separating witnesses (`23` = code without census; `{8,9,13,17}` = census without code):
+  any natural map would equate their vanishing sets, which the witnesses forbid. This converts C585's
+  coincidence verdict into a rigorous no-go, in the same family as the lane's clean C438/theta closes.
+  Same objective, inverted I/O.
+- **E — Settle the forced-vs-accidental containment (cheap, decisive either way; ej item 3).** One
+  finite scan. Forced ⇒ a partial unification theorem ("deep-hole ⊇ index gate; perfect-code gate is
+  the sole discriminant"). Accidental ⇒ reinforces Route A. Do first alongside A.
+- **B — Narrow transport to the `q=11` fibre only.** Don't transport the whole family (that is what
+  C438 killed); build the C434/C492 transport *only on the intersection object* at `q=11`, exhibiting
+  the deep-hole sporadic orbit and the modular carrier as two forgetful images of the single
+  A₅-decoration. C438 died because Frobenius fusion sat on the wrong fibre; at `q=11` in char 11 that
+  fusion may not obstruct — worth one check. Same I/O as C438 restricted to the good fibre.
+- **D — Model-theoretic complexity separation (the C589 first-order-transfer core, aimed at Route A).**
+  Classify the obstructions by definitional complexity: M2 an orbit-count (`Δ₀`) condition, M3a a
+  classification (`Π`) condition, M1 a polynomial-vanishing condition. Provably different quantifier
+  complexity ⇒ a logic proof they cannot be one obstruction — a rigorous "different finiteness types."
+  This is exactly C587 §4's open engine, here pointed at separation rather than unification.
+- **C — Exponential-sum route (low EV, near a dead precedent).** Ask whether both `q`-sets are
+  vanishing loci of one Gauss/Jacobi-sum identity. Must avoid the closed theta/Weil sign detectors;
+  use ordinary Gauss-sum congruences only. Flagged low-EV given the dead metaplectic roof.
+
+Recommendation: **A + E together** are the near-term move (both essentially provable/checkable now and
+mutually reinforcing); **D** is the real prize but is the C589-gated first-order-transfer probe; **B**
+is a targeted long shot; **C** is a backstop. None re-opens a closed idea. No IDs allocated — A/E/B
+feed C586, D feeds the C589 gate.
+
 ## Provenance and reproducibility
 
 This is a comparison of already-established finite `q`-sets, not a new census. No new computation is
