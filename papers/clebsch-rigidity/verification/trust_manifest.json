@@ -1260,9 +1260,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "9511d3509c786b0f0e888f2b3cc197946831dfca911af10559fd1c616edbd38a"
+    "sha256": "a2db8b03867dacdd86e03520eeb30e6f6f70dc19186608ba364fc747e5843bdb"
   },
-  "manuscript_sha256": "fc3a441e1821b78d49a37ef7a7700447f0cea701ea0ed084987505486f2d094c",
+  "manuscript_sha256": "574b5e11a991429abd23205805b28daa452f15bd7d2a63660d3ef3c93c91b024",
   "public_documents": [
     {
       "path": "README.md",
@@ -1302,7 +1302,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "8c1086ffd48976eca7e48a4674d858a70758b004f317cb38ca6a5566449ccb49"
+    "sha256": "2e593379912f5bca09b6e694ea5081c4c692d03be71c1f2dff231a04790849f1"
   },
   "verify_all": {
     "checker_output_certificate": {
