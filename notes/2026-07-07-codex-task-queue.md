@@ -145,6 +145,10 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C545 `[reed-solomon]` [ACTIVE; TIT PACKET + LOCAL PROOF/FORMAL/DETERMINISTIC-EXPORT GATES GREEN; PUBLIC RELEASE EXTERNALLY BLOCKED]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after two independent specialist readers, the publicly fetchable flake-pinned Lean revision, author/account confirmation, immutable paper-export repository and archive identifiers, and the live DOI-bearing submission route are green.  IEEE Transactions on Information Theory is the selected journal target; its 32-page single-column review build and submission packet are locally green.  The release checker fails closed on every public field; no external upload or ScholarOne submission is authorized → `notes/2026-07-24-c545-tit-submission-prep.md`, `notes/2026-07-24-c545-final-reader-export-doi-gates.md`.
 - **C595 `[reed-solomon]` [QUEUED]** — construct the integral universal-polar-line/Fano ideal for \(\mathrm{SC}(j)\), regress its saturations against R6/R7, and test the first unresolved level for a cleared-denominator unit certificate whose integer \(N_j\) confines vertical exceptional characteristics → `notes/reed-solomon-tasks/c595-stable-component-fano-elimination.md`.
 
+### `relconic`
+
+- **C596 `[relconic]` [ACTIVE]** — test whether the C556 conic matching residue admits a mod-\(4\), quadratic, or Arf refinement that separates the regular and Mathon \(\operatorname{MATCH}(10,5,1)\) designs; stop at the exact finite discriminator gate before any \(k=92\) promotion → `notes/2026-07-24-c596-quadratic-matching-residue.md`.
+
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
