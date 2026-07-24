@@ -1,0 +1,1383 @@
+{
+  "c398_cross_check": {
+    "non_grs_nonsingular_conic_classes_consumed": 4,
+    "source_certificate": "notes/2026-07-20-c398-conic-deep-hole-classification.json"
+  },
+  "field_size_reduction": {
+    "coverage_inequality": "q^2-2q-2 <= 15(q+1)",
+    "cubic_point_bound": "#C(F_q) <= 3(q+1)",
+    "largest_integer_q": 17,
+    "residual_prime_powers_with_six_arcs": [
+      4,
+      5,
+      7,
+      8,
+      9,
+      11,
+      13,
+      16,
+      17
+    ]
+  },
+  "fields": [
+    {
+      "projective_points": 21,
+      "projective_six_arc_orbits": 1,
+      "q": 4,
+      "semilinear_six_arc_orbits": 1,
+      "survivor_count": 0,
+      "survivors": []
+    },
+    {
+      "projective_points": 31,
+      "projective_six_arc_orbits": 1,
+      "q": 5,
+      "semilinear_six_arc_orbits": 1,
+      "survivor_count": 0,
+      "survivors": []
+    },
+    {
+      "projective_points": 57,
+      "projective_six_arc_orbits": 3,
+      "q": 7,
+      "semilinear_six_arc_orbits": 3,
+      "survivor_count": 1,
+      "survivors": [
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              2
+            ]
+          ],
+          "automorphism_order": 12,
+          "cubic_kernel_dimension": 8,
+          "grs_parent": true,
+          "linear_kernel_dimension": 1,
+          "locus": [
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              6,
+              5
+            ]
+          ],
+          "locus_size": 2,
+          "minimum_containing_degree": 1,
+          "minimum_degree_curve_components": {
+            "rational_line": {
+              "components": [
+                [
+                  3,
+                  1,
+                  1
+                ]
+              ],
+              "locus_points_per_component": [
+                2
+              ]
+            }
+          },
+          "minimum_degree_curve_type_counts": {
+            "rational_line": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "rational_line": [
+              3,
+              1,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 30,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  2
+                ]
+              ],
+              "projective_automorphism_order": 12
+            }
+          ],
+          "quadratic_kernel_dimension": 4
+        }
+      ]
+    },
+    {
+      "projective_points": 73,
+      "projective_six_arc_orbits": 5,
+      "q": 8,
+      "semilinear_six_arc_orbits": 3,
+      "survivor_count": 2,
+      "survivors": [
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              5
+            ]
+          ],
+          "automorphism_order": 12,
+          "cubic_kernel_dimension": 6,
+          "grs_parent": false,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              7,
+              4
+            ]
+          ],
+          "locus_size": 4,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {
+            "two_distinct_rational_lines": {
+              "components": [
+                [
+                  1,
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  7,
+                  2
+                ]
+              ],
+              "factor_intersection_in_locus": false,
+              "locus_points_per_component": [
+                2,
+                2
+              ]
+            }
+          },
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 6,
+            "two_distinct_rational_lines": 3
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              2,
+              1,
+              4,
+              0,
+              1,
+              0
+            ],
+            "two_distinct_rational_lines": [
+              6,
+              3,
+              7,
+              3,
+              1,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 90,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  5
+                ]
+              ],
+              "projective_automorphism_order": 4
+            }
+          ],
+          "quadratic_kernel_dimension": 2
+        },
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              6
+            ]
+          ],
+          "automorphism_order": 18,
+          "cubic_kernel_dimension": 6,
+          "grs_parent": true,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              7,
+              2
+            ]
+          ],
+          "locus_size": 4,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {
+            "two_distinct_rational_lines": {
+              "components": [
+                [
+                  1,
+                  5,
+                  5
+                ],
+                [
+                  1,
+                  5,
+                  6
+                ]
+              ],
+              "factor_intersection_in_locus": false,
+              "locus_points_per_component": [
+                2,
+                2
+              ]
+            }
+          },
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 6,
+            "two_distinct_rational_lines": 3
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              1,
+              0,
+              7,
+              3,
+              1,
+              0
+            ],
+            "two_distinct_rational_lines": [
+              6,
+              4,
+              1,
+              0,
+              1,
+              5
+            ]
+          },
+          "normalized_presentation_orbit_size": 60,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              "projective_automorphism_order": 6
+            }
+          ],
+          "quadratic_kernel_dimension": 2
+        }
+      ]
+    },
+    {
+      "projective_points": 91,
+      "projective_six_arc_orbits": 7,
+      "q": 9,
+      "semilinear_six_arc_orbits": 6,
+      "survivor_count": 5,
+      "survivors": [
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              2
+            ]
+          ],
+          "automorphism_order": 6,
+          "cubic_kernel_dimension": 4,
+          "grs_parent": false,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              7,
+              6
+            ],
+            [
+              1,
+              8,
+              4
+            ]
+          ],
+          "locus_size": 6,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {},
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              5,
+              7,
+              7,
+              3,
+              3,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 120,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  2
+                ]
+              ],
+              "projective_automorphism_order": 6
+            },
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              "projective_automorphism_order": 6
+            }
+          ],
+          "quadratic_kernel_dimension": 1
+        },
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              3,
+              8
+            ]
+          ],
+          "automorphism_order": 48,
+          "cubic_kernel_dimension": 6,
+          "grs_parent": true,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              8,
+              6
+            ]
+          ],
+          "locus_size": 4,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {
+            "two_distinct_rational_lines": {
+              "components": [
+                [
+                  1,
+                  3,
+                  5
+                ],
+                [
+                  1,
+                  3,
+                  7
+                ]
+              ],
+              "factor_intersection_in_locus": false,
+              "locus_points_per_component": [
+                2,
+                2
+              ]
+            }
+          },
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 7,
+            "two_distinct_rational_lines": 3
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              8,
+              4,
+              5,
+              1,
+              3,
+              1
+            ],
+            "two_distinct_rational_lines": [
+              3,
+              6,
+              1,
+              1,
+              0,
+              0
+            ]
+          },
+          "normalized_presentation_orbit_size": 15,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  3,
+                  8
+                ]
+              ],
+              "projective_automorphism_order": 24
+            }
+          ],
+          "quadratic_kernel_dimension": 2
+        },
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4,
+              2
+            ]
+          ],
+          "automorphism_order": 6,
+          "cubic_kernel_dimension": 3,
+          "grs_parent": false,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              6,
+              4
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              7,
+              4
+            ],
+            [
+              1,
+              7,
+              6
+            ]
+          ],
+          "locus_size": 7,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {},
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              8,
+              4,
+              7,
+              2,
+              7,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 120,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  4,
+                  2
+                ]
+              ],
+              "projective_automorphism_order": 3
+            }
+          ],
+          "quadratic_kernel_dimension": 1
+        },
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              4,
+              5
+            ]
+          ],
+          "automorphism_order": 8,
+          "cubic_kernel_dimension": 3,
+          "grs_parent": true,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              7
+            ],
+            [
+              1,
+              6,
+              7
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              8,
+              2
+            ],
+            [
+              1,
+              8,
+              6
+            ]
+          ],
+          "locus_size": 8,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {},
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              8,
+              2,
+              4,
+              4,
+              1,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 90,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  4,
+                  5
+                ]
+              ],
+              "projective_automorphism_order": 4
+            }
+          ],
+          "quadratic_kernel_dimension": 1
+        },
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              6,
+              4
+            ]
+          ],
+          "automorphism_order": 8,
+          "cubic_kernel_dimension": 3,
+          "grs_parent": false,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              3,
+              5
+            ],
+            [
+              1,
+              3,
+              7
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              4,
+              8
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              8,
+              6
+            ]
+          ],
+          "locus_size": 8,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {
+            "two_distinct_rational_lines": {
+              "components": [
+                [
+                  1,
+                  4,
+                  7
+                ],
+                [
+                  1,
+                  5,
+                  7
+                ]
+              ],
+              "factor_intersection_in_locus": false,
+              "locus_points_per_component": [
+                4,
+                4
+              ]
+            }
+          },
+          "minimum_degree_curve_type_counts": {
+            "two_distinct_rational_lines": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "two_distinct_rational_lines": [
+              7,
+              7,
+              4,
+              8,
+              6,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 90,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  6,
+                  4
+                ]
+              ],
+              "projective_automorphism_order": 4
+            }
+          ],
+          "quadratic_kernel_dimension": 1
+        }
+      ]
+    },
+    {
+      "projective_points": 133,
+      "projective_six_arc_orbits": 15,
+      "q": 11,
+      "semilinear_six_arc_orbits": 15,
+      "survivor_count": 1,
+      "survivors": [
+        {
+          "arc": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              3,
+              4
+            ],
+            [
+              1,
+              4,
+              5
+            ]
+          ],
+          "automorphism_order": 60,
+          "cubic_kernel_dimension": 3,
+          "grs_parent": false,
+          "linear_kernel_dimension": 0,
+          "locus": [
+            [
+              1,
+              2,
+              7
+            ],
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              1,
+              5,
+              2
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              6,
+              9
+            ],
+            [
+              1,
+              6,
+              10
+            ],
+            [
+              1,
+              7,
+              3
+            ],
+            [
+              1,
+              8,
+              2
+            ],
+            [
+              1,
+              9,
+              6
+            ],
+            [
+              1,
+              9,
+              7
+            ],
+            [
+              1,
+              10,
+              3
+            ],
+            [
+              1,
+              10,
+              8
+            ]
+          ],
+          "locus_size": 12,
+          "minimum_containing_degree": 2,
+          "minimum_degree_curve_components": {},
+          "minimum_degree_curve_type_counts": {
+            "nonsingular_conic": 1
+          },
+          "minimum_degree_curve_type_representatives": {
+            "nonsingular_conic": [
+              8,
+              8,
+              6,
+              4,
+              1,
+              1
+            ]
+          },
+          "normalized_presentation_orbit_size": 6,
+          "projective_subclasses": [
+            {
+              "arc": [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  4
+                ],
+                [
+                  1,
+                  4,
+                  5
+                ]
+              ],
+              "projective_automorphism_order": 60
+            }
+          ],
+          "quadratic_kernel_dimension": 1
+        }
+      ]
+    },
+    {
+      "projective_points": 183,
+      "projective_six_arc_orbits": 26,
+      "q": 13,
+      "semilinear_six_arc_orbits": 26,
+      "survivor_count": 0,
+      "survivors": []
+    },
+    {
+      "projective_points": 273,
+      "projective_six_arc_orbits": 61,
+      "q": 16,
+      "semilinear_six_arc_orbits": 22,
+      "survivor_count": 0,
+      "survivors": []
+    },
+    {
+      "projective_points": 307,
+      "projective_six_arc_orbits": 74,
+      "q": 17,
+      "semilinear_six_arc_orbits": 74,
+      "survivor_count": 0,
+      "survivors": []
+    }
+  ],
+  "schema": "c401-cubic-contained-six-arcs-v1"
+}

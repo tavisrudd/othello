@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398--C400 and C403--C411 complete; C399 remains the protected portable synthesis;
+**Status:** C398--C401 and C403--C411 complete; C399 remains the protected portable synthesis;
 C406+C411 is the recommended factorization-memory replacement whose composite claim is likely new
-within bounded audit coverage; C401/C402 remain independent queued pilots
+within bounded audit coverage; C402 remains an independent queued pilot
 
 ## Decision
 
@@ -180,6 +180,16 @@ self-duality plus fieldwise tables.  Audit Schurian translation schemes, cycloto
 schemes, formal duality, and modular `A5` orbit schemes before priority wording.
 
 ## C401 — cubic-contained uncovered loci of six-arcs
+
+### Result
+
+C401 closes with verdict `ALL-FIELD EXACT CLASSIFICATION; THE CUBIC BRANCH COLLAPSES TO DEGREE AT
+MOST TWO`. The elementary cubic point bound and fifteen-secant cover force `q<=17`; the complete
+residual quotient has ten projective / nine semilinear classes, and every survivor already lies on
+a line or quadratic. C398's four non-GRS nonsingular-conic rows are consumed exactly. The sole
+additional non-GRS shape is a q=9 eight-point locus on a unique rational line-pair with `4+4`
+distribution. Raw small-field arc classifications pre-empt flagship positioning. See
+`notes/2026-07-23-c401-cubic-contained-six-arcs.md` and its Python/JSON/checksum bundle.
 
 ### Target theorem
 
