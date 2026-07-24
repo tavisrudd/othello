@@ -1043,8 +1043,17 @@
       "last": 598,
       "purpose": "second referee revision: restore logical-phase scope and self-contained exceptional arithmetic",
       "sequence": 116
+    },
+    {
+      "count": 1,
+      "first": 599,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 599,
+      "purpose": "close C571 re-review field-scope, GRS bound, Dickson credit, and transversal-gate positioning",
+      "sequence": 117
     }
   ],
-  "next_id": 599,
+  "next_id": 600,
   "schema": "codex-task-id-allocations-v1"
 }
