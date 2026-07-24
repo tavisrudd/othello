@@ -1,7 +1,7 @@
 # C287 first-tag theorem and axiom ledger
 
 **Lane**: `build-sys`
-**Status**: SOURCE-LEVEL TERMINAL LEDGER COMPLETE; authoritative axiom extraction pending
+**Status**: 26-FILE REVIEWER BOUNDARY SELECTED; authoritative axiom extraction pending
 
 ## Evidence boundary
 
@@ -36,11 +36,11 @@ to include the generic theorem.
 
 | Claim or artifact | Exact declaration | Status |
 |---|---|---|
-| Hyperbolic quadric `Q+(2m-1,q)` over odd `q` is a second-player win | `ProjectiveCap.Projective.initialSubCapP_blockQuadric_of_odd_card` | Advertised by the public-artifact README but absent from the current manuscript claim skeleton. Adding its module to the adopted human closure costs one file and 122 code lines. Decide adoption before treating it as a first-tag terminal. |
+| Hyperbolic quadric `Q+(2m-1,q)` over odd `q` is a second-player win | `ProjectiveCap.Projective.initialSubCapP_blockQuadric_of_odd_card` | Advertised by the public-artifact README but absent from the current manuscript claim skeleton. Reviewer-facing policy defers it until a manuscript explicitly adopts it; a later tag can add its one file and 122 code lines. |
 | Projective plane of order nine, conditional on the intruder terminal-reply kernel | `ProjectiveCap.ConicLocalization.initialPStatement_of_intruderTerminalReply_finrank` | Correctly not an unconditional Lean claim: the theorem explicitly requires `IntruderTerminalReplyStatement`. The manuscript labels the result computed and the Lean kernel open. |
 | Projective plane of order eleven | `ProjectiveCap.Certificate.CertData.Q11.initialPStatement_finrank` in `ProjectiveCap/CertData/Q11Assembly.lean` | Paper table labels this Lean-proved, but it belongs to the separate Q11 certificate package. The source contains `#print axioms` without a durable recorded output. Exact generator, schema, checker, terminal gate, clean regeneration, and public axiom extraction remain unresolved. |
 | Projective plane of order thirteen | `ProjectiveCap.Certificate.CertData.Q13.initialPStatement_finrank` in `ProjectiveCap/CertData/Q13Assembly.lean` | Same external-package boundary as Q11. Generated leaves use kernel `decide` bridges (`of_decide_eq_true`) and contain no visible `native_decide`, `sorry`, or project axiom, but that does not replace the missing package provenance and authoritative axiom output. |
-| `FiniteGeom` shared-library umbrella | none | `FiniteGeom.lean` contains imports and no declaration. Its 24-file closure is completely disjoint from the 27-file advertised mirror closure, so it is a library-seeding choice rather than a dependency of any terminal above. |
+| `FiniteGeom` shared-library umbrella | none | `FiniteGeom.lean` contains imports and no declaration. Its 24-file closure is completely disjoint from the mirror closure and is deferred to a later tag with an explicit theorem contract. |
 | Flagship sum-free outcome classification | no final terminal declared by the current seven-root contract | The first paper includes a sum-free classification whose remaining formalization gates are still open. Four `Sumfree` modules enter incidentally through the binary/projective closure, but incidental imports are not a paper terminal. The final paper target manifest is incomplete until the adopted sum-free theorem has an exact declaration. |
 
 The computed `q = 3, 9, 17, 19, 23` rows and partial `q = 25` row are not Lean terminal claims.
@@ -62,19 +62,18 @@ the disjoint `FiniteGeom` component. Eight are in the 27-file mirror closure; om
 README-only hyperbolic module leaves seven definite workflow-bearing files in the 26-file adopted
 claim closure.
 
-This does not silently change the approved first-tag contract. It identifies the decision precisely:
-is the first tag a claim-minimal release artifact, or is it deliberately also the seed release of
-the broader `FiniteGeom` library? The latter remains within the size gate but more than doubles the
-human review surface and is not justified by theorem dependence.
+The selected first tag is source set 1: the 26-file closure of the terminals the manuscript
+actually cites. This is the reviewer-facing boundary. The hyperbolic result and `FiniteGeom`
+umbrella remain available for later tagged increments after a paper or public theorem contract
+adopts them.
 
 ## Required gates
 
-1. Decide whether the first tag is claim-minimal or deliberately library-seeding, and whether the
-   hyperbolic-quadric theorem is an adopted paper claim.
-2. Add the eventual sum-free terminal before calling the paper target map complete.
-3. Give Q11 and Q13 separate package manifests naming their generator, semantic schema, checker,
+1. Add the eventual sum-free terminal before calling the paper target map complete.
+2. Give Q11 and Q13 separate package manifests naming their generator, semantic schema, checker,
    assembly terminal, exact gate, and source-regeneration command.
-4. In a quiet window, extract authoritative `#print axioms` facts for every adopted main and
+3. In a quiet window, extract authoritative `#print axioms` facts for every adopted main and
    certificate terminal. A source scan or a checked-in `#print` command is not its output.
-5. Rewrite and referee-review only after the adopted source boundary is fixed; otherwise nine to
-   ten files may receive public cleanup before a decision excludes them.
+4. Rewrite and referee-review the seven workflow-bearing files in the fixed 26-file boundary.
+5. C270 must align the older `papers/papers-planning.md` “`FiniteGeom` + mirror” wording with this
+   reviewer-scale boundary before any public release action.

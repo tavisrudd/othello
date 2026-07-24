@@ -3,8 +3,8 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-awaits a quiet Lean worktree; C287 source inventory and theorem ledger are frozen with adoption
-decisions pending; C162 blast radius and the restart-guard failure suite landed, and the remaining
+awaits a quiet Lean worktree; C287 selected its reviewer-scale 26-file first-tag boundary with
+public rewrites pending; C162 blast radius and the restart-guard failure suite landed, and the remaining
 C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
@@ -108,8 +108,9 @@ portability. The approved main identity and local path are `github.com/tavisrudd
 `~/src/lean/finitegeom`. Heavyweight generated closures stay outside it in one-way-dependent
 certificate packages, beginning with `~/src/lean/finitegeom-q16-certificates` and
 `~/src/lean/finitegeom-q25-certificates`, with ProjectiveCap Q11 and Q13 staged as separate
-field-specific certificate packages. The first main tag is the exact human-scale `FiniteGeom` +
-mirror closure; later tags add reviewed paper-facing closures without copying Lean into paper
+field-specific certificate packages. The first main tag is the exact 26-file closure of the
+human-scale terminals cited by the first manuscript; later tags add the hyperbolic-quadric result,
+the `FiniteGeom` umbrella, and other reviewed paper-facing closures without copying Lean into paper
 repositories. Its first-tag size gate is at most 100 Lean files / 25,000 code lines, and the initial
 planned human-scale union is at most 500 / 75,000; larger generated families are external by
 default. C270 (`nofil`) owns metadata, DOI/OEIS and eventual user-authorized remote actions. C287
@@ -129,21 +130,19 @@ source or Lake targets. No Lean/Lake command or process intervention was perform
 workspace list, nixpkgs pin, measured size gates, and payload blockers are recorded in the C287
 plan.
 
-The first-tag candidate contract now resolves the `FiniteGeom` umbrella and six declared positive
-mirror targets to a content-addressed 51-file / 12,987-code-line inventory. Its 41 external imports
-are all Mathlib, and it reaches none of Q16, Q25, or `ProjectiveCap/CertData`. Public-prose scanning
-found ten files with private note or handoff references and seven more with definite workflow
-residue; source owners must rewrite and review those 17 modules before C287 exports them. Report:
+The first-tag contract now resolves four manuscript-cited terminal modules to a content-addressed
+26-file / 8,954-code-line inventory. Its 18 external imports are all Mathlib, and it reaches none
+of Q16, Q25, or `ProjectiveCap/CertData`. Public-prose scanning found seven files with definite
+workflow residue; source owners must rewrite and review them before C287 exports the closure. Report:
 [`../2026-07-23-c287-first-tag-source-contract.md`](../2026-07-23-c287-first-tag-source-contract.md).
 
-The theorem audit separates a 26-file adopted human claim closure, a 27-file advertised mirror
-closure, and the disjoint 24-file `FiniteGeom` library-seeding component. `FiniteGeom.lean` has no
+The theorem audit selects the 26-file manuscript claim closure for reviewers and defers both the
+uncited hyperbolic module and the disjoint 24-file `FiniteGeom` component. `FiniteGeom.lean` has no
 terminal declaration. The audit also exposes a missing final sum-free terminal and the external
 Q11/Q13 terminals whose package provenance and authoritative axiom facts remain unresolved. Report:
 [`../2026-07-23-c287-first-tag-theorem-ledger.md`](../2026-07-23-c287-first-tag-theorem-ledger.md).
 
-**Next:** decide claim-minimal versus library-seeding first tag and hyperbolic-quadric adoption;
-then finish only the adopted closure's referee review and coordinate its source-owner rewrites.
+**Next:** finish the 26-file closure's referee review and coordinate its seven source-owner rewrites.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.

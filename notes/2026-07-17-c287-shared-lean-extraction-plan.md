@@ -1,7 +1,7 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; source inventory and theorem ledger frozen, adoption decisions pending
+**Status**: IN PROGRESS; reviewer-scale 26-file first-tag boundary selected, rewrites pending
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -18,8 +18,9 @@ bundles. Each paper records exact repository commit pins, exact public target li
 ledger entries, and artifact provenance.
 
 The shared repository evolves through reviewed, incrementally tagged commits. The first tag is the
-exact `FiniteGeom` + mirror closure required by the first release set; later tags add the exact
-closures of further papers. C287 owns manifests, extraction, builds, axiom audits, clean-checkout
+exact closure of the human-scale terminals cited by the first manuscript; later tags add the
+hyperbolic-quadric result, the `FiniteGeom` umbrella, and further paper-facing closures only when an
+explicit public claim contract requires them. C287 owns manifests, extraction, builds, axiom audits, clean-checkout
 validation, and artifact portability. C270 owns public repository identity, metadata,
 release/DOI/OEIS coordination, and any eventual user-authorized remote action. C287 does not create
 remotes, publish, or push; C270 does not copy sources or run builds.
@@ -62,18 +63,19 @@ documented gates and a confirmed quiet build-owner window.
 
 The candidate first-tag contract is now content-addressed in
 `notes/2026-07-23-finitegeom-first-tag-source-inventory.json` and analyzed in
-`notes/2026-07-23-c287-first-tag-source-contract.md`. Its seven declared roots resolve to 51 Lean
-files and 12,987 code lines, with 41 external imports all supplied by Mathlib and no heavyweight
-certificate-family source. Ten closure files still cite private notes or handoffs, including three
-with task IDs; seven more contain other definite workflow residue. All 17 need source-owner public
-rewrites, and the whole-closure referee review precedes export.
+`notes/2026-07-23-c287-first-tag-source-contract.md`. Its four declared roots resolve to 26 Lean
+files and 8,954 code lines, with 18 external imports all supplied by Mathlib and no heavyweight
+certificate-family source. Seven closure files contain definite workflow residue and need
+source-owner public rewrites before the whole-closure referee review and export.
 
 The theorem-level audit in `notes/2026-07-23-c287-first-tag-theorem-ledger.md` shows that the adopted
-human manuscript terminals need 26 files / 8,954 code lines; the advertised hyperbolic-quadric
-result adds one file; and the `FiniteGeom` umbrella contributes a completely disjoint 24-file
-component with no first-release terminal declaration. It also records the missing final sum-free
-terminal and the still-unverified external Q11/Q13 assembly terminals. The 51-file inventory is
-therefore a valid size-bounded candidate, not yet the final paper claim manifest.
+human manuscript terminals need 26 files / 8,954 code lines; the advertised but uncited
+hyperbolic-quadric result adds one file; and the `FiniteGeom` umbrella contributes a completely
+disjoint 24-file component with no first-release terminal declaration. Reviewer-facing policy
+selects the 26-file boundary and defers both additions. The ledger also records the missing final
+sum-free terminal and the still-unverified external Q11/Q13 assembly terminals.
+C270 must align the older public-planning wording with this reviewer-scale boundary before release;
+C287 does not edit that lane's metadata or perform the public action.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed
