@@ -1,0 +1,58 @@
+{
+  "conclusion": "KG(7,2) has no triangle decomposition into near-perfect matchings, so a zero-defect seven-arc is combinatorially impossible",
+  "ground_set": {
+    "completions_per_disjoint_pair": [
+      3
+    ],
+    "disjoint_edge_pairs": 105,
+    "k7_edges": 21,
+    "near_perfect_matchings": 105
+  },
+  "independent_set_recursion": {
+    "count": 0,
+    "max_depth": 29,
+    "nodes": 2906
+  },
+  "modular_ranks": {
+    "2": [
+      85,
+      85
+    ],
+    "3": [
+      91,
+      91
+    ],
+    "5": [
+      91,
+      91
+    ],
+    "7": [
+      91,
+      91
+    ]
+  },
+  "primary_exact_cover": {
+    "count": 0,
+    "max_depth": 27,
+    "nodes": 97
+  },
+  "schema": "c554-k7-zero-defect-obstruction-v1",
+  "symmetry_normalization": {
+    "fixed_matching": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "justification": "S_7 is transitive on three-edge near-perfect matchings",
+    "omitted_vertex": 6
+  }
+}
