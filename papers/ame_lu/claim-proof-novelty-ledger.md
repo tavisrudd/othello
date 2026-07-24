@@ -5,7 +5,7 @@ Every computational result below is present in the C563 paper-local package.
 
 | Claim family | Mathematical proof status | Paper-local evidence | Literature status | Manuscript action |
 |---|---|---|---|---|
-| Six-arc/MDS/CSS/AME dictionary | proved in Section 2 | C374 imported | standard AME--MDS source cited | `thm:dictionary` drafted |
+| Six-arc/MDS/CSS/AME dictionary | proved in Section 2; full statement covered by `RelativeConicArcs.AMELU.Dictionary` and `RelativeConicArcs.AMELU.StabilizerDictionary` | C374 imported; Lean import and standard-axiom gates passed | standard AME--MDS source cited | `thm:dictionary` drafted; aggregate formal adoption assigned to C570 |
 | LC classification by `z` | proved in Section 4 | C396 plus C395 input imported | no independent priority claim | `thm:lc-pencil` drafted |
 | Logical-Clifford phase | proved in Section 5 | C397 imported | no independent priority claim | `thm:logical-phase` drafted |
 | Uniform H3/GRS LU separation | proved in Section 6 | C402 imported | bounded source audit retained | `thm:lu-h3-grs` drafted |

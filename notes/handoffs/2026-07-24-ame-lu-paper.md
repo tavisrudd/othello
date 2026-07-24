@@ -120,6 +120,20 @@ still needs the stabilizer-action, Lagrangian, minimum-support, and AME
 converse clauses before formal adoption; these are now queued as C591.  See
 `2026-07-24-c590-ame-lu-lean-dictionary-bridges.md`.
 
+**C591 closed (2026-07-24): shared Lean stabilizer dictionary complete.**
+`RelativeConicArcs.AMELU.StabilizerDictionary` identifies the six-fold
+tensor Weyl action, proves the full `C×C^\perp` stabilizer equation and its
+separate `X(C)` and `Z(C^\perp)` cases, proves the CSS space is a
+six-dimensional symplectic Lagrangian, and closes the exact `L_C(S)` support
+criterion.  It also proves the universal `q^3` computational-support lower
+bound for six-party AME states, minimality of exact-code equal-phase states,
+and the converse
+`IsAME (equalPhaseState C) ↔ IsMDSCode634 C`.  The measured import gate,
+trace-only aggregate gate, exact no-build checks, and standard-axiom audit
+passed.  The complete manuscript dictionary is now formalized; C570 owns
+aggregate adoption and reconciliation.  See
+`2026-07-24-c591-ame-lu-lean-stabilizer-closure.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -156,12 +170,10 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C591 is next: close the six-party Weyl stabilizer action, CSS Lagrangian and
-support formulas, minimum-support statement, and the AME-to-`[6,3,4]`
-converse needed for full adoption of the dictionary.  C566 follows with the
-admitted non-GRS pencil, scalar `z`, and local-Clifford classification
-interface.  C581 is a separately queued optional upgrade gate for basis-free
-phase-space reconstruction and quantitative approximate rigidity.
+C566 is next: formalize the admitted non-GRS pencil, scalar `z`, and
+local-Clifford classification interface.  C581 is a separately queued
+optional upgrade gate for basis-free phase-space reconstruction and
+quantitative approximate rigidity.
 
 ## Completion gates
 

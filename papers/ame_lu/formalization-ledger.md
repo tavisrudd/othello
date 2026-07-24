@@ -7,7 +7,7 @@ adopted from Lean.
 
 | Manuscript result | Formal status | Unformalized boundary | Action |
 |---|---|---|---|
-| `thm:dictionary` | arc-to-`[6,3,4]`, `[6,3,4]`-to-AME, projective-to-monomial-to-LC, and CSS support interface proved in `RelativeConicArcs.AMELU.Dictionary` | stabilizer action of `C × Cᵖ`, Lagrangian property, and minimum-support clause | close residual statement coverage before C570 adoption |
+| `thm:dictionary` | complete in `RelativeConicArcs.AMELU.Dictionary` and `RelativeConicArcs.AMELU.StabilizerDictionary`: arc-to-`[6,3,4]`, AME equivalence for equal-phase states, projective-to-monomial-to-LC, tensor Weyl stabilizers, CSS Lagrangian/support, and minimum computational support | none at statement level; aggregate manuscript adoption remains | reconcile exact theorem names and axioms in C570 |
 | `thm:lc-pencil` and `cor:lu-lc-pencil` | none adopted | projective invariant theory, exceptional fibres, and rigidity composition | C567 candidate package |
 | `thm:lu-h3-grs` and `thm:q13-lu` | none adopted | stabilizer trace formula, geometric count, and exact contraction bridge | C568 candidate package |
 | `thm:transport-divisor` | none adopted | cycle-cover algebra, rank bridge, and orbit geometry | C569 candidate package |
@@ -16,3 +16,10 @@ adopted from Lean.
 Any Lean action requires an allocated `ame-lu` task and the nested Lean guide.
 A future ledger must state exact theorem names, imports, toolchain, axioms,
 unsafe/native use, external computation, and the manuscript correspondence.
+
+The stabilizer dictionary exits through
+`RelativeConicArcs.Gates.AMELUStabilizerDictionary` and
+`RelativeConicArcs.Gates.AMELUStabilizerDictionaryAxioms`.  Its paper-facing
+terminals depend only on `propext`, `Classical.choice`, and `Quot.sound`;
+there is no native evaluation, generated source, external certificate,
+project-specific axiom, or admitted declaration.

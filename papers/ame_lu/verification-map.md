@@ -6,7 +6,7 @@ artifact.
 
 | Result label | Conceptual proof | Exact computation | Independent replay | Paper-local artifact status |
 |---|---|---|---|---|
-| `thm:dictionary` | C374 | code and stabilizer checks | direct-Lagrangian replay and complete GRS enumeration | imported; C374 bundle |
+| `thm:dictionary` | Section 2 plus `RelativeConicArcs.AMELU.Dictionary` and `RelativeConicArcs.AMELU.StabilizerDictionary` | C374 code and stabilizer checks | direct-Lagrangian replay, complete GRS enumeration, and kernel-checked import/axiom gates | C374 bundle imported; symbolic Lean coverage complete pending aggregate adoption |
 | `thm:lc-pencil` | C396 | projective quotient and holonomy recovery | symbolic identities plus twelve-field direct replay | imported; C396 bundle and C395 input |
 | `thm:lu-h3-grs` | C402 | concurrency formula and permutation lemma | direct q=19 Lagrangian-rank replay | imported; C402 bundle |
 | `thm:logical-phase` | C397 | fixed-party kernel theorem | full-row-space, group-closure, and Gale replays | imported; C397 bundle |
