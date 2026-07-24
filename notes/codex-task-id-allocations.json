@@ -872,8 +872,17 @@
       "last": 553,
       "purpose": "apply C287 first-tag 17-module public rewrite and deletion-first API normalization",
       "sequence": 97
+    },
+    {
+      "count": 4,
+      "first": 554,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 557,
+      "purpose": "zero-defect matching classification, conic-sensitive moments, and coverage-first square-root constructions",
+      "sequence": 98
     }
   ],
-  "next_id": 554,
+  "next_id": 558,
   "schema": "codex-task-id-allocations-v1"
 }
