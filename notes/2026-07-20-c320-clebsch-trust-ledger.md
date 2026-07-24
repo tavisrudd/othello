@@ -2,8 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** repaired after the user-launched independent `NO-GO`; awaiting
-the separately user-launched post-fix review required before final `GO`
+**Status:** complete; final separately user-launched post-fix review `GO`
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -307,13 +306,31 @@ route.
   canonical release surface.
 - **Settled — active routing.** The handoff is the sole active router; the
   mega-paper and replacement-spine plans are explicit non-routing history.
-- **Open gate — post-fix independence.** Only a separately user-launched cold
-  review can return final `GO`; C320 remains live until then.
+- **Settled — post-fix independence.** A separately user-launched,
+  context-free PDF review returned final `GO`.
 - **External packaging — C182.** A public companion-paper provenance target,
   archive DOI/release, licence, and final immutable package remain C182 work
   after C320 `GO`.
 
 No other genuine C320 repair mystery remains.
+
+## Final separately user-launched post-fix review
+
+The user launched a fresh context-free reviewer with only the prompt
+“referee this” and the repaired Paper I PDF path. It inherited no
+conversation, manuscript source, notes, manifest, criteria, or prior
+findings.
+
+**Final verdict:** `GO`.
+
+The reviewer found no blocking or material minor defect in the 19-page PDF.
+It judged the main rigidity argument, enumeration boundaries, small-field
+exclusions, trust distinctions, rendered tables, and figure coherent. As an
+independent spot check, it reproduced the displayed arc's 12-point uncovered
+locus, its equality with the syndrome conic, and the secant-index counts.
+
+This satisfies C320's final independence gate. C320 is complete and hands
+the exact Paper I surface to C182 for immutable archive and release packaging.
 
 ## Preserved mega-paper ledger — fallback evidence only
 
@@ -1099,7 +1116,7 @@ items do not satisfy the focused Paper I gate.
   byte-for-byte as a separate fallback surface.
 - [x] Confirm C321 is not triggered, or interpose it before release if a
   load-bearing Singular route appears.
-- [ ] Repair every issue found by the user-launched independent reviewer and
+- [x] Repair every issue found by the user-launched independent reviewer and
   obtain the required post-fix `GO`.
-- [ ] Only after final `GO`, archive C320 and hand the exact Paper I surface
+- [x] Only after final `GO`, archive C320 and hand the exact Paper I surface
   to C182.

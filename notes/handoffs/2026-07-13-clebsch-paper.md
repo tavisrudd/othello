@@ -21,25 +21,23 @@ It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary
 overstatement; commit `70fb1e7f` repairs it and its clean replay is green.
-C320 is still live and requires another separately user-launched post-fix
-review. Only that review may return final `GO`.
+A fresh separately user-launched, context-free PDF review returned final
+`GO`, with no blocking or material minor finding. C320 is complete; C182 is
+the active Paper I archive/release task.
 
 The active order is strict:
 
-1. **C320:** obtain the separately user-launched post-fix `GO`; the repaired
-   clean replay is green.
-2. **C182:** archive and release Paper I.
-3. **C577:** build and referee-test standalone Paper II after Paper I is
+1. **C182:** archive and release Paper I.
+2. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C579:** test Paper III after Paper II; require one principal theorem or
+3. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
 that external wait as a Paper I defect.
 
-C321 is conditional inside C320 and is currently expected not to trigger:
-Paper I retains no load-bearing Singular claim.
+C321 was not triggered: Paper I retains no load-bearing Singular claim.
 
 The authoritative split records are:
 
@@ -56,7 +54,7 @@ The authoritative split records are:
 
 | role | root | status |
 |---|---|---|
-| Paper I | `papers/clebsch-rigidity/` | review findings repaired and clean replay green; separate C320 post-fix review next |
+| Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | compilable spine; C577 gated behind Paper I |
 | Paper III | `papers/clebsch-passages/` | exploratory spine; C579 gated behind Paper II |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
@@ -97,14 +95,14 @@ make -B clebsch-rigidity
 Inspect `papers/clebsch-rigidity/clebsch_rigidity.log`, not the fallback
 Clebsch log.
 
-## C320 — current independent-review gate
+## C320 — completed Paper I trust gate
 
 C320 means **Paper I only**. The implementation and clean replay are complete
 in `notes/2026-07-20-c320-clebsch-trust-ledger.md`. The exact formal source
 pin is `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`; the manifest is
 `papers/clebsch-rigidity/verification/trust_manifest.json`.
 
-The post-fix reviewer starts from:
+The final verification surface is:
 
 - `papers/clebsch-rigidity/clebsch_rigidity.tex`;
 - the nineteen rows `2, 11--26, 29, 58` in
@@ -126,9 +124,11 @@ The first user-launched cold review returned `NO-GO`, commit `3ed43a0d`
 repaired its findings, and its fifteen-check clean replay passed. A
 separately user-launched PDF-only review then returned `NO-GO` on one
 localized enumeration-boundary sentence; commit `70fb1e7f` repairs it and
-its clean replay is green. The implementing agent must not launch or simulate
-the next post-fix reviewer. The user launches that separate review; only its
-final `GO` advances to C182.
+its clean replay is green. A fresh separately user-launched context-free PDF
+review returned final `GO`, found no blocking or material minor defect, and
+independently reproduced the displayed 12-point uncovered locus,
+syndrome-conic equality, and secant-index counts. C320 is complete and C182
+is next.
 
 The previous C320 `NO-GO`, 58-row manifest, 29-statement extraction, and
 18-check replay belong to the mega-paper fallback. They are provenance and

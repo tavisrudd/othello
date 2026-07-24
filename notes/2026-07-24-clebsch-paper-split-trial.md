@@ -12,8 +12,8 @@ The three-paper program is the active publication path. The 37-page
 preserved unchanged as a fallback.
 
 C575 and C576 are complete. Paper I is the warning-free 19-page candidate in
-`papers/clebsch-rigidity/`; C320 is the current task and waits for a separate
-user-launched post-fix review after repair commit `3ed43a0d`, followed by C182.
+`papers/clebsch-rigidity/`; C320 has final `GO` after two repair rounds and
+a fresh context-free PDF review. C182 is the current Paper I task.
 C577 remains gated behind Paper I submission readiness, and C579 remains
 gated behind Paper II.
 
