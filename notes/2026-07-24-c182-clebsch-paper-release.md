@@ -33,8 +33,9 @@ preceding release candidate.
 - The statement-identity extractor now treats the universal theorem and the
   displayed $q=9$ polarity lemma as the single adopted row-24 claim group.
 - The nineteen-row trust manifest validates with fifteen checks.
-- The deterministic clean release replay is being refreshed against the
-  final source and will be recorded in the live handoff.
+- The deterministic clean release replay passes all fifteen checks against
+  the final source; its refreshed output certificate and trust-manifest hash
+  are committed with the paper.
 
 ## Release blocker
 

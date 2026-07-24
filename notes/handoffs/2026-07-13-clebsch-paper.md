@@ -30,7 +30,9 @@ small-arc counts by a universal chord-defect theorem, proves
 $|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$ together with a sharper
 quadratic field-size barrier and the passant lower bound $q\ge2k-3$,
 classifies conic filling through seven points, and reduces the eight-point case to
-$q\in\{13,16,17,19\}$ while cutting a page of non-feeding census material.
+$q\in\{13,16,17,19\}$ while cutting two pages of non-feeding census
+material. The regenerated nineteen-row release surface and its fifteen-check
+clean replay are green.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has
