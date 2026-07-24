@@ -1,35 +1,11 @@
 \section{Verification and formal boundary}\label{sec:verification}
 
-The conceptual theorems above are accompanied by deterministic,
-committed evidence bundles.  Table~\ref{tab:evidence} records which
-claims use exhaustive computation.  Every named bundle contains the
-primary generator, a compact JSON or text certificate, an independent
-replay where stated, and a SHA-256 manifest.
-The load-bearing generator, certificate, and replay hashes were
-rechecked during manuscript integration.  Two predecessor manifests
-also include living theorem reports whose report-only hashes became
-stale after later proof expansions.  No computational artifact hash is
-stale, and no predecessor manifest is silently rewritten here.  Stable
-public labels refer to the bundles through the release-level schema;
-dated internal filenames are retained only in the provenance record.
-
-\begin{figure}[H]
-\centering
-\[
-\begin{array}{ccc}
-&\text{manuscript proof}\ \downarrow&\\[2pt]
-\text{classical import}
-&\longrightarrow\ \boxed{\text{paper claim}}\ \longleftarrow&
-\text{certificate/replay}\\[2pt]
-&\text{kernel implication}\ \uparrow&
-\end{array}
-\]
-\caption{Claim-level trust routes.  A mixed theorem may use several
-routes, but each route keeps its own boundary: certificates close
-finite domains, imports retain their hypotheses, and Lean proves only
-the printed implication.}
-\label{fig:trust-routes}
-\end{figure}
+The conceptual theorems above are accompanied by deterministic evidence
+bundles.  Table~\ref{tab:evidence} records which claims use exhaustive
+computation.  Each public label resolves, through the supplement
+schema, to its generator, certificate, replay where stated, and
+SHA-256 manifest.  Table~\ref{tab:dependency-map} gives the corresponding
+claim-level mathematical dependencies.
 
 \small
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.19\textwidth}
@@ -83,67 +59,11 @@ working directories are recorded in
 classification records, and their expected hashes; its
 \texttt{--replay} option runs the paper-local Python replays.
 
-The redundancy-nine residual algebra and synthesis implication are
-also formalized in Lean.  The import gate and its axiom-audit module are
-\[
-\begin{split}
-&\texttt{RelativeConicArcs.Gates.PRSRedundancyNine},\\
-&\texttt{RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit}.
-\end{split}
-\]
-Lean checks divided-power contraction, both residual Hankel identities,
-the determinant and branch formulas, the residual roots and their
-sum/product, the witness-to-shallow implication, the persistent-family
-cardinality, and the orbit-count table from explicit arithmetic-case
-and family-count inputs.  It does not derive that table from a formal
-$\PGL_2/\PGammaL_2$ action.  Geometric integrality,
-Hasse--Weil existence after deletions, identification of geometric
-families with PRS syndromes, and exhaustion remain explicit structure
-fields rather than hidden axioms.  The audit reports only the standard
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}
-dependencies.
-
-The four-marker package has a separate exact formal boundary in
-\[
-\texttt{RelativeConicArcs.PRSFourMarkerLowerPackage}.
-\]
-The declaration
-\texttt{three\_pointed\_steps\_have\_witness} kernel-checks composition
-of three admissible pointed contractions.  The declarations
-\texttt{exact\_deletion\_and\_parameter\_degrees},
-\texttt{parameter\_degrees\_lt\_projectiveLine\_cardinality}, and
-\texttt{fourMarker\_genusOne\_squared\_margin} check the constants
-$36,22,18,18,17$ and the $q\ge53$ integer inequalities.  This module
-does not claim to formalize geometric integrality, the explicit
-gcd/monodromy strata, divisor-degree calculations, or Hasse--Weil;
-those are the printed proof of
-Proposition~\ref{prop:r9-budgets}, not implicit Lean axioms.
-
-\begin{table}[ht]
-\centering
-\small
-\caption{Separation of mathematical input from kernel-checked
-formalization.}
-\label{tab:formal-trust}
-\begin{tabular}{p{0.19\textwidth}p{0.34\textwidth}p{0.37\textwidth}}
-\toprule
-Result & Mathematical input & Kernel-checked content\\
-\midrule
-R9 residual synthesis &
-six-slice component theorem, genus/deletion bounds, coding
-identification, and exhaustion &
-divided-power contraction, residual identities, determinant/branch
-formulas, roots, and witness-to-shallow implication\\
-R9 family inventory &
-the actual $\PGL_2/\PGammaL_2$ action and geometric family
-identification &
-arithmetic case inputs, family-count inputs, and the resulting numerical
-table\\
-R9 four-marker package &
-explicit recursive strata, noncontainment, monodromy, divisor degrees,
-and Hasse--Weil &
-three-step witness composition, exact budgets, parameter-line
-inequalities, and the squared genus-one margin\\
-\bottomrule
-\end{tabular}
-\end{table}
+Lean formalizes the redundancy-nine residual identities, the
+witness-to-shallow synthesis implication, and the four-marker integer
+budgets.  It does not formalize geometric integrality, Hasse--Weil
+existence after deletion, the $\PGL_2/\PGammaL_2$ action, identification
+with PRS syndrome families, or geometric exhaustion; those remain
+printed mathematical inputs.  The exact declarations, import gates,
+source anchors, and axiom-audit output are listed in
+\texttt{supplement/LEAN-STATEMENTS.md}.

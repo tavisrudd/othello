@@ -1,0 +1,136 @@
+# C545 cold-review revision
+
+Date: 2026-07-24
+
+## Result
+
+The manuscript-local response to the new cold review is complete.  The
+paper remains one integrated work for the release candidate; no split,
+external upload, DOI request, or repository publication was attempted.
+The revised PDF is a clean 41-page build.
+
+## Changes
+
+- Rewrote the abstract opening so the all-field redundancy-five
+  classification is unmistakably the headline result.
+- Replaced the two dense overview tables by a single printed dependency
+  map.  It separates printed geometry, imported inputs, electronic
+  evidence, and covering-radius promotion for R5--R9 and the
+  characteristic-two results.
+- Corrected the stale overview descriptions of R8 and R9: both are
+  unconditional classifications in their stated high-field ranges,
+  not conditional targets.
+- Added a coding-consequences and recognition subsection.  It explains
+  the one-column MDS-extension payoff, exact projective counts, the
+  fixed-redundancy recognition procedure, its linear-algebra cost, and
+  the boundary between recognition and general decoding.
+- Printed all 17 sporadic redundancy-five syndrome representatives,
+  orbit sizes, stabilizers, and nontrivial Frobenius fusions.
+- Added an independent-total table comparing direct syndrome
+  enumeration, orbit--stabilizer sums, and the theoretical
+  nonsporadic-plus-sporadic decomposition.
+- Expanded the claim-specific PRS/MDS literature from 15 to 19 entries
+  with explicit-family, generalized-projective, even-characteristic,
+  and recent MDS-extension work.  The literature audit records the read
+  depth and cache evidence for the additions.
+- Reduced the main-text verification apparatus: removed the redundant
+  trust-route diagram, moved the statement-adequacy appendix out of the
+  printed paper, and condensed the Lean discussion to its exact
+  mathematical/nonformal boundary.  Detailed declarations remain in
+  the supplement.
+
+## Validation
+
+From `papers/beyond4_prs/`:
+
+```text
+make check
+exit=0
+
+python3 supplement/verify.py
+verified 56 bundled evidence artifacts
+classification records: PASS
+verified classification-record hashes
+```
+
+The rendered review checked the dependency map and the exceptional
+representative inventory.  Neither table clips or escapes the page.
+The canonical PDF has 41 pages, 285515 bytes, and SHA-256
+`7096ae2899c4f4d880647d8c093a5848a6113d466c93cfaa600388771bd1671a`.
+
+## Submission architecture
+
+The cold review makes a two-paper split plausible but does not make it
+automatic.  The current recommendation is:
+
+1. retain the integrated manuscript for the immutable preprint/DOI,
+   because it records the full dependency chain and priority boundary;
+2. obtain the two independent mathematical audits already required for
+   release;
+3. decide the journal architecture after those audits and the target
+   venue are known.
+
+If split for journal submission, the clean boundary is a coding paper
+through redundancy six or seven and a geometric paper on coherent polar
+induction, R8/R9, and characteristic-dependent carriers.  The papers
+must have disjoint theorem payloads and explicit provenance back to the
+integrated preprint; this is an author/venue decision, not an editorial
+change to infer during C545.
+
+## Post-DOI queue
+
+1. C531 then C532: remaining degree-nine Lucas strata and redundancy-ten
+   synthesis.
+2. C535 then C536: Hessian--Arf functoriality and the first plausible
+   uniform contained-component/Fano theorem.
+3. C533: sharpen the ordered-Hessian threshold and deletion constants.
+4. Separate feasibility gates for bounded R8/R9 completion and the
+   small-field R7 covering-radius premise.
+5. A coding-recognition implementation only after the theorem-level
+   orbit normalizers are frozen; the paper now states the mathematical
+   algorithm but does not ship a production decoder.
+
+## Extra-juice and Tao closeout
+
+The closeout asked what an expert referee would still be forced to
+reconstruct.  The cheap task-owned answers were the dependency map,
+canonical sporadic representatives, independent count equalities, and
+the recognition boundary; all are now printed and validated.  The
+remaining pressure is not another explanatory diagram.  It is
+independent verification of the component exhaustions and a release
+artifact that a referee can actually cite.
+
+### Mystery ledger
+
+- **Why did successive reviews still call the proof hard to audit?**
+  Settled editorially: the previous article had the facts but dispersed
+  them across theorem maps, certificates, and supplement prose.  The
+  printed dependency map and representative table now expose the two
+  missing local interfaces.
+- **One paper or two?**  Open strategic choice.  Independent audits and
+  venue selection own the evidence needed to decide; C545 does not
+  silently split the theorem chain.
+- **Uniform contained-component theorem:** open mathematics, owned by
+  C536 after C535.  Current induction remains correctly level-specific.
+- **Remaining degree-nine Lucas strata and redundancy ten:** open,
+  owned by C531 and C532.
+- **Threshold sharpness:** open but nonblocking, owned by C533.
+- **Bounded R8/R9 fields and small R7 radius cases:** open completion
+  problems requiring separate feasibility gates; no field census is
+  authorized here.
+- **Artifact citability and correctness confidence:** still release
+  gates.  C542--C544, two independent mathematical readers, full clean
+  export/replay, immutable identifiers, and author confirmation remain
+  required.
+- **Bibliography breadth:** improved from 15 to 19 claim-specific
+  sources, but a venue-specific final pass remains appropriate.  No
+  negative novelty claim is licensed beyond the recorded search
+  boundary.
+
+## Vibe check
+
+Good and materially less fragile: the paper now presents its evidence
+at the same granularity a skeptical referee will inspect.  The dominant
+risk has shifted to independent audit and release discipline, with the
+one-paper/two-paper choice a strategic upside rather than a manuscript
+defect.

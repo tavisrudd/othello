@@ -240,29 +240,66 @@ residue, canonical representatives, stabilizers, histograms, and
 Frobenius links are exactly the domain of Certificate R5.
 \end{proof}
 
-\begin{table}[ht]
-\centering
-\caption{Complete sporadic orbit inventory at redundancy five.  Entries
-are $\PGL_2(q)$ orbit sizes; exponents denote multiplicity.}
-\label{tab:r5sporadic}
-\begin{tabular}{ccl}
+\begin{longtable}{c>{\ttfamily\small}lrrl}
+\caption{Complete sporadic orbit inventory at redundancy five.  A
+representative $[a_0,\ldots,a_4]$ is in the divided-power syndrome
+coordinates of Section~\ref{sec:dictionary}.  The last column records
+the nontrivial Frobenius fusion; a dash means the orbit is fixed.}
+\label{tab:r5sporadic}\\
 \toprule
-$q$ & number of sporadic points & orbit sizes\\
+$q$ & \normalfont representative & orbit size & stabilizer & Frobenius\\
 \midrule
-7  & 644 & $28,112,168^3$\\
-8  & 756 & $252^3$\\
-9  & 900 & $180,360^2$\\
-11 & 990 & $330,660$\\
-13 & 728 & $182,546$\\
-17 & 1224& $1224$\\
-19 & 570 & $570$\\
+\endfirsthead
+\toprule
+$q$ & \normalfont representative & orbit size & stabilizer & Frobenius\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+7  & [0,1,0,0,3] & 28  & 12 & --\\
+7  & [0,1,0,0,2] & 112 & 3  & --\\
+7  & [0,0,1,0,3] & 168 & 2  & --\\
+7  & [0,1,0,3,2] & 168 & 2  & --\\
+7  & [1,0,0,2,1] & 168 & 2  & --\\
+8  & [0,1,1,0,2] & 252 & 2  & $\to[0,1,1,0,4]$\\
+8  & [0,1,1,0,4] & 252 & 2  & $\to[0,1,1,0,6]$\\
+8  & [0,1,1,0,6] & 252 & 2  & $\to[0,1,1,0,2]$\\
+9  & [1,0,0,1,2] & 180 & 4  & --\\
+9  & [0,1,0,4,1] & 360 & 2  & $\leftrightarrow[0,1,0,4,4]$\\
+9  & [0,1,0,4,4] & 360 & 2  & $\leftrightarrow[0,1,0,4,1]$\\
+11 & [1,0,0,1,10]& 330 & 4  & --\\
+11 & [1,0,0,1,1] & 660 & 2  & --\\
+13 & [0,1,0,0,4] & 182 & 12 & --\\
+13 & [1,0,0,4,7] & 546 & 4  & --\\
+17 & [1,0,0,1,5] & 1224& 4  & --\\
+19 & [0,1,0,0,4] & 570 & 12 & --\\
+\end{longtable}
+
+The certificate additionally records the complete cubic-pencil member
+histogram of each representative.  Repeated orbit sizes in
+Table~\ref{tab:r5sporadic} are therefore visibly distinguished without
+requiring a working-directory file.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Independent R5 completeness totals.  The first equality is
+the direct syndrome enumeration versus the orbit--stabilizer sum; the
+second decomposes the same total into the formula in
+Theorem~\ref{thm:r5} and the sporadic rows above.}
+\label{tab:r5-sanity}
+\begin{tabular}{crrr}
+\toprule
+$q$ & direct $=$ orbit sum & nonsporadic & sporadic\\
+\midrule
+7  & $889=889$   & 245  & 644\\
+8  & $1116=1116$ & 360  & 756\\
+9  & $1391=1391$ & 491  & 900\\
+11 & $1848=1848$ & 858  & 990\\
+13 & $2080=2080$ & 1352 & 728\\
+16 & $2432=2432$ & 2432 & 0\\
+17 & $4131=4131$ & 2907 & 1224\\
+19 & $4541=4541$ & 3971 & 570\\
 \bottomrule
 \end{tabular}
 \end{table}
-
-The orbit sizes in Table~\ref{tab:r5sporadic} are a compact inventory,
-not orbit identifiers.  The electronic Certificate R5 records for
-each row a canonical normalized representative, stabilizer, complete
-cubic-pencil member histogram, and Frobenius image; equality with one
-of those canonical $\PGL_2$ orbits is the finite classification
-criterion.  Thus repeated sizes denote distinct certified orbits.

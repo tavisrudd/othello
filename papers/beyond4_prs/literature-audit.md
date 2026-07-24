@@ -9,14 +9,15 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 15 bibliography entries, four were read at **full text** in the
-underlying audits (Kaipa; Zhang--Wan--Kaipa; Wang; Ball--Lavrauw), three at
-**partial** depth (Kaipa--Patanker--Pradhan;
-Cesaratto--Matera--Pérez; Gmainer--Havlicek), six at
-**abstract/metadata only** (Aubry--Perret; Iarrobino--Kanev;
-Comas--Seiguer; Stichtenoth; Dür; Lidl--Niederreiter; Ben-Sasson et al.),
-and one at **secondary only** for the role used here (Seroussi--Roth through
-the two full-text PRS papers).
+Of the 19 bibliography entries, six were read at **full text** in the
+underlying audits (Kaipa; Zhang--Wan--Kaipa; Wang; Ball--Lavrauw; Xu
+2023; Wu--Ding--Chen), three at **partial** depth
+(Kaipa--Patanker--Pradhan; Cesaratto--Matera--Pérez;
+Gmainer--Havlicek), nine at **abstract/metadata only** (Zhang--Wan
+2017; Xu--Hong--Xu; Aubry--Perret; Iarrobino--Kanev; Comas--Seiguer;
+Stichtenoth; Dür; Lidl--Niederreiter; Ben-Sasson et al.), and one at
+**secondary only** for the role used here (Seroussi--Roth through the
+two full-text PRS papers).
 
 The consolidated verdict is:
 
@@ -60,6 +61,22 @@ holes. No predecessor was located.
   `2ea8efc04bbf42be0919288e5e3777a4010ae30940bf8fec3a5c32feef789752`.
   It supplies binary-quartic orbit machinery and contains no PRS/deep-hole
   classification.
+- Xu (2023) — **full text**, abstract, introduction, and main theorem;
+  cache key `10.1051/wujns/2023281015`, SHA-256
+  `99669c720334c145854d2a0ca4d677aa6a3d715239c16763eba592c1f0642c50`.
+  It constructs two even-characteristic PRS
+  families and explicitly presents the broader classification as only
+  partially solved.
+- Wu--Ding--Chen — **full text**, abstract and Section V.A; cache key
+  `arXiv:2312.05534`, SHA-256
+  `9fe6878668bafce0ba1eb759f9fee16ab10f77b5520b47eb1c4626aec5f76000`.
+  It gives the
+  MDS-extension/deep-hole criterion and discusses PRS covering radii,
+  but does not classify redundancy-five syndromes.
+- Zhang--Wan (2017) and Xu--Hong--Xu — **abstract/metadata only** in
+  this audit.  They provide explicit projective or generalized
+  projective families and lower-redundancy context, not the present
+  cubic-pencil exhaustion.
 
 The permitted paper wording is “to our knowledge, no prior classification
 was located within the recorded search boundary,” never “first” or an
@@ -122,6 +139,10 @@ Surveys volume 6 (2019).
 | SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | secondary only, through Kaipa and Zhang--Wan--Kaipa at full text | covering-radius/MDS-extension input |
 | Kaipa2017 | `10.1109/TIT.2017.2706677` | full text, sections recorded above | deep-hole/MDS dictionary |
 | ZWK2020 | `10.1109/TIT.2019.2940962` | full text, Sections I--IV | PRS lower-redundancy frontier |
+| ZhangWan2017 | `arXiv:1711.02292` | abstract/metadata only | explicit PRS deep-hole families |
+| XuHongXu2017 | `arXiv:1705.07823` | abstract/metadata only | generalized projective RS families |
+| Xu2023 | `10.1051/wujns/2023281015` | full text, main theorem and introduction | even-characteristic PRS families |
+| WuDingChen2023 | `arXiv:2312.05534` | full text, abstract and Section V.A | MDS extensions and PRS radius context |
 | KPP2025 | `arXiv:2312.07118v3` | partial, abstract/introduction/orbit statements | binary-quartic orbit input |
 | CMP2017 | `10.1007/s00493-015-3330-5` | partial, abstract/theorem statements | factorization-family context |
 | AubryPerret1995 | `10.1007/BF02567835` | abstract/metadata only | singular-curve bound |

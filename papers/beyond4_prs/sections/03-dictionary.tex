@@ -62,3 +62,30 @@ factor cannot grow with redundancy: since $\dim W_f=r-3$,
  r-3\leq r-1-\deg\gcd(W_f),
 \]
 so its degree is at most two.
+
+\subsection{Coding consequences and recognition}
+
+The dictionary has two immediate coding consequences.  First, a
+split-free direction is an uncovered point of the normal rational
+curve and hence gives a one-column MDS extension whenever the stated
+covering-radius gate applies.  The classification theorems therefore
+give exact projective deep-hole counts, not only normal forms.  Second,
+they give recognition procedures.  From a syndrome one forms $H_f$,
+computes $W_f$, and tests the listed geometric families: a common
+quadratic factor detects the persistent tangent and conjugate-secant
+families; the relevant contraction kernel detects a modular nucleus;
+and the finite exceptional fields are decided by the canonical orbit
+representatives printed in Table~\ref{tab:r5sporadic} and recorded in
+the supplement.
+
+For each fixed redundancy treated here, constructing and row-reducing
+the Hankel matrix costs $O(r^3)$ field operations, after which the
+persistent and modular tests are constant-size linear algebra and
+quadratic factorization.  The exceptional finite tables add only an
+orbit-normalization lookup.  This is a recognition algorithm for the
+proved classifications, not a general decoder and not a uniform
+arbitrary-redundancy theorem.  A direct witness search would instead
+inspect the projective members of the $(r-3)$-dimensional system
+$W_f$ and factor degree-$(r-2)$ forms; coherent polar induction is the
+mechanism that replaces that ambient search in the levels proved
+below.
