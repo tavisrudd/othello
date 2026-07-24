@@ -820,6 +820,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
+| 2 | C597 | active continuation of C595 | construct the complete non-cyclic R10 integral bad scheme and test \(\mathrm{SC}(11)\) |
 
 ## Unallocated level-ups
 
