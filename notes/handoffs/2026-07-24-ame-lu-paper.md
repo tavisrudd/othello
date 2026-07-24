@@ -110,6 +110,16 @@ import-only gate passed guarded elaboration and the trace-only aggregate
 check.  No manuscript theorem is assumed by the data structure.  See
 `2026-07-24-c565-ame-lu-lean-foundation.md`.
 
+**C590 closed (2026-07-24): CSS support and dictionary bridges complete.**
+`RelativeConicArcs.AMELU.CSS` fixes `L_C=C×C^\perp`, Pauli support, and
+`L_C(S)`.  `RelativeConicArcs.AMELU.Dictionary` proves six-arc to exact
+`[6,3,4]`, `[6,3,4]` to AME, projective to monomial, and monomial to
+local-Clifford coherence with explicit multiplier matrices.  The final
+import gate and standard-axiom audit passed.  The full manuscript dictionary
+still needs the stabilizer-action, Lagrangian, and minimum-support clauses
+before formal adoption.  See
+`2026-07-24-c590-ame-lu-lean-dictionary-bridges.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least

@@ -7,7 +7,7 @@ adopted from Lean.
 
 | Manuscript result | Formal status | Unformalized boundary | Action |
 |---|---|---|---|
-| `thm:dictionary` | shared statement vocabulary complete; theorem not adopted | arc-to-kernel parameter proof and MDS-to-AME implication | downstream dictionary proof |
+| `thm:dictionary` | arc-to-`[6,3,4]`, `[6,3,4]`-to-AME, projective-to-monomial-to-LC, and CSS support interface proved in `RelativeConicArcs.AMELU.Dictionary` | stabilizer action of `C × Cᵖ`, Lagrangian property, and minimum-support clause | close residual statement coverage before C570 adoption |
 | `thm:lc-pencil` and `cor:lu-lc-pencil` | none adopted | projective invariant theory, exceptional fibres, and rigidity composition | C567 candidate package |
 | `thm:lu-h3-grs` and `thm:q13-lu` | none adopted | stabilizer trace formula, geometric count, and exact contraction bridge | C568 candidate package |
 | `thm:transport-divisor` | none adopted | cycle-cover algebra, rank bridge, and orbit geometry | C569 candidate package |
