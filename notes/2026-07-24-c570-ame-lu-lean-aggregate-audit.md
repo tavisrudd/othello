@@ -96,7 +96,7 @@ block formula but does not instantiate the six copy-quotient matrices.
 
 `make check` completed without failure and produced the warning-free
 11-page PDF after the Section 8 reconciliation (SHA-256
-`91e34d6e83a0fe90a2d6d5be56fd211d11cadbc8d3a38e1d280863513870c295`).
+`126cd336c9f98b1aab845355145df0b28e9c987d4bc45acc3f1ef75a16412cb4`).
 
 ## `ej` / Tao closeout and mystery ledger
 
