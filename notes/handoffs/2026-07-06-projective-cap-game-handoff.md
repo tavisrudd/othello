@@ -736,6 +736,15 @@ layer is needed. Prove those leaf conditions directly rather than an arbitrary G
 Report+certificate:
 [`../2026-07-23-c528-mex-skeleton-probe.md`](../2026-07-23-c528-mex-skeleton-probe.md).
 
+**The proposed uniform empty/pure-one-dimensional `capOK` leaf is FALSE (C80, 2026-07-24).**
+The C524 three-move leaf is a twelve-cap.  In `PG(2,67)`, secant coverage forces every twelve-cap
+to have at least 189 legal points, while point-line incidence plus `capOK` forces at most 135.
+Thus no witness choice can yield even `capOK`, before terminality or purity is considered.
+More generally, every fixed leaf size fails for sufficiently large `q`; a uniform `Y_NK` route
+must have growing depth (secant coverage already requires square-root scale) or use a P-guard
+that permits active triples.  Report and proof:
+[`../2026-07-24-c80-capok-depth-obstruction.md`](../2026-07-24-c80-capok-depth-obstruction.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -759,11 +768,11 @@ C523/C524 report+cert+`--check` (q13/q17 and a separate q19 cert):
 
 Priority order and why:
 
-1. **C80 (spine).** Everything gates on it. C528 is closed: the frozen `SG≤5` signal is exact
-   residual height, so the live frontier is the uniform-in-`q` depth-2 routing theorem into `Y_NK`,
-   not a gadget Grundy formula. Use the C528 `ej` leaf collapse: target `capOK` plus terminality or
-   an empty/pure-one-dimensional continuation complex after the third certificate move, with
-   `∃r ∀o ∃p`; do not strengthen this to a global pairing.
+1. **C80 (spine).** Everything gates on it. The fixed-depth frontier is closed-negative:
+   no twelve-cap can be `capOK` once `q≥67`, and the same incidence inequality kills every
+   fixed leaf size asymptotically.  The live frontier is a variable-depth P-preserving descent
+   into `Y_NK`, with state-dependent stopping time, or a new P-guard that permits controlled
+   active triples.  Do not spend another probe on a bounded-depth witness selector.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.
