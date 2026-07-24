@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C536, C538--C544, C578 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -86,6 +86,14 @@ degree at most `102`, and deletion `23/48`; the uniform theorem starts at
 the frozen `q=16,32` controls.  C532's remaining characteristic-two residue
 is confined to the generic two-dimensional carrier quotient, with
 `0 <= rho_q <= q^4(q+1)`.
+C537 closes the Flatland--Gale comparison negatively but exactly. Flatland's pulled-back Joubert
+coordinates and C481's bracket atlas are the same labelled `M_0,6` point for one projection, but
+the multi-view functors have opposite variance: Flatland fixes several planar configurations and
+requires one common line image, while C481--C485 fix one planar parent and invert several generally
+different images. The common Flatland image repeats one C482 compatibility row, so every number
+of views has rank one and a three-dimensional residual cubic family rather than the rank-four Gale
+pair. The missing joint `P3` camera/world realization is absent from C481's input; no descent or
+paper claim transfers.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
 C535 characterizes the strongest characteristic-two Hessian--Arf functoriality theorem:
 the exterior-catalecticant divided Hessian, ordered incidence, twisted-cubic collision pullback,
@@ -99,9 +107,7 @@ scheme is exactly the upper rank-two scheme over `Z`, while every modular-nucleu
 linear Lucas adjacent-run pullback.  Degree four is the sharp vacuous boundary, the first
 separated modular component is C498's characteristic-two line, and the C498/C509/C513/C516
 contained calculations are uniform corollaries.  Voisin's positive-genus theorem does not cover
-the NRC case; no third component occurs inside the secant/nucleus functor.  A late theorem-text check of
-Flatland Theorem 6 exposed an explicit three-or-more-view joint-consistency gap that C481--C485
-may resolve; C537 owns only the exact functor comparison before any paper claim.  The pending
+the NRC case; no third component occurs inside the secant/nucleus functor. The pending
 `arcs`/`continuation` portfolio still owns deletion and continuation reconstruction.  Lucas root
 spaces merge into polar flags; simultaneous extension complexes are already owned by `arcs`; and
 the fixed-size equivalence algorithm has no proved complexity advantage.
@@ -680,6 +686,18 @@ subspace polynomials give split squarefree members over every `F_(2^m)` with `m>
 additive witness count is `q(q-1)(q-2)(q-4)/1344`.  This fires
 C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other carrier strata.
 
+## Closed base — C537
+
+`notes/2026-07-24-c537-flatland-gale-multiview-comparison.md` identifies Flatland's pulled-back
+Joubert invariant with C481's labelled `M_0,6` bracket quotient for a single projection, but kills
+the proposed multi-view bridge by incompatible inverse inputs. Flatland varies the planar parent
+and holds the line image fixed; C481--C485 hold one planar parent fixed and use generally different
+line images. The Flatland diagonal tuple gives repeated C482 rows and rank one for every number of
+views, leaving a three-dimensional residual cubic family rather than a Gale pair. Its missing
+joint `P3` pinhole-camera/world-point datum is not present in the C481 functor, and Flatland's
+camera-centre cubics are not C482's parent-residual cubics. No finite-field descent or portfolio
+claim is activated.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -716,7 +734,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | complete (characterized stop) | maximal base-scheme naturality; Arf torsor; quartic `i_3` prior-art boundary; cubic-local all-degree contraction theorem | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | complete | integral secant pullback from degree five; sharp degree-four failure; Lucas adjacent-run theorem; C498/C509/C513/C516 corollaries | no third component in the componentwise secant/nucleus functor | abstract modular flag theorem boundary |
-| C537 | Flatland--Gale multi-view comparison | queued; C536 gate green | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
+| C537 | Flatland--Gale multi-view comparison | complete (kill) | Flatland Theorem 6 plus C481--C485 | exact one-view quotient match; incompatible multi-view inverse inputs and repeated-row rank-one obstruction | reconstruction novelty boundary closed |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
 | C545 | proof-complete preprint and DOI after second-draft gates | active; new cold-review revision closes the printed dependency map, R5 representatives/count equalities, coding payoff, and 19-source literature pass; release blocked | C543--C544 aggregate, two independent readers, clean export/replay, immutable release bundle, author confirmation | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, separate radius- and witness-based classification routes, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
@@ -738,8 +756,7 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C537 | executable; C536 gate green | high-upside reconstruction comparison, now unblocked by the modular theorem spine |
-| 2 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
+| 1 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -799,10 +816,8 @@ history.
 
 ## Next command
 
-`go C537`
+`go C545`
 
-(C533 has closed the C525 constant sharpening with a minimal cubic Pluecker
-union covariant and exact fixed-root deletion overlap. C537's Flatland--Gale
-comparison is now the highest-EV executable successor. C545 remains externally
-blocked on its final reader, clean export/replay, immutable identifiers, and author/account
-confirmation. No external upload is authorized.)
+(C537 has killed the Flatland--Gale multi-view bridge by an exact inverse-input and repeated-row
+comparison. C545 remains externally blocked on its final reader, clean export/replay, immutable
+identifiers, and author/account confirmation. No external upload is authorized.)

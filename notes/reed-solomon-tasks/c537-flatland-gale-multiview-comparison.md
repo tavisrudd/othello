@@ -1,6 +1,6 @@
 # C537 — Flatland--Gale multi-view comparison
 
-**Lane:** `reed-solomon` · **Status:** queued after C536; does not displace C531
+**Lane:** `reed-solomon` · **Status:** complete — incompatible inverse-input kill
 
 ## Objective
 
@@ -43,6 +43,18 @@ have inequivalent inverse inputs despite sharing the labelled six-point `P1` inv
   owned by the pending `arcs` or `continuation` papers.
 
 No manuscript, ambient census, or displacement of C531 is authorized.
+
+## Outcome
+
+Completed in `notes/2026-07-24-c537-flatland-gale-multiview-comparison.md`.
+
+Flatland's pulled-back Joubert invariants and C481's bracket atlas are exactly the same labelled
+`M_0,6` point for one projection. The multi-view functors nevertheless have opposite variance:
+Flatland fixes several planar parents and requires one common line image, while C481--C485 fix one
+parent and invert several generally different line images. A Flatland common image gives repeated
+C482 compatibility rows, hence rank one and a three-dimensional residual cubic family rather than
+the rank-four Gale pair. The proposed bridge is therefore killed without entering finite-field
+descent or opening a paper.
 
 ## Owned paths
 
