@@ -129,7 +129,10 @@ Phenomenon: the projective mirror acts on more than the full point set.
 
 Interface theorem: invariant-subboard mirror.
 
-Why hypotheses hold: the block form scales by the nonsquare scalar.
+Why hypotheses hold: the block form scales by the nonsquare scalar.  Then use
+`ProjectiveCap.Projective.isP_subCap_mapLinearEquiv` to transport the
+coordinate theorem to any presentation supplied with the corresponding
+projective linear equivalence.
 
 Consequence: one hyperbolic-quadric and one coordinate-exact
 elliptic-quadric corollary.

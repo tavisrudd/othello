@@ -1,5 +1,15 @@
 # Outcome classes of the Nofil/cap achievement game on finite geometries
 
+> **Superseded packaging notice (2026-07-23).** This early skeleton contains
+> stale fixed-q trust rows, especially q=23 and q=25, and predates the current
+> reproducibility and literature-audit conventions.  Use
+> `notes/2026-07-23-c551-cap-paper-flagship-packaging.md` for the authoritative
+> theorem/trust ledger and
+> `notes/2026-07-23-c551-cap-paper-manuscript-skeleton.md` for the current
+> architecture.  This file remains a historical source of proof-outline
+> material only; its evidence table and novelty wording are not
+> manuscript-licensed.
+
 Status: manuscript skeleton for D1; not a submission draft.  Every mathematical or
 bibliographic claim carries an evidence tag.  Proofs are deliberately stubbed.
 

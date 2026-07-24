@@ -291,7 +291,7 @@ profile `[propext, Classical.choice, Quot.sound]`; no row relies on
 | M2 | The same conclusion holds on any invariant projective subboard `Q` | `ProjectiveCap/HyperbolicQuadricMirror.lean`, `ProjectiveCap.Projective.initialSubCapP_of_fpf_collinearity_preserving` | `LEAN-THEOREM`; audited profile `[propext, Classical.choice, Quot.sound]` | one theorem from which the included quadric corollaries follow |
 | M3 | If a linear equivalence squares to a nonsquare scalar and preserves `Q`, the subboard cap game is P | same module, `initialSubCapP_of_linearEquiv_sq_scalar_nonsquare` | `LEAN-THEOREM` | coordinate-friendly corollary interface |
 | Q+ | The hyperbolic quadric subboard `Q⁺(2m−1,q)` is P for odd `q` in the displayed block model | same module, `initialSubCapP_blockQuadric_of_odd_card` | `LEAN-THEOREM`; terminal audit `[propext, Classical.choice, Quot.sound]` | included one-page classical-variety corollary |
-| Q− | The displayed standard/norm-block elliptic quadric subboards admit the same P mirror over odd finite fields | `ProjectiveCap/EllipticQuadricMirror.lean`, `initialSubCapP_standardEllipticQuadric_of_nonsquare`, `exists_standardEllipticQuadric_initialSubCapP`, and `initialSubCapP_normBlockQuadric_of_odd_card` | `LEAN-THEOREM`; coordinate-exact, not an unqualified classification of all presentations | included as a second corollary only with the coordinate/equivalence qualification visible |
+| Q− | The displayed standard/norm-block elliptic quadric subboards admit the same P mirror over odd finite fields, and the value transports to every presentation equipped with a projective linear equivalence to that model | `ProjectiveCap/EllipticQuadricMirror.lean`, `initialSubCapP_standardEllipticQuadric_of_nonsquare`, `exists_standardEllipticQuadric_initialSubCapP`, `initialSubCapP_normBlockQuadric_of_odd_card`, and `isP_subCap_mapLinearEquiv` | `LEAN-THEOREM`; coordinate-exact construction plus an exact supplied-equivalence transport, not an unqualified classification of all presentations | included as a second corollary with the equivalence hypothesis visible |
 
 ### Odd-plane reductions and residual structure
 
@@ -501,6 +501,29 @@ Do not put any of the following in the manuscript:
    paper-cited terminal, especially generated Q11/Q13 data.
 6. **Literature audit.**  Complete the six-item queue above before any
    historical novelty or priority sentence.
+
+### Evidence-normalization return on effort
+
+If a verification supplement is pursued, the highest-return order is:
+
+1. **q=23:** preserve the already rules-checked 22-root chain with an approved
+   durable raw-table manifest, hashes, byte counts, and storage location.  This
+   is closest to `READY-BUNDLE`; no new solving is needed.
+2. **`PG(4,3)`:** rerun or package the small 25,258-state computation with its
+   independent canonicalization and move-order checks.  It is the cheapest
+   evidence for the higher-even-dimensional open family.
+3. **q=17:** regenerate the 21-class canonical book and retain a compact
+   independently checkable certificate or manifest.  Prefer this over the
+   much larger 210-class anchored book.
+4. **q=3 and q=9:** normalize only if retained as historical base rows; the
+   formal q=5,7,11,13 rows already carry the small-field story.
+5. **q=19 and q=25:** defer until the supplement needs them.  q=19 duplicates
+   the qualitative q=17 message at a larger certificate cost; q=25 lacks a
+   C54-style independent checker and is only an on-conic-layer claim.
+
+This ordering allocates no successor work.  It prevents the paper from
+spending its first verification effort on the largest or least
+decision-informative artifact.
 
 ## Mystery ledger
 
