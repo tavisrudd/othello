@@ -188,7 +188,9 @@ MOST TWO`. The elementary cubic point bound and fifteen-secant cover force `q<=1
 residual quotient has ten projective / nine semilinear classes, and every survivor already lies on
 a line or quadratic. C398's four non-GRS nonsingular-conic rows are consumed exactly. The sole
 additional non-GRS shape is a q=9 eight-point locus on a unique rational line-pair with `4+4`
-distribution. Raw small-field arc classifications pre-empt flagship positioning. See
+distribution. The `ej` upgrade identifies its factors intrinsically as the unique tangents with
+four uncovered points, based at the short two-point orbit of the `C4` projective stabilizer. Raw
+small-field arc classifications pre-empt flagship positioning. See
 `notes/2026-07-23-c401-cubic-contained-six-arcs.md` and its Python/JSON/checksum bundle.
 
 ### Target theorem

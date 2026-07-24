@@ -1379,5 +1379,101 @@
       "survivors": []
     }
   ],
+  "q9_reducible_intrinsic_upgrade": {
+    "brianchon_count": 2,
+    "brianchon_points": [
+      {
+        "matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "point": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "matching": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "point": [
+          1,
+          6,
+          0
+        ]
+      }
+    ],
+    "factor_line_profiles": [
+      {
+        "base_vertex_index": 3,
+        "form": [
+          1,
+          4,
+          7
+        ],
+        "locus_points": 4,
+        "secant_multiplicity_histogram": {
+          "0": 4,
+          "2": 5,
+          "5": 1
+        }
+      },
+      {
+        "base_vertex_index": 4,
+        "form": [
+          1,
+          5,
+          7
+        ],
+        "locus_points": 4,
+        "secant_multiplicity_histogram": {
+          "0": 4,
+          "2": 5,
+          "5": 1
+        }
+      }
+    ],
+    "pgl_arc_point_orbits": [
+      [
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        5
+      ]
+    ],
+    "pgl_permutation_group": "C4",
+    "pgl_permutation_group_order": 4,
+    "tangent_locus_histogram": {
+      "1": 16,
+      "2": 12,
+      "4": 2
+    }
+  },
   "schema": "c401-cubic-contained-six-arcs-v1"
 }

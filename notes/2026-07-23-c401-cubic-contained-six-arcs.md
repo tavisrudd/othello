@@ -79,6 +79,22 @@ which, up to the displayed scalar, factors as
 The two component lines each contain four locus points and their intersection is not in the locus.
 No double line or nonsplit conjugate pair occurs in any minimum-degree quadratic profile.
 
+The `ej` intrinsic upgrade removes the remaining coordinate-choice mystery. The projective
+stabilizer induced on the six arc points is `C4`, with orbits of sizes two and four. The two
+short-orbit vertices support the unique two tangents containing four uncovered points; these
+tangents are exactly the two displayed factors. Across all thirty tangents, the number of uncovered
+points has histogram
+
+```text
+1^16, 2^12, 4^2.
+```
+
+Each factor line has secant-multiplicity profile `0^4, 2^5, 5^1`: four uncovered points, five
+ordinary twice-covered points, and its base arc vertex on five pair-secants. The arc has exactly
+two Brianchon points, and the short-orbit vertex pair is a paired edge in both corresponding
+perfect matchings. Thus the line-pair is recoverable intrinsically from the stabilizer and tangent
+incidence, not merely from factoring a chosen coordinate form.
+
 ## Why the classification is finite
 
 Let `C` be a nonzero plane cubic over `F_q`, with `q>=4`. It cannot contain every rational point:
@@ -147,8 +163,8 @@ formalize the field bound or coordinate census in Lean.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| C401 checker `.py` | 15,111 | `7e2c5f81e9869f97b4dc7cab729eb53af4036469792429e0101671c876c57aaf` |
-| C401 certificate `.json` | 27,937 | `bc1a96bfcddc39daf432ce04454b6d3ac6ced30c2e18c765b36c808530ed4364` |
+| C401 checker `.py` | 20,601 | `995a884f7bfc2df890c95c62b605bc273353bb72a4d59b51dc3a1ae7ce5ca9f6` |
+| C401 certificate `.json` | 29,417 | `dc0b6989dabc43daa8f45d10f50136a29540ba5bc56c359bbb9de1bb8a4866b5` |
 | C398 input checker `.py` | 17,444 | `e01fc095bb51dd561d5b71c91d0f775b24ec1d97c8909d7879f3bd7fa499dcfc` |
 | C398 input certificate `.json` | 8,713 | `e68bd03d88afd2c6c05a76fe9ef9b4254cb614c3b2f9f4c252c60222289e6f68` |
 
@@ -226,12 +242,13 @@ non-GRS reducible quadratic and recorded its `4+4` component distribution.
   not; every survivor has a line or quadratic container.
 - **Settled:** whether Frobenius hides a `q=9` exception. It fuses exactly one survivor pair, and
   both projective subclasses carry the same unique nonsingular-conic profile.
-- **Open mystery:** the unique non-GRS `q=9` `4+4` rational-line-pair locus has no coordinate-free
-  mechanism in the present proof. The exact evidence is the exhaustive quotient and displayed
-  factorization; the missing evidence is an intrinsic derivation from the six-arc incidence type.
-  No successor is allocated because the classification and paper boundary are already closed.
+- **Settled by the `ej` intrinsic upgrade:** the unique non-GRS `q=9` `4+4` rational-line-pair
+  locus is selected by the `C4` stabilizer's short two-point orbit. Its vertices support the only
+  tangents containing four uncovered points, and those tangents are the two quadratic factors.
+  The `1^16,2^12,4^2` tangent histogram and the two Brianchon matchings make the extraction
+  coordinate-free.
 
-No other genuine C401 mystery remains.
+No genuine C401 mystery remains.
 
 ## Hand-back
 

@@ -9,7 +9,7 @@ import importlib.util
 import json
 import tempfile
 from collections import Counter
-from itertools import permutations, product
+from itertools import combinations, permutations, product
 from pathlib import Path
 
 
@@ -56,6 +56,51 @@ def projective_suborbits(c398, field, arc):
         )
         remaining.difference_update(orbit)
     return representatives
+
+
+def projective_automorphism_permutations(c398, field, arc):
+    index = {point: position for position, point in enumerate(arc)}
+    answer = set()
+    for ordered in permutations(arc, 4):
+        inverse = c398.inverse3(field, ordered[:3])
+        fourth = c398.mat_vec(field, inverse, ordered[3])
+        diagonal = tuple(field.inverse(entry) for entry in fourth)
+
+        def image(point):
+            coordinates = c398.mat_vec(field, inverse, point)
+            return c398.normalize(
+                field,
+                tuple(
+                    field.mul(diagonal[i], coordinates[i]) for i in range(3)
+                ),
+            )
+
+        images = tuple(image(point) for point in arc)
+        if set(images) == set(arc):
+            answer.add(tuple(index[point] for point in images))
+    return tuple(sorted(answer))
+
+
+def perfect_matchings(items: tuple[int, ...]):
+    if not items:
+        yield ()
+        return
+    first = items[0]
+    for position in range(1, len(items)):
+        second = items[position]
+        remaining = items[1:position] + items[position + 1 :]
+        for matching in perfect_matchings(remaining):
+            yield ((first, second),) + matching
+
+
+def permutation_order(permutation):
+    current = tuple(range(len(permutation)))
+    identity = current
+    for order in range(1, len(permutation) + 1):
+        current = tuple(permutation[current[index]] for index in identity)
+        if current == identity:
+            return order
+    raise AssertionError("permutation order exceeded its degree")
 
 
 def cubic_row(field, point: tuple[int, int, int]) -> tuple[int, ...]:
@@ -329,6 +374,105 @@ def field_record(root: Path, q: int) -> dict[str, object]:
     }
 
 
+def q9_reducible_upgrade(root: Path, records):
+    c398 = load_c398(root)
+    field = c398.FiniteField(9)
+    points = c398.projective_points(field)
+    record = next(record for record in records if record["q"] == 9)
+    survivor = next(
+        survivor
+        for survivor in record["survivors"]
+        if not survivor["grs_parent"]
+        and survivor["locus_size"] == 8
+        and "two_distinct_rational_lines"
+        in survivor["minimum_degree_curve_type_counts"]
+    )
+    arc = tuple(tuple(point) for point in survivor["arc"])
+    locus = set(tuple(point) for point in survivor["locus"])
+    components = {
+        tuple(form)
+        for form in survivor["minimum_degree_curve_components"][
+            "two_distinct_rational_lines"
+        ]["components"]
+    }
+    lines = line_data(field, points)
+    tangent_histogram = Counter()
+    maximum_tangents = []
+    factor_profiles = []
+    for form, line_points in lines:
+        arc_hits = [index for index, point in enumerate(arc) if point in line_points]
+        if len(arc_hits) != 1:
+            continue
+        locus_points = len(locus & set(line_points))
+        tangent_histogram[locus_points] += 1
+        if locus_points == 4:
+            maximum_tangents.append(form)
+            secant_multiplicities = Counter(
+                sum(
+                    not c398.det3(field, left, right, point)
+                    for left, right in combinations(arc, 2)
+                )
+                for point in line_points
+            )
+            factor_profiles.append(
+                {
+                    "base_vertex_index": arc_hits[0],
+                    "form": list(form),
+                    "locus_points": locus_points,
+                    "secant_multiplicity_histogram": {
+                        str(value): count
+                        for value, count in sorted(secant_multiplicities.items())
+                    },
+                }
+            )
+    assert set(maximum_tangents) == components
+    automorphisms = projective_automorphism_permutations(c398, field, arc)
+    remaining = set(range(len(arc)))
+    point_orbits = []
+    while remaining:
+        seed = min(remaining)
+        orbit = sorted({permutation[seed] for permutation in automorphisms})
+        point_orbits.append(orbit)
+        remaining.difference_update(orbit)
+    brianchon_points = []
+    for matching in perfect_matchings(tuple(range(len(arc)))):
+        common = [
+            point
+            for point in points
+            if all(
+                not c398.det3(field, arc[left], arc[right], point)
+                for left, right in matching
+            )
+        ]
+        if common:
+            assert len(common) == 1
+            brianchon_points.append(
+                {
+                    "matching": [list(pair) for pair in matching],
+                    "point": list(common[0]),
+                }
+            )
+    short_orbit = next(orbit for orbit in point_orbits if len(orbit) == 2)
+    assert sorted(profile["base_vertex_index"] for profile in factor_profiles) == short_orbit
+    maximum_automorphism_order = max(
+        permutation_order(permutation) for permutation in automorphisms
+    )
+    assert len(automorphisms) == maximum_automorphism_order == 4
+    return {
+        "brianchon_count": len(brianchon_points),
+        "brianchon_points": brianchon_points,
+        "factor_line_profiles": sorted(
+            factor_profiles, key=lambda profile: profile["form"]
+        ),
+        "pgl_arc_point_orbits": sorted(point_orbits, key=lambda orbit: (len(orbit), orbit)),
+        "pgl_permutation_group": "C4",
+        "pgl_permutation_group_order": len(automorphisms),
+        "tangent_locus_histogram": {
+            str(value): count for value, count in sorted(tangent_histogram.items())
+        },
+    }
+
+
 def build_certificate(root: Path, fields: tuple[int, ...] = FIELDS):
     records = [field_record(root, q) for q in fields]
     if fields == FIELDS:
@@ -364,6 +508,9 @@ def build_certificate(root: Path, fields: tuple[int, ...] = FIELDS):
             "residual_prime_powers_with_six_arcs": list(FIELDS),
         },
         "fields": records,
+        "q9_reducible_intrinsic_upgrade": (
+            q9_reducible_upgrade(root, records) if fields == FIELDS else None
+        ),
     }
 
 
