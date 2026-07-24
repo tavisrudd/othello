@@ -116,12 +116,15 @@ and a no-overcount proof.
 The source-report extraction found three gaps that must not be hidden behind
 the original theorem synopsis:
 
-1. **Later contained flags.**  The rank--nullity argument now proves
+1. **Later contained flags and the pointed R8 package.**  The rank--nullity argument proves
    scheme-theoretically, in every characteristic, that a first-polar line
    contained in the lower rank-two carrier comes from the upper rank-two
    carrier.  This closes `CC(6,1)` and the ordinary persistent part in later
    degrees.  The central, collision, and modular calculations now also close
-   `CC(7,1)`; R8 still requires the full pointed lower package `LP(6,1)`.
+   `CC(7,1)`.  The two-old-marker recursion now prints the rank/gcd,
+   cyclic/wild/inseparable, branch, and marker-collision equations, proves
+   the geometric-`S3` identity twist and deletion degree `30`, and closes
+   `LP(6,1)`.  R8 is unconditional for `q>=43`.
 2. **R9 slices and base selection.**  The six reduced discriminants, their
    Bézout identity, the multiple-root branch polynomials, and the nonzero
    rational-base polynomial with its degree accounting must be printed.
@@ -131,8 +134,8 @@ the original theorem synopsis:
    polynomial vanishing on the whole bad union.  Either exhibit such a
    polynomial, prove a componentwise hitting lemma, or weaken the threshold.
 
-Until the remaining gates close, the manuscript states the R8--R9
-continuation and the effective Hessian corollary conditionally.  This is a mathematical
+Until the remaining gates close, the manuscript states the R9 continuation
+and the effective Hessian corollary conditionally.  This is a mathematical
 correction, not merely an expositional downgrade.
 
 ## Release rule

@@ -27,7 +27,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | P2 | REVIEW | Polar construction has a standalone proof of base change, equivariance, infinity, and marker propagation, independent of the dichotomy. | Construction theorem exists; proof needs a cold algebraic read against the source report. |
 | P3-R6 | REVIEW | Every R6 contained component is a named proved proposition, including exceptional characteristics. | Ordinary rank-two proposition and `CC(6,1)` text exist; audit all modular branches. |
 | P3-R7 | REVIEW | `CC(7,1)` has printed central, collision, and modular proofs. | Candidate expansion exists; verify that no certificate-only step remains. |
-| P3-R8 | FAIL | The full pointed lower package `LP(6,1)` has printed defining equations, component/monodromy proof, and marker-deletion argument for every recursive stratum. | Current theorem remains conditional on this package. |
+| P3-R8 | PASS | The full pointed lower package `LP(6,1)` has printed defining equations, component/monodromy proof, and marker-deletion argument for every recursive stratum. | Proposition `prop:r8-lp61` prints the rank/gcd, cyclic/wild, inseparable, branch, and marker equations; exhausts the degree-three monodromy cases; proves the `S_3` identity twist; and checks outer/inner degree budgets 15/19 plus deletion degree 30. |
 | P4 | PASS | Effective transverse theorem is visibly conditional only on named lower-cover, point-bound, deletion, and contained-component hypotheses. | The induction theorem exposes these inputs. |
 | P5 | FAIL | Every intersection, containment, ramification, genus, and deletion number maps to a named proof or immutable public certificate. | Assertion audit still has open R5--R9 degree/deletion rows. |
 | P6 | FAIL | Ordered-Hessian section proves the ambient incidence, factorization strata, ruling conics, pullbacks, selection argument, and deletion budget; the global bad-union bound is valid. | Root-compatible pullback and one global bad-union argument remain open. |
@@ -93,4 +93,3 @@ absent.  Passing compilation never upgrades a mathematical row.
 5. Split the source, build/replay the clean paper-only export, and fill R4/X1.
 6. Confirm authors and venue, recheck policy, then prepare the exact upload
    artifact.  External publication remains a separate irreversible action.
-

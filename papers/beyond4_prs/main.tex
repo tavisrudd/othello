@@ -72,10 +72,11 @@ root.  After separating the level-specific contained-component problem
 from the transverse point-count argument, this method gives complete
 all-field classifications at redundancies six and seven; the
 redundancy-seven split-free list is a deep-hole classification whenever
-the covering radius is six, in particular for $q\geq11$.  The analogous transverse
-arguments at redundancies eight and nine leave only the persistent
-families for $q\geq43$ and $q\geq53$, conditional on their printed
-lower-package and slice gates.
+the covering radius is six, in particular for $q\geq11$.  The
+three-marker argument at redundancy eight leaves only the persistent
+families for $q\geq43$.  At redundancy nine the analogous conclusion
+for $q\geq53$ remains conditional on the printed slice and
+base-selection gates.
 
 In characteristic two we determine the geometric degeneracy strata of
 an ordered Hessian pullback and isolate the remaining root-compatible
@@ -223,12 +224,13 @@ The following statements hold.
       persistent families plus one central nucleus point when
       $q=2^m$ and $m$ is odd.  The list is a deep-hole classification
       only when $\rho(\PRS(q-6))=6$, in particular for $q\geq11$.
-\item Conditional on the degree-seven pointed lower-package gate and the
-      degree-eight six-slice/base-selection gates printed in
-      Section~\ref{sec:fixed}, the projective deep-hole directions of
-      $\PRS(q-7)$ for $q\geq43$ and of $\PRS(q-8)$ for $q\geq53$ are
-      exactly the persistent tangent and conjugate-secant families.
-      In either case their total size is $q(q+1)^2/2$.
+\item For $q\geq43$, the projective deep-hole directions of
+      $\PRS(q-7)$ are exactly the persistent tangent and
+      conjugate-secant families.  Conditional on the degree-eight
+      six-slice and base-selection gates printed in
+      Section~\ref{sec:fixed}, the same conclusion holds for
+      $\PRS(q-8)$ when $q\geq53$.  In either case the asserted
+      families have total size $q(q+1)^2/2$.
 \end{enumerate}
 At redundancy $r$, the semilinear orbits in the persistent
 conjugate-secant family are parameterized by
@@ -246,9 +248,11 @@ $\operatorname{char}\F_q$ divides $r-1$.
 The three parts have different scopes.  Parts~(a) and~(b) are
 unconditional all-field syndrome classifications, but part~(b)
 becomes a deep-hole classification only when
-$\rho(\PRS(q-6))=6$.  Part~(c) isolates the remaining mathematical
-gates rather than treating them as certificate inputs and makes no
-classification claim below its displayed high-field thresholds.
+$\rho(\PRS(q-6))=6$.  In part~(c) the redundancy-eight clause is
+unconditional, while the redundancy-nine clause isolates its remaining
+mathematical gates rather than treating them as certificate inputs.
+Neither clause makes a classification claim below its displayed
+high-field threshold.
 
 \paragraph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational
@@ -1324,6 +1328,156 @@ branch strata; a finite-field regression is not a substitute for those
 geometric data.
 \end{definition}
 
+\begin{proposition}[Pointed lower package]\label{prop:r8-lp61}
+The assertion $\mathrm{LP}(6,1)$ holds.  On the outer first-marker
+line its exceptional divisor has degree at most fifteen; on the
+recursive second-marker line the corresponding divisor has degree at
+most nineteen.  Its only positive-genus identity twist is the
+geometrically integral off-diagonal $(2,2)$ curve of genus at most one
+with deletion degree $30$.
+\end{proposition}
+
+\begin{proof}
+We print the recursive strata.  For a pointed sextic
+$f=(a_0,\ldots,a_6)$ with old marker $x$, contract successively:
+\[
+ b_i(r)=a_{i+1}-ra_i,\qquad
+ c_i(r,s)=b_{i+1}(r)-sb_i(r).
+\]
+For $c=(c_0,\ldots,c_4)$ put
+\[
+ H_c=\begin{pmatrix}c_0&c_1&c_2&c_3\\
+                     c_1&c_2&c_3&c_4\end{pmatrix}.
+\]
+On the rank-two-kernel chart, if $p_0,p_1$ span $\ker H_c$, the bottom
+ordered-root curve is
+\[
+ G_c(u,v)=
+ \frac{p_0(u)p_1(v)-p_1(u)p_0(v)}{[u,v]}=0.                \tag{25}
+\]
+The rank-at-most-two secant carrier, including the gcd-two and
+rank-drop boundary strata, is
+\[
+ D(c)=\det\begin{pmatrix}
+ c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
+ \end{pmatrix}=0.                                         \tag{26}
+\]
+For an exact common root $z$, the gcd-one incidence is cut out by
+\[
+ \operatorname{rank}
+ \begin{pmatrix}H_c\\1&z&z^2&z^3\end{pmatrix}\leq2,       \tag{27}
+\]
+with the evident homogeneous row at infinity.  After substitution,
+(26) has degree at most three in $s$, while each $3$-minor in
+(27) has degree at most two for fixed $z$.
+
+The remaining reducible-monodromy carriers are explicit.  Put
+$z_i=\binom4i c_i$.  Outside characteristics two and three the cyclic
+closure is
+\[
+ [u:v:w]\longmapsto
+ [u^2:2uv:v^2+2uw:2vw:w^2],                               \tag{28}
+\]
+a degree-four projected Veronese surface containing no line.  In
+characteristic three it is the degree-four cone
+$\Join(e_2,C_4)$; its only lines are rulings, and the consecutive-row
+overlap excludes every ruling as a polar line.  In characteristic two
+it is
+\[
+ \Pi_{\rm cyc}=\PP\langle e_1,e_2,e_3\rangle,\qquad c_0=c_4=0, \tag{29}
+\]
+whose unique contained polar-line component is
+$\cN_3=\PP\langle e_2,e_3\rangle$.  The inseparable degeneration is
+the derivative-minor locus of $p_0,p_1$ and introduces no further
+stratum.  Outside characteristics two and three a nonconstant
+degree-three map cannot factor through Frobenius.  In characteristic
+three an inseparable cubic pencil is projectively
+$\langle X^3,Y^3\rangle$; the two Hankel rows then force
+$c_0=c_1=c_3=c_4=0$, the vertex $e_2$ of the wild cone.  In
+characteristic two, after cancelling a nonzero pencil gcd, an inseparable
+ratio has degree at most two and is a rational function of $t^2$.
+Homogenizing its numerator and denominator to cubics supplies the
+same linear factor to both, so it belongs to the exact-gcd-one
+boundary.  Finally, the branch equation on this chart is
+$p_0'p_1-p_0p_1'=0$.  These carrier and branch loci are the
+scheme-theoretic images of the displayed incidences (equivalently their
+Fitting-minor ideals); the reversed homogeneous chart supplies infinity.
+
+Off (26)--(29), the separable cubic map is noncyclic, so its geometric
+monodromy is $S_3$.  Transitivity on ordered pairs of distinct roots
+makes (25) geometrically integral.  It has arithmetic genus one.
+The diagonal costs four, the degree-four different costs at most
+eight off-diagonal ordered pairs, and each of the three marker fibers
+$x,r,s$ costs at most six.  Thus
+\[
+ \delta\leq4+8+3\cdot6=30.                                \tag{30}
+\]
+Hasse--Weil supplies a surviving rational point for every $q\geq43$.
+
+It remains to show that the strata removed above do not hide another
+component.  On an exact-gcd-one bottom stratum write the cubic pencil
+as $\ell_zQ$, with $Q$ a basepoint-free pencil of quadratics.  In the
+separable case its deck involution $\iota$ is rational, so its graph
+has $q+1$ rational points.  At most two are fixed and at most two
+ordered graph points involve each of $z,x,r,s$.  A point remains for
+$q\geq43$, giving three distinct roots outside the markers.  The
+inseparable degree-two case is on the rank/boundary carrier.
+
+This gives the required two-old-marker quartic lemma.  Indeed, on the
+internal $s$-line the bad degrees are: three from (26), four from the
+cyclic/wild carrier (one in characteristic two), six from ramification
+of the moving $g^2_4$, two for each fixed marker from (27), and two
+marker diagonals.  Their total is at most
+\[
+ 3+4+6+2+2+2=19<q+1.                                     \tag{31}
+\]
+The rank pullback cannot be the whole line:
+Proposition~\ref{prop:r6-secant} identifies that containment exactly
+with quadratic gcd of the original net.  The only possible contained
+cyclic line is the declared binary nucleus.  For a fixed marker, not
+all minors in (27) can vanish identically without giving the original
+quartic net that fixed factor: otherwise the hyperplanes
+$W\cap\ker(\operatorname{ev}_s)$ and
+$W\cap\ker(\operatorname{ev}_x)$ agree for dense $s$, making
+the evaluation map constant.  Choose one nonzero quadratic minor.
+For self-collision, take a generic pencil projection of the moving
+$g^2_d$, $d\leq4$.  It is separable: in characteristic two the only
+dimension-three equality case is the pure-square space
+$\langle1,t^2,t^4\rangle$, which the consecutive Hankel overlap
+equations do not realize; all other $p$-power spaces have smaller
+dimension.  Riemann--Hurwitz gives degree at most $2d-2\leq6$, and
+every self-collision maps into this ramification divisor.
+
+For the pointed sextic itself, the lower rank-two pullback costs three
+parameters and the binary nucleus costs one.  If a contracted net has
+exact gcd $\ell_z$, the condition $z=r$ maps into the ramification of
+a generic separable pencil projection of the moving $g^3_d$, $d\leq5$.
+Riemann--Hurwitz bounds it by $2d-2\leq8$.  The condition $z=x$ is
+again (27), now with the quartic evaluation row, and costs at most two
+because not all of its quadratic minors vanish off the fixed-marker
+boundary, by the same evaluation-hyperplane argument.  Together
+with $r=x$, the internal divisor has degree
+\[
+ 3+1+8+2+1=15.                                            \tag{32}
+\]
+If the contracted net has trivial gcd, the two-old-marker lemma applies.
+If it has exact gcd with $z\notin\{x,r\}$, the ordered-pair argument has three
+$(1,1)$ and two $(2,1)/(1,2)$ bad equations, at most
+$12(q+1)<(q-2)(q-3)$.  The cases $z=x,r$ are precisely the excluded
+quadratic and ramification divisors.
+Lifting first by $\ell_s$ and then by $\ell_r$ gives a split
+squarefree quintic avoiding $x$.
+
+The gcd has degree zero, one, or at least two, and a separable
+gcd-zero cubic cover has monodromy $S_3$ or $C_3$; hence the displayed
+list is exhaustive.  No certificate or finite-field regression is
+used for this integrality assertion.  Notice also that the outer and
+recursive parameter budgets $15$ and $19$ are already strictly below
+$q+1$ for $q\geq19$; the threshold $43$ is imposed solely by the
+genus-one deletion inequality~(30), not by a hidden parameter-choice
+bound.
+\end{proof}
+
 \begin{proposition}[Modular lifts at degree seven]\label{prop:r8-modular}
 The consecutive-row Lucas calculation leaves no nonzero lift in
 characteristic two, the line $\PP\langle e_2,e_5\rangle$ in
@@ -1392,14 +1546,14 @@ additional contained component.
 
 \begin{remark}[Exact remaining R8 gate]\label{rem:r8-contained}
 Proposition~\ref{prop:r8-contained} closes the contained-component
-problem.  The remaining hypothesis is $\mathrm{LP}(6,1)$, not another
-contained-line identity: the current certificate checks the nucleus
-overlaps, witnesses, and numerical budgets, but it does not print
-equations and monodromy proofs for every recursive lower stratum.
+problem, while Proposition~\ref{prop:r8-lp61} closes the pointed lower
+package.  The certificate checks the nucleus overlaps, witnesses, and
+numerical budgets; the geometric integrality and recursive carrier
+equations are proved separately above.
 \end{remark}
 
-\begin{theorem}[Conditional redundancy eight]\label{thm:r8}
-Assume $\mathrm{LP}(6,1)$.  For every prime power $q\geq43$, the deep
+\begin{theorem}[Redundancy eight]\label{thm:r8}
+For every prime power $q\geq43$, the deep
 syndromes of $\PRS(q-7)$ are
 exactly the persistent tangent and conjugate-secant families, of total
 size $q(q+1)^2/2$.  Their orbit law is $T/T^7$ modulo inversion and
@@ -1408,7 +1562,7 @@ Frobenius.  The tangent family splits exactly in characteristic seven.
 
 \begin{proof}
 Outside the contained locus, Proposition~\ref{prop:r8-bottom} chooses a
-good first contraction, and the assumed lower package supplies a
+good first contraction, and Proposition~\ref{prop:r8-lp61} supplies a
 three-marker witness.  Propositions~\ref{prop:r8-modular} and
 \ref{prop:r8-contained} eliminate every nonpersistent contained lift.
 The imported covering-radius theorem promotes the resulting split-free
@@ -2097,11 +2251,10 @@ classification.
       Redundancy seven has a complete all-field split-free
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
-\item Redundancies eight and nine have complete transverse arguments
-      in the displayed high-field ranges.  R8 retains its pointed
-      lower-package gate, while R9 retains its
-      slice/base-selection and residual component gates.  No unconditional or
-      bounded-field completion is inferred.
+\item Redundancy eight is complete for $q\geq43$; no bounded-field
+      completion is inferred.  Redundancy nine has a complete
+      transverse argument for $q\geq53$ but retains its
+      slice/base-selection and residual component gates.
 \item The characteristic-two ordered-Hessian theorem classifies the
       geometric degeneracy strata.  Its root-compatible pullback and
       effective base-selection constant retain the stated gates, and
