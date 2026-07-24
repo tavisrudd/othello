@@ -8,7 +8,7 @@
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
-`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  C529 proves the infinite
+`q >= min((n-4)(n+11)/2+1, 9(n-4))`, with deletion budget `3n-4`.  C529 proves the infinite
 power-of-two top-nucleus carrier family and normalizes the linearized root cover on its
 distinguished Borel-endpoint orbit.  The
 C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine carrier has minimal
@@ -665,7 +665,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
 | C545 | proof-complete preprint and DOI after second-draft gates | queued next, release-blocked | expanded refereeable manuscript, public trust/adequacy ledgers, immutable release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
-| C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, radius-free witness-to-shallow bridge, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
+| C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, separate radius- and witness-based classification routes, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
 | C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
 | C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
 | C542 | redundancy-eight Lean closure | queued after C541 | C513 theorem package | three-marker `q>=43` synthesis and exact orbit terminal | formal redundancy-eight boundary |

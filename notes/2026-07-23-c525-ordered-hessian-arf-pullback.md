@@ -46,7 +46,7 @@ Consequently, for every syndrome degree \(n\ge5\), every characteristic-two synd
 carrier has a root-compatible geometrically integral reduced ordered-Hessian slice once
 \[
 q\ge T_n^{(2)}
-:=\min\left\{\frac{(n-4)(n+3)}2+1,\ 5(n-4)\right\}.          \tag{2}
+:=\min\left\{\frac{(n-4)(n+11)}2+1,\ 9(n-4)\right\}.         \tag{2}
 \]
 The exact deletion budget improves to
 \[
@@ -238,21 +238,23 @@ individual \(r_i\).  Hence:
 - each quadratic equation in (9)--(10) has degree at most four in each root; and
 - the fixed-root Vandermonde has total degree \(\binom{n-4}{2}\).
 
-Outside the contained carrier, at least one pulled-back degeneracy equation is nonzero.  Affine
-Schwartz--Zippel therefore leaves a distinct rational root base as soon as
+Outside the contained carrier, choose one nonzero pulled-back equation of \(\Sigma\) and one of
+the complementary ruling.  Their product is nonzero, vanishes on the whole reduced bad union,
+and has degree at most eight in each root.  Vertical intersections with \(C_3\) are removed before
+this reduced test.  Affine Schwartz--Zippel therefore leaves a distinct rational root base as soon as
 \[
-q>4(n-4)+\binom{n-4}{2}
-=\frac{(n-4)(n+3)}2,
+q>8(n-4)+\binom{n-4}{2}
+=\frac{(n-4)(n+11)}2,
 \]
 which gives the first term of (2).
 
-There is a sharper large-\(n\) choice.  Put \(m=n-4\) and partition any \(5m\) available field
-elements into pairwise disjoint five-element sets \(S_1,\ldots,S_m\).  A nonzero polynomial of
-degree at most four in each variable cannot vanish on
+There is a sharper large-\(n\) choice.  Put \(m=n-4\) and partition any \(9m\) available field
+elements into pairwise disjoint nine-element sets \(S_1,\ldots,S_m\).  A nonzero polynomial of
+degree at most eight in each variable cannot vanish on
 \(S_1\times\cdots\times S_m\): successive univariate interpolation would otherwise make it the
 zero polynomial.  Every tuple in this product has distinct coordinates because the blocks are
-disjoint.  Thus \(q\ge5(n-4)\) also suffices, proving the second term of (2).  Together these
-replace C519's provisional coefficient-discriminant bound \((n-4)(n+43)/2\).
+disjoint.  Thus \(q\ge9(n-4)\) also suffices, proving the second term of (2).  This weaker but
+valid global-union bound replaces the earlier componentwise degree-four claim.
 
 ## 7. Deletion and arithmetic
 
@@ -311,11 +313,11 @@ checks the bound table.  The normal-form and constrained-pullback arguments abov
 - Its factorization exposes the same order-three Frobenius law as the known characteristic-two
   nucleus family.
 - The complementary inseparable ruling has no nontrivial contained root-line pullback.
-- Exact Pluecker equations reduce the base-selection coefficient from `24` per fixed root to `4`,
-  changing the initial quadratic bound from `(n-4)(n+43)/2` to the strict threshold
-  `(n-4)(n+3)/2`.
-- Disjoint five-element interpolation blocks remove the Vandermonde penalty entirely, giving the
-  linear sufficient threshold `q >= 5(n-4)` and hence the minimum in (2).
+- Exact Pluecker equations give degree four per fixed root for each component.  The honest
+  global-union polynomial is the product of one Veronese and one complementary-ruling equation,
+  of degree eight per root; this changes the strict threshold to `(n-4)(n+11)/2`.
+- Disjoint nine-element interpolation blocks remove the Vandermonde penalty entirely, giving the
+  linear sufficient threshold `q >= 9(n-4)` and hence the minimum in (2).
 - The reduced branch degree drops from four to two, improving the deletion budget from `3n-2` to
   `3n-4`.
 
