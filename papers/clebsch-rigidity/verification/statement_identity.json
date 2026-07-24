@@ -144,9 +144,9 @@
       "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
       "kind": "theorem-environment",
       "row": 24,
-      "sha256": "db4bcb15f0e664540b163fac7e73b8d966ae05b784fb91fdb317fcbaca973f42",
+      "sha256": "8c6441bc18c263a4b4bba1555d2f671a4387d3fce280b30189dda79670769286",
       "source_line": 201,
-      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\qquad\n 0\\le t(A)\\le3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\n\\end{theorem}\n\n\\begin{corollary}[Conic-filling window and six-arcs]\n\\label{cor:conic-filling-window}\nIf $|\\cU(A)|=q+1$, then\n\\[\n t(A)=q^2-mq+m+3\\binom{k}{4}-k,\\qquad\n q^2-mq+m-k+\\frac{6}{r}\\binom{k}{4}\\le0,\n\\]\nand $q<m$. If moreover $\\cU(A)$ is a nonsingular conic, then\n\\[\n 2k-3\\le q<\\binom{k}{2}.\n\\]\nFor even $q$, the lower bound strengthens to $q\\ge2k-2$.\nFor $k=6$, writing $c(A)=n_3$ gives\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad\n 0\\le c(A)\\le15,\\qquad\n c(A)=(q-6)(q-9)\n\\]\nwhen $|\\cU(A)|=q+1$. For the displayed Clebsch hexagon, Dye's ten\nBrianchon points give $c(A)=10$; its fifteen chords have $45$ disjoint\npairs, cover $115$ of the $127$ off-arc points, and leave exactly twelve\nuncovered.\n\\end{corollary}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
+      "tex": "\\begin{theorem}[Universal chord defect]\n\\label{lem:chord-defect}\nLet $A$ be a $k$-arc in $\\PG(2,q)$ with $k\\ge4$. Let $n_i$ count the\noff-arc points incident with exactly $i$ chords, put\n\\[\n r=\\lfloor k/2\\rfloor,\\qquad\n t(A)=\\sum_{i=3}^{r}\\binom{i-1}{2}n_i,\n\\]\nand write $m=\\binom{k}{2}$. Then\n\\[\n |\\cU(A)|=q^2-(m-1)q+\n \\left(m+3\\binom{k}{4}-k+1\\right)-t(A),\n\\qquad\n 0\\le t(A)\\le3\\binom{k}{4}\\frac{r-2}{r}.\n\\]\n\\end{theorem}\n\n\\begin{corollary}[Conic-filling window and six-arcs]\n\\label{cor:conic-filling-window}\nIf $|\\cU(A)|=q+1$, then\n\\[\n t(A)=q^2-mq+m+3\\binom{k}{4}-k,\\qquad\n q^2-mq+m-k+\\frac{6}{r}\\binom{k}{4}\\le0,\n\\]\nand $q<m$. If moreover $\\cU(A)$ is a nonsingular conic, then $q$ is odd and\n\\[\n 2k-3\\le q<\\binom{k}{2}.\n\\]\nFor $k=6$, writing $c(A)=n_3$ gives\n\\[\n |\\cU(A)|=q^2-14q+55-c(A),\\qquad\n 0\\le c(A)\\le15,\\qquad\n c(A)=(q-6)(q-9)\n\\]\nwhen $|\\cU(A)|=q+1$. For the displayed Clebsch hexagon, Dye's ten\nBrianchon points give $c(A)=10$; its fifteen chords have $45$ disjoint\npairs, cover $115$ of the $127$ off-arc points, and leave exactly twelve\nuncovered.\n\\end{corollary}\n\n\\begin{lemma}[$q=9$ polarity graph]\n\\label{lem:q9-polarity}\nFor a nonsingular conic $\\cC\\subset\\PG(2,9)$, let $\\Sigma$ be the graph on\nthe $36$ internal points in which\n\\[\n P\\sim Q\\quad\\Longleftrightarrow\\quad Q\\in P^\\perp\n\\]\nfor the conic polarity. Then $\\Sigma$ is the Sylvester graph, with\nintersection array\n\\[\n \\{5,4,2;1,1,4\\}.\n\\]\nFor distinct internal points $P,Q$, the line $PQ$ is passant to $\\cC$ if\nand only if $P$ and $Q$ are at distance two in $\\Sigma$, and the graph\njoining pairs at distance two has clique number\n\\[\n \\omega(\\Sigma_2)=5.\n\\]\n\\end{lemma}",
       "title": "Universal chord defect; Conic-filling window and six-arcs; $q=9$ polarity graph"
     },
     {
@@ -174,9 +174,9 @@
       "id": "thm:small-k-conic-filling",
       "kind": "theorem-environment",
       "row": 29,
-      "sha256": "edd781a0e473f7e85c8aadb75e682db903119693fd26a860affa895144f64ed7",
+      "sha256": "15ffdd2d510e4eb0040aeb92b8c95e021dfba0d2e3fb39cbcea5c813e304a2b2",
       "source_line": 1128,
-      "tex": "\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. If $k\\le7$, then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur. If $k=8$, then\n\\[\n q\\in\\{13,16,17,19\\}.\n\\]\n\\end{theorem}",
+      "tex": "\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. If $k\\le7$, then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur. If $k=8$, then\n\\[\n q\\in\\{13,17,19\\}.\n\\]\n\\end{theorem}",
       "title": "Conic-filling loci through eight points"
     },
     {
@@ -190,5 +190,5 @@
   ],
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "44e464b9e5d178b313a9f892359a484032e1dd8c3b532763254efc2ca7b2e6df"
+  "source_sha256": "9745e9cd0ae458c7343b95723156dbc9a095e48fd6c2a03f3c8ea337fd6000ea"
 }

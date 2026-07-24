@@ -838,11 +838,11 @@
       "components": [
         {
           "cited_inputs": [
-            "No external input; complete double count and standard passant counts in the manuscript"
+            "Complete double count in the manuscript; the standard even-characteristic conic nucleus is cited from Hirschfeld"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "universal secant moments and conic-filling window",
-          "unconditional_remainder": "The identity, defect bound, quadratic barrier, and two-sided field-size window are proved for every k in the manuscript."
+          "unconditional_remainder": "The identity, defect bound, quadratic barrier, odd-characteristic obstruction, and two-sided field-size window are proved for every k in the manuscript."
         },
         {
           "cited_inputs": [
@@ -947,9 +947,9 @@
       "source": {
         "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "db4bcb15f0e664540b163fac7e73b8d966ae05b784fb91fdb317fcbaca973f42"
+        "sha256": "8c6441bc18c263a4b4bba1555d2f671a4387d3fce280b30189dda79670769286"
       },
-      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
+      "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, odd-characteristic obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
     {
       "components": [
@@ -1213,9 +1213,9 @@
       "source": {
         "id": "thm:small-k-conic-filling",
         "kind": "theorem-environment",
-        "sha256": "edd781a0e473f7e85c8aadb75e682db903119693fd26a860affa895144f64ed7"
+        "sha256": "15ffdd2d510e4eb0040aeb92b8c95e021dfba0d2e3fb39cbcea5c813e304a2b2"
       },
-      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 four-field sieve follows from the human-proved conic-filling window."
+      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 three-field sieve follows from the human-proved conic-filling window."
     },
     {
       "computation": {
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "bc92d8cf0e4d278de034ed539035517b1e309490954e4d971d2f06429bd58ef3"
+    "sha256": "e96b5a7a1906ce95a95ab7c3b54d6f53b4e0eb3aeeec023f1d59d539ec930c84"
   },
-  "manuscript_sha256": "44e464b9e5d178b313a9f892359a484032e1dd8c3b532763254efc2ca7b2e6df",
+  "manuscript_sha256": "9745e9cd0ae458c7343b95723156dbc9a095e48fd6c2a03f3c8ea337fd6000ea",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "1a2537b40e67708735475b1ac617f880e948b539f32dbe96f8ffcf3b2e1a15f4"
+    "sha256": "94ce973a8fff7e9deeb5ca8a33d393d27689ce8feed5235aa0b2e12e2c5bb217"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1532,7 +1532,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "fe8c331e37692a321e6e022a4946785f9d9e61ed4e2dba0e8456ebf87bd1eef3"
+        "sha256": "c2ce14c9d2c90fdf1f932946f6d9d245cd576309571607fe9b815381d73d3c89"
       },
       {
         "path": "verification/verify_trust_manifest.py",

@@ -29,8 +29,9 @@ current `main`. A subsequent elevation pass replaces four separate
 small-arc counts by a universal chord-defect theorem, proves
 $|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$ together with a sharper
 quadratic field-size barrier and the passant lower bound $q\ge2k-3$,
-classifies conic filling through seven points, and reduces the eight-point case to
-$q\in\{13,16,17,19\}$ while cutting two pages of non-feeding census
+plus the even-characteristic nucleus obstruction, classifies conic filling
+through seven points, and reduces the eight-point case to
+$q\in\{13,17,19\}$ while cutting two pages of non-feeding census
 material. The regenerated nineteen-row release surface and its fifteen-check
 clean replay are green.
 The final dependency audit explicitly attributes the Clebsch-only

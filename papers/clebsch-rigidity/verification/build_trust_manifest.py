@@ -369,9 +369,9 @@ def components_by_row(
             ],
         ),
         24: (
-            "The manuscript proves the universal chord-defect identity, quadratic barrier, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
+            "The manuscript proves the universal chord-defect identity, quadratic barrier, odd-characteristic obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
             [
-                conceptual("universal secant moments and conic-filling window", ["No external input; complete double count and standard passant counts in the manuscript"], "The identity, defect bound, quadratic barrier, and two-sided field-size window are proved for every k in the manuscript."),
+                conceptual("universal secant moments and conic-filling window", ["Complete double count in the manuscript; the standard even-characteristic conic nucleus is cited from Hirschfeld"], "The identity, defect bound, quadratic barrier, odd-characteristic obstruction, and two-sided field-size window are proved for every k in the manuscript."),
                 conceptual("Clebsch q=11 specialization", CLASSICAL_DYE, "Only the displayed Clebsch specialization uses Dye's ten Brianchon points; it is not asserted for an arbitrary six-arc."),
                 lean("six-arc chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
                 conceptual("Sylvester graph and distance-two interpretation", CLASSICAL_SYLVESTER, "The explicit distance-two clique certificate is kernel checked."),
@@ -395,7 +395,7 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 four-field sieve follows from the human-proved conic-filling window.",
+            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 three-field sieve follows from the human-proved conic-filling window.",
             [
                 conceptual("small-arc reductions, k=6 dependency, and k=8 sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),

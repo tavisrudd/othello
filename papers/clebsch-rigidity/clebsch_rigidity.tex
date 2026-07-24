@@ -57,10 +57,10 @@ classical Brianchon points, self-polar triangles, and an invariant support
 bipartition. The chord identity
 and the Sylvester graph show that $q=11$ is the only conic-filling field for
 six-arcs. A universal chord-defect identity and passant count show that
-conic filling by a $k$-arc forces
+conic filling by a $k$-arc forces $q$ odd and
 $2k-3\le q<\binom{k}{2}$, with a sharper quadratic barrier. Through seven points the only cases are a
 four-frame in $\PG(2,5)$ and the Clebsch hexagon; for eight points only
-$q\in\{13,16,17,19\}$ remain.
+$q\in\{13,17,19\}$ remain.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -124,9 +124,9 @@ decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
 chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
 $(q-4)(q-11)$ when $q\equiv3\pmod4$. In general the same moment calculation
 shows that a conic-filling $k$-arc must satisfy
-$2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier; we
+$q$ odd and $2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier; we
 classify the cases through seven points and reduce the
-eight-point case to four fields.
+eight-point case to three fields.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -239,11 +239,10 @@ If $|\cU(A)|=q+1$, then
  t(A)=q^2-mq+m+3\binom{k}{4}-k,\qquad
  q^2-mq+m-k+\frac{6}{r}\binom{k}{4}\le0,
 \]
-and $q<m$. If moreover $\cU(A)$ is a nonsingular conic, then
+and $q<m$. If moreover $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 \[
  2k-3\le q<\binom{k}{2}.
 \]
-For even $q$, the lower bound strengthens to $q\ge2k-2$.
 For $k=6$, writing $c(A)=n_3$ gives
 \[
  |\cU(A)|=q^2-14q+55-c(A),\qquad
@@ -262,13 +261,14 @@ comparison with the defect bound gives the quadratic inequality. There are
 $q^2-k$ covered off-arc points, so $q^2-k\le m(q-1)$; if $q\ge m$, then
 $0\le q(q-m)\le k-m<0$, a contradiction.
 
-If the uncovered locus is a conic, every chord is passant to it. Through an
-off-conic point there are at most $(q+1)/2$ passants when $q$ is odd and
-$q/2$ when $q$ is even: in odd characteristic these are the standard
-internal/external counts, while in even characteristic every off-conic
-point other than the nucleus has a unique tangent and its remaining $q$
-lines split equally into secants and passants (the nucleus has none). The
-$k-1$ chords through a vertex therefore give $q\ge2k-3$.
+If the uncovered locus is a conic, every chord is passant to it. Suppose
+$q$ were even, and let $N$ be the nucleus, the common point of all tangent
+lines~\cite[Cor.~7.12]{Hirschfeld1998}. Since $\cC$ is nonsingular,
+$N\notin\cC$~\cite[Thm.~7.16]{Hirschfeld1998}. No passant contains $N$, so
+$N$ is neither a vertex nor a point of a chord. Thus $N\in\cU(A)$, a
+contradiction. Hence $q$ is odd. An off-conic point then lies on at most
+$(q+1)/2$ passants, so the $k-1$ chords through a vertex give
+$q\ge2k-3$.
 
 For $k=6$, one has $r=3$ and $t(A)=n_3=c(A)$, giving the displayed
 specialization. For the displayed arc, Dye's Brianchon theorem gives
@@ -1136,7 +1136,7 @@ $\F_q$-rational points of a nonsingular conic. If $k\le7$, then
 In the first case $A$ is a projective four-frame; in the second it is a
 Clebsch hexagon. Conversely, both cases occur. If $k=8$, then
 \[
- q\in\{13,16,17,19\}.
+ q\in\{13,17,19\}.
 \]
 \end{theorem}
 
@@ -1164,8 +1164,9 @@ If this equals $q+1$, then
 n_2=105-3n_3,\quad
  n_1=3(q^2-14q+42).
 \]
-The conic-filling window gives $q\ge11$, while $n_2\ge0$ gives $q\le15$.
-Thus only the prime powers $q=11,13$ remain, with forced spectra
+The conic-filling window and quadratic barrier give $q\ge11$ and
+$q^2-21q+84\le0$, hence $q\le15$. Thus only the prime powers $q=11,13$
+remain, with forced spectra
 $(n_1,n_2,n_3)=(27,78,9)$ and $(87,60,15)$ respectively. An exhaustive
 four-frame-normalized enumeration now supplies the finite exclusion. It
 finds $10232$ distinct normalized seven-arcs at $q=11$, of which $140$ have
@@ -1178,12 +1179,12 @@ evaluation matrix has full rank six, so none lies on a conic.
 
 Finally let $k=8$. The conic-filling window and its quadratic inequality
 give $q\ge13$ and $q^2-28q+125\le0$, hence $q\le22$. The prime powers in
-this interval are exactly $13,16,17,19$.
+this interval that are odd are exactly $13,17,19$.
 \end{proof}
 
 Thus conic filling is finite at every fixed arc size; the classification is
 complete through seven points, and the eight-point problem is reduced to
-four fields.
+three fields.
 
 \section{Verification architecture}
 \label{sec:verification}
@@ -1318,17 +1319,23 @@ $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
 The universal defect identity makes conic filling finite at every fixed arc
 size. It explains both the isolation of $q=11$ and the classification for
 $4\le k\le7$, while the two-sided conic-filling window reduces the
-eight-point case to four fields. The Clebsch code realizes a sharp endpoint:
+eight-point case to three fields. The numerical window is nonempty for
+every $k\ge4$ and has width
+$\binom{k}{2}-(2k-3)=\binom{k-2}{2}$; it is sharp at $k=4$, where its sole
+integer is $q=5$ and conic filling occurs. The Clebsch code realizes another
+sharp endpoint:
 covering-radius data recover geometry that was not built into the code,
 forcing the Clebsch hexagon and hence its $A_5$ symmetry. A line bound and
 the defect identity reduce that rigidity to Dye's equality case;
 enumeration is reserved for the low-degree strengthening, the numerical
 gap, and the terminal $k=7$ exclusions.
 
-Closing the four eight-point fields will require further concurrency or
-extension information. A second problem is to connect fixed-$k$ rigidity
-with the large-arc conic-forcing regime. Both ask how far a syndrome locus
-can reconstruct the projective system that produced it.
+Closing the three eight-point fields will require further concurrency or
+extension information. More generally, which odd prime powers in the
+quadratically widening window admit conic-filling arcs? A second problem is
+to connect fixed-$k$ rigidity with the large-arc conic-forcing regime. Both
+ask how far a syndrome locus can reconstruct the projective system that
+produced it.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}

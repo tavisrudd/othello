@@ -11,10 +11,12 @@ $k$-arc, the sharp moment bound on its defect, and the stronger consequence
 that $|\mathcal U(A)|=q+1$ forces both an explicit quadratic field-size
 barrier and $q<\binom{k}{2}$.  The quadratic gives the sharp sieve bounds
 $q\le5,11,15,22$ at $k=4,6,7,8$.  A passant count supplies the complementary
-bound $q\ge2k-3$.  The theorem and its corollary subsume the four separate
+bound $q\ge2k-3$.  Hirschfeld's nucleus characterization shows that conic
+filling is impossible in even characteristic.  The theorem and its
+corollary subsume the four separate
 $k=4,5,6,7$ counts.  The classification is complete through seven points,
 and the rederived eight-point sieve leaves exactly
-$q\in\{13,16,17,19\}$.
+$q\in\{13,17,19\}$.
 
 The introduction now poses reconstruction and algebraic degeneracy for
 projective deep-hole loci as the general problem, and connects the
@@ -60,13 +62,14 @@ inserted in the manuscript.
   one moment identity.  Comparing its forced defect with the universal
   defect ceiling yields the stronger quadratic barrier, which explains all
   four small-$k$ upper bounds at once; counting passants through a vertex
-  supplies the matching lower window.
+  supplies the matching lower window, and the even-characteristic nucleus
+  excludes every even field.
 - **Open:** characterize equality or near-equality in the universal defect
   ceiling.  The proof shows that extremality constrains chord multiplicities
   to the largest possible concurrence, but turning that into geometry is a
   distinct successor problem.
 - **Open:** whether eight-point conic filling occurs over
-  $q\in\{13,16,17,19\}$.  The present paper proves only the sieve; an
+  $q\in\{13,17,19\}$.  The present paper proves only the sieve; an
   extension-and-rank census or new concurrency argument would be a distinct
   successor, not a release requirement.
 - **Open, user-controlled:** immutable public provenance.  The acceptance
