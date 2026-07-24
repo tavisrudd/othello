@@ -11,9 +11,11 @@ also been proved in Lean.
 |---|---|---|---|
 | Hankel-kernel dictionary | `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member` | the interface identifies split-freeness with absence of a split squarefree kernel member | the concrete Hankel matrix and the proof that its kernel has the stated coding semantics |
 | Kernel member contradicts split-freeness | `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member` | formal implication from kernel incidence and split-squarefreeness | construction of the member |
+| Constructive negation boundary | `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member` | failure of split-freeness is equivalent to double negation of kernel-member existence without classical choice | removal of the double negation requires decidability or classical logic |
 | Covering-radius promotion | `RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree` | deepness and split-freeness coincide under the named radius-range proposition | the external covering-radius theorem and verification that the code parameters lie in its range |
 | Predicate-level witness construction | `RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member` | component and undeleted-point hypotheses imply the packaged witness predicate | component geometry, rational-point existence, deletion bounds, and the point-to-polynomial construction |
 | Polynomial-level witness construction | `RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member` | the same implication with an explicit polynomial witness | the concrete polynomial type and every geometric input |
+| Geometric witness excludes deepness | `RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member` | an explicit split squarefree kernel member makes the syndrome shallow using only the structural implication from deepness to split-freeness | the geometric witness and identification of its predicates with the Hankel and coding interfaces; no covering-radius promotion is required |
 | Divided-power marker contraction | `RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm` and `RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply` | marker contractions commute and have the displayed two-marker coordinate formula over every commutative ring | identification of the chosen coordinates with a particular projective Reed--Solomon parity check |
 | Persistent tangent/sigma union | `RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card` | the cardinality of a disjoint declared union is the sum of the two cardinalities | parametrization, disjointness, and degree-specific family counts |
 | Split-free exhaustion | `RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent` | equivalence from two separately named exhaustion implications | the projective and projective-semilinear group actions, stabilizers, orbit representatives, and exhaustion proofs |
@@ -41,6 +43,8 @@ Lean/mathlib axioms `propext`, `Classical.choice`, and `Quot.sound`.
 
 The gates import no generated certificate, native evaluator, external oracle, or project-local
 axiom.  Finite classification records and externally proved covering-radius or rational-point
-theorems require separate public artifacts and citations.  Numerical orbit tables supplied as
-structure fields are checked only as hypotheses unless a later module constructs the corresponding
-group actions and proves their exhaustion.
+theorems require separate public artifacts and citations.  A constructed split squarefree kernel
+member proves shallowness without a covering-radius theorem; covering radius is needed to promote
+the absence of such witnesses to deepness.  Numerical orbit tables supplied as structure fields are
+checked only as hypotheses unless a later module constructs the corresponding group actions and
+proves their exhaustion.

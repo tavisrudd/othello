@@ -36,10 +36,13 @@ hierarchy was introduced.
 The reusable terminals are:
 
 - `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member`;
+- `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree`;
 - `RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member`;
+- `RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member`;
+- `RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card`;
 - `RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent`;
 - `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent`.
@@ -64,6 +67,11 @@ The build run is recorded under the disk-backed managed runner as
 terminals are either axiom-free or depend only on `propext`, `Classical.choice`, and `Quot.sound`.
 The pre-existing degree-nine synthesis retains exactly those same standard dependencies.
 
+The extra-juice additions passed independent single-file elaboration and the same complete managed
+gate sequence in `run-20260724-031428-d84df6ca`.  The two witness-to-shallow terminals are
+axiom-free.  The constructive double-negation terminal depends only on `propext`, while the
+separate existence terminal retains its disclosed classical dependencies.
+
 The complete changed Lean modules and gates were reviewed for mathematical scope, trust-boundary
 disclosure, stable naming, and forbidden workflow vocabulary.  No task identifiers, internal
 notes, status prose, novelty claims, generated evidence, or machine-local paths occur in the
@@ -81,6 +89,19 @@ agree through explicit predicate equalities before producing a coding classifica
 a subtle but common error in which a split-free syndrome table is silently reported as a
 deep-hole table outside the proved covering-radius range.
 
+The requested extra-juice pass found the converse asymmetry that is easy to obscure in prose.
+Existence of a split squarefree kernel member already proves coding-theoretic shallowness: it uses
+only the structural implication from deepness to split-freeness, not the external covering-radius
+promotion theorem.  The checked theorem
+`exceptional_not_deep_of_geometric_kernel_member` now composes the geometric construction, Hankel
+dictionary, and coding predicate explicitly.  Covering radius is needed only in the other
+direction, when absence of a witness is promoted to deepness.
+
+The same pass exposed the exact constructive-logic boundary.  From the dictionary, failure of
+split-freeness gives double-negated kernel-member existence without classical choice; actual
+existence requires decidability or classical logic.  Both versions are public, so finite
+certificate modules can retain a constructive route instead of importing choice accidentally.
+
 No projective group action was fabricated merely to strengthen the interface.  The orbit structure
 records counts and exhaustion as visible inputs until the degree-specific developments construct
 the actual actions and stabilizers.
@@ -93,6 +114,12 @@ Settled:
   established divided-power operation and its commutation theorem.
 - **Could a split-free classification silently become a code deep-hole classification?** No.
   Covering-radius promotion is a separate structure with an explicit range proposition.
+- **Does a constructed split squarefree kernel member need covering radius to prove shallowness?**
+  No.  The formal bridge uses only `deep_implies_splitFree`; radius promotion is irrelevant in this
+  direction.
+- **Is the converse extraction of a kernel member constructive?** Exactly up to double negation.
+  The constructive theorem is axiom-audited separately; removing the double negation requires
+  decidability or classical logic.
 - **Could geometric existence or orbit exhaustion enter as a hidden axiom?** No.  Each is a named
   structure field, and the audit contains no project-specific axioms.
 - **Can the established redundancy-nine package consume the common interface?** Yes.  Its adapter
@@ -103,6 +130,9 @@ Open, with exact owners:
 - **Concrete projective Hankel models and group actions:** the redundancy-five through
   redundancy-eight and characteristic-two modules must instantiate the abstract syndrome and
   polynomial types and prove their action laws.
+- **Do the numerical orbit-count fields themselves certify a group action?** No.  They are visible
+  inputs, not a substitute for actions, stabilizers, representatives, or quotient-cardinality
+  proofs.  Those semantic links belong to the degree-specific formalizations.
 - **Component, rational-point, and finite exhaustion inputs:** these remain visible mathematical or
   certificate obligations in the corresponding degree-specific modules.
 - **Aggregate manuscript closure:** the final aggregate gate must reconcile every paper theorem

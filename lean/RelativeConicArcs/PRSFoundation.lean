@@ -54,6 +54,16 @@ theorem not_splitFree_of_kernel_member {S P : Type*}
   intro hfree
   exact (dictionary.splitFree_iff_no_kernel_member s).1 hfree ⟨p, hkernel, hsplit⟩
 
+/-- Constructively, failure of split-freeness is equivalent to double negation of kernel-member
+existence.  Removing the double negation requires an additional decidability or classical-logic
+input. -/
+theorem not_splitFree_iff_not_not_has_kernel_member {S P : Type*}
+    (dictionary : HankelKernelDictionary S P) (s : S) :
+    ¬ dictionary.isSplitFree s ↔
+      ¬¬ HasSplitSquarefreeKernelMember dictionary.inHankelKernel
+        dictionary.isSplitSquarefree s := by
+  rw [dictionary.splitFree_iff_no_kernel_member]
+
 /-- Failure of split-freeness is equivalent to existence of a split squarefree Hankel-kernel
 member. -/
 theorem not_splitFree_iff_has_kernel_member {S P : Type*}
@@ -162,6 +172,50 @@ theorem exceptional_has_kernel_member {S P : Type*} {q threshold : ℕ}
   exact input.pointGivesKernelMember hq hs (hcomponent s hs) (hpoint s hs)
 
 end GeometricWitnessInput
+
+/-- A geometric kernel-member construction makes every exceptional syndrome non-split-free once
+its kernel incidence and split-squarefree predicates are identified with the Hankel dictionary. -/
+theorem exceptional_not_splitFree_of_geometric_kernel_member
+    {S P : Type*} {q threshold : ℕ}
+    (dictionary : HankelKernelDictionary S P)
+    (geometry : GeometricWitnessInput S P q threshold)
+    (hq : q ≥ threshold)
+    (hcomponent : ∀ s, geometry.exceptional s → geometry.componentCondition s)
+    (hpoint : ∀ s (_hs : geometry.exceptional s),
+      geometry.rationalPointOutsideDeletedDivisors hq s)
+    (hkernel : geometry.inHankelKernel = dictionary.inHankelKernel)
+    (hsplit : geometry.isSplitSquarefree = dictionary.isSplitSquarefree) :
+    ∀ s, geometry.exceptional s → ¬ dictionary.isSplitFree s := by
+  intro s hs
+  obtain ⟨p, hpKernel, hpSplit⟩ :=
+    geometry.exceptional_has_kernel_member hq hcomponent hpoint s hs
+  rw [hkernel] at hpKernel
+  rw [hsplit] at hpSplit
+  exact dictionary.not_splitFree_of_kernel_member hpKernel hpSplit
+
+/-- A geometric split squarefree Hankel-kernel member proves coding-theoretic shallowness without
+using the covering-radius promotion theorem.  Covering radius is needed for the converse direction,
+from split-freeness to deepness, not for this witness-to-shallow implication. -/
+theorem exceptional_not_deep_of_geometric_kernel_member
+    {S P : Type*} {q threshold : ℕ}
+    (dictionary : HankelKernelDictionary S P)
+    (radius : CoveringRadiusInput S)
+    (geometry : GeometricWitnessInput S P q threshold)
+    (hq : q ≥ threshold)
+    (hcomponent : ∀ s, geometry.exceptional s → geometry.componentCondition s)
+    (hpoint : ∀ s (_hs : geometry.exceptional s),
+      geometry.rationalPointOutsideDeletedDivisors hq s)
+    (hkernel : geometry.inHankelKernel = dictionary.inHankelKernel)
+    (hsplit : geometry.isSplitSquarefree = dictionary.isSplitSquarefree)
+    (hsplitFree : radius.isSplitFree = dictionary.isSplitFree) :
+    ∀ s, geometry.exceptional s → ¬ radius.isDeep s := by
+  have hnotSplitFree :=
+    exceptional_not_splitFree_of_geometric_kernel_member dictionary geometry hq
+      hcomponent hpoint hkernel hsplit
+  intro s hs hdeep
+  apply hnotSplitFree s hs
+  rw [← hsplitFree]
+  exact radius.deep_implies_splitFree hdeep
 
 /-- Persistent tangent and sigma families, recorded as finite subsets with their exact union.
 No claim that this union exhausts split-free or deep syndromes is built into the data. -/
