@@ -1074,10 +1074,10 @@
     }
   ],
   "lean_repository": {
-    "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
+    "commit": "bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "e94d0c2436918f7e4a805af876b2bca4b685804a87bf7ef21566dc95024ede85",
+  "manuscript_sha256": "21ed256547cea391ec1555bc58e8549d66ce9052e9beee1f9cffe8e3c5e3e56a",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
@@ -1105,7 +1105,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "8799bd4fd27de008adecdb8c2feff34a6ca94cffa0af7dfbb326564ca57f2d46"
+    "sha256": "629389ef318fec6d31491020191f6d5617776872f636a8d6da63eb06cda082d8"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1315,7 +1315,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "ee4fab5870c087848cd1898062a1cfc8ecff4f2c530ec98277fc894d7e37cc17"
+      "sha256": "d51911b8b1e61aec3c682d9ab765cfb0cb03639893c30a692d0ff3f2937a1a74"
     },
     "verification_tools": [
       {
@@ -1326,7 +1326,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "3664fd83b355578d19acfd2a35bd33e805d70a93cb2f1abee65f58acfb343cae"
+        "sha256": "d5878d717bf0ba7fb77a92e9027849063a8bdf26e5594775090179699c26f765"
       },
       {
         "path": "verification/verify_trust_manifest.py",
