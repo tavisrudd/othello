@@ -953,8 +953,17 @@
       "last": 583,
       "purpose": "arcs paper equality/reconstruction spine and robust uncovered-locus reconstruction successor",
       "sequence": 106
+    },
+    {
+      "count": 6,
+      "first": 584,
+      "kind": "reservation",
+      "lane": "gateway",
+      "last": 589,
+      "purpose": "Gateway lane: cross-avatar field-dependence of the icosahedral six-arc/Clebsch gateway object and unifying-paper scoping",
+      "sequence": 107
     }
   ],
-  "next_id": 584,
+  "next_id": 590,
   "schema": "codex-task-id-allocations-v1"
 }

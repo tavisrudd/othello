@@ -129,6 +129,15 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 
+### `gateway`
+
+- **C584 `[gateway]` [QUEUED]** — avatar catalogue and field-dependence table for the icosahedral six-arc / `[6,3,4]` gateway object → `notes/handoffs/2026-07-24-gateway.md`.
+- **C585 `[gateway]` [QUEUED; cheap, decisive]** — sporadicity comparison: do `beyond4` r=5 sporadic fields carry the C474 seven-gate carrier, or is the small-`q` overlap coincidental → `notes/handoffs/2026-07-24-gateway.md`.
+- **C586 `[gateway]` [QUEUED; needs C584]** — per-avatar mechanism for why rigidity is sporadic or field-uniform → `notes/handoffs/2026-07-24-gateway.md`.
+- **C587 `[gateway]` [QUEUED; needs C586]** — candidate general statement: which transported invariants are field-uniform vs exceptional-field-sporadic → `notes/handoffs/2026-07-24-gateway.md`.
+- **C588 `[gateway]` [QUEUED]** — literature audit for the cross-avatar gateway field-dependence framing (novelty verdict + claim boundary) → `notes/handoffs/2026-07-24-gateway.md`.
+- **C589 `[gateway]` [QUEUED; needs C584–C588]** — theorem-or-framing verdict and unifying-paper scoping (decision gate) → `notes/handoffs/2026-07-24-gateway.md`.
+
 ### `nofil`
 
 - **C265 `[nofil]` [QUEUED]** — write the projective mirror-outcomes section into `notes/paper-sumfree-capgame/main.tex` per ruling D1 (FOLD): integrate the Lean-proved mirror⇒P projective theorems (PG(n,2), elliptic Q⁻, even-q planes, hyperbolic quadrics), retire the manuscript's "projective case open" framing, and clear the DRAFT flags and placeholder title/author block → `notes/2026-07-17-c265-nofil-projective-section.md`.
