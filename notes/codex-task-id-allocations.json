@@ -908,8 +908,17 @@
       "last": 574,
       "purpose": "verify primary matching-design exclusions at k=8,12 and then classify rank-three realizability of the two MATCH(10,5,1) designs",
       "sequence": 101
+    },
+    {
+      "count": 3,
+      "first": 575,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 577,
+      "purpose": "trial split into focused rigidity Paper I, factorization-memory Paper II, and editorial boundary review",
+      "sequence": 102
     }
   ],
-  "next_id": 575,
+  "next_id": 578,
   "schema": "codex-task-id-allocations-v1"
 }
