@@ -21,7 +21,7 @@ GATE_COMMAND = (
     "nix develop --command env LEAN_NUM_THREADS=1 "
     f"lake build {GATE_TARGET}"
 )
-PINNED_LEAN_COMMIT = "223584997c5691a60c066d865c0a0e449a38cd21"
+PINNED_LEAN_COMMIT = "43c403b23e7cb6b9d66dda01bb43a91bec9ea465"
 
 
 def digest_bytes(value: bytes) -> str:
@@ -606,8 +606,12 @@ def main() -> None:
     manifest = {
         "schema": "clebsch-trust-manifest-v1",
         "lean_repository": {
-            "url": "urn:repository:relative-conic-arcs-lean",
+            "url": "https://github.com/tavisrudd/finitegeom",
             "commit": PINNED_LEAN_COMMIT,
+        },
+        "reproducibility_environment": {
+            "flake": file_evidence("paper", "flake.nix"),
+            "lock": file_evidence("paper", "flake.lock"),
         },
         "manuscript_sha256": digest_bytes((ROOT / "clebsch_hexagon_code.tex").read_bytes()),
         "verify_all": {

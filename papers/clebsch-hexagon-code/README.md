@@ -20,18 +20,31 @@ The global-gap replay prints the complete listing under
 that order. Thus the manuscript's `C02` is the second canonical-key row, whose exact quartic is
 printed by the low-degree replay.
 
-Run the relevant checks from this directory:
+Enter the locked paper environment and run the relevant checks from this directory:
 
 ```bash
-uv run python check_global_conic_gap.py
-uv run python check_low_degree_loci.py
-nix shell nixpkgs#singular -c ./check_low_degree_loci.sh
+nix develop
+python3 check_global_conic_gap.py
+python3 check_low_degree_loci.py
+./check_low_degree_loci.sh
+tectonic clebsch_hexagon_code.tex
 ```
 
 `check_low_degree_loci.sh` invokes `check_low_degree_loci.sing`; both cover the C02, C04, and C12
 geometry. The historical filename `check_chirality.py` deliberately retains the paper's qualified
 “support chirality” shorthand; its mathematical claim is the intrinsic unordered support
 bipartition.
+
+The complete release check also needs a separate checkout of
+[`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom) at the commit recorded in
+`verification/trust_manifest.json`. From this paper environment, run
+
+```bash
+python3 verification/verify_release.py --lean-root /path/to/shared-lean
+```
+
+The runner verifies the Lean checkout against the pinned commit before executing the aggregate
+trust gate.
 
 The immutable release produced by task C182 will extend this file with the frozen environment,
 complete replay command list, expected success sentinels, typical runtimes, licenses, commit and

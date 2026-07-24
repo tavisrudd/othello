@@ -6253,10 +6253,22 @@
     }
   ],
   "lean_repository": {
-    "commit": "223584997c5691a60c066d865c0a0e449a38cd21",
-    "url": "urn:repository:relative-conic-arcs-lean"
+    "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
+    "url": "https://github.com/tavisrudd/finitegeom"
   },
   "manuscript_sha256": "3c1269552e6db46a753ab4db97267392b66c156e31dac529dee5bb541e2f90f9",
+  "reproducibility_environment": {
+    "flake": {
+      "path": "flake.nix",
+      "repository": "paper",
+      "sha256": "4990231c512e96f4e55f407b0169c20473428bb7b4b23cf888de2f91ee2760c3"
+    },
+    "lock": {
+      "path": "flake.lock",
+      "repository": "paper",
+      "sha256": "b2ab69a7105fe245eb9500a4a72c3793b2c1ecae969c1f1bf743d3efc71167a8"
+    }
+  },
   "schema": "clebsch-trust-manifest-v1",
   "verify_all": {
     "checks": [
@@ -6452,7 +6464,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "9c231b95babd4ccb37e8b442487015cd6214eb82e2b3cc670d633bb9495ecbf4"
+      "sha256": "549adc5c47e26d33e885717d3b45abd9713babe4a4ec960f53bd6df6f2adda8f"
     }
   }
 }
