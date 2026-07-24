@@ -1236,10 +1236,23 @@ classification of its low-rank terms.
 **Observed / musing:** the separating orbit sum has rank histogram `20^192,21^528` on the
 `t=3,z=12` class, while the `t=2,z=4` class is `21^720`.  The common projective `A4` acts on the
 192 exceptional party relabellings, so they form exactly sixteen `A4`-orbits if the action is free;
-the exact quotient geometry is currently unidentified.
+the exact quotient geometry is currently unidentified.  A subsequent Tao-style prime-field
+preflight at `q=7,11,13,17,19,23,29,31` finds a much sharper pattern: rank-20 terms occur only on
+the two rational `z`-divisors
+
+```text
+z=2       with multiplicity 96,
+z=4/9     with multiplicity 192.
+```
+
+In characteristic seven the two divisors collide because `2-4/9=14/9`, and the multiplicities add
+to the observed `288`; away from them all 720 terms have rank 21.  This also explains why the
+q=13 separator sees 192 terms: its `z=12` is exactly `4/9 mod 13`.
 **Why it may matter / strongest question:** do those sixteen classes admit a classical description
-in the six-point/Gale matching geometry, turning the degree-eight quantum contraction into a
-smaller incidence count?
-**Evidence:** CHECKED for the `192` count and `A4` divisibility by the C397 certificate; freeness
-and the sixteen-class geometric interpretation remain OPEN.
+in the six-point/Gale matching geometry, and does symbolic row reduction factor the contraction
+rank-drop scheme exactly as `(z-2)(9z-4)`?  A positive answer would turn the degree-eight quantum
+contraction into a two-divisor incidence detector, though not a complete pencil coordinate.
+**Evidence:** CHECKED for the `192` count and `A4` divisibility by the C397 certificate; BOUNDED
+EXACT REPLAY for the eight displayed prime fields and the rational reconstruction `4/9`; the
+all-field factorization, freeness, and sixteen-class geometric interpretation remain OPEN.
 **Status:** open lead; unallocated.
