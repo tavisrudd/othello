@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; C552 post-delta implementation complete and awaiting user-launched independent review
+**Status:** active; user-launched independent review returned `NO-GO`; repair and post-fix review required
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -16,7 +16,8 @@ and C507 results to be admitted when ready.  This overrides the start-order gate
 release gate.  Both slices have now delivered final reviewed implementations and are admitted
 below.  The replacement-spine manuscript, stable public evidence bundles, complete claim manifest,
 tracked aggregate paper audit, and deterministic adequacy appendix have now landed.  C320 remains
-live only through the final clean-release output and the mandatory user-launched independent review.
+live through feedback-driven repair, a fresh clean-release output, and the mandatory user-launched
+post-fix review.
 
 The checked-in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex` is now the replacement-spine
 manuscript described by `notes/2026-07-21-clebsch-paper-abstract-outline.md`; the historical
@@ -519,9 +520,26 @@ trust manifest records 61 claims.  The cover-holonomy theorem has one exact
 environment row and three separately hashed clause rows.  Each clause has
 an explicitly mixed route: conceptual proof in the manuscript plus exact
 public replay, with no inherited Lean label.  The shared-Lean pin remains
-`43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.  The pre-C552 independent
-review state is stale; C320 and C552 remain live until a user-launched
-review covers this delta and returns `GO`.
+`43c403b23e7cb6b9d66dda01bb43a91bec9ea465`.
+
+The user-launched post-C552 cold read is
+`notes/2026-07-23-c320-independent-cold-read.md` and returned `NO-GO`.  Its frozen-state finding was
+subsequently settled: the normalized manuscript, 28-statement extraction, 61-claim manifest,
+four-sheet evidence bundle, and deterministic 18-check output are committed, and the current paper
+tree is clean.  The remaining blockers are substantive:
+
+1. geometric Clebsch-parent recovery is routed through a terminal that explicitly recovers only a
+   frozen matching-table row;
+2. the factorization/balance/depth and Rosetta sections do not expose enough bridge maps and finite
+   mechanisms to support the headline wording;
+3. the four-sheet theorem lacks a prior definition of its admitted pencil and a stated Paper-I
+   consequence;
+4. the uniform rank-three headline lacks one locatable `A_3/B_3/H_3` proof path; and
+5. the “statement adequacy” label exceeds what textual extraction and hashes establish.
+
+The next repair pass must reconcile the user's feedback with those findings, update manuscript and
+trust routes together, rerun all 18 checks on a frozen commit, and stop for user-launched post-fix
+review.
 
 ### Mystery ledger after the `ej`+`tt` closeout
 
