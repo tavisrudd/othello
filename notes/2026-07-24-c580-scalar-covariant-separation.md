@@ -21,9 +21,10 @@ one \(M\)-dependent generic-rank exclusion polynomial, such that every
 scalar local-unitary invariant of bidegree \((m,m)\), \(m\leq M\), takes
 the same value on the entire packet.
 
-The states are inequivalent even after party permutation.  Their one-copy
-four-party marginal covariants force every hypothetical LU intertwiner to
-be LC by C560, while C396's scalar \(z\) distinguishes their LC classes.
+The states are inequivalent even after party permutation.  Their
+algebraic-degree-one four-party marginal covariants force every
+hypothetical LU intertwiner to be LC by C560, while C396's scalar \(z\)
+distinguishes their LC classes.
 
 Equivalently, no copy bound independent of \(q\) makes scalar polynomial
 LU invariants complete on the admitted pencil.  By contrast, the
@@ -120,14 +121,17 @@ is a scalar LU invariant of bidegree \((m,m)\).  Therefore no
 LU-invariant measurement using at most \(M\) copies can distinguish any
 two members of the packet above; every outcome distribution agrees.
 Equivalently, the copy complexity of a uniformly complete
-reference-frame-free scalar protocol is unbounded as \(q\) varies.
+invariant scalar protocol is unbounded as \(q\) varies.
 
 This is not a lower bound for unrestricted tomography or for a protocol
 allowed to retain basis-dependent, operator-valued output.  The
 four-party marginal is precisely such a covariant output: it transforms
 rather than remaining fixed under local basis changes.  C560 exploits
 that retained frame information, so there is no contradiction between
-the scalar measurement lower bound and one-copy covariant rigidity.
+the scalar measurement lower bound and algebraic-degree-one covariant
+rigidity.  “Degree one” here describes dependence on one ket and one bra;
+estimating the marginal experimentally may require many physical
+specimens, and C580 supplies no tomography sample bound.
 
 If the supplied state is chosen uniformly from the packet, every such
 \(M\)-copy invariant measurement has the same conditional outcome
@@ -137,6 +141,27 @@ at least
 \(\log_2\lceil(q-d_M)/8\rceil\) bits.  This is a zero-information
 statement for the stated invariant protocol class, not a quantitative
 lower bound for frame-sensitive tomography.
+
+There is a stronger nuisance-frame formulation.  Let the class label \(J\)
+be uniform on the packet, choose an independent Haar-random local unitary
+\(g\in U(q)^6\), and give an arbitrary measurement \(M\) copies of
+\(g|\Psi_J\rangle\).  For any outcome operator \(E\), averaging its
+probability over \(g\) replaces \(E\) by its local-unitary twirl
+
+\[
+ \overline E
+  =\int_{U(q)^6}
+    (g^\dagger)^{\otimes M} E g^{\otimes M}\,dg.
+\]
+
+The twirled operator is invariant, so its expectation is one of the blind
+degree-\((M,M)\) scalar invariants.  Hence the outcome distribution of
+**every** \(M\)-copy measurement, not only an invariant measurement, is
+independent of \(J\) under the Haar-random unknown-frame model.  In
+particular no protocol can classify the packet uniformly over all local
+frames with success better than prior guessing: such a protocol would
+retain the same advantage after averaging, contradicting the twirled
+calculation.
 
 ## Classical coding corollary
 
@@ -173,8 +198,8 @@ Rains--Van den Nest mechanism, extended in C560 to the full finite-field
 Weyl basis.  C580's additional mechanism is the categorical contrast
 
 ```text
-bounded-copy scalar invariants:  retain only finite-field solution ranks
-one-copy marginal covariants:    retain the intrinsic local operator axes
+bounded-copy scalar invariants:           retain only finite-field solution ranks
+algebraic-degree-one marginal covariants: retain the intrinsic local operator axes
 ```
 
 Scalarization discards the moving basis information before orbit
@@ -332,8 +357,8 @@ C559 to C560 without competing with the Rains attribution.
 The third free corollary is operational.  Every outcome probability of an
 \(M\)-copy LU-invariant measurement lies in the blind scalar sector, so
 the packet is indistinguishable by any such measurement.  This licenses a
-reference-frame-free copy-complexity statement, but not an unrestricted
-tomography or query-complexity claim.
+precise invariant-protocol copy-complexity statement, but not an
+unrestricted tomography or query-complexity claim.
 
 The `ej2` pass adds two consequences without another proof.  Uniformly
 sampling the packet makes every allowed scalar transcript statistically
@@ -344,6 +369,14 @@ full contraction-rank profiles through copy degree \(M\).  This is the
 cleanest indication that the phenomenon belongs to the finite-field
 solution-count geometry, not only to quantum invariant terminology.
 
+The Tao stress test found the exact operational strengthening and the
+needed caveat.  Haar-randomizing the unknown local frame twirls any
+measurement into the invariant sector, so arbitrary \(M\)-copy
+measurements have zero class information in that nuisance-frame model.
+Conversely, calling the marginal “one-copy” could be misread as a
+single-specimen tomography claim; the correct phrase is
+**algebraic-degree-one covariant rigidity**.
+
 ## Mystery ledger
 
 | Feature | Closeout status | Remaining gap or owner |
@@ -351,8 +384,10 @@ solution-count geometry, not only to quantum invariant terminology.
 | Whether bounded scalar copy degree can classify the pencil uniformly in \(q\) | **Settled negatively** by the theorem above; one invariant vector contains at least \(\lceil(q-d_M)/8\rceil\) LU classes | No remaining proof gap |
 | Whether the failure has an operational copy interpretation | **Settled for LU-invariant scalar measurements:** all outcome distributions agree through \(M\) copies | Unrestricted tomography is explicitly outside the claim |
 | How much class information such a protocol retains on the packet | **Settled:** zero mutual information under the uniform prior, with at least \(\log_2\lceil(q-d_M)/8\rceil\) bits of residual ambiguity | No claim for covariant or frame-sensitive protocols |
+| Whether restricting the POVM itself to be invariant is necessary | **Settled negatively under a Haar-random unknown local frame:** twirling reduces every POVM to the blind invariant sector | A known external frame remains outside the lower bound |
+| Whether “one-copy covariant” is an experimental sample-complexity claim | **Settled negatively:** it means algebraic bidegree \((1,1)\) only | C580 gives no marginal-estimation sample bound |
 | Whether the blindness has a purely classical shadow | **Settled:** the packet gives pairwise monomially inequivalent MDS codes with identical complete contraction-rank profiles through \(M\) copies | Relation to standard code-statistic hierarchies is not claimed |
-| Why a one-copy marginal can outperform every fixed scalar degree | **Settled conceptually:** it retains the moving operator axes as covariant data | C581 may sharpen this to intrinsic phase-space reconstruction |
+| Why an algebraic-degree-one marginal can outperform every fixed scalar degree | **Settled conceptually:** it retains the moving operator axes as covariant data | C581 may sharpen this to intrinsic phase-space reconstruction |
 | Whether the minimum separating degree has a quantitative growth rate in \(q\) | Open; C580 proves only unboundedness | Not queued; would require effective degree control on the common generic-rank polynomial |
 | Whether C580 has an exact literature predecessor | Open beyond the bounded screen | C571/C572 manual literature gates if novelty wording is ever proposed |
 | Whether exact rigidity is stable under perturbation | Open | C581 |
