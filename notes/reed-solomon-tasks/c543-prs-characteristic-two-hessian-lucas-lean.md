@@ -1,6 +1,6 @@
 # C543 — Lean closure for characteristic-two Hessian and Lucas carriers
 
-**Lane:** `reed-solomon` · **Status:** queued after C539; may proceed independently of C541/C542
+**Lane:** `reed-solomon` · **Status:** complete 2026-07-24
 
 ## Objective
 
