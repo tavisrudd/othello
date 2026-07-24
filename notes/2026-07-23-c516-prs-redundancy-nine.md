@@ -204,26 +204,29 @@ four-root Vandermonde adds degree six. Hence, when `q>102`, affine Schwartz--Zip
 distinct rational four-root base with a geometrically integral reduced cover. The first
 characteristic-seven field in this range is `q=343`.
 
-On that curve the deletion degrees are:
+On the normalized residual double cover the point-deletion bounds are:
 
 \[
 \begin{array}{c|c}
 \text{divisor}&\text{degree}\\\hline
-\text{moving/fixed diagonal}&4\\
-D=0&2\\
+\text{moving/fixed diagonal}&8\\
+D=0&4\\
 K=0&4\\
 Q\text{ through one of four fixed roots}&8\\
-Q\text{ through the moving root}&4.
+Q\text{ through the moving root}&8.
 \end{array}
 \]
 
-The total is at most 22. Since
+The total is at most 32.  The diagonal, determinant, and moving-root
+resultant live first on the moving-root line and must be pulled back through
+the degree-two residual cover; only the branch divisor is ramified and
+does not double. Since
 
 \[
- q+1-2\sqrt q>22
+ q+1-2\sqrt q>32
 \]
 
-for every `q>=33`, the base-selection bound dominates. Every quartic in the modular carrier is
+for every `q>=45`, the base-selection bound dominates. Every quartic in the modular carrier is
 therefore shallow for `q=7^m>=343`.
 
 At `q=7`, the only split squarefree septics are complements of one point of `P1(F_7)`, so C513's

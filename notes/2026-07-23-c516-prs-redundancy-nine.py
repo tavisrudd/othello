@@ -494,7 +494,10 @@ def build_certificate():
         }
 
     four_marker_deletion = 12 + 4 * 6
-    modular_curve_deletion = 4 + 2 + 4 + 4 * 2 + 4
+    # Point deletions on the normalized residual double cover.  Divisors
+    # pulled back from the moving-root line double, except the ramified
+    # branch divisor.
+    modular_curve_deletion = 8 + 4 + 4 + 4 * 2 + 8
     return {
         "schema": "c516-prs-redundancy-nine-v1",
         "field_characteristic": 7,
@@ -521,11 +524,11 @@ def build_certificate():
         },
         "multiple_root_normal_forms": degenerate_forms,
         "divisor_degrees_on_modular_curve": {
-            "fixed_root_diagonal": 4,
-            "determinant": 2,
+            "fixed_root_diagonal": 8,
+            "determinant": 4,
             "branch": 4,
             "four_fixed_root_collisions": 8,
-            "moving_root_collision": 4,
+            "moving_root_collision": 8,
             "total_deletion_bound": modular_curve_deletion,
         },
         "bad_base_discriminant_degree_bound": {

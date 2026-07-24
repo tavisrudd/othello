@@ -35,7 +35,7 @@ closed.
 | P3 | Replace the hidden contained-case hypothesis by proved contained-component theorems. | No general theorem concludes `P_n union M_n` merely from an assumed implication; every proved degree points to a named component result. | Closed through `CC(8,1)`: ordinary rank two, modular overlaps, and collision finiteness are printed |
 | P4 | State the effective transverse theorem conditionally and visibly. | Its conclusion uses only named lower-cover, point-bound, and deletion hypotheses. | In this revision |
 | P5 | Expand every asserted intersection degree, containment, ramification degree, genus, and deletion budget into a lemma or proposition. | Assertion audit maps each numerical claim to a proof or immutable certificate. | Open |
-| P6 | Replace the ordered-Hessian proof outline by a complete proof. | The ambient scheme, factorization types, ruling conics, pullbacks, selection polynomial, and `3n-4` budget are all proved. | Open |
+| P6 | Replace the ordered-Hessian proof outline by a complete proof. | The ambient scheme, factorization types, ruling conics, pullbacks, selection polynomial, and `3n-4` budget are all proved. | Closed with the honest degree-eight global-union polynomial and correspondingly revised threshold |
 | P7 | Split the degree-nine `e_7` theorem into Artin--Schreier normalization, additive subcover, and shallow-orbit propositions and prove each. | No theorem-strength assertion is supported only by a synopsis paragraph. | Closed in source and cold-read |
 
 ## Classification and finite-range gates
@@ -135,10 +135,15 @@ the original theorem synopsis:
    root-degree at most four do not by themselves produce one degree-four
    polynomial vanishing on the whole bad union.  Either exhibit such a
    polynomial, prove a componentwise hitting lemma, or weaken the threshold.
+   The manuscript now takes the last route: one nonzero Veronese equation
+   times one nonzero complementary-ruling equation gives a single
+   degree-eight polynomial, and the threshold is revised to
+   `min((n-4)(n+11)/2+1, 9(n-4))`.  Vertical factors are removed
+   scheme-theoretically before this test.
 
-Until the remaining gate closes, the manuscript states only the effective
-Hessian corollary conditionally.  This is a mathematical correction, not
-merely an expositional downgrade.
+All three exposed mathematical blockers are now closed in source.  The
+weaker Hessian constant is a mathematical correction, not merely an
+expositional change.
 
 ## Release rule
 

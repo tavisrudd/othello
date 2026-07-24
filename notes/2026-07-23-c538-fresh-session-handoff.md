@@ -53,24 +53,28 @@ The important mathematical status is:
    branch, and marker-collision equations; the geometric-`S3` identity
    twist and deletion degree `30`; direct gcd-one treatments; and two
    independent adversarial passes.
-6. R9 retains its contained-component, six-slice, and rational-base gates.
-7. The ordered-Hessian effective corollary retains its root-compatible
-   pullback and global bad-union polynomial gates.
+6. R9 is unconditional for `q >= 53`.  Its universal good-base open,
+   principal-open cover of quartic moduli, rational
+   Hermite-subdiscriminant selector, corrected deletion bound `32`, and
+   `CC(8,1)` are printed and replayed.
+7. The ordered-Hessian effective corollary uses the proved
+   root-compatible pullback and an honest degree-eight global-union
+   polynomial with the revised threshold.
 8. The DOI route C545 remains blocked.  Do not describe the manuscript as
    proof-complete or submission-ready.
 
 ## Highest-EV next action
 
-Close the R9 six-slice and rational-base gate.  Print the six reduced
-discriminants, their Bézout identity, every multiple-root branch
-polynomial, and one nonzero rational-base polynomial with its exact degree
-accounting.  This is now the nearest fixed-level theorem blocker; the
-ordered-Hessian global bad-union polynomial remains the other open
-mathematical gate.
+Expand and cold-read the R5/R6 proposition proofs, beginning with R5's
+normal forms, stabilizers, degenerations, and cubic-cover geometry because
+redundancy five is the paper headline.  Then close the R6 contained,
+ramification, and exceptional-characteristic propositions.  R8, R9, the
+ordered-Hessian layer, and the `e_7` layer are no longer mathematical
+release gates.
 
-`LP(6,1)` is closed in
-`notes/2026-07-23-c538-lp61-pointed-lower-package.md`.  Do not reopen its
-generic monodromy calculation without a concrete inconsistency.
+`LP(6,1)` and the R9 universal slice proof are closed in
+`notes/2026-07-23-c538-lp61-pointed-lower-package.md` and
+`notes/2026-07-23-c538-r9-universal-slice-proof.md`.
 
 The C513 generator/replay verifies nuclei, modular supports, shallow
 witnesses, thresholds, and numerical collision budgets.  The separate

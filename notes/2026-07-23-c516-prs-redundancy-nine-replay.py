@@ -331,7 +331,7 @@ def replay_thresholds_and_counts():
             "four_fixed_root_collisions",
             "moving_root_collision",
         )
-    ) == modular_deletion["total_deletion_bound"] == 22
+    ) == modular_deletion["total_deletion_bound"] == 32
 
     # Inclusion-exclusion on the eight evaluation hyperplanes in P^4(F_7).
     rootless_vectors = sum(

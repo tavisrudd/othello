@@ -17,7 +17,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | N3 | PASS | R8/R9 table records `(g,delta,kappa)=(1,30,1)` and `(1,36,1)`, with first prime powers 43 and 53. | Threshold table and preceding calculation at lines 748--764. |
 | N4 | PASS | The singular cubic-cover correction is separately assigned `kappa=0`. | `main.tex:745` and `main.tex:1123`. |
 | N5 | PASS | Literal `and and` scan is empty. | Exact source scan is empty. |
-| SCOPE | FAIL | Every theorem advertised in the abstract is unconditional, or the abstract explicitly presents the object as a research announcement rather than proof-complete Version 1. | R8 and R9 remain conditional headline theorems.  C545 requires the former branch. |
+| SCOPE | FAIL | Every theorem advertised in the abstract is unconditional, or the abstract explicitly presents the object as a research announcement rather than proof-complete Version 1. | R8 and R9 are now unconditional; R5/R6 still retain proposition-expansion and cold-read gates, so C545 cannot yet label the artifact proof-complete. |
 
 ## 2. Proof architecture
 
@@ -32,7 +32,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | P4 | PASS | Effective transverse theorem is visibly conditional only on named lower-cover, point-bound, deletion, and contained-component hypotheses. | The induction theorem exposes these inputs. |
 | P5-R5/R6 | FAIL | Every R5/R6 intersection, containment, ramification, genus, and deletion number maps to a named proof or immutable public certificate. | The assertion audit still has open R5/R6 expansion rows. |
 | P5-R9 | PASS | R9 prints residual identities, component exhaustion, base selection, containment, ramification, genus, and deletion proofs. | Six discriminants and a Bezout identity, four multiple-root slices, the nonzero base polynomial with degrees 24/96, `CC(8,1)`, and deletion total 22 are public and replayed. |
-| P6 | FAIL | Ordered-Hessian section proves the ambient incidence, factorization strata, ruling conics, pullbacks, selection argument, and deletion budget; the global bad-union bound is valid. | Root-compatible pullback and one global bad-union argument remain open. |
+| P6 | PASS | Ordered-Hessian section proves the ambient incidence, factorization strata, ruling conics, pullbacks, selection argument, and deletion budget; the global bad-union bound is valid. | The reduced pullback is the persistent/Lucas union; the complementary ruling has no rank-two pullback; vertical factors are removed; and a Veronese equation times a ruling equation gives one degree-eight global polynomial.  The threshold is honestly revised to `min((n-4)(n+11)/2+1, 9(n-4))`. |
 | P7 | PASS | `e_7` is split into proved Artin--Schreier normalization, additive subcover, and direct shallow-orbit propositions, including translation and no-overcount. | The source derives every collision open, proves the nonconstant geometric Artin--Schreier class and trace law, constructs the connected affine-frame normalization with exact `AGL_3(F_2)` group, and counts translated three-spaces without overcount. |
 
 ## 3. Classification and finite ranges
@@ -76,8 +76,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
-| A1 | FAIL | Claim/proof ledger has no `OPEN-MATH` or `REVIEW-GATE` row for an abstract theorem. | Current ledger has 12 `OPEN-MATH` occurrences. |
-| A2 | FAIL | Independent cold reader marks every L1 claim green or supplies a closed correction. | Adversarial audit has six open theorem/repair rows. |
+| A1 | FAIL | Claim/proof ledger has no `OPEN-MATH` or `REVIEW-GATE` row for an abstract theorem. | R5 and R6 retain review/open-math rows; R8/R9 and the modular layers are green. |
+| A2 | FAIL | Independent cold reader marks every L1 claim green or supplies a closed correction. | R5 and R6 still require independent proposition-level cold reads. |
 | A3 | REVIEW | Every paper-facing computational statement replays from committed public inputs by a structurally independent check. | Verification map exists; execute after public-export assembly. |
 | X1 | FAIL | Paper-only fresh-history export builds and replays from a clean checkout and pins exactly one public Lean commit, target list, and axiom audit. | Export not yet created. |
 | X2 | FAIL | All authors, order, affiliations, acknowledgements, and account authority are confirmed. | Requires author confirmation immediately before release. |
@@ -87,8 +87,8 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 ## Work order
 
-1. Close P3-R8, P5, P6, and P7 without weakening the advertised theorem
-   scope.
+1. Close P3-R6 and the remaining R5/R6 portions of P5 without weakening
+   the advertised theorem scope.
 2. Publish the R5--R7 classification records and close C2/R1--R3.
 3. Complete C540--C544 and reconcile F1--F2.
 4. Close E5 and perform the symbol, rendered, and adversarial cold reads.

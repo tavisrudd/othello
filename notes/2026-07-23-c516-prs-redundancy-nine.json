@@ -8,11 +8,11 @@
   },
   "divisor_degrees_on_modular_curve": {
     "branch": 4,
-    "determinant": 2,
-    "fixed_root_diagonal": 4,
+    "determinant": 4,
+    "fixed_root_diagonal": 8,
     "four_fixed_root_collisions": 8,
-    "moving_root_collision": 4,
-    "total_deletion_bound": 22
+    "moving_root_collision": 8,
+    "total_deletion_bound": 32
   },
   "field_characteristic": 7,
   "modular_lifts": [
@@ -548,7 +548,7 @@
     "exact_integer_threshold": 50,
     "first_prime_power": 53,
     "four_marker_deletion": 36,
-    "modular_curve_deletion": 22,
-    "modular_curve_integer_threshold": 33
+    "modular_curve_deletion": 32,
+    "modular_curve_integer_threshold": 45
   }
 }

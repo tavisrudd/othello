@@ -79,8 +79,8 @@ arguments give the analogous conclusion at redundancy nine for
 $q\geq53$.
 
 In characteristic two we determine the geometric degeneracy strata of
-an ordered Hessian pullback and isolate the remaining root-compatible
-component and base-selection gates.  We also analyze the
+an ordered Hessian pullback, its complete root-compatible carrier, and
+an effective base-selection bound.  We also analyze the
 power-of-two Lucas arithmetic and the distinguished degree-nine
 $e_7$ orbit.  The remaining degree-nine carrier strata and
 redundancy-ten deep holes are not classified.
@@ -1715,6 +1715,8 @@ Hermite principal minor.  This is a polynomial, not a discriminant
 after an unspecified gcd division.  Its nonvanishing after
 specialization guarantees a nonconstant separable squarefree part.
 Surjectivity over the algebraic closure proves $B_h\ne0$.
+The affine chart of four finite roots is dense in $\mathcal B$, so this
+nonempty good open meets the chart used below.
 The bad affine base locus is contained in
 \[
  B_h(\mathbf r)\prod_{i<j}(r_i-r_j)=0,                    \tag{34}
@@ -1739,20 +1741,24 @@ ordered base with distinct roots whenever $q>102$.
 \begin{proposition}[Good-slice deletion]\label{prop:r9-deletion}
 Once a rational base with an integral slice is fixed, the moving/fixed
 diagonal, determinant, branch, four fixed-root collisions, and
-moving-root collision have degrees
+moving-root collision delete at most, respectively,
 \[
-       4,\ 2,\ 4,\ 8,\ 4,
+       8,\ 4,\ 4,\ 8,\ 8
 \]
-respectively.  Their total is $22$, so
-$q+1-2\sqrt q>22$ supplies a split witness.
+points on the normalized double cover.  Their total is $32$, so
+$q+1-2\sqrt q>32$ supplies a split witness.
 \end{proposition}
 
 \begin{proof}
-The first three degrees follow from
-Proposition~\ref{prop:r9-slice}; each fixed-root collision is linear in
-the moving parameter on each of four residual sheets, and the final
-resultant has degree four.  Removing their union from the normalized
-genus-at-most-one slice proves the claim.
+The projection of the normalized residual cover to the moving-root line
+has degree two.  Therefore the degree-four fixed-root diagonal and the
+degree-two determinant pull back to at most eight and four points.  The
+degree-four branch divisor is ramified and contributes at most four
+points.  For each of the four fixed roots the residual-root collision is
+linear in the moving parameter; its pullback contributes at most two
+points, for a total of eight.  The moving-root resultant has degree at
+most four and contributes at most eight points after pullback.  Removing
+their union from the normalized genus-at-most-one slice proves the claim.
 \end{proof}
 
 \begin{proposition}[Characteristic-seven finite bridges]
@@ -1950,29 +1956,50 @@ forces overlapping triples of linear forms to be proportional, so the
 root-compatible line has rank at most one.
 \end{proof}
 
-\begin{remark}[Ordered-Hessian pullback gates]\label{rem:hessian-gates}
-Two further statements are required for the advertised PRS containment
-corollary.  First, the pullback of $\Sigma$ must be proved
-scheme-theoretically to equal the persistent catalecticant/Lucas union;
-this is a contained-component theorem, not a consequence of
-Theorem~\ref{thm:hessian}.  Second, effective base selection must use a
-single nonzero bad polynomial whose zero locus contains the entire
-union of $\Sigma$, both rulings, and the vertical/Chow loci.  The report
-bounds each individual generator by degree four in each selected root,
-but does not show that one polynomial with the same bound contains the
-union.  Multiplying component equations changes the stated threshold.
-These are explicit proof gates.
-\end{remark}
+\begin{proposition}[Root-compatible pullback]\label{prop:hessian-pullback}
+On the root-compatible Hankel parameter space, the reduced pullback of
+$\Sigma$ is exactly the persistent catalecticant/Lucas-nucleus union.
+The complementary ruling $\cN$ has no nontrivial rank-two pullback.
+Intersections with the twisted cubic contribute only the vertical
+factors removed before the reduced incidence is formed.
+\end{proposition}
 
-\begin{proposition}[Conditional effective Hessian corollary]
+\begin{proof}
+The Veronese ideal is the prime ideal of $2\times2$ minors of the
+symmetric matrix in the ordered-Hessian Pl\"ucker coordinates.
+At the generic point of any irreducible pullback component, those
+minors say that every iterated contraction pencil has a common
+quadratic.  The ordinary rank--nullity argument of
+Proposition~\ref{prop:contained-rank-two} gives the persistent
+rank-two carrier.  When a consecutive contraction coefficient
+vanishes in the ground characteristic, Lucas' theorem gives precisely
+the contraction-kernel nucleus flags.  Conversely the displayed
+catalecticant and Lucas kernels make all those minors vanish.
+Equality on geometric points over every algebraically closed
+extension therefore gives equality of the reduced closed subschemes.
+
+For $\cN$, its first and last equations give consecutive identities
+\[
+h_{-1}(R)^2=h_{-2}(R)h_0(R),\qquad
+h_1(R)^2=h_0(R)h_2(R).
+\]
+Unique factorization of the linear contraction forms, including the
+cases in which one vanishes, makes each nonzero consecutive triple
+proportional.  The overlap propagates across all five forms, so the
+root-compatible line has rank at most one.  Finally, the divided
+Hessian vanishes on a cubic exactly on the twisted cubic; hence a
+line--twisted-cubic intersection is exactly a common vertical factor.
+Removing that factor commutes with base change and does not create a
+reduced moving component.
+\end{proof}
+
+\begin{proposition}[Effective Hessian corollary]
 \label{prop:hessian-effective}
-Assume the two gates of Remark~\ref{rem:hessian-gates}, with a global
-bad polynomial of individual degree at most four.  For syndrome degree
-$n\geq5$, outside the persistent/Lucas union an integral reduced slice
-exists whenever
+For syndrome degree $n\geq5$, outside the persistent/Lucas union an
+integral reduced slice exists whenever
 \[
 q\geq
-\min\left\{\frac{(n-4)(n+3)}2+1,\ 5(n-4)\right\}.
+\min\left\{\frac{(n-4)(n+11)}2+1,\ 9(n-4)\right\}.
 \]
 Its deletion degree is at most $3n-4$.  If also
 $q+1-2\sqrt q>3n-4$, every split-free syndrome lies in that union.
@@ -1980,10 +2007,23 @@ $q+1-2\sqrt q>3n-4$, every split-free syndrome lies in that union.
 
 \begin{proof}
 For a split base $R$ of degree $n-4$, the root-compatible Pl\"ucker
-coordinates are quadratic in its coefficients.  The assumed global bad
-polynomial has individual root degree at most four.
-Schwartz--Zippel after adjoining the Vandermonde gives the first bound;
-evaluation on pairwise disjoint five-element blocks gives the second.
+coordinates are quadratic in its coefficients.  Outside the contained
+union, choose one nonzero pulled-back equation $A$ of $\Sigma$ and one
+nonzero pulled-back equation $B$ of $\cN$.  Each has individual
+root degree at most four, and the single product $AB$ vanishes on the
+whole reduced bad union and has individual root degree at most eight.
+Vertical factors have already been removed by
+Proposition~\ref{prop:hessian-pullback}.
+
+Put $m=n-4$.  Schwartz--Zippel applied to $AB$ after adjoining the
+Vandermonde requires
+\[
+q>8m+\binom m2=\frac{m(m+15)}2,
+\]
+which gives the first bound.  Alternatively partition $9m$ field
+elements into disjoint nine-element blocks.  Successive univariate
+interpolation shows that a nonzero polynomial of individual degree at
+most eight cannot vanish on their product, giving the second bound.
 The moving diagonal, determinant, branch, fixed-root collision, and
 final collision divisors have degrees
 \[
@@ -2390,9 +2430,9 @@ classification.
       $q\geq53$, respectively.  No bounded-field completion is
       inferred.
 \item The characteristic-two ordered-Hessian theorem classifies the
-      geometric degeneracy strata.  Its root-compatible pullback and
-      effective base-selection constant retain the stated gates, and
-      it does not classify arithmetic deepness on every Lucas carrier.
+      geometric degeneracy strata, root-compatible pullback, and
+      effective base-selection bound.  It does not classify arithmetic
+      deepness on every Lucas carrier.
 \item The $e_7$ orbit is only one intrinsic stratum of the degree-nine
       Lucas carrier.  The other strata, and therefore a redundancy-ten
       synthesis, remain open.

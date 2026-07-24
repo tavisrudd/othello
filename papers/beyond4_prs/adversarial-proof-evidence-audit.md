@@ -31,7 +31,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 
 | Attack | Evidence tested | Verdict | Required repair |
 |---|---|---|---|
-| The contained cases are assumed rather than classified. | Original Theorem 4.1 and its proof | **Rejected through R8 after repair.** | The revision separates polar construction, `CC(n,j)`, and transverse induction.  The rank--nullity, central-lift, collision, and modular calculations close `CC(6,1)` and `CC(7,1)`; the pointed recursion closes `LP(6,1)`.  The later R9 slice/component geometry remains gated. |
+| The contained cases are assumed rather than classified. | Original Theorem 4.1 and its proof | **Rejected through R9 after repair.** | The revision separates polar construction, `CC(n,j)`, and transverse induction.  The rank--nullity, central-lift, collision, and modular calculations close `CC(6,1)`, `CC(7,1)`, and `CC(8,1)`; the pointed recursion closes `LP(6,1)`; and the universal R9 good-base open closes the residual carrier. |
 | Orbit counts are used as orbit identifiers. | R5--R7 tables | **Survived against the first draft.** | Public records must expose canonical representatives, stabilizers, invariants/histograms, Frobenius fusion, and exhaustion. |
 | Split-free is silently promoted to deep. | R7 statement, summary, certificate schema | **Rejected after repair.** | Preserve the separate radius field and the `q>=11` gate. |
 | A finite regression is used as a geometric-integrality proof. | Hessian and R9 evidence rows | **Rejected after repair.** | The manuscript and schema now say explicitly that bounded algebra does not replace the geometric proof. |
@@ -40,7 +40,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | The `q=53` endpoint is an unexplained rounding artifact. | R9 threshold | **Rejected after repair.** | The strict real cutoff is 49, integer lower bound 50, first prime power 53. |
 | The R5 singular curve uses the smooth `+1` convention. | Lemma 3.2 and threshold table | **Rejected after repair.** | R5 is explicitly assigned `kappa=0`. |
 | The verification package is externally reproducible. | Repository-relative paths and predecessor manifests | **Survived.** | The release manifest still lacks URL, tag, commit, DOI, hashes, byte counts, and toolchains. |
-| The manuscript is proof-complete. | All headline theorem proofs | **Survived.** | R5--R9 proof expansions, the ordered-Hessian proof, and the `e_7` cover proof remain open. |
+| The manuscript is proof-complete. | All headline theorem proofs | **Survived.** | R5 and R6 still require their proposition-level expansions and independent cold reads; public classification, literature, formalization, and release gates also remain.  R8/R9, ordered Hessian, and `e_7` are no longer the mathematical blockers. |
 
 ## Result audit
 
@@ -54,7 +54,7 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | R8 | Green mathematical theorem | L1 | `CC(7,1)` and `LP(6,1)` are closed; the cold read checked the recursive rank/gcd/cyclic/wild/inseparable/branch exhaustion, the geometric-`S3` identity twist, both parameter-degree budgets, the direct gcd-one counts, and the marker-collision bounds. |
 | R9 | Green mathematical theorem | L1 | Residual and deletion proofs, six explicit slice polynomials and checked Bezout identity, four multiple-root controls, the rational-base polynomial with degree accounting, and `CC(8,1)` are printed.  The theorem makes no bounded-field claim below 53. |
 | R9-kernel | Green kernel-checked conditional theorem | L3 | Does not close geometric hypotheses. |
-| Hessian | Sharp blocker | L1 | Geometric strata are separated; root-compatible persistent pullback and the global bad-union degree bound remain open. |
+| Hessian | Green mathematical theorem | L1 | The reduced root-compatible pullback is proved to be the persistent/Lucas union, the complementary ruling is excluded, vertical factors are removed before reduction, and a product of two nonzero component equations gives the honest degree-eight global bad polynomial and revised threshold. |
 | Lucas | Green mixed supporting theorem, pending cold read | L2 | Distinguished endpoint only. |
 | e7 | Green mixed theorem | L1/L2 | The source derives the full collision open, proves geometric Artin--Schreier integrality and the trace law, identifies the connected affine-frame quotient and exact `AGL_3(F_2)` deck group, and gives the direct translated-subspace witness count with no overcount. |
 

@@ -31,10 +31,13 @@ the characteristic-free rank-two contained-line identity and the R7 all-field co
 The central-lift, collision, and modular arguments now also close `CC(7,1)`.
 The explicit two-old-marker recursion, geometric-`S3` identity twist, and
 direct gcd-one treatment close the full R8 pointed lower package `LP(6,1)`;
-the redundancy-eight theorem is unconditional for `q>=43`.  The printed R9
-six-slice/base-selection algebra and one global ordered-Hessian bad-union polynomial at the claimed
-degree remain open.  The manuscript states the affected R9 continuation and effective Hessian
-corollary conditionally rather than treating these as proved certificate inputs.  The development
+the redundancy-eight theorem is unconditional for `q>=43`.  The universal
+R9 good-base open, its principal-open cover of quartic moduli, the rational
+Hermite-subdiscriminant selection, and `CC(8,1)` make R9 unconditional for
+`q>=53`.  The ordered-Hessian corollary now uses an honest degree-eight
+global-union polynomial and its revised threshold.  The remaining
+proof-complete manuscript blockers are the R5/R6 proposition expansions
+and cold reads, not R8/R9 or the Hessian/Lucas layer.  The development
 monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
 C545 remains the DOI route but is blocked until those gates close.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger; C540--C544 close the degree-specific and
