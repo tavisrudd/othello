@@ -754,6 +754,20 @@ grows as `sqrt(2q)`.  The `tt` reformulation supplies the deterministic barrier 
 P-preserving survival below the barrier, then `Y_NK` absorption after crossing it.  Report and proof:
 [`../2026-07-24-c80-capok-depth-obstruction.md`](../2026-07-24-c80-capok-depth-obstruction.md).
 
+**The secant-barrier survival/absorption split is insufficient as stated (C80, 2026-07-24), but
+the exact absorption coordinate is now proved.** `δ_q(s)=0` is necessary for `capOK`, not
+sufficient: for every `q=p^(2m+1)`, an additive-subspace parabola cap lies past the barrier while
+the line at infinity still carries `q-p^(m+1)+1` legal points. Even post-barrier `capOK` need not
+be P: a conic with one point removed has full conflict graph `K₁`. The total overload
+`Ω=Σ max(0,|L∩ℓ|-2)` over capacity-two lines is monotone under every move, is zero exactly at
+`capOK`, and strictly decreases whenever the mover selects a legal point on an overloaded line.
+So geometric absorption is free and does not need the barrier; the missing value theorem is now
+exactly a **value-independent survivor family `F`** with `F∩{Ω=0}⊆Y_NK` and a reply back into
+`F` with strictly smaller `Ω` after every opponent move (using an overloaded-line reply whenever
+the opponent made no progress). Induction on `Ω` would prove P. Without such an `F`,
+“P-preserving survival” is circular and equivalent to the desired game result.
+Report: [`../2026-07-24-c80-secbarrier-survival-absorption.md`](../2026-07-24-c80-secbarrier-survival-absorption.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -779,11 +793,14 @@ Priority order and why:
 
 1. **C80 (spine).** Everything gates on it. The fixed-depth frontier is closed-negative:
    no twelve-cap can be `capOK` once `q≥67`; generally `capOK` for an `s`-cap forces
-   `q≤binom(s,2)`.  The live frontier is a variable-depth P-preserving descent
-   into `Y_NK`, split as survival below the deterministic secant barrier
-   `δ_q(s)=max(0,q-binom(s,2))` and absorption after crossing it; the lower-EV alternative is a
-   new P-guard for an extensive growing-dimensional rank-three residual.  Do not spend another probe on a bounded-depth
-   witness selector, bounded-gadget patch, or bounded-dimensional terminal guard.
+   `q≤binom(s,2)`. The secant barrier is only necessary, not sufficient, and even post-barrier
+   `capOK` does not force P. The exact absorption clock is total capacity-two overload `Ω`,
+   which is monotone and strictly controllable by an overloaded-line move. The live frontier is
+   therefore to identify a value-independent survivor family `F` containing the chosen escape
+   child, prove `F∩{Ω=0}⊆Y_NK`, and prove strict-overload response closure back into `F` after
+   every opponent move (using an overloaded-line reply when needed); induction on `Ω` then supplies the P-value. Do not define `F` by P-value,
+   and do not spend another probe on a bounded-depth witness selector, bounded-gadget patch, or
+   bounded-dimensional terminal guard.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.
