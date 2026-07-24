@@ -145,12 +145,9 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 - **C545 `[reed-solomon]` [ACTIVE; TIT PACKET + LOCAL PROOF/FORMAL/DETERMINISTIC-EXPORT GATES GREEN; PUBLIC RELEASE EXTERNALLY BLOCKED]** — publish a proof-complete Version 1 of the same beyond-four PRS paper through a recognized DOI-bearing preprint route only after two independent specialist readers, the publicly fetchable flake-pinned Lean revision, author/account confirmation, immutable paper-export repository and archive identifiers, and the live DOI-bearing submission route are green.  IEEE Transactions on Information Theory is the selected journal target; its 32-page single-column review build and submission packet are locally green.  The release checker fails closed on every public field; no external upload or ScholarOne submission is authorized → `notes/2026-07-24-c545-tit-submission-prep.md`, `notes/2026-07-24-c545-final-reader-export-doi-gates.md`.
 - **C597 `[reed-solomon]` [ACTIVE]** — construct the complete non-cyclic R10 recursively pointed bad scheme as an integral model, prove its chart/saturation equivalence, and test the resulting coherent-Fano elimination for \(\mathrm{SC}(11)\) → `notes/reed-solomon-tasks/c597-r10-integral-bad-scheme-sc11.md`.
 
-### `relconic`
-
-- **C596 `[relconic]` [ACTIVE]** — test whether the C556 conic matching residue admits a mod-\(4\), quadratic, or Arf refinement that separates the regular and Mathon \(\operatorname{MATCH}(10,5,1)\) designs; stop at the exact finite discriminator gate before any \(k=92\) promotion → `notes/2026-07-24-c596-quadratic-matching-residue.md`.
-
 ### `ame-lu`
 
+- **C598 `[ame-lu]` [IN PROGRESS; second referee revision]** — restore the odd-prime-field scope of the promoted logical-phase claim, make Theorem 6.1's characteristic-\(3,5\) cases explicit, move the redundant transport calculation to an appendix while restoring its checkable orbit/characteristic arithmetic, and correct the literature-search and bibliography records → `notes/2026-07-24-c598-ame-lu-scope-self-containedness.md`.
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
 
 ### `rp-next`
