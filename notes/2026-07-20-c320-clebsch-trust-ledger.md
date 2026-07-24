@@ -249,6 +249,47 @@ tracked release-output hash
 C320 now stops for a separately user-launched post-fix cold review. This
 repairing session cannot supply the final `GO`.
 
+### Post-review `ej` + `tt` closeout
+
+The cheap general upgrade exposed by the review was to make semantic
+adequacy partly machine-enforced. The validator now checks exact coverage
+prose, structured checker argv, checker admission by the release runner,
+selected transitive citation boundaries, public-document hashes, and a
+self-reference-free release-surface attestation. This does not replace
+mathematical review, but it prevents the specific omissions found here from
+silently recurring.
+
+The other high-value cleanup was routing. The live handoff now declares
+itself the single Clebsch paper router and states the strict order
+`C320 post-fix GO -> C182 -> C577 -> C579`. The superseded 566-line
+replacement-spine plan is preserved under an explicit `-archive.md` name;
+its former path is a 24-line retired redirect with no active verdict or cold
+route.
+
+### Mystery ledger after repair
+
+- **Settled — rigidity trust decomposition.** The theorem has three geometric
+  equivalences; the human degenerate-conic reduction and kernel-checked
+  nonsingular implication are separate, and the stabilizer is a Dye
+  consequence.
+- **Settled — transitive classical inputs.** Rows 25, 26, and 29 state the
+  Dye and Sylvester inputs actually used by their proofs.
+- **Settled — checker coverage and command identity.** Every executable route
+  has an exact finite domain and structured argv admitted by the release
+  runner.
+- **Settled — command-to-artifact identity.** The deterministic output attests
+  the source, PDF, statement identity, checker certificate, formal pin, and
+  canonical release surface.
+- **Settled — active routing.** The handoff is the sole active router; the
+  mega-paper and replacement-spine plans are explicit non-routing history.
+- **Open gate — post-fix independence.** Only a separately user-launched cold
+  review can return final `GO`; C320 remains live until then.
+- **External packaging — C182.** A public companion-paper provenance target,
+  archive DOI/release, licence, and final immutable package remain C182 work
+  after C320 `GO`.
+
+No other genuine C320 repair mystery remains.
+
 ## Preserved mega-paper ledger — fallback evidence only
 
 Everything below this heading through the historical checklist records the
