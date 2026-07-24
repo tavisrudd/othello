@@ -189,8 +189,11 @@ residual quotient has ten projective / nine semilinear classes, and every surviv
 a line or quadratic. C398's four non-GRS nonsingular-conic rows are consumed exactly. The sole
 additional non-GRS shape is a q=9 eight-point locus on a unique rational line-pair with `4+4`
 distribution. The `ej` upgrade identifies its factors intrinsically as the unique tangents with
-four uncovered points, based at the short two-point orbit of the `C4` projective stabilizer. Raw
-small-field arc classifications pre-empt flagship positioning. See
+four uncovered points, based at the short two-point orbit of the `C4` projective stabilizer.
+The `ej2` upgrade identifies the eight extension points as a regular `C4 x C2` semilinear torsor;
+their compatibility graph is a Frobenius-odd perfect matching whose four pairs give complete
+eight-arcs in one projective class. Raw small-field arc classifications pre-empt flagship
+positioning. See
 `notes/2026-07-23-c401-cubic-contained-six-arcs.md` and its Python/JSON/checksum bundle.
 
 ### Target theorem

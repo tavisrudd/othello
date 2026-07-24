@@ -95,6 +95,43 @@ two Brianchon points, and the short-orbit vertex pair is a paired edge in both c
 perfect matchings. Thus the line-pair is recoverable intrinsically from the stabilizer and tangent
 incidence, not merely from factoring a chosen coordinate form.
 
+### `ej2`: the extension torsor
+
+Regard the eight uncovered points as the eight one-column MDS extensions of the parent. Two such
+points are compatible when adjoining both still gives an arc. Their compatibility graph is the
+perfect matching
+
+```text
+(0,4), (1,2), (3,7), (5,6)
+```
+
+in the certificate's canonical locus ordering. Thus every one-column extension has exactly one
+compatible partner. The four matched pairs give exactly four complete eight-arcs; direct
+uncovered-locus recomputation shows that none admits a ninth point. All four eight-arcs are
+`PGL_3(9)`-equivalent to
+
+```text
+(0,0,1), (0,1,0), (1,0,0), (1,1,1),
+(1,2,3), (1,3,2), (1,4,8), (1,6,5).
+```
+
+This complete class has projective automorphism order `8` and semilinear automorphism order `16`.
+In code language, the matching gives the four two-column `[8,5,4]_9` MDS extensions of the parent
+parity-check code (equivalently four projective `[8,3,6]_9` codes), all in one projective class and
+with no further MDS column extension.
+
+The symmetry is sharper than the graph statement. The parent semilinear stabilizer acts regularly
+on the eight uncovered points. Its element-order histogram is
+
+```text
+1^1, 2^3, 4^4,
+```
+
+so the carrier is a torsor for `C4 x C2`. The compatibility matching is translation by an
+involution in the Frobenius-odd coset; quotienting by that involution gives the four complete
+extensions, on which the induced action is regular `C4`. Hence the unique-partner operation is
+canonical and semilinear-equivariant, rather than an artifact of coordinates or locus ordering.
+
 ## Why the classification is finite
 
 Let `C` be a nonzero plane cubic over `F_q`, with `q>=4`. It cannot contain every rational point:
@@ -163,8 +200,8 @@ formalize the field bound or coordinate census in Lean.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| C401 checker `.py` | 20,601 | `995a884f7bfc2df890c95c62b605bc273353bb72a4d59b51dc3a1ae7ce5ca9f6` |
-| C401 certificate `.json` | 29,417 | `dc0b6989dabc43daa8f45d10f50136a29540ba5bc56c359bbb9de1bb8a4866b5` |
+| C401 checker `.py` | 26,217 | `284507d0e6b08834574f578f8b91a22ed60138789d189a652063b89e7d328f0f` |
+| C401 certificate `.json` | 30,833 | `67e109dd34e238ba6e7b3774e20f5afb480cca8e154ed74e4ebafcce4098473e` |
 | C398 input checker `.py` | 17,444 | `e01fc095bb51dd561d5b71c91d0f775b24ec1d97c8909d7879f3bd7fa499dcfc` |
 | C398 input certificate `.json` | 8,713 | `e68bd03d88afd2c6c05a76fe9ef9b4254cb614c3b2f9f4c252c60222289e6f68` |
 
@@ -247,6 +284,10 @@ non-GRS reducible quadratic and recorded its `4+4` component distribution.
   tangents containing four uncovered points, and those tangents are the two quadratic factors.
   The `1^16,2^12,4^2` tangent histogram and the two Brianchon matchings make the extraction
   coordinate-free.
+- **Settled by `ej2`:** the operational meaning of the `4+4` carrier. Its two-column extension
+  graph is a perfect matching, the semilinear stabilizer makes the eight points a regular
+  `C4 x C2` torsor, and the matching involution is Frobenius-odd. The quotient `C4`-torsor is
+  exactly the four complete eight-arc extensions, all projectively equivalent.
 
 No genuine C401 mystery remains.
 

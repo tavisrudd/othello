@@ -81,6 +81,55 @@ def projective_automorphism_permutations(c398, field, arc):
     return tuple(sorted(answer))
 
 
+def semilinear_automorphism_actions(c398, field, arc, carrier):
+    arc_index = {point: position for position, point in enumerate(arc)}
+    carrier_index = {point: position for position, point in enumerate(carrier)}
+    answer = set()
+    for power in range(field.degree):
+        twisted = tuple(
+            tuple(field.frobenius(value, power) for value in point)
+            for point in arc
+        )
+        for ordered in permutations(twisted, 4):
+            inverse = c398.inverse3(field, ordered[:3])
+            fourth = c398.mat_vec(field, inverse, ordered[3])
+            diagonal = tuple(field.inverse(entry) for entry in fourth)
+
+            def image(point):
+                twisted_point = tuple(
+                    field.frobenius(value, power) for value in point
+                )
+                coordinates = c398.mat_vec(field, inverse, twisted_point)
+                return c398.normalize(
+                    field,
+                    tuple(
+                        field.mul(diagonal[i], coordinates[i])
+                        for i in range(3)
+                    ),
+                )
+
+            arc_images = tuple(image(point) for point in arc)
+            if set(arc_images) != set(arc):
+                continue
+            carrier_images = tuple(image(point) for point in carrier)
+            assert set(carrier_images) == set(carrier)
+            answer.add(
+                (
+                    tuple(arc_index[point] for point in arc_images),
+                    tuple(carrier_index[point] for point in carrier_images),
+                    power,
+                )
+            )
+    return tuple(sorted(answer))
+
+
+def projective_canonical(c398, field, arc):
+    return min(
+        c398.frame_normalize(field, ordered, arc)
+        for ordered in permutations(arc, 4)
+    )
+
+
 def perfect_matchings(items: tuple[int, ...]):
     if not items:
         yield ()
@@ -458,12 +507,105 @@ def q9_reducible_upgrade(root: Path, records):
         permutation_order(permutation) for permutation in automorphisms
     )
     assert len(automorphisms) == maximum_automorphism_order == 4
+    carrier = tuple(tuple(point) for point in survivor["locus"])
+    compatibility_edges = tuple(
+        (left, right)
+        for left, right in combinations(range(len(carrier)), 2)
+        if c398.is_arc(field, arc + (carrier[left], carrier[right]))
+    )
+    degrees = [
+        sum(vertex in edge for edge in compatibility_edges)
+        for vertex in range(len(carrier))
+    ]
+    assert degrees == [1] * len(carrier)
+    completions = [
+        tuple(sorted(arc + tuple(carrier[index] for index in edge)))
+        for edge in compatibility_edges
+    ]
+    assert all(
+        not c398.uncovered_locus(field, completion, points)
+        for completion in completions
+    )
+    projective_completion_classes = {
+        projective_canonical(c398, field, completion)
+        for completion in completions
+    }
+    assert len(projective_completion_classes) == 1
+    canonical_completion = next(iter(projective_completion_classes))
+    completion_projective_automorphisms = projective_automorphism_permutations(
+        c398, field, canonical_completion
+    )
+    completion_semilinear_automorphism_order = c398.automorphism_order(
+        field, canonical_completion
+    )
+    assert len(completion_projective_automorphisms) == 8
+    assert completion_semilinear_automorphism_order == 16
+    actions = semilinear_automorphism_actions(c398, field, arc, carrier)
+    assert len(actions) == len(carrier) == 8
+    assert all(
+        {action[1][vertex] for action in actions} == set(range(len(carrier)))
+        for vertex in range(len(carrier))
+    )
+    action_order_histogram = Counter(
+        permutation_order(action[1]) for action in actions
+    )
+    assert action_order_histogram == Counter({4: 4, 2: 3, 1: 1})
+    partner = {}
+    for left, right in compatibility_edges:
+        partner[left] = right
+        partner[right] = left
+    partner_involution = tuple(partner[index] for index in range(len(carrier)))
+    matching_actions = [
+        action for action in actions if action[1] == partner_involution
+    ]
+    assert len(matching_actions) == 1
+    assert matching_actions[0][2] == 1
+    edge_index = {
+        frozenset(edge): index for index, edge in enumerate(compatibility_edges)
+    }
+    completion_actions = {
+        tuple(
+            edge_index[
+                frozenset((action[1][left], action[1][right]))
+            ]
+            for left, right in compatibility_edges
+        )
+        for action in actions
+    }
+    assert len(completion_actions) == 4
+    completion_action_order_histogram = Counter(
+        permutation_order(action) for action in completion_actions
+    )
+    assert completion_action_order_histogram == Counter({4: 2, 2: 1, 1: 1})
     return {
         "brianchon_count": len(brianchon_points),
         "brianchon_points": brianchon_points,
         "factor_line_profiles": sorted(
             factor_profiles, key=lambda profile: profile["form"]
         ),
+        "extension_torsor": {
+            "canonical_complete_eight_arc": [
+                list(point) for point in canonical_completion
+            ],
+            "compatibility_edges": [list(edge) for edge in compatibility_edges],
+            "complete_eight_arc_count": len(completions),
+            "complete_eight_arc_projective_classes": 1,
+            "complete_eight_arc_projective_automorphism_order": len(
+                completion_projective_automorphisms
+            ),
+            "complete_eight_arc_semilinear_automorphism_order": (
+                completion_semilinear_automorphism_order
+            ),
+            "completion_quotient_action_group": "C4",
+            "matching_involution": list(partner_involution),
+            "matching_involution_frobenius_power": matching_actions[0][2],
+            "semilinear_carrier_action_group": "C4xC2",
+            "semilinear_carrier_action_order_histogram": {
+                str(order): count
+                for order, count in sorted(action_order_histogram.items())
+            },
+            "semilinear_carrier_action_regular": True,
+        },
         "pgl_arc_point_orbits": sorted(point_orbits, key=lambda orbit: (len(orbit), orbit)),
         "pgl_permutation_group": "C4",
         "pgl_permutation_group_order": len(automorphisms),
