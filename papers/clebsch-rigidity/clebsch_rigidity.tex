@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cU}{\mathcal{U}}
+
+\title{Deep-hole rigidity of the Clebsch hexagon code}
+\author{Tavis Rudd}
+\date{Working split draft --- July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We characterize the exceptional non-GRS $[6,3,4]_{11}$ MDS code by the
+geometry of its maximum-distance syndromes.  Among six-arcs of
+$\PG(2,11)$, the projective deep-hole syndrome locus lies on a conic
+exactly for the Clebsch class.  The syndrome conic gives an exact
+decoder, recovers the automorphism group, and determines an invariant
+bipartition of the ambiguous leader supports.  We also give the sharp
+nearest-conic gap and classify the full-conic extension-locus examples
+for arcs of size $4$ through $7$.
+\end{abstract}
+
+\noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
+projective plane; arc; conic; decoding.
+
+\smallskip
+\noindent\textbf{2020 Mathematics Subject Classification.} 51E21, 94B05,
+51E22, 05B25.
+
+\section{Introduction}
+
+The principal question is whether the deep-hole syndrome geometry
+recognizes the Clebsch hexagon without an a priori symmetry assumption.
+The main theorem answers this question and organizes the decoding,
+reconstruction, and classification consequences.
+
+\begin{quote}
+\textbf{Transfer gate.}
+C575 will import the exact theorem statements, hypotheses, citations,
+and proof-mode declarations from the pinned focused source.  This file
+records their narrative order but does not yet replace that source.
+\end{quote}
+
+\section{The code--arc dictionary}
+
+Fix the projective and coding conventions once, identify uncovered
+points with weight-three syndrome directions, and isolate the extension
+locus used throughout the paper.
+
+\section{The Clebsch hexagon and its code}
+
+Give the six points, the explicit parity-check matrix, the automorphism
+action, and the nonsingular conic containing the twelve distinguished
+syndrome directions.
+
+\section{Syndrome geometry, decoding, and automorphisms}
+
+Prove that the syndrome conic is a constant-time distance oracle.  Then
+present the complete fifteen-class ambiguity census and derive the
+automorphism consequences without interrupting the proof with replay
+details.
+
+\section{Rigidity and quantitative gaps}
+
+Separate the conceptual rigidity proof from the exhaustive finite
+calculation.  State the qualitative characterization first, followed by
+the sharp nearest-conic gap and the low-degree strengthening.
+
+\section{Support bipartition and Brianchon reconstruction}
+
+Recover the Brianchon configuration from the decoder data and construct
+the intrinsic unordered $10+10$ bipartition of ambiguous leader
+supports.
+
+\section{Why \texorpdfstring{$q=11$}{q=11}}
+
+Explain the arithmetic isolation of the Clebsch case, then prove the
+classification of full-conic extension loci for $4\leq k\leq 7$.  A
+short reflection-arrangement remark may remain only if it clarifies this
+classification without importing the factorization-memory machinery.
+
+\section{Verification architecture}
+
+Map each headline claim to its conventional proof, classical input,
+Lean theorem, certificate, or exact computation.  Keep the exhaustive
+search boundary limited to the numerical gap and low-degree
+strengthening.
+
+\section*{Conclusion}
+
+Return to what the syndrome geometry reconstructs, why $q=11$ is
+isolated, and the open range $k\geq 8$.
+
+\end{document}

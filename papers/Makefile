@@ -4,6 +4,9 @@ LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCES := \
 	arcs_complete_outside_conic/arcs_complete_outside_conic.tex \
 	clebsch-hexagon-code/clebsch_hexagon_code.tex \
+	clebsch-rigidity/clebsch_rigidity.tex \
+	clebsch-factorization/clebsch_factorization.tex \
+	clebsch-passages/clebsch_passages.tex \
 	coding-repair-hypergraphs/complete_repair_hypergraphs.tex \
 	dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex \
 	equivariant-robust-completion/frobenius_pair_extension.tex
@@ -12,7 +15,8 @@ PDFS := $(SOURCES:.tex=.pdf)
 LOGS := $(SOURCES:.tex=.log)
 
 .PHONY: all check warnings clean distclean list \
-	arcs clebsch dihedral repair-hypergraphs equivariant-completion
+	arcs clebsch clebsch-rigidity clebsch-factorization clebsch-passages \
+	dihedral repair-hypergraphs equivariant-completion
 
 all: $(PDFS)
 
@@ -23,6 +27,12 @@ check:
 arcs: arcs_complete_outside_conic/arcs_complete_outside_conic.pdf
 
 clebsch: clebsch-hexagon-code/clebsch_hexagon_code.pdf
+
+clebsch-rigidity: clebsch-rigidity/clebsch_rigidity.pdf
+
+clebsch-factorization: clebsch-factorization/clebsch_factorization.pdf
+
+clebsch-passages: clebsch-passages/clebsch_passages.pdf
 
 dihedral: dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.pdf
 

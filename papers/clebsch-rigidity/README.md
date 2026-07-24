@@ -11,5 +11,6 @@ Working root for the focused rigidity/decoder manuscript provisionally titled
 - Boundary: no factorization-memory development beyond an optional compact `H_3`
   explanation approved by C575.
 
-Do not copy or move files from `../clebsch-hexagon-code/` until C575 records their
-disposition and provenance.
+The compilable spine is `clebsch_rigidity.tex`.  Do not copy or move further
+files from `../clebsch-hexagon-code/` until C575 records their disposition and
+provenance.

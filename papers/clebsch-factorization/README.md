@@ -15,5 +15,6 @@ configurations*.
   comparisons, carrier torsors, and Mathieu/characteristic-zero bridges remain
   outside this root unless a later editorial decision adopts them.
 
-Do not copy or move files from `../clebsch-hexagon-code/` until C575 records their
-disposition and provenance.
+The compilable spine is `clebsch_factorization.tex`.  Do not copy or move further
+files from `../clebsch-hexagon-code/` until C575 records their disposition and
+provenance.

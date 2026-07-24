@@ -1,7 +1,11 @@
 # Clebsch passages paper
 
-Reserved working root for a possible third manuscript.  `clebsch-passages` is a
-provisional directory name, not an adopted title or an allocated drafting task.
+Working root for the exploratory third manuscript provisionally titled
+*Finite passages and holonomy in Clebsch matching geometry*.
+
+- Owner: C579 in the `clebsch` lane.
+- First gate: identify one principal theorem that makes the comparison package
+  independently readable.
 
 Candidate material:
 
@@ -11,6 +15,6 @@ Candidate material:
 - certified carrier torsors;
 - Mathieu and characteristic-zero bridges.
 
-C575 may inventory material here, but no result is assigned to this paper until
-the standalone-value and literature gates justify a Paper III task.  The current
+The compilable spine is `clebsch_passages.tex`.  No result is assigned to the
+paper until the standalone-value and literature gates pass.  The current
 manuscript remains unchanged in `../clebsch-hexagon-code/`.

@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cC}{\mathcal{C}}
+
+\title{Factorization memory in a conic ideal:\\
+the \texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
+\texorpdfstring{$H_3$}{H3} configurations}
+\author{Tavis Rudd}
+\date{Working split draft --- July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Restriction to a conic forgets how its marked points were paired into
+secants.  We study the information retained after differences of
+matching products are divided by the conic equation.  For the
+rank-three Coxeter configurations $A_3$, $B_3$, and $H_3$, the quotient
+has ranks $3$, $6$, and $10$.  In the balanced cases, second moments
+recover two complementary sheets, a cubic invariant orients them, and
+six incidence profiles recover the matching-table row.  A modular depth
+quotient and arithmetic gluing describe how this factorization memory
+changes across characteristics.
+\end{abstract}
+
+\noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
+configuration; factorization; cubic invariant; modular representation.
+
+\smallskip
+\noindent\textbf{2020 Mathematics Subject Classification.} 05B25, 51E22,
+20C20, 13A02.
+
+\section{Introduction}
+
+The paper asks which parts of a secant factorization survive after all
+products have the same restriction to a conic.  Its main result follows
+one mechanism from the switch identity to the recovery of finite
+matching data.
+
+\begin{quote}
+\textbf{Transfer gate.}
+C575 will import the exact field hypotheses, normalization conventions,
+priority boundaries, and theorem statements from the pinned broad
+source.  The present draft fixes the causal order of the argument.
+\end{quote}
+
+\section{Conic matching products}
+
+Define the matching products, their common conic restriction, and the
+quotient obtained by dividing a difference by the conic equation.  A
+small example should make the retained information visible before the
+general construction.
+
+\section{Switches and divisibility}
+
+Prove the four-endpoint switch identity and the general
+switch/divisibility theorem.  Separate what follows formally from the
+conic ideal from what depends on a selected matching configuration.
+
+\section{The rank-three configurations}
+
+Introduce the $A_3$, $B_3$, and $H_3$ configurations with precise credit
+for their classical geometry.  Compute the quotient ranks $3$, $6$, and
+$10$, and state the complement-code calculation only at the strength
+needed later.
+
+\section{Balanced sheets and cubic orientation}
+
+Show how second moments recover the two balanced halves in the $B_3$ and
+$H_3$ cases up to interchange.  Identify degree three as the first
+signed moment that orients the halves.
+
+\section{Six profiles and matching-row reconstruction}
+
+Derive the two $1,4,6$ triples from subgroup marks, construct the six
+incidence profiles, and explain why their rank-two image still
+separates all six labels.  End with the exact matching-row recovery
+statement.
+
+\section{Modular depth and arithmetic gluing}
+
+Present the modular depth quotient, the primitive $1:4:6$ relation, and
+the arithmetic splitting/gluing theorem as one change-of-characteristic
+story.  Put the relative-cubic Tate plane in an appendix unless it
+shortens this argument.
+
+\section{Verification architecture}
+
+Distinguish conceptual proofs, classical inputs, Lean statements, and
+finite certificates.  State the coordinate-to-Coxeter identifications
+and external semantic bridges explicitly.
+
+\appendix
+
+\section{The relative-cubic Tate plane}
+
+Record the two canonical constructions and the proved boundary between
+the relative-cubic plane and the modular depth plane.
+
+\section*{Conclusion}
+
+State exactly which factorization data the conic ideal remembers and
+which pointed or global data it still forgets.
+
+\end{document}

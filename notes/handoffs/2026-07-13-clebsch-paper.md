@@ -14,13 +14,14 @@
 Test a two-paper Clebsch architecture while preserving the current broad manuscript as a fallback.
 Current assessment: **repeated reviewers find the post-section-12 material too broad and dense,
 while the older 17-page rigidity/decoder version is already a coherent paper.  C575 is now the
-next task: pin both snapshots and produce the exact split map before C576 builds focused Paper I
-and C577 builds standalone factorization-memory Paper II.  No Paper III task is allocated.**
+next task: pin both snapshots and produce the exact split map before C576 builds focused Paper I,
+C577 builds standalone factorization-memory Paper II, and C579 tests whether the passage/holonomy
+package has a single standalone theorem.**
 The split charter and acceptance gates are
 [`2026-07-24-clebsch-paper-split-trial.md`](../2026-07-24-clebsch-paper-split-trial.md).
-The additive source roots are `papers/clebsch-rigidity/`,
-`papers/clebsch-factorization/`, and the provisional unallocated
-`papers/clebsch-passages/`; `papers/clebsch-hexagon-code/` remains the unchanged fallback.
+The additive source roots and compilable spines are `papers/clebsch-rigidity/`,
+`papers/clebsch-factorization/`, and the exploratory `papers/clebsch-passages/`;
+`papers/clebsch-hexagon-code/` remains the unchanged fallback.
 
 The preserved fallback is the post-Sol 37-page single-manuscript revision with 29 extracted
 theorem environments, 58 manifest rows, and an unchanged deterministic 18-check release surface.

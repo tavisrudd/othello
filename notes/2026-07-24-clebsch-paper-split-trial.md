@@ -20,7 +20,7 @@ The source layout is additive:
 - `papers/clebsch-hexagon-code/` remains the unchanged broad fallback;
 - `papers/clebsch-rigidity/` is the C576 Paper I root;
 - `papers/clebsch-factorization/` is the C577 Paper II root;
-- `papers/clebsch-passages/` is a reserved, provisional Paper III root with no drafting task.
+- `papers/clebsch-passages/` is the exploratory C579 Paper III root.
 
 Do not rename, move, or repurpose the fallback.  C575 must populate the new roots from pinned
 source revisions and recorded dispositions rather than treating a working-tree copy as
@@ -102,12 +102,37 @@ Acceptance:
   import them merely to make Paper II comprehensive;
 - render and obtain a fresh referee-style coherence review.
 
-Non-goal: allocate or draft Paper III before the standalone-value gate is met.
+Non-goal: import the passage/holonomy comparison package merely to make Paper II comprehensive.
+
+## C579 — passages and holonomy Paper III gate
+
+Test the provisional title *Finite passages and holonomy in Clebsch matching geometry* against a
+single-question standard.
+
+Candidate spine:
+
+1. carriers, orientations, and passage maps;
+2. exact survival and loss statements;
+3. the four-sheet cover and cycle holonomy;
+4. theta, Fourier, and quantum realizations;
+5. Mathieu and characteristic-zero bridges;
+6. verification architecture.
+
+Acceptance:
+
+- identify one principal theorem that makes the other comparisons consequences or applications;
+- state the common carrier and determinant-sign transport before the individual realizations;
+- separate proved finite or monomial statements from broader equivalences that remain external;
+- establish an independent literature and notation boundary;
+- render a candidate and obtain a fresh referee-style standalone-value review.
+
+If the first acceptance item fails, stop drafting and return the material to a disposition
+inventory.  Do not lengthen Paper II to absorb it automatically.
 
 ## Decision gate
 
-After C575, execute C576 and C577 only if the exact dependency map shows that both candidates can
-state their headline theorems without circular cross-reference or substantial proof duplication.
-After both candidates render, compare them against the preserved 37-page fallback on exposition,
+After C575, execute C576, C577, and C579 only where the exact dependency map shows that a candidate
+can state its headline theorem without circular cross-reference or substantial proof duplication.
+Compare every rendered candidate against the preserved 37-page fallback on exposition,
 organization, referee assessability, verification burden, and submission readiness.  The final
 architecture remains a user decision.
