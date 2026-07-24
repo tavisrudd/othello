@@ -1,0 +1,31 @@
+import RelativeConicArcs.Gates.PRSRedundancyFive
+
+/-!
+# Axiom audit for redundancy-five cubic-pencil classification
+
+This reproducible audit prints the axiom dependencies of the algebraic,
+certificate, arithmetic, and synthesis terminals exported by
+`RelativeConicArcs.Gates.PRSRedundancyFive`.  It adds no definitions or theorems.
+-/
+
+#print axioms RelativeConicArcs.PRSRedundancyFive.affine_span_product_mem_hankelKernel
+#print axioms RelativeConicArcs.PRSRedundancyFive.affine_pair_infinity_span_product_mem_hankelKernel
+#print axioms RelativeConicArcs.PRSRedundancyFive.inHankelKernel_scale_iff
+#print axioms RelativeConicArcs.PRSRedundancyFive.isSplitFree_scale_iff
+#print axioms RelativeConicArcs.PRSRedundancyFive.isSplitFree_iff_not_liesInThreeColumnSpan
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.family_arithmetic
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_doubled
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_of_sporadic_empty
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingConjugate
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingRational
+#print axioms RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_characteristicThree
+#print axioms RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_field_orders
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_counts
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_stabilizer
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_histogram_total
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_frobenius_target
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic
+#print axioms RelativeConicArcs.PRSRedundancyFiveCertificate.certified_orbit_summaries_agree_with_sporadic_records
