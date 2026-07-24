@@ -1544,7 +1544,21 @@ Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$, and put
  t=|U(A)\mathbin{\triangle}U(B)|.
 \]
 Let $r$ be the number of secants of $A$ that are not secants of $B$, and
-put $h=\lfloor(k-1)/2\rfloor$.  If $\delta\ge2$ and
+let $e_A(x)$ be the number of these lost secants through $x\in A$.
+Define $e_B(y)$ analogously for the gained secants.  Put
+\[
+ d_A=|(\PG(2,q)\setminus U(A))\setminus(\PG(2,q)\setminus U(B))|,
+ \qquad
+ d_B=|(\PG(2,q)\setminus U(B))\setminus(\PG(2,q)\setminus U(A))|.
+\]
+With $\phi(0)=0$ and $\phi(j)=\binom{j-1}{2}$ for $j\ge1$, one has
+\[
+ \begin{split}
+ d_A&\ge r\delta-\binom r2+\sum_{x\in A}\phi(e_A(x)),\\
+ d_B&\ge r\delta-\binom r2+\sum_{y\in B}\phi(e_B(y)).
+ \end{split}
+\]
+Put $h=\lfloor(k-1)/2\rfloor$.  If $\delta\ge2$ and
 $s=\lfloor t/2\rfloor$, then
 \[
  r\le
@@ -1552,6 +1566,10 @@ $s=\lfloor t/2\rfloor$, then
  \qquad
  |A\mathbin{\triangle}B|
  \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
+\]
+More precisely, if $a=|A\setminus B|$, then
+\[
+ 2r\ge a\bigl(k-1-\min\{a,\lfloor k/2\rfloor\}\bigr).
 \]
 For every $\delta\ge1$, the stronger threshold conclusion
 \[
@@ -1568,16 +1586,34 @@ size at most $s$.  The pair bound in the lemma gives the displayed estimate
 for $r$.  If $r>0$, each one-sided difference has at least $\delta$ points,
 which proves the threshold conclusion once the vertex step below is used.
 
+The degree correction records the first constraint coming from a secant
+realization.  Start with the Bonferroni subtraction of one for every pair of
+lost lines.  The $e_A(x)$ lost secants through a vertex $x$ have one common
+intersection.  If $x$ lies outside the comparison union, their actual
+overlap correction is $e_A(x)-1$ rather than $\binom{e_A(x)}2$; if $x$ lies
+in the comparison union, none of these intersections contributes to the
+one-sided difference.  In either case Bonferroni over-subtracts by at least
+$\phi(e_A(x))$.  Pairs grouped at distinct vertices are disjoint, which
+proves the bound for $d_A$; interchange $A$ and $B$ for the other bound.
+
 It remains to pass from common secants to common vertices.  For
-$a\in A\setminus B$, the common secants through $a$ are secants of $B$
+$x\in A\setminus B$, the common secants through $x$ are secants of $B$
 through a nonvertex.  They use disjoint pairs of the $k$ points of $B$, so
-there are at most $\lfloor k/2\rfloor$ of them.  At least
+there are at most $\lfloor k/2\rfloor$ of them.  Moreover, no such pair can
+use two points of $A\cap B$, since its line would then contain three points
+of $A$.  Each pair therefore uses a point of $B\setminus A$, and the
+matching contains at most $|B\setminus A|=|A\setminus B|$ pairs.
+Writing $a=|A\setminus B|$, every missing vertex is consequently incident
+with at least
+\[
+ k-1-\min\{a,\lfloor k/2\rfloor\}
+\]
+lost secants.  Summing these degrees proves the nonlinear estimate.
+In particular, every missing vertex is incident with at least
 \[
  (k-1)-\lfloor k/2\rfloor=h
 \]
-of the secants of $A$ through $a$ are therefore among the $r$ lost
-secants.  Summing lost degrees over $A\setminus B$ gives
-$h|A\setminus B|\le2r$.  Since the two arcs have the same size,
+lost secants, so $h|A\setminus B|\le2r$.  Since the two arcs have the same size,
 $|A\mathbin{\triangle}B|=2|A\setminus B|$, proving the second estimate.
 In particular $r=0$ forces $A=B$.
 \end{proof}
@@ -1587,8 +1623,8 @@ In particular $r=0$ forces $A=B$.
 The proposition is nonasymptotic and field-uniform.  Along any family for
 which $t=o(\delta\sqrt N)$, it gives $r=o(N)$ and hence
 $|A\mathbin{\triangle}B|=o(k)$.
-The scale of the line-union estimate cannot be improved by an argument for
-arbitrary line families alone.  If two $N$-line families share $N-r$ lines
+The scale of the line-union lemma cannot be improved for arbitrary line
+families.  If two $N$-line families share $N-r$ lines
 and their $N+r$ lines have no triple concurrence, then, whenever
 $N+r\le q+1$,
 \[
@@ -1598,7 +1634,10 @@ Indeed, every lost line meets the $N$ comparison lines in distinct points,
 while its intersections with the other lost lines account for the
 $\binom r2$ repetitions.  A pencil is less adverse: concurrency merges
 only $r-1$ of these points.  Any improvement at this scale must therefore
-use the secant realization, not merely the two line unions.
+use the secant realization, not merely the two line unions.  The degree
+correction in Proposition~\ref{prop:robust-arc-reconstruction} is the first
+such improvement: whenever the lost-edge graph has vertices of degree at
+least three, its forced concurrence recovers part of the Bonferroni loss.
 \end{remark}
 
 \begin{corollary}[Canonical inverse and automorphisms]
@@ -1699,9 +1738,10 @@ asymptotic constant obtained here.
 \begin{problem}
 Determine whether Proposition~\ref{prop:robust-arc-reconstruction} can be
 strengthened by using the rank-three secant realization together with the
-prescribed-hole defect.  Lemma~\ref{lem:line-union-perturbation} is sharp to
-first order for unrestricted line arrangements, so a stronger bound must
-go beyond combinatorial bad-edge stability.
+prescribed-hole defect.  The lost-edge degree correction already detects
+forced vertex concurrence, but Lemma~\ref{lem:line-union-perturbation} is
+sharp to first order for unrestricted line arrangements; a defect-coupled
+bound must also go beyond combinatorial bad-edge stability.
 \end{problem}
 
 \begin{problem}

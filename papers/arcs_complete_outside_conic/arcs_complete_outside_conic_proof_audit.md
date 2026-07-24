@@ -81,8 +81,13 @@
     `floor(|U(A) triangle U(B)|/2)`. A vertex of `A` absent from `B` has at most `floor(k/2)`
     common secants, because those secants form a matching on `B`; it is therefore incident with
     at least `floor((k-1)/2)` lost secants. Double-counting lost degrees gives the stated vertex
-    bound. The no-triple-concurrence example attains the Bonferroni line bound; concurrency is
-    less adverse. No defect estimate or computational classification enters this theorem.
+    bound. Two refinements use the secant realization itself. If a lost-edge degree is `e`, its
+    forced vertex concurrence restores at least `choose(e-1,2)` of the pairwise Bonferroni
+    subtraction. If `a=|A\B|`, a common secant through a missing vertex must use a point of
+    `B\A`; hence there are at most `min(a,floor(k/2))` such secants and
+    `2r>=a*(k-1-min(a,floor(k/2)))`. The no-triple-concurrence example attains the unrestricted
+    Bonferroni line bound; concurrency is less adverse. No defect estimate or computational
+    classification enters this theorem.
 
 ## Computer-assisted claims
 

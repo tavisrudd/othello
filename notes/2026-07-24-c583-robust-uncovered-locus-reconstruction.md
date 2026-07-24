@@ -28,6 +28,17 @@ Writing \(h=\lfloor(k-1)/2\rfloor\), the parent arcs satisfy
  |A\mathbin{\triangle}B|
  \le 2\left\lfloor\frac{2r}{h}\right\rfloor.
 \]
+There are two sharper arc-specific inequalities.  If \(e_A(x)\) is the
+degree of \(x\) in the lost-secant graph and
+\(\phi(0)=0,\ \phi(j)=\binom{j-1}{2}\) for \(j\ge1\), then
+\[
+ d_A\ge r\delta-\binom r2+\sum_{x\in A}\phi(e_A(x)),
+\]
+with the analogous bound for the gained-secant graph on \(B\).  If
+\(a=|A\setminus B|\), then
+\[
+ 2r\ge a\bigl(k-1-\min\{a,\lfloor k/2\rfloor\}\bigr).
+\]
 For the entire exact-reconstruction range, including the boundary
 \(\delta=1\),
 \[
@@ -144,10 +155,31 @@ boundary instead of presenting one convenient but scale-blind estimate.
 
 The Tao-style discriminator is where geometry first becomes indispensable.
 General-position lines, not pencils, minimize the visible one-sided
-difference to first order.  The only available improvement must exploit
-that the lines are the edges of two complete graphs realized in one
-projective plane.  The vertex estimate supplies one such compatibility
-step; C558's bad-edge count does not yet supply another.
+difference to first order.  An improvement must exploit that the lines are
+the edges of two complete graphs realized in one projective plane.  The
+vertex estimate supplies one such compatibility step; C558's bad-edge
+count does not yet supply another.
+
+## Post-completion `ej` upgrade
+
+The explicit extra-juice pass found that the arbitrary-line Bonferroni
+obstruction is not the end of the proof-only story.  The lost secants form
+an edge set on the \(k\) vertices of \(A\).  If \(e\) lost edges meet at one
+arc vertex, their union pays overlap \(e-1\), not \(\binom e2\); if that
+vertex lies in the comparison union, it pays no one-sided overlap there.
+Either way the secant realization restores at least
+\(\binom{e-1}{2}\) points relative to the unrestricted Bonferroni bound.
+Summing gives the degree-sequence correction displayed above.  It is
+strict as soon as a lost-edge degree reaches three.
+
+The same pass sharpens vertex recovery.  A common secant through
+\(x\in A\setminus B\) is a matching edge on \(B\), but it cannot use two
+vertices of \(A\cap B\), since that would put three points of \(A\) on its
+line.  Every such matching edge therefore consumes a distinct point of
+\(B\setminus A\), so there are at most
+\(\min\{a,\lfloor k/2\rfloor\}\) of them.  This yields the nonlinear
+inequality above and improves the linear vertex estimate whenever the two
+arcs are already close.
 
 ## Mystery ledger
 
@@ -156,10 +188,11 @@ step; C558's bad-edge count does not yet supply another.
   \(q+1>\binom{k}{2}\), and a gap theorem throughout that exact range.
 - **Adversarial concurrency:** settled.  Pencils are not extremal;
   no-triple-concurrence line families attain the Bonferroni bound.
-- **Arc-specific improvement:** open, but not required for C583.  The exact
-  missing input is a rank-three restriction on how the lost-secant graph
-  can realize the general-position line obstruction, possibly coupled to
-  the prescribed-hole defect.
+- **Arc-specific improvement:** partially settled by the post-completion
+  `ej` pass.  Lost-edge degrees at least three force a positive concurrence
+  correction, and the vertex loss obeys the sharper nonlinear inequality.
+  What remains open is a restriction on matching-like lost-edge sets, where
+  the degree correction vanishes.
 - **Defect coupling:** open at the same gate.  C558 bounds combinatorial bad
   edges inside one realization and does not compare two realizations.
 - **Computational evidence:** no mystery remains.  The theorem is
