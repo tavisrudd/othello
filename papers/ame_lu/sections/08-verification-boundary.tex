@@ -1,6 +1,59 @@
-\section{Verification and scope}
+\section{Verification, literature, and scope}\label{sec:verification}
 
-This section will state the trust boundary for conceptual proofs, exact
-symbolic calculations, finite certificates, independent replays, and any
-future formalization.  The final version will cite the paper-local
-evidence manifest and give exact replay commands.
+The rigidity theorem, the arc--AME dictionary, and generic constancy are
+conceptual proofs in the text.  The projective quotient uses displayed
+bracket identities and projectivities; its modular collision closure,
+the finite logical-group checks, the H3 incidence counts, the \(q=13\)
+contractions, and the transport multiplicities also have exact
+paper-local certificates.
+
+The reproducibility package is in \texttt{supplement/}.  From that
+directory,
+\[
+\begin{array}{ll}
+\texttt{python3 verify.py}
+ &\text{checks all fifteen byte counts and SHA-256 digests},\\
+\texttt{python3 verify.py --replay}
+ &\text{regenerates all seven canonical JSON certificates in memory}.
+\end{array}
+\]
+The full replay uses only the Python standard library, deterministic
+integer, rational, polynomial, and finite-field arithmetic, and canonical
+JSON serialization.  It includes independent paths appropriate to each
+claim: CSS versus direct-Lagrangian shortening, symbolic versus finite
+projectivity, chord concurrency versus stabilizer ranks, quotient minors
+versus finite-field elimination, and cycle-cover versus fraction-free
+transport determinants.  The exact files, hashes, domains, expected
+outputs, and negative scopes are recorded in
+\texttt{supplement/EVIDENCE.md} and
+\texttt{supplement/EVIDENCE-MANIFEST.json}.
+
+The trusted boundary is Python integer arithmetic, the exact-arithmetic
+implementations in the generators, deterministic Gaussian elimination,
+and the mathematical dictionaries connecting arcs, codes, stabilizers,
+and tensor contractions.  The certificates check the bounded
+enumerations and symbolic identities that they record.  They do not prove
+the conceptual correspondence between the implemented objects and the
+paper definitions; that correspondence is supplied in the preceding
+sections.
+
+The LU-to-LC mechanism has direct qubit ancestry.  Rains recovered the
+three Pauli axes of distance-two code projectors
+\cite{Rains1999}; Van den Nest, Dehaene, and De Moor used minimal
+stabilizer supports to force every local factor of an LU equivalence to
+be Clifford \cite{VanDenNestDehaeneDeMoor2005}.  General
+minimal-support AME equivalence permits behavior outside our equal-phase
+CSS hypotheses \cite{BurchardtRaissi2020,RamadasLakshminarayan2025}.
+Our qualified novelty claim is only the full \(q^2-1\)-axis,
+prime-power-qudit extension and its uniform \([6,3,4]_q\) MDS/CSS
+specialization.  It is not a new LU--LC mechanism in the abstract.
+
+Finally, none of the results classifies nonlinear orthogonal arrays,
+arbitrary minimal-support AME tensors, non-MDS stabilizer states, or all
+stabilizer states over prime-power dimensions.  We do not claim that four
+copies are globally minimal, that \(z=2,4/9\) are orbit exceptions, or
+that a fixed copy degree separates all classes as \(q\) varies.  The
+logical-group theorem is restricted to the stated odd-field six-arc
+domain, the H3 theorem to odd good non-GRS reductions, and the detector
+exceptions in \((7.5)\) do not alter the characteristic-uniform rigidity
+theorem.

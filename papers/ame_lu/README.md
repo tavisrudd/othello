@@ -5,12 +5,13 @@ Six-Qudit AME Stabilizer Tensors.*
 
 **Lane:** `ame-lu`
 
-**Status:** theorem package and architecture frozen.  C560
+**Status:** complete first draft.  C560
 shows that every local-unitary intertwiner between equal-phase CSS states of
 linear `[6,3,4]_q` MDS codes is local Clifford.  C561 fixes the title,
 theorem hierarchy, exception table, and section order.  The paper-local
 evidence bundle and claim-specific literature audit are closed by C563 and
-C562.  The complete prose is not yet closed.
+C562.  C564 supplies an eleven-page warning-free first draft; formalization,
+adversarial revision, and release gates remain.
 
 The completion program is queued as C559--C572: theorem decision, theorem
 freeze, literature and reproducibility audits, first draft, four Lean theorem

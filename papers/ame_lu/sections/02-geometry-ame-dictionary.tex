@@ -1,6 +1,82 @@
-\section{From six-arcs to AME tensors}
+\section{Six-arcs, MDS codes, and CSS states}\label{sec:dictionary}
 
-This section will fix the projective, code-equivalence, stabilizer, and
-party-permutation conventions.  It will state the six-arc/MDS/CSS/AME
-dictionary used by every later theorem and identify the degenerate and
-$\GRS$ boundary loci.
+Let \(q=p^e\) and fix the additive character
+\(\chi(a)=\exp(2\pi i\,\Tr_{\F_q/\F_p}(a)/p)\).  On the standard basis of
+\(\mathbb C^q\), indexed by \(\F_q\), put
+\[
+ X(a)\lvert x\rangle=\lvert x+a\rangle,\qquad
+ Z(b)\lvert x\rangle=\chi(bx)\lvert x\rangle .
+\]
+For \(v=(a,b)\in\F_q^2\), write \(W_v=X(a)Z(b)\), with any fixed
+consistent phase convention.  The \(q^2\) operators \(W_v\) form an
+orthogonal basis of the single-party Hilbert--Schmidt space.  A unitary is
+Clifford when conjugation permutes their projective axes
+\(\mathbb C W_v\).
+
+A six-arc is an ordered sextuple of points of \(\PP^2(\F_q)\) with no
+three collinear.  Choose nonzero column representatives and collect them
+in a \(3\)-by-\(6\) matrix \(H\).  The arc condition says that every
+three-column minor of \(H\) is nonzero.  Consequently
+\[
+ C=\ker H\leq\F_q^6
+\]
+is an \([6,3,4]_q\) MDS code, and its dual
+\(C^\perp=\operatorname{rowspace}H\) is MDS with the same parameters.
+Conversely, a parity-check matrix of such a code supplies a six-arc.
+Projectivities, independent rescaling of columns, and permutation of
+columns correspond exactly to monomial equivalences of the kernels.
+
+\begin{proposition}[Arc--AME dictionary]\label{thm:dictionary}
+For a six-arc with kernel \(C\), the state \(\lvert\Psi_C\rangle\) in
+\((1.1)\) is a minimal-support stabilizer \(\AME(6,q)\) state.  Its
+projective Pauli-label Lagrangian is
+\[
+ L_C=(C\oplus0)+(0\oplus C^\perp)\leq\F_q^{12}.
+\]
+Monomial code equivalence, together with a party permutation, induces
+local-Clifford equivalence of the corresponding states.
+\end{proposition}
+
+\begin{proof}
+The operators \(X(c)\), \(c\in C\), fix the equal superposition.
+The operators \(Z(h)\), \(h\in C^\perp\), fix it because
+\(\chi(h\cdot c)=1\).  The two subgroups commute, and their label space
+has dimension six and is Lagrangian.
+
+For any three-coordinate set \(I\), puncturing \(C\) to \(I\) is
+bijective: injectivity follows from distance four and both spaces have
+dimension three.  In the partial trace of
+\(\lvert\Psi_C\rangle\langle\Psi_C\rvert\), equality on the complementary
+three coordinates therefore forces equality of the codewords, while the
+projection to \(I\) runs once through \(\F_q^3\).  Hence every
+three-party reduction is \(q^{-3}I\).  Smaller reductions are maximally
+mixed by tracing again, so the state is \(\AME(6,q)\).  Its support has
+the minimum possible size \(q^3\).
+
+A column multiplier \(x\mapsto ax\) is a single-party Clifford operation:
+it sends \(X(b)\) to \(X(ab)\) and \(Z(b)\) to \(Z(a^{-1}b)\).
+Projective row operations do not change the kernel, and column
+permutations permute parties.  This proves the last assertion.
+\end{proof}
+
+For a party set \(S\), let
+\[
+ L_C(S)=\{\ell\in L_C:\supp(\ell)\subseteq S\}.
+\]
+The stabilizer partial-trace formula gives
+\[
+ \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.1}
+\]
+This formula is the bridge used in both the rigidity proof and the
+marginal invariants below.  A Pauli-labelled quantity is not by itself an
+LU invariant; the invariant statements will always be expressed either
+as covariance of the reduced operators or as basis-free tensor
+contractions.
+
+The GRS boundary has a simple geometric meaning.  A dimension-three
+length-six generalized Reed--Solomon code is represented, up to column
+multipliers, by six points on a nonsingular conic in \(\PP^2\).  We use
+``GRS state'' for the state of any such code.  The non-GRS pencil in
+Section~\ref{sec:pencil} consists of arc matrices \(H_t\) away from that
+conic locus and from the other factors needed to keep the columns
+distinct and the displayed coordinates defined.

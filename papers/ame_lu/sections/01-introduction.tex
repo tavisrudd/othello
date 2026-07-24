@@ -1,15 +1,101 @@
 \section{Introduction}
 
-A six-point arc in the projective plane determines a length-six
-dimension-three MDS code and hence an equal-phase CSS stabilizer tensor.
-For odd local dimension this gives a concrete family of minimal-support
-$\AME(6,q)$ states in which projective geometry, coding equivalence, and
-local quantum equivalence can be compared exactly.
+An absolutely maximally entangled state has maximally mixed reductions on
+every subsystem no larger than half the parties.  At minimum support, a
+six-party state of local dimension \(q\) is naturally supplied by a
+length-six MDS code: if \(C\leq\F_q^6\) is linear of dimension three, then
+\[
+  \lvert\Psi_C\rangle
+    =q^{-3/2}\sum_{c\in C}\lvert c\rangle                       \tag{1.1}
+\]
+is \(\AME(6,q)\) exactly when \(C\) is \([6,3,4]_q\) MDS.  This
+code--state dictionary is standard
+\cite{RaissiGogolinRieraAcin2018}.  Our question is how much of the code
+geometry survives arbitrary single-party changes of basis.
 
-This draft separates three questions.  First, which tensors are equivalent
-under local Clifford operations?  Second, which geometric distinctions
-survive arbitrary local unitaries?  Third, when do the local-unitary and
-local-Clifford orbit partitions agree inside the non-$\GRS$ pencil?  The key
-rigidity theorem answers the third question at the stronger level of all
-equal-phase CSS states from linear $[6,3,4]_q$ MDS codes: every
-local-unitary intertwiner is local Clifford.
+The local-unitary versus local-Clifford problem is false for general
+stabilizer states \cite{JiChenWeiYing2008}.  It is therefore important that
+the following result concerns a specific MDS/CSS family and says more than
+equality of two orbit partitions.
+
+\begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
+Let \(q\) be a prime power and let \(C,D\leq\F_q^6\) be linear
+\([6,3,4]_q\) MDS codes.  Suppose that, for a party permutation \(\pi\),
+single-qudit unitaries \(U_1,\ldots,U_6\), and a phase \(\theta\),
+\[
+ (U_1\otimes\cdots\otimes U_6)\pi\lvert\Psi_C\rangle
+   =e^{i\theta}\lvert\Psi_D\rangle .
+\]
+Then every \(U_i\) normalizes the finite-field Weyl system.  In particular,
+the displayed equivalence is local Clifford.
+\end{theorem}
+
+The mechanism is visible in one reduced operator.  Shortening both \(C\)
+and \(C^\perp\) to four parties gives a \(q^2\)-element stabilizer
+subgroup.  At each retained party its \(q^2-1\) nonidentity elements run
+bijectively through the nonidentity Weyl operators.  After the identity
+term is removed, the four-party reduced state is therefore a diagonal
+four-way tensor on the full Weyl basis.  A contraction of such a tensor
+has rank one exactly on its coordinate axes.  Those axes are intrinsic,
+so any product unitary carrying one reduced state to another must permute
+the local Weyl axes.  This is precisely the Clifford condition.
+
+Rains used the corresponding three-Pauli tensor to determine the
+automorphisms of qubit distance-two codes \cite[Theorem~13]{Rains1999},
+and Van den Nest, Dehaene, and De Moor used that rigidity in their
+minimal-support criterion for qubit stabilizer states
+\cite{VanDenNestDehaeneDeMoor2005}.  Our argument is a finite-field
+extension of this axis-recovery mechanism.  To our knowledge, it gives
+the first LU-to-LC theorem in the exact scope of equal-phase CSS states
+from linear \([6,3,4]_q\) MDS codes, uniformly over prime-power \(q\).
+The qualifier is essential: arbitrary phased minimal-support
+\(\AME(6,d)\) states form infinitely many LU classes
+\cite{RamadasLakshminarayan2025}, and neither nonlinear orthogonal arrays
+nor general six-qudit stabilizer states are covered here.
+
+Our main application is the ordered pencil
+\[
+H_t=\bigl((0,1,1-t),(0,1,t-1),(1,1-t,0),(1,t-1,0),
+          (1,0,-t),(1,0,t)\bigr).                              \tag{1.2}
+\]
+On its admitted odd-characteristic non-GRS locus, define
+\[
+\begin{split}
+ A(t)&=-4t(t-1)^2,\\
+ B(t)&=(t^2-t+1)(t^2-3t+1),\\
+ z(t)&=\bigl(B(t)/A(t)\bigr)^2 .
+\end{split}                                                     \tag{1.3}
+\]
+Exact bracket identities show that \(z\) is the degree-eight projective
+quotient of the pencil.  Theorem~\ref{thm:lu-lc-rigidity} upgrades its
+local-Clifford classification to the following complete local result.
+
+\begin{corollary}[Classification of the admitted pencil]
+\label{cor:lu-lc-pencil}
+For admitted parameters \(t,u\) over any finite field of odd order, the
+following are equivalent:
+\[
+ H_t\sim_{\mathrm{proj}}H_u
+ \Longleftrightarrow
+ \ker H_t\sim_{\mathrm{mon}}\ker H_u
+ \Longleftrightarrow
+ \Psi_t\sim_{\LC}\Psi_u
+ \Longleftrightarrow
+ \Psi_t\sim_{\LU}\Psi_u
+ \Longleftrightarrow z(t)=z(u),
+\]
+where party permutations are allowed.
+\end{corollary}
+
+The rest of the paper separates classification from explicit scalar
+certificates.  Section~\ref{sec:dictionary} fixes the arc, code, Weyl, and
+AME conventions.  Section~\ref{sec:rigidity} proves the headline theorem.
+Section~\ref{sec:pencil} proves the \(z\)-classification, and
+Section~\ref{sec:logical} determines the logical-Clifford phase:
+\(\mathrm{SL}_2(q)\) on the GRS locus and a split torus off it.
+Section~\ref{sec:invariants} gives a uniform H3/GRS marginal separator, an
+exact four-copy \(q=13\) witness, and the generic-constancy obstruction for
+fixed-copy scalars.  Section~\ref{sec:transport} derives the exceptional
+divisor of the four-copy witness from a nine-dimensional transport
+operator.  Section~\ref{sec:verification} records the computational trust
+boundary and the precise scope of all results.

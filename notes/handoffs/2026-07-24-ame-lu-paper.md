@@ -2,8 +2,8 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper currently titled *Clifford Geometry and
-Local-Unitary Invariants of Six-Qudit AME Tensors*.
+**Purpose:** complete the paper titled *Local-Unitary Rigidity and Clifford
+Geometry of Six-Qudit AME Stabilizer Tensors*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
@@ -89,6 +89,18 @@ in memory; the complete standard-library replay passed under Python 3.13.12.
 The claim-level report records every domain, independent path, negative scope,
 and trust boundary.  See `2026-07-24-c563-ame-lu-evidence-package.md`.
 
+**C564 closed (2026-07-24): complete first manuscript draft.**  All eight
+sections now carry the frozen theorem spine: the title-page LU-intertwiner
+theorem, arc/MDS/CSS/AME dictionary, full-Weyl axis proof, exact
+`z`-classification, logical phase, H3 and q=13 LU certificates, fixed-copy
+generic constancy, transport divisor, and verification boundary.  Every stable
+label is synchronized with the ledgers.  `make check` produced a warning-free
+11-page PDF (132,775 bytes; SHA-256
+`a23aa69c7e55ccaf12135d517f35b98092f26d300f81c40e376de897bb187da3`);
+pages 1, 6, and 11 passed visual inspection.  The remaining proof-
+reconciliation and exposition risks are assigned to C565--C571 in the
+second-draft plan.  See `2026-07-24-c564-ame-lu-first-draft.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -124,9 +136,8 @@ as C559--C572.  Dependency order is authoritative:
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C564 is next: write the first complete manuscript draft against the frozen
-theorem hierarchy, C562 novelty boundary, and C563 evidence package.  C581 is a
-separately queued optional upgrade
+C565 is next: build the shared Lean convention and definition interface used
+by all four formal theorem packages.  C581 is a separately queued optional upgrade
 gate for basis-free phase-space reconstruction and quantitative approximate
 rigidity; neither is assumed by the completion program.
 

@@ -1,6 +1,121 @@
-\section{The four-copy transport sheaf}
+\section{The four-copy transport operator}\label{sec:transport}
 
-This section will replace the raw contraction matrix by the reduced
-transport operator, derive the exceptional divisor, and explain the
-associated orbit multiplicities.  The divisor records the jump locus of an
-explicit scalar LU certificate, not an exception to LU/LC rigidity.
+We now explain the rank jump behind \((6.4)\).  Fix the six copy
+permutations
+\[
+\boldsymbol\sigma=(1,(03)(12),(23),(02)(13),(01)(23),(021)).
+\]
+Let \(V\) be the three-dimensional message space and let
+\(g_i:V\to k\) be the six coordinate covectors.  Form a bipartite
+four-sheeted cover with vertices \(L_a,R_b\), \(0\leq a,b<4\), and a
+color-\(i\) edge from \(L_a\) to \(R_{\sigma_i(a)}\).  Put \(V\) at each
+vertex and \(k\) at each edge, using \(g_{p(i)}\) as both restriction
+maps for a party assignment \(p\in S_6\).  A global section is a tuple
+\((x_a,y_b)\in V^8\) satisfying
+\[
+ g_{p(i)}(x_a-y_{\sigma_i(a)})=0                       \tag{7.1}
+\]
+on all \(24\) edges.  The three-dimensional constant-section space is
+always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
+matrix in \((6.3)\).
+
+Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
+\(\sigma_i\) on \(U\).  In systematic code coordinates the first three
+rows are
+\[
+ Q=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
+\quad
+\begin{array}{ll}
+a=-2(t-1)^2,&b=-(t^2-t+1),\\
+c=-(t^2-3t+1),&d=-2(t-1).
+\end{array}
+\]
+If \(Y_k\in U\) are the three free copy vectors, then \((7.1)\) reduces
+to the \(9\)-by-\(9\) block transport operator
+\[
+ T_p=\bigl(Q_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.  \tag{7.2}
+\]
+The dimension identity
+\[
+ 21-\rank M_p=9-\rank T_p                              \tag{7.3}
+\]
+holds over every field where the pencil is defined.
+
+\begin{theorem}[Transport divisor]\label{thm:transport-divisor}
+On the admitted odd non-GRS pencil, the sheaf \((7.1)\) has a
+nonconstant section exactly on
+\[
+ (B^2-2A^2)(9B^2-4A^2)=0,
+\]
+or equivalently
+\[
+ (z-2)(9z-4)=0.                                       \tag{7.4}
+\]
+At a generic point above \(z=2\), exactly \(96\) party assignments have
+rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
+Every other assignment has rank \(21\).
+\end{theorem}
+
+\begin{proof}
+The coefficients satisfy
+\[
+ a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
+\]
+Expanding \(\det T_p\) by signed cycle covers gives three nonboundary
+relative-cover types:
+\[
+\begin{split}
+P_-&=AB(3B-2A),\\
+P_+&=AB(3B+2A),\\
+P_2&=A(B^2-2A^2).
+\end{split}
+\]
+With integral bases the determinants are respectively
+\[
+64d^3AB(3B-2A),\quad
+64d^3AB(3B+2A),\quad
+64d^3A(B^2-2A^2).
+\]
+All omitted factors are units on the admitted odd pencil.  The two signed
+types lie above \(w=B/A=\pm2/3\), hence \(z=4/9\); the third lies above
+\(z=2\).  Fraction-free elimination independently gives the same
+determinants and shows that the generic kernel is one-dimensional.
+
+The active party assignments form single double cosets.  For \(z=2\),
+their size is
+\[
+\frac{|S_4\times C_2|\,|D_8\times C_2|}{|C_2^3|}
+ =\frac{48\cdot16}{8}=96.
+\]
+For either signed \(z=4/9\) sheet, their size is
+\[
+\frac{|S_4|\,|S_4\times C_2|}{|S_3|}
+ =\frac{24\cdot48}{6}=192.
+\]
+The two signed double cosets are disjoint.  Equation~\((7.3)\) turns the
+one-dimensional transport kernels into rank \(20\) of the matching
+matrix and completes the proof.
+\end{proof}
+
+The exceptional arithmetic belongs to this detector, not to
+Theorem~\ref{thm:lu-lc-rigidity}.  The exact boundary is:
+\[
+\begin{array}{c|l}
+\operatorname{char}k&\text{effect on the transport divisor}\\ \hline
+2&\text{outside the odd-field pencil}\\
+3&\text{both admitted detector components disappear}\\
+5&z=4/9\text{ lies on the excluded GRS boundary; }z=2\text{ remains}\\
+7&\text{the two components merge; the rank histogram is }20^{288}21^{432}\\
+11,13,41&\text{pullback ramification only; no further rank drop.}
+\end{array}                                             \tag{7.5}
+\]
+At \(t=-1\), \(A=16\), \(B=15\), and the nonboundary exceptional primes
+are already visible in
+\[
+B^2-2A^2=-7\cdot41,\qquad
+9B^2-4A^2=7\cdot11\cdot13.
+\]
+The divisor records where one scalar contraction changes rank.  It is
+not an LU-orbit boundary and, by
+Proposition~\ref{thm:fixed-copy-boundary}, cannot be promoted to a
+generic coordinate.

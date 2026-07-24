@@ -1,24 +1,23 @@
 # Claim, proof, and novelty ledger
 
-No priority claim is authorized by this scaffold.  Every source named in a
-future related-work or novelty statement must carry the read depth required by
-`notes/literature-audit-conventions.md`.
+The first draft uses only the qualified novelty posture authorized by C562.
+Every computational result below is present in the C563 paper-local package.
 
 | Claim family | Mathematical proof status | Paper-local evidence | Literature status | Manuscript action |
 |---|---|---|---|---|
-| Six-arc/MDS/CSS/AME dictionary | proved in C374 and inherited source reports | not yet imported | inherited background audit must be reconciled | draft after conventions are frozen |
-| LC classification by `z` | proved in C396 | not yet imported | C396 audit exists; claim-specific refresh required | central theorem |
-| Logical-Clifford phase | proved in C397 | not yet imported | partial inherited audit | central operational theorem |
-| Uniform H3/GRS LU separation | proved in C402 | not yet imported | bounded audit exists | central LU theorem |
-| `q=13` arbitrary-LU separator | proved in C397 | not yet imported | no priority claim | exact exceptional example |
-| Pentad and signed-sheet forgetfulness | proved in C397/C546 | not yet imported | classical core must be credited | boundary result |
-| Four-copy divisor and transport sheaf | proved in C548/C550 | not yet imported | no paper-level audit | mechanism theorem after evidence import |
-| Generic constancy of fixed-copy contractions | proved in C559 | no new computation | unaudited; no priority claim | mechanism boundary explaining why the divisor is not a coordinate |
-| All-MDS/CSS LU-intertwiner rigidity and pencil `LU iff LC iff z` | proved in C560 | no computation required | C562 complete: Rains and Van den Nest et al. pre-empt the qubit axis-rigidity mechanism; no full-Weyl all-prime-power MDS/CSS predecessor located; qualified wording only | headline theorem with Rains--Van den Nest ancestry and “to our knowledge” |
+| Six-arc/MDS/CSS/AME dictionary | proved in Section 2 | C374 imported | standard AME--MDS source cited | `thm:dictionary` drafted |
+| LC classification by `z` | proved in Section 4 | C396 plus C395 input imported | no independent priority claim | `thm:lc-pencil` drafted |
+| Logical-Clifford phase | proved in Section 5 | C397 imported | no independent priority claim | `thm:logical-phase` drafted |
+| Uniform H3/GRS LU separation | proved in Section 6 | C402 imported | bounded source audit retained | `thm:lu-h3-grs` drafted |
+| `q=13` arbitrary-LU separator | proved in Section 6 | C397 imported | no priority claim | `thm:q13-lu` drafted |
+| Pentad and signed-sheet forgetfulness | stated with Fourier/isodual mechanism in Section 6 | C546 imported | classical pentad core not claimed as new | boundary paragraph drafted |
+| Four-copy divisor and transport operator | proved in Section 7 | C548/C550 imported | no independent priority claim | `thm:transport-divisor` drafted |
+| Generic constancy of fixed-copy contractions | proved in Section 6 | no new computation | no priority claim | `thm:fixed-copy-boundary` drafted |
+| All-MDS/CSS LU-intertwiner rigidity and pencil `LU iff LC iff z` | proved in Sections 3--4 | no computation required; C396 supports the corollary | C562 complete; Rains--Van den Nest ancestry and qualified exact-scope wording retained | `thm:lu-lc-rigidity` and `cor:lu-lc-pencil` drafted |
 
 ## Promotion rule
 
-A row may enter theorem prose only after:
+A row entered theorem prose only after:
 
 1. its exact hypotheses match the source report;
 2. every computational dependency is present in the paper-local manifest;

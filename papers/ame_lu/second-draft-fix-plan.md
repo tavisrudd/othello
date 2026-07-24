@@ -1,42 +1,47 @@
-# Draft completion and fix plan
+# Second-draft fix plan
 
-## Phase 0 — theorem decision
+## Closed before the first draft
 
-- C559 closed the fixed-copy invariant-field route and identified
-  rank-divisor rather than coordinate information.
-- C560 proved the stronger all-MDS/CSS LU-intertwiner rigidity theorem.
-- C561 must now freeze the exact theorem hierarchy, title, exception table,
-  and section architecture.
+- C559--C561 froze the theorem hierarchy, exact domains, title, and section
+  order.
+- C562 fixed the qualified novelty boundary and mandatory Rains--Van den Nest
+  ancestry.
+- C563 imported every retained computational bundle and passed the complete
+  deterministic replay.
+- C564 wrote all eight sections, synchronized every stable theorem label,
+  built an eleven-page warning-free PDF, and visually inspected the title,
+  middle theorem, and bibliography pages.
 
-## Phase 1 — evidence and literature
+## Remaining proof reconciliation
 
-- Import paper-local reproducibility bundles for every adopted computational
-  claim.
-- Reconcile source-report hypotheses and exception sets.
-- Complete the claim-specific literature audit; record read depths and coverage
-  gaps.
-- Freeze the theorem and verification maps.
+- C565--C569 must formalize the shared definitions and the four queued theorem
+  packages.  Until then, Section 8 correctly describes every Lean result as
+  future work rather than adopted evidence.
+- C570 must compare the formal statements with the manuscript definitions,
+  especially the finite-field Weyl phase convention, the shortened-stabilizer
+  plane, the projective quotient's admitted factors, and the transport
+  rank/determinant correspondence.
+- During C570, expand any manuscript bridge whose formal proof reveals a
+  hidden convention or stronger hypothesis.  The highest-risk bridges are the
+  labelled Gale-fixed/conic step in Theorem 5.1 and the passage from the
+  finite-subgroup classification to the exact H3/GRS involution bound in
+  Theorem 6.1.
 
-## Phase 2 — mathematical draft
+## Remaining exposition work
 
-- Write the dictionary and conventions.
-- State the principal theorem on page 1 or 2.
-- Separate LC classification, arbitrary-LU invariants, and logical operations.
-- Give the transport-sheaf mechanism before detailed orbit ledgers.
-- Keep exact finite data in tables or the supplement.
+- Re-read only theorem statements and section openings after formal
+  reconciliation; they must still present rigidity before scalar detectors.
+- Decide whether the logical-group order paragraph and detector exception
+  table belong in the body or a compact appendix after the second-draft page
+  count is known.
+- Add a stable public repository/archive identifier only at the release gate;
+  do not insert provisional links.
+- Check citation metadata against publisher records during C571.  No
+  unqualified priority claim may replace C562's “to our knowledge” wording.
 
-## Phase 3 — adversarial revision
+## Adversarial and release gates
 
-- Close every row in `adversarial-proof-evidence-audit.md`.
-- Read theorem statements and section openings as a standalone argument.
-- Check every language change: projective geometry, coding, stabilizers, and
-  tensor invariants.
-- Verify every hypothesis, quantifier, exception, label, and citation against
-  the maps.
-
-## Phase 4 — release candidate
-
-- Run `make check` and the full evidence replay.
-- Inspect page count, warnings, references, tables, and formulas in the PDF.
-- Obtain an independent mathematical cold read.
-- Prepare a clean public export with immutable source and evidence identifiers.
+- C571: run the adversarial audit against the rendered second draft, inspect
+  every page and float, and obtain a mathematically qualified cold read.
+- C572: replay from a clean public export, freeze the immutable evidence
+  manifest, verify source/PDF hashes, and close release metadata.

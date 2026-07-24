@@ -35,6 +35,9 @@
 \newcommand{\LC}{\mathrm{LC}}
 \newcommand{\AME}{\mathrm{AME}}
 \newcommand{\GRS}{\mathrm{GRS}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
 
 \title{Local-Unitary Rigidity and Clifford Geometry of
 Six-Qudit AME Stabilizer Tensors}
@@ -45,17 +48,21 @@ Six-Qudit AME Stabilizer Tensors}
 \maketitle
 
 \begin{abstract}
-This preparation draft organizes exact results on six-qudit,
-minimal-support absolutely maximally entangled stabilizer tensors arising
-from six-point projective arcs.  The present proved package classifies
-local-Clifford equivalence in a non-Reed--Solomon pencil by one projective
-scalar, detects a sharp change in the logical Clifford group at the
-Reed--Solomon locus, and constructs exact local-unitary invariants that
-separate the distinguished non-Reed--Solomon tensors from Reed--Solomon
-tensors.  We prove that every local-unitary intertwiner between equal-phase
-CSS states of linear $[6,3,4]_q$ MDS codes is local Clifford.  On the admitted
-odd non-Reed--Solomon pencil, local-unitary equivalence, local-Clifford
-equivalence, and equality of the projective scalar therefore coincide.
+Let \(C\) be a linear \([6,3,4]_q\) MDS code and let
+\(\lvert\Psi_C\rangle=q^{-3/2}\sum_{c\in C}\lvert c\rangle\) be its
+equal-phase CSS state.  We prove that every product-unitary intertwiner
+between two such states is local Clifford, for every prime power \(q\).
+The proof shortens the stabilizer to four parties.  Its nonidentity
+correlation tensor is diagonal on all \(q^2-1\) local Weyl axes, and the
+rank-one contraction locus recovers those axes intrinsically.  We apply
+this rigidity to an odd-characteristic non-Reed--Solomon pencil of
+six-point arcs.  Projective, monomial-code, local-Clifford, and
+local-unitary equivalence are all classified there by one degree-eight
+quotient \(z\).  We also determine the split-torus versus
+\(\mathrm{SL}_2(q)\) logical-Clifford phase, give exact marginal and
+four-copy local-unitary certificates, prove generic constancy of every
+fixed-copy scalar contraction on algebraic code families, and derive the
+rank-jump divisor \((z-2)(9z-4)\) from a four-sheet transport operator.
 \end{abstract}
 
 \input{sections/01-introduction}
@@ -66,5 +73,8 @@ equivalence, and equality of the projective scalar therefore coincide.
 \input{sections/06-lu-invariants}
 \input{sections/07-transport-sheaf}
 \input{sections/08-verification-boundary}
+
+\bibliographystyle{alpha}
+\bibliography{refs}
 
 \end{document}

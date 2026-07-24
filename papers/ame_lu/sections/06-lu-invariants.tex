@@ -1,6 +1,145 @@
-\section{Local-unitary invariants}
+\section{Explicit local-unitary invariants}\label{sec:invariants}
 
-This section will develop the marginal-moment formula and the exact
-copy-contraction invariants.  It will explain why these scalar certificates
-remain useful after the complete orbit theorem and why every fixed-copy
-contraction is generically constant on an algebraic equal-phase code family.
+Theorem~\ref{thm:lu-lc-rigidity} settles equivalence without scalar
+invariants.  Scalar witnesses remain useful because they are short,
+basis-free certificates and because their failures explain what the
+operator-valued marginal retains.
+
+\subsection{A marginal-moment separator}
+
+For a four-party set \(T\), let \(\rho_T\) be the reduced state and embed
+it into all six parties as
+\[
+ A_T=\rho_T\otimes I_{T^c}.
+\]
+For an unordered triple \(\{T,U,V\}\), the number
+\(\Tr(A_TA_UA_V)\) is invariant under arbitrary product unitaries; party
+permutation merely permutes the 455 triples.  By \((2.1)\),
+\[
+ \Tr(A_TA_UA_V)=q^{-\rank(L_C(T)+L_C(U)+L_C(V))}.       \tag{6.1}
+\]
+
+Index a four-set by its omitted pair, an edge of \(K_6\).  The rank in
+\((6.1)\) is four exactly when the three corresponding chord lines
+concur in both the six-arc \(\mathcal A\) and its Gale dual
+\(\mathcal A^*\).  Sixty triples are stars and concur universally.  The
+only other possible contributors are the fifteen perfect matchings.
+Hence
+\[
+\#\{q^{-4}\text{ moments}\}=60+b(\mathcal A,\mathcal A^*),     \tag{6.2}
+\]
+where \(b\) counts perfect matchings concurrent in both configurations.
+
+\begin{theorem}[Uniform H3/GRS separation]\label{thm:lu-h3-grs}
+Let \(\tau^2=\tau+1\), and reduce the integral H3 six-arc
+\[
+((0,1,1-\tau),(0,1,\tau-1),(1,1-\tau,0),(1,\tau-1,0),
+ (1,0,-\tau),(1,0,\tau))
+\]
+in an odd good residue field.  If the reduction is non-GRS, its
+equal-phase state is not LU-equivalent, even after party permutation, to
+any six-point GRS state over the same field.
+\end{theorem}
+
+\begin{proof}
+Exact integral chord determinants give ten common concurrent matchings
+for the H3 arc and its Gale dual.  The other five determinant norms are
+\(-64\) and \(-4\), so the count is exactly ten in every odd good
+reduction.  The H3 moment multiset therefore contains \(70\) copies of
+\(q^{-4}\).
+
+For six points \(S\) on a conic, a concurrent perfect matching is the
+orbit pairing of a fixed-point-free involution in
+\(\operatorname{Stab}_{\mathrm{PGL}_2(q)}(S)\).  A projectivity fixing
+three points is the identity, so this group acts freely on ordered
+triples and its order divides \(120\).  The finite subgroups of
+\(\mathrm{PGL}_2\), including the small wild-characteristic cases, show
+that outside characteristic five the number of fixed-point-free
+involutions is in
+\[
+\{0,1,2,3,4,6\}.
+\]
+Thus a GRS state has at most \(66\) copies of \(q^{-4}\).  In
+characteristic five the exceptional \(120\)-element action has ten, but
+the H3 reduction is itself GRS there and is excluded by the theorem's
+hypothesis.  Equation~\((6.1)\) is LU-invariant, so the gap proves the
+claim.
+\end{proof}
+
+The five nonconcurrent H3 matchings form a one-factorization of \(K_6\).
+The marginal incidence recovers its \(S_5\) stabilizer but forgets the
+even \(A_5\) orientation.  This is necessary: full local Fourier
+transform sends \(\Psi_C\) to \(\Psi_{C^\perp}\), and an integral
+isoduality returns the H3 code through an odd pentad permutation in every
+odd reduction.  The orientation is an LC-forgettable CSS
+electric/magnetic marking, not a separate LU class.
+
+\subsection{The exact dimension-thirteen four-copy witness}
+
+For \(m\) ket copies and \(m\) bra copies, choose a permutation
+\(\sigma_i\in S_m\) at each party and contract ket copy \(a\) with bra
+copy \(\sigma_i(a)\).  If \(G\) generates a three-dimensional code, let
+\(M_{\boldsymbol\sigma}(G)\) be the homogeneous matching system
+\[
+ (u_aG)_i=(v_{\sigma_i(a)}G)_i
+ \quad(1\leq i\leq6,\ 1\leq a\leq m).
+\]
+Counting its solutions gives the normalized contraction
+\[
+ I_{\boldsymbol\sigma}(\Psi_C)
+   =q^{3m-\rank M_{\boldsymbol\sigma}(G)}.              \tag{6.3}
+\]
+
+\begin{theorem}[Exact four-copy separator at \(q=13\)]
+\label{thm:q13-lu}
+The two admitted \(q=13\) pencil classes with \(z=4\) and \(z=12\) are
+not local-unitary equivalent, even after arbitrary party permutation.
+\end{theorem}
+
+\begin{proof}
+At \(q=13\), the admitted pencil has two classes in the same complete
+three-copy and marginal-moment bucket, with \(z=4\) and \(z=12\).
+For one explicit four-copy pattern, sum \((6.3)\) over all party
+permutations:
+\[
+ J_{\boldsymbol\sigma}(\Psi)
+   =\sum_{\pi\in S_6}I_{\pi\boldsymbol\sigma}(\Psi).
+\]
+The \(z=4\) class has rank \(21\) for all \(720\) terms.  The \(z=12\)
+class has rank \(20\) for \(192\) terms and rank \(21\) for \(528\).
+Therefore
+\[
+ J_{\boldsymbol\sigma}(z=4)=720\cdot13^{-9},\qquad
+ J_{\boldsymbol\sigma}(z=12)=3024\cdot13^{-9}.          \tag{6.4}
+\]
+This proves arbitrary-LU inequivalence directly.  The complete two- and
+three-copy contraction sets do not separate this pair; \((6.4)\) makes no
+claim that four copies are globally minimal.
+\end{proof}
+
+\subsection{Why fixed-copy scalars cannot recover the pencil coordinate}
+
+\begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
+Fix \(m\).  On any algebraic family of equal-phase states of linear
+codes, every degree-\((m,m)\) permutation contraction is constant on a
+dense open rank stratum.  The same holds for party-orbit sums and linear
+combinations.  In the stable range \(q\geq m\), all scalar LU invariants
+of bidegree \((m,m)\) are generically constant on the family.
+\end{proposition}
+
+\begin{proof}
+Formula~\((6.3)\) depends only on the rank of a matrix whose entries are
+regular functions of the family parameter.  A maximal nonzero minor
+shows that this rank is constant on a dense open set.  There are only
+finitely many diagrams at fixed \(m\), so their generic-rank opens have a
+common dense intersection.  In the stable Schur--Weyl range the local
+permutation diagrams span the multilinear LU invariants, proving the
+last statement.
+\end{proof}
+
+For the pencil, the field generated by the generic four-copy contraction
+values is therefore constant, not \(\mathbb Q(z)\).  The witness
+\((6.4)\) detects a rank-jump stratum.  In contrast, the four-party
+operator tensor \((3.3)\) retains the Weyl axes and forces Cliffordness.
+This is the precise distinction between scalar blindness and marginal
+covariant rigidity.

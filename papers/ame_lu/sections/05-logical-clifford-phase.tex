@@ -1,5 +1,60 @@
-\section{The logical-Clifford phase}
+\section{The logical-Clifford phase}\label{sec:logical}
 
-This section will compare the fixed-party logical symplectic kernels on
-the $\GRS$ and non-$\GRS$ loci and explain the resulting operational
-distinction in each encoder view.
+Regard any one party of an \(\AME(6,q)\) stabilizer tensor as an input and
+the other five as outputs.  This is a \([[5,1,3]]_q\) encoding isometry.
+A tensor symmetry fixing every party induces a one-qudit logical
+symplectic transformation in that view.
+
+\begin{theorem}[Logical phase]\label{thm:logical-phase}
+For an equal-phase CSS state from a six-arc over a field of odd order, the
+fixed-party symplectic kernel is
+\[
+\begin{cases}
+\mathrm{SL}_2(q),&\text{if the arc is conic/GRS},\\
+T=\{\diag(a,a^{-1}):a\in\F_q^\times\},&\text{if the arc is nonconic}.
+\end{cases}                                             \tag{5.1}
+\]
+Thus every encoder view of a GRS tensor realizes the full one-qudit
+logical Clifford group from fixed-party symmetries.  Off the GRS locus,
+the fixed-party logical group is the split torus; adding party-moving
+isodualities gives its normalizer.
+\end{theorem}
+
+\begin{proof}
+Every four-party support carries the two-dimensional shortened label
+plane \((3.2)\), and projection to the Pauli plane of any retained party
+is an isomorphism.  For a fixed party permutation, one anchor block in
+\(\mathrm{SL}_2(q)\) therefore forces the other five local symplectic
+blocks through overlaps of the shortened supports.  Satisfying all
+support relations is necessary and sufficient for preserving the full
+Lagrangian.
+
+Diagonal anchor blocks always propagate and give \(T\).  If an anchor has
+a nonzero off-diagonal entry, the overlap equations force a
+coordinatewise scaling equivalence between \(C\) and \(C^\perp\).  In the
+arc language, the labelled six-arc must be fixed by Gale association.
+For six points in \(\PP^2\), that fixed divisor is precisely the conic
+locus.  On a conic, the usual GRS dual multipliers propagate every anchor
+in \(\mathrm{SL}_2(q)\); off the conic, only diagonal anchors survive.
+\end{proof}
+
+The distinction is operational rather than a classical automorphism
+count.  Including logical Paulis, the projective logical Clifford group
+has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\) on the GRS locus, whereas
+the non-GRS encoder view has \(q^2\cdot2(q-1)\) after the party-moving
+normalizer is included.  At \(q=11\), these orders are \(159720\) and
+\(2420\), respectively.
+
+The MDS property also makes minimum operator pushing uniform.  For any
+input party and nonidentity Pauli label, each of the ten four-sets
+containing that party gives a unique stabilizer representative supported
+there.  Removing the input leaves a weight-three output Pauli.  Thus each
+input Pauli has exactly ten minimum-support pushes, although the symmetry
+orbits of those pushes can distinguish finer projective classes.
+
+Arithmetic symmetry jumps do not change the phase.  The
+characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
+and retains the full \(\mathrm{SL}_2(17)\) kernel.  The
+characteristic-\(31\) non-GRS \(A_5\) specialization retains only the
+split torus.  These are symmetry enhancements inside the two phases, not
+exceptions to \((5.1)\).

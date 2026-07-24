@@ -1,9 +1,88 @@
-\section{Four-party Weyl tensors and local-unitary rigidity}
+\section{Four-party Weyl tensors and LU rigidity}\label{sec:rigidity}
 
-This section will prove the headline theorem.  MDS shortening on four
-parties gives a \(q^2\)-element stabilizer subgroup whose nonidentity
-correlation tensor is diagonal on the full local Weyl basis.  The
-rank-one contraction axes of a diagonal tensor of order at least three are
-intrinsic.  Product-unitary equivalence therefore forces every local
-adjoint action to permute Weyl axes and hence to be Clifford.  Two
-four-party marginals covering all six parties suffice.
+We first isolate the linear-algebra statement that recovers a diagonal
+tensor's coordinate axes.  It is the full-Weyl counterpart of the
+three-Pauli argument in \cite{Rains1999,VanDenNestDehaeneDeMoor2005}.
+
+\begin{lemma}[Diagonal-tensor axes]\label{lem:diagonal-axes}
+Let \(r\geq3\), let \(E_1,\ldots,E_r\) be \(N\)-dimensional complex inner
+product spaces, and choose orthonormal bases
+\(\{e_{ij}:1\leq j\leq N\}\).  If
+\[
+ T=\sum_{j=1}^N\lambda_j
+ e_{1j}\otimes\cdots\otimes e_{rj},\qquad \lambda_j\ne0,       \tag{3.1}
+\]
+then the coordinate axes in every \(E_i\) are intrinsic to \(T\).
+Consequently, a product of invertible linear maps carrying one tensor of
+the form \((3.1)\) to another is monomial in the displayed bases.
+\end{lemma}
+
+\begin{proof}
+Contract the first factor against
+\(x=\sum_jx_je_{1j}^*\).  The result is
+\[
+ T_x=\sum_j\lambda_jx_j e_{2j}\otimes\cdots\otimes e_{rj}.
+\]
+Flattening from \(E_2\) to \(E_3\otimes\cdots\otimes E_r\) gives a matrix
+of rank \(\#\{j:x_j\ne0\}\).  Thus \(T_x\) has rank one exactly when
+\(x\) lies on a coordinate axis.  Product equivalence preserves this
+rank-one contraction locus, and hence permutes the axes in the first
+factor.  Apply the same argument in every factor.
+\end{proof}
+
+Fix a four-party set \(S\).  Shortening an \([6,3,4]\) MDS code on the two
+coordinates outside \(S\) leaves a one-dimensional code.  Choose nonzero
+shortened words \(c^S\in C\) and \(h^S\in C^\perp\).  Each has support
+exactly \(S\), and
+\[
+ L_C(S)=
+ \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.2}
+\]
+At a party \(i\in S\), projection of this plane to the local Pauli labels
+is
+\[
+ (a,b)\longmapsto(ac_i^S,bh_i^S),
+\]
+which is invertible because both coordinates are nonzero.  Thus the
+\(q^2-1\) nonidentity labels in \(L_C(S)\) run bijectively through the
+nonidentity Weyl labels at every party of \(S\).
+
+\begin{proposition}[A four-party marginal fixes the local Weyl axes]
+\label{prop:marginal-axes}
+If a product unitary on \(S\) carries \(\rho^C_S\) to \(\rho^D_S\), then
+every one of its four local factors is Clifford.
+\end{proposition}
+
+\begin{proof}
+Subtract the identity term from \((2.1)\) and view the result as a tensor
+in the four local Hilbert--Schmidt spaces.  By \((3.2)\), after indexing
+the nonzero label \(v=(a,b)\), it has the form
+\[
+ T^C_S=\sum_{v\in\F_q^2\setminus\{0\}}\lambda_v
+ W_{L_1v}\otimes W_{L_2v}\otimes W_{L_3v}\otimes W_{L_4v},     \tag{3.3}
+\]
+where every \(L_i\) is invertible and every coefficient \(\lambda_v\) is
+nonzero.  This is a diagonal tensor with \(N=q^2-1\).
+
+Local conjugation fixes the identity and acts unitarily on each
+Hilbert--Schmidt space.  Lemma~\ref{lem:diagonal-axes} therefore forces
+each local adjoint action to permute the axes
+\(\mathbb CW_v\), \(v\ne0\).  It also fixes the identity axis, so the
+underlying unitary normalizes the projective Weyl group.  This is the
+single-qudit Clifford condition.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
+Absorb the party permutation by relabelling \(D\).  Partial trace of the
+six-party equivalence gives a product-unitary equivalence
+\(\rho^C_S\sim\rho^D_S\) for every four-set \(S\).  Given a party \(i\),
+choose a four-set containing it and apply
+Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
+\end{proof}
+
+Only two marginals are needed if their supports cover all six parties;
+for example \(S=\{1,2,3,4\}\) and \(S'=\{1,2,5,6\}\).  More generally, the
+proof applies whenever every party belongs to a support of size at least
+three whose supported stabilizer subgroup has order \(q^2\) and projects
+bijectively onto all nonzero local Weyl labels.  We use only the
+\([6,3,4]\) MDS specialization.
