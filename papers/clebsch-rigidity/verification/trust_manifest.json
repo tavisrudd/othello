@@ -1555,12 +1555,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "a95f15723275ff17b292862653fc5efbafd706f4fdf77d06942079999aab5fe3"
+        "sha256": "1b4d870b013c461a9cbd0e4afae458cc16060edb127fc375d66cb85c65b498b0"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "e91236cd2a1942393a9f460bfef4ba2431cf70f148c2db48052b8cd753e1d3c0"
+        "sha256": "8fe7a23fdb32a71f5a1d1326cc07a9a246d61ae2245fff2f1b3fbd26fc02cf9a"
       }
     ]
   }

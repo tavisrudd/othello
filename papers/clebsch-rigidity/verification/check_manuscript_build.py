@@ -50,12 +50,12 @@ def main() -> int:
         if match is None:
             raise RuntimeError("manuscript log contains no page count")
         pages = int(match.group(1))
-        if pages != 19:
+        if pages != 20:
             raise RuntimeError(f"manuscript page count changed: {pages}")
         built_pdf = build_root / "clebsch_rigidity.pdf"
         if not built_pdf.is_file() or built_pdf.stat().st_size == 0:
             raise RuntimeError("manuscript build produced no PDF")
-    print("manuscript_pages=19 warnings=0 pdf=produced")
+    print("manuscript_pages=20 warnings=0 pdf=produced")
     return 0
 
 
