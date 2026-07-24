@@ -317,6 +317,13 @@ every field covered by C402. C546 is consequently a discrete component/lift clas
 positive-dimensional unitary search. This Fourier tangent lemma is a task-owned feasibility
 reduction; no novelty wording is attached before C546's audit.
 
+The proof has a portable form. For any equal-phase state of a finite-field linear code with
+`d(C)>=3` and `d(C^perp)>=3`, radius-one disjointness kills the off-diagonal tangent entries and
+dual distance three makes the coordinate-functional frequency lines distinct. Hence its connected
+local-unitary stabilizer is again only local scalar gauge. C546 should package this general lemma
+while using only the `[6,3,4]` instance for the orientation decision; prior-art positioning of the
+portable statement remains part of C546's audit.
+
 There is also a direct hand-back to C396. Its recorded q=13 collision
 `((4,66),(6,389))` says geometrically that both non-GRS pencil classes have six common concurrent
 matchings with their Gale duals. C396 should compare those six-match configurations before doing

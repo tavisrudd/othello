@@ -48,7 +48,7 @@ The attacks are staged but none is individually the task.
 C402's `ej3` pass gives the hand proof: distance four kills every off-diagonal infinitesimal local
 generator, and additive Fourier support on the six distinct coordinate-functional lines kills
 every nonconstant diagonal generator. Reprove this in C546's exact tensor conventions and package
-it as the first theorem:
+it first in the portable form `d(C)>=3`, `d(C^perp)>=3`, then specialize:
 
 ```text
 Lie(Stab_LU(Psi_H3)) / Lie(local scalar gauge) = 0.
