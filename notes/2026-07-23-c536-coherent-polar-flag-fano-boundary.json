@@ -1,0 +1,307 @@
+{
+  "nonzero_lucas_lifts": [
+    {
+      "characteristic": 3,
+      "first_nucleus_order_with_support": 2,
+      "lower_degree": 3,
+      "nucleus_support": [
+        1,
+        2
+      ],
+      "upper_consecutive_lift": [
+        2
+      ],
+      "upper_vector_rank": 1
+    },
+    {
+      "characteristic": 2,
+      "first_nucleus_order_with_support": 3,
+      "lower_degree": 4,
+      "nucleus_support": [
+        1,
+        2,
+        3
+      ],
+      "upper_consecutive_lift": [
+        2,
+        3
+      ],
+      "upper_vector_rank": 2
+    },
+    {
+      "characteristic": 2,
+      "first_nucleus_order_with_support": 3,
+      "lower_degree": 5,
+      "nucleus_support": [
+        2,
+        3
+      ],
+      "upper_consecutive_lift": [
+        3
+      ],
+      "upper_vector_rank": 1
+    },
+    {
+      "characteristic": 5,
+      "first_nucleus_order_with_support": 4,
+      "lower_degree": 5,
+      "nucleus_support": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "upper_consecutive_lift": [
+        2,
+        3,
+        4
+      ],
+      "upper_vector_rank": 3
+    },
+    {
+      "characteristic": 3,
+      "first_nucleus_order_with_support": 5,
+      "lower_degree": 6,
+      "nucleus_support": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "upper_consecutive_lift": [
+        2,
+        5
+      ],
+      "upper_vector_rank": 2
+    },
+    {
+      "characteristic": 5,
+      "first_nucleus_order_with_support": 4,
+      "lower_degree": 6,
+      "nucleus_support": [
+        2,
+        3,
+        4
+      ],
+      "upper_consecutive_lift": [
+        3,
+        4
+      ],
+      "upper_vector_rank": 2
+    },
+    {
+      "characteristic": 5,
+      "first_nucleus_order_with_support": 4,
+      "lower_degree": 7,
+      "nucleus_support": [
+        3,
+        4
+      ],
+      "upper_consecutive_lift": [
+        4
+      ],
+      "upper_vector_rank": 1
+    },
+    {
+      "characteristic": 7,
+      "first_nucleus_order_with_support": 6,
+      "lower_degree": 7,
+      "nucleus_support": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "upper_consecutive_lift": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "upper_vector_rank": 5
+    },
+    {
+      "characteristic": 2,
+      "first_nucleus_order_with_support": 7,
+      "lower_degree": 8,
+      "nucleus_support": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "upper_consecutive_lift": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "upper_vector_rank": 6
+    },
+    {
+      "characteristic": 7,
+      "first_nucleus_order_with_support": 6,
+      "lower_degree": 8,
+      "nucleus_support": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "upper_consecutive_lift": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "upper_vector_rank": 4
+    }
+  ],
+  "polar_minor_span": [
+    {
+      "coefficient_rows": 0,
+      "ranks_mod_primes": {
+        "101": 0,
+        "11": 0,
+        "2": 0,
+        "3": 0,
+        "5": 0,
+        "7": 0
+      },
+      "target_hankel_minors": 1,
+      "upper_degree": 4
+    },
+    {
+      "coefficient_rows": 4,
+      "ranks_mod_primes": {
+        "101": 4,
+        "11": 4,
+        "2": 4,
+        "3": 4,
+        "5": 4,
+        "7": 4
+      },
+      "target_hankel_minors": 4,
+      "upper_degree": 5
+    },
+    {
+      "coefficient_rows": 16,
+      "ranks_mod_primes": {
+        "101": 10,
+        "11": 10,
+        "2": 10,
+        "3": 10,
+        "5": 10,
+        "7": 10
+      },
+      "target_hankel_minors": 10,
+      "upper_degree": 6
+    },
+    {
+      "coefficient_rows": 40,
+      "ranks_mod_primes": {
+        "101": 20,
+        "11": 20,
+        "2": 20,
+        "3": 20,
+        "5": 20,
+        "7": 20
+      },
+      "target_hankel_minors": 20,
+      "upper_degree": 7
+    },
+    {
+      "coefficient_rows": 80,
+      "ranks_mod_primes": {
+        "101": 35,
+        "11": 35,
+        "2": 35,
+        "3": 35,
+        "5": 35,
+        "7": 35
+      },
+      "target_hankel_minors": 35,
+      "upper_degree": 8
+    },
+    {
+      "coefficient_rows": 140,
+      "ranks_mod_primes": {
+        "101": 56,
+        "11": 56,
+        "2": 56,
+        "3": 56,
+        "5": 56,
+        "7": 56
+      },
+      "target_hankel_minors": 56,
+      "upper_degree": 9
+    },
+    {
+      "coefficient_rows": 224,
+      "ranks_mod_primes": {
+        "101": 84,
+        "11": 84,
+        "2": 84,
+        "3": 84,
+        "5": 84,
+        "7": 84
+      },
+      "target_hankel_minors": 84,
+      "upper_degree": 10
+    },
+    {
+      "coefficient_rows": 336,
+      "ranks_mod_primes": {
+        "101": 120,
+        "11": 120,
+        "2": 120,
+        "3": 120,
+        "5": 120,
+        "7": 120
+      },
+      "target_hankel_minors": 120,
+      "upper_degree": 11
+    },
+    {
+      "coefficient_rows": 480,
+      "ranks_mod_primes": {
+        "101": 165,
+        "11": 165,
+        "2": 165,
+        "3": 165,
+        "5": 165,
+        "7": 165
+      },
+      "target_hankel_minors": 165,
+      "upper_degree": 12
+    }
+  ],
+  "schema": "c536-coherent-polar-flag-fano-boundary-v1",
+  "scope": {
+    "lucas_lower_degrees": [
+      2,
+      8
+    ],
+    "polar_upper_degrees": [
+      4,
+      12
+    ],
+    "rank_check_primes": [
+      2,
+      3,
+      5,
+      7,
+      11,
+      101
+    ]
+  }
+}

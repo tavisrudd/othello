@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C535, C538--C544, C578 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C536, C538--C544, C578 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -92,8 +92,13 @@ and nonsingular Arf torsor commute with arbitrary base change, while residual fa
 requires flat/Cartier-preserving base change.  The first higher-degree test is decisive:
 quartics retain the square-Hessian failure but have the established direct modular invariant
 `i_3`; the ordered separable construction is cubic-local and becomes all-degree only after
-canonical contraction.  C536's coherent modular polar flags are now the highest-EV executable
-follow-up without displacing C538/C545.  A late theorem-text check of
+canonical contraction.  C536 now proves the sharp componentwise Fano theorem:
+from upper degree five onward, consecutive polar-line containment in the lower rank-two Hankel
+scheme is exactly the upper rank-two scheme over `Z`, while every modular-nucleus flag is the
+linear Lucas adjacent-run pullback.  Degree four is the sharp vacuous boundary, the first
+separated modular component is C498's characteristic-two line, and the C498/C509/C513/C516
+contained calculations are uniform corollaries.  Voisin's positive-genus theorem does not cover
+the NRC case; no third component occurs inside the secant/nucleus functor.  A late theorem-text check of
 Flatland Theorem 6 exposed an explicit three-or-more-view joint-consistency gap that C481--C485
 may resolve; C537 owns only the exact functor comparison before any paper claim.  The pending
 `arcs`/`continuation` portfolio still owns deletion and continuation reconstruction.  Lucas root
@@ -709,8 +714,8 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | complete (characterized stop) | maximal base-scheme naturality; Arf torsor; quartic `i_3` prior-art boundary; cubic-local all-degree contraction theorem | modular replacement theorem boundary |
-| C536 | coherent polar-flag Fano boundary | queued; C535 gate green | C512/C529 plus C534/C535 boundary | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
-| C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
+| C536 | coherent polar-flag Fano boundary | complete | integral secant pullback from degree five; sharp degree-four failure; Lucas adjacent-run theorem; C498/C509/C513/C516 corollaries | no third component in the componentwise secant/nucleus functor | abstract modular flag theorem boundary |
+| C537 | Flatland--Gale multi-view comparison | queued; C536 gate green | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 | C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
 | C545 | proof-complete preprint and DOI after second-draft gates | active; new cold-review revision closes the printed dependency map, R5 representatives/count equalities, coding payoff, and 19-source literature pass; release blocked | C543--C544 aggregate, two independent readers, clean export/replay, immutable release bundle, author confirmation | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, separate radius- and witness-based classification routes, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
@@ -732,10 +737,9 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C536 | executable; C535 gate green | could replace repeated level-specific contained-component calculations by a coherent Fano-boundary theorem |
-| 2 | C533 | executable independently | cheap uniform constant improvement, valuable but does not change the classification architecture |
-| 3 | C537 | after C536 | high-upside reconstruction comparison, but downstream of the modular theorem spine |
-| 4 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
+| 1 | C533 | executable independently | cheap uniform constant improvement, valuable but does not change the classification architecture |
+| 2 | C537 | executable; C536 gate green | high-upside reconstruction comparison, now unblocked by the modular theorem spine |
+| 3 | C545 | externally blocked | release value is high, but no mathematical move is executable before the reader/export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -794,11 +798,11 @@ history.
 
 ## Next command
 
-`go C536`
+`go C533`
 
-(C535 has characterized the reusable Hessian--Arf theorem as cubic-local and
-base-change-natural before residualization, with the direct quartic invariant
-properly excluded as prior art. C536 is now the highest-EV executable successor
-and tests the coherent polar-flag/Fano boundary. C545 remains externally
+(C536 has closed the coherent polar-flag/Fano boundary with an integral
+secant-pullback theorem and exact Lucas adjacent-run rule. C533 is now the
+highest-EV executable successor and sharpens C525's threshold/deletion constants;
+C537's Flatland--Gale comparison is also unblocked. C545 remains externally
 blocked on its final reader, clean export/replay, immutable identifiers, and author/account
 confirmation. No external upload is authorized.)

@@ -201,3 +201,26 @@ all-degree through the canonical contraction `Gamma^n E -> Gamma^3 E`; C525's co
 consecutive-Hankel pullback remains its nonclassical PRS clause.  The full-text audit also finds
 Reeder--Yu's cubic square-root discriminant, so that classical modular observation is explicitly
 excluded.  C536 is unblocked as the next coherent polar-flag/Fano test.
+
+## 2026-07-24 — C536 coherent polar-flag Fano boundary
+
+C536 closes at the success exit.  For every upper degree `n>=5`, the coefficient ideal obtained
+by requiring the entire consecutive polar line to lie in the lower rank-two Hankel scheme is
+exactly the upper `3 x (n-1)` Hankel-minor ideal over `Z`.  Degree four is the sharp failure:
+the lower twisted-cubic secant fills its ambient `P3`, so every quartic polar line is contained
+although the upper quartic secant remains a cubic hypersurface.
+
+For a modular NRC nucleus with Lucas support `S`, the coherent pullback is the reduced linear
+scheme on indices `j` with both `j-1,j in S`; an iterated flag of length `ell` is exactly a run
+of `ell+1` supported indices.  The complete table through lower degree seven recovers C498's
+characteristic-two line, C509's central point, C513's characteristic-three/five lines, and C516's
+characteristic-five point and characteristic-seven binary-quartic carrier.  Existing arithmetic
+witnesses still decide which candidate nuclei are actually lower bad components.
+
+The full-text comparison corrects the prior classical shorthand: Voisin's only-obvious-secants
+theorem assumes positive genus and does not cover rational normal curves.  Conca--Mostafazadehfard--
+Singh--Varbaro supply the arbitrary-characteristic Hankel/secant scheme, and
+Gmainer--Havlicek supply the nucleus supports; neither states the consecutive ideal identity or
+adjacent-run rule.  No third component occurs in C536's componentwise secant/nucleus functor.
+Cyclic/wild residual carriers remain C512's level-specific boundary, and C531's degree-nine
+arithmetic remains untouched.

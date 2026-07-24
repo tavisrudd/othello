@@ -79,6 +79,17 @@ and must retain “equal-phase CSS”; arbitrary phased `AME(6,d)` states have
 infinitely many LU classes.  See
 `2026-07-24-c562-ame-lu-literature-audit.md`.
 
+**C580 closed (2026-07-24): bounded scalar blindness versus marginal
+covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
+`M`-dependent characteristics and for all sufficiently large `q`, two
+admitted states with different `z` agree on every scalar LU invariant through
+bidegree `(M,M)`.  C559's common generic-rank open and C396's degree-eight
+quotient prove existence, while C560 shows that the states are nevertheless
+LU-inequivalent because the one-copy four-party marginal covariants retain
+the local Weyl axes.  This is an optional synthesis corollary, not a change
+to C561's headline or an independent priority claim.  See
+`2026-07-24-c580-scalar-covariant-separation.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -96,7 +107,9 @@ as C559--C572.  Dependency order is authoritative:
 
 C563 is next.  It imports only the computations retained by C561's
 hierarchy.  C562's qualified wording is the binding novelty boundary for
-the first manuscript draft.
+the first manuscript draft.  C581 is a separately queued optional upgrade
+gate for basis-free phase-space reconstruction and quantitative approximate
+rigidity; neither is assumed by the completion program.
 
 ## Completion gates
 

@@ -1,6 +1,6 @@
 # C536 — coherent polar-flag Fano boundary
 
-**Lane:** `reed-solomon` · **Status:** queued after C535; second-ranked C534 survivor
+**Lane:** `reed-solomon` · **Status:** complete at the componentwise Fano success exit
 
 ## Objective
 
@@ -43,6 +43,24 @@ and isolate exactly what remains beyond classical Fano-scheme results.
   translation.
 
 No manuscript prose, C531 displacement, or ambient syndrome census is authorized.
+
+## Completion
+
+`notes/2026-07-23-c536-coherent-polar-flag-fano-boundary.md` proves:
+
+- the integral coherent-polar identity
+  `CFano_n(Sigma_{2,n-1}) = Sigma_{2,n}` for every upper degree `n>=5`,
+  with the sharp vacuous failure at degree four;
+- the scheme-theoretic Lucas adjacent-run rule for arbitrary flag length;
+- the complete nonzero consecutive nucleus table through lower degree seven;
+  and
+- the C498/C509/C513/C516 component calculations as corollaries.
+
+The full-text comparison corrects the classical boundary: Voisin's
+only-obvious-secants theorem assumes positive genus and does not cover a
+rational normal curve.  No third component occurs in the componentwise
+secant/nucleus functor; cyclic/wild residual carriers remain C512's
+level-specific lower-package boundary.
 
 ## Owned paths
 
