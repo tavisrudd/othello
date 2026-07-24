@@ -1,12 +1,23 @@
 # Paper: Beyond redundancy four for projective Reed--Solomon codes
 
-**Working title:** *Beyond redundancy four: deep holes, polar flags, and modular obstructions for
-projective Reed--Solomon codes.*
+**Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
+coherent polar flags, and modular carriers.*
 
-**Status:** active manuscript staging area.  C538 owns the first integrated LaTeX draft and theorem
-map.  C545 then owns a rapid, proof-complete Version 1 preprint and DOI release of this same work.
-C539--C544 own the paper-facing Lean closure.  This merged paper supersedes the former plan for a
-redundancy-five-only manuscript.
+**Status:** integrated C538 LaTeX draft, bibliography, theorem map, claim/proof/novelty ledger,
+verification map, and compiled PDF are present. C545 owns the proof-complete Version 1 preprint and
+DOI release of this same work. C539--C544 own the paper-facing Lean closure. This merged paper
+supersedes the former plan for a redundancy-five-only manuscript.
+
+## Build
+
+From this directory:
+
+```text
+make check
+```
+
+The principal files are `main.tex`, `main.pdf`, `refs.bib`, `theorem-map.md`,
+`claim-proof-novelty-ledger.md`, and `verification-map.md`.
 
 ## Paper spine
 
@@ -15,7 +26,8 @@ exact strength of each proved level visible:
 
 1. the complete all-field classification of deep holes of `PRS(q-4)` at redundancy five;
 2. the transition from cubic-pencil exceptional covers to coherent consecutive-polar flags;
-3. the all-field redundancy-six and redundancy-seven classifications;
+3. the all-field redundancy-six deep-hole classification and redundancy-seven split-free
+   syndrome classification (a deep-hole theorem for `q>=11`);
 4. the high-field redundancy-eight and redundancy-nine theorems, with their exact orbit laws and
    exceptional modular boundaries;
 5. the general coherent-polar induction theorem;

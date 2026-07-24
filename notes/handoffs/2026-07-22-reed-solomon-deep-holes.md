@@ -2,9 +2,9 @@
 
 **Lane**: `reed-solomon`
 
-**Date:** 2026-07-22
+**Date:** 2026-07-23
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529, and C530 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, and C538 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -16,8 +16,11 @@ constant field `F8` and an order-three component cycle on its `e_7` orbit.  C530
 is only the `AGL_1(F8)` linear section: quotient directions `t^2,t^4` enlarge it to an
 `AGL_3(F2)` additive cover, while the generic framed incidence is a nonconstant Artin--Schreier
 double cover.  Every field of dimension at least three over `F2` contains a three-space subspace
-polynomial, so the full `e_7` orbit is shallow over every admissible field.  By explicit user
-direction C538 is now next and creates the merged `papers/beyond4_prs/` manuscript; C545 then
+polynomial, so the full `e_7` orbit is shallow over every admissible field.  C538 created the
+integrated `papers/beyond4_prs/` manuscript, compiled PDF, theorem map, claim/proof/novelty ledger,
+and exact verification map. Its independent review corrected C509's small-field boundary:
+`q=7,8,9` are certified split-free syndrome tables, not code deep-hole tables without a separate
+covering-radius premise; Seroussi--Roth supplies that premise from `q>=11`. C545 now
 releases a proof-complete Version 1 through a policy-checked DOI-bearing preprint route.  C539--C544
 close the paper-facing Lean package.  C531 still owns the remaining intrinsic degree-nine carrier
 strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
@@ -380,9 +383,11 @@ adding a second six-point deletion to C498's S3 fibre proof gives a pointed triv
 marked equality is ramification of a separable `g^3_5` and costs at most eight parameters.
 Therefore the q>=37 deep set is exactly the persistent tangent/sigma stratum plus the central
 fixed point in odd characteristic-two extension degree.  The exact marked-polar affine-orbit
-calibration closes every q<37 without scanning `P6`: exceptional deep orbits occur exactly at
-q=7/8/9/11, while every q>=13 has only the persistent stratum and the odd-degree
-characteristic-two central point.  The q=19 pointed locus has one transient size-19 orbit
+calibration closes the split-free syndrome classification below 37 without scanning `P6`:
+exceptional split-free orbits occur exactly at q=7/8/9/11, while every q>=13 has only the
+persistent stratum and the odd-degree characteristic-two central point. Seroussi--Roth turns this
+into a code deep-hole classification for q>=11; the q=7/8/9 radius premise is not proved by C509.
+The q=19 pointed locus has one transient size-19 orbit
 `W=<1,t^3,t^4>` whose six split members all contain the marked point, but it cannot synchronize
 into a sextic polar line.  C417's additive-cocycle lemma explains the tangent split intrinsically:
 the Borel translation coefficient is 6, so exactly characteristics two and three split as
@@ -639,8 +644,8 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | queued after C535 | C512/C529 plus C534 audit | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
 | C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
-| C538 | beyond-four PRS manuscript integration | queued next; supersedes C500 | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | compilable integrated draft, exact theorem map, proof/novelty/reproducibility ledger | merged PRS paper spine |
-| C545 | rapid proof-complete preprint and DOI | queued immediately after C538 | frozen C538 theorem map and release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
+| C538 | beyond-four PRS manuscript integration | complete | C491/C498/C509/C512/C513/C516/C517/C525/C529/C530 | integrated draft/PDF, exact theorem map, proof/novelty/reproducibility ledger, independent paragraph review | merged PRS paper spine |
+| C545 | rapid proof-complete preprint and DOI | queued next | frozen C538 theorem map and release bundle | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | queued after C538 theorem freeze | adopted theorem map plus existing C517 API | common Hankel/contraction/synthesis interface and coverage ledger | formalization spine |
 | C540 | redundancy-five Lean closure | queued after C539 | C491 theorem/certificates | kernel-checked algebra, sporadic certificate semantics, exact synthesis gate | formal headline boundary |
 | C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
@@ -707,7 +712,7 @@ history.
 
 ## Next command
 
-`go C538`
+`go C545`
 
-(C538 starts the merged manuscript immediately; C545 follows with the proof-complete DOI-bearing
-preprint. C531 remains the deferred research frontier.)
+(C545 follows the completed merged manuscript with the proof-complete DOI-bearing preprint.
+C531 remains the deferred research frontier.)
