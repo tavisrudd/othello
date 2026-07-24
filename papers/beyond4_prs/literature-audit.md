@@ -46,6 +46,14 @@ counts are respectively OpenAlex/Crossref/Semantic Scholar `21/19/24` and
 redundancy four, and the binary-quartic/apolar application to PRS deep
 holes. No predecessor was located.
 
+Those counts were refreshed on 2026-07-24 and were unchanged.  The
+query URLs, empty-versus-error checks, complete largest-set screen, promoted
+candidates, and source-by-source read depths are recorded in
+`notes/2026-07-22-c491-prs-literature-audit-searchlog.md` and
+`notes/2026-07-22-c498-audit-axisA-coding-forward-citation.md`.  In
+particular, this is forward-citation evidence rather than an inference from
+the cited papers' bibliographies.
+
 - Zhang--Wan--Kaipa — **full text**, arXiv v2, Sections I--IV; cache key
   `arXiv:1901.05445`, SHA-256
   `5c2b9e2508c7200428c441b7a41da1596b1c9b0851f5632e2297cdbed41caf24`.
@@ -87,8 +95,9 @@ unqualified claim of priority.
 The polar-object audit used eight exact object queries and read Wang's
 `arXiv:2606.12810v1` at **full text**, all sections; cache SHA-256
 `5dd4e19544335ebc2c75a184074e94adb91b78331930b5e8a643ae606021a107`.
-Wang supplies the general Frobenius/monodromy semantics of splitting
-families. It does not impose Hankel overlap, preserve a forbidden marked
+Wang's Theorem 3.6 identifies the factorization type of a specialization on
+the étale locus with the cycle type of its Frobenius conjugacy class.
+It does not impose Hankel overlap, preserve a forbidden marked
 factor through contractions, classify contained catalecticant/Lucas flags,
 or produce the paper's effective fixed-redundancy thresholds.
 

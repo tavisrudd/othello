@@ -137,7 +137,7 @@ contains no polar line;
 \item the pointed ramification condition has degree at most six and
 does not vanish identically;
 \item an $S_3$ lower pencil with the marked root deleted has total
-deletion degree at most eighteen.
+deletion degree at most nineteen.
 \end{enumerate}
 \end{proposition}
 
@@ -448,10 +448,17 @@ Coefficient collection gives
 \]
 the lift is squarefree exactly when $g(r)\ne0$.
 
+The contracted net \(W_{b(r)}\) has quadratic gcd exactly when its
+three-row catalecticant has rank at most two.  Unless the first-polar
+line is contained in that rank-two locus, these parameters form the
+degree-at-most-three intersection of
+Proposition~\ref{prop:r6-secant}; the contained case is
+Corollary~\ref{cor:r7-contained}.
+
 \begin{proposition}[Complete two-marker lower package]
 \label{prop:r7-pointed}
-Let \(W_f\) be a trivial-gcd quartic net and let \(x\) be a prescribed
-forbidden root.  Assume in characteristic two that \(f\notin\cN_3\).
+Let \(W_h\) be a trivial-gcd quartic net and let \(x\) be a prescribed
+forbidden root.  Assume in characteristic two that \(h\notin\cN_3\).
 For every prime power \(q\geq37\), the net contains a split squarefree
 quartic avoiding \(x\).
 \end{proposition}
@@ -462,23 +469,27 @@ parameter equations below are then homogenized in \(s\), so the
 infinity chart is included.
 Choose the second contraction marker \(s\).  The unavailable values of
 \(s\) comprise: \(s=x\), of degree one; at most three intersections
-with the lower secant cubic; at most four intersections with the
+with the lower secant cubic, by
+Proposition~\ref{prop:r6-secant}; at most four intersections with the
 cyclic surface or its characteristic-three wild replacement; and at
-most six pointed self-collisions.  In characteristic two the cyclic
+most six pointed self-collisions, by
+Propositions~\ref{prop:r6-degrees} and~\ref{prop:r6-modular}.  In
+characteristic two the cyclic
 replacement is a plane, so its pullback has degree at most one unless
 the polar line is contained in it, the excluded case
-\(f\in\cN_3\).  We must also exclude the parameters for which the
+\(h\in\cN_3\), by Proposition~\ref{prop:r6-modular}.  We must also
+exclude the parameters for which the
 lower pencil has fixed factor \(x\).  They are cut out by the
 \(3\)-minors obtained by appending the fixed evaluation row
 \((1,x,x^2,x^3)\) to the two Hankel rows of \(b(s)\), and hence have
 degree at most two in \(s\).  These minors are not all zero.  If they
 vanished identically, then
 \[
-  W_f\cap\{h:h(s)=0\}\subseteq\{h:h(x)=0\}
+  W_h\cap\{g:g(s)=0\}\subseteq\{g:g(x)=0\}
 \]
-for every geometric \(s\).  Given \(h\in W_f\), choose a geometric
-root \(s\) of \(h\); then \(h(x)=0\).  Thus \(x\) would divide every
-member of \(W_f\), contradicting the trivial-gcd hypothesis.  Hence
+for every geometric \(s\).  Given \(g\in W_h\), choose a geometric
+root \(s\) of \(g\); then \(g(x)=0\).  Thus \(x\) would divide every
+member of \(W_h\), contradicting the trivial-gcd hypothesis.  Hence
 the complete second-step parameter
 scheme has degree at most
 \[
@@ -504,21 +515,33 @@ each.  Hence
  q+1-2\sqrt q>25,
 \]
 whose first prime-power solution is \(37\).  In either case the cubic
-lifts through \(s\) to a split squarefree quartic in \(W_f\) avoiding
+lifts through \(s\) to a split squarefree quartic in \(W_h\) avoiding
 \(x\).
 \end{proof}
 
 \begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
 Suppose the lower net is $\ell_xU$, where
-$U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three and $x\ne r$.
-For $q\geq16$ it contains a split cubic avoiding both $x$ and $r$.
+$U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three.  If \(x=r\),
+the parameter belongs to the marked self-collision scheme.  If
+\(x\ne r\) and \(q\geq16\), then \(U\) contains a split cubic avoiding
+both \(x\) and \(r\).
 \end{proposition}
 
 \begin{proof}
 If \(x=r\), every lifted quintic has the repeated factor
-\((t-r)^2\); this is exactly a marked self-collision and is removed by
-Proposition~\ref{prop:r7-collision}.  Thus the hypothesis \(x\ne r\)
-is the complementary branch, not an unproved genericity assumption.
+\((t-r)^2\).  On an affine chart this equality is cut out by the
+\(3\)-minors of
+\[
+\begin{pmatrix}
+b_0(r)&b_1(r)&b_2(r)&b_3(r)&b_4(r)\\
+b_1(r)&b_2(r)&b_3(r)&b_4(r)&b_5(r)\\
+1&r&r^2&r^3&r^4
+\end{pmatrix}.
+\]
+Each minor has degree at most six in \(r\); after homogenization their
+common zero scheme is contained in the degree-eight marked
+self-collision divisor of Proposition~\ref{prop:r7-collision}.  This
+is the unavailable branch.  Hence assume \(x\ne r\).
 Put $S=\PP^1(\F_q)\setminus\{x,r\}$.  For ordered distinct
 $u,v\in S$, the map
 $w\mapsto\lambda(\ell_u\ell_v\ell_w)$ is linear.  If it vanishes
@@ -605,7 +628,8 @@ the split-free syndromes
 at redundancy seven are the persistent stratum of size
 \(q(q+1)^2/2\), together with the
 central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
-split-free orbit-size profiles are:
+split-free orbit-size profiles, after removing the persistent stratum
+and also the central nucleus singleton at \(q=8\), are:
 \[
 \begin{array}{c|l}
 7&56,\ 84^5,\ 112^2,\ 168^{45},\ 336^{141}\\

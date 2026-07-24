@@ -56,7 +56,7 @@ tables, adds a compact referee roadmap, bounds the fixed-redundancy recognition
 complexity precisely, completes recent-preprint metadata, and removes the sparse
 last bibliography page.  A subsequent cold scope review cut the submission to
 the R5--R7 spine; R8/R9 and the Hessian/Lucas material now belong
-to companion queues.  The retained canonical/IEEE review builds are 28/22 pages.
+to companion queues.  The retained canonical/IEEE review builds are 29/22 pages.
 The first fresh correctness review led to source repairs: the Aubry--Perret
 constant and possible singular rational point are explicit, all retained genus-one rows
 use \(\kappa=1\), R6 has the single field-order threshold \(q\geq29\), the R6/R7
@@ -66,9 +66,11 @@ reader then exposed the missing printed R7 second-step package and fixed-gcd
 marker cases.  The repair now prints the complete degree-16 second-marker bad
 scheme, both bottom strata, the R6/R7 marker-collision arguments, the corrected
 \(\mathcal H_1(1,19)=29\) arithmetic, invariant definitions, R7 count and
-representative index, and field-gap sentence.  R7 remains under `REVIEW-GATE`
-until a cold reader reconfirms this repaired two-step proof.  The exact repair
-and mystery ledger are in
+representative index, and field-gap sentence.  A third reader independently
+reconstructed the degree-16 package, verified the fixed-factor and
+marker--gcd branches, and reproduced sample census invariants; the R7
+`REVIEW-GATE` is closed.  Its six remaining editorial findings are repaired,
+and the exact repair and mystery ledger are in
 `notes/2026-07-24-c545-r7-two-step-review-repair.md`.  External
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
@@ -784,7 +786,7 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | reader and external gates | the repaired R7 two-step proof needs cold confirmation; release also awaits export/identifier/author gates |
+| 1 | C545 | reader and external gates | the repaired R7 two-step proof is cold-confirmed; release still awaits the second specialist reader and export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -847,6 +849,6 @@ history.
 `go C545`
 
 (C537 has killed the Flatland--Gale multi-view bridge by an exact inverse-input and repeated-row
-comparison. C545 awaits cold confirmation of the repaired R7 two-step proof,
-two independent specialist readers, the public Lean/export revisions and
+comparison. C545 has one independent specialist confirmation and awaits the second,
+the public Lean/export revisions and
 identifiers, and author/account confirmation. No external upload is authorized.)

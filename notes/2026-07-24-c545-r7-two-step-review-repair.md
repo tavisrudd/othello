@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`  
 **Date:** 2026-07-24  
-**Status:** repaired in source; cold confirmation required
+**Status:** repaired and independently confirmed
 
 ## Result
 
@@ -40,8 +40,20 @@ using a new finite certificate.
   block with the full-list locator, and states the three empty prime-power
   intervals.
 
-Both manuscript drivers build without final LaTeX warnings.  The current
-canonical and IEEE review builds have 28 and 22 pages.
+Both manuscript drivers build without final LaTeX warnings.  After the
+editorial closure, the canonical and IEEE review builds have 29 and 22 pages.
+
+The next independent review confirmed the displayed floor byte-for-byte,
+recomputed the degree-\(16\) two-marker package and its fixed-factor
+exclusion, checked the marker--gcd equivalence, and independently reproduced
+sample \(E_f\) and \(\tau_5\) entries.  It therefore closes the cold-review
+gate.  Its six residual editorial findings are also repaired in source:
+the R6 deletion bound is nineteen; the \(q=8\) R7 profile explicitly removes
+the central nucleus singleton; Proposition 6.10 cites both lower exclusions;
+its lower-net variable is no longer overloaded; the quadratic-gcd
+catalecticant clause is explicit; and the R7 \(x=r\) branch is controlled by
+the degree-at-most-six evaluation minors inside the marked
+self-collision divisor.
 
 ## EJ + TT closeout
 
@@ -58,6 +70,17 @@ The numerical cutoff has slack at the outer level:
 \(S_3\) point count \(q+1-2\sqrt q>25\), so the repair does not raise the
 geometric threshold or open a new finite-field interval.
 
+## Editorial truth table
+
+| Review condition | Printed resolution | Budget or census effect |
+|---|---|---|
+| R6 marked deletion is \(13+6\) | Proposition 6.4(iii) says nineteen | none; threshold remains \(29\) |
+| The \(q=8\) R7 profile omits one known orbit | The theorem says the central nucleus singleton is removed before printing the additional profile | none; census total is unchanged |
+| R7 uses the lower secant and cyclic/wild exclusions | Proposition 6.10 cites Propositions 6.3 and 6.4/6.5 at the two uses | none |
+| The lower-net letter collides with the ambient syndrome \(f\) | Proposition 6.10 uses \(h\) for the lower syndrome and \(g\) for a member | none |
+| A contraction has quadratic gcd | The rank-at-most-two three-row catalecticant clause points to the transverse degree-three and contained alternatives | none |
+| The exact-linear-gcd root equals the retained marker | Degree-at-most-six evaluation minors place the branch inside the existing degree-eight marked self-collision divisor | no new deletion term |
+
 ## Mystery ledger
 
 | Feature | Status | Evidence or remaining gate |
@@ -65,6 +88,5 @@ geometric threshold or open a new finite-field interval.
 | Why the review obtained \(29.718\) for \(\mathcal H_1(1,19)\) | settled | That is the unfloored real expression.  The theorem uses one plus its floor, equal to \(29\); the revised display and direct \(q=29\) inequality remove the ambiguity. |
 | Whether the R7 second step meets a cyclic pencil with no split witness | settled | The cyclic/wild pullback is an outer second-marker exclusion of degree at most four. |
 | Whether a lower fixed factor can equal an old or new marker | settled | Equality with the new marker is in the pointed collision divisor; equality with the old marker is the nonzero degree-at-most-two evaluation-minor locus. |
-| Whether the repaired R7 proof is independently referee-clear | open | A cold reader must confirm the printed two-step package without using this report or the source report.  This is the active C545 review gate. |
+| Whether the repaired R7 proof is independently referee-clear | settled | The next reader reconstructed the degree-\(16\) package and independently checked the fixed-factor exclusion, marker--gcd equivalence, threshold arithmetic, and sample census invariants. |
 | External certificate and release packaging | separately owned | No certificate, replay, manifest, or release identifier was changed in this repair. |
-
