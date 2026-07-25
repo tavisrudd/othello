@@ -148,6 +148,8 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
+- **C601 `[ame-lu]` [QUEUED; headline formalization]** — formalize the all-prime-power LU-to-LC rigidity theorem for equal-phase states of linear `[6,3,4]` MDS codes through unconditional diagonal-axis, MDS-shortening, marginal-Weyl-expansion, and covariance bridges; export the prime-field admitted-pencil composition and reconcile every paper trust statement → `notes/2026-07-25-c601-ame-lu-lean-lu-lc-rigidity.md`.
+- **C602 `[ame-lu]` [QUEUED; after C601]** — run a full referee-facing audit of the AME-LU Lean aggregate and its complete project-owned verification closure against the paper trust ledger, statement-adequacy map, verification prose, paper style guide, and Lean standards; repair owned defects, rerun all formal gates and axiom audits, and record any foreign-closure blockers exactly → `notes/2026-07-25-c602-ame-lu-full-lean-trust-audit.md`.
 
 ### `rp-next`
 

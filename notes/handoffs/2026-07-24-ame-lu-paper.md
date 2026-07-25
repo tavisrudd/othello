@@ -323,12 +323,24 @@ as C559--C572.  Dependency order is authoritative:
     and transversal-gate positioning closure (complete).
 12. C600: final theorem-local scope, referent, parameter-setting, sharpness,
     and bounded search-scope corrections (complete).
+13. C601: unconditional Lean formalization of the headline LU-to-LC rigidity
+    theorem and the prime-field admitted-pencil composition (queued).
+14. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
+    C601 (queued).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
 optional manuscript upgrade: first determine whether the shortened marginal
 planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
 space before attempting extension-field or approximate rigidity.
+
+C601 is queued to close the paper's principal formalization gap: the
+all-prime-power LU-to-LC rigidity theorem. Its Tao-style planning report
+separates the work into an abstract diagonal-tensor axis theorem, exact
+`[6,3,4]` shortening and local-label bijectivity, the four-party marginal Weyl
+expansion, marginal covariance, and the six-party Clifford terminal. C602
+follows with a complete referee-facing audit of the AME-LU Lean aggregate,
+trust ledgers, verification prose, scholarly closure, and release claims.
 
 ## Completion gates
 
@@ -345,6 +357,8 @@ space before attempting extension-field or approximate rigidity.
 ## Allowed paths
 
 - `papers/ame_lu/**`
+- `lean/RelativeConicArcs/AMELU/**`
+- `lean/RelativeConicArcs/Gates/AMELU*.lean`
 - `notes/handoffs/2026-07-24-ame-lu-paper.md`
 - `notes/2026-07-24-ame-lu-discovery-track.md`
 - the exact report/output stem of an allocated `ame-lu` task
