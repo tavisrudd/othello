@@ -1133,8 +1133,17 @@
       "last": 611,
       "purpose": "Paper I exterior-set framing now; broader mechanism and cross-paper disposition follow-up",
       "sequence": 126
+    },
+    {
+      "count": 2,
+      "first": 612,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 613,
+      "purpose": "split general MDS-CSS LU-rigidity terminal and Choi transversal corollary formalization after C601 foundations",
+      "sequence": 127
     }
   ],
-  "next_id": 612,
+  "next_id": 614,
   "schema": "codex-task-id-allocations-v1"
 }
