@@ -84,6 +84,13 @@ hashes, and the two principal results with no Lean coverage; it must not
 ship until that bundle has an immutable DOI or Software Heritage identifier
 and the identifier is added to the paper.
 
+C577 has begun under the permitted external-wait exception. Paper II now has
+a standalone headline factorization theorem, marked-conic notation, the
+general matching-secant quotient with proof, and the four-endpoint switch
+mechanism. Its clean four-page build is warning-free. The next drafting
+frontier is the independent rank-three configuration theorem and the exact
+`3,6,10` evidence boundary.
+
 The active order is strict:
 
 1. **C182:** make the immutable public deposit and insert its identifier.
@@ -118,7 +125,7 @@ The authoritative split records are:
 | role | root | status |
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
-| Paper II | `papers/clebsch-factorization/` | compilable spine; C577 gated behind Paper I |
+| Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
 | Paper III | `papers/clebsch-passages/` | exploratory spine; C579 gated behind Paper II |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
@@ -216,6 +223,11 @@ complementary reconstruction question of what marked secant data survives
 common restriction to a conic. This is motivation, not proof inheritance.
 Paper II defines its marked-conic objects and quotient independently and
 must cite the final Paper I release rather than changing or extending it.
+
+Current C577 drafting state: the opening bridge, headline theorem,
+marked-conic definition, general quotient proof, and switch identity are in
+the manuscript. Continue with the rank-three configurations and ranks before
+importing balanced-sheet or modular-depth material.
 
 ### Outward-consequence bridge
 

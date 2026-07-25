@@ -6,6 +6,7 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -32,13 +33,14 @@ the \texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
 \begin{abstract}
 Restriction to a conic forgets how its marked points were paired into
 secants.  We study the information retained after differences of
-matching products are divided by the conic equation.  For the
-rank-three Coxeter configurations $A_3$, $B_3$, and $H_3$, the quotient
-has ranks $3$, $6$, and $10$.  In the balanced cases, second moments
-recover two complementary sheets, a cubic invariant orients them, and
-six incidence profiles recover the matching-table row.  A modular depth
-quotient and arithmetic gluing describe how this factorization memory
-changes across characteristics.
+matching products are divided by the conic equation.  We prove that this
+quotient is intrinsic up to translation and equivariant under the
+endpoint stabilizer.  For the rank-three Coxeter configurations $A_3$,
+$B_3$, and $H_3$, its difference space has ranks $3$, $6$, and $10$.
+In the balanced cases, second moments recover two complementary sheets,
+a signed cubic orients them, and six incidence profiles recover the
+matching-table row.  A modular depth quotient and arithmetic gluing
+describe how this factorization memory changes across characteristics.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
@@ -58,10 +60,35 @@ conic forget, and what does the conic-ideal quotient remember?  We answer
 this question across the rank-three $A_3$, $B_3$, and $H_3$
 configurations.
 
-The main result follows one mechanism from the switch identity to the
-recovery of finite matching data.  The rigidity theorem motivates this
-question but is not a hypothesis: the marked-conic objects and quotient
-construction are defined independently here.
+\begin{theorem}[Factorization recovery]
+\label{thm:factorization-recovery}
+Let the $A_3$, $B_3$, and $H_3$ matching configurations be the finite
+matching orbits defined in Section~\ref{sec:rank-three}.  Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item canonically scaled matching products have equal restriction to the
+conic, and their conic-ideal quotients have difference ranks $3$, $6$, and
+$10$;
+\item in the $B_3$ and $H_3$ cases, the two factorization sheets are,
+up to interchange, the unique complementary halves with equal first and
+second tensor moments;
+\item the signed moments vanish through degree two, while a nonzero
+degree-three tensor transforms by the character that exchanges the
+sheets;
+\item in the $H_3$ case, six explicit incidence profiles separate the
+six $A_4$--$A_5$ double-coset labels, and the singleton profiles recover
+the corresponding decorated matching-table row.
+\end{enumerate}
+\end{theorem}
+
+The theorem follows one mechanism from a four-endpoint switch to the
+recovery of finite matching data.  Division by the conic equation first
+turns different factorizations of one restricted form into an affine
+configuration.  Quadratic products then recover an unordered bipartition;
+the first signed moment that survives is cubic.  Finally, a
+double-coset incidence map compresses the configuration to six profiles
+without identifying any two labels.  The rigidity theorem motivates this
+question but is not a hypothesis: all marked-conic objects and quotient
+constructions are defined independently here.
 
 This line of research arose from the following normal-play placement game.
 Two players alternately adjoin a point of a finite projective plane while
@@ -88,19 +115,96 @@ applications and continuations of the geometry, not hypotheses of the
 results proved here.
 
 \section{Conic matching products}
+\label{sec:matching-products}
 
-Define the matching products, their common conic restriction, and the
-quotient obtained by dividing a difference by the conic equation.  A
-small example should make the retained information visible before the
-general construction.
+Write the standard conic as
+\[
+ \cC=V(Q),\qquad Q=XZ-Y^2,
+\]
+and parametrize it by $\nu(s:t)=(s^2:st:t^2)$.  For points
+$a=(a_0:a_1)$ and $b=(b_0:b_1)$ of $\mathbb P^1$, put
+$[a,b]=a_0b_1-a_1b_0$.  We scale the secant $L_{ab}$ through
+$\nu(a)$ and $\nu(b)$ by the condition
+\[
+ L_{ab}(\nu(s:t))=[a,(s:t)]\,[b,(s:t)].
+\]
+
+Let $\Omega$ be a set of $2m$ distinct marked points of $\mathbb P^1$,
+with fixed vector representatives.  For a perfect matching $M$ of
+$\Omega$, define its matching product
+\[
+ P_M=\prod_{\{a,b\}\in M}L_{ab}.
+\]
+The vector representatives are part of the marked-conic data.  Their
+role is to make the products comparable before passing to projective
+equivalence.
+
+\begin{proposition}[The matching-secant quotient]
+\label{prop:matching-secant-quotient}
+For every $m\ge2$ and every two perfect matchings $M,N$ of $\Omega$,
+\[
+ P_M|_{\cC}=P_N|_{\cC},\qquad P_M-P_N\in(Q).
+\]
+Consequently, after choosing a reference matching $M_0$,
+\[
+ \Phi_{M_0}(M)=\frac{P_M-P_{M_0}}{Q}
+       \in H^0(\mathbb P^2,\mathcal O(m-2))
+                                                        \tag{2.1}
+\]
+is an affine configuration.  Changing the reference matching translates
+this configuration.  If $g\in\mathrm{GL}_2$ preserves $\Omega$,
+$\rho(g)$ is its action on binary quadratics, and representatives are
+transported by $g$, then
+\[
+ \Phi_{gM_0}(gM)\circ\rho(g)
+   =\det(g)^{\,2m-2}\Phi_{M_0}(M).                       \tag{2.2}
+\]
+Thus the difference space, its rank, and its affine moment conditions do
+not depend on $M_0$ and are equivariant under the endpoint stabilizer.
+\end{proposition}
+
+\begin{proof}
+For $x\in\mathbb P^1$,
+\[
+ P_M(\nu(x))=\prod_{a\in\Omega}[a,x],
+\]
+which does not depend on the pairing.  The kernel of the Veronese
+pullback
+\[
+ k[X,Y,Z]\longrightarrow k[s,t],\qquad
+ (X,Y,Z)\longmapsto(s^2,st,t^2)
+\]
+is the principal ideal $(Q)$, so $Q$ divides every difference.
+Changing the reference follows by subtraction.  Finally,
+$L_{ga,gb}\circ\rho(g)=\det(g)^2L_{ab}$ and
+$Q\circ\rho(g)=\det(g)^2Q$, which gives (2.2).
+\end{proof}
 
 \section{Switches and divisibility}
+\label{sec:switches}
 
-Prove the four-endpoint switch identity and the general
-switch/divisibility theorem.  Separate what follows formally from the
-conic ideal from what depends on a selected matching configuration.
+For four distinct endpoints, the Pl\"ucker relation gives the local
+switch identity
+\[
+ L_{ab}L_{cd}-L_{ac}L_{bd}
+   =[a,d][b,c]\,Q.                                      \tag{3.1}
+\]
+Multiplying (3.1) by the secant factors common to two matchings proves
+divisibility for a single switch.  Any two perfect matchings are joined
+by a sequence of such switches: if $M$ and $N$ differ at $a$, write
+$\{a,b\}\in M$ and $\{a,c\}\in N$; switching the two $M$-edges through
+$b$ and $c$ creates $\{a,c\}$ and reduces the symmetric difference.
+This also gives an elementary proof of the divisibility clause in
+Proposition~\ref{prop:matching-secant-quotient}.
+
+The switch calculation and the global pullback proof play different
+roles.  The pullback proves the quotient for arbitrary matchings at once.
+The switch identity records how local changes of factorization move in
+the quotient space.  A selected Coxeter orbit need not contain every
+perfect matching or every intermediate switch.
 
 \section{The rank-three configurations}
+\label{sec:rank-three}
 
 Introduce the $A_3$, $B_3$, and $H_3$ configurations with precise credit
 for their classical geometry.  Compute the quotient ranks $3$, $6$, and
