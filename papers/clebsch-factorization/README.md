@@ -19,7 +19,11 @@ configurations*.
 
 The compilable draft is `clebsch_factorization.tex`. Its standalone opening,
 headline factorization theorem, marked-conic notation, matching-secant
-quotient, and switch mechanism are in place. C575's disposition is complete
-and authoritative. Import only the material assigned to Paper II; the broad
-manuscript in `../clebsch-hexagon-code/` remains an unchanged fallback, not a
-source to trim wholesale.
+quotient, switch mechanism, explicit rank-three matching configurations, and
+exact `3,6,10` quotient-rank theorem are in place. The rank theorem separates
+the symbolic conic-ideal/harmonic argument from the finite orbit calculation;
+its current exact evidence is the committed C406 primary certificate and
+independent replay. C575's disposition is complete and authoritative. Import
+only the material assigned to Paper II; the broad manuscript in
+`../clebsch-hexagon-code/` remains an unchanged fallback, not a source to trim
+wholesale.

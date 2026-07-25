@@ -206,10 +206,122 @@ perfect matching or every intermediate switch.
 \section{The rank-three configurations}
 \label{sec:rank-three}
 
-Introduce the $A_3$, $B_3$, and $H_3$ configurations with precise credit
-for their classical geometry.  Compute the quotient ranks $3$, $6$, and
-$10$, and state the complement-code calculation only at the strength
-needed later.
+We now select three finite matching orbits.  This selection is discrete
+input: Proposition~\ref{prop:matching-secant-quotient} applies to every
+matching, but it does not distinguish the Coxeter orbits.
+
+For $q\in\{5,7,11\}$, index
+\[
+ \mathbb P^1(\F_q)=\{0,1,\ldots,q-1,\infty\},
+\]
+where $a$ denotes $(1:a)$ and $\infty$ denotes $(0:1)$.  Let
+$G_q=\operatorname{PGL}_2(q)$ act in the usual way.  The three base
+matchings are
+\[
+\begin{array}{c@{\qquad}c@{\qquad}l}
+T&q&M_T\\ \hline
+A_3&5&
+ \{0,\infty\},\{1,4\},\{2,3\},\\
+B_3&7&
+ \{0,2\},\{1,4\},\{3,\infty\},\{5,6\},\\
+H_3&11&
+ \{0,1\},\{2,5\},\{3,7\},\{4,9\},\{6,8\},
+ \{10,\infty\}.
+\end{array}                                               \tag{4.1}
+\]
+Define the \emph{rank-three matching configuration}
+\[
+ \Omega_T=G_q\cdot M_T.
+\]
+The stabilizers of the three displayed matchings are respectively
+$S_4,S_4,A_5$, and hence
+\[
+ |\Omega_{A_3}|=5,\qquad |\Omega_{B_3}|=14,\qquad
+ |\Omega_{H_3}|=22.                                      \tag{4.2}
+\]
+These marker spaces and their stabilizers are classical.  In particular,
+Edge and Dye identify the exceptional finite conic configurations and
+substantial parts of their incidence geometry
+\cite{Edge1956,Dye1991}.  We use the Coxeter names for the corresponding
+tetrahedral, octahedral, and icosahedral data; neither the orbit counts in
+(4.2) nor the ambiguity of an unmarked conic is asserted here as new.
+
+Fix $M_T$ as reference and apply (2.1) to every member of $\Omega_T$.
+Write $R_d=\F_q[X,Y,Z]_d$ and
+\[
+ \Delta_Q=4\partial_X\partial_Z-\partial_Y^2,\qquad
+ \mathcal H_d=\ker(\Delta_Q:R_d\longrightarrow R_{d-2}).
+                                                               \tag{4.3}
+\]
+The operator $\Delta_Q$ is the Laplacian attached to the dual quadratic
+form.  In the degrees used below, $\mathcal H_d$ is the top harmonic
+summand, while powers of $Q$ give radial summands.
+
+\begin{theorem}[The \(3,6,10\) quotient ranks]
+\label{thm:rank-three-quotients}
+For the matching configurations in (4.1), let
+\[
+ W_T=\operatorname{span}_{\F_q}
+ \{\Phi_{M_T}(M):M\in\Omega_T\}.
+\]
+Then
+\[
+\begin{array}{c@{\quad}c@{\quad}c@{\quad}c}
+T&\deg\Phi& W_T&\dim W_T\\ \hline
+A_3&1&R_1=\mathcal H_1&3,\\
+B_3&2&R_2=\mathcal H_2\oplus\F_7Q&6,\\
+H_3&4&\mathcal H_4\oplus\F_{11}Q^2&10.
+\end{array}                                               \tag{4.4}
+\]
+In particular, the first two configurations fill the complete quotient
+form space.  The \(H_3\) configuration spans a canonical ten-dimensional
+subspace of the fifteen-dimensional space \(R_4\).
+\end{theorem}
+
+\noindent\emph{Proof mode.}
+The quotient construction and the harmonic-space dimensions are proved
+symbolically.  The assertions that the three displayed finite orbits span
+the stated subspaces are certificate-checked exact calculations, with a
+separate implementation that reconstructs the groups, matchings, quotient
+forms, Laplacian, and row reductions from the data in (4.1).
+
+\begin{proof}
+A matching in (4.1) has
+$m=3,4,6$ edges, respectively, so
+Proposition~\ref{prop:matching-secant-quotient} places its quotient in
+$R_{m-2}$, of degrees $1,2,4$.  Representing the quotients in the standard
+monomial bases gives matrices with respectively \(5,14,22\) rows.  Exact
+row reduction over \(\F_5,\F_7,\F_{11}\) gives ranks \(3,6,10\).
+
+It remains to identify the ten-space in the last row rather than record
+only its dimension.  Direct differentiation gives
+\[
+ \dim\mathcal H_1=3,\qquad
+ \dim\mathcal H_2=5,\qquad
+ \dim\mathcal H_4=9.
+\]
+The radial vectors \(Q\in R_2\) and \(Q^2\in R_4\) are not harmonic in
+characteristics \(7\) and \(11\), respectively.  The exact quotient
+matrices lie in
+\[
+ \mathcal H_1,\qquad
+ \mathcal H_2+\F_7Q,\qquad
+ \mathcal H_4+\F_{11}Q^2.
+\]
+Their computed ranks equal the dimensions \(3,6,10\) of these spaces, so
+all three containments are equalities.  Since \(\dim R_4=15\), the last
+equality is proper.
+\end{proof}
+
+The rank calculation has two distinct boundaries.  The common restriction
+and quotient are general consequences of the conic ideal, and (4.3)
+describes the intrinsic target subspaces.  The fact that the three
+particular orbits in (4.1) attain those subspaces is finite.  The primary
+certificate enumerates each full orbit and performs exact prime-field row
+reduction; the independent replay starts only from (4.1) and reconstructs
+the calculation without importing the primary implementation.  Thus
+Theorem~\ref{thm:rank-three-quotients} does not infer a general
+rank formula from the three examples.
 
 \section{Balanced sheets and cubic orientation}
 
@@ -248,5 +360,22 @@ the relative-cubic plane and the modular depth plane.
 
 State exactly which factorization data the conic ideal remembers and
 which pointed or global data it still forgets.
+
+\begin{thebibliography}{99}
+
+\bibitem{Edge1956}
+W.~L.~Edge,
+\newblock Conics and orthogonal projectivities in a finite plane,
+\newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956),
+362--382.
+
+\bibitem{Dye1991}
+R.~H.~Dye,
+\newblock Hexagons, conics, $A_5$ and $\mathrm{PSL}_2(K)$,
+\newblock \emph{Journal of the London Mathematical Society} (2)
+\textbf{44} (1991), 270--286.
+\newblock doi:10.1112/jlms/s2-44.2.270.
+
+\end{thebibliography}
 
 \end{document}

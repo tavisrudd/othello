@@ -87,9 +87,12 @@ and the identifier is added to the paper.
 C577 has begun under the permitted external-wait exception. Paper II now has
 a standalone headline factorization theorem, marked-conic notation, the
 general matching-secant quotient with proof, and the four-endpoint switch
-mechanism. Its clean four-page build is warning-free. The next drafting
-frontier is the independent rank-three configuration theorem and the exact
-`3,6,10` evidence boundary.
+mechanism. It also defines the three matching orbits explicitly and proves the
+exact `3,6,10` rank theorem, distinguishing the full spaces in types `A_3`
+and `B_3` from the canonical harmonic-plus-radial ten-space in type `H_3`.
+The primary C406 certificate and independent replay are green. Its clean
+five-page build is warning-free. The next drafting frontier is balanced-sheet
+uniqueness and cubic-first orientation.
 
 The active order is strict:
 
@@ -225,9 +228,10 @@ Paper II defines its marked-conic objects and quotient independently and
 must cite the final Paper I release rather than changing or extending it.
 
 Current C577 drafting state: the opening bridge, headline theorem,
-marked-conic definition, general quotient proof, and switch identity are in
-the manuscript. Continue with the rank-three configurations and ranks before
-importing balanced-sheet or modular-depth material.
+marked-conic definition, general quotient proof, switch identity, explicit
+rank-three configurations, and exact `3,6,10` theorem are in the manuscript.
+Continue with balanced-sheet uniqueness and cubic-first orientation before
+importing the modular-depth material.
 
 ### Outward-consequence bridge
 
