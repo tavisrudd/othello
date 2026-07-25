@@ -857,6 +857,8 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates after green C603 reconciliation | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two final specialist signoffs, immutable identifiers, and author/account confirmation before upload |
+| 2 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
+| 3 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
 
 ## Unallocated level-ups
 
