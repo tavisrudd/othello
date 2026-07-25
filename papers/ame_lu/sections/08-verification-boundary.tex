@@ -81,13 +81,16 @@ statement, both with fixed party labels and after adjoining the discrete
 party-permutation factor.
 
 The geometric classification,
-marginal-trace, logical propagation, finite contraction, and transport
+marginal-trace, logical propagation, finite contraction, GRS group, and transport
 orbit steps enter separate hypothesis structures; the paper constructs
 or certificate-supports them as specified above, but the Lean modules do
 not.  Importing the terminal therefore does not make them unconditional
-formal theorems.  In particular, the Choi and transposition bridge for
-the transversal Clifford conversion corollary, the exact GRS
-transversal-group corollary, the fixed-copy generic-constancy proposition,
+formal theorems.  The Choi inverse-transpose bridge, Clifford transpose
+closure, and factorwise transversal no-go are kernel checked in
+\texttt{EncoderTransversal}.  Its exact GRS carrier equality is conditional:
+the diagonal GRS construction, phase-corrected lifts, logical Pauli
+representatives, elementary generation, and no-go converse remain named
+fields.  The fixed-copy generic-constancy proposition,
 the party-moving logical normalizer, and the determinant and double-coset
 inputs of the complete transport theorem are not formalized.
 The companion \texttt{AMELUAggregateAxioms} terminal separates the three

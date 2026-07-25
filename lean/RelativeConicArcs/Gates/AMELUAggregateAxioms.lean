@@ -38,6 +38,21 @@ open RelativeConicArcs.AMELU
 #print axioms genericPermutedProductUnitaryContinuousProjectivization
 #print axioms connectedComponent_genericIdentityAutomorphism_eq_scalarPhases
 #print axioms connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases
+#print axioms oneLegQuantumMDSParameters_singletonEquality
+#print axioms isMDSCode2m_oneLegQuantumMDSParameters
+#print axioms coordinateAxes_reflected_by_linearEquiv
+#print axioms IsCliffordMatrix.conjTranspose
+#print axioms IsCliffordMatrix.conjugate
+#print axioms IsCliffordMatrix.transpose
+#print axioms IsUnitaryMatrix.transpose
+#print axioms inverseTransposeWitness_of_isUnitaryMatrix
+#print axioms encoderConversion_inverseTranspose_chosenLeg
+#print axioms encoderConversion_inverseTranspose_and_physical_isClifford
+#print axioms encoderConversion_logical_and_physical_isClifford
+#print axioms genericCSSLabel_lowerDualityShear
+#print axioms genericCSSLabel_upperDualityShear
+#print axioms grs_projectiveTransversal_eq_affineSpecialLinear
+#print axioms affineSpecialLinearOrder_seven
 
 #print axioms isMDSCode634_arcKernel
 #print axioms isAME_equalPhaseState_arcKernel
