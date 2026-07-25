@@ -1178,8 +1178,17 @@
       "last": 617,
       "purpose": "strengthen projective automorphism packaging to a closed scalar-torus exact sequence, discrete finite quotient topology, genuine signature homomorphisms, and party-permutation extension structure",
       "sequence": 131
+    },
+    {
+      "count": 2,
+      "first": 618,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 619,
+      "purpose": "nonabelian automorphism extension class followed by GRS splitting audit",
+      "sequence": 132
     }
   ],
-  "next_id": 618,
+  "next_id": 620,
   "schema": "codex-task-id-allocations-v1"
 }
