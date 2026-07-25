@@ -305,7 +305,8 @@ Clifford.  The proof uses the same rank-one axis mechanism after the general
 dual shortening `[2m,m,m+1] -> [m+1,1,m+1]`; the six-party pencil and
 logical-phase scopes are unchanged.  The warning-free 17-page build and
 release gates pass.  The formalization is split into C601's generic
-foundations, C612's rigidity terminal, and C613's Choi/transversal terminal
+foundations, C612's rigidity terminal, C613's Choi/transversal terminal, and
+C615's projective automorphism group packaging
 before C602's aggregate audit.  See
 `2026-07-25-c609-ame-lu-uniform-rigidity-v1.md`.
 
@@ -375,8 +376,12 @@ as C559--C572.  Dependency order is authoritative:
 16. C613: AME-to-`[[2m-1,1,m]]` encoder parameters, exact Choi orientation,
     Clifford transpose closure, transversal no-go, exact GRS group, and
     explicit `[[7,1,4]]_7` terminal (queued after C612).
-17. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
-    C613 (queued).
+17. C615: explicit product-unitary and party-permuted topological groups,
+    normal scalar-phase torus, quotient groups, and projectivization/signature
+    homomorphisms preserving the C612 finiteness and identity-component
+    terminals (queued after C613).
+18. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
+    C615 (queued).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -384,7 +389,7 @@ optional manuscript upgrade: first determine whether the shortened marginal
 planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
 space before attempting extension-field or approximate rigidity.
 
-C601--C613 close the paper's principal formalization gap in three acceptance
+C601--C615 close the paper's principal formalization gap in four acceptance
 gates.  The full \(m=3\) prototype and pencil composition are already
 unconditional in `RelativeConicArcs.AMELU.LURigidity` and
 `RelativeConicArcs.AMELU.LUPencilClassification`.  C601 is complete:
@@ -396,12 +401,14 @@ general Clifford terminal, compatible six-party/pencil specializations,
 projective finiteness, and scalar-phase identity component are formalized.
 C613 next proves the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, and transversal
-terminal.  C602 follows with a complete referee-facing audit of the AME-LU
-Lean aggregate, trust ledgers, verification prose, scholarly closure, and
-release claims.
+terminal.  C615 then upgrades C612's quotient carriers and identity-component
+statements to explicit group/topological-group structures, normal scalar
+phases, quotient groups, and projectivization/signature homomorphisms.  C602
+follows with a complete referee-facing audit of the AME-LU Lean aggregate,
+trust ledgers, verification prose, scholarly closure, and release claims.
 
-**Token-constrained completion route:** start a fresh session with `go C612`
-and remain in this lane through C612, C613, and C602, committing and closing
+**Token-constrained completion route:** start a fresh session with `go C613`
+and remain in this lane through C613, C615, and C602, committing and closing
 each C-item normally while reusing the loaded manuscript and formal context.
 Do not run optional C581. After C602, the next cross-lane route is C553 and
 then the coordinated build-system extraction. The authoritative three-session
