@@ -2,6 +2,7 @@ import RelativeConicArcs.Gates.AMELUDefinitions
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
 import RelativeConicArcs.Gates.AMELUPencilClassification
+import RelativeConicArcs.AMELU.LUPencilClassification
 import RelativeConicArcs.Gates.AMELUMarginalMoment
 import RelativeConicArcs.Gates.AMELULogicalPhaseFourCopy
 import RelativeConicArcs.Gates.AMELUTransportDivisor
@@ -11,7 +12,8 @@ import RelativeConicArcs.Gates.AMELUTransportDivisor
 
 This terminal imports the shared six-party conventions, the
 arc--MDS--CSS--AME and stabilizer dictionaries, the admitted-pencil
-local-Clifford classification, the marginal-moment separator, the
+local-Clifford and local-unitary classifications, the six-party
+LU-to-LC rigidity theorem, the marginal-moment separator, the
 fixed-party logical phase, the exact four-copy separator, and the transport
 divisor.
 

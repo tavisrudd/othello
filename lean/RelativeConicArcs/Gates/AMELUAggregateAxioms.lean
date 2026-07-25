@@ -23,6 +23,8 @@ open RelativeConicArcs.AMELU
 
 #print axioms pencilZ_eq_iff_samePencilYOrbit
 #print axioms admitted_nonGRS_pencil_classified_by_z
+#print axioms locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent
+#print axioms locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq
 
 #print axioms card_marginalTriples
 #print axioms card_marginalStars
