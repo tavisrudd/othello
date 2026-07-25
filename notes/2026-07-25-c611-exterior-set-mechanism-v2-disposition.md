@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Status**: queued after C610.
+**Status**: queued after C182; does not hold Paper I version 1.
 
 ## Goal
 

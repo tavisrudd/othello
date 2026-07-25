@@ -68,11 +68,13 @@ replay, and mystery ledger are in
 `notes/2026-07-25-c605-eight-point-conic-filling-search.md`. The final clean
 sixteen-check release replay is green at `91db7b5c`.
 
-C610 is in progress as a cheap final presentation pass: it states the
-length-at-most-eight projective MDS consequence, promotes C605's sharp
-maximum-six exterior-set arc bound, and exposes the \(q=13\)
-passant-saturation mechanism without adding a new evidence route. C611 owns
-the broader conceptual mechanism and v2/other-paper disposition.
+C610 is complete. Paper I now states the length-at-most-eight projective MDS
+consequence, promotes C605's sharp maximum-six exterior-set arc bound, names
+the exterior-set framework, and exposes the \(q=13\) passant-saturation
+mechanism without adding a new evidence route. The warning-free 19-page PDF,
+nineteen-row trust surface, and clean sixteen-check release replay are green
+at `fd2dee6e`. C611 owns the broader conceptual mechanism and
+v2/other-paper disposition.
 
 C182 follows C610. Its blocker is external publication packaging. The
 previously cited GitHub artifact URL is not publicly reachable, and this
@@ -84,13 +86,12 @@ and the identifier is added to the paper.
 
 The active order is strict:
 
-1. **C610:** land and release-test the cheap Paper I framing upgrade.
-2. **C182:** make the immutable public deposit and insert its identifier.
-3. **C611:** pursue the broader exterior-set mechanism for v2 or its actual
+1. **C182:** make the immutable public deposit and insert its identifier.
+2. **C611:** pursue the broader exterior-set mechanism for v2 or its actual
    owning paper without holding v1.
-4. **C577:** build and referee-test standalone Paper II after Paper I is
+3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-5. **C579:** test Paper III after Paper II; require one principal theorem or
+4. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled
