@@ -26,6 +26,7 @@ generated data, native evaluation, axioms, or admitted declarations.
 namespace RelativeConicArcs.AMELU
 
 open Matrix Set
+open scoped Pointwise
 
 noncomputable section
 
@@ -262,6 +263,82 @@ noncomputable instance (w : WeylConvention 𝔽) :
 
 /-! ## Closed scalar kernels and discrete projective quotients -/
 
+/-- Scalar Clifford matrices form a closed subgroup of the topological
+group of Clifford matrices. -/
+theorem cliffordScalarSubgroup_isClosed
+    (w : WeylConvention 𝔽) :
+    IsClosed
+      (cliffordScalarSubgroup w :
+        Set (CliffordMatrixGroup w)) := by
+  let f : CliffordMatrixGroup w →
+      (𝔽 × 𝔽 → LocalMatrix 𝔽) :=
+    fun U => cliffordConjugationSignature w U.1
+  have hf : Continuous f :=
+    (continuous_cliffordConjugationSignature w).comp
+      continuous_subtype_val
+  have hcarrier :
+      (cliffordScalarSubgroup w :
+          Set (CliffordMatrixGroup w)) =
+        f ⁻¹' {cliffordConjugationSignature w
+          (1 : LocalMatrix 𝔽)} := by
+    ext U
+    constructor
+    · rintro ⟨z, hz, hU⟩
+      change f U =
+        cliffordConjugationSignature w (1 : LocalMatrix 𝔽)
+      have hnorm :
+          Complex.normSq z = 1 := by
+        apply normSq_eq_one_of_isUnitaryMatrix_smul_one (𝔽 := 𝔽)
+        rw [← hU]
+        exact U.2.1
+      funext v
+      change
+        U.1 * weylMatrix w v.1 v.2 * U.1.conjTranspose =
+          (1 : LocalMatrix 𝔽) * weylMatrix w v.1 v.2 *
+            (1 : LocalMatrix 𝔽).conjTranspose
+      rw [hU]
+      simp only [Matrix.conjTranspose_smul, Matrix.conjTranspose_one,
+        Matrix.smul_mul, Matrix.mul_smul, Matrix.one_mul,
+        Matrix.mul_one]
+      rw [smul_smul]
+      have hstar : star z * z = 1 := by
+        have hstar' : (starRingEnd ℂ) z * z = 1 := by
+          rw [← Complex.normSq_eq_conj_mul_self]
+          exact_mod_cast hnorm
+        simpa using hstar'
+      rw [hstar, one_smul]
+    · intro hU
+      change f U =
+        cliffordConjugationSignature w (1 : LocalMatrix 𝔽) at hU
+      exact
+        sameMatrixAxis_of_cliffordConjugationSignature_eq w
+          U.1 (1 : LocalMatrix 𝔽) U.2.1
+          (isUnitaryMatrix_one (𝔽 := 𝔽)) hU
+  rw [hcarrier]
+  exact isClosed_singleton.preimage hf
+
+/-- The intrinsic one-site Clifford adjoint quotient is Hausdorff. -/
+theorem intrinsicCliffordAdjointSignature_t2Space
+    (w : WeylConvention 𝔽) :
+    T2Space (IntrinsicCliffordAdjointSignature w) := by
+  letI : IsClosed
+      (cliffordScalarSubgroup w :
+        Set (CliffordMatrixGroup w)) :=
+    cliffordScalarSubgroup_isClosed w
+  infer_instance
+
+/-- The intrinsic one-site Clifford adjoint quotient has the discrete
+topology. -/
+theorem intrinsicCliffordAdjointSignature_discrete
+    (w : WeylConvention 𝔽) :
+    DiscreteTopology (IntrinsicCliffordAdjointSignature w) := by
+  letI : IsClosed
+      (cliffordScalarSubgroup w :
+        Set (CliffordMatrixGroup w)) :=
+    cliffordScalarSubgroup_isClosed w
+  letI := intrinsicCliffordAdjointSignature_t2Space w
+  exact Finite.instDiscreteTopology
+
 /-- The fixed-party scalar-phase subgroup is closed. -/
 theorem genericScalarPhaseSubgroup_isClosed
     (hm : 2 ≤ m) (w : WeylConvention 𝔽)
@@ -317,6 +394,15 @@ noncomputable def genericScalarPhaseInclusion
       GenericProductUnitaryAutomorphism ψ :=
   (genericScalarPhaseSubgroup ψ).subtype
 
+/-- Inclusion of the fixed-party scalar torus is a continuous group
+homomorphism. -/
+noncomputable def genericScalarPhaseContinuousInclusion
+    (ψ : GenericState m 𝔽) :
+    genericScalarPhaseSubgroup ψ →ₜ*
+      GenericProductUnitaryAutomorphism ψ where
+  toMonoidHom := genericScalarPhaseInclusion ψ
+  continuous_toFun := continuous_subtype_val
+
 /-- The scalar inclusion and fixed-party projectivization form an exact
 pair. -/
 theorem genericScalarPhase_projectivization_mulExact
@@ -346,6 +432,15 @@ noncomputable def genericPermutedScalarPhaseInclusion
     genericPermutedScalarPhaseSubgroup ψ →*
       GenericPermutedProductUnitaryAutomorphism ψ :=
   (genericPermutedScalarPhaseSubgroup ψ).subtype
+
+/-- Inclusion of the party-permuted scalar torus is a continuous group
+homomorphism. -/
+noncomputable def genericPermutedScalarPhaseContinuousInclusion
+    (ψ : GenericState m 𝔽) :
+    genericPermutedScalarPhaseSubgroup ψ →ₜ*
+      GenericPermutedProductUnitaryAutomorphism ψ where
+  toMonoidHom := genericPermutedScalarPhaseInclusion ψ
+  continuous_toFun := continuous_subtype_val
 
 omit [Field 𝔽] in
 /-- The scalar inclusion and party-permuted projectivization form an exact
@@ -401,7 +496,9 @@ theorem projectiveGenericProductUnitaryAutomorphismGroup_discrete
         Set (GenericProductUnitaryAutomorphism
           (genericEqualPhaseState C))) :=
     genericScalarPhaseSubgroup_isClosed hm w hC
-  letI :=
+  letI : Finite
+      (ProjectiveGenericProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C)) :=
     projectiveGenericProductUnitaryAutomorphismGroup_finite hm w hC
   exact Finite.instDiscreteTopology
 
@@ -423,6 +520,209 @@ theorem
   letI :=
     projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite hm w hC
   exact Finite.instDiscreteTopology
+
+/-! ## Scalar-torus components -/
+
+/-- Every connected component of the fixed-party automorphism group is a
+left translate of its scalar-phase torus. -/
+theorem connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset
+    (hm : 2 ≤ m) (w : WeylConvention 𝔽)
+    {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C)
+    (A : GenericProductUnitaryAutomorphism
+      (genericEqualPhaseState C)) :
+    connectedComponent A =
+      A • (genericScalarPhaseSubgroup
+        (genericEqualPhaseState C) :
+        Set (GenericProductUnitaryAutomorphism
+          (genericEqualPhaseState C))) := by
+  have hidentity :
+      connectedComponent
+          (1 : GenericProductUnitaryAutomorphism
+            (genericEqualPhaseState C)) =
+        (genericScalarPhaseSubgroup
+          (genericEqualPhaseState C) :
+          Set (GenericProductUnitaryAutomorphism
+            (genericEqualPhaseState C))) := by
+    change
+      connectedComponent
+          (genericIdentityAutomorphism (genericEqualPhaseState C)) =
+        _
+    exact
+      connectedComponent_genericIdentityAutomorphism_eq_scalarPhases
+        hm w hC
+  calc
+    connectedComponent A =
+        A • connectedComponent
+          (1 : GenericProductUnitaryAutomorphism
+            (genericEqualPhaseState C)) := by
+      rw [smul_connectedComponent, mul_one]
+    _ = _ := congrArg (fun S => A • S) hidentity
+
+/-- Every connected component of the party-permuted automorphism group is a
+left translate of its scalar-phase torus. -/
+theorem
+    connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset
+    (hm : 2 ≤ m) (w : WeylConvention 𝔽)
+    {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C)
+    (A : GenericPermutedProductUnitaryAutomorphism
+      (genericEqualPhaseState C)) :
+    connectedComponent A =
+      A • (genericPermutedScalarPhaseSubgroup
+        (genericEqualPhaseState C) :
+        Set (GenericPermutedProductUnitaryAutomorphism
+          (genericEqualPhaseState C))) := by
+  have hidentity :
+      connectedComponent
+          (1 : GenericPermutedProductUnitaryAutomorphism
+            (genericEqualPhaseState C)) =
+        (genericPermutedScalarPhaseSubgroup
+          (genericEqualPhaseState C) :
+          Set (GenericPermutedProductUnitaryAutomorphism
+            (genericEqualPhaseState C))) := by
+    change
+      connectedComponent
+          (genericPermutedIdentityAutomorphism
+            (genericEqualPhaseState C)) =
+        _
+    exact
+      connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases
+        hm w hC
+  calc
+    connectedComponent A =
+        A • connectedComponent
+          (1 : GenericPermutedProductUnitaryAutomorphism
+            (genericEqualPhaseState C)) := by
+      rw [smul_connectedComponent, mul_one]
+    _ = _ := congrArg (fun S => A • S) hidentity
+
+/-- The fixed-party automorphism group is a finite union of connected
+components, each a scalar-torus coset. -/
+theorem genericProductUnitaryAutomorphism_finite_component_cover
+    (hm : 2 ≤ m) (w : WeylConvention 𝔽)
+    {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C) :
+    ∃ representatives :
+        Finset (GenericProductUnitaryAutomorphism
+          (genericEqualPhaseState C)),
+      (Set.univ :
+          Set (GenericProductUnitaryAutomorphism
+            (genericEqualPhaseState C))) =
+        ⋃ A ∈ representatives, connectedComponent A := by
+  classical
+  letI : Finite
+      (ProjectiveGenericProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C)) :=
+    projectiveGenericProductUnitaryAutomorphismGroup_finite hm w hC
+  letI : Fintype
+      (ProjectiveGenericProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C)) :=
+    Fintype.ofFinite _
+  let representatives :
+      Finset (GenericProductUnitaryAutomorphism
+        (genericEqualPhaseState C)) :=
+    Finset.univ.image
+      (fun q :
+        ProjectiveGenericProductUnitaryAutomorphismGroup
+          (genericEqualPhaseState C) => Quotient.out q)
+  refine ⟨representatives, (Set.eq_univ_of_forall ?_).symm⟩
+  intro A
+  let q :
+      ProjectiveGenericProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C) :=
+    genericProductUnitaryProjectivization
+      (genericEqualPhaseState C) A
+  have hout :
+      Quotient.out q ∈ representatives := by
+    exact Finset.mem_image.mpr ⟨q, Finset.mem_univ q, rfl⟩
+  have hquot :
+      genericProductUnitaryProjectivization
+          (genericEqualPhaseState C) (Quotient.out q) =
+        genericProductUnitaryProjectivization
+          (genericEqualPhaseState C) A := by
+    exact Quotient.out_eq q
+  have hcoset :
+      A ∈
+        Quotient.out q •
+          (genericScalarPhaseSubgroup
+            (genericEqualPhaseState C) :
+            Set (GenericProductUnitaryAutomorphism
+              (genericEqualPhaseState C))) := by
+    obtain ⟨z, hz, hzA⟩ :=
+      (QuotientGroup.mk'_eq_mk'
+        (genericScalarPhaseSubgroup
+          (genericEqualPhaseState C))).mp hquot
+    exact Set.mem_smul_set.mpr ⟨z, hz, hzA⟩
+  rw [← connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset
+    hm w hC (Quotient.out q)] at hcoset
+  exact Set.mem_iUnion_of_mem (Quotient.out q)
+    (Set.mem_iUnion_of_mem hout hcoset)
+
+/-- The party-permuted automorphism group is a finite union of connected
+components, each a scalar-torus coset. -/
+theorem
+    genericPermutedProductUnitaryAutomorphism_finite_component_cover
+    (hm : 2 ≤ m) (w : WeylConvention 𝔽)
+    {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C) :
+    ∃ representatives :
+        Finset (GenericPermutedProductUnitaryAutomorphism
+          (genericEqualPhaseState C)),
+      (Set.univ :
+          Set (GenericPermutedProductUnitaryAutomorphism
+            (genericEqualPhaseState C))) =
+        ⋃ A ∈ representatives, connectedComponent A := by
+  classical
+  letI : Finite
+      (ProjectiveGenericPermutedProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C)) :=
+    projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite
+      hm w hC
+  letI : Fintype
+      (ProjectiveGenericPermutedProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C)) :=
+    Fintype.ofFinite _
+  let representatives :
+      Finset (GenericPermutedProductUnitaryAutomorphism
+        (genericEqualPhaseState C)) :=
+    Finset.univ.image
+      (fun q :
+        ProjectiveGenericPermutedProductUnitaryAutomorphismGroup
+          (genericEqualPhaseState C) => Quotient.out q)
+  refine ⟨representatives, (Set.eq_univ_of_forall ?_).symm⟩
+  intro A
+  let q :
+      ProjectiveGenericPermutedProductUnitaryAutomorphismGroup
+        (genericEqualPhaseState C) :=
+    genericPermutedProductUnitaryProjectivization
+      (genericEqualPhaseState C) A
+  have hout :
+      Quotient.out q ∈ representatives := by
+    exact Finset.mem_image.mpr ⟨q, Finset.mem_univ q, rfl⟩
+  have hquot :
+      genericPermutedProductUnitaryProjectivization
+          (genericEqualPhaseState C) (Quotient.out q) =
+        genericPermutedProductUnitaryProjectivization
+          (genericEqualPhaseState C) A := by
+    exact Quotient.out_eq q
+  have hcoset :
+      A ∈
+        Quotient.out q •
+          (genericPermutedScalarPhaseSubgroup
+            (genericEqualPhaseState C) :
+            Set (GenericPermutedProductUnitaryAutomorphism
+              (genericEqualPhaseState C))) := by
+    obtain ⟨z, hz, hzA⟩ :=
+      (QuotientGroup.mk'_eq_mk'
+        (genericPermutedScalarPhaseSubgroup
+          (genericEqualPhaseState C))).mp hquot
+    exact Set.mem_smul_set.mpr ⟨z, hz, hzA⟩
+  rw [←
+    connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset
+      hm w hC (Quotient.out q)] at hcoset
+  exact Set.mem_iUnion_of_mem (Quotient.out q)
+    (Set.mem_iUnion_of_mem hout hcoset)
 
 /-! ## Intrinsic continuous signature homomorphisms -/
 
@@ -925,7 +1225,7 @@ noncomputable def
     (QuotientGroup.quotientKerEquivRange
       (genericPermutedAutomorphismIntrinsicSignatureHom hm w hC))
 
-/-! ## The realized party-permutation quotient and splitting boundary -/
+/-! ## The realized party-permutation quotient and splitting criterion -/
 
 /-- Forget local factors and retain the displayed party permutation. -/
 noncomputable def genericPermutedPartyPermutationHom
@@ -1110,8 +1410,9 @@ structure GenericPartyPermutationExtensionSplitting
       MonoidHom.id _
 
 omit [Field 𝔽] in
-/-- The exact obstruction to splitting is the absence of a homomorphic
-right inverse to the realized party-permutation projection. -/
+/-- The realized party-permutation extension splits exactly when its
+projection has a homomorphic right inverse.  This criterion does not
+construct or compute an extension-class obstruction. -/
 theorem genericPartyPermutationExtension_splits_iff
     (ψ : GenericState m 𝔽) :
     Nonempty (GenericPartyPermutationExtensionSplitting ψ) ↔

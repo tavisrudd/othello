@@ -1,88 +1,110 @@
-# C602 plan: full AME-LU Lean and trust audit
+# C602: full AME--LU Lean and trust audit
 
 **Lane:** `ame-lu`
 
-## Goal
+**Status:** complete
 
-After C601, audit the complete referee-facing Lean companion against the
-paper's trust ledger, statement-adequacy map, verification prose, paper style
-guide, and `lean/AGENTS.md`. Repair task-owned defects, rerun the full AME-LU
-formal gates, and leave an exact declaration-by-declaration account of what is
-unconditional, conditional, computational, native, or unformalized.
+## Result
 
-## Scope
+The length-generic AME--LU formal closure now supports every topological
+claim made by Corollary 3.3 at the strength stated in the manuscript.
 
-The review covers:
+- Both fixed-party and party-permuted scalar-torus inclusions are continuous
+  group homomorphisms.
+- The scalar subgroup of the one-site Clifford matrix group is closed.  Its
+  intrinsic adjoint quotient is therefore Hausdorff; its independently proved
+  finiteness makes the quotient topology discrete.
+- Every connected component of either product-unitary automorphism group is a
+  left translate of the scalar torus.  Explicit finite sets of representatives
+  cover the two groups by these connected components.
+- The realized party-permutation theorem is described consistently as a
+  homomorphic-right-inverse splitting criterion.  Neither the Lean source nor
+  the paper now calls it an extension-class or cohomological obstruction.
 
-- every manuscript result for which Section 8 or either formal ledger claims
-  Lean coverage;
-- every module imported by `RelativeConicArcs.Gates.AMELUAggregate`;
-- every AME-LU gate and axiom-audit module;
-- every project-owned generator, schema, template, certificate, data file,
-  generated banner, and diagnostic in those terminals' transitive verification
-  closure;
-- the corresponding formal ledgers, manuscript verification section, and
-  release/export manifests.
+`RelativeConicArcs.Gates.AMELUAggregateAxioms` audits the new declarations.
+Each depends only on `propext`, `Classical.choice`, and `Quot.sound`.
 
-Read-only shared dependencies remain in audit scope. A defect outside the
-`ame-lu` ownership boundary is recorded with its exact path, declaration,
-downstream claim, and required owning successor rather than repaired
-opportunistically.
+## Trust-graph and release audit
 
-## Review matrix
+The release verifier previously pinned only the original nine six-party AME
+modules despite claiming the completed length-generic formal companion.  Its
+formal allowlist is now computed as the recursive project-owned import closure
+of all AME--LU modules and gates.  The resulting graph has 72 artifacts:
 
-For every paper-facing declaration, record:
+- five pinned toolchain, Lake, and Nix build-identity files;
+- 41 `RelativeConicArcs.AMELU` modules;
+- 15 AMELU import and axiom-audit gates; and
+- 11 transitive project modules owned by other lanes.
 
-1. exact manuscript label and mathematical correspondence;
-2. unconditional theorem versus conditional structure fields;
-3. complete `#print axioms` output and native, generated, certificate, or
-   external trust;
-4. whether every manuscript premise is constructed in Lean;
-5. the full transitive project-owned verification closure;
-6. module header, public docstring, name strength, convention, degeneracy, and
-   field-scope adequacy;
-7. absence of `sorry`, hidden axioms, opaque oracles, workflow identifiers,
-   reverse references, status prose, private paths, and unsupported novelty or
-   priority language;
-8. agreement among theorem type, comments, paper prose, ledgers, evidence
-   manifest, and release artifact.
+An independent import scan found zero missing project-owned imports.  The
+release manifest now binds all 72 files, rather than the former partial
+companion.  The theorem map, statement-adequacy map, formalization ledger,
+verification map, adversarial audit, release plan, and Sections 3 and 8 use
+the same closure and splitting boundary.
 
-The audit distinguishes the three native graph-cardinality checks from
-ordinary kernel proofs and re-evaluates every conditional input after C601;
-historical ledger text is not evidence.
+## Foreign-closure blockers
 
-## Validation and acceptance
+The AME--LU-owned 41-module and 15-gate layer contains no task IDs, temporary
+paths, workflow references, `TODO`/`FIXME`, hidden `sorry`, project axiom, or
+unsafe declaration.  The recursive read-only closure has exactly two
+referee-prose defects:
 
-- Repair every defect in task-owned AME-LU modules, gates, scholarly support
-  artifacts, and paper trust prose.
-- Run guarded elaboration for touched modules, then the documented AME-LU
-  import gates, axiom audits, exact-target `--no-build` checks, and final
-  trace-only aggregate gate.
-- Inspect the whole content of every touched module and every changed
-  generator/template/generated closure, not merely the diff.
-- Produce a compact final audit table with no unresolved task-owned mismatch.
-- Record foreign-closure defects as explicit blockers or allocated successors;
-  do not waive them while calling the artifact referee-ready.
-- Rebuild and inspect the paper if trust prose changes, and verify that public
-  and formal export manifests still describe the exact source identities.
-- End with an `ej` plus Tao-style adversarial pass: ask what a skeptical
-  formalizer and referee could still infer too strongly, repair cheap defects,
-  and state every remaining trust boundary without rhetoric.
+1. `lean/RelativeConicArcs/Plane.lean:7` reverse-references
+   `papers/arcs_complete_outside_conic`.
+2. `lean/FiniteGeom/Code.lean:16` cites
+   `notes/handoffs/2026-07-11-lean-formalization-plan.md` and calls it
+   “Phase 0 next-step 1.”
 
-## Principal adversarial questions
+Both files are foreign-owned and outside the `ame-lu` allowlist.  They remain
+byte-pinned and are disclosed in the public-export plan and adversarial audit.
+They do not change any elaborated statement or axiom dependency, but the
+formal companion must not be called referee-prose ready until their owners
+remove those references.
 
-- Does the headline theorem prove that each displayed intertwiner is Clifford,
-  rather than merely equality of LU and LC orbit partitions?
-- Are prime-power and odd-prime-field scopes separated everywhere, including
-  names and docstrings?
-- Do conditional structures expose every substantive manuscript input, or
-  does a convenient field hide a theorem-sized assertion?
-- Does any exact finite result rely on a trusted generator without a proved
-  checker and coverage theorem?
-- Can a reader understand every theorem and trust route without the task
-  queue, handoff, reports, local paths, or manuscript section numbers?
-- Does any name advertise classification, completeness, canonicity,
-  minimality, or sharpness beyond its formal type?
-- Are the three native checks the only nonstandard audit outputs, and does the
-  paper describe them at the right evidentiary level?
+## Validation
 
+- Warning-free guarded elaboration of
+  `RelativeConicArcs.AMELU.AutomorphismExactSequence`.
+- Measured single-thread builds of the exact-sequence module and
+  `RelativeConicArcs.Gates.AMELUAggregateAxioms`, followed by the trace-only
+  aggregate gate:
+  `/home/tavis/.cache/othello-lean-build/run-20260725-230844-c1ecca6e`.
+- Exact no-build probes and the aggregate gate passed.
+- The warning-free manuscript build produced a 19-page, 180,174-byte PDF.
+  Pages 6 and 15, containing the revised corollary and verification boundary,
+  passed visual inspection.  Its SHA-256 is
+  `9868b229f134bafea387499dbcb7a07204bdcfaf7baef10569ed03c211d62c7b`.
+- All 15 evidence artifacts verified and all seven evidence bundles replayed.
+- The release verifier passed with 35 public artifacts and all 72 formal
+  companion artifacts.  The formal tree SHA-256 is
+  `b81b4a50d33bdfecc3dbe56d5e5ab7215451e86bad11d59b294bb6e2ea75ebf0`.
+
+## `ej` and Tao closeout
+
+The cheapest structural strengthening was to expose components, not merely
+the identity component.  Translating the scalar-torus identity-component
+theorem gives every component exactly; finite projective quotients then give
+explicit finite component covers.  This is now formal and paper-facing.
+
+The highest-value audit question was whether the release identity actually
+bound the theorem closure it advertised.  It did not.  Recursive project
+import closure both repaired that defect and made the two remaining foreign
+prose failures visible.  No additional theorem should be added here:
+section-free outer actions, factor sets, and genuine extension obstructions
+change the mathematical shape and remain correctly assigned to C618.
+
+## Mystery ledger
+
+| Feature | Closeout status | Evidence gap or owner |
+|---|---|---|
+| Are the scalar inclusions continuous maps in the short exact sequences? | **Settled:** both are `ContinuousMonoidHom`s. | none |
+| Is the intrinsic Clifford quotient genuinely Hausdorff and discrete? | **Settled:** the scalar kernel is closed, the quotient is Hausdorff, and finiteness gives the discrete topology. | none |
+| Does the identity-component theorem expose the whole component structure? | **Settled:** every component is a scalar-torus coset and finitely many cover each automorphism group. | none |
+| Does `splits_iff` compute an extension obstruction? | **Settled negatively:** it is exactly a right-inverse criterion. | C618 owns the outer action, factor set, and change-of-section law |
+| Does the release manifest pin the complete project closure? | **Settled:** independent replay finds 72 artifacts and zero missing project imports. | none |
+| Is the complete formal companion referee-prose clean? | **Open, foreign-owned:** two exact reverse/workflow references remain. | `RelativeConicArcs/Plane.lean:7` and `FiniteGeom/Code.lean:16` |
+
+**Vibe check:** the mathematical and trust ledgers are now aligned, and the
+release identity finally matches the formal claims.  The two remaining defects
+are small but real scholarly-packaging blockers in foreign source comments,
+not defects in the AME--LU theorems.

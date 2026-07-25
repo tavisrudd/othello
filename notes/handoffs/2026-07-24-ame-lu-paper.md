@@ -378,6 +378,22 @@ that coherence.  The aggregate gate, axiom audit, and warning-free visually
 inspected 19-page manuscript pass.  See
 `2026-07-25-c617-ame-lu-automorphism-exact-sequence.md`.
 
+**C602 closed (2026-07-25): full Lean/trust/style audit complete.**
+Both scalar inclusions are now continuous homomorphisms; the intrinsic
+Clifford adjoint quotient has a closed scalar kernel and formal
+Hausdorff/discrete topology; and both automorphism groups have explicit
+finite covers by scalar-torus connected components.  The paper and formal
+sources distinguish the homomorphic-right-inverse splitting criterion from
+an extension-class obstruction.  The release manifest recursively pins all
+72 project-owned files in the formal verification graph.  The AME--LU owned
+layer is referee-prose clean, but two exact foreign-owned blockers remain:
+`RelativeConicArcs/Plane.lean:7` reverse-references another paper directory,
+and `FiniteGeom/Code.lean:16` cites an internal handoff/work phase.  The
+aggregate gate, 100-declaration axiom audit, warning-free 19-page manuscript,
+seven evidence replays, visual inspection, and 35-public/72-formal release
+checks pass.  See
+`2026-07-25-c602-ame-lu-full-lean-trust-audit.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -426,7 +442,7 @@ as C559--C572.  Dependency order is authoritative:
     available (complete; the available GRS interface does not supply a
     coherent split).
 19. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
-    C617 (queued).
+    C617 (complete; two exact foreign-owned prose blockers recorded).
 20. C618: canonical outer action, normalized factor set, nonabelian
     change-of-section law, and genuine splitting obstruction for the realized
     party-permutation extension, after C602 (queued).
@@ -457,16 +473,16 @@ statements to explicit group/topological-group structures, normal scalar
 phases, quotient groups, and structured projectivization/signature maps.  C617
 has now packaged the closed exact sequences, discrete quotients, intrinsic
 signature homomorphisms, realized party-permutation extension, and splitting
-boundary.  C602 follows with a complete
-referee-facing audit of the AME-LU Lean aggregate,
-trust ledgers, verification prose, scholarly closure, and release claims.
-C618 then packages the section-free nonabelian extension invariant, and C619
-tests the GRS lifts against the relations required for an actual split.
+boundary.  C602 has completed the referee-facing audit of the AME-LU Lean
+aggregate, trust ledgers, verification prose, scholarly closure, and release
+claims.  C618 now packages the section-free nonabelian extension invariant,
+and C619 then tests the GRS lifts against the relations required for an actual
+split.
 
-**Token-constrained completion route:** continue with `go C602`
-and remain in this lane through C602, C618, and C619, committing and closing
+**Token-constrained completion route:** continue with `go C618`
+and remain in this lane through C618 and C619, committing and closing
 each C-item normally while reusing the loaded manuscript and formal context.
-Do not run optional C581. After C602, the next cross-lane route is C553 and
+Do not run optional C581. After C619, the next cross-lane route is C553 and
 then the coordinated build-system extraction. The authoritative three-session
 protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
 

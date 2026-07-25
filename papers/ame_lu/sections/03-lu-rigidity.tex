@@ -134,14 +134,19 @@ party permutations, then
     \longrightarrow \widetilde\Gamma\longrightarrow 1
 \]
 are short exact sequences with closed connected kernel and finite
-discrete quotient.  If \(\Pi\) is the subgroup of party permutations
-realized by \(\widetilde G\), there is a further exact sequence
+discrete quotient; both inclusions of \(T\) are continuous.  In
+particular, \(G\) and \(\widetilde G\) are finite unions of connected
+components, each a translate of \(T\).  If \(\Pi\) is the subgroup of
+party permutations realized by \(\widetilde G\), there is a further exact
+sequence
 \[
   1\longrightarrow \Gamma\longrightarrow\widetilde\Gamma
     \longrightarrow\Pi\longrightarrow 1.
 \]
 This last extension splits exactly when the realized permutations admit a
 homomorphic choice of projective product-unitary lifts.
+This is only a splitting criterion; it does not compute an extension
+class or a cohomological obstruction.
 \end{corollary}
 
 \begin{proof}
@@ -150,7 +155,9 @@ single-qudit Clifford group over a finite field is finite, as is the
 party-permutation group.  The kernel of projectivizing each local factor
 is exactly the torus of one-site scalar phases.  That torus is the
 identity component, hence is closed; the finite Hausdorff quotient is
-discrete.  Forgetting the local factors maps
+discrete.  Translation identifies every connected component with the
+scalar torus, so finitely many quotient representatives cover the group.
+Forgetting the local factors maps
 \(\widetilde\Gamma\) onto the realized permutation subgroup \(\Pi\).
 Its kernel consists exactly of the fixed-party projective
 automorphisms, which gives the third sequence.  A splitting is, by

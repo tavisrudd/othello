@@ -30,22 +30,6 @@ PAPER_FILES = (
     "supplement/verify.py",
 )
 
-FORMAL_FILES = (
-    "lean/lean-toolchain",
-    "lean/RelativeConicArcs/AMELU/CSS.lean",
-    "lean/RelativeConicArcs/AMELU/Definitions.lean",
-    "lean/RelativeConicArcs/AMELU/Dictionary.lean",
-    "lean/RelativeConicArcs/AMELU/FourCopyContraction.lean",
-    "lean/RelativeConicArcs/AMELU/LogicalPhase.lean",
-    "lean/RelativeConicArcs/AMELU/MarginalMoment.lean",
-    "lean/RelativeConicArcs/AMELU/PencilClassification.lean",
-    "lean/RelativeConicArcs/AMELU/StabilizerDictionary.lean",
-    "lean/RelativeConicArcs/AMELU/TransportDivisor.lean",
-    "lean/RelativeConicArcs/Gates/AMELUAggregate.lean",
-    "lean/RelativeConicArcs/Gates/AMELUAggregateAxioms.lean",
-)
-
-
 def digest(path: Path) -> tuple[int, str]:
     data = path.read_bytes()
     return len(data), hashlib.sha256(data).hexdigest()
@@ -71,6 +55,47 @@ def paper_paths() -> list[str]:
     return sorted(paths)
 
 
+def formal_paths() -> list[str]:
+    """Return the complete project-owned AME--LU verification graph."""
+    roots = {
+        str(path.relative_to(REPO_ROOT))
+        for path in
+        (REPO_ROOT / "lean" / "RelativeConicArcs" / "AMELU").glob("*.lean")
+    }
+    roots.update(
+        str(path.relative_to(REPO_ROOT))
+        for path in
+        (REPO_ROOT / "lean" / "RelativeConicArcs" / "Gates").glob(
+            "AMELU*.lean"
+        )
+    )
+    paths = {
+        "lean/flake.lock",
+        "lean/flake.nix",
+        "lean/lake-manifest.json",
+        "lean/lakefile.toml",
+        "lean/lean-toolchain",
+    }
+    pending = list(roots)
+    while pending:
+        path = pending.pop()
+        if path in paths:
+            continue
+        paths.add(path)
+        for line in (REPO_ROOT / path).read_text().splitlines():
+            if not line.startswith("import "):
+                continue
+            for module in line.removeprefix("import ").split():
+                dependency = (
+                    REPO_ROOT
+                    / "lean"
+                    / f"{module.replace('.', '/')}.lean"
+                )
+                if dependency.is_file():
+                    pending.append(str(dependency.relative_to(REPO_ROOT)))
+    return sorted(paths)
+
+
 def tree_digest(records: list[dict[str, object]]) -> str:
     hasher = hashlib.sha256()
     for item in records:
@@ -82,11 +107,11 @@ def tree_digest(records: list[dict[str, object]]) -> str:
 
 def create_manifest() -> dict[str, object]:
     public = [record(PAPER_ROOT / path, path) for path in paper_paths()]
-    formal = [record(REPO_ROOT / path, path) for path in sorted(FORMAL_FILES)]
+    formal = [record(REPO_ROOT / path, path) for path in formal_paths()]
     return {
         "schema": "ame-lu-release-manifest-v1",
         "release": "ame-lu-rc1",
-        "date": "2026-07-24",
+        "date": "2026-07-25",
         "title": (
             "Local-Unitary Rigidity and Transversal Clifford Groups "
             "for MDS--CSS AME States"
@@ -126,11 +151,12 @@ def verify_manifest(require_formal: bool = False) -> dict[str, object]:
     print(f"verified {len(public)} public artifacts")
     print(f"public tree {actual_public['tree_sha256']}")
 
-    present = [(REPO_ROOT / path).exists() for path in FORMAL_FILES]
+    formal_files = formal_paths()
+    present = [(REPO_ROOT / path).exists() for path in formal_files]
     if any(present) and not all(present):
         raise SystemExit("formal companion is only partially present")
     if all(present):
-        formal = [record(REPO_ROOT / path, path) for path in sorted(FORMAL_FILES)]
+        formal = [record(REPO_ROOT / path, path) for path in formal_files]
         actual_formal = {
             "artifacts": formal,
             "tree_sha256": tree_digest(formal),

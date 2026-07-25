@@ -1,13 +1,14 @@
 import RelativeConicArcs.Gates.AMELUAggregate
 
 /-!
-# Axiom audit for six-party AME local-unitary results
+# Axiom audit for MDS--CSS AME local-unitary results
 
-This audit covers the paper-facing dictionary, admitted-pencil
-classification, marginal-moment separator, fixed-party logical phase,
-four-copy separator, and transport-divisor terminals.  The finite graph
-cardinalities use exhaustive native evaluation; all other listed
-declarations are checked without native evaluation.
+This audit covers the length-generic rigidity, topological symmetry and
+transversal terminals together with the six-party dictionary,
+admitted-pencil classification, marginal-moment separator, fixed-party
+logical phase, four-copy separator, and transport-divisor terminals.  The
+finite graph cardinalities use exhaustive native evaluation; all other
+listed declarations are checked without native evaluation.
 -/
 
 open RelativeConicArcs.AMELU
@@ -38,12 +39,21 @@ open RelativeConicArcs.AMELU
 #print axioms genericPermutedProductUnitaryContinuousProjectivization
 #print axioms connectedComponent_genericIdentityAutomorphism_eq_scalarPhases
 #print axioms connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases
+#print axioms cliffordScalarSubgroup_isClosed
+#print axioms intrinsicCliffordAdjointSignature_t2Space
+#print axioms intrinsicCliffordAdjointSignature_discrete
 #print axioms genericScalarPhaseSubgroup_isClosed
 #print axioms genericPermutedScalarPhaseSubgroup_isClosed
+#print axioms genericScalarPhaseContinuousInclusion
+#print axioms genericPermutedScalarPhaseContinuousInclusion
 #print axioms genericScalarPhase_projectivization_mulExact
 #print axioms genericPermutedScalarPhase_projectivization_mulExact
 #print axioms projectiveGenericProductUnitaryAutomorphismGroup_discrete
 #print axioms projectiveGenericPermutedProductUnitaryAutomorphismGroup_discrete
+#print axioms connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset
+#print axioms connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset
+#print axioms genericProductUnitaryAutomorphism_finite_component_cover
+#print axioms genericPermutedProductUnitaryAutomorphism_finite_component_cover
 #print axioms genericAutomorphismIntrinsicSignatureContinuousHom
 #print axioms genericPermutedAutomorphismIntrinsicSignatureContinuousHom
 #print axioms genericAutomorphismIntrinsicSignatureHom_ker

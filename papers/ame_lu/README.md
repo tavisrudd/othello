@@ -5,7 +5,7 @@ MDS--CSS AME States.*
 
 **Lane:** `ame-lu`
 
-**Status:** version-1 revision through C614. Every local-unitary intertwiner
+**Status:** local version-1 release candidate. Every local-unitary intertwiner
 between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is local
 Clifford, for every prime power and \(m\geq2\).  Transversal conversions
 between the associated `[[2m-1,1,m]]_q` quantum MDS codes are Clifford
@@ -14,6 +14,10 @@ transversal logical group `F_q^2 ⋊ SL_2(q)`. The six-party pencil and
 logical-phase applications retain their existing scopes. Public identifiers,
 author metadata, license choice, and submission authorization remain author
 gates.
+
+The complete formal companion is byte-pinned, but two foreign-owned
+transitive source comments still require referee-prose cleanup; see
+`release/PUBLIC-EXPORT.md`.
 
 ## Build
 

@@ -14,14 +14,16 @@ import RelativeConicArcs.Gates.AMELULogicalPhaseFourCopy
 import RelativeConicArcs.Gates.AMELUTransportDivisor
 
 /-!
-# Aggregate import gate for six-party AME local-unitary results
+# Aggregate import gate for MDS--CSS AME local-unitary results
 
 This terminal imports the length-generic code, state, exact-MDS
 shortening, marginal covariance, arbitrary-arity diagonal-axis theorem,
 unconditional LU-to-LC terminal, projective Clifford finiteness, explicit
 product-unitary topological groups and scalar-phase quotient groups, and the
 closed scalar-torus exact sequences, finite discrete quotients, intrinsic
-adjoint-signature homomorphisms, realized party-permutation extension, and
+adjoint-signature homomorphisms, closed Hausdorff discrete intrinsic
+Clifford quotients, finite scalar-torus component covers, the realized
+party-permutation extension and its splitting criterion, and
 scalar-phase identity-component theorem, the one-leg encoder parameter and
 Choi bridges, Clifford transpose closure, transversal no-go, and exact GRS
 transversal-group interface, the shared six-party conventions, the

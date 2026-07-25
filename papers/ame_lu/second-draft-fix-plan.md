@@ -38,8 +38,10 @@ certificate. It closed all of the following:
    gates rather than only the aggregate modules.
 4. “Formalized implication,” “constructed hypothesis,” and
    “certificate-supported hypothesis” distinct in the manuscript and ledgers.
-5. The release plan includes the statement-adequacy ledger and exact aggregate
-   axiom-audit module; C572 still owns their immutable public identity.
+5. The release plan includes the statement-adequacy ledger and recursively
+   complete 72-file project-owned AME--LU verification graph;
+   `RELEASE-MANIFEST.json` records their immutable public identity.  Two
+   foreign-owned source comments remain disclosed prose blockers.
 
 ## Exposition decisions
 

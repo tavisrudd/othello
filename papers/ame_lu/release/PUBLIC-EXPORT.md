@@ -1,6 +1,7 @@
 # Public export plan
 
-Status: **local release candidate; no public or account action authorized**
+Status: **local release candidate with two disclosed foreign formal-prose
+blockers; no public or account action authorized**
 
 The release has two distributions with different purposes.
 
@@ -9,8 +10,15 @@ The release has two distributions with different purposes.
 `release/verify_release.py` packages the manuscript source and rendered PDF,
 the formal-statement adequacy ledger, and the complete deterministic evidence
 supplement. `release/RELEASE-MANIFEST.json` fixes every included byte and also
-fixes the exact Lean toolchain, AME modules, aggregate gate, and axiom-audit
-terminal in the companion repository.
+fixes the exact Lean toolchain and every project-owned AME--LU module,
+import gate, and axiom-audit terminal in the companion repository.
+The recursive formal closure contains 72 files, including the Lean
+toolchain and Lake/Nix build identities.  Two foreign-owned
+dependencies still violate the formal-artifact prose standard:
+`RelativeConicArcs/Plane.lean:7` reverse-references another paper directory,
+and `FiniteGeom/Code.lean:16` cites an internal handoff and work phase.
+The manifest pins both files, but the companion is not referee-prose ready
+until their owners remove those references.
 
 From `papers/ame_lu/`, verify and export without overwriting an existing file:
 
