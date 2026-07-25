@@ -1,0 +1,1683 @@
+{
+  "claim_scope": "Exact marked one-reply overload-drop identity and finite retention audit on the listed q=11/13/17 strict-kernel DAGs. This does not prove or disprove a q-uniform positive bound.",
+  "orders": [
+    {
+      "best_positive_kernel_reply_minimum": null,
+      "blanket_positive_reply_minimum": null,
+      "certified_positive_states": 135,
+      "kernel_roots": 135,
+      "marked_drop_identity_checks": 17370,
+      "positive_kernel_fibres": 0,
+      "q": 11,
+      "root_retention_strengths": [
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            3,
+            5
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            3,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            3,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            3,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            4,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            4,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            4,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            4,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            4,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            5,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            5,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            5,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            5,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            2,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            4,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            4,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            5,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            5,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            5,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            5,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            3,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            5,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            4,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            5,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            6,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            6,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            7,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            4,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            4,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            4,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            4,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            3,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            5,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            5,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            4,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            5,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            7,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            2,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            5,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            5,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            4,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            6,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            5,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            6,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            7,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            7,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            6,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            6,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            7,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            7,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            6,
+            7,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            6,
+            7,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            6,
+            8,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            7,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            5,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            6,
+            8,
+            9,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "best_positive_kernel_reply_minimum": {
+        "child_omega": 10,
+        "marked_drop": 8,
+        "marked_drop_parts": {
+          "deactivated_overload": 2,
+          "deactivated_overloaded_lines": 2,
+          "killed_active_line_incidences": 77,
+          "killed_legal_points": 11,
+          "thinned_overload": 6,
+          "thinned_overloaded_lines": 6
+        },
+        "maximum_strict_target_omega": 2,
+        "old_omega": 72,
+        "opponent": [
+          0,
+          0
+        ],
+        "ratio": {
+          "denominator": 1,
+          "numerator": 1
+        },
+        "reply": [
+          2,
+          2
+        ],
+        "selected_cells": [
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            10,
+            4
+          ]
+        ],
+        "selected_size_residual": 4,
+        "target_in_kernel": true,
+        "target_omega": 2
+      },
+      "blanket_positive_reply_minimum": {
+        "child_omega": 10,
+        "marked_drop": 9,
+        "marked_drop_parts": {
+          "deactivated_overload": 1,
+          "deactivated_overloaded_lines": 1,
+          "killed_active_line_incidences": 63,
+          "killed_legal_points": 9,
+          "thinned_overload": 8,
+          "thinned_overloaded_lines": 8
+        },
+        "maximum_strict_target_omega": 2,
+        "old_omega": 72,
+        "opponent": [
+          0,
+          0
+        ],
+        "ratio": {
+          "denominator": 2,
+          "numerator": 1
+        },
+        "reply": [
+          1,
+          5
+        ],
+        "selected_cells": [
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            10,
+            4
+          ]
+        ],
+        "selected_size_residual": 4,
+        "target_in_kernel": true,
+        "target_omega": 1
+      },
+      "certified_positive_states": 32,
+      "kernel_roots": 5,
+      "marked_drop_identity_checks": 3792,
+      "positive_kernel_fibres": 99,
+      "q": 13,
+      "root_retention_strengths": [
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            1,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            3,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            4,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            7,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "denominator": 1,
+          "numerator": 1,
+          "t4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "best_positive_kernel_reply_minimum": {
+        "child_omega": 252,
+        "marked_drop": 232,
+        "marked_drop_parts": {
+          "deactivated_overload": 11,
+          "deactivated_overloaded_lines": 9,
+          "killed_active_line_incidences": 396,
+          "killed_legal_points": 36,
+          "thinned_overload": 221,
+          "thinned_overloaded_lines": 137
+        },
+        "maximum_strict_target_omega": 51,
+        "old_omega": 820,
+        "opponent": [
+          4,
+          2
+        ],
+        "ratio": {
+          "denominator": 51,
+          "numerator": 20
+        },
+        "reply": [
+          13,
+          7
+        ],
+        "selected_cells": [
+          [
+            6,
+            3
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            8,
+            15
+          ],
+          [
+            14,
+            11
+          ]
+        ],
+        "selected_size_residual": 4,
+        "target_in_kernel": true,
+        "target_omega": 20
+      },
+      "blanket_positive_reply_minimum": {
+        "child_omega": 231,
+        "marked_drop": 223,
+        "marked_drop_parts": {
+          "deactivated_overload": 10,
+          "deactivated_overloaded_lines": 7,
+          "killed_active_line_incidences": 385,
+          "killed_legal_points": 35,
+          "thinned_overload": 213,
+          "thinned_overloaded_lines": 135
+        },
+        "maximum_strict_target_omega": 56,
+        "old_omega": 808,
+        "opponent": [
+          1,
+          12
+        ],
+        "ratio": {
+          "denominator": 7,
+          "numerator": 1
+        },
+        "reply": [
+          16,
+          16
+        ],
+        "selected_cells": [
+          [
+            4,
+            13
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            7,
+            5
+          ],
+          [
+            15,
+            8
+          ]
+        ],
+        "selected_size_residual": 4,
+        "target_in_kernel": true,
+        "target_omega": 8
+      },
+      "certified_positive_states": 1083,
+      "kernel_roots": 5,
+      "marked_drop_identity_checks": 198286,
+      "positive_kernel_fibres": 3046,
+      "q": 17,
+      "root_retention_strengths": [
+        {
+          "denominator": 21,
+          "numerator": 16,
+          "t4": [
+            3,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "denominator": 57,
+          "numerator": 35,
+          "t4": [
+            4,
+            5,
+            7,
+            15
+          ]
+        },
+        {
+          "denominator": 51,
+          "numerator": 20,
+          "t4": [
+            6,
+            7,
+            8,
+            14
+          ]
+        },
+        {
+          "denominator": 56,
+          "numerator": 39,
+          "t4": [
+            11,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "denominator": 26,
+          "numerator": 15,
+          "t4": [
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      ]
+    }
+  ],
+  "schema": "c80-marked-secant-retention-v1",
+  "upstream": {
+    "certificate": {
+      "path": "notes/2026-07-24-c80-scale-survivor-falsifiers.json",
+      "sha256": "12a6147fcbee0bec737ef66407e40f85956184e74c421ea3bea6a616eac2fe70"
+    },
+    "script": {
+      "path": "rust/scripts/c80_scale_survivor_falsifiers.py",
+      "sha256": "11488f316b94ad10f311cf489f6aa4d85a7a06aece3f97661baae8af2aec0c2e"
+    }
+  }
+}

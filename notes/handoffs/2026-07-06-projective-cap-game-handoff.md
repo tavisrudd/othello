@@ -837,6 +837,22 @@ Next prove or falsify `inf_q ρ(S_q)>0` using opponent-marked conic/secant algeb
 gated.  Report+script+certificate:
 [`../2026-07-24-c80-scale-survivor-falsifiers.md`](../2026-07-24-c80-scale-survivor-falsifiers.md).
 
+**The exact opponent-marked retention inequality is proved, but the q-uniform bound remains open
+(C80, 2026-07-25).** For a marked child `C=S+o`, the overload destruction `D_C(p)` of a reply is
+exactly the sum of full overload on active lines deactivated through `p` plus the truncated overload
+removed on every other active line by the legal points killed on the new secants `pS`. If `d_0` is
+the least destruction among strict replies, then retention by `α` is equivalent to
+`D_C(p)≤(1-α)Ω(C)+αd_0`. Exact independent replay checks this identity on 219,448 q11/q13/q17 reply
+rows. The strongest blanket consequence is false: the q17 DAG contains a positive strict target
+with ratio `1/7`, below `1/4`, while its best positive lower-kernel fibre ratio remains `20/51`.
+The actual q17 Bellman bottleneck is one size-four marked fibre at root `{6,7,8,14}`; its unique
+lower-kernel reply realizes equality at `20/51` and lands in a strength-one target. Thus the live
+theorem is not a load bound on all replies but an existential normalized conic/frame exchange class
+whose member is lower-kernel and satisfies the destruction inequality, plus persistence through the
+forced `sqrt(q)` positive-overload depth. No q-independent positive bound is proved or disproved;
+C82 stays gated. Report+script+certificate:
+[`../2026-07-25-c80-marked-secant-retention.md`](../2026-07-25-c80-marked-secant-retention.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
