@@ -49,14 +49,15 @@ its complement gives an exact identity with a pointwise nonnegative
 remainder.  The concurrency cliques of the secants canonically decompose
 the edges of the Kneser graph $KG(k,2)$.  At zero defect they are maximum
 matchings; after projective duality, the star and matching lines give a
-rank-three realization of the full star--matching pairwise-balanced
-design on the edges of $K_k$.  The remainder also bounds the number of
-graph edges outside maximum concurrency cliques.  Using the known
-two-class classification of abstract $\operatorname{MATCH}(10,5,1)$
-designs and exact realization-ideal certificates, we prove that one class
-has no rank-three realization over any field, while the regular-hyperoval
-class is realizable exactly over characteristic-two fields containing
-$\F_8$.
+realization in the dual plane of the full star--matching pairwise-balanced
+design on the edges of $K_k$; in a Desarguesian plane this is a
+rank-three realization over the underlying field.  The remainder also
+bounds the number of graph edges outside maximum concurrency cliques.
+Using the known two-class classification of abstract
+$\operatorname{MATCH}(10,5,1)$ designs and exact realization-ideal
+computations, we prove that one class has no rank-three realization over
+any field, while the regular-hyperoval class is realizable exactly over
+characteristic-two fields containing $\F_8$.
 
 We apply this theory when $\cH$ is a nonsingular conic $\cC$ in
 $\PG(2,q)$.  If $\rhoC(q)$ is the minimum size of an arc outside $\cC$
@@ -66,14 +67,15 @@ gives an integer lower bound \(L_2(q)\), hence
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-For even \(k\), zero defect forces
+For a zero-defect \(\cC\)-complete arc with even \(k\ge6\),
 \(q\in\{k-2,\binom{k-1}{2},\binom{k-1}{2}+1\}\); over fields of
 order a power of two this leaves the hyperoval scale \(k=q+2\) or the
 single arithmetic candidate \((q,k)=(4096,92)\).  Projective averaging
-transfers upper bounds from ordinary complete arcs.  Finally, an exact
-quadratic-evaluation certificate shows that no quadratic disjoint from an
-eight-arc over \(\F_{16}\) contains its uncovered locus.  Together with a
-checked nine-point witness, this gives \(\rhoC(16)=9\).
+transfers upper bounds from sufficiently small ordinary complete arcs.
+Finally, an exhaustive augmentation certificate together with exact
+quadratic-evaluation certificates shows that no quadratic disjoint from
+an eight-arc over \(\F_{16}\) contains its uncovered locus.  A checked
+nine-point witness then gives \(\rhoC(16)=9\).
 \end{abstract}
 
 \section{Introduction}
@@ -143,11 +145,13 @@ Then
  +\sum_{y\in\cH}r(y)(m-r(y)).
 \]
 The concurrency cliques of the secants canonically decompose
-\(KG(k,2)\).  If \(\Delta_{\cH}(A)=0\), these cliques are maximum
-matchings and form a simple
+\(KG(k,2)\).  For \(k\ge4\), if \(\Delta_{\cH}(A)=0\), these cliques are
+maximum matchings and form a simple
 \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design with a
-rank-three projective realization.  For \(k\ge6\), the defect bounds the
-number of edges lying in nonmaximum concurrency cliques.
+star--matching incidence realization in the dual plane.  When the plane
+is Desarguesian, this is a rank-three projective realization over its
+underlying field.  For \(k\ge6\), the defect bounds the number of edges
+lying in nonmaximum concurrency cliques.
 \end{theorem}
 
 \begin{theorem}[Conic lower bound and \(q=16\)]
@@ -208,10 +212,12 @@ of the prescribed-hole defect canonically produces a simple
 $\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)$ design, represented by
 concurrence points of secants in one projective plane.  The local remainder
 also measures the graph edges that fail to lie in such maximum-matching
-cliques.  After projective duality, Corollary~\ref{cor:star-matching-realization}
-upgrades the matching design to a rank-three realization of the full
-star--matching pairwise-balanced design; this is the bridge to the field
-and characteristic restrictions in Section~\ref{sec:equality-classifications}.
+cliques.  After projective duality,
+Corollary~\ref{cor:star-matching-realization} upgrades the matching design
+to an incidence realization of the full star--matching pairwise-balanced
+design.  In a Desarguesian plane it is a rank-three realization over the
+underlying field, providing the bridge to the field and characteristic
+restrictions in Section~\ref{sec:equality-classifications}.
 
 Sections~\ref{sec:classical}--\ref{sec:examples} give the main route:
 exact accounting, equality rigidity, lower and upper bounds, the
@@ -497,14 +503,15 @@ point of $Z$ on it accounts for $m-1$ of them.  Hence it contains
 $\binom{k-2}{2}/(m-1)$ points of $Z$, which has the two displayed values.
 \end{proof}
 
-\begin{corollary}[Rank-three star--matching realization]
+\begin{corollary}[Dual star--matching incidence realization]
 \label{cor:star-matching-realization}
 If \(\Delta_{\cH}(A)=0\), then after any projective duality the
-\(\binom{k}{2}\) secants become points carrying a rank-three projective
-realization of the star--matching pairwise-balanced design on \(E(K_k)\).
+\(\binom{k}{2}\) secants become points carrying an incidence realization
+of the star--matching pairwise-balanced design on \(E(K_k)\).
 Its lines are the \(k\) star lines of size \(k-1\), one for each point of
 \(A\), and the \(|Z|\) matching lines of size
-\(m=\lfloor k/2\rfloor\).
+\(m=\lfloor k/2\rfloor\).  If the original plane is Desarguesian over
+\(K\), this is a rank-three projective realization over \(K\).
 \end{corollary}
 
 \begin{proof}
@@ -1188,7 +1195,7 @@ inequality.
 The verified values at $q=5,8,9,11$ use the lower bound $L_2(q)$ and explicit
 coordinates.  At $q=5$ the witness is the projective four-frame.  At $q=16$,
 the same ingredients give $8\le\rhoC(16)\le9$;
-a checked projective classification excludes eight.  The proof has three
+a checked exhaustive augmentation covering list excludes eight.  The proof has three
 steps: the defect bound supplies the lower bound eight; a hypothetical
 $\cC$-complete eight-arc would have its ordinary-uncovered locus on a
 quadratic avoiding the arc; and the certificate rules out every such
