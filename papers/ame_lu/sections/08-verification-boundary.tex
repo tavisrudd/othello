@@ -49,17 +49,28 @@ The accompanying Lean~4 artifact uses toolchain
 \texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
 arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
-identities, and the transport polynomial and characteristic-seven
-identities in one environment.  The geometric classification,
+identities, the six-party LU-to-LC rigidity chain, and the transport
+polynomial and characteristic-seven identities in one environment.
+For linear \([6,3,4]_q\) codes, the formal proof constructs the dual
+shortenings, expands the four-party marginal on all \(q^2\) Weyl axes
+including the identity, proves marginal covariance under the displayed
+local action, recovers every local Weyl axis, and absorbs the party
+permutation.  It therefore proves the six-party specialization
+unconditionally for every finite field.  Composing it with the existing
+admitted-pencil interface gives the formal conditional statement
+\(\mathrm{LU}\Longleftrightarrow z(t)=z(u)\).
+
+The geometric classification,
 marginal-trace, logical propagation, finite contraction, and transport
 orbit steps enter separate hypothesis structures; the paper constructs
 or certificate-supports them as specified above, but the Lean modules do
 not.  Importing the terminal therefore does not make them unconditional
 formal theorems.  In particular, the
-  headline \([2m,m,m+1]_q\) LU-to-LC rigidity theorem, its transversal
-Clifford corollary, the fixed-copy generic-constancy proposition, the
-party-moving logical normalizer, and the determinant and double-coset
-inputs of the complete transport theorem are not formalized.
+arbitrary-\(m\) extension of the headline
+\([2m,m,m+1]_q\) LU-to-LC rigidity theorem, its transversal Clifford
+corollary, the fixed-copy generic-constancy proposition, the party-moving
+logical normalizer, and the determinant and double-coset inputs of the
+complete transport theorem are not formalized.
 The companion \texttt{AMELUAggregateAxioms} terminal separates the three
 native finite graph counts from the ordinary kernel-checked declarations.
 For each conditional structure, the statement-adequacy ledger records
@@ -79,8 +90,9 @@ stabilizer supports to force every local factor of an LU equivalence to
 be Clifford \cite{VanDenNestDehaeneDeMoor2005}.  General
 minimal-support AME equivalence permits behavior outside our equal-phase
 CSS hypotheses \cite{BurchardtRaissi2020,RamadasLakshminarayan2025}.
-The contribution claimed here is the full \(q^2-1\)-axis,
-prime-power-qudit extension, its uniform
+The contribution claimed here is the full \(q^2\)-axis tensor
+(with the identity axis fixed by conjugation), its prime-power-qudit
+extension, and its uniform
 \([2m,m,m+1]_q\) MDS/CSS specialization, and the resulting transversal
 Clifford no-go.  It is not a new LU--LC mechanism in the abstract.
 

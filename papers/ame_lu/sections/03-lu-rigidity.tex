@@ -46,9 +46,10 @@ is
 \[
  (a,b)\longmapsto(ac_i^S,bh_i^S),
 \]
-which is invertible because both coordinates are nonzero.  Thus the
-\(q^2-1\) nonidentity labels in \(L_C(S)\) run bijectively through the
-nonidentity Weyl labels at every party of \(S\).
+which is invertible because both coordinates are nonzero.  Thus all
+\(q^2\) labels in \(L_C(S)\) run bijectively through the full local Weyl
+basis at every party of \(S\); in particular, the \(q^2-1\)
+nonidentity labels run bijectively through the nonidentity Weyl labels.
 
 \begin{proposition}[A shortened marginal fixes the local Weyl axes]
 \label{prop:marginal-axes}
@@ -63,23 +64,24 @@ calculation as in \((2.1)\) gives
 \[
  \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .
 \]
-Subtract the identity term and view the result as a tensor in the
-\(m+1\) traceless local Hilbert--Schmidt spaces, each of dimension
-\(q^2-1\).  Conjugation preserves these spaces.  By \((3.2)\), after
-indexing the nonzero label \(v=(a,b)\), this tensor has the form
+View the entire marginal as a tensor in the \(m+1\) local
+Hilbert--Schmidt spaces, each with the full \(q^2\)-element Weyl basis.
+By \((3.2)\), after indexing \(v=(a,b)\), it has the form
 \[
- T^C_S=\sum_{v\in\F_q^2\setminus\{0\}}\lambda_v
+ \rho^C_S=\sum_{v\in\F_q^2}\lambda_v
  \bigotimes_{i\in S}W_{L_iv},                                  \tag{3.3}
 \]
 where every \(L_i\) is invertible and every coefficient \(\lambda_v\) is
-nonzero.  This is a diagonal tensor with \(N=q^2-1\).
+nonzero.  (With the normalization above, all coefficients are
+\(q^{-|S|}\).)  This is a diagonal tensor with \(N=q^2\), including the
+identity label \(v=0\).
 
-Local conjugation fixes the identity and acts unitarily on each
-Hilbert--Schmidt space.  Lemma~\ref{lem:diagonal-axes} therefore forces
-each local adjoint action to permute the axes
-\(\mathbb CW_v\), \(v\ne0\).  It also fixes the identity axis, so the
-underlying unitary normalizes the projective Weyl group.  This is the
-single-qudit Clifford condition.
+Local conjugation acts unitarily on each Hilbert--Schmidt space.
+Lemma~\ref{lem:diagonal-axes} therefore forces each local adjoint action
+to permute all \(q^2\) Weyl axes.  Conjugation fixes the identity
+operator, so it fixes the identity axis and permutes the remaining
+\(\mathbb CW_v\), \(v\ne0\).  Hence the underlying unitary normalizes
+the projective Weyl group.  This is the single-qudit Clifford condition.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
