@@ -241,12 +241,12 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
-      "bytes": 2083,
+      "bytes": 2223,
       "path": "FINAL-READER-SIGNOFF.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Independent final-reader signoff",
-      "sha256": "4c14e20d228e51e3cec55566cc87e428ecfad40953b74932ebe18f9965e7434d"
+      "sha256": "34059e2d3adced4188b4225590216570f2bd568fedfb67a9843c49e55d727ddf"
     },
     {
       "bytes": 10539,
@@ -289,12 +289,12 @@
       "sha256": "bbd5879cebde7f2783ff48556974e77614a0339396e69222f87dc882af42ffbf"
     },
     {
-      "bytes": 11465,
+      "bytes": 12124,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "429510c8dbf73b799ced9b7af26fec3481fc019a1d821cec91561f93775f5613"
+      "sha256": "4432bdf188f597479463d836af3e6c4114cf5bc6e13e6583bc97379300cf55ca"
     },
     {
       "bytes": 17225,

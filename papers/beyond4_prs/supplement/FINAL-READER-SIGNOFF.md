@@ -16,11 +16,12 @@ The reader must check the manuscript proofs and scope boundaries for the
 following headline rows in `claim-proof-novelty-ledger.md`:
 
 - R5, including the cubic-pencil exhaustion and finite bridge;
-- PF, TI, CC6, CC7, CC8, and the marked squarefree-lifting interface;
-- R8 and R9, including the contained-component exhaustions, point-count
-  conventions, deletion budgets, and threshold endpoints;
-- Hessian, Lucas, e7-cover, and e7-shallow, including every stated
-  characteristic-two boundary.
+- PF, TI, CC6, and CC7, including the marked squarefree-lifting interface;
+- R6 and R7, including the contained-component exhaustions, point-count
+  conventions, deletion budgets, threshold endpoints, and the separate
+  covering-radius boundary at redundancy seven; and
+- SC, including the exact coordinate identities and the manuscript-only
+  density, saturation, and component-exhaustion boundary.
 
 Verdict: pending.
 
@@ -32,12 +33,13 @@ The reader must check:
 
 - the syndrome, split-free, covering-radius, deep-hole, and one-column
   MDS-extension dictionary;
-- every all-field, high-field, and bounded-field qualifier in R5--R9;
+- every all-field, high-field, and bounded-field qualifier in R5--R7;
 - the public classification representatives, stabilizers, Frobenius fusions,
   exhaustion identities, and independent replay claims;
 - the distinction between manuscript proof, cited input, certificate,
   kernel-checked algebra, and conditional Lean synthesis;
-- the one-command clean-checkout replay and the exact public release manifest.
+- the one-command clean-checkout replay, the exact 15-module R5--R7 Lean
+  closure, and the public release manifest.
 
 Verdict: pending.
 

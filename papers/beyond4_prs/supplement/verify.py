@@ -217,6 +217,16 @@ def check_public_release_gate() -> None:
             raise SystemExit(f"missing release-manifest field: {label}")
         return match.group(1).strip().strip("`")
 
+    def signoff_field(label: str) -> str:
+        match = re.search(
+            rf"^\| {re.escape(label)} \| (.+) \|$",
+            signoff,
+            flags=re.MULTILINE,
+        )
+        if match is None:
+            raise SystemExit(f"missing final-reader candidate field: {label}")
+        return match.group(1).strip().strip("`")
+
     required_patterns = {
         "Paper-export repository URL": r"https://.+",
         "Release tag": r"\S+",
@@ -244,6 +254,10 @@ def check_public_release_gate() -> None:
         raise SystemExit("release flake does not resolve the public Lean revision")
     if "pending" in signoff.lower() or signoff.lower().count("verdict: green.") != 2:
         raise SystemExit("independent final-reader signoff is incomplete")
+    if signoff_field("Paper-export commit") != field("Release commit"):
+        raise SystemExit("final-reader signoff names a different paper-export commit")
+    if signoff_field("Canonical preprint PDF SHA-256") != field("PDF SHA-256"):
+        raise SystemExit("final-reader signoff names a different canonical PDF")
     if "Unrefereed preprint" not in main:
         raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
     print("verified public release metadata and final-reader gate")
