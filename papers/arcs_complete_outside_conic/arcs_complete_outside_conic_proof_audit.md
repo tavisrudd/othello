@@ -18,6 +18,15 @@
      per-secant counts follow from the second index equation and the degree of \(KG(k,2)\);
    - the bad-edge estimate is the pointwise bound
      \(\binom r2\le (m-1)(r-1)(m-r)/2\), with the larger hole weight handled separately.
+   The incidence decomposition, simplicity, zero-defect maximum index, both exact double-count
+   identities, and the bad-edge inequality are kernel-checked respectively by
+   `disjoint_arcPairs_existsUnique_concurrence`, `concurrence_matching_injective`,
+   `concurrenceCenter_pointIndex_eq_half`, `concurrenceCenters_card_mul_choose_half`,
+   `concurrenceCentersOnPair_card_mul_sub_one`, with the displayed quotients exposed by
+   `concurrenceCenters_card_eq_quotient` and
+   `concurrenceCentersOnPair_card_eq_quotient`, and
+   `two_mul_badConcurrenceEdgeCount_le` in
+   `RelativeConicArcs.MatchingDesignRigidity`.
    The six-point realization is proved by a projective frame normalization: the first diagonal
    determinant is `-2`, and the second quadrangle has diagonal line
    `t(1+t)x+(1+t)y+tz=0`, whose passage through the remaining frame point gives
@@ -69,12 +78,18 @@
     `k-1` recovered secants, since secants through a nonvertex form a matching on `k` endpoints and
     therefore number at most `floor(k/2)<k-1`. This is a proof-only reconstruction statement; it
     does not recover labels and introduces no finite census. For six-arcs it applies at `q>=16`.
+    The exact statement is kernel-checked as
+    `RelativeConicArcs.eq_of_ordinaryUncovered_eq`.
 13. The reconstruction is canonical: writing `S=PG(2,q)\U(A)` and `N=choose(k,2)`, the parent
     secants are exactly the lines containing more than `N` points of `S`; vertices are then the
     `(k-1)`-fold points. Equivariance gives equality of the `PGammaL(3,q)` stabilizers of `U(A)`
-    and `A`. The strict threshold is sharp in general: at `(q,k)=(5,4)`, the frame has conic
-    uncovered locus and `q+1=N=6`; the order-120 conic stabilizer has an orbit of at least five
-    frames because a frame stabilizer has order 24.
+    and `A`. The two inverse stages and their equivariant consequence are kernel-checked as
+    `RelativeConicArcs.canonical_reconstruction` and
+    `RelativeConicArcs.stabilizes_iff_stabilizes_ordinaryUncovered`. The latter is stated for an
+    abstract action preserving arc size, arc incidence, and ordinary uncovered loci; semilinear
+    projectivities satisfy these hypotheses. The strict threshold is sharp in general: at
+    `(q,k)=(5,4)`, the frame has conic uncovered locus and `q+1=N=6`; the order-120 conic
+    stabilizer has an orbit of at least five frames because a frame stabilizer has order 24.
 14. The reconstruction section now states the minimum-distance consequence first:
     distinct parents have locus distance at least `2*delta`. Quantitative reconstruction then
     separates line recovery from vertex recovery. For two `N`-line unions,
@@ -232,7 +247,9 @@ The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain an
 certificates. In particular, it proves the arbitrary-hole capacity theorem, the complete-affine
 line-hole equivalence, ideal-line incidence identity, corrected affine bound and equality criterion, the generic
 projective-averaging transfer, the explicit additive lower bound, and the universal
-even-characteristic incidence loss. Its generic Boolean checker verifies conic disjointness, the arc
+even-characteristic incidence loss. It also proves exact uncovered-locus reconstruction and its
+equivariant stabilizer corollary, concurrence decomposition, zero-defect maximum-matching
+rigidity, exact total and per-secant centre counts, and bad-edge stability. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.

@@ -1423,8 +1423,8 @@ The body separates mathematical reductions from finite exclusion.  The
 corresponding evidence and trust boundaries are summarized below.  In the
 source supplement, \path{lean/RelativeConicArcs/TRUST.md} records exact
 commands, toolchain versions, SHA-256 digests, theorem names, and frozen
-outputs.  The import-only gate
-\path{lean/RelativeConicArcs/Gates/Relconic.lean} is the kernel-checking
+outputs.  Within \path{lean/RelativeConicArcs/}, the import-only gate
+\path{Gates/Relconic.lean} is the kernel-checking
 entry point for precisely the results used here.
 The pinned versions are Lean \(4.32.0\)-rc1, Lake
 \texttt{5.0.0-src+b4812ae}, and Mathlib revision
@@ -1454,8 +1454,9 @@ custom axiom declaration, or \texttt{native\_decide}.
                 >{\raggedright\arraybackslash}p{0.36\textwidth}}
 \hline
 Claim & Certificate and checker & Remaining trust\\ \hline
-Defect, bounds, transfer, and reconstruction&
-\texttt{Gates.Relconic}; named declarations in the trust manifest&
+Defect, bounds, transfer, exact reconstruction, and matching rigidity&
+\texttt{Gates.Relconic}; the named reconstruction and matching terminals in
+the trust manifest&
 Lean kernel, Mathlib, and
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
 \(q=16\) exclusion&

@@ -147,7 +147,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
-- **C604 `[relconic]` [QUEUED; begin with TT diagnostic]** — close the paper-facing Lean gap for exact uncovered-locus reconstruction and zero-defect matching-design rigidity, then synchronize the Relconic gate, trust manifest, proof audit, and manuscript verification table → `notes/2026-07-25-c604-relconic-lean-reconstruction-matching-closure.md`.
 
 ### `ame-lu`
 
