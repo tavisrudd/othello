@@ -1613,12 +1613,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "3560ac19e15b46e2e1c7300b35148f74a1a1b3f492a0f729a87bfe69fd10456f"
+        "sha256": "fe073a6d8f490869f63e2302ffc0ebb0157b0ec5a954a932dbc299daa93c2ff6"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "5a4bd591ca77c0651d69cfd9ba8d4d04696d34c20e3ebda577e5ffc2daf0ef96"
+        "sha256": "e91236cd2a1942393a9f460bfef4ba2431cf70f148c2db48052b8cd753e1d3c0"
       }
     ]
   }
