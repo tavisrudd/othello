@@ -33,9 +33,9 @@
 \newcommand{\rhoC}{\rho_{\cC}}
 \newcommand{\tmin}{t_2(2,q)}
 
-\title{Exact defect and matching rigidity for arcs\\
-complete outside a prescribed conic\\
-\large with $\rho_{\mathcal C}(16)=9$}
+\title{Exact prescribed-hole defect and matching-design rigidity\\
+for projective arcs\\
+\large with applications to arcs complete outside a conic}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -43,27 +43,32 @@ complete outside a prescribed conic\\
 \maketitle
 
 \begin{abstract}
-Let $\cH$ be a prescribed set disjoint from a projective arc $A$.
-Splitting the classical first two secant-index equations between $\cH$ and
-its complement gives an exact identity with a nonnegative local remainder.
-At zero defect, the maximum matchings formed by concurrent secants
-constitute a simple matching design.  For \(k\ge6\), the remainder also
-gives a quantitative stability bound.
+For a projective arc $A$ and any prescribed set $\cH$ disjoint from it,
+splitting the classical first two secant-index equations between $\cH$ and
+its complement gives an exact identity with a pointwise nonnegative
+remainder.  The concurrency cliques of the secants canonically decompose
+the edges of the Kneser graph $KG(k,2)$.  At zero defect they are maximum
+matchings and constitute a simple matching design with a rank-three
+projective realization; the remainder also bounds the number of graph
+edges outside maximum concurrency cliques.  Of the two abstract
+$\operatorname{MATCH}(10,5,1)$ designs, one has no rank-three realization
+over any field, while the regular-hyperoval design is realizable exactly
+over characteristic-two fields containing $\F_8$.
 
-We apply the identity when $\cH$ is a nonsingular conic $\cC$ in
-$\PG(2,q)$.  Let $\rhoC(q)$ be the minimum size of an arc
-$A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
-$A\cup\cC$.  The identity gives an integer lower bound \(L_2(q)\), hence
+We apply this theory when $\cH$ is a nonsingular conic $\cC$ in
+$\PG(2,q)$.  If $\rhoC(q)$ is the minimum size of an arc outside $\cC$
+whose secants cover every point outside the arc and conic, the identity
+gives an integer lower bound \(L_2(q)\), hence
 \[
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
 A zero-defect \(\cC\)-complete ten-arc can occur only in \(\PG(2,8)\),
 where its concurrence design is the regular-hyperoval design.  Projective
-averaging transfers upper bounds from ordinary complete arcs.  Explicit
-witnesses attain \(L_2(q)\) for \(q=5,8,9,11\).  A kernel-checked exhaustive
-certificate rules out \(\cC\)-complete eight-arcs over \(\F_{16}\), and a
-checked nine-point witness gives \(\rhoC(16)=9\).
+averaging transfers upper bounds from ordinary complete arcs.  Finally, a
+kernel-checked exhaustive certificate rules out \(\cC\)-complete
+eight-arcs over \(\F_{16}\), and a checked nine-point witness gives
+\(\rhoC(16)=9\).
 \end{abstract}
 
 \section{Introduction}
@@ -75,8 +80,12 @@ two of its points.  Complete arcs and the closely related problem of finding
 small saturating sets have a substantial literature; see, for example,
 Ball~\cite{Ball1997}, Kim--Vu~\cite{KimVu2003}, and Nagy~\cite{Nagy2018}.
 
-Fix a nonsingular conic $\cC\subset\PG(2,q)$.  We impose the arc condition
-but allow the points of $\cC$ to remain uncovered.
+More generally, one may prescribe a set of points that are allowed to
+remain uncovered.  The exact defect identity for this problem, valid in
+every finite projective plane and for an arbitrary prescribed set, is the
+main result of the paper.  Its principal application here takes the
+prescribed set to be a nonsingular conic
+$\cC\subset\PG(2,q)$.
 
 \begin{definition}\label{def:relative}
 An arc $A\subseteq\PG(2,q)\setminus\cC$ is \emph{$\cC$-complete} if every
@@ -107,9 +116,7 @@ three collinear points, so \(x\) lies on a secant of \(A\).  Thus \(A\) is
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
-The local identity below drives the argument; the conic problem is its main
-application.  The following statement collects the identity and its
-numerical consequences.  For a point \(x\)
+For a point \(x\)
 outside a \(k\)-arc \(A\), let \(r(x)\) be the number of secants of \(A\)
 through \(x\), and put \(m=\lfloor k/2\rfloor\) and
 \(N=\binom{k}{2}\).  If a set \(\cH\) disjoint from \(A\) is allowed to
@@ -117,7 +124,7 @@ remain uncovered, let \(\cX_{\cH}(A)\) be the covered points outside
 \(A\cup\cH\) and let
 \(\IH(A)=\sum_{y\in\cH}r(y)\).
 
-\begin{theorem}[Defect, lower bound, and \(q=16\)]\label{thm:main}
+\begin{theorem}[Exact prescribed-hole defect]\label{thm:main}
 For every arc \(A\) and prescribed hole \(\cH\), define
 \[
  \Delta_{\cH}(A)=
@@ -130,7 +137,17 @@ Then
  \sum_{x\in\cX_{\cH}(A)}(r(x)-1)(m-r(x))
  +\sum_{y\in\cH}r(y)(m-r(y)).
 \]
-In particular, if
+The concurrency cliques of the secants canonically decompose
+\(KG(k,2)\).  If \(\Delta_{\cH}(A)=0\), these cliques are maximum
+matchings and form a simple
+\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design with a
+rank-three projective realization.  For \(k\ge6\), the defect bounds the
+number of edges lying in nonmaximum concurrency cliques.
+\end{theorem}
+
+\begin{theorem}[Conic lower bound and \(q=16\)]
+\label{thm:main-conic}
+If
 \[
  L_2(q)=\min\left\{k\ge3:
  q^2-k\le\binom{k}{2}(q-1)
@@ -149,7 +166,7 @@ Its summands record exactly where a
 secant-index distribution falls short of the extremal pattern.  Their
 vanishing produces the matching design used for equality rigidity, while
 their total gives stability.  The last assertion of
-Theorem~\ref{thm:main} has a separate finite input: a checked augmentation
+Theorem~\ref{thm:main-conic} has a separate finite input: a checked augmentation
 certificate reduces all eight-arcs over \(\F_{16}\) to \(2633\) leaves,
 and checked quadratic-evaluation records reject every leaf.
 
