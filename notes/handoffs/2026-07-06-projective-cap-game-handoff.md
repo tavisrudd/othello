@@ -868,6 +868,22 @@ a controlled family; do not enrich another static profile. This does not
 disprove `inf_q ρ(S_q)>0`, and C82 remains gated. Report+script+certificate:
 [`../2026-07-25-c80-marked-secant-profile-persistence.md`](../2026-07-25-c80-marked-secant-profile-persistence.md).
 
+**The canonical forgetful cross-depth morphism is falsified at its first
+q17 step (C80, 2026-07-25).** For `T=S+o+p`, the proposed restriction
+`Δ(S)|Legal(T)→Δ(T)` is exact iff the exchange creates no new pair conflict
+among surviving moves. All 3,798 positive lower-`K_Ω` replies from residual
+size four create such a conflict, and every conflicted reply contains a
+marked-pencil clique with externally non-twin vertices, so neither projective
+relabelling nor collapsing each clique to one move repairs the quotient. Across all 610 forced-positive
+fibres, exact forgetful contractions occur only on 65 size-six replies,
+covering 51 fibres; the other 559 fibres have none. Thus deletion cannot
+initialize the required recursion. A successor must retain the two labelled
+marked-pencil conflict relations per exchange and prove a bounded algebraic
+quotient of their accumulated external incidence; a non-simplicial value
+argument also remains possible. This does not disprove
+`inf_q ρ(S_q)>0`; C82 remains gated. Report+script+certificate:
+[`../2026-07-25-c80-exchange-retraction-falsifier.md`](../2026-07-25-c80-exchange-retraction-falsifier.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -906,8 +922,10 @@ Priority order and why:
    `sqrt(q/2)-4`.  The finite data do not enter that growing-depth regime.  Exact marked-secant
    profiles are now P/N-mixed, while the bounded orbital refinement that covers all q17
    forced-positive fibres has zero cross-depth recurrence.  The live theorem is therefore a
-   cross-depth contraction/renormalization morphism for the opponent/reply exchange; if that is
-   false, the route needs a genuinely recursive family not expressible as a static profile.
+   bounded algebraic quotient of the accumulated marked-pencil boundary. Exact forgetting is
+   false at every q17 size-four positive reply, and collapsing a new pencil clique loses external
+   incidence already at rank two. The route therefore needs a labelled recursive family or a
+   non-simplicial value argument, not another static profile.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
