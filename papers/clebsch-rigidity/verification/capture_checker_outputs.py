@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture canonical stdout identities for the ten exact Paper I replays."""
+"""Capture canonical stdout identities for the eleven exact Paper I replays."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ CHECKERS = (
     "check_small_q_uniqueness.py",
     "check_q19_nonexample.py",
     "check_small_k_conic_filling.py",
+    "verification/c605_verify.py",
 )
 
 

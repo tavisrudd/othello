@@ -55,7 +55,7 @@ a universal chord-defect identity.  Together with a passant count, it shows
 that conic filling by a $k$-arc forces
 $2k-3\le q<\binom{k}{2}$ and a sharper quadratic field-size bound.  It also
 proves that $q=11$ is the only conic-filling field for six-arcs and, with
-finite verification, classifies conic filling through seven points.
+finite verification, classifies conic filling through eight points.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -125,8 +125,7 @@ $|\cU(K)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
 $q\equiv3\pmod4$.  For an arbitrary conic-filling $k$-arc, the same moment
 calculation forces $q$ odd and
 $2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier.  We
-classify the cases through seven points and reduce the eight-point case to
-three fields.
+classify the cases through eight points.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -1148,15 +1147,12 @@ for all smaller neighboring arc sizes.
 \label{thm:small-k-conic-filling}
 Let $A$ be a $k$-arc in $\PG(2,q)$, where $q$ is a prime power and
 $4\le k\le8$, and suppose that $\cU(A)$ is the full set of
-$\F_q$-rational points of a nonsingular conic. If $k\le7$, then
+$\F_q$-rational points of a nonsingular conic. Then
 \[
  (k,q)=(4,5)\qquad\text{or}\qquad(k,q)=(6,11).
 \]
 In the first case $A$ is a projective four-frame; in the second it is a
-Clebsch hexagon. Conversely, both cases occur. If $k=8$, then
-\[
- q\in\{13,17,19\}.
-\]
+Clebsch hexagon. Conversely, both cases occur.
 \end{theorem}
 
 \begin{proof}[Proof with exhaustive finite verification]
@@ -1199,11 +1195,38 @@ evaluation matrix has full rank six, so none lies on a conic.
 Finally let $k=8$. The conic-filling window and its quadratic inequality
 give $q\ge13$ and $q^2-28q+125\le0$, hence $q\le22$. The prime powers in
 this interval that are odd are exactly $13,17,19$.
+
+It remains to exclude these three fields. By projective equivalence fix the
+conic $XZ=Y^2$, whose stabilizer is the symmetric-square image of
+$\operatorname{PGL}(2,q)$. Its complement has $q^2$ points. Join two of them when their
+line is passant. Every chord of a conic-filling arc is passant, so the
+desired eight-arc would be an eight-clique in this graph, with collinear
+triples forbidden.
+
+An exact orbit search gives the complete reduction
+\[
+\begin{array}{c|c|c|c}
+q&\text{off-conic points}&\text{passant edges}&
+ \operatorname{PGL}(2,q)\text{-orbits on edges}\\ \hline
+13&169&7098&10\\
+17&289&20808&13\\
+19&361&32490&15.
+\end{array}
+\]
+For one representative of each edge orbit, the search extends partial arcs
+and identifies states under the setwise stabilizer of the root edge.
+Canonical keys are the lexicographically least sorted point lists in each
+stabilizer orbit. Every candidate is reached: it contains a passant edge,
+that edge is carried to one of the listed representatives, and the remaining
+points are then among the enumerated extensions. In all three fields the
+largest partial arc has size six. Thus there is no seven-point arc with all
+chords passant, and in particular no conic-filling eight-arc. A separate
+replay verifies the edge-orbit partition and repeats the extension search by
+ordered backtracking without stabilizer identification.
 \end{proof}
 
-Thus conic filling is finite at every fixed arc size; the classification is
-complete through seven points, and the eight-point problem is reduced to
-three fields.
+Thus conic filling is finite at every fixed arc size, and its classification
+is complete through eight points.
 
 \section{Verification architecture}
 \label{sec:verification}
@@ -1284,7 +1307,7 @@ Uniqueness of $q=11$
 Clebsch-family formula
 & Dye's ten Brianchon points and edge criterion
 & --- \\
-Classification through seven; eight-point sieve
+Classification through eight points
 & universal chord moments and defect bound
 & \path{RelativeConicArcs/SmallKChordMoments.lean};
 \path{RelativeConicArcs/SmallKGeometricBridge.lean}
@@ -1324,8 +1347,9 @@ Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula
 & \path{check_q19_nonexample.py} \\
-Classification through seven; eight-point sieve
-& \path{check_small_k_conic_filling.py}; the eight-point sieve is human algebra \\
+Classification through eight points
+& \path{check_small_k_conic_filling.py};
+\path{verification/c605_verify.py} \\
 \bottomrule
 \end{tabular}
 \caption{Executable checks, separate from the formal dependencies in
@@ -1344,8 +1368,9 @@ $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
 
 The universal defect identity makes conic filling finite at every fixed arc
 size. It explains both the isolation of $q=11$ and the classification for
-$4\le k\le7$, while the two-sided conic-filling window reduces the
-eight-point case to three fields. The numerical window is nonempty for
+$4\le k\le8$. The two-sided conic-filling window first reduces the
+eight-point case to three fields; exact orbit search excludes all three.
+The numerical window is nonempty for
 every $k\ge4$ and has width
 $\binom{k}{2}-(2k-3)=\binom{k-2}{2}$; it is sharp at $k=4$, where its sole
 integer is $q=5$ and conic filling occurs. The Clebsch code realizes another
@@ -1354,10 +1379,9 @@ covering-radius data recover geometry that was not built into the code,
 forcing the Clebsch hexagon and hence its $A_5$ symmetry. A line bound and
 the defect identity reduce that rigidity to Dye's equality case;
 enumeration is reserved for the low-degree strengthening, the numerical
-gap, and the terminal $k=7$ exclusions.
+gap, and the terminal $k=7,8$ exclusions.
 
-Closing the three eight-point fields will require further concurrency or
-extension information. More generally, which odd prime powers in the
+More generally, which odd prime powers in the
 quadratically widening window admit conic-filling arcs? A second problem is
 to connect fixed-$k$ rigidity with the large-arc conic-forcing regime. Both
 ask how far a syndrome locus can reconstruct the projective system that

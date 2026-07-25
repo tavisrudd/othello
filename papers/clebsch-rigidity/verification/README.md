@@ -30,10 +30,11 @@ The gate records the exact two classical Dye assumptions used by the
 rigidity implication; the other printed axioms are part of Lean's ordinary
 logical trust boundary or are shown absent.
 
-The ten Python programs at the paper root are deterministic,
-standard-library exact replays. They enumerate the finite domains stated in
-the manuscript and print bounded summaries. They do not import generated
-Lean output. `capture_checker_outputs.py` regenerates the compact
+The ten Python programs at the paper root and the C++/Python eight-point
+search under `verification/` are deterministic exact replays. They enumerate
+the finite domains stated in the manuscript and print bounded summaries.
+They do not import generated Lean output. `capture_checker_outputs.py`
+regenerates the compact eleven-entry
 `checker_outputs.json` certificate of stdout hashes, byte counts, and line
 counts. The release runner checks every fresh replay against that certificate.
 The manifest records the coverage and residual semantic trust for every use.
@@ -49,7 +50,7 @@ nix develop --command python3 verification/verify_release.py \
 The runner validates the paper root and the exact Paper I formal source
 pathset against the pinned commit, while ignoring unrelated worktree paths.
 It builds the manuscript in an isolated temporary directory, executes exactly
-the fifteen admitted checks without a shell, and refuses any scholarly path
+the sixteen admitted checks without a shell, and refuses any scholarly path
 change.
 Successful output is deterministic and must equal
 `verify-release-output.json`. That output attests the manuscript source and

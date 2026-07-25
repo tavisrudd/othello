@@ -173,6 +173,55 @@ def replay(
     }
 
 
+def c605_replay() -> dict[str, object]:
+    supporting_artifacts = [
+        "verification/c605_search.cpp",
+        "verification/c605_replay.py",
+        "verification/c605_q13.json",
+        "verification/c605_q17.json",
+        "verification/c605_q19.json",
+        "verification/c605_independent.json",
+    ]
+    return {
+        "route": "exact-replay",
+        "subclaim": "terminal eight-point exclusions",
+        "computation": {
+            "checker_commands": [
+                {"argv": ["python3", "verification/c605_verify.py"]}
+            ],
+            "coverage": (
+                "For q=13,17,19 the primary search fixes XZ=Y^2, partitions "
+                "all 7,098, 20,808, and 32,490 passant edges into 10, 13, "
+                "and 15 PGL(2,q)-orbits, and exhausts arc extensions from "
+                "one representative of every orbit. The maximum size is six "
+                "in every field, before the forced eight-point spectra arise."
+            ),
+            "soundness_bridge": (
+                "Every conic-filling arc is off the fixed conic and every "
+                "one of its chords is passant. Every nontrivial candidate "
+                "therefore contains an edge carried to a listed root."
+            ),
+            "independent_replay": (
+                "The Python replay tests passancy by a discriminant rather "
+                "than conic incidence, verifies the edge-orbit partition "
+                "directly, and repeats ordered backtracking without the "
+                "primary search's stabilizer deduplication."
+            ),
+            "residual_trust": (
+                "The C++17 and Python runtimes, exact prime-field arithmetic, "
+                "and the manuscript's coordinate-to-geometric correspondence. "
+                "No Lean theorem covers this terminal finite exclusion."
+            ),
+            "artifacts": [
+                file_evidence("paper", "verification/c605_verify.py")
+            ],
+            "supporting_artifacts": [
+                file_evidence("paper", path) for path in supporting_artifacts
+            ],
+        },
+    }
+
+
 def lean(
     subclaim: str,
     groups: list[str],
@@ -399,11 +448,12 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 three-field sieve follows from the human-proved conic-filling window.",
+            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 and k=8 exclusions are exact-replayed.",
             [
-                conceptual("small-arc reductions, k=6 dependency, and k=8 sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
                 replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
+                c605_replay(),
             ],
         ),
         58: (
@@ -485,6 +535,23 @@ def checks() -> list[dict[str, object]]:
                 "stdout_sha256": output["sha256"],
             }
         )
+    c605_output = output_checks.get("verification/c605_verify.py")
+    if not isinstance(c605_output, dict):
+        raise ValueError(
+            "checker-output certificate omits verification/c605_verify.py"
+        )
+    result.append(
+        {
+            "id": "check-c605-eight-point-exclusion",
+            "repository": "paper",
+            "cwd": ".",
+            "argv": ["python3", "verification/c605_verify.py"],
+            "timeout_seconds": 120,
+            "stdout_bytes": c605_output["bytes"],
+            "stdout_lines": c605_output["lines"],
+            "stdout_sha256": c605_output["sha256"],
+        }
+    )
     result.append(
         {
             "id": "lean-rigidity-trust-gate",

@@ -171,6 +171,13 @@ def validate_computation(
         if path.suffix != ".py":
             fail(f"{where}.artifacts[{index}] must be an exact Python checker")
         artifact_paths.append(require_string(artifact.get("path"), f"{where}.artifacts[{index}].path"))
+    supporting = value.get("supporting_artifacts", [])
+    if not isinstance(supporting, list):
+        fail(f"{where}.supporting_artifacts must be a list")
+    for index, artifact in enumerate(supporting):
+        validate_file(
+            artifact, repositories, f"{where}.supporting_artifacts[{index}]"
+        )
     commands = value.get("checker_commands")
     if not isinstance(commands, list) or not commands:
         fail(f"{where}.checker_commands must be a nonempty list")
@@ -330,8 +337,8 @@ def validate_checks(
                     or field_value < 1
                 ):
                     fail(f"{item}.{field} must be a positive integer")
-    if len(value) != 15:
-        fail(f"{where} must contain exactly fifteen admitted checks")
+    if len(value) != 16:
+        fail(f"{where} must contain exactly sixteen admitted checks")
 
 
 def main() -> int:
@@ -485,7 +492,7 @@ def main() -> int:
         fail("manifest.lean_repository must be an object")
     require_string(lean_repository.get("url"), "manifest.lean_repository.url")
     require_string(lean_repository.get("commit"), "manifest.lean_repository.commit")
-    print("Clebsch rigidity trust manifest: valid (19 claims, 15 checks)")
+    print("Clebsch rigidity trust manifest: valid (19 claims, 16 checks)")
     return 0
 
 

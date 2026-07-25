@@ -1,0 +1,182 @@
+{
+  "schema": "c605-eight-point-conic-filling-v1",
+  "q": 19,
+  "pg2_points": 381,
+  "conic_points": 20,
+  "off_conic_points": 361,
+  "pgl2_order": 6840,
+  "passant_edges": 32490,
+  "edge_orbits": 15,
+  "forced_spectrum": {"a_range": [0, 19], "constant": [261, 33, 59, 0], "a_coefficient": [-1, 3, -3, 1], "moment_identities_checked": true},
+  "roots": [
+    {
+      "representative": [[1, 0, 1], [1, 1, 3]],
+      "orbit_size": 3420,
+      "stabilizer_order": 2,
+      "states_by_size": [0, 0, 1, 36, 401, 593, 75, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 1, 4]],
+      "orbit_size": 3420,
+      "stabilizer_order": 2,
+      "states_by_size": [0, 0, 1, 36, 405, 613, 87, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 1, 6]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 25, 282, 447, 94, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 1, 7]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 25, 258, 432, 64, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 1, 13]],
+      "orbit_size": 3420,
+      "stabilizer_order": 2,
+      "states_by_size": [0, 0, 1, 36, 389, 558, 81, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 1, 18]],
+      "orbit_size": 855,
+      "stabilizer_order": 8,
+      "states_by_size": [0, 0, 1, 15, 129, 221, 30, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 2, 6]],
+      "orbit_size": 3420,
+      "stabilizer_order": 2,
+      "states_by_size": [0, 0, 1, 36, 405, 621, 94, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 2, 11]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 25, 251, 406, 52, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 2, 14]],
+      "orbit_size": 3420,
+      "stabilizer_order": 2,
+      "states_by_size": [0, 0, 1, 36, 396, 570, 94, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 1], [1, 4, 6]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 25, 286, 470, 107, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 2], [1, 1, 0]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 20, 184, 253, 62, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 2], [1, 1, 4]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 20, 159, 200, 25, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 2], [1, 1, 13]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 20, 176, 209, 38, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 2], [1, 2, 3]],
+      "orbit_size": 1710,
+      "stabilizer_order": 4,
+      "states_by_size": [0, 0, 1, 20, 161, 210, 36, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    },
+    {
+      "representative": [[1, 0, 2], [1, 2, 17]],
+      "orbit_size": 855,
+      "stabilizer_order": 8,
+      "states_by_size": [0, 0, 1, 10, 92, 119, 25, 0, 0],
+      "multiplicity_prunes": 0,
+      "coverage_prunes": 0,
+      "terminal_arcs": 0,
+      "spectrum_matches": 0,
+      "witnesses": 0
+    }
+  ],
+  "rooted_stabilizer_states_by_size": [0, 0, 15, 385, 3974, 5922, 964, 0, 0],
+  "maximum_passant_arc_size": 6,
+  "witness_orbits": 0,
+  "witnesses": []
+}

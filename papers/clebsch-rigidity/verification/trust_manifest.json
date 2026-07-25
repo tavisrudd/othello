@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 327",
+      "paper_location": "source line 326",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 394",
+      "paper_location": "source line 393",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 411",
+      "paper_location": "source line 410",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 448",
+      "paper_location": "source line 447",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 499",
+      "paper_location": "source line 498",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 581",
+      "paper_location": "source line 580",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 624",
+      "paper_location": "source line 623",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -619,7 +619,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 730",
+      "paper_location": "source line 729",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -635,7 +635,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 755",
+      "paper_location": "source line 754",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -669,7 +669,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 785",
+      "paper_location": "source line 784",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -685,7 +685,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 898",
+      "paper_location": "source line 897",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 948",
+      "paper_location": "source line 947",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -825,7 +825,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 964",
+      "paper_location": "source line 963",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -942,7 +942,7 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 201",
+      "paper_location": "source line 200",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1030,7 +1030,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1053",
+      "paper_location": "source line 1052",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1108,7 +1108,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1080",
+      "paper_location": "source line 1079",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1127,7 +1127,7 @@
             "Dye 1991, Theorems 1 and 3, pages 275--278"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "small-arc reductions, k=6 dependency, and k=8 sieve",
+          "subclaim": "small-arc reductions, k=6 dependency, and k=8 field sieve",
           "unconditional_remainder": "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."
         },
         {
@@ -1205,18 +1205,75 @@
           },
           "route": "exact-replay",
           "subclaim": "terminal exclusions through seven points"
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "verification/c605_verify.py",
+                "repository": "paper",
+                "sha256": "42649017b9607ad8f8a07f1647817a2e3d929277013790cbc6c4e357d70f3ae4"
+              }
+            ],
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "verification/c605_verify.py"
+                ]
+              }
+            ],
+            "coverage": "For q=13,17,19 the primary search fixes XZ=Y^2, partitions all 7,098, 20,808, and 32,490 passant edges into 10, 13, and 15 PGL(2,q)-orbits, and exhausts arc extensions from one representative of every orbit. The maximum size is six in every field, before the forced eight-point spectra arise.",
+            "independent_replay": "The Python replay tests passancy by a discriminant rather than conic incidence, verifies the edge-orbit partition directly, and repeats ordered backtracking without the primary search's stabilizer deduplication.",
+            "residual_trust": "The C++17 and Python runtimes, exact prime-field arithmetic, and the manuscript's coordinate-to-geometric correspondence. No Lean theorem covers this terminal finite exclusion.",
+            "soundness_bridge": "Every conic-filling arc is off the fixed conic and every one of its chords is passant. Every nontrivial candidate therefore contains an edge carried to a listed root.",
+            "supporting_artifacts": [
+              {
+                "path": "verification/c605_search.cpp",
+                "repository": "paper",
+                "sha256": "1981788662daf5317e219049b2f634cd75ef9c72099d13e0a8391f607006436d"
+              },
+              {
+                "path": "verification/c605_replay.py",
+                "repository": "paper",
+                "sha256": "a589c89a3dd81e5ca1e7661fb85a6f6e18cf21da5d38eedc16260a4cea676a9a"
+              },
+              {
+                "path": "verification/c605_q13.json",
+                "repository": "paper",
+                "sha256": "da42b60be2d6c47018c8d5975409eade9c4cea9f2084f2dd5b7e276fd09daf8c"
+              },
+              {
+                "path": "verification/c605_q17.json",
+                "repository": "paper",
+                "sha256": "378dbbfe987a66cb771607468f2d1e923f13c52a6426d201dad9ee1beeefae75"
+              },
+              {
+                "path": "verification/c605_q19.json",
+                "repository": "paper",
+                "sha256": "739390f2e9e4c62155582ec0dee0c65bd5295a80ec380ba86f173eda492fa814"
+              },
+              {
+                "path": "verification/c605_independent.json",
+                "repository": "paper",
+                "sha256": "d725286565da0283c64a5eab064bb736fb143c9b662ebf2973c3b4f09d15a870"
+              }
+            ]
+          },
+          "route": "exact-replay",
+          "subclaim": "terminal eight-point exclusions"
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1147",
+      "paper_location": "source line 1146",
       "route": "mixed",
       "row": 29,
       "source": {
         "id": "thm:small-k-conic-filling",
         "kind": "theorem-environment",
-        "sha256": "15ffdd2d510e4eb0040aeb92b8c95e021dfba0d2e3fb39cbcea5c813e304a2b2"
+        "sha256": "9551f1613d91aa3561d1e9497c3ed7be9fcaa9bec6c5612cdcab20c81ec1db2c"
       },
-      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 three-field sieve follows from the human-proved conic-filling window."
+      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 and k=8 exclusions are exact-replayed."
     },
     {
       "computation": {
@@ -1252,7 +1309,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 670",
+      "paper_location": "source line 669",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1270,9 +1327,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "44c8a0fdae79e4ab91be58f4b270058bd08fd6b42135f939d70cfe5606c1f4cf"
+    "sha256": "2fb10a4d7ba152bd86567d67ae6fd388cdf9068f4e53a34be8fe4e5379eb1add"
   },
-  "manuscript_sha256": "0e3a5d37b5ec8988b9f1baf3733e1950ac25243344a17f5da1b7bd045cf7f386",
+  "manuscript_sha256": "af2e4d97313b9449869c514e34772cf2a989ab0db50ba5c9962b16778bb4a14e",
   "public_documents": [
     {
       "path": "README.md",
@@ -1282,7 +1339,7 @@
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "43ac2b870384855d3c7cd4a8e74f10aa1f0a25463d10d9927643aa5b530a8d59"
+      "sha256": "c4a89a3ee88f231e10176852d4cbe5d54188b120da974809403cfe376060a171"
     }
   ],
   "reproducibility_environment": {
@@ -1312,19 +1369,19 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "f6a9ea6f9f7e8d9a856d388ab1b13496f531c41ebb19eb52d4c7dab782f9928a"
+    "sha256": "5e94935129ad4492779c49c0cad18063d2fe3af9c35a0121582946c19c96914a"
   },
   "verify_all": {
     "checker_output_certificate": {
       "generator": {
         "path": "verification/capture_checker_outputs.py",
         "repository": "paper",
-        "sha256": "77ad78142f72583d1671825e47368c8f92e54d8258fc209cb5c8ebfc7c9c61a1"
+        "sha256": "6edbcb4794152304a7acd6206415ab2d91d065c27af052b3ec63c9591cdcf704"
       },
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56"
+        "sha256": "b5577fa19c35992950faf486cac33df5de523ff05162e6fa42ecd886302fdcbc"
       }
     },
     "checks": [
@@ -1504,6 +1561,19 @@
       },
       {
         "argv": [
+          "python3",
+          "verification/c605_verify.py"
+        ],
+        "cwd": ".",
+        "id": "check-c605-eight-point-exclusion",
+        "repository": "paper",
+        "stdout_bytes": 228,
+        "stdout_lines": 1,
+        "stdout_sha256": "bbf3aed130b23a338637a90518ed823a6f7b7c37ee16d8e9a473fbb87908672d",
+        "timeout_seconds": 120
+      },
+      {
+        "argv": [
           "scripts/guarded-lean",
           "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
         ],
@@ -1533,17 +1603,17 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "1a86c5c69110ccee52706f08b2008effe5ce4079156b4a6166f5e020837fd994"
+        "sha256": "9fd98fad71cf1bafd4c63874ae4f960cf314a5ae450106f4c73b71fb8902054e"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "4cff30ebc3b57ed6aa20b64de2ec6d000f4b27e0137621b070c3800876b39879"
+        "sha256": "6cfdae7307039a605dc797205c71908f251df56e60ea18a110859380a9ffc5a7"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "5327c10f1c5d6690716f25955e745e69982663dc7c9cff6ffa87d64228598940"
+        "sha256": "3560ac19e15b46e2e1c7300b35148f74a1a1b3f492a0f729a87bfe69fd10456f"
       },
       {
         "path": "verification/check_manuscript_build.py",

@@ -49,6 +49,11 @@
       "bytes": 1162,
       "lines": 16,
       "sha256": "380ca51dce260f0794de15bf0c3a710139c2fe2734b84475bd638b8413471979"
+    },
+    "verification/c605_verify.py": {
+      "bytes": 228,
+      "lines": 1,
+      "sha256": "bbf3aed130b23a338637a90518ed823a6f7b7c37ee16d8e9a473fbb87908672d"
     }
   },
   "schema": "clebsch-rigidity-checker-output-v1"

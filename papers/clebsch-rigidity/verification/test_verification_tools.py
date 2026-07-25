@@ -72,8 +72,8 @@ class ReleaseRunnerTests(unittest.TestCase):
                 release.safe_cwd(roots, "paper", "../outside", "test")
 
     def test_exact_checker_set_is_unique(self) -> None:
-        self.assertEqual(len(capture.CHECKERS), 10)
-        self.assertEqual(len(set(capture.CHECKERS)), 10)
+        self.assertEqual(len(capture.CHECKERS), 11)
+        self.assertEqual(len(set(capture.CHECKERS)), 11)
 
     def test_manuscript_log_patterns(self) -> None:
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
