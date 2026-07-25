@@ -93,6 +93,35 @@ made without the Sadeh thesis.
 
 ## Release blocker
 
+The final prose--Lean synchronization audit found five internal release
+findings that must be repaired before immutable deposit:
+
+1. the revised row-2 headline now includes recovery of the associated
+   polarity, but its trust-manifest route names only the rigidity implication
+   and stabilizer identification; route the polarity through Dye's exact
+   polarity theorem or narrow the headline;
+2. the verification table groups ``Decoding and support bipartition'' under
+   `Q11DecodingSynthesis.lean`, although that module proves the distance
+   oracle, ambiguity counts, and Brianchon leader supports, not the intrinsic
+   unordered support bipartition; split or qualify the row;
+3. the verification prose says that both external axioms are consequences
+   of Dye's Theorem 1, while `Q11DyeAxioms.lean` correctly assigns them to
+   Dye's Theorems 1 and 3;
+4. `residual_graph_icosahedral` proves the 30-edge, degree-five,
+   five-cycle-link signature, not an explicit graph isomorphism to the
+   icosahedron; either weaken the name/comment or add the isomorphism theorem;
+5. the nonzero-syndrome ambiguity census is described as simply
+   ``complete'', and sixteen public helper theorems across `Q11Coding.lean`,
+   `Q11DecodingSynthesis.lean`, and `Q9Sylvester.lean` lack individual
+   docstrings under the current formal-artifact standard.
+
+These are trust-map and documentation defects, not failures of the
+mathematical terminals.  All twenty-four admitted terminals retain the
+advertised axiom closure, and the fifteen-check release replay remains
+green.  Repairing any manuscript or formal source invalidates the current
+release certificate; regenerate the statement identity, PDF, manifest,
+certificate, and clean replay in the prescribed order.
+
 The previously cited GitHub commit is not publicly reachable, Software
 Heritage has no archived origin for it, and this workspace has no GitHub or
 Zenodo publication credential.  No DOI or SWHID has been invented.  Paper I

@@ -54,13 +54,25 @@ geometry---rather than presenting the abstract as a flat result list.  It
 regenerated the statement identity, PDF, trust manifest, and release
 certificate; the clean fifteen-check replay is green at `949ec7b2`.
 
-The remaining C182 blocker is external publication packaging. The previously
-cited GitHub artifact URL is not publicly reachable, and this workspace has
-no GitHub or Zenodo publication credential. The manuscript now gives the
-exact Git-bundle replay command, stable checker and Lean-gate hashes, and the
-two principal results with no Lean coverage; it must not ship until that
-bundle has an immutable DOI or Software Heritage identifier and the
-identifier is added to the paper.
+The final prose--Lean synchronization audit reopened one bounded internal
+C182 repair before external packaging.  Its five findings are recorded
+exactly in `notes/2026-07-24-c182-clebsch-paper-release.md`: route the new
+polarity headline explicitly; separate the nonformalized support
+bipartition from the decoding-formalization table row; correct Dye
+Theorem~1 to Theorems~1 and~3; weaken or strengthen
+`residual_graph_icosahedral` to match its type; and repair the
+nonzero-ambiguity wording plus missing public docstrings.  The mathematics
+and all twenty-four admitted terminal axiom closures remain green.  After
+these source edits, regenerate the statement identity, PDF, trust manifest,
+release certificate, and final clean fifteen-check replay.
+
+The subsequent C182 blocker is external publication packaging. The
+previously cited GitHub artifact URL is not publicly reachable, and this
+workspace has no GitHub or Zenodo publication credential. The manuscript
+now gives the exact Git-bundle replay command, stable checker and Lean-gate
+hashes, and the two principal results with no Lean coverage; it must not
+ship until that bundle has an immutable DOI or Software Heritage identifier
+and the identifier is added to the paper.
 
 The active order is strict:
 
