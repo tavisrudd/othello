@@ -121,16 +121,41 @@ finite-field Clifford group, and \(L\) is Clifford.
 \label{cor:discrete-lu-symmetry}
 For every equal-phase MDS--CSS state in
 Theorem~\ref{thm:lu-lc-rigidity}, the product-unitary automorphism group
-modulo one-site scalar phases is finite.  Its identity component before
-that quotient consists only of one-site scalar phases.  The same remains
-true after adjoining party permutations.
+modulo one-site scalar phases is finite and discrete.  Its identity
+component before that quotient consists only of one-site scalar phases.
+More precisely, if \(T=(S^1)^{2m}\), \(G\) is the fixed-party
+product-unitary automorphism group, and \(\widetilde G\) also displays
+party permutations, then
+\[
+  1\longrightarrow T\longrightarrow G\longrightarrow \Gamma
+    \longrightarrow 1,
+  \qquad
+  1\longrightarrow T\longrightarrow \widetilde G
+    \longrightarrow \widetilde\Gamma\longrightarrow 1
+\]
+are short exact sequences with closed connected kernel and finite
+discrete quotient.  If \(\Pi\) is the subgroup of party permutations
+realized by \(\widetilde G\), there is a further exact sequence
+\[
+  1\longrightarrow \Gamma\longrightarrow\widetilde\Gamma
+    \longrightarrow\Pi\longrightarrow 1.
+\]
+This last extension splits exactly when the realized permutations admit a
+homomorphic choice of projective product-unitary lifts.
 \end{corollary}
 
 \begin{proof}
 Every local factor of an automorphism is Clifford.  The projective
 single-qudit Clifford group over a finite field is finite, as is the
 party-permutation group.  The kernel of projectivizing each local factor
-is exactly the torus of one-site scalar phases.
+is exactly the torus of one-site scalar phases.  That torus is the
+identity component, hence is closed; the finite Hausdorff quotient is
+discrete.  Forgetting the local factors maps
+\(\widetilde\Gamma\) onto the realized permutation subgroup \(\Pi\).
+Its kernel consists exactly of the fixed-party projective
+automorphisms, which gives the third sequence.  A splitting is, by
+definition, a group-homomorphic right inverse; arbitrary or
+generator-by-generator lifts do not provide one.
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:grs-transversal-group}]

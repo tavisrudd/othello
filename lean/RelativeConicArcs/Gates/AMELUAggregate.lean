@@ -3,6 +3,7 @@ import RelativeConicArcs.AMELU.GenericMDS
 import RelativeConicArcs.AMELU.GenericDiagonalTensor
 import RelativeConicArcs.AMELU.GenericLURigidity
 import RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup
+import RelativeConicArcs.AMELU.AutomorphismExactSequence
 import RelativeConicArcs.AMELU.EncoderTransversal
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
@@ -19,6 +20,8 @@ This terminal imports the length-generic code, state, exact-MDS
 shortening, marginal covariance, arbitrary-arity diagonal-axis theorem,
 unconditional LU-to-LC terminal, projective Clifford finiteness, explicit
 product-unitary topological groups and scalar-phase quotient groups, and the
+closed scalar-torus exact sequences, finite discrete quotients, intrinsic
+adjoint-signature homomorphisms, realized party-permutation extension, and
 scalar-phase identity-component theorem, the one-leg encoder parameter and
 Choi bridges, Clifford transpose closure, transversal no-go, and exact GRS
 transversal-group interface, the shared six-party conventions, the
