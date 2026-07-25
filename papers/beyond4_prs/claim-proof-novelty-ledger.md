@@ -40,15 +40,6 @@ Editorial disposition is one of `main theorem`, `supporting theorem`,
 | CC7 | Redundancy-seven contained components | `MANUSCRIPT / CERTIFIED` | Certificate R7; `RelativeConicArcs.PRSRedundancySixSeven` | Rank--nullity, binary central lift, exact-gcd-one avoidance, and collision propositions close the component assertion; the Lean terminal keeps their geometric meaning explicit; `supporting theorem`; L3 at that boundary |
 | R7-sf | Redundancy-seven split-free classification | `MANUSCRIPT / CERTIFIED` | Certificate R7; `redundancySevenAllFieldSynthesis` | Geometry closes `q>=37` through an explicit second-marker bad scheme and the pointed linear-gcd/\(S_3\) bottom packages; the certificate closes the finite bridge, and public representatives are present with the small-field radius flag separated. The repaired two-step proof, fixed-factor exclusion, marker--gcd branch, and sample census invariants have independent cold confirmation; `main theorem`; L3 at the synthesis boundary |
 | R7-dh | Redundancy-seven deep-hole classification | `DERIVED / IMPORTED-1` | Seroussi–Roth radius theorem | Valid for `q>=11`; `q=7,8,9` are not promoted without a separate radius result; `boundary`; L1 |
-| CC8 | Degree-seven contained components | `MANUSCRIPT / CERTIFIED` | Certificate R8; `RelativeConicArcs.PRSRedundancyEight` | Uniform rank-two containment, empty binary central lift, finite collision divisor, and shallow characteristic-three/five lifts; their concrete geometry remains an explicit terminal input; `supporting theorem`; L3 at that boundary |
-| R8 | Redundancy-eight classification for `q>=43` | `MANUSCRIPT / CERTIFIED` | `LP(6,1)` proof; Certificate R8; `redundancyEightHighFieldSynthesis` | Recursive carrier equations, identity-twist monodromy, three-marker deletion, direct gcd-one strata, and `CC(7,1)` are proved and cold-read; exact threshold and synthesis arithmetic are kernel checked; no claim below 43; `main theorem`; L3 at the synthesis boundary |
-| R9 | Redundancy-nine classification for `q>=53` | `MANUSCRIPT / CERTIFIED / LEAN-CONDITIONAL` | Certificate R9 plus `supplement/R9-SLICE-DATA.md`; `RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis` | Universal good-base open, principal-open cover of the squarefree atlas, boundary-orbit exhaustion, Hermite-subdiscriminant rational selection, corrected deletion bound `32`, and `CC(8,1)` are printed and cold-read; Lean checks the residual algebra and synthesis implication while retaining the geometry, coding identification, exhaustion, and group action as explicit inputs; no claim below 53; `main theorem`; L3 at the synthesis boundary |
-| R9-kernel | Residual quadratic algebra and synthesis implication | `KERNEL` | `RelativeConicArcs.Gates.PRSRedundancyNine` and axiom audit | Does not formalize geometric integrality, rational points, coding identification, exhaustion, or the group action; `supporting theorem`; L3 |
-| R9-49 | Characteristic-seven carrier closure at `q=49` | `CERTIFIED` | Certificate R9-49 | Carrier result only, not a whole-code classification; `supplement-only`; L1 |
-| Hessian | Characteristic-two ordered-Hessian degeneracy locus, contained pullback, and effective corollary | `MANUSCRIPT / CERTIFIED / LEAN-CONDITIONAL` | Certificate Hessian; `RelativeConicArcs.PRSCharacteristicTwoHessianLucas` ordered-Hessian terminals | Reduced pullback is the persistent/Lucas union; the complementary ruling has no rank-two pullback; a genuine degree-eight global-union polynomial gives the revised threshold and deletion budget; Lean checks coordinate algebra and conditional synthesis while the exhaustive geometry remains a structure field; `main theorem`; L3 at that boundary |
-| Lucas | Power-of-two Lucas endpoint arithmetic | `MANUSCRIPT / CERTIFIED / KERNEL` | Certificate Lucas; `two_dvd_choose_two_pow`, `consecutiveOverlapIndex_iff`, and the three Lucas-carrier membership terminals | Lucas overlap arithmetic and modular-kernel instances are checked; constant-field and splitting semantics remain inputs; distinguished endpoint only; no claim for all Lucas-carrier points; `supporting theorem`; L3 at that boundary |
-| e7-cover | Degree-nine ordered-root and additive covers | `MANUSCRIPT / CERTIFIED / LEAN-CONDITIONAL` | Certificate e7; `endpointLastPair_artinSchreier`, `EndpointArtinSchreierLiftingData.rational_lifts_iff_traceZero`, and `DegreeNineEndpointAdditiveData` | Printed open conditions, geometric Artin--Schreier integrality, trace law, connected affine-frame normalization, and exact `AGL_3(F_2)` deck group; Lean checks the equation and conditional interfaces but not geometric integrality or monodromy; `supporting theorem`; L3 at that boundary |
-| e7-shallow | Full `PGL2` orbit of `e_7` is shallow | `MANUSCRIPT / CERTIFIED / LEAN-CONDITIONAL` | Certificate e7; `DegreeNineEndpointAdditiveData.exact_count_and_endpointOrbit_shallow` | Direct subspace-polynomial proof, translation factor, and no-overcount argument are printed and cold-read; Lean derives exact count and orbitwise shallowness from explicit witness-construction and transport fields; other degree-nine carrier strata remain outside the claim; `boundary`; L3 at that boundary |
 
 No row with `OPEN-MATH` or `REVIEW-GATE` is called proof-complete.
 
@@ -59,7 +50,6 @@ No row with `OPEN-MATH` or `REVIEW-GATE` is called proof-complete.
 | Seroussi–Roth | normal-rational-curve completeness / PRS radius range | Promotes split-free directions to code deep holes only in its stated fields. |
 | Zhang–Wan–Kaipa; Kaipa | syndrome/MDS/uncovered-point dictionary and lower persistent families | Does not supply the redundancy-five or higher classifications. |
 | Aubry–Perret / Hasse–Weil | rational-point lower bounds for the specified integral curve models | Does not prove integrality, genus, or deletion budgets. |
-| Kaipa–Patanker–Pradhan | binary-quartic orbit and apolar-invariant tools | Does not prove the PRS carrier classification. |
 | Cesaratto–Matera–Pérez | factorization-pattern precedent | Context only; not a proof of the exceptional Hankel families. |
 | Gmainer–Havlicek | binomial-coordinate NRC nuclei | Locates possible modular kernels; coherent lifts are computed here. |
 | Wang | Frobenius/monodromy semantics for splitting families | Does not prove the pointed Hankel induction or its contained cases. |
@@ -82,8 +72,6 @@ No row with `OPEN-MATH` or `REVIEW-GATE` is called proof-complete.
 |---|---|---|
 | R5--R7 classifications | `NONE-FOUND / QUALIFIED` | “To our knowledge, no prior classification was located in the recorded search boundary.” |
 | Coherent marked contraction | `NONE-FOUND / QUALIFIED` | “The construction used here differs from the cited unmarked splitting-family semantics.” |
-| R8/R9 fixed-level bounds | `NONE-FOUND / QUALIFIED` | “To our knowledge, the recorded search located no such fixed-level PRS bounds.” |
-| Ordered-Hessian and Lucas-carrier results | `NO PRIORITY CLAIM` | State the proved boundaries; do not claim first discovery or absence of predecessors. |
 
 The search method and database limitations belong in an adversarial novelty
 ledger, not in the mathematical manuscript.
@@ -93,9 +81,7 @@ ledger, not in the mathematical manuscript.
 | Direction | Status | Present boundary |
 |---|---|---|
 | Arithmetic classification inside every higher modular carrier | `OPEN-MATH` | The geometric stable-component theorem is uniform; fresh Lucas-carrier arithmetic remains degree-specific. |
-| Bounded-field completion of R8/R9 | `OPEN-MATH` | Theorems begin at 43 and 53. |
-| Remaining degree-nine Lucas strata / redundancy ten | `OPEN-MATH` | Only the distinguished `e_7` orbit is closed. |
-| Full Lean proof of R9 | `OPEN-MATH` | C517 checks algebra and a conditional implication only. |
+| Redundancy-eight and higher fixed levels | `COMPANION WORK` | Excluded from this manuscript and its Lean trust closure. |
 
 ## Consistency and release checklist
 
@@ -104,8 +90,6 @@ ledger, not in the mathematical manuscript.
 - [ ] Every “complete,” “exactly,” and “no other” points to a manuscript proof
   plus any finite certificate required for the bounded bridge.
 - [x] Split-free and deep-hole statements are separated by a radius row.
-- [x] The `q=43` and `q=53` endpoints use the normalized
-  `q+kappa-2g sqrt(q)>delta` convention.
 - [ ] Every genus, degree, intersection, and deletion number has a named proof.
 
 ### Formal and executable trust

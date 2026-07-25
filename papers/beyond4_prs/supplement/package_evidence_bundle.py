@@ -70,64 +70,6 @@ BUNDLES = (
             ("fano-checksum", "2026-07-24-c595-stable-component-fano-elimination.sha256", "2026-07-24-c595-stable-component-fano-elimination.sha256", "compare"),
         ),
     ),
-    (
-        "Certificate R8",
-        "r8",
-        (
-            ("generator", "2026-07-23-c513-prs-redundancy-eight.py", "2026-07-23-c513-prs-redundancy-eight.py", "rederive"),
-            ("certificate", "2026-07-23-c513-prs-redundancy-eight.json", "2026-07-23-c513-prs-redundancy-eight.json", "compare"),
-            ("replay", "2026-07-23-c513-prs-redundancy-eight-replay.py", "2026-07-23-c513-prs-redundancy-eight-replay.py", "rederive"),
-            ("checksum", "2026-07-23-c513-prs-redundancy-eight.sha256", "2026-07-23-c513-prs-redundancy-eight.sha256", "compare"),
-        ),
-    ),
-    (
-        "Certificate R9",
-        "r9",
-        (
-            ("generator", "2026-07-23-c516-prs-redundancy-nine.py", "2026-07-23-c516-prs-redundancy-nine.py", "rederive"),
-            ("certificate", "2026-07-23-c516-prs-redundancy-nine.json", "2026-07-23-c516-prs-redundancy-nine.json", "compare"),
-            ("replay", "2026-07-23-c516-prs-redundancy-nine-replay.py", "2026-07-23-c516-prs-redundancy-nine-replay.py", "rederive"),
-            ("checksum", "2026-07-23-c516-prs-redundancy-nine.sha256", "2026-07-23-c516-prs-redundancy-nine.sha256", "compare"),
-        ),
-    ),
-    (
-        "Certificate R9-49",
-        "r9-q49",
-        (
-            ("generator", "2026-07-23-c516-prs-redundancy-nine-q49.rs", "2026-07-23-c516-prs-redundancy-nine-q49.rs", "rederive"),
-            ("certificate", "2026-07-23-c516-prs-redundancy-nine-q49.txt", "2026-07-23-c516-prs-redundancy-nine-q49.txt", "compare"),
-        ),
-    ),
-    (
-        "Certificate Hessian",
-        "hessian",
-        (
-            ("generator", "2026-07-23-c525-ordered-hessian-arf-pullback.py", "2026-07-23-c525-ordered-hessian-arf-pullback.py", "rederive"),
-            ("certificate", "2026-07-23-c525-ordered-hessian-arf-pullback.json", "2026-07-23-c525-ordered-hessian-arf-pullback.json", "compare"),
-            ("replay", "2026-07-23-c525-ordered-hessian-arf-pullback-replay.py", "2026-07-23-c525-ordered-hessian-arf-pullback-replay.py", "rederive"),
-            ("checksum", "2026-07-23-c525-ordered-hessian-arf-pullback.sha256", "2026-07-23-c525-ordered-hessian-arf-pullback.sha256", "compare"),
-        ),
-    ),
-    (
-        "Certificate Lucas",
-        "lucas",
-        (
-            ("generator", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.py", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.py", "rederive"),
-            ("certificate", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.json", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.json", "compare"),
-            ("replay", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py", "rederive"),
-            ("checksum", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.sha256", "2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.sha256", "compare"),
-        ),
-    ),
-    (
-        "Certificate e7",
-        "e7",
-        (
-            ("generator", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.py", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.py", "rederive"),
-            ("certificate", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.json", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.json", "compare"),
-            ("replay", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py", "rederive"),
-            ("checksum", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.sha256", "2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.sha256", "compare"),
-        ),
-    ),
 )
 
 TOOLCHAIN_LOCKS = (
@@ -148,7 +90,6 @@ PUBLIC_SUPPLEMENT_FILES = (
     ("Classification-record checksums", "CLASSIFICATION-RECORDS.sha256"),
     ("Certificate schema", "CERTIFICATE-SCHEMA.md"),
     ("Reproduction guide", "REPRODUCING.md"),
-    ("Residual-slice data", "R9-SLICE-DATA.md"),
     ("Lean statement-adequacy source", "LEAN-STATEMENTS.md"),
     ("Independent final-reader signoff", "FINAL-READER-SIGNOFF.md"),
 )
@@ -174,13 +115,6 @@ AUXILIARY_COPIES = (
         "notes/2026-07-22-c498-prs-deep-hole-replay.py",
         "evidence/r7/2026-07-22-c498-prs-deep-hole-replay.py",
         "reconstruct",
-    ),
-    (
-        "Certificate R9",
-        "slice-data mirror",
-        "papers/beyond4_prs/supplement/R9-SLICE-DATA.md",
-        "evidence/papers/beyond4_prs/supplement/R9-SLICE-DATA.md",
-        "compare",
     ),
 )
 

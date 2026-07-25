@@ -19,8 +19,8 @@ make check
 make tit-check
 ```
 
-`make check` builds the 28-page canonical preprint.  `make tit-check` builds the
-22-page IEEEtran single-column review manuscript
+`make check` builds the 33-page canonical preprint.  `make tit-check` builds the
+25-page IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
 `main-tit.tex`,
@@ -66,11 +66,11 @@ work, not late additions to the submission.
 - C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
 - C540 closed the redundancy-five Lean package.
 - C541 closed the coherent-polar engine and redundancy-six/seven applications.
-- C542 supplies the companion-paper redundancy-eight application.
-- C543 supplies the companion-paper characteristic-two ordered-Hessian and
-  Lucas-carrier layer.
-- C544 supplies the aggregate import gate, including the stable-component coordinate package,
-  axiom audit, referee-facing trust map, and manuscript-to-formalization reconciliation.
+- The paper-facing aggregate imports only those R5--R7 gates and the
+  stable-component coordinate package. Companion-work R8, R9,
+  ordered-Hessian, Lucas, and degree-nine endpoint modules are excluded.
+- `supplement/verify.py` compares the live TeX label set, exact aggregate
+  imports, and exact axiom-audit target list with the public trust map.
 
 All computational claims retain their committed generators, independent replays, compact
 certificates, and checksum manifests.  Lean terminals must expose rather than conceal cited
@@ -92,7 +92,7 @@ A release described as proof-complete requires:
 9. target-policy check;
 10. cold-prose and adversarial review.
 
-The present draft passes the local proof, supplement-schema, and aggregate
+The present draft passes the local proof and scope-sensitive aggregate
 formalization gates but not the independent-reader, clean public replay,
 immutable-release, or author/account gates.
 

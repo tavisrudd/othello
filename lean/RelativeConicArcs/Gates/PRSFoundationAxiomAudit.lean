@@ -22,5 +22,3 @@ The commands below print the axiom dependencies of the reusable logical theorems
 #print axioms RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow
 #print axioms RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible
 #print axioms RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent
-#print axioms RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm
-#print axioms RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis

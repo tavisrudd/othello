@@ -1,4 +1,4 @@
-import RelativeConicArcs.PRSResidualQuadratic
+import RelativeConicArcs.PRSContraction
 
 /-!
 # Projective Reed--Solomon syndrome interfaces

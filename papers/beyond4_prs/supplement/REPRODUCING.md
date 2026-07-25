@@ -15,8 +15,7 @@ supplement-artifact rows printed in `RELEASE-MANIFEST.md` match the
 current files.  It deliberately does not fill or validate the external
 repository, archive, DOI, or immutable-release fields.
 
-Run every paper-local independent replay, including the compiled R9-49
-comparison, with:
+Run every paper-local replay with:
 
 ```text
 python3 supplement/verify.py --replay
@@ -76,12 +75,6 @@ described as an independent derivation.
 | Certificate R6-NF | recorded small exceptional normal forms | same-file deterministic checker |
 | Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | independent five-secant and orbit checks |
 | Certificate SC | integral factorization and bridge identities in every characteristic; saturation over \(\mathbf Z[1/6]\); fibres \(2,3\) | dependency-free identity/factorization replay plus trusted Singular primary decomposition |
-| Certificate R8 | characteristic cases and numerical bounds, not an ambient census | independent algebra/nucleus replay |
-| Certificate R9 | residual algebra, all recorded slice normal forms, and the public Bezout vectors | independent residual/slice replay plus exact supplement transcription check |
-| Certificate R9-49 | the characteristic-seven carrier at \(q=49\) | one exhaustive carrier implementation |
-| Certificate Hessian | bounded algebra regression | does not replace the geometric proof |
-| Certificate Lucas | recorded Lucas arithmetic parameter domain | independent arithmetic replay |
-| Certificate e7 | recorded quotient-cover open set and additive specialization | independent quotient-cover replay |
 
 ## Exact replay commands
 
@@ -97,22 +90,6 @@ paper-local directory containing the named certificate.
 (cd supplement/evidence/stable-components && python3 2026-07-24-c595-stable-component-fano-elimination.py --check)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-c597-r10-integral-bad-scheme-sc11.sing)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-c595-stable-component-fano-elimination.sing)
-(cd supplement/evidence/r8 && python3 2026-07-23-c513-prs-redundancy-eight-replay.py)
-(cd supplement/evidence/r9 && python3 2026-07-23-c516-prs-redundancy-nine-replay.py)
-(cd supplement/evidence/hessian && python3 2026-07-23-c525-ordered-hessian-arf-pullback-replay.py)
-(cd supplement/evidence/lucas && python3 2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py)
-(cd supplement/evidence/e7 && python3 2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py)
-```
-
-The R9-49 generator is the sole exhaustive implementation of that carrier,
-not an independent replay.  Compile it into a disposable build directory and
-compare its complete output:
-
-```text
-mkdir -p .replay-build
-rustc -O supplement/evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.rs -o .replay-build/r9-q49
-.replay-build/r9-q49 > .replay-build/r9-q49.txt
-cmp .replay-build/r9-q49.txt supplement/evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.txt
 ```
 
 The public R5--R7 orbit tables are a deterministic projection of the

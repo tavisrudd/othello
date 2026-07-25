@@ -15,12 +15,6 @@ and replay.
 | Certificate R6-NF | small exceptional normal forms | C498 small-normal-form bundle |
 | Certificate R7 | redundancy-seven split-free finite bridge | C509 |
 | Certificate SC | all-level stable-component identities, saturation, and vertical fibres | C595/C597 |
-| Certificate R8 | redundancy-eight algebra, nuclei, and bounds | C513 |
-| Certificate R9 | redundancy-nine residual and slice algebra | C516 |
-| Certificate R9-49 | characteristic-seven carrier at \(q=49\) | C516 q49 bundle |
-| Certificate Hessian | ordered-Hessian bounded algebra | C525 |
-| Certificate Lucas | Lucas-carrier arithmetic | C529 |
-| Certificate e7 | degree-nine \(e_7\) quotient cover | C530 |
 
 ## Classification record
 

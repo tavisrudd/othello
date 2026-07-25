@@ -1,6 +1,6 @@
 # Role-based literature and metadata audit
 
-Date: 2026-07-23
+Date: 2026-07-23; dependency pinpoints refreshed 2026-07-25
 
 ## Opening summary
 
@@ -11,13 +11,12 @@ unqualified priority claim.
 
 Of the 19 bibliography entries, six were read at **full text** in the
 underlying audits (Kaipa; Zhang--Wan--Kaipa; Wang; Ball--Lavrauw; Xu
-2023; Wu--Ding--Chen), three at **partial** depth
+2023; Wu--Ding--Chen), five at **partial** depth
 (Kaipa--Patanker--Pradhan; Cesaratto--Matera--Pérez;
-Gmainer--Havlicek), nine at **abstract/metadata only** (Zhang--Wan
-2017; Xu--Hong--Xu; Aubry--Perret; Iarrobino--Kanev; Comas--Seiguer;
-Stichtenoth; Dür; Lidl--Niederreiter; Ben-Sasson et al.), and one at
-**secondary only** for the role used here (Seroussi--Roth through the
-two full-text PRS papers).
+Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret), and eight at
+**abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu;
+Iarrobino--Kanev; Comas--Seiguer; Stichtenoth; Dür;
+Lidl--Niederreiter; Ben-Sasson et al.).
 
 The consolidated verdict is:
 
@@ -60,9 +59,11 @@ the cited papers' bibliographies.
 - Kaipa — **full text**, especially Proposition 1 and Section V; cache key
   `arXiv:1612.05447`, SHA-256
   `1fe8de83c0b8cd3938e1a450fd49f376de795d7a317f099a730c63ab968178a4`.
-- Seroussi--Roth — **secondary only** through the preceding full-text papers
-  for the high-rate covering-radius theorem. The primary PDF was not
-  reachable; no finer characterization is made.
+- Seroussi--Roth — **partial**, published scan, Theorem 1 and its stated
+  corollary; cache key `10.1109/TIT.1986.1057188`, SHA-256
+  `0b5c152819f91d5e410146ada3527b5b795a55fc6170c14a27e43b8c3e39a5f9`.
+  This verifies the high-rate MDS-extension statement used through Kaipa's
+  geometric restatement.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256
@@ -109,8 +110,10 @@ the displayed high-field ranges; it does not claim bounded-field completion.
 
 - Cesaratto--Matera--Pérez — **partial**, abstract and theorem statements
   concerning factorization patterns in linear families.
-- Aubry--Perret — **abstract/metadata only** in this audit chain; used only
-  for the named singular-curve point bound.
+- Aubry--Perret — **partial**, published article, introduction and the
+  arithmetic-genus form of the singular-curve point bound on p. 468; cache
+  key `10.1007/BF02567835`, SHA-256
+  `e189e1897b06c5de5018e4b0d5538aec4303ec71839d37fa5b023285c6387c37`.
 - Gmainer--Havlicek — **partial**, abstract and Theorem 1; cache key
   `arXiv:1304.0088`, SHA-256
   `da688c01e3953319ef93f17e1676fedf0470c590a0a348a853dabb11209526d0`.
@@ -145,7 +148,7 @@ Surveys volume 6 (2019).
 
 | Key | DOI or pinned ID | Read depth | Role |
 |---|---|---|---|
-| SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | secondary only, through Kaipa and Zhang--Wan--Kaipa at full text | covering-radius/MDS-extension input |
+| SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | partial, Theorem 1 and its corollary | covering-radius/MDS-extension input |
 | Kaipa2017 | `10.1109/TIT.2017.2706677` | full text, sections recorded above | deep-hole/MDS dictionary |
 | ZWK2020 | `10.1109/TIT.2019.2940962` | full text, Sections I--IV | PRS lower-redundancy frontier |
 | ZhangWan2017 | `arXiv:1711.02292` | abstract/metadata only | explicit PRS deep-hole families |
@@ -154,7 +157,7 @@ Surveys volume 6 (2019).
 | WuDingChen2023 | `arXiv:2312.05534` | full text, abstract and Section V.A | MDS extensions and PRS radius context |
 | KPP2025 | `arXiv:2312.07118v3` | partial, abstract/introduction/orbit statements | binary-quartic orbit input |
 | CMP2017 | `10.1007/s00493-015-3330-5` | partial, abstract/theorem statements | factorization-family context |
-| AubryPerret1995 | `10.1007/BF02567835` | abstract/metadata only | singular-curve bound |
+| AubryPerret1995 | `10.1007/BF02567835` | partial, introduction and p. 468 point bound | singular-curve bound |
 | GmainerHavlicek2013 | `10.1007/BF01237480`, `arXiv:1304.0088` | partial, abstract/Theorem 1 | NRC nuclei |
 | Wang2026 | `arXiv:2606.12810v1` | full text, all sections | splitting-family semantics |
 | IarrobinoKanev1999 | `10.1007/BFb0093426` | abstract/metadata only | classical apolarity/determinantal background |
@@ -185,7 +188,6 @@ Not covered:
 
 - **MathSciNet**, because institutional authentication is unavailable;
 - **Google Scholar**, because automated access is blocked;
-- the primary Seroussi--Roth PDF;
 - full-text reads of the sources marked abstract/metadata or secondary only.
 
 These gaps license no negative. All absence-dependent wording remains

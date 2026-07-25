@@ -8,12 +8,47 @@ import hashlib
 import re
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
 
 
 SUPPLEMENT = Path(__file__).resolve().parent
 PAPER = SUPPLEMENT.parent
+REPOSITORY = PAPER.parents[1]
+AGGREGATE = (
+    REPOSITORY
+    / "lean/RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean"
+)
+AXIOM_AUDIT = (
+    REPOSITORY
+    / "lean/RelativeConicArcs/Gates/PRSBeyondRedundancyFourAxiomAudit.lean"
+)
+EXPECTED_AGGREGATE_IMPORTS = (
+    "RelativeConicArcs.Gates.PRSFoundation",
+    "RelativeConicArcs.Gates.PRSRedundancyFive",
+    "RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven",
+    "RelativeConicArcs.Gates.PRSStableComponents",
+)
+EXPECTED_PROJECT_CLOSURE = (
+    "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+    "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit",
+    "RelativeConicArcs.Gates.PRSFoundation",
+    "RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven",
+    "RelativeConicArcs.Gates.PRSRedundancyFive",
+    "RelativeConicArcs.Gates.PRSStableComponents",
+    "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSPolarInduction",
+    "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFiveCertificate",
+    "RelativeConicArcs.PRSRedundancyFiveCertified",
+    "RelativeConicArcs.PRSRedundancySixSeven",
+    "RelativeConicArcs.PRSRedundancySixSevenCertificate",
+    "RelativeConicArcs.PRSStableComponents",
+)
+EXPECTED_AXIOM_TARGET_COUNT = 53
+EXPECTED_AXIOM_TARGET_SHA256 = (
+    "106c846bdd0f80ed3993b6ec7e9e2b3fc318c1b9a7adce2c7d4c4c2364e69f49"
+)
 
 
 def digest(path: Path) -> tuple[str, int]:
@@ -78,6 +113,95 @@ def check_release_manifest() -> None:
     print("verified release-manifest local artifact rows")
 
 
+def tex_include_closure(path: Path, seen: set[Path]) -> list[Path]:
+    path = path.resolve()
+    if path in seen:
+        return []
+    seen.add(path)
+    text = path.read_text(encoding="utf-8")
+    closure = [path]
+    for relative in re.findall(r"\\input\{([^}]+)\}", text):
+        included = PAPER / relative
+        if included.suffix == "":
+            included = included.with_suffix(".tex")
+        closure.extend(tex_include_closure(included, seen))
+    return closure
+
+
+def project_import_closure(module: str, seen: set[str]) -> None:
+    if module in seen:
+        return
+    source = REPOSITORY / "lean" / Path(*module.split(".")).with_suffix(".lean")
+    if not source.exists():
+        return
+    seen.add(module)
+    for imported in re.findall(
+        r"^import (RelativeConicArcs\S*)$",
+        source.read_text(encoding="utf-8"),
+        flags=re.MULTILINE,
+    ):
+        project_import_closure(imported, seen)
+
+
+def check_formal_scope() -> None:
+    labels: set[str] = set()
+    for source in tex_include_closure(PAPER / "main.tex", set()):
+        text = source.read_text(encoding="utf-8")
+        labels.update(
+            re.findall(
+                r"\\label\{((?:lem|prop|thm|cor):[^}]+)\}",
+                text,
+            )
+        )
+    statement_map = (SUPPLEMENT / "LEAN-STATEMENTS.md").read_text(encoding="utf-8")
+    mapped = set(
+        re.findall(
+            r"^\| `((?:lem|prop|thm|cor):[^`]+)` \|",
+            statement_map,
+            flags=re.MULTILINE,
+        )
+    )
+    if labels != mapped:
+        missing = ", ".join(sorted(labels - mapped)) or "none"
+        obsolete = ", ".join(sorted(mapped - labels)) or "none"
+        raise SystemExit(
+            "Lean statement map differs from the manuscript labels: "
+            f"missing [{missing}]; obsolete [{obsolete}]"
+        )
+    if len(labels) != 35:
+        raise SystemExit(f"expected 35 adopted manuscript labels, found {len(labels)}")
+
+    aggregate_text = AGGREGATE.read_text(encoding="utf-8")
+    imports = tuple(
+        re.findall(r"^import (\S+)$", aggregate_text, flags=re.MULTILINE)
+    )
+    if imports != EXPECTED_AGGREGATE_IMPORTS:
+        raise SystemExit("paper-facing aggregate import set or order has changed")
+    closure: set[str] = set()
+    project_import_closure(
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit",
+        closure,
+    )
+    if tuple(sorted(closure)) != EXPECTED_PROJECT_CLOSURE:
+        raise SystemExit("paper-facing transitive project import closure has changed")
+
+    audit_text = AXIOM_AUDIT.read_text(encoding="utf-8")
+    targets = re.findall(
+        r"^#print axioms (\S+)$",
+        audit_text,
+        flags=re.MULTILINE,
+    )
+    target_bytes = ("".join(f"{target}\n" for target in targets)).encode()
+    if len(targets) != EXPECTED_AXIOM_TARGET_COUNT:
+        raise SystemExit(
+            "paper-facing axiom target count has changed: "
+            f"expected {EXPECTED_AXIOM_TARGET_COUNT}, found {len(targets)}"
+        )
+    if hashlib.sha256(target_bytes).hexdigest() != EXPECTED_AXIOM_TARGET_SHA256:
+        raise SystemExit("paper-facing axiom target set or order has changed")
+    print("verified R5--R7 manuscript labels and exact Lean target sets")
+
+
 def check_public_release_gate() -> None:
     manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
     signoff = (SUPPLEMENT / "FINAL-READER-SIGNOFF.md").read_text(encoding="utf-8")
@@ -126,6 +250,7 @@ def check_public_release_gate() -> None:
 
 
 def check_bundle() -> None:
+    check_formal_scope()
     run([sys.executable, "supplement/package_evidence_bundle.py", "--check"])
     run([sys.executable, "supplement/build_classification_records.py", "--check"])
     run([sys.executable, "supplement/build_r6_paper_table.py", "--check"])
@@ -164,14 +289,6 @@ def replay() -> None:
             "stable-components",
             ["2026-07-24-c595-stable-component-fano-elimination.py", "--check"],
         ),
-        ("r8", ["2026-07-23-c513-prs-redundancy-eight-replay.py"]),
-        ("r9", ["2026-07-23-c516-prs-redundancy-nine-replay.py"]),
-        ("hessian", ["2026-07-23-c525-ordered-hessian-arf-pullback-replay.py"]),
-        (
-            "lucas",
-            ["2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic-replay.py"],
-        ),
-        ("e7", ["2026-07-23-c530-degree-nine-lucas-e7-quotient-cover-replay.py"]),
     )
     for directory, arguments in python_jobs:
         run(
@@ -179,23 +296,6 @@ def replay() -> None:
             SUPPLEMENT / "evidence" / directory,
         )
 
-    source = (
-        SUPPLEMENT
-        / "evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.rs"
-    )
-    expected = (
-        SUPPLEMENT
-        / "evidence/r9-q49/2026-07-23-c516-prs-redundancy-nine-q49.txt"
-    )
-    with tempfile.TemporaryDirectory(prefix="prs-r9-q49-") as temporary:
-        executable = Path(temporary) / "r9-q49"
-        output = Path(temporary) / "r9-q49.txt"
-        run(["rustc", "-O", str(source), "-o", str(executable)])
-        with output.open("wb") as stream:
-            subprocess.run([str(executable)], check=True, stdout=stream)
-        if output.read_bytes() != expected.read_bytes():
-            raise SystemExit("Certificate R9-49 replay differs from expected output")
-    print("verified Certificate R9-49 replay")
 
 
 def main() -> None:
@@ -203,7 +303,7 @@ def main() -> None:
     parser.add_argument(
         "--replay",
         action="store_true",
-        help="also run every paper-local replay, including the R9-49 Rust replay",
+        help="also run every paper-local replay",
     )
     parser.add_argument(
         "--release",

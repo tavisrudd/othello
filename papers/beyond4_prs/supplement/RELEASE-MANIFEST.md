@@ -19,8 +19,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `afbef1ffdb260d9585ad8acc66cf4e51ddde240c960b052cec9598ecaa13dc5a` |
-| Local built PDF bytes | `252018` |
+| Local built PDF SHA-256 | `37471053da7af4b4112a1034d00da7b5bf59d2a9868a3ec5a54cc101ae1da9f1` |
+| Local built PDF bytes | `252694` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -35,10 +35,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `1aaa7640ba8f92bd39d732805cd2a508259c77d43da7fc96d4b39c95fcc0f8a6` | 19493 |
-| `EVIDENCE-ROWS.md` | `d3cadda08ea89298d3d1b95292634b86b872039729fbfa69d8393648ba0f813b` | 12872 |
-| `package_evidence_bundle.py` | `27ba821f7422d1c684f82e2bf8de1176f1dcf113be812c151a0e965d9920d441` | 16147 |
-| `verify.py` | `f6be6e7791badf14158f5d6e81239f87dc4e380e07ddadf40c3d33bffcad0723` | 8038 |
+| `EVIDENCE-MANIFEST.json` | `ffade512d0cb8f24d4b5da7d78dc9cc79982077ff7377fba36e4671cac33ba5f` | 12317 |
+| `EVIDENCE-ROWS.md` | `36e655b378afee360dba75374b99149d2b2f18ebc676d28ab3e62f42b826affd` | 8144 |
+| `package_evidence_bundle.py` | `bbd5879cebde7f2783ff48556974e77614a0339396e69222f87dc882af42ffbf` | 12184 |
+| `verify.py` | `429510c8dbf73b799ced9b7af26fec3481fc019a1d821cec91561f93775f5613` | 11465 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 
 Verify the complete local bundle from the paper directory:
@@ -47,8 +47,7 @@ Verify the complete local bundle from the paper directory:
 python3 supplement/verify.py
 ```
 
-Add `--replay` to run every paper-local replay, including the compiled
-R9-49 comparison.
+Add `--replay` to run every paper-local replay.
 
 Add `--release` to require the immutable repository, revision, archive, DOI,
 reviewed-PDF, and two-reader signoff fields.  It is expected to fail while any

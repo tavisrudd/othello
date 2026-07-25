@@ -5,18 +5,21 @@
 **Date:** 2026-07-25
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603 complete. C603's independent audit blocks C545 release: the green Lean
-aggregate is the obsolete R5--R9/Hessian/Lucas closure rather than the adopted
-R5--R7 paper closure; the 35 current manuscript labels have 11 missing and 24
-obsolete rows in the 48-row declaration map; the R7 lower-cover row overstates
-formal use of genus/deletion data and retains stale degree 24 instead of 25;
-and the adoption/formalization/release ledgers are not synchronized. The fresh
-113-command axiom audit itself is green with only `propext`,
-`Classical.choice`, and `Quot.sound`; all 21 project-owned closure files pass
-the referee-source hygiene review, and the public classification JSON matches
-its recorded bytes and hash. C545 now owns an explicit scope/ledger/verifier
-repair and independent rerun before its already-open export, identifier,
-author, and account gates. C532 gives
+C603 complete. C545 has repaired C603's release-blocking local trust boundary.
+The adopted aggregate now has the exact 15-file R5--R7 closure and 53-target
+axiom audit; the shared contraction API is separated from the companion R9
+residual-quadratic module; all 35 current manuscript labels reconcile exactly;
+the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
+the adoption/formalization/release ledgers and 42-artifact evidence pack agree;
+and the verifier checks the TeX label set, direct imports, transitive closure,
+and ordered audit targets fail-closed. The paper and TIT builds, supplement
+gate, adopted aggregate, foundation audit, and companion R9 regression gate
+are green. The exact repair, Lean/prose comparison, dependency pinpoints, and
+mystery ledger are in
+`notes/2026-07-25-c545-r5-r7-lean-trust-reconciliation.md`. C545 remains
+externally blocked on two specialist signoffs, a publicly fetchable
+flake-pinned Lean revision, immutable export and identifiers, and
+author/account confirmation. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -850,7 +853,7 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | C603 trust-boundary repair, then external release gates | define and rerun the adopted R5--R7 Lean closure; reconcile all 35 labels and public ledgers; make the verifier scope-sensitive; close citation pinpoints; only then resume export/identifier/author gates |
+| 1 | C545 | external release gates after green C603 reconciliation | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two final specialist signoffs, immutable identifiers, and author/account confirmation before upload |
 
 ## Unallocated level-ups
 
@@ -912,7 +915,7 @@ history.
 
 `go C545`
 
-(C603 found release-blocking scope and trust-map drift despite a green kernel
-and artifact audit. C545 must repair and independently rerun that local gate
-before its public Lean/export revision, identifiers, author/account
-confirmation, and upload steps. No external upload is authorized.)
+(The C603 local trust repair and independent rerun are green. C545 now owns
+the publicly fetchable Lean/export revision, two final specialist signoffs,
+immutable identifiers, author/account confirmation, and upload gates. No
+external upload is authorized.)
