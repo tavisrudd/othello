@@ -918,6 +918,19 @@ parity. The live crown is now a fixed-dimensional unbounded-range algebraic
 congruence on the positive-overload response family. Report:
 [`../2026-07-25-c80-finite-signature-no-go.md`](../2026-07-25-c80-finite-signature-no-go.md).
 
+**The fixed-dimensional unbounded-range crown is formally positive but
+vacuous as stated (C80, 2026-07-25).** Every finite residual object has a
+canonical natural-number code, and decode–`D_x`–encode is a q-independent
+one-coordinate exact transition law. It preserves the whole continuation
+game and therefore all lower-`K_Ω` responses, but stores the complete
+incidence object and leaves kernel recognition recursive. Fixed dimension
+alone is not an information bound. A meaningful successor must add an
+anti-packing gate: for example, fixed-dimensional coordinates and move marks
+of polynomial range in `q`, fixed bounded-degree piecewise-polynomial update
+formulas, and a fixed nonrecursive decoder for lower-kernel responses. C82
+remains gated until that strengthened theorem is fixed and proved. Report:
+[`../2026-07-25-c80-unbounded-coordinate-congruence.md`](../2026-07-25-c80-unbounded-coordinate-congruence.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -963,8 +976,11 @@ Priority order and why:
    is now ruled out: sealed conic subsets already give
    `floor((q-2)/4)+1` distinct P-valued `Y_NK` heights. The exact quotient is only bounded-arity,
    and transporting the recursive kernel through it does not prove membership. The remaining
-   admissible algebra has finitely many coordinates with unbounded ranges; a value-only factor is
-   also not excluded.
+   unrestricted unbounded-range algebra is now formally trivial: one natural number can encode the
+   complete residual and update by decode–`D_x`–encode. The next crown must first fix an
+   anti-packing information model, such as polynomially bounded coordinates and move marks with
+   fixed bounded-degree update formulas plus a nonrecursive lower-kernel decoder. A value-only
+   factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
