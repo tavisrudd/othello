@@ -136,7 +136,7 @@ def main() -> None:
     if dirty:
         raise SystemExit("release-owned source paths are not clean")
 
-    timestamp = run(
+    paper_timestamp = run(
         [
             "git",
             "log",
@@ -144,7 +144,20 @@ def main() -> None:
             "--format=%aI",
             revision,
             "--",
-            *(path.as_posix() for path in owned_paths),
+            PAPER_PATH.as_posix(),
+        ],
+        cwd=source,
+        capture=True,
+    )
+    lean_timestamp = run(
+        [
+            "git",
+            "log",
+            "-1",
+            "--format=%aI",
+            revision,
+            "--",
+            *(path.as_posix() for path in LEAN_PATHS),
         ],
         cwd=source,
         capture=True,
@@ -156,7 +169,7 @@ def main() -> None:
     paper_commit = commit(
         output,
         "Release projective Reed-Solomon syndromes R5-R7 candidate",
-        timestamp,
+        paper_timestamp,
         [PAPER_PATH.as_posix()],
     )
     (output / ".git/info/exclude").write_text(
@@ -180,7 +193,7 @@ def main() -> None:
     lean_commit = commit(
         lean_root,
         "Publish R5-R7 Lean verification closure",
-        timestamp,
+        lean_timestamp,
         [
             "lakefile.toml",
             "lake-manifest.json",
