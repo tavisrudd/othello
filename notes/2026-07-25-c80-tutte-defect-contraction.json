@@ -1,0 +1,2575 @@
+{
+  "claim_scope": {
+    "exceptional_exchanges": 4,
+    "field": 17,
+    "root_t4": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "states": 5,
+    "uniform_odd_q_claim": false
+  },
+  "exceptional_exchanges": [
+    {
+      "conic_intersections": [],
+      "line_type": "external",
+      "opponent": [
+        4,
+        0
+      ],
+      "opponent_tau_played": 1,
+      "prior_intruder_product_orders": [],
+      "product_order": 18,
+      "reply": [
+        7,
+        1
+      ],
+      "reply_tau_played": 0,
+      "target_omega": 40,
+      "target_reply_graph": {
+        "A_size": 13,
+        "C_component_sizes": [
+          2
+        ],
+        "C_size": 2,
+        "D_component_sizes": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          3
+        ],
+        "D_size": 17,
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": [],
+        "matching_size": 15,
+        "order": 32
+      },
+      "target_reply_graph_cells": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          10
+        ]
+      ],
+      "target_selected": [
+        [
+          4,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "target_tutte_contraction": {
+        "A_degree_sequence": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4
+        ],
+        "A_order": 13,
+        "D_component_order": 15,
+        "D_degree_sequence": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ],
+        "incidence_edges": 36,
+        "internal_D_edges": 3
+      },
+      "target_tutte_decomposition": {
+        "A": [
+          {
+            "cell": [
+              0,
+              5
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              0,
+              9
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              0,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              1,
+              3
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              2,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              3,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              5,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              5,
+              15
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              8,
+              5
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              8,
+              9
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              9,
+              12
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              10,
+              12
+            ],
+            "conic_parameter": 10
+          },
+          {
+            "cell": [
+              11,
+              9
+            ],
+            "kind": "intruder"
+          }
+        ],
+        "C_components": [
+          [
+            {
+              "cell": [
+                1,
+                2
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                3,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ],
+        "D_components": [
+          [
+            {
+              "cell": [
+                1,
+                6
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                1,
+                9
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                9
+              ],
+              "conic_parameter": 2
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                10
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                3,
+                12
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                10,
+                7
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                8,
+                2
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                9,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                9,
+                15
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                10,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                10,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                10,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                7
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                9
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                10
+              ],
+              "conic_parameter": 12
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "conic_intersections": [],
+      "line_type": "external",
+      "opponent": [
+        5,
+        0
+      ],
+      "opponent_tau_played": 1,
+      "prior_intruder_product_orders": [],
+      "product_order": 18,
+      "reply": [
+        4,
+        10
+      ],
+      "reply_tau_played": 0,
+      "target_omega": 40,
+      "target_reply_graph": {
+        "A_size": 13,
+        "C_component_sizes": [
+          2
+        ],
+        "C_size": 2,
+        "D_component_sizes": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          3
+        ],
+        "D_size": 17,
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": [],
+        "matching_size": 15,
+        "order": 32
+      },
+      "target_reply_graph_cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          14
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "target_selected": [
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "target_tutte_contraction": {
+        "A_degree_sequence": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4
+        ],
+        "A_order": 13,
+        "D_component_order": 15,
+        "D_degree_sequence": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ],
+        "incidence_edges": 36,
+        "internal_D_edges": 3
+      },
+      "target_tutte_decomposition": {
+        "A": [
+          {
+            "cell": [
+              1,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              1,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              3,
+              6
+            ],
+            "conic_parameter": 3
+          },
+          {
+            "cell": [
+              6,
+              14
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              7,
+              7
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              8,
+              14
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              9,
+              14
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              10,
+              3
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              10,
+              5
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              11,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              11,
+              6
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              12,
+              3
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              12,
+              13
+            ],
+            "kind": "intruder"
+          }
+        ],
+        "C_components": [
+          [
+            {
+              "cell": [
+                2,
+                5
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                3,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ],
+        "D_components": [
+          [
+            {
+              "cell": [
+                0,
+                1
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                8,
+                6
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                9,
+                15
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                0,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                0,
+                14
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                1,
+                1
+              ],
+              "conic_parameter": 1
+            }
+          ],
+          [
+            {
+              "cell": [
+                1,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                14
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                2
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                12
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                15
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                8,
+                2
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                8,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                10,
+                7
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                11,
+                14
+              ],
+              "conic_parameter": 11
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "conic_intersections": [],
+      "line_type": "external",
+      "opponent": [
+        8,
+        14
+      ],
+      "opponent_tau_played": 1,
+      "prior_intruder_product_orders": [],
+      "product_order": 18,
+      "reply": [
+        4,
+        10
+      ],
+      "reply_tau_played": 0,
+      "target_omega": 40,
+      "target_reply_graph": {
+        "A_size": 13,
+        "C_component_sizes": [
+          2
+        ],
+        "C_size": 2,
+        "D_component_sizes": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          3
+        ],
+        "D_size": 17,
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": [],
+        "matching_size": 15,
+        "order": 32
+      },
+      "target_reply_graph_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          9
+        ]
+      ],
+      "target_selected": [
+        [
+          4,
+          10
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "target_tutte_contraction": {
+        "A_degree_sequence": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4
+        ],
+        "A_order": 13,
+        "D_component_order": 15,
+        "D_degree_sequence": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ],
+        "incidence_edges": 36,
+        "internal_D_edges": 3
+      },
+      "target_tutte_decomposition": {
+        "A": [
+          {
+            "cell": [
+              1,
+              1
+            ],
+            "conic_parameter": 1
+          },
+          {
+            "cell": [
+              1,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              1,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              3,
+              12
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              5,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              6,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              6,
+              9
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              7,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              9,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              10,
+              3
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              11,
+              6
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              11,
+              15
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              12,
+              3
+            ],
+            "kind": "intruder"
+          }
+        ],
+        "C_components": [
+          [
+            {
+              "cell": [
+                3,
+                13
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                10,
+                7
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ],
+        "D_components": [
+          [
+            {
+              "cell": [
+                0,
+                0
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                0,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                0,
+                9
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                3,
+                3
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                5,
+                12
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                1,
+                6
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                1
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                2
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                3,
+                6
+              ],
+              "conic_parameter": 3
+            }
+          ],
+          [
+            {
+              "cell": [
+                5,
+                1
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                7,
+                5
+              ],
+              "conic_parameter": 7
+            }
+          ],
+          [
+            {
+              "cell": [
+                7,
+                7
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                9,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                9
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "conic_intersections": [],
+      "line_type": "external",
+      "opponent": [
+        11,
+        9
+      ],
+      "opponent_tau_played": 1,
+      "prior_intruder_product_orders": [],
+      "product_order": 18,
+      "reply": [
+        7,
+        1
+      ],
+      "reply_tau_played": 0,
+      "target_omega": 40,
+      "target_reply_graph": {
+        "A_size": 13,
+        "C_component_sizes": [
+          2
+        ],
+        "C_size": 2,
+        "D_component_sizes": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          3
+        ],
+        "D_size": 17,
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": [],
+        "matching_size": 15,
+        "order": 32
+      },
+      "target_reply_graph_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          10
+        ]
+      ],
+      "target_selected": [
+        [
+          7,
+          1
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "target_tutte_contraction": {
+        "A_degree_sequence": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4
+        ],
+        "A_order": 13,
+        "D_component_order": 15,
+        "D_degree_sequence": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4
+        ],
+        "incidence_edges": 36,
+        "internal_D_edges": 3
+      },
+      "target_tutte_decomposition": {
+        "A": [
+          {
+            "cell": [
+              0,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              0,
+              5
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              2,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              2,
+              2
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              3,
+              7
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              3,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              4,
+              0
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              4,
+              14
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              8,
+              5
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              8,
+              6
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              9,
+              12
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              10,
+              13
+            ],
+            "kind": "intruder"
+          },
+          {
+            "cell": [
+              12,
+              10
+            ],
+            "conic_parameter": 12
+          }
+        ],
+        "C_components": [
+          [
+            {
+              "cell": [
+                1,
+                2
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                9,
+                15
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ],
+        "D_components": [
+          [
+            {
+              "cell": [
+                1,
+                10
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                1,
+                13
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                5
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                6,
+                14
+              ],
+              "kind": "intruder"
+            },
+            {
+              "cell": [
+                9,
+                6
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                2,
+                14
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                3,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                5,
+                10
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                5,
+                15
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                3
+              ],
+              "conic_parameter": 6
+            }
+          ],
+          [
+            {
+              "cell": [
+                6,
+                12
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                8,
+                2
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                9,
+                0
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                9,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                10,
+                12
+              ],
+              "conic_parameter": 10
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                3
+              ],
+              "kind": "intruder"
+            }
+          ],
+          [
+            {
+              "cell": [
+                12,
+                5
+              ],
+              "kind": "intruder"
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "input_sha256": {
+    "notes/2026-07-08-intrusion-census.py": "6f1f7e1e36ff3a3ed5d5f0c410b8d6bacb5be23a73503e669489e4cf06f14c83",
+    "notes/2026-07-08-zone-repair-geometry.py": "5eb096b8eecc872fb961c5f9c385073b32133194f35ed1580b91c537ec8347f8",
+    "notes/2026-07-08-zone-steering-census.py": "f84fd2474ada8b917a73ca094fd5265ced4040501e9f3459ebe16694a90aa406",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_marked_head_orbits.py": "69c3459ef293486e8ce0bca7f42680ee3ad627ce2a7e85edc2ac8957e82b05d2",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_response_fibre_census.py": "d70136673d947f89259a6dab214fee7450505c10580a842c6bd9d51ab69633ce",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206"
+  },
+  "q": 17,
+  "root_omega": 820,
+  "root_reply_graph": {
+    "A_size": 0,
+    "C_component_sizes": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      8,
+      8,
+      8,
+      60
+    ],
+    "C_size": 100,
+    "D_component_sizes": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "D_size": 4,
+    "deficiency": 4,
+    "edges": 158,
+    "isolated_vertices": [
+      32,
+      40,
+      72,
+      93
+    ],
+    "matching_size": 50,
+    "order": 104
+  },
+  "root_reply_graph_cells": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      0,
+      6
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      0,
+      13
+    ],
+    [
+      0,
+      14
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      12
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      2,
+      10
+    ],
+    [
+      2,
+      14
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      4,
+      10
+    ],
+    [
+      4,
+      12
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      4,
+      14
+    ],
+    [
+      4,
+      15
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      10
+    ],
+    [
+      5,
+      12
+    ],
+    [
+      5,
+      15
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      6,
+      3
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      6,
+      12
+    ],
+    [
+      6,
+      13
+    ],
+    [
+      6,
+      14
+    ],
+    [
+      6,
+      15
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      10
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      8,
+      5
+    ],
+    [
+      8,
+      6
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      8,
+      10
+    ],
+    [
+      8,
+      14
+    ],
+    [
+      8,
+      15
+    ],
+    [
+      9,
+      0
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      6
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      9,
+      14
+    ],
+    [
+      9,
+      15
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      5
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      10,
+      10
+    ],
+    [
+      10,
+      12
+    ],
+    [
+      10,
+      13
+    ],
+    [
+      10,
+      14
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      11,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      12,
+      5
+    ],
+    [
+      12,
+      7
+    ],
+    [
+      12,
+      9
+    ],
+    [
+      12,
+      10
+    ],
+    [
+      12,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      12,
+      15
+    ]
+  ],
+  "root_stabilizer": {
+    "matrices": [
+      [
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        8,
+        16
+      ],
+      [
+        1,
+        3,
+        8,
+        16
+      ],
+      [
+        1,
+        4,
+        0,
+        16
+      ]
+    ],
+    "ordered_exchange_orbits": [
+      [
+        0,
+        1,
+        2,
+        3
+      ]
+    ],
+    "stabilizer_order": 4
+  },
+  "root_t4": [
+    13,
+    14,
+    15,
+    16
+  ],
+  "same_parameter_pattern_q13_control": {
+    "positive_pairing_survivor": true,
+    "reply_graph": {
+      "A_size": 0,
+      "C_component_sizes": [
+        40
+      ],
+      "C_size": 40,
+      "D_component_sizes": [],
+      "D_size": 0,
+      "deficiency": 0,
+      "edges": 92,
+      "isolated_vertices": [],
+      "matching_size": 20,
+      "order": 40
+    },
+    "root_t4": [
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "same_parameter_pattern_stabilizer_orders": {
+    "11": 4,
+    "13": 4,
+    "17": 4,
+    "19": 4
+  },
+  "schema": "c80-tutte-defect-contraction-v1",
+  "source": "rust/scripts/c80_tutte_defect_contraction.py",
+  "tutte_berge_certificates_verified": true
+}

@@ -994,6 +994,24 @@ contraction of this marked Tutte defect, not another matching packet or
 bounded-depth lookup. C82 remains gated. Report+script+certificate:
 [`../2026-07-25-c80-positive-pairing-shell.md`](../2026-07-25-c80-positive-pairing-shell.md).
 
+**The marked q17 Tutte defect contracts to one exact normalized type, but
+uniform contraction remains open (C80, 2026-07-25).** The missed root's four
+isolated strict-reply fibres form one ordered orbit under the Klein-four
+stabilizer of `{∞,0,-1,-2,-3,-4}`. Their four exceptional exchanges are
+external to the conic, have product-involution order `q+1=18`, and land in
+projectively equivalent 32-vertex reply graphs. Each target has the exact
+Gallai--Edmonds type `D=14K1⊔K3`, `|A_GE|=13`, `C=K2`; Tutte--Berge certifies
+deficiency `15-13=2`, and contraction of the factor-critical components
+exposes an incident `13×15` quotient, so one further marked response reaches
+`M_Ω`. Thus the finite thread is intrinsically `4→2→0`, not four unrelated
+exceptions. The same Klein-four stabilizer occurs at the q13 control, whose
+reply graph is perfectly matchable, so symmetry normalizes the defect but
+does not explain its game value. Next prove or falsify a uniform marked
+Tutte-excess decrement under the normalized external order-`q+1` exchange;
+do not promote this five-state q17 thread to a depth-two law. C82 stays gated.
+Report+script+certificate:
+[`../2026-07-25-c80-tutte-defect-contraction.md`](../2026-07-25-c80-tutte-defect-contraction.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -1050,12 +1068,16 @@ Priority order and why:
    right base. The clean positive matching lift `M_Ω` is closed-negative at
    one q17 P root: four isolated marked fibres descend to four
    Tutte-deficiency-two targets, and a second adaptive exchange repairs the
-   finite case. The remaining formulation is a directly defined ranked
-   survivor `F_q` realizing the concrete positive-overload `∀o∃p`
-   strict-`Ω` induction and landing in `B_cc`, together with a normalized
-   secant/orbital contraction of that marked Tutte defect; no quotient or
-   arbitrary Grundy oracle is required. A value-only factor is also not
-   excluded.
+   finite case. Those four fibres are now one Klein-four orbit, and every
+   target has the same exact Gallai--Edmonds type
+   `D=14K1⊔K3`, `|A_GE|=13`, `C=K2`, giving a finite intrinsic defect thread
+   `4→2→0`. The remaining formulation is a directly defined ranked survivor
+   `F_q` realizing the concrete positive-overload `∀o∃p` strict-`Ω`
+   induction and landing in `B_cc`, together with a proof that marked
+   Tutte excess contracts uniformly under the normalized external
+   order-`q+1` exchange. No quotient or arbitrary Grundy oracle is required,
+   and the five-state q17 thread is not a depth-two law. A value-only factor
+   is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
