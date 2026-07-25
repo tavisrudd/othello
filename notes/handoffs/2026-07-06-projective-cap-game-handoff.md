@@ -933,9 +933,13 @@ upgrade extracts the first quantitative constraint: if `d` coordinates each
 have `O(q^C)` range, exact transition separation forces `Cd≥1`. More
 importantly, C80 needs only the sound alternating structure
 `∀ opponent ∃ strict-Ω reply`, not full bisimulation. The higher-EV target is
-therefore an information-bounded response algebra with concrete
-opponent/reply lifting theorems and a `Y_NK` base decoder; the exact residual
-transform remains its substrate. Report:
+therefore a directly defined ranked survivor `F_q`, with concrete
+opponent/reply lifting, together with a structural P boundary packet
+`B_q=F_q∩{Ω=0}`. No quotient or deterministic abstract update is required.
+The base cannot be an oracle for arbitrary `Y_NK` Grundy zero; it needs its
+own uniform copycat/decomposition-style P-proof. The exact residual transform
+remains the domain substrate, and the `Cd≥1` bound is only an exact-quotient
+diagnostic. Report:
 [`../2026-07-25-c80-unbounded-coordinate-congruence.md`](../2026-07-25-c80-unbounded-coordinate-congruence.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
@@ -987,9 +991,10 @@ Priority order and why:
    complete residual and update by decode–`D_x`–encode. The next crown must first fix an
    anti-packing information model. Exact polynomial-range quotients must already carry
    `log q-O(1)` bits (`Cd≥1` for `d` coordinates of `O(q^C)` range), but exact congruence is
-   stronger than the crown needs. The higher-EV formulation is a sound information-bounded
-   alternating response algebra realizing the `∀o∃p` strict-`Ω` induction, with fixed
-   opponent/reply lifting and a `Y_NK` base decoder. A value-only factor is also not excluded.
+   stronger than the crown needs. The Tao-style formulation is a directly defined ranked survivor
+   `F_q` realizing the concrete `∀o∃p` strict-`Ω` induction, plus a structurally proved-P boundary
+   packet `B_q=F_q∩{Ω=0}`. No quotient is required, and arbitrary `Y_NK` Grundy zero is not an
+   admissible base oracle. A value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.

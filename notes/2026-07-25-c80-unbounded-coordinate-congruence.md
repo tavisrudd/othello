@@ -188,6 +188,74 @@ spend information on game-tree distinctions that a P-strategy certificate
 never queries. The exact residual transform remains the domain-level
 substrate against which the lifting theorem is proved.
 
+## 5. `tt` correction — seek a ranked invariant, not a quotient
+
+Pushing the quantifiers one step further removes “quotient” from the
+load-bearing theorem altogether.
+
+It is enough to construct two uniformly described families of residuals:
+
+```text
+F_q = the positive-overload controlled family,
+B_q = a structurally proved-P overload-zero boundary packet.
+```
+
+The required theorem package is:
+
+```text
+root_q ∈ F_q;
+
+R∈F_q and Ω(R)=0  →  R∈B_q;
+
+R∈F_q and Ω(R)>0  →
+  for every concrete legal opponent move o,
+  there exists a concrete legal reply p such that
+    D_p(D_o(R))∈F_q and Ω(D_p(D_o(R)))<Ω(R);
+
+R∈B_q  →  R is P.
+```
+
+Induction on `Ω` proves every state of `F_q` P. This is precisely the earlier
+survivor-family theorem shape, now stripped of the unnecessary requirement
+that `F_q` arise as fibres of a transition congruence.
+
+The algebraic work may consist of a fixed list of incidence identities,
+inequalities, and existence lemmas defining and preserving `F_q`. It need not
+provide a deterministic abstract update map. Different concrete opponents
+with the same coarse algebraic data may use different replies; the closure
+theorem quantifies over them directly.
+
+### The hidden boundary crown
+
+The base condition must not be stated as an oracle for
+
+```text
+Grundy(G_R)=0.
+```
+
+That merely hides the Node--Kayles value problem at `Ω=0`. A uniform proof
+needs a structurally recognizable subfamily `B_q⊆Y_NK` with its own P-proof
+(for example, a valid copycat/pairing theorem or another explicit graph
+decomposition). The previous fixed-size empty/pure-one-dimensional leaf was
+falsified, but that does not exclude a growing-depth strategy landing in a
+different structural boundary packet.
+
+Hence C80 has two coupled construction obligations:
+
+1. **survival:** an algebraically defined `F_q` closed by strict-`Ω`
+   responses;
+2. **absorption value:** a uniform, nonrecursive P-theorem for
+   `B_q=F_q∩{Ω=0}`.
+
+C82 should count replies only after both objects are stated. Counting a
+packet that descends into arbitrary `Y_NK` merely transfers the unresolved
+value question to the boundary.
+
+The `Cd≥1` lower bound remains a correct diagnostic for exact quotients, but
+it is not a lower bound on this one-sided strategy certificate. A direct
+ranked-invariant proof may use fewer state bits because it is not separating
+exact follower types.
+
 ## Trust boundary
 
 This is a coding proof, not a computational claim. It uses only:
@@ -236,6 +304,13 @@ theorem lives.
   alternating response algebra enough, avoiding exact bisimulation?** Yes at
   the level of the strict-`Ω` induction; the missing work is its geometric
   construction and lifting theorem.
+- **[SETTLED tt correction] Must the response algebra be a quotient with a
+  closed abstract update?** No. A directly defined ranked family `F_q` with
+  concrete `∀o∃p` closure is sufficient.
+- **[OPEN — hidden boundary crown] What uniformly recognizable
+  `B_q⊆Y_NK` receives the absorption and has a structural P-proof?** Arbitrary
+  boundary Grundy zero is not an admissible decoder; the earlier fixed-size
+  pure-one-dimensional packet is already false.
 - **[OPEN — C80 crown] Under the adopted anti-packing gate, can positive
   overload escape roots be placed uniformly in `K_Ω`?** No proof or
   falsification is currently known.
@@ -244,9 +319,9 @@ theorem lives.
 
 This is a useful specification failure caught cleanly: the literal crown has
 a one-line coding proof, while the mathematical difficulty is untouched. The
-extra squeeze improves the next shape: lock an information-bounded
-`∀opponent∃reply` algebra, not an unnecessarily exact quotient, before doing
-any more invariant mining.
+extra squeeze improves the next shape: state the ranked survivor/boundary
+pair `(F_q,B_q)` and prove its concrete `∀opponent∃reply` closure, rather than
+building an unnecessarily exact quotient.
 
-go C80 cap fix the anti-packing gate and build a polynomial-information
-alternating response algebra
+go C80 cap state and prove or falsify an algebraic ranked survivor with a
+structural P boundary packet
