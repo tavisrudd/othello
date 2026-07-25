@@ -976,6 +976,24 @@ q-independent secant construction; test boundary uniformity beyond q17
 before releasing C82. Report+script+certificate:
 [`../2026-07-25-c80-adaptive-copycat-survivor.md`](../2026-07-25-c80-adaptive-copycat-survivor.md).
 
+**The structural boundary passes its first q19 test, but the clean
+positive-overload pairing lift is false (C80, 2026-07-25).** The previously
+certified q19 root `{15,16,17,18}` remains in the strict survivor after
+replacing `Y_NK` by `B_cc`, with 23,936 explicit copycat-boundary states.
+Define the well-founded positive pairing kernel `M_Ω` by requiring at each
+positive rank a perfect strict-reply matching, or a near-perfect matching plus
+one adaptive bye, into lower `M_Ω`. This contains all five q13 P roots and
+four of five q17 P roots while rejecting all five q17 N roots. The missed P
+root `{13,14,15,16}` has 104 legal moves but four isolated marked fibres in
+its `M_Ω` reply graph. Their unique old-survivor replies give four size-six
+targets with no isolated fibres and matching deficiency two; one more
+adaptive exchange reaches `M_Ω`. Thus a two-layer wrapper repairs the finite
+root, but matching at every positive rank is closed-negative and no uniform
+adaptive depth is evidenced. The live crown is a normalized secant/orbital
+contraction of this marked Tutte defect, not another matching packet or
+bounded-depth lookup. C82 remains gated. Report+script+certificate:
+[`../2026-07-25-c80-positive-pairing-shell.md`](../2026-07-25-c80-positive-pairing-shell.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -1028,10 +1046,16 @@ Priority order and why:
    stronger than the crown needs. The Tao-style boundary is now found at the finite gate:
    `B_cc` is the fixed incidence formula “persistent nonedge pairing, or
    `∀x∃y` into one,” and it replaces every visited q13/q17 `Y_NK` leaf exactly.
-   The remaining formulation is a directly defined ranked survivor `F_q`
-   realizing the concrete positive-overload `∀o∃p` strict-`Ω` induction and
-   landing in `B_cc`; no quotient or arbitrary Grundy oracle is required. A
-   value-only factor is also not excluded.
+   The first q19 boundary probe is positive, so `B_cc` itself remains the
+   right base. The clean positive matching lift `M_Ω` is closed-negative at
+   one q17 P root: four isolated marked fibres descend to four
+   Tutte-deficiency-two targets, and a second adaptive exchange repairs the
+   finite case. The remaining formulation is a directly defined ranked
+   survivor `F_q` realizing the concrete positive-overload `∀o∃p`
+   strict-`Ω` induction and landing in `B_cc`, together with a normalized
+   secant/orbital contraction of that marked Tutte defect; no quotient or
+   arbitrary Grundy oracle is required. A value-only factor is also not
+   excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
