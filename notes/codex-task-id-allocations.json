@@ -1061,8 +1061,17 @@
       "last": 600,
       "purpose": "Apply final local referee exposition corrections and validate release",
       "sequence": 118
+    },
+    {
+      "count": 2,
+      "first": 601,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 602,
+      "purpose": "headline LU-to-LC Lean formalization and paper-facing Lean trust audit",
+      "sequence": 119
     }
   ],
-  "next_id": 601,
+  "next_id": 603,
   "schema": "codex-task-id-allocations-v1"
 }
