@@ -4,15 +4,23 @@
 
 ## Goal
 
-Formalize the paper's version-1 headline package for every finite field and
-every `m≥2`: if equal-phase states of two linear `[2m,m,m+1]` MDS codes are
-related by a party permutation and `2m` local unitaries, then every local
-unitary normalizes the finite-field Weyl system.  Formalize the Choi
-corollary that every product physical unitary implementing a logical gate on
-the associated `[[2m-1,1,m]]` quantum MDS code has Clifford physical factors
-and Clifford logical action.  Specialize the general theorem back to six
-parties and export the admitted-pencil `LU iff LC iff z` composition without
-strengthening the extension-field scalar classification.
+Build the unconditional length-generic foundation needed by the paper's
+version-1 headline package.  C601 owns the `Fin (2*m)` code/state/action API,
+the exact `[2m,m,m+1]` MDS and dual-shortening theory, the code-independent
+diagonal-tensor axis theorem, and compatibility with the existing six-party
+AME definitions.  It stops at those reusable foundations: C612 owns the
+general LU-to-LC terminal, and C613 owns the Choi/quantum-MDS/transversal
+corollary.
+
+## Execution split
+
+The earlier single-task plan was too large for one coherent Lean acceptance
+gate.  Its theorem decomposition remains authoritative, with ownership now:
+
+- **C601:** layers 1--3 below;
+- **C612:** layers 4--6 and 8;
+- **C613:** layer 7;
+- **C602:** aggregate trust, prose, axiom, and release audit after all three.
 
 ## Existing foundation
 
@@ -26,8 +34,16 @@ strengthening the extension-field scalar classification.
   `[6,3,4]`/AME dictionary.
 - `RelativeConicArcs.AMELU.PencilClassification` exposes the prime-field
   classification terminal from named geometric and holonomy inputs.
-- The missing proof is accurately recorded in the paper's formalization and
-  statement-adequacy ledgers.
+- `RelativeConicArcs.AMELU.LURigidity` now proves the complete \(m=3\)
+  specialization unconditionally: diagonal-axis recovery, dual `[6,3,4]`
+  shortening, the full four-party Weyl marginal, covariance, Weyl
+  normalization, party permutations, and the six-party LU-to-LC terminal.
+  `RelativeConicArcs.AMELU.LUPencilClassification` composes that terminal with
+  the conditional pencil interface.
+- The remaining gaps are therefore exactly the length-generic refactor and
+  arbitrary-\(m\) theorem owned by C601/C612, plus C613's
+  quantum-MDS/Choi/transversal corollary.  The paper's formalization and
+  statement-adequacy ledgers record this boundary.
 
 ## Tao-style planning pass
 
@@ -73,37 +89,37 @@ equation, not from an unconstructed input structure.
 
 ## Theorem decomposition
 
-1. **Length-generic code/state interface.**  Define linear codes on
+1. **Length-generic code/state interface (C601).**  Define linear codes on
    `Fin (2*m)`, equal-phase states, subsystem marginals, product local actions,
    and the MDS condition in a form equivalent to the paper's
    `[2m,m,m+1]` parameters.  Prove dual MDS, AME, and the specialization
    bridges to the existing six-party definitions.
-2. **Diagonal tensor.** Define the finite array, one-factor contraction, and
+2. **Diagonal tensor (C601).** Define the finite array, one-factor contraction, and
    flattening matrix. Prove that the flattening has rank one exactly for a
    nonzero coordinate-axis covector. Deduce that invertible product maps
    carrying one full diagonal tensor to another are monomial in every factor.
-3. **MDS shortening.** For an `(m+1)`-party set, prove that codewords
+3. **MDS shortening (C601).** For an `(m+1)`-party set, prove that codewords
    supported there form a one-dimensional subspace for both `C` and
    `C^\perp`; construct nonzero generators, prove exact support, and prove
    that the product plane projects bijectively to `𝔽 × 𝔽` at every retained
    party.
-4. **Marginal Weyl expansion.** Express the identity-subtracted
+4. **Marginal Weyl expansion (C612).** Express the identity-subtracted
    `(m+1)`-party marginal as the full diagonal tensor indexed by
    `𝔽² \ {(0,0)}`, with nonzero coefficients and orthogonal local Weyl axes.
-5. **Covariance and Clifford bridge.** Prove that global local-unitary
+5. **Covariance and Clifford bridge (C612).** Prove that global local-unitary
    equivalence gives product conjugacy of each selected marginal. Apply the
    axis theorem to permute nonidentity Weyl axes, include the identity axis,
    and discharge `IsCliffordMatrix`.
-6. **General rigidity terminal.** Cover all `2m` parties by retained
+6. **General rigidity terminal (C612).** Cover all `2m` parties by retained
    `(m+1)`-sets and conclude that every local factor is Clifford. Export the
    unconditional `LocallyUnitaryEquivalent → LocallyCliffordEquivalent`
    theorem for equal-phase `[2m,m,m+1]` states, then derive the existing
    `[6,3,4]` theorem by specialization.
-7. **Choi/transversal terminal.**  Define the normalized Choi state of an
+7. **Choi/transversal terminal (C613).**  Define the normalized Choi state of an
    encoder, prove the action identity from `U_phys V = V L`, show that
    transpose and inverse preserve the finite-field Clifford normalizer, and
    conclude that the physical factors and logical factor are Clifford.
-8. **Pencil composition.** Over the manuscript's odd-prime-field scope,
+8. **Pencil composition (C612).** Over the manuscript's odd-prime-field scope,
    compose the new theorem with the existing conditional pencil
    classification interface. Do not claim scalar classification over
    extension fields.

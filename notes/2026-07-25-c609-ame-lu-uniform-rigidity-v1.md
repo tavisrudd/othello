@@ -73,8 +73,8 @@ contribution precisely as its full-\(q^2-1\)-axis, prime-power,
 
 ## Lean successor
 
-C601 is queued as the unconditional formalization of the complete version-1
-headline package.  Its revised plan has eight layers:
+C601, C612, and C613 are queued as three acceptance gates for the complete
+version-1 headline package.  Their combined plan has eight layers:
 
 1. a length-generic code, equal-phase-state, marginal, and local-action API on
    `Fin (2*m)`, with a proved bridge to `[2m,m,m+1]` MDS terminology and the
@@ -89,9 +89,12 @@ headline package.  Its revised plan has eight layers:
 7. the Choi/transposition terminal for transversal logical gates; and
 8. the existing odd-prime-field pencil composition.
 
-No diagonal-axis, shortening, marginal, covariance, Choi, or transpose step
-may remain as an input structure.  C602 remains queued after C601 for the
-complete aggregate, axiom, trust-ledger, prose, and release audit.
+C601 owns layers 1--3, C612 owns layers 4--6 and 8, and C613 owns layer 7,
+including the one-leg encoder's quantum-MDS parameters.  No diagonal-axis,
+shortening, marginal, covariance, Choi, transpose, distance, or
+erasure-correction step may remain as an input structure.  C602 remains
+queued after C613 for the complete aggregate, axiom, trust-ledger, prose, and
+release audit.
 
 ## Related leads kept out of version 1
 
