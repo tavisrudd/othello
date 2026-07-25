@@ -1115,8 +1115,17 @@
       "last": 608,
       "purpose": "post-Version-1 exact PRS decoding theorems from bounded-format feasibility and explicit redundancy-five-through-seven Hankel solvers",
       "sequence": 124
+    },
+    {
+      "count": 1,
+      "first": 609,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 609,
+      "purpose": "general MDS-CSS LU rigidity and transversal no-go version-1 revision",
+      "sequence": 125
     }
   ],
-  "next_id": 609,
+  "next_id": 610,
   "schema": "codex-task-id-allocations-v1"
 }
