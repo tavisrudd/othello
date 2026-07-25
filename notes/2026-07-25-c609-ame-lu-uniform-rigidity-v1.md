@@ -36,12 +36,13 @@ on the complementary \(m-1\) coordinates.  MDS shortening gives two
 support, so their product plane projects bijectively to
 \(\mathbb F_q^2\) at every retained party.
 
-After subtracting the identity from the reduced stabilizer operator, its
-nonidentity terms form a diagonal \((m+1)\)-way tensor indexed by all
-\(q^2-1\) nonzero Weyl labels.  Since \(m+1\geq3\), the paper's rank-one
-contraction lemma recovers each local Weyl axis intrinsically.  Marginal
-covariance therefore forces every local adjoint action to permute Weyl axes.
-A retained set through each party proves the global theorem.
+The entire reduced stabilizer operator forms a diagonal
+\((m+1)\)-way tensor indexed by all \(q^2\) Weyl labels, including the
+identity.  Since \(m+1\geq3\), the paper's rank-one contraction lemma
+recovers each local Weyl axis intrinsically.  Marginal covariance therefore
+forces every local adjoint action to permute Weyl axes, and conjugation fixes
+the identity axis.  A retained set through each party proves the global
+theorem.
 
 For an encoder \(V\), the normalized Choi convention gives
 
@@ -68,7 +69,7 @@ stating the theorem and corollary in version 1 without saying “first,” “to
 knowledge,” or that the axis mechanism itself is new.
 
 The manuscript credits the Rains--Van den Nest mechanism and identifies the
-contribution precisely as its full-\(q^2-1\)-axis, prime-power,
+contribution precisely as its full-\(q^2\)-axis tensor, prime-power,
 \([2m,m,m+1]\) MDS/CSS realization and Choi consequence.
 
 ## Lean successor

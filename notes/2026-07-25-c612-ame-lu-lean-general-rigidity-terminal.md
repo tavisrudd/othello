@@ -26,16 +26,16 @@ both a regression oracle and the required specialization target.
    supported-label formula are fixed to six coordinates.  Prove the exact
    `C × Cᗮ` stabilizer equation and partial-trace formula on `Fin (2*m)`.
 2. **Shortened marginal tensor.**  Turn C601's one-dimensional shortenings of
-   \(C\) and \(C^\perp\) into the identity-subtracted \((m+1)\)-party tensor
-   indexed by every nonzero label in \(\mathbb F_q^2\), with nonzero
+   \(C\) and \(C^\perp\) into the entire \((m+1)\)-party tensor indexed by
+   every label in \(\mathbb F_q^2\), including the identity, with nonzero
    coefficients and a local label equivalence at every retained party.
 3. **Marginal covariance.**  Prove from the generic product local action that
    global state equivalence descends to product conjugation of each selected
    reduction, with party permutations and action orientation explicit.
-4. **Axis-to-Clifford bridge.**  Apply C601's diagonal-axis theorem to the
-   traceless Hilbert--Schmidt factors, restore the identity axis, and prove
-   the current generic `IsCliffordMatrix` predicate rather than a weaker
-   monomial-adjoint surrogate.
+4. **Axis-to-Clifford bridge.**  Apply C601's diagonal-axis theorem directly
+   to the full Hilbert--Schmidt factors, use that conjugation fixes the
+   identity axis, and prove the current generic `IsCliffordMatrix` predicate
+   rather than a weaker monomial-adjoint surrogate.
 5. **Cover terminal.**  For each of the \(2m\) parties choose an
    \((m+1)\)-set containing it and conclude that every local unitary is
    Clifford.  The theorem must quantify over arbitrary \(m\geq2\), not a

@@ -1,6 +1,8 @@
-# C601 planning: formal LU-to-LC rigidity
+# C601: length-generic LU-to-LC rigidity foundations
 
 **Lane:** `ame-lu`
+
+**Status:** complete
 
 ## Goal
 
@@ -103,9 +105,9 @@ equation, not from an unconstructed input structure.
    `C^\perp`; construct nonzero generators, prove exact support, and prove
    that the product plane projects bijectively to `𝔽 × 𝔽` at every retained
    party.
-4. **Marginal Weyl expansion (C612).** Express the identity-subtracted
-   `(m+1)`-party marginal as the full diagonal tensor indexed by
-   `𝔽² \ {(0,0)}`, with nonzero coefficients and orthogonal local Weyl axes.
+4. **Marginal Weyl expansion (C612).** Express the entire `(m+1)`-party
+   marginal as the full diagonal tensor indexed by `𝔽²`, including the
+   identity label, with nonzero coefficients and orthogonal local Weyl axes.
 5. **Covariance and Clifford bridge (C612).** Prove that global local-unitary
    equivalence gives product conjugacy of each selected marginal. Apply the
    axis theorem to permute nonidentity Weyl axes, include the identity axis,
@@ -147,39 +149,32 @@ finite-dimensional, and tensor-product APIs fit.
   and no overstated strength.
 - The manuscript theorem, formalization ledger, statement-adequacy map,
   verification section, and exact Lean declarations agree field for field.
-- The general terminal is unconditional from a definition proved equivalent
-  to linear `[2m,m,m+1]` MDS, the explicit Weyl convention, and the displayed
-  local-unitary equivalence. The diagonal-axis, dual shortening, marginal,
-  covariance, transpose, and Choi steps may not remain as unconstructed input
-  fields.
-- The six-party specialization is definitionally or propositionally
-  reconciled with the existing `IsMDSCode634`, `equalPhaseState`,
-  local-equivalence, and pencil APIs; no parallel notion may be left at the
-  paper boundary.
+- The generic exact-MDS predicate is proved equivalent to the
+  `m`-coordinate projection condition, and dual MDS, full-support
+  `(m+1)`-shortening, and full-basis axis recovery are unconditional.
+- The generic state/action definitions and MDS/projection predicates are
+  definitionally or propositionally reconciled at `m=3` with the existing
+  `IsMDSCode634`, `equalPhaseState`, local-equivalence, and projection APIs.
 
 ## Stop conditions
 
-Stop and report a reduced counterexample if the current local-unitary,
-Clifford, Choi, or code definitions do not express the manuscript actions
-faithfully. Stop rather than weakening the gate if matrix rank forces unsafe
-or native execution.  Do not retreat to the narrow six-coordinate theorem:
-if the shared coding layer lacks a reusable MDS dual/shortening theorem, build
-the narrowest length-generic theorem inside `RelativeConicArcs.AMELU` and
-validate every affected AME gate.
+Stop and report a reduced counterexample if the generic code definitions do
+not specialize faithfully to the six-party API. Stop rather than weakening
+the gate if matrix rank forces unsafe or native execution.  Do not retreat
+to a narrow six-coordinate foundation.
 
 ## Mystery ledger
 
-- **Unsettled:** whether the diagonal-axis lemma is cheapest via `Matrix.rank`,
-  range dimension, or explicit nonzero minors. A bounded prototype decides
-  this before the public API is frozen.
+- **Settled:** a two-factor diagonal flattening avoids a matrix-rank API.
+  Its nonzero pure locus is exactly the coordinate-axis union, independently
+  of how many additional tensor factors are present.
 - **Unsettled:** whether the shortened marginal expansion is shorter from
   amplitudes or from a general stabilizer-projector identity. Generalize the
   chosen route to `(m+1)` parties with the smaller trust and dependency
   closure.
-- **Unsettled:** whether the existing six-party state and action definitions
-  are specializations of a clean generic API or require proved extensional
-  equivalences.  A bounded interface prototype settles this before public
-  names are frozen.
+- **Settled:** the generic state/action definitions specialize
+  definitionally at `m=3`; explicit theorems expose the equal-phase, local
+  action, LU, LC, exact-MDS, and projection bridges.
 - **Unsettled:** whether mathlib already exposes the exact Choi transpose
   identity in the required tensor convention.  If not, prove the finite
   matrix-entry identity locally.
@@ -187,3 +182,21 @@ validate every affected AME gate.
   C581 owns that separate gate.
 - **Settled:** extension-field Frobenius affects the pencil scalar
   classification, not the all-prime-power LU-to-LC rigidity theorem.
+
+## Delivered
+
+- `GenericDefinitions.lean` defines length-`2m` labels, states,
+  equal-phase states, party permutations, product local actions, and LU/LC
+  relations, with explicit `m=3` compatibility theorems.
+- `GenericMDS.lean` proves exact `[2m,m,m+1]` MDS iff every
+  `m`-coordinate projection is bijective, proves the dual is exact MDS,
+  and constructs full-support shortening generators on every `m+1` set.
+- `GenericDiagonalTensor.lean` proves the full-basis diagonal-flattening
+  pure-locus theorem and the resulting coordinate-axis preservation
+  statement for invertible factor maps.
+- The aggregate import and axiom audit include every new terminal.  Measured
+  builds and exact no-build replay pass; all new audited declarations depend
+  only on `propext`, `Classical.choice`, and `Quot.sound`.
+- Commits: `80f11632` (generic foundations) and `97346a5c` (paper trust
+  boundary).  The earlier six-party terminal and pencil composition landed
+  in `c855cd89`, with the full-\(q^2\) prose alignment in `4a1bc605`.

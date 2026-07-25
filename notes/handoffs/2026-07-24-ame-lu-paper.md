@@ -337,10 +337,10 @@ as C559--C572.  Dependency order is authoritative:
 12. C600: final theorem-local scope, referent, parameter-setting, sharpness,
     and bounded search-scope corrections (complete).
 13. C601: length-generic code/state/action API, exact MDS dual shortening,
-    diagonal-axis theorem, and six-party compatibility foundation (queued).
+    full-basis diagonal-axis theorem, and six-party compatibility foundation
+    (complete).
 14. C612: shortened marginal expansion and covariance, general LU-to-LC
-    terminal, six-party specialization, and pencil composition (queued after
-    C601).
+    terminal, six-party specialization, and pencil composition (next).
 15. C613: AME-to-`[[2m-1,1,m]]` encoder parameters, exact Choi orientation,
     Clifford transpose closure, and transversal no-go terminal (queued after
     C612).
@@ -356,12 +356,13 @@ space before attempting extension-field or approximate rigidity.
 C601--C613 close the paper's principal formalization gap in three acceptance
 gates.  The full \(m=3\) prototype and pencil composition are already
 unconditional in `RelativeConicArcs.AMELU.LURigidity` and
-`RelativeConicArcs.AMELU.LUPencilClassification`.  C601 builds the
-length-generic code/state/action layer, abstract
-diagonal-tensor axis theorem, exact dual `[2m,m,m+1]` shortening, and
-six-party compatibility.  C612 constructs the shortened marginal expansion,
+`RelativeConicArcs.AMELU.LUPencilClassification`.  C601 is complete:
+`GenericDefinitions`, `GenericMDS`, and `GenericDiagonalTensor` provide the
+length-generic code/state/action layer, exact dual `[2m,m,m+1]` shortening,
+full-basis diagonal-axis theorem, and six-party compatibility.  C612 is next;
+it constructs the full marginal expansion including the identity axis,
 covariance, general Clifford terminal, and compatible six-party/pencil
-specializations.  C613 proves the one-leg quantum-MDS parameters, exact
+specializations.  C613 then proves the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, and transversal
 terminal.  C602 follows with a complete referee-facing audit of the AME-LU
 Lean aggregate, trust ledgers, verification prose, scholarly closure, and
