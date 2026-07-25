@@ -1,7 +1,8 @@
 # C287 first-tag source-owner rewrite packet
 
 **Lane**: `build-sys`
-**Status**: A1/B1 APPROVED; dispatched as C553; no mathematical source changed
+**Status**: A1/B1 APPROVED; dispatched as C553; 2026-07-25 extraction-plan refresh complete;
+source rewrite still queued and no mathematical source changed
 **Source-owner lane**: `cap`
 **Decision**: delete both status-bearing wrapper modules and add no compatibility aliases
 
@@ -16,6 +17,15 @@ The source owner must preserve mathematical limitations expressed by hypotheses 
 while removing private provenance, task history, proof-campaign labels, implementation chronology,
 and instructions for future work. This is not a request to weaken theorem statements or hide
 unfinished mathematics.
+
+## 2026-07-25 planning boundary
+
+This round updates the extraction plan only. The Lean rewrite below remains the complete C553
+source obligation, but no source edit, declaration migration, elaboration, or build is part of the
+planning refresh. Actual fresh-history extraction waits for the AME--LU lane to complete C612,
+C613, and the final C602 aggregate audit. The ready later-paper inputs are the Relconic gate,
+C545's scope-exact PRS R5--R7 closure, and the current Clebsch Paper I trust manifest; their exact
+intake contracts are recorded in `notes/2026-07-24-c287-new-paper-export-intake.md`.
 
 ## Decision A — odd escape API
 

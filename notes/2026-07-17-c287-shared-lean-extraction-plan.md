@@ -1,7 +1,8 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; 26-file boundary declared, referee prose gate and facts pending
+**Status**: IN PROGRESS; first-tag rewrite and trust facts pending; later-paper intake refreshed,
+with source export deferred until AME--LU C602
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -25,7 +26,7 @@ validation, and artifact portability. C270 owns public repository identity, meta
 release/DOI/OEIS coordination, and any eventual user-authorized remote action. C287 does not create
 remotes, publish, or push; C270 does not copy sources or run builds.
 
-## Current local state — 2026-07-23
+## Current local state — 2026-07-25
 
 The following `main`-branch Git workspaces exist:
 
@@ -98,13 +99,30 @@ manifest and green aggregate closure. For `complete-ports`, the logical requests
 and `RepairPorts.FunctionalCost`; C287 must replace those names with exact public module closures
 and aggregate gates before those sources are copied.
 
-Later paper-bound intakes now also include the green beyond-four PRS aggregate, the developing
-AME--LU aggregate, and possible revisions to the immutable Clebsch Paper I boundary. Their exact
-roots, source-owner gates, ordering, and no-umbrella rule are recorded in
-`notes/2026-07-24-c287-new-paper-export-intake.md`. None enlarges the frozen 26-file first tag:
-PRS enters from its two aggregate/audit gates when C545 requests a public pin; AME--LU waits for
-C570; and any Clebsch change must arrive as a replayed manifest delta rather than a monorepo
-refresh.
+Later paper-bound intake now has three locally ready source-owner boundaries and one remaining
+paper gate:
+
+- arcs: `RelativeConicArcs.Gates.Relconic`, with thirteen audited terminals;
+- PRS: the C545 R5--R7 six-gate contract, exactly fifteen project-owned files and 53 ordered audit
+  targets;
+- Clebsch Paper I: the current nineteen-row manifest, 24 unique Lean terminals, and
+  `RelativeConicArcs.Gates.ClebschRigidityTrust`, pinned by the manifest to finitegeom commit
+  `6d4766d1ea5e9a36f1a507e549c223416a6b506f`;
+- AME--LU: C601 is complete, while C612, C613, and the final C602 whole-closure audit remain.
+
+The older intake assumptions are superseded: C544's 103-terminal PRS scope is not the adopted
+paper closure; the older Clebsch `bf4fb39a...` pin is not the current manifest pin; and C570's
+six-party AME--LU aggregate is not the final all-`m >= 2` manuscript boundary. Exact roots,
+exclusions, and evidence boundaries are recorded in
+`notes/2026-07-24-c287-new-paper-export-intake.md`.
+
+Per the 2026-07-25 user gate, no source export occurs before AME--LU C602 freezes its aggregate.
+C287 may prepare content-addressed candidate manifests for the three ready closures, but the
+C553 source rewrite remains an independent precondition and may land before that gate. Once C553
+and C602 are both complete, inventory regeneration, whole-closure review, fresh-history copy,
+builds, axiom extraction, and clean replay form one coordinated execution wave. These later
+closures do not enlarge the frozen 26-file first tag; each enters through a separate incremental
+tag contract, and shared files are deduplicated by content rather than by a portfolio umbrella.
 
 Heavyweight generated certificate trees are not members of the `finitegeom` source union. Each
 such family has an explicit package boundary, depends one-way on a pinned `finitegeom` commit, and

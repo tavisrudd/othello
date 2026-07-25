@@ -62,10 +62,10 @@ There are three distinct source sets:
 3. The approved candidate first tag after adding the disjoint `FiniteGeom` umbrella:
    51 files / 12,987 code lines.
 
-The existing 17-file public-rewrite list splits along the same boundary. Nine affected files are in
-the disjoint `FiniteGeom` component. Eight are in the 27-file mirror closure; omitting the
-README-only hyperbolic module leaves seven definite workflow-bearing files in the 26-file adopted
-claim closure.
+The subsequent whole-closure referee review supersedes the earlier seven-file estimate: seventeen
+files in the selected 26-file claim closure require source-owner prose or API work. The exact set,
+the deletion-first `OddEscape` and `StableFacts` decisions, and the semantic docstring gate are
+recorded in `notes/2026-07-24-c287-source-owner-rewrite-packet.md`.
 
 The selected first tag is source set 1: the 26-file closure of the terminals the manuscript
 actually cites. This is the reviewer-facing boundary. The hyperbolic result and `FiniteGeom`
@@ -80,6 +80,7 @@ adopts them.
 3. In a quiet window, run the already-declared four trust-spine extraction units to obtain
    authoritative `#print axioms` facts for every adopted main terminal. A source scan or a
    checked-in `#print` command is not its output.
-4. Rewrite and referee-review the seven workflow-bearing files in the fixed 26-file boundary.
+4. Rewrite and referee-review the seventeen blocked files in the fixed 26-file boundary, including
+   the two approved wrapper-module deletions and all consumer migrations.
 5. C270 must align the older `papers/papers-planning.md` “`FiniteGeom` + mirror” wording with this
    reviewer-scale boundary before any public release action.

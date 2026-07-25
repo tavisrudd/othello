@@ -502,6 +502,15 @@ nix develop --command lake build ProjectiveCap.CertData.Q11Assembly
 nix develop --command lake build ProjectiveCap.CertData.Q13Assembly
 ```
 
+**C553 public-source dependency:** A1/B1 remain approved: delete
+`ProjectiveCap.Almost.OddEscape` and `ProjectiveCap.StableFacts`, migrate consumers to the
+canonical `GridGame`/`ExtensionCount` APIs without compatibility aliases, and complete the
+seventeen-module referee prose/docstring pass. The 2026-07-25 round refreshed the C287 extraction
+plan only; no Lean source changed. Arcs, PRS R5--R7, and Clebsch Paper I are locally ready for
+later closure intake, while AME--LU C612, C613, and C602 remain the final paper gate before the
+coordinated fresh-history extraction. See
+[`C553 extraction-preparation refresh`](../2026-07-25-c553-extraction-prep-refresh.md).
+
 ## Solver Map
 
 Main solver:

@@ -59,7 +59,8 @@ The integration supplies three later gates at no additional format cost:
 3. The 26-module ownership list prevents an unrelated module in the same three libraries from
    entering the first-tag trust claim merely because Lake can build it.
 
-The remaining first-tag work is source-owner cleanup of seven workflow-bearing modules, followed by
-inventory regeneration and the guarded four-unit extraction in a quiet window. That quiet,
+The remaining first-tag work is source-owner cleanup of seventeen blocked modules, including the
+two approved wrapper-module deletions and consumer migrations, followed by inventory regeneration
+and the guarded four-unit extraction in a quiet window. That quiet,
 coherent tree is also the gate for regenerating the global graph manifest and all shared generated
 portfolio regions together.

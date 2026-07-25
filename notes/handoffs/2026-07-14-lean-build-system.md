@@ -3,10 +3,9 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-awaits a quiet Lean worktree; C287's deletion-first API decisions are approved and its 17-module
-source-owner rewrite is dispatched to C553 (`cap`); C162 blast radius and the restart-guard failure
-suite landed, and the remaining
-C162 streams need a quiet window
+waits for AME--LU C602 and a quiet Lean worktree; C287's deletion-first API decisions are approved,
+and its 17-module source-owner rewrite is dispatched to C553 (`cap`); C162 blast radius and the
+restart-guard failure suite landed, and the remaining C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -123,7 +122,7 @@ Certificate packages are opt-in leaves: unused families are absent from that pap
 graph, fetches, build closure, and validation targets; no portfolio-wide certificate umbrella is
 allowed.
 
-**Current C287 state (2026-07-23):** five `main`-branch workspaces exist under `~/src/lean/`:
+**Current C287 state (2026-07-25):** five `main`-branch workspaces exist under `~/src/lean/`:
 `finitegeom`, Q16 certificates, Q25 certificates, and separate ProjectiveCap Q11/Q13 certificate
 packages. Each has no commit and no remote, with only `.gitignore`, `flake.nix`, `flake.lock`, and
 the matching `lean-toolchain` staged. All pass `nix flake check --no-build`; none contains Lean
@@ -157,9 +156,16 @@ generated regions remain unchanged until a coherent quiet-tree regeneration. Rep
 **Next:** after C553 lands the approved source rewrite and semantic docstring pass, regenerate
 C287's source inventory and trust-spine module list, audit every changed hash and public
 declaration, and repeat the referee gate.
-The later-tag roadmap has also registered the beyond-four PRS aggregate, the developing AME--LU
-aggregate, and possible Clebsch manifest revisions without enlarging the first tag; intake gates
-are in `../2026-07-24-c287-new-paper-export-intake.md`.
+The later-tag roadmap now records three locally ready source-owner boundaries without enlarging
+the first tag: the thirteen-terminal Relconic gate, C545's exact 15-file/53-target PRS R5--R7
+closure, and the current nineteen-row/24-terminal Clebsch Paper I manifest at finitegeom commit
+`6d4766d1ea5e9a36f1a507e549c223416a6b506f`. AME--LU is the remaining local gate: C601 is
+complete, and C612, C613, then C602 must freeze and audit the final all-`m >= 2` aggregate.
+C570's older six-party aggregate is not an admissible final export root, C581 is optional unless
+adopted before C602, and PRS companion levels and Clebsch Papers II/III remain separate intakes.
+Per the user-directed 2026-07-25 boundary, C287 may prepare candidate manifests now but performs
+no source export until C602 is complete; the actual extraction is one coordinated wave afterward.
+Exact roots and exclusions are in `../2026-07-24-c287-new-paper-export-intake.md`.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.
