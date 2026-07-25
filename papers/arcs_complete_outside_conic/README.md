@@ -1,8 +1,7 @@
 # Paper: Arcs complete outside a prescribed conic
 
 **Title:** *Exact defect and matching rigidity for arcs complete outside a
-prescribed conic — Lower bounds, stability, and ρ_C(16) = 9.* Author: Tavis
-Rudd.
+prescribed conic — with ρ_C(16) = 9.* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
 PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
