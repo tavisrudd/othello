@@ -853,6 +853,21 @@ forced `sqrt(q)` positive-overload depth. No q-independent positive bound is pro
 C82 stays gated. Report+script+certificate:
 [`../2026-07-25-c80-marked-secant-retention.md`](../2026-07-25-c80-marked-secant-retention.md).
 
+**The natural persistent normalized marked-secant class is falsified at q17 (C80,
+2026-07-25).** The complete clocked destruction profile—every active-line
+deficiency/thinning multiplicity, marked chord, retention ratio, depth, and
+overload clock—has an explicit same-profile P/N collision and its globally safe
+classes cover only 608/610 fibres forced to remain at positive overload.
+Adding the bounded normalized conic-involution orbital data repairs finite
+coverage to 610/610, but produces 79,881 q17 profiles with zero recurrence
+between the 513 residual-size-four and 97 residual-size-six forced-positive
+fibres. That is a lookup refinement, not an induction class. The next proof
+shape must be a cross-depth contraction/renormalization morphism that deletes
+or contracts the completed opponent/reply exchange and returns the residual to
+a controlled family; do not enrich another static profile. This does not
+disprove `inf_q ρ(S_q)>0`, and C82 remains gated. Report+script+certificate:
+[`../2026-07-25-c80-marked-secant-profile-persistence.md`](../2026-07-25-c80-marked-secant-profile-persistence.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -888,12 +903,14 @@ Priority order and why:
    root, with exact q17 minimum strength `20/51`, and the q19 probe passes through 75%.
    If `s_even(q)` is the least even `s` with `q≤binom(s,2)`, any escape-root strategy still needs
    at least `(s_even(q)-8)/2` positive-overload response targets before absorption, asymptotic to
-   `sqrt(q/2)-4`.  The finite data do not enter that growing-depth regime.  The live theorem is
-   now `inf_q ρ(S_q)>0`, or a marked-algebraic refinement if false; use the original conic/frame
-   and opponent--reply secant data, since unmarked overload profiles are
-   kernel-membership-mixed.  Do not mine another bounded-depth selector, stabilizer signature,
-   bounded-gadget patch, terminal guard, or unmarked load potential.  Only a uniform growing-depth
-   membership proof releases C82.
+   `sqrt(q/2)-4`.  The finite data do not enter that growing-depth regime.  Exact marked-secant
+   profiles are now P/N-mixed, while the bounded orbital refinement that covers all q17
+   forced-positive fibres has zero cross-depth recurrence.  The live theorem is therefore a
+   cross-depth contraction/renormalization morphism for the opponent/reply exchange; if that is
+   false, the route needs a genuinely recursive family not expressible as a static profile.
+   Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
+   terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
+   growing-depth membership proof releases C82.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.

@@ -1,0 +1,485 @@
+{
+  "claim_scope": "Exact profile-purity and positive-depth coverage audit on the listed q=13/q=17 strict-kernel certificate DAGs. It falsifies only exchange classes measurable from the recorded complete marked-secant destruction profile.",
+  "coverage": [
+    {
+      "alpha": {
+        "denominator": 1,
+        "numerator": 0
+      },
+      "coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 608,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 0,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_safe_profiles": 0,
+      "first_failure": {
+        "alpha": {
+          "denominator": 1,
+          "numerator": 0
+        },
+        "good_reply_profiles": [
+          {
+            "bad_collision": {
+              "exact_cap_value": "N",
+              "opponent": [
+                7,
+                6
+              ],
+              "q": 17,
+              "ratio": {
+                "denominator": 1,
+                "numerator": 1
+              },
+              "reply": [
+                8,
+                5
+              ],
+              "selected_cells": [
+                [
+                  2,
+                  14
+                ],
+                [
+                  4,
+                  15
+                ],
+                [
+                  13,
+                  4
+                ],
+                [
+                  14,
+                  11
+                ],
+                [
+                  15,
+                  8
+                ],
+                [
+                  16,
+                  16
+                ]
+              ],
+              "selected_size_residual": 6,
+              "target_in_kernel": false,
+              "target_omega": 1
+            },
+            "globally_safe_profile": false,
+            "profile": {
+              "boundary_target": false,
+              "child_omega": 1,
+              "deactivated_line_deficiency_histogram": [],
+              "intruder_triple_fixed_histogram": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "killed_legal_points": 5,
+              "live_conic_counts": [
+                3,
+                2,
+                0
+              ],
+              "maximum_strict_target_omega": 1,
+              "normalized_retention": {
+                "denominator": 1,
+                "numerator": 1
+              },
+              "old_intruder_pair_orders": [
+                3
+              ],
+              "old_opponent_pair_orders": [
+                6,
+                18
+              ],
+              "old_reply_pair_orders": [
+                16,
+                16
+              ],
+              "opponent_kind": "intruder",
+              "opponent_reply_chord_child_legal": 2,
+              "opponent_reply_chord_parent_legal": 3,
+              "opponent_reply_chord_selected_load": 0,
+              "opponent_reply_product_order": 9,
+              "parent_omega": 25,
+              "reply_kind": "intruder",
+              "residual_selected_size": 6,
+              "selected_conic_parameters": [
+                13,
+                14,
+                15,
+                16
+              ],
+              "target_omega": 1,
+              "thinned_line_profile_histogram": []
+            },
+            "ratio": {
+              "denominator": 1,
+              "numerator": 1
+            },
+            "reply": [
+              6,
+              12
+            ],
+            "target_omega": 1
+          }
+        ],
+        "maximum_strict_target_omega": 1,
+        "old_omega": 25,
+        "opponent": [
+          8,
+          9
+        ],
+        "q": 17,
+        "selected_cells": [
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            13,
+            4
+          ],
+          [
+            14,
+            11
+          ],
+          [
+            15,
+            8
+          ],
+          [
+            16,
+            16
+          ]
+        ],
+        "selected_size_residual": 6
+      },
+      "globally_safe_profiles": 9660,
+      "variant": "clocked_secant"
+    },
+    {
+      "alpha": {
+        "denominator": 4,
+        "numerator": 1
+      },
+      "coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 608,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 0,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_safe_profiles": 0,
+      "first_failure": {
+        "alpha": {
+          "denominator": 4,
+          "numerator": 1
+        },
+        "good_reply_profiles": [
+          {
+            "bad_collision": {
+              "exact_cap_value": "N",
+              "opponent": [
+                7,
+                6
+              ],
+              "q": 17,
+              "ratio": {
+                "denominator": 1,
+                "numerator": 1
+              },
+              "reply": [
+                8,
+                5
+              ],
+              "selected_cells": [
+                [
+                  2,
+                  14
+                ],
+                [
+                  4,
+                  15
+                ],
+                [
+                  13,
+                  4
+                ],
+                [
+                  14,
+                  11
+                ],
+                [
+                  15,
+                  8
+                ],
+                [
+                  16,
+                  16
+                ]
+              ],
+              "selected_size_residual": 6,
+              "target_in_kernel": false,
+              "target_omega": 1
+            },
+            "globally_safe_profile": false,
+            "profile": {
+              "boundary_target": false,
+              "child_omega": 1,
+              "deactivated_line_deficiency_histogram": [],
+              "intruder_triple_fixed_histogram": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  2,
+                  3
+                ]
+              ],
+              "killed_legal_points": 5,
+              "live_conic_counts": [
+                3,
+                2,
+                0
+              ],
+              "maximum_strict_target_omega": 1,
+              "normalized_retention": {
+                "denominator": 1,
+                "numerator": 1
+              },
+              "old_intruder_pair_orders": [
+                3
+              ],
+              "old_opponent_pair_orders": [
+                6,
+                18
+              ],
+              "old_reply_pair_orders": [
+                16,
+                16
+              ],
+              "opponent_kind": "intruder",
+              "opponent_reply_chord_child_legal": 2,
+              "opponent_reply_chord_parent_legal": 3,
+              "opponent_reply_chord_selected_load": 0,
+              "opponent_reply_product_order": 9,
+              "parent_omega": 25,
+              "reply_kind": "intruder",
+              "residual_selected_size": 6,
+              "selected_conic_parameters": [
+                13,
+                14,
+                15,
+                16
+              ],
+              "target_omega": 1,
+              "thinned_line_profile_histogram": []
+            },
+            "ratio": {
+              "denominator": 1,
+              "numerator": 1
+            },
+            "reply": [
+              6,
+              12
+            ],
+            "target_omega": 1
+          }
+        ],
+        "maximum_strict_target_omega": 1,
+        "old_omega": 25,
+        "opponent": [
+          8,
+          9
+        ],
+        "q": 17,
+        "selected_cells": [
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            0
+          ],
+          [
+            13,
+            4
+          ],
+          [
+            14,
+            11
+          ],
+          [
+            15,
+            8
+          ],
+          [
+            16,
+            16
+          ]
+        ],
+        "selected_size_residual": 6
+      },
+      "globally_safe_profiles": 9651,
+      "variant": "clocked_secant"
+    },
+    {
+      "alpha": {
+        "denominator": 1,
+        "numerator": 0
+      },
+      "coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 610,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 0,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_safe_profiles": 0,
+      "first_failure": null,
+      "globally_safe_profiles": 27871,
+      "variant": "normalized_orbital"
+    },
+    {
+      "alpha": {
+        "denominator": 4,
+        "numerator": 1
+      },
+      "coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 610,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_coverage": {
+        "13": {
+          "covered": 0,
+          "of": 0
+        },
+        "17": {
+          "covered": 0,
+          "of": 610
+        }
+      },
+      "cross_depth_recurrent_safe_profiles": 0,
+      "first_failure": null,
+      "globally_safe_profiles": 27862,
+      "variant": "normalized_orbital"
+    }
+  ],
+  "orders": [
+    {
+      "certified_positive_states": 32,
+      "forced_positive_fibres_by_selected_size": {},
+      "forced_positive_target_fibres": 0,
+      "kernel_roots": 5,
+      "q": 13,
+      "variants": {
+        "clocked_secant": {
+          "cross_depth_mixed_profiles": 0,
+          "kernel_mixed_profiles": 3,
+          "profiles": 1012,
+          "recurrent_profiles": 0
+        },
+        "normalized_orbital": {
+          "cross_depth_mixed_profiles": 0,
+          "kernel_mixed_profiles": 0,
+          "profiles": 1134,
+          "recurrent_profiles": 0
+        }
+      }
+    },
+    {
+      "certified_positive_states": 1083,
+      "forced_positive_fibres_by_selected_size": {
+        "4": 513,
+        "6": 97
+      },
+      "forced_positive_target_fibres": 610,
+      "kernel_roots": 5,
+      "q": 17,
+      "variants": {
+        "clocked_secant": {
+          "cross_depth_mixed_profiles": 0,
+          "kernel_mixed_profiles": 3702,
+          "profiles": 36253,
+          "recurrent_profiles": 0
+        },
+        "normalized_orbital": {
+          "cross_depth_mixed_profiles": 0,
+          "kernel_mixed_profiles": 122,
+          "profiles": 79881,
+          "recurrent_profiles": 0
+        }
+      }
+    }
+  ],
+  "schema": "c80-marked-secant-profile-persistence-v1",
+  "upstream": {
+    "certificate": {
+      "path": "notes/2026-07-24-c80-scale-survivor-falsifiers.json",
+      "sha256": "12a6147fcbee0bec737ef66407e40f85956184e74c421ea3bea6a616eac2fe70"
+    },
+    "script": {
+      "path": "rust/scripts/c80_scale_survivor_falsifiers.py",
+      "sha256": "11488f316b94ad10f311cf489f6aa4d85a7a06aece3f97661baae8af2aec0c2e"
+    }
+  }
+}
