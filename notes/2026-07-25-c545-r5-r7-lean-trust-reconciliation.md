@@ -126,10 +126,16 @@ The paper supplement now contains
 It refuses dirty release-owned source or an existing destination, archives the
 committed paper tree and exact 15-module Lean closure, and creates separate
 paper and Lean repositories. Two independent runs from source commit
-`ddefed24b5b5beff44502bc199d563e12fb7285a` produced the same commit
-identifiers. The resulting paper candidate passed the 43-artifact quick
-verifier and rebuilt the 33-page canonical and 25-page TIT PDFs byte-for-byte;
-both repositories remained clean after the builds.
+`60ba59f645fd4049372f8ca45c4bf00777505c30` produced paper commit
+`63ec104cf3f4243223917d3a6d4beed017ba3616` and Lean commit
+`11830150b942d0cdf601331d179ca7ceccd00071` both times. The exporter uses the
+last release-owned source timestamp, so unrelated later repository work does
+not perturb those commits. The resulting paper candidate passed the
+43-artifact quick verifier and rebuilt the 33-page canonical and 25-page TIT
+PDFs byte-for-byte; both repositories remained clean after the builds. The
+full paper-local replay also passed from a clean exported candidate in
+7 minutes 24 seconds. Later changes touched only the release gate and exporter,
+not any replay program, input, certificate, or acceptance criterion.
 
 The final-reader form now names only the retained R5--R7, polar-induction, and
 stable-component boundaries. The release verifier additionally requires the
