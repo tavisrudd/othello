@@ -1142,8 +1142,17 @@
       "last": 613,
       "purpose": "split general MDS-CSS LU-rigidity terminal and Choi transversal corollary formalization after C601 foundations",
       "sequence": 127
+    },
+    {
+      "count": 1,
+      "first": 614,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 614,
+      "purpose": "higher-m GRS transversal Clifford group, code-conversion rigidity, and explicit QMDS applications",
+      "sequence": 128
     }
   ],
-  "next_id": 614,
+  "next_id": 615,
   "schema": "codex-task-id-allocations-v1"
 }
