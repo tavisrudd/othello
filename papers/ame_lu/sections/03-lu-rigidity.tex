@@ -145,8 +145,32 @@ sequence
 \]
 This last extension splits exactly when the realized permutations admit a
 homomorphic choice of projective product-unitary lifts.
-This is only a splitting criterion; it does not compute an extension
-class or a cohomological obstruction.
+It has a section-free outer action
+\(\Pi\to\operatorname{Out}(\Gamma)\): conjugation by any lift of
+\(\pi\in\Pi\) gives an automorphism of \(\Gamma\), and changing the lift
+changes that automorphism by an inner automorphism.
+For a normalized set-theoretic section \(s(1)=1\), write
+\[
+  s(\pi)s(\rho)
+    =f_s(\pi,\rho)s(\pi\rho),\qquad f_s(\pi,\rho)\in\Gamma .
+\]
+Then \(f_s(1,\pi)=f_s(\pi,1)=1\), and, with
+\(\alpha_\pi\) denoting conjugation by \(s(\pi)\),
+\[
+ f_s(\pi,\rho)f_s(\pi\rho,\upsilon)
+ =\alpha_\pi\!\left(f_s(\rho,\upsilon)\right)
+   f_s(\pi,\rho\upsilon).
+\]
+If another normalized section is
+\(s'(\pi)=b(\pi)s(\pi)\), where \(b(1)=1\), then
+\[
+ f_{s'}(\pi,\rho)
+ =b(\pi)\alpha_\pi\!\left(b(\rho)\right)
+   f_s(\pi,\rho)b(\pi\rho)^{-1}.
+\]
+The order of these factors is essential because \(\Gamma\) need not be
+abelian.  The extension splits exactly when this factor set can be changed
+to the constant identity factor set by such a normalized \(b\).
 \end{corollary}
 
 \begin{proof}
@@ -162,7 +186,14 @@ Forgetting the local factors maps
 Its kernel consists exactly of the fixed-party projective
 automorphisms, which gives the third sequence.  A splitting is, by
 definition, a group-homomorphic right inverse; arbitrary or
-generator-by-generator lifts do not provide one.
+generator-by-generator lifts do not provide one.  Conjugation by the
+middle group descends to the outer action because elements of the kernel
+act by inner automorphisms.  Associativity of three chosen lifts gives the
+displayed factor-set identity.  Substituting
+\(s'(\pi)=b(\pi)s(\pi)\) gives the change-of-section formula without
+commuting any kernel factors.  Finally, the factor set is identically one
+precisely when the section preserves multiplication, which proves the
+splitting characterization.
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:grs-transversal-group}]

@@ -63,6 +63,15 @@ open RelativeConicArcs.AMELU
 #print axioms projectiveFixedPartyToPermutedAutomorphismHom_injective
 #print axioms projectiveFixedParty_permutationProjection_mulExact
 #print axioms genericPartyPermutationExtension_splits_iff
+#print axioms GroupExtension.outerAction_eq_sectionClass
+#print axioms GroupExtension.sectionAction_mul
+#print axioms GroupExtension.factorSet_associativity
+#print axioms GroupExtension.factorSet_change
+#print axioms GroupExtension.factorSet_trivializable_iff_splitting
+#print axioms GroupExtension.factorSet_trivializable_iff
+#print axioms genericPartyPermutationFactorSet_associativity
+#print axioms genericPartyPermutationFactorSet_change
+#print axioms genericPartyPermutationFactorSet_trivializable_iff_splits
 #print axioms oneLegQuantumMDSParameters_singletonEquality
 #print axioms isMDSCode2m_oneLegQuantumMDSParameters
 #print axioms coordinateAxes_reflected_by_linearEquiv

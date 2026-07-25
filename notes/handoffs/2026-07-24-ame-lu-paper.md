@@ -394,6 +394,17 @@ seven evidence replays, visual inspection, and 35-public/72-formal release
 checks pass.  See
 `2026-07-25-c602-ame-lu-full-lean-trust-audit.md`.
 
+**C618 closed (2026-07-25): nonabelian extension invariant formalized.**
+The realized party-permutation exact sequence now has a canonical
+section-free outer action on the fixed-party projective group.  A normalized
+choice of lifts has an explicit nonabelian factor set; Lean proves its
+normalization, associativity identity, ordered change-of-section law, and
+choice-independent trivializability.  Trivializability is equivalent to a
+homomorphic section and hence to splitting, with no abelian-kernel shortcut.
+The aggregate axiom audit and warning-free 19-page manuscript/release gates
+pass.  See
+`2026-07-25-c618-ame-lu-nonabelian-extension-class.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -445,7 +456,7 @@ as C559--C572.  Dependency order is authoritative:
     C617 (complete; two exact foreign-owned prose blockers recorded).
 20. C618: canonical outer action, normalized factor set, nonabelian
     change-of-section law, and genuine splitting obstruction for the realized
-    party-permutation extension, after C602 (queued).
+    party-permutation extension, after C602 (complete).
 21. C619: GRS/extended-GRS relation audit and exact
     split-versus-metaplectic/Schur-multiplier boundary, after C618 (queued).
 
@@ -479,7 +490,7 @@ claims.  C618 now packages the section-free nonabelian extension invariant,
 and C619 then tests the GRS lifts against the relations required for an actual
 split.
 
-**Token-constrained completion route:** continue with `go C618`
+**Token-constrained completion route:** continue with `go C619`
 and remain in this lane through C618 and C619, committing and closing
 each C-item normally while reusing the loaded manuscript and formal context.
 Do not run optional C581. After C619, the next cross-lane route is C553 and
