@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Date**: 2026-07-24
+**Date**: 2026-07-25
 
 > **LIVE MAP ONLY.** The three-paper program below is the active publication
 > path. The 37-page mega-paper and its evidence surface are preserved
@@ -16,7 +16,7 @@
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 18-page candidate with a complete nineteen-row release surface.
+warning-free 19-page candidate with a complete nineteen-row release surface.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary
@@ -29,11 +29,12 @@ current `main`. A subsequent elevation pass replaces four separate
 small-arc counts by a universal chord-defect theorem, proves
 $|\mathcal U(A)|=q+1\Rightarrow q<\binom{k}{2}$ together with a sharper
 quadratic field-size barrier and the passant lower bound $q\ge2k-3$,
-plus the stronger even-order oval obstruction, classifies conic filling
-through seven points, and reduces the eight-point case to
-$q\in\{13,17,19\}$ while cutting two pages of non-feeding census
-material. The regenerated nineteen-row release surface and its fifteen-check
-clean replay are green.
+plus the stronger even-order oval obstruction, and classifies conic filling
+through eight points. The last three fields are excluded by a complete
+passant-edge-orbit search: over each of $q=13,17,19$, the maximum arc with
+all chords passant has size six. Compact certificates and a separate
+discriminant/backtracking replay agree. The regenerated nineteen-row release
+surface now has sixteen checks.
 The final dependency audit explicitly attributes the Clebsch-only
 $c(A)=10$ value to Dye, restores the point-orbit subtraction, and uses that
 orbit proposition in the uncovered-conic proof.
@@ -62,13 +63,11 @@ the manuscript and nineteen-row surface were regenerated at `59f6babe`;
 the refreshed certificate and final clean fifteen-check replay passed at
 `341fabbf`.
 
-C605 is the next task in a fresh Clebsch session.  It decides conic filling
-for eight-arcs over $q\in\{13,17,19\}$ by a symmetry-reduced exact search
-with compact certificates and independent replay.  Its complete brief,
-forced spectra, acceptance gate, and Paper I update contract are in
+C605 is complete. Its report, exact search, compact certificates, independent
+replay, and mystery ledger are in
 `notes/2026-07-25-c605-eight-point-conic-filling-search.md`.
 
-The subsequent C182 blocker is external publication packaging. The
+C182 is next. Its blocker is external publication packaging. The
 previously cited GitHub artifact URL is not publicly reachable, and this
 workspace has no GitHub or Zenodo publication credential. The manuscript
 now gives the exact Git-bundle replay command, stable checker and Lean-gate
@@ -78,12 +77,10 @@ and the identifier is added to the paper.
 
 The active order is strict:
 
-1. **C605:** close the three remaining eight-point fields in the next fresh
-   session and refresh Paper I if the result strengthens it.
-2. **C182:** make the immutable public deposit and insert its identifier.
-3. **C577:** build and referee-test standalone Paper II after Paper I is
+1. **C182:** make the immutable public deposit and insert its identifier.
+2. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C579:** test Paper III after Paper II; require one principal theorem or
+3. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled
