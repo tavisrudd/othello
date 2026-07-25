@@ -942,6 +942,21 @@ remains the domain substrate, and the `Cd≥1` bound is only an exact-quotient
 diagnostic. Report:
 [`../2026-07-25-c80-unbounded-coordinate-congruence.md`](../2026-07-25-c80-unbounded-coordinate-congruence.md).
 
+**The even-faceted algebraic survivor is sound but falsified on every q13
+kernel/P escape root (C80, 2026-07-25).** Let the continuation complex have
+all maximal faces even, and require hereditarily that after every opponent
+move at positive overload some reply strictly lowers `Ω`. This is a genuine
+nonrecursive ranked survivor: the overload-zero boundary is P because every
+complete play has even length, and the drain property restricts after each
+exchange. Exact certificates nevertheless give opposite-parity maximal
+continuations for all five q13 kernel/P roots (lengths `6/3`, `4/3`, `6/3`,
+`4/3`, `4/3`), independently checked by grid-engine replay and direct affine
+determinants. Thus fixed-play parity is false at the roots; pure even rank
+and even-rank matroid packets fail a fortiori. The next boundary must expose
+an adaptive copycat/decomposition strategy and may ignore losing maximal
+branches. C82 remains gated. Report+script+certificate:
+[`../2026-07-25-c80-pure-extension-survivor.md`](../2026-07-25-c80-pure-extension-survivor.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q

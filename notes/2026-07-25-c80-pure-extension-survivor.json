@@ -1,0 +1,462 @@
+{
+  "claim_scope": "Each of the five q=13 strict-kernel/P escape roots has certified maximal continuations of opposite parity, so its continuation complex is not pure.",
+  "records": [
+    {
+      "different_lengths": true,
+      "different_parities": true,
+      "engine_replay": "PASS",
+      "independent_affine_determinant_replay": "PASS",
+      "maximal_continuations": [
+        {
+          "coordinates": [
+            [
+              0,
+              12
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              4,
+              10
+            ]
+          ],
+          "indices": [
+            12,
+            39,
+            109,
+            99,
+            28,
+            62
+          ],
+          "length": 6,
+          "seed": 2
+        },
+        {
+          "coordinates": [
+            [
+              0,
+              0
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              7
+            ]
+          ],
+          "indices": [
+            0,
+            50,
+            59
+          ],
+          "length": 3,
+          "seed": 0
+        }
+      ],
+      "q": 13,
+      "root_coordinates": [
+        [
+          1,
+          1
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          6
+        ]
+      ],
+      "t4": [
+        1,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "different_lengths": true,
+      "different_parities": true,
+      "engine_replay": "PASS",
+      "independent_affine_determinant_replay": "PASS",
+      "maximal_continuations": [
+        {
+          "coordinates": [
+            [
+              8,
+              1
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "indices": [
+            105,
+            8,
+            15,
+            85
+          ],
+          "length": 4,
+          "seed": 1
+        },
+        {
+          "coordinates": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              12,
+              12
+            ]
+          ],
+          "indices": [
+            1,
+            33,
+            168
+          ],
+          "length": 3,
+          "seed": 0
+        }
+      ],
+      "q": 13,
+      "root_coordinates": [
+        [
+          3,
+          9
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          6
+        ]
+      ],
+      "t4": [
+        3,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "different_lengths": true,
+      "different_parities": true,
+      "engine_replay": "PASS",
+      "independent_affine_determinant_replay": "PASS",
+      "maximal_continuations": [
+        {
+          "coordinates": [
+            [
+              0,
+              0
+            ],
+            [
+              7,
+              12
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "indices": [
+            0,
+            103,
+            45,
+            18,
+            113,
+            29
+          ],
+          "length": 6,
+          "seed": 0
+        },
+        {
+          "coordinates": [
+            [
+              11,
+              6
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              12,
+              9
+            ]
+          ],
+          "indices": [
+            149,
+            118,
+            165
+          ],
+          "length": 3,
+          "seed": 7
+        }
+      ],
+      "q": 13,
+      "root_coordinates": [
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "t4": [
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      "different_lengths": true,
+      "different_parities": true,
+      "engine_replay": "PASS",
+      "independent_affine_determinant_replay": "PASS",
+      "maximal_continuations": [
+        {
+          "coordinates": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              12,
+              5
+            ]
+          ],
+          "indices": [
+            0,
+            37,
+            105,
+            161
+          ],
+          "length": 4,
+          "seed": 0
+        },
+        {
+          "coordinates": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              9
+            ]
+          ],
+          "indices": [
+            14,
+            26,
+            48
+          ],
+          "length": 3,
+          "seed": 3
+        }
+      ],
+      "q": 13,
+      "root_coordinates": [
+        [
+          7,
+          2
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          6
+        ]
+      ],
+      "t4": [
+        7,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "different_lengths": true,
+      "different_parities": true,
+      "engine_replay": "PASS",
+      "independent_affine_determinant_replay": "PASS",
+      "maximal_continuations": [
+        {
+          "coordinates": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "indices": [
+            0,
+            60,
+            93,
+            44
+          ],
+          "length": 4,
+          "seed": 0
+        },
+        {
+          "coordinates": [
+            [
+              4,
+              10
+            ],
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "indices": [
+            62,
+            8,
+            14
+          ],
+          "length": 3,
+          "seed": 1
+        }
+      ],
+      "q": 13,
+      "root_coordinates": [
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          12,
+          12
+        ]
+      ],
+      "t4": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "roots_checked": 5,
+  "roots_with_mixed_parity_maximal_continuations": 5,
+  "schema": "c80-pure-extension-survivor-v1",
+  "search": {
+    "algorithm": "Python random.Random(seed) shuffle, then greedy legal extension",
+    "seed_range": [
+      0,
+      511
+    ],
+    "stop": "first even-length and first odd-length maximal continuation per root"
+  },
+  "source": {
+    "strict_kernel_certificate": "notes/2026-07-24-c80-strict-overload-kernel.json",
+    "strict_kernel_certificate_sha256": "6b0f4b834d3d956a096530be47097d9795cc89f72ea9b529c0bc485d4c54ab35",
+    "strict_kernel_script": "rust/scripts/c80_strict_overload_kernel.py",
+    "strict_kernel_script_sha256": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206"
+  }
+}
