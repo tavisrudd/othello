@@ -427,6 +427,11 @@ as C559--C572.  Dependency order is authoritative:
     coherent split).
 19. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
     C617 (queued).
+20. C618: canonical outer action, normalized factor set, nonabelian
+    change-of-section law, and genuine splitting obstruction for the realized
+    party-permutation extension, after C602 (queued).
+21. C619: GRS/extended-GRS relation audit and exact
+    split-versus-metaplectic/Schur-multiplier boundary, after C618 (queued).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -455,10 +460,12 @@ signature homomorphisms, realized party-permutation extension, and splitting
 boundary.  C602 follows with a complete
 referee-facing audit of the AME-LU Lean aggregate,
 trust ledgers, verification prose, scholarly closure, and release claims.
+C618 then packages the section-free nonabelian extension invariant, and C619
+tests the GRS lifts against the relations required for an actual split.
 
 **Token-constrained completion route:** continue with `go C602`
-and remain in this lane through C602, committing and closing the C-item
-normally while reusing the loaded manuscript and formal context.
+and remain in this lane through C602, C618, and C619, committing and closing
+each C-item normally while reusing the loaded manuscript and formal context.
 Do not run optional C581. After C602, the next cross-lane route is C553 and
 then the coordinated build-system extraction. The authoritative three-session
 protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
