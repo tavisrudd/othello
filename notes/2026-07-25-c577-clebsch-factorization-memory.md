@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-25
 
-**Status:** `IN PROGRESS; VERIFICATION/CONCLUSION LOCAL GATE GREEN; COLD REVIEW NEXT`
+**Status:** `IN PROGRESS; POST-FIX DUAL GO; MILNOR/SERRE STYLE REVIEWS NEXT`
 
 ## Current result
 
@@ -22,7 +22,20 @@ selected \(A_4\) refinement---the matching-table label. It also closes the
 three boundaries a referee could otherwise misread: nonsingleton profiles
 recover only orbits, the relative-cubic and depth planes have no natural
 identification, and the three small-field split/fused rows do not imply an
-all-prime reciprocity law. The candidate is warning-free at seventeen pages.
+all-prime reciprocity law. The repaired candidate is warning-free at nineteen
+pages.
+
+The first two PDF-only cold reads both returned `NO-GO`. The mathematical
+reader found the false scale-invariant ray claim and the missing standalone
+definitions of the profile and arithmetic specialization maps. The trust
+reader found that the review artifact lacked a content/environment pin. The
+repair now distinguishes normalized vectors from rays, defines the parent,
+matching, cell, and root-specialization data in coordinates, adds theorem-level
+proof-mode labels, and pins the local review closure by a SHA-256 evidence
+fingerprint with exact Python, Lean, Mathlib, command, and success data. Both
+post-fix rereads returned `GO`, with no blocking mathematical, coherence, or
+review-stage reproducibility finding. An immutable public deposit remains an
+explicit release condition rather than a candidate claim.
 
 Paper II now contains its full change-of-characteristic section.  On one
 \(H_3\) sheet, the characteristic-eleven permutation module
@@ -99,10 +112,11 @@ recover only their \(K\)-orbits.
 The weighted relation \(v_1+4v_2+6v_3=0\) and antipodality kill the first and
 second signed moments of the compressed configuration. Its cubic remains
 nonzero, so the profile map preserves the cubic-first orientation already
-proved for the full quotient configuration. Conversely, the three antipodal
-rational profile rays recover the primitive positive dependence \(1:4:6\),
-and hence recover both the orbit-size multiset \(\{1,4,6\}\) and the
-stabilizer-order multiset \(\{12,3,2\}\).
+proved for the full quotient configuration. The incidence normalization of
+the three profile vectors fixes their scales, and their primitive positive
+dependence \(1:4:6\) then recovers both the orbit-size multiset
+\(\{1,4,6\}\) and the stabilizer-order multiset \(\{12,3,2\}\). The
+underlying rational rays alone do not retain those weights.
 
 The section states its decoration boundary explicitly. Balanced moments
 recover the unordered sheet pair from the affine quotient configuration.
@@ -170,7 +184,7 @@ cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting seventeen-page PDF is warning-free. The Paper II aggregate
+The resulting nineteen-page PDF is warning-free. The Paper II aggregate
 entry point is
 
 ```bash
@@ -217,9 +231,12 @@ to the oriented cell pairs, the profile is a pointwise sheet classifier; the
 antipodal singleton pair recovers the unordered golden parent pair. This does
 not revive the failed linear sheet sign because the profile uses decorated
 zero-incidence data rather than a linear functional on the affine quotient.
-Second, even after orientation is forgotten, the three rational profile rays
-recover their own orbit multiplicities through the primitive positive
-dependence \(1:4:6\).
+Second, even after orientation is forgotten, the three
+incidence-normalized profile vectors recover their orbit multiplicities
+through the primitive positive dependence \(1:4:6\). The first cold reader
+correctly found that this is false for the rays alone: their primitive
+generators satisfy \(1:2:1\). The manuscript now states the normalization
+hypothesis and the negative ray boundary explicitly.
 
 The same integer table exposes the bad primes for the next arithmetic section.
 The gcd of its nonzero \(2\times2\) minors is \(3\), so the profile plane drops
@@ -267,7 +284,8 @@ partition does not admit a descended \(\operatorname{PSL}_2(11)\)-action.
 The modular/gluing `ej` pass made the integral relation carry two jobs instead
 of repeating it: over \(\mathbb F_{11}\) it is exactly the statement that
 linearized depth kills the constant orbit indicator, while over
-\(\mathbb Q\) it recovers the orbit multiplicities from the profile rays. It
+\(\mathbb Q\) it recovers the orbit multiplicities from the
+incidence-normalized profile vectors. It
 also promoted the cheap bad-prime audit into a bounded remark: the integral
 profile plane drops rank only in characteristic \(3\), and the signed labels
 degenerate only in characteristics \(2,3\). The paper explicitly declines
@@ -313,7 +331,7 @@ mathematical claim or enlarging the release surface.
 | Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
 | Why can rank-two data recover six rows? | settled | The six displayed vectors are pairwise distinct; linear rank does not control set-theoretic separation. |
 | Why does a singleton profile recover a parent rather than only a matching? | settled | C379 certifies the common \(A_5\) stabilizer, making the equivariant decorated transform a bijection. |
-| Do the unlabeled profile rays retain the group-theoretic orbit sizes? | settled | Their unique primitive positive rational dependence is \(1:4:6\), which also gives stabilizer orders \(12,3,2\). |
+| Do the unlabeled profile rays retain the group-theoretic orbit sizes? | settled negatively after cold review | No. Primitive ray generators have relation \(1:2:1\). The weights \(1:4:6\), and hence stabilizer orders \(12,3,2\), require the incidence normalization of the actual profile vectors. |
 | Is compressed cubic nonvanishing an additional finite calculation? | settled | No. The three-ray cubic lemma forces it from rank two and the nonzero \(1:4:6\) relation in characteristic \(11\). |
 | Why does the compressed cubic retain a doubled-line/simple-line flag? | settled | The orbit weights have total mass \(1+4+6=0\) in \(\mathbb F_{11}\); the general mass-zero cubic identity forces type \(L^2R\), and the Hessian recovers \(L^2\). |
 | Does that flag canonically reconstruct the full relative-cubic source? | settled negatively | C412's covariance and non-descent tests leave no canonical source-to-target map; the flag is internal to the profile plane. |
@@ -325,4 +343,4 @@ mathematical claim or enlarging the release surface.
 | Is every theorem-like statement assigned one exact trust route? | settled | The sixteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the six semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves six bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
-| What is the next load-bearing Paper II frontier? | open by task order | Obtain a fresh context-free referee-style coherence review of the seventeen-page candidate and repair any findings before closing C577. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
+| What is the next load-bearing Paper II frontier? | open by user direction | Run the requested Milnor-style transparency and Serre-style structural-discipline reviews on the dual-GO PDF, then repair any material findings before closing C577. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |

@@ -116,7 +116,8 @@ hexagon over $\F_{11}$ as the only configurations of sizes four through
 seven whose uncovered locus is a full conic.  The latter yields an
 icosahedral continuation complex, a certified game position, and a
 symmetry-compressed finite model for constructing second-player responses.
-Under the standard arc--MDS--AME dictionaries, the same $H_3$ six-arc gives
+Under the standard arc--MDS--AME dictionaries
+\cite{RaissiEtAl2017}, the same $H_3$ six-arc gives
 an $[6,3,4]_{11}$ MDS code and a minimum-support stabilizer absolutely
 maximally entangled state on six $11$-level systems, so its projective
 rigidity controls a concrete quantum-code input.  More generally,
@@ -602,8 +603,10 @@ polynomial powers, the canonically scaled secant products satisfy
 Substitute \(P_M=P_{M_T}+Qx_M\) and expand.  Each sheet has
 \(q=0\) elements in \(\F_q\), and the signed quotient moments vanish
 through degree two.  All terms below cubic degree cancel, leaving
-\(\operatorname{Sym}^3(m_Q)(\mu_3)\) in degree three.  Since \(R_m\)
-is a domain, \(m_Q\) is injective, and so is its third symmetric power.
+\(\operatorname{Sym}^3(m_Q)(\mu_3)\) in degree three.  Since
+\(\F_q[X,Y,Z]\) is a domain, multiplication by \(Q\) is injective;
+over a field, the symmetric powers of an injective linear map are
+injective.
 \end{proof}
 
 \section{Six profiles and matching-row reconstruction}
@@ -800,8 +803,8 @@ Row reduction over \(\F_{11}\) gives rank two and the equations (6.9).
 This rank drop does not merge orbit labels: linear rank and
 set-theoretic separation are different assertions.  Finally, a
 singleton fibre contains its matching without residual choice.  The
-stabilizer of an obstruction matching is the same \(A_5\) as the
-stabilizer of its parent.  The equivariant decorated transform between
+stabilizer of the matching \(M_A\) from (6.3) is the same \(A_5\) as
+the stabilizer of its parent \(A\).  The equivariant decorated transform between
 the two \(G/H\)-orbits is therefore a bijection, so the matching also
 determines its parent.  The stated limitation for the other four rows
 follows from their fibre sizes.
@@ -1133,8 +1136,8 @@ satisfy
                                                                \tag{7.7}
 \]
 and are exchanged by a projectivity $J$ of nonsquare determinant.  The
-common rational hinge is an $S_4$ whose determinant-square kernel is
-$K$.
+normalizer \(N_G(K)\) is a rational \(S_4\) whose determinant-square
+kernel is \(K\).
 \item The determinant character that distinguishes the two rational
 sheets also negates the depth profiles.  Thus choosing one root in the
 split marker algebra chooses one sheet, while its singleton profile
@@ -1169,9 +1172,9 @@ For $H_3$, exact projective closure gives
  |\langle H_+,H_-\rangle|=660.
 \]
 Both stabilizers lie in the determinant-square subgroup, while the
-displayed transporter has nonsquare determinant.  The common
-octahedral carrier has order $24$, and its determinant-square kernel
- has order $12$.  The cited subgroup identifications give (7.7) and the
+displayed transporter has nonsquare determinant.  The normalizer
+\(N_G(K)\) has order $24$, and its determinant-square kernel has order
+$12$.  The cited subgroup identifications give (7.7) and the
 $S_4/A_4$ hinge, proving (b).
 
 The determinant-square subgroup has the two matching sheets as its
@@ -1461,6 +1464,12 @@ T.~Rudd,
 \newblock \emph{Deep holes of projective Reed--Solomon codes beyond
 redundancy four: cubic pencils and coherent polar flags},
 \newblock working paper, 2026.
+
+\bibitem{RaissiEtAl2017}
+Z.~Raissi, C.~Gogolin, A.~Riera, and A.~Ac\'in,
+\newblock Constructing optimal quantum error correcting codes from
+absolutely maximally entangled states,
+\newblock arXiv:1701.03359, 2017.
 
 \end{thebibliography}
 
