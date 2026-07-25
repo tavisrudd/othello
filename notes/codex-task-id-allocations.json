@@ -1097,8 +1097,17 @@
       "last": 605,
       "purpose": "certified conic-filling eight-arc search over q=13,17,19",
       "sequence": 122
+    },
+    {
+      "count": 1,
+      "first": 606,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 606,
+      "purpose": "Post-v1 Clebsch six-arc icosahedral extension-complex follow-up for the arcs paper",
+      "sequence": 123
     }
   ],
-  "next_id": 606,
+  "next_id": 607,
   "schema": "codex-task-id-allocations-v1"
 }
