@@ -1,7 +1,7 @@
 # Paper: Beyond redundancy four for projective Reed--Solomon codes
 
-**Working title:** *Projective Reed--Solomon syndromes beyond redundancy four:
-complete first levels and coherent polar flags.*
+**Working title:** *Deep holes of projective Reed--Solomon codes beyond
+redundancy four: exact classifications and stable polar components.*
 
 **Status:** Scope-reset R5--R7 manuscript under major revision after
 independent cold reads.  R8 and R9 form the fixed-level companion queue;
