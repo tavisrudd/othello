@@ -1,4 +1,6 @@
 import RelativeConicArcs.Gates.AMELUDefinitions
+import RelativeConicArcs.AMELU.GenericMDS
+import RelativeConicArcs.AMELU.GenericDiagonalTensor
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
 import RelativeConicArcs.Gates.AMELUPencilClassification
@@ -10,7 +12,8 @@ import RelativeConicArcs.Gates.AMELUTransportDivisor
 /-!
 # Aggregate import gate for six-party AME local-unitary results
 
-This terminal imports the shared six-party conventions, the
+This terminal imports the length-generic code, state, exact-MDS
+shortening, and diagonal-axis foundations, the shared six-party conventions, the
 arc--MDS--CSS--AME and stabilizer dictionaries, the admitted-pencil
 local-Clifford and local-unitary classifications, the six-party
 LU-to-LC rigidity theorem, the marginal-moment separator, the
