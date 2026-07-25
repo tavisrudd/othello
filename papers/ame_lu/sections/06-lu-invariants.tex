@@ -111,18 +111,18 @@ electric/magnetic marking, not a separate LU class.
 
 \subsection{The exact dimension-thirteen four-copy witness}
 
-For \(m\) ket copies and \(m\) bra copies, choose a permutation
-\(\sigma_i\in S_m\) at each party and contract ket copy \(a\) with bra
+For \(r\) ket copies and \(r\) bra copies, choose a permutation
+\(\sigma_i\in S_r\) at each party and contract ket copy \(a\) with bra
 copy \(\sigma_i(a)\).  If \(G\) generates a three-dimensional code, let
 \(M_{\boldsymbol\sigma}(G)\) be the homogeneous matching system
 \[
  (u_aG)_i=(v_{\sigma_i(a)}G)_i
- \quad(1\leq i\leq6,\ 1\leq a\leq m).
+ \quad(1\leq i\leq6,\ 1\leq a\leq r).
 \]
 Counting its solutions gives the normalized contraction
 \[
  I_{\boldsymbol\sigma}(\Psi_C)
-   =q^{3m-\rank M_{\boldsymbol\sigma}(G)}.              \tag{6.3}
+   =q^{3r-\rank M_{\boldsymbol\sigma}(G)}.              \tag{6.3}
 \]
 
 \begin{theorem}[Exact four-copy separator at \(q=13\)]
@@ -161,15 +161,15 @@ claim that four copies are globally minimal.
 \subsection{Why fixed-copy scalars cannot recover the pencil coordinate}
 
 \begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
-Fix \(m\) and a field \(k\) of cardinality \(q\), which is also the local
+Fix \(r\) and a field \(k\) of cardinality \(q\), which is also the local
 Hilbert-space dimension under the code--state dictionary.  Fix an
 irreducible reduced parameter variety \(X\) over \(k\), and a regular
 generator-matrix chart \(G(x)\) of constant
-code dimension.  Every degree-\((m,m)\) permutation contraction of the
+code dimension.  Every degree-\((r,r)\) permutation contraction of the
 associated equal-phase states is constant on a dense open subset of
 \(X\).  The same holds for party-orbit sums and linear combinations.  In
-the stable range \(q\geq m\), every scalar LU-invariant of bidegree
-\((m,m)\) is generically constant.  For a reducible family, the statement
+the stable range \(q\geq r\), every scalar LU-invariant of bidegree
+\((r,r)\) is generically constant.  For a reducible family, the statement
 holds separately on each irreducible component.
 \end{proposition}
 
@@ -177,12 +177,12 @@ holds separately on each irreducible component.
 Formula~\((6.3)\) depends only on the rank of a matrix whose entries are
 regular functions of the family parameter.  A maximal nonzero minor
 shows that this rank is constant on a dense open set.  There are only
-finitely many diagrams at fixed \(m\), so their generic-rank opens have a
+finitely many diagrams at fixed \(r\), so their generic-rank opens have a
 common dense intersection because \(X\) is irreducible.  Over the complex
 state space, the first fundamental theorem for unitary invariants says
-that local copy-permutation diagrams span the bidegree-\((m,m)\)
+that local copy-permutation diagrams span the bidegree-\((r,r)\)
 invariants; when the local Hilbert-space dimension \(q\) is at least
-\(m\), there are no additional dimension relations among these diagrams.
+\(r\), there are no additional dimension relations among these diagrams.
 This proves the last statement.
 \end{proof}
 

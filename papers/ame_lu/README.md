@@ -1,7 +1,7 @@
 # Paper: Local-unitary rigidity of MDS--CSS AME states
 
-**Title:** *Local-Unitary Rigidity of MDS--CSS AME States: Exact
-Transversal Clifford Groups and Six-Qudit Moduli.*
+**Title:** *Local-Unitary Rigidity and Transversal Clifford Groups for
+MDS--CSS AME States.*
 
 **Lane:** `ame-lu`
 

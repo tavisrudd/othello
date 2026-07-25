@@ -2,8 +2,8 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper titled *Local-Unitary Rigidity of MDS--CSS
-AME States: Exact Transversal Clifford Groups and Six-Qudit Moduli*.
+**Purpose:** complete the paper titled *Local-Unitary Rigidity and
+Transversal Clifford Groups for MDS--CSS AME States*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
@@ -316,9 +316,9 @@ odd prime \(q\) and \(2m\le q+1\), the GRS/extended-GRS quantum-MDS tower has
 exact projective transversal logical group
 \(\mathbb F_q^2\rtimes\mathrm{SL}_2(q)\); the extended
 `[8,4,5]_7` code gives the explicit `AME(8,7)` / `[[7,1,4]]_7` order-16464
-case.  The manuscript has the stronger title *Local-Unitary Rigidity of
-MDS--CSS AME States: Exact Transversal Clifford Groups and Six-Qudit
-Moduli*.  The warning-free 18-page build, visual copy edit, seven-bundle
+case.  The manuscript has the operational title *Local-Unitary Rigidity
+and Transversal Clifford Groups for MDS--CSS AME States*.  The
+warning-free 18-page build, visual copy edit, seven-bundle
 replay, and public/formal release checks pass.  C612 owns the remaining
 general rigidity and discreteness formalization; C613 owns the encoder,
 exact-GRS-group, and explicit-example formalization.  See

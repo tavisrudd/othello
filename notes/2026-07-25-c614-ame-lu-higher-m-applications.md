@@ -76,18 +76,17 @@ The new material received a claim-sensitive copy edit.  In particular:
   plural, since a retained-set cover is needed to recover every site; and
 - the Choi action is written concretely as \(A\mapsto A^{-T}\).
 
-A Milnor-style abstract pass reorganized the front matter as question,
-theorem, operational consequence, proof mechanism, and six-party
-application.  Repetition and table-of-contents phrasing were removed.  The
-title is now
+A Milnor-style abstract pass reorganized the front matter as object, theorem,
+operational consequence, proof mechanism, and six-party application.
+Repetition and table-of-contents phrasing were removed.  The title is now
 
-> *Local-Unitary Rigidity of MDS--CSS AME States: Exact Transversal Clifford
-> Groups and Six-Qudit Moduli*.
+> *Local-Unitary Rigidity and Transversal Clifford Groups for MDS--CSS AME
+> States*.
 
-This is stronger and more faithful than the previous title: it leads with the
-general theorem, names the new exact operational result, and retains the
-six-party classification without suggesting that every MDS code has the GRS
-group.
+This leads with the general theorem and its operational consequence without
+suggesting that every MDS code has the exact GRS group.  The six-party
+classification remains visible in the abstract rather than competing with
+the headline.
 
 ## Lean queue
 
@@ -105,9 +104,9 @@ C602 remains the final aggregate trust and prose audit.
 - `make release-check`: all seven exact-evidence bundles replayed; 35 public
   artifacts and 12 formal-companion artifacts verified.
 - PDF SHA-256:
-  `65676080cb6e3d40d55ad504f7b8459a9a2ef1eca7dd328b4d1575f8945c393f`.
+  `785d6093c4e315c202db930a82e0f0cc8f55eba6ecb8a4a0b9b25d9fa9163863`.
 - Public-tree SHA-256:
-  `ac016aadea4003340446dc2ca97966358dd830dc3e6a788fe62a513739f508b0`.
+  `cdc2026404f2e923f7cfdc0f291a606be8d1757f21ded67c3457c2dc777b3324`.
 - Formal-tree SHA-256:
   `c738a7141b9b854cdd1cd5a96fd4bba0a2fda06072f5e181dca685ec9e24745e`.
 

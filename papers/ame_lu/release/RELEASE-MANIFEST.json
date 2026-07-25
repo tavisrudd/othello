@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-24",
-  "title": "Local-Unitary Rigidity of MDS--CSS AME States: Exact Transversal Clifford Groups and Six-Qudit Moduli",
+  "title": "Local-Unitary Rigidity and Transversal Clifford Groups for MDS--CSS AME States",
   "public_export": {
     "artifacts": [
       {
@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 177728,
+        "bytes": 176951,
         "path": "ame-lu.pdf",
-        "sha256": "65676080cb6e3d40d55ad504f7b8459a9a2ef1eca7dd328b4d1575f8945c393f"
+        "sha256": "785d6093c4e315c202db930a82e0f0cc8f55eba6ecb8a4a0b9b25d9fa9163863"
       },
       {
         "bytes": 12894,
@@ -21,9 +21,9 @@
         "sha256": "ed56be712b1cc15cec499f057a302cb1b66e96fc91ecb4d41f7128de24d75125"
       },
       {
-        "bytes": 3270,
+        "bytes": 3035,
         "path": "main.tex",
-        "sha256": "661a4a54ee2fa20a65fca56cb5eb4343f5503f77c55264696041b7691837e0ce"
+        "sha256": "d55783c8dacf81817be70a524f9047fc6a4997d6c021f38023b621666a718344"
       },
       {
         "bytes": 5941,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 6972,
+        "bytes": 6949,
         "path": "release/verify_release.py",
-        "sha256": "7e6074f7bbdb0c974b600ec60141088ca66c6957c5f8a5a0ae279d87810b6e70"
+        "sha256": "9a94e73041a9cfeec2f824c28df18c77d39caa4424dc8ff96ac0e294d6f245f3"
       },
       {
-        "bytes": 8833,
+        "bytes": 8885,
         "path": "sections/01-introduction.tex",
-        "sha256": "adb1cefe43a3fcf4e84338861a1436038c593e3c5107e532a48198b8df9cea40"
+        "sha256": "f2584f0d98da1bc5d0aab30c22720358ef3d41d9e4221e057d2edab9833be1c7"
       },
       {
         "bytes": 4299,
@@ -66,14 +66,14 @@
         "sha256": "16b9fed5643847986930fbc5c80c8470013130928b47d5ab1d87df86c561a7a6"
       },
       {
-        "bytes": 6584,
+        "bytes": 6589,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "002e3d632891797487a90e2748233939f4c7fd3b375b36c9c701862a9e343e0b"
+        "sha256": "6f33065df16b78a237be8c07bec218adaa3c0a9709ebad1ab75881da6b32cf75"
       },
       {
         "bytes": 9552,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "fa4a070c99a71839b5bacd9e1453261812909de5700891a14d74ede71f444365"
+        "sha256": "ffb1c4880395cde0b6140edcb54112bd213e248412b85dd7415418af1f1b73b9"
       },
       {
         "bytes": 6151,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "ac016aadea4003340446dc2ca97966358dd830dc3e6a788fe62a513739f508b0"
+    "tree_sha256": "cdc2026404f2e923f7cfdc0f291a606be8d1757f21ded67c3457c2dc777b3324"
   },
   "formal_companion": {
     "artifacts": [
