@@ -1,0 +1,114 @@
+# C577 — Clebsch factorization-memory Paper II
+
+**Lane:** `clebsch`
+
+**Date:** 2026-07-25
+
+**Status:** `IN PROGRESS; SIX-PROFILE MATCHING-ROW RECONSTRUCTION DRAFTED`
+
+## Current result
+
+The Paper II candidate now contains a standalone six-profile reconstruction
+section. For
+\[
+G=\operatorname{PGL}_2(11),\qquad H\simeq A_5,\qquad K\simeq A_4,
+\]
+subgroup marks split each of the two
+\(\operatorname{PSL}_2(11)\)-sheets in \(G/H\) into \(K\)-orbits of sizes
+\(1,4,6\). Four oriented pairs of scalar-\(K\) projective cells define a
+secant-zero incidence profile. Six representative counts give the profiles
+\[
+v_1=(-6,0,12,-12),\quad v_2=(-3,3,0,3),\quad
+v_3=(3,-2,-2,0)
+\]
+and their negatives, with fibre sizes \(1,4,6/1,4,6\).
+
+The six vectors are pairwise distinct, so the profile recovers the exact
+double-coset row in \(K\backslash G/H\), although their linear image is only
+the plane
+\[
+2a+2b+c=0,\qquad 9a+8b+d=0
+\]
+over \(\mathbb F_{11}\). The singleton rows recover their individual
+matchings; equality of the parent and matching stabilizers then recovers the
+individual matching-decorated \(H_3\) parent. The size-four and size-six rows
+recover only their \(K\)-orbits.
+
+The weighted relation \(v_1+4v_2+6v_3=0\) and antipodality kill the first and
+second signed moments of the compressed configuration. Its cubic remains
+nonzero, so the profile map preserves the cubic-first orientation already
+proved for the full quotient configuration.
+
+The section states its decoration boundary explicitly. Balanced moments
+recover the unordered sheet pair from the affine quotient configuration.
+They do not select the ordered golden pair, the common \(A_4\), or the
+oriented scalar-\(A_4\) cell pairs. Six-profile row reconstruction is relative
+to that selected refinement.
+
+## Evidence and replay
+
+No new computational result was generated for this drafting step. The paper
+uses two existing atomic evidence bundles.
+
+The six profiles, subgroup orbits, plane equations, weighted relation, and
+cubic witness are certified by
+`notes/2026-07-20-c411-double-coset-hecke.{md,py,json,sha256}` and its
+independent replay. From `/home/tavis/src/othello`, run
+
+```bash
+python3 notes/2026-07-20-c411-double-coset-hecke.py --check
+python3 notes/2026-07-20-c411-double-coset-hecke-replay.py
+sha256sum -c notes/2026-07-20-c411-double-coset-hecke.sha256
+```
+
+The matching-decorated parent bijection and exact \(A_5\) stabilizer are
+certified by
+`notes/2026-07-19-c379-clebsch-deep-hole-extension.{md,py,json,sha256}` and
+its independent replay. From the same directory, run
+
+```bash
+python3 notes/2026-07-19-c379-clebsch-deep-hole-extension.py --check
+python3 notes/2026-07-19-c379-clebsch-deep-hole-extension-replay.py
+sha256sum -c notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256
+```
+
+Both primary checks, independent replays, and checksum manifests passed on
+2026-07-25. Their reports record the exact inputs, byte counts, SHA-256
+hashes, and trusted boundary. The manuscript build command is
+
+```bash
+cd /home/tavis/src/othello/papers
+make -B clebsch-factorization
+```
+
+The resulting eleven-page PDF is warning-free.
+
+## Boundaries
+
+The subgroup-mark argument and the consequences of \(K\)-equivariance and
+\(J\)-negation are conceptual. The six representative incidence rows and
+the equality of parent and matching stabilizers are exact finite inputs.
+The theorem does not say that the profile map is a faithful linear quotient:
+its function space has six double-coset basis elements while the displayed
+linear image has rank two. It is faithful only on the six labels as a set.
+Nor does it reconstruct an individual matching from a size-four or size-six
+profile.
+
+## `ej` + `tt` closeout and mystery ledger
+
+The closeout exposed one cheap but necessary refinement: the profile theorem
+uses an ordered golden pair and a scalar-\(A_4\) refinement that the balanced
+quotient configuration does not intrinsically select. The manuscript now
+states this before the theorem. It also replaces a bare appeal to finite
+injectivity by the exact stabilizer mechanism: parent and obstruction
+matching have the same \(A_5\) stabilizer, so their equivariant \(G/H\) map is
+a bijection.
+
+| mystery | status | exact remaining gap or owner |
+|---|---|---|
+| Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
+| Why can rank-two data recover six rows? | settled | The six displayed vectors are pairwise distinct; linear rank does not control set-theoretic separation. |
+| Why does a singleton profile recover a parent rather than only a matching? | settled | C379 certifies the common \(A_5\) stabilizer, making the equivariant decorated transform a bijection. |
+| Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
+| What is the next load-bearing Paper II frontier? | open by task order | C577 next drafts modular depth and arithmetic splitting/gluing. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
+
