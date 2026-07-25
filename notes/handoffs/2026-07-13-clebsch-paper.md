@@ -112,9 +112,15 @@ rank-two image, recovers the `1,4,6` orbit weights from the three unlabeled
 profile rays, forces the compressed cubic by a general three-ray lemma, and
 derives its doubled-line/residual-line Hessian flag from the modular
 mass-zero identity `1+4+6=0` while stating the exact singleton
-matching/parent recovery boundary. Its clean twelve-page build is
-warning-free. The next drafting
-frontier is modular depth and arithmetic gluing. The current theorem,
+matching/parent recovery boundary. The modular section now identifies the
+depth plane as `P(1)^A4 / soc(P(1))`, separates its six-row set-theoretic
+memory from its rank-two linear memory, and proves the frozen `A_3`
+fused / `B_3,H_3` split arithmetic theorem with the
+`A5 cap A5 = A4` and generated `PSL_2(11)` hinge. The canonical
+relative-cubic Tate plane and its divided-transfer non-identification with
+the depth plane are isolated in an appendix. Its clean fifteen-page build
+is warning-free. The next drafting frontier is the Paper II verification
+architecture and conclusion. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 
@@ -254,8 +260,10 @@ must cite the final Paper I release rather than changing or extending it.
 Current C577 drafting state: the opening bridge, headline theorem,
 marked-conic definition, general quotient proof, switch identity, explicit
 rank-three configurations, exact `3,6,10` theorem, balanced-sheet uniqueness,
-cubic-first orientation, and six-profile matching-row reconstruction are in
-the manuscript. Continue with modular depth and arithmetic gluing.
+cubic-first orientation, six-profile matching-row reconstruction, modular
+depth quotient, arithmetic splitting/gluing, and the relative-cubic Tate
+appendix are in the manuscript. Continue with the Paper II-specific
+verification architecture and conclusion.
 
 ### Outward-consequence bridge
 
