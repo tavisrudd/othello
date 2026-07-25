@@ -48,12 +48,15 @@ splitting the classical first two secant-index equations between $\cH$ and
 its complement gives an exact identity with a pointwise nonnegative
 remainder.  The concurrency cliques of the secants canonically decompose
 the edges of the Kneser graph $KG(k,2)$.  At zero defect they are maximum
-matchings and constitute a simple matching design with a rank-three
-projective realization; the remainder also bounds the number of graph
-edges outside maximum concurrency cliques.  Of the two abstract
-$\operatorname{MATCH}(10,5,1)$ designs, one has no rank-three realization
-over any field, while the regular-hyperoval design is realizable exactly
-over characteristic-two fields containing $\F_8$.
+matchings; after projective duality, the star and matching lines give a
+rank-three realization of the full star--matching pairwise-balanced
+design on the edges of $K_k$.  The remainder also bounds the number of
+graph edges outside maximum concurrency cliques.  Using the known
+two-class classification of abstract $\operatorname{MATCH}(10,5,1)$
+designs and exact realization-ideal certificates, we prove that one class
+has no rank-three realization over any field, while the regular-hyperoval
+class is realizable exactly over characteristic-two fields containing
+$\F_8$.
 
 We apply this theory when $\cH$ is a nonsingular conic $\cC$ in
 $\PG(2,q)$.  If $\rhoC(q)$ is the minimum size of an arc outside $\cC$
@@ -63,12 +66,14 @@ gives an integer lower bound \(L_2(q)\), hence
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-A zero-defect \(\cC\)-complete ten-arc can occur only in \(\PG(2,8)\),
-where its concurrence design is the regular-hyperoval design.  Projective
-averaging transfers upper bounds from ordinary complete arcs.  Finally, a
-kernel-checked exhaustive certificate rules out \(\cC\)-complete
-eight-arcs over \(\F_{16}\), and a checked nine-point witness gives
-\(\rhoC(16)=9\).
+For even \(k\), zero defect forces
+\(q\in\{k-2,\binom{k-1}{2},\binom{k-1}{2}+1\}\); over fields of
+order a power of two this leaves the hyperoval scale \(k=q+2\) or the
+single arithmetic candidate \((q,k)=(4096,92)\).  Projective averaging
+transfers upper bounds from ordinary complete arcs.  Finally, an exact
+quadratic-evaluation certificate shows that no quadratic disjoint from an
+eight-arc over \(\F_{16}\) contains its uncovered locus.  Together with a
+checked nine-point witness, this gives \(\rhoC(16)=9\).
 \end{abstract}
 
 \section{Introduction}
@@ -162,13 +167,19 @@ Moreover, \(\rhoC(16)=9\).
 \end{theorem}
 
 The identity carries more information than the resulting scalar bound.
-Its summands record exactly where a
+The algebra is short; the point is the linear combination that factors
+pointwise into nonnegative terms.  Its summands record exactly where a
 secant-index distribution falls short of the extremal pattern.  Their
 vanishing produces the matching design used for equality rigidity, while
-their total gives stability.  The last assertion of
-Theorem~\ref{thm:main-conic} has a separate finite input: a checked augmentation
-certificate reduces all eight-arcs over \(\F_{16}\) to \(2633\) leaves,
-and checked quadratic-evaluation records reject every leaf.
+their total gives stability.  For conic holes, the equality theory also
+forces every even \(k\) into three possible plane orders; in characteristic
+two only the hyperoval scale and the candidate \((q,k)=(4096,92)\)
+remain.
+
+The last assertion of Theorem~\ref{thm:main-conic} has a separate finite
+input: a checked augmentation certificate reduces all eight-arcs over
+\(\F_{16}\) to \(2633\) leaves, and checked quadratic-evaluation records
+reject every leaf.
 
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
@@ -197,7 +208,10 @@ of the prescribed-hole defect canonically produces a simple
 $\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)$ design, represented by
 concurrence points of secants in one projective plane.  The local remainder
 also measures the graph edges that fail to lie in such maximum-matching
-cliques.
+cliques.  After projective duality, Corollary~\ref{cor:star-matching-realization}
+upgrades the matching design to a rank-three realization of the full
+star--matching pairwise-balanced design; this is the bridge to the field
+and characteristic restrictions in Section~\ref{sec:equality-classifications}.
 
 Sections~\ref{sec:classical}--\ref{sec:examples} give the main route:
 exact accounting, equality rigidity, lower and upper bounds, the
@@ -483,13 +497,22 @@ point of $Z$ on it accounts for $m-1$ of them.  Hence it contains
 $\binom{k-2}{2}/(m-1)$ points of $Z$, which has the two displayed values.
 \end{proof}
 
-After any projective duality, the $\binom{k}{2}$ secants become points.
-They lie on $k$ star lines of size $k-1$, one for each point of $A$, and
-on the $|Z|$ matching lines of size $m$.  Two dual secant-points lie on a
-star line when their endpoint pairs meet and on a unique matching line
-when they are disjoint.  Thus zero defect does not merely prescribe the
-indices: it gives a rank-three projective realization of the star--matching
-pairwise-balanced design on the edges of $K_k$.
+\begin{corollary}[Rank-three star--matching realization]
+\label{cor:star-matching-realization}
+If \(\Delta_{\cH}(A)=0\), then after any projective duality the
+\(\binom{k}{2}\) secants become points carrying a rank-three projective
+realization of the star--matching pairwise-balanced design on \(E(K_k)\).
+Its lines are the \(k\) star lines of size \(k-1\), one for each point of
+\(A\), and the \(|Z|\) matching lines of size
+\(m=\lfloor k/2\rfloor\).
+\end{corollary}
+
+\begin{proof}
+The dual secant-points for two edges of \(K_k\) lie on a star line when
+the edges share a vertex.  When the edges are disjoint, their secants
+meet at a unique point outside \(A\); Theorem~\ref{thm:matching-design}
+places them on a unique matching line, of size \(m\) at zero defect.
+\end{proof}
 
 The same decomposition strengthens Corollary~\ref{cor:stability} from a
 count of nonextremal centres to a count of affected pairs of secants.
@@ -598,23 +621,6 @@ Let $k\ge6$ be even.  If a $\cC$-complete $k$-arc has zero defect, then
 \]
 In the first two cases every point of $\cC$ has index $k/2$; in the third,
 exactly $k-1$ conic points have that index.
-
-If \(q\) is also a power of two, then either \(k=q+2\) or the
-sole remaining arithmetic candidate is
-\[
- (q,k)=(4096,92).
-\]
-
-In particular, no zero-defect $\cC$-complete eight- or twelve-arc exists
-in a Desarguesian plane, while a zero-defect ten-arc can occur only for
-$q=8$ or $q=37$.  In fact, Theorem~\ref{thm:match-ten-realization}
-excludes $q=37$ and shows that the underlying arc in every ten-point
-equality pair has the regular-hyperoval concurrence design.  Such pairs
-exist in \(\PG(2,8)\), but this statement does not classify either their
-projective realizations or the prescribed conics disjoint from them.
-
-Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
-$\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
 \end{corollary}
 
 \begin{proof}
@@ -638,8 +644,23 @@ For $t\ge2$, already at $t=2$ the subtracted term exceeds $q+1$ by
 \]
 and the excess increases with $t$.  Hence $t\in\{0,1\}$.  The displayed
 values of $s$ at $q=Q,B,B+1$ are respectively $q+1,q+1,Q+1$.
+\end{proof}
 
-Suppose now that \(q=2^n\).  The case \(q=B\) is impossible: since
+\begin{corollary}[Characteristic-two equality spectrum]
+\label{cor:characteristic-two-equality-spectrum}
+Let \(k\ge6\) be even, let \(q\) be a power of two, and suppose that a
+\(\cC\)-complete \(k\)-arc has zero defect.  Then either \(k=q+2\) or
+the sole remaining arithmetic candidate is
+\[
+ (q,k)=(4096,92).
+\]
+\end{corollary}
+
+\begin{proof}
+Put \(Q=k-2\) and \(B=Q(Q+1)/2\).  By
+Corollary~\ref{cor:even-equality-spectrum},
+\(q\in\{Q,B,B+1\}\).  Write \(q=2^n\).
+The case \(q=B\) is impossible: since
 \(Q\) is even, the coprime factors \(Q\) and \(Q+1\) could have product
 a power of two only if \(Q+1=1\).  In the case \(q=B+1\), put
 \(x=2k-3\).  Then
@@ -657,15 +678,36 @@ and \((q,k)=(4096,92)\).  The remaining
 case \(q=Q\) is \(k=q+2\).  This argument supplies only a necessary
 parameter pair; it does not assert that the corresponding matching design
 has a rank-three realization.
+\end{proof}
 
+\begin{corollary}[Small even equality cases]
+\label{cor:small-even-equality}
+No zero-defect \(\cC\)-complete eight- or twelve-arc exists in a
+Desarguesian plane.  A zero-defect ten-arc can occur only in
+\(\PG(2,8)\); its underlying arc has the regular-hyperoval concurrence
+design, and such equality pairs exist.  This statement does not classify
+either their projective realizations or the prescribed conics disjoint
+from them.
+
+Moreover, if \(Q\ge4\) is an even prime power and \(d\ge2\), no
+\(\cC\)-complete \((Q+2)\)-arc in
+\(\PG(2,Q^d)\setminus\cC\) has zero defect.
+\end{corollary}
+
+\begin{proof}
 For $k=8,10,12$, the three candidate orders are respectively
 \[
  \{6,21,22\},\qquad \{8,36,37\},\qquad \{10,55,56\}.
 \]
-Since a Desarguesian plane has prime-power order, this proves the stated
-small-size consequences.
+Since a Desarguesian plane has prime-power order, this excludes \(k=8,12\)
+and leaves only \(q=8,37\) when \(k=10\).
 
-For the final assertion, $Q^d\ge Q^2>B+1$ when $Q\ge4$ and $d\ge2$.
+For the final assertion,
+\[
+ Q^d\ge Q^2>\frac{Q(Q+1)}2+1
+\]
+when $Q\ge4$ and $d\ge2$, so none of the three orders allowed by
+Corollary~\ref{cor:even-equality-spectrum} equals \(Q^d\).
 
 For the ten-point refinement, Theorem~\ref{thm:matching-design} produces
 a rank-three $\operatorname{MATCH}(10,5,1)$ design.  Apply
@@ -1510,7 +1552,7 @@ regenerates and checks the certificate.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
 direct \(\F_8\) incidence construction provide independent checks; the
 same record checks the regular hyperoval, the disjoint prescribed conic
-used in Corollary~\ref{cor:even-equality-spectrum}, and its nonvanishing
+used in Corollary~\ref{cor:small-even-equality}, and its nonvanishing
 gradient.  Abstract two-class completeness remains the cited external theorem.  The
 odd-characteristic computation saturates by
 \(x_9(x_9-1)\), the product of the two necessary arc determinants
