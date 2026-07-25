@@ -372,4 +372,35 @@ noncomputable def genericShorteningGenerator
     have hi := congrFun hab i
     simpa [hci] using hi
 
+omit [Fintype 𝔽] in
+/-- At every retained coordinate, the shortening parameters for `C` and
+`C⊥` map bijectively to the two local Weyl labels. -/
+theorem genericShorteningLocalLabel_bijective
+    (hm : 0 < m) {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C) {S : Finset (GenericParty m)}
+    (hS : S.card = m + 1) {i : GenericParty m} (hi : i ∈ S) :
+    let c := genericShorteningGenerator hm C hC S hS
+    let h := genericShorteningGenerator hm (FiniteGeom.dualCode C)
+      (isMDSCode2m_dualCode hm hC) S hS
+    Function.Bijective fun v : 𝔽 × 𝔽 =>
+      (v.1 * c.word i, v.2 * h.word i) := by
+  classical
+  dsimp
+  let ci := (genericShorteningGenerator hm C hC S hS).word i
+  let hi' := (genericShorteningGenerator hm (FiniteGeom.dualCode C)
+    (isMDSCode2m_dualCode hm hC) S hS).word i
+  have hci : ci ≠ 0 :=
+    (genericShorteningGenerator hm C hC S hS).ne_zero_on i hi
+  have hhi : hi' ≠ 0 :=
+    (genericShorteningGenerator hm (FiniteGeom.dualCode C)
+      (isMDSCode2m_dualCode hm hC) S hS).ne_zero_on i hi
+  constructor
+  · rintro ⟨a, b⟩ ⟨a', b'⟩ hab
+    apply Prod.ext
+    · exact mul_right_cancel₀ hci (congrArg Prod.fst hab)
+    · exact mul_right_cancel₀ hhi (congrArg Prod.snd hab)
+  · rintro ⟨x, y⟩
+    exact ⟨(x / ci, y / hi'), by
+      simp [ci, hi', hci, hhi]⟩
+
 end RelativeConicArcs.AMELU

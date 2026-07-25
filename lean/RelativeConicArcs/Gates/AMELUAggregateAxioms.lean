@@ -15,6 +15,7 @@ open RelativeConicArcs.AMELU
 #print axioms isMDSCode2m_iff_projection_bijective
 #print axioms isMDSCode2m_dualCode
 #print axioms genericShorteningGenerator
+#print axioms genericShorteningLocalLabel_bijective
 #print axioms diagonalTensorFlattening_pure_iff_coordinateAxis
 #print axioms coordinateAxes_preserved_of_diagonalTensor_equivalent
 #print axioms genericEqualPhaseState_three
