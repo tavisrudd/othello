@@ -65,7 +65,8 @@ the refreshed certificate and final clean fifteen-check replay passed at
 
 C605 is complete. Its report, exact search, compact certificates, independent
 replay, and mystery ledger are in
-`notes/2026-07-25-c605-eight-point-conic-filling-search.md`.
+`notes/2026-07-25-c605-eight-point-conic-filling-search.md`. The final clean
+sixteen-check release replay is green at `91db7b5c`.
 
 C182 is next. Its blocker is external publication packaging. The
 previously cited GitHub artifact URL is not publicly reachable, and this

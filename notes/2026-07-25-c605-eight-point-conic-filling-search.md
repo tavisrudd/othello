@@ -127,6 +127,9 @@ canonicalization contract, completeness argument, maximum-size result, and
 independent replay. The verification table, nineteen-row statement identity,
 trust manifest, checker-output certificate, PDF, and release runner include
 the new computation. The manuscript is warning-free and now has 19 pages.
+The final clean sixteen-check release replay passed against Lean commit
+`6d4766d1ea5e9a36f1a507e549c223416a6b506f`; its release-surface SHA-256 is
+`f1bdf88608a7f8c5d5082503818c77df07fb5ba87904dbf59e3a1b025f27a2f2`.
 
 ## Extra-juice and Tao-style closeout
 
