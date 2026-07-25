@@ -1,94 +1,111 @@
-# C613 planning: Choi and transversal Clifford corollary
+# C613 — one-leg encoders and transversal Clifford actions
 
 **Lane:** `ame-lu`
 
-## Goal
+**Date:** 2026-07-25
 
-Formalize the complete operational corollary of C612.  For the
-\([[2m-1,1,m]]_q\) encoder obtained by viewing one leg of an equal-phase
-\([2m,m,m+1]_q\) MDS/CSS AME state as the input, prove that every product
-physical unitary implementing a logical unitary has Clifford physical factors
-and a Clifford logical action.
+**Status:** complete
 
-## Exact gaps
+## Result
 
-1. **One-leg reshape.**  Define the normalized Choi state of
-   \(V:\mathbb C^q\to(\mathbb C^q)^{\otimes(2m-1)}\) in the same tensor and
-   basis convention as the generic equal-phase state.
-2. **Isometry from AME.**  Prove that the maximally mixed one-party reduction
-   makes the reshaped map an isometry, including the normalization factor.
-3. **Quantum-MDS parameters.**  Construct the one-logical-qudit code subspace
-   and prove the \([[2m-1,1,m]]_q\) parameters: dimension \(q\), correction of
-   every \(m-1\) output erasures from AME decoupling, distance \(m\), and
-   quantum-Singleton equality.  Do not leave the displayed parameters as
-   manuscript-only nomenclature.
-4. **Choi action orientation.**  From
-   \(U_{\mathrm{phys}}V=VL\), prove exactly
-   \[
-   (I\otimes U_{\mathrm{phys}})|\Psi_C\rangle
-      =(L^T\otimes I)|\Psi_C\rangle
-   \]
-   and hence
-   \[
-   ((L^T)^{-1}\otimes U_{\mathrm{phys}})
-      |\Psi_C\rangle=|\Psi_C\rangle .
-   \]
-   The transpose, inverse, tensor-leg order, and global phase must be visible
-   in the theorem statement or its immediate bridge.
-5. **Clifford closure.**  Prove that entrywise conjugation preserves the
-   finite-field Weyl group, that adjoint and inverse preserve its normalizer,
-   and therefore that transpose preserves the one-qudit Clifford predicate.
-6. **Terminal corollary.**  Apply C612 to the normalized Choi state and
-   conclude separately that every physical factor and \(L\) are Clifford.
-   Quantify over two encoders to cover transversal code conversion, then
-   derive the same-code no-transversal-non-Clifford corollary.
-7. **Exact GRS transversal group.**  Formalize length-\(2m\) GRS and extended
-   GRS dual multipliers \(SC=C^\perp\), the product upper/lower elementary
-   unipotents preserving the CSS label space, generation of every logical
-   `SL₂(q)` block, and physical Pauli representatives.  Combine this
-   construction with the no-go converse to prove the exact projective group
-   `𝔽_q² ⋊ SL₂(q)` for odd prime `q` and `2m≤q+1`.
-8. **Concrete specialization.**  Instantiate the theorem at the extended
-   `[8,4,5]_7` code, its `AME(8,7)` tensor and `[[7,1,4]]_7` encoder, and
-   prove the projective group order `16464` by kernel reduction.
+`RelativeConicArcs.AMELU.EncoderTransversal` now formalizes the one-leg
+encoder consequences of the length-generic MDS--CSS rigidity theorem.
 
-## Proposed module boundary
+- `oneLegQuantumMDSParameters` fixes the associated
+  `[[2m-1,1,m]]` parameters and proves the one-logical-qudit quantum
+  Singleton equality.
+- `encoderConversion_inverseTranspose_chosenLeg` derives the exact
+  `((Lᵀ)⁻¹ ⊗ U_phys)` orientation from
+  `(I ⊗ U_phys) Ψ_C = (Lᵀ ⊗ I) Ψ_D`.
+- `inverseTransposeWitness_of_isUnitaryMatrix` constructs the inverse
+  transpose canonically from logical unitarity.
+- `IsCliffordMatrix.conjTranspose`, `IsCliffordMatrix.conjugate`, and
+  `IsCliffordMatrix.transpose` prove inverse, entrywise-conjugate, and
+  transpose closure for the repository's finite-field Weyl normalizer.
+- `encoderConversion_logical_and_physical_isClifford` proves that every
+  logical and physical factor in a conversion between two associated
+  encoders is Clifford.
+- `GenericDiagonalDuality`, the two CSS shear-preservation theorems, and
+  the parameter-surjectivity theorems formalize the algebra of the GRS
+  upper and lower unipotent construction.
+- `grs_projectiveTransversal_eq_affineSpecialLinear` identifies the exact
+  projective carrier with `𝔽² ⋊ SL₂(𝔽)` from explicit construction,
+  elementary-generation, and converse inputs.
+- `affineSpecialLinearOrder_seven` checks the `AME(8,7)` /
+  `[[7,1,4]]₇` order `16464`.
 
-- a generic finite-dimensional Choi/reshape module if mathlib lacks the exact
-  convention;
-- an AME one-leg encoder and erasure-correction module;
-- a finite-field Clifford closure module;
-- the transversal logical-action terminal;
-- import-only and axiom-audit gates.
+The aggregate import and declaration-level axiom audit include all new
+paper-facing terminals.  The formal-statement, formalization, verification,
+and manuscript trust-boundary ledgers now state the same coverage.
 
-Reuse a suitable existing public Choi or quantum-code API when it matches the
-paper convention.  Otherwise prove the finite matrix-entry identities
-locally; do not introduce a broad quantum-information hierarchy merely to
-state one corollary.
+## Formal boundary
 
-## Acceptance
+The encoder no-go is unconditional from `EncoderConversionInputs`: exact MDS
+parameters, physical and logical unitarity, and the displayed forward
+normalized Choi equation.  The inverse-transpose witness and all Clifford
+closure steps are proved, not assumed.
 
-- The encoder, code subspace, distance, and quantum-MDS parameters are
-  kernel-checked, not assumed fields.
-- The Choi identity has the paper's exact orientation and normalization.
-- The logical conclusion proves the existing finite-field Clifford predicate,
-  not only preservation of an unnamed operator basis.
-- C612's general rigidity theorem is the only nontrivial rigidity input.
-- Guarded elaboration, AME gates, exact no-build checks, aggregate trace, and
-  axiom audits pass; the conceptual terminal has no `sorry`, native
-  evaluation, generated declaration, external certificate, or project axiom.
-- The abstract, Corollary 1.2, Section 3 proof, formalization ledger,
-  statement-adequacy map, verification prose, and exact Lean declarations are
-  synchronized.
-- The two-encoder conversion theorem, exact GRS transversal group, and
-  `[[7,1,4]]_7` specialization are kernel-checked without a certificate or
-  native computation.
+The exact GRS carrier theorem is a conditional interface.
+`GRSTransversalInputs` keeps the actual generalized or extended GRS
+diagonal-duality instance, phase-corrected Clifford lifts, logical Pauli
+representatives, elementary generation, and the no-go containment explicit.
+The repository has no length-generic GRS code definition from which those
+fields could presently be constructed.  Lean checks the duality-shear
+algebra, arbitrary unipotent coefficients, equality from the two
+containments, and the order-seven arithmetic.
 
-## Stop conditions
+## Validation
 
-Stop if the paper's claimed quantum-code parameters require a definition of
-distance or erasure correction not equivalent to the chosen formal API.
-Resolve that correspondence rather than formalizing only the Choi algebra and
-calling the full corollary covered.  Stop on a transpose-orientation mismatch
-with a two-dimensional matrix counterexample rather than changing the
-manuscript convention silently.
+- Warning-free guarded elaboration of
+  `RelativeConicArcs.AMELU.EncoderTransversal`.
+- Measured single-thread build of `EncoderTransversal`,
+  `AMELUAggregate`, and `AMELUAggregateAxioms`, followed by the trace-only
+  aggregate gate:
+  `/home/tavis/.cache/othello-lean-build/run-20260725-215729-9939c8ba`.
+- The declaration-level audit reports only `propext`,
+  `Classical.choice`, and `Quot.sound` for the new conceptual terminals;
+  the closed arithmetic terminal uses only `propext`.
+- Warning-free 18-page manuscript build.
+- PDF SHA-256:
+  `507d85e38c61b513b1017073e5d6228d3880aa5e147559030934ae1f419d8b27`.
+
+Implementation commit: `94ba154e`.
+
+## `ej` and Tao closeout
+
+The first free strengthening removed a hidden inverse assumption.  Logical
+unitarity now constructs `(Lᵀ)⁻¹=(Lᵀ)ᴴ` internally, so the conversion input
+contains no chosen inverse data.
+
+The second strengthening isolated
+`coordinateAxes_reflected_by_linearEquiv`: over a finite coordinate space,
+an invertible linear map that sends every coordinate axis to an axis also
+does so in reverse.  This is the reusable mechanism behind Clifford inverse
+closure and avoids a separate finite permutation choice in later proofs.
+
+The stress test separated three claims that should not be conflated:
+the unconditional encoder no-go, the checked GRS duality-shear algebra, and
+the conditional instantiation of the exact GRS group.  The ledgers expose
+that boundary directly.
+
+## Mystery ledger
+
+| Feature | Closeout status | Remaining gap or owner |
+|---|---|---|
+| Exact inverse-transpose orientation | **Settled:** derived from the forward normalized Choi equation | none |
+| Clifford inverse and transpose closure | **Settled:** adjoint-axis reflection and explicit Weyl conjugation | none |
+| Logical unitarity versus a chosen inverse | **Settled:** the inverse-transpose witness is canonical | none |
+| Upper and lower GRS shears | **Settled algebraically:** both preserve `C × Cᗮ` under diagonal duality and realize every coefficient | concrete GRS and phase-correction instantiation remains an explicit `GRSTransversalInputs` field |
+| Exact `𝔽² ⋊ SL₂(𝔽)` group | **Settled as a conditional carrier equality** | a future length-generic GRS library could discharge the named construction and generation fields |
+| Order-16464 specialization | **Settled:** kernel-checked arithmetic | none |
+
+No unexplained feature remains inside the unconditional encoder theorem.
+The only open formal boundary is the explicitly named GRS instantiation,
+not a hidden assumption in the no-go.
+
+**Vibe check:** the operational theorem is now fully kernel checked, including
+the transpose orientation that was easiest to get subtly wrong.  The exact
+GRS result has a clean formal landing point, but its concrete code-family
+construction remains interface-level rather than an end-to-end GRS
+formalization.
+
