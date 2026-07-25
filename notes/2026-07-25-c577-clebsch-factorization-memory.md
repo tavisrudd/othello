@@ -4,9 +4,25 @@
 
 **Date:** 2026-07-25
 
-**Status:** `IN PROGRESS; MODULAR DEPTH AND ARITHMETIC GLUING DRAFTED`
+**Status:** `IN PROGRESS; VERIFICATION/CONCLUSION LOCAL GATE GREEN; COLD REVIEW NEXT`
 
 ## Current result
+
+Paper II now has its own verification architecture and mathematical
+conclusion. The sixteen theorem-like statements are hash-identified and
+mapped claim by claim to conceptual proofs, classical inputs, six exact
+certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
+runner checks the statement map, all six checksum manifests, eleven primary
+or independent executable routes, and the manuscript build. Its clean replay
+is green.
+
+The conclusion records the exact reconstruction ladder: linear harmonic and
+radial memory, unordered balanced sheets, cubic orientation, and---after a
+selected \(A_4\) refinement---the matching-table label. It also closes the
+three boundaries a referee could otherwise misread: nonsingleton profiles
+recover only orbits, the relative-cubic and depth planes have no natural
+identification, and the three small-field split/fused rows do not imply an
+all-prime reciprocity law. The candidate is warning-free at seventeen pages.
 
 Paper II now contains its full change-of-characteristic section.  On one
 \(H_3\) sheet, the characteristic-eleven permutation module
@@ -154,7 +170,17 @@ cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting fifteen-page PDF is warning-free.
+The resulting seventeen-page PDF is warning-free. The Paper II aggregate
+entry point is
+
+```bash
+python3 papers/clebsch-factorization/verification/verify_release.py
+```
+
+It passed on 2026-07-25, including all six evidence bundles and the clean
+manuscript build. A separate guarded elaboration of
+`RelativeConicArcs/Gates/ClebschArithmeticGluing.lean` also passed with the
+recorded axiom surface.
 
 ## Boundaries
 
@@ -256,6 +282,24 @@ an identification. The source construction has therefore moved to an
 appendix whose closing remark gives the unequal relation lines and
 divided-transfer obstruction.
 
+The verification/conclusion `ej` pass turned the inherited computations into
+one paper-specific audit surface. Semantic bundle names now keep workflow
+identifiers out of the manuscript, and the conclusion uses the refinement
+boundary positively: exact row recovery is a relative theorem, not an
+intrinsic choice of orientation. The cheap extra value is a single replay
+command that simultaneously detects theorem-statement drift, evidence-hash
+drift, and a broken PDF build.
+
+The matching `tt` pass tested the final paragraph against the strongest
+plausible overreading. Saying that the conic ideal remembers a
+matching-table label would be false without the selected \(A_4\) refinement;
+the conclusion now carries that hypothesis in the same sentence. The pass
+also separated the genuinely canonical outputs---the unordered sheets and
+the two individual planes---from the noncanonical comparison between them.
+A local referee-style coherence read found no internal theorem-order,
+proof-mode, or conclusion mismatch. Independence remains the purpose of the
+next context-free review rather than a hidden claim about this pass.
+
 | mystery | status | exact remaining gap or owner |
 |---|---|---|
 | Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
@@ -269,4 +313,6 @@ divided-transfer obstruction.
 | Does the canonical relative-cubic Tate plane identify with the modular depth plane? | settled negatively for the natural labelled routes | Their relation lines are \([2,9,1]\) and \([2,8,1]\); divided transfer kills balanced source relations and fixes the depth socle. The appendix claims no canonical map. |
 | Are the quadratic marker polynomials enough to specify the arithmetic matching models? | settled | No; the manuscript now displays the additional \(B_3\) and \(H_3\) representatives and marks projective transport into the configurations as exact finite evidence. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
-| What is the next load-bearing Paper II frontier? | open by task order | C577 next drafts the Paper II-specific verification architecture and conclusion, then runs the standalone coherence/referee gate. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
+| Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
+| Is every theorem-like statement assigned one exact trust route? | settled | The sixteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
+| What is the next load-bearing Paper II frontier? | open by task order | Obtain a fresh context-free referee-style coherence review of the seventeen-page candidate and repair any findings before closing C577. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |

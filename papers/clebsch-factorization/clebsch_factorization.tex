@@ -5,6 +5,7 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -1095,10 +1096,92 @@ it with any cubic quotient of the ten-dimensional factorization space.
 Appendix~\ref{app:tate-plane} makes that boundary precise.
 
 \section{Verification architecture}
+\label{sec:verification}
 
-Distinguish conceptual proofs, classical inputs, Lean statements, and
-finite certificates.  State the coordinate-to-Coxeter identifications
-and external semantic bridges explicitly.
+Table~\ref{tab:verification} separates the mathematical arguments from
+their exact finite inputs.  Here ``certificate'' means a deterministic
+calculation over a prime field, checked against a canonical JSON output
+and a SHA-256 manifest; an independent replay uses a separate
+implementation.  ``Lean'' means that the stated finite implication is
+checked by the Lean kernel.  Neither term replaces the cited
+identification of the classical groups or configurations.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}
+                    >{\raggedright\arraybackslash}p{0.32\textwidth}
+                    >{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Result & Proof in the text or classical input & Exact evidence \\
+\midrule
+Matching-secant quotient
+& unique conic divisibility and the four-endpoint switch
+& none \\
+Ranks and the middle Fischer layer
+& harmonic decomposition; Edge--Dye configurations
+& quotient matrices and independent replay \\
+Balanced sheets and cubic orientation
+& Proposition~\ref{prop:radical-hadamard}; tensor identities
+& exact moments; radical hypotheses and independent replay \\
+Six-profile reconstruction
+& subgroup marks, orbit--stabilizer, and the three-ray lemmas
+& profile rows and replay; decorated-parent bijection \\
+Modular depth and the Tate plane
+& projectivity, fixed-point exactness, and standard modular-module input
+& invariant, coinvariant, and depth calculations with replay \\
+Arithmetic splitting and gluing
+& displayed root calculations; cited subgroup identifications
+& Lean gate and normalized certificate/replay \\
+\bottomrule
+\end{tabular}
+\caption{Proof modes for the principal results.}
+\label{tab:verification}
+\end{table}
+
+The claim-by-claim map is
+\path{verification/trust_manifest.json}; the exact sixteen-statement
+identity is \path{verification/statement_identity.json}.  From the root
+of the archival source, the aggregate entry point is
+\begin{verbatim}
+python3 papers/clebsch-factorization/verification/verify_release.py
+\end{verbatim}
+It checks the statement identity and all six checksum manifests, runs
+the admitted primary checks and independent replays, and rebuilds this
+manuscript through the repository Makefile.
+
+The largest formal component is the gate
+\begin{center}
+\small\texttt{RelativeConicArcs.Gates.}\\[-2pt]
+\texttt{ClebschArithmeticGluing}.
+\end{center}
+Its twenty-three terminals check the displayed roots, matching involutions, projective
+orders, determinant halves, the $A_3/B_3$ orbit calculations, and the
+split--fused conclusion.  For $H_3$, Lean checks the normalized
+certificate rows, intersections, determinant classes, the $11+11$
+signature split, and the shape of the bounded generation words.
+Evaluation and completeness of the $660$-element coset and word
+certificates remain exact generator/replay obligations.  The classical
+names $S_4,A_4,A_5$, and $\operatorname{PSL}_2(11)$ are cited inputs:
+no group name is inferred from an order.
+
+The other computations are load-bearing only at the points shown in
+Table~\ref{tab:verification}.  The matching-module bundle supplies the
+three finite quotient ranks and frozen moment data; the balanced-sheet
+bundle checks the finite hypotheses of the symbolic radical argument;
+the profile-incidence bundle computes one row per double coset; the
+decorated-parent bundle identifies a singleton matching with its
+parent; and the relative-cubic-depth bundle computes the modular and
+Tate rank patterns.  All use exact prime-field arithmetic.  The general
+divisibility theorem, radical--Hadamard lemma, three-ray cubic lemma,
+and mass-zero factorization are proved in the text and do not depend on
+those enumerations.
+
+This verification surface proves only the three marked configurations
+defined here.  It does not supply an all-characteristic construction,
+a canonical map from the relative-cubic Tate plane to the depth plane,
+or any passage, holonomy, theta, Fourier, quantum, or Mathieu
+identification.
 
 \appendix
 
@@ -1180,8 +1263,37 @@ the depth plane and supplies no missing map.
 
 \section*{Conclusion}
 
-State exactly which factorization data the conic ideal remembers and
-which pointed or global data it still forgets.
+Restriction to a conic erases the pairing of marked points, but division
+by its equation does not erase every trace of the factorization.  The
+four-endpoint switch turns the competing secant products into an affine
+quotient configuration.  For the rank-three systems this configuration
+has dimensions $3,6,10$: its top harmonic part always survives, and in
+the even case so does the deepest radial line.  In type $H_3$, the
+omitted information is exactly the middle Fischer layer
+$Q\mathcal H_2$.
+
+The quotient remembers more than its linear span.  In the balanced
+$B_3$ and $H_3$ cases, quadratic products recover the unordered pair of
+sheets, while the first signed tensor that survives is cubic and changes
+sign under the outer involution.  After an $A_4$ refinement has been
+chosen, six incidence profiles still separate all six matching rows,
+although their linear image is only a plane.  Over $\F_{11}$ the same
+weights $1,4,6$ describe both the rational orbit sizes and the loss of
+the constant socle in modular depth.
+
+These recovery statements have precise limits.  Balanced moments do
+not order the sheets or choose the $A_4$ refinement.  The nonsingleton
+profiles recover orbits, not individual matchings.  The relative-cubic
+Tate plane and the depth plane are separately canonical, but the natural
+labelled and transfer maps do not identify them.  Arithmetic splitting
+chooses a rational sheet in the three frozen small-field models; it
+does not produce an all-prime reciprocity law.
+
+Thus the conic ideal retains a layered memory: harmonic and radial
+linear data, an unordered balanced-sheet decomposition, cubic
+orientation, and---after a stated refinement---the exact matching-table
+label.  Pointed passage maps and global holonomy require additional
+structure, so they lie beyond the reconstruction theorem proved here.
 
 \begin{thebibliography}{99}
 

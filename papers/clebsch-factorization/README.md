@@ -17,7 +17,7 @@ configurations*.
   comparisons, carrier torsors, and Mathieu/characteristic-zero bridges remain
   outside this root unless a later editorial decision adopts them.
 
-The compilable draft is `clebsch_factorization.tex`. Its standalone opening,
+The warning-free seventeen-page candidate is `clebsch_factorization.tex`. Its standalone opening,
 headline factorization theorem, marked-conic notation, matching-secant
 quotient, switch mechanism, explicit rank-three matching configurations, and
 exact `3,6,10` quotient-rank theorem are in place. The rank theorem separates
@@ -30,8 +30,12 @@ the covariant equation `Delta_Q f in F_11 Q`;
 the balanced-sheet section proves a symbolic radical--Hadamard recovery
 theorem, specializes it to the `7+7` and `11+11` sheets, and shows that the
 first signed orientation moment is cubic;
-its current exact evidence is the committed C406 primary certificate and
-independent replay together with the C430 hypothesis certificate and replay.
+the six-profile, modular-depth, arithmetic-gluing, and relative-cubic sections
+are complete. A paper-specific sixteen-statement trust manifest and aggregate
+six-bundle replay now separate conceptual, classical, certificate, and Lean
+support. The conclusion states the exact reconstruction ladder and its
+pointed/global limits. The full local release replay is green; a fresh
+context-free referee-style coherence review is the remaining candidate gate.
 C575's disposition is complete and authoritative. Import only the material
 assigned to Paper II; the broad manuscript in
 `../clebsch-hexagon-code/` remains an unchanged fallback, not a source to trim

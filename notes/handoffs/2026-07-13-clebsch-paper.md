@@ -118,9 +118,13 @@ memory from its rank-two linear memory, and proves the frozen `A_3`
 fused / `B_3,H_3` split arithmetic theorem with the
 `A5 cap A5 = A4` and generated `PSL_2(11)` hinge. The canonical
 relative-cubic Tate plane and its divided-transfer non-identification with
-the depth plane are isolated in an appendix. Its clean fifteen-page build
-is warning-free. The next drafting frontier is the Paper II verification
-architecture and conclusion. The current theorem,
+the depth plane are isolated in an appendix. It now has a sixteen-statement
+paper-specific trust manifest, a six-bundle aggregate replay, a verification
+section that separates conceptual, classical, certificate, and Lean support,
+and a conclusion that states the exact reconstruction ladder and its
+relative/global boundaries. The full local replay and warning-free
+seventeen-page build are green. The next frontier is a fresh context-free
+referee-style coherence review. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 
@@ -262,8 +266,9 @@ marked-conic definition, general quotient proof, switch identity, explicit
 rank-three configurations, exact `3,6,10` theorem, balanced-sheet uniqueness,
 cubic-first orientation, six-profile matching-row reconstruction, modular
 depth quotient, arithmetic splitting/gluing, and the relative-cubic Tate
-appendix are in the manuscript. Continue with the Paper II-specific
-verification architecture and conclusion.
+appendix are in the manuscript. The Paper II-specific verification
+architecture and conclusion are drafted and their full local replay is
+green. Continue with a fresh context-free referee-style coherence review.
 
 ### Outward-consequence bridge
 
