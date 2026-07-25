@@ -49,7 +49,7 @@ The accompanying Lean~4 artifact uses toolchain
 \texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
 arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
-identities, the six-party LU-to-LC rigidity chain, and the transport
+identities, the length-generic LU-to-LC rigidity chain, and the transport
 polynomial and characteristic-seven identities in one environment.
 The length-generic part defines the code, equal-phase state, party action,
 and LU/LC relations on \(\operatorname{Fin}(2m)\); proves that the exact
@@ -57,14 +57,17 @@ and LU/LC relations on \(\operatorname{Fin}(2m)\); proves that the exact
 \(m\)-coordinate projection; proves the same MDS property for the dual
 and constructs full-support \((m+1)\)-coordinate shortening generators;
 and proves the arity-independent full-basis diagonal-flattening axis
-lemma.  Its \(m=3\) definitions are reconciled definitionally with the
-established six-party API.
-For linear \([6,3,4]_q\) codes, the formal proof constructs the dual
-shortenings, expands the four-party marginal on all \(q^2\) Weyl axes
-including the identity, proves marginal covariance under the displayed
-local action, recovers every local Weyl axis, and absorbs the party
-permutation.  It therefore proves the six-party specialization
-unconditionally for every finite field.  Composing it with the existing
+lemma.  The formal proof then expands every shortened
+\((m+1)\)-party marginal on all \(q^2\) Weyl axes, including the
+identity, proves covariance under the displayed product action, and
+shows that invertible product maps preserve and reflect the pure
+contraction locus of a full diagonal tensor.  Since \(m\geq2\), two
+factors remain after contraction, so the locus recovers every local Weyl
+axis.  Retained sets cover all \(2m\) parties, and the party permutation
+is absorbed into the source code.  Thus the generic LU-to-LC terminal
+proves Theorem~\ref{thm:lu-lc-rigidity} unconditionally for every finite
+field and every \(m\geq2\).  Its \(m=3\) definitions and terminal are
+reconciled with the established six-party API.  Composition with the
 admitted-pencil interface gives the formal conditional statement
 \(\mathrm{LU}\Longleftrightarrow z(t)=z(u)\).
 
@@ -73,11 +76,10 @@ marginal-trace, logical propagation, finite contraction, and transport
 orbit steps enter separate hypothesis structures; the paper constructs
 or certificate-supports them as specified above, but the Lean modules do
 not.  Importing the terminal therefore does not make them unconditional
-formal theorems.  In particular, the
-generic marginal-expansion/covariance bridge and hence the
-arbitrary-\(m\) terminal of the headline
-\([2m,m,m+1]_q\) LU-to-LC rigidity theorem, its transversal Clifford
-conversion corollary, the discrete-symmetry corollary, the exact GRS
+formal theorems.  In particular, the Choi and transposition bridge for
+the transversal Clifford conversion corollary, projective Clifford
+finiteness and the identity-component calculation in the
+discrete-symmetry corollary, the exact GRS
 transversal-group corollary, the fixed-copy generic-constancy proposition,
 the party-moving logical normalizer, and the determinant and double-coset
 inputs of the complete transport theorem are not formalized.

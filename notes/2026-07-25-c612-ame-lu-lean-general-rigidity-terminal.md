@@ -2,6 +2,9 @@
 
 **Lane:** `ame-lu`
 
+**Status:** in progress; arbitrary-\(m\) rigidity terminal complete,
+projective-finiteness/identity-component corollary open
+
 ## Goal
 
 From C601's length-generic MDS/CSS and diagonal-tensor foundations, prove the
@@ -10,6 +13,61 @@ paper's unconditional headline theorem for every finite field and every
 linear \([2m,m,m+1]\) MDS codes forces every local factor to normalize the
 finite-field Weyl system.  Derive the compatible six-party specialization
 and compose it with the existing odd-prime-field admitted-pencil interface.
+
+## Delivered
+
+The main marginal-to-rigidity chain is unconditional.
+
+- `RelativeConicArcs.AMELU.GenericMarginal` derives the complete shortened
+  CSS Weyl expansion from equal-phase amplitudes and exact MDS shortening.
+  The identity label is included with the same nonzero coefficient.
+- `RelativeConicArcs.AMELU.GenericSubsystemWeyl` and
+  `RelativeConicArcs.AMELU.GenericMarginalCovariance` prove product-Weyl
+  basis completeness and exact reduced-matrix covariance for an arbitrary
+  retained finite party type.
+- `RelativeConicArcs.AMELU.GenericTensorRigidity` proves that independent
+  invertible factor maps preserve and reflect nonzero pure arrays.  For
+  every arity at least three, contraction of a full diagonal array is pure
+  exactly on a coordinate axis, so every factor map is monomial.
+- `RelativeConicArcs.AMELU.GenericLURigidity` combines those results with
+  the retained-set cover and party-permutation transport.  Its terminal
+  `genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent`
+  proves the all-prime-power, all-\(m\geq2\) theorem directly from
+  `IsMDSCode2m`.
+- The same module proves the \(m=3\) compatibility terminal and the
+  admitted-pencil composition
+  `locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq_from_generic`.
+- `RelativeConicArcs.Gates.AMELUAggregate` imports the complete new chain,
+  and `AMELUAggregateAxioms` audits its paper-facing declarations.
+
+## Validation
+
+Guarded elaboration is warning-free for every new module.  The measured
+single-thread queue built `GenericMarginal`, `GenericPartyPermutation`,
+`GenericSubsystemWeyl`, `GenericMarginalCovariance`,
+`GenericTensorRigidity`, `GenericLURigidity`, `AMELUAggregate`, and
+`AMELUAggregateAxioms`.  The final trace-only aggregate gate passed.
+Every new audited declaration reports only `propext`, `Classical.choice`,
+and `Quot.sound`.
+
+Commits:
+
+- `791c4f15` — generic shortened marginal expansion;
+- `f4c5a209` — generic covariance and party permutations;
+- `8412ba7e` — arbitrary-arity axis recovery, LU-to-LC terminal,
+  specializations, and aggregate audit.
+
+## Open acceptance gate
+
+The manuscript's discrete-symmetry corollary is not yet formalized.
+The remaining work is not a consequence of the LU-to-LC implication alone:
+it requires a concrete quotient of the one-qudit Clifford normalizer by
+scalar phases, a proof that this quotient is finite for the repository's
+finite-field Weyl convention, the induced finite product/permutation
+extension, and a topological proof that the pre-quotient identity component
+is exactly the torus of one-site scalar phases.  No existing AME-LU or
+mathlib declaration supplies that package.  The paper trust ledgers state
+this boundary explicitly.
 
 ## Existing six-party prototype
 

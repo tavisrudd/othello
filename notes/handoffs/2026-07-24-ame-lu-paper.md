@@ -324,6 +324,18 @@ general rigidity and discreteness formalization; C613 owns the encoder,
 exact-GRS-group, and explicit-example formalization.  See
 `2026-07-25-c614-ame-lu-higher-m-applications.md`.
 
+**C612 in progress (2026-07-25): general marginal-to-rigidity terminal complete.**
+The length-generic Lean development now proves the exact shortened marginal
+expansion, local-unitary marginal covariance, arbitrary-arity tensor-axis
+rigidity, the retained-coordinate cover, and the unconditional LU-to-LC
+terminal for every prime power and every \(m\geq2\).  The six-party and
+admitted-pencil terminals are recovered from the generic theorem.  The
+warning-free aggregate build and axiom audit pass.  The remaining C612
+acceptance gate is the projective one-qudit Clifford finiteness theorem and
+the resulting scalar-phase identity-component statement, including party
+permutations.  See
+`2026-07-25-c612-ame-lu-lean-general-rigidity-terminal.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -357,8 +369,8 @@ as C559--C572.  Dependency order is authoritative:
 14. C614: higher-\(m\) encoder conversion, discrete-symmetry, exact GRS-group,
     and explicit `[[7,1,4]]_7` applications (complete).
 15. C612: shortened marginal expansion and covariance, general LU-to-LC
-    terminal, six-party specialization, and discrete-symmetry corollary
-    (next).
+    terminal, and six-party specialization (complete); projective-finiteness
+    and scalar-phase identity-component corollary (remaining).
 16. C613: AME-to-`[[2m-1,1,m]]` encoder parameters, exact Choi orientation,
     Clifford transpose closure, transversal no-go, exact GRS group, and
     explicit `[[7,1,4]]_7` terminal (queued after C612).
@@ -377,10 +389,11 @@ unconditional in `RelativeConicArcs.AMELU.LURigidity` and
 `RelativeConicArcs.AMELU.LUPencilClassification`.  C601 is complete:
 `GenericDefinitions`, `GenericMDS`, and `GenericDiagonalTensor` provide the
 length-generic code/state/action layer, exact dual `[2m,m,m+1]` shortening,
-full-basis diagonal-axis theorem, and six-party compatibility.  C612 is next;
-it constructs the full marginal expansion including the identity axis,
-covariance, general Clifford terminal, and compatible six-party/pencil
-specializations.  C613 then proves the one-leg quantum-MDS parameters, exact
+full-basis diagonal-axis theorem, and six-party compatibility.  Within C612,
+the marginal expansion including the identity axis, covariance, general
+Clifford terminal, and compatible six-party/pencil specializations are
+complete; its projective-finiteness and scalar-phase identity-component
+corollary remains.  C613 then proves the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, and transversal
 terminal.  C602 follows with a complete referee-facing audit of the AME-LU
 Lean aggregate, trust ledgers, verification prose, scholarly closure, and
