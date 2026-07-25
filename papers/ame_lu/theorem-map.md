@@ -28,7 +28,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
-- `cor:discrete-lu-symmetry`: finiteness of the projective product-unitary automorphism group.  The formal terminals are `projectiveGenericProductUnitaryAutomorphism_finite`, `projectiveGenericPermutedProductUnitaryAutomorphism_finite`, `connectedComponent_genericIdentityAutomorphism_eq_scalarPhases`, and `connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases`.
+- `cor:discrete-lu-symmetry`: finiteness of the projective product-unitary automorphism group.  The formal terminals are `projectiveGenericProductUnitaryAutomorphismGroup_finite`, `projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite`, `genericProductUnitaryContinuousProjectivization`, `genericPermutedProductUnitaryContinuousProjectivization`, `connectedComponent_genericIdentityAutomorphism_eq_scalarPhases`, and `connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases`.
 - `cor:grs-transversal-group`: exact full-Clifford transversal group of the odd-prime GRS quantum-MDS tower.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 

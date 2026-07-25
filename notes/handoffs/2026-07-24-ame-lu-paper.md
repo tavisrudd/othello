@@ -338,6 +338,18 @@ after adjoining party permutations.  The warning-free aggregate build and
 axiom audit pass.  See
 `2026-07-25-c612-ame-lu-lean-general-rigidity-terminal.md`.
 
+**C615 closed (2026-07-25): projective automorphism groups packaged.**
+The fixed-party and party-permuted product-unitary automorphism carriers are
+now explicit topological groups, with the latter using the proved
+semidirect-product law.  Independent scalar phases form a central subgroup
+in the fixed-party group and a normal subgroup after party permutations.
+Both scalar quotients are explicit quotient groups, their projectivizations
+are continuous group homomorphisms, their exact finite signature detectors
+are continuous maps, and C612's finiteness and identity-component terminals
+transfer without changing scope.  The aggregate gate and axiom audit pass
+with only `propext`, `Classical.choice`, and `Quot.sound`.  See
+`2026-07-25-c615-ame-lu-projective-automorphism-group-packaging.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -378,8 +390,8 @@ as C559--C572.  Dependency order is authoritative:
     explicit `[[7,1,4]]_7` terminal (queued after C612).
 17. C615: explicit product-unitary and party-permuted topological groups,
     normal scalar-phase torus, quotient groups, and projectivization/signature
-    homomorphisms preserving the C612 finiteness and identity-component
-    terminals (queued after C613).
+    maps preserving the C612 finiteness and identity-component terminals
+    (complete).
 18. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
     C615 (queued).
 
@@ -401,10 +413,10 @@ general Clifford terminal, compatible six-party/pencil specializations,
 projective finiteness, and scalar-phase identity component are formalized.
 C613 next proves the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, and transversal
-terminal.  C615 then upgrades C612's quotient carriers and identity-component
+terminal.  C615 has upgraded C612's quotient carriers and identity-component
 statements to explicit group/topological-group structures, normal scalar
-phases, quotient groups, and projectivization/signature homomorphisms.  C602
-follows with a complete referee-facing audit of the AME-LU Lean aggregate,
+phases, quotient groups, and structured projectivization/signature maps.  C602
+follows C613 with a complete referee-facing audit of the AME-LU Lean aggregate,
 trust ledgers, verification prose, scholarly closure, and release claims.
 
 **Token-constrained completion route:** start a fresh session with `go C613`
