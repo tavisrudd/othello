@@ -1,15 +1,17 @@
-# Paper: Local-unitary rigidity and logical Clifford phases of six-qudit AME stabilizer tensors
+# Paper: Local-unitary rigidity of MDS--CSS AME tensors and logical Clifford phases of six-qudit codes
 
-**Frozen title:** *Local-Unitary Rigidity and Logical Clifford Phases of
-Six-Qudit AME Stabilizer Tensors.*
+**Title:** *Local-Unitary Rigidity of MDS--CSS AME Tensors and Logical
+Clifford Phases of Six-Qudit Codes.*
 
 **Lane:** `ame-lu`
 
-**Status:** local release candidate. Every local-unitary intertwiner between
-equal-phase CSS states of linear `[6,3,4]_q` MDS codes is local Clifford. The
-paper-local evidence bundle, formal companion, adversarial read, and release
-manifest are complete. Public identifiers, author metadata, license choice,
-and submission authorization remain author gates.
+**Status:** version-1 revision under C609. Every local-unitary intertwiner
+between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is local
+Clifford, for every prime power and \(m\geq2\); the associated
+`[[2m-1,1,m]]_q` quantum MDS code has no transversal non-Clifford logical
+unitary. The six-party pencil and logical-phase applications retain their
+existing scopes. Public identifiers, author metadata, license choice, and
+submission authorization remain author gates.
 
 ## Build
 
@@ -41,17 +43,20 @@ replay, and release-manifest verification.
 
 ## Mathematical scope
 
-The paper studies equal-phase CSS `AME(6,q)` tensors arising from
-six-point projective arcs and their `[6,3,4]_q` MDS kernels.  Its proved core is:
+The headline theorem studies equal-phase CSS `AME(2m,q)` tensors arising
+from linear `[2m,m,m+1]_q` MDS codes.  The detailed geometric applications
+specialize to `AME(6,q)` tensors from six-point projective arcs.  Its proved
+core is:
 
-1. exact local-Clifford classification of the admitted non-GRS pencil by one
+1. uniform LU-to-LC rigidity and the associated transversal Clifford no-go;
+2. exact local-Clifford classification of the admitted non-GRS pencil by one
    bracket scalar `z`;
-2. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
+3. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
    locus;
-3. uniform arbitrary-LU separation of good H3 reductions from every GRS
+4. uniform arbitrary-LU separation of good H3 reductions from every GRS
    class;
-4. an exact four-copy separator for the difficult `q=13` pair; and
-5. a transport-sheaf explanation of the exceptional contraction divisor and
+5. an exact four-copy separator for the difficult `q=13` pair; and
+6. a transport-sheaf explanation of the exceptional contraction divisor and
    its multiplicities.
 
 Fixed-copy permutation contractions cannot supply a generic pencil
@@ -59,9 +64,9 @@ coordinate: on an equal-phase linear-code state each is a power of `q`
 determined by a linear-system rank.  Their maximal minors detect special
 rank-jump divisors, but their values are generically constant.
 
-For the admitted odd non-GRS pencil, C560 and C396 give
+For the admitted odd non-GRS pencil, C609/C560 and C396 give
 `LU iff LC iff z equality`.  The all-MDS/CSS theorem is stronger: every LU
-intertwiner is Clifford.  This is a theorem for the stated six-qudit
+intertwiner is Clifford.  This is a theorem for the stated linear
 MDS/CSS family, not a revival of the false global LU--LC conjecture.
 
 ## Initial source set

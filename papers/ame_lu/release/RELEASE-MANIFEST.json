@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-24",
-  "title": "Local-Unitary Rigidity and Logical Clifford Phases of Six-Qudit AME Stabilizer Tensors",
+  "title": "Local-Unitary Rigidity of MDS--CSS AME Tensors and Logical Clifford Phases of Six-Qudit Codes",
   "public_export": {
     "artifacts": [
       {
@@ -11,19 +11,19 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 166072,
+        "bytes": 170514,
         "path": "ame-lu.pdf",
-        "sha256": "89bf865fc3725250d13f5d1b5ec137894254512fecfb63635ce21f797b084af2"
+        "sha256": "3c7e23baabf69899ec710f2cf49b9bc09eb6cf0399424bf33db77485ab3e80a7"
       },
       {
-        "bytes": 11856,
+        "bytes": 11957,
         "path": "formal-statement-adequacy.md",
-        "sha256": "9137cab2431ddc422a0a58ec6c86ea83c656d3c6e98de7381ac87fc9067ffe93"
+        "sha256": "b6d4ad57084f54d0d0e9bcc390530ace6ac3410fb36bebb0be9f7e5d31969ed3"
       },
       {
-        "bytes": 3128,
+        "bytes": 3060,
         "path": "main.tex",
-        "sha256": "656694a52dd77d4be240b80a5d2f9ee16ad3d363e9b4673be64a8b0e300531ae"
+        "sha256": "2f39aabb5b068340c5b57ea5a49a2db6cf3b3c7c0ce97c9577d62b6c33f9ebb3"
       },
       {
         "bytes": 5941,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 6957,
+        "bytes": 6964,
         "path": "release/verify_release.py",
-        "sha256": "24d710e80057bf6544e9b4a143e28933970ab83abc44df53a9bd270fe61eadf8"
+        "sha256": "7370d17389d40de37fc80fb9a7a1d2ccc6617decddb0b64261756f9c7e6b225a"
       },
       {
-        "bytes": 7058,
+        "bytes": 7786,
         "path": "sections/01-introduction.tex",
-        "sha256": "e712655f67e378617d7d83edd4316a8586fe84fb2e62fdd308c9a6e1c633ca59"
+        "sha256": "40719748e457af16f0babeb91e6378b69b1e994b2b890d04114eaeb7705f6623"
       },
       {
         "bytes": 4299,
@@ -56,9 +56,9 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 3865,
+        "bytes": 5118,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "844bdcb643b3871ea05fcd34324a62d310ac1ffc3d3e233be0f3d931645d64fe"
+        "sha256": "5402c8d2ec251718eb3946525e6d01e2adcf8ceba92bc9adb7dc860e4ad2b3f8"
       },
       {
         "bytes": 6002,
@@ -81,9 +81,9 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 5984,
+        "bytes": 6082,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "64da4faadf13183af1e3cdd45fd8d80e4b31d540ecee222c2ecc6f6cb4fecb56"
+        "sha256": "aeefcffad4b129290fbe62991f089ee8832318603c6f34f63c101c3df5c53a87"
       },
       {
         "bytes": 3473,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "77023a6bdaee3b45ec9099a950c903827e9f53f34933e7c793d712bb29313633"
+    "tree_sha256": "567692bb11ee691952a20a2d664a872e47e56c5a4c8375aff3cb62b2953fe35a"
   },
   "formal_companion": {
     "artifacts": [

@@ -88,8 +88,8 @@ def create_manifest() -> dict[str, object]:
         "release": "ame-lu-rc1",
         "date": "2026-07-24",
         "title": (
-            "Local-Unitary Rigidity and Logical Clifford Phases of "
-            "Six-Qudit AME Stabilizer Tensors"
+            "Local-Unitary Rigidity of MDS--CSS AME Tensors and "
+            "Logical Clifford Phases of Six-Qudit Codes"
         ),
         "public_export": {
             "artifacts": public,

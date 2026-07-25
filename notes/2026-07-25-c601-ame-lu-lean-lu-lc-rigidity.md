@@ -4,18 +4,23 @@
 
 ## Goal
 
-Formalize the paper's headline theorem for every finite field: if equal-phase
-states of two linear `[6,3,4]` MDS codes are related by a party permutation and
-six local unitaries, then every local unitary normalizes the finite-field Weyl
-system. Export the resulting local-Clifford equivalence and the
-admitted-pencil `LU iff LC iff z` composition without strengthening the
-extension-field scalar classification.
+Formalize the paper's version-1 headline package for every finite field and
+every `m≥2`: if equal-phase states of two linear `[2m,m,m+1]` MDS codes are
+related by a party permutation and `2m` local unitaries, then every local
+unitary normalizes the finite-field Weyl system.  Formalize the Choi
+corollary that every product physical unitary implementing a logical gate on
+the associated `[[2m-1,1,m]]` quantum MDS code has Clifford physical factors
+and Clifford logical action.  Specialize the general theorem back to six
+parties and export the admitted-pencil `LU iff LC iff z` composition without
+strengthening the extension-field scalar classification.
 
 ## Existing foundation
 
-- `RelativeConicArcs.AMELU.Definitions` fixes states, marginals, local actions,
-  local-unitary equivalence, Weyl matrices, Clifford matrices, and
-  local-Clifford equivalence.
+- `RelativeConicArcs.AMELU.Definitions` fixes six-party states, marginals,
+  local actions, local-unitary equivalence, Weyl matrices, Clifford matrices,
+  and local-Clifford equivalence.  These definitions cannot state the new
+  theorem unchanged: C601 must first factor out a length-generic layer over
+  `Fin (2*m)` and recover the existing six-party API by specialization.
 - `RelativeConicArcs.AMELU.StabilizerDictionary` proves the CSS stabilizer
   equation, supported-label criterion, Lagrangian property, and
   `[6,3,4]`/AME dictionary.
@@ -26,10 +31,11 @@ extension-field scalar classification.
 
 ## Tao-style planning pass
 
-The theorem crosses three mathematical languages: tensor rank, MDS shortening,
-and unitary/Weyl conjugation. The main risk is formalizing all three
-simultaneously inside a six-party density-matrix calculation. The proof should
-instead expose the invariant that makes each language change inevitable.
+The theorem crosses four mathematical languages: general linear codes, tensor
+rank, unitary/Weyl conjugation, and Choi encoders.  The main risk is allowing
+the existing six-coordinate API to dictate a second, incompatible formal
+model.  The proof should first isolate a length-generic algebraic core and
+make the six-party declarations thin specializations.
 
 Questions to settle before freezing an API:
 
@@ -38,56 +44,78 @@ Questions to settle before freezing an API:
    invertible factor maps and matrix rank should suffice.
 2. Can the axis lemma conclude monomiality directly, avoiding a general
    projective intrinsic-locus framework unused elsewhere?
-3. Which exact shortening theorem follows from `IsMDSCode634` by rank-nullity,
-   and which dual-code lemma supplies the second generator?
-4. Can the four-party stabilizer expansion be proved once as equality of
+3. Should the generic MDS hypothesis be projection-bijectivity on every
+   `m`-set or minimum distance plus dimension?  Prefer the former if it makes
+   shortening and AME immediate, but prove its equivalence to the paper's
+   `[2m,m,m+1]` terminology.
+4. Which dual-MDS theorem supplies the second one-dimensional shortening
+   without importing a fixed-length coding hierarchy?
+5. Can the `(m+1)`-party stabilizer expansion be proved once as equality of
    matrix-entry arrays rather than through a new operator-algebra hierarchy?
-5. What is the smallest covariance lemma saying that a six-party local action
+6. What is the smallest covariance lemma saying that a `2m`-party local action
    descends to product conjugation on a selected marginal?
-6. Does axis permutation plus the fixed identity axis prove the current
+7. Does axis permutation plus the fixed identity axis prove the current
    `IsCliffordMatrix` definition directly, with the correct conjugation
    orientation and a nonzero scalar?
-7. Can the cover corollary be independent of the special choice of two
-   four-sets, so the formal theorem displays the real combinatorial hypothesis?
+8. Can the Choi theorem reuse a general reshape/isometry API, and can the
+   transpose bridge prove directly that `(Lᵀ)⁻¹` Clifford implies `L`
+   Clifford under the finite-field Weyl convention?
+9. Can the cover terminal quantify over arbitrary retained `(m+1)`-sets so
+   the statement displays the real combinatorial hypothesis?
 
 The highest-value simplification is to make the diagonal-axis theorem
-independent of AME, codes, finite fields, and Hilbert-space terminology. The
-highest-risk seam is the exact four-party marginal expansion: derive it from
-the normalized equal-phase state and CSS stabilizer equation, not from an
-unconstructed input structure. The second risk is hidden use of surjectivity
-when the supported stabilizer plane is projected to a local Weyl label; prove
-a linear equivalence at each retained party.
+independent of AME, codes, finite fields, and Hilbert-space terminology.  The
+highest-risk seam is the generic code layer: the theorem must conclude from a
+faithful formalization of `[2m,m,m+1]` MDS, not from a purpose-built
+shortening hypothesis.  The second risk is the exact shortened marginal
+expansion; derive it from the normalized equal-phase state and CSS stabilizer
+equation, not from an unconstructed input structure.
 
 ## Theorem decomposition
 
-1. **Diagonal tensor.** Define the finite array, one-factor contraction, and
+1. **Length-generic code/state interface.**  Define linear codes on
+   `Fin (2*m)`, equal-phase states, subsystem marginals, product local actions,
+   and the MDS condition in a form equivalent to the paper's
+   `[2m,m,m+1]` parameters.  Prove dual MDS, AME, and the specialization
+   bridges to the existing six-party definitions.
+2. **Diagonal tensor.** Define the finite array, one-factor contraction, and
    flattening matrix. Prove that the flattening has rank one exactly for a
    nonzero coordinate-axis covector. Deduce that invertible product maps
    carrying one full diagonal tensor to another are monomial in every factor.
-2. **MDS shortening.** For a four-party set, prove that codewords supported
-   there form a one-dimensional subspace for both `C` and `C^\perp`; construct
-   nonzero generators, prove exact support, and prove that the product plane
-   projects bijectively to `𝔽 × 𝔽` at every retained party.
-3. **Marginal Weyl expansion.** Express the identity-subtracted four-party
-   marginal as the full diagonal tensor indexed by
+3. **MDS shortening.** For an `(m+1)`-party set, prove that codewords
+   supported there form a one-dimensional subspace for both `C` and
+   `C^\perp`; construct nonzero generators, prove exact support, and prove
+   that the product plane projects bijectively to `𝔽 × 𝔽` at every retained
+   party.
+4. **Marginal Weyl expansion.** Express the identity-subtracted
+   `(m+1)`-party marginal as the full diagonal tensor indexed by
    `𝔽² \ {(0,0)}`, with nonzero coefficients and orthogonal local Weyl axes.
-4. **Covariance and Clifford bridge.** Prove that global local-unitary
+5. **Covariance and Clifford bridge.** Prove that global local-unitary
    equivalence gives product conjugacy of each selected marginal. Apply the
    axis theorem to permute nonidentity Weyl axes, include the identity axis,
    and discharge `IsCliffordMatrix`.
-5. **Six-party terminal.** Cover all parties by four-sets and conclude that
-   every local factor is Clifford. Export the unconditional
-   `LocallyUnitaryEquivalent → LocallyCliffordEquivalent` theorem for
-   equal-phase `[6,3,4]` states.
-6. **Pencil composition.** Over the manuscript's odd-prime-field scope,
+6. **General rigidity terminal.** Cover all `2m` parties by retained
+   `(m+1)`-sets and conclude that every local factor is Clifford. Export the
+   unconditional `LocallyUnitaryEquivalent → LocallyCliffordEquivalent`
+   theorem for equal-phase `[2m,m,m+1]` states, then derive the existing
+   `[6,3,4]` theorem by specialization.
+7. **Choi/transversal terminal.**  Define the normalized Choi state of an
+   encoder, prove the action identity from `U_phys V = V L`, show that
+   transpose and inverse preserve the finite-field Clifford normalizer, and
+   conclude that the physical factors and logical factor are Clifford.
+8. **Pencil composition.** Over the manuscript's odd-prime-field scope,
    compose the new theorem with the existing conditional pencil
    classification interface. Do not claim scalar classification over
    extension fields.
 
-Likely module boundaries are an algebraic diagonal-tensor module, an
-MDS-supported-plane module, and an AME-LU rigidity module, followed by an
-import-only gate and axiom audit. Choose final names after small elaborating
-probes establish which mathlib matrix-rank and finite-dimensional APIs fit.
+Likely module boundaries are a generic MDS/CSS definitions module, an
+algebraic diagonal-tensor module, an MDS-shortening module, a shortened
+marginal module, an LU-rigidity module, and a Choi/transversal module,
+followed by import-only gates and axiom audits.  Keep the six-party
+specialization in a thin compatibility module so the existing pencil
+formalization does not depend on a duplicate state model.  Choose final names
+after small elaborating probes establish which mathlib matrix-rank,
+finite-dimensional, and tensor-product APIs fit.
 
 ## Validation and acceptance
 
@@ -103,28 +131,42 @@ probes establish which mathlib matrix-rank and finite-dimensional APIs fit.
   and no overstated strength.
 - The manuscript theorem, formalization ledger, statement-adequacy map,
   verification section, and exact Lean declarations agree field for field.
-- The terminal is unconditional from `IsMDSCode634`, the explicit Weyl
-  convention, and displayed local-unitary equivalence. The diagonal-axis,
-  shortening, marginal, and covariance steps may not remain as unconstructed
-  input fields.
+- The general terminal is unconditional from a definition proved equivalent
+  to linear `[2m,m,m+1]` MDS, the explicit Weyl convention, and the displayed
+  local-unitary equivalence. The diagonal-axis, dual shortening, marginal,
+  covariance, transpose, and Choi steps may not remain as unconstructed input
+  fields.
+- The six-party specialization is definitionally or propositionally
+  reconciled with the existing `IsMDSCode634`, `equalPhaseState`,
+  local-equivalence, and pencil APIs; no parallel notion may be left at the
+  paper boundary.
 
 ## Stop conditions
 
-Stop and report a reduced counterexample if the current local-unitary or
-Clifford definitions do not express the manuscript action faithfully. Stop
-rather than weakening the gate if matrix rank forces unsafe or native
-execution. If the shared finite-geometry layer lacks a reusable shortening
-theorem, prove the narrow six-coordinate result locally unless a shared change
-is separately owned and all affected gates can be validated.
+Stop and report a reduced counterexample if the current local-unitary,
+Clifford, Choi, or code definitions do not express the manuscript actions
+faithfully. Stop rather than weakening the gate if matrix rank forces unsafe
+or native execution.  Do not retreat to the narrow six-coordinate theorem:
+if the shared coding layer lacks a reusable MDS dual/shortening theorem, build
+the narrowest length-generic theorem inside `RelativeConicArcs.AMELU` and
+validate every affected AME gate.
 
 ## Mystery ledger
 
 - **Unsettled:** whether the diagonal-axis lemma is cheapest via `Matrix.rank`,
   range dimension, or explicit nonzero minors. A bounded prototype decides
   this before the public API is frozen.
-- **Unsettled:** whether the four-party marginal expansion is shorter from
-  amplitudes or from a general stabilizer-projector identity. Choose the route
-  with the smaller trust and dependency closure.
+- **Unsettled:** whether the shortened marginal expansion is shorter from
+  amplitudes or from a general stabilizer-projector identity. Generalize the
+  chosen route to `(m+1)` parties with the smaller trust and dependency
+  closure.
+- **Unsettled:** whether the existing six-party state and action definitions
+  are specializations of a clean generic API or require proved extensional
+  equivalences.  A bounded interface prototype settles this before public
+  names are frozen.
+- **Unsettled:** whether mathlib already exposes the exact Choi transpose
+  identity in the required tensor convention.  If not, prove the finite
+  matrix-entry identity locally.
 - **Settled:** quantitative stability is unnecessary for exact LU-to-LC;
   C581 owns that separate gate.
 - **Settled:** extension-field Frobenius affects the pencil scalar

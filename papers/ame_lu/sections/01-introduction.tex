@@ -1,15 +1,16 @@
 \section{Introduction}
 
 An absolutely maximally entangled state has maximally mixed reductions on
-every subsystem no larger than half the parties.  At minimum support, a
-six-party state of local dimension \(q\) is naturally supplied by a
-length-six MDS code: if \(C\leq\F_q^6\) is linear of dimension three, then
+every subsystem no larger than half the parties.  A linear
+\([2m,m,m+1]_q\) MDS code supplies such a state at minimum support:
+if \(C\leq\F_q^{2m}\), then
 \[
   \lvert\Psi_C\rangle
-    =q^{-3/2}\sum_{c\in C}\lvert c\rangle                       \tag{1.1}
+    =q^{-m/2}\sum_{c\in C}\lvert c\rangle                       \tag{1.1}
 \]
-is \(\AME(6,q)\) exactly when \(C\) is \([6,3,4]_q\) MDS.  This
-code--state dictionary is standard
+is \(\AME(2m,q)\); conversely, the equal-phase state of a linear
+\([2m,m]_q\) code is AME only if the code is MDS.  This code--state
+dictionary is standard
 \cite{RaissiGogolinRieraAcin2018}.  Our question is how much of the code
 geometry survives arbitrary single-party changes of basis.
 
@@ -19,43 +20,61 @@ the following result concerns a specific MDS/CSS family and says more than
 equality of two orbit partitions.
 
 \begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
-Let \(q\) be a prime power and let \(C,D\leq\F_q^6\) be linear
-\([6,3,4]_q\) MDS codes.  Suppose that, for a party permutation \(\pi\),
-single-qudit unitaries \(U_1,\ldots,U_6\), and a phase \(\theta\),
+Let \(q\) be a prime power, let \(m\geq2\), and let
+\(C,D\leq\F_q^{2m}\) be linear \([2m,m,m+1]_q\) MDS codes.
+Suppose that, for a party permutation \(\pi\), single-qudit unitaries
+\(U_1,\ldots,U_{2m}\), and a phase \(\theta\),
 \[
- (U_1\otimes\cdots\otimes U_6)\pi\lvert\Psi_C\rangle
+ (U_1\otimes\cdots\otimes U_{2m})\pi\lvert\Psi_C\rangle
    =e^{i\theta}\lvert\Psi_D\rangle .
 \]
 Then every \(U_i\) normalizes the finite-field Weyl system.  In particular,
 the displayed equivalence is local Clifford.
 \end{theorem}
 
-The mechanism is visible in one reduced operator.  Shortening both \(C\)
-and \(C^\perp\) to four parties gives a \(q^2\)-element stabilizer
-subgroup.  At each retained party its \(q^2-1\) nonidentity elements run
-bijectively through the nonidentity Weyl operators.  After the identity
-term is removed, the four-party reduced state is therefore a diagonal
-four-way tensor on the full Weyl basis.  A contraction of such a tensor
-has rank one exactly on its coordinate axes.  Those axes are intrinsic,
-so any product unitary carrying one reduced state to another must permute
-the local Weyl axes.  This is precisely the Clifford condition.
+\begin{corollary}[Transversal Clifford no-go]
+\label{cor:transversal-clifford}
+Let \(V:\mathbb C^q\to(\mathbb C^q)^{\otimes(2m-1)}\) be an encoding
+isometry whose normalized Choi state is \(\lvert\Psi_C\rangle\) as in
+Theorem~\ref{thm:lu-lc-rigidity}.  Thus \(V\) encodes the associated
+\([[2m-1,1,m]]_q\) quantum MDS code.  If
+\[
+ (U_1\otimes\cdots\otimes U_{2m-1})V=VL
+\]
+for a logical unitary \(L\), then \(L\) and every \(U_i\) are Clifford.
+In particular, this code admits no transversal non-Clifford logical
+unitary.
+\end{corollary}
+
+The mechanism is visible in one reduced operator.  Retain any \(m+1\)
+parties and shorten both \(C\) and \(C^\perp\) on the other \(m-1\).
+Each shortening is \([m+1,1,m+1]_q\), and together they give a
+\(q^2\)-element stabilizer subgroup.  At every retained party its
+\(q^2-1\) nonidentity elements run bijectively through the nonidentity
+Weyl operators.  After the identity term is removed, the reduced state
+is a diagonal \((m+1)\)-way tensor on the full Weyl basis.  A contraction
+of this tensor has rank one exactly on a coordinate axis.  Those axes
+are intrinsic, so any product unitary carrying one reduced state to
+another must permute the local Weyl axes.  This is precisely the
+Clifford condition.  The corollary follows by applying the theorem to
+the Choi state of a transversal logical action.
 
 Rains used the corresponding three-Pauli tensor to determine the
 automorphisms of qubit distance-two codes \cite[Theorem~13]{Rains1999},
 and Van den Nest, Dehaene, and De Moor used that rigidity in their
 minimal-support criterion for qubit stabilizer states
 \cite{VanDenNestDehaeneDeMoor2005}.  Our argument is a finite-field
-extension of this axis-recovery mechanism.  Our literature search for
-this claim covered LU--LC equivalence for stabilizer states and LU
-equivalence of minimal-support AME states.  Within that scope, we found no earlier LU-to-LC
-theorem for equal-phase CSS states from linear \([6,3,4]_q\) MDS codes,
-uniformly over prime-power \(q\).
+extension of this axis-recovery mechanism.  The contribution here is its
+uniform realization for equal-phase CSS states from linear
+\([2m,m,m+1]_q\) MDS codes, together with the transversal corollary.
+We do not claim a new LU--LC mechanism in the abstract.
 The qualifier is essential: arbitrary phased minimal-support
 \(\AME(6,d)\) states form infinitely many LU classes
 \cite{RamadasLakshminarayan2025}, and neither nonlinear orthogonal arrays
-nor general six-qudit stabilizer states are covered here.
+nor general stabilizer states are covered here.
 
-Our main application is the ordered pencil
+For the rest of the paper we specialize to \(m=3\).  Our main application
+is the ordered pencil
 \[
 H_t=\bigl((0,1,1-t),(0,1,t-1),(1,1-t,0),(1,t-1,0),
           (1,0,-t),(1,0,t)\bigr).                              \tag{1.2}
@@ -129,7 +148,8 @@ survey of Ball and Lavrauw
 
 The rest of the paper separates classification from explicit scalar
 certificates.  Section~\ref{sec:dictionary} fixes the arc, code, Weyl, and
-AME conventions.  Section~\ref{sec:rigidity} proves the headline theorem.
+AME conventions.  Section~\ref{sec:rigidity} proves the headline theorem
+and its transversal corollary.
 Section~\ref{sec:pencil} proves the \(z\)-classification, and
 Section~\ref{sec:logical} proves the logical-Clifford phase theorem:
 \(\mathrm{SL}_2(q)\) on the GRS locus and a split torus off it.

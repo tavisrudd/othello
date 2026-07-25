@@ -6,14 +6,16 @@ specific proof location or evidence record.
 | Risk | Present status | Closure gate |
 |---|---|---|
 | “LU=LC” is read as the false global conjecture | closed in Theorem 1.1 and Section 8 | exact linear MDS/equal-phase CSS scope stated at first use and in final boundary |
-| Equality of orbit partitions is confused with classification of all LU intertwiners | closed in Theorem 1.1 | headline theorem quantifies over every intertwiner; Corollary 1.2 is separate |
+| Equality of orbit partitions is confused with classification of all LU intertwiners | closed in Theorem 1.1 | headline theorem quantifies over every intertwiner; the six-party orbit classification is Corollary 1.3 |
+| The arbitrary-\(m\) theorem silently reuses a six-coordinate formula | closed in Section 3 | dual MDS shortening is stated for `[2m,m,m+1]`, the retained set has size `m+1`, and the general stabilizer partial trace is displayed before the tensor argument |
+| The transversal corollary has the Choi transpose on the wrong side or assumes transpose preserves Cliffordness | closed after Theorem 1.1 | the proof displays `((L^T)^{-1}⊗U_phys)|Ψ_C⟩=|Ψ_C⟩` and derives transpose stability from entrywise conjugation plus adjoint |
 | A Pauli or holonomy signature is used as an arbitrary-LU invariant | closed in Sections 4 and 6 | holonomy used only for LC; LU claims use reduced-operator covariance or basis-free contractions |
 | The scalar `z` is claimed LU-complete from finite samples | closed in Sections 3--4 | exact bracket quotient plus uniform LU-to-LC rigidity, not interpolation |
 | Exceptional characteristics are silently removed | closed in Sections 4, 7, and 8 | admitted pencil equation and detector-only exception table are explicit |
 | The H3/GRS theorem is generalized to the whole pencil | closed in Theorem 6.1 | exact odd good non-GRS H3 domain retained |
 | Four-copy rank drop is mistaken for a complete coordinate | closed after Theorem A.1 | generic-constancy proposition and closing warning distinguish divisor from coordinate |
 | Computational evidence lacks a public replay | closed by C563 | `supplement/EVIDENCE.md`, manifest, exact generators/certificates, and `verify.py --replay` |
-| Classical six-point invariant theory is presented as new | closed by C562 and Sections 1/8 | novelty claim restricted to the exact full-Weyl MDS/CSS LU-rigidity scope |
+| Classical six-point invariant theory or the axis mechanism is presented as new | closed by C562 and Sections 1/8 | Rains--Van den Nest ancestry is explicit; the contribution is stated by exact full-Weyl MDS/CSS and transversal scope without a “first” or absence claim |
 | The manuscript inherits report terminology without defining conventions | closed in Section 2 | projective, monomial, Weyl, Clifford, stabilizer, GRS, and party actions defined |
 
 ## C571 independent cold-read closures
@@ -36,7 +38,7 @@ were judged clear and convincing. The following defects were then repaired.
 | transport type exhaustion, minors, and double cosets were hidden | Appendix A distinguishes the conceptual systematization from certificate-supported cycle-cover exhaustion, exact minors, representatives, stabilizers, intersections, and supports | trust boundary and completeness bridge explicit |
 | exceptional-characteristic table lacked derivation | Appendix A displays the characteristic `3,5,7` factor identities and gives the exact-minor reason that `7,11,13,41` have no larger kernel | exceptional arithmetic reconciled with theorem |
 | the paper ended administratively | Section 8 now ends with the mathematical contrast between Weyl-axis covariants and generically blind scalars | hierarchy restored |
-| second cold read found that full extension-field Cliffords are larger than `SL₂(q)` | Theorems 4.1, 5.1, and Corollary 1.2 now restrict their quantum clauses to odd prime fields; Section 4 records the exact admitted `q=25` Frobenius counterexample `t=s`, `u=-s`, `z(s)≠z(-s)` | release-blocking scope error corrected; all-prime-power Theorem 1.1 remains unchanged |
+| second cold read found that full extension-field Cliffords are larger than `SL₂(q)` | Theorems 4.1, 5.1, and Corollary 1.3 restrict their quantum clauses to odd prime fields; Section 4 records the exact admitted `q=25` Frobenius counterexample `t=s`, `u=-s`, `z(s)≠z(-s)` | release-blocking scope error corrected; the now-general all-prime-power Theorem 1.1 remains unchanged |
 | the displayed definition of \(\mathcal K_C\subseteq\mathrm{SL}_2(q)^6\) could recreate the retracted extension-field claim | Section 5 now assumes \(q\) odd prime before defining \(\mathcal K_C\) and contrasts its blocks with the full \(\mathrm{Sp}_{2e}(\F_p)\) extension-field action | scope caveat moved to first use |
 | the proof asserted the unsupported exact set \(b\in\{0,1,2,3,4,6\}\) although it established only \(b\leq6\) | Theorem 6.1 now states only the needed bound and records the octahedral equality case | stronger unproved exclusion removed; \(70>66\) argument unchanged |
 | the logical-phase positioning did not separate prior GRS gate constructions from the paper's contribution | the introduction now credits quantum RS encoders, polynomial-code gate procedures, and general stabilizer Clifford gadgets, disclaims priority for the GRS constructions, and identifies the new claim as the fixed-party self-association iff classification | novelty boundary made explicit |
@@ -44,7 +46,7 @@ were judged clear and convincing. The following defects were then repaired.
 | Theorem 6.1's characteristic-five vacuity appeared only in the proof | the theorem statement now says explicitly that the non-GRS hypothesis is vacuous in characteristic five | exceptional-field scope visible at first use |
 | the octahedral equality case was phrased as though every field contained the required subgroup | the proof now conditions attainment on the existence of an octahedral \(S_4\subseteq\mathrm{PGL}_2(q)\) | equality case no longer overgeneralized |
 | Proposition 6.3 used one field both as parameter base and local Hilbert-space cardinality without saying so | the proposition names \(k\), identifies \(q=|k|\) with the local dimension under the code--state dictionary, and declares \(X/k\) | the two roles are explicit |
-| “redundant witness” had no local referent | the introduction now says that the appendix witness is redundant specifically by Corollary 1.2 | redundancy claim is theorem-linked |
+| “redundant witness” had no local referent | the introduction says that the appendix witness is redundant specifically by the admitted-pencil classification, now Corollary 1.3 | redundancy claim is theorem-linked |
 | the fixed-party dichotomy novelty sentence lacked a stated search scope | the introduction now lists the quantum RS/polynomial-code, stabilizer-Clifford, and transversal-gate literatures screened | bounded search scope stated without an exhaustive priority claim |
 
 ## Formal-coverage adversarial checklist

@@ -1124,8 +1124,17 @@
       "last": 609,
       "purpose": "general MDS-CSS LU rigidity and transversal no-go version-1 revision",
       "sequence": 125
+    },
+    {
+      "count": 2,
+      "first": 610,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 611,
+      "purpose": "Paper I exterior-set framing now; broader mechanism and cross-paper disposition follow-up",
+      "sequence": 126
     }
   ],
-  "next_id": 610,
+  "next_id": 612,
   "schema": "codex-task-id-allocations-v1"
 }

@@ -2,8 +2,8 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper titled *Local-Unitary Rigidity and Logical
-Clifford Phases of Six-Qudit AME Stabilizer Tensors*.
+**Purpose:** complete the paper titled *Local-Unitary Rigidity of MDS--CSS
+AME Tensors and Logical Clifford Phases of Six-Qudit Codes*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
@@ -296,6 +296,18 @@ confirmed.  The warning-free 16-page build, all seven evidence replays, and
 public/formal release checks pass.  See
 `2026-07-24-c600-ame-lu-local-referee-corrections.md`.
 
+**C609 closed (2026-07-25): uniform version-1 headline adopted.**
+The LU-to-LC theorem now holds for every prime power, every \(m\geq2\), and
+every existing linear `[2m,m,m+1]_q` MDS/CSS equal-phase state.  Its Choi
+corollary proves that the associated `[[2m-1,1,m]]_q` quantum MDS code has
+only Clifford product logical implementations, with every physical factor
+Clifford.  The proof uses the same rank-one axis mechanism after the general
+dual shortening `[2m,m,m+1] -> [m+1,1,m+1]`; the six-party pencil and
+logical-phase scopes are unchanged.  The warning-free 17-page build and
+release gates pass.  C601 is re-scoped to formalize the general theorem and
+transversal corollary before C602's aggregate audit.  See
+`2026-07-25-c609-ame-lu-uniform-rigidity-v1.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -323,8 +335,10 @@ as C559--C572.  Dependency order is authoritative:
     and transversal-gate positioning closure (complete).
 12. C600: final theorem-local scope, referent, parameter-setting, sharpness,
     and bounded search-scope corrections (complete).
-13. C601: unconditional Lean formalization of the headline LU-to-LC rigidity
-    theorem and the prime-field admitted-pencil composition (queued).
+13. C601: unconditional Lean formalization of the general
+    `[2m,m,m+1]` LU-to-LC rigidity theorem, its `[[2m-1,1,m]]`
+    Choi/transversal corollary, the compatible six-party specialization, and
+    the prime-field admitted-pencil composition (queued).
 14. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
     C601 (queued).
 
@@ -335,12 +349,15 @@ planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
 space before attempting extension-field or approximate rigidity.
 
 C601 is queued to close the paper's principal formalization gap: the
-all-prime-power LU-to-LC rigidity theorem. Its Tao-style planning report
-separates the work into an abstract diagonal-tensor axis theorem, exact
-`[6,3,4]` shortening and local-label bijectivity, the four-party marginal Weyl
-expansion, marginal covariance, and the six-party Clifford terminal. C602
-follows with a complete referee-facing audit of the AME-LU Lean aggregate,
-trust ledgers, verification prose, scholarly closure, and release claims.
+all-prime-power, all-\(m\) LU-to-LC rigidity theorem and its transversal
+corollary. Its Tao-style planning report separates the work into a
+length-generic code/state layer, an abstract diagonal-tensor axis theorem,
+exact dual `[2m,m,m+1]` shortening and local-label bijectivity, the shortened
+marginal Weyl expansion, marginal covariance, the general Clifford terminal,
+the Choi/transposition bridge, and the compatible six-party/pencil
+specializations. C602 follows with a complete referee-facing audit of the
+AME-LU Lean aggregate, trust ledgers, verification prose, scholarly closure,
+and release claims.
 
 ## Completion gates
 

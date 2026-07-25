@@ -1,4 +1,4 @@
-\section{Four-party Weyl tensors and LU rigidity}\label{sec:rigidity}
+\section{Shortened Weyl tensors and LU rigidity}\label{sec:rigidity}
 
 We first isolate the linear-algebra statement that recovers a diagonal
 tensor's coordinate axes.  It is the full-Weyl counterpart of the
@@ -30,10 +30,13 @@ rank-one contraction locus, and hence permutes the axes in the first
 factor.  Apply the same argument in every factor.
 \end{proof}
 
-Fix a four-party set \(S\).  Shortening an \([6,3,4]\) MDS code on the two
-coordinates outside \(S\) leaves a one-dimensional code.  Choose nonzero
-shortened words \(c^S\in C\) and \(h^S\in C^\perp\).  Each has support
-exactly \(S\), and
+Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
+\(S\) of size \(m+1\).  Shortening \(C\) on the \(m-1\) coordinates
+outside \(S\) gives an \([m+1,1,m+1]_q\) MDS code.  The dual
+\(C^\perp\) has the same parameters, so its corresponding shortening
+does as well.  Choose nonzero shortened words
+\(c^S\in C\) and \(h^S\in C^\perp\).  Each has support exactly \(S\),
+and
 \[
  L_C(S)=
  \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.2}
@@ -47,20 +50,26 @@ which is invertible because both coordinates are nonzero.  Thus the
 \(q^2-1\) nonidentity labels in \(L_C(S)\) run bijectively through the
 nonidentity Weyl labels at every party of \(S\).
 
-\begin{proposition}[A four-party marginal fixes the local Weyl axes]
+\begin{proposition}[A shortened marginal fixes the local Weyl axes]
 \label{prop:marginal-axes}
-If a product unitary on \(S\) carries \(\rho^C_S\) to \(\rho^D_S\), then
-every one of its four local factors is Clifford.
+Let \(C,D\leq\F_q^{2m}\) be linear \([2m,m,m+1]_q\) MDS codes.  If a
+product unitary on an \((m+1)\)-set \(S\) carries \(\rho^C_S\) to
+\(\rho^D_S\), then every local factor on \(S\) is Clifford.
 \end{proposition}
 
 \begin{proof}
-Subtract the identity term from \((2.1)\) and view the result as a tensor
-in the four traceless local Hilbert--Schmidt spaces, each of dimension
+For a general equal-phase CSS state, the same stabilizer partial-trace
+calculation as in \((2.1)\) gives
+\[
+ \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .
+\]
+Subtract the identity term and view the result as a tensor in the
+\(m+1\) traceless local Hilbert--Schmidt spaces, each of dimension
 \(q^2-1\).  Conjugation preserves these spaces.  By \((3.2)\), after
-indexing the nonzero label \(v=(a,b)\), the tensor has the form
+indexing the nonzero label \(v=(a,b)\), this tensor has the form
 \[
  T^C_S=\sum_{v\in\F_q^2\setminus\{0\}}\lambda_v
- W_{L_1v}\otimes W_{L_2v}\otimes W_{L_3v}\otimes W_{L_4v},     \tag{3.3}
+ \bigotimes_{i\in S}W_{L_iv},                                  \tag{3.3}
 \]
 where every \(L_i\) is invertible and every coefficient \(\lambda_v\) is
 nonzero.  This is a diagonal tensor with \(N=q^2-1\).
@@ -75,15 +84,38 @@ single-qudit Clifford condition.
 
 \begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
 Absorb the party permutation by relabelling \(D\).  Partial trace of the
-six-party equivalence gives a product-unitary equivalence
-\(\rho^C_S\sim\rho^D_S\) for every four-set \(S\).  Given a party \(i\),
-choose a four-set containing it and apply
+\(2m\)-party equivalence gives a product-unitary equivalence
+\(\rho^C_S\sim\rho^D_S\) for every \((m+1)\)-set \(S\).  Given a party
+\(i\), choose such a set containing it and apply
 Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
 \end{proof}
 
-Only two marginals are needed if their supports cover all six parties;
-for example \(S=\{1,2,3,4\}\) and \(S'=\{1,2,5,6\}\).  More generally, the
-proof applies whenever every party belongs to a support of size at least
-three whose supported stabilizer subgroup has order \(q^2\) and projects
-bijectively onto all nonzero local Weyl labels.  We use only the
-\([6,3,4]\) MDS specialization.
+\begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
+Let \(\lvert\Phi\rangle=q^{-1/2}\sum_x\lvert x,x\rangle\), and use the
+Choi convention
+\(\lvert\Psi_C\rangle=(I\otimes V)\lvert\Phi\rangle\).
+Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), the relation
+\(U_{\mathrm{phys}}V=VL\) gives
+\[
+ (I\otimes U_{\mathrm{phys}})\lvert\Psi_C\rangle
+   =(L^T\otimes I)\lvert\Psi_C\rangle .
+\]
+Hence
+\[
+ \bigl((L^T)^{-1}\otimes U_{\mathrm{phys}}\bigr)
+   \lvert\Psi_C\rangle=\lvert\Psi_C\rangle .
+\]
+Theorem~\ref{thm:lu-lc-rigidity} makes every displayed local factor
+Clifford.  Entrywise conjugation preserves the finite-field Weyl group,
+since \(\overline{X(a)}=X(a)\) and
+\(\overline{Z(b)}=Z(-b)\); it therefore preserves the Clifford
+normalizer.  Taking adjoints preserves the normalizer as well, and
+\(U^T=(\overline U)^\dagger\).  Thus transposition preserves the
+finite-field Clifford group, and \(L\) is Clifford.
+\end{proof}
+
+The theorem needs only a cover by retained sets of size \(m+1\); choosing
+one such set through each party is enough.  More generally, the proof
+applies whenever every party belongs to a support of size at least three
+whose supported stabilizer subgroup has order \(q^2\) and projects
+bijectively onto all nonzero local Weyl labels.

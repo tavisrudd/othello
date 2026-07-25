@@ -14,7 +14,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
 | C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
-| C560 | every LU intertwiner between equal-phase CSS states of linear `[6,3,4]_q` MDS codes is LC; hence `LU iff LC iff z` on the admitted pencil | adopted headline theorem | every prime power for intertwiner rigidity; the objects exist exactly for \(q\geq4\); C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity |
+| C560/C609 | every LU intertwiner between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is LC; the associated `[[2m-1,1,m]]_q` code has no transversal non-Clifford logical unitary; hence `LU iff LC iff z` on the admitted six-party pencil | adopted version-1 headline package | every prime power and \(m\geq2\) whenever the MDS code exists; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity; Choi correspondence for the transversal corollary |
 
 ## Stable source labels
 
@@ -26,13 +26,17 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
+- `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 
 ## Frozen theorem hierarchy
 
-1. **Headline theorem (`thm:lu-lc-rigidity`).** For every prime power `q`
-   and every pair of linear `[6,3,4]_q` MDS codes, every LU intertwiner of
-   the associated equal-phase CSS states is LC.
+1. **Headline package (`thm:lu-lc-rigidity`,
+   `cor:transversal-clifford`).** For every prime power `q`, every
+   `m≥2`, and every pair of linear `[2m,m,m+1]_q` MDS codes, every LU
+   intertwiner of the associated equal-phase CSS states is LC.  The
+   associated `[[2m-1,1,m]]_q` quantum MDS code therefore admits no
+   transversal non-Clifford logical unitary.
 2. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
    odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
    equivalence are all equivalent to equality of `z`. Over extension
@@ -52,7 +56,7 @@ still depends on the claim, evidence, literature, and prose gates.
 
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
-| LU-intertwiner rigidity | every prime power `q`; linear `[6,3,4]_q` MDS/CSS states, which exist exactly for `q≥4` | none | nonlinear orthogonal arrays and non-MDS/non-CSS AME tensors |
+| LU-intertwiner rigidity and transversal no-go | every prime power `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS/CSS state; associated `[[2m-1,1,m]]_q` encoder for the corollary | none | nonlinear orthogonal arrays, non-MDS/non-CSS AME tensors, and transversal gates of other quantum-code families |
 | Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
 | Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |

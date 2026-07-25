@@ -43,6 +43,10 @@ certificate. It closed all of the following:
 
 ## Exposition decisions
 
+- C609 supersedes the frozen six-party headline and title with the uniform
+  `[2m,m,m+1]` rigidity theorem, its transversal Clifford corollary, and the
+  broader MDS--CSS title; the exact six-party classification and logical-phase
+  scopes are unchanged.
 - The theorem/section-opening pass still presents rigidity before scalar
   detectors.
 - The logical-group order paragraph and detector exception table remain in the
@@ -50,7 +54,8 @@ certificate. It closed all of the following:
 - Add a stable public repository/archive identifier only at the release gate;
   do not insert provisional links.
 - Citation metadata was checked against DOI/Crossref publisher records and
-  repaired; C562's “to our knowledge” wording remains unchanged.
+  repaired.  C609 retains the C562 ancestry but makes no absence or “first”
+  claim for the broader theorem pending a repository-compliant audit.
 
 ## Adversarial and release gates
 
