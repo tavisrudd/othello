@@ -289,12 +289,12 @@
       "sha256": "8bf477b5492d1ca58e9dbb6b637e1ab02b0f201c3b690d1942bceee84972a9fd"
     },
     {
-      "bytes": 5453,
+      "bytes": 5768,
       "path": "prepare_release_export.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Release-export builder",
-      "sha256": "7b7f3439aa2824fbba2195b9b9cb3f329b26db48404980143a7387551b3919c9"
+      "sha256": "300fda62a3000c5ff0b7deb29fe7f10cbf78dec85d7d2a6aa7c7c8a2c9e6df39"
     },
     {
       "bytes": 12124,

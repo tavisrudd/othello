@@ -151,7 +151,23 @@ def main() -> None:
         timestamp,
         [PAPER_PATH.as_posix()],
     )
-    (output / ".git/info/exclude").write_text("/lean/\n", encoding="utf-8")
+    (output / ".git/info/exclude").write_text(
+        "\n".join(
+            (
+                "/lean/",
+                "*.aux",
+                "*.bbl",
+                "*.blg",
+                "*.fdb_latexmk",
+                "*.fls",
+                "*.log",
+                "*.out",
+                "*.xdv",
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
     lean_root = output / "lean"
     lean_commit = commit(
         lean_root,
