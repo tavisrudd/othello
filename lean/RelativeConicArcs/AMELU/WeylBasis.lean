@@ -151,4 +151,41 @@ theorem weylCoordinateEquiv_weylMatrix (w : WeylConvention 𝔽)
   simpa [coordinateVector, eq_comm] using
     (weylBasis w).repr_self_apply v u
 
+/-- A Weyl basis coordinate is the normalized shifted-diagonal Fourier
+functional. -/
+theorem weylCoordinateEquiv_apply (w : WeylConvention 𝔽)
+    (A : LocalMatrix 𝔽) (v : 𝔽 × 𝔽) :
+    weylCoordinateEquiv w A v =
+      (Fintype.card 𝔽 : ℂ)⁻¹ *
+        weylFourierFunctional w v.1 v.2 A := by
+  classical
+  change (weylBasis w).repr A v =
+    (Fintype.card 𝔽 : ℂ)⁻¹ *
+      weylFourierFunctional w v.1 v.2 A
+  symm
+  calc
+    (Fintype.card 𝔽 : ℂ)⁻¹ *
+        weylFourierFunctional w v.1 v.2 A =
+      (Fintype.card 𝔽 : ℂ)⁻¹ *
+        weylFourierFunctional w v.1 v.2
+          (∑ u, (weylBasis w).repr A u • weylBasis w u) := by
+            rw [(weylBasis w).sum_repr]
+    _ = ∑ u, (weylBasis w).repr A u *
+        ((Fintype.card 𝔽 : ℂ)⁻¹ *
+          weylFourierFunctional w v.1 v.2 (weylBasis w u)) := by
+            simp [Finset.mul_sum]
+            apply Finset.sum_congr rfl
+            intro u _
+            ring
+    _ = (weylBasis w).repr A v := by
+      rw [Fintype.sum_eq_single v]
+      · rw [weylBasis_apply, weylFourierFunctional_weylMatrix]
+        simp
+      · intro u huv
+        rw [weylBasis_apply, weylFourierFunctional_weylMatrix]
+        have hvu : ¬(v.1 = u.1 ∧ v.2 = u.2) := by
+          intro h
+          exact huv (Prod.ext h.1.symm h.2.symm)
+        simp [hvu]
+
 end RelativeConicArcs.AMELU
