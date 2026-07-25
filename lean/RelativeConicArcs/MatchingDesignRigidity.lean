@@ -177,6 +177,20 @@ theorem concurrenceCenters_card_mul_choose_half
           rw [← hrestrict]
           exact second_secant_moment (L := L) hA
 
+/-- For arcs of size at least four, the exact centre count is the quotient appearing in the
+matching-design formula. -/
+theorem concurrenceCenters_card_eq_quotient
+    {A H : Finset P} (hA : Arc (L := L) A) (hdisj : Disjoint A H)
+    (hzero : scaledDefect (L := L) A H = 0) (hfour : 4 ≤ A.card) :
+    (concurrenceCenters (L := L) A).card =
+      (3 * Nat.choose A.card 4) / Nat.choose (A.card / 2) 2 := by
+  have hdenom : Nat.choose (A.card / 2) 2 ≠ 0 := by
+    rw [Nat.choose_ne_zero_iff]
+    omega
+  apply Nat.eq_div_of_mul_eq_right hdenom
+  simpa [Nat.mul_comm] using
+    concurrenceCenters_card_mul_choose_half (L := L) hA hdisj hzero
+
 /-- The number of Kneser edges contained in nonmaximum concurrence cliques, counted separately
 over required points and prescribed holes. -/
 noncomputable def badConcurrenceEdgeCount (A H : Finset P) : ℤ :=
@@ -506,6 +520,19 @@ theorem concurrenceCentersOnPair_card_mul_sub_one
           intro x hx
           exact (hsummand x hx).symm
     _ = Nat.choose (A.card - 2) 2 := hcardSum.symm
+
+/-- For arcs of size at least four, every secant has the exact quotient number of zero-defect
+maximum-matching centres stated in the incidence double count. -/
+theorem concurrenceCentersOnPair_card_eq_quotient
+    {A H : Finset P} (hA : Arc (L := L) A) (hdisj : Disjoint A H)
+    (hzero : scaledDefect (L := L) A H = 0) (hfour : 4 ≤ A.card)
+    (e : ArcPair A) :
+    (concurrenceCentersOnPair (L := L) A e).card =
+      Nat.choose (A.card - 2) 2 / (A.card / 2 - 1) := by
+  have hdenom : A.card / 2 - 1 ≠ 0 := by omega
+  apply Nat.eq_div_of_mul_eq_right hdenom
+  simpa [Nat.mul_comm] using
+    concurrenceCentersOnPair_card_mul_sub_one (L := L) hA hdisj hzero e
 
 end FinitePlane
 
