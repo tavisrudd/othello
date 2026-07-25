@@ -98,8 +98,8 @@ or absence claim was changed.
   evidence manifest, classification-record extraction, R6 paper table,
   classification hashes, and local release rows all pass.
 - `make check`: pass; canonical PDF rebuilt to 33 pages,
-  252,694 bytes, SHA-256
-  `37471053da7af4b4112a1034d00da7b5bf59d2a9868a3ec5a54cc101ae1da9f1`.
+  252,752 bytes, SHA-256
+  `058f6c859724e10580b59153328b1c9c4e79e6e8599b0ad104397dcc87cc7afa`.
 - `make tit-check`: pass; the IEEEtran single-column review build is 25 pages.
 - Lean guarded queue
   `/home/tavis/.cache/othello-lean-build/run-20260725-163716-2ec723b6`:
