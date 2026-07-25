@@ -300,6 +300,14 @@ A local referee-style coherence read found no internal theorem-order,
 proof-mode, or conclusion mismatch. Independence remains the purpose of the
 next context-free review rather than a hidden claim about this pass.
 
+The `ej3` verification-hardening pass found that checksum validation alone
+did not freeze the aggregate runner's admitted commands or proof-mode
+vocabulary. The runner now rejects schema drift, evidence-set drift, changed
+commands or checksum manifests, unsafe or duplicate checksum targets, unknown
+proof modes, certificate claims with no evidence, and Lean claims with no
+Lean bundle. This closes a cheap auditability gap without adding a new
+mathematical claim or enlarging the release surface.
+
 | mystery | status | exact remaining gap or owner |
 |---|---|---|
 | Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
@@ -315,4 +323,5 @@ next context-free review rather than a hidden claim about this pass.
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
 | Is every theorem-like statement assigned one exact trust route? | settled | The sixteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
+| Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the six semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | What is the next load-bearing Paper II frontier? | open by task order | Obtain a fresh context-free referee-style coherence review of the seventeen-page candidate and repair any findings before closing C577. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |

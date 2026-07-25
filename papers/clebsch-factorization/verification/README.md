@@ -15,8 +15,9 @@ unrecorded change to those statements.
 
 `trust_manifest.json` maps every statement to its proof modes and evidence
 bundles. `verify_release.py` checks the statement identity, the manifest
-partition, every recorded checksum manifest, and the primary and independent
-replays. It then builds the paper through the repository Makefile.
+partition, the exact command and evidence-path allowlist, safe checksum
+targets, every recorded digest, and the primary and independent replays. It
+then builds the paper through the repository Makefile.
 
 From the repository root, run:
 
