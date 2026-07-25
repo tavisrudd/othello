@@ -51,6 +51,14 @@ arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
 identities, the six-party LU-to-LC rigidity chain, and the transport
 polynomial and characteristic-seven identities in one environment.
+The length-generic part defines the code, equal-phase state, party action,
+and LU/LC relations on \(\operatorname{Fin}(2m)\); proves that the exact
+\([2m,m,m+1]\) parameters are equivalent to bijectivity of every
+\(m\)-coordinate projection; proves the same MDS property for the dual
+and constructs full-support \((m+1)\)-coordinate shortening generators;
+and proves the arity-independent full-basis diagonal-flattening axis
+lemma.  Its \(m=3\) definitions are reconciled definitionally with the
+established six-party API.
 For linear \([6,3,4]_q\) codes, the formal proof constructs the dual
 shortenings, expands the four-party marginal on all \(q^2\) Weyl axes
 including the identity, proves marginal covariance under the displayed
@@ -66,11 +74,13 @@ orbit steps enter separate hypothesis structures; the paper constructs
 or certificate-supports them as specified above, but the Lean modules do
 not.  Importing the terminal therefore does not make them unconditional
 formal theorems.  In particular, the
-arbitrary-\(m\) extension of the headline
+generic marginal-expansion/covariance bridge and hence the
+arbitrary-\(m\) terminal of the headline
 \([2m,m,m+1]_q\) LU-to-LC rigidity theorem, its transversal Clifford
-corollary, the fixed-copy generic-constancy proposition, the party-moving
-logical normalizer, and the determinant and double-coset inputs of the
-complete transport theorem are not formalized.
+conversion corollary, the discrete-symmetry corollary, the exact GRS
+transversal-group corollary, the fixed-copy generic-constancy proposition,
+the party-moving logical normalizer, and the determinant and double-coset
+inputs of the complete transport theorem are not formalized.
 The companion \texttt{AMELUAggregateAxioms} terminal separates the three
 native finite graph counts from the ordinary kernel-checked declarations.
 For each conditional structure, the statement-adequacy ledger records
@@ -93,8 +103,10 @@ CSS hypotheses \cite{BurchardtRaissi2020,RamadasLakshminarayan2025}.
 The contribution claimed here is the full \(q^2\)-axis tensor
 (with the identity axis fixed by conjugation), its prime-power-qudit
 extension, and its uniform
-\([2m,m,m+1]_q\) MDS/CSS specialization, and the resulting transversal
-Clifford no-go.  It is not a new LU--LC mechanism in the abstract.
+\([2m,m,m+1]_q\) MDS/CSS specialization.  Its operational consequences
+are factorwise rigidity of transversal code conversions, the
+non-Clifford no-go, and the exact full-Clifford transversal group of the
+odd-prime GRS tower.  It is not a new LU--LC mechanism in the abstract.
 
 Finally, none of the results classifies nonlinear orthogonal arrays,
 arbitrary minimal-support AME tensors, non-MDS stabilizer states, or all
