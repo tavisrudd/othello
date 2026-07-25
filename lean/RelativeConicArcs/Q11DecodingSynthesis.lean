@@ -60,6 +60,7 @@ theorem totalSyndromeDistance_nonzero_branches (s : Vec (ZMod 11)) (hs : s ≠ 0
     by_cases h0 : rawPointIndex (projectiveVec (affineRayOfVec ⟨s, hs⟩).1) = 0 <;>
       simp [h5, h0]
 
+/-- The total syndrome-distance oracle returns zero exactly on the zero syndrome. -/
 theorem totalSyndromeDistance_zero_iff (s : Vec (ZMod 11)) :
     totalSyndromeDistance s = 0 ↔ s = 0 := by
   constructor
@@ -150,6 +151,7 @@ private theorem weightOne_representation_unique {s : Vec (ZMod 11)}
       exact hi (Finset.mem_union_right _ (CodingBridge.mem_hammingSupport.mpr hne))
     rw [hci, hdi]
 
+/-- Every distance-one syndrome has exactly one coefficient-bearing weight-one leader. -/
 theorem distanceOne_leader_count_one {s : Vec (ZMod 11)}
     (hd : CodingBridge.SyndromeDistanceExactly (K := ZMod 11) witnessVec s 1) :
     (CodingBridge.syndromeLeadersOfWeight (K := ZMod 11) witnessVec s 1).card = 1 := by
@@ -171,15 +173,19 @@ theorem distanceOne_leader_count_one {s : Vec (ZMod 11)}
 def ambiguityOneSyndromes : Finset (Vec (ZMod 11)) :=
   affineSyndromesOfDistance 1 ∪ affineDistanceTwoSyndromesOfLeaderCount 1
 
+/-- Nonzero syndromes having exactly two nearest leaders. -/
 def ambiguityTwoSyndromes : Finset (Vec (ZMod 11)) :=
   affineDistanceTwoSyndromesOfLeaderCount 2
 
+/-- Nonzero syndromes having exactly three nearest leaders. -/
 def ambiguityThreeSyndromes : Finset (Vec (ZMod 11)) :=
   affineDistanceTwoSyndromesOfLeaderCount 3
 
+/-- Nonzero syndromes having exactly twenty nearest leaders. -/
 def ambiguityTwentySyndromes : Finset (Vec (ZMod 11)) :=
   affineSyndromesOfDistance 3
 
+/-- Number of leaders at the minimum weight returned by `totalSyndromeDistance`. -/
 def nearestLeaderCount (s : Vec (ZMod 11)) : ℕ :=
   (CodingBridge.syndromeLeadersOfWeight (K := ZMod 11) witnessVec s
     (totalSyndromeDistance s)).card
@@ -219,7 +225,7 @@ theorem ambiguity_strata_sound :
         have hd : totalSyndromeDistance s = 3 := (totalSyndromeDistance_exact s).unique hexact
         simpa [nearestLeaderCount, hd] using distanceThree_leader_count_twenty hexact
 
-/-- Complete nearest-codeword ambiguity enumerator `1^960 2^150 3^100 20^120`. -/
+/-- Complete nonzero-syndrome ambiguity enumerator `1^960 2^150 3^100 20^120`. -/
 theorem ambiguity_strata_counts :
     ambiguityOneSyndromes.card = 960 ∧
     ambiguityTwoSyndromes.card = 150 ∧

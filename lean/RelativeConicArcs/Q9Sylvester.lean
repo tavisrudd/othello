@@ -48,6 +48,7 @@ def projectiveVec (p : ProjectiveIndex) : Vec3 :=
 /-- `XZ-Y^2`, in the coordinates used by the manuscript and the independent checker. -/
 def quadratic (v : Vec3) : K := v 0 * v 2 - v 1 * v 1
 
+/-- The predicate that a field element is a square, including zero. -/
 def IsSquare (x : K) : Prop := ∃ y : K, y * y = x
 
 instance (x : K) : Decidable (IsSquare x) := Fintype.decidableExistsFintype
@@ -65,6 +66,7 @@ def internalProjectiveIndex (v : Vertex) : ProjectiveIndex :=
     30, 31, 33, 34, 37, 38, 40, 41, 46, 47, 52, 53,
     57, 58, 60, 61, 64, 65, 70, 71, 73, 74, 76, 77] v
 
+/-- Canonical vector representative of a catalogued internal point. -/
 def internalVec (v : Vertex) : Vec3 := projectiveVec (internalProjectiveIndex v)
 
 /-- All 36 catalog entries are internal. -/
@@ -95,6 +97,7 @@ instance (u v : Vertex) : Decidable (HAdjacent u v) := by
   unfold HAdjacent
   infer_instance
 
+/-- Neighbours of a vertex in the polarity-conjugacy graph. -/
 def hNeighbors (v : Vertex) : Finset Vertex :=
   Finset.univ.filter fun w => HAdjacent v w
 
@@ -108,6 +111,7 @@ def hDistance (u v : Vertex) : Nat :=
 /-- Every internal point has five polarity conjugates. -/
 theorem h_regular_degree_five : ∀ v : Vertex, (hNeighbors v).card = 5 := by decide
 
+/-- Vertices at the executable graph distance `d` from `base`. -/
 def distanceLayer (base : Vertex) (d : Nat) : Finset Vertex :=
   Finset.univ.filter fun v => hDistance base v = d
 
@@ -178,6 +182,7 @@ def distanceTwoMask (u : Vertex) : Nat :=
     60377693011, 21572204515, 47437237341, 21570768062,
     3953972716, 1440541660, 3198629175, 1434140219] u
 
+/-- Adjacency in the exact-distance-two graph, read from the checked masks. -/
 def DistanceTwoAdjacent (u v : Vertex) : Prop :=
   (distanceTwoMask u).testBit v.1 = true
 
@@ -190,8 +195,10 @@ theorem distanceTwoAdjacent_iff_hDistance :
     ∀ u v : Vertex, DistanceTwoAdjacent u v ↔ hDistance u v = 2 := by
   decide
 
+/-- Exact-distance-two adjacency is irreflexive. -/
 theorem distanceTwoAdjacent_irrefl : ∀ u : Vertex, ¬ DistanceTwoAdjacent u u := by decide
 
+/-- Exact-distance-two adjacency is symmetric. -/
 theorem distanceTwoAdjacent_symmetric :
     ∀ u v : Vertex, DistanceTwoAdjacent u v ↔ DistanceTwoAdjacent v u := by
   decide
@@ -202,6 +209,7 @@ def vertexColor (v : Vertex) : Fin 6 :=
     0, 3, 0, 3, 4, 3, 4, 3, 2, 3, 2, 3,
     0, 5, 0, 5, 4, 5, 4, 5, 2, 5, 2, 5] v
 
+/-- The displayed six-colouring is proper for exact-distance-two adjacency. -/
 theorem vertexColor_proper :
     ∀ u v : Vertex, DistanceTwoAdjacent u v → vertexColor u ≠ vertexColor v := by
   decide
@@ -215,10 +223,12 @@ def colorClass (c : Fin 6) : List Vertex :=
     [5, 7, 16, 18, 28, 30],
     [25, 27, 29, 31, 33, 35]] c
 
+/-- Membership in a displayed colour class is equivalent to having that colour. -/
 theorem mem_colorClass_iff :
     ∀ c : Fin 6, ∀ v : Vertex, v ∈ colorClass c ↔ vertexColor v = c := by
   decide
 
+/-- A vertex is adjacent to every member of a stored clique prefix. -/
 def CompatibleWith (v : Vertex) (xs : List Vertex) : Prop :=
   ∀ u ∈ xs, DistanceTwoAdjacent v u
 
@@ -231,22 +241,35 @@ def extendPrefixes (c : Fin 6) (xss : List (List Vertex)) : List (List Vertex) :
   xss.flatMap fun xs =>
     ((colorClass c).filter fun v => CompatibleWith v xs).map fun v => v :: xs
 
+/-- Empty compatible prefix before any colour class is selected. -/
 def rainbowLevel0 : List (List Vertex) := [[]]
+/-- Compatible prefixes after selecting colour class zero. -/
 def rainbowLevel1 : List (List Vertex) := extendPrefixes 0 rainbowLevel0
+/-- Compatible prefixes after selecting the first two colour classes. -/
 def rainbowLevel2 : List (List Vertex) := extendPrefixes 1 rainbowLevel1
+/-- Compatible prefixes after selecting the first three colour classes. -/
 def rainbowLevel3 : List (List Vertex) := extendPrefixes 2 rainbowLevel2
+/-- Compatible prefixes after selecting the first four colour classes. -/
 def rainbowLevel4 : List (List Vertex) := extendPrefixes 3 rainbowLevel3
+/-- Compatible prefixes after selecting the first five colour classes. -/
 def rainbowLevel5 : List (List Vertex) := extendPrefixes 4 rainbowLevel4
+/-- Compatible prefixes after selecting all six colour classes. -/
 def rainbowLevel6 : List (List Vertex) := extendPrefixes 5 rainbowLevel5
 
 /-- Small reflected prefix counts; the empty final level is the no-rainbow-six certificate. -/
 theorem rainbow_level1_card : rainbowLevel1.length = 6 := by decide
+/-- There are 24 compatible prefixes through the first two colours. -/
 theorem rainbow_level2_card : rainbowLevel2.length = 24 := by decide
+/-- There are 66 compatible prefixes through the first three colours. -/
 theorem rainbow_level3_card : rainbowLevel3.length = 66 := by decide
+/-- There are 120 compatible prefixes through the first four colours. -/
 theorem rainbow_level4_card : rainbowLevel4.length = 120 := by decide
+/-- There are 126 compatible prefixes through the first five colours. -/
 theorem rainbow_level5_card : rainbowLevel5.length = 126 := by decide
+/-- No compatible prefix meets all six colour classes. -/
 theorem rainbow_level6_empty : rainbowLevel6 = [] := by decide
 
+/-- A compatible vertex from the prescribed colour extends any recorded prefix. -/
 theorem mem_extendPrefixes {c : Fin 6} {xss : List (List Vertex)} {xs : List Vertex}
     {v : Vertex} (hxs : xs ∈ xss) (hv : v ∈ colorClass c)
     (hcompat : CompatibleWith v xs) : v :: xs ∈ extendPrefixes c xss := by
@@ -281,6 +304,7 @@ theorem no_rainbow_six (r : Fin 6 → Vertex)
   rw [rainbow_level6_empty] at h6
   simp at h6
 
+/-- Package six displayed vertices as a function indexed by `Fin 6`. -/
 def sixTuple (a b c d e f : Vertex) : Fin 6 → Vertex := ![a, b, c, d, e, f]
 
 /-- Semantic six-clique predicate, indexed so finite-colour bijectivity applies directly. -/
@@ -317,6 +341,7 @@ theorem no_six_clique : ¬ ∃ a b c d e f : Vertex, SixClique a b c d e f := by
 /-- An explicit five-clique in the exact-distance-two graph. -/
 def fiveClique : Finset Vertex := {0, 4, 9, 18, 21}
 
+/-- Pairwise exact-distance-two adjacency on a finite vertex set. -/
 def IsClique (s : Finset Vertex) : Prop :=
   ∀ u ∈ s, ∀ v ∈ s, u ≠ v → DistanceTwoAdjacent u v
 
@@ -324,8 +349,10 @@ instance (s : Finset Vertex) : Decidable (IsClique s) := by
   unfold IsClique
   infer_instance
 
+/-- The displayed clique contains five vertices. -/
 theorem fiveClique_card : fiveClique.card = 5 := by decide
 
+/-- The displayed five-vertex set is a clique. -/
 theorem fiveClique_isClique : IsClique fiveClique := by decide
 
 /-- Exact clique-number certificate: an explicit `K_5` and a semantic exclusion of `K_6`. -/

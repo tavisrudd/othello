@@ -57,10 +57,12 @@ theorem witness_mds_columns :
     CodingBridge.CodimThreeMDSColumns (K := ZMod 11) witnessVec := by
   refine ⟨by simp, witness_columns_span, witness_small_independent⟩
 
+/-- The parity-check kernel defined by the six witness columns has dimension three. -/
 theorem witness_code_finrank :
     Module.finrank (ZMod 11) (CodingBridge.parityCheckCode (K := ZMod 11) witnessVec) = 3 := by
   simpa using witness_mds_columns.code_finrank
 
+/-- Every nonzero witness-code word has weight at least four, and a weight-four word exists. -/
 theorem witness_code_minimum_distance_four :
     (∀ c : Fin 6 → ZMod 11,
       c ∈ CodingBridge.parityCheckCode (K := ZMod 11) witnessVec → c ≠ 0 →
@@ -171,8 +173,9 @@ theorem extension_independence_spectrum :
     (independentSetsOfCard 4).card = 0 := by
   decide
 
-/-- No zero- or one-column extension is maximal, while exactly six two-column and twenty
-three-column extensions are maximal; hence the fixed seed has six complete eight-arcs and twenty
+/-- No zero- or one-column residual extension is maximal, while exactly six two-column and twenty
+three-column residual extensions are maximal.  Together with
+`maximal_independent_extension_complete` below, these give six complete eight-arcs and twenty
 complete nine-arcs, with no ten-arc superextension. -/
 theorem maximal_extension_spectrum :
     (maximalIndependentSetsOfCard 0).card = 0 ∧
@@ -297,14 +300,11 @@ theorem completed_witness_matchings_oneFactorization :
 def residualNeighbors (x : Fin 12) : Finset (Fin 12) :=
   Finset.univ.filter fun y => Adj x y
 
-/-- The twelve deep-hole conic points, joined by the arc's secant chords, carry the **icosahedral
-graph**: it is 5-regular with 30 edges, and every vertex link is a 5-cycle (each neighbour of a
-vertex `x` has exactly two of its neighbours again adjacent to `x`, so the induced subgraph on the
-five neighbours is 2-regular, hence a 5-cycle on five vertices). By Whitney's theorem a 5-regular
-graph all of whose vertex links are 5-cycles is the icosahedron, so this is an edge-level witness of
-the icosahedron sitting inside the deep-hole conic's incidence structure. All three clauses are
-`decide`-grade (no `native_decide`). -/
-theorem residual_graph_icosahedral :
+/-- The secant-conflict graph on the twelve deep-hole conic points has the local data of the
+icosahedron: 30 edges, degree five at every vertex, and degree two inside every five-vertex link.
+This theorem records those exact finite clauses; it does not construct a graph isomorphism.
+All three clauses are checked by `decide`, with no `native_decide`. -/
+theorem residual_graph_icosahedral_local_data :
     residualEdges.card = 30 ∧
       (∀ x : Fin 12, (residualNeighbors x).card = 5) ∧
       (∀ x : Fin 12, ∀ y ∈ residualNeighbors x,
