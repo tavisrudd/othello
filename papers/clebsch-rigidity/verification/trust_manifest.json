@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 73",
+      "paper_location": "source line 77",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 326",
+      "paper_location": "source line 330",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 393",
+      "paper_location": "source line 397",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 410",
+      "paper_location": "source line 414",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 447",
+      "paper_location": "source line 451",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 498",
+      "paper_location": "source line 502",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 580",
+      "paper_location": "source line 584",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 623",
+      "paper_location": "source line 627",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -619,7 +619,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 729",
+      "paper_location": "source line 733",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -635,7 +635,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 754",
+      "paper_location": "source line 758",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -669,7 +669,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 784",
+      "paper_location": "source line 788",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -685,7 +685,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 897",
+      "paper_location": "source line 901",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 947",
+      "paper_location": "source line 951",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -825,7 +825,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 963",
+      "paper_location": "source line 967",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -942,7 +942,7 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 200",
+      "paper_location": "source line 204",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -1030,7 +1030,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1052",
+      "paper_location": "source line 1056",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1108,7 +1108,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1079",
+      "paper_location": "source line 1083",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1128,7 +1128,16 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "small-arc reductions, k=6 dependency, and k=8 field sieve",
-          "unconditional_remainder": "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."
+          "unconditional_remainder": "The manuscript derives the moment equations, the universal conic-filling window, and the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."
+        },
+        {
+          "cited_inputs": [
+            "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
+            "Hirschfeld 1998, the plane arc/covering-radius dictionary"
+          ],
+          "route": "conceptual-cited-inputs",
+          "subclaim": "projective MDS translation",
+          "unconditional_remainder": "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."
         },
         {
           "lean": {
@@ -1265,15 +1274,15 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1146",
+      "paper_location": "source line 1150",
       "route": "mixed",
       "row": 29,
       "source": {
         "id": "thm:small-k-conic-filling",
         "kind": "theorem-environment",
-        "sha256": "9551f1613d91aa3561d1e9497c3ed7be9fcaa9bec6c5612cdcab20c81ec1db2c"
+        "sha256": "23c3ad48c78a33f8da0cd94f1f902de4996cecb8c0eb61937273e596cac7ea80"
       },
-      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 and k=8 exclusions are exact-replayed."
+      "trust_boundary": "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 and k=8 exclusions and sharp maximum-six result are exact-replayed, and the MDS statement is the projective arc--syndrome translation."
     },
     {
       "computation": {
@@ -1309,7 +1318,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 669",
+      "paper_location": "source line 673",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1327,9 +1336,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "2fb10a4d7ba152bd86567d67ae6fd388cdf9068f4e53a34be8fe4e5379eb1add"
+    "sha256": "b3af5a3dba9815878422efd20df2c809a23ffa8593ec1226080ffbd3d760cf1b"
   },
-  "manuscript_sha256": "af2e4d97313b9449869c514e34772cf2a989ab0db50ba5c9962b16778bb4a14e",
+  "manuscript_sha256": "d7e08a065243a1b63bf5a3cac66b7805d7e4206b0b7e9eff9b3feb4e7fe32dfc",
   "public_documents": [
     {
       "path": "README.md",
@@ -1369,7 +1378,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "5e94935129ad4492779c49c0cad18063d2fe3af9c35a0121582946c19c96914a"
+    "sha256": "9246d5f0f5cf267990b7260fa40d3f40ec984ef96a2535d45f6c0bbd34828854"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1603,7 +1612,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "9fd98fad71cf1bafd4c63874ae4f960cf314a5ae450106f4c73b71fb8902054e"
+        "sha256": "da2c2bb8fb1b7d92a1487f59fb6d69ccf56c0d38bb83c0b1c6d1de2a94b07f2a"
       },
       {
         "path": "verification/verify_trust_manifest.py",

@@ -448,9 +448,10 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 and k=8 exclusions are exact-replayed.",
+            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 and k=8 exclusions and sharp maximum-six result are exact-replayed, and the MDS statement is the projective arc--syndrome translation.",
             [
-                conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and the universal conic-filling window; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations, the universal conic-filling window, and the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("projective MDS translation", CLASSICAL_CODE, "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
                 replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
                 c605_replay(),

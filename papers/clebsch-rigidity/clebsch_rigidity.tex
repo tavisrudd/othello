@@ -56,6 +56,10 @@ that conic filling by a $k$-arc forces
 $2k-3\le q<\binom{k}{2}$ and a sharper quadratic field-size bound.  It also
 proves that $q=11$ is the only conic-filling field for six-arcs and, with
 finite verification, classifies conic filling through eight points.
+Equivalently, among projective $[k,k-3,4]_q$ MDS codes with
+$4\le k\le8$, only the frame code over $\F_5$ and the Clebsch code over
+$\F_{11}$ have a nonsingular conic as their projective distance-three
+syndrome locus.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -1153,6 +1157,10 @@ $\F_q$-rational points of a nonsingular conic. Then
 \]
 In the first case $A$ is a projective four-frame; in the second it is a
 Clebsch hexagon. Conversely, both cases occur.
+
+Moreover, for each $q\in\{13,17,19\}$, an arc all of whose chords are
+passant to a fixed nonsingular conic has at most six points, and this bound
+is attained.
 \end{theorem}
 
 \begin{proof}[Proof with exhaustive finite verification]
@@ -1198,10 +1206,21 @@ this interval that are odd are exactly $13,17,19$.
 
 It remains to exclude these three fields. By projective equivalence fix the
 conic $XZ=Y^2$, whose stabilizer is the symmetric-square image of
-$\operatorname{PGL}(2,q)$. Its complement has $q^2$ points. Join two of them when their
-line is passant. Every chord of a conic-filling arc is passant, so the
-desired eight-arc would be an eight-clique in this graph, with collinear
-triples forbidden.
+$\operatorname{PGL}(2,q)$. Its complement has $q^2$ points. In the
+terminology of Blokhuis, Seress, and Wilbrink, a set whose pairwise joins
+are passant is an exterior set of the conic
+\cite[pp.~143,146]{BSW1992}; its vertices may have either internal or
+exterior point type. Every conic-filling arc is such an exterior set.
+
+There is already a structural reduction at $q=13$. An exterior point lies
+on only $(q-1)/2=6$ passants, fewer than the seven distinct chords through
+a vertex of an eight-arc. Hence every vertex would be internal. Each
+internal point lies on exactly $(q+1)/2=7$ passants, so its seven chords
+would exhaust its complete passant pencil.
+
+For the remaining finite step, join two off-conic points when their line is
+passant. The desired eight-arc would be an eight-clique in this graph, with
+collinear triples forbidden.
 
 An exact orbit search gives the complete reduction
 \[
@@ -1222,8 +1241,15 @@ points are then among the enumerated extensions. In all three fields the
 largest partial arc has size six. Thus there is no seven-point arc with all
 chords passant, and in particular no conic-filling eight-arc. A separate
 replay verifies the edge-orbit partition and repeats the extension search by
-ordered backtracking without stabilizer identification.
+ordered backtracking without stabilizer identification. Its certificates
+give an explicit six-point witness in every field, proving sharpness.
 \end{proof}
+
+In coding terms, let $C$ be a projective $[k,k-3,4]_q$ MDS code with
+$4\le k\le8$. If its projective distance-three syndrome locus is a
+nonsingular conic, then, up to monomial equivalence, $C$ is the
+$[4,1,4]_5$ frame code or the $[6,3,4]_{11}$ Clebsch code. Both codes have
+the stated syndrome locus.
 
 Thus conic filling is finite at every fixed arc size, and its classification
 is complete through eight points.
