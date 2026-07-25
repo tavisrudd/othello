@@ -21,6 +21,19 @@ Run every paper-local replay with:
 python3 supplement/verify.py --replay
 ```
 
+Create the paper-only and exact R5--R7 Lean fresh-history candidates from a
+clean development revision with:
+
+```text
+python3 supplement/prepare_release_export.py /disk-backed/output/path
+```
+
+The command refuses an existing destination or dirty release-owned source,
+archives only the committed paper tree and exact 15-module Lean closure, and
+prints the source, paper, and Lean commit identifiers.  The output contains a
+paper repository at its root and a separately initialized Lean repository
+under `lean/`; the paper repository excludes that adjacent Lean checkout.
+
 ## Pinned environment
 
 The exact Lean, Lake, Nix, and Rust dependency locks used by the development
