@@ -136,6 +136,58 @@ The earlier conic family forces at least linearly many exact transition
 classes, so it is compatible with this polynomial-information gate; it does
 not itself falsify the corrected target.
 
+## 4. `ej` upgrade — the first information lower bound
+
+The sealed-conic family does give a quantitative constraint on any
+polynomial-range **exact** quotient.
+
+Suppose `π_q` has `d` integer coordinates and each coordinate takes at most
+`Bq^C` values, with `B,d,C` independent of `q`. Then the quotient has at most
+
+```text
+(Bq^C)^d = B^d q^(Cd)
+```
+
+states. The conic family requires at least
+`floor((q-2)/4)+1` exact transition classes. Therefore necessarily
+
+```text
+Cd ≥ 1.
+```
+
+So even the overload-zero boundary needs asymptotically at least `log₂q-O(1)`
+bits of exact state information. This is weak—the single coordinate `n`
+attains the correct order—but it is the first representation-independent
+lower bound on an admissible polynomial-information signature.
+
+### Exact congruence is probably more than C80 needs
+
+The descent theorem has alternating quantifiers:
+
+```text
+for every opponent move, there exists a strict-overload reply
+into the controlled family.
+```
+
+It does not require preserving every follower or the full rooted game.
+Accordingly, the highest-EV corrected target is a **sound alternating
+response algebra**, not necessarily an exact transition congruence. Such an
+algebra needs:
+
+1. an information-bounded state summary and marked-move summary;
+2. a sound realization theorem from abstract opponent types to all concrete
+   opponent moves;
+3. an abstract reply relation with a lifting theorem producing a concrete
+   legal reply;
+4. strict decrease of `Ω` for the lifted reply;
+5. a sound `Y_NK` base decoder.
+
+This retains precisely the `∀o∃p` structure used by the `K_Ω` induction while
+allowing many irrelevant followers to be merged. Requiring bisimulation would
+spend information on game-tree distinctions that a P-strategy certificate
+never queries. The exact residual transform remains the domain-level
+substrate against which the lifting theorem is proved.
+
 ## Trust boundary
 
 This is a coding proof, not a computational claim. It uses only:
@@ -177,6 +229,13 @@ theorem lives.
   algebraic quotient?** The report gives a concrete polynomial-information
   gate, but adopting that gate changes the theorem statement and should be
   explicit.
+- **[SETTLED quantitative] What information is unavoidable for an exact
+  polynomial-range quotient?** At least `log₂q-O(1)` bits; in the coordinate
+  model, `Cd≥1`.
+- **[OPEN — higher-EV C80 reformulation] Is a sound information-bounded
+  alternating response algebra enough, avoiding exact bisimulation?** Yes at
+  the level of the strict-`Ω` induction; the missing work is its geometric
+  construction and lifting theorem.
 - **[OPEN — C80 crown] Under the adopted anti-packing gate, can positive
   overload escape roots be placed uniformly in `K_Ω`?** No proof or
   falsification is currently known.
@@ -185,8 +244,9 @@ theorem lives.
 
 This is a useful specification failure caught cleanly: the literal crown has
 a one-line coding proof, while the mathematical difficulty is untouched. The
-next move should lock the information model before doing any more invariant
-mining.
+extra squeeze improves the next shape: lock an information-bounded
+`∀opponent∃reply` algebra, not an unnecessarily exact quotient, before doing
+any more invariant mining.
 
-go C80 cap fix the anti-packing algebraic gate, then prove or falsify the
-polynomial-information residual quotient
+go C80 cap fix the anti-packing gate and build a polynomial-information
+alternating response algebra

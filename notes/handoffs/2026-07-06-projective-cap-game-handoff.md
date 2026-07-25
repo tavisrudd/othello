@@ -928,7 +928,14 @@ alone is not an information bound. A meaningful successor must add an
 anti-packing gate: for example, fixed-dimensional coordinates and move marks
 of polynomial range in `q`, fixed bounded-degree piecewise-polynomial update
 formulas, and a fixed nonrecursive decoder for lower-kernel responses. C82
-remains gated until that strengthened theorem is fixed and proved. Report:
+remains gated until that strengthened theorem is fixed and proved. The `ej`
+upgrade extracts the first quantitative constraint: if `d` coordinates each
+have `O(q^C)` range, exact transition separation forces `Cd≥1`. More
+importantly, C80 needs only the sound alternating structure
+`∀ opponent ∃ strict-Ω reply`, not full bisimulation. The higher-EV target is
+therefore an information-bounded response algebra with concrete
+opponent/reply lifting theorems and a `Y_NK` base decoder; the exact residual
+transform remains its substrate. Report:
 [`../2026-07-25-c80-unbounded-coordinate-congruence.md`](../2026-07-25-c80-unbounded-coordinate-congruence.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
@@ -978,9 +985,11 @@ Priority order and why:
    and transporting the recursive kernel through it does not prove membership. The remaining
    unrestricted unbounded-range algebra is now formally trivial: one natural number can encode the
    complete residual and update by decode–`D_x`–encode. The next crown must first fix an
-   anti-packing information model, such as polynomially bounded coordinates and move marks with
-   fixed bounded-degree update formulas plus a nonrecursive lower-kernel decoder. A value-only
-   factor is also not excluded.
+   anti-packing information model. Exact polynomial-range quotients must already carry
+   `log q-O(1)` bits (`Cd≥1` for `d` coordinates of `O(q^C)` range), but exact congruence is
+   stronger than the crown needs. The higher-EV formulation is a sound information-bounded
+   alternating response algebra realizing the `∀o∃p` strict-`Ω` induction, with fixed
+   opponent/reply lifting and a `Y_NK` base decoder. A value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
