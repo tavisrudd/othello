@@ -105,9 +105,12 @@ Paper II now also proves the abstract radical--Hadamard recovery lemma,
 specializes it to the `B_3` `7+7` and `H_3` `11+11` sheets without subset
 enumeration, and proves that the first signed tensor orientation moment is
 cubic and carries the outer character. The C406 and C430 primary certificates,
-independent replays, and checksum gates are green. Its clean nine-page build is
-warning-free. The next drafting frontier is six-profile matching-row
-reconstruction.
+independent replays, and checksum gates are green. The six-profile section
+now derives the `1,4,6 / 1,4,6` rows from subgroup marks, defines the
+secant-incidence profiles, proves set-theoretic row separation despite the
+rank-two image, and states the exact singleton matching/parent recovery
+boundary. Its clean eleven-page build is warning-free. The next drafting
+frontier is modular depth and arithmetic gluing.
 
 The active order is strict:
 
@@ -245,8 +248,8 @@ must cite the final Paper I release rather than changing or extending it.
 Current C577 drafting state: the opening bridge, headline theorem,
 marked-conic definition, general quotient proof, switch identity, explicit
 rank-three configurations, exact `3,6,10` theorem, balanced-sheet uniqueness,
-and cubic-first orientation are in the manuscript. Continue with six-profile
-matching-row reconstruction before importing the modular-depth material.
+cubic-first orientation, and six-profile matching-row reconstruction are in
+the manuscript. Continue with modular depth and arithmetic gluing.
 
 ### Outward-consequence bridge
 
