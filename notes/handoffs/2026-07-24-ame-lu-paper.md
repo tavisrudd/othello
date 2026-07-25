@@ -363,6 +363,21 @@ Pauli representatives, elementary generation, and converse as named inputs.
 The warning-free aggregate build, axiom audit, and 18-page manuscript build
 pass.  See `2026-07-25-c613-ame-lu-lean-transversal-clifford.md`.
 
+**C617 closed (2026-07-25): scalar-torus exact sequences and discrete
+quotients formalized.**
+`RelativeConicArcs.AMELU.AutomorphismExactSequence` proves the fixed-party
+and party-permuted scalar tori closed and normal; packages their injective
+inclusions, surjective projectivizations, exact pairs, and finite discrete
+quotients; replaces the detector maps by continuous homomorphisms into
+intrinsic Clifford adjoint-signature groups with exact scalar kernels and
+canonical realized-image identifications; and proves that the fixed-party
+projective group is exactly the kernel of the realized party-permutation
+quotient.  The splitting boundary is exact: it requires a homomorphic right
+inverse, while C613's phase-corrected generator representatives do not supply
+that coherence.  The aggregate gate, axiom audit, and warning-free visually
+inspected 19-page manuscript pass.  See
+`2026-07-25-c617-ame-lu-automorphism-exact-sequence.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -408,7 +423,8 @@ as C559--C572.  Dependency order is authoritative:
 18. C617: closed scalar-torus exact sequence, finite discrete quotient,
     intrinsic continuous signature homomorphisms, realized party-permutation
     extension, and splitting obstruction, using C613's GRS split where
-    available (queued).
+    available (complete; the available GRS interface does not supply a
+    coherent split).
 19. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
     C617 (queued).
 
@@ -431,17 +447,18 @@ projective finiteness, and scalar-phase identity component are formalized.
 C613 is complete: the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, transversal terminal,
 GRS shear algebra, conditional exact carrier equality, and order-seven
-specialization are formalized.  C615 has upgraded C612's quotient carriers and identity-component
+specialization are formalized.  C615 upgraded C612's quotient carriers and identity-component
 statements to explicit group/topological-group structures, normal scalar
 phases, quotient groups, and structured projectivization/signature maps.  C617
-then packages the closed exact sequence, discrete quotient, intrinsic signature
-homomorphisms, and splitting boundary.  C602 follows with a complete
+has now packaged the closed exact sequences, discrete quotients, intrinsic
+signature homomorphisms, realized party-permutation extension, and splitting
+boundary.  C602 follows with a complete
 referee-facing audit of the AME-LU Lean aggregate,
 trust ledgers, verification prose, scholarly closure, and release claims.
 
-**Token-constrained completion route:** continue with `go C617`
-and remain in this lane through C617 and C602, committing and closing
-each C-item normally while reusing the loaded manuscript and formal context.
+**Token-constrained completion route:** continue with `go C602`
+and remain in this lane through C602, committing and closing the C-item
+normally while reusing the loaded manuscript and formal context.
 Do not run optional C581. After C602, the next cross-lane route is C553 and
 then the coordinated build-system extraction. The authoritative three-session
 protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
