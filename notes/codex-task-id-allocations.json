@@ -1070,8 +1070,17 @@
       "last": 602,
       "purpose": "headline LU-to-LC Lean formalization and paper-facing Lean trust audit",
       "sequence": 119
+    },
+    {
+      "count": 1,
+      "first": 603,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 603,
+      "purpose": "audit paper Lean against trust ledger, paper style guide, Lean standards, and external-paper math dependencies",
+      "sequence": 120
     }
   ],
-  "next_id": 603,
+  "next_id": 604,
   "schema": "codex-task-id-allocations-v1"
 }
