@@ -64,14 +64,19 @@ result before C602.
 
 1. Keep C553's approved deletion-first `OddEscape` and `StableFacts` migration plus the
    seventeen-module semantic prose/docstring review as a required first-tag dependency.
-2. Prepare content-addressed candidate manifests for Relconic, PRS R5--R7, and Clebsch Paper I
-   without copying sources.
-3. Wait for AME--LU C612, C613, and C602; do not freeze the superseded C570 closure.
+2. Retain the exact Relconic, PRS R5--R7, and Clebsch Paper I root ledger, but do not generate
+   provisional closure manifests before C602.
+3. Complete AME--LU C612, C613, and C602 continuously in one lane session; do not freeze the
+   superseded C570 closure or run optional C581.
 4. C553 may land before C602. Once both are complete, execute one coordinated extraction wave:
-   inventory regeneration, whole-closure public review, fresh-history copy, exact builds, axiom
-   extraction, and clean replay.
+   form one content-addressed source union, review every unique hash once, regenerate inventories,
+   copy the fresh-history source, run exact builds and axiom extraction, and clean-replay the
+   resulting tags.
 5. Preserve separate incremental tag contracts and paper pins. Shared source may deduplicate by
    content, but no portfolio umbrella is an admissible paper root.
+
+The fresh-session commands, compact semantic-index boundary, batching rules, and deferred work are
+authoritative in `notes/2026-07-25-c287-token-efficient-execution.md`.
 
 ## Files refreshed
 
@@ -80,9 +85,11 @@ result before C602.
 - `notes/2026-07-24-c287-new-paper-export-intake.md`
 - `notes/2026-07-24-c287-first-tag-trust-spine.md`
 - `notes/2026-07-24-c287-source-owner-rewrite-packet.md`
+- `notes/2026-07-25-c287-token-efficient-execution.md`
 - `notes/2026-07-07-codex-task-queue.md`
 - `notes/handoffs/2026-07-06-projective-cap-game-handoff.md`
 - `notes/handoffs/2026-07-14-lean-build-system.md`
+- `notes/handoffs/2026-07-24-ame-lu-paper.md`
 
 ## Open gates
 

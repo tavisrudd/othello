@@ -510,6 +510,9 @@ plan only; no Lean source changed. Arcs, PRS R5--R7, and Clebsch Paper I are loc
 later closure intake, while AME--LU C612, C613, and C602 remain the final paper gate before the
 coordinated fresh-history extraction. See
 [`C553 extraction-preparation refresh`](../2026-07-25-c553-extraction-prep-refresh.md).
+For a token-constrained fresh session, use the one-pass module review and scoped validation route
+in [`C287 token-efficient extraction execution`](../2026-07-25-c287-token-efficient-execution.md);
+do not reload the four paper handoffs while executing C553.
 
 ## Solver Map
 

@@ -26,6 +26,8 @@ planning refresh. Actual fresh-history extraction waits for the AME--LU lane to 
 C613, and the final C602 aggregate audit. The ready later-paper inputs are the Relconic gate,
 C545's scope-exact PRS R5--R7 closure, and the current Clebsch Paper I trust manifest; their exact
 intake contracts are recorded in `notes/2026-07-24-c287-new-paper-export-intake.md`.
+The low-context execution order and compact, one-pass semantic-review boundary are authoritative
+in `notes/2026-07-25-c287-token-efficient-execution.md`.
 
 ## Decision A — odd escape API
 

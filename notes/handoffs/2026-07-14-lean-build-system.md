@@ -163,9 +163,13 @@ closure, and the current nineteen-row/24-terminal Clebsch Paper I manifest at fi
 complete, and C612, C613, then C602 must freeze and audit the final all-`m >= 2` aggregate.
 C570's older six-party aggregate is not an admissible final export root, C581 is optional unless
 adopted before C602, and PRS companion levels and Clebsch Papers II/III remain separate intakes.
-Per the user-directed 2026-07-25 boundary, C287 may prepare candidate manifests now but performs
-no source export until C602 is complete; the actual extraction is one coordinated wave afterward.
-Exact roots and exclusions are in `../2026-07-24-c287-new-paper-export-intake.md`.
+Per the user-directed 2026-07-25 boundary, retain the exact ready-root ledger but defer provisional
+manifests and all source export until C602 is complete; the actual extraction is one coordinated
+wave afterward. Exact roots and exclusions are in
+`../2026-07-24-c287-new-paper-export-intake.md`. Follow
+`../2026-07-25-c287-token-efficient-execution.md`, which defers closure computation until C602,
+deduplicates the full source union by path and hash, reviews every unique source once, and batches
+the paper gates in one quiet build-owner window.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.

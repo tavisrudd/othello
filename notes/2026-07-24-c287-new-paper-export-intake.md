@@ -125,16 +125,20 @@ The current preparation order is:
 
 1. retain C553's approved first-tag source rewrite and semantic docstring pass as a required
    pre-extraction dependency; this planning refresh does not edit Lean;
-2. prepare content-addressed candidate manifests for the ready Relconic, PRS R5--R7, and Clebsch
-   Paper I roots without copying sources;
-3. wait for AME--LU C612, C613, and C602, then ingest the exact C602 aggregate rather than the
-   superseded C570 union;
-4. once both C553 and C602 are complete, execute inventory regeneration, closure review,
-   fresh-history source copy, builds, axiom audits, and clean replay as one coordinated extraction
-   wave;
+2. keep the ready Relconic, PRS R5--R7, and Clebsch Paper I root ledger frozen, but do not generate
+   provisional closure manifests before C602;
+3. complete AME--LU C612, C613, and C602 in one continuous lane session, then ingest the exact C602
+   aggregate rather than the superseded C570 union;
+4. once both C553 and C602 are complete, compute one content-addressed union, review each unique
+   source hash once, and execute inventory regeneration, fresh-history source copy, builds, axiom
+   audits, and clean replay as one coordinated extraction wave;
 5. mint separate incremental tag contracts for the first tag and each adopted paper closure;
    shared source deduplicates by content, while every paper keeps its exact gate and commit pin;
 6. treat Clebsch Papers II/III, PRS companion levels, Relconic quantitative successors, and
    optional AME--LU C581 as later independent intakes unless explicitly adopted before the wave.
+
+The exact fresh-session sequence, deduplication rules, compact semantic-index boundary, deferred
+work, and output discipline are authoritative in
+`notes/2026-07-25-c287-token-efficient-execution.md`.
 
 No Lean, Lake, generator, build, export, or remote action was performed for this intake.

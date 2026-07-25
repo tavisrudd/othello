@@ -117,12 +117,22 @@ exclusions, and evidence boundaries are recorded in
 `notes/2026-07-24-c287-new-paper-export-intake.md`.
 
 Per the 2026-07-25 user gate, no source export occurs before AME--LU C602 freezes its aggregate.
-C287 may prepare content-addressed candidate manifests for the three ready closures, but the
-C553 source rewrite remains an independent precondition and may land before that gate. Once C553
-and C602 are both complete, inventory regeneration, whole-closure review, fresh-history copy,
-builds, axiom extraction, and clean replay form one coordinated execution wave. These later
-closures do not enlarge the frozen 26-file first tag; each enters through a separate incremental
-tag contract, and shared files are deduplicated by content rather than by a portfolio umbrella.
+The three ready closures retain their exact root ledger, but provisional manifests are deferred to
+avoid recomputation. C553 remains an independent precondition and may land before C602. Once both
+are complete, inventory regeneration, whole-closure review, fresh-history copy, builds, axiom
+extraction, and clean replay form one coordinated execution wave. These later closures do not
+enlarge the frozen 26-file first tag; each enters through a separate incremental tag contract, and
+shared files are deduplicated by content rather than by a portfolio umbrella.
+
+### Token-efficient execution route
+
+The authoritative low-context route is
+`notes/2026-07-25-c287-token-efficient-execution.md`. It uses exactly three lane sessions:
+C612--C613--C602 continuously in `ame-lu`, C553 in `cap`, then one coordinated C287 extraction in
+`build-sys`. The extraction computes one content-addressed union, reviews each unique source hash
+once, preserves separate paper manifests and gates, and validates all aggregates in one quiet
+build-owner window. It explicitly defers provisional pre-C602 manifests, C581, companion-paper
+closures, and certificate packages not required by an adopted paper contract.
 
 Heavyweight generated certificate trees are not members of the `finitegeom` source union. Each
 such family has an explicit package boundary, depends one-way on a pinned `finitegeom` commit, and

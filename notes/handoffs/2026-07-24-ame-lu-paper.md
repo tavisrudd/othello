@@ -386,6 +386,13 @@ terminal.  C602 follows with a complete referee-facing audit of the AME-LU
 Lean aggregate, trust ledgers, verification prose, scholarly closure, and
 release claims.
 
+**Token-constrained completion route:** start a fresh session with `go C612`
+and remain in this lane through C612, C613, and C602, committing and closing
+each C-item normally while reusing the loaded manuscript and formal context.
+Do not run optional C581. After C602, the next cross-lane route is C553 and
+then the coordinated build-system extraction. The authoritative three-session
+protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
+
 ## Completion gates
 
 1. Freeze the adopted theorem package and honest exceptional set.
