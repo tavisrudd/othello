@@ -1,0 +1,347 @@
+{
+  "claim_scope": "Finite gate on the frozen q13/q17 escape-root domains. The omega-zero boundary is certified by a one-exchange adaptive shell into a persistent nonedge pairing (with graph involutions/component swaps as special cases); positive layers use strict-omega adaptive response descent.",
+  "orders": [
+    {
+      "boundary_component_order_histogram": {
+        "1": 119,
+        "2": 12,
+        "3": 1,
+        "4": 34,
+        "5": 8,
+        "6": 29,
+        "7": 16,
+        "8": 6,
+        "9": 2,
+        "10": 14
+      },
+      "boundary_legal_vertex_histogram": {
+        "0": 110,
+        "2": 47,
+        "4": 47,
+        "5": 8,
+        "6": 29,
+        "7": 16,
+        "8": 6,
+        "9": 2,
+        "10": 14
+      },
+      "boundary_rejections": {
+        "unpaired_component_order_1": 2,
+        "unpaired_component_order_2": 6,
+        "unpaired_component_order_3": 20,
+        "unpaired_component_order_4": 106,
+        "unpaired_component_order_5": 88,
+        "unpaired_component_order_6": 77,
+        "unpaired_component_order_7": 50,
+        "unpaired_component_order_8": 41,
+        "unpaired_component_order_9": 7
+      },
+      "certified_response_edges": 446,
+      "copycat_boundary_mask_sha256": "12adf6eb997d4a0e04d445fdde020aa760cc55dfbd2b8504b2fcd3d9334e2ea0",
+      "copycat_boundary_states": 279,
+      "exact_p_roots": 5,
+      "independent_boundary_grundy_histogram": {
+        "0": 279
+      },
+      "kernel_states_visited": 733,
+      "q": 13,
+      "records": [
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 108,
+          "t4": [
+            1,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 102,
+          "t4": [
+            3,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 72,
+          "t4": [
+            4,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 90,
+          "t4": [
+            7,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 92,
+          "t4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "response_map_sha256": "6741118268a2badd2f6e4b30c83128e0a78a7061fded9817bc13b9dec4917608",
+      "roots": 5,
+      "survivor_roots": 5
+    },
+    {
+      "boundary_component_order_histogram": {
+        "1": 19748,
+        "2": 4118,
+        "3": 761,
+        "4": 4473,
+        "5": 2774,
+        "6": 1867,
+        "7": 609,
+        "8": 237,
+        "9": 44,
+        "10": 53,
+        "12": 5
+      },
+      "boundary_legal_vertex_histogram": {
+        "0": 9042,
+        "2": 6994,
+        "3": 3510,
+        "4": 5579,
+        "5": 2845,
+        "6": 1878,
+        "7": 609,
+        "8": 350,
+        "9": 44,
+        "10": 53,
+        "12": 5
+      },
+      "boundary_rejections": {
+        "unpaired_component_order_1": 13157,
+        "unpaired_component_order_10": 26,
+        "unpaired_component_order_2": 16922,
+        "unpaired_component_order_3": 25140,
+        "unpaired_component_order_4": 20678,
+        "unpaired_component_order_5": 13201,
+        "unpaired_component_order_6": 6270,
+        "unpaired_component_order_7": 2279,
+        "unpaired_component_order_8": 559,
+        "unpaired_component_order_9": 219
+      },
+      "certified_response_edges": 59419,
+      "copycat_boundary_mask_sha256": "6838f260f6cdf94d6120431d04f6bfba6a20adf6c0793e23feec0d5cdb419da0",
+      "copycat_boundary_states": 30909,
+      "exact_p_roots": 5,
+      "independent_boundary_grundy_histogram": {
+        "0": 30909
+      },
+      "kernel_states_visited": 138221,
+      "q": 17,
+      "records": [
+        {
+          "copycat_survivor": false,
+          "exact_cap_value": "N",
+          "omega": 832,
+          "t4": [
+            1,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": false,
+          "exact_cap_value": "N",
+          "omega": 832,
+          "t4": [
+            2,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 772,
+          "t4": [
+            3,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "copycat_survivor": false,
+          "exact_cap_value": "N",
+          "omega": 832,
+          "t4": [
+            3,
+            4,
+            5,
+            9
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 808,
+          "t4": [
+            4,
+            5,
+            7,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": false,
+          "exact_cap_value": "N",
+          "omega": 832,
+          "t4": [
+            4,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 820,
+          "t4": [
+            6,
+            7,
+            8,
+            14
+          ]
+        },
+        {
+          "copycat_survivor": false,
+          "exact_cap_value": "N",
+          "omega": 844,
+          "t4": [
+            6,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 796,
+          "t4": [
+            11,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "copycat_survivor": true,
+          "exact_cap_value": "P",
+          "omega": 820,
+          "t4": [
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      ],
+      "response_map_sha256": "0ae6aec57d596451023ea663c179ed4b2b86da10232f0fee8f8b8a37ca326028",
+      "roots": 10,
+      "survivor_roots": 5
+    }
+  ],
+  "original_ynk_boundary_audit": [
+    {
+      "component_kind_histogram": {
+        "clique": 13,
+        "cycle": 16,
+        "isolated": 119,
+        "other": 75,
+        "path": 18
+      },
+      "legal_vertex_histogram": {
+        "0": 110,
+        "2": 47,
+        "4": 47,
+        "5": 8,
+        "6": 29,
+        "7": 16,
+        "8": 6,
+        "9": 2,
+        "10": 14
+      },
+      "minimum_adaptive_pairing_shell_depth": {
+        "0": 242,
+        "1": 37
+      },
+      "q": 13,
+      "state_component_class_histogram": {
+        "has_other_component": 75,
+        "path_cycle_clique_only": 204
+      },
+      "ynk_boundary_mask_sha256": "12adf6eb997d4a0e04d445fdde020aa760cc55dfbd2b8504b2fcd3d9334e2ea0",
+      "ynk_boundary_states": 279
+    },
+    {
+      "component_kind_histogram": {
+        "clique": 4923,
+        "cycle": 2325,
+        "isolated": 19748,
+        "other": 5578,
+        "path": 2115
+      },
+      "legal_vertex_histogram": {
+        "0": 9042,
+        "2": 6994,
+        "3": 3510,
+        "4": 5579,
+        "5": 2845,
+        "6": 1878,
+        "7": 609,
+        "8": 350,
+        "9": 44,
+        "10": 53,
+        "12": 5
+      },
+      "minimum_adaptive_pairing_shell_depth": {
+        "0": 22475,
+        "1": 8434
+      },
+      "q": 17,
+      "state_component_class_histogram": {
+        "has_other_component": 5578,
+        "path_cycle_clique_only": 25331
+      },
+      "ynk_boundary_mask_sha256": "6838f260f6cdf94d6120431d04f6bfba6a20adf6c0793e23feec0d5cdb419da0",
+      "ynk_boundary_states": 30909
+    }
+  ],
+  "schema": "c80-adaptive-copycat-survivor-v6",
+  "source": {
+    "frozen_rows": "notes/data/c20-q13-q17-states.jsonl.gz",
+    "frozen_rows_sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d",
+    "strict_kernel_script": "rust/scripts/c80_strict_overload_kernel.py",
+    "strict_kernel_script_sha256": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206"
+  }
+}

@@ -957,6 +957,25 @@ an adaptive copycat/decomposition strategy and may ignore losing maximal
 branches. C82 remains gated. Report+script+certificate:
 [`../2026-07-25-c80-pure-extension-survivor.md`](../2026-07-25-c80-pure-extension-survivor.md).
 
+**The adaptive copycat boundary is a finite positive and removes the Grundy
+oracle from the complete q13/q17 strict-kernel DAG (C80, 2026-07-25).**
+At `Ω=0`, a persistent nonedge pairing is a copycat certificate when every
+other pair survives or is deleted whole after a pair is played. The structural
+packet `B_cc` allows either such a pairing immediately or a one-exchange
+adaptive shell `∀x∃y` into one. Exact replay finds that every visited `Y_NK`
+boundary state has this form: q13 `242` direct + `37` shell; q17 `22,475`
+direct + `8,434` shell. The boundary-mask and positive response-map digests
+are identical to the prior strict-kernel artifact, so the resulting ranked
+survivor still contains all five q13 P roots and exactly the five q17 P roots
+while rejecting all five q17 N roots. Independent Node--Kayles replay gives
+Grundy zero on all accepted boundary graphs. This closes the finite
+boundary-value gate but not the uniform crown: the positive layer still
+stores an opponent-complete strict-`Ω` response tree. Next lift the marked
+`∀x∃y∃pairing` incidence certificate through positive overload with a
+q-independent secant construction; test boundary uniformity beyond q17
+before releasing C82. Report+script+certificate:
+[`../2026-07-25-c80-adaptive-copycat-survivor.md`](../2026-07-25-c80-adaptive-copycat-survivor.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -1006,10 +1025,13 @@ Priority order and why:
    complete residual and update by decode–`D_x`–encode. The next crown must first fix an
    anti-packing information model. Exact polynomial-range quotients must already carry
    `log q-O(1)` bits (`Cd≥1` for `d` coordinates of `O(q^C)` range), but exact congruence is
-   stronger than the crown needs. The Tao-style formulation is a directly defined ranked survivor
-   `F_q` realizing the concrete `∀o∃p` strict-`Ω` induction, plus a structurally proved-P boundary
-   packet `B_q=F_q∩{Ω=0}`. No quotient is required, and arbitrary `Y_NK` Grundy zero is not an
-   admissible base oracle. A value-only factor is also not excluded.
+   stronger than the crown needs. The Tao-style boundary is now found at the finite gate:
+   `B_cc` is the fixed incidence formula “persistent nonedge pairing, or
+   `∀x∃y` into one,” and it replaces every visited q13/q17 `Y_NK` leaf exactly.
+   The remaining formulation is a directly defined ranked survivor `F_q`
+   realizing the concrete positive-overload `∀o∃p` strict-`Ω` induction and
+   landing in `B_cc`; no quotient or arbitrary Grundy oracle is required. A
+   value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
