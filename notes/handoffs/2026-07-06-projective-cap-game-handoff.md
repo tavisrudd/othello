@@ -902,6 +902,22 @@ this exact transform that makes lower-`K_Ω` response membership nonrecursive;
 C82 remains gated. Report+script+certificate:
 [`../2026-07-25-c80-residual-exchange-morphism.md`](../2026-07-25-c80-residual-exchange-morphism.md).
 
+**A q-independent finite-state residual congruence is impossible even inside
+`Y_NK∩P` (C80, 2026-07-25).** If `A` is a conic subset with
+`|A|>(q+3)/2`, every off-conic point is illegal: the conic involution induced
+by that point has at most two fixed points, so an unpaired subset has size at
+most `(q+3)/2`. The residual is therefore free placement on
+`n=q+1-|A|` conic points. For every even `n<(q-1)/2` this is a distinct
+height-`n` `Y_NK` P-position, forcing at least
+`floor((q-2)/4)+1` exact move-bisimulation classes at one order. Thus no
+fixed finite exact follower-game type can encode the residual transform, even
+on the proven kernel boundary. This does not rule out finitely many algebraic
+coordinates with unbounded values, or a value-only Grundy factor; the conic
+family itself is described by the one unbounded coordinate `n` and valued by
+parity. The live crown is now a fixed-dimensional unbounded-range algebraic
+congruence on the positive-overload response family. Report:
+[`../2026-07-25-c80-finite-signature-no-go.md`](../2026-07-25-c80-finite-signature-no-go.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -943,8 +959,12 @@ Priority order and why:
    depth-free mixed-capacity residual transform is an exact game-tree morphism and absorbs all
    historical pencils into pair-conflict blocks plus active capacity-two blocks. The live theorem
    is now a q-independent finite-dimensional congruence/follower signature of that residual
-   transform which preserves the lower-`K_Ω` response structure. The exact quotient is only
-   bounded-arity, and transporting the recursive kernel through it does not prove membership.
+   transform which preserves the lower-`K_Ω` response structure. A fixed finite exact signature
+   is now ruled out: sealed conic subsets already give
+   `floor((q-2)/4)+1` distinct P-valued `Y_NK` heights. The exact quotient is only bounded-arity,
+   and transporting the recursive kernel through it does not prove membership. The remaining
+   admissible algebra has finitely many coordinates with unbounded ranges; a value-only factor is
+   also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
