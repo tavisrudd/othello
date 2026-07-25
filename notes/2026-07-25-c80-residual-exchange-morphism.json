@@ -1,0 +1,48 @@
+{
+  "claim_scope": "Exact bounded-arity residual transform checked on the stated frozen q=17 positive-overload reply domain. The mathematical update law is general for line-capacity-two residuals. This is not a bounded-cardinality or bounded-dimensional quotient and does not prove uniform K_Omega membership.",
+  "order": {
+    "direct_target_reconstructions": 3960,
+    "distinct_target_residuals": 2022,
+    "domain": "all positive-overload lower-K_Omega replies in forced-positive fibres of the frozen strict-kernel DAG",
+    "first_mismatch": null,
+    "marked_children": 610,
+    "mismatches": 0,
+    "opponent_transform_checks": 610,
+    "parents": 58,
+    "q": 17,
+    "reply_rows": 3960,
+    "reply_transform_checks": 3960,
+    "signature_rows": 254,
+    "target_active_block_range": [
+      1,
+      53
+    ],
+    "target_live_vertex_range": [
+      3,
+      38
+    ],
+    "target_omega_range": [
+      1,
+      68
+    ],
+    "target_pair_block_range": [
+      0,
+      88
+    ],
+    "target_selected_size_histogram": {
+      "6": 3798,
+      "8": 162
+    }
+  },
+  "schema": "c80-residual-exchange-morphism-v1",
+  "upstream": {
+    "certificate": {
+      "path": "notes/2026-07-25-c80-marked-secant-profile-persistence.json",
+      "sha256": "80abe5227cb0148b5236fa1fbfd7d2a4b5a966c9741fb9e176139866ff7bb00b"
+    },
+    "script": {
+      "path": "rust/scripts/c80_marked_secant_profile_persistence.py",
+      "sha256": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa"
+    }
+  }
+}

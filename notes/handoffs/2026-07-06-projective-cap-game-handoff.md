@@ -877,12 +877,30 @@ marked-pencil clique with externally non-twin vertices, so neither projective
 relabelling nor collapsing each clique to one move repairs the quotient. Across all 610 forced-positive
 fibres, exact forgetful contractions occur only on 65 size-six replies,
 covering 51 fibres; the other 559 fibres have none. Thus deletion cannot
-initialize the required recursion. A successor must retain the two labelled
-marked-pencil conflict relations per exchange and prove a bounded algebraic
-quotient of their accumulated external incidence; a non-simplicial value
-argument also remains possible. This does not disprove
+initialize the required recursion. A successor must retain the surviving
+pair-conflict effect of the marked pencils and compress its accumulated
+external incidence; a non-simplicial value argument also remains possible. This does not disprove
 `inf_q ρ(S_q)>0`; C82 remains gated. Report+script+certificate:
 [`../2026-07-25-c80-exchange-retraction-falsifier.md`](../2026-07-25-c80-exchange-retraction-falsifier.md).
+
+**An exact depth-free residual exchange morphism is proved (C80,
+2026-07-25), but finite-dimensional compression remains open.** A state
+contracts to its live vertices, load-one pair-conflict blocks, and load-zero
+active capacity-two blocks. Selecting a move deletes its pair neighbours,
+restricts all blocks, and degrades each active block through the move into a
+pair block. This commutes exactly with direct geometric play, hence preserves
+the full continuation game; `Ω`, `Y_NK`, `K_Ω`, and `F_α` all factor through
+it. Independent direct reconstruction agrees on all 610 q17 marked children
+and 3,960 positive reply targets. This is C547's rank-three residual theorem
+made dynamic—the existing `deepTransform` object—not a new game class.
+Historical pencils need not remain separately labelled; their surviving
+pair-conflict union suffices together with the active blocks. The quotient is
+bounded-arity, not bounded-size or bounded-dimensional: tested targets still
+range over 3–38 vertices, 0–88 pair blocks, and 1–53 active blocks. The live
+crown is a q-independent finite-dimensional congruence/follower signature of
+this exact transform that makes lower-`K_Ω` response membership nonrecursive;
+C82 remains gated. Report+script+certificate:
+[`../2026-07-25-c80-residual-exchange-morphism.md`](../2026-07-25-c80-residual-exchange-morphism.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
@@ -921,11 +939,12 @@ Priority order and why:
    at least `(s_even(q)-8)/2` positive-overload response targets before absorption, asymptotic to
    `sqrt(q/2)-4`.  The finite data do not enter that growing-depth regime.  Exact marked-secant
    profiles are now P/N-mixed, while the bounded orbital refinement that covers all q17
-   forced-positive fibres has zero cross-depth recurrence.  The live theorem is therefore a
-   bounded algebraic quotient of the accumulated marked-pencil boundary. Exact forgetting is
-   false at every q17 size-four positive reply, and collapsing a new pencil clique loses external
-   incidence already at rank two. The route therefore needs a labelled recursive family or a
-   non-simplicial value argument, not another static profile.
+   forced-positive fibres has zero cross-depth recurrence. Exact forgetting is false, but the
+   depth-free mixed-capacity residual transform is an exact game-tree morphism and absorbs all
+   historical pencils into pair-conflict blocks plus active capacity-two blocks. The live theorem
+   is now a q-independent finite-dimensional congruence/follower signature of that residual
+   transform which preserves the lower-`K_Ω` response structure. The exact quotient is only
+   bounded-arity, and transporting the recursive kernel through it does not prove membership.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
