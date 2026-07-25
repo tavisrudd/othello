@@ -1,5 +1,5 @@
 {
-  "check_count": 15,
+  "check_count": 16,
   "checks": [
     {
       "id": "verification-tool-tests",
@@ -58,16 +58,20 @@
       "status": "passed"
     },
     {
+      "id": "check-c605-eight-point-exclusion",
+      "status": "passed"
+    },
+    {
       "id": "lean-rigidity-trust-gate",
       "status": "passed"
     }
   ],
   "inputs": {
-    "checker_outputs_sha256": "d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56",
-    "manuscript_pdf_sha256": "44c8a0fdae79e4ab91be58f4b270058bd08fd6b42135f939d70cfe5606c1f4cf",
-    "manuscript_sha256": "0e3a5d37b5ec8988b9f1baf3733e1950ac25243344a17f5da1b7bd045cf7f386",
-    "release_surface_sha256": "7a8019c5924adf2487825e8f471a7de36756531e8a884317e3a7a789a03c4e74",
-    "statement_identity_sha256": "f6a9ea6f9f7e8d9a856d388ab1b13496f531c41ebb19eb52d4c7dab782f9928a"
+    "checker_outputs_sha256": "b5577fa19c35992950faf486cac33df5de523ff05162e6fa42ecd886302fdcbc",
+    "manuscript_pdf_sha256": "2fb10a4d7ba152bd86567d67ae6fd388cdf9068f4e53a34be8fe4e5379eb1add",
+    "manuscript_sha256": "af2e4d97313b9449869c514e34772cf2a989ab0db50ba5c9962b16778bb4a14e",
+    "release_surface_sha256": "f1bdf88608a7f8c5d5082503818c77df07fb5ba87904dbf59e3a1b025f27a2f2",
+    "statement_identity_sha256": "5e94935129ad4492779c49c0cad18063d2fe3af9c35a0121582946c19c96914a"
   },
   "lean_commit": "6d4766d1ea5e9a36f1a507e549c223416a6b506f",
   "status": "passed"
