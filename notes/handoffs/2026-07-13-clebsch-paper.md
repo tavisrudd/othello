@@ -54,17 +54,19 @@ geometry---rather than presenting the abstract as a flat result list.  It
 regenerated the statement identity, PDF, trust manifest, and release
 certificate; the clean fifteen-check replay is green at `949ec7b2`.
 
-The final prose--Lean synchronization audit reopened one bounded internal
-C182 repair before external packaging.  Its five findings are recorded
-exactly in `notes/2026-07-24-c182-clebsch-paper-release.md`: route the new
-polarity headline explicitly; separate the nonformalized support
-bipartition from the decoding-formalization table row; correct Dye
-Theorem~1 to Theorems~1 and~3; weaken or strengthen
-`residual_graph_icosahedral` to match its type; and repair the
-nonzero-ambiguity wording plus missing public docstrings.  The mathematics
-and all twenty-four admitted terminal axiom closures remain green.  After
-these source edits, regenerate the statement identity, PDF, trust manifest,
-release certificate, and final clean fifteen-check replay.
+The five prose--Lean synchronization findings are repaired.  The polarity
+route, support-bipartition trust boundary, Dye theorem numbering,
+icosahedral-local-data name, ambiguity wording, and public docstrings now
+match the exact formal statements.  The formal gate passed at `6d4766d1`;
+the manuscript and nineteen-row surface were regenerated at `59f6babe`;
+the refreshed certificate and final clean fifteen-check replay passed at
+`341fabbf`.
+
+C605 is the next task in a fresh Clebsch session.  It decides conic filling
+for eight-arcs over $q\in\{13,17,19\}$ by a symmetry-reduced exact search
+with compact certificates and independent replay.  Its complete brief,
+forced spectra, acceptance gate, and Paper I update contract are in
+`notes/2026-07-25-c605-eight-point-conic-filling-search.md`.
 
 The subsequent C182 blocker is external publication packaging. The
 previously cited GitHub artifact URL is not publicly reachable, and this
@@ -76,10 +78,12 @@ and the identifier is added to the paper.
 
 The active order is strict:
 
-1. **C182:** archive and release Paper I.
-2. **C577:** build and referee-test standalone Paper II after Paper I is
+1. **C605:** close the three remaining eight-point fields in the next fresh
+   session and refresh Paper I if the result strengthens it.
+2. **C182:** make the immutable public deposit and insert its identifier.
+3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-3. **C579:** test Paper III after Paper II; require one principal theorem or
+4. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled

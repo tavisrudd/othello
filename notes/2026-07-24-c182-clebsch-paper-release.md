@@ -93,34 +93,19 @@ made without the Sadeh thesis.
 
 ## Release blocker
 
-The final prose--Lean synchronization audit found five internal release
-findings that must be repaired before immutable deposit:
+The five prose--Lean synchronization findings are repaired.  The manifest
+now routes the polarity claim through Dye's Theorem~2; the verification
+tables separate decoding/Brianchon formalization from the human-and-replay
+support bipartition; the Dye seam names Theorems~1 and~3 correctly;
+`residual_graph_icosahedral_local_data` now matches its exact type; and the
+nonzero-syndrome wording and public helper docstrings are complete.  The
+formal gate passed at `6d4766d1`, the regenerated manuscript and
+nineteen-row surface landed at `59f6babe`, and the refreshed certificate and
+final clean fifteen-check replay passed at `341fabbf`.
 
-1. the revised row-2 headline now includes recovery of the associated
-   polarity, but its trust-manifest route names only the rigidity implication
-   and stabilizer identification; route the polarity through Dye's exact
-   polarity theorem or narrow the headline;
-2. the verification table groups ``Decoding and support bipartition'' under
-   `Q11DecodingSynthesis.lean`, although that module proves the distance
-   oracle, ambiguity counts, and Brianchon leader supports, not the intrinsic
-   unordered support bipartition; split or qualify the row;
-3. the verification prose says that both external axioms are consequences
-   of Dye's Theorem 1, while `Q11DyeAxioms.lean` correctly assigns them to
-   Dye's Theorems 1 and 3;
-4. `residual_graph_icosahedral` proves the 30-edge, degree-five,
-   five-cycle-link signature, not an explicit graph isomorphism to the
-   icosahedron; either weaken the name/comment or add the isomorphism theorem;
-5. the nonzero-syndrome ambiguity census is described as simply
-   ``complete'', and sixteen public helper theorems across `Q11Coding.lean`,
-   `Q11DecodingSynthesis.lean`, and `Q9Sylvester.lean` lack individual
-   docstrings under the current formal-artifact standard.
-
-These are trust-map and documentation defects, not failures of the
-mathematical terminals.  All twenty-four admitted terminals retain the
-advertised axiom closure, and the fifteen-check release replay remains
-green.  Repairing any manuscript or formal source invalidates the current
-release certificate; regenerate the statement identity, PDF, manifest,
-certificate, and clean replay in the prescribed order.
+C605 is now the next Clebsch research task before immutable deposit.  It
+will decide the three remaining eight-point fields and either strengthen
+Paper I or certify that the present sieve is the exact stopping boundary.
 
 The previously cited GitHub commit is not publicly reachable, Software
 Heritage has no archived origin for it, and this workspace has no GitHub or
@@ -144,9 +129,8 @@ inserted in the manuscript.
   ceiling.  The proof shows that extremality constrains chord multiplicities
   to the largest possible concurrence, but turning that into geometry is a
   distinct successor problem.
-- **Open:** whether eight-point conic filling occurs over
-  $q\in\{13,17,19\}$.  The present paper proves only the sieve; an
-  extension-and-rank census or new concurrency argument would be a distinct
-  successor, not a release requirement.
+- **Allocated to C605:** whether eight-point conic filling occurs over
+  $q\in\{13,17,19\}$.  The next fresh Clebsch session runs the
+  symmetry-reduced certified search before immutable Paper I deposit.
 - **Open, user-controlled:** immutable public provenance.  The acceptance
   gate is a DOI or SWHID plus a replayable archival artifact.
