@@ -98,9 +98,16 @@ A `tt` pass isolates the exact proof target:
 would leave only ten-space spanning to the finite certificate.
 The same pass promotes the uniform Coxeter-number formula
 `dim W_T = h_T - 1 + 1_(h_T/2-1 even)`, whose three values are `3,6,10`.
-The primary C406 certificate and independent replay are green. Its clean
-six-page build is warning-free. The next drafting frontier is balanced-sheet
-uniqueness and cubic-first orientation.
+C616 is queued as a nonblocking Paper II trust-boundary upgrade: prove the
+radial-trace identity without coordinates and replace ten-space row reduction,
+as far as possible, by equivariant nonvanishing on `1+4+5`.
+Paper II now also proves the abstract radical--Hadamard recovery lemma,
+specializes it to the `B_3` `7+7` and `H_3` `11+11` sheets without subset
+enumeration, and proves that the first signed tensor orientation moment is
+cubic and carries the outer character. The C406 and C430 primary certificates,
+independent replays, and checksum gates are green. Its clean nine-page build is
+warning-free. The next drafting frontier is six-profile matching-row
+reconstruction.
 
 The active order is strict:
 
@@ -237,9 +244,9 @@ must cite the final Paper I release rather than changing or extending it.
 
 Current C577 drafting state: the opening bridge, headline theorem,
 marked-conic definition, general quotient proof, switch identity, explicit
-rank-three configurations, and exact `3,6,10` theorem are in the manuscript.
-Continue with balanced-sheet uniqueness and cubic-first orientation before
-importing the modular-depth material.
+rank-three configurations, exact `3,6,10` theorem, balanced-sheet uniqueness,
+and cubic-first orientation are in the manuscript. Continue with six-profile
+matching-row reconstruction before importing the modular-depth material.
 
 ### Outward-consequence bridge
 

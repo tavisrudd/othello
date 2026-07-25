@@ -27,8 +27,12 @@ it packages the three ranks uniformly by Coxeter number
 its `H_3` corollary identifies the five missing dimensions exactly as the
 middle Fischer layer `Q H_2` and equivalently characterizes the image by
 the covariant equation `Delta_Q f in F_11 Q`;
+the balanced-sheet section proves a symbolic radical--Hadamard recovery
+theorem, specializes it to the `7+7` and `11+11` sheets, and shows that the
+first signed orientation moment is cubic;
 its current exact evidence is the committed C406 primary certificate and
-independent replay. C575's disposition is complete and authoritative. Import
-only the material assigned to Paper II; the broad manuscript in
+independent replay together with the C430 hypothesis certificate and replay.
+C575's disposition is complete and authoritative. Import only the material
+assigned to Paper II; the broad manuscript in
 `../clebsch-hexagon-code/` remains an unchanged fallback, not a source to trim
 wholesale.

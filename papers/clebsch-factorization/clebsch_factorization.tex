@@ -391,10 +391,197 @@ begins one categorical level higher, with products of affine evaluation
 functions.
 
 \section{Balanced sheets and cubic orientation}
+\label{sec:balanced}
 
-Show how second moments recover the two balanced halves in the $B_3$ and
-$H_3$ cases up to interchange.  Identify degree three as the first
-signed moment that orients the halves.
+For \(T=B_3,H_3\), put \(q=7,11\), respectively.  The subgroup
+\[
+ G^+=\operatorname{PSL}_2(q)
+ \subset G=\operatorname{PGL}_2(q)
+\]
+splits \(\Omega_T\) into two orbits
+\(\Omega_+\sqcup\Omega_-\), each of size \(q\); an element of the outer
+coset exchanges them.  These are the two one-factorization sheets.  The
+\(A_3\) orbit does not split: its \(S_4\) stabilizer cannot lie in
+\(\operatorname{PSL}_2(5)\simeq A_5\), already by order.
+
+Write \(x_M=\Phi_{M_T}(M)\in W_T\).  Let \(L\subseteq\F_q^{\Omega_T}\)
+be the evaluation space of affine-linear functions on the finite
+configuration \(\{x_M\}\).  Since the points affinely span \(W_T\),
+\[
+ \dim L=1+\dim W_T=q.
+\]
+For subspaces of functions, write
+\[
+ L^{\circ2}=\operatorname{span}\{fg:f,g\in L\},
+\]
+where multiplication is pointwise.
+
+\begin{proposition}[Radical--Hadamard recovery]
+\label{prop:radical-hadamard}
+Let \(k\) be a field and
+\(\Omega=\Omega_+\sqcup\Omega_-\), with both sheets of size \(q=0\)
+in \(k\).  Suppose an affine evaluation space
+\(L\subseteq k^\Omega\) has the following properties:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item each sheet has zero first moment, and the two sheets have equal
+second moments;
+\item \(\dim L=q\), and restriction from \(L\) onto the zero-sum
+hyperplane of either sheet has rank \(q-1\);
+\item the second-moment form on linear functionals has rank \(q-2\)
+and a one-dimensional radical;
+\item a nonzero radical functional is constant on each sheet, with
+different constants on the two sheets.
+\end{enumerate}
+Then
+\[
+ L^{\circ2}
+ =\left\{(u_+,u_-):
+   \sum_{\Omega_+}u_+=\sum_{\Omega_-}u_-\right\},              \tag{5.1}
+\]
+and
+\[
+ (L^{\circ2})^\perp
+ =k(\mathbf1_{\Omega_+}-\mathbf1_{\Omega_-}).                 \tag{5.2}
+\]
+Consequently every field-valued strength-two trade is a scalar multiple
+of the sheet sign.
+\end{proposition}
+
+\begin{proof}
+Let \(e_+\) and \(e_-\) be the two sheet indicators.  The radical
+functional evaluates as \(a_+e_++a_-e_-\) with \(a_+\ne a_-\).
+Together with \(1=e_++e_-\in L\), it therefore yields
+\(e_+,e_-\in L\).
+
+Let \(H_\pm\) be the zero-sum hyperplane on \(\Omega_\pm\).
+The first-moment hypothesis and \(q=0\) put each restriction of \(L\)
+inside \(H_\pm\); the rank hypothesis makes both restrictions
+surjective.  Multiplication by \(e_+\) and \(e_-\) now gives
+\[
+ (H_+\oplus0)+(0\oplus H_-)\subseteq L^{\circ2}.              \tag{5.3}
+\]
+This subspace has dimension \(2q-2\).
+
+For \(f,g\in L\), the difference between the two sheet sums of \(fg\)
+expands into constant, first-moment, and second-moment terms.  The
+hypotheses make all three differences zero, so \(L^{\circ2}\) lies in
+the hyperplane on the right of (5.1).  Finally choose restrictions
+\(a,b\in H_+\) with nonzero standard pairing and lift them to
+\(f,g\in L\).  Equality of the second moments gives the same nonzero
+pairing on \(\Omega_-\).  Thus \(fg\) has equal nonzero sheet sums and
+does not lie in (5.3).  We have found \(2q-1\) independent directions
+in the \(2q-1\)-dimensional hyperplane, proving (5.1).  Its annihilator
+under the standard coordinate pairing is the line in (5.2).
+\end{proof}
+
+The hypotheses of Proposition~\ref{prop:radical-hadamard} are small
+finite linear-algebra statements for the two quotient configurations:
+\[
+\begin{array}{c@{\quad}c@{\quad}c@{\quad}c@{\quad}c}
+T&q&\text{sheet restriction ranks}
+ &\text{second-moment rank}&\dim L^{\circ2}\\ \hline
+B_3&7&6,6&5&13,\\
+H_3&11&10,10&9&21.
+\end{array}                                                   \tag{5.4}
+\]
+In each row the radical is one-dimensional and takes two distinct
+sheet values.  The exact certificate checks these hypotheses from the
+matching quotients; an independent implementation reconstructs the
+row reductions and the resulting trade line.  No enumeration of
+equal-size subsets is used in the proof.
+
+\begin{theorem}[Balanced sheets and cubic-first orientation]
+\label{thm:balanced-cubic}
+For \(T=B_3,H_3\), the unordered pair
+\(\{\Omega_+,\Omega_-\}\) is intrinsic to the affine quotient
+configuration:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item up to interchange, \(\Omega_+\) and \(\Omega_-\) are the only
+complementary halves with equal first and second tensor moments;
+\item if \(\epsilon\) is \(+1\) on \(\Omega_+\) and \(-1\) on
+\(\Omega_-\), then
+\[
+ \mu_j=\sum_{M\in\Omega_T}\epsilon(M)x_M^{\odot j}
+       \in\operatorname{Sym}^j(W_T)
+\]
+satisfies
+\[
+ \mu_1=0,\qquad \mu_2=0,\qquad \mu_3\ne0;                    \tag{5.5}
+\]
+\item \(\mu_3\) is independent of the reference matching,
+\(G^+\) fixes it, and the outer coset negates it.  Within \(G\),
+\[
+ \operatorname{Stab}_G(\mu_3)=G^+,\qquad
+ \operatorname{Stab}_G(\F_q\mu_3)=G.                         \tag{5.6}
+\]
+\end{enumerate}
+Thus degree three is the first signed tensor moment, or linear
+functional of such a moment, that orients the recovered sheet pair.
+This minimality statement concerns signed tensor moments, not every
+possible nonlinear statistic of the configuration.
+\end{theorem}
+
+\noindent\emph{Proof mode.}
+Proposition~\ref{prop:radical-hadamard} is a symbolic proof.
+The ranks, radical separation, lower-moment cancellation, and nonzero
+cubic for the two displayed configurations are certificate-checked over
+\(\F_7\) and \(\F_{11}\) and independently replayed.  The transformation
+law and reference independence below are formal consequences of those
+finite inputs.
+
+\begin{proof}
+Equality of first and second tensor moments for a complementary pair is
+equivalent, by polarization, to its sign weight annihilating
+\(L^{\circ2}\).  Since the characteristics are \(7\) and \(11\),
+polarization through degree two is valid.  Proposition
+\ref{prop:radical-hadamard} says that the annihilator is exactly the
+sheet-sign line.  A sign weight taking only the values \(\{\pm1\}\) is
+therefore \(\epsilon\) or \(-\epsilon\), proving (i).
+
+The same moment equalities give \(\mu_1=\mu_2=0\).  Exact tensor
+summation in the rank-six and rank-ten quotient coordinates gives
+\(\mu_3\ne0\).  If the reference matching changes, every point translates
+by one vector \(c\).  Expanding the signed third moment after
+\(x_M\mapsto x_M+c\) leaves \(\mu_3\) unchanged: the other terms contain
+\(\mu_2,\mu_1\), or
+\(\mu_0=\sum_M\epsilon(M)=0\).
+
+Every element of \(G^+\) preserves both sheets and hence fixes the signed
+sum.  Every element of the outer coset exchanges the sheets and negates
+it.  Since \(\mu_3\ne0\), these two transformation laws give (5.6).
+Finally (5.5) proves the stated minimality inside the signed tensor-moment
+family.
+\end{proof}
+
+The cubic remembers an orientation that the linear quotient does not.
+Indeed, the signed linear relation
+\[
+ \sum_{M\in\Omega_+}x_M=\sum_{M\in\Omega_-}x_M
+\]
+already shows that the sheet sign is killed by the linear
+quotient map.  Quadratic products recover the unordered
+partition through (5.2), and the cubic supplies the sign exchanged when
+the two recovered levels are swapped.
+
+\begin{corollary}[Secant-product tensor syzygies]
+\label{cor:secant-product-syzygies}
+For \(T=B_3,H_3\), the canonically scaled secant products satisfy
+\[
+\begin{aligned}
+\sum_M\epsilon(M)P_M&=0,\\
+\sum_M\epsilon(M)P_M^{\odot2}&=0,\\
+\sum_M\epsilon(M)P_M^{\odot3}
+  &=Q^{\odot3}\mu_3\ne0.
+\end{aligned}                                               \tag{5.7}
+\]
+\end{corollary}
+
+\begin{proof}
+Substitute \(P_M=P_{M_T}+Qx_M\) and expand.  Each sheet has
+\(q=0\) elements in \(\F_q\), and the signed quotient moments vanish
+through degree two.  All terms below cubic degree cancel, leaving
+\(Q^{\odot3}\mu_3\) in degree three.
+\end{proof}
 
 \section{Six profiles and matching-row reconstruction}
 
