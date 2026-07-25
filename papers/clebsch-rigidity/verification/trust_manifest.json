@@ -92,13 +92,13 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 117",
+      "paper_location": "source line 73",
       "route": "mixed",
       "row": 2,
       "source": {
         "id": "rigidity-headline",
         "kind": "verbatim",
-        "sha256": "8704bc151d6497d16189ad0868aefab69809ce83b127f462faa3be7d78792866"
+        "sha256": "0f0c13c15894c5f98a5813ac99be6f94148cc87e0129b13847a57b1f6c3a959b"
       },
       "trust_boundary": "Lean proves the conic-containment implication through the explicit Dye axiom seam; the stabilizer identification remains a cited classical and coordinate result."
     },
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "b2a98b9ba809cacae286cc87a58d0cb20947fba7aba943c33320d83a8bdffbdc"
+    "sha256": "b4fc764b2483ffae7eceed2836d017aaae3aac41259d4e208debafdb6add3d3d"
   },
-  "manuscript_sha256": "bc62ab7f7308636bf56976000b29466dedde3e123f7df100db20fa86ca6fa058",
+  "manuscript_sha256": "e4fce181884499ce36de193b8759eebccd10b2505ead52a03ca5766ba13680f2",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "8bcc2378072fbe0befb4c070da8eeef449fde37ccc5a9313aa437430c7b307f7"
+    "sha256": "f5c31a39ecdba4f6a0435db45a79e0980161cc11bbed30042359c340094f3367"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1527,7 +1527,7 @@
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "0be7d9b8ce9d708a61288b1d982d2b8eceaefb2119b55aa5832817f84b758a44"
+        "sha256": "289f4bbca69451a745b6a487130a5b8d0de03eb1d88dc779e1811b1b48e42c5f"
       },
       {
         "path": "verification/build_trust_manifest.py",

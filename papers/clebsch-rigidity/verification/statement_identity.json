@@ -5,9 +5,9 @@
       "id": "rigidity-headline",
       "kind": "verbatim",
       "row": 2,
-      "sha256": "8704bc151d6497d16189ad0868aefab69809ce83b127f462faa3be7d78792866",
-      "source_line": 117,
-      "tex": "The main theorem starts from no symmetry or conic construction. Among all\nsix-arcs of $\\PG(2,11)$, conic containment of the projective deep-hole\nsyndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer."
+      "sha256": "0f0c13c15894c5f98a5813ac99be6f94148cc87e0129b13847a57b1f6c3a959b",
+      "source_line": 73,
+      "tex": "Its maximum-distance syndrome directions form a\nconic, and that coarse locus already determines the projective code: its six\nparity-check columns are projectively equivalent to the Clebsch hexagon,\nwith the associated polarity and $A_5$ symmetry.  No conic, polarity, group\naction, or classical hexagon structure is assumed."
     },
     {
       "environment": "proposition",
@@ -190,5 +190,5 @@
   ],
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "bc62ab7f7308636bf56976000b29466dedde3e123f7df100db20fa86ca6fa058"
+  "source_sha256": "e4fce181884499ce36de193b8759eebccd10b2505ead52a03ca5766ba13680f2"
 }

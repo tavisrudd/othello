@@ -37,30 +37,25 @@
 \maketitle
 
 \begin{abstract}
-Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
-maximum-distance syndrome directions of its associated MDS code contained
-in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
-projective stabilizer $A_5$. More generally, containment of the syndrome
-locus in the zero set of any nonzero form of degree at most three
-characterizes the same class. A line bound, a chord-defect identity, and
-Dye's Brianchon theorem give the core conic-rigidity implication.
-Enumeration proves the low-degree strengthening, the sharp numerical gap,
-and the terminal $k=7$ exclusions.
+We show that coarse decoding data can reconstruct the hidden geometry of a
+non-GRS MDS code.  Among all six-arcs of $\PG(2,11)$, exactly one projective
+class has its maximum-distance syndrome directions contained in a conic:
+the Clebsch hexagon.  The hypothesis assumes neither a conic construction
+nor a symmetry action, yet it recovers the associated conic, polarity, and
+$A_5$ stabilizer.  More strongly, vanishing of any nonzero form of degree at
+most three on the maximum-distance syndrome locus characterizes the same
+class.
 
-The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS; the
-code has covering radius three. Its twelve projective deep-hole directions are the
-$\F_{11}$-points of a conic. Among nonzero syndromes outside the six arc
-columns, the quadratic test separates exactly the deep holes; together with
-the zero-syndrome and arc-column cases, it gives the complete distance oracle
-of Proposition~\ref{prop:decoding-oracle}. Its ambiguity data recover the
-classical Brianchon points, self-polar triangles, and an invariant support
-bipartition. The chord identity
-and the Sylvester graph show that $q=11$ is the only conic-filling field for
-six-arcs. A universal chord-defect identity and passant count show that
-conic filling by a $k$-arc forces $q$ odd and
-$2k-3\le q<\binom{k}{2}$, with a sharper quadratic barrier. Through seven points the only cases are a
-four-frame in $\PG(2,5)$ and the Clebsch hexagon; for eight points only
-$q\in\{13,17,19\}$ remain.
+For the resulting $[6,3,4]_{11}$ code, one quadratic equation gives the
+complete distance oracle.  We determine every nearest-codeword
+multiplicity, and show that decoder ambiguity reconstructs the classical
+Brianchon points, the five self-polar triangles, and an invariant
+bipartition of the three-coordinate supports.  The main conceptual tool is
+a universal chord-defect identity.  Together with a passant count, it shows
+that conic filling by a $k$-arc forces
+$2k-3\le q<\binom{k}{2}$ and a sharper quadratic field-size bound.  It also
+proves that $q=11$ is the only conic-filling field for six-arcs and, with
+finite verification, classifies conic filling through seven points.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -73,13 +68,15 @@ projective plane; arc; conic.
 \section{Introduction}
 \label{sec:intro}
 
-In $\PG(2,11)$ there is a six-point set whose fifteen chords miss exactly
-twelve points, and those twelve points are the points of a conic. This paper
-shows that the property characterizes the set: it is the Clebsch hexagon.
-In coding language, the conic is the projective deep-hole syndrome locus of
-a non-GRS $[6,3,4]_{11}$ MDS code. This is an instance of a broader
-question: when does the projective deep-hole locus determine an MDS code,
-and when can that locus be algebraically degenerate?
+The complete nearest-codeword structure of a code can retain geometry that
+is absent from its definition.  The example here is a non-GRS
+$[6,3,4]_{11}$ MDS code.  Its maximum-distance syndrome directions form a
+conic, and that coarse locus already determines the projective code: its six
+parity-check columns are projectively equivalent to the Clebsch hexagon,
+with the associated polarity and $A_5$ symmetry.  No conic, polarity, group
+action, or classical hexagon structure is assumed.  Thus the problem is an
+inverse one: when does the projective deep-hole locus determine an MDS code,
+and how much of its geometry can nearest-codeword data recover?
 
 Let $C$ be a linear $[n,k,d]_q$ code with covering radius $\rho$ and
 full-rank parity-check matrix $H$. For a received word $v$, write
@@ -114,19 +111,22 @@ Marcugini, and Pambianco~\cite{DMP2021}; their Theorem~6.3 supplies the
 leader count used in Section~\ref{sec:code}. See also
 Hirschfeld~\cite{Hirschfeld1998} for the plane arc/covering-radius setting.
 
-The main theorem starts from no symmetry or conic construction. Among all
-six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
-syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer.
+The main theorem proves this reconstruction from conic containment alone.
 A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
-conceptual implication; the census is needed only for the numerical clause.
-We then prove quantitative gaps, reconstruct the Brianchon geometry from
-decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
-chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
-$(q-4)(q-11)$ when $q\equiv3\pmod4$. In general the same moment calculation
-shows that a conic-filling $k$-arc must satisfy
-$q$ odd and $2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier; we
-classify the cases through seven points and reduce the
-eight-point case to three fields.
+conceptual implication; finite enumeration is needed only for the
+low-degree strengthening and quantitative clauses.  The same geometry then
+gives an exact distance oracle and all nearest-codeword multiplicities.
+Its ambiguity strata reconstruct the Brianchon points, the self-polar
+triangles, and the invariant support bipartition.
+
+The chord-defect identity has a second role independent of the Clebsch
+classification.  For a Clebsch hexagon $K$ it gives
+$|\cU(K)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
+$q\equiv3\pmod4$.  For an arbitrary conic-filling $k$-arc, the same moment
+calculation forces $q$ odd and
+$2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier.  We
+classify the cases through seven points and reduce the eight-point case to
+three fields.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer

@@ -48,9 +48,11 @@ ROW_LABELS = {
 }
 
 HEADLINE = (
-    "The main theorem starts from no symmetry or conic construction. Among all\n"
-    "six-arcs of $\\PG(2,11)$, conic containment of the projective deep-hole\n"
-    "syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer."
+    "Its maximum-distance syndrome directions form a\n"
+    "conic, and that coarse locus already determines the projective code: its six\n"
+    "parity-check columns are projectively equivalent to the Clebsch hexagon,\n"
+    "with the associated polarity and $A_5$ symmetry.  No conic, polarity, group\n"
+    "action, or classical hexagon structure is assumed."
 )
 CENSUS = (
     "Table~\\ref{tab:fifteen-classes} prints the complete census at the level\n"
