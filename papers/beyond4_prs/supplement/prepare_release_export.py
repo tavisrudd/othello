@@ -137,7 +137,15 @@ def main() -> None:
         raise SystemExit("release-owned source paths are not clean")
 
     timestamp = run(
-        ["git", "show", "-s", "--format=%aI", revision],
+        [
+            "git",
+            "log",
+            "-1",
+            "--format=%aI",
+            revision,
+            "--",
+            *(path.as_posix() for path in owned_paths),
+        ],
         cwd=source,
         capture=True,
     )
