@@ -75,16 +75,27 @@ python3 notes/2026-07-19-c379-clebsch-deep-hole-extension-replay.py
 sha256sum -c notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256
 ```
 
-Both primary checks, independent replays, and checksum manifests passed on
-2026-07-25. Their reports record the exact inputs, byte counts, SHA-256
-hashes, and trusted boundary. The manuscript build command is
+The binary cubic factorization, Hessian, and exact boundary of the resulting
+target flag are certified by
+`notes/2026-07-20-c412-relative-cubic-depth-plane.{md,py,json,sha256}` and
+its independent replay:
+
+```bash
+python3 notes/2026-07-20-c412-relative-cubic-depth-plane.py --check
+python3 notes/2026-07-20-c412-relative-cubic-depth-plane-replay.py
+sha256sum -c notes/2026-07-20-c412-relative-cubic-depth-plane.sha256
+```
+
+All three primary checks, independent replays, and checksum manifests passed
+on 2026-07-25. Their reports record the exact inputs, byte counts, SHA-256
+hashes, and trusted boundaries. The manuscript build command is
 
 ```bash
 cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting eleven-page PDF is warning-free.
+The resulting twelve-page PDF is warning-free.
 
 ## Boundaries
 
@@ -133,6 +144,32 @@ signed antipodal cubic to be nonzero: in a basis \(u_1,u_2\), the
 rank two and the \(1:4:6\) dependence. The former coordinate witness `6` is
 retained only to pin the frozen normalization.
 
+The second-order `ej2` pass asks what the forced cubic itself reconstructs.
+It yields a general mass-zero factorization. For three spanning rays with
+nonzero weights \(n_i\), both
+\[
+\sum_i n_i u_i=0\qquad\text{and}\qquad \sum_i n_i=0
+\]
+force the cubic to have type \(L^2R\), with \(L\ne R\); explicitly,
+\[
+\sum_i n_i u_i^{\odot3}
+=\frac{n_1n_2}{(n_1+n_2)^2}(u_1-u_2)^{\odot2}
+ \odot\bigl((2n_1+n_2)u_1+(n_1+2n_2)u_2\bigr).
+\]
+Thus the doubled line is forced here by the modular identity
+\(1+4+6=11=0\), not by an accidental coordinate factorization. In the
+profile basis \(e_1=v_2,e_2=v_3\), the normalized binary form is
+\[
+(x-y)^2(x-2y),
+\]
+and its Hessian is a nonzero scalar multiple of \((x-y)^2\). The compressed
+cubic therefore carries an intrinsic target flag: a doubled line recovered
+by the Hessian and a residual simple line. This is more structure than a
+nonzero orientation carrier, but it remains output-side structure. C412
+proves that it does not canonically identify the three-dimensional source
+relative-cubic space with the two-dimensional profile plane, and the profile
+partition does not admit a descended \(\operatorname{PSL}_2(11)\)-action.
+
 | mystery | status | exact remaining gap or owner |
 |---|---|---|
 | Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
@@ -140,6 +177,8 @@ retained only to pin the frozen normalization.
 | Why does a singleton profile recover a parent rather than only a matching? | settled | C379 certifies the common \(A_5\) stabilizer, making the equivariant decorated transform a bijection. |
 | Do the unlabeled profile rays retain the group-theoretic orbit sizes? | settled | Their unique primitive positive rational dependence is \(1:4:6\), which also gives stabilizer orders \(12,3,2\). |
 | Is compressed cubic nonvanishing an additional finite calculation? | settled | No. The three-ray cubic lemma forces it from rank two and the nonzero \(1:4:6\) relation in characteristic \(11\). |
+| Why does the compressed cubic retain a doubled-line/simple-line flag? | settled | The orbit weights have total mass \(1+4+6=0\) in \(\mathbb F_{11}\); the general mass-zero cubic identity forces type \(L^2R\), and the Hessian recovers \(L^2\). |
+| Does that flag canonically reconstruct the full relative-cubic source? | settled negatively | C412's covariance and non-descent tests leave no canonical source-to-target map; the flag is internal to the profile plane. |
 | What do the exceptional primes \(2,3\) mean geometrically? | open | Exact reduction of the integral profile table isolates them, but C577's modular-depth section must decide whether this is part of the arithmetic gluing theorem or only degeneration of this coordinate realization. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | What is the next load-bearing Paper II frontier? | open by task order | C577 next drafts modular depth and arithmetic splitting/gluing. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
