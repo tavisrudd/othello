@@ -19,6 +19,16 @@ partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
 then builds the paper through the repository Makefile.
 
+`evidence_fingerprint.json` pins the six checksum manifests, exact command
+vectors, verification runner, trust manifest, Python version, Lean
+toolchain, Mathlib revision, Nix lock, and expected success lines. Refresh it
+only after an intentional verification-surface change:
+
+```text
+python3 papers/clebsch-factorization/verification/verify_release.py \
+  --update-fingerprint --metadata-only
+```
+
 From the repository root, run:
 
 ```text

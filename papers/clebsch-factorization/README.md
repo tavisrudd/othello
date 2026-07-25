@@ -17,7 +17,7 @@ configurations*.
   comparisons, carrier torsors, and Mathieu/characteristic-zero bridges remain
   outside this root unless a later editorial decision adopts them.
 
-The warning-free seventeen-page candidate is `clebsch_factorization.tex`. Its standalone opening,
+The warning-free nineteen-page candidate is `clebsch_factorization.tex`. Its standalone opening,
 headline factorization theorem, marked-conic notation, matching-secant
 quotient, switch mechanism, explicit rank-three matching configurations, and
 exact `3,6,10` quotient-rank theorem are in place. The rank theorem separates

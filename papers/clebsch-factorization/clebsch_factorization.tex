@@ -42,9 +42,10 @@ Uniformly, the image contains the top harmonic summand and, in even
 degree, the deepest radial line.  In the $H_3$ case it omits exactly the
 middle Fischer layer $Q\mathcal H_2$.
 In the balanced cases, second moments recover two complementary sheets,
-a signed cubic orients them, and six incidence profiles recover the
-matching-table row.  A modular depth quotient and arithmetic gluing
-describe how this factorization memory changes across characteristics.
+a signed cubic orients them, and, relative to a selected \(A_4\)
+refinement, six incidence profiles recover the matching-table row.  A
+modular depth quotient and arithmetic gluing describe how this
+factorization memory changes across characteristics.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
@@ -58,7 +59,7 @@ configuration; factorization; cubic invariant; modular representation.
 
 The companion rigidity paper isolates the Clebsch hexagon through its
 uncovered syndrome locus and reconstructs its projective geometry from
-decoding data.  Here we begin with marked secant geometry and ask a
+decoding data \cite{RuddRigidity2026}.  Here we begin with marked secant geometry and ask a
 complementary reconstruction question: what does common restriction to a
 conic forget, and what does the conic-ideal quotient remember?  We answer
 this question across the rank-three $A_3$, $B_3$, and $H_3$
@@ -124,7 +125,7 @@ places its equality and reconstruction properties in a forward/inverse
 framework, while the syndrome--uncovered-point mechanism extends to
 projective Reed--Solomon deep holes beyond redundancy four.  These are
 applications and continuations of the geometry, not hypotheses of the
-results proved here.
+results proved here \cite{RuddPrescribedHoles2026,RuddPRS2026}.
 
 \section{Conic matching products}
 \label{sec:matching-products}
@@ -424,6 +425,16 @@ For subspaces of functions, write
  L^{\circ2}=\operatorname{span}\{fg:f,g\in L\},
 \]
 where multiplication is pointwise.
+The common second-moment form in the proposition below is
+\[
+ B(\lambda,\mu)=\sum_{M\in\Omega_+}\lambda(x_M)\mu(x_M)
+               =\sum_{M\in\Omega_-}\lambda(x_M)\mu(x_M)
+\]
+on \(W_T^\vee\).  A \emph{field-valued strength-two trade} is a
+weight \(\tau\in k^\Omega\) satisfying, for all \(f,g\in L\),
+\[
+ \sum_{M\in\Omega}\tau(M)f(M)g(M)=0.
+\]
 
 \begin{proposition}[Radical--Hadamard recovery]
 \label{prop:radical-hadamard}
@@ -574,13 +585,15 @@ the two recovered levels are swapped.
 
 \begin{corollary}[Secant-product tensor syzygies]
 \label{cor:secant-product-syzygies}
-For \(T=B_3,H_3\), the canonically scaled secant products satisfy
+For \(T=B_3,H_3\), let \(m_Q:R_{m-2}\to R_m\) denote multiplication
+by \(Q\).  Regarding the displayed powers as symmetric tensors, not
+polynomial powers, the canonically scaled secant products satisfy
 \[
 \begin{aligned}
 \sum_M\epsilon(M)P_M&=0,\\
 \sum_M\epsilon(M)P_M^{\odot2}&=0,\\
 \sum_M\epsilon(M)P_M^{\odot3}
-  &=Q^{\odot3}\mu_3\ne0.
+  &=\operatorname{Sym}^3(m_Q)(\mu_3)\ne0.
 \end{aligned}                                               \tag{5.7}
 \]
 \end{corollary}
@@ -589,7 +602,8 @@ For \(T=B_3,H_3\), the canonically scaled secant products satisfy
 Substitute \(P_M=P_{M_T}+Qx_M\) and expand.  Each sheet has
 \(q=0\) elements in \(\F_q\), and the signed quotient moments vanish
 through degree two.  All terms below cubic degree cancel, leaving
-\(Q^{\odot3}\mu_3\) in degree three.
+\(\operatorname{Sym}^3(m_Q)(\mu_3)\) in degree three.  Since \(R_m\)
+is a domain, \(m_Q\) is injective, and so is its third symmetric power.
 \end{proof}
 
 \section{Six profiles and matching-row reconstruction}
@@ -603,16 +617,70 @@ We now specialize to \(H_3\).  Put
 \]
 where \(H\simeq A_5\) is the stabilizer of the base matching in
 (4.1).  Thus \(X=X_+\sqcup X_-\), with \(|X_+|=|X_-|=11\).
-The ordered golden pair of \(A_5\)-parents selects a common subgroup
-\(K\simeq A_4\) and an outer involution \(J\) which normalizes \(K\)
-and exchanges \(X_+\) with \(X_-\).
+Here is the additional decoration used in this section.  On
+\(V=\F_{11}^3\), set
+\[
+ q_0(x,y,z)=x^2+y^2+z^2,\qquad
+ \cC_0=\mathbb P\{q_0=0\}.
+\]
+The projectivity
+\[
+ \psi=
+ \begin{pmatrix}10&2&1\\1&2&10\\3&0&3\end{pmatrix}
+ \quad\text{satisfies}\quad
+ q_0(\psi(X,Y,Z)^t)=3(XZ-Y^2),                         \tag{6.1}
+\]
+so \(\psi\circ\nu\) identifies the endpoint conic of Section~2 with
+\(\cC_0\).  In these coordinates take the two six-point sets
+\[
+\begin{aligned}
+A_+={}&\{(0:1:4),(0:1:7),(1:0:3),(1:0:8),
+          (1:4:0),(1:7:0)\},\\
+A_-={}&\{(0:1:3),(0:1:8),(1:0:4),(1:0:7),
+          (1:3:0),(1:8:0)\}.
+\end{aligned}                                           \tag{6.2}
+\]
+Let \(\mathcal P=G\cdot A_+\), where \(G\) is viewed as the full
+projective stabilizer of \(\cC_0\).  For \(A\in\mathcal P\) and
+\(a\in A\), let \(C_{A,a}\) be the conic through
+\(A\setminus\{a\}\).  The six pairs
+\[
+ C_{A,a}\cap\cC_0,\qquad a\in A,                        \tag{6.3}
+\]
+form a perfect matching \(M_A\) of the twelve points of \(\cC_0\).
+On this \(22\)-point orbit, \(A\mapsto M_A\) is a
+\(G\)-equivariant bijection onto \(X\).  This is the
+\emph{matching-decorated parent correspondence}; its bijectivity and
+the assertion that (6.3) consists of six disjoint pairs are exact
+finite inputs.
 
-The nonzero scalar-\(K\) orbits in the ternary representation
-projectivize to a \(K\)-orbit refinement of the projective plane.  The
-involution \(J\) exchanges four pairs of cells, which we denote
+Put \(H_\pm=\operatorname{Stab}_G(A_\pm)\) and
+\[
+ K=H_+\cap H_-,\qquad
+ J=\begin{pmatrix}1&0&0\\0&0&-1\\0&-1&0\end{pmatrix}.
+                                                               \tag{6.4}
+\]
+Then \(K\simeq A_4\), \(J(A_+)=A_-\), and \(J\) normalizes \(K\) and
+exchanges \(X_+\) with \(X_-\).  Thus the \emph{ordered golden pair}
+means precisely the ordered pair \((A_+,A_-)\).
+
+Choose linear representatives of \(K\) preserving \(q_0\), and let
+\(\widetilde K=\F_{11}^{\times}K\).  For the following eight vectors,
+define \(R_i=\mathbb P(\widetilde K r_i)\):
+\[
+\begin{array}{c@{\quad}c@{\qquad}c@{\quad}c}
+i&r_i&i&r_i\\ \hline
+1&(0,1,4)&10&(0,1,3)\\
+3&(0,1,2)&13&(0,1,5)\\
+6&(1,3,2)&14&(1,1,5)\\
+9&(1,4,2)&11&(1,2,4).
+\end{array}                                               \tag{6.5}
+\]
+These are cells in the scalar-\(K\) orbit partition of
+\(\mathbb P(V)\).  The involution \(J\) exchanges the four pairs
 \[
  (R_1,R_{10}),\quad (R_3,R_{13}),\quad
- (R_6,R_{14}),\quad (R_9,R_{11}).                         \tag{6.1}
+ (R_6,R_{14}),\quad (R_9,R_{11}).                         \tag{6.6}
 \]
 Only these four oriented pairs enter the argument.  Reversing the
 golden pair reverses all four orientations.
@@ -636,7 +704,7 @@ vanishes.  Define the \emph{depth profile}
               Z_M(R_3)-Z_M(R_{13}),\\
             &Z_M(R_6)-Z_M(R_{14}),\
               Z_M(R_9)-Z_M(R_{11})\bigr)\in\F_{11}^4.
- \end{aligned}                                           \tag{6.2}
+ \end{aligned}                                           \tag{6.7}
 \]
 This definition uses only zero sets of secant products, so it is
 unchanged if their equations are rescaled.
@@ -644,7 +712,7 @@ unchanged if their equations are rescaled.
 \begin{theorem}[Six-profile reconstruction]
 \label{thm:six-profile-reconstruction}
 The \(K\)-orbits on each sheet \(X_\pm\) have sizes \(1,4,6\).
-With the orientation in (6.1), the corresponding profiles and fibre
+With the orientation in (6.6), the corresponding profiles and fibre
 sizes are
 \[
 \begin{array}{c@{\quad}c@{\quad}c}
@@ -655,7 +723,7 @@ sizes are
 -&1&-v_1,\\
 -&4&-v_2,\\
 -&6&-v_3.
-\end{array}                                                \tag{6.3}
+\end{array}                                                \tag{6.8}
 \]
 The six vectors are pairwise distinct.  Hence \(D\) recovers the
 double-coset row in
@@ -665,7 +733,7 @@ double-coset row in
 of every matching.  Its linear span nevertheless has dimension only
 two: over \(\F_{11}\) it is the plane
 \[
- 2a+2b+c=0,\qquad 9a+8b+d=0.                              \tag{6.4}
+ 2a+2b+c=0,\qquad 9a+8b+d=0.                              \tag{6.9}
 \]
 The two singleton profiles recover their individual matchings.  Under
 the matching-decorated parent correspondence, they therefore recover
@@ -676,7 +744,7 @@ matching.
 
 \noindent\emph{Proof mode.}
 The subgroup-mark reduction and the implications from equivariance are
-conceptual.  The six representative incidence rows in (6.5) below are
+conceptual.  The six representative incidence rows in (6.10) below are
 certificate-checked exact counts and are reconstructed by an independent
 implementation.  A companion certificate verifies that the matching
 decoration uniquely recovers its parent on the \(22\)-point \(H_3\)
@@ -708,7 +776,7 @@ The orbit sizes are therefore \(1,4,6\); conjugation by \(J\) gives the
 same decomposition on \(X_-\).
 
 For \(k\in K\), the transformation \(k\) preserves every cell in
-(6.1) and carries \(S_M\) to \(S_{kM}\).  Thus \(D(kM)=D(M)\).
+(6.6) and carries \(S_M\) to \(S_{kM}\).  Thus \(D(kM)=D(M)\).
 The involution \(J\) exchanges the two cells in every oriented pair and
 carries \(S_M\) to \(S_{JM}\), so
 \[
@@ -719,16 +787,16 @@ The exact incidence rows are
 \[
 \begin{array}{c@{\quad}c@{\quad}c@{\quad}c}
 \text{orbit size}&\operatorname{Stab}_K(M)&
- \text{zero counts in the four pairs of (6.1)}&D(M)\\ \hline
+ \text{zero counts in the four pairs of (6.6)}&D(M)\\ \hline
 1&A_4&(0,6;\ 0,0;\ 12,0;\ 0,12)&v_1,\\
 4&C_3&(3,6;\ 3,0;\ 3,3;\ 6,3)&v_2,\\
 6&C_2&(3,0;\ 1,3;\ 2,4;\ 6,6)&v_3.
-\end{array}                                                \tag{6.5}
+\end{array}                                               \tag{6.10}
 \]
 The \(J\)-images supply the three negative rows.  These six vectors are
 pairwise distinct, so their fibres are precisely the six \(K\)-orbits.
 
-Row reduction over \(\F_{11}\) gives rank two and the equations (6.4).
+Row reduction over \(\F_{11}\) gives rank two and the equations (6.9).
 This rank drop does not merge orbit labels: linear rank and
 set-theoretic separation are different assertions.  Finally, a
 singleton fibre contains its matching without residual choice.  The
@@ -741,7 +809,7 @@ follows from their fibre sizes.
 
 \begin{corollary}[Decorated sheet classifier]
 \label{cor:decorated-sheet-classifier}
-Relative to the orientation in (6.1), the profile \(D(M)\) determines
+Relative to the orientation in (6.6), the profile \(D(M)\) determines
 the sheet containing \(M\).  The antipodal singleton pair
 \(\{v_1,-v_1\}\) recovers the unordered golden matching pair and hence
 the unordered golden parent pair; choosing the orientation selects one
@@ -749,7 +817,7 @@ member.
 \end{corollary}
 
 \begin{proof}
-The positive and negative profile sets in (6.3) are disjoint, and the
+The positive and negative profile sets in (6.8) are disjoint, and the
 only singleton fibres are \(v_1\) and \(-v_1\).  Apply the
 matching--parent bijection from
 Theorem~\ref{thm:six-profile-reconstruction}.
@@ -766,21 +834,25 @@ The profile compression also retains the cubic-first orientation from
 Section~\ref{sec:balanced}.  The three positive vectors satisfy the
 integral weighted relation
 \[
- v_1+4v_2+6v_3=0.                                        \tag{6.6}
+ v_1+4v_2+6v_3=0.                                       \tag{6.11}
 \]
-\begin{corollary}[Orbit weights from profile rays]
+\begin{corollary}[Orbit weights from normalized profiles]
 \label{cor:profile-ray-weights}
-The three antipodal rational profile rays recover the orbit-size
-multiset \(\{1,4,6\}\).  They also recover the stabilizer orders
-\(\{12,3,2\}\) inside \(K\simeq A_4\).
+The three incidence-normalized vectors \(v_1,v_2,v_3\) recover the
+orbit-size multiset \(\{1,4,6\}\).  They also recover the stabilizer
+orders \(\{12,3,2\}\) inside \(K\simeq A_4\).  The underlying rational
+rays alone do not recover these weights.
 \end{corollary}
 
 \begin{proof}
-The three integral profile vectors span a plane over \(\mathbb Q\), so
-their rational relation space is one-dimensional.  Equation (6.6) is
-its primitive positive generator.  Its coefficients recover the three
-orbit sizes without labels.  Orbit--stabilizer then gives
-\(12/1,12/4,12/6\).
+The coordinates of each \(v_i\) are fixed by the cardinality
+differences in (6.7), so independent rescaling is not allowed.  These
+three integral vectors span a plane over \(\mathbb Q\), and (6.11) is
+the primitive positive generator of their relation lattice.  Its
+coefficients recover the three orbit sizes without labels.
+Orbit--stabilizer then gives \(12/1,12/4,12/6\).  If the vectors are
+replaced by primitive generators of their rays, the relation becomes
+\(1:2:1\), which proves the final warning.
 \end{proof}
 
 \begin{lemma}[Three-ray cubic forcing]
@@ -822,7 +894,7 @@ In Lemma~\ref{lem:three-ray-cubic}, suppose also that
  \frac12M_3(\xi)=\sum_{i=1}^3n_i u_i^{\odot3}
  =\frac{n_1n_2}{(n_1+n_2)^2}
  (u_1-u_2)^{\odot2}\odot
- \bigl((2n_1+n_2)u_1+(n_1+2n_2)u_2\bigr).                \tag{6.7}
+ \bigl((2n_1+n_2)u_1+(n_1+2n_2)u_2\bigr).               \tag{6.12}
 \]
 The two displayed lines are distinct.  Hence the cubic intrinsically
 defines a doubled line and a residual simple line; its Hessian recovers
@@ -834,7 +906,7 @@ Since \(n_3=-(n_1+n_2)\), the weighted vector relation gives
 \[
  u_3=\frac{n_1u_1+n_2u_2}{n_1+n_2}.
 \]
-Substitution and expansion give (6.7).  The residual factor would equal
+Substitution and expansion give (6.12).  The residual factor would equal
 the doubled factor only if \(3(n_1+n_2)=0\), which is impossible under
 the hypotheses.  The Hessian of a binary cubic \(L^2R\), with \(L\) and
 \(R\) distinct, is a nonzero scalar multiple of \(L^2\).
@@ -850,9 +922,9 @@ then its signed symmetric moments obey
  M_j(\eta)=
  \bigl(1-(-1)^j\bigr)
  \sum_{i=1}^3 n_i v_i^{\odot j},
- \qquad (n_1,n_2,n_3)=(1,4,6).                            \tag{6.8}
+ \qquad (n_1,n_2,n_3)=(1,4,6).                           \tag{6.13}
 \]
-Equation (6.6) kills the first moment, and antipodality kills every even
+Equation (6.11) kills the first moment, and antipodality kills every even
 moment.  The first two profiles are independent over \(\F_{11}\), since
 the determinant of their first two coordinates is \(-18\ne0\).
 Lemma~\ref{lem:three-ray-cubic} therefore forces the cubic to be nonzero
@@ -860,7 +932,7 @@ without a coordinate calculation.  In the frozen normalization, its
 first coordinate is
 \[
 2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0
-\quad\text{in }\F_{11}.                                 \tag{6.9}
+\quad\text{in }\F_{11}.                                \tag{6.14}
 \]
 Thus the six-row quotient preserves the first nonzero signed moment even
 though its linear image is only a plane.  It is a set-separating
@@ -912,14 +984,14 @@ in orbit-size order.  Thus
  V^K=ke_1\oplus ke_4\oplus ke_6,\qquad
  \mathbf 1=e_1+e_4+e_6.                                \tag{7.1}
 \]
-Linearizing the incidence construction in (6.2) gives
+Linearizing the incidence construction in (6.7) gives
 \[
  \mathcal D:V^K\longrightarrow k^4,\qquad
  e_i\longmapsto i\,u_i,                                \tag{7.2}
 \]
 where $u_1=v_1$, $u_4=v_2$, and $u_6=v_3$ are the profiles on the
 orbits of the indicated sizes.
-Equation (6.6) says exactly that $\mathcal D(\mathbf1)=0$.
+Equation (6.11) says exactly that $\mathcal D(\mathbf1)=0$.
 
 \begin{proposition}[Modular depth quotient]
 \label{prop:modular-depth-quotient}
@@ -935,6 +1007,14 @@ The map $\mathcal D$ has kernel $k\mathbf1$ and induces an isomorphism
 \]
 The sheet exchanged by $J$ carries the negative copy of this quotient.
 \end{proposition}
+
+\noindent\emph{Proof mode.}
+Projectivity, indecomposability, fixed-point exactness, and the socle
+quotient are conceptual.  Absolute irreducibility of the
+nine-dimensional middle layer and the rank and kernel of
+\(\mathcal D\) are exact generator-matrix calculations in the
+\texttt{relative-cubic-depth} bundle, reconstructed by its independent
+replay.
 
 \begin{proof}
 The order of $H\simeq A_5$ is prime to $11$, so its trivial module is
@@ -954,7 +1034,7 @@ This gives the displayed Loewy dimensions.
 
 Taking $K$-fixed points is exact because $11\nmid |K|=12$.  The orbit
 sizes $1,4,6$ give (7.1).  The three vectors in (7.2) span the plane
-(6.4), and their only relation is (6.6), so
+ (6.9), and their only relation is (6.11), so
 $\ker\mathcal D=k\mathbf1$.  This proves (7.3).  Finally
 $D(JM)=-D(M)$, which attaches the outer character on the opposite
 sheet.
@@ -964,14 +1044,15 @@ This quotient identifies the precise modular loss in the six-profile
 construction.  Before linearization, the six profiles remain distinct
 and recover all six double-coset labels.  After linearization, the
 constant orbit trade dies and only the two-dimensional depth plane
-remains.  Conversely, the three rational rays in that plane retain
-their primitive positive dependence $1:4:6$, so
-Corollary~\ref{cor:profile-ray-weights} recovers the orbit sizes from the
-quotient itself.
+remains.  Conversely, the three rational rays in that plane remain
+distinct but do not retain their orbit weights.  The weights \(1,4,6\) are
+recovered only when the quotient is supplied with the
+incidence-normalized vectors of (6.8), as in
+Corollary~\ref{cor:profile-ray-weights}.
 
 \begin{remark}[Reduction of the profile table]
 \label{rem:bad-profile-primes}
-The four-coordinate profiles in (6.3) are integral before reduction.
+The four-coordinate profiles in (6.8) are integral before reduction.
 The greatest common divisor of their nonzero $2$-by-$2$ minors is $3$.
 Their span therefore drops below rank two only in characteristic $3$.
 The six signed rows remain distinct away from characteristics $2$ and
@@ -995,11 +1076,23 @@ conjugate pairs.  Besides the base matchings in (4.1), we use
 \]
 The pair for $A_3$ consists of two copies of $M_{A_3}$, the pair for
 $B_3$ is $(M_{B,-},M_{B,+})$, and the pair for $H_3$ is
-$(M_{H_3},M_{H,-})$.  Exact projective transport places the two $B_3$
-representatives in $\Omega_{B_3}$ and the two $H_3$ representatives in
-$\Omega_{H_3}$.  Their quadratic marker algebras determine whether the
-pair is rational over the working field or appears as one Frobenius
-orbit only after a quadratic extension.
+$(M_{H_3},M_{H,-})$.  To make the arithmetic bridge part of the
+definition, let \(\bar k\) be an algebraic closure of the working field
+and define the root-specialization maps
+\[
+\begin{array}{c@{\quad}c@{\quad}c}
+T&\text{root}&\sigma_T(\text{root})\\ \hline
+A_3&\sqrt2,\ -\sqrt2&M_{A_3},\ M_{A_3}\\
+B_3&3,\ 4&M_{B,-},\ M_{B,+}\\
+H_3&4,\ 8&M_{H_3},\ M_{H,-}.
+\end{array}                                               \tag{7.5}
+\]
+Thus the \emph{marker datum} is the quadratic algebra together with
+\(\sigma_T\), not the polynomial alone.  Exact projective transport
+places the displayed $B_3$ and $H_3$ values in
+\(\Omega_{B_3}\) and \(\Omega_{H_3}\).  The certificate also verifies
+that \(\sigma_T\) is the reduction of the corresponding integral
+Coxeter frames; the theorem below needs only the explicit map (7.5).
 
 \begin{lemma}[Split--inert frame calculation]
 \label{lem:split-inert-frames}
@@ -1009,7 +1102,7 @@ The three marker polynomials factor as follows:
 A_3,\ q=5&t^2-2&\text{irreducible},\\
 B_3,\ q=7&t^2-2=(t-3)(t-4)&\text{split},\\
 H_3,\ q=11&t^2-t-1=(t-4)(t-8)&\text{split}.
-\end{array}                                               \tag{7.5}
+\end{array}                                               \tag{7.6}
 \]
 In the first row the two geometric roots form one Frobenius orbit over
 $\F_{25}$.  In each split row the nontrivial involution of the
@@ -1037,7 +1130,7 @@ satisfy
 \[
  H_+\cap H_-=K\simeq A_4,\qquad
  \langle H_+,H_-\rangle=\operatorname{PSL}_2(11),
-                                                               \tag{7.6}
+                                                               \tag{7.7}
 \]
 and are exchanged by a projectivity $J$ of nonsquare determinant.  The
 common rational hinge is an $S_4$ whose determinant-square kernel is
@@ -1052,21 +1145,22 @@ choice leaves the unordered pair.
 
 \noindent\emph{Proof mode.}
 Lemma~\ref{lem:split-inert-frames} and the determinant-character
-deductions are conceptual.  The passage from the coordinate frames to
-the matchings in (4.1), the matching stabilizers and intersections, and
-the generated subgroup in (7.5) are exhaustive exact finite checks.
+deductions are conceptual.  The agreement of the specialization map
+(7.5) with the integral Coxeter frames, the matching stabilizers and
+intersections, and the generated subgroup in (7.7) are exhaustive
+exact finite checks.
 The classical subgroup names use the standard subgroup structure of
 $\operatorname{PGL}_2(11)$ \cite{Atlas1985,Giudici2007}.
 
 \begin{proof}
-The frozen reductions of the two coordinate frames induce the same
-$A_3$ matching.  The two $B_3$ reductions induce distinct matchings
-exchanged by $x\mapsto-x$, and the two $H_3$ reductions induce distinct
-matchings exchanged by
+By definition, the two roots in the \(A_3\) row of (7.5) have the same
+matching value.  The two values in the \(B_3\) row are exchanged by
+\(x\mapsto-x\), and the two values in the \(H_3\) row are exchanged by
 \[
  x\longmapsto\frac{x-1}{x+1}.
 \]
-Together with Lemma~\ref{lem:split-inert-frames}, these identities prove
+The exact transport check verifies these identities on the displayed
+matchings.  Together with Lemma~\ref{lem:split-inert-frames}, they prove
 (a).
 
 For $H_3$, exact projective closure gives
@@ -1077,7 +1171,7 @@ For $H_3$, exact projective closure gives
 Both stabilizers lie in the determinant-square subgroup, while the
 displayed transporter has nonsquare determinant.  The common
 octahedral carrier has order $24$, and its determinant-square kernel
-has order $12$.  The cited subgroup identifications give (7.5) and the
+ has order $12$.  The cited subgroup identifications give (7.7) and the
 $S_4/A_4$ hinge, proving (b).
 
 The determinant-square subgroup has the two matching sheets as its
@@ -1149,6 +1243,26 @@ python3 papers/clebsch-factorization/verification/verify_release.py
 It checks the statement identity and all six checksum manifests, runs
 the admitted primary checks and independent replays, and rebuilds this
 manuscript through the repository Makefile.
+
+The full-source review archive accompanying this candidate is pinned by
+\path{verification/evidence_fingerprint.json}, whose SHA-256 digest is
+\begin{center}
+\small\texttt{2d16e063d7ed7480adebec277179dc39}\\[-2pt]
+\texttt{c6aa7642a1a6bdb116bc3c7324550a2e}.
+\end{center}
+That fingerprint fixes the six evidence manifests, command vectors,
+runner, trust manifest, and environment: Python 3.13.12, Lean
+4.32.0-rc1, and Mathlib revision
+\begin{center}
+\small\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
+\end{center}
+A successful replay ends with
+\begin{center}
+\texttt{clebsch factorization release: CHECK OK}.
+\end{center}
+An immutable public archive locator must be added before release.  Until
+then, the digest identifies the accompanying review archive exactly but
+is not presented as a public deposit.
 
 The largest formal component is the gate
 \begin{center}
@@ -1224,6 +1338,13 @@ the same quotient.  In the frozen relative basis its matrix is
 and its kernel is again $\langle[1:3:9]\rangle$.
 \end{proposition}
 
+\noindent\emph{Proof mode.}
+The invariant/coinvariant construction and the implications of the
+displayed ranks are conceptual.  The dimensions, norm and projection
+ranks, kernel line, rank-one pencil member, contraction matrix, and
+flattening census are exact finite linear algebra in the
+\texttt{relative-cubic-depth} bundle and its independent replay.
+
 \begin{proof}
 Exact invariant and commutator calculations give
 $\dim R=\dim M_G=3$, the two ranks in (A.1), and $N\pi=0$.
@@ -1278,14 +1399,16 @@ sheets, while the first signed tensor that survives is cubic and changes
 sign under the outer involution.  After an $A_4$ refinement has been
 chosen, six incidence profiles still separate all six matching rows,
 although their linear image is only a plane.  Over $\F_{11}$ the same
-weights $1,4,6$ describe both the rational orbit sizes and the loss of
-the constant socle in modular depth.
+incidence-normalized weights $1,4,6$ describe both the rational orbit
+sizes and the loss of the constant socle in modular depth; the three
+projective rays alone do not determine those weights.
 
 These recovery statements have precise limits.  Balanced moments do
 not order the sheets or choose the $A_4$ refinement.  The nonsingleton
 profiles recover orbits, not individual matchings.  The relative-cubic
-Tate plane and the depth plane are separately canonical, but the natural
-labelled and transfer maps do not identify them.  Arithmetic splitting
+Tate plane and the depth plane are each canonical relative to their
+stated inputs, but the natural labelled and transfer maps do not
+identify them.  Arithmetic splitting
 chooses a rational sheet in the three frozen small-field models; it
 does not produce an all-prime reciprocity law.
 
@@ -1321,6 +1444,23 @@ M.~Giudici,
 \newblock Maximal subgroups of almost simple groups with socle
 $\mathrm{PSL}(2,q)$,
 \newblock arXiv:math/0703685, 2007.
+
+\bibitem{RuddRigidity2026}
+T.~Rudd,
+\newblock \emph{Deep-hole rigidity of the Clebsch hexagon code},
+\newblock working paper, 2026.
+
+\bibitem{RuddPrescribedHoles2026}
+T.~Rudd,
+\newblock \emph{Exact defect and matching rigidity for arcs complete
+outside a prescribed conic},
+\newblock working paper, 2026.
+
+\bibitem{RuddPRS2026}
+T.~Rudd,
+\newblock \emph{Deep holes of projective Reed--Solomon codes beyond
+redundancy four: cubic pencils and coherent polar flags},
+\newblock working paper, 2026.
 
 \end{thebibliography}
 

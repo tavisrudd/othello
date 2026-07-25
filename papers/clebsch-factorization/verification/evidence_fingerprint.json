@@ -1,0 +1,106 @@
+{
+  "schema": "clebsch-factorization-evidence-fingerprint-v1",
+  "python": "3.13.12",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "mathlib_revision": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "environment_sha256": {
+    "lean_toolchain": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed",
+    "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
+    "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
+  },
+  "trust_manifest_sha256": "9634c4e6de474232688973a9a21ef6d6f00b2aa81ca1cd6d37384aece9d36437",
+  "runner_sha256": "787499750c1190d60080cc8f1fe972168929bc5391fabb8dbb6c6ab8beaa84de",
+  "evidence": {
+    "matching-module": {
+      "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
+      "checksum_manifest_sha256": "0d4a69a51fa3e86df70f8f50fb2bfa9ececabdea908b973e913b08746440c878",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-20-c406-matching-module.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-20-c406-matching-module-replay.py"
+        ]
+      ]
+    },
+    "balanced-sheet": {
+      "checksum_manifest": "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
+      "checksum_manifest_sha256": "fbdeac2b3d3f4140dda9c11602c8e4ea7450ae07a6a0159107cbe2aca2264a5c",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py",
+          "--check"
+        ]
+      ]
+    },
+    "profile-incidence": {
+      "checksum_manifest": "notes/2026-07-20-c411-double-coset-hecke.sha256",
+      "checksum_manifest_sha256": "95949399b2b567bcfb33250900ddfa22f85f672c2c4cde966c53948569c26e9a",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-20-c411-double-coset-hecke.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-20-c411-double-coset-hecke-replay.py"
+        ]
+      ]
+    },
+    "decorated-parent": {
+      "checksum_manifest": "notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256",
+      "checksum_manifest_sha256": "ce8a38b501ba5342a15cca8ceea1e6e35e38173a39cdb0ba24aaa853a6773be7",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-19-c379-clebsch-deep-hole-extension.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-19-c379-clebsch-deep-hole-extension-replay.py"
+        ]
+      ]
+    },
+    "relative-cubic-depth": {
+      "checksum_manifest": "notes/2026-07-20-c412-relative-cubic-depth-plane.sha256",
+      "checksum_manifest_sha256": "804df8fa90755b983cbff6f34737d1b8f916ff952388350ef54932d8049d2d06",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-20-c412-relative-cubic-depth-plane.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-20-c412-relative-cubic-depth-plane-replay.py"
+        ]
+      ]
+    },
+    "arithmetic-gluing": {
+      "checksum_manifest": "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.sha256",
+      "checksum_manifest_sha256": "91d2bb9b3c50c049490a9fc9fc7af683e8c2edf1961240d66c91a5d8f53bae7b",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.py",
+          "--check"
+        ]
+      ]
+    }
+  },
+  "expected_success": {
+    "metadata": "metadata: 16 statements, 6 evidence bundles: CHECK OK",
+    "release": "clebsch factorization release: CHECK OK"
+  }
+}
