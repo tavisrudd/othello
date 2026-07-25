@@ -2,8 +2,7 @@
 
 **Lane:** `ame-lu`
 
-**Status:** in progress; arbitrary-\(m\) rigidity terminal complete,
-projective-finiteness/identity-component corollary open
+**Status:** complete
 
 ## Goal
 
@@ -57,17 +56,57 @@ Commits:
 - `8412ba7e` — arbitrary-arity axis recovery, LU-to-LC terminal,
   specializations, and aggregate audit.
 
-## Open acceptance gate
+## Discrete-symmetry acceptance gate
 
-The manuscript's discrete-symmetry corollary is not yet formalized.
-The remaining work is not a consequence of the LU-to-LC implication alone:
-it requires a concrete quotient of the one-qudit Clifford normalizer by
-scalar phases, a proof that this quotient is finite for the repository's
-finite-field Weyl convention, the induced finite product/permutation
-extension, and a topological proof that the pre-quotient identity component
-is exactly the torus of one-site scalar phases.  No existing AME-LU or
-mathlib declaration supplies that package.  The paper trust ledgers state
-this boundary explicitly.
+Closed by `RelativeConicArcs.AMELU.ProjectiveClifford`,
+`RelativeConicArcs.AMELU.ProductUnitarySymmetry`, and
+`RelativeConicArcs.AMELU.ProductUnitarySymmetryTopology`.
+
+- `ProjectiveClifford` is the concrete quotient of one-site Clifford
+  matrices by nonzero scalar multiplication.  Exact conjugation signatures
+  take values in a finite set: determinant preservation confines each
+  axis scalar to the roots of a nonzero polynomial.
+- Equality of exact Weyl-conjugation signatures forces two unitaries to
+  differ by a scalar.  This identifies the signature construction with the
+  projective quotient and proves `projectiveClifford_finite`.
+- `ProjectiveGenericProductUnitaryAutomorphism` and its party-permuted
+  analogue are concrete coordinatewise scalar quotients.  Their injective
+  projective-coordinate maps prove both quotient carriers finite.
+- The inherited-topology automorphism spaces have continuous exact
+  adjoint-signature maps into finite Hausdorff spaces.  Their identity
+  fibers are precisely the images of connected finite products of
+  `Circle`.  The fixed-party and party-permuted identity-component
+  terminals therefore identify the component exactly with the one-site
+  scalar-phase torus.
+
+The final measured build run
+`/home/tavis/.cache/othello-lean-build/run-20260725-200121-5ede28ff`
+built the topology module, aggregate gate, and axiom-audit gate and passed
+the trace-only aggregate check.  The five new audited terminals depend
+only on `propext`, `Classical.choice`, and `Quot.sound`.
+
+Additional commits:
+
+- `131ab077` — projective one-site Clifford finiteness;
+- `bc6c4667` — product quotients, identity components, party permutations,
+  and aggregate audit.
+
+## Mystery ledger
+
+- **Settled:** the finiteness proof does not require the trace character or
+  an explicit Clifford-group order.  Determinant preservation supplies a
+  finite polynomial root set for every nontrivial additive-character Weyl
+  convention.
+- **Settled:** adjoining party permutations cannot enlarge the identity
+  component.  The formal proof includes the permutation in the finite
+  discrete signature and recovers the identity permutation in its identity
+  fiber.
+- **Owned by the successor:** the exact order and semidirect-product
+  description for the GRS tower require the encoder, dual-multiplier,
+  logical-Pauli, and Choi bridges assigned to C613.  They are not an
+  unexplained feature of the general finiteness theorem.
+
+No genuine mystery remains inside the C612 statement.
 
 ## Existing six-party prototype
 
