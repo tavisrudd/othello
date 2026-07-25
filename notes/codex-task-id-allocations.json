@@ -1160,8 +1160,17 @@
       "last": 615,
       "purpose": "Package product-unitary automorphisms as topological groups, scalar phases as a normal subgroup, and projectivization/signature as homomorphisms after the exact GRS round",
       "sequence": 129
+    },
+    {
+      "count": 1,
+      "first": 616,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 616,
+      "purpose": "coordinate-free H3 radial-trace identity and representation-theoretic ten-space spanning proof for Paper II",
+      "sequence": 130
     }
   ],
-  "next_id": 616,
+  "next_id": 617,
   "schema": "codex-task-id-allocations-v1"
 }
