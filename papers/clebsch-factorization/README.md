@@ -22,6 +22,8 @@ headline factorization theorem, marked-conic notation, matching-secant
 quotient, switch mechanism, explicit rank-three matching configurations, and
 exact `3,6,10` quotient-rank theorem are in place. The rank theorem separates
 the symbolic conic-ideal/harmonic argument from the finite orbit calculation;
+its `H_3` corollary identifies the five missing dimensions exactly as the
+middle Fischer layer `Q H_2`;
 its current exact evidence is the committed C406 primary certificate and
 independent replay. C575's disposition is complete and authoritative. Import
 only the material assigned to Paper II; the broad manuscript in

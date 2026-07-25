@@ -90,8 +90,11 @@ general matching-secant quotient with proof, and the four-endpoint switch
 mechanism. It also defines the three matching orbits explicitly and proves the
 exact `3,6,10` rank theorem, distinguishing the full spaces in types `A_3`
 and `B_3` from the canonical harmonic-plus-radial ten-space in type `H_3`.
+An `ej` upgrade proves that the omitted five-space is exactly the middle
+Fischer layer `Q H_2`; a coordinate-free reason that the finite `H_3` orbit
+annihilates precisely this layer remains a nonblocking conceptual refinement.
 The primary C406 certificate and independent replay are green. Its clean
-five-page build is warning-free. The next drafting frontier is balanced-sheet
+six-page build is warning-free. The next drafting frontier is balanced-sheet
 uniqueness and cubic-first orientation.
 
 The active order is strict:

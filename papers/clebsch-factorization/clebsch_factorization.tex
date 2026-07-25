@@ -37,6 +37,9 @@ matching products are divided by the conic equation.  We prove that this
 quotient is intrinsic up to translation and equivariant under the
 endpoint stabilizer.  For the rank-three Coxeter configurations $A_3$,
 $B_3$, and $H_3$, its difference space has ranks $3$, $6$, and $10$.
+Uniformly, the image contains the top harmonic summand and, in even
+degree, the deepest radial line.  In the $H_3$ case it omits exactly the
+middle Fischer layer $Q\mathcal H_2$.
 In the balanced cases, second moments recover two complementary sheets,
 a signed cubic orients them, and six incidence profiles recover the
 matching-table row.  A modular depth quotient and arithmetic gluing
@@ -313,6 +316,37 @@ all three containments are equalities.  Since \(\dim R_4=15\), the last
 equality is proper.
 \end{proof}
 
+\begin{corollary}[The exact \(H_3\) loss]
+\label{cor:h3-middle-layer}
+Over \(\F_{11}\), the quartic form space has the Fischer decomposition
+\[
+ R_4=\mathcal H_4\oplus Q\mathcal H_2\oplus\F_{11}Q^2.
+                                                               \tag{4.5}
+\]
+Consequently,
+\[
+ R_4=W_{H_3}\oplus Q\mathcal H_2,\qquad
+ R_4/W_{H_3}\simeq Q\mathcal H_2.                              \tag{4.6}
+\]
+Thus the \(H_3\) quotient configuration retains the top harmonic
+nine-space and the deepest radial line, and omits precisely the
+five-dimensional middle radial layer.
+\end{corollary}
+
+\begin{proof}
+For a homogeneous form \(f\) of degree \(r\), direct differentiation
+gives
+\[
+ \Delta_Q(Qf)=(4r+6)f+Q\Delta_Qf.                              \tag{4.7}
+\]
+Hence \(\Delta_Q(Qh)=3h\) for \(h\in\mathcal H_2\), while
+\(\Delta_Q(Q^2)=9Q\) over \(\F_{11}\).  Applying
+\(\Delta_Q^2\) and then \(\Delta_Q\) shows that the three summands in
+(4.5) meet trivially.  Their dimensions are \(9,5,1\), so they exhaust
+the fifteen-dimensional space \(R_4\).  Theorem
+\ref{thm:rank-three-quotients} then gives (4.6).
+\end{proof}
+
 The rank calculation has two distinct boundaries.  The common restriction
 and quotient are general consequences of the conic ideal, and (4.3)
 describes the intrinsic target subspaces.  The fact that the three
@@ -322,6 +356,12 @@ reduction; the independent replay starts only from (4.1) and reconstructs
 the calculation without importing the primary implementation.  Thus
 Theorem~\ref{thm:rank-three-quotients} does not infer a general
 rank formula from the three examples.
+
+Corollary~\ref{cor:h3-middle-layer} identifies the linear information
+lost by the \(H_3\) orbit, but linear span does not recover the two
+factorization sheets inside the finite configuration.  Their recovery
+begins one categorical level higher, with products of affine evaluation
+functions.
 
 \section{Balanced sheets and cubic orientation}
 
