@@ -1006,9 +1006,16 @@ exposes an incident `13×15` quotient, so one further marked response reaches
 `M_Ω`. Thus the finite thread is intrinsically `4→2→0`, not four unrelated
 exceptions. The same Klein-four stabilizer occurs at the q13 control, whose
 reply graph is perfectly matchable, so symmetry normalizes the defect but
-does not explain its game value. Next prove or falsify a uniform marked
-Tutte-excess decrement under the normalized external order-`q+1` exchange;
-do not promote this five-state q17 thread to a depth-two law. C82 stays gated.
+does not explain its game value. The `ej`+`tt` cross-order pass now closes the
+obvious uniform orbital lift. The rational orbit has conic discriminant 28:
+at q13 its replies are illegal; at q19 it becomes a legal strict secant,
+product-order-`q-1` orbit whose target `Ω=152` lies outside `F_cc`. For the
+same marked q19 opponent, the first actual strict-survivor reply `(0,2)`
+lands at the larger overload `Ω=169` directly in `M_Ω`. Maximum drain and
+the fixed orbital class therefore both fail. The next target is a
+nonrecursive coupled bank trading overload retention against future
+Tutte/pairing structure on the q17 thread and marked q19 control; do not
+promote the five-state q17 thread to a depth-two law. C82 stays gated.
 Report+script+certificate:
 [`../2026-07-25-c80-tutte-defect-contraction.md`](../2026-07-25-c80-tutte-defect-contraction.md).
 
@@ -1073,11 +1080,13 @@ Priority order and why:
    `D=14K1⊔K3`, `|A_GE|=13`, `C=K2`, giving a finite intrinsic defect thread
    `4→2→0`. The remaining formulation is a directly defined ranked survivor
    `F_q` realizing the concrete positive-overload `∀o∃p` strict-`Ω`
-   induction and landing in `B_cc`, together with a proof that marked
-   Tutte excess contracts uniformly under the normalized external
-   order-`q+1` exchange. No quotient or arbitrary Grundy oracle is required,
-   and the five-state q17 thread is not a depth-two law. A value-only factor
-   is also not excluded.
+   induction and landing in `B_cc`. The fixed rational orbital lift is
+   closed-negative across q13/q19: at q19 its lower-`Ω` target `152` fails
+   even `F_cc`, while a higher-`Ω` target `169` reaches `M_Ω`. The live
+   theorem therefore needs a coupled overload-retention/Tutte-excess bank,
+   not maximum drain or one orbital class. No quotient or arbitrary Grundy
+   oracle is required, and the five-state q17 thread is not a depth-two law.
+   A value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.

@@ -2044,6 +2044,365 @@
     "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206"
   },
   "q": 17,
+  "rational_exchange_orbit": [
+    {
+      "opponent": [
+        [
+          4,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "reply": [
+        [
+          7,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "opponent": [
+        [
+          -12,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "reply": [
+        [
+          -31,
+          5
+        ],
+        [
+          -1,
+          5
+        ]
+      ]
+    },
+    {
+      "opponent": [
+        [
+          -12,
+          7
+        ],
+        [
+          -4,
+          7
+        ]
+      ],
+      "reply": [
+        [
+          -5,
+          3
+        ],
+        [
+          -5,
+          8
+        ]
+      ]
+    },
+    {
+      "opponent": [
+        [
+          -20,
+          9
+        ],
+        [
+          -4,
+          9
+        ]
+      ],
+      "reply": [
+        [
+          -22,
+          9
+        ],
+        [
+          -5,
+          12
+        ]
+      ]
+    }
+  ],
+  "rational_packet_geometry": [
+    {
+      "distinct_ordered_exchanges": 4,
+      "line_discriminant_28_square_class": "nonsquare",
+      "q": 13,
+      "representative_first_strict_copycat_survivor_reply": {
+        "line_type": "tangent",
+        "positive_pairing_survivor": true,
+        "product_order": 13,
+        "reply": [
+          0,
+          1
+        ],
+        "target_omega": 0
+      },
+      "representative_packet_target_copycat_survivor": null,
+      "root_omega": 92,
+      "root_t4": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "rows": [
+        {
+          "line_type": "external",
+          "opponent": [
+            4,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 14,
+          "reply": [
+            7,
+            1
+          ],
+          "reply_legal": false,
+          "strict_omega": false,
+          "target_omega": null
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            1,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 14,
+          "reply": [
+            12,
+            5
+          ],
+          "reply_legal": false,
+          "strict_omega": false,
+          "target_omega": null
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            2,
+            5
+          ],
+          "opponent_legal": true,
+          "product_order": 14,
+          "reply": [
+            7,
+            1
+          ],
+          "reply_legal": false,
+          "strict_omega": false,
+          "target_omega": null
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            5,
+            1
+          ],
+          "opponent_legal": true,
+          "product_order": 14,
+          "reply": [
+            12,
+            5
+          ],
+          "reply_legal": false,
+          "strict_omega": false,
+          "target_omega": null
+        }
+      ]
+    },
+    {
+      "distinct_ordered_exchanges": 4,
+      "line_discriminant_28_square_class": "nonsquare",
+      "q": 17,
+      "representative_first_strict_copycat_survivor_reply": {
+        "line_type": "external",
+        "positive_pairing_survivor": false,
+        "product_order": 18,
+        "reply": [
+          7,
+          1
+        ],
+        "target_omega": 40
+      },
+      "representative_packet_target_copycat_survivor": true,
+      "root_omega": 820,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "rows": [
+        {
+          "line_type": "external",
+          "opponent": [
+            4,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            7,
+            1
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 40
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            5,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            4,
+            10
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 40
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            8,
+            14
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            4,
+            10
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 40
+        },
+        {
+          "line_type": "external",
+          "opponent": [
+            11,
+            9
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            7,
+            1
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 40
+        }
+      ]
+    },
+    {
+      "distinct_ordered_exchanges": 4,
+      "line_discriminant_28_square_class": "square",
+      "q": 19,
+      "representative_first_strict_copycat_survivor_reply": {
+        "line_type": "external",
+        "positive_pairing_survivor": true,
+        "product_order": 10,
+        "reply": [
+          0,
+          2
+        ],
+        "target_omega": 169
+      },
+      "representative_packet_target_copycat_survivor": false,
+      "root_omega": 1520,
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "rows": [
+        {
+          "line_type": "secant",
+          "opponent": [
+            4,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            7,
+            1
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 152
+        },
+        {
+          "line_type": "secant",
+          "opponent": [
+            7,
+            0
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            9,
+            15
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 152
+        },
+        {
+          "line_type": "secant",
+          "opponent": [
+            1,
+            13
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            11,
+            16
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 152
+        },
+        {
+          "line_type": "secant",
+          "opponent": [
+            2,
+            8
+          ],
+          "opponent_legal": true,
+          "product_order": 18,
+          "reply": [
+            6,
+            17
+          ],
+          "reply_legal": true,
+          "strict_omega": true,
+          "target_omega": 152
+        }
+      ]
+    }
+  ],
   "root_omega": 820,
   "root_reply_graph": {
     "A_size": 0,

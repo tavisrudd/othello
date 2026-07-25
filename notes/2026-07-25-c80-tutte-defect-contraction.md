@@ -47,11 +47,18 @@ attachment vertex has a cross-edge. Every reply edge lands in the lower
 positive-pairing kernel. This is the exact Tutte contraction behind the
 previously observed second adaptive exchange.
 
-It does **not** prove a uniform contraction law. The result replaces four
-q=17 fibres and four target graphs by one intrinsic orbit representative and
-one contracted Tutte type; it does not show that defects at larger `q`
-always have this type, that deficiency always decreases, or that adaptive
-depth is bounded.
+It does **not** prove a uniform contraction law. The `ej`+`tt` cross-order
+upgrade decisively falsifies the tempting uniform continuation of this
+orbit. The representative line has conic discriminant `28`. At q=13 the
+four rational-orbit replies are illegal; at q=19 they are legal and strictly
+lower `Ω`, but become secants of product order `q-1=18`, and their targets
+are outside even the older copycat survivor. The q=17 label “external
+order-`q+1`” is therefore not uniform.
+
+The result replaces four q=17 fibres and four target graphs by one intrinsic
+orbit representative and one contracted Tutte type. It does not show that
+defects at larger `q` always have this type, that deficiency always
+decreases, or that adaptive depth is bounded.
 
 ## 1. Algebraic normalization
 
@@ -92,6 +99,45 @@ the q=13 control root `{9,10,11,12}` has a connected 40-vertex strict-reply
 graph with a perfect matching, while the q=17 graph has four isolated
 vertices and deficiency four. The stabilizer normalizes the defect once it
 appears; it does not explain why the defect appears.
+
+### Cross-order orbital falsifier
+
+The four q=17 exchanges are reductions of one rational Klein-four orbit.
+Starting from `(4,0) -> (7,1)`, the ordered orbit is
+
+```text
+(4,0)             -> (7,1)
+(-12,0)           -> (-31/5,-1/5)
+(-12/7,-4/7)      -> (-5/3,-5/8)
+(-20/9,-4/9)      -> (-22/9,-5/12).
+```
+
+The representative joining line is
+
+```text
+-X + 3Y + 4Z = 0.
+```
+
+Its conic intersection equation is `t²-4t-3=0`, with discriminant `28`.
+Exact reduction gives:
+
+| q | `χ(28)` | rational reply | line/product type | target |
+| ---: | --- | --- | --- | --- |
+| 13 | nonsquare | illegal after the opponent | external, order `q+1=14` | none |
+| 17 | nonsquare | legal | external, order `q+1=18` | `Ω=40`, in `M_Ω` |
+| 19 | square | legal | secant, order `q-1=18` | `Ω=152`, outside `F_cc` |
+
+Thus neither the rational orbit, externality, nor product order gives the
+uniform contraction.
+
+There is nevertheless a sharper positive q=19 control. For the same marked
+opponent `(4,0)`, the first strict structural-survivor reply is `(0,2)`.
+It lands at `Ω=169`, has external line type and product order `10`, and is
+already inside the positive pairing kernel `M_Ω`. The rejected rational
+reply destroys more overload (`152<169`) but loses future response
+structure. This is the exact Tao-style warning: the correct contraction
+coordinate cannot optimize `Ω` or a single orbital order alone; it must
+retain a future Tutte/pairing resource.
 
 ## 2. Exact Tutte certificate
 
@@ -154,8 +200,8 @@ temporary directory and requires byte equality.
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_tutte_defect_contraction.py` | 15,169 | `8af3a3ae74e0fb1ec76c87e49611c388d88c16e075eb3055c1f79801a4c91848` |
-| `notes/2026-07-25-c80-tutte-defect-contraction.json` | 38,679 | `dda6c1e75e0fcde91de813c63ba7e8ef47f507c8f103139ceb179daa9e272028` |
+| `rust/scripts/c80_tutte_defect_contraction.py` | 19,853 | `822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef` |
+| `notes/2026-07-25-c80-tutte-defect-contraction.json` | 45,582 | `371c7492fb2927b88e1cc8c58b57c04c9df598cdd2347d4b3077f5bff046af5e` |
 
 The matching implementation inherits the prior exhaustive comparison on all
 33,867 labelled graphs of orders at most six. The new Tutte--Berge barriers
@@ -164,33 +210,34 @@ give an independent optimality certificate on the actual 104- and
 the frozen normalized prime-grid engine; there is no second independent
 projective implementation in this bundle.
 
-The searched domain is exactly the five-state q=17 defect thread from the
-missed root and the one q=13 same-parameter control. No q=19
-positive-pairing-kernel expansion was run. The computation proves neither a
+The searched game domain is exactly the five-state q=17 defect thread, the
+one q=13 same-parameter control, and the marked `(4,0)` fibre at the existing
+q=19 root. At q=19 the rational target and the first strict structural
+target are checked individually; the full q=19 positive-pairing kernel and
+all marked fibres are not expanded. The computation proves neither a
 larger-field pattern nor odd-q escape.
 
 ## `ej` + `tt` closeout
 
-The cheap `ej` upgrade was the cross-order control. The Klein-four
-normalization persists at q=13, but the defect vanishes there: the analogous
-reply graph is connected and perfectly matchable. This prevents a false
-claim that the stabilizer creates the defect and cleanly separates geometric
-normalization from game-semantic contraction.
+The cheap `ej` upgrade was the rational-orbit reduction at q=13 and q=19.
+It closes the most tempting uniform lift: the q=17 external
+order-`q+1` exchange becomes illegal at q=13 and becomes a secant,
+order-`q-1` exchange outside the survivor at q=19.
 
-The Tao-style formulation is a defect clock, not a depth claim:
+The `tt` upgrade is the q=19 comparison between two replies to the same
+marked opponent:
 
 ```text
-marked isolated orbit at deficiency 4
-  -> factor-critical quotient at deficiency 2
-  -> lower pairing kernel.
+rational maximum-drain reply: Ω=152, outside F_cc;
+actual structural reply:      Ω=169, inside M_Ω.
 ```
 
-The next uniform attempt should define the marked Tutte excess of the
-strict-reply relation and prove that a normalized external
-order-`q+1` exchange strictly contracts that excess while lowering `Ω`.
-That would permit growing adaptive depth by induction. The present data
-establish only the first `4 -> 2 -> 0` thread; they do not justify assuming
-the decrement is always two.
+This rules out a lexicographic “maximize overload destruction, then repair
+Tutte defect” law. The next uniform attempt needs a coupled rank or bank:
+spend less immediate `Ω` destruction when that preserves a lower-rank
+pairing shell. The q=17 `4 -> 2 -> 0` thread supplies the Tutte coordinate;
+the q=19 `152` versus `169` fork supplies the retention coordinate. What
+remains is to state a nonrecursive inequality that trades the two.
 
 ## Mystery ledger
 
@@ -206,21 +253,29 @@ the decrement is always two.
 - **[SETTLED negative] Does the Klein-four stabilizer explain the q=17
   value defect?** No. The same stabilizer occurs in the q=13 control, whose
   reply graph has a perfect matching.
+- **[SETTLED negative] Is the rational Klein-four exchange orbit a uniform
+  external order-`q+1` packet?** No. It is illegal at q=13; at q=19 it is
+  secant of order `q-1` and its target lies outside `F_cc`.
+- **[SETTLED q19 marked fibre] Does the packet failure mean the marked
+  opponent has no direct reply into the pairing kernel?** No. Reply `(0,2)`
+  lands at `Ω=169` inside `M_Ω`; it simply destroys less overload than the
+  rejected rational reply.
 - **[OPEN — C80] Does a marked Tutte-excess rank contract uniformly under a
-  normalized secant/orbital reply?** Unknown. Only the single q=17
-  `4 -> 2 -> 0` thread is certified.
-- **[OPEN — C80] Is the external, product-order-`q+1` exchange class
-  guaranteed to contain a lower-survivor reply at every future defect?**
-  Unknown; this is now the algebraic lifting target.
+  state-dependent secant/orbital reply?** Unknown. The fixed rational orbit
+  is now closed-negative.
+- **[OPEN — C80] What nonrecursive bank trades retained overload against
+  future Tutte/pairing structure?** Exact finite pressure:
+  q19 rejects the lower-`Ω` target `152` and accepts the higher-`Ω` target
+  `169`.
 - **[OPEN — C80/C82 gate] Can that exchange class be counted without
   recursive kernel membership?** Unknown. C82 remains gated.
 
 ## Vibe
 
-This is real compression, but not the crown: four exceptional fibres and
-four successor graphs have collapsed to one algebraic orbit and one
-Tutte-certified quotient. The risk has moved from finite clutter to a clean
-uniform question—whether marked Tutte excess is a genuine descending rank
-or merely another q=17 coincidence.
+This is a productive reversal: the finite q=17 defect is genuinely
+compressed, and the obvious uniform orbital lift is now dead rather than
+lingering as false hope. The surviving mechanism is more interesting and
+harder—a controlled trade between overload retention and future pairing
+structure.
 
-go C80 cap prove or falsify uniform marked Tutte-excess contraction under the normalized external order-q+1 exchange
+go C80 cap define and falsify a coupled overload-retention/Tutte-excess bank on the q17 defect thread and marked q19 control

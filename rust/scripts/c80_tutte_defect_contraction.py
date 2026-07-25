@@ -308,6 +308,121 @@ def six_parameter_stabilizer_order(q: int) -> int:
     )
 
 
+RATIONAL_EXCHANGE_ORBIT = (
+    (((4, 1), (0, 1)), ((7, 1), (1, 1))),
+    (((-12, 1), (0, 1)), ((-31, 5), (-1, 5))),
+    (((-12, 7), (-4, 7)), ((-5, 3), (-5, 8))),
+    (((-20, 9), (-4, 9)), ((-22, 9), (-5, 12))),
+)
+
+
+def reduce_rational_cell(q: int, cell) -> tuple[int, int]:
+    return tuple(
+        numerator * pow(denominator, -1, q) % q
+        for numerator, denominator in cell
+    )
+
+
+def rational_packet_geometry(q: int) -> dict:
+    kernel = BASE.CopycatKernel(q)
+    root_t4 = tuple(range(q - 4, q))
+    root = kernel.game.base_mask(root_t4)
+    root_omega = kernel.omega(root)
+    rows = []
+    for opponent_rational, reply_rational in RATIONAL_EXCHANGE_ORBIT:
+        opponent_cell = reduce_rational_cell(q, opponent_rational)
+        reply_cell = reduce_rational_cell(q, reply_rational)
+        opponent = opponent_cell[0] * q + opponent_cell[1]
+        reply = reply_cell[0] * q + reply_cell[1]
+        opponent_legal = bool(kernel.game.legal_mask(root) & (1 << opponent))
+        child = root | (1 << opponent)
+        reply_legal = opponent_legal and bool(
+            kernel.game.legal_mask(child) & (1 << reply)
+        )
+        target = child | (1 << reply)
+        rows.append(
+            {
+                "opponent": list(opponent_cell),
+                "reply": list(reply_cell),
+                "opponent_legal": opponent_legal,
+                "reply_legal": reply_legal,
+                "target_omega": kernel.omega(target) if reply_legal else None,
+                "strict_omega": reply_legal and kernel.omega(target) < root_omega,
+                "line_type": GEOMETRY.line_type(
+                    kernel.game, opponent, reply
+                ),
+                "product_order": GEOMETRY.prod_order(
+                    kernel.game, opponent, reply
+                ),
+            }
+        )
+    representative = rows[0]
+    representative_opponent = (
+        representative["opponent"][0] * q + representative["opponent"][1]
+    )
+    representative_reply = (
+        representative["reply"][0] * q + representative["reply"][1]
+    )
+    representative_child = root | (1 << representative_opponent)
+    representative_target = representative_child | (
+        1 << representative_reply
+    )
+    packet_target_survivor = (
+        kernel.contains(representative_target)
+        if representative["reply_legal"]
+        else None
+    )
+    first_survivor_reply = None
+    first_survivor_target = None
+    for reply in GEOMETRY.bits(kernel.game.legal_mask(representative_child)):
+        target = representative_child | (1 << reply)
+        if kernel.omega(target) < root_omega and kernel.contains(target):
+            first_survivor_target = target
+            first_survivor_reply = {
+                "reply": list(kernel.game.cell_tuple(reply)),
+                "target_omega": kernel.omega(target),
+                "line_type": GEOMETRY.line_type(
+                    kernel.game, representative_opponent, reply
+                ),
+                "product_order": GEOMETRY.prod_order(
+                    kernel.game, representative_opponent, reply
+                ),
+            }
+            break
+    if first_survivor_target is not None:
+        pairing_kernel = SHELL.PositivePairingKernel(q)
+        first_survivor_reply["positive_pairing_survivor"] = (
+            pairing_kernel.contains(first_survivor_target)
+        )
+    return {
+        "q": q,
+        "root_t4": list(root_t4),
+        "root_omega": root_omega,
+        "line_discriminant_28_square_class": (
+            "zero"
+            if 28 % q == 0
+            else (
+                "square"
+                if pow(28 % q, (q - 1) // 2, q) == 1
+                else "nonsquare"
+            )
+        ),
+        "distinct_ordered_exchanges": len(
+            {
+                (tuple(row["opponent"]), tuple(row["reply"]))
+                for row in rows
+            }
+        ),
+        "representative_packet_target_copycat_survivor": (
+            packet_target_survivor
+        ),
+        "representative_first_strict_copycat_survivor_reply": (
+            first_survivor_reply
+        ),
+        "rows": rows,
+    }
+
+
 def run() -> dict:
     q = 17
     kernel = SHELL.PositivePairingKernel(q)
@@ -400,6 +515,22 @@ def run() -> dict:
             str(order): six_parameter_stabilizer_order(order)
             for order in (11, 13, 17, 19)
         },
+        "rational_exchange_orbit": [
+            {
+                "opponent": [
+                    [numerator, denominator]
+                    for numerator, denominator in opponent
+                ],
+                "reply": [
+                    [numerator, denominator]
+                    for numerator, denominator in reply
+                ],
+            }
+            for opponent, reply in RATIONAL_EXCHANGE_ORBIT
+        ],
+        "rational_packet_geometry": [
+            rational_packet_geometry(order) for order in (13, 17, 19)
+        ],
         "same_parameter_pattern_q13_control": {
             "root_t4": [9, 10, 11, 12],
             "positive_pairing_survivor": comparison_accepted,
