@@ -108,4 +108,3 @@ the transpose orientation that was easiest to get subtly wrong.  The exact
 GRS result has a clean formal landing point, but its concrete code-family
 construction remains interface-level rather than an end-to-end GRS
 formalization.
-
