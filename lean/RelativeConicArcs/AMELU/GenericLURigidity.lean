@@ -358,6 +358,33 @@ theorem generic_all_isClifford_of_localAction_equalPhaseState
   exact genericMarginal_party_isClifford
     hm w hC hD U hU phase hphase hstate hS ⟨i, hiS⟩
 
+/-- In a phase-normalized product action from a party permutation of one
+generic equal-phase exact MDS code state to another, every displayed local
+unitary is Clifford. -/
+theorem generic_all_isClifford_of_permutedLocalAction_equalPhaseState
+    (hm : 2 ≤ m) (w : WeylConvention 𝔽)
+    {C D : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    (hC : IsMDSCode2m C) (hD : IsMDSCode2m D)
+    (π : Equiv.Perm (GenericParty m))
+    (U : GenericParty m → LocalMatrix 𝔽)
+    (hU : ∀ i, IsUnitaryMatrix (U i))
+    (phase : ℂ) (hphase : Complex.normSq phase = 1)
+    (hstate :
+      genericLocalAction U
+          (genericPermuteState π (genericEqualPhaseState C)) =
+        phase • genericEqualPhaseState D) :
+    ∀ i, IsCliffordMatrix w (U i) := by
+  let Cπ := genericPermutedCode π C
+  have hCπ : IsMDSCode2m Cπ :=
+    isMDSCode2m_genericPermutedCode π hC
+  have hstate' :
+      genericLocalAction U (genericEqualPhaseState Cπ) =
+        phase • genericEqualPhaseState D := by
+    rw [← genericPermuteState_equalPhaseState π C]
+    exact hstate
+  exact generic_all_isClifford_of_localAction_equalPhaseState
+    hm w hCπ hD U hU phase hphase hstate'
+
 /-- Length-generic rigidity: for every finite field and every `m ≥ 2`,
 local-unitary equivalence between equal-phase exact `[2m,m,m+1]` MDS code
 states is local-Clifford equivalence, with the same permutation, local

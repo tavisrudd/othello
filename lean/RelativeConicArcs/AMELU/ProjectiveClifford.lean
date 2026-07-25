@@ -1,6 +1,7 @@
 import RelativeConicArcs.AMELU.UnitaryConjugation
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Polynomial.Roots
+import Mathlib.Topology.Instances.Matrix
 
 /-!
 # Projective finite-field Clifford matrices
@@ -18,6 +19,8 @@ generated data, native evaluation, axioms, or admitted declarations.
 namespace RelativeConicArcs.AMELU
 
 open Matrix Polynomial
+
+noncomputable section
 
 variable {𝔽 : Type*} [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽]
 
@@ -177,8 +180,9 @@ theorem projectiveCliffordSignatureSet_finite
 /-- The finite type of exact adjoint signatures of one-site Clifford
 matrices.  Equal signatures are precisely equal projective Clifford
 transformations. -/
-def ProjectiveCliffordSignature (w : WeylConvention 𝔽) :=
+noncomputable def ProjectiveCliffordSignature (w : WeylConvention 𝔽) :=
   {s // s ∈ projectiveCliffordSignatureSet w}
+deriving TopologicalSpace, T2Space
 
 noncomputable instance (w : WeylConvention 𝔽) :
     Fintype (ProjectiveCliffordSignature w) :=
@@ -365,5 +369,7 @@ noncomputable instance projectiveClifford_finite
     (w : WeylConvention 𝔽) : Finite (ProjectiveClifford w) :=
   Finite.of_surjective (projectiveCliffordClassOfSignature w)
     (projectiveCliffordClassOfSignature_surjective w)
+
+end
 
 end RelativeConicArcs.AMELU
