@@ -10,16 +10,19 @@ The adopted aggregate now has the exact 15-file R5--R7 closure and 53-target
 axiom audit; the shared contraction API is separated from the companion R9
 residual-quadratic module; all 35 current manuscript labels reconcile exactly;
 the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
-the adoption/formalization/release ledgers and 42-artifact evidence pack agree;
+the adoption/formalization/release ledgers and 43-artifact evidence pack agree;
 and the verifier checks the TeX label set, direct imports, transitive closure,
-and ordered audit targets fail-closed. The paper and TIT builds, supplement
+ordered audit targets, and exact reader candidate fail-closed. A deterministic
+fresh-history exporter now produces separate paper and exact 15-module Lean
+candidates reproducibly; the clean candidate passes the quick supplement gate
+and rebuilds both PDFs byte-for-byte. The paper and TIT builds, supplement
 gate, adopted aggregate, foundation audit, and companion R9 regression gate
 are green. The exact repair, Lean/prose comparison, dependency pinpoints, and
 mystery ledger are in
 `notes/2026-07-25-c545-r5-r7-lean-trust-reconciliation.md`. C545 remains
 externally blocked on two specialist signoffs, a publicly fetchable
-flake-pinned Lean revision, immutable export and identifiers, and
-author/account confirmation. C532 gives
+flake-pinned Lean revision, authenticated repository/archive publication and
+identifiers, and author/account confirmation. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the

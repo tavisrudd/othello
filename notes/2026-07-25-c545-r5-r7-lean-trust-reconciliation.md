@@ -119,6 +119,41 @@ revision, exact paper-only public export and immutable identifiers, two final
 independent specialist signoffs, and author/account confirmation. The public
 release checker remains fail-closed.
 
+## External-release preparation follow-up
+
+The paper supplement now contains
+`supplement/prepare_release_export.py`, a deterministic fresh-history exporter.
+It refuses dirty release-owned source or an existing destination, archives the
+committed paper tree and exact 15-module Lean closure, and creates separate
+paper and Lean repositories. Two independent runs from source commit
+`ddefed24b5b5beff44502bc199d563e12fb7285a` produced the same commit
+identifiers. The resulting paper candidate passed the 43-artifact quick
+verifier and rebuilt the 33-page canonical and 25-page TIT PDFs byte-for-byte;
+both repositories remained clean after the builds.
+
+The final-reader form now names only the retained R5--R7, polar-induction, and
+stable-component boundaries. The release verifier additionally requires the
+two readers' candidate commit and canonical PDF hash to equal the release
+manifest. This closes a false-green route in which signoffs for the former
+R5--R9/Hessian/Lucas scope, or for a different candidate, could have satisfied
+the string-level gate.
+
+The same-day policy recheck remains favorable but does not replace account
+confirmation. IEEE's current Author Center policy permits preprints on arXiv,
+TechRxiv, or another PSPB-approved not-for-profit server and does not treat
+them as prior publication
+(`https://journals.ieeeauthorcenter.ieee.org/become-an-ieee-journal-author/publishing-ethics/guidelines-and-policies/post-publication-policies/`,
+checked 2026-07-25). Zenodo's current documentation states that a published
+record receives a DOI and permits reserving that DOI in advance
+(`https://help.zenodo.org/docs/get-started/quickstart/` and
+`https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/`, checked
+2026-07-25).
+No upload was performed: this checkout has no Git remote, GitHub or Zenodo
+credential, author/account confirmation, or final independent-reader
+attestation. The tracked release flake also still lacks the required public
+`finitegeom` input; it can be locked only after the exact Lean revision is
+publicly fetchable.
+
 ## Extra-juice and Tao closeout
 
 The closeout asked whether a direct-import check alone could regress while
@@ -153,10 +188,15 @@ Settled:
 Open, with owner and gate:
 
 - **What immutable public Lean revision and export commit will carry this
-  closure?** C545's public-export gate; no identifier exists yet.
+  closure?** The deterministic local candidates now exist, but C545's
+  public-export gate still requires authenticated publication and a
+  publicly resolving `finitegeom` flake lock.
 - **Will both final independent specialists sign the exact repaired
   artifact?** C545's reader-signoff gate.
 - **What DOI/archive/account metadata will identify Version 1?** C545's
   irreversible external-release gate and author confirmation.
+- **Can the public release checker close without the exact reviewed bytes?**
+  No. It now binds both reader records to the manifest's export commit and
+  canonical PDF hash; public URL and DOI resolution remain external facts.
 
 No incidental finding met the discovery-track discriminator.
