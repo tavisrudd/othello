@@ -19,10 +19,10 @@ The open research center of gravity is the **projective cap ("Nofil") program** 
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
 has spun off enough standalone finite-geometry and coding-theory mathematics — extension, rigidity,
 and completion-distance theory about geometric *legality* rather than game value — that the repo now
-carries a **publication track alongside the research track**: `papers/` stages seven papers in ship
-order plus two OEIS entries in its original backbone, with the Clebsch sequel and Reed–Solomon
-programme now expanding that historical count; all are governed by a Lean release gate
-(see §3, §7, §8).
+carries a **publication portfolio alongside the open game programme**. Its original seven-paper
+backbone and two OEIS entries have expanded through the Clebsch and projective Reed–Solomon work and
+now include a quantum-information branch on MDS–CSS AME states, local-unitary rigidity, and
+transversal Clifford groups (see §3, §7, §8).
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -58,7 +58,8 @@ mirror/slack analysis is new.
 |------------------------|---------------------------------------------------|----------------------------------------------|
 | **Projective cap**     | `PG(n,q)` cap/Nofil outcome theorem               | **Open research frontier.** Odd-plane kernel |
 | **Geometry / coding**  | The spin-off portfolio (§3) — legality, not value | **Where the deliverables are.** Multiple papers |
-| **Reed–Solomon**       | Deep holes, determinant invariants, reconstruction | **Major new theorem programme.** `r=3,5,6,7` |
+| **Reed–Solomon**       | Deep holes, determinant invariants, reconstruction | **Major theorem programme.** Exact `r=3,5,6,7`; uniform high-field theory |
+| **Quantum / AME**      | MDS–CSS states, LU rigidity, transversal gates    | **Uniform LU-to-LC theorem.** Generic Lean core |
 | **Queens**             | Non-attacking queens game + A344227 nimbers       | n=18 outcome solved; G(18) nimber open       |
 | **Sum-free / cap-set** | Achievement game on abelian groups / `F₃ⁿ`        | Core theorems proved + Lean; one slice open  |
 | **Node-Kayles**        | Graph/Cayley substrate for all of the above       | Outcome laws proved; classic opens remain    |
@@ -230,6 +231,17 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   identification: a projectively non-GRS `[6,3,4]₁₁` code of covering radius three whose
   distance-three affine syndrome rays are exactly the standard conic. All Lean, `sorry`-free.
 
+  **Zero defect is rigid, not merely extremal.** The concurrence points of an arc canonically
+  decompose the edges of `KG(k,2)` into matching cliques. Equality in the prescribed-hole defect
+  identity forces those cliques to form a simple maximum-matching design represented by secant
+  concurrence in one projective plane; the second index equation then determines the exact number
+  of maximum-index centres and their incidence with every secant. At defect `Δ`, at most
+  `m(m−1)Δ/2` Kneser edges lie in nonmaximum cliques. The six-point realization is classified
+  projectively, and for every even `k ≥ 6`, zero relative defect forces
+  `q ∈ {k−2, C(k−1,2), C(k−1,2)+1}`. Exact reconstruction of the arc from its ordinary uncovered
+  locus, semilinear-stabilizer recovery, the matching-design theorem, and the stability bound all
+  pass through the scoped `RelativeConicArcs` gate.
+
   **The prescribed hole answers to something already asked.** Taking the hole to be a *line at
   infinity* specializes the whole framework to **complete affine arcs**: `CompleteOutside A L∞` is
   exactly maximality of `A` as an arc in the affine plane obtained by deleting that line, every
@@ -257,6 +269,14 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   whose `eq₂` is known to be 5). Extended to **`4 ≤ k ≤ 7`**: the only conic-filling pairs are
   `(k,q) = (4,5)` — the projective frame — and `(6,11)`; at `k=7` the arithmetic leaves only q=11 and
   q=13 with forced spectra, both excluded by exhaustive search.
+
+  A universal chord-defect identity now subsumes the separate small-`k` counts. Its sharp moment
+  bound shows that a conic-filling uncovered locus forces an explicit quadratic field-size barrier
+  and `q < C(k,2)`; a passant count gives `q ≥ 2k−3`, while Hirschfeld's nucleus characterization
+  excludes the even-order branch. The eight-point sieve leaves exactly `q ∈ {13,17,19}`, and a
+  complete passant-edge-orbit search excludes all three. The classification is therefore complete
+  through eight points. These results strengthen the active rigidity manuscript without changing
+  the classical-priority boundary around the Clebsch configuration itself.
 
   **The spine is now conceptual rather than enumerative**, which is what moves the paper's central
   claim from an exact classification to an equality theorem. Two replacements did it. The **`q−5`
@@ -822,9 +842,52 @@ in place.
   discrepancy is settled; the arithmetic/monodromy reason it occurs specifically at q=19, and its
   possible relation to the equianharmonic q=19 cubic-pencil orbit, remain open.
 
+- **Arbitrary redundancy — coherent polar containment.** Iterated contractions must retain every
+  removed root as a forbidden marker; classifying bad fibres independently loses exactly the
+  information needed to lift squarefree witnesses. With those coherent polar flags in place, a
+  catalecticant-rowspace reduction and an integral Grassmannian calculation show that every
+  recursively pointed contained component is persistent or modular. Consequently every split-free
+  syndrome at redundancy `r` lies in those loci once
+  `q ≥ 6r−15 + floor(2 sqrt(6r−17))`. This is a uniform high-field containment theorem, not a
+  general solution of the Reed–Solomon deep-hole conjecture.
+
 These results combine exact invariant theory, Plücker inversion, Gale duality, catalecticants and
 apolarity, finite-group descent, low-genus point bounds, and independently replayed bounded
 classifications. They do **not** prove the general Reed–Solomon deep-hole conjecture.
+
+### MDS–CSS AME local-unitary rigidity
+
+Let `C` be a linear `[2m,m,m+1]_q` MDS code and
+`|Ψ_C⟩ = q^(−m/2) Σ_{c∈C}|c⟩` its equal-phase CSS state. For every prime power `q` and every
+`m ≥ 2`, every product-unitary intertwiner between two such states is local Clifford. The proof is
+uniform in length: shorten `C` and `C⊥` to `m+1` retained coordinates, expand the reduced density
+matrix in the full finite-field Weyl basis, and recover the Weyl axes from the pure rank-one
+contractions of the resulting diagonal tensor. The marginal expansion, covariance, tensor-rigidity,
+party-permutation transport, and LU-to-LC terminal are formalized in Lean.
+
+Three consequences give the theorem operational content:
+
+- any product physical unitary converting the associated `[[2m−1,1,m]]_q` encoders is Clifford
+  factor by factor, and so is its logical intertwiner;
+- the product-unitary automorphism group of an equal-phase MDS–CSS state is finite modulo one-site
+  scalar phases, with those phases forming the full identity component;
+- for odd prime `q`, generalized or extended generalized Reed–Solomon codes of even length
+  `2m ≤ q+1` attain exactly the projective one-qudit Clifford group
+  `F_q² ⋊ SL₂(q)`. The first case beyond six parties is
+  `AME(8,7) ↔ [[7,1,4]]₇`, whose projective transversal group has order `16464`.
+
+At `m=3`, the general theorem is paired with a more specific six-point-pencil classification: a
+degree-eight quotient separates projective, monomial-code, local-Clifford, and local-unitary
+equivalence, the conic/GRS locus has logical symplectic group `SL₂(q)`, and the generic off-conic
+locus has only the split torus. Fixed-copy scalar contractions are generically constant; exact
+marginal and four-copy witnesses detect only special strata.
+
+**Trust boundary:** the arbitrary-`m` marginal-to-rigidity theorem is in the formal aggregate. The
+projective-finiteness corollary has a completed Lean module but is not yet imported by that aggregate
+or its axiom audit. The full Choi/encoder construction and the exact GRS transversal-group
+computation remain manuscript proofs rather than completed Lean terminals. The paper has a clean,
+reproducible local release candidate, but no public deposit, DOI, license grant, or submission has
+occurred.
 
 ---
 
@@ -1258,10 +1321,12 @@ every result depending on it, and no result silently inherits one. Certificate c
 by the **Lean kernel** (`decide` / `checkCap_sound`), not `native_decide` and not trusted.
 
 Those clean reports and the newer repository-wide extraction audit are different evidence layers.
-The former are stored outputs from individual build gates; the latter is meant to rederive the
-dependency and terminal-axiom facts from the tracked project as a whole. No project module has yet
-passed that extraction path, so the legacy clean reports have **not** been independently reproduced
-by the new auditor and must not be described as a completed repository-wide trust audit.
+Scoped current-project aggregates now elaborate and audit successfully: the relconic reconstruction
+and matching-design closure, the exact 15-file R5–R7 PRS paper closure with its 53-target audit, and
+the generic AME marginal-to-rigidity chain all have current gate evidence. The repository-wide
+extractor is still a separate attempt to rederive dependency and terminal-axiom facts across the
+whole tracked development. Its state must not be conflated with those scoped gates or described as a
+completed repository-wide trust audit.
 
 Namespaces: **CapGame** (finite build-game kernel + affine cap theorem + reusable mirror
 lemmas), **ProjectiveCap** (the flagship — Binary / Elliptic / Hyperbolic / PolarSegre mirrors, the
@@ -1283,8 +1348,11 @@ development**:
   normalization, the asymptotic additive bound, averaging transfer, the char-2 nucleus constraints,
   certificate soundness, the evaluation obstruction/dichotomy, the arc–MDS syndrome dictionary, the
   exhaustive `PG(2,16)` eight-arc quadratic-avoidance theorem with `ρ_𝒞(16) = 9`, the q=11
-  coding/deep-hole/extension-complex package, and the whole `Q25` profile ladder up to the uniform
-  pair-extension theorem.
+  coding/deep-hole/extension-complex package, exact uncovered-locus reconstruction and stabilizer
+  recovery, zero-defect matching-design rigidity and bad-edge stability, the whole `Q25` profile
+  ladder up to the uniform pair-extension theorem, the exact R5–R7 projective-Reed–Solomon paper
+  aggregate, and the arbitrary-length MDS–CSS marginal/covariance/tensor-rigidity chain culminating
+  in the generic LU-to-LC theorem.
 - **RepairCodes** — the concatenation-transfer lemma, the trace-dual bridge, exact cubic/axis repair
   invariants, both projective and affine seed lifts, and the two asymptotic families.
 - **DihedralSchreier** — the dihedral reduction, the `V₄ → K₄` core, the template invariant `Φ_T`,
@@ -1375,35 +1443,40 @@ of every candidate manuscript.
 |---|------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------|
 | 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten   |
 | 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | rebuilt as LaTeX on a spine; owes a value fix        |
-| 3 | Arcs complete outside a conic                        | the defect identity + additive-3/2 refinement + verified values | **no mathematical gate left**; archive identity only |
-| 4 | Clebsch factorization memory                         | the recoverable bit and exact survival/forgetting ledger        | selected replacement spine; integration + Lean open  |
+| 3 | Arcs complete outside a prescribed conic             | defect identity → rigidity → stability; `ρ_𝒞(16)=9`             | 21-page local candidate + scoped Lean; archive gate  |
+| 4 | Deep-hole rigidity of the Clebsch hexagon code       | conic-filling rigidity, gaps, decoding, universal chord defect  | 19-page local candidate; no public deposit           |
 | 5 | Complete repair hypergraphs (twisted-cubic–axis LRC) | the certified `[19,4,8]₉` seed + exact row transfer             | manuscript + Lean complete; specialist audit left    |
 | 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | extremal gate cleared; bookkeeping + graph remain    |
 | 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | manuscript complete; Lean planned; audit gated       |
+| — | PRS beyond redundancy four                          | exact R5–R7 + coherent-polar high-field containment             | 43-page reproducible V1; external release gates      |
+| — | MDS–CSS AME local-unitary rigidity                  | uniform LU-to-LC + transversal Clifford groups                  | 18-page local candidate; generic Lean core           |
 
 Paper 3 carries its final title — *Arcs complete outside a prescribed conic: an exact defect
-identity and `ρ_𝒞(16) = 9`*. The former Clebsch rigidity title remains the protected fallback, not
-the selected shipping manuscript; the selected Paper 1 is the factorization-memory theorem, and
-the modular-gateway mechanism is reserved for a separate Paper 2. Paper 5's venue is stated as DCC / FFA,
-explicitly **not** IEEE-TIT. A `lean-proof-engineering-at-scale`
-methods paper is registered as an idea and deliberately kept **outside** the mathematical ship order;
-its evidence base is the measured build failures and the tooling above, and any novelty claim there
-needs its own literature audit.
+identity and `ρ_𝒞(16) = 9`* — and now has the zero-defect matching-design capstone that earlier
+work identified as the missing structural complement. The active Clebsch program is again a three-paper sequence:
+rigidity/decoding first, factorization memory second, and a gated passages sequel third; the
+37-page integrated manuscript is preserved only as a fallback. Paper 5's venue is stated as
+DCC / FFA, explicitly **not** IEEE-TIT. A `lean-proof-engineering-at-scale` methods paper remains
+outside the mathematical ship order; any novelty claim there needs its own literature audit.
 
-**Papers 3 and 5, and the protected fallback version of Paper 4, are past their mathematical gates.
-Nothing has shipped.** Papers 3 and 5 now chiefly need artifact-release plumbing — a citable archive
-identifier, an immutable release, and external citation-chain review. The selected
-factorization-memory replacement for Paper 4 still needs manuscript integration and its planned
-end-to-end Lean formalization; its theorem package and sharp negative boundaries are already fixed.
-The shared release blocker therefore still binds the mature front-half papers, but no longer
-describes every Clebsch task.
+**Nothing has shipped.** The arcs, Clebsch-rigidity, beyond-four PRS, and AME–LU papers all have
+warning-free local candidates, but local reproducibility is not publication. The beyond-four PRS
+candidate now has an exact 15-module R5–R7 Lean export, 53-target axiom audit, and reconciled
+35-label manuscript ledger; the older R5–R9 aggregate is explicitly outside that evidence set. Its public
+release still requires two specialist signoffs, a public flake-pinned Lean revision, authenticated
+repository/archive publication, identifiers, and author/account confirmation. The AME–LU candidate
+has the uniform LU-to-LC core in its aggregate and a separate formal proof of projective finiteness;
+the latter still needs aggregate/audit integration, while the Choi encoder and exact GRS
+transversal-group consequences remain outside the completed formal boundary. Arcs and Clebsch
+likewise still need their explicit external archive/release actions.
 
-**Maturity boundary:** no paper has been published or externally refereed. A successful managed
-Lean compile of a real project target has likewise not yet been observed, and the new
-repository-wide extraction audit has not reproduced the legacy per-gate axiom reports. The
-mathematics has also changed materially under checking: the dihedral paper still carries a known
-value-affecting case split, the repair-hypergraph transfer theorem required an all-zero branch and
-an additional hypothesis, and several proposed Clebsch identifications were replaced by sharp
+**Maturity boundary:** no paper has been published or externally refereed. Scoped Lean aggregates
+and axiom audits are green where stated, but the repository-wide extraction audit is a different
+and unfinished evidence layer, and the managed-service success path is not established by those
+local gates. The mathematics has also changed materially under checking: the dihedral paper still
+carries a known value-affecting case split, the repair-hypergraph transfer theorem required an
+all-zero branch and an additional hypothesis, the first PRS paper aggregate failed its manuscript
+closure boundary before being narrowed to the exact R5–R7 target, and several proposed Clebsch identifications were replaced by sharp
 negative theorems. These are reasons to take the current statements and their boundaries seriously,
 not reasons to assign them the status of externally validated results.
 

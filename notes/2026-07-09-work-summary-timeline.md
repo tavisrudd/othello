@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-23** — six working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-25**, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -591,6 +591,60 @@ five, six, and seven.
   two geometric realizations, one carrier-only boundary, and a separate even
   Hadamard/signed-gluing block. The original universal metaplectic/theta roof is a recorded no-go,
   not a hidden casualty.
+
+## Week 8 — Jul 24–25 · Four manuscripts cross local maturity gates
+
+- **Jul 24 — the arcs paper acquires its structural capstone.**
+  The prescribed-hole defect identity was upgraded from a local counting tool to a global rigidity
+  theorem. Zero defect now canonically decomposes the Kneser graph into secant-concurrence matching
+  cliques, forces a simple maximum-matching design, determines the exact centre counts, and admits a
+  quantitative bad-edge stability bound. The six-point realization is classified projectively; for
+  every even `k ≥ 6`, zero relative defect forces
+  `q ∈ {k−2, C(k−1,2), C(k−1,2)+1}`. The manuscript was reorganized around the
+  identity–rigidity–stability progression, with `ρ_C(16)=9` retained as an application, and the
+  reconstruction, stabilizer-recovery, matching-design, and stability statements were added to the
+  scoped `RelativeConicArcs` Lean gate.
+
+- **Jul 24 — Clebsch Paper I is shortened and strengthened.**
+  C182 replaced four small-`k` counts by a universal chord-defect identity and sharp moment bound.
+  A conic-filling uncovered locus now forces an explicit quadratic field-size barrier and
+  `q < C(k,2)`; a passant count gives the complementary `q ≥ 2k−3`, and Hirschfeld's nucleus
+  characterization excludes the even-order branch. The resulting eight-point sieve leaves only
+  `q ∈ {13,17,19}`, and a complete passant-edge-orbit search excludes all three, completing the
+  classification through eight points. A dependency and referee audit tightened the Dye input,
+  restored the `A5` overgroup subtraction, removed unused censuses, and produced a warning-free
+  manuscript. The increment is local: no immutable public deposit was made.
+
+- **Jul 24 — the beyond-four PRS programme becomes a reproducible Version 1 candidate.**
+  The redundancy-five classification, coherent-polar reductions at redundancies six and seven, and
+  the arbitrary-redundancy persistent/modular containment theorem were assembled into a 43-page
+  manuscript. The high-field theorem states that every split-free syndrome lies in the persistent
+  or modular loci once
+  `q ≥ 6r−15 + floor(2 sqrt(6r−17))`. A clean paper-only export rebuilt byte-for-byte and passed its
+  57-artifact verifier. Public release remains a NO-GO pending two specialist signoffs, a public
+  pinned Lean revision, author/account actions, an immutable archive, and a live DOI. A subsequent
+  audit found that the advertised Lean aggregate still targeted the older R5–R9/Hessian/Lucas
+  closure rather than the adopted R5–R7 paper. The repair replaced it by the exact 15-file R5–R7
+  closure, reconciled all 35 manuscript labels with a 53-target axiom audit, and made the verifier
+  check those sets fail-closed; the remaining blocks are external release gates.
+
+- **Jul 24–25 — AME local-unitary rigidity becomes a new paper and a generic theorem family.**
+  A new lane grew from the six-party Clebsch/quantum comparison into a uniform result: for every
+  prime power `q`, every `m ≥ 2`, and every linear `[2m,m,m+1]_q` MDS code, a product-unitary
+  intertwiner between equal-phase CSS states is local Clifford. The proof shortens the code and its
+  dual to `m+1` parties, expands the marginal in the full finite-field Weyl basis, and recovers Weyl
+  axes from rank-one contractions. The complete marginal-to-rigidity chain was formalized in Lean
+  without restricting to the original six-party pencil. The manuscript also records the associated
+  `[[2m−1,1,m]]_q` transversal-Clifford consequence, finiteness of the product-unitary automorphism
+  group modulo one-site phases, and, for odd prime GRS codes of even length `2m ≤ q+1`, the exact
+  projective logical group `F_q^2 ⋊ SL_2(q)`. The first beyond-six example is
+  `AME(8,7) ↔ [[7,1,4]]_7`, with projective transversal group order `16464`.
+
+  The first six-party release candidate was independently replayed from a clean export, but no
+  upload, DOI, license grant, or submission occurred. The generic LU-to-LC theorem is now in the
+  formal aggregate, and the projective-finiteness corollary has its own completed Lean module but
+  has not yet been wired into that aggregate and axiom audit. The full Choi/encoder construction and
+  exact GRS transversal-group computation still sit on the manuscript side of the trust boundary.
 
 ---
 
