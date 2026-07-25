@@ -48,6 +48,11 @@ an exceptional-characteristic counting degeneration, not an instance of
 the associated-conic construction.  The final consistency pass cites the
 unique $K_6$ one-factorization, folds the $k\le5$ clause into Theorem 2.2,
 harmonizes frame order, and routes the $q=9$ exclusion to Theorem 6.2.
+The final claim-preserving editorial pass now foregrounds the unified
+inverse statement---coarse decoding data reconstruct the hidden Clebsch
+geometry---rather than presenting the abstract as a flat result list.  It
+regenerated the statement identity, PDF, trust manifest, and release
+certificate; the clean fifteen-check replay is green at `949ec7b2`.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has

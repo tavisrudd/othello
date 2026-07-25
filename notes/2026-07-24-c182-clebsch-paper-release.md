@@ -56,6 +56,26 @@ puts the $k\le5$ zero-defect case inside Theorem 2.2's display, harmonizes
 the two standard-frame orderings, and corrects the $q=9$ exclusion pointer
 to Theorem 6.2.
 
+A final claim-preserving editorial pass now gives the paper a single
+conceptual headline: coarse nearest-codeword data reconstruct the hidden
+projective geometry of the non-GRS MDS code.  The abstract and introduction
+state explicitly that no conic, polarity, group action, or classical
+hexagon structure is assumed, and give the complete distance oracle,
+ambiguity reconstruction, and universal chord-defect identity their proper
+hierarchy.  No theorem environment or executable claim was added.
+
+The accompanying Clebsch--AME proof and novelty memos were also triaged
+against the repository's earlier audits.  Their LU/LC, transversal-gate,
+scalar-invariant, and PRS results belong to other lanes.  The icosahedral
+simultaneous-extension complex is already retained in the checked Lean
+supplement, including global completeness of the six maximal two-point and
+twenty maximal three-point extensions.  It remains outside Paper I.  The
+raw extension census is conservatively conceded as a possible routine
+byproduct of Sadeh's classification; the stronger icosahedral
+independence-complex packaging has meaningful negative evidence from
+Karaoglu's direct Sussex continuation, but no claim of priority should be
+made without the Sadeh thesis.
+
 ## Verification
 
 - The universal identity and the $k=8$ sieve were independently rederived
@@ -66,6 +86,10 @@ to Theorem 6.2.
 - The deterministic clean release replay passes all fifteen checks against
   the final source; its refreshed output certificate and trust-manifest hash
   are committed with the paper.
+- The reconstruction-framing edit regenerated the nineteen-row statement
+  identity, PDF, trust manifest, and release certificate.  The final
+  no-update replay again passed all fifteen checks at commits
+  `d716bce1`, `3d29e4f7`, and `949ec7b2`.
 
 ## Release blocker
 
