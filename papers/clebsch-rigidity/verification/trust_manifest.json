@@ -4,10 +4,11 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Theorems 1 and 3, pages 275--278",
+            "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "classical equality and stabilizer identification",
+          "subclaim": "classical equality, polarity, and stabilizer identification",
           "unconditional_remainder": "The line bound and chord-defect deduction are proved in the manuscript."
         },
         {
@@ -100,7 +101,7 @@
         "kind": "verbatim",
         "sha256": "0f0c13c15894c5f98a5813ac99be6f94148cc87e0129b13847a57b1f6c3a959b"
       },
-      "trust_boundary": "Lean proves the conic-containment implication through the explicit Dye axiom seam; the stabilizer identification remains a cited classical and coordinate result."
+      "trust_boundary": "Lean proves the conic-containment implication through the explicit Dye axiom seam; the associated polarity and stabilizer identification remain cited classical consequences."
     },
     {
       "components": [
@@ -1263,15 +1264,15 @@
     }
   ],
   "lean_repository": {
-    "commit": "bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520",
+    "commit": "6d4766d1ea5e9a36f1a507e549c223416a6b506f",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "90076faa86ab486547505e27ae5126d8d212927fe8aef956507c691e6f510ac4"
+    "sha256": "44c8a0fdae79e4ab91be58f4b270058bd08fd6b42135f939d70cfe5606c1f4cf"
   },
-  "manuscript_sha256": "e4fce181884499ce36de193b8759eebccd10b2505ead52a03ca5766ba13680f2",
+  "manuscript_sha256": "0e3a5d37b5ec8988b9f1baf3733e1950ac25243344a17f5da1b7bd045cf7f386",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1312,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "f5c31a39ecdba4f6a0435db45a79e0980161cc11bbed30042359c340094f3367"
+    "sha256": "f6a9ea6f9f7e8d9a856d388ab1b13496f531c41ebb19eb52d4c7dab782f9928a"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1532,7 +1533,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "66e51e60e98b9f8c5e976f81d893b9bdd512fcf5c0f1c030178e2f67c42ab124"
+        "sha256": "1a86c5c69110ccee52706f08b2008effe5ce4079156b4a6166f5e020837fd994"
       },
       {
         "path": "verification/verify_trust_manifest.py",

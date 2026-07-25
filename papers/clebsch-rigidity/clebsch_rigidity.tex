@@ -1217,7 +1217,7 @@ finite enumeration. Here
 implication; executable replays instead enumerate the finite search space
 with exact arithmetic. The formal source tree supplied with the release
 artifact is pinned at commit
-\path{bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520}; it uses Lean 4.32.0-rc1
+\path{6d4766d1ea5e9a36f1a507e549c223416a6b506f}; it uses Lean 4.32.0-rc1
 and Mathlib commit
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}. Manifest, release, and
 executable checker paths are relative to this paper root; Lean paths are
@@ -1259,9 +1259,12 @@ $A_5$ orbits and syndrome conic
 & Dye; Proposition~\ref{prop:a5-point-orbits}
 & \path{RelativeConicArcs/Q11A5PointOrbits.lean};
 \path{RelativeConicArcs/Q11Coding.lean} \\
-Decoding and support bipartition
-& arc--coset dictionary; Edge--Dye triangles
+Decoding and Brianchon supports
+& arc--coset dictionary; Edge--Dye incidence
 & \path{RelativeConicArcs/Q11DecodingSynthesis.lean} \\
+Invariant support bipartition
+& Edge--Dye triangles; incidence reconstruction
+& --- \\
 Rigidity theorem
 & line bound; chord defect; Dye's Theorems~1 and~3
 & \path{RelativeConicArcs/Q11DyeAxioms.lean};
@@ -1306,9 +1309,10 @@ Result & Exhaustive or independent executable check \\
 \midrule
 $A_5$ orbits and syndrome conic
 & \path{check_rigidity_degenerate_conic.py} (syndrome-conic clause) \\
-Decoding and support bipartition
-& \path{check_decoding.py}; \path{check_chirality.py};
-\path{check_code_automorphisms.py} \\
+Decoding and Brianchon supports
+& \path{check_decoding.py} \\
+Invariant support bipartition
+& \path{check_chirality.py}; \path{check_code_automorphisms.py} \\
 Rigidity theorem
 & \path{check_rigidity_degenerate_conic.py};
 $1548$-representative frame-normalized enumeration \\
@@ -1329,8 +1333,9 @@ Table~\ref{tab:verification}.}
 \label{tab:replays}
 \end{table}
 
-The formal development axiomatizes exactly two consequences of Dye's
-Theorem~1: the ten-point Brianchon bound and the classification of equality.
+The formal development axiomatizes exactly two classical inputs from Dye:
+the ten-point Brianchon bound from Theorem~1 and the equality classification
+from Theorem~3.
 The line bound and chord-defect identity are proved independently. At
 $q=11$, the finite census also checks the imported numerical conclusion:
 $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.

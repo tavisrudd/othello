@@ -18,7 +18,7 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_LEAN_COMMIT = "bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520"
+PINNED_LEAN_COMMIT = "6d4766d1ea5e9a36f1a507e549c223416a6b506f"
 
 
 TERMINALS = {
@@ -69,6 +69,10 @@ TERMINALS = {
 
 CLASSICAL_DYE = [
     "Dye 1991, Theorems 1 and 3, pages 275--278",
+]
+CLASSICAL_DYE_RIGIDITY = [
+    "Dye 1991, Theorems 1 and 3, pages 275--278",
+    "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity",
 ]
 CLASSICAL_DYE_ASSOCIATED_CONIC = [
     "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the "
@@ -283,9 +287,9 @@ def components_by_row(
     )
     return {
         2: (
-            "Lean proves the conic-containment implication through the explicit Dye axiom seam; the stabilizer identification remains a cited classical and coordinate result.",
+            "Lean proves the conic-containment implication through the explicit Dye axiom seam; the associated polarity and stabilizer identification remain cited classical consequences.",
             [
-                conceptual("classical equality and stabilizer identification", CLASSICAL_DYE, "The line bound and chord-defect deduction are proved in the manuscript."),
+                conceptual("classical equality, polarity, and stabilizer identification", CLASSICAL_DYE_RIGIDITY, "The line bound and chord-defect deduction are proved in the manuscript."),
                 lean("symmetry-free rigidity implication", ["rigidity"], axioms),
                 replay("finite witness and orbit census", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay checks the explicit Clebsch witness and normalized class census.", direct_coordinates),
             ],
