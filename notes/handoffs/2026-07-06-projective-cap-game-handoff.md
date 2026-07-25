@@ -1019,6 +1019,24 @@ promote the five-state q17 thread to a depth-two law. C82 stays gated.
 Report+script+certificate:
 [`../2026-07-25-c80-tutte-defect-contraction.md`](../2026-07-25-c80-tutte-defect-contraction.md).
 
+**The nonrecursive overload-retention/Tutte-excess bank is falsified on the
+entire q17 defect thread and marked q19 control (C80, 2026-07-25).** Let
+`R_Ω(S)` contain every jointly legal opponent/reply pair giving strict
+overload descent, and let `ε_Ω` be its matching deficiency beyond parity.
+Every tested raw graph has `ε_Ω=0`. In each of the four q17 exceptional
+fibres, a non-survivor at `(Ω,ε_Ω)=(49,0)` strictly dominates the unique
+certified repair at `(40,0)`, so every bank increasing in retained overload
+and decreasing in raw excess fails. The q19 decoy `(152,0)` and structural
+survivor `(169,0)` also have equal excess. The finite q17 target's excess two
+appears only after reply edges are filtered by recursive lower-`M_Ω`
+membership; using it as a bank coordinate is therefore circular. Moreover,
+that filtered graph has no isolated fibre, so Tutte deficiency is stronger
+than the actual `∀o∃p` game gate. The next crown is a proof-producing
+nonrecursive marked edge predicate, followed by opponent-complete
+secant/incidence coverage—not another scalar state bank or matching shell.
+C82 stays gated. Report+script+certificate:
+[`../2026-07-25-c80-coupled-overload-tutte-bank.md`](../2026-07-25-c80-coupled-overload-tutte-bank.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q

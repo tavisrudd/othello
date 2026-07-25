@@ -1,0 +1,316 @@
+{
+  "all_reported_tutte_berge_certificates_verified": true,
+  "definition": {
+    "candidate_bank": "Omega(target) - lambda * tutte_excess(target)",
+    "lambda_domain": "lambda >= 0",
+    "raw_strict_reply_graph": "vertices are legal moves; xy is an edge iff x,y are jointly legal and the two-move target has strictly lower Omega",
+    "tutte_excess": "matching deficiency of the raw strict-reply graph minus its unavoidable parity deficiency"
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "matching_self_check_graphs": 33867,
+  "q17_defect_thread": [
+    {
+      "opponent": [
+        4,
+        0
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 0,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 16,
+        "omega": 40,
+        "strict_edges": 194,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "recursive_M_omega_filtered_coordinates": {
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 15,
+        "tutte_excess": 2
+      },
+      "reply": [
+        7,
+        1
+      ],
+      "target_in_copycat_survivor": true,
+      "target_in_positive_pairing_kernel": false
+    },
+    {
+      "opponent": [
+        5,
+        0
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 0,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 16,
+        "omega": 40,
+        "strict_edges": 194,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "recursive_M_omega_filtered_coordinates": {
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 15,
+        "tutte_excess": 2
+      },
+      "reply": [
+        4,
+        10
+      ],
+      "target_in_copycat_survivor": true,
+      "target_in_positive_pairing_kernel": false
+    },
+    {
+      "opponent": [
+        8,
+        14
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 0,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 16,
+        "omega": 40,
+        "strict_edges": 194,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "recursive_M_omega_filtered_coordinates": {
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 15,
+        "tutte_excess": 2
+      },
+      "reply": [
+        4,
+        10
+      ],
+      "target_in_copycat_survivor": true,
+      "target_in_positive_pairing_kernel": false
+    },
+    {
+      "opponent": [
+        11,
+        9
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 0,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 16,
+        "omega": 40,
+        "strict_edges": 194,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "recursive_M_omega_filtered_coordinates": {
+        "deficiency": 2,
+        "edges": 53,
+        "isolated_vertices": 0,
+        "legal_moves": 32,
+        "matching_size": 15,
+        "tutte_excess": 2
+      },
+      "reply": [
+        7,
+        1
+      ],
+      "target_in_copycat_survivor": true,
+      "target_in_positive_pairing_kernel": false
+    }
+  ],
+  "q17_marked_fibre_falsifier": [
+    {
+      "certified_reply": {
+        "in_copycat_survivor": true,
+        "omega": 40,
+        "reply": [
+          7,
+          1
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "child_omega": 246,
+      "copycat_survivor_replies": 1,
+      "dominant_nonsurvivor_found": true,
+      "opponent": [
+        4,
+        0
+      ],
+      "strict_replies": 58,
+      "strongest_checked_dominant_nonsurvivor": {
+        "in_copycat_survivor": false,
+        "omega": 49,
+        "reply": [
+          5,
+          15
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      }
+    },
+    {
+      "certified_reply": {
+        "in_copycat_survivor": true,
+        "omega": 40,
+        "reply": [
+          4,
+          10
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "child_omega": 246,
+      "copycat_survivor_replies": 1,
+      "dominant_nonsurvivor_found": true,
+      "opponent": [
+        5,
+        0
+      ],
+      "strict_replies": 58,
+      "strongest_checked_dominant_nonsurvivor": {
+        "in_copycat_survivor": false,
+        "omega": 49,
+        "reply": [
+          7,
+          7
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      }
+    },
+    {
+      "certified_reply": {
+        "in_copycat_survivor": true,
+        "omega": 40,
+        "reply": [
+          4,
+          10
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "child_omega": 246,
+      "copycat_survivor_replies": 1,
+      "dominant_nonsurvivor_found": true,
+      "opponent": [
+        8,
+        14
+      ],
+      "strict_replies": 58,
+      "strongest_checked_dominant_nonsurvivor": {
+        "in_copycat_survivor": false,
+        "omega": 49,
+        "reply": [
+          6,
+          2
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      }
+    },
+    {
+      "certified_reply": {
+        "in_copycat_survivor": true,
+        "omega": 40,
+        "reply": [
+          7,
+          1
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "child_omega": 246,
+      "copycat_survivor_replies": 1,
+      "dominant_nonsurvivor_found": true,
+      "opponent": [
+        11,
+        9
+      ],
+      "strict_replies": 58,
+      "strongest_checked_dominant_nonsurvivor": {
+        "in_copycat_survivor": false,
+        "omega": 49,
+        "reply": [
+          10,
+          13
+        ],
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      }
+    }
+  ],
+  "q19_marked_control": [
+    {
+      "opponent": [
+        4,
+        0
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 0,
+        "isolated_vertices": 0,
+        "legal_moves": 48,
+        "matching_size": 24,
+        "omega": 152,
+        "strict_edges": 538,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "reply": [
+        7,
+        1
+      ],
+      "role": "maximum_drain_decoy",
+      "target_in_copycat_survivor": false,
+      "target_in_positive_pairing_kernel": false
+    },
+    {
+      "opponent": [
+        4,
+        0
+      ],
+      "raw_bank_coordinates": {
+        "deficiency": 1,
+        "isolated_vertices": 0,
+        "legal_moves": 51,
+        "matching_size": 25,
+        "omega": 169,
+        "strict_edges": 603,
+        "tutte_berge_verified": true,
+        "tutte_excess": 0
+      },
+      "reply": [
+        0,
+        2
+      ],
+      "role": "structural_survivor",
+      "target_in_copycat_survivor": true,
+      "target_in_positive_pairing_kernel": true
+    }
+  ],
+  "schema": "c80-coupled-overload-tutte-bank-v1",
+  "source": "rust/scripts/c80_coupled_overload_tutte_bank.py",
+  "verdict": {
+    "candidate_falsified": true,
+    "generality": "the same witnesses falsify every bank monotone increasing in retained Omega and monotone decreasing in raw Tutte excess",
+    "reason": "raw Tutte excess is zero on every tested target; in each q17 exceptional fibre a nonsurvivor with Omega 49 and excess zero strictly dominates the unique survivor at Omega 40",
+    "recursive_filter_warning": "the q17 target excess two appears only after reply edges are filtered by lower M_Omega membership"
+  }
+}
