@@ -1088,8 +1088,17 @@
       "last": 604,
       "purpose": "Lean reconstruction and zero-defect matching-design closure, beginning with a Terence-Tao diagnostic pass",
       "sequence": 121
+    },
+    {
+      "count": 1,
+      "first": 605,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 605,
+      "purpose": "certified conic-filling eight-arc search over q=13,17,19",
+      "sequence": 122
     }
   ],
-  "next_id": 605,
+  "next_id": 606,
   "schema": "codex-task-id-allocations-v1"
 }
