@@ -1,17 +1,19 @@
-# Paper: Local-unitary rigidity of MDS--CSS AME tensors and logical Clifford phases of six-qudit codes
+# Paper: Local-unitary rigidity of MDS--CSS AME states
 
-**Title:** *Local-Unitary Rigidity of MDS--CSS AME Tensors and Logical
-Clifford Phases of Six-Qudit Codes.*
+**Title:** *Local-Unitary Rigidity of MDS--CSS AME States: Exact
+Transversal Clifford Groups and Six-Qudit Moduli.*
 
 **Lane:** `ame-lu`
 
-**Status:** version-1 revision under C609. Every local-unitary intertwiner
+**Status:** version-1 revision through C614. Every local-unitary intertwiner
 between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is local
-Clifford, for every prime power and \(m\geq2\); the associated
-`[[2m-1,1,m]]_q` quantum MDS code has no transversal non-Clifford logical
-unitary. The six-party pencil and logical-phase applications retain their
-existing scopes. Public identifiers, author metadata, license choice, and
-submission authorization remain author gates.
+Clifford, for every prime power and \(m\geq2\).  Transversal conversions
+between the associated `[[2m-1,1,m]]_q` quantum MDS codes are Clifford
+factor by factor; over odd prime fields the GRS tower has exact projective
+transversal logical group `F_q^2 ⋊ SL_2(q)`. The six-party pencil and
+logical-phase applications retain their existing scopes. Public identifiers,
+author metadata, license choice, and submission authorization remain author
+gates.
 
 ## Build
 
@@ -48,15 +50,18 @@ from linear `[2m,m,m+1]_q` MDS codes.  The detailed geometric applications
 specialize to `AME(6,q)` tensors from six-point projective arcs.  Its proved
 core is:
 
-1. uniform LU-to-LC rigidity and the associated transversal Clifford no-go;
-2. exact local-Clifford classification of the admitted non-GRS pencil by one
+1. uniform LU-to-LC rigidity and factorwise rigidity of transversal encoder
+   conversions;
+2. the exact full-Clifford transversal logical group for the odd-prime
+   even-length GRS quantum-MDS tower;
+3. exact local-Clifford classification of the admitted non-GRS pencil by one
    bracket scalar `z`;
-3. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
+4. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
    locus;
-4. uniform arbitrary-LU separation of good H3 reductions from every GRS
+5. uniform arbitrary-LU separation of good H3 reductions from every GRS
    class;
-5. an exact four-copy separator for the difficult `q=13` pair; and
-6. a transport-sheaf explanation of the exceptional contraction divisor and
+6. an exact four-copy separator for the difficult `q=13` pair; and
+7. a transport-sheaf explanation of the exceptional contraction divisor and
    its multiplicities.
 
 Fixed-copy permutation contractions cannot supply a generic pencil

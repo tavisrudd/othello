@@ -47,6 +47,10 @@ both a regression oracle and the required specialization target.
    `LU iff LC iff z` implication from the unconditional six-party terminal
    and the existing hypothesis-explicit classification interface.  Preserve
    the extension-field Frobenius exclusion.
+8. **Discrete symmetry corollary.**  Prove that the projective one-qudit
+   Clifford group is finite and derive finiteness of the product-unitary
+   automorphism group modulo one-site scalar phases, including the exact
+   identity-component statement and the finite party-permutation extension.
 
 ## Proposed module boundary
 
@@ -78,6 +82,8 @@ planning record.
   conceptual theorem.
 - The manuscript formalization ledger, statement-adequacy map, verification
   prose, theorem map, and exact declaration names agree.
+- `cor:discrete-lu-symmetry` is exported from the general theorem with no
+  topological or quotient-group hypothesis left implicit.
 
 ## Stop conditions
 

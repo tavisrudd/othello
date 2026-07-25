@@ -40,8 +40,17 @@ and a Clifford logical action.
    and therefore that transpose preserves the one-qudit Clifford predicate.
 6. **Terminal corollary.**  Apply C612 to the normalized Choi state and
    conclude separately that every physical factor and \(L\) are Clifford.
-   Export both the strong factorwise statement and the concise
-   no-transversal-non-Clifford corollary.
+   Quantify over two encoders to cover transversal code conversion, then
+   derive the same-code no-transversal-non-Clifford corollary.
+7. **Exact GRS transversal group.**  Formalize length-\(2m\) GRS and extended
+   GRS dual multipliers \(SC=C^\perp\), the product upper/lower elementary
+   unipotents preserving the CSS label space, generation of every logical
+   `SL₂(q)` block, and physical Pauli representatives.  Combine this
+   construction with the no-go converse to prove the exact projective group
+   `𝔽_q² ⋊ SL₂(q)` for odd prime `q` and `2m≤q+1`.
+8. **Concrete specialization.**  Instantiate the theorem at the extended
+   `[8,4,5]_7` code, its `AME(8,7)` tensor and `[[7,1,4]]_7` encoder, and
+   prove the projective group order `16464` by kernel reduction.
 
 ## Proposed module boundary
 
@@ -71,6 +80,9 @@ state one corollary.
 - The abstract, Corollary 1.2, Section 3 proof, formalization ledger,
   statement-adequacy map, verification prose, and exact Lean declarations are
   synchronized.
+- The two-encoder conversion theorem, exact GRS transversal group, and
+  `[[7,1,4]]_7` specialization are kernel-checked without a certificate or
+  native computation.
 
 ## Stop conditions
 
@@ -80,4 +92,3 @@ Resolve that correspondence rather than formalizing only the Choi algebra and
 calling the full corollary covered.  Stop on a transpose-orientation mismatch
 with a two-dimensional matrix counterexample rather than changing the
 manuscript convention silently.
-

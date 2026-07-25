@@ -34,16 +34,18 @@ the displayed equivalence is local Clifford.
 
 \begin{corollary}[Transversal Clifford no-go]
 \label{cor:transversal-clifford}
-Let \(V:\mathbb C^q\to(\mathbb C^q)^{\otimes(2m-1)}\) be an encoding
-isometry whose normalized Choi state is \(\lvert\Psi_C\rangle\) as in
-Theorem~\ref{thm:lu-lc-rigidity}.  Thus \(V\) encodes the associated
-\([[2m-1,1,m]]_q\) quantum MDS code.  If
+Let \(V_C,V_D:\mathbb C^q\to
+(\mathbb C^q)^{\otimes(2m-1)}\) be encoding isometries whose normalized
+Choi states are \(\lvert\Psi_C\rangle,\lvert\Psi_D\rangle\) as in
+Theorem~\ref{thm:lu-lc-rigidity}.  They encode the associated
+\([[2m-1,1,m]]_q\) quantum MDS codes.  If
 \[
- (U_1\otimes\cdots\otimes U_{2m-1})V=VL
+ (U_1\otimes\cdots\otimes U_{2m-1})V_C=V_DL
 \]
 for a logical unitary \(L\), then \(L\) and every \(U_i\) are Clifford.
-In particular, this code admits no transversal non-Clifford logical
-unitary.
+Thus every transversal conversion between two codes in the family is
+Clifford factor by factor.  Taking \(C=D\), no such code admits a
+transversal non-Clifford logical unitary.
 \end{corollary}
 
 The mechanism is visible in one reduced operator.  Retain any \(m+1\)
@@ -59,6 +61,25 @@ carrying one reduced state to another must permute the local Weyl axes.
 Since conjugation fixes the identity axis, this is precisely the
 Clifford condition.  The corollary follows by applying the theorem to
 the Choi state of a transversal logical action.
+
+\begin{corollary}[GRS transversal logical group]
+\label{cor:grs-transversal-group}
+Let \(q\) be an odd prime and \(2m\leq q+1\).  For a length-\(2m\)
+generalized or extended generalized Reed--Solomon code \(C\), the group
+of logical unitaries of the associated \([[2m-1,1,m]]_q\) quantum MDS
+code that admit tensor-product physical implementations, modulo phase,
+is exactly
+\[
+ \F_q^2\rtimes\mathrm{SL}_2(q),
+\]
+the full one-qudit projective Clifford group.
+\end{corollary}
+
+For example, an extended \([8,4,5]_7\) Reed--Solomon code gives an
+\(\AME(8,7)\) tensor and a \([[7,1,4]]_7\) quantum MDS code whose
+projective transversal logical group has order
+\(7^2\lvert\mathrm{SL}_2(7)\rvert=16464\).  No non-Clifford
+transversal gate enlarges this group.
 
 Rains used the corresponding three-Pauli tensor to determine the
 automorphisms of qubit distance-two codes \cite[Theorem~13]{Rains1999},
@@ -128,15 +149,17 @@ logical Clifford group for any prime-dimensional stabilizer code using
 ancillas and Pauli measurements \cite{Gottesman1999}.  These results
 establish that GRS and polynomial encoders support fault-tolerant
 logical gates, but they do not identify the fixed-party product-Clifford
-kernel.  The GRS half of Theorem~\ref{thm:logical-phase} upgrades those
-constructions to the whole fixed-party \(\mathrm{SL}_2(q)\) symmetry.
-Its converse classifies the obstruction among all six-arcs:
+kernel.  Corollary~\ref{cor:grs-transversal-group} combines standard GRS
+dual multipliers with LU rigidity to identify the exact transversal
+logical group throughout the even-length GRS tower.  The converse in
+Theorem~\ref{thm:logical-phase} then classifies the obstruction among
+six-arcs:
 self-association is exactly the condition for the kernel to exceed the
 split torus.  Our literature search for this comparison covered quantum
 Reed--Solomon and polynomial-code gate constructions, general
 prime-dimensional stabilizer Clifford synthesis, and restrictions on
-transversal gate sets.  We claim this equivalence, not priority for the
-GRS gate constructions themselves.  Eastin and Knill's
+transversal gate sets.  We claim the exact group statements, not priority
+for the GRS gate constructions themselves.  Eastin and Knill's
 restriction on universal transversal sets gives the general boundary
 \cite{EastinKnill2009}.
 
@@ -150,7 +173,7 @@ survey of Ball and Lavrauw
 The rest of the paper separates classification from explicit scalar
 certificates.  Section~\ref{sec:dictionary} fixes the arc, code, Weyl, and
 AME conventions.  Section~\ref{sec:rigidity} proves the headline theorem
-and its transversal corollary.
+and its transversal and GRS corollaries.
 Section~\ref{sec:pencil} proves the \(z\)-classification, and
 Section~\ref{sec:logical} proves the logical-Clifford phase theorem:
 \(\mathrm{SL}_2(q)\) on the GRS locus and a split torus off it.

@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-24",
-  "title": "Local-Unitary Rigidity of MDS--CSS AME Tensors and Logical Clifford Phases of Six-Qudit Codes",
+  "title": "Local-Unitary Rigidity of MDS--CSS AME States: Exact Transversal Clifford Groups and Six-Qudit Moduli",
   "public_export": {
     "artifacts": [
       {
@@ -11,19 +11,19 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 170514,
+        "bytes": 177728,
         "path": "ame-lu.pdf",
-        "sha256": "3c7e23baabf69899ec710f2cf49b9bc09eb6cf0399424bf33db77485ab3e80a7"
+        "sha256": "65676080cb6e3d40d55ad504f7b8459a9a2ef1eca7dd328b4d1575f8945c393f"
       },
       {
-        "bytes": 11957,
+        "bytes": 12894,
         "path": "formal-statement-adequacy.md",
-        "sha256": "b6d4ad57084f54d0d0e9bcc390530ace6ac3410fb36bebb0be9f7e5d31969ed3"
+        "sha256": "ed56be712b1cc15cec499f057a302cb1b66e96fc91ecb4d41f7128de24d75125"
       },
       {
-        "bytes": 3060,
+        "bytes": 3270,
         "path": "main.tex",
-        "sha256": "2f39aabb5b068340c5b57ea5a49a2db6cf3b3c7c0ce97c9577d62b6c33f9ebb3"
+        "sha256": "661a4a54ee2fa20a65fca56cb5eb4343f5503f77c55264696041b7691837e0ce"
       },
       {
         "bytes": 5941,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 6964,
+        "bytes": 6972,
         "path": "release/verify_release.py",
-        "sha256": "7370d17389d40de37fc80fb9a7a1d2ccc6617decddb0b64261756f9c7e6b225a"
+        "sha256": "7e6074f7bbdb0c974b600ec60141088ca66c6957c5f8a5a0ae279d87810b6e70"
       },
       {
-        "bytes": 7786,
+        "bytes": 8833,
         "path": "sections/01-introduction.tex",
-        "sha256": "40719748e457af16f0babeb91e6378b69b1e994b2b890d04114eaeb7705f6623"
+        "sha256": "adb1cefe43a3fcf4e84338861a1436038c593e3c5107e532a48198b8df9cea40"
       },
       {
         "bytes": 4299,
@@ -56,9 +56,9 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 5118,
+        "bytes": 7747,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "5402c8d2ec251718eb3946525e6d01e2adcf8ceba92bc9adb7dc860e4ad2b3f8"
+        "sha256": "72c4a6396024b2fffa5605e959a85275b5aa267466f5d752d55126521194da06"
       },
       {
         "bytes": 6002,
@@ -81,9 +81,9 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 6082,
+        "bytes": 7542,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "aeefcffad4b129290fbe62991f089ee8832318603c6f34f63c101c3df5c53a87"
+        "sha256": "532afa4bf954429117d2cca19ef654eff2592e6ea8aae0ddae313c4404288d1f"
       },
       {
         "bytes": 3473,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "567692bb11ee691952a20a2d664a872e47e56c5a4c8375aff3cb62b2953fe35a"
+    "tree_sha256": "ac016aadea4003340446dc2ca97966358dd830dc3e6a788fe62a513739f508b0"
   },
   "formal_companion": {
     "artifacts": [
@@ -231,14 +231,14 @@
         "sha256": "70cd0db6d3026d0d0ae0ed39d78da8f9cc89aaa8f3d829b4583f07414fece42b"
       },
       {
-        "bytes": 1130,
+        "bytes": 1424,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregate.lean",
-        "sha256": "53ee1946202f9250aa058107a03505f7aa87ca2948d55ba45d574b94bf3fb123"
+        "sha256": "54ff5392b987397bd41b2d806478b8471a3a4d228214fe2ce46fd736e653af12"
       },
       {
-        "bytes": 2398,
+        "bytes": 2970,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregateAxioms.lean",
-        "sha256": "3d8eec6a93167e849aeaa81d048fa76979f863c1415afc3165fa65e812191b01"
+        "sha256": "635a42bb30c5e6c0adff694cfb05608bbf4dbcb55d4183bb9b28d615bf2b6e40"
       },
       {
         "bytes": 29,
@@ -246,6 +246,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "91c8ba3c885a65e71adb0cf5cf3491086c3f810cec11673435112852983399de"
+    "tree_sha256": "c738a7141b9b854cdd1cd5a96fd4bba0a2fda06072f5e181dca685ec9e24745e"
   }
 }

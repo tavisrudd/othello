@@ -15,6 +15,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
 | C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
 | C560/C609 | every LU intertwiner between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is LC; the associated `[[2m-1,1,m]]_q` code has no transversal non-Clifford logical unitary; hence `LU iff LC iff z` on the admitted six-party pencil | adopted version-1 headline package | every prime power and \(m\geq2\) whenever the MDS code exists; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity; Choi correspondence for the transversal corollary |
+| C614 | transversal conversions between any two associated encoders are Clifford factor by factor; product-unitary automorphisms are projectively finite; the odd-prime even-length GRS tower has exact projective transversal logical group `F_q^2 ⋊ SL_2(q)` | adopted higher-\(m\) application package | conversion and finiteness for every prime power and existing `[2m,m,m+1]` code; exact GRS group for odd prime `q` and `2m≤q+1` | Choi correspondence, finiteness of the projective Clifford group, and explicit GRS dual-multiplier unipotents |
 
 ## Stable source labels
 
@@ -27,6 +28,8 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
+- `cor:discrete-lu-symmetry`: finiteness of the projective product-unitary automorphism group.
+- `cor:grs-transversal-group`: exact full-Clifford transversal group of the odd-prime GRS quantum-MDS tower.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 
 ## Frozen theorem hierarchy
@@ -37,18 +40,23 @@ still depends on the claim, evidence, literature, and prose gates.
    intertwiner of the associated equal-phase CSS states is LC.  The
    associated `[[2m-1,1,m]]_q` quantum MDS code therefore admits no
    transversal non-Clifford logical unitary.
-2. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
+2. **Higher-\(m\) operational corollaries
+   (`cor:grs-transversal-group`, `cor:discrete-lu-symmetry`).**  Over odd
+   prime fields, the even-length GRS quantum-MDS tower has exact projective
+   transversal group `F_q^2 ⋊ SL_2(q)`.  Every state in the general family
+   has finite projective product-unitary automorphism group.
+3. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
    odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
    equivalence are all equivalent to equality of `z`. Over extension
    fields, Frobenius already identifies unequal `z` values.
-3. **Operational phase theorem (`thm:logical-phase`).** The fixed-party
+4. **Operational phase theorem (`thm:logical-phase`).** The fixed-party
    logical group is `SL_2(q)` on the GRS locus and the split torus off it,
    over odd prime fields.  A party-moving isoduality, when
    present, extends the torus to its normalizer.
-4. **Explicit LU witnesses.** C402's marginal moment uniformly separates
+5. **Explicit LU witnesses.** C402's marginal moment uniformly separates
    good H3 reductions from GRS; C397's four-copy scalar resolves its q=13
    collision.
-5. **Mechanism boundary.** C559 proves generic constancy of fixed-copy
+6. **Mechanism boundary.** C559 proves generic constancy of fixed-copy
    scalar contractions; C548/C550 identify and explain the exceptional
    divisor of one useful four-copy certificate.
 
@@ -57,6 +65,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
 | LU-intertwiner rigidity and transversal no-go | every prime power `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS/CSS state; associated `[[2m-1,1,m]]_q` encoder for the corollary | none | nonlinear orthogonal arrays, non-MDS/non-CSS AME tensors, and transversal gates of other quantum-code families |
+| Exact GRS transversal logical group | odd prime `q`, `m≥2`, `2m≤q+1`, and a generalized or extended generalized Reed--Solomon `[2m,m,m+1]_q` code | includes the extended length `q+1` case and all logical Paulis | extension-field full Clifford groups, non-GRS MDS codes, and non-product physical implementations |
 | Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
 | Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |

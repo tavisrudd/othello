@@ -3,7 +3,7 @@
 **Lane:** `ame-lu`
 
 **Purpose:** complete the paper titled *Local-Unitary Rigidity of MDS--CSS
-AME Tensors and Logical Clifford Phases of Six-Qudit Codes*.
+AME States: Exact Transversal Clifford Groups and Six-Qudit Moduli*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
@@ -309,6 +309,21 @@ foundations, C612's rigidity terminal, and C613's Choi/transversal terminal
 before C602's aggregate audit.  See
 `2026-07-25-c609-ame-lu-uniform-rigidity-v1.md`.
 
+**C614 closed (2026-07-25): higher-\(m\) applications adopted.**
+The transversal corollary now covers conversions between two associated
+encoders, and product-unitary state symmetries are projectively finite.  For
+odd prime \(q\) and \(2m\le q+1\), the GRS/extended-GRS quantum-MDS tower has
+exact projective transversal logical group
+\(\mathbb F_q^2\rtimes\mathrm{SL}_2(q)\); the extended
+`[8,4,5]_7` code gives the explicit `AME(8,7)` / `[[7,1,4]]_7` order-16464
+case.  The manuscript has the stronger title *Local-Unitary Rigidity of
+MDS--CSS AME States: Exact Transversal Clifford Groups and Six-Qudit
+Moduli*.  The warning-free 18-page build, visual copy edit, seven-bundle
+replay, and public/formal release checks pass.  C612 owns the remaining
+general rigidity and discreteness formalization; C613 owns the encoder,
+exact-GRS-group, and explicit-example formalization.  See
+`2026-07-25-c614-ame-lu-higher-m-applications.md`.
+
 ## Queued completion program
 
 The complete preparation, audit, formalization, and release program is queued
@@ -339,12 +354,15 @@ as C559--C572.  Dependency order is authoritative:
 13. C601: length-generic code/state/action API, exact MDS dual shortening,
     full-basis diagonal-axis theorem, and six-party compatibility foundation
     (complete).
-14. C612: shortened marginal expansion and covariance, general LU-to-LC
-    terminal, six-party specialization, and pencil composition (next).
-15. C613: AME-to-`[[2m-1,1,m]]` encoder parameters, exact Choi orientation,
-    Clifford transpose closure, and transversal no-go terminal (queued after
-    C612).
-16. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
+14. C614: higher-\(m\) encoder conversion, discrete-symmetry, exact GRS-group,
+    and explicit `[[7,1,4]]_7` applications (complete).
+15. C612: shortened marginal expansion and covariance, general LU-to-LC
+    terminal, six-party specialization, and discrete-symmetry corollary
+    (next).
+16. C613: AME-to-`[[2m-1,1,m]]` encoder parameters, exact Choi orientation,
+    Clifford transpose closure, transversal no-go, exact GRS group, and
+    explicit `[[7,1,4]]_7` terminal (queued after C612).
+17. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
     C613 (queued).
 
 The revision has cleared the independent re-review findings and is complete
