@@ -165,6 +165,10 @@ to a narrow six-coordinate foundation.
 
 ## Mystery ledger
 
+- **`ej`+`tt` closeout:** the generic shortening object initially exposed
+  the two generator lines separately but not the exact local Weyl-label
+  interface needed next.  The cheap closure is now proved as
+  `genericShorteningLocalLabel_bijective` and included in the axiom audit.
 - **Settled:** a two-factor diagonal flattening avoids a matrix-rank API.
   Its nonzero pure locus is exactly the coordinate-axis union, independently
   of how many additional tensor factors are present.
@@ -190,7 +194,9 @@ to a narrow six-coordinate foundation.
   relations, with explicit `m=3` compatibility theorems.
 - `GenericMDS.lean` proves exact `[2m,m,m+1]` MDS iff every
   `m`-coordinate projection is bijective, proves the dual is exact MDS,
-  and constructs full-support shortening generators on every `m+1` set.
+  constructs full-support shortening generators on every `m+1` set, and
+  proves their parameter plane maps bijectively to both local Weyl labels
+  at every retained party.
 - `GenericDiagonalTensor.lean` proves the full-basis diagonal-flattening
   pure-locus theorem and the resulting coordinate-axis preservation
   statement for invertible factor maps.
