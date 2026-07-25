@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-25
 
-**Status:** `IN PROGRESS; POST-FIX DUAL GO; MILNOR/SERRE STYLE REVIEWS NEXT`
+**Status:** `IN PROGRESS; TECHNICAL DUAL GO; TITLE/ABSTRACT REVISED; STYLE SPINE OPEN`
 
 ## Current result
 
@@ -36,6 +36,17 @@ fingerprint with exact Python, Lean, Mathlib, command, and success data. Both
 post-fix rereads returned `GO`, with no blocking mathematical, coherence, or
 review-stage reproducibility finding. An immutable public deposit remains an
 explicit release condition rather than a candidate claim.
+
+The subsequent Milnor- and Serre-style reads both returned `NO-GO` on
+architecture rather than correctness. As a first repair, the title is now
+*Secant-factorization memory modulo a conic: the \(A_3\), \(B_3\), and
+\(H_3\) configurations*. The abstract now leads with the quotient mechanism,
+names the three fields, follows the quotient--sheet--cubic--profile chain, and
+demotes modular depth and arithmetic splitting to separate refinements. The
+remaining style gate is a broader spine compression: narrow Theorem 1.1,
+compress the programmatic motivation, give Section 6 a conceptual gateway,
+separate the two Section 7 stories, and move secondary cubic/verification
+material behind the mathematical conclusion.
 
 Paper II now contains its full change-of-characteristic section.  On one
 \(H_3\) sheet, the characteristic-eleven permutation module
@@ -343,4 +354,4 @@ mathematical claim or enlarging the release surface.
 | Is every theorem-like statement assigned one exact trust route? | settled | The sixteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the six semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves six bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
-| What is the next load-bearing Paper II frontier? | open by user direction | Run the requested Milnor-style transparency and Serre-style structural-discipline reviews on the dual-GO PDF, then repair any material findings before closing C577. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
+| What is the next load-bearing Paper II frontier? | open by user direction | Execute the Milnor/Serre spine revision beyond the completed title/abstract repair: narrow the headline theorem, compress motivation, add the Section 6 mechanism map, separate modular from arithmetic refinements, and move secondary material behind the conclusion. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |

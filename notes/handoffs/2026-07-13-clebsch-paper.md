@@ -123,8 +123,11 @@ paper-specific trust manifest, a six-bundle aggregate replay, a verification
 section that separates conceptual, classical, certificate, and Lean support,
 and a conclusion that states the exact reconstruction ladder and its
 relative/global boundaries. The full local replay and warning-free
-seventeen-page build are green. The next frontier is a fresh context-free
-referee-style coherence review. The current theorem,
+nineteen-page build are green, and two post-fix PDF-only technical rereads
+returned `GO`. The title and abstract now lead with secant-factorization
+memory and the quotient--sheet--cubic--profile mechanism. The Milnor- and
+Serre-style reads returned `NO-GO` on the broader spine; the next frontier is
+their structural compression pass. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 
@@ -268,7 +271,8 @@ cubic-first orientation, six-profile matching-row reconstruction, modular
 depth quotient, arithmetic splitting/gluing, and the relative-cubic Tate
 appendix are in the manuscript. The Paper II-specific verification
 architecture and conclusion are drafted and their full local replay is
-green. Continue with a fresh context-free referee-style coherence review.
+green. The technical rereads are `GO`; continue with the Milnor/Serre spine
+revision beyond the completed title/abstract repair.
 
 ### Outward-consequence bridge
 
