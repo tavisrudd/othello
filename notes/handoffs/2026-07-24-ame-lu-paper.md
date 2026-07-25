@@ -392,8 +392,12 @@ as C559--C572.  Dependency order is authoritative:
     normal scalar-phase torus, quotient groups, and projectivization/signature
     maps preserving the C612 finiteness and identity-component terminals
     (complete).
-18. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
-    C615 (queued).
+18. C617: closed scalar-torus exact sequence, finite discrete quotient,
+    intrinsic continuous signature homomorphisms, realized party-permutation
+    extension, and splitting obstruction, using C613's GRS split where
+    available (queued after C613).
+19. C602: full AME-LU Lean/trust/style/standards audit and repair pass, after
+    C617 (queued).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -415,8 +419,10 @@ C613 next proves the one-leg quantum-MDS parameters, exact
 Choi/transposition bridge, Clifford closure operations, and transversal
 terminal.  C615 has upgraded C612's quotient carriers and identity-component
 statements to explicit group/topological-group structures, normal scalar
-phases, quotient groups, and structured projectivization/signature maps.  C602
-follows C613 with a complete referee-facing audit of the AME-LU Lean aggregate,
+phases, quotient groups, and structured projectivization/signature maps.  C617
+then packages the closed exact sequence, discrete quotient, intrinsic signature
+homomorphisms, and splitting boundary.  C602 follows with a complete
+referee-facing audit of the AME-LU Lean aggregate,
 trust ledgers, verification prose, scholarly closure, and release claims.
 
 **Token-constrained completion route:** start a fresh session with `go C613`
