@@ -433,12 +433,12 @@
       "sha256": "4c14e20d228e51e3cec55566cc87e428ecfad40953b74932ebe18f9965e7434d"
     },
     {
-      "bytes": 12797,
+      "bytes": 13360,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "f752c517bb5e146bd6662ee3d002a96faed4f01a402aba95e1979a76c11cd617"
+      "sha256": "d92b8ac4d9893fa088f9c920af3b51116f0ad0f97df01b9d4e8fe68c74f7e6d7"
     },
     {
       "bytes": 5436,

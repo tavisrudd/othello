@@ -1,0 +1,19 @@
+import RelativeConicArcs.Gates.PRSStableComponents
+
+/-!
+# Axiom audit for stable coherent-polar component algebra
+
+The commands below print the dependencies of every paper-facing declaration exported by
+`RelativeConicArcs.Gates.PRSStableComponents`.  This file adds no declarations.
+-/
+
+#print axioms RelativeConicArcs.PRSStableComponents.symmetricFactor_plucker
+#print axioms RelativeConicArcs.PRSStableComponents.exchangedFactor_plucker
+#print axioms RelativeConicArcs.PRSStableComponents.antiInvariantFactor_plucker
+#print axioms RelativeConicArcs.PRSStableComponents.coherentFano_first_hankelMinor
+#print axioms RelativeConicArcs.PRSStableComponents.coherentFano_second_hankelMinor
+#print axioms RelativeConicArcs.PRSStableComponents.coherentFano_third_hankelMinor
+#print axioms RelativeConicArcs.PRSStableComponents.coherentFano_fourth_hankelMinor
+#print axioms RelativeConicArcs.PRSStableComponents.mem_modularContractionKernel_prod_iff
+#print axioms RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_blocks_cover
+#print axioms RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_no_nonzero_coefficient

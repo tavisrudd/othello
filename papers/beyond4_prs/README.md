@@ -69,8 +69,8 @@ work, not late additions to the submission.
 - C542 supplies the companion-paper redundancy-eight application.
 - C543 supplies the companion-paper characteristic-two ordered-Hessian and
   Lucas-carrier layer.
-- C544 supplies the completed aggregate import gate, axiom audit, referee-facing trust map, and
-  manuscript-to-formalization reconciliation.
+- C544 supplies the aggregate import gate, including the stable-component coordinate package,
+  axiom audit, referee-facing trust map, and manuscript-to-formalization reconciliation.
 
 All computational claims retain their committed generators, independent replays, compact
 certificates, and checksum manifests.  Lean terminals must expose rather than conceal cited

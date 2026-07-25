@@ -5,8 +5,9 @@ The paper-facing Lean closure is
 `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit` prints the axiom
 dependencies of every declaration on which the manuscript places Lean-level
 trust.  The aggregate gate imports only the projective Reed--Solomon
-foundation, redundancy-five through redundancy-nine packages, and the
-characteristic-two ordered-Hessian/Lucas package.
+foundation, redundancy-five through redundancy-nine packages, the
+stable-component coordinate package, and the characteristic-two
+ordered-Hessian/Lucas package.
 
 “Kernel algebra” below means that Lean proves the displayed identity or
 arithmetic statement.  “Conditional terminal” means that Lean proves the
@@ -31,6 +32,7 @@ composition.  Declaration names in the table are relative to the
 | `prop:r5-bridge` | `PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic`; `certified_orbit_summaries_agree_with_sporadic_records`; `CertificateValidation` | Transcription and arithmetic are kernel checked.  Identification and exhaustive-search semantics remain explicit validation fields. |
 | `thm:polar-construction` | `PRSPolarInduction.iteratedProjectiveSequenceContraction_map`; `PointedKernelLift.lift_splitSquarefreeKernelMember`; `PRSResidualQuadratic.dividedPowerContraction_comm` | Kernel algebra and a conditional squarefree-lift terminal.  The concrete polynomial/kernel identification is an input. |
 | `thm:induction` | `PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular` | Conditional terminal with explicit component, genus, deletion, collision, and witness fields. |
+| `thm:stable-component-headline` | the three `PRSStableComponents.*Factor_plucker` declarations; the four `coherentFano_*_hankelMinor` identities; `mem_modularContractionKernel_prod_iff`; `cyclicPlaneCatalecticant_blocks_cover` | Coordinate algebra and the characteristic-two block-coverage termination are kernel checked.  Marker-product density, projective row-space transport, cyclic-ideal saturation, and the geometric bottom-component classification are manuscript and Certificate SC proofs, not Lean conclusions. |
 | `prop:contained-rank-two` | no direct declaration | Characteristic-free manuscript rank--nullity proof; degree-specific formal terminals consume its geometric consequence as an input. |
 | `prop:r6-persistent` | `PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount`; tangent-translation terminals | Cardinality and quotient arithmetic are checked; genuine group actions and the geometric family identification are inputs. |
 | `prop:r6-secant` | `PRSPolarInduction.sequenceContraction_agrees_with_finite`; `PRSResidualQuadratic.dividedPowerContraction_twice_apply` | Contraction algebra is checked; the secant-degree assertion is a manuscript proof. |

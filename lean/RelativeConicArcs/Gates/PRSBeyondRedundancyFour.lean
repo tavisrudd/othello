@@ -1,6 +1,7 @@
 import RelativeConicArcs.Gates.PRSFoundation
 import RelativeConicArcs.Gates.PRSRedundancyFive
 import RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven
+import RelativeConicArcs.Gates.PRSStableComponents
 import RelativeConicArcs.Gates.PRSRedundancyEight
 import RelativeConicArcs.Gates.PRSRedundancyNine
 import RelativeConicArcs.Gates.PRSCharacteristicTwoHessianLucas
@@ -12,8 +13,8 @@ This gate is the paper-facing import closure for the formal results on redundanc
 nine and the characteristic-two ordered-Hessian and Lucas-carrier boundary.  It imports the
 shared Hankel and coding interfaces, the redundancy-five algebra and finite-table arithmetic,
 coherent polar contraction and the redundancy-six/seven synthesis interfaces, the
-redundancy-eight specialization, the redundancy-nine residual-quadratic package, and the
-characteristic-two modular package.
+stable-component coordinate algebra, the redundancy-eight specialization, the redundancy-nine
+residual-quadratic package, and the characteristic-two modular package.
 
 The imported synthesis theorems are conditional.  Concrete projective-coordinate dictionaries,
 covering-radius results, geometric component classifications, rational-point bounds, genuine
