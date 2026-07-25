@@ -93,6 +93,11 @@ and `B_3` from the canonical harmonic-plus-radial ten-space in type `H_3`.
 An `ej` upgrade proves that the omitted five-space is exactly the middle
 Fischer layer `Q H_2`; a coordinate-free reason that the finite `H_3` orbit
 annihilates precisely this layer remains a nonblocking conceptual refinement.
+A `tt` pass isolates the exact proof target:
+`Delta_Q Phi(M) in F_11 Q`. Proving this covariant identity conceptually
+would leave only ten-space spanning to the finite certificate.
+The same pass promotes the uniform Coxeter-number formula
+`dim W_T = h_T - 1 + 1_(h_T/2-1 even)`, whose three values are `3,6,10`.
 The primary C406 certificate and independent replay are green. Its clean
 six-page build is warning-free. The next drafting frontier is balanced-sheet
 uniqueness and cubic-first orientation.

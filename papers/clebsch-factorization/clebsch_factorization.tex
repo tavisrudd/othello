@@ -276,6 +276,17 @@ B_3&2&R_2=\mathcal H_2\oplus\F_7Q&6,\\
 H_3&4&\mathcal H_4\oplus\F_{11}Q^2&10.
 \end{array}                                               \tag{4.4}
 \]
+If \(h_T=4,6,10\) is the Coxeter number and
+\(d=h_T/2-1\), the three rows have the uniform form
+\[
+ W_T=
+ \begin{cases}
+ \mathcal H_d,&d\ \text{odd},\\
+ \mathcal H_d\oplus\F_qQ^{d/2},&d\ \text{even},
+ \end{cases}
+ \qquad
+ \dim W_T=h_T-1+\mathbf 1_{\{d\ {\rm even}\}}.
+\]
 In particular, the first two configurations fill the complete quotient
 form space.  The \(H_3\) configuration spans a canonical ten-dimensional
 subspace of the fifteen-dimensional space \(R_4\).
@@ -328,6 +339,11 @@ Consequently,
  R_4=W_{H_3}\oplus Q\mathcal H_2,\qquad
  R_4/W_{H_3}\simeq Q\mathcal H_2.                              \tag{4.6}
 \]
+Equivalently,
+\[
+ W_{H_3}
+ =\{f\in R_4:\Delta_Qf\in\F_{11}Q\}.                           \tag{4.7}
+\]
 Thus the \(H_3\) quotient configuration retains the top harmonic
 nine-space and the deepest radial line, and omits precisely the
 five-dimensional middle radial layer.
@@ -337,14 +353,20 @@ five-dimensional middle radial layer.
 For a homogeneous form \(f\) of degree \(r\), direct differentiation
 gives
 \[
- \Delta_Q(Qf)=(4r+6)f+Q\Delta_Qf.                              \tag{4.7}
+ \Delta_Q(Qf)=(4r+6)f+Q\Delta_Qf.                              \tag{4.8}
 \]
 Hence \(\Delta_Q(Qh)=3h\) for \(h\in\mathcal H_2\), while
 \(\Delta_Q(Q^2)=9Q\) over \(\F_{11}\).  Applying
 \(\Delta_Q^2\) and then \(\Delta_Q\) shows that the three summands in
 (4.5) meet trivially.  Their dimensions are \(9,5,1\), so they exhaust
 the fifteen-dimensional space \(R_4\).  Theorem
-\ref{thm:rank-three-quotients} then gives (4.6).
+\ref{thm:rank-three-quotients} then gives (4.6).  If
+\(f=h_4+Qh_2+cQ^2\) is its decomposition, then
+\[
+ \Delta_Qf=3h_2+9cQ.
+\]
+The quadratic decomposition \(R_2=\mathcal H_2\oplus\F_{11}Q\)
+therefore gives (4.7).
 \end{proof}
 
 The rank calculation has two distinct boundaries.  The common restriction
@@ -356,6 +378,11 @@ reduction; the independent replay starts only from (4.1) and reconstructs
 the calculation without importing the primary implementation.  Thus
 Theorem~\ref{thm:rank-three-quotients} does not infer a general
 rank formula from the three examples.
+
+Equation (4.7) isolates a smaller conceptual target than the full rank
+calculation: the \(H_3\) containment is the vanishing of the harmonic
+quadratic part of \(\Delta_Q\Phi(M)\).  Once that covariant identity is
+known, only spanning the resulting ten-space remains finite.
 
 Corollary~\ref{cor:h3-middle-layer} identifies the linear information
 lost by the \(H_3\) orbit, but linear span does not recover the two
