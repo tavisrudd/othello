@@ -730,12 +730,81 @@ determines its parent.  The stated limitation for the other four rows
 follows from their fibre sizes.
 \end{proof}
 
+\begin{corollary}[Decorated sheet classifier]
+\label{cor:decorated-sheet-classifier}
+Relative to the orientation in (6.1), the profile \(D(M)\) determines
+the sheet containing \(M\).  The antipodal singleton pair
+\(\{v_1,-v_1\}\) recovers the unordered golden matching pair and hence
+the unordered golden parent pair; choosing the orientation selects one
+member.
+\end{corollary}
+
+\begin{proof}
+The positive and negative profile sets in (6.3) are disjoint, and the
+only singleton fibres are \(v_1\) and \(-v_1\).  Apply the
+matching--parent bijection from
+Theorem~\ref{thm:six-profile-reconstruction}.
+\end{proof}
+
+This pointwise classifier does not contradict the failure of a linear
+sheet sign in Section~\ref{sec:balanced}.  The map \(D\) uses zero
+incidences with the selected scalar-\(K\) refinement; it is not a linear
+functional on the affine quotient configuration.  Without that extra
+decoration, the quadratic and cubic moment statements remain the
+intrinsic recovery mechanism.
+
 The profile compression also retains the cubic-first orientation from
 Section~\ref{sec:balanced}.  The three positive vectors satisfy the
 integral weighted relation
 \[
  v_1+4v_2+6v_3=0.                                        \tag{6.6}
 \]
+\begin{corollary}[Orbit weights from profile rays]
+\label{cor:profile-ray-weights}
+The three antipodal rational profile rays recover the orbit-size
+multiset \(\{1,4,6\}\).  They also recover the stabilizer orders
+\(\{12,3,2\}\) inside \(K\simeq A_4\).
+\end{corollary}
+
+\begin{proof}
+The three integral profile vectors span a plane over \(\mathbb Q\), so
+their rational relation space is one-dimensional.  Equation (6.6) is
+its primitive positive generator.  Its coefficients recover the three
+orbit sizes without labels.  Orbit--stabilizer then gives
+\(12/1,12/4,12/6\).
+\end{proof}
+
+\begin{lemma}[Three-ray cubic forcing]
+\label{lem:three-ray-cubic}
+Let \(k\) have characteristic different from \(2\) and \(3\).  Suppose
+\(u_1,u_2\) form a basis of a two-dimensional \(k\)-space and
+\(n_1,n_2,n_3\in k^\times\) satisfy
+\[
+ n_1u_1+n_2u_2+n_3u_3=0.
+\]
+For the signed antipodal measure
+\[
+ \xi=\sum_{i=1}^3 n_i(\delta_{u_i}-\delta_{-u_i}),
+\]
+the moments of degrees one and two vanish, while the cubic moment is
+nonzero.
+\end{lemma}
+
+\begin{proof}
+The relation kills the first moment, and antipodality kills every even
+moment.  Write
+\[
+ u_3=-\frac{n_1}{n_3}u_1-\frac{n_2}{n_3}u_2.
+\]
+In \(\sum_i n_i u_i^{\odot3}\), the coefficient of
+\(u_1^{\odot2}\odot u_2\) is
+\[
+ -\frac{3n_1^2n_2}{n_3^2},
+\]
+which is nonzero.  The signed cubic is twice this tensor and is therefore
+nonzero as well.
+\end{proof}
+
 If
 \[
  \eta=\delta_{v_1}+4\delta_{v_2}+6\delta_{v_3}
@@ -749,7 +818,11 @@ then its signed symmetric moments obey
  \qquad (n_1,n_2,n_3)=(1,4,6).                            \tag{6.7}
 \]
 Equation (6.6) kills the first moment, and antipodality kills every even
-moment.  The cubic is nonzero: its first coordinate is
+moment.  The first two profiles are independent over \(\F_{11}\), since
+the determinant of their first two coordinates is \(-18\ne0\).
+Lemma~\ref{lem:three-ray-cubic} therefore forces the cubic to be nonzero
+without a coordinate calculation.  In the frozen normalization, its
+first coordinate is
 \[
  2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0
  \quad\text{in }\F_{11}.                                 \tag{6.8}

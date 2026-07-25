@@ -37,7 +37,10 @@ recover only their \(K\)-orbits.
 The weighted relation \(v_1+4v_2+6v_3=0\) and antipodality kill the first and
 second signed moments of the compressed configuration. Its cubic remains
 nonzero, so the profile map preserves the cubic-first orientation already
-proved for the full quotient configuration.
+proved for the full quotient configuration. Conversely, the three antipodal
+rational profile rays recover the primitive positive dependence \(1:4:6\),
+and hence recover both the orbit-size multiset \(\{1,4,6\}\) and the
+stabilizer-order multiset \(\{12,3,2\}\).
 
 The section states its decoration boundary explicitly. Balanced moments
 recover the unordered sheet pair from the affine quotient configuration.
@@ -104,11 +107,39 @@ injectivity by the exact stabilizer mechanism: parent and obstruction
 matching have the same \(A_5\) stabilizer, so their equivariant \(G/H\) map is
 a bijection.
 
+The explicit `ej` follow-up adds two reversible consequences. First, relative
+to the oriented cell pairs, the profile is a pointwise sheet classifier; the
+antipodal singleton pair recovers the unordered golden parent pair. This does
+not revive the failed linear sheet sign because the profile uses decorated
+zero-incidence data rather than a linear functional on the affine quotient.
+Second, even after orientation is forgotten, the three rational profile rays
+recover their own orbit multiplicities through the primitive positive
+dependence \(1:4:6\).
+
+The same integer table exposes the bad primes for the next arithmetic section.
+The gcd of its nonzero \(2\times2\) minors is \(3\), so the profile plane drops
+rank only in characteristic \(3\). The six signed vectors remain distinct
+away from characteristics \(2\) and \(3\); characteristic \(2\) identifies
+antipodes, while characteristic \(3\) sends \(v_1\) and \(v_2\) to zero.
+This is presently a statement about reduction of the integral profile table,
+not an all-characteristic geometric construction.
+
+The explicit `tt` pass removes one more finite-looking step. A general
+three-ray lemma now proves that over characteristic different from \(2,3\),
+any nonzero weighted relation among three rays spanning a plane forces the
+signed antipodal cubic to be nonzero: in a basis \(u_1,u_2\), the
+\(u_1^{\odot2}\odot u_2\) coefficient is
+\(-3n_1^2n_2/n_3^2\). Thus the compressed H3 cubic follows conceptually from
+rank two and the \(1:4:6\) dependence. The former coordinate witness `6` is
+retained only to pin the frozen normalization.
+
 | mystery | status | exact remaining gap or owner |
 |---|---|---|
 | Does the bare affine quotient intrinsically select the four oriented profile coordinates? | settled negatively for the present theorem | The manuscript now treats them as relative to the selected ordered golden pair; no intrinsic selection is claimed. |
 | Why can rank-two data recover six rows? | settled | The six displayed vectors are pairwise distinct; linear rank does not control set-theoretic separation. |
 | Why does a singleton profile recover a parent rather than only a matching? | settled | C379 certifies the common \(A_5\) stabilizer, making the equivariant decorated transform a bijection. |
+| Do the unlabeled profile rays retain the group-theoretic orbit sizes? | settled | Their unique primitive positive rational dependence is \(1:4:6\), which also gives stabilizer orders \(12,3,2\). |
+| Is compressed cubic nonvanishing an additional finite calculation? | settled | No. The three-ray cubic lemma forces it from rank two and the nonzero \(1:4:6\) relation in characteristic \(11\). |
+| What do the exceptional primes \(2,3\) mean geometrically? | open | Exact reduction of the integral profile table isolates them, but C577's modular-depth section must decide whether this is part of the arithmetic gluing theorem or only degeneration of this coordinate realization. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | What is the next load-bearing Paper II frontier? | open by task order | C577 next drafts modular depth and arithmetic splitting/gluing. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
-

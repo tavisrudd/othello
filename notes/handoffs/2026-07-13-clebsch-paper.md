@@ -108,8 +108,10 @@ cubic and carries the outer character. The C406 and C430 primary certificates,
 independent replays, and checksum gates are green. The six-profile section
 now derives the `1,4,6 / 1,4,6` rows from subgroup marks, defines the
 secant-incidence profiles, proves set-theoretic row separation despite the
-rank-two image, and states the exact singleton matching/parent recovery
-boundary. Its clean eleven-page build is warning-free. The next drafting
+rank-two image, recovers the `1,4,6` orbit weights from the three unlabeled
+profile rays, forces the compressed cubic by a general three-ray lemma, and
+states the exact singleton matching/parent recovery boundary. Its clean
+eleven-page build is warning-free. The next drafting
 frontier is modular depth and arithmetic gluing. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
