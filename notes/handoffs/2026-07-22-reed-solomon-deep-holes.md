@@ -4,7 +4,11 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597 complete. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597 complete. C603 is
+queued before C545 public release to audit the complete paper-facing Lean
+closure against the adopted manuscript trust ledger, paper style guide, and
+Lean standards, with explicit internal/external mathematical-dependency
+ledgers and a dated gap report. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -824,6 +828,7 @@ are the Gale pair; repeated Flatland colours still impose only one condition.
 | C542 | redundancy-eight Lean closure | complete | C513 theorem package | three-marker contraction with affine/infinity adjacent-swap invariance, elementary-symmetric cubic factorization, and geometric-`S3` interface; exact integer-42/prime-power-43 and finite-field synthesis terminals; persistent count, tangent cocycle, orbit table, and bounded characteristic-seven carrier terminal | formal redundancy-eight boundary |
 | C543 | characteristic-two Hessian/Lucas Lean closure | complete | C519/C525/C529/C530 theorem packages plus C541's integer-safe polar contract | doubled discriminant and Arf algebra; ordered-Hessian coordinates and explicit geometric boundary; squared Hasse--Weil deletion inputs; modular-kernel instances; power-of-two Lucas overlap, Frobenius cycles, and distinguished degree-nine endpoint terminals | formal modular boundary |
 | C544 | beyond-four PRS aggregate Lean gate | complete | all new terminals plus C517 | exact aggregate import, 103-terminal standard-axiom audit, referee-facing transitive-closure review, and 47-label manuscript reconciliation | paper trust boundary |
+| C603 | paper-facing Lean trust audit | queued; required before C545 public release | adopted manuscript, trust/formalization ledgers, paper style guide, Lean standards, exact aggregate closure | dated itemized source, claim-boundary, trust-route, style, dependency, gap, and release-readiness report | independent release audit |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -837,7 +842,8 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C545 | external release gates | both specialist reviews are closed; release still awaits export/identifier/author gates |
+| 1 | C603 | independent Lean trust audit | reconcile the adopted manuscript, trust ledgers, full project-owned Lean closure, style/standards, and mathematical dependencies before release |
+| 2 | C545 | external release gates | both specialist reviews are closed; release still awaits the C603 audit plus export/identifier/author gates |
 
 ## Unallocated level-ups
 
@@ -897,9 +903,9 @@ history.
 
 ## Next command
 
-`go C545`
+`go C603`
 
 (C537 has killed the Flatland--Gale multi-view bridge by an exact inverse-input and repeated-row
-comparison. C545 has one independent specialist confirmation and awaits the second,
-the public Lean/export revisions and
-identifiers, and author/account confirmation. No external upload is authorized.)
+comparison. C603 is the next local release gate. C545 remains externally
+blocked on the public Lean/export revision, identifiers, and author/account
+confirmation. No external upload is authorized.)
