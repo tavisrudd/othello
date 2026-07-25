@@ -1079,8 +1079,17 @@
       "last": 603,
       "purpose": "audit paper Lean against trust ledger, paper style guide, Lean standards, and external-paper math dependencies",
       "sequence": 120
+    },
+    {
+      "count": 1,
+      "first": 604,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 604,
+      "purpose": "Lean reconstruction and zero-defect matching-design closure, beginning with a Terence-Tao diagnostic pass",
+      "sequence": 121
     }
   ],
-  "next_id": 604,
+  "next_id": 605,
   "schema": "codex-task-id-allocations-v1"
 }
