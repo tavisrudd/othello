@@ -108,8 +108,11 @@ phase-space/robust-rigidity result before C602 freezes the aggregate.
 Paper I has a current regenerated formal boundary in
 `papers/clebsch-rigidity/verification/trust_manifest.json`: nineteen claim rows, 24 unique Lean
 terminals, the single gate `RelativeConicArcs.Gates.ClebschRigidityTrust`, and sixteen release
-checks. The manifest now pins finitegeom commit
-`6d4766d1ea5e9a36f1a507e549c223416a6b506f`; this supersedes the older
+checks. The manifest currently names source-owner finitegeom commit
+`6d4766d1ea5e9a36f1a507e549c223416a6b506f`; this is evidence for the adopted private-source
+boundary, not a commit in the still-uncommitted fresh-history public repository. C287 must map that
+boundary to the exact validated public candidate commit and update the public paper pin only after
+clean replay. The source-owner pin supersedes the older
 `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520` pin still quoted in the previous intake prose.
 C182 owns archive/release after the final author gate. Paper II and Paper III remain separate
 prospective papers under C577 and C579; their Lean must not leak into Paper I's release closure.

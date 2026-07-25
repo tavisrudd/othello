@@ -168,8 +168,11 @@ manifests and all source export until C602 is complete; the actual extraction is
 wave afterward. Exact roots and exclusions are in
 `../2026-07-24-c287-new-paper-export-intake.md`. Follow
 `../2026-07-25-c287-token-efficient-execution.md`, which defers closure computation until C602,
-deduplicates the full source union by path and hash, reviews every unique source once, and batches
-the paper gates in one quiet build-owner window.
+pins one immutable private-source snapshot, deduplicates public-prose review across the full source
+union by path and hash, then constructs and validates resumable incremental candidate commits.
+Commit-scoped trust, axiom, and clean-replay evidence is never reused by file hash; `main` and each
+tag advance only after that exact candidate passes. A single quiet build-owner window is preferred
+but is no longer an atomicity assumption.
 Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
 do not elaborate or build until a confirmed quiet build-owner window. The first commits must
 include reviewed source manifests and public rewrites, not scaffold-only history.

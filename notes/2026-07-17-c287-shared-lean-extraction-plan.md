@@ -119,8 +119,11 @@ exclusions, and evidence boundaries are recorded in
 Per the 2026-07-25 user gate, no source export occurs before AME--LU C602 freezes its aggregate.
 The three ready closures retain their exact root ledger, but provisional manifests are deferred to
 avoid recomputation. C553 remains an independent precondition and may land before C602. Once both
-are complete, inventory regeneration, whole-closure review, fresh-history copy, builds, axiom
-extraction, and clean replay form one coordinated execution wave. These later closures do not
+are complete, an immutable private-source snapshot, inventory regeneration, whole-closure review,
+incremental fresh-history candidate commits, builds, axiom extraction, and clean replay form one
+resumable coordinated execution wave. Each candidate is constructed from the last validated
+public state, and `main` and its tag advance only after that exact candidate passes; the full union
+is never staged before the frozen first tag. These later closures do not
 enlarge the frozen 26-file first tag; each enters through a separate incremental tag contract, and
 shared files are deduplicated by content rather than by a portfolio umbrella.
 
@@ -130,8 +133,9 @@ The authoritative low-context route is
 `notes/2026-07-25-c287-token-efficient-execution.md`. It uses exactly three lane sessions:
 C612--C613--C602 continuously in `ame-lu`, C553 in `cap`, then one coordinated C287 extraction in
 `build-sys`. The extraction computes one content-addressed union, reviews each unique source hash
-once, preserves separate paper manifests and gates, and validates all aggregates in one quiet
-build-owner window. It explicitly defers provisional pre-C602 manifests, C581, companion-paper
+once for public prose, preserves separate paper manifests and commit-scoped trust gates, and
+validates resumable candidate states, preferably in one quiet build-owner window. It explicitly
+defers provisional pre-C602 manifests, C581, companion-paper
 closures, and certificate packages not required by an adopted paper contract.
 
 Heavyweight generated certificate trees are not members of the `finitegeom` source union. Each
@@ -193,17 +197,20 @@ first-tag `FiniteGeom` + ProjectiveCap + CapGame upper bound, excluding `Project
 - Record `tokei` counts for the reviewed main closure and each external certificate family; fail the
   main export when the reviewer-facing size gate is exceeded.
 
-### 2. Stage the fresh source tree
+### 2. Stage incremental fresh source states
 
-- Export only the reviewed manifest into the new disk-backed destination; do not broadly copy the
-  private tree.
+- Export only the first state's reviewed manifest into a candidate commit in the new disk-backed
+  destination; do not broadly copy the private tree or stage the full reviewed union.
+- Add each later paper closure only as the next state ledger's reviewed delta from the last
+  validated public state.
 - Author public README, target/gate map, proof ledger, and provenance documentation without private
   C-task references or host paths.
 - Compare the complete staged regular-file set with the manifest and scan staged bytes for private
   paths, credentials, internal hostnames, and monorepo-only references.
-- The empty workspaces may remain Git-initialized, but create each root commit only after its source
-  set and rewrites pass review. Attaching a remote and pushing remain separate user-authorized
-  actions.
+- The empty workspaces may remain Git-initialized, but advance `main` and tag a candidate only after
+  its exact source set, rewrites, build, axiom audit, and clean-checkout replay pass. A failure
+  leaves the last validated state unchanged. Attaching a remote and pushing remain separate
+  user-authorized actions.
 
 ### 3. Validate public sources
 
