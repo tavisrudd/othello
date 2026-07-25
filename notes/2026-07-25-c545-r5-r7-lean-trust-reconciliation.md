@@ -126,11 +126,12 @@ The paper supplement now contains
 It refuses dirty release-owned source or an existing destination, archives the
 committed paper tree and exact 15-module Lean closure, and creates separate
 paper and Lean repositories. Two independent runs from source commit
-`60ba59f645fd4049372f8ca45c4bf00777505c30` produced paper commit
-`63ec104cf3f4243223917d3a6d4beed017ba3616` and Lean commit
-`11830150b942d0cdf601331d179ca7ceccd00071` both times. The exporter uses the
-last release-owned source timestamp, so unrelated later repository work does
-not perturb those commits. The resulting paper candidate passed the
+`ec39cf0fce475077fc28942c454c308b39845664` produced paper commit
+`07da7e76ba9703fd87b6edfe71390fecabc65a99` and Lean commit
+`dddf7a8dc1a7fd6f4c079f09ef4fd3a73dd8256c` both times. The exporter uses
+separate last-modification timestamps for the paper and Lean allowlists, so
+unrelated repository work and paper-only edits do not perturb the Lean commit.
+The resulting paper candidate passed the
 43-artifact quick verifier and rebuilt the 33-page canonical and 25-page TIT
 PDFs byte-for-byte; both repositories remained clean after the builds. The
 full paper-local replay also passed from a clean exported candidate in
