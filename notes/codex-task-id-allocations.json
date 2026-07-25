@@ -1151,8 +1151,17 @@
       "last": 614,
       "purpose": "higher-m GRS transversal Clifford group, code-conversion rigidity, and explicit QMDS applications",
       "sequence": 128
+    },
+    {
+      "count": 1,
+      "first": 615,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 615,
+      "purpose": "Package product-unitary automorphisms as topological groups, scalar phases as a normal subgroup, and projectivization/signature as homomorphisms after the exact GRS round",
+      "sequence": 129
     }
   ],
-  "next_id": 615,
+  "next_id": 616,
   "schema": "codex-task-id-allocations-v1"
 }
