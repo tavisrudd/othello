@@ -1169,8 +1169,17 @@
       "last": 616,
       "purpose": "coordinate-free H3 radial-trace identity and representation-theoretic ten-space spanning proof for Paper II",
       "sequence": 130
+    },
+    {
+      "count": 1,
+      "first": 617,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 617,
+      "purpose": "strengthen projective automorphism packaging to a closed scalar-torus exact sequence, discrete finite quotient topology, genuine signature homomorphisms, and party-permutation extension structure",
+      "sequence": 131
     }
   ],
-  "next_id": 617,
+  "next_id": 618,
   "schema": "codex-task-id-allocations-v1"
 }
