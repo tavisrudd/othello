@@ -1,10 +1,10 @@
-# C577 — Clebsch factorization-memory Paper II
+# C577 — Clebsch conic-ideal quotient Paper II
 
 **Lane:** `clebsch`
 
 **Date:** 2026-07-25
 
-**Status:** `IN PROGRESS; TECHNICAL DUAL GO; TITLE/ABSTRACT REVISED; STYLE SPINE OPEN`
+**Status:** `LOCAL GO; PUBLIC ARCHIVE LOCATOR REQUIRED BEFORE RELEASE`
 
 ## Current result
 
@@ -38,15 +38,19 @@ review-stage reproducibility finding. An immutable public deposit remains an
 explicit release condition rather than a candidate claim.
 
 The subsequent Milnor- and Serre-style reads both returned `NO-GO` on
-architecture rather than correctness. As a first repair, the title is now
-*Secant-factorization memory modulo a conic: the \(A_3\), \(B_3\), and
-\(H_3\) configurations*. The abstract now leads with the quotient mechanism,
-names the three fields, follows the quotient--sheet--cubic--profile chain, and
-demotes modular depth and arithmetic splitting to separate refinements. The
-remaining style gate is a broader spine compression: narrow Theorem 1.1,
-compress the programmatic motivation, give Section 6 a conceptual gateway,
-separate the two Section 7 stories, and move secondary cubic/verification
-material behind the mathematical conclusion.
+architecture rather than correctness. Their structural repair is now
+applied: the mechanism precedes a narrowed four-clause recovery theorem;
+the switch is folded into the quotient section; coding, quantum, game,
+prescribed-hole, and PRS context is compressed into cited provenance; the
+profile construction begins with a conceptual dependency map; modular depth
+and arithmetic splitting are separate sections; and the mathematical
+conclusion precedes the appendices. The title now states explicitly that the
+linear quotient covers \(A_3,B_3,H_3\) while quadratic recovery and cubic
+orientation apply only to \(B_3,H_3\). A front-matter scope ledger makes the
+branching theorem surface visible. Two successive staged
+title--abstract--full-PDF experiments found and then cleared the remaining
+equal-type overstatement; the final fresh reader returned editorial `GO`
+conditional only on the declared public archive locator.
 
 Paper II now contains its full change-of-characteristic section.  On one
 \(H_3\) sheet, the characteristic-eleven permutation module

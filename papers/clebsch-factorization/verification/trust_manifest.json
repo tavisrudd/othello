@@ -61,11 +61,11 @@
     {"label": "thm:six-profile-reconstruction", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:decorated-sheet-classifier", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:profile-ray-weights", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence"]},
-    {"label": "lem:three-ray-cubic", "modes": ["conceptual"], "evidence": []},
-    {"label": "cor:mass-zero-cubic", "modes": ["conceptual"], "evidence": []},
     {"label": "prop:modular-depth-quotient", "modes": ["conceptual", "certificate", "classical-input"], "evidence": ["relative-cubic-depth"]},
     {"label": "lem:split-inert-frames", "modes": ["conceptual", "lean"], "evidence": ["arithmetic-gluing"]},
     {"label": "thm:rank-three-arithmetic-gluing", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["arithmetic-gluing"]},
+    {"label": "lem:three-ray-cubic", "modes": ["conceptual"], "evidence": []},
+    {"label": "cor:mass-zero-cubic", "modes": ["conceptual"], "evidence": []},
     {"label": "prop:relative-cubic-tate-plane", "modes": ["certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [

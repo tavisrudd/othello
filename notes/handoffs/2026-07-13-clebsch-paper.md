@@ -122,12 +122,17 @@ the depth plane are isolated in an appendix. It now has a sixteen-statement
 paper-specific trust manifest, a six-bundle aggregate replay, a verification
 section that separates conceptual, classical, certificate, and Lean support,
 and a conclusion that states the exact reconstruction ladder and its
-relative/global boundaries. The full local replay and warning-free
-nineteen-page build are green, and two post-fix PDF-only technical rereads
-returned `GO`. The title and abstract now lead with secant-factorization
-memory and the quotient--sheet--cubic--profile mechanism. The Milnor- and
-Serre-style reads returned `NO-GO` on the broader spine; the next frontier is
-their structural compression pass. The current theorem,
+relative/global boundaries. The Milnor/Serre structural pass is now applied:
+the mechanism precedes the narrowed four-clause theorem; the switch is folded
+into the general quotient section; the applications paragraph is replaced by
+companion-paper citations; Section 6 has a conceptual gateway; modular depth
+and arithmetic splitting are separate sections; and the conclusion precedes
+the verification and mathematical appendices. A front-matter scope ledger
+now distinguishes the three-type linear theorem from the `B_3/H_3` sheet
+theorem and the `H_3`-only refinements. A fresh staged title/abstract/full-PDF
+cold read returned editorial `GO`, conditional only on the already-declared
+public immutable archive locator. The full local replay and warning-free
+nineteen-page build are green. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 
@@ -245,10 +250,11 @@ The previous C320 `NO-GO`, 58-row manifest, 29-statement extraction, and
 evidence inputs, not the active C320 acceptance state. Do not resume the old
 instruction to launch its reviewer.
 
-## Paper II — factorization memory
+## Paper II — conic-ideal quotients
 
-C577 owns the standalone paper provisionally titled *Factorization memory
-in a conic ideal: the `A_3`, `B_3`, and `H_3` configurations*. Its spine is:
+C577 owns the standalone paper titled *Conic-ideal quotients for the
+`A_3`, `B_3`, and `H_3` secant configurations: quadratic sheet recovery
+and cubic orientation in types `B_3` and `H_3`*. Its spine is:
 
 1. conic matching products and the general switch/divisibility quotient;
 2. the `A_3/B_3/H_3` configurations and ranks `3,6,10`;
@@ -264,15 +270,16 @@ common restriction to a conic. This is motivation, not proof inheritance.
 Paper II defines its marked-conic objects and quotient independently and
 must cite the final Paper I release rather than changing or extending it.
 
-Current C577 drafting state: the opening bridge, headline theorem,
+Current C577 drafting state: the opening bridge, narrowed headline theorem,
 marked-conic definition, general quotient proof, switch identity, explicit
 rank-three configurations, exact `3,6,10` theorem, balanced-sheet uniqueness,
 cubic-first orientation, six-profile matching-row reconstruction, modular
 depth quotient, arithmetic splitting/gluing, and the relative-cubic Tate
 appendix are in the manuscript. The Paper II-specific verification
 architecture and conclusion are drafted and their full local replay is
-green. The technical rereads are `GO`; continue with the Milnor/Serre spine
-revision beyond the completed title/abstract repair.
+green. The technical rereads and post-spine staged cold read are `GO`;
+release still requires the user-controlled immutable public evidence
+locator.
 
 ### Outward-consequence bridge
 

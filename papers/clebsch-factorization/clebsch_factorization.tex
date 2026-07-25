@@ -22,9 +22,11 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\cC}{\mathcal{C}}
 
-\title{Secant-factorization memory modulo a conic:\\
-the \texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
-\texorpdfstring{$H_3$}{H3} configurations}
+\title{Conic-ideal quotients for the
+\texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
+\texorpdfstring{$H_3$}{H3} secant configurations:\\
+quadratic sheet recovery and cubic orientation in types
+\texorpdfstring{$B_3$}{B3} and \texorpdfstring{$H_3$}{H3}}
 \author{Tavis Rudd}
 \date{}
 
@@ -32,20 +34,21 @@ the \texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
 \maketitle
 
 \begin{abstract}
-Pairing marked points of a conic into secants gives products of line
-equations with the same restriction to the conic.  Dividing the
-difference of two such products by the conic equation produces an
-affine quotient configuration, intrinsic up to translation.  For the
-rank-three Coxeter configurations \(A_3\) over \(\F_5\), \(B_3\) over
-\(\F_7\), and \(H_3\) over \(\F_{11}\), its linear span has dimensions
-\(3,6,10\).  It contains the top harmonic summand and, in even degree,
-the deepest radial line; in type \(H_3\), it omits exactly
-\(Q\mathcal H_2\).  In the balanced \(B_3\) and \(H_3\) cases,
-quadratic products recover the unordered pair of sheets, while the
-first nonzero signed moment is cubic and orients them.  After a selected
-\(A_4\)-refinement, signed incidence profiles recover the exact
-\(A_4\backslash\operatorname{PGL}_2(11)/A_5\) label.  Modular depth and
-arithmetic splitting are treated as separate refinements.
+Restriction to a conic forgets how its marked points were paired into
+secants.  For the balanced \(B_3\) and \(H_3\) configurations, we show
+that the quotient by the conic equation nevertheless recovers the two
+factorization sheets from quadratic products of affine evaluation
+functions.  Within signed tensor moments, the first nonzero term is an
+anti-invariant cubic line that detects sheet interchange.  The
+corresponding difference spans have dimensions \(3,6,10\) for
+\(A_3/\F_5\), \(B_3/\F_7\), and \(H_3/\F_{11}\); in type \(H_3\), the
+only missing Fischer layer is \(Q\mathcal H_2\).  After a chosen
+\(A_4\)-refinement, six incidence profiles recover the exact
+double-coset label in
+\(A_4\backslash\operatorname{PGL}_2(11)/A_5\), not in general an
+individual matching.  Separate modular and arithmetic results identify
+the loss on linearization and the split--fused behavior of the three
+marker algebras.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
@@ -59,13 +62,38 @@ configuration; factorization; cubic invariant; modular representation.
 
 The companion rigidity paper isolates the Clebsch hexagon through its
 uncovered syndrome locus and reconstructs its projective geometry from
-decoding data \cite{RuddRigidity2026}.  Here we begin with marked secant geometry and ask a
-complementary reconstruction question: what does common restriction to a
-conic forget, and what does the conic-ideal quotient remember?  We answer
-this question across the rank-three $A_3$, $B_3$, and $H_3$
-configurations.
+decoding data \cite{RuddRigidity2026}.  Here we begin with marked secant
+geometry and ask a complementary reconstruction question: what does
+common restriction to a conic forget, and what does the conic-ideal
+quotient remember?
 
-\begin{theorem}[Factorization recovery]
+The answer is governed by one mechanism.  A four-endpoint switch shows
+that competing secant products differ by the conic equation, so their
+quotients form an affine configuration.  In the balanced cases,
+Hadamard squares recover an unordered bipartition of that configuration;
+the first signed tensor that survives is cubic and orients the two
+parts.  A selected double-coset incidence map then compresses the
+\(H_3\) configuration to six profiles without identifying any labels.
+
+\begin{center}
+\small
+\begin{tabular}{@{}c@{\quad}c@{\quad}c@{\quad}c@{\quad}c@{}}
+\toprule
+type & linear quotient & sheets/cubic & \(H_3\) refinements & arithmetic\\
+\midrule
+\(A_3/\F_5\) & rank \(3\) & not applicable & not applicable & fused\\
+\(B_3/\F_7\) & rank \(6\) & recovered/oriented & not used & split\\
+\(H_3/\F_{11}\) & rank \(10\) & recovered/oriented & six labels/depth & split/glued\\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+The quotient construction and recovery mechanisms are symbolic.  The
+attainment of the displayed ranks and the hypotheses for the three
+finite configurations are exact certified inputs; the \(H_3\)-specific
+profile and modular results use further finite incidence data.
+
+\begin{theorem}[Quadratic recovery and cubic orientation]
 \label{thm:factorization-recovery}
 Let the $A_3$, $B_3$, and $H_3$ matching configurations be the finite
 matching orbits defined in Section~\ref{sec:rank-three}.  Then:
@@ -82,51 +110,24 @@ sheets;
 \item in the $H_3$ case, six explicit incidence profiles separate the
 six $A_4$--$A_5$ double-coset labels, and the singleton profiles recover
 the corresponding decorated matching-table row;
-\item over $\F_{11}$, the linearized depth map is the
-$A_4$-fixed part of the projective cover of the trivial
-$\operatorname{PSL}_2(11)$-module, modulo its socle;
-\item the $A_3$ marker is arithmetically fused over $\F_5$, whereas
-the $B_3$ and $H_3$ markers split into two rational sheets over
-$\F_7$ and $\F_{11}$; in the $H_3$ case the two $A_5$
-stabilizers glue along $A_4$ and generate
-$\operatorname{PSL}_2(11)$.
 \end{enumerate}
 \end{theorem}
 
-The theorem follows one mechanism from a four-endpoint switch to the
-recovery of finite matching data.  Division by the conic equation first
-turns different factorizations of one restricted form into an affine
-configuration.  Quadratic products then recover an unordered bipartition;
-the first signed moment that survives is cubic.  Finally, a
-double-coset incidence map compresses the configuration to six profiles
-without identifying any two labels.  The rigidity theorem motivates this
-question but is not a hypothesis: all marked-conic objects and quotient
-constructions are defined independently here.
+The modular depth quotient and the arithmetic split--fused theorem are
+stated separately in Sections~\ref{sec:modular-depth} and
+\ref{sec:arithmetic-splitting}; they refine the same finite table but
+are not clauses of the recovery theorem.
 
-This line of research arose from the following normal-play placement game.
-Two players alternately adjoin a point of a finite projective plane while
-keeping the selected set an arc; the first player with no legal point loses.
-After frame reduction in an odd projective plane, a residual three-point
-position and the two burned directions determine a five-arc and hence a
-conic; adjoining an on-conic response exposes the exceptional six-arc
-geometry studied here.  The resulting connection now runs in both
-directions.  The small-arc equality theorem isolates the projective frame
-over $\F_5$ and the Clebsch
-hexagon over $\F_{11}$ as the only configurations of sizes four through
-seven whose uncovered locus is a full conic.  The latter yields an
-icosahedral continuation complex, a certified game position, and a
-symmetry-compressed finite model for constructing second-player responses.
-Under the standard arc--MDS--AME dictionaries
-\cite{RaissiEtAl2017}, the same $H_3$ six-arc gives
-an $[6,3,4]_{11}$ MDS code and a minimum-support stabilizer absolutely
-maximally entangled state on six $11$-level systems, so its projective
-rigidity controls a concrete quantum-code input.  More generally,
-prescribed-hole arc theory
-places its equality and reconstruction properties in a forward/inverse
-framework, while the syndrome--uncovered-point mechanism extends to
-projective Reed--Solomon deep holes beyond redundancy four.  These are
-applications and continuations of the geometry, not hypotheses of the
-results proved here \cite{RuddPrescribedHoles2026,RuddPRS2026}.
+The exceptional \(H_3\) configuration arose from a normal-play
+finite-projective arc game and subsequently led to coding and quantum
+applications.  Its game-theoretic origin and decoding rigidity are
+developed in the companion rigidity paper
+\cite{RuddRigidity2026}; its MDS--AME and transversal-Clifford aspects
+are treated separately in \cite{RuddAMELU2026}, using the standard
+arc--MDS--AME dictionary \cite{RaissiEtAl2017}.  Prescribed-hole arcs
+and higher-redundancy projective Reed--Solomon deep holes are developed
+in \cite{RuddPrescribedHoles2026,RuddPRS2026}.  None of those results is
+a hypothesis here.
 
 \section{Conic matching products}
 \label{sec:matching-products}
@@ -194,7 +195,7 @@ $L_{ga,gb}\circ\rho(g)=\det(g)^2L_{ab}$ and
 $Q\circ\rho(g)=\det(g)^2Q$, which gives (2.2).
 \end{proof}
 
-\section{Switches and divisibility}
+\subsection{The four-endpoint switch}
 \label{sec:switches}
 
 For four distinct endpoints, the Pl\"ucker relation gives the local
@@ -394,6 +395,16 @@ Equation (4.7) isolates a smaller conceptual target than the full rank
 calculation: the \(H_3\) containment is the vanishing of the harmonic
 quadratic part of \(\Delta_Q\Phi(M)\).  Once that covariant identity is
 known, only spanning the resulting ten-space remains finite.
+
+A uniform theorem for the three rank-three types would replace the
+three row reductions by two representation-theoretic steps: a
+coordinate-free proof that every orbit quotient lands in the displayed
+harmonic-plus-radial target, and equivariant nonvanishing on each of its
+irreducible summands.  Equation (4.7) supplies the sharp \(H_3\) target,
+but those nonvanishing arguments are not yet proved uniformly.  A
+theorem over all good reductions would additionally require integral
+models and an analysis of the characteristics in which the harmonic
+decomposition, orbit structure, or marker algebra degenerates.
 
 Corollary~\ref{cor:h3-middle-layer} identifies the linear information
 lost by the \(H_3\) orbit, but linear span does not recover the two
@@ -620,7 +631,20 @@ We now specialize to \(H_3\).  Put
 \]
 where \(H\simeq A_5\) is the stabilizer of the base matching in
 (4.1).  Thus \(X=X_+\sqcup X_-\), with \(|X_+|=|X_-|=11\).
-Here is the additional decoration used in this section.  On
+The construction has four stages:
+\[
+ (A_+,A_-)\longmapsto K
+ \longmapsto\text{four oriented cell pairs}
+ \longmapsto D(M)
+ \longmapsto K\backslash G/H.
+\]
+The ordered parent pair supplies the \(A_4\)-subgroup \(K\); its cell
+partition supplies four signed incidence counts; those counts recover
+the double-coset label.  Only the first two stages require coordinates.
+
+\subsection{The decorated parent correspondence}
+
+On
 \(V=\F_{11}^3\), set
 \[
  q_0(x,y,z)=x^2+y^2+z^2,\qquad
@@ -693,6 +717,8 @@ The quotient configuration intrinsically recovers the unordered sheets,
 but it does not select an ordered golden pair or the resulting
 scalar-\(K\) refinement.  The reconstruction below is relative to that
 selected refinement.
+
+\subsection{Incidence profiles}
 
 For \(M\in X\), let \(S_M\) be the union of its six secants in
 \(\mathbb P^2(\F_{11})\), and put
@@ -858,122 +884,14 @@ replaced by primitive generators of their rays, the relation becomes
 \(1:2:1\), which proves the final warning.
 \end{proof}
 
-\begin{lemma}[Three-ray cubic forcing]
-\label{lem:three-ray-cubic}
-Let \(k\) have characteristic different from \(2\) and \(3\).  Suppose
-\(u_1,u_2\) form a basis of a two-dimensional \(k\)-space and
-\(n_1,n_2,n_3\in k^\times\) satisfy
-\[
- n_1u_1+n_2u_2+n_3u_3=0.
-\]
-For the signed antipodal measure
-\[
- \xi=\sum_{i=1}^3 n_i(\delta_{u_i}-\delta_{-u_i}),
-\]
-the moments of degrees one and two vanish, while the cubic moment is
-nonzero.
-\end{lemma}
+\section{Modular depth}
+\label{sec:modular-depth}
 
-\begin{proof}
-The relation kills the first moment, and antipodality kills every even
-moment.  Write
-\[
- u_3=-\frac{n_1}{n_3}u_1-\frac{n_2}{n_3}u_2.
-\]
-In \(\sum_i n_i u_i^{\odot3}\), the coefficient of
-\(u_1^{\odot2}\odot u_2\) is
-\[
- -\frac{3n_1^2n_2}{n_3^2},
-\]
-which is nonzero.  The signed cubic is twice this tensor and is therefore
-nonzero as well.
-\end{proof}
-
-\begin{corollary}[The mass-zero cubic flag]
-\label{cor:mass-zero-cubic}
-In Lemma~\ref{lem:three-ray-cubic}, suppose also that
-\(n_1+n_2+n_3=0\).  Then its half-cubic factors as
-\[
- \frac12M_3(\xi)=\sum_{i=1}^3n_i u_i^{\odot3}
- =\frac{n_1n_2}{(n_1+n_2)^2}
- (u_1-u_2)^{\odot2}\odot
- \bigl((2n_1+n_2)u_1+(n_1+2n_2)u_2\bigr).               \tag{6.12}
-\]
-The two displayed lines are distinct.  Hence the cubic intrinsically
-defines a doubled line and a residual simple line; its Hessian recovers
-the doubled line.
-\end{corollary}
-
-\begin{proof}
-Since \(n_3=-(n_1+n_2)\), the weighted vector relation gives
-\[
- u_3=\frac{n_1u_1+n_2u_2}{n_1+n_2}.
-\]
-Substitution and expansion give (6.12).  The residual factor would equal
-the doubled factor only if \(3(n_1+n_2)=0\), which is impossible under
-the hypotheses.  The Hessian of a binary cubic \(L^2R\), with \(L\) and
-\(R\) distinct, is a nonzero scalar multiple of \(L^2\).
-\end{proof}
-
-If
-\[
- \eta=\delta_{v_1}+4\delta_{v_2}+6\delta_{v_3}
-      -\delta_{-v_1}-4\delta_{-v_2}-6\delta_{-v_3},
-\]
-then its signed symmetric moments obey
-\[
- M_j(\eta)=
- \bigl(1-(-1)^j\bigr)
- \sum_{i=1}^3 n_i v_i^{\odot j},
- \qquad (n_1,n_2,n_3)=(1,4,6).                           \tag{6.13}
-\]
-Equation (6.11) kills the first moment, and antipodality kills every even
-moment.  The first two profiles are independent over \(\F_{11}\), since
-the determinant of their first two coordinates is \(-18\ne0\).
-Lemma~\ref{lem:three-ray-cubic} therefore forces the cubic to be nonzero
-without a coordinate calculation.  In the frozen normalization, its
-first coordinate is
-\[
-2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0
-\quad\text{in }\F_{11}.                                \tag{6.14}
-\]
-Thus the six-row quotient preserves the first nonzero signed moment even
-though its linear image is only a plane.  It is a set-separating
-realization of the mixed \(K\)--\(H\) double-coset space, not a faithful
-linear quotient of its six-dimensional function space.
-
-\begin{remark}[The \(H_3\) cubic flag]
-\label{rem:cubic-target-flag}
-Here \(1+4+6=0\) in \(\F_{11}\), so
-Corollary~\ref{cor:mass-zero-cubic} forces the double-line factorization.
-In the basis \(e_1=v_2,e_2=v_3\) of the profile plane, the projective
-cubic is represented by
-\[
- f(x,y)=x^3+7x^2y+5xy^2+9y^3=(x-y)^2(x-2y).
-\]
-Its Hessian is
-\[
- 7x^2+8xy+7y^2=7(x-y)^2.
-\]
-Thus the cubic divisor intrinsically distinguishes a doubled line and a
-residual simple line, and the Hessian recovers the doubled line.  This is
-an internal flag of the decorated profile plane.  It does not supply a
-canonical map from the full relative-cubic space to that plane, nor does
-the six-profile quotient carry a descended \(G^+\)-action.
-\end{remark}
-
-\section{Modular depth and arithmetic gluing}
-\label{sec:modular-gluing}
-
-Two changes of characteristic meet in the $H_3$ matching table.  The
-first is modular: because a sheet has eleven points, its constant vector
-lies in the augmentation submodule, and the depth map kills precisely
-that vector.  The second is arithmetic: the quadratic marker that
-produces the two $H_3$ frames splits over $\F_{11}$, while its $A_3$
-analogue is inert over $\F_5$.  The two statements use the same sheets,
-but they are not two descriptions of one quotient.
-
-\subsection{The depth plane as a modular quotient}
+Because an \(H_3\) sheet has eleven points in characteristic eleven,
+the sum of its basis vectors is simultaneously constant and
+augmentation-zero.  Linearizing the three incidence rows therefore
+kills exactly this constant direction and leaves the two-dimensional
+profile plane.  The following module statement identifies that loss.
 
 Retain the notation of Section~\ref{sec:six-profiles}, put
 \[
@@ -1065,7 +983,8 @@ the displayed integral table, not a construction of the marked conic
 geometry in those characteristics.
 \end{remark}
 
-\subsection{Split markers and the \texorpdfstring{$H_3$}{H3} hinge}
+\section{Arithmetic splitting of the marker algebra}
+\label{sec:arithmetic-splitting}
 
 The arithmetic representatives of the three configurations come in
 conjugate pairs.  Besides the base matchings in (4.1), we use
@@ -1075,7 +994,7 @@ conjugate pairs.  Besides the base matchings in (4.1), we use
  M_{B,+}&=\{\{0,\infty\},\{1,5\},\{2,3\},\{4,6\}\},\\
  M_{H,-}&=\{\{0,10\},\{1,\infty\},\{2,7\},\{3,5\},
                    \{4,8\},\{6,9\}\}.
-\end{aligned}                                             \tag{7.4}
+\end{aligned}                                             \tag{8.1}
 \]
 The pair for $A_3$ consists of two copies of $M_{A_3}$, the pair for
 $B_3$ is $(M_{B,-},M_{B,+})$, and the pair for $H_3$ is
@@ -1088,14 +1007,17 @@ T&\text{root}&\sigma_T(\text{root})\\ \hline
 A_3&\sqrt2,\ -\sqrt2&M_{A_3},\ M_{A_3}\\
 B_3&3,\ 4&M_{B,-},\ M_{B,+}\\
 H_3&4,\ 8&M_{H_3},\ M_{H,-}.
-\end{array}                                               \tag{7.5}
+\end{array}                                               \tag{8.2}
 \]
 Thus the \emph{marker datum} is the quadratic algebra together with
 \(\sigma_T\), not the polynomial alone.  Exact projective transport
 places the displayed $B_3$ and $H_3$ values in
 \(\Omega_{B_3}\) and \(\Omega_{H_3}\).  The certificate also verifies
 that \(\sigma_T\) is the reduction of the corresponding integral
-Coxeter frames; the theorem below needs only the explicit map (7.5).
+Coxeter frames; the theorem below needs only the explicit map (8.2).
+We call the datum \emph{fused} when its two geometric roots have one
+rational matching value, and \emph{split} when they give two distinct
+rational matching sheets.
 
 \begin{lemma}[Split--inert frame calculation]
 \label{lem:split-inert-frames}
@@ -1105,7 +1027,7 @@ The three marker polynomials factor as follows:
 A_3,\ q=5&t^2-2&\text{irreducible},\\
 B_3,\ q=7&t^2-2=(t-3)(t-4)&\text{split},\\
 H_3,\ q=11&t^2-t-1=(t-4)(t-8)&\text{split}.
-\end{array}                                               \tag{7.6}
+\end{array}                                               \tag{8.3}
 \]
 In the first row the two geometric roots form one Frobenius orbit over
 $\F_{25}$.  In each split row the nontrivial involution of the
@@ -1133,7 +1055,7 @@ satisfy
 \[
  H_+\cap H_-=K\simeq A_4,\qquad
  \langle H_+,H_-\rangle=\operatorname{PSL}_2(11),
-                                                               \tag{7.7}
+                                                               \tag{8.4}
 \]
 and are exchanged by a projectivity $J$ of nonsquare determinant.  The
 normalizer \(N_G(K)\) is a rational \(S_4\) whose determinant-square
@@ -1149,14 +1071,14 @@ choice leaves the unordered pair.
 \noindent\emph{Proof mode.}
 Lemma~\ref{lem:split-inert-frames} and the determinant-character
 deductions are conceptual.  The agreement of the specialization map
-(7.5) with the integral Coxeter frames, the matching stabilizers and
-intersections, and the generated subgroup in (7.7) are exhaustive
+(8.2) with the integral Coxeter frames, the matching stabilizers and
+intersections, and the generated subgroup in (8.4) are exhaustive
 exact finite checks.
 The classical subgroup names use the standard subgroup structure of
 $\operatorname{PGL}_2(11)$ \cite{Atlas1985,Giudici2007}.
 
 \begin{proof}
-By definition, the two roots in the \(A_3\) row of (7.5) have the same
+By definition, the two roots in the \(A_3\) row of (8.2) have the same
 matching value.  The two values in the \(B_3\) row are exchanged by
 \(x\mapsto-x\), and the two values in the \(H_3\) row are exchanged by
 \[
@@ -1174,7 +1096,7 @@ For $H_3$, exact projective closure gives
 Both stabilizers lie in the determinant-square subgroup, while the
 displayed transporter has nonsquare determinant.  The normalizer
 \(N_G(K)\) has order $24$, and its determinant-square kernel has order
-$12$.  The cited subgroup identifications give (7.7) and the
+$12$.  The cited subgroup identifications give (8.4) and the
 $S_4/A_4$ hinge, proving (b).
 
 The determinant-square subgroup has the two matching sheets as its
@@ -1191,6 +1113,136 @@ selected and remembers all three orbit rays modulo the constant socle.
 The first choice orients the second, but does not canonically identify
 it with any cubic quotient of the ten-dimensional factorization space.
 Appendix~\ref{app:tate-plane} makes that boundary precise.
+
+\section*{Conclusion}
+
+Restriction to a conic erases the pairing of marked points, but division
+by its equation retains a layered record of the factorization.  The
+four-endpoint switch produces an affine quotient configuration.  For
+the three rank-three systems its span has dimensions \(3,6,10\); the
+top harmonic part survives, as does the deepest radial line in even
+degree, while type \(H_3\) loses exactly \(Q\mathcal H_2\).
+
+The nonlinear record is sharper.  In the balanced \(B_3\) and \(H_3\)
+cases, quadratic products recover the unordered pair of sheets and a
+cubic signed moment orients them.  After a chosen \(A_4\)-refinement,
+six incidence profiles separate the six matching rows even though
+their linear image is only a plane.  The modular and arithmetic
+theorems identify, respectively, the constant direction lost on
+linearization and the rational choice that splits or fuses the marker
+algebra.
+
+The limits are equally explicit.  Balanced moments do not choose the
+\(A_4\)-refinement; nonsingleton profiles recover orbits rather than
+individual matchings; and the relative-cubic Tate plane does not
+canonically identify with the depth plane.  The theorem is uniform in
+its mechanism but its three Coxeter instances still use exact finite
+spanning and incidence calculations.  Extending those calculations to
+a representation-theoretic nonvanishing argument is the remaining
+step toward a uniform rank-three theorem.
+
+\appendix
+
+\section{Cubic structure of the profile plane}
+\label{app:profile-cubic}
+
+\begin{lemma}[Three-ray cubic forcing]
+\label{lem:three-ray-cubic}
+Let \(k\) have characteristic different from \(2\) and \(3\).  Suppose
+\(u_1,u_2\) form a basis of a two-dimensional \(k\)-space and
+\(n_1,n_2,n_3\in k^\times\) satisfy
+\[
+ n_1u_1+n_2u_2+n_3u_3=0.
+\]
+For the signed antipodal measure
+\[
+ \xi=\sum_{i=1}^3 n_i(\delta_{u_i}-\delta_{-u_i}),
+\]
+the moments of degrees one and two vanish, while the cubic moment is
+nonzero.
+\end{lemma}
+
+\begin{proof}
+The relation kills the first moment, and antipodality kills every even
+moment.  Write
+\[
+ u_3=-\frac{n_1}{n_3}u_1-\frac{n_2}{n_3}u_2.
+\]
+In \(\sum_i n_i u_i^{\odot3}\), the coefficient of
+\(u_1^{\odot2}\odot u_2\) is
+\[
+ -\frac{3n_1^2n_2}{n_3^2},
+\]
+which is nonzero.  The signed cubic is twice this tensor and is therefore
+nonzero as well.
+\end{proof}
+
+\begin{corollary}[The mass-zero cubic flag]
+\label{cor:mass-zero-cubic}
+In Lemma~\ref{lem:three-ray-cubic}, suppose also that
+\(n_1+n_2+n_3=0\).  Then its half-cubic factors as
+\[
+ \frac12M_3(\xi)=\sum_{i=1}^3n_i u_i^{\odot3}
+ =\frac{n_1n_2}{(n_1+n_2)^2}
+ (u_1-u_2)^{\odot2}\odot
+ \bigl((2n_1+n_2)u_1+(n_1+2n_2)u_2\bigr).               \tag{A.1}
+\]
+The two displayed lines are distinct.  Hence the cubic intrinsically
+defines a doubled line and a residual simple line; its Hessian recovers
+the doubled line.
+\end{corollary}
+
+\begin{proof}
+Since \(n_3=-(n_1+n_2)\), the weighted vector relation gives
+\[
+ u_3=\frac{n_1u_1+n_2u_2}{n_1+n_2}.
+\]
+Substitution and expansion give (A.1).  The residual factor would equal
+the doubled factor only if \(3(n_1+n_2)=0\), which is impossible under
+the hypotheses.  The Hessian of a binary cubic \(L^2R\), with \(L\) and
+\(R\) distinct, is a nonzero scalar multiple of \(L^2\).
+\end{proof}
+
+For the incidence-normalized profiles of Section~\ref{sec:six-profiles},
+put
+\[
+ \eta=\delta_{v_1}+4\delta_{v_2}+6\delta_{v_3}
+      -\delta_{-v_1}-4\delta_{-v_2}-6\delta_{-v_3}.
+\]
+Then
+\[
+ M_j(\eta)=
+ \bigl(1-(-1)^j\bigr)
+ \sum_{i=1}^3 n_i v_i^{\odot j},
+ \qquad (n_1,n_2,n_3)=(1,4,6).                           \tag{A.2}
+\]
+Equation (6.11) kills the first moment, and antipodality kills every even
+moment.  The first two profiles are independent over \(\F_{11}\), since
+the determinant of their first two coordinates is \(-18\ne0\).
+Lemma~\ref{lem:three-ray-cubic} therefore forces the cubic to be nonzero.
+In the frozen normalization, its first coordinate is
+\[
+2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0
+\quad\text{in }\F_{11}.                                  \tag{A.3}
+\]
+Thus the six-row quotient preserves the cubic-first signed moment even
+though its linear image is only a plane.
+
+\begin{remark}[The \(H_3\) cubic flag]
+\label{rem:cubic-target-flag}
+Here \(1+4+6=0\) in \(\F_{11}\), so
+Corollary~\ref{cor:mass-zero-cubic} forces the double-line factorization.
+In the basis \(e_1=v_2,e_2=v_3\) of the profile plane, the projective
+cubic is
+\[
+ f(x,y)=x^3+7x^2y+5xy^2+9y^3=(x-y)^2(x-2y),
+\]
+with Hessian \(7x^2+8xy+7y^2=7(x-y)^2\).  Hence the cubic
+intrinsically distinguishes a doubled line and a residual simple line.
+This flag is internal to the decorated profile plane: it supplies no
+canonical map from the full relative-cubic space and no descended
+\(G^+\)-action.
+\end{remark}
 
 \section{Verification architecture}
 \label{sec:verification}
@@ -1300,8 +1352,6 @@ a canonical map from the relative-cubic Tate plane to the depth plane,
 or any passage, holonomy, theta, Fourier, quantum, or Mathieu
 identification.
 
-\appendix
-
 \section{The relative-cubic Tate plane}
 \label{app:tate-plane}
 
@@ -1324,19 +1374,19 @@ dimension three.  The canonical projection and group norm fit into
  R\xrightarrow{\ \pi\ }M_G\xrightarrow{\ N\ }R,
 \qquad
 \operatorname{rank}\pi=2,\quad\operatorname{rank}N=1,
-                                                               \tag{A.1}
+                                                               \tag{C.1}
 \]
 with
 \[
  \operatorname{im}\pi=\ker N,\qquad
- \operatorname{im}N=\ker\pi=\langle[1:3:9]\rangle.             \tag{A.2}
+ \operatorname{im}N=\ker\pi=\langle[1:3:9]\rangle.             \tag{C.2}
 \]
 Contraction by the covector whose square is the unique rank-one member
 of the invariant symmetric-form pencil gives a second construction of
 the same quotient.  In the frozen relative basis its matrix is
 \[
  \begin{pmatrix}8&1&0\\0&8&1\end{pmatrix},
-                                                               \tag{A.3}
+                                                               \tag{C.3}
 \]
 and its kernel is again $\langle[1:3:9]\rangle$.
 \end{proposition}
@@ -1350,15 +1400,15 @@ flattening census are exact finite linear algebra in the
 
 \begin{proof}
 Exact invariant and commutator calculations give
-$\dim R=\dim M_G=3$, the two ranks in (A.1), and $N\pi=0$.
+$\dim R=\dim M_G=3$, the two ranks in (C.1), and $N\pi=0$.
 Thus $\operatorname{im}\pi\subseteq\ker N$; both spaces have dimension
 two, so they are equal.  The computed image of $N$ is the displayed
-kernel of $\pi$, proving (A.2).
+kernel of $\pi$, proving (C.2).
 
 The invariant symmetric-form pencil on $W$ has a unique rank-one member
 $\ell^2$, where $\ell$ transforms by $\chi$.  Contracting a
 $\chi$-twisted cubic by $\ell$ cancels the two characters and lands in
-the invariant quadratic pencil.  Exact contraction gives (A.3), whose
+the invariant quadratic pencil.  Exact contraction gives (C.3), whose
 kernel proves the second assertion.
 \end{proof}
 
@@ -1384,42 +1434,6 @@ the depth socle instead of identifying them.  The doubled-line and
 residual-line flag of Remark~\ref{rem:cubic-target-flag} is internal to
 the depth plane and supplies no missing map.
 \end{remark}
-
-\section*{Conclusion}
-
-Restriction to a conic erases the pairing of marked points, but division
-by its equation does not erase every trace of the factorization.  The
-four-endpoint switch turns the competing secant products into an affine
-quotient configuration.  For the rank-three systems this configuration
-has dimensions $3,6,10$: its top harmonic part always survives, and in
-the even case so does the deepest radial line.  In type $H_3$, the
-omitted information is exactly the middle Fischer layer
-$Q\mathcal H_2$.
-
-The quotient remembers more than its linear span.  In the balanced
-$B_3$ and $H_3$ cases, quadratic products recover the unordered pair of
-sheets, while the first signed tensor that survives is cubic and changes
-sign under the outer involution.  After an $A_4$ refinement has been
-chosen, six incidence profiles still separate all six matching rows,
-although their linear image is only a plane.  Over $\F_{11}$ the same
-incidence-normalized weights $1,4,6$ describe both the rational orbit
-sizes and the loss of the constant socle in modular depth; the three
-projective rays alone do not determine those weights.
-
-These recovery statements have precise limits.  Balanced moments do
-not order the sheets or choose the $A_4$ refinement.  The nonsingleton
-profiles recover orbits, not individual matchings.  The relative-cubic
-Tate plane and the depth plane are each canonical relative to their
-stated inputs, but the natural labelled and transfer maps do not
-identify them.  Arithmetic splitting
-chooses a rational sheet in the three frozen small-field models; it
-does not produce an all-prime reciprocity law.
-
-Thus the conic ideal retains a layered memory: harmonic and radial
-linear data, an unordered balanced-sheet decomposition, cubic
-orientation, and---after a stated refinement---the exact matching-table
-label.  Pointed passage maps and global holonomy require additional
-structure, so they lie beyond the reconstruction theorem proved here.
 
 \begin{thebibliography}{99}
 
@@ -1451,6 +1465,12 @@ $\mathrm{PSL}(2,q)$,
 \bibitem{RuddRigidity2026}
 T.~Rudd,
 \newblock \emph{Deep-hole rigidity of the Clebsch hexagon code},
+\newblock working paper, 2026.
+
+\bibitem{RuddAMELU2026}
+T.~Rudd,
+\newblock \emph{Local-unitary rigidity and transversal Clifford groups
+for MDS--CSS AME states},
 \newblock working paper, 2026.
 
 \bibitem{RuddPrescribedHoles2026}

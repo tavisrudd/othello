@@ -1,8 +1,9 @@
 # Clebsch factorization-memory paper
 
 Working root for the standalone manuscript titled
-*Secant-factorization memory modulo a conic: the `A_3`, `B_3`, and
-`H_3` configurations*.
+*Conic-ideal quotients for the `A_3`, `B_3`, and `H_3` secant
+configurations: quadratic sheet recovery and cubic orientation in types
+`B_3` and `H_3`*.
 
 - Owner: C577 in the `clebsch` lane.
 - Inputs: the exact current-paper sections and supporting artifacts assigned by

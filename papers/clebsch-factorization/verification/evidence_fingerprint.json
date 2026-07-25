@@ -8,7 +8,7 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "9634c4e6de474232688973a9a21ef6d6f00b2aa81ca1cd6d37384aece9d36437",
+  "trust_manifest_sha256": "417e9490d216bcd098178e4f6589d740ab445c828c78c917747a1c39668ee258",
   "runner_sha256": "787499750c1190d60080cc8f1fe972168929bc5391fabb8dbb6c6ab8beaa84de",
   "evidence": {
     "matching-module": {

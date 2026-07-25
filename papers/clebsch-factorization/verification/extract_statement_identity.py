@@ -26,11 +26,11 @@ EXPECTED_LABELS = (
     "thm:six-profile-reconstruction",
     "cor:decorated-sheet-classifier",
     "cor:profile-ray-weights",
-    "lem:three-ray-cubic",
-    "cor:mass-zero-cubic",
     "prop:modular-depth-quotient",
     "lem:split-inert-frames",
     "thm:rank-three-arithmetic-gluing",
+    "lem:three-ray-cubic",
+    "cor:mass-zero-cubic",
     "prop:relative-cubic-tate-plane",
 )
 
