@@ -33,8 +33,9 @@
 \newcommand{\rhoC}{\rho_{\cC}}
 \newcommand{\tmin}{t_2(2,q)}
 
-\title{Arcs complete outside a prescribed conic\\
-\large Exact defect, equality rigidity, and $\rho_{\mathcal C}(16)=9$}
+\title{Exact defect and matching rigidity for arcs\\
+complete outside a prescribed conic\\
+\large Lower bounds, stability, and $\rho_{\mathcal C}(16)=9$}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -42,29 +43,27 @@
 \maketitle
 
 \begin{abstract}
-Let $\cC$ be a nonsingular conic in $\PG(2,q)$.  We study arcs
+Let $\cH$ be a prescribed set disjoint from a projective arc $A$.
+Splitting the classical first two secant-index equations between $\cH$ and
+its complement gives an exact identity with a nonnegative local remainder.
+At zero defect, the concurrence points of disjoint secants form a matching
+design.  The remainder measures the failure of this equality pattern and
+gives a quantitative stability bound.
+
+We apply the identity when $\cH$ is a nonsingular conic $\cC$ in
+$\PG(2,q)$.  Let $\rhoC(q)$ be the minimum size of an arc
 $A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
-$A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Splitting the
-classical first two secant-index equations over an arbitrary prescribed
-hole and its complement gives an exact defect identity whose remainder is
-a sum of nonnegative local terms.  For a conic this yields an exact integer
-lower bound \(L_2(q)\), and in particular
+$A\cup\cC$.  The identity gives an integer lower bound \(L_2(q)\), hence
 \[
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-Vanishing defect turns the concurrence points of disjoint secants into a
-matching design, giving equality rigidity and quantitative stability; for
-ten points equality occurs only for zero-defect \(\cC\)-complete ten-arcs
-in \(\PG(2,8)\), and the concurrence
-design is the regular-hyperoval design.  Projective averaging transfers
-ordinary complete arcs to upper bounds in the relative problem.  Explicit
-witnesses attain \(L_2(q)\) for \(q=5,8,9,11\).  Finally, a kernel-checked
-exhaustive covering
-certificate excludes every eight-arc over \(\F_{16}\): its ordinary
-uncovered locus cannot lie on a quadratic avoiding the arc.  A
-certificate-checked nine-point witness therefore gives
-\(\rhoC(16)=9\).
+The zero-defect ten-point case occurs only in \(\PG(2,8)\), where the
+concurrence design is the regular-hyperoval design.  Projective averaging
+transfers upper bounds from ordinary complete arcs.  Explicit witnesses
+attain \(L_2(q)\) for \(q=5,8,9,11\).  A kernel-checked exhaustive
+certificate rules out eight-point examples over \(\F_{16}\), and a checked
+nine-point witness gives \(\rhoC(16)=9\).
 \end{abstract}
 
 \section{Introduction}
@@ -108,7 +107,9 @@ three collinear points, so \(x\) lies on a secant of \(A\).  Thus \(A\) is
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
-The following statement collects the main conclusions.  For a point \(x\)
+The local identity below drives the argument; the conic problem is its main
+application.  The following statement collects the identity and its
+numerical consequences.  For a point \(x\)
 outside a \(k\)-arc \(A\), let \(r(x)\) be the number of secants of \(A\)
 through \(x\), and put \(m=\lfloor k/2\rfloor\) and
 \(N=\binom{k}{2}\).  If a set \(\cH\) disjoint from \(A\) is allowed to
@@ -143,7 +144,8 @@ then every nonsingular conic satisfies
 Moreover, \(\rhoC(16)=9\).
 \end{theorem}
 
-The identity is the conceptual step.  Its summands record exactly where a
+The identity carries more information than the resulting scalar bound.
+Its summands record exactly where a
 secant-index distribution falls short of the extremal pattern.  Their
 vanishing produces the matching design used for equality rigidity, while
 their total gives stability.  The last assertion of
@@ -188,10 +190,11 @@ incidence threshold, the complete uncovered locus determines its parent
 arc and automorphism group.
 
 The secant-index equations and the Lunelli--Sce \(\sqrt{2q}\) scale are
-classical.  The contributions are the prescribed-hole remainder with its
-equality and stability consequences, its conic specialization, the
-uncovered-locus evaluation obstruction, and the certified relative-conic
-conclusions.
+classical.  The new ingredient is the exact prescribed-hole remainder.  It
+yields the lower bound, identifies equality with a geometrically realized
+matching design, and measures stability.  We then specialize it to a conic,
+develop the uncovered-locus evaluation obstruction, certify the exact value
+at \(q=16\), and prove the inverse reconstruction theorem.
 
 \section{The classical secant equations}
 \label{sec:classical}
