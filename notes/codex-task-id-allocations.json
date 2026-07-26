@@ -1520,8 +1520,17 @@
       "last": 665,
       "purpose": "Classify balanced projective matching orbits and extract the C661 cocycle, cubic-inevitability, and radial-trace consequences in EV order",
       "sequence": 169
+    },
+    {
+      "count": 1,
+      "first": 666,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 666,
+      "purpose": "q16 Redei quotient and K8 chord-resultant exclusion",
+      "sequence": 170
     }
   ],
-  "next_id": 666,
+  "next_id": 667,
   "schema": "codex-task-id-allocations-v1"
 }
