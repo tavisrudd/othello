@@ -312,6 +312,26 @@ private def uncoveredToSelectedAtPrefix (first second : Fin 9) : List M :=
   (frameCandidatesAtPrefix uncoveredPoints selectedPoints first second).filter fun matrix =>
     mapsRaysTo matrix uncoveredPoints selectedPoints
 
+/-- Number of selected-orbit stabilizers in one first-two-image frame block. -/
+def selectedStabilizerPrefixCount (first second : Fin 9) : Nat :=
+  (selectedStabilizersAtPrefix first second).length
+
+/-- Number of uncovered-orbit stabilizers in one first-two-image frame block. -/
+def uncoveredStabilizerPrefixCount (first second : Fin 9) : Nat :=
+  (uncoveredStabilizersAtPrefix first second).length
+
+/-- Number of ordered-pair stabilizers in one first-two-image frame block. -/
+def pairStabilizerPrefixCount (first second : Fin 9) : Nat :=
+  (pairStabilizersAtPrefix first second).length
+
+/-- Number of selected-to-uncovered transporters in one first-two-image frame block. -/
+def selectedToUncoveredPrefixCount (first second : Fin 9) : Nat :=
+  (selectedToUncoveredAtPrefix first second).length
+
+/-- Number of uncovered-to-selected transporters in one first-two-image frame block. -/
+def uncoveredToSelectedPrefixCount (first second : Fin 9) : Nat :=
+  (uncoveredToSelectedAtPrefix first second).length
+
 private def prefixCandidatesNonsingular
     (source target : List V) (first second : Fin 9) : Bool :=
   (frameCandidatesAtPrefix source target first second).all fun matrix =>
@@ -328,6 +348,8 @@ attribute [reducible] point selectedPoints uncoveredPoints finiteNine finiteThre
   selectedStabilizersAt uncoveredStabilizersAt pairStabilizersAt selectedToUncoveredAt
   uncoveredToSelectedAt selectedStabilizersAtPrefix uncoveredStabilizersAtPrefix
   pairStabilizersAtPrefix selectedToUncoveredAtPrefix uncoveredToSelectedAtPrefix
+  selectedStabilizerPrefixCount uncoveredStabilizerPrefixCount pairStabilizerPrefixCount
+  selectedToUncoveredPrefixCount uncoveredToSelectedPrefixCount
   prefixCandidatesNonsingular
 
 /-- The ordered target-frame domain has exactly 3024 elements. -/
@@ -362,6 +384,16 @@ private def belongsToDisplayedHeisenbergSubgroup (matrix : M) : Bool :=
   displayedHeisenbergMatrices.any fun heisenbergMatrix =>
     matrixScalarEquivalent matrix heisenbergMatrix
 
+private abbrev prefixCountFacts (first second : Fin 9) : Prop :=
+  selectedStabilizerPrefixCount first second =
+      expectedMultiplicity second (selectedExpectedSecond first) ∧
+  uncoveredStabilizerPrefixCount first second =
+      expectedMultiplicity second (uncoveredExpectedSecond first) ∧
+  pairStabilizerPrefixCount first second =
+      expectedMultiplicity second (selectedExpectedSecond first) ∧
+  selectedToUncoveredPrefixCount first second = 0 ∧
+  uncoveredToSelectedPrefixCount first second = 0
+
 /--
 The complete transporter count for one ordered prefix of the target frame.  Fixing the first two
 images leaves 42 ordered target frames.  The two displayed expected-second tables specify the
@@ -370,24 +402,77 @@ an orbit interchange.  It also checks nonsingularity for every candidate matrix 
 source-target transporter enumerations.
 -/
 def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
+  decide (prefixCountFacts first second) &&
   prefixCandidatesNonsingular selectedPoints selectedPoints first second &&
   prefixCandidatesNonsingular uncoveredPoints uncoveredPoints first second &&
   prefixCandidatesNonsingular selectedPoints uncoveredPoints first second &&
   prefixCandidatesNonsingular uncoveredPoints selectedPoints first second &&
-  (selectedStabilizersAtPrefix first second).length ==
-      expectedMultiplicity second (selectedExpectedSecond first) &&
-  (uncoveredStabilizersAtPrefix first second).length ==
-      expectedMultiplicity second (uncoveredExpectedSecond first) &&
-  (pairStabilizersAtPrefix first second).length ==
-      expectedMultiplicity second (selectedExpectedSecond first) &&
   (selectedStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
   (uncoveredStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
-  (pairStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
-  selectedToUncoveredAtPrefix first second == [] &&
-  uncoveredToSelectedAtPrefix first second == []
+  (pairStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup
 
 attribute [reducible] selectedExpectedSecond uncoveredExpectedSecond expectedMultiplicity
   belongsToDisplayedHeisenbergSubgroup stabilizerPrefixProfile
+
+/-- Sum of the selected-orbit stabilizer counts over the 81 frame-prefix blocks. -/
+def frameNormalizedSelectedStabilizerCount : Nat :=
+  (finiteNine.map fun first =>
+    (finiteNine.map fun second => selectedStabilizerPrefixCount first second).sum).sum
+
+/-- Sum of the uncovered-orbit stabilizer counts over the 81 frame-prefix blocks. -/
+def frameNormalizedUncoveredStabilizerCount : Nat :=
+  (finiteNine.map fun first =>
+    (finiteNine.map fun second => uncoveredStabilizerPrefixCount first second).sum).sum
+
+/-- Sum of the ordered-pair stabilizer counts over the 81 frame-prefix blocks. -/
+def frameNormalizedPairStabilizerCount : Nat :=
+  (finiteNine.map fun first =>
+    (finiteNine.map fun second => pairStabilizerPrefixCount first second).sum).sum
+
+/-- Sum of the selected-to-uncovered transporter counts over the 81 frame-prefix blocks. -/
+def frameNormalizedSelectedToUncoveredCount : Nat :=
+  (finiteNine.map fun first =>
+    (finiteNine.map fun second => selectedToUncoveredPrefixCount first second).sum).sum
+
+/-- Sum of the uncovered-to-selected transporter counts over the 81 frame-prefix blocks. -/
+def frameNormalizedUncoveredToSelectedCount : Nat :=
+  (finiteNine.map fun first =>
+    (finiteNine.map fun second => uncoveredToSelectedPrefixCount first second).sum).sum
+
+private theorem prefix_counts_of_profile
+    (first second : Fin 9) (profile : stabilizerPrefixProfile first second = true) :
+    selectedStabilizerPrefixCount first second =
+        expectedMultiplicity second (selectedExpectedSecond first) ∧
+    uncoveredStabilizerPrefixCount first second =
+        expectedMultiplicity second (uncoveredExpectedSecond first) ∧
+    pairStabilizerPrefixCount first second =
+        expectedMultiplicity second (selectedExpectedSecond first) ∧
+    selectedToUncoveredPrefixCount first second = 0 ∧
+    uncoveredToSelectedPrefixCount first second = 0 := by
+  simp only [stabilizerPrefixProfile, Bool.and_eq_true] at profile
+  exact of_decide_eq_true profile.1.1.1.1.1.1.1
+
+/--
+If all 81 frame-prefix profiles hold, the selected orbit, uncovered orbit, and ordered pair each
+have exactly nine frame-normalized stabilizers, while neither orbit has a transporter to the
+other.
+-/
+theorem exact_frame_normalized_stabilizer_counts_of_profiles
+    (profiles : ∀ first second : Fin 9, stabilizerPrefixProfile first second = true) :
+    frameNormalizedSelectedStabilizerCount = 9 ∧
+    frameNormalizedUncoveredStabilizerCount = 9 ∧
+    frameNormalizedPairStabilizerCount = 9 ∧
+    frameNormalizedSelectedToUncoveredCount = 0 ∧
+    frameNormalizedUncoveredToSelectedCount = 0 := by
+  unfold frameNormalizedSelectedStabilizerCount frameNormalizedUncoveredStabilizerCount
+    frameNormalizedPairStabilizerCount frameNormalizedSelectedToUncoveredCount
+    frameNormalizedUncoveredToSelectedCount
+  simp_rw [(prefix_counts_of_profile _ _ (profiles _ _)).1]
+  simp_rw [(prefix_counts_of_profile _ _ (profiles _ _)).2.1]
+  simp_rw [(prefix_counts_of_profile _ _ (profiles _ _)).2.2.1]
+  simp_rw [(prefix_counts_of_profile _ _ (profiles _ _)).2.2.2.1]
+  simp_rw [(prefix_counts_of_profile _ _ (profiles _ _)).2.2.2.2]
+  decide
 
 end NinePointHeisenbergStabilizer
 end RelativeConicArcs
