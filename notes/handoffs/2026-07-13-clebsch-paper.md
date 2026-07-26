@@ -76,13 +76,21 @@ nineteen-row trust surface, and clean sixteen-check release replay are green
 at `fd2dee6e`. C611 owns the broader conceptual mechanism and
 v2/other-paper disposition.
 
+C662 is queued as the human-mathematics elevation of that frontier. It asks
+for a uniform spectral, association-scheme, incidence, or polynomial theorem
+that replaces the \(k=7,8\) terminal searches or yields an equally strong
+reconstruction theorem. Computation may suggest statements but cannot
+discharge the task; certificates and exhaustive replay are explicitly
+non-acceptance routes. Paper I absorbs the result only when the theorem-level
+gain outweighs the added prose.
+
 C182 follows C610. Its blocker is external publication packaging. The
-previously cited GitHub artifact URL is not publicly reachable, and this
+paper repository and immutable public deposit do not yet exist, and this
 workspace has no GitHub or Zenodo publication credential. The manuscript
-now gives the exact Git-bundle replay command, stable checker and Lean-gate
-hashes, and the two principal results with no Lean coverage; it must not
-ship until that bundle has an immutable DOI or Software Heritage identifier
-and the identifier is added to the paper.
+names the shared `tavisrudd/finitegeom` formal repository, pins its commit,
+and gives the exact replay interface; it must not ship until the paper
+repository has an immutable DOI or Software Heritage identifier and that
+identifier is added to the paper.
 
 C577 has begun under the permitted external-wait exception. Paper II now has
 a standalone headline factorization theorem, marked-conic notation, the
@@ -210,11 +218,14 @@ The active order is strict:
 1. **C182:** make the immutable public deposit and insert its identifier.
 2. **C611:** pursue the broader exterior-set mechanism for v2 or its actual
    owning paper without holding v1.
-3. **C577:** build and referee-test standalone Paper II after Paper I is
+3. **C662:** prove a uniform human bound or reconstruction theorem from the
+   exterior-set/passant frontier; do not accept computational evidence as
+   the crown or bloat Paper I for a merely local improvement.
+4. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C661:** test a uniform or equivalent-strength Paper II upgrade after
+5. **C661:** test a uniform or equivalent-strength Paper II upgrade after
    C577 without holding the current release.
-5. **C579:** test Paper III after Paper II; require one principal theorem or
+6. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled
