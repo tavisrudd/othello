@@ -4,7 +4,8 @@ import RelativeConicArcs.ChowRestrictionDescent
 # Polynomial restriction and Frobenius-descent verification boundary
 
 This import-only module checks homogeneous linear substitution, restriction of a finite product of
-linear factors, representative rescaling, the proportional paired-factor identity and its
+linear factors, the coefficient formula and affine-node factorization for a restricted
+plane-linear equation, representative rescaling, the proportional paired-factor identity and its
 square-scalar correction, automatic correction over perfect exponent-characteristic-two
 coefficient rings, and descent of extended linewise roots through a jointly detecting restriction
 family.
@@ -18,6 +19,8 @@ of projective lines and a particular degree bound.
 #print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero
 #print axioms RelativeConicArcs.homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode
 #print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+#print axioms RelativeConicArcs.planeLineRestriction_homogeneousLinearPolynomial
+#print axioms RelativeConicArcs.exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
 #print axioms RelativeConicArcs.planeLineRestriction_X
 #print axioms RelativeConicArcs.homogeneousLinearPolynomial_scale
 #print axioms RelativeConicArcs.dualLinearFactorProduct_rescale

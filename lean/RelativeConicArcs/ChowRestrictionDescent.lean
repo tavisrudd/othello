@@ -46,6 +46,13 @@ noncomputable def planeLineRestriction (lineCoordinates : Fin 3 → Fin 2 → K)
   MvPolynomial.eval₂Hom MvPolynomial.C
     (fun i => homogeneousLinearPolynomial (lineCoordinates i))
 
+/-- Coefficients of the binary linear form obtained by restricting a plane-linear covector along
+a homogeneous parametrization of a projective line. -/
+noncomputable def planeLineRestrictedCoefficients
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) :
+    Fin 2 → K :=
+  fun j => ∑ i, covector i * lineCoordinates i j
+
 /-- Restriction sends each plane coordinate to its prescribed homogeneous linear form. -/
 @[simp]
 theorem planeLineRestriction_X
@@ -53,6 +60,17 @@ theorem planeLineRestriction_X
     planeLineRestriction lineCoordinates (MvPolynomial.X i) =
       homogeneousLinearPolynomial (lineCoordinates i) := by
   simp [planeLineRestriction]
+
+/-- Restricting a plane-linear covector gives the binary linear form whose coefficients are the
+matrix product of the covector with the line parametrization. -/
+theorem planeLineRestriction_homogeneousLinearPolynomial
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) :
+    planeLineRestriction lineCoordinates (homogeneousLinearPolynomial covector) =
+      homogeneousLinearPolynomial
+        (planeLineRestrictedCoefficients lineCoordinates covector) := by
+  simp [planeLineRestriction, homogeneousLinearPolynomial,
+    planeLineRestrictedCoefficients, Finset.sum_mul, Finset.sum_comm,
+    mul_add, mul_assoc]
 
 omit [DecidableEq σ] in
 /-- Scaling a coefficient vector scales its homogeneous linear polynomial by the corresponding
@@ -205,6 +223,24 @@ theorem exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_s
   refine ⟨c, hc, ?_⟩
   rw [hproportional,
     homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode]
+
+/-- A nonzero plane-linear equation restricted to a parametrized line is a nonzero scalar multiple
+of the homogenized factor at any affine parameter where the restricted equation vanishes. -/
+theorem exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) (t : K)
+    (hne : planeLineRestrictedCoefficients lineCoordinates covector ≠ 0)
+    (hvanish :
+      planeLineRestrictedCoefficients lineCoordinates covector 0 * t +
+        planeLineRestrictedCoefficients lineCoordinates covector 1 = 0) :
+    ∃ c : K, c ≠ 0 ∧
+      planeLineRestriction lineCoordinates
+          (homogeneousLinearPolynomial covector) =
+        MvPolynomial.C c *
+          Polynomial.homogenize (Polynomial.X - Polynomial.C t) 1 := by
+  rw [planeLineRestriction_homogeneousLinearPolynomial]
+  exact
+    exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+      (planeLineRestrictedCoefficients lineCoordinates covector) t hne hvanish
 
 end BinaryLinearFactors
 

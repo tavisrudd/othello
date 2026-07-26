@@ -131,6 +131,13 @@ ten public terminals.
   `exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C`
   proves that every nonzero binary linear form vanishing at `[t:1]` is its
   nonzero scalar multiple;
+- `planeLineRestrictedCoefficients` computes the binary coefficient vector
+  obtained by restricting a plane-linear covector to a parametrized line,
+  `planeLineRestriction_homogeneousLinearPolynomial` identifies the
+  restricted polynomial with that binary form, and
+  `exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C`
+  turns its concrete nonvanishing and affine-node incidence into the required
+  nonzero scalar factorization;
 - `homogeneousLinearPolynomial_scale` and its restriction corollary prove the
   exact scalar change caused by rescaling a linear-factor representative;
 - `dualLinearFactorProduct` constructs the finite product of dual linear
@@ -164,7 +171,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-one public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-three public
 terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
@@ -250,18 +257,14 @@ Lean does not yet check:
 - the passage from projective arc points to the dual-factor product (its
   square status is now representative-independent, although the product
   itself changes by the explicit aggregate scalar);
-- the incidence argument which turns the secant pairing into the determinant
-  hypotheses for the restricted binary factors;
-- the local binary-form lemma that compatibility at the preceding nodes makes
-  each new residual divisible by the restricted product of their linear
-  factors; distinct-affine-node factorization, its degree-bounded
-  homogenization to binary forms, the quotient-lift correction, and finite
-  induction are formalized.  What remains is identifying the restricted old
-  line equations are nonzero and vanish at their corresponding intersections.
-  Lean then identifies them factorwise with the homogenized node factors and
-  absorbs all resulting nonzero scalars at the product level.  Choosing a
-  chart which avoids a point at infinity and deriving the affine-degree
-  hypothesis from the concrete homogeneous sections remain;
+- the concrete incidence and nonvanishing argument for the binary coefficient
+  vector of each restricted old line equation;
+- the chart choice which places all required intersections in the affine
+  patch and makes their parameters distinct.  Once these facts are supplied,
+  Lean identifies each restricted equation with its homogenized node factor,
+  absorbs all nonzero scalars, derives the affine degree bound from
+  homogeneity, proves residual product divisibility, constructs quotient-lift
+  corrections, and iterates them over the finite line family;
 - the construction of a linear coordinate change for each concrete projective
   line and the facts that the resulting equations have degree one and are
   pairwise relatively prime;
@@ -301,7 +304,7 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its twenty-one terminals reports no axioms beyond
+- The source-local audit of its twenty-three terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
@@ -312,7 +315,7 @@ standing for them is introduced.
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the twenty-one-terminal polynomial gate
+  `--no-build` confirmation, together with the twenty-three-terminal polynomial gate
   and twenty-seven-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
   the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
