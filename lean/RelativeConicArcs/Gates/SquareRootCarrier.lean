@@ -11,6 +11,7 @@ claim a formal construction of the dual Chow product or its global square-root e
 #print axioms RelativeConicArcs.carrierConductor_eq_zero_of_linearJet
 #print axioms RelativeConicArcs.carrierConductor_eq_of_rescale
 #print axioms RelativeConicArcs.carrierConductor_change_of_trivialization
+#print axioms RelativeConicArcs.carrierConductor_change_of_trivialization_eq_zero_iff
 #print axioms RelativeConicArcs.carrierConductor_sq
 #print axioms RelativeConicArcs.carrierConductor_sq_eq_hasse
 #print axioms RelativeConicArcs.localConductorCoordinateCount

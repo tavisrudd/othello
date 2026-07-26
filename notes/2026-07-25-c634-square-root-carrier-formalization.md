@@ -80,9 +80,14 @@ first coordinate of this Frobenius-killed obstruction.
   rescaling leaves the coordinate unchanged;
 - `carrierConductor_change_of_trivialization`: a common local change of
   trivialization scales the coordinate by its common scalar;
+- `carrierConductor_change_of_trivialization_eq_zero_iff`: a change with
+  nonzero common scalar preserves the coordinate's zero or nonzero status;
 - `carrierConductor_sq` and `carrierConductor_sq_eq_hasse`: in characteristic
   two, the conductor square is the relation-weighted sum of the squared
   derivatives, hence of prescribed second Hasse coefficients;
+- `localConductorCoordinateCount`: after the common-value equations at an
+  ordinary `s`-fold point, exactly `choose (s-1) 2` conductor coordinates
+  remain;
 - `card_sub_le_of_sdiff_arc` and `card_le_card_add_of_sdiff_arc`: an arc bound
   on a finite carrier set gives the exact `|X|-k` deletion bound; and
 - `card_le_card_mul_of_biUnion_cover`: the finite fiber-cover inequality which
@@ -90,7 +95,7 @@ first coordinate of this Frobenius-killed obstruction.
 
 The dedicated gate
 `RelativeConicArcs.Gates.SquareRootCarrier` imports the module and audits all
-eight public terminals.
+ten public terminals.
 
 ## Formal boundary
 
@@ -114,8 +119,16 @@ for them is introduced.
 
 - `lean/scripts/guarded-lean RelativeConicArcs/SquareRootCarrier.lean`:
   **PASS**, warning-free.
+- `RelativeConicArcs.SquareRootCarrier` through the guarded build queue:
+  **PASS**, `5.81s`, maximum resident set size `1,394,312 KiB`.
+- `lean/scripts/guarded-lean
+  RelativeConicArcs/Gates/SquareRootCarrier.lean`: **PASS** before the final
+  zero-invariance upgrade, with all then-current nine
+  terminals reporting exactly `propext`, `Classical.choice`, and `Quot.sound`.
 - Whole-module prose and naming audit: **PASS**.  The source and gate contain
   no workflow identifiers, internal-record references, status language, or
   unqualified formalization claims.
-- Dedicated build and gate axiom audit: pending release of the shared Lean
-  build-owner lock held by the concurrent relconic aggregate build.
+- Re-elaboration of the ten-terminal gate, exact-target gate build, and
+  `--no-build` confirmation: pending release of
+  the shared Lean build-owner lock.  The first aggregate attempt correctly
+  failed closed because the new gate itself had not yet been built.

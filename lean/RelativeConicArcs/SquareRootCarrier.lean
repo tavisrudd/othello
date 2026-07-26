@@ -86,6 +86,18 @@ theorem carrierConductor_change_of_trivialization
       simp
     _ = a * ∑ i, c i * d i := by simp [hrel]
 
+/-- A change of local trivialization with nonzero common scalar preserves whether the conductor
+coordinate vanishes. -/
+theorem carrierConductor_change_of_trivialization_eq_zero_iff
+    [NoZeroDivisors K]
+    (v : Fin 3 → V) (c d : Fin 3 → K)
+    (hrel : ∑ i, c i • v i = 0)
+    (φ : V →ₗ[K] K) (a z : K) (ha : a ≠ 0) :
+    carrierConductor c (fun i => a * d i + z * φ (v i)) = 0 ↔
+      carrierConductor c d = 0 := by
+  rw [carrierConductor_change_of_trivialization v c d hrel φ a z]
+  simp [ha]
+
 /-- In characteristic two, the square of the first conductor coordinate is the weighted sum of
 the squares of its three derivative values. -/
 theorem carrierConductor_sq
