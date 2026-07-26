@@ -1187,8 +1187,17 @@
       "last": 619,
       "purpose": "nonabelian automorphism extension class followed by GRS splitting audit",
       "sequence": 132
+    },
+    {
+      "count": 1,
+      "first": 620,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 620,
+      "purpose": "classify split-free points on higher Lucas modular carriers",
+      "sequence": 133
     }
   ],
-  "next_id": 620,
+  "next_id": 621,
   "schema": "codex-task-id-allocations-v1"
 }
