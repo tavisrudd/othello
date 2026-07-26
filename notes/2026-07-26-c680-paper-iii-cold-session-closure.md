@@ -388,6 +388,32 @@ two-branch \(\mathbf Q\)-model.  The manuscript states explicitly that this
 model explains the descent geometry but does not replace the independent
 local comparison with Hitchin's incidence scheme.
 
+The deeper continuation closes the three questions explicitly.
+
+1. Stein factorization of the normal incidence scheme gives its finite
+   normalization \(\mathcal N\).  For the fixed parent \(I_t\), polarization
+   identifies \(V_t=U_t^\perp\), so the chart has a tautological
+   fixed-parent section.  The conjugate sections descend to
+   \(Z^\nu\to\mathcal I\to\mathcal N\), identifying \(\Spec E\) with the
+   golden incidence fibre on the local finite-etale neighborhood.
+2. The completed local ring is
+   \[
+   \widehat{\mathcal O}_{Z,[xyz]}
+   =
+   \frac{\mathbf Q[[a_1,a_2,a_3,b_1,b_2,b_3]]}
+   {(a_i b_j-a_j b_i,\ b_i b_j-5a_i a_j)}.
+   \]
+   Its normalization is \(E[[x_1,x_2,x_3]]\), its conductor is the maximal
+   ideal, and the normalization quotient is \(E/\mathbf Q\).  Thus \(5\)
+   is intrinsically the splitting class of the completed two-branch model.
+3. Two-transitivity on the five plane triples makes the commutant on the
+   sum-zero module scalar.  Hence the abstract arithmetic-to-Petersen
+   comparison is uniquely projective; it is
+   \(y\mapsto(y_i+y_j)\), with inverse
+   \(y_i=\frac13\sum_{j\ne i}a_{ij}\).  Preserving \(\sigma_3\) forces the
+   scalar to be one over \(E\).  This is a canonical abstract comparison,
+   not an ambient harmonic-space map.
+
 The release artifact is now paper-local.  The arithmetic certificate was
 reduced to the displayed golden configurations, all twenty three-point
 determinants, the exchanger, its mod-\(11\) reduction, and the nonsquare
@@ -432,8 +458,8 @@ those remain human arguments from the cited primary source.
 
 The ordinary aggregate and a copy of the paper directory under a fresh
 temporary root both pass all thirteen checks, including the warning-free
-nine-page build.  Visual inspection of the title and first five pages
-found no layout defect; PDF text contains no workflow identifier,
+ten-page build.  Visual inspection of the title, chart/local-proof pages,
+and harmonic-comparison page found no layout defect; PDF text contains no workflow identifier,
 repository-note reference, stale paper name, or archive placeholder.
 
 ## Mystery ledger
@@ -441,8 +467,9 @@ repository-note reference, stale paper name, or archive placeholder.
 | feature | status | closure gate |
 |---|---|---|
 | factor-\(13\) Gram normalization | settled | preserve \(G=K/13\) and exact replay |
-| Clebsch chart inside \(H\) | settled by correction, `tt2`, and `tt3` | exact \(E\)-defined conjugate charts, intersection \(E\cdot xyz\), and a \(\mathbf Q\)-descended normalization model with fibre \(\Spec E\); no false rational inclusion |
-| extraction of \(c=5\) from one fibre | settled | finite-etale local normalization and complete reduced fibre |
+| Clebsch chart inside \(H\) | settled by correction and deep closeout | exact \(E\)-defined conjugate charts, intersection \(E\cdot xyz\), completed conductor model, and canonical map to the incidence normalization; no false rational inclusion |
+| extraction of \(c=5\) from one fibre | settled twice | finite-etale incidence comparison and intrinsic splitting class of the completed chart-union model |
+| abstract arithmetic--harmonic comparison | settled | unique projective \(A_5\)-map; \(\sigma_3\)-normalization fixes the scalar; no ambient map claimed |
 | artifact self-containment | settled | ordinary and isolated-package replay green |
 | statement-to-ledger identity | settled | label/clause map and frozen row digest |
 | Lean coverage | settled | explicit `none claimed` |

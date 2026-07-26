@@ -19,9 +19,9 @@
       "clauses": [
         "rational incidence model and quadratic function field",
         "branch square class 5J0",
-        "conjugate Clebsch charts, their one-point intersection and descended normalization model, and the identity iota_t^*J0=16 sigma3^2"
+        "conjugate Clebsch charts, their completed conductor model and canonical map to the incidence normalization, and the identity iota_t^*J0=16 sigma3^2"
       ],
-      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose normalization has fibre Spec Q(sqrt(5)) there, and each chart pulls J0 back to 16 sigma3^2.",
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "modes": [
         "conceptual",
@@ -71,9 +71,10 @@
       "clauses": [
         "face-axis labeling",
         "Petersen minus-two eigenspace",
-        "injective degree-six zonal-harmonic realization"
+        "injective degree-six zonal-harmonic realization",
+        "unique sigma3-normalized abstract A5-equivariant comparison"
       ],
-      "statement": "The ten explicitly labelled face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with normalized spherical Gram matrix one thirteenth of the reproducing kernel and the Clebsch four-space equal to the Petersen minus-two eigenspace.",
+      "statement": "The ten explicitly labelled face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with normalized spherical Gram matrix one thirteenth of the reproducing kernel and the Clebsch four-space equal to the Petersen minus-two eigenspace; after the five objects are identified, the abstract A5-equivariant comparison is uniquely fixed by preserving sigma3.",
       "status": "certified",
       "modes": [
         "conceptual",

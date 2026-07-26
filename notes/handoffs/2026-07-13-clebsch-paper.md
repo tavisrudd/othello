@@ -309,7 +309,7 @@ uniform finite-field spinor class \([2]\), with the certified nontrivial
 `clebsch-passages` artifact has no C-ID, stale program name, repository-note
 reference, Mathieu/Hadamard/matching branch, or Klein bundle.  Label-level
 trust identity, explicit `formal_coverage: none claimed`, ordinary replay,
-isolated replay, and the warning-free nine-page PDF are green.  Submission
+isolated replay, and the warning-free ten-page PDF are green.  Submission
 remains `NO-GO` pending a fresh context-free PDF-only `GO`, an immutable
 artifact locator, and the author's affiliation/contact metadata.  The
 authoritative report and mystery ledger are
