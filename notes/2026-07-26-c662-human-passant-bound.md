@@ -335,14 +335,27 @@ decoder geometry.  The companion's machine-readable surface is
 exact routes pass, including the independent \(q=13,17,19\) certificate
 check.  Both PDFs build without TeX warnings.
 
-At the next A/B cold read, the reader must make the manuscript choice before
-seeing or ranking this five-title shortlist:
+The follow-up cold read made its manuscript choice before seeing the title
+list.  It again selected the human-core paper for primary submission and
+found that the revised abstract materially repairs the apparent novelty
+loss.  After reading the standalone companion, it found that the split
+restores the broader value without bloating the primary paper.  It ranked
+the title shortlist as follows:
 
-1. *A conic deep-hole syndrome locus characterizes the Clebsch code*;
-2. *Nearest-codeword data characterize the Clebsch code*;
-3. *Reconstructing the Clebsch code from its deep-hole syndrome locus*;
+1. *Reconstructing the Clebsch code from its deep-hole syndrome locus*;
+2. *A conic deep-hole syndrome locus characterizes the Clebsch code*;
+3. *Nearest-codeword data characterize the Clebsch code*;
 4. *Clebsch rigidity from a conic syndrome locus*;
 5. *The Clebsch code reconstructed from its deep holes*.
+
+The first title is now adopted.  A subsequent copy edit synchronized that
+title across both papers, repaired the companion's formerly undefined code
+symbol in its monomial-characterization corollary, removed an uncited
+literature fragment, and standardized cross-paper and nearest-codeword
+terminology.  Both page counts and the zero-warning builds are unchanged.
+The companion remains blocked from independent submission only by the
+external packaging issue recorded under C182: its load-bearing relative
+paths need a stable artifact locator and immutable version.
 
 ## Vibe check
 

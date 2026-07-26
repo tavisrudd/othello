@@ -95,9 +95,14 @@ seven-page computational companion in the same paper root. The companion
 holds the fifteen-class/low-degree/gap results, cross-field six-arc
 uniqueness, and the classification through eight points, with its own build
 target, bibliography, machine-readable seven-claim ledger, validator, and
-five passing exact replay routes. The next A/B protocol requires the
-manuscript choice first and only then a ranking of the five alternate titles
-recorded in the C662 report.
+five passing exact replay routes. A post-choice cold read again selected the
+human-core paper, found that its revised abstract repairs the apparent
+novelty loss, and ranked *Reconstructing the Clebsch code from its deep-hole
+syndrome locus* first; that title is now adopted. A copy edit of both parts
+then fixed the companion's undefined code symbol and synchronized
+terminology without changing either page count. The companion's remaining
+submission blocker is external packaging: its relative replay paths need a
+stable artifact locator and immutable version, as tracked by C182.
 
 C182 follows C610. Its blocker is external publication packaging. The
 paper repository and immutable public deposit do not yet exist, and this

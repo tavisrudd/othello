@@ -32,22 +32,27 @@
 
 \begin{abstract}
 For a projective arc $A\subset\PG(2,q)$, let $\cU(A)$ be the points on no
-chord of $A$.  A companion paper proves, without classification, that a
+chord of $A$.  The geometric paper proves, without classification, that a
 six-arc in $\PG(2,11)$ whose uncovered locus lies on a conic is the Clebsch
 hexagon.  Here exact finite computation sharpens and extends that result.
 There are fifteen projective classes of six-arcs over $\F_{11}$; the
-Clebsch class is the unique one whose uncovered locus lies on a cubic, and
-it is separated from every other class by a four-point gap in uncovered-set
-size.  A Sylvester-graph obstruction shows that $q=11$ is the only field
-order admitting a conic-filling six-arc.  Exhaustive orbit searches then
-classify all conic-filling arcs through eight points: only the projective
-four-frame over $\F_5$ and the Clebsch six-arc over $\F_{11}$ occur.
+Clebsch class is the unique one whose uncovered locus is contained in a
+cubic, and it is separated from every other class by a four-point gap in
+uncovered-set size.  A Sylvester-graph obstruction shows that $q=11$ is the
+only field order admitting a conic-filling six-arc.  Exhaustive orbit
+searches then classify all conic-filling arcs through eight points: only
+the projective four-frame over $\F_5$ and the Clebsch six-arc over
+$\F_{11}$ occur.
 The finite claims are accompanied by exact replay routes and a
 claim-by-claim trust ledger.
 \end{abstract}
 
 \noindent\textbf{Keywords.} finite projective plane; arc; conic; MDS code;
 deep hole; exhaustive classification.
+
+\smallskip
+\noindent\textbf{2020 Mathematics Subject Classification.} 51E21, 94B05,
+51E22, 05B25.
 
 \section{Setup and relation to the geometric paper}
 
@@ -65,7 +70,7 @@ with exactly $i$ chords, put
  m=\binom{k}{2}.
 \]
 
-The geometric companion~\cite{RuddRigidity2026} proves the following three
+The geometric paper~\cite{RuddRigidity2026} proves the following three
 inputs.  They are restated to make every dependency in the finite arguments
 explicit.
 
@@ -121,8 +126,8 @@ $18^{30},19^{60},20^{90},22^{72}$, so
 $|\cU(A)|\in\{18,19,20,22\}$. The replay is listed in the ``Fifteen
 classes and numerical gap'' row of Table~\ref{tab:replays}.
 
-Table~\ref{tab:fifteen-classes} prints the complete census at the level
-used by the rigidity and low-degree arguments.  Every representative
+Table~\ref{tab:fifteen-classes} records the complete census needed below.
+Every representative
 contains the standard frame
 \[
  (1,0,0),\ (0,1,0),\ (0,0,1),\ (1,1,1);
@@ -208,22 +213,22 @@ by linear forms gives the full three-dimensional cubic kernel.
 
 \begin{corollary}[Monomial characterization]
 \label{cor:monomial-characterization}
-Up to monomial equivalence, $C$ is the unique linear $[6,3,4]_{11}$ code of
-covering radius three whose projective deep-hole syndrome locus is contained
-in a plane curve of degree at most three. In particular, this coding
-condition forces the Clebsch projective class, whose stabilizer is $A_5$ by
-Dye's theorem.
+Up to monomial equivalence, there is a unique linear $[6,3,4]_{11}$ code
+of covering radius three whose projective deep-hole syndrome locus is
+contained in a plane curve of degree at most three. It is the Clebsch code,
+whose projective stabilizer is $A_5$.
 \end{corollary}
 
 \begin{proof}
 The columns of a parity-check matrix of such a code form a six-arc $A$, and
 covering radius three identifies its projective deep-hole syndrome locus
-with $\cU(A)$. Proposition~\ref{prop:low-degree-rigidity} makes $A$ projectively equivalent
-to the Clebsch hexagon. A projectivity between two unordered parity-check
-column sets lifts, after choosing column representatives, to a row operation
-together with a coordinate permutation and nonzero coordinate scalings;
-these are exactly a monomial code equivalence. The converse is immediate,
-and Dye's Theorem~3 gives the final $A_5$ statement
+with $\cU(A)$. Proposition~\ref{prop:low-degree-rigidity} makes $A$
+projectively equivalent to the Clebsch hexagon. A projectivity between two
+unordered parity-check column sets lifts, after choosing column
+representatives, to a row operation together with a coordinate permutation
+and nonzero coordinate scalings; these are exactly a monomial code
+equivalence. Conversely, the Clebsch code has the stated property, and
+Dye's Theorem~3 gives the $A_5$ statement
 \cite[p.~278]{Dye1991}.
 \end{proof}
 
@@ -242,8 +247,8 @@ here.
 \label{thm:gap}
 The Clebsch class has $|\cU(A)|=12$, while every non-Clebsch
 six-arc has $|\cU(A)|\ge16$. Equivalently, $|\cU(A)|\le15$
-characterizes the Clebsch class, and equality $|\cU(A)|=12$ is its
-exact value. If $|\cU(A)|\ge16$, then $\cU(A)$ lies on no conic.
+characterizes the Clebsch class, for which $|\cU(A)|=12$.
+If $|\cU(A)|\ge16$, then $\cU(A)$ lies on no conic.
 \end{theorem}
 
 \begin{proof}[Computer-assisted proof]
@@ -333,8 +338,8 @@ six-clique in the distance-two graph of the Sylvester graph, whose clique
 number is five. This is impossible.
 
 Therefore $q=11$. The final assertion follows from
-Theorem~\ref{thm:rigidity}, which puts every matching $q=11$ representative
-in the single Clebsch orbit.
+Theorem~\ref{thm:rigidity}, which puts every conic-filling six-arc over
+$\F_{11}$ in the single Clebsch orbit.
 \end{proof}
 
 \section{The small-arc boundary}
@@ -362,13 +367,12 @@ is attained.
 \begin{proof}[Proof with exhaustive finite verification]
 For $k=4$, Corollary~\ref{cor:conic-filling-window} gives
 $5\le q<6$, hence $q=5$. Every four-arc is a projective frame, and for the
-standard frame a direct
-substitution gives
+standard frame a direct substitution gives
 \[
  \cU(A)=V(X^2+Y^2+Z^2+XY+XZ+YZ),
 \]
 where $V(f)$ denotes the projective zero set of $f$; this is a nonsingular
-six-point conic. For $k=5$, the theorem gives
+six-point conic. For $k=5$, Theorem~\ref{lem:chord-defect} gives
 $|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
 $q^2-10q+20=0$, which has no integral root. The case $k=6$ is
 Theorem~\ref{thm:why11} together with Theorem~\ref{thm:rigidity}.
@@ -416,7 +420,7 @@ For the remaining finite step, join two off-conic points when their line is
 passant. The desired eight-arc would be an eight-clique in this graph, with
 collinear triples forbidden.
 
-An exact orbit search gives the complete reduction
+An exact orbit search gives the following data:
 \[
 \begin{array}{c|c|c|c}
 q&\text{off-conic points}&\text{passant edges}&
@@ -550,7 +554,7 @@ A.~Juri\v{s}i\'c and J.~Vidali,
 
 \bibitem{RuddRigidity2026}
 T.~Rudd,
-\newblock A conic deep-hole syndrome locus characterizes the Clebsch code,
+\newblock Reconstructing the Clebsch code from its deep-hole syndrome locus,
 \newblock companion manuscript, 2026.
 
 \end{thebibliography}

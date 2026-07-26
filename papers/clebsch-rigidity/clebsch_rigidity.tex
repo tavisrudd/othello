@@ -29,7 +29,8 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{A conic deep-hole syndrome locus characterizes the Clebsch code}
+\title{Reconstructing the Clebsch code\\
+from its deep-hole syndrome locus}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -128,9 +129,9 @@ conic;
 The proof reconstructs the hexagon from conic containment alone.
 A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
 conceptual implication.  The same geometry then gives an exact distance
-oracle and all nearest-codeword multiplicities. Its
-ambiguity strata reconstruct the Brianchon points, the self-polar triangles,
-and the invariant support bipartition.
+oracle and all nearest-codeword multiplicities; the resulting ambiguity
+strata reconstruct the Brianchon points, the self-polar triangles, and the
+invariant support bipartition.
 
 The chord-defect identity has a second role independent of the Clebsch
 classification.  For a Clebsch hexagon $K$ it gives
@@ -205,7 +206,7 @@ branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
 
 The displayed hexagon is the arc $K_2$ of Storme and Van~Maldeghem
 \cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
-square in the base field~\cite[Theorem~1, pp.~275--276]{Dye1991}. At
+square in the base field~\cite[Theorem~1, pp.~275--276]{Dye1991}. In
 characteristic $11$, Dye's Theorems~1--3 give projective uniqueness, the
 unique associated polarity, and stabilizer $A_5$; in the displayed
 coordinates the associated conic is $\cC$
@@ -352,7 +353,7 @@ weight-three leader.  Thus this single syndrome exhibits the complete
 dictionary: its projective direction is a conic point, its coset has
 distance three, and its nearest-codeword ambiguity has size twenty.
 
-The stabilizer already forces the small point sets that will occur.
+The stabilizer already forces the small point sets that arise below.
 
 \begin{proposition}[The $A_5$ point orbits]
 \label{prop:a5-point-orbits}
@@ -408,8 +409,8 @@ For the third row, a $D_5$ fixes one $C_5$ eigenline and exchanges the other
 two; the unique $C_3$ line is already fixed by its $S_3$ normalizer; and
 $A_4$ permutes the three $V_4$ eigenlines without fixing one.
 By orbit--stabilizer, the third row already gives the orbits of lengths
-$6$, $10$, $12$, and $15$; only points with exact stabilizer $C_2$ remain.
-It remains to account for exact $C_2$ stabilizers. Each involution lies in
+$6$, $10$, $12$, and $15$. To account for the points with exact stabilizer
+$C_2$, observe that each involution lies in
 two $D_5$ subgroups, two $S_3$ subgroups, and one $V_4$. Of its thirteen
 fixed points, these contribute respectively $2$, $2$, and $3$ points from
 the preceding rows. The remaining six points have exact stabilizer $C_2$.
@@ -500,15 +501,16 @@ so the monomial group is transitive on the twelve syndrome rays above
 $\cC$. Its central scalar subgroup $\F_{11}^{\times}$ acts transitively on
 the ten nonzero vectors of each ray. Hence the monomial group is transitive
 on all $12\cdot10=120$ maximum-distance syndromes and therefore on the
-corresponding cosets. Given deep
-holes $v$ and $w$, choose $m\in\operatorname{MAut}(C)$ with
+corresponding cosets. Given deep holes $v$ and $w$, choose
+$m\in\operatorname{MAut}(C)$ with
 $\sigma(mv)=\sigma(w)$. Then $c=w-mv$ has zero syndrome, so $c\in C$, and
 the codeword translation by $c$ sends $mv$ to $w$. Both kinds of generator
 are Hamming isometries preserving $C$. The monomial group normalizes the
 translation subgroup, since $m\,t_c\,m^{-1}=t_{m(c)}$ with $m(c)\in C$.
 Thus $\Gamma=C\rtimes\operatorname{MAut}(C)$; the two subgroups have trivial
-intersection and the displayed product order follows. Orbit--stabilizer now gives stabilizer order
-$798600/159720=5$, and every group of prime order is cyclic.
+intersection and the displayed product order follows. Orbit--stabilizer
+now gives stabilizer order $798600/159720=5$, and every group of prime
+order is cyclic.
 \end{proof}
 
 \subsection{Decoding consequences}
@@ -519,10 +521,10 @@ deep-hole cosets, not received words. Its codeword weight enumerator is
 $(1,0,0,0,150,420,760)$, forced by the MDS parameters.
 This is the radius-three instance of the coset-weight framework of Davydov,
 Marcugini, and Pambianco~\cite[\S6]{DMP2021}; the secant indices below
-refine its weight-two stratum by nearest-word multiplicity.
+refine its weight-two stratum by nearest-codeword multiplicity.
 
-The special geometry also makes distance diagnosis and nearest-word structure
-unusually explicit.  Write a syndrome as $s=(s_0,s_1,s_2)$ and put
+The special geometry also makes distance diagnosis and nearest-codeword
+structure unusually explicit.  Write a syndrome as $s=(s_0,s_1,s_2)$ and put
 $Q(s)=s_0s_2-s_1^2$.
 For a point $x\notin A$, its \emph{secant index} is the number of chords of
 $A$ through $x$; by the dictionary above, this is the number of
@@ -584,7 +586,7 @@ turns its ten pairs of matchings into the Brianchon--support dictionary.
 \section{The rigidity theorem}
 \label{sec:rigidity}
 
-Proposition~\ref{prop:deep-holes-conic} concerns one known arc. We now prove
+Proposition~\ref{prop:deep-holes-conic} concerns a specific arc. We now prove
 the symmetry-free characterization stated in
 Theorem~\ref{thm:rigidity}. The uncovered conic determines the resulting
 Clebsch hexagon's polarity, and Dye's stabilizer theorem then identifies
@@ -687,9 +689,8 @@ proves the coding formulation in the abstract.
 \begin{remark}[Why this rigidity is not in the extension-locus literature]
 The set $\cU(A)$ is the classical extension locus, studied for sufficiently
 large arcs through Segre's tangent-envelope method; see Ball and
-Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019}. Those results require arc-size
-hypotheses far from the six-point regime, while Sadeh's census uses six-arcs
-for a different classification problem. Neither direction records the
+Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019}. Those results require
+arc-size hypotheses far from the six-point regime and do not record the
 conic rigidity detected here.
 \end{remark}
 
@@ -697,11 +698,11 @@ conic rigidity detected here.
 \label{sec:support-bipartition}
 
 Label the six coordinates by $0,\ldots,5$. The $20$ three-element
-coordinate supports form two complementary
-$A_5$-orbits of size ten. Automorphisms preserve the two classes, but
+coordinate supports form two complementary $A_5$-orbits of size ten.
+Automorphisms preserve the two classes, but
 nothing intrinsic chooses one as positive. We use \emph{support bipartition}
-only as shorthand for this unoriented bipartition. Its ten complementary pairs
-carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
+only as shorthand for this unoriented bipartition. Its ten complementary
+pairs carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
 
 \begin{figure}[H]
 \centering
@@ -804,14 +805,14 @@ from $M(T,T')$, so the ten triangle pairs give exactly the ten perfect
 matchings outside $\mathcal T$. Applying the alternating-class rule to the
 five displayed matchings gives ten distinct complementary support pairs,
 hence all ten such pairs. Edge's Clebsch construction says that the
-three chords of each such matching concur, at the ten distinct Brianchon
+three chords of each such matching concur at the ten distinct Brianchon
 points~\cite[\S\S19--20,30]{Edge1956}. The bipartition bijection and
 Petersen assertion are the alternating-cycle construction above.
 
 The ten outside matchings give the ten triple concurrences. The remaining
 fifteen intersections of disjoint chords have multiplicity one. Since every
-step uses only the five invariant matchings and incidence, both bijections and their
-compatibility with the support map are $A_5$-equivariant.
+step uses only the five invariant matchings and incidence, both bijections
+and their compatibility with the support map are $A_5$-equivariant.
 \end{proof}
 
 \begin{corollary}[The decoder reconstructs the Brianchon configuration]
@@ -841,12 +842,12 @@ leaders supported in each class. Globally, the $2400$ minimum-weight
 leaders split as $1200+1200$.
 
 Every monomial automorphism of $C$ preserves this unordered bipartition.
-The other coset in the exotic normalizer $N_{S_6}(A_5)\cong S_5$ exchanges
-the two support classes, but its sixty elements are not automorphisms of the
-displayed code. By
+The nontrivial coset of $A_5$ in the exotic normalizer
+$N_{S_6}(A_5)\cong S_5$ exchanges the two support classes, but its sixty
+elements are not automorphisms of the displayed code. By
 Proposition~\ref{prop:brianchon-support}, the ten complementary support
-pairs are canonically both the two-subsets of the five self-polar triangles
-and the ten Brianchon points.
+pairs are canonically identified both with the two-subsets of the five
+self-polar triangles and with the ten Brianchon points.
 \end{proposition}
 
 \begin{proof}
@@ -928,8 +929,8 @@ The root $q=5$ lies in characteristic five, where the
 associated-conic construction of Definition~\ref{def:hexagon} is
 not available. At $q=9$, however, Dye's construction applies:
 $5=-1$ is a square in $\F_9$, and the characteristic is three. Thus the
-formula recovers a complete Clebsch six-arc at $q=9$. Independently,
-its uncovered locus is empty, so it is not conic-filling. At $q=11$ the
+formula gives an empty uncovered locus, so the Clebsch six-arc is complete
+and not conic-filling. At $q=11$ the
 uncovered locus is instead exactly the associated conic.
 
 At $q=19$, the same icosahedral construction still produces a Clebsch
