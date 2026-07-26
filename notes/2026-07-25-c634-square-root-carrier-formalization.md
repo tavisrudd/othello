@@ -122,9 +122,10 @@ for them is introduced.
 - `RelativeConicArcs.SquareRootCarrier` through the guarded build queue:
   **PASS**, `5.81s`, maximum resident set size `1,394,312 KiB`.
 - `lean/scripts/guarded-lean
-  RelativeConicArcs/Gates/SquareRootCarrier.lean`: **PASS** before the final
-  zero-invariance upgrade, with all then-current nine
-  terminals reporting exactly `propext`, `Classical.choice`, and `Quot.sound`.
+  RelativeConicArcs/Gates/SquareRootCarrier.lean`: **PASS** for the
+  nine-terminal version.
+- A fresh source-local audit after the zero-invariance upgrade reports all ten
+  terminals with exactly `propext`, `Classical.choice`, and `Quot.sound`.
 - Whole-module prose and naming audit: **PASS**.  The source and gate contain
   no workflow identifiers, internal-record references, status language, or
   unqualified formalization claims.
