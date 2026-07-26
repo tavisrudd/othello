@@ -283,7 +283,13 @@ v2 upgrades and do not hold v1.  Resume the Platinum proof under
 `notes/expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`;
 its first gate is the point-vector/evaluation-dual extension diagram, followed
 by the Dickson-type \(S^K\) table and the characteristic-three torus
-exception.
+exception.  The first persona pass fixes the q=19 convention: the unique
+\(H\)-fixed affine line lies in the nonconstant fibre, has outer sign, and
+does not split the trivial quotient; C1 is now the nonsplitting of the
+quadratic pullback along \(S^\chi\hookrightarrow E\).  H1 is settled for
+cyclic tori outside characteristic three and for generic dihedral
+normalizers; the remaining subgroup rows are characteristic three, the q=5
+endpoint, and the exceptional \(A_4,S_4,A_5\) simple-quotient calculation.
 
 The active order is strict:
 
