@@ -1340,8 +1340,17 @@
       "last": 643,
       "purpose": "mine compressed secant-Veronese obstruction signatures in the q=13,17,19 rejected classes",
       "sequence": 149
+    },
+    {
+      "count": 1,
+      "first": 644,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 644,
+      "purpose": "classify the unique q=19 uncovered-arc residue and seek a uniform secant-concurrency explanation",
+      "sequence": 150
     }
   ],
-  "next_id": 644,
+  "next_id": 645,
   "schema": "codex-task-id-allocations-v1"
 }
