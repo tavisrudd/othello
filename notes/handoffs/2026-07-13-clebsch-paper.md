@@ -298,6 +298,21 @@ stabilizer because it enlarges to \(S_4\).  The remaining Platinum inputs
 are uniform C1 for the other heads, characteristic-three tori, and the q=5
 dihedral endpoint.
 
+**Local Paper II persona — the “tears in their eyes” test.**  The result
+this composite expert would cherish is not a longer exceptional-case table,
+but a proof in which the weak quadratic memory makes the hidden Platonic
+geometry inevitable: point/evaluation duality is explicit, a
+Frobenius-digit \(K\)-fixed head is forced, outer parity makes the quadratic
+pullback nonsplit, and the characteristic-three torus obstruction is
+explained by one closed geometric identity.  Balance and the \(B_3/H_3\)
+alternatives should then emerge as conclusions rather than hypotheses.
+The proof should make modular nonsemisimplicity do visible work, reduce
+computation to discovery and certification, and leave one diagram or formula
+that explains both the generic mechanism and every genuine small-field
+exception.  That combination—hidden geometry reconstructed from coarse
+data, with no miraculous row reduction left unexplained—is the local
+emotional and mathematical north star.
+
 The active order is strict:
 
 1. **C182:** make the immutable public deposit and insert its identifier.
