@@ -36,6 +36,10 @@ Theorem~\ref{thm:uniform-transverse} closes the transverse branch for
 \[
  q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
 \]
+In this range the Seroussi--Roth extension theorem automatically gives
+covering radius \(r-1\). Thus the all-level conclusion is an
+unconditional containment theorem for projective deep-hole directions,
+not only for split-free syndrome directions.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -183,8 +187,11 @@ if
 \]
 every split-free redundancy-\(r\) syndrome belongs to
 \(\mathcal P_r\cup\mathcal M_r\).  Calling these directions code deep holes
-still requires the separate covering-radius equality
-\(\rho(\PRS(q+1-r))=r-1\).
+requires the covering-radius equality
+\(\rho(\PRS(q+1-r))=r-1\); the Seroussi--Roth theorem supplies it
+automatically under the displayed bound. Hence, in this range, the
+split-free directions are precisely the projective deep-hole directions
+and all lie in \(\mathcal P_r\cup\mathcal M_r\).
 \end{theorem}
 
 Theorem~\ref{thm:stable-component-headline} is the third principal
@@ -226,9 +233,15 @@ Relative completion outside a prescribed conic gives the
 redundancy-three uncovered-syndrome problem
 \cite{RuddPrescribedHoles2026}; the Clebsch rigidity paper asks the
 inverse question of recovering a non-GRS code from that locus
-\cite{RuddRigidity2026}; and the conic-ideal quotient paper determines
-which \(A_3,B_3,H_3\) secant-factorization data survive restriction to
-the conic \cite{RuddFactorization2026}.  The MDS--CSS companion turns
+\cite{RuddRigidity2026}; and the conic-ideal quotient paper proves that
+secant matching products with the same endpoint divisor agree on the
+conic while their quotients retain \(3\)-, \(6\)-, and
+\(10\)-dimensional \(A_3,B_3,H_3\) factorization data, with quadratic
+sheet recovery and cubic orientation in the balanced cases
+\cite{RuddFactorization2026}. That retained factorization memory is
+parallel to the forbidden marker here: both remember factor data erased
+by a natural reduction, but neither theorem is an input to the other.
+The MDS--CSS companion turns
 the balanced \(q=8\) extension row into the quantum consequences stated
 in Section~\ref{sec:r5} \cite{RuddAMELU2026}.  Apart from that explicit
 corollary, these companion results are comparisons rather than inputs

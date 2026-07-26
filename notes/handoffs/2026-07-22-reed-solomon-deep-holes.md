@@ -8,7 +8,7 @@
 C603 complete. C545 has repaired C603's release-blocking local trust boundary.
 The adopted aggregate now has the exact 15-file R5--R7 closure and 53-target
 axiom audit; the shared contraction API is separated from the companion R9
-residual-quadratic module; all 35 current manuscript labels reconcile exactly;
+residual-quadratic module; all 36 current manuscript labels reconcile exactly;
 the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
 the adoption/formalization/release ledgers and 43-artifact evidence pack agree;
 and the verifier checks the TeX label set, direct imports, transitive closure,
@@ -28,7 +28,14 @@ one-column \([10,5,6]_8\) MDS extensions yield minimum-support
 \(\operatorname{AME}(10,8)\) states and \([[9,1,5]]_8\) quantum MDS codes.
 Its separate Lean bridge checks the exact row, balance, uniqueness within
 R5--R7, and the imported AME--LU rigidity consequences while leaving the
-standard coding dictionaries as an explicit semantic interface. C532 gives
+standard coding dictionaries as an explicit semantic interface. Two fresh
+full-draft readers then exposed an automatic all-level radius promotion:
+Seroussi--Roth applies throughout \(q\geq Q_r\), making the uniform result
+unconditional deep-hole containment and the large-characteristic list an
+unconditional exact classification. Their question ledger is in
+`notes/2026-07-25-c545-beyond4-question-cold-reads.md`; C620 owns the
+highest-value successor, exact split-freeness on higher Lucas carriers.
+C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -863,8 +870,9 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates after green C603 reconciliation | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two final specialist signoffs, immutable identifiers, and author/account confirmation before upload |
-| 2 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
-| 3 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
+| 2 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
+| 3 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
+| 4 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
 
 ## Unallocated level-ups
 

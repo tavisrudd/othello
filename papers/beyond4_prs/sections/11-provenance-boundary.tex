@@ -20,9 +20,12 @@ arithmetic threshold.
 \label{cor:large-characteristic-stable}
 Let \(r\geq6\) and \(q\geq Q_r\), and suppose
 \(\mathcal M_r\) is empty.  Then the split-free directions
-are exactly the persistent tangent and conjugate-secant families.  If
-the covering radius is \(r-1\), this is also the projective deep-hole
-list.  The modular locus is empty when
+and the projective deep-hole directions are exactly the persistent tangent
+and conjugate-secant families, of total cardinality
+\[
+                         \frac{q(q+1)^2}{2}.
+\]
+The modular locus is empty when
 \(\operatorname{char}\F_q>r-1\), so the conclusion applies in
 particular over every prime field with \(q\geq Q_r\).
 \end{corollary}
@@ -32,7 +35,13 @@ Theorem~\ref{thm:uniform-transverse} leaves
 \(\mathcal P_r\cup\mathcal M_r\), and the base-\(p\) binomial
 criterion for normal-rational-curve nuclei
 \cite[Lem.~1 and Thm.~1]{GmainerHavlicek2013} makes
-\(\mathcal M_r\) empty.  The persistent families are split-free.
+\(\mathcal M_r\) empty.  The persistent families are split-free, and
+the Seroussi--Roth argument following
+Theorem~\ref{thm:uniform-transverse} supplies covering radius \(r-1\)
+throughout \(q\geq Q_r\).
+The tangent family has \(q(q+1)\) directions and the
+conjugate-secant family has \(q(q^2-1)/2\), as in the uniform
+rank-two parametrization, giving the displayed total.
 \end{proof}
 
 Proposition~\ref{prop:r6-contained} and
@@ -50,15 +59,18 @@ a complete deep-hole classification.
       classification; its $q=7,8,9$ covering-radius gate remains
       separate.
 \item At every redundancy \(r\geq6\) and \(q\geq Q_r\), every split-free
-      direction lies in the persistent or modular locus.  The binary
+      direction, equivalently every projective deep-hole direction, lies
+      in the persistent or modular locus.  The binary
       cyclic-plane descendant terminates after redundancy seven, but
       fresh higher Lucas carriers remain possible.  Fields below \(Q_r\)
-      and the covering-radius premise remain separate.
+      and exact arithmetic membership in the modular carriers remain
+      separate.
 \end{enumerate}
 
 In particular, the paper does not settle the general Reed--Solomon
-deep-hole conjecture: it neither proves the covering-radius premise nor
-classifies the fields below the transverse threshold.
+deep-hole conjecture: it neither classifies the fields below the
+transverse threshold nor determines exact membership in every higher
+modular carrier.
 
 The last sporadic fields at redundancies five, six, and seven are
 \(19,13,11\), while the corresponding point-count gates are
