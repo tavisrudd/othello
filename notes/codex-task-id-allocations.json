@@ -1259,8 +1259,17 @@
       "last": 633,
       "purpose": "formalize extension-field Frobenius-sector Clifford classification and jump divisors",
       "sequence": 140
+    },
+    {
+      "count": 1,
+      "first": 634,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 634,
+      "purpose": "formalize the square-root carrier extension and collinearity inequality",
+      "sequence": 141
     }
   ],
-  "next_id": 634,
+  "next_id": 635,
   "schema": "codex-task-id-allocations-v1"
 }
