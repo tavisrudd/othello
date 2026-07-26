@@ -78,6 +78,35 @@ The bound is exact: the \(q+1\) one-dimensional subspaces of
 argument using only individual degree-\(d\) separators can replace
 \(|A|\le q\) by \(|A|\le q+1\).
 
+The same count is quantitative.  If \(s=\dim I(U)_d\ge2\) and \(t\) distinct
+proper evaluation kernels occur, then their complement contains at least
+\[
+ q^{s-2}(q-1)(q+1-t)
+\]
+nonzero forms, hence at least
+\[
+ q^{s-2}(q+1-t)
+\]
+projective forms.  The bound is attained when the \(t\) hyperplanes share a
+common codimension-two subspace.
+
+For quadrics this also controls nonsingularity.  The singular plane conics
+form a cubic discriminant hypersurface in the six-dimensional coefficient
+space, in every characteristic.  If a quadratic space \(W\) contains one
+nonsingular conic, the discriminant restricts to a nonzero cubic on \(W\)
+and has at most \(3q^{s-1}\) affine zeros.  Therefore, for \(q\ge5\),
+\[
+ |A|\le q-3,\qquad
+ A\cap\operatorname{Hull}_2(U)=\varnothing,
+\]
+and the existence of one nonsingular member of \(I(U)_2\) imply the
+existence of a nonsingular member avoiding all of \(A\).  Indeed,
+\[
+ q^{s-2}(q-1)(q+1-|A|)>3q^{s-1}.
+\]
+The case \(s=1\) is immediate: its unique projective member is already the
+assumed nonsingular conic and the hull condition says that it avoids \(A\).
+
 ## Veronese and code formulations
 
 The degree-\(d\) Veronese evaluation vectors of \(U\) span a subspace of
@@ -168,11 +197,16 @@ orders still requires a projective classification, a new theorem coupling
 the secant arrangement to the quadratic hull, or a separately reproducible
 finite certificate.  No pilot has been promoted into an exact-value claim.
 
-There is also an important one-way boundary.  The theorem produces a nonzero
-quadratic, possibly singular.  That suffices for a quadratic-avoidance
-obstruction, because excluding all quadratics excludes nonsingular conics.
-It does not by itself construct a prescribed nonsingular conic.  On the
-five-points-on-a-nonsingular-conic stratum, uniqueness removes this issue.
+The basic theorem produces a nonzero quadratic, possibly singular.  The
+quantitative refinement removes this boundary in all three pilots:
+\[
+ 7\le13-3,\qquad 8\le17-3,\qquad 8\le19-3.
+\]
+Whenever their quadratic kernel contains one nonsingular conic and has no
+selected hull point, it contains a nonsingular conic avoiding the whole arc.
+Thus a bounded certificate may cleanly separate three cases: full quadratic
+rank, a selected hull point, or a kernel consisting entirely of singular
+conics.
 
 ## Conclusion
 
@@ -199,7 +233,10 @@ coordinate force a full-support word, with the projective
 length.  This identifies the real invariant as the represented matroid of
 the combined Veronese evaluations of \(U\cup A\), not the scalar Hilbert
 function of \(U\).  It also compresses any future bounded certificate to a
-rank record plus one closure witness.
+rank record plus one closure witness.  The quantitative complement count and
+cubic-discriminant estimate strengthen the construction side: for
+\(|A|\le q-3\), one nonsingular member plus pointwise separation already
+forces a nonsingular avoiding conic.
 
 A rank-three-sensitive successor should therefore ask for a mechanism that
 forces
@@ -215,6 +252,9 @@ larger coefficient space.
 - **Settled:** on at least five points of a nonsingular conic, the quadratic
   hull is exactly that conic and the Hilbert function contains no further
   information.
+- **Settled:** for `q=13,17,19`, a quadratic kernel containing any
+  nonsingular member and no selected hull point necessarily contains a
+  nonsingular member avoiding the entire candidate arc.
 - **Open:** no structural principle is known that couples the secant
   arrangement of an arc to membership
   \(A\cap\operatorname{Hull}_2(U(A))\).  This is the exact evidence gap behind
