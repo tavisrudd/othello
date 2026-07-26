@@ -32,7 +32,9 @@ fibers has nonzero first conductor, so the roots globalize exactly on
 tangent-fiber-transversal arcs.  Thus the odd tangent twist does not produce
 a global square-root carrier or a positive-defect obstruction.
 
-No manuscript or Lean file is changed.
+No manuscript file is changed.  The stable algebraic and combinatorial core
+is formalized in `RelativeConicArcs.OddTangentCarrier` and exposed through
+the dedicated gate `RelativeConicArcs.Gates.OddTangentCarrier`.
 
 ## Pointwise odd square restriction
 
@@ -364,6 +366,44 @@ arc condition makes the dual carrier lines have no triple concurrence, so
 the carrier extension lemma applies.  Thus the zero-defect baseline fixes
 not only all pair data but the entire ordinary gluing complex whenever the
 regular oval occurs on the zero-defect branch.
+
+## Lean formalization
+
+`RelativeConicArcs.OddTangentCarrier` kernel-checks the parts of the argument
+which do not require a projective Chow-product API:
+
+- `sq_injective_charTwo` and `oddTangentFactorization_rescale` prove root
+  uniqueness and the exact factor/root rescaling law;
+- `oddZerothConductorSq_ne_zero` proves the same-fiber zeroth conductor
+  nonzero from a nonzero residual factor and distinct tangent parameters;
+- `tangentConductorPartner_involutive`,
+  `tangentConductorPartner_ne_self`, and
+  `tangentConductorPartner_ne_zero` prove the fixed-point-free partner
+  structure on every nonzero conductor class;
+- `excludedTangentParametersEquivOrderedPairs` and
+  `card_nonzeroOrderedConductorPairs` identify the ordered nonzero pair fiber
+  with the field minus \(0\) and the conductor label, giving exact cardinality
+  \(|K|-2\);
+- `tangentFiberCompatibilityGraph_isClique_iff_injOn`,
+  `tangentFiberCompatibilityGraph_clique_card_le`, and
+  `exists_tangentFiberCompatibilityGraph_clique_card_eq` identify the
+  compatibility graph as complete multipartite and prove its exact clique
+  bound when every contact fiber is represented;
+- `oddCarrierConductor_mul_commonFactor` and its nonvanishing terminal prove
+  the first-conductor transfer through \(h_x=ng_x\); and
+- `ordinaryGlobalizes_iff_of_transversal_arc_criteria` composes the
+  same-fiber obstruction, cross-fiber arc obstruction, and carrier-extension
+  input into the exact transversal-arc globalization criterion.
+
+The formal boundary is explicit.  Lean does not construct \(F_A\), identify
+the projective tangent-contact map, prove the regular-oval external/secant
+triple count, or establish the carrier-extension hypotheses from projective
+geometry.  The last terminal checks their logical composition rather than
+asserting those analytic inputs.
+
+The import-only gate audits all fifteen public terminals.  Its source
+elaboration is warning-free; the exact Lake build, no-build replay, and axiom
+output are recorded after the shared build-owner window is available.
 
 ## Outcome and boundary
 
