@@ -41,6 +41,14 @@ one Weyl axis, so the tensor intrinsically determines every local Weyl
 frame.  Product conjugation must permute those frames and is consequently
 Clifford.  The argument uses neither CSS form, equal phases, classical
 linearity, nor \(\F_q\)-linearity of the stabilizer labels.
+Thus the proof has four steps:
+\[
+\begin{gathered}
+\text{AME support squeeze}\ \Longrightarrow\ \text{full-Weyl marginal}\\
+\Longrightarrow\ \text{intrinsic local axes}
+\ \Longrightarrow\ \text{local Clifford factors}.
+\end{gathered}
+\]
 
 \begin{corollary}[Transversal Clifford no-go]
 \label{cor:transversal-clifford}
@@ -247,36 +255,28 @@ parties.  Including logical Paulis, the exact fixed-party projective
 logical group is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) on the GRS locus and
 \(\F_q^2\rtimes T\) off it.
 
-Quantum Reed--Solomon encoders, polynomial-code gates, and general
-prime-dimensional stabilizer Clifford synthesis supply established
-fault-tolerant constructions
+Quantum Reed--Solomon and polynomial-code constructions provide the
+standard coding setting
 \cite{GrasslGeiselmannBeth1999,AharonovBenOr2008,Gottesman1999}.
-Automorphism methods recover SWAP-transversal logical Cliffords with
-their Pauli corrections \cite{SayginelEtAl2025}, while fold-transversal
-and \(2\)-local layers realize larger logical groups in high-rate codes
-\cite{TansuwannontChanTakagi2026,Holmes2026}.  Those constructions do not
-identify the kernel of one fixed-party product layer.
+Closest to our fixed-party question are restrictions on diagonal gates
+between qubit codes \cite[Propositions~3 and~4]{AndersonJochymOConnor2014},
+the endomorphism-algebra classification of multiblock diagonal Clifford
+gates \cite[Theorems~5.5 and~6.1]{DasuBurton2025}, and automorphism methods
+that recover SWAP-transversal logical Cliffords and their Pauli corrections
+\cite{SayginelEtAl2025}.  Other locality models, including fold-transversal
+and \(2\)-local layers, can realize larger groups
+\cite{TansuwannontChanTakagi2026,Holmes2026}; fully transversal gates remain
+subject to the Eastin--Knill obstruction and, for codes with several logical
+qubits, cannot realize the full logical Clifford group
+\cite{EastinKnill2009,ChakrabortyGottesman2026}.
 
-Complementary restrictions describe diagonal gates between qubit codes
-\cite[Propositions~3 and~4]{AndersonJochymOConnor2014}, transversal
-Hadamard and phase gates for binary self-dual CSS codes
-\cite{TansuwannontTakadaFujii2025}, and multiblock diagonal Clifford gates
-through an \(\F_2\)-endomorphism algebra
-\cite[Theorems~5.5 and~6.1]{DasuBurton2025}.  A code encoding more than
-one logical qubit cannot realize its full logical Clifford group by fully
-transversal gates \cite{ChakrabortyGottesman2026}; universal transversal
-sets face the broader Eastin--Knill obstruction \cite{EastinKnill2009}.
-
-Here each coordinate may carry an independent one-qudit factor, and
-Corollary~\ref{cor:transversal-clifford} treats conversions between
+Our coordinates may carry independent one-qudit factors, and
+Corollary~\ref{cor:transversal-clifford} also treats conversions between
 different one-logical-qudit quantum-MDS encoders.  The MDS--CSS
-specialization then identifies the exact fixed-party projective logical
-image for every half-dimensional MDS code over an odd prime field.
-Diagonal code--dual equivalence is the fixed-coordinate form of isometry
-duality and occurs in algebraic-geometry MDS families as well as GRS codes
-\cite{ZhuZhao2026}.  The transition-atlas centralizer and the multiblock
-endomorphism-algebra classification above are parallel algebraic
-descriptions under complementary locality assumptions.
+specialization identifies the exact fixed-party projective image for every
+half-dimensional MDS code over an odd prime field.  Its dividing condition,
+diagonal code--dual equivalence, also occurs beyond GRS codes in
+algebraic-geometry MDS families \cite{ZhuZhao2026}.
 
 Classically, we use Coble's
 association theory \cite{Coble1922} through the modern treatment of

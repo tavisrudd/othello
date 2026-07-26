@@ -34,8 +34,9 @@ to each claim: CSS versus direct-Lagrangian shortening, symbolic versus
 finite projectivity, chord concurrency versus stabilizer ranks, quotient
 minors versus finite-field elimination, and cycle-cover versus
 fraction-free transport determinants.  These checks belong to one
-paper-owned Python package; they are not external independent
-reproductions.  The exact files, hashes, domains, expected
+paper-owned Python package.  They provide independent implementations
+within that package, not an independent external reproduction.  The exact
+files, entry points, hashes, domains, expected
 outputs, and negative scopes are recorded in
 \texttt{supplement/EVIDENCE.md} and
 \texttt{supplement/EVIDENCE-MANIFEST.json}.
@@ -62,38 +63,34 @@ including the Lean toolchain and build definitions.  The manifest, rather
 than a mutable working-tree name, is the immutable identity of the
 companion release.
 
-\begin{center}
-\begin{tabular}{p{0.25\linewidth}p{0.22\linewidth}p{0.43\linewidth}}
-\toprule
-Claim family & Proof mode & Machine trust / formal status\\
-\midrule
-LU-to-LC rigidity, atlas classification, and no-go &
-manuscript proof plus Lean &
-support, transition, marginal, covariance, axis, and holonomy cores kernel
-checked; exact projective atlas extension proved in the manuscript\\
-Pencil and six-arc classification &
-proof plus exact certificates &
-conditional Lean interface; geometric and holonomy inputs named\\
-\(H_3\) and \(q=13\) separators &
-proof plus exact certificates &
-finite graph core unconditional; trace/covariance and exact ranks named\\
-Diagonal-isodual logical groups &
-manuscript proof plus Lean &
-multiplier theorem unconditional; exact carrier interface conditional\\
-Twelve party splittings and transport &
-exact certificates plus abstract Lean &
-splitting algebra unconditional after a supplied complement; finite
-witnesses and transport matrices certificate supplied\\
-\bottomrule
-\end{tabular}
-\end{center}
-No module in the aggregate uses \texttt{sorry} or unsafe declarations.
-Native execution is confined to three finite graph cardinalities proved
-by \texttt{native\_decide}; the axiom terminal reports them separately.
-It prints declaration-level dependencies: the ordinary kernel-checked results use only
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound};
-all other finite evidence used by the paper is replayed by the Python
-supplement rather than imported as a Lean axiom.
+\paragraph{Claim-to-trust map.}
+\noindent\textbf{LU-to-LC rigidity, atlas classification, and the
+transversal no-go.}
+The manuscript gives complete proofs.  Lean kernel-checks the support,
+transition, marginal, covariance, axis-recovery, and holonomy cores; the
+manuscript proves the exact projective atlas extension.
+
+\noindent\textbf{Pencil and six-arc classification.}
+The manuscript proof uses exact certificates for the finite holonomy
+calculation.  The Lean interface is conditional and names its geometric and
+holonomy inputs.
+
+\noindent\textbf{\(H_3\) and \(q=13\) separators.}
+The manuscript proof uses exact certificates for the determinants and
+contraction ranks.  The finite graph core is unconditional in Lean; the
+trace/covariance bridges and exact ranks are named inputs.
+
+\noindent\textbf{Diagonal-isodual logical groups.}
+The manuscript gives the proof, and the multiplier theorem is unconditional
+in Lean.  The formal exact-carrier terminal names the propagation interface
+as a hypothesis.
+
+\noindent\textbf{Twelve computed party-extension splittings and transport.}
+Exact certificates supply the finite complements and transport matrices.
+Lean proves the abstract splitting algebra once a complement is supplied.
+
+The corresponding certificate entry points and formal theorem names appear
+in the claim crosswalk in \texttt{supplement/EVIDENCE.md}.
 
 The trusted boundary is Python integer arithmetic, the exact-arithmetic
 implementations in the generators, deterministic Gaussian elimination,
@@ -104,21 +101,24 @@ the conceptual correspondence between the implemented objects and the
 paper definitions; that correspondence is supplied in the preceding
 sections.
 
-The accompanying Lean~4 artifact uses toolchain
-\texttt{v4.32.0-rc1}.  Its aggregate contains unconditional formal proofs
+The Lean~4 artifact uses toolchain \texttt{v4.32.0-rc1}; no aggregate module
+uses \texttt{sorry} or an unsafe declaration.  Its aggregate contains
+unconditional formal proofs
 of the support squeeze, minimum-support generation, marginal and
 axis-recovery cores, atlas equivalence, abstract holonomy centralizers,
 the Choi/transversal bridge, the diagonal-multiplier theorem, and the
 abstract projective-extension algebra.  The ordinary kernel-checked
 declarations use only \texttt{propext}, \texttt{Classical.choice}, and
 \texttt{Quot.sound}; three finite graph cardinalities use
-\texttt{native\_decide} and are reported separately.
+\texttt{native\_decide} and are reported separately by the axiom terminal.
+All other finite evidence is replayed by the Python supplement rather than
+imported as a Lean axiom.
 
 The geometric classification, exact logical propagation, finite
 contractions, concrete party complements, and transport-orbit inputs enter
 conditional interfaces.  The manuscript proves or the supplement
-certificate-checks those inputs as recorded in the table; importing the
-aggregate does not turn them into unconditional Lean theorems.  The exact
+certificate-checks those inputs as recorded in the claim-to-trust map above;
+importing the aggregate does not turn them into unconditional Lean theorems.  The exact
 module-to-claim crosswalk and each named hypothesis are recorded in
 \texttt{supplement/EVIDENCE.md}.
 
