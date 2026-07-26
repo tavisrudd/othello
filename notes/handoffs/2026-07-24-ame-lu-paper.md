@@ -431,6 +431,20 @@ fiber hypothesis.  Both are included in the aggregate axiom audit, which
 passes with only `propext`, `Classical.choice`, and `Quot.sound`.  See
 `2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
+**C622 closed (2026-07-25): diagonal isoduality is the intrinsic
+all-length logical phase.**  For every odd-prime linear
+`[2m,m,m+1]_q` MDS code, the exact fixed-party projective transversal
+logical group is `F_q^2 ⋊ SL_2(q)` precisely when `SC=C^perp` for a
+nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise.  The proof extends
+the diagonal-multiplier lemma to arbitrary `m`, proves the off-diagonal
+converse and complete translation fiber, and moves the coherent Weil lift
+from the GRS presentation to the entire diagonally isodual branch.
+The manuscript and trust ledgers now use this intrinsic boundary.
+`EncoderTransversal` packages the exact conditional carrier terminal with
+no GRS evaluation hypothesis, and the aggregate axiom audit passes with
+only `propext`, `Classical.choice`, and `Quot.sound`.  See
+`2026-07-25-c622-ame-lu-diagonal-isoduality-dichotomy.md`.
+
 **C624 closed (2026-07-25): concrete party-permutation extensions split.**
 The exact fixed and party-moving projective groups, normalized nonabelian
 factor sets, outer actions, trivializing cochains, and complements are now
@@ -452,12 +466,13 @@ compact certificate interface that states exactly which concrete claims are
 kernel checked and which remain externally computed.  Manuscript sources
 remain untouched.
 
-**Post-C619 two-reader frontier (2026-07-25): two successors remain queued.**
+**Post-C619 two-reader frontier (2026-07-25): one research successor remains
+queued.**
 Two independent manuscript-only cold reads converged on the same research
-frontiers.  C622, the highest-EV remaining successor, tests the length-generic exact
-fixed-party dichotomy `F_q^2 ⋊ SL_2(q)` precisely for diagonally isodual MDS
-codes and `F_q^2 ⋊ T` otherwise.  C623 runs the `q=9,25,27` falsifier gate for extension-field
-Clifford equivalence before attempting Desarguesian-spread reconstruction.
+frontiers.  C622 has proved the length-generic diagonal-isoduality
+dichotomy, and C624 has computed the first party-moving extensions.  C623
+runs the `q=9,25,27` falsifier gate for extension-field Clifford equivalence
+before attempting Desarguesian-spread reconstruction.
 C581 is correspondingly narrowed to quantitative approximate rigidity after
 C623.  The complete synthesis, secondary questions, underdeveloped
 connections, and EV rationale are in
@@ -520,6 +535,9 @@ C619 is closed.  Dependency order is authoritative:
 22. C624: exact code-specific party-permutation groups, outer actions,
     normalized factor sets, splitting witnesses, and `T`-normalizer
     enlargements (complete).
+23. C622: intrinsic all-length diagonal-isoduality dichotomy, arbitrary-length
+    multiplier converse, complete translation fiber, manuscript adoption, and
+    conditional evaluation-free Lean terminal (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -553,9 +571,9 @@ symplectic factor splits by the odd-field Weil representation, while the full
 affine one-qudit extension is non-split by the Heisenberg commutator.
 
 **Token-constrained completion route:** the principal `ame-lu` Version-1
-completion program is closed through C619.  The post-Version-1 research
-frontier is C622 first, with C623 as the deeper independent extension-field
-gate; C624 is complete, and C581 must not run before C623.  The next
+completion program is closed through C619.  The post-Version-1 diagonal
+isoduality and party-extension frontiers C622/C624 are complete.  C623 is the
+next independent extension-field gate, and C581 must not run before it.  The next
 cross-lane route remains C553 and then the coordinated build-system
 extraction.  The authoritative three-session protocol is
 `notes/2026-07-25-c287-token-efficient-execution.md`.
