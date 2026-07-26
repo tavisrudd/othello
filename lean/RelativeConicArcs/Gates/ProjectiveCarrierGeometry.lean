@@ -1,0 +1,35 @@
+import RelativeConicArcs.ProjectiveCarrierGeometry
+
+/-!
+# Projective carrier geometry verification boundary
+
+This import-only module checks the coordinate geometry and interpolation theorem for square-root
+carriers in a projective plane over a characteristic-two field.  It covers the line-normal and
+Cauchy--Binet identities, determinant nonvanishing from noncollinearity, exact shared intersection
+representatives, homogeneous-component preservation under line restriction, coordinate-chart
+lifting and restriction surjectivity, incidence-derived residual divisibility, degree-preserving
+finite interpolation, and the resulting twice-the-root-degree carrier bound.
+
+The terminal cardinality theorem assumes coordinate charts for the carrier lines, square
+restrictions of one ambient homogeneous form, nonincidence of distinct centers, noncollinearity of
+triples, and nonsquareness of the ambient form.  It does not construct those data from a
+projectivized arc or identify a particular dual Chow product.
+-/
+
+#print axioms RelativeConicArcs.binaryLinearCoefficientDeterminant_restrictions_eq_planeVectorDeterminant_normal
+#print axioms RelativeConicArcs.binaryLinearCoefficientDeterminant_restrictions_ne_zero_of_normal_eq_scale
+#print axioms RelativeConicArcs.pairwise_restrictedDeterminant_ne_zero_of_normal_eq_scale
+#print axioms RelativeConicArcs.planeLineRestrictedCoefficients_parametrizedPlaneLineNormal_eq_zero
+#print axioms RelativeConicArcs.planeLineRestriction_center_eq_zero_of_normal_eq_scale
+#print axioms RelativeConicArcs.planeVectorPairing_pointOn_restrictedCovectorProjectiveZero
+#print axioms RelativeConicArcs.exists_binaryPreimage_of_restrictedCovectorProjectiveZero
+#print axioms RelativeConicArcs.MvPolynomial.IsHomogeneous.planeLineRestriction
+#print axioms RelativeConicArcs.planeLineRestriction_homogeneousComponent
+#print axioms RelativeConicArcs.planeLineRestriction_planeLinePolynomialLift
+#print axioms RelativeConicArcs.PlaneLineCoordinateChart.planeLineRestriction_surjective
+#print axioms RelativeConicArcs.PlaneLineCoordinateChart.exists_binaryPreimage
+#print axioms RelativeConicArcs.PlaneLineCoordinateChart.lineEquation_isRelPrime_of_restricted_ne_zero
+#print axioms RelativeConicArcs.planeLineRestriction_finsetLineProduct_dvd_root_sub_restriction
+#print axioms RelativeConicArcs.exists_finset_homogeneous_carrierRoot_extension
+#print axioms RelativeConicArcs.exists_finset_homogeneous_carrierRoot_extension_of_coordinateCharts
+#print axioms RelativeConicArcs.card_le_two_mul_degree_of_coordinateCharts_carrierRoots
