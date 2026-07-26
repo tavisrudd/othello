@@ -1205,8 +1205,17 @@
       "last": 624,
       "purpose": "post-cold-read rank-three, higher-moment, stability-completion, and quadratic-hull research tasks",
       "sequence": 134
+    },
+    {
+      "count": 4,
+      "first": 625,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 628,
+      "purpose": "replacement block after live-queue collision for post-cold-read relconic research tasks",
+      "sequence": 135
     }
   ],
-  "next_id": 625,
+  "next_id": 629,
   "schema": "codex-task-id-allocations-v1"
 }
