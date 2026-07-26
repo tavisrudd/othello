@@ -19,7 +19,10 @@ automatically nonzero on every triple above an arc secant, including genuine
 zero-defect hyperovals; carrier nonvanishing alone therefore cannot improve
 the defect bound.
 
-No manuscript or Lean file is changed.
+The paper-facing finite-graph and defect-transfer spine is now formalized in
+`lean/RelativeConicArcs/MatchingPackingDefect.lean` and
+`lean/RelativeConicArcs/MatchingPackingDefectBridge.lean`.  No manuscript file
+is changed.
 
 ## Matching-packing setup
 
@@ -272,6 +275,32 @@ Therefore every triple of distinct maximum centres on an arc secant carries a
 nonzero local conductor obstruction.  This happens in genuine zero-defect
 hyperoval matching designs.  Nonvanishing of the raw conductor class, even at
 the robust abundance forced above, cannot imply positive defect.
+
+## Lean formalization
+
+The focused gate
+`RelativeConicArcs.Gates.MatchingPackingDefect` exports six terminals:
+
+- `RelativeConicArcs.MatchingPacking.oneBlockShort_leave_isClique` proves that
+  a finite simple graph with \(\binom m2\) edges and all positive degrees
+  divisible by \(m-1\) has exactly \(m\) support vertices and is complete on
+  its support;
+- `RelativeConicArcs.badConcurrenceEdgeCount_add_maximumBlocks` proves the
+  exact identity
+  \[
+    B+b\binom m2=3\binom k4
+  \]
+  directly from the formal concurrence partition;
+- `RelativeConicArcs.maximumConcurrenceBlockDeficiency_le_scaledDefect`
+  derives \(m(v-b)\le S\), including \(b\le v\), from the full block-count
+  identity; and
+- `RelativeConicArcs.two_mul_half_le_scaledDefect_of_two_le_maximumConcurrenceBlockDeficiency`
+  derives \(2m\le S\) whenever at least two maximum blocks are missing.
+
+The gate build and its exact-target `--no-build` replay are green.  Every
+exported terminal reports exactly
+`[propext, Classical.choice, Quot.sound]`; there is no `sorry`, custom axiom,
+or native decision procedure in the new modules.
 
 ## Outcome and boundary
 
