@@ -329,5 +329,5 @@ standing for them is introduced.
   `--no-build` confirmation, together with the twenty-nine-terminal polynomial gate
   and twenty-seven-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
-  the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
+  the foreign `RelativeConicArcs.Gates.ClebschArithmeticGluing` build owns that
   lock.
