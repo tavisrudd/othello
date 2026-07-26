@@ -2,8 +2,8 @@
 
 **Lane**: `complete-ports`
 
-**Date**: 2026-07-17
-**Status**: ACTIVE; C220 OMITTED; RELEASE GATES OPEN
+**Date**: 2026-07-26
+**Status**: ACTIVE; REVISED HUMAN-PROOF/LEAN DRAFT SPINE QUEUED; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -13,11 +13,44 @@ Reliability, and Geometric Structure*
 
 ## Goal
 
-Produce one short theorem-led complete-ports manuscript in a fresh-history repository without
-publishing the private monorepo or its history. The paper's six-part spine is the complete bounded
-repair-port object, exact weighted-functional transfer, prescribed asymptotic realization,
-reliability/bounded EXIT, pointed Tutte/perspective structure, and the cubic versus
-quartic-nucleus/harmonic flagship contrast.
+Produce one short theorem-led complete-ports manuscript whose main proof spine consists entirely of
+complete human proofs backed by statement-adequate Lean declarations. Computations, finite tables,
+certificates, and replay machinery may support appendices but may not carry a body theorem. Public
+release remains a separate fresh-history operation that never publishes the private monorepo or its
+history.
+
+## Main-proof admission rule
+
+A result enters the body proof spine only when it has:
+
+1. an exact stable paper statement;
+2. a complete human proof exposing the mathematical mechanism;
+3. a matching Lean declaration;
+4. a field-by-field statement-adequacy check;
+5. an axiom audit naming every classical imported input; and
+6. no computation or certificate in its logical dependency chain.
+
+Results failing this gate are marked `TO FORMALIZE`, `APPENDIX COMPUTATION`, or `CUT/DERIVE`.
+Classical literature inputs may remain cited, but the paper and Lean boundary must expose the same
+input explicitly.
+
+## Revised paper spine
+
+1. complete bounded ports, reconstruction radius, support/coefficient/probability layers, intrinsic
+   port isomorphisms, and the general MDS local-reconstruction theorem on page 2;
+2. exact pointed confinement and weighted-functional transfer;
+3. positive-density geometric fingerprints, led by the general MDS theorem and followed by compact
+   Clebsch/arc/PRS/AME consequences;
+4. reliability and bounded EXIT;
+5. pointed Tutte structure and the radius-filtration boundary;
+6. cubic--axis versus quartic--nucleus/harmonic applications as demonstrations of different port
+   geometries;
+7. verification and provenance; and
+8. appendices containing every retained computation, certificate, exact finite table, and replay
+   description.
+
+The working title is *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*;
+C671 freezes the final adopted title and theorem hierarchy.
 
 ## Lane lineage and ownership
 
@@ -62,15 +95,23 @@ terminal.
 
 ## Next step
 
-The corrected private draft has passed three independent paragraph-by-paragraph cold reads and
-same-reader resolution checks, and the user has chosen to omit C220. The paper repository,
-disk-backed destination, and MIT license are approved. Shared-Lean extraction is planned under
+Run C671 first. It freezes the theorem hierarchy and creates the paper-control documents before any
+TeX restructuring. The proof/formalization work then branches:
+
+- C672 establishes MDS local reconstruction;
+- C673 reconciles exact confinement and transfer;
+- C675 establishes the noncomputational reliability/EXIT calculus;
+- C674 follows C672+C673 for positive-density realization;
+- C676 follows C675 for pointed Tutte and the filtration boundary; and
+- C677 follows C672 for the harmonic geometric application.
+
+C678 assembles the revised modular draft only after C672--C677 pass their gates. C325 then builds
+the appendix-only finite verifier. C679 performs the aggregate formal/prose audits and independent
+draft-readiness cold reads.
+
+The corrected prior twelve-page draft and its cold reads remain inputs, not acceptance of the new
+hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md) and remains separately build-system-owned.
-Allocate the release-preparation pass only after the external specialist citation-chain review,
-public checker/archive identity, and shared-Lean export gates are resolved. That pass must add the
-explicit mixed-trust verification map, verbatim adequacy appendix for headline Lean statements,
-and AI/provenance section before fresh-history export. Do not initialize, copy, publish, or push
-before those gates.
 
 Public export remains gated on the public checker/archive identity and C287 shared-Lean export. The
 paper repo pins an exact validated shared-Lean commit and contains no copied Lean sources. The
