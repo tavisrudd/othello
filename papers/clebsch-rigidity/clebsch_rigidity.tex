@@ -114,6 +114,10 @@ Hirschfeld~\cite{Hirschfeld1998} for the plane arc/covering-radius setting.
 We call $A$ \emph{conic-filling} when $\cU(A)$ is the full
 $\F_q$-rational point set of a nonsingular conic.
 
+Here and in Theorem~\ref{thm:rigidity}, a \emph{conic} is the projective
+zero set of a nonzero homogeneous quadratic form; it may be degenerate
+unless stated otherwise.
+
 \begin{theorem}[Rigidity theorem]
 \label{thm:rigidity}
 For a six-arc $A\subset\PG(2,11)$, the following are equivalent:
@@ -126,6 +130,14 @@ conic;
 \end{enumerate}
 \end{theorem}
 
+More precisely, fix a nonsingular conic $\cC$.  The six-arcs satisfying
+$\cU(A)=\cC(\F_{11})$ form one orbit under
+$\operatorname{Stab}_{\mathrm{PGL}(3,11)}(\cC)$.  Indeed, a projectivity
+between two such arcs carries one uncovered locus to the other. Its image
+of $\cC$ therefore shares all twelve rational points with $\cC$, so
+B\'ezout's theorem makes the two conics equal. This is the exact geometric
+sense in which the syndrome locus reconstructs the six-column realization.
+
 The proof reconstructs the hexagon from conic containment alone.
 A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
 conceptual implication.  The same geometry then gives an exact distance
@@ -133,12 +145,12 @@ oracle and all nearest-codeword multiplicities; the resulting ambiguity
 strata reconstruct the Brianchon points, the self-polar triangles, and the
 invariant support bipartition.
 
-The chord-defect identity has a second role independent of the Clebsch
-classification.  For a Clebsch hexagon $K$ it gives
-$|\cU(K)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
-$q\equiv3\pmod4$.  For an arbitrary conic-filling $k$-arc, the moment
-calculation and a partial-cover theorem force $q$ odd and
-$2k-3\le q\le(k(k-1)+3)/3<\binom{k}{2}$.
+The main general theorem is a uniform field window for conic-filling arcs.
+For an arbitrary conic-filling $k$-arc, the chord moments and a
+partial-cover theorem force $q$ odd and
+$2k-3\le q\le(k(k-1)+3)/3<\binom{k}{2}$.  For a Clebsch hexagon $K$, the
+same chord-defect identity gives $|\cU(K)|=q^2-14q+45$, with off-conic
+excess $(q-4)(q-11)$ when $q\equiv3\pmod4$.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -148,8 +160,14 @@ pp.~275--278]{Dye1991}; Storme and Van~Maldeghem identified the corresponding
 six-arc in their finite-plane classification~\cite{SVM1995}. Deep holes of
 Reed--Solomon codes have both an algorithmic history
 \cite{GuruswamiVardy2005,ChengMurray2007} and a geometric classification in
-the projective case~\cite{ZWK2020}. Those results concern GRS codes, whose
-arcs lie on normal rational curves; the code here is not GRS.
+the projective case~\cite{ZWK2020}. Kaipa makes the
+deep-hole/MDS-extension equivalence explicit for Reed--Solomon
+codes~\cite{Kaipa2017}, while Wu, Ding, and Chen formulate a corresponding
+extension criterion for general MDS codes and dual deep
+holes~\cite{WuDingChen2025}. Those results begin with a fixed code and
+characterize its extensions. The inverse statement here instead
+reconstructs a non-GRS projective code from its entire maximum-distance
+syndrome locus.
 
 \paragraph{What is new and what is not.} The hexagon, its uniqueness and
 stabilizer, and its complete-exterior-set interpretation are classical
@@ -255,7 +273,7 @@ $q^2+q+1-k$ off-arc points proves the identity. Finally,
 and the second moment gives the defect bound.
 \end{proof}
 
-\begin{corollary}[Conic-filling window and six-arcs]
+\begin{theorem}[Conic-filling window and six-arcs]
 \label{cor:conic-filling-window}
 If $|\cU(A)|=q+1$, then
 \[
@@ -278,7 +296,7 @@ when $|\cU(A)|=q+1$. For the displayed Clebsch hexagon, Dye's ten
 Brianchon points give $c(A)=10$; its fifteen chords have $45$ disjoint
 pairs, cover $115$ of the $127$ off-arc points, and leave exactly twelve
 uncovered.
-\end{corollary}
+\end{theorem}
 
 \begin{proof}
 The first formula is Theorem~\ref{lem:chord-defect} rearranged, and its
@@ -311,6 +329,15 @@ $c(A)=10$~\cite[Theorem~1, pp.~275--276]{Dye1991}. At $q=11$, the two
 moments read $\sum i n_i=150$ and $\sum\binom{i}{2}n_i=45$, whence
 $n_1+n_2+n_3=115$.
 \end{proof}
+
+\begin{remark}[Sharpness of the window]
+Both bounds are attained. A projective four-frame over $\F_5$ has a
+conic-filling uncovered locus and satisfies
+$q=2k-3=(k(k-1)+3)/3$. The Clebsch six-arc over $\F_{11}$ attains the
+upper bound. We do not know an infinite family attaining either bound; the
+computational companion~\cite{RuddComputational2026} shows that, through
+$k=8$, these are the only conic-filling examples.
+\end{remark}
 
 \section{The code and its projective syndrome locus}
 \label{sec:code}
@@ -431,7 +458,7 @@ The covering radius of $C$ is three, and
 \end{proposition}
 
 \begin{proof}
-Corollary~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$.
+Theorem~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$.
 The exteriority of all fifteen chords gives
 $\cC(\F_{11})\subseteq\cU(A)$. Since a nonsingular conic has twelve
 $\F_{11}$-points, equality follows without using the orbit classification.
@@ -959,19 +986,26 @@ obstruction uses the standard nucleus theorem
 Proposition~1.5 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
-reconstruction, and support bipartition are proved in the text.  A separate
-Lean development checks the central deductions conditional on the two Dye
-inputs.  It is distributed in the
-\href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom} repository}
-at commit
-\path{6d4766d1ea5e9a36f1a507e549c223416a6b506f}.  The aggregate theorem is
-\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}; the development
-uses Lean 4.32.0-rc1 and Mathlib commit
-\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  This formalization is an
+reconstruction, and support bipartition are proved in the text. The formal
+cross-check is conditional: it treats Dye's Brianchon bound and equality
+classification as explicit axioms. It does not certify the exhaustive
+searches in the computational companion. The Lean development is
+distributed in the
+\href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}
+repository} and uses Lean 4.32.0-rc1. Its pinned artifacts are
+\begin{center}
+\small
+source commit:
+\path{6d4766d1ea5e9a36f1a507e549c223416a6b506f}\\
+aggregate gate:
+\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
+Mathlib commit:
+\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
+\end{center}
+This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
-recorded axiom audit lists the standard logical axioms and, for the
-rigidity implication, exactly the explicit Brianchon-bound and
-equality-classification axioms imported from Dye; the gate uses neither
+recorded axiom audit lists the standard logical axioms and exactly the two
+Dye axioms above for the rigidity implication; the gate uses neither
 admitted declarations nor native execution.
 
 \section{Conclusion}
@@ -999,6 +1033,8 @@ decoder results ask when coset-leader support data alone reconstruct a
 projective code.
 
 \bibliographystyle{plain}
+\small
+\raggedright
 \begin{thebibliography}{99}
 
 \bibitem{BBS2010}
@@ -1081,6 +1117,13 @@ J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
 \newblock Oxford University Press, 1998.
 
+\bibitem{Kaipa2017}
+K.~Kaipa,
+\newblock Deep holes and MDS extensions of Reed--Solomon codes,
+\newblock \emph{IEEE Transactions on Information Theory} \textbf{63}(8)
+(2017), 4940--4948.
+\newblock doi:10.1109/TIT.2017.2706677.
+
 \bibitem{MendelsohnRosa1985}
 E.~Mendelsohn and A.~Rosa,
 \newblock One-factorizations of the complete graph---a survey,
@@ -1110,6 +1153,13 @@ L.~Storme and H.~Van~Maldeghem,
 \newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
 (1995), 200--216.
 \newblock doi:10.1016/0097-3165(95)90051-9.
+
+\bibitem{WuDingChen2025}
+Y.~Wu, C.~Ding, and T.~Chen,
+\newblock When does the extended code of an MDS code remain MDS?,
+\newblock \emph{IEEE Transactions on Information Theory} \textbf{71}(1)
+(2025), 263--272.
+\newblock doi:10.1109/TIT.2024.3494813.
 
 \bibitem{ZWK2020}
 Y.~Zhang, D.~Wan, and K.~Kaipa,

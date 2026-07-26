@@ -358,6 +358,22 @@ The companion remains blocked from independent submission only by the
 external packaging issue recorded under C182: its load-bearing relative
 paths need a stable artifact locator and immutable version.
 
+A later submission-readiness pass made the remaining internal repairs.  The
+companion now says that Paper I avoids an *exhaustive classification of
+six-arcs over* \(\mathbb F_{11}\), rather than claiming to avoid classification
+altogether.  Paper I states the reconstruction precisely: for a fixed
+recovered conic, all compatible arcs form one orbit under its projective
+stabilizer.  The conic-filling window is now a theorem, is foregrounded in
+the introduction, and has a sharpness remark recording the \((4,5)\) and
+\((6,11)\) equality examples and that no infinite family is presently known
+to the author.
+The introduction now distinguishes the Kaipa and Wu--Ding--Chen
+deep-hole/MDS-extension results from the new inverse-rigidity direction.
+Both papers state plainly that Lean is conditional on Dye's two inputs and
+does not certify the exhaustive searches.  The companion's exponent-like
+histogram notation has been replaced by a frequency table.  These changes
+preserve the fourteen- and seven-page warning-free builds.
+
 ## Vibe check
 
 The geometry now has a clean human boundary theorem, but the desired human

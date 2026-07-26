@@ -103,6 +103,16 @@ then fixed the companion's undefined code symbol and synchronized
 terminology without changing either page count. The companion's remaining
 submission blocker is external packaging: its relative replay paths need a
 stable artifact locator and immutable version, as tracked by C182.
+A submission-readiness pass then narrowed the companion's
+``without classification'' claim to ``without an exhaustive classification
+of six-arcs over \(\mathbb F_{11}\)'', stated fixed-conic reconstruction as one
+stabilizer orbit, promoted and motivated the general conic-filling window,
+added its sharpness status, positioned Kaipa and Wu--Ding--Chen, made the
+Lean/exhaustive-search boundary explicit in both papers, and replaced the
+companion's exponent-like histogram with a frequency table. Both PDFs remain
+warning-free at fourteen and seven pages. No paper-code remote or immutable
+deposit exists yet, so the external artifact citation remains C182's
+blocker.
 
 C182 follows C610. Its blocker is external publication packaging. The
 paper repository and immutable public deposit do not yet exist, and this

@@ -32,9 +32,10 @@
 
 \begin{abstract}
 For a projective arc $A\subset\PG(2,q)$, let $\cU(A)$ be the points on no
-chord of $A$.  The geometric paper proves, without classification, that a
-six-arc in $\PG(2,11)$ whose uncovered locus lies on a conic is the Clebsch
-hexagon.  Here exact finite computation sharpens and extends that result.
+chord of $A$.  The geometric paper proves, without an exhaustive
+classification of six-arcs over $\F_{11}$, that a six-arc in $\PG(2,11)$
+whose uncovered locus lies on a conic is the Clebsch hexagon.  Here exact
+finite computation sharpens and extends that result.
 There are fifteen projective classes of six-arcs over $\F_{11}$; the
 Clebsch class is the unique one whose uncovered locus is contained in a
 cubic, and it is separated from every other class by a four-point gap in
@@ -85,8 +86,8 @@ For every $k$-arc with $k\ge4$,
 \]
 \end{theorem}
 
-\begin{corollary}[Conic-filling window
-{\cite[Corollary 3.2]{RuddRigidity2026}}]
+\begin{theorem}[Conic-filling window
+{\cite[Theorem 3.2]{RuddRigidity2026}}]
 \label{cor:conic-filling-window}
 If $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 \[
@@ -99,7 +100,7 @@ For $k=6$, writing $c(A)=n_3$ gives
  c(A)=(q-6)(q-9)
 \]
 when $|\cU(A)|=q+1$.
-\end{corollary}
+\end{theorem}
 
 \begin{theorem}[Geometric rigidity
 {\cite[Theorem 1.1]{RuddRigidity2026}}]
@@ -122,7 +123,13 @@ interpretation.
 For comparison, the exact replay enumerates all $1548$ frame-normalized
 six-arc presentations and selects the $252$ whose vertices lie on a
 nonsingular conic. Their $|\cU(A)|$ histogram is
-$18^{30},19^{60},20^{90},22^{72}$, so
+\[
+\begin{array}{c|rrrr}
+|\cU(A)|&18&19&20&22\\ \hline
+\text{frequency}&30&60&90&72
+\end{array}
+\]
+so
 $|\cU(A)|\in\{18,19,20,22\}$. The replay is listed in the ``Fifteen
 classes and numerical gap'' row of Table~\ref{tab:replays}.
 
@@ -324,7 +331,7 @@ Clebsch hexagon.
 \end{theorem}
 
 \begin{proof}
-Corollary~\ref{cor:conic-filling-window} gives $q\ge9$ and
+Theorem~\ref{cor:conic-filling-window} gives $q\ge9$ and
 $c(A)=(q-6)(q-9)$ with $0\le c(A)\le15$. Thus the only prime-power
 candidates are $q=9,11$: $q=10$ is not a prime power, and every
 $q\ge12$ gives $c(A)\ge18$.
@@ -365,7 +372,7 @@ is attained.
 \end{theorem}
 
 \begin{proof}[Proof with exhaustive finite verification]
-For $k=4$, Corollary~\ref{cor:conic-filling-window} gives
+For $k=4$, Theorem~\ref{cor:conic-filling-window} gives
 $5\le q<6$, hence $q=5$. Every four-arc is a projective frame, and for the
 standard frame a direct substitution gives
 \[
@@ -501,12 +508,12 @@ Passant-arc bound for $q=13,17,19$
 \label{tab:replays}
 \end{table}
 
-The companion has no hidden formal-proof dependency.  A separate Lean
-development checks the chord moments, six-arc defect specialization, the
-$q=9$ polarity reduction, and the geometric bridge used in the small-$k$
-argument, but it does not formalize the exhaustive classifications.
-Accordingly, the replays in Table~\ref{tab:replays} are part of the proof
-surface rather than optional corroboration.
+No exhaustive classification in this paper is certified by Lean. A
+separate development checks the chord moments, six-arc defect
+specialization, the $q=9$ polarity reduction, and the geometric bridge used
+in the small-$k$ argument. Accordingly, the replays in
+Table~\ref{tab:replays} are part of the proof surface rather than optional
+corroboration.
 
 \section{Conclusion}
 
