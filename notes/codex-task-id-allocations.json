@@ -1196,8 +1196,17 @@
       "last": 620,
       "purpose": "classify split-free points on higher Lucas modular carriers",
       "sequence": 133
+    },
+    {
+      "count": 4,
+      "first": 621,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 624,
+      "purpose": "post-cold-read rank-three, higher-moment, stability-completion, and quadratic-hull research tasks",
+      "sequence": 134
     }
   ],
-  "next_id": 621,
+  "next_id": 625,
   "schema": "codex-task-id-allocations-v1"
 }
