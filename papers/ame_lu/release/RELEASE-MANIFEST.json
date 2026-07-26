@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 246870,
+        "bytes": 247012,
         "path": "ame-lu.pdf",
-        "sha256": "6d32d63fe96e668e7feb92ddab6e4ad81cb4e26d28e060355a1296d3d6954f59"
+        "sha256": "c23eda1448cfa77036723ebdfc79eb40ac4e0e0832078d96f0aeadc6be3361d4"
       },
       {
         "bytes": 18767,
@@ -66,9 +66,9 @@
         "sha256": "a15f5639e38c6ee3eaeb7feaa8bb40bd649895117ebb9ba659a74190ad319b7f"
       },
       {
-        "bytes": 8990,
+        "bytes": 9160,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "9469a3c1d8d72d11051928aff6c32ec25a85d0dbf7526154edbda274da8650fd"
+        "sha256": "7e665eae64811eeafd6958b2b2ea86fa34efe76b3cd32422b7aa759582c9fda5"
       },
       {
         "bytes": 11116,
@@ -81,9 +81,9 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 14997,
+        "bytes": 15002,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "58a24a6fad5c9ee478e74d15fd9f48df6864068e6ef4bd568b3586d8eae424c2"
+        "sha256": "1d8ddbef0c7c4e53ca2eb47ec0bd5162c4512d357e00589cc65ae787272a737a"
       },
       {
         "bytes": 3946,
@@ -191,7 +191,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "96cf9fd1d3dde0dd2c2b258d777663146dfe3fb9c0aceec1670d867d12ccebc3"
+    "tree_sha256": "e6aef3abaa68667905836c8f33b5aa90f80c16b6815190bf728caf17de2879af"
   },
   "formal_companion": {
     "artifacts": [

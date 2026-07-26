@@ -77,10 +77,12 @@ T=\{\diag(a,a^{-1}):a\in\F_q^\times\},&\text{if the arc is nonconic}.
 \]
 Thus every encoder view of a GRS tensor realizes the full one-qudit
 logical symplectic group from fixed-party symmetries.  Off the GRS locus,
-the fixed-party logical symplectic image is the split torus.  Any party-moving
-isoduality that exchanges the CSS \(X\)- and \(Z\)-spaces acts by the
-nontrivial Weyl-group element and generates the normalizer of \(T\)
-together with \(T\).
+the fixed-party logical symplectic image is the split torus.  At a chosen
+anchor leg, any party-moving isoduality that exchanges the CSS \(X\)- and
+\(Z\)-spaces transports the encoder view by the nontrivial Weyl-group
+element, so the possible anchor blocks generate the normalizer of \(T\)
+together with \(T\).  This is an action on one fixed encoder only when
+the isoduality fixes its input leg.
 \end{theorem}
 
 \begin{proof}
@@ -188,5 +190,6 @@ and therefore retains the full \(\mathrm{SL}_2(17)\) fixed-party image; its
 party image is \(S_4\), and the computed extension splits.  The
 characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
 fixed-party image is the split torus; its \(S_5\) party image also splits,
-and odd motion enlarges the logical linear group to \(N(T)\).  These are
-symmetry enhancements inside the two phases, not exceptions to \((5.1)\).
+and odd motion enlarges the transported anchor-block carrier to \(N(T)\).
+These are symmetry enhancements inside the two phases, not exceptions
+to \((5.1)\).
