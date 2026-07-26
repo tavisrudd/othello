@@ -4,8 +4,10 @@
 
 **Date:** 2026-07-25
 
-**Status:** mathematical test positive; dimension core kernel checked;
-manuscript promotion and claim-specific literature audit pending
+**Status:** theorem and literature positioning adopted in the manuscript;
+coordinate support, generation, axis, and abstract holonomy cores kernel
+checked; end-to-end stabilizer-state/reduced-density Lean composition and
+the queued aggregate gate remain open
 
 ## Result
 
@@ -133,65 +135,56 @@ headline, not the later code-geometric group dichotomy.
 
 ## Lean support
 
-`RelativeConicArcs.AMELU.StabilizerAMESupport` proves the reusable
-finite-dimensional kernel squeeze:
+`RelativeConicArcs.AMELU.StabilizerAMESupport` now proves the explicit
+finite-coordinate support bridge, including:
 
 - `stabilizerAME_kernelToLocal_bijective`;
 - `stabilizerAME_finrank_ker_eq_local`.
+- `stabilizerCoordinateRestriction_eq_zero_iff`;
+- `stabilizerKernelLocalProjection_injective_of_supportAtMost`;
+- `stabilizerAME_halfParty_kernelToLocal_bijective_of_finrank`; and
+- `stabilizerKernelLocalProjection_existsUnique`.
 
-The input is an outside-coordinate restriction map and a one-site
-projection from its kernel.  If the source dimension is the sum of the
-outside and one-site dimensions, injectivity of the one-site projection
-forces bijectivity and exact kernel dimension.  This applies over
-\(\mathbb F_p\) to arbitrary additive \(q=p^e\) stabilizers.
+`AMESupportedSubspaceProfile.erase_sup_erase_eq`,
+`space_eq_minimumSupportSpan`, and
+`minimumSupportSpan_univ_eq_top` prove the minimum-support decomposition
+and generation consequences from the exact support profile.
+`RelativeConicArcs.AMELU.HolonomyCentralizer` proves the abstract
+evaluation-at-a-base equivalence between compatible transition gauges and
+the holonomy centralizer, including restriction to a normal subgroup.
 
 The existing generic diagonal-tensor files already prove the independent
 axis-recovery step for arbitrary finite index sets and nonzero
-coefficients.  What is not yet formalized is the physics bridge from an
-abstract additive stabilizer AME state to the supported-label kernel and
-its reduced-density Weyl expansion.
+coefficients.  What remains is the end-to-end physics bridge from an
+additive stabilizer AME state and projector to the exact support profile
+and phased reduced-density Weyl expansion, followed by composition with
+the axis terminal.
 
-## Literature reconnaissance
+## Literature audit
 
-This was a mathematical test, not yet a claim-specific novelty audit.
-Targeted arXiv/web searches on 2026-07-25 located the known qubit
-LU--LC line and no exact qudit stabilizer-AME theorem.
+The claim-specific audit is complete in
+`2026-07-25-c649-stabilizer-ame-literature-audit.md`.  It discusses
+fourteen sources individually, including three at full-text depth, and
+records every search family, cache key, hash, read depth, and database gap.
 
-For qubits, the result is already a consequence of the
-Van den Nest--Dehaene--De Moor minimal-support criterion: the support
-theorem above gives all three nonidentity Pauli labels at every party of
-each minimum support.  Thus the qubit theorem and its axis mechanism are
-not new.
-
-The potentially new scope is the arbitrary prime-power qudit and additive
-stabilizer extension.  The searches
-
-```text
-site:arxiv.org stabilizer absolutely maximally entangled local unitary local Clifford equivalence
-site:arxiv.org stabilizer AME state automorphism local Clifford full Pauli support marginal
-site:arxiv.org "AME stabilizer" "local unitary" Clifford
-site:arxiv.org qudit stabilizer state local unitary local Clifford equivalence prime dimension
-site:arxiv.org nonbinary stabilizer state "local unitary" "local Clifford"
-site:arxiv.org additive quantum MDS stabilizer AME local equivalence Clifford
-```
-
-did not locate that statement.  This licenses no priority claim:
-OpenAlex/zbMATH exhaustion, read-depth reconciliation, and the existing
-C562 forward-citation closure have not yet been rerun for the enlarged
-claim.
+The qubit theorem is already a consequence of Rains and the Van den
+Nest--Dehaene--De Moor minimal-support criterion.  Tan's 2026 computation
+contains the canonical \(q=3,m=2\) automorphism subcase.  Huber--Grassl
+already give the full quantum-MDS weight enumerator, and perfect-tensor
+operator pushing is standard from Pastawski et al.  No exact predecessor
+was located for the uniform all-prime-power, all-\(m\), arbitrary-additive
+intertwiner theorem or its factorwise stabilizer-QMDS conversion corollary.
+The manuscript makes no absolute firstness claim.
 
 ## Manuscript consequence
 
-If the literature gate stays open, Theorem 1.1 can be promoted from
-equal-phase MDS/CSS states to all stabilizer \(\operatorname{AME}(2m,q)\)
-states for \(m\geq2\).  The present MDS/CSS theorem then becomes an
-immediate corollary feeding the exact code and logical-group results.
-
-The abstract and title would need only a hierarchy change, but Section 2
-would need a general stabilizer-projector convention and Section 3 would
-need the support theorem and arbitrary-bijection form of “full-Weyl
-diagonal.”  The diagonal-isodual, pencil, and verification sections retain
-their current scopes.
+Theorem 1.1 is now the arbitrary-additive stabilizer
+\(\operatorname{AME}(2m,q)\) theorem.  The title, abstract, Sections 1--4,
+verification prose, and scholarly ledgers use the new hierarchy.  MDS
+shortening remains as an explicit CSS realization; diagonal isoduality and
+the pencil retain their previous scopes.  The transition-atlas paragraph
+now identifies Section 4's 450 holonomies as concrete conjugacy data of the
+general full-Weyl marginal atlas.
 
 ## Extra-juice consequences and exposition hierarchy
 
@@ -388,6 +381,86 @@ approximate-rigidity problem a uniform starting estimate and suggests an
 explicit ``approximately LU implies near LC'' theorem for stabilizer AME
 states.  It is a successor, not a free manuscript corollary.
 
+## Tao / third-order extra juice: the transport-commutant theorem
+
+The transition atlas suggests one exact object that may subsume much of the
+paper's later propagation machinery.  Make a connected multigraph whose
+vertices are the local Pauli-label spaces \(V_i\) and whose edge labeled by
+\((A;i,j)\) is
+\[
+ M_A(i,j)=p_jp_i^{-1}:V_i\longrightarrow V_j,
+ \qquad |A|=m+1,\quad i,j\in A.
+\]
+Fix a base party \(b\).  Products along closed paths generate a holonomy
+group \(H_b\leq\operatorname{GL}(V_b)\).
+
+In prime local dimension, evaluation at \(b\) should give an exact
+isomorphism
+\[
+ \{\text{fixed-party linear Clifford symmetries of }L\}
+   \;\cong\;
+ C_{\operatorname{SL}_2(q)}(H_b).                    \tag{*}
+\]
+Necessity is immediate: preservation of every supported graph gives
+\[
+ F_jM_A(i,j)=M_A(i,j)F_i,
+\]
+so \(F_b\) commutes with every loop transport.  Conversely, an element
+centralizing \(H_b\) propagates consistently to every party.  Since
+\(\operatorname{SL}_2(q)\) is normal in \(\operatorname{GL}_2(q)\), all
+propagated blocks remain symplectic.  They preserve every minimum-support
+subgroup, and minimum-support generation then makes them preserve \(L\).
+
+For \(q=p^e\), \(e>1\), conjugation by an arbitrary transition need not
+preserve \(\operatorname{Sp}_{2e}(p)\).  Choose path transports
+\(P_i:V_b\to V_i\), pull each local alternating form back to \(V_b\), and
+write it as
+\[
+ P_i^*J_i=J_bA_i.
+\]
+A base block propagates symplectically exactly when it commutes with every
+\(A_i\); path independence is exactly commutation with every holonomy.
+Thus the natural prime-power replacement for \((*)\) is
+\[
+ G_b
+   \;\cong\;
+ \operatorname{Sp}(V_b,J_b)\cap\mathcal A_L',
+ \qquad
+ \mathcal A_L=\langle H_b,A_1,\ldots,A_{2m}\rangle.    \tag{**}
+\]
+Changing the base or chosen paths conjugates the presentation without
+changing the resulting group.
+
+This is the structural theorem Tao would ask the paper to expose.
+
+- In the prime-field MDS--CSS case, the ever-present split torus forces
+  the holonomies into its diagonal commutant.  Diagonal isoduality is the
+  scalar-holonomy branch, whose centralizer is all of
+  \(\operatorname{SL}_2(q)\); a nonscalar diagonal holonomy leaves exactly
+  \(T\).
+- The 450 quantities in the six-party pencil are scalar conjugacy data
+  extracted from \(H_b\), rather than an isolated census.
+- The extension-field shortened-transport commutant dimensions and their
+  Frobenius-sector jumps are candidates for concrete manifestations of
+  \(\mathcal A_L'\).  Verifying the identification could turn the current
+  exceptional census into an exact group theorem.
+- Dasu--Burton's transversal-Clifford matrix algebra becomes a genuinely
+  close conceptual comparison: both problems reduce a transversal group
+  to units in a finite endomorphism-algebra commutant, with different
+  locality and block hypotheses.
+- Quantitative rigidity can be organized by the smallest nonzero singular
+  value of the commutator map
+  \(X\mapsto([X,a])_{a\in\mathcal A_L}\).  A near symmetry is then close to
+  the exact commutant before the final projection to a Clifford element.
+
+The immediate high-value test is to prove \((*)\) abstractly and check that
+the existing prime-field logical-phase proof factors through it.  The
+prime-power theorem \((**)\) is the next layer.  A finite census should then
+ask which centralizer types actually occur for stabilizer AME tensors:
+full symplectic group, split or nonsplit Cartan, unipotent centralizer,
+center, or further extension-field commutants.  Unexpected absences would
+be structural constraints, not failed searches.
+
 ## Mystery ledger
 
 | Mystery | Status | Evidence / next gate |
@@ -402,6 +475,10 @@ states.  It is a successor, not a free manuscript corollary.
 | Do the marginal transition maps explain the pencil holonomies? | resolved conceptually | Section 4 already defines the same projection transitions and loop compositions |
 | Is the full pushing atlas a complete LC invariant including phases? | resolved in prose | generation recovers the label Lagrangian; existing Pauli character correction removes lift mismatch |
 | Does full-Weyl rigidity admit a uniform quantitative version? | open successor | equal coefficient magnitudes give a condition-number-free rank-one defect; C581 owns the full stability theorem |
+| Is the prime-field fixed-party group exactly the holonomy centralizer? | open, proof outlined | prove evaluation-at-base isomorphism using transition intertwining, loop consistency, and minimum-support generation |
+| Does the prime-power group equal the symplectic commutant in \((**)\)? | open | add transported-form operators to the holonomy algebra and prove path-choice independence |
+| Which holonomy-centralizer types occur for general stabilizer AME states? | open | exact census after \((*)\)/\((**)\); distinguish split, nonsplit, unipotent, central, and extension-field cases |
+| Do C623's commutant jumps equal \(\dim\mathcal A_L'\)? | open | reconcile the shortened-transport matrices and transported alternating forms definition by definition |
 | Does the transversal no-go remain CSS-specific? | resolved negatively | view any party as the Choi input of the punctured stabilizer quantum-MDS encoder |
 | Is the prime-power qudit theorem already in the literature? | open | claim-specific audit required before manuscript novelty wording |
 | Is the full stabilizer-to-marginal bridge kernel checked? | open | build an additive stabilizer-state interface; current Lean checks the dimension and axis cores |

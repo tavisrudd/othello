@@ -2,16 +2,16 @@
 
 **Lane:** `ame-lu`
 
-**Purpose:** complete the paper titled *Local-Unitary Rigidity and
-Transversal Clifford Groups for MDS--CSS AME States*.
+**Purpose:** complete the paper titled *Local-Unitary Rigidity of
+Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).
 
 ## Current status
 
-**C649 mathematical test positive (2026-07-25): general stabilizer-AME
-full-Weyl rigidity.**  For every stabilizer
+**C649 adopted pending its final Lean composition and aggregate gate
+(2026-07-25): general stabilizer-AME full-Weyl rigidity.**  For every stabilizer
 \(\operatorname{AME}(2m,q)\) state with \(m\ge2\), the stabilizer labels
 supported on any \(m+1\) parties form a \(q^2\)-element subgroup and
 project bijectively onto the full local Pauli-label group at every retained
@@ -21,9 +21,17 @@ forces every factor of an LU intertwiner to be Clifford.  This works for
 arbitrary additive prime-power stabilizers; CSS, equal-phase, classical
 linearity, and MDS are unnecessary for rigidity.  The \(m=1\) Bell-pair
 boundary is sharp.  The dimension squeeze is kernel checked in
-`StabilizerAMESupport.lean`; the additive stabilizer-projector bridge and a
-claim-specific literature audit remain the promotion gates.  See
-`2026-07-25-c649-stabilizer-ame-full-weyl-rigidity.md`.
+`StabilizerAMESupport.lean`; minimum-support generation and the abstract
+holonomy-centralizer theorem are also kernel checked.  The claim-specific
+audit located the known qubit and canonical four-qutrit subcases, the
+standard QMDS enumerator, and standard operator pushing, but no exact
+all-prime-power/all-\(m\)/arbitrary-additive predecessor.  The manuscript
+now leads with the general theorem, credits those sources at point of use,
+and interprets its 450 pencil holonomies as transition-atlas data.  The
+end-to-end additive stabilizer-projector/reduced-density Lean composition
+and the already queued aggregate remain open.  See
+`2026-07-25-c649-stabilizer-ame-full-weyl-rigidity.md` and
+`2026-07-25-c649-stabilizer-ame-literature-audit.md`.
 
 **C647 closed (2026-07-25): post-C562 literature and novelty audit.**
 Every theorem family incorporated after C562 was compared against the
