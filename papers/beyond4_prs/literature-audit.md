@@ -56,14 +56,15 @@ the cited papers' bibliographies.
 - Zhang--Wan--Kaipa — **full text**, arXiv v2, Sections I--IV; cache key
   `arXiv:1901.05445`, SHA-256
   `5c2b9e2508c7200428c441b7a41da1596b1c9b0851f5632e2297cdbed41caf24`.
-- Kaipa — **full text**, especially Proposition 1 and Section V; cache key
+- Kaipa — **full text**, especially Proposition 1, Section IV's theorem of
+  Dür and Proposition 4(1), and Section V; cache key
   `arXiv:1612.05447`, SHA-256
   `1fe8de83c0b8cd3938e1a450fd49f376de795d7a317f099a730c63ab968178a4`.
 - Seroussi--Roth — **partial**, published scan, Theorem 1 and its stated
   corollary; cache key `10.1109/TIT.1986.1057188`, SHA-256
   `0b5c152819f91d5e410146ada3527b5b795a55fc6170c14a27e43b8c3e39a5f9`.
-  This verifies the high-rate MDS-extension statement used through Kaipa's
-  geometric restatement.
+  This verifies the high-rate MDS nonextendability input; Dür's theorem in
+  Kaipa Section IV supplies the separate completeness--radius equivalence.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256

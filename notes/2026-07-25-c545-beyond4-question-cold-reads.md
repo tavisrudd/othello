@@ -13,7 +13,8 @@ Clebsch-factorization manuscript with the PRS paper.
 The first reader noticed that the uniform transverse range already forces the
 covering-radius equality that the draft stated conditionally. Seroussi--Roth,
 Theorem 1, applied to the dual \(r\)-dimensional GRS code of length \(q+1\),
-gives completeness of the normal rational curve, hence
+gives nonextendability. Dür's theorem, as stated in Kaipa Section IV, equates
+that nonextendability with completeness of the normal rational curve and hence
 \[
  \rho(\operatorname{PRS}(q+1-r))=r-1,
  \qquad r\leq\left\lfloor\frac q2\right\rfloor+2,
@@ -31,8 +32,11 @@ greater than \(r-1\) gives the exact persistent deep-hole list.
 The source was checked against the cached primary PDF
 DOI `10.1109/TIT.1986.1057188`, SHA-256
 `0b5c152819f91d5e410146ada3527b5b795a55fc6170c14a27e43b8c3e39a5f9`,
-especially Theorem 1 and its geometric restatement. Kaipa's Theorem 2 remains
-the paper's geometric secondary restatement.
+especially Theorem 1. Kaipa Section IV's theorem of Dür and Proposition 4(1)
+supply the noncircular completeness--radius passage and the exact
+Seroussi--Roth parameter range. Kaipa's Theorem 2 is not used for the radius:
+at length \(q+1\), its Proposition 1 hypothesis already assumes the desired
+covering-radius equality.
 
 ## Questions ranked by expected value
 
@@ -103,7 +107,9 @@ configurations*.
 Settled:
 
 - The uniform radius gate is automatic for \(q\geq Q_r\); it is not an open
-  premise in the all-level range.
+  premise in the all-level range. A targeted specialist confirmed the
+  conclusion and repaired the proof chain to Seroussi--Roth plus Dür, avoiding
+  the circular use of Kaipa's Theorem 2.
 - Clebsch factorization supplies a precise comparison about retained
   factorization data, not a proof input for the PRS classifications.
 - Both readers independently selected higher modular-carrier arithmetic as

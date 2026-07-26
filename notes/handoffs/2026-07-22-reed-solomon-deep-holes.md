@@ -30,9 +30,12 @@ Its separate Lean bridge checks the exact row, balance, uniqueness within
 R5--R7, and the imported AME--LU rigidity consequences while leaving the
 standard coding dictionaries as an explicit semantic interface. Two fresh
 full-draft readers then exposed an automatic all-level radius promotion:
-Seroussi--Roth applies throughout \(q\geq Q_r\), making the uniform result
+Seroussi--Roth gives dual nonextendability throughout \(q\geq Q_r\), and
+Dür's equivalence turns it into radius \(r-1\), making the uniform result
 unconditional deep-hole containment and the large-characteristic list an
-unconditional exact classification. Their question ledger is in
+unconditional exact classification. A targeted specialist confirmed the
+claim after correcting the initially circular Kaipa-Theorem-2 citation chain.
+Their question ledger is in
 `notes/2026-07-25-c545-beyond4-question-cold-reads.md`; C620 owns the
 highest-value successor, exact split-freeness on higher Lucas carriers.
 C532 gives
