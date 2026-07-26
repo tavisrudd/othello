@@ -1304,8 +1304,17 @@
       "last": 639,
       "purpose": "carrier-conductor excess beyond forced secant singularities; odd-size tangent-twisted carrier",
       "sequence": 145
+    },
+    {
+      "count": 1,
+      "first": 640,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 640,
+      "purpose": "adopt unconditionally formalized extension-field pencil-sector algebra and enforce Lean coverage for manuscript claims",
+      "sequence": 146
     }
   ],
-  "next_id": 640,
+  "next_id": 641,
   "schema": "codex-task-id-allocations-v1"
 }
