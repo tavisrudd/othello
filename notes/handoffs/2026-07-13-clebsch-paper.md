@@ -129,7 +129,7 @@ memory from its rank-two linear memory, and proves the frozen `A_3`
 fused / `B_3,H_3` split arithmetic theorem with the
 `A5 cap A5 = A4` and generated `PSL_2(11)` hinge. The canonical
 relative-cubic Tate plane and its divided-transfer non-identification with
-the depth plane are isolated in an appendix. It now has an eighteen-statement
+the depth plane are isolated in an appendix. It now has a twenty-one-statement
 paper-specific trust manifest, an eight-bundle aggregate replay, a verification
 section that separates conceptual, classical, certificate, and Lean support,
 and a conclusion that states the exact reconstruction ladder and its
@@ -143,7 +143,7 @@ now distinguishes the three-type linear theorem from the `B_3/H_3` sheet
 theorem and the `H_3`-only refinements. A fresh staged title/abstract/full-PDF
 cold read returned editorial `GO`, conditional only on the already-declared
 public immutable archive locator. The full local replay and warning-free
-twenty-two-page build are green. The current theorem,
+twenty-four-page build is green. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 The two unprimed next-question reads are consolidated in
@@ -159,8 +159,8 @@ self-associated arithmetically Gorenstein sets, their dualizing residue
 vector is the sheet sign, and \(\mu_3\) is the cubic inverse system of
 their Artinian reductions. The exact saturated ideals, deletion tests,
 socles, Betti tables, and independent replay are positive. Paper II's
-eighteen-statement, eight-bundle aggregate replay and warning-free
-twenty-two-page build are green. C616 completes the \(SL_2/A_5\)
+twenty-one-statement, eight-bundle aggregate replay and warning-free
+twenty-four-page build is green. C616 completes the \(SL_2/A_5\)
 uniform-rank upgrade. The C620 proof,
 trust disposition, and mystery ledger are in
 `notes/2026-07-25-c620-graded-evaluation-algebra.md`.
@@ -180,6 +180,20 @@ full-support weights make diagonal scaling injective. The resulting terminal
 takes exactly the matrix identity, full row rank, full support, and the
 \(q\)-by-\(2q\) size; its degrees-of-freedom audit is in
 `notes/2026-07-25-c635-signed-gale-closeout.md`.
+The final polish renumbers equations by section, shortens the title,
+defines the profile and Tate-basis conventions, and identifies the
+top-harmonic homogeneous extension with
+\(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\). A revision-specific reader
+then caught the necessary full-module correction: the complete restricted
+homogenization has one additional trivial radial summand. Its standard
+questions are in
+`notes/2026-07-25-c577-revised-standard-questions.md`; the post-baseline
+literature and novelty disposition is in
+`notes/2026-07-25-c577-postbaseline-novelty-audit.md`.
+The corrected metadata and warning-free twenty-four-page PDF gates are
+green. The final aggregate replay is waiting on reconstruction of one
+missing Lean dependency object after the foreign `Relconic` owner releases
+the shared build lock; this revision changes no Lean source.
 
 The active order is strict:
 
@@ -297,9 +311,8 @@ instruction to launch its reviewer.
 
 ## Paper II — conic-ideal quotients
 
-C577 owns the standalone paper titled *Conic-ideal quotients for the
-`A_3`, `B_3`, and `H_3` secant configurations: quadratic sheet recovery
-and cubic orientation in types `B_3` and `H_3`*. Its spine is:
+C577 owns the standalone paper titled *Factorization memory in conic
+quotients: the `A_3`, `B_3`, and `H_3` secant configurations*. Its spine is:
 
 1. conic matching products and the general switch/divisibility quotient;
 2. the `A_3/B_3/H_3` configurations and ranks `3,6,10`;

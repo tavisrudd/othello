@@ -46,14 +46,12 @@ corresponding difference spans have dimensions \(3,6,10\) for
 only missing Fischer layer is \(Q\mathcal H_2\).  The base-choice cocycle
 generates \(H^1(\operatorname{PGL}_2(11),M_8)\), so the \(H_3\) affine
 quotient has no equivariant origin.  After restriction to
-\(\operatorname{PSL}_2(11)\), its homogeneous extension is the
-nonsplit quotient of the projective cover of the trivial module.
+\(\operatorname{PSL}_2(11)\), its top-harmonic homogeneous extension is
+the nonsplit quotient of the projective cover of the trivial module.
 After a chosen \(A_4\)-refinement, six incidence profiles recover the exact
 double-coset label in
 \(A_4\backslash\operatorname{PGL}_2(11)/A_5\), not in general an
-individual matching.  Separate modular and arithmetic results identify
-the loss on linearization and the split--fused behavior of the three
-marker algebras.
+individual matching.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
@@ -128,6 +126,11 @@ The modular depth quotient and the arithmetic split--fused theorem are
 stated separately in Sections~\ref{sec:modular-depth} and
 \ref{sec:arithmetic-splitting}; they refine the same finite table but
 are not clauses of the recovery theorem.
+For \(H_3\), the affine failure of an equivariant origin is the upper
+nonsplit layer of a projective cover: Corollary~\ref{cor:h3-homogeneous-projective-cover}
+identifies the top-harmonic homogeneous extension with
+\(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\).  The full homogeneous
+module has one additional trivial radial summand.
 
 The exceptional \(H_3\) configuration arose from a normal-play
 finite-projective arc game and subsequently led to coding and quantum
@@ -490,7 +493,7 @@ In particular, the affine \(H_3\) quotient configuration has no
 \(G\)-equivariant origin: no translation makes its affine action linear.
 Equivalently, the homogeneous module
 \[
- E_c=M_8\oplus\F_{11},\qquad
+ E_{c_8}=M_8\oplus\F_{11},\qquad
  g\cdot(v,t)=(gv+t\,c_8(g),t),                         \tag{3.11b}
 \]
 is nonsplit.  Up to equivalence and nonzero rescaling of the quotient
@@ -1301,8 +1304,8 @@ surjective.  Both sides have dimension nine, so it is an isomorphism.
 \begin{corollary}[The homogeneous projective-cover bridge]
 \label{cor:h3-homogeneous-projective-cover}
 For the cocycle representative \(c_8\) determined by the chosen
-reference matching, let \(E_{c_8}=M_8\oplus k\) be the \(G\)-module
-defined in (3.11b).
+reference matching, let \(E_{c_8}\) be the \(G\)-module defined in
+(3.11b).
 There is a \(G^+\)-module isomorphism
 \[
  P(\mathbf1)/\operatorname{soc}P(\mathbf1)
@@ -1315,13 +1318,20 @@ given by
                                                                \tag{6.7}
 \]
 Thus the extension class, unlike a cocycle representative or an affine
-origin, is canonical: the restriction of the affine \(H_3\) quotient
-is the homogeneous nonsplit extension
+origin, is canonical: the top-harmonic homogeneous extension restricts
+to the nonsplit exact sequence
 \[
  0\longrightarrow M_8\!\downarrow_{G^+}
  \longrightarrow P(\mathbf1)/\operatorname{soc}P(\mathbf1)
  \longrightarrow \mathbf1\longrightarrow0 .
 \]
+If \(\widetilde E_c\) denotes the homogenization of the full affine
+quotient with translation space \(M_8\oplus M_0\), then
+\[
+ \widetilde E_c\!\downarrow_{G^+}\simeq
+ P(\mathbf1)/\operatorname{soc}P(\mathbf1)\oplus\mathbf1,      \tag{6.8}
+\]
+where the last summand is the radial module \(M_0\!\downarrow_{G^+}\).
 \end{corollary}
 
 \begin{proof}
@@ -1335,10 +1345,22 @@ descends through the socle.
 On the kernel of augmentation, the descended map is the isomorphism
 of Corollary~\ref{cor:h3-nine-space-bridge}; on the one-dimensional
 head it induces the identity through the second coordinate.  It is
-therefore an isomorphism.  The extension is nonsplit because
-\(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) has Loewy layers
-\(9\mid1\), as in Proposition~\ref{prop:modular-depth-quotient}.
+therefore an isomorphism.  The exact sequence cannot split:
+Proposition~\ref{prop:modular-depth-quotient} gives
+\(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) the simple socle \(M_8\),
+whereas a splitting would put a trivial summand in its socle.  Finally,
+\(M_0=\chi\) is trivial on \(G^+\), and its cocycle vanishes there,
+proving (6.8).
 \end{proof}
+
+\begin{remark}[Ambient and intrinsic sheet recovery]
+With the harmonic--radial decomposition retained, the \(M_0\)-projection
+already separates the two \(H_3\) sheets: it is zero on \(X_+\), constant
+on \(X_-\), and nonzero by the witness (3.11).  The quadratic theorem of
+Section~\ref{sec:balanced} is stronger in a different sense: it recovers
+the sheets intrinsically from the abstract affine point configuration,
+without retaining the ambient Fischer operator.
+\end{remark}
 
 This quotient identifies the precise modular loss in the six-profile
 construction.  Before linearization, the six profiles remain distinct
@@ -1503,12 +1525,13 @@ top harmonic part survives, as does the deepest radial line in even
 degree, while type \(H_3\) loses exactly \(Q\mathcal H_2\).
 For \(H_3\), the base-choice class generates
 \(H^1(\operatorname{PGL}_2(11),M_8)\), so the affine quotient has no
-equivariant origin.  Its homogeneous extension restricts to
+equivariant origin.  Its top-harmonic homogeneous extension restricts to
 \[
 P(\mathbf1)/\operatorname{soc}P(\mathbf1),
 \]
 and the radical of this identification is the canonical nine-space
-bridge to \(M_8\downarrow_{\operatorname{PSL}_2(11)}\).
+bridge to \(M_8\downarrow_{\operatorname{PSL}_2(11)}\).  The full
+homogenization adds the trivial radial summand.
 
 The nonlinear record is sharper.  In the balanced \(B_3\) and \(H_3\)
 cases, quadratic products recover the unordered pair of sheets and a
@@ -1695,8 +1718,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{0563ef9676e2d657a3907adc038942e278ee76}\\[-2pt]
-\texttt{8efc4a864759a5d18fc1d0080b}.
+\small\texttt{5c2982b8cf73143e33f28c4e26352a75d0195b}\\[-2pt]
+\texttt{9404fce65e3ba73a6cc86bbdbb}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, eight evidence

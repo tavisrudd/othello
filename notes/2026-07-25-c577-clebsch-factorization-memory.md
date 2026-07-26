@@ -50,6 +50,23 @@ gates, and execution order are recorded in
   blocker is the immutable archive locator; its editorial request to surface
   the \(H^1\) theorem and nine-space bridge in the abstract and conclusion is
   implemented.
+- A revision-specific standard-questions reader returned `GO` after one
+  substantive wording repair: the projective-cover quotient is the
+  top-harmonic homogeneous extension, while the full affine homogenization
+  has one additional trivial radial summand. The corrected paper now states
+  both modules and distinguishes intrinsic quadratic sheet recovery from the
+  cheaper ambient radial classifier.
+- The post-baseline novelty audit covers every addition not already disposed
+  by C399/C406/C417. It found no pre-emption of the exact conic-quotient
+  compositions, but classifies the underlying \(H^1\), projective-cover,
+  Schur-evaluation, Gale/Gorenstein, and cubic-algebra frameworks as
+  classical. No new unrestricted priority language was added.
+- The corrected source passes the twenty-one-row metadata gate and a clean,
+  warning-free twenty-four-page manuscript rebuild. The final aggregate
+  replay reached its unchanged Lean gate but found one missing cached
+  dependency object; rebuilding that exact gate is temporarily excluded by
+  a foreign `Relconic` build holding the shared Lean-owner lock. No Lean
+  source changed in this revision.
 
 ## Current result
 
@@ -416,5 +433,5 @@ mathematical claim or enlarging the release surface.
 | Is every theorem-like statement assigned one exact trust route? | settled | The twenty-one-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, altered proof-mode/evidence assignments, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the eight semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | Can Paper II's verification surface ship independently of the full repository? | settled locally; public deposit remains | All seven finite evidence closures now live under stable paper-owned semantic paths, arithmetic gluing uses its stable Lean-owned closure, and the fingerprint pins the project-owned Lean import closure. An immutable public archive locator is still required. |
-| Does the no-origin cocycle determine the same homogeneous object as the projective-cover quotient? | settled | The explicit map \(\Theta(\sum a_M[M])=(\sum a_M\pi_8(x_M),\sum a_M)\) identifies \(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) with the restricted cocycle extension; its radical map is the canonical nine-space bridge. |
+| Does the no-origin cocycle determine the same homogeneous object as the projective-cover quotient? | settled with scope correction | The explicit map \(\Theta(\sum a_M[M])=(\sum a_M\pi_8(x_M),\sum a_M)\) identifies \(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) with the restricted top-harmonic cocycle extension; the full homogenization is this module plus one trivial radial summand. |
 | What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the \(H^1\) no-origin theorem and the homogeneous projective-cover bridge. Release still depends on the user-controlled immutable public archive locator. |
