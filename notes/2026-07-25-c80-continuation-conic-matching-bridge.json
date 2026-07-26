@@ -1,0 +1,2647 @@
+{
+  "candidate_bridge": {
+    "source": "legal moves and maximal two-faces of the full continuation complex",
+    "target": "matching data from the conic involution induced by a legal intruder",
+    "tested_restrictions": "selected conic marks, live conic points, and the full rational conic"
+  },
+  "cases": [
+    {
+      "full_conic_perfect_matching_core_moves": 2,
+      "full_conic_perfect_matching_isolates": 7,
+      "full_conic_perfect_matching_moves": 9,
+      "full_conic_plucker_quotient_degree": 7,
+      "history_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "repair": [
+          7,
+          1
+        ]
+      },
+      "legal_moves": 32,
+      "live_conic_points": 3,
+      "live_matching_nonempty_core_moves": 1,
+      "live_matching_nonempty_isolates": 2,
+      "live_matching_nonempty_moves": 3,
+      "moves": [
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            0,
+            9
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            0,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            6
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            9
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            2,
+            9
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            10
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            5,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            5,
+            15
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            9
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            12
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            10,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            9
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            9
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            10
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        }
+      ],
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_conic_marks": 6,
+      "selected_mark_matching_nonempty_moves": 0,
+      "signature_histogram": [
+        {
+          "count": 2,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 7,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "core"
+        },
+        {
+          "count": 3,
+          "full_fixed_points": null,
+          "kind": "conic",
+          "live_matching_edges": null,
+          "status": "isolate"
+        },
+        {
+          "count": 6,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 11,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        }
+      ],
+      "terminal_graph_isolates": 22
+    },
+    {
+      "full_conic_perfect_matching_core_moves": 2,
+      "full_conic_perfect_matching_isolates": 7,
+      "full_conic_perfect_matching_moves": 9,
+      "full_conic_plucker_quotient_degree": 7,
+      "history_edge": {
+        "opponent": [
+          5,
+          0
+        ],
+        "repair": [
+          4,
+          10
+        ]
+      },
+      "legal_moves": 32,
+      "live_conic_points": 3,
+      "live_matching_nonempty_core_moves": 1,
+      "live_matching_nonempty_isolates": 2,
+      "live_matching_nonempty_moves": 3,
+      "moves": [
+        {
+          "cell": [
+            0,
+            1
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            0,
+            14
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            14
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            3,
+            6
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            2
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            12
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            14
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            6,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            7,
+            7
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            6
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            14
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            9,
+            14
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            6
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            14
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        }
+      ],
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_conic_marks": 6,
+      "selected_mark_matching_nonempty_moves": 0,
+      "signature_histogram": [
+        {
+          "count": 2,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 7,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "core"
+        },
+        {
+          "count": 3,
+          "full_fixed_points": null,
+          "kind": "conic",
+          "live_matching_edges": null,
+          "status": "isolate"
+        },
+        {
+          "count": 6,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 11,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        }
+      ],
+      "terminal_graph_isolates": 22
+    },
+    {
+      "full_conic_perfect_matching_core_moves": 2,
+      "full_conic_perfect_matching_isolates": 7,
+      "full_conic_perfect_matching_moves": 9,
+      "full_conic_plucker_quotient_degree": 7,
+      "history_edge": {
+        "opponent": [
+          8,
+          14
+        ],
+        "repair": [
+          4,
+          10
+        ]
+      },
+      "legal_moves": 32,
+      "live_conic_points": 3,
+      "live_matching_nonempty_core_moves": 1,
+      "live_matching_nonempty_isolates": 2,
+      "live_matching_nonempty_moves": 3,
+      "moves": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            0,
+            9
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            6
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            1
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            6
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            5,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            5,
+            1
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            5,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            2
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            9
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            5
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            7
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            10,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            6
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            15
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            9
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        }
+      ],
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_conic_marks": 6,
+      "selected_mark_matching_nonempty_moves": 0,
+      "signature_histogram": [
+        {
+          "count": 2,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 7,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "core"
+        },
+        {
+          "count": 3,
+          "full_fixed_points": null,
+          "kind": "conic",
+          "live_matching_edges": null,
+          "status": "isolate"
+        },
+        {
+          "count": 6,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 11,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        }
+      ],
+      "terminal_graph_isolates": 22
+    },
+    {
+      "full_conic_perfect_matching_core_moves": 2,
+      "full_conic_perfect_matching_isolates": 7,
+      "full_conic_perfect_matching_moves": 9,
+      "full_conic_plucker_quotient_degree": 7,
+      "history_edge": {
+        "opponent": [
+          11,
+          9
+        ],
+        "repair": [
+          7,
+          1
+        ]
+      },
+      "legal_moves": 32,
+      "live_conic_points": 3,
+      "live_matching_nonempty_core_moves": 1,
+      "live_matching_nonempty_isolates": 2,
+      "live_matching_nonempty_moves": 3,
+      "moves": [
+        {
+          "cell": [
+            0,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            0,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            10
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            1,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            14
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            3,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            7
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            4,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            4,
+            14
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            5,
+            10
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            5,
+            15
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            3
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            12
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            14
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            2
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            8,
+            6
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            9,
+            0
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            9,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            6
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            12
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "core"
+        },
+        {
+          "cell": [
+            12,
+            5
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            10
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        }
+      ],
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_conic_marks": 6,
+      "selected_mark_matching_nonempty_moves": 0,
+      "signature_histogram": [
+        {
+          "count": 2,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 7,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "core"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "core"
+        },
+        {
+          "count": 3,
+          "full_fixed_points": null,
+          "kind": "conic",
+          "live_matching_edges": null,
+          "status": "isolate"
+        },
+        {
+          "count": 6,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 11,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        }
+      ],
+      "terminal_graph_isolates": 22
+    },
+    {
+      "full_conic_perfect_matching_core_moves": 0,
+      "full_conic_perfect_matching_isolates": 20,
+      "full_conic_perfect_matching_moves": 20,
+      "full_conic_plucker_quotient_degree": 8,
+      "history_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "repair": [
+          0,
+          2
+        ]
+      },
+      "legal_moves": 51,
+      "live_conic_points": 5,
+      "live_matching_nonempty_core_moves": 0,
+      "live_matching_nonempty_isolates": 16,
+      "live_matching_nonempty_moves": 16,
+      "moves": [
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            4
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            1,
+            16
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            10
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            2,
+            16
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            7
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            8
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            3,
+            13
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            5,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            5,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            4
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            11
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            15
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            6,
+            17
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            1
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            7
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            10
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            7,
+            13
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 2,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            8
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            8,
+            10
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            8
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            11
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            16
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 2,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            9,
+            17
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            4
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            11
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            12
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            10,
+            15
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            1
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            3
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            4
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            11,
+            17
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 1,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            3
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            8
+          ],
+          "full_conic_fixed_points": null,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": null,
+          "move_kind": "conic",
+          "selected_mark_matching_edges": null,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            11
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            12,
+            16
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            13,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            13,
+            13
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            14,
+            8
+          ],
+          "full_conic_fixed_points": 0,
+          "full_conic_perfect_matching": true,
+          "live_conic_matching_edges": 2,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            14,
+            12
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        },
+        {
+          "cell": [
+            14,
+            16
+          ],
+          "full_conic_fixed_points": 2,
+          "full_conic_perfect_matching": false,
+          "live_conic_matching_edges": 0,
+          "move_kind": "intruder",
+          "selected_mark_matching_edges": 0,
+          "terminal_graph_status": "isolate"
+        }
+      ],
+      "q": 19,
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "selected_conic_marks": 6,
+      "selected_mark_matching_nonempty_moves": 0,
+      "signature_histogram": [
+        {
+          "count": 5,
+          "full_fixed_points": null,
+          "kind": "conic",
+          "live_matching_edges": null,
+          "status": "isolate"
+        },
+        {
+          "count": 15,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 3,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 2,
+          "full_fixed_points": 0,
+          "kind": "intruder",
+          "live_matching_edges": 2,
+          "status": "isolate"
+        },
+        {
+          "count": 15,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 0,
+          "status": "isolate"
+        },
+        {
+          "count": 10,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 1,
+          "status": "isolate"
+        },
+        {
+          "count": 1,
+          "full_fixed_points": 2,
+          "kind": "intruder",
+          "live_matching_edges": 2,
+          "status": "isolate"
+        }
+      ],
+      "terminal_graph_isolates": 51
+    }
+  ],
+  "cross_checks": {
+    "all_selected_mark_matching_counts_are_zero": true,
+    "move_signatures_commute_with_projective_transport": true
+  },
+  "general_obstruction": {
+    "full_conic_matching": "perfect only for external intruders; split intruders have two fixed conic points and conic moves have no projection matching",
+    "full_conic_quotient_degree": "(q-3)/2, hence unbounded in q",
+    "selected_mark_matching": "empty for every legal intruder: pairing two selected marks would put the move on their selected secant"
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "schema": "c80-continuation-conic-matching-bridge-v1",
+  "source": "rust/scripts/c80_continuation_conic_matching_bridge.py",
+  "transport": {
+    "q17_representative": {
+      "all_checks_pass": true,
+      "stabilizer_order": 4,
+      "transported_move_signature_checks": 128
+    },
+    "q19_control": {
+      "all_checks_pass": true,
+      "stabilizer_order": 4,
+      "transported_move_signature_checks": 204
+    }
+  },
+  "verdict": {
+    "full_conic_plucker_bridge": "FAIL: partial domain and unbounded quotient degree",
+    "live_conic_matching_bridge_q17": "FAIL: 3/32 moves",
+    "selected_mark_plucker_bridge": "FAIL: empty matching",
+    "uniform_c80_candidate": false
+  }
+}

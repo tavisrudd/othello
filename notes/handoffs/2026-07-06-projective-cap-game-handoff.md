@@ -1174,6 +1174,25 @@ intruders) to conic matchings. Next test that bridge on the q17 `K2` plus
 ramified-tree obligation shape; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-history-torus-obligation-rewrite.md`](../2026-07-25-c80-history-torus-obligation-rewrite.md).
 
+**The continuation-complex to Clebsch matching-quotient bridge is
+closed-negative in all natural domains (C80, 2026-07-25).** There is a
+general obstruction on the selected conic marks: if a legal intruder paired
+two of them under its projection involution, it would lie on their selected
+secant and be illegal. Thus every tested legal move induces the empty
+selected-mark matching. The live conic is too small (`3/32` q17 moves have
+one live matching edge). The full conic is too large and incomplete: only
+external intruders give perfect matchings (`9/32` q17 moves, containing just
+`2/10` terminal-core vertices), split intruders have two fixed points, conic
+moves have no projection matching, and the quotient degree `(q-3)/2` grows
+with q, violating the bounded-format gate. All q17/q19 move signatures
+commute with transport. The useful snapshot transfer is therefore the full
+continuation complex itself: terminal replies are maximal two-faces, governed
+jointly by tangent pair conflicts and collinear-triple conflicts. Next seek a
+bounded tangent-plus-triple coverage datum with a direct rank update; do not
+force the obligation locus through a perfect-matching quotient. C82 remains
+gated. Report+cert:
+[`../2026-07-25-c80-continuation-conic-matching-bridge.md`](../2026-07-25-c80-continuation-conic-matching-bridge.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
