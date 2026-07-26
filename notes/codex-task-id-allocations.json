@@ -1358,8 +1358,26 @@
       "last": 645,
       "purpose": "artifact-aware minor revisions and literature positioning",
       "sequence": 151
+    },
+    {
+      "count": 1,
+      "first": 646,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 646,
+      "purpose": "formalize stable-component geometric bridge for beyond-four PRS theorem",
+      "sequence": 152
+    },
+    {
+      "count": 1,
+      "first": 647,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 647,
+      "purpose": "post-C562 literature and novelty audit of all adopted manuscript additions",
+      "sequence": 153
     }
   ],
-  "next_id": 646,
+  "next_id": 648,
   "schema": "codex-task-id-allocations-v1"
 }
