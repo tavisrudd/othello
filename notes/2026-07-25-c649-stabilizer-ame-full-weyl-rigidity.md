@@ -193,6 +193,62 @@ need the support theorem and arbitrary-bijection form of “full-Weyl
 diagonal.”  The diagonal-isodual, pencil, and verification sections retain
 their current scopes.
 
+## Extra-juice consequences and exposition hierarchy
+
+Two consequences are free once the support theorem is stated.
+
+First, the minimum-weight coefficient of the projective stabilizer weight
+enumerator is forced:
+\[
+ A_{m+1}
+   =\binom{2m}{m+1}(q^2-1).
+\]
+Indeed, each \((m+1)\)-set supports exactly \(q^2-1\) nonidentity labels,
+all with full support, and a label of weight \(m+1\) determines its support
+set uniquely.  This is best presented as a short corollary or consistency
+check, not as a separate headline; a literature comparison with quantum-MDS
+weight-enumerator formulas is required before attaching novelty language.
+
+Second, choose any party of a stabilizer \(\operatorname{AME}(2m,q)\) state
+as a Choi input.  The remaining parties define a one-logical-qudit
+stabilizer quantum-MDS encoder with parameters
+\([[2m-1,1,m]]_q\).  The LU-to-LC theorem then makes every tensor-product
+conversion between any two such encoders Clifford on every physical factor
+and on the logical factor.  Thus the present transversal no-go also loses
+its CSS, equal-phase, and classical-MDS hypotheses.  This belongs immediately
+after the general rigidity theorem.
+
+The clean paper hierarchy is therefore:
+
+1. general stabilizer-AME support theorem;
+2. general stabilizer-AME LU-to-LC theorem and projective discreteness;
+3. general stabilizer quantum-MDS encoder no-go;
+4. MDS--CSS specialization, where classical geometry computes exact
+   logical groups rather than proving rigidity;
+5. the six-party pencil and invariant-theoretic applications.
+
+The title and abstract should reflect the split in roles: stabilizer AME is
+the scope of rigidity, while MDS--CSS geometry is the scope of the exact
+transversal-group calculation.  A suitable working title is
+
+> *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford
+> Groups of MDS--CSS Codes*.
+
+The opening proof picture should be the cardinality squeeze, not MDS
+shortening.  On every half-plus-one marginal, AME forces the supported
+stabilizer subgroup to contain exactly one representative of every local
+Pauli label at each retained party.  The existing axis lemma then recovers
+the local Pauli frame.  MDS shortening should reappear afterward as the
+explicit CSS realization of this intrinsic support theorem.
+
+For \(q=p^e\), “Clifford” in the general theorem means the normalizer of the
+chosen \(q\)-dimensional additive Weyl system, whose label action lies in
+\(\operatorname{Sp}_{2e}(p)\).  The later
+\(\operatorname{SL}_2(q)\)-versus-\(T\) calculation remains an odd-prime
+MDS--CSS specialization.  Keeping these statements separate prevents the
+larger extension-field local Clifford group from leaking into the exact
+logical-group claim.
+
 ## Mystery ledger
 
 | Mystery | Status | Evidence / next gate |
@@ -202,5 +258,7 @@ their current scopes.
 | Do arbitrary stabilizer phases spoil diagonality? | resolved negatively | they only multiply Weyl-basis coefficients by nonzero phases |
 | Is \(\mathbb F_q\)-linearity required? | resolved negatively | prime-field/additive dimension argument and group-cardinality proof |
 | Is \(m=1\) included? | resolved negatively and sharply | Bell-pair \(U\otimes\overline U\) automorphisms |
+| Is the minimum stabilizer weight multiplicity determined? | resolved positively | double-count the \(q^2-1\) nonidentity labels on every \((m+1)\)-support |
+| Does the transversal no-go remain CSS-specific? | resolved negatively | view any party as the Choi input of the punctured stabilizer quantum-MDS encoder |
 | Is the prime-power qudit theorem already in the literature? | open | claim-specific audit required before manuscript novelty wording |
 | Is the full stabilizer-to-marginal bridge kernel checked? | open | build an additive stabilizer-state interface; current Lean checks the dimension and axis cores |
