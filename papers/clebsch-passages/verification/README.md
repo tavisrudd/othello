@@ -21,3 +21,15 @@ The checker verifies:
 This is a planning-time guard, not a release certificate.  The final surface
 will also freeze theorem statement identity, evidence hashes, exact replay
 commands, toolchains, manuscript warnings, and archival metadata.
+
+The first task-owned evidence bundle is the C655 harmonic bridge:
+
+```text
+python3 papers/clebsch-passages/verification/evidence/harmonic_clebsch.py --check
+python3 papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py
+sha256sum -c papers/clebsch-passages/verification/evidence/harmonic_clebsch.sha256
+```
+
+It certifies the exact face-axis Gram matrix, Petersen decomposition,
+spherical moments, Gaunt scalar, and normalization to the standard
+unnormalized degree-six `W_6`.  It makes no empirical materials claim.

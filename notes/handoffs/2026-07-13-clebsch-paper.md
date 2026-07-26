@@ -554,8 +554,19 @@ face-axis harmonic and Gaunt/Steinhardt restriction as a third theorem leg,
 while keeping all materials utility empirical. Nine section files, a
 dependency workplan, a fourteen-claim trust manifest, and a structural checker now keep
 proved, certified, literature-backed, gated, and conditional statements
-separate while C652--C655 run. C579 is therefore in progress, but the paper
+separate while C652--C654 run. C579 is therefore in progress, but the paper
 does not advance to cold review until all load-bearing rows are closed.
+
+C655 is complete. The ten icosahedral face axes give an exact
+\(1+4+5\) subspace of \(\mathcal H_6\), the four-space is the Petersen
+\((-2)\)-eigenspace, and the spherical cubic restricts to
+\(-784000/1247103\,\sigma_3\). Its exact conversion to the standard
+unnormalized Steinhardt invariant is
+\(\int F^3=-130/\sqrt{3553\pi}\,W_6(F)\). A task-owned certificate,
+independent replay, primary-source audit, and warning-free manuscript
+integration are complete. The physical claim is exact equality of
+observables on the decorated four-channel; predictive materials utility is
+not claimed.
 
 The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
 and degree-23 coherence material is subordinate inventory. C579 admits an

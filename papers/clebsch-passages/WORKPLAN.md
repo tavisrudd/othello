@@ -38,7 +38,7 @@ C654 rational Klein representation / polarization / relative invariant
           |
           +----> strong Klein theorem
 
-C655 exact face-axis Gram matrix / Gaunt restriction / physical-source audit
+C655 exact face-axis Gram matrix / Gaunt restriction / physical-source audit (complete)
           |
           +----> harmonic realization theorem
 
@@ -56,7 +56,7 @@ core theorem + harmonic theorem + strong Klein theorem + exact trust surface
 | 3 | golden fibres and `A4` hinge | Section 4 | C652 |
 | 4 | exchanger, spinor class, and `T11` | Section 4 | C652 |
 | 5 | integral base and invariant-ring input | Sections 2 and 4 | C653 |
-| 6 | exact face-axis harmonic embedding and Gaunt cubic | Section 5 | C655 |
+| 6 | exact face-axis harmonic embedding and Gaunt cubic | Section 5 | C655 complete |
 | 7 | exact Klein commutants and polarization | Section 6 | C654 |
 | 8 | canonical discriminant-`5` invariant | Section 6 and main theorem | C654 |
 | 9 | 55-curve orientation realization | Section 6 or appendix | conditional C654 continuation |

@@ -58,26 +58,41 @@
     {
       "id": "PH-1",
       "statement": "The ten face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with the Clebsch four-space equal to the Petersen minus-two eigenspace.",
-      "status": "gated",
+      "status": "certified",
       "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C655",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.sha256"
+      ]
     },
     {
       "id": "PH-2",
       "statement": "The degree-six Gaunt cubic restricts to -784000/1247103 times sigma3 on the Clebsch four-channel.",
-      "status": "gated",
+      "status": "certified",
       "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C655",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.sha256"
+      ]
     },
     {
       "id": "PH-3",
       "statement": "The Clebsch cubic is the symmetry-resolved four-channel restriction of the standard signed degree-six bond-orientational cubic.",
-      "status": "gated",
-      "modes": ["conceptual", "classical-input"],
+      "status": "certified",
+      "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C655",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
+        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
+        "notes/2026-07-26-c655-clebsch-harmonic-bridge.md"
+      ]
     },
     {
       "id": "PH-4",
@@ -121,11 +136,11 @@
     }
   ],
   "boundaries": [
-    "Only ALG-1 and HC-3 are presently proved in manuscript-ready form.",
+    "ALG-1, HC-3, and PH-1 through PH-3 are presently proved in manuscript-ready form.",
     "The checker validates structure and ledger consistency; it does not certify mathematical truth.",
     "The Klein product J(X)=E^5 is unpolarized, and the two-dimensional carrier is a multiplicity Hodge structure rather than an invariant abelian subvariety.",
     "The rational Gaunt scalar has denominator divisible by 11, so HC-3 identifies an integral cubic line rather than a reduced rational normalization.",
-    "The harmonic identity has one imported exact calculation but no task-owned independent replay or primary-source audit yet.",
+    "The harmonic identity has a task-owned exact certificate, independent replay, and primary-source normalization audit.",
     "No empirical performance or commercial-utility claim is made for the proposed four-channel descriptor.",
     "No sharp good-prime set, marked Hitchin--Mathieu identification, or novelty claim is currently certified."
   ]

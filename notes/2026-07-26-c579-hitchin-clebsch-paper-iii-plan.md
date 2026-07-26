@@ -190,13 +190,17 @@ Mukai--Umemura model and normalization comparison.
    invariant, and test whether its discriminant is \(5\). Treat the
    55-curve lattice as a second-stage integral route, not as assumed
    evidence.
-5. **C655 — harmonic realization.** Certify the exact embedding of the ten
-   icosahedral face axes in \(\mathcal H_6\), identify the Clebsch
-   four-space as the Petersen \((-2)\)-eigenspace, and independently verify
-   that the standard Gaunt cubic restricts to
-   \(-784000/1247103\,\sigma_3\). Audit the physical order-parameter
-   normalization against primary sources and state materials utility only
-   as an untested benchmark.
+5. **C655 — harmonic realization (complete).** The ten icosahedral face
+   axes embed in \(\mathcal H_6\), the Clebsch four-space is the Petersen
+   \((-2)\)-eigenspace, and two exact implementations prove that the
+   spherical cubic restricts to
+   \(-784000/1247103\,\sigma_3\). The Gaunt formula gives the explicit
+   standard normalization
+   \(\int F^3=-130/\sqrt{3553\pi}\,W_6(F)\). The primary-source audit
+   confirms the degree-six bond-orientational meaning; materials utility
+   remains an untested benchmark. The report and evidence bundle are
+   `notes/2026-07-26-c655-clebsch-harmonic-bridge.md` and
+   `papers/clebsch-passages/verification/evidence/harmonic_clebsch.*`.
 6. **C579 — Paper III synthesis.** After C651--C653, and with C654's
    positive or negative disposition recorded, replace the exploratory
    skeleton with the arithmetic orientation-cover paper, admit only
@@ -213,7 +217,7 @@ Klein multiplicity elevation. The
 adjacent `WORKPLAN.md` records the dependency graph, and
 `verification/trust_manifest.json` is the initial fourteen-claim trust ledger.
 The structural checker deliberately reports a non-release surface while
-C652--C655 remain open.
+C652--C654 remain open; C655 is closed.
 
 The final target is the strongest coherent theorem complex: a positive
 C654 result is to be integrated as a second structural theorem, a positive
