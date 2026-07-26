@@ -36,10 +36,10 @@ secants.  For the balanced \(B_3\) and \(H_3\) configurations, we show
 that the quotient by the conic equation nevertheless recovers the two
 factorization sheets from quadratic products of affine evaluation
 functions.  More generally, if a full
-\(\operatorname{PGL}_2(q)\)-orbit has a unique quadratic trade whose two
-levels are one-factorizations, then edge counting forces a \(q+q\) split,
-and subgroup classification leaves exactly these two orbits.  Within
-signed tensor moments, the first nonzero term is an
+\(\operatorname{PGL}_2(q)\)-orbit has a one-dimensional strength-two
+trade space whose two fibers are one-factorizations, then edge counting
+forces a \(q+q\) split, and subgroup classification leaves exactly these
+two orbits.  Within signed tensor moments, the first nonzero term is an
 anti-invariant cubic line that detects sheet interchange.  The
 resulting \(14\)- and \(22\)-point configurations are self-associated and
 arithmetically Gorenstein, with that signed cubic as the inverse system
@@ -96,9 +96,10 @@ connecting cocycle and the defining-characteristic
 \(\operatorname{SL}_2\)-modules in the Fischer decomposition.  In type
 \(B_3\), one transparent outer-sheet quotient supplies the radial line;
 type \(H_3\) uses the analogous second-Laplacian scalar after cohomology
-excludes the middle layer.  A stable two-level quadratic-trade line gives
-the special-projective block system, and the one-factorization property
-forces both blocks to have size \(q\).  A maximal-subgroup argument then
+excludes the middle layer.  A one-dimensional strength-two trade space
+with two fibers gives the special-projective block system, and the
+one-factorization property forces both blocks to have size \(q\).  A
+maximal-subgroup argument then
 leaves only \(B_3/\F_7\) and \(H_3/\F_{11}\); the apparent \(\F_5\)
 candidate acquires an outer normalizer and has only five points.
 In Section~\ref{sec:balanced}, the defining-characteristic permutation
@@ -117,8 +118,8 @@ have equal restriction to the conic, and their conic-ideal quotients have
 difference ranks $3$, $6$, and $10$;
 \item among all odd prime powers \(q\), the \(B_3/\F_7\) and
 \(H_3/\F_{11}\) configurations are the only full
-\(\operatorname{PGL}_2(q)\)-orbits whose quadratic-trade line has two
-levels, each a one-factorization of
+\(\operatorname{PGL}_2(q)\)-orbits whose strength-two trade space is
+one-dimensional and has two fibers, each a one-factorization of
 \(\mathbb P^1(\F_q)\);
 \item in the $B_3$ and $H_3$ cases, the two factorization sheets are,
 up to interchange, the unique complementary halves with equal first and
@@ -273,7 +274,7 @@ substantial parts of their incidence geometry
 tetrahedral, octahedral, and icosahedral data; neither the orbit counts in
 (3.2) nor the ambiguity of an unmarked conic is asserted here as new.
 
-\begin{theorem}[Intrinsic completeness of recovered factorization sheets]
+\begin{theorem}[Completeness under the one-factorization hypothesis]
 \label{thm:balanced-orbit-completeness}
 Let \(q\) be an odd prime power, put
 \[
@@ -281,9 +282,14 @@ Let \(q\) be an odd prime power, put
 \]
 and let \(\Omega\) be a \(G\)-orbit of perfect matchings of
 \(\mathbb P^1(\F_q)\).  Form its conic-ideal quotient configuration and
-let \(L\subseteq\F_q^\Omega\) be its affine evaluation space.  Suppose
-\((L^{\circ2})^\perp\) is a line whose nonzero vectors have exactly two
-level sets, and that each level set is a one-factorization: its matchings
+let \(L\subseteq\F_q^\Omega\) be its affine evaluation space.  Put
+\[
+ L^{\circ2}=\operatorname{span}\{fg:f,g\in L\},
+\]
+with pointwise multiplication, and take its annihilator under the
+standard coordinate pairing on \(\F_q^\Omega\).  Suppose
+\((L^{\circ2})^\perp\) is one-dimensional, its nonzero vectors have
+exactly two fibers, and each fiber is a one-factorization: its matchings
 partition the edges of the complete graph on
 \(\mathbb P^1(\F_q)\).  Then
 \[
@@ -1221,13 +1227,14 @@ quadratic data recover the unoriented factorization, and cubic data
 recover its orientation.
 
 The completeness theorem shows that, among full projective matching orbits,
-a unique two-level quadratic trade whose levels are one-factorizations can
-occur only for \(B_3/\F_7\) and \(H_3/\F_{11}\).  The remaining structural
-question is whether the one-factorization hypothesis follows from weaker
-intrinsic properties of the quotient configuration.  The linear ranks have
-one proof from representations---the affine connecting cocycle, its
-irreducible Fischer summands, and a radial trace---but the two radial
-nonvanishing witnesses remain type-specific.
+a one-dimensional strength-two trade space whose two fibers are
+one-factorizations can occur only for \(B_3/\F_7\) and \(H_3/\F_{11}\).
+The remaining structural question is whether the one-factorization
+hypothesis follows from weaker intrinsic properties of the quotient
+configuration.  The linear ranks have one proof from
+representations---the affine connecting cocycle, its irreducible Fischer
+summands, and a radial trace---but the two radial nonvanishing witnesses
+remain type-specific.
 
 The appendix refinements require a chosen \(A_4\)-structure and do not
 canonically identify the depth plane with the relative-cubic plane.

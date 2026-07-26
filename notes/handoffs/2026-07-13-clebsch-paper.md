@@ -239,10 +239,12 @@ The proof and mystery ledger are in
 
 C665's limited Gold is complete and integrated; its Platinum continuation is
 in progress and is not yet a manuscript claim.  For any full-projective
-matching orbit, a unique quadratic-trade line whose two intrinsic level sets
+matching orbit, a one-dimensional strength-two trade space whose two fibers
 are one-factorizations is \(G\)-stable; transitivity forces a nontrivial
 two-block action with kernel \(\operatorname{PSL}_2(q)\), and edge counting
-derives the \(q+q\) split rather than assuming it.  Orbit--stabilizer and Dickson then
+derives the \(q+q\) split rather than assuming it.  The one-factorization
+condition still uses endpoint incidence rather than the abstract quotient
+alone.  Orbit--stabilizer and Dickson then
 reduce to \(q=5,7,11\); the \(q=5\) ten-orbit stays one special-projective
 orbit with full Schur square, while the unique \(q=7,11\) recovering orbits
 are \(B_3,H_3\).  The field-independent hyperplane-square lemma proves

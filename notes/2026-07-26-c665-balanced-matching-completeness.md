@@ -4,11 +4,12 @@
 
 **Date**: 2026-07-26
 
-**Status**: limited Gold complete and integrated — intrinsic quadratic
-recovery whose two levels are one-factorizations forces the balanced setup,
-and the only resulting orbits are \(B_3/\mathbb F_7\) and
-\(H_3/\mathbb F_{11}\).  The Platinum continuation is in progress and is
-not claimed here.
+**Status**: limited Gold complete and integrated — a one-dimensional
+strength-two trade space whose two fibers are one-factorizations forces the
+balanced setup, and the only resulting orbits are \(B_3/\mathbb F_7\) and
+\(H_3/\mathbb F_{11}\).  The one-factorization condition uses endpoint
+incidence rather than the abstract quotient alone.  The Platinum continuation
+is in progress and is not claimed here.
 
 ## Result
 

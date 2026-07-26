@@ -4,9 +4,9 @@ This directory contains the manuscript
 *Quadratic recovery and cubic orientation in conic matching quotients*.
 
 The paper studies matching products modulo a conic ideal, their quotient
-ranks `3,6,10`, intrinsic completeness of recovered one-factorization
-sheets, cubic orientation, and self-associated arithmetically Gorenstein
-evaluation sets. Appendices
+ranks `3,6,10`, completeness of quadratic recovery under the
+one-factorization hypothesis, cubic orientation, and self-associated
+arithmetically Gorenstein evaluation sets. Appendices
 record six-profile reconstruction, modular depth, arithmetic splitting,
 and further `H_3` cubic structure.
 
