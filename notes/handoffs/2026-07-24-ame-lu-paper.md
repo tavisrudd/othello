@@ -466,15 +466,29 @@ compact certificate interface that states exactly which concrete claims are
 kernel checked and which remain externally computed.  Manuscript sources
 remain untouched.
 
-**Post-C619 two-reader frontier (2026-07-25): one research successor remains
-queued.**
+**C623 closed negatively at its reconstruction gate (2026-07-25):
+extension-field Clifford census complete.**
+For the full `q=9,25,27` pencil, LC orbits are the GRS class plus Galois
+orbits of `z`, but this equality of partitions hides genuine nonsemilinear
+maps.  Every `q=9` non-GRS pair has such a witness; the fixed-party kernel
+has order 96 with only 16 semilinear elements.  At `q=25` the GRS kernel is
+the full `Sp_4(5)` of order 9,360,000, while non-GRS kernels have order 24;
+at `q=27` they have order 26.  The shortened planes therefore do not
+reconstruct the Desarguesian spread, so no positive reconstruction theorem
+was attempted.  The exact standard-library replay, witnesses, kernel
+invariants, and mystery ledger are in
+`2026-07-25-c623-ame-lu-extension-field-clifford.md`.  No manuscript source
+was edited.
+
+**Post-C619 two-reader frontier (2026-07-25): exact frontiers closed;
+quantitative successor remains queued.**
 Two independent manuscript-only cold reads converged on the same research
 frontiers.  C622 has proved the length-generic diagonal-isoduality
-dichotomy, and C624 has computed the first party-moving extensions.  C623
-runs the `q=9,25,27` falsifier gate for extension-field Clifford equivalence
-before attempting Desarguesian-spread reconstruction.
-C581 is correspondingly narrowed to quantitative approximate rigidity after
-C623.  The complete synthesis, secondary questions, underdeveloped
+dichotomy, C624 has computed the first party-moving extensions, and C623 has
+closed the extension-field reconstruction route negatively.  C581 remains
+the separately queued quantitative approximate-rigidity problem and must
+not reuse the failed exact spread-reconstruction premise.  The complete
+synthesis, secondary questions, underdeveloped
 connections, and EV rationale are in
 `2026-07-25-ame-lu-two-cold-read-frontier.md`.
 
@@ -572,8 +586,9 @@ affine one-qudit extension is non-split by the Heisenberg commutator.
 
 **Token-constrained completion route:** the principal `ame-lu` Version-1
 completion program is closed through C619.  The post-Version-1 diagonal
-isoduality and party-extension frontiers C622/C624 are complete.  C623 is the
-next independent extension-field gate, and C581 must not run before it.  The next
+isoduality, party-extension, and extension-field frontiers C622/C624/C623
+are complete.  C581 is now unblocked as a separate quantitative-rigidity
+upgrade, without an exact spread-reconstruction assumption.  The next
 cross-lane route remains C553 and then the coordinated build-system
 extraction.  The authoritative three-session protocol is
 `notes/2026-07-25-c287-token-efficient-execution.md`.
