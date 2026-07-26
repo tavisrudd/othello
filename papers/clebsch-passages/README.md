@@ -6,13 +6,10 @@ The intended final paper has two theorem scales:
 1. the arithmetic Hitchin--Clebsch orientation cover, including its exact
    specialization modulo `11`; and
 2. the identification of its cubic with the degree-six icosahedral
-   Gaunt/Steinhardt channel; and
-3. the strongest positive Klein-cubic elevation supported by the exact
-   relative-commutant and 55-curve calculations.
+   Gaunt/Steinhardt channel.
 
-The manuscript is deliberately modular while those calculations are open.
-That structure controls the trust boundary; it does not lower the target for
-the final paper.
+The exact Klein relative-commutant test closed negatively and its detachable
+section has been removed.  This does not change either theorem above.
 
 ## Source
 
@@ -35,7 +32,6 @@ Check the current manuscript and trust scaffold:
 python3 papers/clebsch-passages/verification/verify_scaffold.py
 ```
 
-The scaffold checker is not a release runner.  It returns a non-release
-status while C652--C654 remain open.  A release surface will add frozen
+The scaffold checker is not a release runner.  A release surface will add frozen
 statement identity, exact evidence bundles, independent replays, manuscript
 warning checks, and archival fingerprints.

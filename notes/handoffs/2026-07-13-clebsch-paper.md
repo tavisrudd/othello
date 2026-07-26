@@ -553,23 +553,26 @@ elliptic factor and replaces it by the canonical two-dimensional
 \(H^1(J(X),\mathbf Q)|_{A_5}\simeq W_5\otimes U\). Roulleau supplies the
 CM product \(J(X)\cong E^5\) and the 55-curve index-two lattice; Hartlieb
 supplies the relevant characters and the one-dimensional \(A_5\)-special
-family. C654 now owns the exact relative-commutant calculation and the
-discriminant-five test. Its positive result may elevate Paper III; its
-negative result kills only this Klein period-lattice lift. The audited
-statement and source depths are in
-`notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md`.
+family. C654 is complete. The two \(A_5\) commutants are
+\(M_2(\mathbf Q)\), their intersection is
+\(\mathbf Q(\sqrt{-11})\), and the canonical Reynolds mixed operator has
+spectrum \(1,1,1/12,1/12\). Its noncommon discriminant is zero, not five,
+so the simple Klein period-lattice lift closes negatively and its detachable
+Paper III section has been removed. The exact certificate, independent
+replay, trust boundary, and mystery ledger are in
+`notes/2026-07-26-c654-klein-relative-position.md`.
 
 Paper III drafting is active. The old passage-catalogue skeleton has been
 replaced by the working manuscript *The Clebsch orientation cubic:
 arithmetic covers and icosahedral harmonics* under
-`papers/clebsch-passages/`. Its strong-form plan
-pursues both the core arithmetic specialization and the strongest positive
-Klein multiplicity/55-curve theorem. C655 adds the exact degree-six
-face-axis harmonic and Gaunt/Steinhardt restriction as a third theorem leg,
-while keeping all materials utility empirical. Nine section files, a
-dependency workplan, a fourteen-claim trust manifest, and a structural checker now keep
-proved, certified, literature-backed, gated, and conditional statements
-separate while C653--C654 run. C579 is therefore in progress, but the paper
+`papers/clebsch-passages/`. Its strong-form plan now consists of the core
+arithmetic specialization and the exact degree-six
+face-axis harmonic/Gaunt--Steinhardt theorem. The failed Klein lift is not a
+manuscript leg; the 55-curve saturation question remains outside C579.
+The manuscript keeps all materials utility empirical. Its section files,
+dependency workplan, trust manifest, and structural checker keep proved,
+certified, literature-backed, gated, and conditional statements separate.
+C579 is in progress, but the paper
 does not advance to cold review until all load-bearing rows are closed.
 
 C655 is complete. The ten icosahedral face axes give an exact

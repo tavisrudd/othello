@@ -123,44 +123,11 @@
       "modes": ["empirical-test-required"],
       "owner": "C655",
       "evidence": []
-    },
-    {
-      "id": "KL-1",
-      "statement": "The Klein intermediate Jacobian has a two-dimensional A5 multiplicity Hodge structure and no invariant elliptic factor.",
-      "status": "literature-backed",
-      "modes": ["conceptual", "classical-input"],
-      "owner": "C654",
-      "evidence": ["notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md"]
-    },
-    {
-      "id": "KL-2",
-      "statement": "The two A5 commutants are M2(Q) and intersect in Q(sqrt(-11)) inside the polarized ten-dimensional representation.",
-      "status": "gated",
-      "modes": ["conceptual", "certificate", "independent-replay"],
-      "owner": "C654",
-      "evidence": []
-    },
-    {
-      "id": "KL-3",
-      "statement": "A canonical polarization-compatible relative invariant of the two commutants has discriminant class 5.",
-      "status": "gated",
-      "modes": ["conceptual", "certificate", "independent-replay"],
-      "owner": "C654",
-      "evidence": []
-    },
-    {
-      "id": "KL-4",
-      "statement": "The 55-curve index-two lattice detects the same orientation torsor.",
-      "status": "conditional",
-      "modes": ["conceptual", "classical-input", "certificate"],
-      "owner": "C654",
-      "evidence": []
     }
   ],
   "boundaries": [
     "ALG-1, HC-3, and PH-1 through PH-3 are presently proved in manuscript-ready form.",
     "The checker validates structure and ledger consistency; it does not certify mathematical truth.",
-    "The Klein product J(X)=E^5 is unpolarized, and the two-dimensional carrier is a multiplicity Hodge structure rather than an invariant abelian subvariety.",
     "The rational Gaunt scalar has denominator divisible by 11, so HC-3 identifies an integral cubic line rather than a reduced rational normalization.",
     "The harmonic identity has a task-owned exact certificate, independent replay, and primary-source normalization audit.",
     "No empirical performance or commercial-utility claim is made for the proposed four-channel descriptor.",
