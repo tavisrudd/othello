@@ -1,0 +1,637 @@
+{
+  "ancestral_charge": {
+    "branching_at_this_edge": 1,
+    "current_defect_to_old_label": {
+      "(17, 19)": [
+        17,
+        19
+      ],
+      "(21, 17)": [
+        12,
+        15
+      ]
+    },
+    "full_root_coverage": {
+      "deletion_witness_count_range": [
+        1,
+        11
+      ],
+      "lineage_transport_fibres": 1,
+      "strict_deletion_fibres": 26,
+      "successor_in_F_del": true,
+      "uncovered_fibres": 0
+    },
+    "old_label_count": 27,
+    "rule": "retain labels of retained defects; transport the marked opponent label to the unique causally created defect",
+    "strict_label_support_drop": 25,
+    "surviving_label_count": 2
+  },
+  "boundary_endpoint_transport": {
+    "after_pair": [
+      [
+        17,
+        19
+      ],
+      [
+        21,
+        17
+      ]
+    ],
+    "before_pair": [
+      [
+        17,
+        19
+      ],
+      [
+        22,
+        9
+      ]
+    ],
+    "common_endpoint": [
+      17,
+      19
+    ],
+    "common_rank_zero_reply": [
+      10,
+      13
+    ],
+    "new_boundary_reply": [
+      {
+        "kind": "two_nonconflicting_moves",
+        "remaining_legal": [
+          [
+            17,
+            19
+          ],
+          [
+            21,
+            17
+          ]
+        ],
+        "reply": [
+          11,
+          3
+        ]
+      }
+    ],
+    "rank_zero_rows": {
+      "(17, 19)": [
+        {
+          "omega": 0,
+          "remaining_legal": [
+            [
+              11,
+              3
+            ],
+            [
+              16,
+              22
+            ],
+            [
+              21,
+              17
+            ]
+          ],
+          "reply": [
+            10,
+            13
+          ]
+        }
+      ],
+      "(21, 17)": [
+        {
+          "omega": 0,
+          "remaining_legal": [
+            [
+              11,
+              3
+            ],
+            [
+              16,
+              22
+            ],
+            [
+              17,
+              19
+            ]
+          ],
+          "reply": [
+            10,
+            13
+          ]
+        }
+      ]
+    },
+    "replaced_endpoint": {
+      "from": [
+        22,
+        9
+      ],
+      "to": [
+        21,
+        17
+      ]
+    }
+  },
+  "causal_lineage": {
+    "after_parent_move_old_certificate_has_legal_locus": [
+      [
+        17,
+        19
+      ]
+    ],
+    "descendant_new_defect": [
+      21,
+      17
+    ],
+    "killed_boundary_mate": [
+      22,
+      9
+    ],
+    "killing_secant": {
+      "line_coefficients": [
+        1,
+        17,
+        9
+      ],
+      "old_selected_pivot": [
+        4,
+        6
+      ]
+    },
+    "parent_old_defect": [
+      12,
+      15
+    ],
+    "retained_boundary_mate": [
+      17,
+      19
+    ],
+    "unique_former_boundary_reply": [
+      {
+        "kind": "two_nonconflicting_moves",
+        "remaining_legal": [
+          [
+            17,
+            19
+          ],
+          [
+            22,
+            9
+          ]
+        ],
+        "reply": [
+          5,
+          13
+        ]
+      }
+    ]
+  },
+  "defect_evolution": {
+    "created_by_opponent": [
+      [
+        21,
+        17
+      ]
+    ],
+    "created_by_reply": [],
+    "independent_reference": {
+      "after_opponent": [
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          21,
+          17
+        ],
+        [
+          22,
+          14
+        ]
+      ],
+      "after_reply": [
+        [
+          17,
+          19
+        ],
+        [
+          21,
+          17
+        ]
+      ],
+      "before": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          18
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          11,
+          16
+        ],
+        [
+          11,
+          18
+        ],
+        [
+          12,
+          15
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          20,
+          14
+        ],
+        [
+          21,
+          16
+        ],
+        [
+          22,
+          14
+        ],
+        [
+          22,
+          18
+        ]
+      ]
+    },
+    "primary": {
+      "after_opponent": [
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          21,
+          17
+        ],
+        [
+          22,
+          14
+        ]
+      ],
+      "after_reply": [
+        [
+          17,
+          19
+        ],
+        [
+          21,
+          17
+        ]
+      ],
+      "before": [
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          18
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          11,
+          16
+        ],
+        [
+          11,
+          18
+        ],
+        [
+          12,
+          15
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          20,
+          14
+        ],
+        [
+          21,
+          16
+        ],
+        [
+          22,
+          14
+        ],
+        [
+          22,
+          18
+        ]
+      ]
+    },
+    "ranks": [
+      27,
+      7,
+      2
+    ],
+    "removed_by_opponent": 21,
+    "removed_by_reply": 5
+  },
+  "domain": {
+    "marked_exchange": {
+      "opponent": [
+        12,
+        15
+      ],
+      "reply": [
+        22,
+        14
+      ]
+    },
+    "q": 23,
+    "scope": "first exact F_d outside F_del edge only",
+    "state": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        13,
+        7
+      ]
+    ]
+  },
+  "input_sha256": {
+    "notes/2026-07-26-c80-q23-obligation-deletion-sweep.json": "f62d5f89c5b413cfd763fd29735d96aec4a6876d3571e47650b794f07fa32736",
+    "rust/scripts/c80_q23_obligation_deletion_sweep.py": "71147cef27db6f9a73df7913044cbdef66514dc97da8573fea9f0af2fa76bbd9"
+  },
+  "projective_incidence": {
+    "collinear_triples": [
+      [
+        "secant_pivot",
+        "opponent_parent",
+        "killed_boundary_mate"
+      ],
+      [
+        "old_boundary_reply",
+        "replacement_defect",
+        "new_boundary_reply"
+      ],
+      [
+        "killed_boundary_mate",
+        "replacement_defect",
+        "common_rank_zero_reply"
+      ]
+    ],
+    "named_points": {
+      "common_rank_zero_reply": [
+        10,
+        13
+      ],
+      "killed_boundary_mate": [
+        22,
+        9
+      ],
+      "new_boundary_reply": [
+        11,
+        3
+      ],
+      "old_boundary_reply": [
+        5,
+        13
+      ],
+      "opponent_parent": [
+        12,
+        15
+      ],
+      "replacement_defect": [
+        21,
+        17
+      ],
+      "reply": [
+        22,
+        14
+      ],
+      "retained_defect": [
+        17,
+        19
+      ],
+      "secant_pivot": [
+        4,
+        6
+      ]
+    },
+    "replacement_construction": {
+      "intersection": "replacement_defect",
+      "line_1": [
+        "killed_boundary_mate",
+        "common_rank_zero_reply"
+      ],
+      "line_2": [
+        "old_boundary_reply",
+        "new_boundary_reply"
+      ]
+    }
+  },
+  "schema": "c80-q23-replacement-lineage-v1",
+  "source": "rust/scripts/c80_q23_replacement_lineage.py",
+  "status": "PASS",
+  "trust": {
+    "independent": "direct affine determinant engine with independent legal, Omega, B_small, and Def implementations",
+    "primary": "existing normalized q23 bitmask incidence engine"
+  }
+}

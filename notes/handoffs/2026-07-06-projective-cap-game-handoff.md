@@ -1395,6 +1395,23 @@ obligations projectively; a bounded one-replacement observation is not yet
 a well-founded theorem. C82 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-obligation-deletion-sweep.md`](../2026-07-26-c80-q23-obligation-deletion-sweep.md).
 
+**The first replacement has a projective lineage and strict ancestral
+charge (C80, 2026-07-26).** The unique new defect `(21,17)` is created by
+the opponent half-move `(12,15)`, not by the reply. Its sole former
+`B_small` certificate loses one endpoint on the newly saturated secant
+through `(4,6)`, and the boundary pair transports
+`{(17,19),(22,9)}→{(17,19),(21,17)}`. Intrinsically, the replacement is
+the intersection of the killed-endpoint/common-reply line and the
+old-reply/new-reply line. Transporting the played obligation's ancestral
+label to the new defect makes label support drop `27→2`; 26 ordinary
+deletion fibres plus this one lineage fibre cover the complete marked root,
+whose successor is already in `F_del`. A direct determinant engine
+independently agrees. This is a finite q23 charged proof object, not a
+uniform theorem: the next gate is the next replacement edge, where
+branching or an ancestry collision would falsify injective transport.
+C82 remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-replacement-lineage.md`](../2026-07-26-c80-q23-replacement-lineage.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
