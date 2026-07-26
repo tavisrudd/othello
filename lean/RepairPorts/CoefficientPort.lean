@@ -1,4 +1,5 @@
 import FiniteGeom.Repair
+import FiniteGeom.CodeDuality
 import Mathlib.Data.ENat.Lattice
 
 /-!
@@ -36,6 +37,13 @@ def coefficientPortSpan (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (r : ℕ) :
 def ReconstructsAt (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) (r : ℕ) : Prop :=
   coefficientPortSpan C x r = FiniteGeom.dualCode C
 
+/-- When a coefficient port spans the parity-check space, taking its orthogonal code recovers the
+original linear code. -/
+theorem reconstructedCode_eq {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r : ℕ}
+    (h : ReconstructsAt C x r) :
+    FiniteGeom.dualCode (coefficientPortSpan C x r) = C := by
+  rw [h, FiniteGeom.dualCode_dualCode]
+
 /-- The least radius reconstructing the parity-check space, or `⊤` if none does. -/
 noncomputable def reconstructionRadius (C : Submodule 𝔽 (ι → 𝔽)) (x : ι) : ℕ∞ :=
   sInf ((fun r : ℕ => (r : ℕ∞)) '' {r | ReconstructsAt C x r})
@@ -61,6 +69,60 @@ theorem reconstructsAt_mono {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r s : �
   apply le_antisymm (coefficientPortSpan_le_dualCode C x s)
   rw [← hr]
   exact coefficientPortSpan_mono hrs
+
+/-- An intrinsic isomorphism of pointed coefficient ports.  The ambient linear equivalence must
+carry the full parity-check space and every bounded normalized coefficient fiber exactly. -/
+structure PointedCoefficientPortIso
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    (C : Submodule 𝔽 (ι → 𝔽)) (x : ι)
+    (C' : Submodule 𝔽 (κ → 𝔽)) (x' : κ) where
+  ambientEquiv : (ι → 𝔽) ≃ₗ[𝔽] (κ → 𝔽)
+  map_dualCode :
+    (FiniteGeom.dualCode C).map ambientEquiv.toLinearMap = FiniteGeom.dualCode C'
+  map_coefficientPort :
+    ∀ r, ambientEquiv '' coefficientPort C x r = coefficientPort C' x' r
+
+theorem PointedCoefficientPortIso.map_coefficientPortSpan
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {C' : Submodule 𝔽 (κ → 𝔽)} {x' : κ}
+    (e : PointedCoefficientPortIso C x C' x') (r : ℕ) :
+    (coefficientPortSpan C x r).map e.ambientEquiv.toLinearMap =
+      coefficientPortSpan C' x' r := by
+  rw [coefficientPortSpan, coefficientPortSpan, LinearMap.map_span]
+  change Submodule.span 𝔽 (e.ambientEquiv '' coefficientPort C x r) =
+    Submodule.span 𝔽 (coefficientPort C' x' r)
+  rw [e.map_coefficientPort]
+
+theorem PointedCoefficientPortIso.reconstructsAt_iff
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {C' : Submodule 𝔽 (κ → 𝔽)} {x' : κ}
+    (e : PointedCoefficientPortIso C x C' x') (r : ℕ) :
+    ReconstructsAt C x r ↔ ReconstructsAt C' x' r := by
+  constructor <;> intro h
+  · rw [ReconstructsAt, ← e.map_coefficientPortSpan r, h, e.map_dualCode]
+  · have hmap :
+        (coefficientPortSpan C x r).map e.ambientEquiv.toLinearMap =
+          (FiniteGeom.dualCode C).map e.ambientEquiv.toLinearMap := by
+      rw [e.map_coefficientPortSpan r, e.map_dualCode, h]
+    exact (Submodule.map_injective_of_injective e.ambientEquiv.injective) hmap
+
+/-- Pointed coefficient-port isomorphisms preserve reconstruction radius. -/
+theorem PointedCoefficientPortIso.reconstructionRadius_eq
+    {κ : Type*} [Fintype κ] [DecidableEq κ]
+    {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    {C' : Submodule 𝔽 (κ → 𝔽)} {x' : κ}
+    (e : PointedCoefficientPortIso C x C' x') :
+    reconstructionRadius C x = reconstructionRadius C' x' := by
+  unfold reconstructionRadius
+  congr 1
+  ext z
+  constructor
+  · rintro ⟨r, hr, rfl⟩
+    exact ⟨r, (e.reconstructsAt_iff r).mp hr, rfl⟩
+  · rintro ⟨r, hr, rfl⟩
+    exact ⟨r, (e.reconstructsAt_iff r).mpr hr, rfl⟩
 
 private theorem erased_wordSupport_card_le_univ (y : ι → 𝔽) (x : ι) :
     ((FiniteGeom.wordSupport y).erase x).card ≤ Fintype.card ι := by
@@ -143,5 +205,11 @@ theorem mem_repairHypergraph_iff_exists_mem_coefficientPort
     refine ⟨?_, hcard, y, hy, by simp [hyx], hsupp⟩
     intro j hj
     exact Finset.mem_erase.mpr ⟨fun hjx => hxR (hjx ▸ hj), Finset.mem_univ j⟩
+
+#print axioms reconstructedCode_eq
+#print axioms PointedCoefficientPortIso.reconstructsAt_iff
+#print axioms PointedCoefficientPortIso.reconstructionRadius_eq
+#print axioms reconstructsAt_card_of_exists_dual_not_zero
+#print axioms mem_repairHypergraph_iff_exists_mem_coefficientPort
 
 end RepairPorts

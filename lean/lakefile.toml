@@ -1,9 +1,9 @@
 name = "NodeKayles"
-defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "DihedralSchreier", "RelativeConicArcs"]
+defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "RepairPorts", "DihedralSchreier", "RelativeConicArcs"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
-# the standalone CombinatorialGames package), so Phase 4 is built self-contained.
+# the standalone CombinatorialGames package), so the local Grundy layer is self-contained.
 # Pinned to the exact rev that matches lean-toolchain v4.32.0-rc1 (also in lake-manifest.json) so
 # the build is reproducible; bump to a release tag + stable toolchain when v4.32.0 ships. Do NOT
 # `lake update` on a checkout — it would re-float to master and break the toolchain pin.
@@ -27,17 +27,20 @@ name = "ProjectiveCap"
 [[lean_lib]]
 name = "Queens"
 
-# Coding/MDS formalization program (notes/handoffs/2026-07-11-lean-formalization-plan.md).
+# Linear codes, finite geometry, and bounded repair ports.
 [[lean_lib]]
 name = "FiniteGeom"
 
 [[lean_lib]]
 name = "RepairCodes"
 
+[[lean_lib]]
+name = "RepairPorts"
+
 # Fixed-point-deleted Schreier templates from tame dihedral conic triples.
 [[lean_lib]]
 name = "DihedralSchreier"
 
-# Standalone formalization of papers/arcs_complete_outside_conic.
+# Relative conic-arc geometry and its finite classification interfaces.
 [[lean_lib]]
 name = "RelativeConicArcs"
