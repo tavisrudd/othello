@@ -137,9 +137,14 @@ and `48943b96949604cb25133c53403b4cf24ea87ec8c30ab78f4172931f1770d652`.
 
 `lean/scripts/guarded-lean
 RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean` passes against the
-narrowed paper-facing map.  Rebuilding the matching axiom-audit closure is
-queued behind the active C646 Lean owner after the first overlapping attempt
-was killed with exit 137 while the R7 census was still live.
+narrowed paper-facing map.  The serialized build of
+`RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit` passes with a
+trace-current aggregate gate after rebuilding the stable-component dependency.
+All 74 ordered targets print only `propext`, `Classical.choice`, and
+`Quot.sound`, or no axioms; no `sorryAx` or unsafe dependency appears.  Peak
+resident memory was 3,372,056 KiB.  The first overlapping attempt was killed
+with exit 137 while the R7 census was still live; serialization resolved that
+resource conflict without a source change.
 
 ## Mystery ledger
 
@@ -161,7 +166,6 @@ Settled:
 
 Open:
 
-- The serialized Lean axiom-audit rebuild remains queued.
 - Publication-independent human readers remain a C545 external release gate;
   the internal blind reviews do not substitute for them.
 - The exact all-level component ledger and modular-union degree belong to
