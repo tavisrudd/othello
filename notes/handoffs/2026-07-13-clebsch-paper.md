@@ -76,13 +76,18 @@ nineteen-row trust surface, and clean sixteen-check release replay are green
 at `fd2dee6e`. C611 owns the broader conceptual mechanism and
 v2/other-paper disposition.
 
-C662 is queued as the human-mathematics elevation of that frontier. It asks
-for a uniform spectral, association-scheme, incidence, or polynomial theorem
-that replaces the \(k=7,8\) terminal searches or yields an equally strong
-reconstruction theorem. Computation may suggest statements but cannot
-discharge the task; certificates and exhaustive replay are explicitly
-non-acceptance routes. Paper I absorbs the result only when the theorem-level
-gain outweighs the added prose.
+C662 is complete with a negative manuscript disposition. Its human
+partial-cover theorem gives
+\(\binom{k}{2}\ge3(q-1)/2\), reconstructing the exact \(k=7,8\) terminal
+window, and its saturation theorem identifies the \(q=2k-3\) endpoint with
+arc-supported minimum-weight words in the passant/internal incidence-code
+nullspace. Its full \(q=13\) elliptic-scheme audit reaches only the integer
+bound eight, one short of excluding the terminal eight-arc. The literature
+audit shows that the missing support and near-minimum-cover classifications
+are not consequences of the known human theorems. The C605 terminal
+searches therefore remain load-bearing, and Paper I is unchanged. The
+report and mystery ledger are in
+`notes/2026-07-26-c662-human-passant-bound.md`.
 
 C182 follows C610. Its blocker is external publication packaging. The
 paper repository and immutable public deposit do not yet exist, and this
