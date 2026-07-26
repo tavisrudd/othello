@@ -1,19 +1,28 @@
 \section{Introduction}
 
-Hitchin associated to a general harmonic cubic two icosahedral
-six-axis configurations \cite{HitchinIcosahedron,HitchinBundles}.  Retaining
-one of the two configurations gives a degree-two incidence cover of the
-projective seven-space of harmonic cubics.  We determine its rational square
-class and then study a separate occurrence of the same Clebsch invariant in
-degree-six spherical harmonics.
+Let
+\[
+ H=\ker\!\left(\partial_x^2+\partial_y^2+\partial_z^2:
+ \Q[x,y,z]_3\longrightarrow\Q[x,y,z]_1\right)
+\]
+be the rational seven-space of harmonic cubics.  Hitchin associated to a
+general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations:
+equivalently, two Mukai--Umemura isotropic three-planes \(U\subset H\) with
+\(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  The incidence
+variety of pairs \(([f],U)\) is therefore generically a degree-two cover of
+\(\mathbf P(H)\).  We determine its rational square class and then study a
+separate occurrence of the same Clebsch invariant in degree-six spherical
+harmonics.
 
-Let \(H\) be the rational seven-space of harmonic cubics, let \(J_0\) denote
-Hitchin's invariant sextic, and write
+Let \(J_0\) denote Hitchin's irreducible invariant sextic, with his
+normalization, and write
 \[
  V=\{(y_1,\ldots,y_5):\textstyle\sum_i y_i=0\},\qquad
  \sigma_3(y)=\frac13\sum_i y_i^3
 \]
 for the Clebsch four-space and its invariant cubic.
+Here and below, \(D(\sigma_3)\) is the principal open set
+\(\{\sigma_3\ne0\}\).
 
 \begin{theorem}[Arithmetic incidence cover]
 \label{thm:arithmetic-main}
@@ -36,6 +45,10 @@ defined over \(\Q(\sqrt5)\).  Their Galois exchanger has good reduction at
 \]
 \end{theorem}
 
+The last sentence concerns only the displayed golden fibre and its
+exchanger; it is not a good-reduction statement for the global geometric
+incidence cover.
+
 \begin{theorem}[Degree-six harmonic restriction]
 \label{thm:harmonic-main}
 Let \(u_{ij}\), \(1\leq i<j\leq5\), be the explicitly labelled unit axes
@@ -56,15 +69,23 @@ copy is
 \]
 \end{theorem}
 
-The arithmetic theorem fixes the unknown constant in the square class of
-Hitchin's known cover by evaluating one golden fibre.  Its statement at
-\(11\) concerns only that explicit fibre and exchanger.  The abstract
+Hitchin proves the generic degree, identifies the branch sextic, computes
+its Clebsch restriction, and classifies the fibre over \(xyz\)
+\cite[\S\S3, 9--10]{HitchinIcosahedron}
+\cite[\S\S4--5]{HitchinBundles}.  The arithmetic theorem fixes the remaining
+rational constant in that square class and computes the spinor class of the
+explicit specialization.  The Mukai--Umemura threefold supplies the
+incidence source \cite{MukaiUmemura}; Dye's finite theorem gives the
+complementary square-\(5\) criterion for Clebsch hexagons
+\cite{DyeClebsch}.  The abstract
 equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
 comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 
-The harmonic theorem uses the same polynomial \(\sigma_3\) on \(V\), but it
-is logically independent of the incidence cover.  The coefficient
+The harmonic theorem is new and logically independent of the incidence
+cover.  It places the classical degree-six bond-order observable
+\cite{SNR1981,SNR1983} on the same four-space and computes its exact
+restriction.  The coefficient
 \(-784000/1247103\) has denominator divisible by \(11\), and this paper
 constructs no common integral lattice from which the two realizations could
 be obtained by base change.  The relation proved here is their common base

@@ -2,6 +2,7 @@
   "schema": "clebsch-passages-trust-manifest-v2",
   "paper": "Arithmetic and harmonic realizations of the Clebsch cubic",
   "release_ready": true,
+  "release_scope": "all local mathematical and reproducibility gates pass; an immutable public artifact locator remains required before submission",
   "integral_boundary": {
     "abstract_quadratic_algebra": "finite etale on D(10 J_Z)",
     "classical_invariant_presentation": "over Z[1/30]",
