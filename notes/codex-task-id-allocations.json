@@ -1502,8 +1502,17 @@
       "last": 663,
       "purpose": "split Chow polynomial and projective-code exclusion for q16 eight-arcs",
       "sequence": 167
+    },
+    {
+      "count": 1,
+      "first": 664,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 664,
+      "purpose": "plan and execute a human-mechanism-first Lean formalization of the bounded Paper III theorem surface",
+      "sequence": 168
     }
   ],
-  "next_id": 664,
+  "next_id": 665,
   "schema": "codex-task-id-allocations-v1"
 }
