@@ -10,7 +10,7 @@ make tit-check
 ```
 
 The output is `prs-beyond-redundancy-four-tit-submission.pdf`.  The current
-build has 23 single-column pages, below the 50-page submission limit effective
+build has 22 single-column pages, below the 50-page submission limit effective
 since 2025-05-01.  The canonical preprint PDF remains a separate build from
 `main.tex`.
 

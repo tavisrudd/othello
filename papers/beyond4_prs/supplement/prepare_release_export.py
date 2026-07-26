@@ -12,6 +12,35 @@ from pathlib import Path
 
 
 PAPER_PATH = Path("papers/beyond4_prs")
+PAPER_PATHS = (
+    PAPER_PATH / "README.md",
+    PAPER_PATH / "Makefile",
+    PAPER_PATH / "main.tex",
+    PAPER_PATH / "main-tit.tex",
+    PAPER_PATH / "refs.bib",
+    PAPER_PATH / "flake.nix",
+    PAPER_PATH / "flake.lock",
+    PAPER_PATH / "lean-toolchain",
+    PAPER_PATH / "prs-beyond-redundancy-four.pdf",
+    PAPER_PATH / "prs-beyond-redundancy-four-tit-submission.pdf",
+    PAPER_PATH / "theorem-map.md",
+    PAPER_PATH / "claim-proof-novelty-ledger.md",
+    PAPER_PATH / "formalization-ledger.md",
+    PAPER_PATH / "literature-audit.md",
+    PAPER_PATH / "verification-map.md",
+    PAPER_PATH / "frontmatter",
+    PAPER_PATH / "sections/README.md",
+    PAPER_PATH / "sections/01-introduction.tex",
+    PAPER_PATH / "sections/02-overview.tex",
+    PAPER_PATH / "sections/03-dictionary.tex",
+    PAPER_PATH / "sections/04-redundancy-five.tex",
+    PAPER_PATH / "sections/05-polar-induction.tex",
+    PAPER_PATH / "sections/06-redundancies-six-seven.tex",
+    PAPER_PATH / "sections/10-verification.tex",
+    PAPER_PATH / "sections/11-provenance-boundary.tex",
+    PAPER_PATH / "submission",
+    PAPER_PATH / "supplement",
+)
 LEAN_PATHS = (
     Path("lean/lakefile.toml"),
     Path("lean/lake-manifest.json"),
@@ -122,7 +151,7 @@ def main() -> None:
         cwd=source,
         capture=True,
     )
-    owned_paths = (PAPER_PATH, *LEAN_PATHS)
+    owned_paths = (*PAPER_PATHS, *LEAN_PATHS)
     dirty = run(
         [
             "git",
@@ -146,7 +175,7 @@ def main() -> None:
             "--format=%aI",
             revision,
             "--",
-            PAPER_PATH.as_posix(),
+            *(path.as_posix() for path in PAPER_PATHS),
         ],
         cwd=source,
         capture=True,
@@ -165,7 +194,7 @@ def main() -> None:
         capture=True,
     )
     output.mkdir(parents=True)
-    extract_archive(source, revision, (PAPER_PATH,), output)
+    extract_archive(source, revision, PAPER_PATHS, output)
     extract_archive(source, revision, LEAN_PATHS, output)
 
     paper_commit = commit(

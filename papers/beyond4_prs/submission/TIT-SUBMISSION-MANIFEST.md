@@ -6,14 +6,14 @@ Status: **local venue-formatted candidate — author fields unresolved**
 |---|---|
 | Journal | *IEEE Transactions on Information Theory* |
 | Article type | Regular paper |
-| Manuscript title | *Projective Reed--Solomon Syndromes Beyond Redundancy Four: Complete First Levels and Coherent Polar Flags* |
+| Manuscript title | *Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Exact Classifications at Redundancies Five Through Seven* |
 | Submission driver | `main-tit.tex` |
 | Submission PDF | `prs-beyond-redundancy-four-tit-submission.pdf` |
-| Single-column pages | `23` |
-| Submission PDF SHA-256 | `b0e6d70dc90c3e86aa7e1b165718236839baa2e44187698aac28bce463e22c41` |
-| Submission PDF bytes | `221712` |
-| Abstract words (`texcount -sum -brief`) | `287` |
-| Index terms | `6` |
+| Single-column pages | `22` |
+| Submission PDF SHA-256 | `f4881b8f4e2860d15b8a02001579a574132483d3d06ea979a977a985a82d9437` |
+| Submission PDF bytes | `397166` |
+| Abstract words (`texcount -sum -brief`) | `247` |
+| Index terms | `8` |
 | Corresponding author | `[[AUTHOR INPUT: confirm]]` |
 | Affiliation | `[[AUTHOR INPUT: confirm]]` |
 | ORCID-linked ScholarOne account | `[[AUTHOR INPUT: confirm]]` |

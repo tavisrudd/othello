@@ -11,7 +11,7 @@ instructions on 2026-07-24.
 - [x] Abstract is one paragraph, self-contained, and below 250 words.
 - [x] Abstract contains no unexplained abbreviation, citation, display, or
   table.
-- [x] Six index terms are present.
+- [x] Eight index terms are present.
 - [x] References use `IEEEtran` style in the submission build.
 - [x] Electronic supplement is cited and assigned an exact trust boundary.
 - [x] AI use is identified in an Acknowledgment, with its roles and author
@@ -37,8 +37,9 @@ instructions on 2026-07-24.
 ## Submission files
 
 - [ ] `prs-beyond-redundancy-four-tit-submission.pdf`
-- [ ] complete manuscript source, including `main-tit.tex`, `frontmatter/`,
-  `sections/`, `appendices/`, and `refs.bib`
+- [ ] complete active manuscript source, including `main-tit.tex`,
+  `frontmatter/`, the eight section files listed in `sections/README.md`,
+  and `refs.bib`
 - [ ] electronic supplement archive
 - [ ] `TIT-SUPPLEMENT-README.md` with final size and contact fields
 - [ ] cover letter with every `[[AUTHOR INPUT: ...]]` field resolved

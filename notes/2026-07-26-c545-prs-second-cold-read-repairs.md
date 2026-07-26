@@ -98,7 +98,7 @@ python3 supplement/verify.py
 python3 supplement/verify.py --replay
 ```
 
-The canonical build is 30 pages and the IEEE single-column build is 23 pages.
+The canonical build is 30 pages and the IEEE single-column build is 22 pages.
 The evidence manifest contains 47 artifacts.  The paper, TIT, evidence,
 classification-record, manuscript-label, and non-replay supplement gates are
 green.  The new direct-locus replay passes all fourteen fields and its bundled
@@ -137,7 +137,15 @@ argument.  Sparse italic signposts divide only the three longest load-bearing
 proofs into their existing mathematical phases: the R5 cyclic cases, the R6
 contained/transverse/bottom analysis, and the R7 second-marker branches.  No
 theorem, proof step, preview, or retrospective summary was added; both builds
-remain at 30 and 23 pages.
+remain at 30 and 22 pages.
+
+A fresh cold reader found no mathematical blocker and judged those signposts
+useful.  The ensuing source audit removed three disabled draft blocks, reduced
+the manuscript reconciliation from 42 raw-source labels to the exact 37
+rendered claims, aligned the submission title and R5--R7 scope, and restricted
+the release exporter to active scholarly source.  The IEEEtran build now uses
+pdfLaTeX and fails on font warnings rather than silently substituting away
+italic and bold shapes.
 
 ## Mystery ledger
 

@@ -26,16 +26,16 @@ ledgers.
 - `thm:r7`: complete redundancy-seven split-free classification and the
   `q>=11` deep-hole corollary.
 
-The complete set of 41 retained numbered labels is reconciled mechanically
+The complete set of 37 retained numbered labels is reconciled mechanically
 against `supplement/LEAN-STATEMENTS.md` by `supplement/verify.py`.
 
 ## Companion-work boundary
 
 Redundancy eight, redundancy nine, ordered-Hessian geometry, the proposed
 all-level stable-component theorem, and higher Lucas-carrier arithmetic are
-not adopted by this manuscript and are not
-imported by its Lean gate. Their development records and formal modules remain
-companion-work sources, not paper dependencies.
+not adopted by this manuscript.  Some reusable stable-component interfaces
+remain in the regression-checked Lean import closure, but no theorem from that
+companion work is mapped to a manuscript claim.
 
 ## Excluded claims
 

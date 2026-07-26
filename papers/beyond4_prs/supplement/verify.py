@@ -116,12 +116,31 @@ def check_release_manifest() -> None:
     print("verified release-manifest local artifact rows")
 
 
+def active_tex(text: str, source: Path) -> str:
+    """Return text outside exact-line ``\\iffalse`` blocks."""
+    depth = 0
+    active: list[str] = []
+    for line in text.splitlines(keepends=True):
+        marker = line.strip()
+        if marker == r"\iffalse":
+            depth += 1
+            continue
+        if marker == r"\fi" and depth:
+            depth -= 1
+            continue
+        if depth == 0:
+            active.append(line)
+    if depth:
+        raise SystemExit(f"unclosed \\\\iffalse block in {source}")
+    return "".join(active)
+
+
 def tex_include_closure(path: Path, seen: set[Path]) -> list[Path]:
     path = path.resolve()
     if path in seen:
         return []
     seen.add(path)
-    text = path.read_text(encoding="utf-8")
+    text = active_tex(path.read_text(encoding="utf-8"), path)
     closure = [path]
     for relative in re.findall(r"\\input\{([^}]+)\}", text):
         included = PAPER / relative
@@ -149,7 +168,7 @@ def project_import_closure(module: str, seen: set[str]) -> None:
 def check_formal_scope() -> None:
     labels: set[str] = set()
     for source in tex_include_closure(PAPER / "main.tex", set()):
-        text = source.read_text(encoding="utf-8")
+        text = active_tex(source.read_text(encoding="utf-8"), source)
         labels.update(
             re.findall(
                 r"\\label\{((?:lem|prop|thm|cor):[^}]+)\}",
@@ -171,8 +190,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 42:
-        raise SystemExit(f"expected 42 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 37:
+        raise SystemExit(f"expected 37 adopted manuscript labels, found {len(labels)}")
 
     aggregate_text = AGGREGATE.read_text(encoding="utf-8")
     imports = tuple(

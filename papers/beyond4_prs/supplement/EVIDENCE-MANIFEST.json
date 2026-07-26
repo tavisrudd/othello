@@ -281,12 +281,12 @@
       "sha256": "f737cea8414be43654b6e15e6aea929a9912ec156091ba75701ffa581d752034"
     },
     {
-      "bytes": 15334,
+      "bytes": 12405,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "adee1a0cdf1fc78caa6be13445037491e07b2527b948e956c55b98fafa19160f"
+      "sha256": "cca570904b381358dff893b98a9016c68082ad4542f294eb634e8c8d54dc83eb"
     },
     {
       "bytes": 6549,
@@ -321,20 +321,20 @@
       "sha256": "13c79f4be5dee424035690116e83894dc3a9ec5bbc5c12ed3f79b8e9316d6b7d"
     },
     {
-      "bytes": 6316,
+      "bytes": 7469,
       "path": "prepare_release_export.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Release-export builder",
-      "sha256": "ce55af12d042b959ca1c0223c0819ab806cf3cafd96b467c490cccf540767cfb"
+      "sha256": "8c2cb1420d71e7a6d0288fea1b17930e106e7742aedd3f11190662b1c2681b62"
     },
     {
-      "bytes": 12575,
+      "bytes": 13170,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "c4ab38dd2b82fa5293289d5758604afddf78799356e7dccdf80078b1d1cc198f"
+      "sha256": "ca526a8b1b53189794d1dc6a5d02bae3ff2ecf50f29f6a29a38d28c56d91edf1"
     },
     {
       "bytes": 17225,

@@ -1,9 +1,8 @@
 # TeX source layout
 
 `main.tex` is the canonical preprint driver and `main-tit.tex` is the
-single-column IEEEtran review driver.  Both consume the same `frontmatter/`,
-section, appendix, and bibliography sources.  Stable section filenames are
-numbered by reading order:
+single-column IEEEtran review driver.  Both consume the same frontmatter,
+eight active section files, acknowledgment, and bibliography:
 
 1. `01-introduction.tex`
 2. `02-overview.tex`
@@ -11,16 +10,10 @@ numbered by reading order:
 4. `04-redundancy-five.tex`
 5. `05-polar-induction.tex`
 6. `06-redundancies-six-seven.tex`
-7. `07-fixed-level-eight-nine.tex`
-8. `08-ordered-hessian.tex`
-9. `09-lucas-carriers.tex`
-10. `10-verification.tex`
-11. `11-provenance-boundary.tex`
+7. `10-verification.tex`
+8. `11-provenance-boundary.tex`
 
-Appendices live under `appendices/`; the statement-adequacy appendix is
-`appendices/statement-adequacy.tex`.  The section extraction is complete.
-Each driver now contains only its venue-specific preamble, ordered inputs,
+The exact paper-to-formal declaration map is
+`supplement/LEAN-STATEMENTS.md`; it is not a manuscript appendix.  Each
+driver contains only its venue-specific preamble, the active inputs,
 bibliography style, and document terminator.
-
-The eventual paper-only export preserves this layout.  It does not publish
-the development monorepo.

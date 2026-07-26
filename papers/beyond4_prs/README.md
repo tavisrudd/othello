@@ -1,15 +1,15 @@
-# Paper: Beyond redundancy four for projective Reed--Solomon codes
+# Deep holes beyond redundancy four
 
-**Working title:** *Deep holes of projective Reed--Solomon codes beyond
-redundancy four: exact classifications at redundancies five through seven.*
+This directory contains the manuscript
+*Deep holes of projective Reed--Solomon codes beyond redundancy four:
+exact classifications at redundancies five through seven* and its public
+verification bundle.
 
-**Status:** C656 narrowed Version 1 to the proved R5--R7 boundary after
-independent cold reads found unresolved arbitrary-level component and modular
-budget gates.  R8, R9, the proposed stable-component theorem,
-ordered-Hessian geometry, and higher Lucas-carrier strata are reserved for
-separate companion work.  The follow-up
-cold-session queue and release gates are recorded in
-`second-draft-fix-plan.md`; no DOI release is authorized yet.
+The paper proves complete deep-hole classifications at redundancies five and
+six over every prime power \(q\geq7\).  At redundancy seven it proves the
+complete split-free classification over the same range and promotes it to a
+deep-hole classification whenever the covering radius is six, in particular
+for \(q\geq11\).  It makes no arbitrary-redundancy claim.
 
 ## Build
 
@@ -20,105 +20,46 @@ make check
 make tit-check
 ```
 
-`make check` builds the 31-page canonical preprint.  `make tit-check` builds the
-23-page IEEEtran single-column review manuscript
-`prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
-*IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
-`main-tit.tex`,
-`prs-beyond-redundancy-four.pdf`,
-`refs.bib`, `theorem-map.md`,
-`claim-proof-novelty-ledger.md`, `adversarial-proof-evidence-audit.md`,
-`second-draft-fix-plan.md`, and `verification-map.md`.  Major TeX units live
-under `sections/`; shared abstract, index terms, and acknowledgment text live
-under `frontmatter/`.  The build drivers are described in
-`sections/README.md`.  Public certificates and release material are under
-`supplement/`.  Run `python3 supplement/verify.py` for the local manifest and
-classification-record check, or add `--replay` for every paper-local Python replay.
-Add `--release` only for the immutable public candidate; it rejects unresolved
-repository, revision, archive, DOI, PDF, and independent-reader fields.
+`make check` builds the 30-page canonical preprint
+`prs-beyond-redundancy-four.pdf`.  `make tit-check` builds the 23-page
+IEEEtran single-column review manuscript
+`prs-beyond-redundancy-four-tit-submission.pdf`.
 
-## Results
+The canonical and IEEEtran drivers consume the same abstract, index terms,
+eight active section files, acknowledgment, and bibliography.  Their layout
+is recorded in `sections/README.md`.
 
-The paper begins immediately beyond the published redundancy-at-most-four frontier and keeps the
-exact strength of each proved level visible:
+## Verification
 
-1. the complete all-field classification of deep holes of `PRS(q-4)` at redundancy five;
-2. the transition from cubic-pencil exceptional covers to coherent consecutive-polar flags;
-3. the all-field redundancy-six deep-hole classification and the complete
-   all-field redundancy-seven split-free classification, with its separate
-   small-field covering-radius boundary;
-4. the one-step polar-escape theorem and its explicit R6/R7 iterations.
+The electronic supplement contains public classification records, generators,
+independent replays, checksums, toolchain locks, and the declaration-level map
+of the conditional Lean formalization.
 
-The manuscript must distinguish complete classifications from containment, high-field, and
-obstruction statements.  R9 and the unresolved modular-carrier strata are
-companion-paper work, not late additions to the submission.
+Run
 
-## Deliberate exclusions
+```text
+python3 supplement/verify.py
+```
 
-- C481--C490 projection/Gale reconstruction belongs to the separate reconstruction-paper decision.
-- Twisted Reed--Solomon results C510/C514/C515/C518 are not part of the projective-RS spine.
-- R8/R9, the proposed arbitrary-level stable-component theorem,
-  ordered-Hessian geometry, and higher Lucas-carrier strata are reserved for
-  companion papers.
-- No ambient syndrome census substitutes for the proved geometric and arithmetic mechanisms.
+for the local bundle, classification-record, manuscript-label, and formal-scope
+checks.  Add `--replay` to execute every paper-local Python replay.
+`--release` is reserved for an immutable public candidate whose repository,
+revision, archive, DOI, PDF, and independent-reader fields are complete.
 
-## Verification plan
+Lean checks coordinate algebra, finite-record arithmetic, degree-specific
+budgets, and conditional synthesis.  The geometric classifications, cited
+point and covering-radius theorems, group actions, and certificate semantics
+retain the explicit trust routes recorded in
+`supplement/LEAN-STATEMENTS.md`.
 
-- C517 supplies companion-paper redundancy-nine residual-quadratic algebra.
-- C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
-- C540 closed the redundancy-five Lean package.
-- C541 closed the coherent-polar engine and redundancy-six/seven applications.
-- The paper-facing aggregate audits the R5--R7 gates.  Stable-component
-  coordinate and uniform-radius interfaces remain regression-checked companion
-  modules and are not mapped to a Version 1 theorem.
-- `supplement/verify.py` compares the live TeX label set, exact aggregate
-  imports, and exact axiom-audit target list with the public trust map.
+## Scope
 
-All computational claims retain their committed generators, independent replays, compact
-certificates, and checksum manifests.  Lean terminals must expose rather than conceal cited
-geometric or arithmetic inputs that are not formalized.
+Redundancies eight and nine, ordered-Hessian geometry, arbitrary-level
+stable-component assertions, and higher Lucas-carrier arithmetic are companion
+work.  They are neither manuscript theorems nor inputs to the R5--R7
+classifications.
 
-## Release gate
-
-A release described as proof-complete requires:
-
-1. theorem/proof completeness review;
-2. claim-by-claim trust map;
-3. statement-adequacy appendix;
-4. data/code availability and assistance disclosure;
-5. exact shared-Lean commit, targets, and axiom audit;
-6. immutable source/certificate manifest;
-7. clean-checkout replay and build;
-8. reviewed paper-only fresh-history repository export and versioned DOI
-   (the development monorepo is never published);
-9. target-policy check;
-10. cold-prose and adversarial review.
-
-The present draft passes the local proof and scope-sensitive aggregate
-formalization gates but not the independent-reader, clean public replay,
-immutable-release, or author/account gates.
-
-## Rapid priority record
-
-The quick note is not a second publication.  It is a concise, proof-complete Version 1 of this
-paper only after the release gate above closes, carrying the same title family, authorship, theorem
-numbering map, and later-version relationship.  C545 will then verify the selected journal's current
-preprint policy, prepare the exact release artifact and metadata, and use a recognized preprint
-route that supplies both a public timestamp and DOI.  Later manuscript versions must cite and
-supersede that record rather than presenting overlapping material as an independent paper.  An
-earlier research-announcement release would require an explicit re-scope and must not claim proof
-completeness.
-
-## Initial source set
-
-- `notes/2026-07-22-c491-prs-redundancy-five.md`
-- `notes/2026-07-22-c498-prs-redundancy-six.md`
-- `notes/2026-07-23-c509-prs-redundancy-seven.md`
-- `notes/2026-07-23-c512-general-polar-flag-theorem.md`
-- `notes/2026-07-23-c513-prs-redundancy-eight.md`
-- `notes/2026-07-23-c516-prs-redundancy-nine.md`
-- `notes/2026-07-23-c517-prs-redundancy-nine-lean.md`
-- `notes/2026-07-23-c525-ordered-hessian-arf-pullback.md`
-- `notes/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.md`
-- `notes/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.md`
-- the associated literature audits and reproducibility bundles named by those reports
+Public release remains blocked on the immutable paper and Lean exports,
+independent specialist signoffs, public identifiers, and author/account
+confirmation.  No upload or external publication is performed by the local
+verification commands.

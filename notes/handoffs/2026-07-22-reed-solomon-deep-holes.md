@@ -12,15 +12,17 @@ proved by an explicit monodromy/characteristic trichotomy, and R7 finite
 completeness now has a direct-locus replay independent of the C509 quotient
 partition, including the transient 19-point marked orbit at \(q=19\). Both
 readers cleared the repaired draft (accept/release-ready).
-The paper gates cover 42 labels, the supplement now contains 47 artifacts,
+The paper gates cover 37 rendered labels, the supplement now contains 47 artifacts,
 and the canonical 30-page PDF has SHA-256
-`85ad935a8a4ef2ec2c9d7207a6786a5aaf690cc7bf039f20a132c4144a077dc3`.
+`cb59721088deedabb140e16c101d3b84856ad757872f8be1a3921fba8603881d`.
 An editorial compression pass centralizes proof navigation in one
 three-row reading map, removes repeated mechanism and organization summaries,
 and restores the acknowledgment as an ordinary unnumbered section rather
 than an empty appendix.  Sparse in-proof signposts now expose the existing
 case structure in the three densest load-bearing proofs without adding
-exposition or changing any theorem.
+exposition or changing any theorem.  The source audit removes disabled
+companion claims from the manuscript reconciliation and confines the public
+export to the active R5--R7 paper and scholarly supplement.
 The repair and mystery ledger are in
 `notes/2026-07-26-c545-prs-second-cold-read-repairs.md`.
 A same-day literature delta found no new or revised pre-empting work; it
@@ -195,7 +197,7 @@ fail-closed.  Release remains blocked
 on two independent specialist readers, a publicly fetchable flake-pinned Lean
 revision, the immutable public export and identifiers, and author/account
 confirmation.  IEEE Transactions on Information Theory is now the selected
-journal target; its shared-source IEEEtran review build is 23 single-column
+journal target; its shared-source IEEEtran review build is 22 single-column
 pages, and the venue-specific cover letter, checklist, manifest, and
 supplement README are prepared with author-only fields left explicit.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel
