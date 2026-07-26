@@ -276,13 +276,17 @@ def stabilizerLabelProfile (label : OrbitLabel) : Bool :=
   uncoveredToSelectedAt label == [] &&
   (selectedStabilizersAt label).all (fun matrix =>
     decide (Matrix.det matrix ≠ 0) &&
+    mapsRaysInto matrix selectedPoints &&
     projectiveOrderDividesThree matrix &&
     heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift) &&
   (uncoveredStabilizersAt label).all (fun matrix =>
     decide (Matrix.det matrix ≠ 0) &&
+    mapsRaysInto matrix uncoveredPoints &&
     heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift) &&
   (pairStabilizersAt label).all (fun matrix =>
     decide (Matrix.det matrix ≠ 0) &&
+    mapsRaysInto matrix selectedPoints &&
+    mapsRaysInto matrix uncoveredPoints &&
     heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift)
 
 end NinePointHeisenbergStabilizer
