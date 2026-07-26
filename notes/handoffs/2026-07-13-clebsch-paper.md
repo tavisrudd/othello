@@ -207,11 +207,21 @@ accessibility pass. The synchronized twenty-one-statement, eight-bundle
 aggregate replay, Lean gate, warning-free twenty-four-page PDF, and fingerprint
 are green at `b9ee4f88`.
 
-C661 is queued after C577 as a bounded higher-tier upgrade. It accepts a
-uniform recovery/Gorenstein theorem with a genuinely new family or instance,
-conceptual \(A_3/B_3\) rank proofs that remove the row reductions, or a
-canonical classification/application of equivalent strength. It must not hold
-the current Paper II release or import unfinished Paper III claims.
+C661 is complete.  Paper II's \(A_3,B_3\) row reductions are replaced by
+one affine-cocycle/Fischer-module proof: defining-characteristic
+\(\operatorname{SL}_2\) irreducibility forces the top summands, while the
+\(B_3\) outer quotient is \(3L_{02}^2\), so its radial trace is the dual
+norm of a secant.  The `tt` closeout also reverses the former
+cubic-to-Gorenstein dependency: radical--Hadamard recovery gives signed Gale
+self-duality and Cayley--Bacharach in degree two; the classical
+self-association criterion and Hilbert symmetry then force
+\(h=(1,q-1,q-1,1)\), \(L^{\circ3}=k^\Omega\), and the nonzero cubic.
+Exact matrices and cubic tensors remain cross-checks rather than the human
+proof.  The bounded family route found the abstract antipodal-simplex family
+but no new conic matching realization, so the remaining frontier is the
+structural derivation of radical--Hadamard hypotheses beyond \(B_3,H_3\).
+The proof and mystery ledger are in
+`notes/2026-07-26-c661-uniform-factorization-upgrade.md`.
 
 The active order is strict:
 
@@ -223,8 +233,6 @@ The active order is strict:
    the crown or bloat Paper I for a merely local improvement.
 4. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-5. **C661:** test a uniform or equivalent-strength Paper II upgrade after
-   C577 without holding the current release.
 
 C579 is complete and no longer an open-order item.
 
@@ -611,6 +619,17 @@ Nine theorem-like statements, twelve claim rows, three independent exact
 evidence pairs, and the warning-free build pass the aggregate gate. The
 report and mystery ledger are in
 `notes/2026-07-26-c579-paper-iii-synthesis-cold-review.md`.
+
+C664 is queued as a bounded human-mechanism-first Lean upgrade. Its required
+surface is the generic involutive odd-unit splitting and the general
+\(K(n,2)\) pair-sum eigenspace theorem, including equality with the full
+Petersen \((-2)\)-eigenspace at \(n=5\). A symbolic golden-exchanger leaf is
+optional. Generated data, imported certificate arrays, `native_decide`, new
+axioms, and any claim to have formalized the full paper are non-acceptance
+routes. The Paper III release gate remains independent of Lean until a
+separate post-formalization correspondence decision. The plan, Tao pass,
+red team, extra-juice pass, and mystery ledger are in
+`notes/2026-07-26-c664-paper-iii-lean-mechanisms-plan.md`.
 
 C655 is complete. The ten icosahedral face axes give an exact
 \(1+4+5\) subspace of \(\mathcal H_6\), the four-space is the Petersen
