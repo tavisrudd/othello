@@ -23,11 +23,24 @@ open NinePointHeisenbergPair
 set_option maxHeartbeats 800000000
 set_option maxRecDepth 100000
 
-private abbrev selectedPoints : List V := NinePointHeisenbergPair.selected
-private abbrev uncoveredPoints : List V := NinePointHeisenbergPair.uncovered
+private def point (x y z : Nat) : V := ![x, y, z]
+
+private def selectedPoints : List V := [
+  point 0 0 1, point 0 1 0, point 1 0 0, point 1 1 1, point 1 2 3,
+  point 1 3 11, point 1 4 9, point 1 13 7, point 1 14 15]
+
+private def uncoveredPoints : List V := [
+  point 1 6 10, point 1 6 18, point 1 10 4, point 1 11 16, point 1 15 2,
+  point 1 15 18, point 1 16 6, point 1 16 10, point 1 18 4]
 
 private def finiteNine : List (Fin 9) := List.ofFn fun i : Fin 9 => i
 private def fieldElements : List K := List.ofFn fun i : Fin 19 => (i.val : K)
+
+private def fieldPower : K → Nat → K
+  | _, 0 => 1
+  | value, exponent + 1 => fieldPower value exponent * value
+
+private def fieldInverse (value : K) : K := fieldPower value 17
 
 abbrev OrbitLabel := Fin 3 × Fin 3
 
@@ -49,6 +62,14 @@ private def orderedIndexFramesAt (label : OrbitLabel) : List (List (Fin 9)) :=
           some [i, j, k, l]
         else none
 
+private def orderedIndexFramesAtPrefix (first second : Fin 9) : List (List (Fin 9)) :=
+  finiteNine.flatMap fun third =>
+    finiteNine.filterMap fun fourth =>
+      if first ≠ second ∧ first ≠ third ∧ first ≠ fourth ∧
+          second ≠ third ∧ second ≠ fourth ∧ third ≠ fourth then
+        some [first, second, third, fourth]
+      else none
+
 private def orderedIndexFrames : List (List (Fin 9)) :=
   orbitLabels.flatMap orderedIndexFramesAt
 
@@ -58,8 +79,20 @@ private def framePoint (points : List V) (indices : List (Fin 9)) (i : Fin 4) : 
 private def coordinateMatrix (points : List V) (indices : List (Fin 9)) : M :=
   fun i j => framePoint points indices ⟨j.val, by omega⟩ i
 
+private def determinantThree (matrix : M) : K :=
+  matrix 0 0 * (matrix 1 1 * matrix 2 2 - matrix 1 2 * matrix 2 1) -
+  matrix 0 1 * (matrix 1 0 * matrix 2 2 - matrix 1 2 * matrix 2 0) +
+  matrix 0 2 * (matrix 1 0 * matrix 2 1 - matrix 1 1 * matrix 2 0)
+
+private def multiplyMatrices (left right : M) : M :=
+  fun i j =>
+    left i 0 * right 0 j + left i 1 * right 1 j + left i 2 * right 2 j
+
+private def applyMatrix (matrix : M) (vector : V) : V :=
+  fun i => matrix i 0 * vector 0 + matrix i 1 * vector 1 + matrix i 2 * vector 2
+
 private def inverseMatrix (matrix : M) : M :=
-  let scale := (Matrix.det matrix)⁻¹
+  let scale := fieldInverse (determinantThree matrix)
   scale •
     ![![matrix 1 1 * matrix 2 2 - matrix 1 2 * matrix 2 1,
         matrix 0 2 * matrix 2 1 - matrix 0 1 * matrix 2 2,
@@ -82,15 +115,15 @@ def frameNormalizer (points : List V) (indices : List (Fin 9)) : M :=
   let basis := coordinateMatrix points indices
   let inverseBasis := inverseMatrix basis
   let fourthCoordinates :=
-    Matrix.mulVec inverseBasis (framePoint points indices 3)
-  diagonalMatrix (fun i => (fourthCoordinates i)⁻¹) * inverseBasis
+    applyMatrix inverseBasis (framePoint points indices 3)
+  multiplyMatrices (diagonalMatrix (fun i => fieldInverse (fourthCoordinates i))) inverseBasis
 
 /-- The canonical matrix carrying one ordered projective frame to another. -/
 def frameProjectivity
     (source : List V) (sourceIndices : List (Fin 9))
     (target : List V) (targetIndices : List (Fin 9)) : M :=
-  inverseMatrix (frameNormalizer target targetIndices) *
-    frameNormalizer source sourceIndices
+  multiplyMatrices (inverseMatrix (frameNormalizer target targetIndices))
+    (frameNormalizer source sourceIndices)
 
 private def sourceFrame : List (Fin 9) := [0, 1, 2, 3]
 
@@ -104,16 +137,21 @@ def frameCandidatesAt (source target : List V) (label : OrbitLabel) : List M :=
   (orderedIndexFramesAt label).map fun targetFrame =>
     frameProjectivity source sourceFrame target targetFrame
 
+private def frameCandidatesAtPrefix
+    (source target : List V) (first second : Fin 9) : List M :=
+  (orderedIndexFramesAtPrefix first second).map fun targetFrame =>
+    frameProjectivity source sourceFrame target targetFrame
+
 /-- Canonical normalization of a nonzero coordinate ray. -/
 def normalizeRay (point : V) : V :=
-  if point 0 ≠ 0 then (point 0)⁻¹ • point else
-  if point 1 ≠ 0 then (point 1)⁻¹ • point else
-  if point 2 ≠ 0 then (point 2)⁻¹ • point else 0
+  if point 0 ≠ 0 then fieldInverse (point 0) • point else
+  if point 1 ≠ 0 then fieldInverse (point 1) • point else
+  if point 2 ≠ 0 then fieldInverse (point 2) • point else 0
 
 /-- Whether a coordinate matrix maps every source ray into the target ray set. -/
 def mapsRaysTo (matrix : M) (source target : List V) : Bool :=
   source.all fun p =>
-    target.any fun q => normalizeRay (Matrix.mulVec matrix p) = normalizeRay q
+    target.any fun q => normalizeRay (applyMatrix matrix p) = normalizeRay q
 
 private def e₀ : V := ![1, 0, 0]
 private def e₁ : V := ![0, 1, 0]
@@ -229,65 +267,67 @@ def uncoveredToSelectedAt (label : OrbitLabel) : List M :=
   (frameCandidatesAt uncoveredPoints selectedPoints label).filter fun matrix =>
     mapsRaysTo matrix uncoveredPoints selectedPoints
 
-attribute [reducible] finiteNine fieldElements orbitIndex orbitLabels orderedIndexFramesAt
-  orderedIndexFrames framePoint coordinateMatrix
+private def selectedStabilizersAtPrefix (first second : Fin 9) : List M :=
+  (frameCandidatesAtPrefix selectedPoints selectedPoints first second).filter fun matrix =>
+    mapsRaysTo matrix selectedPoints selectedPoints
+
+private def uncoveredStabilizersAtPrefix (first second : Fin 9) : List M :=
+  (frameCandidatesAtPrefix uncoveredPoints uncoveredPoints first second).filter fun matrix =>
+    mapsRaysTo matrix uncoveredPoints uncoveredPoints
+
+private def pairStabilizersAtPrefix (first second : Fin 9) : List M :=
+  (selectedStabilizersAtPrefix first second).filter fun matrix =>
+    mapsRaysTo matrix uncoveredPoints uncoveredPoints
+
+private def selectedToUncoveredAtPrefix (first second : Fin 9) : List M :=
+  (frameCandidatesAtPrefix selectedPoints uncoveredPoints first second).filter fun matrix =>
+    mapsRaysTo matrix selectedPoints uncoveredPoints
+
+private def uncoveredToSelectedAtPrefix (first second : Fin 9) : List M :=
+  (frameCandidatesAtPrefix uncoveredPoints selectedPoints first second).filter fun matrix =>
+    mapsRaysTo matrix uncoveredPoints selectedPoints
+
+attribute [reducible] point selectedPoints uncoveredPoints finiteNine fieldElements
+  fieldPower fieldInverse
+  orbitIndex orbitLabels orderedIndexFramesAt orderedIndexFramesAtPrefix
+  orderedIndexFrames framePoint coordinateMatrix determinantThree multiplyMatrices applyMatrix
   inverseMatrix diagonalMatrix frameNormalizer frameProjectivity sourceFrame
-  frameCandidates frameCandidatesAt normalizeRay mapsRaysTo selectedStabilizers
+  frameCandidates frameCandidatesAt frameCandidatesAtPrefix normalizeRay mapsRaysTo selectedStabilizers
   uncoveredStabilizers pairStabilizers selectedToUncovered uncoveredToSelected
   selectedStabilizersAt uncoveredStabilizersAt pairStabilizersAt selectedToUncoveredAt
-  uncoveredToSelectedAt
+  uncoveredToSelectedAt selectedStabilizersAtPrefix uncoveredStabilizersAtPrefix
+  pairStabilizersAtPrefix selectedToUncoveredAtPrefix uncoveredToSelectedAtPrefix
 
 /-- The ordered target-frame domain has exactly 3024 elements. -/
 theorem ordered_frame_count : orderedIndexFrames.length = 3024 := by decide
 
-/-- Whether a matrix is scalar. -/
-def isScalarMatrix (matrix : M) : Bool :=
-  fieldElements.any fun scalar => decide (matrix = scalar • (1 : M))
+private def selectedExpectedSecond : Fin 9 → Fin 9 :=
+  ![1, 2, 0, 4, 5, 3, 8, 6, 7]
 
-/-- Whether the projective class of a matrix has order dividing three. -/
-def projectiveOrderDividesThree (matrix : M) : Bool :=
-  isScalarMatrix (matrix ^ 3)
+private def uncoveredExpectedSecond : Fin 9 → Fin 9 :=
+  ![1, 7, 5, 8, 3, 6, 2, 0, 4]
 
-/-- The nine displayed linear lifts of the projective `C₃ × C₃` subgroup. -/
-def heisenbergLifts : List M :=
-  [(1 : M), g, g ^ 2, h, g * h, g ^ 2 * h, h ^ 2, g * h ^ 2, g ^ 2 * h ^ 2]
-
-/-- Whether two nonzero matrices represent the same projective transformation. -/
-def projectivelyEquivalentMatrices (left right : M) : Bool :=
-  fieldElements.any fun scalar => scalar ≠ 0 && decide (left = scalar • right)
-
-/-- Whether two lists contain the same projective matrix classes. -/
-def sameProjectiveMatrices (left right : List M) : Bool :=
-  left.all (fun matrix =>
-    right.any fun other => projectivelyEquivalentMatrices matrix other) &&
-  right.all (fun matrix =>
-    left.any fun other => projectivelyEquivalentMatrices matrix other)
+private def expectedMultiplicity (actual expected : Fin 9) : Nat :=
+  if actual = expected then 1 else 0
 
 /--
-The complete transporter profile for one possible label of the first frame image: one
-nonsingular stabilizer of each orbit and the ordered pair, no orbit interchange, projective
-order dividing three, and membership in the displayed Heisenberg subgroup.
+The complete transporter count for one ordered prefix of the target frame.  Fixing the first two
+images leaves 42 ordered target frames.  The two displayed expected-second tables specify the
+unique accepted transporter in each orbit; all other prefixes contain none, and no prefix contains
+an orbit interchange.
 -/
-def stabilizerLabelProfile (label : OrbitLabel) : Bool :=
-  (selectedStabilizersAt label).length == 1 &&
-  (uncoveredStabilizersAt label).length == 1 &&
-  (pairStabilizersAt label).length == 1 &&
-  selectedToUncoveredAt label == [] &&
-  uncoveredToSelectedAt label == [] &&
-  (selectedStabilizersAt label).all (fun matrix =>
-    decide (Matrix.det matrix ≠ 0) &&
-    mapsRaysInto matrix selectedPoints &&
-    projectiveOrderDividesThree matrix &&
-    heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift) &&
-  (uncoveredStabilizersAt label).all (fun matrix =>
-    decide (Matrix.det matrix ≠ 0) &&
-    mapsRaysInto matrix uncoveredPoints &&
-    heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift) &&
-  (pairStabilizersAt label).all (fun matrix =>
-    decide (Matrix.det matrix ≠ 0) &&
-    mapsRaysInto matrix selectedPoints &&
-    mapsRaysInto matrix uncoveredPoints &&
-    heisenbergLifts.any fun lift => projectivelyEquivalentMatrices matrix lift)
+def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
+  (selectedStabilizersAtPrefix first second).length ==
+      expectedMultiplicity second (selectedExpectedSecond first) &&
+  (uncoveredStabilizersAtPrefix first second).length ==
+      expectedMultiplicity second (uncoveredExpectedSecond first) &&
+  (pairStabilizersAtPrefix first second).length ==
+      expectedMultiplicity second (selectedExpectedSecond first) &&
+  selectedToUncoveredAtPrefix first second == [] &&
+  uncoveredToSelectedAtPrefix first second == []
+
+attribute [reducible] selectedExpectedSecond uncoveredExpectedSecond expectedMultiplicity
+  stabilizerPrefixProfile
 
 end NinePointHeisenbergStabilizer
 end RelativeConicArcs
