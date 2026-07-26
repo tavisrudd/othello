@@ -254,9 +254,12 @@ dependencies.
 The finite group-action terminal is kernel-checked in
 `RelativeConicArcs.KleinFourOrbitCongruence`:
 
+- `card_mod_group_order_eq_one_of_unique_fixed_point_action` proves the
+  stronger ambient statement: for any nontrivial finite group with the
+  common-singleton fixed-point pattern, the set cardinality is one modulo
+  the group order;
 - `card_mod_four_eq_one_of_unique_fixed_point_action` proves the general
-  congruence from an order-four action and the common-singleton fixed-point
-  hypothesis;
+  order-four congruence as a specialization;
 - `no_unique_fixed_point_four_group_action_on_card_ninety_one` specializes it
   to the 91-point contradiction.
 
@@ -288,6 +291,14 @@ Tao's question is not “which large subgroup can contain 46 root groups?” but
 acts freely on the rest, forcing \(|E|\equiv1\pmod4\).  The same pass weakens
 the reusable sieve's hypothesis: one tangent secant gives the congruence, and
 two distinct tangent secants already force the subfield-group alternative.
+The formal closeout exposes the still more invariant statement: for any
+nontrivial finite acting group with the same common-singleton fixed-point
+pattern, Burnside's lemma gives
+\[
+ |E|\equiv 1\pmod{|G|}.
+\]
+Thus the number four belongs to the geometric construction of the subgroup,
+not to the orbit argument itself.
 
 The proof genuinely uses the prescribed conic twice and indispensably: to
 place the involutions in one \(\operatorname{PGL}_2\), and to make the same
