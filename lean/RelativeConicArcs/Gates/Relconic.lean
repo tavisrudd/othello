@@ -7,6 +7,7 @@ import RelativeConicArcs.UncoveredLocusReconstruction
 import RelativeConicArcs.MatchingDesignRigidity
 import RelativeConicArcs.KleinFourOrbitCongruence
 import RelativeConicArcs.EqualityConsequences
+import RelativeConicArcs.TangentPairFourGroup
 
 /-!
 # Relative-conic verification boundary
@@ -16,7 +17,8 @@ and their game and coding-theory applications.  It includes exact uncovered-locu
 equivariant stabilizer recovery, secant concurrence decomposition, zero-defect maximum-matching
 rigidity, exact centre-count identities, bad-edge stability, secant-deletion stability, and the
 finite-group unique-fixed-point congruence with its order-four specialization.  It also checks the
-discrete defect gap, affine and odd equality spectra, the characteristic-two odd-order reduction,
+standard-conic exclusion of the exceptional characteristic-two candidate via the tangent-pair
+involutions, the discrete defect gap, affine and odd equality spectra, the characteristic-two odd-order reduction,
 and the exceptional `(4096,92)` secant-type split.  The separate order-twenty-five certificate,
 repair, and other developments are not dependencies of these results.
 -/
@@ -43,3 +45,4 @@ repair, and other developments are not dependencies of these results.
 #print axioms RelativeConicArcs.odd_completeOutside_zeroDefect_order_spectrum
 #print axioms RelativeConicArcs.odd_standardConic_zeroDefect_charTwo_order
 #print axioms RelativeConicArcs.exceptional_candidate_secant_type_cards
+#print axioms RelativeConicArcs.TangentPairFourGroup.no_exceptional_candidate_standardConic

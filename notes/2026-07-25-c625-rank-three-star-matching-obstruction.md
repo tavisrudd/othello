@@ -263,11 +263,15 @@ The finite group-action terminal is kernel-checked in
 - `no_unique_fixed_point_four_group_action_on_card_ninety_one` specializes it
   to the 91-point contradiction.
 
-The module uses Mathlib's formal Burnside lemma.  Lean does not yet construct
-the four-group action from conic coordinates, tangent pairs, or zero defect;
-that geometry-to-action implication remains the analytic bridge stated above.
-The declarations are imported and axiom-audited by
-`RelativeConicArcs.Gates.Relconic`.
+The remaining geometric bridge is now kernel-checked as well.
+`ConicSecantInvolution` constructs the standard-conic involution and proves
+its chord-incidence formula.  `ZeroDefectConicInvariance` proves that the
+91-point maximum-index parameter set is invariant.  Finally,
+`TangentPairFourGroup.no_exceptional_candidate_standardConic` chooses a
+tangent arc secant, proves that its two involutions and their product have the
+same unique fixed point, restricts them to that set, and derives the
+contradiction from permutation sign.  These declarations are imported and
+axiom-audited by `RelativeConicArcs.Gates.Relconic`.
 
 No finite census, heuristic search, or untracked computational artifact is
 part of the theorem.
@@ -340,12 +344,14 @@ nonrealizability of the naked star--matching design.
 - **Naked rank-three \(\operatorname{MATCH}(92,46,1)\) realizability:** open
   and explicitly outside the theorem's scope; it is not a residual mystery
   of the prescribed-conic equality branch.
-- **Manuscript integration:** not performed because C625's routed scope owns
-  the research report and handoff, not a new manuscript edit.  A later
-  paper-edit task may promote the compact corollary and proof.
-- **Formal boundary:** settled.  Lean kernel-checks the group-action
-  congruence and 91-point exclusion; the conic construction of the action is
-  explicitly analytic rather than represented by an axiom.
+- **Manuscript integration:** settled.  The characteristic-two discussion,
+  verification appendix, and a compact exclusion corollary now incorporate
+  the tangent-pair proof.
+- **Formal boundary:** settled locally for the geometric exclusion.  Lean
+  constructs the conic involutions, proves zero-defect invariance, and checks
+  the terminal 91-point contradiction.  The preceding Ramanujan--Nagell
+  classification remains an independently formalized theorem in Banwait's
+  separately pinned Lean package rather than a dependency of this package.
 - **Mystery close:** no genuine task-owned mathematical mystery remains.
   The candidate, proof mechanism, minimal hypothesis, and reusable boundary
   are all locked down.

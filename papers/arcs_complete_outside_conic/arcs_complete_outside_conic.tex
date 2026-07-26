@@ -73,8 +73,9 @@ gives an integer lower bound \(L_2(q)\), hence
 For zero-defect \(\cC\)-complete arcs we determine the three possible
 orders \(q\) for each parity of \(k\).  Over fields of order a power of
 two, odd \(k\) gives exactly an oval whose nucleus lies on \(\cC\), while
-even \(k\) leaves the hyperoval scale \(k=q+2\) or the single arithmetic
-candidate \((q,k)=(4096,92)\).  Projective averaging
+even \(k\) forces the hyperoval scale \(k=q+2\); the sole additional
+arithmetic candidate \((q,k)=(4096,92)\) is ruled out by the involutions
+induced on \(\cC\) by a tangent arc secant.  Projective averaging
 transfers upper bounds from sufficiently small ordinary complete arcs.
 Finally, an exhaustive augmentation certificate together with exact
 quadratic-evaluation certificates shows that no quadratic disjoint from
@@ -194,8 +195,8 @@ vanishing produces the matching design used for equality rigidity, while
 their total gives stability.  For conic holes, the equality theory forces
 each parity of \(k\) into three possible plane orders.  In characteristic
 two the odd branch is exactly the oval--nucleus configuration, while the
-even branch leaves only the hyperoval scale and the candidate
-\((q,k)=(4096,92)\).
+even branch leaves only the hyperoval scale; the sole additional arithmetic
+candidate \((q,k)=(4096,92)\) is excluded geometrically below.
 
 The last assertion of Theorem~\ref{thm:main-conic} has a separate finite
 input: a checked augmentation certificate reduces all eight-arcs over
@@ -833,8 +834,9 @@ has a rank-three realization.
 In the first branch, $A$ is a hyperoval.  Every point outside $A$ has
 secant index $(q+2)/2$, so every nonsingular conic disjoint from $A$
 produces a $\cC$-complete zero-defect pair.  Thus the oval and hyperoval
-branches in characteristic two are completely geometric; only
-$(q,k)=(4096,92)$ remains arithmetically unresolved.
+branches in characteristic two are completely geometric.  The additional
+arithmetic candidate $(q,k)=(4096,92)$ will be excluded in
+Corollary~\ref{cor:no-exceptional-candidate}.
 
 \begin{corollary}[Small even equality cases]
 \label{cor:small-even-equality}
@@ -1345,6 +1347,39 @@ secants relative to $\cC$, then
 which yields $(T,B,E)=(46,2070,2070)$.
 \end{proof}
 
+\begin{corollary}[Exclusion of the exceptional candidate]
+\label{cor:no-exceptional-candidate}
+No zero-defect \(\cC\)-complete arc exists at
+\((q,k)=(4096,92)\).  Consequently, in characteristic two the even
+zero-defect branch has \(k=q+2\).
+\end{corollary}
+
+\begin{proof}
+Let \(\nu\) be the nucleus of \(\cC\).  The preceding proof shows that
+\(\nu\notin A\) and that some arc secant \(PQ\) is tangent to \(\cC\),
+say at \(T\).  Each point \(R\notin\cC\) induces an involution
+\(\sigma_R\) on \(\cC\): the second intersection of \(RX\) with
+\(\cC\) is \(\sigma_R(X)\).  For \(R\ne\nu\), this involution has a
+unique fixed point, namely the contact point of the tangent through \(R\).
+Thus \(\sigma_P\) and \(\sigma_Q\) have the common unique fixed point
+\(T\).  In characteristic two their standard \(2\)-by-\(2\) matrices
+commute; their product is again a nonidentity involution with unique fixed
+point \(T\).
+
+Let \(S\subseteq\cC\) be the set of points of secant index \(46\).
+Zero defect says that every arc point lies in a secant through every
+member of \(S\), so \(S\) is invariant under both \(\sigma_P\) and
+\(\sigma_Q\); moreover \(|S|=91\).  Restrict the three involutions
+\(\sigma_P,\sigma_Q,\sigma_P\sigma_Q\) to \(S\).  Each fixes exactly
+\(T\), hence is a product of \(45\) transpositions and has sign \(-1\).
+But multiplicativity of sign gives
+\[
+ \operatorname{sgn}(\sigma_P\sigma_Q)
+ =\operatorname{sgn}(\sigma_P)\operatorname{sgn}(\sigma_Q)=1,
+\]
+a contradiction.
+\end{proof}
+
 \begin{corollary}[Universal even-characteristic loss]
 \label{cor:even-loss}
 Every $\cC$-complete arc in even characteristic satisfies
@@ -1694,7 +1729,10 @@ measured peak of approximately \(1.3\) GiB each.
 The gate also checks the discrete zero-or-gap alternative, the two
 complete-affine equality orders, the odd three-value equality spectrum and
 its characteristic-two power-of-two collapse, and the exact
-\((46,2070,2070)\) secant-type split at \((q,k)=(4096,92)\).  The
+\((46,2070,2070)\) secant-type split at \((q,k)=(4096,92)\).  It further
+checks the standard-conic secant involutions, their invariance on the
+91-point maximum-index set, and the sign contradiction excluding that
+candidate.  The
 identification of an arbitrary equality oval with a prescribed conic through
 its nucleus, and the parallel hyperoval converse, remain paper proofs rather
 than claims of the formal artifact.
@@ -1729,7 +1767,7 @@ Ramanujan--Nagell classification&
 Nagell's proof~\cite{Nagell1948}; independent Lean formalization
 by Banwait~\cite{Banwait2026}&
 Nagell's published argument; for the formal cross-check, the Lean kernel
-and Mathlib\\
+and Banwait's separately pinned Mathlib package\\
 Small-field witnesses&
 \texttt{ExampleChecks/\allowbreak Q5.lean} through \texttt{Q16.lean}&
 Lean kernel and the explicit finite-field implementations\\ \hline
