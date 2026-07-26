@@ -22,6 +22,7 @@ EXPECTED_LABELS = (
     "cor:h3-middle-layer",
     "prop:radical-hadamard",
     "thm:balanced-cubic",
+    "cor:graded-evaluation",
     "cor:secant-product-syzygies",
     "thm:six-profile-reconstruction",
     "cor:decorated-sheet-classifier",

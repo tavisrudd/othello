@@ -182,7 +182,7 @@ def build_fingerprint(
         "runner_sha256": sha256(Path(__file__).resolve()),
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 16 statements, 6 evidence bundles: CHECK OK",
+            "metadata": "metadata: 17 statements, 6 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }

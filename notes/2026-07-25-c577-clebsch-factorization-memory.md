@@ -15,8 +15,8 @@ ranked question and connection ledger, exact direct corollary, falsifier
 gates, and execution order are recorded in
 `notes/2026-07-25-c620-clebsch-factorization-next-questions.md`.
 
-- C620 owns the immediate theorem \(L^{\circ3}=k^\Omega\) and the Hilbert
-  function/\(h\)-vector.
+- C620 is complete: Paper II now contains \(L^{\circ3}=k^\Omega\), the full
+  Schur-power filtration, and the Hilbert function/\(h\)-vector.
 - C621 owns the falsifier-first ideal, Betti, Cayley--Bacharach, type, and
   inverse-system experiment.
 - Existing C616 owns the modularly valid \(SL_2/A_5\) containment and
@@ -25,7 +25,7 @@ gates, and execution order are recorded in
 ## Current result
 
 Paper II now has its own verification architecture and mathematical
-conclusion. The sixteen theorem-like statements are hash-identified and
+conclusion. The seventeen theorem-like statements are hash-identified and
 mapped claim by claim to conceptual proofs, classical inputs, six exact
 certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
 runner checks the statement map, all six checksum manifests, eleven primary
@@ -215,7 +215,7 @@ cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting nineteen-page PDF is warning-free. The Paper II aggregate
+The resulting twenty-page PDF is warning-free. The Paper II aggregate
 entry point is
 
 ```bash
@@ -371,7 +371,7 @@ mathematical claim or enlarging the release surface.
 | Are the quadratic marker polynomials enough to specify the arithmetic matching models? | settled | No; the manuscript now displays the additional \(B_3\) and \(H_3\) representatives and marks projective transport into the configurations as exact finite evidence. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
-| Is every theorem-like statement assigned one exact trust route? | settled | The sixteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
+| Is every theorem-like statement assigned one exact trust route? | settled | The seventeen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the six semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves six bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
 | What is the next load-bearing Paper II frontier? | open by user direction | Execute the Milnor/Serre spine revision beyond the completed title/abstract repair: narrow the headline theorem, compress motivation, add the Section 6 mechanism map, separate modular from arithmetic refinements, and move secondary material behind the conclusion. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |

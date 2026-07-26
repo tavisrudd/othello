@@ -118,7 +118,7 @@ memory from its rank-two linear memory, and proves the frozen `A_3`
 fused / `B_3,H_3` split arithmetic theorem with the
 `A5 cap A5 = A4` and generated `PSL_2(11)` hinge. The canonical
 relative-cubic Tate plane and its divided-transfer non-identification with
-the depth plane are isolated in an appendix. It now has a sixteen-statement
+the depth plane are isolated in an appendix. It now has a seventeen-statement
 paper-specific trust manifest, a six-bundle aggregate replay, a verification
 section that separates conceptual, classical, certificate, and Lean support,
 and a conclusion that states the exact reconstruction ladder and its
@@ -132,14 +132,23 @@ now distinguishes the three-type linear theorem from the `B_3/H_3` sheet
 theorem and the `H_3`-only refinements. A fresh staged title/abstract/full-PDF
 cold read returned editorial `GO`, conditional only on the already-declared
 public immutable archive locator. The full local replay and warning-free
-nineteen-page build are green. The current theorem,
+twenty-page build are green. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 The two unprimed next-question reads are consolidated in
-`notes/2026-07-25-c620-clebsch-factorization-next-questions.md`: C620 owns
-the immediate \(L^{\circ3}=k^\Omega\) and Hilbert-function corollary, C621
-owns the falsifier-first self-associated/Gorenstein gate, and C616 absorbs
-the \(SL_2/A_5\) uniform-rank proof rather than spawning a duplicate task.
+`notes/2026-07-25-c620-clebsch-factorization-next-questions.md`. C620 is
+complete: Paper II now proves \(L^{\circ3}=k^\Omega\), the full Schur-power
+filtration, and the Hilbert function with \(h\)-vector
+\((1,q-1,q-1,1)\); its seventeen-statement aggregate replay and warning-free
+twenty-page build are green. C417's nontrivial base-choice cocycle explains
+why the graded algebra is reference-independent under translation without
+coming from a canonical equivariant origin; that obstruction remains on
+C417's existing evidence surface rather than becoming a new Paper II
+theorem. C621 owns the falsifier-first
+self-associated/Gorenstein gate, and C616 absorbs the \(SL_2/A_5\)
+uniform-rank proof rather than spawning a duplicate task. The C620 proof,
+trust disposition, and mystery ledger are in
+`notes/2026-07-25-c620-graded-evaluation-algebra.md`.
 
 The active order is strict:
 

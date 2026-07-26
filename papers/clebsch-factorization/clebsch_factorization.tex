@@ -591,6 +591,58 @@ Finally (5.5) proves the stated minimality inside the signed tensor-moment
 family.
 \end{proof}
 
+\begin{corollary}[Graded evaluation algebra]
+\label{cor:graded-evaluation}
+Put \(L^{\circ0}=\langle1\rangle\), and let \(L^{\circ d}\) be the
+span of the pointwise products of \(d\) elements of \(L\).
+For \(T=B_3,H_3\), the pointwise powers of the affine evaluation
+space satisfy
+\[
+ \dim L^{\circ d}=
+ \begin{cases}
+  1,&d=0,\\
+  q,&d=1,\\
+  2q-1,&d=2,\\
+  2q,&d\ge3.
+ \end{cases}
+\]
+In particular, \(L^{\circ3}=\F_q^{\Omega_T}\).  The homogenized
+configuration
+\[
+ \widehat X_T=\{[1:x_M]:M\in\Omega_T\}\subseteq\mathbb P^{q-1}
+\]
+therefore has Hilbert function
+\[
+ 1,\ q,\ 2q-1,\ 2q,\ 2q,\ldots
+\]
+and \(h\)-vector \((1,q-1,q-1,1)\).
+\end{corollary}
+
+\begin{proof}
+Pair functions on \(\Omega_T\) with the sheet sign by
+\(\langle\epsilon,f\rangle=\sum_M\epsilon(M)f(M)\).
+Proposition~\ref{prop:radical-hadamard} gives
+\(L^{\circ2}=\ker\langle\epsilon,-\rangle\).  Since
+\(\operatorname{char}\F_q\) is \(7\) or \(11\), polarization in degree
+three identifies \(\operatorname{Sym}^3(W_T^*)\) with the dual of
+\(\operatorname{Sym}^3(W_T)\).  The nonzero tensor \(\mu_3\) therefore
+pairs nontrivially with some cubic in the linear coordinates on \(W_T\).
+Evaluating that cubic on the points \(x_M\) gives an element of
+\(L^{\circ3}\) whose pairing with \(\epsilon\) is nonzero.
+
+Because \(1\in L\), we have
+\(L^{\circ2}\subseteq L^{\circ3}\).  Thus \(L^{\circ3}\) contains the
+hyperplane \(\ker\langle\epsilon,-\rangle\) and a vector outside it, so
+\(L^{\circ3}=\F_q^{\Omega_T}\).  Multiplication by \(1\) gives the same
+equality in every higher degree.  Homogeneous degree-\(d\) forms on
+\(\widehat X_T\) restrict to \(L^{\circ d}\), which gives the Hilbert
+function; its first difference is the stated \(h\)-vector.
+Changing the reference matching translates every \(x_M\).  Such a
+translation preserves \(L\) and all its pointwise powers and acts
+projectively on \(\widehat X_T\), so the graded algebra and Hilbert
+function are independent of the reference.
+\end{proof}
+
 The cubic remembers an orientation that the linear quotient does not.
 Indeed, the signed linear relation
 \[
@@ -1305,7 +1357,7 @@ Arithmetic splitting and gluing
 \end{table}
 
 The claim-by-claim map is
-\path{verification/trust_manifest.json}; the exact sixteen-statement
+\path{verification/trust_manifest.json}; the exact seventeen-statement
 identity is \path{verification/statement_identity.json}.  From the root
 of the archival source, the aggregate entry point is
 \begin{verbatim}

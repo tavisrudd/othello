@@ -9,7 +9,7 @@ memory in a conic ideal*. It separates four kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact sixteen theorem-like statements
+`statement_identity.json` contains the exact seventeen theorem-like statements
 in the manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 

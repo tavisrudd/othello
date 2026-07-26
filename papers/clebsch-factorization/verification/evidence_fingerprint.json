@@ -8,8 +8,8 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "417e9490d216bcd098178e4f6589d740ab445c828c78c917747a1c39668ee258",
-  "runner_sha256": "787499750c1190d60080cc8f1fe972168929bc5391fabb8dbb6c6ab8beaa84de",
+  "trust_manifest_sha256": "6f3b566145ab8efa4fa2c586013f9eba5674171254ee9ee8735102cf2ad05b6f",
+  "runner_sha256": "271b5bd71a748d2b67a4fb4d7487cf9d40488b4ff6b47096d053aedd9903932b",
   "evidence": {
     "matching-module": {
       "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
@@ -100,7 +100,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 16 statements, 6 evidence bundles: CHECK OK",
+    "metadata": "metadata: 17 statements, 6 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

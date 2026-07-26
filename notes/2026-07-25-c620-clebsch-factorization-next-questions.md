@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-25
 
-**Status:** queued follow-ons to C577; C616 owns the overlapping uniform-rank
-proof.
+**Status:** C620 complete and adopted in Paper II; C621 remains queued;
+C616 owns the overlapping uniform-rank proof.
 
 ## Origin
 
@@ -30,6 +30,10 @@ rank-three theorem. That direction belongs to C616 rather than a duplicate
 task.
 
 ## C620 — immediate graded-evaluation theorem
+
+**Completed 2026-07-25.**  The symbolic corollary, trust disposition,
+validation, and mystery ledger are in
+`notes/2026-07-25-c620-graded-evaluation-algebra.md`.
 
 Let \(L\subseteq k^\Omega\) be the affine evaluation space of either
 balanced \(B_3\) or \(H_3\) quotient configuration. Paper II proves

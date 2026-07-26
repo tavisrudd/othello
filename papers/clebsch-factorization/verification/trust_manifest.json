@@ -57,6 +57,7 @@
     {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
     {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
+    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
     {"label": "cor:secant-product-syzygies", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
     {"label": "thm:six-profile-reconstruction", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:decorated-sheet-classifier", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},

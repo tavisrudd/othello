@@ -32,7 +32,7 @@ the balanced-sheet section proves a symbolic radical--Hadamard recovery
 theorem, specializes it to the `7+7` and `11+11` sheets, and shows that the
 first signed orientation moment is cubic;
 the six-profile, modular-depth, arithmetic-gluing, and relative-cubic sections
-are complete. A paper-specific sixteen-statement trust manifest and aggregate
+are complete. A paper-specific seventeen-statement trust manifest and aggregate
 six-bundle replay now separate conceptual, classical, certificate, and Lean
 support. The conclusion states the exact reconstruction ladder and its
 pointed/global limits. The full local release replay is green; a fresh
