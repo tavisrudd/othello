@@ -34,6 +34,8 @@ The module also:
 - computes all nine parity-check pairings and proves that their simultaneous
   vanishing is equivalent, in odd characteristic, to
   \(((1-s)(1-t))^2+st=0\);
+- proves that, on the admitted non-GRS locus, the diagonal and Gale modes for
+  one fixed Frobenius exponent are disjoint;
 - proves that the GRS quartic and the pencil invariants \(A,B,z\) commute
   with every field automorphism; and
 - proves that the admitted non-GRS parameter locus is invariant under every
@@ -61,6 +63,7 @@ The public declarations are:
 - `pencilGalePairing`;
 - `pencilGalePairing_multiplier`;
 - `pencilGalePairing_multiplier_zero_iff`;
+- `twistedPencil_sectors_disjoint`;
 - `map_pencilGRSQuartic`;
 - `map_pencilA`;
 - `map_pencilB`;
@@ -104,6 +107,16 @@ equivalence between the appropriate Frobenius twist and the target.  The
 already-formalized equality of `pencilZ` under projective equivalence and the
 new automorphism-equivariance theorem give the required Galois relation.
 The reverse implication is exactly the separately named construction bridge.
+
+The second-order sector-purity theorem uses both factors of \(E_\sigma(t)\).
+If \(\sigma(t)=t\), then \(D_\sigma(t)\) is the GRS quartic.  If
+\(\sigma(t)t=1\), then
+\[
+  t^2D_\sigma(t)=\operatorname{GRSQuartic}(t).
+\]
+Since admitted non-GRS parameters have \(t\ne0\) and nonzero GRS quartic,
+neither diagonal branch can also be a Gale branch for the same exponent.
+Different exponents may still coexist, exactly as in the \(q=9\) kernel.
 
 ## Trust boundary
 
@@ -155,6 +168,7 @@ implementation without changing the terminal theorem.
 | Scale of the Gale multiplier | Projectively free; the displayed normalization fixes it. |
 | Choice of Galois exponent witnessing relatedness | Existential and intentionally not required to be unique. |
 | Genuine sums of several Frobenius sectors | Allowed by C623 and responsible for enlarged kernels; they do not enlarge the orbit relation. |
+| Diagonal and Gale modes at one exponent | Mutually exclusive on the admitted non-GRS locus. |
 | Local-Clifford phases and additive symplectic lifts | Outside the scalar module; owned by the two bridge fields. |
 | Party permutations | Absorbed only insofar as the supplied equivalence bridge handles them; not reconstructed by this module. |
 
@@ -167,6 +181,7 @@ implementation without changing the terminal theorem.
 | Where does the diagonal reciprocal branch come from? | **Settled unconditionally:** it is the second factor of the frame-ratio cross difference. | none |
 | Does \(z\) commute with Frobenius? | **Settled unconditionally** for every field automorphism. | none |
 | Can a Galois twist leave the admitted non-GRS locus? | **Settled negatively** by `admitted_nonGRS_map_iff`. | none |
+| Can one Frobenius exponent carry diagonal and Gale modes simultaneously? | **Settled negatively** on the admitted non-GRS locus by `twistedPencil_sectors_disjoint`. | none |
 | Do genuine nonsemilinear maps force extra orbits? | **Settled negatively in C623; composition formalized conditionally here.** | Full kernel-checked additive-sector propagation remains the forward bridge. |
 | Is the linearized-polynomial decomposition itself implemented in Lean matrices? | **No.** | Formalize additive endomorphisms over the prime field, uniqueness of their Frobenius expansion, and coordinate propagation. |
 | Is the converse Galois-\(z\) Clifford constructed inside Lean? | **No.** | Connect the existing projectivity witnesses and coordinatewise field automorphisms to the additive Clifford action API. |
@@ -177,10 +192,11 @@ implementation without changing the terminal theorem.
 - Direct guarded elaboration of
   `RelativeConicArcs/AMELU/ExtensionFieldPencil.lean`: passed with no Lean
   stdout.
-- The guarded build queue rebuilt the module (15.09 seconds, 1,876,592 KiB
-  peak) and its dedicated import gate (7.17 seconds, 1,796,824 KiB peak);
+- After the second-order sector-purity upgrade, the guarded build queue
+  rebuilt the module (17.74 seconds, 1,876,732 KiB peak) and its dedicated
+  import gate (4.98 seconds, 1,800,408 KiB peak);
   the gate's exact-target no-build confirmation passed.
-- The dedicated axiom audit built in 4.25 seconds and its exact-target
+- The dedicated axiom audit built in 6.04 seconds and its exact-target
   no-build confirmation passed.  Every audited declaration reports only
   `propext`, `Classical.choice`, and `Quot.sound`.
 - `git diff --check` passed on all C633-owned paths.

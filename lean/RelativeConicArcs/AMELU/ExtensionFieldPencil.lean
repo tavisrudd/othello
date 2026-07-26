@@ -128,6 +128,43 @@ theorem pencilGalePairing_multiplier_zero_iff [Field 𝔽]
     · simp [h]
     · rfl
 
+/-- On the admitted non-GRS locus, one Frobenius exponent cannot support both
+a diagonal coefficient and a Gale coefficient.  The two branches of the
+diagonal divisor reduce the Gale divisor to the GRS quartic, directly or
+after multiplication by `t²`. -/
+theorem twistedPencil_sectors_disjoint [Field 𝔽]
+    (σ : 𝔽 ≃+* 𝔽) {t : 𝔽} (ht : IsAdmittedNonGRSParameter t)
+    (hdiag : twistedPencilDiagonalDivisor σ t = 0) :
+    twistedPencilGaleDivisor σ t ≠ 0 := by
+  have ht0 : t ≠ 0 := by
+    intro hzero
+    apply ht
+    simp [hzero]
+  have hgrs : pencilGRSQuartic t ≠ 0 := by
+    intro hzero
+    apply ht
+    simp [hzero]
+  rw [twistedPencilDiagonalDivisor, mul_eq_zero] at hdiag
+  rcases hdiag with hsame | hinverse
+  · have hsigma : σ t = t := sub_eq_zero.mp hsame
+    have href :
+        twistedPencilGaleDivisor (RingEquiv.refl 𝔽) t ≠ 0 := by
+      rw [twistedPencilGaleDivisor_refl]
+      exact hgrs
+    simpa [twistedPencilGaleDivisor, hsigma] using href
+  · have hproduct : σ t * t = 1 := (sub_eq_zero.mp hinverse).symm
+    have hsigma : σ t = 1 / t := by
+      rw [eq_div_iff ht0]
+      exact hproduct
+    intro hgale
+    apply hgrs
+    have hscaled :
+        t ^ 2 * twistedPencilGaleDivisor σ t = pencilGRSQuartic t := by
+      rw [twistedPencilGaleDivisor, pencilGRSQuartic, hsigma]
+      field_simp [ht0]
+      ring
+    rw [← hscaled, hgale, mul_zero]
+
 /-- A field automorphism commutes with the GRS quartic. -/
 theorem map_pencilGRSQuartic [Field 𝔽] (σ : 𝔽 ≃+* 𝔽) (t : 𝔽) :
     σ (pencilGRSQuartic t) = pencilGRSQuartic (σ t) := by

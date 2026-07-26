@@ -523,6 +523,9 @@ formalized.**
 Frobenius-sector divisor, the Frobenius--Gale divisor, its explicit
 six-coordinate multiplier and odd-characteristic zero criterion, and field-
 automorphism equivariance of the GRS quartic and pencil invariant `z`.  It
+also proves that diagonal and Gale modes are disjoint at each individual
+Frobenius exponent on the admitted non-GRS locus, while allowing the
+different-exponent coexistence responsible for the exceptional kernels.  It
 packages the all-odd-prime-power Galois-`z` orbit theorem through two
 explicitly named bridges: extraction of a projective Frobenius sector from an
 additive Clifford equivalence, and construction of a Clifford from a Galois

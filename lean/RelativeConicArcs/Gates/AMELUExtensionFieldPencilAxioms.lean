@@ -13,6 +13,7 @@ terminals in one import environment.
 #print axioms RelativeConicArcs.AMELU.twistedPencilGaleDivisor_refl
 #print axioms RelativeConicArcs.AMELU.pencilGalePairing_multiplier
 #print axioms RelativeConicArcs.AMELU.pencilGalePairing_multiplier_zero_iff
+#print axioms RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint
 #print axioms RelativeConicArcs.AMELU.map_pencilZ
 #print axioms RelativeConicArcs.AMELU.admitted_nonGRS_map_iff
 #print axioms RelativeConicArcs.AMELU.extensionField_pencil_classified_by_galoisZ
