@@ -1,0 +1,1 @@
+{"collinear_triple_certificates":53960,"frame_candidates":110,"k":7,"points":183,"q":13,"q_plus_one_collinear_triple_counts":{"17":840,"22":840},"schema":"c643-q13-frame-collinearity-v1","tested_frame_marked_arcs":53960,"uncovered_size_counts":{"14":1680,"15":2940,"16":9240,"17":18480,"18":7980,"19":6440,"20":5460,"21":840,"22":480,"23":420},"verdict":"all_nonarcs"}
