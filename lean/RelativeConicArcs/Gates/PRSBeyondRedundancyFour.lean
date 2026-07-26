@@ -2,6 +2,7 @@ import RelativeConicArcs.Gates.PRSFoundation
 import RelativeConicArcs.Gates.PRSRedundancyFive
 import RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven
 import RelativeConicArcs.Gates.PRSStableComponents
+import RelativeConicArcs.PRSUniformCoveringRadius
 
 /-!
 # Aggregate import gate for projective Reed--Solomon results beyond redundancy four
@@ -9,10 +10,12 @@ import RelativeConicArcs.Gates.PRSStableComponents
 This gate is the paper-facing import closure for the formal results adopted by the
 redundancy-five through redundancy-seven manuscript.  It imports the shared Hankel and coding
 interfaces, redundancy-five algebra and finite-table arithmetic, coherent polar contraction,
-the redundancy-six/seven synthesis interfaces, and the stable-component coordinate algebra.
+the redundancy-six/seven synthesis interfaces, the stable-component coordinate algebra, and the
+uniform covering-radius threshold bridge.
 
 The imported synthesis theorems are conditional.  Concrete projective-coordinate dictionaries,
-covering-radius results, geometric component classifications, rational-point bounds, genuine
+the Seroussi--Roth nonextendability theorem, Dür's completeness--radius equivalence, geometric
+component classifications, rational-point bounds, genuine
 projective and semilinear group actions, and semantic validation of externally generated finite
 records remain explicit hypotheses or structure fields.  The closure imports no project-local
 axiom, generated evaluator, native decision procedure, or external oracle.

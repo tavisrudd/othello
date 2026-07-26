@@ -27,6 +27,7 @@ EXPECTED_AGGREGATE_IMPORTS = (
     "RelativeConicArcs.Gates.PRSRedundancyFive",
     "RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven",
     "RelativeConicArcs.Gates.PRSStableComponents",
+    "RelativeConicArcs.PRSUniformCoveringRadius",
 )
 EXPECTED_PROJECT_CLOSURE = (
     "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
@@ -44,10 +45,11 @@ EXPECTED_PROJECT_CLOSURE = (
     "RelativeConicArcs.PRSRedundancySixSeven",
     "RelativeConicArcs.PRSRedundancySixSevenCertificate",
     "RelativeConicArcs.PRSStableComponents",
+    "RelativeConicArcs.PRSUniformCoveringRadius",
 )
-EXPECTED_AXIOM_TARGET_COUNT = 53
+EXPECTED_AXIOM_TARGET_COUNT = 58
 EXPECTED_AXIOM_TARGET_SHA256 = (
-    "106c846bdd0f80ed3993b6ec7e9e2b3fc318c1b9a7adce2c7d4c4c2364e69f49"
+    "c1bf1cadc48e9f7ff2dfdfe92d54379a59fe402a8a1c85cac98ef340a6c9eb9a"
 )
 
 

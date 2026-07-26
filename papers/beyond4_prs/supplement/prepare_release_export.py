@@ -31,6 +31,7 @@ LEAN_PATHS = (
     Path("lean/RelativeConicArcs/PRSRedundancySixSeven.lean"),
     Path("lean/RelativeConicArcs/PRSRedundancySixSevenCertificate.lean"),
     Path("lean/RelativeConicArcs/PRSStableComponents.lean"),
+    Path("lean/RelativeConicArcs/PRSUniformCoveringRadius.lean"),
 )
 
 

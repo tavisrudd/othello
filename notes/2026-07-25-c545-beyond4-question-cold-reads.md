@@ -107,6 +107,47 @@ companion there. Its bibliography should use the companion's current title,
 *Factorization memory in a conic ideal: the \(A_3\), \(B_3\), and \(H_3\)
 configurations*.
 
+## Lean closure and final diagnostic passes
+
+The radius inference is now formalized in
+`RelativeConicArcs.PRSUniformCoveringRadius`.  Lean checks the exact integer
+threshold, proves that \(r\geq6\) and \(q\geq Q_r\) imply the full
+Seroussi--Roth dimension range, checks the endpoint
+\((q,r)=(8,6)\), and composes the imported nonextendability and radius
+implications with the existing split-free/deep interface.  The formal
+structure keeps the field order, dual-GRS identification, Seroussi--Roth
+implication, Dür equivalence, and concrete radius proposition separate.  Thus
+the new theorem closes the inference used by the paper without representing
+either cited coding theorem as kernel proved.
+
+The Tao-style pass changes the organization of the conclusion rather than its
+mathematical scope.  The natural invariant is the exact dimension range
+\[
+  r\leq\left\lfloor q/2\right\rfloor+2,
+\]
+not the sufficient inequality \(q\geq2r-3\).  Factoring the proof through that
+range both captures the \(q=8,r=6\) endpoint and exposes the uniform threshold
+as only one source of radius input.  It also makes clear that improving the
+geometric threshold cannot improve this coding-theoretic endpoint; the two
+questions have independent slack.
+
+The extra-juice pass finds no stronger unconditional classification hidden in
+the present argument.  Its useful additional consequence is architectural:
+any future improvement of the transverse threshold can reuse the same radius
+adapter as soon as it proves \(2r\leq q+4\).  Conversely, small fields outside
+that inequality still need an independent radius certificate even if their
+split-free census is complete.
+
+The degrees of freedom are now explicit:
+
+- the threshold and endpoint arithmetic are locked down in Lean;
+- the two literature implications and the concrete code identifications are
+  external semantic inputs, not proof gaps disguised as definitions;
+- the geometric classification controls which split-free directions survive,
+  while the coding theorem controls whether split-free means deep;
+- the modular carriers retain genuine arithmetic freedom, beginning with the
+  higher Lucas carrier assigned to C620.
+
 ## Mystery ledger
 
 Settled:
@@ -118,6 +159,9 @@ Settled:
 - The exact Seroussi--Roth endpoint also promotes redundancy six at \(q=8\);
   only \(q=7\) needs the finite radius certificate, while the certificate
   remains an independent \(q=8\) confirmation.
+- Lean now checks the threshold-to-dimension-range implication, the
+  \(q=8,r=6\) endpoint, and the logical composition of the separately supplied
+  Seroussi--Roth and Dür steps.
 - Clebsch factorization supplies a precise comparison about retained
   factorization data, not a proof input for the PRS classifications.
 - Both readers independently selected higher modular-carrier arithmetic as
@@ -129,4 +173,7 @@ Open:
   C620.
 - R7 at \(q=7,8,9\), explicit stable orbit counts, scheme-level radicality,
   and the elliptic explanation of sporadicity remain unallocated questions.
+- A first-principles Lean development of generalized Reed--Solomon duality,
+  one-coordinate MDS extension, and Dür's covering-radius equivalence is
+  outside the present formal boundary; the paper now says so exactly.
 - The public Version 1 release gates remain owned by C545.

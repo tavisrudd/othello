@@ -6,11 +6,12 @@ The paper-facing Lean closure is
 dependencies of every declaration on which the retained redundancy-five
 through redundancy-seven manuscript places Lean-level trust. The aggregate
 gate imports exactly the foundation, redundancy-five, polar-induction and
-redundancy-six/seven, and stable-component gates.
+redundancy-six/seven, and stable-component gates, together with the
+`PRSUniformCoveringRadius` arithmetic and literature adapter.
 The balanced quantum corollary uses the separate cross-paper closure
 `RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and audit
 `RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`; it is not
-folded into the 15-file geometric aggregate.
+folded into the 16-file geometric aggregate.
 
 “Kernel algebra” means that Lean proves the displayed identity or arithmetic
 statement. “Conditional terminal” means that Lean proves the conclusion from
@@ -32,7 +33,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `thm:r5` | `PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate`; family arithmetic under `PRSRedundancyFive.FamilyData`; table arithmetic under `PRSRedundancyFiveCertificate` | Conditional synthesis plus kernel arithmetic. Covering radius, cubic-cover geometry, group actions, and certificate semantics remain inputs. |
 | `cor:q8-quantum-extension` | `PRSBalancedQuantumExtension.fieldEightRecord_mem_certifiedFieldRecords`; `fieldEight_projectiveDirectionCount`; `fieldEight_balancedExtensionParameters`; `fieldEight_uniqueBalancedPrimePowerRow`; `certifiedBalancedExtensions_haveQuantumConsequences`; `lengthTen_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent`; `lengthTen_encoderConversion_logical_and_physical_isClifford` | Exact certificate arithmetic and balanced-row uniqueness are kernel checked. The MDS--AME and Choi semantics are explicit interface fields; the LU and transversal conclusions are kernel-checked specializations of the generic MDS--CSS theorems. No complete LU/LC orbit classification is asserted. |
 | `thm:spine` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `redundancySevenAllFieldSynthesis`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount` | Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary. |
-| `thm:stable-component-headline` | the three `PRSStableComponents.*Factor_plucker` declarations; the four `coherentFano_*_hankelMinor` identities; `mem_modularContractionKernel_prod_iff`; `cyclicPlaneCatalecticant_blocks_cover` | Coordinate algebra and characteristic-two block-coverage termination are kernel checked. Marker-product density, projective row-space transport, saturation, and geometric component classification are manuscript and Certificate SC proofs. |
+| `thm:stable-component-headline` | the three `PRSStableComponents.*Factor_plucker` declarations; the four `coherentFano_*_hankelMinor` identities; `mem_modularContractionKernel_prod_iff`; `cyclicPlaneCatalecticant_blocks_cover`; `PRSUniformCoveringRadius.seroussiRothDimensionRange_of_uniformTransverseThreshold`; `deep_iff_splitFree_of_externalSeroussiRothDuer_uniformTransverseThreshold` | Coordinate algebra, characteristic-two block-coverage termination, exact threshold arithmetic, and composition of the external radius implications are kernel checked. Marker-product density, projective row-space transport, saturation, geometric component classification, the dual-GRS identification, and the cited coding theorems remain manuscript or external inputs. |
 | `prop:r5-radius` | `PRSFoundation.CoveringRadiusInput.deep_iff_splitFree` | The logical use is checked; the Seroussi--Roth theorem is imported by citation. |
 | `prop:r5-gcd2` | `PRSRedundancyFive.FamilyData.family_arithmetic` and the three `deep_card_*` terminals | Family/count arithmetic is kernel checked; the geometric gcd classification is a manuscript proof. |
 | `prop:r5-gcd1` | no direct declaration | Manuscript proof, with the finite `q=7` clause supplied by Certificate R5. |
@@ -55,7 +56,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:r6-nucleus` | no direct declaration | Manuscript binary-nucleus arithmetic and splitting proof, supported by Certificate R6. |
 | `prop:r6-contained` | no direct declaration | Manuscript exhaustion of contained alternatives. |
 | `prop:r6-one-step` | `PRSRedundancySixSeven.redundancySixHighFieldSynthesis` | Conditional specialization of the one-step budgets; the geometric inputs remain hypotheses. |
-| `thm:r6` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion` | Conditional synthesis plus kernel-checked finite-row arithmetic. |
+| `thm:r6` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion`; `PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight`; `radiusRange_six_eight_of_externalSeroussiRothDuer` | Conditional synthesis plus kernel-checked finite-row arithmetic and the exact \(q=8,r=6\) high-rate endpoint. The concrete coding identifications and cited radius implications remain explicit inputs. |
 | `prop:r7-pointed` | `PRSPolarInduction.LowerCoverStratum`; `CoherentPolarInput.splitFree_implies_persistent_or_modular` | The conditional interface and its witness use are checked. The two-marker cover, deletion degree `25`, and point-count derivation are manuscript mathematics, not Lean conclusions. |
 | `prop:r7-gcd1` | no direct declaration | Manuscript proof. |
 | `prop:r7-collision` | no direct declaration | Manuscript degree computation, supplied as a collision-budget input to Lean. |
@@ -66,18 +67,18 @@ proposition, theorem, or corollary labels in the TeX include graph.
 
 ## Exact project-owned closure
 
-Recursive import resolution from the axiom-audit gate gives 15
+Recursive import resolution from the axiom-audit gate gives 16
 project-owned Lean files:
 
 - six gates: `PRSFoundation`, `PRSRedundancyFive`,
   `PRSPolarInductionRedundancySixSeven`, `PRSStableComponents`,
   `PRSBeyondRedundancyFour`, and
   `PRSBeyondRedundancyFourAxiomAudit`;
-- nine mathematical modules: `PRSContraction`, `PRSFoundation`,
+- ten mathematical modules: `PRSContraction`, `PRSFoundation`,
   `PRSRedundancyFive`, `PRSRedundancyFiveCertificate`,
   `PRSRedundancyFiveCertified`, `PRSPolarInduction`,
   `PRSRedundancySixSeven`, `PRSRedundancySixSevenCertificate`, and
-  `PRSStableComponents`.
+  `PRSStableComponents`, and `PRSUniformCoveringRadius`.
 
 `PRSContraction` contains only the finite-coordinate contraction API.
 The residual-quadratic, R8, R9, ordered-Hessian, Lucas-carrier, and

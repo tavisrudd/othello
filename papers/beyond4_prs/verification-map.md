@@ -83,7 +83,8 @@ by `supplement/verify.py`.
   `supplement/LEAN-STATEMENTS.md`.
 
 The aggregate imports exactly the shared foundation, redundancy-five,
-polar-induction and redundancy-six/seven, and stable-component gates. Its audit
+polar-induction and redundancy-six/seven, and stable-component gates, plus the
+uniform covering-radius arithmetic and literature adapter. Its audit
 covers the adopted algebraic, contraction, arithmetic, finite-table, and
 conditional synthesis terminals. It reports no project-specific axiom or
 opaque computational oracle; only `propext`, `Classical.choice`, and
@@ -95,3 +96,11 @@ Its quantum-dictionary terminal is conditional on explicit MDS--AME and
 AME--quantum-MDS implication fields; its length-ten LU and transversal
 terminals are direct specializations of the imported generic MDS--CSS
 theorems.
+
+`RelativeConicArcs.PRSUniformCoveringRadius` checks that the displayed
+all-level threshold implies the Seroussi--Roth dimension range and that
+\((q,r)=(8,6)\) lies at its exact endpoint. It then composes separately
+supplied Seroussi--Roth and Dür implications with
+`PRSFoundation.CoveringRadiusInput`. The code duality, nonextendability,
+covering-radius equivalence, and concrete syndrome semantics are not
+formalized.

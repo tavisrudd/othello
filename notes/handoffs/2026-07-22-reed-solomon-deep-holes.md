@@ -6,7 +6,7 @@
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
 C603 complete. C545 has repaired C603's release-blocking local trust boundary.
-The adopted aggregate now has the exact 15-file R5--R7 closure and 53-target
+The adopted aggregate now has the exact 16-file R5--R7 closure and 58-target
 axiom audit; the shared contraction API is separated from the companion R9
 residual-quadratic module; all 36 current manuscript labels reconcile exactly;
 the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
@@ -38,6 +38,9 @@ claim after correcting the initially circular Kaipa-Theorem-2 citation chain.
 Their question ledger is in
 `notes/2026-07-25-c545-beyond4-question-cold-reads.md`; C620 owns the
 highest-value successor, exact split-freeness on higher Lucas carriers.
+`RelativeConicArcs.PRSUniformCoveringRadius` now checks the threshold-to-range
+arithmetic, the exact \(q=8,r=6\) endpoint, and the composition of separately
+supplied Seroussi--Roth and Dür implications with the syndrome interface.
 C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
