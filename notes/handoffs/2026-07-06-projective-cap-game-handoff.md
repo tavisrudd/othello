@@ -1442,6 +1442,25 @@ next marked orbit for one-to-many creation or a creator without an old
 label; C82 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-first-new-replacement-orbit.md`](../2026-07-26-c80-q23-first-new-replacement-orbit.md).
 
+**The next marked replacement orbit also passes, and compresses into the
+same reply-created local mechanism (C80, 2026-07-26).** After quotienting
+the first two complete 12,144-element marked `PGL_2(23)` orbits, the next
+new orbit appears at canonical control 88. Its causal reply creates one
+replacement from its own old defect label, drops ancestral support `23→1`,
+and has no branching, collision, or unlabelled creator. The former
+`B_small` certificate again loses its reply while both endpoints survive;
+the refinement is that the saturating secant's pivot is an already selected
+outer-exchange point rather than the current opponent. Thus no third local
+mechanism is needed: certificate-reply deletion uses the causal reply plus
+any selected secant pivot. Twenty-two strict-deletion fibres plus the one
+lineage fibre close the root, followed by the same three-move terminal
+response shell. The exact sweep covers 515,858 outer reply candidates and
+uses a bounded-memory Rust line-load backend with independent Python
+determinant replay. Next quotient all three marked orbits and stop at the
+first branch, collision, unlabelled creator, or genuinely new bounded flag;
+C82 remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-next-marked-replacement-orbit.md`](../2026-07-26-c80-q23-next-marked-replacement-orbit.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

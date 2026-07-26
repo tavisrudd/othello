@@ -1,0 +1,1405 @@
+{
+  "bounded_causality_flag": {
+    "failure_kind": "certificate_reply_deletion",
+    "former_boundary": {
+      "kind": "two_nonconflicting_moves",
+      "remaining_legal": [
+        [
+          6,
+          14
+        ],
+        [
+          13,
+          7
+        ]
+      ],
+      "reply": [
+        8,
+        20
+      ]
+    },
+    "full_root_coverage": {
+      "lineage_transport_fibres": 1,
+      "strict_deletion_fibres": 22,
+      "successor_in_F_del": true,
+      "uncovered_fibres": 0
+    },
+    "independent_reference_boundary_and_shell": true,
+    "rank_zero_response": [
+      {
+        "omega": 0,
+        "remaining_legal": [
+          [
+            6,
+            14
+          ],
+          [
+            11,
+            9
+          ],
+          [
+            22,
+            20
+          ]
+        ],
+        "reply": [
+          13,
+          7
+        ]
+      }
+    ],
+    "saturating_secant": {
+      "causal_reply": [
+        20,
+        17
+      ],
+      "certificate_reply": [
+        8,
+        20
+      ],
+      "line_coefficients": [
+        1,
+        4,
+        4
+      ],
+      "pivot_is_current_opponent": false,
+      "preexisting_pivot": [
+        16,
+        18
+      ]
+    },
+    "terminal_response_shell": {
+      "degree_sequence": [
+        1,
+        1,
+        2
+      ],
+      "legal_moves": [
+        [
+          6,
+          14
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          22,
+          20
+        ]
+      ],
+      "response_edges": [
+        [
+          [
+            6,
+            14
+          ],
+          [
+            22,
+            20
+          ]
+        ],
+        [
+          [
+            11,
+            9
+          ],
+          [
+            22,
+            20
+          ]
+        ]
+      ]
+    }
+  },
+  "causal_ancestry": {
+    "ancestry_collision": false,
+    "assignments": [
+      {
+        "causal_half_move": [
+          20,
+          17
+        ],
+        "creator_has_old_label": true,
+        "new_defect": [
+          9,
+          16
+        ]
+      }
+    ],
+    "branching": 1,
+    "created_by_opponent_count": 0,
+    "created_by_reply_count": 1,
+    "creator_without_old_label": false,
+    "independent_reference_defects": {
+      "after_opponent": [
+        [
+          20,
+          17
+        ],
+        [
+          22,
+          20
+        ]
+      ],
+      "after_reply": [
+        [
+          9,
+          16
+        ]
+      ],
+      "before": [
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          8,
+          19
+        ],
+        [
+          8,
+          20
+        ],
+        [
+          8,
+          22
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          18,
+          11
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          20,
+          17
+        ],
+        [
+          21,
+          3
+        ],
+        [
+          22,
+          3
+        ],
+        [
+          22,
+          15
+        ],
+        [
+          22,
+          20
+        ]
+      ]
+    },
+    "injective_causal_ancestry": true,
+    "old_label_count": 23,
+    "retained_old_label_count": 0,
+    "strict_support_drop": 22,
+    "surviving_label_count": 1
+  },
+  "completed_controls": [
+    {
+      "control_index_zero_based": 22,
+      "counts": {
+        "necessary_replacement_witnesses": 2,
+        "outer_F_d_edges": 1352,
+        "outer_F_del_edges": 1350,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 7986
+      },
+      "history_reply": [
+        7,
+        10
+      ]
+    },
+    {
+      "control_index_zero_based": 23,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1226,
+        "outer_F_del_edges": 1226,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7606
+      },
+      "history_reply": [
+        7,
+        13
+      ]
+    },
+    {
+      "control_index_zero_based": 24,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1138,
+        "outer_F_del_edges": 1138,
+        "outer_opponent_fibres": 116,
+        "outer_reply_candidates": 7714
+      },
+      "history_reply": [
+        7,
+        14
+      ]
+    },
+    {
+      "control_index_zero_based": 25,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1176,
+        "outer_F_del_edges": 1176,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7578
+      },
+      "history_reply": [
+        7,
+        16
+      ]
+    },
+    {
+      "control_index_zero_based": 26,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1026,
+        "outer_F_del_edges": 1026,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7448
+      },
+      "history_reply": [
+        7,
+        17
+      ]
+    },
+    {
+      "control_index_zero_based": 27,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1312,
+        "outer_F_del_edges": 1312,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7848
+      },
+      "history_reply": [
+        7,
+        18
+      ]
+    },
+    {
+      "control_index_zero_based": 28,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1276,
+        "outer_F_del_edges": 1276,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7874
+      },
+      "history_reply": [
+        8,
+        3
+      ]
+    },
+    {
+      "control_index_zero_based": 29,
+      "counts": {
+        "necessary_replacement_witnesses": 2,
+        "outer_F_d_edges": 988,
+        "outer_F_del_edges": 986,
+        "outer_opponent_fibres": 112,
+        "outer_reply_candidates": 7208
+      },
+      "history_reply": [
+        8,
+        4
+      ]
+    },
+    {
+      "control_index_zero_based": 30,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1182,
+        "outer_F_del_edges": 1182,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7572
+      },
+      "history_reply": [
+        8,
+        7
+      ]
+    },
+    {
+      "control_index_zero_based": 31,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1214,
+        "outer_F_del_edges": 1214,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7832
+      },
+      "history_reply": [
+        8,
+        10
+      ]
+    },
+    {
+      "control_index_zero_based": 32,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 994,
+        "outer_F_del_edges": 994,
+        "outer_opponent_fibres": 113,
+        "outer_reply_candidates": 7314
+      },
+      "history_reply": [
+        8,
+        13
+      ]
+    },
+    {
+      "control_index_zero_based": 33,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1022,
+        "outer_F_del_edges": 1022,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7452
+      },
+      "history_reply": [
+        8,
+        15
+      ]
+    },
+    {
+      "control_index_zero_based": 34,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1308,
+        "outer_F_del_edges": 1308,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7598
+      },
+      "history_reply": [
+        8,
+        16
+      ]
+    },
+    {
+      "control_index_zero_based": 35,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1554,
+        "outer_F_del_edges": 1554,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 8034
+      },
+      "history_reply": [
+        8,
+        19
+      ]
+    },
+    {
+      "control_index_zero_based": 36,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1344,
+        "outer_F_del_edges": 1344,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 8016
+      },
+      "history_reply": [
+        8,
+        20
+      ]
+    },
+    {
+      "control_index_zero_based": 37,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1008,
+        "outer_F_del_edges": 1008,
+        "outer_opponent_fibres": 113,
+        "outer_reply_candidates": 7326
+      },
+      "history_reply": [
+        8,
+        22
+      ]
+    },
+    {
+      "control_index_zero_based": 38,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1298,
+        "outer_F_del_edges": 1298,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7452
+      },
+      "history_reply": [
+        9,
+        3
+      ]
+    },
+    {
+      "control_index_zero_based": 39,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1068,
+        "outer_F_del_edges": 1068,
+        "outer_opponent_fibres": 113,
+        "outer_reply_candidates": 7348
+      },
+      "history_reply": [
+        9,
+        4
+      ]
+    },
+    {
+      "control_index_zero_based": 40,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1068,
+        "outer_F_del_edges": 1068,
+        "outer_opponent_fibres": 116,
+        "outer_reply_candidates": 7676
+      },
+      "history_reply": [
+        9,
+        10
+      ]
+    },
+    {
+      "control_index_zero_based": 41,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1244,
+        "outer_F_del_edges": 1244,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7858
+      },
+      "history_reply": [
+        9,
+        11
+      ]
+    },
+    {
+      "control_index_zero_based": 42,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1080,
+        "outer_F_del_edges": 1080,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7570
+      },
+      "history_reply": [
+        9,
+        13
+      ]
+    },
+    {
+      "control_index_zero_based": 43,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1092,
+        "outer_F_del_edges": 1092,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7438
+      },
+      "history_reply": [
+        9,
+        15
+      ]
+    },
+    {
+      "control_index_zero_based": 44,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1222,
+        "outer_F_del_edges": 1222,
+        "outer_opponent_fibres": 110,
+        "outer_reply_candidates": 6982
+      },
+      "history_reply": [
+        9,
+        16
+      ]
+    },
+    {
+      "control_index_zero_based": 45,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1306,
+        "outer_F_del_edges": 1306,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7866
+      },
+      "history_reply": [
+        9,
+        17
+      ]
+    },
+    {
+      "control_index_zero_based": 46,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 962,
+        "outer_F_del_edges": 962,
+        "outer_opponent_fibres": 112,
+        "outer_reply_candidates": 7204
+      },
+      "history_reply": [
+        9,
+        18
+      ]
+    },
+    {
+      "control_index_zero_based": 47,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1056,
+        "outer_F_del_edges": 1056,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7596
+      },
+      "history_reply": [
+        9,
+        21
+      ]
+    },
+    {
+      "control_index_zero_based": 48,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1278,
+        "outer_F_del_edges": 1278,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 7966
+      },
+      "history_reply": [
+        10,
+        2
+      ]
+    },
+    {
+      "control_index_zero_based": 49,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1196,
+        "outer_F_del_edges": 1196,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7828
+      },
+      "history_reply": [
+        10,
+        4
+      ]
+    },
+    {
+      "control_index_zero_based": 50,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1342,
+        "outer_F_del_edges": 1342,
+        "outer_opponent_fibres": 119,
+        "outer_reply_candidates": 8144
+      },
+      "history_reply": [
+        10,
+        7
+      ]
+    },
+    {
+      "control_index_zero_based": 51,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1274,
+        "outer_F_del_edges": 1274,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7806
+      },
+      "history_reply": [
+        10,
+        9
+      ]
+    },
+    {
+      "control_index_zero_based": 52,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1338,
+        "outer_F_del_edges": 1338,
+        "outer_opponent_fibres": 116,
+        "outer_reply_candidates": 7716
+      },
+      "history_reply": [
+        10,
+        13
+      ]
+    },
+    {
+      "control_index_zero_based": 53,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1332,
+        "outer_F_del_edges": 1332,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7596
+      },
+      "history_reply": [
+        10,
+        18
+      ]
+    },
+    {
+      "control_index_zero_based": 54,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1228,
+        "outer_F_del_edges": 1228,
+        "outer_opponent_fibres": 120,
+        "outer_reply_candidates": 8222
+      },
+      "history_reply": [
+        10,
+        20
+      ]
+    },
+    {
+      "control_index_zero_based": 55,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1256,
+        "outer_F_del_edges": 1256,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7808
+      },
+      "history_reply": [
+        10,
+        22
+      ]
+    },
+    {
+      "control_index_zero_based": 56,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1360,
+        "outer_F_del_edges": 1360,
+        "outer_opponent_fibres": 119,
+        "outer_reply_candidates": 8126
+      },
+      "history_reply": [
+        11,
+        2
+      ]
+    },
+    {
+      "control_index_zero_based": 57,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1210,
+        "outer_F_del_edges": 1210,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7794
+      },
+      "history_reply": [
+        11,
+        3
+      ]
+    },
+    {
+      "control_index_zero_based": 58,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1310,
+        "outer_F_del_edges": 1310,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7478
+      },
+      "history_reply": [
+        11,
+        4
+      ]
+    },
+    {
+      "control_index_zero_based": 59,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1304,
+        "outer_F_del_edges": 1304,
+        "outer_opponent_fibres": 119,
+        "outer_reply_candidates": 8134
+      },
+      "history_reply": [
+        11,
+        7
+      ]
+    },
+    {
+      "control_index_zero_based": 60,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1336,
+        "outer_F_del_edges": 1336,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7860
+      },
+      "history_reply": [
+        11,
+        9
+      ]
+    },
+    {
+      "control_index_zero_based": 61,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1430,
+        "outer_F_del_edges": 1430,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7574
+      },
+      "history_reply": [
+        11,
+        16
+      ]
+    },
+    {
+      "control_index_zero_based": 62,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1206,
+        "outer_F_del_edges": 1206,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7582
+      },
+      "history_reply": [
+        11,
+        17
+      ]
+    },
+    {
+      "control_index_zero_based": 63,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1066,
+        "outer_F_del_edges": 1066,
+        "outer_opponent_fibres": 113,
+        "outer_reply_candidates": 7316
+      },
+      "history_reply": [
+        11,
+        18
+      ]
+    },
+    {
+      "control_index_zero_based": 64,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1372,
+        "outer_F_del_edges": 1372,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 8012
+      },
+      "history_reply": [
+        11,
+        21
+      ]
+    },
+    {
+      "control_index_zero_based": 65,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1028,
+        "outer_F_del_edges": 1028,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7428
+      },
+      "history_reply": [
+        12,
+        2
+      ]
+    },
+    {
+      "control_index_zero_based": 66,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1156,
+        "outer_F_del_edges": 1156,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7590
+      },
+      "history_reply": [
+        12,
+        10
+      ]
+    },
+    {
+      "control_index_zero_based": 67,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1322,
+        "outer_F_del_edges": 1322,
+        "outer_opponent_fibres": 118,
+        "outer_reply_candidates": 7976
+      },
+      "history_reply": [
+        12,
+        11
+      ]
+    },
+    {
+      "control_index_zero_based": 68,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 966,
+        "outer_F_del_edges": 966,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7416
+      },
+      "history_reply": [
+        12,
+        14
+      ]
+    },
+    {
+      "control_index_zero_based": 69,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1104,
+        "outer_F_del_edges": 1104,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7804
+      },
+      "history_reply": [
+        12,
+        15
+      ]
+    },
+    {
+      "control_index_zero_based": 70,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1184,
+        "outer_F_del_edges": 1184,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7596
+      },
+      "history_reply": [
+        12,
+        17
+      ]
+    },
+    {
+      "control_index_zero_based": 71,
+      "counts": {
+        "necessary_replacement_witnesses": 2,
+        "outer_F_d_edges": 1514,
+        "outer_F_del_edges": 1512,
+        "outer_opponent_fibres": 121,
+        "outer_reply_candidates": 8362
+      },
+      "history_reply": [
+        12,
+        19
+      ]
+    },
+    {
+      "control_index_zero_based": 72,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1344,
+        "outer_F_del_edges": 1344,
+        "outer_opponent_fibres": 119,
+        "outer_reply_candidates": 8072
+      },
+      "history_reply": [
+        12,
+        20
+      ]
+    },
+    {
+      "control_index_zero_based": 73,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1118,
+        "outer_F_del_edges": 1118,
+        "outer_opponent_fibres": 113,
+        "outer_reply_candidates": 7340
+      },
+      "history_reply": [
+        12,
+        21
+      ]
+    },
+    {
+      "control_index_zero_based": 74,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1466,
+        "outer_F_del_edges": 1466,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7874
+      },
+      "history_reply": [
+        12,
+        22
+      ]
+    },
+    {
+      "control_index_zero_based": 75,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1466,
+        "outer_F_del_edges": 1466,
+        "outer_opponent_fibres": 119,
+        "outer_reply_candidates": 8098
+      },
+      "history_reply": [
+        13,
+        5
+      ]
+    },
+    {
+      "control_index_zero_based": 76,
+      "counts": {
+        "necessary_replacement_witnesses": 2,
+        "outer_F_d_edges": 1346,
+        "outer_F_del_edges": 1344,
+        "outer_opponent_fibres": 117,
+        "outer_reply_candidates": 7828
+      },
+      "history_reply": [
+        13,
+        7
+      ]
+    },
+    {
+      "control_index_zero_based": 77,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1356,
+        "outer_F_del_edges": 1356,
+        "outer_opponent_fibres": 120,
+        "outer_reply_candidates": 8210
+      },
+      "history_reply": [
+        13,
+        10
+      ]
+    },
+    {
+      "control_index_zero_based": 78,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1046,
+        "outer_F_del_edges": 1046,
+        "outer_opponent_fibres": 112,
+        "outer_reply_candidates": 7204
+      },
+      "history_reply": [
+        13,
+        15
+      ]
+    },
+    {
+      "control_index_zero_based": 79,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1490,
+        "outer_F_del_edges": 1490,
+        "outer_opponent_fibres": 116,
+        "outer_reply_candidates": 7678
+      },
+      "history_reply": [
+        13,
+        16
+      ]
+    },
+    {
+      "control_index_zero_based": 80,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1612,
+        "outer_F_del_edges": 1612,
+        "outer_opponent_fibres": 120,
+        "outer_reply_candidates": 8290
+      },
+      "history_reply": [
+        13,
+        17
+      ]
+    },
+    {
+      "control_index_zero_based": 81,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1226,
+        "outer_F_del_edges": 1226,
+        "outer_opponent_fibres": 120,
+        "outer_reply_candidates": 8228
+      },
+      "history_reply": [
+        13,
+        19
+      ]
+    },
+    {
+      "control_index_zero_based": 82,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1042,
+        "outer_F_del_edges": 1042,
+        "outer_opponent_fibres": 112,
+        "outer_reply_candidates": 7202
+      },
+      "history_reply": [
+        13,
+        22
+      ]
+    },
+    {
+      "control_index_zero_based": 83,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1264,
+        "outer_F_del_edges": 1264,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7610
+      },
+      "history_reply": [
+        14,
+        2
+      ]
+    },
+    {
+      "control_index_zero_based": 84,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 950,
+        "outer_F_del_edges": 950,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7574
+      },
+      "history_reply": [
+        14,
+        3
+      ]
+    },
+    {
+      "control_index_zero_based": 85,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1292,
+        "outer_F_del_edges": 1292,
+        "outer_opponent_fibres": 115,
+        "outer_reply_candidates": 7616
+      },
+      "history_reply": [
+        14,
+        4
+      ]
+    },
+    {
+      "control_index_zero_based": 86,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1112,
+        "outer_F_del_edges": 1112,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7468
+      },
+      "history_reply": [
+        14,
+        5
+      ]
+    },
+    {
+      "control_index_zero_based": 87,
+      "counts": {
+        "necessary_replacement_witnesses": 0,
+        "outer_F_d_edges": 1046,
+        "outer_F_del_edges": 1046,
+        "outer_opponent_fibres": 114,
+        "outer_reply_candidates": 7450
+      },
+      "history_reply": [
+        14,
+        7
+      ]
+    }
+  ],
+  "domain": {
+    "backend": "fresh bounded-memory Rust line-load engine for each canonical control",
+    "control_order": "C54 canonical P-reply order",
+    "edge_order": "outer opponent, outer reply, blocking obligation, sound reply lexicographic",
+    "known_marked_orbit_sizes": {
+      "type_i": 12144,
+      "type_ii": 12144,
+      "union": 24288
+    },
+    "q": 23,
+    "start_control_zero_based": 22,
+    "stop_condition": "first necessary replacement witness outside the first two marked PGL2 orbits"
+  },
+  "independent_replay": {
+    "python_affine_determinant_defects_agree": true,
+    "rust_python_witness_fields_agree": true
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "notes/2026-07-26-c80-q23-first-new-replacement-orbit.json": "276103c81c898e32699089636459035944ed95f1ea881815417092aed8cfcc2a",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_q23_defect_rank_descent.py": "c64a5b9fe05a49525cebe97bc92d89b2629066f0d46d2e05441e21764da34295",
+    "rust/scripts/c80_q23_defect_three_update.py": "4e4a97d5c76fd7951885cef9ca0f9e7f26a13dbef1209be97616eaa2485a802f",
+    "rust/scripts/c80_q23_first_new_replacement_orbit.py": "0d62a09dfa17d15e4edf56f173bf9fad0e60fc2b2073b2400271c97ab8582e45",
+    "rust/scripts/c80_q23_obligation_deletion_sweep.py": "71147cef27db6f9a73df7913044cbdef66514dc97da8573fea9f0af2fa76bbd9",
+    "rust/scripts/c80_q23_rank_zero_correspondence.py": "e2a6add73471702695cd39683fd0b55c35af2e70bb1979f85a6bda1aa6f2bee0",
+    "rust/scripts/c80_q23_replacement_lineage.py": "dbf2d7aa497cea113f0c02391170fd1832fef371e2f4c87466955acbc1081e60",
+    "rust/scripts/c80_q23_replacement_sweep_backend.rs": "54e90ad41bc16fc8b9a78cec3b07240b565e0ac8cd176c706b64eb796963629b",
+    "rust/scripts/c80_q23_small_shell_falsifier.py": "469238cea7af51daf0ba21d17c609074e1fd6d9c2d1d62e840565ec0df5ef198",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "next_new_orbit": {
+    "after_opponent_defect_rank": 2,
+    "control_index_zero_based": 88,
+    "created_by_opponent": [],
+    "created_by_reply": [
+      [
+        9,
+        16
+      ]
+    ],
+    "history_reply": [
+      14,
+      13
+    ],
+    "new_defects": [
+      [
+        9,
+        16
+      ]
+    ],
+    "next_defect_rank": 1,
+    "old_defect_rank": 23,
+    "opponent": [
+      7,
+      10
+    ],
+    "outer_opponent": [
+      15,
+      2
+    ],
+    "outer_reply": [
+      16,
+      18
+    ],
+    "removed_old_defects": [
+      [
+        6,
+        4
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        6,
+        14
+      ],
+      [
+        6,
+        15
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        8,
+        16
+      ],
+      [
+        8,
+        19
+      ],
+      [
+        8,
+        20
+      ],
+      [
+        8,
+        22
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        11,
+        9
+      ],
+      [
+        12,
+        11
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        12,
+        17
+      ],
+      [
+        17,
+        15
+      ],
+      [
+        18,
+        11
+      ],
+      [
+        19,
+        10
+      ],
+      [
+        20,
+        17
+      ],
+      [
+        21,
+        3
+      ],
+      [
+        22,
+        3
+      ],
+      [
+        22,
+        15
+      ],
+      [
+        22,
+        20
+      ]
+    ],
+    "reply": [
+      20,
+      17
+    ],
+    "retained_old_defects": [],
+    "successor_in_F_del": true,
+    "target_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        14,
+        13
+      ],
+      [
+        15,
+        2
+      ],
+      [
+        16,
+        18
+      ]
+    ],
+    "target_omega": 45
+  },
+  "schema": "c80-q23-next-marked-replacement-orbit-v2",
+  "search_counts": {
+    "known_orbit_witnesses_skipped": 10,
+    "necessary_replacement_witnesses": 12,
+    "outer_F_d_edges": 82118,
+    "outer_F_del_edges": 82106,
+    "outer_opponent_fibres": 7763,
+    "outer_reply_candidates": 515858,
+    "type_i_witnesses_skipped": 6,
+    "type_ii_witnesses_skipped": 4
+  },
+  "source": "rust/scripts/c80_q23_next_marked_replacement_orbit.py",
+  "status": "FOUND"
+}
