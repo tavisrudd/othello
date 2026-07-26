@@ -334,8 +334,9 @@ uniform finite-field spinor class \([2]\), with the certified nontrivial
 reference, Mathieu/Hadamard/matching branch, or Klein bundle.  Label-level
 trust identity, explicit `formal_coverage: none claimed`, ordinary replay,
 isolated replay, and the warning-free ten-page PDF are green.  Submission
-remains `NO-GO` pending a fresh context-free PDF-only `GO`, an immutable
-artifact locator, and the author's affiliation/contact metadata.  The
+received a fresh context-free PDF-only `GO` with no blocker or material
+minor.  Submission readiness remains `NO-GO` solely pending an immutable
+artifact locator and the author's affiliation/contact metadata.  The
 authoritative report and mystery ledger are
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
 

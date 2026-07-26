@@ -463,6 +463,29 @@ and harmonic-comparison page found no layout defect; PDF text contains no workfl
 repository-note reference, stale paper name, or archive placeholder.
 
 ## Mystery ledger
+## Fresh context-free PDF-only verdict
+
+An ephemeral independent `gpt-5.6-sol` referee session at high reasoning
+received only the regenerated PDF, its direct `pdftotext` extraction, and
+ten direct page renders.  It received no repository source, prior report,
+review feedback, or internet source.  The reviewed PDF has SHA-256
+`4f303beeea42979abea013b01c5c907021519d18b5d859cd7b1816716e7e6b36`.
+
+The referee returned `GO`, with no blocker and no material minor.  It found
+the theorems coherent, the attribution and rational/integral/finite-field
+boundaries explicit, the two Clebsch-module realizations properly
+distinguished, and the exposition and page formatting submission-quality.
+
+The same PDF-only metadata audit found:
+
+- author name: Tavis Rudd;
+- affiliation: missing;
+- contact email: missing; and
+- immutable artifact locator: missing.
+
+Thus the fresh PDF gate is green, while submission readiness remains
+`NO-GO` solely on the three missing user-controlled metadata fields.
+
 
 | feature | status | closure gate |
 |---|---|---|
@@ -474,8 +497,8 @@ repository-note reference, stale paper name, or archive placeholder.
 | statement-to-ledger identity | settled | label/clause map and frozen row digest |
 | Lean coverage | settled | explicit `none claimed` |
 | standalone harmonic novelty | settled subtractively | unlicensed “new” deleted |
-| immutable locator and author metadata | external blocker | user-supplied submission data |
-| fresh context-free PDF-only referee read | open release gate | launch only from the regenerated PDF without C670/C680 feedback |
+| immutable locator and author metadata | external blocker | user-supplied affiliation, contact email, and immutable artifact locator |
+| fresh context-free PDF-only referee read | settled | independent `GO`; no blocker or material minor on PDF SHA-256 `4f303beeea42979abea013b01c5c907021519d18b5d859cd7b1816716e7e6b36` |
 
 Vibe check: the mathematical repair is stronger than the entering draft
 because it discovered and removed a false descent claim while preserving
