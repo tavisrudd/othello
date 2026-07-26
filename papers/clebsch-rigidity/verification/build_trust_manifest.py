@@ -90,6 +90,10 @@ CLASSICAL_CODE = [
     "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
     "Hirschfeld 1998, the plane arc/covering-radius dictionary",
 ]
+CLASSICAL_PARTIAL_COVER = [
+    "Blokhuis--Brouwer--Szonyi 2010, Proposition 1.5, for the partial-cover "
+    "bound with noncollinear holes",
+]
 CLASSICAL_SYLVESTER = [
     "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph "
     "interpretation",
@@ -426,9 +430,9 @@ def components_by_row(
             ],
         ),
         24: (
-            "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
+            "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
             [
-                conceptual("universal secant moments and conic-filling window", ["Complete double count in the manuscript; the standard even-order oval nucleus is cited from Hirschfeld"], "The identity, defect bound, quadratic barrier, even-order oval obstruction, and two-sided field-size window are proved for every k in the manuscript."),
+                conceptual("universal secant moments and conic-filling window", ["Complete double count in the manuscript; the standard even-order oval nucleus is cited from Hirschfeld"] + CLASSICAL_PARTIAL_COVER, "The identity, defect bound, quadratic barrier, even-order oval obstruction, and lower field-size bound are proved for every k in the manuscript; the stronger upper bound is deduced from the cited partial-cover theorem."),
                 conceptual("Clebsch q=11 specialization", CLASSICAL_DYE, "Only the displayed Clebsch specialization uses Dye's ten Brianchon points; it is not asserted for an arbitrary six-arc."),
                 lean("six-arc chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
                 conceptual("Sylvester graph and distance-two interpretation", CLASSICAL_SYLVESTER, "The explicit distance-two clique certificate is kernel checked."),
@@ -454,7 +458,7 @@ def components_by_row(
         29: (
             "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 and k=8 exclusions and sharp maximum-six result are exact-replayed, and the MDS statement is the projective arc--syndrome translation.",
             [
-                conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations, the universal conic-filling window, and the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("small-arc reductions, k=6 dependency, and k=8 field sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE + CLASSICAL_PARTIAL_COVER, "The manuscript derives the moment equations, applies the partial-cover window, and proves the q=13 passant-saturation reduction; only the k=6 branch invokes rows 25 and 17."),
                 conceptual("projective MDS translation", CLASSICAL_CODE, "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
                 replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),

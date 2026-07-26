@@ -51,10 +51,11 @@ containment in the zero set of some nonzero form of degree at most three.
 
 For the Clebsch code, the conic equation tests syndrome distance, and
 decoder ambiguity recovers the Brianchon geometry and an invariant
-bipartition of the three-coordinate supports.  The conceptual tool is a
-universal chord-defect identity.  Together with passant counts, it reduces
-the classification of $k$-arcs whose uncovered locus is a nonsingular
-conic to exact terminal searches.  For $4\le k\le8$, only a projective
+bipartition of the three-coordinate supports.  The conceptual tools are a
+universal chord-defect identity and a partial-cover bound.  Together with
+passant counts, they reduce the classification of $k$-arcs whose uncovered
+locus is a nonsingular conic to exact terminal searches.  For
+$4\le k\le8$, only a projective
 four-frame over $\F_5$ and the Clebsch hexagon over $\F_{11}$ occur.
 Equivalently, these give the only projective $[k,k-3,4]_q$ MDS codes in
 this range whose projective distance-three syndrome locus is a nonsingular
@@ -142,10 +143,10 @@ claims instead use separately replayable exact enumeration.
 The chord-defect identity has a second role independent of the Clebsch
 classification.  For a Clebsch hexagon $K$ it gives
 $|\cU(K)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
-$q\equiv3\pmod4$.  For an arbitrary conic-filling $k$-arc, the same moment
-calculation forces $q$ odd and
-$2k-3\le q<\binom{k}{2}$, together with a sharper quadratic barrier.  We
-classify the cases through eight points.
+$q\equiv3\pmod4$.  For an arbitrary conic-filling $k$-arc, the moment
+calculation and a partial-cover theorem force $q$ odd and
+$2k-3\le q\le(k(k-1)+3)/3<\binom{k}{2}$.  We classify the cases through
+eight points.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -271,7 +272,7 @@ and $q<m$. Under the same hypothesis $|\cU(A)|=q+1$, if $q$ is even,
 then $\cU(A)$ is not an arc. Hence if
 $\cU(A)$ is a nonsingular conic, then $q$ is odd and
 \[
- 2k-3\le q<\binom{k}{2}.
+ 2k-3\le q\le\frac{k(k-1)+3}{3}<\binom{k}{2}.
 \]
 For $k=6$, writing $c(A)=n_3$ gives
 \[
@@ -300,6 +301,15 @@ $N\in\cU(A)$, a contradiction.
 In the conic case, $q$ is therefore odd and every chord is passant. An
 off-conic point lies on at most $(q+1)/2$ passants, so the $k-1$ chords
 through a vertex give $q\ge2k-3$.
+
+The $m$ chords form a partial line cover whose $q+1$ holes are the
+noncollinear points of the conic.  The partial-cover bound of Blokhuis,
+Brouwer, and Sz\H{o}nyi gives~\cite[Proposition~1.5]{BBS2010}
+\[
+ m\ge 2q-1-\frac{q+1}{2}=\frac{3(q-1)}2.
+\]
+Rearranging gives $q\le(k(k-1)+3)/3$; the final strict inequality follows
+from $k\ge4$.
 
 For $k=6$, one has $r=3$ and $t(A)=n_3=c(A)$, giving the displayed
 specialization. For the displayed arc, Dye's Brianchon theorem gives
@@ -1210,9 +1220,8 @@ If this equals $q+1$, then
 n_2=105-3n_3,\quad
  n_1=3(q^2-14q+42).
 \]
-The conic-filling window and quadratic barrier give $q\ge11$ and
-$q^2-21q+84\le0$, hence $q\le15$. Thus only the prime powers $q=11,13$
-remain, with forced spectra
+The strengthened conic-filling window gives $11\le q\le15$. Thus only the
+prime powers $q=11,13$ remain, with forced spectra
 $(n_1,n_2,n_3)=(27,78,9)$ and $(87,60,15)$ respectively. An exhaustive
 four-frame-normalized enumeration now supplies the finite exclusion. It
 finds $10232$ distinct normalized seven-arcs at $q=11$, of which $140$ have
@@ -1223,9 +1232,8 @@ seven-arc exactly three times, according to which non-frame point is
 deleted. For all $1820$ candidates of the required size, the quadratic
 evaluation matrix has full rank six, so none lies on a conic.
 
-Finally let $k=8$. The conic-filling window and its quadratic inequality
-give $q\ge13$ and $q^2-28q+125\le0$, hence $q\le22$. The prime powers in
-this interval that are odd are exactly $13,17,19$.
+Finally let $k=8$. The strengthened conic-filling window gives
+$13\le q\le59/3$, so the odd prime powers are exactly $13,17,19$.
 
 It remains to exclude these three fields. By projective equivalence fix the
 conic $XZ=Y^2$, whose stabilizer is the symmetric-square image of
@@ -1346,7 +1354,7 @@ Rigidity theorem
 \path{RelativeConicArcs/Q11DyeConsequences.lean};
 \path{RelativeConicArcs/SixArcDefectBridge.lean} \\
 Universal defect and conic-filling window
-& two chord moments; passant counts
+& two chord moments; partial-cover theorem; passant counts
 & six-arc specialization only:
 \path{RelativeConicArcs/ClebschChordDefect.lean} \\
 Gap and low-degree loci
@@ -1360,7 +1368,7 @@ Clebsch-family formula
 & Dye's ten Brianchon points and edge criterion
 & --- \\
 Classification through eight points
-& universal chord moments and defect bound
+& universal chord moments; partial-cover bound; defect bound
 & \path{RelativeConicArcs/SmallKChordMoments.lean};
 \path{RelativeConicArcs/SmallKGeometricBridge.lean}
 \\
@@ -1392,7 +1400,8 @@ Rigidity theorem
 & \path{check_rigidity_degenerate_conic.py};
 $1548$-representative frame-normalized enumeration \\
 Universal defect and conic-filling window
-& conceptual double counting; no separate executable check \\
+& conceptual double counting; cited partial-cover theorem;
+no separate executable check \\
 Gap and low-degree loci
 & \path{check_global_conic_gap.py}; \path{check_low_degree_loci.py} \\
 Uniqueness of $q=11$
@@ -1418,15 +1427,14 @@ $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
 
 \section{Conclusion}
 
-For every fixed arc size, the universal defect identity bounds the field
-orders that can admit conic filling. It reduces both the isolation of
+For every fixed arc size, the partial-cover bound limits the field orders
+that can admit conic filling, while the universal defect identity supplies
+the exact terminal spectra. Together they reduce both the isolation of
 $q=11$ and the classification for $4\le k\le8$ to bounded terminal cases.
-The two-sided conic-filling window first reduces the eight-point case to
-three fields; exact orbit search excludes all three.
-The numerical window is nonempty for
-every $k\ge4$ and has width
-$\binom{k}{2}-(2k-3)=\binom{k-2}{2}$; it is sharp at $k=4$, where its sole
-integer is $q=5$ and conic filling occurs. The Clebsch code realizes a
+The two-sided window first reduces the eight-point case to three fields;
+exact orbit search excludes all three. Its endpoint difference is
+$(k-3)(k-4)/3$. The window is sharp at $k=4$, where its sole integer is
+$q=5$ and conic filling occurs. The Clebsch code realizes a
 different kind of sharpness:
 covering-radius data recover geometry that was not built into the code,
 forcing the Clebsch hexagon and hence its $A_5$ symmetry. A line bound and
@@ -1449,6 +1457,13 @@ reconstruct a projective code.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
+
+\bibitem{BBS2010}
+A.~Blokhuis, A.~E.~Brouwer, and T.~Sz\H{o}nyi,
+\newblock Covering all points except one,
+\newblock \emph{Journal of Algebraic Combinatorics} \textbf{32} (2010),
+59--66.
+\newblock doi:10.1007/s10801-009-0204-1.
 
 \bibitem{BSW1992}
 A.~Blokhuis, Á.~Seress, and H.~A.~Wilbrink,

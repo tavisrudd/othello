@@ -2,12 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete, with a negative manuscript disposition.  A uniform
+**Status:** complete and integrated into Paper I.  A uniform
 human cover theorem and a uniform saturation reconstruction are proved below.
 They recover the exact \(k=7,8\) terminal window and identify two endpoint
 cases with minimum-weight incidence-code supports, but they do **not** exclude
-the five terminal pairs.  Thus C662 does not replace the C605 searches, and
-Paper I is unchanged.
+the five terminal pairs.  Thus C662 does not replace the C605 searches.  It
+does strengthen Paper I's general conic-filling window and simplify its
+terminal field sieve.
 
 ## Result
 
@@ -26,7 +27,7 @@ Then:
      \qquad
      q\le \frac{k(k-1)+3}{3};
    \]
-2. together with the elementary passant-pencil bound
+2. for \(k=7,8\), together with the elementary passant-pencil bound
    \(q\ge2k-3\), this leaves exactly
    \[
    \begin{array}{c|c}
@@ -229,10 +230,14 @@ of all five terminal pairs.
 
 ## Paper I disposition
 
-No manuscript change.  The cover proof is elegant but reproduces, rather
-than improves, Paper I's already exact terminal window.  Adding the
-incidence-code reformulation without a support classification would enlarge
-the proof surface while leaving every load-bearing terminal search intact.
+The partial-cover theorem is integrated into Paper I.  Although it leaves
+the five terminal fields and every load-bearing C605 search unchanged, it
+improves the general upper bound from
+\(q<\binom{k}{2}\) to \(q\le(k(k-1)+3)/3\), simplifies the \(k=7,8\)
+field sieve, and narrows the asymptotic conic-filling window from coefficient
+\(1/2\) to \(1/3\).  The incidence-code, polarity, and association-scheme
+reductions remain in this report: without a support classification they
+would enlarge the manuscript without strengthening its classification.
 
 ## Vibe check
 
