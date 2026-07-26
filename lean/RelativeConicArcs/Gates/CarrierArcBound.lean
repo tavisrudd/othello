@@ -9,12 +9,17 @@ relatively prime degree-one divisors, nonsquareness of squarefree nonunits, and 
 linewise roots with these statements into carrier-cardinality and threshold identities.
 
 It does not assert the projective incidence hypotheses that produce the line divisors, the
-squarefree dual-factor product, or the one-line polynomial correction used to interpolate
-compatible roots on a nodal line arrangement.
+squarefree dual-factor product, or that compatibility at the nodes makes each linewise residual
+divisible by the restricted product of the preceding line equations.
 -/
 
 #print axioms RelativeConicArcs.firstCoordinateHyperplaneRestriction_eq_zero_iff_dvd
+#print axioms RelativeConicArcs.firstCoordinateHyperplaneRestriction_surjective
 #print axioms RelativeConicArcs.coordinateTransformedHyperplaneRestriction_eq_zero_iff_dvd
+#print axioms RelativeConicArcs.coordinateTransformedHyperplaneRestriction_surjective
+#print axioms RelativeConicArcs.exists_single_correction_of_surjective_of_residual_dvd
+#print axioms RelativeConicArcs.exists_finset_extension_of_residual_dvd_restrictedEquationProduct
+#print axioms RelativeConicArcs.exists_finset_coordinateTransformed_extension_of_residual_dvd
 #print axioms RelativeConicArcs.exists_finset_extension_of_single_correction
 #print axioms RelativeConicArcs.totalDegree_fintypeProd_of_ne_zero
 #print axioms RelativeConicArcs.totalDegree_fintypeProd_eq_card_of_degree_one

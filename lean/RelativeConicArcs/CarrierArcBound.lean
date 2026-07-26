@@ -21,7 +21,9 @@ detection, and ambient nonsquareness into a cardinality bound, and identify the 
 difference as a constant multiple of the carrier-line product.
 The extension induction is also formalized: a correction that fixes one new restriction while
 vanishing on all restrictions already treated produces a simultaneous extension over any finite
-family.  The module is independent of the geometric construction of such corrections.
+family.  Surjectivity of coordinate-hyperplane restriction constructs that correction whenever
+the new residual is divisible by the restricted product of the previous line equations.  The
+module does not derive this residual divisibility from projective node compatibility.
 -/
 
 namespace RelativeConicArcs
@@ -60,6 +62,15 @@ theorem firstCoordinateHyperplaneRestriction_eq_zero_iff_dvd
     simp [firstCoordinateHyperplaneRestriction,
       MvPolynomial.finSuccEquiv_X_zero]
 
+/-- Every polynomial on the coordinate line `X₀ = 0` is the restriction of a plane polynomial. -/
+theorem firstCoordinateHyperplaneRestriction_surjective :
+    Function.Surjective
+      (firstCoordinateHyperplaneRestriction :
+        MvPolynomial (Fin 3) K → MvPolynomial (Fin 2) K) := by
+  intro Q
+  refine ⟨(MvPolynomial.finSuccEquiv K 2).symm (Polynomial.C Q), ?_⟩
+  simp [firstCoordinateHyperplaneRestriction]
+
 /-- Restriction to the coordinate hypersurface obtained from `X₀ = 0` by a coefficient-preserving
 polynomial automorphism. -/
 noncomputable def coordinateTransformedHyperplaneRestriction
@@ -83,7 +94,118 @@ theorem coordinateTransformedHyperplaneRestriction_eq_zero_iff_dvd
     (map_dvd_iff coordinateChange
       (a := coordinateChange.symm (MvPolynomial.X 0)) (b := F))
 
+/-- Restriction to a transformed coordinate hypersurface is surjective. -/
+theorem coordinateTransformedHyperplaneRestriction_surjective
+    (coordinateChange :
+      MvPolynomial (Fin 3) K ≃ₐ[K] MvPolynomial (Fin 3) K) :
+    Function.Surjective
+      (coordinateTransformedHyperplaneRestriction coordinateChange :
+        MvPolynomial (Fin 3) K → MvPolynomial (Fin 2) K) := by
+  intro Q
+  obtain ⟨F, hF⟩ := firstCoordinateHyperplaneRestriction_surjective Q
+  refine ⟨coordinateChange.symm F, ?_⟩
+  change firstCoordinateHyperplaneRestriction
+    (coordinateChange (coordinateChange.symm F)) = Q
+  simpa using hF
+
 end CoordinateHyperplaneRestriction
+
+section QuotientLiftCorrection
+
+variable {A B P : Type*} [CommRing A] [CommRing B]
+
+/-- A divisible residual on one restriction can be corrected by lifting the quotient and
+multiplying by an ambient element which vanishes on every restriction already treated. -/
+theorem exists_single_correction_of_surjective_of_residual_dvd
+    (restriction : P → A →+* B) (root : P → B)
+    (s : Finset P) (x : P) (G product : A)
+    (hsurjective : Function.Surjective (restriction x))
+    (hzero : ∀ y ∈ s, restriction y product = 0)
+    (hdiv : restriction x product ∣ root x - restriction x G) :
+    ∃ D : A,
+      (∀ y ∈ s, restriction y D = 0) ∧
+      restriction x (G + D) = root x := by
+  obtain ⟨quotient, hquotient⟩ := hdiv
+  obtain ⟨lift, hlift⟩ := hsurjective quotient
+  refine ⟨product * lift, ?_, ?_⟩
+  · intro y hy
+    rw [map_mul, hzero y hy, zero_mul]
+  · rw [map_add, map_mul, hlift, ← hquotient]
+    abel
+
+/-- If every residual on a new restriction is divisible by the restriction of the product of the
+previous equations, then the prescribed sections extend simultaneously over every finite family. -/
+theorem exists_finset_extension_of_residual_dvd_restrictedEquationProduct
+    [DecidableEq P]
+    (restriction : P → A →+* B) (lineEquation : P → A) (root : P → B)
+    (hsurjective : ∀ x, Function.Surjective (restriction x))
+    (hselfZero : ∀ x, restriction x (lineEquation x) = 0)
+    (hresidualDivides :
+      ∀ (s : Finset P) (x : P) (G : A), x ∉ s →
+        (∀ y ∈ s, restriction y G = root y) →
+        restriction x (∏ y ∈ s, lineEquation y) ∣
+          root x - restriction x G) :
+    ∀ s : Finset P, ∃ G : A, ∀ x ∈ s, restriction x G = root x := by
+  intro s
+  induction s using Finset.induction_on with
+  | empty =>
+      exact ⟨0, by simp⟩
+  | @insert x s hx ih =>
+      obtain ⟨G, hG⟩ := ih
+      obtain ⟨D, hD, hxD⟩ :=
+        exists_single_correction_of_surjective_of_residual_dvd
+          restriction root s x G (∏ y ∈ s, lineEquation y) (hsurjective x)
+          (by
+            intro y hy
+            rw [map_prod]
+            exact Finset.prod_eq_zero hy (hselfZero y))
+          (hresidualDivides s x G hx hG)
+      refine ⟨G + D, ?_⟩
+      intro y hy
+      rw [Finset.mem_insert] at hy
+      rcases hy with rfl | hy
+      · exact hxD
+      · rw [map_add, hD y hy, add_zero]
+        exact hG y hy
+
+end QuotientLiftCorrection
+
+section CoordinateTransformedInterpolation
+
+variable {K P : Type*} [Field K] [DecidableEq P]
+
+/-- For coordinate-transformed projective lines, divisibility of each new residual by the
+restricted product of the previous line equations implies simultaneous interpolation on every
+finite line family. -/
+theorem exists_finset_coordinateTransformed_extension_of_residual_dvd
+    (coordinateChange :
+      P → MvPolynomial (Fin 3) K ≃ₐ[K] MvPolynomial (Fin 3) K)
+    (root : P → MvPolynomial (Fin 2) K)
+    (hresidualDivides :
+      ∀ (s : Finset P) (x : P) (G : MvPolynomial (Fin 3) K), x ∉ s →
+        (∀ y ∈ s,
+          coordinateTransformedHyperplaneRestriction (coordinateChange y) G =
+            root y) →
+        coordinateTransformedHyperplaneRestriction (coordinateChange x)
+            (∏ y ∈ s,
+              (coordinateChange y).symm (MvPolynomial.X 0)) ∣
+          root x -
+            coordinateTransformedHyperplaneRestriction (coordinateChange x) G) :
+    ∀ s : Finset P, ∃ G : MvPolynomial (Fin 3) K, ∀ x ∈ s,
+      coordinateTransformedHyperplaneRestriction (coordinateChange x) G =
+        root x := by
+  apply exists_finset_extension_of_residual_dvd_restrictedEquationProduct
+    (fun x => coordinateTransformedHyperplaneRestriction (coordinateChange x))
+    (fun x => (coordinateChange x).symm (MvPolynomial.X 0))
+    root
+  · exact fun x =>
+      coordinateTransformedHyperplaneRestriction_surjective
+        (coordinateChange x)
+  · intro x
+    rw [coordinateTransformedHyperplaneRestriction_eq_zero_iff_dvd]
+  · exact hresidualDivides
+
+end CoordinateTransformedInterpolation
 
 section FiniteRestrictionExtension
 
