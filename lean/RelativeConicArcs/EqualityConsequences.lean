@@ -630,6 +630,116 @@ noncomputable def externalSecantsStandardConic (A : Finset (Point K)) :
   (secants (L := Point K) A).filter fun l =>
     (lineSlice (standardConic (K := K)) l).card = 0
 
+/-- On the upper even equality branch `q = choose(2n-1,2)+1`, zero defect forces one
+standard-conic incidence for every arc secant. -/
+theorem upper_even_equality_branch_holeIncidence
+    {A : Finset (Point K)} {n : ℕ}
+    (hcomplete : CompleteOutside (L := Point K) A (standardConic (K := K)))
+    (hcard : A.card = 2 * n) (hn : 3 ≤ n)
+    (hq : Fintype.card K = Nat.choose (2 * n - 1) 2 + 1)
+    (hzero : scaledDefect (L := Point K) A (standardConic (K := K)) = 0) :
+    holeIncidence (L := Point K) A (standardConic (K := K)) =
+      Nat.choose A.card 2 := by
+  have hempty : uncovered (L := Point K) A (standardConic (K := K)) = ∅ :=
+    (completeOutside_iff_uncovered_eq_empty (L := Point K)).mp hcomplete |>.2.2
+  have hcovered :
+      coveredRequired (L := Point K) A (standardConic (K := K)) =
+        requiredLocus A (standardConic (K := K)) := by
+    rw [← covered_union_uncovered (L := Point K) A (standardConic (K := K)),
+      hempty, Finset.union_empty]
+  have hconicCard :
+      (standardConic (K := K)).card =
+        PlaneOrder (Point K) (Point K) + 1 := by
+    rw [ProjectiveBridge.planeOrder_eq_card]
+    exact Conic.standardConic_card (K := K)
+  have hcoveredCard :
+      (coveredRequired (L := Point K) A (standardConic (K := K))).card =
+        Fintype.card K ^ 2 - A.card := by
+    rw [hcovered]
+    simpa [ProjectiveBridge.planeOrder_eq_card] using
+      Conic.card_requiredLocus_of_card_holes hcomplete.2.1 hconicCard
+  have hchooseTwo := two_mul_choose_two (2 * n)
+  have hchooseTwoPred := two_mul_choose_two (2 * n - 1)
+  have hchooseFour := Conic.twentyFour_mul_choose_four (2 * n)
+  have hchooseTwoValue : Nat.choose (2 * n) 2 = n * (2 * n - 1) := by
+    have hrhs : 2 * n * (2 * n - 1) = 2 * (n * (2 * n - 1)) := by
+      simp [Nat.mul_assoc]
+    rw [hrhs] at hchooseTwo
+    omega
+  have hchooseTwoPredValue :
+      Nat.choose (2 * n - 1) 2 = (2 * n - 1) * (n - 1) := by
+    have hsub : 2 * n - 1 - 1 = 2 * (n - 1) := by omega
+    rw [hsub] at hchooseTwoPred
+    have hrhs :
+        (2 * n - 1) * (2 * (n - 1)) =
+          2 * ((2 * n - 1) * (n - 1)) := by ring
+    rw [hrhs] at hchooseTwoPred
+    omega
+  have hsixChooseFourValue :
+      6 * Nat.choose (2 * n) 4 =
+        n * (2 * n - 1) * (n - 1) * (2 * n - 3) := by
+    have hsubtwo : 2 * n - 2 = 2 * (n - 1) := by omega
+    rw [hsubtwo] at hchooseFour
+    have hrhs :
+        2 * n * (2 * n - 1) * (2 * (n - 1)) * (2 * n - 3) =
+          4 * (n * (2 * n - 1) * (n - 1) * (2 * n - 3)) := by ring
+    have hlhs :
+        24 * Nat.choose (2 * n) 4 =
+          4 * (6 * Nat.choose (2 * n) 4) := by ring
+    rw [hrhs, hlhs] at hchooseFour
+    omega
+  have hqValue :
+      Fintype.card K = (2 * n - 1) * (n - 1) + 1 := by
+    simpa [hchooseTwoPredValue] using hq
+  have hqPos : 1 ≤ Fintype.card K := by omega
+  have hqLinear : 2 * n ≤ Fintype.card K := by
+    have hnsub : 1 ≤ n - 1 := by omega
+    have hmul :
+        2 * n - 1 ≤ (2 * n - 1) * (n - 1) :=
+      Nat.le_mul_of_pos_right _ hnsub
+    rw [hqValue]
+    omega
+  have hqSq : 2 * n ≤ Fintype.card K ^ 2 := by
+    nlinarith
+  have hsixChooseFourValueZ :
+      6 * (Nat.choose (2 * n) 4 : ℤ) =
+        (n * (2 * n - 1) * (n - 1) * (2 * n - 3) : ℕ) := by
+    exact_mod_cast hsixChooseFourValue
+  have hzeroz := hzero
+  rw [scaledDefect, hcard, hcoveredCard, ProjectiveBridge.planeOrder_eq_card,
+    hcard, hchooseTwoValue, hsixChooseFourValueZ] at hzeroz
+  have hhalf : 2 * n / 2 = n := by omega
+  rw [hhalf] at hzeroz
+  have hqSubCast : ((Fintype.card K - 1 : ℕ) : ℤ) =
+      (Fintype.card K : ℤ) - 1 := by
+    rw [Nat.cast_sub hqPos]
+    norm_num
+  have hqSqSubCast : ((Fintype.card K ^ 2 - 2 * n : ℕ) : ℤ) =
+      (Fintype.card K : ℤ) ^ 2 - 2 * (n : ℤ) := by
+    rw [Nat.cast_sub hqSq]
+    push_cast
+    ring
+  have hzeroz' := hzeroz
+  simp only [Nat.cast_mul] at hzeroz'
+  rw [hqSubCast, hqSqSubCast] at hzeroz'
+  rw [hqValue] at hzeroz'
+  push_cast at hzeroz'
+  have htwoNSubOne : ((2 * n - 1 : ℕ) : ℤ) = 2 * (n : ℤ) - 1 := by
+    omega
+  have hnSubOne : ((n - 1 : ℕ) : ℤ) = (n : ℤ) - 1 := by
+    omega
+  have htwoNSubThree : ((2 * n - 3 : ℕ) : ℤ) = 2 * (n : ℤ) - 3 := by
+    omega
+  rw [htwoNSubOne, hnSubOne, htwoNSubThree] at hzeroz'
+  ring_nf at hzeroz'
+  have htarget :
+      (holeIncidence (L := Point K) A (standardConic (K := K)) : ℤ) =
+        n * (2 * n - 1) := by
+    linear_combination -hzeroz'
+  rw [hcard, hchooseTwoValue]
+  rw [← htwoNSubOne] at htarget
+  exact_mod_cast htarget
+
 /-- At `(q,k)=(4096,92)`, the zero-defect equation itself fixes conic incidence at `4186`. -/
 theorem exceptional_candidate_holeIncidence
     {A : Finset (Point K)}

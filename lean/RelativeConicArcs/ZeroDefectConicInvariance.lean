@@ -220,5 +220,35 @@ theorem maximumIndexParameters_card_eq_ninety_one
   rw [maximumIndexHoles_eq_map_parameters, Finset.card_map] at hholes
   exact hholes
 
+omit [CharP K 2] in
+/-- If an even zero-defect arc of size `2n` spends one conic incidence for every arc secant,
+then the maximum-index parameter set has cardinality `2n-1`. -/
+theorem maximumIndexParameters_card_eq_two_mul_sub_one
+    {A : Finset (Point K)} {n : ℕ}
+    (hcomplete : CompleteOutside (L := Point K) A (standardConic (K := K)))
+    (hcard : A.card = 2 * n) (hn : 1 ≤ n)
+    (hzero : scaledDefect (L := Point K) A (standardConic (K := K)) = 0)
+    (hinc : holeIncidence (L := Point K) A (standardConic (K := K)) =
+      Nat.choose A.card 2) :
+    (maximumIndexParameters A).card = 2 * n - 1 := by
+  have hfactor :=
+    holeIncidence_eq_half_mul_card_maximumIndexHoles
+      (L := Point K) hcomplete.1 hcomplete.2.1 hzero
+  have hchoose := two_mul_choose_two (2 * n)
+  have hchooseA : Nat.choose A.card 2 = n * (2 * n - 1) := by
+    rw [hcard]
+    have hrhs : 2 * n * (2 * n - 1) = 2 * (n * (2 * n - 1)) := by
+      simp [Nat.mul_assoc]
+    rw [hrhs] at hchoose
+    omega
+  have hhalf : 2 * n / 2 = n := by omega
+  rw [hinc, hchooseA, hcard, hhalf] at hfactor
+  have hholes :
+      (maximumIndexHoles (L := Point K) A (standardConic (K := K))).card =
+        2 * n - 1 := by
+    exact (Nat.mul_left_cancel hn hfactor).symm
+  rw [maximumIndexHoles_eq_map_parameters, Finset.card_map] at hholes
+  exact hholes
+
 end ZeroDefectConicInvariance
 end RelativeConicArcs

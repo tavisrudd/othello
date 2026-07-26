@@ -45,4 +45,6 @@ repair, and other developments are not dependencies of these results.
 #print axioms RelativeConicArcs.odd_completeOutside_zeroDefect_order_spectrum
 #print axioms RelativeConicArcs.odd_standardConic_zeroDefect_charTwo_order
 #print axioms RelativeConicArcs.exceptional_candidate_secant_type_cards
+#print axioms RelativeConicArcs.upper_even_equality_branch_holeIncidence
+#print axioms RelativeConicArcs.TangentPairFourGroup.no_upper_even_equality_branch
 #print axioms RelativeConicArcs.TangentPairFourGroup.no_exceptional_candidate_standardConic
