@@ -161,7 +161,7 @@ def linear_forest_grundy_certificate(components: list[dict]) -> int | None:
         return 1
     if has_isolate:
         return 2
-    return None
+    return 0
 
 
 def edge_features(kernel, state: int, opponent: int, reply: int) -> dict:
