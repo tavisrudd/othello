@@ -13,7 +13,8 @@ ChatGPT conversations. They are preserved byte-for-byte as:
 - `notes/2026-07-26-hitchin-clebsch-bridge-report.md`;
 - `notes/artifacts/2026-07-26-clebsch-top3-reproducibility-bundle.tar.gz`;
 - `notes/2026-07-26-clebsch-targets-4-5-7-8-report.md`;
-- `notes/artifacts/2026-07-26-clebsch-targets-4-5-7-8-bundle.tar.gz`.
+- `notes/artifacts/2026-07-26-clebsch-targets-4-5-7-8-bundle.tar.gz`;
+- `notes/2026-07-26-klein-intermediate-jacobian-kill-test.md`.
 
 Their hashes are frozen in the adjacent `SHA256SUMS` files. Import records
 provenance; it does not promote every claim in the reports to a verified
@@ -70,6 +71,35 @@ marked-torsor theorem conditional on four banked identifications; it is not
 yet evidence for those identifications. Its continuation-rigidity reduction
 and repair-port compiler belong to other owning lanes and are not Paper III
 claims.
+
+## Klein cubic elevation target
+
+The intermediate-Jacobian kill test rules out the naive
+two-dimensional invariant abelian subvariety. The correct object is the
+two-dimensional multiplicity Hodge structure
+\[
+ U_H=\operatorname{Hom}_{A_5}
+   \bigl(W_5,H^1(J(X),\mathbf Q)\bigr)
+\]
+in the decomposition
+\[
+ H^1(J(X),\mathbf Q)|_{A_5}\simeq W_5\otimes U_H.
+\]
+Roulleau proves \(J(X)\cong E^5\) as an unpolarized complex abelian
+variety, with \(E\) carrying CM by \(\mathbf Q(\sqrt{-11})\). Hartlieb's
+character tables and one-dimensional \(A_5\)-special family verify the
+five-space multiplicity mechanism. The source audit and corrections to the
+imported note are in
+`notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md`.
+
+C654 will compute the two embedded \(A_5\)-commutant algebras and their
+relative position. The intended golden invariant must be canonical under
+basis and isogeny change and compatible with the polarization. Arbitrary
+rank-one idempotents in \(M_2(\mathbf Q)\) do not meet this requirement.
+A positive discriminant-five invariant could elevate the Klein lift into a
+second principal clause of Paper III. A negative stops the simple
+period-lattice lift without weakening the already established arithmetic
+Hitchin--Clebsch cover.
 
 ## Imported evidence status
 
@@ -153,7 +183,15 @@ Mukai--Umemura model and normalization comparison.
    finite-field reductions. Prove the largest justified integral base and
    exact bad-prime boundary obtainable from available equations, or retain
    the spread-out finite-set formulation.
-4. **C579 — Paper III synthesis.** After C651--C653, replace the exploratory
+4. **C654 — Klein multiplicity relative position.** Build the exact rational
+   ten-dimensional Klein representation and its polarization, embed the two
+   \(A_5\) parents, certify their \(M_2(\mathbf Q)\) commutants and
+   \(\mathbf Q(\sqrt{-11})\) intersection, define a canonical mixed
+   invariant, and test whether its discriminant is \(5\). Treat the
+   55-curve lattice as a second-stage integral route, not as assumed
+   evidence.
+5. **C579 — Paper III synthesis.** After C651--C653, and with C654's
+   positive or negative disposition recorded, replace the exploratory
    skeleton with the arithmetic orientation-cover paper, admit only
    consequences of its principal theorem, build a Paper III-specific trust
    surface, and run independent cold review.
@@ -185,5 +223,10 @@ been cut.
   torsor.
 - **Open under C653:** the minimal bad-prime set and prior-art status of the
   \(5\)-twist and finite-field incidence interpretation.
+- **Killed:** there is no \(PSL_2(11)\)- or \(A_5\)-stable elliptic
+  subvariety carrying the orientation.
+- **Open under C654:** whether the intrinsic relative position of the two
+  \(A_5\) multiplicity structures has discriminant \(5\), and whether
+  Roulleau's index-two 55-curve lattice sees the same finite torsor.
 - **Deferred:** theta, Fourier, quantum, Mathieu, and four-sheet holonomy
   comparisons unless C579 derives them from the orientation cover.

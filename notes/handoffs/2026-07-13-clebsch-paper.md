@@ -532,6 +532,18 @@ now added to C652. Its continuation-rigidity and repair-port targets remain
 outside the clebsch lane. Provenance and exact disposition are recorded in
 `notes/2026-07-26-c579-hitchin-clebsch-paper-iii-plan.md`.
 
+The Klein intermediate-Jacobian kill test removes the proposed invariant
+elliptic factor and replaces it by the canonical two-dimensional
+\(A_5\)-multiplicity Hodge structure in
+\(H^1(J(X),\mathbf Q)|_{A_5}\simeq W_5\otimes U\). Roulleau supplies the
+CM product \(J(X)\cong E^5\) and the 55-curve index-two lattice; Hartlieb
+supplies the relevant characters and the one-dimensional \(A_5\)-special
+family. C654 now owns the exact relative-commutant calculation and the
+discriminant-five test. Its positive result may elevate Paper III; its
+negative result kills only this Klein period-lattice lift. The audited
+statement and source depths are in
+`notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md`.
+
 The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
 and degree-23 coherence material is subordinate inventory. C579 admits an
 item only when it becomes a proved consequence or application of the
