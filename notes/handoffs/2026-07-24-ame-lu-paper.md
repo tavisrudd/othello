@@ -444,6 +444,14 @@ factor tables and complement witnesses are reproducible and remain separate
 from the Weil and Heisenberg scalar extensions.  No manuscript source was
 edited.  See `2026-07-25-c624-ame-lu-party-extension-examples.md`.
 
+**C629 in progress (2026-07-25): formalize the C624 extension mechanism.**
+The user requested a Tao/extra-juice pass followed by Lean formalization.
+The owned target is the reusable complement, explicit normalized-cochain,
+outer-action, and torus-normalizer layer behind the finite examples, plus a
+compact certificate interface that states exactly which concrete claims are
+kernel checked and which remain externally computed.  Manuscript sources
+remain untouched.
+
 **Post-C619 two-reader frontier (2026-07-25): two successors remain queued.**
 Two independent manuscript-only cold reads converged on the same research
 frontiers.  C622, the highest-EV remaining successor, tests the length-generic exact
