@@ -119,5 +119,11 @@ def directionProfile (direction offset : Label) : Bool :=
 def missedDirection (direction : Label) : Bool :=
   labels.all fun x => chordSelectedCount x direction = 0
 
+attribute [reducible] fieldElements canonicalPoints onRays determinantOfTriple
+  isCoordinateArc determinantOfPairWith ordinarilyCovered secantMultiplicity
+  pointsOnLine lineType lineTypeCount offSetSecantMultiplicityCount labels labelIndex
+  selectedAt uncoveredAt addLabel subLabel chordSelectedCount chordHitsSelectedAt
+  directionProfile missedDirection
+
 end NinePointHeisenbergIncidence
 end RelativeConicArcs
