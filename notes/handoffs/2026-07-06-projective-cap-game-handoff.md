@@ -1037,6 +1037,26 @@ secant/incidence coverage—not another scalar state bank or matching shell.
 C82 stays gated. Report+script+certificate:
 [`../2026-07-25-c80-coupled-overload-tutte-bank.md`](../2026-07-25-c80-coupled-overload-tutte-bank.md).
 
+**The marked secant/incidence comparison diagnoses premature N absorption,
+not a uniform edge selector (C80, 2026-07-25).** Across the three canonical
+spoiling types, all 106 strict candidates are exact N by both the grid solver
+and an independent small-tree replay; 105 land at `Ω=0` with Node--Kayles
+Grundy 1 or 2, and the unique `Ω=1` target has exactly one P follower.
+Compared with the four q17 `Ω=40` repairs and q19 `Ω=169` repair, the finite
+incidence gap is large: repairs retain 5--8 legal marked-chord points, 32--51
+legal points total, and 3--5 live conic parameters, while spoilers retain
+2--4, 2--7, and 0--1. The complete normalized feature multiset is identical
+across the four coordinate copies of each q17 type. Full marked destruction
+profiles isolate the five repairs purely in the complete 322-edge natural
+comparison, but no conjunction through three predeclared monotone scalar
+thresholds is P-pure; the first four-coordinate fits are finite
+interpolation, agreeing with the earlier zero-recurrence profile result.
+Therefore do not promote a chord/live/overload threshold. The next crown is
+an explicit nonrecursive operation that transports a response certificate
+while retaining enough incidence to prevent premature N absorption, then an
+opponent-complete coverage proof. C82 remains gated. Report+certificate:
+[`../2026-07-25-c80-marked-secant-spoiler-repair-compare.md`](../2026-07-25-c80-marked-secant-spoiler-repair-compare.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -1105,16 +1125,18 @@ Priority order and why:
    every tested raw strict-reply graph has excess zero, while the q17 decoys
    retain more overload than the certified repairs. The observed excess two
    is created only by recursively filtering edges through lower `M_Ω`.
-   Minimal-fibre extraction now sharpens the target. The four q17 `Ω=49`
-   decoys are one projective state orbit but have eight empty marked fibres
-   in two `PGL(2,17)` orbits (strict-candidate sizes 12 and 11); the q19
-   `Ω=152` decoy has one empty fibre of size 14. All 106 strict candidates
-   miss even `F_cc`, not only `M_Ω`. Next compare marked secant/conic
-   incidence on these three canonical spoiling types against the q17
-   `Ω=40` and q19 `Ω=169` certified repairs, seeking a sound nonrecursive
-   admissible-edge predicate. No quotient or arbitrary Grundy oracle is
-   required, and the five-state q17 thread is not a depth-two law. A
-   value-only factor is also not excluded.
+   The marked secant comparison now strengthens all 106 canonical spoiling
+   candidates to exact N: 105 are `Ω=0` boundaries of Grundy 1 or 2, and the
+   unique `Ω=1` target has one P follower. Repairs retain a much larger
+   marked-chord, legal-point, and live-conic reservoir, but that finite gap
+   does not compress to a low-dimensional monotone rule: no conjunction
+   through three predeclared scalar thresholds is P-pure, and the first
+   four-coordinate fits are interpolation. The next crown is therefore an
+   explicit nonrecursive operation transporting a response certificate
+   while retaining enough marked incidence to prevent premature N
+   absorption, followed by opponent-complete coverage. No quotient or
+   arbitrary Grundy oracle is required, and the five-state q17 thread is not
+   a depth-two law. A value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
