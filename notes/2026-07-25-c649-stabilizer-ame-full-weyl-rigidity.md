@@ -4,10 +4,12 @@
 
 **Date:** 2026-07-25
 
-**Status:** theorem and literature positioning adopted in the manuscript;
-coordinate support, generation, axis, and abstract holonomy cores kernel
-checked; end-to-end stabilizer-state/reduced-density Lean composition and
-the queued aggregate gate remain open
+**Updated:** 2026-07-26
+
+**Status:** theorem, proof repairs, and literature positioning adopted in
+the manuscript; the arbitrary-additive support, marginal, covariance,
+axis-recovery, and LU-to-LC chain is kernel checked above one explicit
+stabilizer-projector realization field; aggregate replay is queued
 
 ## Result
 
@@ -155,10 +157,14 @@ the holonomy centralizer, including restriction to a normal subgroup.
 
 The existing generic diagonal-tensor files already prove the independent
 axis-recovery step for arbitrary finite index sets and nonzero
-coefficients.  What remains is the end-to-end physics bridge from an
-additive stabilizer AME state and projector to the exact support profile
-and phased reduced-density Weyl expansion, followed by composition with
-the axis terminal.
+coefficients.  `RelativeConicArcs.AMELU.StabilizerAMERigidity` now composes
+the actual supported kernels, exact profile, complete local-label
+projections, phased marginal, covariance, and axis terminal.  Its
+`additiveStabilizer_all_isClifford_of_localAction` and party-relabeled
+variant are the end-to-end rigidity terminals.  The sole physics-facing
+field is `AdditiveStabilizerState.marginalWeylExpansion`, the standard
+partial-trace stabilizer-projector formula; the party-relabeled terminal
+also takes an explicit realization of the permuted source state.
 
 ## Literature audit
 

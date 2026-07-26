@@ -40,6 +40,10 @@ In particular, \(\rho^\psi_A\) is maximally mixed exactly when
 when it has no nonidentity stabilizer label supported on at most \(m\)
 parties.
 
+The rigidity theorem uses only \((2.1)\)--\((2.2)\).  For exact group
+and classification results, we now specialize to the six-party
+MDS--CSS model.
+
 A six-arc is an ordered sextuple of points of \(\PP^2(\F_q)\) with no
 three collinear.  Choose nonzero column representatives and collect them
 in a \(3\)-by-\(6\) matrix \(H\).  The arc condition says that every
@@ -105,6 +109,11 @@ For a party set \(S\), let
 The general stabilizer partial-trace formula specializes to
 \[
  \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.3}
+\]
+For later block calculations, write
+\[
+ C_X=C\oplus0,\qquad C^\perp_Z=0\oplus C^\perp,
+ \qquad L_C=C_X\oplus C^\perp_Z .
 \]
 This formula is the bridge used in both the rigidity proof and the
 marginal invariants below.  A Pauli-labelled quantity is not by itself an

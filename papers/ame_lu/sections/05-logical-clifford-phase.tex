@@ -40,14 +40,29 @@ the labeled Gale transform of the columns of \(H\).  Since
  AGS=H\ \text{ for some }A\in\mathrm{GL}_3(q).
 \]
 Thus the condition is precisely fixed-label projective equivalence to the
-Gale transform.  The six-point self-association theorem identifies this
-fixed locus with the conic locus
-\cite[Section~2.3, especially the branch-locus and Veronese-determinant
-description]{HowardMillsonSnowdenVakil2008}.  Concretely, its equation is
-the determinant of the six quadratic evaluation rows
-\((x_i^2,y_i^2,z_i^2,x_iy_i,x_iz_i,y_iz_i)\): it vanishes exactly when one
-nonzero quadratic form contains all six columns.  Because the columns
-form an arc, that conic cannot be reducible.
+Gale transform.  This fixed locus can be identified directly over the
+finite field.  Let \(V\) be the matrix with quadratic evaluation rows
+\[
+ (x_i^2,y_i^2,z_i^2,x_iy_i,x_iz_i,y_iz_i).
+\]
+Its determinant vanishes exactly when a nonzero quadratic form contains
+all six columns.  Every five rows of \(V\) are independent: a relation
+supported on at most five points would give
+\(H_I D H_I^T=0\) for a nonsingular diagonal \(D\) on its support \(I\);
+for \(|I|\geq3\), this would put the three-dimensional row space of
+\(H_I D\) inside \(\ker H_I\), which has dimension at most two, while
+smaller supports are immediate.  Hence any relation
+\(\sum_i d_i V_i=0\) has every \(d_i\ne0\).
+
+Writing \(D=\diag(d_i)\), that relation is \(HDH^T=0\).  Therefore
+\(\operatorname{row}(HD)\subseteq\ker H=C\), and equality follows from
+dimension three.  Thus \(CD^{-1}=C^\perp\).  Conversely, a nonsingular
+diagonal equivalence \(SC=C^\perp\) gives
+\(HS^{-1}H^T=0\), hence a relation among the rows of \(V\) and a conic
+through the six columns.  The conic is irreducible because the columns
+form an arc.  This is the finite-field fixed-label form of the classical
+six-point self-association theorem
+\cite[Section~2.3]{HowardMillsonSnowdenVakil2008}.
 \end{proof}
 
 \begin{theorem}[Fixed-party logical phase]\label{thm:logical-phase}

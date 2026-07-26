@@ -1,8 +1,8 @@
 {
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
-  "date": "2026-07-25",
-  "title": "Local-Unitary Rigidity and Transversal Clifford Groups for MDS--CSS AME States",
+  "date": "2026-07-26",
+  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes",
   "public_export": {
     "artifacts": [
       {
@@ -11,29 +11,29 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 222058,
+        "bytes": 233416,
         "path": "ame-lu.pdf",
-        "sha256": "9c2973b3250eb6594bcadb6931995adf5650b32d10296cd22ecb4e5c10599d7e"
+        "sha256": "9550eacfa3000d7b87ee091812f3cfcdee49f38223f9784058f3b9dba92bdbca"
       },
       {
-        "bytes": 18310,
+        "bytes": 18539,
         "path": "formal-statement-adequacy.md",
-        "sha256": "51df6857cb3769b280fb6989e243b83011d53b522ab4a58eb41af139c8a73d29"
+        "sha256": "31b9fc711918eb5f54b8d02e11e56317a3b62173fb61661a3894ff4f69c6356c"
       },
       {
-        "bytes": 3366,
+        "bytes": 3445,
         "path": "main.tex",
-        "sha256": "17846ce9417e380437f9eae53b2a1ed2a6fe9eb4828f2fd96c36cbf48d0ff15c"
+        "sha256": "b0ae728049dd00cdfde271149a69ea8a90b4f2c0b6bea9f2d159d941fa6579e6"
       },
       {
-        "bytes": 9129,
+        "bytes": 10614,
         "path": "refs.bib",
-        "sha256": "ce859f6d0dd1770cb448d88a8726de0a960d54c5f322cef1c9068aadfba18f11"
+        "sha256": "91344547662b585f7bb221efd74f2bafefae787b3ed36c5af707ee1562fec637"
       },
       {
-        "bytes": 2654,
+        "bytes": 2282,
         "path": "release/PUBLIC-EXPORT.md",
-        "sha256": "7310ce30f6883f20cbba1dc8949b83c5c7d31878d1b34aaf9699f4c15a5325d4"
+        "sha256": "bb69a9ba827b13286d45ea4707c9f173d20c4f58c11427ce620047bb7dd4fe15"
       },
       {
         "bytes": 2299,
@@ -41,39 +41,39 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 7573,
+        "bytes": 7592,
         "path": "release/verify_release.py",
-        "sha256": "8c790decce74cdc3c2861651c39a714a554699484e44cb2bbe30b191381f45e4"
+        "sha256": "b6fc797b48e0ce9b4fa753ad75b4b596d6fda99cb377de079650e8cd37bf85c0"
       },
       {
-        "bytes": 14183,
+        "bytes": 15579,
         "path": "sections/01-introduction.tex",
-        "sha256": "d14da9e508ae8932d4bbe6fa130a389942beded01bd5c3c6c4d9ed87454d5490"
+        "sha256": "b8559d09ece7693d0d81e5a1e369e11d29ee5c7b19c5f061d1e82c26bab1ae01"
       },
       {
-        "bytes": 4299,
+        "bytes": 5649,
         "path": "sections/02-geometry-ame-dictionary.tex",
-        "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
+        "sha256": "9d9681fef4ccd94d3399a0cf4825b2d8d333d9733d8c153a2d5fae80b37733ab"
       },
       {
-        "bytes": 20766,
+        "bytes": 23609,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "d3c5c4b93fd870f450ab1c704e324be7229b4aeb6bbb52e21656451ded04acd2"
+        "sha256": "cdb189e642b69feb968b4549e2d12cfe45a00f7400a5063341da9ff0e823f261"
       },
       {
-        "bytes": 8015,
+        "bytes": 8583,
         "path": "sections/04-pencil-classification.tex",
-        "sha256": "9a1470e3a953c95da2b3c6960b1f61cd1b85342367253009c2a7bb5b313d8ca5"
+        "sha256": "3a74e003131bc256d9122d2bbf21635db9e597a7df468a6df6c6ec9a0ee7b385"
       },
       {
-        "bytes": 8015,
+        "bytes": 8717,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "100565e10417b5a664aeed065416f45abd7c7bf6718ddd6122313494b820977e"
+        "sha256": "4e6dc78ac1ced249d8136204a0913fb992ddce54cf6eba962622ddcf48be6c88"
       },
       {
         "bytes": 11151,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "fcfe112ff9d9fc972f8cc9a93f8d2aefb5b572a6c0022d95b105ec81bd6b7d55"
+        "sha256": "6b9f4066199b56b90bb09b84d0e585fe0229984363b7db5761f126de8d891e17"
       },
       {
         "bytes": 6151,
@@ -81,9 +81,9 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 13948,
+        "bytes": 14372,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "a959632994cfcb90eac6b58e4bf0194d9d744ae8d782442e3dd0dab60e09aa3e"
+        "sha256": "4567cbc5fadda44f88bbd11771bd767f4a75914bbfd9ec09d8406d17c447a88f"
       },
       {
         "bytes": 3946,
@@ -191,7 +191,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "1659a69b9572392ef07018a7e5e476cefb641d3412dadbe36f0a029cb3d5c8df"
+    "tree_sha256": "3f32e6958b5982a70eff606de95e6a883530f0256f996124fe6efa917b68a37b"
   },
   "formal_companion": {
     "artifacts": [
@@ -321,6 +321,11 @@
         "sha256": "f9a93d80ef44989b61f80133d6f24ccbc30920de353e94c2716e53ba106d2073"
       },
       {
+        "bytes": 7774,
+        "path": "lean/RelativeConicArcs/AMELU/HolonomyCentralizer.lean",
+        "sha256": "deeff2dcaeff4da00278d1da75446da796dc4aa1b3e6a69f140cfe95a262f5fb"
+      },
+      {
         "bytes": 2044,
         "path": "lean/RelativeConicArcs/AMELU/LUPencilClassification.lean",
         "sha256": "cfd2a147d546ba9b84c2b2fe6ea0d3ed3497582821bbf0c711ece3e096cbfce6"
@@ -406,6 +411,16 @@
         "sha256": "2f44c1923f0c63230b4fd12ea47379636d1c734718a24536447f2288a343ed71"
       },
       {
+        "bytes": 29667,
+        "path": "lean/RelativeConicArcs/AMELU/StabilizerAMERigidity.lean",
+        "sha256": "0807fc240f6db033187f6d3fbd5685c6ef81947eb7d5d8d8ae50456c3a0a7e36"
+      },
+      {
+        "bytes": 20813,
+        "path": "lean/RelativeConicArcs/AMELU/StabilizerAMESupport.lean",
+        "sha256": "5c91ea4a0c10b540df4e3599d9ae77a752455c3bf0386f9263efde4c83f1832e"
+      },
+      {
         "bytes": 22113,
         "path": "lean/RelativeConicArcs/AMELU/StabilizerDictionary.lean",
         "sha256": "66028c81c880ee61ea30c63c0df04ea7c69b2c8a11384c4dfc845fb7151cc171"
@@ -456,14 +471,14 @@
         "sha256": "5caae34f785b5c37df05ed42c8c278dbf88e0ef98b6adf2d514716122f31ee2d"
       },
       {
-        "bytes": 3020,
+        "bytes": 3230,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregate.lean",
-        "sha256": "94a38a7e96e50af8cbce80fc8ca61c24f81da5d0a557d453bddd8b2856c77577"
+        "sha256": "08e7628c9aab1daa1d6c8f53d3840e312b4a55de319c13d683e0196e03ba97a9"
       },
       {
-        "bytes": 9519,
+        "bytes": 10889,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregateAxioms.lean",
-        "sha256": "ee724406f38e808f6e96373bbf96959077179e3d319adbec0279f85e49f3f329"
+        "sha256": "c7822ea86800c44891ce67e389dd887cf155cdae29787a81341c7992aa8a2b4a"
       },
       {
         "bytes": 391,
@@ -596,6 +611,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "b0d54b26020927e2ac682555dde4dd835e29a71c0eac250d13d3769988a61bb5"
+    "tree_sha256": "68c7968786fdb2012ddf4c9a3a757074c6bc053dd0586f2da48e7b66b4be64d1"
   }
 }
