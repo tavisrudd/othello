@@ -1,10 +1,12 @@
 import RelativeConicArcs.PRSPolarInduction
+import RelativeConicArcs.PRSSquarefreeMarkerDensity
+import Mathlib.Topology.Irreducible
 
 /-!
 # Algebraic terminals for stable coherent-polar components
 
-This module checks three coordinate calculations used in the all-degree contained-component
-argument for binary divided-power syndromes.
+This module checks the coordinate calculations and the topological component-selection argument
+used in the all-degree contained-component proof for binary divided-power syndromes.
 
 First, it proves the Plücker factorizations for the symmetric, exchanged, and anti-invariant
 factorizations of a symmetric bidegree-`(2,2)` ordered-root incidence.  Second, it shows that a
@@ -12,12 +14,16 @@ linear contraction family indexed by a two-dimensional free module lies in a low
 exactly when its two coordinate contractions do.  Third, it proves the coefficient-block
 overlap responsible for termination of the characteristic-two cyclic-plane descendant: if the
 first and last columns of an `(m+1) × 5` consecutive catalecticant vanish and `m ≥ 3`, every
-coefficient represented by that catalecticant vanishes.
+coefficient represented by that catalecticant vanishes.  Finally, it proves that a dense attainable
+locus contained in a closed finite component union has its irreducible row-space closure contained
+in one component, and connects that selected component to the recursive contained classification.
 
-The module does not formalize the algebraic-geometric classification of the lower bad scheme,
-the density of squarefree marker products, saturation of the cyclic ideal, or the assertion that
-every contained row space lies in one classified irreducible component.  Those statements remain
-outside this coordinate-algebra boundary.
+The imported marker-density module proves polynomial density of monic split-squarefree coefficient
+tuples over an infinite field, as used after passage to an algebraic closure.  The paper-specific
+identification of that coefficient map with the projective
+catalecticant row-space closure and the primary decomposition of the lower bad scheme remain
+mathematical inputs.  Once supplied, component selection and recursive classification are
+conclusions rather than interface assumptions.
 -/
 
 namespace RelativeConicArcs.PRSStableComponents
@@ -117,6 +123,145 @@ theorem coherentFano_fourth_hankelMinor
   ring
 
 end CoherentFanoIdentities
+
+section ContainedRowSpaceGeometry
+
+variable {Point : Type*} [TopologicalSpace Point]
+
+/-- Topological data for the row-space step in a contained coherent-polar argument.
+
+`attainable` is the locus produced by distinct retained markers, `rowSpace` is its asserted
+closure, and `badCarrier` is the closed lower bad locus.  The finite set `components` is the exact
+closed-component ledger for that carrier. -/
+structure ContainedRowSpaceData (Point : Type*) [TopologicalSpace Point] where
+  /-- Syndromes attained by the allowed distinct-marker products. -/
+  attainable : Set Point
+  /-- Projective row space obtained by closing the attainable locus. -/
+  rowSpace : Set Point
+  /-- Reduced closed lower bad carrier. -/
+  badCarrier : Set Point
+  /-- Finite ledger of closed components of the lower bad carrier. -/
+  components : Finset (Set Point)
+  /-- The attainable locus is dense in the asserted row space. -/
+  closure_attainable : closure attainable = rowSpace
+  /-- Every attainable syndrome belongs to the lower bad carrier. -/
+  attainable_subset_badCarrier : attainable ⊆ badCarrier
+  /-- The lower bad carrier is closed. -/
+  badCarrier_closed : IsClosed badCarrier
+  /-- The finite component ledger covers the lower bad carrier exactly. -/
+  badCarrier_eq_sUnion_components : badCarrier = ⋃₀ (components : Set (Set Point))
+  /-- Every member of the component ledger is closed. -/
+  components_closed : ∀ component ∈ components, IsClosed component
+  /-- The projective row space is nonempty and irreducible. -/
+  rowSpace_irreducible : IsIrreducible rowSpace
+
+namespace ContainedRowSpaceData
+
+/-- Closing a dense attainable locus transports its containment in the closed bad carrier to the
+entire row space. -/
+theorem rowSpace_subset_badCarrier (data : ContainedRowSpaceData Point) :
+    data.rowSpace ⊆ data.badCarrier := by
+  rw [← data.closure_attainable]
+  exact closure_minimal data.attainable_subset_badCarrier data.badCarrier_closed
+
+/-- An irreducible row space contained in a finite union of closed components lies in one listed
+component. -/
+theorem exists_component_containing_rowSpace (data : ContainedRowSpaceData Point) :
+    ∃ component ∈ data.components, data.rowSpace ⊆ component := by
+  apply (isIrreducible_iff_sUnion_isClosed.mp data.rowSpace_irreducible)
+  · exact data.components_closed
+  · rw [← data.badCarrier_eq_sUnion_components]
+    exact data.rowSpace_subset_badCarrier
+
+end ContainedRowSpaceData
+
+end ContainedRowSpaceGeometry
+
+section RecursiveContainedGeometry
+
+/-- Geometric inputs for recursively contained polar flags.
+
+At each positive stage, the retained-marker locus has a row-space closure and a finite closed
+component ledger.  Each selected component is declared persistent, modular, or descending.  This
+structure differs from `PRSPolarInduction.RecursiveContainedInput` by deriving component selection
+from density, closedness, and irreducibility instead of accepting a preselected lower component. -/
+structure RecursiveContainedGeometryInput
+    (Stage GeometryPoint : ℕ → Type*)
+    [∀ j, TopologicalSpace (GeometryPoint j)] where
+  /-- Reduced recursively contained bad locus at each stage. -/
+  bad : ∀ j, Stage j → Prop
+  /-- Persistent component predicate at each stage. -/
+  persistent : ∀ j, Stage j → Prop
+  /-- Modular component predicate at each stage. -/
+  modular : ∀ j, Stage j → Prop
+  /-- Lower syndrome associated with one contraction step. -/
+  lower : ∀ j, Stage (j + 1) → Stage j
+  /-- Classification of the bottom bad locus. -/
+  bottomClassification :
+    ∀ {syndrome}, bad 0 syndrome → persistent 0 syndrome ∨ modular 0 syndrome
+  /-- Dense row-space and finite-component data attached to every positive-stage bad syndrome. -/
+  rowSpaceData :
+    ∀ j {syndrome}, bad (j + 1) syndrome →
+      ContainedRowSpaceData (GeometryPoint j)
+  /-- Classification of any component selected from the exact lower ledger. -/
+  componentClassification :
+    ∀ j {syndrome} (hbad : bad (j + 1) syndrome)
+      (component : Set (GeometryPoint j)),
+      component ∈ (rowSpaceData j hbad).components →
+      (rowSpaceData j hbad).rowSpace ⊆ component →
+      persistent (j + 1) syndrome ∨ modular (j + 1) syndrome ∨
+        bad j (lower j syndrome)
+  /-- A persistent lower classification lifts through one contraction. -/
+  persistent_lift :
+    ∀ j {syndrome}, persistent j (lower j syndrome) → persistent (j + 1) syndrome
+  /-- A modular lower classification lifts through one contraction. -/
+  modular_lift :
+    ∀ j {syndrome}, modular j (lower j syndrome) → modular (j + 1) syndrome
+
+namespace RecursiveContainedGeometryInput
+
+/-- Density and irreducibility select a classified lower component at every recursive step. -/
+theorem recursiveStep
+    {Stage GeometryPoint : ℕ → Type*}
+    [∀ j, TopologicalSpace (GeometryPoint j)]
+    (input : RecursiveContainedGeometryInput Stage GeometryPoint)
+    (j : ℕ) {syndrome : Stage (j + 1)}
+    (hbad : input.bad (j + 1) syndrome) :
+    input.persistent (j + 1) syndrome ∨ input.modular (j + 1) syndrome ∨
+      input.bad j (input.lower j syndrome) := by
+  obtain ⟨component, hcomponent, hrowSpace⟩ :=
+    (input.rowSpaceData j hbad).exists_component_containing_rowSpace
+  exact input.componentClassification j hbad component hcomponent hrowSpace
+
+/-- Forgetting the geometric witnesses gives the recursive logical interface used by polar
+induction.  Its recursive-step field is proved by component selection rather than supplied. -/
+def toRecursiveContainedInput
+    {Stage GeometryPoint : ℕ → Type*}
+    [∀ j, TopologicalSpace (GeometryPoint j)]
+    (input : RecursiveContainedGeometryInput Stage GeometryPoint) :
+    PRSPolarInduction.RecursiveContainedInput Stage where
+  bad := input.bad
+  persistent := input.persistent
+  modular := input.modular
+  lower := input.lower
+  bottomClassification := input.bottomClassification
+  recursiveStep := input.recursiveStep
+  persistent_lift := input.persistent_lift
+  modular_lift := input.modular_lift
+
+/-- Every recursively contained bad syndrome is persistent or modular once the exact dense
+row-space component ledger and the one-step lift classifications are supplied. -/
+theorem bad_implies_persistent_or_modular
+    {Stage GeometryPoint : ℕ → Type*}
+    [∀ j, TopologicalSpace (GeometryPoint j)]
+    (input : RecursiveContainedGeometryInput Stage GeometryPoint) :
+    ∀ j {syndrome : Stage j}, input.bad j syndrome →
+      input.persistent j syndrome ∨ input.modular j syndrome :=
+  input.toRecursiveContainedInput.bad_implies_persistent_or_modular
+
+end RecursiveContainedGeometryInput
+
+end RecursiveContainedGeometry
 
 section TwoCoordinateModularKernel
 
