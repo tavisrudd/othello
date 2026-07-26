@@ -10,6 +10,21 @@ Discovery companion:
 
 ## Current status
 
+**C649 mathematical test positive (2026-07-25): general stabilizer-AME
+full-Weyl rigidity.**  For every stabilizer
+\(\operatorname{AME}(2m,q)\) state with \(m\ge2\), the stabilizer labels
+supported on any \(m+1\) parties form a \(q^2\)-element subgroup and
+project bijectively onto the full local Pauli-label group at every retained
+party.  The reduced stabilizer projector is therefore full-Weyl diagonal
+up to arbitrary nonzero phase coefficients, so the existing axis theorem
+forces every factor of an LU intertwiner to be Clifford.  This works for
+arbitrary additive prime-power stabilizers; CSS, equal-phase, classical
+linearity, and MDS are unnecessary for rigidity.  The \(m=1\) Bell-pair
+boundary is sharp.  The dimension squeeze is kernel checked in
+`StabilizerAMESupport.lean`; the additive stabilizer-projector bridge and a
+claim-specific literature audit remain the promotion gates.  See
+`2026-07-25-c649-stabilizer-ame-full-weyl-rigidity.md`.
+
 **C647 closed (2026-07-25): post-C562 literature and novelty audit.**
 Every theorem family incorporated after C562 was compared against the
 closest located prior art.  The exact all-prime-power MDS/CSS LU rigidity

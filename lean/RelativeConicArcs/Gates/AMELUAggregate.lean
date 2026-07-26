@@ -1,6 +1,7 @@
 import RelativeConicArcs.Gates.AMELUDefinitions
 import RelativeConicArcs.AMELU.GenericMDS
 import RelativeConicArcs.AMELU.GenericDiagonalTensor
+import RelativeConicArcs.AMELU.StabilizerAMESupport
 import RelativeConicArcs.AMELU.GenericLURigidity
 import RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup
 import RelativeConicArcs.AMELU.AutomorphismExactSequence
@@ -22,7 +23,8 @@ import RelativeConicArcs.Gates.AMELUTransportDivisor
 
 This terminal imports the length-generic code, state, exact-MDS
 shortening, marginal covariance, arbitrary-arity diagonal-axis theorem,
-the full-Weyl diagonal intertwining criterion, unconditional LU-to-LC
+the stabilizer-AME supported-label dimension squeeze, the full-Weyl
+diagonal intertwining criterion, unconditional LU-to-LC
 terminal, projective Clifford finiteness, explicit
 product-unitary topological groups and scalar-phase quotient groups, and the
 closed scalar-torus exact sequences, finite discrete quotients, intrinsic

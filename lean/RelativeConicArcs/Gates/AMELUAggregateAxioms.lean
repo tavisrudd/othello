@@ -20,6 +20,8 @@ open RelativeConicArcs.AMELU
 #print axioms genericShorteningLocalLabel_bijective
 #print axioms diagonalTensorFlattening_pure_iff_coordinateAxis
 #print axioms coordinateAxes_preserved_of_diagonalTensor_equivalent
+#print axioms stabilizerAME_kernelToLocal_bijective
+#print axioms stabilizerAME_finrank_ker_eq_local
 #print axioms genericEqualPhaseState_three
 #print axioms genericLocallyUnitaryEquivalent_three
 #print axioms genericMarginalWeylCoefficient_equalPhaseState_cases
