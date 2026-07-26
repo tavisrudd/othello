@@ -73,6 +73,16 @@ open RelativeConicArcs.AMELU
 #print axioms genericPartyPermutationFactorSet_associativity
 #print axioms genericPartyPermutationFactorSet_change
 #print axioms genericPartyPermutationFactorSet_trivializable_iff_splits
+#print axioms GroupExtension.Splitting.trivializingCochain_coboundary
+#print axioms GroupExtension.Splitting.semidirectProductEquiv
+#print axioms GroupExtension.Splitting.existsUnique_inl_mul_splitting
+#print axioms GroupExtension.Splitting.natCard_middle
+#print axioms GroupExtension.Splitting.inl_conj_eq_inv
+#print axioms GroupExtension.Splitting.invertingInvolutionWitness
+#print axioms genericPartyPermutationGroupExtensionSplitting
+#print axioms genericPartyPermutationTrivializingCochain_coboundary
+#print axioms genericPartyPermutationSemidirectProductEquiv
+#print axioms genericPartyPermutation_natCard
 #print axioms oneLegQuantumMDSParameters_singletonEquality
 #print axioms isMDSCode2m_oneLegQuantumMDSParameters
 #print axioms coordinateAxes_reflected_by_linearEquiv
