@@ -1,8 +1,7 @@
-# Factorization memory in conic quotients
+# Quadratic recovery and cubic orientation in conic matching quotients
 
 This directory contains the manuscript
-*Factorization memory in conic quotients: the A3, B3, and H3 secant
-configurations*.
+*Quadratic recovery and cubic orientation in conic matching quotients*.
 
 The paper studies matching products modulo a conic ideal, their quotient
 ranks `3,6,10`, balanced-sheet recovery, cubic orientation, self-associated

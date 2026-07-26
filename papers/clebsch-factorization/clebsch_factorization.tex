@@ -22,9 +22,8 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\cC}{\mathcal{C}}
 
-\title{Factorization memory in conic quotients:\\
-the \texorpdfstring{$A_3$}{A3}, \texorpdfstring{$B_3$}{B3}, and
-\texorpdfstring{$H_3$}{H3} secant configurations}
+\title{Quadratic recovery and cubic orientation\\
+in conic matching quotients}
 \author{Tavis Rudd}
 \date{}
 
@@ -38,17 +37,17 @@ that the quotient by the conic equation nevertheless recovers the two
 factorization sheets from quadratic products of affine evaluation
 functions.  Within signed tensor moments, the first nonzero term is an
 anti-invariant cubic line that detects sheet interchange.  The
-homogenized \(2q\)-point configurations are self-associated and
+resulting \(14\)- and \(22\)-point configurations are self-associated and
 arithmetically Gorenstein, with that signed cubic as the inverse system
-of an Artinian reduction.  The
-corresponding difference spans have dimensions \(3,6,10\) for
-\(A_3/\F_5\), \(B_3/\F_7\), and \(H_3/\F_{11}\); in type \(H_3\), the
-only missing Fischer layer is \(Q\mathcal H_2\).  The base-choice cocycle
+of an Artinian reduction.  For the \(A_3/\F_5\), \(B_3/\F_7\), and
+\(H_3/\F_{11}\) configurations, the difference spans have dimensions
+\(3,6,10\); in type \(H_3\), the only missing Fischer layer is
+\(Q\mathcal H_2\).  The base-choice cocycle
 generates \(H^1(\operatorname{PGL}_2(11),M_8)\), so the \(H_3\) affine
 quotient has no equivariant origin.  After restriction to
 \(\operatorname{PSL}_2(11)\), its top-harmonic homogeneous extension is
 the nonsplit quotient of the projective cover of the trivial module.
-After a chosen \(A_4\)-refinement, six incidence profiles recover the exact
+After a chosen \(A_4\)-refinement, six incidence profiles recover the
 double-coset label in
 \(A_4\backslash\operatorname{PGL}_2(11)/A_5\), not in general an
 individual matching.
@@ -77,7 +76,8 @@ quotients form an affine configuration.  In the balanced cases,
 Hadamard squares recover an unordered bipartition of that configuration;
 the first signed tensor that survives is cubic and orients the two
 parts.  A selected double-coset incidence map then compresses the
-\(H_3\) configuration to six profiles without identifying any labels.
+\(H_3\) configuration to six profiles that recover the double-coset
+labels, though generally not an individual matching.
 
 \begin{center}
 \small
@@ -104,15 +104,15 @@ incidence data.
 Let the $A_3$, $B_3$, and $H_3$ matching configurations be the finite
 matching orbits defined in Section~\ref{sec:rank-three}.  Then:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
-\item canonically scaled matching products have equal restriction to the
-conic, and their conic-ideal quotients have difference ranks $3$, $6$, and
-$10$;
+\item matching products scaled as in Section~\ref{sec:matching-products}
+have equal restriction to the conic, and their conic-ideal quotients have
+difference ranks $3$, $6$, and $10$;
 \item in the $B_3$ and $H_3$ cases, the two factorization sheets are,
 up to interchange, the unique complementary halves with equal first and
 second tensor moments;
-\item the signed moments vanish through degree two, while a nonzero
-degree-three tensor transforms by the character that exchanges the
-sheets;
+\item in those two cases, the signed moments vanish through degree two,
+while a nonzero degree-three tensor transforms by the character that
+exchanges the sheets;
 \item the homogenized \(B_3\) and \(H_3\) configurations are
 self-associated with Gorenstein coordinate rings; the signed cubic is
 the Macaulay inverse system of their Artinian reductions;
@@ -131,18 +131,6 @@ nonsplit layer of a projective cover: Corollary~\ref{cor:h3-homogeneous-projecti
 identifies the top-harmonic homogeneous extension with
 \(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\).  The full homogeneous
 module has one additional trivial radial summand.
-
-The exceptional \(H_3\) configuration arose from a normal-play
-finite-projective arc game and subsequently led to coding and quantum
-applications.  Its game-theoretic origin and decoding rigidity are
-developed in the companion rigidity paper
-\cite{RuddRigidity2026}; its MDS--AME and transversal-Clifford aspects
-are treated separately in \cite{RuddAMELU2026}, using the standard
-arc--MDS--AME dictionary \cite{RaissiEtAl2017}.  Prescribed-hole arcs
-are developed in \cite{RuddPrescribedHoles2026}.  Beyond redundancy
-four, the same syndrome-as-projective-geometry viewpoint is developed
-through Hankel witness systems and coherent polar recognition
-\cite{RuddPRS2026}.  None of those results is a hypothesis here.
 
 \section{Conic matching products}
 \label{sec:matching-products}
@@ -238,16 +226,7 @@ perfect matching or every intermediate switch.
 
 We now select three finite matching orbits.  This selection is discrete
 input: Proposition~\ref{prop:matching-secant-quotient} applies to every
-matching, but it does not distinguish the Coxeter orbits.  Maximum
-matchings arise more generally as equality objects in prescribed-hole
-defect theory, where concurrent secants form a matching design and,
-dually, a star--matching incidence realization
-\cite{RuddPrescribedHoles2026}.  Away from equality, the same defect
-controls both the edge count and the secant vertex-cover number of the
-graph formed by nonmaximum concurrence cliques.  This supplies an
-incidence-geometric route toward the maximum-matching regime.  The
-comparison is combinatorial: here the matched endpoints lie on the
-conic, and the Coxeter orbits are additional finite geometric input.
+matching, but it does not distinguish the Coxeter orbits.
 Here and below, ``rank three'' refers to Coxeter rank.  It does not
 refer to the dimensions of the conic-ideal quotient spaces, which are
 \(3,6,10\).
@@ -1146,14 +1125,6 @@ matching--parent bijection from
 Theorem~\ref{thm:six-profile-reconstruction}.
 \end{proof}
 
-Perfect-matching incidence also survives in the associated six-party
-state: companion work converts simultaneous concurrence in the arc and
-its Gale dual into a local-unitary marginal-moment invariant and uses it
-to separate the \(H_3\) state from the GRS locus
-\cite{RuddAMELU2026}.  That invariant is a different quotient: it
-forgets an \(A_5\) orientation, whereas the cubic here detects the
-factorization-sheet character.
-
 This pointwise classifier does not contradict the failure of a linear
 sheet sign in Section~\ref{sec:balanced}.  The map \(D\) uses zero
 incidences with the selected scalar-\(K\) refinement; it is not a linear
@@ -1442,7 +1413,7 @@ to $-u$, and hence exchanges the two roots.  The remaining
 factorizations follow by direct substitution.
 \end{proof}
 
-\begin{theorem}[Rank-three arithmetic gluing]
+\begin{theorem}[Marker specialization and \(H_3\) arithmetic gluing]
 \label{thm:rank-three-arithmetic-gluing}
 For these arithmetic representatives of the rank-three matching
 configurations, the following hold.
@@ -1479,8 +1450,9 @@ The classical subgroup names use the standard subgroup structure of
 $\operatorname{PGL}_2(11)$ \cite{Atlas1985,Giudici2007}.
 
 \begin{proof}
-By definition, the two roots in the \(A_3\) row of (7.2) have the same
-matching value.  The two values in the \(B_3\) row are exchanged by
+Part (a) records the specialization data in (7.2).  Its two
+\(A_3\) roots have the same matching value.  The two values in the
+\(B_3\) row are exchanged by
 \(x\mapsto-x\), and the two values in the \(H_3\) row are exchanged by
 \[
  x\longmapsto\frac{x-1}{x+1}.
@@ -1529,8 +1501,8 @@ equivariant origin.  Its top-harmonic homogeneous extension restricts to
 \[
 P(\mathbf1)/\operatorname{soc}P(\mathbf1),
 \]
-and the radical of this identification is the canonical nine-space
-bridge to \(M_8\downarrow_{\operatorname{PSL}_2(11)}\).  The full
+and its radical submodule identifies canonically with
+\(M_8\downarrow_{\operatorname{PSL}_2(11)}\).  The full
 homogenization adds the trivial radial summand.
 
 The nonlinear record is sharper.  In the balanced \(B_3\) and \(H_3\)
@@ -1718,8 +1690,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{5c2982b8cf73143e33f28c4e26352a75d0195b}\\[-2pt]
-\texttt{9404fce65e3ba73a6cc86bbdbb}.
+\small\texttt{89cf660b68dd4ed113a882d18e5dd5b800826e}\\[-2pt]
+\texttt{f102b31d65928119c7c43373c9}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, eight evidence
@@ -1919,30 +1891,6 @@ points fails to be arithmetically Gorenstein,
 T.~Rudd,
 \newblock \emph{Deep-hole rigidity of the Clebsch hexagon code},
 \newblock working paper, 2026.
-
-\bibitem{RuddAMELU2026}
-T.~Rudd,
-\newblock \emph{Local-unitary rigidity and transversal Clifford groups
-for MDS--CSS AME states},
-\newblock working paper, 2026.
-
-\bibitem{RuddPrescribedHoles2026}
-T.~Rudd,
-\newblock \emph{Exact prescribed-hole defect and matching-design rigidity
-for projective arcs, with applications to arcs complete outside a conic},
-\newblock companion manuscript, 2026.
-
-\bibitem{RuddPRS2026}
-T.~Rudd,
-\newblock \emph{Deep holes of projective Reed--Solomon codes beyond
-redundancy four: cubic pencils and coherent polar flags},
-\newblock working paper, 2026.
-
-\bibitem{RaissiEtAl2017}
-Z.~Raissi, C.~Gogolin, A.~Riera, and A.~Ac\'in,
-\newblock Constructing optimal quantum error correcting codes from
-absolutely maximally entangled states,
-\newblock arXiv:1701.03359, 2017.
 
 \bibitem{BraunNebe2025}
 T.~Braun and G.~Nebe,

@@ -11,12 +11,12 @@
   "trust_manifest_sha256": "97e683ae622257464bdd2bde8ba5f6c3b7d6b338eeaa4d6e1e2c3f3278ed672d",
   "runner_sha256": "2dbdf38e732fdaa40c2aef9e4b9917dda5c915f95ba3df883f8ba06414b04ccf",
   "review_sources_sha256": {
-    "normalized_manuscript": "02b221135ee38de00edb4de843b014a3d021146ccd0f16eac8e14fb923a9cc2a",
-    "normalized_statement_identity": "133d0cf962f49a219d8c409477c6f531cbb0efe362bd3fcc5d03da7627ba1db8",
+    "normalized_manuscript": "0b8f22d56efa63527b046c02fa9863b42d1b6276e8fd9b44d164e6e5c94eb0e7",
+    "normalized_statement_identity": "779cfcd9b522bd8f70267a8f795af27f96b42ac5731f67fb0eb171f58c545eb5",
     "statement_extractor": "ebc02b9ce0c8562a330845b72033453be4457e9590aacf3b937a9d7424f13ba9",
-    "paper_readme": "aaf633e6c91a0b915b3601f80e7f2078688032b75913efb7911f4027d28eada8",
+    "paper_readme": "47977b71c2393127780035ac48d72cf0f5126ccbf184dbeff25b3c3086a4f245",
     "paper_makefile": "26ec6e218e3c11e3913a36a9481277b1a4f63b68ac5dc21640d322b3da5bf681",
-    "verification_readme": "5d6eacf71308516ab2fbc0fe38fb44acdc8daff6e5cbdae5607306d515a6e594",
+    "verification_readme": "d876d2efb2d55148abc7cb585c973418638a286417a4fbbdc0be6dc846616045",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gate": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
     "guarded_lean": "d8e2a4642519aed0290aecf3ff39eab802be45da6323a18aa2bbc2ad07125189"

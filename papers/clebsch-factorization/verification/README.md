@@ -1,7 +1,7 @@
-# Verification of the conic-ideal quotient paper
+# Verification of the conic matching quotient paper
 
-This directory is the aggregate verification surface for *Factorization
-memory in conic quotients: the A3, B3, and H3 secant configurations*. It
+This directory is the aggregate verification surface for *Quadratic recovery
+and cubic orientation in conic matching quotients*. It
 separates four kinds of support:
 
 - proofs given in the manuscript;
