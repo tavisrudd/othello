@@ -1529,8 +1529,17 @@
       "last": 666,
       "purpose": "q16 Redei quotient and K8 chord-resultant exclusion",
       "sequence": 170
+    },
+    {
+      "count": 1,
+      "first": 667,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 667,
+      "purpose": "q16 multi-base conic-involution boundary expansion",
+      "sequence": 171
     }
   ],
-  "next_id": 667,
+  "next_id": 668,
   "schema": "codex-task-id-allocations-v1"
 }
