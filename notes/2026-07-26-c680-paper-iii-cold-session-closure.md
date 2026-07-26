@@ -338,6 +338,11 @@ golden configurations are consequently the complete reduced
 scheme-theoretic fibre with residue algebra \(\mathbf Q(\sqrt5)\); a local
 generator of \(\mathcal O(3)\) makes the square-unit specialization step
 explicit and yields \(c=5\).
+An `ej` closeout records the conceptual dividend in the introduction:
+the factor \(5\) is precisely the descent obstruction to choosing one of
+the two conjugate icosahedral parents (or its Clebsch chart) over
+\(\mathbf Q\).  This is an interpretation of the proved fibre, not a new
+claim or evidence route.
 
 The release artifact is now paper-local.  The arithmetic certificate was
 reduced to the displayed golden configurations, all twenty three-point
