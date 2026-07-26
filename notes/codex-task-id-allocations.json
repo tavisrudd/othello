@@ -1295,8 +1295,17 @@
       "last": 637,
       "purpose": "analyze the secant-arrangement coupling to the quadratic hull of the ordinary-uncovered locus",
       "sequence": 144
+    },
+    {
+      "count": 2,
+      "first": 638,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 639,
+      "purpose": "carrier-conductor excess beyond forced secant singularities; odd-size tangent-twisted carrier",
+      "sequence": 145
     }
   ],
-  "next_id": 638,
+  "next_id": 640,
   "schema": "codex-task-id-allocations-v1"
 }
