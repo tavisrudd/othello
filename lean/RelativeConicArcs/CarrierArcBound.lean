@@ -586,7 +586,73 @@ theorem homogeneousLinearPolynomial_isRelPrime_of_binaryCoefficientDeterminant_n
   simp [binaryLinearCoefficientDeterminant]
   ring
 
+/-- Pairwise nonzero restricted coefficient determinants give a pairwise relatively prime family
+of restricted homogeneous linear factors. -/
+theorem pairwise_isRelPrime_planeLineRestrictedLinearFactors_of_determinant_ne_zero
+    {ι : Type*}
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K)
+    (hdet :
+      Pairwise fun i j =>
+        binaryLinearCoefficientDeterminant
+          (planeLineRestrictedCoefficients lineCoordinates (covector i))
+          (planeLineRestrictedCoefficients lineCoordinates (covector j)) ≠ 0) :
+    Pairwise
+      (IsRelPrime on fun i =>
+        homogeneousLinearPolynomial
+          (planeLineRestrictedCoefficients lineCoordinates (covector i))) := by
+  intro i j hij
+  exact
+    homogeneousLinearPolynomial_isRelPrime_of_binaryCoefficientDeterminant_ne_zero
+      (hdet hij)
+
 end BinaryLinearRelativePrimality
+
+section RestrictedProjectiveFactorProduct
+
+variable {K ι : Type*} [Field K] [Fintype ι]
+
+/-- For plane covectors restricted to one parametrized projective line, nonzero pairwise
+coefficient determinants and square agreement at the canonical restricted zeros make the product
+of the actual restricted factors divide the root difference. -/
+theorem fintypeProd_planeLineRestrictedLinearFactors_dvd_sub_of_projectiveZero_sq_eq
+    [ExpChar K 2]
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K)
+    (hne :
+      ∀ i, planeLineRestrictedCoefficients lineCoordinates (covector i) ≠ 0)
+    (hdet :
+      Pairwise fun i j =>
+        binaryLinearCoefficientDeterminant
+          (planeLineRestrictedCoefficients lineCoordinates (covector i))
+          (planeLineRestrictedCoefficients lineCoordinates (covector j)) ≠ 0)
+    (target current : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (htarget : target.IsHomogeneous degree)
+    (hcurrent : current.IsHomogeneous degree)
+    (hsquareAgree :
+      ∀ i,
+        let restricted :=
+          planeLineRestrictedCoefficients lineCoordinates (covector i)
+        MvPolynomial.eval ![restricted 1, -restricted 0] (target ^ 2) =
+          MvPolynomial.eval ![restricted 1, -restricted 0] (current ^ 2)) :
+    (∏ i,
+        planeLineRestriction lineCoordinates
+          (homogeneousLinearPolynomial (covector i))) ∣
+      target - current := by
+  have hcoprime :
+      Pairwise
+        (IsRelPrime on fun i =>
+          homogeneousLinearPolynomial
+            (planeLineRestrictedCoefficients lineCoordinates (covector i))) :=
+    pairwise_isRelPrime_planeLineRestrictedLinearFactors_of_determinant_ne_zero
+      lineCoordinates covector hdet
+  have hdiv :=
+    fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_sq_eq
+      (fun i => planeLineRestrictedCoefficients lineCoordinates (covector i))
+      hne hcoprime target current degree htarget hcurrent hsquareAgree
+  simpa only [planeLineRestriction_homogeneousLinearPolynomial] using hdiv
+
+end RestrictedProjectiveFactorProduct
 
 section CoordinateHyperplaneRestriction
 
