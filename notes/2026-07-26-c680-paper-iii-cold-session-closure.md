@@ -486,19 +486,65 @@ The same PDF-only metadata audit found:
 Thus the fresh PDF gate is green, while submission readiness remains
 `NO-GO` solely on the three missing user-controlled metadata fields.
 
+## Requested grading and expanded-evidence review
+
+The PDF-only grade pass assigned overall scientific and manuscript grades
+of `B+`.  Its strongest marks were `A+` for scope discipline, `A` for
+typesetting, and `A-` for theorem architecture, exposition, and the visible
+trust boundary.  It assigned `B+` for significance, originality, rigor,
+literature positioning, and specialist-journal readiness; `B` for
+self-containedness; `B-` for broad-journal readiness; and `D` for missing
+submission metadata.
+
+A separate pass applying `papers/style-guide.md` returned `REVISE` and an
+overall exposition grade of `B+`, with no submission-blocking expositional
+finding.  Its five material-minor recommendations were to add a causal proof
+roadmap, separate the finite-field specialization from the headline theorem,
+consolidate repeated scope boundaries, gloss the disciplinary interfaces,
+and regularize the configuration/sheet terminology.
+
+The requested source-and-Lean expansion then found a mathematical defect
+that the PDF-only verdict missed.  In
+`sections/02-orientation-cover.tex`, the local argument at lines 188--212 is
+sound after the standard branch-locus justification: proper plus
+quasi-finite permits a finite neighborhood, normal finite birational models
+agree, and the local generator of \(\mathcal O(3)\) makes specialization
+legitimate.  But lines 168--186 write \(d/J_0\) as though the homogeneous
+sextic \(J_0\) were already a rational function and incorrectly conclude
+that the resulting divisor class is two-torsion.  The required repair is to
+choose a rational section \(s\) of \(\mathcal O(3)\), set
+\(j=J_0/s^2\in K^\times\), and run the square-class argument with \(j\);
+equivalently, formulate the double cover through
+\(\mathcal O\oplus\mathcal O(-3)\).
+
+The expanded review therefore revised rigor from `B+` to `B`, architecture
+and reproducibility from `A-` to `A`, kept the scientific grade at `B+`,
+and revised the manuscript grade from `B+` to `B`.  The inspected Lean files
+prove only the abstract involutive odd-unit splitting and the
+four-dimensional Petersen \((-2)\)-eigenspace/pair-sum equivalence.  They do
+not cover the incidence scheme, square class, local fibre comparison,
+Clebsch charts, harmonic embedding, or spherical moments, exactly matching
+the manifest's `formal_coverage: none claimed` boundary.
+
+Accordingly, the fresh PDF-only `GO` remains an accurate record of that
+blind review, but it no longer closes the mathematical release gate.
+Submission is `NO-GO` pending the square-class repair, a refreshed PDF-only
+review of the repaired bytes, the immutable locator, and affiliation/contact
+metadata.
+
 
 | feature | status | closure gate |
 |---|---|---|
 | factor-\(13\) Gram normalization | settled | preserve \(G=K/13\) and exact replay |
 | Clebsch chart inside \(H\) | settled by correction and deep closeout | exact \(E\)-defined conjugate charts, intersection \(E\cdot xyz\), completed conductor model, and canonical map to the incidence normalization; no false rational inclusion |
-| extraction of \(c=5\) from one fibre | settled twice | finite-etale incidence comparison and intrinsic splitting class of the completed chart-union model |
+| extraction of \(c=5\) from one fibre | reopened at the global square-class step | choose \(s\in\operatorname{Rat}\mathcal O(3)\), replace \(J_0\) by \(J_0/s^2\in K^\times\), and revalidate the local specialization |
 | abstract arithmetic--harmonic comparison | settled | unique projective \(A_5\)-map; \(\sigma_3\)-normalization fixes the scalar; no ambient map claimed |
 | artifact self-containment | settled | ordinary and isolated-package replay green |
 | statement-to-ledger identity | settled | label/clause map and frozen row digest |
 | Lean coverage | settled | explicit `none claimed` |
 | standalone harmonic novelty | settled subtractively | unlicensed “new” deleted |
 | immutable locator and author metadata | external blocker | user-supplied affiliation, contact email, and immutable artifact locator |
-| fresh context-free PDF-only referee read | settled | independent `GO`; no blocker or material minor on PDF SHA-256 `4f303beeea42979abea013b01c5c907021519d18b5d859cd7b1816716e7e6b36` |
+| fresh context-free PDF-only referee read | superseded as a release gate | independent `GO` on PDF SHA-256 `4f303beeea42979abea013b01c5c907021519d18b5d859cd7b1816716e7e6b36`, followed by source-aware discovery of the \(\mathcal O(6)\) trivialization defect |
 
 Vibe check: the mathematical repair is stronger than the entering draft
 because it discovered and removed a false descent claim while preserving
