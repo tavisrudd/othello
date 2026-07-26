@@ -91,7 +91,15 @@
    \(r(\nu)=46\), and the two secant-incidence equations then force exactly 46 tangent, 2070
    bisecant, and 2070 external arc secants. The complete arithmetic deduction, including
    \(I_C(A)=4186\), is the Lean theorem `exceptional_candidate_secant_type_cards` in
-   `RelativeConicArcs.EqualityConsequences`.
+   `RelativeConicArcs.EqualityConsequences`. A tangent arc secant then supplies two commuting
+   involutions of the conic. They preserve the 91 maximum-index parameters, and each of them and
+   their product fixes only the tangent contact; permutation sign gives a contradiction. Lean
+   constructs the standard-conic involutions in `ConicSecantInvolution`, proves the invariant-set
+   bridge in `ZeroDefectConicInvariance`, and checks the terminal
+   `TangentPairFourGroup.no_exceptional_candidate_standardConic`. The reduction to the standard
+   conic is the usual projective normalization in the manuscript. The preceding
+   Ramanujan--Nagell classification is independently Lean-formalized in Banwait's package rather
+   than imported into this repository's gate.
 8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened
    manuscript. Its exact \(q\)-hyperplane threshold and checker remain supplementary results; no
    paper theorem depends on them.
