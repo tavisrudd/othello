@@ -1,13 +1,13 @@
 # Clebsch rigidity paper
 
-Working root for the focused rigidity/decoder manuscript provisionally titled
-*Deep-hole rigidity of the Clebsch hexagon code*.
+Working root for the focused rigidity/decoder manuscript titled
+*A conic deep-hole syndrome locus characterizes the Clebsch code*.
 
 - Scope owner: the focused Clebsch rigidity paper and its release surface.
 - Base: the focused manuscript snapshot at
   `7d258dcd6cda9f54c330d4b705d553a975749014`.
 - Scope: rigidity, quantitative gaps, decoding, automorphisms, support bipartition,
-  Brianchon reconstruction, `q=11` uniqueness, the `4 <= k <= 7` classification,
+  Brianchon reconstruction, `q=11` uniqueness, the `4 <= k <= 8` classification,
   and their verification architecture.
 - Boundary: no factorization-memory, reflection-arrangement, or later-passage
   theorem or verification dependency.
@@ -23,15 +23,18 @@ mega-paper fallback.
 
 The Paper I verification surface is under `verification/`. It contains the
 nineteen-row statement identity, trust manifest, validator, clean release
-runner, unit tests, and deterministic successful output. The ten selected
+runner, unit tests, and deterministic successful output. The eleven selected
 exact checkers and pinned Nix environment are release-local; the aggregate formal gate is
-`../../lean/RelativeConicArcs/Gates/ClebschRigidityTrust.lean`.
+`RelativeConicArcs/Gates/ClebschRigidityTrust.lean` in the shared formal
+repository.
 
-From this directory, with the separately checked-out flattened formal
-repository supplied as `--lean-root`, run:
+The formal source is distributed separately at
+`https://github.com/tavisrudd/finitegeom` and pinned to the commit recorded
+in the manuscript. From this directory, supply a checkout of that repository
+as `--lean-root`:
 
 ```text
 nix develop --command \
   python3 verification/verify_release.py \
-  --lean-root /path/to/finitegeom
+  --lean-root /absolute/path/to/finitegeom
 ```

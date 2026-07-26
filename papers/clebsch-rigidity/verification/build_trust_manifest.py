@@ -68,10 +68,13 @@ TERMINALS = {
 }
 
 CLASSICAL_DYE = [
-    "Dye 1991, Theorems 1 and 3, pages 275--278",
+    "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and "
+    "Theorem 3, page 278",
 ]
 CLASSICAL_DYE_RIGIDITY = [
-    "Dye 1991, Theorems 1 and 3, pages 275--278",
+    "Dye 1991, Section 2.2, page 275, for the ten-point bound, "
+    "Theorem 1(ii), page 275, for equality classification, "
+    "and Theorem 3, page 278, for the stabilizer",
     "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity",
 ]
 CLASSICAL_DYE_ASSOCIATED_CONIC = [
@@ -80,7 +83,8 @@ CLASSICAL_DYE_ASSOCIATED_CONIC = [
 ]
 CLASSICAL_EDGE_DYE = [
     "Edge 1956, Sections 29--32",
-    "Dye 1991, Theorems 1 and 3, pages 275--278",
+    "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and "
+    "Theorem 3, page 278",
 ]
 CLASSICAL_CODE = [
     "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
@@ -351,9 +355,9 @@ def components_by_row(
             ],
         ),
         12: (
-            "The manuscript obtains the twelve-point count from Dye's Brianchon value and the universal defect formula, then identifies the invariant orbit; Lean and the exhaustive replay check the displayed witness independently.",
+            "The manuscript obtains the twelve-point count from Dye's Brianchon value and the universal defect formula, then identifies the conic by chord exteriority; Lean and the exhaustive replay check the displayed witness independently.",
             [
-                conceptual("Brianchon count, point orbit, and code--arc dictionary", CLASSICAL_DYE + CLASSICAL_CODE, "The manuscript routes the count through row 24 and the conic identification through row 11."),
+                conceptual("Brianchon count, chord exteriority, and code--arc dictionary", CLASSICAL_DYE + CLASSICAL_CODE, "The manuscript routes the count through row 24 and proves conic equality directly from the exteriority of all fifteen chords."),
                 lean("witness MDS code and projective distance-three locus", ["code_locus"], axioms),
                 replay("independent coordinate witness", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay verifies the displayed Clebsch class and uncovered conic.", direct_coordinates),
             ],
@@ -593,7 +597,9 @@ def build_manifest() -> dict[str, object]:
             file_evidence("paper", "verification/README.md"),
         ],
         "lean_repository": {
+            "distribution": "separate shared Git repository",
             "url": "https://github.com/tavisrudd/finitegeom",
+            "path": ".",
             "commit": PINNED_LEAN_COMMIT,
         },
         "reproducibility_environment": {
@@ -615,7 +621,7 @@ def build_manifest() -> dict[str, object]:
             "command": (
                 "nix develop --command python3 "
                 "verification/verify_release.py "
-                "--lean-root /path/to/finitegeom"
+                "--lean-root /absolute/path/to/finitegeom"
             ),
             "entry_point": file_evidence(
                 "paper", "verification/verify_release.py"

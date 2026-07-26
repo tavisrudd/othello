@@ -4,7 +4,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278",
+            "Dye 1991, Section 2.2, page 275, for the ten-point bound, Theorem 1(ii), page 275, for equality classification, and Theorem 3, page 278, for the stabilizer",
             "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity"
           ],
           "route": "conceptual-cited-inputs",
@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 77",
+      "paper_location": "source line 76",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -107,7 +107,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group identification",
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 330",
+      "paper_location": "source line 354",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -180,13 +180,13 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278",
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278",
             "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
             "Hirschfeld 1998, the plane arc/covering-radius dictionary"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "Brianchon count, point orbit, and code--arc dictionary",
-          "unconditional_remainder": "The manuscript routes the count through row 24 and the conic identification through row 11."
+          "subclaim": "Brianchon count, chord exteriority, and code--arc dictionary",
+          "unconditional_remainder": "The manuscript routes the count through row 24 and proves conic equality directly from the exteriority of all fifteen chords."
         },
         {
           "lean": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 397",
+      "paper_location": "source line 421",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -268,7 +268,7 @@
         "kind": "theorem-environment",
         "sha256": "5fb600094c48e7dc65ea98d8ca215de2b2ea89a0109f5ae6760508a99396092d"
       },
-      "trust_boundary": "The manuscript obtains the twelve-point count from Dye's Brianchon value and the universal defect formula, then identifies the invariant orbit; Lean and the exhaustive replay check the displayed witness independently."
+      "trust_boundary": "The manuscript obtains the twelve-point count from Dye's Brianchon value and the universal defect formula, then identifies the conic by chord exteriority; Lean and the exhaustive replay check the displayed witness independently."
     },
     {
       "cited_inputs": [
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 414",
+      "paper_location": "source line 438",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -291,7 +291,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "deep-hole orbit deduction",
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 451",
+      "paper_location": "source line 477",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 502",
+      "paper_location": "source line 528",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,13 +498,13 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 584",
+      "paper_location": "source line 606",
       "route": "mixed",
       "row": 16,
       "source": {
         "id": "lem:six-arc-line-bound",
         "kind": "theorem-environment",
-        "sha256": "840ab87722acfa9044ed68465bc83f8d3cd88b92da764d40df94ac3d7e9aa714"
+        "sha256": "94320face4dcbdf85e4c61f5941df4dd99532ad671f120e2c7d3a614da5d90be"
       },
       "trust_boundary": "The line bound is a complete human combinatorial proof; the displayed conic-inscribed values are backed by the exact normalized census."
     },
@@ -512,7 +512,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "degenerate-conic reduction and Dye equality boundary",
@@ -575,13 +575,13 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 627",
+      "paper_location": "source line 119",
       "route": "mixed",
       "row": 17,
       "source": {
         "id": "thm:rigidity",
         "kind": "theorem-environment",
-        "sha256": "ee582584c018b6697f310e9d87bb4147d34c952aa4a02725871de6e38b2ef545"
+        "sha256": "49282b0388745dbd71076010b8e0db376255306a903eb723e76f174285266f69"
       },
       "trust_boundary": "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences."
     },
@@ -619,7 +619,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 733",
+      "paper_location": "source line 748",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -635,13 +635,13 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 758",
+      "paper_location": "source line 773",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
         "id": "cor:monomial-characterization",
         "kind": "theorem-environment",
-        "sha256": "0da146e0b5f4e65e83bbab3808efceecd1b0ea65e18e0e51322f0d2f500e1b6a"
+        "sha256": "0e372d3c2be48fc0f15e7e0eaa9a1c95f467f972daab8ebdcab7afe6da92730d"
       },
       "trust_boundary": "This is a conceptual corollary of the code--arc dictionary and the preceding replay-backed proposition.",
       "unconditional_remainder": "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18."
@@ -669,7 +669,7 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 788",
+      "paper_location": "source line 805",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -682,10 +682,10 @@
     {
       "cited_inputs": [
         "Edge 1956, Sections 29--32",
-        "Dye 1991, Theorems 1 and 3, pages 275--278"
+        "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 901",
+      "paper_location": "source line 918",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -701,7 +701,7 @@
         {
           "cited_inputs": [
             "Edge 1956, Sections 29--32",
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "decoder reconstruction",
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 951",
+      "paper_location": "source line 968",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -781,7 +781,7 @@
         {
           "cited_inputs": [
             "Edge 1956, Sections 29--32",
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "intrinsic support bipartition",
@@ -825,7 +825,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 967",
+      "paper_location": "source line 984",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -847,7 +847,7 @@
         },
         {
           "cited_inputs": [
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "Clebsch q=11 specialization",
@@ -942,13 +942,13 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 204",
+      "paper_location": "source line 227",
       "route": "mixed",
       "row": 24,
       "source": {
         "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "b60903009be018f9bc160c6e8a45755919f99e681fda978f383f0f026258a5d9"
+        "sha256": "51dfa52ca7f31c577fecf5e22f87f740805a341288233d172de15eb1075d5b1b"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -958,7 +958,7 @@
           "cited_inputs": [
             "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
             "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "Sylvester graph interpretation and q=11 rigidity dependency",
@@ -1030,7 +1030,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1056",
+      "paper_location": "source line 1074",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1108,13 +1108,13 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1083",
+      "paper_location": "source line 1101",
       "route": "mixed",
       "row": 26,
       "source": {
         "id": "prop:clebsch-family-uncovered",
         "kind": "theorem-environment",
-        "sha256": "314d254fbf78b34c2ba3bb2453f810017225e88ee23feb52cd2c38d80d024c3d"
+        "sha256": "4c80b78f56a7acb84cafc60cbbd7b2995489098be1c2304ddad496e25ebed5dc"
       },
       "trust_boundary": "The all-field formula is conceptual; q=19 is checked by an independent exact specialization."
     },
@@ -1124,7 +1124,7 @@
           "cited_inputs": [
             "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
             "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
-            "Dye 1991, Theorems 1 and 3, pages 275--278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "small-arc reductions, k=6 dependency, and k=8 field sieve",
@@ -1274,7 +1274,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1150",
+      "paper_location": "source line 1173",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1318,7 +1318,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 673",
+      "paper_location": "source line 688",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1331,24 +1331,26 @@
   ],
   "lean_repository": {
     "commit": "6d4766d1ea5e9a36f1a507e549c223416a6b506f",
+    "distribution": "separate shared Git repository",
+    "path": ".",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "b3af5a3dba9815878422efd20df2c809a23ffa8593ec1226080ffbd3d760cf1b"
+    "sha256": "7df74ffe548f10e0dbe70e240f4219754e38b218217c5f0775f10e6ff1ecfa4a"
   },
-  "manuscript_sha256": "d7e08a065243a1b63bf5a3cac66b7805d7e4206b0b7e9eff9b3feb4e7fe32dfc",
+  "manuscript_sha256": "0e2ac618964f8cf32f982d5fc74eaf974b846935e09864f5b53a0a2214c90b8a",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "436e097343d2c64c2a2c2ca277933a79c9e9c3bf03c7ee752d83891205579040"
+      "sha256": "7462b7962b2f19abbc1c712b65caf790893b4ba09a2cd33f313d33dc1ebf3c81"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "c4a89a3ee88f231e10176852d4cbe5d54188b120da974809403cfe376060a171"
+      "sha256": "48dd86de0862c12bea1f8fdc16ed5cf25752b09adf9f468c224ca30afbb9425e"
     }
   ],
   "reproducibility_environment": {
@@ -1378,7 +1380,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "9246d5f0f5cf267990b7260fa40d3f40ec984ef96a2535d45f6c0bbd34828854"
+    "sha256": "d6c3a2b6938a4b461941dd42060608d8028d1027591b78595f2c66cc112c978c"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1592,7 +1594,7 @@
         "timeout_seconds": 1800
       }
     ],
-    "command": "nix develop --command python3 verification/verify_release.py --lean-root /path/to/finitegeom",
+    "command": "nix develop --command python3 verification/verify_release.py --lean-root /absolute/path/to/finitegeom",
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
@@ -1612,12 +1614,12 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "da2c2bb8fb1b7d92a1487f59fb6d69ccf56c0d38bb83c0b1c6d1de2a94b07f2a"
+        "sha256": "04bad8c3896ab0f706beae7648cc2d7b77d8758526c7ddc05681dcf08e8d98d8"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "6cfdae7307039a605dc797205c71908f251df56e60ea18a110859380a9ffc5a7"
+        "sha256": "445e06ad0818f18962dd72134d11d5a81c48c33c6b54000bbbe13d921e5aa1c8"
       },
       {
         "path": "verification/test_verification_tools.py",

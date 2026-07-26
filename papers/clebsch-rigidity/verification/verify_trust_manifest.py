@@ -12,6 +12,7 @@ from typing import NoReturn
 
 
 SCHEMA = "clebsch-rigidity-trust-manifest-v1"
+LEAN_REPOSITORY_URL = "https://github.com/tavisrudd/finitegeom"
 REQUIRED_CITATION_FRAGMENTS = {
     17: ("Dye 1991",),
     25: ("Dye 1991", "Brouwer--Cohen--Neumaier", "Abiad--Jabal Ameli--Reijnders"),
@@ -52,6 +53,23 @@ def release_surface_sha256(manifest: dict[str, object]) -> str:
         projection, separators=(",", ":"), sort_keys=True
     ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def validate_displayed_digest(
+    manuscript_text: str,
+    artifact: Path,
+    artifact_label: str,
+) -> None:
+    pattern = re.compile(
+        rf"The SHA-256 digest of\s+\\path\{{{re.escape(artifact_label)}\}} is"
+        rf".*?\\path\{{([0-9a-f]{{64}})\}}",
+        re.DOTALL,
+    )
+    matches = pattern.findall(manuscript_text)
+    if len(matches) != 1:
+        fail(f"manuscript must display exactly one digest for {artifact_label}")
+    if matches[0] != digest(artifact):
+        fail(f"manuscript displays a stale digest for {artifact_label}")
 
 
 def require_string(value: object, where: str) -> str:
@@ -376,6 +394,20 @@ def main() -> int:
     manuscript = args.manuscript.resolve()
     if manifest.get("manuscript_sha256") != digest(manuscript):
         fail("manuscript hash mismatch")
+    manuscript_text = manuscript.read_text(encoding="utf-8")
+    validate_displayed_digest(
+        manuscript_text,
+        paper_root / "verification" / "checker_outputs.json",
+        "verification/checker_outputs.json",
+    )
+    validate_displayed_digest(
+        manuscript_text,
+        repositories["lean"]
+        / "RelativeConicArcs"
+        / "Gates"
+        / "ClebschRigidityTrust.lean",
+        "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+    )
     validate_file(
         manifest.get("manuscript_pdf"),
         repositories,
@@ -490,7 +522,18 @@ def main() -> int:
     lean_repository = manifest.get("lean_repository")
     if not isinstance(lean_repository, dict):
         fail("manifest.lean_repository must be an object")
-    require_string(lean_repository.get("url"), "manifest.lean_repository.url")
+    distribution = require_string(
+        lean_repository.get("distribution"),
+        "manifest.lean_repository.distribution",
+    )
+    if distribution != "separate shared Git repository":
+        fail("manifest.lean_repository.distribution must identify a separate repository")
+    url = require_string(lean_repository.get("url"), "manifest.lean_repository.url")
+    if url != LEAN_REPOSITORY_URL:
+        fail(f"manifest.lean_repository.url must be {LEAN_REPOSITORY_URL}")
+    path = require_string(lean_repository.get("path"), "manifest.lean_repository.path")
+    if path != ".":
+        fail("manifest.lean_repository.path must be relative to the checkout root")
     require_string(lean_repository.get("commit"), "manifest.lean_repository.commit")
     print("Clebsch rigidity trust manifest: valid (19 claims, 16 checks)")
     return 0
