@@ -35,7 +35,8 @@ is an input bank, not C80 status authority.
 | q17 frozen descent | **FINITE-CERTIFIED** | The q17 three-intruder domain closes by depth-two routing into `Y_NK`; q13/q17/q19 data do not prove uniform bounded depth. [Report](2026-07-23-c524-capover-core-depth2.md) |
 | Marked q17 defect thread | **FINITE-CERTIFIED** | Four bad fibres form one Klein-four orbit with common Gallai--Edmonds type and an adaptive `4 -> 2 -> 0` repair thread. [Report](2026-07-25-c80-tutte-defect-contraction.md) |
 | Tangent-plus-triple coverage identity | **PROVED; FINITE-CERTIFIED value census** | `kappa_T(x,y)=|Legal(T+x+y)|` has an exact pair-conflict plus collinear-triple formula. Minimum-`kappa` replies are value-unsound at q17/q19. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
-| Uncovered-locus boundary rewrite | **FINITE-CERTIFIED positive** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Bounded algebraic format is not established. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
+| Uncovered-locus boundary rewrite | **FINITE-CERTIFIED; SUPERSEDED packaging** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Its explicit witnesses are superseded by `R_small` below. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
+| Bounded small-shell correspondence `R_small` | **PROVED soundness; FINITE-CERTIFIED q17/q19 coverage** | The fixed incidence formula “terminal or two mutually legal moves, or one exchange into that boundary” eliminates all explicit `B_cc` pairings. It gives `49/49 P` q17 and `69/69 P` q19 selected edges, with strict `Omega` descent. Uniform coverage is open. [Report](2026-07-25-c80-q19-rank-one-incidence-shell.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -74,8 +75,8 @@ is impossible.
 | Scale-aware survivor `F_alpha` | **FINITE-CERTIFIED:** `F_1/4` contains tested q11/q13/q17 roots; q19 passes through `alpha=3/4` and fails at `9/10`. | A q-independent positive retention bound, or a proof that none exists. [Reports](2026-07-24-c80-scale-survivor-falsifiers.md), [marked retention](2026-07-25-c80-marked-secant-retention.md) |
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
-| Equivariant bounded-degree reply correspondence | Symmetry and transport are achievable; several natural carriers are value-impure. | A bounded algebraic proof datum whose individual edges are sound and whose update is direct. |
-| Uncovered-locus obligation | The q17 small loci are completely classified, and the `B_cc`/rank-one logical schema survives q19. | Compress the four q19 rank-one fibres without explicit growing pairings or reply lists. |
+| Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, sound, and opponent-complete at q17/q19; observed selected fibre degree is at most four. | Uniform opponent completeness and a count/lower bound on geometric replies. |
+| Uncovered-locus obligation | The q17 small loci are completely classified, and the q19 rank-one fibres compress to the same bounded small shell. | q23 falsification and a field-uniform incidence proof of the `forall exists` coverage clause. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -83,17 +84,17 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Construct a directly defined, bounded-format, transport-natural survivor
-whose every opponent has a P-sound reply of strictly smaller Omega,
-eventually landing in B_cc.
+Prove or falsify uniformly that every opponent fibre contains an R_small
+reply of strictly smaller Omega, where R_small is the bounded sound
+small-shell incidence formula.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Replace the explicit B_cc pairings and full reply fibres for the four q19
-rank-one exceptions by one direct, transport-natural algebraic incidence
-certificate, or exhibit a decisive growing-information obstruction.
+Run the q23 out-of-sample gate and derive the projective incidence equations
+for R_small; on survival, prove/count opponent completeness without
+enumerating replies.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -106,4 +107,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap compress the four q19 rank-one boundary fibres into a direct algebraic incidence certificate
+go C80 cap test the bounded small-shell correspondence on q23 and derive its field-uniform incidence equations

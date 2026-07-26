@@ -1,0 +1,6327 @@
+{
+  "bounded_relation": {
+    "definition": "x,y are a legal pair; Omega(U+x+y)=0; and the follower has either zero legal moves or exactly two mutually legal moves",
+    "format": "fixed first-order incidence/cardinality formula; no matching, Grundy value, minimax query, or recursive survivor membership",
+    "name": "R_small(U; x,y)",
+    "rank_one_shell": "Shell_small(U) iff every legal x has a legal y with R_small(U;x,y)",
+    "soundness": "the zero-move follower is terminal P; the two-move follower is P by replying with the other move"
+  },
+  "control_target_omega": 169,
+  "full_outer_correspondence": {
+    "cases": [
+      {
+        "history_edge": {
+          "opponent": [
+            4,
+            0
+          ],
+          "reply": [
+            7,
+            1
+          ]
+        },
+        "opponents": 32,
+        "q": 17,
+        "rank_deficiency_histogram": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponents": 10,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponents": 7,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponents": 9,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponents": 6,
+            "small_shell_rank": 1
+          }
+        ],
+        "root_t4": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "rows": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              9
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  10,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              0,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  12,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              1,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              1,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              1,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  2,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              9
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              2,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  7
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              2,
+              9
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  1,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              2,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  5,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              3,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              3,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  5,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              3,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  7
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              5,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  6,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              5,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  8,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              6,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  5,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              8,
+              2
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              8,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              8,
+              9
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  1,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              9,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              9,
+              12
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  10,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              9,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  5,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  11,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              10,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              10,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              10,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              10,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  8,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              10,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  9,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              11,
+              9
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              7
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  2,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              9
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              12,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  0,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  5,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          }
+        ],
+        "selected_fibre_degree_histogram": [
+          {
+            "degree": 1,
+            "opponents": 19
+          },
+          {
+            "degree": 2,
+            "opponents": 10
+          },
+          {
+            "degree": 3,
+            "opponents": 2
+          },
+          {
+            "degree": 4,
+            "opponents": 1
+          }
+        ],
+        "selected_oriented_edges": 49,
+        "selected_target_omega_histogram": [
+          {
+            "oriented_edges": 49,
+            "target_omega": 0
+          }
+        ],
+        "selected_value_histogram": {
+          "P": 49
+        },
+        "target_omega": 40
+      },
+      {
+        "history_edge": {
+          "opponent": [
+            5,
+            0
+          ],
+          "reply": [
+            4,
+            10
+          ]
+        },
+        "opponents": 32,
+        "q": 17,
+        "rank_deficiency_histogram": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponents": 10,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponents": 7,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponents": 9,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponents": 6,
+            "small_shell_rank": 1
+          }
+        ],
+        "root_t4": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "rows": [
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              0,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              14
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              1,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  12,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  2,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  6,
+                  15
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  6,
+                  15
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              2,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              2,
+              14
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              3,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  6,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              3,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              6,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  11,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              6,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              6,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              6,
+              14
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              6,
+              15
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              7,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  6,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  6,
+                  15
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              8,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  12,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              8,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              8,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  9,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  9,
+                  15
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  12,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              8,
+              14
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              9,
+              14
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              9,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              10,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              10,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  9,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              10,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              11,
+              2
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  1,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              11,
+              6
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  6,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              11,
+              14
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              12,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  8,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              12,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  8,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          }
+        ],
+        "selected_fibre_degree_histogram": [
+          {
+            "degree": 1,
+            "opponents": 19
+          },
+          {
+            "degree": 2,
+            "opponents": 10
+          },
+          {
+            "degree": 3,
+            "opponents": 2
+          },
+          {
+            "degree": 4,
+            "opponents": 1
+          }
+        ],
+        "selected_oriented_edges": 49,
+        "selected_target_omega_histogram": [
+          {
+            "oriented_edges": 49,
+            "target_omega": 0
+          }
+        ],
+        "selected_value_histogram": {
+          "P": 49
+        },
+        "target_omega": 40
+      },
+      {
+        "history_edge": {
+          "opponent": [
+            8,
+            14
+          ],
+          "reply": [
+            4,
+            10
+          ]
+        },
+        "opponents": 32,
+        "q": 17,
+        "rank_deficiency_histogram": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponents": 10,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponents": 7,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponents": 9,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponents": 6,
+            "small_shell_rank": 1
+          }
+        ],
+        "root_t4": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "rows": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              0,
+              9
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  7,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  15
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              1,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  5,
+                  1
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  9
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              1,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  10,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              1,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              2,
+              1
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              2,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  3,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              2,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  7,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              3,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              3,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  6,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  7,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              3,
+              12
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              3,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              5,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              5,
+              1
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  10,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              5,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  7,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              6,
+              2
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  5,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              6,
+              9
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  6
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              6,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              7,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              7,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  9,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              7,
+              7
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  11,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              9,
+              0
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  7,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  11,
+                  15
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              9,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  7,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              10,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  5,
+                  1
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              10,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              11,
+              6
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  7,
+                  7
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              11,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  0,
+                  9
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  9,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  2,
+                  1
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              12,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  5,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              9
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          }
+        ],
+        "selected_fibre_degree_histogram": [
+          {
+            "degree": 1,
+            "opponents": 19
+          },
+          {
+            "degree": 2,
+            "opponents": 10
+          },
+          {
+            "degree": 3,
+            "opponents": 2
+          },
+          {
+            "degree": 4,
+            "opponents": 1
+          }
+        ],
+        "selected_oriented_edges": 49,
+        "selected_target_omega_histogram": [
+          {
+            "oriented_edges": 49,
+            "target_omega": 0
+          }
+        ],
+        "selected_value_histogram": {
+          "P": 49
+        },
+        "target_omega": 40
+      },
+      {
+        "history_edge": {
+          "opponent": [
+            11,
+            9
+          ],
+          "reply": [
+            7,
+            1
+          ]
+        },
+        "opponents": 32,
+        "q": 17,
+        "rank_deficiency_histogram": [
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponents": 10,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponents": 7,
+            "small_shell_rank": 0
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponents": 9,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponents": 6,
+            "small_shell_rank": 1
+          }
+        ],
+        "root_t4": [
+          13,
+          14,
+          15,
+          16
+        ],
+        "rows": [
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              0,
+              0
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  6,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              0,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  5,
+                  10
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              1,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              1,
+              10
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  8,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              1,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              2,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  12,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              2,
+              2
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              2,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              2,
+              14
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              3,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  2,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              3,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  0,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  6,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              3,
+              13
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  10
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  2,
+                  14
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              4,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              4,
+              14
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  10,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              5,
+              10
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  0,
+                  5
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              5,
+              15
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  9,
+                  12
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              6,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  0,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              6,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  8,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              6,
+              14
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  3,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              8,
+              2
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              8,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  1,
+                  10
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              8,
+              6
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  9,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              9,
+              0
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              9,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              9,
+              6
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  2,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              9,
+              12
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  5,
+                  15
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              9,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  1,
+                  2
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  4,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 3,
+            "opponent": [
+              10,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  2,
+                  0
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 3,
+                "reply": [
+                  4,
+                  14
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              10,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  1,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 0,
+            "opponent": [
+              12,
+              3
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 0,
+                "reply": [
+                  8,
+                  6
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 2,
+            "opponent": [
+              12,
+              5
+            ],
+            "selected_rank": 0,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 2,
+                "reply": [
+                  2,
+                  0
+                ],
+                "small_shell_rank": 0,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              12,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          }
+        ],
+        "selected_fibre_degree_histogram": [
+          {
+            "degree": 1,
+            "opponents": 19
+          },
+          {
+            "degree": 2,
+            "opponents": 10
+          },
+          {
+            "degree": 3,
+            "opponents": 2
+          },
+          {
+            "degree": 4,
+            "opponents": 1
+          }
+        ],
+        "selected_oriented_edges": 49,
+        "selected_target_omega_histogram": [
+          {
+            "oriented_edges": 49,
+            "target_omega": 0
+          }
+        ],
+        "selected_value_histogram": {
+          "P": 49
+        },
+        "target_omega": 40
+      },
+      {
+        "history_edge": {
+          "opponent": [
+            4,
+            0
+          ],
+          "reply": [
+            0,
+            2
+          ]
+        },
+        "opponents": 51,
+        "q": 19,
+        "rank_deficiency_histogram": [
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponents": 10,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponents": 7,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponents": 7,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponents": 14,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponents": 9,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 9,
+            "opponents": 3,
+            "small_shell_rank": 1
+          },
+          {
+            "minimum_deficiency_at_rank": 11,
+            "opponents": 1,
+            "small_shell_rank": 1
+          }
+        ],
+        "root_t4": [
+          15,
+          16,
+          17,
+          18
+        ],
+        "rows": [
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              1,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  6,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 9,
+            "opponent": [
+              1,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 9,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 2
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              1,
+              4
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              1,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  12,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              1,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  13,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              1,
+              16
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  3,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              2,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  7,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              2,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  13,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              2,
+              16
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  6,
+                  17
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              3,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  9,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              3,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              3,
+              8
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  6,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              3,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  8,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              5,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              5,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              6,
+              4
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  1,
+                  16
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              6,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  8,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  11,
+                  17
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  12,
+                  16
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              6,
+              11
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              6,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  3,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 11,
+            "opponent": [
+              6,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 11,
+                "reply": [
+                  2,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              },
+              {
+                "coverage_deficiency": 11,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 2
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              6,
+              17
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  1,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  2,
+                  16
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              7,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  1,
+                  16
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  2,
+                  5
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              7,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              7,
+              7
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  10,
+                  4
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              7,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  14,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              7,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  6,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              8,
+              5
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  2,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 9,
+            "opponent": [
+              8,
+              8
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 9,
+                "reply": [
+                  12,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              8,
+              10
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  3,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              9,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  10,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              9,
+              8
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  3,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              9,
+              11
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  7,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  14,
+                  12
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              9,
+              16
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  1,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              9,
+              17
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  12,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              10,
+              4
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              10,
+              11
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              10,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              10,
+              15
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  7,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              11,
+              1
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  14,
+                  16
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              11,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              11,
+              4
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  9,
+                  8
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              11,
+              17
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  6,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              12,
+              3
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  1,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  7
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 4,
+            "opponent": [
+              12,
+              8
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 4,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 9,
+            "opponent": [
+              12,
+              11
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 9,
+                "reply": [
+                  13,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              12,
+              16
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  7,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 7,
+            "opponent": [
+              13,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 7,
+                "reply": [
+                  9,
+                  3
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 5,
+            "opponent": [
+              13,
+              13
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 5,
+                "reply": [
+                  2,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              14,
+              8
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  1,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  7,
+                  13
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 6,
+            "opponent": [
+              14,
+              12
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  7,
+                  10
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              },
+              {
+                "coverage_deficiency": 6,
+                "reply": [
+                  9,
+                  11
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 1
+              }
+            ]
+          },
+          {
+            "minimum_deficiency_at_rank": 8,
+            "opponent": [
+              14,
+              16
+            ],
+            "selected_rank": 1,
+            "selected_replies": [
+              {
+                "coverage_deficiency": 8,
+                "reply": [
+                  11,
+                  1
+                ],
+                "small_shell_rank": 1,
+                "target_exact_grid_value": "P",
+                "target_omega": 0
+              }
+            ]
+          }
+        ],
+        "selected_fibre_degree_histogram": [
+          {
+            "degree": 1,
+            "opponents": 36
+          },
+          {
+            "degree": 2,
+            "opponents": 13
+          },
+          {
+            "degree": 3,
+            "opponents": 1
+          },
+          {
+            "degree": 4,
+            "opponents": 1
+          }
+        ],
+        "selected_oriented_edges": 69,
+        "selected_target_omega_histogram": [
+          {
+            "oriented_edges": 49,
+            "target_omega": 0
+          },
+          {
+            "oriented_edges": 18,
+            "target_omega": 1
+          },
+          {
+            "oriented_edges": 2,
+            "target_omega": 2
+          }
+        ],
+        "selected_value_histogram": {
+          "P": 69
+        },
+        "target_omega": 169
+      }
+    ],
+    "representative_value_purity": "118/118 P",
+    "selection": "retain all replies lexicographically minimizing (small-shell rank, coverage deficiency)"
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "rank_one_targets": [
+    {
+      "active_blocks": [
+        [
+          [
+            3,
+            8
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            13,
+            12
+          ]
+        ],
+        [
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            11,
+            17
+          ]
+        ]
+      ],
+      "boundary_kind_histogram": {
+        "terminal": 16
+      },
+      "opponents_covered": 9,
+      "oriented_reply_edges": 16,
+      "outer_opponent": [
+        1,
+        3
+      ],
+      "outer_reply": [
+        7,
+        13
+      ],
+      "reply_target_value_histogram": {
+        "P": 16
+      },
+      "rows": [
+        {
+          "opponent": [
+            3,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            5
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                3,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                7
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            6,
+            7
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                11,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            11,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                7
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            12,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            13,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                3,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        }
+      ],
+      "target_exact_grid_value": "P",
+      "target_legal_moves": 9,
+      "target_omega": 2
+    },
+    {
+      "active_blocks": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            9,
+            17
+          ],
+          [
+            12,
+            8
+          ]
+        ]
+      ],
+      "boundary_kind_histogram": {
+        "terminal": 12
+      },
+      "opponents_covered": 7,
+      "oriented_reply_edges": 12,
+      "outer_opponent": [
+        5,
+        12
+      ],
+      "outer_reply": [
+        7,
+        13
+      ],
+      "reply_target_value_histogram": {
+        "P": 12
+      },
+      "rows": [
+        {
+          "opponent": [
+            1,
+            1
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            1,
+            3
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            6,
+            4
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            6,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                1
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            12,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        }
+      ],
+      "target_exact_grid_value": "P",
+      "target_legal_moves": 7,
+      "target_omega": 1
+    },
+    {
+      "active_blocks": [
+        [
+          [
+            5,
+            12
+          ],
+          [
+            12,
+            11
+          ],
+          [
+            14,
+            8
+          ]
+        ]
+      ],
+      "boundary_kind_histogram": {
+        "terminal": 18
+      },
+      "opponents_covered": 11,
+      "oriented_reply_edges": 18,
+      "outer_opponent": [
+        6,
+        15
+      ],
+      "outer_reply": [
+        2,
+        10
+      ],
+      "reply_target_value_histogram": {
+        "P": 18
+      },
+      "rows": [
+        {
+          "opponent": [
+            1,
+            3
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                3,
+                13
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            3,
+            13
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            5
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            7,
+            7
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                11
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            8,
+            5
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                13
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            16
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                7,
+                7
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                7,
+                7
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            12,
+            11
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                7,
+                7
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            13,
+            13
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                8,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                11
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        }
+      ],
+      "target_exact_grid_value": "P",
+      "target_legal_moves": 11,
+      "target_omega": 1
+    },
+    {
+      "active_blocks": [
+        [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            5,
+            12
+          ]
+        ],
+        [
+          [
+            5,
+            12
+          ],
+          [
+            12,
+            11
+          ],
+          [
+            14,
+            8
+          ]
+        ]
+      ],
+      "boundary_kind_histogram": {
+        "terminal": 18
+      },
+      "opponents_covered": 11,
+      "oriented_reply_edges": 18,
+      "outer_opponent": [
+        6,
+        15
+      ],
+      "outer_reply": [
+        3,
+        13
+      ],
+      "reply_target_value_histogram": {
+        "P": 18
+      },
+      "rows": [
+        {
+          "opponent": [
+            1,
+            3
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                2,
+                10
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            1,
+            4
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                7,
+                10
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            2,
+            10
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            5
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            5,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                8,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            7,
+            10
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            8,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                3
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            12,
+            11
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                8
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            8
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                12,
+                11
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            16
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                5
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                5,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                7,
+                10
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        }
+      ],
+      "target_exact_grid_value": "P",
+      "target_legal_moves": 11,
+      "target_omega": 2
+    },
+    {
+      "active_blocks": [
+        [
+          [
+            1,
+            15
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            14,
+            12
+          ]
+        ]
+      ],
+      "boundary_kind_histogram": {
+        "terminal": 16,
+        "two_nonconflicting_moves": 12
+      },
+      "opponents_covered": 9,
+      "oriented_reply_edges": 28,
+      "outer_opponent": [
+        8,
+        8
+      ],
+      "outer_reply": [
+        12,
+        3
+      ],
+      "reply_target_value_histogram": {
+        "P": 28
+      },
+      "rows": [
+        {
+          "opponent": [
+            1,
+            15
+          ],
+          "replies": [
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                11,
+                1
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                11,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                14,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            1,
+            16
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            3,
+            13
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            6,
+            17
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                3,
+                13
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            9,
+            16
+          ],
+          "replies": [
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                1,
+                15
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                11,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                14,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            11,
+            1
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                15
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                13,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                14,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            11,
+            4
+          ],
+          "replies": [
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                1,
+                15
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                14,
+                12
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            13,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                1,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                6,
+                17
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                11,
+                1
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        },
+        {
+          "opponent": [
+            14,
+            12
+          ],
+          "replies": [
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                1,
+                15
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                3,
+                13
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                9,
+                16
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "terminal",
+              "remaining_legal_moves": 0,
+              "reply": [
+                11,
+                1
+              ],
+              "target_exact_grid_value": "P"
+            },
+            {
+              "boundary_kind": "two_nonconflicting_moves",
+              "remaining_legal_moves": 2,
+              "reply": [
+                11,
+                4
+              ],
+              "target_exact_grid_value": "P"
+            }
+          ]
+        }
+      ],
+      "target_exact_grid_value": "P",
+      "target_legal_moves": 9,
+      "target_omega": 1
+    }
+  ],
+  "schema": "c80-q19-rank-one-incidence-shell-v1",
+  "source": "rust/scripts/c80_q19_rank_one_incidence_shell.py",
+  "summary": {
+    "inner_boundary_value_purity": "92/92 P",
+    "inner_opponents_covered": 47,
+    "oriented_inner_reply_edges": 92,
+    "outer_opponent_fibres": 4,
+    "target_value_purity": "5/5 P",
+    "targets": 5,
+    "terminal_edges": 80,
+    "two_nonconflicting_move_edges": 12
+  },
+  "transport": {
+    "all_checks_pass": true,
+    "outer_q17": {
+      "all_checks_pass": true,
+      "stabilizer_order": 4,
+      "transported_outer_fibre_checks": 128
+    },
+    "outer_q19": {
+      "all_checks_pass": true,
+      "stabilizer_order": 4,
+      "transported_outer_fibre_checks": 204
+    },
+    "stabilizer_order": 4,
+    "transported_inner_fibre_checks": 188
+  },
+  "verdict": {
+    "bounded_algebraic_incidence_schema": "PASS",
+    "explicit_B_cc_pairings_eliminated": true,
+    "explicit_rank_one_reply_table_eliminated_from_definition": true,
+    "full_outer_correspondence_value_purity": "118/118 P",
+    "full_q17_q19_outer_correspondence": "PASS",
+    "q19_four_fibre_coverage": "PASS",
+    "uniform_c80_candidate": false,
+    "uniform_opponent_completeness": "OPEN"
+  }
+}

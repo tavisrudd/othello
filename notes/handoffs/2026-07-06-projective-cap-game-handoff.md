@@ -1224,6 +1224,24 @@ algebraic datum. Next compress the four q19 rank-one fibres directly; C82
 remains gated. Report+cert:
 [`../2026-07-25-c80-uncovered-locus-boundary-rewrite.md`](../2026-07-25-c80-uncovered-locus-boundary-rewrite.md).
 
+**A bounded sound incidence correspondence now passes the full q17/q19 gate
+(C80, 2026-07-25).** Let `B_small(U)` mean `Omega(U)=0` and either no legal
+moves or exactly two mutually legal moves; let `Shell_small(U)` mean every
+opponent has one reply into `B_small`. Both are P by a terminal/pairing proof,
+and their definitions are fixed-arity projective incidence formulas with no
+matching, Grundy/minimax query, response table, or recursive survivor
+membership. The outer relation `R_small(T;o,p)` requiring `T+o+p` to lie in
+one of these classes covers all opponents on every q17 repair target and the
+q19 control. Retaining minimum-rank/minimum-`kappa` replies gives `49/49 P`
+q17 and `69/69 P` q19 oriented edges, all with strict `Omega` descent.
+Transport recomputation passes. The five former q19 rank-one targets compress
+to 80 terminal edges plus 12 edges leaving `2K1`; explicit `B_cc` pairings
+are eliminated. This is the first bounded-formula, projective, sound,
+opponent-complete, value-pure correspondence on both test orders. Uniform
+opponent completeness and fibre counts remain open; q23 is now the proper
+out-of-sample falsifier, and C82 remains gated. Report+cert:
+[`../2026-07-25-c80-q19-rank-one-incidence-shell.md`](../2026-07-25-c80-q19-rank-one-incidence-shell.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
