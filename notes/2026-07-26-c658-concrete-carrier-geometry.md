@@ -146,3 +146,10 @@ being bounded.
   connected to the concrete arc data.
 
 No unexplained algebraic freedom remains inside the charted carrier theorem.
+
+## Next task
+
+C659 owns the remaining bridge: construct the chart family from the actual
+projectivized rank-three arc carrier, identify its representative factor
+product with the ambient dual Chow form, and derive the maximum-index square
+restrictions and nonsquareness inputs required by the finite-type theorem.

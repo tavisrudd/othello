@@ -153,6 +153,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `relconic`
 
+- **C659 `[relconic]` [QUEUED; EV 1 — PROJECTIVIZED ARC / DUAL-CHOW BRIDGE]** — construct `PlaneLineCoordinateChart` data from the actual projectivized rank-three arc carrier, identify its representative factor product with the ambient dual Chow form, and prove that maximum-index centers supply the square restrictions and nonsquareness hypotheses needed by the C658 finite-type \(2m\) theorem → `notes/2026-07-26-c659-projective-dual-chow-bridge.md`.
 - **C648 `[relconic]` [QUEUED; EV 1 — ABSTRACT HEISENBERG ORBIT CHORD CALCULUS]** — develop the projective \(C_3^2\)-orbit chord calculus exposed by the q=19 residue, classify when one regular orbit can be the uncovered locus of another, and test a field-uniform collinearity-or-Heisenberg dichotomy without replacing the mechanism question by a larger unstructured census → `notes/2026-07-25-c648-heisenberg-orbit-chord-calculus.md`.
 - **C606 `[relconic]` [QUEUED; only after Version 1 is published]** — develop Theorem 4 from `clebsch_ame_proof_development.md` as a post-publication follow-up to the arcs paper: verify and package the Clebsch six-arc's simultaneous extension complex as the independence complex of the icosahedron, then decide whether it belongs in a Version 2 structural remark or a companion note; do not alter Version 1 → `notes/2026-07-25-c606-clebsch-extension-complex-follow-up.md`.
 
