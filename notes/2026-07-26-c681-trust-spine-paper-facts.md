@@ -6,15 +6,42 @@
 
 **Status:** QUEUED
 
-## Goal
+## Global intent
+
+The portfolio is now about ten manuscripts, a large Lean development, a live queue, per-lane
+handoffs, and two standing summary documents, all of which restate facts about each other. Nothing
+mechanically links them. Every consistency property that matters — this paper's title, this claim's
+label, this theorem's count, this Lean terminal's existence — is currently maintained by a human
+reading two files and noticing they disagree. That does not scale with the number of papers, and it
+has already failed: four distinct drift defects were found by hand on one day in July 2026, none of
+which any paper's own verifier could have caught.
+
+The intent is to make the portfolio's cross-artifact claims **derived rather than restated**, using
+the mechanism C326 already established for Lean: a reviewer declares, a checker extracts facts from
+tracked bytes, and divergence is an error rather than a discovery. The end state has three
+properties.
+
+1. **A fact appears in exactly one place.** A paper's title lives in its `\title{}`. Everything else
+   that names it either derives that name or is reported as drift.
+2. **Portfolio-level questions are answerable by a command.** "How many theorems per paper", "which
+   papers cite a Lean terminal that does not exist", "which paper directories are unregistered"
+   should be a query against a facts artifact, not a session of ad-hoc greps whose answer is stale
+   before it is written down.
+3. **The publication release gate is checkable.** Every paper must print an adequacy appendix giving
+   the Lean statements of its headline theorems verbatim. That is currently hand-transcription, which
+   is precisely the operation the spine's `render` exists to replace.
+
+This is a programme, not one task. C681 is its first step and is scoped so that it either proves the
+approach on real defects or fails cheaply.
+
+## Goal of this task
 
 Extend the C326 trust spine with a `paper` area type whose facts are extracted from manuscript
 sources rather than from Lean, and whose first job is exactly one class of defect: **drift between
 what a paper is and what the repository says it is.**
 
-The scope is deliberately one step, not the full design sketched below in *Deferred*. C681 closes
-when the extractor and checker catch title, self-citation, and label drift on the current tree, and
-stops there.
+The scope is deliberately one step. C681 closes when the extractor and checker catch title,
+self-citation, and label drift on the current tree, and stops there.
 
 ## Why this is worth a task
 
@@ -82,11 +109,69 @@ paper-layer audit must never read as evidence about the Lean layer.
 - No manuscript source, bibliography, or PDF is edited by this task. C681 reports drift; the owning
   lane repairs it.
 
-## Deferred, explicitly not in C681
+## What to queue after step 1
 
-Generated regions in the report documents; extracted statement counts replacing hand-written ones;
-adequacy-appendix rendering from the theorem graph. Each waits on evidence that the extractor is
-right, and the last also waits on project extraction.
+Four further steps are foreseen. None is allocated: allocate each through the reserve script when
+its gate is met, and never write a concrete unallocated ID into a plan. They are ordered by what
+unblocks what, not by value.
+
+**Step 2 — generated regions in the two summary documents.** Wrap the publication table in
+`notes/2026-07-09-work-summary.md` and the status summary in the current results snapshot in
+`trust-spine:begin/end` markers so they are rendered from facts, and let `check` fail when they
+drift. These two files have no other owning lane, which is why they come first.
+
+- *Gate:* C681 closed, and its checker has caught at least one drift defect that was not one of the
+  four it was built against. A checker that only reproduces its own fixtures has not yet earned a
+  writing role.
+- *Lane:* `build-sys` for the renderer; the summary documents are not another lane's files.
+- *Risk to watch:* generating prose. Only the tabular facts may be inside the markers. If a region
+  starts wanting a sentence of judgement, the region boundary is in the wrong place.
+
+**Step 3 — extracted statement counts replace hand-written ones.** Make per-paper theorem, lemma,
+proposition, and corollary counts a rendered table, so the repository's no-stale-counts rule is
+enforced by construction rather than by discipline.
+
+- *Gate:* step 2 shipped, and the count extractor agrees with a hand count on at least two papers.
+- *Note:* this is the step that answers "how many theorems have we proved" without a session of
+  greps. It is cheap once step 2's rendering path exists.
+
+**Step 4 — registry rows for `papers-index.md` and `papers-planning.md`.** Extend generated regions
+into the two shared registries so their per-paper title and status rows derive from facts.
+
+- *Gate:* steps 2–3 shipped **and** the registry writer agrees. `lean/trust/portfolio.toml` already
+  records that inserting regions into a file another lane owns is a separate phase needing that
+  lane's owner; the same rule applies here and is not waived by these files being shared rather than
+  lane-owned.
+- *Risk to watch:* these registries carry rulings and gate distances as well as facts. Only the
+  factual rows are candidates.
+
+**Step 5 — adequacy-appendix rendering.** Emit each paper's adequacy appendix — the verbatim Lean
+statements of its headline theorems and the definitions they bottom out in — as a `render` view.
+
+- *Gate:* project extraction has actually run, so Lean facts exist. Today all five declared gates
+  report `facts-missing`, which is C326's remaining work and needs a quiet Lean worktree.
+- *Value:* highest of the five, because it converts a publication release-gate requirement from
+  hand-transcription into a derived artifact. It is last only because it is the one step that
+  genuinely depends on the Lean half.
+
+## What is deliberately never automated
+
+Judgement stays hand-written: what blocks a release, whether a result is worth publishing, how a
+claim is scoped, what a negative result means, and every vibe or priority assessment. The spine
+renders facts. A document whose *argument* is generated is worse than one that drifts, because
+drift is visible and generated argument is not.
+
+## Boundary against adjacent tasks
+
+- **Per-paper verifiers** (`verify_release.py` and friends) check a paper against itself: its own
+  labels, its own certificates, its own checksums. C681 checks *between* artifacts. Neither
+  subsumes the other, and C681 must not absorb per-paper verification.
+- **C328** operationalizes the trust graph's evidence overlay for *novelty and literature*
+  assessment — status vocabulary, assessment records, search metadata, renderer badges. C681 covers
+  *artifact facts* — titles, labels, citations, counts. The two share the graph and must share node
+  identity, but neither owns the other's vocabulary. If they collide it will be over node IDs; settle
+  that in C328's schema, which is where node identity is already being stabilized.
+- **C287** exports Lean sources to public repositories. C681 neither exports nor publishes anything.
 
 ## Findings to hand to other lanes now
 
