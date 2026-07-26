@@ -108,12 +108,25 @@ ten public terminals.
 
 - `homogeneousLinearPolynomial` and `planeLineRestriction` define the actual
   three-variable to two-variable homogeneous substitution;
+- `homogeneousLinearPolynomial_scale` and its restriction corollary prove the
+  exact scalar change caused by rescaling a linear-factor representative;
 - `dualLinearFactorProduct` constructs the finite product of dual linear
   factors, and `planeLineRestriction_dualLinearFactorProduct` commutes its
   restriction with that product;
 - `prod_eq_sq_of_equiv_sum` proves the abstract paired-product square identity;
 - `planeLineRestriction_dualLinearFactorProduct_eq_sq_of_pairing` supplies an
   explicit restricted root from paired equal factors;
+- `prod_eq_scaleProduct_mul_sq_of_equiv_sum` and its polynomial specialization
+  replace literal equality by the projectively natural condition that paired
+  factors are proportional: their product is the aggregate scalar times a
+  square;
+- `prod_eq_sq_of_equiv_sum_of_scaleProduct_sq` and
+  `planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportionalPairing`
+  construct the corrected root whenever that aggregate scalar is a square;
+- `exists_planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportionalPairing`
+  proves that this scalar condition is automatic over a perfect coefficient
+  ring of exponent characteristic two, hence in particular over every finite
+  characteristic-two field;
 - `RestrictionFamily.JointlyDetects` states injectivity of the combined
   restriction map;
 - `exists_globalSquareRoot_of_jointlyDetected_extendedRoots` proves descent
@@ -122,7 +135,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its seven public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its fourteen public
 terminals.
 
 ## Formal boundary
@@ -135,7 +148,7 @@ Lean does not yet check:
 
 - the passage from projective arc points to a representative-independent
   dual-factor product;
-- the secant pairing which makes the restricted factors equal;
+- the secant pairing which makes the restricted factors proportional;
 - bounded-degree joint detection for the chosen family of carrier lines;
 - interpolation of compatible linewise roots in general position;
 - the deduction that the maximum-centre set has arc number at most `k`; or
@@ -144,6 +157,16 @@ Lean does not yet check:
 
 Those remain the geometric inputs proved in the C626 report.  No axiom
 standing for them is introduced.
+
+## Mystery ledger
+
+| Feature | Disposition |
+|:--|:--|
+| Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
+| When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
+| Is the full dual-factor product representative-independent? | **Open at the geometric interface:** individual rescaling is formalized exactly, but the projective normalization or line-bundle formulation of the whole product is not. |
+| Do compatible linewise roots extend? | **Open with an exact gate:** prove interpolation into one ambient form of the required degree. |
+| Do the carrier restrictions detect that ambient form? | **Open with an exact gate:** prove injectivity of the combined restriction map on the bounded-degree homogeneous component. |
 
 ## Validation
 
@@ -161,10 +184,10 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its seven terminals reports no axioms beyond
+- The source-local audit of its fourteen terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the new seven-terminal polynomial
+  `--no-build` confirmation, together with the new fourteen-terminal polynomial
   gate build: pending release of the shared Lean build-owner lock.  Submitted
   attempts correctly fail closed while the foreign aggregate owns that lock.

@@ -1,6 +1,7 @@
 import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Algebra.CharP.Lemmas
 import Mathlib.Data.Fintype.BigOperators
+import Mathlib.FieldTheory.Perfect
 
 /-!
 # Polynomial restriction and Frobenius descent for paired linear factors
@@ -10,11 +11,14 @@ polynomial in three variables.  This module allows degenerate coefficient arrays
 substitution as a ring homomorphism, and applies it to a finite product of homogeneous linear
 factors.  A rank-two array gives the usual parametrization of a projective line.
 
-If the restricted factors admit a pairing with equal members, their product is the square of the
-product over either half of the pairing.  This is the algebraic restriction mechanism used by
-square-root carriers.  A separate descent theorem states the exact remaining extension condition:
-linewise roots must be restrictions of one ambient polynomial, and the family of restriction maps
-must jointly detect ambient polynomials.
+If the restricted factors admit a pairing with proportional members, their product is the product
+of the proportionality scalars times a square.  Equal paired factors are the unit-scalar case; a
+square aggregate scalar gives an explicitly corrected square root.  This is the algebraic
+restriction mechanism used by square-root carriers.  Over a perfect coefficient ring of exponent
+characteristic two, Frobenius surjectivity makes the aggregate scalar automatically a square.  A
+separate descent theorem states the exact remaining extension condition: linewise roots must be
+restrictions of one ambient polynomial, and the family of restriction maps must jointly detect
+ambient polynomials.
 
 No projective incidence theorem is asserted here.  In particular, the module does not construct a
 pairing from secants, prove that a chosen family of line parametrizations jointly detects forms of
@@ -47,6 +51,30 @@ theorem planeLineRestriction_X
     (lineCoordinates : Fin 3 → Fin 2 → K) (i : Fin 3) :
     planeLineRestriction lineCoordinates (MvPolynomial.X i) =
       homogeneousLinearPolynomial (lineCoordinates i) := by
+  simp [planeLineRestriction]
+
+omit [DecidableEq σ] in
+/-- Scaling a coefficient vector scales its homogeneous linear polynomial by the corresponding
+constant polynomial. -/
+theorem homogeneousLinearPolynomial_scale
+    (s : K) (a : σ → K) :
+    homogeneousLinearPolynomial (fun i => s * a i) =
+      MvPolynomial.C s * homogeneousLinearPolynomial a := by
+  simp only [homogeneousLinearPolynomial, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i hi
+  simp [mul_assoc]
+
+/-- Homogeneous line substitution preserves the scalar change caused by rescaling a linear-factor
+representative. -/
+theorem planeLineRestriction_homogeneousLinearPolynomial_scale
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (s : K) (a : Fin 3 → K) :
+    planeLineRestriction lineCoordinates
+        (homogeneousLinearPolynomial (fun i => s * a i)) =
+      MvPolynomial.C s *
+        planeLineRestriction lineCoordinates (homogeneousLinearPolynomial a) := by
+  rw [homogeneousLinearPolynomial_scale, map_mul]
   simp [planeLineRestriction]
 
 /-- The finite product of homogeneous plane-linear factors represented by their coefficient
@@ -99,6 +127,51 @@ theorem prod_eq_sq_of_equiv_sum
     _ = (∏ j, factor (pairing.symm (Sum.inl j))) ^ 2 := by
       rw [pow_two]
 
+/-- If corresponding factors differ by prescribed scalars, their product is the scalar product
+times the square of the product over the left half. -/
+theorem prod_eq_scaleProduct_mul_sq_of_equiv_sum
+    (pairing : ι ≃ J ⊕ J) (factor : ι → R) (scale : J → R)
+    (hpair :
+      ∀ j, factor (pairing.symm (Sum.inr j)) =
+        scale j * factor (pairing.symm (Sum.inl j))) :
+    ∏ i, factor i =
+      (∏ j, scale j) *
+        (∏ j, factor (pairing.symm (Sum.inl j))) ^ 2 := by
+  calc
+    ∏ i, factor i =
+        ∏ s : J ⊕ J, factor (pairing.symm s) := by
+      apply Fintype.prod_equiv pairing
+      intro i
+      simp
+    _ = (∏ j, factor (pairing.symm (Sum.inl j))) *
+        ∏ j, factor (pairing.symm (Sum.inr j)) :=
+      Fintype.prod_sum_type _
+    _ = (∏ j, factor (pairing.symm (Sum.inl j))) *
+        ∏ j, scale j * factor (pairing.symm (Sum.inl j)) := by
+      congr 1
+      apply Fintype.prod_congr
+      exact hpair
+    _ = (∏ j, factor (pairing.symm (Sum.inl j))) *
+        ((∏ j, scale j) * ∏ j, factor (pairing.symm (Sum.inl j))) := by
+      rw [Finset.prod_mul_distrib]
+    _ = (∏ j, scale j) *
+        (∏ j, factor (pairing.symm (Sum.inl j))) ^ 2 := by
+      rw [pow_two]
+      ac_rfl
+
+/-- If the product of the proportionality scalars is itself a square, the paired product has an
+explicit square root corrected by that scalar root. -/
+theorem prod_eq_sq_of_equiv_sum_of_scaleProduct_sq
+    (pairing : ι ≃ J ⊕ J) (factor : ι → R) (scale : J → R)
+    (hpair :
+      ∀ j, factor (pairing.symm (Sum.inr j)) =
+        scale j * factor (pairing.symm (Sum.inl j)))
+    (scaleRoot : R) (hscale : ∏ j, scale j = scaleRoot ^ 2) :
+    ∏ i, factor i =
+      (scaleRoot * ∏ j, factor (pairing.symm (Sum.inl j))) ^ 2 := by
+  rw [prod_eq_scaleProduct_mul_sq_of_equiv_sum pairing factor scale hpair,
+    hscale, mul_pow]
+
 end PairedProducts
 
 section PairedChowRestriction
@@ -123,7 +196,98 @@ theorem planeLineRestriction_dualLinearFactorProduct_eq_sq_of_pairing
   rw [planeLineRestriction_dualLinearFactorProduct]
   exact prod_eq_sq_of_equiv_sum pairing _ hpair
 
+/-- Proportional restricted factor pairs give a scalar multiple of a square.  The scalar is the
+product of the pairwise proportionality constants. -/
+theorem planeLineRestriction_dualLinearFactorProduct_eq_scaleProduct_mul_sq_of_pairing
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K)
+    (pairing : ι ≃ J ⊕ J) (scale : J → K)
+    (hpair :
+      ∀ j,
+        planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inr j)))) =
+          MvPolynomial.C (scale j) *
+            planeLineRestriction lineCoordinates
+              (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j))))) :
+    planeLineRestriction lineCoordinates (dualLinearFactorProduct covector) =
+      MvPolynomial.C (∏ j, scale j) *
+        (∏ j, planeLineRestriction lineCoordinates
+          (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j))))) ^ 2 := by
+  rw [planeLineRestriction_dualLinearFactorProduct]
+  calc
+    ∏ i, planeLineRestriction lineCoordinates
+        (homogeneousLinearPolynomial (covector i)) =
+        (∏ j, MvPolynomial.C (scale j)) *
+          (∏ j, planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial
+              (covector (pairing.symm (Sum.inl j))))) ^ 2 :=
+      prod_eq_scaleProduct_mul_sq_of_equiv_sum
+        pairing _ (fun j => MvPolynomial.C (scale j)) hpair
+    _ = MvPolynomial.C (∏ j, scale j) *
+          (∏ j, planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial
+              (covector (pairing.symm (Sum.inl j))))) ^ 2 := by
+      rw [map_prod]
+
+/-- If the aggregate proportionality scalar is a square, proportional restricted factor pairs
+still give an explicit square root of the restricted factor product. -/
+theorem planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportionalPairing
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K)
+    (pairing : ι ≃ J ⊕ J) (scale : J → K)
+    (hpair :
+      ∀ j,
+        planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inr j)))) =
+          MvPolynomial.C (scale j) *
+            planeLineRestriction lineCoordinates
+              (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j)))))
+    (scaleRoot : K)
+    (hscale : ∏ j, scale j = scaleRoot ^ 2) :
+    planeLineRestriction lineCoordinates (dualLinearFactorProduct covector) =
+      (MvPolynomial.C scaleRoot * ∏ j, planeLineRestriction lineCoordinates
+        (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j))))) ^ 2 := by
+  rw [planeLineRestriction_dualLinearFactorProduct]
+  apply prod_eq_sq_of_equiv_sum_of_scaleProduct_sq
+    pairing _ (fun j => MvPolynomial.C (scale j)) hpair
+      (MvPolynomial.C scaleRoot)
+  rw [← map_prod, hscale, map_pow]
+
 end PairedChowRestriction
+
+section PerfectCoefficientFrobenius
+
+variable {K ι J : Type*} [CommRing K] [ExpChar K 2] [PerfectRing K 2]
+  [Fintype ι] [Fintype J]
+
+/-- Over a perfect coefficient ring of exponent characteristic two, the aggregate scalar in a
+proportional factor pairing is automatically a square.  Hence the restricted factor product has
+an explicit square root after choosing the Frobenius preimage of that scalar. -/
+theorem exists_planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportionalPairing
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K)
+    (pairing : ι ≃ J ⊕ J) (scale : J → K)
+    (hpair :
+      ∀ j,
+        planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inr j)))) =
+          MvPolynomial.C (scale j) *
+            planeLineRestriction lineCoordinates
+              (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j))))) :
+    ∃ root : MvPolynomial (Fin 2) K,
+      planeLineRestriction lineCoordinates (dualLinearFactorProduct covector) =
+        root ^ 2 := by
+  obtain ⟨scaleRoot, hscaleRoot⟩ :=
+    surjective_frobenius K 2 (∏ j, scale j)
+  refine ⟨MvPolynomial.C scaleRoot *
+    ∏ j, planeLineRestriction lineCoordinates
+      (homogeneousLinearPolynomial (covector (pairing.symm (Sum.inl j)))), ?_⟩
+  apply planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportionalPairing
+    lineCoordinates covector pairing scale hpair scaleRoot
+  change ∏ j, scale j = scaleRoot ^ 2
+  exact hscaleRoot.symm
+
+end PerfectCoefficientFrobenius
 
 section SquareRootDescent
 
