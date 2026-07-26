@@ -80,6 +80,21 @@ component ledger, nucleus geometry, or finite classifications.
 - Reorganize the all-level proof so the exact bottom theorem and
   componentwise coherent lifts precede the recursive induction and
   threshold.
+- Add a compact object ledger for “persistent,” “modular,” “carrier,” “bad
+  scheme,” “contained pullback,” “collision,” and “coherent-Fano,” recording
+  each ambient space, defining ideal or map, geometric meaning, and
+  all-level disposition.
+- Separate the conceptual R7 theorem from its long small-field orbit
+  profiles; move certificate-scale data out of the main proof line.
+- Clarify why the unscaled formal quintic invariant \(\tau_5(f)\) is
+  meaningful in every small characteristic where it is used, or replace it
+  by an explicitly invariant divided-power formulation.
+- Replace ambiguous “complete inverse image” and “unconditional all-field
+  syndrome classification” wording by exact scheme-theoretic and
+  split-free statements, respectively.
+- Rebalance the abstract and introduction so the exact R5/R6 results, the
+  radius-gated R7 result, and the certificate-assisted all-level containment
+  theorem cannot be mistaken for claims at the same evidentiary level.
 - Mark each headline as geometric, certificate-assisted, or conditional on
   an external theorem.  Describe Lean as checking identities and
   conditional implication plumbing unless the concrete geometry is
