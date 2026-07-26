@@ -1,41 +1,85 @@
 \section{The rational incidence cover}
 \label{sec:cover}
 
-The alternating group acts on the Clebsch four-space by permuting
-coordinates.  If \(\tau\) is odd, the rule
-\(\kappa(y_i)=-y_{\tau(i)}\) defines a twisted involution.  Put
-\[
- A_R=R[y_1,\ldots,y_5]/(e_1),\qquad
- \Delta=\prod_{i<j}(y_i-y_j),
-\]
-where \(R=\mathbf Z[1/30]\).  Nonmodular invariant theory gives
-\[
- A_R^{A_5}
- =R[e_2,e_3,e_4,e_5,\Delta]/
-   \bigl(\Delta^2-\operatorname{disc}(e_2,e_3,e_4,e_5)\bigr).
-\]
-\[
- \kappa(e_i)=(-1)^i e_i,\qquad \kappa(\Delta)=-\Delta.
-\]
-Thus \(e_3=\sigma_3\) is the first nonconstant odd invariant.  After
-inverting \(e_3^2\), every odd element \(r\) is \(e_3(r/e_3)\) with
-\(r/e_3\) invariant, so the localized algebra is the direct sum of its
-even part and \(e_3\) times that part.  We use this observation only in
-characteristic zero.  The classical binary-sextic presentation used by
-Hitchin is uniform in characteristic greater than \(5\)
-\cite{HitchinBundles,BinaryForms}; modular invariant theory is not invoked
-here.  Dye's finite-geometry theorem separately shows that Clebsch hexagons
-exist precisely when the characteristic is not \(2\) and \(5\) is a square
-\cite[Theorem~1]{DyeClebsch}.
+\subsection{The Clebsch chart}
 
-The threefold in the next statement originates with Mukai and Umemura;
-Hitchin's Grassmannian model supplies the incidence calculation used here
-\cite{MukaiUmemura,HitchinBundles}.
+Put \(E=\Q[t]/(t^2-t-1)=\Q(\sqrt5)\), and let
+\[
+\begin{aligned}
+ I_t=\{&
+ [0:t:1],[0:t:-1],[1:0:t],[-1:0:t],\\
+ & [t:-1:0],[-t:-1:0]\}\subset\mathbf P^2_E .
+\end{aligned}
+\]
+These are the six axes of the standard icosahedron.  Define the linear
+subspace
+\[
+ V_t=\{p\in H_E:p(a)=0\text{ for every }[a]\in I_t\}\subset H_E.
+\]
+This is the exact inclusion used below.  Hitchin proves that \(V_t\) has
+dimension four and describes it as follows
+\cite[\S\S2--4]{HitchinIcosahedron}.  The rotation group of \(I_t\) permutes
+the five triples of mutually orthogonal symmetry planes.  Let
+\(q_1,\ldots,q_5\) be the products of the three linear equations in those
+triples, with \(q_1=xyz\) and relative scalars chosen so that
+\(\sum_iq_i=0\).  Then
+\[
+ \iota_t:V_E=\{(y_i)\in E^5:\textstyle\sum_i y_i=0\}
+   \longrightarrow V_t,\qquad
+ (y_i)\longmapsto\sum_i y_iq_i
+\]
+is an \(A_5\)-equivariant isomorphism.  Thus the parameter of \(xyz=q_1\)
+is
+\[
+ y^\circ=\frac15(4,-1,-1,-1,-1),\qquad
+ \sigma_3(y^\circ)=\frac4{25}.
+\]
+With the polarization and sextic normalization fixed in the introduction,
+Hitchin's invariant calculation gives
+\[
+ \iota_t^*J_0=16\sigma_3^2,
+ \qquad J_0(xyz)=\left(\frac{16}{25}\right)^2
+\cite[\S10]{HitchinIcosahedron}.
+\]
+
+This chart is defined over \(E\), not over \(\Q\).  The nontrivial
+automorphism \(t\mapsto1-t\) carries \(I_t\) and \(V_t\) to the distinct
+conjugate icosahedron and its vanishing space; the matrix \(R\) in
+Section~\ref{sec:arithmetic} gives the corresponding transport.  Hence
+\(\iota_t\) is not a literal rational inclusion \(V\hookrightarrow H\).
+After base change to \(E\), the pullback of the incidence double cover to
+\(D(\sigma_3)\) is split.  Galois conjugation exchanges both the two
+components and the two conjugate charts.
+
+\subsection{A rational incidence model}
+
+The function-field calculation requires a rational model, which can be
+given without descending either Clebsch chart.  Let \(W=\Q^3\) with the
+quadratic form \(Q\) from the introduction.  For \(a\in W\), infinitesimal
+rotation about \(a\) acts on \(H\); put
+\[
+ \omega_a(p,q)=\langle a\mathbin{\cdot}p,q\rangle .
+\]
+These three rational skew forms define a closed subscheme
+\[
+ X=\{U\in\operatorname{Gr}(3,H):
+       \omega_a|_U=0\text{ for every }a\in W\}.
+\]
+Hitchin identifies \(X_{\mathbf C}\) with the Mukai--Umemura threefold
+\cite[\S\S4--5]{HitchinBundles}; in particular \(X\) is geometrically
+integral and smooth.  The incidence scheme used here is
+\[
+ \mathcal I=\{([f],U)\in\mathbf P(H)\times X:
+                   \langle f,U\rangle=0\}.
+\]
+It is a projective bundle over \(X\), is therefore normal and integral,
+and all its displayed equations are defined over \(\Q\).  Mukai and Umemura
+introduced the underlying threefold; Hitchin supplies this Grassmannian
+model and the incidence calculation \cite{MukaiUmemura,HitchinBundles}.
 
 \subsection{Proof of Theorem~\ref{thm:arithmetic-main}}
 
-Let \(\mathcal I_{\mathbf Q}\) be the incidence variety defined in the
-introduction.
+Let \(\pi:\mathcal I\to\mathbf P(H)\) be the first projection.
 Hitchin realizes the Mukai--Umemura threefold as the zero locus of the
 three skew forms on \(\operatorname{Gr}(3,H)\).  The top Chern number of
 the dual universal bundle is \(2\), so a general \(f\) is orthogonal to
@@ -64,22 +108,31 @@ for some \(g\in K^\times\) and a unique
 \(c\in\Q^\times/\Q^{\times2}\).  The incidence extension is therefore
 \(K(\sqrt{cJ_0})\).
 
-\emph{Determining the constant from one fibre.}
-Hitchin computes
+\emph{The local comparison at \(xyz\).}
+Hitchin's classification gives exactly the two distinct configurations
+\(I_t\) and \(I_{1-t}\) over \([xyz]\)
+\cite[\S\S3, 7--9]{HitchinIcosahedron}.  Thus \(\pi\) is quasi-finite over
+this point.  Because \(\pi\) is proper, there is a Zariski neighborhood
+\(B\) of \([xyz]\) on which \(\pi\) is finite.  Let
+\(\widetilde B\) be the normalization of \(B\) in the quadratic generic
+field \(K(\sqrt{cJ_0})\).  The normal finite scheme
+\(\pi^{-1}(B)\) is birational to \(\widetilde B\), hence is isomorphic to
+it.  Moreover \(J_0(xyz)\ne0\), so this normalization is etale after
+shrinking \(B\).  The two distinct geometric points therefore form the
+complete reduced scheme-theoretic fibre, whose residue algebra is
 \[
- J_0|_{\mathbf P(V)}=16\sigma_3^2
+ E=\Q[t]/(t^2-t-1)=\Q(\sqrt5).
 \]
-and exhibits over \(f=xyz\) the two ordered icosahedra with coordinates
-in the roots of \(t^2-t-1\) \cite[\S\S3 and 9--10]{HitchinIcosahedron}.
-Their residue algebra is \(\Q(\sqrt5)\).  At this point
-\(J_0(f)=(4\sigma_3(f))^2\) is a nonzero rational square, so the fibre of
-\(K(\sqrt{cJ_0})\) has residue algebra \(\Q(\sqrt c)\).  Hence
-\(c=5\) in \(\Q^\times/\Q^{\times2}\).
 
-\emph{Restriction to the Clebsch chart.}
-On \(D(\sigma_3)\subset\mathbf P(V)\), the odd generator divided by
-\(4\sigma_3\) has square \(5\).  This gives the asserted product with
-\(\operatorname{Spec}\Q(\sqrt5)\).
+Choose a local generator of \(\mathcal O_{\mathbf P(H)}(3)\) at
+\([xyz]\).  The equation of the normalization is then
+\(w^2=cJ_0u^2\) for a rational unit \(u\); changing the generator multiplies
+the right side by a square unit.  Since
+\(J_0(xyz)=(16/25)^2\), specialization gives the residue algebra
+\(\Q(\sqrt c)\).  Comparison with the preceding fibre proves
+\(c=5\) in \(\Q^\times/\Q^{\times2}\).  This also explains why evaluating
+the generic square class at the point is legitimate: the point lies in the
+finite etale locus and every omitted factor is a unit square there.
 
 \paragraph{Integral boundary.}
 Choose a full lattice \(\Lambda\subset H\) and an integer \(a\ne0\) such

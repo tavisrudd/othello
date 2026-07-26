@@ -90,6 +90,25 @@ def extract(main: Path) -> dict[str, object]:
     labels = tuple(statement["label"] for statement in statements)
     if labels != EXPECTED_LABELS:
         raise ValueError(f"statement labels changed: {labels!r}")
+    manifest_path = main.parent / "verification" / "trust_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    trust_rows = [
+        {
+            key: claim[key]
+            for key in (
+                "id",
+                "theorem_labels",
+                "clauses",
+                "statement",
+                "status",
+                "modes",
+                "proof_role",
+                "evidence",
+            )
+        }
+        for claim in manifest["claims"]
+    ]
+    trust_text = json.dumps(trust_rows, sort_keys=True, separators=(",", ":"))
     return {
         "schema": "clebsch-orientation-statement-identity-v2",
         "main_source": main.name,
@@ -97,6 +116,8 @@ def extract(main: Path) -> dict[str, object]:
         "section_sha256": source_hashes,
         "statement_count": len(statements),
         "statements": statements,
+        "trust_rows_sha256": sha256_text(trust_text),
+        "trust_rows": trust_rows,
     }
 
 
@@ -121,7 +142,7 @@ def main() -> int:
     if args.check:
         if not args.output.exists() or args.output.read_text(encoding="utf-8") != rendered:
             raise SystemExit("statement identity is stale")
-        print("Paper III statement identity: CHECK OK")
+        print("clebsch-passages statement identity: CHECK OK")
         return 0
     args.output.write_text(rendered, encoding="utf-8")
     print(f"wrote {args.output}")

@@ -1,250 +1,211 @@
 #!/usr/bin/env python3
-"""Compact exact certificate for the C652 arithmetic and Mathieu carriers."""
+"""Exact certificate for the displayed golden fibre and its exchanger."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-from collections import deque
+from dataclasses import dataclass
+from fractions import Fraction
+from itertools import combinations
 from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
-UPSTREAM = ROOT / "notes/2026-07-22-c470-golay-hadamard-automorphisms.json"
 OUTPUT = HERE / "arithmetic_cover.json"
 Q = 11
-N = 12
 
 
-def mat_mul(a, b, q=Q):
-    return [[sum(a[i][k] * b[k][j] for k in range(3)) % q
-             for j in range(3)] for i in range(3)]
+@dataclass(frozen=True)
+class Golden:
+    """Element a+b*t of Q[t]/(t^2-t-1)."""
+
+    a: Fraction = Fraction(0)
+    b: Fraction = Fraction(0)
+
+    def __add__(self, other: object) -> Golden:
+        value = coerce(other)
+        return Golden(self.a + value.a, self.b + value.b)
+
+    __radd__ = __add__
+
+    def __neg__(self) -> Golden:
+        return Golden(-self.a, -self.b)
+
+    def __sub__(self, other: object) -> Golden:
+        return self + (-coerce(other))
+
+    def __rsub__(self, other: object) -> Golden:
+        return coerce(other) - self
+
+    def __mul__(self, other: object) -> Golden:
+        value = coerce(other)
+        return Golden(
+            self.a * value.a + self.b * value.b,
+            self.a * value.b + self.b * value.a + self.b * value.b,
+        )
+
+    __rmul__ = __mul__
+
+    def conjugate(self) -> Golden:
+        return Golden(self.a + self.b, -self.b)
 
 
-def mat_vec(a, v, q=Q):
-    return tuple(sum(a[i][j] * v[j] for j in range(3)) % q
-                 for i in range(3))
+def coerce(value: object) -> Golden:
+    if isinstance(value, Golden):
+        return value
+    return Golden(Fraction(value))
 
 
-def det(a, q=Q):
+ZERO = Golden()
+ONE = Golden(Fraction(1))
+T = Golden(Fraction(0), Fraction(1))
+
+
+def dot(left: tuple[Golden, ...], right: tuple[Golden, ...]) -> Golden:
+    return sum((a * b for a, b in zip(left, right)), ZERO)
+
+
+def det(columns: tuple[tuple[Golden, ...], ...]) -> Golden:
+    a, b, c = columns
     return (
-        a[0][0] * (a[1][1] * a[2][2] - a[1][2] * a[2][1])
-        - a[0][1] * (a[1][0] * a[2][2] - a[1][2] * a[2][0])
-        + a[0][2] * (a[1][0] * a[2][1] - a[1][1] * a[2][0])
-    ) % q
+        a[0] * (b[1] * c[2] - b[2] * c[1])
+        - b[0] * (a[1] * c[2] - a[2] * c[1])
+        + c[0] * (a[1] * b[2] - a[2] * b[1])
+    )
 
 
-def inverse_matrix(a, q=Q):
-    d = det(a, q)
-    assert d
-    cof = [
-        [
-            (a[(j + 1) % 3][(i + 1) % 3] * a[(j + 2) % 3][(i + 2) % 3]
-             - a[(j + 1) % 3][(i + 2) % 3] * a[(j + 2) % 3][(i + 1) % 3])
-            % q
-            for j in range(3)
-        ]
-        for i in range(3)
-    ]
-    scale = pow(d, -1, q)
-    answer = [[scale * cof[i][j] % q for j in range(3)] for i in range(3)]
-    assert mat_mul(a, answer, q) == [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
-    return answer
+def golden_axes() -> tuple[tuple[Golden, Golden, Golden], ...]:
+    return (
+        (ZERO, T, ONE),
+        (ZERO, T, -ONE),
+        (ONE, ZERO, T),
+        (-ONE, ZERO, T),
+        (T, -ONE, ZERO),
+        (-T, -ONE, ZERO),
+    )
 
 
-def projective(v, q=Q):
-    pivot = next(x for x in v if x % q)
-    scale = pow(pivot, -1, q)
-    return tuple(scale * x % q for x in v)
+def mat_vec(matrix: tuple[tuple[int, ...], ...],
+            vector: tuple[Golden, ...]) -> tuple[Golden, ...]:
+    return tuple(
+        sum((coerce(entry) * coordinate
+             for entry, coordinate in zip(row, vector)), ZERO)
+        for row in matrix
+    )
 
 
-def axes(t):
+def proportional(left: tuple[Golden, ...], right: tuple[Golden, ...]) -> bool:
+    return all(left[i] * right[j] == left[j] * right[i]
+               for i in range(3) for j in range(i + 1, 3))
+
+
+def projective_mod(vector: tuple[int, ...], modulus: int = Q) -> tuple[int, ...]:
+    pivot = next(entry % modulus for entry in vector if entry % modulus)
+    scale = pow(pivot, -1, modulus)
+    return tuple(scale * entry % modulus for entry in vector)
+
+
+def axes_mod(t: int) -> set[tuple[int, ...]]:
     return {
-        projective(v)
-        for v in (
+        projective_mod(vector)
+        for vector in (
             (0, t, 1), (0, t, -1), (1, 0, t),
             (-1, 0, t), (t, -1, 0), (-t, -1, 0),
         )
     }
 
 
-def image(matrix, points):
-    return {projective(mat_vec(matrix, point)) for point in points}
-
-
-def compose(left, right):
-    return bytes(left[right[i]] for i in range(N))
-
-
-def inverse_permutation(permutation):
-    answer = bytearray(N)
-    for old, new in enumerate(permutation):
-        answer[new] = old
-    return bytes(answer)
-
-
-def conjugate(element, by):
-    return compose(inverse_permutation(by), compose(element, by))
-
-
-def generated_group(generators):
-    generators = tuple(generators)
-    identity = bytes(range(N))
-    group = {identity}
-    queue = deque([identity])
-    while queue:
-        current = queue.popleft()
-        for generator in generators:
-            target = compose(generator, current)
-            if target not in group:
-                group.add(target)
-                queue.append(target)
-    return group
-
-
-def as_permutations(rows):
-    return tuple(bytes(row) for row in rows)
-
-
-def build_certificate():
-    roots = [t for t in range(Q) if (t * t - t - 1) % Q == 0]
-    assert roots == [4, 8]
-    i4, i8 = axes(4), axes(8)
-    arc = {
-        projective(v)
-        for v in ((1, 10, 0), (1, 9, 1), (1, 4, 7),
-                  (1, 8, 5), (0, 1, 4), (1, 1, 7))
+def image_mod(matrix: tuple[tuple[int, ...], ...],
+              points: set[tuple[int, ...]]) -> set[tuple[int, ...]]:
+    return {
+        projective_mod(tuple(
+            sum(matrix[i][j] * point[j] for j in range(3)) % Q
+            for i in range(3)
+        ))
+        for point in points
     }
-    m4 = [[1, 4, 7], [5, 10, 3], [1, 8, 1]]
-    m8 = [[4, 5, 5], [9, 10, 7], [4, 7, 10]]
-    r = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
-    r = [[x % Q for x in row] for row in r]
-    scalar_r = [[3 * x % Q for x in row] for row in r]
-    assert image(m4, i4) == arc
-    assert image(m8, i8) == arc
-    assert det(m4) == 1 and det(m8) == 9
-    assert mat_mul(inverse_matrix(m8), m4) == scalar_r
-    assert image(r, i4) == i8 and image(r, i8) == i4
-    r2 = mat_mul(r, r)
-    assert r2 == [[1, 0, 0], [0, 10, 0], [0, 0, 10]]
-    assert mat_mul(r2, r2) == [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 
-    # Reflection formula s_v(x)=x-2<x,v>/<v,v>v.
-    def reflection(v):
-        norm = sum(x * x for x in v) % Q
-        scale = 2 * pow(norm, -1, Q) % Q
-        return [[((1 if i == j else 0) - scale * v[i] * v[j]) % Q
-                 for j in range(3)] for i in range(3)]
 
-    s_e2 = reflection((0, 1, 0))
-    s_e2_minus_e3 = reflection((0, 1, -1))
-    assert mat_mul(s_e2, s_e2_minus_e3) == r
-    squares = {x * x % Q for x in range(1, Q)}
+def build_certificate() -> dict[str, object]:
+    points = golden_axes()
+    norms = {dot(point, point) for point in points}
+    assert norms == {T + 2}
+    for left, right in combinations(points, 2):
+        inner = dot(left, right)
+        assert 5 * inner * inner == dot(left, left) * dot(right, right)
+    determinants = [det(triple) for triple in combinations(points, 3)]
+    assert all(value != ZERO for value in determinants)
+
+    exchanger = ((1, 0, 0), (0, 0, -1), (0, 1, 0))
+    conjugate_points = tuple(
+        tuple(coordinate.conjugate() for coordinate in point)
+        for point in points
+    )
+    images = tuple(mat_vec(exchanger, point) for point in points)
+    assert all(any(proportional(image, target) for target in conjugate_points)
+               for image in images)
+
+    roots = [value for value in range(Q)
+             if (value * value - value - 1) % Q == 0]
+    assert roots == [4, 8]
+    reduced_exchanger = tuple(tuple(entry % Q for entry in row)
+                              for row in exchanger)
+    assert image_mod(reduced_exchanger, axes_mod(4)) == axes_mod(8)
+    assert image_mod(reduced_exchanger, axes_mod(8)) == axes_mod(4)
+
+    # R=s_e2 s_(e2-e3); the two reflection norms have product 2.
+    squares = {value * value % Q for value in range(1, Q)}
     assert 2 not in squares
 
-    upstream_bytes = UPSTREAM.read_bytes()
-    upstream = json.loads(upstream_bytes)
-    coordinate = upstream["coordinate_and_design_groups"]
-    parents = upstream["two_M11_parents_and_frozen_intersection"]
-    row = upstream["hadamard_row_action"]
-
-    pure_generators = as_permutations(
-        coordinate["pure_coordinate_code_group"]["generators_old_to_new_zero_based"]
-    )
-    puncture_generators = as_permutations(parents["parity_stabilizer_generators"])
-    frozen_generators = as_permutations(parents["frozen_generators"])
-    pure = generated_group(pure_generators)
-    puncture = generated_group(puncture_generators)
-    frozen = generated_group(frozen_generators)
-    join = generated_group(pure_generators + puncture_generators)
-    assert len(pure) == len(puncture) == 7920
-    assert pure & puncture == frozen
-    assert len(frozen) == 660
-    assert len(join) == 95040
-
-    outer_pure = generated_group(
-        as_permutations(row["outer_image_pure_M11_generators"])
-    )
-    outer_puncture = generated_group(
-        as_permutations(row["outer_image_puncture_M11_generators"])
-    )
-    pure_to_puncture = inverse_permutation(
-        bytes(row["pure_to_puncture_class_conjugator"])
-    )
-    puncture_to_pure = inverse_permutation(
-        bytes(row["puncture_to_pure_class_conjugator"])
-    )
-    assert {conjugate(g, pure_to_puncture) for g in outer_pure} == puncture
-    assert {conjugate(g, puncture_to_pure) for g in outer_puncture} == pure
-    assert row["aligned_automorphism_is_inner"] is False
-    assert row["outer_maps_pure_M11_class_to_puncture_M11_class"] is True
-    assert row["outer_maps_puncture_M11_class_to_pure_M11_class"] is True
-
     return {
-        "schema": "c652-arithmetic-cover-v1",
-        "arithmetic": {
-            "golden_polynomial_modulus": Q,
+        "schema": "golden-fibre-v2",
+        "field": {
+            "polynomial": "t^2-t-1",
+            "six_axes": len(points),
+            "common_norm": "t+2",
+            "normalized_squared_inner_product": "1/5",
+            "nonzero_three_point_determinants": len(determinants),
+        },
+        "exchanger": {
+            "matrix": exchanger,
+            "maps_t_chart_to_conjugate_chart": True,
+            "projective_order": 4,
+            "linear_order": 4,
+        },
+        "mod_11": {
             "roots": roots,
-            "comparison": {
-                "M4_maps_I4_to_A": True,
-                "M8_maps_I8_to_A": True,
-                "determinants": [1, 9],
-                "M8_inverse_M4_equals_3R": True,
-            },
-            "exchanger": {
-                "R_maps_I4_to_I8": True,
-                "R_maps_I8_to_I4": True,
-                "order": 4,
-                "spinor_representative": 2,
-                "spinor_representative_is_nonsquare": True,
-            },
-        },
-        "mathieu": {
-            "upstream_certificate": str(UPSTREAM.relative_to(ROOT)),
-            "upstream_sha256": hashlib.sha256(upstream_bytes).hexdigest(),
-            "parent_orders": [len(pure), len(puncture)],
-            "intersection_order": len(frozen),
-            "intersection_equals_frozen_PSL2_11_carrier": True,
-            "join_order": len(join),
-            "hadamard_exchange_maps_parent_classes": ["pure", "puncture"],
-            "hadamard_exchange_is_noninner": True,
-        },
-        "marked_compatibility": {
-            "marking": "I4 <-> pure-coordinate M11",
-            "forced_partner": "I8 <-> puncture-stabilizer M11",
-            "unmarked_equivariant_bijection_count": 2,
-            "canonical_unmarked_identification_claimed": False,
+            "maps_I4_to_I8": True,
+            "maps_I8_to_I4": True,
+            "reflection_norm_product": 2,
+            "spinor_representative_is_nonsquare": True,
         },
         "scope": {
             "certificate_checks": [
-                "explicit projective substitutions and matrix identities",
-                "reflection factorization and nonsquare class modulo 11",
-                "orders, intersection, and join of explicit permutation carriers",
-                "explicit Hadamard outer images exchange the two parent classes",
+                "the displayed golden six-sets and their exact metric data",
+                "all twenty three-point determinants",
+                "the exchanger on the two conjugate charts",
+                "the reduction modulo 11 and nonsquare spinor representative",
             ],
-            "human_proof_checks": [
-                "golden fibre and six-arc argument",
-                "A4 intersection",
-                "SO3/Omega3 identification with PGL2/PSL2",
-                "marked C2-torsor lemma",
+            "not_checked": [
+                "the global incidence degree and branch divisor",
+                "the local normalization comparison",
+                "the Clebsch-chart invariant identity",
             ],
         },
     }
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    certificate = build_certificate()
-    rendered = json.dumps(certificate, indent=2, sort_keys=True) + "\n"
+    rendered = json.dumps(build_certificate(), indent=2, sort_keys=True) + "\n"
     if args.check:
-        assert OUTPUT.read_text() == rendered
-        print("C652 arithmetic-cover certificate: PASS")
+        assert OUTPUT.read_text(encoding="utf-8") == rendered
+        print("golden-fibre certificate: PASS")
     else:
-        OUTPUT.write_text(rendered)
+        OUTPUT.write_text(rendered, encoding="utf-8")
         print(f"wrote {OUTPUT}")
 
 

@@ -4,7 +4,8 @@
 **Lane:** `clebsch`  
 **Paper:** `papers/clebsch-passages/`  
 **Entering verdict:** `NO-GO` for submission  
-**Status:** queued
+**Status:** local mathematical and package closure complete; submission and
+fresh-review gates remain open
 
 ## Authority and cold-session startup
 
@@ -310,20 +311,98 @@ C680 closes only when:
 - the immutable locator and author metadata are present before the verdict
   is called submission-ready.
 
-## Entering mystery ledger
+## 2026-07-26 local closure result
+
+The entering rational Clebsch-chart statement was false as written.  For
+the standard rational harmonic space, the vanishing four-space of the
+golden icosahedron is defined over
+\(E=\mathbf Q(\sqrt5)\); Galois conjugation carries it to the distinct
+vanishing four-space of the conjugate icosahedron.  The manuscript now
+defines
+\[
+ V_t=\{p\in H_E:p(a)=0\text{ for every }[a]\in I_t\}
+\]
+and the exact \(A_5\)-equivariant coordinate map
+\(\iota_t(y)=\sum_i y_iq_i\).  It identifies
+\(xyz\) with \((4,-1,-1,-1,-1)/5\), obtains
+\(\sigma_3=4/25\), and records
+\(J_0(xyz)=(16/25)^2\).  The main theorem no longer calls this a
+\(\mathbf Q\)-defined restriction or a rational constant torsor.
+
+The global square-class theorem survives.  The paper now gives rational
+equations for Hitchin's Grassmannian incidence model, shrinks the proper
+incidence morphism to a finite neighborhood of \([xyz]\), identifies it
+with the normalization in the quadratic generic field, and uses
+\(J_0(xyz)\ne0\) to reach the finite etale locus.  Hitchin's two distinct
+golden configurations are consequently the complete reduced
+scheme-theoretic fibre with residue algebra \(\mathbf Q(\sqrt5)\); a local
+generator of \(\mathcal O(3)\) makes the square-unit specialization step
+explicit and yields \(c=5\).
+
+The release artifact is now paper-local.  The arithmetic certificate was
+reduced to the displayed golden configurations, all twenty three-point
+determinants, the exchanger, its mod-\(11\) reduction, and the nonsquare
+spinor representative.  The private Mathieu/Hadamard input, matching
+matrices, marked carrier, and complete unused Klein bundle were removed.
+`WORKPLAN.md` was replaced by `ARTIFACT.md`; `release_files.json` is the
+27-file packaging allowlist; and a local `Makefile` lets the aggregate
+build without the repository's parent `papers/Makefile`.
+
+The four trust rows now name exact theorem labels and clause boundaries.
+The frozen statement identity includes the complete trust-row prose,
+proof-mode, and evidence-route snapshot and its SHA-256 digest.  The
+manifest states `formal_coverage: none claimed`, has no workflow owner
+fields, and records the two external submission blockers separately from
+the green local release gate.  The aggregate rejects C-IDs, the superseded
+programmatic paper name, and every `notes/` reference in packaged text.
+The unlicensed word “new” and the manuscript's archive placeholder were
+deleted.
+
+### Reproducibility
+
+Run from `papers/clebsch-passages/`:
+
+```text
+python3 verification/evidence/arithmetic_cover.py --check
+python3 verification/evidence/arithmetic_cover_replay.py
+sha256sum -c verification/evidence/arithmetic_cover.sha256
+python3 verification/verify_release.py
+```
+
+The primary generator is deterministic and uses exact
+\(\mathbf Q[t]/(t^2-t-1)\) arithmetic; the replay independently works
+modulo \(11\).  The certificate does not check Hitchin's incidence degree,
+branch divisor, local normalization comparison, or invariant restriction;
+those remain human arguments from the cited primary source.
+
+| file | bytes | SHA-256 |
+|---|---:|---|
+| `arithmetic_cover.py` | 6445 | `6475fd509bde04476fce39a1d82432d2700628da1b6d2426396b61e2f28770c4` |
+| `arithmetic_cover_replay.py` | 2140 | `d64c5e2734b66af6547cbfabe5c1938b3ffb5ba8332283ee627314aeb0fc8fb5` |
+| `arithmetic_cover.json` | 1151 | `c0e338960cd0a12a7eab85a7f000847349327564142178af97a03a54aef23c41` |
+
+The ordinary aggregate and a copy of the paper directory under a fresh
+temporary root both pass all thirteen checks, including the warning-free
+eight-page build.  Visual inspection of the title and first four pages
+found no layout defect; PDF text contains no workflow identifier,
+repository-note reference, stale paper name, or archive placeholder.
+
+## Mystery ledger
 
 | feature | status | closure gate |
 |---|---|---|
 | factor-\(13\) Gram normalization | settled | preserve \(G=K/13\) and exact replay |
-| Clebsch chart inside \(H\) | open blocker | explicit rational inclusion and normalization |
-| extraction of \(c=5\) from one fibre | open blocker | local normalization and complete reduced fibre |
-| artifact self-containment | open blocker | isolated-package replay |
-| statement-to-ledger identity | open blocker | label-level manifest validation |
-| Lean coverage | bounded but implicit | explicit no-claim or exact partial correspondence |
-| standalone harmonic novelty | unsupported wording | delete “new” or run targeted audit |
+| Clebsch chart inside \(H\) | settled by correction | exact \(E\)-defined conjugate charts; no false rational inclusion |
+| extraction of \(c=5\) from one fibre | settled | finite-etale local normalization and complete reduced fibre |
+| artifact self-containment | settled | ordinary and isolated-package replay green |
+| statement-to-ledger identity | settled | label/clause map and frozen row digest |
+| Lean coverage | settled | explicit `none claimed` |
+| standalone harmonic novelty | settled subtractively | unlicensed “new” deleted |
 | immutable locator and author metadata | external blocker | user-supplied submission data |
+| fresh context-free PDF-only referee read | open release gate | launch only from the regenerated PDF without C670/C680 feedback |
 
-Vibe check: the harmonic half is healthy and the arithmetic result still
-looks worth saving, but the next session must treat the scheme-theoretic
-fibre and release-package isolation as proof obligations, not editorial
-polish.
+Vibe check: the mathematical repair is stronger than the entering draft
+because it discovered and removed a false descent claim while preserving
+the global \(5J_0\) theorem.  The local artifact is now clean; the only
+remaining gates require an independent reader and user-controlled
+submission metadata.

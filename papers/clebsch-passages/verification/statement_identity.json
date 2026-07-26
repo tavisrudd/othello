@@ -1,14 +1,14 @@
 {
   "schema": "clebsch-orientation-statement-identity-v2",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "9b0a44efd432c6004d7f0ef7578789db965f96b4a79cfcac7768c3f3a0b8977e",
+  "main_source_sha256": "d3c2ba907997acb378774e63b48392ea5f7f29e41827c41b0e55f1b312ac3c20",
   "section_sha256": {
-    "sections/01-introduction.tex": "4efa5c94a1fdcc49c1276bc9ca3e582084ffd3da8a1303f974e5545ff74eae54",
-    "sections/02-orientation-cover.tex": "0849906c7d7c023386e829823bbcf3f3ecf69a15d32f49e2c33f4254ee6de20f",
-    "sections/04-arithmetic-specialization.tex": "63a77661a0bcd997a153976352b9e2edc89f5b7a8d67f6c308bb72b82ec55d4d",
+    "sections/01-introduction.tex": "019ece88e06892c60b678bedf80509bf27c7a6bfde492fb1209a412fe5a4a295",
+    "sections/02-orientation-cover.tex": "53eb63abc327cb36212a6d403c76900bc6bab83310498d5197014e6a91a3e63d",
+    "sections/04-arithmetic-specialization.tex": "c101730c16f28345eb67aeac1817745abbc54d27a9730af4a91d8c62311c6905",
     "sections/05-harmonic-realization.tex": "9b7ae8b18bb5265f161d9d3f52ba0d04eac0ad6c96fbcd40dfc406aa3105f321",
-    "sections/08-verification.tex": "8fe43f6909bd55eb28e52d34ad7a8d9f9ba7054d8900b71b7e89126767b65451",
-    "sections/09-conclusion.tex": "af6d4daf493b7b4e3c47045177cbf40ccf88ba3875f38645fe0ec6961bb14efd",
+    "sections/08-verification.tex": "40149c005f3cdf4031f9e84bcc8c7852ce2d0d6d598fd63c9b2621f585051ada",
+    "sections/09-conclusion.tex": "1848afc8cbda1859ee60406c6ddad394a7ad982b887468d12aa9df15ac7102d0",
     "sections/10-references.tex": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
   },
   "statement_count": 4,
@@ -18,16 +18,16 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 27,
-      "sha256": "b92bcae117336876d8eaf9d9305135ca5b58aef0fa089353eb8529b8ea6afc8c",
-      "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr),\n\\qquad J_0|_V=16\\sigma_3^2.\n\\]\nHence its restriction to \\(D(\\sigma_3)\\subset\\mathbf P(V)\\) is the constant\ngolden torsor\n\\[\n D(\\sigma_3)\\times_{\\Spec\\Q}\\Spec\\Q(\\sqrt5)\n \\longrightarrow D(\\sigma_3).\n\\]\nThe fibre over \\(xyz\\) consists of two conjugate icosahedral configurations\ndefined over \\(\\Q(\\sqrt5)\\).  Their Galois exchanger has good reduction at\n\\(11\\), where its spinor class is the nontrivial element of\n\\[\n\\operatorname{PGL}_2(11)/\\operatorname{PSL}_2(11).\n\\]\n\\end{theorem}"
+      "source_line": 33,
+      "sha256": "982647d1f938c9694e199e67891a7471c220eccb4f4f0a590e2d53d545432f91",
+      "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).  Its Galois exchanger has good reduction at \\(11\\), where\nits spinor class is the nontrivial element of\n\\[\n\\operatorname{PGL}_2(11)/\\operatorname{PSL}_2(11).\n\\]\n\\end{theorem}"
     },
     {
       "label": "thm:harmonic-main",
       "environment": "theorem",
       "title": "Degree-six harmonic restriction",
       "source": "sections/01-introduction.tex",
-      "source_line": 52,
+      "source_line": 59,
       "sha256": "6b9a793610cb48237465bcbcc70096e022e995bb6eac40f8f24dfc6cc290fd01",
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega),\n \\qquad\n P_6(s)=\\frac{231s^6-315s^4+105s^2-5}{16}.\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in \\(\\mathcal H_6\\).  With\n\\(\\langle f,g\\rangle=(4\\pi)^{-1}\\int_{S^2}fg\\), the spherical cubic on this\ncopy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     },
@@ -36,7 +36,7 @@
       "environment": "proposition",
       "title": "Golden fibre",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 24,
+      "source_line": 18,
       "sha256": "434c6639df29640b2183880dff9bbdee7d4cbc7e9fd3bf359a20e7e0e02fe25c",
       "tex": "\\begin{proposition}[Golden fibre]\\label{prop:golden-fibre}\nOver a field of characteristic different from \\(2\\) and \\(5\\), the points\nof \\(I_t\\) lie on \\(xyz=0\\), have a common nonzero norm, have normalized\nsquared inner product \\(1/5\\), and form a six-arc.  The two configurations\nare conjugate geometric configurations defined over\n\\[\n \\Q[t]/(t^2-t-1)=\\Q(\\sqrt5)\n\\]\nand are exchanged by its nontrivial automorphism.  In Hitchin's normalized\ncover of ordered icosahedra they are the complete fibre over \\([xyz]\\).\n\\end{proposition}"
     },
@@ -45,9 +45,115 @@
       "environment": "proposition",
       "title": "Spinor specialization",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 75,
+      "source_line": 69,
       "sha256": "d40898676504ad95d7c03b70a5292d3f61d402445730245b7d1bf649ddf2b96f",
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe reduction of \\(R\\) represents the nontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
+    }
+  ],
+  "trust_rows_sha256": "dc2e11c79067bcbccd514f9c8d5022eb58b6cea16400c51708a741cf76bd3a63",
+  "trust_rows": [
+    {
+      "id": "ARITH-1",
+      "theorem_labels": [
+        "thm:arithmetic-main"
+      ],
+      "clauses": [
+        "rational incidence model and quadratic function field",
+        "branch square class 5J0",
+        "conjugate Clebsch charts and the identity iota_t^*J0=16 sigma3^2"
+      ],
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, and pulls J0 back to 16 sigma3^2.",
+      "status": "proven",
+      "modes": [
+        "conceptual",
+        "classical-input"
+      ],
+      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, and invariant calculation",
+      "evidence": [
+        "sections/01-introduction.tex",
+        "sections/02-orientation-cover.tex"
+      ]
+    },
+    {
+      "id": "ARITH-2",
+      "theorem_labels": [
+        "thm:arithmetic-main",
+        "prop:golden-fibre",
+        "prop:spinor-specialization"
+      ],
+      "clauses": [
+        "complete reduced local fibre over xyz",
+        "golden six-set metric and six-arc properties",
+        "mod-11 exchanger and nonsquare spinor class"
+      ],
+      "statement": "The complete reduced fibre over xyz has residue algebra Q(sqrt(5)); its displayed configurations are exchanged by R, whose reduction modulo 11 has nontrivial spinor class.",
+      "status": "certified",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "certificate",
+        "independent-replay"
+      ],
+      "proof_role": "local normalization proof plus exact audit of displayed coordinates",
+      "evidence": [
+        "sections/02-orientation-cover.tex",
+        "sections/04-arithmetic-specialization.tex",
+        "verification/evidence/arithmetic_cover.py",
+        "verification/evidence/arithmetic_cover_replay.py",
+        "verification/evidence/arithmetic_cover.json",
+        "verification/evidence/arithmetic_cover.sha256"
+      ]
+    },
+    {
+      "id": "HARM-1",
+      "theorem_labels": [
+        "thm:harmonic-main"
+      ],
+      "clauses": [
+        "face-axis labeling",
+        "Petersen minus-two eigenspace",
+        "injective degree-six zonal-harmonic realization"
+      ],
+      "statement": "The ten explicitly labelled face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with normalized spherical Gram matrix one thirteenth of the reproducing kernel and the Clebsch four-space equal to the Petersen minus-two eigenspace.",
+      "status": "certified",
+      "modes": [
+        "conceptual",
+        "certificate",
+        "independent-replay"
+      ],
+      "proof_role": "human representation-theoretic proof with exact matrix audit",
+      "evidence": [
+        "sections/05-harmonic-realization.tex",
+        "verification/evidence/harmonic_clebsch.py",
+        "verification/evidence/harmonic_clebsch_replay.py",
+        "verification/evidence/harmonic_clebsch.json",
+        "verification/evidence/harmonic_clebsch.sha256"
+      ]
+    },
+    {
+      "id": "HARM-2",
+      "theorem_labels": [
+        "thm:harmonic-main"
+      ],
+      "clauses": [
+        "normalized spherical cubic coefficient -784000/1247103"
+      ],
+      "statement": "The normalized degree-six spherical cubic restricts to -784000/1247103 times sigma3 on the Clebsch four-space.",
+      "status": "certified",
+      "modes": [
+        "conceptual",
+        "classical-input",
+        "certificate",
+        "independent-replay"
+      ],
+      "proof_role": "Gaunt identity and invariant-line argument with two exact evaluations",
+      "evidence": [
+        "sections/05-harmonic-realization.tex",
+        "verification/evidence/harmonic_clebsch.py",
+        "verification/evidence/harmonic_clebsch_replay.py",
+        "verification/evidence/harmonic_clebsch.json",
+        "verification/evidence/harmonic_clebsch.sha256"
+      ]
     }
   ]
 }

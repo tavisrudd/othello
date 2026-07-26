@@ -17,8 +17,10 @@ The claim/evidence map, exact programs, canonical certificates, checksums,
 toolchain requirements, and aggregate replay command are included in the
 \texttt{verification} directory distributed with the paper.  The aggregate
 runner also checks the four theorem-like statements against their frozen
-identity and requires a warning-free manuscript build.
-The proofs do not depend on availability of these audits.  An immutable
-archive identifier for the complete paper and artifact bundle is required
-before submission and will be added to this paragraph when that deposit
-exists.
+identity, verifies label-level correspondence with every trust row, checks a
+declared packaging allowlist, and requires a warning-free manuscript build.
+The manifest explicitly claims no Lean coverage: the incidence model,
+square class, local fibre comparison, spinor specialization, face-axis
+geometry, and spherical moments are not formal dependencies.  The proofs do
+not depend on availability of the exact-arithmetic audits.  The complete
+source and verification bundle accompanies this manuscript.

@@ -1,0 +1,32 @@
+{
+  "schema": "clebsch-passages-release-files-v1",
+  "files": [
+    "ARTIFACT.md",
+    "Makefile",
+    "README.md",
+    "clebsch_passages.pdf",
+    "clebsch_passages.tex",
+    "release_files.json",
+    "sections/01-introduction.tex",
+    "sections/02-orientation-cover.tex",
+    "sections/04-arithmetic-specialization.tex",
+    "sections/05-harmonic-realization.tex",
+    "sections/08-verification.tex",
+    "sections/09-conclusion.tex",
+    "sections/10-references.tex",
+    "verification/README.md",
+    "verification/evidence/arithmetic_cover.json",
+    "verification/evidence/arithmetic_cover.py",
+    "verification/evidence/arithmetic_cover.sha256",
+    "verification/evidence/arithmetic_cover_replay.py",
+    "verification/evidence/harmonic_clebsch.json",
+    "verification/evidence/harmonic_clebsch.py",
+    "verification/evidence/harmonic_clebsch.sha256",
+    "verification/evidence/harmonic_clebsch_replay.py",
+    "verification/extract_statement_identity.py",
+    "verification/statement_identity.json",
+    "verification/trust_manifest.json",
+    "verification/verify_release.py",
+    "verification/verify_scaffold.py"
+  ]
+}

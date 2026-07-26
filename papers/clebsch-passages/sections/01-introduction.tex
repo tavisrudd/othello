@@ -5,7 +5,13 @@ Let
  H=\ker\!\left(\partial_x^2+\partial_y^2+\partial_z^2:
  \Q[x,y,z]_3\longrightarrow\Q[x,y,z]_1\right)
 \]
-be the rational seven-space of harmonic cubics.  Hitchin associated to a
+be the rational seven-space of harmonic cubics for
+\(Q(x,y,z)=x^2+y^2+z^2\).  We use the polarization pairing on cubics
+normalized by
+\[
+ \langle p,(\,a\mathbin{\cdot}x\,)^3\rangle=p(a);
+\]
+its restriction to \(H\) is nondegenerate.  Hitchin associated to a
 general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations:
 equivalently, two Mukai--Umemura isotropic three-planes \(U\subset H\) with
 \(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  The incidence
@@ -14,8 +20,8 @@ variety of pairs \(([f],U)\) is therefore generically a degree-two cover of
 separate occurrence of the same Clebsch invariant in degree-six spherical
 harmonics.
 
-Let \(J_0\) denote Hitchin's irreducible invariant sextic, with his
-normalization, and write
+Let \(J_0\) denote Hitchin's irreducible invariant sextic, with the
+normalization in his invariant calculation.  Write
 \[
  V=\{(y_1,\ldots,y_5):\textstyle\sum_i y_i=0\},\qquad
  \sigma_3(y)=\frac13\sum_i y_i^3
@@ -28,18 +34,19 @@ Here and below, \(D(\sigma_3)\) is the principal open set
 \label{thm:arithmetic-main}
 The function field of Hitchin's incidence cover is
 \[
- \Q(\mathbf P(H))\bigl(\sqrt{5J_0}\bigr),
-\qquad J_0|_V=16\sigma_3^2.
+ \Q(\mathbf P(H))\bigl(\sqrt{5J_0}\bigr).
 \]
-Hence its restriction to \(D(\sigma_3)\subset\mathbf P(V)\) is the constant
-golden torsor
+For the Clebsch chart
+\(\iota_t:\mathbf P(V_{\Q(\sqrt5)})\to\mathbf P(H_{\Q(\sqrt5)})\)
+defined in Section~\ref{sec:cover},
 \[
- D(\sigma_3)\times_{\Spec\Q}\Spec\Q(\sqrt5)
- \longrightarrow D(\sigma_3).
+ \iota_t^*J_0=16\sigma_3^2.
 \]
-The fibre over \(xyz\) consists of two conjugate icosahedral configurations
-defined over \(\Q(\sqrt5)\).  Their Galois exchanger has good reduction at
-\(11\), where its spinor class is the nontrivial element of
+The chart is not defined over \(\Q\); Galois conjugation carries it to the
+chart of the conjugate icosahedron.  The fibre over the rational point
+\([xyz]\) is nevertheless a complete reduced fibre with residue algebra
+\(\Q(\sqrt5)\).  Its Galois exchanger has good reduction at \(11\), where
+its spinor class is the nontrivial element of
 \[
 \operatorname{PGL}_2(11)/\operatorname{PSL}_2(11).
 \]
@@ -69,24 +76,28 @@ copy is
 \]
 \end{theorem}
 
-Hitchin proves the generic degree, identifies the branch sextic, computes
-its Clebsch restriction, and classifies the fibre over \(xyz\)
-\cite[\S\S3, 9--10]{HitchinIcosahedron}
+Hitchin proves the generic degree, identifies the branch sextic, constructs
+the Clebsch chart, computes its restriction, and classifies the fibre over
+\(xyz\)
+\cite[\S\S2--4, 7--10]{HitchinIcosahedron}
 \cite[\S\S4--5]{HitchinBundles}.  The arithmetic theorem fixes the remaining
 rational constant in that square class and computes the spinor class of the
 explicit specialization.  The Mukai--Umemura threefold supplies the
-incidence source \cite{MukaiUmemura}; Dye's finite theorem gives the
+original threefold \cite{MukaiUmemura}; Hitchin supplies the incidence
+construction and every formula used here.  Dye's finite theorem gives the
 complementary square-\(5\) criterion for Clebsch hexagons
 \cite{DyeClebsch}.  The abstract
 equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
 comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 
-The harmonic theorem is new and logically independent of the incidence
-cover.  It places the classical degree-six bond-order observable
+The harmonic theorem is logically independent of the incidence cover.  It
+places the classical degree-six bond-order observable
 \cite{SNR1981,SNR1983} on the same four-space and computes its exact
 restriction.  The coefficient
 \(-784000/1247103\) has denominator divisible by \(11\), and this paper
-constructs no common integral lattice from which the two realizations could
-be obtained by base change.  The relation proved here is their common base
-four-space and invariant polynomial, not a specialization between them.
+constructs no rational identification of the two displayed embeddings and
+no common integral lattice from which they could be obtained by base
+change.  Their relation is an isomorphism class of four-dimensional
+\(A_5\)-modules and the invariant polynomial \(\sigma_3\), not a
+specialization between them.

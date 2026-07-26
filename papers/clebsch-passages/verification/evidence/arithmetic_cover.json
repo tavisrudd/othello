@@ -1,62 +1,55 @@
 {
-  "arithmetic": {
-    "comparison": {
-      "M4_maps_I4_to_A": true,
-      "M8_inverse_M4_equals_3R": true,
-      "M8_maps_I8_to_A": true,
-      "determinants": [
+  "exchanger": {
+    "linear_order": 4,
+    "maps_t_chart_to_conjugate_chart": true,
+    "matrix": [
+      [
         1,
-        9
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        0
       ]
-    },
-    "exchanger": {
-      "R_maps_I4_to_I8": true,
-      "R_maps_I8_to_I4": true,
-      "order": 4,
-      "spinor_representative": 2,
-      "spinor_representative_is_nonsquare": true
-    },
-    "golden_polynomial_modulus": 11,
+    ],
+    "projective_order": 4
+  },
+  "field": {
+    "common_norm": "t+2",
+    "nonzero_three_point_determinants": 20,
+    "normalized_squared_inner_product": "1/5",
+    "polynomial": "t^2-t-1",
+    "six_axes": 6
+  },
+  "mod_11": {
+    "maps_I4_to_I8": true,
+    "maps_I8_to_I4": true,
+    "reflection_norm_product": 2,
     "roots": [
       4,
       8
-    ]
-  },
-  "marked_compatibility": {
-    "canonical_unmarked_identification_claimed": false,
-    "forced_partner": "I8 <-> puncture-stabilizer M11",
-    "marking": "I4 <-> pure-coordinate M11",
-    "unmarked_equivariant_bijection_count": 2
-  },
-  "mathieu": {
-    "hadamard_exchange_is_noninner": true,
-    "hadamard_exchange_maps_parent_classes": [
-      "pure",
-      "puncture"
     ],
-    "intersection_equals_frozen_PSL2_11_carrier": true,
-    "intersection_order": 660,
-    "join_order": 95040,
-    "parent_orders": [
-      7920,
-      7920
-    ],
-    "upstream_certificate": "notes/2026-07-22-c470-golay-hadamard-automorphisms.json",
-    "upstream_sha256": "694ddb709dce8b4b513b33fa899d23fe538528d76a0d82ec6b8779305e6f9a07"
+    "spinor_representative_is_nonsquare": true
   },
-  "schema": "c652-arithmetic-cover-v1",
+  "schema": "golden-fibre-v2",
   "scope": {
     "certificate_checks": [
-      "explicit projective substitutions and matrix identities",
-      "reflection factorization and nonsquare class modulo 11",
-      "orders, intersection, and join of explicit permutation carriers",
-      "explicit Hadamard outer images exchange the two parent classes"
+      "the displayed golden six-sets and their exact metric data",
+      "all twenty three-point determinants",
+      "the exchanger on the two conjugate charts",
+      "the reduction modulo 11 and nonsquare spinor representative"
     ],
-    "human_proof_checks": [
-      "golden fibre and six-arc argument",
-      "A4 intersection",
-      "SO3/Omega3 identification with PGL2/PSL2",
-      "marked C2-torsor lemma"
+    "not_checked": [
+      "the global incidence degree and branch divisor",
+      "the local normalization comparison",
+      "the Clebsch-chart invariant identity"
     ]
   }
 }

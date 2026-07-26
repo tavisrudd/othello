@@ -289,15 +289,18 @@ The active order is strict:
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
 
-C670 is complete as the subtractive two-theorem cut, but its release verdict
-is superseded. A later PDF-only cold reader returned `NO-GO`: the manuscript
-does not define the Clebsch inclusion \(V\hookrightarrow H\), the extraction
-of the constant \(5\) lacks a local normalization/fibre comparison, and the
-PDF retains an archive placeholder. An isolated package replay also proved
-that the advertised paper-local arithmetic bundle still imports a private
-Mathieu/Hadamard certificate from `notes/`. C680 owns the mathematical,
-package, trust-ledger, Lean-boundary, novelty, and renewed-cold-read closure.
-Its authoritative brief is
+C680 has completed the local mathematical and artifact repair.  The
+fixed-icosahedron Clebsch chart is correctly defined over
+\(\mathbf Q(\sqrt5)\), not \(\mathbf Q\); a finite-etale local normalization
+argument now makes the two golden configurations the complete reduced fibre
+and preserves the global \(5J_0\) square-class theorem.  The 27-file
+`clebsch-passages` artifact has no C-ID, stale program name, repository-note
+reference, Mathieu/Hadamard/matching branch, or Klein bundle.  Label-level
+trust identity, explicit `formal_coverage: none claimed`, ordinary replay,
+isolated replay, and the warning-free eight-page PDF are green.  Submission
+remains `NO-GO` pending a fresh context-free PDF-only `GO`, an immutable
+artifact locator, and the author's affiliation/contact metadata.  The
+authoritative report and mystery ledger are
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
 
 If C182 has passed every local gate and waits only for a user-controlled
@@ -325,7 +328,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | C680 queued after post-C670 `NO-GO`; arithmetic and package closure required |
+| Paper III | `papers/clebsch-passages/` | C680 local closure green; fresh PDF-only review and external submission metadata remain |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -705,13 +708,11 @@ closure brief. The two entering revision reports are
 `notes/2026-07-26-c669-paper-iii-context-literature-audit.md` and
 `notes/2026-07-26-c668-paper-iii-focused-note-revision.md`.
 
-C670 implements the correct subtractive disposition, and its harmonic
-normalization remains green. Its `GO` is not the current release verdict.
-The later cold read found missing definitions and a scheme-theoretic gap in
-the arithmetic theorem; the isolated replay found private and deleted
-branches inside the release bundle; and the novelty audit does not license
-the surviving unqualified “new” sentence. C680 is the sole current Paper III
-repair path. Do not revive the finite bridge while closing it.
+C670 supplied the subtractive disposition and harmonic normalization.
+C680 corrects its arithmetic descent statement, closes the local fibre
+comparison, and replaces its private release bundle.  Do not revive the
+deleted finite bridge.  The only remaining `clebsch-passages` gates are the
+fresh PDF-only review and external submission metadata recorded above.
 
 C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full
