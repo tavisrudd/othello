@@ -27,8 +27,10 @@ nonzero tangent-node conductors.  Their normalized nonzero values are
 equidistributed, and on each tangent their value classes form the canonical
 near-one-factorization of \(K_{q-1}\).  Across tangent fibers, compatibility
 is exactly the complete \((q+1)\)-partite graph and has clique number
-\(q+1=k\).  Thus the odd tangent twist does not produce a global square-root
-carrier or a positive-defect obstruction.
+\(q+1=k\).  For the regular oval, every collinear triple from distinct
+fibers has nonzero first conductor, so the roots globalize exactly on
+tangent-fiber-transversal arcs.  Thus the odd tangent twist does not produce
+a global square-root carrier or a positive-defect obstruction.
 
 No manuscript or Lean file is changed.
 
@@ -303,6 +305,66 @@ each part and therefore has size \(q+1=k\), exactly the degree threshold in
 the tangent-twisted carrier argument.  The oval branch does not merely evade
 the bound: its pairwise compatibility graph saturates it.
 
+For the regular oval, C638 closes the next layer as well.  Put
+\[
+ H=A\cup\{n\},
+\]
+the regular hyperoval, and write
+\[
+ F_H=nF_A=n^2(F_A/n).
+\]
+On every odd carrier line let \(g_x^2=(F_A/n)|_{L_x}\).  The corresponding
+even-hyperoval root is
+\[
+ h_x=n|_{L_x}\,g_x.
+\]
+At a carrier intersection \(p=\ell^*\) with \(\ell\) not through \(n\), the
+first conductors satisfy
+\[
+ \boxed{\qquad \Omega_H(p)=n(p)\Omega_{\mathrm{odd}}(p).\qquad}
+\]
+Indeed, differentiating \(h_x=ng_x\) adds a common term
+\(g_x(p)D_{v_x}n\); its conductor sum vanishes because the relation
+coefficients satisfy \(\sum_xc_xv_x=0\).
+
+A line containing centres from three distinct tangent fibers cannot pass
+through \(n\).  C638 proves that every collinear triple in the regular
+hyperoval complement has nonzero first conductor.  The displayed transfer
+therefore gives
+\[
+ \boxed{\quad
+ \text{every collinear triple from three distinct tangent fibers has }
+ \Omega_{\mathrm{odd}}\ne0.\quad}
+\]
+There are exactly
+\[
+ \boxed{\qquad
+ \frac{q(q-1)}2\binom{q+1}{3}
+ +\frac{q(q+1)}2\binom{q-1}{3}
+\qquad}
+\]
+such triples.  The first term comes from the external conic lines, each
+containing one centre from every tangent fiber; the second comes from the
+ordinary conic secants, each containing \(q-1\) centres with distinct
+contacts.  The omitted \(q+1\) hyperoval secants are the oval tangents and
+contain only one contact fiber, where the zeroth conductor already obstructs
+gluing.
+
+Consequently the regular oval baseline has an exact globalizability
+criterion.  For \(Y\subseteq X_A\), the tangent-twisted roots are restrictions
+of one degree-\(m\) plane form if and only if
+\[
+ \boxed{\qquad
+ Y\text{ meets every tangent fiber at most once and }Y\text{ is an arc}.
+ \qquad}
+\]
+Necessity is the within-fiber zeroth conductor followed by the cross-fiber
+first conductor.  For sufficiency, all pairwise root values agree, and the
+arc condition makes the dual carrier lines have no triple concurrence, so
+the carrier extension lemma applies.  Thus the zero-defect baseline fixes
+not only all pair data but the entire ordinary gluing complex whenever the
+regular oval occurs on the zero-defect branch.
+
 ## Outcome and boundary
 
 C639 closes with a sharp positive/negative split:
@@ -353,12 +415,21 @@ near-one-factorization of \(K_{q-1}\).  This is the exact odd analogue of
 C638's uniform local-value and pair-design baselines.  The first shape not
 disposed of is necessarily cross-contact.
 
-The `ej2` pass closes the raw cross-contact pair layer as well.  Pairwise
+The same `ej` pass closes the raw cross-contact pair layer as well.  Pairwise
 compatibility is the complete \((q+1)\)-partite graph with tangent fibers as
 parts.  Its clique number is exactly \(q+1=k\), so the C626-style degree
-argument is sharp on the oval baseline.  Any remaining odd invariant must
-start at triples from distinct contact fibers, retain higher compatibility
-data, or use the prescribed conic; pair support and pair values are exhausted.
+argument is sharp on the oval baseline; pair support and pair values are
+exhausted.
+
+The user-requested `ej2` pass starts at the first surviving shape, triples
+from distinct contact fibers.  For the regular oval, the identity
+\(F_H=n^2(F_A/n)\) transfers C638's all-lines first-conductor theorem exactly:
+every collinear cross-fiber triple has nonzero odd first conductor.  Together
+with the zeroth conductor, this proves that the ordinary gluing complex is
+exactly the complex of tangent-fiber-transversal arcs.  No higher local jet
+is needed to classify ordinary globalizability in the baseline.  A genuinely
+new odd invariant must now compare nonregular oval behavior, subtract this
+complete regular baseline, or couple it to the prescribed conic.
 
 ## Mystery ledger
 
@@ -373,5 +444,7 @@ data, or use the prescribed conic; pair support and pair values are exhausted.
 | Can zeroth-conductor mass force positive defect? | **Settled negatively on the oval--nucleus equality branch:** every realized zero-defect pair has exactly \((q+1)\binom{q-1}{2}\) such pairs. |
 | Do normalized zeroth-conductor values have scalar bias? | **Settled negatively by `ej`:** every nonzero value occurs \((q+1)(q-2)/2\) times in the oval baseline. |
 | Does within-contact pair incidence retain extra structure? | **Settled exactly by `ej`:** each tangent fiber is a \(K_{q-1}\) decomposed into \(q-1\) near-perfect matchings indexed by conductor value. |
-| Does cross-contact pairwise compatibility yield a stronger bound? | **Settled negatively by `ej2`:** it is exactly \(K_{q-1,\ldots,q-1}\), whose clique number \(q+1=k\) saturates the carrier threshold. |
-| Is a further odd normalization still conceivable? | **Only as a new task:** it must start with triples across distinct contact fibers, subtract the oval--nucleus baseline, or use additional prescribed-conic data. |
+| Does cross-contact pairwise compatibility yield a stronger bound? | **Settled negatively by `ej`:** it is exactly \(K_{q-1,\ldots,q-1}\), whose clique number \(q+1=k\) saturates the carrier threshold. |
+| What happens on collinear triples from distinct fibers? | **Settled for the regular oval by `ej2`:** C638 transfers through \(F_H=n^2(F_A/n)\), making every such first conductor nonzero with the displayed exact count. |
+| Which subsets admit one ordinary global root in the regular baseline? | **Settled exactly by `ej2`:** precisely the tangent-fiber-transversal arcs. |
+| Is a further odd normalization still conceivable? | **Only as a new task:** it must distinguish nonregular ovals, subtract the complete regular baseline, or use additional prescribed-conic data. |
