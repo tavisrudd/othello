@@ -335,13 +335,22 @@ finite-field Clifford group, and \(L\) is Clifford.
 
 \begin{corollary}[Discrete product-unitary symmetry]
 \label{cor:discrete-lu-symmetry}
-For every stabilizer AME state in Theorem~\ref{thm:lu-lc-rigidity}, the
-product-unitary automorphism group
-modulo one-site scalar phases is finite and discrete.  Its identity
-component before that quotient consists only of one-site scalar phases.
-More precisely, if \(T=(S^1)^{2m}\), \(G\) is the fixed-party
-product-unitary automorphism group, and \(\widetilde G\) also displays
-party permutations, then
+Fix a stabilizer AME state \(\lvert\psi\rangle\) as in
+Theorem~\ref{thm:lu-lc-rigidity}, and define the local-factor tuple groups
+\[
+\begin{split}
+G&=\{(U_i)\in U(q)^{2m}:
+       (\bigotimes_iU_i)\lvert\psi\rangle
+          \in\mathbb C\lvert\psi\rangle\},\\
+\widetilde G
+ &=\{((U_i),\pi)\in U(q)^{2m}\rtimes S_{2m}:
+       (\bigotimes_iU_i)\pi\lvert\psi\rangle
+          \in\mathbb C\lvert\psi\rangle\},
+\end{split}
+\]
+where \(S_{2m}\) permutes the local factors.  Let
+\(T=(S^1)^{2m}\) be the coordinatewise scalar subgroup and put
+\(\Gamma=G/T\), \(\widetilde\Gamma=\widetilde G/T\).  Then
 \[
   1\longrightarrow T\longrightarrow G\longrightarrow \Gamma
     \longrightarrow 1,
@@ -352,7 +361,10 @@ party permutations, then
 are short exact sequences with closed connected kernel and finite
 discrete quotient; both inclusions of \(T\) are continuous.  In
 particular, \(G\) and \(\widetilde G\) are finite unions of connected
-components, each a translate of \(T\).  If \(\Pi\) is the subgroup of
+components, each a translate of \(T\).  Thus the local-factor
+automorphism group modulo one-site scalar phases is finite and discrete,
+and its identity component before quotienting is exactly \(T\).
+If \(\Pi\) is the subgroup of
 party permutations realized by \(\widetilde G\), there is a further exact
 sequence
 \[
@@ -390,7 +402,8 @@ to the constant identity factor set by such a normalized \(b\).
 \end{corollary}
 
 \begin{proof}
-Every local factor of an automorphism is Clifford.  The projective
+Every local factor in a tuple from \(G\) or \(\widetilde G\) is
+Clifford.  The projective
 single-qudit Clifford group over a finite field is finite, as is the
 party-permutation group.  The kernel of projectivizing each local factor
 is exactly the torus of one-site scalar phases.  That torus is the
