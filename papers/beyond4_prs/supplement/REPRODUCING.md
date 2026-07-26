@@ -29,7 +29,7 @@ python3 supplement/prepare_release_export.py /disk-backed/output/path
 ```
 
 The command refuses an existing destination or dirty release-owned source,
-archives only the committed paper tree and exact 16-file Lean closure, and
+archives only the committed paper tree and exact 17-file Lean closure, and
 prints the source, paper, and Lean commit identifiers.  The output contains a
 paper repository at its root and a separately initialized Lean repository
 under `lean/`; the paper repository excludes that adjacent Lean checkout.

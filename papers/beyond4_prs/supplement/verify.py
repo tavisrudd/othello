@@ -44,12 +44,13 @@ EXPECTED_PROJECT_CLOSURE = (
     "RelativeConicArcs.PRSRedundancyFiveCertified",
     "RelativeConicArcs.PRSRedundancySixSeven",
     "RelativeConicArcs.PRSRedundancySixSevenCertificate",
+    "RelativeConicArcs.PRSSquarefreeMarkerDensity",
     "RelativeConicArcs.PRSStableComponents",
     "RelativeConicArcs.PRSUniformCoveringRadius",
 )
-EXPECTED_AXIOM_TARGET_COUNT = 66
+EXPECTED_AXIOM_TARGET_COUNT = 74
 EXPECTED_AXIOM_TARGET_SHA256 = (
-    "ed61120a9f40a8e4ca8eb672b43ab61510d61a1e42fa01143c765a1d73c63ad1"
+    "8411874478983746739dc8111dec9b3252d5c45ae456a0d7e9944b8323a65683"
 )
 
 

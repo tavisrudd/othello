@@ -41,9 +41,11 @@ from the cited standard and companion theorems.
   replay uses five-point spans rather than the pointed-contraction criterion.
   At `q=7,8,9` this certifies split-freeness, not covering radius.
 - Certificate SC checks the stated integral identities, eliminations,
-  saturations, and finite bottom-component ledger. It does not turn the
-  manuscript's density and projective-transport arguments into executable
-  claims.
+  saturations, and finite bottom-component ledger. Lean separately checks
+  polynomial density of monic split-squarefree coefficient tuples,
+  density-to-closure transport, and finite irreducible-component selection
+  once the marker-to-catalecticant identification, row-space closure equality,
+  and closed component ledger are supplied.
 
 ## Exact replay commands
 

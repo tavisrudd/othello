@@ -9,12 +9,14 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 19 bibliography entries, six were read at **full text** in the
+Of the 26 bibliography entries, seven were read at **full text** in the
 underlying audits (Kaipa; Zhang--Wan--Kaipa; Wang; Ball--Lavrauw; Xu
-2023; Wu--Ding--Chen), five at **partial** depth
+2023; Wu--Ding--Chen; Wang--Wu--Hu), nine at **partial** depth
 (Kaipa--Patanker--Pradhan; Cesaratto--Matera--Pérez;
-Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret), and eight at
-**abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu;
+Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret; and the four repository
+companion manuscripts at their cross-cited statements), and ten at
+**abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu; Dür 1994;
+Raissi--Gogolin--Riera--Acín;
 Iarrobino--Kanev; Comas--Seiguer; Stichtenoth; Dür;
 Lidl--Niederreiter; Ben-Sasson et al.).
 
@@ -142,6 +144,67 @@ new. The Lucas and `e_7` reports make no priority claim. Their paper-facing
 content closes only the distinguished `e_7` orbit; the other degree-nine
 carrier strata remain unclassified.
 
+## Post-audit delta: additions through 2026-07-25
+
+This delta compares the manuscript with commit `b77f4683`, the last
+literature-audit baseline.  The new labelled mathematical items are
+`lem:old-marker-fixed-factor`, `lem:exact-linear-gcd-transport`,
+`lem:identically-colliding`, `prop:exact-bottom-ledger`,
+`lem:recursive-bottom-transport`, `prop:uniform-iterated-packages`, and
+`prop:higher-lucas-endpoint`; `tab:bottom-ledger-disposition` is their trust
+ledger.  The all-level stable-component and covering-radius headlines were
+also expanded to consume these pieces.
+
+The first six additions are proof-local specializations of ingredients
+already covered by the audit: divisibility after specialization, preservation
+of a displayed gcd under contraction, inseparable collision reduction,
+primary-decomposition/component bookkeeping, density and irreducible-component
+selection, and simultaneous use of the Aubry--Perret, Seroussi--Roth, and Dür
+inputs.  The manuscript makes no independent priority claim for any of those
+tools.  The exact conjunction and its use in the PRS proof were not located in
+the pinned PRS citation trees or the object searches already recorded above.
+The new Lean density and component-selection declarations formalize standard
+commutative-algebra/topology steps and carry no novelty claim.
+
+The higher-Lucas endpoint required a correction.  Wang--Wu--Hu,
+Proposition 11, proves that for \(q=p^e\) and \(k=p^a+1\), the block family
+from the corresponding Lucas subspace is nonempty exactly when \(a\mid e\);
+the blocks are projective sublines and form
+\(S(3,p^a+1,q+1)\).  In characteristic two, after fixing the point at
+infinity, their polynomial is \(X^{2^a}-X\).  This is the projectivized
+version of the manuscript's canonical-section witness and necessity
+criterion.  The manuscript now cites that proposition and does not present
+the bare divisibility criterion as new.  Their paper does not treat the
+larger endpoint Hankel kernel
+\(\langle1,t,\ldots,t^5,t^8\rangle\), its coherent-carrier identification,
+or transport of subspace-polynomial witnesses over the full
+\(\PGL_2(q)\)-orbit for every \(m\geq3\).  Those are the remaining
+paper-specific conclusions.
+
+Wang--Wu--Hu was read at **full text**, arXiv v4, all sections; cache key
+`arXiv:2604.21183v4`, SHA-256
+`ad1e19b1a1bf7b1bbc016cc4617a59a718cf1a3f9396f6386f4b1b151149a811`.
+The theorem-level comparison relies on their Theorem 1, Proposition 3,
+Theorem 2, Propositions 10--11, and the conclusion.  The pinned record is
+arXiv `2604.21183v4` (submitted 23 April 2026, v4 dated 4 June 2026).
+
+Four exact arXiv API object queries were run on 2026-07-25 over titles,
+abstracts, and metadata, with `max_results=100`:
+
+| Query | Results | Disposition |
+|---|---:|---|
+| `all:"Lucas subspace" AND all:"projective Reed-Solomon"` | 1 | Wang--Wu--Hu promoted and read in full |
+| `all:catalecticant AND all:"split squarefree"` | 0 | no result; no unqualified absence claim follows |
+| `all:"projective Reed-Solomon" AND all:"redundancy seven"` | 0 | no result; the prior three-graph PRS audit remains the wider evidence |
+| `all:"coherent polar" AND all:"Reed-Solomon"` | 0 | no result; no unqualified absence claim follows |
+
+A broader same-day web search over the same objects promoted only
+Wang--Wu--Hu and the already-audited PRS sources.  It was used for discovery,
+not as an enumerable negative set.  OpenAlex resolves the new preprint as
+`W7155558292` and reported zero citations on the audit date; Crossref did not
+resolve the arXiv-issued DOI and Semantic Scholar rate-limited the request.
+No negative verdict rests on this incomplete forward-citation check.
+
 ## Bibliography metadata and read-depth ledger
 
 Every DOI was resolved on 2026-07-23 by DOI content negotiation; author,
@@ -154,6 +217,7 @@ Surveys volume 6 (2019).
 | Key | DOI or pinned ID | Read depth | Role |
 |---|---|---|---|
 | SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | partial, Theorem 1 and its corollary | covering-radius/MDS-extension input |
+| Dur1994 | `10.1016/0012-365X(94)90256-9` | abstract/metadata only; exact consumed form checked secondarily in Kaipa Section IV at full-text depth | completeness--covering-radius equivalence |
 | Kaipa2017 | `10.1109/TIT.2017.2706677` | full text, sections recorded above | deep-hole/MDS dictionary |
 | ZWK2020 | `10.1109/TIT.2019.2940962` | full text, Sections I--IV | PRS lower-redundancy frontier |
 | ZhangWan2017 | `arXiv:1711.02292` | abstract/metadata only | explicit PRS deep-hole families |
@@ -165,6 +229,7 @@ Surveys volume 6 (2019).
 | AubryPerret1995 | `10.1007/BF02567835` | partial, introduction and p. 468 point bound | singular-curve bound |
 | GmainerHavlicek2013 | `10.1007/BF01237480`, `arXiv:1304.0088` | partial, abstract/Theorem 1 | NRC nuclei |
 | Wang2026 | `arXiv:2606.12810v1` | full text, all sections | splitting-family semantics |
+| WangWuHu2026 | `arXiv:2604.21183v4` | full text, all sections; theorem-level reliance listed above | prior projective-subline form of the higher-Lucas divisibility test |
 | IarrobinoKanev1999 | `10.1007/BFb0093426` | abstract/metadata only | classical apolarity/determinantal background |
 | ComasSeiguer2011 | `10.1007/s10208-010-9077-x` | abstract/metadata only | binary-form rank background |
 | BallLavrauw2019 | `10.4171/EMSS/33`, `arXiv:1908.10772` | full text, especially Section 3 | arcs/NRC background |
@@ -172,6 +237,11 @@ Surveys volume 6 (2019).
 | Dur1987 | `10.1016/0097-3165(87)90060-4` | abstract/metadata only | code automorphisms |
 | LidlNiederreiter1996 | `10.1017/CBO9780511525926` | abstract/metadata only | finite fields/linearized polynomials |
 | BenSassonEtAl2016 | `10.1109/TIT.2016.2520479` | abstract/metadata only | subspace-polynomial terminology |
+| RuddPrescribedHoles2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning only |
+| RuddRigidity2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning only |
+| RuddFactorization2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning and shared factorization-memory context |
+| RuddAMELU2026 | repository companion manuscript, bundle revision | partial, abstract and the LU-rigidity/transversal-conversion theorem statements consumed by the quantum corollary | cross-paper theorem input |
+| RaissiGogolinRieraAcin2018 | DOI `10.1088/1751-8121/aaa151`, arXiv `1701.03359v2` | abstract/metadata only from the official arXiv record | standard minimal-support AME/MDS and QECC context |
 
 No source is characterized beyond its stated read depth. Metadata-only
 background citations support terminology and orientation, not a load-bearing

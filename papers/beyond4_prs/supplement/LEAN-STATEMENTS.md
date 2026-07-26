@@ -11,7 +11,7 @@ redundancy-six/seven, and stable-component gates, together with the
 The balanced quantum corollary uses the separate cross-paper closure
 `RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and audit
 `RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`; it is not
-folded into the 16-file geometric aggregate.
+folded into the 17-file geometric aggregate.
 
 “Kernel algebra” means that Lean proves the displayed identity or arithmetic
 statement. “Conditional terminal” means that Lean proves the conclusion from
@@ -33,7 +33,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `thm:r5` | `PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate`; family arithmetic under `PRSRedundancyFive.FamilyData`; table arithmetic under `PRSRedundancyFiveCertificate` | Conditional synthesis plus kernel arithmetic. Covering radius, cubic-cover geometry, group actions, and certificate semantics remain inputs. |
 | `cor:q8-quantum-extension` | `PRSBalancedQuantumExtension.fieldEightRecord_mem_certifiedFieldRecords`; `fieldEight_projectiveDirectionCount`; `fieldEight_balancedExtensionParameters`; `fieldEight_uniqueBalancedPrimePowerRow`; `certifiedBalancedExtensions_haveQuantumConsequences`; `lengthTen_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent`; `lengthTen_encoderConversion_logical_and_physical_isClifford` | Exact certificate arithmetic and balanced-row uniqueness are kernel checked. The MDS--AME and Choi semantics are explicit interface fields; the LU and transversal conclusions are kernel-checked specializations of the generic MDS--CSS theorems. No complete LU/LC orbit classification is asserted. |
 | `thm:spine` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `redundancySevenAllFieldSynthesis`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount` | Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary. |
-| `thm:stable-component-headline` | `PRSPolarInduction.RecursiveContainedInput.bad_implies_persistent_or_modular`; the `PRSStableComponents` factor, coherent-Fano, modular-kernel, and cyclic-plane terminals; `PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold`; `seroussiRothDimensionRange_of_uniformTransverseThreshold`; `deep_iff_splitFree_of_externalSeroussiRothDuer_uniformTransverseThreshold` | Recursive descent, coordinate algebra, characteristic-two block-coverage termination, simultaneous stagewise budget arithmetic, and composition of the external radius implications are kernel checked. Irreducible-component selection, marker-product density, projective row-space transport, saturation, concrete scheme properness and integrality, the dual-GRS identification, and the cited coding theorems remain manuscript or external inputs. |
+| `thm:stable-component-headline` | `PRSSquarefreeMarkerDensity.eq_zero_of_splitCoefficientPullback_eval_eq_zero_on_injective`; `PRSStableComponents.ContainedRowSpaceData.rowSpace_subset_badCarrier`; `ContainedRowSpaceData.exists_component_containing_rowSpace`; `RecursiveContainedGeometryInput.bad_implies_persistent_or_modular`; the `PRSStableComponents` factor, coherent-Fano, modular-kernel, and cyclic-plane terminals; `PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold`; `seroussiRothDimensionRange_of_uniformTransverseThreshold`; `deep_iff_splitFree_of_externalSeroussiRothDuer_uniformTransverseThreshold` | Polynomial density of monic split-squarefree coefficient tuples, density-to-closure transport, finite irreducible-component selection, recursive descent, coordinate algebra, characteristic-two block-coverage termination, simultaneous stagewise budget arithmetic, and composition of the external radius implications are kernel checked. Identification of the retained-marker coefficient map with the catalecticant row-space closure, the exact primary-decomposition ledger, saturation, concrete scheme properness and integrality, the dual-GRS identification, and the cited coding theorems remain manuscript, certificate, or external inputs. |
 | `prop:r5-radius` | `PRSFoundation.CoveringRadiusInput.deep_iff_splitFree` | The logical use is checked; the Seroussi--Roth theorem is imported by citation. |
 | `prop:r5-gcd2` | `PRSRedundancyFive.FamilyData.family_arithmetic` and the three `deep_card_*` terminals | Family/count arithmetic is kernel checked; the geometric gcd classification is a manuscript proof. |
 | `prop:r5-gcd1` | no direct declaration | Manuscript proof, with the finite `q=7` clause supplied by Certificate R5. |
@@ -49,10 +49,10 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `lem:exact-linear-gcd-transport` | `PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget` and `UniformIteratedPackageInput.packages_fit_uniform_threshold` | The factor-preserving flag’s budget and simultaneous threshold use are kernel checked. Preservation of the concrete gcd under contraction is the displayed manuscript proof and an explicit formal input. |
 | `lem:identically-colliding` | no direct declaration | Manuscript reduction to the two inseparable fixed-level calculations. |
 | `prop:exact-bottom-ledger` | the `PRSStableComponents` factor, coherent-Fano, modular-kernel, and cyclic-plane terminals | Coordinate identities are kernel checked. The gcd trichotomy, exact component identification, primary decomposition, and match to the reduced terminal carrier are manuscript and Certificate SC mathematics. |
-| `lem:recursive-bottom-transport` | `PRSPolarInduction.RecursiveContainedInput.bad_implies_persistent_or_modular` | The finite recursive implication and one-step lifting composition are kernel checked. Irreducible-component selection and the catalecticant-rowspace closure are manuscript geometry supplied to the interface. |
+| `lem:recursive-bottom-transport` | `PRSSquarefreeMarkerDensity.eq_zero_of_splitCoefficientPullback_eval_eq_zero_on_injective`; `PRSStableComponents.ContainedRowSpaceData.rowSpace_subset_badCarrier`; `ContainedRowSpaceData.exists_component_containing_rowSpace`; `RecursiveContainedGeometryInput.bad_implies_persistent_or_modular` | Polynomial density of split-squarefree coefficient tuples, closure transport, finite closed-component selection by irreducibility, and the recursive implication are kernel checked. Identification of the marker coefficient map with the catalecticant row-space closure and identification and classification of the listed components are supplied geometric inputs. |
 | `thm:induction` | `PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular` | Conditional terminal. `lowerWitness` directly supplies rational witnesses; genus, deletion, and Hasse--Weil data are carried in the interface but do not derive that field. |
 | `prop:uniform-iterated-packages` | `PRSUniformCoveringRadius.bottomCurveDeletionBudget_eq`; `exactLinearGraphDeletionBudget_eq`; `intermediateParameterBudget_lt_uniformParameterBudget`; the two `*DeletionBudget_lt_fieldOrder_add_one` terminals; `UniformIteratedPackageInput.packages_fit_uniform_threshold` | The genus-one, exact-linear-gcd graph, and stagewise degree formulas and their simultaneous use above the threshold are kernel checked. Properness, geometric integrality, rational graph cardinality, and concrete degree bounds are explicit inputs proved in the manuscript. |
-| `thm:uniform-transverse` | `PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular`; `RecursiveContainedInput.bad_implies_persistent_or_modular`; `PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold`; `PRSStableComponents` coordinate terminals | Conditional one-step logic, recursive composition, coordinate identities, and uniform arithmetic are checked. Concrete integrality, point counts, component selection, and scheme identification remain manuscript proofs. |
+| `thm:uniform-transverse` | `PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular`; `PRSStableComponents.RecursiveContainedGeometryInput.bad_implies_persistent_or_modular`; `PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold`; `PRSStableComponents` coordinate and component-selection terminals | Conditional one-step logic, polynomial density of split-squarefree coefficient tuples, density-to-closure transport, finite irreducible-component selection, recursive composition, coordinate identities, and uniform arithmetic are checked. The retained-marker-to-catalecticant identification, integrality, point counts, primary decomposition, and scheme identification remain manuscript or certificate inputs. |
 | `prop:contained-rank-two` | no direct declaration | Characteristic-free manuscript rank--nullity proof; degree-specific formal terminals consume its consequence as an input. |
 | `prop:higher-lucas-endpoint` | no direct declaration | Manuscript proof using Lucas support, linearized-polynomial root differences, and binary subspace polynomials.  It classifies the canonical endpoint section and proves shallowness of the first fresh endpoint orbit, not of every higher modular-carrier stratum. |
 | `prop:r6-persistent` | `PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount`; tangent-translation terminals | Cardinality and quotient arithmetic are checked; genuine actions and geometric family identification are inputs. |
@@ -74,18 +74,19 @@ proposition, theorem, or corollary labels in the TeX include graph.
 
 ## Exact project-owned closure
 
-Recursive import resolution from the axiom-audit gate gives 16
+Recursive import resolution from the axiom-audit gate gives 17
 project-owned Lean files:
 
 - six gates: `PRSFoundation`, `PRSRedundancyFive`,
   `PRSPolarInductionRedundancySixSeven`, `PRSStableComponents`,
   `PRSBeyondRedundancyFour`, and
   `PRSBeyondRedundancyFourAxiomAudit`;
-- ten mathematical modules: `PRSContraction`, `PRSFoundation`,
+- eleven mathematical modules: `PRSContraction`, `PRSFoundation`,
   `PRSRedundancyFive`, `PRSRedundancyFiveCertificate`,
   `PRSRedundancyFiveCertified`, `PRSPolarInduction`,
   `PRSRedundancySixSeven`, `PRSRedundancySixSevenCertificate`, and
-  `PRSStableComponents`, and `PRSUniformCoveringRadius`.
+  `PRSSquarefreeMarkerDensity`, `PRSStableComponents`, and
+  `PRSUniformCoveringRadius`.
 
 `PRSContraction` contains only the finite-coordinate contraction API.
 The residual-quadratic, R8, R9, ordered-Hessian, Lucas-carrier, and

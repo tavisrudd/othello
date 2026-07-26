@@ -246,15 +246,15 @@
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Independent final-reader signoff",
-      "sha256": "7a10e717143e8a7e1c018c8a6d568f7b8aaafc21b6eaa094040635b427cd57a8"
+      "sha256": "092db6bdd9d4d618f4ffef72eaaf696103ddc80801caa0607306fcb384c504b0"
     },
     {
-      "bytes": 15432,
+      "bytes": 16490,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "ba3f31746efd622626b91a185662eb296fb0e05f72afeef9585b01c695d4849e"
+      "sha256": "f11dfb5ed610b98b790ce50608be1f249463a7372c27a63287af401cc44fc71c"
     },
     {
       "bytes": 6132,
@@ -262,7 +262,7 @@
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "feb7c34294ce6adfe2139de994a316777ef3a607dadb33c5f1daa2a1b62d825f"
+      "sha256": "9af63125475eb3d9117da616f9de545732b9df467ee301543630d32a13eb5ffa"
     },
     {
       "bytes": 12059,
@@ -289,20 +289,20 @@
       "sha256": "8bf477b5492d1ca58e9dbb6b637e1ab02b0f201c3b690d1942bceee84972a9fd"
     },
     {
-      "bytes": 6248,
+      "bytes": 6316,
       "path": "prepare_release_export.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Release-export builder",
-      "sha256": "6fff26efa379266301d25fd75ba8553823f729a0e6f3794a1481bf147da338c9"
+      "sha256": "ce55af12d042b959ca1c0223c0819ab806cf3cafd96b467c490cccf540767cfb"
     },
     {
-      "bytes": 12231,
+      "bytes": 12283,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "c85416809e2fc3c0775c797af10e19641da30b0a3919e3564a84abf65fed7ce7"
+      "sha256": "3fa971869dd014b14376781c2e39bfcd24f51a56dc8dcc4889905e08a94724ae"
     },
     {
       "bytes": 17225,
