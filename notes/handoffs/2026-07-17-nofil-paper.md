@@ -28,8 +28,14 @@ sharpness-negative release gate, a cleared novelty audit, and adversarial + cold
   become the flagship's projective section; no standalone projective paper; no standalone sum-free
   paper; if the flagship balloons, cut capacity-c, never sum-free). Ruling D4 keeps the open
   odd-plane conic-localization kernel as the flagship's open-frontier section only.
-- Novelty audit: `notes/2026-07-08-codex-projective-nofil-novelty-audit.md` is done and conservative;
-  one diligence item is open (Clark–Mancini–Van Hook full text unread).
+- Novelty audit: `notes/2026-07-08-codex-projective-nofil-novelty-audit.md` is conservative. A
+  full-text forward reference, Matsumoto--Momihara--Nakamura (2022), explicitly defines the
+  separately colored game and attributes the projective `STS(2^k-1)`, `k >= 3`, second-player
+  theorem to Clark--Mancini--Van Hook; it gives no shared-set Nofil result. Its involution argument
+  is for its own 1-reverse-STS theorem and must not be attributed to Clark--Mancini--Van Hook
+  without the original text. OpenAlex, Crossref, and Semantic Scholar all miss this citation
+  (each reports zero), so their citation graphs are not exhaustive. The original
+  Clark--Mancini--Van Hook full text remains unread, and C267 stays open.
 - No `lean/TRUST.md`-standard ledger exists for `lean/ProjectiveCap/` or `lean/CapGame/`; axiom
   profiles appear only as prose in the `cap` handoff.
 
