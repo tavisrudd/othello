@@ -534,6 +534,21 @@ scalar geometry and theorem composition are kernel checked.  A dedicated
 import gate and axiom audit passed without modifying the manuscript.  See
 `2026-07-25-c633-ame-lu-extension-field-frobenius-lean.md`.
 
+**C640 closed (2026-07-25): extension-field sector algebra adopted under a
+strict Lean-completeness rule.**
+Section 4 now states the exact diagonal and Frobenius--Gale divisors, explicit
+six-coordinate Gale multiplier, same-exponent sector disjointness, and
+automorphism equivariance of the pencil data.  All adopted clauses are
+unconditional in `ExtensionFieldPencil` and are imported through the main
+aggregate and axiom audit.  The full Galois-`z` Clifford-orbit theorem remains
+outside the manuscript because its sector-extraction and Clifford-construction
+bridges are conditional.  The unformalized C631 generator-matrix/Veronese
+remark and its \(m=2,3\) consequences were removed, while the kernel-checked
+intrinsic multiplier-line theorem remains.  The warning-free 23-page build,
+eight evidence replays, visual inspection, and 37-public/80-formal release
+checks pass.  See
+`2026-07-25-c640-ame-lu-extension-field-adoption.md`.
+
 **Post-C619 two-reader frontier (2026-07-25): exact frontiers closed;
 quantitative successor remains queued.**
 Two independent manuscript-only cold reads converged on the same research
@@ -613,6 +628,9 @@ C619 is closed.  Dependency order is authoritative:
     (complete; concrete complements remain externally certified).
 26. C633: extension-field pencil divisor algebra, Galois equivariance, and
     conditional additive-Clifford orbit interface in Lean (complete).
+27. C640: adopt only the unconditional extension-field sector algebra,
+    aggregate its Lean audit, and remove the unformalized C631 Veronese add-on
+    (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains

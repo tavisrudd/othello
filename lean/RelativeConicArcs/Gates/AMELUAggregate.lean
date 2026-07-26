@@ -12,6 +12,7 @@ import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
 import RelativeConicArcs.Gates.AMELUPencilClassification
 import RelativeConicArcs.AMELU.LUPencilClassification
+import RelativeConicArcs.AMELU.ExtensionFieldPencil
 import RelativeConicArcs.Gates.AMELUMarginalMoment
 import RelativeConicArcs.Gates.AMELULogicalPhaseFourCopy
 import RelativeConicArcs.Gates.AMELUTransportDivisor
@@ -37,12 +38,15 @@ code-to-dual multiplier space, its exact nullity test and projectively unique
 witness ratios, the shared six-party conventions, the
 arc--MDS--CSS--AME and stabilizer dictionaries, the admitted-pencil
 local-Clifford and local-unitary classifications, the six-party
-LU-to-LC rigidity theorem, the marginal-moment separator, the
+LU-to-LC rigidity theorem, the unconditional Frobenius-sector divisor,
+explicit Gale-multiplier, sector-disjointness, and field-automorphism
+equivariance results for the extension-field pencil, the marginal-moment separator, the
 fixed-party logical phase, the exact four-copy separator, and the transport
 divisor.
 
 The dictionary statements are unconditional.  The classification,
-marginal-moment, logical-phase, four-copy, transport, and exact GRS terminals derive
+marginal-moment, extension-field orbit, logical-phase, four-copy, transport,
+and exact GRS terminals derive
 their conclusions from structures whose fields state the geometric,
 analytic, finite-certificate, or orbit-recognition inputs that are not
 proved in their modules.  Importing this gate therefore does not turn those

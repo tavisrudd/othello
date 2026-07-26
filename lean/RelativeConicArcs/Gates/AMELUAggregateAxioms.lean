@@ -6,7 +6,8 @@ import RelativeConicArcs.Gates.AMELUAggregate
 This audit covers the length-generic rigidity, topological symmetry and
 transversal terminals together with the six-party dictionary,
 admitted-pencil classification, marginal-moment separator, fixed-party
-logical phase, four-copy separator, and transport-divisor terminals.  The
+logical phase, extension-field pencil-sector algebra, four-copy separator,
+and transport-divisor terminals.  The
 finite graph cardinalities use exhaustive native evaluation; all other
 listed declarations are checked without native evaluation.
 -/
@@ -126,6 +127,17 @@ open RelativeConicArcs.AMELU
 #print axioms admitted_nonGRS_pencil_classified_by_z
 #print axioms locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent
 #print axioms locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq
+#print axioms pencilFrameRatio_crossDifference
+#print axioms pencilFrameRatio_eq_iff
+#print axioms twistedPencilGaleDivisor_refl
+#print axioms pencilGalePairing_multiplier
+#print axioms pencilGalePairing_multiplier_zero_iff
+#print axioms twistedPencil_sectors_disjoint
+#print axioms map_pencilGRSQuartic
+#print axioms map_pencilA
+#print axioms map_pencilB
+#print axioms map_pencilZ
+#print axioms admitted_nonGRS_map_iff
 
 #print axioms card_marginalTriples
 #print axioms card_marginalStars

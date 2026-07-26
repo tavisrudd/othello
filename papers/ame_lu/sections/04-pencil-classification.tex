@@ -136,6 +136,54 @@ an LU, while Theorem~\ref{thm:lu-lc-rigidity} turns every LU intertwiner
 between the states \(\Psi_t,\Psi_u\) into an LC intertwiner.
 \end{proof}
 
+\begin{proposition}[Frobenius-sector divisors]
+\label{prop:frobenius-sector-divisors}
+Let \(\sigma\) be an automorphism of a finite field of odd order and let
+\(t\) be admitted and non-GRS.  Put
+\[
+ E_\sigma(t)=(\sigma(t)-t)(1-\sigma(t)t),\qquad
+ D_\sigma(t)=((1-\sigma(t))(1-t))^2+\sigma(t)t.
+\]
+Then
+\[
+ \frac{\sigma(t)}{(1-\sigma(t))^2}
+   =\frac{t}{(1-t)^2}
+ \quad\Longleftrightarrow\quad E_\sigma(t)=0.            \tag{4.6}
+\]
+If \(h=(1-\sigma(t))(1-t)\) and
+\(w=(-h,-h,1,1,-1,-1)\), then
+\[
+ H_{\sigma(t)}\diag(w)H_t^{\mathsf T}=0
+ \quad\Longleftrightarrow\quad D_\sigma(t)=0.            \tag{4.7}
+\]
+Moreover \(D_{\mathrm{id}}(t)=G(t)\), and
+\[
+ E_\sigma(t)=0\quad\Longrightarrow\quad D_\sigma(t)\ne0.
+                                                               \tag{4.8}
+\]
+Finally \(G,A,B,z\) commute with \(\sigma\), and \(\sigma\) preserves the
+admitted non-GRS locus.
+\end{proposition}
+
+\begin{proof}
+Admission gives \(t\ne1\), and injectivity of \(\sigma\) gives
+\(\sigma(t)\ne1\).  Cross multiplication in \((4.6)\) gives
+\[
+ s(1-t)^2-t(1-s)^2=(s-t)(1-st)
+\]
+with \(s=\sigma(t)\).  Direct multiplication in \((4.7)\) makes eight
+entries vanish identically and leaves \(-2D_\sigma(t)\) in the last
+entry; odd characteristic gives the equivalence.  Setting \(\sigma\) to
+the identity yields \(D_{\mathrm{id}}=G\).
+
+If \(E_\sigma(t)=0\), then either \(\sigma(t)=t\) or
+\(\sigma(t)t=1\).  In the first case \(D_\sigma(t)=G(t)\).  In the
+second, multiplying \(D_\sigma(t)\) by \(t^2\) gives \(G(t)\).
+Admission excludes \(t=0\) and \(G(t)=0\), proving \((4.8)\).
+The equivariance statements follow by applying \(\sigma\) to the
+defining polynomial and rational expressions.
+\end{proof}
+
 The prime-field hypothesis is necessary for this scalar classification.
 Over \(\F_{p^e}\), the basis permutation
 \(\lvert x\rangle\mapsto\lvert x^p\rangle\) is a local Clifford and sends
@@ -145,7 +193,9 @@ Over \(\F_{p^e}\), the basis permutation
 \[
  z(s)=3+3s,\qquad z(-s)=3+2s.
 \]
-Thus extension-field LC/LU classification requires at least a Frobenius
-quotient and, for the full Weyl normalizer, potentially further
-\(\F_5\)-symplectic identifications.  No such classification is claimed
-here.
+Proposition~\ref{prop:frobenius-sector-divisors} gives the exact scalar
+geometry of each Frobenius exponent.  It does not by itself extract a
+nonzero exponent sector from an arbitrary additive local Clifford or
+construct a local Clifford from a Galois match of \(z\).  Those two
+representation-theoretic bridges are not claimed here, so neither is a
+full extension-field LC/LU classification.

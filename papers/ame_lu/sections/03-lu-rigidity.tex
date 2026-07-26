@@ -321,29 +321,6 @@ Hence \(\dim\mathcal D(E,F)\leq1\).  The all-ones vector belongs to
 \(F=C^\perp\) gives the remaining assertions.
 \end{proof}
 
-\begin{remark}[Veronese circuit and phase test]
-\label{rem:veronese-phase-test}
-For a generator matrix \(G=[g_1\ \cdots\ g_{2m}]\),
-\[
- s\in\mathcal D(C,C^\perp)
- \quad\Longleftrightarrow\quad
- G\diag(s)G^{\mathsf T}
-   =\sum_{i=1}^{2m}s_i g_i g_i^{\mathsf T}=0.          \tag{3.5}
-\]
-Thus diagonal isoduality is a single exact nullity test: the displayed
-map from \(\F_q^{2m}\) to the symmetric \(m\)-by-\(m\) matrices has rank
-\(2m-1\) on the isodual branch and \(2m\) otherwise.  Equivalently, the
-quadratic Veronese columns \(g_i g_i^{\mathsf T}\) are either independent
-or form a circuit whose unique dependence uses every column.
-
-For \(m=2\), four such columns lie in a three-dimensional symmetric-matrix
-space, so dependence is forced; every exact \([4,2,3]_q\) MDS code is
-diagonally isodual.  For \(m=3\), the six Veronese columns form a square
-matrix, and its determinant vanishes exactly when the six projective
-points lie on a conic.  This recovers the six-party phase boundary in
-Section~\ref{sec:logical} from the all-length multiplier test.
-\end{remark}
-
 \begin{proof}[Proof of
 Corollary~\ref{cor:diagonal-isodual-transversal-group}]
 Write a fixed-party product-Clifford action on Pauli labels as
@@ -358,12 +335,12 @@ matrices with the corresponding entries.  Preservation of
 \begin{array}{ll}
 D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
 D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
-\end{array}                                             \tag{3.6}
+\end{array}                                             \tag{3.5}
 \]
 
 If the block at the chosen input is nondiagonal, then \(D_\beta\) or
 \(D_\gamma\) is nonzero.
-Proposition~\ref{prop:diagonal-multiplier-line} and \((3.6)\) give
+Proposition~\ref{prop:diagonal-multiplier-line} and \((3.5)\) give
 \[
  D_\gamma C=C^\perp\qquad\text{or}\qquad
  D_\beta C^\perp=C.
@@ -376,7 +353,7 @@ hence the exact linear factor there is \(T\).
 
 Now suppose
 \[
- S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.7}
+ S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.6}
 \]
 The projective vector \([s_1:\cdots:s_{2m}]\), and hence every propagation
 ratio \(s_i/s_j\), depends only on \(C\).
@@ -387,7 +364,7 @@ For \(\lambda,\mu\in\F_q\), put
  \begin{pmatrix}1&0\\ \lambda s_i&1\end{pmatrix},
  \qquad
  F_i^+(\mu)=
- \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.8}
+ \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.7}
 \]
 On the CSS label space
 \(L_C=(C\oplus0)+(0\oplus C^\perp)\), the product of the lower blocks
@@ -415,7 +392,7 @@ Corollary~\ref{cor:transversal-clifford} excludes every product-unitary
 logical action outside that group.  Hence the displayed group is exact.
 
 For a generalized or extended generalized Reed--Solomon code, the
-standard dual formula supplies \((3.7)\), including the extended
+standard dual formula supplies \((3.6)\), including the extended
 evaluation point at length \(q+1\).  Thus the GRS tower lies on the
 diagonally isodual branch, but the proof used no evaluation structure.
 
@@ -431,10 +408,10 @@ Propagation to coordinate \(i\) is
  =
  \begin{pmatrix}1&0\\0&t_i\end{pmatrix}
  A
- \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.9}
+ \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.8}
 \]
 Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
-and the elementary matrices in \((3.8)\) satisfy all
+and the elementary matrices in \((3.7)\) satisfy all
 \(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
 applies at the extended evaluation point.  It uses only the diagonal
 duality \(SC=C^\perp\), not the evaluation formula for a GRS code.

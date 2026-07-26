@@ -50,8 +50,9 @@ The accompanying Lean~4 artifact uses toolchain
 \texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
 arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
-identities, the length-generic LU-to-LC rigidity chain, and the transport
-polynomial and characteristic-seven identities in one environment.
+identities, the length-generic LU-to-LC rigidity chain, the
+extension-field pencil-sector algebra, and the transport polynomial and
+characteristic-seven identities in one environment.
 The length-generic part defines the code, equal-phase state, party action,
 and LU/LC relations on \(\operatorname{Fin}(2m)\); proves that the exact
 \([2m,m,m+1]\) parameters are equivalent to bijectivity of every
@@ -125,6 +126,16 @@ certificate replay, such as the transport determinant and double-coset
 inputs.  These are hypotheses of formalized implications, not additional
 Lean theorems.
 
+The extension-field scalar statements in
+Proposition~\ref{prop:frobenius-sector-divisors} are unconditional in
+Lean.  The aggregate audit checks the frame-ratio
+factorization, explicit Gale multiplier and odd-characteristic zero
+criterion, same-exponent sector disjointness, and automorphism equivariance
+of \(G,A,B,z\) and the admitted locus.  Its separate Galois-\(z\) orbit
+terminal is conditional on two named bridges: extraction of a projective
+Frobenius sector from an additive Clifford equivalence, and construction of
+a Clifford from a Galois match.  Neither bridge is used as a paper theorem.
+
 The LU-to-LC mechanism has direct qubit ancestry.  Rains recovered the
 three Pauli axes of distance-two code projectors
 \cite{Rains1999}; Van den Nest, Dehaene, and De Moor used minimal
@@ -147,8 +158,12 @@ copies are globally minimal, that \(z=2,4/9\) are orbit exceptions, or
 that a fixed copy degree separates all classes as \(q\) varies.  The
 logical-group theorem and the quantum part of the pencil classification
 are restricted to odd prime fields.  Over extension fields, Frobenius
-basis permutations are additional local Cliffords and the scalar \(z\)
-is only Frobenius-covariant.  The H3 theorem is restricted to the stated
+basis permutations are additional local Cliffords.  The scalar \(z\)
+is Frobenius-covariant, and
+Proposition~\ref{prop:frobenius-sector-divisors} determines each scalar
+exponent sector, but the two additive-Clifford bridges needed for a full
+orbit classification are outside the theorem package.  The H3 theorem is
+restricted to the stated
 odd residue-field reductions, and the detector exceptions described in
 Appendix~\ref{sec:transport} do not alter the
 characteristic-uniform rigidity theorem.
