@@ -1421,8 +1421,17 @@
       "last": 654,
       "purpose": "compute the relative commutant of the two Klein-cubic A5 multiplicity decompositions and test the golden field",
       "sequence": 158
+    },
+    {
+      "count": 1,
+      "first": 655,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 655,
+      "purpose": "certify the l=6 Gaunt-Steinhardt restriction to the Clebsch four-channel and audit its physical order-parameter interpretation",
+      "sequence": 159
     }
   ],
-  "next_id": 655,
+  "next_id": 656,
   "schema": "codex-task-id-allocations-v1"
 }
