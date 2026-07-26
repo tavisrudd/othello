@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Date**: 2026-07-25
+**Date**: 2026-07-26
 
 > **LIVE MAP ONLY.** The three-paper program below is the active publication
 > path. The 37-page mega-paper and its evidence surface are preserved
@@ -288,18 +288,19 @@ The active order is strict:
    owning paper without holding v1.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C670:** run a fresh context-free release review on the revised Paper III
-   surface.
+4. **C670:** revise Paper III after the four-reader release review returned
+   `NO-GO`, then obtain a new context-free review of the reduced surface.
 
 C579 is complete as the candidate-synthesis task, but Paper III is not
-publication-complete. External editorial feedback found that the candidate
-still needs a sharper audience and theorem focus, a fuller derivation from
-the global rational square class to the special fibre, a justified or
-removed marked Mathieu carrier, removal of tentative physical and
-research-inventory prose, substantially broader primary-source context, and
-complete title-page authorship. C669 completed the literature and
-claim-ownership gate, and C668 completed the focused-note revision. C670
-owns the remaining independent release decision.
+publication-complete. C669 completed the literature and claim-ownership
+gate, and C668 completed the first focused-note revision. Four independent
+C670 readers then converged on `NO-GO` or major revision: the manuscript
+proves strong standalone square-class and harmonic theorems but does not
+construct its advertised canonical or integral three-way bridge. The dated
+feedback, exact blocking findings, cut disposition, smaller fixes, and
+fresh-session execution order are in
+`notes/2026-07-26-c670-paper-iii-cold-review-feedback.md`. C670 remains open
+for the reduced two-theorem revision and a new context-free release review.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
@@ -326,7 +327,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | focused arithmetic--harmonic candidate and seven-statement gate green; C670 independent review next |
+| Paper III | `papers/clebsch-passages/` | C670 cold review `NO-GO`; focused two-theorem cut and rereview next |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -707,6 +708,37 @@ are gone. The seven-statement, nine-row trust surface and warning-free PDF
 are green. C670 owns the independent release gate. The two revision reports
 are `notes/2026-07-26-c669-paper-iii-context-literature-audit.md` and
 `notes/2026-07-26-c668-paper-iii-focused-note-revision.md`.
+
+Four independent C670 cold reads now supersede that candidate-level
+release expectation. All returned `NO-GO` or major revision under the
+three-way-bridge thesis. They found:
+
+- the order-\(60\) group in Section 3 cannot have the asserted
+  \(22\)-element orbit;
+- the \(A_5\)-intertwiner retains independent irreducible scalings, so the
+  coefficient \(4\) is normalization-dependent and uniqueness of the cubic
+  line does not prove compatibility;
+- no theorem identifies the golden exchanger with the matching-sheet
+  exchange or constructs a common integral lattice;
+- HC-3's decisive evidence is outside the paper package, while the Lean
+  terminal checks only imported literal tensor data;
+- the harmonic “Gram matrix” is the kernel matrix, off by a factor of \(13\)
+  for the standard normalized spherical inner product; and
+- the manuscript conflates the deck-odd coordinate with the separately
+  twisted base invariant \(\sigma_3\).
+
+The preferred C670 disposition is therefore subtractive. Remove the finite
+tensor section and its bridge claims from Paper III; retain the rational
+\(5J_0\) square-class/constant-torsor theorem, the explicit golden fibre and
+spinor calculation without a matching-sheet identification, and the exact
+harmonic restriction after its normalization and axis-data repairs. Delete
+the repetitive common-line section, compress verification mechanics and
+integral caveats, remove internal claim IDs, and regenerate the reduced
+statement/trust surface before another PDF-only cold read. Retaining the
+finite bridge instead requires new canonical/integral mathematics and a
+paper-local evidence bundle, not prose repair. The authoritative plan and
+all smaller fixes are in
+`notes/2026-07-26-c670-paper-iii-cold-review-feedback.md`.
 
 C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full
