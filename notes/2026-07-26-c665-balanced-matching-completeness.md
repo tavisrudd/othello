@@ -14,8 +14,9 @@ manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
 and the retracted-socle trace lemma closes the quadratic pullback for every
 prime-field exceptional head.  The first two extension barriers \(q=25,49\)
 also close because none of their Frobenius-digit heads embeds in the affine
-socle; uniform extension-field C1, characteristic-three tori, and the
-\(q=5\) dihedral endpoint remain.
+socle.  The complete \(q=5\) matching census closes the isolated dihedral
+endpoint geometrically.  Uniform extension-field C1 and the
+characteristic-three torus family remain.
 
 ## Result
 
@@ -728,7 +729,8 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
-| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, and affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback.  Uniform extension-field C1, characteristic-three tori, and the isolated \(q=5\) dihedral endpoint remain. |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback, and the complete matching census closes the isolated \(q=5\) dihedral endpoint.  Uniform extension-field C1 and characteristic-three tori remain. |
+| Which degrees of freedom remain in characteristic-three torus cases? | settled as a parameter reduction; T3 remains open | After fixing split versus nonsplit type, a torus-invariant matching is an equivariant cross-orbit bijection parametrized by one element of the cyclic torus, plus one antipodal type when the torus order is even.  Normalizer and outer actions give only affine-inversion identifications.  For a full normalizer stabilizer, \(\lambda=(q+1)/2\) or \((q-1)/2\).  In the residual split family, \(P_c+P_{c^{-1}}=Y(X^n-Z^n)\), so the only uncontrolled datum is whether the fixed correction's translation norms add at most one direction modulo the first-sheet image; quadratic descent of the nonsplit analogue is also open. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -1032,7 +1034,11 @@ has Weyl sign \(-1\), the one in \(L(4)\) has sign \(+1\), and the tensor of
 two \(L(2)\) zero-weight vectors again has sign \(+1\).  Frobenius
 reciprocity then places each displayed simple in the head of \(k[H/K]\).
 Thus H1 is already reduced, for torus subgroups, to characteristic \(3\)
-and the isolated \(q=5\) dihedral endpoint.
+and the isolated \(q=5\) dihedral endpoint at the representation-theoretic
+level.  The latter endpoint is geometrically empty: the complete census of
+all fifteen matchings at \(q=5\) has full-projective orbits of sizes five
+and ten, and neither splits into two \(H\)-sheets with \(\lambda>1\).
+Consequently no actual matching stabilizer reaches the residual q=5 row.
 
 The exceptional \(A_4,S_4,A_5\) head calculation is now complete.  For
 Steinberg digits \(a=(a_0,\ldots,a_{e-1})\), the direct binary-polyhedral
@@ -1279,6 +1285,104 @@ quadratic trade dimension is \(27\).  The replay is
 matchings at \(q=27\), but it is evidence for, not a proof of, the uniform
 characteristic-three torus exclusion.
 
+### Characteristic-three torus degrees of freedom
+
+The residual geometric input has only one scalar parameter, not an
+unstructured family of matchings.  Let \(T\) be the cyclic torus in
+\(H=\operatorname{PSL}_2(q)\).  For a split torus, the endpoint set consists
+of its two fixed points and two regular \(T\)-orbits; invariance forces the
+fixed points to be paired.  For a nonsplit torus, the endpoint set is two
+regular \(T\)-orbits.  On the union of the two regular orbits, every
+\(T\)-invariant matching is either
+
+1. the graph of a \(T\)-equivariant bijection between the two orbits, and
+   these bijections form a torsor under \(T\); or
+2. when \(|T|\) is even, the unique internal antipodal matching on each
+   regular orbit.
+
+Indeed, the partner of one marked point determines all cross-orbit partners
+by regularity.  An internal invariant matching is translation by an element
+of order two in \(T\), which exists uniquely exactly when \(|T|\) is even.
+Elements normalizing \(T\) act on the cross-orbit torsor by
+affine-inversion maps \(t\mapsto a t^{-1}\).  Thus marking the two regular
+orbits leaves only one cyclic parameter, modulo a finite dihedral
+identification, plus the possible antipodal type.
+
+If the full stabilizer is the split or nonsplit normalizer, orbit--stabilizer
+fixes all remaining numerical data:
+\[
+\begin{array}{c|c|c|c}
+\text{type}&|N_H(T)|&|H/N_H(T)|&\lambda\\ \hline
+\text{split}&q-1&q(q+1)/2&(q+1)/2\\
+\text{nonsplit}&q+1&q(q-1)/2&(q-1)/2.
+\end{array}
+\]
+The Sylow translation group acts freely, so the displayed \(\lambda\) is
+also exactly the number of translation orbits in a sheet.  Stabilizer
+enlargement is a finite Dickson-realization question, not an additional
+module parameter; \(q=9\) is already closed by the exhaustive census.
+
+This locks the degrees of freedom before T3.  After choosing torus type and
+the one matching parameter, the sheet permutation module and \(\lambda\)
+are fixed.  The only unexplained quantity is how that explicit
+matching-product vector sits in the affine Fischer filtration, equivalently
+the rank of the joint translation-norm image of its two outer sheets.  A
+proof of
+\[
+\dim(V+dV)\le\lambda+1
+\]
+would give at least \(\lambda-1\) invariant trades and close every genuine
+characteristic-three normalizer case at once.  No field census can remove
+this last functional degree of freedom.
+
+For the split cross-orbit type, that functional datum has a closed
+one-parameter formula.  Put \(n=(q-1)/2\), let \(Q\) be the subgroup of
+squares, and normalize the fixed pair to \(\{0,\infty\}\).  For a nonsquare
+parameter \(c\), the remaining edges are \(\{x,cx\}\), \(x\in Q\), so
+\[
+ P_c=-Y\prod_{x\in Q}
+ \bigl(X-(1+c)xY+cx^2Z\bigr).
+\]
+If \(D_n(u,v)\) is the Dickson polynomial characterized by
+\(D_n(r+s,rs)=r^n+s^n\), taking the resultant with \(t^n-1\) gives
+\[
+ P_c=-Y\left[
+ X^n+(cZ)^n-(cZ)^n
+ D_n\left(\frac{(1+c)Y}{cZ},\frac{X}{cZ}\right)
+ \right]. \tag{T}
+\]
+Indeed, if \(r,s\) are the roots of
+\(cZt^2-(1+c)Yt+X\), the product is
+\((cZ)^n(r^n-1)(s^n-1)\), which is exactly (T).
+Thus the remaining split-torus norm problem is an explicit coefficient
+identity in one scalar \(c\); it no longer contains a hidden matching
+choice.  The nonsplit analogue is obtained over the quadratic splitting
+field and must still be descended carefully before it is used.
+
+In the genuinely residual split case \(q=3^e\) with \(e\) odd, this formula
+also identifies the outer-sheet defect.  Here \(n\) is odd and a nonsquare
+\(c\) satisfies \(c^n=-1\).  In the coefficient expansion of the Dickson
+term, inversion sends
+\[
+c^j(1+c)^{n-2j}
+\longmapsto
+c^{-j}(1+c^{-1})^{n-2j}
+=c^{-n}c^j(1+c)^{n-2j}
+=-c^j(1+c)^{n-2j}.
+\]
+Consequently the two outer parameters obey the parameter-free identity
+\[
+ P_c+P_{c^{-1}}=Y(X^n-Z^n). \tag{T\(_{\mathrm{out}}\)}
+\]
+Thus the second sheet is not an independent affine vector family: it is
+the negative of the first sheet plus the \(H\)-orbit of one fixed Frobenius
+binomial \(R=Y(X^n-Z^n)\).  The remaining split-T3 statement is now exactly
+that the translation norms contributed by this fixed correction add at
+most one direction modulo the first-sheet norm image.  This is sharper than
+the original rank bound and explains why the observed joint rank exceeds a
+one-sheet rank by at most one.  Proving that last quotient-rank-one claim,
+and deriving the descended nonsplit counterpart, remain open.
+
 Accordingly the proposed proof of L2 now has two uniform inputs and one
 isolated endpoint:
 
@@ -1292,9 +1396,9 @@ whether each nonnegligible Frobenius-digit candidate embeds in \(E\); only
 an embedded nonretract requires an actual pullback-class calculation.
 
 **H1-torus. Nonnegligible torus head.**  The exceptional \(A_4,S_4,A_5\)
-rows are settled by the table above.  The only remaining H1 rows are the
-characteristic-three torus family and the isolated \(q=5\) dihedral
-endpoint already identified in the torus table.
+rows are settled by the table above, and the q=5 dihedral endpoint is empty
+by the complete matching census.  The only remaining H1 rows are the
+characteristic-three torus family.
 
 **T3. Characteristic-three torus exclusion.**  If
 \(q=3^e\) and a split or nonsplit torus normalizer stabilizes a matching
@@ -1362,10 +1466,18 @@ S^K\ne0
 \;\longrightarrow\;
 \text{quadratic pullback only if necessary}.
 \]
-The highest-EV continuation is now the characteristic-three torus gate,
-followed by the isolated \(q=5\) dihedral endpoint.  What remains genuinely
-unexplained on C1 is whether affine-socle absence persists uniformly or a
-later extension field contains the first embedded nonretract.
+The `dof` pass removes the isolated \(q=5\) dihedral endpoint for free: the
+already-complete matching census contains no split \(\lambda>1\) orbit.
+For characteristic-three tori it reduces every invariant matching to one
+cyclic parameter, modulo affine inversion, plus a possible antipodal type;
+the sheet module and \(\lambda\) are then forced.  The `tt` coefficient pass
+then removes even that parameter from the outer-sheet defect:
+\(P_c+P_{c^{-1}}=Y(X^n-Z^n)\).  The highest-EV continuation is to prove
+that this fixed correction adds at most one translation-norm direction and
+to descend its nonsplit analogue.
+What remains genuinely unexplained on C1 is whether affine-socle absence
+persists uniformly or a later extension field contains the first embedded
+nonretract.
 
 ### Facts that must not be assumed
 

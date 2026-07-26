@@ -315,8 +315,31 @@ way: the shared four-dimensional \(A_4/S_4\) head and the sixteen-dimensional
 \(A_5\) head both have zero Hom into the 301-dimensional universal affine
 module, by MeatAxe and an independent reduced block-linear solve.  Thus no
 q=49 quadratic module, retraction test, or pullback is needed.  Uniform
-extension-field C1 remains open; the active finite gates are now the
-characteristic-three tori and the q=5 dihedral endpoint.
+extension-field C1 remains open.  The complete q=5 matching census closes
+the isolated dihedral endpoint geometrically.  A `dof` pass reduces every
+characteristic-three torus-invariant matching to one cyclic parameter
+modulo affine inversion, plus a possible antipodal type; for a full split
+or nonsplit normalizer the sheet module and
+\(\lambda=(q+1)/2\) or \((q-1)/2\) are forced.  The sole remaining torus
+freedom is the matching-product vector's joint translation-norm rank.  The
+active gate is the one-parameter identity
+\(\dim(V+dV)\le\lambda+1\), which would force at least
+\(\lambda-1\) invariant trades.  For the split cross-orbit type, the
+matching product is now the explicit Dickson resultant
+\[
+P_c=-Y\left[X^n+(cZ)^n-(cZ)^n
+D_n\left(\frac{(1+c)Y}{cZ},\frac{X}{cZ}\right)\right],
+\qquad n=(q-1)/2,
+\]
+so the remaining split norm bound is a one-scalar coefficient identity.
+For \(q=3^e\), \(e\) odd, coefficient inversion further gives the
+parameter-free outer identity
+\[
+P_c+P_{c^{-1}}=Y(X^n-Z^n).
+\]
+The active split gate is to prove that the fixed correction on the right
+adds at most one direction modulo the first-sheet translation-norm image.
+The nonsplit analogue still needs careful quadratic descent.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
@@ -364,6 +387,19 @@ or material minors, and the final grades were `A/A`.  Submission remains
 affiliation/contact metadata.  The
 authoritative report and mystery ledger are
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
+
+C682 is an open Hitchin-facing exploration, not a theorem gate.  It ranges
+over the rational \(5J_0\) incidence torsor, complete golden fibre,
+conjugate Clebsch charts, Petersen module, and Steinhardt/Gaunt realization,
+looking for any interesting structural consequence, connection, question,
+example, or viewpoint.  It must label proved deductions and conjectural
+leads honestly, but it has no preset output shape, negative-close test, or
+automatic stopping condition.  If the first proposed bridge is tautological
+or fails, the task continues: rotate through deeper Hitchin-style geometric,
+invariant-theoretic, arithmetic, and representation-theoretic questions and
+look for the next interesting structure.  The user decides when C682 is
+done.  This exploration does not reopen or hold the pre-release-green
+Paper III bytes unless the user later chooses to promote a finding.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
