@@ -1,14 +1,16 @@
-# Paper: Equivariant extension of Galois-invariant arcs
+# Retired source view: Frobenius-equivariant pair extension
 
-**Working title:** *Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`.*
+**Canonical paper:** [`equivariant-robust-completion`](../equivariant-robust-completion/) —
+*Frobenius-equivariant pair extension and robust repair of eight-arcs.*
 
-**Object:** extension of Frobenius/Baer-invariant arcs in PG(2,s²) (and higher-dim caps /
-MDS codes) over finite fields — the unit of extension is a Galois orbit (a fixed point or a
-conjugate pair). Headline = the exact quadratic-Frobenius orbit-valued conjugate-pair extension
-criterion (Thm 3.1); the √2·s orbit-saturation lower bound (Cor 3.4) is a classical-scale corollary.
+**Lane:** `paper-frob-eq`.
 
-**Status:** source/staging directory feeding the focused canonical manuscript
-`../equivariant-robust-completion/`. The broad merge is superseded: the generic completion package
+This directory is a retained historical source view, not a paper candidate.
+Its theorem-package notes and audits feed the canonical manuscript.  All
+publication status, adopted results, title, and release gates are owned by
+the canonical directory and the `paper-frob-eq` handoff.
+
+**Status:** merged into the focused canonical manuscript. The generic completion package
 does not supply a family-specific bridge to the Q25 theorem. The exact coordinate quadratic
 pair-extension theorem are Lean-built. Prior-art audit verdict = **SOFTEN**: the √2·s bound is the
 classical Lunelli–Sce √(2q) complete-arc bound at q=s², *not* a new constant — the surviving
@@ -18,7 +20,8 @@ collision correction is now Lean-proved, including the generic `s+3-f-e` invisib
 for cross-pair orbits. The exceptional `s=5,f=2` existence theorem is kernel-checked in
 `Q25PairResult.f2_pair_extension`; a second adversarial proof audit found no
 proof-validity defect, and the conclusion explicitly makes both added conjugate points fresh. The
-census size and minimum 32 remain external evidence. The certificate-free
+successor work proves the exact semantic minimum `32` and classifies its equality cases as five
+residual-group orbits up to normalization. The certificate-free
 `Q25ProfileFour.profile_four_pair_extension` also kernel-checks the `f=4` profile from center
 incidence and exact balance. The certificate-free `Q25ProfileZero.profile_zero_pair_extension`
 kernel-checks the `f=0` moment geometry and at least five legal pairs, while
@@ -31,8 +34,9 @@ coordinate-conjugation, quadratic-Frobenius, exact line-counting, and forbidden-
 under `lean/RelativeConicArcs/`. See the lane's `TRUST.md`.
 
 **Scope boundary:** `completion-core-rigidity` is reusable generic infrastructure, not part of the
-focused submission. A future alternate-orbit repair or fixed-locus resilience theorem may add a
-tightly scoped robustness section without restoring the broad generic package.
+focused submission. Robust alternate-orbit repair and the exact Q25 extremal classification are
+now adopted by the canonical manuscript; the unfinished exchange graph remains optional future
+work.
 
 **Focused development manuscript:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).

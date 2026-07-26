@@ -23,11 +23,11 @@ ordering and detail.
 
 ## Open tasks by lane
 
-### `alt-orbit-repair`
+### `paper-frob-eq`
 
-- **C152 `[alt-orbit-repair]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
-- **C318 `[alt-orbit-repair]` [QUEUED]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
-- **C319 `[alt-orbit-repair]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C152 `[paper-frob-eq]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
+- **C318 `[paper-frob-eq]` [QUEUED]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C319 `[paper-frob-eq]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 
 ### `build-sys`
 

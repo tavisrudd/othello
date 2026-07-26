@@ -1,6 +1,9 @@
-# Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`
+# Frobenius-equivariant pair extension and robust repair of eight-arcs
 
-Status: focused development source; synchronized LaTeX/PDF submission artifact and release audit complete
+Status: historical development source; the canonical manuscript, adopted theorem set, and current
+release gates are in `papers/equivariant-robust-completion/` and the `paper-frob-eq` handoff.
+The canonical paper includes the robust-repair results and the exact Q25 minimum/equality
+classification developed after this note.
 Sources: the Baer-extension theorem notes and C99/C133–C136 proof ledgers
 Lean lane: [`FiniteGeom/BaerCompletion/`](../../lean/FiniteGeom/BaerCompletion/) and the quadratic
 consumers under [`RelativeConicArcs/`](../../lean/RelativeConicArcs/)

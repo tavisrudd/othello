@@ -9,7 +9,7 @@ This note combines the 2026-07-25 user-facing summaries of:
 
 1. Clebsch Papers II and III; and
 2. the later programs in `papers/papers-index.md`: complete bounded repair
-   ports, Frobenius-equivariant robust completion, and continuation-graph
+   ports, Frobenius-equivariant pair extension and robust repair, and continuation-graph
    rigidity.
 
 It excludes `arcs_complete_outside_conic`, `beyond4_prs`, and `ame-lu`.
@@ -509,7 +509,7 @@ The six-part private manuscript is assembled and has survived multiple cold
 reads. Remaining obstacles are release infrastructure and specialist
 citation review, not missing central mathematics.
 
-## Frobenius-equivariant robust completion
+## Frobenius-equivariant pair extension and robust repair
 
 The paper studies extensions of Frobenius-invariant arcs in
 \[
@@ -633,7 +633,7 @@ The focused manuscript and PDF exist. The foundational theorem chain is
 complete; the exact 32-minimum upgrade still needs final manifest/release
 bookkeeping before its adopted theorem set is frozen.
 
-## Continuation-graph rigidity
+## Semilinear rigidity of four-point-frame continuation graphs
 
 For a \(k\)-cap \(K\), let \(V_K\) be its legal one-point continuations and
 join \(x,y\in V_K\) when \(K\cup\{x,y\}\) is no longer a cap. Equivalently,
@@ -821,11 +821,11 @@ closure remains its largest execution gate.
 - **Complete bounded repair ports:** six-part private manuscript assembled;
   central finite-transfer and cubic results are kernel-checked; release waits
   on specialist citation review and public artifact/Lean-export gates.
-- **Frobenius-equivariant robust completion:** focused manuscript and PDF
+- **Frobenius-equivariant pair extension and robust repair:** focused manuscript and PDF
   exist; the foundational theorem chain and exact Q25 minimum are proved;
   integration of the final minimum-classification layer and release
   bookkeeping remain.
-- **Continuation-graph rigidity:** N1 manuscript and written proof are
+- **Semilinear rigidity of four-point-frame continuation graphs:** N1 manuscript and written proof are
   complete; Lean formalization and final publication review remain. N2 is
   banked but publication-softened.
 

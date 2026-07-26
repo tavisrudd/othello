@@ -10,20 +10,21 @@ spreads of `PG(3,q)`,
 and higher-rank MDS/NRC extension resilience. Strongest new candidates = the twisted-cubic
 external-orbit δ_x spectrum and the relative multiple-saturation parameter t_h(q).
 
-**Status:** source/staging view folded into the combined manuscript. The abstract infrastructure is
+**Status:** reusable library/research-program view, not a paper candidate and not part of the
+Frobenius-equivariant submission. The abstract infrastructure is
 `[PROVED]` but is standard hitting-set, defining-set, and saturation theory under a checked common
 interface (not headline). The strongest new
 pieces are `[OPEN]` — twisted-cubic transversal spectrum (§6.5), t_h(q), asymptotics of γ(q).
 The combined paper's broad novelty audit is complete; exact-formula specialist priority review and
 one new family-specific strengthening remain.
 
-**Merge decision:** retain the sharp deletion theorem and classical applications as the robustness
-and reconstruction layer of the combined `baer-equivariant-extension` development draft.
+**Packaging decision:** retain the checked generic interfaces as shared infrastructure. The
+canonical `equivariant-robust-completion` manuscript uses its own family-specific Frobenius
+extension and repair theory and does not import this generic package.
 
 **Lean:** the semantic δ_x = τ identity, completion-core radius, weighted and multi-insertion
 extensions, and robust-obstruction results are landed and `sorry`-clean under
-`lean/FiniteGeom/BaerCompletion/`. They are being developed as part of the combined
-Baer/completion paper.
+`lean/FiniteGeom/BaerCompletion/`. They remain reusable formal infrastructure.
 
 **Combined development draft:**
 [`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).

@@ -30,8 +30,8 @@
 \newcommand{\Npair}{N_{\mathrm{pair}}}
 \newcommand{\pospart}[1]{\left(#1\right)_{+}}
 
-\title{Frobenius-equivariant pair extension of eight-arcs in
-$\PG(2,25)$}
+\title{Frobenius-equivariant pair extension and robust repair of
+eight-arcs}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -48,16 +48,16 @@ make them invisible on a carrier from genuine collisions between visible
 charges, and it classifies equality and every first-order excess level.
 
 We then prove that every $\phi$-invariant eight-arc in $\PG(2,25)$ admits at
-least two distinct fresh conjugate-pair extensions.  The zero- and four-fixed-point profiles
-follow from incidence and moment arguments.  The exceptional
-two-fixed-point profile is reduced, by projective normalization, to a
-finite certificate checked by the Lean kernel.  The full theorem, the
-semantic global pair count, and the profile split are formalized in Lean
-without unproved declarations, custom axioms, or native-code evaluation.
-Consequently, deleting any selected nonfixed conjugate orbit from an invariant
-ten-arc in $\PG(2,25)$ leaves a different orbit that repairs the arc.  Together
-with the general count, the extension result covers every prime-power
-base-field order $s\ge5$.  For every $s\ge7$, an exact five-profile
+least four distinct fresh conjugate-pair extensions.  In the exceptional
+two-fixed-point profile the exact minimum is $32$.  The equality cases form,
+after normalization, five residual-group orbits of sizes
+$200,400,400,200,400$; outside their union the count is at least $33$.
+The semantic lower bound, attainment, and equality-orbit exhaustion are
+checked by the Lean kernel.  Consequently, deleting any selected nonfixed
+conjugate orbit from an invariant ten-arc in $\PG(2,25)$ leaves at least
+three different orbits that repair the arc.  Together with the general
+count, the extension result covers every prime-power base-field order
+$s\ge5$.  For every $s\ge7$, an exact five-profile
 lower-envelope calculation gives at least $319$ legal conjugate pairs for
 every invariant eight-arc and hence at least $318$ alternate repairs after
 arbitrary nonfixed-orbit deletion.  More generally, deleting a selected
@@ -96,10 +96,11 @@ into an orbit-valued extension count.  The main results are:
 \item an exact linewise correction that separates invisible secant centers
       from charge collisions, together with equality and excess criteria;
 \item a uniform theorem that every invariant eight-arc in $\PG(2,25)$ has
-      at least two distinct fresh conjugate-pair extensions, yielding
-      alternate-orbit repair after arbitrary nonfixed-orbit deletion, and,
-      together with the general estimate, covering every prime-power base
-      order $s\ge5$;
+      at least four distinct fresh conjugate-pair extensions, together with
+      the exact minimum $32$ and five-orbit equality classification in the
+      exceptional two-fixed-point profile; this yields robust repair after
+      arbitrary nonfixed-orbit deletion and, with the general estimate,
+      covers every prime-power base order $s\ge5$;
 \item an exact five-profile first-order lower envelope for invariant
       eight-arcs over every $s\ge7$, yielding at least $318$ alternate repairs
       after arbitrary nonfixed-orbit deletion;
@@ -386,9 +387,8 @@ pairs.  The profile of an invariant eight-arc is
 \]
 
 Table~\ref{tab:q25-profiles} records the numerical data and the proved
-lower bound for each profile.  In the exceptional row the bound $L\ge2$
-records the kernel-checked two-witness theorem; the stronger observed census
-minimum in Remark~\ref{rem:census} is not used.
+lower bound for each profile.  The exceptional row records the exact
+kernel-checked minimum and equality classification.
 
 \begin{table}[ht]
 \centering
@@ -398,7 +398,7 @@ minimum in Remark~\ref{rem:census} is not used.
 $f$ & $e$ & $E$ & $M$ & proved $L\ge$ & method \\
 \midrule
 $0$ & $4$ & $27$ & $12$ & $5$   & secant-index moments \\
-$2$ & $3$ & $17$ & $12$ & $2$   & kernel-checked two-witness certificate \\
+$2$ & $3$ & $17$ & $12$ & $32$  & exact minimum and five-orbit classification \\
 $4$ & $2$ & $11$ & $10$ & $4$   & fixed-center incidence \\
 $6$ & $1$ & $9$  & $6$  & $36$  & uniform criterion \\
 $8$ & $0$ & $11$ & $0$  & $110$ & uniform criterion \\
@@ -497,9 +497,17 @@ The remaining profile $(f,e)=(2,3)$ has $(E,M,N)=(17,12,10)$.  The center
 estimate gives $B\ge18$, but the aggregate identity would still require a
 further collision estimate.  We close this profile by a finite reduction.
 
-\begin{proposition}[Exceptional profile multiplicity]\label{prop:f2}
+\begin{proposition}[Exact exceptional minimum]\label{prop:f2}
 Every invariant eight-arc in $\PG(2,25)$ with exactly two fixed selected
-points has at least two distinct fresh legal conjugate-pair extensions.
+points has at least $32$ fresh legal conjugate-pair extensions.  This bound
+is attained.  After the two projective normalizations used below, the
+configurations attaining equality form exactly five residual-group orbits,
+of sizes
+\[
+  200,\qquad 400,\qquad 400,\qquad 200,\qquad 400.
+\]
+Their disjoint union has size $1600$.  Every normalized configuration
+outside this union has at least $33$ legal pairs.
 \end{proposition}
 
 \begin{proof}[Computer-assisted proof, kernel checked]
@@ -513,40 +521,46 @@ pair to
 Both transformations commute with Frobenius and preserve the arc and
 pair-extension predicates.
 
-After these reductions, the remaining finite slice has $46{,}056$ rows.
-Of these, $39{,}012$ carry a checked witness that the proposed old set is
-not an arc, while $7{,}044$ carry two checked fresh legal-pair witnesses
-and a checked proof that they are distinct.  The
-rows are split into $1{,}639$ leaf modules and $303$ aggregate modules.
-Each leaf is evaluated by Lean's kernel reduction.  The projective
-transport theorem maps both checked survivors back to the original arc,
-preserves their distinctness, and states explicitly that each pair is fresh
-and that each enlarged set is an arc.  Section~\ref{sec:formalization}
-records the trust boundary.
+After these reductions, the finite slice has $46{,}056$ rows and $1{,}189$
+residual class representatives.  Kernel-checked composition certificates
+give a lower bound of $32$ on every representative.  Five representatives
+attain $32$.  The residual group has order $400$; orbit--stabilizer
+certificates give the five displayed orbit sizes, prove their pairwise
+disjointness, and show that their union has size $1600$.
+
+Strict certificates place every nonminimizing residual class above $32$,
+and an exhaustive dispatcher places every normalized equality row in the
+five-orbit union.  Separate semantic transport theorems carry both the
+lower bound and equality exhaustion through the two projective
+normalizations.  Conversely, invariance of the legal-pair count under the
+residual action transports the five checked equalities across their orbits.
+Thus $32$ is the exact semantic minimum, with the stated complete equality
+classification up to normalization.  Section~\ref{sec:formalization}
+records the trust boundary and the generated-certificate layers.
 \end{proof}
 
 \begin{theorem}[Uniform order-five multiplicity]\label{thm:q25}
-Every Frobenius-invariant eight-arc in $\PG(2,25)$ has at least two distinct
+Every Frobenius-invariant eight-arc in $\PG(2,25)$ has at least four distinct
 fresh nonfixed conjugate-pair extensions.
 \end{theorem}
 
 \begin{proof}
 The fixed-point count is even and at most eight.  Proposition
-\ref{prop:four-profiles} treats $f=0,4,6,8$, and Proposition~\ref{prop:f2}
-treats $f=2$.
+\ref{prop:four-profiles} gives respective lower bounds $5,4,36,110$ for
+$f=0,4,6,8$, and Proposition~\ref{prop:f2} gives $32$ for $f=2$.
 \end{proof}
 
 \begin{corollary}[Uniform order-five alternate repair]
 \label{cor:q25-uniform-repair}
 Let $A$ be an invariant ten-arc in $\PG(2,25)$ and let $O\subseteq A$ be
 any selected nonfixed conjugate orbit.  After deleting $O$, at least one
-different legal conjugate orbit repairs the arc.
+different legal conjugate orbit repairs the arc; in fact at least three do.
 \end{corollary}
 
 \begin{proof}
 The remainder $D=A\setminus O$ is an invariant eight-arc, and $O$ is one
 of its legal conjugate-pair extensions.  Theorem~\ref{thm:q25} supplies at
-least two legal pairs for $D$, so at least one is different from $O$.
+least four legal pairs for $D$, so at least three are different from $O$.
 \end{proof}
 
 The complete-arc classifications in
@@ -557,13 +571,12 @@ Theorem~\ref{thm:q25}: ordinary extendability neither makes the legal-point
 set Frobenius-stable nor ensures that a legal point and its conjugate are
 jointly legal.
 
-\begin{remark}[External census]\label{rem:census}
-An external enumeration after fixed-point normalization reports $469{,}600$
-invariant eight-arcs with profile $(f,e)=(2,3)$ and observed minimum legal
-pair count $32$.  Independent C++ and Python implementations agree on the
-census, minimum, minimizing orbit indices, and coordinate witness.  These
-numbers are computational data, not inputs to Proposition~\ref{prop:f2} or
-Theorem~\ref{thm:q25}.
+\begin{remark}[Scope of the equality classification]\label{rem:census}
+Proposition~\ref{prop:f2} classifies equality up to normalization: it says
+that some base-field collineation sends an equality case into the certified
+$1600$-element union.  It neither asserts uniqueness of that collineation
+nor enumerates the semantic arcs attaining $32$.  It makes no equality
+claim for the other fixed-point profiles, other arc sizes, or other fields.
 \end{remark}
 
 \section{Equivariant saturation}
@@ -757,11 +770,14 @@ mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
       fixed-center interpretation, and the cross-pair estimate
       \eqref{eq:cross-invisible}.
 \item Separate profile modules prove the lower bounds $5$ and $4$ for
-      $f=0$ and $f=4$.  The exceptional certificate proves
-      Proposition~\ref{prop:f2}; the order-five alternate-repair module
-      proves Theorem~\ref{thm:q25} by the exhaustive parity split and
-      Corollary~\ref{cor:q25-uniform-repair} by deleting the erased pair
-      from the semantic legal-pair finset.
+      $f=0$ and $f=4$.  For $f=2$, residual composition certificates prove
+      the lower bound $32$ on all $1189$ representatives; orbit--stabilizer,
+      strict-composition, and exhaustive-dispatch modules prove attainment
+      and equality-orbit exhaustion.  Semantic transport carries these
+      conclusions through both normalizations.  The order-five
+      alternate-repair module and the paper-level parity split then give
+      Theorem~\ref{thm:q25} and
+      Corollary~\ref{cor:q25-uniform-repair}.
 \item The orbit-saturation module proves the denominator-free inequality
       $2s(s-1)\le(k-1)^2$ used in Corollary~\ref{cor:saturation}.  The final
       ceiling notation and the geometric case split are paper proofs.
@@ -779,8 +795,8 @@ The scoped builds and declaration-level axiom audits report exactly
 the standard classical quotient profile inherited from mathlib.  No public
 theorem depends on an admitted proof, a custom axiom, or
 \texttt{native\_decide}.  The finite leaves in Proposition~\ref{prop:f2}
-use kernel \texttt{decide}; the external census in Remark~\ref{rem:census}
-is outside the theorem dependency graph.
+use kernel \texttt{decide}.  The theorem classifies equality up to
+normalization and does not rely on a count of semantic arcs.
 
 For reproducibility, the paper-facing declarations are located as follows.
 
@@ -823,6 +839,15 @@ Source module & Paper-facing declaration or role \\
   \path{four_le_sum_card_legal_profile_four} \\
 \path{RelativeConicArcs/Q25PairResult.lean} &
   \path{f2_two_pair_extension} \\
+\path{RelativeConicArcs/Q25ResidualMinimumOrbits.lean} &
+  five orbit sizes, disjointness, and union size $1600$ \\
+\path{RelativeConicArcs/Q25Exhaustion.lean} &
+  \path{mem_minimumOrbitUnion_of_normalized_card_eq_32} \\
+\path{RelativeConicArcs/Q25SemanticExhaustion.lean} &
+  semantic lower bound and equality-orbit exhaustion \\
+\path{RelativeConicArcs/Gates/}\newline
+\path{AlternateOrbitRepairQ25Minimum.lean} &
+  paper-facing exact-minimum and equality-classification gate \\
 \path{RelativeConicArcs/Q25AllProfiles.lean} &
   \path{pair_extension} \\
 \path{FiniteGeom/BaerCompletion/OrbitSaturation.lean} &
@@ -845,7 +870,8 @@ LEAN_NUM_THREADS=6 nix develop --command lake build \
   RelativeConicArcs.AlternateOrbitRepair \
   RelativeConicArcs.Q25AlternateOrbitRepair \
   RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult \
-  RelativeConicArcs.ParameterizedAlternateOrbitRepair
+  RelativeConicArcs.ParameterizedAlternateOrbitRepair \
+  RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum
 \end{verbatim}
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}

@@ -1,6 +1,9 @@
-# Alternate-orbit repair for invariant ten-arcs
+# Frobenius-equivariant pair-extension paper
 
-**Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
+**Lane**: `paper-frob-eq` — see CLAUDE.md § Lane routing.
+
+**Canonical paper:** `papers/equivariant-robust-completion/` —
+*Frobenius-equivariant pair extension and robust repair of eight-arcs*
 
 **Date:** 2026-07-19
 **Status:** OPEN — C142, C143, C148–C151, C331, C363 reported. The exact Q25 minimum is closed at the
@@ -22,7 +25,7 @@ Companion discovery log:
 
 ## Lane scope
 
-This is the sticky `alt-orbit-repair` lane. Until the user explicitly switches lanes or this
+This is the sticky `paper-frob-eq` lane. Until the user explicitly switches lanes or this
 handoff is finished, `go` and `next?` refer to the next open-queue step below.
 
 ### Allowed paths
@@ -233,8 +236,9 @@ that *some* base-field collineation lands the arc in the 1600-element union; it 
 collineation is unique, and it neither enumerates nor counts the semantic arcs attaining 32. Do not
 restate it as a list of arcs, and do not extend it to other fixed-point counts, arc sizes, or `q`.
 
-The `alt-orbit-repair` integrator remains the sole writer of
+The `paper-frob-eq` integrator remains the sole writer of
 `papers/equivariant-robust-completion/` and its release boundary. C270/C287 may inventory metadata
-and prospective shared-Lean targets read-only. C152 becomes a release gate only if its exchange-graph
-claims are adopted. Public-release preparation resumes after the lane integrator records the final
-adopted theorem set.
+and prospective shared-Lean targets read-only. The canonical manuscript adopts the exact semantic
+minimum `32`, the five-orbit equality classification up to normalization, and the parameterized
+robust-repair results. C318 and C319 remain release bookkeeping gates. C152 becomes a release gate
+only if its exchange-graph claims are later adopted.

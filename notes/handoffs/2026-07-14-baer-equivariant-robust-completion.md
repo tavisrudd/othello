@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-14
 **Status:** FINISHED — the Baer core (C99 and C133–C141) is reported; publication upgrades continue
-in the `alt-orbit-repair` successor lane
+in the consolidated `paper-frob-eq` lane
 **Tasks:** C99, C133–C141 (closed)
 
 > **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's important context and live
@@ -15,11 +15,11 @@ in the `alt-orbit-repair` successor lane
 
 ## Routing state
 
-The Baer core lane is finished. Its same-paper successor is `alt-orbit-repair`, routed through
+The Baer core lane is finished. Its same-paper successor is `paper-frob-eq`, routed through
 [the alternate-orbit handoff](2026-07-14-alternate-orbit-repair.md). Archiving this handoff closes
 only the foundational lane; it does **not** freeze or archive the
 `papers/equivariant-robust-completion/` manuscript. Do not route `go baer` into successor work
-implicitly—the user must select `alt-orbit-repair`.
+implicitly—the user must select `paper-frob-eq`.
 
 While this handoff remains live, Baer-owned paths are the modules under
 `lean/FiniteGeom/BaerCompletion/`, the Baer/Frobenius/Q25 modules under
@@ -44,11 +44,11 @@ expected axiom profile is `[propext, Classical.choice, Quot.sound]`.
 
 ## Publication state and successor
 
-The Baer core produced a complete focused submission artifact presenting the quadratic-Frobenius
+The Baer core produced the foundational submission artifact presenting the quadratic-Frobenius
 structural criterion, exact collision correction, the all-prime-power consequence, and the uniform
-Q25 theorem. The `alt-orbit-repair` lane subsequently strengthened that same paper with robust
-deletion/replacement, the exact profile envelope, parameterized exchange, and the active Q25
-extremal-classification program. Its handoff is authoritative for the manuscript's current upgrade
+Q25 theorem. The `paper-frob-eq` lane subsequently strengthened that same paper with robust
+deletion/replacement, the exact profile envelope, parameterized exchange, and the exact Q25
+minimum and extremal classification. Its handoff is authoritative for the manuscript's current
 state. Generic completion material and the classical-radius table remain outside the paper's scope.
 
 The bounded literature work found special-family exact completion and configuration-graph
@@ -69,4 +69,5 @@ The authoritative context is:
 
 C99 and C133–C141 are reported. Their execution details and dispositions are in the reports and
 companion archive, not here. The former optional census/minimum certification was allocated as C151
-to `alt-orbit-repair`; it is not an open task in this finished foundational lane.
+to the successor now named `paper-frob-eq`; it is not an open task in this finished foundational
+lane.

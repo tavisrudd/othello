@@ -228,7 +228,7 @@ the closure invariant. Never leave the only copy of a finding, decision, or requ
 
 ## Cautions (standing, for any session in this lane)
 
-- The Lean worktree may hold foreign dirty state under `RelativeConicArcs/` (alt-orbit-repair
+- The Lean worktree may hold foreign dirty state under `RelativeConicArcs/` (`paper-frob-eq`
   lane): never build across, stage, or touch that closure. Builds go through
   `lean/scripts/lean-build-queue.py` or `guarded-lean` only, per `lean/CLAUDE.md`.
 - `lean-build-queue.py run --detach` FAILS FAST when another owner holds the build lock — it does

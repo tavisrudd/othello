@@ -1,13 +1,17 @@
-# Paper: Frobenius-equivariant pair extension of eight-arcs
+# Paper: Frobenius-equivariant pair extension and robust repair of eight-arcs
 
-**Working title:** *Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`.*
+**Title:** *Frobenius-equivariant pair extension and robust repair of eight-arcs.*
+
+**Lane:** `paper-frob-eq`.
 
 **Object:** the focused paper on the quantitative quadratic-Frobenius pair-extension criterion, its
-exact collision correction, five-profile lower envelope, and uniform `PG(2,25)` eight-arc theorem. This is the canonical
-paper directory; `baer-equivariant-extension` remains a source/staging view. The generic
+exact collision correction, robust orbit replacement, five-profile lower envelope, and the exact
+exceptional `PG(2,25)` minimum and extremal classification. This is the canonical paper directory;
+`baer-equivariant-extension` is a retired source view. The generic
 `completion-core-rigidity` package is reusable library material but is not part of this submission.
 
-**Formal status:** the quadratic pair-extension existence theorem, uniform two-pair `PG(2,25)` theorem,
+**Formal status:** the quadratic pair-extension existence theorem, exact exceptional-profile
+minimum `32` and five-orbit equality classification, uniform four-pair `PG(2,25)` theorem,
 exact five-profile first-order envelope, 318-alternate-repair theorem, collision equality/excess
 classification, parameterized `(k+2)→k` robust exchange theorem, and semantic global pair count are
 kernel-checked. The
@@ -15,8 +19,10 @@ end-to-end Lean theorem constructs two distinct conjugate pairs whose separate u
 invariant arc are arcs. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh legal Frobenius pairs
 and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
 The five parity-allowed Q25 profiles are exhausted in Lean. Every invariant eight-arc in
-`PG(2,25)` has at least two distinct legal conjugate pairs, so deleting any selected nonfixed orbit
-from an invariant ten-arc leaves at least one different legal orbit that repairs it.
+`PG(2,25)` has at least four distinct legal conjugate pairs, so deleting any selected nonfixed orbit
+from an invariant ten-arc leaves at least three different legal orbits that repair it. In the
+two-fixed-point profile, every arc has at least `32` legal pairs; equality is attained and, up to
+normalization, consists exactly of five residual-group orbits of sizes `200,400,400,200,400`.
 For every base order `s≥7`, the certified envelope gives at least 319 legal pairs for every
 invariant eight-arc and hence at least 318 alternate repairs after arbitrary selected-orbit deletion.
 More generally, a selected-orbit deletion from an invariant `(k+2)`-arc leaves at least `r`
@@ -53,11 +59,13 @@ the bounded C139 search; this supports no historical-first claim.
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.
 The profile-independent cross-pair estimate `s+3-f-e` is also kernel-checked in
 `QuadraticInvisible.lean`; the theorem derives the necessary `e≥2` from the cross-pair witness.
-`Q25PairResult.f2_two_pair_extension` kernel-checks two distinct legal pairs in the exceptional
+`Q25PairResult.f2_two_pair_extension` supplies the original two-witness baseline in the exceptional
 `f=2` profile, and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-checks
-`f=4`. The `f=2` statement explicitly makes both added conjugate pairs fresh. The
-external census size and observed minimum 32 remain computational evidence. The uniform `s≥5`
-claim does not depend on them: `Q25ProfileZero.profile_zero_pair_extension` kernel-checks `f=0`, and
+`f=4`. The residual composition, orbit--stabilizer, strict-exhaustion, and semantic-transport
+modules strengthen the `f=2` result to the exact minimum `32` and the complete five-orbit equality
+classification up to normalization. The external census size remains computational context; it is
+not needed for the exact theorem. The uniform `s≥5` claim also uses
+`Q25ProfileZero.profile_zero_pair_extension` for `f=0`, and
 `Q25AllProfiles.pair_extension` proves the uniform order-five extension theorem; the generic
 criterion covers every `s≥7`, and there is no intervening prime-power base order.
 `AlternateOrbitRepairProfileEnvelopeResult.profileEnvelope_le_card_globalLegalPairs_of_card_eight`
@@ -71,6 +79,11 @@ The C135 declarations classify equality by universal visibility and collision-fr
 classify every first-order excess level by invisible mass plus collision redundancy. In the
 quadratic instance, invisible mass is center/empty-carrier incidence. This is an algebraic inverse
 theorem, not a structural classification of near-saturated arcs.
+
+**Open release work:** C318 adds the residual classification layer to the paper-facing trust
+manifest. C319 decides whether the literal canonical-class links remain in the trusted surface or
+are demoted to a checked reduction plus reproducible computation. C152's exchange graph is optional
+future work and is not a release gate unless its results are later adopted.
 
 **Submission manuscript:**
 [`frobenius_pair_extension.tex`](frobenius_pair_extension.tex), with

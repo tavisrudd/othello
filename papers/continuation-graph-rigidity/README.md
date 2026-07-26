@@ -1,12 +1,14 @@
 # Paper: Continuation-graph rigidity
 
-**Working title:** *Semilinear rigidity and reconstruction from cap continuation graphs.*
+**Title:** *Semilinear rigidity of four-point-frame continuation graphs.*
 
-**Object:** recovering the arc / plane from the abstract continuation ("conflict") graph or
-complex of a k-cap. Two headlines:
+**Object:** automorphisms of the abstract continuation ("conflict") graph of a projective frame.
+The paper has one headline:
 - **N1** — the four-point-frame continuation graph has exactly its ambient semilinear
   automorphisms for q ≥ 13 (Thm 7.4; an M₀,₅ four-map-reduct rigidity result).
-- **N2** — the full continuation complex reconstructs the plane + secants + arc (Thm 8.4).
+
+The broader full-complex reconstruction theorem N2 is retained only as a scope remark pending its
+literature gate; it is not a second headline.
 
 **Status:** N1 working manuscript drafted in `continuation_graph_rigidity.tex`. Theorems are
 `[PROVED]`. Audit verdict:
@@ -15,8 +17,7 @@ complex of a k-cap. Two headlines:
 Drake–Sané, Beutelspacher–Metsch — but the arc-recovery chain survives; gated on a paywalled
 Metsch / Drake–Sané full-text read). Extremal quantities m(k), r(k) are `[OPEN]`.
 
-**Split flag:** N1 is the recommended standalone headline; N2 is separably publishable and may
-be deferred/softened rather than carried.
+**Scope:** N1 is the standalone paper. N2 is deferred/softened rather than carried.
 
 **Lean:** planned `ContinuationRigidity` library (Phase 3), **not yet built**.
 

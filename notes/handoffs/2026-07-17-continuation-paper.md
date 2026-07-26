@@ -1,4 +1,4 @@
-# Continuation-graph rigidity paper
+# Semilinear rigidity of four-point-frame continuation graphs
 
 **Lane**: `continuation`
 
@@ -8,8 +8,8 @@ Discovery companion: `notes/2026-07-19-continuation-discovery-track.md`.
 
 ## Goal
 
-Bring `papers/continuation-graph-rigidity` (recovering the arc / plane from a k-cap's abstract
-continuation graph) to the arcs/clebsch release bar as an **N1-only** paper per ruling D3 and the
+Bring `papers/continuation-graph-rigidity` (semilinear automorphisms of the continuation graph of
+a four-point projective frame) to the arcs/clebsch release bar as an **N1-only** paper per ruling D3 and the
 ship-order #7 gate: LaTeX+PDF manuscript, full-trust Lean, provenance section, adversarial and
 cold-prose review, and a cleared novelty audit. N1 is the headline (four-point-frame continuation
 graph has exactly its ambient semilinear automorphisms, q ≥ 13, Thm 7.4). N2 (full-complex

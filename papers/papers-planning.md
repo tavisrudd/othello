@@ -10,8 +10,8 @@ packaging review (2026-07-12) settled the decomposition, sequencing, and positio
   `nofil-finite-geometry-outcomes`. Split by *technique* — Schreier-residual nimbers vs
   pairing/mirror ⇒ P.
 - **Geometry/coding track** ("Package 2": arc extension & reconstruction):
-  `equivariant-robust-completion` (focused Baer/Q25 paper; generic `completion-core-rigidity` is
-  library-only), `continuation-graph-rigidity`, plus
+  `equivariant-robust-completion` (focused Frobenius-equivariant extension/repair paper; generic
+  `completion-core-rigidity` is library-only), `continuation-graph-rigidity`, plus
   `arcs_complete_outside_conic` (related but separate; classical index equations, not the game
   machinery).
 - **Sequence submissions** (`oeis-submissions/`): the queens A344227 extension and the new sum-free
@@ -97,19 +97,24 @@ adjusted only by the explicit ownership edges below.
   adequacy/provenance pass, immutable checker/archive identity, exact shared-Lean pinning, and the
   final aggregate `RepairCodes` rebuild remain.
 
-**6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
-- *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
-  theorem, yielding pair extension for every prime-power base order `s≥5`; generic completion-core
-  material is outside the submission.
+**6 · Frobenius-equivariant pair extension and robust repair of eight-arcs** —
+`equivariant-robust-completion`
+- *Lane:* `paper-frob-eq`.
+- *What:* focused quadratic-Frobenius criterion, exact collision theory, robust orbit replacement,
+  and uniform `PG(2,25)` theorem, yielding pair extension for every prime-power base order `s≥5`.
+  In the exceptional two-fixed-point profile, `32` is the exact semantic minimum and five
+  residual-group orbits are the complete equality set up to normalization. Generic
+  completion-core material is outside the submission.
 - *Gate:* the reported theorem spine and all order-five profiles are Lean-built; bounded
   general-criterion priority search, LaTeX source, bibliography, clean PDF, and internal referee
-  closeout are complete. The same manuscript remains owned by `alt-orbit-repair` while C151 settles
-  the exact Q25 minimum/equality boundary; C152's exchange graph is a release gate only if adopted.
-  Release preparation stays frozen until that owner records the adopted theorem set.
+  closeout are complete. C318 and C319 own the remaining exact-minimum trust-manifest and
+  canonicalizer/demotion decisions. C152's exchange graph is a release gate only if later adopted.
 
-**7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
-- *What:* N2 demoted to remarks.
-- *Gate:* no manuscript; hardest formalization; collaborator route if it stalls.
+**7 · Semilinear rigidity of four-point-frame continuation graphs** —
+`continuation-graph-rigidity`
+- *What:* N1 only; full-complex reconstruction is demoted to scope remarks.
+- *Gate:* the LaTeX working manuscript and complete written proof exist. The planned Lean library
+  remains the hardest formalization; use the collaborator route if it stalls.
 
 **Active unnumbered merger candidate · Beyond redundancy four for PRS** — `beyond4_prs`
 - *What:* C491's complete redundancy-five classification is the headline; C498/C509/C512/C513/
