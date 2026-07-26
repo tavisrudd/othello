@@ -35,6 +35,7 @@ private def uncoveredPoints : List V := [
   point 1 15 18, point 1 16 6, point 1 16 10, point 1 18 4]
 
 private def finiteNine : List (Fin 9) := List.ofFn fun i : Fin 9 => i
+private def finiteThree : List (Fin 3) := List.ofFn fun i : Fin 3 => i
 private def fieldElements : List K := List.ofFn fun i : Fin 19 => (i.val : K)
 
 private def fieldPower : K → Nat → K
@@ -91,6 +92,10 @@ private def multiplyMatrices (left right : M) : M :=
 
 private def applyMatrix (matrix : M) (vector : V) : V :=
   fun i => matrix i 0 * vector 0 + matrix i 1 * vector 1 + matrix i 2 * vector 2
+
+private def matrixPower : M → Nat → M
+  | _, 0 => 1
+  | matrix, exponent + 1 => multiplyMatrices (matrixPower matrix exponent) matrix
 
 private def inverseMatrix (matrix : M) : M :=
   let scale := fieldInverse (determinantThree matrix)
@@ -153,6 +158,17 @@ def normalizeRay (point : V) : V :=
 def mapsRaysTo (matrix : M) (source target : List V) : Bool :=
   source.all fun p =>
     target.any fun q => normalizeRay (applyMatrix matrix p) = normalizeRay q
+
+/-- Whether two coordinate matrices differ by a nonzero scalar. -/
+def matrixScalarEquivalent (left right : M) : Bool :=
+  fieldElements.any fun scalar =>
+    scalar ≠ 0 && decide (left = scalar • right)
+
+/-- The nine coordinate matrices `g^i h^j`, for `0 ≤ i,j < 3`. -/
+def displayedHeisenbergMatrices : List M :=
+  finiteThree.flatMap fun i =>
+    finiteThree.map fun j =>
+      multiplyMatrices (matrixPower g i.val) (matrixPower h j.val)
 
 private def e₀ : V := ![1, 0, 0]
 private def e₁ : V := ![0, 1, 0]
@@ -293,12 +309,13 @@ private def prefixCandidatesNonsingular
   (frameCandidatesAtPrefix source target first second).all fun matrix =>
     determinantThree matrix != 0
 
-attribute [reducible] point selectedPoints uncoveredPoints finiteNine fieldElements
+attribute [reducible] point selectedPoints uncoveredPoints finiteNine finiteThree fieldElements
   fieldPower fieldInverse
   orbitIndex orbitLabels orderedIndexFramesAt orderedIndexFramesAtPrefix
   orderedIndexFrames framePoint coordinateMatrix determinantThree multiplyMatrices applyMatrix
-  inverseMatrix diagonalMatrix frameNormalizer frameProjectivity sourceFrame
+  matrixPower inverseMatrix diagonalMatrix frameNormalizer frameProjectivity sourceFrame
   frameCandidates frameCandidatesAt frameCandidatesAtPrefix normalizeRay mapsRaysTo selectedStabilizers
+  matrixScalarEquivalent displayedHeisenbergMatrices
   uncoveredStabilizers pairStabilizers selectedToUncovered uncoveredToSelected
   selectedStabilizersAt uncoveredStabilizersAt pairStabilizersAt selectedToUncoveredAt
   uncoveredToSelectedAt selectedStabilizersAtPrefix uncoveredStabilizersAtPrefix
@@ -307,6 +324,22 @@ attribute [reducible] point selectedPoints uncoveredPoints finiteNine fieldEleme
 
 /-- The ordered target-frame domain has exactly 3024 elements. -/
 theorem ordered_frame_count : orderedIndexFrames.length = 3024 := by decide
+
+/--
+The displayed Heisenberg matrices give nine distinct projectivities preserving both members of
+the ordered pair.
+-/
+theorem displayed_heisenberg_matrices_form_pair_stabilizers :
+    displayedHeisenbergMatrices.length = 9 ∧
+    displayedHeisenbergMatrices.all (fun matrix =>
+      decide (Matrix.det matrix ≠ 0) &&
+      mapsRaysTo matrix NinePointHeisenbergPair.selected NinePointHeisenbergPair.selected &&
+      mapsRaysTo matrix NinePointHeisenbergPair.uncovered NinePointHeisenbergPair.uncovered) = true ∧
+    (List.sublistsLen 2 displayedHeisenbergMatrices).all (fun pair =>
+      match pair with
+      | [left, right] => !matrixScalarEquivalent left right
+      | _ => false) = true := by
+  decide
 
 private def selectedExpectedSecond : Fin 9 → Fin 9 :=
   ![1, 2, 0, 4, 5, 3, 8, 6, 7]
@@ -335,6 +368,9 @@ def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
       expectedMultiplicity second (uncoveredExpectedSecond first) &&
   (pairStabilizersAtPrefix first second).length ==
       expectedMultiplicity second (selectedExpectedSecond first) &&
+  (pairStabilizersAtPrefix first second).all (fun matrix =>
+    displayedHeisenbergMatrices.any fun heisenbergMatrix =>
+      matrixScalarEquivalent matrix heisenbergMatrix) &&
   selectedToUncoveredAtPrefix first second == [] &&
   uncoveredToSelectedAtPrefix first second == []
 
