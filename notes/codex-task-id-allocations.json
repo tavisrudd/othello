@@ -1376,8 +1376,17 @@
       "last": 647,
       "purpose": "post-C562 literature and novelty audit of all adopted manuscript additions",
       "sequence": 153
+    },
+    {
+      "count": 1,
+      "first": 648,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 648,
+      "purpose": "develop abstract projective Heisenberg orbit chord calculus and test a collinearity-or-Heisenberg dichotomy",
+      "sequence": 154
     }
   ],
-  "next_id": 648,
+  "next_id": 649,
   "schema": "codex-task-id-allocations-v1"
 }
