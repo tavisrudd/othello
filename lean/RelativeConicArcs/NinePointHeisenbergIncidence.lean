@@ -101,10 +101,16 @@ def lineType (line : V) : Nat × Nat :=
 def lineTypeCount (aCount uCount : Nat) : Nat :=
   canonicalPoints.countP fun line => lineType line = (aCount, uCount)
 
-/-- Number of points outside `points` having a prescribed chord multiplicity. -/
-def offSetSecantMultiplicityCount (points : List V) (multiplicity : Nat) : Nat :=
-  canonicalPoints.countP fun p =>
+/-- Number of points in a finite domain, but outside `points`, having a prescribed chord
+multiplicity. -/
+def offSetSecantMultiplicityCountOn
+    (domain points : List V) (multiplicity : Nat) : Nat :=
+  domain.countP fun p =>
     !onRays p points && decide (secantMultiplicity points p = multiplicity)
+
+/-- Number of projective points outside `points` having a prescribed chord multiplicity. -/
+def offSetSecantMultiplicityCount (points : List V) (multiplicity : Nat) : Nat :=
+  offSetSecantMultiplicityCountOn canonicalPoints points multiplicity
 
 abbrev Label := Fin 3 × Fin 3
 
@@ -151,7 +157,8 @@ attribute [reducible] fieldElements affinePointsFor canonicalPointsY0To4 canonic
   canonicalPointsY10To14 canonicalPointsY15To18AndInfinity canonicalPoints onRays determinantOfTriple
   isCoordinateArc determinantOfPairWith ordinarilyCovered secantMultiplicity
   uncoveredLocusAgreementOn
-  pointsOnLine lineType lineTypeCount offSetSecantMultiplicityCount labels labelIndex
+  pointsOnLine lineType lineTypeCount offSetSecantMultiplicityCountOn
+  offSetSecantMultiplicityCount labels labelIndex
   selectedAt uncoveredAt addLabel subLabel chordSelectedCount chordHitsSelectedAt
   directionProfile missedDirection
 
