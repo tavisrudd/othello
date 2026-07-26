@@ -1,0 +1,17 @@
+{
+  "boundary_only_arc_indices": [2, 25, 26, 43, 44, 89, 108, 197],
+  "boundary_only_off_conic_holes": [7, 8, 12, 16, 83, 88, 98, 101, 113, 132, 139, 158, 159, 171, 175, 184, 187, 222],
+  "boundary_only_profiles": [4, 2, 3, 2, 2, 4, 4, 3],
+  "boundary_only_uncovered_conic_points": [53, 70, 84, 174, 202, 239],
+  "candidate_quadrics_tested": 26755617,
+  "leaf_count": 2633,
+  "minimum_arc_indices": [0, 1, 17, 34, 52, 67, 89, 112],
+  "minimum_form": [1, 1, 6, 7, 7, 0],
+  "minimum_leaf": 3,
+  "minimum_off_conic_holes": [139, 141, 166, 191, 218, 245],
+  "minimum_uncovered_conic_points": [124, 126, 151, 171, 173, 251, 253, 263],
+  "minimum_visible_off_conic_holes": 6,
+  "multibase_survivors": 0,
+  "schema": "c667-q16-multibase-involution-expansion-v1",
+  "small_uncovered_candidate_pairs": 2291362
+}
