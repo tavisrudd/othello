@@ -5,9 +5,10 @@
 **Date:** 2026-07-25
 
 **Status:** implementation now includes polynomial restriction and
-Frobenius descent, binary-factor proportionality, finite interpolation from a
-one-line correction, line-product detection, product nonsquareness, and the
-conditional carrier-cardinality theorem.  Dedicated gate builds remain
+Frobenius descent, binary-factor proportionality, projective-representative
+invariance of square status, finite interpolation from a one-line correction,
+line-product detection, product nonsquareness, and the conditional
+carrier-cardinality theorem.  Dedicated gate builds remain
 pending the shared Lean build window.  The manuscript is unchanged, and the
 formal boundary below isolates the projective inputs which Lean does not yet
 check.
@@ -128,6 +129,12 @@ ten public terminals.
 - `dualLinearFactorProduct` constructs the finite product of dual linear
   factors, and `planeLineRestriction_dualLinearFactorProduct` commutes its
   restriction with that product;
+- `dualLinearFactorProduct_rescale` computes the aggregate scalar change under
+  independent rescaling of all factor representatives, while
+  `exists_dualLinearFactorProduct_rescale_eq_sq_of_exists_eq_sq` and
+  `exists_dualLinearFactorProduct_rescale_eq_sq_iff` prove that over a perfect
+  characteristic-two field the existence of a square root is invariant under
+  every nonzero change of projective representatives;
 - `prod_eq_sq_of_equiv_sum` proves the abstract paired-product square identity;
 - `planeLineRestriction_dualLinearFactorProduct_eq_sq_of_pairing` supplies an
   explicit restricted root from paired equal factors;
@@ -150,7 +157,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its sixteen public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its nineteen public
 terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
@@ -186,8 +193,9 @@ deletion implication, and the finite-cover counting kernel.
 
 Lean does not yet check:
 
-- the passage from projective arc points to a representative-independent
-  dual-factor product;
+- the passage from projective arc points to the dual-factor product (its
+  square status is now representative-independent, although the product
+  itself changes by the explicit aggregate scalar);
 - the incidence argument which turns the secant pairing into the determinant
   hypotheses for the restricted binary factors;
 - the one-line polynomial correction lemma for compatible sections on a nodal
@@ -209,7 +217,7 @@ standing for them is introduced.
 |:--|:--|
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
-| Is the full dual-factor product representative-independent? | **Open at the geometric interface:** individual rescaling is formalized exactly, but the projective normalization or line-bundle formulation of the whole product is not. |
+| Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
 | Do compatible linewise roots extend? | **Reduced:** finite interpolation from successive corrections is kernel-checked.  The remaining evidence gap is the projective one-line correction: divisibility of the residual binary form by the previous node factors and a lift of the quotient to the plane. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to explicit algebraic hypotheses:** line-product detection and the final cardinal contradiction are kernel-checked.  The remaining evidence gap is the specialization from restriction-zero to divisibility by each chosen line equation, plus pairwise relative primality and the required degree bound. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
@@ -230,7 +238,7 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its sixteen terminals reports no axioms beyond
+- The source-local audit of its nineteen terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
@@ -240,7 +248,7 @@ standing for them is introduced.
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the sixteen-terminal polynomial gate
+  `--no-build` confirmation, together with the nineteen-terminal polynomial gate
   and eight-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because the
   foreign `RelativeConicArcs.Gates.Relconic` aggregate owns that lock.

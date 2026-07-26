@@ -84,6 +84,16 @@ noncomputable def dualLinearFactorProduct
     MvPolynomial (Fin 3) K :=
   ∏ i, homogeneousLinearPolynomial (covector i)
 
+/-- Rescaling every linear-factor representative multiplies their product by the product of the
+scalars. -/
+theorem dualLinearFactorProduct_rescale
+    {ι : Type*} [Fintype ι]
+    (scale : ι → K) (covector : ι → Fin 3 → K) :
+    dualLinearFactorProduct (fun i j => scale i * covector i j) =
+      MvPolynomial.C (∏ i, scale i) * dualLinearFactorProduct covector := by
+  simp [dualLinearFactorProduct, homogeneousLinearPolynomial_scale,
+    Finset.prod_mul_distrib]
+
 /-- Restriction of a finite linear-factor product is the product of the restricted factors. -/
 theorem planeLineRestriction_dualLinearFactorProduct
     {ι : Type*} [Fintype ι]
@@ -328,6 +338,26 @@ section PerfectCoefficientFrobenius
 variable {K ι J : Type*} [CommRing K] [ExpChar K 2] [PerfectRing K 2]
   [Fintype ι] [Fintype J]
 
+/-- Over a perfect coefficient ring of exponent characteristic two, rescaling all representatives
+of a finite linear-factor product preserves the existence of a square root. -/
+theorem exists_dualLinearFactorProduct_rescale_eq_sq_of_exists_eq_sq
+    (scale : ι → K) (covector : ι → Fin 3 → K)
+    (hsquare :
+      ∃ root : MvPolynomial (Fin 3) K,
+        dualLinearFactorProduct covector = root ^ 2) :
+    ∃ root : MvPolynomial (Fin 3) K,
+      dualLinearFactorProduct (fun i j => scale i * covector i j) =
+        root ^ 2 := by
+  obtain ⟨root, hroot⟩ := hsquare
+  obtain ⟨scaleRoot, hscaleRoot⟩ :=
+    surjective_frobenius K 2 (∏ i, scale i)
+  refine ⟨MvPolynomial.C scaleRoot * root, ?_⟩
+  rw [dualLinearFactorProduct_rescale, hroot]
+  change MvPolynomial.C (∏ i, scale i) * root ^ 2 =
+    (MvPolynomial.C scaleRoot * root) ^ 2
+  rw [show ∏ i, scale i = scaleRoot ^ 2 by exact hscaleRoot.symm,
+    map_pow, mul_pow]
+
 /-- Over a perfect coefficient ring of exponent characteristic two, the aggregate scalar in a
 proportional factor pairing is automatically a square.  Hence the restricted factor product has
 an explicit square root after choosing the Frobenius preimage of that scalar. -/
@@ -356,6 +386,34 @@ theorem exists_planeLineRestriction_dualLinearFactorProduct_eq_sq_of_proportiona
   exact hscaleRoot.symm
 
 end PerfectCoefficientFrobenius
+
+section ProjectiveRepresentativeSquareClass
+
+variable {K ι : Type*} [Field K] [ExpChar K 2] [PerfectRing K 2] [Fintype ι]
+
+/-- Over a perfect field of exponent characteristic two, changing every projective linear-factor
+representative by a nonzero scalar preserves, in both directions, whether the full factor product
+is a square. -/
+theorem exists_dualLinearFactorProduct_rescale_eq_sq_iff
+    (scale : ι → K) (covector : ι → Fin 3 → K)
+    (hscale : ∀ i, scale i ≠ 0) :
+    (∃ root : MvPolynomial (Fin 3) K,
+      dualLinearFactorProduct (fun i j => scale i * covector i j) =
+        root ^ 2) ↔
+    ∃ root : MvPolynomial (Fin 3) K,
+      dualLinearFactorProduct covector = root ^ 2 := by
+  constructor
+  · intro hsquare
+    have hback :=
+      exists_dualLinearFactorProduct_rescale_eq_sq_of_exists_eq_sq
+        (fun i => (scale i)⁻¹)
+        (fun i j => scale i * covector i j) hsquare
+    simpa [hscale, mul_assoc] using hback
+  · exact
+      exists_dualLinearFactorProduct_rescale_eq_sq_of_exists_eq_sq
+        scale covector
+
+end ProjectiveRepresentativeSquareClass
 
 section SquareRootDescent
 
