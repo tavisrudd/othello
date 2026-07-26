@@ -25,6 +25,21 @@ making better proof-design choices in Lean.
 | Rank-one modular reconstruction specialist | Stephen Doty, Anne Henke, Alison Parker, Gunter Malle, Geoffrey Robinson; Simeon Ball, Michel Lavrauw | PGL2/PSL2 reconstruction: fix point/evaluation duality, compute p'-subgroup invariants and Frobenius digits, track projective covers and outer parity, and isolate torus-normalizer exceptions. |
 | Arithmetic icosahedral invariant geometer | Nigel Hitchin; Igor Dolgachev, Laurent Manivel; Brian Conrad, Asher Auel, David Eisenbud; Paul Steinhardt, David Nelson | Clebsch passages: referee and extend the harmonic-cubic incidence cover, its \(\mathbf Q(\sqrt5)\) descent and conductor, the \(A_5\)-module bridge, the spinor specialization, and the degree-six bond-order cubic. |
 
+## Paper-specific proof dossiers
+
+These dossiers are **required only for nontrivial proof work in the exact paper shown**. Never
+preload one for another paper, even when subjects or named experts overlap.
+
+| Exact paper directory | Required dossier |
+| --- | --- |
+| `papers/arcs_complete_outside_conic/` | `../papers/expert-profiles/03-arcs-complete-outside-conic.md` |
+| `papers/clebsch-rigidity/` | `../papers/expert-profiles/04-clebsch-rigidity.md` |
+| `papers/complete-repair-ports/` | `../papers/expert-profiles/05-complete-repair-ports.md` |
+| `papers/beyond4_prs/` | `../papers/expert-profiles/08-beyond-four-prs.md` |
+| `papers/clebsch-factorization/` | `../papers/expert-profiles/09-clebsch-factorization.md` |
+| `papers/clebsch-passages/` | `../papers/expert-profiles/10-clebsch-passages.md` |
+| `papers/ame_lu/` | `../papers/expert-profiles/11-ame-lu.md` |
+
 ## Loading order by task
 
 1. Formal normal-play semantics:

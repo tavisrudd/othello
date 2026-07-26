@@ -13,7 +13,9 @@ appendix-only and cannot discharge a body theorem.
 3. C673 is closed: exact confinement/transfer has a complete human proof,
    paper-facing zero/singleton/multisupport and pointed terminals, and a green
    axiom gate.
-4. C674 follows C672+C673 for positive-density fingerprints.
+4. C674 is closed: trace duality, eventual exact confinement, coefficient-port
+   copies, density, scaled parameters, and general MDS fingerprints pass the
+   paper-facing gate; outer-family existence is the named classical input.
 5. C675 proves and formalizes reliability and bounded EXIT.
 6. C676 follows C675 for pointed Tutte and the filtration boundary.
 7. C677 follows C672 for harmonic geometry.

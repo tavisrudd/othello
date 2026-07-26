@@ -1,24 +1,30 @@
-# Expert profiles for the seven-paper programme
+# Expert profiles and paper-specific proof personas
 
-**Date checked:** 2026-07-15
+**Date checked:** 2026-07-26
 
-This directory maps the likely expert readership of each mathematical paper in the
-repo's seven-paper ship order.  It is a planning aid for adversarial review,
+This directory maps likely expert readership and proof-design lenses. It is a planning aid for adversarial review,
 positioning, venue selection, seminar conversations, and eventual cover-letter
 referee suggestions.  It is **not** a claim that any named person is available,
 willing, independent, or suitable under a particular journal's conflict policy.
 
-## Files
+Paper-specific dossiers are **required only when working on proofs for the exact paper they name**.
+Do not preload or reuse them as general context for another paper.
+
+## Profiles and proof dossiers
 
 | # | Paper | Profile |
 |---|---|---|
 | 1 | Nofil / finite-geometry outcomes | `01-nofil-finite-geometry-outcomes.md` |
 | 2 | Dihedral Schreier Node Kayles | `02-dihedral-schreier-node-kayles.md` |
 | 3 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | `03-arcs-complete-outside-conic.md` |
-| 4 | Clebsch hexagon code | `04-clebsch-hexagon-code.md` |
+| 4 | Clebsch rigidity | `04-clebsch-rigidity.md` |
 | 5 | Complete bounded repair ports | `05-complete-repair-ports.md` |
 | 6 | Frobenius-equivariant pair extension and robust repair | `06-equivariant-robust-completion.md` |
 | 7 | Continuation-graph rigidity | `07-continuation-graph-rigidity.md` |
+| 8 | PRS deep holes beyond redundancy four | `08-beyond-four-prs.md` |
+| 9 | Clebsch factorization memory | `09-clebsch-factorization.md` |
+| 10 | Clebsch arithmetic and harmonic passages | `10-clebsch-passages.md` |
+| 11 | Local-unitary rigidity of stabilizer AME states | `11-ame-lu.md` |
 
 ## At-a-glance mental panels
 
@@ -31,9 +37,13 @@ priority proximity, role, and conflict cautions.
 | 2 | Nándor Sieben + Michel Lavrauw + Tony Wong | Philippe Tranchida, Melissa Huggan |
 | 3 | Simeon Ball + Geertrui Van de Voorde + Daniele Bartoli | Leo Storme, Aart Blokhuis |
 | 4 | Krishna Kaipa + Geertrui Van de Voorde + Jan De Beule | Leo Storme, Aart Blokhuis |
-| 5 | Michel Lavrauw + one of Tamo/Yaakobi + one of Kurz/Xing | Oggier, Ravagnani, Daniele Bartoli |
+| 5 | Ravagnani/Britz + Lavrauw + one of Tamo/Yaakobi | Oggier, Bartoli; Janson/O'Donnell or Stichtenoth/Xing by section |
 | 6 | Simeon Ball + Michel Lavrauw + Tim Alderson | Leo Storme, John Bamberg |
 | 7 | N1: Sanming Zhou + John Bamberg + an independent finite geometer; N2: Klaus Metsch + Lavrauw/Van de Voorde | Cheryl Praeger, Massimiliano Mella, and the closest embedding authors |
+| 8 | Krishna Kaipa + Simeon Ball + Daqing Wan | Lavrauw, Sziklai |
+| 9 | Eisenbud/Schreyer + Dolgachev/Manivel + Lavrauw | Henke/Parker, Conrad |
+| 10 | Hitchin + Dolgachev/Manivel + Conrad/Auel | Steinhardt, Nelson |
+| 11 | Van den Nest/Gross + Grassl/Huber + Ball/Lavrauw | Rötteler and closest LU/LC authors |
 
 ## Recurrent-reader caution
 

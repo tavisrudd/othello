@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C673 PROOF GATES COMPLETE; C674 NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672--C674 PROOF GATES COMPLETE; C675 NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -72,6 +72,7 @@ Completed preparation:
 - [C671 revised theorem hierarchy and paper-control surface](../2026-07-26-c671-complete-ports-theorem-hierarchy.md).
 - [C672 MDS minimum coefficient-port reconstruction](../2026-07-26-c672-mds-local-reconstruction.md).
 - [C673 exact pointed confinement and weighted transfer](../2026-07-26-c673-exact-confinement-transfer.md).
+- [C674 positive-density coefficient fingerprints](../2026-07-26-c674-positive-density-fingerprints.md).
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -100,12 +101,18 @@ terminal.
 
 ## Next step
 
-Run C674 next: close prescribed positive-density realization and derive the admitted fingerprint
-consequences.  C673 showed that the singleton functional stratum remains necessary in general but
-vanishes automatically for an \(L\)-linear outer family once its dual distance is at least two.
-The remaining proof/formalization work then branches:
+Before any nontrivial proof development or formalization for this paper, read the required
+paper-specific expert dossier
+[`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
+It routes C675 to the Janson--O'Donnell reliability lens, C676 to the Britz--Ravagnani
+code/matroid lens, and C677 to the Lavrauw--Ball/Bartoli finite-geometry lens; final assembly also
+requires the Yaakobi/Tamo operational-storage read.
 
-- C675 establishes the noncomputational reliability/EXIT calculus;
+Run C675 next: replace the reliability and bounded-EXIT certificate dependence by complete
+finite-sum proofs and paper-facing Lean terminals.  C674 closed exact support and normalized
+coefficient transfer, eventual necessity and sufficiency, density, scaled parameters, and general
+MDS fingerprints.  The remaining proof/formalization work then branches:
+
 - C676 follows C675 for pointed Tutte and the filtration boundary; and
 - C677 follows C672 for the harmonic geometric application.
 

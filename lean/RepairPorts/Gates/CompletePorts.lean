@@ -1,5 +1,6 @@
 import RepairPorts.MDSReconstruction
 import RepairPorts.PointedTransfer
+import RepairPorts.PositiveDensity
 
 /-!
 # Complete bounded repair-port theorem gate
@@ -24,5 +25,14 @@ No executable certificate or fiber enumerator occurs in these dependency closure
 #print axioms RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed
 #print axioms RepairPorts.pointedFunctionalTupleRealizationCost_eq
 #print axioms RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost
+#print axioms RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed
 #print axioms RepairPorts.exactPointedConfinementAndTransfer
+#print axioms RepairPorts.representedTargets_density
+#print axioms RepairPorts.concatenatedRestrictedCode_parameters
+#print axioms RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance
+#print axioms RepairPorts.prescribedPorts_of_outerDualDistance
+#print axioms RepairPorts.eventually_pointedConfinement_iff_zeroCost
+#print axioms RepairPorts.eventually_prescribedPorts
+#print axioms RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq
+#print axioms RepairPorts.eventually_mdsMinimumCoefficientFingerprints
 #print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action
