@@ -1336,6 +1336,21 @@ q23 P control and stop at the first `F_d\R0` edge or uncovered `R0` fibre.
 Report+script+cert:
 [`../2026-07-25-c80-q23-third-control-rank-zero.md`](../2026-07-25-c80-q23-third-control-rank-zero.md).
 
+**The rank-zero identity survives the fourth canonical q23 P control exactly
+(C80, 2026-07-25).** For
+`S4(1,2,3,4)+(0,0)+(5,13)`, all 118 opponent fibres are covered and
+`R0=F_d` on all 7,988 candidates (`1,270=1,270` accepted edges, zero
+disagreements). Across the first four controls the aggregate is 472 covered
+fibres, 31,922 candidates, and 5,220 common edges. The first rejected
+candidate `(6,3)->(7,2)` is independently C54-labelled N; after
+`(9,4)->(22,9)` it reaches an overload-zero rank-two state with two terminal
+moves. This remains a correlated finite shell test, not a growing-depth
+theorem; C82 remains gated. One-at-a-time probes now have diminishing
+information value: batch the remaining controls from the fifth onward and
+stop at the first `F_d\R0` edge or uncovered `R0` fibre.
+Report+script+cert:
+[`../2026-07-25-c80-q23-fourth-control-rank-zero.md`](../2026-07-25-c80-q23-fourth-control-rank-zero.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
