@@ -1430,8 +1430,17 @@
       "last": 655,
       "purpose": "certify the l=6 Gaunt-Steinhardt restriction to the Clebsch four-channel and audit its physical order-parameter interpretation",
       "sequence": 159
+    },
+    {
+      "count": 1,
+      "first": 656,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 656,
+      "purpose": "Repair PRS cold-read blockers: modular pullback budget, exact bottom-component ledger, recursive transport, and independent finite replay",
+      "sequence": 160
     }
   ],
-  "next_id": 656,
+  "next_id": 657,
   "schema": "codex-task-id-allocations-v1"
 }
