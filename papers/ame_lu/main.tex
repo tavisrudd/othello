@@ -8,6 +8,7 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \numberwithin{equation}{section}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{xcolor}
@@ -39,16 +40,15 @@
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\title{Local-Unitary Rigidity of Stabilizer AME States:
-Operator-Pushing Atlases and Transversal Logical Clifford Groups of
-MDS--CSS Codes}
+\title{Local-Unitary Rigidity of Stabilizer AME States and
+Transversal Clifford Groups of MDS--CSS Codes}
 \author{Tavis Rudd}
 \date{July 2026}
 \hypersetup{
-  pdftitle={Local-Unitary Rigidity of Stabilizer AME States:
-    Operator-Pushing Atlases and Transversal Logical Clifford Groups of
-    MDS--CSS Codes},
+  pdftitle={Local-Unitary Rigidity of Stabilizer AME States and
+    Transversal Clifford Groups of MDS--CSS Codes},
   pdfauthor={Tavis Rudd}
 }
 
@@ -88,8 +88,8 @@ and local-unitary equivalence.
 \input{sections/04-pencil-classification}
 \input{sections/05-logical-clifford-phase}
 \input{sections/06-lu-invariants}
-\input{sections/07-conclusion}
 \input{sections/08-verification-boundary}
+\input{sections/07-conclusion}
 \appendix
 \input{sections/10-scalar-certificates}
 \input{sections/07-transport-sheaf}

@@ -109,9 +109,11 @@ and Van den Nest, Dehaene, and De Moor used this mechanism in a
 minimal-support LU-to-LC criterion for qubit stabilizer states
 \cite[Theorem~13]{Rains1999}
 \cite[Theorem~1 and Corollary~1]{VanDenNestDehaeneDeMoor2005}.
-For \(q=2\), the AME minimum-support profile satisfies that criterion, so
-the LU-to-LC conclusion of Theorem~\ref{thm:lu-lc-rigidity} is already
-covered by their result.  The new scope here is the uniform
+For \(q=2\), Proposition~\ref{prop:full-weyl-marginal} supplies all three
+Pauli axes on each minimum support, so the AME profile satisfies their
+criterion.  The LU-to-LC conclusion of
+Theorem~\ref{thm:lu-lc-rigidity} is therefore already covered by their
+result.  The new scope here is the uniform
 prime-power theorem for arbitrary additive stabilizers, together with the
 minimum-support atlas and its exact symmetry-group sequence.
 Van den Nest, Dehaene, and De Moor also gave a finite invariant set
@@ -258,8 +260,8 @@ where party permutations are allowed.
 means that a displayed party permutation is applied first and the remaining
 equivalence is fixed-party.}
 \label{tab:result-scopes}
-\begin{tabular}{@{}p{0.22\linewidth}p{0.14\linewidth}
-                p{0.34\linewidth}p{0.22\linewidth}@{}}
+\begin{tabular}{@{}L{0.27\linewidth}L{0.14\linewidth}
+                L{0.29\linewidth}L{0.22\linewidth}@{}}
 \toprule
 Result & \shortstack[l]{Local\\dimension} &
 \shortstack[l]{State or code\\assumptions} & Party motion \\
@@ -268,7 +270,7 @@ LU rigidity & \(p^e\) & arbitrary stabilizer \(\AME(2m,q)\) &
 allowed explicitly \\
 Atlas classification & \(p^e\) & arbitrary stabilizer
 \(\AME(2m,q)\) & fixed after relabelling \\
-Exact logical group & odd prime & equal-phase linear
+Exact fixed-party projective logical group & odd prime & equal-phase linear
 \([2m,m,m+1]\) MDS--CSS & fixed \\
 Pencil LU/LC by \(z\) & odd prime & admitted non-GRS
 six-party pencil & arbitrary permutation \\
@@ -335,9 +337,9 @@ applications and contrasts.  Section~\ref{sec:pencil} proves the
 \(z\)-classification; Section~\ref{sec:logical} proves the
 logical-Clifford phase theorem; and Section~\ref{sec:invariants} compares
 operator-valued rigidity with the generic blindness of fixed-copy scalar
-invariants.  Section~\ref{sec:conclusion} returns to the exact
-extension-field boundary, and Section~\ref{sec:verification} records the
-trust boundary.  The appendices contain the detailed \(H_3\) and
+invariants.  Section~\ref{sec:verification} records the trust boundary,
+and Section~\ref{sec:conclusion} closes with the exact extension-field
+boundary.  The appendices contain the detailed \(H_3\) and
 \(q=13\) scalar certificates, optional transport calculations, and finite
 party-permutation examples; none is used in the uniform rigidity or atlas
 theorems.

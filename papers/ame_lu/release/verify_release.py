@@ -113,9 +113,8 @@ def create_manifest() -> dict[str, object]:
         "release": "ame-lu-rc1",
         "date": "2026-07-26",
         "title": (
-            "Local-Unitary Rigidity of Stabilizer AME States: "
-            "Operator-Pushing Atlases and Transversal Logical Clifford "
-            "Groups of MDS--CSS Codes"
+            "Local-Unitary Rigidity of Stabilizer AME States and "
+            "Transversal Clifford Groups of MDS--CSS Codes"
         ),
         "public_export": {
             "artifacts": public,

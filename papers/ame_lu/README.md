@@ -1,8 +1,7 @@
 # Paper: Local-unitary rigidity of stabilizer AME states
 
-**Title:** *Local-Unitary Rigidity of Stabilizer AME States:
-Operator-Pushing Atlases and Transversal Logical Clifford Groups of
-MDS--CSS Codes.*
+**Title:** *Local-Unitary Rigidity of Stabilizer AME States and
+Transversal Clifford Groups of MDS--CSS Codes.*
 
 **Lane:** `ame-lu`
 

@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-26",
-  "title": "Local-Unitary Rigidity of Stabilizer AME States: Operator-Pushing Atlases and Transversal Logical Clifford Groups of MDS--CSS Codes",
+  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes",
   "public_export": {
     "artifacts": [
       {
@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 241434,
+        "bytes": 241424,
         "path": "ame-lu.pdf",
-        "sha256": "2f0e78f4441c40d6debf25304020b0a875de996c8423e71630fd461336942e37"
+        "sha256": "2e98f920aa3a8b1d1c1a624cd539f17c504e66947024625c80a4902cc12fec4d"
       },
       {
         "bytes": 19155,
@@ -21,9 +21,9 @@
         "sha256": "07ba0643fc8599db03b701b097e45efb0456009390e671f3b10f65c8f9dab776"
       },
       {
-        "bytes": 3568,
+        "bytes": 3573,
         "path": "main.tex",
-        "sha256": "3dfeabf7016be5385b88eff465b4275ed90bf48de7ccd4eda647ba2bbc36f898"
+        "sha256": "264f0efe13d22d00ccf032e4cdd1f2798fb7a979267f190f5d1e20f57c18b1d2"
       },
       {
         "bytes": 12611,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 7641,
+        "bytes": 7592,
         "path": "release/verify_release.py",
-        "sha256": "e7dcfbf530835ec5fdc54b0580d20f2b74f826d3ff52baa3ce32dd9e4bcbb119"
+        "sha256": "b6fc797b48e0ce9b4fa753ad75b4b596d6fda99cb377de079650e8cd37bf85c0"
       },
       {
-        "bytes": 16563,
+        "bytes": 16680,
         "path": "sections/01-introduction.tex",
-        "sha256": "169eec9daf416d1eaa1dd818e97c8e98064e12983292334c11fbe83bb4e493f5"
+        "sha256": "f9029877b09d2038eadb2fac8f91bc66fe8661cc796a1da420c18cddd2fe55e5"
       },
       {
         "bytes": 6200,
@@ -206,7 +206,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "b8e2961b2c46c31d2a9bd74a9145cf334746a27161bb70998192c6915cb4aa7c"
+    "tree_sha256": "f7c9ffd6e941312a6035deb885cb327f573a860319df06de97222012b1445b20"
   },
   "formal_companion": {
     "artifacts": [
