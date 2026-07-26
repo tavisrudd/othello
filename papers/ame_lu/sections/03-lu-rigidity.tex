@@ -30,6 +30,55 @@ rank-one contraction locus, and hence permutes the axes in the first
 factor.  Apply the same argument in every factor.
 \end{proof}
 
+Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if it
+has an expansion
+\[
+ R=\sum_{v\in\F_q^2}\lambda_v
+       \bigotimes_{i=1}^r W_{L_i v},
+ \qquad L_i\in\mathrm{GL}_2(q),\quad \lambda_v\ne0.       \tag{3.2}
+\]
+The coefficients need not be equal.  What matters is that the same
+\(q^2\)-element index set runs bijectively through the complete local
+Weyl basis at every party.
+
+\begin{proposition}[Full-Weyl marginal criterion]
+\label{prop:full-weyl-marginal}
+Let \(R\) and \(R'\) be full-Weyl diagonal operators on the same
+\(r\geq3\) parties, possibly with different maps \(L_i\) and
+coefficients.  If
+\[
+ R'=(U_1\otimes\cdots\otimes U_r)R
+       (U_1\otimes\cdots\otimes U_r)^\dagger ,
+\]
+then every \(U_i\) is Clifford.
+\end{proposition}
+
+\begin{proof}
+View \(R\) and \(R'\) as tensors in the local Hilbert--Schmidt spaces.
+Both have the form in Lemma~\ref{lem:diagonal-axes}, with \(N=q^2\).
+Local conjugation acts invertibly on each factor, so it must permute the
+Weyl axes.  It fixes the identity operator and hence the identity axis.
+It therefore permutes the nonidentity projective Weyl operators, which
+is exactly the single-qudit Clifford condition.
+\end{proof}
+
+\begin{corollary}[Full-Weyl marginal-cover rigidity]
+\label{cor:full-weyl-cover}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be \(n\)-qudit states and
+suppose a product unitary, after a party relabelling, carries
+\(\lvert\psi\rangle\) to \(\lvert\phi\rangle\) up to phase.  If every
+party belongs to a set \(S\) of at least three parties for which both
+reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are full-Weyl
+diagonal, then every local factor is Clifford.
+\end{corollary}
+
+\begin{proof}
+Partial trace gives a product-unitary equivalence of the two reduced
+operators on each chosen \(S\).  Apply
+Proposition~\ref{prop:full-weyl-marginal}; the chosen sets cover all
+parties.
+\end{proof}
+
 Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
 \(S\) of size \(m+1\).  Shortening \(C\) on the \(m-1\) coordinates
 outside \(S\) gives an \([m+1,1,m+1]_q\) MDS code.  The dual
@@ -39,7 +88,7 @@ does as well.  Choose nonzero shortened words
 and
 \[
  L_C(S)=
- \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.2}
+ \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.3}
 \]
 At a party \(i\in S\), projection of this plane to the local Pauli labels
 is
@@ -66,22 +115,18 @@ calculation as in \((2.1)\) gives
 \]
 View the entire marginal as a tensor in the \(m+1\) local
 Hilbert--Schmidt spaces, each with the full \(q^2\)-element Weyl basis.
-By \((3.2)\), after indexing \(v=(a,b)\), it has the form
+By \((3.3)\), after indexing \(v=(a,b)\), it has the form
 \[
  \rho^C_S=\sum_{v\in\F_q^2}\lambda_v
- \bigotimes_{i\in S}W_{L_iv},                                  \tag{3.3}
+ \bigotimes_{i\in S}W_{L_iv},                                  \tag{3.4}
 \]
 where every \(L_i\) is invertible and every coefficient \(\lambda_v\) is
 nonzero.  (With the normalization above, all coefficients are
 \(q^{-|S|}\).)  This is a diagonal tensor with \(N=q^2\), including the
 identity label \(v=0\).
 
-Local conjugation acts unitarily on each Hilbert--Schmidt space.
-Lemma~\ref{lem:diagonal-axes} therefore forces each local adjoint action
-to permute all \(q^2\) Weyl axes.  Conjugation fixes the identity
-operator, so it fixes the identity axis and permutes the remaining
-\(\mathbb CW_v\), \(v\ne0\).  Hence the underlying unitary normalizes
-the projective Weyl group.  This is the single-qudit Clifford condition.
+The same calculation for \(D\) makes \(\rho^D_S\) full-Weyl diagonal.
+The conclusion is Proposition~\ref{prop:full-weyl-marginal}.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
@@ -202,7 +247,7 @@ formula uses the same evaluation set and complementary coordinate
 multipliers.  Since the dimension is \(m\), there is therefore a
 nonsingular diagonal matrix
 \[
- S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.4}
+ S=\diag(s_1,\ldots,s_{2m}),\qquad SC=C^\perp .          \tag{3.5}
 \]
 The same statement holds for the extended evaluation point when
 \(2m=q+1\).
@@ -213,7 +258,7 @@ For \(\lambda,\mu\in\F_q\), put
  \begin{pmatrix}1&0\\ \lambda s_i&1\end{pmatrix},
  \qquad
  F_i^+(\mu)=
- \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.5}
+ \begin{pmatrix}1&\mu s_i^{-1}\\0&1\end{pmatrix}.       \tag{3.6}
 \]
 On the CSS label space
 \(L_C=(C\oplus0)+(0\oplus C^\perp)\), the product of the lower blocks
@@ -252,10 +297,10 @@ Propagation to coordinate \(i\) is
  =
  \begin{pmatrix}1&0\\0&t_i\end{pmatrix}
  A
- \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.6}
+ \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.7}
 \]
 Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
-and the elementary matrices in \((3.5)\) satisfy all
+and the elementary matrices in \((3.6)\) satisfy all
 \(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
 applies at the extended evaluation point.  It uses only the diagonal
 duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
@@ -295,8 +340,8 @@ the scalar phases.  Its splitting remains exactly the nonabelian
 factor-set triviality criterion stated there.
 \end{proof}
 
-The theorem needs only a cover by retained sets of size \(m+1\); choosing
-one such set through each party is enough.  More generally, the proof
-applies whenever every party belongs to a support of size at least three
-whose supported stabilizer subgroup has order \(q^2\) and projects
-bijectively onto all nonzero local Weyl labels.
+For a stabilizer state, the hypotheses of
+Corollary~\ref{cor:full-weyl-cover} hold whenever every party belongs to
+a support \(S\) of size at least three whose full supported stabilizer
+label subgroup is an \(\F_q\)-linear plane and projects isomorphically
+onto the local Weyl-label plane at every party of \(S\).

@@ -418,7 +418,12 @@ metaplectic or Schur-multiplier obstruction.  C618's party-permutation
 extension is independent and remains governed by its code-specific
 nonabelian factor set.  No finite computation was needed.  The warning-free
 20-page manuscript, seven evidence replays, 35-public/73-formal release
-checks, and trust ledgers are synchronized.  See
+checks, and trust ledgers are synchronized.  The manuscript now also isolates
+the reusable full-Weyl marginal-cover criterion and states the exact
+fixed-party projective six-arc groups:
+`\(\mathbb F_q^2\rtimes\mathrm{SL}_2(q)\)` on the GRS locus and
+`\(\mathbb F_q^2\rtimes T\)` off it; no uniform party-moving equality is
+claimed.  See
 `2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
 ## Completion program

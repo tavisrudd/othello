@@ -11,14 +11,14 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 186796,
+        "bytes": 190368,
         "path": "ame-lu.pdf",
-        "sha256": "0e87672e4a086eb9c42ea9f645e9d93202269a7170f742b869a450bf2fe4b0ee"
+        "sha256": "6acfdd71beb95e2c74104b81edb7f54d1bf5fa1af6ffe0ec01eead11847c11d7"
       },
       {
-        "bytes": 14691,
+        "bytes": 15024,
         "path": "formal-statement-adequacy.md",
-        "sha256": "f1d62ca0eddf2a30813d469f11f7116c4b2ac5a1bc31b68f5c90a6ab739ce3ca"
+        "sha256": "f81f26fc1a6f560b5662fcdf4931ef03a1299ac3c983b91f9a68321be7037281"
       },
       {
         "bytes": 3124,
@@ -46,9 +46,9 @@
         "sha256": "8c790decce74cdc3c2861651c39a714a554699484e44cb2bbe30b191381f45e4"
       },
       {
-        "bytes": 9384,
+        "bytes": 9544,
         "path": "sections/01-introduction.tex",
-        "sha256": "3851641b347196b7b3c10e422dd3af0955ec61bca2429c31499d814d21f31576"
+        "sha256": "a6dc6af6e990432915b1a5cc2a7db8d6d2e3bc32afc79e91542dbea195628875"
       },
       {
         "bytes": 4299,
@@ -56,24 +56,24 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 13085,
+        "bytes": 14671,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "8468af69ebba549b4c81162a7f098c0dff57a2e156b62db2193985eb1a3d4f04"
+        "sha256": "633e63f6e5931a7341a78233ef5f5f9ae1f91a41711a7aac3779b07cb7702265"
       },
       {
         "bytes": 6002,
         "path": "sections/04-pencil-classification.tex",
-        "sha256": "16b9fed5643847986930fbc5c80c8470013130928b47d5ab1d87df86c561a7a6"
+        "sha256": "9109205c88f2640ee369f8a8c7402ec9e8667b89c87104001ffdd835100dede9"
       },
       {
-        "bytes": 6589,
+        "bytes": 7415,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "6f33065df16b78a237be8c07bec218adaa3c0a9709ebad1ab75881da6b32cf75"
+        "sha256": "ba19667b3c0079a36ca1efc0486d4d2c0c5bc78995fe49a274f5974d38922b36"
       },
       {
         "bytes": 9552,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "ffb1c4880395cde0b6140edcb54112bd213e248412b85dd7415418af1f1b73b9"
+        "sha256": "c14760bd03ea44a4f54ce4bb547246dbe649826c871c953a3419804a2c3e1f3d"
       },
       {
         "bytes": 6151,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "12bff04431487c67e5f36672fcb5afd36d0ff367fcf151db363437956dd2fb2d"
+    "tree_sha256": "e24e92b76fb8e43831c77362eec936043be7613c4503f57b25e1c5a94e64dade"
   },
   "formal_companion": {
     "artifacts": [

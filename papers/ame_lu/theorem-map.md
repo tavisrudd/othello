@@ -28,9 +28,11 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
+- `prop:full-weyl-marginal` and `cor:full-weyl-cover`: reusable full-Weyl marginal and cover criteria forcing every local intertwiner to be Clifford.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
 - `cor:discrete-lu-symmetry`: continuous closed scalar-torus short exact sequences, a closed Hausdorff discrete intrinsic Clifford quotient, finite scalar-torus component covers, finite discrete fixed-party and party-permuted quotients, and the exact extension through the realized party-permutation subgroup.  `AutomorphismExactSequence` supplies the exact sequence.  `NonabelianExtensionInvariant` supplies its section-free outer action, normalized factor set, nonabelian associativity and change-of-section laws, and the equivalence between factor-set trivializability and a homomorphic splitting.  The principal new terminals are `genericPartyPermutationOuterAction`, `genericPartyPermutationFactorSet_associativity`, `genericPartyPermutationFactorSet_change`, and `genericPartyPermutationFactorSet_trivializable_iff_splits`.
 - `cor:grs-transversal-group`: exact full-Clifford transversal group of the odd-prime GRS quantum-MDS tower, with a coherent Weil lift on its linear `SL_2(q)` factor and a Heisenberg obstruction to splitting the full affine one-qudit scalar extension.
+- `cor:six-arc-fixed-party-group`: exact projective fixed-party logical group `F_q^2 ⋊ SL_2(q)` on the GRS six-arc locus and `F_q^2 ⋊ T` off it.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 
 ## Frozen theorem hierarchy
@@ -50,9 +52,11 @@ still depends on the claim, evidence, literature, and prose gates.
    odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
    equivalence are all equivalent to equality of `z`. Over extension
    fields, Frobenius already identifies unequal `z` values.
-4. **Operational phase theorem (`thm:logical-phase`).** The fixed-party
-   logical group is `SL_2(q)` on the GRS locus and the split torus off it,
-   over odd prime fields.  A party-moving isoduality, when
+4. **Operational phase theorem (`thm:logical-phase`,
+   `cor:six-arc-fixed-party-group`).** The fixed-party symplectic kernel is
+   `SL_2(q)` on the GRS locus and the split torus off it, over odd prime
+   fields.  Including logical Paulis, the exact projective groups are
+   `F_q^2 ⋊ SL_2(q)` and `F_q^2 ⋊ T`.  A party-moving isoduality, when
    present, extends the torus to its normalizer.
 5. **Explicit LU witnesses.** C402's marginal moment uniformly separates
    good H3 reductions from GRS; C397's four-copy scalar resolves its q=13
