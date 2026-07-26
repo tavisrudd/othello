@@ -640,6 +640,49 @@ def affineSpecialLinearSet :
     Set (ProjectiveLogicalAction 𝔽) :=
   {g | IsSpecialLinearBlock g.linear}
 
+/-- The affine split-torus subset `𝔽² ⋊ T` of projective logical actions. -/
+def affineSplitTorusSet :
+    Set (ProjectiveLogicalAction 𝔽) :=
+  {g | IsSplitTorusBlock g.linear}
+
+/-- Data identifying a fixed-party projective logical carrier from its linear
+kernel.  Membership depends exactly on the linear block, so every logical Weyl
+translation occurs over every realized linear block. -/
+structure FixedPartyProjectiveTransversalInputs
+    (transversal : Set (ProjectiveLogicalAction 𝔽))
+    (isConic : Prop) where
+  /-- The realized linear fixed-party kernel. -/
+  kernel : Set (LogicalBlock 𝔽)
+  /-- The geometric full-special-linear versus split-torus dichotomy. -/
+  logicalPhase : LogicalPhaseInputs 𝔽 kernel isConic
+  /-- The projective carrier is the complete affine fiber over the linear
+  kernel. -/
+  transversal_iff_linear_mem :
+    ∀ g, g ∈ transversal ↔ g.linear ∈ kernel
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- The exact fixed-party projective logical carrier is `𝔽² ⋊ SL₂(𝔽)` on
+the conic locus and `𝔽² ⋊ T` off it. -/
+theorem fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus
+    {transversal : Set (ProjectiveLogicalAction 𝔽)}
+    {isConic : Prop}
+    (inputs : FixedPartyProjectiveTransversalInputs transversal isConic) :
+    (isConic → transversal = affineSpecialLinearSet) ∧
+    (¬ isConic → transversal = affineSplitTorusSet) := by
+  obtain ⟨hconic, hnonconic⟩ :=
+    fixedPartyKernel_eq_specialLinear_or_splitTorus inputs.logicalPhase
+  constructor
+  · intro hc
+    have hk := hconic hc
+    ext g
+    rw [inputs.transversal_iff_linear_mem, hk]
+    rfl
+  · intro hnc
+    have hk := hnonconic hnc
+    ext g
+    rw [inputs.transversal_iff_linear_mem, hk]
+    rfl
+
 /-- A pure logical Weyl translation. -/
 def projectiveLogicalTranslation (v : 𝔽 × 𝔽) :
     ProjectiveLogicalAction 𝔽 where

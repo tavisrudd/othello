@@ -16,9 +16,9 @@
         "sha256": "6acfdd71beb95e2c74104b81edb7f54d1bf5fa1af6ffe0ec01eead11847c11d7"
       },
       {
-        "bytes": 15024,
+        "bytes": 15203,
         "path": "formal-statement-adequacy.md",
-        "sha256": "f81f26fc1a6f560b5662fcdf4931ef03a1299ac3c983b91f9a68321be7037281"
+        "sha256": "a91ba1036bfbff517139afba90b35d8f49b0722f339913fbf04cc4f897a9653d"
       },
       {
         "bytes": 3124,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "e24e92b76fb8e43831c77362eec936043be7613c4503f57b25e1c5a94e64dade"
+    "tree_sha256": "d3674ec34fbec2a092ba6dc437f8ec2ff7eb62ac6037489d2cf85e83e40edcb7"
   },
   "formal_companion": {
     "artifacts": [
@@ -236,9 +236,9 @@
         "sha256": "67292ca7f120da8751879dae958c430d8eeab803549e0fb0b865abe41fa0f8dc"
       },
       {
-        "bytes": 28312,
+        "bytes": 30083,
         "path": "lean/RelativeConicArcs/AMELU/EncoderTransversal.lean",
-        "sha256": "c8fc9a4dc83e4e15d8195a5696f45d11e5443f8428d0b6b6c30e0c84de5d4b79"
+        "sha256": "fa0b3d19f2f7a3cb8210ee9ff62effb1e97a7fb648d2d19a7827cf8c75c7a3d8"
       },
       {
         "bytes": 12000,
@@ -266,9 +266,9 @@
         "sha256": "7a066ccae0835ed334afb09ca5b9ec56d58f5102bec8b71beebe261cc0b35396"
       },
       {
-        "bytes": 18551,
+        "bytes": 19682,
         "path": "lean/RelativeConicArcs/AMELU/GenericLURigidity.lean",
-        "sha256": "670315033926a122564563f68e1290b29600b090137e8ce9e94bbe7765a58bcb"
+        "sha256": "2455f69ca3858e47dff8f3c1a504ef71af43af848e428185ffa05250f85e8df2"
       },
       {
         "bytes": 15373,
@@ -431,14 +431,14 @@
         "sha256": "5caae34f785b5c37df05ed42c8c278dbf88e0ef98b6adf2d514716122f31ee2d"
       },
       {
-        "bytes": 2434,
+        "bytes": 2542,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregate.lean",
-        "sha256": "4ddd1c7706a088bf108ef3eb7eae710fe55579fe8f768d8df4907f3e130a8df3"
+        "sha256": "c622ccbab69d02da299985b6f16fefdbeadf0758ebb7f5ca5ae67749858cdc1d"
       },
       {
-        "bytes": 7264,
+        "bytes": 7409,
         "path": "lean/RelativeConicArcs/Gates/AMELUAggregateAxioms.lean",
-        "sha256": "3ee4709137ced2841fafee3fbe15e9e3a620963f6d66beb4949b2d3569157d4c"
+        "sha256": "470c60dd1bf6c753851d27c6e87c7a4db21c375bbf59f18fb5a34f6870144fc1"
       },
       {
         "bytes": 391,
@@ -551,6 +551,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "7d8578e0e585a3d62559c058e0cf8769a90e5405c11340045a12d4046b023f29"
+    "tree_sha256": "f05d246877efb11b7b5952544942fb7eabe3f8e4a3617007cc02a29548af06ba"
   }
 }

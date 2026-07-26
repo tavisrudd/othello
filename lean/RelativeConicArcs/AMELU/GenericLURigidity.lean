@@ -254,6 +254,33 @@ private theorem generic_relabelCoordinateEquiv_preserves_axis
     ⟨e i, z, hz,
       relabelCoordinateEquiv_coordinateVector e i z⟩
 
+/-- A product of one-qudit conjugations carrying one full diagonal Weyl
+coordinate tensor to another is Clifford in every factor.  The factors are
+indexed by the complete local Weyl-label plane, all diagonal coefficients are
+nonzero, and at least three tensor factors are present. -/
+theorem all_isClifford_of_fullWeylDiagonal_intertwining
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (hι : 3 ≤ Fintype.card ι)
+    (w : WeylConvention 𝔽)
+    (U : ι → LocalMatrix 𝔽)
+    (hU : ∀ i, IsUnitaryMatrix (U i))
+    {coeff target : (𝔽 × 𝔽) → ℂ}
+    (hcoeff : ∀ v, coeff v ≠ 0)
+    (htarget : ∀ v, target v ≠ 0)
+    (hmap :
+      mapFamilyArray
+          (fun i => unitaryConjugationWeylEquiv w (U i) (hU i))
+          (diagonalFamilyArray (ι := ι) coeff) =
+        diagonalFamilyArray (ι := ι) target) :
+    ∀ i, IsCliffordMatrix w (U i) := by
+  intro i
+  have haxes :=
+    familyFactor_coordinateAxes_of_diagonal_equivalent
+      hι
+      (fun j => unitaryConjugationWeylEquiv w (U j) (hU j))
+      hcoeff htarget hmap i
+  exact isCliffordMatrix_of_weylCoordinate_axes w (U i) (hU i) haxes
+
 private theorem genericMarginal_party_isClifford
     (hm2 : 2 ≤ m) (w : WeylConvention 𝔽)
     {C D : Submodule 𝔽 (GenericBasisLabel m 𝔽)}

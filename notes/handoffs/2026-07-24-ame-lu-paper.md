@@ -423,7 +423,12 @@ the reusable full-Weyl marginal-cover criterion and states the exact
 fixed-party projective six-arc groups:
 `\(\mathbb F_q^2\rtimes\mathrm{SL}_2(q)\)` on the GRS locus and
 `\(\mathbb F_q^2\rtimes T\)` off it; no uniform party-moving equality is
-claimed.  See
+claimed.  `all_isClifford_of_fullWeylDiagonal_intertwining` now formalizes
+the reusable local criterion, while
+`fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus`
+formalizes the exact affine carrier from the explicit complete-translation
+fiber hypothesis.  Both are included in the aggregate axiom audit, which
+passes with only `propext`, `Classical.choice`, and `Quot.sound`.  See
 `2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
 ## Completion program

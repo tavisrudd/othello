@@ -25,6 +25,7 @@ open RelativeConicArcs.AMELU
 #print axioms genericReindexedMarginalArray_eq_diagonal
 #print axioms genericMarginalWeylCoordinates_eq_of_localAction_eq
 #print axioms familyFactor_coordinateAxes_of_diagonal_equivalent
+#print axioms all_isClifford_of_fullWeylDiagonal_intertwining
 #print axioms generic_all_isClifford_of_localAction_equalPhaseState
 #print axioms generic_all_isClifford_of_permutedLocalAction_equalPhaseState
 #print axioms genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent
@@ -85,6 +86,7 @@ open RelativeConicArcs.AMELU
 #print axioms encoderConversion_logical_and_physical_isClifford
 #print axioms genericCSSLabel_lowerDualityShear
 #print axioms genericCSSLabel_upperDualityShear
+#print axioms fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus
 #print axioms grs_projectiveTransversal_eq_affineSpecialLinear
 #print axioms affineSpecialLinearOrder_seven
 
