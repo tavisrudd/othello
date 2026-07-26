@@ -8,8 +8,8 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "51d0be9734eb24b706f75eca2729f9040ad9c8c7a12c4cbb5eae8f329c3585e7",
-  "runner_sha256": "30877cc919edd484d5e3906baa4246b0a39b7877d5efa3173f69e585020bf9c9",
+  "trust_manifest_sha256": "35b3ef98526824ce716a600692341fe15fd420a8b797ebd94bc92ea4448b5a48",
+  "runner_sha256": "c008cc8539e0b1d06c6a3d1bb7d8637487d4cbc9e93baa78fc90d00501842694",
   "evidence": {
     "matching-module": {
       "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
@@ -23,6 +23,21 @@
         [
           "python3",
           "notes/2026-07-20-c406-matching-module-replay.py"
+        ]
+      ]
+    },
+    "h3-equivariant-rank": {
+      "checksum_manifest": "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
+      "checksum_manifest_sha256": "9d5810eb1d7958199dbb944dc729e75faae434bbb815799dd5475014a6ec9151",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-25-c616-h3-equivariant-rank.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-25-c616-h3-equivariant-rank-replay.py"
         ]
       ]
     },
@@ -115,7 +130,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 18 statements, 7 evidence bundles: CHECK OK",
+    "metadata": "metadata: 18 statements, 8 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

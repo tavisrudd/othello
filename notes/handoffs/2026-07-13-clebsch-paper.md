@@ -91,16 +91,18 @@ mechanism. It also defines the three matching orbits explicitly and proves the
 exact `3,6,10` rank theorem, distinguishing the full spaces in types `A_3`
 and `B_3` from the canonical harmonic-plus-radial ten-space in type `H_3`.
 An `ej` upgrade proves that the omitted five-space is exactly the middle
-Fischer layer `Q H_2`; a coordinate-free reason that the finite `H_3` orbit
-annihilates precisely this layer remains a nonblocking conceptual refinement.
-A `tt` pass isolates the exact proof target:
-`Delta_Q Phi(M) in F_11 Q`. Proving this covariant identity conceptually
-would leave only ten-space spanning to the finite certificate.
+Fischer layer `Q H_2`. C616 now explains this loss by projecting the affine
+connecting cocycle to the three twisted Fischer summands: Sylow-normalizer
+cohomology and the `A5` fixed-space calculation kill the middle layer.
+Same-sheet unique factorization and irreducibility force the top nine-space,
+while one independently replayed second-Laplacian scalar supplies the radial
+line.
 The same pass promotes the uniform Coxeter-number formula
 `dim W_T = h_T - 1 + 1_(h_T/2-1 even)`, whose three values are `3,6,10`.
-C616 is queued as a nonblocking Paper II trust-boundary upgrade: prove the
-radial-trace identity without coordinates and replace ten-space row reduction,
-as far as possible, by equivariant nonvanishing on `1+4+5`.
+C616 is complete: the radial-trace identity is coordinate-free, and the
+ten-space row reduction has been replaced by the cohomological argument plus
+one scalar radial witness. The proof, certificate, independent replay, and
+mystery ledger are in `notes/2026-07-25-c616-h3-uniform-rank-upgrade.md`.
 Paper II now also proves the abstract radical--Hadamard recovery lemma,
 specializes it to the `B_3` `7+7` and `H_3` `11+11` sheets without subset
 enumeration, and proves that the first signed tensor orientation moment is
@@ -119,7 +121,7 @@ fused / `B_3,H_3` split arithmetic theorem with the
 `A5 cap A5 = A4` and generated `PSL_2(11)` hinge. The canonical
 relative-cubic Tate plane and its divided-transfer non-identification with
 the depth plane are isolated in an appendix. It now has an eighteen-statement
-paper-specific trust manifest, a seven-bundle aggregate replay, a verification
+paper-specific trust manifest, an eight-bundle aggregate replay, a verification
 section that separates conceptual, classical, certificate, and Lean support,
 and a conclusion that states the exact reconstruction ladder and its
 relative/global boundaries. The Milnor/Serre structural pass is now applied:
@@ -132,7 +134,7 @@ now distinguishes the three-type linear theorem from the `B_3/H_3` sheet
 theorem and the `H_3`-only refinements. A fresh staged title/abstract/full-PDF
 cold read returned editorial `GO`, conditional only on the already-declared
 public immutable archive locator. The full local replay and warning-free
-twenty-one-page build are green. The current theorem,
+twenty-two-page build are green. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
 The two unprimed next-question reads are consolidated in
@@ -148,9 +150,9 @@ self-associated arithmetically Gorenstein sets, their dualizing residue
 vector is the sheet sign, and \(\mu_3\) is the cubic inverse system of
 their Artinian reductions. The exact saturated ideals, deletion tests,
 socles, Betti tables, and independent replay are positive. Paper II's
-eighteen-statement, seven-bundle aggregate replay and warning-free
-twenty-one-page build are green. C616 absorbs the \(SL_2/A_5\)
-uniform-rank proof rather than spawning a duplicate task. The C620 proof,
+eighteen-statement, eight-bundle aggregate replay and warning-free
+twenty-two-page build are green. C616 completes the \(SL_2/A_5\)
+uniform-rank upgrade. The C620 proof,
 trust disposition, and mystery ledger are in
 `notes/2026-07-25-c620-graded-evaluation-algebra.md`.
 The C621 proof, audit, exact certificate, and mystery ledger are in

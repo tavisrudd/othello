@@ -93,9 +93,11 @@ type & linear quotient & sheets/cubic & \(H_3\) refinements & arithmetic\\
 \end{center}
 \noindent
 The quotient construction and recovery mechanisms are symbolic.  The
-attainment of the displayed ranks and the hypotheses for the three
-finite configurations are exact certified inputs; the \(H_3\)-specific
-profile and modular results use further finite incidence data.
+\(A_3/B_3\) rank attainments and the recovery hypotheses are exact
+certified inputs.  For \(H_3\), Sylow-normalizer cohomology proves the
+missing-layer statement and top nonvanishing; one exact scalar supplies
+the radial line.  The profile and modular results use further finite
+incidence data.
 
 \begin{theorem}[Quadratic recovery and cubic orientation]
 \label{thm:factorization-recovery}
@@ -323,10 +325,12 @@ subspace of the fifteen-dimensional space \(R_4\).
 
 \noindent\emph{Proof mode.}
 The quotient construction and the harmonic-space dimensions are proved
-symbolically.  The assertions that the three displayed finite orbits span
-the stated subspaces are certificate-checked exact calculations, with a
-separate implementation that reconstructs the groups, matchings, quotient
-forms, Laplacian, and row reductions from the data in (4.1).
+symbolically.  The \(A_3\) and \(B_3\) spanning assertions are
+certificate-checked exact calculations.  For \(H_3\), a Sylow-normalizer
+cohomology argument excludes the middle Fischer layer and forces the top
+harmonic summand; one displayed outer-sheet quotient certifies the remaining
+radial line.  A separate implementation reconstructs all three original row
+reductions and the smaller \(H_3\) witness from the data in (4.1).
 
 \begin{proof}
 A matching in (4.1) has
@@ -334,26 +338,115 @@ $m=3,4,6$ edges, respectively, so
 Proposition~\ref{prop:matching-secant-quotient} places its quotient in
 $R_{m-2}$, of degrees $1,2,4$.  Representing the quotients in the standard
 monomial bases gives matrices with respectively \(5,14,22\) rows.  Exact
-row reduction over \(\F_5,\F_7,\F_{11}\) gives ranks \(3,6,10\).
-
-It remains to identify the ten-space in the last row rather than record
-only its dimension.  Direct differentiation gives
+row reduction over \(\F_5\) and \(\F_7\) gives ranks \(3\) and \(6\).
+Direct differentiation gives
 \[
  \dim\mathcal H_1=3,\qquad
  \dim\mathcal H_2=5,\qquad
  \dim\mathcal H_4=9.
 \]
-The radial vectors \(Q\in R_2\) and \(Q^2\in R_4\) are not harmonic in
-characteristics \(7\) and \(11\), respectively.  The exact quotient
-matrices lie in
+The radial vector \(Q\in R_2\) is not harmonic in characteristic \(7\).
+The first two exact quotient matrices lie in
+\(\mathcal H_1\) and \(\mathcal H_2+\F_7Q\); their ranks equal the
+dimensions of these spaces, proving the first two rows.
+
+We prove the \(H_3\) row equivariantly.  Put
+\(G=\operatorname{PGL}_2(11)\),
+\(G^+=\operatorname{PSL}_2(11)\), and let
+\(\chi(g)=\det(g)^5\) be the square-class character.  On the conic, the
+common restriction of the matching products is the Dickson form
+\(s^{11}t-st^{11}\), of contragredient weight \(\det^{-1}\).
+After making this section invariant, division by the conic form gives the
+linearized quotient module
 \[
- \mathcal H_1,\qquad
- \mathcal H_2+\F_7Q,\qquad
- \mathcal H_4+\F_{11}Q^2.
+ \widetilde R_4=R_4\otimes\det^{-1}
+  =M_8\oplus M_4\oplus M_0,                       \tag{4.5}
 \]
-Their computed ranks equal the dimensions \(3,6,10\) of these spaces, so
-all three containments are equalities.  Since \(\dim R_4=15\), the last
-equality is proper.
+where
+\[
+\begin{split}
+ M_8&=\mathcal H_4\otimes\det^{-1}
+      \simeq\operatorname{Sym}^8(V^\vee)\otimes\det^{-1},\\
+ M_4&=Q\mathcal H_2\otimes\det^{-1}
+      \simeq\operatorname{Sym}^4(V^\vee)\otimes\det^{-3},\\
+ M_0&=\F_{11}Q^2\otimes\det^{-1}
+      \simeq\det^{-5}=\chi .
+\end{split}                                         \tag{4.6}
+\]
+The twist is part of the linearization; it does not alter the underlying
+subspaces of \(R_4\).
+
+We need two elementary cohomology facts.  For
+\[
+ M_r=\operatorname{Sym}^r(V^\vee)\otimes\det^{r/2}\otimes\chi,
+ \qquad r=8,4,0,
+\]
+let \(U=\langle u\rangle\) be the upper-unipotent Sylow \(11\)-subgroup
+and let \(a\) generate the diagonal torus of order \(10\).
+Since \(r<10\), the cyclic norm
+\(1+u+\cdots+u^{10}=(u-1)^{10}\) vanishes on \(M_r\), while
+\((u-1)M_r\) has codimension one.  Thus \(H^1(U,M_r)\) is represented by
+the class of \(x^r\).  Diagonal conjugation acts on that class by
+\[
+ a^{\,4-r/2}.                                      \tag{4.7}
+\]
+Restriction from \(G\) to \(U\) is injective because
+\([G:U]=120\) is invertible in \(\F_{11}\), and its image is fixed by the
+Sylow normalizer.  Equation (4.7) therefore gives
+\[
+ H^1(G,M_4)=H^1(G,M_0)=0,\qquad
+ \dim H^1(G,M_8)\le1.                              \tag{4.8}
+\]
+The stabilizer \(H=A_5\) of \(M_{H_3}\) lies in \(G^+\).
+The restrictions of \(M_8,M_4,M_0\) to \(H\) are respectively
+\(4\oplus5,5,1\), so
+\[
+ M_8^H=M_4^H=0,\qquad \dim M_0^H=1.                \tag{4.9}
+\]
+Equivalently, average the characters
+\((9,1,0,-1,-1)\), \((5,1,-1,0,0)\), and
+\((1,1,1,1,1)\) over the \(A_5\) class sizes
+\((1,15,20,12,12)\).
+
+Let \(c(g)=\Phi_{M_{H_3}}(gM_{H_3})\).  The common-restriction identity
+gives
+\[
+ c(gh)=g c(h)+c(g),
+\]
+and \(c\) vanishes on \(H\).  Project \(c\) through (4.5).  By (4.8), its
+\(M_4\)-component is a coboundary; its translating vector lies in
+\(M_4^H=0\), so that component vanishes.  This proves, without quotient
+coordinates,
+\[
+ \Delta_Q\Phi_{M_{H_3}}(M)\in\F_{11}Q
+ \quad\text{for every }M\in\Omega_{H_3}.            \tag{4.10}
+\]
+Likewise the \(M_0\)-component is a coboundary and hence vanishes on
+\(G^+\).  Choose any other matching in the eleven-element \(G^+\)-orbit
+of \(M_{H_3}\).  Its quotient is nonzero: equality of the two secant
+products would identify their irreducible line factors and hence the
+matchings.  Its \(M_4\)- and \(M_0\)-components vanish, so it gives a
+nonzero vector in \(M_8\).  The degree-eight restricted
+\(\operatorname{SL}_2(\F_{11})\)-module is irreducible; therefore the quotient span
+contains all of \(M_8\).
+
+It remains only to see the radial line.  With \(\infty\) indexed by \(11\),
+take
+\[
+ M_-=\{\{0,1\},\{2,\infty\},\{3,8\},\{4,6\},
+          \{5,9\},\{7,10\}\}.
+\]
+Exact division and differentiation give
+\[
+ \Delta_Q^2\Phi_{M_{H_3}}(M_-)=10
+   =\Delta_Q^2(Q^2)\ne0.                            \tag{4.11}
+\]
+The independent replay reconstructs this single scalar from the secant
+formula.  Since \(\Delta_Q^2\) kills \(M_8\oplus M_4\), (4.11) supplies
+the \(M_0\)-projection.  The span already contains \(M_8\), so it also
+contains \(M_0\).  Hence
+\(W_{H_3}=\mathcal H_4\oplus\F_{11}Q^2\), of dimension \(10\).
+Since \(\dim R_4=15\), this equality is proper.
 \end{proof}
 
 \begin{corollary}[The exact \(H_3\) loss]
@@ -361,17 +454,17 @@ equality is proper.
 Over \(\F_{11}\), the quartic form space has the Fischer decomposition
 \[
  R_4=\mathcal H_4\oplus Q\mathcal H_2\oplus\F_{11}Q^2.
-                                                               \tag{4.5}
+                                                               \tag{4.12}
 \]
 Consequently,
 \[
  R_4=W_{H_3}\oplus Q\mathcal H_2,\qquad
- R_4/W_{H_3}\simeq Q\mathcal H_2.                              \tag{4.6}
+ R_4/W_{H_3}\simeq Q\mathcal H_2.                              \tag{4.13}
 \]
 Equivalently,
 \[
  W_{H_3}
- =\{f\in R_4:\Delta_Qf\in\F_{11}Q\}.                           \tag{4.7}
+ =\{f\in R_4:\Delta_Qf\in\F_{11}Q\}.                           \tag{4.14}
 \]
 Thus the \(H_3\) quotient configuration retains the top harmonic
 nine-space and the deepest radial line, and omits precisely the
@@ -382,46 +475,40 @@ five-dimensional middle radial layer.
 For a homogeneous form \(f\) of degree \(r\), direct differentiation
 gives
 \[
- \Delta_Q(Qf)=(4r+6)f+Q\Delta_Qf.                              \tag{4.8}
+ \Delta_Q(Qf)=(4r+6)f+Q\Delta_Qf.                              \tag{4.15}
 \]
 Hence \(\Delta_Q(Qh)=3h\) for \(h\in\mathcal H_2\), while
 \(\Delta_Q(Q^2)=9Q\) over \(\F_{11}\).  Applying
 \(\Delta_Q^2\) and then \(\Delta_Q\) shows that the three summands in
-(4.5) meet trivially.  Their dimensions are \(9,5,1\), so they exhaust
+(4.12) meet trivially.  Their dimensions are \(9,5,1\), so they exhaust
 the fifteen-dimensional space \(R_4\).  Theorem
-\ref{thm:rank-three-quotients} then gives (4.6).  If
+\ref{thm:rank-three-quotients} then gives (4.13).  If
 \(f=h_4+Qh_2+cQ^2\) is its decomposition, then
 \[
  \Delta_Qf=3h_2+9cQ.
 \]
 The quadratic decomposition \(R_2=\mathcal H_2\oplus\F_{11}Q\)
-therefore gives (4.7).
+therefore gives (4.14).
 \end{proof}
 
-The rank calculation has two distinct boundaries.  The common restriction
-and quotient are general consequences of the conic ideal, and (4.3)
-describes the intrinsic target subspaces.  The fact that the three
-particular orbits in (4.1) attain those subspaces is finite.  The primary
-certificate enumerates each full orbit and performs exact prime-field row
-reduction; the independent replay starts only from (4.1) and reconstructs
-the calculation without importing the primary implementation.  Thus
-Theorem~\ref{thm:rank-three-quotients} does not infer a general
-rank formula from the three examples.
+The rank proof has two distinct boundaries.  The common restriction and
+quotient are general consequences of the conic ideal, and (4.3) describes
+the intrinsic target subspaces.  The \(A_3\) and \(B_3\) spanning steps
+remain full-orbit row reductions.  For \(H_3\), (4.7)--(4.10) prove the
+containment and top-summand nonvanishing equivariantly; only the single
+radial scalar (4.11) remains an exact coordinate witness.  The primary
+certificate still enumerates every orbit and recovers the original ranks,
+while an independent replay reconstructs both that calculation and the
+smaller witness from (4.1).
 
-Equation (4.7) isolates a smaller conceptual target than the full rank
-calculation: the \(H_3\) containment is the vanishing of the harmonic
-quadratic part of \(\Delta_Q\Phi(M)\).  Once that covariant identity is
-known, only spanning the resulting ten-space remains finite.
-
-A uniform theorem for the three rank-three types would replace the
-three row reductions by two representation-theoretic steps: a
-coordinate-free proof that every orbit quotient lands in the displayed
-harmonic-plus-radial target, and equivariant nonvanishing on each of its
-irreducible summands.  Equation (4.7) supplies the sharp \(H_3\) target,
-but those nonvanishing arguments are not yet proved uniformly.  A
-theorem over all good reductions would additionally require integral
-models and an analysis of the characteristics in which the harmonic
-decomposition, orbit structure, or marker algebra degenerates.
+This proof is uniform at the level of its mechanism---an affine connecting
+cocycle, its Sylow-normalizer weights, stabilizer fixed spaces, and
+irreducible summands---but it still uses the \(H_3\)-specific
+\(A_5<\operatorname{PGL}_2(11)\) module data.  A fully uniform theorem for all three
+rank-three types would also replace the remaining \(A_3\) and \(B_3\) row
+reductions.  A theorem over all good reductions would additionally require
+integral models and an analysis of the characteristics in which the
+harmonic decomposition, orbit structure, or marker algebra degenerates.
 
 Corollary~\ref{cor:h3-middle-layer} identifies the linear information
 lost by the \(H_3\) orbit, but linear span does not recover the two
@@ -1411,7 +1498,8 @@ Matching-secant quotient
 & none \\
 Ranks and the middle Fischer layer
 & harmonic decomposition; Edge--Dye configurations
-& quotient matrices and independent replay \\
+& quotient matrices; for \(H_3\), the equivariant cohomology reduction
+  and one normalized scalar; independent replay \\
 Balanced sheets and cubic orientation
 & Proposition~\ref{prop:radical-hadamard}; tensor identities
 & exact moments; radical hypotheses and independent replay \\
@@ -1437,17 +1525,17 @@ of the archival source, the aggregate entry point is
 \begin{verbatim}
 python3 papers/clebsch-factorization/verification/verify_release.py
 \end{verbatim}
-It checks the statement identity and all seven checksum manifests, runs
+It checks the statement identity and all eight checksum manifests, runs
 the admitted primary checks and independent replays, and rebuilds this
 manuscript through the repository Makefile.
 
 The full-source review archive accompanying this candidate is pinned by
 \path{verification/evidence_fingerprint.json}, whose SHA-256 digest is
 \begin{center}
-\small\texttt{2d16e063d7ed7480adebec277179dc39}\\[-2pt]
-\texttt{c6aa7642a1a6bdb116bc3c7324550a2e}.
+\small\texttt{b9423a3e782d4683f56e597bd4431112c208ce}\\[-2pt]
+\texttt{3b929db6f3d2e767b2c5be4e51}.
 \end{center}
-That fingerprint fixes the seven evidence manifests, command vectors,
+That fingerprint fixes the eight evidence manifests, command vectors,
 runner, trust manifest, and environment: Python 3.13.12, Lean
 4.32.0-rc1, and Mathlib revision
 \begin{center}

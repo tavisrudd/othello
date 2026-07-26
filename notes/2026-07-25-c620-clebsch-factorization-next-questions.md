@@ -4,8 +4,7 @@
 
 **Date:** 2026-07-25
 
-**Status:** C620 and C621 complete and adopted in Paper II; C616 owns the
-overlapping uniform-rank proof.
+**Status:** C620, C621, and C616 complete and adopted in Paper II.
 
 ## Origin
 
@@ -141,6 +140,11 @@ The candidate strengthening is:
    upgrade, or a separate short note.
 
 ## C616 amendment — uniform \(SL_2/A_5\) rank proof
+
+**Completed 2026-07-25.** The coordinate-free radial-trace proof,
+equivariant top-summand argument, minimal radial witness, exact certificate,
+independent replay, and mystery ledger are in
+`notes/2026-07-25-c616-h3-uniform-rank-upgrade.md`.
 
 C616 should formulate the quotient map equivariantly as
 \[

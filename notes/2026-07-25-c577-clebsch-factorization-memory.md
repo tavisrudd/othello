@@ -20,16 +20,17 @@ gates, and execution order are recorded in
 - C621 is complete: both homogenized configurations are self-associated
   arithmetically Gorenstein point sets, and the signed cubic is their
   Artinian inverse system.
-- Existing C616 owns the modularly valid \(SL_2/A_5\) containment and
-  equivariant-nonvanishing proof; no duplicate uniformity task is opened.
+- C616 is complete: Sylow-normalizer cohomology proves the \(H_3\)
+  radial-trace containment, same-sheet irreducibility forces the top
+  nine-space, and one exact scalar supplies the radial line.
 
 ## Current result
 
 Paper II now has its own verification architecture and mathematical
 conclusion. The eighteen theorem-like statements are hash-identified and
-mapped claim by claim to conceptual proofs, classical inputs, six exact
+mapped claim by claim to conceptual proofs, classical inputs, seven exact
 certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
-runner checks the statement map, all seven checksum manifests, thirteen primary
+runner checks the statement map, all eight checksum manifests, fifteen primary
 or independent executable routes, and the manuscript build. Its clean replay
 is green.
 
@@ -39,7 +40,7 @@ selected \(A_4\) refinement---the matching-table label. It also closes the
 three boundaries a referee could otherwise misread: nonsingleton profiles
 recover only orbits, the relative-cubic and depth planes have no natural
 identification, and the three small-field split/fused rows do not imply an
-all-prime reciprocity law. The repaired candidate is warning-free at nineteen
+all-prime reciprocity law. The repaired candidate is warning-free at twenty-two
 pages.
 
 The first two PDF-only cold reads both returned `NO-GO`. The mathematical
@@ -216,14 +217,14 @@ cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting twenty-one-page PDF is warning-free. The Paper II aggregate
+The resulting twenty-two-page PDF is warning-free. The Paper II aggregate
 entry point is
 
 ```bash
 python3 papers/clebsch-factorization/verification/verify_release.py
 ```
 
-It passed on 2026-07-25, including all seven evidence bundles and the clean
+It passed on 2026-07-25, including all eight evidence bundles and the clean
 manuscript build. A separate guarded elaboration of
 `RelativeConicArcs/Gates/ClebschArithmeticGluing.lean` also passed with the
 recorded axiom surface.
@@ -373,6 +374,6 @@ mathematical claim or enlarging the release surface.
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
 | Is every theorem-like statement assigned one exact trust route? | settled | The eighteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
-| Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the six semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
-| Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves six bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
-| What is the next load-bearing Paper II frontier? | open by user direction | Execute the Milnor/Serre spine revision beyond the completed title/abstract repair: narrow the headline theorem, compress motivation, add the Section 6 mechanism map, separate modular from arithmetic refinements, and move secondary material behind the conclusion. C616 separately owns the nonblocking coordinate-free radial-trace and equivariant rank upgrade. |
+| Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the eight semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
+| Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves eight bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
+| What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the C616 equivariant rank upgrade. Release still depends on the user-controlled immutable public archive locator. |

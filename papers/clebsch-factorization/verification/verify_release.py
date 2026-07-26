@@ -24,6 +24,21 @@ EXPECTED_EVIDENCE = {
             ["python3", "notes/2026-07-20-c406-matching-module-replay.py"],
         ],
     },
+    "h3-equivariant-rank": {
+        "checksum_manifest":
+            "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
+        "commands": [
+            [
+                "python3",
+                "notes/2026-07-25-c616-h3-equivariant-rank.py",
+                "--check",
+            ],
+            [
+                "python3",
+                "notes/2026-07-25-c616-h3-equivariant-rank-replay.py",
+            ],
+        ],
+    },
     "balanced-sheet": {
         "checksum_manifest":
             "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
@@ -193,7 +208,7 @@ def build_fingerprint(
         "runner_sha256": sha256(Path(__file__).resolve()),
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 18 statements, 7 evidence bundles: CHECK OK",
+            "metadata": "metadata: 18 statements, 8 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }

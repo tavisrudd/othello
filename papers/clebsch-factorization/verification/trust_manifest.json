@@ -10,6 +10,14 @@
         ["python3", "notes/2026-07-20-c406-matching-module-replay.py"]
       ]
     },
+    "h3-equivariant-rank": {
+      "role": "Sylow-normalizer weights, A5 fixed spaces, and minimal top/radial quotient witnesses",
+      "checksum_manifest": "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
+      "commands": [
+        ["python3", "notes/2026-07-25-c616-h3-equivariant-rank.py", "--check"],
+        ["python3", "notes/2026-07-25-c616-h3-equivariant-rank-replay.py"]
+      ]
+    },
     "balanced-sheet": {
       "role": "frozen hypotheses for radical--Hadamard recovery",
       "checksum_manifest": "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
@@ -59,10 +67,10 @@
     }
   },
   "claims": [
-    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent", "relative-cubic-depth", "arithmetic-gluing"]},
+    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent", "relative-cubic-depth", "arithmetic-gluing"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
-    {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module"]},
-    {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
+    {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
+    {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
     {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
     {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
