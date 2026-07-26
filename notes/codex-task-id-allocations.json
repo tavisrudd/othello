@@ -1475,8 +1475,17 @@
       "last": 660,
       "purpose": "post-Version-1 independent R7 finite-completeness derivation without the primary quotient enumerator",
       "sequence": 164
+    },
+    {
+      "count": 1,
+      "first": 661,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 661,
+      "purpose": "Explore a uniform conic-quotient recovery/Gorenstein theorem, conceptual A3/B3 rank proofs, or an equivalent-strength upgrade",
+      "sequence": 165
     }
   ],
-  "next_id": 661,
+  "next_id": 662,
   "schema": "codex-task-id-allocations-v1"
 }
