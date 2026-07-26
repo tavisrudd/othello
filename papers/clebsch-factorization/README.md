@@ -4,9 +4,10 @@ This directory contains the manuscript
 *Quadratic recovery and cubic orientation in conic matching quotients*.
 
 The paper studies matching products modulo a conic ideal, their quotient
-ranks `3,6,10`, balanced-sheet recovery, cubic orientation, self-associated
-arithmetically Gorenstein evaluation sets, six-profile reconstruction,
-modular depth, and arithmetic splitting.
+ranks `3,6,10`, balanced-sheet recovery, cubic orientation, and
+self-associated arithmetically Gorenstein evaluation sets. Appendices
+record six-profile reconstruction, modular depth, arithmetic splitting,
+and further `H_3` cubic structure.
 
 ## Files
 
