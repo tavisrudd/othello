@@ -1014,6 +1014,62 @@
       "-13/6",
       "1"
     ],
+    "conceptual_derivation": {
+      "Hplus_times_Hminus_product_order_histogram": {
+        "1": 10,
+        "11": 600,
+        "2": 350,
+        "3": 650,
+        "5": 1440,
+        "6": 550
+      },
+      "common_dimension": 2,
+      "rational_character_by_class_order_size_trace": [
+        [
+          1,
+          1,
+          "10"
+        ],
+        [
+          2,
+          55,
+          "2"
+        ],
+        [
+          3,
+          110,
+          "-2"
+        ],
+        [
+          5,
+          132,
+          "0"
+        ],
+        [
+          5,
+          132,
+          "0"
+        ],
+        [
+          6,
+          110,
+          "2"
+        ],
+        [
+          11,
+          60,
+          "-1"
+        ],
+        [
+          11,
+          60,
+          "-1"
+        ]
+      ],
+      "residual_K_bimodule_dimension": 2,
+      "residual_scalar_from_trace": "1/12",
+      "trace_Pplus_Pminus": "13/6"
+    },
     "definition": "P_plus P_minus P_plus on End_A5plus(V), with P_H the Reynolds projector",
     "discriminant_five": false,
     "factorization": "(x-1)^2*(x-1/12)^2",

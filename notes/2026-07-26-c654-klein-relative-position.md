@@ -18,6 +18,15 @@ where \(G\) acts by conjugation on its 55 involutions and \(A\) joins two
 distinct involutions precisely when they commute.  The certificate gives an
 integral basis of \(V\), exact \(10\)-by-\(10\) matrices for two generators
 of \(G\), and the invariant Gram matrix \(B\).
+Its conjugacy-class fingerprint, recorded as
+\((\text{order},\text{class size},\text{trace})\), is
+\[
+ (1,1,10),\ (2,55,2),\ (3,110,-2),\
+ (5,132,0)^2,\ (6,110,2),\ (11,60,-1)^2.
+\]
+This is the rational sum of Hartlieb's two conjugate degree-five
+characters, so the exact carrier is identified with the Klein
+intermediate-Jacobian representation rather than only matched by dimension.
 
 For representatives \(H_+\) and \(H_-\) of the two conjugacy classes of
 icosahedral subgroups,
@@ -72,6 +81,34 @@ Hence the nontrivial factor has discriminant zero, not five.  There is no
 \(\mathbf Q(\sqrt5)\) splitting field in this canonical first-order
 relative-position invariant.
 
+The value \(1/12\) also has a short structural derivation.  Since
+\(K=C_+\cap C_-\) lies in both commutants, both Reynolds projectors and
+their composite are \(K\)-bimodule maps.  The decomposition
+\[
+ M_2(\mathbf Q)=K\oplus K^\perp
+\]
+has two simple two-dimensional \(K\)-bimodule summands.  On the second
+summand a bimodule endomorphism lies in \(K\); self-adjointness for the
+positive Rosati trace form forces it into the fixed field \(\mathbf Q\).
+Thus the residual operator is scalar before any matrix diagonalization.
+
+The exact product-order histogram for
+\((h_+,h_-)\in H_+\times H_-\) is
+\[
+\begin{array}{c|rrrrrr}
+o(h_+h_-)&1&2&3&5&6&11\\ \hline
+\#&10&350&650&1440&550&600.
+\end{array}
+\]
+For the rational character \(\chi\) above,
+\[
+ \operatorname{tr}(P_+P_-)
+ =\frac1{60^2}\sum_{h_+,h_-}\chi(h_+h_-)^2
+ =\frac{13}{6}.
+\]
+The common field contributes trace \(2\), leaving \(1/6\) on a
+two-dimensional scalar summand.  Its eigenvalue is therefore \(1/12\).
+
 This closes the simple Klein period-lattice lift negatively.  It does not
 exclude a genuinely higher-order invariant or a cycle-level invariant of
 Roulleau's 55 curves; neither is part of C654.
@@ -83,7 +120,9 @@ all 55 involutions, and all 22 \(A_5\) subgroups.  It finds the two
 subgroup classes by their degree-eleven orbit types \(1+10\) and \(5+6\),
 checks their order-ten intersection and order-660 join, computes both
 commutants and their intersection over \(\mathbf Q\), and evaluates both
-Reynolds projections exactly.
+Reynolds projections exactly.  It also certifies the full rational
+character fingerprint and the \(H_+H_-\) product-order histogram used in
+the structural trace proof.
 
 From the repository root, replay with:
 
@@ -97,16 +136,18 @@ The second checker is an independent modular reconstruction at primes
 the 660 paired group elements, independently recomputes the carrier
 nullity, subgroup orders, joins, commutant dimensions, split idempotents,
 polarization identities, Reynolds projectors, and the two mixed
-eigenspaces.  Agreement at these primes is a cross-check of the rational
+eigenspaces.  It also independently reconstructs the conjugacy-class traces,
+the product-order histogram, and the \(13/6\) projection trace.  Agreement
+at these primes is a cross-check of the rational
 calculation, not a substitute for it.
 
 The deterministic evidence bundle is:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `klein_relative_position.py` | 19235 | `1423b65588cab666444502f14559b2ef7ecad0b6ca0a7c963924b47432b5c330` |
-| `klein_relative_position_replay.py` | 11860 | `2a3e00c9578d9f92c9e1ec89531662d7d8566fc06012d53e615e92ad175e1e88` |
-| `klein_relative_position.json` | 15000 | `4c4a54584eba2580aaa591c69a34c897b9c0d02c82409258b62db1a29f47e1ac` |
+| `klein_relative_position.py` | 21438 | `d0781ba1bbdc1ed53b911ecd68aa025b3bc53333b190936ed7955104348b4f6c` |
+| `klein_relative_position_replay.py` | 13181 | `c5efff66d5f72a6cc302cc70ed10884dbc2e0ae496cb1fbc4034177fa2d030bf` |
+| `klein_relative_position.json` | 15928 | `2c896a12a584c86d1ed7b38b61539b2689f17cf48322a4ce8850e2e21ddf0631` |
 
 The adjacent `klein_relative_position.sha256` is the checksum manifest.
 The computation is deterministic and uses only the Python 3 standard
@@ -127,7 +168,9 @@ saturation.
 
 The cheap upgrade is stronger than a bare negative: after removing the
 common CM field, the two split commutants are equi-isoclinic with squared
-cosine \(1/12\).  This explains why every attempted quadratic
+cosine \(1/12\).  The \(K\)-bimodule and character-trace argument now
+derives that value without diagonalizing the mixed matrix.  This explains
+why every attempted quadratic
 discriminant collapses—the remaining two directions are not separated at
 all by the first-order angle operator.  Explicit rank-five idempotents were
 also added to the certificate so that \(C_\pm\simeq M_2(\mathbf Q)\) is
@@ -155,4 +198,3 @@ distinct CM field \(\mathbf Q(\sqrt{-11})\).
   55-curve lattice sees the finite orientation torsor.  This requires an
   integral Néron--Severi calculation and is not licensed by the rational
   commutant result.
-

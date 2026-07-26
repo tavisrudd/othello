@@ -8,7 +8,7 @@ import hashlib
 import itertools
 import json
 import math
-from collections import deque
+from collections import Counter, deque
 from fractions import Fraction as Q
 from pathlib import Path
 
@@ -436,6 +436,52 @@ def build_certificate() -> dict[str, object]:
     assert characteristic == expected
     assert characteristic == characteristic_polynomial_4(transpose(mixed))
 
+    unseen = set(group)
+    conjugacy_classes = []
+    while unseen:
+        representative = min(unseen)
+        conjugacy_class = {
+            conjugate(representative, element) for element in group
+        }
+        unseen -= conjugacy_class
+        conjugacy_classes.append(conjugacy_class)
+    character_fingerprint = sorted(
+        (
+            element_order(min(conjugacy_class)),
+            len(conjugacy_class),
+            sum(
+                representations[min(conjugacy_class)][index][index]
+                for index in range(10)
+            ),
+        )
+        for conjugacy_class in conjugacy_classes
+    )
+    assert character_fingerprint == [
+        (1, 1, Q(10)),
+        (2, 55, Q(2)),
+        (3, 110, Q(-2)),
+        (5, 132, Q(0)),
+        (5, 132, Q(0)),
+        (6, 110, Q(2)),
+        (11, 60, Q(-1)),
+        (11, 60, Q(-1)),
+    ]
+    product_orders = Counter(
+        element_order(compose(left, right)) for left in plus for right in minus
+    )
+    assert product_orders == {1: 10, 2: 350, 3: 650, 5: 1440, 6: 550, 11: 600}
+    character_by_order = {1: 10, 2: 2, 3: -2, 5: 0, 6: 2, 11: -1}
+    projection_trace = Q(
+        sum(
+            count * character_by_order[element_order_value] ** 2
+            for element_order_value, count in product_orders.items()
+        ),
+        len(plus) * len(minus),
+    )
+    assert projection_trace == Q(13, 6)
+    residual_scalar = (projection_trace - len(common_commutant)) / 2
+    assert residual_scalar == Q(1, 12)
+
     matrix_payload = {
         "group_generators": [list(generator) for generator in GENERATORS],
         "representation_generators": [matrix_data(representations[g]) for g in GENERATORS],
@@ -489,6 +535,19 @@ def build_certificate() -> dict[str, object]:
             "spectrum": {"1": 2, "1/12": 2},
             "nontrivial_factor_discriminant": "0",
             "discriminant_five": False,
+            "conceptual_derivation": {
+                "rational_character_by_class_order_size_trace": [
+                    [order, size, fraction_text(trace)]
+                    for order, size, trace in character_fingerprint
+                ],
+                "Hplus_times_Hminus_product_order_histogram": {
+                    str(order): product_orders[order] for order in sorted(product_orders)
+                },
+                "trace_Pplus_Pminus": fraction_text(projection_trace),
+                "common_dimension": len(common_commutant),
+                "residual_K_bimodule_dimension": 2,
+                "residual_scalar_from_trace": fraction_text(residual_scalar),
+            },
         },
         "matrix_payload": matrix_payload,
         "matrix_payload_sha256": hashlib.sha256(payload_bytes).hexdigest(),

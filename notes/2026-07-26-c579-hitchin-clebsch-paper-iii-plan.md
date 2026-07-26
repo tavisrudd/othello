@@ -72,34 +72,32 @@ yet evidence for those identifications. Its continuation-rigidity reduction
 and repair-port compiler belong to other owning lanes and are not Paper III
 claims.
 
-## Klein cubic elevation target
+## Klein cubic disposition
 
-The intermediate-Jacobian kill test rules out the naive
-two-dimensional invariant abelian subvariety. The correct object is the
-two-dimensional multiplicity Hodge structure
+C654 closes the simple period-lattice lift negatively.  The exact rational
+carrier has character
 \[
- U_H=\operatorname{Hom}_{A_5}
-   \bigl(W_5,H^1(J(X),\mathbf Q)\bigr)
+ (10,2,-2,0,0,2,-1,-1)
 \]
-in the decomposition
+on the eight conjugacy classes and therefore matches Hartlieb's rational
+sum of the conjugate degree-five characters.  Its two \(A_5\) commutants
+are \(M_2(\mathbf Q)\), their intersection is
+\(\mathbf Q(\sqrt{-11})\), and their canonical Reynolds mixed operator has
+spectrum
 \[
- H^1(J(X),\mathbf Q)|_{A_5}\simeq W_5\otimes U_H.
+ 1,1,\frac1{12},\frac1{12}.
 \]
-Roulleau proves \(J(X)\cong E^5\) as an unpolarized complex abelian
-variety, with \(E\) carrying CM by \(\mathbf Q(\sqrt{-11})\). Hartlieb's
-character tables and one-dimensional \(A_5\)-special family verify the
-five-space multiplicity mechanism. The source audit and corrections to the
-imported note are in
-`notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md`.
+The value \(1/12\) follows structurally from the common CM
+\(K\)-bimodule, self-adjointness, and the exact character trace
+\(\operatorname{tr}(P_+P_-)=13/6\).  The noncommon discriminant is zero,
+not five.  Paper III therefore contains no Klein theorem or speculative
+Klein section.
 
-C654 will compute the two embedded \(A_5\)-commutant algebras and their
-relative position. The intended golden invariant must be canonical under
-basis and isogeny change and compatible with the polarization. Arbitrary
-rank-one idempotents in \(M_2(\mathbf Q)\) do not meet this requirement.
-A positive discriminant-five invariant could elevate the Klein lift into a
-second principal clause of Paper III. A negative stops the simple
-period-lattice lift without weakening the already established arithmetic
-Hitchin--Clebsch cover.
+The 55-curve index-two saturation remains outside C579.  It may return only
+with an explicit cycle-class or Abel--Jacobi map to the arithmetic
+orientation torsor; the bare index-two coincidence is not evidence for the
+golden normalization.  The exact result and evidence are in
+`notes/2026-07-26-c654-klein-relative-position.md`.
 
 ## Imported evidence status
 
@@ -190,13 +188,11 @@ Mukai--Umemura model and normalization comparison.
    degree-two-incidence crown and Dye pre-empts the square-\(5\) field
    criterion.  The surviving novelty boundary and source-depth audit are
    in `notes/2026-07-26-c653-hitchin-integral-novelty-gate.md`.
-4. **C654 — Klein multiplicity relative position.** Build the exact rational
-   ten-dimensional Klein representation and its polarization, embed the two
-   \(A_5\) parents, certify their \(M_2(\mathbf Q)\) commutants and
-   \(\mathbf Q(\sqrt{-11})\) intersection, define a canonical mixed
-   invariant, and test whether its discriminant is \(5\). Treat the
-   55-curve lattice as a second-stage integral route, not as assumed
-   evidence.
+4. **C654 — Klein multiplicity relative position (complete, negative
+   disposition).** The exact carrier, polarization, split commutants, CM
+   intersection, character fingerprint, and Reynolds invariant are
+   certified and independently replayed.  The residual spectrum is the
+   scalar \(1/12\), so the discriminant-five lift is removed from Paper III.
 5. **C655 — harmonic realization (complete).** The ten icosahedral face
    axes embed in \(\mathcal H_6\), the Clebsch four-space is the Petersen
    \((-2)\)-eigenspace, and two exact implementations prove that the
@@ -216,22 +212,20 @@ Mukai--Umemura model and normalization comparison.
 
 ## Acceptance boundary
 
-Paper III now has a compilable strong-form manuscript scaffold under
-`papers/clebsch-passages/`. Its nine section files separate the core
-Hitchin--Clebsch theorem, the certified finite cubic bridge, the exact
-arithmetic specialization, the degree-six harmonic realization, and the
-Klein multiplicity elevation. The
-adjacent `WORKPLAN.md` records the dependency graph, and
-`verification/trust_manifest.json` is the initial fourteen-claim trust ledger.
-The structural checker deliberately reports a non-release surface while
-C654 remains open; C651--C653 and C655 are closed.
+Paper III now has a compilable two-leg manuscript under
+`papers/clebsch-passages/`. Its nine included section files separate the
+core Hitchin--Clebsch theorem, the certified finite cubic bridge, the exact
+arithmetic specialization, and the degree-six harmonic realization.  The
+detachable Klein section and its four trust rows have been removed.
+The adjacent `WORKPLAN.md` records the dependency graph, and
+`verification/trust_manifest.json` is the live ten-claim ledger.
 
-The final target is the strongest coherent theorem complex: a positive
-C654 result is to be integrated as a second structural theorem, a positive
-55-curve saturation test as its integral geometric realization, and C655's
-harmonic identity as the bridge to an established physical order parameter.
-The modular source layout is risk control during the calculation, not a
-decision to publish the weaker core first.
+The final target is the strongest coherent theorem complex now supported:
+the arithmetic orientation cover together with C655's harmonic
+realization of the same integral Clebsch cubic line.  No equality of the
+characteristic-zero Gaunt scalar with its mod-\(11\) normalization is
+claimed, because the rational Gaunt coefficient has denominator divisible
+by \(11\).
 
 Paper III is not release-certified. C579 passes only when the prerequisite
 gates support one theorem complex with a complete proof/evidence map, every
@@ -264,8 +258,12 @@ cut.
   equations.
 - **Killed:** there is no \(PSL_2(11)\)- or \(A_5\)-stable elliptic
   subvariety carrying the orientation.
-- **Open under C654:** whether the intrinsic relative position of the two
-  \(A_5\) multiplicity structures has discriminant \(5\), and whether
-  Roulleau's index-two 55-curve lattice sees the same finite torsor.
+- **Settled under C654:** the exact carrier matches the rational Klein
+  character; its commutants meet in \(\mathbf Q(\sqrt{-11})\), and their
+  residual Reynolds angle is the scalar \(1/12\), so the simple
+  discriminant-five lift is false.
+- **Deferred outside C579:** whether Roulleau's index-two 55-curve lattice
+  sees the finite torsor; it requires an explicit cycle map before further
+  work is justified.
 - **Deferred:** theta, Fourier, quantum, Mathieu, and four-sheet holonomy
   comparisons unless C579 derives them from the orientation cover.

@@ -15,7 +15,7 @@
 
 ## Current verdict
 
-Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
+Paper I, *A conic deep-hole syndrome locus characterizes the Clebsch code*, is a
 warning-free 19-page candidate with a complete nineteen-row release surface.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
@@ -469,7 +469,7 @@ Forwarded to the owning papers on 2026-07-24:
 - **Baer/Frobenius:** the manuscript proves the exact `4180/4179`
   Clebsch-over-`F_121` extension/repair corollary.
 
-Both papers cite *Deep-hole rigidity of the Clebsch hexagon code* as a
+Both papers cite *A conic deep-hole syndrome locus characterizes the Clebsch code* as a
 working paper and state their generic-MDS/generic-six-arc boundaries.
 Neither forward bridge changes Paper I or reopens its final-GO release
 surface.
@@ -558,7 +558,11 @@ family. C654 is complete. The two \(A_5\) commutants are
 \(\mathbf Q(\sqrt{-11})\), and the canonical Reynolds mixed operator has
 spectrum \(1,1,1/12,1/12\). Its noncommon discriminant is zero, not five,
 so the simple Klein period-lattice lift closes negatively and its detachable
-Paper III section has been removed. The exact certificate, independent
+Paper III section has been removed. A full conjugacy-class trace fingerprint
+identifies the carrier with Hartlieb's rational \(5+\overline5\), and a
+\(K\)-bimodule/character-trace argument derives \(1/12\) from
+\(\operatorname{tr}(P_+P_-)=13/6\) without matrix diagonalization.
+The exact certificate, independent
 replay, trust boundary, and mystery ledger are in
 `notes/2026-07-26-c654-klein-relative-position.md`.
 

@@ -7,7 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
-from collections import deque
+from collections import Counter, deque
 from pathlib import Path
 
 
@@ -300,6 +300,48 @@ def replay(prime: int, data: dict[str, object]) -> None:
     assert len(plus) == len(minus) == 60
     assert len(plus & minus) == 10
     assert len(generated_subgroup(tuple(plus | minus))) == 660
+
+    unseen = set(group)
+    fingerprint = []
+    while unseen:
+        representative = min(unseen)
+        conjugacy_class = {
+            conjugate(representative, element) for element in group
+        }
+        unseen -= conjugacy_class
+        fingerprint.append(
+            (
+                order(representative),
+                len(conjugacy_class),
+                sum(representation[representative][i][i] for i in range(10))
+                % prime,
+            )
+        )
+    expected_fingerprint = [
+        (1, 1, 10),
+        (2, 55, 2),
+        (3, 110, -2),
+        (5, 132, 0),
+        (5, 132, 0),
+        (6, 110, 2),
+        (11, 60, -1),
+        (11, 60, -1),
+    ]
+    assert sorted(fingerprint) == sorted(
+        (element_order, size, trace % prime)
+        for element_order, size, trace in expected_fingerprint
+    )
+    product_orders = Counter(
+        order(compose(left, right)) for left in plus for right in minus
+    )
+    assert product_orders == {1: 10, 2: 350, 3: 650, 5: 1440, 6: 550, 11: 600}
+    character = {1: 10, 2: 2, 3: -2, 5: 0, 6: 2, 11: -1}
+    projection_trace = (
+        sum(count * character[key] ** 2 for key, count in product_orders.items())
+        * pow(3600, -1, prime)
+        % prime
+    )
+    assert projection_trace == 13 * pow(6, -1, prime) % prime
 
     commutant_plus = commutant_basis(plus_generators, representation, prime)
     commutant_minus = commutant_basis(minus_generators, representation, prime)
