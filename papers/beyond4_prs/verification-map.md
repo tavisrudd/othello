@@ -42,7 +42,8 @@ from the cited standard and companion theorems.
   At `q=7,8,9` this certifies split-freeness, not covering radius.
 - Certificate SC checks the stated integral identities, eliminations,
   saturations, and finite bottom-component ledger. Lean separately checks
-  polynomial density of monic split-squarefree coefficient tuples,
+  polynomial density of monic split-squarefree coefficient tuples over an
+  infinite field, as used after passage to an algebraic closure,
   density-to-closure transport, and finite irreducible-component selection
   once the marker-to-catalecticant identification, row-space closure equality,
   and closed component ledger are supplied.
