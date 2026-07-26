@@ -148,7 +148,7 @@ that.
 No incidental discovery-track item arose. The redundancy and its exact proof
 are direct C80 deliverables.
 
-## `ej2` — quantifier-shadow no-go and the C80→C82 interface
+## `ej` follow-up — quantifier-shadow no-go and the C80→C82 interface
 
 The mate-surplus equality is an instance of a reusable ranked-survivor
 principle. Suppose
@@ -202,6 +202,61 @@ unbounded range in `q`; the earlier finite-signature no-go excludes only a
 fixed finite exact quotient, not a fixed algebraic construction with
 unbounded parameters.
 
+## `ej2` — proof-witness gauge and an anti-packing gate
+
+There is a second circularity one layer beyond the quantifier shadow. Even
+after C80 supplies proof-producing witnesses, C82 must not count witness
+representations. If
+
+```text
+E_q(S,z,x,y,z')
+```
+
+means that reply `y` transports proof datum `z` to `z'`, then counting pairs
+`(y,z')` is meaningless: duplicating or re-encoding `z'` can create arbitrary
+“abundance” without adding a move. The invariant C82 object must project to
+geometric replies:
+
+```text
+R_E(S,z,x) = {y : ∃z', E_q(S,z,x,y,z')},
+μ_E(S,z)   = min_x |R_E(S,z,x)|.
+```
+
+Equivalently, successor proof data need a canonical gauge, or C82 must
+quotient them before counting. Coverage is `μ_E≥1`; any stronger lower bound
+counts distinct legal replies only.
+
+The proof datum itself also needs the same anti-packing discipline that closed
+the one-natural-number residual encoding. Otherwise `z` can store the whole
+remaining strategy tree and make `E_q` locally checkable only by decoding the
+answer. Before C82 release, a candidate must therefore satisfy all four
+gates:
+
+1. **bounded format:** a fixed algebraic schema, with a fixed number of
+   field/group/integer coordinates of polynomial range or comparably explicit
+   `O(log q)`-scale description;
+2. **direct update:** a fixed bounded-complexity algebraic/incidence rule
+   computes or verifies `z'` from `(S,z,x,y)`;
+3. **nonrecursive soundness:** the update plus strict rank proves the reply
+   safe without querying `F_cc`, `K_Ω`, minimax, or a stored subtree; and
+4. **projected abundance:** all counts are over distinct replies `y`, after
+   existentially eliminating or canonically gauging `z'`.
+
+This sharpens the next constructive opportunity. `B_cc` already carries an
+explicit pairing or one-exchange pairing shell. The q17 `4→2→0` thread
+suggests lifting that object not by a scalar Tutte deficiency, but by an
+**algebraically parametrized pairing-with-obligations certificate**: paired
+fibres use copycat immediately, while a marked secant rewrite transports the
+outstanding obligation family and lowers `Ω`. The obligations cannot be a
+bounded lookup list—the earlier fixed-depth and finite-signature negatives
+forbid that reading—but they may form one field-parametrized orbit family.
+The cheap next scout is therefore very narrow: ask whether the five q17
+repairs and the q19 control admit the same local obligation-rewrite identity,
+with the Klein-four q17 copies treated as one orbit and with reply counts
+projected to distinct cells. Failure kills this proof-object shape without
+another global feature census; success yields the first legitimate `E_q`
+candidate for C80 soundness and only then for C82 counting.
+
 ## Mystery ledger
 
 - **[SETTLED] Does strict-overload positive-mate-surplus closure pass the
@@ -213,16 +268,27 @@ unbounded parameters.
 - **[SETTLED `ej`] Is there a hidden quantitative surplus margin?** No in the
   tested certificates. Every order uses accepted positive states and chosen
   targets with `μ=1`.
-- **[SETTLED `ej2`] Is mate surplus an isolated redundant coordinate?** No.
+- **[SETTLED `ej`] Is mate surplus an isolated redundant coordinate?** No.
   It is one instance of the quantifier-shadow principle, which also closes
   every recursive “no isolated opponent fibre” reformulation.
 - **[SETTLED] Did `μ` explain the spoiler/repair split structurally?** It
   diagnoses it but does not certify it. The spoilers have `μ=0`, while the
   repairs have positive `μ`, yet recursive preservation merely restates the
   survivor response condition.
-- **[SETTLED `ej2`] What exactly may C82 count?** Only witnesses of a
+- **[SETTLED `ej`] What exactly may C82 count?** Only witnesses of a
   nonrecursive proof-producing edge predicate supplied by C80. Ordinary
   legal mates or recursively filtered replies do not meet the soundness gate.
+- **[SETTLED `ej2`] May C82 count proof witnesses `(y,z')`?** No. It must
+  count distinct geometric replies `y` after projecting or canonically
+  gauging successor proof data; otherwise certificate duplication fabricates
+  abundance.
+- **[SETTLED `ej2`] Can the carried datum encode the complete strategy?** Not
+  under the strengthened interface. It needs bounded format, direct local
+  update, nonrecursive soundness, and projected reply counting.
+- **[OPEN — C80 `ej2`] Does a field-parametrized
+  pairing-with-obligations rewrite cover the q17 Klein-four repair orbit and
+  marked q19 control by one identity?** This is the cheapest proof-object
+  scout; it is not a new scalar/profile census.
 - **[OPEN — C80] What nonrecursive marked incidence predicate proves a reply
   good?** The evidence gap is unchanged: construct a direct secant/orbital
   certificate datum with an algebraic transport law whose soundness does not

@@ -1078,14 +1078,21 @@ therefore proves the proposed `F_μ` equals `F_cc` at every order. The finite
 certificates genuinely hit the floor `μ=1`, so there is no hidden
 quantitative margin. This closes `μ` as a new recursive compression: it
 diagnoses the repair/spoiler split but cannot serve as the missing
-nonrecursive marked-edge predicate. The `ej2` upgrade generalizes this to a
+nonrecursive marked-edge predicate. The `ej` follow-up generalizes this to a
 quantifier-shadow no-go: any positive-state property obtained merely by
 forgetting information from `F_cc`'s `∀x∃y` witness is equally redundant.
 The exact C80→C82 interface is now fixed: first construct a direct
 secant/orbital edge predicate carrying an algebraically transportable,
 lower-ranked proof datum, with soundness independent of lower-survivor
-membership; only then may C82 count those witnesses and prove
-opponent-complete coverage. C82 remains gated. Report+script+cert:
+membership. The `ej2` gauge correction adds two release gates: the datum must
+have bounded algebraic format and a direct nonrecursive update rather than
+encode the whole strategy tree, and C82 must count distinct geometric replies
+after projecting/canonically gauging successor proof data—not `(reply,datum)`
+representations. The cheapest constructive scout is one
+field-parametrized pairing-with-obligations rewrite covering both the q17
+Klein-four repair orbit and marked q19 control; this is a proof-object test,
+not another scalar/profile census. Only after soundness may C82 prove
+opponent-complete projected abundance. C82 remains gated. Report+script+cert:
 [`../2026-07-25-c80-positive-mate-surplus-closure.md`](../2026-07-25-c80-positive-mate-surplus-closure.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
