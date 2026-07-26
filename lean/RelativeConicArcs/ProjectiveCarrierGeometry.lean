@@ -297,6 +297,95 @@ theorem planeLineRestriction_homogeneousComponent
 
 end HomogeneousRestrictions
 
+section CoordinateCharts
+
+variable (K : Type*) [Field K]
+
+/-- A homogeneous coordinate chart for one projective plane line.  The two parametrization
+columns span the kernel of `center`; `coordinateFunctional` recovers binary coordinates on that
+kernel and is a left inverse to the parametrization.  The normal equation records the chosen
+projective representative of the line equation. -/
+structure PlaneLineCoordinateChart where
+  center : Fin 3 → K
+  lineCoordinates : Fin 3 → Fin 2 → K
+  scale : K
+  normal_eq :
+    parametrizedPlaneLineNormal lineCoordinates =
+      fun i => scale * center i
+  scale_ne_zero : scale ≠ 0
+  coordinateFunctional : Fin 2 → Fin 3 → K
+  leftInverse :
+    ∀ j k,
+      (∑ i, coordinateFunctional j i * lineCoordinates i k) =
+        if j = k then 1 else 0
+  reconstruct_incident :
+    ∀ point : Fin 3 → K,
+      planeVectorPairing center point = 0 →
+        pointOnParametrizedPlaneLine lineCoordinates
+          (fun j => ∑ i, coordinateFunctional j i * point i) =
+            point
+
+variable {K}
+
+/-- Substituting the coordinate functionals lifts a binary polynomial to the plane. -/
+noncomputable def planeLinePolynomialLift
+    (chart : PlaneLineCoordinateChart K) :
+    MvPolynomial (Fin 2) K →+* MvPolynomial (Fin 3) K :=
+  MvPolynomial.eval₂Hom MvPolynomial.C
+    (fun j => homogeneousLinearPolynomial (chart.coordinateFunctional j))
+
+/-- The polynomial lift associated with a line chart is a right inverse to line restriction. -/
+theorem planeLineRestriction_planeLinePolynomialLift
+    (chart : PlaneLineCoordinateChart K)
+    (F : MvPolynomial (Fin 2) K) :
+    planeLineRestriction chart.lineCoordinates
+        (planeLinePolynomialLift chart F) = F := by
+  let composition : MvPolynomial (Fin 2) K →+* MvPolynomial (Fin 2) K :=
+    (planeLineRestriction chart.lineCoordinates).comp
+      (planeLinePolynomialLift chart)
+  have hcomposition : composition = RingHom.id _ := by
+    apply MvPolynomial.ringHom_ext
+    · intro c
+      simp [composition, planeLinePolynomialLift, planeLineRestriction]
+    · intro j
+      rw [RingHom.id_apply]
+      simp only [composition, RingHom.coe_comp, Function.comp_apply,
+        planeLinePolynomialLift, MvPolynomial.eval₂Hom_X']
+      rw [planeLineRestriction_homogeneousLinearPolynomial]
+      have hcoeff :
+          planeLineRestrictedCoefficients chart.lineCoordinates
+              (chart.coordinateFunctional j) =
+            fun k => if j = k then 1 else 0 := by
+        funext k
+        exact chart.leftInverse j k
+      rw [hcoeff]
+      fin_cases j <;> simp [homogeneousLinearPolynomial]
+  exact RingHom.congr_fun hcomposition F
+
+/-- Every binary polynomial is the restriction of a plane polynomial through a coordinate chart. -/
+theorem PlaneLineCoordinateChart.planeLineRestriction_surjective
+    (chart : PlaneLineCoordinateChart K) :
+    Function.Surjective
+      (planeLineRestriction chart.lineCoordinates :
+        MvPolynomial (Fin 3) K → MvPolynomial (Fin 2) K) := by
+  intro F
+  exact
+    ⟨planeLinePolynomialLift chart F,
+      planeLineRestriction_planeLinePolynomialLift chart F⟩
+
+/-- Every incident plane vector has an exact binary preimage in a line coordinate chart. -/
+theorem PlaneLineCoordinateChart.exists_binaryPreimage
+    (chart : PlaneLineCoordinateChart K)
+    (point : Fin 3 → K)
+    (hpoint : planeVectorPairing chart.center point = 0) :
+    ∃ binaryPoint : Fin 2 → K,
+      pointOnParametrizedPlaneLine chart.lineCoordinates binaryPoint =
+        point :=
+  ⟨fun j => ∑ i, chart.coordinateFunctional j i * point i,
+    chart.reconstruct_incident point hpoint⟩
+
+end CoordinateCharts
+
 section CarrierResidualDivisibility
 
 variable {K P : Type*} [Field K] [ExpChar K 2]
@@ -571,6 +660,44 @@ theorem exists_finset_homogeneous_carrierRoot_extension
       · exact hxD'
       · rw [map_add, hDzero' y hy, add_zero]
         exact hG y hy
+
+/-- Coordinate charts discharge both exact-preimage choice and polynomial-surjectivity
+hypotheses in the homogeneous carrier-root extension theorem. -/
+theorem exists_finset_homogeneous_carrierRoot_extension_of_coordinateCharts
+    [DecidableEq P]
+    (chart : P → PlaneLineCoordinateChart K)
+    (ambient : MvPolynomial (Fin 3) K)
+    (root : P → MvPolynomial (Fin 2) K)
+    (degree : ℕ)
+    (hrootHomogeneous : ∀ x, (root x).IsHomogeneous degree)
+    (hsquare :
+      ∀ x,
+        planeLineRestriction (chart x).lineCoordinates ambient =
+          (root x) ^ 2)
+    (hrestrictedNonzero :
+      ∀ ⦃x y⦄, x ≠ y →
+        planeLineRestrictedCoefficients
+          (chart x).lineCoordinates (chart y).center ≠ 0)
+    (hnoncollinear :
+      ∀ ⦃x y z⦄, x ≠ y → x ≠ z → y ≠ z →
+        planeVectorDeterminant
+          (chart x).center (chart y).center (chart z).center ≠ 0) :
+    ∀ s : Finset P,
+      ∃ G : MvPolynomial (Fin 3) K,
+        G.IsHomogeneous degree ∧
+        ∀ x ∈ s,
+          planeLineRestriction (chart x).lineCoordinates G = root x := by
+  apply exists_finset_homogeneous_carrierRoot_extension
+    (fun x => (chart x).lineCoordinates)
+    (fun x => (chart x).center)
+    ambient root degree hrootHomogeneous hsquare
+    (fun x point hpoint =>
+      (chart x).exists_binaryPreimage point hpoint)
+    (fun x => (chart x).scale)
+    (fun x => (chart x).normal_eq)
+    (fun x => (chart x).scale_ne_zero)
+    hrestrictedNonzero hnoncollinear
+    (fun x => (chart x).planeLineRestriction_surjective)
 
 end CarrierResidualDivisibility
 
