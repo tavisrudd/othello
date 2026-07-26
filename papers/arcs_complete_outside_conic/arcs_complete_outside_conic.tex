@@ -70,10 +70,11 @@ gives an integer lower bound \(L_2(q)\), hence
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-For a zero-defect \(\cC\)-complete arc with even \(k\ge6\),
-\(q\in\{k-2,\binom{k-1}{2},\binom{k-1}{2}+1\}\); over fields of
-order a power of two this leaves the hyperoval scale \(k=q+2\) or the
-single arithmetic candidate \((q,k)=(4096,92)\).  Projective averaging
+For zero-defect \(\cC\)-complete arcs we determine the three possible
+orders \(q\) for each parity of \(k\).  Over fields of order a power of
+two, odd \(k\) gives exactly an oval whose nucleus lies on \(\cC\), while
+even \(k\) leaves the hyperoval scale \(k=q+2\) or the single arithmetic
+candidate \((q,k)=(4096,92)\).  Projective averaging
 transfers upper bounds from sufficiently small ordinary complete arcs.
 Finally, an exhaustive augmentation certificate together with exact
 quadratic-evaluation certificates shows that no quadratic disjoint from
@@ -190,10 +191,11 @@ The algebra is short; the point is the linear combination that factors
 pointwise into nonnegative terms.  Its summands record exactly where a
 secant-index distribution falls short of the extremal pattern.  Their
 vanishing produces the matching design used for equality rigidity, while
-their total gives stability.  For conic holes, the equality theory also
-forces every even \(k\) into three possible plane orders; in characteristic
-two only the hyperoval scale and the candidate \((q,k)=(4096,92)\)
-remain.
+their total gives stability.  For conic holes, the equality theory forces
+each parity of \(k\) into three possible plane orders.  In characteristic
+two the odd branch is exactly the oval--nucleus configuration, while the
+even branch leaves only the hyperoval scale and the candidate
+\((q,k)=(4096,92)\).
 
 The last assertion of Theorem~\ref{thm:main-conic} has a separate finite
 input: a checked augmentation certificate reduces all eight-arcs over
@@ -466,6 +468,12 @@ $(r-1)(m-r)\ge m-2$.  For $1\le r\le m-1$,
 $r(m-r)\ge m-1$.  Apply these estimates to~\eqref{eq:defect}.
 \end{proof}
 
+In particular, the defect has a discrete gap:
+\[
+ m\Delta_{\cH}(A)=0
+ \quad\text{or}\quad
+ m\Delta_{\cH}(A)\ge m-2.
+\]
 Thus small defect forces almost every multiply covered required point to
 have the maximum possible multiplicity $m$, while almost every hole point
 met by a secant also has multiplicity $m$.  This is the precise stability
@@ -635,6 +643,10 @@ $L_\infty$.  In that case
 \end{equation}
 Equality holds if and only if every affine point outside $A$ has secant index
 in $\{1,m\}$ and every point of $L_\infty$ has secant index in $\{0,m\}$.
+If moreover $k\ge6$ is even and equality holds, then
+\[
+ q\in\left\{k-2,\binom{k-1}{2}+1\right\}.
+\]
 \end{corollary}
 
 \begin{proof}
@@ -643,7 +655,12 @@ $A$ lying on a secant of $A$, which is exactly completeness outside
 $L_\infty$.  Every secant meets $L_\infty$ once, so
 $I_{L_\infty}(A)=\binom{k}{2}$.  Now apply
 Corollaries~\ref{cor:arbitrary-holes} and~\ref{cor:coverage}; the latter also
-gives the equality criterion.
+gives the equality criterion.  For even $k$, substituting the fixed value of
+$I_{L_\infty}(A)$ into the zero-defect equation and factoring gives
+\[
+ \bigl(q-(k-2)\bigr)
+ \left(q-\left(\binom{k-1}{2}+1\right)\right)=0.
+\]
 \end{proof}
 
 \section{Specialization to a conic}
@@ -724,6 +741,61 @@ and the excess increases with $t$.  Hence $t\in\{0,1\}$.  The displayed
 values of $s$ at $q=Q,B,B+1$ are respectively $q+1,q+1,Q+1$.
 \end{proof}
 
+\begin{corollary}[Odd-size equality spectrum]
+\label{cor:odd-equality-spectrum}
+Let $k\ge7$ be odd.  If a $\cC$-complete $k$-arc has zero defect, then
+\[
+ q\in
+ \left\{
+   k-1,\ \binom{k-1}{2}-1,\ \binom{k-1}{2}
+ \right\}.
+\]
+If $s$ is the number of conic points of index $(k-1)/2$, then the
+corresponding values of $s$ are respectively $q,q,k-1$.
+\end{corollary}
+
+\begin{proof}
+Put $Q=k-1$, $m=Q/2$, and
+$R=\binom Q2-1$.  At zero defect every positive conic index equals $m$,
+and substitution in the defect identity gives
+\[
+ s=q-(q-Q)(q-R).
+\]
+The arc bound gives $q\ge Q-1$, but the right-hand side is negative at
+$q=Q-1$, so $q\ge Q$.  If $Q\le q\le R$, then $s\le q+1$ gives
+$(q-Q)(R-q)\le1$.  Since $R-Q>2$, this forces $q=Q$ or $q=R$.
+If $q=R+t$ with $t\ge1$, then $s=q-t(q-Q)$.  The value $t=1$ is
+possible, whereas $t\ge2$ and $s\ge0$ would imply $q\le2Q$, contrary to
+$q\ge R+2>2Q$.  Substitution gives the stated values of $s$.
+\end{proof}
+
+\begin{corollary}[Odd equality in characteristic two]
+\label{cor:odd-characteristic-two-equality}
+Let $q$ be a power of two, let $k\ge7$ be odd, and let $A$ be a $k$-arc
+disjoint from $\cC$.  Then $A$ is $\cC$-complete with zero defect if and
+only if $k=q+1$, $A$ is an oval, and its nucleus belongs to $\cC$.
+\end{corollary}
+
+\begin{proof}
+Put $Q=k-1$.  The value $\binom Q2$ in
+Corollary~\ref{cor:odd-equality-spectrum} is not a power of two: the
+coprime factors $Q/2$ and $Q-1>1$ would both have to be powers of two.
+Nor can $2^n=\binom Q2-1$.  Writing $Q=2a$ and $x=4a-1$ would give
+\[
+ (x-3)(x+3)=2^{n+3};
+\]
+the two positive powers of two differ by six, hence are $2$ and $8$,
+which gives $x=5$, incompatible with integral $a$.  Thus $q=Q$.
+
+A $(q+1)$-arc in even order is an oval.  Its nucleus is the unique
+external point of secant index zero, and every other external point has
+index $q/2$.  The value $s=q$ from
+Corollary~\ref{cor:odd-equality-spectrum} therefore says exactly that the
+prescribed conic contains the nucleus.  Conversely, an oval disjoint from
+$\cC$ whose nucleus lies on $\cC$ has the required index pattern, so it is
+$\cC$-complete with zero defect.
+\end{proof}
+
 \begin{corollary}[Characteristic-two equality spectrum]
 \label{cor:characteristic-two-equality-spectrum}
 Let \(k\ge6\) be even, let \(q\) be a power of two, and suppose that a
@@ -757,6 +829,12 @@ case \(q=Q\) is \(k=q+2\).  This argument supplies only a necessary
 parameter pair; it does not assert that the corresponding matching design
 has a rank-three realization.
 \end{proof}
+
+In the first branch, $A$ is a hyperoval.  Every point outside $A$ has
+secant index $(q+2)/2$, so every nonsingular conic disjoint from $A$
+produces a $\cC$-complete zero-defect pair.  Thus the oval and hyperoval
+branches in characteristic two are completely geometric; only
+$(q,k)=(4096,92)$ remains arithmetically unresolved.
 
 \begin{corollary}[Small even equality cases]
 \label{cor:small-even-equality}
@@ -1234,6 +1312,37 @@ Thus the number of tangent $A$-secants is $r(\nu)$.  Reducing the sum of the
 intersection sizes $|\ell\cap\cC|$ modulo two gives
 $\IC(A)\equiv r(\nu)\pmod2$.  The remaining claims follow from
 Corollary~\ref{cor:conic-bound}.
+\end{proof}
+
+\begin{corollary}[Exceptional secant types]
+\label{cor:exceptional-secant-types}
+Suppose a zero-defect $\cC$-complete arc exists at
+$(q,k)=(4096,92)$.  Its arc secants consist of exactly
+\[
+ 46\ \text{tangents},\qquad
+ 2070\ \text{bisecants},\qquad
+ 2070\ \text{external lines}
+\]
+relative to $\cC$.
+\end{corollary}
+
+\begin{proof}
+Here $m=46$, and Corollary~\ref{cor:even-equality-spectrum} gives
+$91$ conic points of index $46$.  Hence
+\[
+ \IC(A)=91\cdot46=\binom{92}{2}=4186.
+\]
+If $\nu\in A$, Proposition~\ref{prop:nucleus-in} would give
+$\IC(A)\equiv91\pmod2$, a contradiction.  Thus $\nu\notin A$.
+Zero defect gives $r(\nu)\in\{1,46\}$, and
+Proposition~\ref{prop:nucleus-out} gives
+$\IC(A)\equiv r(\nu)\pmod2$, so $r(\nu)=46$.  This is the number $T$ of
+tangent arc secants.  If $B,E$ count the bisecant and external arc
+secants relative to $\cC$, then
+\[
+ T+2B=\IC(A)=4186,\qquad T+B+E=\binom{92}{2}=4186,
+\]
+which yields $(T,B,E)=(46,2070,2070)$.
 \end{proof}
 
 \begin{corollary}[Universal even-characteristic loss]

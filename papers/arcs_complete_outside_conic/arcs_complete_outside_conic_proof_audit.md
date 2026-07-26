@@ -10,6 +10,8 @@
    \sum_{y\in H}r(y)(m-r(y)).
    \]
 3. Coverage, uncovered-locus, equality, and quantitative stability statements are immediate corollaries of the exact identity.
+   The stability weights also give the discrete alternative
+   \(m\Delta_H(A)=0\) or \(m\Delta_H(A)\ge m-2\).
    The new equality capstone adds three checked consequences:
    - concurrence points canonically partition \(E(KG(k,2))\) into matching cliques, because each
      pair of disjoint secants has one projective intersection;
@@ -54,6 +56,19 @@
    \(q=Q\) or \(q=Q(Q+1)/2+t\); positivity then forces \(t\in\{0,1\}\).
    Prime-power order excludes the resulting \(k=8,12\) candidates in Desarguesian planes and
    leaves only \(q=8,37\) at \(k=10\). The scalar-extension obstruction is also immediate.
+   For complete affine arcs of even size, the fixed ideal incidence removes the middle conic
+   value: direct factorization gives
+   \(q\in\{k-2,\binom{k-1}{2}+1\}\).
+   For odd \(k\), putting \(Q=k-1\), \(R=\binom Q2-1\), and letting \(s\) count the
+   maximum-index conic points gives
+   \(s=q-(q-Q)(q-R)\). The arc bound together with \(0\le s\le q+1\) leaves exactly
+   \(q\in\{k-1,\binom{k-1}{2}-1,\binom{k-1}{2}\}\).
+   In characteristic two the latter spectrum reduces to \(k=q+1\), and the standard oval
+   secant-index distribution identifies equality exactly with a disjoint prescribed conic
+   containing the oval nucleus. The parallel even first branch is a hyperoval disjoint from the
+   prescribed conic.
+   These factorization and spectrum corollaries are analytic manuscript proofs, not additional
+   Lean terminals.
 5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),
@@ -64,6 +79,11 @@
    complete \(b\)-arc can be moved off any prescribed \(H\) when \(b|H|<q^2+q+1\).
 7. The even-characteristic statements use only the standard nucleus/tangent facts for a
    nonsingular conic; combining the nucleus-in/out cases gives \(I_C(A)\ge1\) universally.
+   At the surviving \((q,k)=(4096,92)\) zero-defect candidate, the even equality spectrum gives
+   \(I_C(A)=91\cdot46=4186\). The nucleus-in parity is impossible; nucleus-out parity forces
+   \(r(\nu)=46\), and the two secant-incidence equations then force exactly 46 tangent, 2070
+   bisecant, and 2070 external arc secants. This arithmetic corollary uses the formalized nucleus
+   propositions but is not itself a separate Lean theorem.
 8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened
    manuscript. Its exact \(q\)-hyperplane threshold and checker remain supplementary results; no
    paper theorem depends on them.
