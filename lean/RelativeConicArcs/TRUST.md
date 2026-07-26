@@ -245,8 +245,10 @@ level-eight list.  On exactly 2630 leaves it records three collinear
 uncovered points and three noncollinear uncovered points outside their line.
 The first triple forces that line to divide any containing quadratic, while
 the second triple excludes the residual linear factor.  The three remaining
-leaves are precisely the forced-hit records analyzed above.  Replay from the
-paper directory with:
+leaves are precisely the forced-hit records analyzed above.  The checker also
+verifies both displayed split factorizations on all 4096 coordinate vectors
+and the middle form's invertible coordinate-change matrix and standard-conic
+transport.  Replay from the paper directory with:
 
 ```text
 python3 check_q16_uncovered_patterns.py --check

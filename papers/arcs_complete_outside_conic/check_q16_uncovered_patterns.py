@@ -127,6 +127,73 @@ def monomial(point: tuple[int, ...]) -> tuple[int, ...]:
     return (mul(x, x), mul(y, y), mul(z, z), mul(x, y), mul(x, z), mul(y, z))
 
 
+def eval_quadratic(form: tuple[int, ...], point: tuple[int, ...]) -> int:
+    return dot(monomial(point), form)
+
+
+def eval_linear(form: tuple[int, ...], point: tuple[int, ...]) -> int:
+    return dot(form, point)
+
+
+def matrix_mul_vec(
+    matrix: tuple[tuple[int, ...], ...], point: tuple[int, ...]
+) -> tuple[int, ...]:
+    return tuple(dot(row, point) for row in matrix)
+
+
+def det3(matrix: tuple[tuple[int, ...], ...]) -> int:
+    a, b, c = matrix
+    return (
+        mul(a[0], mul(b[1], c[2]) ^ mul(b[2], c[1]))
+        ^ mul(a[1], mul(b[0], c[2]) ^ mul(b[2], c[0]))
+        ^ mul(a[2], mul(b[0], c[1]) ^ mul(b[1], c[0]))
+    )
+
+
+def verify_exceptional_arithmetic(exception: dict) -> None:
+    leaf = exception["leaf"]
+    form = tuple(exception["kernel_generator"])
+    vectors = itertools.product(range(Q), repeat=3)
+    if leaf == 89:
+        left = (1, 6, 6)
+        right = (1, 7, 7)
+        if any(
+            eval_quadratic(form, v)
+            != mul(eval_linear(left, v), eval_linear(right, v))
+            for v in vectors
+        ):
+            raise AssertionError("leaf 89 factorization")
+        exception["factorization"] = [[1, 6, 6], [1, 7, 7]]
+        exception["factorization_vector_count"] = Q**3
+    elif leaf == 2631:
+        left = (1, 4, 15)
+        right = (1, 15, 4)
+        if any(
+            eval_quadratic(form, v)
+            != mul(eval_linear(left, v), eval_linear(right, v))
+            for v in vectors
+        ):
+            raise AssertionError("leaf 2631 factorization")
+        exception["factorization"] = [[1, 4, 15], [1, 15, 4]]
+        exception["factorization_vector_count"] = Q**3
+    elif leaf == 90:
+        matrix = ((0, 1, 10), (0, 0, 15), (5, 0, 1))
+        determinant = det3(matrix)
+        if determinant != 6:
+            raise AssertionError(("leaf 90 determinant", determinant))
+        for v in vectors:
+            x, y, z = matrix_mul_vec(matrix, v)
+            standard_conic = mul(y, y) ^ mul(x, z)
+            if standard_conic != mul(5, eval_quadratic(form, v)):
+                raise AssertionError(("leaf 90 transport", v))
+        exception["nonsingular_model_matrix"] = [list(row) for row in matrix]
+        exception["nonsingular_model_matrix_det"] = determinant
+        exception["nonsingular_model_scalar"] = 5
+        exception["standard_conic_transport_vector_count"] = Q**3
+    else:
+        raise AssertionError(("unexpected exceptional leaf", leaf))
+
+
 def kernel(rows: list[tuple[int, ...]]) -> list[tuple[int, ...]]:
     matrix = [list(row) for row in rows]
     pivots: list[int] = []
@@ -181,6 +248,7 @@ def build_summary(levels: pathlib.Path) -> dict:
                 "uncovered_size": len(locus),
             }
         )
+        verify_exceptional_arithmetic(exceptions[-1])
     if len(patterns) != 2630 or len(exceptions) != 3:
         raise AssertionError((len(patterns), len(exceptions)))
     return {

@@ -1818,8 +1818,10 @@ python3 check_q16_uncovered_patterns.py --check
 sha256sum -c check_q16_uncovered_patterns.sha256
 \end{verbatim}
 from the paper directory.  This checker supplies the geometric compression
-used in the proof; the independently shaped Lean inverse matrices remain a
-kernel-checked verification of the same \(2630+3\) partition.
+used in the proof.  It also checks the two displayed factorizations and the
+middle form's invertible standard-conic coordinate change on all \(16^3\)
+coordinate vectors.  The independently shaped Lean inverse matrices remain
+a kernel-checked verification of the same \(2630+3\) partition.
 
 \section{Finite-field witnesses}\label{app:witnesses}
 

@@ -69,15 +69,18 @@ The checker reads the exact 2,633 level-eight arcs from
 `lean/RelativeConicArcs/Q16CertificateLevels.lean`, reconstructs every
 ordinary-uncovered locus directly from the 28 secants, chooses the
 lexicographically first displayed incidence pattern, and recomputes the
-quadratic kernel and arc intersection for each of the three exceptions.
+quadratic kernel and arc intersection for each of the three exceptions.  It
+also checks both split factorizations on all \(16^3=4096\) coordinate vectors
+and verifies the middle form's displayed coordinate-change matrix, including
+its nonzero determinant \(6\), on the same domain.
 It uses exact arithmetic modulo \(x^4+x+1\), contains no random choice, and
 stops after all 2,633 leaves.
 
-The checked byte counts are 7,746 for the script and 124,491 for the JSON.
+The checked byte counts are 10,232 for the script and 124,791 for the JSON.
 Their SHA-256 digests are respectively
-`f40e088206d1cd47e2717d9a8aac40171e10eba9b018d5f7c141d405ee27ff9c`
+`73a77f92565980bdebc965b9422c3338d6075505474f3293f54fcaa19cd06afe`
 and
-`ef7b36ed5f926187747e3cbae02080c8cefef3c302c6143449bb3b96ba043007`.
+`27c6ffd726dacf505f8717d13f57acf4d691340f3f37ef45e9cc4c2473b3385c`.
 The consumed level list has digest
 `568be2fa296466c059a9cdcefcb4f830a861a1dba18e6a69eab29eb07872cfc1`.
 

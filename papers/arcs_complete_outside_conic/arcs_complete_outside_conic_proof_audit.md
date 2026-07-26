@@ -184,7 +184,9 @@ line, so its residual linear factor cannot contain the second triple.  The
 independent pattern checker records one such six-point witness for every
 generic leaf.  On the other three leaves, the unique quadratic kernel line
 meets the arc; its generators and selected-point intersections are displayed
-in the manuscript.  Lean independently checks invertible six-row evaluation
+in the manuscript.  The same checker verifies the two split factorizations
+and the middle form's invertible standard-conic coordinate change on all
+4096 coordinate vectors.  Lean independently checks invertible six-row evaluation
 matrices on the 2630 generic leaves, proves that the three exceptional
 matrices have exactly the displayed one-dimensional kernels, and transports
 the rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
