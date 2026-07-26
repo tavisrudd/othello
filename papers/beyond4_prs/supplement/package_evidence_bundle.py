@@ -53,6 +53,7 @@ BUNDLES = (
             ("generator", "2026-07-23-c509-prs-deep-hole-calibration.py", "2026-07-23-c509-prs-deep-hole-calibration.py", "rederive"),
             ("certificate", "2026-07-23-c509-prs-deep-hole-calibration.json", "2026-07-23-c509-prs-deep-hole-calibration.json", "compare"),
             ("replay", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "rederive"),
+            ("independent-arithmetic-replay", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "reconstruct"),
             ("checksum", "2026-07-23-c509-prs-redundancy-seven.sha256", "2026-07-23-c509-prs-redundancy-seven.sha256", "compare"),
         ),
     ),

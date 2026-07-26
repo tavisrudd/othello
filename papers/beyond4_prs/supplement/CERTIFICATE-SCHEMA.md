@@ -16,6 +16,14 @@ and replay.
 | Certificate R7 | redundancy-seven split-free finite bridge | C509 |
 | Companion Certificate SC | proposed stable-component identities, saturation, and vertical fibres; not an adopted Version 1 claim | C595/C597 |
 
+Certificate R7 has two replay routes.  The original replay checks every
+recorded representative directly by the five-secant criterion and rebuilds
+its projective orbit, stabilizer, and Frobenius link.  The C656 arithmetic
+replay imports no stored orbit partition: it reruns the quotient enumerator
+after replacing C509's field implementation by the independently written R5
+replay field, and compares the reconstructed pointed complements, sextic
+split-free set, projective orbits, stabilizers, flags, and Frobenius links.
+
 ## Classification record
 
 A finite classification record is complete only when it contains all of:

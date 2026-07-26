@@ -63,19 +63,26 @@ this gap and do not close the concrete geometry.
 Certificate R5 already has an independent full projective Hankel scan.
 Certificate R6 already has an independent direct four-secant marking replay
 with separately implemented Hankel checks and orbit reconstruction.
-Certificate R7's current replay independently checks representatives,
+Certificate R7's original replay independently checks representatives,
 five-secant tests, group orbits, stabilizers, and Frobenius fusion, but it
-imports the generator's orbit list and aggregate absence claims.  C656 must
-add a second implementation that reconstructs the pointed quotient and the
-complete R7 deep set before this gate is green.
+imports the generator's orbit list and aggregate absence claims.
+`notes/2026-07-26-c656-r7-independent-arithmetic-replay.py` now supplies a
+second end-to-end route.  It imports no stored classification or orbit
+partition, replaces C509's field layer by the R5 replay's separately
+implemented arithmetic, and reruns the pointed complement, marker transport,
+complete sextic split-free set, projective-orbit, stabilizer, flag, and
+Frobenius aggregation.  The existing replay independently checks the
+syndrome test and orbit semantics.  The complete fourteen-field
+cross-arithmetic run remains to be completed.
 
 ## Literature delta gate
 
-The 2026-07-25 audit already records the theorem-level Wang--Wu--Hu
-comparison and its exact full-text cache record.  C656 still must screen the
-post-baseline delta through 2026-07-26, record all three forward-graph counts
-where a negative depends on an enumerated citing set, and reconcile the
-narrowed manuscript's remaining absence-dependent R5--R7 wording.
+The 2026-07-25 audit records the theorem-level Wang--Wu--Hu comparison and
+its exact full-text cache record.  The C656 delta refreshes the two pinned
+PRS citation graphs in OpenAlex, Crossref, and Semantic Scholar: all six
+counts are unchanged.  Four exact arXiv submission-date queries returned
+valid zero-result feeds, and the narrowed manuscript's remaining qualified
+R5--R7 positioning is reconciled.  No new source was promoted.
 
 ## Validation so far
 
@@ -85,9 +92,11 @@ From the repository root:
 make -C papers/beyond4_prs check
 ```
 
-passes on the narrowed canonical manuscript.  Supplement hashes, the TIT
-build, replay closure, Lean gate, fresh-history export, and two blind final
-readers remain open.
+passes on the narrowed 31-page canonical manuscript.  `make -C
+papers/beyond4_prs tit-check` passes on the 23-page IEEE build.  The local
+supplement consistency gate also passes before addition of the C656 replay.
+Complete replay closure, refreshed hashes, the Lean gate, fresh-history
+export, and two blind final readers remain open.
 
 ## Mystery ledger
 
@@ -104,8 +113,7 @@ Settled:
 
 Open:
 
-- Independent end-to-end reconstruction of every R7 finite bridge field.
-- The post-2026-07-25 literature delta.
+- The complete fourteen-field R7 cross-arithmetic run remains open.
 - Final replay, build, export, and cold-reader gates.
 - The exact all-level component ledger and modular-union degree belong to
   successor work, not Version 1.

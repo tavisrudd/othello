@@ -205,6 +205,56 @@ not as an enumerable negative set.  OpenAlex resolves the new preprint as
 resolve the arXiv-issued DOI and Semantic Scholar rate-limited the request.
 No negative verdict rests on this incomplete forward-citation check.
 
+## C656 post-baseline delta through 2026-07-26
+
+This delta was run after Version 1 was narrowed to the R5--R7
+classifications.  It makes no absence claim for the excluded all-level
+stable-component or higher-Lucas statements.  The report still names 26
+sources: seven were read at **full text**, nine at **partial** depth, and ten
+at **abstract/metadata only**, exactly as itemized in the read-depth ledger
+below.
+
+The two pinned coding seeds were resolved by their recorded identifiers.
+On 2026-07-26 the cited-by counts remained:
+
+| Seed | OpenAlex | Crossref | Semantic Scholar |
+|---|---:|---:|---:|
+| Zhang--Wan--Kaipa, `W2973880421`, DOI `10.1109/TIT.2019.2940962` | 21 | 19 | 24 |
+| Kaipa, `W2563545890`, DOI `10.1109/TIT.2017.2706677` | 20 | 16 | 28 |
+
+The exact endpoints were
+`https://api.openalex.org/works/W2973880421`,
+`https://api.openalex.org/works/W2563545890`,
+the two Crossref work endpoints for the displayed DOIs, and the Semantic
+Scholar graph endpoints `paper/DOI:<doi>?fields=title,citationCount`.
+Each returned a successful record with the pinned identifier and a numeric
+count.  All six counts are unchanged from the largest sets screened in the
+baseline audit, so there was no new citing record to promote or screen.
+
+Four arXiv API delta queries were run over titles, abstracts, and metadata,
+with `start=0`, `max_results=100`, and submission interval
+`[202607250000 TO 202607262359]`:
+
+| Query after the submission-date clause | Results |
+|---|---:|
+| `all:"projective Reed-Solomon"` | 0 |
+| `all:Reed-Solomon AND all:Hankel` | 0 |
+| `all:"normal rational curve" AND all:nucleus` | 0 |
+| `all:"coherent polar" AND all:"Reed-Solomon"` | 0 |
+
+Each response was a valid Atom feed with
+`opensearch:totalResults=0`; an empty response or transport error was not
+counted as zero.  A same-day web discovery search for the same four objects
+returned the already-audited projective-RS papers, the adjacent twisted-RS
+paper, and irrelevant homonyms; no result was promoted.  That web search was
+not used as an enumerable negative.
+
+No new, revised, newly indexed, or newly citing work was located in this
+one-day delta.  The qualified R5--R7 positioning sentence remains supported
+by the unchanged three-graph baseline plus this delta.  MathSciNet and Google
+Scholar remain not covered for the reasons stated below; those gaps license
+no unqualified priority claim.
+
 ## Bibliography metadata and read-depth ledger
 
 Every DOI was resolved on 2026-07-23 by DOI content negotiation; author,

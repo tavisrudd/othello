@@ -298,6 +298,7 @@ def replay() -> None:
             ["2026-07-23-c498-small-exceptional-normal-forms.py", "--summary"],
         ),
         ("r7", ["2026-07-23-c509-prs-deep-hole-calibration-replay.py"]),
+        ("r7", ["2026-07-26-c656-r7-independent-arithmetic-replay.py"]),
         (
             "stable-components",
             ["2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "--check"],
