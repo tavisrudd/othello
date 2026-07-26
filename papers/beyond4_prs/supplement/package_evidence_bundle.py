@@ -54,6 +54,8 @@ BUNDLES = (
             ("certificate", "2026-07-23-c509-prs-deep-hole-calibration.json", "2026-07-23-c509-prs-deep-hole-calibration.json", "compare"),
             ("replay", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "rederive"),
             ("independent-arithmetic-replay", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "reconstruct"),
+            ("independent-direct-locus-replay", "2026-07-26-c545-r7-direct-locus-replay.py", "2026-07-26-c545-r7-direct-locus-replay.py", "rederive"),
+            ("independent-direct-locus-certificate", "2026-07-26-c545-r7-direct-locus-replay.json", "2026-07-26-c545-r7-direct-locus-replay.json", "compare"),
             ("checksum", "2026-07-23-c509-prs-redundancy-seven.sha256", "2026-07-23-c509-prs-redundancy-seven.sha256", "compare"),
         ),
     ),
@@ -116,6 +118,13 @@ AUXILIARY_COPIES = (
         "dependency-replay",
         "notes/2026-07-22-c498-prs-deep-hole-replay.py",
         "evidence/r7/2026-07-22-c498-prs-deep-hole-replay.py",
+        "reconstruct",
+    ),
+    (
+        "Certificate R7",
+        "dependency-r5-field-replay",
+        "notes/2026-07-22-c491-prs-deep-hole-replay.py",
+        "evidence/r7/2026-07-22-c491-prs-deep-hole-replay.py",
         "reconstruct",
     ),
 )

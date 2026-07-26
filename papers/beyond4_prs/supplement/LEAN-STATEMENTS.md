@@ -57,6 +57,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:r6-persistent` | `PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount`; tangent-translation terminals | Cardinality and quotient arithmetic are checked; genuine actions and geometric family identification are inputs. |
 | `lem:r6-gcd1` | no direct declaration | Manuscript proof of exact-linear-gcd shallowness. |
 | `prop:r6-secant` | `PRSPolarInduction.sequenceContraction_agrees_with_finite` | Contraction algebra is checked; the secant-degree assertion is a manuscript proof. |
+| `prop:r6-lower-carrier` | no direct declaration | Manuscript monodromy trichotomy and characteristic-two/three specialization proving exhaustion of the lower trivial-gcd failure loci. |
 | `prop:r6-degrees` | no direct declaration | Manuscript component and divisor-degree proof; its bounds enter the polar terminal as hypotheses. |
 | `prop:r6-modular` | `PRSPolarInduction.mem_modularContractionKernel_iff` | The abstract modular kernel is checked; the concrete component classification is a manuscript proof. |
 | `prop:r6-nucleus` | no direct declaration | Manuscript binary-nucleus arithmetic and splitting proof, supported by Certificate R6. |
@@ -64,7 +65,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:r6-one-step` | `PRSRedundancySixSeven.redundancySixHighFieldSynthesis` | Conditional specialization of the one-step budgets; the geometric inputs remain hypotheses. |
 | `thm:r6` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion`; `PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight`; `radiusRange_six_eight_of_externalSeroussiRothDuer` | Conditional synthesis plus kernel-checked finite-row arithmetic and the exact \(q=8,r=6\) high-rate endpoint. The concrete coding identifications and cited radius implications remain explicit inputs. |
 | `prop:r7-pointed` | `PRSPolarInduction.LowerCoverStratum`; `CoherentPolarInput.splitFree_implies_persistent_or_modular` | The conditional interface and its witness use are checked. The two-marker cover, deletion degree `25`, and point-count derivation are manuscript mathematics, not Lean conclusions. |
-| `prop:r7-gcd1` | no direct declaration | Manuscript proof. |
+| `prop:r7-gcd1` | no direct declaration | Manuscript exact-gcd-one avoidance proof; the exactness hypothesis is explicit. |
 | `prop:r7-collision` | no direct declaration | Manuscript degree computation, supplied as a collision-budget input to Lean. |
 | `prop:r7-central` | no direct declaration | Manuscript central-lift and inverse-image proof, supported by Certificate R7. |
 | `cor:r7-contained` | no direct declaration | Manuscript rank--nullity and component proof; the R7 synthesis structure takes the result as an explicit input. |

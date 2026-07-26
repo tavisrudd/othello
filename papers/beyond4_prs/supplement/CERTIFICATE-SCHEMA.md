@@ -23,9 +23,14 @@ replay imports no stored orbit partition: it reruns the quotient enumerator
 after replacing C509's field implementation by the independently written R5
 replay field, and compares the reconstructed pointed complements, sextic
 split-free set, projective orbits, stabilizers, flags, and Frobenius links.
-Both routes reuse the primary quotient enumerator, so bounded-field
-completeness remains a trusted exact execution of that enumerator rather than
-an independent derivation.
+The C545 direct-locus replay is independent of the quotient enumerator.  It
+imports only the separately written R5 replay's finite-field implementation.
+For \(q<16\) it constructs the literal complement of all four-finite-secant
+spans in \(\operatorname{PG}(5,q)\); for \(q\geq16\) it constructs the
+classified R6 pointed locus directly from its persistent, marked-secant, and
+binary-nucleus pieces.  It then intersects every contraction condition,
+rebuilds the complete \(\operatorname{PGL}_2(q)\) orbit and Frobenius
+partition, and compares exact sets and records in all fourteen bridge fields.
 
 ## Classification record
 

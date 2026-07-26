@@ -5,7 +5,23 @@
 **Date:** 2026-07-26
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603 and C656 complete. C656's cold audit rejected the arbitrary-level
+C603 and C656 complete. A second pair of independent cold reads exposed and
+closed three Version 1 defects: the R7 common-factor proposition now states
+the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
+proved by an explicit monodromy/characteristic trichotomy, and R7 finite
+completeness now has a direct-locus replay independent of the C509 quotient
+partition. Both readers cleared the repaired draft (accept/release-ready).
+The paper gates cover 42 labels, the supplement now contains 47 artifacts,
+and the canonical 32-page PDF has SHA-256
+`5747371f73b51bc3a62dc2c139b7c388382afb276b7f41b258546bc24a91b4e9`.
+The repair and mystery ledger are in
+`notes/2026-07-26-c545-prs-second-cold-read-repairs.md`.
+A same-day literature delta found no new or revised pre-empting work; it
+resolved one earlier abstract-access gap by confirming that
+Cheng--Wu--Zhou treats a non-Reed--Solomon evaluation code. The bounded
+search record is `notes/2026-07-26-c656-prs-literature-delta.md`.
+
+C656's cold audit rejected the arbitrary-level
 stable-component release claim and narrowed Version 1 to the complete R5--R7
 results.  The fourteen-field R7 arithmetic reconstruction, exact 74-target
 standard-axiom audit, 44-artifact supplement gate, byte-reproducible fresh

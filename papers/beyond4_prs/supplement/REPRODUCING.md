@@ -86,14 +86,14 @@ described as an independent derivation.
 | Certificate R5 | nineteen recorded fields; pointwise and orbitwise exhaustion | independent Python replay |
 | Certificate R6 | direct scan through \(q=16\); structural bridge thereafter | independent replay plus radius gate |
 | Certificate R6-NF | recorded small exceptional normal forms | same-file deterministic checker |
-| Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | primary quotient enumeration, representative/orbit replay, and independent-arithmetic reconstruction; completeness trusts the primary enumerator |
+| Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | primary quotient enumeration, representative/orbit replay, independent-arithmetic reconstruction, and an independent direct-locus enumeration of the complete split-free sets and orbit partitions |
 | Companion Certificate SC | non-adopted integral factorization and bridge identities in every characteristic; saturation over \(\mathbf Z[1/6]\); fibres \(2,3\) | companion-only dependency-free identity/factorization replay plus trusted Singular primary decomposition |
 
 ## Exact replay commands
 
 Run these from the paper directory.  Each subshell changes only to the
 paper-local directory containing the named certificate.  The top-level
-`--replay` option runs the seven Python commands; the two Singular commands are
+`--replay` option runs the eight Python commands; the two Singular commands are
 separate checks in the same evidence bundle.
 
 ```text
@@ -102,6 +102,7 @@ separate checks in the same evidence bundle.
 (cd supplement/evidence/r6-normal-forms && python3 2026-07-23-c498-small-exceptional-normal-forms.py --summary)
 (cd supplement/evidence/r7 && python3 2026-07-23-c509-prs-deep-hole-calibration-replay.py)
 (cd supplement/evidence/r7 && python3 2026-07-26-c656-r7-independent-arithmetic-replay.py)
+(cd supplement/evidence/r7 && python3 2026-07-26-c545-r7-direct-locus-replay.py --check 2026-07-26-c545-r7-direct-locus-replay.json)
 (cd supplement/evidence/stable-components && python3 2026-07-24-c597-r10-integral-bad-scheme-sc11.py --check)
 (cd supplement/evidence/stable-components && python3 2026-07-24-c595-stable-component-fano-elimination.py --check)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-c597-r10-integral-bad-scheme-sc11.sing)

@@ -1,0 +1,161 @@
+{
+  "field_implementation": "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
+  "fields": [
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "8217d93aed4c73d9042da0188360e4a203f393f88ba48813a8d7d0cd9f3bc268",
+      "pgl_orbit_count": 197,
+      "pointed_bad_count": 11040,
+      "pointed_method": "literal-four-secant-complement",
+      "q": 7,
+      "searched_candidate_count": 77281,
+      "split_free_count": 55860,
+      "split_free_set_sha256": "15fee124470868c41edab94d0ec58da116a5c6a6ea2dbacb63e2ca871506d481"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "cdbc0e2f91a8a88ddeab5d6e76036e49c5ea71290e0a0986c6b4286fda204421",
+      "pgl_orbit_count": 124,
+      "pointed_bad_count": 14166,
+      "pointed_method": "literal-four-secant-complement",
+      "q": 8,
+      "searched_candidate_count": 113329,
+      "split_free_count": 50776,
+      "split_free_set_sha256": "3075cd8576bd6338dc06655bf6b91cc1ea5ef868ab79e5836a7da0dd513c49c3"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "9305561e67e0ef7aae2dda9f349f5bb4612171e717113e57cdc09c7d0f3727e4",
+      "pgl_orbit_count": 58,
+      "pointed_bad_count": 14479,
+      "pointed_method": "literal-four-secant-complement",
+      "q": 9,
+      "searched_candidate_count": 130312,
+      "split_free_count": 28350,
+      "split_free_set_sha256": "4a498a24f5599799500de26558605b1a8d45a6629d292c1d76305480653cabc6"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "776d380810b369cd076b10c850bfba5a1d018fca60276df099fcd488439e0b05",
+      "pgl_orbit_count": 10,
+      "pointed_bad_count": 8130,
+      "pointed_method": "literal-four-secant-complement",
+      "q": 11,
+      "searched_candidate_count": 89431,
+      "split_free_count": 3080,
+      "split_free_set_sha256": "029044b1d185af9c3b7151b7e639467ac6b8445acf04feedf48c88346dbb1c81"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "6b6d5aeac56150f81bda7fe36f0fe42839c9bc5c2fc54a68846a9a7a9e3131cb",
+      "pgl_orbit_count": 3,
+      "pointed_bad_count": 3147,
+      "pointed_method": "literal-four-secant-complement",
+      "q": 13,
+      "searched_candidate_count": 40912,
+      "split_free_count": 1274,
+      "split_free_set_sha256": "f135aa9fe2c17faee47bba373cbe70c645493a56845ff1c06a1c8dbe266eeda0"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "d4f195d17fcc38df404ac9d8cc290d5716a360ca87e047b41154a8f6959e46c5",
+      "pgl_orbit_count": 3,
+      "pointed_bad_count": 2553,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 16,
+      "searched_candidate_count": 40849,
+      "split_free_count": 2312,
+      "split_free_set_sha256": "4310d93e2e8542612c3e1a6ce0126325e5f9025ad0b226ed04af6a63f1c7ad42"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "a4b904027ae21b75c47f54e597c1de6cb99929db5149a25e64e8c1033c9cf15e",
+      "pgl_orbit_count": 5,
+      "pointed_bad_count": 3027,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 17,
+      "searched_candidate_count": 51460,
+      "split_free_count": 2754,
+      "split_free_set_sha256": "bdcc04a2fcf44c6bfbf01df96b770501ce593692a102e6fd5072f16a1624f5de"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "3ae9c5b255dffc0bc6bbce3562a61c90061ff40734e74182a670eb30a64c0b8e",
+      "pgl_orbit_count": 3,
+      "pointed_bad_count": 4143,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 19,
+      "searched_candidate_count": 78718,
+      "split_free_count": 3800,
+      "split_free_set_sha256": "f2ef2c11db8488c345ec89b07a7af988d308108e18f1e479e56b97596d9b3846"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "2598494ea5559900b0e1e8d381bbc34ef3138c65df2ff499bd90c27f0417f3bf",
+      "pgl_orbit_count": 5,
+      "pointed_bad_count": 7131,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 23,
+      "searched_candidate_count": 164014,
+      "split_free_count": 6624,
+      "split_free_set_sha256": "9c4065776b04f35a1e3783e8f08413f52155a4c7d0c2ee5aa56cd56e6a8b74d8"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "9b5989bbfc72299bda029e73d1ecd5a7180e46bf3d063fa6ca2c902ddeba82c8",
+      "pgl_orbit_count": 3,
+      "pointed_bad_count": 9051,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 25,
+      "searched_candidate_count": 226276,
+      "split_free_count": 8450,
+      "split_free_set_sha256": "be71aac31526096ba516942429d3ee8516d5d9be8f7cbd34c01f7843d0618622"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "fd267a5e0a5898ed847067096e358e2d2f2012291ae53e950dded9614f6ab92f",
+      "pgl_orbit_count": 4,
+      "pointed_bad_count": 11287,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 27,
+      "searched_candidate_count": 304750,
+      "split_free_count": 10584,
+      "split_free_set_sha256": "2d044e778d5ee1679b68800b6a2f87b337a057790ca112c3689ffa140d7b3528"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "1f273d8e8d6a7836dd237a120924e2626b0449cded925d9b7f1456fe00479838",
+      "pgl_orbit_count": 5,
+      "pointed_bad_count": 13863,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 29,
+      "searched_candidate_count": 402028,
+      "split_free_count": 13050,
+      "split_free_set_sha256": "a029680ca83693d4e3dc9cb5abad1167fcd88a7b4c0ffce2d6c292ac3a3f3e82"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "13b38531a8d7cb332a85cf7a89b6e737d903dc8c12a4e5edd4267541a326a4b2",
+      "pgl_orbit_count": 3,
+      "pointed_bad_count": 16803,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 31,
+      "searched_candidate_count": 520894,
+      "split_free_count": 15872,
+      "split_free_set_sha256": "b2923d882a20c4285a9092a2e04dc5614a724a8af0e136c7fca6d3598ff06170"
+    },
+    {
+      "matches_public_record": true,
+      "orbit_partition_sha256": "7af6ae6f0f5f600e1e42d7b4d85f149fbaf04e07104a82e2405ad3cd8c3acefa",
+      "pgl_orbit_count": 5,
+      "pointed_bad_count": 18450,
+      "pointed_method": "direct-r6-persistent-marked-star-nucleus-union",
+      "q": 32,
+      "searched_candidate_count": 590401,
+      "split_free_count": 17425,
+      "split_free_set_sha256": "1336be50890996deab9f3092633b26767df62d5fac517e638a06c62d13c9454f"
+    }
+  ],
+  "public_record": "CLASSIFICATION-RECORDS.json",
+  "schema": "c545-r7-direct-locus-replay-v1"
+}

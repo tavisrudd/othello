@@ -171,8 +171,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 41:
-        raise SystemExit(f"expected 41 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 42:
+        raise SystemExit(f"expected 42 adopted manuscript labels, found {len(labels)}")
 
     aggregate_text = AGGREGATE.read_text(encoding="utf-8")
     imports = tuple(
@@ -299,6 +299,14 @@ def replay() -> None:
         ),
         ("r7", ["2026-07-23-c509-prs-deep-hole-calibration-replay.py"]),
         ("r7", ["2026-07-26-c656-r7-independent-arithmetic-replay.py"]),
+        (
+            "r7",
+            [
+                "2026-07-26-c545-r7-direct-locus-replay.py",
+                "--check",
+                "2026-07-26-c545-r7-direct-locus-replay.json",
+            ],
+        ),
         (
             "stable-components",
             ["2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "--check"],

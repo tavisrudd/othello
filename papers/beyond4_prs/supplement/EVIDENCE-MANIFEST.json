@@ -105,6 +105,14 @@
       "sha256": "e7299f8ff0ffed3137fc58d20c15dad27ace429583c217ccaf3c0c0cb497b66a"
     },
     {
+      "bytes": 21749,
+      "path": "evidence/r7/2026-07-22-c491-prs-deep-hole-replay.py",
+      "public_label": "Certificate R7",
+      "replay_class": "reconstruct",
+      "role": "dependency-r5-field-replay",
+      "sha256": "53cb8cfc9158cc4ed505245500a01f380fdd3ef89c29fc27d7cad326c4579f08"
+    },
+    {
       "bytes": 16760,
       "path": "evidence/r7/2026-07-22-c498-prs-deep-hole-replay.py",
       "public_label": "Certificate R7",
@@ -145,12 +153,28 @@
       "sha256": "4536e6ad8ac3bf398650abefd97b3757d6aca15e613141c0e20fd27f787ee642"
     },
     {
-      "bytes": 3195,
+      "bytes": 6737,
+      "path": "evidence/r7/2026-07-26-c545-r7-direct-locus-replay.json",
+      "public_label": "Certificate R7",
+      "replay_class": "compare",
+      "role": "independent-direct-locus-certificate",
+      "sha256": "9e99674f4d3d5bf1a3c28e652f024baa79f7892a9f3226c48f7b34e175702441"
+    },
+    {
+      "bytes": 16215,
+      "path": "evidence/r7/2026-07-26-c545-r7-direct-locus-replay.py",
+      "public_label": "Certificate R7",
+      "replay_class": "rederive",
+      "role": "independent-direct-locus-replay",
+      "sha256": "41914798d6e68d31e6627cbe24a661f95bbc71ffbc3ea54c75ec2943a005e305"
+    },
+    {
+      "bytes": 3529,
       "path": "evidence/r7/2026-07-26-c656-r7-independent-arithmetic-replay.py",
       "public_label": "Certificate R7",
       "replay_class": "reconstruct",
       "role": "independent-arithmetic-replay",
-      "sha256": "d85cb6aa25f5edc5fca6b61c184cb050a9b7ce1e3a8c09cc2093a161bb2a7b05"
+      "sha256": "08cf4d35ff62e11875b61b20c850d3953ce390d616f8255157ca4393e91836a3"
     },
     {
       "bytes": 5468,
@@ -217,12 +241,12 @@
       "sha256": "3fbb98c10798e5fc28b14585f0e27a8292a7594b0ed05cc27fa1ed1ce4fde2f6"
     },
     {
-      "bytes": 4630,
+      "bytes": 5054,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "9e1c0782d4948d387078ca23aeafdc1394a4c3cd7015c10a506dafe955458cbe"
+      "sha256": "ee0f2997ddaebf47eb5f8cf364156699f1a76b4adc344a4ed8e96ff9eae14534"
     },
     {
       "bytes": 545912,
@@ -257,20 +281,20 @@
       "sha256": "f737cea8414be43654b6e15e6aea929a9912ec156091ba75701ffa581d752034"
     },
     {
-      "bytes": 15084,
+      "bytes": 15334,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "e38d74f914a8732431cec5278738cbbe1c5f09e1182e3503f1e9ad64d1c5678a"
+      "sha256": "adee1a0cdf1fc78caa6be13445037491e07b2527b948e956c55b98fafa19160f"
     },
     {
-      "bytes": 6366,
+      "bytes": 6549,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "513cf401664d6020b8e1b201df7612907c6d1f4eedd4f4f83eea5e5cabb7f383"
+      "sha256": "0f07e89209404669c913f843f061dc3a5c665159554ba6df7ad573a97682c6ba"
     },
     {
       "bytes": 12059,
@@ -289,12 +313,12 @@
       "sha256": "b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98"
     },
     {
-      "bytes": 12427,
+      "bytes": 12957,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "19145d2d4d885d97615280ec58154cca0427f462a9ff5c793a5371f6a8fff2e4"
+      "sha256": "13c79f4be5dee424035690116e83894dc3a9ec5bbc5c12ed3f79b8e9316d6b7d"
     },
     {
       "bytes": 6316,
@@ -305,12 +329,12 @@
       "sha256": "ce55af12d042b959ca1c0223c0819ab806cf3cafd96b467c490cccf540767cfb"
     },
     {
-      "bytes": 12356,
+      "bytes": 12575,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "1784110670194f5e3965d936f6110672612912384a074956ab3ac4c038d40e82"
+      "sha256": "c4ab38dd2b82fa5293289d5758604afddf78799356e7dccdf80078b1d1cc198f"
     },
     {
       "bytes": 17225,
