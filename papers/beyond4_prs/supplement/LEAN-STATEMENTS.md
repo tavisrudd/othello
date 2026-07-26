@@ -23,7 +23,7 @@ Declaration names below are relative to the `RelativeConicArcs` namespace.
 
 ## Manuscript declaration reconciliation
 
-The following table has one row for each of the 35 numbered lemma,
+The following table has one row for each of the 43 numbered lemma,
 proposition, theorem, or corollary labels in the TeX include graph.
 
 | Manuscript label | Lean boundary | Exact formal status |
@@ -54,6 +54,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:uniform-iterated-packages` | `PRSUniformCoveringRadius.bottomCurveDeletionBudget_eq`; `exactLinearGraphDeletionBudget_eq`; `intermediateParameterBudget_lt_uniformParameterBudget`; the two `*DeletionBudget_lt_fieldOrder_add_one` terminals; `UniformIteratedPackageInput.packages_fit_uniform_threshold` | The genus-one, exact-linear-gcd graph, and stagewise degree formulas and their simultaneous use above the threshold are kernel checked. Properness, geometric integrality, rational graph cardinality, and concrete degree bounds are explicit inputs proved in the manuscript. |
 | `thm:uniform-transverse` | `PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular`; `RecursiveContainedInput.bad_implies_persistent_or_modular`; `PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold`; `PRSStableComponents` coordinate terminals | Conditional one-step logic, recursive composition, coordinate identities, and uniform arithmetic are checked. Concrete integrality, point counts, component selection, and scheme identification remain manuscript proofs. |
 | `prop:contained-rank-two` | no direct declaration | Characteristic-free manuscript rank--nullity proof; degree-specific formal terminals consume its consequence as an input. |
+| `prop:higher-lucas-endpoint` | no direct declaration | Manuscript proof using Lucas support, linearized-polynomial root differences, and binary subspace polynomials.  It classifies the canonical endpoint section and proves shallowness of the first fresh endpoint orbit, not of every higher modular-carrier stratum. |
 | `prop:r6-persistent` | `PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount`; tangent-translation terminals | Cardinality and quotient arithmetic are checked; genuine actions and geometric family identification are inputs. |
 | `lem:r6-gcd1` | no direct declaration | Manuscript proof of exact-linear-gcd shallowness. |
 | `prop:r6-secant` | `PRSPolarInduction.sequenceContraction_agrees_with_finite` | Contraction algebra is checked; the secant-degree assertion is a manuscript proof. |

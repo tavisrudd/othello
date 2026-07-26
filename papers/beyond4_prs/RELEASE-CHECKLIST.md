@@ -62,7 +62,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 | R3 | PASS | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/verify.py` is the single entry point; its quick check verifies all 66 manifest rows, the generated public classifications, and their hashes. |
 | R4 | REVIEW | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | The complete local bundle and built PDF have exact hashes and byte counts; final public commit, archive, and DOI fields require the external release step. |
 | R5 | FAIL | Public paper-only repository URL, immutable tag/commit, and DOI/permanent archive URL resolve. | No public release exists. |
-| F1 | PASS | Statement-adequacy appendix maps every numbered manuscript claim to its exact Lean, manuscript, cited-input, or certificate route. | `supplement/LEAN-STATEMENTS.md` reconciles all 42 adopted labels and records every explicit unformalized input. |
+| F1 | PASS | Statement-adequacy appendix maps every numbered manuscript claim to its exact Lean, manuscript, cited-input, or certificate route. | `supplement/LEAN-STATEMENTS.md` reconciles all 43 adopted labels and records every explicit unformalized input. |
 | F2 | PASS | Aggregate import, axiom, exact-target, and manuscript-reconciliation gates pass in the pinned local Lean toolchain. | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour` and its 66-terminal audit pass; the audit reports only `propext`, `Classical.choice`, and `Quot.sound`.  The immutable public revision remains an export gate under R4/X1. |
 
 ## 5. Exposition, literature, and responsibility

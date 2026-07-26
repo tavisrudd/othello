@@ -19,8 +19,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `679ee392a87e7fe2c5b2a99f1dd620faaf88a945b4e7701da66f4768dcfd2422` |
-| Local built PDF bytes | `288564` |
+| Local built PDF SHA-256 | `1203be1a0f551202f4b93b13a18ebec2445a8ea4eac95a39d75e892a3dbba20d` |
+| Local built PDF bytes | `293424` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -35,10 +35,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `a9f809528539619f2fafa6ec2ecae14aa6f69f1c4be12ee324c3169fa70b1c33` | 12586 |
-| `EVIDENCE-ROWS.md` | `667c9947d0a6ffcdf14cd1fbbe6cdc1b0be6b998a37f0ac6bb342703c298d372` | 8311 |
+| `EVIDENCE-MANIFEST.json` | `08ab1fa13c579f39c0bc5fbe1c35da8475a492ef95801c503c674036bc141415` | 12586 |
+| `EVIDENCE-ROWS.md` | `a885f0415284369387407e506cfc2e4f00605ea5ce0ca0dd1e80563a2e96b4e1` | 8311 |
 | `package_evidence_bundle.py` | `8bf477b5492d1ca58e9dbb6b637e1ab02b0f201c3b690d1942bceee84972a9fd` | 12245 |
-| `verify.py` | `3d9bdb45f71b038cab90e07958aac794e52879e9c670ce646af9b711863052fb` | 12224 |
+| `verify.py` | `c85416809e2fc3c0775c797af10e19641da30b0a3919e3564a84abf65fed7ce7` | 12231 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 
 Verify the complete local bundle from the paper directory:
@@ -47,7 +47,8 @@ Verify the complete local bundle from the paper directory:
 python3 supplement/verify.py
 ```
 
-Add `--replay` to run every paper-local replay.
+Add `--replay` to run every paper-local Python replay.  The two paper-local
+Singular checks are listed separately in `REPRODUCING.md`.
 
 Add `--release` to require the immutable repository, revision, archive, DOI,
 reviewed-PDF, and two-reader signoff fields.  It is expected to fail while any

@@ -38,7 +38,7 @@ The reader must check:
   exhaustion identities, and independent replay claims;
 - the distinction between manuscript proof, cited input, certificate,
   kernel-checked algebra, and conditional Lean synthesis;
-- the one-command clean-checkout replay, the exact 15-module R5--R7 Lean
+- the one-command clean-checkout replay, the exact 16-file R5--R7 Lean
   closure, and the public release manifest.
 
 Verdict: pending.

@@ -13,6 +13,7 @@ ledgers.
 | R7 | Redundancy-seven split-free syndrome classification | complete all-field split-free classification; deep-hole promotion only with the radius gate | finite certificate through `q=32`; geometric continuation from `q>=37`; genuine deep holes only for `q >= 11`; the `q=7,8,9` radius gate is not supplied | explicit degree-16 second-marker scheme, pointed linear-gcd and \(S_3\) bottom packages, contained rank-two proposition, and orbit-reduced finite certificate |
 | Polar flags | Polar construction and one-step escape | exact conditional construction and effective one-step implication | each step requires the displayed lower-cover, collision, component, and witness inputs | projective divided-power contraction plus manuscript geometry and cited point bounds |
 | Stable components | All-level reduced irreducible-component exclusion and uniform transverse theorems | unconditional manuscript theorem with conditional recursive and coordinate formalization | \(\mathrm{SC}(j)\) holds for every \(j\geq6\); the displayed threshold leaves only persistent/modular loci and automatically lies in the Seroussi--Roth range, while Dür's equivalence makes this unconditional deep-hole containment; in characteristic \(p>r-1\), the persistent families are the exact deep-hole list of cardinality \(q(q+1)^2/2\) | explicit recursive component descent, catalecticant-rowspace transport, uniform properness and degree proposition, integral rank-two/Lucas pullback, Plücker bridge, coherent-Fano identities, Certificate SC, matching Lean interfaces, and the imported Seroussi--Roth--Dür radius chain |
+| Higher Lucas endpoint | Exact canonical-section divisibility test and first fresh endpoint-orbit shallowness | unconditional manuscript proposition | for \(d=2^s\) over \(\F_{2^m}\), \(\langle1,t,t^d\rangle\) contains a split squarefree degree-\(d\) form exactly when \(s\mid m\); the full \(e_7\) orbit is shallow for every \(m\geq3\); no claim about the other strata of the ambient carrier | Lucas support, root-difference recovery of \(\F_d\), and explicit binary subspace-polynomial witnesses |
 | Lean boundary | R5--R7 algebra, arithmetic, coordinate identities, finite-table transcription, and conditional synthesis | one exact paper-facing closure, not a full formalization of the geometry | geometric classifications, cited theorems, group actions, and certificate semantics remain manuscript, literature, or public-validation inputs | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`, its axiom audit, and `supplement/LEAN-STATEMENTS.md` |
 
 ## Stable source labels
@@ -22,6 +23,8 @@ ledgers.
 - `thm:spine`: R6/R7 classification spine and persistent orbit law.
 - `thm:stable-component-headline`: all-level stable-component classification
   and uniform transverse consequence.
+- `prop:higher-lucas-endpoint`: exact binary endpoint-section divisibility
+  test and first fresh endpoint-orbit shallowness.
 - `thm:polar-construction`: intrinsic polar-flag construction and squarefree
   lifting.
 - `thm:induction`: one-step polar escape from an explicit lower package.
@@ -29,16 +32,16 @@ ledgers.
 - `thm:r7`: complete redundancy-seven split-free classification and the
   `q>=11` deep-hole corollary.
 
-The complete set of 35 retained numbered labels is reconciled mechanically
+The complete set of 43 retained numbered labels is reconciled mechanically
 against `supplement/LEAN-STATEMENTS.md` by `supplement/verify.py`.
 
 ## Companion-work boundary
 
-Redundancy eight, redundancy nine, ordered-Hessian geometry, general
-Lucas-carrier arithmetic, and the distinguished degree-nine endpoint are not
-adopted by this manuscript and are not imported by its Lean gate. Their
-development records and formal modules remain companion-work sources, not
-paper dependencies.
+Redundancy eight, redundancy nine, ordered-Hessian geometry, and general
+Lucas-carrier arithmetic beyond the canonical endpoint section and
+distinguished \(e_7\) orbit are not adopted by this manuscript and are not
+imported by its Lean gate. Their development records and formal modules remain
+companion-work sources, not paper dependencies.
 
 ## Excluded claims
 

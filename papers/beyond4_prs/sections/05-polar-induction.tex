@@ -1152,6 +1152,58 @@ At redundancy \(r\), if \(p>r-1\), Lucas' theorem leaves no nucleus
 coordinate, so \(\mathcal M_r\) is empty.  This removes the modular
 term only; the R5 cyclic carrier survives in large characteristic.
 
+\begin{proposition}[Higher Lucas endpoint test]\label{prop:higher-lucas-endpoint}
+Let \(q=2^m\), let \(d=2^s\) with \(s\geq2\), and consider the
+degree-\((d+1)\) coherent Lucas carrier
+\[
+             \PP\langle e_2,\ldots,e_{d-1}\rangle.
+\]
+At its distinguished endpoint \(e_{d-1}\), the Hankel kernel contains
+the canonical section
+\[
+                         \cU_s=\langle1,t,t^d\rangle.
+\]
+This section contains a completely split squarefree polynomial of
+degree \(d\) over \(\F_q\) if and only if \(s\mid m\).
+
+For the first fresh case \(s=3\), the conclusion for the full kernel is
+strictly stronger: for every \(m\geq3\), the entire
+\(\PGL_2(q)\)-orbit of
+\(e_7\in\PP(\Gamma^9E)\) is shallow.
+\end{proposition}
+
+\begin{proof}
+Lucas' binomial criterion
+\cite[Lem.~1 and Thm.~1]{GmainerHavlicek2013}, applied to the two
+consecutive contraction rows, gives the displayed carrier and leaves
+\(1,t,t^d\) at \(e_{d-1}\).  A squarefree degree-\(d\) member of
+\(\cU_s\) has the form
+\[
+                         Ct^d+Bt+A,\qquad BC\ne0.
+\]
+Over an algebraic closure, its roots form an affine translate of
+\(\beta\F_d\), where \(\beta^{d-1}=B/C\).  If all roots lie in
+\(\F_q\), ratios of two nonzero root differences recover \(\F_d\);
+hence \(\F_d\subseteq\F_q\), equivalently \(s\mid m\).  Conversely,
+when \(s\mid m\), the polynomial \(t^d+t\) is split and squarefree over
+\(\F_q\).
+
+For \(s=3\), the two endpoint Hankel equations give
+\[
+ W_{e_7}=\langle1,t,t^2,t^3,t^4,t^5,t^8\rangle.
+\]
+Choose any three-dimensional \(\F_2\)-subspace
+\(V\subseteq\F_q\).  Its subspace polynomial is
+\[
+ L_V(t)=\prod_{v\in V}(t-v)
+       =t^8+A_4t^4+A_2t^2+A_1t,
+ \qquad A_1=\prod_{v\in V\setminus\{0\}}v\ne0.
+\]
+Thus \(L_V\in W_{e_7}\) is completely split and squarefree.
+The apolar \(\PGL_2(q)\)-action transports both Hankel kernels and
+split root divisors, so the same holds throughout the orbit.
+\end{proof}
+
 \begin{remark}[Scope of the contained calculations]
 The modular contraction kernel is an exact finite linear-algebra
 construction.  Proposition~\ref{prop:contained-rank-two} supplies the
@@ -1159,5 +1211,7 @@ ordinary persistent component uniformly, and
 Lemma~\ref{lem:uniform-collision} supplies the collision alternative.
 Theorem~\ref{thm:stable-component-headline} settles the remaining
 arbitrary-level question: no other recursively pointed contained
-component occurs.
+component occurs.  Proposition~\ref{prop:higher-lucas-endpoint}
+settles the canonical section and first fresh endpoint orbit, not the
+other arithmetic strata of a higher Lucas carrier.
 \end{remark}

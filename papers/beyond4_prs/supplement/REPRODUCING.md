@@ -15,7 +15,7 @@ supplement-artifact rows printed in `RELEASE-MANIFEST.md` match the
 current files.  It deliberately does not fill or validate the external
 repository, archive, DOI, or immutable-release fields.
 
-Run every paper-local replay with:
+Run every paper-local Python replay with:
 
 ```text
 python3 supplement/verify.py --replay
@@ -29,7 +29,7 @@ python3 supplement/prepare_release_export.py /disk-backed/output/path
 ```
 
 The command refuses an existing destination or dirty release-owned source,
-archives only the committed paper tree and exact 15-module Lean closure, and
+archives only the committed paper tree and exact 16-file Lean closure, and
 prints the source, paper, and Lean commit identifiers.  The output contains a
 paper repository at its root and a separately initialized Lean repository
 under `lean/`; the paper repository excludes that adjacent Lean checkout.
@@ -92,7 +92,9 @@ described as an independent derivation.
 ## Exact replay commands
 
 Run these from the paper directory.  Each subshell changes only to the
-paper-local directory containing the named certificate.
+paper-local directory containing the named certificate.  The top-level
+`--replay` option runs the six Python commands; the two Singular commands are
+separate checks in the same evidence bundle.
 
 ```text
 (cd supplement/evidence/r5 && python3 2026-07-22-c491-prs-deep-hole-replay.py --json 2026-07-22-c491-prs-deep-hole-census.json)

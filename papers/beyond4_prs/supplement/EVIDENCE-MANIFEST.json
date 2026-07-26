@@ -241,28 +241,28 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
-      "bytes": 2223,
+      "bytes": 2221,
       "path": "FINAL-READER-SIGNOFF.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Independent final-reader signoff",
-      "sha256": "34059e2d3adced4188b4225590216570f2bd568fedfb67a9843c49e55d727ddf"
+      "sha256": "7a10e717143e8a7e1c018c8a6d568f7b8aaafc21b6eaa094040635b427cd57a8"
     },
     {
-      "bytes": 15113,
+      "bytes": 15432,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "e9a33e4752e61b67d3712e449fae63a4b5e4fd1a4c0530d30012c6adb848b43b"
+      "sha256": "ba3f31746efd622626b91a185662eb296fb0e05f72afeef9585b01c695d4849e"
     },
     {
-      "bytes": 5989,
+      "bytes": 6132,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "b6a192f2dc2255f3e72907b93f6c195c2ec972f060add636b9303a657a012622"
+      "sha256": "feb7c34294ce6adfe2139de994a316777ef3a607dadb33c5f1daa2a1b62d825f"
     },
     {
       "bytes": 12059,
@@ -297,12 +297,12 @@
       "sha256": "6fff26efa379266301d25fd75ba8553823f729a0e6f3794a1481bf147da338c9"
     },
     {
-      "bytes": 12224,
+      "bytes": 12231,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "3d9bdb45f71b038cab90e07958aac794e52879e9c670ce646af9b711863052fb"
+      "sha256": "c85416809e2fc3c0775c797af10e19641da30b0a3919e3564a84abf65fed7ce7"
     },
     {
       "bytes": 17225,
