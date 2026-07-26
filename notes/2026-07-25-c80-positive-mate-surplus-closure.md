@@ -257,6 +257,63 @@ projected to distinct cells. Failure kills this proof-object shape without
 another global feature census; success yields the first legitimate `E_q`
 candidate for C80 soundness and only then for C82 counting.
 
+## `ej3` — intensional pairing, matching gauge, and obligation varieties
+
+The pairing-with-obligations proposal still fails the anti-packing gate if
+the datum literally lists a matching. A matching on `Θ(q)` live moves stores
+`Θ(q log q)` bits and can hide an arbitrarily complicated strategy even
+though it is called a “pairing certificate.” The same warning applies to an
+explicit list of unmatched fibres, Gallai--Edmonds components, or alternating
+paths.
+
+A legitimate uniform datum must therefore be **intensional**. The smallest
+proof-object shape consistent with all current gates is:
+
+```text
+z = (bounded algebraic parameters for σ_z, bounded equations for Z_z),
+```
+
+where:
+
+- `σ_z` is a formula-defined partial involution on the legal-move locus;
+- outside the exceptional locus `Z_z`, `σ_z(x)` is a jointly legal,
+  proof-producing reply and the opponent/reply exchange has a direct update
+  `z ↦ z'`;
+- `Z_z` is not an enumerated defect list but a bounded-degree algebraic set
+  or orbit family;
+- a separate marked rewrite handles `x∈Z_z` and strictly contracts a
+  well-founded obligation rank; and
+- the complete rank couples `Ω` with the obligation rank without consulting
+  recursive survivor membership.
+
+This recasts the q17 `4→2→0` thread in a potentially uniform way. Its four
+isolated fibres are already one Klein-four orbit, so they are compatible with
+one exceptional orbit equation rather than four stored exceptions. The
+deficiency-two target suggests contraction of that orbit datum, not
+subtraction of a scalar matching deficiency. The q19 control supplies the
+necessary state dependence: the fixed rational orbit fails, but a different
+reply reaches the pairing kernel. Thus `σ_z` must be chosen from an
+algebraic family parametrized by the current marked incidence, not fixed once
+for the normalized six-set.
+
+There is also a matching **gauge symmetry**. Two chosen maximum matchings can
+differ by alternating cycles and paths while representing the same strategic
+resource. Any update law depending on the arbitrary listed matching is
+noncanonical and risks another witness-multiplicity artifact. Soundness must
+be stated either directly for the formula-defined involution `σ_z`, or for a
+canonical alternating-equivalence object such as an algebraically presented
+factor-critical/attachment structure. C82 then counts projected replies,
+never pairings or alternating representatives.
+
+This produces a sharper cheap falsifier than “find a common pairing.” On the
+five q17 repairs and marked q19 control, search only for a common
+bounded-degree **partial involution schema plus exceptional-orbit equation**
+whose local rewrite reproduces the certified replies. Reject the schema if
+it needs an explicit edge list, coordinate-specific exception table, or a
+choice of matching not invariant under alternating-cycle changes. A positive
+would be the first candidate that simultaneously clears quantifier-shadow,
+proof-witness gauge, and anti-packing.
+
 ## Mystery ledger
 
 - **[SETTLED] Does strict-overload positive-mate-surplus closure pass the
@@ -289,6 +346,18 @@ candidate for C80 soundness and only then for C82 counting.
   pairing-with-obligations rewrite cover the q17 Klein-four repair orbit and
   marked q19 control by one identity?** This is the cheapest proof-object
   scout; it is not a new scalar/profile census.
+- **[SETTLED `ej3`] May the proof datum store an explicit matching or defect
+  list?** No. Its `Θ(q)`-scale description violates the anti-packing gate.
+  Pairing and exceptional loci must be formula-defined from bounded
+  algebraic parameters.
+- **[SETTLED `ej3`] Is a chosen matching canonical proof structure?** No.
+  Alternating cycles and paths give a gauge symmetry. The update law must use
+  a formula-defined involution or an alternating-equivalence invariant, not
+  an arbitrary matching representative.
+- **[OPEN — C80 `ej3`] Does one bounded-degree partial-involution schema with
+  an algebraic exceptional-orbit locus cover the q17 `4→2→0` thread and q19
+  direct repair?** This is now the exact highest-EV scout and its stop
+  condition.
 - **[OPEN — C80] What nonrecursive marked incidence predicate proves a reply
   good?** The evidence gap is unchanged: construct a direct secant/orbital
   certificate datum with an algebraic transport law whose soundness does not

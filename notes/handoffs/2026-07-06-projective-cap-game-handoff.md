@@ -1091,8 +1091,16 @@ after projecting/canonically gauging successor proof data—not `(reply,datum)`
 representations. The cheapest constructive scout is one
 field-parametrized pairing-with-obligations rewrite covering both the q17
 Klein-four repair orbit and marked q19 control; this is a proof-object test,
-not another scalar/profile census. Only after soundness may C82 prove
-opponent-complete projected abundance. C82 remains gated. Report+script+cert:
+not another scalar/profile census. The `ej3` anti-packing pass sharpens the
+datum further: it may not list a `Θ(q)` matching or defect set. It must be a
+bounded-formula partial involution with an algebraic exceptional/obligation
+locus, and its update must be invariant under alternating-cycle changes of
+matching representative. The exact scout is now one bounded-degree
+partial-involution schema whose exceptional-orbit rewrite realizes the q17
+`4→2→0` thread and the state-dependent q19 direct repair; reject it on any
+explicit edge list, coordinate exception table, or matching-gauge
+dependence. Only after soundness may C82 prove opponent-complete projected
+abundance. C82 remains gated. Report+script+cert:
 [`../2026-07-25-c80-positive-mate-surplus-closure.md`](../2026-07-25-c80-positive-mate-surplus-closure.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
