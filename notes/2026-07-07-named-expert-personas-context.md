@@ -23,6 +23,7 @@ making better proof-design choices in Lean.
 | Graph-game certificate engineer | Thomas J. Schaefer, Aaron N. Siegel, Berlekamp-Conway-Guy | Queens/NodeKayles: prove finite-board strategies by game-graph certificates, local reductions, and Grundy/PN bridges; expect general hardness. |
 | Repair-reliability and Boolean-threshold analyst | Svante Janson, Ryan O'Donnell; Ehud Friedgut, Gil Kalai | RepairPorts: exact reliability recurrences and pivotal influences, dependency-controlled Poisson windows, and careful sharp-threshold terminology. |
 | Rank-one modular reconstruction specialist | Stephen Doty, Anne Henke, Alison Parker, Gunter Malle, Geoffrey Robinson; Simeon Ball, Michel Lavrauw | PGL2/PSL2 reconstruction: fix point/evaluation duality, compute p'-subgroup invariants and Frobenius digits, track projective covers and outer parity, and isolate torus-normalizer exceptions. |
+| Arithmetic icosahedral invariant geometer | Nigel Hitchin; Igor Dolgachev, Laurent Manivel; Brian Conrad, Asher Auel, David Eisenbud; Paul Steinhardt, David Nelson | Clebsch passages: referee and extend the harmonic-cubic incidence cover, its \(\mathbf Q(\sqrt5)\) descent and conductor, the \(A_5\)-module bridge, the spinor specialization, and the degree-six bond-order cubic. |
 
 ## Loading order by task
 
@@ -47,6 +48,10 @@ making better proof-design choices in Lean.
    load `expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`;
    add the finite projective arcs dossier only when the residual step uses
    conics, matching products, or torus-normal-form geometry.
+9. Clebsch incidence descent, arithmetic square classes, or the relation
+   between the degree-three and degree-six harmonic realizations:
+   load
+   `expert-personas/hitchin-dolgachev-conrad-clebsch-arithmetic-harmonics.md`.
 
 ## Current project cautions
 
