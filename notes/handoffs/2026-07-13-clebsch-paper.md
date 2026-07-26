@@ -579,7 +579,7 @@ with \(T_{11}\). Its provenance, exact current evidence boundary, and
 acceptance plan are in
 `notes/2026-07-26-c579-hitchin-clebsch-paper-iii-plan.md`.
 
-C651 is complete: an explicit \(A_5\)-equivariant isomorphism from the
+C651 is complete and archived: an explicit \(A_5\)-equivariant isomorphism from the
 ten-pair permutation module to Paper II's quotient module has been verified
 on all 60 elements, and the transported signed cubic restricts to
 \(4\sigma_3\) over \(\mathbf F_{11}\). The certificate, independent replay,
@@ -587,7 +587,9 @@ prose proof, and Lean terminal are recorded in
 `notes/2026-07-26-c651-hitchin-tensor-bridge.md`. Because the rational Gaunt
 scalar has denominator divisible by \(11\), the cross-characteristic bridge
 is the common integral Clebsch cubic line rather than reduction of that
-scalar. C652 is complete: Section 4 now proves the golden fibre, unique
+scalar. The serialized import-only gate and its exact-target trace replay
+are green, with the native-decision boundary unchanged. C652 is complete:
+Section 4 now proves the golden fibre, unique
 common cubic, \(A_4\) hinge, order-four exchanger, spinor class,
 \(T_{11}\) reduction, and marked Hitchin--Mathieu torsor in prose. A compact
 primary certificate and independent replay check only the explicit

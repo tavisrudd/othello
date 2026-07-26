@@ -189,3 +189,38 @@ Closed here: the exact Paper II--Clebsch tensor identification over
 nonzero scalar. Not closed here: the arithmetic Hitchin cover, the
 \(T_{11}\) specialization, an integral comparison of Gaunt and matching
 normalizations, or the novelty gate for a Paper III headline.
+
+## Serialized import gate and exact freshness
+
+The import-only target
+`RelativeConicArcs.Gates.ClebschTensorBridge` was built through the shared
+serialized Lean queue on 2026-07-26.  The build completed in 14.47 seconds
+with peak resident memory 1,101,320 kB.  The queue's required post-build
+trace-only invocation
+
+```text
+lake build --no-build RelativeConicArcs.Gates.ClebschTensorBridge
+```
+
+replayed both the source module and its gate and ended with
+`All targets up-to-date (1268 jobs).`  The replayed gate reported exactly
+the disclosed native-decision axiom for the 64-entry equality, only
+`propext` and `Quot.sound` for nonvanishing, and only `propext` for the
+denominator divisibility theorem.  This closes the serialized-build and
+exact-target freshness condition without changing the optional status of
+Lean in Paper III's release surface.
+
+## Mystery ledger
+
+The `ej` and `tt` closeout found no unresolved task-internal mystery.  The
+three-dimensional intertwiner space is the expected commutant dimension of
+the multiplicity-free \(1+4+5\) decomposition of the ten-pair permutation
+module, and the scalar \(4\) is fixed by the explicitly frozen bases and
+selected invertible intertwiner.
+
+One broader normalization question remains deliberately outside this task:
+the rational Gaunt scalar cannot be reduced modulo \(11\), so a single
+integral normalization comparing the characteristic-zero and
+characteristic-\(11\) representatives would require new arithmetic input.
+No successor is allocated for that question, and C651 makes no claim beyond
+the common integral cubic line.
