@@ -12,7 +12,8 @@ formalizes the algebra that is independent of the ambient projective constructio
 
 * uniqueness and rescaling of a square root after a linear factor is chosen;
 * the nonzero zeroth conductor at two distinct parameters on one tangent fiber;
-* the fixed-point-free partner involution and its exact ordered- and unordered-pair counts;
+* the canonical additive one-factorization, its deletion to near-perfect matchings, and the exact
+  ordered- and unordered-pair counts;
 * the complete multipartite compatibility graph determined by tangent-contact labels; and
 * invariance of first-conductor nonvanishing after multiplication by one common linear factor.
 
@@ -106,6 +107,95 @@ theorem tangentConductorPartner_ne_zero
     tangentConductorPartner δ κ ≠ 0 := by
   intro h
   exact hκδ (add_eq_zero_iff_eq_charTwo.mp h)
+
+/-- Translation by `δ` defines a matching graph on the additive field.  When `δ` is nonzero,
+every vertex is paired with its translate by `δ`. -/
+def additiveConductorMatching (δ : K) : SimpleGraph K :=
+  SimpleGraph.fromRel fun κ μ => μ = tangentConductorPartner δ κ
+
+/-- Adjacency in a finite additive conductor matching is decidable when field equality is
+decidable. -/
+instance instDecidableRelAdditiveConductorMatching
+    [DecidableEq K] (δ : K) :
+    DecidableRel (additiveConductorMatching δ).Adj := by
+  unfold additiveConductorMatching
+  infer_instance
+
+/-- For a nonzero label, a field element is adjacent exactly to its translate by that label. -/
+theorem additiveConductorMatching_adj_iff
+    {δ : K} (hδ : δ ≠ 0) (κ μ : K) :
+    (additiveConductorMatching δ).Adj κ μ ↔
+      μ = tangentConductorPartner δ κ := by
+  rw [additiveConductorMatching, SimpleGraph.fromRel_adj]
+  constructor
+  · rintro ⟨_, h | h⟩
+    · exact h
+    · have hpartner := congrArg (tangentConductorPartner δ) h
+      have hreverse : tangentConductorPartner δ κ = μ := by
+        simpa only [tangentConductorPartner_involutive δ μ] using hpartner
+      exact hreverse.symm
+  · intro h
+    refine ⟨?_, Or.inl h⟩
+    intro hκμ
+    apply tangentConductorPartner_ne_self hδ
+    calc
+      tangentConductorPartner δ κ = μ := h.symm
+      _ = κ := hκμ.symm
+
+/-- Every vertex has degree one in a nonzero additive conductor matching. -/
+theorem additiveConductorMatching_degree_eq_one
+    [Fintype K] [DecidableEq K]
+    {δ : K} (hδ : δ ≠ 0) (κ : K) :
+    (additiveConductorMatching δ).degree κ = 1 := by
+  classical
+  apply Finset.card_eq_one.mpr
+  refine ⟨tangentConductorPartner δ κ, ?_⟩
+  ext μ
+  simp only [SimpleGraph.mem_neighborFinset, additiveConductorMatching_adj_iff hδ,
+    Finset.mem_singleton]
+
+/-- A nonzero additive conductor matching has exactly `|K| / 2` unordered edges. -/
+theorem card_additiveConductorMatching_edgeSet
+    [Fintype K] [DecidableEq K] {δ : K} (hδ : δ ≠ 0) :
+    Fintype.card (additiveConductorMatching δ).edgeSet =
+      Fintype.card K / 2 := by
+  classical
+  rw [(additiveConductorMatching δ).card_edgeSet]
+  have hdouble :
+      2 * (additiveConductorMatching δ).edgeFinset.card =
+        Fintype.card K := by
+    calc
+      2 * (additiveConductorMatching δ).edgeFinset.card =
+          ∑ κ, (additiveConductorMatching δ).degree κ :=
+        (additiveConductorMatching δ).sum_degrees_eq_twice_card_edges.symm
+      _ = Fintype.card K := by
+        simp only [additiveConductorMatching_degree_eq_one hδ, Finset.sum_const,
+          Finset.card_univ, smul_eq_mul, mul_one]
+  omega
+
+/-- Every edge of the complete graph on the field belongs to exactly one nonzero additive
+conductor matching.  Its label is the sum of its endpoints. -/
+theorem existsUnique_additiveConductorMatching_of_ne
+    {κ μ : K} (hκμ : κ ≠ μ) :
+    ∃! δ : K, δ ≠ 0 ∧ (additiveConductorMatching δ).Adj κ μ := by
+  have hsum : κ + μ ≠ 0 :=
+    fun hzero => hκμ (add_eq_zero_iff_eq_charTwo.mp hzero)
+  refine ⟨κ + μ, ⟨hsum, ?_⟩, ?_⟩
+  · rw [additiveConductorMatching_adj_iff hsum]
+    unfold tangentConductorPartner
+    calc
+      μ = 0 + μ := by simp
+      _ = (κ + κ) + μ := by rw [add_self_eq_zero_charTwo]
+      _ = κ + (κ + μ) := by rw [add_assoc]
+  · intro δ hδ
+    have hadj :=
+      (additiveConductorMatching_adj_iff hδ.1 κ μ).mp hδ.2
+    change μ = κ + δ at hadj
+    calc
+      δ = 0 + δ := by simp
+      _ = (κ + κ) + δ := by rw [add_self_eq_zero_charTwo]
+      _ = κ + (κ + δ) := by rw [add_assoc]
+      _ = κ + μ := by rw [← hadj]
 
 /-- Ordered nonzero parameter pairs whose normalized squared conductor is `δ`. -/
 abbrev NonzeroOrderedConductorPairs (δ : K) : Type _ :=
@@ -230,6 +320,18 @@ theorem tangentConductorMatching_adj_iff
     calc
       excludedTangentPartner δ κ = μ := h.symm
       _ = κ := hκμ.symm
+
+/-- The reduced conductor matching is the restriction of the full additive matching after
+deleting zero and the label `δ`; those are the endpoints of the deleted edge `{0, δ}`. -/
+theorem tangentConductorMatching_adj_iff_additiveConductorMatching
+    {δ : K} (hδ : δ ≠ 0) (κ μ : ExcludedTangentParameters δ) :
+    (tangentConductorMatching δ).Adj κ μ ↔
+      (additiveConductorMatching δ).Adj κ.1 μ.1 := by
+  rw [tangentConductorMatching_adj_iff hδ,
+    additiveConductorMatching_adj_iff hδ]
+  constructor
+  · exact fun h => congrArg Subtype.val h
+  · exact fun h => Subtype.ext h
 
 /-- Every reduced tangent parameter has degree one in the conductor matching. -/
 theorem tangentConductorMatching_degree_eq_one

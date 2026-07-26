@@ -388,6 +388,15 @@ which do not require a projective Chow-product API:
   `card_nonzeroUnorderedConductorPairs` quotient that fixed-point-free partner
   involution by coordinate exchange and give the exact near-perfect-matching
   cardinality \((|K|-2)/2\);
+- `additiveConductorMatching`,
+  `card_additiveConductorMatching_edgeSet`, and
+  `existsUnique_additiveConductorMatching_of_ne` prove the simultaneous
+  statement behind those counts: the nonzero additive translations form a
+  canonical one-factorization of the complete graph on \(K\), with edge
+  \(\{\kappa,\mu\}\) carrying the unique label \(\kappa+\mu\);
+- `tangentConductorMatching_adj_iff_additiveConductorMatching` identifies the
+  tangent-fiber matching with the restriction obtained by deleting the edge
+  \(\{0,\delta\}\), leaving \(\delta\) unmatched on \(K^\times\);
 - `tangentFiberCompatibilityGraph_isClique_iff_injOn`,
   `tangentFiberCompatibilityGraph_clique_card_le`, and
   `exists_tangentFiberCompatibilityGraph_clique_card_eq` identify the
@@ -405,11 +414,11 @@ triple count, or establish the carrier-extension hypotheses from projective
 geometry.  The last terminal checks their logical composition rather than
 asserting those analytic inputs.
 
-The import-only gate audits all sixteen public terminals.  Direct source
-elaboration is warning-free, and the source-local axiom audit of the new
-unordered-count terminal reports only `propext`, `Classical.choice`, and
-`Quot.sound`.  The exact Lake build and no-build replay await the shared
-build-owner window.
+The import-only gate audits all nineteen public terminals.  Direct source
+elaboration is warning-free.  The source-local axiom audits of the
+one-factorization, unique-color, deletion, and unordered-count terminals
+report only `propext`, `Classical.choice`, and `Quot.sound` in their union.
+The exact Lake build and no-build replay await the shared build-owner window.
 
 ## Outcome and boundary
 
