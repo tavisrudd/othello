@@ -1439,8 +1439,17 @@
       "last": 656,
       "purpose": "Repair PRS cold-read blockers: modular pullback budget, exact bottom-component ledger, recursive transport, and independent finite replay",
       "sequence": 160
+    },
+    {
+      "count": 1,
+      "first": 657,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 657,
+      "purpose": "instantiate projective carrier incidence and coordinate-free factor hypotheses",
+      "sequence": 161
     }
   ],
-  "next_id": 657,
+  "next_id": 658,
   "schema": "codex-task-id-allocations-v1"
 }
