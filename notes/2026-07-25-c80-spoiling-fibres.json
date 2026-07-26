@@ -1,0 +1,2670 @@
+{
+  "cross_checks": {
+    "every_strict_candidate_outside_copycat_survivor": true,
+    "isolated_vertices_equal_direct_empty_fibres": true,
+    "orbit_stabilizer_identity_verified": true
+  },
+  "definition": {
+    "canonicalization": "lexicographically least symmetric-square PGL(2,q) image of the selected projective set, marked spoiler, and complete strict-reply candidate set",
+    "minimality": "one marked opponent fibre; emptiness is checked by exhaustive enumeration of every jointly legal strict-Omega reply",
+    "spoiling_fibre": "a legal opponent at a marked decoy target for which every jointly legal strict-Omega reply lies outside M_Omega"
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "orbit_summary": {
+    "17": {
+      "canonical_orbits": 2,
+      "decoy_state_orbits": 1,
+      "orbit_members": [
+        [
+          0,
+          2,
+          5,
+          6
+        ],
+        [
+          1,
+          3,
+          4,
+          7
+        ]
+      ],
+      "orbit_multiplicities": [
+        4,
+        4
+      ],
+      "spoiling_fibres": 8
+    },
+    "19": {
+      "canonical_orbits": 1,
+      "decoy_state_orbits": 1,
+      "orbit_members": [
+        [
+          0
+        ]
+      ],
+      "orbit_multiplicities": [
+        1
+      ],
+      "spoiling_fibres": 1
+    }
+  },
+  "records": [
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          0,
+          3
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            13
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            1,
+            9,
+            0
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            5
+          ],
+          [
+            1,
+            10,
+            13
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            14,
+            13
+          ],
+          [
+            1,
+            16,
+            2
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 0,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        5,
+        15
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        4,
+        0
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        0,
+        1
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            2,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            9
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            7
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 12,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          15,
+          0
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            7,
+            7
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            14
+          ],
+          [
+            1,
+            10,
+            5
+          ],
+          [
+            1,
+            10,
+            10
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            12,
+            3
+          ],
+          [
+            1,
+            12,
+            8
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            16,
+            5
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 0,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        5,
+        15
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        4,
+        0
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        0,
+        9
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            7
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            14
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            12
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 11,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          0,
+          3
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            13
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            1,
+            9,
+            0
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            5
+          ],
+          [
+            1,
+            10,
+            13
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            14,
+            13
+          ],
+          [
+            1,
+            16,
+            2
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 1,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        7,
+        7
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        5,
+        0
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        2,
+        10
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            15
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            14
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            13
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 12,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          15,
+          0
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            7,
+            7
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            14
+          ],
+          [
+            1,
+            10,
+            5
+          ],
+          [
+            1,
+            10,
+            10
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            12,
+            3
+          ],
+          [
+            1,
+            12,
+            8
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            16,
+            5
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 1,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        7,
+        7
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        5,
+        0
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        6,
+        14
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            2,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            9
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            15
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 11,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          15,
+          0
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            7,
+            7
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            14
+          ],
+          [
+            1,
+            10,
+            5
+          ],
+          [
+            1,
+            10,
+            10
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            12,
+            3
+          ],
+          [
+            1,
+            12,
+            8
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            16,
+            5
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 2,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        6,
+        2
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        8,
+        14
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        3,
+        12
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            9
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            2,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            15
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            7
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            6
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            10
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 11,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          0,
+          3
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            13
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            1,
+            9,
+            0
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            5
+          ],
+          [
+            1,
+            10,
+            13
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            14,
+            13
+          ],
+          [
+            1,
+            16,
+            2
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 2,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        6,
+        2
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        8,
+        14
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        9,
+        6
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            9
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            2,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            13
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            15
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            5
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 12,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          0,
+          3
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            13
+          ],
+          [
+            1,
+            5,
+            8
+          ],
+          [
+            1,
+            9,
+            0
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            5
+          ],
+          [
+            1,
+            10,
+            13
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            14,
+            13
+          ],
+          [
+            1,
+            16,
+            2
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 3,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        10,
+        13
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        11,
+        9
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        5,
+        12
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            2,
+            2
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            14
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            7
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            3
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 12,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            4,
+            15
+          ],
+          [
+            1,
+            6,
+            16
+          ],
+          [
+            1,
+            8,
+            12
+          ],
+          [
+            1,
+            13,
+            9
+          ]
+        ],
+        "spoiler": [
+          1,
+          15,
+          0
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            7,
+            7
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            14
+          ],
+          [
+            1,
+            10,
+            5
+          ],
+          [
+            1,
+            10,
+            10
+          ],
+          [
+            1,
+            11,
+            5
+          ],
+          [
+            1,
+            11,
+            13
+          ],
+          [
+            1,
+            12,
+            3
+          ],
+          [
+            1,
+            12,
+            8
+          ],
+          [
+            1,
+            14,
+            10
+          ],
+          [
+            1,
+            16,
+            5
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          6
+        ],
+        [
+          1,
+          4,
+          15
+        ],
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          8,
+          12
+        ],
+        [
+          1,
+          13,
+          9
+        ]
+      ],
+      "case": 3,
+      "decoy_omega": 49,
+      "decoy_reply": [
+        10,
+        13
+      ],
+      "decoy_state_orbit_size": 4896,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        11,
+        9
+      ],
+      "object_orbit_size": 4896,
+      "object_stabilizer_size": 1,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "spoiler": [
+        8,
+        6
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            0,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            3,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            4,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            0
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            6,
+            14
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            1
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            7,
+            7
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            9,
+            15
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 11,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    },
+    {
+      "canonical": {
+        "selected": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            4,
+            2
+          ],
+          [
+            1,
+            5,
+            13
+          ],
+          [
+            1,
+            6,
+            14
+          ],
+          [
+            1,
+            7,
+            8
+          ],
+          [
+            1,
+            11,
+            7
+          ]
+        ],
+        "spoiler": [
+          1,
+          14,
+          16
+        ],
+        "strict_reply_candidates": [
+          [
+            1,
+            0,
+            9
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            1,
+            8,
+            11
+          ],
+          [
+            1,
+            8,
+            18
+          ],
+          [
+            1,
+            9,
+            5
+          ],
+          [
+            1,
+            10,
+            3
+          ],
+          [
+            1,
+            10,
+            5
+          ],
+          [
+            1,
+            10,
+            17
+          ],
+          [
+            1,
+            12,
+            4
+          ],
+          [
+            1,
+            13,
+            0
+          ],
+          [
+            1,
+            15,
+            15
+          ],
+          [
+            1,
+            16,
+            12
+          ],
+          [
+            1,
+            16,
+            18
+          ],
+          [
+            1,
+            18,
+            3
+          ]
+        ]
+      },
+      "canonical_decoy_state": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          1,
+          5,
+          13
+        ],
+        [
+          1,
+          6,
+          14
+        ],
+        [
+          1,
+          7,
+          8
+        ],
+        [
+          1,
+          11,
+          7
+        ]
+      ],
+      "case": 4,
+      "decoy_omega": 152,
+      "decoy_reply": [
+        7,
+        1
+      ],
+      "decoy_state_orbit_size": 6840,
+      "decoy_state_stabilizer_size": 1,
+      "marked_opponent": [
+        4,
+        0
+      ],
+      "object_orbit_size": 6840,
+      "object_stabilizer_size": 1,
+      "q": 19,
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "spoiler": [
+        3,
+        7
+      ],
+      "strict_replies": [
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            5
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            1,
+            16
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            5,
+            17
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            8,
+            8
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            4
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            10,
+            12
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            3
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            11
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            11,
+            16
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            15
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            12,
+            16
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            13,
+            4
+          ],
+          "target_omega": 1
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            13,
+            10
+          ],
+          "target_omega": 0
+        },
+        {
+          "in_copycat_survivor": false,
+          "in_positive_pairing_kernel": false,
+          "reply": [
+            14,
+            8
+          ],
+          "target_omega": 0
+        }
+      ],
+      "strict_reply_count": 14,
+      "zero_copycat_survivor_replies": true,
+      "zero_positive_pairing_replies": true
+    }
+  ],
+  "schema": "c80-spoiling-fibres-v1",
+  "source": "rust/scripts/c80_spoiling_fibre_canonicalization.py"
+}

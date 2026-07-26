@@ -1101,10 +1101,20 @@ Priority order and why:
    induction and landing in `B_cc`. The fixed rational orbital lift is
    closed-negative across q13/q19: at q19 its lower-`Ω` target `152` fails
    even `F_cc`, while a higher-`Ω` target `169` reaches `M_Ω`. The live
-   theorem therefore needs a coupled overload-retention/Tutte-excess bank,
-   not maximum drain or one orbital class. No quotient or arbitrary Grundy
-   oracle is required, and the five-state q17 thread is not a depth-two law.
-   A value-only factor is also not excluded.
+   coupled overload-retention/Tutte-excess bank is also closed-negative:
+   every tested raw strict-reply graph has excess zero, while the q17 decoys
+   retain more overload than the certified repairs. The observed excess two
+   is created only by recursively filtering edges through lower `M_Ω`.
+   Minimal-fibre extraction now sharpens the target. The four q17 `Ω=49`
+   decoys are one projective state orbit but have eight empty marked fibres
+   in two `PGL(2,17)` orbits (strict-candidate sizes 12 and 11); the q19
+   `Ω=152` decoy has one empty fibre of size 14. All 106 strict candidates
+   miss even `F_cc`, not only `M_Ω`. Next compare marked secant/conic
+   incidence on these three canonical spoiling types against the q17
+   `Ω=40` and q19 `Ω=169` certified repairs, seeking a sound nonrecursive
+   admissible-edge predicate. No quotient or arbitrary Grundy oracle is
+   required, and the five-state q17 thread is not a depth-two law. A
+   value-only factor is also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
