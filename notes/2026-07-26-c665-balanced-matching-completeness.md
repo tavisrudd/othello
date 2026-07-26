@@ -8,8 +8,9 @@
 strength-two trade space whose two fibers are one-factorizations forces the
 balanced setup, and the only resulting orbits are \(B_3/\mathbb F_7\) and
 \(H_3/\mathbb F_{11}\).  The one-factorization condition uses endpoint
-incidence rather than the abstract quotient alone.  The Platinum continuation
-is in progress and is not claimed here.
+incidence rather than the abstract quotient alone.  The stronger
+trade-only “Platinum” statement is an open strengthening, not part of C665
+and not claimed here.
 
 ## Result
 
@@ -93,6 +94,83 @@ quadratic-trade line would force two equal \(G^+\)-orbits, but without the
 edge-partition condition each orbit would only be a
 \(\lambda\)-fold one-factorization of size \(q\lambda\).  The theorem does
 not silently identify that weaker condition with balance.
+
+### `tt` nonacceptance gate for the stronger statement
+
+Dropping the one-factorization clause is not a cosmetic reformulation.  If
+the two intrinsic levels have size \(n\), transitivity of \(G^+\) on
+matchings and on endpoint edges gives a constant edge multiplicity
+\[
+\lambda=\frac{n}{q};
+\]
+thus the group action alone derives only two \(\lambda\)-fold
+one-factorizations.  It gives no argument that \(\lambda=1\).
+
+The first representation-theoretic obstruction is consistent with, but does
+not prove, the desired strengthening.  Let \(U\) be a Sylow-\(p\) subgroup.
+A matching stabilizer contains no nontrivial unipotent: such an element has
+one fixed endpoint, while the partner of that endpoint would have a
+nontrivial \(p\)-orbit.  Hence a sheet permutation module restricts to
+\(\lambda\) copies of the regular \(U\)-module.  If its quadratic evaluation
+vectors were independent, the two sheets would require \(2\lambda\) regular
+summands in the ambient quadratic module.  This supplies useful bounded
+obstructions, but the ambient regular-summand capacity grows with \(q\), so
+it does not furnish a uniform proof that \(\lambda=1\).
+
+Accordingly, the Gold theorem uses “factorization bipartition” in its
+standard incidence sense: each fiber partitions the edge set exactly once.
+Any statement replacing that hypothesis by “the unique quadratic trade has
+two values” needs a new uniform module or matching-scheme argument.
+
+### Platinum plan and bounded falsification
+
+Write a recovered sheet as \(H/K\), where
+\(H=\operatorname{PSL}_2(q)\), and write its size as \(q\lambda\).
+The exact plan is:
+
+1. **Falsify first.**  Search extension-field and larger-prime split
+   matching orbits before investing in a uniform module theorem.
+2. **Sheet-module reduction.**  Since \(K\) contains no nontrivial
+   unipotent, \(P=k[H/K]\) is projective and
+   \(P\mathord\downarrow_U\cong(kU)^\lambda\) for a Sylow-\(p\) subgroup
+   \(U\).
+3. **Common-quotient reduction.**  For the two surjective sheet evaluations
+   \(e_+,e_-:R\to P\), identify the trade dimension with
+   \[
+   \dim R/(\ker e_++\ker e_-).
+   \]
+   A unique trade says exactly that this common quotient is the trivial
+   line.
+4. **Nonprincipal survival target.**  Prove that if \(P\) has a
+   nonprincipal projective summand, the common quotient has a nontrivial
+   composition factor.  This directly contradicts a unique trade.
+5. **Finish from the sheet module.**  Prove in the present matching action
+   that \(k[H/K]=P(\mathbf1)\) occurs only for
+   \((q,K)=(7,S_4)\) and \((11,A_5)\).  Then
+   \(\dim P=q\), hence \(\lambda=1\), and the Gold classification applies.
+
+Step 3 is now a formal identity.  Steps 4 and 5 are the remaining
+representation- and subgroup-theoretic inputs.  The earlier proposal to
+exclude two projective copies in the ambient quadratic module remains a
+valid sufficient condition, but it is not the intrinsic seam: already for
+the \(q=19\) competitor the relevant simple socle occurs ten times in the
+quadratic module and its dual.  The single-Sylow norm count likewise supplies
+useful small-field obstructions but has no uniform capacity bound.
+
+The new exact bounded gate found no counterexample:
+
+| field/scope | split competitors | affine rank(s) | quadratic trade dimension(s) |
+|---|---:|---:|---:|
+| \(q=9\), all 945 matchings | none | -- | -- |
+| \(q=13\), all 135135 matchings | minimum orbit size \(364\) | ambient at most \(22\) | at least \(364-\binom{23}{2}=111\) |
+| \(q=17\), explicit orbits \(204,408,612\) | \(102+102,\ 204+204,\ 306+306\) | \(16,23,27\) | \(84,193,288\) |
+| \(q=19\), exceptional \(A_5\) competitor | \(57+57\) | \(32\) | \(14\) |
+
+The \(q=9\) and \(q=13\) rows are exhaustive.  The later rows are explicit
+falsifiers, not subgroup-list exhaustion claims.  Exploratory
+\(A_5\)-competitor checks at \(q=29,31\) also had trade dimensions
+\(113,91\), but those uncatalogued checks are not part of the evidence
+bundle or any claim.
 
 ## Balanced-orbit classification
 
@@ -278,6 +356,262 @@ the matching realization and evaluation-algebra claims in the three fields
 left by the human subgroup theorem.  It does not itself prove Dickson's
 classification.
 
+The separate Platinum falsifier is:
+
+```bash
+python3 notes/2026-07-26-c665-platinum-falsifier.py
+python3 notes/2026-07-26-c665-platinum-falsifier-replay.py
+sha256sum -c notes/2026-07-26-c665-platinum-falsifier.sha256
+```
+
+Its primary checker constructs full projective groups from normalized
+matrices.  Its replay uses translation, extension-field translation,
+inversion, and nonsquare dilation generators; for \(q=9\) it also changes
+from \(\mathbb F_3[a]/(a^2+1)\) to the independent model
+\(\mathbb F_3[b]/(b^2-b-1)\).  The trusted scope is recorded in the JSON:
+the \(q=9,13\) censuses are exhaustive, whereas \(q=17,19\) evaluate only
+the displayed representatives.
+
+Two exact Sage checks expose the \(q=19\) module structure:
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q19-module-test.sage
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q19-trade-module.sage
+```
+
+The sheet permutation character is
+\[
+P(\mathbf1)+P(S_{13}),
+\qquad \dim P(\mathbf1)=19,\quad \dim P(S_{13})=38.
+\]
+The 1081-dimensional universal quadratic module and its dual both have
+\(\dim\operatorname{Hom}_H(S_{13},-)=10\), so a simple-socle
+multiplicity-one surrogate is false.  This does not by itself decide whether
+two full copies of \(P(S_{13})\) embed.  More decisively for the actual
+evaluation, the fourteen-dimensional quadratic-trade module has composition
+factors
+\[
+\mathbf1,\ S_{13}.
+\]
+Thus the q=19 competitor exhibits exactly the nonprincipal-survival pattern
+required by Step 4.
+
+### Head-survival attack
+
+The same pattern persists in all three certified \(q=17\) competitors.
+Their sheet projectives and quadratic trade modules have the following
+simple dimensions:
+
+| \(\lambda\) | heads of indecomposable sheet summands | trade composition factors |
+|---:|---|---|
+| \(6\) | \(1,9,13,17\) | \(1,1,3,7,9,9,9,13,15,17\) |
+| \(12\) | \(1,7,9,13,13,15,17\) | every displayed head, with additional factors |
+| \(18\) | \(1,5,9,9,11,13,13,15,17,17,17\) | every displayed head, with additional factors |
+
+Thus every simple head of the sheet module occurs in the trade module, with
+at least its sheet multiplicity.  The exact check is
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q17-trade-modules.sage
+```
+
+Translation norms give a second, more elementary view.  The
+translation-invariant trade dimensions are
+
+| field | \(\lambda\) | invariant trade dimension |
+|---|---:|---:|
+| \(13\) | \(14,42,84\) | \(15,69,153\) |
+| \(17\) | \(6,12,18\) | \(5,12,18\) |
+| \(19\) | \(3\) | \(2\) |
+
+The \(q=13\) representatives are checked by
+`notes/2026-07-26-c665-q13-norm-images.sage`.  In every tested
+\(\lambda>1\) case, translation invariants alone already rule out a unique
+trade.
+
+This does not follow from the universal conic module: at \(q=19\) its
+translation norm has rank \(40\), and a nonsquare dilation has rank \(39\)
+on the norm-image difference.  The low-rank intersection is therefore a
+property of the actual matching-orbit evaluation, not a formal property of
+the ambient polynomial representation.  The universal calculation is
+replayed by adding `--norm-only` to the q=19 module-test command.
+
+The sharpened target is now:
+
+> For every simple \(S\) in the head of a sheet projective \(P\), the two
+> sheet copies have a nonzero scalar combination whose quadratic moments
+> vanish.
+
+Such a combination embeds \(S\) in the trade module.  If the trade module
+is one-dimensional, the head of \(P\) is therefore one-dimensional; since
+\(P\) is projective and has the invariant trivial quotient, this forces
+\(P=P(\mathbf1)\).  What remains is to prove the displayed moment dependence
+uniformly from the matching-product cocycle.
+
+### Platinum `tt` checkpoint
+
+The first uniform-projective attack is too coarse.  Because group algebras
+are self-injective, two embedded copies of a projective sheet summand would
+split off the universal quadratic conic module.  It is therefore tempting to
+exclude them by decomposing that universal module.  The \(q=19\) calculation
+already shows why simple-socle multiplicity cannot do this: the relevant
+thirteen-dimensional simple maps into the module and its dual with
+multiplicity ten.  A full MeatAxe indecomposition was started only as a
+diagnostic and was stopped before producing a result; no conclusion from it
+is used here.
+
+The sharper route is the Sylow-translation norm on the *actual orbit
+evaluation*.  Let \(U\) be the translation subgroup and let a sheet contain
+\(\lambda\) regular \(U\)-orbits.  Pair the two sheets by a nonsquare
+dilation \(d\), and write \(N_i\) for the quadratic moment sum over the
+\(i\)-th \(U\)-orbit in one sheet.  The tested ranks point to the exact
+statement
+\[
+ \dim\bigl(\langle N_1,\ldots,N_\lambda\rangle+
+ d\langle N_1,\ldots,N_\lambda\rangle\bigr)\leq\lambda+1.   \tag{*}
+\]
+Equivalently, the nonsquare dilation adds at most one direction to the norm
+image of one sheet.  If \((*)\) holds, the \(2\lambda\)-dimensional
+translation-fixed subspace of the two sheet permutation modules contains at
+least \(\lambda-1\) independent trades.  Thus a unique trade forces
+\(\lambda\leq2\); Dickson's \(p'\)-subgroup list and the small matching
+realizations can then dispose of the residual \(\lambda=2\) cases.
+
+This is more precise than either earlier projective-capacity target.  The
+universal conic module does not satisfy the corresponding rank-one outer
+difference: at \(q=19\) that difference has rank \(39\).  Hence the proof of
+\((*)\), if true, must use the matching-product cocycle, namely that every
+secant product has the same restriction to the conic.  The next acceptance
+test is to compute the one-sheet norm ranks and the rank of the dilation
+difference on their images in the certified \(q=13,17,19\) cases.  Only if
+those ranks support \((*)\) should the cocycle coefficient identity be
+developed.
+
+That acceptance test is positive:
+
+| \(q\) | \(\lambda\) | one-sheet norm ranks | joint norm rank |
+|---:|---:|---:|---:|
+| \(13\) | \(14,42,84\) | \(13,15,15\) on both sheets | \(13,15,15\) |
+| \(17\) | \(6,12,18\) | \(6,11,17\) on both sheets | \(7,12,18\) |
+| \(19\) | \(3\) | \(3\) on both sheets | \(4\) |
+
+Thus every certified joint rank is at most \(\lambda+1\).  In the cases
+where a sheet norm map is injective, the nonsquare sheet adds exactly one
+direction; otherwise one sheet already has a translation-invariant kernel.
+The remaining proof obligation is the uniform rank bound \((*)\), not a
+further finite test.
+
+A second falsification pass targets the first large regular exceptional
+action.  Over \(\mathbb F_{59}\), an \(A_5\) acts regularly on the sixty
+endpoints; right multiplication by an involution gives an
+\(A_5\)-invariant perfect matching.  Its full orbit has size \(3422\), its
+two sheets have size \(1711=59\cdot29\), and its affine rank is \(376\).
+Two independent samples of \(3485\) quadratic rows both have rank \(2381\),
+far below the \(3421\) required for a unique trade.  This is a one-sided
+exact falsifier, not yet a full square-rank certificate: it proves that
+neither displayed sample certifies uniqueness, while their identical rank
+is evidence for structural saturation at \(2381\).
+
+The affine ranks also expose the governing module shape.  At \(q=19\) the
+full affine conic module decomposes into indecomposables of dimensions
+\[
+ 1,\ 5,\ 9,\ 13,\ 18,
+\]
+with the eighteen-dimensional summand having trivial head and
+seventeen-dimensional socle.  The \(A_5\) orbit span is exactly the
+\(1+13+18=32\) selection.  At \(q=17\), the three certified orbit spans
+have dimensions \(16\), \(16+7\), and \(16+11\).  Thus the orbit spans are
+multiplicity-free selections of Fischer layers.  This makes a
+projective-summand proof more plausible, but it is not itself the missing
+uniform theorem.
+
+## Lean reduction of the Platinum seam
+
+Three certificate-free modules formalize the incidence, conditional
+projective, and unconditional common-quotient reductions.
+
+`RelativeConicArcs.MatchingFactorizationBalance` proves:
+
+- `stableLine_fullSupport`: a nonzero group-stable function line on a
+  transitive orbit has full support;
+- `card_mul_edgesPerMatching_eq_card_mul_edgeMultiplicity`: the incidence
+  double count
+  \[
+  |S|m=|E|\lambda;
+  \]
+- `sheet_card_eq_q_mul_index`: for perfect-matching parameters this gives
+  \(|S|=q\lambda\);
+- `edgeMultiplicity_eq_one_of_sheet_card_eq_q`: conversely, a positive
+  \(q\)-sheet has \(\lambda=1\), so excluding \(\lambda>1\) is exactly the
+  missing incidence conclusion;
+- `oneFactorization_card_eq_q` and
+  `twoOneFactorizationSheets_card_eq_two_mul_q`: index one gives the derived
+  \(q+q\) balance.
+
+`RelativeConicArcs.ProjectiveMultiplicityObstruction` proves:
+
+- `projectiveMonomorphism_lifts` and `twoProjectiveCopies_lift`: if an
+  epimorphic quadratic evaluation target contains \(Q\oplus Q\), projectivity
+  embeds \(Q\oplus Q\) back into the quadratic source;
+- `twoNonprincipalCopies_embed_kernel`: if
+  \(\operatorname{Hom}(Q,\mathbf1)=0\), the kernel of the two-sheet trade
+  functional contains the two nonprincipal sheet copies;
+- `no_epimorphism_to_twoSheetKernel` and its representation-category
+  specialization: a source satisfying `ExcludesTwoCopies Q R` cannot
+  surject onto that kernel;
+- `representation_twoCopies_finrank_le_source`: an epimorphic evaluation
+  onto a target containing \(Q\oplus Q\) forces
+  \(\dim(Q\oplus Q)\leq\dim R\), giving a direct numerical test for a
+  concrete conic module;
+- `representation_excludesTwoCopies_of_finrank_lt`: the required exclusion
+  follows from the sufficient finite-dimensional inequality
+  \(\dim R<2\dim Q\).
+
+This remains a correct conditional obstruction, but it is no longer the
+selected uniform route.
+
+`RelativeConicArcs.TwoSheetCommonQuotient` proves:
+
+- `combinedRange_fst_surjective` and
+  `combinedRange_snd_surjective`: surjective sheet evaluations give a
+  subdirect product;
+- `combinedRange_goursat`: the simultaneous image is the graph of an
+  isomorphism between quotient sheets;
+- `finrank_combinedRange_quotient_eq_finrank_kernelSup_quotient`: exactly
+  \[
+  \dim (P\oplus P)/\operatorname{im}(e_+,e_-)
+  =
+  \dim R/(\ker e_++\ker e_-).
+  \];
+- `uniqueTrade_iff_commonQuotient_finrank_eq_one` and
+  `two_le_tradeDimension_of_two_le_commonQuotient`: dimension one is
+  equivalent on the two sides, while a common quotient of dimension at
+  least two rules out uniqueness;
+- `pairedCopy_injective`, `pairedCopy_range_le_tradeKernel`, and
+  `finrank_le_tradeKernel_of_pairedCopy`: a nonzero scalar combination of
+  two sheet copies with zero quadratic moments embeds that simple module in
+  the trade kernel and supplies its dimension as a lower bound.
+
+All three substantive modules elaborate cleanly with the guarded
+single-file checker and introduce no axiom or `sorry`.  The import-only source
+`RelativeConicArcs.Gates.MatchingFactorizationBalance` is present, but its
+aggregate build was not run because a foreign Lean build owns the shared
+build lock.
+
+Lean therefore moves the open statement to a sharper exact input: when
+\(\lambda>1\), prove that the common quotient
+\[
+R/(\ker e_++\ker e_-)
+\]
+has dimension at least two, preferably by showing that a nonprincipal simple
+head of the sheet module survives in it.  The q=19 trade calculation gives
+the model case \(\mathbf1\oplus S_{13}\), and all three q=17 competitors
+contain every sheet head in their trade modules.  No uniform survival
+theorem is claimed yet.
+
 ## Paper and formal disposition
 
 The intrinsic-completeness theorem and hyperplane-square lemma are Paper II
@@ -314,11 +648,297 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open; not a C665 claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  Lean proves that the trade dimension equals the dimension of the common quotient \(R/(\ker e_++\ker e_-)\).  It remains to show that \(\lambda>1\) forces a nontrivial simple factor beyond the trade line; q=19 gives \(\mathbf1\oplus S_{13}\). |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
 | Is there a genuinely reusable cocycle-span theorem beyond C661? | settled negatively for this task | Without extra containment or cohomology hypotheses, the proposed statement is only irreducibility in new notation. |
 | Is one geometric radial nonvanishing mechanism shared by \(B_3,H_3\)? | open | Iterated trace extracts both radial pieces, but no common matching-geometric reason for nonvanishing is proved.  A future Paper II v2 task must supply that mechanism rather than another scalar check. |
 
-No open mystery affects balanced-orbit completeness, quadratic recovery, or
-cubic inevitability.
+The open trade-only strengthening does not affect the stated
+one-factorization theorem, balanced-orbit completeness, or cubic
+inevitability.
+
+## Platinum hypothesis and degrees-of-freedom ledger
+
+This ledger separates the information available before the missing leap
+from the statements that still need proof.
+
+### Fixed objects
+
+- \(k=\mathbb F_q\), with \(q\) an odd prime power;
+  \(G=\operatorname{PGL}_2(q)\), \(H=\operatorname{PSL}_2(q)\), and
+  \(\chi:G/H\to\{\pm1\}\) the determinant-square character.
+- \(X=\mathbb P^1(k)\), \(M\) is a perfect matching of \(X\), and
+  \(\Omega=G\cdot M\).
+- The matching product \(P_M\) is the product of the \((q+1)/2\) secant
+  equations belonging to \(M\).  All matching products restrict to the
+  same binary form \(s^qt-st^q\) on the conic \(XZ-Y^2=0\).
+- Hence \(P_M-P_{M_0}=(XZ-Y^2)Q_M\), where
+  \(\deg Q_M=(q-3)/2\).  The homogenized vectors
+  \(\widehat Q_M=(1,Q_M)\) form a \(G\)-stable affine orbit span \(E_\Omega\)
+  inside the universal conic-fibre module.
+- \(L\subseteq k^\Omega\) is the unital affine evaluation space.  The
+  quadratic moment map is
+  \[
+    \mu:k^\Omega\longrightarrow \operatorname{Sym}^2(E_\Omega),
+    \qquad \delta_M\longmapsto \widehat Q_M^{\odot2},
+  \]
+  up to the harmless choice of dual convention.  Its kernel is exactly the
+  strength-two trade space \((L^{\circ2})^\perp\).
+
+### Platinum hypothesis and consequences already proved
+
+Assume \(\ker\mu=k\tau\), where \(\tau\) has two values.
+
+1. Transitivity gives full support.  The two level sets are a nontrivial
+   \(G\)-block system, so \(H\) fixes each level and an outer element
+   exchanges them.  After scaling, \(\tau\) is the \(+1/-1\) sheet sign and
+   affords \(\chi\).
+2. Writing \(K=\operatorname{Stab}_G(M)\), splitness gives \(K\le H\) and
+   \[
+     \Omega=\Omega_+\sqcup\Omega_-,
+     \qquad \Omega_+\simeq H/K,
+     \qquad |\Omega_+|=q\lambda,
+     \qquad |K|=\frac{q^2-1}{2\lambda}.
+   \]
+3. No nontrivial unipotent stabilizes a perfect matching.  Thus \(K\) is a
+   \(p'\)-group, the sheet module \(P=k[H/K]\) is projective, and for the
+   translation Sylow subgroup \(U\),
+   \(P\mathord\downarrow_U\simeq(kU)^\lambda\).
+4. The restriction of \(\mu\) to either sheet is injective: a vector
+   supported on one sheet cannot lie in the full-support sign line.  Hence
+   \((P\oplus P)/k\tau\) embeds in the quadratic moment module.
+5. The invariant quotient occurs once in \(P\).  If \(\lambda>1\), the
+   sheet module has a nonzero nonprincipal projective summand.  Therefore a
+   proof that the quadratic moment module cannot contain both outer
+   extensions of such a summand would force \(\lambda=1\).
+
+Items 1--4 use no one-factorization hypothesis.  Item 5 is the exact point
+at which modular representation theory must replace endpoint incidence.
+
+### Geometric and module constraints on the quadratic target
+
+- The universal conic-fibre module is an extension of its constant quotient
+  by the degree-\((q-3)/2\) conic-quotient module.
+- Its Fischer layers are multiplicity-free and their binary highest weights
+  differ by four.  With the normalization that fixes the constant quotient,
+  every nonconstant layer carries the same determinant-square twist.
+- Consequently the quadratic module has only two kinds of channels:
+  constant--Fischer cross terms with that twist, and Fischer--Fischer
+  products with the square of the twist.  The cross terms contain only one
+  copy of each selected linear Fischer layer; all additional copies must
+  come from tensor-product channels.
+- In every computed orbit, \(E_\Omega\) is a multiplicity-free selection of
+  these layers.  The \(q=19\) \(A_5\) competitor selects dimensions
+  \(1+13+18\); the three \(q=17\) competitors select
+  \(16\), \(16+7\), and \(16+11\).
+- The tested nonprincipal simple heads always survive in the trade module.
+  At \(q=19\) the trade factors are \(\mathbf1\oplus S_{13}\); at \(q=17\)
+  every simple head of every tested sheet projective occurs in the trade
+  with at least the sheet multiplicity.
+
+The multiplicity-free Fischer selection is exact computationally in the
+displayed cases, but it is not yet a proved theorem for every matching
+orbit or every prime power.
+
+### Degrees of freedom still present
+
+After the preceding reductions, the only uncontrolled data are:
+
+1. the Dickson \(p'\)-subgroup type of \(K\): cyclic, dihedral,
+   \(A_4,S_4\), or \(A_5\);
+2. the \(K\)-invariant perfect matching inside the endpoint action;
+3. which Fischer-layer projections of its matching product are nonzero;
+4. the multiplicities and outer parities with which projective covers occur
+   in the quadratic tensor channels; and
+5. for \(q=p^e\), the Frobenius-digit structure of those channels.
+
+The orbit size and \(\lambda\) are not independent degrees of freedom: they
+are fixed by \(|K|\).  Nor is the outer sheet action free: it is fixed by
+\(\chi\).  The unresolved freedom is entirely the interaction of the
+\(K\)-fixed matching-product vector with the modular Fischer tensor
+channels.
+
+### Exact missing lemmas
+
+The shortest proof would consist of the following three lemmas.
+
+**L1. Fischer selection.**  For every full-projective matching orbit, its
+homogenized affine span is a multiplicity-free filtered selection of the
+universal Fischer layers, compatibly with the diagonal outer action.  The
+statement must include the Frobenius-twisted layers when \(q\) is not prime.
+
+**L2. Outer projective exclusion.**  If a nonprincipal projective
+indecomposable \(Q\) occurs in \(k[H/K]\), the quadratic module
+\(\operatorname{Sym}^2(E_\Omega)\) does not contain both \(G\)-extensions
+of \(Q\).  A sufficient sharpened version is that, for at least one simple
+head \(S\) of the nonprincipal part, only one outer parity of the projective
+cover of \(S\) occurs in the quadratic Fischer channels.
+
+**L3. Projective--trade bridge.**  Under the unique-trade hypothesis,
+projectivity, self-injectivity of \(kH\), and index-two Clifford theory embed
+both outer extensions of every nonprincipal sheet summand into the
+quadratic target.  Combining this with L2 forces the sheet module to be the
+principal projective alone; its dimension is \(q\), hence \(\lambda=1\).
+
+L3 is close to the already formalized lifting and common-quotient lemmas.
+L1 and especially L2 are the real gap.
+
+The linear-algebra core of L3 is now kernel-checked in
+`RelativeConicArcs.QuadraticTradeProjectiveBridge`.  Its theorem
+`moments_comp_nonprincipalSheets_injective` proves that a moment kernel
+supported in the principal coordinates makes the two nonprincipal sheet
+copies inject into the quadratic target.
+`two_mul_finrank_nonprincipal_le_target` gives the consequent bound
+\[
+  2\dim Q\le\dim R.
+\]
+This removes the projective-to-linear embedding ambiguity.  The remaining
+part of L3 is the representation-category identification of the two copies
+with the two outer extensions; L2 remains the substantive obstruction.
+
+The first attempted closed formula for the outer parity omitted the
+projective scaling cocycle of the matching product.  It has therefore been
+discarded rather than promoted to a formal lemma.  The exact \(q=19\)
+calculation, with the scalar normalization corrected so that
+\(\operatorname{Sym}^{12}\otimes\det^{-6}\) descends to
+\(\operatorname{PGL}_2(19)\), gives
+\[
+ \dim\operatorname{Hom}_G(S_{13}^{+},\operatorname{Sym}^2E)=10,
+ \qquad
+ \dim\operatorname{Hom}_G(S_{13}^{-},\operatorname{Sym}^2E)=0.
+\]
+Thus all ten \(H\)-maps have one outer parity in the model case, exactly as
+L2 predicts.  A uniform proof must derive this parity from the complete
+matching-product cocycle, not only from the untwisted Fischer weights.
+
+There is nevertheless a cocycle-free explanation of the part of L2 that
+the calculation suggests.  On the point-vector convention, write the
+affine conic-fibre module as an extension
+\[
+  0\longrightarrow F\longrightarrow E
+   \mathrel{\mathop{\longrightarrow}^{\epsilon}} \mathbf1
+  \longrightarrow0,
+\]
+where \(F=\ker\epsilon\) is the nonconstant fibre.  Polarization gives the
+canonical contraction
+\[
+ \partial:\operatorname{Sym}^2E\longrightarrow E,\qquad
+ \partial(xy)=\epsilon(x)y+\epsilon(y)x,
+\]
+whose kernel is \(\operatorname{Sym}^2F\).  Thus a simple factor with the
+linear outer parity can enter the socle of \(\operatorname{Sym}^2E\) only
+through the constant--\(F\) cross channel.
+
+The missing categorical bridge is to prove, with the point-vector and
+dual-evaluation conventions fixed, that such a cross-channel socle lift
+would split the relevant affine extension after tensoring with that simple
+module.  Once that bridge is available, a standard categorical-trace
+argument excludes the lift whenever the simple module \(S\) has nonzero
+categorical dimension \(\dim_kS\in k^\times\): compose the tensor splitting
+with coevaluation and evaluation for \(S\), then divide by \(\dim_kS\), to
+split the original extension, contradicting its nonsplitness.  This trace
+implication is sound once nonsplitness in the selected convention is
+verified; the
+identification of the observed quadratic socle lift with that tensor
+splitting is not yet proved.  In particular, the decomposition used in the
+\(q=19\) calculation must first be transported explicitly between the two
+dual module conventions.  The report therefore does not promote this
+argument to L2.
+
+This leaves one sharply delimited representation-theoretic escape:
+all nonprincipal heads of \(k[H/K]\) might have dimension divisible by
+\(p\).  In defining characteristic these are exactly the heads carrying a
+Steinberg Frobenius digit.  The missing subgroup lemma is therefore:
+\[
+ \tag{H1}
+ \lambda>1\quad\Longrightarrow\quad
+ k[H/K]\text{ has a nontrivial simple head }S
+ \text{ with }p\nmid\dim S,
+\]
+or, if H1 is false in small-characteristic torus cases, a geometric
+argument excluding precisely those cases.  For cyclic and dihedral
+stabilizers the candidate must also respect the Weyl involution: the
+three-dimensional adjoint simple has a torus-fixed line but the involution
+negates it.  Thus it handles a cyclic torus when \(p\ne3\), while for a
+full dihedral normalizer the first expected invariant is in the
+five-dimensional fourth symmetric layer, valid without further work only
+when \(p\ne5\).  Characteristics \(3\) and \(5\) therefore require
+digitwise treatment rather than the blanket assertion previously
+suggested.  In characteristic \(3\), the trace argument gives no conclusion
+even for the cyclic torus.  In fact H1 is false for a full torus in
+characteristic \(3\): Steinberg's tensor-product description shows that a
+simple of \(3'\)-dimension has only binary Frobenius digits, and its torus
+weights are signed sums of distinct powers of \(3\), never zero.
+
+This is the first genuine residual family, not a cosmetic defect of the
+method.  Its first field can nevertheless be excluded exactly.  Over
+\(\mathbb F_{27}\), all thirteen matchings invariant under the split torus
+pair \(0\) with \(\infty\) and pair the two regular torus orbits by a
+torus-equivariant bijection.  They form seven \(G\)-orbits.  Six are split
+orbits of size \(756\), with sheets
+\[
+  378=27\cdot14,
+\]
+affine rank \(80\), quadratic rank \(609\), and therefore trade dimension
+\(756-609=147\).  The seventh orbit has size \(378\), is already one
+\(H\)-orbit, and hence cannot support the required sheet sign; its
+quadratic trade dimension is \(27\).  The replay is
+`2026-07-26-c665-q27-torus-test.sage`.  This exhausts the torus-invariant
+matchings at \(q=27\), but it is evidence for, not a proof of, the uniform
+characteristic-three torus exclusion.
+
+Accordingly the proposed proof of L2 has three exact remaining inputs:
+
+**C1. Cross-channel extension identification.**  Fix one module convention
+and identify the extension class detected by a linear-parity socle lift in
+\(\operatorname{Sym}^2E\) with the tensor extension to which categorical
+trace applies; prove that the underlying affine extension is nonsplit in
+that convention.
+
+**H1. Nonnegligible head, away from the torus exception.**  For each
+relevant \(p'\)-subgroup \(K\), produce a nonprincipal simple head of
+\(k[H/K]\) whose dimension is nonzero in \(k\), or list the exact additional
+Dickson-type exceptions.
+
+**T3. Characteristic-three torus exclusion.**  If
+\(q=3^e\) and a split or nonsplit torus normalizer stabilizes a matching
+whose \(G\)-orbit splits into two \(H\)-sheets with \(\lambda>1\), then its
+quadratic trade space has dimension at least two.
+
+For the non-torus Dickson types, either H1 supplies a \(3'\)-dimensional
+head or the finitely many exceptional modular restrictions must be checked
+separately.  No prime-power-wide proof of H1 or T3 is claimed here.
+
+There is a second route if L2 fails:
+
+**N1. Translation-norm bound.**  For one sheet's \(U\)-orbit quadratic
+moments \(V\) and a nonsquare dilation \(d\),
+\[
+  \dim(V+dV)\le\lambda+1.
+\]
+Then the translation-fixed trade space has dimension at least
+\(\lambda-1\), so uniqueness gives \(\lambda\le2\).
+
+**N2. Residual subgroup realization.**  Dickson's list and the matching
+normalizers exclude the residual \(\lambda=2\) actions, leaving precisely
+the \(q=7,S_4\) and \(q=11,A_5\) principal-projective sheets at
+\(\lambda=1\).
+
+N1 passes every certified \(q=13,17,19\) test.  It is not yet proved and
+does not follow from the universal conic module, whose outer norm
+difference is large.
+
+### Facts that must not be assumed
+
+- A two-valued trade does not by itself say that either sheet is a
+  one-factorization; it yields only a \(\lambda\)-fold factorization.
+- The observed Fischer selections do not yet constitute a uniform
+  decomposition theorem.
+- Ten copies of a simple socle in the \(q=19\) universal quadratic module
+  do not determine how many full projective covers or which outer parities
+  occur.
+- The \(q=59\) quadratic samples do not determine the full square rank.
+- No computation presently covers all cyclic, dihedral, and exceptional
+  subgroup realizations over all odd prime powers.
