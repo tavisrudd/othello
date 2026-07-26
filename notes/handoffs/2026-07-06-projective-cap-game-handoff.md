@@ -1351,6 +1351,22 @@ stop at the first `F_d\R0` edge or uncovered `R0` fibre.
 Report+script+cert:
 [`../2026-07-25-c80-q23-fourth-control-rank-zero.md`](../2026-07-25-c80-q23-fourth-control-rank-zero.md).
 
+**The canonical q23 sweep finds the first exact `F_d\R0` edge on the
+eleventh P control (C80, 2026-07-25).** Controls five through ten pass
+edge-for-edge, extending the exact positive range to ten controls,
+1,163/1,163 fibres, 77,632 candidates, and 12,496 common edges. On control
+`S4(1,2,3,4)+(0,0)+(6,5)`, candidate
+`(12,20)->(16,15)` has `d=30`, `Omega=72`, lies in `F_d`, and fails `R0`.
+The failure has exactly one marked obligation: defect move `(14,3)` has no
+rank-zero reply, while recursive reply `(18,21)` drops `30->1` into an
+`Omega=1` `R0` state. The C54 archive labels the control P but this child
+`unknown`; soundness comes from the well-founded `F_d` certificate. Do not
+patch this with a fixed `R1` shell—the square-root obstruction still forces
+growing depth. The live crown is an algebraic obligation datum whose marked
+rewrite is iterable under strict rank descent; C82 remains gated.
+Report+script+cert:
+[`../2026-07-25-c80-q23-canonical-rank-zero-sweep.md`](../2026-07-25-c80-q23-canonical-rank-zero-sweep.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
