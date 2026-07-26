@@ -91,6 +91,7 @@
     {"label": "cor:profile-ray-weights", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence"]},
     {"label": "prop:modular-depth-quotient", "modes": ["conceptual", "certificate", "classical-input"], "evidence": ["relative-cubic-depth"]},
     {"label": "cor:h3-nine-space-bridge", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "relative-cubic-depth"]},
+    {"label": "cor:h3-homogeneous-projective-cover", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "relative-cubic-depth"]},
     {"label": "lem:split-inert-frames", "modes": ["conceptual", "lean"], "evidence": ["arithmetic-gluing"]},
     {"label": "thm:rank-three-arithmetic-gluing", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["profile-incidence", "decorated-parent", "arithmetic-gluing"]},
     {"label": "lem:three-ray-cubic", "modes": ["conceptual"], "evidence": []},

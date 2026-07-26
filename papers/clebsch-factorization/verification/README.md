@@ -1,8 +1,8 @@
 # Verification of the conic-ideal quotient paper
 
-This directory is the aggregate verification surface for *Conic-ideal
-quotients for the A3, B3, and H3 secant configurations*. It separates four
-kinds of support:
+This directory is the aggregate verification surface for *Factorization
+memory in conic quotients: the A3, B3, and H3 secant configurations*. It
+separates four kinds of support:
 
 - proofs given in the manuscript;
 - classical inputs attributed to Edge, Dye, the *Atlas*, and Giudici;
@@ -10,7 +10,7 @@ kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact twenty theorem-like statements
+`statement_identity.json` contains the exact twenty-one theorem-like statements
 in the manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 

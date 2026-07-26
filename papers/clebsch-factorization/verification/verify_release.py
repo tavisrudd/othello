@@ -185,6 +185,11 @@ EXPECTED_CLAIMS = {
         {"matching-module", "h3-equivariant-rank", "balanced-sheet",
          "relative-cubic-depth"},
     ),
+    "cor:h3-homogeneous-projective-cover": (
+        {"conceptual", "classical-input", "certificate"},
+        {"matching-module", "h3-equivariant-rank", "balanced-sheet",
+         "relative-cubic-depth"},
+    ),
     "lem:split-inert-frames": (
         {"conceptual", "lean"},
         {"arithmetic-gluing"},
@@ -428,7 +433,7 @@ def build_fingerprint(
         },
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 20 statements, 8 evidence bundles: CHECK OK",
+            "metadata": "metadata: 21 statements, 8 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }

@@ -8,15 +8,15 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "01482292627d5a6644aaf98c48f5e46d7255818be098788761e81086a61c4966",
-  "runner_sha256": "0fe714db6e8d278249e9668d03c5c9eb349085feb757ee6fc32c7b347bae6935",
+  "trust_manifest_sha256": "97e683ae622257464bdd2bde8ba5f6c3b7d6b338eeaa4d6e1e2c3f3278ed672d",
+  "runner_sha256": "2dbdf38e732fdaa40c2aef9e4b9917dda5c915f95ba3df883f8ba06414b04ccf",
   "review_sources_sha256": {
-    "normalized_manuscript": "ed06425e2213a41e3f36fd6278947782bdc0d130970dd48e928fcc9fe7130a10",
-    "normalized_statement_identity": "52b8fac39a73ae6f3ac2695d201f8f14a41d8891ad56c47a64e02ebbbc8c41c8",
-    "statement_extractor": "71813195cdc527f36c63fb3464c6bc7a3eeec553305ab1784069047caf673233",
-    "paper_readme": "f5d6d37b057d744c3cfd07ddc3c41f2a005db0224fbfe9f010fc2e6e5fd4f63e",
+    "normalized_manuscript": "768938695784f99c308f338df3fa356adb2c30d6b1c2b75e4749f701b79c20ea",
+    "normalized_statement_identity": "9879b3fd839ba2636809725919abe021e05a36b14fe773efac0d166d9fb6246e",
+    "statement_extractor": "ebc02b9ce0c8562a330845b72033453be4457e9590aacf3b937a9d7424f13ba9",
+    "paper_readme": "aaf633e6c91a0b915b3601f80e7f2078688032b75913efb7911f4027d28eada8",
     "paper_makefile": "26ec6e218e3c11e3913a36a9481277b1a4f63b68ac5dc21640d322b3da5bf681",
-    "verification_readme": "ca154826d5d33238d3f47f4c4ea5acd94ecd1fbf3caf82b777c2575ed9d901b3",
+    "verification_readme": "5d6eacf71308516ab2fbc0fe38fb44acdc8daff6e5cbdae5607306d515a6e594",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gate": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
     "guarded_lean": "d8e2a4642519aed0290aecf3ff39eab802be45da6323a18aa2bbc2ad07125189"
@@ -44,7 +44,7 @@
     "lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
     "lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean": "9ea2ba12de452fb6eef09f34d4c204c6e3bc9573f4b317108dea7fe3b714d5c8",
     "lean/RelativeConicArcs/Moments.lean": "5892d6448b919dffe5988502b014948831294247657b49a68e0aa228517305e8",
-    "lean/RelativeConicArcs/Plane.lean": "b8062ff5375c10c51537958a44f8666d8e3d09b6d26eea7bcecec11e3fbe728a",
+    "lean/RelativeConicArcs/Plane.lean": "4884204d8c0a1c219e969b72c6fa394abc28be3097c7eed6bed97e8f63c21ff5",
     "lean/RelativeConicArcs/ProjectiveBridge.lean": "423405930931867f62730ba3d2013012026f8a64db0af81d7b0ace6a43524a3f",
     "lean/RelativeConicArcs/SyndromeGeometry.lean": "0c49ee1527b10ec15ed84d07d0e0780d0f27df7776d048c04dd9d25d49e331b3"
   },
@@ -187,7 +187,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 20 statements, 8 evidence bundles: CHECK OK",
+    "metadata": "metadata: 21 statements, 8 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

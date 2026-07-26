@@ -54,7 +54,7 @@ gates, and execution order are recorded in
 ## Current result
 
 Paper II now has its own verification architecture and mathematical
-conclusion. The twenty theorem-like statements are hash-identified and
+conclusion. The twenty-one theorem-like statements are hash-identified and
 mapped claim by claim to conceptual proofs, classical inputs, seven exact
 certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
 runner checks the statement map, the admitted checksum manifests, fifteen
@@ -68,6 +68,18 @@ three boundaries a referee could otherwise misread: nonsingleton profiles
 recover only orbits, the relative-cubic and depth planes have no natural
 identification, and the three small-field split/fused rows do not imply an
 all-prime reciprocity law. The repaired candidate is warning-free.
+
+The final mathematical polish identifies the restricted affine extension
+itself:
+\[
+P(\mathbf1)/\operatorname{soc}P(\mathbf1)\cong
+E_{c_8}\!\downarrow_{\operatorname{PSL}_2(11)}.
+\]
+Thus the no-origin cocycle and the \(9\mid1\) quotient of the projective
+cover are not merely parallel descriptions; they define the same nonsplit
+homogeneous extension. The proof uses the affine transformation law,
+same-sheet first moment, and the canonical nine-space bridge, so it adds no
+new computational dependency.
 
 The first two PDF-only cold reads both returned `NO-GO`. The mathematical
 reader found the false scale-invariant ray claim and the missing standalone
@@ -401,7 +413,8 @@ mathematical claim or enlarging the release surface.
 | Are the quadratic marker polynomials enough to specify the arithmetic matching models? | settled | No; the manuscript now displays the additional \(B_3\) and \(H_3\) representatives and marks projective transport into the configurations as exact finite evidence. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
-| Is every theorem-like statement assigned one exact trust route? | settled | The twenty-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, altered proof-mode/evidence assignments, stale statements, and stale evidence hashes. |
+| Is every theorem-like statement assigned one exact trust route? | settled | The twenty-one-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, altered proof-mode/evidence assignments, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the eight semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
 | Can Paper II's verification surface ship independently of the full repository? | settled locally; public deposit remains | All seven finite evidence closures now live under stable paper-owned semantic paths, arithmetic gluing uses its stable Lean-owned closure, and the fingerprint pins the project-owned Lean import closure. An immutable public archive locator is still required. |
-| What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the \(H^1\) no-origin theorem and canonical nine-space bridge. Release still depends on the user-controlled immutable public archive locator. |
+| Does the no-origin cocycle determine the same homogeneous object as the projective-cover quotient? | settled | The explicit map \(\Theta(\sum a_M[M])=(\sum a_M\pi_8(x_M),\sum a_M)\) identifies \(P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) with the restricted cocycle extension; its radical map is the canonical nine-space bridge. |
+| What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the \(H^1\) no-origin theorem and the homogeneous projective-cover bridge. Release still depends on the user-controlled immutable public archive locator. |

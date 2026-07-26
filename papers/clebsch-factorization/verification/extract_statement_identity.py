@@ -31,6 +31,7 @@ EXPECTED_LABELS = (
     "cor:profile-ray-weights",
     "prop:modular-depth-quotient",
     "cor:h3-nine-space-bridge",
+    "cor:h3-homogeneous-projective-cover",
     "lem:split-inert-frames",
     "thm:rank-three-arithmetic-gluing",
     "lem:three-ray-cubic",

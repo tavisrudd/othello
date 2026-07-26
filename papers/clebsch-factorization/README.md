@@ -1,8 +1,8 @@
-# Conic-ideal quotients for rank-three secant configurations
+# Factorization memory in conic quotients
 
 This directory contains the manuscript
-*Conic-ideal quotients for the A3, B3, and H3 secant configurations:
-quadratic sheet recovery and cubic orientation in types B3 and H3*.
+*Factorization memory in conic quotients: the A3, B3, and H3 secant
+configurations*.
 
 The paper studies matching products modulo a conic ideal, their quotient
 ranks `3,6,10`, balanced-sheet recovery, cubic orientation, self-associated
@@ -13,7 +13,7 @@ modular depth, and arithmetic splitting.
 
 - `clebsch_factorization.tex`: manuscript source.
 - `clebsch_factorization.pdf`: rebuilt review PDF.
-- `verification/statement_identity.json`: exact identity of all twenty
+- `verification/statement_identity.json`: exact identity of all twenty-one
   theorem-like statements.
 - `verification/trust_manifest.json`: proof-mode and evidence mapping.
 - `verification/evidence_fingerprint.json`: normalized review-source and
