@@ -1385,8 +1385,17 @@
       "last": 648,
       "purpose": "develop abstract projective Heisenberg orbit chord calculus and test a collinearity-or-Heisenberg dichotomy",
       "sequence": 154
+    },
+    {
+      "count": 1,
+      "first": 649,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 649,
+      "purpose": "test full-Weyl rigidity for general stabilizer AME states",
+      "sequence": 155
     }
   ],
-  "next_id": 649,
+  "next_id": 650,
   "schema": "codex-task-id-allocations-v1"
 }
