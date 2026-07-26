@@ -249,12 +249,12 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
-      "bytes": 2221,
+      "bytes": 2230,
       "path": "FINAL-READER-SIGNOFF.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Independent final-reader signoff",
-      "sha256": "092db6bdd9d4d618f4ffef72eaaf696103ddc80801caa0607306fcb384c504b0"
+      "sha256": "f737cea8414be43654b6e15e6aea929a9912ec156091ba75701ffa581d752034"
     },
     {
       "bytes": 15020,
@@ -265,12 +265,12 @@
       "sha256": "e24670d4561e21441bc424eb9671c2b01ba969da47e80973cf5b853e9dac4160"
     },
     {
-      "bytes": 6132,
+      "bytes": 6225,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "9af63125475eb3d9117da616f9de545732b9df467ee301543630d32a13eb5ffa"
+      "sha256": "b4dde5e193865d87af52f303df588ae3dc28a6ff1f888d8b714d38dfc6376ea1"
     },
     {
       "bytes": 12059,

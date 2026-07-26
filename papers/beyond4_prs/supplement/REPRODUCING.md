@@ -93,7 +93,7 @@ described as an independent derivation.
 
 Run these from the paper directory.  Each subshell changes only to the
 paper-local directory containing the named certificate.  The top-level
-`--replay` option runs the six Python commands; the two Singular commands are
+`--replay` option runs the seven Python commands; the two Singular commands are
 separate checks in the same evidence bundle.
 
 ```text
@@ -101,6 +101,7 @@ separate checks in the same evidence bundle.
 (cd supplement/evidence/r6 && python3 2026-07-22-c498-prs-deep-hole-replay.py --json 2026-07-22-c498-prs-deep-hole-census.json)
 (cd supplement/evidence/r6-normal-forms && python3 2026-07-23-c498-small-exceptional-normal-forms.py --summary)
 (cd supplement/evidence/r7 && python3 2026-07-23-c509-prs-deep-hole-calibration-replay.py)
+(cd supplement/evidence/r7 && python3 2026-07-26-c656-r7-independent-arithmetic-replay.py)
 (cd supplement/evidence/stable-components && python3 2026-07-24-c597-r10-integral-bad-scheme-sc11.py --check)
 (cd supplement/evidence/stable-components && python3 2026-07-24-c595-stable-component-fano-elimination.py --check)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-c597-r10-integral-bad-scheme-sc11.sing)

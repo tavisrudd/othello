@@ -20,8 +20,8 @@ following headline rows in `claim-proof-novelty-ledger.md`:
 - R6 and R7, including the contained-component exhaustions, point-count
   conventions, deletion budgets, threshold endpoints, and the separate
   covering-radius boundary at redundancy seven; and
-- SC, including the exact coordinate identities and the manuscript-only
-  density, saturation, and component-exhaustion boundary.
+- the explicit exclusion of the proposed arbitrary-redundancy
+  stable-component theorem and higher-Lucas proposition from Version 1.
 
 Verdict: pending.
 
@@ -38,7 +38,7 @@ The reader must check:
   exhaustion identities, and independent replay claims;
 - the distinction between manuscript proof, cited input, certificate,
   kernel-checked algebra, and conditional Lean synthesis;
-- the one-command clean-checkout replay, the exact 17-file R5--R7 Lean
+- the one-command clean-checkout replay, the exact paper-facing R5--R7 Lean
   closure, and the public release manifest.
 
 Verdict: pending.
