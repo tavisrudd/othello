@@ -4,14 +4,14 @@
   "main_source_sha256": "d725c491fd424805e179604e78f9555d591af90ccf7328a5d5dd9d76a5dadb20",
   "section_sha256": {
     "sections/01-introduction.tex": "b5d85aa7ef2da7e1080dba44ada84c11dc4dba591c2fef2f9dd390c97993190c",
-    "sections/02-orientation-cover.tex": "2cc339d80f1250d4807cbc8cd3e4be979515ce34b81a425cf9387f2dfbda28fc",
+    "sections/02-orientation-cover.tex": "95f32e8048313aba88b58db4e0113a4c55375dff83d6e3756f2ee0c5521f408f",
     "sections/03-clebsch-cubic.tex": "da34d789eaaba2aa6e17867d055c050c527b898e87ac80a5728eb49817ce9748",
-    "sections/04-arithmetic-specialization.tex": "a79f638fb38526a6466c67c1ca4f013146153d45964a6d33de16bbb064d14c0e",
-    "sections/05-harmonic-realization.tex": "e2e496ca3963bd7379f37bef64980107bb3aca5b748d9d32486063d99d5e7de1",
+    "sections/04-arithmetic-specialization.tex": "0a8bfefb9bd8e4a4bea74f6f171a55dfa1c612e3c5457d8466defccd6bf3fdb3",
+    "sections/05-harmonic-realization.tex": "32d15416583f6a96d972d885d48fb1704ddd3601fdcbbbf098ec1cf43f339bb6",
     "sections/07-consequences.tex": "459b5759c20c10fad890dd1d4b9c29c47a36aec13bdd28ada3a3f9c8a2f5854f",
     "sections/08-verification.tex": "c4871671e70b76608ee574e2418067a31ff7dc3ab636bc42205a0ba782b457ed",
     "sections/09-conclusion.tex": "24f420a3ef9ae2a4e49276dbe4a951775789507d29b577f2706e35ba1095e634",
-    "sections/10-references.tex": "dcc273ff06d808bc5a455aba5c6658e4b63abea30e967abbfd0f69f9b003e174"
+    "sections/10-references.tex": "67897af3433e2e60837c2a71866a0c2103879b2f2fda2735931812ce5c96e7bc"
   },
   "statement_count": 9,
   "statements": [
@@ -38,7 +38,7 @@
       "environment": "theorem",
       "title": "Rational Hitchin--Clebsch cover",
       "source": "sections/02-orientation-cover.tex",
-      "source_line": 76,
+      "source_line": 80,
       "sha256": "9e3f36a70401e5078b2ccbce860aed91bbc4925a3476ba67d2cdd5a6aaeedfdc",
       "tex": "\\begin{theorem}[Rational Hitchin--Clebsch cover]\n\\label{thm:rational-cover}\n\\claimid{HC-1}.\nLet \\(H\\) be the rational seven-space of harmonic cubics, and let\n\\(\\mathcal I_{\\mathbf Q}\\) be the incidence variety of pairs\n\\(([f],U)\\), where \\(U\\) is a Mukai--Umemura isotropic three-plane and\n\\(f\\perp U\\).  The induced extension of\n\\(\\mathbf Q(\\mathbf P(H))\\) is\n\\[\n \\mathbf Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nOn the Clebsch four-space,\n\\[\n J_0=16\\sigma_3^2,\n\\]\nso over \\(D(\\sigma_3)\\) the cover is the constant golden torsor\n\\(\\operatorname{Spec}\\mathbf Q(\\sqrt5)\\).\n\\end{theorem}"
     },
@@ -83,7 +83,7 @@
       "environment": "corollary",
       "title": "Marked Hitchin--Mathieu torsor",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 194,
+      "source_line": 198,
       "sha256": "fa91e489c076e37720f946b55908c1337ceec47cea36e43724ccdb89313358bc",
       "tex": "\\begin{corollary}[Marked Hitchin--Mathieu torsor]\\label{cor:marked-mathieu}\nChoose the marking \\(I_4\\leftrightarrow H_{\\rm row}\\).  There is a unique\nequivariant bijection\n\\[\n \\{I_4,I_8\\}\\longrightarrow\\{H_{\\rm row},H_{\\rm col}\\}\n\\]\nthat extends this choice.  It sends \\(I_8\\) to \\(H_{\\rm col}\\), and\nintertwines the reduced Hitchin exchanger with Hadamard row--column\nduality.  Without the marking there are exactly two such equivariant\nbijections and neither parent is distinguished.\n\\end{corollary}"
     },
