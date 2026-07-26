@@ -521,10 +521,18 @@ primary certificate and independent replay check only the explicit
 projective substitutions and the two \(M_{11}\) carriers, their frozen
 \(\operatorname{PSL}_2(11)\) intersection, \(M_{12}\) join, and Hadamard
 parent exchange. The report and mystery ledger are in
-`notes/2026-07-26-c652-arithmetic-cover-certificate.md`. C653 owns the
-integral-model, bad-prime, and focused novelty gate. C579 then rebuilds
-Paper III around the arithmetic orientation theorem and creates its
-independent trust surface.
+`notes/2026-07-26-c652-arithmetic-cover-certificate.md`. C653 is complete:
+the rational incidence extension is the \(5J_0\)-twist, the abstract
+quadratic algebra is etale away from \(2,5\) and its branch, the classical
+invariant presentation is used over \(\mathbf Z[1/30]\), and the geometric
+incidence comparison retains an unspecified finite bad set. Hitchin
+already owns the degree-two incidence cover and Dye the square-\(5\)
+field criterion, so Paper III's novelty is the arithmetic normalization,
+the \(p=11\) specialization, and the cross-characteristic cubic line. The
+report and source-depth audit are in
+`notes/2026-07-26-c653-hitchin-integral-novelty-gate.md`. C579 then
+rebuilds Paper III around the arithmetic orientation theorem and creates
+its independent trust surface.
 
 The imported targets-4/5/7/8 report adds the conceptual interpretation of
 C651: after localizing at the square of a nonzero odd element, an involutive

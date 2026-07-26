@@ -35,10 +35,13 @@ python3 verification/evidence/arithmetic_cover.py --check
 python3 verification/evidence/arithmetic_cover_replay.py
 sha256sum -c verification/evidence/arithmetic_cover.sha256
 \end{verbatim}
-run from the paper directory.  The integral model and novelty claims
-require primary-source proofs rather than a certificate alone.  The Klein
-elevation, if positive, will have its own exact rational matrices and
-polarization-aware invariant.
+run from the paper directory.  The integral model and novelty claims are
+established by the source audit and the scheme-theoretic argument in
+Section~\ref{sec:cover}, not by a certificate.  That argument proves the
+rational \(5\)-twist and the abstract integral quadratic algebra, while
+retaining an unspecified finite bad set for comparison with the geometric
+incidence model.  The Klein elevation, if positive, will have its own exact
+rational matrices and polarization-aware invariant.
 
 The current verification runner checks manuscript structure and trust-ledger
 coverage only.  It intentionally refuses to report release readiness while

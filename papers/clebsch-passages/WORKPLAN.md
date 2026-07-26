@@ -55,7 +55,7 @@ core theorem + harmonic theorem + strong Klein theorem + exact trust surface
 | 2 | finite tensor bridge | Section 3 | C651 complete |
 | 3 | golden fibres and `A4` hinge | Section 4 | C652 |
 | 4 | exchanger, spinor class, and `T11` | Section 4 | C652 |
-| 5 | integral base and invariant-ring input | Sections 2 and 4 | C653 |
+| 5 | rational cover, abstract integral base, invariant-ring input, and finite-set incidence boundary | Sections 2 and 4 | C653 complete |
 | 6 | exact face-axis harmonic embedding and Gaunt cubic | Section 5 | C655 complete |
 | 7 | exact Klein commutants and polarization | Section 6 | C654 |
 | 8 | canonical discriminant-`5` invariant | Section 6 and main theorem | C654 |
@@ -85,7 +85,9 @@ The manuscript advances to cold review only when:
   reported exactly and the Klein section must not survive as speculation.
 - Failure to identify the reduced exchanger with `T11` blocks the core
   theorem.
-- Failure to justify a sharp bad-prime set forces the theorem to use the
-  proved spread-out finite-set formulation.
+- The abstract quadratic algebra has forced bad primes `2,5`; the
+  classical invariant presentation is used over `Z[1/30]`; the geometric
+  incidence comparison uses the proved spread-out finite-set formulation
+  because no source or available equation determines its minimal bad set.
 - A resemblance of fields is not a bridge: the final paper needs a canonical
   map or invariant.

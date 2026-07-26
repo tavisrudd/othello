@@ -180,11 +180,16 @@ Mukai--Umemura model and normalization comparison.
    parent exchange. The theorem explicitly asserts no canonical unmarked
    identification. The report and evidence boundary are
    `notes/2026-07-26-c652-arithmetic-cover-certificate.md`.
-3. **C653 — integral and novelty gate.** Audit rational forms of the
-   Mukai--Umemura incidence cover, Dye, binary-sextic invariant theory, and
-   finite-field reductions. Prove the largest justified integral base and
-   exact bad-prime boundary obtainable from available equations, or retain
-   the spread-out finite-set formulation.
+3. **C653 — integral and novelty gate (complete).** The rational incidence
+   extension is the \(5J_0\)-twist and restricts to the golden torsor.  The
+   abstract integral quadratic algebra is etale away from \(2,5\) and its
+   branch; the classical invariant presentation is justified over
+   \(\mathbf Z[1/30]\); and the geometric incidence comparison retains an
+   unspecified finite bad set because no consulted source or available
+   equation controls its minimal support.  Hitchin pre-empts the
+   degree-two-incidence crown and Dye pre-empts the square-\(5\) field
+   criterion.  The surviving novelty boundary and source-depth audit are
+   in `notes/2026-07-26-c653-hitchin-integral-novelty-gate.md`.
 4. **C654 — Klein multiplicity relative position.** Build the exact rational
    ten-dimensional Klein representation and its polarization, embed the two
    \(A_5\) parents, certify their \(M_2(\mathbf Q)\) commutants and
@@ -219,7 +224,7 @@ Klein multiplicity elevation. The
 adjacent `WORKPLAN.md` records the dependency graph, and
 `verification/trust_manifest.json` is the initial fourteen-claim trust ledger.
 The structural checker deliberately reports a non-release surface while
-C653--C654 remain open; C652 and C655 are closed.
+C654 remains open; C651--C653 and C655 are closed.
 
 The final target is the strongest coherent theorem complex: a positive
 C654 result is to be integrated as a second structural theorem, a positive
@@ -242,17 +247,21 @@ cut.
   \(\mathbf F_{11}\). The characteristic-zero Gaunt scalar has
   \(11\)-divisible denominator, so the common statement across
   characteristics is equality of the integral Clebsch line.
-- **Conceptually settled, citation-gated under C653:** localization at the
-  square of a nonzero odd element makes any involutive integral algebra a
-  rank-two invariant algebra, and the Clebsch chart's first odd generator is
-  the cubic \(e_3=\sigma_3\).
+- **Settled under C653:** over the nonmodular base
+  \(\mathbf Z[1/30]\), localization at the square of a nonzero odd element
+  makes the involutive Clebsch invariant algebra a rank-two algebra over
+  its even part, and its first odd generator is
+  \(e_3=\sigma_3\).
 - **Settled under C652:** the exact arithmetic specialization from the
   golden fibre to \(T_{11}\), the two Mathieu parents and their common
   \(\operatorname{PSL}_2(11)\), and the marked Hitchin--Mathieu torsor.
   There are exactly two unmarked equivariant bijections; no canonical
   unmarked identification is claimed.
-- **Open under C653:** the minimal bad-prime set and prior-art status of the
-  \(5\)-twist and finite-field incidence interpretation.
+- **Bounded under C653:** the abstract quadratic algebra has forced bad
+  primes \(2,5\), while the geometric incidence comparison is proved only
+  outside an unspecified finite set.  Its minimal bad-prime support
+  remains unknown and must not be sharpened in C579 without new integral
+  equations.
 - **Killed:** there is no \(PSL_2(11)\)- or \(A_5\)-stable elliptic
   subvariety carrying the orientation.
 - **Open under C654:** whether the intrinsic relative position of the two

@@ -42,16 +42,100 @@ generator is the cubic
  \sigma_3(y)=\frac13\sum_{i=1}^5 y_i^3,
  \qquad \sum_{i=1}^5y_i=0.
 \]
-The invariant-ring identification and its characteristic boundary are the
-classical inputs assigned to \claimid{HC-1}.
-
-\paragraph{Target cover.}
-On the open Clebsch chart where \(\sigma_3\ne0\), the ordered-icosahedron
-cover should pull back to
+Here is the precise characteristic boundary.  Put
 \[
- w^2=5J_0,\qquad J_0=16\sigma_3^2.
+ A_R=R[y_1,\ldots,y_5]/(e_1),\qquad
+ \Delta=\prod_{i<j}(y_i-y_j),
 \]
-Equivalently, \(w/(4\sigma_3)\) squares to \(5\).  This is the exact point
-at which the geometric cover becomes the golden constant torsor.  We do not
-promote this paragraph to a theorem until C652 and C653 close the
-normalization, integral-model, and citation gates.
+where \(R=\mathbf Z[1/30]\).  The alternating group permutes the
+coordinates, and an odd permutation \(\tau\) defines the twisted
+involution \(\kappa(y_i)=-y_{\tau(i)}\).  Nonmodular invariant theory gives
+\[
+ A_R^{A_5}
+ =R[e_2,e_3,e_4,e_5,\Delta]/
+   \bigl(\Delta^2-\operatorname{disc}(e_2,e_3,e_4,e_5)\bigr).
+\]
+Indeed, an \(A_5\)-invariant polynomial is the sum of a symmetric
+polynomial and \(\Delta\) times a symmetric polynomial; exactness of
+invariants after imposing \(e_1=0\) uses \(60\in R^\times\).  Moreover
+\[
+ \kappa(e_i)=(-1)^i e_i,\qquad \kappa(\Delta)=-\Delta.
+\]
+Thus \(e_3=\sigma_3\) is the first nonconstant odd invariant.  On
+\(D(e_3)\), Lemma~\ref{lem:localized-odd} identifies the full invariant
+algebra with its even part plus \(e_3\) times its even part.  This statement
+does not assert the same presentation in characteristics \(2,3,5\);
+modular invariants can appear there.  Hitchin's binary-sextic realization
+has the same nonmodular boundary: the classical generators and the sextic
+\(J_6\) used below are available uniformly in characteristic greater than
+\(5\) \cite{HitchinBundles,BinaryForms}.  Dye's earlier finite-geometry
+theorem already gives the complementary field-level criterion: Clebsch
+hexagons exist precisely when the characteristic is not \(2\) and \(5\)
+is a square \cite[Theorem~1]{DyeClebsch}.
+
+\begin{theorem}[Rational Hitchin--Clebsch cover]
+\label{thm:rational-cover}
+\claimid{HC-1}.
+Let \(H\) be the rational seven-space of harmonic cubics, and let
+\(\mathcal I_{\mathbf Q}\) be the incidence variety of pairs
+\(([f],U)\), where \(U\) is a Mukai--Umemura isotropic three-plane and
+\(f\perp U\).  The induced extension of
+\(\mathbf Q(\mathbf P(H))\) is
+\[
+ \mathbf Q(\mathbf P(H))\bigl(\sqrt{5J_0}\bigr).
+\]
+On the Clebsch four-space,
+\[
+ J_0=16\sigma_3^2,
+\]
+so over \(D(\sigma_3)\) the cover is the constant golden torsor
+\(\operatorname{Spec}\mathbf Q(\sqrt5)\).
+\end{theorem}
+
+\begin{proof}
+Hitchin realizes the Mukai--Umemura threefold as the zero locus of the
+three skew forms on \(\operatorname{Gr}(3,H)\).  The top Chern number of
+the dual universal bundle is \(2\), so a general \(f\) is orthogonal to
+two isotropic three-planes \cite[\S\S4--5]{HitchinBundles}.  The incidence
+variety is integral, hence its generic function field is a quadratic
+extension.  Hitchin identifies its branch hypersurface with the irreducible
+sextic \(J_0=0\), and computes
+\(J_0|_{\mathbf P(V)}=16\sigma_3^2\)
+\cite[\S\S9--10]{HitchinIcosahedron}.  Since
+\(\operatorname{Pic}(\mathbf P(H))=\mathbf Z\) has no two-torsion, the
+extension therefore has the form
+\(\mathbf Q(\mathbf P(H))(\sqrt{cJ_0})\) for one rational square class
+\(c\).
+
+For \(f=xyz\), Hitchin exhibits the two icosahedra with golden coordinates
+\(t^2-t-1=0\).  The value \(J_0(f)\) is a nonzero rational square by the
+displayed Clebsch restriction.  Hence this fibre determines \(c=5\).
+Dividing by \(4\sigma_3\) gives the final assertion.
+\end{proof}
+
+\paragraph{Integral boundary.}
+Choose a full lattice \(\Lambda\subset H\) and an integer \(a\ne0\) such
+that \(J_{\mathbf Z}=a^2J_0\) has integral coefficients.  The algebra
+\[
+ \mathcal O_{\mathbf P(\Lambda)}
+ \oplus\mathcal O_{\mathbf P(\Lambda)}(-3),
+ \qquad z^2=5J_{\mathbf Z},
+\]
+is finite locally free of degree two over \(\mathbf Z\) and has the
+function field of Theorem~\ref{thm:rational-cover}.  On
+\(D(10J_{\mathbf Z})\) it is finite etale.  The primes \(2\) and \(5\)
+are forced bad primes for an ordinary two-sheet interpretation: in
+characteristic \(2\) the equation is inseparable, while in characteristic
+\(5\) it is generically \(z^2=0\).
+
+This abstract integral algebra is not yet an integral incidence theorem.
+The constructions in the cited Mukai--Umemura and Hitchin sources are over
+\(\mathbf C\), and the available binary-sextic formulae justify their
+classical invariant presentation only after inverting \(30\).  Spreading
+out the rational incidence isomorphism gives some
+\(\mathbf Z[1/N]\), with \(2,3,5\mid N\) after enlarging \(N\), but neither
+the sources nor the present equations determine the other prime divisors
+or prove that there are none.  Consequently every finite-field
+icosahedral-incidence interpretation in this paper remains restricted to
+an unspecified cofinite set of primes.  The formula for the abstract
+quadratic algebra itself has no such extra exception.

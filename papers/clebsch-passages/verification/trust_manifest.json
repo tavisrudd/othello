@@ -12,11 +12,14 @@
     },
     {
       "id": "HC-1",
-      "statement": "The ordered-icosahedron cover has equation w^2=5J0 and J0 restricts to 16 sigma3^2 on the Clebsch chart.",
-      "status": "gated",
+      "statement": "Over Q, the ordered-icosahedron incidence extension has equation w^2=5J0 and J0 restricts to 16 sigma3^2 on the Clebsch chart.",
+      "status": "proven",
       "modes": ["conceptual", "classical-input"],
       "owner": "C653",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/sections/02-orientation-cover.tex",
+        "notes/2026-07-26-c653-hitchin-integral-novelty-gate.md"
+      ]
     },
     {
       "id": "HC-2",
@@ -161,6 +164,7 @@
     "The rational Gaunt scalar has denominator divisible by 11, so HC-3 identifies an integral cubic line rather than a reduced rational normalization.",
     "The harmonic identity has a task-owned exact certificate, independent replay, and primary-source normalization audit.",
     "No empirical performance or commercial-utility claim is made for the proposed four-channel descriptor.",
-    "No sharp good-prime set, marked Hitchin--Mathieu identification, or novelty claim is currently certified."
+    "The abstract quadratic algebra is finite etale over D(10J), but comparison with the geometric incidence model is proved only over Z[1/N] for an unspecified N; no claim that every p other than 2 and 5 is incidence-good is made.",
+    "The rational 5-twist is an arithmetic normalization of Hitchin's known degree-two incidence cover, not a new construction of that cover; Dye already proves the square-5 field criterion for Clebsch hexagons."
   ]
 }
