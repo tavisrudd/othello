@@ -19,7 +19,7 @@ The labels are strict:
   longer live.
 
 The cross-project
-[`2026-07-25 results summary snapshot`](2026-07-25-results-summary-snapshot.md)
+[`2026-07-26 results summary snapshot`](2026-07-26-results-summary-snapshot.md)
 is an input bank, not C80 status authority.
 
 ## What works

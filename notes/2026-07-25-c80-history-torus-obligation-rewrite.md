@@ -104,7 +104,7 @@ for all eight tested stabilizer elements.
 ## Review of the later-results snapshot
 
 The read-only snapshot
-`notes/2026-07-25-results-summary-snapshot.md` contributes two useful
+`notes/2026-07-26-results-summary-snapshot.md` contributes two useful
 structures and several guardrails.
 
 ### Full continuation complex: exact language for the isolate locus
