@@ -1,5 +1,6 @@
 import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.Algebra.CharP.Reduced
 import Mathlib.Algebra.Polynomial.Div
@@ -484,6 +485,108 @@ theorem prod_dvd_sub_of_proportional_homogenizedNodeFactors_of_isHomogeneous_eva
       node hnode target current degree htarget hcurrent hcard hagree
 
 end DistinctPolynomialRoots
+
+section BinaryLinearRelativePrimality
+
+variable {K σ : Type*} [Field K]
+
+/-- A nonzero multivariable polynomial of total degree one over a field is irreducible. -/
+theorem mvPolynomial_irreducible_of_totalDegree_eq_one
+    (F : MvPolynomial σ K) (hdegree : F.totalDegree = 1) :
+    Irreducible F := by
+  have hF : F ≠ 0 := by
+    intro hzero
+    simp [hzero] at hdegree
+  have isUnit_of_ne_zero_totalDegree_eq_zero :
+      ∀ {G : MvPolynomial σ K}, G ≠ 0 → G.totalDegree = 0 → IsUnit G := by
+    intro G hG hGdegree
+    rw [MvPolynomial.isUnit_iff_totalDegree_of_isReduced]
+    refine ⟨?_, hGdegree⟩
+    rw [isUnit_iff_ne_zero]
+    intro hconstant
+    apply hG
+    rw [MvPolynomial.totalDegree_eq_zero_iff_eq_C] at hGdegree
+    rw [hGdegree, hconstant]
+    simp
+  refine ⟨?_, ?_⟩
+  · intro hunit
+    have hzero :=
+      (MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mp hunit).2
+    omega
+  · intro A B hfactor
+    have hA : A ≠ 0 := by
+      intro hzero
+      apply hF
+      simpa [hzero] using hfactor
+    have hB : B ≠ 0 := by
+      intro hzero
+      apply hF
+      simpa [hzero] using hfactor
+    have hsum : A.totalDegree + B.totalDegree = 1 := by
+      rw [← MvPolynomial.totalDegree_mul_of_isDomain hA hB, ← hfactor,
+        hdegree]
+    rcases Nat.eq_zero_or_pos A.totalDegree with hAdegree | hAdegree
+    · exact Or.inl (isUnit_of_ne_zero_totalDegree_eq_zero hA hAdegree)
+    · have hBdegree : B.totalDegree = 0 := by omega
+      exact Or.inr (isUnit_of_ne_zero_totalDegree_eq_zero hB hBdegree)
+
+/-- Two homogeneous binary linear forms whose coefficient determinant is nonzero have no common
+nonunit divisor. -/
+theorem homogeneousLinearPolynomial_isRelPrime_of_binaryCoefficientDeterminant_ne_zero
+    {a b : Fin 2 → K}
+    (hdet : binaryLinearCoefficientDeterminant a b ≠ 0) :
+    IsRelPrime (homogeneousLinearPolynomial a) (homogeneousLinearPolynomial b) := by
+  have ha : a ≠ 0 := by
+    intro hzero
+    subst a
+    simp [binaryLinearCoefficientDeterminant] at hdet
+  have hb : b ≠ 0 := by
+    intro hzero
+    subst b
+    simp [binaryLinearCoefficientDeterminant] at hdet
+  apply
+    (mvPolynomial_irreducible_of_totalDegree_eq_one
+      (homogeneousLinearPolynomial a)
+      (homogeneousLinearPolynomial_totalDegree_eq_one ha)).isRelPrime_iff_not_dvd.mpr
+  intro hdiv
+  obtain ⟨Q, hfactor⟩ := hdiv
+  have hlinearA :
+      homogeneousLinearPolynomial a ≠ 0 :=
+    homogeneousLinearPolynomial_ne_zero_of_binaryCoefficients_ne_zero ha
+  have hlinearB :
+      homogeneousLinearPolynomial b ≠ 0 :=
+    homogeneousLinearPolynomial_ne_zero_of_binaryCoefficients_ne_zero hb
+  have hQ : Q ≠ 0 := by
+    intro hzero
+    apply hlinearB
+    simpa [hzero] using hfactor
+  have hQdegree : Q.totalDegree = 0 := by
+    have hdegree :
+        (homogeneousLinearPolynomial b).totalDegree =
+          (homogeneousLinearPolynomial a).totalDegree + Q.totalDegree := by
+      rw [hfactor, MvPolynomial.totalDegree_mul_of_isDomain hlinearA hQ]
+    rw [homogeneousLinearPolynomial_totalDegree_eq_one ha,
+      homogeneousLinearPolynomial_totalDegree_eq_one hb] at hdegree
+    omega
+  rw [MvPolynomial.totalDegree_eq_zero_iff_eq_C] at hQdegree
+  let c := Q.coeff 0
+  have hproportional :
+      homogeneousLinearPolynomial b =
+        MvPolynomial.C c * homogeneousLinearPolynomial a := by
+    rw [hfactor, hQdegree, mul_comm]
+  have hcoefficient : b = fun i => c * a i := by
+    funext i
+    fin_cases i
+    · have heval := congrArg (MvPolynomial.eval ![1, 0]) hproportional
+      simpa [homogeneousLinearPolynomial] using heval
+    · have heval := congrArg (MvPolynomial.eval ![0, 1]) hproportional
+      simpa [homogeneousLinearPolynomial] using heval
+  apply hdet
+  rw [hcoefficient]
+  simp [binaryLinearCoefficientDeterminant]
+  ring
+
+end BinaryLinearRelativePrimality
 
 section CoordinateHyperplaneRestriction
 

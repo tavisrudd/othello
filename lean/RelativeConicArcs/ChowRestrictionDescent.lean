@@ -237,6 +237,110 @@ variable {K : Type*} [Field K]
 def binaryLinearCoefficientDeterminant (a b : Fin 2 → K) : K :=
   a 0 * b 1 - a 1 * b 0
 
+/-- A nonzero binary coefficient vector defines a nonzero homogeneous linear polynomial. -/
+theorem homogeneousLinearPolynomial_ne_zero_of_binaryCoefficients_ne_zero
+    {a : Fin 2 → K} (ha : a ≠ 0) :
+    homogeneousLinearPolynomial a ≠ 0 := by
+  intro hzero
+  apply ha
+  funext i
+  fin_cases i
+  · have heval := congrArg (MvPolynomial.eval ![1, 0]) hzero
+    simpa [homogeneousLinearPolynomial] using heval
+  · have heval := congrArg (MvPolynomial.eval ![0, 1]) hzero
+    simpa [homogeneousLinearPolynomial] using heval
+
+/-- A homogeneous binary linear polynomial is homogeneous of total degree one when its
+coefficient vector is nonzero. -/
+theorem homogeneousLinearPolynomial_totalDegree_eq_one
+    {a : Fin 2 → K} (ha : a ≠ 0) :
+    (homogeneousLinearPolynomial a).totalDegree = 1 := by
+  apply MvPolynomial.IsHomogeneous.totalDegree
+  · apply MvPolynomial.IsHomogeneous.sum
+    intro i _
+    exact MvPolynomial.isHomogeneous_C_mul_X (a i) i
+  · exact homogeneousLinearPolynomial_ne_zero_of_binaryCoefficients_ne_zero ha
+
+/-- The determinant of two plane covectors after restriction to a parametrized line is the
+three-term Cauchy--Binet pairing of their two-coordinate minors with the line minors. -/
+theorem binaryLinearCoefficientDeterminant_planeLineRestrictedCoefficients
+    (lineCoordinates : Fin 3 → Fin 2 → K) (a b : Fin 3 → K) :
+    binaryLinearCoefficientDeterminant
+        (planeLineRestrictedCoefficients lineCoordinates a)
+        (planeLineRestrictedCoefficients lineCoordinates b) =
+      (a 0 * b 1 - a 1 * b 0) *
+          (lineCoordinates 0 0 * lineCoordinates 1 1 -
+            lineCoordinates 0 1 * lineCoordinates 1 0) +
+        (a 0 * b 2 - a 2 * b 0) *
+          (lineCoordinates 0 0 * lineCoordinates 2 1 -
+            lineCoordinates 0 1 * lineCoordinates 2 0) +
+        (a 1 * b 2 - a 2 * b 1) *
+          (lineCoordinates 1 0 * lineCoordinates 2 1 -
+            lineCoordinates 1 1 * lineCoordinates 2 0) := by
+  simp [binaryLinearCoefficientDeterminant, planeLineRestrictedCoefficients,
+    Fin.sum_univ_succ]
+  ring
+
+/-- The canonical binary representative `[a₁ : -a₀]` is a zero of the homogeneous linear form
+with coefficient vector `a`. -/
+theorem eval_homogeneousLinearPolynomial_canonicalProjectiveZero
+    (a : Fin 2 → K) :
+    MvPolynomial.eval ![a 1, -a 0] (homogeneousLinearPolynomial a) = 0 := by
+  simp [homogeneousLinearPolynomial]
+  ring
+
+/-- The canonical zero of a restricted plane covector maps to a plane representative incident
+with that covector. -/
+theorem eval_planeCovector_pointOnParametrizedLine_canonicalRestrictedZero
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) :
+    MvPolynomial.eval
+        (pointOnParametrizedPlaneLine lineCoordinates
+          ![planeLineRestrictedCoefficients lineCoordinates covector 1,
+            -planeLineRestrictedCoefficients lineCoordinates covector 0])
+        (homogeneousLinearPolynomial covector) = 0 := by
+  rw [← eval_planeLineRestriction]
+  rw [planeLineRestriction_homogeneousLinearPolynomial]
+  exact
+    eval_homogeneousLinearPolynomial_canonicalProjectiveZero
+      (planeLineRestrictedCoefficients lineCoordinates covector)
+
+/-- Restrictions along two parametrized lines have equal values at binary representatives of the
+same plane vector. -/
+theorem eval_planeLineRestrictions_eq_of_pointOnParametrizedLine_eq
+    (firstLine secondLine : Fin 3 → Fin 2 → K)
+    (firstPoint secondPoint : Fin 2 → K)
+    (F : MvPolynomial (Fin 3) K)
+    (hpoint :
+      pointOnParametrizedPlaneLine firstLine firstPoint =
+        pointOnParametrizedPlaneLine secondLine secondPoint) :
+    MvPolynomial.eval firstPoint (planeLineRestriction firstLine F) =
+      MvPolynomial.eval secondPoint (planeLineRestriction secondLine F) := by
+  rw [eval_planeLineRestriction, eval_planeLineRestriction, hpoint]
+
+/-- In exponent characteristic two, square roots of two restrictions have equal values at binary
+representatives of one exact shared plane vector. -/
+theorem eval_eq_of_planeLineRestriction_sq_eq_at_shared_plane_representative
+    [ExpChar K 2]
+    (firstLine secondLine : Fin 3 → Fin 2 → K)
+    (firstPoint secondPoint : Fin 2 → K)
+    (F : MvPolynomial (Fin 3) K)
+    (firstRoot secondRoot : MvPolynomial (Fin 2) K)
+    (hfirst : planeLineRestriction firstLine F = firstRoot ^ 2)
+    (hsecond : planeLineRestriction secondLine F = secondRoot ^ 2)
+    (hpoint :
+      pointOnParametrizedPlaneLine firstLine firstPoint =
+        pointOnParametrizedPlaneLine secondLine secondPoint) :
+    MvPolynomial.eval firstPoint firstRoot =
+      MvPolynomial.eval secondPoint secondRoot := by
+  apply frobenius_inj K 2
+  change
+    MvPolynomial.eval firstPoint firstRoot ^ 2 =
+      MvPolynomial.eval secondPoint secondRoot ^ 2
+  rw [← map_pow, ← hfirst, ← map_pow, ← hsecond]
+  exact
+    eval_planeLineRestrictions_eq_of_pointOnParametrizedLine_eq
+      firstLine secondLine firstPoint secondPoint F hpoint
+
 /-- Two nonzero homogeneous binary linear forms with zero coefficient determinant are related by
 a nonzero scalar at the level of coefficient vectors. -/
 theorem exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero
