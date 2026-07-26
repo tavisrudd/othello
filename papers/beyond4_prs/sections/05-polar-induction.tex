@@ -459,6 +459,42 @@ verify these reduced component statements scheme-theoretically, rather
 than only on geometric points.
 \end{proof}
 
+Table~\ref{tab:bottom-ledger-disposition} records the disposition used
+in the all-level proof.  The last two rows are transverse packages and
+are not components of \(\mathcal B_5^{\mathrm{red}}\).
+\begin{table}[H]
+\centering
+\small
+\caption{Bottom carriers and their all-level disposition.}
+\label{tab:bottom-ledger-disposition}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.22\textwidth}p{0.28\textwidth}p{0.40\textwidth}}
+\toprule
+Bottom locus & Exact test & Disposition after coherent lifting\\
+\midrule
+Rank at most two & \(D=0\); Hankel minors &
+Persistent rank-two locus by Proposition~\ref{prop:contained-rank-two}\\
+Tame cyclic carrier & \(V_1=\cdots=V_7=0\), \(D\ne0\) &
+Persistent locus or rank one by
+\eqref{eq:stable-fano-certificate}\\
+Binary cyclic plane & \(c_0=c_4=0\) &
+Lucas modular kernel; empty after redundancy seven for this descendant\\
+Binary Hessian rulings & the two displayed quadratic rulings &
+Persistent Veronese ruling or rank one by consecutive overlap\\
+Ternary wild cone & \(\operatorname{Join}(e_2,C_4)\) &
+Rank one by the ruling calculation\\
+Whole-line collision & zero differential &
+The two R5/R6 persistent or modular components of
+Lemma~\ref{lem:identically-colliding}\\
+\midrule
+Exact linear gcd & common factor \(L\) &
+Factor-preserving flag and R5 quadratic graph; not a terminal carrier\\
+Ordinary collision & nonzero Wronskian divisor &
+Finite parameter deletion; not a terminal carrier\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 The indices follow two conventions.  The assertion
 \(\mathrm{CC}(n,1;\mathcal C_n)\) is indexed by the divided-power
 degree \(n\), so \(f\in S_n\) has redundancy \(n+1\);
@@ -549,6 +585,7 @@ bottom bad union.  Since that projective row space is irreducible, it
 lies in one irreducible component of the union.  We now construct and
 check that component ledger.
 
+\paragraph{Integral bottom carrier.}
 Let \(\mathbf G=\operatorname{Gr}(2,\Gamma^3E)\) over
 \(\operatorname{Spec}\mathbf Z\), and write
 \[
@@ -667,6 +704,7 @@ The inversion of \(2\) in the second statement is necessary: in
 characteristic two, \(V\) retains a \(D\)-supported component, so
 \((V:D^\infty)\ne V\).
 
+\paragraph{Coherent lifts and exceptional fibers.}
 For a homogeneous carrier ideal \(I\), define its
 \emph{coherent-Fano ideal} by substituting the universal consecutive
 polar line into every generator of \(I\), expanding in the two line
@@ -737,6 +775,7 @@ respectively, ordinary collision and exact-linear-gcd strata.  They are
 outside the terminal carrier and are handled by the deletion divisor
 and quadratic-graph package.
 
+\paragraph{Componentwise rowspace conclusion.}
 It remains to apply the rowspace reduction
 \eqref{eq:stable-rowspace}.  If the row space lies in the rank-two
 Hankel component, induct on \(m\): every first contraction has its
