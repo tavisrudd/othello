@@ -8,13 +8,17 @@ PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a compl
 Lean formalization under [`lean/RelativeConicArcs/`](../../lean/RelativeConicArcs/). Related to the
 projective-cap program but **separate**: it draws only on classical index equations, not on the
 game machinery. The former last finite gap is closed by a kernel-checked projective
-classification: **rho_C(16) = 9**.
+augmentation covering list and exact quadratic-rejection certificates:
+**rho_C(16) = 9**.
 
 **Object.** For a nonsingular conic 𝒞 ⊂ PG(2,q), study arcs A disjoint from 𝒞 whose secants
 cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributions:
 - an exact **prescribed-hole defect identity** (splits the classical first/second secant-index
   equations over an exceptional set, with an exact — not estimated — remainder);
-- coverage / uncovered-locus bounds, an equality criterion, and a quantitative stability bound;
+- coverage / uncovered-locus bounds, an equality criterion, and quantitative bad-edge and
+  secant-deletion stability bounds;
+- a canonical Kneser-edge decomposition by secant concurrence, with zero-defect
+  maximum-matching rigidity and exact total and per-secant centre counts;
 - an exact complete-affine-arc specialization: deleting a line is the line-hole case, with
   `I_L(A)=choose(|A|,2)`, a corrected capacity bound, and the full equality pattern;
 - the explicit lower bound **ρ_𝒞(q) ≥ √(2q) + 3/2 − 8/√(2q)**;
@@ -29,9 +33,10 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
 - the stronger q=16 classification theorem: no nonzero quadratic zero set, singular or
   nonsingular, contains an eight-arc's ordinary-uncovered locus while avoiding the arc.
 
-The Lean package proves the elementary theorem chain, the conic/projective transport statements,
-and a semantic bridge from a generic rules-only coordinate checker to relative completeness. Its
-finite checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
+The Lean package proves the elementary theorem chain, exact uncovered-locus reconstruction,
+matching rigidity and secant-deletion stability, the conic/projective transport statements, and a
+semantic bridge from a generic rules-only coordinate checker to relative completeness. Its finite
+checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
 [`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md).
 
 **Exact q=5 value (C188).** Clebsch C187's hardened checker verifies that the ordinary-uncovered

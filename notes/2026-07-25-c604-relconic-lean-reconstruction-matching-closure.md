@@ -3,9 +3,9 @@
 **Lane:** `relconic`
 
 **Status:** COMPLETE — exact reconstruction, equivariant stabilizer recovery,
-zero-defect matching rigidity, exact counts, and bad-edge stability are
-imported by the Relconic gate; the trust and manuscript records agree with the
-checked boundary.
+zero-defect matching rigidity, exact counts, bad-edge stability, and
+secant-deletion stability are imported by the Relconic gate; the trust and
+manuscript records agree with the checked boundary.
 
 ## Goal
 
@@ -15,7 +15,8 @@ Close the paper-facing Lean gap for:
    the strict incidence threshold, including the canonical secant/vertex
    reconstruction and semilinear-stabilizer equality; and
 2. the zero-defect concurrence decomposition, maximum-matching design, exact
-   centre counts, and bad-edge stability theorem.
+   centre counts, bad-edge stability theorem, and secant-deletion cleanup
+   theorem.
 
 Finish by importing the public declarations through
 `RelativeConicArcs.Gates.Relconic`, auditing their axioms, and synchronizing
@@ -142,7 +143,12 @@ proof structure:
   per-secant counts for `k >= 4`, with their multiplicative double-count
   identities retained as denominator-free terminals; and
 - `two_mul_badConcurrenceEdgeCount_le` proves the paper's bad-edge stability
-  inequality in the integer-normalized defect convention.
+  inequality in the integer-normalized defect convention; and
+- `exists_secantDeletionSet_at_centers` constructs the cleanup centrewise,
+  while `exists_secantDeletionSet` states the paper-facing consequence:
+  deleting at most `scaledDefect = floor(k/2)·Δ` secants leaves every pair of
+  disjoint surviving secants with a unique concurrence point of maximum
+  index.
 
 The quantitative two-parent inverse from the later reconstruction section is
 not imported into this boundary; it remains logically separate, as the paper
@@ -156,10 +162,10 @@ itself separates its Bonferroni and lost-degree proof from the exact inverse.
 - The guarded build queue compiled both modules and
   `RelativeConicArcs.Gates.Relconic`; the final exact-target trace-only
   aggregate gate passed.
-- The gate prints axioms for thirteen paper-facing terminals.  Every one
+- The gate prints axioms for fourteen paper-facing terminals.  Every one
   reports exactly `[propext, Classical.choice, Quot.sound]`; none reports
   `sorry`, `admit`, a custom axiom, or `native_decide`.
-- `make -C papers arcs` passes.  The tracked 20-page PDF has no undefined
+- `make -C papers arcs` passes.  The tracked 22-page PDF has no undefined
   references, undefined citations, or overfull boxes.
 - Referee-facing review found no task identifiers, workflow references,
   status prose, or unresolved placeholders in either new module or the

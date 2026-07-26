@@ -18,14 +18,18 @@
      per-secant counts follow from the second index equation and the degree of \(KG(k,2)\);
    - the bad-edge estimate is the pointwise bound
      \(\binom r2\le (m-1)(r-1)(m-r)/2\), with the larger hole weight handled separately.
+   - secant-deletion stability retains one secant through each nonmaximum concurrence centre
+     and deletes the rest; the local cost \(r-1\) is bounded by the corresponding required-point
+     or hole defect weight, so the union has size at most \(m\Delta_H(A)\).
    The incidence decomposition, simplicity, zero-defect maximum index, both exact double-count
-   identities, and the bad-edge inequality are kernel-checked respectively by
+   identities, the bad-edge inequality, and the deletion statement are kernel-checked
+   respectively by
    `disjoint_arcPairs_existsUnique_concurrence`, `concurrence_matching_injective`,
    `concurrenceCenter_pointIndex_eq_half`, `concurrenceCenters_card_mul_choose_half`,
    `concurrenceCentersOnPair_card_mul_sub_one`, with the displayed quotients exposed by
    `concurrenceCenters_card_eq_quotient` and
    `concurrenceCentersOnPair_card_eq_quotient`, and
-   `two_mul_badConcurrenceEdgeCount_le` in
+   `two_mul_badConcurrenceEdgeCount_le` and `exists_secantDeletionSet` in
    `RelativeConicArcs.MatchingDesignRigidity`.
    The six-point realization is proved by a projective frame normalization: the first diagonal
    determinant is `-2`, and the second quadrangle has diagonal line
@@ -249,7 +253,8 @@ line-hole equivalence, ideal-line incidence identity, corrected affine bound and
 projective-averaging transfer, the explicit additive lower bound, and the universal
 even-characteristic incidence loss. It also proves exact uncovered-locus reconstruction and its
 equivariant stabilizer corollary, concurrence decomposition, zero-defect maximum-matching
-rigidity, exact total and per-secant centre counts, and bad-edge stability. Its generic Boolean checker verifies conic disjointness, the arc
+rigidity, exact total and per-secant centre counts, bad-edge stability, and secant-deletion
+stability. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.

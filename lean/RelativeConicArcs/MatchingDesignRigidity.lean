@@ -10,8 +10,10 @@ on the vertex pairs.
 
 When the prescribed-hole defect vanishes, every concurrence matching has the maximum size
 `floor (k / 2)`.  The second secant-index equation then gives the exact number of concurrence
-centres.  These statements use only finite projective-plane incidence and the formal defect
-identity; they do not use coordinates, a conic, or a classification of abstract matching designs.
+centres.  For arbitrary defect, deleting at most the integer-normalized defect many secants
+removes every edge belonging to a nonmaximum concurrence matching.  These statements use only
+finite projective-plane incidence and the formal defect identity; they do not use coordinates, a
+conic, or a classification of abstract matching designs.
 -/
 
 namespace RelativeConicArcs
@@ -336,6 +338,262 @@ theorem two_mul_badConcurrenceEdgeCount_le
     have hscaledZero : scaledDefect (L := L) A H = 0 := by
       simp [scaledDefect, holeIncidence, hhalf, hchooseTwo, hchooseFour, hindexZero]
     simp [badConcurrenceEdgeCount, hreqEmpty, hholeEmpty, hscaledZero]
+
+private noncomputable def allButOne {α : Type*} [DecidableEq α]
+    (s : Finset α) : Finset α :=
+  if h : s.Nonempty then s.erase h.choose else ∅
+
+private theorem allButOne_subset {α : Type*} [DecidableEq α] (s : Finset α) :
+    allButOne s ⊆ s := by
+  classical
+  by_cases h : s.Nonempty
+  · simp only [allButOne, dif_pos h]
+    exact Finset.erase_subset _ _
+  · simp [allButOne, h]
+
+private theorem card_allButOne {α : Type*} [DecidableEq α] {s : Finset α}
+    (h : s.Nonempty) :
+    (allButOne s).card = s.card - 1 := by
+  classical
+  simp [allButOne, h, Finset.card_erase_of_mem h.choose_spec]
+
+private theorem eq_of_mem_of_not_mem_allButOne
+    {α : Type*} [DecidableEq α] {s : Finset α} {e f : α}
+    (he : e ∈ s) (he' : e ∉ allButOne s)
+    (hf : f ∈ s) (hf' : f ∉ allButOne s) :
+    e = f := by
+  classical
+  have h : s.Nonempty := ⟨e, he⟩
+  have heq : e = h.choose := by
+    simpa [allButOne, h, he] using he'
+  have hfq : f = h.choose := by
+    simpa [allButOne, h, hf] using hf'
+  exact heq.trans hfq.symm
+
+/-- Centrewise form of secant-deletion stability.  There is a set of at most
+`scaledDefect A H` secants such that no two distinct surviving secants concur at a centre of index
+below `floor (|A| / 2)`. -/
+theorem exists_secantDeletionSet_at_centers
+    {A H : Finset P} (hA : Arc (L := L) A) (hdisj : Disjoint A H) :
+    ∃ D : Finset (ArcPair A),
+      (D.card : ℤ) ≤ scaledDefect (L := L) A H ∧
+        ∀ x : P, x ∈ concurrenceCenters (L := L) A →
+          ∀ e ∈ pairsThrough (L := L) A x, e ∉ D →
+            ∀ f ∈ pairsThrough (L := L) A x, f ∉ D → e ≠ f →
+              pointIndex (L := L) A x = A.card / 2 := by
+  classical
+  let deletionAt : P → Finset (ArcPair A) := fun x =>
+    allButOne (pairsThrough (L := L) A x)
+  let Dreq : Finset (ArcPair A) :=
+    (intermediateRequired (L := L) A H).biUnion deletionAt
+  let Dhole : Finset (ArcPair A) :=
+    (intermediateHoles (L := L) A H).biUnion deletionAt
+  let D := Dreq ∪ Dhole
+  refine ⟨D, ?_, ?_⟩
+  · let m := A.card / 2
+    let reqWeight : P → ℤ := fun x =>
+      ((pointIndex (L := L) A x : ℤ) - 1) *
+        ((m : ℤ) - pointIndex (L := L) A x)
+    let holeWeight : P → ℤ := fun y =>
+      (pointIndex (L := L) A y : ℤ) *
+        ((m : ℤ) - pointIndex (L := L) A y)
+    have hreqCard :
+        (Dreq.card : ℤ) ≤
+          ∑ x ∈ intermediateRequired (L := L) A H,
+            ((pointIndex (L := L) A x - 1 : ℕ) : ℤ) := by
+      have hcard :
+          Dreq.card ≤
+            ∑ x ∈ intermediateRequired (L := L) A H, (deletionAt x).card := by
+        dsimp [Dreq]
+        exact Finset.card_biUnion_le
+      calc
+        (Dreq.card : ℤ) ≤
+            (↑(∑ x ∈ intermediateRequired (L := L) A H,
+              (deletionAt x).card) : ℤ) := by exact_mod_cast hcard
+        _ = ∑ x ∈ intermediateRequired (L := L) A H,
+              ((pointIndex (L := L) A x - 1 : ℕ) : ℤ) := by
+          push_cast
+          apply Finset.sum_congr rfl
+          intro x hx
+          have hx' := Finset.mem_filter.mp hx
+          have hnonempty :
+              (pairsThrough (L := L) A x).Nonempty := by
+            rw [← Finset.card_pos, ← pointIndex_eq_card_pairsThrough hA]
+            omega
+          have hdel :
+              (deletionAt x).card = pointIndex (L := L) A x - 1 := by
+            rw [show deletionAt x =
+              allButOne (pairsThrough (L := L) A x) by rfl,
+              card_allButOne hnonempty, pointIndex_eq_card_pairsThrough hA]
+          exact_mod_cast hdel
+    have hholeCard :
+        (Dhole.card : ℤ) ≤
+          ∑ y ∈ intermediateHoles (L := L) A H,
+            ((pointIndex (L := L) A y - 1 : ℕ) : ℤ) := by
+      have hcard :
+          Dhole.card ≤
+            ∑ y ∈ intermediateHoles (L := L) A H, (deletionAt y).card := by
+        dsimp [Dhole]
+        exact Finset.card_biUnion_le
+      calc
+        (Dhole.card : ℤ) ≤
+            (↑(∑ y ∈ intermediateHoles (L := L) A H,
+              (deletionAt y).card) : ℤ) := by exact_mod_cast hcard
+        _ = ∑ y ∈ intermediateHoles (L := L) A H,
+              ((pointIndex (L := L) A y - 1 : ℕ) : ℤ) := by
+          push_cast
+          apply Finset.sum_congr rfl
+          intro y hy
+          have hy' := Finset.mem_filter.mp hy
+          have hnonempty :
+              (pairsThrough (L := L) A y).Nonempty := by
+            rw [← Finset.card_pos, ← pointIndex_eq_card_pairsThrough hA]
+            omega
+          have hdel :
+              (deletionAt y).card = pointIndex (L := L) A y - 1 := by
+            rw [show deletionAt y =
+              allButOne (pairsThrough (L := L) A y) by rfl,
+              card_allButOne hnonempty, pointIndex_eq_card_pairsThrough hA]
+          exact_mod_cast hdel
+    have hreqCost :
+        (∑ x ∈ intermediateRequired (L := L) A H,
+          ((pointIndex (L := L) A x - 1 : ℕ) : ℤ)) ≤
+            ∑ x ∈ intermediateRequired (L := L) A H, reqWeight x := by
+      apply Finset.sum_le_sum
+      intro x hx
+      have hx' := Finset.mem_filter.mp hx
+      have hcast :
+          ((pointIndex (L := L) A x - 1 : ℕ) : ℤ) =
+            (pointIndex (L := L) A x : ℤ) - 1 := by
+        omega
+      rw [hcast]
+      dsimp [reqWeight, m]
+      have hleft : 0 ≤ (pointIndex (L := L) A x : ℤ) - 1 := by omega
+      have hright :
+          1 ≤ ((A.card / 2 : ℕ) : ℤ) - pointIndex (L := L) A x := by omega
+      nlinarith
+    have hholeCost :
+        (∑ y ∈ intermediateHoles (L := L) A H,
+          ((pointIndex (L := L) A y - 1 : ℕ) : ℤ)) ≤
+            ∑ y ∈ intermediateHoles (L := L) A H, holeWeight y := by
+      apply Finset.sum_le_sum
+      intro y hy
+      have hy' := Finset.mem_filter.mp hy
+      have hcast :
+          ((pointIndex (L := L) A y - 1 : ℕ) : ℤ) =
+            (pointIndex (L := L) A y : ℤ) - 1 := by
+        omega
+      rw [hcast]
+      dsimp [holeWeight, m]
+      have hr : 1 ≤ (pointIndex (L := L) A y : ℤ) := by omega
+      have hright :
+          1 ≤ ((A.card / 2 : ℕ) : ℤ) - pointIndex (L := L) A y := by omega
+      nlinarith
+    have hreqNonneg (x : P) (hx : x ∈ coveredRequired (L := L) A H) :
+        0 ≤ reqWeight x := by
+      have hxA : x ∉ A := by
+        have hx' := Finset.mem_filter.mp hx
+        have hxnot := (Finset.mem_sdiff.mp hx'.1).2
+        exact fun hxA => hxnot (Finset.mem_union_left H hxA)
+      have hupper := pointIndex_le_half_card (L := L) hA hxA
+      have hpositive : 1 ≤ pointIndex (L := L) A x := by
+        have hx' := (Finset.mem_filter.mp hx).2
+        have : 0 < pointIndex (L := L) A x := by simpa [Covered] using hx'
+        omega
+      dsimp [reqWeight, m]
+      exact mul_nonneg (by omega) (by omega)
+    have hholeNonneg (y : P) (hy : y ∈ H) :
+        0 ≤ holeWeight y := by
+      have hyA : y ∉ A := fun hyA => Finset.disjoint_left.mp hdisj hyA hy
+      have hupper := pointIndex_le_half_card (L := L) hA hyA
+      dsimp [holeWeight, m]
+      exact mul_nonneg (by omega) (by omega)
+    have hreqSubset :
+        (∑ x ∈ intermediateRequired (L := L) A H, reqWeight x) ≤
+          ∑ x ∈ coveredRequired (L := L) A H, reqWeight x :=
+      Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _)
+        (fun x hx _ => hreqNonneg x hx)
+    have hholeSubset :
+        (∑ y ∈ intermediateHoles (L := L) A H, holeWeight y) ≤
+          ∑ y ∈ H, holeWeight y :=
+      Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _)
+        (fun y hy _ => hholeNonneg y hy)
+    have hDcard : (D.card : ℤ) ≤ (Dreq.card : ℤ) + Dhole.card := by
+      have := Finset.card_union_le Dreq Dhole
+      dsimp [D]
+      exact_mod_cast this
+    rw [scaledDefect_eq_remainders (L := L) hA hdisj]
+    simp only [requiredRemainder, holeRemainder]
+    exact hDcard.trans <|
+      add_le_add (hreqCard.trans <| hreqCost.trans hreqSubset)
+        (hholeCard.trans <| hholeCost.trans hholeSubset)
+  · intro x hx e he heD f hf hfD hef
+    have hxA : x ∉ A := (mem_concurrenceCenters.mp hx).1
+    have hupper := pointIndex_le_half_card (L := L) hA hxA
+    by_contra hne
+    have hlt : pointIndex (L := L) A x < A.card / 2 := by omega
+    have htwo : 2 ≤ pointIndex (L := L) A x :=
+      (mem_concurrenceCenters.mp hx).2
+    have hxexternal : x ∈ Finset.univ \ A := Finset.mem_sdiff.mpr ⟨Finset.mem_univ _, hxA⟩
+    rw [external_eq_holes_union_required hdisj] at hxexternal
+    rcases Finset.mem_union.mp hxexternal with hxH | hxrequired
+    · have hxIntermediate : x ∈ intermediateHoles (L := L) A H := by
+        exact Finset.mem_filter.mpr ⟨hxH, by omega⟩
+      have hxDelete : deletionAt x ⊆ D := by
+        intro g hg
+        exact Finset.mem_union_right Dreq <|
+          Finset.mem_biUnion.mpr ⟨x, hxIntermediate, hg⟩
+      have he' : e ∉ deletionAt x := fun he' => heD (hxDelete he')
+      have hf' : f ∉ deletionAt x := fun hf' => hfD (hxDelete hf')
+      exact hef (eq_of_mem_of_not_mem_allButOne he he' hf hf')
+    · have hxCovered : x ∈ coveredRequired (L := L) A H := by
+        exact Finset.mem_filter.mpr ⟨hxrequired, by simpa [Covered] using (show
+          0 < pointIndex (L := L) A x by omega)⟩
+      have hxIntermediate : x ∈ intermediateRequired (L := L) A H := by
+        exact Finset.mem_filter.mpr ⟨hxCovered, htwo, hlt⟩
+      have hxDelete : deletionAt x ⊆ D := by
+        intro g hg
+        exact Finset.mem_union_left Dhole <|
+          Finset.mem_biUnion.mpr ⟨x, hxIntermediate, hg⟩
+      have he' : e ∉ deletionAt x := fun he' => heD (hxDelete he')
+      have hf' : f ∉ deletionAt x := fun hf' => hfD (hxDelete hf')
+      exact hef (eq_of_mem_of_not_mem_allButOne he he' hf hf')
+
+/-- Secant-deletion stability.  There is a set of at most `scaledDefect A H` secants such that
+every two surviving secants with disjoint endpoint pairs have a unique concurrence point of index
+`floor (|A| / 2)`.  Thus every surviving Kneser edge belongs, in the original concurrence
+decomposition, to a maximum matching. -/
+theorem exists_secantDeletionSet
+    {A H : Finset P} (hA : Arc (L := L) A) (hdisj : Disjoint A H) :
+    ∃ D : Finset (ArcPair A),
+      (D.card : ℤ) ≤ scaledDefect (L := L) A H ∧
+        ∀ e : ArcPair A, e ∉ D →
+          ∀ f : ArcPair A, f ∉ D → e ≠ f → Disjoint e.1 f.1 →
+            ∃! x : P,
+              x ∉ A ∧
+                e ∈ pairsThrough (L := L) A x ∧
+                f ∈ pairsThrough (L := L) A x ∧
+                pointIndex (L := L) A x = A.card / 2 := by
+  classical
+  obtain ⟨D, hcard, hmaximum⟩ :=
+    exists_secantDeletionSet_at_centers (L := L) hA hdisj
+  refine ⟨D, hcard, ?_⟩
+  intro e heD f hfD hef hdisjef
+  obtain ⟨x, hx, hunique⟩ :=
+    disjoint_arcPairs_existsUnique_concurrence (L := L) hA hef hdisjef
+  have htwo : 2 ≤ (pairsThrough (L := L) A x).card := by
+    by_contra hnot
+    have hcardOne : (pairsThrough (L := L) A x).card ≤ 1 := by omega
+    exact hef (Finset.card_le_one.mp hcardOne e hx.2.1 f hx.2.2)
+  have hxcenter : x ∈ concurrenceCenters (L := L) A := by
+    exact mem_concurrenceCenters.mpr
+      ⟨hx.1, by rw [pointIndex_eq_card_pairsThrough hA]; exact htwo⟩
+  have hindex :
+      pointIndex (L := L) A x = A.card / 2 :=
+    hmaximum x hxcenter e hx.2.1 heD f hx.2.2 hfD hef
+  refine ⟨x, ⟨hx.1, hx.2.1, hx.2.2, hindex⟩, ?_⟩
+  intro y hy
+  exact hunique y ⟨hy.1, hy.2.1, hy.2.2.1⟩
 
 private noncomputable def orderedPairsWithFirst
     (A : Finset P) (e : ArcPair A) : Finset (ArcPair A × ArcPair A) := by

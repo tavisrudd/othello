@@ -12,8 +12,9 @@ import RelativeConicArcs.MatchingDesignRigidity
 This import-only module is the transitive kernel-checking boundary for the relative-conic results
 and their game and coding-theory applications.  It includes exact uncovered-locus reconstruction,
 equivariant stabilizer recovery, secant concurrence decomposition, zero-defect maximum-matching
-rigidity, exact centre-count identities, and bad-edge stability.  The separate order-twenty-five
-certificate and repair developments are not dependencies of these results.
+rigidity, exact centre-count identities, bad-edge stability, and secant-deletion stability.  The
+separate order-twenty-five certificate and repair developments are not dependencies of these
+results.
 -/
 
 #print axioms RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants
@@ -29,3 +30,4 @@ certificate and repair developments are not dependencies of these results.
 #print axioms RelativeConicArcs.concurrenceCentersOnPair_card_mul_sub_one
 #print axioms RelativeConicArcs.concurrenceCentersOnPair_card_eq_quotient
 #print axioms RelativeConicArcs.two_mul_badConcurrenceEdgeCount_le
+#print axioms RelativeConicArcs.exists_secantDeletionSet
