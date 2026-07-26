@@ -100,11 +100,16 @@ Mukai--Umemura model and normalization comparison.
 
 ## Queued gates
 
-1. **C651 — exact tensor bridge.** Export Paper II's rank-ten signed cubic,
-   construct and verify the \(A_5\)-equivariant intertwiner with the ten
-   face-pair module, compare invariant pairings, and decide the exact scalar
-   relating \(\mu_3\), \(\sigma_3\), and the restricted Gaunt/\(W_6\) cubic.
-   Require a compact certificate and independent replay.
+1. **C651 — exact tensor bridge (complete).** Paper II's rank-ten signed
+   cubic has been exported, an explicit \(A_5\)-equivariant isomorphism with
+   the ten-pair permutation module has been checked on all 60 group
+   elements, and full tensor contraction gives \(4\sigma_3\) over
+   \(\mathbf F_{11}\). A primary certificate, independent replay, prose
+   proof, and Lean terminal are recorded in
+   `notes/2026-07-26-c651-hitchin-tensor-bridge.md`. The rational Gaunt
+   coefficient cannot be reduced modulo \(11\), because its denominator is
+   divisible by \(11\); the cross-characteristic conclusion is equality of
+   the integral Clebsch cubic line, not equality of those normalizations.
 2. **C652 — arithmetic-cover certificate.** Check the two golden fibres,
    \(I_4=A_-\), \(I_8=A_+\), the comparison matrices, the order-four
    exchanger, the \(A_4\) intersection, the spinor square class, and the
@@ -132,9 +137,11 @@ been cut.
 
 - **Settled:** Paper III has a credible principal organizer stronger than the
   previous passage catalogue.
-- **Open under C651:** whether Paper II's signed cubic is literally the
-  Hitchin/Gaunt cubic after the correct intertwiner, rather than merely lying
-  on an abstractly unique invariant line.
+- **Settled under C651:** after the explicit intertwiner and pair
+  restriction, Paper II's signed cubic is \(4\sigma_3\) over
+  \(\mathbf F_{11}\). The characteristic-zero Gaunt scalar has
+  \(11\)-divisible denominator, so the common statement across
+  characteristics is equality of the integral Clebsch line.
 - **Open under C652:** an independently replayed exact arithmetic
   specialization from the golden fibre to \(T_{11}\).
 - **Open under C653:** the minimal bad-prime set and prior-art status of the

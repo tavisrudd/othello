@@ -506,12 +506,18 @@ with \(T_{11}\). Its provenance, exact current evidence boundary, and
 acceptance plan are in
 `notes/2026-07-26-c579-hitchin-clebsch-paper-iii-plan.md`.
 
-C651 first tests the literal tensor identity between Paper II's signed cubic
-and the Hitchin/Gaunt \(W_6\) cubic through an explicit \(A_5\)-intertwiner.
-C652 owns the exact golden-fibre, order-four, spinor, and \(T_{11}\)
-certificate. C653 owns the integral-model, bad-prime, and focused novelty
-gate. C579 then rebuilds Paper III around the arithmetic orientation theorem
-and creates its independent trust surface.
+C651 is complete: an explicit \(A_5\)-equivariant isomorphism from the
+ten-pair permutation module to Paper II's quotient module has been verified
+on all 60 elements, and the transported signed cubic restricts to
+\(4\sigma_3\) over \(\mathbf F_{11}\). The certificate, independent replay,
+prose proof, and Lean terminal are recorded in
+`notes/2026-07-26-c651-hitchin-tensor-bridge.md`. Because the rational Gaunt
+scalar has denominator divisible by \(11\), the cross-characteristic bridge
+is the common integral Clebsch cubic line rather than reduction of that
+scalar. C652 now owns the exact golden-fibre, order-four, spinor, and
+\(T_{11}\) certificate. C653 owns the integral-model, bad-prime, and focused
+novelty gate. C579 then rebuilds Paper III around the arithmetic orientation
+theorem and creates its independent trust surface.
 
 The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
 and degree-23 coherence material is subordinate inventory. C579 admits an
