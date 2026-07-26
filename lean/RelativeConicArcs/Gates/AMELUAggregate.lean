@@ -25,9 +25,11 @@ import RelativeConicArcs.Gates.AMELUTransportDivisor
 
 This terminal imports the length-generic code, state, exact-MDS
 shortening, marginal covariance, arbitrary-arity diagonal-axis theorem,
-the stabilizer-AME supported-label dimension squeeze, the full-Weyl
-diagonal intertwining criterion, unconditional LU-to-LC
-terminal, projective Clifford finiteness, explicit
+the stabilizer-AME supported-label dimension squeeze, linear
+minimum-support transitions and their atlas-equivalence relation, the
+full-Weyl diagonal intertwining criterion, unconditional LU-to-LC terminal,
+normal- and arbitrary-subgroup holonomy reductions, projective Clifford
+finiteness, explicit
 product-unitary topological groups and scalar-phase quotient groups, and the
 closed scalar-torus exact sequences, finite discrete quotients, intrinsic
 adjoint-signature homomorphisms, closed Hausdorff discrete intrinsic

@@ -9,10 +9,12 @@ loop holonomy at the base.  Compatible vertex gauges are determined uniquely
 by their base value, and the possible base values are exactly the elements
 commuting with every loop holonomy.
 
-The final equivalence restricts this statement to a normal subgroup.  In the
-prime-dimensional Clifford application the ambient group is `GL₂`, the normal
-subgroup is `SL₂`, and the transitions are the pushing maps between local Weyl
-label planes.
+One equivalence restricts this statement to a normal subgroup.  A second,
+exact version for an arbitrary subgroup retains the condition that every
+propagated block lies in that subgroup.  In the prime-dimensional Clifford
+application the ambient group is `GL₂`, the normal subgroup is `SL₂`, and the
+transitions are the pushing maps between local Weyl label planes.  In
+extension dimension the arbitrary-subgroup form applies to `Sp(2e,p)`.
 
 This module is symbolic and kernel checked.  It contains no generated data,
 native evaluation, axioms, or admitted declarations.
@@ -177,6 +179,41 @@ def CompatibleGaugesIn (N : Subgroup G) :=
 /-- The centralizer of the loop holonomies inside a specified subgroup. -/
 def HolonomyCentralizerIn (N : Subgroup G) :=
   {g : {g : G // ∀ e, Commute g (atlas.holonomy e)} // g.1 ∈ N}
+
+/-- Base blocks that centralize every holonomy and whose propagated blocks
+all lie in a specified subgroup.  Unlike `HolonomyCentralizerIn`, this is
+the exact target for an arbitrary, not necessarily normal, subgroup. -/
+def HolonomyCentralizerWithPropagatesIn (N : Subgroup G) :=
+  {g : {g : G // ∀ e, Commute g (atlas.holonomy e)} //
+    ∀ i, atlas.transport i * g.1 *
+      (atlas.transport i)⁻¹ ∈ N}
+
+/-- Without a normality hypothesis, compatible subgroup-valued gauges are
+the holonomy-centralizing base blocks whose transports remain in the
+subgroup at every vertex.  This is the form relevant to extension-field
+local Clifford blocks, where `Sp(2e,p)` need not be normal in the ambient
+general linear group. -/
+def compatibleGaugesInSubgroupEquiv
+    (N : Subgroup G) :
+    atlas.CompatibleGaugesIn N ≃
+      atlas.HolonomyCentralizerWithPropagatesIn N where
+  toFun F :=
+    ⟨atlas.compatibleGaugeEquivHolonomyCentralizer F.1,
+      fun i => by
+        change
+          atlas.transport i * F.1.1 atlas.base *
+            (atlas.transport i)⁻¹ ∈ N
+        rw [← atlas.gauge_eq_transport_conj F.1.1 F.1.2.1 i]
+        exact F.2 i⟩
+  invFun g :=
+    ⟨atlas.compatibleGaugeEquivHolonomyCentralizer.symm g.1,
+      fun i => g.2 i⟩
+  left_inv F := by
+    apply Subtype.ext
+    exact atlas.compatibleGaugeEquivHolonomyCentralizer.left_inv F.1
+  right_inv g := by
+    apply Subtype.ext
+    exact atlas.compatibleGaugeEquivHolonomyCentralizer.right_inv g.1
 
 /-- For a normal subgroup, evaluation at the base identifies compatible
 subgroup-valued gauges with the holonomy centralizer inside that subgroup. -/

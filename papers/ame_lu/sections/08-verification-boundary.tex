@@ -69,10 +69,10 @@ the author at deposit.
 \toprule
 Claim family & Proof mode & Machine trust / formal status\\
 \midrule
-LU-to-LC rigidity and no-go &
+LU-to-LC rigidity, atlas classification, and no-go &
 manuscript proof plus Lean &
-arbitrary-additive support, marginal, covariance, and axis-recovery chain
-kernel checked above an explicit stabilizer-projector realization\\
+support, transition, marginal, covariance, axis, and holonomy cores kernel
+checked; exact projective atlas extension proved in the manuscript\\
 Pencil and six-arc classification &
 proof plus exact certificates &
 conditional Lean interface; geometric and holonomy inputs named\\
@@ -113,8 +113,10 @@ arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
 identities, the length-generic MDS--CSS LU-to-LC chain, the
 arbitrary-additive support squeeze, minimum-support generation, realized
-full-Weyl marginal chain, and LU-to-LC terminal, the
-abstract holonomy-centralizer mechanism, the
+full-Weyl marginal chain, LU-to-LC terminal, linear minimum-support
+transitions, and atlas-equivalence relation, the abstract
+holonomy-centralizer mechanism for both normal and arbitrary local-block
+subgroups, the
 extension-field pencil-sector algebra, and the transport polynomial and
 characteristic-seven identities in one environment.
 The arbitrary-additive layer defines coordinate restriction of a
@@ -128,8 +130,10 @@ interface proves
 generation by \((m+1)\)-supported subspaces.  The diagonal-tensor modules
 prove the arity-independent axis lemma for arbitrary bijective local
 reindexings and nonzero coefficients.  The abstract holonomy module proves
-that compatible local gauges are the centralizer of loop transports, with
-a normal-subgroup specialization.
+that compatible local gauges are the centralizer of loop transports.  Its
+arbitrary-subgroup form retains the exact propagated-membership conditions
+needed for \(\mathrm{Sp}_{2e}(\F_p)\); its normal-subgroup specialization
+gives the pure \(\mathrm{SL}_2(q)\) centralizer in prime dimension.
 
 The \texttt{StabilizerAMERigidity} module composes the
 arbitrary-additive support profile, unique local-label recovery, phased
@@ -240,7 +244,11 @@ is Frobenius-covariant, and
 Proposition~\ref{prop:frobenius-sector-divisors} determines the two
 divisors attached to each field automorphism, but the two additive-Clifford
 bridges needed for a full orbit classification are outside the theorem
-package.  Theorem~\ref{thm:lu-h3-grs} is restricted to the stated
+package.  The minimum-support atlas theorem remains exact over extension
+fields, with local blocks in \(\mathrm{Sp}_{2e}(\F_p)\); its holonomy form
+requires both a centralizing base block and the propagated symplectic
+membership conditions, and does not imply a semilinear classification.
+Theorem~\ref{thm:lu-h3-grs} is restricted to the stated
 odd residue-field reductions, and the detector exceptions described in
 Appendix~\ref{sec:transport} do not alter the
 characteristic-uniform rigidity theorem.

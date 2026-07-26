@@ -8,8 +8,9 @@
 
 **Status:** theorem, proof repairs, and literature positioning adopted in
 the manuscript; the arbitrary-additive support, marginal, covariance,
-axis-recovery, and LU-to-LC chain is kernel checked above one explicit
-stabilizer-projector realization field; aggregate replay is queued
+axis-recovery, LU-to-LC, linear transition, atlas-equivalence, and abstract
+holonomy chains are kernel checked above one explicit stabilizer-projector
+realization field; aggregate replay is queued
 
 ## Result
 
@@ -119,6 +120,38 @@ normalizes the projective Weyl group and is Clifford.
 Every party lies in an \((m+1)\)-set, completing the global LU-to-LC
 argument.
 
+## Minimum-support atlas classification
+
+For each \((m+1)\)-support \(A\) and \(i,j\in A\), the projection
+bijections define the \(\mathbb F_p\)-linear operator-pushing transition
+\[
+ M_A(i,j)=p_jp_i^{-1}.
+\]
+Two stabilizer AME states are LU equivalent, after a displayed party
+relabeling, exactly when there are local
+\(F_i\in\operatorname{Sp}_{2e}(\mathbb F_p)\) satisfying
+\[
+ F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
+\]
+for every minimum support.  Compatibility maps every supported subgroup
+to its counterpart, and minimum-support generation then maps the full
+label Lagrangians.  Local Clifford lifts exist, and a product Pauli removes
+the residual stabilizer character.
+
+For one state, if \(\Gamma_\psi\) is the fixed-party projective
+product-unitary symmetry group and \(\mathcal G_\psi\) the compatible
+atlas-gauge group, then
+\[
+ 1\longrightarrow L_\psi\longrightarrow\Gamma_\psi
+   \longrightarrow\mathcal G_\psi\longrightarrow1.
+\]
+In prime dimension, base-frame evaluation identifies
+\(\mathcal G_\psi\) with the atlas-holonomy centralizer inside
+\(\operatorname{SL}_2(q)\).  For \(q=p^e\), \(e>1\), the exact statement
+also requires every propagated block to remain in
+\(\operatorname{Sp}_{2e}(\mathbb F_p)\), since that subgroup is not
+generally normal in the ambient general linear group.
+
 ## What the test removed
 
 None of the following hypotheses is needed for rigidity:
@@ -153,7 +186,11 @@ finite-coordinate support bridge, including:
 and generation consequences from the exact support profile.
 `RelativeConicArcs.AMELU.HolonomyCentralizer` proves the abstract
 evaluation-at-a-base equivalence between compatible transition gauges and
-the holonomy centralizer, including restriction to a normal subgroup.
+the holonomy centralizer, including both restriction to a normal subgroup
+and the exact propagated-membership condition for an arbitrary subgroup.
+`StabilizerAMERigidity` constructs the linear minimum-support transitions
+and proves that their local-frame equivalence relation is reflexive,
+symmetric, and transitive.
 
 The existing generic diagonal-tensor files already prove the independent
 axis-recovery step for arbitrary finite index sets and nonzero
@@ -477,12 +514,14 @@ be structural constraints, not failed searches.
 | Is \(\mathbb F_q\)-linearity required? | resolved negatively | prime-field/additive dimension argument and group-cardinality proof |
 | Is \(m=1\) included? | resolved negatively and sharply | Bell-pair \(U\otimes\overline U\) automorphisms |
 | Is the stabilizer weight distribution determined? | resolved positively | purity fixes every supported-label count; subset Möbius inversion gives all exact weights |
-| Do minimum-support stabilizers generate the full label group? | resolved positively in prose | support-dimension inclusion--exclusion and descending induction; Lean bridge requested |
+| Do minimum-support stabilizers generate the full label group? | resolved positively | support-dimension inclusion--exclusion and descending induction; Lean span theorem |
 | Do the marginal transition maps explain the pencil holonomies? | resolved conceptually | Section 4 already defines the same projection transitions and loop compositions |
-| Is the full pushing atlas a complete LC invariant including phases? | resolved in prose | generation recovers the label Lagrangian; existing Pauli character correction removes lift mismatch |
+| Is the full pushing atlas a complete LC invariant including phases? | resolved | Theorem `thm:atlas-classification`: generation recovers the label Lagrangian and Pauli character correction removes lift mismatch |
 | Does full-Weyl rigidity admit a uniform quantitative version? | open successor | equal coefficient magnitudes give a condition-number-free rank-one defect; C581 owns the full stability theorem |
-| Is the prime-field fixed-party group exactly the holonomy centralizer? | open, proof outlined | prove evaluation-at-base isomorphism using transition intertwining, loop consistency, and minimum-support generation |
-| Does the prime-power group equal the symplectic commutant in \((**)\)? | open | add transported-form operators to the holonomy algebra and prove path-choice independence |
+| Is the prime-field fixed-party group exactly the holonomy centralizer? | resolved | exact projective sequence and evaluation-at-base centralizer theorem in `thm:atlas-classification`; Lean normal-subgroup equivalence |
+| What replaces the prime-field centralizer over extension fields? | resolved abstractly | centralizing base block plus symplectic membership of every propagated block; Lean arbitrary-subgroup equivalence |
+| Does the prime-power group equal the transported-form commutant in \((**)\)? | open | package the propagated membership conditions as transported alternating-form operators and prove path-choice independence |
+| Does full-Clifford equivalence reduce to scalar semilinearity? | resolved negatively | exact \(q=9\) census finds 96 compatible gauges, 80 outside the standard semilinear normalizer; see the 2026-07-26 extension-field kill-test note |
 | Which holonomy-centralizer types occur for general stabilizer AME states? | open | exact census after \((*)\)/\((**)\); distinguish split, nonsplit, unipotent, central, and extension-field cases |
 | Do C623's commutant jumps equal \(\dim\mathcal A_L'\)? | open | reconcile the shortened-transport matrices and transported alternating forms definition by definition |
 | Does the transversal no-go remain CSS-specific? | resolved negatively | view any party as the Choi input of the punctured stabilizer quantum-MDS encoder |

@@ -21,6 +21,10 @@ projector has the stated product-Weyl coefficients.  This is the only
 physics-facing assumption in the module.  The support squeeze, unique local
 label projections, full-Weyl diagonality, marginal covariance, and
 local-unitary-to-local-Clifford conclusion are kernel checked from it.
+The supported kernels also define linear minimum-support operator-pushing
+transitions.  Their local-frame equivalence relation is proved reflexive,
+symmetric, and transitive here; the group-valued holonomy reduction is in
+`HolonomyCentralizer`.
 
 The module contains no generated data, native evaluation, axioms, or admitted
 declarations.
@@ -179,6 +183,76 @@ theorem supportedLocalProjection_bijective
   · simp [i.2]
   · exact P.labelSpace_finrank
   · exact P.noSmallSupport
+
+/-- The supported-label kernel is linearly equivalent to the complete local
+Pauli-label space at every retained party. -/
+noncomputable def supportedLocalLinearEquiv
+    (S : Finset (GenericParty m)) (hS : S.card = m + 1) (i : S) :
+    P.supportedKernel S ≃ₗ[𝕜] 𝔽 × 𝔽 :=
+  LinearEquiv.ofBijective (P.supportedLocalProjection S i)
+    (P.supportedLocalProjection_bijective S hS i)
+
+/-- Linear operator-pushing transport between two local label frames on one
+minimum support. -/
+noncomputable def minimumSupportTransition
+    (S : Finset (GenericParty m)) (hS : S.card = m + 1)
+    (i j : S) : (𝔽 × 𝔽) ≃ₗ[𝕜] (𝔽 × 𝔽) :=
+  (P.supportedLocalLinearEquiv S hS i).symm.trans
+    (P.supportedLocalLinearEquiv S hS j)
+
+/-- A minimum-support transition sends the label at one retained party to
+the label at another party of the same supported stabilizer. -/
+theorem minimumSupportTransition_apply_supportedLabel
+    (S : Finset (GenericParty m)) (hS : S.card = m + 1)
+    (i j : S) (x : P.supportedKernel S) :
+    P.minimumSupportTransition S hS i j
+        (P.supportedLocalProjection S i x) =
+      P.supportedLocalProjection S j x := by
+  simp [minimumSupportTransition, supportedLocalLinearEquiv]
+
+/-- Local linear frame changes intertwine the complete minimum-support
+operator-pushing atlases of two additive stabilizer AME projectors. -/
+def MinimumSupportAtlasEquivalent
+    (P Q : AdditiveStabilizerProjector m 𝕜 𝔽)
+    (F : ∀ _ : GenericParty m, (𝔽 × 𝔽) ≃ₗ[𝕜] (𝔽 × 𝔽)) : Prop :=
+  ∀ (S : Finset (GenericParty m)) (hS : S.card = m + 1)
+    (i j : S) (v : 𝔽 × 𝔽),
+    F j.1 (P.minimumSupportTransition S hS i j v) =
+      Q.minimumSupportTransition S hS i j (F i.1 v)
+
+/-- The identity local frames identify a minimum-support atlas with itself. -/
+theorem minimumSupportAtlasEquivalent_refl :
+    MinimumSupportAtlasEquivalent P P
+      (fun _ => LinearEquiv.refl 𝕜 (𝔽 × 𝔽)) := by
+  intro S hS i j v
+  rfl
+
+/-- Minimum-support atlas equivalences compose party by party. -/
+theorem MinimumSupportAtlasEquivalent.trans
+    {P Q R : AdditiveStabilizerProjector m 𝕜 𝔽}
+    {F G : ∀ _ : GenericParty m, (𝔽 × 𝔽) ≃ₗ[𝕜] (𝔽 × 𝔽)}
+    (hF : MinimumSupportAtlasEquivalent P Q F)
+    (hG : MinimumSupportAtlasEquivalent Q R G) :
+    MinimumSupportAtlasEquivalent P R
+      (fun i => (F i).trans (G i)) := by
+  intro S hS i j v
+  change
+    G j.1 (F j.1 (P.minimumSupportTransition S hS i j v)) =
+      R.minimumSupportTransition S hS i j (G i.1 (F i.1 v))
+  rw [hF S hS i j v, hG S hS i j (F i.1 v)]
+
+/-- A minimum-support atlas equivalence is symmetric by inverting every
+local frame change. -/
+theorem MinimumSupportAtlasEquivalent.symm
+    {P Q : AdditiveStabilizerProjector m 𝕜 𝔽}
+    {F : ∀ _ : GenericParty m, (𝔽 × 𝔽) ≃ₗ[𝕜] (𝔽 × 𝔽)}
+    (hF : MinimumSupportAtlasEquivalent P Q F) :
+    MinimumSupportAtlasEquivalent Q P (fun i => (F i).symm) := by
+  intro S hS i j v
+  apply (F j.1).injective
+  simp only [LinearEquiv.apply_symm_apply]
+  rw [hF S hS i j ((F i.1).symm v)]
+  simp
 
 /-- The supported label is uniquely determined by its label at one retained
 party. -/
