@@ -43,6 +43,15 @@ def transform(point: tuple[int, ...]) -> tuple[int, ...]:
     return normalize((x, -z, y))
 
 
+def multiply(left: tuple[tuple[int, ...], ...],
+             right: tuple[tuple[int, ...], ...]) -> tuple[tuple[int, ...], ...]:
+    return tuple(
+        tuple(sum(left[i][k] * right[k][j] for k in range(3)) % Q
+              for j in range(3))
+        for i in range(3)
+    )
+
+
 def main() -> None:
     certificate = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
     roots = [value for value in range(Q)
@@ -55,6 +64,12 @@ def main() -> None:
     assert all(determinant(triple) for triple in combinations(left, 3))
     assert all(determinant(triple) for triple in combinations(right, 3))
 
+    first_reflection = ((1, 0, 0), (0, -1, 0), (0, 0, 1))
+    second_reflection = ((1, 0, 0), (0, 0, 1), (0, 1, 0))
+    exchanger = ((1, 0, 0), (0, 0, -1), (0, 1, 0))
+    assert multiply(first_reflection, second_reflection) == tuple(
+        tuple(value % Q for value in row) for row in exchanger
+    )
     squares = {value * value % Q for value in range(1, Q)}
     assert certificate["mod_11"]["reflection_norm_product"] not in squares
     assert certificate["field"]["nonzero_three_point_determinants"] == 20

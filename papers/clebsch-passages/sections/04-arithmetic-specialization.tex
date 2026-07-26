@@ -60,14 +60,23 @@ The relation \(1-t=-1/t\) gives, by substitution,
 Moreover \(R(xyz)=-xyz\): it fixes the projective cubic and exchanges its
 two ordered icosahedra.
 
-\subsection{Reduction modulo eleven}
+\subsection{Finite-field specialization}
 
-The roots of \(t^2-t-1\) in \(\F_{11}\) are \(4\) and \(8\).  For the
-displayed equations for \(I_t\) and \(R\) therefore reduce directly to two
-rational configurations \(I_4,I_8\) exchanged by \(R\).
+Let \(k\) be a finite field of odd characteristic other than \(5\), and
+suppose that \(5\) is a square in \(k\).  Then \(t^2-t-1\) has two distinct
+roots in \(k\), so the displayed equations give two rational
+configurations exchanged by \(R\).
 
 \begin{proposition}[Spinor specialization]\label{prop:spinor-specialization}
-The reduction of \(R\) represents the nontrivial element of
+The spinor class of \(R\) is \([2]\in k^\times/k^{\times2}\).  Under the
+standard identifications
+\[
+ \operatorname{SO}_3(k)/\Omega_3(k)
+ \cong \operatorname{PGL}_2(k)/\operatorname{PSL}_2(k),
+\]
+the exchanger lies outside \(\operatorname{PSL}_2(k)\) exactly when \(2\)
+is nonsquare.  In particular, over \(\F_{11}\) it represents the
+nontrivial element of
 \[
  T_{11}=\operatorname{PGL}_2(11)/\PSL_2(11).
 \]
@@ -82,17 +91,25 @@ class \(Q(v)\).  On the \(yz\)-plane,
 so
 \[
  \theta(R)=Q(e_2)Q(e_2-e_3)=2
- \quad\text{in }\F_{11}^{\times}/\F_{11}^{\times2}.
+ \quad\text{in }k^\times/k^{\times2}.
 \]
-The class of \(2\) is nonsquare modulo \(11\).  The standard
+The standard
 identifications
 \[
- \operatorname{SO}_3(11)\cong\operatorname{PGL}_2(11),
+ \operatorname{SO}_3(k)\cong\operatorname{PGL}_2(k),
  \qquad
- \Omega_3(11)\cong\PSL_2(11)
+ \Omega_3(k)\cong\operatorname{PSL}_2(k)
 \]
-identify the spinor quotient with \(T_{11}\), proving the claim.
+identify the spinor quotient with the projective quotient.  Finally, the
+roots modulo \(11\) are \(4\) and \(8\), and \(2\) is nonsquare modulo
+\(11\), proving the specialization.
 \end{proof}
+
+Thus two independent square classes govern the finite specialization:
+\([5]\) determines whether the two displayed parents are rational, while
+\([2]\) determines whether their exchanger lies in the special projective
+subgroup.  Dye's existence criterion for Clebsch hexagons has the same
+\([5]\) boundary \cite[Theorem~1]{DyeClebsch}.
 
 \paragraph{Integral boundary.}
 Over a finite field of characteristic different from \(2\) and \(5\), the

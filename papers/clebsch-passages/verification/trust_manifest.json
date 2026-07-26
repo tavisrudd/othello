@@ -43,9 +43,9 @@
       "clauses": [
         "complete reduced local fibre over xyz",
         "golden six-set metric and six-arc properties",
-        "mod-11 exchanger and nonsquare spinor class"
+        "uniform finite-field spinor class [2] and its nontrivial mod-11 specialization"
       ],
-      "statement": "The complete reduced fibre over xyz has residue algebra Q(sqrt(5)); its displayed configurations are exchanged by R, whose reduction modulo 11 has nontrivial spinor class.",
+      "statement": "The complete reduced fibre over xyz has residue algebra Q(sqrt(5)); over every odd finite field where 5 is a nonzero square, its displayed configurations are exchanged by R with spinor class [2], which is nontrivial modulo 11.",
       "status": "certified",
       "modes": [
         "conceptual",

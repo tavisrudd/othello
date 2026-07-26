@@ -95,6 +95,15 @@ def mat_vec(matrix: tuple[tuple[int, ...], ...],
     )
 
 
+def mat_mul(left: tuple[tuple[int, ...], ...],
+            right: tuple[tuple[int, ...], ...]) -> tuple[tuple[int, ...], ...]:
+    return tuple(
+        tuple(sum(left[i][k] * right[k][j] for k in range(3))
+              for j in range(3))
+        for i in range(3)
+    )
+
+
 def proportional(left: tuple[Golden, ...], right: tuple[Golden, ...]) -> bool:
     return all(left[i] * right[j] == left[j] * right[i]
                for i in range(3) for j in range(i + 1, 3))
@@ -155,6 +164,9 @@ def build_certificate() -> dict[str, object]:
     assert image_mod(reduced_exchanger, axes_mod(8)) == axes_mod(4)
 
     # R=s_e2 s_(e2-e3); the two reflection norms have product 2.
+    s_e2 = ((1, 0, 0), (0, -1, 0), (0, 0, 1))
+    s_e2_minus_e3 = ((1, 0, 0), (0, 0, 1), (0, 1, 0))
+    assert mat_mul(s_e2, s_e2_minus_e3) == exchanger
     squares = {value * value % Q for value in range(1, Q)}
     assert 2 not in squares
 

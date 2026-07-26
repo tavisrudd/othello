@@ -343,6 +343,27 @@ the factor \(5\) is precisely the descent obstruction to choosing one of
 the two conjugate icosahedral parents (or its Clebsch chart) over
 \(\mathbf Q\).  This is an interpretation of the proved fibre, not a new
 claim or evidence route.
+A subsequent `tt` field-of-definition audit caught the symmetric danger in
+the harmonic half: the Petersen coefficient module is rational, but the
+displayed zonal embedding uses golden face axes.  The abstract's unsupported
+“rational Clebsch four-space” adjective is removed, and the harmonic section
+now says exactly that conjugation changes the embedded configuration while
+preserving the abstract Petersen incidence and formulas after relabeling.
+No rational descent of that displayed embedding is claimed.
+The same `tt` pass removes the apparent numerology of the \(q=11\)
+sentence.  The reflection proof already works over every odd finite field
+of characteristic other than \(5\) in which \(5\) is a square: the
+exchanger has spinor class \([2]\), and it lies outside the special
+projective subgroup exactly when \(2\) is nonsquare.  The paper now states
+this uniform proposition and retains \(q=11\) as the certified
+nontrivial specialization; no new computational route is required.
+The ensuing `ej` pass isolates the reusable finite-field classification:
+\([5]\) governs rationality of the two parents, whereas \([2]\) governs
+whether the exchanger lies in the special projective subgroup.  These are
+independent arithmetic controls; Dye's Clebsch-hexagon existence theorem
+shares the first boundary.  This replaces an isolated numerical
+specialization by a structural consequence without changing the trust
+surface.
 
 The release artifact is now paper-local.  The arithmetic certificate was
 reduced to the displayed golden configurations, all twenty three-point
@@ -382,8 +403,8 @@ those remain human arguments from the cited primary source.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `arithmetic_cover.py` | 6445 | `6475fd509bde04476fce39a1d82432d2700628da1b6d2426396b61e2f28770c4` |
-| `arithmetic_cover_replay.py` | 2140 | `d64c5e2734b66af6547cbfabe5c1938b3ffb5ba8332283ee627314aeb0fc8fb5` |
+| `arithmetic_cover.py` | 6872 | `b3e3496f3b78de1881adcf71a90c0ab3d7c518867b66da15a6d5505185388bf4` |
+| `arithmetic_cover_replay.py` | 2723 | `22f55a9c4b781bb028e64f4544c7dfa7145bb325cc49c0ee43fb256c2dc330a6` |
 | `arithmetic_cover.json` | 1151 | `c0e338960cd0a12a7eab85a7f000847349327564142178af97a03a54aef23c41` |
 
 The ordinary aggregate and a copy of the paper directory under a fresh
