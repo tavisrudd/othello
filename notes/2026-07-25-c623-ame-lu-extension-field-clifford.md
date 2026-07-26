@@ -8,15 +8,23 @@
 
 ## Result
 
-For the full six-arc pencil over \(\mathbb F_9,\mathbb F_{25},\mathbb
-F_{27}\), with the four quotient-coordinate degeneracies excluded and the
-GRS boundary included when it exists, the local-Clifford orbit partition is
-exactly
+For every odd prime power \(q=p^e\), the admitted non-GRS pencil has the
+exact extension-field local-Clifford classification
+\[
+ \Psi_t\sim_{\mathrm{LC}(\mathbb F_p)}\Psi_u
+ \quad\Longleftrightarrow\quad
+ z(u)=z(t)^{p^k}\quad\text{for some }0\leq k<e,
+\]
+allowing arbitrary party permutations.  Adding the GRS boundary gives the
+partition
 \[
  \{\text{the GRS locus}\}\ \sqcup\
  \{\operatorname{Gal}(\mathbb F_q/\mathbb F_p)\text{-orbits of }z
    \text{ on the non-GRS locus}\}.
 \]
+The exact \(q=9,25,27\) census is an exhaustive falsifier and witness package
+for this general algebraic theorem.
+
 This orbit statement does **not** mean that all identifications are
 semilinear.  The \(q=9\) admitted non-GRS pencil has genuine
 \(\mathbb F_3\)-symplectic, nonsemilinear local-Clifford identifications.
@@ -61,8 +69,91 @@ subgroup order \(24\), and element-order distribution
 \[
  1^1\,2^7\,3^8\,4^{32}\,6^8\,8^{24}\,12^{16}.
 \]
-These invariants delimit the exceptional group without assigning an
-unproved abstract small-group name.
+More precisely, its center is \(C_4\), its center quotient acts faithfully
+on its four order-three subgroups and is therefore \(S_4\), and its
+commutator subgroup has the order distribution of
+\(\operatorname{SL}_2(3)\).  Thus it is an exact central \(C_4\)-extension
+of \(S_4\) with commutator subgroup \(\operatorname{SL}_2(3)\).  This
+intrinsic description avoids an ambiguous small-group catalogue label.
+
+## Extra invariant exposed by the failure
+
+The homogeneous shortened-transport intertwiner space is itself a
+basis-free LC covariant.  Every additive block has a unique
+linearized-polynomial decomposition
+\[
+ A(v)=\sum_{k=0}^{e-1}M_kv^{p^k},
+\]
+and the transport equations split as a direct sum over the Frobenius
+exponent \(k\).  The exact fixed-party sector profile is
+\[
+\begin{array}{c|c|c}
+\text{stratum}&k&\dim_{\mathbb F_p}\text{ and active coefficients}\\ \hline
+q=25\text{ non-GRS}&0,1&4\ (xx,zz),\ 0\\
+q=27\text{ non-GRS}&0,1,2&6\ (xx,zz),\ 0,\ 0\\
+q=9\text{ non-GRS}&0,1&4\ (xx,zz),\ 4\ (xz,zx)\\
+q=25\text{ GRS}&0,1&8\ (xx,xz,zx,zz)\text{ in each sector}.
+\end{array}
+\]
+Thus the \(q=9\) mystery is not an undifferentiated eight-dimensional
+accident.  Its ordinary field-linear sector is the expected diagonal
+split-torus span, while its extra sector is purely off-diagonal and
+Frobenius-twisted.  Equivalently, Frobenius exchanges the code and its Gale
+dual with fixed party labels.  Sums of the linear diagonal and twisted
+off-diagonal sectors are the genuinely nonsemilinear maps.  At the
+\(q=25\) GRS boundary both Frobenius sectors instead carry the full matrix
+algebra.
+
+The off-diagonal jump has an exact divisor.  Put \(s=t^{p^k}\).  A
+fixed-label diagonal association between \(C_s\) and \(C_t^\perp\) exists
+exactly when
+\[
+ D_k(t)=((1-s)(1-t))^2+st=0.                    \tag{C623.1}
+\]
+Indeed, the nine entries of
+\(H_s\operatorname{diag}(w_1,\ldots,w_6)H_t^{\mathsf T}=0\)
+force, up to a common nonzero scalar,
+\[
+ (w_1,\ldots,w_6)
+ =(-(1-s)(1-t),-(1-s)(1-t),1,1,-1,-1),
+\]
+and the final entry is precisely \(D_k(t)=0\).  For \(k=0\),
+\[
+ D_0(t)=(1-t)^4+t^2
+ =t^4-4t^3+7t^2-4t+1=G(t),
+\]
+so the ordinary off-diagonal sector is exactly the GRS divisor.  For
+\(q=9,k=1\), \(D_1\) vanishes at all four admitted non-GRS parameters and
+produces exactly the extra \((xz,zx)\) sector.  The certificate checks
+\(D_k=0\) iff an off-diagonal sector is active for every parameter and
+Frobenius exponent in the three censused fields.
+
+The diagonal sector is equally explicit.  Normalizing the first four
+labeled columns projectively sends the last two to points depending only on
+\[
+ R(t)=\frac{t}{(1-t)^2}.
+\]
+Thus a fixed-label diagonal equivalence between \(C_s\) and \(C_t\) exists
+exactly when \(R(s)=R(t)\), or
+\[
+ E_k(t)=(t^{p^k}-t)(1-t^{p^k+1})=0.             \tag{C623.2}
+\]
+Consequently, for every admitted parameter in odd characteristic, the
+\(k\)-th fixed-party intertwiner sector is the direct sum of
+
+- a \(2e\)-dimensional diagonal coefficient space iff \(E_k(t)=0\); and
+- a \(2e\)-dimensional off-diagonal coefficient space iff \(D_k(t)=0\).
+
+This accounts for every linear degree of freedom before imposing the
+symplectic quadratic equations.  In particular, the \(q=9\) jump has
+\(E_1\ne0,D_1=0\), while the \(q=25\) GRS boundary has
+\(E_k=D_k=0\) in both sectors.
+
+The failed reconstruction therefore leaves a sharper replacement invariant:
+the complete twist-sector transport-commutant profile.  Any
+quantitative-rigidity successor should treat its dimension-jump strata
+separately; a uniform conditioning statement cannot silently identify them
+with the generic split-torus stratum.
 
 ## Exact reduction
 
@@ -91,16 +182,46 @@ permutation on the full prime-field-expanded CSS stabilizer Lagrangian.
 A necessary, incidence-labelled holonomy trace filter removes permutations
 but never accepts or rejects an equivalence by itself.
 
+## All-extension-field orbit theorem
+
+Let \(A_i:V_i\to V_{\pi i}\) be the additive symplectic blocks of a local
+Clifford equivalence.  Each has a unique linearized-polynomial expansion
+\[
+ A_i(x,z)
+ =\sum_{k=0}^{e-1}M_{i,k}(x^{p^k},z^{p^k}).
+\]
+The target CSS stabilizer equations are \(\mathbb F_q\)-linear, so uniqueness
+of linearized polynomials makes the equations decouple by \(k\).  If one
+entry of \(M_{i,k}\) is nonzero at one party, the four-party transport
+relations propagate it nonzero to every party.  According to whether that
+entry is \(xx,xz,zx,\) or \(zz\), it gives a nonsingular diagonal monomial
+equivalence between
+\[
+ C_t^{(p^k)}\text{ or }(C_t^\perp)^{(p^k)}
+ \quad\text{and}\quad
+ C_u\text{ or }C_u^\perp,
+\]
+with the same party permutation \(\pi\).
+
+The field-independent classical pencil quotient and its Gale invariance
+therefore give \(z(u)=z(t)^{p^k}\).  At least one sector entry is nonzero
+because the original \(A_i\) are invertible, proving necessity even when the
+full map is a genuine sum of several Frobenius sectors.  Conversely,
+\(z(u)=z(t)^{p^k}\) gives a projective/monomial equivalence from
+\(C_t^{(p^k)}\) to \(C_u\); composing it with coordinatewise Frobenius gives
+an additive local Clifford equivalence.  This proves the displayed
+classification without reconstructing or preserving a Desarguesian spread.
+
 For the \(q=25\) GRS parameters the nullspace has dimension \(16\), the
 entire endomorphism algebra.  Hence its symplectic units are exactly
 \(\operatorname{Sp}_4(5)\); an explicit nonsemilinear symplectic
 transvection in the certificate passes the full-Lagrangian replay.  This
-also exposes the general mechanism: on the GRS/isodual locus the transport
-maps are symplectic similitudes, so an arbitrary additive symplectic input
-block propagates by conjugation to additive symplectic blocks on every
-party.  The field-linear \(\operatorname{SL}_2(q)\) phase is therefore only
-the \(\mathbb F_q\)-linear subgroup of the extension-field fixed-party
-kernel.
+also exposes the valid conditional mechanism: whenever the
+shortened-transport holonomies collapse to prime-field scalars, the
+intertwiner algebra is the full prime-field endomorphism algebra and the
+fixed-party kernel is the full additive symplectic group.  The certificate
+proves that collapse for this \(q=25\) GRS boundary.  It does not infer the
+same collapse for every GRS or diagonally isodual code.
 
 ## What the counterexample preserves
 
@@ -134,8 +255,8 @@ first witness, and exact group invariant.
 Checksums and byte counts:
 
 ```text
-53fb37956c80d832be81cf678c978c97570d72a4d2f9a0e16ec19fe8dcfc6421   54655  2026-07-25-c623-ame-lu-extension-field-clifford.py
-cd1bd3841c5bd4854c16d9f315ac8bca39e88fe63d540991253e98102317b98b  493163  2026-07-25-c623-ame-lu-extension-field-clifford.json
+8a0703b0458fad2c8e1b27fbdd660e23f73a80ee43ddd8e67b97f8fa10e4848f   64122  2026-07-25-c623-ame-lu-extension-field-clifford.py
+4273fa355a507e2b1951e868f94f5431b2b469a60fc0af3d6426122a08a154a1  563719  2026-07-25-c623-ame-lu-extension-field-clifford.json
 ```
 
 The trusted boundary is the standard-library finite-field and row-reduction
@@ -143,9 +264,10 @@ implementation.  The independent checks are exact projective
 canonicalization, the direct full-Lagrangian replay of shortened-plane
 witnesses, group closure/inverse/commutator checks for explicitly enumerated
 kernels, and the full-endomorphism-algebra proof for the large
-\(\operatorname{Sp}_4(5)\) kernels.  The finite census proves only the
-stated fields and pencil domain; it does not classify arbitrary
-extension-field six-arcs.
+\(\operatorname{Sp}_4(5)\) kernels.  The certificate proves only the stated
+finite fields.  The all-odd-prime-power admitted-pencil classification is
+the separate linearized-polynomial argument above, not an extrapolation from
+the census.  Neither result classifies arbitrary extension-field six-arcs.
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -154,22 +276,47 @@ than leaving them as observations: the full \(q=25\) GRS boundary was added
 to the initial non-GRS census, and its dimension-16 intertwiner algebra was
 identified with the full \(\operatorname{Sp}_4(5)\) kernel.  It also checked
 that the \(q=9\) counterexamples are genuinely nonsemilinear blockwise, not
-merely semilinear with inconsistent Frobenius exponents.
+merely semilinear with inconsistent Frobenius exponents.  The later explicit
+extra-juice pass recognized the \(q=9\) kernel as the central \(C_4\)
+extension of \(S_4\) described above and tightened the full-symplectic
+statement to its exact prime-scalar-holonomy hypothesis.
 
 - **Settled:** Galois-\(z\) gives the orbit partition in all three tested
   fields, after adjoining the single GRS class.
+- **Settled:** Frobenius-sector decoupling upgrades the finite pattern to an
+  all-odd-prime-power theorem on the admitted non-GRS pencil.
 - **Settled:** Galois-\(z\) is not a complete description of the
   intertwiners; \(q=9\) supplies genuine nonsemilinear non-GRS maps.
 - **Settled:** shortened marginal planes do not reconstruct the
   Desarguesian spread.
+- **Settled:** the transport-commutant dimension gives a replacement exact
+  invariant that detects both enlarged-kernel strata in the census.
+- **Settled:** the formerly unexplained \(q=9\) degrees of freedom are the
+  off-diagonal \(k=1\) Frobenius--Gale sector; the \(k=0\) sector remains the
+  ordinary diagonal split-torus span.
+- **Settled:** the exact jump equation is the twisted Gale divisor
+  \(D_k(t)=((1-t^{p^k})(1-t))^2+t^{p^k+1}\); its untwisted specialization is
+  the known GRS quartic.
+- **Settled:** the diagonal twist equation is
+  \(E_k(t)=(t^{p^k}-t)(1-t^{p^k+1})\), and together \(D_k,E_k\) account for
+  every fixed-party additive intertwiner degree of freedom.
 - **Settled:** the \(q=25\) GRS fixed-party kernel is the full
   \(\operatorname{Sp}_4(5)\), with an exact structural rather than sampled
   count.
-- **Open mystery:** the \(q=9\) exceptional order-96 kernel has the exact
-  invariants above, but no abstract group identification is claimed.  That
-  identification is not needed for the falsifier or orbit theorem.
-- **Open mystery:** whether Galois-\(z\) remains the orbit invariant for all
-  extension fields away from exceptional characteristic-three degeneracy
-  is not decided by this finite gate.  Any successor must use a new
-  invariant or a restricted reconstruction statement; the original spread
-  reconstruction route is closed.
+- **Settled:** the \(q=9\) exceptional order-96 kernel has center \(C_4\),
+  quotient \(S_4\), and commutator subgroup
+  \(\operatorname{SL}_2(3)\).
+- **Open mystery:** the exact central-extension class of the \(q=9\) kernel
+  has not been matched to a catalogue identifier; the intrinsic structure
+  above is sufficient for the falsifier.
+- **Settled:** Galois-\(z\) remains the exact orbit invariant over every odd
+  extension field; genuine nonsemilinear sums enlarge intertwiner groups but
+  do not merge additional orbits.
+- **Settled:** \(z=1\) alone does not control a jump; the missing fixed-label
+  datum is exactly the vanishing of \(D_k\).
+- **No unexplained linear fixed-party degree of freedom remains:** after the
+  Frobenius-sector decomposition, \(E_k\) and \(D_k\) determine the entire
+  intertwiner space.  Beyond the censused cases, the symplectic quadratic
+  coupling when several twist sectors coexist may still produce distinct
+  finite-group structures; that is a nonlinear classification question,
+  not a missing linear parameter.

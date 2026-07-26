@@ -491,15 +491,29 @@ source was edited.  See
 
 **C623 closed negatively at its reconstruction gate (2026-07-25):
 extension-field Clifford census complete.**
-For the full `q=9,25,27` pencil, LC orbits are the GRS class plus Galois
-orbits of `z`, but this equality of partitions hides genuine nonsemilinear
-maps.  Every `q=9` non-GRS pair has such a witness; the fixed-party kernel
+Frobenius-sector decoupling proves for every odd prime power that admitted
+non-GRS LC orbits are exactly Galois orbits of `z`; the exhaustive
+`q=9,25,27` census is the falsifier and witness package.  This equality of
+partitions hides genuine nonsemilinear maps.  Every `q=9` non-GRS pair has
+such a witness; the fixed-party kernel
 has order 96 with only 16 semilinear elements.  At `q=25` the GRS kernel is
 the full `Sp_4(5)` of order 9,360,000, while non-GRS kernels have order 24;
 at `q=27` they have order 26.  The shortened planes therefore do not
 reconstruct the Desarguesian spread, so no positive reconstruction theorem
-was attempted.  The exact standard-library replay, witnesses, kernel
-invariants, and mystery ledger are in
+was attempted.  The extra-juice pass identifies the order-96 kernel as a
+central `C4`-extension of `S4` with commutator `SL_2(3)`, and promotes the
+shortened-transport commutant dimension as the replacement exact invariant:
+generic dimension `2e`, dimension 8 at the `q=9` non-GRS exception, and the
+full dimension 16 at the `q=25` GRS boundary.  The mystery investigation
+decomposes this commutant by Frobenius exponent and proves that the
+off-diagonal `k`-twist appears exactly on
+`((1-t^(p^k))(1-t))^2+t^(p^k+1)=0`; at `k=0` this is the GRS quartic, while
+the `q=9,k=1` divisor gives the extra Frobenius--Gale sector.  The diagonal
+`k`-twist appears exactly on
+`(t^(p^k)-t)(1-t^(p^k+1))=0`; together the two divisors account for every
+fixed-party additive intertwiner degree of freedom.  C581 should treat these
+enlarged-kernel strata separately.  The exact standard-library replay,
+witnesses, kernel invariants, and mystery ledger are in
 `2026-07-25-c623-ame-lu-extension-field-clifford.md`.  No manuscript source
 was edited.
 

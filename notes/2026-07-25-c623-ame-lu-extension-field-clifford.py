@@ -965,20 +965,25 @@ def matrix_group_invariants(
             if fp_mul(p, left, right) not in group:
                 raise AssertionError("matrix set is not multiplication closed")
 
-    order_histogram: Counter[int] = Counter()
-    for value in group:
+    def element_order(value: FpMatrix, bound: int) -> int:
         power = identity
-        for order in range(1, len(group) + 1):
+        for order in range(1, bound + 1):
             power = fp_mul(p, power, value)
             if power == identity:
-                order_histogram[order] += 1
-                break
-        else:
-            raise AssertionError("element order exceeds group order")
-    center_order = sum(
-        all(fp_mul(p, value, other) == fp_mul(p, other, value) for other in group)
-        for value in group
+                return order
+        raise AssertionError("element order exceeds group order")
+
+    order_histogram = Counter(
+        element_order(value, len(group)) for value in group
     )
+    center = {
+        value
+        for value in group
+        if all(
+            fp_mul(p, value, other) == fp_mul(p, other, value)
+            for other in group
+        )
+    }
     commutators = {
         fp_commutator(p, left, right)
         for left in group
@@ -987,13 +992,128 @@ def matrix_group_invariants(
     derived = generated_matrix_group(p, commutators, size)
     if not derived.issubset(group):
         raise AssertionError("derived subgroup escaped the kernel")
+    derived_center = {
+        value
+        for value in derived
+        if all(
+            fp_mul(p, value, other) == fp_mul(p, other, value)
+            for other in derived
+        )
+    }
+    derived_histogram = Counter(
+        element_order(value, len(derived)) for value in derived
+    )
+    quotient_cosets: set[frozenset[FpMatrix]] = set()
+    quotient_histogram: Counter[int] = Counter()
+    quotient_representatives: dict[frozenset[FpMatrix], FpMatrix] = {}
+    for value in group:
+        coset = frozenset(fp_mul(p, value, central) for central in center)
+        if coset in quotient_cosets:
+            continue
+        quotient_cosets.add(coset)
+        quotient_representatives[coset] = value
+        power = identity
+        for order in range(1, len(group) // len(center) + 1):
+            power = fp_mul(p, power, value)
+            if power in center:
+                quotient_histogram[order] += 1
+                break
+        else:
+            raise AssertionError("center-quotient element order is too large")
+
+    center_coset = frozenset(center)
+
+    def quotient_coset(value: FpMatrix) -> frozenset[FpMatrix]:
+        return frozenset(
+            fp_mul(p, value, central) for central in center
+        )
+
+    order_three_subgroups: set[
+        frozenset[frozenset[FpMatrix]]
+    ] = set()
+    for coset, representative in quotient_representatives.items():
+        if coset == center_coset:
+            continue
+        square_coset = quotient_coset(
+            fp_mul(p, representative, representative)
+        )
+        cube_coset = quotient_coset(
+            fp_mul(
+                p,
+                fp_mul(p, representative, representative),
+                representative,
+            )
+        )
+        if cube_coset == center_coset:
+            order_three_subgroups.add(
+                frozenset((center_coset, coset, square_coset))
+            )
+    conjugation_kernel = 0
+    for value in group:
+        inverse = fp_inverse(p, value)
+        fixes_all = True
+        for subgroup in order_three_subgroups:
+            image = frozenset(
+                quotient_coset(
+                    fp_mul(
+                        p,
+                        fp_mul(
+                            p,
+                            value,
+                            quotient_representatives[coset],
+                        ),
+                        inverse,
+                    )
+                )
+                for coset in subgroup
+            )
+            if image != subgroup:
+                fixes_all = False
+                break
+        if fixes_all:
+            conjugation_kernel += 1
+
+    recognition = None
+    if (
+        len(group) == 96
+        and len(center) == 4
+        and Counter(element_order(value, 4) for value in center)
+        == Counter({4: 2, 1: 1, 2: 1})
+        and len(derived) == 24
+        and len(derived_center) == 2
+        and derived_histogram
+        == Counter({3: 8, 6: 8, 4: 6, 1: 1, 2: 1})
+        and quotient_histogram
+        == Counter({2: 9, 3: 8, 4: 6, 1: 1})
+        and len(order_three_subgroups) == 4
+        and conjugation_kernel == len(center)
+    ):
+        recognition = (
+            "central C4-extension of S4 with commutator subgroup SL2(3)"
+        )
+
     return {
         "verified_group_order": len(group),
-        "center_order": center_order,
+        "center_order": len(center),
         "derived_subgroup_order": len(derived),
         "element_order_histogram": {
             str(key): value for key, value in sorted(order_histogram.items())
         },
+        "derived_center_order": len(derived_center),
+        "derived_element_order_histogram": {
+            str(key): value
+            for key, value in sorted(derived_histogram.items())
+        },
+        "center_quotient_order": len(quotient_cosets),
+        "center_quotient_element_order_histogram": {
+            str(key): value
+            for key, value in sorted(quotient_histogram.items())
+        },
+        "center_quotient_order_three_subgroups": len(
+            order_three_subgroups
+        ),
+        "order_three_conjugation_kernel_order": conjugation_kernel,
+        "recognized_structure": recognition,
     }
 
 
@@ -1036,6 +1156,114 @@ def first_nonsemilinear_transvection(field: FiniteField) -> FpMatrix:
             ):
                 return matrix
     raise AssertionError("no nonsemilinear symplectic transvection found")
+
+
+def frobenius_matrix(
+    field: FiniteField, exponent: int
+) -> FpMatrix:
+    return tuple(
+        tuple(
+            field.frobenius(field.basis[column], exponent)[row]
+            for column in range(field.degree)
+        )
+        for row in range(field.degree)
+    )
+
+
+def frobenius_sector_basis(
+    field: FiniteField, exponent: int
+) -> tuple[tuple[int, ...], ...]:
+    e = field.degree
+    size = 2 * e
+    twist = frobenius_matrix(field, exponent)
+    basis_vectors = []
+    for output_coordinate in range(2):
+        for input_coordinate in range(2):
+            for scalar in field.basis:
+                coefficient = multiplication_matrix(field, scalar)
+                block = fp_mul(field.p, coefficient, twist)
+                matrix = [
+                    [0] * size for _ in range(size)
+                ]
+                for row in range(e):
+                    for column in range(e):
+                        matrix[
+                            output_coordinate * e + row
+                        ][input_coordinate * e + column] = block[row][column]
+                basis_vectors.append(
+                    tuple(
+                        matrix[row][column]
+                        for row in range(size)
+                        for column in range(size)
+                    )
+                )
+    return tuple(basis_vectors)
+
+
+def frobenius_sector_profile(
+    field: FiniteField, constraints: Sequence[Sequence[int]]
+) -> list[dict[str, object]]:
+    profiles = []
+    labels = ("xx", "xz", "zx", "zz")
+    for exponent in range(field.degree):
+        sector_basis = frobenius_sector_basis(field, exponent)
+        restricted_rows = tuple(
+            tuple(
+                sum(
+                    row[column] * basis_vector[column]
+                    for column in range(len(row))
+                )
+                % field.p
+                for basis_vector in sector_basis
+            )
+            for row in constraints
+        )
+        solutions = fp_nullspace(
+            field.p, restricted_rows, len(sector_basis)
+        )
+        active = []
+        for coefficient_index, label in enumerate(labels):
+            start = coefficient_index * field.degree
+            stop = start + field.degree
+            if any(
+                any(vector[index] for index in range(start, stop))
+                for vector in solutions
+            ):
+                active.append(label)
+        profiles.append(
+            {
+                "frobenius_exponent": exponent,
+                "dimension_over_prime_field": len(solutions),
+                "active_matrix_coefficients": active,
+            }
+        )
+    return profiles
+
+
+def twisted_gale_divisor(
+    field: FiniteField, parameter: Element, exponent: int
+) -> Element:
+    conjugate = field.frobenius(parameter, exponent)
+    product = field.mul(
+        field.sub(field.one, conjugate),
+        field.sub(field.one, parameter),
+    )
+    return field.add(
+        field.mul(product, product),
+        field.mul(conjugate, parameter),
+    )
+
+
+def twisted_diagonal_divisor(
+    field: FiniteField, parameter: Element, exponent: int
+) -> Element:
+    conjugate = field.frobenius(parameter, exponent)
+    return field.mul(
+        field.sub(conjugate, parameter),
+        field.sub(
+            field.one, field.mul(conjugate, parameter)
+        ),
+    )
 
 
 def parameter_y(field: FiniteField, parameter: Element) -> Element:
@@ -1321,6 +1549,44 @@ def field_census(field: FiniteField) -> dict[str, object]:
         basis = fp_nullspace(
             field.p, constraints, (2 * field.degree) ** 2
         )
+        sector_profile = frobenius_sector_profile(
+            field, constraints
+        )
+        for profile in sector_profile:
+            exponent = int(profile["frobenius_exponent"])
+            divisor = twisted_gale_divisor(
+                field, member.parameter, exponent
+            )
+            profile["twisted_gale_divisor"] = encode_element(divisor)
+            diagonal_divisor = twisted_diagonal_divisor(
+                field, member.parameter, exponent
+            )
+            profile["twisted_diagonal_divisor"] = encode_element(
+                diagonal_divisor
+            )
+            off_diagonal_active = any(
+                coefficient in profile["active_matrix_coefficients"]
+                for coefficient in ("xz", "zx")
+            )
+            diagonal_active = any(
+                coefficient in profile["active_matrix_coefficients"]
+                for coefficient in ("xx", "zz")
+            )
+            if off_diagonal_active != (divisor == field.zero):
+                raise AssertionError(
+                    "twisted Gale divisor and off-diagonal sector disagree"
+                )
+            if diagonal_active != (diagonal_divisor == field.zero):
+                raise AssertionError(
+                    "twisted diagonal divisor and diagonal sector disagree"
+                )
+        if sum(
+            int(profile["dimension_over_prime_field"])
+            for profile in sector_profile
+        ) != len(basis):
+            raise AssertionError(
+                "Frobenius sectors do not sum to the intertwiner dimension"
+            )
         count = 0
         semilinear = 0
         individually_semilinear = 0
@@ -1354,6 +1620,7 @@ def field_census(field: FiniteField) -> dict[str, object]:
                 {
                     "parameter_index": index,
                     "intertwiner_space_dimension_over_prime_field": len(basis),
+                    "frobenius_sector_profile": sector_profile,
                     "structure": f"Sp_{2 * field.degree}({field.p})",
                     "order": order,
                     "semilinear_elements": semilinear_order,
@@ -1422,6 +1689,7 @@ def field_census(field: FiniteField) -> dict[str, object]:
             {
                 "parameter_index": index,
                 "intertwiner_space_dimension_over_prime_field": len(basis),
+                "frobenius_sector_profile": sector_profile,
                 "order": count,
                 "semilinear_elements": semilinear,
                 "individually_semilinear_elements": individually_semilinear,
@@ -1514,7 +1782,7 @@ def field_census(field: FiniteField) -> dict[str, object]:
 def build_certificate() -> dict[str, object]:
     results = [field_census(field) for field in FIELDS]
     return {
-        "schema": "c623-extension-field-clifford-v1",
+        "schema": "c623-extension-field-clifford-v2",
         "scope": {
             "fields": [9, 25, 27],
             "family": (
@@ -1543,6 +1811,15 @@ def build_certificate() -> dict[str, object]:
             "independent_replay": (
                 "the first accepted witness for every solution permutation "
                 "maps the full prime-field-expanded stabilizer rowspace exactly"
+            ),
+            "frobenius_sector_gate": (
+                "the fixed-party intertwiner nullspace is independently "
+                "decomposed into linearized-polynomial Frobenius sectors"
+            ),
+            "exact_sector_divisors": (
+                "diagonal coefficients are checked against "
+                "(t^(p^k)-t)(1-t^(p^k+1)); off-diagonal coefficients are "
+                "checked against ((1-t^(p^k))(1-t))^2+t^(p^k+1)"
             ),
         },
         "results": results,
