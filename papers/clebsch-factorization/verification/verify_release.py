@@ -40,6 +40,17 @@ EXPECTED_EVIDENCE = {
             ],
         ],
     },
+    "gorenstein-gate": {
+        "checksum_manifest": "notes/2026-07-25-c621-gorenstein-gate.sha256",
+        "commands": [
+            [
+                "python3",
+                "notes/2026-07-25-c621-gorenstein-gate.py",
+                "--check",
+            ],
+            ["python3", "notes/2026-07-25-c621-gorenstein-gate-replay.py"],
+        ],
+    },
     "profile-incidence": {
         "checksum_manifest": "notes/2026-07-20-c411-double-coset-hecke.sha256",
         "commands": [
@@ -182,7 +193,7 @@ def build_fingerprint(
         "runner_sha256": sha256(Path(__file__).resolve()),
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 17 statements, 6 evidence bundles: CHECK OK",
+            "metadata": "metadata: 18 statements, 7 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }

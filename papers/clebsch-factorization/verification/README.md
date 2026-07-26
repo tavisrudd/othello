@@ -9,7 +9,7 @@ memory in a conic ideal*. It separates four kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact seventeen theorem-like statements
+`statement_identity.json` contains the exact eighteen theorem-like statements
 in the manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 
@@ -19,7 +19,7 @@ partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
 then builds the paper through the repository Makefile.
 
-`evidence_fingerprint.json` pins the six checksum manifests, exact command
+`evidence_fingerprint.json` pins the seven checksum manifests, exact command
 vectors, verification runner, trust manifest, Python version, Lean
 toolchain, Mathlib revision, Nix lock, and expected success lines. Refresh it
 only after an intentional verification-surface change:

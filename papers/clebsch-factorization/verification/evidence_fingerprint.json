@@ -8,8 +8,8 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "6f3b566145ab8efa4fa2c586013f9eba5674171254ee9ee8735102cf2ad05b6f",
-  "runner_sha256": "271b5bd71a748d2b67a4fb4d7487cf9d40488b4ff6b47096d053aedd9903932b",
+  "trust_manifest_sha256": "51d0be9734eb24b706f75eca2729f9040ad9c8c7a12c4cbb5eae8f329c3585e7",
+  "runner_sha256": "30877cc919edd484d5e3906baa4246b0a39b7877d5efa3173f69e585020bf9c9",
   "evidence": {
     "matching-module": {
       "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
@@ -39,6 +39,21 @@
           "python3",
           "notes/2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py",
           "--check"
+        ]
+      ]
+    },
+    "gorenstein-gate": {
+      "checksum_manifest": "notes/2026-07-25-c621-gorenstein-gate.sha256",
+      "checksum_manifest_sha256": "2eb966b9c4869bc8366a688af139c9e6a2e8bc81be84ec3b499527c10fc8c07c",
+      "commands": [
+        [
+          "python3",
+          "notes/2026-07-25-c621-gorenstein-gate.py",
+          "--check"
+        ],
+        [
+          "python3",
+          "notes/2026-07-25-c621-gorenstein-gate-replay.py"
         ]
       ]
     },
@@ -100,7 +115,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 17 statements, 6 evidence bundles: CHECK OK",
+    "metadata": "metadata: 18 statements, 7 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

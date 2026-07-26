@@ -40,6 +40,9 @@ that the quotient by the conic equation nevertheless recovers the two
 factorization sheets from quadratic products of affine evaluation
 functions.  Within signed tensor moments, the first nonzero term is an
 anti-invariant cubic line that detects sheet interchange.  The
+homogenized \(2q\)-point configurations are self-associated and
+arithmetically Gorenstein, with that signed cubic as the inverse system
+of an Artinian reduction.  The
 corresponding difference spans have dimensions \(3,6,10\) for
 \(A_3/\F_5\), \(B_3/\F_7\), and \(H_3/\F_{11}\); in type \(H_3\), the
 only missing Fischer layer is \(Q\mathcal H_2\).  After a chosen
@@ -52,7 +55,8 @@ marker algebras.
 \end{abstract}
 
 \noindent\textbf{Keywords.} conic ideal; secant matching; Coxeter
-configuration; factorization; cubic invariant; modular representation.
+configuration; self-associated points; arithmetically Gorenstein;
+cubic inverse system; modular representation.
 
 \smallskip
 \noindent\textbf{2020 Mathematics Subject Classification.} 05B25, 51E22,
@@ -107,6 +111,9 @@ second tensor moments;
 \item the signed moments vanish through degree two, while a nonzero
 degree-three tensor transforms by the character that exchanges the
 sheets;
+\item the homogenized \(B_3\) and \(H_3\) configurations are
+self-associated with Gorenstein coordinate rings; the signed cubic is
+the Macaulay inverse system of their Artinian reductions;
 \item in the $H_3$ case, six explicit incidence profiles separate the
 six $A_4$--$A_5$ double-coset labels, and the singleton profiles recover
 the corresponding decorated matching-table row;
@@ -646,6 +653,69 @@ translation preserves \(L\) and all its pointwise powers and acts
 projectively on \(\widehat X_T\), so the graded algebra and Hilbert
 function are independent of the reference.
 \end{proof}
+
+\begin{corollary}[Self-association and cubic duality]
+\label{cor:self-associated-gorenstein}
+For \(T=B_3,H_3\), the configuration
+\(\widehat X_T\subseteq\mathbb P^{q-1}\) is a reduced
+self-associated arithmetically Gorenstein set of \(2q\) points.
+Every one-point deletion imposes independent conditions on quadrics,
+so \(\widehat X_T\) has the Cayley--Bacharach property in degree two.
+Its dualizing residue vector is the sheet sign \(\epsilon\).  The
+Artinian reduction by the homogenizing coordinate has Hilbert function
+\((1,q-1,q-1,1)\), and its Macaulay inverse system is the cubic line
+\(\F_q\mu_3\).
+\end{corollary}
+
+\begin{proof}
+Let \(A\) be the \(q\)-by-\(2q\) matrix whose \(M\)-th column is
+\(\widehat x_M=(1,x_M)\), and put
+\(D=\operatorname{diag}(\epsilon(M))\).  Equal sheet sizes and the
+vanishing first and second signed moments give
+\[
+ A D A^{\mathsf T}=0.
+\]
+The affine spanning statement gives \(\operatorname{rank}A=q\).
+Consequently the rows of \(AD\) form the kernel of \(A\), so \(AD\) is
+a Gale matrix for \(\widehat X_T\).  Its columns differ from those of
+\(A\) only by the nonzero scalars \(\epsilon(M)\); hence the labeled
+configuration is its own Gale transform.
+
+Corollary~\ref{cor:graded-evaluation} says that the \(2q\) points fail
+by exactly one to impose independent conditions on quadrics.  The
+unique dependence is \(\epsilon\), which has full support, so deleting
+any coordinate removes that dependence and leaves rank \(2q-1\).
+After base change to an algebraic closure, the hypotheses of
+Eisenbud--Popescu's self-association criterion
+\cite[Theorem~7.3]{EisenbudPopescu1998} hold.  It follows that the
+homogeneous coordinate ring is Gorenstein after base change, and hence
+over \(\F_q\).
+
+Let \(z\) be the homogenizing coordinate.  It is nonzero at every
+point and is therefore regular on the coordinate ring.  The degree
+\(d\) part of the reduction modulo \(z\) is
+\(L^{\circ d}/L^{\circ(d-1)}\), so its Hilbert function is the
+\(h\)-vector from Corollary~\ref{cor:graded-evaluation}.  The functional
+\[
+ f\longmapsto\sum_M\epsilon(M)f(x_M)
+\]
+annihilates degrees below three and is nonzero in degree three.
+Thus \(\epsilon\) is the socle residue vector.  Degree-three
+polarization identifies its Macaulay dual generator with \(\mu_3\).
+\end{proof}
+
+The implication above is the zero-defect case of the modern
+self-dual-code criterion: the Gorenstein defect is measured by the
+defect of the Schur square, or equivalently by decomposability
+\cite{RodriguezPajaresEtAl2025}.  Here
+\(\dim L^{\circ2}=2q-1\) already places both configurations in the
+zero-defect case.  The ideal, deletion, socle, inverse-system, and
+minimal-resolution calculations are also checked directly in the
+verification bundle.
+Self-association does not select an affine origin.  Translating all
+\(x_M\) acts projectively on the columns of \(A\) and preserves the
+signed Gale identity, in agreement with the nontrivial base-choice
+obstruction behind the quotient construction.
 
 The cubic remembers an orientation that the linear quotient does not.
 Indeed, the signed linear relation
@@ -1361,13 +1431,13 @@ Arithmetic splitting and gluing
 \end{table}
 
 The claim-by-claim map is
-\path{verification/trust_manifest.json}; the exact seventeen-statement
+\path{verification/trust_manifest.json}; the exact eighteen-statement
 identity is \path{verification/statement_identity.json}.  From the root
 of the archival source, the aggregate entry point is
 \begin{verbatim}
 python3 papers/clebsch-factorization/verification/verify_release.py
 \end{verbatim}
-It checks the statement identity and all six checksum manifests, runs
+It checks the statement identity and all seven checksum manifests, runs
 the admitted primary checks and independent replays, and rebuilds this
 manuscript through the repository Makefile.
 
@@ -1377,7 +1447,7 @@ The full-source review archive accompanying this candidate is pinned by
 \small\texttt{2d16e063d7ed7480adebec277179dc39}\\[-2pt]
 \texttt{c6aa7642a1a6bdb116bc3c7324550a2e}.
 \end{center}
-That fingerprint fixes the six evidence manifests, command vectors,
+That fingerprint fixes the seven evidence manifests, command vectors,
 runner, trust manifest, and environment: Python 3.13.12, Lean
 4.32.0-rc1, and Mathlib revision
 \begin{center}
@@ -1533,6 +1603,17 @@ M.~Giudici,
 \newblock Maximal subgroups of almost simple groups with socle
 $\mathrm{PSL}(2,q)$,
 \newblock arXiv:math/0703685, 2007.
+
+\bibitem{EisenbudPopescu1998}
+D.~Eisenbud and S.~Popescu,
+\newblock The projective geometry of the Gale transform,
+\newblock arXiv:math/9807127, 1998.
+
+\bibitem{RodriguezPajaresEtAl2025}
+G.~Rodr\'iguez-Pajares, D.~Ruano, and F.~Salizzoni,
+\newblock A combinatorial description of when a self-associated set of
+points fails to be arithmetically Gorenstein,
+\newblock arXiv:2512.16766v1, 2025.
 
 \bibitem{RuddRigidity2026}
 T.~Rudd,

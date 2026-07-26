@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-25
 
-**Status:** C620 complete and adopted in Paper II; C621 remains queued;
-C616 owns the overlapping uniform-rank proof.
+**Status:** C620 and C621 complete and adopted in Paper II; C616 owns the
+overlapping uniform-rank proof.
 
 ## Origin
 
@@ -94,6 +94,10 @@ and hence the \(h\)-vector
    Cayley--Bacharach in C620; those are C621 questions.
 
 ## C621 — self-associated/Gorenstein falsifier and theorem gate
+
+**Completed 2026-07-25.**  Both configurations pass.  The theorem,
+ideal/resolution certificate, independent replay, literature audit, and
+mystery ledger are in `notes/2026-07-25-c621-gorenstein-gate.md`.
 
 The numerical signal is unusually sharp. Writing \(n=q-1\),
 \(\widehat X\subseteq\mathbb P^n\) has \(2q=2n+2\) reduced points and

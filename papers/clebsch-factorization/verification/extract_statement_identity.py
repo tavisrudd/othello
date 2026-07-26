@@ -23,6 +23,7 @@ EXPECTED_LABELS = (
     "prop:radical-hadamard",
     "thm:balanced-cubic",
     "cor:graded-evaluation",
+    "cor:self-associated-gorenstein",
     "cor:secant-product-syzygies",
     "thm:six-profile-reconstruction",
     "cor:decorated-sheet-classifier",
