@@ -176,6 +176,19 @@ Only the first belongs to projective Reed--Muller theory.  The third, not
 the first, contains the possible mechanism.  No cheap task-owned upgrade
 turns that nonlinear lift problem into a codeword theorem.
 
+There is, however, a sharper residual formulation.  If the support is
+nonempty, choose an uncovered conic point \(u\).  No secant of \(A\) passes
+through \(u\), so projection from \(u\) maps the eight arc points injectively
+to the pencil of 17 lines through \(u\).  Each of the 28 secants is a
+transversal of that pencil.  On every nontangent pencil line, its 28
+intersection points must cover all 15 points off the conic; on the tangent
+at \(u\), they must cover all 16.  In each of the eight pencil fibers
+containing an arc point, the seven transversals labeled by incident edges of
+\(K_8\) coincide at that point.  Thus the surviving problem is an exact
+17-fiber value-set problem with eight prescribed sevenfold collisions.  It
+retains the edge labels erased by the code quotient and is the cleanest
+starting point for any future mechanism theorem.
+
 ## Mystery ledger
 
 - **Settled:** degree-28 codewords supported on a nonsingular conic are
@@ -189,7 +202,9 @@ turns that nonlinear lift problem into a codeword theorem.
 - **Open:** whether the edge-labeled \(K_8\) factorization forces the
   degree-28 word to be zero or a factor to meet \(A\).  This is exactly the
   original rank-three incidence problem, not a low-weight-code
-  classification, and C663 does not allocate a successor for it.
+  classification.  Projection from one uncovered conic point reduces it to
+  the 17-fiber transversal/value-set problem above; C663 does not allocate a
+  successor for it.
 - **Open:** a nonexhaustive structural exclusion of ordinarily complete
   eight-arcs over \(\mathbb F_{16}\).  The current q=16 theorem continues
   to obtain that branch from the checked covering classification.
