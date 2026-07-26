@@ -1241,8 +1241,17 @@
       "last": 631,
       "purpose": "formalize diagonal-isodual witness uniqueness and corollaries",
       "sequence": 138
+    },
+    {
+      "count": 1,
+      "first": 632,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 632,
+      "purpose": "formalize signed Gale-kernel duality behind the balanced quotient configurations",
+      "sequence": 139
     }
   ],
-  "next_id": 632,
+  "next_id": 633,
   "schema": "codex-task-id-allocations-v1"
 }
