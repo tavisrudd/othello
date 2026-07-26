@@ -1,0 +1,7498 @@
+{
+  "control": {
+    "history": [
+      [
+        0,
+        0
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "outer_opponent_fibres": 118,
+    "outer_reply_candidates": 7986,
+    "q": 23,
+    "root_t4": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "direct_relation": {
+    "all_candidate_survivor_edges": 1240,
+    "complete": 118,
+    "definition": "R0(T;o,p) iff for U=T+o+p, every x in Def(U) has a legal y with Def(U+x+y)=empty",
+    "first_impure": null,
+    "first_incomplete": null,
+    "first_survivor_outside_relation": null,
+    "projected_fibre_degree_histogram": [
+      {
+        "outer_fibres": 1,
+        "selected_replies": 1
+      },
+      {
+        "outer_fibres": 3,
+        "selected_replies": 2
+      },
+      {
+        "outer_fibres": 4,
+        "selected_replies": 3
+      },
+      {
+        "outer_fibres": 4,
+        "selected_replies": 4
+      },
+      {
+        "outer_fibres": 4,
+        "selected_replies": 5
+      },
+      {
+        "outer_fibres": 7,
+        "selected_replies": 6
+      },
+      {
+        "outer_fibres": 8,
+        "selected_replies": 7
+      },
+      {
+        "outer_fibres": 7,
+        "selected_replies": 8
+      },
+      {
+        "outer_fibres": 7,
+        "selected_replies": 9
+      },
+      {
+        "outer_fibres": 11,
+        "selected_replies": 10
+      },
+      {
+        "outer_fibres": 17,
+        "selected_replies": 11
+      },
+      {
+        "outer_fibres": 5,
+        "selected_replies": 12
+      },
+      {
+        "outer_fibres": 9,
+        "selected_replies": 13
+      },
+      {
+        "outer_fibres": 10,
+        "selected_replies": 14
+      },
+      {
+        "outer_fibres": 8,
+        "selected_replies": 15
+      },
+      {
+        "outer_fibres": 5,
+        "selected_replies": 16
+      },
+      {
+        "outer_fibres": 2,
+        "selected_replies": 17
+      },
+      {
+        "outer_fibres": 2,
+        "selected_replies": 18
+      },
+      {
+        "outer_fibres": 2,
+        "selected_replies": 20
+      },
+      {
+        "outer_fibres": 2,
+        "selected_replies": 22
+      }
+    ],
+    "pure": 118,
+    "selected_edges": 1240,
+    "soundness": "nondefect opponents reply into B_small; defect opponents reply into defect rank zero, hence Shell_small",
+    "survivor_edges_outside_relation": 0
+  },
+  "extremal_selector_falsifiers": {
+    "maximum_deletion_updates": {
+      "complete": 37,
+      "first_impure": {
+        "opponent": [
+          6,
+          4
+        ],
+        "optimum": [
+          582,
+          13
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          4
+        ],
+        "optimum": [
+          582,
+          13
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "pure": 37
+    },
+    "maximum_min_degree_then_edges": {
+      "complete": 41,
+      "first_impure": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          14,
+          580
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          14,
+          580
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "pure": 41
+    },
+    "maximum_min_drop_then_degree": {
+      "complete": 45,
+      "first_impure": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          37,
+          12,
+          685
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          37,
+          12,
+          685
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "pure": 45
+    },
+    "maximum_minimum_descent_degree": {
+      "complete": 62,
+      "first_impure": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          14
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          14
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "pure": 24
+    },
+    "maximum_rank": {
+      "complete": 40,
+      "first_impure": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          38
+        ],
+        "passing": 0,
+        "selected": 2
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          38
+        ],
+        "passing": 0,
+        "selected": 2
+      },
+      "pure": 24
+    },
+    "maximum_total_descent_edges": {
+      "complete": 31,
+      "first_impure": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          685
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "first_incomplete": {
+        "opponent": [
+          6,
+          3
+        ],
+        "optimum": [
+          685
+        ],
+        "passing": 0,
+        "selected": 1
+      },
+      "pure": 30
+    }
+  },
+  "first_nonminimum_fibre": {
+    "candidate_replies": 66,
+    "direct_relation_replies": 13,
+    "outer_opponent": [
+      6,
+      3
+    ],
+    "selected_rank_histogram": [
+      {
+        "defect_rank": 22,
+        "replies": 1
+      },
+      {
+        "defect_rank": 23,
+        "replies": 1
+      },
+      {
+        "defect_rank": 25,
+        "replies": 1
+      },
+      {
+        "defect_rank": 27,
+        "replies": 2
+      },
+      {
+        "defect_rank": 28,
+        "replies": 2
+      },
+      {
+        "defect_rank": 30,
+        "replies": 1
+      },
+      {
+        "defect_rank": 32,
+        "replies": 3
+      },
+      {
+        "defect_rank": 37,
+        "replies": 2
+      }
+    ],
+    "selected_rows": [
+      {
+        "defect_deletion_updates": 434,
+        "minimum_descent_degree": 12,
+        "minimum_rank_drop": 32,
+        "rank": 32,
+        "ranked_survivor": true,
+        "reply": [
+          7,
+          10
+        ],
+        "total_descent_edges": 499,
+        "total_rank_drop": 1024
+      },
+      {
+        "defect_deletion_updates": 408,
+        "minimum_descent_degree": 13,
+        "minimum_rank_drop": 30,
+        "rank": 30,
+        "ranked_survivor": true,
+        "reply": [
+          7,
+          16
+        ],
+        "total_descent_edges": 502,
+        "total_rank_drop": 900
+      },
+      {
+        "defect_deletion_updates": 610,
+        "minimum_descent_degree": 10,
+        "minimum_rank_drop": 37,
+        "rank": 37,
+        "ranked_survivor": true,
+        "reply": [
+          13,
+          17
+        ],
+        "total_descent_edges": 610,
+        "total_rank_drop": 1369
+      },
+      {
+        "defect_deletion_updates": 164,
+        "minimum_descent_degree": 10,
+        "minimum_rank_drop": 23,
+        "rank": 23,
+        "ranked_survivor": true,
+        "reply": [
+          14,
+          4
+        ],
+        "total_descent_edges": 318,
+        "total_rank_drop": 529
+      },
+      {
+        "defect_deletion_updates": 270,
+        "minimum_descent_degree": 12,
+        "minimum_rank_drop": 27,
+        "rank": 27,
+        "ranked_survivor": true,
+        "reply": [
+          15,
+          10
+        ],
+        "total_descent_edges": 403,
+        "total_rank_drop": 729
+      },
+      {
+        "defect_deletion_updates": 344,
+        "minimum_descent_degree": 9,
+        "minimum_rank_drop": 28,
+        "rank": 28,
+        "ranked_survivor": true,
+        "reply": [
+          16,
+          10
+        ],
+        "total_descent_edges": 371,
+        "total_rank_drop": 784
+      },
+      {
+        "defect_deletion_updates": 146,
+        "minimum_descent_degree": 9,
+        "minimum_rank_drop": 22,
+        "rank": 22,
+        "ranked_survivor": true,
+        "reply": [
+          17,
+          22
+        ],
+        "total_descent_edges": 268,
+        "total_rank_drop": 484
+      },
+      {
+        "defect_deletion_updates": 262,
+        "minimum_descent_degree": 10,
+        "minimum_rank_drop": 27,
+        "rank": 27,
+        "ranked_survivor": true,
+        "reply": [
+          19,
+          4
+        ],
+        "total_descent_edges": 399,
+        "total_rank_drop": 729
+      },
+      {
+        "defect_deletion_updates": 200,
+        "minimum_descent_degree": 10,
+        "minimum_rank_drop": 25,
+        "rank": 25,
+        "ranked_survivor": true,
+        "reply": [
+          19,
+          11
+        ],
+        "total_descent_edges": 358,
+        "total_rank_drop": 625
+      },
+      {
+        "defect_deletion_updates": 390,
+        "minimum_descent_degree": 11,
+        "minimum_rank_drop": 32,
+        "rank": 32,
+        "ranked_survivor": true,
+        "reply": [
+          20,
+          13
+        ],
+        "total_descent_edges": 513,
+        "total_rank_drop": 1024
+      },
+      {
+        "defect_deletion_updates": 326,
+        "minimum_descent_degree": 11,
+        "minimum_rank_drop": 28,
+        "rank": 28,
+        "ranked_survivor": true,
+        "reply": [
+          21,
+          17
+        ],
+        "total_descent_edges": 402,
+        "total_rank_drop": 784
+      },
+      {
+        "defect_deletion_updates": 574,
+        "minimum_descent_degree": 12,
+        "minimum_rank_drop": 37,
+        "rank": 37,
+        "ranked_survivor": true,
+        "reply": [
+          22,
+          9
+        ],
+        "total_descent_edges": 637,
+        "total_rank_drop": 1369
+      },
+      {
+        "defect_deletion_updates": 396,
+        "minimum_descent_degree": 12,
+        "minimum_rank_drop": 32,
+        "rank": 32,
+        "ranked_survivor": true,
+        "reply": [
+          22,
+          15
+        ],
+        "total_descent_edges": 524,
+        "total_rank_drop": 1024
+      }
+    ]
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_q23_defect_rank_descent.py": "c64a5b9fe05a49525cebe97bc92d89b2629066f0d46d2e05441e21764da34295",
+    "rust/scripts/c80_q23_defect_three_update.py": "4e4a97d5c76fd7951885cef9ca0f9e7f26a13dbef1209be97616eaa2485a802f",
+    "rust/scripts/c80_q23_small_shell_falsifier.py": "469238cea7af51daf0ba21d17c609074e1fd6d9c2d1d62e840565ec0df5ef198",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "recursive_comparison": {
+    "all_7986_candidates_checked": true,
+    "direct_edges": 1240,
+    "direct_relation_equals_recursive_survivor_on_domain": true,
+    "recursive_edges_outside_direct_relation": 0,
+    "recursive_survivor_edges": 1240
+  },
+  "rows": [
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        6,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            610,
+            10
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            580
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            12,
+            685
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            685
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        6,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            582,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            610
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            649
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            649
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        6,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 12,
+          "selected": 12
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            662,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            633
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            12,
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        6,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 16,
+          "selected": 16
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            670,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            670
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            14,
+            670
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            670
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        6,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            588,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            679
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            14,
+            679
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            679
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        6,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 17,
+          "selected": 17
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            740,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            528
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            12,
+            740
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 3,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            740
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 73,
+      "opponent": [
+        6,
+        20
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            776,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            579
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            42,
+            13,
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 63,
+      "opponent": [
+        7,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            520,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            34,
+            14,
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        7,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            558,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            678
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            650
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            678
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        7,
+        9
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 3,
+          "selected": 3
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            584,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            14,
+            669
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            683
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        7,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            632,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            586
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            12,
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 74,
+      "opponent": [
+        7,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 20,
+          "selected": 20
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            766,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 2,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        7,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 22,
+          "selected": 22
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            744,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            738
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            13,
+            744
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            806
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 73,
+      "opponent": [
+        7,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            776,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            684
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            42,
+            13,
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 2,
+          "selected": 6
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        8,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 4,
+          "selected": 4
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            628,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            569
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            11,
+            628
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            628
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        8,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            738,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            612
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            10,
+            738
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            738
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        8,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            644,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            630
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            11,
+            664
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            664
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        8,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            552,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            689
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            689
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 2,
+          "selected": 5
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            689
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        8,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            562,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            636
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            712
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            712
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        8,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            744,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            587
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            13,
+            744
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            744
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        8,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            580,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            473
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            11,
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        9,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            580,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            492
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            11,
+            642
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            642
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        9,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            654,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            691
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            14,
+            691
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            710
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        9,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            640,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            415
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            11,
+            640
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            640
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        9,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            582,
+            9
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            700
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            14,
+            700
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            700
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 60,
+      "opponent": [
+        9,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            476,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            560
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            35,
+            9,
+            544
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            35
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            560
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        9,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            572,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            526
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            35,
+            12,
+            572
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            36
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            572
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        9,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 20,
+          "selected": 20
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            456,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            435
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            32,
+            12,
+            515
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            33
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            539
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        9,
+        21
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            666,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            666
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            14,
+            666
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 2,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            690
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        10,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            748,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            679
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            13,
+            748
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 5
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            748
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        10,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            664,
+            11
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            426
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            11,
+            724
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            724
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        10,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 22,
+          "selected": 22
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            580,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            540
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            640
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            640
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        10,
+        20
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            704,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            704
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            13,
+            704
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 2,
+          "selected": 12
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            704
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        10,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            740,
+            16
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            16,
+            807
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            16,
+            807
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            16
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            807
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        11,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            708,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            810
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        11,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            456,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            508
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            34,
+            12,
+            577
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            577
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        11,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            684,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            666
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            12,
+            684
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            684
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        11,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            648,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            577
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            643
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 1,
+          "selected": 4
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            723
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        11,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 4,
+          "selected": 4
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            720,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            702
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            12,
+            720
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            720
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 75,
+      "opponent": [
+        11,
+        21
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 5,
+          "selected": 5
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            712,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            751
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            12,
+            712
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            751
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        12,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            648,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            566
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            13,
+            731
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            731
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        12,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            766,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            797
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            15,
+            797
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            797
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        12,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 5,
+          "selected": 5
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            724,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            679
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            822
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            822
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        12,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 16,
+          "selected": 16
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            680,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            629
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            680
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            680
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        12,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            746,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 3,
+          "selected": 8
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            806
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        12,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            608,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            13,
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        13,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            740,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            776
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        13,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            608,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            601
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        13,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            700,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            586
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            13,
+            700
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            700
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        13,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            692,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            763
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            763
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            763
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        13,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            662,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            505
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            662
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            662
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        13,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            614,
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            15,
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 61,
+      "opponent": [
+        13,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            388,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            512
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            31,
+            13,
+            512
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            32
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            512
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        14,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            650,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            650
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            14,
+            650
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            650
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        14,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            562,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            573
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            12,
+            635
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            635
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 63,
+      "opponent": [
+        14,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            626,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            12,
+            626
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            626
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 61,
+      "opponent": [
+        14,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 4,
+          "selected": 4
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            394,
+            8
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            12,
+            408
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            31,
+            11,
+            510
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            12
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            32
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            510
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 62,
+      "opponent": [
+        14,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 3,
+          "selected": 3
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            472,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            456
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            33,
+            11,
+            527
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            527
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        14,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            720,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            751
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            12,
+            720
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            757
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        14,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 5,
+          "selected": 5
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            480,
+            9
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            492
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            33,
+            12,
+            515
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            546
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        14,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            636,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            655
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            12,
+            720
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            720
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        14,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 4,
+          "selected": 4
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            588,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            550
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            12,
+            588
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            594
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        14,
+        20
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            580,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            15,
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        15,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 18,
+          "selected": 18
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            646,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            595
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            646
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            646
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 61,
+      "opponent": [
+        15,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 3,
+          "selected": 3
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            638,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            547
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            12,
+            638
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            638
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        15,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            676,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            738
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            738
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            738
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        15,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 12,
+          "selected": 12
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            562,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            549
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            11,
+            609
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 2,
+          "selected": 6
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            609
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        15,
+        14
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            752,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            752
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            752
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            752
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        15,
+        20
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            634,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            723
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            15,
+            723
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            723
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        15,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            592,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            658
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            678
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            678
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        16,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 12,
+          "selected": 12
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            704,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            579
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            13,
+            704
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            704
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        16,
+        9
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            618,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            15,
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            713
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        16,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            554,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            598
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            13,
+            598
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            36
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            598
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 64,
+      "opponent": [
+        16,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            604,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            610
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            10,
+            604
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            610
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        16,
+        14
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 9,
+          "selected": 9
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            620,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            584
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            620
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            652
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        16,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            728,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            728
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            728
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            728
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        16,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 12,
+          "selected": 12
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            678,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            678
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            14,
+            678
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            690
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 61,
+      "opponent": [
+        16,
+        20
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 5,
+          "selected": 5
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            668,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            616
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            668
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        16,
+        21
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            720,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            590
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            10,
+            720
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 5
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            720
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        17,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            742,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            700
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            12,
+            742
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 2,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            742
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        17,
+        9
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            728,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            822
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            14,
+            822
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            822
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        17,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            564,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            647
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            12,
+            619
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            647
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        17,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 12,
+          "selected": 12
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            662,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            636
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            11,
+            662
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            662
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 73,
+      "opponent": [
+        17,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            752,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            752
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            752
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        17,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            640,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            374
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            11,
+            640
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            640
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        18,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            632,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            678
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            709
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            709
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 74,
+      "opponent": [
+        18,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 18,
+          "selected": 18
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            800,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            16,
+            807
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            43,
+            13,
+            800
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            16
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            807
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        18,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            656,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            654
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            656
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            656
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        18,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            648,
+            11
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            677
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            14,
+            677
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            677
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        18,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            602,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            12,
+            670
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            693
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        19,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            592,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            569
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            13,
+            592
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            592
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        19,
+        5
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            716,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            716
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            13,
+            716
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            716
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        19,
+        10
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            558,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            617
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            12,
+            626
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            626
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 73,
+      "opponent": [
+        19,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 17,
+          "selected": 17
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            750,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            723
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            13,
+            750
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            750
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 73,
+      "opponent": [
+        19,
+        14
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 16,
+          "selected": 16
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            742,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            691
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            13,
+            735
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 3,
+          "selected": 5
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            742
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        19,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            558,
+            9
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            588
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            36,
+            13,
+            588
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            36
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            601
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        19,
+        21
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 16,
+          "selected": 16
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            548,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            686
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            686
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 69,
+      "opponent": [
+        20,
+        13
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            686,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            660
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            10,
+            686
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            716
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        20,
+        14
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            714,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            702
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            40,
+            13,
+            714
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            40
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            714
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 72,
+      "opponent": [
+        20,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 13,
+          "selected": 13
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            654,
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            638
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            38,
+            13,
+            710
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            710
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 63,
+      "opponent": [
+        20,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            506,
+            11
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            12,
+            614
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            35,
+            11,
+            575
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            12
+          ],
+          "passing": 2,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            35
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            614
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        20,
+        18
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            438,
+            9
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            550
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            33,
+            13,
+            550
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            557
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        20,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            600,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            511
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            35,
+            13,
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            648
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 62,
+      "opponent": [
+        20,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 7,
+          "selected": 7
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            470,
+            8
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            546
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            33,
+            13,
+            546
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            546
+          ],
+          "passing": 1,
+          "selected": 2
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        21,
+        3
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 15,
+          "selected": 15
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            746,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            568
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            12,
+            746
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            41
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            746
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        21,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 11,
+          "selected": 11
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            802,
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            42,
+            15,
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        21,
+        9
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            800,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            800
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            43,
+            13,
+            800
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            800
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        21,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            696,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 67,
+      "opponent": [
+        21,
+        16
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            618,
+            14
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            669
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            14,
+            669
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            37
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            669
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        21,
+        17
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            508,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            438
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            34,
+            10,
+            508
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 3
+        },
+        "maximum_rank": {
+          "optimum": [
+            35
+          ],
+          "passing": 0,
+          "selected": 3
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            583
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        21,
+        22
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 2,
+          "selected": 2
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            576,
+            11
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            512
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            35,
+            12,
+            601
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            36
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            601
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 63,
+      "opponent": [
+        22,
+        4
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 8,
+          "selected": 8
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            634,
+            12
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            13,
+            575
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            12,
+            634
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            13
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            38
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            634
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 65,
+      "opponent": [
+        22,
+        7
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 6,
+          "selected": 6
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            642,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            441
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            37,
+            13,
+            642
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            703
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 71,
+      "opponent": [
+        22,
+        9
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 16,
+          "selected": 16
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            802,
+            15
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            15,
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            42,
+            15,
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            15
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_rank": {
+          "optimum": [
+            43
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            802
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 70,
+      "opponent": [
+        22,
+        11
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            618,
+            13
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            684
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            13,
+            689
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            689
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 68,
+      "opponent": [
+        22,
+        14
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 14,
+          "selected": 14
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            724,
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            41,
+            14,
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 1,
+          "selected": 4
+        },
+        "maximum_rank": {
+          "optimum": [
+            42
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            788
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 66,
+      "opponent": [
+        22,
+        15
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 10,
+          "selected": 10
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            684,
+            12
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            14,
+            438
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            39,
+            12,
+            684
+          ],
+          "passing": 1,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            14
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_rank": {
+          "optimum": [
+            39
+          ],
+          "passing": 1,
+          "selected": 2
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            684
+          ],
+          "passing": 1,
+          "selected": 1
+        }
+      }
+    },
+    {
+      "legal_reply_candidates": 62,
+      "opponent": [
+        22,
+        19
+      ],
+      "selectors": {
+        "all_defects_reply_to_rank_zero": {
+          "passing": 3,
+          "selected": 3
+        },
+        "maximum_deletion_updates": {
+          "optimum": [
+            462,
+            10
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_degree_then_edges": {
+          "optimum": [
+            12,
+            458
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_min_drop_then_degree": {
+          "optimum": [
+            32,
+            10,
+            534
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_minimum_descent_degree": {
+          "optimum": [
+            12
+          ],
+          "passing": 1,
+          "selected": 6
+        },
+        "maximum_rank": {
+          "optimum": [
+            34
+          ],
+          "passing": 0,
+          "selected": 1
+        },
+        "maximum_total_descent_edges": {
+          "optimum": [
+            534
+          ],
+          "passing": 0,
+          "selected": 1
+        }
+      }
+    }
+  ],
+  "schema": "c80-q23-rank-zero-correspondence-v1",
+  "source": "rust/scripts/c80_q23_rank_zero_correspondence.py",
+  "verdict": {
+    "c82_released": false,
+    "exact_finite_recursive_compression": "1240/1240",
+    "greedy_or_extremal_rule": "FAIL",
+    "opponent_complete": "118/118",
+    "selected_edges_sound": "1240/1240",
+    "uniform_odd_q_theorem": "OPEN"
+  }
+}

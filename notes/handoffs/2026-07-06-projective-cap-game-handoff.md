@@ -1291,6 +1291,23 @@ rule selecting these farsighted higher-rank replies; the finite `F_d`
 recursion itself is not that rule, and C82 remains gated. Report+script+cert:
 [`../2026-07-25-c80-q23-defect-rank-descent.md`](../2026-07-25-c80-q23-defect-rank-descent.md).
 
+**The 91 nonminimum q23 fibres have an exact direct incidence compression
+(C80, 2026-07-25).** Define `R0(T;o,p)` by requiring every point of
+`Def(T+o+p)` to have a legal reply sending `Def` to the empty set. This
+fixed-depth projective formula covers all 118 outer fibres of the normalized
+q23 control with 1,240 sound edges. Exhaustive comparison on all 7,986 legal
+outer replies gives exact equality `R0=F_d`: the recursive survivor has no
+additional edge on this domain. At the first greedy fibre, `R0` selects 13 of
+66 replies with ranks 22--37 and rejects the rank-16 stall. Six natural
+extrema—rank, descent degree/edge count, drop margin, and deletion
+updates—cover only 31--62 fibres, so the relation is not a scalar selector.
+This is the requested nonrecursive finite rule, but it is one additional
+fixed shell and therefore cannot by itself evade C80's growing-depth
+obstruction. Next test the next canonical q23 P control and extract the first
+`F_d`-outside-`R0` edge or `R0` coverage failure; C82 remains gated.
+Report+script+cert:
+[`../2026-07-25-c80-q23-rank-zero-correspondence.md`](../2026-07-25-c80-q23-rank-zero-correspondence.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
