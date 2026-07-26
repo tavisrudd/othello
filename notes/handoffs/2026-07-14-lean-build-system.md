@@ -68,6 +68,11 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    theorems downstream of generated leaves.
 6. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
    discipline with disk-backed per-lane build directories.
+7. **C681 paper-facts area:** extend the spine with a `paper` area type whose facts come from tracked
+   TeX/BibTeX/verification JSON, catching title, self-citation, stale-bbl, label-mapping, and
+   unknown-terminal drift. Independent of the extraction window — it runs no Lake command — and it
+   reports other lanes' drift rather than repairing it. Brief:
+   [`../2026-07-26-c681-trust-spine-paper-facts.md`](../2026-07-26-c681-trust-spine-paper-facts.md).
 
 ## Gates and non-goals
 
