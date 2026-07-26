@@ -1448,8 +1448,17 @@
       "last": 657,
       "purpose": "instantiate projective carrier incidence and coordinate-free factor hypotheses",
       "sequence": 161
+    },
+    {
+      "count": 1,
+      "first": 658,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 658,
+      "purpose": "concrete carrier determinant and shared-representative geometry",
+      "sequence": 162
     }
   ],
-  "next_id": 658,
+  "next_id": 659,
   "schema": "codex-task-id-allocations-v1"
 }
