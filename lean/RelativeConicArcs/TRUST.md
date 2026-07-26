@@ -275,7 +275,7 @@ count is only an external consistency check and is not a proof input.
 
 The paper's six-point matching-design realization calculation and cited seven-point
 nonrealizability result are not represented as a field-linear realization classification in Lean.
-Likewise, the Beyond-4, Clebsch, and AME-LU references attached to the coding/design comparison
-are contextual citations, not formal proof inputs; the underlying parity-check-code parameters,
-syndrome-distance dictionary, and matching decomposition are the separately listed checked
-bridges.
+Likewise, the Beyond-4, Clebsch rigidity/factorization, and AME-LU references attached to the
+coding/design comparisons are contextual citations, not formal proof inputs; the underlying
+parity-check-code parameters, syndrome-distance dictionary, and matching decomposition are the
+separately listed checked bridges.
