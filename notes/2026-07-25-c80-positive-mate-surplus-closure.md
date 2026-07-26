@@ -148,6 +148,60 @@ that.
 No incidental discovery-track item arose. The redundancy and its exact proof
 are direct C80 deliverables.
 
+## `ej2` — quantifier-shadow no-go and the C80→C82 interface
+
+The mate-surplus equality is an instance of a reusable ranked-survivor
+principle. Suppose
+
+```text
+F(S) ⇔ B(S)                                      at rank zero,
+F(S) ⇔ ∀ opponent x, ∃ reply y, E(S,x,y) ∧ F(T)  at positive rank,
+```
+
+where every `E`-edge strictly lowers the rank. Let `Q(S)` be any property
+obtained merely by forgetting information from those one-step witnesses:
+
+```text
+(∀x, ∃y, E(S,x,y)) ⇒ Q(S).
+```
+
+If `F_Q` is formed by adding `Q(S)` to the positive clause while retaining
+the same recursive response condition and boundary, then rank induction gives
+
+```text
+F_Q = F.
+```
+
+Call such a `Q` a **quantifier shadow**. Positive mate surplus is the first
+example: erase strictness and lower-survivor membership from the certified
+reply and retain only joint legality. The same no-go automatically eliminates
+minimum positive degree, absence of isolated marked fibres, and every other
+binary “each opponent has some legal mate” reformulation as recursive
+compressions of `F_cc`. They may diagnose failed candidate edges, but
+intersecting them back with the survivor cannot strengthen or explain it.
+
+This yields an exact release interface between C80 and C82. C80 must first
+define a nonrecursive, algebraically checkable marked-edge predicate
+`E_q(S,x,y,z,z')` carrying an explicit proof datum `z` to a lower-ranked datum
+`z'`, and prove its soundness without `F_cc`, `K_Ω`, minimax, or a filtered
+reply graph. Only then is the C82 abundance object meaningful:
+
+```text
+μ_E(S,z) = min_x |{(y,z') : E_q(S,x,y,z,z')}|.
+```
+
+The C80 coverage theorem is `μ_E≥1`; C82 may seek a stronger count. Counting
+ordinary legal mates, strict-overload replies, or replies selected after
+recursive survivor filtering is upstream-invalid because none carries the
+missing soundness proof.
+
+This also clarifies what “proof-producing” must mean. A scalar score on the
+target is insufficient. The reply needs a transportable certificate datum
+with a direct update law and a well-founded rank. The datum may have
+unbounded range in `q`; the earlier finite-signature no-go excludes only a
+fixed finite exact quotient, not a fixed algebraic construction with
+unbounded parameters.
+
 ## Mystery ledger
 
 - **[SETTLED] Does strict-overload positive-mate-surplus closure pass the
@@ -159,14 +213,20 @@ are direct C80 deliverables.
 - **[SETTLED `ej`] Is there a hidden quantitative surplus margin?** No in the
   tested certificates. Every order uses accepted positive states and chosen
   targets with `μ=1`.
+- **[SETTLED `ej2`] Is mate surplus an isolated redundant coordinate?** No.
+  It is one instance of the quantifier-shadow principle, which also closes
+  every recursive “no isolated opponent fibre” reformulation.
 - **[SETTLED] Did `μ` explain the spoiler/repair split structurally?** It
   diagnoses it but does not certify it. The spoilers have `μ=0`, while the
   repairs have positive `μ`, yet recursive preservation merely restates the
   survivor response condition.
+- **[SETTLED `ej2`] What exactly may C82 count?** Only witnesses of a
+  nonrecursive proof-producing edge predicate supplied by C80. Ordinary
+  legal mates or recursively filtered replies do not meet the soundness gate.
 - **[OPEN — C80] What nonrecursive marked incidence predicate proves a reply
   good?** The evidence gap is unchanged: construct a direct secant/orbital
-  certificate whose soundness does not call `F_cc`, `K_Ω`, minimax, or a
-  filtered reply graph.
+  certificate datum with an algebraic transport law whose soundness does not
+  call `F_cc`, `K_Ω`, minimax, or a filtered reply graph.
 - **[OPEN — C80/C82 gate] Can that predicate be proved opponent-complete
   uniformly in odd q?** Unknown; C82 remains gated.
 
