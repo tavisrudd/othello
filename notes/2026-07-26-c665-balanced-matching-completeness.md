@@ -760,6 +760,31 @@ are fixed by \(|K|\).  Nor is the outer sheet action free: it is fixed by
 \(K\)-fixed matching-product vector with the modular Fischer tensor
 channels.
 
+### Solved-problem analogues
+
+No located result states the Platinum theorem, but several solved problems
+have almost exactly the local proof shapes needed here.
+
+| Solved analogue | What was proved there | C665 lesson |
+|---|---|---|
+| Doty--Henke, tensor products of modular \(\mathrm{SL}_2\)-irreducibles | Tilting summands and Frobenius digits replace the characteristic-zero Clebsch--Gordan rule. | Decompose the Fischer quadratic channels digitwise; do not infer them from weights alone. |
+| Parker, higher extensions for \(\mathrm{SL}_2\) | \(\operatorname{Ext}\)-groups between simple and Weyl modules are calculated recursively. | C1 should be an explicit pullback class in \(\operatorname{Ext}^1\), not a composition-factor assertion. |
+| Srinivasan--Humphreys--Jeyakumar, projective modules for \(\mathrm{SL}_2(q)\) | Defining-characteristic projective indecomposables and their characters are determined. | Replace the provisional head-existence heuristic by the actual PIM attached to each \(S^K\). |
+| Malle--Robinson, projective indecomposable permutation modules | Coset modules induced from \(p'\)-subgroups are classified or strongly restricted using PIM dimensions and subgroup orders. | The desired \(\lambda=1\) conclusion is naturally a “permutation module is only the principal projective” statement. |
+| Zavarnitsine, subextensions for a permutation \(\mathrm{PSL}_2(q)\)-module | Existence of a nonsplit cover inside a permutation-module extension is decided cohomologically. | Test whether the quadratic pullback extension splits by its cohomology class. |
+| Long--Plaza--Sin--Xiang, maximum intersecting families in \(\mathrm{PSL}_2(q)\) | A high-multiplicity \(\mathrm{PSL}_2\) module problem is solved by retaining the almost multiplicity-free \(\mathrm{PGL}_2\) action and proving constituent survival by finite-field sums. | Outer parity is structure, not bookkeeping; if multiplicities remain large, seek an explicit finite-field sum or Hecke eigenvalue. |
+| Segre--Ball--Lavrauw tangent/tensor polynomial method | Secant data of a finite arc is converted into a low-degree polynomial or tensor identity, leaving controlled exceptional cases. | T3 should come from the closed torus matching product and translation norm, not an unbounded field census. |
+| Dickson--Faber subgroup classification | A projective-action problem is divided into cyclic, dihedral, exceptional, and subfield cases. | H1/T3 should become a finite mechanism table with rational-conjugacy conditions. |
+
+The closest methodological analogue is Long--Plaza--Sin--Xiang: their
+\(\mathrm{PSL}_2(q)\) permutation module has obstructive multiplicities, but
+the ambient \(\mathrm{PGL}_2(q)\) action restores an almost
+multiplicity-free decomposition.  Their remaining constituent-survival
+question becomes an explicit finite-field character sum.  Here the
+corresponding move is to retain the two outer parities and express
+\(\partial_*\), or the translation norm in T3, as an explicit torus/Hecke
+operator.
+
 ### Exact missing lemmas
 
 The shortest proof would consist of the following three lemmas.
@@ -847,6 +872,46 @@ splitting is not yet proved.  In particular, the decomposition used in the
 dual module conventions.  The report therefore does not promote this
 argument to L2.
 
+The convention audit now fixes this more precisely in the \(q=19\) model.
+The matrices in `2026-07-26-c665-q19-module-test.sage` act on the
+point-vector module
+\[
+  0\longrightarrow F\longrightarrow E
+  \mathrel{\mathop{\longrightarrow}^{\epsilon}}\mathbf1
+  \longrightarrow0.
+\]
+An exact fixed-space calculation gives
+\[
+ \dim E^H=1,\qquad \epsilon(E^H)=0,
+ \qquad d|_{E^H}=-1
+\]
+for a nonsquare dilation \(d\).  Hence the \(H\)-fixed line lies inside
+\(F\), carries the outer character \(\chi\), and does not split the trivial
+quotient.  The affine \(S_{13}\) also has outer parity \(\chi\), so their
+symmetric product has parity \(\chi^2=1\).  This explains, rather than
+contradicts, the exact quadratic result \(10+0\): the visible
+constant-like line is not a \(G\)-trivial splitting line.
+
+The correct C1 object is therefore the pullback of
+\[
+ 0\longrightarrow\operatorname{Sym}^2F
+ \longrightarrow\operatorname{Sym}^2E
+ \mathrel{\mathop{\longrightarrow}^{\partial}}E
+ \longrightarrow0
+\]
+along a chosen simple embedding \(S^\chi\hookrightarrow E\).
+Equivalently, one must determine the outer-eigenspace map
+\[
+ \partial_*:
+ \operatorname{Hom}_H(S,\operatorname{Sym}^2E)
+ \longrightarrow \operatorname{Hom}_H(S,E).
+\]
+At \(q=19\), its target has outer dimensions \(0+1\), while its source has
+\(10+0\); the \(\chi\)-eigenspace map is therefore zero and the pullback is
+nonsplit.  A uniform proof should compute this pullback class directly.
+The earlier tensor-trace proposal is at best one possible way to prove that
+nonsplitting after the pullback has been identified; it is not itself C1.
+
 This leaves one sharply delimited representation-theoretic escape:
 all nonprincipal heads of \(k[H/K]\) might have dimension divisible by
 \(p\).  In defining characteristic these are exactly the heads carrying a
@@ -872,6 +937,32 @@ characteristic \(3\): Steinberg's tensor-product description shows that a
 simple of \(3'\)-dimension has only binary Frobenius digits, and its torus
 weights are signed sums of distinct powers of \(3\), never zero.
 
+The first Dickson/head pass gives the following exact torus table.  Here a
+displayed invariant is fixed by the full torus; in the dihedral rows its
+zero-weight vector is also fixed by the Weyl involution.
+
+| stabilizer type | simple candidate | dimension | valid range | residual |
+|---|---:|---:|---|---|
+| cyclic torus or subgroup | \(L(2)\) | \(3\) | \(p\ne3\) | characteristic \(3\) full-torus cases |
+| full dihedral normalizer | \(L(4)\) | \(5\) | \(p\ge7\) | characteristics \(3,5\) |
+| full dihedral normalizer | \(L(2)\otimes L(2)^{(1)}\) | \(9\) | \(p=5,\ e\ge2\) | \(q=5\) and characteristic \(3\) |
+
+The signs in this table are elementary: the zero-weight vector of \(L(2)\)
+has Weyl sign \(-1\), the one in \(L(4)\) has sign \(+1\), and the tensor of
+two \(L(2)\) zero-weight vectors again has sign \(+1\).  Frobenius
+reciprocity then places each displayed simple in the head of \(k[H/K]\).
+Thus H1 is already reduced, for torus subgroups, to characteristic \(3\)
+and the isolated \(q=5\) dihedral endpoint.
+
+The exceptional \(A_4,S_4,A_5\) rows require more care.  The classical
+binary-polyhedral invariant degrees provide vectors in Weyl modules, but
+in small characteristic such a vector can die on passage to the simple
+quotient.  The \(q=11,A_5\) principal-projective sheet is the warning:
+the classical degree-twelve invariant does not imply a nonprincipal simple
+head there.  The correct exceptional-row test is therefore
+\(\dim L(a)^K\), not merely the existence of an invariant in
+\(\operatorname{Sym}^a(k^2)\).
+
 This is the first genuine residual family, not a cosmetic defect of the
 method.  Its first field can nevertheless be excluded exactly.  Over
 \(\mathbb F_{27}\), all thirteen matchings invariant under the split torus
@@ -891,11 +982,13 @@ characteristic-three torus exclusion.
 
 Accordingly the proposed proof of L2 has three exact remaining inputs:
 
-**C1. Cross-channel extension identification.**  Fix one module convention
-and identify the extension class detected by a linear-parity socle lift in
-\(\operatorname{Sym}^2E\) with the tensor extension to which categorical
-trace applies; prove that the underlying affine extension is nonsplit in
-that convention.
+**C1. Quadratic pullback nonsplitting.**  In the point-vector convention,
+compute the pullback of
+\(\operatorname{Sym}^2E\mathrel{\mathop{\to}^{\partial}}E\) along the
+relevant \(S^\chi\hookrightarrow E\), and prove it is nonsplit.  Equivalently,
+prove that \(\partial_*\) has no linear-parity preimage.  Only after this
+identification may categorical trace or an \(\operatorname{Ext}^1\)
+calculation be invoked.
 
 **H1. Nonnegligible head, away from the torus exception.**  For each
 relevant \(p'\)-subgroup \(K\), produce a nonprincipal simple head of

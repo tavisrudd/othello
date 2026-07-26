@@ -80,6 +80,49 @@ extensions, or symmetric powers of an affine orbit span.
 - What fails in characteristics \(3\) and \(5\)?
 - Can a torus-normal-form matching product expose the extra trade directly?
 
+## Solved-problem analogues
+
+Use these as method analogues, not as citations for the target theorem.
+
+- **Doty--Henke modular Clebsch--Gordan:** tensor products of simple
+  \(\mathrm{SL}_2\)-modules are solved by passing from characteristic-zero
+  weight intuition to tilting summands and Frobenius digits.  Analogue:
+  decompose the quadratic Fischer channels digitwise instead of assuming a
+  semisimple symmetric-square formula.
+- **Parker's \(\mathrm{SL}_2\) extension calculations:** apparent
+  constituent questions are converted into recursive
+  \(\operatorname{Ext}\)-computations between Weyl and simple modules.
+  Analogue: formulate the missing outer-parity lift as a pullback extension,
+  then calculate its class.
+- **Srinivasan--Humphreys--Jeyakumar projective modules for
+  \(\mathrm{SL}_2(q)\):** projective indecomposables and their characters are
+  recovered from defining-characteristic structure rather than ordinary
+  constituents alone.  Analogue: identify the exact projective cover forced
+  inside \(k[H/K]\).
+- **Malle--Robinson projective permutation modules:** a coset module induced
+  from a \(p'\)-subgroup is constrained by subgroup order, local structure,
+  and the projective cover of the trivial module.  Analogue: turn
+  \(\lambda=1\) into the assertion that no nonprincipal projective summand can
+  survive.
+- **Cohomological subextensions of permutation modules:** embedding a
+  nonsplit cover in a permutation semidirect product is decided by the image
+  of an extension class in group cohomology.  Analogue: test the affine and
+  quadratic pullback classes, not only their composition factors.
+- **PGL-versus-PSL module methods in Erdős--Ko--Rado problems:** high
+  multiplicity for \(\mathrm{PSL}_2(q)\) is controlled by retaining the
+  larger \(\mathrm{PGL}_2(q)\)-action, where outer parity separates channels.
+  Analogue: compute the two Clifford extensions rather than one
+  \(H\)-multiplicity.
+- **Segre/Ball tangent-polynomial arguments:** a finite-geometric
+  classification is obtained by converting secant data into a low-degree
+  polynomial identity, leaving only small exceptional fields.
+  Analogue: derive the characteristic-three torus exclusion from the closed
+  matching product and its translation norm.
+- **Dickson--Faber subgroup reduction:** a uniform projective-action problem
+  becomes cyclic, dihedral, exceptional, and subfield cases with explicit
+  rational-conjugacy conditions.  Analogue: make H1/T3 a finite list of
+  subgroup mechanisms rather than a universal black box.
+
 ## Repository framing
 
 For rank-one modular reconstruction problems, use
