@@ -1156,18 +1156,20 @@ term only; the R5 cyclic carrier survives in large characteristic.
 Let \(q=2^m\), let \(d=2^s\) with \(s\geq2\), and consider the
 degree-\((d+1)\) coherent Lucas carrier
 \[
-             \PP\langle e_2,\ldots,e_{d-1}\rangle.
+ \PP\langle e_2,\ldots,e_{d-1}\rangle
+             \subset\PP(\Gamma^{d+1}E).
 \]
-At its distinguished endpoint \(e_{d-1}\), the Hankel kernel contains
-the canonical section
+At its distinguished endpoint \(e_{d-1}\), the Hankel kernel
+\(W_{e_{d-1}}\subset\Sym^dE^\vee\) contains the canonical section
 \[
                          \cU_s=\langle1,t,t^d\rangle.
 \]
 This section contains a completely split squarefree polynomial of
 degree \(d\) over \(\F_q\) if and only if \(s\mid m\).
 
-For the first fresh case \(s=3\), the conclusion for the full kernel is
-strictly stronger: for every \(m\geq3\), the entire
+The case \(s=2\) is the binary nucleus already occurring at the first
+two polar levels.  For the first higher case \(s=3\), the conclusion
+for the full kernel is strictly stronger: for every \(m\geq3\), the entire
 \(\PGL_2(q)\)-orbit of
 \(e_7\in\PP(\Gamma^9E)\) is shallow.
 \end{proposition}
@@ -1176,7 +1178,18 @@ strictly stronger: for every \(m\geq3\), the entire
 Lucas' binomial criterion
 \cite[Lem.~1 and Thm.~1]{GmainerHavlicek2013}, applied to the two
 consecutive contraction rows, gives the displayed carrier and leaves
-\(1,t,t^d\) at \(e_{d-1}\).  A squarefree degree-\(d\) member of
+\(1,t,t^d\) at \(e_{d-1}\).  More explicitly, its two Hankel
+equations are
+\[
+                         b_{d-2}=b_{d-1}=0,
+\]
+so
+\[
+ W_{e_{d-1}}
+   =\langle1,t,\ldots,t^{d-3},t^d\rangle
+   \subset\Sym^dE^\vee.
+\]
+A squarefree degree-\(d\) member of
 \(\cU_s\) has the form
 \[
                          Ct^d+Bt+A,\qquad BC\ne0.
@@ -1200,8 +1213,12 @@ Choose any three-dimensional \(\F_2\)-subspace
  \qquad A_1=\prod_{v\in V\setminus\{0\}}v\ne0.
 \]
 Thus \(L_V\in W_{e_7}\) is completely split and squarefree.
-The apolar \(\PGL_2(q)\)-action transports both Hankel kernels and
-split root divisors, so the same holds throughout the orbit.
+For the contragredient apolar action,
+\[
+                              gW_f=W_{gf}.
+\]
+The same action preserves split squarefree root divisors, so the
+witness transports throughout the orbit.
 \end{proof}
 
 \begin{remark}[Scope of the contained calculations]
