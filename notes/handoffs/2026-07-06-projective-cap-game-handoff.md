@@ -1382,6 +1382,19 @@ controls for the first sound `F_d` edge that necessarily creates a
 replacement defect; C82 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-obligation-deletion-rewrite.md`](../2026-07-26-c80-q23-obligation-deletion-rewrite.md).
 
+**Strict obligation deletion fails at the first replacement edge (C80,
+2026-07-26).** The canonical q23 sweep finds `F_del=F_d` on all outer
+targets of the next nine controls (indices 11--19), then the first exact
+disagreement at control index 20 after 70,973 candidates and 11,075 common
+edges. The blocking obligation `(12,15)` has one sound `F_d` reply,
+`(22,14)`: it drops defect rank `27→2`, removes 26 old obligations, retains
+`(17,19)`, and creates `(21,17)`. The successor is already in `F_del`, so
+literal inclusion—not recursive descendant complexity—is precisely the
+failure. The next proof object must transport or charge replacement
+obligations projectively; a bounded one-replacement observation is not yet
+a well-founded theorem. C82 remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-obligation-deletion-sweep.md`](../2026-07-26-c80-q23-obligation-deletion-sweep.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

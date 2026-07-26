@@ -1,6 +1,6 @@
 # C80 canonical status ledger
 
-**Lane:** `cap`. **Task:** C80. **As of:** 2026-07-25.
+**Lane:** `cap`. **Task:** C80. **As of:** 2026-07-26.
 
 This is the single current truth ledger for C80. The projective-cap handoff
 remains the program-level routing map; individual reports remain the evidence
@@ -40,7 +40,7 @@ is an input bank, not C80 status authority.
 | q23 defect-three update | **PROVED sound for one target; FINITE-CERTIFIED** | The unique minimum-defect follower has a three-point noncollinear mutually legal defect locus. Every defect move has two replies sending rank `3 -> 0`; with direct boundary replies elsewhere this gives `24/24` coverage and 50 sound edges. [Report](2026-07-25-c80-q23-defect-three-update.md) |
 | q23 recursive defect-rank survivor | **PROVED soundness; FINITE-CERTIFIED reach** | The well-founded `F_d` survivor uses `d=|Def|`, the `B_small` boundary, and strict defect-rank replies. All 118 outer fibres of the normalized q23 control enter `F_d`; 24,568 ranked states and 25,479 defect obligations are checked without minimax or the C54 value label. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
 | q23 rank-zero correspondence `R0` | **PROVED soundness; FINITE-CERTIFIED exact compression on ten controls; FIRST FAILURE FOUND** | `R0(T;o,p)` requires every defect of `T+o+p` to have a reply to defect rank zero. It equals `F_d` exactly on the first ten canonical controls: 1,163/1,163 fibres, 12,496 common edges, and 77,632 candidates. The eleventh control `(6,5)` has the first `F_d\R0` edge, `(12,20)->(16,15)`, at rank 30 and `Omega=72`. Its sole direct failure is defect move `(14,3)`; recursive reply `(18,21)` drops to a rank-one, `Omega=1` `R0` state. Thus `R0` remains the base packet but is not the full recursive survivor even at q23. [First four controls](2026-07-25-c80-q23-fourth-control-rank-zero.md), [canonical sweep and first failure](2026-07-25-c80-q23-canonical-rank-zero-sweep.md) |
-| Obligation-deletion survivor `F_del` | **PROVED soundness; FINITE-CERTIFIED exact compression on the first `F_d\R0` target** | Require `Def(S+x+y)⊊Def(S)` at every defect response. Finite-set induction proves the hereditary survivor P and permits arbitrary growing rank without replacement obligations. On the rank-30 q23 target, one 29-state proof DAG closes at depth two; over all 525 marked defect/reply candidates, `F_del=F_d` edge-for-edge with 118 accepted edges. Uniform opponent completeness is open. [Report](2026-07-26-c80-q23-obligation-deletion-rewrite.md) |
+| Obligation-deletion survivor `F_del` | **PROVED soundness; SETTLED NEGATIVE as an exact `F_d` compression** | Require `Def(S+x+y)⊊Def(S)` at every defect response. Finite-set induction proves the hereditary survivor P. It equals `F_d` on the first rank-30 target and every outer target of the next nine canonical controls, but fails first at control index 20: the unique `F_d` response to one obligation sends rank `27→2`, removes 26 old defects, retains one, and creates one replacement. The successor is already in `F_del`, so literal inclusion—not descendant complexity—is exactly the obstruction. [Positive target](2026-07-26-c80-q23-obligation-deletion-rewrite.md), [first failure](2026-07-26-c80-q23-obligation-deletion-sweep.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -70,6 +70,7 @@ continuation object. They do **not** yet provide the uniform
 | Uniform bounded small-shell coverage | **SETTLED NEGATIVE** | On the q23 P target `S4(1,2,3,4)+(0,0)+(5,2)`, no opponent has an `R_small` reply (`0/118`); no alternative root reply after `(0,0)` enters the survivor (`0/181`). [Report](2026-07-25-c80-q23-small-shell-falsifier.md) |
 | Greedy recursive minimum-defect choice | **SETTLED NEGATIVE on the q23 control** | Only 27/118 outer fibres have a recursively sound minimum-rank reply. The first greedy branch reaches a rank-one state whose unique defect opponent has three replies and minimum successor rank one; a nonminimum outer reply restores descent. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
 | Defect-rank/degree extremal selectors | **SETTLED NEGATIVE on the q23 control** | Maximizing rank, descent degree, total descent edges, rank-drop margin, or defect-deletion updates covers only 31--62 of 118 fibres. The full bounded incidence relation `R0`, not a scalar extremum, is required. [Report](2026-07-25-c80-q23-rank-zero-correspondence.md) |
+| Strict obligation deletion as the full defect-rank proof object | **SETTLED NEGATIVE on the canonical q23 sweep** | After nine complete later controls and 11,075 common `F_d/F_del` edges, control index 20 contains the first `F_d\F_del` target. Its blocking obligation has a unique `F_d` reply, and that reply necessarily creates one new defect while dropping rank `27→2`. [Report](2026-07-26-c80-q23-obligation-deletion-sweep.md) |
 
 These negatives rule out the named statements and natural domains. They do
 not prove that every bounded-formula proof object or every value-only factor
@@ -83,7 +84,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 defect rank | The first `F_d\R0` target admits the stronger inclusion-ranked survivor `F_del`: defects only disappear, and `F_del=F_d` on all 525 marked candidates. This supplies an iterable projective obligation rewrite but only on one finite target. | Sweep later q23 controls for the first sound `F_d` edge that cannot avoid creating a replacement defect; if none appears, prove opponent-complete deletion fibres uniformly. |
+| q23 defect rank with replacement obligations | The first strict-deletion failure is isolated exactly. One unique sound exchange removes 26 old obligations, retains one, creates one, and lands back in `F_del`; defect cardinality still drops `27→2`. | Find a projectively natural lineage or charge for replacements and prove a well-founded opponent-complete rewrite without collapsing back to rank alone. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -91,17 +92,18 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Prove or falsify the obligation-deletion survivor beyond the first exact
-q23 `F_d\R0` target.
+Extract a projectively natural lineage or charge for the first exact q23
+replacement-obligation edge.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Sweep later q23 `F_d` edges and stop at the first edge whose sound
-lower-rank continuation necessarily creates a defect outside the old
-obligation locus. If no such edge appears, the direct next theorem is
-opponent completeness of projectively natural deletion fibres.
+The first replacement is maximally sharp: the blocking obligation has one
+sound `F_d` response, which removes 26 old defects, retains one, creates one,
+and lands in `F_del`. The next compression test must explain that identity
+change by an incidence-defined transport, lineage, or charge. A bounded
+"at most one replacement" observation is not itself a well-founded theorem.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -114,4 +116,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap sweep q23 F_d edges for the first obligation-deletion failure
+go C80 cap extract a projective lineage/charge for the first q23 replacement edge
