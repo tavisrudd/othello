@@ -29,12 +29,34 @@ private abbrev uncoveredPoints : List V := NinePointHeisenbergPair.uncovered
 /-- The standard integer representatives of the elements of `ZMod 19`. -/
 def fieldElements : List K := List.ofFn fun i : Fin 19 => (i.val : K)
 
-/-- The canonical coordinate representatives of all points of `PG(2, 19)`. -/
-def canonicalPoints : List V :=
-  (fieldElements.flatMap fun y =>
-      fieldElements.map fun z => ![1, y, z]) ++
+private def affinePointsFor (yCoordinates : List K) : List V :=
+  yCoordinates.flatMap fun y => fieldElements.map fun z => ![1, y, z]
+
+/-- Canonical affine points whose second coordinate has representative zero through four. -/
+def canonicalPointsY0To4 : List V :=
+  affinePointsFor (fieldElements.take 5)
+
+/-- Canonical affine points whose second coordinate has representative five through nine. -/
+def canonicalPointsY5To9 : List V :=
+  affinePointsFor ((fieldElements.drop 5).take 5)
+
+/-- Canonical affine points whose second coordinate has representative ten through fourteen. -/
+def canonicalPointsY10To14 : List V :=
+  affinePointsFor ((fieldElements.drop 10).take 5)
+
+/--
+Canonical affine points whose second coordinate has representative fifteen through eighteen,
+together with all points on the line at infinity.
+-/
+def canonicalPointsY15To18AndInfinity : List V :=
+  affinePointsFor (fieldElements.drop 15) ++
     (fieldElements.map fun z => ![0, 1, z]) ++
     [![0, 0, 1]]
+
+/-- The canonical coordinate representatives of all points of `PG(2, 19)`. -/
+def canonicalPoints : List V :=
+  canonicalPointsY0To4 ++ canonicalPointsY5To9 ++ canonicalPointsY10To14 ++
+    canonicalPointsY15To18AndInfinity
 
 /-- Whether a vector represents a ray occurring in a coordinate list. -/
 def onRays (p : V) (points : List V) : Bool :=
@@ -57,6 +79,11 @@ def ordinarilyCovered (p : V) : Bool :=
   onRays p selectedPoints ||
     (List.sublistsLen 2 selectedPoints).any fun pair =>
       decide (determinantOfPairWith p pair = 0)
+
+/-- Whether ordinary uncoveredness agrees with the displayed uncovered ray set on a point list. -/
+def uncoveredLocusAgreementOn (points : List V) : Bool :=
+  points.all fun p =>
+    (!ordinarilyCovered p) == onRays p NinePointHeisenbergPair.uncovered
 
 /-- Number of chords of `points` incident with `p`. -/
 def secantMultiplicity (points : List V) (p : V) : Nat :=
@@ -120,8 +147,10 @@ def directionProfile (direction offset : Label) : Bool :=
 def missedDirection (direction : Label) : Bool :=
   labels.all fun x => chordSelectedCount x direction = 0
 
-attribute [reducible] fieldElements canonicalPoints onRays determinantOfTriple
+attribute [reducible] fieldElements affinePointsFor canonicalPointsY0To4 canonicalPointsY5To9
+  canonicalPointsY10To14 canonicalPointsY15To18AndInfinity canonicalPoints onRays determinantOfTriple
   isCoordinateArc determinantOfPairWith ordinarilyCovered secantMultiplicity
+  uncoveredLocusAgreementOn
   pointsOnLine lineType lineTypeCount offSetSecantMultiplicityCount labels labelIndex
   selectedAt uncoveredAt addLabel subLabel chordSelectedCount chordHitsSelectedAt
   directionProfile missedDirection
