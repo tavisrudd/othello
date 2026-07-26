@@ -24,8 +24,9 @@ permitted_axioms = [
 ]
 
 # ---------------------------------------------------------------------------------------------
-# Gates.  Five independently compiled import-only targets; they are never built into one
-# environment, which is why completeness is defined over their union rather than a single closure.
+# Gates.  The relconic targets are independently compiled import-only modules, so completeness is
+# defined over their union.  The AME--LU axiom audit imports its aggregate, while both remain
+# explicit extraction units because the paper's reproducibility command builds both targets.
 
 [[gate]]
 module = "RelativeConicArcs.Gates.Relconic"
@@ -49,6 +50,66 @@ coverage_rule = "closure"
 
 [[gate]]
 module = "RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUAggregate"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUAggregateAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUDictionaryAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUExtensionFieldPencil"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUExtensionFieldPencilAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELULogicalPhaseFourCopyAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUMarginalMomentAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUPartyExtensionSplitting"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUPartyExtensionSplittingAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUPencilClassificationAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUStabilizerDictionaryAxioms"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AMELUTransportDivisorAxioms"
 terminals = []
 coverage_rule = "closure"
 
