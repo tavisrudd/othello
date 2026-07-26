@@ -1250,8 +1250,17 @@
       "last": 632,
       "purpose": "formalize signed Gale-kernel duality behind the balanced quotient configurations",
       "sequence": 139
+    },
+    {
+      "count": 1,
+      "first": 633,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 633,
+      "purpose": "formalize extension-field Frobenius-sector Clifford classification and jump divisors",
+      "sequence": 140
     }
   ],
-  "next_id": 633,
+  "next_id": 634,
   "schema": "codex-task-id-allocations-v1"
 }
