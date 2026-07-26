@@ -148,6 +148,115 @@ The degrees of freedom are now explicit:
 - the modular carriers retain genuine arithmetic freedom, beginning with the
   higher Lucas carrier assigned to C620.
 
+## Post-radius full-draft cold reads
+
+Two new readers independently read only the current 36-page manuscript after
+the radius proof and Lean adapter were added.  They did not see this note,
+earlier reviews, handoffs, formalization ledgers, verification maps, or each
+other's report.  One read as a coding theorist and one as an algebraic
+geometer.  Both answered:
+
+1. What questions does the paper beg?
+2. What does it imply that one should check or try to prove?
+3. What strong connections does it miss?
+4. What does it undersell?
+5. What does it oversell?
+
+### Independent consensus
+
+Both readers ranked exact split-free membership in the higher Lucas carriers
+as the strongest next mathematical theorem.  They asked for a base-\(p\)-digit
+or subfield criterion, exact \(\PGL_2/\PGammaL_2\) orbit decomposition, and a
+decision whether a fresh carrier contributes a whole component, a bounded
+orbit set, or nothing.
+
+Both then selected the same next cluster:
+
+- sharpen \(Q_r\), preferably by quotienting the ordered cover or replacing
+  the union-bound deletions by Chebotarev or intersection geometry;
+- settle the R7 covering radii at \(q=7,8,9\);
+- explain the decreasing last sporadic fields \(19,13,11\) through the
+  arithmetic of the genus-one fiber square rather than raw census data;
+- derive explicit Burnside formulas from
+  \(T/T^{r-1}\) modulo inversion and Frobenius;
+- turn the recurrence/Hankel criterion into a proved recognition or decoding
+  algorithm with a complexity bound.
+
+Both independently identified the same missed connections:
+
+- modular \(\mathrm{SL}_2\) representation theory, Frobenius twists, Weyl and
+  divided-power modules, and Lucas digit structure;
+- rational squarefree apolar rank, Waring/cactus rank, secant varieties, and
+  \(\operatorname{Hilb}^2(\mathbb P^1)\);
+- Prony reconstruction and Berlekamp--Massey recurrence theory;
+- Hurwitz spaces, exceptional covers, arithmetic dynamics, and effective
+  Chebotarev for the cubic-cover and sporadic-field phenomena.
+
+### What the draft undersells
+
+The readers agreed that the cleanest all-level payoff is buried:
+when \(q\geq Q_r\) and \(\operatorname{char}\mathbb F_q>r-1\), the
+projective deep-hole count is
+\[
+ \frac{q(q+1)^2}{2}
+\]
+for every \(r\geq6\), independent of redundancy.  They also judged the marked
+contraction to be a reusable coherence principle, not merely proof
+bookkeeping, and found the recurrence interpretation too brief to communicate
+its algorithmic meaning.  The geometry reader regarded the R5 genus-one
+fiber-square argument as the conceptual heart of the fixed-level results and
+thought the census tables currently receive more rhetorical weight.
+
+### What the draft oversells or states imprecisely
+
+Both readers warned that “complete all-field” can sound broader than the
+actual “every prime power \(q\geq7\)” scope.  Both also observed that the
+article alone does not display enough invariants to reconstruct the large
+R6/R7 exceptional orbit lists; exactness there necessarily carries the
+supplement and certificate trust boundary.  The geometry reader further
+objected that “all-level irreducible-component exclusion” sounds
+scheme-theoretic although the stated assertion concerns reduced irreducible
+components and does not exclude embedded primary structure.
+
+The coding reader found two concrete local inconsistencies:
+
+- Table `tab:classification-status` still calls the \(q\geq Q_r\) deep-hole
+  conclusion conditional on radius, although the printed
+  Seroussi--Roth--Dür argument now makes radius automatic.
+- Section 3 says \(\dim W_f=r-3\) without first restricting to the rank-two
+  Hankel locus.  A rank-one Hankel matrix has
+  \(\dim W_f=r-2\); the common-quadratic hypothesis should explicitly exclude
+  that case before the dimension count is used.
+
+The introduction's final related-work sentence also calls the transverse
+induction mechanism conditional, which undersells the now unconditional
+threshold theorem and should be reconciled with the headline.
+
+### Adversarial audit required for the arbitrary-level theorem
+
+The two reports diverged in severity but not in location.  The coding reader
+treated the integral bottom-component ledger and its recursive transport as
+the principal referee audit burden, without identifying a contradiction.  The
+geometry reader could not find two explicit bridges and would not accept the
+arbitrary-\(r\) theorem until they are isolated:
+
+1. an induction proving that every reduced irreducible component of the
+   recursively pointed bad locus, including noninjective, identically
+   colliding, and fresh Lucas branches, forces the asserted bottom
+   catalecticant-rowspace containment and enters the finite bottom-component
+   ledger;
+2. one proposition instantiating the one-step lower-package hypotheses at
+   every iteration, including uniform scheme-degree bounds, properness of the
+   deletion schemes after specialization, and the claimed
+   \(13+6(r-5)\) and \(d_j\) budgets.
+
+These are reader objections, not established counterexamples.  They are now
+release-blocking proof-audit questions: either point to the exact existing
+lemmas and make the implications explicit in the manuscript, or add the
+missing lemmas and proofs.  Both readers regarded the separately developed
+R5--R7 classifications as substantially more secure, subject to certificate
+replay and expansion of a few compressed coordinate exhaustions.
+
 ## Mystery ledger
 
 Settled:
@@ -169,6 +278,10 @@ Settled:
 
 Open:
 
+- Two adversarial proof obligations for the arbitrary-level stable-component
+  and uniform-threshold theorems must be closed or precisely discharged before
+  release: recursive bad-locus transport to the bottom component ledger, and
+  uniform instantiation of every iterated lower-package/deletion hypothesis.
 - The exact split-free subset of the first fresh Lucas carrier is owned by
   C620.
 - R7 at \(q=7,8,9\), explicit stable orbit counts, scheme-level radicality,

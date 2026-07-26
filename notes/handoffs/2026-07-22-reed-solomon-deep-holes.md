@@ -41,6 +41,13 @@ highest-value successor, exact split-freeness on higher Lucas carriers.
 `RelativeConicArcs.PRSUniformCoveringRadius` now checks the threshold-to-range
 arithmetic, the exact \(q=8,r=6\) endpoint, and the composition of separately
 supplied Seroussi--Roth and Dür implications with the syndrome interface.
+Two fresh post-radius full-draft readers independently reconfirmed modular
+carrier membership as the strongest successor and exposed one new
+release-blocking audit: the arbitrary-level proof must explicitly discharge
+the recursive bad-locus-to-bottom-ledger implication and the uniform
+stage-by-stage lower-package/deletion hypotheses.  The exact objections,
+consensus, missed connections, and undersell/oversell findings are appended to
+`notes/2026-07-25-c545-beyond4-question-cold-reads.md`.
 C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
