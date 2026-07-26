@@ -23,16 +23,17 @@ restrictions of one ambient polynomial, and the family of restriction maps must 
 ambient polynomials.
 
 For a fixed line parametrization, the module computes restricted binary coefficients, identifies
-their evaluation at `[t : 1]` with incidence at the corresponding plane point, derives injectivity
-of assigned affine parameters from pairwise avoidance, and chooses the nonzero scalars relating an
-incident family of restricted equations to its homogenized affine-node factors.  For a
-nontrivially indexed family, pairwise avoidance also proves that the restricted equations are
-nonzero.  Equality of squared polynomial-root values forces equality of their values over a
-characteristic-two field.
+their homogeneous evaluation with incidence at the corresponding plane vector, and proves the
+Cauchy--Binet identity for determinants of two restricted coefficient vectors.  Canonical
+projective zeros map to incident plane representatives.  Roots of two restricted squares have
+equal values when their binary arguments map to one exact shared plane representative.  The
+affine specialization derives injectivity of assigned parameters from pairwise avoidance and
+chooses the nonzero scalars relating an incident family of restricted equations to homogenized
+node factors.
 
-No projective incidence theorem is asserted here.  In particular, the module does not construct a
-pairing from secants, prove that a chosen family of line parametrizations jointly detects forms of
-a bounded degree, or interpolate compatible linewise roots.
+No geometric incidence theorem is asserted here.  In particular, the module does not construct a
+pairing from secants, supply exact shared representatives for a concrete line family, prove joint
+bounded-degree detection, or interpolate compatible linewise roots.
 -/
 
 namespace RelativeConicArcs
@@ -47,6 +48,7 @@ variable {K σ : Type*} [CommSemiring K] [Fintype σ] [DecidableEq σ]
 noncomputable def homogeneousLinearPolynomial (a : σ → K) : MvPolynomial σ K :=
   ∑ i, MvPolynomial.C (a i) * MvPolynomial.X i
 
+omit [DecidableEq σ] in
 /-- Evaluating a degree-`degree` homogeneous polynomial at a scalar multiple of a point multiplies
 its value by the `degree`-th power of that scalar. -/
 theorem MvPolynomial.IsHomogeneous.eval_smul_point

@@ -31,8 +31,10 @@ the new residual is divisible by the restricted product of the previous line equ
 coordinate-free binary-factor theorem proves divisibility from vanishing at canonical projective
 zeros, including points at infinity, and its characteristic-two form derives root-value agreement
 from agreement of squares.  The distinct-affine-node theorem is retained as a normalized
-specialization.  Identifying the concrete restricted factors, their projective zeros, and their
-pairwise relative primality remains geometric.
+specialization.  Restricted plane covectors are identified with their binary factors; a
+Cauchy--Binet determinant gate proves their pairwise relative primality and composes directly with
+the coordinate-free projective-zero theorem.  Nonvanishing of those determinants and construction
+of exact shared representatives remain geometric inputs.
 -/
 
 namespace RelativeConicArcs
