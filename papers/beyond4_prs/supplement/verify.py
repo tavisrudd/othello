@@ -47,9 +47,9 @@ EXPECTED_PROJECT_CLOSURE = (
     "RelativeConicArcs.PRSStableComponents",
     "RelativeConicArcs.PRSUniformCoveringRadius",
 )
-EXPECTED_AXIOM_TARGET_COUNT = 58
+EXPECTED_AXIOM_TARGET_COUNT = 66
 EXPECTED_AXIOM_TARGET_SHA256 = (
-    "c1bf1cadc48e9f7ff2dfdfe92d54379a59fe402a8a1c85cac98ef340a6c9eb9a"
+    "ed61120a9f40a8e4ca8eb672b43ab61510d61a1e42fa01143c765a1d73c63ad1"
 )
 
 
@@ -170,8 +170,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 36:
-        raise SystemExit(f"expected 36 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 42:
+        raise SystemExit(f"expected 42 adopted manuscript labels, found {len(labels)}")
 
     aggregate_text = AGGREGATE.read_text(encoding="utf-8")
     imports = tuple(

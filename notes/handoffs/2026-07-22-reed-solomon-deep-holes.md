@@ -6,9 +6,9 @@
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
 C603 complete. C545 has repaired C603's release-blocking local trust boundary.
-The adopted aggregate now has the exact 16-file R5--R7 closure and 58-target
+The adopted aggregate now has the exact 16-file R5--R7 closure and 66-target
 axiom audit; the shared contraction API is separated from the companion R9
-residual-quadratic module; all 36 current manuscript labels reconcile exactly;
+residual-quadratic module; all 42 adopted manuscript labels reconcile exactly;
 the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
 the adoption/formalization/release ledgers and 43-artifact evidence pack agree;
 and the verifier checks the TeX label set, direct imports, transitive closure,
@@ -48,6 +48,19 @@ the recursive bad-locus-to-bottom-ledger implication and the uniform
 stage-by-stage lower-package/deletion hypotheses.  The exact objections,
 consensus, missed connections, and undersell/oversell findings are appended to
 `notes/2026-07-25-c545-beyond4-question-cold-reads.md`.
+Those objections are now closed.  The manuscript separates the exact-linear-gcd
+graph, ordinary collision deletions, and the reduced recursively contained
+carrier; proves the exact bottom ledger, old-marker propriety,
+exact-linear-gcd transport, and whole-line collision classification; and gives
+separate uniform budgets for the trivial-gcd and factor-preserving flags.
+Matching Lean interfaces check the recursive logical descent and all uniform
+budget arithmetic while leaving the concrete geometry explicit.  A fresh
+manuscript-only referee first returned major revision, then minor revision, and
+finally **Accept**, with no remaining release-blocking proof defect, on the
+39-page canonical PDF with SHA-256
+`35c2d30762be4fd25ccd35e410471bbec9e2d5746b4af82ed8f1a4e093a165ed`;
+the TIT build is 29 pages.  The complete repair and review record is
+`notes/2026-07-25-c545-beyond4-referee-repair-signoff.md`.
 C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete

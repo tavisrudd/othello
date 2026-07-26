@@ -10,8 +10,9 @@ import RelativeConicArcs.PRSUniformCoveringRadius
 This gate is the paper-facing import closure for the formal results adopted by the
 redundancy-five through redundancy-seven manuscript.  It imports the shared Hankel and coding
 interfaces, redundancy-five algebra and finite-table arithmetic, coherent polar contraction,
-the redundancy-six/seven synthesis interfaces, the stable-component coordinate algebra, and the
-uniform covering-radius threshold bridge.
+the recursive contained-component and redundancy-six/seven synthesis interfaces, the
+stable-component coordinate algebra, and the uniform iteration-budget and covering-radius
+threshold bridges.
 
 The imported synthesis theorems are conditional.  Concrete projective-coordinate dictionaries,
 the Seroussi--Roth nonextendability theorem, Dür's completeness--radius equivalence, geometric

@@ -36,6 +36,177 @@ def SeroussiRothDimensionRange (q r : ℕ) : Prop :=
 def uniformTransverseThreshold (r : ℕ) : ℕ :=
   6 * r - 15 + Nat.sqrt (4 * (6 * r - 17))
 
+/-- Uniform degree budget for every unavailable-parameter scheme in the iterated polar flag. -/
+def uniformParameterBudget (r : ℕ) : ℕ :=
+  3 * r - 5
+
+/-- Degree budget obtained at an intermediate redundancy `j`. -/
+def intermediateParameterBudget (r j : ℕ) : ℕ :=
+  3 + 1 + (2 * j - 6) + 3 * (r - j)
+
+/-- Parameter budget for the factor-preserving exact-linear-gcd flag. -/
+def exactLinearFlagParameterBudget (r j : ℕ) : ℕ :=
+  3 + 1 + (r - j)
+
+/-- Total deletion degree on the final genus-one ordered-root curve. -/
+def bottomCurveDeletionBudget (r : ℕ) : ℕ :=
+  13 + 6 * (r - 5)
+
+/-- Total deletion degree on the exact-linear-gcd quadratic deck graph. -/
+def exactLinearGraphDeletionBudget (r : ℕ) : ℕ :=
+  8 + 2 * (r - 5)
+
+/-- The bottom-curve deletion formula simplifies to `6r - 17` for redundancy at least six. -/
+theorem bottomCurveDeletionBudget_eq
+    {r : ℕ} (hr : 6 ≤ r) :
+    bottomCurveDeletionBudget r = 6 * r - 17 := by
+  unfold bottomCurveDeletionBudget
+  omega
+
+/-- The exact-linear-gcd graph deletion formula simplifies to `2r - 2`. -/
+theorem exactLinearGraphDeletionBudget_eq
+    {r : ℕ} (hr : 6 ≤ r) :
+    exactLinearGraphDeletionBudget r = 2 * r - 2 := by
+  unfold exactLinearGraphDeletionBudget
+  omega
+
+/-- Every intermediate parameter budget is strictly smaller than the bottom-stage budget. -/
+theorem intermediateParameterBudget_lt_uniformParameterBudget
+    {r j : ℕ} (hj : 7 ≤ j) (hjr : j ≤ r) :
+    intermediateParameterBudget r j < uniformParameterBudget r := by
+  unfold intermediateParameterBudget uniformParameterBudget
+  omega
+
+/-- The factor-preserving exact-linear-gcd flag has a smaller parameter budget than the
+uniform trivial-gcd iteration. -/
+theorem exactLinearFlagParameterBudget_lt_uniformParameterBudget
+    {r j : ℕ} (hr : 6 ≤ r) (hj : 6 ≤ j) (hjr : j ≤ r) :
+    exactLinearFlagParameterBudget r j < uniformParameterBudget r := by
+  unfold exactLinearFlagParameterBudget uniformParameterBudget
+  omega
+
+/-- The uniform field threshold leaves more rational marker parameters than the largest
+stagewise unavailable-parameter degree. -/
+theorem uniformParameterBudget_lt_fieldOrder_add_one
+    {q r : ℕ} (hr : 6 ≤ r) (hq : uniformTransverseThreshold r ≤ q) :
+    uniformParameterBudget r < q + 1 := by
+  have hbudget :
+      3 * r - 5 < uniformTransverseThreshold r := by
+    unfold uniformTransverseThreshold
+    omega
+  unfold uniformParameterBudget
+  omega
+
+/-- The uniform threshold leaves a rational point on the exact-linear-gcd graph after every
+retained-marker deletion. -/
+theorem exactLinearGraphDeletionBudget_lt_fieldOrder_add_one
+    {q r : ℕ} (hr : 6 ≤ r) (hq : uniformTransverseThreshold r ≤ q) :
+    exactLinearGraphDeletionBudget r < q + 1 := by
+  have hbudget :
+      2 * r - 2 < uniformTransverseThreshold r := by
+    unfold uniformTransverseThreshold
+    omega
+  rw [exactLinearGraphDeletionBudget_eq hr]
+  omega
+
+/-- Geometric inputs for instantiating the lower package at every stage of a uniform polar
+iteration.  Properness, geometric integrality, and the degree comparisons remain explicit
+hypotheses; Lean checks their simultaneous use and the threshold arithmetic. -/
+structure UniformIteratedPackageInput (q r : ℕ) where
+  /-- Degree of the unavailable-parameter scheme at stage `j`. -/
+  parameterSchemeDegree : ℕ → ℕ
+  /-- The unavailable-parameter scheme at stage `j` is a proper closed subscheme of the
+  projective marker line. -/
+  parameterSchemeProper : ℕ → Prop
+  /-- Properness holds at every stage used by the iteration. -/
+  parameterSchemeProper_of_mem :
+    ∀ {j}, 6 ≤ j → j ≤ r → parameterSchemeProper j
+  /-- Every stagewise scheme has degree at most the uniform bottom-stage budget. -/
+  parameterSchemeDegree_le :
+    ∀ {j}, 6 ≤ j → j ≤ r →
+      parameterSchemeDegree j ≤ uniformParameterBudget r
+  /-- Degree of the parameter scheme on the factor-preserving exact-linear-gcd branch. -/
+  exactLinearFlagParameterSchemeDegree : ℕ → ℕ
+  /-- Properness proposition for the exact-linear-gcd flag at stage `j`. -/
+  exactLinearFlagParameterSchemeProper : ℕ → Prop
+  /-- The exact-linear-gcd flag parameter scheme is proper at every stage used. -/
+  exactLinearFlagParameterSchemeProper_of_mem :
+    ∀ {j}, 6 ≤ j → j ≤ r → exactLinearFlagParameterSchemeProper j
+  /-- Its terminal-carrier, fixed-factor, and old-marker degree has the displayed bound. -/
+  exactLinearFlagParameterSchemeDegree_le :
+    ∀ {j}, 6 ≤ j → j ≤ r →
+      exactLinearFlagParameterSchemeDegree j ≤ exactLinearFlagParameterBudget r j
+  /-- Proposition asserting that the final ordered-root curve is proper. -/
+  bottomCurveIsProper : Prop
+  /-- Proof that the final ordered-root curve is proper. -/
+  bottomCurveProper : bottomCurveIsProper
+  /-- Proposition asserting that the final ordered-root curve is geometrically integral. -/
+  bottomCurveIsGeometricallyIntegral : Prop
+  /-- Proof that the final ordered-root curve is geometrically integral. -/
+  bottomCurveGeometricallyIntegral : bottomCurveIsGeometricallyIntegral
+  /-- Degree of its singular, branch, diagonal, collision, and marker deletion scheme. -/
+  bottomCurveDeletionDegree : ℕ
+  /-- The deletion scheme obeys the uniform retained-marker bound. -/
+  bottomCurveDeletionDegree_le :
+    bottomCurveDeletionDegree ≤ bottomCurveDeletionBudget r
+  /-- Proposition asserting that the exact-linear-gcd quadratic deck graph is proper. -/
+  exactLinearGraphIsProper : Prop
+  /-- Proof that the exact-linear-gcd graph is proper. -/
+  exactLinearGraphProper : exactLinearGraphIsProper
+  /-- Proposition asserting that the exact-linear-gcd graph is geometrically integral. -/
+  exactLinearGraphIsGeometricallyIntegral : Prop
+  /-- Proof that the exact-linear-gcd graph is geometrically integral. -/
+  exactLinearGraphGeometricallyIntegral : exactLinearGraphIsGeometricallyIntegral
+  /-- Number of rational points on the exact-linear-gcd graph. -/
+  exactLinearGraphRationalPointCardinality : ℕ
+  /-- The rational deck graph has one point over every rational base point. -/
+  exactLinearGraphRationalPointCardinality_eq :
+    exactLinearGraphRationalPointCardinality = q + 1
+  /-- Degree of its fixed-point, branch, gcd-root, and retained-marker deletion scheme. -/
+  exactLinearGraphDeletionDegree : ℕ
+  /-- The graph deletion scheme obeys the uniform retained-marker bound. -/
+  exactLinearGraphDeletionDegree_le :
+    exactLinearGraphDeletionDegree ≤ exactLinearGraphDeletionBudget r
+
+namespace UniformIteratedPackageInput
+
+/-- Above the uniform threshold, every supplied stage is proper and has fewer unavailable
+parameters than the `q+1` rational points of the projective marker line; the bottom curve and
+deletion data are retained in the same conclusion. -/
+theorem packages_fit_uniform_threshold
+    {q r : ℕ} (input : UniformIteratedPackageInput q r)
+    (hr : 6 ≤ r) (hq : uniformTransverseThreshold r ≤ q) :
+    (∀ {j}, 6 ≤ j → j ≤ r →
+      input.parameterSchemeProper j ∧ input.parameterSchemeDegree j < q + 1) ∧
+    (∀ {j}, 6 ≤ j → j ≤ r →
+      input.exactLinearFlagParameterSchemeProper j ∧
+        input.exactLinearFlagParameterSchemeDegree j < q + 1) ∧
+      input.bottomCurveIsProper ∧ input.bottomCurveIsGeometricallyIntegral ∧
+        input.bottomCurveDeletionDegree ≤ bottomCurveDeletionBudget r ∧
+      input.exactLinearGraphIsProper ∧
+        input.exactLinearGraphIsGeometricallyIntegral ∧
+          input.exactLinearGraphDeletionDegree <
+            input.exactLinearGraphRationalPointCardinality := by
+  refine ⟨?_, ?_, input.bottomCurveProper, input.bottomCurveGeometricallyIntegral,
+    input.bottomCurveDeletionDegree_le, input.exactLinearGraphProper,
+    input.exactLinearGraphGeometricallyIntegral, ?_⟩
+  · intro j hj hjr
+    exact ⟨input.parameterSchemeProper_of_mem hj hjr,
+      lt_of_le_of_lt (input.parameterSchemeDegree_le hj hjr)
+        (uniformParameterBudget_lt_fieldOrder_add_one hr hq)⟩
+  · intro j hj hjr
+    refine ⟨input.exactLinearFlagParameterSchemeProper_of_mem hj hjr, ?_⟩
+    exact lt_of_le_of_lt
+      (input.exactLinearFlagParameterSchemeDegree_le hj hjr)
+      (lt_trans
+        (exactLinearFlagParameterBudget_lt_uniformParameterBudget hr hj hjr)
+        (uniformParameterBudget_lt_fieldOrder_add_one hr hq))
+  · rw [input.exactLinearGraphRationalPointCardinality_eq]
+    exact lt_of_le_of_lt input.exactLinearGraphDeletionDegree_le
+      (exactLinearGraphDeletionBudget_lt_fieldOrder_add_one hr hq)
+
+end UniformIteratedPackageInput
+
 /-- For redundancy at least six, the uniform transverse threshold dominates `2r - 3`. -/
 theorem two_mul_sub_three_le_uniformTransverseThreshold
     {r : ℕ} (hr : 6 ≤ r) :

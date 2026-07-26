@@ -378,6 +378,63 @@ theorem splitFree_implies_persistent_or_modular
 
 end CoherentPolarInput
 
+/-- Abstract component data for a recursively contained polar flag.  `Stage j` is the syndrome
+space after `j` remaining contractions.  The geometric argument must supply a chosen lower
+component, classify each exceptional component, and prove that persistent and modular
+classifications lift through one contraction. -/
+structure RecursiveContainedInput (Stage : ℕ → Type*) where
+  /-- The recursively defined reduced bad locus at each stage. -/
+  bad : ∀ j, Stage j → Prop
+  /-- The declared persistent component at each stage. -/
+  persistent : ∀ j, Stage j → Prop
+  /-- The declared modular component at each stage. -/
+  modular : ∀ j, Stage j → Prop
+  /-- A lower syndrome on the irreducible component selected by a contained polar family. -/
+  lower : ∀ j, Stage (j + 1) → Stage j
+  /-- Every component of the bottom bad locus is classified. -/
+  bottomClassification :
+    ∀ {syndrome}, bad 0 syndrome → persistent 0 syndrome ∨ modular 0 syndrome
+  /-- One recursive step is either already classified or descends to the selected lower
+  component.  Noninjective and identically colliding components belong in the first two
+  alternatives after their geometric classification. -/
+  recursiveStep :
+    ∀ j {syndrome}, bad (j + 1) syndrome →
+      persistent (j + 1) syndrome ∨ modular (j + 1) syndrome ∨
+        bad j (lower j syndrome)
+  /-- A persistent classification of the selected lower component lifts one stage. -/
+  persistent_lift :
+    ∀ j {syndrome}, persistent j (lower j syndrome) → persistent (j + 1) syndrome
+  /-- A modular classification of the selected lower component lifts one stage. -/
+  modular_lift :
+    ∀ j {syndrome}, modular j (lower j syndrome) → modular (j + 1) syndrome
+
+namespace RecursiveContainedInput
+
+/-- Finite recursive descent to a classified bottom component classifies every stage.
+
+Lean checks the induction once the component-selection and one-step lifting fields are supplied.
+It does not prove irreducibility, identify the geometric components, or construct the
+catalecticant-rowspace image used to discharge those fields. -/
+theorem bad_implies_persistent_or_modular
+    {Stage : ℕ → Type*} (input : RecursiveContainedInput Stage) :
+    ∀ j {syndrome : Stage j}, input.bad j syndrome →
+      input.persistent j syndrome ∨ input.modular j syndrome := by
+  intro j
+  induction j with
+  | zero =>
+      intro syndrome hbad
+      exact input.bottomClassification hbad
+  | succ j ih =>
+      intro syndrome hbad
+      rcases input.recursiveStep j hbad with hpersistent | hmodular | hlower
+      · exact Or.inl hpersistent
+      · exact Or.inr hmodular
+      · rcases ih hlower with hpersistent | hmodular
+        · exact Or.inl (input.persistent_lift j hpersistent)
+        · exact Or.inr (input.modular_lift j hmodular)
+
+end RecursiveContainedInput
+
 /-- Scalar tangent-fibre cocycle `z ↦ z + n u`. -/
 def tangentTranslate {K : Type*} [Semiring K] (n : ℕ) (u z : K) : K :=
   z + (n : K) * u

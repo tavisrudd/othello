@@ -218,6 +218,20 @@ objected that “all-level irreducible-component exclusion” sounds
 scheme-theoretic although the stated assertion concerns reduced irreducible
 components and does not exclude embedded primary structure.
 
+## Subsequent blind referee closure
+
+The local defects and the two all-level proof bridges identified above were
+repaired, then a fresh manuscript-only referee was commissioned.  Its first
+major-revision report exposed a remaining conflation of exact-linear-gcd,
+ordinary-collision, and recursively contained branches.  After the terminal
+carrier, exact bottom ledger, fixed-factor transport, collision, and separate
+uniform-package branches were rewritten, the referee returned **Accept** with
+no remaining release-blocking proof defect.
+
+The repair sequence, exact formal boundary, final PDF hash, and the consensus
+discussion queue are recorded in
+`notes/2026-07-25-c545-beyond4-referee-repair-signoff.md`.
+
 The coding reader found two concrete local inconsistencies:
 
 - Table `tab:classification-status` still calls the \(q\geq Q_r\) deep-hole

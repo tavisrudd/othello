@@ -98,9 +98,12 @@ terminals are direct specializations of the imported generic MDS--CSS
 theorems.
 
 `RelativeConicArcs.PRSUniformCoveringRadius` checks that the displayed
-all-level threshold implies the Seroussi--Roth dimension range and that
-\((q,r)=(8,6)\) lies at its exact endpoint. It then composes separately
-supplied Seroussi--Roth and Dür implications with
-`PRSFoundation.CoveringRadiusInput`. The code duality, nonextendability,
-covering-radius equivalence, and concrete syndrome semantics are not
-formalized.
+all-level threshold dominates every supplied stagewise parameter degree,
+matches the bottom deletion formula, implies the Seroussi--Roth dimension
+range, and has \((q,r)=(8,6)\) at its exact endpoint.
+`PRSPolarInduction.RecursiveContainedInput` checks the finite recursive
+classification once component selection and one-step lifts are supplied.
+The radius module then composes separately supplied Seroussi--Roth and Dür
+implications with `PRSFoundation.CoveringRadiusInput`. Irreducible-component
+selection, concrete scheme geometry, code duality, nonextendability,
+covering-radius equivalence, and syndrome semantics are not formalized.
