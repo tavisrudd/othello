@@ -1493,8 +1493,17 @@
       "last": 662,
       "purpose": "Conceptual passant-graph bound replacing terminal conic-filling searches through eight points",
       "sequence": 166
+    },
+    {
+      "count": 1,
+      "first": 663,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 663,
+      "purpose": "split Chow polynomial and projective-code exclusion for q16 eight-arcs",
+      "sequence": 167
     }
   ],
-  "next_id": 663,
+  "next_id": 664,
   "schema": "codex-task-id-allocations-v1"
 }
