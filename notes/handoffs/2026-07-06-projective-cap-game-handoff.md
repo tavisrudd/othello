@@ -1155,6 +1155,25 @@ legality on every response. The central torus element cannot be the proof
 datum even locally; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-central-involution-rank-datum.md`](../2026-07-25-c80-central-involution-rank-datum.md).
 
+**The full history-torus obligation rewrite is closed-negative, while the
+later-results snapshot supplies the next exact substrate (C80,
+2026-07-25).** Retaining `H=ι_oι_p` from the marked repair and admitting all
+legal strict replies in `<H>.x` gives only 14 projected q17 edges, covers
+`21/32` moves and `15/22` terminal isolates, and is value-impure
+(`6 P + 8 N`); only eight isolates touch a P edge. The q19 control covers
+`20/51` moves with `2 P + 9 N`. Generator conjugacy, projected relations,
+and direct determinant legality all commute with transport. The review of
+`../2026-07-25-results-summary-snapshot.md` identifies the useful successor:
+the terminal-reply graph is exactly the graph of maximal two-element faces
+of the **full continuation complex**, so tangent-code pair conflicts alone
+are insufficient because collinear-triple minimal nonfaces are essential.
+Clebsch Paper II's secant-product quotient `(P_M-P_M0)/Q` is a plausible
+anti-packing carrier for pairing obligations, with Plücker-switch updates,
+but only after a bridge from full legal-move obligations (including
+intruders) to conic matchings. Next test that bridge on the q17 `K2` plus
+ramified-tree obligation shape; C82 remains gated. Report+cert:
+[`../2026-07-25-c80-history-torus-obligation-rewrite.md`](../2026-07-25-c80-history-torus-obligation-rewrite.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q

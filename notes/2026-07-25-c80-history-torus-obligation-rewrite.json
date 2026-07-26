@@ -1,0 +1,1806 @@
+{
+  "candidate": {
+    "history_datum": "H=iota_o iota_p from the marked repair edge",
+    "projection_rule": "count distinct geometric reply edges after eliminating power witnesses",
+    "reply_correspondence": "distinct jointly legal strict replies y in the cyclic projective orbit <H>.x of the opponent x"
+  },
+  "cases": [
+    {
+      "direct_determinant_legality_checks": 544,
+      "edges": [
+        {
+          "edge": [
+            [
+              0,
+              13
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            3,
+            15
+          ]
+        },
+        {
+          "edge": [
+            [
+              0,
+              13
+            ],
+            [
+              10,
+              7
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            16
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              3
+            ],
+            [
+              10,
+              7
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              9
+            ],
+            [
+              10,
+              5
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              9
+            ],
+            [
+              10,
+              12
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              3
+            ],
+            [
+              10,
+              7
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              12
+            ],
+            [
+              12,
+              7
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              13
+            ],
+            [
+              12,
+              7
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              5,
+              2
+            ],
+            [
+              9,
+              15
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              5,
+              15
+            ],
+            [
+              12,
+              9
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              13
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              9,
+              12
+            ],
+            [
+              10,
+              13
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              10,
+              12
+            ],
+            [
+              12,
+              10
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        }
+      ],
+      "history_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "repair": [
+          7,
+          1
+        ]
+      },
+      "history_generator_matrix": [
+        1,
+        1,
+        6,
+        11
+      ],
+      "history_product_order": 18,
+      "isolates_covered": 15,
+      "isolates_covered_by_P_edges": 8,
+      "legal_moves": 32,
+      "moves_covered": 21,
+      "moves_covered_by_P_edges": 11,
+      "projected_relation_edges": 14,
+      "q": 17,
+      "relation_target_omega_histogram": [
+        [
+          0,
+          14
+        ]
+      ],
+      "relation_value_histogram": {
+        "N": 8,
+        "P": 6
+      },
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "terminal_graph_isolates": 22,
+      "uncovered_isolates": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          10,
+          3
+        ]
+      ]
+    },
+    {
+      "direct_determinant_legality_checks": 544,
+      "edges": [
+        {
+          "edge": [
+            [
+              0,
+              14
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              2
+            ],
+            [
+              6,
+              15
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              13
+            ],
+            [
+              6,
+              12
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              5
+            ],
+            [
+              9,
+              15
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              14
+            ],
+            [
+              7,
+              7
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              6
+            ],
+            [
+              11,
+              14
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              2
+            ],
+            [
+              9,
+              14
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              2
+            ],
+            [
+              11,
+              6
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              15
+            ],
+            [
+              8,
+              6
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              9,
+              15
+            ],
+            [
+              10,
+              5
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              9,
+              15
+            ],
+            [
+              11,
+              2
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            16
+          ]
+        },
+        {
+          "edge": [
+            [
+              10,
+              5
+            ],
+            [
+              11,
+              2
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            3,
+            15
+          ]
+        },
+        {
+          "edge": [
+            [
+              10,
+              7
+            ],
+            [
+              12,
+              13
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        }
+      ],
+      "history_edge": {
+        "opponent": [
+          5,
+          0
+        ],
+        "repair": [
+          4,
+          10
+        ]
+      },
+      "history_generator_matrix": [
+        1,
+        9,
+        12,
+        9
+      ],
+      "history_product_order": 18,
+      "isolates_covered": 15,
+      "isolates_covered_by_P_edges": 8,
+      "legal_moves": 32,
+      "moves_covered": 21,
+      "moves_covered_by_P_edges": 11,
+      "projected_relation_edges": 14,
+      "q": 17,
+      "relation_target_omega_histogram": [
+        [
+          0,
+          14
+        ]
+      ],
+      "relation_value_histogram": {
+        "N": 8,
+        "P": 6
+      },
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "terminal_graph_isolates": 22,
+      "uncovered_isolates": [
+        [
+          0,
+          1
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          12,
+          5
+        ]
+      ]
+    },
+    {
+      "direct_determinant_legality_checks": 544,
+      "edges": [
+        {
+          "edge": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              0,
+              9
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              1
+            ],
+            [
+              3,
+              6
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              1
+            ],
+            [
+              7,
+              5
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              6
+            ],
+            [
+              10,
+              3
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              5
+            ],
+            [
+              7,
+              0
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              3
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            16
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              3
+            ],
+            [
+              9,
+              0
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              3
+            ],
+            [
+              10,
+              7
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              2
+            ],
+            [
+              12,
+              9
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              9
+            ],
+            [
+              9,
+              0
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            3,
+            15
+          ]
+        },
+        {
+          "edge": [
+            [
+              7,
+              7
+            ],
+            [
+              11,
+              6
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              7,
+              7
+            ],
+            [
+              11,
+              15
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        }
+      ],
+      "history_edge": {
+        "opponent": [
+          8,
+          14
+        ],
+        "repair": [
+          4,
+          10
+        ]
+      },
+      "history_generator_matrix": [
+        1,
+        12,
+        12,
+        5
+      ],
+      "history_product_order": 18,
+      "isolates_covered": 15,
+      "isolates_covered_by_P_edges": 8,
+      "legal_moves": 32,
+      "moves_covered": 21,
+      "moves_covered_by_P_edges": 11,
+      "projected_relation_edges": 14,
+      "q": 17,
+      "relation_target_omega_histogram": [
+        [
+          0,
+          14
+        ]
+      ],
+      "relation_value_histogram": {
+        "N": 8,
+        "P": 6
+      },
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "terminal_graph_isolates": 22,
+      "uncovered_isolates": [
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          12,
+          5
+        ]
+      ]
+    },
+    {
+      "direct_determinant_legality_checks": 544,
+      "edges": [
+        {
+          "edge": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              5
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              14
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            3,
+            15
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              10
+            ],
+            [
+              3,
+              13
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              1,
+              10
+            ],
+            [
+              6,
+              14
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              5
+            ],
+            [
+              4,
+              14
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            16
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              5
+            ],
+            [
+              9,
+              15
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              14
+            ],
+            [
+              10,
+              13
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              15
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            8,
+            10
+          ]
+        },
+        {
+          "edge": [
+            [
+              5,
+              10
+            ],
+            [
+              9,
+              0
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5,
+            13
+          ]
+        },
+        {
+          "edge": [
+            [
+              5,
+              15
+            ],
+            [
+              9,
+              12
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              3
+            ],
+            [
+              12,
+              10
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            6,
+            12
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              12
+            ],
+            [
+              8,
+              5
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        },
+        {
+          "edge": [
+            [
+              10,
+              12
+            ],
+            [
+              12,
+              10
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            7,
+            11
+          ]
+        }
+      ],
+      "history_edge": {
+        "opponent": [
+          11,
+          9
+        ],
+        "repair": [
+          7,
+          1
+        ]
+      },
+      "history_generator_matrix": [
+        1,
+        3,
+        6,
+        13
+      ],
+      "history_product_order": 18,
+      "isolates_covered": 15,
+      "isolates_covered_by_P_edges": 8,
+      "legal_moves": 32,
+      "moves_covered": 21,
+      "moves_covered_by_P_edges": 11,
+      "projected_relation_edges": 14,
+      "q": 17,
+      "relation_target_omega_histogram": [
+        [
+          0,
+          14
+        ]
+      ],
+      "relation_value_histogram": {
+        "N": 8,
+        "P": 6
+      },
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "terminal_graph_isolates": 22,
+      "uncovered_isolates": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          12,
+          5
+        ]
+      ]
+    },
+    {
+      "direct_determinant_legality_checks": 459,
+      "edges": [
+        {
+          "edge": [
+            [
+              1,
+              1
+            ],
+            [
+              12,
+              8
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            1,
+            9
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              5
+            ],
+            [
+              10,
+              15
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 1,
+          "witness_powers": [
+            1,
+            9
+          ]
+        },
+        {
+          "edge": [
+            [
+              2,
+              10
+            ],
+            [
+              9,
+              17
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 2,
+          "witness_powers": [
+            2,
+            8
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              3
+            ],
+            [
+              14,
+              12
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            5
+          ]
+        },
+        {
+          "edge": [
+            [
+              3,
+              8
+            ],
+            [
+              12,
+              16
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            4,
+            6
+          ]
+        },
+        {
+          "edge": [
+            [
+              5,
+              12
+            ],
+            [
+              7,
+              13
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 1,
+          "witness_powers": [
+            5
+          ]
+        },
+        {
+          "edge": [
+            [
+              6,
+              11
+            ],
+            [
+              14,
+              12
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 1,
+          "witness_powers": [
+            4,
+            6
+          ]
+        },
+        {
+          "edge": [
+            [
+              8,
+              5
+            ],
+            [
+              10,
+              4
+            ]
+          ],
+          "in_copycat_survivor": true,
+          "target_exact_grid_value": "P",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            8
+          ]
+        },
+        {
+          "edge": [
+            [
+              8,
+              10
+            ],
+            [
+              13,
+              12
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            4,
+            6
+          ]
+        },
+        {
+          "edge": [
+            [
+              9,
+              16
+            ],
+            [
+              13,
+              12
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            1,
+            9
+          ]
+        },
+        {
+          "edge": [
+            [
+              11,
+              17
+            ],
+            [
+              14,
+              16
+            ]
+          ],
+          "in_copycat_survivor": false,
+          "target_exact_grid_value": "N",
+          "target_omega": 0,
+          "witness_powers": [
+            2,
+            8
+          ]
+        }
+      ],
+      "history_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "repair": [
+          0,
+          2
+        ]
+      },
+      "history_generator_matrix": [
+        1,
+        13,
+        3,
+        8
+      ],
+      "history_product_order": 10,
+      "isolates_covered": 20,
+      "isolates_covered_by_P_edges": 4,
+      "legal_moves": 51,
+      "moves_covered": 20,
+      "moves_covered_by_P_edges": 4,
+      "projected_relation_edges": 11,
+      "q": 19,
+      "relation_target_omega_histogram": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "relation_value_histogram": {
+        "N": 9,
+        "P": 2
+      },
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "terminal_graph_isolates": 51,
+      "uncovered_isolates": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          1,
+          15
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          2,
+          16
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          6,
+          17
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          14,
+          8
+        ]
+      ]
+    }
+  ],
+  "cross_checks": {
+    "engine_pair_legality_equals_direct_projective_determinants": true,
+    "history_generator_commutes_with_projective_transport": true,
+    "projected_relation_commutes_with_transport": true
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "schema": "c80-history-torus-obligation-rewrite-v1",
+  "source": "rust/scripts/c80_history_torus_obligation_rewrite.py",
+  "transport": {
+    "q17_representative": {
+      "all_checks_pass": true,
+      "generator_conjugacy_checks": 4,
+      "stabilizer_order": 4,
+      "transported_projected_edge_checks": 56
+    },
+    "q19_control": {
+      "all_checks_pass": true,
+      "generator_conjugacy_checks": 4,
+      "stabilizer_order": 4,
+      "transported_projected_edge_checks": 44
+    }
+  },
+  "verdict": {
+    "opponent_complete_rank_update": "FAIL",
+    "q17_edgewise_purity": "FAIL: 6 P + 8 N edges",
+    "q17_isolate_coverage": "15/22",
+    "q17_sound_isolate_coverage": "8/22",
+    "q19_edgewise_purity": "FAIL: 2 P + 9 N edges",
+    "q19_move_coverage": "20/51",
+    "uniform_c80_candidate": false
+  }
+}
