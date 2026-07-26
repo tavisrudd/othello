@@ -67,12 +67,16 @@
    secant-index distribution identifies equality exactly with a disjoint prescribed conic
    containing the oval nucleus. The parallel even first branch is a hyperoval disjoint from the
    prescribed conic.
-   The discrete gap, the complete-affine roots, the odd three-value spectrum, and its
-   characteristic-two power-of-two collapse are also Lean terminals in
+   The discrete gap, the complete-affine roots, both three-value spectra, and their
+   characteristic-two reductions are also Lean terminals in
    `RelativeConicArcs.EqualityConsequences`: respectively
    `scaledDefect_eq_zero_or_half_sub_two_le`, `completeAffine_equality_order`,
-   `odd_completeOutside_zeroDefect_order_spectrum`, and
-   `odd_standardConic_zeroDefect_charTwo_order`. The final geometric identification with an
+   `even_completeOutside_zeroDefect_order_spectrum`,
+   `odd_completeOutside_zeroDefect_order_spectrum`,
+   `even_equality_spectrum_power_two`, and
+   `odd_standardConic_zeroDefect_charTwo_order`. The even spectrum theorem is stronger than the
+   conic corollary: it assumes only a complete arc outside a hole set of cardinality \(q+1\).
+   The final geometric identification with an
    arbitrary oval or hyperoval and its nucleus remains an analytic manuscript proof: the Lean
    conic API supplies the required nucleus geometry for the standard conic, not the converse
    classification for an arbitrary oval.
@@ -94,7 +98,9 @@
    Lean checks the incidence identity in
    `RelativeConicArcs.upper_even_equality_branch_holeIncidence`, the invariant-set bridge in
    `ZeroDefectConicInvariance`, and the general terminal
-   `TangentPairFourGroup.no_upper_even_equality_branch`. Thus the proof no longer uses the
+   `TangentPairFourGroup.no_upper_even_equality_branch`. The composed terminal
+   `TangentPairFourGroup.even_standardConic_zeroDefect_charTwo_order` concludes \(q=k-2\)
+   directly. Thus the proof no longer uses the
    Ramanujan--Nagell classification. The reduction from a nonsingular conic to the standard conic
    is the projective normalization in the manuscript.
 8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened

@@ -795,6 +795,41 @@ theorem no_upper_even_equality_branch
     hcomplete hcard (by omega) (upper_even_equality_branch_half_even hn hq)
       hzero hinc
 
+/-- An even zero-defect arc complete outside the standard conic has hyperoval size.  The
+three-order equality spectrum is purely incidence-theoretic; characteristic two eliminates its
+middle root, and the conic involution argument eliminates its upper root. -/
+theorem even_standardConic_zeroDefect_charTwo_order
+    {A : Finset (Point K)} {n : ℕ}
+    (hcomplete : CompleteOutside (L := Point K) A (standardConic (K := K)))
+    (hcard : A.card = 2 * n) (hn : 3 ≤ n)
+    (hzero : scaledDefect (L := Point K) A (standardConic (K := K)) = 0) :
+    Fintype.card K = A.card - 2 := by
+  have hconicCard :
+      (standardConic (K := K)).card =
+        PlaneOrder (Point K) (Point K) + 1 := by
+    rw [ProjectiveBridge.planeOrder_eq_card]
+    exact standardConic_card (K := K)
+  have hspectrum :=
+    even_completeOutside_zeroDefect_order_spectrum
+      (P := Point K) (L := Point K) hcomplete hconicCard hcard hn hzero
+  rw [ProjectiveBridge.planeOrder_eq_card, hcard] at hspectrum
+  have hchoosePred : Nat.choose (2 * n - 1) 2 =
+      (2 * n - 1) * (n - 1) := by
+    have h := two_mul_choose_two (2 * n - 1)
+    have hsub : 2 * n - 1 - 1 = 2 * (n - 1) := by omega
+    rw [hsub] at h
+    have hrhs : (2 * n - 1) * (2 * (n - 1)) =
+        2 * ((2 * n - 1) * (n - 1)) := by ring
+    rw [hrhs] at h
+    omega
+  simp only [hchoosePred] at hspectrum
+  obtain ⟨e, _hprime, hpow⟩ := FiniteField.card K 2
+  rcases even_equality_spectrum_power_two hn hpow hspectrum with hfirst | hupper
+  · rw [hcard]
+    exact hfirst
+  · exact (no_upper_even_equality_branch hcomplete hcard hn
+      (by simpa [hchoosePred] using hupper) hzero).elim
+
 /-- No zero-defect relative-complete `92`-arc exists outside the standard conic over a field of
 order `4096`.  This is the `n = 46` specialization of the uniform upper-branch exclusion. -/
 theorem no_exceptional_candidate_standardConic
@@ -803,12 +838,9 @@ theorem no_exceptional_candidate_standardConic
     (hq : Fintype.card K = 4096) (hcard : A.card = 92)
     (hzero : scaledDefect (L := Point K) A (standardConic (K := K)) = 0) :
     False := by
-  apply no_upper_even_equality_branch (n := 46) hcomplete
-  · simpa using hcard
-  · norm_num
-  · norm_num [Nat.choose] at hq ⊢
-    exact hq
-  · exact hzero
+  have horder := even_standardConic_zeroDefect_charTwo_order
+    (n := 46) hcomplete hcard (by norm_num) hzero
+  omega
 
 end TangentPairFourGroup
 end RelativeConicArcs

@@ -1,5 +1,4 @@
 import RelativeConicArcs.EvaluationDichotomy
-import RelativeConicArcs.Results
 import RelativeConicArcs.Q9Terminal
 import RelativeConicArcs.Q11Residual
 import RelativeConicArcs.Q11Coding
@@ -43,9 +42,12 @@ these results.
 #print axioms RelativeConicArcs.no_unique_fixed_point_four_group_action_on_card_ninety_one
 #print axioms RelativeConicArcs.scaledDefect_eq_zero_or_half_sub_two_le
 #print axioms RelativeConicArcs.completeAffine_equality_order
+#print axioms RelativeConicArcs.even_completeOutside_zeroDefect_order_spectrum
+#print axioms RelativeConicArcs.even_equality_spectrum_power_two
 #print axioms RelativeConicArcs.odd_completeOutside_zeroDefect_order_spectrum
 #print axioms RelativeConicArcs.odd_standardConic_zeroDefect_charTwo_order
 #print axioms RelativeConicArcs.exceptional_candidate_secant_type_cards
 #print axioms RelativeConicArcs.upper_even_equality_branch_holeIncidence
 #print axioms RelativeConicArcs.TangentPairFourGroup.no_upper_even_equality_branch
+#print axioms RelativeConicArcs.TangentPairFourGroup.even_standardConic_zeroDefect_charTwo_order
 #print axioms RelativeConicArcs.TangentPairFourGroup.no_exceptional_candidate_standardConic

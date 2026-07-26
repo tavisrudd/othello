@@ -376,9 +376,83 @@ theorem odd_equality_spectrum_power_two {n q e : ℕ} (hn : 3 ≤ n)
     dsimp [d] at hdOne
     omega
 
+/-- Integer sieve for the even equality formula.  If the number `s` of maximum-index holes lies
+between zero and the hole-set cardinality, then the order is one of the three factorization
+values. -/
+theorem even_equality_formula_spectrum {n q s : ℤ} (hn : 3 ≤ n)
+    (hqLower : 2 * n - 2 ≤ q) (hs0 : 0 ≤ s) (hsUpper : s ≤ q + 1)
+    (hformula : s = q + 1 -
+      (q - (2 * n - 2)) * (q - ((2 * n - 1) * (n - 1)))) :
+    q = 2 * n - 2 ∨
+      q = (2 * n - 1) * (n - 1) ∨
+      q = (2 * n - 1) * (n - 1) + 1 := by
+  let Q := 2 * n - 2
+  let B := (2 * n - 1) * (n - 1)
+  have hQ : 4 ≤ Q := by dsimp [Q]; omega
+  have hB : 2 * B = Q * (Q + 1) := by
+    dsimp [Q, B]
+    ring
+  have hQB : Q < B := by
+    nlinarith
+  by_cases hqB : q ≤ B
+  · have hqQ : 0 ≤ q - Q := by dsimp [Q]; omega
+    have hBq : 0 ≤ B - q := by omega
+    have hprod : 0 ≤ (q - Q) * (B - q) :=
+      mul_nonneg hqQ hBq
+    have hzero : (q - Q) * (B - q) = 0 := by
+      dsimp [Q, B] at hprod ⊢
+      nlinarith
+    rcases mul_eq_zero.mp hzero with hfirst | hsecond
+    · left
+      dsimp [Q] at hfirst ⊢
+      omega
+    · right
+      left
+      dsimp [B] at hsecond ⊢
+      omega
+  · have hBq : B < q := lt_of_not_ge hqB
+    by_cases hnext : q = B + 1
+    · right
+      right
+      simpa [B] using hnext
+    · have hqBtwo : B + 2 ≤ q := by omega
+      have hqLarge : 2 * Q + 1 < q := by
+        nlinarith
+      have hleft : 0 ≤ q - Q := by omega
+      have hfactor : 2 ≤ q - B := by omega
+      have hprodLower :
+          2 * (q - Q) ≤ (q - Q) * (q - B) := by
+        simpa [mul_comm] using mul_le_mul_of_nonneg_left hfactor hleft
+      have hprodLarge : q + 1 < (q - Q) * (q - B) := by
+        omega
+      dsimp [Q, B] at hprodLarge
+      nlinarith
+
+/-- If an even equality order is a power of two, the middle factorization root is impossible. -/
+theorem even_equality_spectrum_power_two {n q e : ℕ} (hn : 3 ≤ n)
+    (hqpow : q = 2 ^ e)
+    (hspectrum : q = 2 * n - 2 ∨
+      q = (2 * n - 1) * (n - 1) ∨
+      q = (2 * n - 1) * (n - 1) + 1) :
+    q = 2 * n - 2 ∨ q = (2 * n - 1) * (n - 1) + 1 := by
+  rcases hspectrum with hfirst | hmiddle | hupper
+  · exact Or.inl hfirst
+  · exfalso
+    let d := 2 * n - 1
+    have hodd : Odd d := ⟨n - 1, by
+      dsimp [d]
+      omega⟩
+    have hdvd : d ∣ 2 ^ e := by
+      refine ⟨n - 1, ?_⟩
+      rw [← hqpow, hmiddle]
+    have hdOne := odd_dvd_two_pow_eq_one hodd hdvd
+    dsimp [d] at hdOne
+    omega
+  · exact Or.inr hupper
+
 end Arithmetic
 
-section OddGeometricSpectrum
+section GeometricSpectrum
 
 variable {P L : Type*} [Membership P L]
   [Fintype P] [Fintype L] [DecidableEq P] [DecidableEq L]
@@ -414,6 +488,173 @@ theorem holeIncidence_eq_half_mul_card_maximumIndexHoles {A H : Finset P}
     _ = (A.card / 2) *
           (H.filter fun y => pointIndex (L := L) A y = A.card / 2).card := by
       simp [mul_comm]
+
+/-- For even arc size, zero defect and any prescribed hole set of cardinality `q+1` force the
+three possible orders `k-2`, `choose(k-1,2)`, and `choose(k-1,2)+1`.  No geometric property of
+the holes is used. -/
+theorem even_completeOutside_zeroDefect_order_spectrum {A H : Finset P} {n : ℕ}
+    (hcomplete : CompleteOutside (L := L) A H)
+    (hH : H.card = PlaneOrder P L + 1)
+    (hcard : A.card = 2 * n) (hn : 3 ≤ n)
+    (hzero : scaledDefect (L := L) A H = 0) :
+    PlaneOrder P L = A.card - 2 ∨
+      PlaneOrder P L = Nat.choose (A.card - 1) 2 ∨
+      PlaneOrder P L = Nat.choose (A.card - 1) 2 + 1 := by
+  classical
+  let q := PlaneOrder P L
+  let s := (maximumIndexHoles (L := L) A H).card
+  have hm : A.card / 2 = n := by omega
+  have hinc : holeIncidence (L := L) A H = n * s := by
+    simpa [s, hm] using
+      holeIncidence_eq_half_mul_card_maximumIndexHoles
+        (L := L) hcomplete.1 hcomplete.2.1 hzero
+  have hempty : uncovered (L := L) A H = ∅ :=
+    (completeOutside_iff_uncovered_eq_empty (L := L)).mp hcomplete |>.2.2
+  have hcovered : coveredRequired (L := L) A H = requiredLocus A H := by
+    rw [← covered_union_uncovered (L := L) A H, hempty, Finset.union_empty]
+  have hcoveredCard : (coveredRequired (L := L) A H).card = q ^ 2 - A.card := by
+    rw [hcovered]
+    simpa [q] using
+      Conic.card_requiredLocus_of_card_holes (P := P) (L := L) hcomplete.2.1 hH
+  have hnonempty : A.Nonempty := by
+    rw [Finset.nonempty_iff_ne_empty]
+    intro hemptyA
+    have : A.card = 0 := by simp [hemptyA]
+    omega
+  have harcBound := arc_card_le_planeOrder_add_two (L := L) hcomplete.1 hnonempty
+  have hqLower : 2 * n - 2 ≤ q := by
+    dsimp [q]
+    omega
+  have hsubset : maximumIndexHoles (L := L) A H ⊆ H :=
+    Finset.filter_subset _ _
+  have hsUpper : s ≤ q + 1 := by
+    have := Finset.card_le_card hsubset
+    dsimp [s, q]
+    omega
+  have hqk : 2 * n ≤ q ^ 2 := by
+    have hqTwo : 2 ≤ q := by
+      dsimp [q]
+      exact Configuration.ProjectivePlane.one_lt_order P L
+    nlinarith
+  have hzeroz := hzero
+  rw [scaledDefect, hm, hcard, hinc, hcoveredCard, hcard] at hzeroz
+  have hqsub : q - 1 + 1 = q := Nat.sub_add_cancel (by
+    dsimp [q]
+    exact Nat.le_of_lt (Configuration.ProjectivePlane.one_lt_order P L))
+  have hqsqsub : q ^ 2 - 2 * n + 2 * n = q ^ 2 :=
+    Nat.sub_add_cancel hqk
+  have hchooseTwo := two_mul_choose_two (2 * n)
+  have hchooseFour := Conic.twentyFour_mul_choose_four (2 * n)
+  have hqsubz : ((q - 1 : ℕ) : ℤ) = (q : ℤ) - 1 := by
+    have hcast : ((q - 1 : ℕ) : ℤ) + 1 = (q : ℤ) := by
+      exact_mod_cast hqsub
+    linarith
+  have hqsqsubz : ((q ^ 2 - 2 * n : ℕ) : ℤ) =
+      (q : ℤ) ^ 2 - 2 * (n : ℤ) := by
+    have : ((q ^ 2 - 2 * n : ℕ) : ℤ) + 2 * (n : ℤ) =
+        (q : ℤ) ^ 2 := by exact_mod_cast hqsqsub
+    nlinarith
+  have hchooseTwoz : (2 : ℤ) * (Nat.choose (2 * n) 2 : ℤ) =
+      ((2 * n : ℕ) : ℤ) * ((2 * n - 1 : ℕ) : ℤ) := by
+    exact_mod_cast hchooseTwo
+  have hchooseFourz : (24 : ℤ) * (Nat.choose (2 * n) 4 : ℤ) =
+      ((2 * n : ℕ) : ℤ) * ((2 * n - 1 : ℕ) : ℤ) *
+        ((2 * n - 2 : ℕ) : ℤ) * ((2 * n - 3 : ℕ) : ℤ) := by
+    exact_mod_cast hchooseFour
+  push_cast at hzeroz hchooseTwoz hchooseFourz
+  have hnsubone : ((2 * n - 1 : ℕ) : ℤ) = 2 * (n : ℤ) - 1 := by omega
+  have hnsubtwo : ((2 * n - 2 : ℕ) : ℤ) = 2 * (n : ℤ) - 2 := by omega
+  have hnsubthree : ((2 * n - 3 : ℕ) : ℤ) = 2 * (n : ℤ) - 3 := by omega
+  rw [hnsubone] at hchooseTwoz
+  rw [hnsubone, hnsubtwo, hnsubthree] at hchooseFourz
+  have hchooseTwoValue : (Nat.choose (2 * n) 2 : ℤ) =
+      (n : ℤ) * (2 * (n : ℤ) - 1) := by
+    have hrhs : (2 * (n : ℤ)) * (2 * (n : ℤ) - 1) =
+        2 * ((n : ℤ) * (2 * (n : ℤ) - 1)) := by ring
+    rw [hrhs] at hchooseTwoz
+    omega
+  have hsixChooseFourValue : 6 * (Nat.choose (2 * n) 4 : ℤ) =
+      (n : ℤ) * (2 * (n : ℤ) - 1) * ((n : ℤ) - 1) *
+        (2 * (n : ℤ) - 3) := by
+    have hrhs : (2 * (n : ℤ)) * (2 * (n : ℤ) - 1) *
+          (2 * (n : ℤ) - 2) * (2 * (n : ℤ) - 3) =
+        4 * ((n : ℤ) * (2 * (n : ℤ) - 1) * ((n : ℤ) - 1) *
+          (2 * (n : ℤ) - 3)) := by ring
+    have hlhs : 24 * (Nat.choose (2 * n) 4 : ℤ) =
+        4 * (6 * (Nat.choose (2 * n) 4 : ℤ)) := by ring
+    rw [hrhs, hlhs] at hchooseFourz
+    omega
+  rw [hqsubz, hqsqsubz, hchooseTwoValue, hsixChooseFourValue] at hzeroz
+  have hnzero : (n : ℤ) ≠ 0 := by omega
+  have hfactored :
+      (n : ℤ) * (((n : ℤ) * (2 * (n : ℤ) - 1) * ((q : ℤ) - 1)) -
+        ((2 * (n : ℤ) - 1) * ((n : ℤ) - 1) * (2 * (n : ℤ) - 3)) -
+        (s : ℤ) - ((q : ℤ) ^ 2 - 2 * (n : ℤ))) = 0 := by
+    linear_combination hzeroz
+  have hinside :
+      ((n : ℤ) * (2 * (n : ℤ) - 1) * ((q : ℤ) - 1)) -
+        ((2 * (n : ℤ) - 1) * ((n : ℤ) - 1) * (2 * (n : ℤ) - 3)) -
+        (s : ℤ) - ((q : ℤ) ^ 2 - 2 * (n : ℤ)) = 0 :=
+    (mul_eq_zero.mp hfactored).resolve_left hnzero
+  have hformula : (s : ℤ) = (q : ℤ) + 1 -
+      ((q : ℤ) - (2 * (n : ℤ) - 2)) *
+        ((q : ℤ) - ((2 * (n : ℤ) - 1) * ((n : ℤ) - 1))) := by
+    linear_combination -hinside
+  have hqLowerz : ((2 * n - 2 : ℕ) : ℤ) ≤ (q : ℤ) := by
+    exact_mod_cast hqLower
+  rw [hnsubtwo] at hqLowerz
+  have hroots := even_equality_formula_spectrum
+    (n := (n : ℤ)) (q := (q : ℤ)) (s := (s : ℤ))
+    (by exact_mod_cast hn) hqLowerz
+    (Int.natCast_nonneg s) (by exact_mod_cast hsUpper) hformula
+  have hchoosePred : Nat.choose (2 * n - 1) 2 =
+      (2 * n - 1) * (n - 1) := by
+    have h := two_mul_choose_two (2 * n - 1)
+    have hsub : 2 * n - 1 - 1 = 2 * (n - 1) := by omega
+    rw [hsub] at h
+    have hrhs : (2 * n - 1) * (2 * (n - 1)) =
+        2 * ((2 * n - 1) * (n - 1)) := by ring
+    rw [hrhs] at h
+    omega
+  have hnminusone : ((n - 1 : ℕ) : ℤ) = (n : ℤ) - 1 := by omega
+  have hprodCast :
+      (((2 * n - 1) * (n - 1) : ℕ) : ℤ) =
+        (2 * (n : ℤ) - 1) * ((n : ℤ) - 1) := by
+    push_cast
+    rw [hnsubone, hnminusone]
+  rcases hroots with hfirst | hsecond | hthird
+  · left
+    have hfirst' : (q : ℤ) = ((2 * n - 2 : ℕ) : ℤ) := by
+      rw [hnsubtwo]
+      exact hfirst
+    have hnat : q = 2 * n - 2 := by exact_mod_cast hfirst'
+    dsimp [q] at hnat
+    rw [hcard]
+    exact hnat
+  · right
+    left
+    have hsecond' :
+        (q : ℤ) = (((2 * n - 1) * (n - 1) : ℕ) : ℤ) := by
+      rw [hprodCast]
+      exact hsecond
+    have hnat : q = (2 * n - 1) * (n - 1) := by exact_mod_cast hsecond'
+    dsimp [q] at hnat
+    rw [hcard]
+    simp only [hchoosePred]
+    exact hnat
+  · right
+    right
+    have hthird' :
+        (q : ℤ) = (((2 * n - 1) * (n - 1) + 1 : ℕ) : ℤ) := by
+      rw [Nat.cast_add, hprodCast]
+      norm_num
+      exact hthird
+    have hnat : q = (2 * n - 1) * (n - 1) + 1 := by
+      exact_mod_cast hthird'
+    dsimp [q] at hnat
+    rw [hcard]
+    simp only [hchoosePred]
+    exact hnat
 
 /-- For odd arc size, zero defect and a prescribed hole set of conic cardinality force the three
 orders in the manuscript's odd equality spectrum.  The proof uses only the hole cardinality, not
@@ -603,7 +844,7 @@ theorem odd_completeOutside_zeroDefect_order_spectrum {A H : Finset P} {n : ℕ}
     simp only [Nat.add_sub_cancel, hchooseQ]
     exact hnat
 
-end OddGeometricSpectrum
+end GeometricSpectrum
 
 section ExceptionalCandidate
 
@@ -922,7 +1163,10 @@ end ExceptionalCandidate
 #print axioms completeAffine_equality_order
 #print axioms odd_equality_formula_spectrum
 #print axioms odd_equality_spectrum_power_two
+#print axioms even_equality_formula_spectrum
+#print axioms even_equality_spectrum_power_two
 #print axioms holeIncidence_eq_half_mul_card_maximumIndexHoles
+#print axioms even_completeOutside_zeroDefect_order_spectrum
 #print axioms odd_completeOutside_zeroDefect_order_spectrum
 #print axioms exceptional_candidate_holeIncidence
 #print axioms exceptional_candidate_tangentSecants_card
