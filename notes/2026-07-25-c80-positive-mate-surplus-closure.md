@@ -314,6 +314,78 @@ choice of matching not invariant under alternating-cycle changes. A positive
 would be the first candidate that simultaneously clears quantifier-shadow,
 proof-witness gauge, and anti-packing.
 
+## `ej4` — equivariant reply correspondence, not a canonical selector
+
+The partial-involution formulation still assumes that one reply can be
+selected canonically from each marked fibre. That need not be compatible with
+symmetry. A state stabilizer may permute several equally valid replies while
+fixing the marked input data, so any coordinate formula choosing one point
+either breaks equivariance or hides an extra gauge choice in `z`.
+
+The coordinate-free object is therefore a bounded-degree **reply
+correspondence**
+
+```text
+R_z ⊆ Legal(S) × Legal(S),
+```
+
+not necessarily a global function. Its required naturality is
+
+```text
+R_{g·z}(g·S) = (g×g) R_z(S)
+```
+
+for every projective transport `g`, and the certificate update must commute
+with the same transport. The earlier partial involution is recovered on the
+degree-one bulk, where each marked opponent has one paired reply. Fibres of
+higher degree retain all symmetric choices rather than selecting one
+artificially.
+
+This turns the exceptional/obligation locus into the ramification or
+non-degree-one locus of the correspondence. It is exactly where a marked
+rewrite is needed:
+
+```text
+bulk fibre:        one copycat-style reply;
+exceptional fibre: a bounded algebraic packet of replies, each carrying
+                   an equivariant lower-ranked datum.
+```
+
+The q17 evidence fits this language better than a chosen matching. The four
+bad marked fibres are one Klein-four orbit, so the unmarked state should carry
+their orbit as a whole. After the opponent marks one fibre, its stabilizer is
+trivial and a reply may become distinguishable; no global symmetry breaking
+is required. The `4→2→0` thread can then be sought as contraction of an
+exceptional divisor/orbit under the correspondence update. The q19 control
+requires the correspondence to depend on the marked incidence state, because
+the fixed rational branch is losing while another branch is sound.
+
+This also gives C82 its first intrinsic abundance parameter. Once soundness
+is proved edgewise, C82 counts the projected fibre degree
+
+```text
+deg_R(S,z,x) = |{y : (x,y)∈R_z(S)}|,
+```
+
+not proof data, coordinate representatives, or matching choices. The
+opponent-complete gate is positive minimum fibre degree. Higher fibre degree
+is genuine geometric redundancy and cannot be inflated by certificate
+gauge.
+
+The exact next falsifier should therefore require three commutative checks on
+the q17 orbit and q19 control:
+
+1. the same bounded-degree equations define the transported reply relation;
+2. the exceptional locus transports as an orbit, with no normalized-coordinate
+   exception table; and
+3. every accepted reply edge transports its proof datum and lowers the
+   coupled rank naturally.
+
+Failure under projective transport kills the schema even if it fits all five
+finite repairs numerically. Success would replace the too-rigid “uniform
+selector” target by a uniform algebraic correspondence, which is precisely
+the object C82 can later count.
+
 ## Mystery ledger
 
 - **[SETTLED] Does strict-overload positive-mate-surplus closure pass the
@@ -358,6 +430,18 @@ proof-witness gauge, and anti-packing.
   an algebraic exceptional-orbit locus cover the q17 `4→2→0` thread and q19
   direct repair?** This is now the exact highest-EV scout and its stop
   condition.
+- **[SETTLED `ej4`] Must the bulk proof object select one canonical reply?**
+  No. Stabilizers can obstruct an equivariant point choice. The correct
+  coordinate-free object is an equivariant bounded-degree reply
+  correspondence; a partial involution is only its degree-one bulk.
+- **[SETTLED `ej4`] What is the intrinsic C82 abundance coordinate?** The
+  projected geometric fibre degree of the sound reply correspondence,
+  minimized over marked opponents—not the number of proof witnesses or
+  normalized representatives.
+- **[OPEN — C80 `ej4`] Do the q17 exceptional orbit and q19 repair lie in one
+  projectively natural bounded-degree correspondence whose exceptional
+  locus and rank update commute with transport?** This supersedes the
+  canonical-selector formulation and is the sharper falsifier.
 - **[OPEN — C80] What nonrecursive marked incidence predicate proves a reply
   good?** The evidence gap is unchanged: construct a direct secant/orbital
   certificate datum with an algebraic transport law whose soundness does not

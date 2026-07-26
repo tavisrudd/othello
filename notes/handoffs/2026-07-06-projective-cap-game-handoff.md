@@ -1099,8 +1099,16 @@ matching representative. The exact scout is now one bounded-degree
 partial-involution schema whose exceptional-orbit rewrite realizes the q17
 `4→2→0` thread and the state-dependent q19 direct repair; reject it on any
 explicit edge list, coordinate exception table, or matching-gauge
-dependence. Only after soundness may C82 prove opponent-complete projected
-abundance. C82 remains gated. Report+script+cert:
+dependence. The `ej4` correction removes an unnecessary selector assumption:
+stabilizers may forbid a canonical reply, so the coordinate-free datum is an
+equivariant bounded-degree reply correspondence. Its degree-one bulk is the
+partial pairing, its ramification/non-degree-one locus is the algebraic
+obligation family, and its transport-natural projected fibre degree is the
+only intrinsic C82 abundance coordinate. The sharpened falsifier requires
+the q17 exceptional orbit and q19 repair to satisfy one correspondence,
+exceptional-locus, and rank-update identity commuting with projective
+transport. Only after edgewise soundness may C82 prove opponent-complete
+projected abundance. C82 remains gated. Report+script+cert:
 [`../2026-07-25-c80-positive-mate-surplus-closure.md`](../2026-07-25-c80-positive-mate-surplus-closure.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
