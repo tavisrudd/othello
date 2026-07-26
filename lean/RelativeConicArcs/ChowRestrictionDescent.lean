@@ -341,13 +341,12 @@ theorem exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affineP
       lineCoordinates (covector i) (node i) (hne i) (hincident i)
   exact ⟨scale, hscale, hfactor⟩
 
-/-- For an indexed family with no isolated index, incidence at assigned affine points and pairwise
+/-- For a nontrivially indexed family, incidence at assigned affine points and pairwise
 avoidance together make the node parameters injective and identify every restricted equation with
 its node factor up to a simultaneously chosen nonzero scalar. -/
 theorem injective_affineNode_and_exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_pairwise_avoids
-    {ι : Type*} (lineCoordinates : Fin 3 → Fin 2 → K)
+    {ι : Type*} [Nontrivial ι] (lineCoordinates : Fin 3 → Fin 2 → K)
     (covector : ι → Fin 3 → K) (node : ι → K)
-    (hother : ∀ i : ι, ∃ j : ι, j ≠ i)
     (hincident :
       ∀ i, ∑ k, covector i k *
         affinePointOnParametrizedPlaneLine lineCoordinates (node i) k = 0)
@@ -369,7 +368,7 @@ theorem injective_affineNode_and_exists_scale_planeLineRestriction_eq_C_mul_homo
   have hrestrictedNe :
       ∀ i, planeLineRestrictedCoefficients lineCoordinates (covector i) ≠ 0 := by
     intro i
-    obtain ⟨j, hji⟩ := hother i
+    obtain ⟨j, hji⟩ := exists_ne i
     apply planeLineRestrictedCoefficients_ne_zero_of_affinePoint_ne_zero
     exact havoid j i hji
   exact ⟨hnode,

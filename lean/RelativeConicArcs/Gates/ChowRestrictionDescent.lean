@@ -7,7 +7,7 @@ This import-only module checks homogeneous linear substitution, restriction of a
 linear factors, the coefficient formula and affine-node factorization for a restricted
 plane-linear equation, injectivity of affine nodes under pairwise avoidance, simultaneous
 factorization of an incident line family, derivation of restricted nonvanishing from avoidance
-when every index has a distinct companion, representative rescaling, the proportional
+for a nontrivially indexed family, representative rescaling, the proportional
 paired-factor identity and its square-scalar correction, automatic correction over perfect
 exponent-characteristic-two coefficient rings, and descent of extended linewise roots through a
 jointly detecting restriction family.
