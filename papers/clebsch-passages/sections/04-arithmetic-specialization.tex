@@ -1,26 +1,221 @@
 \section{Arithmetic specialization}
 \label{sec:arithmetic}
 
-The remaining core argument has three interfaces.  Each must be proved with
-an explicit integral normalization.
+The arithmetic exchange is already visible on the cubic \(xyz\).  Its two
+ordered icosahedra are Galois conjugate over \(\Q(\sqrt5)\); modulo \(11\)
+they become two rational Clebsch parents, and the Galois exchange becomes
+the nontrivial spinor class.  We prove these statements before introducing
+the Mathieu carrier.
 
-\begin{enumerate}
-\item The two golden fibres must be identified with the two icosahedral
-parents \(A_5^-\) and \(A_5^+\), including the comparison matrices and
-their common \(A_4\).
-\item The order-four exchanger must be computed together with its spinor
-square class and its reduction modulo \(11\).
-\item The reduced exchanger must agree with the finite deck involution
-\(T_{11}\), not merely have the same order or interchange the same two
-unlabelled sets.
-\end{enumerate}
+\subsection{The golden fibre}
 
-The same distinction applies to the Mathieu formulation.  Two
-\(M_{11}\) parents, their \(\PSL_2(11)\) intersection, and Hadamard
-row--column exchange give a marked-torsor corollary only after their
-carriers have been identified with the reduced Hitchin construction.
-Group orders and abstract conjugacy classes do not supply this
-identification.  This conditional claim is \claimid{HC-5}.
+Let \(t^2-t-1=0\), and put
+\[
+\begin{aligned}
+ I_t=\{&
+ [0:t:1],[0:t:-1],[1:0:t],[-1:0:t],\\
+ & [t:-1:0],[-t:-1:0]\}\subset\mathbf P^2.
+\end{aligned}
+\]
+These six points represent the six opposite vertex pairs of an
+icosahedron.
+
+\begin{proposition}[Golden fibre]\label{prop:golden-fibre}
+Over a field of characteristic different from \(2\) and \(5\), the points
+of \(I_t\) lie on \(xyz=0\), have a common nonzero norm, have normalized
+squared inner product \(1/5\), and form a six-arc.  The two configurations
+over \(\Q\) are therefore defined over
+\[
+ \Q[t]/(t^2-t-1)=\Q(\sqrt5)
+\]
+and are exchanged by its nontrivial automorphism.  In Hitchin's normalized
+cover of ordered icosahedra they are the complete fibre over \([xyz]\).
+\end{proposition}
+
+\begin{proof}
+Every displayed vector has one zero coordinate.  Since \(t^2=t+1\), its
+squared norm is \(t^2+1=t+2\).  The inner product of two distinct
+representatives is \(\pm t\), while
+\[
+ (t+2)^2=5(t+1)=5t^2.
+\]
+This gives the normalized squared inner product \(1/5\).  The twenty
+three-point determinants are
+\(\pm2t\) or \(\pm2t^2\), so none vanishes under the stated hypotheses.
+The final assertion uses Hitchin's classification of the two
+icosahedral sets on the orthogonal-plane cubic.
+\end{proof}
+
+\subsection{The exchanger and the tetrahedral hinge}
+
+Set
+\[
+ R=
+ \begin{pmatrix}
+ 1&0&0\\
+ 0&0&-1\\
+ 0&1&0
+ \end{pmatrix}.
+\]
+The relation \(1-t=-1/t\) gives, by substitution,
+\[
+ R(I_t)=I_{1-t},\qquad
+ R^2=\operatorname{diag}(1,-1,-1),\qquad R^4=1.
+\]
+Moreover \(R(xyz)=-xyz\): it fixes the projective cubic and exchanges its
+two ordered icosahedra.
+
+\begin{proposition}[Tetrahedral hinge]\label{prop:a4-hinge}
+Let \(G_t=\operatorname{Stab}_{\operatorname{SO}_3}(I_t)\cong A_5\).  Then
+\[
+ RG_tR^{-1}=G_{1-t},
+ \qquad
+ G_t\cap G_{1-t}\cong A_4.
+\]
+\end{proposition}
+
+\begin{proof}
+The first equality follows from \(R(I_t)=I_{1-t}\).  A direct linear
+calculation shows that the cubics through
+\(I_t\cup I_{1-t}\) form the one-dimensional space spanned by \(xyz\):
+write a general ternary cubic as
+\[
+ ax^3+bx^2y+cx^2z+dxy^2+exyz+fxz^2
+   +gy^3+hy^2z+iyz^2+jz^3.
+\]
+Substitution of the three opposite pairs, followed by
+\(t^2=t+1\), gives
+\[
+ g=i=0,\quad h(t+1)+j=0,\quad c+j(t+1)=0,
+\]
+\[
+ a+f(t+1)=0,\quad b(t+1)+g=0,\quad a(t+1)+d=0.
+\]
+Equating the rational and \(t\)-parts kills every coefficient except
+\(e\).  Thus every element of the intersection fixes the plane-triple
+cubic.
+
+The rotations given by even signed coordinate permutations fix \(xyz\)
+and each \(I_t\); they form the tetrahedral group \(A_4\).  Conversely,
+the icosahedral group \(G_t\cong A_5\) acts on its five plane-triple
+cubics.  This is its standard transitive action of degree five, whose
+point stabilizer is \(A_4\).  Hence the common stabilizer is exactly the
+displayed tetrahedral subgroup.
+\end{proof}
+
+\subsection{Reduction modulo eleven}
+
+The roots of \(t^2-t-1\) in \(\F_{11}\) are \(4\) and \(8\).  For the
+working Clebsch arc
+\[
+\begin{aligned}
+ A=\{&
+ [1:10:0],[1:9:1],[1:4:7],\\
+ & [1:8:5],[0:1:4],[1:1:7]\},
+\end{aligned}
+\]
+define
+\[
+M_4=\begin{pmatrix}1&4&7\\5&10&3\\1&8&1\end{pmatrix},
+\qquad
+M_8=\begin{pmatrix}4&5&5\\9&10&7\\4&7&10\end{pmatrix}.
+\]
+Six projective substitutions give
+\[
+ M_4I_4=A,\qquad M_8I_8=A,
+\]
+and \(\det M_4=1,\ \det M_8=9\).  Furthermore,
+\[
+ M_8^{-1}M_4=3R
+\]
+in \(\operatorname{GL}_3(\F_{11})\).  Thus forgetting the ordered parent identifies
+both configurations with the same unmarked Clebsch arc, while their
+relative projectivity is the reduction of the golden exchanger.
+
+\begin{proposition}[Spinor specialization]\label{prop:spinor-specialization}
+The reduction of \(R\) represents the nontrivial element of
+\[
+ T_{11}=\operatorname{PGL}_2(11)/\PSL_2(11).
+\]
+\end{proposition}
+
+\begin{proof}
+For \(Q(x,y,z)=x^2+y^2+z^2\), reflection in a vector \(v\) has spinor
+class \(Q(v)\).  On the \(yz\)-plane,
+\[
+ R=s_{e_2}s_{e_2-e_3},
+\]
+so
+\[
+ \theta(R)=Q(e_2)Q(e_2-e_3)=2
+ \quad\text{in }\F_{11}^{\times}/\F_{11}^{\times2}.
+\]
+The class of \(2\) is nonsquare modulo \(11\).  The standard
+identifications
+\[
+ \operatorname{SO}_3(11)\cong\operatorname{PGL}_2(11),
+ \qquad
+ \Omega_3(11)\cong\PSL_2(11)
+\]
+identify the spinor quotient with \(T_{11}\), proving the claim.
+\end{proof}
+
+\subsection{The marked Mathieu carrier}
+
+The ternary Golay--Hadamard model supplies two explicit subgroups
+\[
+ H_{\rm row},H_{\rm col}\cong M_{11}
+ \quad\text{inside}\quad M_{12}.
+\]
+One is the pure coordinate group of the signed code and the other is the
+stabilizer of the parity coordinate.  Their exact twelve-point generators
+give
+\[
+ H_{\rm row}\cap H_{\rm col}=\PSL_2(11).
+\]
+Consequently
+\[
+ |H_{\rm row}H_{\rm col}|
+ =\frac{7920^2}{660}=95040=|M_{12}|,
+\]
+so the two parents generate \(M_{12}\).  Hadamard row--column duality
+induces the noninner automorphism of \(M_{12}\) and exchanges their two
+conjugacy classes.  The finite assertions in this paragraph are checked
+from the displayed permutation carriers by the primary certificate and
+an implementation-independent replay described in
+Section~\ref{sec:verification}.
+
+There is no canonical unmarked identification between the golden and
+Mathieu pairs.  The precise conclusion is the following marked statement.
+
+\begin{corollary}[Marked Hitchin--Mathieu torsor]\label{cor:marked-mathieu}
+Choose the marking \(I_4\leftrightarrow H_{\rm row}\).  There is a unique
+equivariant bijection
+\[
+ \{I_4,I_8\}\longrightarrow\{H_{\rm row},H_{\rm col}\}
+\]
+that extends this choice.  It sends \(I_8\) to \(H_{\rm col}\), and
+intertwines the reduced Hitchin exchanger with Hadamard row--column
+duality.  Without the marking there are exactly two such equivariant
+bijections and neither parent is distinguished.
+\end{corollary}
+
+\begin{proof}
+Both sets are free transitive \(C_2\)-sets: Pro\-po\-si\-tion
+\ref{prop:spinor-specialization} supplies the nontrivial exchange on the
+Hitchin side, and Hadamard duality supplies it on the Mathieu side.  The
+image of one marked element determines an equivariant map between free
+transitive \(C_2\)-sets.  There are two possible markings.
+\end{proof}
+
+This marked, and only marked, compatibility is \claimid{HC-5}.
+
+The certificate for this section checks only the explicit substitutions,
+matrix identities, permutation-group orders, intersection, and carrier
+exchange.  Propositions \ref{prop:golden-fibre}--\ref{prop:spinor-specialization}
+and Corollary \ref{cor:marked-mathieu} are the mathematical proof; the
+certificate is not used to infer the golden field, the \(A_4\) hinge, the
+spinor formula, or the marked-torsor lemma.
 
 \paragraph{Integral boundary.}
 The abstract quadratic cover gives, on its nonbranch locus,

@@ -514,10 +514,17 @@ prose proof, and Lean terminal are recorded in
 `notes/2026-07-26-c651-hitchin-tensor-bridge.md`. Because the rational Gaunt
 scalar has denominator divisible by \(11\), the cross-characteristic bridge
 is the common integral Clebsch cubic line rather than reduction of that
-scalar. C652 now owns the exact golden-fibre, order-four, spinor, and
-\(T_{11}\) certificate. C653 owns the integral-model, bad-prime, and focused
-novelty gate. C579 then rebuilds Paper III around the arithmetic orientation
-theorem and creates its independent trust surface.
+scalar. C652 is complete: Section 4 now proves the golden fibre, unique
+common cubic, \(A_4\) hinge, order-four exchanger, spinor class,
+\(T_{11}\) reduction, and marked Hitchin--Mathieu torsor in prose. A compact
+primary certificate and independent replay check only the explicit
+projective substitutions and the two \(M_{11}\) carriers, their frozen
+\(\operatorname{PSL}_2(11)\) intersection, \(M_{12}\) join, and Hadamard
+parent exchange. The report and mystery ledger are in
+`notes/2026-07-26-c652-arithmetic-cover-certificate.md`. C653 owns the
+integral-model, bad-prime, and focused novelty gate. C579 then rebuilds
+Paper III around the arithmetic orientation theorem and creates its
+independent trust surface.
 
 The imported targets-4/5/7/8 report adds the conceptual interpretation of
 C651: after localizing at the square of a nonzero odd element, an involutive
@@ -554,7 +561,7 @@ face-axis harmonic and Gaunt/Steinhardt restriction as a third theorem leg,
 while keeping all materials utility empirical. Nine section files, a
 dependency workplan, a fourteen-claim trust manifest, and a structural checker now keep
 proved, certified, literature-backed, gated, and conditional statements
-separate while C652--C654 run. C579 is therefore in progress, but the paper
+separate while C653--C654 run. C579 is therefore in progress, but the paper
 does not advance to cold review until all load-bearing rows are closed.
 
 C655 is complete. The ten icosahedral face axes give an exact

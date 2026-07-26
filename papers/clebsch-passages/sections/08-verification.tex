@@ -22,12 +22,23 @@ the quadratic and cubic spherical moments.  The replay separately checks
 the Petersen minimal polynomial and the factorial formula for the Wigner
 \(3j\)-symbol.  Neither route uses floating-point arithmetic.
 
-The arithmetic cover will require a separate certificate bundle: exact
-golden fibres, comparison matrices, exchanger, spinor class, reduction, and
-carrier identification, together with an independent replay.  The integral
-model and novelty claims require primary-source proofs rather than a
-certificate alone.  The Klein elevation, if positive, will have its own
-exact rational matrices and polarization-aware invariant.
+The arithmetic specialization is proved in the text.  Its compact
+certificate checks only the six projective substitutions, the comparison
+and reflection matrices, and the explicit twelve-point Mathieu carriers.
+The independent replay reimplements those checks and enumerates the two
+\(M_{11}\) parents, their order-\(660\) intersection, their \(M_{12}\)
+join, and the carrier exchange without importing the primary program.
+Neither route is used to infer the golden field, the \(A_4\) hinge, the
+spinor formula, or the marked-torsor lemma.  The exact commands are
+\begin{verbatim}
+python3 verification/evidence/arithmetic_cover.py --check
+python3 verification/evidence/arithmetic_cover_replay.py
+sha256sum -c verification/evidence/arithmetic_cover.sha256
+\end{verbatim}
+run from the paper directory.  The integral model and novelty claims
+require primary-source proofs rather than a certificate alone.  The Klein
+elevation, if positive, will have its own exact rational matrices and
+polarization-aware invariant.
 
 The current verification runner checks manuscript structure and trust-ledger
 coverage only.  It intentionally refuses to report release readiness while

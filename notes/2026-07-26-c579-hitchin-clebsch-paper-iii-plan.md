@@ -170,14 +170,16 @@ Mukai--Umemura model and normalization comparison.
    coefficient cannot be reduced modulo \(11\), because its denominator is
    divisible by \(11\); the cross-characteristic conclusion is equality of
    the integral Clebsch cubic line, not equality of those normalizations.
-2. **C652 — arithmetic-cover certificate.** Check the two golden fibres,
-   \(I_4=A_-\), \(I_8=A_+\), the comparison matrices, the order-four
-   exchanger, the \(A_4\) intersection, the spinor square class, and the
-   \(T_{11}\) specialization. Also certify the two \(M_{11}\) parents,
-   their \(\operatorname{PSL}_2(11)\) intersection, and the compatibility
-   of Hadamard row--column exchange with the reduced Hitchin exchange before
-   using the marked-torsor corollary. Package exact scripts, canonical
-   output, hashes, and an independent implementation.
+2. **C652 — arithmetic-cover certificate (complete).** Section 4 proves the
+   two golden fibres, unique common cubic, \(A_4\) hinge, order-four
+   exchanger, spinor square class, \(T_{11}\) specialization, and marked
+   torsor corollary in prose. A compact primary certificate and independent
+   replay check the comparison matrices and the explicit Mathieu carriers:
+   the two \(M_{11}\) parents, their frozen
+   \(\operatorname{PSL}_2(11)\) intersection, \(M_{12}\) join, and Hadamard
+   parent exchange. The theorem explicitly asserts no canonical unmarked
+   identification. The report and evidence boundary are
+   `notes/2026-07-26-c652-arithmetic-cover-certificate.md`.
 3. **C653 — integral and novelty gate.** Audit rational forms of the
    Mukai--Umemura incidence cover, Dye, binary-sextic invariant theory, and
    finite-field reductions. Prove the largest justified integral base and
@@ -217,7 +219,7 @@ Klein multiplicity elevation. The
 adjacent `WORKPLAN.md` records the dependency graph, and
 `verification/trust_manifest.json` is the initial fourteen-claim trust ledger.
 The structural checker deliberately reports a non-release surface while
-C652--C654 remain open; C655 is closed.
+C653--C654 remain open; C652 and C655 are closed.
 
 The final target is the strongest coherent theorem complex: a positive
 C654 result is to be integrated as a second structural theorem, a positive
@@ -244,10 +246,11 @@ cut.
   square of a nonzero odd element makes any involutive integral algebra a
   rank-two invariant algebra, and the Clebsch chart's first odd generator is
   the cubic \(e_3=\sigma_3\).
-- **Open under C652:** an independently replayed exact arithmetic
-  specialization from the golden fibre to \(T_{11}\), together with the
-  carrier-level identifications needed for the marked Hitchin--Mathieu
-  torsor.
+- **Settled under C652:** the exact arithmetic specialization from the
+  golden fibre to \(T_{11}\), the two Mathieu parents and their common
+  \(\operatorname{PSL}_2(11)\), and the marked Hitchin--Mathieu torsor.
+  There are exactly two unmarked equivariant bijections; no canonical
+  unmarked identification is claimed.
 - **Open under C653:** the minimal bad-prime set and prior-art status of the
   \(5\)-twist and finite-field incidence interpretation.
 - **Killed:** there is no \(PSL_2(11)\)- or \(A_5\)-stable elliptic

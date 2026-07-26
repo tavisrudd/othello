@@ -21,10 +21,16 @@
     {
       "id": "HC-2",
       "statement": "The nonbranch Clebsch fibre is the golden torsor Spec Q(sqrt(5)).",
-      "status": "gated",
-      "modes": ["conceptual", "certificate"],
+      "status": "certified",
+      "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C652",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256"
+      ]
     },
     {
       "id": "HC-3",
@@ -42,18 +48,31 @@
     {
       "id": "HC-4",
       "statement": "The Hitchin deck exchange reduces modulo 11 to the finite sheet involution T11.",
-      "status": "gated",
+      "status": "certified",
       "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C652",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256"
+      ]
     },
     {
       "id": "HC-5",
       "statement": "The marked Hitchin and Mathieu torsors agree after identifying both M11 carriers and their PSL_2(11) intersection.",
-      "status": "conditional",
+      "status": "certified",
       "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C652",
-      "evidence": []
+      "evidence": [
+        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
+        "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256",
+        "notes/2026-07-22-c470-golay-hadamard-automorphisms.json"
+      ]
     },
     {
       "id": "PH-1",
