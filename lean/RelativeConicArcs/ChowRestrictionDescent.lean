@@ -21,6 +21,11 @@ separate descent theorem states the exact remaining extension condition: linewis
 restrictions of one ambient polynomial, and the family of restriction maps must jointly detect
 ambient polynomials.
 
+For a fixed line parametrization, the module computes restricted binary coefficients, identifies
+their evaluation at `[t : 1]` with incidence at the corresponding plane point, derives injectivity
+of assigned affine parameters from pairwise avoidance, and chooses the nonzero scalars relating an
+incident family of restricted equations to its homogenized affine-node factors.
+
 No projective incidence theorem is asserted here.  In particular, the module does not construct a
 pairing from secants, prove that a chosen family of line parametrizations jointly detects forms of
 a bounded degree, or interpolate compatible linewise roots.
@@ -53,6 +58,13 @@ noncomputable def planeLineRestrictedCoefficients
     Fin 2 → K :=
   fun j => ∑ i, covector i * lineCoordinates i j
 
+/-- The point of a parametrized projective line represented by the affine binary coordinates
+`[t : 1]`.  No nondegeneracy condition is imposed on the parametrization. -/
+def affinePointOnParametrizedPlaneLine
+    (lineCoordinates : Fin 3 → Fin 2 → K) (t : K) :
+    Fin 3 → K :=
+  fun i => lineCoordinates i 0 * t + lineCoordinates i 1
+
 /-- Restriction sends each plane coordinate to its prescribed homogeneous linear form. -/
 @[simp]
 theorem planeLineRestriction_X
@@ -71,6 +83,36 @@ theorem planeLineRestriction_homogeneousLinearPolynomial
   simp [planeLineRestriction, homogeneousLinearPolynomial,
     planeLineRestrictedCoefficients, Finset.sum_mul, Finset.sum_comm,
     mul_add, mul_assoc]
+
+/-- Evaluating the restricted binary coefficient vector at `[t : 1]` equals evaluating the
+original plane-linear covector at the corresponding parametrized point. -/
+theorem planeLineRestrictedCoefficients_affinePoint
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) (t : K) :
+    planeLineRestrictedCoefficients lineCoordinates covector 0 * t +
+        planeLineRestrictedCoefficients lineCoordinates covector 1 =
+      ∑ i, covector i * affinePointOnParametrizedPlaneLine lineCoordinates t i := by
+  simp [planeLineRestrictedCoefficients, affinePointOnParametrizedPlaneLine,
+    Finset.sum_mul, mul_add, mul_assoc]
+  rw [Finset.sum_add_distrib]
+
+/-- If each indexed plane line contains its assigned affine point on a parametrized carrier line,
+and every differently indexed plane line avoids that point, then the affine parameters are
+injective. -/
+theorem injective_affineNode_of_pairwise_avoids_incidentPoint
+    {ι : Type*} (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K) (node : ι → K)
+    (hincident :
+      ∀ i, ∑ k, covector i k *
+        affinePointOnParametrizedPlaneLine lineCoordinates (node i) k = 0)
+    (havoid :
+      ∀ i j, i ≠ j → ∑ k, covector j k *
+        affinePointOnParametrizedPlaneLine lineCoordinates (node i) k ≠ 0) :
+    Function.Injective node := by
+  intro i j hij
+  by_contra hne
+  apply havoid i j hne
+  rw [hij]
+  exact hincident j
 
 omit [DecidableEq σ] in
 /-- Scaling a coefficient vector scales its homogeneous linear polynomial by the corresponding
@@ -241,6 +283,48 @@ theorem exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq
   exact
     exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
       (planeLineRestrictedCoefficients lineCoordinates covector) t hne hvanish
+
+/-- Concrete incidence of a plane line with the affine point `[t : 1]` on a parametrized carrier
+line supplies the vanishing hypothesis needed to identify its restricted linear factor. -/
+theorem exists_ne_zero_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoint
+    (lineCoordinates : Fin 3 → Fin 2 → K) (covector : Fin 3 → K) (t : K)
+    (hne : planeLineRestrictedCoefficients lineCoordinates covector ≠ 0)
+    (hincident :
+      ∑ i, covector i *
+        affinePointOnParametrizedPlaneLine lineCoordinates t i = 0) :
+    ∃ c : K, c ≠ 0 ∧
+      planeLineRestriction lineCoordinates
+          (homogeneousLinearPolynomial covector) =
+        MvPolynomial.C c *
+          Polynomial.homogenize (Polynomial.X - Polynomial.C t) 1 := by
+  apply
+    exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+      lineCoordinates covector t hne
+  rw [planeLineRestrictedCoefficients_affinePoint]
+  exact hincident
+
+/-- A family of incident, nonzero restricted plane-line equations admits simultaneous nonzero
+scalars identifying every member with its affine node factor. -/
+theorem exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoints
+    {ι : Type*} (lineCoordinates : Fin 3 → Fin 2 → K)
+    (covector : ι → Fin 3 → K) (node : ι → K)
+    (hne :
+      ∀ i, planeLineRestrictedCoefficients lineCoordinates (covector i) ≠ 0)
+    (hincident :
+      ∀ i, ∑ k, covector i k *
+        affinePointOnParametrizedPlaneLine lineCoordinates (node i) k = 0) :
+    ∃ scale : ι → K,
+      (∀ i, scale i ≠ 0) ∧
+      ∀ i,
+        planeLineRestriction lineCoordinates
+            (homogeneousLinearPolynomial (covector i)) =
+          MvPolynomial.C (scale i) *
+            Polynomial.homogenize
+              (Polynomial.X - Polynomial.C (node i)) 1 := by
+  choose scale hscale hfactor using fun i =>
+    exists_ne_zero_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoint
+      lineCoordinates (covector i) (node i) (hne i) (hincident i)
+  exact ⟨scale, hscale, hfactor⟩
 
 end BinaryLinearFactors
 

@@ -5,10 +5,11 @@ import RelativeConicArcs.ChowRestrictionDescent
 
 This import-only module checks homogeneous linear substitution, restriction of a finite product of
 linear factors, the coefficient formula and affine-node factorization for a restricted
-plane-linear equation, representative rescaling, the proportional paired-factor identity and its
-square-scalar correction, automatic correction over perfect exponent-characteristic-two
-coefficient rings, and descent of extended linewise roots through a jointly detecting restriction
-family.
+plane-linear equation, injectivity of affine nodes under pairwise avoidance, simultaneous
+factorization of an incident line family, representative rescaling, the proportional paired-factor
+identity and its square-scalar correction, automatic correction over perfect
+exponent-characteristic-two coefficient rings, and descent of extended linewise roots through a
+jointly detecting restriction family.
 
 It does not assert the projective incidence hypotheses that produce a factor pairing, an
 interpolation theorem for compatible linewise roots, or joint detection for a particular family
@@ -20,7 +21,11 @@ of projective lines and a particular degree bound.
 #print axioms RelativeConicArcs.homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode
 #print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
 #print axioms RelativeConicArcs.planeLineRestriction_homogeneousLinearPolynomial
+#print axioms RelativeConicArcs.planeLineRestrictedCoefficients_affinePoint
+#print axioms RelativeConicArcs.injective_affineNode_of_pairwise_avoids_incidentPoint
 #print axioms RelativeConicArcs.exists_ne_zero_scale_planeLineRestriction_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+#print axioms RelativeConicArcs.exists_ne_zero_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoint
+#print axioms RelativeConicArcs.exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoints
 #print axioms RelativeConicArcs.planeLineRestriction_X
 #print axioms RelativeConicArcs.homogeneousLinearPolynomial_scale
 #print axioms RelativeConicArcs.dualLinearFactorProduct_rescale
