@@ -1484,8 +1484,17 @@
       "last": 661,
       "purpose": "Explore a uniform conic-quotient recovery/Gorenstein theorem, conceptual A3/B3 rank proofs, or an equivalent-strength upgrade",
       "sequence": 165
+    },
+    {
+      "count": 1,
+      "first": 662,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 662,
+      "purpose": "Conceptual passant-graph bound replacing terminal conic-filling searches through eight points",
+      "sequence": 166
     }
   ],
-  "next_id": 662,
+  "next_id": 663,
   "schema": "codex-task-id-allocations-v1"
 }
