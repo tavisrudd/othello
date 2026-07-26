@@ -1,0 +1,58 @@
+{
+  "chosen_conic_points": [
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      9,
+      13
+    ],
+    [
+      1,
+      14,
+      11
+    ],
+    [
+      1,
+      13,
+      14
+    ],
+    [
+      1,
+      11,
+      9
+    ]
+  ],
+  "chosen_five_point_ranks": [
+    5
+  ],
+  "chosen_six_point_quadratic_rank": 5,
+  "chosen_support_weights": [
+    5,
+    5,
+    11,
+    3,
+    12,
+    1
+  ],
+  "conic_point_count": 17,
+  "conic_quadratic_restriction_rank": 5,
+  "conic_supported_subcode_dimension": 12,
+  "cross_orthogonal": true,
+  "degree_28_code_rank": 267,
+  "degree_2_code_rank": 6,
+  "field": "GF(16), polynomial basis modulo x^4+x+1",
+  "full_support_on_chosen_six": true,
+  "length": 273,
+  "rank_sum": 273,
+  "schema": "c663-projective-code-obstruction-v1",
+  "weight_six_word_orthogonal_to_degree_2": true
+}
