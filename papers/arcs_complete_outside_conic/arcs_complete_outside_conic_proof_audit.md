@@ -16,11 +16,15 @@
    - zero defect makes every nontrivial clique a maximum matching and hence a simple
      \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; the high-index-centre and
      per-secant counts follow from the second index equation and the degree of \(KG(k,2)\);
-   - the bad-edge estimate is the pointwise bound
+   - the bad-concurrence graph has the secants as vertices and the Kneser edges in nonmaximum
+     concurrence cliques as edges; its edge estimate is the pointwise bound
      \(\binom r2\le (m-1)(r-1)(m-r)/2\), with the larger hole weight handled separately.
-   - secant-deletion stability retains one secant through each nonmaximum concurrence centre
-     and deletes the rest; the local cost \(r-1\) is bounded by the corresponding required-point
-     or hole defect weight, so the union has size at most \(m\Delta_H(A)\).
+   - its vertex-cover estimate retains one secant through each nonmaximum concurrence centre and
+     deletes the rest; the local cost \(r-1\) is bounded by the corresponding required-point or
+     hole defect weight, so the union has size at most \(m\Delta_H(A)\).
+   - the displayed slack identity is an algebraic refinement of the same construction: its three
+     terms are respectively overlap among local deletion sets, off-hole local slack, and hole
+     local slack. This refinement is proved in the manuscript but is not a separate Lean theorem.
    The incidence decomposition, simplicity, zero-defect maximum index, both exact double-count
    identities, the bad-edge inequality, and the deletion statement are kernel-checked
    respectively by
@@ -253,8 +257,8 @@ line-hole equivalence, ideal-line incidence identity, corrected affine bound and
 projective-averaging transfer, the explicit additive lower bound, and the universal
 even-characteristic incidence loss. It also proves exact uncovered-locus reconstruction and its
 equivariant stabilizer corollary, concurrence decomposition, zero-defect maximum-matching
-rigidity, exact total and per-secant centre counts, bad-edge stability, and secant-deletion
-stability. Its generic Boolean checker verifies conic disjointness, the arc
+rigidity, exact total and per-secant centre counts, and edge/vertex stability of the
+bad-concurrence graph. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.

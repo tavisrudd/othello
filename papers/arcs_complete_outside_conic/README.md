@@ -15,8 +15,8 @@ augmentation covering list and exact quadratic-rejection certificates:
 cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributions:
 - an exact **prescribed-hole defect identity** (splits the classical first/second secant-index
   equations over an exceptional set, with an exact — not estimated — remainder);
-- coverage / uncovered-locus bounds, an equality criterion, and quantitative bad-edge and
-  secant-deletion stability bounds;
+- coverage / uncovered-locus bounds, an equality criterion, and edge/vertex stability for the
+  bad-concurrence graph;
 - a canonical Kneser-edge decomposition by secant concurrence, with zero-defect
   maximum-matching rigidity and exact total and per-secant centre counts;
 - an exact complete-affine-arc specialization: deleting a line is the line-hole case, with

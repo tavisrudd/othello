@@ -3,9 +3,9 @@
 **Lane:** `relconic`
 
 **Status:** COMPLETE — exact reconstruction, equivariant stabilizer recovery,
-zero-defect matching rigidity, exact counts, bad-edge stability, and
-secant-deletion stability are imported by the Relconic gate; the trust and
-manuscript records agree with the checked boundary.
+zero-defect matching rigidity, exact counts, and edge/vertex stability of the
+bad-concurrence graph are imported by the Relconic gate; the trust and manuscript
+records agree with the checked boundary.
 
 ## Goal
 
@@ -212,6 +212,13 @@ separate formal model of `PΓL(3,q)` is present.
 - **Quantitative two-parent inversion: deliberately separate.**  Its
   Bonferroni, point-pair, and lost-degree inequalities are not consequences of
   the exact inverse interface and were not pulled into this task.
+- **Sharpness of secant deletion: open.**  The manuscript's slack identity
+  separates local defect slack from overlap among the chosen deletion sets.
+  Equality requires no intermediate-index hole, requires every bad off-hole
+  centre to have index `m - 1`, and requires disjoint local deletion sets.
+  No realizable equality example or universal overlap-sensitive improvement is
+  presently established; pursuing either would require a separately allocated
+  successor.
 - **Incidental discoveries:** none.  All observations arose from the planned
   theorem/prose comparison, so the discovery companion requires no entry.
 
