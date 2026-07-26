@@ -1214,8 +1214,17 @@
       "last": 628,
       "purpose": "replacement block after live-queue collision for post-cold-read relconic research tasks",
       "sequence": 135
+    },
+    {
+      "count": 1,
+      "first": 629,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 629,
+      "purpose": "formalize C624 concrete party-extension groups, actions, factor sets, and splitting witnesses",
+      "sequence": 136
     }
   ],
-  "next_id": 629,
+  "next_id": 630,
   "schema": "codex-task-id-allocations-v1"
 }
