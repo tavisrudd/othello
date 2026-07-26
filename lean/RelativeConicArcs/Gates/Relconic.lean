@@ -15,10 +15,10 @@ This import-only module is the transitive kernel-checking boundary for the relat
 and their game and coding-theory applications.  It includes exact uncovered-locus reconstruction,
 equivariant stabilizer recovery, secant concurrence decomposition, zero-defect maximum-matching
 rigidity, exact centre-count identities, bad-edge stability, secant-deletion stability, and the
-four-group unique-fixed-point congruence.  The separate order-twenty-five certificate and repair
-It also checks the discrete defect gap, affine and odd equality spectra, the characteristic-two
-odd-order reduction, and the exceptional `(4096,92)` secant-type split.
-developments are not dependencies of these results.
+finite-group unique-fixed-point congruence with its order-four specialization.  It also checks the
+discrete defect gap, affine and odd equality spectra, the characteristic-two odd-order reduction,
+and the exceptional `(4096,92)` secant-type split.  The separate order-twenty-five certificate,
+repair, and other developments are not dependencies of these results.
 -/
 
 #print axioms RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants
@@ -32,10 +32,10 @@ developments are not dependencies of these results.
 #print axioms RelativeConicArcs.concurrenceCenters_card_mul_choose_half
 #print axioms RelativeConicArcs.concurrenceCenters_card_eq_quotient
 #print axioms RelativeConicArcs.concurrenceCentersOnPair_card_mul_sub_one
-#print axioms RelativeConicArcs.card_mod_group_order_eq_one_of_unique_fixed_point_action
 #print axioms RelativeConicArcs.concurrenceCentersOnPair_card_eq_quotient
 #print axioms RelativeConicArcs.two_mul_badConcurrenceEdgeCount_le
 #print axioms RelativeConicArcs.exists_secantDeletionSet
+#print axioms RelativeConicArcs.card_mod_group_order_eq_one_of_unique_fixed_point_action
 #print axioms RelativeConicArcs.card_mod_four_eq_one_of_unique_fixed_point_action
 #print axioms RelativeConicArcs.no_unique_fixed_point_four_group_action_on_card_ninety_one
 #print axioms RelativeConicArcs.scaledDefect_eq_zero_or_half_sub_two_le
