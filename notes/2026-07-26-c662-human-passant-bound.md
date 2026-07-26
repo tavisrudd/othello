@@ -320,7 +320,8 @@ The subtractive alternative is now the working Paper I surface.  The
 warning-free human manuscript is fourteen pages and retains the fixed-field
 rigidity theorem, decoder reconstruction, chord defect, partial-cover
 window, and Clebsch-family formula.  The removed results are no longer a TeX
-fragment: `papers/clebsch-rigidity/computational_companion.tex` is a
+fragment:
+`papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex` is a
 standalone seven-page companion with its own abstract, notation, imported
 geometric inputs, bibliography, conclusion, build target, and trust ledger.
 It contains the fifteen-class census, cubic rigidity, numerical gap,

@@ -1,6 +1,6 @@
 {
   "schema": "clebsch-computational-companion-trust-v1",
-  "manuscript": "computational_companion.tex",
+  "manuscript": "clebsch_rigidity_computational_companion.tex",
   "claims": [
     {
       "id": "chord-defect-and-window",
