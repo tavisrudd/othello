@@ -27,6 +27,7 @@ spinoff.
 | projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
 | transparent coding bridge | `parityCheckCode`; `[n,n-3,4]` MDS parameter package; affine syndrome distance; actual-leader/support cardinality bijection through weight three; exact `choose(n,3)` weight-three leader count; covering-radius-three predicate; indexed projective arc/triple-independence equivalence | proved in `CodingBridge.lean` without an external coding API; codewords, supports, distance, and leaders are explicit finite functions; `card_syndromeLeadersOfWeight_eq_supports` makes the incidence count literally an affine coefficient-word count |
 | finite examples | `Examples.rhoC_ZMod5`, `rho_points_ZMod5`, `rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all five values exact; the q=5 leaf is the projective four-frame transported to the standard conic, then `NonsingularConic.rho_points_eq_rhoC` transports the value to every nonsingular model |
+| C637 small-odd upper witnesses | `C637WitnessData.q13Normalization_det`, `q17Normalization_det`, `q13Normalization_maps`, `q17Normalization_maps`, `q13Normalization_conicForm`, `q17Normalization_conicForm`; `C637Witnesses.q13_check`, `q17_check`, `q19_check`, `q19_ordinaryCoverage`, `q19_complete`, `rhoC_ZMod13_le_eight`, `rhoC_ZMod17_le_nine`, `rhoC_ZMod19_le_ten` | kernel-checked normalization matrices, pullback identities for the displayed conics, and rules-only upper bounds; Lean verifies the exact coordinate transports, arc, standard-conic disjointness, and relative coverage for all three lists, and ordinary completeness for the q=19 ten-arc. The exact equalities at q=13,17,19 additionally use exhaustive lower-bound classifications which are external computations and are not claimed by any Lean declaration |
 | q=16 projective classification | `StepBook.coverage`; `StepBooksValid`; `classifiedAt_level8_of_frame`; `arbitrary_eight_arc_classification_chain`; `arbitrary_eight_arc_projectiveQuadraticAvoidance`; `rejection_profile`; `exceptional_leaf_records`; `exceptionalKernelOne/Two/Three`; `no_completeOutside_GF16_card_eight` | every legal move is represented by a certified transition into the next list, and the books cover the current parent list exactly, so the lists of lengths 4/61/454/2633 form a kernel-checked exhaustive cover. Lean checks the exact 2630+3 split, identifies the three exceptional records and their one-dimensional kernels, and proves the full singular-or-nonsingular quadratic-avoidance theorem for every abstract eight-arc, including projective transport of ordinary uncoveredness and zero sets |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
@@ -107,6 +108,33 @@ q=16 k=9 points=273 conic_points=17 secants=36 required_points=247 I_C=32 L2=8
 ```
 
 The Python verifier is provenance and an independent cross-check, not part of the Lean proof.
+
+## C637 small-odd provenance and trust split
+
+The C637 exact-value report is
+`notes/2026-07-25-c637-secant-hull-coupling.md`.  Its upper-bound witnesses are represented in
+`C637Witnesses.lean`.  The q=13 and q=17 lists are projective normalizations of the displayed
+C637 witnesses to the standard conic; the matrices and transformed coordinates are retained in
+`notes/2026-07-25-c641-conic-normalizations.json`.  The q=19 list already avoids the standard
+conic.  `Certificate.check` recomputes all arc, disjointness, and relative-coverage conditions by
+kernel reduction, so neither the Python normalization search nor any C637 JSON verdict is a proof
+input to these upper bounds.  `q19_ordinaryCoverage` separately checks every projective point,
+showing that this ten-arc is ordinary complete.
+
+The lower bounds have a different trust status.  The assertions that no seven-arc at q=13, no
+eight-arc at q=17, and no nine-arc at q=19 is complete outside a conic depend on the exhaustive
+C++ classification/rank runs recorded by C637.  Their projective-class coverage and quadratic-rank
+conclusions have not been imported as local Lean certificates, and no structural Lean theorem
+currently implies them.  Consequently Lean proves only
+`rhoC (ZMod 13) ≤ 8`, `rhoC (ZMod 17) ≤ 9`, and `rhoC (ZMod 19) ≤ 10`;
+the exact equalities \(8,9,10\) remain external-computation-backed results.
+
+Replay the kernel-checked portion from `lean/` with:
+
+```text
+nix develop --command env LEAN_NUM_THREADS=1 \
+  lake build RelativeConicArcs.Gates.C637Witnesses
+```
 
 ## Strengthening-check provenance
 
@@ -254,6 +282,7 @@ coverage checker, `Certificate.check_sound`,
 q=16 eight-arc nonexistence, profile, exceptional-arithmetic, arbitrary-classification-chain, and
 quadratic-pullback theorems, the q=9 terminal P theorem, q=11 residual and actual
 seeded P theorems, the q11 MDS/radius/deep-hole/leader/extension/chord theorems, and the public
+q=13,17,19 upper-witness checks, upper bounds, and q=19 ordinary-completeness theorem, the public
 syndrome/coding bridges, together with the public finite-field evaluation-dichotomy, quantitative-count,
 sharp-cover, equality-model, kernel/span, and feature-closure theorems, as well as the exact
 uncovered-locus reconstruction, matching-rigidity, bad-edge, secant-deletion, and four-group
@@ -278,6 +307,8 @@ count is only an external consistency check and is not a proof input.
 
 The paper's six-point matching-design realization calculation and cited seven-point
 nonrealizability result are not represented as a field-linear realization classification in Lean.
+The C637 lower-bound classifications at q=13,17,19 are likewise external: Lean checks the
+attaining witnesses but does not prove the three exact equalities.
 Likewise, the Beyond-4, Clebsch rigidity/factorization, and AME-LU references attached to the
 coding/design comparisons are contextual citations, not formal proof inputs; the underlying
 parity-check-code parameters, syndrome-distance dictionary, and matching decomposition are the
