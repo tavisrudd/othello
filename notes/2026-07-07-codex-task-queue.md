@@ -152,7 +152,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `relconic`
 
 - **C630 `[relconic]` [ACTIVE — LEAN CLOSURE OF CHEAP CONSEQUENCES]** — formalize the discrete defect gap, complete-affine equality roots, odd equality spectrum, characteristic-two arithmetic reduction where supported by the current API, and the exceptional `(4096,92)` secant restrictions; expose the resulting terminals through the relconic gate and update the trust boundary → `notes/2026-07-25-c630-relconic-cheap-consequences-lean.md`.
-- **C626 `[relconic]` [QUEUED; EV 2 — RANK-THREE-SENSITIVE THIRD LAYER]** — find a six-point, bracket, Brianchon, polarity, carrier, or square-restriction invariant that survives the known collapse of raw `sum_x choose(r(x),3)` and can yield a projective-compatibility inequality beyond the first two moments → `notes/2026-07-25-c626-rank-three-sensitive-third-layer.md`.
 - **C627 `[relconic]` [QUEUED; EV 3 — BAD-CONCURRENCE DESIGN COMPLETION]** — determine whether the checked edge/vertex removal bounds can be upgraded to completion or edit distance from a genuine matching design or rank-three realization, with a quantitative defect gap from nonrealizability as the target and an exact geometric falsifier as the negative exit → `notes/2026-07-25-c627-bad-concurrence-design-completion.md`.
 - **C628 `[relconic]` [QUEUED; EV 4 — UNIFORM QUADRATIC-HULL OBSTRUCTION]** — recast the evaluation obstruction through Hilbert functions, Veronese spans, and separators, then test for a structural extension of the `q=16` quadratic-avoidance theorem; use `q=13,17,19` only as bounded pilots under the reproducibility convention → `notes/2026-07-25-c628-uniform-quadratic-hull-obstruction.md`.
 - **C606 `[relconic]` [QUEUED; only after Version 1 is published]** — develop Theorem 4 from `clebsch_ame_proof_development.md` as a post-publication follow-up to the arcs paper: verify and package the Clebsch six-arc's simultaneous extension complex as the independence complex of the icosahedron, then decide whether it belongs in a Version 2 structural remark or a companion note; do not alter Version 1 → `notes/2026-07-25-c606-clebsch-extension-complex-follow-up.md`.
@@ -160,6 +159,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C623; optional quantitative-rigidity upgrade]** — after C623 fixes the exact basis-free phase-space boundary, test whether C560's rank-one contraction locus admits a quantitative approximate-rigidity theorem with explicit conditioning; keep robust claims separate from exact reconstruction and audit them before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
+- **C631 `[ame-lu]` [IN PROGRESS; C622 Lean closeout]** — formalize the diagonal-duality witness space, its zero-or-one-dimensionality and projective uniqueness, the one-nondiagonal-gate bootstrap, and every cheap arithmetic corollary supported by the existing AME--LU abstractions → `notes/2026-07-25-c631-diagonal-isoduality-corollaries-lean.md`.
 
 ### `rp-next`
 
