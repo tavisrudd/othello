@@ -1313,8 +1313,17 @@
       "last": 640,
       "purpose": "adopt unconditionally formalized extension-field pencil-sector algebra and enforce Lean coverage for manuscript claims",
       "sequence": 146
+    },
+    {
+      "count": 1,
+      "first": 641,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 641,
+      "purpose": "kernel-check the C637 attaining witnesses and record the exact external lower-bound trust boundary",
+      "sequence": 147
     }
   ],
-  "next_id": 641,
+  "next_id": 642,
   "schema": "codex-task-id-allocations-v1"
 }
