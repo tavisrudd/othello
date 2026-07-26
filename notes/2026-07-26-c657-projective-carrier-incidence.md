@@ -134,3 +134,6 @@ No manuscript file was edited.  This belongs in Lean and in the internal
 formalization report now; it should enter the paper only when a concrete
 geometric carrier supplies the three open inputs above, so the paper does
 not advertise a conditional algebraic shell as a completed carrier theorem.
+
+The allocated successor is C658, which owns exactly those concrete geometric
+inputs and their connection to the existing interpolation/detection endpoint.
