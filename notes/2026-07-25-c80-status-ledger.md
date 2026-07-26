@@ -39,7 +39,7 @@ is an input bank, not C80 status authority.
 | Bounded small-shell correspondence `R_small` | **PROVED soundness; SETTLED NEGATIVE uniformly** | The fixed incidence formula eliminates explicit `B_cc` pairings and gives `49/49 P` q17 and `69/69 P` q19 selected edges. The first q23 P control has `0/118` coverage, and all 181 replies to root opponent `(0,0)` miss the survivor. [Positive finite gate](2026-07-25-c80-q19-rank-one-incidence-shell.md), [q23 falsifier](2026-07-25-c80-q23-small-shell-falsifier.md) |
 | q23 defect-three update | **PROVED sound for one target; FINITE-CERTIFIED** | The unique minimum-defect follower has a three-point noncollinear mutually legal defect locus. Every defect move has two replies sending rank `3 -> 0`; with direct boundary replies elsewhere this gives `24/24` coverage and 50 sound edges. [Report](2026-07-25-c80-q23-defect-three-update.md) |
 | q23 recursive defect-rank survivor | **PROVED soundness; FINITE-CERTIFIED reach** | The well-founded `F_d` survivor uses `d=|Def|`, the `B_small` boundary, and strict defect-rank replies. All 118 outer fibres of the normalized q23 control enter `F_d`; 24,568 ranked states and 25,479 defect obligations are checked without minimax or the C54 value label. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
-| q23 rank-zero correspondence `R0` | **PROVED soundness; FINITE-CERTIFIED exact compression on two controls** | `R0(T;o,p)` requires every defect of `T+o+p` to have a reply to defect rank zero. It equals `F_d` exactly on both canonical controls tested: `1,240/7,986` edges with `118/118` coverage for history reply `(5,2)`, then `1,326/7,700` with `116/116` coverage for `(5,9)`. The second control's first rejected candidate fails after one exchange at an overload-zero state with a terminal defect move. The formula remains fixed-depth, not a uniform growing-rank theorem. [First control](2026-07-25-c80-q23-rank-zero-correspondence.md), [second control](2026-07-25-c80-q23-next-control-depth-two.md) |
+| q23 rank-zero correspondence `R0` | **PROVED soundness; FINITE-CERTIFIED exact compression on three controls** | `R0(T;o,p)` requires every defect of `T+o+p` to have a reply to defect rank zero. It equals `F_d` exactly on all three canonical controls tested: `1,240/7,986` edges with `118/118` coverage for history reply `(5,2)`, `1,326/7,700` with `116/116` for `(5,9)`, and `1,384/8,248` with `120/120` for `(5,10)`. The latter two controls' first rejected candidates fail after one exchange at overload-zero states with terminal defect moves. The formula remains fixed-depth, not a uniform growing-rank theorem. [First control](2026-07-25-c80-q23-rank-zero-correspondence.md), [second control](2026-07-25-c80-q23-next-control-depth-two.md), [third control](2026-07-25-c80-q23-third-control-rank-zero.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -82,7 +82,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 defect rank | The direct projective relation `R0` equals the recursive `F_d` reply set exactly on the first two canonical controls (`1,240/7,986` and `1,326/7,700`), with full opponent coverage in both. It remains one fixed-depth shell. | Test the third canonical q23 P control and extract the first `F_d \\ R0` edge or first `R0` coverage failure; only then formulate a growing-rank update. |
+| q23 defect rank | The direct projective relation `R0` equals the recursive `F_d` reply set exactly on the first three canonical controls (`1,240/7,986`, `1,326/7,700`, and `1,384/8,248`), with full opponent coverage in all three. It remains one fixed-depth shell. | Test the fourth canonical q23 P control and extract the first `F_d \\ R0` edge or first `R0` coverage failure; only then formulate a growing-rank update. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -91,13 +91,13 @@ The live C80 statement is:
 
 ```text
 Determine where the exact q23 identity `R0=F_d`, now verified on the first
-two canonical normalized P controls, first fails.
+three canonical normalized P controls, first fails.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Test `R0` on the third canonical q23 P control and extract the first
+Test `R0` on the fourth canonical q23 P control and extract the first
 coverage failure or first survivor edge outside the direct relation.
 ```
 
@@ -111,4 +111,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap test R0 on the next canonical q23 P control and extract the first depth-two failure
+go C80 cap test R0/F_d equality on the fourth canonical q23 P control

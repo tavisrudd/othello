@@ -1,0 +1,1517 @@
+{
+  "control": {
+    "canonical_choice": "third P reply in C54 s4query canonical output order, immediately after the second control",
+    "history": [
+      [
+        0,
+        0
+      ],
+      [
+        5,
+        10
+      ]
+    ],
+    "legal_moves": 120,
+    "oracle": {
+      "binary": "rust/target/gridcap-c54",
+      "binary_sha256": "c2ed49a6ecf4fbba8d2c3063765eada8268453c7551e8561f3c77d18078506d7",
+      "c54_contract": "notes/2026-07-09-codex-q23-bucket-certification.md",
+      "canonical_p_replies": 163,
+      "canonical_p_reply_index_zero_based": 2,
+      "previous_p_reply_line": "REPLY x=0,0 y=5,9 ygeom=ext value=P",
+      "raw_archive": "rust/s4-dumps/2026-07-08/q23-root-1234-1-2-3-4.raw",
+      "raw_archive_bytes": 301735064,
+      "raw_archive_sha256": "bee6ce230878a4da653892fb093e10cef13cee3234befd03667685657d24d274",
+      "target_p_reply_line": "REPLY x=0,0 y=5,10 ygeom=int value=P"
+    },
+    "q": 23,
+    "root_t4": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "direct_recursive_comparison": {
+    "F_d_edges": 1384,
+    "R0_edges": 1384,
+    "R0_opponent_complete": true,
+    "mismatches": []
+  },
+  "first_failure_one_exchange_below_target": {
+    "C54_target_value_line": "REPLY x=6,3 y=7,2 ygeom=int value=N",
+    "canonical_exchange_to_obstruction": {
+      "opponent": [
+        8,
+        7
+      ],
+      "reply": [
+        18,
+        19
+      ]
+    },
+    "first_nondecreasing_obstruction": {
+      "defect_opponent": [
+        15,
+        18
+      ],
+      "legal_replies_tested": 0,
+      "minimizers": [],
+      "minimum_next_defect_rank": null,
+      "rank_change": null,
+      "state_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "state_defect_rank": 1,
+      "state_legal_moves": 5,
+      "state_omega": 0
+    },
+    "legal_exchange_orientations": [
+      {
+        "opponent": [
+          8,
+          7
+        ],
+        "reply": [
+          18,
+          19
+        ]
+      },
+      {
+        "opponent": [
+          18,
+          19
+        ],
+        "reply": [
+          8,
+          7
+        ]
+      }
+    ],
+    "obstruction_exchange_depth": 1,
+    "obstruction_legal_moves": [
+      {
+        "follower_legal_moves": 2,
+        "move": [
+          9,
+          4
+        ]
+      },
+      {
+        "follower_legal_moves": 1,
+        "move": [
+          10,
+          18
+        ]
+      },
+      {
+        "follower_legal_moves": 1,
+        "move": [
+          15,
+          14
+        ]
+      },
+      {
+        "follower_legal_moves": 0,
+        "move": [
+          15,
+          18
+        ]
+      },
+      {
+        "follower_legal_moves": 2,
+        "move": [
+          16,
+          20
+        ]
+      }
+    ],
+    "obstruction_terminal_moves": [
+      [
+        15,
+        18
+      ]
+    ],
+    "outer_opponent": [
+      6,
+      3
+    ],
+    "outer_reply": [
+      7,
+      2
+    ],
+    "target_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        10
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        2
+      ]
+    ],
+    "target_defect_rank": 37,
+    "target_omega": 69
+  },
+  "first_recursive_failure": {
+    "C54_target_value_line": "REPLY x=6,3 y=7,2 ygeom=int value=N",
+    "canonical_exchange_to_obstruction": {
+      "opponent": [
+        8,
+        7
+      ],
+      "reply": [
+        18,
+        19
+      ]
+    },
+    "first_nondecreasing_obstruction": {
+      "defect_opponent": [
+        15,
+        18
+      ],
+      "legal_replies_tested": 0,
+      "minimizers": [],
+      "minimum_next_defect_rank": null,
+      "rank_change": null,
+      "state_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "state_defect_rank": 1,
+      "state_legal_moves": 5,
+      "state_omega": 0
+    },
+    "legal_exchange_orientations": [
+      {
+        "opponent": [
+          8,
+          7
+        ],
+        "reply": [
+          18,
+          19
+        ]
+      },
+      {
+        "opponent": [
+          18,
+          19
+        ],
+        "reply": [
+          8,
+          7
+        ]
+      }
+    ],
+    "obstruction_exchange_depth": 1,
+    "obstruction_legal_moves": [
+      {
+        "follower_legal_moves": 2,
+        "move": [
+          9,
+          4
+        ]
+      },
+      {
+        "follower_legal_moves": 1,
+        "move": [
+          10,
+          18
+        ]
+      },
+      {
+        "follower_legal_moves": 1,
+        "move": [
+          15,
+          14
+        ]
+      },
+      {
+        "follower_legal_moves": 0,
+        "move": [
+          15,
+          18
+        ]
+      },
+      {
+        "follower_legal_moves": 2,
+        "move": [
+          16,
+          20
+        ]
+      }
+    ],
+    "obstruction_terminal_moves": [
+      [
+        15,
+        18
+      ]
+    ],
+    "outer_opponent": [
+      6,
+      3
+    ],
+    "outer_reply": [
+      7,
+      2
+    ],
+    "target_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        10
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        2
+      ]
+    ],
+    "target_defect_rank": 37,
+    "target_omega": 69
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_q23_defect_rank_descent.py": "c64a5b9fe05a49525cebe97bc92d89b2629066f0d46d2e05441e21764da34295",
+    "rust/scripts/c80_q23_defect_three_update.py": "4e4a97d5c76fd7951885cef9ca0f9e7f26a13dbef1209be97616eaa2485a802f",
+    "rust/scripts/c80_q23_next_control_depth_two.py": "25ba9007b580f87e35bd2e411658781d25621d8341f58b22b6022f63458f33f3",
+    "rust/scripts/c80_q23_rank_zero_correspondence.py": "e2a6add73471702695cd39683fd0b55c35af2e70bb1979f85a6bda1aa6f2bee0",
+    "rust/scripts/c80_q23_small_shell_falsifier.py": "469238cea7af51daf0ba21d17c609074e1fd6d9c2d1d62e840565ec0df5ef198",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "schema": "c80-q23-third-control-rank-zero-v1",
+  "search": {
+    "order": "increasing internal cell index for outer opponents, then replies; complete census of the immediate next control",
+    "outer_opponent_fibres": 120,
+    "outer_reply_candidates": 8248,
+    "rows": [
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          6,
+          3
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          6,
+          4
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 20,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          6,
+          5
+        ],
+        "recursive_survivor_replies": 20
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          6,
+          15
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          6,
+          20
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 6,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          6,
+          21
+        ],
+        "recursive_survivor_replies": 6
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 75,
+        "opponent": [
+          6,
+          22
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          7,
+          2
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          7,
+          4
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          7,
+          5
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 62,
+        "opponent": [
+          7,
+          9
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          7,
+          13
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          7,
+          16
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          7,
+          17
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          8,
+          3
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          8,
+          4
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          8,
+          7
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          8,
+          15
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          8,
+          18
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          8,
+          19
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 19,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          8,
+          20
+        ],
+        "recursive_survivor_replies": 19
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          9,
+          4
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          9,
+          5
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 3,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          9,
+          11
+        ],
+        "recursive_survivor_replies": 3
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          9,
+          13
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 61,
+        "opponent": [
+          9,
+          16
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 20,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          9,
+          17
+        ],
+        "recursive_survivor_replies": 20
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          9,
+          21
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 74,
+        "opponent": [
+          10,
+          2
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          10,
+          5
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 75,
+        "opponent": [
+          10,
+          9
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 15,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          10,
+          13
+        ],
+        "recursive_survivor_replies": 15
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          10,
+          18
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          11,
+          2
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          11,
+          3
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          11,
+          4
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          11,
+          7
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          11,
+          9
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 6,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          11,
+          17
+        ],
+        "recursive_survivor_replies": 6
+      },
+      {
+        "R0_replies": 15,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          11,
+          18
+        ],
+        "recursive_survivor_replies": 15
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          11,
+          21
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          12,
+          2
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          12,
+          11
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          12,
+          14
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          12,
+          16
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 15,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          12,
+          19
+        ],
+        "recursive_survivor_replies": 15
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          12,
+          21
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          12,
+          22
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 24,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          13,
+          7
+        ],
+        "recursive_survivor_replies": 24
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          13,
+          15
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          13,
+          16
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 24,
+        "legal_reply_candidates": 74,
+        "opponent": [
+          13,
+          17
+        ],
+        "recursive_survivor_replies": 24
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          13,
+          22
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          14,
+          2
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          14,
+          3
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 20,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          14,
+          7
+        ],
+        "recursive_survivor_replies": 20
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          14,
+          11
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          14,
+          16
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          14,
+          17
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          14,
+          18
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          14,
+          20
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 21,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          15,
+          2
+        ],
+        "recursive_survivor_replies": 21
+      },
+      {
+        "R0_replies": 15,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          15,
+          3
+        ],
+        "recursive_survivor_replies": 15
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 62,
+        "opponent": [
+          15,
+          5
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          15,
+          13
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          15,
+          14
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 18,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          15,
+          16
+        ],
+        "recursive_survivor_replies": 18
+      },
+      {
+        "R0_replies": 4,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          15,
+          18
+        ],
+        "recursive_survivor_replies": 4
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          15,
+          22
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          16,
+          7
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          16,
+          11
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 12,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          16,
+          13
+        ],
+        "recursive_survivor_replies": 12
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          16,
+          14
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          16,
+          15
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          16,
+          17
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          16,
+          20
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 6,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          16,
+          22
+        ],
+        "recursive_survivor_replies": 6
+      },
+      {
+        "R0_replies": 15,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          17,
+          4
+        ],
+        "recursive_survivor_replies": 15
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          17,
+          5
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          17,
+          9
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 23,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          17,
+          15
+        ],
+        "recursive_survivor_replies": 23
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          17,
+          18
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          17,
+          19
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          18,
+          5
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          18,
+          7
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          18,
+          11
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          18,
+          15
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          18,
+          19
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          18,
+          20
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          18,
+          21
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          19,
+          2
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          19,
+          3
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          19,
+          4
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          19,
+          5
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          19,
+          9
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          19,
+          11
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          19,
+          14
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          19,
+          21
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 4,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          20,
+          11
+        ],
+        "recursive_survivor_replies": 4
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          20,
+          13
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          20,
+          14
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 16,
+        "legal_reply_candidates": 73,
+        "opponent": [
+          20,
+          16
+        ],
+        "recursive_survivor_replies": 16
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          20,
+          18
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 64,
+        "opponent": [
+          20,
+          19
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 5,
+        "legal_reply_candidates": 71,
+        "opponent": [
+          20,
+          21
+        ],
+        "recursive_survivor_replies": 5
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          20,
+          22
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          21,
+          4
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 18,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          21,
+          9
+        ],
+        "recursive_survivor_replies": 18
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 65,
+        "opponent": [
+          21,
+          13
+        ],
+        "recursive_survivor_replies": 13
+      },
+      {
+        "R0_replies": 7,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          21,
+          15
+        ],
+        "recursive_survivor_replies": 7
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          21,
+          16
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 68,
+        "opponent": [
+          21,
+          17
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 11,
+        "legal_reply_candidates": 67,
+        "opponent": [
+          21,
+          22
+        ],
+        "recursive_survivor_replies": 11
+      },
+      {
+        "R0_replies": 14,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          22,
+          3
+        ],
+        "recursive_survivor_replies": 14
+      },
+      {
+        "R0_replies": 8,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          22,
+          7
+        ],
+        "recursive_survivor_replies": 8
+      },
+      {
+        "R0_replies": 10,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          22,
+          11
+        ],
+        "recursive_survivor_replies": 10
+      },
+      {
+        "R0_replies": 6,
+        "legal_reply_candidates": 69,
+        "opponent": [
+          22,
+          15
+        ],
+        "recursive_survivor_replies": 6
+      },
+      {
+        "R0_replies": 17,
+        "legal_reply_candidates": 70,
+        "opponent": [
+          22,
+          18
+        ],
+        "recursive_survivor_replies": 17
+      },
+      {
+        "R0_replies": 9,
+        "legal_reply_candidates": 66,
+        "opponent": [
+          22,
+          19
+        ],
+        "recursive_survivor_replies": 9
+      },
+      {
+        "R0_replies": 13,
+        "legal_reply_candidates": 72,
+        "opponent": [
+          22,
+          20
+        ],
+        "recursive_survivor_replies": 13
+      }
+    ]
+  },
+  "source": "rust/scripts/c80_q23_third_control_rank_zero.py",
+  "verdict": {
+    "R0_coverage_failure": false,
+    "R0_equals_recursive_survivor_on_domain": true,
+    "R0_opponent_complete_on_third_control": true,
+    "c82_released": false,
+    "survivor_edge_outside_R0": false,
+    "uniform_odd_q_theorem": "OPEN"
+  }
+}
