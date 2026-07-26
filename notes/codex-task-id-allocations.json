@@ -1412,8 +1412,17 @@
       "last": 653,
       "purpose": "Paper III Hitchin-Clebsch tensor, arithmetic-certificate, and integral-novelty gates",
       "sequence": 157
+    },
+    {
+      "count": 1,
+      "first": 654,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 654,
+      "purpose": "compute the relative commutant of the two Klein-cubic A5 multiplicity decompositions and test the golden field",
+      "sequence": 158
     }
   ],
-  "next_id": 654,
+  "next_id": 655,
   "schema": "codex-task-id-allocations-v1"
 }
