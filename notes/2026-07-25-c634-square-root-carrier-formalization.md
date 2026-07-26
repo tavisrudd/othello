@@ -4,11 +4,13 @@
 
 **Date:** 2026-07-25
 
-**Status:** implementation extended through the first polynomial restriction
-and Frobenius-descent interface; dedicated gate builds remain pending the
-shared Lean build window.  The stable local and combinatorial core of C626's
-square-root carrier theorem is formalized without enlarging the manuscript or
-claiming that Lean checks the geometric pairing and interpolation inputs.
+**Status:** implementation now includes polynomial restriction and
+Frobenius descent, binary-factor proportionality, finite interpolation from a
+one-line correction, line-product detection, product nonsquareness, and the
+conditional carrier-cardinality theorem.  Dedicated gate builds remain
+pending the shared Lean build window.  The manuscript is unchanged, and the
+formal boundary below isolates the projective inputs which Lean does not yet
+check.
 
 ## Mathematical scope
 
@@ -26,11 +28,19 @@ The formalization now also constructs homogeneous linear substitution
  K[X_0,X_1,X_2]\longrightarrow K[U,V]
 \]
 and the finite product of homogeneous plane-linear factors.  A pairing of
-equal restricted factors produces an explicit square root.  Compatible
-linewise roots descend once they extend to one ambient polynomial and the
-restriction family jointly detects ambient polynomials.  Producing those
-hypotheses from projective secants and a general-position carrier arrangement
-remains geometric.
+proportional restricted factors produces an explicit square root over a
+perfect characteristic-two coefficient ring.  Lean now proves the finite
+induction from one-line corrections to a simultaneous extension, the
+bounded-degree line-product detection lemma, the squarefree-product nonsquare
+obstruction, and their cardinality consequence.  Producing the one-line
+correction, divisibility, and concrete factor hypotheses from projective
+secants and a general-position carrier arrangement remains geometric.
+
+This belongs in the Lean development and in this verification report now.  It
+should not enter the current V1 manuscript as a proved carrier theorem: the
+remaining projective inputs are precisely the steps a paper proof would have
+to supply.  A later V2 or companion treatment can cite the formal theorem once
+those inputs are proved or are stated transparently as hypotheses.
 
 ## `ej`, degrees of freedom, and Tao stress pass
 
@@ -108,6 +118,11 @@ ten public terminals.
 
 - `homogeneousLinearPolynomial` and `planeLineRestriction` define the actual
   three-variable to two-variable homogeneous substitution;
+- `binaryLinearCoefficientDeterminant`,
+  `exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero`, and
+  `exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero`
+  prove that two nonzero binary linear forms with zero coefficient determinant
+  are proportional by a nonzero scalar;
 - `homogeneousLinearPolynomial_scale` and its restriction corollary prove the
   exact scalar change caused by rescaling a linear-factor representative;
 - `dualLinearFactorProduct` constructs the finite product of dual linear
@@ -135,8 +150,33 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its fourteen public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its sixteen public
 terminals.
+
+`RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
+
+- `exists_finset_extension_of_single_correction` proves the elementary
+  interpolation induction: a correction which fits one new restriction and
+  vanishes on those already fitted yields a simultaneous extension on every
+  finite family;
+- `totalDegree_fintypeProd_of_ne_zero` and
+  `totalDegree_fintypeProd_eq_card_of_degree_one` compute the total degree of a
+  finite product of nonzero degree-one forms;
+- `eq_zero_of_pairwise_isRelPrime_dvd_of_totalDegree_lt_card` proves the line
+  detection lemma: a polynomial of degree below the number of pairwise
+  relatively prime linear divisors is zero;
+- `not_exists_eq_sq_of_squarefree_of_not_isUnit` and
+  `not_exists_fintypeProd_eq_sq_of_pairwise_isRelPrime_of_squarefree` prove the
+  nonsquare obstruction for a squarefree nonunit and for a pairwise relatively
+  prime finite product of squarefree factors;
+- `card_le_of_linewiseSquareRoots_extend_and_jointlyDetect` gives the abstract
+  carrier-cardinality contradiction; and
+- `card_le_of_linewiseSquareRoots_extend_of_lineProductDetection` composes
+  actual multivariable line divisors, a degree bound, extended linewise roots,
+  and ambient nonsquareness into `Y.card ≤ degreeBound`.
+
+The import-only gate `RelativeConicArcs.Gates.CarrierArcBound` audits these
+eight terminals.
 
 ## Formal boundary
 
@@ -148,9 +188,14 @@ Lean does not yet check:
 
 - the passage from projective arc points to a representative-independent
   dual-factor product;
-- the secant pairing which makes the restricted factors proportional;
-- bounded-degree joint detection for the chosen family of carrier lines;
-- interpolation of compatible linewise roots in general position;
+- the incidence argument which turns the secant pairing into the determinant
+  hypotheses for the restricted binary factors;
+- the one-line polynomial correction lemma for compatible sections on a nodal
+  line arrangement (its finite induction is formalized);
+- the geometric facts that restriction equality gives divisibility by the
+  chosen line equation and that the chosen equations are pairwise relatively
+  prime;
+- squarefreeness and nonunit status of the particular dual-factor product;
 - the deduction that the maximum-centre set has arc number at most `k`; or
 - the specialization of the finite-cover kernel to all `(k+1)`-subsets and
   their collinear triples.
@@ -165,8 +210,9 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Open at the geometric interface:** individual rescaling is formalized exactly, but the projective normalization or line-bundle formulation of the whole product is not. |
-| Do compatible linewise roots extend? | **Open with an exact gate:** prove interpolation into one ambient form of the required degree. |
-| Do the carrier restrictions detect that ambient form? | **Open with an exact gate:** prove injectivity of the combined restriction map on the bounded-degree homogeneous component. |
+| Do compatible linewise roots extend? | **Reduced:** finite interpolation from successive corrections is kernel-checked.  The remaining evidence gap is the projective one-line correction: divisibility of the residual binary form by the previous node factors and a lift of the quotient to the plane. |
+| Do the carrier restrictions detect that ambient form? | **Reduced to explicit algebraic hypotheses:** line-product detection and the final cardinal contradiction are kernel-checked.  The remaining evidence gap is the specialization from restriction-zero to divisibility by each chosen line equation, plus pairwise relative primality and the required degree bound. |
+| Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 
 ## Validation
 
@@ -184,10 +230,17 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its fourteen terminals reports no axioms beyond
+- The source-local audit of its sixteen terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
+- `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
+  **PASS**, warning-free.
+- The source-local audit of its eight terminals reports no axioms beyond
+  `propext`, `Classical.choice`, and `Quot.sound`;
+  `exists_finset_extension_of_single_correction` uses only `propext` and
+  `Quot.sound`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the new fourteen-terminal polynomial
-  gate build: pending release of the shared Lean build-owner lock.  Submitted
-  attempts correctly fail closed while the foreign aggregate owns that lock.
+  `--no-build` confirmation, together with the sixteen-terminal polynomial gate
+  and eight-terminal carrier gate builds: pending release of the shared Lean
+  build-owner lock.  The latest exact two-gate attempt failed closed because the
+  foreign `RelativeConicArcs.Gates.Relconic` aggregate owns that lock.
