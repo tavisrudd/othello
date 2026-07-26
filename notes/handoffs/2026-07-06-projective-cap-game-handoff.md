@@ -1060,10 +1060,11 @@ profiles isolate the five repairs purely in the complete 322-edge natural
 comparison, but no conjunction through three predeclared monotone scalar
 thresholds is P-pure; the first four-coordinate fits are finite
 interpolation, agreeing with the earlier zero-recurrence profile result.
-Therefore do not promote a chord/live/overload threshold. The next crown is
-an explicit nonrecursive operation that transports a response certificate
-while retaining enough incidence to prevent premature N absorption, then an
-opponent-complete coverage proof. C82 remains gated. Report+certificate:
+Therefore do not promote a chord/live/overload threshold. The exact next gate
+is opponent-complete strict-`Ω`, positive-`μ` closure on the complete
+certified q13/q17 DAGs and marked q19 control. On failure extract the first
+canonical isolate-creation obstruction; on success seek the field-uniform
+incidence proof. C82 remains gated. Report+certificate:
 [`../2026-07-25-c80-marked-secant-spoiler-repair-compare.md`](../2026-07-25-c80-marked-secant-spoiler-repair-compare.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
@@ -1140,12 +1141,16 @@ Priority order and why:
    marked-chord, legal-point, and live-conic reservoir, but that finite gap
    does not compress to a low-dimensional monotone rule: no conjunction
    through three predeclared scalar thresholds is P-pure, and the first
-   four-coordinate fits are interpolation. The next crown is therefore an
-   explicit nonrecursive operation transporting a response certificate
-   while retaining enough marked incidence to prevent premature N
-   absorption, followed by opponent-complete coverage. No quotient or
-   arbitrary Grundy oracle is required, and the five-state q17 thread is not
-   a depth-two law. A value-only factor is also not excluded.
+   four-coordinate fits are interpolation. The sparse-complement proof
+   identifies the exact structural coordinate
+   `μ(S)=min_x |{y:S+x+y legal}|`: repairs have `μ=8` at q17 and `μ=17` at
+   q19, while every spoiler has `μ=0`. Next test opponent-complete
+   strict-`Ω`, positive-`μ` closure on the complete certified q13/q17 DAGs
+   and marked q19 control; failure means canonicalize the first
+   isolate-creation obstruction, while success advances to the field-uniform
+   incidence proof. No quotient or arbitrary Grundy oracle is required, and
+   the five-state q17 thread is not a depth-two law. A value-only factor is
+   also not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
