@@ -359,6 +359,10 @@ nonrealizability of the naked star--matching design.
   proves its conic-incidence identity and parity, constructs the conic
   involutions, proves zero-defect invariance, and checks the general
   \(3\bmod4\) contradiction.  Ramanujan--Nagell is no longer a dependency.
+  The paper's preceding even conic three-root spectrum is not yet formalized;
+  `no_upper_even_equality_branch` receives its upper-root equation as a
+  hypothesis.
 - **Mystery close:** no genuine task-owned mathematical mystery remains.
-  The candidate, proof mechanism, minimal hypothesis, and reusable boundary
-  are all locked down.
+  The remaining gap is formal coverage, with an exact target: derive the
+  even conic three-root spectrum from the zero-defect identity and the
+  maximum-index-hole count, then compose it with the uniform exclusion.
