@@ -86,20 +86,17 @@
    complete \(b\)-arc can be moved off any prescribed \(H\) when \(b|H|<q^2+q+1\).
 7. The even-characteristic statements use only the standard nucleus/tangent facts for a
    nonsingular conic; combining the nucleus-in/out cases gives \(I_C(A)\ge1\) universally.
-   At the surviving \((q,k)=(4096,92)\) zero-defect candidate, the even equality spectrum gives
-   \(I_C(A)=91\cdot46=4186\). The nucleus-in parity is impossible; nucleus-out parity forces
-   \(r(\nu)=46\), and the two secant-incidence equations then force exactly 46 tangent, 2070
-   bisecant, and 2070 external arc secants. The complete arithmetic deduction, including
-   \(I_C(A)=4186\), is the Lean theorem `exceptional_candidate_secant_type_cards` in
-   `RelativeConicArcs.EqualityConsequences`. A tangent arc secant then supplies two commuting
-   involutions of the conic. They preserve the 91 maximum-index parameters, and each of them and
-   their product fixes only the tangent contact; permutation sign gives a contradiction. Lean
-   constructs the standard-conic involutions in `ConicSecantInvolution`, proves the invariant-set
-   bridge in `ZeroDefectConicInvariance`, and checks the terminal
-   `TangentPairFourGroup.no_exceptional_candidate_standardConic`. The reduction to the standard
-   conic is the usual projective normalization in the manuscript. The preceding
-   Ramanujan--Nagell classification is independently Lean-formalized in Banwait's package rather
-   than imported into this repository's gate.
+   On the upper even equality branch, write \(k=2m\). Since
+   \(q=(m-1)(2m-1)+1\) is even, \(m\) is even, while the equality spectrum gives
+   \(I_C(A)=\binom{k}{2}\) and \(k-1\) maximum-index conic points. Nucleus parity forces a tangent
+   arc secant. Its two commuting conic involutions preserve that \(3\bmod4\) set and have, together
+   with their product, the tangent contact as unique fixed point; permutation sign is contradictory.
+   Lean checks the incidence identity in
+   `RelativeConicArcs.upper_even_equality_branch_holeIncidence`, the invariant-set bridge in
+   `ZeroDefectConicInvariance`, and the general terminal
+   `TangentPairFourGroup.no_upper_even_equality_branch`. Thus the proof no longer uses the
+   Ramanujan--Nagell classification. The reduction from a nonsingular conic to the standard conic
+   is the projective normalization in the manuscript.
 8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened
    manuscript. Its exact \(q\)-hyperplane threshold and checker remain supplementary results; no
    paper theorem depends on them.

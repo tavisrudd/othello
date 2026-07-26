@@ -265,13 +265,14 @@ The finite group-action terminal is kernel-checked in
 
 The remaining geometric bridge is now kernel-checked as well.
 `ConicSecantInvolution` constructs the standard-conic involution and proves
-its chord-incidence formula.  `ZeroDefectConicInvariance` proves that the
-91-point maximum-index parameter set is invariant.  Finally,
-`TangentPairFourGroup.no_exceptional_candidate_standardConic` chooses a
-tangent arc secant, proves that its two involutions and their product have the
-same unique fixed point, restricts them to that set, and derives the
-contradiction from permutation sign.  These declarations are imported and
-axiom-audited by `RelativeConicArcs.Gates.Relconic`.
+its chord-incidence formula.  `ZeroDefectConicInvariance` proves invariance
+and the general cardinality \(2m-1\).
+`upper_even_equality_branch_holeIncidence` proves the incidence identity
+throughout the upper even equality branch.  Finally,
+`TangentPairFourGroup.no_upper_even_equality_branch` proves that \(m\) is
+even, extracts a tangent arc secant, and derives the sign contradiction on
+the resulting \(3\bmod4\) parameter set.  These declarations are imported
+and axiom-audited by `RelativeConicArcs.Gates.Relconic`.
 
 No finite census, heuristic search, or untracked computational artifact is
 part of the theorem.
@@ -304,6 +305,13 @@ pattern, Burnside's lemma gives
 Thus the number four belongs to the geometric construction of the subgroup,
 not to the orbit argument itself.
 
+A final `tt` pass removes the Ramanujan--Nagell reduction itself.  On the
+upper branch, writing \(k=2m\) gives
+\(q=(m-1)(2m-1)+1\), so the even field order forces \(m\) even.  The
+maximum-index conic set then has size \(2m-1\equiv3\pmod4\), exactly the
+forbidden residue.  Thus the tangent-pair argument excludes the whole upper
+branch uniformly rather than first reducing it to \((4096,92)\).
+
 The proof genuinely uses the prescribed conic twice and indispensably: to
 place the involutions in one \(\operatorname{PGL}_2\), and to make the same
 set \(E\) invariant under them.  It therefore does not silently claim
@@ -329,9 +337,9 @@ nonrealizability of the naked star--matching design.
 
 ## Mystery ledger
 
-- **The \((4096,92)\) equality candidate:** settled negatively by the
-  one-tangent Klein-four congruence; the subfield-orbit calculation is an
-  independent backup.
+- **The \((4096,92)\) equality candidate:** settled negatively by the uniform
+  upper-branch theorem; the numerical specialization and subfield-orbit
+  calculation are independent backups.
 - **Even characteristic-two zero defect:** settled completely at the
   parameter level; only the hyperoval scale remains.
 - **Why the local residues failed:** settled conceptually.  Two involutions
@@ -347,11 +355,10 @@ nonrealizability of the naked star--matching design.
 - **Manuscript integration:** settled.  The characteristic-two discussion,
   verification appendix, and a compact exclusion corollary now incorporate
   the tangent-pair proof.
-- **Formal boundary:** settled locally for the geometric exclusion.  Lean
-  constructs the conic involutions, proves zero-defect invariance, and checks
-  the terminal 91-point contradiction.  The preceding Ramanujan--Nagell
-  classification remains an independently formalized theorem in Banwait's
-  separately pinned Lean package rather than a dependency of this package.
+- **Formal boundary:** settled locally for the upper equality branch.  Lean
+  proves its conic-incidence identity and parity, constructs the conic
+  involutions, proves zero-defect invariance, and checks the general
+  \(3\bmod4\) contradiction.  Ramanujan--Nagell is no longer a dependency.
 - **Mystery close:** no genuine task-owned mathematical mystery remains.
   The candidate, proof mechanism, minimal hypothesis, and reusable boundary
   are all locked down.
