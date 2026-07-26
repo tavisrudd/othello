@@ -159,6 +159,71 @@ permutations, the entries of \(s\) must be permuted up to one common scalar.
 This supplies a structural pre-filter for future party-extension
 classifications without computing a factor set.
 
+## Third-order extra juice: uniform matroids and stability
+
+The circuit statement determines the complete matroid carried by the
+Veronese columns.  In the nonisodual branch they represent
+\(U_{2m,2m}\); in the isodual branch they represent
+\(U_{2m-1,2m}\).  Indeed, any dependence on a proper subset would extend by
+zeros to a nonzero multiplier without full support, contradicting the
+formal theorem.  Consequently every \(2m-1\) Veronese columns are
+independent in the isodual branch, and any deleted column is recovered
+uniquely as a linear combination of all the others with no zero
+coefficient.
+
+This makes the canonical multiplier determinantal.  Choose coordinates on
+the \((2m-1)\)-dimensional Veronese span and let \(A\) be the resulting
+\((2m-1)\)-by-\(2m\) column matrix.  If
+\(\Delta_i=\det A_{\widehat i}\) is the maximal minor obtained by deleting
+column \(i\), then
+\[
+  s_i=\lambda(-1)^i\Delta_i
+\]
+for one \(\lambda\ne0\), and every \(\Delta_i\) is nonzero.  Changing the
+chosen coordinates rescales the whole projective vector in the expected
+way.  Thus the multiplier can be reconstructed from maximal minors without
+solving a second linear system.
+
+Over odd characteristic the relation is also the unique weighted identity
+\[
+  \sum_i s_i\,q(g_i)=0
+\]
+valid for every quadratic form \(q\).  Combining the cofactor formula with
+the manuscript's hyperbolic discriminant condition
+\(\prod_i s_i\in(-1)^m(\mathbb F^\times)^2\) gives the basis-independent
+Plücker obstruction
+\[
+  \prod_{i=1}^{2m}\Delta_i\in(\mathbb F^\times)^2.
+\]
+The signs cancel because
+\(\prod_i(-1)^i=(-1)^m\), and every change-of-basis or projective-column
+rescaling contributes a square.  This square-class identity is a
+paper-level corollary of the discriminant statement; it is not yet a Lean
+theorem.
+
+The conformal action on the multiplier line is more rigid than a generic
+stabilizer condition.  Pure permutation automorphisms act through a
+one-dimensional character \(\chi\):
+\[
+  P\cdot s=\chi(P)s.
+\]
+For an element with cycle lengths \(d_1,\ldots,d_r\), nonvanishing of every
+entry forces \(\chi(P)^{d_j}=1\) for every \(j\).  Hence a fixed point, or
+more generally coprime cycle lengths, forces \(\chi(P)=1\).  If a transitive
+permutation subgroup has trivial character, then all \(s_i\) are equal and
+\(C=C^\perp\).  These character and cycle constraints are a cheaper
+pre-filter than constructing the party-extension factor set.
+
+There is also a free qualitative stability consequence when this result is
+combined with the all-length LU-to-LC theorem.  For fixed finite
+\((q,m)\), there are finitely many normalized MDS--CSS code states, their
+product-unitary orbits are compact, and distinct LC classes are distinct LU
+orbits.  The minimum distance between inequivalent orbits is therefore
+positive.  Thus some parameter-dependent approximate-rigidity threshold
+exists automatically.  This argument supplies neither an effective value
+nor a bound uniform in \(q\) or \(m\); C581's substantive target is exactly
+that conditioning problem, not qualitative existence.
+
 ## Degrees of freedom
 
 | Degree of freedom | Status |
@@ -168,6 +233,8 @@ classifications without computing a factor set.
 | Coordinate propagation ratios \(s_i/s_j\) | Canonical and independent of the witness. |
 | Diagonal automorphisms of the code | Only common scalar multiplication survives. |
 | Choice of fixed-party linear phase after one nondiagonal block | None: the whole `SL₂` branch follows. |
+| Matroid type of the \(2m\) Veronese columns | Exactly \(U_{2m,2m}\) or \(U_{2m-1,2m}\). |
+| Pure-permutation action on the multiplier | A one-dimensional character constrained by every cycle length. |
 | Phases of unitary Clifford lifts | Not controlled by the multiplier space; owned by the separate Weil/Heisenberg scalar-extension analysis. |
 | Party permutations | Not controlled by fixed-coordinate diagonal isoduality; owned by the realized party-permutation extension. |
 
@@ -188,6 +255,10 @@ classifications without computing a factor set.
 | Why does the six-party phase reduce to a conic? | **Settled structurally:** the square Veronese evaluation matrix is singular exactly on the conic locus. | The matrix-presentation bridge is not yet encoded in Lean. |
 | How rare is diagonal isoduality for \(m\geq4\)? | **Open quantitatively:** the ambient determinantal model predicts codimension \((m-1)(m-2)/2\). | Prove transversality, or determine the actual components, inside the MDS-arc moduli space before adopting the count. |
 | Does the multiplier line constrain party symmetries before factor-set computation? | **Settled:** every monomial automorphism conformally stabilizes the line; pure permutations preserve its entries projectively. | Turning this into a generated group pre-filter is an optional implementation step. |
+| Can a proper subset of the Veronese columns already be dependent? | **Settled negatively:** full support upgrades the two branches to the uniform matroids \(U_{2m,2m}\) and \(U_{2m-1,2m}\). | none |
+| Is the multiplier recoverable without a fresh kernel solve? | **Settled:** its projective coordinates are the signed maximal deletion minors. | Encoding this matrix presentation in Lean remains the same optional API bridge. |
+| Does exact LU-to-LC rigidity already imply approximate rigidity? | **Settled qualitatively at fixed \((q,m)\)** by finiteness and compactness. | C581 owns an effective, preferably uniform, conditioning bound. |
+| Which multiplier characters can party groups realize? | **Constrained but not classified:** cycle lengths bound the character, and a fixed point kills it. | Combine the pre-filter with concrete party-group data if a uniform classification is pursued. |
 
 No genuine mathematical mystery remains in the multiplier-space and witness
 uniqueness results.  The open entries are exact formal-interface depth
