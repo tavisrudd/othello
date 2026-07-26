@@ -2,6 +2,7 @@ import RelativeConicArcs.Gates.AMELUDefinitions
 import RelativeConicArcs.AMELU.GenericMDS
 import RelativeConicArcs.AMELU.GenericDiagonalTensor
 import RelativeConicArcs.AMELU.StabilizerAMESupport
+import RelativeConicArcs.AMELU.HolonomyCentralizer
 import RelativeConicArcs.AMELU.GenericLURigidity
 import RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup
 import RelativeConicArcs.AMELU.AutomorphismExactSequence

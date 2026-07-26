@@ -28,6 +28,9 @@ open RelativeConicArcs.AMELU
 #print axioms AMESupportedSubspaceProfile.space_eq_minimumSupportSpan
 #print axioms AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top
 #print axioms stabilizerAME_finrank_ker_eq_local
+#print axioms HolonomyAtlas.transition_intertwines_iff_commute_holonomy
+#print axioms HolonomyAtlas.compatibleGaugeEquivHolonomyCentralizer
+#print axioms HolonomyAtlas.compatibleGaugesInNormalSubgroupEquiv
 #print axioms genericEqualPhaseState_three
 #print axioms genericLocallyUnitaryEquivalent_three
 #print axioms genericMarginalWeylCoefficient_equalPhaseState_cases
