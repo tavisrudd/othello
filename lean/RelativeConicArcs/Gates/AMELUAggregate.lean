@@ -7,6 +7,7 @@ import RelativeConicArcs.AMELU.AutomorphismExactSequence
 import RelativeConicArcs.AMELU.NonabelianExtensionInvariant
 import RelativeConicArcs.AMELU.PartyExtensionSplitting
 import RelativeConicArcs.AMELU.EncoderTransversal
+import RelativeConicArcs.AMELU.DiagonalIsoduality
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
 import RelativeConicArcs.Gates.AMELUPencilClassification
@@ -31,7 +32,9 @@ nonabelian factor set, change-of-section law, and splitting obstruction, and
 scalar-phase identity-component theorem, the one-leg encoder parameter and
 Choi bridges, Clifford transpose closure, transversal no-go, exact
 fixed-party affine special-linear/split-torus carrier, and exact GRS
-transversal-group interface, the shared six-party conventions, the
+transversal-group interface, the zero-or-one-dimensional diagonal
+code-to-dual multiplier space, its exact nullity test and projectively unique
+witness ratios, the shared six-party conventions, the
 arc--MDS--CSS--AME and stabilizer dictionaries, the admitted-pencil
 local-Clifford and local-unitary classifications, the six-party
 LU-to-LC rigidity theorem, the marginal-moment separator, the
