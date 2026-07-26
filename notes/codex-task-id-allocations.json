@@ -1556,8 +1556,17 @@
       "last": 679,
       "purpose": "human-proof and Lean-backed complete-ports draft spine",
       "sequence": 173
+    },
+    {
+      "count": 1,
+      "first": 680,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 680,
+      "purpose": "close Paper III arithmetic, trust-package, Lean-boundary, and novelty gaps after cold-read NO-GO",
+      "sequence": 174
     }
   ],
-  "next_id": 680,
+  "next_id": 681,
   "schema": "codex-task-id-allocations-v1"
 }
