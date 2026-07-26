@@ -431,13 +431,24 @@ fiber hypothesis.  Both are included in the aggregate axiom audit, which
 passes with only `propext`, `Classical.choice`, and `Quot.sound`.  See
 `2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
-**Post-C619 two-reader frontier (2026-07-25): three successors queued.**
+**C624 closed (2026-07-25): concrete party-permutation extensions split.**
+The exact fixed and party-moving projective groups, normalized nonabelian
+factor sets, outer actions, trivializing cochains, and complements are now
+computed for both q=11 pencil classes, all four representative q=11 GRS
+evaluation-set orbits, the q=17 and q=31 enhanced-symmetry rows, and four
+split-prime integral H3 representatives.  The q=11 party groups are
+`S5`, `S4`, `V4`, `C5`, `S3`, and `D12`; every listed extension splits.
+On every non-GRS/H3 row, odd party motion inverts the fixed split torus and
+enlarges the logical linear group exactly from `T` to `N(T)`.  The complete
+factor tables and complement witnesses are reproducible and remain separate
+from the Weil and Heisenberg scalar extensions.  No manuscript source was
+edited.  See `2026-07-25-c624-ame-lu-party-extension-examples.md`.
+
+**Post-C619 two-reader frontier (2026-07-25): two successors remain queued.**
 Two independent manuscript-only cold reads converged on the same research
-frontiers.  C622, the highest-EV successor, tests the length-generic exact
+frontiers.  C622, the highest-EV remaining successor, tests the length-generic exact
 fixed-party dichotomy `F_q^2 ⋊ SL_2(q)` precisely for diagonally isodual MDS
-codes and `F_q^2 ⋊ T` otherwise.  C624 computes the actual nonabelian
-party-permutation extensions for the first pencil, enhanced-symmetry, GRS,
-and H3 examples.  C623 runs the `q=9,25,27` falsifier gate for extension-field
+codes and `F_q^2 ⋊ T` otherwise.  C623 runs the `q=9,25,27` falsifier gate for extension-field
 Clifford equivalence before attempting Desarguesian-spread reconstruction.
 C581 is correspondingly narrowed to quantitative approximate rigidity after
 C623.  The complete synthesis, secondary questions, underdeveloped
@@ -498,6 +509,9 @@ C619 is closed.  Dependency order is authoritative:
     party-permutation extension, after C602 (complete).
 21. C619: GRS/extended-GRS relation audit and exact
     split-versus-metaplectic/Schur-multiplier boundary, after C618 (complete).
+22. C624: exact code-specific party-permutation groups, outer actions,
+    normalized factor sets, splitting witnesses, and `T`-normalizer
+    enlargements (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -532,8 +546,8 @@ affine one-qudit extension is non-split by the Heisenberg commutator.
 
 **Token-constrained completion route:** the principal `ame-lu` Version-1
 completion program is closed through C619.  The post-Version-1 research
-frontier is C622 first, then C624 by immediate EV, with C623 as the deeper
-independent extension-field gate; do not run C581 before C623.  The next
+frontier is C622 first, with C623 as the deeper independent extension-field
+gate; C624 is complete, and C581 must not run before C623.  The next
 cross-lane route remains C553 and then the coordinated build-system
 extraction.  The authoritative three-session protocol is
 `notes/2026-07-25-c287-token-efficient-execution.md`.
