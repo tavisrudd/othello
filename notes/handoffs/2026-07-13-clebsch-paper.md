@@ -651,16 +651,17 @@ evidence pairs, and the warning-free build pass the aggregate gate. The
 report and mystery ledger are in
 `notes/2026-07-26-c579-paper-iii-synthesis-cold-review.md`.
 
-C664 is queued as a bounded human-mechanism-first Lean upgrade. Its required
-surface is the generic involutive odd-unit splitting and the general
-\(K(n,2)\) pair-sum eigenspace theorem, including equality with the full
-Petersen \((-2)\)-eigenspace at \(n=5\). A symbolic golden-exchanger leaf is
-optional. Generated data, imported certificate arrays, `native_decide`, new
-axioms, and any claim to have formalized the full paper are non-acceptance
-routes. The Paper III release gate remains independent of Lean until a
-separate post-formalization correspondence decision. The plan, Tao pass,
-red team, extra-juice pass, and mystery ledger are in
-`notes/2026-07-26-c664-paper-iii-lean-mechanisms-plan.md`.
+C664 has implemented the generic involutive odd-unit splitting and the
+general \(K(n,2)\) pair-sum eigenspace theorem, including the full
+four-dimensional Petersen \((-2)\)-eigenspace at \(n=5\).  Both symbolic
+leaves elaborate warning-free with no generated data, imported certificate,
+`native_decide`, new axiom, or admitted declaration.  The import-only gate and
+exact-current confirmation wait behind the foreign
+`ArcsCompleteOutsideConic` build owner, so C664 remains open.  The optional
+golden-exchanger leaf is omitted.  The implementation report and mystery
+ledger are in
+`notes/2026-07-26-c664-paper-iii-lean-mechanisms.md`; the Paper III release
+gate remains independent of Lean pending a separate correspondence decision.
 
 C655 is complete. The ten icosahedral face axes give an exact
 \(1+4+5\) subspace of \(\mathcal H_6\), the four-space is the Petersen
