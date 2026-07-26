@@ -1,7 +1,7 @@
 # Paper III work plan
 
-**Status:** two-leg synthesis complete; aggregate release gate and cold review
-green on 2026-07-26.
+**Status:** focused-note revision in progress after the first candidate
+review; the next independent release decision is C670.
 
 ## Realized theorem surface
 
@@ -25,19 +25,22 @@ and introduction.
 ```text
 C651 exact tensor bridge (complete)
           |
-          +----> C652 arithmetic fibres / exchanger / T11 / carriers
+          +----> C652 arithmetic fibres / exchanger / T11
           |                 |
           +----> C653 integral model / invariant theory / novelty
                             |
                             +----> core Hitchin--Clebsch theorem
 
-C655 exact face-axis Gram matrix / Gaunt restriction / physical-source audit (complete)
+C655 exact face-axis Gram matrix / Gaunt restriction (complete)
           |
           +----> harmonic realization theorem
 
 core theorem + harmonic theorem + exact trust surface
           |
-          +----> C579 synthesis and cold review (complete)
+          +----> C579 first candidate synthesis (complete)
+          +----> C669 literature and claim-ownership audit (complete)
+          +----> C668 focused-note revision
+          +----> C670 independent release review
 ```
 
 ## Drafting order
@@ -46,28 +49,27 @@ core theorem + harmonic theorem + exact trust surface
 |---|---|---|---|
 | 1 | localized odd-generator lemma | Section 2 | prose proof complete |
 | 2 | finite tensor bridge | Section 3 | C651 complete |
-| 3 | golden fibres and `A4` hinge | Section 4 | C652 |
+| 3 | golden fibre | Section 4 | C652 |
 | 4 | exchanger, spinor class, and `T11` | Section 4 | C652 |
 | 5 | rational cover, abstract integral base, invariant-ring input, and finite-set incidence boundary | Sections 2 and 4 | C653 complete |
 | 6 | exact face-axis harmonic embedding and Gaunt cubic | Section 5 | C655 complete |
 | 7 | exact Klein commutants and polarization | omitted after discriminant-zero test | C654 complete |
-| 8 | consequences, novelty, and final hierarchy | Introduction/Section 7 | after C652--C655 |
-| 9 | statement identity and release replay | Verification | C579 |
+| 8 | common-line boundary and final hierarchy | Introduction/Section 7 | C668 |
+| 9 | statement identity and release replay | Verification | C668/C670 |
 
 ## Editorial acceptance
 
-The cold review confirmed:
+The focused revision requires:
 
-- every theorem-like statement has a ledger row and an exact proof mode;
-- the main theorem is visible on page 1 or 2 and has no gated clause;
-- every finite computation has a primary certificate and independent replay;
-- every classical input has been checked against its primary source;
-- the integral exceptional-prime boundary is explicit;
-- the harmonic section proves equality with the established order parameter
-  under an explicit normalization and does not claim empirical utility;
-- theta, Fourier, quantum, and holonomy material has either become a
-  consequence or been cut; and
-- the PDF builds without warnings.
+- expand the rational square-class argument from the branch divisor to the
+  golden fibre;
+- state the finite matching quotient without requiring the factorization
+  paper's notation;
+- remove the detachable tetrahedral and marked-Mathieu branches;
+- retain the exact Gaunt normalization while removing the speculative
+  physical descriptor; and
+- obtain a new context-free release review after the seven-statement trust
+  surface and warning-free PDF are regenerated.
 
 ## Stop rules
 

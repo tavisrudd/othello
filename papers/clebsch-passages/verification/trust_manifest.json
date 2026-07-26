@@ -1,6 +1,6 @@
 {
   "schema": "clebsch-passages-trust-manifest-v1",
-  "paper": "The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics",
+  "paper": "Arithmetic and harmonic realizations of the Clebsch cubic",
   "release_ready": true,
   "integral_boundary": {
     "abstract_quadratic_algebra": "finite etale on D(10 J_Z)",
@@ -14,7 +14,7 @@
       "statement": "The arithmetic orientation cover and the degree-six harmonic realization meet on the integral Clebsch cubic line, with the explicit golden fibre specializing at 11 to the finite sheet bit.",
       "status": "proven",
       "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
-      "owner": "C579",
+      "owner": "C668",
       "evidence": [
         "papers/clebsch-passages/sections/02-orientation-cover.tex",
         "papers/clebsch-passages/sections/03-clebsch-cubic.tex",
@@ -82,31 +82,6 @@
       ]
     },
     {
-      "id": "HC-5",
-      "statement": "The marked Hitchin and Mathieu torsors agree after identifying both M11 carriers and their PSL_2(11) intersection.",
-      "status": "certified",
-      "modes": ["conceptual", "certificate", "independent-replay"],
-      "owner": "C652",
-      "evidence": [
-        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.py",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256",
-        "notes/2026-07-22-c470-golay-hadamard-automorphisms.json"
-      ]
-    },
-    {
-      "id": "HC-6",
-      "statement": "The common stabilizer of the two golden icosahedra is the tetrahedral subgroup A4.",
-      "status": "proven",
-      "modes": ["conceptual"],
-      "owner": "C652",
-      "evidence": [
-        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex"
-      ]
-    },
-    {
       "id": "PH-1",
       "statement": "The ten face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with the Clebsch four-space equal to the Petersen minus-two eigenspace.",
       "status": "certified",
@@ -144,14 +119,6 @@
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
         "notes/2026-07-26-c655-clebsch-harmonic-bridge.md"
       ]
-    },
-    {
-      "id": "PH-4",
-      "statement": "A normalized Clebsch four-channel descriptor may distinguish physical environments collapsed by lower-order or uniform icosahedral descriptors.",
-      "status": "inventory",
-      "modes": ["empirical-test-required"],
-      "owner": "C655",
-      "evidence": []
     }
   ],
   "boundaries": [
@@ -159,7 +126,6 @@
     "The checker validates structure and ledger consistency; it does not certify mathematical truth.",
     "The rational Gaunt scalar has denominator divisible by 11, so HC-3 identifies an integral cubic line rather than a reduced rational normalization.",
     "The harmonic identity has a task-owned exact certificate, independent replay, and primary-source normalization audit.",
-    "No empirical performance or commercial-utility claim is made for the proposed four-channel descriptor.",
     "The abstract quadratic algebra is finite etale over D(10J), but comparison with the geometric incidence model is proved only over Z[1/N] for an unspecified N; no claim that every p other than 2 and 5 is incidence-good is made.",
     "The rational 5-twist is an arithmetic normalization of Hitchin's known degree-two incidence cover, not a new construction of that cover; Dye already proves the square-5 field criterion for Clebsch hexagons."
   ]

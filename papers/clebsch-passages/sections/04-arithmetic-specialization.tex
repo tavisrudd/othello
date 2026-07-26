@@ -4,8 +4,7 @@
 The arithmetic exchange is already visible on the cubic \(xyz\).  Its two
 ordered icosahedra are Galois conjugate over \(\Q(\sqrt5)\); modulo \(11\)
 they become two rational Clebsch parents, and the Galois exchange becomes
-the nontrivial spinor class.  We prove these statements before introducing
-the Mathieu carrier.
+the nontrivial spinor class.
 
 \subsection{The golden fibre}
 
@@ -47,7 +46,7 @@ The final assertion uses Hitchin's classification of the two
 icosahedral sets on the orthogonal-plane cubic.
 \end{proof}
 
-\subsection{The exchanger and the tetrahedral hinge}
+\subsection{The exchanger}
 
 Set
 \[
@@ -65,45 +64,6 @@ The relation \(1-t=-1/t\) gives, by substitution,
 \]
 Moreover \(R(xyz)=-xyz\): it fixes the projective cubic and exchanges its
 two ordered icosahedra.
-
-\begin{proposition}[Tetrahedral hinge]\label{prop:a4-hinge}
-\claimid{HC-6}.
-Let \(G_t=\operatorname{Stab}_{\operatorname{SO}_3}(I_t)\cong A_5\).  Then
-\[
- RG_tR^{-1}=G_{1-t},
- \qquad
- G_t\cap G_{1-t}\cong A_4.
-\]
-\end{proposition}
-
-\begin{proof}
-The first equality follows from \(R(I_t)=I_{1-t}\).  A direct linear
-calculation shows that the cubics through
-\(I_t\cup I_{1-t}\) form the one-dimensional space spanned by \(xyz\):
-write a general ternary cubic as
-\[
- ax^3+bx^2y+cx^2z+dxy^2+exyz+fxz^2
-   +gy^3+hy^2z+iyz^2+jz^3.
-\]
-Substitution of the three opposite pairs, followed by
-\(t^2=t+1\), gives
-\[
- g=i=0,\quad h(t+1)+j=0,\quad c+j(t+1)=0,
-\]
-\[
- a+f(t+1)=0,\quad b(t+1)+g=0,\quad a(t+1)+d=0.
-\]
-Equating the rational and \(t\)-parts kills every coefficient except
-\(e\).  Thus every element of the intersection fixes the plane-triple
-cubic.
-
-The rotations given by even signed coordinate permutations fix \(xyz\)
-and each \(I_t\); they form the tetrahedral group \(A_4\).  Conversely,
-the icosahedral group \(G_t\cong A_5\) acts on its five plane-triple
-cubics.  This is its standard transitive action of degree five, whose
-point stabilizer is \(A_4\).  Hence the common stabilizer is exactly the
-displayed tetrahedral subgroup.
-\end{proof}
 
 \subsection{Reduction modulo eleven}
 
@@ -162,67 +122,6 @@ identifications
 \]
 identify the spinor quotient with \(T_{11}\), proving the claim.
 \end{proof}
-
-\subsection{The marked Mathieu carrier}
-
-The ternary Golay--Hadamard model supplies two explicit subgroups
-\[
- H_{\rm row},H_{\rm col}\cong M_{11}
- \quad\text{inside}\quad M_{12}.
-\]
-The order-twelve Hadamard model and its row--column outer automorphism
-have a direct construction in \cite[\S4]{ConwayElkiesMartin}; the two
-\(M_{11}\) maximal-subgroup classes and the \(L_2(11)\) class are recorded
-in the online ATLAS \cite{AtlasM12}.
-One is the pure coordinate group of the signed code and the other is the
-stabilizer of the parity coordinate.  Their exact twelve-point generators
-give
-\[
- H_{\rm row}\cap H_{\rm col}=\PSL_2(11).
-\]
-Consequently
-\[
- |H_{\rm row}H_{\rm col}|
- =\frac{7920^2}{660}=95040=|M_{12}|,
-\]
-so the two parents generate \(M_{12}\).  Hadamard row--column duality
-induces the noninner automorphism of \(M_{12}\) and exchanges their two
-conjugacy classes.  The finite assertions in this paragraph are checked
-from the displayed permutation carriers by the primary certificate and
-an implementation-independent replay described in
-Section~\ref{sec:verification}.
-
-There is no canonical unmarked identification between the golden and
-Mathieu pairs.  The precise conclusion is the following marked statement.
-
-\begin{corollary}[Marked Hitchin--Mathieu torsor]\label{cor:marked-mathieu}
-Choose the marking \(I_4\leftrightarrow H_{\rm row}\).  There is a unique
-equivariant bijection
-\[
- \{I_4,I_8\}\longrightarrow\{H_{\rm row},H_{\rm col}\}
-\]
-that extends this choice.  It sends \(I_8\) to \(H_{\rm col}\), and
-intertwines the reduced Hitchin exchanger with Hadamard row--column
-duality.  Without the marking there are exactly two such equivariant
-bijections and neither parent is distinguished.
-\end{corollary}
-
-\begin{proof}
-Both sets are free transitive \(C_2\)-sets: Pro\-po\-si\-tion
-\ref{prop:spinor-specialization} supplies the nontrivial exchange on the
-Hitchin side, and Hadamard duality supplies it on the Mathieu side.  The
-image of one marked element determines an equivariant map between free
-transitive \(C_2\)-sets.  There are two possible markings.
-\end{proof}
-
-This marked, and only marked, compatibility is \claimid{HC-5}.
-
-The certificate for this section checks only the explicit substitutions,
-matrix identities, permutation-group orders, intersection, and carrier
-exchange.  Propositions \ref{prop:golden-fibre}--\ref{prop:spinor-specialization}
-and Corollary \ref{cor:marked-mathieu} are the mathematical proof; the
-certificate is not used to infer the golden field, the \(A_4\) hinge, the
-spinor formula, or the marked-torsor lemma.
 
 \paragraph{Integral boundary.}
 Over a finite field of characteristic different from \(2\) and \(5\), the

@@ -278,9 +278,7 @@ The active order is strict:
    owning paper without holding v1.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C668:** rebuild Paper III as a focused arithmetic--harmonic note using
-   C669's citation and ownership boundary.
-5. **C670:** run a fresh context-free release review on the revised Paper III
+4. **C670:** run a fresh context-free release review on the revised Paper III
    surface.
 
 C579 is complete as the candidate-synthesis task, but Paper III is not
@@ -289,8 +287,9 @@ still needs a sharper audience and theorem focus, a fuller derivation from
 the global rational square class to the special fibre, a justified or
 removed marked Mathieu carrier, removal of tentative physical and
 research-inventory prose, substantially broader primary-source context, and
-complete title-page authorship. C669 has completed the literature and
-claim-ownership gate; C668 and C670 own the remaining revision in order.
+complete title-page authorship. C669 completed the literature and
+claim-ownership gate, and C668 completed the focused-note revision. C670
+owns the remaining independent release decision.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
@@ -317,7 +316,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | two-leg twelve-page candidate green locally; C669 complete, C668/C670 publication revision open |
+| Paper III | `papers/clebsch-passages/` | focused arithmetic--harmonic candidate and seven-statement gate green; C670 independent review next |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -691,9 +690,13 @@ completed the literature and claim-ownership audit: it identifies the
 \(5J_0\) normalization plus the mod-\(11\) and degree-six realizations as
 the paper-owned bridge, adds the missing primary context, and determines
 that both the marked Mathieu torsor and the speculative descriptor should
-be removed. C668 owns the focused-note revision and C670 the independent
-release gate. The C669 report is
-`notes/2026-07-26-c669-paper-iii-context-literature-audit.md`.
+be removed. C668 implements that disposition: the branch-to-square-class
+argument is expanded, the finite quotient is self-contained, and the
+\(A_4\), marked-Mathieu, speculative descriptor, and inventory branches
+are gone. The seven-statement, nine-row trust surface and warning-free PDF
+are green. C670 owns the independent release gate. The two revision reports
+are `notes/2026-07-26-c669-paper-iii-context-literature-audit.md` and
+`notes/2026-07-26-c668-paper-iii-focused-note-revision.md`.
 
 C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full

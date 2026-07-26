@@ -2,7 +2,7 @@
 
 `trust_manifest.json` is the claim ledger.  It records claim status, proof
 modes, task ownership, and evidence paths.  `statement_identity.json` freezes
-the nine theorem-like statements in manuscript order.
+the seven theorem-like statements in manuscript order.
 
 Run from the repository root:
 
@@ -40,9 +40,9 @@ sha256sum -c papers/clebsch-passages/verification/evidence/harmonic_clebsch.sha2
 
 It certifies the exact face-axis Gram matrix, Petersen decomposition,
 spherical moments, Gaunt scalar, and normalization to the standard
-unnormalized degree-six `W_6`.  It makes no empirical materials claim.
+unnormalized degree-six `W_6`.
 
-The C652 arithmetic-cover bundle is deliberately smaller than its human
+The arithmetic-cover bundle is deliberately smaller than its human
 proof:
 
 ```text
@@ -51,11 +51,10 @@ python3 papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py
 sha256sum -c papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256
 ```
 
-It checks the explicit projective substitutions, comparison and reflection
-matrices, and finite Mathieu carriers.  Section 4 proves the golden fibre,
-the `A4` hinge, the spinor specialization, and the marked-torsor lemma in
-prose.  In particular, the evidence asserts no canonical unmarked
-Hitchin--Mathieu identification.
+It checks the explicit projective substitutions and the comparison and
+reflection matrices.  Its additional finite-carrier outputs are not used by
+the paper.  Section 4 proves the golden fibre and spinor specialization in
+prose.
 
 The aggregate gate does not turn the abstract integral equation into a
 global incidence model at \(11\).  The mod-\(11\) claim is the exact good

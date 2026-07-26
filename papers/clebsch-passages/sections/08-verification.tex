@@ -26,12 +26,9 @@ the Petersen minimal polynomial and the factorial formula for the Wigner
 
 The arithmetic specialization is proved in the text.  Its compact
 certificate checks only the six projective substitutions, the comparison
-and reflection matrices, and the explicit twelve-point Mathieu carriers.
-The independent replay reimplements those checks and enumerates the two
-\(M_{11}\) parents, their order-\(660\) intersection, their \(M_{12}\)
-join, and the carrier exchange without importing the primary program.
-Neither route is used to infer the golden field, the \(A_4\) hinge, the
-spinor formula, or the marked-torsor lemma.  The exact commands are
+and reflection matrices.  The evidence programs also audit additional
+finite carrier data that are not used by this paper.  Neither route is used
+to infer the golden field or the spinor formula.  The exact commands are
 \begin{verbatim}
 python3 verification/evidence/arithmetic_cover.py --check
 python3 verification/evidence/arithmetic_cover_replay.py
@@ -44,12 +41,10 @@ rational \(5\)-twist and the abstract integral quadratic algebra, while
 retaining an unspecified finite bad set for comparison with the geometric
 incidence model.
 
-The aggregate runner checks the frozen identity of all nine theorem-like
+The aggregate runner checks the frozen identity of all seven theorem-like
 statements, the claim-ledger correspondence, the primary and independent
 exact audits, and a warning-free manuscript build.  The command
 \begin{verbatim}
 python3 verification/verify_release.py
 \end{verbatim}
-is run from the paper directory.  The empirical descriptor row
-\claimid{PH-4} remains inventory and is not a premise of
-Theorem~\ref{thm:main}.
+is run from the paper directory.

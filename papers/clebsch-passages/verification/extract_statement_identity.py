@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract the theorem-like statements of the Clebsch orientation paper."""
+"""Extract the theorem-like statements of the Clebsch cubic paper."""
 
 from __future__ import annotations
 
@@ -22,9 +22,7 @@ EXPECTED_LABELS = (
     "thm:rational-cover",
     "thm:finite-tensor-bridge",
     "prop:golden-fibre",
-    "prop:a4-hinge",
     "prop:spinor-specialization",
-    "cor:marked-mathieu",
     "thm:harmonic-clebsch",
 )
 

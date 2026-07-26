@@ -1,19 +1,19 @@
 {
   "schema": "clebsch-orientation-statement-identity-v1",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "d725c491fd424805e179604e78f9555d591af90ccf7328a5d5dd9d76a5dadb20",
+  "main_source_sha256": "26a7a951c89a02ab870951900ae8abcb3a9d37862192f81c35e385be8cb94734",
   "section_sha256": {
-    "sections/01-introduction.tex": "b5d85aa7ef2da7e1080dba44ada84c11dc4dba591c2fef2f9dd390c97993190c",
-    "sections/02-orientation-cover.tex": "95f32e8048313aba88b58db4e0113a4c55375dff83d6e3756f2ee0c5521f408f",
-    "sections/03-clebsch-cubic.tex": "da34d789eaaba2aa6e17867d055c050c527b898e87ac80a5728eb49817ce9748",
-    "sections/04-arithmetic-specialization.tex": "0a8bfefb9bd8e4a4bea74f6f171a55dfa1c612e3c5457d8466defccd6bf3fdb3",
-    "sections/05-harmonic-realization.tex": "32d15416583f6a96d972d885d48fb1704ddd3601fdcbbbf098ec1cf43f339bb6",
-    "sections/07-consequences.tex": "459b5759c20c10fad890dd1d4b9c29c47a36aec13bdd28ada3a3f9c8a2f5854f",
-    "sections/08-verification.tex": "c4871671e70b76608ee574e2418067a31ff7dc3ab636bc42205a0ba782b457ed",
+    "sections/01-introduction.tex": "024420cd33dceb51b29d0e0cba98a2ed88e9c188d902cfd1b225a7c6eda58ca7",
+    "sections/02-orientation-cover.tex": "b66f541f22d385794ea790df4d85306f96de59cb11893d95c67c3eed99bda344",
+    "sections/03-clebsch-cubic.tex": "7417f81e133838fd00ea613ed7b0719be77ef21552367e912607738af61bb0d8",
+    "sections/04-arithmetic-specialization.tex": "091ab75fe0524a3ef2c0483a10f7e7817c2aa79105b2038e21ee047a99225db0",
+    "sections/05-harmonic-realization.tex": "07f2909a60c6792758400e2352c8abb0cef02fc0590635fa2c63faf50326e339",
+    "sections/07-consequences.tex": "5dba2b870021aee93ae3acb3e1858d0e841e754e553d1238cc9848a4db59bdc8",
+    "sections/08-verification.tex": "20cc19f39c21c2f0c892f51c9bf3c1e4a0c5c62f8bdfbb40ab94cf2ff943318d",
     "sections/09-conclusion.tex": "24f420a3ef9ae2a4e49276dbe4a951775789507d29b577f2706e35ba1095e634",
-    "sections/10-references.tex": "67897af3433e2e60837c2a71866a0c2103879b2f2fda2735931812ce5c96e7bc"
+    "sections/10-references.tex": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
   },
-  "statement_count": 9,
+  "statement_count": 7,
   "statements": [
     {
       "label": "thm:main",
@@ -47,7 +47,7 @@
       "environment": "theorem",
       "title": "Finite tensor bridge",
       "source": "sections/03-clebsch-cubic.tex",
-      "source_line": 17,
+      "source_line": 39,
       "sha256": "b9fb2fdf3672a761c31161ecbc40c2737b0dce3e44bbdb725033f73a12988e04",
       "tex": "\\begin{theorem}[Finite tensor bridge]\n\\label{thm:finite-tensor-bridge}\n\\claimid{HC-3}.\nThere is a \\(G\\)-equivariant isomorphism\n\\[\n S:\\F_{11}^{\\binom{[5]}2}\\longrightarrow W\n\\]\nsuch that, after using the standard pairing to identify the permutation\nmodule with its dual and restricting along\n\\[\n E(y)_{\\{i,j\\}}=y_i+y_j,\\qquad \\sum_i y_i=0,\n\\]\none has\n\\[\n E^*(S^{-1})^{\\otimes3}T=4\\sigma_3.\n\\]\nIn particular, the signed matching cubic and the Clebsch cubic span the\nsame nonzero invariant line over \\(\\F_{11}\\).\n\\end{theorem}"
     },
@@ -56,36 +56,18 @@
       "environment": "proposition",
       "title": "Golden fibre",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 23,
+      "source_line": 22,
       "sha256": "27f6ae17879e5a652d83ef4804c5609d0c486054a5642f0710cff8ca7297a286",
       "tex": "\\begin{proposition}[Golden fibre]\\label{prop:golden-fibre}\n\\claimid{HC-2}.\nOver a field of characteristic different from \\(2\\) and \\(5\\), the points\nof \\(I_t\\) lie on \\(xyz=0\\), have a common nonzero norm, have normalized\nsquared inner product \\(1/5\\), and form a six-arc.  The two configurations\nover \\(\\Q\\) are therefore defined over\n\\[\n \\Q[t]/(t^2-t-1)=\\Q(\\sqrt5)\n\\]\nand are exchanged by its nontrivial automorphism.  In Hitchin's normalized\ncover of ordered icosahedra they are the complete fibre over \\([xyz]\\).\n\\end{proposition}"
-    },
-    {
-      "label": "prop:a4-hinge",
-      "environment": "proposition",
-      "title": "Tetrahedral hinge",
-      "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 69,
-      "sha256": "4ae203f19fec8f1de4bb58a4d324d083536f6af71c45b70c689222a130e4389a",
-      "tex": "\\begin{proposition}[Tetrahedral hinge]\\label{prop:a4-hinge}\n\\claimid{HC-6}.\nLet \\(G_t=\\operatorname{Stab}_{\\operatorname{SO}_3}(I_t)\\cong A_5\\).  Then\n\\[\n RG_tR^{-1}=G_{1-t},\n \\qquad\n G_t\\cap G_{1-t}\\cong A_4.\n\\]\n\\end{proposition}"
     },
     {
       "label": "prop:spinor-specialization",
       "environment": "proposition",
       "title": "Spinor specialization",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 137,
+      "source_line": 97,
       "sha256": "9e882417c29838cdd9f085d84017309216111a7b5c82a43eb028d64e78a5c4ba",
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\n\\claimid{HC-4}.\nThe reduction of \\(R\\) represents the nontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
-    },
-    {
-      "label": "cor:marked-mathieu",
-      "environment": "corollary",
-      "title": "Marked Hitchin--Mathieu torsor",
-      "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 198,
-      "sha256": "fa91e489c076e37720f946b55908c1337ceec47cea36e43724ccdb89313358bc",
-      "tex": "\\begin{corollary}[Marked Hitchin--Mathieu torsor]\\label{cor:marked-mathieu}\nChoose the marking \\(I_4\\leftrightarrow H_{\\rm row}\\).  There is a unique\nequivariant bijection\n\\[\n \\{I_4,I_8\\}\\longrightarrow\\{H_{\\rm row},H_{\\rm col}\\}\n\\]\nthat extends this choice.  It sends \\(I_8\\) to \\(H_{\\rm col}\\), and\nintertwines the reduced Hitchin exchanger with Hadamard row--column\nduality.  Without the marking there are exactly two such equivariant\nbijections and neither parent is distinguished.\n\\end{corollary}"
     },
     {
       "label": "thm:harmonic-clebsch",

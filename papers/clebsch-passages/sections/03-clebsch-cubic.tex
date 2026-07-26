@@ -1,16 +1,38 @@
 \section{The Clebsch cubic bridge}
 \label{sec:cubic}
 
-Let \(G\) be the order-\(60\) stabilizer of the \(H_3\)-invariant matching
-in \(\operatorname{PGL}_2(\F_{11})\), and let \(\Omega\) be its
-\(22\)-point matching orbit.  For a reference matching \(M_0\), put
+Let \(\mathcal C=V(Q)\), \(Q=XZ-Y^2\), be the standard conic over
+\(\F_{11}\), with its twelve marked rational points.  For two marked
+points \(a,b\), scale their secant \(L_{ab}\) so that under the standard
+parametrization \(\nu:\mathbf P^1\to\mathcal C\),
 \[
- W=\left\langle q_M-q_{M_0}:M\in\Omega\right\rangle .
+ L_{ab}(\nu(s:t))=[a,(s:t)]\,[b,(s:t)].
 \]
-The two \(\PSL_2(\F_{11})\)-sheets define signs
-\(\epsilon(M)\in\{\pm1\}\) and the symmetric tensor
+If \(M\) is a perfect matching of the twelve points, put
+\(P_M=\prod_{\{a,b\}\in M}L_{ab}\).  Every \(P_M\) has the same
+restriction to \(\mathcal C\), because
 \[
- T=\sum_{M\in\Omega}\epsilon(M)[q_M-q_{M_0}]^{\otimes3}
+ P_M(\nu(s:t))=\prod_a[a,(s:t)]
+\]
+is the product over all twelve marked endpoints, independent of the
+matching.  Thus, after choosing \(M_0\),
+\[
+ q_M=\frac{P_M-P_{M_0}}{Q}
+\]
+is a quartic form.  This is the only input from the conic-factorization
+construction needed below.
+
+Let \(G\) be the order-\(60\) stabilizer of the \(H_3\)-invariant matching
+orbit in \(\operatorname{PGL}_2(\F_{11})\), and let \(\Omega\) be its
+\(22\)-element orbit of perfect matchings.  Put
+\[
+ W=\left\langle q_M:M\in\Omega\right\rangle .
+\]
+The orbit splits into two \(\PSL_2(\F_{11})\)-orbits of eleven
+matchings.  Assigning signs \(+1\) and \(-1\) to these two sheets defines
+the symmetric tensor
+\[
+ T=\sum_{M\in\Omega}\epsilon(M)q_M^{\otimes3}
  \in\operatorname{Sym}^3(W).
 \]
 
