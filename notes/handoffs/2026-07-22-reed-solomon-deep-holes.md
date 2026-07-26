@@ -15,6 +15,8 @@ canonical PDF SHA-256
 The internal AI reviews do not replace C545's publication-independent human
 reader gate.  The exact repair and mystery ledger are in
 `notes/2026-07-26-c656-prs-cold-read-release-repairs.md`.
+C646 remains active on companion stable-component formal geometry and does
+not reopen any Version 1 claim.
 C545 has repaired C603's release-blocking local trust boundary.
 The adopted aggregate now has the exact 17-file R5--R7 closure and 74-target
 axiom audit; the shared contraction API is separated from the companion R9
@@ -901,7 +903,8 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 ## Open work by expected value
 
 This is the authoritative order for open `reed-solomon` C-items; dependency
-gates remain binding.
+gates remain binding.  C646 is already active on the separately scoped
+companion formal geometry and is not a dispatch candidate in this ranking.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
