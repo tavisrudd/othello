@@ -14,6 +14,8 @@ interpolation theorem for compatible linewise roots, or joint detection for a pa
 of projective lines and a particular degree bound.
 -/
 
+#print axioms RelativeConicArcs.exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero
+#print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero
 #print axioms RelativeConicArcs.planeLineRestriction_X
 #print axioms RelativeConicArcs.homogeneousLinearPolynomial_scale
 #print axioms RelativeConicArcs.planeLineRestriction_homogeneousLinearPolynomial_scale

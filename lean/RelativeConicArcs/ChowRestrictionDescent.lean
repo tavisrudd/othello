@@ -96,6 +96,74 @@ theorem planeLineRestriction_dualLinearFactorProduct
 
 end HomogeneousRestriction
 
+section BinaryLinearFactors
+
+variable {K : Type*} [Field K]
+
+/-- The determinant of two coefficient vectors for homogeneous binary linear forms. -/
+def binaryLinearCoefficientDeterminant (a b : Fin 2 → K) : K :=
+  a 0 * b 1 - a 1 * b 0
+
+/-- Two nonzero homogeneous binary linear forms with zero coefficient determinant are related by
+a nonzero scalar at the level of coefficient vectors. -/
+theorem exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero
+    {a b : Fin 2 → K} (ha : a ≠ 0) (hb : b ≠ 0)
+    (hdet : binaryLinearCoefficientDeterminant a b = 0) :
+    ∃ c : K, c ≠ 0 ∧ b = fun i => c * a i := by
+  have hcross : a 0 * b 1 = a 1 * b 0 := by
+    simpa [binaryLinearCoefficientDeterminant, sub_eq_zero] using hdet
+  by_cases ha0 : a 0 = 0
+  · have ha1 : a 1 ≠ 0 := by
+      intro ha1
+      apply ha
+      funext i
+      fin_cases i
+      · exact ha0
+      · exact ha1
+    have hb0 : b 0 = 0 := by
+      apply (mul_left_cancel₀ ha1)
+      simpa [ha0] using hcross.symm
+    have heq : b = fun i => (b 1 / a 1) * a i := by
+      funext i
+      fin_cases i
+      · simp [ha0, hb0]
+      · exact (div_mul_cancel₀ (b 1) ha1).symm
+    refine ⟨b 1 / a 1, ?_, heq⟩
+    intro hc
+    apply hb
+    rw [heq, hc]
+    funext i
+    simp
+  · have heq : b = fun i => (b 0 / a 0) * a i := by
+      funext i
+      fin_cases i
+      · exact (div_mul_cancel₀ (b 0) ha0).symm
+      · apply (mul_left_cancel₀ ha0)
+        calc
+          a 0 * b 1 = a 1 * b 0 := hcross
+          _ = a 0 * ((b 0 / a 0) * a 1) := by
+            field_simp [ha0]
+    refine ⟨b 0 / a 0, ?_, heq⟩
+    · intro hc
+      apply hb
+      rw [heq, hc]
+      funext i
+      simp
+
+/-- Zero determinant for two nonzero binary coefficient vectors makes their homogeneous linear
+polynomials proportional by a nonzero constant. -/
+theorem exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero
+    {a b : Fin 2 → K} (ha : a ≠ 0) (hb : b ≠ 0)
+    (hdet : binaryLinearCoefficientDeterminant a b = 0) :
+    ∃ c : K, c ≠ 0 ∧
+      homogeneousLinearPolynomial b =
+        MvPolynomial.C c * homogeneousLinearPolynomial a := by
+  obtain ⟨c, hc, rfl⟩ :=
+    exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero ha hb hdet
+  exact ⟨c, hc, homogeneousLinearPolynomial_scale c a⟩
+
+end BinaryLinearFactors
+
 section PairedProducts
 
 variable {R ι J : Type*} [CommMonoid R] [Fintype ι] [Fintype J]
