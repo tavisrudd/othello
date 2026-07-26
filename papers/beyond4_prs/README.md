@@ -1,13 +1,13 @@
 # Paper: Beyond redundancy four for projective Reed--Solomon codes
 
 **Working title:** *Deep holes of projective Reed--Solomon codes beyond
-redundancy four: exact classifications and stable polar components.*
+redundancy four: exact classifications at redundancies five through seven.*
 
-**Status:** Scope-reset R5--R7 manuscript at minor revision after
-independent cold reads and evidence-aware re-review.  R8 and R9 form the fixed-level companion queue;
-ordered-Hessian geometry and general Lucas-carrier strata beyond the canonical
-endpoint section and distinguished \(e_7\) orbit are reserved for separate
-companion work.  The follow-up
+**Status:** C656 narrowed Version 1 to the proved R5--R7 boundary after
+independent cold reads found unresolved arbitrary-level component and modular
+budget gates.  R8, R9, the proposed stable-component theorem,
+ordered-Hessian geometry, and higher Lucas-carrier strata are reserved for
+separate companion work.  The follow-up
 cold-session queue and release gates are recorded in
 `second-draft-fix-plan.md`; no DOI release is authorized yet.
 
@@ -20,8 +20,8 @@ make check
 make tit-check
 ```
 
-`make check` builds the 41-page canonical preprint.  `make tit-check` builds the
-30-page IEEEtran single-column review manuscript
+`make check` builds the canonical preprint.  `make tit-check` builds the
+IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,
 `main-tit.tex`,
@@ -47,9 +47,7 @@ exact strength of each proved level visible:
 3. the all-field redundancy-six deep-hole classification and the complete
    all-field redundancy-seven split-free classification, with its separate
    small-field covering-radius boundary;
-4. the one-step polar-escape theorem and its explicit R6/R7 iterations;
-5. the exact higher-Lucas endpoint-section divisibility test and shallowness
-   of the first fresh \(e_7\) orbit.
+4. the one-step polar-escape theorem and its explicit R6/R7 iterations.
 
 The manuscript must distinguish complete classifications from containment, high-field, and
 obstruction statements.  R9 and the unresolved modular-carrier strata are
@@ -59,8 +57,9 @@ companion-paper work, not late additions to the submission.
 
 - C481--C490 projection/Gale reconstruction belongs to the separate reconstruction-paper decision.
 - Twisted Reed--Solomon results C510/C514/C515/C518 are not part of the projective-RS spine.
-- R8/R9, ordered-Hessian geometry, and general Lucas-carrier strata beyond
-  the adopted endpoint proposition are reserved for companion papers.
+- R8/R9, the proposed arbitrary-level stable-component theorem,
+  ordered-Hessian geometry, and higher Lucas-carrier strata are reserved for
+  companion papers.
 - No ambient syndrome census substitutes for the proved geometric and arithmetic mechanisms.
 
 ## Verification plan
@@ -69,10 +68,9 @@ companion-paper work, not late additions to the submission.
 - C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
 - C540 closed the redundancy-five Lean package.
 - C541 closed the coherent-polar engine and redundancy-six/seven applications.
-- The paper-facing aggregate imports only those R5--R7 gates and the
-  stable-component coordinate package. Companion-work R8, R9,
-  ordered-Hessian, Lucas, and degree-nine endpoint modules are excluded; the
-  adopted endpoint proposition has a manuscript proof and adds no Lean import.
+- The paper-facing aggregate audits the R5--R7 gates.  Stable-component
+  coordinate and uniform-radius interfaces remain regression-checked companion
+  modules and are not mapped to a Version 1 theorem.
 - `supplement/verify.py` compares the live TeX label set, exact aggregate
   imports, and exact axiom-audit target list with the public trust map.
 

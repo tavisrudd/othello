@@ -85,11 +85,12 @@ by `supplement/verify.py`.
 - declaration-level manuscript reconciliation:
   `supplement/LEAN-STATEMENTS.md`.
 
-The aggregate imports exactly the shared foundation, redundancy-five,
-polar-induction and redundancy-six/seven, and stable-component gates, plus the
-uniform covering-radius arithmetic and literature adapter. Its audit
-covers the adopted algebraic, contraction, arithmetic, finite-table, and
-conditional synthesis terminals. It reports no project-specific axiom or
+The aggregate imports the shared foundation, redundancy-five,
+polar-induction and redundancy-six/seven gates.  It also regression-checks
+companion stable-component and uniform-radius interfaces that are not adopted
+as Version 1 paper theorems. Its audit covers the adopted algebraic,
+contraction, arithmetic, finite-table, and conditional synthesis terminals.
+It reports no project-specific axiom or
 opaque computational oracle; only `propext`, `Classical.choice`, and
 `Quot.sound` occur. The R5--R7 transcription modules name
 `supplement/CLASSIFICATION-RECORDS.json`, SHA-256
@@ -100,10 +101,9 @@ AME--quantum-MDS implication fields; its length-ten LU and transversal
 terminals are direct specializations of the imported generic MDS--CSS
 theorems.
 
-`RelativeConicArcs.PRSUniformCoveringRadius` checks that the displayed
-all-level threshold dominates every supplied stagewise parameter degree,
-matches the bottom deletion formula, implies the Seroussi--Roth dimension
-range, and has \((q,r)=(8,6)\) at its exact endpoint.
+`RelativeConicArcs.PRSUniformCoveringRadius` checks the arithmetic of a
+proposed all-level threshold and the \((q,r)=(8,6)\) endpoint, but Version 1
+does not consume that proposal.
 `PRSPolarInduction.RecursiveContainedInput` checks the finite recursive
 classification once component selection and one-step lifts are supplied.
 The radius module then composes separately supplied Seroussi--Roth and Dür

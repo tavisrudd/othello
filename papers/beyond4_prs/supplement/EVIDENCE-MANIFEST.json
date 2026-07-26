@@ -209,12 +209,12 @@
       "sha256": "3fbb98c10798e5fc28b14585f0e27a8292a7594b0ed05cc27fa1ed1ce4fde2f6"
     },
     {
-      "bytes": 3892,
+      "bytes": 3933,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "b50f67ef1dbc48a32e5db6d67f7cfc60bc62e68ab79ffe146e9617f06ffa2cc6"
+      "sha256": "212e04300e4f2270465503c4729bd0d285a5fb9493f1665d648cef4d4fa68560"
     },
     {
       "bytes": 545912,
@@ -249,12 +249,12 @@
       "sha256": "092db6bdd9d4d618f4ffef72eaaf696103ddc80801caa0607306fcb384c504b0"
     },
     {
-      "bytes": 16755,
+      "bytes": 15020,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "4c5ea70125882a6d7ecbafb610b9d876c8739e50ea0094a2b7feb79b35364e5e"
+      "sha256": "e24670d4561e21441bc424eb9671c2b01ba969da47e80973cf5b853e9dac4160"
     },
     {
       "bytes": 6132,
@@ -302,7 +302,7 @@
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "3fa971869dd014b14376781c2e39bfcd24f51a56dc8dcc4889905e08a94724ae"
+      "sha256": "abf79dec5576ddb92bf708cc2b2f5f3b1b3cdd8f16b5724d3fbfb1893be08841"
     },
     {
       "bytes": 17225,

@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued
+**Status:** active; arbitrary-level gate failed, Version 1 narrowed to R5--R7
 
 ## Objective
 

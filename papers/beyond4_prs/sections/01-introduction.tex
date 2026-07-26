@@ -1,18 +1,17 @@
 \section{Introduction}
 
-This paper gives two complete all-field deep-hole classifications and
-one all-level component theorem beyond the known cases through
-redundancy four.  At redundancies five and six we classify the
+This paper gives two complete all-field deep-hole classifications beyond the
+known cases through redundancy four.  At redundancies five and six we classify the
 projective deep-hole directions for every prime power \(q\geq7\), with
 exact projective counts and semilinear orbit laws.  At redundancy seven
 we classify every split-free syndrome over the same range; this is a
 deep-hole classification whenever the covering radius is six, in
 particular for \(q\geq11\).  The common mechanism is a coherent polar
 flag, a marked contraction that propagates splitting information
-without forgetting the factor needed for a squarefree lift.  At
-arbitrary redundancy, a catalecticant-rowspace reduction and an
-integral bottom-component calculation then prove that every recursively
-pointed contained component is persistent or modular.
+without forgetting the factor needed for a squarefree lift.  Complete
+contained-component calculations at redundancies six and seven, followed by
+one- and two-marker point counts, close the uniform parts of those two
+classifications.
 
 The mechanism is the elementary identity
 \[
@@ -30,17 +29,10 @@ through \(\lambda\) lifts with a double root, so the naïve induction is
 false.  The \(q=19\) example in Section~\ref{sec:r67} makes the failure
 concrete: an individual lower fiber appears exceptional, but its orbit
 contains no coherent consecutive-row polar line.
-Theorem~\ref{thm:stable-component-headline} classifies the contained
-components, and
-Theorem~\ref{thm:uniform-transverse} closes the transverse branch for
-\[
- q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
-\]
-In this range Seroussi--Roth nonextendability together with Dür's
-completeness--covering-radius equivalence automatically gives radius
-\(r-1\). Thus the all-level conclusion is an
-unconditional containment theorem for projective deep-hole directions,
-not only for split-free syndrome directions.
+At redundancy six the marker calculation closes the transverse branch for
+\(q\geq29\); at redundancy seven the two-marker calculation closes it for
+\(q\geq37\).  The lower fields are handled by the finite certificates stated
+in Section~\ref{sec:verification}.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -177,42 +169,6 @@ $\rho(\PRS(q-6))=6$.  Table~\ref{tab:classification-status} places the
 split-free result, radius gate, deep-hole conclusion, and remaining
 field gap in separate columns for each redundancy.
 
-\begin{theorem}[Stable components and the uniform transverse consequence]
-\label{thm:stable-component-headline}
-The stable-component assertion \(\mathrm{SC}(j)\) holds for every
-\(j\geq6\).  In characteristic two, the modular component descended
-from the R5 cyclic plane is empty for every \(r\geq8\).  Consequently,
-for every \(r\geq6\), if
-\[
- q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
-\]
-every split-free redundancy-\(r\) syndrome belongs to
-\(\mathcal P_r\cup\mathcal M_r\).  Calling these directions code deep holes
-requires the covering-radius equality
-\(\rho(\PRS(q+1-r))=r-1\); Seroussi--Roth nonextendability and Dür's
-equivalence supply it automatically under the displayed bound. Hence,
-in this range, the
-split-free directions are precisely the projective deep-hole directions
-and all lie in \(\mathcal P_r\cup\mathcal M_r\).
-\end{theorem}
-
-Theorem~\ref{thm:stable-component-headline} is the third principal
-contribution.  Its proof is given in Section~\ref{sec:polar}: products of
-the retained markers are dense in the full binary-form parameter space,
-so the bottom contractions close to the projectivized row space of a
-consecutive catalecticant.  Irreducibility reduces containment to one
-bottom component, and each component is then treated explicitly.
-The same section gives an exact arithmetic test on the canonical
-three-dimensional section of every binary higher Lucas endpoint:
-for \(d=2^s\) over \(\F_{2^m}\), that section contains a split
-squarefree degree-\(d\) form exactly when \(s\mid m\).  The equivalent
-projective-subline criterion was proved in the Lucas-subspace setting by
-\cite[Prop.~11]{WangWuHu2026}; our use identifies it inside the coherent
-Hankel endpoint.  At the first
-fresh endpoint \(e_7\), subspace polynomials show that the full
-\(\PGL_2\)-orbit is shallow for every \(m\geq3\); this does not classify
-the remaining strata of the ambient Lucas carrier.
-
 \paragraph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational
 curve dictionary come from
@@ -276,10 +232,9 @@ and factorization references supply normal forms and distribution
 tools, but not the coherent marked contraction used here.  The nucleus
 results locate characteristic-dependent kernels, while the present
 work computes which of their coherent lifts meet the PRS splitting
-incidence.  Accordingly, this paper's
-contributions are separated into the
-redundancy-five through seven classifications, the stable-component
-theorem, and the uniform transverse induction.
+incidence.  Accordingly, this paper's contributions are the
+redundancy-five through seven classifications and the coherent marked
+contraction that proves the uniform ranges at redundancies six and seven.
 Claim-by-claim novelty and dependency boundaries are recorded in the
 electronic ledger.
 

@@ -171,8 +171,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 43:
-        raise SystemExit(f"expected 43 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 41:
+        raise SystemExit(f"expected 41 adopted manuscript labels, found {len(labels)}")
 
     aggregate_text = AGGREGATE.read_text(encoding="utf-8")
     imports = tuple(

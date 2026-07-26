@@ -14,7 +14,7 @@ and replay.
 | Certificate R6 | redundancy-six census and radius bridge | C498 |
 | Certificate R6-NF | small exceptional normal forms | C498 small-normal-form bundle |
 | Certificate R7 | redundancy-seven split-free finite bridge | C509 |
-| Certificate SC | all-level stable-component identities, saturation, and vertical fibres | C595/C597 |
+| Companion Certificate SC | proposed stable-component identities, saturation, and vertical fibres; not an adopted Version 1 claim | C595/C597 |
 
 ## Classification record
 
