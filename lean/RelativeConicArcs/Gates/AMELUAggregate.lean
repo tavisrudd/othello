@@ -5,6 +5,7 @@ import RelativeConicArcs.AMELU.GenericLURigidity
 import RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup
 import RelativeConicArcs.AMELU.AutomorphismExactSequence
 import RelativeConicArcs.AMELU.NonabelianExtensionInvariant
+import RelativeConicArcs.AMELU.PartyExtensionSplitting
 import RelativeConicArcs.AMELU.EncoderTransversal
 import RelativeConicArcs.Gates.AMELUDictionary
 import RelativeConicArcs.Gates.AMELUStabilizerDictionary
