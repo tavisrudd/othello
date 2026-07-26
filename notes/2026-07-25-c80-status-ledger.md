@@ -36,7 +36,7 @@ is an input bank, not C80 status authority.
 | Marked q17 defect thread | **FINITE-CERTIFIED** | Four bad fibres form one Klein-four orbit with common Gallai--Edmonds type and an adaptive `4 -> 2 -> 0` repair thread. [Report](2026-07-25-c80-tutte-defect-contraction.md) |
 | Tangent-plus-triple coverage identity | **PROVED; FINITE-CERTIFIED value census** | `kappa_T(x,y)=|Legal(T+x+y)|` has an exact pair-conflict plus collinear-triple formula. Minimum-`kappa` replies are value-unsound at q17/q19. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
 | Uncovered-locus boundary rewrite | **FINITE-CERTIFIED; SUPERSEDED packaging** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Its explicit witnesses are superseded by `R_small` below. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
-| Bounded small-shell correspondence `R_small` | **PROVED soundness; FINITE-CERTIFIED q17/q19 coverage** | The fixed incidence formula “terminal or two mutually legal moves, or one exchange into that boundary” eliminates all explicit `B_cc` pairings. It gives `49/49 P` q17 and `69/69 P` q19 selected edges, with strict `Omega` descent. Uniform coverage is open. [Report](2026-07-25-c80-q19-rank-one-incidence-shell.md) |
+| Bounded small-shell correspondence `R_small` | **PROVED soundness; SETTLED NEGATIVE uniformly** | The fixed incidence formula eliminates explicit `B_cc` pairings and gives `49/49 P` q17 and `69/69 P` q19 selected edges. The first q23 P control has `0/118` coverage, and all 181 replies to root opponent `(0,0)` miss the survivor. [Positive finite gate](2026-07-25-c80-q19-rank-one-incidence-shell.md), [q23 falsifier](2026-07-25-c80-q23-small-shell-falsifier.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -63,6 +63,7 @@ continuation object. They do **not** yet provide the uniform
 | Central-involution and history-torus rewrites | **SETTLED NEGATIVE** | q17 has no usable central replies; the enlarged torus relation is incomplete and value-impure. [Central](2026-07-25-c80-central-involution-rank-datum.md), [history](2026-07-25-c80-history-torus-obligation-rewrite.md) |
 | Clebsch conic-matching quotient bridge | **SETTLED NEGATIVE** | Legal moves induce no matching on selected marks; live marks have negligible coverage; the full-conic degree grows with q. [Report](2026-07-25-c80-continuation-conic-matching-bridge.md) |
 | Greedy minimum continuation deficiency | **SETTLED NEGATIVE** | Exact `kappa` minimizers are mostly N on the q17 isolates and q19 control. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
+| Uniform bounded small-shell coverage | **SETTLED NEGATIVE** | On the q23 P target `S4(1,2,3,4)+(0,0)+(5,2)`, no opponent has an `R_small` reply (`0/118`); no alternative root reply after `(0,0)` enters the survivor (`0/181`). [Report](2026-07-25-c80-q23-small-shell-falsifier.md) |
 
 These negatives rule out the named statements and natural domains. They do
 not prove that every bounded-formula proof object or every value-only factor
@@ -75,8 +76,8 @@ is impossible.
 | Scale-aware survivor `F_alpha` | **FINITE-CERTIFIED:** `F_1/4` contains tested q11/q13/q17 roots; q19 passes through `alpha=3/4` and fails at `9/10`. | A q-independent positive retention bound, or a proof that none exists. [Reports](2026-07-24-c80-scale-survivor-falsifiers.md), [marked retention](2026-07-25-c80-marked-secant-retention.md) |
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
-| Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, sound, and opponent-complete at q17/q19; observed selected fibre degree is at most four. | Uniform opponent completeness and a count/lower bound on geometric replies. |
-| Uncovered-locus obligation | The q17 small loci are completely classified, and the q19 rank-one fibres compress to the same bounded small shell. | q23 falsification and a field-uniform incidence proof of the `forall exists` coverage clause. |
+| Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
+| q23 defect locus | The closest failed follower has 24 legal moves, covers 21 inner opponents, and leaves exactly three obligations. | Classify those three points projectively and test a direct rank-lowering update. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -84,17 +85,16 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Prove or falsify uniformly that every opponent fibre contains an R_small
-reply of strictly smaller Omega, where R_small is the bounded sound
-small-shell incidence formula.
+Construct a directly updated growing-rank incidence datum. The q23
+small-shell failure supplies a canonical three-obligation first test.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Run the q23 out-of-sample gate and derive the projective incidence equations
-for R_small; on survival, prove/count opponent completeness without
-enumerating replies.
+Classify the q23 minimum-defect-three locus and test whether one
+transport-natural algebraic update lowers its obligation rank without
+recursive survivor membership.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -107,4 +107,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap test the bounded small-shell correspondence on q23 and derive its field-uniform incidence equations
+go C80 cap classify the q23 minimum-defect-three locus and test a rank-carrying incidence update

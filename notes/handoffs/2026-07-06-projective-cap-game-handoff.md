@@ -1242,6 +1242,21 @@ opponent completeness and fibre counts remain open; q23 is now the proper
 out-of-sample falsifier, and C82 remains gated. Report+cert:
 [`../2026-07-25-c80-q19-rank-one-incidence-shell.md`](../2026-07-25-c80-q19-rank-one-incidence-shell.md).
 
+**The bounded small-shell correspondence is closed-negative at q23, with
+field-uniform equations now explicit (C80, 2026-07-25).** The C54
+rules-checked archive labels `S4(1,2,3,4)+(0,0)+(5,2)` P. This target has
+`Omega=1112` and 118 legal moves, but `R_small` covers `0/118` opponent
+fibres. The failure is not a poor P-reply choice: after root opponent
+`(0,0)`, all 181 legal replies fail to enter the outer `R_small` survivor.
+The incidence formulas for legality, overload zero, the terminal/two-point
+boundary, its one-exchange shell, and the outer relation are fixed-arity and
+projectively natural, so edge soundness survives; uniform coverage is what
+is false. The closest failed follower has 24 legal moves and covers 21,
+leaving a minimum three-point defect locus. Do not add another anonymous
+fixed shell. Next classify those three marked obligations and seek a direct
+growing-rank update; C82 remains gated. Report+cert:
+[`../2026-07-25-c80-q23-small-shell-falsifier.md`](../2026-07-25-c80-q23-small-shell-falsifier.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

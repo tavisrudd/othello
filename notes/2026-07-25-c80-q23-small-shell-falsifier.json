@@ -1,0 +1,5071 @@
+{
+  "control": {
+    "exact_value": "P",
+    "history_edge": {
+      "opponent": [
+        0,
+        0
+      ],
+      "reply": [
+        5,
+        2
+      ]
+    },
+    "legal_moves": 118,
+    "q": 23,
+    "root_stabilizer_order": 4,
+    "root_t4": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "target_omega": 1112,
+    "target_stabilizer_order": 1
+  },
+  "fibre_census": {
+    "best_global_failed_fibre": {
+      "follower_legal_moves": 24,
+      "inner_opponents_covered": 21,
+      "inner_opponents_uncovered": 3,
+      "outer_opponent": [
+        9,
+        16
+      ],
+      "outer_reply": [
+        17,
+        18
+      ],
+      "target_omega": 18
+    },
+    "legal_reply_count_histogram": [
+      {
+        "legal_replies": 60,
+        "opponents": 1
+      },
+      {
+        "legal_replies": 61,
+        "opponents": 4
+      },
+      {
+        "legal_replies": 62,
+        "opponents": 3
+      },
+      {
+        "legal_replies": 63,
+        "opponents": 4
+      },
+      {
+        "legal_replies": 64,
+        "opponents": 6
+      },
+      {
+        "legal_replies": 65,
+        "opponents": 8
+      },
+      {
+        "legal_replies": 66,
+        "opponents": 16
+      },
+      {
+        "legal_replies": 67,
+        "opponents": 12
+      },
+      {
+        "legal_replies": 68,
+        "opponents": 20
+      },
+      {
+        "legal_replies": 69,
+        "opponents": 12
+      },
+      {
+        "legal_replies": 70,
+        "opponents": 8
+      },
+      {
+        "legal_replies": 71,
+        "opponents": 8
+      },
+      {
+        "legal_replies": 72,
+        "opponents": 8
+      },
+      {
+        "legal_replies": 73,
+        "opponents": 5
+      },
+      {
+        "legal_replies": 74,
+        "opponents": 2
+      },
+      {
+        "legal_replies": 75,
+        "opponents": 1
+      }
+    ],
+    "maximum_coverage_at_minimum_defect_histogram": [
+      {
+        "inner_opponents_covered": 8,
+        "outer_opponents": 1
+      },
+      {
+        "inner_opponents_covered": 9,
+        "outer_opponents": 1
+      },
+      {
+        "inner_opponents_covered": 10,
+        "outer_opponents": 2
+      },
+      {
+        "inner_opponents_covered": 11,
+        "outer_opponents": 4
+      },
+      {
+        "inner_opponents_covered": 12,
+        "outer_opponents": 11
+      },
+      {
+        "inner_opponents_covered": 13,
+        "outer_opponents": 15
+      },
+      {
+        "inner_opponents_covered": 14,
+        "outer_opponents": 18
+      },
+      {
+        "inner_opponents_covered": 15,
+        "outer_opponents": 13
+      },
+      {
+        "inner_opponents_covered": 16,
+        "outer_opponents": 14
+      },
+      {
+        "inner_opponents_covered": 17,
+        "outer_opponents": 14
+      },
+      {
+        "inner_opponents_covered": 18,
+        "outer_opponents": 12
+      },
+      {
+        "inner_opponents_covered": 19,
+        "outer_opponents": 10
+      },
+      {
+        "inner_opponents_covered": 20,
+        "outer_opponents": 1
+      },
+      {
+        "inner_opponents_covered": 21,
+        "outer_opponents": 2
+      }
+    ],
+    "minimum_inner_uncovered_histogram": [
+      {
+        "minimum_uncovered": 3,
+        "opponents": 2
+      },
+      {
+        "minimum_uncovered": 6,
+        "opponents": 2
+      },
+      {
+        "minimum_uncovered": 8,
+        "opponents": 2
+      },
+      {
+        "minimum_uncovered": 9,
+        "opponents": 7
+      },
+      {
+        "minimum_uncovered": 10,
+        "opponents": 3
+      },
+      {
+        "minimum_uncovered": 11,
+        "opponents": 9
+      },
+      {
+        "minimum_uncovered": 12,
+        "opponents": 13
+      },
+      {
+        "minimum_uncovered": 13,
+        "opponents": 9
+      },
+      {
+        "minimum_uncovered": 14,
+        "opponents": 11
+      },
+      {
+        "minimum_uncovered": 15,
+        "opponents": 14
+      },
+      {
+        "minimum_uncovered": 16,
+        "opponents": 17
+      },
+      {
+        "minimum_uncovered": 17,
+        "opponents": 8
+      },
+      {
+        "minimum_uncovered": 18,
+        "opponents": 10
+      },
+      {
+        "minimum_uncovered": 19,
+        "opponents": 5
+      },
+      {
+        "minimum_uncovered": 20,
+        "opponents": 3
+      },
+      {
+        "minimum_uncovered": 21,
+        "opponents": 2
+      },
+      {
+        "minimum_uncovered": 22,
+        "opponents": 1
+      }
+    ],
+    "opponents": 118,
+    "opponents_with_formula_reply": 0,
+    "rows": [
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              12,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 43
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          6,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              18,
+              13
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          6,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              22,
+              15
+            ],
+            "small_shell_rank": null,
+            "target_omega": 37
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          6,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              12,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          },
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              15,
+              14
+            ],
+            "small_shell_rank": null,
+            "target_omega": 38
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          6,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 10,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 26
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 10,
+        "opponent": [
+          6,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              22,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 19
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          6,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              22,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 73,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          6,
+          20
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              8,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 27
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 63,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          7,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 21
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          7,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              14,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          7,
+          9
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              16,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          7,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 20,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 41
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 74,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 20,
+        "opponent": [
+          7,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              15,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 33
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          7,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 11,
+            "inner_opponents_uncovered": 21,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 44
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 73,
+        "maximum_inner_coverage_at_minimum_defect": 11,
+        "minimum_inner_opponents_uncovered": 21,
+        "opponent": [
+          7,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              15,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 36
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          8,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              19,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 21
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          8,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              15,
+              14
+            ],
+            "small_shell_rank": null,
+            "target_omega": 36
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          8,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 17
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          8,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              16,
+              20
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          8,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 9,
+            "inner_opponents_uncovered": 22,
+            "reply": [
+              9,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 37
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 9,
+        "minimum_inner_opponents_uncovered": 22,
+        "opponent": [
+          8,
+          19
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              20,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          8,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              12,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          9,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              14,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 24
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          9,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 19
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          9,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          9,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 24,
+            "inner_opponents_covered": 21,
+            "inner_opponents_uncovered": 3,
+            "reply": [
+              17,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 18
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 60,
+        "maximum_inner_coverage_at_minimum_defect": 21,
+        "minimum_inner_opponents_uncovered": 3,
+        "opponent": [
+          9,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              19,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 36
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          9,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          9,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              14,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 41
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          9,
+          21
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              11,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          10,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          10,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 27
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          10,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              21,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 38
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          10,
+          20
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 33,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              19,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          10,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 33,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              14,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          11,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 8,
+            "reply": [
+              15,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 20
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 8,
+        "opponent": [
+          11,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 31
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          11,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              7,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          11,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          11,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 19,
+            "reply": [
+              6,
+              15
+            ],
+            "small_shell_rank": null,
+            "target_omega": 45
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 75,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 19,
+        "opponent": [
+          11,
+          21
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 46
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          12,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 36,
+            "inner_opponents_covered": 20,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              16,
+              21
+            ],
+            "small_shell_rank": null,
+            "target_omega": 45
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 20,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          12,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              14,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          12,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              10,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 37
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          12,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 40
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          12,
+          19
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              19,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 28
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          12,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 19,
+            "reply": [
+              14,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 36
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 19,
+        "opponent": [
+          13,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 11,
+            "inner_opponents_uncovered": 19,
+            "reply": [
+              16,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 11,
+        "minimum_inner_opponents_uncovered": 19,
+        "opponent": [
+          13,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              15,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          13,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              9,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          13,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 27
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          13,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              7,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          13,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 24,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 6,
+            "reply": [
+              14,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 17
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 61,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 6,
+        "opponent": [
+          13,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              8,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 37
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          14,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              15,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          14,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              22,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 63,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          14,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              11,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 23
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 61,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          14,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              10,
+              13
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 62,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          14,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 35,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              11,
+              3
+            ],
+            "small_shell_rank": null,
+            "target_omega": 51
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          14,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 24,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 6,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 17
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 6,
+        "opponent": [
+          14,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              8,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          14,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              9,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 24
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          14,
+          19
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              22,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          14,
+          20
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              10,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          15,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 8,
+            "reply": [
+              11,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 20
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 61,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 8,
+        "opponent": [
+          15,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              8,
+              3
+            ],
+            "small_shell_rank": null,
+            "target_omega": 36
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          15,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              19,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          15,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 33,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 40
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          15,
+          14
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 33,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              9,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 46
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          15,
+          20
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              16,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          15,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              15,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          16,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 10,
+            "inner_opponents_uncovered": 19,
+            "reply": [
+              18,
+              15
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 10,
+        "minimum_inner_opponents_uncovered": 19,
+        "opponent": [
+          16,
+          9
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              14,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          16,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 21
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 64,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          16,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 10,
+            "reply": [
+              22,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 10,
+        "opponent": [
+          16,
+          14
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              7,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          16,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              15,
+              3
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          16,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              8,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 61,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          16,
+          20
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              8,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 40
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          16,
+          21
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 10,
+            "inner_opponents_uncovered": 20,
+            "reply": [
+              19,
+              21
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 10,
+        "minimum_inner_opponents_uncovered": 20,
+        "opponent": [
+          17,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          17,
+          9
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              8,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          17,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 24,
+            "inner_opponents_covered": 21,
+            "inner_opponents_uncovered": 3,
+            "reply": [
+              9,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 18
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 21,
+        "minimum_inner_opponents_uncovered": 3,
+        "opponent": [
+          17,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 73,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          17,
+          19
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              9,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 32
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          17,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          18,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 35,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 21,
+            "reply": [
+              15,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 49
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 74,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 21,
+        "opponent": [
+          18,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              6,
+              4
+            ],
+            "small_shell_rank": null,
+            "target_omega": 34
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          18,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              19,
+              21
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          18,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              17,
+              9
+            ],
+            "small_shell_rank": null,
+            "target_omega": 48
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          18,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              14,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 42
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          19,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              22,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 26
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          19,
+          5
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 29,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              20,
+              17
+            ],
+            "small_shell_rank": null,
+            "target_omega": 28
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          19,
+          10
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 34,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 17,
+            "reply": [
+              12,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 45
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 73,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 17,
+        "opponent": [
+          19,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 35,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 20,
+            "reply": [
+              8,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 45
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 73,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 20,
+        "opponent": [
+          19,
+          14
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              20,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          19,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 13,
+            "reply": [
+              18,
+              15
+            ],
+            "small_shell_rank": null,
+            "target_omega": 29
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 13,
+        "opponent": [
+          19,
+          21
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              9,
+              11
+            ],
+            "small_shell_rank": null,
+            "target_omega": 30
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 69,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          20,
+          13
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              9,
+              16
+            ],
+            "small_shell_rank": null,
+            "target_omega": 26
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          20,
+          14
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 32,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              17,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 72,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          20,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              18,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 25
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 63,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          20,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 9,
+            "reply": [
+              8,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 9,
+        "opponent": [
+          20,
+          18
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 11,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 23
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 11,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          20,
+          19
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 14,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              22,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 18
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 62,
+        "maximum_inner_coverage_at_minimum_defect": 14,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          20,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 17,
+            "inner_opponents_uncovered": 11,
+            "reply": [
+              15,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 23
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 17,
+        "minimum_inner_opponents_uncovered": 11,
+        "opponent": [
+          21,
+          3
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 33,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              17,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 45
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          21,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 26,
+            "inner_opponents_covered": 8,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 24
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 8,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          21,
+          9
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 16,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              14,
+              7
+            ],
+            "small_shell_rank": null,
+            "target_omega": 40
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 16,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          21,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 12,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              13,
+              22
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 67,
+        "maximum_inner_coverage_at_minimum_defect": 12,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          21,
+          16
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 15,
+            "reply": [
+              14,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 27
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 15,
+        "opponent": [
+          21,
+          17
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              8,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          21,
+          22
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 27,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 14,
+            "reply": [
+              8,
+              10
+            ],
+            "small_shell_rank": null,
+            "target_omega": 24
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 63,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 14,
+        "opponent": [
+          22,
+          4
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 25,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              6,
+              18
+            ],
+            "small_shell_rank": null,
+            "target_omega": 19
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 65,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          22,
+          7
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 13,
+            "inner_opponents_uncovered": 18,
+            "reply": [
+              16,
+              13
+            ],
+            "small_shell_rank": null,
+            "target_omega": 35
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 71,
+        "maximum_inner_coverage_at_minimum_defect": 13,
+        "minimum_inner_opponents_uncovered": 18,
+        "opponent": [
+          22,
+          9
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 30,
+            "inner_opponents_covered": 11,
+            "inner_opponents_uncovered": 19,
+            "reply": [
+              15,
+              13
+            ],
+            "small_shell_rank": null,
+            "target_omega": 39
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 70,
+        "maximum_inner_coverage_at_minimum_defect": 11,
+        "minimum_inner_opponents_uncovered": 19,
+        "opponent": [
+          22,
+          11
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 15,
+            "inner_opponents_uncovered": 16,
+            "reply": [
+              14,
+              19
+            ],
+            "small_shell_rank": null,
+            "target_omega": 40
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 68,
+        "maximum_inner_coverage_at_minimum_defect": 15,
+        "minimum_inner_opponents_uncovered": 16,
+        "opponent": [
+          22,
+          14
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 31,
+            "inner_opponents_covered": 19,
+            "inner_opponents_uncovered": 12,
+            "reply": [
+              6,
+              5
+            ],
+            "small_shell_rank": null,
+            "target_omega": 37
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 66,
+        "maximum_inner_coverage_at_minimum_defect": 19,
+        "minimum_inner_opponents_uncovered": 12,
+        "opponent": [
+          22,
+          15
+        ]
+      },
+      {
+        "best_failed_replies": [
+          {
+            "follower_legal_moves": 28,
+            "inner_opponents_covered": 18,
+            "inner_opponents_uncovered": 10,
+            "reply": [
+              16,
+              14
+            ],
+            "small_shell_rank": null,
+            "target_omega": 22
+          }
+        ],
+        "formula_replies": [],
+        "legal_replies_tested": 62,
+        "maximum_inner_coverage_at_minimum_defect": 18,
+        "minimum_inner_opponents_uncovered": 10,
+        "opponent": [
+          22,
+          19
+        ]
+      }
+    ]
+  },
+  "incidence_equations": {
+    "legal": "L_S(z) iff z is not selected and det(a,b,z) != 0 for every distinct selected a,b",
+    "omega_zero": "there is no zero-load line ell containing three distinct points of L_S",
+    "outer_relation": "R_small(T;o,p) iff p in L_{T+o} and T+o+p satisfies the small boundary or small shell",
+    "small_boundary": "Omega(S)=0 and either L_S is empty or L_S={a,b} with L_{S+a}(b)",
+    "small_shell": "for every x in L_S there exists y in L_{S+x} such that S+x+y satisfies the small boundary"
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "oracle_evidence": {
+    "binary": "rust/target/gridcap-c54",
+    "binary_sha256": "c2ed49a6ecf4fbba8d2c3063765eada8268453c7551e8561f3c77d18078506d7",
+    "c54_contract": "notes/2026-07-09-codex-q23-bucket-certification.md",
+    "history_reply_line": "REPLY x=0,0 y=5,2 ygeom=int value=P",
+    "raw_archive": "rust/s4-dumps/2026-07-08/q23-root-1234-1-2-3-4.raw",
+    "raw_archive_bytes": 301735064,
+    "raw_archive_sha256": "bee6ce230878a4da653892fb093e10cef13cee3234befd03667685657d24d274",
+    "root_state_line": "STATE ply=4 cells=1,1 2,12 3,8 4,6 legal=260 value=P",
+    "trust": "exact early-break proof-DAG value queried through the independently rules-checked C54 archive interface"
+  },
+  "root_opponent_fibre_falsifier": {
+    "first_uncovered_next_opponent_histogram": [
+      {
+        "first_uncovered_opponent": [
+          5,
+          2
+        ],
+        "root_replies": 118
+      },
+      {
+        "first_uncovered_opponent": [
+          5,
+          9
+        ],
+        "root_replies": 38
+      },
+      {
+        "first_uncovered_opponent": [
+          5,
+          10
+        ],
+        "root_replies": 12
+      },
+      {
+        "first_uncovered_opponent": [
+          5,
+          11
+        ],
+        "root_replies": 1
+      },
+      {
+        "first_uncovered_opponent": [
+          5,
+          13
+        ],
+        "root_replies": 2
+      },
+      {
+        "first_uncovered_opponent": [
+          6,
+          3
+        ],
+        "root_replies": 6
+      },
+      {
+        "first_uncovered_opponent": [
+          6,
+          4
+        ],
+        "root_replies": 3
+      },
+      {
+        "first_uncovered_opponent": [
+          6,
+          5
+        ],
+        "root_replies": 1
+      }
+    ],
+    "legal_replies_tested": 181,
+    "opponent": [
+      0,
+      0
+    ],
+    "reply_targets_satisfying_outer_correspondence": 0,
+    "rows": [
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          5
+        ],
+        "reply": [
+          5,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          4
+        ],
+        "reply": [
+          5,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          4
+        ],
+        "reply": [
+          5,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          3
+        ],
+        "reply": [
+          5,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          6,
+          4
+        ],
+        "reply": [
+          5,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          6,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          6,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          6,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          6,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          7,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          7,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          7,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          7,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          7,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          8,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          8,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          8,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          8,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          8,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          9,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          9,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          9,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          9,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          10,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          11
+        ],
+        "reply": [
+          10,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          10,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          10,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          10,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          10,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          10,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          10,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          10,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          11,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          11,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          11,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          11,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          12,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          12,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          13
+        ],
+        "reply": [
+          12,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          12,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          12,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          12,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          13,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          13,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          13,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          14,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          14,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          14,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          15,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          15,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          15,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          15,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          16,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          16,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          16,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          16,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          17,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          17,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          17,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          18,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          18,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          13
+        ],
+        "reply": [
+          18,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          18,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          18,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          18,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          18,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          18,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          18,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          18,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          19,
+          2
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          19,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          5
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          19,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          10
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          19,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          20,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          20,
+          21
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          20,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          21,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          21,
+          13
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          16
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          17
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          21,
+          22
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          22,
+          3
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          4
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          7
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          9
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          11
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          14
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          15
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          9
+        ],
+        "reply": [
+          22,
+          18
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          2
+        ],
+        "reply": [
+          22,
+          19
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      },
+      {
+        "first_uncovered_next_opponent": [
+          5,
+          10
+        ],
+        "reply": [
+          22,
+          20
+        ],
+        "reply_target_satisfies_outer_correspondence": false
+      }
+    ]
+  },
+  "schema": "c80-q23-small-shell-falsifier-v1",
+  "source": "rust/scripts/c80_q23_small_shell_falsifier.py",
+  "verdict": {
+    "bounded_formula_soundness": "PRESERVED",
+    "minimum_defect_over_all_outer_fibres": 3,
+    "opponent_coverage": "0/118",
+    "q23_out_of_sample_gate": "FAIL",
+    "root_opponent_replies_into_correspondence": "0/181",
+    "uniform_c80_candidate": false,
+    "uniform_opponent_completeness": "FALSE"
+  }
+}
