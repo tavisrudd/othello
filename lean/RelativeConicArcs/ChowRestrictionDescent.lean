@@ -47,6 +47,25 @@ variable {K σ : Type*} [CommSemiring K] [Fintype σ] [DecidableEq σ]
 noncomputable def homogeneousLinearPolynomial (a : σ → K) : MvPolynomial σ K :=
   ∑ i, MvPolynomial.C (a i) * MvPolynomial.X i
 
+/-- Evaluating a degree-`degree` homogeneous polynomial at a scalar multiple of a point multiplies
+its value by the `degree`-th power of that scalar. -/
+theorem MvPolynomial.IsHomogeneous.eval_smul_point
+    {F : MvPolynomial σ K} {degree : ℕ}
+    (hF : F.IsHomogeneous degree) (scale : K) (point : σ → K) :
+    MvPolynomial.eval (fun i => scale * point i) F =
+      scale ^ degree * MvPolynomial.eval point F := by
+  rw [MvPolynomial.eval_eq', MvPolynomial.eval_eq']
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro monomial hmonomial
+  have hdegree : ∑ i, monomial i = degree := by
+    simpa [Finsupp.weight_apply, Finsupp.sum_fintype] using
+      hF (MvPolynomial.mem_support_iff.mp hmonomial)
+  simp only [mul_pow]
+  rw [Finset.prod_mul_distrib,
+    Finset.prod_pow_eq_pow_sum Finset.univ monomial scale, hdegree]
+  ring
+
 /-- Substitution from three homogeneous coordinates to two homogeneous line coordinates.
 The array `lineCoordinates i j` is the coefficient of line variable `j` in plane coordinate
 `i`; no rank condition is imposed. -/
@@ -62,12 +81,18 @@ noncomputable def planeLineRestrictedCoefficients
     Fin 2 → K :=
   fun j => ∑ i, covector i * lineCoordinates i j
 
+/-- The plane vector obtained from homogeneous binary coordinates under a line parametrization. -/
+def pointOnParametrizedPlaneLine
+    (lineCoordinates : Fin 3 → Fin 2 → K) (point : Fin 2 → K) :
+    Fin 3 → K :=
+  fun i => ∑ j, lineCoordinates i j * point j
+
 /-- The point of a parametrized projective line represented by the affine binary coordinates
 `[t : 1]`.  No nondegeneracy condition is imposed on the parametrization. -/
 def affinePointOnParametrizedPlaneLine
     (lineCoordinates : Fin 3 → Fin 2 → K) (t : K) :
     Fin 3 → K :=
-  fun i => lineCoordinates i 0 * t + lineCoordinates i 1
+  pointOnParametrizedPlaneLine lineCoordinates ![t, 1]
 
 /-- Restriction sends each plane coordinate to its prescribed homogeneous linear form. -/
 @[simp]
@@ -88,6 +113,26 @@ theorem planeLineRestriction_homogeneousLinearPolynomial
     planeLineRestrictedCoefficients, Finset.sum_mul, Finset.sum_comm,
     mul_add, mul_assoc]
 
+/-- Evaluation after restricting a plane polynomial to a parametrized line equals evaluation of
+the original polynomial at the corresponding plane vector. -/
+theorem eval_planeLineRestriction
+    (lineCoordinates : Fin 3 → Fin 2 → K) (point : Fin 2 → K)
+    (F : MvPolynomial (Fin 3) K) :
+    MvPolynomial.eval point (planeLineRestriction lineCoordinates F) =
+      MvPolynomial.eval (pointOnParametrizedPlaneLine lineCoordinates point) F := by
+  let left : MvPolynomial (Fin 3) K →+* K :=
+    (MvPolynomial.eval point).comp (planeLineRestriction lineCoordinates)
+  let right : MvPolynomial (Fin 3) K →+* K :=
+    MvPolynomial.eval (pointOnParametrizedPlaneLine lineCoordinates point)
+  have heq : left = right := by
+    apply MvPolynomial.ringHom_ext
+    · intro c
+      simp [left, right, planeLineRestriction]
+    · intro i
+      simp [left, right, planeLineRestriction, pointOnParametrizedPlaneLine,
+        homogeneousLinearPolynomial]
+  exact RingHom.congr_fun heq F
+
 /-- Evaluating the restricted binary coefficient vector at `[t : 1]` equals evaluating the
 original plane-linear covector at the corresponding parametrized point. -/
 theorem planeLineRestrictedCoefficients_affinePoint
@@ -96,7 +141,7 @@ theorem planeLineRestrictedCoefficients_affinePoint
         planeLineRestrictedCoefficients lineCoordinates covector 1 =
       ∑ i, covector i * affinePointOnParametrizedPlaneLine lineCoordinates t i := by
   simp [planeLineRestrictedCoefficients, affinePointOnParametrizedPlaneLine,
-    Finset.sum_mul, mul_add, mul_assoc]
+    pointOnParametrizedPlaneLine, Finset.sum_mul, mul_add, mul_assoc]
   rw [Finset.sum_add_distrib]
 
 /-- A plane-linear equation whose value is nonzero at one affine point of a parametrized line has
