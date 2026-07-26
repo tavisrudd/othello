@@ -132,6 +132,13 @@ split-free set remains unchanged at \(3800\).  Thus the executable route now
 checks, rather than assumes, that the transient pointed orbit contributes no
 coherent sextic polar line.
 
+The final hierarchy pass addresses theorem density without lengthening the
+argument.  Sparse italic signposts divide only the three longest load-bearing
+proofs into their existing mathematical phases: the R5 cyclic cases, the R6
+contained/transverse/bottom analysis, and the R7 second-marker branches.  No
+theorem, proof step, preview, or retrospective summary was added; both builds
+remain at 30 and 23 pages.
+
 ## Mystery ledger
 
 - **R6 carrier exhaustivity:** settled in Version 1 by the new monodromy

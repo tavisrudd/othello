@@ -14,11 +14,13 @@ partition, including the transient 19-point marked orbit at \(q=19\). Both
 readers cleared the repaired draft (accept/release-ready).
 The paper gates cover 42 labels, the supplement now contains 47 artifacts,
 and the canonical 30-page PDF has SHA-256
-`a1a42fee0442df8179e4b5c285843cec460ba811faf08b658d917eb3df926dbc`.
+`85ad935a8a4ef2ec2c9d7207a6786a5aaf690cc7bf039f20a132c4144a077dc3`.
 An editorial compression pass centralizes proof navigation in one
 three-row reading map, removes repeated mechanism and organization summaries,
 and restores the acknowledgment as an ordinary unnumbered section rather
-than an empty appendix.
+than an empty appendix.  Sparse in-proof signposts now expose the existing
+case structure in the three densest load-bearing proofs without adding
+exposition or changing any theorem.
 The repair and mystery ledger are in
 `notes/2026-07-26-c545-prs-second-cold-read-repairs.md`.
 A same-day literature delta found no new or revised pre-empting work; it

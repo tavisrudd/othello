@@ -10,8 +10,8 @@ Status: **local venue-formatted candidate — author fields unresolved**
 | Submission driver | `main-tit.tex` |
 | Submission PDF | `prs-beyond-redundancy-four-tit-submission.pdf` |
 | Single-column pages | `23` |
-| Submission PDF SHA-256 | `3805409e8ce9e9b41b105385ee83ccb070f8c2bd4d64db6b0d8718d79bde83a3` |
-| Submission PDF bytes | `221580` |
+| Submission PDF SHA-256 | `b0e6d70dc90c3e86aa7e1b165718236839baa2e44187698aac28bce463e22c41` |
+| Submission PDF bytes | `221712` |
 | Abstract words (`texcount -sum -brief`) | `287` |
 | Index terms | `6` |
 | Corresponding author | `[[AUTHOR INPUT: confirm]]` |
