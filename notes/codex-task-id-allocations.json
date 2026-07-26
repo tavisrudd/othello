@@ -1547,8 +1547,17 @@
       "last": 670,
       "purpose": "Paper III focused-note revision, literature audit, and independent release review",
       "sequence": 172
+    },
+    {
+      "count": 9,
+      "first": 671,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 679,
+      "purpose": "human-proof and Lean-backed complete-ports draft spine",
+      "sequence": 173
     }
   ],
-  "next_id": 671,
+  "next_id": 680,
   "schema": "codex-task-id-allocations-v1"
 }
