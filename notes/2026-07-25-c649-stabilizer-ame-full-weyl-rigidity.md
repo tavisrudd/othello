@@ -321,6 +321,73 @@ Only then introduce linear MDS--CSS states and state diagonal isoduality.
 This prevents the exact group calculation and the pencil from obscuring
 the theorem that now carries the widest scope.
 
+## Second-order extra juice: generation, holonomy, and stability
+
+The complete support profile implies that the minimum supported subgroups
+generate the whole stabilizer label space.  If \(A\) has size
+\(s\geq m+2\) and \(i\ne j\) lie in \(A\), then
+\[
+ L(A\setminus\{i\})\cap L(A\setminus\{j\})
+   =L(A\setminus\{i,j\}).
+\]
+The support-dimension formula gives
+\[
+\begin{split}
+ \dim_{\mathbb F_p}\bigl(
+   L(A\setminus\{i\})+L(A\setminus\{j\})\bigr)
+ &=2e(s-1-m)+2e(s-1-m)-2e(s-2-m)\\
+ &=2e(s-m)\\
+ &=\dim_{\mathbb F_p}L(A),
+\end{split}
+\]
+with the same calculation at \(s=m+2\) using
+\(\dim L(A\setminus\{i,j\})=0\).  Hence
+\[
+ L(A)=L(A\setminus\{i\})+L(A\setminus\{j\}).
+\]
+Descending induction from the full party set shows that the
+\(L(B)\), \(|B|=m+1\), span \(L\).
+
+This turns the family of half-plus-one marginals into a finite
+Pauli-pushing atlas.  Projection bijections on one support give transition
+maps between local Pauli spaces; overlaps impose compatibility, and loop
+compositions give holonomy up to local symplectic conjugacy.  The 450
+shortened-plane holonomies already used for the six-party pencil are
+exactly the \(m=3\), prime-field instance of this construction.  The
+minimum-support generation theorem also replaces the MDS-specific sentence
+in the logical-phase proof that shortened minimum-weight words span
+\(C\oplus C^\perp\).
+
+The full embedded atlas is a complete LC invariant, although a compressed
+holonomy multiset need not be.  If local symplectic maps carry every
+\(L(B)\), \(|B|=m+1\), to the corresponding supported subgroup of a
+second state, generation makes their direct sum carry the full label
+Lagrangian \(L\) to \(L'\).  Choose local Clifford lifts.  Any remaining
+stabilizer-character mismatch is removed by a Pauli correction, as in the
+existing character-correction theorem.  Conversely, an LC equivalence
+plainly carries the full atlas.  In a fixed Pauli frame the actual
+\((m+1)\)-party reduced operators determine even the stabilizer character,
+because their nonzero Weyl coefficients give its values on a spanning
+set.  Thus all half-plus-one marginals determine the stabilizer AME state.
+
+This is the best route for making the two halves of the paper cohere:
+rigidity reconstructs each local frame, holonomy compares the reconstructed
+frames across overlapping marginals, and diagonal isoduality determines
+the symmetry group of the resulting atlas.  The exact claim that the
+full atlas is a complete LC invariant uses only generation and Pauli phase
+correction.  Completeness should not be attributed to the scalar
+450-holonomy multiset outside the admitted pencil.
+
+There is also a quantitative successor.  For a stabilizer marginal all
+diagonal Weyl coefficients have the same magnitude.  In the contraction
+proof, the nonzero singular values are therefore a common scalar times
+the absolute values of the contraction coordinates.  The distance from
+rank one is exactly controlled by the second-largest coordinate, with no
+condition-number loss from unequal coefficients.  This gives the queued
+approximate-rigidity problem a uniform starting estimate and suggests an
+explicit ``approximately LU implies near LC'' theorem for stabilizer AME
+states.  It is a successor, not a free manuscript corollary.
+
 ## Mystery ledger
 
 | Mystery | Status | Evidence / next gate |
@@ -331,6 +398,10 @@ the theorem that now carries the widest scope.
 | Is \(\mathbb F_q\)-linearity required? | resolved negatively | prime-field/additive dimension argument and group-cardinality proof |
 | Is \(m=1\) included? | resolved negatively and sharply | Bell-pair \(U\otimes\overline U\) automorphisms |
 | Is the stabilizer weight distribution determined? | resolved positively | purity fixes every supported-label count; subset Möbius inversion gives all exact weights |
+| Do minimum-support stabilizers generate the full label group? | resolved positively in prose | support-dimension inclusion--exclusion and descending induction; Lean bridge requested |
+| Do the marginal transition maps explain the pencil holonomies? | resolved conceptually | Section 4 already defines the same projection transitions and loop compositions |
+| Is the full pushing atlas a complete LC invariant including phases? | resolved in prose | generation recovers the label Lagrangian; existing Pauli character correction removes lift mismatch |
+| Does full-Weyl rigidity admit a uniform quantitative version? | open successor | equal coefficient magnitudes give a condition-number-free rank-one defect; C581 owns the full stability theorem |
 | Does the transversal no-go remain CSS-specific? | resolved negatively | view any party as the Choi input of the punctured stabilizer quantum-MDS encoder |
 | Is the prime-power qudit theorem already in the literature? | open | claim-specific audit required before manuscript novelty wording |
 | Is the full stabilizer-to-marginal bridge kernel checked? | open | build an additive stabilizer-state interface; current Lean checks the dimension and axis cores |
