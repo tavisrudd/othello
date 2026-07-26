@@ -105,6 +105,11 @@ byte-for-byte with SHA-256
 `81eeae9fdfec14b4518892074390fe252fa02ed8df596974bb3d53e333d31a7b`,
 and the 23-page TIT build passes.
 
+`lean/scripts/guarded-lean
+RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean` passes against the
+narrowed paper-facing map.  The matching axiom-audit elaboration is still
+running.
+
 ## Mystery ledger
 
 Settled:
