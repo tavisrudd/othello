@@ -1,7 +1,27 @@
 {
-  "schema": "clebsch-passages-trust-manifest-v0",
-  "release_ready": false,
+  "schema": "clebsch-passages-trust-manifest-v1",
+  "paper": "The Clebsch orientation cubic: arithmetic covers and icosahedral harmonics",
+  "release_ready": true,
+  "integral_boundary": {
+    "abstract_quadratic_algebra": "finite etale on D(10 J_Z)",
+    "classical_invariant_presentation": "over Z[1/30]",
+    "geometric_incidence_comparison": "over Z[1/N] for an unspecified nonzero N divisible by 2, 3, and 5",
+    "mod_11_scope": "good reduction of the explicit golden fibre and exchanger, not a global integral incidence comparison"
+  },
   "claims": [
+    {
+      "id": "MAIN-1",
+      "statement": "The arithmetic orientation cover and the degree-six harmonic realization meet on the integral Clebsch cubic line, with the explicit golden fibre specializing at 11 to the finite sheet bit.",
+      "status": "proven",
+      "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
+      "owner": "C579",
+      "evidence": [
+        "papers/clebsch-passages/sections/02-orientation-cover.tex",
+        "papers/clebsch-passages/sections/03-clebsch-cubic.tex",
+        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
+        "papers/clebsch-passages/sections/05-harmonic-realization.tex"
+      ]
+    },
     {
       "id": "ALG-1",
       "statement": "Localization at the square of a nonzero odd element splits the involutive algebra into invariant and odd-generator summands.",
@@ -23,7 +43,7 @@
     },
     {
       "id": "HC-2",
-      "statement": "The nonbranch Clebsch fibre is the golden torsor Spec Q(sqrt(5)).",
+      "statement": "The two displayed golden six-arcs form the complete fibre over xyz, and the nonbranch Clebsch cover is the constant golden torsor.",
       "status": "certified",
       "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C652",
@@ -39,18 +59,17 @@
       "id": "HC-3",
       "statement": "The signed matching cubic restricts to 4 sigma3 over F_11 under an explicit A5-equivariant isomorphism.",
       "status": "certified",
-      "modes": ["conceptual", "certificate", "independent-replay", "lean"],
+      "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C651",
       "evidence": [
         "notes/2026-07-26-c651-hitchin-tensor-bridge.py",
         "notes/2026-07-26-c651-hitchin-tensor-bridge-replay.py",
-        "notes/2026-07-26-c651-hitchin-tensor-bridge.json",
-        "lean/RelativeConicArcs/ClebschTensorBridge.lean"
+        "notes/2026-07-26-c651-hitchin-tensor-bridge.json"
       ]
     },
     {
       "id": "HC-4",
-      "statement": "The Hitchin deck exchange reduces modulo 11 to the finite sheet involution T11.",
+      "statement": "The explicit golden-fibre exchanger has good reduction modulo 11 and represents the finite sheet involution T11.",
       "status": "certified",
       "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C652",
@@ -75,6 +94,16 @@
         "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
         "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256",
         "notes/2026-07-22-c470-golay-hadamard-automorphisms.json"
+      ]
+    },
+    {
+      "id": "HC-6",
+      "statement": "The common stabilizer of the two golden icosahedra is the tetrahedral subgroup A4.",
+      "status": "proven",
+      "modes": ["conceptual"],
+      "owner": "C652",
+      "evidence": [
+        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex"
       ]
     },
     {

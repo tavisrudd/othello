@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the Paper III source and trust-ledger scaffold."""
+"""Validate the Paper III source and trust ledger."""
 
 from __future__ import annotations
 
@@ -69,8 +69,11 @@ def main() -> None:
 
     open_statuses = {"gated", "conditional"}
     has_open = any(claim["status"] in open_statuses for claim in claims)
-    require(not (manifest.get("release_ready") and has_open),
+    release_ready = bool(manifest.get("release_ready"))
+    require(not (release_ready and has_open),
             "release_ready is true with open claims")
+    require(release_ready,
+            "release_ready is false after all load-bearing claims closed")
 
     counts = {status: 0 for status in sorted(ALLOWED_STATUSES)}
     for claim in claims:
@@ -78,7 +81,7 @@ def main() -> None:
     summary = ", ".join(f"{key}={value}" for key, value in counts.items() if value)
     print(
         f"Paper III scaffold: OK ({len(inputs)} sections, "
-        f"{len(claims)} claims; {summary}; release_ready=false)"
+        f"{len(claims)} claims; {summary}; release_ready=true)"
     )
 
 

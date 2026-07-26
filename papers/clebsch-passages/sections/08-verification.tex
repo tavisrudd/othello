@@ -2,18 +2,20 @@
 \label{sec:verification}
 
 The proof surface distinguishes conceptual arguments, classical inputs,
-exact certificates, independent replays, and Lean terminals.  The
+and exact audits.  Human proofs carry the theorem; certificates check only
+the displayed finite matrices, carrier data, and arithmetic constants.  The
 machine-readable ledger in
 \path{verification/trust_manifest.json}
-records the current status of every manuscript claim.
+records the proof mode and evidence for every manuscript claim.
 
-The finite tensor bridge uses exact arithmetic in two implementations.  The
-primary route exports the \(22\) orbit vectors, the sheet signs, the
-ten-dimensional intertwiner, and the contracted tensor.  The independent
-route reconstructs the group, orbit, quotient, and contraction.  Lean
-checks the final literal \(4^3\)-tensor equality over \(\F_{11}\); it does
-not formalize the upstream orbit construction or all \(60\) equivariance
-equations.
+For the finite tensor bridge, invariant theory reduces the conclusion to
+one nonzero scalar on the unique cubic line.  The displayed intertwiner and
+one witness determine that scalar; two exact implementations audit the
+\(22\) orbit vectors, the sheet signs, all \(60\) equivariance equations,
+and the contraction.  A Lean terminal separately checks the final literal
+\(4^3\)-tensor equality over \(\F_{11}\), but it is not part of the release
+gate and does not formalize the geometric or representation-theoretic
+argument.
 
 The harmonic bridge likewise has a primary exact generator, a canonical
 JSON certificate, and a separate replay.  Both reconstruct the ten
@@ -42,6 +44,12 @@ rational \(5\)-twist and the abstract integral quadratic algebra, while
 retaining an unspecified finite bad set for comparison with the geometric
 incidence model.
 
-The current verification runner checks manuscript structure and trust-ledger
-coverage only.  It intentionally refuses to report release readiness while
-any load-bearing claim remains gated.
+The aggregate runner checks the frozen identity of all nine theorem-like
+statements, the claim-ledger correspondence, the primary and independent
+exact audits, and a warning-free manuscript build.  The command
+\begin{verbatim}
+python3 verification/verify_release.py
+\end{verbatim}
+is run from the paper directory.  The empirical descriptor row
+\claimid{PH-4} remains inventory and is not a premise of
+Theorem~\ref{thm:main}.

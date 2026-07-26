@@ -1,0 +1,100 @@
+{
+  "schema": "clebsch-orientation-statement-identity-v1",
+  "main_source": "clebsch_passages.tex",
+  "main_source_sha256": "d725c491fd424805e179604e78f9555d591af90ccf7328a5d5dd9d76a5dadb20",
+  "section_sha256": {
+    "sections/01-introduction.tex": "b5d85aa7ef2da7e1080dba44ada84c11dc4dba591c2fef2f9dd390c97993190c",
+    "sections/02-orientation-cover.tex": "2cc339d80f1250d4807cbc8cd3e4be979515ce34b81a425cf9387f2dfbda28fc",
+    "sections/03-clebsch-cubic.tex": "da34d789eaaba2aa6e17867d055c050c527b898e87ac80a5728eb49817ce9748",
+    "sections/04-arithmetic-specialization.tex": "a79f638fb38526a6466c67c1ca4f013146153d45964a6d33de16bbb064d14c0e",
+    "sections/05-harmonic-realization.tex": "e2e496ca3963bd7379f37bef64980107bb3aca5b748d9d32486063d99d5e7de1",
+    "sections/07-consequences.tex": "459b5759c20c10fad890dd1d4b9c29c47a36aec13bdd28ada3a3f9c8a2f5854f",
+    "sections/08-verification.tex": "c4871671e70b76608ee574e2418067a31ff7dc3ab636bc42205a0ba782b457ed",
+    "sections/09-conclusion.tex": "24f420a3ef9ae2a4e49276dbe4a951775789507d29b577f2706e35ba1095e634",
+    "sections/10-references.tex": "dcc273ff06d808bc5a455aba5c6658e4b63abea30e967abbfd0f69f9b003e174"
+  },
+  "statement_count": 9,
+  "statements": [
+    {
+      "label": "thm:main",
+      "environment": "theorem",
+      "title": "Arithmetic orientation and harmonic realization",
+      "source": "sections/01-introduction.tex",
+      "source_line": 19,
+      "sha256": "a984f4bd56f42483498e8d92df47332aa521db98a430943c8eb31650f141e47b",
+      "tex": "\\begin{theorem}[Arithmetic orientation and harmonic realization]\n\\label{thm:main}\n\\claimid{MAIN-1}.\n\\begin{enumerate}\n\\item The function field of Hitchin's ordered-icosahedron incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr),\n\\qquad J_0|_V=16\\sigma_3^2.\n\\]\nHence its restriction to \\(D(\\sigma_3)\\subset\\mathbf P(V)\\) is the constant\ngolden torsor\n\\[\n D(\\sigma_3)\\times_{\\Spec\\Q}\\Spec\\Q(\\sqrt5)\n \\longrightarrow D(\\sigma_3).\n\\]\nThe explicit fibre over \\(xyz\\) has good reduction at \\(11\\): its Galois\nexchanger reduces to the nontrivial class\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\operatorname{PSL}_2(11),\n\\]\nwhile an explicit \\(A_5\\)-equivariant identification places the signed\nmatching cubic on the line \\(\\langle\\sigma_3\\rangle\\).\n\\item The zonal degree-six harmonics on the ten axes through opposite\nicosahedral faces contain \\(V\\) as their Petersen \\((-2)\\)-eigenspace.\nLabel the unit face axes by pairs \\(\\{i,j\\}\\), and put\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega),\n \\qquad\n P_6(s)=\\frac{231s^6-315s^4+105s^2-5}{16}.\n\\]\nOn this four-space the spherical Gaunt cubic is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\nEquivalently, the Clebsch cubic line is the four-channel restriction of the\nstandard degree-six Steinhardt cubic.\n\\end{enumerate}\n\\end{theorem}"
+    },
+    {
+      "label": "lem:localized-odd",
+      "environment": "lemma",
+      "title": "Localized odd generator",
+      "source": "sections/02-orientation-cover.tex",
+      "source_line": 11,
+      "sha256": "d5cdf7d20c8475b966031d753a647aec0117beba49fe10c64ad8949adfaf55f3",
+      "tex": "\\begin{lemma}[Localized odd generator]\n\\label{lem:localized-odd}\n\\claimid{ALG-1}.\nAssume that \\(2\\) is invertible in \\(R\\), and let \\(C\\in R^-\\) be nonzero.\nAfter localizing at \\(C^2\\),\n\\[\n R[(C^2)^{-1}]\n =\n R^+[(C^2)^{-1}]\n \\oplus\n C\\,R^+[(C^2)^{-1}].\n\\]\n\\end{lemma}"
+    },
+    {
+      "label": "thm:rational-cover",
+      "environment": "theorem",
+      "title": "Rational Hitchin--Clebsch cover",
+      "source": "sections/02-orientation-cover.tex",
+      "source_line": 76,
+      "sha256": "9e3f36a70401e5078b2ccbce860aed91bbc4925a3476ba67d2cdd5a6aaeedfdc",
+      "tex": "\\begin{theorem}[Rational Hitchin--Clebsch cover]\n\\label{thm:rational-cover}\n\\claimid{HC-1}.\nLet \\(H\\) be the rational seven-space of harmonic cubics, and let\n\\(\\mathcal I_{\\mathbf Q}\\) be the incidence variety of pairs\n\\(([f],U)\\), where \\(U\\) is a Mukai--Umemura isotropic three-plane and\n\\(f\\perp U\\).  The induced extension of\n\\(\\mathbf Q(\\mathbf P(H))\\) is\n\\[\n \\mathbf Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nOn the Clebsch four-space,\n\\[\n J_0=16\\sigma_3^2,\n\\]\nso over \\(D(\\sigma_3)\\) the cover is the constant golden torsor\n\\(\\operatorname{Spec}\\mathbf Q(\\sqrt5)\\).\n\\end{theorem}"
+    },
+    {
+      "label": "thm:finite-tensor-bridge",
+      "environment": "theorem",
+      "title": "Finite tensor bridge",
+      "source": "sections/03-clebsch-cubic.tex",
+      "source_line": 17,
+      "sha256": "b9fb2fdf3672a761c31161ecbc40c2737b0dce3e44bbdb725033f73a12988e04",
+      "tex": "\\begin{theorem}[Finite tensor bridge]\n\\label{thm:finite-tensor-bridge}\n\\claimid{HC-3}.\nThere is a \\(G\\)-equivariant isomorphism\n\\[\n S:\\F_{11}^{\\binom{[5]}2}\\longrightarrow W\n\\]\nsuch that, after using the standard pairing to identify the permutation\nmodule with its dual and restricting along\n\\[\n E(y)_{\\{i,j\\}}=y_i+y_j,\\qquad \\sum_i y_i=0,\n\\]\none has\n\\[\n E^*(S^{-1})^{\\otimes3}T=4\\sigma_3.\n\\]\nIn particular, the signed matching cubic and the Clebsch cubic span the\nsame nonzero invariant line over \\(\\F_{11}\\).\n\\end{theorem}"
+    },
+    {
+      "label": "prop:golden-fibre",
+      "environment": "proposition",
+      "title": "Golden fibre",
+      "source": "sections/04-arithmetic-specialization.tex",
+      "source_line": 23,
+      "sha256": "27f6ae17879e5a652d83ef4804c5609d0c486054a5642f0710cff8ca7297a286",
+      "tex": "\\begin{proposition}[Golden fibre]\\label{prop:golden-fibre}\n\\claimid{HC-2}.\nOver a field of characteristic different from \\(2\\) and \\(5\\), the points\nof \\(I_t\\) lie on \\(xyz=0\\), have a common nonzero norm, have normalized\nsquared inner product \\(1/5\\), and form a six-arc.  The two configurations\nover \\(\\Q\\) are therefore defined over\n\\[\n \\Q[t]/(t^2-t-1)=\\Q(\\sqrt5)\n\\]\nand are exchanged by its nontrivial automorphism.  In Hitchin's normalized\ncover of ordered icosahedra they are the complete fibre over \\([xyz]\\).\n\\end{proposition}"
+    },
+    {
+      "label": "prop:a4-hinge",
+      "environment": "proposition",
+      "title": "Tetrahedral hinge",
+      "source": "sections/04-arithmetic-specialization.tex",
+      "source_line": 69,
+      "sha256": "4ae203f19fec8f1de4bb58a4d324d083536f6af71c45b70c689222a130e4389a",
+      "tex": "\\begin{proposition}[Tetrahedral hinge]\\label{prop:a4-hinge}\n\\claimid{HC-6}.\nLet \\(G_t=\\operatorname{Stab}_{\\operatorname{SO}_3}(I_t)\\cong A_5\\).  Then\n\\[\n RG_tR^{-1}=G_{1-t},\n \\qquad\n G_t\\cap G_{1-t}\\cong A_4.\n\\]\n\\end{proposition}"
+    },
+    {
+      "label": "prop:spinor-specialization",
+      "environment": "proposition",
+      "title": "Spinor specialization",
+      "source": "sections/04-arithmetic-specialization.tex",
+      "source_line": 137,
+      "sha256": "9e882417c29838cdd9f085d84017309216111a7b5c82a43eb028d64e78a5c4ba",
+      "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\n\\claimid{HC-4}.\nThe reduction of \\(R\\) represents the nontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
+    },
+    {
+      "label": "cor:marked-mathieu",
+      "environment": "corollary",
+      "title": "Marked Hitchin--Mathieu torsor",
+      "source": "sections/04-arithmetic-specialization.tex",
+      "source_line": 194,
+      "sha256": "fa91e489c076e37720f946b55908c1337ceec47cea36e43724ccdb89313358bc",
+      "tex": "\\begin{corollary}[Marked Hitchin--Mathieu torsor]\\label{cor:marked-mathieu}\nChoose the marking \\(I_4\\leftrightarrow H_{\\rm row}\\).  There is a unique\nequivariant bijection\n\\[\n \\{I_4,I_8\\}\\longrightarrow\\{H_{\\rm row},H_{\\rm col}\\}\n\\]\nthat extends this choice.  It sends \\(I_8\\) to \\(H_{\\rm col}\\), and\nintertwines the reduced Hitchin exchanger with Hadamard row--column\nduality.  Without the marking there are exactly two such equivariant\nbijections and neither parent is distinguished.\n\\end{corollary}"
+    },
+    {
+      "label": "thm:harmonic-clebsch",
+      "environment": "theorem",
+      "title": "Harmonic Clebsch bridge",
+      "source": "sections/05-harmonic-realization.tex",
+      "source_line": 20,
+      "sha256": "5815e77376e64e43fa61a502db96fcc510985ff69e3755879b60e7f7682a1815",
+      "tex": "\\begin{theorem}[Harmonic Clebsch bridge]\n\\label{thm:harmonic-clebsch}\n\\claimid{PH-1}, \\claimid{PH-2}, and \\claimid{PH-3}.\nLet \\(A\\) be the Petersen adjacency matrix on the ten face axes.\n\\begin{enumerate}\n\\item The map \\(L\\) is injective, and its Gram matrix is\n\\[\n K=\\frac1{243}(196I+47J-112A).\n\\]\nIts eigenvalues on\n\\(\\mathbb R^{10}\\simeq\\mathbf1\\oplus V_4\\oplus V_5\\) are respectively\n\\[\n \\frac{110}{81},\\qquad\\frac{140}{81},\\qquad\\frac{28}{81}.\n\\]\n\\item Label the axes by the pairs \\(\\{i,j\\}\\subset\\{1,\\ldots,5\\}\\).\nThe Clebsch summand is the Petersen \\((-2)\\)-eigenspace\n\\[\n a_{ij}=y_i+y_j,\\qquad \\sum_i y_i=0.\n\\]\n\\item For\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\cdot\\omega),\n\\]\nthe spherical cubic is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =\n -\\frac{784000}{1247103}\\,\\sigma_3(y).\n\\]\nIf \\(F=\\sum_{m=-6}^6q_{6m}Y_{6m}\\) in the orthonormal\nCondon--Shortley convention and\n\\[\n W_6(F)=\n \\sum_{m_1+m_2+m_3=0}\n \\begin{pmatrix}6&6&6\\\\m_1&m_2&m_3\\end{pmatrix}\n q_{6m_1}q_{6m_2}q_{6m_3},\n\\]\nthen\n\\[\n \\int_{S^2}F^3\\,d\\omega\n =-\\frac{130}{\\sqrt{3553\\pi}}\\,W_6(F).\n\\]\n\\end{enumerate}\n\\end{theorem}"
+    }
+  ]
+}

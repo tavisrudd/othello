@@ -2,48 +2,82 @@
 
 The Clebsch matching configuration has two sheets.  Forgetting the sheet
 retains the unordered matching data; recovering it requires an odd
-observable.  Paper~II constructs such an observable over \(\F_{11}\): a
-signed cubic tensor on a ten-dimensional matching quotient.  The question
-here is arithmetic.  Does this finite orientation arise as a specialization
-of a characteristic-zero double cover?
+observable.  Over \(\F_{11}\) that first observable is a signed cubic tensor
+on a ten-dimensional matching quotient.  We ask whether the orientation and
+its cubic have a characteristic-zero source.
 
-Hitchin's ordered-icosahedron incidence supplies the geometric cover.  Its
-rational function field has the form
+Hitchin's incidence between harmonic cubics and ordered icosahedra supplies
+the double cover.  Let \(H\) be the rational seven-space of harmonic cubics,
+let \(J_0\) denote Hitchin's invariant sextic, and write
 \[
- w^2=5J_0.
+ V=\{(y_1,\ldots,y_5):\textstyle\sum_i y_i=0\},\qquad
+ \sigma_3(y)=\frac13\sum_i y_i^3
 \]
-On the Clebsch four-space the invariant \(J_0\) restricts to
-\(16\sigma_3^2\).  Away from \(\sigma_3=0\), division by \(4\sigma_3\)
-then leaves the constant quadratic torsor
+for the Clebsch four-space and its invariant cubic.  The following theorem
+gives the arithmetic and harmonic realizations of the same cubic line.
+
+\begin{theorem}[Arithmetic orientation and harmonic realization]
+\label{thm:main}
+\claimid{MAIN-1}.
+\begin{enumerate}
+\item The function field of Hitchin's ordered-icosahedron incidence cover is
 \[
- \Spec\Q(\sqrt5)\longrightarrow\Spec\Q.
+ \Q(\mathbf P(H))\bigl(\sqrt{5J_0}\bigr),
+\qquad J_0|_V=16\sigma_3^2.
 \]
-The factor \(5\) records the orientation field; the cubic records the first
-place at which orientation becomes visible.
+Hence its restriction to \(D(\sigma_3)\subset\mathbf P(V)\) is the constant
+golden torsor
+\[
+ D(\sigma_3)\times_{\Spec\Q}\Spec\Q(\sqrt5)
+ \longrightarrow D(\sigma_3).
+\]
+The explicit fibre over \(xyz\) has good reduction at \(11\): its Galois
+exchanger reduces to the nontrivial class
+\[
+ T_{11}=\operatorname{PGL}_2(11)/\operatorname{PSL}_2(11),
+\]
+while an explicit \(A_5\)-equivariant identification places the signed
+matching cubic on the line \(\langle\sigma_3\rangle\).
+\item The zonal degree-six harmonics on the ten axes through opposite
+icosahedral faces contain \(V\) as their Petersen \((-2)\)-eigenspace.
+Label the unit face axes by pairs \(\{i,j\}\), and put
+\[
+ F_y(\omega)=\sum_{i<j}(y_i+y_j)P_6(u_{ij}\mathbin{\cdot}\omega),
+ \qquad
+ P_6(s)=\frac{231s^6-315s^4+105s^2-5}{16}.
+\]
+On this four-space the spherical Gaunt cubic is
+\[
+ \frac1{4\pi}\int_{S^2}F_y(\omega)^3\,d\omega
+ =-\frac{784000}{1247103}\sigma_3(y).
+\]
+Equivalently, the Clebsch cubic line is the four-channel restriction of the
+standard degree-six Steinhardt cubic.
+\end{enumerate}
+\end{theorem}
 
-\paragraph{Principal target.}
-The central theorem will identify the golden Clebsch orientation torsor
-with this Hitchin fibre and prove that its deck exchange reduces modulo
-\(11\) to the finite sheet involution \(T_{11}\).  This statement is
-partitioned in the trust ledger as \claimid{HC-1}, \claimid{HC-2},
-\claimid{HC-3}, and \claimid{HC-4}.  The tensor clause \claimid{HC-3} is
-certified, and the rational cover and specialization clauses are proved.
-The geometric incidence comparison in positive characteristic is asserted
-only outside an unspecified finite set of primes; the present integral
-equations do not justify the sharper claim \(p\ne2,5\).
+The first assertion determines the rational square class of Hitchin's known
+degree-two cover by evaluating its golden fibre.  It does not claim an
+integral incidence model at every prime: the abstract equation
+\(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), while comparison
+with the geometric incidence variety is proved only after inverting an
+unspecified integer.  The statement at \(11\) concerns the explicitly
+integral golden fibre and exchanger, so it does not depend on a global
+good-reduction claim.
 
-\paragraph{Harmonics.}
-The axes through opposite icosahedral faces give a canonical
-ten-dimensional subspace of the degree-six spherical harmonics.  Its
-four-dimensional summand is the Clebsch module, and the standard Gaunt
-cubic restricts there to a nonzero multiple of \(\sigma_3\).  This
-identifies the orientation observable with a symmetry-resolved
-Steinhardt-type cubic, not merely with an analogous invariant.
+The second assertion gives an exact analytic realization, not an empirical
+materials claim.  The ordinary uniformly weighted icosahedron lies in the
+trivial summand; the orientation cubic lives on a nonuniform
+four-dimensional decoration of the face axes.  Moreover, the displayed
+characteristic-zero scalar has denominator divisible by \(11\).  The
+cross-characteristic conclusion is equality of the integral line
+\(\langle\sigma_3\rangle\), not reduction of one scalar.
 
-\paragraph{Proof architecture.}
-Section~\ref{sec:cover} separates the general quadratic-cover mechanism
-from its invariant-theoretic input.  Section~\ref{sec:cubic} proves the
-finite cubic bridge.  Section~\ref{sec:arithmetic} isolates the exact
-integral specialization still required.  Section~\ref{sec:harmonic}
-constructs the harmonic channel.  The final sections admit only
-consequences of these theorems and state the proof modes used.
+The proof has four steps.  Section~\ref{sec:cover} fixes the square class of
+the rational cover and separates its three integral boundaries.
+Section~\ref{sec:cubic} constructs the equivariant finite tensor bridge.
+Section~\ref{sec:arithmetic} computes the golden exchanger and its spinor
+class at \(11\).  Section~\ref{sec:harmonic} constructs the degree-six
+channel and evaluates its Gaunt cubic.  Section~\ref{sec:verification}
+records which steps are conceptual or literature-backed and which explicit
+data receive independent exact audits.

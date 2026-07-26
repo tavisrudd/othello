@@ -1,15 +1,18 @@
 # Paper III work plan
 
-## Final target
+**Status:** two-leg synthesis complete; aggregate release gate and cold review
+green on 2026-07-26.
 
-The final paper should prove the strongest coherent theorem complex supported
-by the arithmetic and Hodge calculations:
+## Realized theorem surface
+
+The paper proves the strongest coherent theorem complex supported by the
+arithmetic and harmonic calculations:
 
 1. Hitchin's ordered-icosahedron cover restricts on the Clebsch chart to the
    golden orientation torsor.
-2. Its deck exchange specializes modulo `11` to the finite Clebsch sheet
-   involution, and the signed matching tensor is the reduction of the same
-   cubic orientation line.
+2. The explicit golden fibre and exchanger have good reduction modulo `11`;
+   the exchanger becomes the finite Clebsch sheet involution, and the signed
+   matching tensor lies on the same integral cubic orientation line.
 3. The cubic orientation line is the four-channel restriction of the
    standard degree-six Gaunt/Steinhardt invariant on icosahedral face axes.
 The exact C654 relative-commutant invariant has discriminant zero rather
@@ -34,7 +37,7 @@ C655 exact face-axis Gram matrix / Gaunt restriction / physical-source audit (co
 
 core theorem + harmonic theorem + exact trust surface
           |
-          +----> C579 synthesis, cold review, and release decision
+          +----> C579 synthesis and cold review (complete)
 ```
 
 ## Drafting order
@@ -53,7 +56,7 @@ core theorem + harmonic theorem + exact trust surface
 
 ## Editorial acceptance
 
-The manuscript advances to cold review only when:
+The cold review confirmed:
 
 - every theorem-like statement has a ledger row and an exact proof mode;
 - the main theorem is visible on page 1 or 2 and has no gated clause;

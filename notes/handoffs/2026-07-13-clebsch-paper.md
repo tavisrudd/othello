@@ -225,8 +225,8 @@ The active order is strict:
    submission-ready.
 5. **C661:** test a uniform or equivalent-strength Paper II upgrade after
    C577 without holding the current release.
-6. **C579:** test Paper III after Paper II; require one principal theorem or
-   return the material to an inventory.
+
+C579 is complete and no longer an open-order item.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
@@ -253,7 +253,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | exploratory spine; C579 gated behind Paper II |
+| Paper III | `papers/clebsch-passages/` | C579 cold-review `GO`; two-leg twelve-page candidate and aggregate gate green |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -591,18 +591,26 @@ The exact certificate, independent
 replay, trust boundary, and mystery ledger are in
 `notes/2026-07-26-c654-klein-relative-position.md`.
 
-Paper III drafting is active. The old passage-catalogue skeleton has been
-replaced by the working manuscript *The Clebsch orientation cubic:
-arithmetic covers and icosahedral harmonics* under
-`papers/clebsch-passages/`. Its strong-form plan now consists of the core
-arithmetic specialization and the exact degree-six
-face-axis harmonic/Gaunt--Steinhardt theorem. The failed Klein lift is not a
-manuscript leg; the 55-curve saturation question remains outside C579.
-The manuscript keeps all materials utility empirical. Its section files,
-dependency workplan, trust manifest, and structural checker keep proved,
-certified, literature-backed, gated, and conditional statements separate.
-C579 is in progress, but the paper
-does not advance to cold review until all load-bearing rows are closed.
+C579 is complete. The twelve-page manuscript *The Clebsch orientation
+cubic: arithmetic covers and icosahedral harmonics* has one page-one theorem
+with two legs: the rational \(5J_0\) orientation cover and explicit
+golden-fibre \(T_{11}\) specialization, and the exact degree-six
+face-axis Gaunt--Steinhardt realization of the same integral cubic line.
+The cold review is `GO`. It repaired the entering draft's only material
+scope defect by restricting good reduction at \(11\) to the displayed
+golden fibre and exchanger; the global geometric incidence comparison
+retains its unspecified finite bad set. The failed Klein lift is not a
+manuscript leg, the 55-curve saturation question remains outside C579, and
+all materials utility remains empirical.
+
+Human invariant-theoretic, spinor, Petersen, and spherical-moment arguments
+carry the paper. Certificates only audit explicit matrices, finite carriers,
+contractions, and constants. Lean is absent from the release-critical path;
+the existing finite tensor terminal is an optional literal-tensor backstop.
+Nine theorem-like statements, twelve claim rows, three independent exact
+evidence pairs, and the warning-free build pass the aggregate gate. The
+report and mystery ledger are in
+`notes/2026-07-26-c579-paper-iii-synthesis-cold-review.md`.
 
 C655 is complete. The ten icosahedral face axes give an exact
 \(1+4+5\) subspace of \(\mathcal H_6\), the four-space is the Petersen
@@ -615,12 +623,12 @@ integration are complete. The physical claim is exact equality of
 observables on the decorated four-channel; predictive materials utility is
 not claimed.
 
-The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
-and degree-23 coherence material is subordinate inventory. C579 admits an
-item only when it becomes a proved consequence or application of the
-orientation cover; otherwise it remains outside the paper. Paper II stays
+The previous carrier, four-sheet holonomy, theta, Fourier, quantum, and
+degree-23 coherence material remains inventory. The marked Mathieu torsor is
+the sole retained subordinate corollary because it follows from the explicit
+golden exchanger and the verified carriers. Paper II stays
 closed to the characteristic-zero bridge apart from a possible short forward
-reference after Paper III is proved.
+reference to the completed Paper III.
 
 ## Shared verification and release policy
 

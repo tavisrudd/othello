@@ -1,26 +1,34 @@
-# Paper III verification scaffold
+# Paper III verification
 
-`trust_manifest.json` is the live claim ledger.  It records claim status,
-proof modes, task ownership, and admitted evidence paths before those claims
-enter the final theorem.
+`trust_manifest.json` is the claim ledger.  It records claim status, proof
+modes, task ownership, and evidence paths.  `statement_identity.json` freezes
+the nine theorem-like statements in manuscript order.
 
 Run from the repository root:
 
 ```text
-python3 papers/clebsch-passages/verification/verify_scaffold.py
+python3 papers/clebsch-passages/verification/verify_release.py
 ```
 
-The checker verifies:
+The aggregate gate verifies:
 
-- the section files named by the manuscript exist exactly once;
-- every `\claimid{...}` used in the manuscript occurs in the ledger;
-- claim identifiers and owners are unique and well formed;
-- evidence paths recorded for certified claims exist; and
-- `release_ready` is false while a claim is gated or conditional.
+- exact theorem-statement identity and claim-ledger coverage;
+- the human proof surface and two exact audits of the finite tensor;
+- the primary, independent, and checksum gates for the arithmetic and
+  harmonic evidence bundles; and
+- a clean manuscript build with no LaTeX box, citation, or reference warning.
 
-This is a planning-time guard, not a release certificate.  The final surface
-will also freeze theorem statement identity, evidence hashes, exact replay
-commands, toolchains, manuscript warnings, and archival metadata.
+The statement extractor can be run separately with
+
+```text
+python3 papers/clebsch-passages/verification/extract_statement_identity.py --check
+```
+
+The Lean terminal
+`RelativeConicArcs.ClebschTensorBridge.restrictedCubic_eq_four_mul_clebschPolarization`
+is an optional check of the final literal \(4^3\)-tensor equality.  It is not
+part of the aggregate release gate and does not carry the theorem's geometric
+or representation-theoretic argument.
 
 The first task-owned evidence bundle is the C655 harmonic bridge:
 
@@ -48,3 +56,8 @@ matrices, and finite Mathieu carriers.  Section 4 proves the golden fibre,
 the `A4` hinge, the spinor specialization, and the marked-torsor lemma in
 prose.  In particular, the evidence asserts no canonical unmarked
 Hitchin--Mathieu identification.
+
+The aggregate gate does not turn the abstract integral equation into a
+global incidence model at \(11\).  The mod-\(11\) claim is the exact good
+reduction of the displayed golden fibre and exchanger.  The geometric
+incidence comparison remains over an unspecified cofinite base.
