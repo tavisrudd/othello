@@ -42,6 +42,7 @@ is an input bank, not C80 status authority.
 | q23 rank-zero correspondence `R0` | **PROVED soundness; FINITE-CERTIFIED exact compression on ten controls; FIRST FAILURE FOUND** | `R0(T;o,p)` requires every defect of `T+o+p` to have a reply to defect rank zero. It equals `F_d` exactly on the first ten canonical controls: 1,163/1,163 fibres, 12,496 common edges, and 77,632 candidates. The eleventh control `(6,5)` has the first `F_d\R0` edge, `(12,20)->(16,15)`, at rank 30 and `Omega=72`. Its sole direct failure is defect move `(14,3)`; recursive reply `(18,21)` drops to a rank-one, `Omega=1` `R0` state. Thus `R0` remains the base packet but is not the full recursive survivor even at q23. [First four controls](2026-07-25-c80-q23-fourth-control-rank-zero.md), [canonical sweep and first failure](2026-07-25-c80-q23-canonical-rank-zero-sweep.md) |
 | Obligation-deletion survivor `F_del` | **PROVED soundness; SETTLED NEGATIVE as an exact `F_d` compression** | Require `Def(S+x+y)⊊Def(S)` at every defect response. Finite-set induction proves the hereditary survivor P. It equals `F_d` on the first rank-30 target and every outer target of the next nine canonical controls, but fails first at control index 20: the unique `F_d` response to one obligation sends rank `27→2`, removes 26 old defects, retains one, and creates one replacement. The successor is already in `F_del`, so literal inclusion—not descendant complexity—is exactly the obstruction. [Positive target](2026-07-26-c80-q23-obligation-deletion-rewrite.md), [first failure](2026-07-26-c80-q23-obligation-deletion-sweep.md) |
 | Replacement lineage and ancestral charge | **PROVED sound for one marked projective type; FINITE-CERTIFIED** | The replacement is created by the opponent half-move alone. Its unique former `B_small` certificate loses one endpoint on a newly saturated selected secant; the boundary pair transports `{w,q}->{w,z}`, with `z=line(q,p)∩line(r,h)`. Transporting the played obligation's ancestral label to `z` makes label support drop `27→2`. Together with 26 ordinary deletion fibres, this covers all 27 fibres of the marked root, whose successor is in `F_del`. The next exact replacement edge has the same injective update and bounded flag, but a unique `PGL_2(23)` transporter carries its complete marked data to the first edge: it confirms equivariance without adding a second type. Direct determinant replay independently agrees. Uniform injective ancestry beyond this orbit and a bounded-format update remain open. [First edge](2026-07-26-c80-q23-replacement-lineage.md), [next edge and orbit check](2026-07-26-c80-q23-next-replacement-ancestry.md) |
+| First projectively new replacement type | **PROVED sound for a second marked projective type; FINITE-CERTIFIED** | The first replacement outside the prior 12,144-element marked orbit is created by the reply half-move. Its unique former `B_small` certificate loses the certificate reply itself on the secant through opponent and reply, while both boundary endpoints survive. The new defect inherits the causal reply's old label, support drops `34→1`, and 33 deletion fibres plus this lineage fibre cover the root. Selecting one old endpoint leaves a three-move terminal-response star, giving a direct P shell. Thus causal-half-move ancestry survives without branching or collision, but by a second bounded local mechanism. Independent determinant replay agrees. [Report](2026-07-26-c80-q23-first-new-replacement-orbit.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -85,7 +86,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 ancestral-label survivor | The first two exact replacement edges have direct incidence lineages and injective label updates: the played old obligation labels the unique new defect, label support drops `27→2`, and all 27 marked-root fibres close. The second complete marked flag is the unique projective transport of the first, so only one marked projective type has been tested. | Canonicalize later replacement flags and find the first new marked projective orbit; test it for branching, ancestry collisions, and the bounded endpoint-transport construction. Then state a bounded-format uniform update without an explicit growing label table. |
+| q23 ancestral-label survivor | Two marked projective replacement types now pass. Type I is opponent-created endpoint degradation with support `27→2`; its next exact edge is a projective copy. Type II is reply-created certificate-reply deletion with support `34→1` and a three-move terminal shell. In both, the new defect inherits the old label of the causal half-move; neither branches or collides. | Quotient later replacement witnesses by both marked types and test the next orbit for the causal-half-move rule, especially one-to-many creation or a creator that is not a consumed old defect. Then state a bounded-format uniform update without an explicit growing label table. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -93,21 +94,22 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Find the first q23 replacement edge outside the known marked projective
-orbit and test injective ancestral-label transport there.
+Test causal-half-move ancestral transport on the next marked q23 replacement
+orbit.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-The first two exact replacements are explained by the same bounded projective
-flag and strict ancestral-label charge, and the second complete marked flag
-is the unique projective transport of the first. The next compression test
-must quotient later replacement edges by marked projective transport, stop
-at the first new orbit, and ask whether every new defect injects into a
-consumed old label by the same incidence-defined transport. Branching,
-ancestry collision, or the absence of a bounded projective flag is the
-decisive falsifier.
+The first two exact replacements lie in one marked orbit and use
+opponent-created endpoint degradation. The first new orbit uses the
+complementary mechanism: the reply creates the replacement by killing its
+unique boundary reply, then a three-move terminal shell closes. In both
+types the new defect inherits the old label of the causal half-move. The
+next compression test must quotient by both marked types and ask whether
+the causal-half-move rule remains injective. One-to-many creation, a creator
+without an old defect label, ancestry collision, or the absence of a bounded
+projective flag is the decisive falsifier.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -120,4 +122,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap find the first projectively new q23 replacement edge and test ancestral charge
+go C80 cap test causal-half-move ancestry on the next marked q23 replacement orbit

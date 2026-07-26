@@ -1426,6 +1426,22 @@ canonicalize later replacement flags and stop at the first new orbit; C82
 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-next-replacement-ancestry.md`](../2026-07-26-c80-q23-next-replacement-ancestry.md).
 
+**The first projectively new replacement type also passes injective causal
+ancestry (C80, 2026-07-26).** After skipping two witnesses in the first
+12,144-element marked orbit, the next necessary replacement appears at
+control index 22. The opponent drops defect rank `34→2`; the reply creates
+the sole new defect, removes both remaining old defects, and lands at rank
+one in `F_del`. The replacement inherits the reply's old label, so support
+drops `34→1` with no branching or collision. Its bounded flag is genuinely
+new: the reply kills the unique former `B_small` certificate reply on the
+opponent-reply secant while both boundary endpoints survive; selecting one
+endpoint leaves a three-move terminal-response star. Together with Type I's
+endpoint-degradation flag, this suggests labeling by the causal half-move
+rather than always the opponent. Next quotient by both types and test the
+next marked orbit for one-to-many creation or a creator without an old
+label; C82 remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-first-new-replacement-orbit.md`](../2026-07-26-c80-q23-first-new-replacement-orbit.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
