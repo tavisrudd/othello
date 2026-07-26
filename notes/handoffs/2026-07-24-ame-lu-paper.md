@@ -458,13 +458,18 @@ factor tables and complement witnesses are reproducible and remain separate
 from the Weil and Heisenberg scalar extensions.  No manuscript source was
 edited.  See `2026-07-25-c624-ame-lu-party-extension-examples.md`.
 
-**C629 in progress (2026-07-25): formalize the C624 extension mechanism.**
-The user requested a Tao/extra-juice pass followed by Lean formalization.
-The owned target is the reusable complement, explicit normalized-cochain,
-outer-action, and torus-normalizer layer behind the finite examples, plus a
-compact certificate interface that states exactly which concrete claims are
-kernel checked and which remain externally computed.  Manuscript sources
-remain untouched.
+**C629 closed (2026-07-25): split party-extension consequences formalized.**
+`PartyExtensionSplitting` constructs the explicit normalized cochain that
+trivializes a chosen factor set from any homomorphic complement, proves the
+semidirect-product equivalence, unique kernel--quotient coordinates, exact
+cardinality product, and the inverting-involution witness behind
+`T`-to-`N(T)`.  The realized AME--LU specialization is imported through both
+the dedicated and main aggregate gates; the axiom audit reports only
+`propext`, `Classical.choice`, and `Quot.sound`.  The twelve concrete C624
+complements remain honestly external exact computations until a generated
+finite-table checker supplies the formal splitting witnesses.  No manuscript
+source was edited.  See
+`2026-07-25-c629-ame-lu-party-extension-formalization.md`.
 
 **C623 closed negatively at its reconstruction gate (2026-07-25):
 extension-field Clifford census complete.**
@@ -552,12 +557,16 @@ C619 is closed.  Dependency order is authoritative:
 23. C622: intrinsic all-length diagonal-isoduality dichotomy, arbitrary-length
     multiplier converse, complete translation fiber, manuscript adoption, and
     conditional evaluation-free Lean terminal (complete).
+24. C623: extension-field `q=9,25,27` full additive-symplectic falsifier and
+    nonsemilinear-kernel census (complete; spread reconstruction false).
+25. C629: explicit cochain trivialization, semidirect decomposition,
+    cardinality product, and torus-normalizer inversion witness in Lean
+    (complete; concrete complements remain externally certified).
 
 The revision has cleared the independent re-review findings and is complete
-locally.  Public release waits on the author gates listed above. C581 remains a separately queued
-optional manuscript upgrade: first determine whether the shortened marginal
-planes recover the Desarguesian `F_q`-spread inside the additive `F_p` phase
-space before attempting extension-field or approximate rigidity.
+locally.  Public release waits on the author gates listed above. C581 remains
+a separately queued optional manuscript upgrade in quantitative approximate
+rigidity; C623 has disproved the exact spread-reconstruction premise.
 
 C601--C615 close the paper's principal formalization gap in four acceptance
 gates.  The full \(m=3\) prototype and pencil composition are already
@@ -587,8 +596,9 @@ affine one-qudit extension is non-split by the Heisenberg commutator.
 **Token-constrained completion route:** the principal `ame-lu` Version-1
 completion program is closed through C619.  The post-Version-1 diagonal
 isoduality, party-extension, and extension-field frontiers C622/C624/C623
-are complete.  C581 is now unblocked as a separate quantitative-rigidity
-upgrade, without an exact spread-reconstruction assumption.  The next
+are complete, and C629 formalizes the reusable split-extension consequences.
+C581 is now unblocked as a separate quantitative-rigidity upgrade, without
+an exact spread-reconstruction assumption.  The next
 cross-lane route remains C553 and then the coordinated build-system
 extraction.  The authoritative three-session protocol is
 `notes/2026-07-25-c287-token-efficient-execution.md`.
