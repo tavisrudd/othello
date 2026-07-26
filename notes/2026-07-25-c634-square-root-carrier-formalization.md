@@ -144,6 +144,11 @@ ten public terminals.
   node parameters from pairwise avoidance of the assigned intersections, and
   `exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_affinePoints`
   simultaneously chooses all nonzero factor scalars for an indexed family;
+- `planeLineRestrictedCoefficients_ne_zero_of_affinePoint_ne_zero` derives
+  nonvanishing of a restricted equation from one avoided affine point, and
+  `injective_affineNode_and_exists_scale_planeLineRestriction_eq_C_mul_homogenize_X_sub_C_of_pairwise_avoids`
+  packages injective nodes and simultaneous factorization using only
+  incidence, pairwise avoidance, and the existence of another index;
 - `homogeneousLinearPolynomial_scale` and its restriction corollary prove the
   exact scalar change caused by rescaling a linear-factor representative;
 - `dualLinearFactorProduct` constructs the finite product of dual linear
@@ -177,7 +182,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-seven public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-nine public
 terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
@@ -289,7 +294,7 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
-| Do compatible linewise roots extend? | **Reduced to concrete incidence and chart choice:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Lean now identifies restricted binary evaluation with plane incidence, derives injectivity of the node parameters from pairwise avoidance, simultaneously chooses every nonzero factor scalar, and absorbs those scalars at the product level.  Homogeneity supplies the affine-degree bound automatically; restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate.  The remaining gap is verifying incidence, nonvanishing, and pairwise avoidance for the concrete carrier arrangement and choosing a chart avoiding infinity. |
+| Do compatible linewise roots extend? | **Reduced to concrete incidence and chart choice:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Lean now identifies restricted binary evaluation with plane incidence; for a family in which every index has a distinct companion, pairwise avoidance supplies both nonvanishing and injectivity of the node parameters.  Lean simultaneously chooses every nonzero factor scalar and absorbs those scalars at the product level.  Homogeneity supplies the affine-degree bound automatically; restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate.  The remaining gap is verifying incidence and pairwise avoidance for the concrete carrier arrangement and choosing a chart avoiding infinity. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 | What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
@@ -310,7 +315,7 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its twenty-seven terminals reports no axioms beyond
+- The source-local audit of its twenty-nine terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
@@ -321,7 +326,7 @@ standing for them is introduced.
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the twenty-seven-terminal polynomial gate
+  `--no-build` confirmation, together with the twenty-nine-terminal polynomial gate
   and twenty-seven-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
   the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
