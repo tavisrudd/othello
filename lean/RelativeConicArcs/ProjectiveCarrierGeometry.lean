@@ -304,9 +304,11 @@ variable (K : Type*) [Field K]
 /-- A homogeneous coordinate chart for one projective plane line.  The two parametrization
 columns span the kernel of `center`; `coordinateFunctional` recovers binary coordinates on that
 kernel and is a left inverse to the parametrization.  The normal equation records the chosen
-projective representative of the line equation. -/
+projective representative of the line equation, and the final field records that restriction has
+the expected principal kernel. -/
 structure PlaneLineCoordinateChart where
   center : Fin 3 → K
+  center_ne_zero : center ≠ 0
   lineCoordinates : Fin 3 → Fin 2 → K
   scale : K
   normal_eq :
@@ -324,6 +326,10 @@ structure PlaneLineCoordinateChart where
         pointOnParametrizedPlaneLine lineCoordinates
           (fun j => ∑ i, coordinateFunctional j i * point i) =
             point
+  restriction_eq_zero_iff_dvd :
+    ∀ F : MvPolynomial (Fin 3) K,
+      planeLineRestriction lineCoordinates F = 0 ↔
+        homogeneousLinearPolynomial center ∣ F
 
 variable {K}
 
@@ -383,6 +389,60 @@ theorem PlaneLineCoordinateChart.exists_binaryPreimage
         point :=
   ⟨fun j => ∑ i, chart.coordinateFunctional j i * point i,
     chart.reconstruct_incident point hpoint⟩
+
+/-- A nonzero plane coefficient vector defines a nonzero homogeneous linear polynomial. -/
+theorem homogeneousLinearPolynomial_ne_zero_of_planeCoefficients_ne_zero
+    {a : Fin 3 → K} (ha : a ≠ 0) :
+    homogeneousLinearPolynomial a ≠ 0 := by
+  intro hzero
+  apply ha
+  funext i
+  fin_cases i
+  · have heval := congrArg (MvPolynomial.eval ![1, 0, 0]) hzero
+    simpa [homogeneousLinearPolynomial, Fin.sum_univ_succ] using heval
+  · have heval := congrArg (MvPolynomial.eval ![0, 1, 0]) hzero
+    simpa [homogeneousLinearPolynomial, Fin.sum_univ_succ] using heval
+  · have heval := congrArg (MvPolynomial.eval ![0, 0, 1]) hzero
+    simpa [homogeneousLinearPolynomial, Fin.sum_univ_succ] using heval
+
+/-- A nonzero homogeneous plane-linear polynomial has total degree one. -/
+theorem homogeneousLinearPolynomial_plane_totalDegree_eq_one
+    {a : Fin 3 → K} (ha : a ≠ 0) :
+    (homogeneousLinearPolynomial a).totalDegree = 1 := by
+  apply MvPolynomial.IsHomogeneous.totalDegree
+  · apply MvPolynomial.IsHomogeneous.sum
+    intro i _
+    exact MvPolynomial.isHomogeneous_C_mul_X (a i) i
+  · exact homogeneousLinearPolynomial_ne_zero_of_planeCoefficients_ne_zero ha
+
+/-- A chart line equation and any plane-linear equation nonzero on that line are relatively
+prime. -/
+theorem PlaneLineCoordinateChart.lineEquation_isRelPrime_of_restricted_ne_zero
+    (chart : PlaneLineCoordinateChart K)
+    (other : Fin 3 → K)
+    (hother :
+      planeLineRestrictedCoefficients chart.lineCoordinates other ≠ 0) :
+    IsRelPrime
+      (homogeneousLinearPolynomial chart.center)
+      (homogeneousLinearPolynomial other) := by
+  apply
+    (mvPolynomial_irreducible_of_totalDegree_eq_one
+      (homogeneousLinearPolynomial chart.center)
+      (homogeneousLinearPolynomial_plane_totalDegree_eq_one
+        chart.center_ne_zero)).isRelPrime_iff_not_dvd.mpr
+  rintro ⟨Q, hQ⟩
+  have hrestrictedOther :
+      planeLineRestriction chart.lineCoordinates
+          (homogeneousLinearPolynomial other) ≠ 0 := by
+    rw [planeLineRestriction_homogeneousLinearPolynomial]
+    exact
+      homogeneousLinearPolynomial_ne_zero_of_binaryCoefficients_ne_zero
+        hother
+  apply hrestrictedOther
+  rw [hQ, map_mul,
+    planeLineRestriction_center_eq_zero_of_normal_eq_scale
+      chart.lineCoordinates chart.center chart.scale
+      chart.normal_eq chart.scale_ne_zero, zero_mul]
 
 end CoordinateCharts
 
@@ -698,6 +758,87 @@ theorem exists_finset_homogeneous_carrierRoot_extension_of_coordinateCharts
     (fun x => (chart x).scale_ne_zero)
     hrestrictedNonzero hnoncollinear
     (fun x => (chart x).planeLineRestriction_surjective)
+
+/-- A nonsquare homogeneous plane form whose square roots are carried by a noncollinear family of
+charted dual lines has at most twice the root degree many carriers. -/
+theorem card_le_two_mul_degree_of_coordinateCharts_carrierRoots
+    [DecidableEq P]
+    (chart : P → PlaneLineCoordinateChart K)
+    (ambient : MvPolynomial (Fin 3) K)
+    (root : P → MvPolynomial (Fin 2) K)
+    (degree : ℕ) (carrier : Finset P)
+    (hambientHomogeneous : ambient.IsHomogeneous (2 * degree))
+    (hrootHomogeneous : ∀ x, (root x).IsHomogeneous degree)
+    (hsquare :
+      ∀ x,
+        planeLineRestriction (chart x).lineCoordinates ambient =
+          (root x) ^ 2)
+    (hrestrictedNonzero :
+      ∀ ⦃x y⦄, x ≠ y →
+        planeLineRestrictedCoefficients
+          (chart x).lineCoordinates (chart y).center ≠ 0)
+    (hnoncollinear :
+      ∀ ⦃x y z⦄, x ≠ y → x ≠ z → y ≠ z →
+        planeVectorDeterminant
+          (chart x).center (chart y).center (chart z).center ≠ 0)
+    (hnonsquare :
+      ¬∃ G : MvPolynomial (Fin 3) K, ambient = G ^ 2) :
+    carrier.card ≤ 2 * degree := by
+  by_contra hcard
+  have hlarge : 2 * degree < carrier.card := by omega
+  obtain ⟨G, hGhomogeneous, hG⟩ :=
+    exists_finset_homogeneous_carrierRoot_extension_of_coordinateCharts
+      chart ambient root degree hrootHomogeneous hsquare
+      hrestrictedNonzero hnoncollinear carrier
+  have hcoprime :
+      Pairwise
+        (IsRelPrime on fun x : {x // x ∈ carrier} =>
+          homogeneousLinearPolynomial (chart x.1).center) := by
+    intro x y hxy
+    apply
+      (chart x.1).lineEquation_isRelPrime_of_restricted_ne_zero
+        (chart y.1).center
+    apply hrestrictedNonzero
+    intro hxy'
+    exact hxy (Subtype.ext hxy')
+  have hlineNe :
+      ∀ x : {x // x ∈ carrier},
+        homogeneousLinearPolynomial (chart x.1).center ≠ 0 := by
+    intro x
+    exact
+      homogeneousLinearPolynomial_ne_zero_of_planeCoefficients_ne_zero
+        (chart x.1).center_ne_zero
+  have hlineDegree :
+      ∀ x : {x // x ∈ carrier},
+        (homogeneousLinearPolynomial (chart x.1).center).totalDegree = 1 := by
+    intro x
+    exact
+      homogeneousLinearPolynomial_plane_totalDegree_eq_one
+        (chart x.1).center_ne_zero
+  have hdiv :
+      ∀ x : {x // x ∈ carrier},
+        homogeneousLinearPolynomial (chart x.1).center ∣
+          ambient - G ^ 2 := by
+    intro x
+    rw [← (chart x.1).restriction_eq_zero_iff_dvd]
+    rw [map_sub, map_pow, hsquare x.1, hG x.1 x.2, sub_self]
+  have hGsquareHomogeneous :
+      (G ^ 2).IsHomogeneous (2 * degree) := by
+    simpa [mul_comm] using hGhomogeneous.pow 2
+  have hresidualHomogeneous :
+      (ambient - G ^ 2).IsHomogeneous (2 * degree) :=
+    hambientHomogeneous.sub hGsquareHomogeneous
+  have hlarge' :
+      2 * degree < Fintype.card {x // x ∈ carrier} := by
+    simpa using hlarge
+  have hzero : ambient - G ^ 2 = 0 := by
+    apply eq_zero_of_pairwise_isRelPrime_dvd_of_totalDegree_lt_card
+      (fun x : {x // x ∈ carrier} =>
+        homogeneousLinearPolynomial (chart x.1).center)
+      hcoprime hlineNe hlineDegree (ambient - G ^ 2) hdiv
+    exact lt_of_le_of_lt hresidualHomogeneous.totalDegree_le hlarge'
+  apply hnonsquare
+  exact ⟨G, sub_eq_zero.mp hzero⟩
 
 end CarrierResidualDivisibility
 
