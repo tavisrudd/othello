@@ -1257,6 +1257,22 @@ fixed shell. Next classify those three marked obligations and seek a direct
 growing-rank update; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-q23-small-shell-falsifier.md`](../2026-07-25-c80-q23-small-shell-falsifier.md).
 
+**The minimum q23 defect locus has a direct rank-carrying repair (C80,
+2026-07-25).** For `Def(S)={x:no reply from x reaches B_small}` and
+`d=|Def|`, the unique best failed follower has 24 legal moves, `Omega=18`,
+and `Def={(7,13),(15,22),(19,4)}`. The three points are noncollinear and
+pairwise mutually legal. Replying to any defect move with either other
+defect point sends `d:3->0`; nondefect opponents already reply directly into
+`B_small`. The resulting projectively natural relation covers `24/24`
+opponents with 50 sound edges (`8` terminal, `36` two-move, `6` defect
+exchange), all lowering `Omega` to zero or two. The order-two target
+stabilizer acts on the defect locus with orbits `2+1`, and retaining the full
+six-edge exchange relation commutes with it. This proves the target P and is
+a genuine growing-rank local model, but no global defect-descent law is yet
+proved. Next test every q23 outer fibre and extract the first nondecreasing
+obstruction; C82 remains gated. Report+cert:
+[`../2026-07-25-c80-q23-defect-three-update.md`](../2026-07-25-c80-q23-defect-three-update.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

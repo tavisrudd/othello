@@ -37,6 +37,7 @@ is an input bank, not C80 status authority.
 | Tangent-plus-triple coverage identity | **PROVED; FINITE-CERTIFIED value census** | `kappa_T(x,y)=|Legal(T+x+y)|` has an exact pair-conflict plus collinear-triple formula. Minimum-`kappa` replies are value-unsound at q17/q19. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
 | Uncovered-locus boundary rewrite | **FINITE-CERTIFIED; SUPERSEDED packaging** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Its explicit witnesses are superseded by `R_small` below. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
 | Bounded small-shell correspondence `R_small` | **PROVED soundness; SETTLED NEGATIVE uniformly** | The fixed incidence formula eliminates explicit `B_cc` pairings and gives `49/49 P` q17 and `69/69 P` q19 selected edges. The first q23 P control has `0/118` coverage, and all 181 replies to root opponent `(0,0)` miss the survivor. [Positive finite gate](2026-07-25-c80-q19-rank-one-incidence-shell.md), [q23 falsifier](2026-07-25-c80-q23-small-shell-falsifier.md) |
+| q23 defect-three update | **PROVED sound for one target; FINITE-CERTIFIED** | The unique minimum-defect follower has a three-point noncollinear mutually legal defect locus. Every defect move has two replies sending rank `3 -> 0`; with direct boundary replies elsewhere this gives `24/24` coverage and 50 sound edges. [Report](2026-07-25-c80-q23-defect-three-update.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -77,7 +78,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 defect locus | The closest failed follower has 24 legal moves, covers 21 inner opponents, and leaves exactly three obligations. | Classify those three points projectively and test a direct rank-lowering update. |
+| q23 defect rank | The minimum locus is classified and has a direct equivariant `3 -> 0` update. | Test the same lower-rank condition on every q23 outer fibre and extract the first nondecreasing obstruction. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -85,16 +86,15 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Construct a directly updated growing-rank incidence datum. The q23
-small-shell failure supplies a canonical three-obligation first test.
+Prove or falsify defect-rank descent as a directly updated growing-rank
+incidence datum, beginning with the complete q23 control fibre.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Classify the q23 minimum-defect-three locus and test whether one
-transport-natural algebraic update lowers its obligation rank without
-recursive survivor membership.
+Apply defect-rank descent to every q23 outer fibre and extract the first
+defect opponent for which no reply has smaller rank.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -107,4 +107,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap classify the q23 minimum-defect-three locus and test a rank-carrying incidence update
+go C80 cap test defect-rank descent on every q23 outer fibre and extract the first nondecreasing obstruction

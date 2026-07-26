@@ -1,0 +1,1156 @@
+{
+  "defect_locus": {
+    "active_zero_load_blocks": [
+      {
+        "defect_points": [],
+        "points": [
+          [
+            6,
+            4
+          ],
+          [
+            14,
+            5
+          ],
+          [
+            21,
+            3
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            6,
+            15
+          ],
+          [
+            11,
+            21
+          ],
+          [
+            14,
+            20
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            7,
+            10
+          ],
+          [
+            11,
+            21
+          ],
+          [
+            20,
+            17
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            7,
+            10
+          ],
+          [
+            14,
+            13
+          ],
+          [
+            15,
+            20
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            11,
+            21
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            19,
+            10
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            13,
+            3
+          ],
+          [
+            14,
+            19
+          ],
+          [
+            22,
+            9
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            13,
+            3
+          ],
+          [
+            15,
+            20
+          ],
+          [
+            16,
+            17
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            13,
+            10
+          ],
+          [
+            15,
+            20
+          ],
+          [
+            22,
+            9
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [
+          [
+            19,
+            4
+          ]
+        ],
+        "points": [
+          [
+            13,
+            22
+          ],
+          [
+            14,
+            19
+          ],
+          [
+            19,
+            4
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [],
+        "points": [
+          [
+            13,
+            22
+          ],
+          [
+            14,
+            20
+          ],
+          [
+            19,
+            10
+          ]
+        ],
+        "size": 3
+      },
+      {
+        "defect_points": [
+          [
+            7,
+            13
+          ]
+        ],
+        "points": [
+          [
+            6,
+            15
+          ],
+          [
+            7,
+            13
+          ],
+          [
+            10,
+            7
+          ],
+          [
+            15,
+            20
+          ]
+        ],
+        "size": 4
+      },
+      {
+        "defect_points": [
+          [
+            15,
+            22
+          ]
+        ],
+        "points": [
+          [
+            8,
+            3
+          ],
+          [
+            11,
+            21
+          ],
+          [
+            13,
+            10
+          ],
+          [
+            15,
+            22
+          ]
+        ],
+        "size": 4
+      },
+      {
+        "defect_points": [
+          [
+            19,
+            4
+          ]
+        ],
+        "points": [
+          [
+            7,
+            10
+          ],
+          [
+            10,
+            20
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            19,
+            4
+          ],
+          [
+            21,
+            3
+          ],
+          [
+            22,
+            14
+          ]
+        ],
+        "size": 6
+      }
+    ],
+    "definition": "Def(S)={x in Legal(S): no legal y makes S+x+y satisfy B_small}",
+    "noncollinear": true,
+    "pairwise_mutually_legal": true,
+    "points": [
+      [
+        7,
+        13
+      ],
+      [
+        15,
+        22
+      ],
+      [
+        19,
+        4
+      ]
+    ],
+    "rank": 3,
+    "stabilizer_actions": [
+      [
+        [
+          7,
+          13
+        ],
+        [
+          15,
+          22
+        ],
+        [
+          19,
+          4
+        ]
+      ],
+      [
+        [
+          15,
+          22
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          19,
+          4
+        ]
+      ]
+    ],
+    "stabilizer_orbit_sizes": [
+      2,
+      1
+    ]
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_q23_small_shell_falsifier.py": "469238cea7af51daf0ba21d17c609074e1fd6d9c2d1d62e840565ec0df5ef198",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "rank_update": {
+    "defect_rule": "reply to a defect point with either other defect point",
+    "next_defect_rank_histogram": [
+      {
+        "next_defect_rank": 0,
+        "oriented_edges": 50
+      }
+    ],
+    "nondefect_rule": "reply directly into terminal or two-nonconflicting-move B_small",
+    "opponents": 24,
+    "oriented_response_edges": 50,
+    "rank_change_on_every_selected_edge": "3 -> 0",
+    "response_degree_histogram": [
+      {
+        "degree": 1,
+        "opponents": 3
+      },
+      {
+        "degree": 2,
+        "opponents": 17
+      },
+      {
+        "degree": 3,
+        "opponents": 3
+      },
+      {
+        "degree": 4,
+        "opponents": 1
+      }
+    ],
+    "response_kind_histogram": {
+      "defect_exchange": 6,
+      "terminal": 8,
+      "two_nonconflicting_moves": 36
+    },
+    "rows": [
+      {
+        "is_defect": false,
+        "opponent": [
+          6,
+          4
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              8,
+              3
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              3
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          6,
+          15
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              7
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              15,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          7,
+          10
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": true,
+        "opponent": [
+          7,
+          13
+        ],
+        "replies": [
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              15,
+              22
+            ],
+            "target_legal_moves": 6,
+            "target_omega": 2
+          },
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              19,
+              4
+            ],
+            "target_legal_moves": 7,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          8,
+          3
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              6,
+              4
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              10
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          10,
+          7
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              6,
+              15
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              5
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          10,
+          20
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              7,
+              10
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              16,
+              17
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              21,
+              3
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              22,
+              14
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          11,
+          21
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              10
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          13,
+          3
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              6,
+              4
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              13
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              19
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          13,
+          10
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              8,
+              3
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              11,
+              21
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          13,
+          22
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              19,
+              10
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          14,
+          5
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              7
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              19,
+              10
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          14,
+          13
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              3
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          14,
+          19
+        ],
+        "replies": [
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              3
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              22,
+              9
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          14,
+          20
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              11,
+              21
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              22
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          15,
+          20
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              6,
+              15
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              22,
+              9
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": true,
+        "opponent": [
+          15,
+          22
+        ],
+        "replies": [
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              7,
+              13
+            ],
+            "target_legal_moves": 6,
+            "target_omega": 2
+          },
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              19,
+              4
+            ],
+            "target_legal_moves": 7,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          16,
+          17
+        ],
+        "replies": [
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              20
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              21,
+              3
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              22,
+              14
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": true,
+        "opponent": [
+          19,
+          4
+        ],
+        "replies": [
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              7,
+              13
+            ],
+            "target_legal_moves": 7,
+            "target_omega": 0
+          },
+          {
+            "kind": "defect_exchange",
+            "next_defect_rank": 0,
+            "reply": [
+              15,
+              22
+            ],
+            "target_legal_moves": 7,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          19,
+          10
+        ],
+        "replies": [
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              13,
+              22
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              5
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              20,
+              17
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          20,
+          17
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              19,
+              10
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          21,
+          3
+        ],
+        "replies": [
+          {
+            "kind": "terminal",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              20
+            ],
+            "target_legal_moves": 0,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              16,
+              17
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          22,
+          9
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              14,
+              19
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              15,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      },
+      {
+        "is_defect": false,
+        "opponent": [
+          22,
+          14
+        ],
+        "replies": [
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              10,
+              20
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          },
+          {
+            "kind": "two_nonconflicting_moves",
+            "next_defect_rank": 0,
+            "reply": [
+              16,
+              17
+            ],
+            "target_legal_moves": 2,
+            "target_omega": 0
+          }
+        ]
+      }
+    ],
+    "soundness": "nondefect replies land in B_small; defect exchanges land at Def-rank zero, hence in Shell_small",
+    "target_omega_histogram": [
+      {
+        "oriented_edges": 48,
+        "target_omega": 0
+      },
+      {
+        "oriented_edges": 2,
+        "target_omega": 2
+      }
+    ]
+  },
+  "schema": "c80-q23-defect-three-update-v1",
+  "source": "rust/scripts/c80_q23_defect_three_update.py",
+  "target": {
+    "history": [
+      [
+        0,
+        0
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        9,
+        16
+      ],
+      [
+        17,
+        18
+      ]
+    ],
+    "legal_moves": 24,
+    "omega": 18,
+    "q": 23,
+    "root_t4": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "stabilizer_order": 2
+  },
+  "verdict": {
+    "defect_three_classification": "PASS",
+    "direct_rank_carrying_update": "PASS",
+    "opponent_complete": "24/24",
+    "selected_edge_soundness": "PROVED",
+    "uniform_c80_candidate": false,
+    "uniform_update_law": "OPEN"
+  }
+}
