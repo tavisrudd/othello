@@ -351,15 +351,17 @@ uniform finite-field spinor class \([2]\), with the certified nontrivial
 `clebsch-passages` artifact has no C-ID, stale program name, repository-note
 reference, Mathieu/Hadamard/matching branch, or Klein bundle.  Label-level
 trust identity, explicit `formal_coverage: none claimed`, ordinary replay,
-isolated replay, and the warning-free ten-page PDF were green.  A fresh
-context-free PDF-only review returned `GO`, but the requested source-aware
-regrade then found that the global square-class proof treats the sextic
-\(J_0\) as a rational function without choosing a rational generator of
-\(\mathcal O(3)\); its two-torsion divisor-class sentence is false as
-written.  The local finite-etale fibre comparison itself survives.  C680
-must repair the global step using \(J_0/s^2\in K^\times\), regenerate and
-re-review the PDF, then obtain an immutable artifact locator and the
-author's affiliation/contact metadata.  Submission remains `NO-GO`.  The
+isolated replay, and the warning-free ten-page PDF are green.  The global
+square-class proof now correctly uses \(j_s=J_0/s^2\in K^\times\) for a
+rational section of \(\mathcal O(3)\), and the local generator comparison
+preserves the \(c=5\) specialization.  The style findings are repaired, and
+the cheap closeout adds the exact standard bond-order restriction
+\(W_6(F_y)=313600\pi^{3/2}\sigma_3(y)/(4563\sqrt{3553})\).  Two
+direct-access pre-release reviews received the complete live paper and Lean
+directories with metadata excluded; both returned `GO` with zero blockers
+or material minors, and the final grades were `A/A`.  Submission remains
+`NO-GO` only pending an immutable artifact locator and the author's
+affiliation/contact metadata.  The
 authoritative report and mystery ledger are
 `notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
 

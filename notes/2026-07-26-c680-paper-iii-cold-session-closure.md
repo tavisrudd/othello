@@ -462,7 +462,6 @@ ten-page build.  Visual inspection of the title, chart/local-proof pages,
 and harmonic-comparison page found no layout defect; PDF text contains no workflow identifier,
 repository-note reference, stale paper name, or archive placeholder.
 
-## Mystery ledger
 ## Fresh context-free PDF-only verdict
 
 An ephemeral independent `gpt-5.6-sol` referee session at high reasoning
@@ -532,22 +531,68 @@ Submission is `NO-GO` pending the square-class repair, a refreshed PDF-only
 review of the repaired bytes, the immutable locator, and affiliation/contact
 metadata.
 
+## Final repair and pre-release verdict
+
+Commit `2859b64c` repairs the reopened square-class proof.  The manuscript
+now treats \(J_0\) as a section of \(\mathcal O_{\mathbf P(H)}(6)\): for a
+rational section \(s\) of \(\mathcal O(3)\), it sets
+\(j_s=J_0/s^2\in K^\times\), runs the divisor argument with \(j_s\), and
+uses a local generator \(e\) to show that the specialization at \([xyz]\)
+changes only by a rational unit square.  The same revision implements the
+style review's five material-minor requests: it adds the causal proof
+roadmap, removes the finite-field clause from the headline theorem,
+consolidates scope boundaries, adds the interface glosses, and regularizes
+configuration/sheet terminology.
+
+The first direct-access pre-release review received the complete live
+`papers/clebsch-passages/` and `lean/` directories, the style guide, and
+the ten rendered pages.  Submission metadata was explicitly outside its
+rubric.  It returned `GO`, with no blocker or material minor, and graded
+the science and manuscript `A-`.  Its deeper-without-bloat pass exposed one
+free consequence: combining the spherical-cubic theorem with the Gaunt
+conversion gives
+\[
+ W_6(F_y)=
+ \frac{313600\pi^{3/2}}{4563\sqrt{3553}}\,\sigma_3(y).
+\]
+Commit `712f0ccc` adds this exact standard bond-order restriction without a
+new evidence route.
+
+After that closeout, both the ordinary and isolated thirteen-check release
+gates passed again.  A final fresh reviewer with direct read access to the
+complete live paper and Lean directories, with metadata again excluded,
+verified the coefficient algebra and returned pre-release `GO`, with no
+blocker or material minor and final scientific/manuscript grades `A/A`.
+It accepted the exact Lean boundary: the accessible formalization proves
+neighboring abstract involutive and Petersen mechanisms, while no
+manuscript theorem depends on Lean.  The final warning-free ten-page PDF
+has SHA-256
+`79a8a6aaee1b488d7195459f90baca41755c7c026226357adb6c013b181e33c5`.
+
+The Hitchin-facing conclusion is now crisp.  Proven: the geometric double
+cover has rational twist \(5J_0\), detected by the complete etale golden
+fibre, while the independent harmonic realization restricts the standard
+degree-six invariant to the same abstract Clebsch cubic.  Not proved, and
+not suggested as a paper claim: a rational, integral, or ambient geometric
+identification of the two realizations.
+
+## Mystery ledger
 
 | feature | status | closure gate |
 |---|---|---|
 | factor-\(13\) Gram normalization | settled | preserve \(G=K/13\) and exact replay |
 | Clebsch chart inside \(H\) | settled by correction and deep closeout | exact \(E\)-defined conjugate charts, intersection \(E\cdot xyz\), completed conductor model, and canonical map to the incidence normalization; no false rational inclusion |
-| extraction of \(c=5\) from one fibre | reopened at the global square-class step | choose \(s\in\operatorname{Rat}\mathcal O(3)\), replace \(J_0\) by \(J_0/s^2\in K^\times\), and revalidate the local specialization |
+| extraction of \(c=5\) from one fibre | settled after source-aware repair | global \(j_s=J_0/s^2\) square class, local \(j_e=J_0/e^2\) specialization, and complete etale fibre comparison |
 | abstract arithmetic--harmonic comparison | settled | unique projective \(A_5\)-map; \(\sigma_3\)-normalization fixes the scalar; no ambient map claimed |
 | artifact self-containment | settled | ordinary and isolated-package replay green |
 | statement-to-ledger identity | settled | label/clause map and frozen row digest |
 | Lean coverage | settled | explicit `none claimed` |
 | standalone harmonic novelty | settled subtractively | unlicensed “new” deleted |
 | immutable locator and author metadata | external blocker | user-supplied affiliation, contact email, and immutable artifact locator |
-| fresh context-free PDF-only referee read | superseded as a release gate | independent `GO` on PDF SHA-256 `4f303beeea42979abea013b01c5c907021519d18b5d859cd7b1816716e7e6b36`, followed by source-aware discovery of the \(\mathcal O(6)\) trivialization defect |
+| fresh pre-release referee read | settled | final direct-access `GO`, zero blockers/minors, metadata excluded, on PDF SHA-256 `79a8a6aaee1b488d7195459f90baca41755c7c026226357adb6c013b181e33c5` |
 
 Vibe check: the mathematical repair is stronger than the entering draft
-because it discovered and removed a false descent claim while preserving
-the global \(5J_0\) theorem.  The local artifact is now clean; the only
-remaining gates require an independent reader and user-controlled
-submission metadata.
+because it discovered and repaired both the false descent claim and the
+line-bundle trivialization gap while preserving the global \(5J_0\)
+theorem.  The mathematical paper and local artifact are pre-release green;
+only user-controlled submission metadata remain.
