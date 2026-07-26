@@ -124,6 +124,41 @@ quadratic/Arf gates: the 46 tangent pairs do not merely give a parity word;
 they force 46 distinct noncyclic 2-local subgroups inside one global
 conic stabilizer.
 
+### Reusable root-group sieve
+
+The preceding argument is parameter-free.  Let \(K=\mathbf F_{2^n}\), let
+\(|A|=2m\ge6\), and suppose a zero-defect pair satisfies
+\(N\notin A\) and \(r(N)=m\).  Then the \(m\) secants through the conic
+nucleus are the tangent perfect matching of \(A\).  If
+\[
+ E=\{y\in\mathcal C:r(y)=m\},
+ \qquad G=\operatorname{Stab}_{\operatorname{PGL}_2(K)}(E),
+\]
+the same conic-involution construction gives \(m\) distinct points \(t\)
+with \(|G\cap U_t|\ge4\).
+
+For \(m\ge2\), the characteristic-two subgroup classification therefore
+forces
+\[
+ G\ \text{to be conjugate to}
+ \operatorname{PGL}_2(2^d)
+ \quad\text{for some }d\mid n,
+ \qquad 2^d+1\ge m.
+\]
+Moreover all \(m\) tangent contacts lie on the corresponding conjugate
+\(\mathbf P^1(\mathbf F_{2^d})\), and \(E\) must be a union of its orbits
+on \(\mathbf P^1(K)\).
+
+Thus any future candidate with maximum nucleus index faces a two-step
+arithmetic gate before bracket or census work:
+
+1. a proper subfield must have at least \(m-1\) elements; and
+2. the prescribed value of \(|E|\) must be a sum of subfield-group orbit
+   lengths.
+
+At \((q,m)=(4096,46)\), the first step leaves only \(2^d=64\) or \(4096\),
+and the second is exactly the contradiction below.
+
 ## Subgroup classification and the final contradiction
 
 Apply the characteristic-two classification of finite \(2\)-irregular
@@ -208,6 +243,11 @@ hyperoval scale and \((4096,92)\); the present theorem removes the latter.
 This is stronger than merely classifying one matching design because it
 closes the complete zero-defect equality branch relevant to the paper.
 
+The explicit `ej` pass also extracted the reusable root-group sieve above.
+It separates the global mechanism into a subfield-size gate and an orbit-sum
+gate, so later work can test a candidate without repeating the special
+\(4096\) calculation.
+
 The Tao-style stress test asks where the proof genuinely uses the prescribed
 conic.  It uses it twice and indispensably: to place all 92 involutions in one
 \(\operatorname{PGL}_2\), and to make the same 91-point set \(E\) invariant
@@ -226,6 +266,10 @@ repackaging of C556, C593, or C596.
 - **Why the local residues failed:** settled conceptually.  Two involutions
   on each tangent pair amplify to a root four-group only after all local data
   are placed in the common global conic stabilizer.
+- **Generality of the mechanism:** settled at the reusable level by the
+  root-group sieve.  A maximum-index nucleus forces a subfield
+  \(\operatorname{PGL}_2\) stabilizer large enough to contain every tangent
+  contact, followed by an exact orbit-sum constraint on \(E\).
 - **Naked rank-three \(\operatorname{MATCH}(92,46,1)\) realizability:** open
   and outside the theorem's scope.  No evidence gap remains for the
   prescribed-conic equality branch.
