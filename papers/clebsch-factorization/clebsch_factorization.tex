@@ -85,11 +85,15 @@ type & linear quotient & sheets/cubic\\
 \end{tabular}
 \end{center}
 \noindent
-The quotient construction and recovery mechanisms are symbolic.  The
-\(A_3/B_3\) rank attainments and the recovery hypotheses are exact
-certified inputs.  For \(H_3\), Sylow-normalizer cohomology proves the
-missing-layer statement and top nonvanishing; one exact scalar supplies
-the radial line.
+The proof has two layers.  Section~\ref{sec:matching-products} proves the
+quotient and switch identities symbolically for arbitrary matchings.
+Section~\ref{sec:rank-three} obtains the \(A_3/B_3\) ranks by exact row
+reduction; for \(H_3\), Sylow-normalizer cohomology proves the missing
+layer and top nonvanishing, and one exact scalar supplies the radial
+line.  In Section~\ref{sec:balanced}, the recovery argument is symbolic
+once finite rank and radical hypotheses are checked; a certified nonzero
+cubic then implies the Schur-power and Gorenstein conclusions.  Appendix
+F maps each finite input to its primary check and independent replay.
 
 \begin{theorem}[Quadratic recovery and cubic orientation]
 \label{thm:factorization-recovery}
@@ -585,6 +589,21 @@ weight \(\tau\in k^\Omega\) satisfying, for all \(f,g\in L\),
 \[
  \sum_{M\in\Omega}\tau(M)f(M)g(M)=0.
 \]
+
+\paragraph{The \(B_3\) model.}
+Here the quotient configuration consists of fourteen points spanning
+the six-space \(W_{B_3}\), split into two seven-point sheets.  Its
+affine evaluation space \(L\) has dimension seven.  Restriction to
+either sheet has rank six, while the common second-moment form has rank
+five and a radical functional that takes distinct constant values on
+the two sheets.  It follows that \(L^{\circ2}\) is the
+thirteen-dimensional hyperplane of functions with equal sheet sums;
+its one-dimensional annihilator is the sheet sign.  Thus the quadratic
+algebra recovers the \(7+7\) partition without a search through
+partitions.  The first nonzero signed moment is cubic, so
+\(L^{\circ3}=\F_7^{14}\), and the homogenized points have
+\(h\)-vector \((1,6,6,1)\).  The next proposition isolates the
+quadratic step in a form that applies to both balanced configurations.
 
 \begin{proposition}[Radical--Hadamard recovery]
 \label{prop:radical-hadamard}
@@ -1771,8 +1790,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{4ef24920419e1cd3e87dcdd1963dab432133bf}\\[-2pt]
-\texttt{9ded02c9e93e59f84ef128387b}.
+\small\texttt{71e27a2468c12177c36b8df2f8b7061bcc0a7b}\\[-2pt]
+\texttt{e78bda9230e3288bcb609a2972}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, eight evidence
@@ -1871,7 +1890,7 @@ points fails to be arithmetically Gorenstein,
 
 \bibitem{RuddRigidity2026}
 T.~Rudd,
-\newblock \emph{Deep-hole rigidity of the Clebsch hexagon code},
+\newblock \emph{A conic deep-hole syndrome locus characterizes the Clebsch code},
 \newblock working paper, 2026.
 
 \bibitem{BraunNebe2025}
