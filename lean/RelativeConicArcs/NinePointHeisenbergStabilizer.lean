@@ -9,10 +9,11 @@ For each of the two explicit nine-arcs in `PG(2, 19)`, the first four listed poi
 frame.  This module constructs the unique coordinate matrix carrying that source frame to each
 ordered four-tuple of distinct target points.  It checks all `9·8·7·6 = 3024` target frames.
 
-The terminal results count the frame-normalized projectivities stabilizing either orbit and the
-ordered pair, and check that no frame-normalized projectivity interchanges the two orbits.  The
-enumeration, matrix construction, ray tests, and deduplication are all evaluated by the Lean
-kernel; no externally generated transporter list is imported.
+The terminal results are split by the first two target indices.  Together they check all 3024
+frames, certify that every constructed coordinate matrix is nonsingular, count the projectivities
+stabilizing either orbit and the ordered pair, and rule out projectivities interchanging the two
+orbits.  The enumeration, matrix construction, determinant tests, and ray tests are all evaluated
+by the Lean kernel; no externally generated transporter list is imported.
 -/
 
 namespace RelativeConicArcs
@@ -287,6 +288,11 @@ private def uncoveredToSelectedAtPrefix (first second : Fin 9) : List M :=
   (frameCandidatesAtPrefix uncoveredPoints selectedPoints first second).filter fun matrix =>
     mapsRaysTo matrix uncoveredPoints selectedPoints
 
+private def prefixCandidatesNonsingular
+    (source target : List V) (first second : Fin 9) : Bool :=
+  (frameCandidatesAtPrefix source target first second).all fun matrix =>
+    determinantThree matrix != 0
+
 attribute [reducible] point selectedPoints uncoveredPoints finiteNine fieldElements
   fieldPower fieldInverse
   orbitIndex orbitLabels orderedIndexFramesAt orderedIndexFramesAtPrefix
@@ -297,6 +303,7 @@ attribute [reducible] point selectedPoints uncoveredPoints finiteNine fieldEleme
   selectedStabilizersAt uncoveredStabilizersAt pairStabilizersAt selectedToUncoveredAt
   uncoveredToSelectedAt selectedStabilizersAtPrefix uncoveredStabilizersAtPrefix
   pairStabilizersAtPrefix selectedToUncoveredAtPrefix uncoveredToSelectedAtPrefix
+  prefixCandidatesNonsingular
 
 /-- The ordered target-frame domain has exactly 3024 elements. -/
 theorem ordered_frame_count : orderedIndexFrames.length = 3024 := by decide
@@ -314,9 +321,14 @@ private def expectedMultiplicity (actual expected : Fin 9) : Nat :=
 The complete transporter count for one ordered prefix of the target frame.  Fixing the first two
 images leaves 42 ordered target frames.  The two displayed expected-second tables specify the
 unique accepted transporter in each orbit; all other prefixes contain none, and no prefix contains
-an orbit interchange.
+an orbit interchange.  It also checks nonsingularity for every candidate matrix used in the four
+source-target transporter enumerations.
 -/
 def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
+  prefixCandidatesNonsingular selectedPoints selectedPoints first second &&
+  prefixCandidatesNonsingular uncoveredPoints uncoveredPoints first second &&
+  prefixCandidatesNonsingular selectedPoints uncoveredPoints first second &&
+  prefixCandidatesNonsingular uncoveredPoints selectedPoints first second &&
   (selectedStabilizersAtPrefix first second).length ==
       expectedMultiplicity second (selectedExpectedSecond first) &&
   (uncoveredStabilizersAtPrefix first second).length ==
