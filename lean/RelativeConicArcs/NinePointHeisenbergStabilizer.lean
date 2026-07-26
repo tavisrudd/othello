@@ -36,6 +36,7 @@ private def uncoveredPoints : List V := [
 
 private def finiteNine : List (Fin 9) := List.ofFn fun i : Fin 9 => i
 private def finiteThree : List (Fin 3) := List.ofFn fun i : Fin 3 => i
+private def finiteFour : List (Fin 4) := List.ofFn fun i : Fin 4 => i
 private def fieldElements : List K := List.ofFn fun i : Fin 19 => (i.val : K)
 
 private def fieldPower : K → Nat → K
@@ -337,7 +338,16 @@ private def prefixCandidatesNonsingular
   (frameCandidatesAtPrefix source target first second).all fun matrix =>
     determinantThree matrix != 0
 
-attribute [reducible] point selectedPoints uncoveredPoints finiteNine finiteThree fieldElements
+private def prefixCandidatesMapAdvertisedFrames
+    (source target : List V) (first second : Fin 9) : Bool :=
+  (orderedIndexFramesAtPrefix first second).all fun targetFrame =>
+    let matrix := frameProjectivity source sourceFrame target targetFrame
+    finiteFour.all fun i =>
+      normalizeRay (applyMatrix matrix (framePoint source sourceFrame i)) =
+        normalizeRay (framePoint target targetFrame i)
+
+attribute [reducible] point selectedPoints uncoveredPoints finiteNine finiteThree finiteFour
+  fieldElements
   fieldPower fieldInverse
   orbitIndex orbitLabels orderedIndexFramesAt orderedIndexFramesAtPrefix
   orderedIndexFrames framePoint coordinateMatrix determinantThree multiplyMatrices applyMatrix
@@ -350,7 +360,7 @@ attribute [reducible] point selectedPoints uncoveredPoints finiteNine finiteThre
   pairStabilizersAtPrefix selectedToUncoveredAtPrefix uncoveredToSelectedAtPrefix
   selectedStabilizerPrefixCount uncoveredStabilizerPrefixCount pairStabilizerPrefixCount
   selectedToUncoveredPrefixCount uncoveredToSelectedPrefixCount
-  prefixCandidatesNonsingular
+  prefixCandidatesNonsingular prefixCandidatesMapAdvertisedFrames
 
 /-- The ordered target-frame domain has exactly 3024 elements. -/
 theorem ordered_frame_count : orderedIndexFrames.length = 3024 := by decide
@@ -395,21 +405,26 @@ private abbrev prefixCountFacts (first second : Fin 9) : Prop :=
   uncoveredToSelectedPrefixCount first second = 0
 
 /--
-The complete transporter count for one ordered prefix of the target frame.  Fixing the first two
-images leaves 42 ordered target frames.  The two displayed expected-second tables specify the
-unique accepted transporter in each orbit; all other prefixes contain none, and no prefix contains
-an orbit interchange.  It also checks nonsingularity for every candidate matrix used in the four
-source-target transporter enumerations.
+The complete transporter count for one ordered prefix of the target frame.  Distinct first and
+second images leave 42 ordered target frames; an equal pair leaves none.  The two displayed
+expected-second tables specify the unique accepted transporter in each orbit; all other prefixes
+contain none, and no prefix contains an orbit interchange.  It also checks nonsingularity for every
+candidate matrix used in the four source-target transporter enumerations and verifies that each
+candidate carries the source frame to its advertised target rays.
 -/
 def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
-  decide (prefixCountFacts first second) &&
+  decide (prefixCountFacts first second) && (
   prefixCandidatesNonsingular selectedPoints selectedPoints first second &&
   prefixCandidatesNonsingular uncoveredPoints uncoveredPoints first second &&
   prefixCandidatesNonsingular selectedPoints uncoveredPoints first second &&
   prefixCandidatesNonsingular uncoveredPoints selectedPoints first second &&
+  prefixCandidatesMapAdvertisedFrames selectedPoints selectedPoints first second &&
+  prefixCandidatesMapAdvertisedFrames uncoveredPoints uncoveredPoints first second &&
+  prefixCandidatesMapAdvertisedFrames selectedPoints uncoveredPoints first second &&
+  prefixCandidatesMapAdvertisedFrames uncoveredPoints selectedPoints first second &&
   (selectedStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
   (uncoveredStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
-  (pairStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup
+  (pairStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup)
 
 attribute [reducible] selectedExpectedSecond uncoveredExpectedSecond expectedMultiplicity
   belongsToDisplayedHeisenbergSubgroup stabilizerPrefixProfile
@@ -450,7 +465,7 @@ private theorem prefix_counts_of_profile
     selectedToUncoveredPrefixCount first second = 0 ∧
     uncoveredToSelectedPrefixCount first second = 0 := by
   simp only [stabilizerPrefixProfile, Bool.and_eq_true] at profile
-  exact of_decide_eq_true profile.1.1.1.1.1.1.1
+  exact of_decide_eq_true profile.1
 
 /--
 If all 81 frame-prefix profiles hold, the selected orbit, uncovered orbit, and ordered pair each
