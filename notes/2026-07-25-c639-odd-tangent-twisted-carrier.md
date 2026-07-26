@@ -401,9 +401,10 @@ triple count, or establish the carrier-extension hypotheses from projective
 geometry.  The last terminal checks their logical composition rather than
 asserting those analytic inputs.
 
-The import-only gate audits all fifteen public terminals.  Its source
-elaboration is warning-free; the exact Lake build, no-build replay, and axiom
-output are recorded after the shared build-owner window is available.
+The import-only gate audits all fifteen public terminals.  Direct source
+elaboration is warning-free, and the source-local axiom audit reports only
+`propext`, `Classical.choice`, and `Quot.sound`.  The exact Lake build and
+no-build replay await the shared build-owner window.
 
 ## Outcome and boundary
 
