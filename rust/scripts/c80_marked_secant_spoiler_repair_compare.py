@@ -187,6 +187,12 @@ def edge_features(kernel, state: int, opponent: int, reply: int) -> dict:
         if reply_intruder
         else -1
     )
+    complement_components = conflict_complement_components(kernel, target)
+    mate_degrees = sorted(
+        degree
+        for component in complement_components
+        for degree in component["degree_sequence"]
+    )
     scalar = (
         len(through_loads),
         sum(load - 2 for load in through_loads),
@@ -230,6 +236,12 @@ def edge_features(kernel, state: int, opponent: int, reply: int) -> dict:
         "target_omega": kernel.omega(target),
         "target_legal_points": game.legal_mask(target).bit_count(),
         "target_live_conic": len(GEOMETRY.live_conic(game, target)),
+        "target_mate_degree_histogram": [
+            [degree, count]
+            for degree, count in sorted(Counter(mate_degrees).items())
+        ],
+        "target_minimum_mate_degree": min(mate_degrees, default=0),
+        "target_maximum_mate_degree": max(mate_degrees, default=0),
         "target_active_line_load_histogram": active_line_load_histogram(
             kernel, target
         ),
@@ -651,6 +663,14 @@ def run() -> dict:
     spoiler_legal = [
         row["features"]["target_legal_points"] for row in spoilers
     ]
+    repair_mate_minimum = [
+        row["features"]["target_minimum_mate_degree"] for row in repairs
+    ]
+    spoiler_mate_minimum = [
+        row["features"]["target_minimum_mate_degree"] for row in spoilers
+    ]
+    assert repair_mate_minimum == [8, 8, 8, 8, 17]
+    assert set(spoiler_mate_minimum) == {0}
 
     return {
         "schema": "c80-marked-secant-spoiler-repair-compare-v1",
@@ -686,6 +706,16 @@ def run() -> dict:
                 "repairs": [min(repair_legal), max(repair_legal)],
                 "spoilers": [min(spoiler_legal), max(spoiler_legal)],
             },
+            "target_minimum_mate_degree": {
+                "repairs": [
+                    min(repair_mate_minimum),
+                    max(repair_mate_minimum),
+                ],
+                "spoilers": [
+                    min(spoiler_mate_minimum),
+                    max(spoiler_mate_minimum),
+                ],
+            },
             "interpretation": (
                 "Every spoiler is a premature near-boundary collapse: all "
                 "q17 candidates have Omega=0; at q19 thirteen have Omega=0 "
@@ -702,6 +732,7 @@ def run() -> dict:
             "all_spoilers_exact_N_in_independent_small_tree_replay": True,
             "overload_zero_spoilers_have_grundy_one_or_two": True,
             "linear_forest_complement_lemma_certifies_all_boundary_grundies": True,
+            "repairs_have_mate_surplus_and_spoilers_have_isolates": True,
             "unique_overload_one_spoiler_has_one_P_follower": True,
             "all_repairs_exact_P_in_grid_engine": True,
             "all_repairs_in_structural_copycat_survivor": True,

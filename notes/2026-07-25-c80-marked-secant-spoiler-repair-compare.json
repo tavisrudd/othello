@@ -750,6 +750,7 @@
     "candidate_count": 106,
     "linear_forest_complement_lemma_certifies_all_boundary_grundies": true,
     "overload_zero_spoilers_have_grundy_one_or_two": true,
+    "repairs_have_mate_surplus_and_spoilers_have_isolates": true,
     "unique_overload_one_spoiler_has_one_P_follower": true
   },
   "finite_separations": {
@@ -782,6 +783,16 @@
       "spoilers": [
         0,
         1
+      ]
+    },
+    "target_minimum_mate_degree": {
+      "repairs": [
+        8,
+        17
+      ],
+      "spoilers": [
+        0,
+        0
       ]
     }
   },
@@ -943,6 +954,50 @@
         ],
         "target_legal_points": 32,
         "target_live_conic": 3,
+        "target_mate_degree_histogram": [
+          [
+            8,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            13,
+            8
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            17,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 17,
+        "target_minimum_mate_degree": 8,
         "target_omega": 40,
         "thinned_line_profile_histogram": [
           [
@@ -1131,6 +1186,50 @@
         ],
         "target_legal_points": 32,
         "target_live_conic": 3,
+        "target_mate_degree_histogram": [
+          [
+            8,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            13,
+            8
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            17,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 17,
+        "target_minimum_mate_degree": 8,
         "target_omega": 40,
         "thinned_line_profile_histogram": [
           [
@@ -1319,6 +1418,50 @@
         ],
         "target_legal_points": 32,
         "target_live_conic": 3,
+        "target_mate_degree_histogram": [
+          [
+            8,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            13,
+            8
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            17,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 17,
+        "target_minimum_mate_degree": 8,
         "target_omega": 40,
         "thinned_line_profile_histogram": [
           [
@@ -1507,6 +1650,50 @@
         ],
         "target_legal_points": 32,
         "target_live_conic": 3,
+        "target_mate_degree_histogram": [
+          [
+            8,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            10,
+            4
+          ],
+          [
+            11,
+            11
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            13,
+            8
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            17,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 17,
+        "target_minimum_mate_degree": 8,
         "target_omega": 40,
         "thinned_line_profile_histogram": [
           [
@@ -1703,6 +1890,50 @@
         ],
         "target_legal_points": 51,
         "target_live_conic": 5,
+        "target_mate_degree_histogram": [
+          [
+            17,
+            1
+          ],
+          [
+            20,
+            5
+          ],
+          [
+            21,
+            5
+          ],
+          [
+            22,
+            6
+          ],
+          [
+            23,
+            9
+          ],
+          [
+            24,
+            4
+          ],
+          [
+            25,
+            10
+          ],
+          [
+            26,
+            4
+          ],
+          [
+            27,
+            4
+          ],
+          [
+            29,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 29,
+        "target_minimum_mate_degree": 17,
         "target_omega": 169,
         "thinned_line_profile_histogram": [
           [
@@ -1961,6 +2192,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2055,6 +2298,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2165,6 +2416,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -2247,6 +2510,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2345,6 +2616,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2449,6 +2728,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2535,6 +2826,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2641,6 +2940,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2727,6 +3034,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2820,6 +3135,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -2919,6 +3242,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3018,6 +3353,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3112,6 +3459,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3215,6 +3570,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -3304,6 +3671,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3402,6 +3781,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3506,6 +3897,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -3583,6 +3990,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3674,6 +4089,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3772,6 +4199,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -3849,6 +4284,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -3941,6 +4384,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4046,6 +4505,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4137,6 +4608,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4231,6 +4714,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4329,6 +4820,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4420,6 +4919,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4514,6 +5025,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4600,6 +5119,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4699,6 +5226,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -4817,6 +5356,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -4901,6 +5452,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5013,6 +5572,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5111,6 +5682,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5202,6 +5781,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5305,6 +5892,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -5387,6 +5986,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5473,6 +6084,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5559,6 +6178,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5657,6 +6284,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5743,6 +6382,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5841,6 +6488,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -5945,6 +6604,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -6041,6 +6716,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6133,6 +6820,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6231,6 +6934,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -6320,6 +7031,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -6409,6 +7128,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6495,6 +7226,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6587,6 +7326,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6673,6 +7428,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6777,6 +7540,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -6859,6 +7638,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -6945,6 +7736,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7048,6 +7847,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -7144,6 +7955,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7242,6 +8065,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7333,6 +8168,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7451,6 +8298,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -7546,6 +8405,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7644,6 +8515,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7730,6 +8609,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7821,6 +8708,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -7922,6 +8821,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8021,6 +8928,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8120,6 +9039,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8218,6 +9145,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8304,6 +9239,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8390,6 +9333,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8489,6 +9440,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8588,6 +9551,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8694,6 +9669,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8792,6 +9775,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8885,6 +9876,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -8979,6 +9978,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9089,6 +10096,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -9171,6 +10190,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9275,6 +10302,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9361,6 +10400,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9447,6 +10494,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9546,6 +10601,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9640,6 +10707,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9738,6 +10813,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9829,6 +10916,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -9927,6 +11026,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -10010,6 +11117,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10096,6 +11219,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10194,6 +11325,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10280,6 +11423,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10384,6 +11535,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -10480,6 +11647,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10583,6 +11762,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": []
       },
@@ -10665,6 +11856,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10769,6 +11972,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10867,6 +12082,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -10965,6 +12196,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11065,6 +12312,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11164,6 +12419,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11263,6 +12530,18 @@
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 1,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11376,6 +12655,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11468,6 +12755,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11594,6 +12897,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 7,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11694,6 +13013,14 @@
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            4
+          ]
+        ],
+        "target_maximum_mate_degree": 0,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -11865,6 +13192,18 @@
         },
         "target_legal_points": 4,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 1,
         "thinned_line_profile_histogram": [
           [
@@ -11970,6 +13309,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 6,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [
@@ -12077,6 +13432,22 @@
         "target_follower_value_summary": null,
         "target_legal_points": 7,
         "target_live_conic": 0,
+        "target_mate_degree_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "target_maximum_mate_degree": 2,
+        "target_minimum_mate_degree": 0,
         "target_omega": 0,
         "thinned_line_profile_histogram": [
           [

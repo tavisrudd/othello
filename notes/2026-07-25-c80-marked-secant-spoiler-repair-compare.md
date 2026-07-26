@@ -16,6 +16,7 @@ repairs:
 | legal points on the marked opponent--reply chord before the opponent | 5--8 | 2--4 |
 | legal points after the exchange | 32--51 | 2--7 |
 | live conic parameters after the exchange | 3--5 | 0--1 |
+| minimum number of legal mates per move | 8--17 | 0 |
 | target overload | 40 or 169 | 105 at 0, one at 1 |
 
 Thus every spoiler is a premature near-boundary collapse, while the repairs
@@ -205,8 +206,8 @@ directory and requires byte equality.
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_marked_secant_spoiler_repair_compare.py` | 27,401 | `73f29f467a83306c2f778154380b9419cde9e9a717ced8c8b895a146a1611963` |
-| `notes/2026-07-25-c80-marked-secant-spoiler-repair-compare.json` | 300,242 | `98a7e744763a3395dc55c02e1078cb4eacf485a3ecc5b359d45a861159d65a75` |
+| `rust/scripts/c80_marked_secant_spoiler_repair_compare.py` | 28,637 | `c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb` |
+| `notes/2026-07-25-c80-marked-secant-spoiler-repair-compare.json` | 327,743 | `dbecd2066b044f52b58a61372be1262ccb5fc75bb85dea0cf88e09e38510ede4` |
 
 The exact small-tree replay is independent of the imported `game.value`
 recursion but shares the normalized grid legality engine. Geometry, `Ω`,
@@ -234,6 +235,14 @@ therefore not “large reservoir implies P.” It must be an explicit operation
 that transports a response certificate while preventing premature
 absorption.
 
+The sparse-complement proof identifies the exact structural quantity to try:
+mate surplus `μ(S)`, the minimum number of legal partners of a legal move.
+The repairs have `μ=8` at q17 and `μ=17` at q19, while every spoiler has
+`μ=0`. Unlike overload or legal-point count, `μ>0` is precisely the P
+boundary condition once `Ω=0` makes the continuation complex
+one-dimensional. The next falsifier is closure of `μ>0` under strict-overload
+replies on the certified DAGs, not another ranking or fitted selector.
+
 No incidental discovery-track item arose. The exact-N upgrade and the
 reservoir diagnosis are direct C80 deliverables.
 
@@ -253,6 +262,10 @@ reservoir diagnosis are direct C80 deliverables.
   triangle-free complement with an edge and no isolated vertex, the same mex
   calculation gives Grundy 0. This is exactly the pure one-dimensional
   continuation-complex boundary criterion.
+- **[OPEN — C80 `tt`] Can positive mate surplus be preserved while `Ω`
+  strictly decreases?** The repairs have minimum mate degrees 8 and 17,
+  versus 0 for every spoiler. The next exact gate is opponent-complete
+  closure on the certified q13/q17 DAGs and marked q19 control.
 - **[SETTLED] Are the q17 incidence tables coordinate-dependent?** No. Each
   canonical type has the same complete feature multiset in all four copies.
 - **[SETTLED] What finite incidence gap separates repairs from spoilers?**

@@ -1052,7 +1052,9 @@ continuation-complex criterion. Write-up:
 Compared with the four q17 `Ω=40` repairs and q19 `Ω=169` repair, the finite
 incidence gap is large: repairs retain 5--8 legal marked-chord points, 32--51
 legal points total, and 3--5 live conic parameters, while spoilers retain
-2--4, 2--7, and 0--1. The complete normalized feature multiset is identical
+2--4, 2--7, and 0--1. More structurally, the repairs have minimum legal-mate
+degree 8 at q17 and 17 at q19, while every spoiler has an isolated legal move
+(`μ=0`). The complete normalized feature multiset is identical
 across the four coordinate copies of each q17 type. Full marked destruction
 profiles isolate the five repairs purely in the complete 322-edge natural
 comparison, but no conjunction through three predeclared monotone scalar

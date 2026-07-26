@@ -142,6 +142,48 @@ adjacent JSON certificate. The graph lemma itself is elementary and does not
 depend on the computation; the certificate checks that the 105 C80 residuals
 satisfy its hypotheses.
 
+## Tao-style continuation question
+
+The proof singles out one structural coordinate rather than an arbitrary
+feature score. Let
+
+```text
+μ(S) = min_x |{y : S+x+y is legal}|,
+```
+
+where `x` ranges over the legal moves from `S`. Thus `μ(S)>0` says that every
+legal move has a mate.
+
+The certified repairs have substantial mate surplus:
+
+```text
+q17 Ω=40 repairs: μ=8;
+q19 Ω=169 repair: μ=17.
+```
+
+Every one of the 106 spoiling targets has `μ=0`. At `Ω=0`,
+triangle-freeness is automatic from the absence of legal triples, and the
+lemma says that the nonterminal condition `μ>0` is exactly the structural P
+case within this sparse-complement family.
+
+This suggests a sharper positive-overload target than another fitted edge
+profile. Seek a geometrically defined family on which, for every opponent
+move, one can choose a strict-`Ω` reply that preserves `μ>0`. Well-founded
+descent would then end at the P boundary supplied by the lemma. Positive
+`μ` alone does not prove a positive-overload state P, so the missing theorem
+is closure under a concrete reply construction:
+
+```text
+μ(S)>0 and Ω(S)>0
+⇒ for every legal o, there exists legal p such that
+     Ω(S+o+p)<Ω(S) and μ(S+o+p)>0,
+```
+
+on an explicitly stated geometric survivor family. The next cheap
+falsifier is to test this closure on the complete certified q13/q17 DAGs and
+the marked q19 control before attempting a field-uniform incidence proof.
+This is local mate coverage, not a perfect-matching or Tutte condition.
+
 ## Scope and provenance
 
 This note packages an elementary Node--Kayles calculation for reuse in the
