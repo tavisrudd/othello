@@ -1268,8 +1268,17 @@
       "last": 634,
       "purpose": "formalize the square-root carrier extension and collinearity inequality",
       "sequence": 141
+    },
+    {
+      "count": 1,
+      "first": 635,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 635,
+      "purpose": "remove redundant signed-row independence hypothesis and audit remaining Gale formalization degrees of freedom",
+      "sequence": 142
     }
   ],
-  "next_id": 635,
+  "next_id": 636,
   "schema": "codex-task-id-allocations-v1"
 }
