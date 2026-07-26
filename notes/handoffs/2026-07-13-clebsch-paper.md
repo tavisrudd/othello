@@ -289,15 +289,16 @@ The active order is strict:
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
 
-C670 is complete. Paper III is now a seven-page arithmetic--harmonic note:
-the unsupported finite matching bridge and common-line section are deleted,
-the factor-\(13\) Gram normalization and complete axis labeling are repaired,
-and the release surface has four theorem-like statements and four trust
-rows. A fresh seven-page image-only referee read returned `GO` with no
-blocker and independently confirmed both main arguments. The full local
-aggregate is warning-free and green. An immutable public artifact locator
-and ordinary submission metadata remain external release requirements; no
-identifier is fabricated in the manuscript.
+C670 is complete as the subtractive two-theorem cut, but its release verdict
+is superseded. A later PDF-only cold reader returned `NO-GO`: the manuscript
+does not define the Clebsch inclusion \(V\hookrightarrow H\), the extraction
+of the constant \(5\) lacks a local normalization/fibre comparison, and the
+PDF retains an archive placeholder. An isolated package replay also proved
+that the advertised paper-local arithmetic bundle still imports a private
+Mathieu/Hadamard certificate from `notes/`. C680 owns the mathematical,
+package, trust-ledger, Lean-boundary, novelty, and renewed-cold-read closure.
+Its authoritative brief is
+`notes/2026-07-26-c680-paper-iii-cold-session-closure.md`.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
@@ -324,7 +325,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | C670 final `GO`; local release gate green, public artifact locator still required |
+| Paper III | `papers/clebsch-passages/` | C680 queued after post-C670 `NO-GO`; arithmetic and package closure required |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -698,24 +699,19 @@ completed the literature and claim-ownership audit: it identifies the
 \(5J_0\) normalization plus the mod-\(11\) and degree-six realizations as
 the paper-owned bridge, adds the missing primary context, and determines
 that both the marked Mathieu torsor and the speculative descriptor should
-be removed. C668 implements that disposition: the branch-to-square-class
-argument is expanded, the finite quotient is self-contained, and the
-\(A_4\), marked-Mathieu, speculative descriptor, and inventory branches
-are gone. The seven-statement, nine-row trust surface and warning-free PDF
-are green. C670 owns the independent release gate. The two revision reports
-are `notes/2026-07-26-c669-paper-iii-context-literature-audit.md` and
+be removed. C668 implemented that entering disposition. Its
+seven-statement, nine-row candidate is superseded by the C670 cut and C680
+closure brief. The two entering revision reports are
+`notes/2026-07-26-c669-paper-iii-context-literature-audit.md` and
 `notes/2026-07-26-c668-paper-iii-focused-note-revision.md`.
 
-C670 implements the subtractive verdict. The finite tensor section,
-matching-specialization language, common-line section, internal claim IDs,
-and finite evidence route are absent. The two page-one theorems now state
-only the rational \(5J_0\) square class and golden specialization, and the
-exact normalized degree-six harmonic restriction. The harmonic certificate
-distinguishes the kernel matrix from the normalized spherical Gram matrix,
-records the ten labeled axes, and independently verifies the Petersen
-adjacency. The fresh context-free referee returned final `GO`; its findings,
-the exact cut disposition, validation record, and mystery ledger are in
-`notes/2026-07-26-c670-paper-iii-independent-release-review.md`.
+C670 implements the correct subtractive disposition, and its harmonic
+normalization remains green. Its `GO` is not the current release verdict.
+The later cold read found missing definitions and a scheme-theoretic gap in
+the arithmetic theorem; the isolated replay found private and deleted
+branches inside the release bundle; and the novelty audit does not license
+the surviving unqualified “new” sentence. C680 is the sole current Paper III
+repair path. Do not revive the finite bridge while closing it.
 
 C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full
