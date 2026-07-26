@@ -551,8 +551,10 @@ scope.
 
 ## Cross-lane relationships
 
-- `crowns` owns the completed mathematical source reports.
-- `ame-lu` owns theorem selection, remaining LU-rigidity work, manuscript
-  synthesis, verification ledgers, and release preparation.
+- `crowns` retains the completed source reports as provenance.
+- `ame-lu` owns the H3 AME/LU/LC results, including theorem adoption,
+  manuscript exposition, verification, and every future quantum-equivalence
+  refinement; it also owns the remaining paper synthesis and release
+  preparation.
 - Any future Lean work requires its own allocated `ame-lu` task and the nested
   Lean guide before action.
