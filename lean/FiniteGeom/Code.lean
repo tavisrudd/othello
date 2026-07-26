@@ -12,10 +12,9 @@ import Mathlib.Data.Fintype.Card
 /-!
 # Linear codes over `𝔽_q`: dual code and minimum / dual distance (shared `FiniteGeom` base)
 
-The concrete algebraic half of the `FiniteGeom` MVP the formalization plan calls for
-([`notes/handoffs/2026-07-11-lean-formalization-plan.md`](../notes) §3, Phase 0 next-step 1).
-The combinatorial half (`ν`/`τ`) lives in `FiniteGeom.Hypergraph`; the q-ary weight
-arithmetic in `FiniteGeom.Weight`.
+This module supplies the algebraic code layer shared by the finite-geometry developments.
+The complementary hypergraph parameters (`ν`/`τ`) live in `FiniteGeom.Hypergraph`, and
+q-ary weight arithmetic lives in `FiniteGeom.Weight`.
 
 A linear `[n, k]_q` code is a `𝔽_q`-`Submodule` of `Fin n → 𝔽_q`; the code layer here is
 deliberately thin (mathlib at this pin ships `hammingNorm` but no `Code`/dual/MDS layer):
@@ -34,9 +33,8 @@ the transfer-lemma interface; see `RepairCodes.CodeInstance`. Coefficient faithf
 outer-dual membership are proved coordinate-free in `RepairCodes.CodeInstance` and
 `RepairCodes.OuterDual`.
 
-* `singleton_bound` — the classical Singleton bound `d(C) + k ≤ n + 1` (a `PROVE`-tier
-  finite/algebraic input the plan flags prove-don't-import, §5 decision 3), with `IsMDS`
-  the equality case. Proved by the standard puncturing argument: restricting codewords to
+* `singleton_bound` — the classical Singleton bound `d(C) + k ≤ n + 1`, with `IsMDS`
+  the equality case. It is proved by the standard puncturing argument: restricting codewords to
   the complement of any `d-1` coordinates is injective on `C` (two codewords agreeing there
   differ on `≤ d-1 < d` coordinates, forcing equality), so `k = dim C ≤ n - (d-1)`.
 -/
@@ -227,9 +225,8 @@ theorem le_dualDist_rowCode_of_column_independent (G : Matrix (Fin k) ι 𝔽) (
   · have hjS : j ∈ S := by simp [S, hj]
     exact hcoeff ⟨j, hjS⟩
 
-/-- **Singleton bound.** For a linear `[n, k]_q` code `C`, `d(C) + k ≤ n + 1`. One of the
-elementary, general-in-`q` bounds the plan marks *prove-don't-import* (§5 decision 3): no
-imported input, pure finite linear algebra.
+/-- **Singleton bound.** For a linear `[n, k]_q` code `C`, `d(C) + k ≤ n + 1`.  The proof
+uses only finite linear algebra.
 
 Proof (standard puncturing): if `d = minDist C = 0` the code is trivial (`k ≤ n` suffices);
 otherwise pick any coordinate set `S` with `|S| = d - 1` and restrict codewords to `Sᶜ`. That

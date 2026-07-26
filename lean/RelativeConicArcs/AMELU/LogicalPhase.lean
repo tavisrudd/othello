@@ -39,10 +39,40 @@ def splitTorusBlock [Field 𝔽] (a : 𝔽ˣ) : LogicalBlock 𝔽 :=
 def IsSplitTorusBlock [Field 𝔽] (A : LogicalBlock 𝔽) : Prop :=
   ∃ a : 𝔽ˣ, A = splitTorusBlock a
 
+/-- The anti-diagonal determinant-one block that represents the nontrivial
+Weyl-group element of the diagonal split torus. -/
+def splitTorusWeylBlock [Ring 𝔽] : LogicalBlock 𝔽 :=
+  !![0, -1; 1, 0]
+
 /-- Every split-torus block has determinant one. -/
 theorem splitTorusBlock_isSpecialLinear [Field 𝔽] (a : 𝔽ˣ) :
     IsSpecialLinearBlock (splitTorusBlock a) := by
   simp [IsSpecialLinearBlock, splitTorusBlock, Matrix.det_fin_two]
+
+/-- The anti-diagonal Weyl block has determinant one. -/
+theorem splitTorusWeylBlock_isSpecialLinear [CommRing 𝔽] :
+    IsSpecialLinearBlock (splitTorusWeylBlock (𝔽 := 𝔽)) := by
+  simp [IsSpecialLinearBlock, splitTorusWeylBlock, Matrix.det_fin_two]
+
+/-- The square of the anti-diagonal Weyl block is minus the identity.  Thus
+its linear order is four in odd characteristic, although its class modulo the
+split torus has order two. -/
+theorem splitTorusWeylBlock_mul_self [CommRing 𝔽] :
+    splitTorusWeylBlock (𝔽 := 𝔽) * splitTorusWeylBlock =
+      -(1 : LogicalBlock 𝔽) := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [splitTorusWeylBlock, Matrix.mul_apply, Fin.sum_univ_succ]
+
+/-- The anti-diagonal Weyl block conjugates the split-torus parameter to its
+inverse, expressed without choosing a matrix inverse. -/
+theorem splitTorusWeylBlock_mul_splitTorusBlock [Field 𝔽] (a : 𝔽ˣ) :
+    splitTorusWeylBlock (𝔽 := 𝔽) * splitTorusBlock a =
+      splitTorusBlock a⁻¹ * splitTorusWeylBlock := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [splitTorusWeylBlock, splitTorusBlock, Matrix.mul_apply,
+      Fin.sum_univ_succ]
 
 /-- A determinant-one diagonal `2 × 2` matrix is a split-torus block. -/
 theorem isSplitTorusBlock_of_specialLinear_of_offDiagonal_eq_zero

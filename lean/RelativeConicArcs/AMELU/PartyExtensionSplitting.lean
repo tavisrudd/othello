@@ -121,8 +121,9 @@ variable {N E G : Type*} [CommGroup N] [Group E] [Group G]
 namespace Splitting
 
 /-- A quotient element acts by inversion on the kernel under the
-conjugation action induced by a splitting.  For a split torus kernel this
-is the algebraic condition detected by an anti-diagonal normalizer lift. -/
+conjugation action induced by a splitting.  For a projective split-torus
+kernel this is the algebraic condition detected by the nontrivial normalizer
+class. -/
 def InvertsKernel (s : S.Splitting) (g : G) : Prop :=
   s.conjAct g = MulEquiv.inv N
 
@@ -139,8 +140,10 @@ theorem inl_conj_eq_inv
     _ = S.inl n⁻¹ := by rw [hg]; rfl
 
 /-- A homomorphic lift of an involution is itself an involution.  Together
-with `inl_conj_eq_inv`, this is the abstract dihedral-normalizer witness
-behind an enlargement from a split torus to its order-two normalizer. -/
+with `inl_conj_eq_inv`, this is the abstract witness for a split
+party-extension element whose projective action inverts a torus.  It does not
+assert that a chosen determinant-one matrix representative of that projective
+action has order two. -/
 theorem invertingInvolutionWitness
     (s : S.Splitting) {g : G}
     (hg_order : g * g = 1) (hg_action : s.InvertsKernel g) :

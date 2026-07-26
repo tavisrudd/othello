@@ -19,6 +19,13 @@ stabilizer states \cite{JiChenWeiYing2008}.  It is therefore important that
 the following result concerns a specific MDS/CSS family and says more than
 equality of two orbit partitions.
 
+Throughout, \emph{transversal} means a tensor product of one-site physical
+operators with the party labels fixed.  A \emph{fixed-party} symmetry has
+this form; a \emph{party-moving} symmetry additionally permutes tensor
+factors.  LU and LC equivalence allow a party permutation when it is
+displayed explicitly.  Logical groups called fixed-party below exclude
+such permutations.
+
 \begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
 Let \(q\) be a prime power, let \(m\geq2\), and let
 \(C,D\leq\F_q^{2m}\) be linear \([2m,m,m+1]_q\) MDS codes.
@@ -80,10 +87,16 @@ implementations is
 where \(T=\{\diag(a,a^{-1}):a\in\F_q^\times\}\).
 \end{corollary}
 
-The phase condition is a single nullity test:
-Proposition~\ref{prop:diagonal-multiplier-line} proves that
-\(\mathcal D(C,C^\perp)\) has dimension zero or one and that every nonzero
-vector in it has full support and is unique up to scalar.
+Put
+\[
+ \mathcal D(C,C^\perp)
+ =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
+\]
+The phase condition is the nullity test
+\(\dim\mathcal D(C,C^\perp)=1\).
+Proposition~\ref{prop:diagonal-multiplier-line} proves that this dimension
+is zero or one and that every nonzero vector in the space has full support
+and is unique up to scalar.
 
 The phrase ``modulo phase'' is essential.  Over an odd field the
 \(\mathrm{SL}_2(q)\) factor on the diagonally isodual branch has coherent
@@ -112,6 +125,12 @@ extension of this axis-recovery mechanism.  The contribution here is its
 uniform realization for equal-phase CSS states from linear
 \([2m,m,m+1]_q\) MDS codes, together with the transversal corollary.
 We do not claim a new LU--LC mechanism in the abstract.
+For binary stabilizer codes, Wirthm\"uller determines the identity
+component of the local-unitary automorphism group and gives a protected-qubit
+criterion for finiteness of the projective group
+\cite[Theorem~7 and Corollary~11]{Wirthmuller2011}.  Our finiteness
+corollary is the prime-power MDS/CSS specialization obtained after the
+stronger factorwise LU-to-LC statement.
 The qualifier is essential: arbitrary phased minimal-support
 \(\AME(6,d)\) states form infinitely many LU classes
 \cite{RamadasLakshminarayan2025}, and neither nonlinear orthogonal arrays
@@ -183,9 +202,39 @@ Tansuwannont, Takada, and Fujii give criteria for transversal Hadamard and
 phase operations relative to a compatible logical basis
 \cite{TansuwannontTakadaFujii2025}.  Their setting and conclusion differ
 from the odd-prime, one-logical-qudit exact fixed-party group here.
+Anderson and Jochym-O'Connor constrain diagonal transversal gates, including
+maps between two qubit stabilizer codes, to Clifford-hierarchy angles
+\cite[Propositions~3 and~4]{AndersonJochymOConnor2014}.  Sayginel
+et al.\ derive SWAP-transversal logical Cliffords from code automorphisms,
+including Pauli phase correction and logical-action recovery
+\cite{SayginelEtAl2025}.  Our conversion theorem instead proves that every
+factor of an arbitrary product-unitary conversion in the MDS/CSS family is
+Clifford, while the party-moving results determine the exact extension and
+factor set rather than an automorphism-search procedure.
+For qubit stabilizer codes, Dasu and Burton classify diagonal transversal
+Clifford gates on any number of identical code blocks by the code's
+\(\F_2\)-endomorphism algebra \cite[Theorems~5.5 and~6.1]{DasuBurton2025}.
+Their classification permits gates coupling corresponding qubits across
+several blocks but applies the same local tableau at every physical
+coordinate.  We instead allow an independent one-qudit factor at each
+coordinate, work over odd prime fields, and determine the exact one-block
+logical image for the half-dimensional MDS/CSS family.  The two results
+therefore classify complementary notions of transversality.
+Recent high-rate constructions obtain the full logical Clifford group by
+allowing fold-transversal or \(2\)-local transversal layers
+\cite{TansuwannontChanTakagi2026,Holmes2026}.  Those architectures encode
+many logical qubits and deliberately use interactions beyond a single
+fixed-party product layer.  Conversely, Chakraborty and Gottesman prove
+that a stabilizer code encoding more than one logical qubit cannot realize
+its full logical Clifford group by fully transversal gates
+\cite{ChakrabortyGottesman2026}.  The exact positive result here concerns
+one logical qudit, so it lies on the permitted side of that obstruction
+and determines which half-dimensional MDS encoders attain the full
+one-qudit group.
 Theorem~\ref{thm:logical-phase} identifies the geometric condition among
-six-arcs: self-association is exactly the condition for the kernel to
-exceed the split torus.  Our literature search for this comparison covered
+six-arcs: self-association is exactly the condition for the fixed-party
+logical symplectic image to exceed the split torus.  Our literature search
+for this comparison covered
 isometry-dual MDS constructions, quantum Reed--Solomon and polynomial-code
 gate constructions, self-dual CSS transversal Clifford gates, general
 prime-dimensional stabilizer Clifford synthesis, and restrictions on
@@ -200,6 +249,16 @@ Dolgachev and Ortland \cite[Chapter~III]{DolgachevOrtland1988}; for
 finite-projective arc background see Segre, Hirschfeld, and the modern
 survey of Ball and Lavrauw
 \cite{Segre1955,Hirschfeld1998,BallLavrauw2019}.
+Over characteristic zero, the GIT quotient of six ordered points in
+\(\mathbb P^2\) is a double cover of \(\mathbb P^4\), with Gale
+association exchanging the sheets and the self-associated locus forming
+the Igusa-quartic branch divisor
+\cite[Section~2.3]{HowardMillsonSnowdenVakil2008}.  That divisor is dual
+to the Segre cubic parametrizing six points on \(\mathbb P^1\).  Our
+six-arc phase theorem is the finite-field, fixed-label slice of this
+picture: the branch condition becomes diagonal isoduality, and the
+Veronese determinant detects the conic/GRS locus.  This interpretation is
+not used in the proof.
 
 The rest of the paper separates classification from explicit scalar
 certificates.  Section~\ref{sec:dictionary} fixes the arc, code, Weyl, and
@@ -208,7 +267,8 @@ and its transversal and GRS corollaries.
 Section~\ref{sec:pencil} proves the \(z\)-classification, and
 Section~\ref{sec:logical} proves the logical-Clifford phase theorem:
 \(\mathrm{SL}_2(q)\) on the GRS locus and a split torus off it.
-Section~\ref{sec:invariants} gives a uniform H3/GRS marginal separator, an
+Section~\ref{sec:invariants} gives a uniform \(H_3\) (icosahedral)/GRS
+marginal separator, an
 exact four-copy \(q=13\) witness, and the generic-constancy obstruction for
 fixed-copy scalars.  Appendix~\ref{sec:transport} calculates the
 exceptional divisor of that witness, redundant given

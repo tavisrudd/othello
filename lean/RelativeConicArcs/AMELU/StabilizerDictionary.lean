@@ -1,5 +1,6 @@
 import RelativeConicArcs.AMELU.Dictionary
 import Mathlib.LinearAlgebra.BilinearForm.Orthogonal
+import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Stabilizer closure for six-party equal-phase CSS states
@@ -121,6 +122,79 @@ theorem tensorWeylAction_Z_equalPhaseState (w : WeylConvention 𝔽)
 `⟨(a,b),(a',b')⟩ = a·b' - b·a'`. -/
 def pauliSymplecticPairing (v u : PauliLabel 𝔽) : 𝔽 :=
   v.1 ⬝ᵥ u.2 - v.2 ⬝ᵥ u.1
+
+/-- The standard Pauli symplectic pairing identifies the ambient label
+space with its linear dual.  This is the algebraic input used to correct a
+stabilizer character by conjugating with a Pauli label. -/
+noncomputable def pauliSymplecticToDual :
+    PauliLabel 𝔽 →ₗ[𝔽] Module.Dual 𝔽 (PauliLabel 𝔽) where
+  toFun v :=
+    { toFun := fun u => pauliSymplecticPairing v u
+      map_add' := by
+        intro u w
+        simp [pauliSymplecticPairing, dotProduct_add]
+        ring
+      map_smul' := by
+        intro a u
+        simp [pauliSymplecticPairing, dotProduct_smul]
+        ring }
+  map_add' := by
+    intro v w
+    apply LinearMap.ext
+    intro u
+    simp [pauliSymplecticPairing, add_dotProduct]
+    ring
+  map_smul' := by
+    intro a v
+    apply LinearMap.ext
+    intro u
+    simp [pauliSymplecticPairing, smul_dotProduct]
+    ring
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Nondegeneracy of the standard Pauli symplectic pairing. -/
+theorem pauliSymplecticToDual_injective :
+    Function.Injective (pauliSymplecticToDual (𝔽 := 𝔽)) := by
+  intro v w hvw
+  have hx : v.1 = w.1 := by
+    apply sub_eq_zero.mp
+    apply dotProduct_eq_zero (v.1 - w.1)
+    intro y
+    have h := LinearMap.congr_fun hvw (0, y)
+    have heq : v.1 ⬝ᵥ y = w.1 ⬝ᵥ y := by
+      simpa [pauliSymplecticToDual, pauliSymplecticPairing] using h
+    simpa [sub_dotProduct] using sub_eq_zero.mpr heq
+  have hz : v.2 = w.2 := by
+    apply sub_eq_zero.mp
+    apply dotProduct_eq_zero (v.2 - w.2)
+    intro y
+    have h := LinearMap.congr_fun hvw (y, 0)
+    have hneg := congrArg Neg.neg h
+    have heq : v.2 ⬝ᵥ y = w.2 ⬝ᵥ y := by
+      simpa [pauliSymplecticToDual, pauliSymplecticPairing] using hneg
+    simpa [sub_dotProduct] using sub_eq_zero.mpr heq
+  exact Prod.ext hx hz
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- Every linear character exponent on a Pauli-label subspace is induced by
+symplectic pairing with an ambient Pauli label.  For a Lagrangian stabilizer
+this supplies the Pauli phase correction used in the manuscript. -/
+theorem exists_pauliLabel_pairing_eq_dual
+    (L : Submodule 𝔽 (PauliLabel 𝔽)) (f : Module.Dual 𝔽 L) :
+    ∃ v : PauliLabel 𝔽, ∀ ell : L,
+      pauliSymplecticPairing v ell = f ell := by
+  have hdim :
+      Module.finrank 𝔽 (PauliLabel 𝔽) =
+        Module.finrank 𝔽 (Module.Dual 𝔽 (PauliLabel 𝔽)) := by
+    symm
+    exact Subspace.dual_finrank_eq
+  have hsurj : Function.Surjective (pauliSymplecticToDual (𝔽 := 𝔽)) :=
+    (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hdim).mp
+      pauliSymplecticToDual_injective
+  obtain ⟨v, hv⟩ := hsurj (Subspace.dualLift L f)
+  refine ⟨v, fun ell => ?_⟩
+  have h := LinearMap.congr_fun hv (ell : PauliLabel 𝔽)
+  simpa [pauliSymplecticToDual] using h
 
 /-- A Pauli-label subspace is isotropic when its symplectic pairing
 vanishes on every pair of its labels. -/

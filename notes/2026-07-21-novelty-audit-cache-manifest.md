@@ -31,6 +31,13 @@ Reports mirrored: `cocycle-gateway-novelty-check`, `novelty-galois-exceptional-p
 | arXiv:1812.02804     | 7fd0208e93b4 | Dechant, From the Trinity (A3,B3,H3) to an ADE correspondence (= Proc R Soc A 474:20180034, DOI 10.1098/rspa.2018.0034) | https://arxiv.org/abs/1812.02804 |
 | 10.1098/rsif.2010.0297 | 1ee19961e6b9 | Hattne & Lamzin, A moment invariant for evaluating the chirality of 3D objects (PMC3024826) | https://europepmc.org/articles/PMC3024826 |
 | eljc:v27i1p37        | db45d7e0d3a8 | Pace & Sonnino, One-factorisations of complete graphs in Desarguesian planes of odd square orders (EJC 27(1) 2020 #P1.37) | https://www.combinatorics.org/ojs/index.php/eljc/article/download/v27i1p37/pdf/ |
+| arXiv:1102.5715      | 5cfd43e7f314 | Wirthmüller, Automorphisms of stabilizer codes | https://arxiv.org/abs/1102.5715 |
+| arXiv:1409.8320      | 59a664150f0c | Anderson & Jochym-O'Connor, Classification of transversal gates in qubit stabilizer codes | https://arxiv.org/abs/1409.8320 |
+| arXiv:2409.18175     | f95889863485 | Sayginel et al., Fault-Tolerant Logical Clifford Gates from Code Automorphisms | https://arxiv.org/abs/2409.18175 |
+| arXiv:2507.10519     | da95db667162 | Dasu & Burton, A Classification of Transversal Clifford Gates for Qubit Stabilizer Codes | https://arxiv.org/abs/2507.10519 |
+| arXiv:2602.09788     | 87b1aa032352 | Tansuwannont, Chan & Takagi, Construction of the Full Logical Clifford Group for High-Rate Quantum Reed--Muller Codes | https://arxiv.org/abs/2602.09788 |
+| arXiv:2606.13521     | dccf2c829005 | Holmes, Quantum Logic Codes | https://arxiv.org/abs/2606.13521 |
+| arXiv:2602.13395     | ea38a71b1ea | Chakraborty & Gottesman, No-Go Theorem on Fault Tolerant Gadgets for Multiple Logical Qubits | https://arxiv.org/abs/2602.13395 |
 
 ## Attempted, recorded not-a-pdf (paywall/HTML — durable "don't re-fetch blind" markers)
 

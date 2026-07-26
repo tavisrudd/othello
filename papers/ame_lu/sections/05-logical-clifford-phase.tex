@@ -14,16 +14,45 @@ tensor symmetries is
 For \(q=p^e\) with \(e>1\), the full local Clifford group acts instead
 through \(\mathrm{Sp}_{2e}(\F_p)\); the displayed field-linear block
 group is then not the full local Clifford kernel.
-For an encoder view, the \emph{fixed-party symplectic kernel} means the
-image of \(\mathcal K_C\) on its input block.
+For an encoder view, the \emph{fixed-party logical symplectic image} means
+the image of \(\mathcal K_C\) on its input block.
 Corollary~\ref{cor:diagonal-isodual-transversal-group} identifies the
 all-length phase boundary as diagonal isoduality.  For six-arcs, classical
 self-association turns that intrinsic code condition into the conic
 criterion below.
 
+\begin{lemma}[Fixed-label self-association]\label{lem:six-arc-self-association}
+Let \(H\) be a rank-three \(3\times6\) matrix whose columns are a
+six-arc, and put \(C=\ker H\).  There is a nonsingular diagonal matrix
+\(S\) with \(SC=C^\perp\) if and only if the six columns of \(H\) lie on
+a conic.
+\end{lemma}
+
+\begin{proof}
+Let \(G\) be a \(3\times6\) generator matrix for \(C\).  Its columns are
+the labeled Gale transform of the columns of \(H\).  Since
+\(C^\perp=\operatorname{row}(H)\),
+\[
+ SC=C^\perp
+ \quad\Longleftrightarrow\quad
+ \operatorname{row}(GS)=\operatorname{row}(H)
+ \quad\Longleftrightarrow\quad
+ AGS=H\ \text{ for some }A\in\mathrm{GL}_3(q).
+\]
+Thus the condition is precisely fixed-label projective equivalence to the
+Gale transform.  The six-point self-association theorem identifies this
+fixed locus with the conic locus
+\cite[Section~2.3, especially the branch-locus and Veronese-determinant
+description]{HowardMillsonSnowdenVakil2008}.  Concretely, its equation is
+the determinant of the six quadratic evaluation rows
+\((x_i^2,y_i^2,z_i^2,x_iy_i,x_iz_i,y_iz_i)\): it vanishes exactly when one
+nonzero quadratic form contains all six columns.  Because the columns
+form an arc, that conic cannot be reducible.
+\end{proof}
+
 \begin{theorem}[Fixed-party logical phase]\label{thm:logical-phase}
 For an equal-phase CSS state from a six-arc over an odd prime field, the
-fixed-party symplectic kernel is
+fixed-party logical symplectic image is
 \[
 \begin{cases}
 \mathrm{SL}_2(q),&\text{if the arc is conic/GRS},\\
@@ -32,7 +61,7 @@ T=\{\diag(a,a^{-1}):a\in\F_q^\times\},&\text{if the arc is nonconic}.
 \]
 Thus every encoder view of a GRS tensor realizes the full one-qudit
 logical symplectic group from fixed-party symmetries.  Off the GRS locus,
-the fixed-party symplectic group is the split torus.  Any party-moving
+the fixed-party logical symplectic image is the split torus.  Any party-moving
 isoduality that exchanges the CSS \(X\)- and \(Z\)-spaces acts by the
 nontrivial Weyl-group element and generates the normalizer of \(T\)
 together with \(T\).
@@ -65,20 +94,8 @@ D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
 D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
 \end{array}                                             \tag{5.2}
 \]
-We use the following elementary MDS fact to control the off-diagonal
-blocks.  If \(E,F\leq\F_q^6\) are \([6,3,4]\) MDS codes and a diagonal
-matrix \(D\) satisfies \(DE\subseteq F\), then either \(D=0\) or \(D\)
-is nonsingular and \(DE=F\).  Indeed, if \(D\ne0\) and its diagonal
-support had size at most three, choose \(e\in E\) nonzero at a supported
-coordinate.  Then \(De\) would be a nonzero word of \(F\) of weight at
-most three.  Thus \(D\) has at least four nonzero entries.  Its kernel on
-\(E\) consists of words supported on at most the two remaining
-coordinates, so the distance-four property makes this kernel zero.
-Consequently \(DE=F\).  If a diagonal entry of \(D\) were zero, every
-word of \(F\) would vanish in that coordinate, which is impossible for
-an MDS code.
-
-Apply this fact to \(D_\gamma C\subseteq C^\perp\) and
+Apply Proposition~\ref{prop:diagonal-multiplier-line} to
+\(D_\gamma C\subseteq C^\perp\) and
 \(D_\beta C^\perp\subseteq C\).  A nondiagonal input block has a nonzero
 off-diagonal entry, hence the corresponding diagonal matrix is nonzero,
 nonsingular, and gives
@@ -92,17 +109,9 @@ then \(S^{-1}C^\perp=C\).  Taking \(D_\gamma=S\), respectively
 the lower and upper elementary unipotent input anchors.  Together with
 \(T\), these generate \(\mathrm{SL}_2(q)\).
 
-It remains to identify when the diagonal equivalence
-\(C\sim C^\perp\) occurs.  A parity-check matrix for \(C\) and a kernel
-basis for it represent associated, or Gale-dual, ordered six-arcs.
-The classical self-association theorem for six points in
-\(\PP^2\) says that these two sextuples are projectively equivalent
-exactly when the six original columns lie on a conic
-\cite{Coble1922}\cite[Chapter~III]{DolgachevOrtland1988}
-\cite[Section~2.3]{HowardMillsonSnowdenVakil2008}.  Equivalently, solving
-the multipliers in \((5.2)\) leaves the determinant of the six quadratic
-evaluation vectors.  Since the columns form an arc, the conic is
-nonsingular.  On it, the standard GRS dual multipliers realize the
+Lemma~\ref{lem:six-arc-self-association} identifies the diagonal
+equivalence \(C\sim C^\perp\) with the conic locus.  On it, the standard
+GRS dual multipliers realize the
 code--dual equivalence and hence every anchor in
 \(\mathrm{SL}_2(q)\); off it, the preceding implication excludes every
 nondiagonal anchor.
@@ -156,9 +165,9 @@ finite group calculation.
 
 Arithmetic symmetry jumps do not change the phase.  The
 characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
-and therefore retains the full \(\mathrm{SL}_2(17)\) kernel; its
+and therefore retains the full \(\mathrm{SL}_2(17)\) fixed-party image; its
 party image is \(S_4\), and the computed extension splits.  The
 characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
-fixed-party kernel is the split torus; its \(S_5\) party image also splits,
+fixed-party image is the split torus; its \(S_5\) party image also splits,
 and odd motion enlarges the logical linear group to \(N(T)\).  These are
 symmetry enhancements inside the two phases, not exceptions to \((5.1)\).

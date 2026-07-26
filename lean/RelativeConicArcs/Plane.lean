@@ -3,9 +3,9 @@ import Mathlib.Combinatorics.Configuration
 /-!
 # Finite projective-plane vocabulary
 
-This module is the incidence foundation for the formalization of
-`papers/arcs_complete_outside_conic`.  It builds on Mathlib's
-`Configuration.ProjectivePlane` rather than defining a second projective-plane structure.
+This module supplies the incidence vocabulary used for finite projective planes.  It builds
+on Mathlib's `Configuration.ProjectivePlane` rather than defining a second projective-plane
+structure.
 -/
 
 namespace RelativeConicArcs

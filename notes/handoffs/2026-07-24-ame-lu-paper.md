@@ -10,6 +10,49 @@ Discovery companion:
 
 ## Current status
 
+**C647 closed (2026-07-25): post-C562 literature and novelty audit.**
+Every theorem family incorporated after C562 was compared against the
+closest located prior art.  The exact all-prime-power MDS/CSS LU rigidity
+and odd-prime diagonal-isodual group dichotomy remain the paper's strongest
+family-specific contribution, but no firstness claim is added.  The
+introduction now credits Wirthmüller for connected binary stabilizer
+automorphisms and projective finiteness, Anderson--Jochym-O'Connor for
+qubit diagonal/inter-code transversal restrictions, and Sayginel et al.
+for automorphism-derived logical Cliffords with phase correction and
+logical-action recovery.  The audit records 17 individually discussed
+sources, exact search queries, read depths, cache hashes, authorized
+wording, and MathSciNet/Google Scholar/zbMATH gaps.  See
+`2026-07-25-c647-ame-lu-post-c562-novelty-audit.md`.
+
+**C645 closed (2026-07-25): artifact-aware minor revision and literature
+positioning.**  The abstract now ranks the arbitrary-length LU-to-LC
+theorem, factorwise transversal no-go, and exact diagonal-isodual group
+dichotomy ahead of the \(m=3\) applications.  The introduction compares
+the exact scope of Dasu--Burton's qubit multiblock matrix-algebra
+classification and adds the classical GIT double-cover/Igusa-quartic/
+Segre-cubic interpretation of the six-point phase theorem.  The trust
+section now distinguishes internal independent checks from external
+reproduction, stale Section 6 theorem numbers are corrected, and the two
+foreign Lean workflow reverse references are removed.  No new theorem
+branch was added.  Public deposit remains an author gate.  See
+`2026-07-25-c645-ame-lu-minor-revision-literature-positioning.md`.
+
+**C642 closed (2026-07-25): referee proof repair and post-repair cold reads.**
+The false linear identity \(N(T)=T\rtimes C_2\) was replaced by the exact
+odd-characteristic relation \(J^2=-I\), \(N(T)/T\cong C_2\); the separate
+projective party extensions in the twelve C624 examples still split.  The
+stabilizer-character phase correction and the exact Weyl-block relations
+are now kernel checked.  The conic matching/involution six-bound is a
+standalone case lemma, the trust presentation has exact replay commands and
+a compact table, the current 2026 transversal-Clifford comparison is in the
+introduction, and the generic-constancy statement now distinguishes its
+geometric open from finite rational points.  Full Lean, TeX, evidence, and
+release gates passed.  Two fresh readers independently identified
+stabilizer-AME rigidity, a global prime-field MDS--CSS orbit theorem modulo
+duality, and higher-dimensional Veronese phase geometry as the best new
+targets; none was silently added to this version.  See
+`2026-07-25-c642-ame-lu-referee-repair.md`.
+
 The paper-preparation scaffold is under `papers/ame_lu/`.  It follows the
 `beyond4_prs` preparation system: the manuscript is subordinate to a theorem
 adoption map, a claim/proof/novelty ledger, a verification map, an adversarial

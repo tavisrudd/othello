@@ -4,12 +4,14 @@ The rigidity theorem, the arc--AME dictionary, and generic constancy are
 conceptual proofs in the text.  The projective quotient uses displayed
 bracket identities and projectivities.  Its transition-map invariance and
 collision argument are proved in Section 4, while the 450 exact rational
-functions are certificate-supported.  Section 5 proves the MDS
-diagonal-multiplier and Gale-duality implications.  The party groups,
+functions are certificate-supported.
+Section~\ref{sec:rigidity} proves the general MDS diagonal-multiplier
+criterion.  Section~\ref{sec:logical} combines it with Gale duality to
+obtain the six-arc phase theorem.  The party groups,
 factor sets, complements, and torus actions in
 Corollary~\ref{cor:computed-party-splitting} are certificate-supported
 finite examples, not inputs to the uniform theorem.
-Section 6 proves the marginal trace/rank and incidence bridges; the H3
+Section 6 proves the marginal trace/rank and incidence bridges; the \(H_3\)
 determinants and \(q=13\) contractions are certificate-supported.
 Appendix~\ref{sec:transport} proves the systematic transport reduction; the cycle-cover
 determinants, assignment exhaustion, exact minors, and double-coset
@@ -27,14 +29,72 @@ directory,
 \]
 The full replay uses only the Python standard library, deterministic
 integer, rational, polynomial, and finite-field arithmetic, and canonical
-JSON serialization.  It includes independent paths appropriate to each
-claim: CSS versus direct-Lagrangian shortening, symbolic versus finite
-projectivity, chord concurrency versus stabilizer ranks, quotient minors
-versus finite-field elimination, and cycle-cover versus fraction-free
-transport determinants.  The exact files, hashes, domains, expected
+JSON serialization.  It includes separately implemented checks appropriate
+to each claim: CSS versus direct-Lagrangian shortening, symbolic versus
+finite projectivity, chord concurrency versus stabilizer ranks, quotient
+minors versus finite-field elimination, and cycle-cover versus
+fraction-free transport determinants.  These checks belong to one
+paper-owned Python package; they are not external independent
+reproductions.  The exact files, hashes, domains, expected
 outputs, and negative scopes are recorded in
 \texttt{supplement/EVIDENCE.md} and
 \texttt{supplement/EVIDENCE-MANIFEST.json}.
+On the reference machine the digest check takes under a second, the full
+evidence replay about six minutes, and each Lean aggregate under ten
+seconds.
+
+From the repository root, the exact formal replay is
+\begin{verbatim}
+python3 lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.Gates.AMELUAggregate \
+  RelativeConicArcs.Gates.AMELUAggregateAxioms \
+  --profile single --threads 1 \
+  --aggregate RelativeConicArcs.Gates.AMELUAggregateAxioms
+\end{verbatim}
+The checked release is then reproduced from \texttt{papers/ame\_lu/} by
+\begin{verbatim}
+make release-check
+\end{verbatim}
+The release identifier is content based:
+\texttt{release/RELEASE-MANIFEST.json} records the SHA-256 digest of every
+public byte and every file in the recursive formal dependency closure,
+including the Lean toolchain and build definitions.  The manifest, rather
+than a mutable working-tree name, is the immutable identity of the
+refereed local release; a public DOI or archive URL must be assigned by
+the author at deposit.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.25\linewidth}p{0.22\linewidth}p{0.43\linewidth}}
+\toprule
+Claim family & Proof mode & Machine trust / formal status\\
+\midrule
+LU-to-LC rigidity and no-go &
+manuscript proof plus Lean &
+unconditional kernel checking; standard Lean axioms only\\
+Pencil and six-arc classification &
+proof plus exact certificates &
+conditional Lean interface; geometric and holonomy inputs named\\
+\(H_3\) and \(q=13\) separators &
+proof plus exact certificates &
+finite graph core unconditional; trace/covariance and exact ranks named\\
+Diagonal-isodual logical groups &
+manuscript proof plus Lean &
+multiplier theorem unconditional; exact carrier interface conditional\\
+Twelve party splittings and transport &
+exact certificates plus abstract Lean &
+splitting algebra unconditional after a supplied complement; finite
+witnesses and transport matrices certificate supplied\\
+\bottomrule
+\end{tabular}
+\end{center}
+No module in the aggregate uses \texttt{sorry} or unsafe declarations.
+Native execution is confined to three finite graph cardinalities proved
+by \texttt{native\_decide}; the axiom terminal reports them separately.
+It prints declaration-level dependencies: the ordinary kernel-checked results use only
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound};
+all other finite evidence used by the paper is replayed by the Python
+supplement rather than imported as a Lean axiom.
 
 The trusted boundary is Python integer arithmetic, the exact-arithmetic
 implementations in the generators, deterministic Gaussian elimination,
@@ -90,8 +150,10 @@ trivializability independent of the chosen lifts, and trivializability is
 equivalent to a homomorphic splitting.  The companion
 \texttt{PartyExtensionSplitting} module proves that a complement supplies
 the trivializing cochain, semidirect-product equivalence, unique
-kernel--quotient coordinates, cardinality product, and the
-inverting-involution witness behind \(T\subset N(T)\).  The twelve concrete
+kernel--quotient coordinates, cardinality product, and the involutive
+party-extension lift whose conjugation action on \(T\) is inversion.
+This projective involution is distinct from the determinant-one matrix
+\(J\), which satisfies \(J^2=-I\).  The twelve concrete
 complements in Corollary~\ref{cor:computed-party-splitting} are exact
 certificate computations rather than kernel-checked finite tables.
 
@@ -107,10 +169,15 @@ closure, and factorwise transversal no-go are kernel checked in
 \texttt{DiagonalIsoduality} module proves the arbitrary-length MDS
 diagonal-multiplier lemma, the zero-or-one-dimensional multiplier space,
 the exact nullity test, and projective uniqueness of the witness ratios.
-The exact carrier dichotomy remains conditional: special-linearity, torus
+The \texttt{StabilizerDictionary} module proves that the Pauli symplectic
+pairing identifies the ambient label space with its dual and that every
+linear stabilizer-character exponent is induced by an ambient Pauli label;
+this is the phase-correction step used in Section~\ref{sec:rigidity}.
+The exact diagonal-isodual transversal-group dichotomy remains conditional:
+special-linearity, torus
 propagation, diagonal-duality propagation, the off-diagonal
 block-to-multiplier bridge, and the complete translation fiber remain named
-fields.  Section~3 proves these action-level inputs for arbitrary
+fields.  Section~\ref{sec:rigidity} proves these action-level inputs for arbitrary
 \([2m,m,m+1]\) MDS codes.  The fixed-copy generic-constancy proposition,
 the party-moving logical normalizer, and the determinant and double-coset
 inputs of the complete transport theorem are not formalized.
@@ -120,7 +187,7 @@ For each conditional structure, the statement-adequacy ledger records
 its fields individually.  Some fields are constructed in the displayed
 paper proof, such as the four deck projectivities and the marginal
 trace/rank reduction; some are mathematical implications supported by a
-paper-local certificate, such as the H3 determinant count and the
+paper-local certificate, such as the \(H_3\) determinant count and the
 four-copy rank evaluations; and some combine a prose construction with a
 certificate replay, such as the transport determinant and double-coset
 inputs.  These are hypotheses of formalized implications, not additional
@@ -160,10 +227,10 @@ logical-group theorem and the quantum part of the pencil classification
 are restricted to odd prime fields.  Over extension fields, Frobenius
 basis permutations are additional local Cliffords.  The scalar \(z\)
 is Frobenius-covariant, and
-Proposition~\ref{prop:frobenius-sector-divisors} determines each scalar
-exponent sector, but the two additive-Clifford bridges needed for a full
-orbit classification are outside the theorem package.  The H3 theorem is
-restricted to the stated
+Proposition~\ref{prop:frobenius-sector-divisors} determines the two
+divisors attached to each field automorphism, but the two additive-Clifford
+bridges needed for a full orbit classification are outside the theorem
+package.  Theorem~\ref{thm:lu-h3-grs} is restricted to the stated
 odd residue-field reductions, and the detector exceptions described in
 Appendix~\ref{sec:transport} do not alter the
 characteristic-uniform rigidity theorem.

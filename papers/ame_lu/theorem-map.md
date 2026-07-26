@@ -19,7 +19,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C622 | the exact odd-prime fixed-party projective transversal group is `F_q^2 ⋊ SL_2(q)` exactly for diagonally isodual `[2m,m,m+1]_q` MDS codes and `F_q^2 ⋊ T` otherwise | adopted intrinsic phase boundary | every odd prime `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS code | arbitrary-length diagonal-multiplier lemma, block converse, complete logical-Pauli fiber, and duality-shear propagation |
 | C631 | the diagonal multiplier space between two exact half-dimensional MDS codes has dimension at most one; the code-to-dual space gives an exact nullity test and a unique projective witness | adopted as the intrinsic coding-theoretic phase test | every finite field and exact linear `[2m,m,m+1]` MDS pair; Clifford-group consequence remains odd-prime | full-support shortening argument and kernel-checked multiplier-space, reconstruction, uniqueness, and ratio theorems |
 | C619 | the GRS propagation maps satisfy the `SL_2(q)` relations exactly; over odd fields the Weil lift splits the scalar extension on the linear factor, while the full affine one-qudit extension is non-split by the Weyl commutator | adopted lift-boundary audit | odd prime `q`, generalized and extended GRS tower; no claim about splitting the realized party-permutation extension | explicit conjugation formula, finite-field Heisenberg--Weil representation, and the nontrivial Pauli commutator |
-| C624/C629 | the realized party-permutation extensions split in twelve concrete pencil, GRS, enhanced-symmetry, and H3 rows; on every listed non-GRS/H3 row, odd party motion inverts `T` and gives `N(T)` | adopted as a computed structural corollary | exactly the twelve rows listed in `cor:computed-party-splitting`; no all-good-reduction or arbitrary-six-arc splitting claim | exhaustive exact local-symplectic enumeration, normalized factor sets, explicit complements and cochains; abstract splitting consequences kernel checked, concrete complements certificate checked |
+| C624/C629 | the realized party-permutation extensions split in twelve concrete pencil, GRS, enhanced-symmetry, and \(H_3\) rows; on every listed non-GRS/\(H_3\) row, odd party motion inverts `T` and gives `N(T)` | adopted as a computed structural corollary | exactly the twelve rows listed in `cor:computed-party-splitting`; \(N(T)/T\cong C_2\), but the determinant-one Weyl lift has \(J^2=-I\), so the linear torus-normalizer extension is not asserted to split; no all-good-reduction or arbitrary-six-arc splitting claim | exhaustive exact local-symplectic enumeration, normalized factor sets, explicit party-extension complements and cochains; abstract splitting consequences and the separate \(J\)-matrix relations kernel checked, concrete complements certificate checked |
 | C633 | each field-automorphism exponent has exact diagonal and Gale divisors; the explicit Gale multiplier, same-exponent sector disjointness, and automorphism equivariance of `G,A,B,z` hold on the admitted non-GRS pencil | adopted scalar extension-field structure | every odd finite field and every field automorphism; no full additive-Clifford orbit classification | unconditional ring and field algebra in `ExtensionFieldPencil`; the two representation-theoretic bridges needed for the orbit theorem remain named hypotheses |
 
 ## Stable source labels
@@ -28,6 +28,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:lc-pencil`: LC classification by `z`.
 - `thm:lu-h3-grs`: uniform H3/GRS LU separation.
 - `thm:logical-phase`: split-torus versus `SL_2(q)` logical phase.
+- `lem:six-arc-self-association`: fixed-label diagonal isoduality iff the six-arc lies on a conic.
 - `thm:q13-lu`: exact four-copy `q=13` separator.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
@@ -62,7 +63,7 @@ still depends on the claim, evidence, literature, and prose gates.
    fields, Frobenius already identifies unequal `z` values.
 4. **Operational phase theorem (`thm:logical-phase`,
    `cor:six-arc-fixed-party-group`,
-   `cor:computed-party-splitting`).** The fixed-party symplectic kernel is
+   `cor:computed-party-splitting`).** The fixed-party logical symplectic image is
    `SL_2(q)` on the GRS locus and the split torus off it, over odd prime
    fields.  Including logical Paulis, the exact projective groups are
    `F_q^2 ⋊ SL_2(q)` and `F_q^2 ⋊ T`.  In the twelve computed

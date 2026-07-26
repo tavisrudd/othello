@@ -118,6 +118,8 @@ open RelativeConicArcs.AMELU
 #print axioms isAME_equalPhaseState_arcKernel
 #print axioms projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent
 #print axioms tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace
+#print axioms pauliSymplecticToDual_injective
+#print axioms exists_pauliLabel_pairing_eq_dual
 #print axioms cssLabelSpace_isPauliLagrangian
 #print axioms mem_cssSupportedLabelSpace_iff_support_subset
 #print axioms equalPhaseState_hasMinimalComputationalSupport
@@ -146,6 +148,9 @@ open RelativeConicArcs.AMELU
 #print axioms not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences
 
 #print axioms fixedPartyKernel_eq_specialLinear_or_splitTorus
+#print axioms splitTorusWeylBlock_isSpecialLinear
+#print axioms splitTorusWeylBlock_mul_self
+#print axioms splitTorusWeylBlock_mul_splitTorusBlock
 #print axioms contractionMatchingRank_normalizeContractionPattern
 #print axioms contractionRankOrbitSum_permuteContractionPattern
 #print axioms q13_zFour_not_locallyUnitaryEquivalent_zTwelve

@@ -12,7 +12,7 @@ the formal-statement adequacy ledger, and the complete deterministic evidence
 supplement. `release/RELEASE-MANIFEST.json` fixes every included byte and also
 fixes the exact Lean toolchain and every project-owned AME--LU module,
 import gate, and axiom-audit terminal in the companion repository.
-The recursive formal closure contains 72 files, including the Lean
+The recursive formal closure contains 80 files, including the Lean
 toolchain and Lake/Nix build identities.  Two foreign-owned
 dependencies still violate the formal-artifact prose standard:
 `RelativeConicArcs/Plane.lean:7` reverse-references another paper directory,
