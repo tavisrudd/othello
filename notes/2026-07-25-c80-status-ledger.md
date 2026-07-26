@@ -38,6 +38,7 @@ is an input bank, not C80 status authority.
 | Uncovered-locus boundary rewrite | **FINITE-CERTIFIED; SUPERSEDED packaging** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Its explicit witnesses are superseded by `R_small` below. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
 | Bounded small-shell correspondence `R_small` | **PROVED soundness; SETTLED NEGATIVE uniformly** | The fixed incidence formula eliminates explicit `B_cc` pairings and gives `49/49 P` q17 and `69/69 P` q19 selected edges. The first q23 P control has `0/118` coverage, and all 181 replies to root opponent `(0,0)` miss the survivor. [Positive finite gate](2026-07-25-c80-q19-rank-one-incidence-shell.md), [q23 falsifier](2026-07-25-c80-q23-small-shell-falsifier.md) |
 | q23 defect-three update | **PROVED sound for one target; FINITE-CERTIFIED** | The unique minimum-defect follower has a three-point noncollinear mutually legal defect locus. Every defect move has two replies sending rank `3 -> 0`; with direct boundary replies elsewhere this gives `24/24` coverage and 50 sound edges. [Report](2026-07-25-c80-q23-defect-three-update.md) |
+| q23 recursive defect-rank survivor | **PROVED soundness; FINITE-CERTIFIED reach** | The well-founded `F_d` survivor uses `d=|Def|`, the `B_small` boundary, and strict defect-rank replies. All 118 outer fibres of the normalized q23 control enter `F_d`; 24,568 ranked states and 25,479 defect obligations are checked without minimax or the C54 value label. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -65,6 +66,7 @@ continuation object. They do **not** yet provide the uniform
 | Clebsch conic-matching quotient bridge | **SETTLED NEGATIVE** | Legal moves induce no matching on selected marks; live marks have negligible coverage; the full-conic degree grows with q. [Report](2026-07-25-c80-continuation-conic-matching-bridge.md) |
 | Greedy minimum continuation deficiency | **SETTLED NEGATIVE** | Exact `kappa` minimizers are mostly N on the q17 isolates and q19 control. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
 | Uniform bounded small-shell coverage | **SETTLED NEGATIVE** | On the q23 P target `S4(1,2,3,4)+(0,0)+(5,2)`, no opponent has an `R_small` reply (`0/118`); no alternative root reply after `(0,0)` enters the survivor (`0/181`). [Report](2026-07-25-c80-q23-small-shell-falsifier.md) |
+| Greedy recursive minimum-defect choice | **SETTLED NEGATIVE on the q23 control** | Only 27/118 outer fibres have a recursively sound minimum-rank reply. The first greedy branch reaches a rank-one state whose unique defect opponent has three replies and minimum successor rank one; a nonminimum outer reply restores descent. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
 
 These negatives rule out the named statements and natural domains. They do
 not prove that every bounded-formula proof object or every value-only factor
@@ -78,7 +80,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 defect rank | The minimum locus is classified and has a direct equivariant `3 -> 0` update. | Test the same lower-rank condition on every q23 outer fibre and extract the first nondecreasing obstruction. |
+| q23 defect rank | The recursive `F_d` survivor covers all 118 fibres of the normalized control. Every one of 7,986 outer followers passes one-step descent, but 91/118 fibres require a nonminimum-rank recursive choice. | A nonrecursive projective incidence rule selecting the farsighted reply, then tests on other q23 controls and other odd orders. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -86,15 +88,15 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Prove or falsify defect-rank descent as a directly updated growing-rank
-incidence datum, beginning with the complete q23 control fibre.
+Compress the q23 `F_d` response map into a nonrecursive projective incidence
+rule, beginning with the 91 fibres where minimum-rank choice fails.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-Apply defect-rank descent to every q23 outer fibre and extract the first
-defect opponent for which no reply has smaller rank.
+Explain why a higher-rank outer reply restores recursive descent at the first
+greedy obstruction, then test the rule across all 91 nonminimum fibres.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -107,4 +109,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap test defect-rank descent on every q23 outer fibre and extract the first nondecreasing obstruction
+go C80 cap extract a nonrecursive incidence rule for the 91 q23 fibres that require nonminimum defect rank

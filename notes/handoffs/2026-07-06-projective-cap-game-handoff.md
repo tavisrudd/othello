@@ -1273,6 +1273,24 @@ proved. Next test every q23 outer fibre and extract the first nondecreasing
 obstruction; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-q23-defect-three-update.md`](../2026-07-25-c80-q23-defect-three-update.md).
 
+**Recursive defect rank passes the complete q23 control, but greedy minimum
+rank is false (C80, 2026-07-25).** The well-founded survivor `F_d`, with
+`d=|Def|`, uses `B_small` at rank zero and requires every defect move to have
+a strict lower-rank reply back into `F_d`; nondefect moves already reply
+directly into `B_small`. Induction proves `F_d` P. On
+`S4(1,2,3,4)+(0,0)+(5,2)`, all 118 outer fibres enter `F_d`: all 7,986 legal
+outer followers pass the one-step rank test, and the recursive certificate
+visits 24,568 states and 25,479 defect obligations without minimax or the C54
+value label. The requested obstruction appears only for greedy choice:
+27/118 fibres have a recursively sound minimum-rank reply. The first failure
+starts with opponent `(6,3)`, minimum-rank reply `(12,22)`, and reaches a
+rank-one `Omega=0` state where defect opponent `(20,13)` has three replies
+but minimum successor rank one. Reply `(17,22)` starts at the higher rank 22
+and closes recursively. The live crown is a nonrecursive projective incidence
+rule selecting these farsighted higher-rank replies; the finite `F_d`
+recursion itself is not that rule, and C82 remains gated. Report+script+cert:
+[`../2026-07-25-c80-q23-defect-rank-descent.md`](../2026-07-25-c80-q23-defect-rank-descent.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
