@@ -517,6 +517,20 @@ witnesses, kernel invariants, and mystery ledger are in
 `2026-07-25-c623-ame-lu-extension-field-clifford.md`.  No manuscript source
 was edited.
 
+**C633 closed (2026-07-25): extension-field pencil-sector algebra
+formalized.**
+`RelativeConicArcs.AMELU.ExtensionFieldPencil` proves the diagonal
+Frobenius-sector divisor, the Frobenius--Gale divisor, its explicit
+six-coordinate multiplier and odd-characteristic zero criterion, and field-
+automorphism equivariance of the GRS quartic and pencil invariant `z`.  It
+packages the all-odd-prime-power Galois-`z` orbit theorem through two
+explicitly named bridges: extraction of a projective Frobenius sector from an
+additive Clifford equivalence, and construction of a Clifford from a Galois
+match.  Those representation-theoretic bridges remain conditional; the
+scalar geometry and theorem composition are kernel checked.  A dedicated
+import gate and axiom audit passed without modifying the manuscript.  See
+`2026-07-25-c633-ame-lu-extension-field-frobenius-lean.md`.
+
 **Post-C619 two-reader frontier (2026-07-25): exact frontiers closed;
 quantitative successor remains queued.**
 Two independent manuscript-only cold reads converged on the same research
@@ -594,6 +608,8 @@ C619 is closed.  Dependency order is authoritative:
 25. C629: explicit cochain trivialization, semidirect decomposition,
     cardinality product, and torus-normalizer inversion witness in Lean
     (complete; concrete complements remain externally certified).
+26. C633: extension-field pencil divisor algebra, Galois equivariance, and
+    conditional additive-Clifford orbit interface in Lean (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains
