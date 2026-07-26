@@ -35,6 +35,7 @@ is an input bank, not C80 status authority.
 | q17 frozen descent | **FINITE-CERTIFIED** | The q17 three-intruder domain closes by depth-two routing into `Y_NK`; q13/q17/q19 data do not prove uniform bounded depth. [Report](2026-07-23-c524-capover-core-depth2.md) |
 | Marked q17 defect thread | **FINITE-CERTIFIED** | Four bad fibres form one Klein-four orbit with common Gallai--Edmonds type and an adaptive `4 -> 2 -> 0` repair thread. [Report](2026-07-25-c80-tutte-defect-contraction.md) |
 | Tangent-plus-triple coverage identity | **PROVED; FINITE-CERTIFIED value census** | `kappa_T(x,y)=|Legal(T+x+y)|` has an exact pair-conflict plus collinear-triple formula. Minimum-`kappa` replies are value-unsound at q17/q19. [Report](2026-07-25-c80-tangent-triple-coverage-datum.md) |
+| Uncovered-locus boundary rewrite | **FINITE-CERTIFIED positive** | The q17 small loci are classified exactly. Rank-zero `B_cc`, plus one direct exchange for four q19 fibres, gives an opponent-complete value-pure correspondence: `49/49 P` at q17 and `67/67 P` at q19. Bounded algebraic format is not established. [Report](2026-07-25-c80-uncovered-locus-boundary-rewrite.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -74,7 +75,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-degree reply correspondence | Symmetry and transport are achievable; several natural carriers are value-impure. | A bounded algebraic proof datum whose individual edges are sound and whose update is direct. |
-| Uncovered-locus obligation | `kappa` exactly counts it; q17 minimal loci have sizes one to three. | A structural rewrite distinguishing the four P-carrying isolates from 18 N-only isolates and surviving q19. |
+| Uncovered-locus obligation | The q17 small loci are completely classified, and the `B_cc`/rank-one logical schema survives q19. | Compress the four q19 rank-one fibres without explicit growing pairings or reply lists. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -87,12 +88,12 @@ whose every opponent has a P-sound reply of strictly smaller Omega,
 eventually landing in B_cc.
 ```
 
-The immediate finite falsifier is narrower:
+The immediate compression test is narrower:
 
 ```text
-Classify the q17 kappa-one/two uncovered loci and test whether one direct
-incidence rewrite separates the P-carrying obligations from the N-only ones;
-then apply the same formula to the q19 control.
+Replace the explicit B_cc pairings and full reply fibres for the four q19
+rank-one exceptions by one direct, transport-natural algebraic incidence
+certificate, or exhibit a decisive growing-information obstruction.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -105,4 +106,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap classify the q17 kappa-one/two uncovered-locus obligations and test a direct rewrite
+go C80 cap compress the four q19 rank-one boundary fibres into a direct algebraic incidence certificate

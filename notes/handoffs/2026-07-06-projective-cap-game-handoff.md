@@ -1208,6 +1208,22 @@ uncovered loci, with the same formula tested on q19; C82 remains gated.
 Report+cert:
 [`../2026-07-25-c80-tangent-triple-coverage-datum.md`](../2026-07-25-c80-tangent-triple-coverage-datum.md).
 
+**The q17 uncovered loci are classified and a common q17/q19 sound finite
+rewrite now passes (C80, 2026-07-25).** Among q17 raw minimum-`kappa`
+isolate replies, the exact types are `K1` N, `K2` N, `2K1` P, `P3` N, and
+`K2 disjoint K1` P. Imposing the proved overload-zero `B_cc` boundary before
+minimizing `kappa` gives opponent-complete `49/49 P` fibres on every q17
+repair target. At q19 rank zero covers 47 of 51 opponents; one direct
+opponent/reply exchange into that boundary covers the four exceptions,
+giving `67/67 P` selected edges. All selected targets strictly reduce
+`Omega`, and the relation commutes with projective transport. This is the
+first common finite correspondence in the thread that is both complete and
+value-pure without a minimax query. It is not yet uniform: the `B_cc`
+pairings and rank-one response lists may grow with q and are not a bounded
+algebraic datum. Next compress the four q19 rank-one fibres directly; C82
+remains gated. Report+cert:
+[`../2026-07-25-c80-uncovered-locus-boundary-rewrite.md`](../2026-07-25-c80-uncovered-locus-boundary-rewrite.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
