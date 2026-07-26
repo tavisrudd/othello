@@ -93,9 +93,13 @@ bounded-degree joint detection remain the later carrier-extension layer.
   `RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**.
 - Warning-free single-file elaboration of
   `RelativeConicArcs/CarrierArcBound.lean`: **PASS**.
-- The import-only gates were extended to audit every declaration listed
-  above.  Their exact build and axiom-audit results are recorded in the
-  completion update after the shared build window.
+- Exact build of `RelativeConicArcs.Gates.ChowRestrictionDescent`: **PASS**,
+  19.80 seconds, maximum resident set size 1,382,932 KiB.
+- Exact build of `RelativeConicArcs.Gates.CarrierArcBound`: **PASS**,
+  8.75 seconds, maximum resident set size 1,411,808 KiB.
+- The joint trace-only aggregate gate: **PASS**.
+- The eleven new audited declarations depend only on `propext`,
+  `Classical.choice`, and `Quot.sound`.
 
 ## Extra-juice and Tao closeout
 

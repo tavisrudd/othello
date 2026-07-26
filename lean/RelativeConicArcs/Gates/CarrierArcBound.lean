@@ -8,7 +8,9 @@ for finite products, the affine degree bound obtained by dehomogenizing a homoge
 coordinate-free projective-zero divisibility for homogeneous binary forms, bounded-degree detection
 and exact-threshold classification by pairwise relatively prime degree-one divisors, nonsquareness
 of squarefree nonunits, and the composition of linewise roots with these statements into
-carrier-cardinality and threshold identities.
+carrier-cardinality and threshold identities.  It also checks irreducibility of total-degree-one
+forms, relative primality of restricted binary factors from nonzero coefficient determinants, and
+the resulting restricted-factor product divisibility theorem.
 
 It does not assert the projective incidence hypotheses that produce the line divisors, the
 squarefree dual-factor product, or that compatibility at the nodes makes each linewise residual
@@ -23,6 +25,10 @@ divisible by the restricted product of the preceding line equations.
 #print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZeros
 #print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_eq
 #print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_sq_eq
+#print axioms RelativeConicArcs.mvPolynomial_irreducible_of_totalDegree_eq_one
+#print axioms RelativeConicArcs.homogeneousLinearPolynomial_isRelPrime_of_binaryCoefficientDeterminant_ne_zero
+#print axioms RelativeConicArcs.pairwise_isRelPrime_planeLineRestrictedLinearFactors_of_determinant_ne_zero
+#print axioms RelativeConicArcs.fintypeProd_planeLineRestrictedLinearFactors_dvd_sub_of_projectiveZero_sq_eq
 #print axioms RelativeConicArcs.homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
 #print axioms RelativeConicArcs.homogenize_fintypeProd_X_sub_C_eq_prod_homogenize
 #print axioms RelativeConicArcs.prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C

@@ -3,11 +3,13 @@ import RelativeConicArcs.ChowRestrictionDescent
 /-!
 # Polynomial restriction and Frobenius-descent verification boundary
 
-This import-only module checks homogeneous linear substitution, restriction of a finite product of
-linear factors, the coefficient formula and affine-node factorization for a restricted
-plane-linear equation, injectivity of affine nodes under pairwise avoidance, simultaneous
-factorization of an incident line family, derivation of restricted nonvanishing from avoidance
-for a nontrivially indexed family, representative rescaling, the proportional
+This import-only module checks homogeneous scaling and evaluation naturality for projective-line
+restriction, restriction of a finite product of linear factors, the coefficient formula,
+Cauchy--Binet determinant identity, canonical projective zero, exact-shared-representative root
+compatibility, and affine-node factorization for a restricted plane-linear equation.  It also
+checks injectivity of affine nodes under pairwise avoidance, simultaneous factorization of an
+incident line family, derivation of restricted nonvanishing from avoidance for a nontrivially
+indexed family, representative rescaling, the proportional
 paired-factor identity and its square-scalar correction, automatic correction over perfect
 exponent-characteristic-two coefficient rings, and descent of extended linewise roots through a
 jointly detecting restriction family.  It also checks that equality of squared root values forces
@@ -19,6 +21,13 @@ of projective lines and a particular degree bound.
 -/
 
 #print axioms RelativeConicArcs.exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero
+#print axioms RelativeConicArcs.MvPolynomial.IsHomogeneous.eval_smul_point
+#print axioms RelativeConicArcs.eval_planeLineRestriction
+#print axioms RelativeConicArcs.binaryLinearCoefficientDeterminant_planeLineRestrictedCoefficients
+#print axioms RelativeConicArcs.eval_homogeneousLinearPolynomial_canonicalProjectiveZero
+#print axioms RelativeConicArcs.eval_planeCovector_pointOnParametrizedLine_canonicalRestrictedZero
+#print axioms RelativeConicArcs.eval_planeLineRestrictions_eq_of_pointOnParametrizedLine_eq
+#print axioms RelativeConicArcs.eval_eq_of_planeLineRestriction_sq_eq_at_shared_plane_representative
 #print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero
 #print axioms RelativeConicArcs.homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode
 #print axioms RelativeConicArcs.exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
