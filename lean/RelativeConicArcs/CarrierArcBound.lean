@@ -2,6 +2,7 @@ import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Algebra.Polynomial.Homogenize
 import Mathlib.Algebra.Polynomial.RingDivision
 import Mathlib.Algebra.Squarefree.Basic
 import Mathlib.RingTheory.Coprime.Lemmas
@@ -24,7 +25,9 @@ The extension induction is also formalized: a correction that fixes one new rest
 vanishing on all restrictions already treated produces a simultaneous extension over any finite
 family.  Surjectivity of coordinate-hyperplane restriction constructs that correction whenever
 the new residual is divisible by the restricted product of the previous line equations.  The
-module does not derive this residual divisibility from projective node compatibility.
+distinct-affine-node factor theorem and its homogenized binary-form version provide the polynomial
+divisibility mechanism; identifying their node factors with the restricted equations remains a
+geometric hypothesis.
 -/
 
 namespace RelativeConicArcs
@@ -58,6 +61,87 @@ theorem fintypeProd_X_sub_C_dvd_sub_of_injective_eval_eq
   apply fintypeProd_X_sub_C_dvd_of_injective_roots node hnode
   intro i
   rw [Polynomial.IsRoot, Polynomial.eval_sub, hagree i, sub_self]
+
+/-- After choosing an affine chart, agreement at distinct nodes gives divisibility of the
+degree-`degree` homogenized residual by the homogenized product of the node factors. -/
+theorem homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
+    (node : ι → K) (hnode : Function.Injective node)
+    (target current : Polynomial K) (degree : ℕ)
+    (hcard : Fintype.card ι ≤ degree)
+    (hdegree : (target - current).natDegree ≤ degree)
+    (hagree : ∀ i, target.eval (node i) = current.eval (node i)) :
+    Polynomial.homogenize
+        (∏ i, (Polynomial.X - Polynomial.C (node i)))
+        (Fintype.card ι) ∣
+      Polynomial.homogenize (target - current) degree := by
+  let nodeProduct : Polynomial K :=
+    ∏ i, (Polynomial.X - Polynomial.C (node i))
+  have hdiv : nodeProduct ∣ target - current :=
+    fintypeProd_X_sub_C_dvd_sub_of_injective_eval_eq
+      node hnode target current hagree
+  by_cases hresidual : target - current = 0
+  · simp [hresidual]
+  obtain ⟨quotient, hquotient⟩ := hdiv
+  have hproductDegree :
+      nodeProduct.natDegree = Fintype.card ι := by
+    simp [nodeProduct]
+  have hproductNe : nodeProduct ≠ 0 := by
+    dsimp [nodeProduct]
+    exact Finset.prod_ne_zero_iff.mpr fun i _ =>
+      Polynomial.X_sub_C_ne_zero (node i)
+  have hquotientNe : quotient ≠ 0 := by
+    intro hzero
+    apply hresidual
+    simpa [hzero] using hquotient
+  have hquotientDegree :
+      quotient.natDegree ≤ degree - Fintype.card ι := by
+    have hmulDegree :
+        (target - current).natDegree =
+          nodeProduct.natDegree + quotient.natDegree := by
+      rw [hquotient, Polynomial.natDegree_mul hproductNe hquotientNe]
+    omega
+  refine ⟨Polynomial.homogenize quotient (degree - Fintype.card ι), ?_⟩
+  rw [← Polynomial.homogenize_mul nodeProduct quotient
+    (by rw [hproductDegree]) hquotientDegree]
+  rw [Nat.add_sub_of_le hcard, ← hquotient]
+
+/-- For homogeneous binary forms, affine-node agreement yields divisibility of their difference
+by the homogenized product of the corresponding node factors. -/
+theorem homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
+    (node : ι → K) (hnode : Function.Injective node)
+    (target current : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (htarget : target.IsHomogeneous degree)
+    (hcurrent : current.IsHomogeneous degree)
+    (hcard : Fintype.card ι ≤ degree)
+    (haffineDegree :
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
+        MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).natDegree ≤ degree)
+    (hagree :
+      ∀ i,
+        (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target).eval (node i) =
+          (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).eval (node i)) :
+    Polynomial.homogenize
+        (∏ i, (Polynomial.X - Polynomial.C (node i)))
+        (Fintype.card ι) ∣
+      target - current := by
+  have hdvd :=
+    homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
+      node hnode
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target)
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current)
+      degree hcard haffineDegree hagree
+  have hhomogeneous : (target - current).IsHomogeneous degree :=
+    htarget.sub hcurrent
+  have hhomogenize :
+      Polynomial.homogenize
+          (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
+            MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current)
+          degree =
+        target - current := by
+    apply Polynomial.homogenize_eq_of_isHomogeneous hhomogeneous
+    simp
+  rw [hhomogenize] at hdvd
+  exact hdvd
 
 end DistinctPolynomialRoots
 
