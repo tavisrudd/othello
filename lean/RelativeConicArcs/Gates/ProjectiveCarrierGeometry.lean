@@ -33,3 +33,4 @@ projectivized arc or identify a particular dual Chow product.
 #print axioms RelativeConicArcs.exists_finset_homogeneous_carrierRoot_extension
 #print axioms RelativeConicArcs.exists_finset_homogeneous_carrierRoot_extension_of_coordinateCharts
 #print axioms RelativeConicArcs.card_le_two_mul_degree_of_coordinateCharts_carrierRoots
+#print axioms RelativeConicArcs.fintype_card_le_two_mul_degree_of_coordinateCharts_carrierRoots

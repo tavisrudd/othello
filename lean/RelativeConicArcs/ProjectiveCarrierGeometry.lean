@@ -840,6 +840,36 @@ theorem card_le_two_mul_degree_of_coordinateCharts_carrierRoots
   apply hnonsquare
   exact ⟨G, sub_eq_zero.mp hzero⟩
 
+/-- Finite-family form of the charted carrier bound, with no hypotheses outside the indexed
+carrier family. -/
+theorem fintype_card_le_two_mul_degree_of_coordinateCharts_carrierRoots
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (chart : ι → PlaneLineCoordinateChart K)
+    (ambient : MvPolynomial (Fin 3) K)
+    (root : ι → MvPolynomial (Fin 2) K)
+    (degree : ℕ)
+    (hambientHomogeneous : ambient.IsHomogeneous (2 * degree))
+    (hrootHomogeneous : ∀ x, (root x).IsHomogeneous degree)
+    (hsquare :
+      ∀ x,
+        planeLineRestriction (chart x).lineCoordinates ambient =
+          (root x) ^ 2)
+    (hrestrictedNonzero :
+      ∀ ⦃x y⦄, x ≠ y →
+        planeLineRestrictedCoefficients
+          (chart x).lineCoordinates (chart y).center ≠ 0)
+    (hnoncollinear :
+      ∀ ⦃x y z⦄, x ≠ y → x ≠ z → y ≠ z →
+        planeVectorDeterminant
+          (chart x).center (chart y).center (chart z).center ≠ 0)
+    (hnonsquare :
+      ¬∃ G : MvPolynomial (Fin 3) K, ambient = G ^ 2) :
+    Fintype.card ι ≤ 2 * degree := by
+  simpa using
+    card_le_two_mul_degree_of_coordinateCharts_carrierRoots
+      chart ambient root degree Finset.univ hambientHomogeneous
+      hrootHomogeneous hsquare hrestrictedNonzero hnoncollinear hnonsquare
+
 end CarrierResidualDivisibility
 
 end RelativeConicArcs
