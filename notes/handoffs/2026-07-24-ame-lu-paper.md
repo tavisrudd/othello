@@ -431,6 +431,19 @@ fiber hypothesis.  Both are included in the aggregate axiom audit, which
 passes with only `propext`, `Classical.choice`, and `Quot.sound`.  See
 `2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
+**Post-C619 two-reader frontier (2026-07-25): three successors queued.**
+Two independent manuscript-only cold reads converged on the same research
+frontiers.  C622, the highest-EV successor, tests the length-generic exact
+fixed-party dichotomy `F_q^2 ⋊ SL_2(q)` precisely for diagonally isodual MDS
+codes and `F_q^2 ⋊ T` otherwise.  C624 computes the actual nonabelian
+party-permutation extensions for the first pencil, enhanced-symmetry, GRS,
+and H3 examples.  C623 runs the `q=9,25,27` falsifier gate for extension-field
+Clifford equivalence before attempting Desarguesian-spread reconstruction.
+C581 is correspondingly narrowed to quantitative approximate rigidity after
+C623.  The complete synthesis, secondary questions, underdeveloped
+connections, and EV rationale are in
+`2026-07-25-ame-lu-two-cold-read-frontier.md`.
+
 ## Completion program
 
 The complete preparation, audit, formalization, and release program through
@@ -517,11 +530,13 @@ invariant.  C619 separates it from the scalar lift problem: the GRS linear
 symplectic factor splits by the odd-field Weil representation, while the full
 affine one-qudit extension is non-split by the Heisenberg commutator.
 
-**Token-constrained completion route:** the principal `ame-lu` completion
-program is closed through C619.  Do not run optional C581 without selecting
-that upgrade explicitly.  The next cross-lane route is C553 and then the
-coordinated build-system extraction.  The authoritative three-session
-protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
+**Token-constrained completion route:** the principal `ame-lu` Version-1
+completion program is closed through C619.  The post-Version-1 research
+frontier is C622 first, then C624 by immediate EV, with C623 as the deeper
+independent extension-field gate; do not run C581 before C623.  The next
+cross-lane route remains C553 and then the coordinated build-system
+extraction.  The authoritative three-session protocol is
+`notes/2026-07-25-c287-token-efficient-execution.md`.
 
 ## Completion gates
 
