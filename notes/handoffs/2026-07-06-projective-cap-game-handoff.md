@@ -1412,6 +1412,20 @@ branching or an ancestry collision would falsify injective transport.
 C82 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-replacement-lineage.md`](../2026-07-26-c80-q23-replacement-lineage.md).
 
+**The next exact replacement passes the same injective charge but is not a
+new projective type (C80, 2026-07-26).** Continuing the canonical q23 order
+after the first edge finds another rank-27 target on control index 20. Its
+unique blocking exchange creates one new defect, retains one old defect,
+removes the other 26, and lands in `F_del`; ancestral support again drops
+`27→2`, with no branching or collision. The same selected-secant and
+boundary-endpoint transport gives the bounded incidence flag, and an
+independent determinant engine agrees. However, a unique `PGL_2(23)`
+transporter carries the entire marked flag to the first replacement edge.
+This confirms equivariance but tests only one marked projective type. Next
+canonicalize later replacement flags and stop at the first new orbit; C82
+remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-next-replacement-ancestry.md`](../2026-07-26-c80-q23-next-replacement-ancestry.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

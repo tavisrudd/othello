@@ -1,0 +1,948 @@
+{
+  "ancestral_charge": {
+    "ancestral_labels": {
+      "(20, 18)": [
+        15,
+        16
+      ],
+      "(8, 3)": [
+        8,
+        3
+      ]
+    },
+    "branching": 1,
+    "causal_parent": [
+      15,
+      16
+    ],
+    "common_rank_zero_replies": [
+      [
+        14,
+        7
+      ]
+    ],
+    "damaged_former_boundaries": [
+      {
+        "after_opponent_legal_locus": [
+          [
+            8,
+            3
+          ]
+        ],
+        "causal_selected_pivots": {
+          "(5, 2)": [
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        "former_boundary_reply": [
+          13,
+          17
+        ],
+        "former_kind": "two_nonconflicting_moves",
+        "former_legal_locus": [
+          [
+            5,
+            2
+          ],
+          [
+            8,
+            3
+          ]
+        ],
+        "killed_endpoints": [
+          [
+            5,
+            2
+          ]
+        ]
+      }
+    ],
+    "full_root_coverage": {
+      "deletion_witness_count_range": [
+        1,
+        11
+      ],
+      "lineage_transport_fibres": 1,
+      "strict_deletion_fibres": 26,
+      "successor_in_F_del": true,
+      "uncovered_fibres": 0
+    },
+    "independent_reference_boundaries": {
+      "former": [
+        {
+          "kind": "two_nonconflicting_moves",
+          "remaining_legal": [
+            [
+              5,
+              2
+            ],
+            [
+              8,
+              3
+            ]
+          ],
+          "reply": [
+            13,
+            17
+          ]
+        }
+      ],
+      "transported": [
+        {
+          "kind": "two_nonconflicting_moves",
+          "remaining_legal": [
+            [
+              8,
+              3
+            ],
+            [
+              20,
+              18
+            ]
+          ],
+          "reply": [
+            18,
+            21
+          ]
+        }
+      ]
+    },
+    "independent_reference_defects": {
+      "after_opponent": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          22
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          20,
+          18
+        ]
+      ],
+      "after_reply": [
+        [
+          8,
+          3
+        ],
+        [
+          20,
+          18
+        ]
+      ],
+      "before": [
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          16
+        ],
+        [
+          6,
+          22
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          21
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          11,
+          18
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          15,
+          20
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          18,
+          21
+        ],
+        [
+          20,
+          17
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          21,
+          3
+        ],
+        [
+          22,
+          9
+        ]
+      ]
+    },
+    "injective": true,
+    "new_boundaries": {
+      "(14, 7)": [
+        {
+          "kind": "two_nonconflicting_moves",
+          "remaining_legal": [
+            [
+              8,
+              3
+            ],
+            [
+              20,
+              18
+            ]
+          ],
+          "reply": [
+            18,
+            21
+          ]
+        }
+      ]
+    },
+    "new_defect": [
+      20,
+      18
+    ],
+    "old_label_count": 27,
+    "projective_incidence": {
+      "killing_secant": {
+        "killed_boundary_endpoint": [
+          5,
+          2
+        ],
+        "line_coefficients": [
+          1,
+          19,
+          3
+        ],
+        "opponent_parent": [
+          15,
+          16
+        ],
+        "selected_pivot": [
+          1,
+          1
+        ]
+      },
+      "replacement_construction": {
+        "intersection": [
+          20,
+          18
+        ],
+        "line_1": [
+          [
+            5,
+            2
+          ],
+          [
+            14,
+            7
+          ]
+        ],
+        "line_2": [
+          [
+            13,
+            17
+          ],
+          [
+            18,
+            21
+          ]
+        ]
+      }
+    },
+    "projective_orbit_comparison": {
+      "current_flag": {
+        "common_rank_zero_reply": [
+          14,
+          7
+        ],
+        "killed_boundary_mate": [
+          5,
+          2
+        ],
+        "new_boundary_reply": [
+          18,
+          21
+        ],
+        "old_boundary_reply": [
+          13,
+          17
+        ],
+        "opponent_parent": [
+          15,
+          16
+        ],
+        "replacement_defect": [
+          20,
+          18
+        ],
+        "reply": [
+          6,
+          22
+        ],
+        "retained_defect": [
+          8,
+          3
+        ],
+        "secant_pivot": [
+          1,
+          1
+        ]
+      },
+      "full_marked_flag_is_transport_copy": true,
+      "previous_flag": {
+        "common_rank_zero_reply": [
+          10,
+          13
+        ],
+        "killed_boundary_mate": [
+          22,
+          9
+        ],
+        "new_boundary_reply": [
+          11,
+          3
+        ],
+        "old_boundary_reply": [
+          5,
+          13
+        ],
+        "opponent_parent": [
+          12,
+          15
+        ],
+        "replacement_defect": [
+          21,
+          17
+        ],
+        "reply": [
+          22,
+          14
+        ],
+        "retained_defect": [
+          17,
+          19
+        ],
+        "secant_pivot": [
+          4,
+          6
+        ]
+      },
+      "previous_replacement_state": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          13,
+          7
+        ]
+      ],
+      "state_transporter_count": 1,
+      "transported_flag": {
+        "common_rank_zero_reply": [
+          10,
+          13
+        ],
+        "killed_boundary_mate": [
+          22,
+          9
+        ],
+        "new_boundary_reply": [
+          11,
+          3
+        ],
+        "old_boundary_reply": [
+          5,
+          13
+        ],
+        "opponent_parent": [
+          12,
+          15
+        ],
+        "replacement_defect": [
+          21,
+          17
+        ],
+        "reply": [
+          22,
+          14
+        ],
+        "retained_defect": [
+          17,
+          19
+        ],
+        "secant_pivot": [
+          4,
+          6
+        ]
+      },
+      "unique_pgl2_matrix": [
+        1,
+        20,
+        12,
+        22
+      ]
+    },
+    "rank_zero_replies": {
+      "(20, 18)": [
+        {
+          "omega": 0,
+          "remaining_legal": [
+            [
+              5,
+              10
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              18,
+              21
+            ]
+          ],
+          "reply": [
+            14,
+            7
+          ]
+        }
+      ],
+      "(8, 3)": [
+        {
+          "omega": 0,
+          "remaining_legal": [
+            [
+              5,
+              10
+            ],
+            [
+              18,
+              21
+            ],
+            [
+              20,
+              18
+            ]
+          ],
+          "reply": [
+            14,
+            7
+          ]
+        }
+      ]
+    },
+    "retained_defect": [
+      8,
+      3
+    ],
+    "strict_support_drop": 25,
+    "surviving_label_count": 2
+  },
+  "domain": {
+    "control_order": "C54 canonical P-reply order",
+    "edge_order": "lexicographic opponent then reply cell",
+    "known_edge_skipped": [
+      [
+        8,
+        4
+      ],
+      [
+        13,
+        7
+      ]
+    ],
+    "q": 23,
+    "start_control_zero_based": 20,
+    "stop_condition": "first later outer target in F_d outside F_del"
+  },
+  "input_sha256": {
+    "notes/2026-07-09-codex-q23-bucket-certification.md": "bcb26ebc7b7182e031fef47f85d884825a79150e17a09d3c232490e7b1fd525d",
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_central_involution_rank_datum.py": "7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1",
+    "rust/scripts/c80_continuation_conic_matching_bridge.py": "1a0990da6359597994874b1f72d2432b53bf6c2030f5e116632790d297ad727f",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_history_torus_obligation_rewrite.py": "6a1e005cd4aa962ab628c6c92b1185a15557563e9e260ff8fc4926a8bd029d00",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_q19_rank_one_incidence_shell.py": "340f7f46b3189420b2ba2517469271fbd1ced68051a7c6988353267795fa1323",
+    "rust/scripts/c80_q23_defect_rank_descent.py": "c64a5b9fe05a49525cebe97bc92d89b2629066f0d46d2e05441e21764da34295",
+    "rust/scripts/c80_q23_defect_three_update.py": "4e4a97d5c76fd7951885cef9ca0f9e7f26a13dbef1209be97616eaa2485a802f",
+    "rust/scripts/c80_q23_obligation_deletion_rewrite.py": "9d3542a47d998b65d01f3599c259b8175b144b95ccad1bc1fb2c0ea9adcbbb01",
+    "rust/scripts/c80_q23_obligation_deletion_sweep.py": "71147cef27db6f9a73df7913044cbdef66514dc97da8573fea9f0af2fa76bbd9",
+    "rust/scripts/c80_q23_rank_zero_correspondence.py": "e2a6add73471702695cd39683fd0b55c35af2e70bb1979f85a6bda1aa6f2bee0",
+    "rust/scripts/c80_q23_replacement_lineage.py": "dbf2d7aa497cea113f0c02391170fd1832fef371e2f4c87466955acbc1081e60",
+    "rust/scripts/c80_q23_small_shell_falsifier.py": "469238cea7af51daf0ba21d17c609074e1fd6d9c2d1d62e840565ec0df5ef198",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tangent_triple_coverage_datum.py": "f7bd4d77d21d607422a7186f96c704cfd1a63a67fee90f6188a08ecdce2354cd",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef",
+    "rust/scripts/c80_uncovered_locus_boundary_rewrite.py": "ee693d6112f9b79e776ccd94d0552984316b46a8fd997ba93cd57f9c476a8de5"
+  },
+  "next_replacement_target": {
+    "blocking_obligations": [
+      {
+        "F_d_witness_count": 1,
+        "opponent": [
+          15,
+          16
+        ],
+        "witnesses": [
+          {
+            "after_opponent_defects": [
+              [
+                5,
+                10
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                8,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                9,
+                11
+              ],
+              [
+                14,
+                7
+              ],
+              [
+                20,
+                18
+              ]
+            ],
+            "after_reply_defects": [
+              [
+                8,
+                3
+              ],
+              [
+                20,
+                18
+              ]
+            ],
+            "created_by_opponent": [
+              [
+                20,
+                18
+              ]
+            ],
+            "created_by_reply": [],
+            "new_defects": [
+              [
+                20,
+                18
+              ]
+            ],
+            "removed_old_defects": [
+              [
+                5,
+                10
+              ],
+              [
+                5,
+                16
+              ],
+              [
+                6,
+                22
+              ],
+              [
+                8,
+                4
+              ],
+              [
+                8,
+                16
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                9,
+                11
+              ],
+              [
+                9,
+                21
+              ],
+              [
+                11,
+                17
+              ],
+              [
+                11,
+                18
+              ],
+              [
+                14,
+                7
+              ],
+              [
+                14,
+                13
+              ],
+              [
+                15,
+                2
+              ],
+              [
+                15,
+                13
+              ],
+              [
+                15,
+                16
+              ],
+              [
+                15,
+                20
+              ],
+              [
+                16,
+                7
+              ],
+              [
+                16,
+                9
+              ],
+              [
+                16,
+                22
+              ],
+              [
+                17,
+                15
+              ],
+              [
+                18,
+                7
+              ],
+              [
+                18,
+                21
+              ],
+              [
+                20,
+                17
+              ],
+              [
+                20,
+                21
+              ],
+              [
+                21,
+                3
+              ],
+              [
+                22,
+                9
+              ]
+            ],
+            "reply": [
+              6,
+              22
+            ],
+            "retained_old_defects": [
+              [
+                8,
+                3
+              ]
+            ],
+            "successor_in_F_del": true
+          }
+        ]
+      }
+    ],
+    "control_index_zero_based": 20,
+    "defect_rank": 27,
+    "defects": [
+      [
+        5,
+        10
+      ],
+      [
+        5,
+        16
+      ],
+      [
+        6,
+        22
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        8,
+        16
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        9,
+        11
+      ],
+      [
+        9,
+        21
+      ],
+      [
+        11,
+        17
+      ],
+      [
+        11,
+        18
+      ],
+      [
+        14,
+        7
+      ],
+      [
+        14,
+        13
+      ],
+      [
+        15,
+        2
+      ],
+      [
+        15,
+        13
+      ],
+      [
+        15,
+        16
+      ],
+      [
+        15,
+        20
+      ],
+      [
+        16,
+        7
+      ],
+      [
+        16,
+        9
+      ],
+      [
+        16,
+        22
+      ],
+      [
+        17,
+        15
+      ],
+      [
+        18,
+        7
+      ],
+      [
+        18,
+        21
+      ],
+      [
+        20,
+        17
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        21,
+        3
+      ],
+      [
+        22,
+        9
+      ]
+    ],
+    "history_reply": [
+      7,
+      5
+    ],
+    "omega": 63,
+    "outer_opponent": [
+      12,
+      19
+    ],
+    "outer_reply": [
+      19,
+      14
+    ],
+    "state_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        12,
+        19
+      ],
+      [
+        19,
+        14
+      ]
+    ]
+  },
+  "schema": "c80-q23-next-replacement-ancestry-v1",
+  "search_counts": {
+    "F_d_edges": 513,
+    "F_del_edges": 511,
+    "known_replacement_edges_skipped": 1,
+    "legal_reply_candidates": 2947,
+    "opponent_fibres": 46
+  },
+  "source": "rust/scripts/c80_q23_next_replacement_ancestry.py",
+  "status": "FOUND"
+}
