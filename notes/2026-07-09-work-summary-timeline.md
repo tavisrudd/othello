@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-25**, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-26**, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -592,7 +592,7 @@ five, six, and seven.
   Hadamard/signed-gluing block. The original universal metaplectic/theta roof is a recorded no-go,
   not a hidden casualty.
 
-## Week 8 — Jul 24–25 · Four manuscripts cross local maturity gates
+## Week 8 — Jul 24–26 · Manuscripts cross local maturity gates, then get cut back
 
 - **Jul 24 — the arcs paper acquires its structural capstone.**
   The prescribed-hole defect identity was upgraded from a local counting tool to a global rigidity
@@ -645,6 +645,93 @@ five, six, and seven.
   formal aggregate, and the projective-finiteness corollary has its own completed Lean module but
   has not yet been wired into that aggregate and axiom audit. The full Choi/encoder construction and
   exact GRS transversal-group computation still sit on the manuscript side of the trust boundary.
+
+- **Jul 25 — the AME lane generalizes past its own paper; relconic closes its Lean gate; arcs is
+  reframed.**
+  `ame-lu` ran C601–C649 in one day and the lane's own headline moved twice. C601/C602 landed the
+  Lean LU-to-LC rigidity chain and its full trust audit; C609 assembled the uniform-rigidity V1;
+  C612/C613 closed the general rigidity terminal and the transversal-Clifford consequence;
+  C614/C615/C617/C618/C619/C622 added higher-`m` applications, projective automorphism packaging,
+  the automorphism exact sequence, the nonabelian extension class, the GRS splitting obstruction and
+  the diagonal-isoduality dichotomy; C623/C624/C629/C631/C633 supplied extension-field Clifford data,
+  party-extension examples and their formalizations. **C642 was a referee repair that changed a
+  statement:** the linear identity `N(T) = T ⋊ C₂` is false and was replaced by the exact
+  odd-characteristic relation `J² = −I`, `N(T)/T ≅ C₂`. **C647**'s post-C562 novelty audit recorded
+  17 individually discussed sources with read depths, cache hashes and named database gaps, credited
+  Wirthmüller, Anderson–Jochym-O'Connor and Sayginel et al. at point of use, and **added no firstness
+  claim**. Then **C649 generalized the paper out from under itself**: full-Weyl rigidity holds for
+  every stabilizer `AME(2m,q)` state with arbitrary additive prime-power stabilizers, so CSS,
+  equal-phase, classical linearity and MDS are all unnecessary hypotheses and the manuscript's
+  own theorem is a special case; the `m=1` Bell boundary is sharp. Its claim-specific audit located
+  the known qubit and four-qutrit subcases but no all-prime-power predecessor. Two fresh readers
+  independently proposed the same next targets and **none was silently added to the version**.
+  On `relconic`/`arcs`, C604 imported exact reconstruction, equivariant stabilizer recovery,
+  zero-defect matching rigidity and bad-edge stability through the Relconic gate; **C625 killed the
+  last non-hyperoval characteristic-two zero-defect candidate** `(q,k) = (4096,92)` by a
+  polarity-stabilizer congruence (`90 ≢ 0 mod 4`), which let the even equality spectrum be
+  formalized and **Ramanujan–Nagell removed from its proof**; C627 proved the packing-deficiency gap
+  `Δ ≥ 2`; **C628 closed negative** — the evaluation obstruction does have an exact field-uniform
+  Hilbert/separator form, but that form does not force the `q=16` conclusion; C630/C632/C634/C635/C636
+  formalized the equality consequences, signed Gale duality (C635 stripping the strongest redundant
+  hypothesis from C632's theorem), the square-root carrier and the quadratic hull; **C637 computed the
+  three bounded open values** `ρ_𝒞(13)=8`, `ρ_𝒞(17)=9`, `ρ_𝒞(19)=10`; C641/C643 closed their trust
+  and compressed the lower-bound checks to an elementary conic obstruction in every case but one;
+  C644 identified the sole residue as a projective Heisenberg `C₃²` orbit pair. The arcs manuscript
+  was reframed around prescribed-hole rigidity in the same window. On `clebsch`, **C605** excluded
+  eight-point conic filling at `q = 13,17,19` and completed the `4 ≤ k ≤ 8` classification; C610/C611
+  adopted the exterior-set framing; C616 replaced the `H₃` coordinate row reduction by an equivariant
+  proof; C620/C621 added the graded evaluation algebra and the adopted Gorenstein gate. `reed-solomon`
+  ran C603's Lean trust audit and C545's R5–R7 reconciliation. On `cap`, C80 ran a long falsifier
+  sweep whose dominant output class is settled negatives, plus the `R_small` bounded correspondence
+  and the q=23 falsifier that bounds it. A read-only **cross-paper results snapshot** was written the
+  same day as an editorial bank, explicitly not a routing document.
+
+- **Jul 26 — Paper III is cut down twice, the q=16 certificate survives three attacks, and
+  complete-ports gets a new headline.**
+  The day's shape is subtraction. In `clebsch`, C579's plan and synthesis cold review were followed by
+  C651's exact Hitchin–Clebsch tensor bridge, C652's arithmetic-cover certificate, C653's mixed
+  novelty gate, C654's Klein relative-position calculation (positive commutant, **negative**
+  discriminant-five lift) and C655's harmonic bridge; a separate Klein intermediate-Jacobian kill test
+  ran alongside. C668/C669/C670 then **deleted most of it**: the finite tensor section, the
+  common-cubic-line section, the matching-specialization claims and the combined headline theorem all
+  came out, the statement identity contracted from seven statements to four and the trust manifest
+  from nine rows to four, and Paper III became a seven-page two-theorem note. A **context-free
+  reviewer given only the seven rendered page images**, with no repository access and no earlier
+  review context, returned `GO` with no blocking finding, and its cheap material-minor requests were
+  applied afterwards. C670 also **settled the factor-13 mystery**: the earlier display was the
+  reproducing kernel, not the Gram matrix, and `G = K/13`. Then a later PDF-only cold read plus an
+  isolated-package audit reopened the file, and **C680 was queued at `NO-GO`**: the Clebsch inclusion
+  `V ↪ H` is used but never defined, the constant-5 fibre step has no local comparison theorem, the
+  release bundle only passes inside the private repository because a script reads a `notes/` JSON, and
+  the word "new" is not licensed by C669's recorded audit. C670's report is preserved as the
+  historical verdict with C680 made authoritative — the same review-supersedes-review pattern seen on
+  the transfer theorem in week 6.
+  Paper I absorbed **C662**'s human passant-cover theorem and was then **split into a fourteen-page
+  human core plus a seven-page computational companion** in the same paper root, with its own build
+  target, ledger, validator and five replay routes; a post-choice cold read selected the human core
+  and its title, now *Reconstructing the Clebsch code from its deep-hole syndrome locus*. C662 is
+  explicit that it does **not** replace the C605 terminal searches. Paper II took C661's conceptual
+  rank proof — no orbit row reduction is load-bearing for `3,6,10` any more — and C665's balanced
+  matching-completeness classification, whose stronger trade-only form is recorded as an open
+  strengthening rather than claimed.
+  On `relconic`, three independent attempts to replace the exhaustive `q=16` eight-arc certificate all
+  closed negative in one day — **C663** (low-weight projective-Reed–Muller structure lives on
+  polynomial representatives, not codewords), **C666** (an exact `GF(16)` example satisfies seven of
+  eight fibre quotients, so no seven-fibre Rédei argument can work), and **C667** (no multi-base
+  survivor in the 2,291,362 checked arc–conic pairs, but the boundary data alone admit exact
+  counterexamples). A separate compression pass showed **2,630 of the 2,633 leaves share one
+  elementary incidence obstruction**, leaving three exceptional leaves with one-dimensional quadratic
+  kernels — the certificate is smaller but still load-bearing. C657/C658/C659 advanced the projective
+  carrier geometry.
+  `complete-ports` reopened as a drafting lane: **C671** froze the theorem hierarchy under a strict
+  admission rule (exact statement, complete human proof, matching Lean declaration, field-by-field
+  adequacy check, axiom audit, **no computational dependency**), with everything else marked
+  `TO FORMALIZE` / `APPENDIX COMPUTATION` / `CUT`; **C672** then made a general MDS
+  local-reconstruction theorem the page-2 headline and began building it in Lean. `reed-solomon`
+  closed C545's second cold-read repairs, C656's literature delta, and C646's stable-component formal
+  geometry. `ame-lu` ran two cheap kill batteries, one of which **killed a proposed reduction on its
+  first in-scope extension field**. `cap` continued C80 on q=23 replacement lineage and ancestral
+  charge, with the obligation-deletion sweep returning the day's other decisive negative.
 
 ---
 
