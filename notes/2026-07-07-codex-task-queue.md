@@ -155,7 +155,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `ame-lu`
 
 - **C581 `[ame-lu]` [QUEUED; after C580; optional manuscript upgrade gate]** — test whether C560's rank-one contraction locus canonically reconstructs the local Heisenberg/symplectic phase space and admits a quantitative approximate-rigidity theorem; separate the exact basis-free reconstruction from any robust claim and audit each before adoption → `notes/2026-07-24-c581-phase-space-robust-rigidity.md`.
-- **C619 `[ame-lu]` [QUEUED; after C618]** — specialize C618 to the odd-prime GRS and extended-GRS towers: test C613's phase-corrected Pauli and elementary-unipotent representatives against the defining group relations, determine exactly when they yield a homomorphic section and when a metaplectic/Schur-multiplier obstruction remains, separate party-permutation from scalar central extensions, and import any adopted finite checks with reproducible certificates → `notes/2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
 ### `rp-next`
 

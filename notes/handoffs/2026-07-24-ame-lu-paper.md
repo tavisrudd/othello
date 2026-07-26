@@ -405,10 +405,26 @@ The aggregate axiom audit and warning-free 19-page manuscript/release gates
 pass.  See
 `2026-07-25-c618-ame-lu-nonabelian-extension-class.md`.
 
-## Queued completion program
+**C619 closed (2026-07-25): GRS split-versus-obstruction boundary exact.**
+For generalized and extended GRS codes, propagation from any chosen input
+block is coordinatewise conjugation by
+`\(\operatorname{diag}(1,s_i/s_j)\)`, so all `SL_2(q)` relations hold
+exactly.  In odd characteristic the finite Heisenberg representation has a
+genuine Weil extension, and the scalar extension therefore splits over the
+linear `SL_2(q)` factor.  It does not split over the full affine one-qudit
+group: the nontrivial Weyl commutator obstructs a homomorphic lift of
+`\(\mathbb F_q^2\)`.  This is a Heisenberg obstruction, not a residual
+metaplectic or Schur-multiplier obstruction.  C618's party-permutation
+extension is independent and remains governed by its code-specific
+nonabelian factor set.  No finite computation was needed.  The warning-free
+20-page manuscript, seven evidence replays, 35-public/73-formal release
+checks, and trust ledgers are synchronized.  See
+`2026-07-25-c619-ame-lu-grs-splitting-obstruction.md`.
 
-The complete preparation, audit, formalization, and release program is queued
-as C559--C572.  Dependency order is authoritative:
+## Completion program
+
+The complete preparation, audit, formalization, and release program through
+C619 is closed.  Dependency order is authoritative:
 
 1. C559--C560: fixed-copy obstruction and uniform LU/LC rigidity theorem
    (complete).
@@ -458,7 +474,7 @@ as C559--C572.  Dependency order is authoritative:
     change-of-section law, and genuine splitting obstruction for the realized
     party-permutation extension, after C602 (complete).
 21. C619: GRS/extended-GRS relation audit and exact
-    split-versus-metaplectic/Schur-multiplier boundary, after C618 (queued).
+    split-versus-metaplectic/Schur-multiplier boundary, after C618 (complete).
 
 The revision has cleared the independent re-review findings and is complete
 locally.  Public release waits on the author gates listed above. C581 remains a separately queued
@@ -486,15 +502,15 @@ has now packaged the closed exact sequences, discrete quotients, intrinsic
 signature homomorphisms, realized party-permutation extension, and splitting
 boundary.  C602 has completed the referee-facing audit of the AME-LU Lean
 aggregate, trust ledgers, verification prose, scholarly closure, and release
-claims.  C618 now packages the section-free nonabelian extension invariant,
-and C619 then tests the GRS lifts against the relations required for an actual
-split.
+claims.  C618 packages the section-free nonabelian party-permutation
+invariant.  C619 separates it from the scalar lift problem: the GRS linear
+symplectic factor splits by the odd-field Weil representation, while the full
+affine one-qudit extension is non-split by the Heisenberg commutator.
 
-**Token-constrained completion route:** continue with `go C619`
-and remain in this lane through C618 and C619, committing and closing
-each C-item normally while reusing the loaded manuscript and formal context.
-Do not run optional C581. After C619, the next cross-lane route is C553 and
-then the coordinated build-system extraction. The authoritative three-session
+**Token-constrained completion route:** the principal `ame-lu` completion
+program is closed through C619.  Do not run optional C581 without selecting
+that upgrade explicitly.  The next cross-lane route is C553 and then the
+coordinated build-system extraction.  The authoritative three-session
 protocol is `notes/2026-07-25-c287-token-efficient-execution.md`.
 
 ## Completion gates

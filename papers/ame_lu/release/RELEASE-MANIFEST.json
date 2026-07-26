@@ -11,14 +11,14 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 181763,
+        "bytes": 186711,
         "path": "ame-lu.pdf",
-        "sha256": "a01a9366b1f02a65b4b5f952668f21f405e3f6447fc8dff98e90d81b5150bea5"
+        "sha256": "bf13a3bbcdca461e87e8cb4b9495a3f312a5b034a9f84feb02d847f0446cc538"
       },
       {
-        "bytes": 14509,
+        "bytes": 14691,
         "path": "formal-statement-adequacy.md",
-        "sha256": "6d2c7a14ff6aa2e0b4567c776507d2dabd2b03033eb9254f273c78b768657f7e"
+        "sha256": "f1d62ca0eddf2a30813d469f11f7116c4b2ac5a1bc31b68f5c90a6ab739ce3ca"
       },
       {
         "bytes": 3035,
@@ -26,9 +26,9 @@
         "sha256": "d55783c8dacf81817be70a524f9047fc6a4997d6c021f38023b621666a718344"
       },
       {
-        "bytes": 5941,
+        "bytes": 6243,
         "path": "refs.bib",
-        "sha256": "92711dab24c084f282bd90dda1aceda5aa5bf6227f374cbe5f1906adf546b9fb"
+        "sha256": "59e9fe7c30c84dcaaaf3c66f906c65eac57bfe187ca62ddf0fa95907b81f7f03"
       },
       {
         "bytes": 2654,
@@ -46,9 +46,9 @@
         "sha256": "8c790decce74cdc3c2861651c39a714a554699484e44cb2bbe30b191381f45e4"
       },
       {
-        "bytes": 8885,
+        "bytes": 9384,
         "path": "sections/01-introduction.tex",
-        "sha256": "f2584f0d98da1bc5d0aab30c22720358ef3d41d9e4221e057d2edab9833be1c7"
+        "sha256": "3851641b347196b7b3c10e422dd3af0955ec61bca2429c31499d814d21f31576"
       },
       {
         "bytes": 4299,
@@ -56,9 +56,9 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 10633,
+        "bytes": 13085,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "d5f879b1df8a4912db4f4ebf0413c2400b913338a9ebc19bbbeb7f41f587bd75"
+        "sha256": "8468af69ebba549b4c81162a7f098c0dff57a2e156b62db2193985eb1a3d4f04"
       },
       {
         "bytes": 6002,
@@ -181,7 +181,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "db8b9b87396d698989acd36076d50418ce99bee3519aa91871533845e6ba27da"
+    "tree_sha256": "354f5d902ea7b79a2b8e4f2afeab603778caa1f78c1eb96a1a4459faa3112bbe"
   },
   "formal_companion": {
     "artifacts": [

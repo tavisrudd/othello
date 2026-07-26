@@ -239,6 +239,60 @@ Clifford group
 
 Corollary~\ref{cor:transversal-clifford} excludes every product-unitary
 logical action outside that group.  Hence the displayed group is exact.
+
+There are two different lift questions behind this projective statement.
+Fix an input coordinate \(j\), put \(t_i=s_i/s_j\), and write
+\[
+ A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\mathrm{SL}_2(q).
+\]
+Propagation to coordinate \(i\) is
+\[
+ \phi_i(A)=
+ \begin{pmatrix}a&t_i^{-1}b\\t_i c&d\end{pmatrix}
+ =
+ \begin{pmatrix}1&0\\0&t_i\end{pmatrix}
+ A
+ \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.          \tag{3.6}
+\]
+Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
+and the elementary matrices in \((3.5)\) satisfy all
+\(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
+applies at the extended evaluation point.  It uses only the diagonal
+duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
+
+For odd \(q\), the finite Stone--von Neumann representation of the
+Heisenberg group \(H_q\) extends to a genuine representation of
+\(\mathrm{SL}_2(q)\ltimes H_q\)
+\cite[Theorem~1]{Gerardin1976}.  Apply its Weil factor to each
+\(\phi_i(A)\).  The resulting tensor product is multiplicative in
+\(A\), and exact Egorov covariance preserves the CSS stabilizer line.
+Consequently the one-qudit Clifford scalar extension, restricted to the
+linear \(\mathrm{SL}_2(q)\) factor, splits coherently with the propagated
+tensor symmetries.  The exceptional uniqueness clause at \(q=3\) in
+G\'erardin's theorem does not remove existence.
+
+The affine extension does not split.  Choose \(a,b\in\F_q\) with
+\(\chi(ab)\ne1\), and put \(X=X(a)\), \(Z=Z(b)\).  Their projective
+classes commute, whereas every choice of unitary representatives
+satisfies
+\[
+ ZX=\chi(ab)XZ,\qquad \chi(ab)\ne1 .
+\]
+Scalar changes of \(X\) and \(Z\) do not change their commutator.
+Hence the translation subgroup
+\(\F_q^2\) has no homomorphic lift to the one-qudit unitary Clifford
+group.  The coherent odd-field lift is therefore
+\(H_q\rtimes\mathrm{SL}_2(q)\), not a section of
+\(\F_q^2\rtimes\mathrm{SL}_2(q)\) through the scalar quotient.
+This is the Heisenberg central extension, not a residual metaplectic
+or Schur-multiplier obstruction on \(\mathrm{SL}_2(q)\).
+
+Neither conclusion decides the party-permutation extension in
+Corollary~\ref{cor:discrete-lu-symmetry}.  Its quotient is the
+evaluation-set-dependent realized permutation group \(\Pi\), and its
+kernel is the full fixed-party projective group \(\Gamma\), rather than
+the scalar phases.  Its splitting remains exactly the nonabelian
+factor-set triviality criterion stated there.
 \end{proof}
 
 The theorem needs only a cover by retained sets of size \(m+1\); choosing
