@@ -190,10 +190,20 @@ questions are in
 `notes/2026-07-25-c577-revised-standard-questions.md`; the post-baseline
 literature and novelty disposition is in
 `notes/2026-07-25-c577-postbaseline-novelty-audit.md`.
-The corrected metadata and warning-free twenty-four-page PDF gates are
-green. The final aggregate replay is waiting on reconstruction of one
-missing Lean dependency object after the foreign `Relconic` owner releases
-the shared build lock; this revision changes no Lean source.
+The final Paper II hierarchy now presents the quotient, \(3,6,10\) ranks,
+quadratic sheet recovery, cubic orientation, and Gorenstein duality as the
+twelve-page main paper; the decorated \(H_3\) profile, modular, arithmetic,
+and Tate results are preserved as mathematical appendices, with verification
+last. A concrete \(B_3\) walkthrough and proof/evidence map complete the
+accessibility pass. The synchronized twenty-one-statement, eight-bundle
+aggregate replay, Lean gate, warning-free twenty-four-page PDF, and fingerprint
+are green at `b9ee4f88`.
+
+C661 is queued after C577 as a bounded higher-tier upgrade. It accepts a
+uniform recovery/Gorenstein theorem with a genuinely new family or instance,
+conceptual \(A_3/B_3\) rank proofs that remove the row reductions, or a
+canonical classification/application of equivalent strength. It must not hold
+the current Paper II release or import unfinished Paper III claims.
 
 The active order is strict:
 
@@ -202,7 +212,9 @@ The active order is strict:
    owning paper without holding v1.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-4. **C579:** test Paper III after Paper II; require one principal theorem or
+4. **C661:** test a uniform or equivalent-strength Paper II upgrade after
+   C577 without holding the current release.
+5. **C579:** test Paper III after Paper II; require one principal theorem or
    return the material to an inventory.
 
 If C182 has passed every local gate and waits only for a user-controlled
@@ -311,15 +323,17 @@ instruction to launch its reviewer.
 
 ## Paper II — conic-ideal quotients
 
-C577 owns the standalone paper titled *Factorization memory in conic
-quotients: the `A_3`, `B_3`, and `H_3` secant configurations*. Its spine is:
+C577 owns the standalone paper titled *Quadratic recovery and cubic
+orientation in conic matching quotients*. Its spine is:
 
 1. conic matching products and the general switch/divisibility quotient;
-2. the `A_3/B_3/H_3` configurations and ranks `3,6,10`;
-3. balanced sheets and cubic-first orientation;
-4. six-profile reconstruction;
-5. modular depth quotient and arithmetic splitting/gluing;
-6. a Paper II-specific verification architecture.
+2. the `A_3/B_3/H_3` configurations, ranks `3,6,10`, and the `H_3`
+   cohomological missing-layer proof;
+3. quadratic recovery of the balanced sheets and cubic-first orientation;
+4. self-association, the Schur-power filtration, and Gorenstein duality;
+5. decorated `H_3` profiles, modular depth, arithmetic gluing, and relative
+   cubic structure as mathematical appendices;
+6. a final Paper II-specific verification architecture.
 
 The opening bridge is fixed: Paper I reconstructs the Clebsch configuration
 from its uncovered syndrome locus and decoding data; Paper II asks the
