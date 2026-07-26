@@ -319,6 +319,102 @@ theorem planeLineRestriction_finsetLineProduct_dvd_root_sub_restriction
   rw [hproduct] at hdiv
   simpa only [map_prod] using hdiv
 
+/-- A finite family of carrier roots has a homogeneous ambient extension once divisible
+homogeneous residuals admit homogeneous one-line corrections.  The incidence hypotheses discharge
+the divisibility premise: distinct centers give nonzero restricted equations, and triples of
+distinct centers give nonzero plane determinants. -/
+theorem exists_finset_homogeneous_carrierRoot_extension
+    [DecidableEq P]
+    (lineCoordinates : P → Fin 3 → Fin 2 → K)
+    (center : P → Fin 3 → K)
+    (ambient : MvPolynomial (Fin 3) K)
+    (root : P → MvPolynomial (Fin 2) K)
+    (degree : ℕ)
+    (hrootHomogeneous : ∀ x, (root x).IsHomogeneous degree)
+    (hsquare :
+      ∀ x, planeLineRestriction (lineCoordinates x) ambient = (root x) ^ 2)
+    (hlineSurjective :
+      ∀ x (point : Fin 3 → K),
+        planeVectorPairing (center x) point = 0 →
+          ∃ binaryPoint : Fin 2 → K,
+            pointOnParametrizedPlaneLine (lineCoordinates x) binaryPoint =
+              point)
+    (scale : P → K)
+    (hnormal :
+      ∀ x,
+        parametrizedPlaneLineNormal (lineCoordinates x) =
+          fun i => scale x * center x i)
+    (hscale : ∀ x, scale x ≠ 0)
+    (hrestrictedNonzero :
+      ∀ ⦃x y⦄, x ≠ y →
+        planeLineRestrictedCoefficients
+          (lineCoordinates x) (center y) ≠ 0)
+    (hnoncollinear :
+      ∀ ⦃x y z⦄, x ≠ y → x ≠ z → y ≠ z →
+        planeVectorDeterminant (center x) (center y) (center z) ≠ 0)
+    (hhomogeneousCorrection :
+      ∀ (s : Finset P) (x : P) (G : MvPolynomial (Fin 3) K),
+        x ∉ s →
+        G.IsHomogeneous degree →
+        (∀ y ∈ s, planeLineRestriction (lineCoordinates y) G = root y) →
+        planeLineRestriction (lineCoordinates x)
+            (∏ y ∈ s, homogeneousLinearPolynomial (center y)) ∣
+          root x - planeLineRestriction (lineCoordinates x) G →
+        ∃ D : MvPolynomial (Fin 3) K,
+          D.IsHomogeneous degree ∧
+          (∀ y ∈ s, planeLineRestriction (lineCoordinates y) D = 0) ∧
+          planeLineRestriction (lineCoordinates x) (G + D) = root x) :
+    ∀ s : Finset P,
+      ∃ G : MvPolynomial (Fin 3) K,
+        G.IsHomogeneous degree ∧
+        ∀ x ∈ s, planeLineRestriction (lineCoordinates x) G = root x := by
+  intro s
+  induction s using Finset.induction_on with
+  | empty =>
+      exact
+        ⟨0, MvPolynomial.isHomogeneous_zero (Fin 3) K degree, by simp⟩
+  | @insert x s hx ih =>
+      obtain ⟨G, hGhomogeneous, hG⟩ := ih
+      have hne :
+          ∀ y : {y // y ∈ s},
+            planeLineRestrictedCoefficients
+              (lineCoordinates x) (center y.1) ≠ 0 := by
+        intro y
+        apply hrestrictedNonzero
+        intro hxy
+        apply hx
+        exact hxy ▸ y.2
+      have htriple :
+          Pairwise fun y z : {y // y ∈ s} =>
+            planeVectorDeterminant
+              (center x) (center y.1) (center z.1) ≠ 0 := by
+        intro y z hyz
+        apply hnoncollinear
+        · intro hxy
+          apply hx
+          exact hxy ▸ y.2
+        · intro hxz
+          apply hx
+          exact hxz ▸ z.2
+        · exact fun hyz' => hyz (Subtype.ext hyz')
+      have hdiv :
+          planeLineRestriction (lineCoordinates x)
+              (∏ y ∈ s, homogeneousLinearPolynomial (center y)) ∣
+            root x - planeLineRestriction (lineCoordinates x) G :=
+        planeLineRestriction_finsetLineProduct_dvd_root_sub_restriction
+          lineCoordinates center ambient root degree hrootHomogeneous
+          hsquare hlineSurjective s x G hGhomogeneous hG hne
+          (scale x) (hnormal x) (hscale x) htriple
+      obtain ⟨D, hDhomogeneous, hDzero, hxD⟩ :=
+        hhomogeneousCorrection s x G hx hGhomogeneous hG hdiv
+      refine ⟨G + D, hGhomogeneous.add hDhomogeneous, ?_⟩
+      intro y hy
+      rw [Finset.mem_insert] at hy
+      rcases hy with rfl | hy
+      · exact hxD
+      · rw [map_add, hDzero y hy, add_zero]
+        exact hG y hy
+
 end CarrierResidualDivisibility
 
 end RelativeConicArcs
