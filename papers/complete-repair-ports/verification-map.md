@@ -7,7 +7,7 @@ the mechanism even when Lean checks the statement.
 | Claim group | Human proof route | Lean route | Finite artifact | Permitted role of computation |
 |---|---|---|---|---|
 | Port object and MDS reconstruction | Restriction dimension gives every prescribed relation; a common-core star gives a basis; double duality recovers the code | `RepairPorts.Gates.CompletePorts` and its ten audited terminals | Existing coefficient replay | Corroborate examples only |
-| Exact confinement and transfer | Block-functional decomposition and exact pointed obstruction | Existing `WeightedTransfer*` chain; C673 aggregate terminal | None | No role |
+| Exact confinement and transfer | Block-functional decomposition, independent fiber minima, exact three-stratum split, and both inclusions of port equality | `RepairPorts.Gates.CompletePorts`, led by `RepairPorts.exactFunctionalStrata` and `RepairPorts.exactPointedConfinementAndTransfer` | None | No role |
 | Positive-density realization | Trace pairing, outer-family hypothesis, concatenated parameters, and density count | C674 conditional family terminal | None | No role |
 | Reliability and bounded EXIT | Finite subset sums, deletion--contraction partition, derivative counting, radius filtration | C675 terminals | C219 and C226 bundles | Appendix profiles only |
 | Pointed Tutte | Direct rank-polynomial specialization and pointed duality | C676 terminals | C227 bundle | Appendix comparison only |

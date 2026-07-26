@@ -1,12 +1,13 @@
 import RepairPorts.MDSReconstruction
+import RepairPorts.PointedTransfer
 
 /-!
-# Complete bounded repair-port reconstruction gate
+# Complete bounded repair-port theorem gate
 
 This import-only module exposes the paper-facing coefficient-port object, intrinsic reconstruction
-radius, standard-code duality bridge, and the MDS minimum-port reconstruction theorem.  All
-headline declarations are proved by finite linear algebra; no executable certificate or imported
-mathematical axiom occurs in their dependency closure.
+radius, standard-code duality bridge, MDS minimum-port reconstruction, and exact pointed transfer.
+The strict weighted example is conditional only on the displayed regular Singer-action input.
+No executable certificate or fiber enumerator occurs in these dependency closures.
 -/
 
 #print axioms FiniteGeom.dualCode_dualCode
@@ -19,4 +20,9 @@ mathematical axiom occurs in their dependency closure.
 #print axioms RepairPorts.HasMDSDualParameters.reconstructsAt
 #print axioms RepairPorts.HasMDSDualParameters.reconstructsAt_iff
 #print axioms RepairPorts.HasMDSDualParameters.reconstructionRadius_eq
-
+#print axioms RepairPorts.exactFunctionalStrata
+#print axioms RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed
+#print axioms RepairPorts.pointedFunctionalTupleRealizationCost_eq
+#print axioms RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost
+#print axioms RepairPorts.exactPointedConfinementAndTransfer
+#print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action

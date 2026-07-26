@@ -10,9 +10,11 @@ appendix-only and cannot discharge a body theorem.
 
 1. C671 freezes the hierarchy and installs the control documents.
 2. C672 is closed: MDS reconstruction, exact radius, code recovery, and intrinsic invariance pass the paper-facing Lean gate.
-3. C673 reconciles exact confinement/transfer into paper-facing Lean terminals.
-4. C675 proves and formalizes reliability and bounded EXIT.
-5. C674 follows C672+C673 for positive-density fingerprints.
+3. C673 is closed: exact confinement/transfer has a complete human proof,
+   paper-facing zero/singleton/multisupport and pointed terminals, and a green
+   axiom gate.
+4. C674 follows C672+C673 for positive-density fingerprints.
+5. C675 proves and formalizes reliability and bounded EXIT.
 6. C676 follows C675 for pointed Tutte and the filtration boundary.
 7. C677 follows C672 for harmonic geometry.
 8. C678 assembles the modular draft after C672--C677 pass.
