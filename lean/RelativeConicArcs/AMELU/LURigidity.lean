@@ -10,8 +10,8 @@ Clifford.  Hence every local factor in an LU equivalence between
 equal-phase states of exact `[6,3,4]` codes is Clifford.  The allowed
 party permutation is absorbed into the source code.
 
-This is the six-party specialization of the headline LU-to-LC theorem
-of the accompanying paper.
+This is the `m = 3`, equal-phase MDS--CSS specialization of the additive
+stabilizer rigidity mechanism formalized in `StabilizerAMERigidity`.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.

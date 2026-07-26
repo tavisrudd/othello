@@ -297,10 +297,10 @@ structure PencilClassificationInputs
         (equalPhaseState (arcKernel (nonGRSPencil u))) →
       pencilZ t = pencilZ u
 
-/-- The complete admitted-pencil interface: projective equivalence,
-monomial equivalence of the parity-check kernels, and local-Clifford
-equivalence of their equal-phase states are each equivalent to equality
-of the scalar `z`. -/
+/-- Under `PencilClassificationInputs`, the complete admitted-pencil
+interface identifies projective equivalence, monomial equivalence of the
+parity-check kernels, and local-Clifford equivalence of their equal-phase
+states with equality of the scalar `z`. -/
 theorem admitted_nonGRS_pencil_classified_by_z
     [Field 𝔽] [Fintype 𝔽] [DecidableEq 𝔽]
     (w : WeylConvention 𝔽) (inputs : PencilClassificationInputs 𝔽 w)

@@ -11,12 +11,13 @@ module fixes the corresponding parameter, action, and transpose conventions.
 It then transfers length-generic local-unitary rigidity to conversions between
 two such encoders.
 
-The exact fixed-party conclusion is stated intrinsically in terms of diagonal
-isoduality.  `DiagonalIsodualityTransversalInputs` separates the two propagation
+The exact fixed-party carrier dichotomy is packaged as an implication from
+`DiagonalIsodualityTransversalInputs`, which names the two propagation
 directions, the off-diagonal converse, and the complete translation fiber.
-`GRSTransversalInputs` retains the concrete generalized Reed--Solomon
-specialization.  No existence or propagation assertion is introduced as an
-axiom.
+The multiplier-space and nullity results are unconditional; construction of
+these action-level inputs is outside this module.  `GRSTransversalInputs`
+retains the concrete generalized Reed--Solomon specialization.  No existence
+or propagation assertion is introduced as an axiom.
 
 All arguments are symbolic and kernel checked.  This module contains no
 generated data, native evaluation, axioms, or admitted declarations.
@@ -697,9 +698,10 @@ structure DiagonalIsodualityTransversalInputs
     ∀ g, g ∈ transversal ↔ g.linear ∈ kernel
 
 omit [Fintype 𝔽] [DecidableEq 𝔽] in
-/-- The exact projective fixed-party carrier is the full affine
-special-linear group precisely on the diagonally isodual branch, and the
-affine split torus otherwise.  No evaluation-code presentation is assumed. -/
+/-- Assuming `DiagonalIsodualityTransversalInputs`, the projective fixed-party
+carrier is the full affine special-linear group precisely on the diagonally
+isodual branch, and the affine split torus otherwise.  No evaluation-code
+presentation is assumed. -/
 theorem diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy
     {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
     {transversal : Set (ProjectiveLogicalAction 𝔽)}

@@ -1,13 +1,14 @@
 import RelativeConicArcs.Gates.AMELUAggregate
 
 /-!
-# Axiom audit for MDS--CSS AME local-unitary results
+# Axiom audit for stabilizer-AME rigidity, atlases, and MDS--CSS applications
 
-This audit covers the length-generic rigidity, topological symmetry and
-transversal terminals together with the six-party dictionary,
-admitted-pencil classification, marginal-moment separator, fixed-party
-logical phase, extension-field pencil-sector algebra, four-copy separator,
-and transport-divisor terminals.  The
+This audit covers the arbitrary-additive supported-label, minimum-support
+atlas, and rigidity terminals; the length-generic equal-phase MDS--CSS
+rigidity, topological symmetry, and transversal terminals; and the six-party
+dictionary, admitted-pencil classification, marginal-moment separator,
+fixed-party logical phase, extension-field pencil-sector algebra, four-copy
+separator, and transport-divisor terminals.  The
 finite graph cardinalities use exhaustive native evaluation; all other
 listed declarations are checked without native evaluation.
 -/

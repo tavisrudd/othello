@@ -21,13 +21,16 @@ import RelativeConicArcs.Gates.AMELULogicalPhaseFourCopy
 import RelativeConicArcs.Gates.AMELUTransportDivisor
 
 /-!
-# Aggregate import gate for MDS--CSS AME local-unitary results
+# Aggregate import gate for stabilizer-AME rigidity, operator-pushing atlases,
+# and MDS--CSS applications
 
 This terminal imports the length-generic code, state, exact-MDS
 shortening, marginal covariance, arbitrary-arity diagonal-axis theorem,
 the stabilizer-AME supported-label dimension squeeze, linear
 minimum-support transitions and their atlas-equivalence relation, the
-full-Weyl diagonal intertwining criterion, unconditional LU-to-LC terminal,
+full-Weyl diagonal intertwining criterion, the LU-to-LC terminal over the
+explicit `AdditiveStabilizerState.marginalWeylExpansion` realization, the
+unconditional equal-phase MDS--CSS specialization,
 normal- and arbitrary-subgroup holonomy reductions, projective Clifford
 finiteness, explicit
 product-unitary topological groups and scalar-phase quotient groups, and the
@@ -57,4 +60,9 @@ their conclusions from structures whose fields state the geometric,
 analytic, finite-certificate, or orbit-recognition inputs that are not
 proved in their modules.  Importing this gate therefore does not turn those
 named inputs into axioms or unconditional theorems.
+
+The arbitrary-additive physical terminal also takes the
+stabilizer-projector marginal expansion as an explicit structure field.
+Lean kernel-checks the support, covariance, axis-recovery, and rigidity
+deductions from that realization.
 -/

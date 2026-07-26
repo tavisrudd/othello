@@ -2,15 +2,15 @@ import RelativeConicArcs.AMELU.OrderedFourConjugation
 import RelativeConicArcs.AMELU.PartialTraceCovariance
 
 /-!
-# Reduced-matrix covariance for repository states
+# Reduced-matrix covariance for six-party amplitude states
 
 Splitting a six-party basis label into subsystem and environment
-coordinates identifies the repository's `localAction` with a Kronecker
+coordinates identifies the `localAction` of `Definitions` with a Kronecker
 product acting on the assembled state vector.  The reduced matrix
-`marginalEntry` is the partial trace of the corresponding rank-one
-density matrix.  The generic partial-trace identity therefore gives
-covariance under local product unitaries, with the repository's global
-phase cancelling by its norm-one hypothesis.
+`marginalEntry` is the partial trace of the corresponding rank-one density
+matrix.  The generic partial-trace identity therefore gives covariance under
+local product unitaries, with the chosen global phase cancelling by its
+norm-one hypothesis.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.
@@ -101,8 +101,8 @@ theorem vectorDensity_mulVec
   ring
 
 omit [Field 𝔽] [DecidableEq 𝔽] in
-/-- In assembled coordinates, the repository local action is the
-Kronecker product of the subsystem and environment tensor matrices. -/
+/-- In assembled coordinates, `localAction` is the Kronecker product of the
+subsystem and environment tensor matrices. -/
 theorem assembledState_localAction
     (U : Party → LocalMatrix 𝔽) (ψ : State 𝔽)
     (S : Finset Party) :
@@ -153,8 +153,8 @@ theorem assembledState_localAction
   exact congrArg₂ (· * ·) hSprod hEprod
 
 omit [Field 𝔽] [DecidableEq 𝔽] in
-/-- The repository reduced matrix is the partial trace of the assembled
-rank-one density matrix. -/
+/-- `marginalEntry` is the partial trace of the assembled rank-one density
+matrix. -/
 theorem partialTraceSecond_vectorDensity_assembledState
     (ψ : State 𝔽) (S : Finset Party) :
     partialTraceSecond (vectorDensity (assembledState ψ S)) =
@@ -162,8 +162,8 @@ theorem partialTraceSecond_vectorDensity_assembledState
   rfl
 
 omit [Field 𝔽] in
-/-- Reduced matrices transform by conjugation with the retained tensor
-factor under a repository local action. -/
+/-- Reduced matrices transform by conjugation with the retained tensor factor
+under `localAction`. -/
 theorem marginalEntry_localAction
     (U : Party → LocalMatrix 𝔽) (hU : ∀ i, IsUnitaryMatrix (U i))
     (ψ : State 𝔽) (S : Finset Party) :

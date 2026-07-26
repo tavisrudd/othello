@@ -13,7 +13,7 @@ map on Weyl-coordinate functions.
 The terminal criterion states the exact bridge needed for local Clifford
 rigidity: if this coordinate action carries every nonzero coordinate axis
 to a coordinate axis, then the unitary normalizes every Weyl axis and is
-Clifford in the repository convention.
+Clifford for the chosen `WeylConvention`.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.

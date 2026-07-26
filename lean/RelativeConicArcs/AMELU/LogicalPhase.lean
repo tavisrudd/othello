@@ -121,8 +121,8 @@ structure LogicalPhaseInputs
     ∀ ⦃A⦄, A ∈ kernel →
       (A 0 1 ≠ 0 ∨ A 1 0 ≠ 0) → isConic
 
-/-- The fixed-party kernel is `SL₂(𝔽)` on the conic locus and the diagonal
-split torus off it. -/
+/-- Assuming `LogicalPhaseInputs`, the fixed-party kernel is `SL₂(𝔽)` on the
+conic locus and the diagonal split torus off it. -/
 theorem fixedPartyKernel_eq_specialLinear_or_splitTorus
     [Field 𝔽] {kernel : Set (LogicalBlock 𝔽)} {isConic : Prop}
     (inputs : LogicalPhaseInputs 𝔽 kernel isConic) :
