@@ -221,6 +221,57 @@ selective than the scalar histogram.  A surviving renormalization must see
 at least triples of external lines, or couple the polar labels to this
 incidence design in a way not determined by its \(2\)-parameters.
 
+Even the raw triple-concurrence layer has fixed parameters.  Given two
+external lines, their outside intersection point lies on exactly \(q/2\)
+external lines, so there are exactly \(q/2-2\) choices of a third external
+line concurrent with the pair.  Thus, for \(q\ge8\), the concurrent triples
+form the design
+\[
+ \boxed{\quad
+ 2\!-\!\left(\frac{q(q-1)}2,3,\frac q2-2\right).\quad}
+\]
+For \(q=4\) the same statement degenerates to the empty triple system.  The
+exact number of concurrent triples is
+\[
+ (q^2-1)\binom{q/2}{3},
+\]
+and every external line lies in
+\[
+ (q+1)\binom{q/2-1}{2}
+\]
+of them.  Consequently the unweighted triple count, and even its degree at
+each line and codegree at each pair, is fixed by the regular-hyperoval
+baseline.
+
+The first joint datum not erased by these parameters has an exact coordinate
+form.  Parameterize an external line by
+\[
+ (\lambda,d)\in\mathbf F_q^\times
+ \times\{d:\operatorname{Tr}(d)=1\},
+ \qquad
+ b=\frac d\lambda,\quad c=\frac{d^3}{\lambda^2}.
+\]
+Its line-coordinate row is
+\[
+ L_{\lambda,d}
+ =\left(1,\frac d\lambda,\frac{d^3}{\lambda^2}\right).
+\]
+Three external lines are concurrent exactly when
+\[
+ \boxed{\quad
+ \det
+ \begin{pmatrix}
+ 1&d_1/\lambda_1&d_1^3/\lambda_1^2\\
+ 1&d_2/\lambda_2&d_2^3/\lambda_2^2\\
+ 1&d_3/\lambda_3&d_3^3/\lambda_3^2
+ \end{pmatrix}=0,
+ \qquad \operatorname{Tr}(d_i)=1.\quad}
+\]
+This trace-one determinant is the cheapest surviving
+polar-label/incidence coupling.  Its mere zero count is already fixed by the
+displayed design; a future invariant would have to retain its value,
+factorization, orbit, or correlation with another prescribed-conic weight.
+
 The calculation includes \(q=2\).  It uses only the regular conic and its
 nucleus, so the falsifier already respects the strongest available
 conic-polarity structure rather than evading it through a nonclassical
@@ -292,6 +343,15 @@ polar-label interaction inside a block, or a comparable projective
 cross-ratio.  This is again a shape discriminator, not evidence that such an
 invariant yields a defect gap.
 
+The `ej4` pass closes the raw third-order aggregate as well.  Concurrent
+external-line triples form a
+\(2-(q(q-1)/2,3,q/2-2)\) design, so their total, line degrees, and pair
+codegrees carry no defect-sensitive variation in the baseline.  What first
+survives is the trace-one determinant coupling the polar labels
+\(\lambda_i\) to the auxiliary trace-one coordinates \(d_i\).  Counting its
+zeros again would only recover the design; one must retain finer algebraic
+data.  No new task is allocated.
+
 ## Mystery ledger
 
 | Feature | Disposition |
@@ -302,5 +362,7 @@ invariant yields a defect gap.
 | Can higher jets rescue a nonnegative excess retaining the first layer? | **No:** its first coordinate is already unbounded at zero defect. |
 | Do the external polar coefficients have unexplained scalar variation? | **Settled by `ej2`:** every nonzero field value occurs exactly \(q/2\) times in the canonical conic frame. |
 | Does pairwise external-line incidence retain nonuniform geometry? | **Settled by `ej3`:** it is the Steiner \(2\)-design \(2-(q(q-1)/2,q/2,1)\), so unweighted pairwise incidence is fixed. |
-| Could a twice-renormalized or signed invariant still work? | **Open but sharply narrowed:** scalar-only moments and unweighted pair incidence are fixed; a successor would need triple-line structure, polar-label/incidence coupling, another prescribed-conic weight, and a new task gate. |
+| Does raw triple-line concurrence escape the design baseline? | **Settled by `ej4`:** concurrent triples form \(2-(q(q-1)/2,3,q/2-2)\); totals, degrees, and codegrees are fixed. |
+| What is the first explicit surviving coupling? | **Located:** the displayed trace-one determinant couples polar labels to concurrency, but its zero count alone is again subordinate to the design. |
+| Could a twice-renormalized or signed invariant still work? | **Open but sharply narrowed:** it must retain determinant values, factorization, orbits, or another prescribed-conic correlation; scalar moments and unweighted incidence through order three are fixed. |
 | Does C638 affect the odd-size program? | **No:** C639 remains the next allocated carrier question. |
