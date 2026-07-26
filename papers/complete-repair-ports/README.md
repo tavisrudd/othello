@@ -1,9 +1,9 @@
 # Complete bounded repair ports
 
-**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
+**Title:** *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*<br>
 **Author:** Tavis Rudd<br>
-**Status:** private six-part manuscript corrected after citation preflight and independent cold
-reads; publication export remains gated.
+**Status:** private corrected manuscript with a revised human-proof/Lean theorem hierarchy frozen
+for the next draft; the modular rewrite has not begun and publication export remains gated.
 
 ## Paper spine
 
@@ -65,6 +65,20 @@ product architecture, and random harmonic-cascade thresholds are outside scope.
 - `refs.bib` — bibliography.
 - `proof_ledger.md` — exact claim, trust, and evidence boundary.
 - `adversarial_novelty_review.md` — internal novelty and overclaim audit; excluded from export.
+
+Paper control for the revised draft lives in:
+
+- `theorem-map.md`;
+- `claim-proof-novelty-ledger.md`;
+- `formalization-ledger.md`;
+- `formal-statement-adequacy.md`;
+- `verification-map.md`;
+- `second-draft-fix-plan.md`; and
+- `sections/README.md`.
+
+The legacy `proof_ledger.md` remains the detailed source inventory until the
+new ledgers have absorbed and validated every retained row.  It is not the
+admission authority for the revised body.
 
 ## Build
 

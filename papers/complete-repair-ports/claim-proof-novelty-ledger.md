@@ -1,0 +1,40 @@
+# Claim, proof, and novelty ledger
+
+Every assertion promoted to theorem or corollary status appears here.  Human
+proof, Lean coverage, executable evidence, imported mathematics, novelty, and
+editorial disposition are independent fields.
+
+## Status vocabulary
+
+- `HUMAN`: a complete mathematical proof is present in the manuscript or named
+  proof report.
+- `KERNEL`: the exact paper statement is checked by Lean.
+- `KERNEL-CORE`: Lean checks only part of the paper statement.
+- `IMPORTED`: a named classical theorem is consumed explicitly.
+- `CERTIFIED`: a finite executable artifact checks only its stated finite
+  domain.
+- `NONE-FOUND`: a bounded search found no predecessor; this never authorizes a
+  categorical priority claim.
+- `BLOCKED-BODY`: the claim cannot carry the main proof spine yet.
+
+| Claim family | Human proof | Lean status | Computation | Literature/novelty boundary | Manuscript action |
+|---|---|---|---|---|---|
+| Complete support/coefficient/probability port | Existing definitions and basic-invariants proof | `KERNEL-CORE`; intrinsic coefficient-port isomorphism remains absent | Existing coefficient replay is corroborative only | Repair tolerance and all-low-weight-dual-support machinery are prior or adjacent art | Retain; close the intrinsic reconstruction interface in C672 |
+| MDS local reconstruction | Present only as the Clebsch/MDS argument | None | None permitted | MDS support clutter is generic; value lies in the coefficient reconstruction statement | `BLOCKED-BODY`; C672 |
+| Exact pointed confinement and weighted transfer | Complete proof in current Section 3 | Extensive `KERNEL` chain | None required | Concatenated-dual decomposition and fiber enumerator are prior art; complete-port equality is none-found candidate contribution | Retain after C673 terminal/adequacy reconciliation |
+| Strict weighted example | Conceptual Singer averaging and code deduction | `KERNEL` conditional on cited Singer regularity | None required | Natural strict example, not a new MDS construction | Secondary corollary after C673 |
+| Prescribed positive-density realization | Manuscript proof | `KERNEL-CORE` for finite cost and transfer | None required | Random GV, trace duality, AG/TVZ, and locality-preserving concatenation are classical; represented-port consequence is none-found | `BLOCKED-BODY`; C674 |
+| Clebsch/MDS fingerprints | Short manuscript derivation | None as a paper-facing terminal | None required | Support-only MDS data is generic; the coefficient layer carries the geometry | Derive after C672+C674 |
+| Reliability calculus | Manuscript proof | None | Current exact profiles are `CERTIFIED` | Reliability, pivotality, Russo--Margulis, and blocker calculus are classical tools | `BLOCKED-BODY`; C675 formalizes the exact port specialization |
+| Bounded EXIT | Manuscript proof | None | Exact finite curves are `CERTIFIED` | EXIT is classical; finite radius is bounded-query decoding, not symbol-MAP or capacity | `BLOCKED-BODY`; C675 |
+| Pointed Tutte specialization | Manuscript derivation from cited Las Vergnas structure | None | Current \(q=9\) comparison is `CERTIFIED` | The polynomial is prior art; the bounded-radius filtration is the paper-specific boundary | `BLOCKED-BODY`; C676 |
+| Cubic--axis port | Complete manuscript proof | `KERNEL` chain | Exact \(q=9\) tables are also kernel checked but secondary | Classical geometry; exact repair rows and all-symbol separation are `NONE-FOUND` candidate contributions | Retain as an application after adequacy reconciliation |
+| Quartic--nucleus/harmonic port | Symbolic manuscript proof using classical nucleus/design inputs | None | \(q=9,q=27\) circuits and profiles are `CERTIFIED` | Classical geometry and design; complete radius-four repair interpretation is `NONE-FOUND` | `BLOCKED-BODY`; C677 |
+| Harmonic closure and Poisson consequences | Manuscript arguments of mixed scope | None | Finite gate and error tables are `CERTIFIED` | Chen--Stein and design overlaps are classical; no threshold or completeness claim | Admit only theorem-derived Lean consequences; otherwise appendix |
+
+## Promotion rule
+
+A row leaves `BLOCKED-BODY` only when its human proof, exact Lean terminal,
+adequacy comparison, and axiom audit all pass.  Replaying a certificate cannot
+promote a row.
+

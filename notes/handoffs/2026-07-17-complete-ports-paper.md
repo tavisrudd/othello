@@ -3,11 +3,11 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; REVISED HUMAN-PROOF/LEAN DRAFT SPINE QUEUED; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C671 CONTROL SURFACE COMPLETE; C672 NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
-**Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
-Reliability, and Geometric Structure*
+**Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
+Transfer, and Reliability*
 **Approved paper repository**: `tavisrudd/complete-ports` at `~/src/papers/complete-ports`
 **Approved paper license**: MIT
 
@@ -69,6 +69,9 @@ Completed preparation:
 - [C280 six-part manuscript assembly](../2026-07-17-c280-complete-ports-six-part-assembly.md).
 - [C285 submission-preflight citation and claim audit](../2026-07-17-c285-complete-ports-citation-preflight.md).
 - [C286 private-source correction and independent cold-read pass](../2026-07-17-c286-complete-ports-correction-and-cold-read.md).
+- [C671 revised theorem hierarchy and paper-control surface](../2026-07-26-c671-complete-ports-theorem-hierarchy.md).
+
+**Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 ## Publication boundary
 
@@ -95,10 +98,10 @@ terminal.
 
 ## Next step
 
-Run C671 first. It freezes the theorem hierarchy and creates the paper-control documents before any
-TeX restructuring. The proof/formalization work then branches:
+Run C672 next: prove and formalize reconstruction radius, intrinsic pointed-port isomorphisms, and
+the general MDS local-reconstruction theorem before any TeX restructuring. The remaining
+proof/formalization work then branches:
 
-- C672 establishes MDS local reconstruction;
 - C673 reconciles exact confinement and transfer;
 - C675 establishes the noncomputational reliability/EXIT calculus;
 - C674 follows C672+C673 for positive-density realization;
