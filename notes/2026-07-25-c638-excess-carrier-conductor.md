@@ -272,6 +272,46 @@ polar-label/incidence coupling.  Its mere zero count is already fixed by the
 displayed design; a future invariant would have to retain its value,
 factorization, orbit, or correlation with another prescribed-conic weight.
 
+Its value distribution has only one possible scalar residue.  For
+\(s\in\mathbf F_q^\times\), the conic stabilizer
+\[
+ (X,Y,Z)\longmapsto(s^2X,sY,Z)
+\]
+sends the normalized external-line row
+\[
+ (1,b,c)\longmapsto(1,bs,cs^2).
+\]
+It therefore multiplies every \(3\)-by-\(3\) line determinant by \(s^3\).
+Coordinatewise Frobenius preserves the external-line set and squares the
+determinant.  Consequently the number \(N(a)\) of unordered external-line
+triples with determinant \(a\ne0\) satisfies
+\[
+ \boxed{\quad
+ N(a)=N(s^3a)=N(a^2).\quad}
+\]
+
+Write \(q=2^n\).  If \(n\) is odd, cubing is a bijection of
+\(\mathbf F_q^\times\), so all nonzero determinant values are exactly
+equidistributed:
+\[
+ N(a)=
+ \frac{
+ \binom{q(q-1)/2}{3}
+ -(q^2-1)\binom{q/2}{3}}
+ {q-1}
+ \qquad(a\ne0).
+\]
+If \(n\) is even, the cube subgroup has index three and Frobenius swaps its
+two nontrivial cosets.  Hence there are at most two multiplicities: one for
+cubes and one shared by both noncube cosets.  The **cubic bias**
+\[
+ N_{\mathrm{cube}}-N_{\mathrm{noncube}}
+\]
+is the first scalar statistic not forced to vanish or become constant by the
+regular-hyperoval symmetries.  Determining that bias, or proving it stable
+under a defect perturbation, is a concrete new gate; it is not needed for
+C638's negative conclusion and is not allocated here.
+
 The calculation includes \(q=2\).  It uses only the regular conic and its
 nucleus, so the falsifier already respects the strongest available
 conic-polarity structure rather than evading it through a nonclassical
@@ -352,6 +392,15 @@ survives is the trace-one determinant coupling the polar labels
 zeros again would only recover the design; one must retain finer algebraic
 data.  No new task is allocated.
 
+The `ej5` pass takes determinant values rather than their zero set.  Conic
+scaling acts by cubes and Frobenius acts by squaring.  For odd extension
+degree this forces exact equidistribution over every nonzero field value.
+For even extension degree it leaves only one possible scalar distinction:
+cube versus noncube determinant values, with the two noncube cosets paired by
+Frobenius.  Thus the first plausible scalar refinement is a cubic-character
+bias, not a raw determinant moment.  Testing its defect stability would
+require a separately allocated gate.
+
 ## Mystery ledger
 
 | Feature | Disposition |
@@ -364,5 +413,6 @@ data.  No new task is allocated.
 | Does pairwise external-line incidence retain nonuniform geometry? | **Settled by `ej3`:** it is the Steiner \(2\)-design \(2-(q(q-1)/2,q/2,1)\), so unweighted pairwise incidence is fixed. |
 | Does raw triple-line concurrence escape the design baseline? | **Settled by `ej4`:** concurrent triples form \(2-(q(q-1)/2,3,q/2-2)\); totals, degrees, and codegrees are fixed. |
 | What is the first explicit surviving coupling? | **Located:** the displayed trace-one determinant couples polar labels to concurrency, but its zero count alone is again subordinate to the design. |
-| Could a twice-renormalized or signed invariant still work? | **Open but sharply narrowed:** it must retain determinant values, factorization, orbits, or another prescribed-conic correlation; scalar moments and unweighted incidence through order three are fixed. |
+| Are nonzero determinant values themselves informative? | **Settled by `ej5` up to one character:** odd extension degree forces full equidistribution; even degree leaves only cube-versus-noncube bias. |
+| Could a twice-renormalized or signed invariant still work? | **Open at one concrete scalar gate:** test cubic-character bias and its defect stability, or retain finer factorization/orbit/conic correlation; all coarser scalar and incidence data are fixed. |
 | Does C638 affect the odd-size program? | **No:** C639 remains the next allocated carrier question. |
