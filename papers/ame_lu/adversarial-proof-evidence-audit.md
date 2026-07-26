@@ -5,9 +5,9 @@ specific proof location or evidence record.
 
 | Risk | Present status | Closure gate |
 |---|---|---|
-| “LU=LC” is read as the false global conjecture | closed in Theorem 1.1 and Section 8 | exact linear MDS/equal-phase CSS scope stated at first use and in final boundary |
+| “LU=LC” is read as the false global conjecture | closed in Theorem 1.1 and Section 8 | exact additive stabilizer-AME scope, prime-power Weyl convention, and sharp \(m\ge2\) boundary stated at first use and in the final trust boundary |
 | Equality of orbit partitions is confused with classification of all LU intertwiners | closed in Theorem 1.1 | headline theorem quantifies over every intertwiner; the six-party orbit classification is Corollary 1.4 |
-| The arbitrary-\(m\) theorem silently reuses a six-coordinate formula | closed in Section 3 | dual MDS shortening is stated for `[2m,m,m+1]`, the retained set has size `m+1`, and the general stabilizer partial trace is displayed before the tensor argument |
+| The arbitrary-\(m\) theorem silently reuses MDS shortening or a six-coordinate formula | closed in Sections 2--3 | the general stabilizer projector and partial trace precede the exact \(2m\) versus \(m-1\) support-kernel squeeze; MDS shortening appears only afterward as an explicit CSS specialization |
 | The transversal conversion corollary has the Choi transpose on the wrong side or assumes transpose preserves Cliffordness | closed after Theorem 1.1 | for two encoders the proof displays `((L^T)^{-1}⊗U_phys)|Ψ_C⟩=|Ψ_D⟩` and derives transpose stability from entrywise conjugation plus adjoint |
 | The exact higher-\(m\) GRS transversal group is inferred from six-party propagation or only proves containment | closed in Corollary 1.3 and Section 3 | the general GRS dual multiplier `SC=Cᗮ` gives explicit product upper/lower unipotents at every length; these generate `SL₂(q)`, physical Paulis supply `F_q²`, and the LU-rigidity converse excludes every product-unitary enlargement |
 | A Pauli or holonomy signature is used as an arbitrary-LU invariant | closed in Sections 4 and 6 | holonomy used only for LC; LU claims use reduced-operator covariance or basis-free contractions |
@@ -16,7 +16,7 @@ specific proof location or evidence record.
 | The H3/GRS theorem is generalized to the whole pencil | closed in Theorem 6.1 | exact odd good non-GRS H3 domain retained |
 | Four-copy rank drop is mistaken for a complete coordinate | closed after Theorem A.1 | generic-constancy proposition and closing warning distinguish divisor from coordinate |
 | Computational evidence lacks a public replay | closed by C563 | `supplement/EVIDENCE.md`, manifest, exact generators/certificates, and `verify.py --replay` |
-| Classical six-point invariant theory or the axis mechanism is presented as new | closed by C562 and Sections 1/8 | Rains--Van den Nest ancestry is explicit; the contribution is stated by exact full-Weyl MDS/CSS and transversal scope without a “first” or absence claim |
+| Classical six-point invariant theory, QMDS weights, operator pushing, or the axis mechanism is presented as new | closed by C562/C649 and Sections 1--4 | Rains--Van den Nest, Tan, Huber--Grassl, Ketkar et al., and Pastawski et al. are credited at theorem level; the contribution is the exact all-prime-power, all-\(m\), arbitrary-additive intertwiner scope, with no “first” claim |
 | The manuscript inherits report terminology without defining conventions | closed in Section 2 | projective, monomial, Weyl, Clifford, stabilizer, GRS, and party actions defined |
 
 ## C571 independent cold-read closures
@@ -31,7 +31,7 @@ were judged clear and convincing. The following defects were then repaired.
 | LC holonomy was undefined and the 450-entry collision claim was asserted | Section 4 now defines `K_T`, `M_T(i,j)`, and `Hol(T,U;i,j)`, proves LC covariance, states the symbolic/certificate bridge, and gives the complete multiplicity-collision argument | central `LC ⇒ z` proof made referee-followable |
 | “fixed-party symplectic kernel” and its propagation were undefined | Section 5 now defines the kernel, gives the four multiplier inclusions (5.2), derives code--dual equivalence from a nondiagonal block, cites the six-point self-association theorem, and states the GRS converse | fixed-party theorem proof expanded |
 | party-moving normalizer sounded unconditional | Theorem 5.1 now says an isoduality generates the normalizer only when present; the order `2420` is explicitly restricted to the two certificate-checked `q=11` non-GRS classes | scope corrected |
-| Weyl phases were underspecified | Section 2 fixes the exact CSS lift `X(c)Z(h)` and explains why its multiplication phases vanish | (2.1), (3.3), and (6.1) use one exact convention |
+| Weyl phases were underspecified | Section 2 distinguishes arbitrary nonzero stabilizer-lift phases from the exact CSS lift `X(c)Z(h)` and explains why the latter multiply without residual phase | (2.1)--(2.3), (3.6), and (6.1) use the stated conventions |
 | “odd good residue field” was undefined | Theorem 6.1 now quantifies over a prime ideal of `Z[τ]`, names the residue field, and defines goodness by the six-arc condition | arithmetic domain explicit |
 | marginal rank/concurrency bridge was asserted | Section 6 derives the trace normalization, addition-map kernel count, Gale-dual split, and graph-type reduction | conceptual bridge constructed in prose |
 | q=13 copy pattern and party action were absent | Section 6 displays the six permutations, defines `πσ`, states the rank field, and names the complete C397 replay | finite domain explicit |

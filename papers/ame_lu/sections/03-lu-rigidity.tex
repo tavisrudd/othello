@@ -1,4 +1,4 @@
-\section{Shortened Weyl tensors and LU rigidity}\label{sec:rigidity}
+\section{Full-Weyl marginals and LU rigidity}\label{sec:rigidity}
 
 We first isolate the linear-algebra statement that recovers a diagonal
 tensor's coordinate axes.  It is the full-Weyl counterpart of the
@@ -30,16 +30,17 @@ rank-one contraction locus, and hence permutes the axes in the first
 factor.  Apply the same argument in every factor.
 \end{proof}
 
-Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if it
-has an expansion
+Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if there
+is a \(q^2\)-element set \(P\), a distinguished element \(0\in P\), and
+bijections \(f_i:P\to\F_q^2\) with \(f_i(0)=0\), for which
 \[
- R=\sum_{v\in\F_q^2}\lambda_v
-       \bigotimes_{i=1}^r W_{L_i v},
- \qquad L_i\in\mathrm{GL}_2(q),\quad \lambda_v\ne0.       \tag{3.2}
+ R=\sum_{v\in P}\lambda_v
+       \bigotimes_{i=1}^r W_{f_i(v)},\qquad \lambda_v\ne0.       \tag{3.2}
 \]
 The coefficients need not be equal.  What matters is that the same
 \(q^2\)-element index set runs bijectively through the complete local
-Weyl basis at every party.
+Weyl basis at every party.  Neither \(P\) nor the bijections need be
+\(\F_q\)-linear.
 
 \begin{proposition}[Full-Weyl marginal criterion]
 \label{prop:full-weyl-marginal}
@@ -79,6 +80,91 @@ Proposition~\ref{prop:full-weyl-marginal}; the chosen sets cover all
 parties.
 \end{proof}
 
+\begin{proposition}[Stabilizer-AME support theorem]
+\label{prop:stabilizer-ame-support}
+Let \(\lvert\psi\rangle\) be a stabilizer
+\(\AME(2m,q)\) state, and let \(A\) be any \(m+1\) parties.  Then
+\[
+ |L(A)|=q^2.
+\]
+Every nonidentity label in \(L(A)\) has support exactly \(A\), and for
+each \(i\in A\) the coordinate projection
+\[
+ p_i:L(A)\longrightarrow\F_q^2
+\]
+is bijective.
+\end{proposition}
+
+\begin{proof}
+The projective label group \(L\) has order \(q^{2m}\).  Restrict its
+labels to the \(m-1\) parties outside \(A\).  The target has order
+\(q^{2(m-1)}\), and the kernel is \(L(A)\); hence
+\[
+ |L(A)|\geq q^{2m}/q^{2(m-1)}=q^2.                    \tag{3.3}
+\]
+Fix \(i\in A\).  A label in the kernel of \(p_i\) is supported on the
+\(m\)-set \(A\setminus\{i\}\).  The AME condition and \((2.2)\) exclude
+every such nonidentity stabilizer, so \(p_i\) is injective.  Its codomain
+has order \(q^2\), giving the reverse inequality in \((3.3)\) and hence
+bijectivity.  The same no-small-support argument shows that every
+nonidentity element of \(L(A)\) has full support \(A\).
+\end{proof}
+
+\begin{proposition}[A stabilizer-AME marginal fixes the local Weyl axes]
+\label{prop:marginal-axes}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
+\(\AME(2m,q)\) states.  If a product unitary on an \((m+1)\)-set \(A\)
+carries \(\rho^\psi_A\) to \(\rho^\phi_A\), then every local factor on
+\(A\) is Clifford.
+\end{proposition}
+
+\begin{proof}
+By \((2.2)\),
+\[
+ \rho^\psi_A=q^{-|A|}
+   \sum_{\ell\in L_\psi(A)}\widetilde W_\ell .
+\]
+Index this sum by \(P=L_\psi(A)\).  Proposition
+\ref{prop:stabilizer-ame-support} says that every coordinate projection
+\(P\to\F_q^2\) is bijective.  Relative to the fixed Weyl convention, each
+stabilizer lift contributes a nonzero coefficient.  Thus
+\(\rho^\psi_A\) is full-Weyl diagonal in the sense of \((3.2)\), and the
+same holds for \(\rho^\phi_A\).  Apply
+Proposition~\ref{prop:full-weyl-marginal}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
+Absorb the party permutation by relabelling \(\lvert\phi\rangle\).  Partial
+trace gives a product-unitary equivalence
+\(\rho^\psi_A\sim\rho^\phi_A\) for every \((m+1)\)-set \(A\).  Given a
+party \(i\), choose such a set containing it and apply
+Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
+\end{proof}
+
+The same support calculation recovers standard quantum-MDS structure.
+For every party set \(A\), purity and Weyl orthogonality give
+\[
+ |L(A)|=q^{2\max(|A|-m,0)}.                              \tag{3.4}
+\]
+M\"obius inversion is the stabilizer-state specialization of the
+quantum-MDS Shor--Laflamme distribution of Huber and Grassl
+\cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
+weight-\(m+1\) projective stabilizers is
+\(\binom{2m}{m+1}(q^2-1)\).  We use one further consequence.  If
+\(|A|\geq m+2\) and \(i\ne j\) lie in \(A\), then the dimensions in
+\((3.4)\), together with
+\[
+ L(A\setminus\{i\})\cap L(A\setminus\{j\})
+   =L(A\setminus\{i,j\}),
+\]
+give
+\[
+ L(A)=L(A\setminus\{i\})+L(A\setminus\{j\}).             \tag{3.5}
+\]
+Descending induction shows that the \((m+1)\)-supported subgroups span
+the full label group.  This is the additive quantum-MDS form of
+minimum-weight generation, not a separate weight-enumerator claim.
+
 Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
 \(S\) of size \(m+1\).  Shortening \(C\) on the \(m-1\) coordinates
 outside \(S\) gives an \([m+1,1,m+1]_q\) MDS code.  The dual
@@ -88,7 +174,7 @@ does as well.  Choose nonzero shortened words
 and
 \[
  L_C(S)=
- \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.3}
+ \{(ac^S,bh^S):a,b\in\F_q\}.                            \tag{3.6}
 \]
 At a party \(i\in S\), projection of this plane to the local Pauli labels
 is
@@ -100,58 +186,21 @@ which is invertible because both coordinates are nonzero.  Thus all
 basis at every party of \(S\); in particular, the \(q^2-1\)
 nonidentity labels run bijectively through the nonidentity Weyl labels.
 
-\begin{proposition}[A shortened marginal fixes the local Weyl axes]
-\label{prop:marginal-axes}
-Let \(C,D\leq\F_q^{2m}\) be linear \([2m,m,m+1]_q\) MDS codes.  If a
-product unitary on an \((m+1)\)-set \(S\) carries \(\rho^C_S\) to
-\(\rho^D_S\), then every local factor on \(S\) is Clifford.
-\end{proposition}
-
-\begin{proof}
-For a general equal-phase CSS state, the same stabilizer partial-trace
-calculation as in \((2.1)\) gives
-\[
- \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .
-\]
-View the entire marginal as a tensor in the \(m+1\) local
-Hilbert--Schmidt spaces, each with the full \(q^2\)-element Weyl basis.
-By \((3.3)\), after indexing \(v=(a,b)\), it has the form
-\[
- \rho^C_S=\sum_{v\in\F_q^2}\lambda_v
- \bigotimes_{i\in S}W_{L_iv},                                  \tag{3.4}
-\]
-where every \(L_i\) is invertible and every coefficient \(\lambda_v\) is
-nonzero.  (With the normalization above, all coefficients are
-\(q^{-|S|}\).)  This is a diagonal tensor with \(N=q^2\), including the
-identity label \(v=0\).
-
-The same calculation for \(D\) makes \(\rho^D_S\) full-Weyl diagonal.
-The conclusion is Proposition~\ref{prop:full-weyl-marginal}.
-\end{proof}
-
-\begin{proof}[Proof of Theorem~\ref{thm:lu-lc-rigidity}]
-Absorb the party permutation by relabelling \(D\).  Partial trace of the
-\(2m\)-party equivalence gives a product-unitary equivalence
-\(\rho^C_S\sim\rho^D_S\) for every \((m+1)\)-set \(S\).  Given a party
-\(i\), choose such a set containing it and apply
-Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
-\end{proof}
-
 \begin{proof}[Proof of Corollary~\ref{cor:transversal-clifford}]
 Let \(\lvert\Phi\rangle=q^{-1/2}\sum_x\lvert x,x\rangle\), and use the
 Choi convention
-\(\lvert\Psi_C\rangle=(I\otimes V_C)\lvert\Phi\rangle\) and
-\(\lvert\Psi_D\rangle=(I\otimes V_D)\lvert\Phi\rangle\).
+\(\lvert\psi\rangle=(I\otimes V_\psi)\lvert\Phi\rangle\) and
+\(\lvert\phi\rangle=(I\otimes V_\phi)\lvert\Phi\rangle\).
 Writing \(U_{\mathrm{phys}}=\bigotimes_iU_i\), the relation
-\(U_{\mathrm{phys}}V_C=V_DL\) gives
+\(U_{\mathrm{phys}}V_\psi=V_\phi L\) gives
 \[
- (I\otimes U_{\mathrm{phys}})\lvert\Psi_C\rangle
-   =(L^T\otimes I)\lvert\Psi_D\rangle .
+ (I\otimes U_{\mathrm{phys}})\lvert\psi\rangle
+   =(L^T\otimes I)\lvert\phi\rangle .
 \]
 Hence
 \[
  \bigl((L^T)^{-1}\otimes U_{\mathrm{phys}}\bigr)
-   \lvert\Psi_C\rangle=\lvert\Psi_D\rangle .
+   \lvert\psi\rangle=\lvert\phi\rangle .
 \]
 Theorem~\ref{thm:lu-lc-rigidity} makes every displayed local factor
 Clifford.  Entrywise conjugation preserves the finite-field Weyl group,
@@ -164,8 +213,8 @@ finite-field Clifford group, and \(L\) is Clifford.
 
 \begin{corollary}[Discrete product-unitary symmetry]
 \label{cor:discrete-lu-symmetry}
-For every equal-phase MDS--CSS state in
-Theorem~\ref{thm:lu-lc-rigidity}, the product-unitary automorphism group
+For every stabilizer AME state in Theorem~\ref{thm:lu-lc-rigidity}, the
+product-unitary automorphism group
 modulo one-site scalar phases is finite and discrete.  Its identity
 component before that quotient consists only of one-site scalar phases.
 More precisely, if \(T=(S^1)^{2m}\), \(G\) is the fixed-party

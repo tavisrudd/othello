@@ -50,8 +50,9 @@ the locally generated PDF or build intermediates with TeX source. Inspect
 arXiv's generated PDF before submission.
 
 The intended primary category is `quant-ph`; `cs.IT` is a plausible
-cross-list because the main theorem is stated for MDS/CSS codes. Category,
-license, metadata, and the final submit action require the author's decision.
+cross-list because the exact transversal-group specialization is stated for
+MDS--CSS codes. Category, license, metadata, and the final submit action
+require the author's decision.
 
 ## Immutable identity
 

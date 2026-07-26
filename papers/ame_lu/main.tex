@@ -39,8 +39,8 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\diag}{\operatorname{diag}}
 
-\title{Local-Unitary Rigidity and Transversal Clifford Groups
-for MDS--CSS AME States}
+\title{Local-Unitary Rigidity of Stabilizer AME States and
+Transversal Clifford Groups of MDS--CSS Codes}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -48,20 +48,22 @@ for MDS--CSS AME States}
 \maketitle
 
 \begin{abstract}
-Let \(C\) be a linear \([2m,m,m+1]_q\) MDS code, and let
-\(\lvert\Psi_C\rangle=q^{-m/2}\sum_{c\in C}\lvert c\rangle\) be its
-equal-phase CSS state.  For every prime power \(q\) and \(m\geq2\), every
-product-unitary intertwiner between two such states is local Clifford.
-Consequently, every transversal conversion between the associated
-\([[2m-1,1,m]]_q\) quantum MDS encoders is Clifford factor by factor, and
-none admits a transversal non-Clifford logical unitary.
+Let \(q=p^e\).  For every \(m\geq2\), each product-unitary intertwiner
+between two stabilizer \(\AME(2m,q)\) states is Clifford factor by factor.
+On any \(m+1\) parties, the supported stabilizer labels form a
+\(q^2\)-element group and project bijectively onto the complete local Weyl
+basis at every retained party.  The reduced operator therefore determines
+its local Weyl axes intrinsically.  Consequently, every tensor-product
+conversion between the associated \([[2m-1,1,m]]_q\) stabilizer
+quantum-MDS encoders is Clifford on every physical factor and on the
+logical factor.
+
+For equal-phase CSS states of linear \([2m,m,m+1]_q\) MDS codes, the code
+geometry further determines the exact transversal group.
 For odd prime \(q\), the exact fixed-party projective transversal logical
 group is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) precisely when \(C\) is
 diagonally isodual, and \(\F_q^2\rtimes T\) otherwise, where \(T\) is the
 split torus; generalized Reed--Solomon codes lie on the first branch.
-The proof shortens \(C\) and \(C^\perp\) to \(m+1\) coordinates.  The
-resulting marginal is diagonal on the full local Weyl basis, and its
-rank-one contractions recover the Weyl axes.
 
 For \(m=3\), a degree-eight quotient \(z\) classifies projective and
 monomial-code equivalence on an admitted non-GRS pencil of six-point

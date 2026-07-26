@@ -1,15 +1,16 @@
-# Paper: Local-unitary rigidity of MDS--CSS AME states
+# Paper: Local-unitary rigidity of stabilizer AME states
 
-**Title:** *Local-Unitary Rigidity and Transversal Clifford Groups for
-MDS--CSS AME States.*
+**Title:** *Local-Unitary Rigidity of Stabilizer AME States and Transversal
+Clifford Groups of MDS--CSS Codes.*
 
 **Lane:** `ame-lu`
 
-**Status:** local version-1 release candidate. Every local-unitary intertwiner
-between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is local
-Clifford, for every prime power and \(m\geq2\).  Transversal conversions
-between the associated `[[2m-1,1,m]]_q` quantum MDS codes are Clifford
-factor by factor; over odd prime fields the GRS tower has exact projective
+**Status:** post-version-1 general-theorem revision. Every local-unitary
+intertwiner between arbitrary additive stabilizer `AME(2m,q)` states is
+local Clifford, for every prime power and \(m\geq2\).  Transversal
+conversions between the associated stabilizer `[[2m-1,1,m]]_q` quantum-MDS
+encoders are Clifford factor by factor; over odd prime fields the MDS--CSS
+specialization has exact projective
 transversal logical group `F_q^2 ⋊ SL_2(q)`, and diagonal isoduality is the
 exact all-length condition for that group rather than the split-torus
 alternative. The six-party pencil and logical-phase applications retain
@@ -17,9 +18,10 @@ their existing scopes. Public identifiers,
 author metadata, license choice, and submission authorization remain author
 gates.
 
-The complete formal companion is byte-pinned, but two foreign-owned
-transitive source comments still require referee-prose cleanup; see
-`release/PUBLIC-EXPORT.md`.
+The formal companion and trust maps distinguish the kernel-checked
+finite-coordinate, minimum-support, diagonal-axis, and Choi cores from the
+remaining stabilizer-state/reduced-density composition.  The previous
+byte-pinned release is superseded by this revision.
 
 ## Build
 
@@ -51,10 +53,10 @@ replay, and release-manifest verification.
 
 ## Mathematical scope
 
-The headline theorem studies equal-phase CSS `AME(2m,q)` tensors arising
-from linear `[2m,m,m+1]_q` MDS codes.  The detailed geometric applications
-specialize to `AME(6,q)` tensors from six-point projective arcs.  Its proved
-core is:
+The headline theorem studies arbitrary additive stabilizer `AME(2m,q)`
+tensors.  Linear `[2m,m,m+1]_q` MDS--CSS states supply the exact-group and
+geometric specialization; the detailed applications use `AME(6,q)` tensors
+from six-point projective arcs.  Its proved core is:
 
 1. uniform LU-to-LC rigidity and factorwise rigidity of transversal encoder
    conversions;
@@ -79,9 +81,10 @@ determined by a linear-system rank.  Their maximal minors detect special
 rank-jump divisors, but their values are generically constant.
 
 For the admitted odd non-GRS pencil, C609/C560 and C396 give
-`LU iff LC iff z equality`.  The all-MDS/CSS theorem is stronger: every LU
-intertwiner is Clifford.  This is a theorem for the stated linear
-MDS/CSS family, not a revival of the false global LU--LC conjecture.
+`LU iff LC iff z equality`.  C649 is stronger: every LU intertwiner between
+stabilizer AME states is factorwise Clifford.  This is a theorem for the
+stabilizer-AME class, not a revival of the false global LU--LC conjecture
+for arbitrary stabilizer states.
 
 ## Initial source set
 

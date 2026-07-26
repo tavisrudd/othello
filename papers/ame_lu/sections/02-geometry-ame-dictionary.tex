@@ -1,4 +1,4 @@
-\section{Six-arcs, MDS codes, and CSS states}\label{sec:dictionary}
+\section{Stabilizer AME states and MDS--CSS models}\label{sec:dictionary}
 
 Let \(q=p^e\) and fix the additive character
 \(\chi(a)=\exp(2\pi i\,\Tr_{\F_q/\F_p}(a)/p)\).  On the standard basis of
@@ -8,18 +8,37 @@ Let \(q=p^e\) and fix the additive character
  Z(b)\lvert x\rangle=\chi(bx)\lvert x\rangle .
 \]
 For \(v=(a,b)\in\F_q^2\), write \(W_v=X(a)Z(b)\), with any fixed
-consistent phase convention when only its projective axis is used.  For
-the CSS stabilizer we use the exact lift
-\[
- W_{(c,h)}=X(c)Z(h)=\bigotimes_{i=1}^6X(c_i)Z(h_i),
- \qquad(c,h)\in C\oplus C^\perp .
-\]
-Since \(h\cdot c'=0\) for \(h\in C^\perp\) and \(c'\in C\), these lifts
-multiply without a residual phase and fix \(\lvert\Psi_C\rangle\).
-The \(q^2\) single-party operators \(W_v\) form an
+consistent phase convention when only its projective axis is used.  The
+\(q^2\) single-party operators \(W_v\) form an
 orthogonal basis of the single-party Hilbert--Schmidt space.  A unitary is
 Clifford when conjugation permutes their projective axes
 \(\mathbb C W_v\).
+
+For \(n\) parties, a pure stabilizer state is fixed by an abelian Pauli
+group \(\mathcal S\) of order \(q^n\).  Its projective label group
+\(L\leq(\F_q^2)^n\), viewed additively over \(\F_p\), is maximal isotropic
+for the trace-symplectic form.  This is the standard arbitrary-additive
+prime-power stabilizer correspondence
+\cite[Theorems~13 and 15]{KetkarKlappeneckerKumarSarvepalli2006}.
+For each \(\ell\in L\), write the stabilizer lift as
+\(\widetilde W_\ell=\alpha_\ell W_\ell\), where
+\(\alpha_\ell\ne0\).  Then
+\[
+ \lvert\psi\rangle\langle\psi\rvert
+   =q^{-n}\sum_{\ell\in L}\widetilde W_\ell .           \tag{2.1}
+\]
+If \(A\) is a party set, put
+\[
+ L(A)=\{\ell\in L:\supp(\ell)\subseteq A\}.
+\]
+Weyl orthogonality and partial trace give
+\[
+ \rho^\psi_A=q^{-|A|}\sum_{\ell\in L(A)}\widetilde W_\ell .  \tag{2.2}
+\]
+In particular, \(\rho^\psi_A\) is maximally mixed exactly when
+\(L(A)=\{0\}\).  Thus a stabilizer state on \(2m\) parties is AME exactly
+when it has no nonidentity stabilizer label supported on at most \(m\)
+parties.
 
 A six-arc is an ordered sextuple of points of \(\PP^2(\F_q)\) with no
 three collinear.  Choose nonzero column representatives and collect them
@@ -37,6 +56,14 @@ These objects exist exactly when \(q\geq4\).  Indeed, from one point of
 a six-arc the five joining lines are distinct, so \(q+1\geq5\).  For
 \(q=4\), a conic together with its nucleus is a six-arc; for \(q\geq5\),
 any six points of a nonsingular conic form a six-arc.
+
+For the resulting CSS stabilizer we use the exact lift
+\[
+ W_{(c,h)}=X(c)Z(h)=\bigotimes_{i=1}^6X(c_i)Z(h_i),
+ \qquad(c,h)\in C\oplus C^\perp .
+\]
+Since \(h\cdot c'=0\) for \(h\in C^\perp\) and \(c'\in C\), these lifts
+multiply without a residual phase and fix \(\lvert\Psi_C\rangle\).
 
 \begin{proposition}[Arc--AME dictionary]\label{thm:dictionary}
 For a six-arc with kernel \(C\), the state \(\lvert\Psi_C\rangle\) in
@@ -75,9 +102,9 @@ For a party set \(S\), let
 \[
  L_C(S)=\{\ell\in L_C:\supp(\ell)\subseteq S\}.
 \]
-The stabilizer partial-trace formula gives
+The general stabilizer partial-trace formula specializes to
 \[
- \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.1}
+ \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.3}
 \]
 This formula is the bridge used in both the rigidity proof and the
 marginal invariants below.  A Pauli-labelled quantity is not by itself an

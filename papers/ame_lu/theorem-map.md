@@ -14,7 +14,8 @@ still depends on the claim, evidence, literature, and prose gates.
 | C548 | rank-drop scheme is `(z-2)(9z-4)=0` | adopted after paper-local evidence import | admitted pencil with stated exceptional characteristics | exact symbolic computation and group-orbit certificates |
 | C550 | transport sheaf derives the divisor and multiplicities | adopted | exact domain and corrections stated in C550 | cycle-cover algebra and double-coset geometry |
 | C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
-| C560/C609 | every LU intertwiner between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is LC; the associated `[[2m-1,1,m]]_q` code has no transversal non-Clifford logical unitary; hence `LU iff LC iff z` on the admitted six-party pencil | adopted version-1 headline package | every prime power and \(m\geq2\) whenever the MDS code exists; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity; Choi correspondence for the transversal corollary |
+| C560/C609 | every LU intertwiner between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is LC; the associated `[[2m-1,1,m]]_q` code has no transversal non-Clifford logical unitary; hence `LU iff LC iff z` on the admitted six-party pencil | adopted as a specialization of C649 | every prime power and \(m\geq2\) whenever the MDS code exists; C396's odd admitted domain for the `z` classification | MDS shortening gives an explicit realization of C649's supported-label bijection; Choi correspondence for the transversal corollary |
+| C649 | every LU intertwiner between arbitrary additive stabilizer `AME(2m,q)` states is factorwise Clifford; every associated stabilizer-QMDS encoder conversion is Clifford on all physical and logical factors | adopted headline package | every prime power `q=p^e` and every `m≥2`; standard additive Weyl system; the Bell-pair boundary `m=1` is excluded sharply | AME no-small-support condition, supported-label cardinality squeeze, full-Weyl diagonal-axis recovery, and Choi correspondence |
 | C614 | transversal conversions between any two associated encoders are Clifford factor by factor; product-unitary automorphisms are projectively finite; the odd-prime even-length GRS tower has exact projective transversal logical group `F_q^2 ⋊ SL_2(q)` | adopted higher-\(m\) application package | conversion and finiteness for every prime power and existing `[2m,m,m+1]` code; exact GRS group for odd prime `q` and `2m≤q+1` | Choi correspondence, finiteness of the projective Clifford group, and explicit GRS dual-multiplier unipotents |
 | C622 | the exact odd-prime fixed-party projective transversal group is `F_q^2 ⋊ SL_2(q)` exactly for diagonally isodual `[2m,m,m+1]_q` MDS codes and `F_q^2 ⋊ T` otherwise | adopted intrinsic phase boundary | every odd prime `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS code | arbitrary-length diagonal-multiplier lemma, block converse, complete logical-Pauli fiber, and duality-shear propagation |
 | C631 | the diagonal multiplier space between two exact half-dimensional MDS codes has dimension at most one; the code-to-dual space gives an exact nullity test and a unique projective witness | adopted as the intrinsic coding-theoretic phase test | every finite field and exact linear `[2m,m,m+1]` MDS pair; Clifford-group consequence remains odd-prime | full-support shortening argument and kernel-checked multiplier-space, reconstruction, uniqueness, and ratio theorems |
@@ -32,7 +33,8 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:q13-lu`: exact four-copy `q=13` separator.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
-- `thm:lu-lc-rigidity`: all-MDS/CSS LU-intertwiner rigidity.
+- `thm:lu-lc-rigidity`: arbitrary-additive stabilizer-AME LU-intertwiner rigidity.
+- `prop:stabilizer-ame-support`: exact \(q^2\) supported-label group and bijective local projections on every half-plus-one marginal.
 - `prop:full-weyl-marginal` and `cor:full-weyl-cover`: reusable full-Weyl marginal and cover criteria forcing every local intertwiner to be Clifford.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
 - `cor:discrete-lu-symmetry`: continuous closed scalar-torus short exact sequences, a closed Hausdorff discrete intrinsic Clifford quotient, finite scalar-torus component covers, finite discrete fixed-party and party-permuted quotients, and the exact extension through the realized party-permutation subgroup.  `AutomorphismExactSequence` supplies the exact sequence.  `NonabelianExtensionInvariant` supplies its section-free outer action, normalized factor set, nonabelian associativity and change-of-section laws, and the equivalence between factor-set trivializability and a homomorphic splitting.  The principal new terminals are `genericPartyPermutationOuterAction`, `genericPartyPermutationFactorSet_associativity`, `genericPartyPermutationFactorSet_change`, and `genericPartyPermutationFactorSet_trivializable_iff_splits`.
@@ -47,10 +49,10 @@ still depends on the claim, evidence, literature, and prose gates.
 
 1. **Headline package (`thm:lu-lc-rigidity`,
    `cor:transversal-clifford`).** For every prime power `q`, every
-   `m≥2`, and every pair of linear `[2m,m,m+1]_q` MDS codes, every LU
-   intertwiner of the associated equal-phase CSS states is LC.  The
-   associated `[[2m-1,1,m]]_q` quantum MDS code therefore admits no
-   transversal non-Clifford logical unitary.
+   `m≥2`, and every pair of additive stabilizer `AME(2m,q)` states, every
+   LU intertwiner is LC.  Every tensor-product conversion between the
+   associated stabilizer `[[2m-1,1,m]]_q` quantum-MDS encoders is
+   Clifford on every physical and logical factor.
 2. **Higher-\(m\) operational corollaries
    (`cor:diagonal-isodual-transversal-group`, `cor:discrete-lu-symmetry`).**  Over odd
    prime fields, diagonal isoduality is exactly the condition for the
@@ -80,7 +82,7 @@ still depends on the claim, evidence, literature, and prose gates.
 
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
-| LU-intertwiner rigidity and transversal no-go | every prime power `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS/CSS state; associated `[[2m-1,1,m]]_q` encoder for the corollary | none | nonlinear orthogonal arrays, non-MDS/non-CSS AME tensors, and transversal gates of other quantum-code families |
+| LU-intertwiner rigidity and transversal no-go | every prime power `q=p^e`, every `m≥2`, and every additive stabilizer `AME(2m,q)` state; associated stabilizer `[[2m-1,1,m]]_q` encoder for the corollary | arbitrary stabilizer phases and non-`\(\F_q\)`-linear additive label groups | `m=1`, nonstabilizer AME tensors, and transversal gates of other quantum-code families |
 | Exact diagonal-isodual transversal logical group | odd prime `q`, `m≥2`, and a linear `[2m,m,m+1]_q` MDS code | `F_q^2 ⋊ SL_2(q)` iff `SC=C^\perp` for nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise; includes non-GRS diagonally isodual codes | extension-field full Clifford groups, party-moving enlargements, and non-product physical implementations |
 | Diagonal-multiplier phase test | every finite field and exact linear `[2m,m,m+1]` MDS pair | multiplier nullity zero or one; every nonzero multiplier has full support and a unique projective class | no generator-matrix/Veronese or higher-\(m\) codimension claim |
 | Pencil classification by `z` and extension-field sector algebra | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | every field-automorphism exponent has exact diagonal/Gale divisors, explicit Gale multiplier, same-exponent disjointness, and `z`-equivariance | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |

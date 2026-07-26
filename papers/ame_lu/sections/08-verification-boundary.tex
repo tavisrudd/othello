@@ -71,7 +71,8 @@ Claim family & Proof mode & Machine trust / formal status\\
 \midrule
 LU-to-LC rigidity and no-go &
 manuscript proof plus Lean &
-unconditional kernel checking; standard Lean axioms only\\
+coordinate squeeze and axis cores kernel checked; stabilizer-density
+composition proved in the manuscript\\
 Pencil and six-arc classification &
 proof plus exact certificates &
 conditional Lean interface; geometric and holonomy inputs named\\
@@ -110,28 +111,35 @@ The accompanying Lean~4 artifact uses toolchain
 \texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
 arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
 marginal graph counts, the contraction normalization and party-orbit
-identities, the length-generic LU-to-LC rigidity chain, the
+identities, the length-generic MDS--CSS LU-to-LC chain, the
+arbitrary-additive support squeeze and minimum-support generation, the
+abstract holonomy-centralizer mechanism, the
 extension-field pencil-sector algebra, and the transport polynomial and
 characteristic-seven identities in one environment.
-The length-generic part defines the code, equal-phase state, party action,
-and LU/LC relations on \(\operatorname{Fin}(2m)\); proves that the exact
-\([2m,m,m+1]\) parameters are equivalent to bijectivity of every
-\(m\)-coordinate projection; proves the same MDS property for the dual
-and constructs full-support \((m+1)\)-coordinate shortening generators;
-and proves the arity-independent full-basis diagonal-flattening axis
-lemma.  The formal proof then expands every shortened
-\((m+1)\)-party marginal on all \(q^2\) Weyl axes, including the
-identity, proves covariance under the displayed product action, and
-shows that invertible product maps preserve and reflect the pure
-contraction locus of a full diagonal tensor.  Since \(m\geq2\), two
-factors remain after contraction, so the locus recovers every local Weyl
-axis.  Retained sets cover all \(2m\) parties, and the party permutation
-is absorbed into the source code.  Thus the generic LU-to-LC terminal
-proves Theorem~\ref{thm:lu-lc-rigidity} unconditionally for every finite
-field and every \(m\geq2\).  Its \(m=3\) definitions and terminal are
-reconciled with the established six-party API.  Composition with the
-admitted-pencil interface gives the formal conditional statement
-\(\mathrm{LU}\Longleftrightarrow z(t)=z(u)\).
+The arbitrary-additive layer defines coordinate restriction of a
+prime-field label space, identifies its kernel with supported labels, and
+proves that absence of a nonzero label on at most \(m\) parties makes the
+one-site kernel projection injective.  The exact \(2m\) versus \(m-1\)
+dimension balance then makes that projection bijective and gives a unique
+supported label over every local Weyl label.  A separate support-profile
+interface proves
+\(L(A)=L(A\setminus\{i\})+L(A\setminus\{j\})\) and the resulting
+generation by \((m+1)\)-supported subspaces.  The diagonal-tensor modules
+prove the arity-independent axis lemma for arbitrary bijective local
+reindexings and nonzero coefficients.  The abstract holonomy module proves
+that compatible local gauges are the centralizer of loop transports, with
+a normal-subgroup specialization.
+
+The manuscript supplies the remaining physics correspondence for
+Theorem~\ref{thm:lu-lc-rigidity}: AME excludes small stabilizer supports,
+purity gives the exact support dimensions, and the stabilizer projector
+gives the phased full-Weyl marginal \((2.2)\).  Those three statements are
+not yet composed into one arbitrary-additive Lean terminal.  The earlier
+MDS--CSS specialization remains unconditional in the generic Lean chain,
+including marginal covariance, retained-set coverage, and party
+relabeling.  Composition with the admitted-pencil interface gives the
+formal conditional statement
+\(\mathrm{LU}\Longleftrightarrow z(t)=z(u)\) in that specialization.
 The same artifact constructs the one-site Clifford quotient by nonzero
 scalars, proves the scalar subgroup closed, and proves the quotient
 Hausdorff, discrete, and finite by recording exact Weyl conjugates and
