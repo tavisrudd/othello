@@ -4,14 +4,14 @@
 
 **Date:** 2026-07-25
 
-**Status:** implementation now includes polynomial restriction and
+**Status:** complete.  The implementation includes polynomial restriction and
 Frobenius descent, binary-factor proportionality, projective-representative
 invariance of square status, quotient-lift corrections and their finite
 interpolation, line-product detection, product nonsquareness, and the conditional
 carrier-cardinality theorem, together with the exact-threshold residue
 identity.  All three dedicated gates and their aggregate confirmations pass.
-The manuscript is unchanged, and the formal boundary below isolates the
-projective inputs which Lean does not yet check.
+The manuscript is unchanged.  The concrete projective incidence and factor
+instantiation isolated below is allocated as C657.
 
 ## Mathematical scope
 
