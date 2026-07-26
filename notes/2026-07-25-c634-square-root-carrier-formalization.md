@@ -173,6 +173,16 @@ terminals.
   and
   `homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq`
   concludes divisibility of an actual homogeneous binary residual;
+- `homogenize_fintypeProd_X_sub_C_eq_prod_homogenize` identifies the
+  homogenized node product with the product of its degree-one homogenized
+  factors;
+- `prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C` computes the aggregate
+  scalar for factorwise proportional restricted equations, while
+  `prod_dvd_of_homogenize_fintypeProd_X_sub_C_dvd_of_proportional` removes
+  that nonzero unit from divisibility; and
+- `prod_dvd_sub_of_proportional_homogenizedNodeFactors_of_isHomogeneous_eval_eq`
+  combines node agreement, homogenization, and proportional factor
+  identification into divisibility by the actual restricted equation product;
 - `exists_finset_extension_of_single_correction` proves the elementary
   interpolation induction: a correction which fits one new restriction and
   vanishes on those already fitted yields a simultaneous extension on every
@@ -219,7 +229,7 @@ terminals.
   and ambient nonsquareness into `Y.card ≤ degreeBound`.
 
 The import-only gate `RelativeConicArcs.Gates.CarrierArcBound` audits these
-twenty-two terminals.
+twenty-six terminals.
 
 ## Formal boundary
 
@@ -239,9 +249,10 @@ Lean does not yet check:
   factors; distinct-affine-node factorization, its degree-bounded
   homogenization to binary forms, the quotient-lift correction, and finite
   induction are formalized.  What remains is identifying the restricted old
-  line equations with the homogenized node factors, choosing a chart which
-  avoids a point at infinity, and deriving the affine-degree hypothesis from
-  the concrete homogeneous sections;
+  line equations factorwise with the homogenized node factors; Lean already
+  absorbs all resulting nonzero scalars at the product level.  Choosing a
+  chart which avoids a point at infinity and deriving the affine-degree
+  hypothesis from the concrete homogeneous sections also remain;
 - the construction of a linear coordinate change for each concrete projective
   line and the facts that the resulting equations have degree one and are
   pairwise relatively prime;
@@ -260,7 +271,7 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
-| Do compatible linewise roots extend? | **Reduced to the geometric node-factor identification:** agreement at distinctly indexed affine nodes gives product divisibility, and degree-bounded homogenization gives divisibility of the actual homogeneous binary residual.  Restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate over every finite family.  The remaining gap is identifying the restricted previous line equations with these homogenized node factors, choosing an affine chart avoiding infinity, and deriving the stated affine-degree bound. |
+| Do compatible linewise roots extend? | **Reduced to the geometric node-factor identification and chart choice:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Factorwise nonzero scalar changes are absorbed formally, restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate over every finite family.  The remaining gap is identifying each restricted previous line equation with its node factor, choosing an affine chart avoiding infinity, and deriving the stated affine-degree bound. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 | What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
@@ -286,14 +297,14 @@ standing for them is introduced.
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
   **PASS**, warning-free.
-- The source-local audit of its twenty-two terminals reports no axioms beyond
+- The source-local audit of its twenty-six terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`;
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
   `--no-build` confirmation, together with the nineteen-terminal polynomial gate
-  and twenty-two-terminal carrier gate builds: pending release of the shared Lean
+  and twenty-six-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
   the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
   lock.

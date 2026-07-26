@@ -143,6 +143,107 @@ theorem homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
   rw [hhomogenize] at hdvd
   exact hdvd
 
+/-- Homogenizing the product of affine node factors in its natural degree equals the product of
+their degree-one homogenizations. -/
+theorem homogenize_fintypeProd_X_sub_C_eq_prod_homogenize
+    (node : ι → K) :
+    Polynomial.homogenize
+        (∏ i, (Polynomial.X - Polynomial.C (node i)))
+        (Fintype.card ι) =
+      ∏ i, Polynomial.homogenize
+        (Polynomial.X - Polynomial.C (node i)) 1 := by
+  have h :=
+    Polynomial.homogenize_finsetProd
+      (s := Finset.univ)
+      (p := fun i : ι => Polynomial.X - Polynomial.C (node i))
+      (n := fun _ => 1)
+      (by
+        intro i _
+        simp)
+  have hsum :
+      (∑ _i ∈ (Finset.univ : Finset ι), (1 : ℕ)) =
+        Fintype.card ι := by
+    simp
+  rw [hsum] at h
+  exact h
+
+/-- A family of nonzero scalar multiples of the homogenized node factors has product equal to the
+aggregate scalar times the homogenized node-factor product. -/
+theorem prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C
+    (node scale : ι → K)
+    (factor : ι → MvPolynomial (Fin 2) K)
+    (hfactor :
+      ∀ i,
+        factor i =
+          MvPolynomial.C (scale i) *
+            Polynomial.homogenize
+              (Polynomial.X - Polynomial.C (node i)) 1) :
+    (∏ i, factor i) =
+      MvPolynomial.C (∏ i, scale i) *
+        Polynomial.homogenize
+          (∏ i, (Polynomial.X - Polynomial.C (node i)))
+          (Fintype.card ι) := by
+  simp_rw [hfactor]
+  rw [Finset.prod_mul_distrib]
+  simp only [map_prod]
+  rw [homogenize_fintypeProd_X_sub_C_eq_prod_homogenize]
+
+/-- Divisibility by the homogenized node-factor product is equivalent to divisibility by any
+factorwise nonzero scalar rescaling of that product. -/
+theorem prod_dvd_of_homogenize_fintypeProd_X_sub_C_dvd_of_proportional
+    (node scale : ι → K)
+    (factor : ι → MvPolynomial (Fin 2) K)
+    (hscale : ∀ i, scale i ≠ 0)
+    (hfactor :
+      ∀ i,
+        factor i =
+          MvPolynomial.C (scale i) *
+            Polynomial.homogenize
+              (Polynomial.X - Polynomial.C (node i)) 1)
+    (residual : MvPolynomial (Fin 2) K)
+    (hdiv :
+      Polynomial.homogenize
+          (∏ i, (Polynomial.X - Polynomial.C (node i)))
+          (Fintype.card ι) ∣
+        residual) :
+    (∏ i, factor i) ∣ residual := by
+  rw [prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C
+    node scale factor hfactor]
+  have hscaleProduct : ∏ i, scale i ≠ 0 :=
+    Finset.prod_ne_zero_iff.mpr fun i _ => hscale i
+  exact ((hscaleProduct.isUnit.map MvPolynomial.C).mul_left_dvd).mpr hdiv
+
+/-- If the restricted line equations are nonzero scalar multiples of the homogenized factors at
+distinct affine nodes, agreement of homogeneous binary sections at those nodes makes their
+difference divisible by the product of the actual restricted equations. -/
+theorem prod_dvd_sub_of_proportional_homogenizedNodeFactors_of_isHomogeneous_eval_eq
+    (node scale : ι → K) (hnode : Function.Injective node)
+    (factor : ι → MvPolynomial (Fin 2) K)
+    (hscale : ∀ i, scale i ≠ 0)
+    (hfactor :
+      ∀ i,
+        factor i =
+          MvPolynomial.C (scale i) *
+            Polynomial.homogenize
+              (Polynomial.X - Polynomial.C (node i)) 1)
+    (target current : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (htarget : target.IsHomogeneous degree)
+    (hcurrent : current.IsHomogeneous degree)
+    (hcard : Fintype.card ι ≤ degree)
+    (haffineDegree :
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
+        MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).natDegree ≤ degree)
+    (hagree :
+      ∀ i,
+        (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target).eval (node i) =
+          (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).eval (node i)) :
+    (∏ i, factor i) ∣ target - current := by
+  apply prod_dvd_of_homogenize_fintypeProd_X_sub_C_dvd_of_proportional
+    node scale factor hscale hfactor
+  exact
+    homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
+      node hnode target current degree htarget hcurrent hcard haffineDegree hagree
+
 end DistinctPolynomialRoots
 
 section CoordinateHyperplaneRestriction
