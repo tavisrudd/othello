@@ -186,4 +186,139 @@ theorem MvPolynomial.IsHomogeneous.planeLineRestriction
 
 end HomogeneousRestrictions
 
+section CarrierResidualDivisibility
+
+variable {K P : Type*} [Field K] [ExpChar K 2]
+
+/-- On a new carrier line, exact shared representatives convert the preceding root agreements
+into square agreement at every canonical restricted zero.  Nonincidence and no-three-collinear
+determinants then make the product of the preceding line equations divide the homogeneous
+residual. -/
+theorem planeLineRestriction_finsetLineProduct_dvd_root_sub_restriction
+    (lineCoordinates : P → Fin 3 → Fin 2 → K)
+    (center : P → Fin 3 → K)
+    (ambient : MvPolynomial (Fin 3) K)
+    (root : P → MvPolynomial (Fin 2) K)
+    (degree : ℕ)
+    (hrootHomogeneous : ∀ x, (root x).IsHomogeneous degree)
+    (hsquare :
+      ∀ x, planeLineRestriction (lineCoordinates x) ambient = (root x) ^ 2)
+    (hlineSurjective :
+      ∀ x (point : Fin 3 → K),
+        planeVectorPairing (center x) point = 0 →
+          ∃ binaryPoint : Fin 2 → K,
+            pointOnParametrizedPlaneLine (lineCoordinates x) binaryPoint =
+              point)
+    (s : Finset P) (x : P) (G : MvPolynomial (Fin 3) K)
+    (hGhomogeneous : G.IsHomogeneous degree)
+    (hG : ∀ y ∈ s, planeLineRestriction (lineCoordinates y) G = root y)
+    (hne :
+      ∀ y : {y // y ∈ s},
+        planeLineRestrictedCoefficients
+          (lineCoordinates x) (center y.1) ≠ 0)
+    (scale : K)
+    (hnormal :
+      parametrizedPlaneLineNormal (lineCoordinates x) =
+        fun i => scale * center x i)
+    (hscale : scale ≠ 0)
+    (hnoncollinear :
+      Pairwise fun y z : {y // y ∈ s} =>
+        planeVectorDeterminant (center x) (center y.1) (center z.1) ≠ 0) :
+    planeLineRestriction (lineCoordinates x)
+        (∏ y ∈ s, homogeneousLinearPolynomial (center y)) ∣
+      root x - planeLineRestriction (lineCoordinates x) G := by
+  let restrictedCovector : {y // y ∈ s} → Fin 3 → K :=
+    fun y => center y.1
+  have hdet :
+      Pairwise fun y z : {y // y ∈ s} =>
+        binaryLinearCoefficientDeterminant
+          (planeLineRestrictedCoefficients
+            (lineCoordinates x) (restrictedCovector y))
+          (planeLineRestrictedCoefficients
+            (lineCoordinates x) (restrictedCovector z)) ≠ 0 :=
+    pairwise_restrictedDeterminant_ne_zero_of_normal_eq_scale
+      (lineCoordinates x) (center x) restrictedCovector scale
+      hnormal hscale hnoncollinear
+  have hsquareAgree :
+      ∀ y : {y // y ∈ s},
+        let restricted :=
+          planeLineRestrictedCoefficients
+            (lineCoordinates x) (restrictedCovector y)
+        MvPolynomial.eval ![restricted 1, -restricted 0] ((root x) ^ 2) =
+          MvPolynomial.eval ![restricted 1, -restricted 0]
+            ((planeLineRestriction (lineCoordinates x) G) ^ 2) := by
+    intro y
+    let firstPoint : Fin 2 → K :=
+      restrictedCovectorProjectiveZero (lineCoordinates x) (center y.1)
+    obtain ⟨secondPoint, hpoint⟩ :=
+      exists_binaryPreimage_of_restrictedCovectorProjectiveZero
+        (lineCoordinates x) (lineCoordinates y.1) (center y.1)
+        (hlineSurjective y.1)
+    change
+      MvPolynomial.eval firstPoint ((root x) ^ 2) =
+        MvPolynomial.eval firstPoint
+          ((planeLineRestriction (lineCoordinates x) G) ^ 2)
+    calc
+      MvPolynomial.eval firstPoint ((root x) ^ 2) =
+          MvPolynomial.eval firstPoint
+            (planeLineRestriction (lineCoordinates x) ambient) := by
+        rw [hsquare x]
+      _ = MvPolynomial.eval secondPoint
+            (planeLineRestriction (lineCoordinates y.1) ambient) :=
+        eval_planeLineRestrictions_eq_of_pointOnParametrizedLine_eq
+          (lineCoordinates x) (lineCoordinates y.1)
+          firstPoint secondPoint ambient hpoint.symm
+      _ = MvPolynomial.eval secondPoint ((root y.1) ^ 2) := by
+        rw [hsquare y.1]
+      _ = MvPolynomial.eval secondPoint
+            ((planeLineRestriction (lineCoordinates y.1) G) ^ 2) := by
+        rw [hG y.1 y.2]
+      _ = MvPolynomial.eval secondPoint
+            (planeLineRestriction (lineCoordinates y.1) (G ^ 2)) := by
+        simp only [map_pow]
+      _ = MvPolynomial.eval firstPoint
+            (planeLineRestriction (lineCoordinates x) (G ^ 2)) :=
+        (eval_planeLineRestrictions_eq_of_pointOnParametrizedLine_eq
+          (lineCoordinates x) (lineCoordinates y.1)
+          firstPoint secondPoint (G ^ 2) hpoint.symm).symm
+      _ = MvPolynomial.eval firstPoint
+            ((planeLineRestriction (lineCoordinates x) G) ^ 2) := by
+        rw [map_pow]
+  have hdiv :=
+    fintypeProd_planeLineRestrictedLinearFactors_dvd_sub_of_projectiveZero_sq_eq
+      (lineCoordinates x) restrictedCovector hne hdet
+      (root x) (planeLineRestriction (lineCoordinates x) G) degree
+      (hrootHomogeneous x)
+      (MvPolynomial.IsHomogeneous.planeLineRestriction
+        hGhomogeneous (lineCoordinates x))
+      hsquareAgree
+  change
+    (∏ y : {y // y ∈ s},
+      planeLineRestriction (lineCoordinates x)
+        (homogeneousLinearPolynomial (center y.1))) ∣
+      root x - planeLineRestriction (lineCoordinates x) G at hdiv
+  have hproduct :
+      (∏ y : {y // y ∈ s},
+        planeLineRestriction (lineCoordinates x)
+          (homogeneousLinearPolynomial (center y.1))) =
+        ∏ y ∈ s,
+          planeLineRestriction (lineCoordinates x)
+            (homogeneousLinearPolynomial (center y)) := by
+    change
+      (∏ y ∈ s.attach,
+        planeLineRestriction (lineCoordinates x)
+          (homogeneousLinearPolynomial (center y.1))) =
+        ∏ y ∈ s,
+          planeLineRestriction (lineCoordinates x)
+            (homogeneousLinearPolynomial (center y))
+    exact
+      Finset.prod_attach s
+        (fun y =>
+          planeLineRestriction (lineCoordinates x)
+            (homogeneousLinearPolynomial (center y)))
+  rw [hproduct] at hdiv
+  simpa only [map_prod] using hdiv
+
+end CarrierResidualDivisibility
+
 end RelativeConicArcs
