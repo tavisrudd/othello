@@ -1,0 +1,9 @@
+import RelativeConicArcs.OrdinaryUncoveredObstruction
+
+#print axioms RelativeConicArcs.ordinaryUncovered_subset_holes
+#print axioms RelativeConicArcs.ordinaryUncovered_card_le_holes
+#print axioms RelativeConicArcs.ordinaryUncovered_arc
+#print axioms RelativeConicArcs.Conic.standardConic_arc
+#print axioms RelativeConicArcs.Conic.NonsingularConic.points_arc
+#print axioms RelativeConicArcs.Conic.completeOutside_ordinaryUncovered_arc
+#print axioms RelativeConicArcs.Conic.completeOutside_ordinaryUncovered_card_le

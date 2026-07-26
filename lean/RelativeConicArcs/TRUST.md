@@ -22,6 +22,7 @@ spinoff.
 | averaging | `exists_completeOutside_of_completeArc`, `rhoC_le_t2`, `rhoC_le_of_kimVuBound` | proved in Lean for arbitrary holes under `|A||H| < |PG(2,K)|`; Kim--Vu remains an explicit theorem parameter |
 | characteristic two | hyperoval/nucleus/tangent classification, `complete_holeIncidence_pos`, nucleus-in/out inequalities in `Nucleus.lean`, `odd_standardConic_zeroDefect_charTwo_order`, and `TangentPairFourGroup.no_upper_even_equality_branch` | proved in Lean; the terminals collapse the odd equality spectrum to \(q=k-1\) and exclude the entire upper even equality branch over the standard conic without Ramanujan--Nagell. The converse identification of an arbitrary oval with a nucleus-containing prescribed conic, the parallel arbitrary-hyperoval interpretation, and projective transport of the standard-conic terminal are not formalized |
 | certificate bridge | relative and ordinary canonical-coverage soundness; `rawArc_iff_projectiveCap`; `check_sound`, `check_sound_empty` | proved in Lean for every finite field |
+| ordinary uncovered obstruction | `ordinaryUncovered_subset_holes`, `ordinaryUncovered_card_le_holes`, `ordinaryUncovered_arc`, `NonsingularConic.points_arc`, `completeOutside_ordinaryUncovered_arc`, `completeOutside_ordinaryUncovered_card_le` | proved in `OrdinaryUncoveredObstruction.lean`; completeness outside a nonsingular conic forces the ordinary uncovered locus to be an arc of cardinality at most `q+1`. Finite assertions that a particular classified locus is oversized or contains a collinear triple remain external unless separately imported |
 | evaluation obstruction | `evaluationMap`; injective-evaluation and selected-functional span obstructions in `EvaluationObstruction.lean` | proved over every commutative semiring; no finite-dimensionality assumption |
 | finite-field evaluation dichotomy | common-zero and distinct-hyperplane counts; `exists_ne_zero_forall_apply_ne_zero`; sharp `q+1` plane cover and equality model; `evaluation_avoidance_iff`; `evaluation_ker_le_ker_iff_mem_span`; `feature_evaluation_avoidance_iff`; `exists_outside_hyperplanes_not_mem_of_cubic_bound`; `exists_ne_zero_apply_ne_zero_not_mem_of_cubic_bound` | proved in `EvaluationDichotomy.lean` and `GoodFormAvoidance.lean`; the uniform threshold is `|A|≤q`, the rank-sensitive count is `(q-1)q^(r-2)(q+1-m)`, and at most `q-3` proper hyperplanes cannot force every remaining vector into an exceptional set of cardinality at most `3q^(r-1)` when `q≥5` and `r≥2`; identifying such an exceptional set with a conic discriminant zero locus is outside this formal claim |
 | projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
@@ -121,11 +122,15 @@ kernel reduction, so neither the Python normalization search nor any C637 JSON v
 input to these upper bounds.  `q19_ordinaryCoverage` separately checks every projective point,
 showing that this ten-arc is ordinary complete.
 
-The lower bounds have a different trust status.  The assertions that no seven-arc at q=13, no
-eight-arc at q=17, and no nine-arc at q=19 is complete outside a conic depend on the exhaustive
-C++ classification/rank runs recorded by C637.  Their projective-class coverage and quadratic-rank
-conclusions have not been imported as local Lean certificates, and no structural Lean theorem
-currently implies them.  Consequently Lean proves only
+The lower bounds have a different trust status.  `OrdinaryUncoveredObstruction.lean`
+kernel-checks the structural reduction: completeness outside a nonsingular conic forces the
+ordinary uncovered locus to be an arc of cardinality at most `q+1`.  The assertions that every
+classified seven-arc at q=13 has an uncovered collinear triple, every classified eight-arc at q=17
+has more than `q+1` uncovered points, and all but one tested nine-arc extension at q=19 have an
+uncovered collinear triple remain exhaustive external computations.  The exceptional q=19
+extension is rejected by an external six-point conic-evaluation certificate.  Projective-class
+coverage and these finite predicates have not been imported as local Lean certificates.
+Consequently Lean proves only
 `rhoC (ZMod 13) ≤ 8`, `rhoC (ZMod 17) ≤ 9`, and `rhoC (ZMod 19) ≤ 10`;
 the exact equalities \(8,9,10\) remain external-computation-backed results.
 
