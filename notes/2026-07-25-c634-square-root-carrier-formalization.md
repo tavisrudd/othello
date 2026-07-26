@@ -125,6 +125,11 @@ ten public terminals.
   `exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero`
   prove that two nonzero binary linear forms with zero coefficient determinant
   are proportional by a nonzero scalar;
+- `homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode` identifies
+  the homogenized affine factor `X-t` with coefficient vector `(1,-t)`, and
+  `exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C`
+  proves that every nonzero binary linear form vanishing at `[t:1]` is its
+  nonzero scalar multiple;
 - `homogeneousLinearPolynomial_scale` and its restriction corollary prove the
   exact scalar change caused by rescaling a linear-factor representative;
 - `dualLinearFactorProduct` constructs the finite product of dual linear
@@ -158,7 +163,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its nineteen public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-one public
 terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
@@ -249,10 +254,11 @@ Lean does not yet check:
   factors; distinct-affine-node factorization, its degree-bounded
   homogenization to binary forms, the quotient-lift correction, and finite
   induction are formalized.  What remains is identifying the restricted old
-  line equations factorwise with the homogenized node factors; Lean already
+  line equations are nonzero and vanish at their corresponding intersections.
+  Lean then identifies them factorwise with the homogenized node factors and
   absorbs all resulting nonzero scalars at the product level.  Choosing a
   chart which avoids a point at infinity and deriving the affine-degree
-  hypothesis from the concrete homogeneous sections also remain;
+  hypothesis from the concrete homogeneous sections remain;
 - the construction of a linear coordinate change for each concrete projective
   line and the facts that the resulting equations have degree one and are
   pairwise relatively prime;
@@ -271,7 +277,7 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
-| Do compatible linewise roots extend? | **Reduced to the geometric node-factor identification and chart choice:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Factorwise nonzero scalar changes are absorbed formally, restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate over every finite family.  The remaining gap is identifying each restricted previous line equation with its node factor, choosing an affine chart avoiding infinity, and deriving the stated affine-degree bound. |
+| Do compatible linewise roots extend? | **Reduced to elementary incidence, chart choice, and degree bookkeeping:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Every nonzero binary linear form vanishing at `[t:1]` is formally a nonzero scalar multiple of the homogenized node factor, and all such scalars are absorbed at the product level.  Restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate.  The remaining gap is instantiating nonvanishing and node incidence for the concrete restricted line equations, choosing a chart avoiding infinity, and deriving the affine-degree bound. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 | What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
@@ -292,7 +298,7 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its nineteen terminals reports no axioms beyond
+- The source-local audit of its twenty-one terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
@@ -303,7 +309,7 @@ standing for them is introduced.
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the nineteen-terminal polynomial gate
+  `--no-build` confirmation, together with the twenty-one-terminal polynomial gate
   and twenty-six-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
   the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that

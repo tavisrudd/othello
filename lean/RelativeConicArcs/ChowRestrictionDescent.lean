@@ -1,4 +1,5 @@
 import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Algebra.Polynomial.Homogenize
 import Mathlib.Algebra.CharP.Lemmas
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.FieldTheory.Perfect
@@ -171,6 +172,39 @@ theorem exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_e
   obtain ⟨c, hc, rfl⟩ :=
     exists_ne_zero_scale_binaryCoefficients_of_determinant_eq_zero ha hb hdet
   exact ⟨c, hc, homogeneousLinearPolynomial_scale c a⟩
+
+/-- The degree-one homogenization of `X - t` is the homogeneous binary linear form with
+coefficient vector `(1, -t)`. -/
+theorem homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode
+    (t : K) :
+    Polynomial.homogenize (Polynomial.X - Polynomial.C t) 1 =
+      homogeneousLinearPolynomial ![1, -t] := by
+  simp [homogeneousLinearPolynomial, sub_eq_add_neg]
+
+/-- A nonzero homogeneous binary linear form which vanishes at the affine point `[t : 1]` is a
+nonzero scalar multiple of the homogenized node factor `X - t`. -/
+theorem exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+    (a : Fin 2 → K) (t : K) (ha : a ≠ 0)
+    (hvanish : a 0 * t + a 1 = 0) :
+    ∃ c : K, c ≠ 0 ∧
+      homogeneousLinearPolynomial a =
+        MvPolynomial.C c *
+          Polynomial.homogenize (Polynomial.X - Polynomial.C t) 1 := by
+  let nodeCoefficient : Fin 2 → K := ![1, -t]
+  have hnode : nodeCoefficient ≠ 0 := by
+    intro hzero
+    have hzero' := congrFun hzero 0
+    simp [nodeCoefficient] at hzero'
+  have hdet :
+      binaryLinearCoefficientDeterminant nodeCoefficient a = 0 := by
+    simpa [binaryLinearCoefficientDeterminant, nodeCoefficient,
+      sub_eq_add_neg, mul_comm, add_comm] using hvanish
+  obtain ⟨c, hc, hproportional⟩ :=
+    exists_ne_zero_scale_homogeneousLinearPolynomial_of_binary_determinant_eq_zero
+      hnode ha hdet
+  refine ⟨c, hc, ?_⟩
+  rw [hproportional,
+    homogenize_X_sub_C_eq_homogeneousLinearPolynomial_affineNode]
 
 end BinaryLinearFactors
 
