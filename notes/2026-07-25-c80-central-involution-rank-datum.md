@@ -120,6 +120,20 @@ Retaining all equivariant choices again admits losing edges; choosing the P
 pair would require an additional sound datum not supplied by the central
 involution.
 
+The `ej` orbit compression sharpens this comparison:
+
+| unoriented exchange | value | `Ω` | product order | legal points | live conic | minimum mate degree |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| `{(3,3),(14,12)}` | N | 0 | 2 | 4 | 0 | 0 |
+| `{(5,12),(7,13)}` | P | 1 | 10 | 7 | 3 | 1 |
+
+Both joining lines are external. The losing orbit is premature complete
+absorption, while the P orbit retains exactly the positive-overload/live-conic
+resource seen throughout the earlier repair/spoiler comparison. Replacing
+the datum by the P exchange's own central involution does not start a
+recursion: it gives `0/7` usable replies on that target. The central-datum
+family is therefore not closed even after selecting the good q19 orbit.
+
 The searched domain is exactly the five certified repair targets and their
 full legal-opponent sets, together with stabilizer transports of the q17
 representative and q19 control. It is not a q19 root census and says nothing
@@ -169,8 +183,8 @@ python3 rust/scripts/c80_central_involution_rank_datum.py --check
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_central_involution_rank_datum.py` | 13,027 | `c73980795654404a8eac1fcf30c977d2d438fdd1483e13811ec7e1438eb63e0f` |
-| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 43,098 | `ff7f7a320b57e90d34bc0541503153dbf6c309ad330f7791fb4e37d3d86f4aa8` |
+| `rust/scripts/c80_central_involution_rank_datum.py` | 16,032 | `a34e54e0ec7122e0394b245ee67c746916b3f1821eebbdbf7ede040e3707c3ee` |
+| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 44,232 | `99eb57a960b5e974db5fd298bad9214b6e054690d6b3d97e8fc15f7af558437b` |
 
 The JSON is canonical sorted data. `--check` regenerates it in a temporary
 directory and requires byte equality. Load-bearing source hashes are embedded
@@ -187,9 +201,12 @@ exists.
 
 The exact q19 pattern is revealing. `J` pairs the four usable moves into two
 orbits, one P-pair at `Ω=1` and one N-pair at `Ω=0`. Once again faster
-absorption is the losing choice. The datum captures a real symmetry but not
-the resource distinguishing premature N absorption from a safe positive
-target.
+absorption is the losing choice. The P orbit retains seven legal points,
+three live conic points, and positive mate degree; the N orbit retains
+`4,0,0`. The datum captures a real symmetry but not the resource
+distinguishing premature N absorption from a safe positive target. Updating
+to the P orbit's own central involution yields `0/7`, so the distinction is
+not recursively carried by the same construction.
 
 The Tao-style correction is that a canonical involution derived solely from
 the marked edge is too rigid. The selected state is not invariant under it:
@@ -210,6 +227,12 @@ the q19 P/N split are direct C80 deliverables.
   repair orbit?** No: `0/32` usable replies on every target.
 - **[SETTLED negative] Does q19 rescue the datum?** No: only `4/51` replies
   are usable, and they split `2 P + 2 N`.
+- **[SETTLED `ej`] What are those four q19 replies intrinsically?** Two
+  unoriented external exchanges: an order-two `Ω=0` N absorber and an
+  order-ten `Ω=1` P exchange retaining three live conic points.
+- **[SETTLED `ej`] Can the P exchange rewrite the datum to its own central
+  involution?** Not as a copycat recursion: the rewritten datum has `0/7`
+  usable replies.
 - **[SETTLED `ej`] Is the failure caused by the normalized grid legality
   implementation?** No. Direct projective determinant replay agrees on every
   response.

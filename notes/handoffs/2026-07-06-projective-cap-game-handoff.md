@@ -1135,9 +1135,12 @@ rank while `Ω` decreases. This datum is formula-defined, anti-gauge, and
 commutes exactly with the full stabilizer, but the selected state is not
 `J`-invariant. Every q17 repair target has `0/32` usable strict replies
 (`0/128` over the orbit); the q19 control has only `4/51`, and those four
-targets split `2 P + 2 N`. Direct projective determinant replay agrees with
-grid legality on every response. Thus the central torus element cannot be
-the proof datum even locally; the successor needs a state-dependent algebraic
+oriented edges collapse to two external exchange orbits: an order-two
+`Ω=0` N absorber and an order-ten `Ω=1` P target retaining three live conic
+points. Rewriting to the P exchange's own central involution still gives
+`0/7` usable replies. Direct projective determinant replay agrees with grid
+legality on every response. Thus the central torus element cannot be the
+proof datum even locally; the successor needs a state-dependent algebraic
 obligation rewrite before copycat, not another edge-only involution. C82
 remains gated. Report+cert:
 [`../2026-07-25-c80-central-involution-rank-datum.md`](../2026-07-25-c80-central-involution-rank-datum.md).

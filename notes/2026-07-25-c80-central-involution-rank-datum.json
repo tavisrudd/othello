@@ -2177,6 +2177,52 @@
     "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
     "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
   },
+  "q19_usable_exchange_orbits": [
+    {
+      "exchange": [
+        [
+          3,
+          3
+        ],
+        [
+          14,
+          12
+        ]
+      ],
+      "exchange_line_type": "external",
+      "exchange_product_order": 2,
+      "oriented_edges": 2,
+      "rewritten_central_usable_replies": 0,
+      "rewritten_target_legal_opponents": 4,
+      "target_exact_grid_value": "N",
+      "target_legal_points": 4,
+      "target_live_conic": 0,
+      "target_minimum_mate_degree": 0,
+      "target_omega": 0
+    },
+    {
+      "exchange": [
+        [
+          5,
+          12
+        ],
+        [
+          7,
+          13
+        ]
+      ],
+      "exchange_line_type": "external",
+      "exchange_product_order": 10,
+      "oriented_edges": 2,
+      "rewritten_central_usable_replies": 0,
+      "rewritten_target_legal_opponents": 7,
+      "target_exact_grid_value": "P",
+      "target_legal_points": 7,
+      "target_live_conic": 3,
+      "target_minimum_mate_degree": 1,
+      "target_omega": 1
+    }
+  ],
   "schema": "c80-central-involution-rank-datum-v1",
   "source": "rust/scripts/c80_central_involution_rank_datum.py",
   "transport": {
@@ -2194,9 +2240,11 @@
     }
   },
   "verdict": {
+    "central_datum_rewrite_on_q19_P_target": "0/7 usable",
     "contains_all_five_repairs": true,
     "opponent_complete_rank_update": "FAIL",
     "q17_usable_replies": "0/32 in each marked target",
+    "q19_unoriented_exchange_targets": "one P + one N",
     "q19_usable_replies": "4/51",
     "q19_usable_target_values": "2 P + 2 N",
     "transport_naturality": "PASS",

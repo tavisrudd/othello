@@ -313,6 +313,67 @@ def transport_check(case: dict) -> dict:
     }
 
 
+def q19_usable_orbits() -> list[dict]:
+    q, t4, opponent_cell, repair_cell = COMPARE.REPAIRS[-1]
+    kernel = SPOILER.SHELL.PositivePairingKernel(q)
+    game = kernel.game
+    state = game.base_mask(t4)
+    opponent = LIVE.cell_index(game, opponent_cell)
+    repair = LIVE.cell_index(game, repair_cell)
+    target = state | (1 << opponent) | (1 << repair)
+    _order, central = central_involution(game, opponent, repair)
+    seen = set()
+    result = []
+    for row in response_rows(
+        kernel, target, central, evaluate_values=True
+    ):
+        if row["classification"] != "usable_strict_reply":
+            continue
+        first = LIVE.cell_index(game, tuple(row["opponent"]))
+        second = LIVE.cell_index(game, tuple(row["central_image"]))
+        pair = tuple(sorted((first, second)))
+        if pair in seen:
+            continue
+        seen.add(pair)
+        next_target = target | (1 << first) | (1 << second)
+        features = COMPARE.public_features(
+            COMPARE.edge_features(kernel, target, first, second)
+        )
+        pair_order, rewritten_central = central_involution(
+            game, first, second
+        )
+        rewritten_rows = response_rows(
+            kernel, next_target, rewritten_central
+        )
+        result.append(
+            {
+                "exchange": [
+                    list(game.cell_tuple(cell)) for cell in pair
+                ],
+                "oriented_edges": 2,
+                "target_exact_grid_value": (
+                    "P" if not game.value(next_target) else "N"
+                ),
+                "target_omega": kernel.omega(next_target),
+                "exchange_product_order": pair_order,
+                "exchange_line_type": features[
+                    "opponent_reply_line_type"
+                ],
+                "target_legal_points": features["target_legal_points"],
+                "target_live_conic": features["target_live_conic"],
+                "target_minimum_mate_degree": features[
+                    "target_minimum_mate_degree"
+                ],
+                "rewritten_central_usable_replies": sum(
+                    response["classification"] == "usable_strict_reply"
+                    for response in rewritten_rows
+                ),
+                "rewritten_target_legal_opponents": len(rewritten_rows),
+            }
+        )
+    return sorted(result, key=lambda row: row["exchange"])
+
+
 def build_certificate() -> dict:
     cases = [
         case_data(q, t4, opponent, repair)
@@ -328,6 +389,20 @@ def build_certificate() -> dict:
         "q17_representative": transport_check(cases[0]),
         "q19_control": transport_check(cases[-1]),
     }
+    q19_orbits = q19_usable_orbits()
+    assert [
+        (
+            row["target_exact_grid_value"],
+            row["target_omega"],
+            row["exchange_product_order"],
+            row["target_live_conic"],
+        )
+        for row in q19_orbits
+    ] == [("N", 0, 2, 0), ("P", 1, 10, 3)]
+    assert all(
+        row["rewritten_central_usable_replies"] == 0
+        for row in q19_orbits
+    )
     return {
         "schema": "c80-central-involution-rank-datum-v1",
         "source": str(Path(__file__).resolve().relative_to(ROOT)),
@@ -350,6 +425,7 @@ def build_certificate() -> dict:
             ),
         },
         "cases": cases,
+        "q19_usable_exchange_orbits": q19_orbits,
         "transport": transports,
         "cross_checks": {
             "central_matrix_squares_projectively_to_identity": True,
@@ -364,6 +440,8 @@ def build_certificate() -> dict:
             "q17_usable_replies": "0/32 in each marked target",
             "q19_usable_replies": "4/51",
             "q19_usable_target_values": "2 P + 2 N",
+            "q19_unoriented_exchange_targets": "one P + one N",
+            "central_datum_rewrite_on_q19_P_target": "0/7 usable",
             "uniform_c80_candidate": False,
         },
     }
