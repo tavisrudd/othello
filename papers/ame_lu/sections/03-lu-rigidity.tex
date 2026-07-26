@@ -267,8 +267,9 @@ when \(F_b\) commutes with \(H_A(i,j)\).  Since
 \(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
 Evaluation at the base therefore identifies
 \(\mathcal G_\psi\) with the holonomy centralizer inside
-\(\mathrm{SL}_2(q)\).  Changing the tree transports conjugates all
-holonomies and the displayed centralizer simultaneously.
+\(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
+holonomy subgroup; changing the base conjugates that subgroup, and hence
+its centralizer, by a chosen transport.
 \end{proof}
 
 Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
@@ -421,15 +422,20 @@ the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
 and the \(H_3\) representatives
 \((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
 For every listed non-GRS or \(H_3\) row, party parity acts on the fixed
-split torus \(T\) by inversion.  Thus a realized odd party permutation
-enlarges the logical linear group exactly from \(T\) to
+split torus \(T\) by inversion.  Thus, after choosing an anchor leg and
+allowing party motion to transport the corresponding encoder view, a
+realized odd party permutation enlarges the possible local linear
+carrier exactly from \(T\) to
 \[
  N(T)=\langle T,J\rangle,\qquad
  J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
  J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
 \]
 Hence \(N(T)/T\cong C_2\).  The linear extension does not split in odd
-characteristic, although its projectivization does.
+characteristic, although its projectivization does.  If the party
+permutation fixes the input leg of a chosen encoder, this carrier acts
+as an actual logical enlargement; otherwise it compares two encoder
+views of the same six-leg tensor.
 \end{corollary}
 
 \begin{proof}
@@ -455,8 +461,8 @@ normalized cochain changes the factor set to the identity.  Hence every
 listed extension splits.  Conjugating the fixed torus by the stored lifts
 gives the sign action; any odd lift therefore induces the nontrivial
 class of \(N(T)/T\).  The complement is an involution in the projective
-party-extension group; its determinant-one logical representative is
-\(J\), whose square is \(-I\).
+party-extension group; its determinant-one anchor block is \(J\), whose
+square is \(-I\).
 \end{proof}
 
 \begin{proposition}[The diagonal-multiplier line]

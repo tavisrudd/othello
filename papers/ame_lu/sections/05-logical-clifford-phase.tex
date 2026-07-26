@@ -165,9 +165,13 @@ group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
 Corollary~\ref{cor:computed-party-splitting} makes the party-moving
 comparison exact at \(q=11\): the two non-GRS pencil classes have party
 images \(S_5\) and \(S_4\), their extensions split, and odd party motion
-inverts \(T\).  Their party-moving logical group is therefore
-\(\F_q^2\rtimes N(T)\).  The GRS and party-moving non-GRS logical-group
-orders are \(159720\) and \(2420\), respectively.
+inverts \(T\).  After choosing an anchor leg, the possible one-qudit
+affine carriers across the transported encoder views therefore form
+\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
+only for the subgroup that fixes its input leg; general party motion
+compares different encoder views.  At \(q=11\), the GRS fixed-party
+logical group and this anchored non-GRS carrier have orders \(159720\)
+and \(2420\), respectively.
 
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
