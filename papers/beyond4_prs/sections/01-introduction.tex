@@ -9,31 +9,7 @@ we classify every split-free syndrome over the same range; this is a
 deep-hole classification whenever the covering radius is six, in
 particular for \(q\geq11\).  The common mechanism is a coherent polar
 flag, a marked contraction that propagates splitting information
-without forgetting the factor needed for a squarefree lift.  Complete
-contained-component calculations at redundancies six and seven, followed by
-one- and two-marker point counts, close the uniform parts of those two
-classifications.
-
-The mechanism is the elementary identity
-\[
- g\in W_{\iota_\lambda f}
- \quad\Longleftrightarrow\quad
- \lambda g\in W_f,
- \qquad
- \lambda g\ \hbox{squarefree}
- \quad\Longleftrightarrow\quad
- \lambda\nmid g
-\]
-when \(g\) is squarefree.  Retaining \(\lambda\) is therefore the
-essential coherence condition: without the marker, a lower divisor
-through \(\lambda\) lifts with a double root, so the naïve induction is
-false.  The \(q=19\) example in Section~\ref{sec:r67} makes the failure
-concrete: an individual lower fiber appears exceptional, but its orbit
-contains no coherent consecutive-row polar line.
-At redundancy six the marker calculation closes the transverse branch for
-\(q\geq29\); at redundancy seven the two-marker calculation closes it for
-\(q\geq37\).  The lower fields are handled by the finite certificates stated
-in Section~\ref{sec:verification}.
+without forgetting the factor needed for a squarefree lift.
 
 Let $\PRS(k)$ denote the projective Reed--Solomon code of length $q+1$
 obtained by evaluating homogeneous binary forms of degree $k-1$ on
@@ -104,29 +80,15 @@ according as $q\equiv1\pmod3$ with characteristic not three,
 $q\equiv2\pmod3$, or $\operatorname{char}\F_q=3$.
 \end{theorem}
 
-The main mechanism is a characteristic-free Hankel dictionary.  A
-syndrome at redundancy $r$ annihilates a linear system of binary forms
-of degree $r-2$.  It is split-free if and only if this system contains
-no completely split squarefree form; it is a deep-hole direction when,
-in addition, $\rho(\PRS(q+1-r))=r-1$.  At redundancy five the system is a
-pencil of cubics.  Its induced degree-three map of projective lines is
-either cyclic or has geometric monodromy $S_3$.  Cyclic descent gives
-the arithmetic families in Theorem~\ref{thm:r5}; in the $S_3$ case the
-off-diagonal fiber square is an integral curve of arithmetic genus one,
-and the singular-curve Weil bound \cite[p.~468]{AubryPerret1995} forces a split
-fiber for $q\geq23$.  The certified finite computations in
-Section~\ref{sec:verification} handle the remaining fields.
-
-Starting at redundancy six, the Hankel system is no longer a pencil.
-The useful replacement is the coherently parameterized line of
-contractions obtained by choosing one prospective root.  Iteration
-produces a \emph{polar flag}.  Geometrically, naïve contraction keeps
-the lower divisor but forgets which point of \(\PP^1\) was removed.
-If the lower divisor passes through that point, putting the point back
-creates a double point rather than a squarefree divisor.  The polar
-flag retains the removed point as a forbidden marker, exactly the datum
-needed for lifting.  Thus the marked flag, rather than an independent
-collection of lower fibers, is the object on which induction is valid.
+The Hankel dictionary turns redundancy five into a pencil of cubics.
+Cyclic descent gives the arithmetic families in
+Theorem~\ref{thm:r5}; the \(S_3\) case is controlled by the
+off-diagonal fiber square and a genus-one point bound.  At higher
+redundancy, contraction lowers the degree, but the removed root must
+remain forbidden: restoring a lower witness through that root creates
+a double factor.  Coherent polar flags retain precisely this datum.
+The three-row reading map in Section~\ref{sec:overview} identifies the
+load-bearing argument for each redundancy.
 
 The resulting structural theorem has two outputs.
 
@@ -236,14 +198,3 @@ work computes which of their coherent lifts meet the PRS splitting
 incidence.  Accordingly, this paper's contributions are the
 redundancy-five through seven classifications and the coherent marked
 contraction that proves the uniform ranges at redundancies six and seven.
-Claim-by-claim novelty and dependency boundaries are recorded in the
-electronic ledger.
-
-\paragraph{Organization.}
-Section~\ref{sec:overview} first gives a proof-free guide to the
-argument, and Section~\ref{sec:dictionary} gives the Hankel dictionary.
-Section~\ref{sec:r5} proves Theorem~\ref{thm:r5}.
-Sections~\ref{sec:polar} and~\ref{sec:r67} develop coherent polar
-induction and prove Theorem~\ref{thm:spine}.
-Section~\ref{sec:verification} states the computational and formal trust
-boundary, and Section~\ref{sec:boundary} records the exact open boundary.

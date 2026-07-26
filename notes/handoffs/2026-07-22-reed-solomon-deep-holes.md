@@ -13,8 +13,12 @@ completeness now has a direct-locus replay independent of the C509 quotient
 partition, including the transient 19-point marked orbit at \(q=19\). Both
 readers cleared the repaired draft (accept/release-ready).
 The paper gates cover 42 labels, the supplement now contains 47 artifacts,
-and the canonical 32-page PDF has SHA-256
-`bc677ae15e5d3ed2e453ac090b94877526bbc9572e41008b2a5f47f61b259568`.
+and the canonical 30-page PDF has SHA-256
+`a1a42fee0442df8179e4b5c285843cec460ba811faf08b658d917eb3df926dbc`.
+An editorial compression pass centralizes proof navigation in one
+three-row reading map, removes repeated mechanism and organization summaries,
+and restores the acknowledgment as an ordinary unnumbered section rather
+than an empty appendix.
 The repair and mystery ledger are in
 `notes/2026-07-26-c545-prs-second-cold-read-repairs.md`.
 A same-day literature delta found no new or revised pre-empting work; it

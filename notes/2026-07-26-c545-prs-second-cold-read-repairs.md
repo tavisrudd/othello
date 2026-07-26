@@ -98,7 +98,7 @@ python3 supplement/verify.py
 python3 supplement/verify.py --replay
 ```
 
-The canonical build is 32 pages and the IEEE single-column build is 23 pages.
+The canonical build is 30 pages and the IEEE single-column build is 23 pages.
 The evidence manifest contains 47 artifacts.  The paper, TIT, evidence,
 classification-record, manuscript-label, and non-replay supplement gates are
 green.  The new direct-locus replay passes all fourteen fields and its bundled

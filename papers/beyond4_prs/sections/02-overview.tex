@@ -1,71 +1,20 @@
-\section{Guide to the proof}\label{sec:overview}
+\section{Reading map}\label{sec:overview}
 
-This section is a proof-free guided tour.  Its purpose is to install the
-information flow used throughout the paper before coordinates, finite
-exceptional tables, or formal trust boundaries intervene.
-
-\paragraph{Syndrome to splitting system.}
-A syndrome direction $[f]\in\PP(\Gamma^{r-1}E)$ determines its Hankel
-annihilator $W_f\subset\Sym^{r-2}E^\vee$.  A product of $r-2$ distinct
-rational linear factors lies in $W_f$ exactly when $f$ lies in the span
-of the corresponding normal-rational-curve columns.  Thus the geometric
-classification begins with split-free systems.  The separate
-covering-radius theorem is what promotes split-free directions to code
-deep holes; the dictionary alone does not.
-
-\paragraph{The redundancy-five base cover.}
-At redundancy five, $W_f$ is a pencil of binary cubics.  Its root
-incidence is a degree-three map of projective lines.  The off-diagonal
-fiber square separates the cyclic cases, controlled by Frobenius on a
-deck transformation, from the $S_3$ case, controlled by rational points
-on a geometrically integral $(2,2)$ curve.  This is the bottom cover
-used at every later level.
-
-\paragraph{Why independent lower fibers fail.}
-At higher redundancy, choosing one lower witness forgets which factor
-was removed.  If that lower witness contains the chosen factor, then
-multiplication restores it with multiplicity two rather than producing
-a squarefree form.  The lost datum is therefore not auxiliary: it is
-the exact obstruction to lifting.
-
-\paragraph{Coherent replacement and the fork.}
-Choose a prospective root $\lambda$, contract $f$ to
-$\iota_\lambda f$, and retain $\lambda$ as a marked forbidden root.
-Iteration gives an ordered polar flag.  Its first-polar line has two
-qualitatively different behaviors.  If it is transverse to the lower
-bad locus and collision schemes, only finitely many parameters must
-be removed and a point count produces an escape.  If it is
-scheme-theoretically contained, the point-count argument says nothing:
-ordinary catalecticant components and components created in small
-characteristic require a separate level-specific classification.
-Section~\ref{sec:polar} introduces the persistent and modular loci
-only when that distinction enters the proof.
-
-\paragraph{Contained components at the two retained levels.}
-At redundancy six the first-polar line meets the lower secant cubic and
-cyclic carrier in bounded degree unless it is contained.  The contained
-rank-two lines are exactly the upper persistent component; in
-characteristic two the only additional component is the nucleus line.
-At redundancy seven its complete coherent lift is one central point.
-These two direct calculations are the contained branch used here.  No
-arbitrary-level component-exclusion theorem is asserted.
-
-\paragraph{Lifting.}
-On the transverse branch, a rational point of the lower ordered
-splitting cover outside the branch, diagonal, marker, and collision
-divisors produces a split squarefree lower witness
-avoiding all markers.  Multiplying by the marked factors then lifts it
-squarefreely to $W_f$.  Figure~\ref{fig:polar-flow} records this
-sequence at the point where the construction is formalized.
+The proof can be read at two speeds.  For the classification spine,
+follow the three rows of Table~\ref{tab:dependency-map}; the intervening
+definitions and lemmas discharge the cited carrier, collision, and
+point-count steps.  Table~\ref{tab:classification-status} separately
+records where a split-free classification needs a covering-radius
+input before it becomes a deep-hole classification.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Mathematical dependency map.}
+\caption{Fast path through the classification proofs.}
 \label{tab:dependency-map}
 \begin{tabular}{p{0.09\textwidth}p{0.48\textwidth}p{0.31\textwidth}}
 \toprule
-Result & Printed geometric argument & Imported input\\
+Result & Load-bearing printed argument & Imported input\\
 \midrule
 R5 & Hankel dictionary; gcd strata; cyclic descent; integral $(2,2)$
 fiber square and point bound &
