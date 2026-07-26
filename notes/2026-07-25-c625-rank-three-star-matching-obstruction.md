@@ -237,7 +237,7 @@ polarity-stabilizer argument.
 
 ## Validation
 
-The proof is analytic.  Its independently checkable gates are:
+The geometric proof has the following independently checkable gates:
 
 1. the prior exact equality data
    \(|E|=91\) and \((T,B,X)=(46,2070,2070)\);
@@ -250,6 +250,21 @@ The proof is analytic.  Its independently checkable gates are:
 Faber's finite-subgroup classification and the \(65+4032\) orbit
 decomposition independently replay the contradiction but are not theorem
 dependencies.
+
+The finite group-action terminal is kernel-checked in
+`RelativeConicArcs.KleinFourOrbitCongruence`:
+
+- `card_mod_four_eq_one_of_unique_fixed_point_action` proves the general
+  congruence from an order-four action and the common-singleton fixed-point
+  hypothesis;
+- `no_unique_fixed_point_four_group_action_on_card_ninety_one` specializes it
+  to the 91-point contradiction.
+
+The module uses Mathlib's formal Burnside lemma.  Lean does not yet construct
+the four-group action from conic coordinates, tangent pairs, or zero defect;
+that geometry-to-action implication remains the analytic bridge stated above.
+The declarations are imported and axiom-audited by
+`RelativeConicArcs.Gates.Relconic`.
 
 No finite census, heuristic search, or untracked computational artifact is
 part of the theorem.
@@ -317,6 +332,9 @@ nonrealizability of the naked star--matching design.
 - **Manuscript integration:** not performed because C625's routed scope owns
   the research report and handoff, not a new manuscript edit.  A later
   paper-edit task may promote the compact corollary and proof.
+- **Formal boundary:** settled.  Lean kernel-checks the group-action
+  congruence and 91-point exclusion; the conic construction of the action is
+  explicitly analytic rather than represented by an axiom.
 - **Mystery close:** no genuine task-owned mathematical mystery remains.
   The candidate, proof mechanism, minimal hypothesis, and reusable boundary
   are all locked down.

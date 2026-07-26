@@ -14,6 +14,7 @@ spinoff.
 | moments and defect | `pointIndex_le_half_card`, `first_secant_moment`, `second_secant_moment`, defect/coverage/stability theorems in `Defect.lean` | proved in Lean |
 | exact uncovered-locus reconstruction | `linesAboveUncoveredThreshold_eq_secants`, `verticesOfLineFamily_secants_eq`, `canonical_reconstruction`, `eq_of_ordinaryUncovered_eq`, `stabilizes_iff_stabilizes_ordinaryUncovered` | proved in `UncoveredLocusReconstruction.lean` for abstract finite projective planes; the inverse uses the strict line threshold and `k ≥ 3`, while the stabilizer theorem is stated for any action satisfying the displayed incidence-equivariance hypotheses |
 | concurrence and matching rigidity | `concurrence_matching`, `disjoint_arcPairs_existsUnique_concurrence`, `concurrence_matching_injective`, `concurrenceCenter_pointIndex_eq_half`, `concurrenceCenters_card_eq_quotient`, `concurrenceCentersOnPair_card_eq_quotient`, `two_mul_badConcurrenceEdgeCount_le`, `exists_secantDeletionSet` | proved in `MatchingDesignRigidity.lean`; the total and per-secant counts are exact quotient identities for `k ≥ 4`; the final two declarations control respectively the edge count and vertex-cover number of the bad-concurrence graph using `scaledDefect = floor(k/2)·Δ` |
+| four-group orbit congruence | `card_mod_four_eq_one_of_unique_fixed_point_action`, `no_unique_fixed_point_four_group_action_on_card_ninety_one` | proved in `KleinFourOrbitCongruence.lean` from Burnside's lemma: an order-four action whose nonidentity elements fix the same singleton has set cardinality congruent to one modulo four, excluding cardinality 91; constructing this action from conic involutions is not formalized |
 | arbitrary holes and conic bounds | `completeOutside_bound_general`, `NonsingularConic.finite_lower_bound`, `L1_le_L2`, `L2_le_rho` | proved in Lean; the general bound depends only on hole cardinality and incidence |
 | complete affine arcs | `CompleteAffine`, `completeAffine_iff_completeOutside`, `holeIncidence_pointsOnLine`, `completeAffine_bound`, `completeAffine_bound_eq_iff` | proved in `Affine.lean`; deleting a line is definitionally the line-hole case, every secant contributes one ideal incidence, and the corrected bound and equality pattern are the exact specialization of the general defect |
 | asymptotics | `parityFreeNecessary`, `rhoC_explicit_additive_lower_bound`, `eventually_lt_centered`, and the Big-O/liminf wrappers in `Asymptotic.lean` | proved in Lean; the paper's isolated polynomial estimate is the `hExpansion`/`hB2`/`hB1`/`hB0`/`hR` block of `explicit_additive_lower_bound`, with the same error `8 / sqrt(2q)`. `eventually_lt_centered` is unconditional along unbounded orders; the literal real-valued liminf wrapper adds coboundedness because `ℝ` cannot encode `+∞` |
@@ -254,7 +255,8 @@ quadratic-pullback theorems, the q=9 terminal P theorem, q=11 residual and actua
 seeded P theorems, the q11 MDS/radius/deep-hole/leader/extension/chord theorems, and the public
 syndrome/coding bridges, together with the public finite-field evaluation-dichotomy, quantitative-count,
 sharp-cover, equality-model, kernel/span, and feature-closure theorems, as well as the exact
-uncovered-locus reconstruction, matching-rigidity, bad-edge, and secant-deletion terminals
+uncovered-locus reconstruction, matching-rigidity, bad-edge, secant-deletion, and four-group
+unique-fixed-point congruence terminals
 reports exactly:
 
 ```text
