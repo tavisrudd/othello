@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 221867,
+        "bytes": 222058,
         "path": "ame-lu.pdf",
-        "sha256": "16721025793da0209380526370834721dd5ca04ad23cf9aa702bf2ffe9a56b6f"
+        "sha256": "9c2973b3250eb6594bcadb6931995adf5650b32d10296cd22ecb4e5c10599d7e"
       },
       {
         "bytes": 18310,
@@ -46,9 +46,9 @@
         "sha256": "8c790decce74cdc3c2861651c39a714a554699484e44cb2bbe30b191381f45e4"
       },
       {
-        "bytes": 14173,
+        "bytes": 14183,
         "path": "sections/01-introduction.tex",
-        "sha256": "964896990ae0478243deec911d3a7ec0dfd68b793cbc00f2733c7ab86e7d7d12"
+        "sha256": "d14da9e508ae8932d4bbe6fa130a389942beded01bd5c3c6c4d9ed87454d5490"
       },
       {
         "bytes": 4299,
@@ -81,9 +81,9 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 13834,
+        "bytes": 13948,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "24a91b0a2c81b381c0dbd4cb04f574f1da53d4b379659160da67ce9d068c28fe"
+        "sha256": "a959632994cfcb90eac6b58e4bf0194d9d744ae8d782442e3dd0dab60e09aa3e"
       },
       {
         "bytes": 3946,
@@ -191,7 +191,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "9e730404e1f4a19c91155295b356e8db67457b4343baa67a550287601498379d"
+    "tree_sha256": "1659a69b9572392ef07018a7e5e476cefb641d3412dadbe36f0a029cb3d5c8df"
   },
   "formal_companion": {
     "artifacts": [
