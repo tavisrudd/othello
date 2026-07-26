@@ -15,8 +15,10 @@
 
 ## Current verdict
 
-Paper I, *A conic deep-hole syndrome locus characterizes the Clebsch code*, is a
-warning-free 19-page candidate with a complete nineteen-row release surface.
+Paper I, *Reconstructing the Clebsch code from its deep-hole syndrome locus*,
+is a warning-free candidate with a complete nineteen-row release surface; its
+computational companion is *Computational strengthenings of Clebsch syndrome
+rigidity*.
 It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
 returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
 user-launched PDF-only post-fix review found one remaining enumeration-boundary

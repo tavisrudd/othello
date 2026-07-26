@@ -1605,26 +1605,29 @@ of every candidate manuscript.
 | # | Paper                                                | Lead                                                            | State                                                |
 |---|------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------|
 | 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten   |
-| 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | rebuilt as LaTeX on a spine; owes a value fix        |
-| 3 | Arcs complete outside a prescribed conic             | defect identity → rigidity → stability; `ρ_𝒞(16)=9`             | 21-page local candidate + scoped Lean; archive gate  |
+| 2 | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates | exact nimbers for an explicit infinite family | rebuilt as LaTeX on a spine; owes a value fix |
+| 3 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | defect identity → rigidity → stability | local candidate + scoped Lean; archive gate |
 | 4 | Reconstructing the Clebsch code from its deep-hole syndrome locus | conic-filling rigidity, gaps, decoding, universal chord defect | 14-page human core + 7-page computational companion  |
-| 5 | Complete bounded repair ports                        | general MDS local reconstruction + exact bounded transfer       | spine refrozen under a no-computation admission rule |
-| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | extremal gate cleared; bookkeeping + graph remain    |
-| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | manuscript complete; Lean planned; audit gated       |
-| — | PRS beyond redundancy four                          | exact R5–R7 + coherent-polar high-field containment             | 30-page reproducible V1; external release gates      |
-| — | MDS–CSS AME local-unitary rigidity                  | uniform LU-to-LC + transversal Clifford groups                  | 18-page local candidate; generic Lean core           |
-| — | Clebsch passages (arithmetic + harmonic realizations) | rational square class `5J₀`; the face-axis Petersen eigenspace | 7-page note; `NO-GO` on two proof gaps + packaging   |
+| 5 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | general MDS local reconstruction + exact bounded transfer | spine refrozen under a no-computation admission rule |
+| 6 | Frobenius-equivariant pair extension and robust repair of eight-arcs | every invariant eight-arc in `PG(2,25)` pair-extends | extremal gate cleared; bookkeeping + graph remain |
+| 7 | Semilinear rigidity of four-point-frame continuation graphs | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13` | manuscript complete; Lean planned; audit gated |
+| — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven | exact R5–R7 + coherent-polar high-field containment | 30-page reproducible V1; external release gates |
+| — | Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS–CSS Codes | LU-to-LC for every stabilizer AME state | 18-page local candidate; generic Lean core |
+| — | Arithmetic and harmonic realizations of the Clebsch cubic | rational square class `5J₀`; the face-axis Petersen eigenspace | 7-page note; `NO-GO` on two proof gaps + packaging |
+| — | Quadratic recovery and cubic orientation in conic matching quotients | the conic-ideal factorization quotient and its `B₃/H₃` completeness | theorem spine conceptual; drafting follows |
 
-Paper 3 carries its final title — *Arcs complete outside a prescribed conic: an exact defect
-identity and `ρ_𝒞(16) = 9`* — and now has the zero-defect matching-design capstone that earlier
-work identified as the missing structural complement. The active Clebsch program is a three-paper
-sequence: rigidity/decoding first, factorization memory second, and a gated passages note third; the
-37-page integrated manuscript is preserved only as a fallback. Paper 4 has itself split — a human
-core carrying the theorems and a separate computational companion carrying the fifteen-class,
-low-degree, cross-field and through-eight-points classifications, each with its own build target,
-bibliography, machine-readable claim ledger and replay routes. The split was chosen over a single
+The arcs manuscript was retitled when it acquired the zero-defect matching-design capstone that
+earlier work identified as the missing structural complement: `ρ_𝒞(16) = 9` is now an application
+rather than a headline. The active Clebsch program is a three-paper sequence — rigidity/decoding,
+then the conic matching quotient, then the arithmetic/harmonic note; the 37-page integrated
+manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon code* is preserved
+only as a fallback. The rigidity paper has itself split — a human
+core carrying the theorems and a separate companion, *Computational strengthenings of Clebsch
+syndrome rigidity*, carrying the fifteen-class, low-degree, cross-field and through-eight-points
+classifications, each with its own build target, bibliography, machine-readable claim ledger and
+replay routes. The split was chosen over a single
 longer manuscript on a cold read, and its cost is stated plainly: the companion's relative replay
-paths need a stable artifact locator before either half can ship. Paper 5's venue is stated as
+paths need a stable artifact locator before either half can ship. The repair-ports venue is stated as
 DCC / FFA, explicitly **not** IEEE-TIT. A `lean-proof-engineering-at-scale` methods paper remains
 outside the mathematical ship order; any novelty claim there needs its own literature audit.
 
@@ -1660,21 +1663,22 @@ negative theorems. These are reasons to take the current statements and their bo
 not reasons to assign them the status of externally validated results.
 
 **Several papers moved backwards or changed shape on their own evidence, which is the gate
-working.** Paper 6's former mathematical freeze has cleared: the exact `PG(2,25)` minimum is
+working.** The Frobenius pair-extension paper's former mathematical freeze has cleared: the exact `PG(2,25)` minimum is
 semantically `32`, and the five normalized extremal orbits lift to the complete semantic extremal
 set; bookkeeping and the exchange graph remain. The dihedral paper was rebuilt as LaTeX on a fixed eight-section
 spine, and carries a **known value-affecting correction** as its first release-blocking hazard: an
 exhaustive census refuted its own boxed formula, so the affected statements need a case split applied
 to the body before any polishing, and the density theorem must stay explicitly conditional on its one
-named axiom rather than reading as an axiom-free formal proof. Paper 5's transfer theorem was likewise
-found **not exact as stated** and repaired (§3). Paper 7 now has an N1-only manuscript, but its
+named axiom rather than reading as an axiom-free formal proof. The repair-ports transfer theorem was
+likewise found **not exact as stated** and repaired (§3). The continuation paper now claims only the
+four-frame rigidity theorem, but its
 library is planned rather than built — the hardest formalization in the portfolio, with an external
 collaborator recorded as the fallback if it stalls rather than as a first move.
 
-**The one dependency, downgraded.** `3 → 4` was recorded as a *hard* dependency; it is now a
+**The one dependency, downgraded.** arcs → Clebsch rigidity was recorded as a *hard* dependency; it is now a
 **publication-allocation ruling, not a mathematical one** — `clebsch` reproves the identification, cites
-`arcs` for provenance, and depends on no unpublished companion. `1 ↔ 3` is a seam, not an ordering
-constraint — both cite backwards, neither waits.
+`arcs` for provenance, and depends on no unpublished companion. The games flagship and arcs form a
+seam, not an ordering constraint — both cite backwards, neither waits.
 
 **Where the next theorem is not.** `arcs` is assessed a mature **strong-A** specialist paper, and the
 route to A+ was specific: a second theorem *mathematically inseparable* from the defect identity, which

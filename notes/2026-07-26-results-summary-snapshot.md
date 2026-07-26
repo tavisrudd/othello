@@ -19,21 +19,21 @@ The results are grouped as follows.
 1. *Reconstructing the Clebsch code from its deep-hole syndrome locus* — how a
    six-point arc in the plane of order eleven is recovered from coarse decoding
    data.
-2. *Clebsch factorization memory* — what survives when a matching of conic
-   points is restricted to the conic.
+2. *Quadratic recovery and cubic orientation in conic matching quotients* —
+   what survives when a matching of conic points is restricted to the conic.
 3. *Arithmetic and harmonic realizations of the Clebsch cubic* — two
    independent realizations of the same four-dimensional space.
-4. *Arcs complete outside a prescribed conic* — an exact defect identity and
-   the rigidity of its equality case.
-5. *Deep holes of projective Reed–Solomon codes beyond redundancy four* — an
-   exact classification at redundancies five, six, and seven.
-6. *Complete bounded repair ports* — local memory, exact transfer, and
-   reliability of erasure repair.
-7. *Local-unitary rigidity of stabilizer AME states* — every product-unitary
-   intertwiner of a stabilizer absolutely maximally entangled state is local
-   Clifford.
-8. *Frobenius-equivariant pair extension and robust repair* — extending
-   Frobenius-invariant arcs by conjugate point pairs.
+4. *Arcs complete outside a conic: a prescribed-hole defect identity and
+   matching-design rigidity*.
+5. *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact
+   classifications at redundancies five through seven*.
+6. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
+   Structure* — local memory and exact transfer of erasure repair.
+7. *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford
+   Groups of MDS–CSS Codes* — every product-unitary intertwiner of a stabilizer
+   absolutely maximally entangled state is local Clifford.
+8. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
+   extending Frobenius-invariant arcs by conjugate point pairs.
 9. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
    graph that remembers its ambient plane.
 10. Two open programmes with substantial partial results: complete arcs of
@@ -167,10 +167,11 @@ gives only the classical inclusion — together with the rigidity, gap,
 low-degree, decoding, and through-eight-points statements.
 
 The manuscript is split into a human core carrying the theorems and a separate
-computational companion carrying the fifteen-class, low-degree, cross-field and
-through-eight-points classifications, each with its own replay routes.
+companion, *Computational strengthenings of Clebsch syndrome rigidity*,
+carrying the fifteen-class, low-degree, cross-field and through-eight-points
+classifications, each with its own replay routes.
 
-## *Clebsch factorization memory*
+## *Quadratic recovery and cubic orientation in conic matching quotients*
 
 What remains of a pairing of marked conic points after the associated products
 of secant equations are restricted to the conic.
@@ -512,7 +513,7 @@ ten-dimensional rational Klein representation of \(\operatorname{PSL}_2(11)\)
 is positive, its discriminant-five lift fails. The proposed degree-23
 \(M_{23}\)/Golay coherence test is a future unity test, not a result.
 
-## *Arcs complete outside a prescribed conic*
+## *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
 
 Let \(\mathcal C\) be a nonsingular conic in \(\operatorname{PG}(2,q)\) and let
 \(A\) be a \(k\)-arc disjoint from it. Call \(A\) *complete outside*
@@ -649,7 +650,7 @@ visible on its fibres, with equality realized by two collinear triples on a
 split quadratic meeting the arc once on each component. A classification-free
 proof of that six-hole stability statement is the remaining route.
 
-## *Deep holes of projective Reed–Solomon codes beyond redundancy four*
+## *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven*
 
 A projective Reed–Solomon code is the evaluation code of polynomials of bounded
 degree on the rational normal curve. Its *covering radius* and the geometry of
@@ -799,7 +800,7 @@ The methods combine exact invariant theory, Plücker inversion, Gale duality,
 catalecticants and apolarity, finite-group descent, low-genus point bounds, and
 independently replayed bounded classifications.
 
-## *Complete bounded repair ports*
+## *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
 
 The organizing object is the complete radius-\(r\) repair port at a target
 coordinate: every dual-word repair using at most \(r\) helpers, retaining
@@ -1104,7 +1105,7 @@ The manuscript is assembled and has survived several independent readings. Its
 remaining obstacles are specialist citation review and publication
 infrastructure, not missing central mathematics.
 
-## *Local-unitary rigidity of stabilizer AME states*
+## *Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS–CSS Codes*
 
 A pure state of \(2m\) parties, each of local dimension \(q\), is *absolutely
 maximally entangled* when every \(m\)-party marginal is maximally mixed. Two
@@ -1178,7 +1179,7 @@ projective finiteness, Anderson–Jochym-O'Connor for qubit diagonal and
 inter-code transversal restrictions, Sayginel et al. for automorphism-derived
 logical Cliffords with phase correction — and no firstness claim is made.
 
-## *Frobenius-equivariant pair extension and robust repair*
+## *Frobenius-equivariant pair extension and robust repair of eight-arcs*
 
 The paper studies extensions of Frobenius-invariant arcs in
 \[
@@ -1588,15 +1589,17 @@ are vacuous because a natural number can encode the whole residual.
 ## Status summary
 
 - ***Reconstructing the Clebsch code from its deep-hole syndrome locus:***
-  mathematics complete, in a human core plus a computational companion; what
-  remains is publication packaging.
-- ***Clebsch factorization memory:*** coherent standalone theorem sequence with
-  conceptual proofs of its rank and cubic mechanisms and a completeness theorem
-  naming the two occurring configurations; drafting follows.
+  mathematics complete; the computational strengthenings travel in a companion,
+  *Computational strengthenings of Clebsch syndrome rigidity*. What remains is
+  publication packaging.
+- ***Quadratic recovery and cubic orientation in conic matching quotients:***
+  coherent standalone theorem sequence with conceptual proofs of its rank and
+  cubic mechanisms and a completeness theorem naming the two occurring
+  configurations; drafting follows.
 - ***Arithmetic and harmonic realizations of the Clebsch cubic:*** two adopted
   theorems; two proof gaps must close or the arithmetic theorem must be weakened
   to exactly what is proved.
-- ***Arcs complete outside a prescribed conic:*** defect identity, zero-defect
+- ***Arcs complete outside a conic:*** defect identity, zero-defect
   rigidity, and stability formally verified; six exact values of
   \(\rho_{\mathcal C}\); the \(q=16\) classification compressed to three
   exceptional cases.
@@ -1604,14 +1607,14 @@ are vacuous because a natural number can encode the whole residual.
   exact at redundancies three, five, six, and seven, with a uniform high-field
   containment theorem at arbitrary redundancy; not a proof of the general
   deep-hole conjecture.
-- ***Complete bounded repair ports:*** manuscript assembled around the general
+- ***Complete Bounded Repair Ports:*** manuscript assembled around the general
   MDS reconstruction theorem; central transfer and cubic results formally
   verified; specialist citation review outstanding.
-- ***Local-unitary rigidity of stabilizer AME states:*** rigidity proved for
+- ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family; the marginal-to-
   rigidity chain is formally verified, the encoder and transversal-group
   consequences are not.
-- ***Frobenius-equivariant pair extension and robust repair:*** foundational
+- ***Frobenius-equivariant pair extension and robust repair of eight-arcs:*** foundational
   theorem chain and the exact minimum for \(PG(2,25)\) proved; the
   orbit-replacement graph remains future work.
 - ***Semilinear rigidity of four-point-frame continuation graphs:*** manuscript

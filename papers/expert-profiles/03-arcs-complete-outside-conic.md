@@ -1,4 +1,4 @@
-# Expert profile: *Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9*
+# Expert profile: *Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity*
 
 **Paper:** `papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex`<br>
 **Profile verified:** 2026-07-15<br>

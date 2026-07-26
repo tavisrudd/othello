@@ -40,16 +40,16 @@ geometries (pairing/mirror)
 - **Owns the game reading** of the shared q=11/q=9 material (`thm-relative-game-localization`,
   `comp-q9-terminal`, `comp-q11-icosahedral`); see *Arcs vs Nofil* in the planning doc.
 
-**2 · `dihedral-schreier-node-kayles`** — Node Kayles on fixed-point-deleted Schreier graphs
-from conic involutions
+**2 · `dihedral-schreier-node-kayles`** — *Node Kayles on Conic Schreier Graphs: Dihedral and
+Polyhedral Templates*
 - *Status:* draft near-complete, committed.
 
 *Split by technique:* Schreier-residual nimbers vs the pairing/mirror ⇒ P method.
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
-**3 · `arcs_complete_outside_conic`** — *Arcs complete outside a prescribed conic: An exact
-defect identity and ρ_𝒞(16) = 9*
+**3 · `arcs_complete_outside_conic`** — *Arcs complete outside a conic: a prescribed-hole defect
+identity and matching-design rigidity*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
   formalization; the 21-page paper has completed adversarial, style-guide, and repeated cold-prose
   review. The standard frame and optional-branch hierarchy are explicit. Its remaining
@@ -62,40 +62,44 @@ defect identity and ρ_𝒞(16) = 9*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
-**4 · `clebsch-rigidity`** — *Deep-hole rigidity of the Clebsch hexagon code*
-(Paper I of the active Clebsch program)
-- *Status:* warning-free 19-page LaTeX manuscript + PDF with 17 theorem-like
-  environments and an exact nineteen-row claim/evidence map. C320 is
-  constructing the Paper I-specific manifest, aggregate gate, release runner,
-  and independent review surface; C182 then archives/releases it.
+**4 · `clebsch-rigidity`** — *Reconstructing the Clebsch code from its deep-hole syndrome locus*,
+with the companion *Computational strengthenings of Clebsch syndrome rigidity* in the same root
+- *Status:* warning-free manuscript + PDF, split into a human core and the
+  computational companion, each with its own build target, bibliography, claim
+  ledger, and replay routes. Review cleared; C182 owns archive/release, whose
+  blocker is an immutable public artifact locator.
 - *Scope:* conceptual and low-degree rigidity, quantitative gaps, decoder and
   automorphism structure, invariant support bipartition, Brianchon
-  reconstruction, `q=11` uniqueness, and the `4≤k≤7` classification.
+  reconstruction, `q=11` uniqueness, the universal conic-filling window, and the
+  `4≤k≤8` classification.
 - **Ships after `arcs` by publication-allocation ruling, not mathematical
   dependency.** It reproves the shared deep-holes=conic input while citing
   `arcs` for public provenance.
 
-**Clebsch Paper II candidate · `clebsch-factorization`** —
-*Factorization memory in a conic ideal: the `A_3`, `B_3`, and `H_3`
-configurations*
-- *Status:* compilable spine; C577 begins only after Paper I is
-  submission-ready.
+**Clebsch second paper · `clebsch-factorization`** — *Quadratic recovery and cubic orientation in
+conic matching quotients*
+- *Status:* C577 active. The `3,6,10` ranks and cubic survival now have
+  conceptual proofs, and C665 adds the completeness theorem naming `B₃/F₇` and
+  `H₃/F₁₁` as the only occurring orbits.
 - *Scope:* conic matching quotient, ranks `3,6,10`, balanced sheets,
   cubic-first orientation, six-profile reconstruction, modular depth, and
   arithmetic splitting/gluing.
 
-**Clebsch Paper III gate · `clebsch-passages`** — *Finite passages and
-holonomy in Clebsch matching geometry*
-- *Status:* exploratory spine; C579 begins only after Paper II and proceeds
-  only if one principal theorem organizes the comparison package.
+**Clebsch third paper · `clebsch-passages`** — *Arithmetic and harmonic realizations of the
+Clebsch cubic*
+- *Status:* cut to a seven-page two-theorem note — the rational square class
+  `5J₀` with its constant golden torsor, and the degree-six face-axis Petersen
+  eigenspace. C680 owns closure: the Clebsch inclusion and the local fibre
+  comparison are open proof gaps, the release bundle is not self-contained, and
+  the verdict is `NO-GO for submission`.
 
-**Preserved fallback · `clebsch-hexagon-code`** — the 37-page integrated
-mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
+**Preserved fallback · `clebsch-hexagon-code`** — *Deep-hole rigidity and factorization memory in
+the Clebsch hexagon code*, the 37-page integrated mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
 18-check release surface. It remains immutable as a fallback and is not the
 active `clebsch` release target.
 
-**5 · `complete-repair-ports`** — Complete Bounded Repair Ports: Transfer, Reliability, and
-Geometric Structure
+**5 · `complete-repair-ports`** — *Complete Bounded Repair Ports: Transfer, Reliability, and
+Geometric Structure*
 - *Status:* six-part private manuscript assembled and rebuilt, with synchronized proof and novelty
   ledgers. Structural-section assembly is complete and C220 is **omitted by decision**. External
   specialist citation-chain review, immutable checker/archive identity, shared-Lean public closure,
@@ -135,8 +139,8 @@ graphs*
 - *Status:* N1-only LaTeX working manuscript with complete written proof; the planned Lean library
   is not yet built. Full-complex reconstruction remains a softened scope remark.
 
-**Active unnumbered candidate · `beyond4_prs`** — *Beyond redundancy four: deep holes, polar
-flags, and modular obstructions for projective Reed--Solomon codes*
+**Active unnumbered candidate · `beyond4_prs`** — *Deep holes of projective Reed--Solomon codes
+beyond redundancy four: exact classifications at redundancies five through seven*
 - *Status:* user-directed merger admitted to active manuscript staging.  C538 creates the first
   integrated draft; C545 releases a proof-complete Version 1 preprint with a policy-checked DOI;
   C539--C544 close the paper-facing Lean package.
@@ -146,6 +150,19 @@ flags, and modular obstructions for projective Reed--Solomon codes*
 - *Boundary:* this supersedes the redundancy-five-only C500 plan.  C481--C490 reconstruction,
   twisted-RS results, and unfinished redundancy ten remain outside.  Numbering and ship-order
   admission wait for C538's manuscript-level review.
+
+**Active unnumbered candidate · `ame_lu`** — *Local-Unitary Rigidity of Stabilizer AME States and
+Transversal Clifford Groups of MDS--CSS Codes*
+- *Lane:* `ame-lu`.
+- *Status:* 18-page local candidate with a clean reproducible release candidate; no public deposit,
+  DOI, license grant, or submission has occurred.
+- *Owns:* the arbitrary-length LU-to-LC theorem for equal-phase MDS--CSS states, its generalization
+  to every stabilizer AME state (CSS, equal phase, classical linearity, and MDS are all unnecessary
+  for rigidity), the factorwise transversal no-go, the exact diagonal-isodual group dichotomy, and
+  the projective logical group `F_q^2 : SL_2(q)` for odd-prime GRS codes of even length `2m <= q+1`.
+- *Trust:* the marginal-to-rigidity chain is in the formal aggregate; the projective-finiteness
+  corollary has a completed module not yet imported by that aggregate, and the Choi/encoder
+  construction and exact GRS transversal-group computation remain manuscript proofs.
 
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. The Clebsch program is the exception:

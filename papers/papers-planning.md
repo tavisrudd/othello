@@ -39,7 +39,8 @@ adjusted only by the explicit ownership edges below.
   Scharlau/Witt support, novelty, and Lean trust ledger; C269 then performs the mixed-verification,
   adequacy/provenance, adversarial, and cold-prose release pass.
 
-**2 · Dihedral Schreier catalogue** — `dihedral-schreier-node-kayles`
+**2 · Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates** —
+`dihedral-schreier-node-kayles`
 - *What:* **extended with the generalized-D₂ₘ family** before shipping; retitle toward
   "finite subgroups of PGL₂(q)".
 - *Gate:* Φ_T and the finite ½-density core are Lean-formalized (C262), the D₂ₘ additions landed
@@ -48,8 +49,8 @@ adjusted only by the explicit ownership edges below.
   correction, the mixed-verification map, adequacy/provenance, reproducibility, adversarial review,
   and cold prose. (The lone `native_decide` is cleared: kernel `decide` since 2026-07-12.)
 
-**3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
-`arcs_complete_outside_conic`
+**3 · Arcs complete outside a conic: a prescribed-hole defect identity and matching-design
+rigidity** — `arcs_complete_outside_conic`
 - *What:* the prescribed-hole defect identity and its equality/stability consequences, the explicit
   bound `ρ_𝒞(q)≥√(2q)+3/2−8/√(2q)`, projective averaging, and the exact value
   `ρ_𝒞(16)=9`; the q=11 coding/deep-hole and extension material is a secondary application. It
@@ -70,8 +71,9 @@ adjusted only by the explicit ownership edges below.
   such a bound fails for an infinite family.  Isolated additional values of `ρ_𝒞(q)` discharge
   none of these tasks.
 
-**4 · The Clebsch hexagon code: rigidity from a conic deep-hole locus** —
-`clebsch-hexagon-code`
+**4 · Reconstructing the Clebsch code from its deep-hole syndrome locus** — `clebsch-rigidity`
+(the integrated `clebsch-hexagon-code`, *Deep-hole rigidity and factorization memory in the
+Clebsch hexagon code*, is retained only as a fallback)
 - *What:* a symmetry-free rigidity TFAE and low-degree characterization for the `[6,3,4]₁₁`
   code, plus quantitative gaps, decoder/Brianchon reconstruction, intrinsic support chirality,
   uniqueness of `q=11`, the all-field Clebsch formula, the `4≤k≤7` boundary, and the audited
@@ -112,7 +114,8 @@ adjusted only by the explicit ownership edges below.
 
 **7 · Semilinear rigidity of four-point-frame continuation graphs** —
 `continuation-graph-rigidity`
-- *What:* N1 only; full-complex reconstruction is demoted to scope remarks.
+- *What:* the four-frame rigidity theorem only; full-complex reconstruction is demoted to scope
+  remarks.
 - *Gate:* the LaTeX working manuscript and complete written proof exist. The planned Lean library
   remains the hardest formalization; use the collaborator route if it stalls.
 
@@ -165,7 +168,7 @@ so they are named, not numbered.
   completion/transversal synthesis has no family-specific bridge to that result and is library-only.
   A future alternate-orbit repair or fixed-locus resilience theorem may enter as a focused section;
   generic completion cores, weighted variants, and classical-radius tables do not.
-- **D3 — N1 only.** N2 (full-complex reconstruction) → a remarks subsection, out of the abstract and
+- **D3 — four-frame rigidity only.** Full-complex reconstruction → a remarks subsection, out of the abstract and
   contributions, until the paywalled Metsch / Drake–Sané read clears.
 - **D4 — HOLD.** The conic-localization reduction lands on the open (ON) kernel — a scaffold with no
   result on it. Keep as the flagship's open-frontier section; revisit only when a kernel result exists.
@@ -392,7 +395,7 @@ author; the lead signs alone and takes responsibility.
 
 **Scoped pre-submission adequacy reviewer.** One mathematician (acknowledged, not authored) checks
 *statements only* (not proofs) for the two highest-adequacy-risk papers — the games flagship and
-continuation N1 — at submission time. A named, scheduled step, not aspirational.
+continuation's four-frame theorem — at submission time. A named, scheduled step, not aspirational.
 
 **Reception split.** Specialist track (arXiv + journal) rides the credibility spine = Lean + adequacy
 appendix + provenance section + repo + DOI. The public meta-story (human-directed, machine-checked AI
@@ -471,7 +474,7 @@ positioned as prior art or derived machinery.
 checked; every order-five consequence remains unproved until Lean checks the geometry and finite
 certificate. Specialist priority search follows proof.
 
-**7 · `continuation-graph-rigidity`** — N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané
+**7 · `continuation-graph-rigidity`** — four-frame rigidity cleared; full-complex reconstruction blocked on the paywalled Metsch / Drake–Sané
 read (keep N2 out of the abstract).
 
 
