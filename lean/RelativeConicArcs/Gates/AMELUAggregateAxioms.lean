@@ -21,6 +21,9 @@ open RelativeConicArcs.AMELU
 #print axioms diagonalTensorFlattening_pure_iff_coordinateAxis
 #print axioms coordinateAxes_preserved_of_diagonalTensor_equivalent
 #print axioms stabilizerAME_kernelToLocal_bijective
+#print axioms stabilizerKernelLocalProjection_injective_of_supportAtMost
+#print axioms stabilizerAME_halfParty_kernelToLocal_bijective_of_finrank
+#print axioms stabilizerKernelLocalProjection_existsUnique
 #print axioms stabilizerAME_finrank_ker_eq_local
 #print axioms genericEqualPhaseState_three
 #print axioms genericLocallyUnitaryEquivalent_three
