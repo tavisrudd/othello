@@ -495,27 +495,30 @@ Primary planning inputs:
 Passage, holonomy, torsor, theta/Fourier/quantum, Mathieu, and
 characteristic-zero material is inventory-only during C577.
 
-## Paper III — passages and holonomy
+## Paper III — arithmetic Hitchin--Clebsch orientation cover
 
-C579 tests the provisional *Finite passages and holonomy in Clebsch
-matching geometry*. It may proceed only if one principal theorem organizes:
+The imported ChatGPT reports identify a credible principal theorem: the
+golden Clebsch orientation torsor is an arithmetic fibre of Hitchin's
+ordered-icosahedron double cover. The candidate theorem joins
+\(w^2=5J_0\), \(J_0|_{V_I}=16\sigma_3^2\), the golden fibre
+\(\operatorname{Spec}\mathbf Q(\sqrt5)\), and the mod-\(11\) deck exchange
+with \(T_{11}\). Its provenance, exact current evidence boundary, and
+acceptance plan are in
+`notes/2026-07-26-c579-hitchin-clebsch-paper-iii-plan.md`.
 
-- carriers, orientations, and passage maps;
-- exact survival and loss statements;
-- the four-sheet cover and cycle holonomy;
-- theta, Fourier, and quantum realizations;
-- Mathieu and characteristic-zero bridges.
+C651 first tests the literal tensor identity between Paper II's signed cubic
+and the Hitchin/Gaunt \(W_6\) cubic through an explicit \(A_5\)-intertwiner.
+C652 owns the exact golden-fibre, order-four, spinor, and \(T_{11}\)
+certificate. C653 owns the integral-model, bad-prime, and focused novelty
+gate. C579 then rebuilds Paper III around the arithmetic orientation theorem
+and creates its independent trust surface.
 
-If no single theorem makes the comparisons consequences or applications,
-stop drafting and return the material to a disposition inventory. Do not
-lengthen Paper II to absorb it.
-
-The preferred pre-allocation test, queued behind Paper II rather than active
-now, is the degree-23 `M_{23}`/Golay coherence test proposed in
-`notes/2026-07-24-c589-gateway-to-clebsch-memo.md`. Test whether the
-degree-11 recovery-depth lattice extends functorially to the degree-23
-instance. Coherence supplies a candidate principal organizer; failure keeps
-Paper III inventoried. Allocate no successor ID until C579 reaches this gate.
+The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
+and degree-23 coherence material is subordinate inventory. C579 admits an
+item only when it becomes a proved consequence or application of the
+orientation cover; otherwise it remains outside the paper. Paper II stays
+closed to the characteristic-zero bridge apart from a possible short forward
+reference after Paper III is proved.
 
 ## Shared verification and release policy
 
