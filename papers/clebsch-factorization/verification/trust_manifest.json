@@ -60,16 +60,19 @@
     },
     "arithmetic-gluing": {
       "role": "split/fused arithmetic and mixed Lean/certificate gluing gate",
-      "checksum_manifest": "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.sha256",
+      "checksum_manifest": "lean/verification/clebsch_arithmetic_gluing/manifest.sha256",
+      "checksum_root": "lean",
       "commands": [
-        ["python3", "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.py", "--check"]
+        ["python3", "lean/verification/clebsch_arithmetic_gluing/generate.py", "--check"],
+        ["python3", "lean/verification/clebsch_arithmetic_gluing/replay.py"]
       ]
     }
   },
   "claims": [
-    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent", "relative-cubic-depth", "arithmetic-gluing"]},
+    {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
     {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
+    {"label": "cor:h3-affine-origin", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
     {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
@@ -80,8 +83,9 @@
     {"label": "cor:decorated-sheet-classifier", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:profile-ray-weights", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence"]},
     {"label": "prop:modular-depth-quotient", "modes": ["conceptual", "certificate", "classical-input"], "evidence": ["relative-cubic-depth"]},
+    {"label": "cor:h3-nine-space-bridge", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "relative-cubic-depth"]},
     {"label": "lem:split-inert-frames", "modes": ["conceptual", "lean"], "evidence": ["arithmetic-gluing"]},
-    {"label": "thm:rank-three-arithmetic-gluing", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["arithmetic-gluing"]},
+    {"label": "thm:rank-three-arithmetic-gluing", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["profile-incidence", "decorated-parent", "arithmetic-gluing"]},
     {"label": "lem:three-ray-cubic", "modes": ["conceptual"], "evidence": []},
     {"label": "cor:mass-zero-cubic", "modes": ["conceptual"], "evidence": []},
     {"label": "prop:relative-cubic-tate-plane", "modes": ["certificate"], "evidence": ["relative-cubic-depth"]}

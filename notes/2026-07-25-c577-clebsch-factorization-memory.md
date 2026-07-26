@@ -23,6 +23,14 @@ gates, and execution order are recorded in
 - C616 is complete: Sylow-normalizer cohomology proves the \(H_3\)
   radial-trace containment, same-sheet irreducibility forces the top
   nine-space, and one exact scalar supplies the radial line.
+- The resulting base-choice class generates
+  \(H^1(\operatorname{PGL}_2(11),M_8)\), proves that the affine quotient
+  has no equivariant origin, and defines the unique nonsplit homogeneous
+  extension line.
+- The augmentation quotient
+  \(\operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) is now
+  canonically identified with the top harmonic module
+  \(M_8\downarrow_{\operatorname{PSL}_2(11)}\).
 - A fresh PDF-only referee read of the post-C616 candidate returned a
   local `NO-GO` on three proof-presentation gaps: the twisted action was
   not defined explicitly, cocycle-span stability was omitted before
@@ -34,7 +42,7 @@ gates, and execution order are recorded in
 ## Current result
 
 Paper II now has its own verification architecture and mathematical
-conclusion. The eighteen theorem-like statements are hash-identified and
+conclusion. The twenty theorem-like statements are hash-identified and
 mapped claim by claim to conceptual proofs, classical inputs, seven exact
 certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
 runner checks the statement map, all eight checksum manifests, fifteen primary
@@ -47,8 +55,7 @@ selected \(A_4\) refinement---the matching-table label. It also closes the
 three boundaries a referee could otherwise misread: nonsingleton profiles
 recover only orbits, the relative-cubic and depth planes have no natural
 identification, and the three small-field split/fused rows do not imply an
-all-prime reciprocity law. The repaired candidate is warning-free at twenty-two
-pages.
+all-prime reciprocity law. The repaired candidate is warning-free.
 
 The first two PDF-only cold reads both returned `NO-GO`. The mathematical
 reader found the false scale-invariant ray claim and the missing standalone
@@ -206,15 +213,18 @@ The split--inert rows, matching representatives, sheet exchanges,
 stabilizer/intersection data, \(660\)-element generation closure, and
 nonsquare-determinant transporters are certified by the stable
 arithmetic-gluing bundle and its Lean gate.  The workflow compatibility
-entry point and hash check are
+entry points and hash check are
 
 ```bash
-python3 notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.py --check
-sha256sum -c notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.sha256
+python3 lean/verification/clebsch_arithmetic_gluing/generate.py --check
+python3 lean/verification/clebsch_arithmetic_gluing/replay.py
+(cd lean && sha256sum -c verification/clebsch_arithmetic_gluing/manifest.sha256)
+lean/scripts/guarded-lean RelativeConicArcs/Gates/ClebschArithmeticGluing.lean
 ```
 
 The C412 primary check, independent replay, and checksum manifest, and the
-C503 compatibility check and checksum manifest, passed again on 2026-07-25.
+stable arithmetic generator, independent replay, manifest, and Lean gate
+passed again on 2026-07-25.
 The earlier C411 and C379 checks remain the six-profile evidence surface.
 Their reports record the exact inputs, byte counts, SHA-256 hashes, and
 trusted boundaries. The manuscript build command is
@@ -224,8 +234,7 @@ cd /home/tavis/src/othello/papers
 make -B clebsch-factorization
 ```
 
-The resulting twenty-two-page PDF is warning-free. The Paper II aggregate
-entry point is
+The resulting PDF is warning-free. The Paper II aggregate entry point is
 
 ```bash
 python3 papers/clebsch-factorization/verification/verify_release.py
@@ -380,7 +389,7 @@ mathematical claim or enlarging the release surface.
 | Are the quadratic marker polynomials enough to specify the arithmetic matching models? | settled | No; the manuscript now displays the additional \(B_3\) and \(H_3\) representatives and marks projective transport into the configurations as exact finite evidence. |
 | Can the six representative incidence rows be derived without finite coordinate counts? | open, nonblocking | C411 reduces the computation to one representative per double coset but still certifies those six rows. A conceptual incidence derivation would be a trust-boundary upgrade, not a prerequisite for the present statement. |
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
-| Is every theorem-like statement assigned one exact trust route? | settled | The eighteen-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, stale statements, and stale evidence hashes. |
+| Is every theorem-like statement assigned one exact trust route? | settled | The twenty-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, altered proof-mode/evidence assignments, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the eight semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
-| Can Paper II's verification surface ship independently of the full repository? | open, release-facing | The semantic manifest currently resolves eight bundles through dated `notes/` paths. Before a standalone archive is cut, either vendor those closures under stable paper-owned paths or define and test an explicit full-source packaging allowlist. This does not block the candidate cold review. |
-| What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the C616 equivariant rank upgrade. Release still depends on the user-controlled immutable public archive locator. |
+| Can Paper II's verification surface ship independently of the full repository? | open, release-facing | Seven semantic bundles still resolve through dated `notes/` paths; arithmetic gluing now uses its stable Lean-owned closure. The fingerprint defines and tests an explicit normalized review-source allowlist, but a standalone archive must still vendor the remaining closures. |
+| What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the \(H^1\) no-origin theorem and canonical nine-space bridge. Release still depends on the user-controlled immutable public archive locator. |

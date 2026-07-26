@@ -161,8 +161,8 @@ theorem stabilizer_eq_character_kernel {G W K : Type*} [Group G] [Field K]
     action haction hone chi mu hmu htwo hrelative hpm
 
 /-- Two abstract actions on a two-sheet set define the same sheet character when they
-have the same kernel.  Applying this reusable replacement-spine interface to the concrete
-finite actions requires a separately supplied group-action identification. -/
+have the same kernel.  Applying this reusable equal-kernel interface to the concrete finite
+actions requires a separately supplied group-action identification. -/
 theorem sheetCharacter_eq_of_kernel_eq {G : Type*} [Group G]
     (chi₁ chi₂ : G →* Equiv.Perm (Fin 2)) (hker : chi₁.ker = chi₂.ker) :
     chi₁ = chi₂ :=

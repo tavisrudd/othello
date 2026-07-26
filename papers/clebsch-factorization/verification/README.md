@@ -9,7 +9,7 @@ memory in a conic ideal*. It separates four kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact eighteen theorem-like statements
+`statement_identity.json` contains the exact twenty theorem-like statements
 in the manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 
@@ -17,12 +17,18 @@ unrecorded change to those statements.
 bundles. `verify_release.py` checks the statement identity, the manifest
 partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
-then builds the paper through the repository Makefile.
+then elaborates the arithmetic-gluing Lean gate and builds the paper through
+the repository Makefile.
 
-`evidence_fingerprint.json` pins the eight checksum manifests, exact command
-vectors, verification runner, trust manifest, Python version, Lean
-toolchain, Mathlib revision, Nix lock, and expected success lines. Refresh it
-only after an intentional verification-surface change:
+`evidence_fingerprint.json` pins the normalized manuscript and statement
+identity, statement extractor, paper Makefile, this documentation, Lean gate,
+eight checksum manifests, exact command vectors, verification runner, trust
+manifest, Python version, Lean toolchain, Mathlib revision, Nix lock, and
+expected success lines. The manuscript normalization replaces only its
+displayed fingerprint digest; the identity normalization replaces only its
+derived full-source hash. This is the explicit review-source allowlist, not a
+hash of the entire repository or every transitive dependency. Refresh it only
+after an intentional verification-surface change:
 
 ```text
 python3 papers/clebsch-factorization/verification/verify_release.py \

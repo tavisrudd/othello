@@ -1,5 +1,5 @@
 {
-  "schema": "clebsch-factorization-evidence-fingerprint-v1",
+  "schema": "clebsch-factorization-evidence-fingerprint-v2",
   "python": "3.13.12",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "mathlib_revision": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
@@ -8,12 +8,28 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "35b3ef98526824ce716a600692341fe15fd420a8b797ebd94bc92ea4448b5a48",
-  "runner_sha256": "c008cc8539e0b1d06c6a3d1bb7d8637487d4cbc9e93baa78fc90d00501842694",
+  "trust_manifest_sha256": "8396f37dc796703c3f19234b22b0f0d1fbb013ecee1f505b7d403ed3a9ecdfed",
+  "runner_sha256": "fafad8c3b1dcbead9d1c3ee4b8e17cd0a2a734a154015e235eacd1ec67493bb7",
+  "review_sources_sha256": {
+    "normalized_manuscript": "15e265d7ab3e4d401f77e93069ff70a77f825781b19ab90410e87c68074a2458",
+    "normalized_statement_identity": "2e823fb00c8c9b8d879a2fd204ce7b2efe2a22840765bda843329454f17eaa95",
+    "statement_extractor": "71813195cdc527f36c63fb3464c6bc7a3eeec553305ab1784069047caf673233",
+    "paper_makefile": "26ec6e218e3c11e3913a36a9481277b1a4f63b68ac5dc21640d322b3da5bf681",
+    "verification_readme": "6ea0bfa2ad8339af67192b8be724ba07292cc9e66eff45b4d519a5832e954066",
+    "lean_gate": "6c429451cc1f85dad4ae1a9ef4b6535e80354f039b0122612008eca2e39d0bec"
+  },
+  "lean_gate": {
+    "command": [
+      "lean/scripts/guarded-lean",
+      "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean"
+    ],
+    "cwd": "."
+  },
   "evidence": {
     "matching-module": {
       "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
       "checksum_manifest_sha256": "0d4a69a51fa3e86df70f8f50fb2bfa9ececabdea908b973e913b08746440c878",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -29,6 +45,7 @@
     "h3-equivariant-rank": {
       "checksum_manifest": "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
       "checksum_manifest_sha256": "9d5810eb1d7958199dbb944dc729e75faae434bbb815799dd5475014a6ec9151",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -44,6 +61,7 @@
     "balanced-sheet": {
       "checksum_manifest": "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
       "checksum_manifest_sha256": "fbdeac2b3d3f4140dda9c11602c8e4ea7450ae07a6a0159107cbe2aca2264a5c",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -60,6 +78,7 @@
     "gorenstein-gate": {
       "checksum_manifest": "notes/2026-07-25-c621-gorenstein-gate.sha256",
       "checksum_manifest_sha256": "2eb966b9c4869bc8366a688af139c9e6a2e8bc81be84ec3b499527c10fc8c07c",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -75,6 +94,7 @@
     "profile-incidence": {
       "checksum_manifest": "notes/2026-07-20-c411-double-coset-hecke.sha256",
       "checksum_manifest_sha256": "95949399b2b567bcfb33250900ddfa22f85f672c2c4cde966c53948569c26e9a",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -90,6 +110,7 @@
     "decorated-parent": {
       "checksum_manifest": "notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256",
       "checksum_manifest_sha256": "ce8a38b501ba5342a15cca8ceea1e6e35e38173a39cdb0ba24aaa853a6773be7",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -105,6 +126,7 @@
     "relative-cubic-depth": {
       "checksum_manifest": "notes/2026-07-20-c412-relative-cubic-depth-plane.sha256",
       "checksum_manifest_sha256": "804df8fa90755b983cbff6f34737d1b8f916ff952388350ef54932d8049d2d06",
+      "checksum_root": ".",
       "commands": [
         [
           "python3",
@@ -118,19 +140,24 @@
       ]
     },
     "arithmetic-gluing": {
-      "checksum_manifest": "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.sha256",
-      "checksum_manifest_sha256": "91d2bb9b3c50c049490a9fc9fc7af683e8c2edf1961240d66c91a5d8f53bae7b",
+      "checksum_manifest": "lean/verification/clebsch_arithmetic_gluing/manifest.sha256",
+      "checksum_manifest_sha256": "524dd446f5a6c8c94682aac0df686875baa940646be62b756fac7e5edc329e57",
+      "checksum_root": "lean",
       "commands": [
         [
           "python3",
-          "notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.py",
+          "lean/verification/clebsch_arithmetic_gluing/generate.py",
           "--check"
+        ],
+        [
+          "python3",
+          "lean/verification/clebsch_arithmetic_gluing/replay.py"
         ]
       ]
     }
   },
   "expected_success": {
-    "metadata": "metadata: 18 statements, 8 evidence bundles: CHECK OK",
+    "metadata": "metadata: 20 statements, 8 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

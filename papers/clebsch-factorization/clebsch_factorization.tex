@@ -440,7 +440,8 @@ of \(M_{H_3}\).  Its quotient is nonzero: equality of the two secant
 products would identify their irreducible line factors and hence the
 matchings.  Its \(M_4\)- and \(M_0\)-components vanish, so it gives a
 nonzero vector in \(M_8\).  The degree-eight restricted
-\(\operatorname{SL}_2(\F_{11})\)-module is irreducible.  Moreover the
+\(\operatorname{SL}_2(\F_{11})\)-module is irreducible
+\cite[Fact~3.1]{BraunNebe2025}.  Moreover the
 span of the cocycle values is \(G\)-stable, since
 \[
  b\,c(g)=c(bg)-c(b)\qquad(b,g\in G).
@@ -471,6 +472,43 @@ the \(M_0\)-projection.  The span already contains \(M_8\), so it also
 contains \(M_0\).  Hence
 \(W_{H_3}=\mathcal H_4\oplus\F_{11}Q^2\), of dimension \(10\).
 Since \(\dim R_4=15\), this equality is proper.
+\end{proof}
+
+\begin{corollary}[The base-choice class and its homogeneous extension]
+\label{cor:h3-affine-origin}
+Let \(c_8:G\to M_8\) be the top-harmonic projection of the base-choice
+cocycle \(c\).  Then
+\[
+ H^1(G,M_8)=\F_{11}[c_8].                              \tag{4.11a}
+\]
+In particular, the affine \(H_3\) quotient configuration has no
+\(G\)-equivariant origin: no translation makes its affine action linear.
+Equivalently, the homogeneous module
+\[
+ E_c=M_8\oplus\F_{11},\qquad
+ g\cdot(v,t)=(gv+t\,c_8(g),t),                         \tag{4.11b}
+\]
+is nonsplit.  Up to equivalence and nonzero rescaling of the quotient
+coordinate, it is the unique nonsplit extension of the trivial
+\(G\)-module by \(M_8\).
+\end{corollary}
+
+\begin{proof}
+Equation (4.8) gives \(\dim H^1(G,M_8)\leq1\).  On the base sheet the
+\(M_0\)-component vanishes, and the \(M_4\)-component vanishes by (4.9);
+the nonzero same-sheet quotient used in the proof above is therefore a
+value of \(c_8\).  If \(c_8(g)=gv-v\), its vanishing on
+\(H=\operatorname{Stab}_G(M_{H_3})\) would put \(v\) in \(M_8^H=0\),
+forcing \(c_8=0\), a contradiction.  Thus \([c_8]\ne0\), proving
+(4.11a).
+
+Changing the reference quotient translates the affine configuration
+and changes \(c_8\) by a coboundary.  Hence a \(G\)-equivariant origin
+would kill \([c_8]\), which is impossible.  Finally the standard
+identification
+\(\operatorname{Ext}^1_{\F_{11}G}(\F_{11},M_8)\simeq H^1(G,M_8)\)
+identifies (4.11b) with \([c_8]\); the one-dimensionality just proved
+gives the last assertion.
 \end{proof}
 
 \begin{corollary}[The exact \(H_3\) loss]
@@ -1214,6 +1252,38 @@ $D(JM)=-D(M)$, which attaches the outer character on the opposite
 sheet.
 \end{proof}
 
+\begin{corollary}[The canonical nine-space bridge]
+\label{cor:h3-nine-space-bridge}
+There is a canonical \(G^+\)-module isomorphism
+\[
+ \operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)
+ \ \xrightarrow{\ \sim\ }\ M_8\!\downarrow_{G^+}.             \tag{7.4}
+\]
+It sends the augmentation class of
+\(\sum_{M\in X_+}a_M[M]\) to
+\[
+ \sum_{M\in X_+}a_M\,\pi_8(x_M),
+ \qquad \sum_Ma_M=0,                                         \tag{7.5}
+\]
+where \(\pi_8\) is the top-harmonic projection.  Formula (7.5) is
+independent of the reference matching.
+\end{corollary}
+
+\begin{proof}
+Changing the reference matching translates every \(x_M\) by the same
+vector, so the augmentation condition makes (7.5) reference-independent.
+The affine cocycle term in \(x_{gM}\) cancels for the same reason, hence
+the map is \(G^+\)-equivariant.  The same-sheet first-moment identity of
+Proposition~\ref{prop:radical-hadamard} sends the constant vector
+\(\mathbf1\), which lies in the augmentation module because
+\(|X_+|=11=0\) in \(k\), to zero.  Thus (7.5) descends to
+\(\operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)\).
+
+Its image contains a nonzero same-sheet quotient and is \(G^+\)-stable.
+The irreducibility of \(M_8\!\downarrow_{G^+}\) therefore makes it
+surjective.  Both sides have dimension nine, so it is an isomorphism.
+\end{proof}
+
 This quotient identifies the precise modular loss in the six-profile
 construction.  Before linearization, the six profiles remain distinct
 and recover all six double-coset labels.  After linearization, the
@@ -1544,24 +1614,30 @@ Arithmetic splitting and gluing
 \end{table}
 
 The claim-by-claim map is
-\path{verification/trust_manifest.json}; the exact eighteen-statement
+\path{verification/trust_manifest.json}; the exact twenty-statement
 identity is \path{verification/statement_identity.json}.  From the root
 of the archival source, the aggregate entry point is
 \begin{verbatim}
 python3 papers/clebsch-factorization/verification/verify_release.py
 \end{verbatim}
 It checks the statement identity and all eight checksum manifests, runs
-the admitted primary checks and independent replays, and rebuilds this
-manuscript through the repository Makefile.
+the admitted primary checks and independent replays, elaborates the
+arithmetic-gluing Lean gate, and rebuilds this manuscript through the
+repository Makefile.
 
-The full-source review archive accompanying this candidate is pinned by
-\path{verification/evidence_fingerprint.json}, whose SHA-256 digest is
+The enumerated review closure accompanying this candidate is pinned by
 \begin{center}
-\small\texttt{b9423a3e782d4683f56e597bd4431112c208ce}\\[-2pt]
-\texttt{3b929db6f3d2e767b2c5be4e51}.
+\small\path{verification/evidence_fingerprint.json}.
 \end{center}
-That fingerprint fixes the eight evidence manifests, command vectors,
-runner, trust manifest, and environment: Python 3.13.12, Lean
+Its SHA-256 digest is
+\begin{center}
+\small\texttt{0a1db3adcf1754da413199cb0328e8cec143b7}\\[-2pt]
+\texttt{91f55382d58128d30f51990d56}.
+\end{center}
+That fingerprint fixes a normalized manuscript, statement contents,
+extractor, paper Makefile, verification documentation, eight evidence
+manifests, command vectors, Lean gate, runner, trust manifest, and
+environment: Python 3.13.12, Lean
 4.32.0-rc1, and Mathlib revision
 \begin{center}
 \small\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
@@ -1570,9 +1646,11 @@ A successful replay ends with
 \begin{center}
 \texttt{clebsch factorization release: CHECK OK}.
 \end{center}
-An immutable public archive locator must be added before release.  Until
-then, the digest identifies the accompanying review archive exactly but
-is not presented as a public deposit.
+The normalization replaces only the displayed fingerprint digest and
+the statement identity's derived full-source hash, avoiding a circular
+self-hash.  This is an explicit review-source allowlist, not a claim to
+hash every file in the repository or every transitive tool dependency.
+An immutable public archive locator must be added before release.
 
 The largest formal component is the gate
 \begin{center}
@@ -1762,6 +1840,13 @@ Z.~Raissi, C.~Gogolin, A.~Riera, and A.~Ac\'in,
 \newblock Constructing optimal quantum error correcting codes from
 absolutely maximally entangled states,
 \newblock arXiv:1701.03359, 2017.
+
+\bibitem{BraunNebe2025}
+T.~Braun and G.~Nebe,
+\newblock Orthogonal representations of \(\operatorname{SL}_2(q)\) in
+defining characteristic,
+\newblock \emph{Beitr\"age zur Algebra und Geometrie} (2025).
+\newblock doi:10.1007/s13366-024-00763-w.
 
 \end{thebibliography}
 
