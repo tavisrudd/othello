@@ -8,7 +8,8 @@
 Frobenius descent, binary-factor proportionality, projective-representative
 invariance of square status, finite interpolation from a one-line correction,
 line-product detection, product nonsquareness, and the conditional
-carrier-cardinality theorem.  Dedicated gate builds remain
+carrier-cardinality theorem, together with the exact-threshold residue
+identity.  Dedicated gate builds remain
 pending the shared Lean build window.  The manuscript is unchanged, and the
 formal boundary below isolates the projective inputs which Lean does not yet
 check.
@@ -172,18 +173,31 @@ terminals.
 - `eq_zero_of_pairwise_isRelPrime_dvd_of_totalDegree_lt_card` proves the line
   detection lemma: a polynomial of degree below the number of pairwise
   relatively prime linear divisors is zero;
+- `firstCoordinateHyperplaneRestriction_eq_zero_iff_dvd` identifies the kernel
+  of restriction to `X₀ = 0` with the principal ideal `(X₀)`, while
+  `coordinateTransformedHyperplaneRestriction_eq_zero_iff_dvd` transports the
+  statement through a coefficient-preserving polynomial automorphism;
+- `exists_eq_C_mul_fintypeProd_of_pairwise_isRelPrime_dvd_of_totalDegree_le_card`
+  classifies the exact threshold: a polynomial of degree at most the number of
+  pairwise relatively prime degree-one divisors is a constant multiple of
+  their product;
 - `not_exists_eq_sq_of_squarefree_of_not_isUnit` and
   `not_exists_fintypeProd_eq_sq_of_pairwise_isRelPrime_of_squarefree` prove the
   nonsquare obstruction for a squarefree nonunit and for a pairwise relatively
   prime finite product of squarefree factors;
 - `card_le_of_linewiseSquareRoots_extend_and_jointlyDetect` gives the abstract
   carrier-cardinality contradiction; and
+- `exists_extendedRoot_difference_eq_C_mul_lineProduct` gives
+  `F-G² = C(c)∏L_y` at the degree threshold, while
+  `exists_coordinateTransformed_extendedRoot_difference_eq_C_mul_lineProduct`
+  discharges restriction-zero divisibility for a family of lines presented by
+  coordinate changes; and
 - `card_le_of_linewiseSquareRoots_extend_of_lineProductDetection` composes
   actual multivariable line divisors, a degree bound, extended linewise roots,
   and ambient nonsquareness into `Y.card ≤ degreeBound`.
 
 The import-only gate `RelativeConicArcs.Gates.CarrierArcBound` audits these
-eight terminals.
+thirteen terminals.
 
 ## Formal boundary
 
@@ -200,9 +214,9 @@ Lean does not yet check:
   hypotheses for the restricted binary factors;
 - the one-line polynomial correction lemma for compatible sections on a nodal
   line arrangement (its finite induction is formalized);
-- the geometric facts that restriction equality gives divisibility by the
-  chosen line equation and that the chosen equations are pairwise relatively
-  prime;
+- the construction of a linear coordinate change for each concrete projective
+  line and the facts that the resulting equations have degree one and are
+  pairwise relatively prime;
 - squarefreeness and nonunit status of the particular dual-factor product;
 - the deduction that the maximum-centre set has arc number at most `k`; or
 - the specialization of the finite-cover kernel to all `(k+1)`-subsets and
@@ -219,8 +233,9 @@ standing for them is introduced.
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
 | Do compatible linewise roots extend? | **Reduced:** finite interpolation from successive corrections is kernel-checked.  The remaining evidence gap is the projective one-line correction: divisibility of the residual binary form by the previous node factors and a lift of the quotient to the plane. |
-| Do the carrier restrictions detect that ambient form? | **Reduced to explicit algebraic hypotheses:** line-product detection and the final cardinal contradiction are kernel-checked.  The remaining evidence gap is the specialization from restriction-zero to divisibility by each chosen line equation, plus pairwise relative primality and the required degree bound. |
+| Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
+| What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
 
 ## Validation
 
@@ -243,12 +258,13 @@ standing for them is introduced.
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
   **PASS**, warning-free.
-- The source-local audit of its eight terminals reports no axioms beyond
+- The source-local audit of its thirteen terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`;
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
   `--no-build` confirmation, together with the nineteen-terminal polynomial gate
-  and eight-terminal carrier gate builds: pending release of the shared Lean
-  build-owner lock.  The latest exact two-gate attempt failed closed because the
-  foreign `RelativeConicArcs.Gates.Relconic` aggregate owns that lock.
+  and thirteen-terminal carrier gate builds: pending release of the shared Lean
+  build-owner lock.  The latest exact two-gate attempt failed closed because
+  the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
+  lock.
