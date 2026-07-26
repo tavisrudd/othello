@@ -909,9 +909,10 @@ companion formal geometry and is not a dispatch candidate in this ranking.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C545 | external release gates | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two publication-independent human signoffs, immutable identifiers, and author/account confirmation before upload |
-| 2 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
-| 3 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
-| 4 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
+| 2 | C660 | only after Version 1 is published | remove R7's largest remaining computational single point of trust by deriving finite completeness without the primary quotient enumerator |
+| 3 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
+| 4 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
+| 5 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
 
 ## Unallocated level-ups
 
