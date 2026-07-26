@@ -107,6 +107,47 @@ existence of a nonsingular member avoiding all of \(A\).  Indeed,
 The case \(s=1\) is immediate: its unique projective member is already the
 assumed nonsingular conic and the hull condition says that it avoids \(A\).
 
+There is a purely geometric test for the remaining hypothesis.  Suppose
+\(q\) is odd and \(q\ge5\).  If \(I(U)_2\ne0\), then
+\[
+ I(U)_2\text{ contains a nonsingular conic}
+ \quad\Longleftrightarrow\quad
+ U\text{ has no three collinear points}.
+\]
+The forward implication is immediate because a line meets a nonsingular
+conic in at most two points.  Conversely, if \(|U|\ge5\), any quadratic
+through \(U\) is nonsingular: a singular conic is a pair of geometric lines
+and cannot contain five rational points with no collinear triple.  If
+\(|U|\le4\), extend \(U\) to a projective four-frame.  In frame coordinates
+the conics through the four points include
+\[
+ YZ+ZX-2XY=0,
+\]
+which is nonsingular in odd characteristic.  Projective transport gives a
+nonsingular conic through \(U\).
+
+Combining this with the quantitative theorem gives the lossless pilot-range
+criterion
+\[
+\begin{split}
+&\text{some nonsingular conic contains \(U\) and avoids \(A\)}\\
+&\qquad\Longleftrightarrow\qquad
+H_U(2)<6,\quad
+A\cap\operatorname{Hull}_2(U)=\varnothing,\quad
+U\text{ is an arc},
+\end{split}
+\]
+whenever \(q\) is odd, \(q\ge5\), and \(|A|\le q-3\).
+
+For \(|U|\le4\) with no three collinear, the degree-two base locus is exactly
+\(U\), so the hull condition is automatic from \(A\cap U=\varnothing\).
+For \(|U|=5\), the five-arc determines a unique nonsingular conic.  Thus:
+
+- at \(|U|\le4\), only the collinear-triple test remains;
+- at \(|U|=5\), only incidence of \(A\) with the unique conic remains; and
+- at \(|U|\ge6\), quadratic rank and then unique-conic incidence are the two
+  genuine gates.
+
 ## Veronese and code formulations
 
 The degree-\(d\) Veronese evaluation vectors of \(U\) span a subspace of
@@ -204,9 +245,10 @@ quantitative refinement removes this boundary in all three pilots:
 \]
 Whenever their quadratic kernel contains one nonsingular conic and has no
 selected hull point, it contains a nonsingular conic avoiding the whole arc.
-Thus a bounded certificate may cleanly separate three cases: full quadratic
-rank, a selected hull point, or a kernel consisting entirely of singular
-conics.
+The nonsingularity hypothesis is exactly that the uncovered locus itself has
+no collinear triple.  Thus a bounded certificate may cleanly separate three
+cases: full quadratic rank, a selected hull point, or a collinear triple in
+the uncovered locus.
 
 ## Conclusion
 
@@ -245,6 +287,20 @@ another aggregate count of \(U(A)\).  Without that coupling, higher-degree
 Hilbert functions merely repeat the same full-support-code question in a
 larger coefficient space.
 
+The `dof` and `tt` pass removes two apparent freedoms.  “The kernel might
+contain only singular conics” is not an algebraic mystery: it is exactly a
+collinear triple in \(U(A)\).  Moreover, quadratic rank is irrelevant for
+\(|U(A)|\le5\): at most four uncovered points have base locus exactly
+themselves, while five uncovered points in arc position determine their
+unique nonsingular conic.  The first genuinely unexplained stratum is
+therefore
+\[
+ |U(A)|\ge5,\qquad U(A)\text{ an arc},
+\]
+where the secant arrangement must control whether the unique conic through
+the uncovered points also contains a selected point; quadratic rank becomes
+an additional issue only from six uncovered points onward.
+
 ## Mystery ledger
 
 - **Settled:** the exact uniform range of the Hilbert/separator criterion is
@@ -255,10 +311,17 @@ larger coefficient space.
 - **Settled:** for `q=13,17,19`, a quadratic kernel containing any
   nonsingular member and no selected hull point necessarily contains a
   nonsingular member avoiding the entire candidate arc.
+- **Settled:** in these odd fields the kernel contains a nonsingular conic
+  exactly when the uncovered locus has no collinear triple; the former
+  all-singular-kernel mystery is therefore completely geometric.
+- **Settled:** for at most four uncovered points in arc position, the
+  quadratic hull is the uncovered set itself, so every target-size pilot arc
+  is automatically completable outside some nonsingular conic.
 - **Open:** no structural principle is known that couples the secant
   arrangement of an arc to membership
-  \(A\cap\operatorname{Hull}_2(U(A))\).  This is the exact evidence gap behind
-  the three bounded pilots and belongs to a future explicitly allocated
-  classification or rank-three-sensitive task.
+  \(A\cap\operatorname{Hull}_2(U(A))\) once \(|U(A)|\ge5\), or forces
+  \(H_{U(A)}(2)<6\) once \(|U(A)|\ge6\).  These are the exact evidence gaps
+  behind the three bounded pilots and belong to a future explicitly
+  allocated classification or rank-three-sensitive task.
 - **Open:** the exact values at `q=13,17,19` remain unproved.  C628 supplies
   only the lossless certificate shape and makes no finite-search claim.

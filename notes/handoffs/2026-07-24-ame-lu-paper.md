@@ -449,20 +449,6 @@ no GRS evaluation hypothesis, and the aggregate axiom audit passes with
 only `propext`, `Classical.choice`, and `Quot.sound`.  See
 `2026-07-25-c622-ame-lu-diagonal-isoduality-dichotomy.md`.
 
-**C631 closed (2026-07-25): diagonal-isodual multiplier space formalized.**
-`DiagonalIsoduality` proves that every nonzero diagonal multiplier between
-exact `[2m,m,m+1]` MDS codes has full support and induces a code
-isomorphism.  The multiplier space has dimension at most one; its self-code
-specialization is exactly the scalar line, and its code-to-dual
-specialization has nullity zero or one.  Diagonal isoduality is exactly the
-nullity-one case.  A nonzero multiplier reconstructs the duality witness,
-the scalar relating two witnesses is unique, all coordinate ratios are
-canonical, and one realized nondiagonal block forces the full affine
-special-linear carrier through the existing action interface.  The aggregate
-gate and axiom audit report only `propext`, `Classical.choice`, and
-`Quot.sound`.  See
-`2026-07-25-c631-diagonal-isoduality-corollaries-lean.md`.
-
 **C624 closed (2026-07-25): concrete party-permutation extensions split.**
 The exact fixed and party-moving projective groups, normalized nonabelian
 factor sets, outer actions, trivializing cochains, and complements are now
