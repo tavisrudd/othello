@@ -1367,6 +1367,21 @@ rewrite is iterable under strict rank descent; C82 remains gated.
 Report+script+cert:
 [`../2026-07-25-c80-q23-canonical-rank-zero-sweep.md`](../2026-07-25-c80-q23-canonical-rank-zero-sweep.md).
 
+**The first `F_d\R0` edge admits an iterable obligation-deletion rewrite
+(C80, 2026-07-26).** Strengthen defect-cardinality descent to strict locus
+inclusion: every defect response must satisfy
+`Def(S+x+y)⊊Def(S)`. The hereditary survivor `F_del` is P by finite-set
+induction, permits arbitrary growing rank, and forbids replacement
+obligations. On the rank-30 q23 target it closes through a 29-state,
+32-edge proof DAG of maximum depth two. More strongly, `F_del=F_d`
+edge-for-edge on all 525 marked defect/reply candidates, with 118 accepted
+edges. The marked `(14,3)->(18,21)` rewrite deletes 29 obligations and leaves
+the old singleton `(5,13)`; no new defect is created. This is a finite
+compression, not uniform opponent completeness. Next sweep later q23
+controls for the first sound `F_d` edge that necessarily creates a
+replacement defect; C82 remains gated. Report+script+certificate:
+[`../2026-07-26-c80-q23-obligation-deletion-rewrite.md`](../2026-07-26-c80-q23-obligation-deletion-rewrite.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded

@@ -40,6 +40,7 @@ is an input bank, not C80 status authority.
 | q23 defect-three update | **PROVED sound for one target; FINITE-CERTIFIED** | The unique minimum-defect follower has a three-point noncollinear mutually legal defect locus. Every defect move has two replies sending rank `3 -> 0`; with direct boundary replies elsewhere this gives `24/24` coverage and 50 sound edges. [Report](2026-07-25-c80-q23-defect-three-update.md) |
 | q23 recursive defect-rank survivor | **PROVED soundness; FINITE-CERTIFIED reach** | The well-founded `F_d` survivor uses `d=|Def|`, the `B_small` boundary, and strict defect-rank replies. All 118 outer fibres of the normalized q23 control enter `F_d`; 24,568 ranked states and 25,479 defect obligations are checked without minimax or the C54 value label. [Report](2026-07-25-c80-q23-defect-rank-descent.md) |
 | q23 rank-zero correspondence `R0` | **PROVED soundness; FINITE-CERTIFIED exact compression on ten controls; FIRST FAILURE FOUND** | `R0(T;o,p)` requires every defect of `T+o+p` to have a reply to defect rank zero. It equals `F_d` exactly on the first ten canonical controls: 1,163/1,163 fibres, 12,496 common edges, and 77,632 candidates. The eleventh control `(6,5)` has the first `F_d\R0` edge, `(12,20)->(16,15)`, at rank 30 and `Omega=72`. Its sole direct failure is defect move `(14,3)`; recursive reply `(18,21)` drops to a rank-one, `Omega=1` `R0` state. Thus `R0` remains the base packet but is not the full recursive survivor even at q23. [First four controls](2026-07-25-c80-q23-fourth-control-rank-zero.md), [canonical sweep and first failure](2026-07-25-c80-q23-canonical-rank-zero-sweep.md) |
+| Obligation-deletion survivor `F_del` | **PROVED soundness; FINITE-CERTIFIED exact compression on the first `F_d\R0` target** | Require `Def(S+x+y)⊊Def(S)` at every defect response. Finite-set induction proves the hereditary survivor P and permits arbitrary growing rank without replacement obligations. On the rank-30 q23 target, one 29-state proof DAG closes at depth two; over all 525 marked defect/reply candidates, `F_del=F_d` edge-for-edge with 118 accepted edges. Uniform opponent completeness is open. [Report](2026-07-26-c80-q23-obligation-deletion-rewrite.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -82,7 +83,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 defect rank | `R0=F_d` exactly on the first ten canonical q23 P controls, then fails at the eleventh by one additional recursive layer: the unique missed obligation drops `30->1` into `R0`. This is the first explicit `F_d\R0` edge. | Derive a bounded algebraic obligation datum and iterable rank update from the marked `(14,3)->(18,21)` rewrite; do not add a fixed `R1` shell. |
+| q23 defect rank | The first `F_d\R0` target admits the stronger inclusion-ranked survivor `F_del`: defects only disappear, and `F_del=F_d` on all 525 marked candidates. This supplies an iterable projective obligation rewrite but only on one finite target. | Sweep later q23 controls for the first sound `F_d` edge that cannot avoid creating a replacement defect; if none appears, prove opponent-complete deletion fibres uniformly. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -90,17 +91,17 @@ is impossible.
 The live C80 statement is:
 
 ```text
-Turn the first exact q23 `F_d\R0` edge into an iterable growing-rank
-obligation rewrite.
+Prove or falsify the obligation-deletion survivor beyond the first exact
+q23 `F_d\R0` target.
 ```
 
 The immediate compression test is narrower:
 
 ```text
-The finite model is the marked defect move `(14,3)` with no rank-zero reply,
-answered by `(18,21)` into a rank-one `R0` state. Compress that exchange
-without recursive survivor membership and prove that the obligation datum
-updates under iteration.
+Sweep later q23 `F_d` edges and stop at the first edge whose sound
+lower-rank continuation necessarily creates a defect outside the old
+obligation locus. If no such edge appears, the direct next theorem is
+opponent completeness of projectively natural deletion fibres.
 ```
 
 Do not promote a finite q17 selector, a value/minimax lookup, an explicit
@@ -113,4 +114,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap derive an iterable growing-rank obligation rewrite from the first q23 F_d-outside-R0 edge
+go C80 cap sweep q23 F_d edges for the first obligation-deletion failure
