@@ -1,4 +1,5 @@
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
@@ -31,6 +32,31 @@ def signedRow (A : Matrix ι κ K) (ε : κ → K) (i : ι) : κ → K :=
 /-- The matrix obtained by multiplying column `j` of `A` by `ε j`. -/
 def signedMatrix (A : Matrix ι κ K) (ε : κ → K) : Matrix ι κ K :=
   fun i => signedRow A ε i
+
+/-- Coordinatewise multiplication by the column weights. -/
+def columnScale (ε : κ → K) : (κ → K) →ₗ[K] (κ → K) where
+  toFun x := fun j => x j * ε j
+  map_add' x y := by ext j; simp [add_mul]
+  map_smul' c x := by ext j; simp [mul_assoc]
+
+omit [Fintype κ] [DecidableEq κ] in
+/-- Full-support column weights make coordinatewise scaling injective. -/
+theorem columnScale_injective {ε : κ → K} (hε : ∀ j, ε j ≠ 0) :
+    Function.Injective (columnScale ε) := by
+  intro x y hxy
+  ext j
+  apply mul_right_cancel₀ (hε j)
+  exact congrFun hxy j
+
+omit [Fintype κ] [DecidableEq κ] in
+/-- Multiplying every coordinate by a nonzero weight preserves linear
+independence of a row family. -/
+theorem signedRow_linearIndependent {A : Matrix ι κ K} {ε : κ → K}
+    (hrows : LinearIndependent K A) (hε : ∀ j, ε j ≠ 0) :
+    LinearIndependent K (signedRow A ε) := by
+  have hscaled : LinearIndependent K (fun i => columnScale ε (A i)) :=
+    hrows.map' (columnScale ε) (LinearMap.ker_eq_bot.mpr (columnScale_injective hε))
+  exact hscaled
 
 /-- The span of the signed rows of `A`. -/
 def signedRowSpace (A : Matrix ι κ K) (ε : κ → K) : Submodule K (κ → K) :=
@@ -115,6 +141,36 @@ theorem signedRowSpace_eq_ker_of_mul_transpose_eq_zero
     signedRowSpace A ε = LinearMap.ker (Matrix.toLin' A) :=
   signedRowSpace_eq_ker_of_card_eq_twice
     (weightedRowOrthogonal_iff_mul_transpose_eq_zero.mpr hzero) hind hsurj hcard
+
+/-- Surjectivity of the column-evaluation map is equivalent here to full row
+rank, hence makes the rows of `A` linearly independent. -/
+theorem rows_linearIndependent_of_toLin_surjective
+    [Fintype ι] [DecidableEq ι] {A : Matrix ι κ K}
+    (hsurj : Function.Surjective (Matrix.toLin' A)) :
+    LinearIndependent K A := by
+  rw [linearIndependent_iff_card_eq_finrank_span]
+  change Fintype.card ι = Module.finrank K (Submodule.span K (Set.range A.row))
+  rw [← A.rank_eq_finrank_span_row]
+  rw [A.rank_eq_finrank_span_cols, ← Matrix.range_mulVecLin]
+  have hsurj' : Function.Surjective A.mulVecLin := by
+    simpa [Matrix.toLin'_apply'] using hsurj
+  rw [LinearMap.range_eq_top.mpr hsurj', Submodule.topEquiv.finrank_eq, Module.finrank_pi K]
+
+/-- Exact full-support matrix form.  For a full-row-rank `q`-by-`2q` matrix,
+the identity `A * (signedMatrix A ε)ᵀ = 0` and nonzero column weights already
+force the signed rows to be the complete relation space. -/
+theorem signedRowSpace_eq_ker_of_fullSupport
+    [Fintype ι] [DecidableEq ι] {A : Matrix ι κ K} {ε : κ → K}
+    (hzero : A * (signedMatrix A ε)ᵀ = 0)
+    (hsurj : Function.Surjective (Matrix.toLin' A))
+    (hε : ∀ j, ε j ≠ 0)
+    (hcard : Fintype.card κ = 2 * Fintype.card ι) :
+    signedRowSpace A ε = LinearMap.ker (Matrix.toLin' A) := by
+  apply signedRowSpace_eq_ker_of_mul_transpose_eq_zero hzero
+  · exact signedRow_linearIndependent
+      (rows_linearIndependent_of_toLin_surjective hsurj) hε
+  · exact hsurj
+  · exact hcard
 
 end SignedGaleDuality
 end RelativeConicArcs

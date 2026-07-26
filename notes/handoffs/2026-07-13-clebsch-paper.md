@@ -163,6 +163,12 @@ Lean gate and exact noncoverage boundary are recorded in
 `notes/2026-07-25-c632-signed-gale-duality-lean.md`; the frozen
 \(B_3/H_3\) coordinate hypotheses and the Gorenstein criterion remain on
 C621's non-Lean evidence routes.
+C635 removes the formal theorem's redundant signed-row-independence
+hypothesis: full row rank makes the original rows independent, while
+full-support weights make diagonal scaling injective. The resulting terminal
+takes exactly the matrix identity, full row rank, full support, and the
+\(q\)-by-\(2q\) size; its degrees-of-freedom audit is in
+`notes/2026-07-25-c635-signed-gale-closeout.md`.
 
 The active order is strict:
 

@@ -84,9 +84,10 @@ signed rows prove the required dimension equality by rank--nullity.
 
 - **Settled:** the formal proof needs no projective-coordinate API; its genuine
   reusable core is finite-dimensional linear algebra.
-- **Open, owned by a future formal-coverage upgrade:** derive independence of
-  the signed rows directly from full row rank and full-support weights, thereby
-  reducing the terminal hypotheses to the exact data used in the paper.
+- **Settled by C635:** full row rank makes the original rows independent, and
+  full-support coordinate scaling preserves their independence. The strengthened
+  terminal now takes the exact matrix identity, full row rank, full-support
+  weights, and the \(q\)-by-\(2q\) size directly.
 - **Open, outside this task:** connect the two frozen configurations to these
   abstract hypotheses inside Lean. That requires formal coordinate or
   certificate bridges and must not be inferred from the Python/Singular
