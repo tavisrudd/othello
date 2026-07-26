@@ -105,6 +105,46 @@ theorem homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
     (by rw [hproductDegree]) hquotientDegree]
   rw [Nat.add_sub_of_le hcard, ← hquotient]
 
+/-- Dehomogenizing a homogeneous binary form in the affine chart `[X : 1]` does not increase its
+degree beyond the homogeneous degree. -/
+theorem natDegree_dehomogenize_le_of_isHomogeneous
+    (F : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (hF : F.IsHomogeneous degree) :
+    (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] F).natDegree ≤
+      degree := by
+  let coefficientEval : MvPolynomial (Fin 1) K →+* K :=
+    MvPolynomial.eval₂Hom (RingHom.id K) (fun _ => 1)
+  have hhom :
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)]).toRingHom =
+        (Polynomial.mapRingHom coefficientEval).comp
+          (MvPolynomial.finSuccEquiv K 1).toRingEquiv.toRingHom := by
+    apply MvPolynomial.ringHom_ext
+    · intro c
+      simp [coefficientEval, MvPolynomial.finSuccEquiv_apply]
+    · intro i
+      have hi : i = 0 ∨ i = 1 := by
+        fin_cases i <;> simp
+      rcases hi with rfl | rfl
+      · simp [coefficientEval, MvPolynomial.finSuccEquiv_apply]
+      · have hfin :
+            MvPolynomial.finSuccEquiv K 1 (MvPolynomial.X (1 : Fin 2)) =
+              Polynomial.C (MvPolynomial.X (0 : Fin 1)) := by
+          rw [show (1 : Fin 2) = (0 : Fin 1).succ by decide]
+          exact MvPolynomial.finSuccEquiv_X_succ
+        simp [coefficientEval, hfin]
+  have heval :
+      MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] F =
+        Polynomial.map coefficientEval (MvPolynomial.finSuccEquiv K 1 F) :=
+    RingHom.congr_fun hhom F
+  rw [heval]
+  calc
+    (Polynomial.map coefficientEval (MvPolynomial.finSuccEquiv K 1 F)).natDegree
+        ≤ (MvPolynomial.finSuccEquiv K 1 F).natDegree :=
+      Polynomial.natDegree_map_le
+    _ = F.degreeOf 0 := MvPolynomial.natDegree_finSuccEquiv F
+    _ ≤ F.totalDegree := MvPolynomial.degreeOf_le_totalDegree F 0
+    _ ≤ degree := hF.totalDegree_le
+
 /-- For homogeneous binary forms, affine-node agreement yields divisibility of their difference
 by the homogenized product of the corresponding node factors. -/
 theorem homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
@@ -113,9 +153,6 @@ theorem homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
     (htarget : target.IsHomogeneous degree)
     (hcurrent : current.IsHomogeneous degree)
     (hcard : Fintype.card ι ≤ degree)
-    (haffineDegree :
-      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
-        MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).natDegree ≤ degree)
     (hagree :
       ∀ i,
         (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target).eval (node i) =
@@ -124,14 +161,20 @@ theorem homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
         (∏ i, (Polynomial.X - Polynomial.C (node i)))
         (Fintype.card ι) ∣
       target - current := by
+  have hhomogeneous : (target - current).IsHomogeneous degree :=
+    htarget.sub hcurrent
+  have haffineDegree :
+      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
+        MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).natDegree ≤ degree := by
+    simpa using
+      natDegree_dehomogenize_le_of_isHomogeneous
+        (target - current) degree hhomogeneous
   have hdvd :=
     homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
       node hnode
       (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target)
       (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current)
       degree hcard haffineDegree hagree
-  have hhomogeneous : (target - current).IsHomogeneous degree :=
-    htarget.sub hcurrent
   have hhomogenize :
       Polynomial.homogenize
           (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
@@ -230,9 +273,6 @@ theorem prod_dvd_sub_of_proportional_homogenizedNodeFactors_of_isHomogeneous_eva
     (htarget : target.IsHomogeneous degree)
     (hcurrent : current.IsHomogeneous degree)
     (hcard : Fintype.card ι ≤ degree)
-    (haffineDegree :
-      (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target -
-        MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] current).natDegree ≤ degree)
     (hagree :
       ∀ i,
         (MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] target).eval (node i) =
@@ -242,7 +282,7 @@ theorem prod_dvd_sub_of_proportional_homogenizedNodeFactors_of_isHomogeneous_eva
     node scale factor hscale hfactor
   exact
     homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
-      node hnode target current degree htarget hcurrent hcard haffineDegree hagree
+      node hnode target current degree htarget hcurrent hcard hagree
 
 end DistinctPolynomialRoots
 
