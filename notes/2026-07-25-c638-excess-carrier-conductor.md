@@ -7,12 +7,12 @@
 **Status:** complete negative.  Removing the universally nonzero conductor
 triples supported on arc secants does not expose a defect-sensitive remainder.
 For every even prime power \(q\), the regular hyperoval in
-\(\operatorname{PG}(2,q)\) has defect zero and every one of its
-\(q(q-1)/2\) external lines contains \(q+1\) maximum centres on which every
-carrier triple has nonzero first conductor.  Thus the external
-first-conductor mass is exactly
+\(\operatorname{PG}(2,q)\) has defect zero and an explicit family of \(q/2\)
+external lines, each containing \(q+1\) maximum centres, on which every
+carrier triple has nonzero first conductor.  Thus even the external
+first-conductor mass is at least
 \[
- \frac{q(q-1)}2\binom{q+1}{3}
+ \frac q2\binom{q+1}{3}
 \]
 at defect zero.  No nonnegative external-line or higher-jet excess which
 retains this first layer can be bounded by the prescribed-hole defect.
@@ -84,30 +84,22 @@ secant pairs through the point.  Hence
  X_H=\operatorname{PG}(2,q)\setminus H.
 \]
 
-Every line external to \(H\) has a unique equation
+For every \(c\in\mathbf F_q\) with absolute trace one, consider
 \[
- \ell_{b,c}:\ X+bY+cZ=0
+ \ell_c:\ X+Y+cZ=0.
 \]
-with \(b\ne0\) and
-\(\operatorname{Tr}(c/b^2)=1\).  Indeed, avoiding the two points at infinity
-forces the \(X\)- and \(Y\)-coefficients to be nonzero, after which scaling
-normalizes the former to one.  The affine
+The line avoids the two points at infinity of \(H\), and its affine
 intersection equation
 \[
- t^2+bt+c=0
+ t^2+t+c=0
 \]
-has no root exactly when
-\(\operatorname{Tr}(c/b^2)=1\).  Thus all \(q+1\) points of
-\(\ell_{b,c}\) are maximum centres.  There are
-\[
- (q-1)\frac q2=\frac{q(q-1)}2
-\]
-such lines, which is also the full external-line count.
+has no root in \(\mathbf F_q\).  Thus \(\ell_c\) is external to \(H\), and all
+of its \(q+1\) points are maximum centres.  There are \(q/2\) such values of
+\(c\).
 
-It remains to check that the external conductor has not disappeared.  First
-take \(b=1\).  At \(p_c=\ell_{1,c}^*\), use the tangent perturbations
-\(M=X\) and \(N=Y\), and
-normalize each Chow factor by its nonzero value on \(\ell_{1,c}\).  The two
+It remains to check that the external conductor has not disappeared.  At
+\(p_c=\ell_c^*\), use the tangent perturbations \(M=X\) and \(N=Y\), and
+normalize each Chow factor by its nonzero value on \(\ell_c\).  The two
 points at infinity contribute zero to the polar coefficient, while the
 affine points give
 \[
@@ -138,35 +130,17 @@ Summing the partial fractions therefore gives
  \beta_{p_c}(M,N)
  =r^2+r=c\ne0.
 \]
-For general \(b\ne0\), substitute \(t=bu\) and
-\(d=c/b^2\).  The same sum scales by \(b^{-1}\), so
-\[
- \beta_{p_{b,c}}(M,N)
- =b^{-1}d=\frac{c}{b^3}\ne0.
-\]
-Thus every external-line polar form is nonzero.  By the local identity above,
-every one of the \(\binom{q+1}{3}\) carrier triples on every external line has
-nonzero first conductor.  Distinct lines support distinct collinear triples,
-so
+The external-line polar form is nonzero.  By the local identity above, every
+one of the
+\(\binom{q+1}{3}\) carrier triples on \(\ell_c\) has nonzero first
+conductor.  Distinct lines support distinct collinear triples, so
 \[
  \boxed{\quad
  E_{\mathrm{ext}}(H)
- =\frac{q(q-1)}2\binom{q+1}{3},
+ \ge \frac q2\binom{q+1}{3},
  \qquad
  \Delta_{\mathcal H}(H)=0.\quad}
 \]
-
-There are \(\binom{q+2}{2}\) secants, each containing \(q-1\) maximum
-centres.  C627 shows that their carrier triples also have nonzero conductor.
-Consequently every collinear triple in \(X_H\) has nonzero first conductor,
-and the exact total is
-\[
- \frac{q(q-1)}2\binom{q+1}{3}
- +\binom{q+2}{2}\binom{q-1}{3}.
-\]
-For \(q\ge4\), the external term is strictly larger than the secant term.
-The supposedly residual external contribution is therefore the dominant
-first-conductor mass in this zero-defect family, not a lower-order exception.
 
 The calculation includes \(q=2\).  It uses only the regular conic and its
 nucleus, so the falsifier already respects the strongest available
@@ -177,9 +151,8 @@ hyperoval.
 
 C638 closes negatively for the proposed excess-conductor route:
 
-- subtracting all secant-supported conductor triples leaves the exact
-  external contribution
-  \(\frac{q(q-1)}2\binom{q+1}{3}\) at zero defect;
+- subtracting all secant-supported conductor triples leaves an unbounded
+  external contribution at zero defect;
 - conic polarity does not upper-bound that contribution by defect, because
   the regular conic--nucleus hyperoval itself supplies the falsifier; and
 - passing to the higher local conductor hierarchy cannot repair any
@@ -204,14 +177,12 @@ coordinate calculation and has no computational trust dependency.
 
 ## `ej` + `tt` closeout
 
-The first cheap upgrade was quantitative: the trace-one pencil gave \(q/2\)
-explicit external lines.  The user-requested extra-juice pass removes that
-normalization.  Varying \(b\ne0\) exhausts all \(q(q-1)/2\) external lines,
-and the scaled polar coefficient \(c/b^3\) remains nonzero.  Hence every
-collinear triple of maximum centres in the regular-hyperoval complement has
-nonzero conductor, and the external contribution is larger than the secant
-baseline for \(q\ge4\).  The obstruction is not a bounded exceptional
-residue: it is the dominant first-conductor mass.
+The cheap upgrade is quantitative.  A single external line would already
+falsify conductor vanishing at zero defect, but the trace-one pencil gives
+\(q/2\) explicit external lines and
+\(\frac q2\binom{q+1}{3}\) nonzero external triples.  The obstruction is
+therefore not a bounded exceptional residue: it grows through the entire
+regular-hyperoval family.
 
 The Tao-style stress test asks whether the failure comes from forgetting the
 prescribed conic.  It does not.  The example is the standard conic plus its
@@ -226,7 +197,7 @@ neither is implied by the C626/C627 carrier formalism.
 | Feature | Disposition |
 |:--|:--|
 | Is there an intrinsic secant-subtracted first-conductor statistic? | **Settled positively:** \(E_{\mathrm{ext}}\) counts precisely the external rich lines with nonzero polarized quadratic Hasse term. |
-| Does it vanish or stay bounded at defect zero? | **Settled negatively:** regular hyperovals give exactly \(\frac{q(q-1)}2\binom{q+1}{3}\) nonzero external triples. |
+| Does it vanish or stay bounded at defect zero? | **Settled negatively:** regular hyperovals give at least \(\frac q2\binom{q+1}{3}\) nonzero external triples. |
 | Can conic polarity force a defect-sensitive upper bound? | **Settled negatively for this statistic:** the falsifier is itself the regular conic plus nucleus. |
 | Can higher jets rescue a nonnegative excess retaining the first layer? | **No:** its first coordinate is already unbounded at zero defect. |
 | Could a twice-renormalized or signed invariant still work? | **Open but outside C638:** it would need an explicit regular-hyperoval baseline or a global cancellation law and a new task gate. |
