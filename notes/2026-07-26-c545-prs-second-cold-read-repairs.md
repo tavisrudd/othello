@@ -34,12 +34,12 @@ The source bundle is:
 
 - `notes/2026-07-26-c545-r7-direct-locus-replay.py`
   - SHA-256
-    `41914798d6e68d31e6627cbe24a661f95bbc71ffbc3ea54c75ec2943a005e305`
-  - 16215 bytes
+    `16d5d5bfccd6e4ac27d4f8b31655ab15025011ea41d86d08497e0d0a0e67572f`
+  - 17117 bytes
 - `notes/2026-07-26-c545-r7-direct-locus-replay.json`
   - SHA-256
-    `9e99674f4d3d5bf1a3c28e652f024baa79f7892a9f3226c48f7b34e175702441`
-  - 6737 bytes
+    `c673eb7dc712875b180f70acbcd584c7dfb87561d24f7726ca33dd9bdec11aad`
+  - 7244 bytes
 
 The paper-local bundle contains byte-identical copies under
 `papers/beyond4_prs/supplement/evidence/r7/`.
@@ -70,10 +70,11 @@ complement in \(\operatorname{PG}(5,q)\) of every span of four distinct
 finite normal-rational-curve points.  For \(q\geq16\), it constructs the
 proved/certified R6 pointed locus directly as the union of the persistent
 quadratic-recurrence locus, the marked secant star, and the odd-binary nucleus
-line.  It transports this set to every prospective root, intersects all
-contraction conditions in \(\operatorname{PG}(6,q)\), then independently
-rebuilds the full \(\operatorname{PGL}_2(q)\) orbit partition, stabilizer
-orders, and coefficient-Frobenius targets.
+line, adding at \(q=19\) the transient 19-point marked orbit represented by
+\((0,0,1,0,0,0)\).  It transports this set to every prospective root,
+intersects all contraction conditions in \(\operatorname{PG}(6,q)\), then
+independently rebuilds the full \(\operatorname{PGL}_2(q)\) orbit partition,
+stabilizer orders, and coefficient-Frobenius targets.
 
 The replay imports only the finite-field implementation from the separately
 written R5 replay.  It imports no C509/R7 generator function, quotient
@@ -121,6 +122,16 @@ one deliberate shared boundary—the already proved R6 pointed-locus
 classification—and confirms that no R7 generator, quotient partition, or
 certificate code is imported by the new route.
 
+A subsequent local-copy audit exercised that candidate-count assertion and
+found that the first direct implementation omitted the transient 19-point
+marked orbit at \(q=19\).  The orbit represented by
+\((0,0,1,0,0,0)\) is now constructed directly under the affine marker
+stabilizer.  The pointed count rises from \(4143\) to the exact \(4162\) and
+the searched-candidate count from \(78718\) to \(79079\), while the final
+split-free set remains unchanged at \(3800\).  Thus the executable route now
+checks, rather than assumes, that the transient pointed orbit contributes no
+coherent sextic polar line.
+
 ## Mystery ledger
 
 - **R6 carrier exhaustivity:** settled in Version 1 by the new monodromy
@@ -128,8 +139,9 @@ certificate code is imported by the new route.
   closures.  This is level-specific and does not revive the rejected
   arbitrary-redundancy theorem.
 - **R7 finite completeness:** settled independently relative to the R6
-  pointed-locus input by the direct-locus replay.  No trusted C509 quotient
-  partition remains in this route.
+  pointed-locus input by the direct-locus replay, including the transient
+  \(q=19\) marked orbit.  No trusted C509 quotient partition remains in this
+  route.
 - **Small-field radius at R7:** intentionally open at \(q=7,8,9\); the
   manuscript continues to claim only split-free classification there.
 - **External release:** unchanged.  Human specialist signoff, immutable

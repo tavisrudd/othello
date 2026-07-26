@@ -6,9 +6,10 @@ For q < 16 it constructs the infinity-pointed bad locus as the literal
 complement of all four-finite-secant spans in PG(5,q).  For q >= 16 it
 constructs the proved R6 pointed locus directly from the persistent
 quadratic-recurrence locus, the marked secant star, and the binary nucleus
-line.  It transports that locus to every marker, intersects the q+1
-contraction conditions in PG(6,q), rebuilds the PGL2 orbit partition, and
-compares the result with the public Certificate R7 record.
+line, together with the transient marked orbit at q=19.  It transports that
+locus to every marker, intersects the q+1 contraction conditions in PG(6,q),
+rebuilds the PGL2 orbit partition, and compares the result with the public
+Certificate R7 record.
 
 The only imported executable code is the separately written R5 replay's
 finite-field implementation.  No R7 generator, quotient representative,
@@ -300,11 +301,36 @@ def binary_nucleus_line(field):
     }
 
 
+def transient_pointed_orbit(field):
+    """The q=19 marked orbit of W=<1,t^3,t^4>, absent otherwise."""
+    if field.q != 19:
+        return set()
+    representative = (0, 0, 1, 0, 0, 0)
+    orbit = {
+        encode(
+            field,
+            canonical(
+                field,
+                matrix_vector(
+                    field,
+                    symmetric_power_matrix(field, (scale, shift, 0, 1), 5),
+                    representative,
+                ),
+            ),
+        )
+        for scale in range(1, field.q)
+        for shift in range(field.q)
+    }
+    assert len(orbit) == 19
+    return orbit
+
+
 def pointed_bad_formula(field):
     return (
         persistent_pointed_locus(field)
         | marked_secant_star(field)
         | binary_nucleus_line(field)
+        | transient_pointed_orbit(field)
     )
 
 
@@ -427,8 +453,12 @@ def replay_field(q, expected):
     field = R5.GF(q)
     base_method = (
         "literal-four-secant-complement"
-        if q < 16 else
-        "direct-r6-persistent-marked-star-nucleus-union"
+        if q < 16
+        else (
+            "direct-r6-persistent-marked-star-transient-union"
+            if q == 19
+            else "direct-r6-persistent-marked-star-nucleus-union"
+        )
     )
     base = (
         pointed_bad_exhaustive(field)
@@ -457,6 +487,7 @@ def replay_field(q, expected):
         "q": q,
         "pointed_method": base_method,
         "pointed_bad_count": len(base),
+        "transient_pointed_count": len(transient_pointed_orbit(field)),
         "searched_candidate_count": searched_candidate_count,
         "split_free_count": len(split_free),
         "split_free_set_sha256": digest_integers(split_free),
@@ -479,7 +510,7 @@ def canonical_document(fields):
             flush=True,
         )
     return {
-        "schema": "c545-r7-direct-locus-replay-v1",
+        "schema": "c545-r7-direct-locus-replay-v2",
         "field_implementation": str(R5_REPLAY.relative_to(SUPPLEMENT)),
         "public_record": str(PUBLIC_RECORD.relative_to(SUPPLEMENT)),
         "fields": rows,

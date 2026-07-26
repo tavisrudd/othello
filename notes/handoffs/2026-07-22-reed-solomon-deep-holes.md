@@ -10,10 +10,11 @@ closed three Version 1 defects: the R7 common-factor proposition now states
 the exact-gcd hypothesis its proof needs, the R6 lower-carrier exhaustion is
 proved by an explicit monodromy/characteristic trichotomy, and R7 finite
 completeness now has a direct-locus replay independent of the C509 quotient
-partition. Both readers cleared the repaired draft (accept/release-ready).
+partition, including the transient 19-point marked orbit at \(q=19\). Both
+readers cleared the repaired draft (accept/release-ready).
 The paper gates cover 42 labels, the supplement now contains 47 artifacts,
 and the canonical 32-page PDF has SHA-256
-`5747371f73b51bc3a62dc2c139b7c388382afb276b7f41b258546bc24a91b4e9`.
+`bc677ae15e5d3ed2e453ac090b94877526bbc9572e41008b2a5f47f61b259568`.
 The repair and mystery ledger are in
 `notes/2026-07-26-c545-prs-second-cold-read-repairs.md`.
 A same-day literature delta found no new or revised pre-empting work; it
@@ -21,12 +22,12 @@ resolved one earlier abstract-access gap by confirming that
 Cheng--Wu--Zhou treats a non-Reed--Solomon evaluation code. The bounded
 search record is `notes/2026-07-26-c656-prs-literature-delta.md`.
 
-C656's cold audit rejected the arbitrary-level
+At the C656 checkpoint, its cold audit rejected the arbitrary-level
 stable-component release claim and narrowed Version 1 to the complete R5--R7
 results.  The fourteen-field R7 arithmetic reconstruction, exact 74-target
-standard-axiom audit, 44-artifact supplement gate, byte-reproducible fresh
-export, and two mutually blind internal specialist reviews are green on
-canonical PDF SHA-256
+standard-axiom audit, then-current 44-artifact supplement gate,
+byte-reproducible fresh export, and two mutually blind internal specialist
+reviews were green on the superseded canonical PDF SHA-256
 `5eb6d0c2c420cfc7cd4317e3d1ea80447288ee7666029d660410069bf29aef9b`.
 The internal AI reviews do not replace C545's publication-independent human
 reader gate.  The exact repair and mystery ledger are in
@@ -34,13 +35,14 @@ reader gate.  The exact repair and mystery ledger are in
 C646 remains active on companion stable-component formal geometry and does
 not reopen any Version 1 claim.
 C545 has repaired C603's release-blocking local trust boundary.
-The adopted aggregate now has the exact 17-file R5--R7 closure and 74-target
-axiom audit; the shared contraction API is separated from the companion R9
-residual-quadratic module; all 42 adopted manuscript labels reconcile exactly;
-the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
-the adoption/formalization/release ledgers and 44-artifact evidence pack agree;
-and the verifier checks the TeX label set, direct imports, transitive closure,
-ordered audit targets, and exact reader candidate fail-closed. A deterministic
+The adopted aggregate has the exact 17-file R5--R7 closure and 74-target
+axiom audit. The shared contraction API is separated from the companion R9
+residual-quadratic module, all 42 adopted manuscript labels reconcile exactly,
+the R7 row honestly records `lowerWitness` and manuscript deletion degree 25,
+and the adoption/formalization/release ledgers agree with the current
+47-artifact evidence pack. The verifier checks the TeX label set, direct
+imports, transitive closure, ordered audit targets, and exact reader candidate
+fail-closed. A deterministic
 fresh-history exporter now produces separate paper and exact 17-file Lean
 candidates reproducibly; the clean candidate passes the quick supplement gate
 and rebuilds both PDFs byte-for-byte. The paper and TIT builds, supplement
@@ -180,13 +182,14 @@ The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
 marker--ramification lemma.  The recurrence interpretation and exact
 q=19 pointed example are now visible, while the duplicate overview
 figure, referee roadmap, complexity defense, threshold table, detailed
-Lean inventory, and R8/R9 preview are removed.  C545's
-deterministic paper-only archive now rebuilds and passes the 57-artifact local
-gate, and its public release checker is fail-closed.  Release remains blocked
+Lean inventory, and R8/R9 preview are removed.  An earlier pre-scope C545
+paper-only archive passed a 57-artifact local gate; the current release bundle
+is recorded at the top of this handoff.  Its public release checker is
+fail-closed.  Release remains blocked
 on two independent specialist readers, a publicly fetchable flake-pinned Lean
 revision, the immutable public export and identifiers, and author/account
 confirmation.  IEEE Transactions on Information Theory is now the selected
-journal target; its shared-source IEEEtran review build is 20 single-column
+journal target; its shared-source IEEEtran review build is 23 single-column
 pages, and the venue-specific cover letter, checklist, manifest, and
 supplement README are prepared with author-only fields left explicit.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel

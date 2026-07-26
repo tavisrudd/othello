@@ -9,10 +9,10 @@ Status: **local venue-formatted candidate — author fields unresolved**
 | Manuscript title | *Projective Reed--Solomon Syndromes Beyond Redundancy Four: Complete First Levels and Coherent Polar Flags* |
 | Submission driver | `main-tit.tex` |
 | Submission PDF | `prs-beyond-redundancy-four-tit-submission.pdf` |
-| Single-column pages | `25` |
-| Submission PDF SHA-256 | `f9cfe6584aac91151459407f335b3ba23f0eabe98e21341223f710b33c08e933` |
-| Submission PDF bytes | `229601` |
-| Abstract words | `228` |
+| Single-column pages | `23` |
+| Submission PDF SHA-256 | `fcaeaa5895dae376f6f13bdcdee5f97ce373504bfb6f951bc26d410c5f3e269e` |
+| Submission PDF bytes | `227980` |
+| Abstract words (`texcount -sum -brief`) | `287` |
 | Index terms | `6` |
 | Corresponding author | `[[AUTHOR INPUT: confirm]]` |
 | Affiliation | `[[AUTHOR INPUT: confirm]]` |

@@ -28,7 +28,8 @@ imports only the separately written R5 replay's finite-field implementation.
 For \(q<16\) it constructs the literal complement of all four-finite-secant
 spans in \(\operatorname{PG}(5,q)\); for \(q\geq16\) it constructs the
 classified R6 pointed locus directly from its persistent, marked-secant, and
-binary-nucleus pieces.  It then intersects every contraction condition,
+binary-nucleus pieces, together with the transient 19-point marked orbit at
+\(q=19\).  It then intersects every contraction condition,
 rebuilds the complete \(\operatorname{PGL}_2(q)\) orbit and Frobenius
 partition, and compares exact sets and records in all fourteen bridge fields.
 

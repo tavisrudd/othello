@@ -153,20 +153,20 @@
       "sha256": "4536e6ad8ac3bf398650abefd97b3757d6aca15e613141c0e20fd27f787ee642"
     },
     {
-      "bytes": 6737,
+      "bytes": 7244,
       "path": "evidence/r7/2026-07-26-c545-r7-direct-locus-replay.json",
       "public_label": "Certificate R7",
       "replay_class": "compare",
       "role": "independent-direct-locus-certificate",
-      "sha256": "9e99674f4d3d5bf1a3c28e652f024baa79f7892a9f3226c48f7b34e175702441"
+      "sha256": "c673eb7dc712875b180f70acbcd584c7dfb87561d24f7726ca33dd9bdec11aad"
     },
     {
-      "bytes": 16215,
+      "bytes": 17117,
       "path": "evidence/r7/2026-07-26-c545-r7-direct-locus-replay.py",
       "public_label": "Certificate R7",
       "replay_class": "rederive",
       "role": "independent-direct-locus-replay",
-      "sha256": "41914798d6e68d31e6627cbe24a661f95bbc71ffbc3ea54c75ec2943a005e305"
+      "sha256": "16d5d5bfccd6e4ac27d4f8b31655ab15025011ea41d86d08497e0d0a0e67572f"
     },
     {
       "bytes": 3529,
@@ -241,12 +241,12 @@
       "sha256": "3fbb98c10798e5fc28b14585f0e27a8292a7594b0ed05cc27fa1ed1ce4fde2f6"
     },
     {
-      "bytes": 5054,
+      "bytes": 5117,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "ee0f2997ddaebf47eb5f8cf364156699f1a76b4adc344a4ed8e96ff9eae14534"
+      "sha256": "19656d0d09467c4d509f1e838b16c8c651b613bbca9930a29c91b0f1e54503d1"
     },
     {
       "bytes": 545912,
