@@ -26,6 +26,7 @@ open RelativeConicArcs.AMELU
 #print axioms stabilizerKernelLocalProjection_existsUnique
 #print axioms AMESupportedSubspaceProfile.erase_sup_erase_eq
 #print axioms AMESupportedSubspaceProfile.space_eq_minimumSupportSpan
+#print axioms AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top
 #print axioms stabilizerAME_finrank_ker_eq_local
 #print axioms genericEqualPhaseState_three
 #print axioms genericLocallyUnitaryEquivalent_three

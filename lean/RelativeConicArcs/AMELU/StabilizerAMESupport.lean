@@ -469,6 +469,18 @@ theorem AMESupportedSubspaceProfile.space_eq_minimumSupportSpan
               (Finset.erase_subset j A)))
   · exact profile.minimumSupportSpan_le_space A
 
+/-- If the support on all parties is the full label space, then the
+`m+1`-party supported subspaces span the full label space. -/
+theorem AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top
+    {ι E : Type*} [Fintype ι] [DecidableEq ι]
+    [AddCommGroup E] [Module 𝕜 E] [FiniteDimensional 𝕜 E]
+    {m localFinrank : ℕ}
+    (profile : AMESupportedSubspaceProfile
+      (𝕜 := 𝕜) (ι := ι) (E := E) m localFinrank)
+    (hfull : profile.space Finset.univ = ⊤) :
+    profile.minimumSupportSpan Finset.univ = ⊤ := by
+  rw [← profile.space_eq_minimumSupportSpan Finset.univ, hfull]
+
 /-- Under the same hypotheses, the supported stabilizer-label kernel has
 exactly one local Pauli-label space of dimension. -/
 theorem stabilizerAME_finrank_ker_eq_local
