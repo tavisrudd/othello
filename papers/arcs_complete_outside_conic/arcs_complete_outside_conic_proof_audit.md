@@ -67,8 +67,15 @@
    secant-index distribution identifies equality exactly with a disjoint prescribed conic
    containing the oval nucleus. The parallel even first branch is a hyperoval disjoint from the
    prescribed conic.
-   These factorization and spectrum corollaries are analytic manuscript proofs, not additional
-   Lean terminals.
+   The discrete gap, the complete-affine roots, the odd three-value spectrum, and its
+   characteristic-two power-of-two collapse are also Lean terminals in
+   `RelativeConicArcs.EqualityConsequences`: respectively
+   `scaledDefect_eq_zero_or_half_sub_two_le`, `completeAffine_equality_order`,
+   `odd_completeOutside_zeroDefect_order_spectrum`, and
+   `odd_standardConic_zeroDefect_charTwo_order`. The final geometric identification with an
+   arbitrary oval or hyperoval and its nucleus remains an analytic manuscript proof: the Lean
+   conic API supplies the required nucleus geometry for the standard conic, not the converse
+   classification for an arbitrary oval.
 5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),
@@ -82,8 +89,9 @@
    At the surviving \((q,k)=(4096,92)\) zero-defect candidate, the even equality spectrum gives
    \(I_C(A)=91\cdot46=4186\). The nucleus-in parity is impossible; nucleus-out parity forces
    \(r(\nu)=46\), and the two secant-incidence equations then force exactly 46 tangent, 2070
-   bisecant, and 2070 external arc secants. This arithmetic corollary uses the formalized nucleus
-   propositions but is not itself a separate Lean theorem.
+   bisecant, and 2070 external arc secants. The complete arithmetic deduction, including
+   \(I_C(A)=4186\), is the Lean theorem `exceptional_candidate_secant_type_cards` in
+   `RelativeConicArcs.EqualityConsequences`.
 8. The former appendix on simultaneous evaluation avoidance has been cut from the shortened
    manuscript. Its exact \(q\)-hyperplane threshold and checker remain supplementary results; no
    paper theorem depends on them.

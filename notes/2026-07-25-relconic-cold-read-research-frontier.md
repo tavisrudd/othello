@@ -302,10 +302,12 @@ The cheap pass promoted five consequences into the paper:
 4. the characteristic-two oval/hyperoval interpretation; and
 5. the forced tangent/bisecant/external split at \((4096,92)\).
 
-They strengthen or close branches already visible in the manuscript and use
-only analytic consequences of existing results.  The proof audit now says
-explicitly that these are paper proofs, not new Lean terminals; the
-\((4096,92)\) split uses the already formalized nucleus propositions.
+They strengthen or close branches already visible in the manuscript.  Lean now
+checks the discrete gap, both complete-affine roots, the odd three-value
+spectrum, its characteristic-two power-of-two collapse, and the full
+\((4096,92)\) split.  The arbitrary oval--nucleus and hyperoval geometric
+converses remain paper proofs because the formal API provides nucleus geometry
+for the standard conic but no converse classification of arbitrary ovals.
 
 No theorem should be displaced.  The additions increase the compiled draft
 from 22 to 24 pages, but replacing any main result would reduce the paper's
