@@ -314,6 +314,36 @@ proposition replaces its whole exhaustive route and its proof fits in about
 one manuscript page without a field-by-field matrix table.  Moving the same
 enumeration into association-scheme or code language does not meet the gate.
 
+### Implemented split
+
+The subtractive alternative is now the working Paper I surface.  The
+warning-free human manuscript is fourteen pages and retains the fixed-field
+rigidity theorem, decoder reconstruction, chord defect, partial-cover
+window, and Clebsch-family formula.  The removed results are no longer a TeX
+fragment: `papers/clebsch-rigidity/computational_companion.tex` is a
+standalone seven-page companion with its own abstract, notation, imported
+geometric inputs, bibliography, conclusion, build target, and trust ledger.
+It contains the fifteen-class census, cubic rigidity, numerical gap,
+cross-field six-arc uniqueness, and classification through eight points.
+
+Paper I gives the companion one restrained novelty pointer in its
+``What is new'' paragraph.  Its abstract now states the inverse contribution
+directly: nearest-codeword data reconstruct the code, conic, polarity, and
+decoder geometry.  The companion's machine-readable surface is
+`verification/computational_companion_trust.json`, checked by
+`verification/verify_computational_companion.py`.  All five load-bearing
+exact routes pass, including the independent \(q=13,17,19\) certificate
+check.  Both PDFs build without TeX warnings.
+
+At the next A/B cold read, the reader must make the manuscript choice before
+seeing or ranking this five-title shortlist:
+
+1. *A conic deep-hole syndrome locus characterizes the Clebsch code*;
+2. *Nearest-codeword data characterize the Clebsch code*;
+3. *Reconstructing the Clebsch code from its deep-hole syndrome locus*;
+4. *Clebsch rigidity from a conic syndrome locus*;
+5. *The Clebsch code reconstructed from its deep holes*.
+
 ## Vibe check
 
 The geometry now has a clean human boundary theorem, but the desired human

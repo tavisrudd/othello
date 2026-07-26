@@ -5,6 +5,7 @@ SOURCES := \
 	arcs_complete_outside_conic/arcs_complete_outside_conic.tex \
 	clebsch-hexagon-code/clebsch_hexagon_code.tex \
 	clebsch-rigidity/clebsch_rigidity.tex \
+	clebsch-rigidity/computational_companion.tex \
 	clebsch-factorization/clebsch_factorization.tex \
 	clebsch-passages/clebsch_passages.tex \
 	coding-repair-hypergraphs/complete_repair_hypergraphs.tex \
@@ -15,7 +16,7 @@ PDFS := $(SOURCES:.tex=.pdf)
 LOGS := $(SOURCES:.tex=.log)
 
 .PHONY: all check warnings clean distclean list \
-	arcs clebsch clebsch-rigidity clebsch-factorization clebsch-passages \
+	arcs clebsch clebsch-rigidity clebsch-rigidity-companion clebsch-factorization clebsch-passages \
 	dihedral repair-hypergraphs equivariant-completion
 
 all: $(PDFS)
@@ -29,6 +30,8 @@ arcs: arcs_complete_outside_conic/arcs_complete_outside_conic.pdf
 clebsch: clebsch-hexagon-code/clebsch_hexagon_code.pdf
 
 clebsch-rigidity: clebsch-rigidity/clebsch_rigidity.pdf
+
+clebsch-rigidity-companion: clebsch-rigidity/computational_companion.pdf
 
 clebsch-factorization: clebsch-factorization/clebsch_factorization.pdf
 

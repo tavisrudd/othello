@@ -89,6 +89,15 @@ classifications are not consequences of the known human theorems. The C605
 terminal searches therefore remain load-bearing. The report and mystery
 ledger are in
 `notes/2026-07-26-c662-human-passant-bound.md`.
+The accepted Paper I trial now implements C662's subtractive disposition:
+the warning-free fourteen-page human paper points to a standalone
+seven-page computational companion in the same paper root. The companion
+holds the fifteen-class/low-degree/gap results, cross-field six-arc
+uniqueness, and the classification through eight points, with its own build
+target, bibliography, machine-readable seven-claim ledger, validator, and
+five passing exact replay routes. The next A/B protocol requires the
+manuscript choice first and only then a ranking of the five alternate titles
+recorded in the C662 report.
 
 C182 follows C610. Its blocker is external publication packaging. The
 paper repository and immutable public deposit do not yet exist, and this

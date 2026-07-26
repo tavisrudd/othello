@@ -1,0 +1,57 @@
+{
+  "schema": "clebsch-computational-companion-trust-v1",
+  "manuscript": "computational_companion.tex",
+  "claims": [
+    {
+      "id": "chord-defect-and-window",
+      "mode": "imported-proof",
+      "source": "clebsch_rigidity.tex"
+    },
+    {
+      "id": "q11-geometric-rigidity",
+      "mode": "imported-proof",
+      "source": "clebsch_rigidity.tex"
+    },
+    {
+      "id": "fifteen-class-census-and-gap",
+      "mode": "exhaustive-exact-replay",
+      "checks": [
+        "check_global_conic_gap.py"
+      ]
+    },
+    {
+      "id": "low-degree-rigidity",
+      "mode": "exhaustive-exact-replay",
+      "checks": [
+        "check_low_degree_loci.py"
+      ]
+    },
+    {
+      "id": "q9-sylvester-obstruction",
+      "mode": "literature-plus-exact-replay",
+      "checks": [
+        "check_small_q_uniqueness.py"
+      ]
+    },
+    {
+      "id": "seven-arc-exclusion",
+      "mode": "exhaustive-exact-replay",
+      "checks": [
+        "check_small_k_conic_filling.py"
+      ]
+    },
+    {
+      "id": "passant-arc-bound-q13-q17-q19",
+      "mode": "exhaustive-orbit-search-with-independent-certificate-check",
+      "checks": [
+        "verification/c605_verify.py"
+      ],
+      "certificates": [
+        "verification/c605_q13.json",
+        "verification/c605_q17.json",
+        "verification/c605_q19.json",
+        "verification/c605_independent.json"
+      ]
+    }
+  ]
+}
