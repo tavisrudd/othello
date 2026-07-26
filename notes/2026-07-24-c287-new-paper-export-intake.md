@@ -1,8 +1,9 @@
-# C287 intake for arcs, PRS, AME--LU, and Clebsch Lean
+# C287 intake for arcs, PRS, AME--LU, and Clebsch paper trust boundaries
 
 **Lane**: `build-sys`
-**Status**: ARCS, PRS, AND CLEBSCH LOCALLY READY FOR CLOSURE INTAKE; AME--LU
-WAITS FOR C612, C613, AND C602; no source export performed
+**Status**: ARCS, PRS, AME--LU, AND CLEBSCH RIGIDITY BOUNDARIES FROZEN;
+CLEBSCH FACTORIZATION CLOSURE MAP INCOMPLETE; CLEBSCH PASSAGES HAS NO LEAN ROOT;
+no source export performed
 
 ## Boundary
 
@@ -16,10 +17,11 @@ C287 owns closure extraction, public-source review, manifests, clean-checkout va
 artifact portability after the source-owning lane freezes its adopted formal boundary. It does not
 revise another lane's mathematics or infer a paper theorem set from a directory.
 
-The 2026-07-25 planning refresh treats source-owner readiness as an intake input, not as a
+The 2026-07-26 planning refresh treats source-owner readiness as an intake input, not as a
 substitute for C287's own closure computation and review. The user-directed execution boundary is
-one coordinated extraction pass after the AME--LU C602 audit is complete. Until then C287 may
-update manifests and plans read-only, but must not copy sources into the fresh-history workspaces.
+one coordinated, resumable extraction wave after all adopted source-owner boundaries are coherent.
+AME--LU C602 is complete. C553, the two C602 foreign-prose defects, and the incomplete Clebsch
+factorization closure map still prevent source copy into the fresh-history workspaces.
 
 ## Arcs complete outside a prescribed conic
 
@@ -58,8 +60,9 @@ The adopted R5--R7 logical roots are:
 - `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`;
 - `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`.
 
-C545 supersedes the older C544 intake boundary. It records an exact 15-file closure: six gate files
-and nine mathematical modules, with 53 ordered axiom-audit targets and 35 manuscript labels. The
+C646 and the 2026-07-26 C545 repairs supersede the older 15-file/53-target intake boundary. The
+geometric paper closure now has exactly 17 files: six gates and eleven mathematical modules, with
+74 ordered axiom-audit targets and 35 manuscript labels. The
 closure deliberately excludes the residual-quadratic, redundancy-eight, redundancy-nine,
 Hessian, general Lucas, and degree-nine endpoint companion modules. Its local supplement,
 aggregate, axiom, source-hygiene, clean-export, and replay gates are green. C545's remaining
@@ -69,43 +72,47 @@ they do not prevent C287 from preparing the local source closure.
 C287 intake gate:
 
 1. derive and content-address the exact project-owned import closure of the six roots and require
-   equality with C545's 15-file set;
+   equality with the current 17-file set;
 2. classify every non-Lean evidence file and certificate referenced by the 35-label paper map;
 3. keep externally checked exhaustive-search semantics outside the kernel-source package unless
    their own package manifest and checker boundary justify inclusion;
 4. measure the closure against the 500-file/75,000-line planned-human-union gate and split any
    generated family under the existing external-package rule;
-5. preserve the ordered 53-target audit and exclude all companion-work modules;
+5. preserve the ordered 74-target audit and exclude all companion-work modules;
 6. provide C545 with a public commit pin and exact locked target list only after clean replay.
+
+The balanced quantum corollary is adopted through the separate cross-paper roots
+`RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and
+`RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`. They are not members of the
+17-file geometric closure. Their public state must follow the validated AME--LU state required by
+their import DAG; the PRS paper pin and gate map must name both boundaries without misreporting
+AME--LU sources as geometric R5--R7 dependencies.
 
 ## AME--LU paper
 
 **Source owner:** `ame-lu`
 
-The shared foundation is under `RelativeConicArcs.AMELU`. C570's seven-package aggregate and
-33-declaration audit were complete for the six-party manuscript, but C609 and C614 subsequently
-adopted the all-prime-power, all-`m >= 2` rigidity theorem and its encoder/transversal
-consequences. C601 has completed the length-generic definitions, shortening, and diagonal-axis
-foundations. The remaining mandatory source-owner order is:
+The final length-generic boundary is frozen by C602. Its roots are
+`RelativeConicArcs.Gates.AMELUAggregate` and
+`RelativeConicArcs.Gates.AMELUAggregateAxioms`. The recursive release graph has 72 artifacts:
+five pinned build-identity files, 41 AME--LU modules, 15 AME--LU gates, and eleven transitive
+project-owned Lean modules. The audited terminals use only `propext`, `Classical.choice`, and
+`Quot.sound`; an independent import scan found no missing project-owned imports.
 
-1. C612 — shortened marginal expansion, covariance, the general LU-to-LC terminal, and the
-   compatible six-party specialization;
-2. C613 — encoder parameters, Choi orientation, Clifford transpose closure, transversal no-go,
-   exact GRS group, and the explicit `AME(8,7)` / `[[7,1,4]]_7` terminal;
-3. C602 — whole-closure referee, trust, style, statement-adequacy, and axiom audit.
+C287 must reproduce the 67-file Lean portion independently from the immutable source snapshot and
+keep the five build-identity files in the environment manifest rather than counting them as Lean
+source. C570's six-party boundary remains superseded, and C581 remains absent.
 
-C287 must not freeze an AME--LU source manifest from the superseded C570 boundary. C602 must name
-the final aggregate root, exact terminal set, transitive project-owned closure, native-axiom
-boundary, and manuscript correspondence after C613. C287 then computes that closure independently,
-reviews it for public prose, and supplies the release candidate with public pins and locked
-targets. C581 is optional and absent unless the manuscript explicitly adopts its exact
-phase-space/robust-rigidity result before C602 freezes the aggregate.
+C602 found two foreign-owned public-prose blockers in this exact closure:
+`RelativeConicArcs/Plane.lean` reverse-references a paper path, and `FiniteGeom/Code.lean`
+references an internal handoff and workflow phase. Their owners must remove those references before
+C287 marks the union referee-prose clean.
 
 ## Clebsch papers and revisions
 
 **Source owner:** `clebsch`
 
-Paper I has a current regenerated formal boundary in
+Clebsch Rigidity has a current regenerated formal boundary in
 `papers/clebsch-rigidity/verification/trust_manifest.json`: nineteen claim rows, 24 unique Lean
 terminals, the single gate `RelativeConicArcs.Gates.ClebschRigidityTrust`, and sixteen release
 checks. The manifest currently names source-owner finitegeom commit
@@ -114,8 +121,25 @@ boundary, not a commit in the still-uncommitted fresh-history public repository.
 boundary to the exact validated public candidate commit and update the public paper pin only after
 clean replay. The source-owner pin supersedes the older
 `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520` pin still quoted in the previous intake prose.
-C182 owns archive/release after the final author gate. Paper II and Paper III remain separate
-prospective papers under C577 and C579; their Lean must not leak into Paper I's release closure.
+C182 owns archive/release after the final author gate.
+
+The renamed Clebsch Factorization companion now has 24 trust-manifest claims, of which six name
+Lean evidence. It advertises three guarded gates:
+
+- `RelativeConicArcs.Gates.ClebschArithmeticGluing`;
+- `RelativeConicArcs.Gates.ClebschHilbertSymmetry`;
+- `RelativeConicArcs.Gates.ClebschHyperplaneSquare`.
+
+Its current evidence fingerprint content-addresses a 27-file union for only the first two gate
+closures; the third advertised gate has no corresponding closure-map entry. C287 must not infer or
+admit that missing closure. The source owner must regenerate a complete three-gate fingerprint,
+after which C287 independently resolves the union and requires exact equality.
+
+`papers/clebsch-passages/verification/trust_manifest.json` is a new, release-ready nine-claim paper
+boundary. It currently names conceptual, classical-input, certificate, and independent-replay
+evidence but no Lean declaration, module, or gate. C287 records the paper and its explicit
+integral-boundary qualifications, but it creates no `finitegeom` source state for it. Any future
+Lean companion enters only through a new source-owner manifest delta with exact roots.
 
 Any new Clebsch revision is an explicit manifest delta, not an unreviewed refresh from the current
 monorepo. The `clebsch` owner must provide the revised adopted statements, gate/checker changes,
@@ -128,16 +152,17 @@ The current preparation order is:
 
 1. retain C553's approved first-tag source rewrite and semantic docstring pass as a required
    pre-extraction dependency; this planning refresh does not edit Lean;
-2. keep the ready Relconic, PRS R5--R7, and Clebsch Paper I root ledger frozen, but do not generate
-   provisional closure manifests before C602;
-3. complete AME--LU C612, C613, and C602 in one continuous lane session, then ingest the exact C602
-   aggregate rather than the superseded C570 union;
-4. once both C553 and C602 are complete, compute one content-addressed union, review each unique
-   source hash once, and execute inventory regeneration, fresh-history source copy, builds, axiom
-   audits, and clean replay as one coordinated extraction wave;
+2. retain the frozen Relconic, PRS geometric, AME--LU, and Clebsch Rigidity roots; add the complete
+   Clebsch Factorization roots only after its three-gate fingerprint is coherent;
+3. record Clebsch Passages as a non-Lean paper boundary and do not invent a source closure for it;
+4. after C553 and the three prose/fingerprint blockers close, compute one content-addressed union,
+   review each unique source hash once for public prose, and execute the resumable candidate-state
+   extraction wave;
 5. mint separate incremental tag contracts for the first tag and each adopted paper closure;
    shared source deduplicates by content, while every paper keeps its exact gate and commit pin;
-6. treat Clebsch Papers II/III, PRS companion levels, Relconic quantitative successors, and
+6. topologically place the PRS balanced-quantum state after its AME--LU dependency; do not fold
+   that cross-paper closure into the 17-file geometric ledger;
+7. treat other Clebsch revisions, PRS companion levels, Relconic quantitative successors, and
    optional AME--LU C581 as later independent intakes unless explicitly adopted before the wave.
 
 The exact fresh-session sequence, deduplication rules, compact semantic-index boundary, deferred

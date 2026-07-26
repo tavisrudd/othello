@@ -2,7 +2,8 @@
 
 **Lane:** `build-sys`
 
-**Status:** authoritative resumable execution route; extraction waits for C553 and AME--LU C602
+**Status:** authoritative resumable execution route; AME--LU C602 is complete; extraction waits
+for C553 and the intake's public-prose/fingerprint blockers
 
 ## Objective
 
@@ -13,27 +14,15 @@ clean-checkout replay.
 
 ## Fresh-session route
 
-Use three lane sessions in this order.
+The two source-owner preparation sessions and the extraction session remain distinct. Do not
+reload or rerun a completed source-owner task.
 
 ### Session 1 — AME--LU
 
-Start with:
-
-```text
-go C612
-```
-
-Read the root guide, the exact C612 queue row, the `ame-lu` handoff, and the nested Lean guide.
-Remain in the lane through C612, C613, and C602 rather than starting three cold sessions. Commit
-and perform normal task lifecycle closure for each C-item, but reuse the already loaded lane,
-manuscript, convention, and formal-foundation context.
-
-- C612 completes the general marginal/covariance and LU-to-LC terminal.
-- C613 completes the encoder, Choi, transversal, exact GRS-group, and explicit-example terminal.
-- C602 freezes and audits the final paper-facing aggregate, terminal list, source closure,
-  statement-adequacy map, native-axiom boundary, and referee-facing prose.
-- Do not run C581 in this route. If the user later explicitly adopts it, revise this execution
-  card before expanding the wave.
+C612, C613, and C602 are complete. C602 freezes the final length-generic aggregate and axiom-audit
+roots, a 67-file project-owned Lean closure, and five separate build-identity files. Consume that
+report and the intake record; do not reload the AME--LU lane or rerun its builds. C581 remains
+outside the adopted boundary.
 
 ### Session 2 — first-tag source rewrite
 
@@ -55,7 +44,8 @@ the scoped consumer and four-root validation required by the packet.
 
 ### Session 3 — coordinated extraction
 
-After C553 and C602 are complete, start with:
+After C553 and the intake's two foreign-prose defects and Clebsch Factorization fingerprint
+mismatch are complete, start with:
 
 ```text
 go build-sys
@@ -71,7 +61,7 @@ a source-owner report only to resolve an explicit mismatch.
 Before computing any closure, write a checkpoint that fixes:
 
 - the exact private source commit and requires every exported input path to match that commit;
-- the hashes of the five adopted root/terminal contracts, the toolchain and lockfiles, and the
+- the hashes of every adopted root/terminal contract, the toolchain and lockfiles, and the
   closure/import tool;
 - C553 and C602's completing commits; and
 - the destination module-name policy, including canonical path spelling and case sensitivity.
@@ -82,8 +72,9 @@ is constructed. A frozen root name is not a frozen source snapshot.
 ## One-pass review, incremental public states
 
 1. From the immutable snapshot, compute the exact transitive project-owned closure for the first
-   tag and the four later-paper contracts: Relconic, PRS R5--R7, Clebsch Paper I, and the final C602
-   AME--LU aggregate.
+   tag and the adopted Lean contracts: Relconic; PRS R5--R7 geometric; Clebsch Rigidity; Clebsch
+   Factorization; the final C602 AME--LU aggregate; and the PRS balanced-quantum cross-paper gate.
+   Record Clebsch Passages as a no-Lean paper contract and do not add it to the source union.
 2. Form one content-addressed union. Each row records source path, destination path, canonical Lean
    module name, regular-file type and mode, byte count, and SHA-256. Reject symlinks, non-regular
    files, path traversal, duplicate destinations, module aliases, Unicode-normalization or
@@ -93,11 +84,11 @@ is constructed. A frozen root name is not a frozen source snapshot.
    Elaboration, axiom, and trust results are never reused by file hash: they belong to the complete
    candidate commit, dependency graph, toolchain, and locked environment.
 4. Freeze a tracked public-state ledger before writing sources. Its first state is exactly the
-   reviewed 26-file first-tag manifest. Later states apply only manifest-declared deltas in the
-   fixed order Relconic, PRS R5--R7, Clebsch Paper I, then AME--LU, unless the computed import DAG
-   requires a different topological order; record and review any such order before construction.
-   Each state has its own complete file manifest, paper gate map, terminal list, axiom
-   expectations, certificate inputs, and expected parent state.
+   reviewed 26-file first-tag manifest. Later states apply only manifest-declared deltas in an
+   order derived from the computed import DAG and frozen before construction. In particular, the
+   PRS balanced-quantum state must follow its AME--LU dependency and must remain distinct from the
+   17-file geometric PRS ledger. Each state has its own complete file manifest, paper gate map,
+   terminal list, axiom expectations, certificate inputs, and expected parent state.
 5. Construct each state as a candidate commit from the last validated public state, never by
    staging the full union before the first commit. Confirm that the candidate's complete tracked
    file set and parent match its ledger row.
@@ -121,10 +112,11 @@ is constructed. A frozen root name is not a frozen source snapshot.
 
 ## Work deliberately deferred
 
-- Do not generate provisional paper closure manifests before C602. The existing root ledger is
-  sufficient and avoids a second manifest pass.
-- Do not ingest C581, PRS companion levels, Clebsch Papers II/III, or Relconic quantitative
-  successors.
+- Do not compute provisional source closures while C553 and the intake blockers remain open. The
+  adopted root ledger is sufficient and avoids a second manifest pass.
+- Do not ingest C581, PRS companion levels, future Clebsch revisions, or Relconic quantitative
+  successors. Clebsch Passages remains in the paper ledger but outside the source union unless a
+  later manifest names an exact Lean root.
 - Do not copy Q11, Q13, Q16, or Q25 certificate families into the main source union. Handle a
   certificate package only when an adopted paper manifest explicitly requires it, through its
   existing one-way package boundary.

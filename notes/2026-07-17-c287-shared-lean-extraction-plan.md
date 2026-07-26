@@ -1,8 +1,8 @@
 # C287 shared Lean fresh-history extraction plan
 
 **Lane**: `build-sys`
-**Status**: IN PROGRESS; first-tag rewrite and trust facts pending; later-paper intake refreshed,
-with source export deferred until AME--LU C602
+**Status**: IN PROGRESS; AME--LU C602 complete; first-tag rewrite, two foreign-prose repairs, and
+Clebsch Factorization closure-map reconciliation still block source export
 **Local root**: `~/src/lean/`
 
 ## Outcome and boundary
@@ -99,16 +99,21 @@ manifest and green aggregate closure. For `complete-ports`, the logical requests
 and `RepairPorts.FunctionalCost`; C287 must replace those names with exact public module closures
 and aggregate gates before those sources are copied.
 
-Later paper-bound intake now has three locally ready source-owner boundaries and one remaining
-paper gate:
+Later paper-bound intake now has four frozen Lean boundaries, one incomplete Lean boundary, and one
+new no-Lean paper boundary:
 
 - arcs: `RelativeConicArcs.Gates.Relconic`, with thirteen audited terminals;
-- PRS: the C545 R5--R7 six-gate contract, exactly fifteen project-owned files and 53 ordered audit
-  targets;
-- Clebsch Paper I: the current nineteen-row manifest, 24 unique Lean terminals, and
+- PRS geometric R5--R7: six gates, exactly seventeen project-owned files, and 74 ordered audit
+  targets; its balanced-quantum gate remains a separate cross-paper state after AME--LU;
+- Clebsch Rigidity: the current nineteen-row manifest, 24 unique Lean terminals, and
   `RelativeConicArcs.Gates.ClebschRigidityTrust`, pinned by the manifest to finitegeom commit
   `6d4766d1ea5e9a36f1a507e549c223416a6b506f`;
-- AME--LU: C601 is complete, while C612, C613, and the final C602 whole-closure audit remain.
+- AME--LU: C602 freezes the aggregate and axiom-audit roots over 67 project-owned Lean files plus
+  five locked build-identity files;
+- Clebsch Factorization: 24 claims and three advertised Lean gates, but the current closure
+  fingerprint covers only two gates and must be regenerated before intake;
+- Clebsch Passages: nine release-ready claims with conceptual/certificate/replay evidence and no
+  Lean root, so it creates no `finitegeom` source state.
 
 The older intake assumptions are superseded: C544's 103-terminal PRS scope is not the adopted
 paper closure; the older Clebsch `bf4fb39a...` pin is not the current manifest pin; and C570's
@@ -116,10 +121,9 @@ six-party AME--LU aggregate is not the final all-`m >= 2` manuscript boundary. E
 exclusions, and evidence boundaries are recorded in
 `notes/2026-07-24-c287-new-paper-export-intake.md`.
 
-Per the 2026-07-25 user gate, no source export occurs before AME--LU C602 freezes its aggregate.
-The three ready closures retain their exact root ledger, but provisional manifests are deferred to
-avoid recomputation. C553 remains an independent precondition and may land before C602. Once both
-are complete, an immutable private-source snapshot, inventory regeneration, whole-closure review,
+AME--LU C602 is complete. No source export occurs until C553, C602's two foreign-owned public-prose
+repairs, and the Clebsch Factorization three-gate closure-map reconciliation are complete. Once
+they are complete, an immutable private-source snapshot, inventory regeneration, whole-closure review,
 incremental fresh-history candidate commits, builds, axiom extraction, and clean replay form one
 resumable coordinated execution wave. Each candidate is constructed from the last validated
 public state, and `main` and its tag advance only after that exact candidate passes; the full union
@@ -130,13 +134,13 @@ shared files are deduplicated by content rather than by a portfolio umbrella.
 ### Token-efficient execution route
 
 The authoritative low-context route is
-`notes/2026-07-25-c287-token-efficient-execution.md`. It uses exactly three lane sessions:
-C612--C613--C602 continuously in `ame-lu`, C553 in `cap`, then one coordinated C287 extraction in
-`build-sys`. The extraction computes one content-addressed union, reviews each unique source hash
+`notes/2026-07-25-c287-token-efficient-execution.md`. The AME--LU preparation session is complete;
+C553 in `cap` and then one coordinated C287 extraction in `build-sys` remain. The extraction
+computes one content-addressed union, reviews each unique source hash
 once for public prose, preserves separate paper manifests and commit-scoped trust gates, and
 validates resumable candidate states, preferably in one quiet build-owner window. It explicitly
-defers provisional pre-C602 manifests, C581, companion-paper
-closures, and certificate packages not required by an adopted paper contract.
+defers C581, paper boundaries without Lean roots, and certificate packages not required by an
+adopted paper contract.
 
 Heavyweight generated certificate trees are not members of the `finitegeom` source union. Each
 such family has an explicit package boundary, depends one-way on a pinned `finitegeom` commit, and

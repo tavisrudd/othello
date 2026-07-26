@@ -2,10 +2,10 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-18
-**Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-waits for AME--LU C602 and a quiet Lean worktree; C287's deletion-first API decisions are approved,
-and its 17-module source-owner rewrite is dispatched to C553 (`cap`); C162 blast radius and the
-restart-guard failure suite landed, and the remaining C162 streams need a quiet window
+**Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated; AME--LU C602 is
+complete, while C287 extraction waits for C553, three intake hygiene/fingerprint repairs, and a
+quiet Lean worktree; C162 blast radius and the restart-guard failure suite landed, and the
+remaining C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -86,6 +86,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 - C225 managed queue (reported): [`done/2026-07-16-c225-lean-queue-completion-notification.md`](done/2026-07-16-c225-lean-queue-completion-notification.md).
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
 - C326 exporter: [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
+- C287 current paper intake: [`../2026-07-26-c287-paper-intake-refresh.md`](../2026-07-26-c287-paper-intake-refresh.md).
 - C365 literature-audit conventions (reported): [`../literature-audit-conventions.md`](../literature-audit-conventions.md),
   reviewed in [`../2026-07-19-c365-literature-audit-conventions-fable-review.md`](../2026-07-19-c365-literature-audit-conventions-fable-review.md).
   Repo-wide recording standard for novelty/priority work, pointed to from `CLAUDE.md`. Its read-depth
@@ -156,16 +157,17 @@ generated regions remain unchanged until a coherent quiet-tree regeneration. Rep
 **Next:** after C553 lands the approved source rewrite and semantic docstring pass, regenerate
 C287's source inventory and trust-spine module list, audit every changed hash and public
 declaration, and repeat the referee gate.
-The later-tag roadmap now records three locally ready source-owner boundaries without enlarging
-the first tag: the thirteen-terminal Relconic gate, C545's exact 15-file/53-target PRS R5--R7
-closure, and the current nineteen-row/24-terminal Clebsch Paper I manifest at finitegeom commit
-`6d4766d1ea5e9a36f1a507e549c223416a6b506f`. AME--LU is the remaining local gate: C601 is
-complete, and C612, C613, then C602 must freeze and audit the final all-`m >= 2` aggregate.
-C570's older six-party aggregate is not an admissible final export root, C581 is optional unless
-adopted before C602, and PRS companion levels and Clebsch Papers II/III remain separate intakes.
-Per the user-directed 2026-07-25 boundary, retain the exact ready-root ledger but defer provisional
-manifests and all source export until C602 is complete; the actual extraction is one coordinated
-wave afterward. Exact roots and exclusions are in
+The later-tag roadmap now records frozen Relconic, PRS geometric, Clebsch Rigidity, and AME--LU
+boundaries without enlarging the first tag. PRS is now a 17-file/74-target geometric closure; its
+balanced-quantum gate is a separate cross-paper state after AME--LU. C602 freezes AME--LU at 67
+project-owned Lean files plus five build-identity files. Clebsch Factorization adds three advertised
+Lean gates, but its current fingerprint maps closures for only two and must be regenerated.
+Clebsch Passages has a release-ready nine-claim trust manifest but no Lean root, so it creates no
+source state. C570 remains superseded and C581 remains excluded.
+
+Source export now waits for C553, removal of the exact foreign workflow references in
+`RelativeConicArcs/Plane.lean` and `FiniteGeom/Code.lean`, and reconciliation of the Clebsch
+Factorization three-gate fingerprint. Exact roots and exclusions are in
 `../2026-07-24-c287-new-paper-export-intake.md`. Follow
 `../2026-07-25-c287-token-efficient-execution.md`, which defers closure computation until C602,
 pins one immutable private-source snapshot, deduplicates public-prose review across the full source
