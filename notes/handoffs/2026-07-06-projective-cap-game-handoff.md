@@ -1042,6 +1042,9 @@ not a uniform edge selector (C80, 2026-07-25).** Across the three canonical
 spoiling types, all 106 strict candidates are exact N by both the grid solver
 and an independent small-tree replay; 105 land at `Ω=0` with Node--Kayles
 Grundy 1 or 2, and the unique `Ω=1` target has exactly one P follower.
+The 105 boundary values also have a direct proof: each conflict-graph
+complement is a linear forest, with no edge giving Grundy 1 and an edge plus
+an isolated vertex giving Grundy 2.
 Compared with the four q17 `Ω=40` repairs and q19 `Ω=169` repair, the finite
 incidence gap is large: repairs retain 5--8 legal marked-chord points, 32--51
 legal points total, and 3--5 live conic parameters, while spoilers retain

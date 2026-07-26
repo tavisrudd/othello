@@ -101,6 +101,69 @@ def active_line_load_histogram(kernel, target: int) -> list[list[int]]:
     return [[load, count] for load, count in sorted(loads.items())]
 
 
+def conflict_complement_components(kernel, mask: int) -> list[dict]:
+    """Components of the nonconflict graph on the current legal moves."""
+    cells = list(GEOMETRY.bits(kernel.game.legal_mask(mask)))
+    adjacency = [set() for _ in cells]
+    for left, move in enumerate(cells):
+        after = kernel.game.legal_mask(mask | (1 << move))
+        for right in range(left + 1, len(cells)):
+            if after & (1 << cells[right]):
+                adjacency[left].add(right)
+                adjacency[right].add(left)
+
+    seen = set()
+    components = []
+    for start in range(len(cells)):
+        if start in seen:
+            continue
+        stack = [start]
+        seen.add(start)
+        vertices = []
+        while stack:
+            vertex = stack.pop()
+            vertices.append(vertex)
+            for neighbour in adjacency[vertex]:
+                if neighbour not in seen:
+                    seen.add(neighbour)
+                    stack.append(neighbour)
+        degrees = sorted(len(adjacency[vertex]) for vertex in vertices)
+        components.append(
+            {
+                "vertices": len(vertices),
+                "edges": sum(degrees) // 2,
+                "degree_sequence": degrees,
+            }
+        )
+    return sorted(
+        components,
+        key=lambda row: (
+            row["vertices"],
+            row["edges"],
+            row["degree_sequence"],
+        ),
+    )
+
+
+def linear_forest_grundy_certificate(components: list[dict]) -> int | None:
+    """Return the forced SG value for the certified complement shape."""
+    if not components:
+        return 0
+    if not all(
+        component["edges"] == component["vertices"] - 1
+        and max(component["degree_sequence"], default=0) <= 2
+        for component in components
+    ):
+        return None
+    has_edge = any(component["edges"] for component in components)
+    has_isolate = any(component["vertices"] == 1 for component in components)
+    if not has_edge:
+        return 1
+    if has_isolate:
+        return 2
+    return None
+
+
 def edge_features(kernel, state: int, opponent: int, reply: int) -> dict:
     game = kernel.game
     child = state | (1 << opponent)
@@ -288,17 +351,28 @@ def spoiler_rows() -> tuple[
                 assert not copycat_kernel.contains(target)
                 assert not pair_kernel.contains(target)
                 if pair_kernel.omega(target) == 0:
+                    complement = conflict_complement_components(
+                        pair_kernel, target
+                    )
                     features["target_boundary_grundy"] = (
                         pair_kernel.boundary_grundy(target)
+                    )
+                    features["target_conflict_complement_components"] = (
+                        complement
+                    )
+                    features["linear_forest_grundy_certificate"] = (
+                        linear_forest_grundy_certificate(complement)
                     )
                     features["target_follower_value_summary"] = None
                 else:
                     follower_values = Counter()
                     p_followers = []
+                    follower_rows = []
                     for move in GEOMETRY.bits(
                         pair_kernel.game.legal_mask(target)
                     ):
                         follower = target | (1 << move)
+                        assert pair_kernel.omega(follower) == 0
                         value = (
                             "N" if pair_kernel.game.value(follower) else "P"
                         )
@@ -307,11 +381,36 @@ def spoiler_rows() -> tuple[
                             p_followers.append(
                                 list(pair_kernel.game.cell_tuple(move))
                             )
+                        complement = conflict_complement_components(
+                            pair_kernel, follower
+                        )
+                        follower_rows.append(
+                            {
+                                "move": list(
+                                    pair_kernel.game.cell_tuple(move)
+                                ),
+                                "value": value,
+                                "grundy": pair_kernel.boundary_grundy(
+                                    follower
+                                ),
+                                "conflict_complement_components": (
+                                    complement
+                                ),
+                                "linear_forest_grundy_certificate": (
+                                    linear_forest_grundy_certificate(
+                                        complement
+                                    )
+                                ),
+                            }
+                        )
                     features["target_boundary_grundy"] = None
+                    features["target_conflict_complement_components"] = None
+                    features["linear_forest_grundy_certificate"] = None
                     features["target_follower_value_summary"] = {
                         "P": follower_values["P"],
                         "N": follower_values["N"],
                         "P_moves": p_followers,
+                        "followers": follower_rows,
                     }
                 fibre.append(features)
                 rows.append(
@@ -362,6 +461,7 @@ def type_summary(
         "target_legal_points",
         "target_live_conic",
         "target_boundary_grundy",
+        "linear_forest_grundy_certificate",
     )
     return {
         "type": type_name,
@@ -514,12 +614,24 @@ def run() -> dict:
     ]
     assert len(boundary_grundies) == 105
     assert set(boundary_grundies) == {1, 2}
+    assert all(
+        row["features"]["target_boundary_grundy"]
+        == row["features"]["linear_forest_grundy_certificate"]
+        for row in spoilers
+        if row["features"]["target_omega"] == 0
+    )
     assert len(omega_one) == 1
-    assert omega_one[0]["features"]["target_follower_value_summary"] == {
-        "P": 1,
-        "N": 3,
-        "P_moves": [[14, 8]],
-    }
+    omega_one_summary = omega_one[0]["features"][
+        "target_follower_value_summary"
+    ]
+    assert {
+        key: omega_one_summary[key] for key in ("P", "N", "P_moves")
+    } == {"P": 1, "N": 3, "P_moves": [[14, 8]]}
+    assert all(
+        follower["grundy"]
+        == follower["linear_forest_grundy_certificate"]
+        for follower in omega_one_summary["followers"]
+    )
 
     repair_chord = [
         row["features"]["marked_chord_parent_legal"] for row in repairs
@@ -589,6 +701,7 @@ def run() -> dict:
             "all_spoilers_exact_N_in_grid_engine": True,
             "all_spoilers_exact_N_in_independent_small_tree_replay": True,
             "overload_zero_spoilers_have_grundy_one_or_two": True,
+            "linear_forest_complement_lemma_certifies_all_boundary_grundies": True,
             "unique_overload_one_spoiler_has_one_P_follower": True,
             "all_repairs_exact_P_in_grid_engine": True,
             "all_repairs_in_structural_copycat_survivor": True,
@@ -599,8 +712,11 @@ def run() -> dict:
             "not merely misses of F_cc. Full marked destruction profiles "
             "identify the five repairs purely in the searched root fibres, "
             "but no conjunction of at most three predeclared monotone scalar "
-            "thresholds does. The clean finite gap is premature absorption, "
-            "not a demonstrated q-independent admissible-edge law."
+            "thresholds does. The 105 boundary values have a direct structural "
+            "certificate: the conflict-graph complement is a linear forest, "
+            "empty of edges for SG 1 or nonempty with an isolate for SG 2. "
+            "The clean finite gap is premature absorption, not a demonstrated "
+            "q-independent admissible-edge law."
         ),
     }
 

@@ -76,6 +76,12 @@ The unique q19 `Ω=1` target has four legal followers, three N and exactly one
 P, at move `(14,8)`. Thus even the lone nonboundary exception is a one-move
 winning shell over the same nonzero-boundary phenomenon.
 
+There is also a direct structural certificate for all 105 boundary values.
+The complement of each residual conflict graph is a linear forest. If that
+complement has no edge, the conflict graph is complete and has Grundy 1. If
+it has an edge, it also has an isolated vertex and the conflict graph has
+Grundy 2. This removes exact recursion from the boundary-value explanation.
+
 ## Incidence anatomy
 
 All five repairs are external intruder--intruder exchanges. The q17 repair
@@ -136,6 +142,25 @@ signature of finite interpolation, not a canonical geometric law. It agrees
 with the prior persistence result: the full q17 profile refinement covered
 the finite fibres but had zero recurrence between positive depths.
 
+### Linear-forest boundary lemma
+
+Let `G` be the residual conflict graph and suppose its complement `F` is a
+linear forest.
+
+- Playing a vertex of `G` leaves exactly its neighbours in `F`.
+- Those neighbours form a clique in `G`: there are at most two, and when
+  there are two they are the two neighbours of an internal path vertex and
+  are not adjacent in `F`.
+- Hence every follower has Grundy 0 if the chosen vertex is isolated in `F`,
+  and Grundy 1 otherwise.
+
+If `F` has no edge, every option has value 0 and `SG(G)=1`. If `F` has both
+an edge and an isolated vertex, the option set contains exactly the values 0
+and 1, so `SG(G)=2`. The certificate checks that every one of the 105
+overload-zero spoilers satisfies one of these two hypotheses. Both outcomes
+occur in all three canonical spoiling types, so the lemma explains the
+finite values but does not merge the three marked incidence types.
+
 ## Consequence for C80
 
 The comparison closes the immediate hope that one elementary marked
@@ -176,8 +201,8 @@ directory and requires byte equality.
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_marked_secant_spoiler_repair_compare.py` | 22,790 | `b6ea0e9d0ca22eec80247972675293a35dc86db2888c48e4f9d1120b37c4e9d1` |
-| `notes/2026-07-25-c80-marked-secant-spoiler-repair-compare.json` | 246,032 | `209ab8b6aace677c272e09c16b99cb583f3c00c0ee8b8e35b855d7880d0418cd` |
+| `rust/scripts/c80_marked_secant_spoiler_repair_compare.py` | 27,404 | `b7c940f4652dc02fb20b41397a0323fe68154e8178387ea4daac9222317485ed` |
+| `notes/2026-07-25-c80-marked-secant-spoiler-repair-compare.json` | 300,242 | `98a7e744763a3395dc55c02e1078cb4eacf485a3ecc5b359d45a861159d65a75` |
 
 The exact small-tree replay is independent of the imported `game.value`
 recursion but shares the normalized grid legality engine. Geometry, `Ω`,
@@ -192,8 +217,10 @@ are N in both the grid engine and the independent small-tree recursion. The
 earlier statement only knew that they missed `F_cc` and `M_Ω`. The additional
 cheap boundary audit shows that all 105 `Ω=0` targets have Grundy value 1 or
 2, while the unique `Ω=1` target has exactly one P follower. No further
-uniform base law appears: both nonzero Grundy values occur in every canonical
-type.
+uniform selector appears: both nonzero Grundy values occur in every canonical
+type. The genuine extra theorem is the linear-forest complement lemma, which
+proves those boundary Grundy values directly and is reusable anywhere the
+same complement shape occurs.
 
 The Tao-style correction is to distinguish diagnosis from induction. The
 large finite gaps tempt a threshold rule, but the scalar audit shows that
@@ -214,6 +241,10 @@ reservoir diagnosis are direct C80 deliverables.
 - **[SETTLED] Do the spoilers share one terminal graph value?** No. The 105
   overload-zero targets have Grundy values 1 and 2 in every canonical type;
   the unique overload-one target has a single P follower.
+- **[SETTLED] Is there a nonrecursive structural explanation of those 105
+  boundary values?** Yes. Their conflict-graph complements are linear
+  forests; no complement edge gives Grundy 1, while an edge plus an isolated
+  vertex gives Grundy 2.
 - **[SETTLED] Are the q17 incidence tables coordinate-dependent?** No. Each
   canonical type has the same complete feature multiset in all four copies.
 - **[SETTLED] What finite incidence gap separates repairs from spoilers?**

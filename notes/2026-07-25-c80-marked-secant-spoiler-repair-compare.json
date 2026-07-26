@@ -38,6 +38,16 @@
             "value": 8
           }
         ],
+        "linear_forest_grundy_certificate": [
+          {
+            "count": 16,
+            "value": 1
+          },
+          {
+            "count": 28,
+            "value": 2
+          }
+        ],
         "marked_chord_child_legal": [
           {
             "count": 20,
@@ -250,6 +260,16 @@
           {
             "count": 16,
             "value": 9
+          }
+        ],
+        "linear_forest_grundy_certificate": [
+          {
+            "count": 28,
+            "value": 1
+          },
+          {
+            "count": 20,
+            "value": 2
           }
         ],
         "marked_chord_child_legal": [
@@ -490,6 +510,20 @@
             "value": 9
           }
         ],
+        "linear_forest_grundy_certificate": [
+          {
+            "count": 3,
+            "value": 1
+          },
+          {
+            "count": 10,
+            "value": 2
+          },
+          {
+            "count": 1,
+            "value": null
+          }
+        ],
         "marked_chord_child_legal": [
           {
             "count": 7,
@@ -714,6 +748,7 @@
     "all_spoilers_exact_N_in_grid_engine": true,
     "all_spoilers_exact_N_in_independent_small_tree_replay": true,
     "candidate_count": 106,
+    "linear_forest_complement_lemma_certifies_all_boundary_grundies": true,
     "overload_zero_spoilers_have_grundy_one_or_two": true,
     "unique_overload_one_spoiler_has_one_P_follower": true
   },
@@ -1858,6 +1893,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -1905,6 +1941,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -1939,6 +1992,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -1982,6 +2036,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -2013,6 +2083,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2060,6 +2131,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -2082,6 +2184,7 @@
           ]
         ],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2125,6 +2228,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -2156,6 +2275,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2199,6 +2319,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -2230,6 +2373,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -2277,6 +2421,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -2303,6 +2472,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2346,6 +2516,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -2385,6 +2571,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -2428,6 +2615,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -2454,6 +2664,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -2497,6 +2708,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -2523,6 +2750,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2566,6 +2794,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -2600,6 +2851,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2647,6 +2899,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -2681,6 +2950,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -2728,6 +2998,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -2762,6 +3049,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2805,6 +3093,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -2836,6 +3140,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -2883,6 +3188,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -2900,6 +3229,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -2947,6 +3277,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -2973,6 +3327,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3020,6 +3375,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -3051,6 +3430,7 @@
           ]
         ],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3098,6 +3478,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -3115,6 +3520,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3158,6 +3564,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -3184,6 +3606,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3231,6 +3654,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -3262,6 +3702,7 @@
           ]
         ],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3305,6 +3746,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -3322,6 +3786,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3365,6 +3830,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -3391,6 +3872,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3438,6 +3920,24 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
@@ -3464,6 +3964,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3511,6 +4012,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
@@ -3537,6 +4069,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3584,6 +4117,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -3618,6 +4168,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -3661,6 +4212,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -3692,6 +4259,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3735,6 +4303,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -3761,6 +4352,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3808,6 +4400,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -3842,6 +4451,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -3885,6 +4495,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -3911,6 +4537,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -3954,6 +4581,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -3988,6 +4631,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -4035,6 +4679,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -4074,6 +4735,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4121,6 +4783,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -4138,6 +4831,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4181,6 +4875,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -4220,6 +4937,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -4267,6 +4985,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -4298,6 +5041,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -4341,6 +5085,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -4372,6 +5139,7 @@
           ]
         ],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4415,6 +5183,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -4446,6 +5230,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4493,6 +5278,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -4510,6 +5319,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4557,6 +5367,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -4583,6 +5410,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4626,6 +5454,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -4652,6 +5496,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4695,6 +5540,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -4721,6 +5582,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -4768,6 +5630,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -4794,6 +5680,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -4837,6 +5724,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -4863,6 +5766,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -4910,6 +5814,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -4941,6 +5869,7 @@
           ]
         ],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -4988,6 +5917,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -5005,6 +5959,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5052,6 +6007,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
@@ -5078,6 +6064,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5125,6 +6112,24 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
@@ -5156,6 +6161,7 @@
           ]
         ],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5199,6 +6205,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -5221,6 +6250,7 @@
           ]
         ],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5264,6 +6294,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -5281,6 +6334,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5328,6 +6382,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -5354,6 +6432,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5397,6 +6476,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -5423,6 +6518,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5470,6 +6566,24 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
@@ -5496,6 +6610,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5539,6 +6654,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -5570,6 +6701,7 @@
           ]
         ],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5617,6 +6749,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -5634,6 +6791,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5681,6 +6839,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -5707,6 +6882,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5750,6 +6926,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -5781,6 +6973,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -5828,6 +7021,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -5845,6 +7062,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5892,6 +7110,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
@@ -5918,6 +7167,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -5965,6 +7215,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -5991,6 +7265,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6038,6 +7313,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6077,6 +7369,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6124,6 +7417,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -6146,6 +7470,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -6193,6 +7518,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -6224,6 +7574,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -6267,6 +7618,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6293,6 +7667,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -6336,6 +7711,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -6362,6 +7753,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -6409,6 +7801,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6443,6 +7852,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6486,6 +7896,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6520,6 +7953,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -6567,6 +8001,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6606,6 +8057,7 @@
           ]
         ],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6649,6 +8101,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -6680,6 +8148,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6723,6 +8192,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6749,6 +8241,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -6792,6 +8285,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -6818,6 +8327,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -6861,6 +8371,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -6895,6 +8421,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -6942,6 +8469,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -6976,6 +8520,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -7023,6 +8568,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -7062,6 +8624,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -7105,6 +8668,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -7136,6 +8722,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7179,6 +8766,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -7205,6 +8815,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7248,6 +8859,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -7282,6 +8916,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -7325,6 +8960,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -7356,6 +9007,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7403,6 +9055,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -7425,6 +9108,7 @@
           ]
         ],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7468,6 +9152,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -7499,6 +9199,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -7546,6 +9247,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -7572,6 +9298,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -7615,6 +9342,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -7641,6 +9384,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7684,6 +9428,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -7718,6 +9478,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7765,6 +9526,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -7799,6 +9577,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7842,6 +9621,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -7868,6 +9663,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -7915,6 +9711,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -7941,6 +9761,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -7988,6 +9809,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -8019,6 +9857,7 @@
           ]
         ],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -8062,6 +9901,29 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 1,
@@ -8079,6 +9941,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -8126,6 +9989,24 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 1,
@@ -8152,6 +10033,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -8195,6 +10077,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -8221,6 +10119,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -8268,6 +10167,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -8294,6 +10217,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -8337,6 +10261,22 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 2,
         "target_live_conic": 0,
@@ -8368,6 +10308,7 @@
           ]
         ],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -8415,6 +10356,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -8432,6 +10398,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 5,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -8479,6 +10446,37 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 1,
@@ -8510,6 +10508,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -8557,6 +10556,30 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -8574,6 +10597,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 10,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -8621,6 +10645,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -8660,6 +10701,7 @@
           ]
         ],
         "killed_legal_points": 10,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -8707,6 +10749,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -8738,6 +10797,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -8785,6 +10845,25 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "edges": 3,
+            "vertices": 4
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -8816,6 +10895,7 @@
           ]
         ],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -8863,6 +10943,25 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "edges": 3,
+            "vertices": 4
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -8889,6 +10988,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 3,
         "marked_chord_parent_legal": 4,
         "marked_chord_selected_load": 0,
@@ -8932,6 +11032,36 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -8966,6 +11096,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 10,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9013,6 +11144,23 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 3,
         "target_live_conic": 0,
@@ -9039,6 +11187,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 8,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9086,6 +11235,31 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 5,
         "target_live_conic": 0,
@@ -9125,6 +11299,7 @@
           ]
         ],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9168,6 +11343,36 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -9194,6 +11399,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -9241,6 +11447,24 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -9280,6 +11504,7 @@
           ]
         ],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9327,6 +11552,45 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 7,
         "target_live_conic": 0,
@@ -9353,6 +11617,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": 1,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -9396,6 +11661,36 @@
           ]
         ],
         "target_boundary_grundy": 1,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 4,
         "target_live_conic": 0,
@@ -9422,6 +11717,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 9,
+        "linear_forest_grundy_certificate": null,
         "marked_chord_child_legal": 2,
         "marked_chord_parent_legal": 3,
         "marked_chord_selected_load": 0,
@@ -9469,6 +11765,7 @@
           ]
         ],
         "target_boundary_grundy": null,
+        "target_conflict_complement_components": null,
         "target_follower_value_summary": {
           "N": 3,
           "P": 1,
@@ -9477,6 +11774,93 @@
               14,
               8
             ]
+          ],
+          "followers": [
+            {
+              "conflict_complement_components": [
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                },
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                }
+              ],
+              "grundy": 1,
+              "linear_forest_grundy_certificate": 1,
+              "move": [
+                5,
+                17
+              ],
+              "value": "N"
+            },
+            {
+              "conflict_complement_components": [
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                },
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                }
+              ],
+              "grundy": 1,
+              "linear_forest_grundy_certificate": 1,
+              "move": [
+                8,
+                8
+              ],
+              "value": "N"
+            },
+            {
+              "conflict_complement_components": [
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                },
+                {
+                  "degree_sequence": [
+                    0
+                  ],
+                  "edges": 0,
+                  "vertices": 1
+                }
+              ],
+              "grundy": 1,
+              "linear_forest_grundy_certificate": 1,
+              "move": [
+                12,
+                15
+              ],
+              "value": "N"
+            },
+            {
+              "conflict_complement_components": [],
+              "grundy": 0,
+              "linear_forest_grundy_certificate": 0,
+              "move": [
+                14,
+                8
+              ],
+              "value": "P"
+            }
           ]
         },
         "target_legal_points": 4,
@@ -9509,6 +11893,7 @@
           ]
         ],
         "killed_legal_points": 7,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9556,6 +11941,32 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2,
+              2
+            ],
+            "edges": 3,
+            "vertices": 4
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 6,
         "target_live_conic": 0,
@@ -9582,6 +11993,7 @@
       "features": {
         "deactivated_line_deficiency_histogram": [],
         "killed_legal_points": 6,
+        "linear_forest_grundy_certificate": 2,
         "marked_chord_child_legal": 1,
         "marked_chord_parent_legal": 2,
         "marked_chord_selected_load": 0,
@@ -9629,6 +12041,39 @@
           ]
         ],
         "target_boundary_grundy": 2,
+        "target_conflict_complement_components": [
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              0
+            ],
+            "edges": 0,
+            "vertices": 1
+          },
+          {
+            "degree_sequence": [
+              1,
+              1
+            ],
+            "edges": 1,
+            "vertices": 2
+          },
+          {
+            "degree_sequence": [
+              1,
+              1,
+              2
+            ],
+            "edges": 2,
+            "vertices": 3
+          }
+        ],
         "target_follower_value_summary": null,
         "target_legal_points": 7,
         "target_live_conic": 0,
@@ -9659,5 +12104,5 @@
       "type": "q19-strict-14"
     }
   ],
-  "verdict": "The three canonical spoiling types are actual N-edge fibres, not merely misses of F_cc. Full marked destruction profiles identify the five repairs purely in the searched root fibres, but no conjunction of at most three predeclared monotone scalar thresholds does. The clean finite gap is premature absorption, not a demonstrated q-independent admissible-edge law."
+  "verdict": "The three canonical spoiling types are actual N-edge fibres, not merely misses of F_cc. Full marked destruction profiles identify the five repairs purely in the searched root fibres, but no conjunction of at most three predeclared monotone scalar thresholds does. The 105 boundary values have a direct structural certificate: the conflict-graph complement is a linear forest, empty of edges for SG 1 or nonempty with an isolate for SG 2. The clean finite gap is premature absorption, not a demonstrated q-independent admissible-edge law."
 }
