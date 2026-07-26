@@ -1111,6 +1111,22 @@ transport. Only after edgewise soundness may C82 prove opponent-complete
 projected abundance. C82 remains gated. Report+script+cert:
 [`../2026-07-25-c80-positive-mate-surplus-closure.md`](../2026-07-25-c80-positive-mate-surplus-closure.md).
 
+**The first equivariant reply-correspondence scout is cleanly negative
+(C80, 2026-07-25).** The live-secant relation admits a strict external reply
+when the reply lies on a chord through two conic points still legal after the
+exchange. It is a bounded-degree projectively natural incidence formula,
+contains all four q17 Klein-four repairs and the q19 control repair, and
+commutes exactly with the full order-four stabilizer (`92/92` and `188/188`
+transported edges). It is nevertheless value-impure: every q17 marked fibre
+has degree 23 with `1 P + 22 N`, and the q19 control has degree 47 with
+`39 P + 8 N`. Thus symmetry, normalization, and witness gauge are not the
+obstruction; edgewise game soundness is. The unique q17 P edge is the known
+repair, so this is an equivariant carrier packet, not a proof-producing
+correspondence. The next target is a nonrecursive rank-carrying algebraic
+subcorrespondence that cuts out the q17 repair and excludes the eight q19 N
+edges without querying minimax or `F_cc`; C82 remains gated. Report+cert:
+[`../2026-07-25-c80-equivariant-live-secant-correspondence.md`](../2026-07-25-c80-equivariant-live-secant-correspondence.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q

@@ -1,0 +1,1595 @@
+{
+  "cases": [
+    {
+      "certified_repair": [
+        7,
+        1
+      ],
+      "certified_repair_present": true,
+      "edges": [
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 44
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            14
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 25
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 21
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            2,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 45
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            2,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 42
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            3,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            5,
+            12
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 49
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            2
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 3,
+          "reply": [
+            7,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            7,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            8,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            8,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            8,
+            9
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            8,
+            14
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            9,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            10,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 30
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            10,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 18
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            10,
+            13
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 37
+        }
+      ],
+      "opponent": [
+        4,
+        0
+      ],
+      "projected_fibre_degree": 23,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "transport": {
+        "all_transported_fibres_equal": true,
+        "commuting_edge_checks": 92,
+        "selected_six_set_stabilizer_order": 4,
+        "transported_marked_opponents": [
+          [
+            4,
+            0
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            8,
+            14
+          ],
+          [
+            11,
+            9
+          ]
+        ]
+      },
+      "value_histogram": {
+        "N": 22,
+        "P": 1
+      }
+    },
+    {
+      "certified_repair": [
+        4,
+        10
+      ],
+      "certified_repair_present": true,
+      "edges": [
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 42
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            1,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 18
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            9
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 25
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            3,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 45
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 3,
+          "reply": [
+            4,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            6,
+            2
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            7,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 49
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            8,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            8,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 30
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            8,
+            6
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            9,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            9,
+            6
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            9,
+            14
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            10,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 21
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            10,
+            13
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            11,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 44
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            11,
+            6
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            11,
+            9
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        }
+      ],
+      "opponent": [
+        5,
+        0
+      ],
+      "projected_fibre_degree": 23,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "value_histogram": {
+        "N": 22,
+        "P": 1
+      }
+    },
+    {
+      "certified_repair": [
+        4,
+        10
+      ],
+      "certified_repair_present": true,
+      "edges": [
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            0,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 18
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            6
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            9
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            1,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            2,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 30
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            2,
+            10
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            4,
+            0
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 3,
+          "reply": [
+            4,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 25
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 42
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            15
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 49
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            9
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 44
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            7,
+            7
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            9,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 21
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            9,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            9,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 45
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            11,
+            6
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            11,
+            15
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        }
+      ],
+      "opponent": [
+        8,
+        14
+      ],
+      "projected_fibre_degree": 23,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "value_histogram": {
+        "N": 22,
+        "P": 1
+      }
+    },
+    {
+      "certified_repair": [
+        7,
+        1
+      ],
+      "certified_repair_present": true,
+      "edges": [
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 21
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            0,
+            1
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            0,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            10
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 30
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            2,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 25
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            3,
+            7
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            4,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            4,
+            14
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 44
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            5,
+            0
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 31
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            5,
+            15
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 37
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            6,
+            14
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 3,
+          "reply": [
+            7,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 40
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            7,
+            7
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 33
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            8,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 39
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            9,
+            0
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 18
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            9,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 24
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            9,
+            6
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 42
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            9,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 36
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 3,
+          "reply": [
+            10,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 45
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            10,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 49
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 33
+        }
+      ],
+      "opponent": [
+        11,
+        9
+      ],
+      "projected_fibre_degree": 23,
+      "q": 17,
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "value_histogram": {
+        "N": 22,
+        "P": 1
+      }
+    },
+    {
+      "certified_repair": [
+        0,
+        2
+      ],
+      "certified_repair_present": true,
+      "edges": [
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            0,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 169
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 6,
+          "reply": [
+            0,
+            10
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 166
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 8,
+          "reply": [
+            0,
+            11
+          ],
+          "surviving_reply_chords": 3,
+          "target_omega": 164
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            0,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 153
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            0,
+            16
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 175
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            1,
+            2
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 172
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            1,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 165
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            1,
+            4
+          ],
+          "surviving_reply_chords": 3,
+          "target_omega": 167
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            1,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 128
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            2,
+            1
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 168
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            2,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 190
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            2,
+            8
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 109
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            3,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 125
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            3,
+            12
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 189
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            5,
+            2
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 180
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            5,
+            5
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 197
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 8,
+          "reply": [
+            5,
+            12
+          ],
+          "surviving_reply_chords": 3,
+          "target_omega": 127
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 7,
+          "reply": [
+            5,
+            17
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 194
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            6,
+            4
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 142
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 7,
+          "reply": [
+            6,
+            11
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 175
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            6,
+            13
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 158
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            6,
+            15
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 195
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            6,
+            17
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 169
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            7,
+            7
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 171
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            7,
+            8
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 184
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            7,
+            10
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 132
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            7,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 154
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            8,
+            7
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 166
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            8,
+            8
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 158
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 7,
+          "reply": [
+            8,
+            10
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 181
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            9,
+            3
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 167
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            9,
+            7
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 171
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            9,
+            16
+          ],
+          "surviving_reply_chords": 3,
+          "target_omega": 154
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            10,
+            4
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 180
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            10,
+            12
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 163
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            10,
+            15
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 154
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            11,
+            11
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 167
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            11,
+            16
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 171
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 5,
+          "reply": [
+            11,
+            17
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 149
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            12,
+            11
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 167
+        },
+        {
+          "exact_grid_value": "N",
+          "live_conic_points": 4,
+          "reply": [
+            12,
+            16
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 142
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            13,
+            1
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 185
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            13,
+            2
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 157
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 4,
+          "reply": [
+            13,
+            13
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 170
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 6,
+          "reply": [
+            14,
+            8
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 172
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            14,
+            12
+          ],
+          "surviving_reply_chords": 1,
+          "target_omega": 184
+        },
+        {
+          "exact_grid_value": "P",
+          "live_conic_points": 5,
+          "reply": [
+            14,
+            17
+          ],
+          "surviving_reply_chords": 2,
+          "target_omega": 174
+        }
+      ],
+      "opponent": [
+        4,
+        0
+      ],
+      "projected_fibre_degree": 47,
+      "q": 19,
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "transport": {
+        "all_transported_fibres_equal": true,
+        "commuting_edge_checks": 188,
+        "selected_six_set_stabilizer_order": 4,
+        "transported_marked_opponents": [
+          [
+            1,
+            13
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            4,
+            0
+          ],
+          [
+            7,
+            0
+          ]
+        ]
+      },
+      "value_histogram": {
+        "N": 8,
+        "P": 39
+      }
+    }
+  ],
+  "correspondence": {
+    "domain": "jointly legal strict-overload external intruder replies",
+    "equation": "there exist two distinct conic points still legal after the exchange whose chord contains the reply",
+    "intended_role": "retain one formula-defined conic reply edge without choosing a matching representative"
+  },
+  "cross_checks": {
+    "all_five_certified_repairs_present": true,
+    "q17_klein_four_transport_commutes": true,
+    "q19_control_stabilizer_transport_commutes": true,
+    "sigma_pair_test_equals_direct_determinant_test_on_domain": true
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "schema": "c80-equivariant-live-secant-correspondence-v1",
+  "source": "rust/scripts/c80_equivariant_live_secant_correspondence.py",
+  "verdict": {
+    "edgewise_soundness": "FAIL",
+    "q17_counterexamples_per_marked_fibre": 22,
+    "q19_counterexamples_in_control_fibre": 8,
+    "transport_naturality": "PASS",
+    "uniform_c80_candidate": false
+  }
+}
