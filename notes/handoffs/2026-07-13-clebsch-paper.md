@@ -278,8 +278,21 @@ The active order is strict:
    owning paper without holding v1.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
+4. **C669:** establish Paper III's primary-source context and exact novelty
+   boundary.
+5. **C668:** rebuild Paper III as a focused arithmetic--harmonic note using
+   C669's citation and ownership boundary.
+6. **C670:** run a fresh context-free release review on the revised Paper III
+   surface.
 
-C579 is complete and no longer an open-order item.
+C579 is complete as the candidate-synthesis task, but Paper III is not
+publication-complete. External editorial feedback found that the candidate
+still needs a sharper audience and theorem focus, a fuller derivation from
+the global rational square class to the special fibre, a justified or
+removed marked Mathieu carrier, removal of tentative physical and
+research-inventory prose, substantially broader primary-source context, and
+complete title-page authorship. C669, C668, and C670 own that revision in
+order.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
@@ -306,7 +319,7 @@ The authoritative split records are:
 |---|---|---|
 | Paper I | `papers/clebsch-rigidity/` | C320 final `GO`; C182 archive/release next |
 | Paper II | `papers/clebsch-factorization/` | C577 active; standalone quotient/switch opening built |
-| Paper III | `papers/clebsch-passages/` | C579 cold-review `GO`; two-leg twelve-page candidate and aggregate gate green |
+| Paper III | `papers/clebsch-passages/` | two-leg twelve-page candidate green locally; C669/C668/C670 publication revision queued |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
 
 Never rename, delete, repurpose, or silently filter the mega-paper fallback.
@@ -646,7 +659,8 @@ The exact certificate, independent
 replay, trust boundary, and mystery ledger are in
 `notes/2026-07-26-c654-klein-relative-position.md`.
 
-C579 is complete. The twelve-page manuscript *The Clebsch orientation
+C579 is complete as a candidate-synthesis task. The twelve-page manuscript
+*The Clebsch orientation
 cubic: arithmetic covers and icosahedral harmonics* has one page-one theorem
 with two legs: the rational \(5J_0\) orientation cover and explicit
 golden-fibre \(T_{11}\) specialization, and the exact degree-six
@@ -666,6 +680,17 @@ Nine theorem-like statements, twelve claim rows, three independent exact
 evidence pairs, and the warning-free build pass the aggregate gate. The
 report and mystery ledger are in
 `notes/2026-07-26-c579-paper-iii-synthesis-cold-review.md`.
+
+That local `GO` is not the publication verdict. A later cross-window
+editorial read judged the arithmetic--harmonic triangle strong but the
+audience, contextualization, and central dependency shape unresolved. It
+specifically requires more explanation of the global rational square class
+before specialization, a decision on whether the marked Mathieu carrier is
+mathematically necessary, removal of tentative physical-language and
+research-inventory distractions, primary-source coverage commensurate with
+the four literatures invoked, and an author name on the title page. C669
+owns the literature and claim-ownership audit, C668 the focused-note
+revision, and C670 the independent release gate.
 
 C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full
