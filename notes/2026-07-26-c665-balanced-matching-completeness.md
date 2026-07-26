@@ -11,8 +11,11 @@ balanced setup, and the only resulting orbits are \(B_3/\mathbb F_7\) and
 incidence rather than the abstract quotient alone.  The stronger
 trade-only “Platinum” continuation is active under C665 but is not yet a
 manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
-and its \(q=19,A_5\) quadratic pullback is nonsplit; uniform C1,
-characteristic-three tori, and the \(q=5\) dihedral endpoint remain.
+and the retracted-socle trace lemma closes the quadratic pullback for every
+prime-field exceptional head.  The first extension barrier \(q=25\) also
+closes because neither Frobenius-digit head embeds in the affine socle;
+extension-field C1 from \(q=49\), characteristic-three tori, and the \(q=5\)
+dihedral endpoint remain.
 
 ## Result
 
@@ -414,6 +417,27 @@ certificate (15,813 bytes), the extended q=19 checker (21,425 bytes), and
 its pullback certificate (268 bytes).  Their SHA-256 values are pinned in
 `2026-07-26-c665-exceptional-head-pullback.sha256`.
 
+The first extension-field gate is replayed by
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q25-pullback.sage --check
+sha256sum -c notes/2026-07-26-c665-q25-pullback.sha256
+```
+
+The checker uses the canonical Sage model of \(\mathbb F_{25}\), two
+independent translation generators, inversion, and a primitive-element
+nonsquare dilation.  It constructs the 79-dimensional universal affine
+module from an explicit base matching.  GAP MeatAxe intertwiners and a
+separate block-linear nullspace calculation both give zero for the two
+candidate Hom spaces.  It does not construct the 3160-dimensional symmetric
+square: once the affine Hom space is zero, the outer-filtration argument
+proves that no linear-parity pullback exists.  The certificate covers only
+the displayed \(q=25\) candidates and makes no extension-field-wide claim.
+The checker and certificate have respectively 10,530 and 1,552 bytes; their
+SHA-256 values are pinned in
+`2026-07-26-c665-q25-pullback.sha256`.
+
 The sheet permutation character is
 \[
 P(\mathbf1)+P(S_{13}),
@@ -681,7 +705,7 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
-| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional \(A_4,S_4,A_5\) head table now supplies a nonnegligible head in every non-endpoint case, and the \(q=19,A_5\) quadratic pullback is exactly nonsplit.  The remaining uniform gates are C1 for the other selected heads, characteristic-three tori, and the isolated \(q=5\) dihedral endpoint. |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, and the affine-socle test closes \(q=25\).  The remaining gates begin at \(q=49\), followed by characteristic-three tori and the isolated \(q=5\) dihedral endpoint. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -1071,8 +1095,118 @@ S^\chi\times_E\operatorname{Sym}^2E\longrightarrow S^\chi
 \longrightarrow0
 \]
 is nonsplit.  This closes C1 in the \(q=19,A_5\) model and fixes the exact
-extension convention; a uniform C1 calculation for every candidate head
-is still required.
+extension convention.
+
+### Retracted-socle pullback lemma and prime-field C1
+
+The model calculation is an instance of a general categorical lemma.
+Let \(k\) have odd characteristic, let
+\[
+0\longrightarrow F\longrightarrow E
+\mathrel{\mathop{\longrightarrow}^{\epsilon}}k\longrightarrow0
+\]
+be a nonsplit \(H\)-module extension, and let \(i:S\hookrightarrow F\) be
+a simple submodule.  Suppose \(i\) has an \(H\)-equivariant retraction
+\(r:E\to S\), and \(\dim_kS\ne0\) in \(k\).  Then the pullback along \(i\)
+of
+\[
+0\longrightarrow\operatorname{Sym}^2F\longrightarrow
+\operatorname{Sym}^2E\mathrel{\mathop{\longrightarrow}^{\partial}}E
+\longrightarrow0
+\]
+is nonsplit.
+
+Indeed, a splitting would give an \(H\)-map
+\(\sigma:S\to\operatorname{Sym}^2E\) with
+\(\partial\sigma=i\).  Regard symmetric tensors inside \(E\otimes E\).
+Symmetry and \(ri=1_S\) give
+\[
+ 2(\epsilon\otimes r)\sigma=r\partial\sigma=1_S.
+\]
+Hence \(2(1_E\otimes r)\sigma:S\to E\otimes S\) splits
+\(\epsilon\otimes1_S\).  Its categorical partial trace is an \(H\)-fixed
+vector \(e\in E\) with
+\(\epsilon(e)=\dim_kS\).  Dividing by the nonzero dimension splits
+\(\epsilon\), a contradiction.  Thus the decisive input is not a large
+intertwiner calculation: it is retractability plus nonzero categorical
+dimension.
+
+This closes C1 for every prime-field exceptional head.  Put
+\(q=p\ge5\) and \(d=(p-3)/2\).  On \(H=\operatorname{PSL}_2(p)\), the
+nonconstant universal conic-fibre module is
+\[
+ F=\operatorname{Sym}^d L(2)
+   =\bigoplus_{0\le j\le\lfloor d/2\rfloor}L(p-3-4j).
+\]
+The decomposition is valid in characteristic \(p\): since \(d<p\), the
+symmetrizer makes \(\operatorname{Sym}^dL(2)\) a tilting summand of
+\(L(2)^{\otimes d}\), and every displayed highest weight lies in the bottom
+alcove, where the indecomposable tilting module is simple.
+
+Only the top factor can carry the affine extension.  For an even
+\(0\le m\le p-3\), restriction
+\[
+H^1(H,L(m))\longrightarrow H^1(B,L(m))
+\]
+is injective because \([H:B]=p+1\) is invertible in \(k\).  Writing
+\(B=U\rtimes T\), with \(U=C_p\), gives
+\[
+H^1(B,L(m))=H^1(U,L(m))^T.
+\]
+The \(U\)-module \(L(m)\) is one Jordan block, so the latter cohomology is a
+one-dimensional coinvariant line.  The torus acts on it by
+\(a^{-(m+2)}\); it is fixed precisely when \(p-1\mid m+2\).  In the stated
+range this forces \(m=p-3\).  Therefore every lower Fischer simple is an
+actual retract of \(E\), while the nonsplit affine class is confined to the
+top factor.
+
+The exceptional candidates \(L(6),L(8),L(12)\) are never a dangerous top
+factor.  Equality with \(L(p-3)\) would require respectively
+\(p=9,11,15\); the middle value does not admit \(S_4\), since
+\(24\nmid|\operatorname{PSL}_2(11)|=660\).  Thus, whenever a prime-field
+candidate occurs in \(F\), the retracted-socle lemma applies.  When it does
+not occur, the constant--\(F\) cross channel contains no copy of that
+simple, while the \(F\)--\(F\) channels have the opposite outer parity.
+In either case \(\operatorname{Sym}^2E\) cannot contain both
+\(\operatorname{PGL}_2(p)\)-extensions of the candidate projective cover.
+
+The q=19 rank-zero calculation is now an independent exact check of this
+human proof, not its load-bearing premise.  The remaining C1 problem is
+confined to extension fields, where Frobenius-digit tilting summands need
+not split as bottom-alcove simples.
+
+### The first extension barrier: \(q=25\)
+
+The first modular-barrier calculation closes more cleanly than expected.
+Over the canonical model
+\(\mathbb F_{25}=\mathbb F_5[a]/(a^2+4a+2)\), the universal point-vector
+affine module has dimension
+\[
+1+\binom{13}{2}=79.
+\]
+For the two exceptional H1 candidates, exact calculations give
+\[
+\begin{array}{c|c|c}
+K&S&\dim\operatorname{Hom}_H(S,E)\\ \hline
+A_4&L(1)\otimes L(1)^{(1)}&0\\
+S_4&L(2)\otimes L(2)^{(1)}&0.
+\end{array}
+\]
+The MeatAxe intertwiner basis and an independent explicit block-linear
+system agree in both rows.
+
+Thus neither simple lies in the affine socle.  There is no
+linear-parity constant--\(F\) cross channel to lift, so the quadratic
+pullback question is vacuous in both rows; any occurrence in the
+\(F\)--\(F\) channels has the squared outer parity.  This closes C1 for
+the \(q=25\) \(A_4/S_4\) heads.
+
+The conceptual lesson is important: a simple head of the sheet projective
+need not be a socle constituent of the affine conic-fibre module.  At the
+first modular barrier, testing \(\operatorname{Hom}_H(S,E)\) before
+computing \(\operatorname{Sym}^2E\) removes the entire 3160-dimensional
+quadratic calculation.  The next extension-field gate is \(q=49\), with
+the \(p=7\) \(A_4,S_4,A_5\) candidates.
 
 This is the first genuine residual family, not a cosmetic defect of the
 method.  Its first field can nevertheless be excluded exactly.  Over
@@ -1094,12 +1228,14 @@ characteristic-three torus exclusion.
 Accordingly the proposed proof of L2 now has two uniform inputs and one
 isolated endpoint:
 
-**C1-uniform. Quadratic pullback nonsplitting.**  In the point-vector
+**C1-extension. Quadratic pullback nonsplitting.**  In the point-vector
 convention, compute the pullback of
 \(\operatorname{Sym}^2E\mathrel{\mathop{\to}^{\partial}}E\) along the
-relevant \(S^\chi\hookrightarrow E\), and prove it is nonsplit for the
-candidate supplied by H1.  The \(q=19,A_5,S=L(12)\) row now passes exactly;
-the other subgroup and Fischer selections remain.
+relevant \(S^\chi\hookrightarrow E\) for the remaining \(q=p^e,\ e>1\).
+The retracted-socle lemma closes every prime-field exceptional row, and the
+affine-socle test closes \(q=25\).  Starting at \(q=49\), first decide
+whether each nonnegligible Frobenius-digit candidate embeds in \(E\); only
+an embedded nonretract requires an actual pullback-class calculation.
 
 **H1-torus. Nonnegligible torus head.**  The exceptional \(A_4,S_4,A_5\)
 rows are settled by the table above.  The only remaining H1 rows are the
@@ -1111,7 +1247,8 @@ endpoint already identified in the torus table.
 whose \(G\)-orbit splits into two \(H\)-sheets with \(\lambda>1\), then its
 quadratic trade space has dimension at least two.
 
-No prime-power-wide proof of C1-uniform, H1-torus, or T3 is claimed here.
+No extension-field-wide proof of C1-extension, H1-torus, or T3 is claimed
+here.
 
 There is a second route if L2 fails:
 
@@ -1140,21 +1277,39 @@ the exceptional Dickson types no longer belong to the Platinum mystery:
 every non-endpoint family has an explicit nonnegligible head, and the sole
 Steinberg-only row is removed by full-stabilizer enlargement.
 
-The q=19 pullback also changes the shape of C1.  Its zero contraction map
-does not require a separate recursive \(\operatorname{Ext}^1\) calculation:
-equivariance plus the outer decomposition \(10+0\to0+1\) already forces
-zero.  The highest-EV uniform continuation is therefore an outer-parity
-table for
+The q=19 pullback exposes the more conceptual retracted-socle trace lemma.
+Together with the bottom-alcove Fischer decomposition and the elementary
+Borel restriction for \(H^1\), it closes every prime-field exceptional row
+without an intertwiner table.  This is the task-local “tears” upgrade:
+modular nonsplitting itself forces the outer-parity exclusion, and the exact
+matrix calculation becomes a check.
+
+The first `tt` attack on extension fields is negative but clarifying:
+ordinary block support is too coarse.  In defining characteristic the
+non-Steinberg simples for \(\operatorname{PSL}_2(q)\) lie in the
+full-defect block, so the affine cocycle and the nonnegligible H1 candidates
+are not separated at block level.  The next invariant must see the actual
+Fischer/tilting summand and its retraction, not merely its block.
+
+The q=25 test then supplies a sharper cheap upgrade: neither candidate is
+in the affine socle, despite occurring as a head of the corresponding sheet
+projective.  The 3160-dimensional quadratic module is irrelevant.  This
+separates two notions that the earlier plan risked conflating and gives a
+strict decision order for every remaining row:
 \[
-\operatorname{Hom}_H(S,\operatorname{Sym}^2E)
-\quad\text{and}\quad
-\operatorname{Hom}_H(S,E)
+S^K\ne0
+\;\longrightarrow\;
+\operatorname{Hom}_H(S,E)\ ?
+\;\longrightarrow\;
+\text{retract?}
+\;\longrightarrow\;
+\text{quadratic pullback only if necessary}.
 \]
-for the H1 candidates, with an explicit contraction check only when both
-parities occur.  What remains genuinely unexplained is whether every
-matching-selected Fischer span has the same parity separation; the present
-calculation proves it only for the \(q=19,A_5\) model.  Characteristic-three
-tori and the \(q=5\) dihedral endpoint remain separate geometric gates.
+The highest-EV continuation is \(q=49\), where all three \(p=7\)
+exceptional candidates exercise the next Frobenius-digit pattern.  What
+remains genuinely unexplained is whether affine-socle absence persists or
+a first embedded nonretract appears.  Characteristic-three tori and the
+\(q=5\) dihedral endpoint remain separate geometric gates.
 
 ### Facts that must not be assumed
 

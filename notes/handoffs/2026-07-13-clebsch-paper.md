@@ -297,8 +297,23 @@ binary-polyhedral simple-quotient calculation supplies nonnegligible heads
 for every exceptional \(A_4,S_4,A_5\) family outside the principal Platonic
 endpoints; the lone \(q=7,A_4\) Steinberg-only row cannot be a full matching
 stabilizer because it enlarges to \(S_4\).  The remaining Platinum inputs
-are uniform C1 for the other heads, characteristic-three tori, and the q=5
-dihedral endpoint.
+were uniform C1 for the other heads, characteristic-three tori, and the q=5
+dihedral endpoint.  The retracted-socle trace lemma now turns any quadratic
+lift into a splitting of the original affine extension whenever the simple
+head is a retract and has nonzero categorical dimension.  Bottom-alcove
+Fischer decomposition plus a Borel-restriction calculation confines the
+prime-field affine class to \(L(p-3)\), so every prime-field exceptional C1
+row is closed conceptually; the q=19 matrix is now a cross-check.  The
+remaining C1 frontier is the extension-field tilting structure of the
+affine cocycle versus the Frobenius-digit heads.  The first `tt` block test is
+negative: defining-characteristic full-defect blocks do not separate the
+non-Steinberg candidates.  At q=25 both \(A_4/S_4\) heads have zero Hom into
+the 79-dimensional universal affine module, by MeatAxe and an independent
+block-linear solve; hence the linear-parity cross channel is absent and no
+quadratic pullback is needed.  The active test is q=49: check the three
+\(p=7\) exceptional heads against the affine socle, then test retraction or
+pullback only for an embedded head.  Characteristic-three tori and the q=5
+dihedral endpoint follow.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
