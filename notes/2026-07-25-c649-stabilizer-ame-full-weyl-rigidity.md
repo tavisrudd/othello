@@ -209,6 +209,26 @@ set uniquely.  This is best presented as a short corollary or consistency
 check, not as a separate headline; a literature comparison with quantum-MDS
 weight-enumerator formulas is required before attaching novelty language.
 
+More generally, AME and purity give the complete supported-label profile
+\[
+ \bigl|\{\ell\in L:\operatorname{supp}(\ell)\subseteq A\}\bigr|
+   =q^{2\max(|A|-m,0)}.
+\]
+For \(|A|\leq m\) this is the no-small-support condition.  For
+\(|A|\geq m\), compare the Weyl-orthogonality formula for
+\(\operatorname{tr}(\rho_A^2)\) with
+\(\operatorname{tr}(\rho_{A^c}^2)=q^{-|A^c|}\).
+Möbius inversion then determines the entire projective stabilizer weight
+enumerator.  If \(w>m\), the number of labels with any one prescribed
+support of size \(w\) is
+\[
+ \sum_{j=m+1}^{w}(-1)^{w-j}\binom{w}{j}
+       \bigl(q^{2(j-m)}-1\bigr),
+\]
+and multiplying by \(\binom{2m}{w}\) gives the weight-\(w\) coefficient.
+This broader formula is likely standard quantum-MDS enumerator territory
+and should serve as a literature connection rather than a new paper branch.
+
 Second, choose any party of a stabilizer \(\operatorname{AME}(2m,q)\) state
 as a Choi input.  The remaining parties define a one-logical-qudit
 stabilizer quantum-MDS encoder with parameters
@@ -258,7 +278,7 @@ logical-group claim.
 | Do arbitrary stabilizer phases spoil diagonality? | resolved negatively | they only multiply Weyl-basis coefficients by nonzero phases |
 | Is \(\mathbb F_q\)-linearity required? | resolved negatively | prime-field/additive dimension argument and group-cardinality proof |
 | Is \(m=1\) included? | resolved negatively and sharply | Bell-pair \(U\otimes\overline U\) automorphisms |
-| Is the minimum stabilizer weight multiplicity determined? | resolved positively | double-count the \(q^2-1\) nonidentity labels on every \((m+1)\)-support |
+| Is the stabilizer weight distribution determined? | resolved positively | purity fixes every supported-label count; subset Möbius inversion gives all exact weights |
 | Does the transversal no-go remain CSS-specific? | resolved negatively | view any party as the Choi input of the punctured stabilizer quantum-MDS encoder |
 | Is the prime-power qudit theorem already in the literature? | open | claim-specific audit required before manuscript novelty wording |
 | Is the full stabilizer-to-marginal bridge kernel checked? | open | build an additive stabilizer-state interface; current Lean checks the dimension and axis cores |
