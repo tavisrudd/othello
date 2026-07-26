@@ -1223,8 +1223,17 @@
       "last": 629,
       "purpose": "formalize C624 concrete party-extension groups, actions, factor sets, and splitting witnesses",
       "sequence": 136
+    },
+    {
+      "count": 1,
+      "first": 630,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 630,
+      "purpose": "formalize newly added defect-gap, affine/odd equality-spectrum, and exceptional secant consequences",
+      "sequence": 137
     }
   ],
-  "next_id": 630,
+  "next_id": 631,
   "schema": "codex-task-id-allocations-v1"
 }
