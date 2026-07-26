@@ -2,18 +2,28 @@
 
 **Lane**: `reed-solomon`
 
-**Date:** 2026-07-25
+**Date:** 2026-07-26
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
-C603 complete. C545 has repaired C603's release-blocking local trust boundary.
-The adopted aggregate now has the exact 16-file R5--R7 closure and 66-target
+C603 and C656 complete. C656's cold audit rejected the arbitrary-level
+stable-component release claim and narrowed Version 1 to the complete R5--R7
+results.  The fourteen-field R7 arithmetic reconstruction, exact 74-target
+standard-axiom audit, 44-artifact supplement gate, byte-reproducible fresh
+export, and two mutually blind internal specialist reviews are green on
+canonical PDF SHA-256
+`5eb6d0c2c420cfc7cd4317e3d1ea80447288ee7666029d660410069bf29aef9b`.
+The internal AI reviews do not replace C545's publication-independent human
+reader gate.  The exact repair and mystery ledger are in
+`notes/2026-07-26-c656-prs-cold-read-release-repairs.md`.
+C545 has repaired C603's release-blocking local trust boundary.
+The adopted aggregate now has the exact 17-file R5--R7 closure and 74-target
 axiom audit; the shared contraction API is separated from the companion R9
 residual-quadratic module; all 42 adopted manuscript labels reconcile exactly;
 the R7 row honestly records `lowerWitness` and manuscript deletion degree 25;
-the adoption/formalization/release ledgers and 43-artifact evidence pack agree;
+the adoption/formalization/release ledgers and 44-artifact evidence pack agree;
 and the verifier checks the TeX label set, direct imports, transitive closure,
 ordered audit targets, and exact reader candidate fail-closed. A deterministic
-fresh-history exporter now produces separate paper and exact 15-module Lean
+fresh-history exporter now produces separate paper and exact 17-file Lean
 candidates reproducibly; the clean candidate passes the quick supplement gate
 and rebuilds both PDFs byte-for-byte. The paper and TIT builds, supplement
 gate, adopted aggregate, foundation audit, and companion R9 regression gate
@@ -895,11 +905,10 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C656 | queued; literature delta launched; coordinate with active C646 before touching overlapping formal geometry | repair the two cold reads' release blockers: the modular-union degree budget, exact bottom-component ledger, recursive scheme-theoretic transport, independent R5--R7 finite replay, and post-2026-07-25 literature delta; narrow the all-level headline if any gate fails |
-| 2 | C545 | external release gates only after C656 passes | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two final specialist signoffs, immutable identifiers, and author/account confirmation before upload |
-| 3 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
-| 4 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
-| 5 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
+| 1 | C545 | external release gates | publish the exact repaired R5--R7 Lean revision and paper-only export; obtain two publication-independent human signoffs, immutable identifiers, and author/account confirmation before upload |
+| 2 | C620 | theorem development only after Version 1 is published | classify the first fresh higher Lucas carrier and seek the exact modular split-freeness criterion identified independently by both full-draft cold readers |
+| 3 | C608 | only after Version 1 is published | extract the immediate elementary decoding consequence of the R5--R7 Hankel criterion; close the locator-rank and terminal-hyperplane proof gaps before choosing Version 2 or companion placement |
+| 4 | C607 | only after Version 1 is published | settle the broader FPT/XP decoding boundary only after an algorithmic-geometry and prior-decoding audit makes the absolute \(q\)-exponent rigorous |
 
 ## Unallocated level-ups
 

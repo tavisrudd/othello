@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** active; Version 1 narrowed to R5--R7
+**Status:** complete; Version 1 narrowed to R5--R7
 
 ## Decision
 
@@ -78,15 +78,17 @@ remains a trusted exact execution rather than an independently rederived
 claim.
 
 The cross-arithmetic replay passes at all fourteen fields
-\(7,8,9,11,13,16,17,19,23,25,27,29,31,32\).  The first serial run printed
-PASS through \(q=31\) before deliberate interruption to release memory for
-the Lean gate; the remaining shard
+\(7,8,9,11,13,16,17,19,23,25,27,29,31,32\) in two successful serialized
+shards:
 
 ```text
+python3 notes/2026-07-26-c656-r7-independent-arithmetic-replay.py \
+  --fields 7,8,9,11,13,16,17,19,23,25,27,29,31
 python3 notes/2026-07-26-c656-r7-independent-arithmetic-replay.py --fields 32
 ```
 
-exited zero with
+The thirteen-field shard exits zero after 13 PASS rows.  The \(q=32\) shard
+exits zero with
 `q=32: pointed=18450 deep=17425 PGL=5: PASS`.
 
 ## Literature delta gate
@@ -146,6 +148,18 @@ resident memory was 3,372,056 KiB.  The first overlapping attempt was killed
 with exit 137 while the R7 census was still live; serialization resolved that
 resource conflict without a source change.
 
+## Extra-juice and Tao closeout
+
+The explicit closeout reread every surviving Version 1 claim against its
+strongest trust wording.  It exposed the distinction between reconstructing
+the primary R7 enumerator with independent arithmetic and independently
+deriving completeness, removed the last active all-level proof reference,
+separated Companion Certificate SC from adopted evidence, and reconciled the
+actual 74-target axiom audit.  These were free release-strengthening repairs;
+none changed an R5--R7 theorem.  The discovery-track discriminator found no
+incidental lead: every observation answered C656's requested scope, replay, or
+trust audit directly.
+
 ## Mystery ledger
 
 Settled:
@@ -163,6 +177,7 @@ Settled:
   the paper and supplement now state that boundary.
 - Both blind readers' scope and trust objections are closed on one byte-exact
   candidate.
+- No genuine Version 1 mathematical or verification mystery remains.
 
 Open:
 
