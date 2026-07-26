@@ -1394,8 +1394,17 @@
       "last": 649,
       "purpose": "test full-Weyl rigidity for general stabilizer AME states",
       "sequence": 155
+    },
+    {
+      "count": 1,
+      "first": 650,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 650,
+      "purpose": "kernel-check the complete fixed q=19 Heisenberg-pair incidence, stabilizer, cubic-pencil, and conic profile while leaving only exhaustive parent-class uniqueness external",
+      "sequence": 156
     }
   ],
-  "next_id": 650,
+  "next_id": 651,
   "schema": "codex-task-id-allocations-v1"
 }
