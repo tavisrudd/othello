@@ -261,6 +261,17 @@ Pauli label at each retained party.  The existing axis lemma then recovers
 the local Pauli frame.  MDS shortening should reappear afterward as the
 explicit CSS realization of this intrinsic support theorem.
 
+Equivalently, the supported subgroup is the graph of stabilizer
+operator-pushing maps.  Fix \(i\in A\).  Every Pauli label at \(i\) has a
+unique stabilizer completion on the other \(m\) parties of \(A\), so on the
+state every one-party Pauli pushes to a product Pauli on any chosen other
+\(m\) parties.  The half-plus-one marginal records the graph of this
+discrete pushing map.  Axis recovery says that its product structure
+reconstructs the Pauli frame.  This gives the theorem a direct perfect-
+tensor, holographic-code, and quantum-secret-sharing interpretation without
+adding another proof branch; the closest primary operator-pushing source
+should be cited rather than claiming this language as new.
+
 For \(q=p^e\), “Clifford” in the general theorem means the normalizer of the
 chosen \(q\)-dimensional additive Weyl system, whose label action lies in
 \(\operatorname{Sp}_{2e}(p)\).  The later
