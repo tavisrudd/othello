@@ -439,6 +439,10 @@ nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise.  The proof extends
 the diagonal-multiplier lemma to arbitrary `m`, proves the off-diagonal
 converse and complete translation fiber, and moves the coherent Weil lift
 from the GRS presentation to the entire diagonally isodual branch.
+The diagonal-duality witness space has dimension zero or one, giving a
+linear nullity test, projective uniqueness of the propagation ratios, and
+the hyperbolic-form obstruction
+`\(\det S\in(-1)^m(\mathbb F_q^\times)^2\)`.
 The manuscript and trust ledgers now use this intrinsic boundary.
 `EncoderTransversal` packages the exact conditional carrier terminal with
 no GRS evaluation hypothesis, and the aggregate axiom audit passes with

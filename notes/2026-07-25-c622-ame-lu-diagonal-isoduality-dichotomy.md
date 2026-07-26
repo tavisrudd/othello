@@ -238,6 +238,44 @@ often allow a coordinate permutation in “isodual,” while fixed-party
 transversality does not.  The manuscript now says “diagonally isodual” and
 keeps permutation-assisted dualities in the party-moving extension.
 
+## Post-closeout extra juice
+
+The multiplier lemma gives a sharper intrinsic test than the dichotomy needs.
+For a generator matrix \(G\) of \(C\), set
+\[
+ \mathcal D_C=\{s\in\mathbb F_q^{2m}:G\operatorname{diag}(s)G^{\mathsf T}=0\}.
+\]
+This is a linear space, and \(s\in\mathcal D_C\) precisely when
+\(\operatorname{diag}(s)C\subseteq C^\perp\).  Every nonzero member is
+nonsingular and gives equality by the multiplier lemma.  Moreover,
+\(\dim\mathcal D_C\leq1\): if independent \(s,t\) existed, both would have
+full support, while
+\(s-(s_i/t_i)t\) would be a nonzero member with a zero \(i\)-th coordinate.
+Thus diagonal isoduality is exactly the nullity-one case, failure is the
+nullity-zero case, and the witness \(S\) is unique up to scalar.  The ratios
+\(s_i/s_j\) in the propagation formula are consequently canonical invariants
+of the labeled code.
+
+This also makes the logical phase an all-or-nothing one-gate test.  The
+existence of one fixed-party transversal Clifford with a nondiagonal block at
+one input forces \(\mathcal D_C\neq0\), and the resulting upper and lower
+shears generate the whole \(\operatorname{SL}_2(q)\) factor at every input.
+The two projective groups have orders
+\[
+ q^3(q^2-1)\quad\text{and}\quad q^2(q-1),
+\]
+so crossing the phase boundary multiplies the group order by \(q(q+1)\).
+
+Finally, a witness \(S\) makes \(C\) a maximal totally isotropic subspace for
+the diagonal symmetric form
+\((x,y)\mapsto xS y^{\mathsf T}\).  The form is therefore hyperbolic.  In odd
+characteristic this gives the immediate necessary check
+\[
+ \det S=\prod_i s_i\in(-1)^m(\mathbb F_q^\times)^2.
+\]
+This determinant-square-class obstruction is weaker than the nullity test but
+can reject a proposed witness without manipulating the code.
+
 ## Mystery ledger
 
 | Feature | Closeout status | Evidence gap or owner |
@@ -248,6 +286,9 @@ keeps permutation-assisted dualities in the party-moving extension.
 | Does the theorem require GRS evaluation structure? | **Settled negatively:** only a diagonal duality witness is used. | none |
 | Are there non-GRS codes on the isodual branch? | **Settled at family level:** published self-dual non-GRS MDS constructions exist. | the accessible Zhu--Liao record did not support a parameter-level example, so none is claimed |
 | Is the exact arbitrary-length converse unconditional in Lean? | **Settled boundary:** the terminal names its five hypotheses and proves the exact carrier dichotomy from them. | formalizing the MDS diagonal-multiplier lemma and its block-action bridge would remove the remaining conditional fields |
+| How many diagonal-duality witnesses can a fixed labeled MDS code have? | **Settled:** their linear space has dimension zero or one, so a witness is projectively unique. | none |
+| Does one nondiagonal transversal gate imply only a partial enlargement? | **Settled negatively:** it forces the full \(\operatorname{SL}_2(q)\) branch and an order jump by \(q(q+1)\). | none |
+| Does the witness carry a quick arithmetic obstruction? | **Settled:** its diagonal form is hyperbolic, so \(\det S\) has square class \((-1)^m\). | none |
 
 No unresolved mathematical feature remains in the exact fixed-party
 dichotomy.  The only open item is the depth of its formal proof, not the
