@@ -1322,8 +1322,17 @@
       "last": 641,
       "purpose": "kernel-check the C637 attaining witnesses and record the exact external lower-bound trust boundary",
       "sequence": 147
+    },
+    {
+      "count": 1,
+      "first": 642,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 642,
+      "purpose": "repair referee and eight-commit copy-review findings, including torus-normalizer correction and proof/trust clarifications",
+      "sequence": 148
     }
   ],
-  "next_id": 642,
+  "next_id": 643,
   "schema": "codex-task-id-allocations-v1"
 }
