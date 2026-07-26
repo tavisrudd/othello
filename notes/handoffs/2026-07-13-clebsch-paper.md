@@ -279,7 +279,11 @@ elaboration is green, while the import-only gate waits behind the same
 foreign Lean build owner as the Hilbert-symmetry gate.  The report, exact
 certificate, independent replay, and mystery ledger are in
 `notes/2026-07-26-c665-balanced-matching-completeness.md`; these are Paper II
-v2 upgrades and do not hold v1.
+v2 upgrades and do not hold v1.  Resume the Platinum proof under
+`notes/expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`;
+its first gate is the point-vector/evaluation-dual extension diagram, followed
+by the Dickson-type \(S^K\) table and the characteristic-three torus
+exception.
 
 The active order is strict:
 
@@ -293,7 +297,9 @@ C680 has completed the local mathematical and artifact repair.  The
 fixed-icosahedron Clebsch chart is correctly defined over
 \(\mathbf Q(\sqrt5)\), not \(\mathbf Q\); a finite-etale local normalization
 argument now makes the two golden configurations the complete reduced fibre
-and preserves the global \(5J_0\) square-class theorem.  The 27-file
+and preserves the global \(5J_0\) square-class theorem.  The exchanger has
+uniform finite-field spinor class \([2]\), with the certified nontrivial
+\(q=11\) case as its specialization.  The 27-file
 `clebsch-passages` artifact has no C-ID, stale program name, repository-note
 reference, Mathieu/Hadamard/matching branch, or Klein bundle.  Label-level
 trust identity, explicit `formal_coverage: none claimed`, ordinary replay,

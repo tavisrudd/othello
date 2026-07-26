@@ -22,6 +22,7 @@ making better proof-design choices in Lean.
 | Formal cap-set methodologist | Sander R. Dahmen, Johannes Holzl, Robert Y. Lewis; Ellenberg and Gijswijt | Affine cap-set definitions and bounds: follow formalization-friendly algebra, but do not confuse cap-size bounds with game outcome proofs. |
 | Graph-game certificate engineer | Thomas J. Schaefer, Aaron N. Siegel, Berlekamp-Conway-Guy | Queens/NodeKayles: prove finite-board strategies by game-graph certificates, local reductions, and Grundy/PN bridges; expect general hardness. |
 | Repair-reliability and Boolean-threshold analyst | Svante Janson, Ryan O'Donnell; Ehud Friedgut, Gil Kalai | RepairPorts: exact reliability recurrences and pivotal influences, dependency-controlled Poisson windows, and careful sharp-threshold terminology. |
+| Rank-one modular reconstruction specialist | Stephen Doty, Anne Henke, Alison Parker, Gunter Malle, Geoffrey Robinson; Simeon Ball, Michel Lavrauw | PGL2/PSL2 reconstruction: fix point/evaluation duality, compute p'-subgroup invariants and Frobenius digits, track projective covers and outer parity, and isolate torus-normalizer exceptions. |
 
 ## Loading order by task
 
@@ -41,6 +42,11 @@ making better proof-design choices in Lean.
    load graph-game certificate engineering and Lean CGT.
 7. Repair-port reliability and threshold work:
    load `expert-personas/janson-odonnell-reliability-thresholds.md`.
+8. PGL2/PSL2 matching reconstruction and defining-characteristic quadratic
+   modules:
+   load `expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`;
+   add the finite projective arcs dossier only when the residual step uses
+   conics, matching products, or torus-normal-form geometry.
 
 ## Current project cautions
 
