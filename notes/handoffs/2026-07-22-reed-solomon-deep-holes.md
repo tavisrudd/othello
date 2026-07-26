@@ -22,7 +22,13 @@ mystery ledger are in
 `notes/2026-07-25-c545-r5-r7-lean-trust-reconciliation.md`. C545 remains
 externally blocked on two specialist signoffs, a publicly fetchable
 flake-pinned Lean revision, authenticated repository/archive publication and
-identifiers, and author/account confirmation. C532 gives
+identifiers, and author/account confirmation. The bundled-paper revision also
+records the balanced \(q=8\), redundancy-five quantum corollary: 1116
+one-column \([10,5,6]_8\) MDS extensions yield minimum-support
+\(\operatorname{AME}(10,8)\) states and \([[9,1,5]]_8\) quantum MDS codes.
+Its separate Lean bridge checks the exact row, balance, uniqueness within
+R5--R7, and the imported AME--LU rigidity consequences while leaving the
+standard coding dictionaries as an explicit semantic interface. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the

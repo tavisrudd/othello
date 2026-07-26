@@ -19,7 +19,7 @@ make check
 make tit-check
 ```
 
-`make check` builds the 34-page canonical preprint.  `make tit-check` builds the
+`make check` builds the 35-page canonical preprint.  `make tit-check` builds the
 26-page IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`; the target venue is the
 *IEEE Transactions on Information Theory*.  The principal files are `main.tex`,

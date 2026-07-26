@@ -161,6 +161,28 @@ attestation. The tracked release flake also still lacks the required public
 `finitegeom` input; it can be locked only after the exact Lean revision is
 publicly fetchable.
 
+## Balanced quantum bundle addendum
+
+The redundancy-five \(q=8\) row gives 1116 projective one-column
+\([10,5,6]_8\) MDS extensions, split as \(360+756\). Since the extended
+length is twice its dimension, the standard MDS dictionary gives
+minimum-support \(\operatorname{AME}(10,8)\) states and associated
+\([[9,1,5]]_8\) quantum MDS codes. The bundled AME--LU results then give
+LU-to-LC rigidity and Clifford-only transversal encoder conversion. The paper
+cites the arcs, Clebsch-rigidity, Clebsch-factorization, and AME--LU companions
+at the precise comparison points; Clebsch factorization is context for the
+complementary factorization-memory mechanism, not an input to the
+Reed--Solomon proof.
+
+`RelativeConicArcs.PRSBalancedQuantumExtension` checks the \(q=8\) record,
+the \(1116=360+756\) arithmetic, the balanced parameters, and uniqueness of
+the balanced prime-power row among redundancies five through seven. It also
+specializes the generic AME--LU rigidity and encoder-transversal theorems at
+length ten. The standard MDS-to-AME and AME-to-quantum-code correspondences
+remain explicit proposition-valued interface fields rather than reconstructed
+formal semantics. The separate import gate and seven-command axiom audit pass
+with only `propext`, `Classical.choice`, and `Quot.sound`.
+
 ## Extra-juice and Tao closeout
 
 The closeout asked whether a direct-import check alone could regress while
@@ -175,6 +197,14 @@ They do not: they now identify the exact external statements that supply the
 radius, point-count, coding-dictionary, persistent-family, Lucas, and
 factorization inputs, while the formal ledger says precisely which remain
 Lean hypotheses.
+
+The quantum addendum closeout asked whether the balanced construction persists
+at redundancy six or seven. The equation \(q+2=2r\) gives \(q=10,12\), neither
+a prime power, so \(q=8,r=5\) is the unique row in the paper's exact range.
+It also separated the free formal gain from a larger foundational project:
+the bundle-specific arithmetic and the AME--LU consequences are checked now;
+formalizing the standard coding dictionaries would enlarge the trust base and
+is not needed to state the corollary honestly.
 
 ## Mystery ledger
 
@@ -191,6 +221,13 @@ Settled:
   say so.
 - **Are the load-bearing literature statements pinpointed and checked?** Yes,
   including the two primary-source gaps identified by C603.
+- **Is the \(q=8\) quantum consequence another finite classification?** No.
+  It is the standard balanced MDS dictionary applied to the already certified
+  1116 extensions; Lean checks the exact row, balance, uniqueness, and bundled
+  rigidity specializations.
+- **Does Clebsch factorization enter the proof?** No. Its quotient
+  factorization-memory theorem is a complementary comparison and is cited as
+  such.
 
 Open, with owner and gate:
 
@@ -205,5 +242,10 @@ Open, with owner and gate:
 - **Can the public release checker close without the exact reviewed bytes?**
   No. It now binds both reader records to the manifest's export commit and
   canonical PDF hash; public URL and DOI resolution remain external facts.
+- **Should the standard MDS-to-AME and AME-to-quantum dictionaries themselves
+  be reconstructed in Lean?** This is outside the present paper gate. The
+  current module exposes those two implications as the exact semantic trust
+  interface; a future shared quantum-foundation task would own any stronger
+  closure.
 
 No incidental finding met the discovery-track discriminator.

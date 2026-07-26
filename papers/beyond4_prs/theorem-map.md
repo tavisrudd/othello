@@ -8,15 +8,17 @@ ledgers.
 | Source | Manuscript result | Adopted strength | Exact boundary | Proof/evidence type |
 |---|---|---|---|---|
 | R5 | Complete redundancy-five classification | complete classification | every prime power `q >= 7`; sporadic orbits exactly at `7,8,9,11,13,17,19` | characteristic-free Hankel/cubic-cover proof plus exhaustive finite certificates |
+| R5 quantum corollary | Balanced \(q=8\) MDS extension, \(\operatorname{AME}(10,8)\), and \([[9,1,5]]_8\) quantum MDS code | exact derived corollary; no claim of a complete LU/LC orbit table | the `1116=360+756` relative projective extension directions at `(r,q)=(5,8)`; the only balanced prime-power row among R5--R7 | R5 extension dictionary and Certificate R5 count; standard MDS--AME/Choi correspondence; companion MDS--CSS LU and transversal-conversion theorems |
 | R6 | Redundancy-six classification | complete classification | every prime power `q >= 7`; small exceptional tables at `7,8,9,11,13`; recurring binary nucleus orbit for odd `m >= 5` | polar-line proof plus bounded census and semilinear normal-form certificate |
 | R7 | Redundancy-seven split-free syndrome classification | complete all-field split-free classification; deep-hole promotion only with the radius gate | finite certificate through `q=32`; geometric continuation from `q>=37`; genuine deep holes only for `q >= 11`; the `q=7,8,9` radius gate is not supplied | explicit degree-16 second-marker scheme, pointed linear-gcd and \(S_3\) bottom packages, contained rank-two proposition, and orbit-reduced finite certificate |
 | Polar flags | Polar construction and one-step escape | exact conditional construction and effective one-step implication | each step requires the displayed lower-cover, collision, component, and witness inputs | projective divided-power contraction plus manuscript geometry and cited point bounds |
-| Stable components | All-level stable-component and uniform transverse theorems | unconditional manuscript theorem with partial coordinate formalization | \(\mathrm{SC}(j)\) holds for every \(j\geq6\); the displayed threshold leaves only persistent/modular loci; in characteristic \(p>r-1\), only persistent families remain | catalecticant-rowspace transport, integral rank-two/Lucas pullback, Plücker bridge, coherent-Fano identities, and Certificate SC |
+| Stable components | All-level irreducible-component exclusion and uniform transverse theorems | unconditional manuscript theorem with partial coordinate formalization | \(\mathrm{SC}(j)\) holds for every \(j\geq6\); the displayed threshold leaves only persistent/modular loci; in characteristic \(p>r-1\), only persistent families remain | catalecticant-rowspace transport, integral rank-two/Lucas pullback, Plücker bridge, coherent-Fano identities, and Certificate SC |
 | Lean boundary | R5--R7 algebra, arithmetic, coordinate identities, finite-table transcription, and conditional synthesis | one exact paper-facing closure, not a full formalization of the geometry | geometric classifications, cited theorems, group actions, and certificate semantics remain manuscript, literature, or public-validation inputs | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`, its axiom audit, and `supplement/LEAN-STATEMENTS.md` |
 
 ## Stable source labels
 
 - `thm:r5`: complete redundancy-five classification.
+- `cor:q8-quantum-extension`: balanced field-eight MDS, AME, and quantum-MDS consequence.
 - `thm:spine`: R6/R7 classification spine and persistent orbit law.
 - `thm:stable-component-headline`: all-level stable-component classification
   and uniform transverse consequence.

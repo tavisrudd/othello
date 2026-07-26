@@ -9,6 +9,11 @@ Artifact paths below are relative to `notes/`. Commands run from the repository
 root. The manuscript proves its mathematical claims; these artifacts certify
 only the finite or symbolic domains stated here.
 
+The balanced \(q=8\) quantum corollary introduces no new computation:
+its `1116=360+756` count is the R5 certificate row, while the
+MDS--AME, Choi, local-unitary, and transversal conclusions are imported
+from the cited standard and companion theorems.
+
 | Claim group | Generator | Certificate | Independent replay | Checksum |
 |---|---|---|---|---|
 | C491 redundancy-five census | `2026-07-22-c491-prs-deep-hole-census.py` | `2026-07-22-c491-prs-deep-hole-census.json` | `2026-07-22-c491-prs-deep-hole-replay.py` | `2026-07-22-c491-prs-redundancy-five.sha256` |
@@ -70,6 +75,10 @@ by `supplement/verify.py`.
   `RelativeConicArcs.Gates.PRSBeyondRedundancyFour`;
 - aggregate tracked audit:
   `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`;
+- balanced quantum bridge:
+  `RelativeConicArcs.Gates.PRSBalancedQuantumExtension`;
+- balanced quantum bridge audit:
+  `RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`;
 - declaration-level manuscript reconciliation:
   `supplement/LEAN-STATEMENTS.md`.
 
@@ -81,3 +90,8 @@ opaque computational oracle; only `propext`, `Classical.choice`, and
 `Quot.sound` occur. The R5--R7 transcription modules name
 `supplement/CLASSIFICATION-RECORDS.json`, SHA-256
 `b3441d983798793f211878de7e72b976be9170b580041f460cf981a73dbf66a2`.
+The separate balanced-quantum audit reports the same standard axiom set.
+Its quantum-dictionary terminal is conditional on explicit MDS--AME and
+AME--quantum-MDS implication fields; its length-ten LU and transversal
+terminals are direct specializations of the imported generic MDS--CSS
+theorems.

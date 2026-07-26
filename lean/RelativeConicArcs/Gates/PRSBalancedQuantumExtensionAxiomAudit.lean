@@ -1,0 +1,16 @@
+import RelativeConicArcs.Gates.PRSBalancedQuantumExtension
+
+/-!
+# Axiom audit for the balanced redundancy-five quantum consequence
+
+The commands print the axiom dependencies of every paper-facing terminal
+exported by the import-only gate; this file adds no declarations.
+-/
+
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.fieldEightRecord_mem_certifiedFieldRecords
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.fieldEight_projectiveDirectionCount
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.fieldEight_balancedExtensionParameters
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.fieldEight_uniqueBalancedPrimePowerRow
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.certifiedBalancedExtensions_haveQuantumConsequences
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.lengthTen_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent
+#print axioms RelativeConicArcs.PRSBalancedQuantumExtension.lengthTen_encoderConversion_logical_and_physical_isClifford

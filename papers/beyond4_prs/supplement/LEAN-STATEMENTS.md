@@ -7,6 +7,10 @@ dependencies of every declaration on which the retained redundancy-five
 through redundancy-seven manuscript places Lean-level trust. The aggregate
 gate imports exactly the foundation, redundancy-five, polar-induction and
 redundancy-six/seven, and stable-component gates.
+The balanced quantum corollary uses the separate cross-paper closure
+`RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and audit
+`RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`; it is not
+folded into the 15-file geometric aggregate.
 
 “Kernel algebra” means that Lean proves the displayed identity or arithmetic
 statement. “Conditional terminal” means that Lean proves the conclusion from
@@ -26,6 +30,7 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `lem:hankel` | `PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member` | Conditional terminal. The concrete Hankel dictionary and its coding semantics are inputs. |
 | `cor:splitfree` | `PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member`; `PRSFoundation.CoveringRadiusInput.deep_iff_splitFree` | Conditional terminal. The concrete dictionary and covering-radius premise are inputs. |
 | `thm:r5` | `PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate`; family arithmetic under `PRSRedundancyFive.FamilyData`; table arithmetic under `PRSRedundancyFiveCertificate` | Conditional synthesis plus kernel arithmetic. Covering radius, cubic-cover geometry, group actions, and certificate semantics remain inputs. |
+| `cor:q8-quantum-extension` | `PRSBalancedQuantumExtension.fieldEightRecord_mem_certifiedFieldRecords`; `fieldEight_projectiveDirectionCount`; `fieldEight_balancedExtensionParameters`; `fieldEight_uniqueBalancedPrimePowerRow`; `certifiedBalancedExtensions_haveQuantumConsequences`; `lengthTen_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent`; `lengthTen_encoderConversion_logical_and_physical_isClifford` | Exact certificate arithmetic and balanced-row uniqueness are kernel checked. The MDS--AME and Choi semantics are explicit interface fields; the LU and transversal conclusions are kernel-checked specializations of the generic MDS--CSS theorems. No complete LU/LC orbit classification is asserted. |
 | `thm:spine` | `PRSRedundancySixSeven.redundancySixAllFieldSynthesis`; `redundancySevenAllFieldSynthesis`; `PRSPolarInduction.fifthPower_sigmaInversionOrbitCount` | Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary. |
 | `thm:stable-component-headline` | the three `PRSStableComponents.*Factor_plucker` declarations; the four `coherentFano_*_hankelMinor` identities; `mem_modularContractionKernel_prod_iff`; `cyclicPlaneCatalecticant_blocks_cover` | Coordinate algebra and characteristic-two block-coverage termination are kernel checked. Marker-product density, projective row-space transport, saturation, and geometric component classification are manuscript and Certificate SC proofs. |
 | `prop:r5-radius` | `PRSFoundation.CoveringRadiusInput.deep_iff_splitFree` | The logical use is checked; the Seroussi--Roth theorem is imported by citation. |
@@ -78,6 +83,11 @@ project-owned Lean files:
 The residual-quadratic, R8, R9, ordered-Hessian, Lucas-carrier, and
 degree-nine endpoint modules are not in this closure.
 
+The balanced quantum bridge adds its mathematical module, import-only gate,
+and axiom-audit gate on top of the separately released AME--LU dependency
+closure.  Its arithmetic and length-ten specializations are kernel checked;
+the MDS--AME and one-party Choi semantics remain explicit cited inputs.
+
 ## Trust statement
 
 The aggregate audit reports only `propext`, `Classical.choice`, and
@@ -111,3 +121,13 @@ exact-target currentness, and the final trace-only aggregate gate. The
 paper-local verifier independently checks that this table has exactly the
 current TeX label set and that the aggregate and audit source have exactly the
 declared R5--R7 target sets.
+
+The balanced quantum bridge is checked separately by:
+
+```text
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.PRSBalancedQuantumExtension \
+  RelativeConicArcs.Gates.PRSBalancedQuantumExtension \
+  RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit \
+  --profile single --threads 1 --cores 20-23
+```
