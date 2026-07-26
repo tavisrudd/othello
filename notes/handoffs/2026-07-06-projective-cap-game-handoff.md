@@ -1193,6 +1193,29 @@ force the obligation locus through a perfect-matching quotient. C82 remains
 gated. Report+cert:
 [`../2026-07-25-c80-continuation-conic-matching-bridge.md`](../2026-07-25-c80-continuation-conic-matching-bridge.md).
 
+**The tangent-plus-triple coverage coordinate is exact, but its greedy
+reply rule is closed-negative (C80, 2026-07-25).** For a legal pair `x,y`,
+the bounded-arity inclusion-exclusion formula `kappa_T(x,y)` equals exactly
+`|Legal(T+x+y)|`, so `kappa=0` recovers the maximal two-faces of the full
+continuation complex. At q17 the 22 terminal-graph isolates have minimum
+deficiencies `1^8 2^13 3^1`, but only `4/22` admit a P-valued minimizer; the
+full minimizing correspondence is `21 P + 43 N`. The q19 minima range
+`3..8`, only `19/51` opponent fibres contain a P minimizer, and the oriented
+split is `21 P + 55 N`. All fibres commute with projective transport.
+Coverage cardinality is therefore an exact obligation size but not a value
+certificate. The next target is a direct rewrite of the q17 one-/two-point
+uncovered loci, with the same formula tested on q19; C82 remains gated.
+Report+cert:
+[`../2026-07-25-c80-tangent-triple-coverage-datum.md`](../2026-07-25-c80-tangent-triple-coverage-datum.md).
+
+**Canonical C80 truth ledger (2026-07-25).** The handoff remains the
+program-level routing map, while the compact ledger now distinguishes
+field-uniform proofs, finite certificates, settled negatives, superseded
+routes, and genuinely open claims. Use it to prevent finite passes or
+cross-project snapshot transfers from being promoted into uniform C80
+theorems:
+[`../2026-07-25-c80-status-ledger.md`](../2026-07-25-c80-status-ledger.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
