@@ -7,11 +7,11 @@
 **Status:** complete.  The sole non-hyperoval characteristic-two zero-defect
 candidate \((q,k)=(4096,92)\) is impossible.  Conic polarity turns the 92 arc
 points into distinct involutions stabilizing the same 91-point subset of the
-conic.  The 46 tangent pairs force 46 distinct root groups of order at least
-four in that stabilizer.  The characteristic-two subgroup classification of
-\(\operatorname{PGL}_2(4096)\), followed by the two-orbit calculation for the
-only surviving subfield group \(\operatorname{PGL}_2(64)\), contradicts the
-cardinality 91.
+conic.  Either tangent pair generates a four-group fixing exactly its contact
+point, so the other 90 points would have to split into four-element orbits.
+The contradiction \(90\not\equiv0\pmod4\) is the complete primary proof.
+The characteristic-two subgroup classification and subfield-orbit sieve
+remain as a stronger reusable backup for candidates that pass this congruence.
 
 ## Result
 
@@ -98,68 +98,82 @@ Thus
 \]
 contains the 92 distinct involutions \(\sigma_P\), \(P\in A\).
 
-## Root-group amplification
+## Klein-four orbit obstruction
 
 Every nonidentity involution of \(\operatorname{PGL}_2(K)\) in
 characteristic two has one fixed point on \(\mathcal C\).  For
 \(\sigma_P\), it is the contact point of the unique conic tangent through
 \(P\).
 
-The 46 tangent secants of \(A\) therefore give 46 distinct points
-\(t\in\mathcal C\), each supporting two distinct involutions of \(G\).
+Choose any one of the 46 tangent secants, with arc points \(P,Q\) and
+contact point \(t\in\mathcal C\).  It supports the two distinct involutions
+\(\sigma_P,\sigma_Q\in G\).
 After moving \(t\) to infinity, all involutions fixing \(t\) are
 translations \(x\mapsto x+\gamma\).  The two coming from the tangent pair
-generate a four-group, whose third nonidentity element is another
-involution fixing \(t\).  Consequently
-\[
- \left|\left\{
- t\in\mathcal C:
- |G\cap U_t|\ge4
- \right\}\right|\ge46,
-\]
-where \(U_t\) is the characteristic-two root group fixing \(t\).
+generate a four-group \(V_t\), whose third nonidentity element is another
+involution fixing \(t\).
 
-This amplification is the step missed by the earlier binary-residue and
-quadratic/Arf gates: the 46 tangent pairs do not merely give a parity word;
-they force 46 distinct noncyclic 2-local subgroups inside one global
-conic stabilizer.
+Every nonidentity element of \(V_t\) has \(t\) as its unique fixed point on
+the conic.  Since \(t\in E\), the action of \(V_t\) on
+\(E\setminus\{t\}\) is free.  Therefore
+\[
+ |E|\equiv1\pmod4.
+\]
+But \(|E|=91\equiv3\pmod4\), a contradiction.
+
+Equivalently, each \(\sigma_P\) acts on \(E\) as one fixed point and 45
+transpositions, hence as an odd permutation.  The product
+\(\sigma_P\sigma_Q\) must be even, but it is a third involution with the same
+one-fixed-point cycle type and would have to be odd.  The four-orbit argument
+is the sign contradiction without choosing generators.
+
+This is the step missed by the earlier binary-residue and quadratic/Arf
+gates: one tangent pair does not merely give a parity word.  Once both local
+involutions act on the same global conic set, their product locks the orbit
+size modulo four.
 
 ### Reusable root-group sieve
 
-The preceding argument is parameter-free.  Let \(K=\mathbf F_{2^n}\), let
-\(|A|=2m\ge6\), and suppose a zero-defect pair satisfies
-\(N\notin A\) and \(r(N)=m\).  Then the \(m\) secants through the conic
-nucleus are the tangent perfect matching of \(A\).  If
+The preceding argument gives a parameter-free first gate.  Let
+\(K=\mathbf F_{2^n}\), let \(|A|=2m\ge6\), and let
 \[
  E=\{y\in\mathcal C:r(y)=m\},
  \qquad G=\operatorname{Stab}_{\operatorname{PGL}_2(K)}(E),
 \]
-the same conic-involution construction gives \(m\) distinct points \(t\)
-with \(|G\cap U_t|\ge4\).
+for any zero-defect pair.  If \(A\) has even one tangent secant to
+\(\mathcal C\), then
+\[
+ |E|\equiv1\pmod4.
+\]
 
-For \(m\ge2\), the characteristic-two subgroup classification therefore
+If \(A\) has \(T\ge2\) tangent secants, their contacts are distinct and give
+\(T\) distinct root groups with \(|G\cap U_t|\ge4\).  The
+characteristic-two subgroup classification then
 forces
 \[
  G\ \text{to be conjugate to}
  \operatorname{PGL}_2(2^d)
  \quad\text{for some }d\mid n,
- \qquad 2^d+1\ge m.
+ \qquad 2^d+1\ge T.
 \]
-Moreover all \(m\) tangent contacts lie on the corresponding conjugate
+Moreover all \(T\) tangent contacts lie on the corresponding conjugate
 \(\mathbf P^1(\mathbf F_{2^d})\), and \(E\) must be a union of its orbits
 on \(\mathbf P^1(K)\).
 
-Thus any future candidate with maximum nucleus index faces a two-step
-arithmetic gate before bracket or census work:
+Thus any future candidate with a tangent secant faces a congruence gate
+before bracket or census work.  If it has at least two tangent secants and
+passes that gate, it faces two further arithmetic gates:
 
-1. a proper subfield must have at least \(m-1\) elements; and
+1. a proper subfield must have at least \(T-1\) elements; and
 2. the prescribed value of \(|E|\) must be a sum of subfield-group orbit
    lengths.
 
-At \((q,m)=(4096,46)\), the first step leaves only \(2^d=64\) or \(4096\),
-and the second is exactly the contradiction below.
+At \((q,m,T)=(4096,46,46)\), the congruence already closes the candidate.
+If deliberately ignored, the subfield-size step leaves only
+\(2^d=64\) or \(4096\), and the orbit-sum step gives the independent
+contradiction below.
 
-## Subgroup classification and the final contradiction
+## Independent subfield-orbit backup
 
 Apply the characteristic-two classification of finite \(2\)-irregular
 subgroups of \(\operatorname{PGL}_2(K)\).
@@ -199,19 +213,21 @@ its orbit has size
  =64\cdot63=4032.
 \]
 Every invariant subset therefore has size \(0,65,4032\), or \(4097\),
-never 91.  This contradicts \(|E|=91\).
+never 91.  This independently contradicts \(|E|=91\), but is no longer
+load-bearing.
 
 ## Literature boundary
 
-The load-bearing group classification is Xander Faber, *Finite
+The secondary root-group sieve uses Xander Faber, *Finite
 \(p\)-Irregular Subgroups of \(\operatorname{PGL}(2,k)\)*,
 arXiv:1112.1999 (2011), especially the definitions and Theorems A--B in
 Section 2.  Read depth: partial, exact theorem statements and their
 characteristic-two cases.  Cached key `arXiv:1112.1999`, SHA-256
 `2c32c6ec0cef4f6a5d92fba5cf899e67d16c2413ccbb517df1c03be5ab3f1e00`.
 The theorem gives both the list of \(2\)-irregular types and the subfield
-condition used above.  The orbit calculation and the conic-involution
-lemma are proved directly here.
+condition used in the independent backup.  The primary Klein-four
+congruence proof uses no external classification theorem.  The orbit
+calculation and the conic-involution lemma are proved directly here.
 
 The hyperfocused terminology is background already audited in C593 through
 Giulietti--Montanucci, *On Hyperfocused Arcs in
@@ -228,9 +244,12 @@ The proof is analytic.  Its independently checkable gates are:
 2. the displayed determinant factorization and matrix square;
 3. injectivity of \(P\mapsto[M_P]\);
 4. zero-defect closure of \(E\) under every \(\sigma_P\);
-5. the four-group generated by the two involutions on each tangent pair;
-6. Faber's finite-subgroup classification; and
-7. the \(65+4032\) orbit decomposition of the quadratic subfield action.
+5. the four-group generated by the two involutions on one tangent pair; and
+6. its free action on the other 90 points of \(E\).
+
+Faber's finite-subgroup classification and the \(65+4032\) orbit
+decomposition independently replay the contradiction but are not theorem
+dependencies.
 
 No finite census, heuristic search, or untracked computational artifact is
 part of the theorem.
@@ -248,31 +267,56 @@ It separates the global mechanism into a subfield-size gate and an orbit-sum
 gate, so later work can test a candidate without repeating the special
 \(4096\) calculation.
 
-The Tao-style stress test asks where the proof genuinely uses the prescribed
-conic.  It uses it twice and indispensably: to place all 92 involutions in one
-\(\operatorname{PGL}_2\), and to make the same 91-point set \(E\) invariant
-under all of them.  The argument therefore does not silently claim
-nonrealizability of the naked star--matching design.  Conversely, it is
-insensitive to the closed resolution, binary-residue, tangent-spectrum, and
-quadratic/Arf gates, so it is a genuinely new global invariant rather than a
-repackaging of C556, C593, or C596.
+The `tt`+`ej2` pass then removed the classification from the primary proof.
+Tao's question is not “which large subgroup can contain 46 root groups?” but
+“what does one four-group do to the 91-point set?”  It fixes one point and
+acts freely on the rest, forcing \(|E|\equiv1\pmod4\).  The same pass weakens
+the reusable sieve's hypothesis: one tangent secant gives the congruence, and
+two distinct tangent secants already force the subfield-group alternative.
+
+The proof genuinely uses the prescribed conic twice and indispensably: to
+place the involutions in one \(\operatorname{PGL}_2\), and to make the same
+set \(E\) invariant under them.  It therefore does not silently claim
+nonrealizability of the naked star--matching design.
+
+## Degrees of freedom audit
+
+- **Number of tangent pairs:** locked down.  The primary contradiction needs
+  one, not all 46.  The exact value 46 matters only for the independent
+  subfield sieve.
+- **Maximum nucleus index:** removed from the reusable first gate.  Any
+  tangent secant in a zero-defect pair forces \(|E|\equiv1\pmod4\).
+- **Coordinates and choice of tangent:** quotiented out.  Projective
+  normalization identifies the common-fixed-point involutions with
+  translations, and every tangent pair gives the same four-orbit argument.
+- **Subfield choice:** irrelevant to the primary proof and locked to
+  \(64\) or \(4096\) only in the independent backup.
+- **Unexplained geometric freedom:** exactly one remains: without the
+  prescribed conic there is no canonical common \(\mathbf P^1\), invariant
+  set \(E\), or conic involution product.  Producing such a carrier from the
+  naked star--matching design would be a different theorem, not a loose
+  parameter in C625.
 
 ## Mystery ledger
 
 - **The \((4096,92)\) equality candidate:** settled negatively by the
-  polarity-stabilizer and subfield-orbit contradiction.
+  one-tangent Klein-four congruence; the subfield-orbit calculation is an
+  independent backup.
 - **Even characteristic-two zero defect:** settled completely at the
   parameter level; only the hyperoval scale remains.
 - **Why the local residues failed:** settled conceptually.  Two involutions
-  on each tangent pair amplify to a root four-group only after all local data
-  are placed in the common global conic stabilizer.
+  on one tangent pair amplify to a four-orbit congruence only after both act
+  on the same global conic set.
 - **Generality of the mechanism:** settled at the reusable level by the
-  root-group sieve.  A maximum-index nucleus forces a subfield
-  \(\operatorname{PGL}_2\) stabilizer large enough to contain every tangent
-  contact, followed by an exact orbit-sum constraint on \(E\).
+  congruence and root-group sieves.  One tangent forces
+  \(|E|\equiv1\pmod4\); two force a subfield
+  \(\operatorname{PGL}_2\) stabilizer and orbit-sum constraint.
 - **Naked rank-three \(\operatorname{MATCH}(92,46,1)\) realizability:** open
-  and outside the theorem's scope.  No evidence gap remains for the
-  prescribed-conic equality branch.
+  and explicitly outside the theorem's scope; it is not a residual mystery
+  of the prescribed-conic equality branch.
 - **Manuscript integration:** not performed because C625's routed scope owns
   the research report and handoff, not a new manuscript edit.  A later
   paper-edit task may promote the compact corollary and proof.
+- **Mystery close:** no genuine task-owned mathematical mystery remains.
+  The candidate, proof mechanism, minimal hypothesis, and reusable boundary
+  are all locked down.
