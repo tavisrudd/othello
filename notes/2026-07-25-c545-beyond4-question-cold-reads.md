@@ -38,6 +38,11 @@ Seroussi--Roth parameter range. Kaipa's Theorem 2 is not used for the radius:
 at length \(q+1\), its Proposition 1 hypothesis already assumes the desired
 covering-radius equality.
 
+An extra-juice pass added the original Dür citation, DOI
+`10.1016/0012-365X(94)90256-9`. Its publisher abstract confirms the
+completeness criterion; the exact if-and-only-if form used in the proof is
+checked in Kaipa Section IV.
+
 ## Questions ranked by expected value
 
 1. **Exact modular membership.** Classify the split-free subset of every
@@ -110,6 +115,9 @@ Settled:
   premise in the all-level range. A targeted specialist confirmed the
   conclusion and repaired the proof chain to Seroussi--Roth plus Dür, avoiding
   the circular use of Kaipa's Theorem 2.
+- The exact Seroussi--Roth endpoint also promotes redundancy six at \(q=8\);
+  only \(q=7\) needs the finite radius certificate, while the certificate
+  remains an independent \(q=8\) confirmation.
 - Clebsch factorization supplies a precise comparison about retained
   factorization data, not a proof input for the PRS classifications.
 - Both readers independently selected higher modular-carrier arithmetic as

@@ -65,6 +65,10 @@ the cited papers' bibliographies.
   `0b5c152819f91d5e410146ada3527b5b795a55fc6170c14a27e43b8c3e39a5f9`.
   This verifies the high-rate MDS nonextendability input; Dür's theorem in
   Kaipa Section IV supplies the separate completeness--radius equivalence.
+- Dür — **metadata and publisher abstract**, DOI
+  `10.1016/0012-365X(94)90256-9`; the abstract states the completeness
+  criterion for the covering radius of doubly extended Reed--Solomon codes.
+  The exact theorem form consumed here was checked in Kaipa Section IV.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256
