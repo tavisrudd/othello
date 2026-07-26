@@ -2181,6 +2181,30 @@
     {
       "legal_moves": 32,
       "moves_covered_by_terminal_reply_edges": 10,
+      "nontrivial_component_profiles": [
+        {
+          "degree_sequence": [
+            1,
+            1
+          ],
+          "edges": 1,
+          "vertices": 2
+        },
+        {
+          "degree_sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            4
+          ],
+          "edges": 7,
+          "vertices": 8
+        }
+      ],
       "opponent_complete_terminal_shell": false,
       "repair_edge": {
         "opponent": [
@@ -2193,11 +2217,57 @@
         ]
       },
       "terminal_moves": 0,
+      "terminal_reply_degree_histogram": [
+        [
+          0,
+          22
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
       "terminal_reply_edges": 8
     },
     {
       "legal_moves": 32,
       "moves_covered_by_terminal_reply_edges": 10,
+      "nontrivial_component_profiles": [
+        {
+          "degree_sequence": [
+            1,
+            1
+          ],
+          "edges": 1,
+          "vertices": 2
+        },
+        {
+          "degree_sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            4
+          ],
+          "edges": 7,
+          "vertices": 8
+        }
+      ],
       "opponent_complete_terminal_shell": false,
       "repair_edge": {
         "opponent": [
@@ -2210,11 +2280,57 @@
         ]
       },
       "terminal_moves": 0,
+      "terminal_reply_degree_histogram": [
+        [
+          0,
+          22
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
       "terminal_reply_edges": 8
     },
     {
       "legal_moves": 32,
       "moves_covered_by_terminal_reply_edges": 10,
+      "nontrivial_component_profiles": [
+        {
+          "degree_sequence": [
+            1,
+            1
+          ],
+          "edges": 1,
+          "vertices": 2
+        },
+        {
+          "degree_sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            4
+          ],
+          "edges": 7,
+          "vertices": 8
+        }
+      ],
       "opponent_complete_terminal_shell": false,
       "repair_edge": {
         "opponent": [
@@ -2227,11 +2343,57 @@
         ]
       },
       "terminal_moves": 0,
+      "terminal_reply_degree_histogram": [
+        [
+          0,
+          22
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
       "terminal_reply_edges": 8
     },
     {
       "legal_moves": 32,
       "moves_covered_by_terminal_reply_edges": 10,
+      "nontrivial_component_profiles": [
+        {
+          "degree_sequence": [
+            1,
+            1
+          ],
+          "edges": 1,
+          "vertices": 2
+        },
+        {
+          "degree_sequence": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            3,
+            4
+          ],
+          "edges": 7,
+          "vertices": 8
+        }
+      ],
       "opponent_complete_terminal_shell": false,
       "repair_edge": {
         "opponent": [
@@ -2244,6 +2406,28 @@
         ]
       },
       "terminal_moves": 0,
+      "terminal_reply_degree_histogram": [
+        [
+          0,
+          22
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ]
+      ],
       "terminal_reply_edges": 8
     }
   ],
@@ -2278,6 +2462,7 @@
           11
         ]
       ],
+      "selected_target_conic_projective_stabilizer_order": 1,
       "target_exact_grid_value": "N",
       "terminal_moves": [
         [
@@ -2316,7 +2501,8 @@
             15
           ]
         ]
-      ]
+      ],
+      "terminal_reply_graph_automorphism_order": 4
     },
     {
       "every_move_has_terminal_reply": true,
@@ -2360,6 +2546,7 @@
           8
         ]
       ],
+      "selected_target_conic_projective_stabilizer_order": 1,
       "target_exact_grid_value": "P",
       "terminal_moves": [],
       "terminal_reply_component_edge_counts": [
@@ -2440,7 +2627,8 @@
             8
           ]
         ]
-      ]
+      ],
+      "terminal_reply_graph_automorphism_order": 4
     }
   ],
   "q19_usable_exchange_orbits": [
@@ -2512,6 +2700,7 @@
     "q17_terminal_shell_uniform_lift": "FAIL: 8 edges cover only 10/32 moves per repair target",
     "q17_usable_replies": "0/32 in each marked target",
     "q19_P_target_direct_certificate": "no terminal move; every move has a terminal reply",
+    "q19_shell_symmetry_source": "abstract graph Aut order 4; projective target stabilizer order 1",
     "q19_unoriented_exchange_targets": "one P + one N",
     "q19_usable_replies": "4/51",
     "q19_usable_target_values": "2 P + 2 N",

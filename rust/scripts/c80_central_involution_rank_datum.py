@@ -8,7 +8,7 @@ import importlib.util
 import json
 import sys
 import tempfile
-from itertools import combinations
+from itertools import combinations, permutations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -392,6 +392,24 @@ def graph_components(adjacency: list[set[int]]) -> list[list[int]]:
     return sorted(result, key=lambda component: (len(component), component))
 
 
+def graph_automorphism_order(adjacency: list[set[int]]) -> int:
+    order = len(adjacency)
+    degrees = [len(neighbours) for neighbours in adjacency]
+    count = 0
+    for permutation in permutations(range(order)):
+        if any(degrees[vertex] != degrees[permutation[vertex]] for vertex in range(order)):
+            continue
+        if all(
+            ((right in adjacency[left]) == (
+                permutation[right] in adjacency[permutation[left]]
+            ))
+            for left in range(order)
+            for right in range(left + 1, order)
+        ):
+            count += 1
+    return count
+
+
 def q19_terminal_shells() -> list[dict]:
     q, t4, opponent_cell, repair_cell = COMPARE.REPAIRS[-1]
     kernel = SPOILER.SHELL.PositivePairingKernel(q)
@@ -461,6 +479,12 @@ def q19_terminal_shells() -> list[dict]:
                     // 2
                     for component in components
                 ),
+                "terminal_reply_graph_automorphism_order": (
+                    graph_automorphism_order(adjacency)
+                ),
+                "selected_target_conic_projective_stabilizer_order": len(
+                    LIVE.stabilizer_matrices(game, target)
+                ),
                 "every_move_has_terminal_reply": all(adjacency),
             }
         )
@@ -476,6 +500,7 @@ def q17_terminal_edge_controls() -> list[dict]:
         target |= 1 << LIVE.cell_index(game, opponent_cell)
         target |= 1 << LIVE.cell_index(game, repair_cell)
         cells = list(GEOMETRY.bits(game.legal_mask(target)))
+        adjacency = [set() for _ in cells]
         terminal_moves = 0
         terminal_edges = 0
         covered = set()
@@ -490,6 +515,28 @@ def q17_terminal_edge_controls() -> list[dict]:
                     continue
                 terminal_edges += 1
                 covered.update((first, second))
+                right = cells.index(second)
+                adjacency[left].add(right)
+                adjacency[right].add(left)
+        components = graph_components(adjacency)
+        nontrivial = []
+        for component in components:
+            component_set = set(component)
+            edge_count = sum(
+                len(adjacency[vertex] & component_set)
+                for vertex in component
+            ) // 2
+            if edge_count:
+                nontrivial.append(
+                    {
+                        "vertices": len(component),
+                        "edges": edge_count,
+                        "degree_sequence": sorted(
+                            len(adjacency[vertex] & component_set)
+                            for vertex in component
+                        ),
+                    }
+                )
         result.append(
             {
                 "repair_edge": {
@@ -500,6 +547,11 @@ def q17_terminal_edge_controls() -> list[dict]:
                 "terminal_moves": terminal_moves,
                 "terminal_reply_edges": terminal_edges,
                 "moves_covered_by_terminal_reply_edges": len(covered),
+                "terminal_reply_degree_histogram": [
+                    [degree, sum(len(neighbours) == degree for neighbours in adjacency)]
+                    for degree in sorted({len(neighbours) for neighbours in adjacency})
+                ],
+                "nontrivial_component_profiles": nontrivial,
                 "opponent_complete_terminal_shell": len(covered) == len(cells),
             }
         )
@@ -551,6 +603,8 @@ def build_certificate() -> dict:
     ]
     assert q19_shells[1]["terminal_reply_component_orders"] == [2, 5]
     assert q19_shells[1]["terminal_reply_component_edge_counts"] == [1, 5]
+    assert q19_shells[1]["terminal_reply_graph_automorphism_order"] == 4
+    assert q19_shells[1]["selected_target_conic_projective_stabilizer_order"] == 1
     q17_terminal_controls = q17_terminal_edge_controls()
     assert all(
         (
@@ -560,6 +614,20 @@ def build_certificate() -> dict:
             row["moves_covered_by_terminal_reply_edges"],
         )
         == (32, 0, 8, 10)
+        for row in q17_terminal_controls
+    )
+    assert all(
+        row["terminal_reply_degree_histogram"]
+        == [[0, 22], [1, 7], [2, 1], [3, 1], [4, 1]]
+        and row["nontrivial_component_profiles"]
+        == [
+            {"vertices": 2, "edges": 1, "degree_sequence": [1, 1]},
+            {
+                "vertices": 8,
+                "edges": 7,
+                "degree_sequence": [1, 1, 1, 1, 1, 2, 3, 4],
+            },
+        ]
         for row in q17_terminal_controls
     )
     return {
@@ -608,6 +676,9 @@ def build_certificate() -> dict:
             ),
             "q17_terminal_shell_uniform_lift": (
                 "FAIL: 8 edges cover only 10/32 moves per repair target"
+            ),
+            "q19_shell_symmetry_source": (
+                "abstract graph Aut order 4; projective target stabilizer order 1"
             ),
             "uniform_c80_candidate": False,
         },

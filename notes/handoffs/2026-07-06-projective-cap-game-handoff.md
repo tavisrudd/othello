@@ -1143,11 +1143,16 @@ of that q19 target: no move is terminal, every move has a terminal reply, and
 the six-edge reply graph is `K2` disjoint from a triangle with a length-two
 tail. The bad orbit has two terminal moves and is directly N. This terminal
 shell does not lift to q17: eight terminal edges cover only `10/32` moves per
-repair target. Direct projective determinant replay agrees with grid legality
-on every response. Thus the central torus element cannot be the proof datum
-even locally; the successor needs a state-dependent algebraic obligation
-rewrite before copycat, not another edge-only involution. C82 remains gated.
-Report+cert:
+repair target. The `ej3` pass shows the q19 graph symmetry is accidental:
+its automorphism group has order four but the selected target's
+conic-projective stabilizer is trivial. The q17 nonisolated terminal graph is
+`K2` plus an eight-vertex tree with degree sequence
+`1,1,1,1,1,2,3,4`, accompanied by 22 isolates. Thus the common shape is a
+pair seed plus one ramified component, not a bounded state orbital; the
+successor must mark exchange history and absorb an algebraic isolate locus
+without listing it. Direct projective determinant replay agrees with grid
+legality on every response. The central torus element cannot be the proof
+datum even locally; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-central-involution-rank-datum.md`](../2026-07-25-c80-central-involution-rank-datum.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**

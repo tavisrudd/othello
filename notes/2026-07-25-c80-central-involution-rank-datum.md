@@ -183,8 +183,8 @@ python3 rust/scripts/c80_central_involution_rank_datum.py --check
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_central_involution_rank_datum.py` | 22,217 | `41a452797a23c5f2cfbcd92e3724f135f0c812ceb66f2e1f0fddab95f9fa459f` |
-| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 48,559 | `a0a3a3d3aa41a98e8bc0aaf701f380878c059e0d85b0ad1dc0d4a8ba10a019c0` |
+| `rust/scripts/c80_central_involution_rank_datum.py` | 25,076 | `7888a330452f7fe4c7cc8d1905aba23d4d2d3d0b8cdaca66eae5c9e0146230f1` |
+| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 51,692 | `286e6c1c601f743c76187276a7149b9a30e872947a04df8229acfe0b123271c7` |
 
 The JSON is canonical sorted data. `--check` regenerates it in a temporary
 directory and requires byte equality. Load-bearing source hashes are embedded
@@ -268,6 +268,48 @@ whether the q17 `4→2→0` thread replaces terminality by the same
 pairing-plus-one-obligation schema at the next structural boundary. Do not
 promote terminal distance two itself as uniform.
 
+## `ej3` — accidental graph symmetry and the q17 obligation tree
+
+The q19 terminal shell has abstract graph automorphism group of order four:
+one involution swaps the `K2`, and one swaps the two symmetric triangle
+vertices in the lollipop component. But exhaustive conic-`PGL₂(19)`
+stabilizer enumeration gives order one for the selected ten-point target.
+None of the nontrivial reply-graph automorphisms comes from a projective
+symmetry of the state.
+
+This kills the cheapest algebraization of the shell. The six terminal edges
+cannot be presented as one or two stabilizer orbitals of the current state;
+their abstract `C2×C2` symmetry is a combinatorial coincidence. Any
+coordinate-free formula must either:
+
+1. retain marked construction history—the original repair edge and the good
+   central-involution exchange—as proof datum; or
+2. find a new incidence characterization of terminal coverage not explained
+   by automorphisms.
+
+The q17 terminal graph identifies what the history-marked datum would have to
+carry. In every one of the four projectively equivalent repair targets its
+nonisolated part is
+
+```text
+K2
+⊔ an eight-vertex, seven-edge tree
+  with degree sequence 1,1,1,1,1,2,3,4,
+```
+
+plus `22 K1` isolated obligation vertices. The `K2` seed persists from q19,
+but the ramified component grows from a five-vertex unicyclic lollipop to an
+eight-vertex tree and loses opponent completeness because of the 22
+isolates. Thus “pairing plus one ramified component” is the common finite
+shape; bounded terminal-shell size is not.
+
+This is the third-order proof-design correction. The next datum should not
+try to algebraize the q19 graph as a state orbital. It should mark the
+exchange history and attach a rule that absorbs isolated obligation vertices
+into a growing ramified component while lowering `Ω`. The q17
+`4→2→0` thread is then the first contraction test. Anti-packing still
+forbids listing the 22 isolates; they need an algebraic locus.
+
 ## Mystery ledger
 
 - **[SETTLED] Is the central involution canonical and transport-natural?**
@@ -289,6 +331,15 @@ promote terminal distance two itself as uniform.
   Yes. Two of its four legal moves are terminal.
 - **[SETTLED negative `ej2`] Does the same terminal shell cover q17?** No.
   Each repair target has eight terminal edges covering only `10/32` moves.
+- **[SETTLED negative `ej3`] Is the q19 `K2`-plus-lollipop symmetry induced
+  projectively?** No. The graph automorphism group has order four, while the
+  selected target's conic-projective stabilizer is trivial.
+- **[SETTLED `ej3`] What is the exact q17 terminal obligation shape?** The
+  nonisolated graph is `K2` plus an eight-vertex tree of degree sequence
+  `1,1,1,1,1,2,3,4`, accompanied by 22 isolates.
+- **[OPEN — C80 `ej3`] Can a history-marked algebraic datum absorb the q17
+  isolate locus into the ramified component without listing it?** This is
+  the sharpened obligation-rewrite target.
 - **[SETTLED `ej`] Is the failure caused by the normalized grid legality
   implementation?** No. Direct projective determinant replay agrees on every
   response.
@@ -308,4 +359,4 @@ involution is mathematically clean and computationally natural, but it
 collides head-on with the selected-state geometry. The next attempt must
 rewrite obligations, not merely choose a better torus element.
 
-go C80 cap test one state-dependent algebraic obligation rewrite before copycat
+go C80 cap test a history-marked algebraic rewrite of the q17 isolate locus
