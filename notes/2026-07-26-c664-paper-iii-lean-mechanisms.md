@@ -16,10 +16,9 @@ certificate array, `native_decide`, project-specific axiom, or admitted
 declaration.
 
 The import-only axiom gate is
-`RelativeConicArcs.Gates.ClebschOrientationMechanisms`.  Its shared-tree build
-and exact-current confirmation remain blocked by the foreign build owner for
-`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the two leaves elaborate
-individually through `lean/scripts/guarded-lean`.
+`RelativeConicArcs.Gates.ClebschOrientationMechanisms`.  Its serialized
+import-only build, twelve-terminal axiom audit, and exact-current aggregate
+confirmation are green.
 
 ## Involutive odd-unit mechanism
 
@@ -97,8 +96,11 @@ acceptance crown.
   green, warning-free;
 - `lean/scripts/guarded-lean RelativeConicArcs/KneserPairEigenspace.lean`:
   green, warning-free;
-- import-only gate and exact-target freshness: waiting for the foreign
-  shared-tree build owner to release the build lock.
+- `RelativeConicArcs.Gates.ClebschOrientationMechanisms`: import-only target
+  current and aggregate gate passed under the serialized `single` profile;
+- exact replay reports only `propext`, `Classical.choice`, and `Quot.sound`
+  across all twelve audited terminals.  It reports no project-specific axiom,
+  admitted declaration, native evaluation, or imported certificate.
 
 ## Mystery ledger
 
@@ -119,5 +121,5 @@ acceptance crown.
 ## Vibe check
 
 Strong mathematical result with a clean trust boundary.  The formalization
-replaces both coordinate-level claims by reusable structural theorems; only
-shared-tree build ownership prevents administrative completion.
+replaces both coordinate-level claims by reusable structural theorems, and the
+serialized import gate now closes the task.

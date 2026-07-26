@@ -660,15 +660,15 @@ evidence pairs, and the warning-free build pass the aggregate gate. The
 report and mystery ledger are in
 `notes/2026-07-26-c579-paper-iii-synthesis-cold-review.md`.
 
-C664 has implemented the generic involutive odd-unit splitting and the
+C664 is complete.  It implements the generic involutive odd-unit splitting and the
 general \(K(n,2)\) pair-sum eigenspace theorem, including the full
 four-dimensional Petersen \((-2)\)-eigenspace at \(n=5\).  Both symbolic
 leaves elaborate warning-free with no generated data, imported certificate,
-`native_decide`, new axiom, or admitted declaration.  The import-only gate and
-exact-current confirmation wait behind the foreign
-`ArcsCompleteOutsideConic` build owner, so C664 remains open.  The optional
-golden-exchanger leaf is omitted.  The implementation report and mystery
-ledger are in
+`native_decide`, new axiom, or admitted declaration.  The serialized
+import-only gate and exact-current aggregate replay pass, and all twelve
+audited terminals use only `propext`, `Classical.choice`, and `Quot.sound`.
+The optional golden-exchanger leaf is omitted.  The implementation report and
+mystery ledger are in
 `notes/2026-07-26-c664-paper-iii-lean-mechanisms.md`; the Paper III release
 gate remains independent of Lean pending a separate correspondence decision.
 
