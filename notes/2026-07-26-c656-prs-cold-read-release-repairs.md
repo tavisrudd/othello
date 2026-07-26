@@ -98,6 +98,13 @@ supplement consistency gate also passes before addition of the C656 replay.
 Complete replay closure, refreshed hashes, the Lean gate, fresh-history
 export, and two blind final readers remain open.
 
+The deterministic exporter produced separate paper and Lean histories at
+source commit `7db291a1325fd922c15ccb5dd414ddbfd82a496c`.  In the clean candidate,
+the supplement consistency gate passes, the canonical PDF rebuilds
+byte-for-byte with SHA-256
+`81eeae9fdfec14b4518892074390fe252fa02ed8df596974bb3d53e333d31a7b`,
+and the 23-page TIT build passes.
+
 ## Mystery ledger
 
 Settled:
