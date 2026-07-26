@@ -18,7 +18,7 @@ The final theorem applies these facts to a partial square-root interpolation.  O
 line, the product of all preceding line equations divides the residual whenever the preceding
 roots already agree with one homogeneous ambient form.  The theorem assumes the stated
 nonincidence and noncollinearity conditions on the plane representatives; it does not construct a
-projective arc, a dual Chow product, or a degree-preserving quotient lift.
+projective arc or a dual Chow product.
 -/
 
 namespace RelativeConicArcs
@@ -113,6 +113,49 @@ theorem pairwise_restrictedDeterminant_ne_zero_of_normal_eq_scale
       lineCoordinates center (covector i) (covector j) scale
       hnormal hscale (hnoncollinear hij)
 
+/-- The normal of a parametrized line restricts to the zero binary coefficient vector. -/
+theorem planeLineRestrictedCoefficients_parametrizedPlaneLineNormal_eq_zero
+    (lineCoordinates : Fin 3 → Fin 2 → K) :
+    planeLineRestrictedCoefficients lineCoordinates
+        (parametrizedPlaneLineNormal lineCoordinates) = 0 := by
+  funext j
+  fin_cases j <;>
+    simp [planeLineRestrictedCoefficients, parametrizedPlaneLineNormal,
+      Fin.sum_univ_succ] <;>
+    ring
+
+/-- If the normal of a parametrized line is a nonzero scalar multiple of `center`, the plane-linear
+equation represented by `center` restricts identically to zero on that line. -/
+theorem planeLineRestriction_center_eq_zero_of_normal_eq_scale
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (center : Fin 3 → K) (scale : K)
+    (hnormal :
+      parametrizedPlaneLineNormal lineCoordinates =
+        fun i => scale * center i)
+    (hscale : scale ≠ 0) :
+    planeLineRestriction lineCoordinates
+        (homogeneousLinearPolynomial center) = 0 := by
+  rw [planeLineRestriction_homogeneousLinearPolynomial]
+  have hcoeff :
+      planeLineRestrictedCoefficients lineCoordinates center = 0 := by
+    funext j
+    apply mul_left_cancel₀ hscale
+    calc
+      scale * planeLineRestrictedCoefficients lineCoordinates center j =
+          planeLineRestrictedCoefficients lineCoordinates
+            (fun i => scale * center i) j := by
+        simp [planeLineRestrictedCoefficients, Finset.mul_sum, mul_assoc]
+      _ = planeLineRestrictedCoefficients lineCoordinates
+            (parametrizedPlaneLineNormal lineCoordinates) j := by
+        rw [← hnormal]
+      _ = 0 := by
+        rw [
+          planeLineRestrictedCoefficients_parametrizedPlaneLineNormal_eq_zero]
+        rfl
+      _ = scale * 0 := by simp
+  rw [hcoeff]
+  simp [homogeneousLinearPolynomial]
+
 end PlaneDeterminants
 
 section ExactIntersectionRepresentatives
@@ -183,6 +226,74 @@ theorem MvPolynomial.IsHomogeneous.planeLineRestriction
         exact MvPolynomial.isHomogeneous_C_mul_X (lineCoordinates i j) j)
   rw [Nat.one_mul] at hrestriction
   exact hrestriction
+
+/-- The homogeneous component in the degree of a homogeneous polynomial is the polynomial itself. -/
+theorem MvPolynomial.IsHomogeneous.homogeneousComponent_eq_self
+    {F : MvPolynomial (Fin 2) K} {degree : ℕ}
+    (hF : F.IsHomogeneous degree) :
+    MvPolynomial.homogeneousComponent degree F = F := by
+  ext monomial
+  rw [MvPolynomial.coeff_homogeneousComponent]
+  by_cases hdegree : monomial.degree = degree
+  · simp [hdegree]
+  · simp [hdegree, hF.coeff_eq_zero hdegree]
+
+/-- A homogeneous component in a different degree of a homogeneous polynomial vanishes. -/
+theorem MvPolynomial.IsHomogeneous.homogeneousComponent_eq_zero_of_ne
+    {F : MvPolynomial (Fin 2) K} {firstDegree secondDegree : ℕ}
+    (hF : F.IsHomogeneous firstDegree) (hne : firstDegree ≠ secondDegree) :
+    MvPolynomial.homogeneousComponent secondDegree F = 0 := by
+  ext monomial
+  rw [MvPolynomial.coeff_homogeneousComponent]
+  by_cases hdegree : monomial.degree = secondDegree
+  · have hnotFirst : monomial.degree ≠ firstDegree := by
+      intro heq
+      exact hne (heq.symm.trans hdegree)
+    simp [hdegree, hF.coeff_eq_zero hnotFirst]
+  · simp [hdegree]
+
+/-- Homogeneous substitution commutes with extraction of every homogeneous component. -/
+theorem planeLineRestriction_homogeneousComponent
+    (lineCoordinates : Fin 3 → Fin 2 → K)
+    (degree : ℕ) (F : MvPolynomial (Fin 3) K) :
+    planeLineRestriction lineCoordinates
+        (MvPolynomial.homogeneousComponent degree F) =
+      MvPolynomial.homogeneousComponent degree
+        (planeLineRestriction lineCoordinates F) := by
+  classical
+  conv_rhs =>
+    rw [← MvPolynomial.sum_homogeneousComponent F]
+  rw [map_sum, map_sum]
+  by_cases hdegree :
+      degree ∈ Finset.range (F.totalDegree + 1)
+  · rw [Finset.sum_eq_single degree]
+    · exact
+        (MvPolynomial.IsHomogeneous.homogeneousComponent_eq_self
+          (MvPolynomial.IsHomogeneous.planeLineRestriction
+            (MvPolynomial.homogeneousComponent_isHomogeneous degree F)
+            lineCoordinates)).symm
+    · intro other hother hne
+      exact
+        MvPolynomial.IsHomogeneous.homogeneousComponent_eq_zero_of_ne
+          (MvPolynomial.IsHomogeneous.planeLineRestriction
+            (MvPolynomial.homogeneousComponent_isHomogeneous other F)
+            lineCoordinates)
+          hne
+    · exact fun hnotMem => (hnotMem hdegree).elim
+  · have htotal : F.totalDegree < degree := by
+      simpa [Finset.mem_range, Nat.lt_add_one_iff] using hdegree
+    rw [MvPolynomial.homogeneousComponent_eq_zero degree F htotal, map_zero]
+    symm
+    apply Finset.sum_eq_zero
+    intro other hother
+    apply
+      MvPolynomial.IsHomogeneous.homogeneousComponent_eq_zero_of_ne
+        (MvPolynomial.IsHomogeneous.planeLineRestriction
+          (MvPolynomial.homogeneousComponent_isHomogeneous other F)
+          lineCoordinates)
+    intro heq
+    apply hdegree
+    simpa [heq] using hother
 
 end HomogeneousRestrictions
 
@@ -319,10 +430,11 @@ theorem planeLineRestriction_finsetLineProduct_dvd_root_sub_restriction
   rw [hproduct] at hdiv
   simpa only [map_prod] using hdiv
 
-/-- A finite family of carrier roots has a homogeneous ambient extension once divisible
-homogeneous residuals admit homogeneous one-line corrections.  The incidence hypotheses discharge
-the divisibility premise: distinct centers give nonzero restricted equations, and triples of
-distinct centers give nonzero plane determinants. -/
+/-- A finite family of carrier roots has a homogeneous ambient extension when every line
+restriction is surjective.  The incidence hypotheses discharge the divisibility premise: distinct
+centers give nonzero restricted equations, and triples of distinct centers give nonzero plane
+determinants.  Taking the required homogeneous component of each ordinary quotient-lift correction
+preserves all line restrictions and the prescribed degree. -/
 theorem exists_finset_homogeneous_carrierRoot_extension
     [DecidableEq P]
     (lineCoordinates : P → Fin 3 → Fin 2 → K)
@@ -352,18 +464,11 @@ theorem exists_finset_homogeneous_carrierRoot_extension
     (hnoncollinear :
       ∀ ⦃x y z⦄, x ≠ y → x ≠ z → y ≠ z →
         planeVectorDeterminant (center x) (center y) (center z) ≠ 0)
-    (hhomogeneousCorrection :
-      ∀ (s : Finset P) (x : P) (G : MvPolynomial (Fin 3) K),
-        x ∉ s →
-        G.IsHomogeneous degree →
-        (∀ y ∈ s, planeLineRestriction (lineCoordinates y) G = root y) →
-        planeLineRestriction (lineCoordinates x)
-            (∏ y ∈ s, homogeneousLinearPolynomial (center y)) ∣
-          root x - planeLineRestriction (lineCoordinates x) G →
-        ∃ D : MvPolynomial (Fin 3) K,
-          D.IsHomogeneous degree ∧
-          (∀ y ∈ s, planeLineRestriction (lineCoordinates y) D = 0) ∧
-          planeLineRestriction (lineCoordinates x) (G + D) = root x) :
+    (hrestrictionSurjective :
+      ∀ x,
+        Function.Surjective
+          (planeLineRestriction (lineCoordinates x) :
+            MvPolynomial (Fin 3) K → MvPolynomial (Fin 2) K)) :
     ∀ s : Finset P,
       ∃ G : MvPolynomial (Fin 3) K,
         G.IsHomogeneous degree ∧
@@ -405,14 +510,66 @@ theorem exists_finset_homogeneous_carrierRoot_extension
           lineCoordinates center ambient root degree hrootHomogeneous
           hsquare hlineSurjective s x G hGhomogeneous hG hne
           (scale x) (hnormal x) (hscale x) htriple
-      obtain ⟨D, hDhomogeneous, hDzero, hxD⟩ :=
-        hhomogeneousCorrection s x G hx hGhomogeneous hG hdiv
-      refine ⟨G + D, hGhomogeneous.add hDhomogeneous, ?_⟩
+      obtain ⟨D, hDzero, hxD⟩ :=
+        exists_single_correction_of_surjective_of_residual_dvd
+          (fun y => planeLineRestriction (lineCoordinates y))
+          root s x G
+          (∏ y ∈ s, homogeneousLinearPolynomial (center y))
+          (hrestrictionSurjective x)
+          (by
+            intro y hy
+            rw [map_prod]
+            exact
+              Finset.prod_eq_zero hy
+                (planeLineRestriction_center_eq_zero_of_normal_eq_scale
+                  (lineCoordinates y) (center y) (scale y)
+                  (hnormal y) (hscale y)))
+          hdiv
+      let homogeneousCorrection : MvPolynomial (Fin 3) K :=
+        MvPolynomial.homogeneousComponent degree D
+      have hDhomogeneous :
+          homogeneousCorrection.IsHomogeneous degree :=
+        MvPolynomial.homogeneousComponent_isHomogeneous degree D
+      have hDzero' :
+          ∀ y ∈ s,
+            planeLineRestriction (lineCoordinates y)
+              homogeneousCorrection = 0 := by
+        intro y hy
+        dsimp [homogeneousCorrection]
+        rw [planeLineRestriction_homogeneousComponent, hDzero y hy]
+        simp
+      have hresidualHomogeneous :
+          (planeLineRestriction (lineCoordinates x) D).IsHomogeneous
+            degree := by
+        have hDrestriction :
+            planeLineRestriction (lineCoordinates x) D =
+              root x - planeLineRestriction (lineCoordinates x) G := by
+          have hxD' := hxD
+          rw [map_add] at hxD'
+          rw [eq_sub_iff_add_eq]
+          simpa [add_comm] using hxD'
+        rw [hDrestriction]
+        exact
+          (hrootHomogeneous x).sub
+            (MvPolynomial.IsHomogeneous.planeLineRestriction
+              hGhomogeneous (lineCoordinates x))
+      have hxD' :
+          planeLineRestriction (lineCoordinates x)
+              (G + homogeneousCorrection) = root x := by
+        dsimp [homogeneousCorrection]
+        rw [map_add,
+          planeLineRestriction_homogeneousComponent,
+          MvPolynomial.IsHomogeneous.homogeneousComponent_eq_self
+            hresidualHomogeneous]
+        simpa only [map_add] using hxD
+      refine
+        ⟨G + homogeneousCorrection,
+          hGhomogeneous.add hDhomogeneous, ?_⟩
       intro y hy
       rw [Finset.mem_insert] at hy
       rcases hy with rfl | hy
-      · exact hxD
-      · rw [map_add, hDzero y hy, add_zero]
+      · exact hxD'
+      · rw [map_add, hDzero' y hy, add_zero]
         exact hG y hy
 
 end CarrierResidualDivisibility
