@@ -340,8 +340,8 @@ standing for them is introduced.
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - `RelativeConicArcs.Gates.SquareRootCarrier`: exact build and aggregate
   confirmation **PASS**, `23.40s`, maximum resident set size `1,386,012 KiB`.
-- `RelativeConicArcs.Gates.ChowRestrictionDescent`: exact build **PASS**,
-  `6.86s`, maximum resident set size `1,375,248 KiB`; the subsequent
-  trace-current aggregate confirmation **PASS**.
-- `RelativeConicArcs.Gates.CarrierArcBound`: exact build and aggregate
-  confirmation **PASS**, `5.18s`, maximum resident set size `1,278,312 KiB`.
+- `RelativeConicArcs.Gates.ChowRestrictionDescent`: thirty-one-terminal exact
+  build **PASS**, `9.34s`, maximum resident set size `1,371,568 KiB`.
+- `RelativeConicArcs.Gates.CarrierArcBound`: thirty-one-terminal exact build
+  **PASS**, `14.87s`, maximum resident set size `1,404,096 KiB`; the joint
+  trace-only aggregate confirmation **PASS**.
