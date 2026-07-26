@@ -94,11 +94,18 @@ exits zero with
 ## Literature delta gate
 
 The 2026-07-25 audit records the theorem-level Wang--Wu--Hu comparison and
-its exact full-text cache record.  The C656 delta refreshes the two pinned
-PRS citation graphs in OpenAlex, Crossref, and Semantic Scholar: all six
-counts are unchanged.  Four exact arXiv submission-date queries returned
-valid zero-result feeds, and the narrowed manuscript's remaining qualified
-R5--R7 positioning is reconciled.  No new source was promoted.
+its exact full-text cache record.  The bounded follow-up is
+`notes/2026-07-26-c656-prs-literature-delta.md`.  All four pinned arXiv
+versions are unchanged.  The two pinned PRS citation graphs retain their
+OpenAlex/Crossref counts `21/19` and `20/16`; Semantic Scholar returned HTTP
+429, so no fresh three-graph closure is claimed.  Eight exact arXiv object
+searches and six recent-index Crossref probes located no pre-empting work.
+One old access gap was closed: the newly reachable publisher abstract for
+Cheng--Wu--Zhou, DOI `10.1016/j.ffa.2026.102882`, confirms that it studies a
+non-Reed--Solomon evaluation code and leaves its even \(k=q-4\) case open.
+The narrowed manuscript's qualified R5--R7 positioning is unchanged; the
+MathSciNet, Google Scholar, current Semantic Scholar, and full-text
+Cheng--Wu--Zhou gaps remain explicit.
 
 ## Validation so far
 
