@@ -239,6 +239,81 @@ field sieve, and narrows the asymptotic conic-filling window from coefficient
 reductions remain in this report: without a support classification they
 would enlarge the manuscript without strengthening its classification.
 
+## `aa` follow-up: a computation-free Paper I
+
+The right alternative attack changes the output shape.  Paper I's headline
+rigidity theorem is already human: the line bound and chord-defect identity
+force ten Brianchon points, and Dye's equality theorem identifies the
+Clebsch orbit.  Computation is load-bearing only for three strengthenings:
+
+1. the degree-at-most-three recognition theorem and its fifteen-class table;
+2. the numerical gap among all six-arcs in \(\operatorname{PG}(2,11)\);
+3. the \(k=7,8\) terminal classification.
+
+The highest-EV non-bloating revision is therefore **subtractive**.  Retain
+the fixed-\(q=11\) rigidity theorem, decoder reconstruction, universal chord
+defect, and partial-cover window.  Retain any broader small-\(k\) clause only
+when its cited finite-graph input has a conceptual proof acceptable under the
+same standard.  Remove the three items above from the manuscript and preserve
+them in the computational companion record.  The executable replay table can
+then leave the paper as well; exact scripts remain archival cross-checks
+rather than proof routes.
+This produces a shorter paper whose theorem chain is entirely human, at the
+cost of giving up secondary strengthenings rather than replacing them by
+several pages of small-field algebra.
+
+There are two less attractive alternatives.
+
+- A full replacement would need both a human exterior-arc theorem for the
+  terminal fields and a human Hilbert-function argument for the low-degree
+  and gap claims.  These are different problems, so solving them would add
+  two proof mechanisms and work against the non-bloating requirement.
+- A hybrid could retain the classification through eight points if a single
+  short proposition proves that an arc whose chords are passant has size at
+  most six for \(q=13,17,19\).  Until such a proposition exists, retaining
+  the finite classification necessarily retains a load-bearing search.
+
+The strongest concrete route toward that one-proposition hybrid is Segre's
+lemma of tangents.  At a saturated endpoint \(q=2k-3\), let
+\[
+ S_P(X)=\prod_{\substack{\ell\ni P\\ \ell\text{ secant to }\mathcal C}}
+ \ell(X).
+\]
+The saturation theorem says that \(S_P\) is exactly a tangent polynomial of
+the \(k\)-arc at \(P\).  With \(t=q+2-k=(q+1)/2\), Segre's lemma forces, for
+every distinct \(P,Q,R\in A\),
+\[
+ S_P(Q)S_Q(R)S_R(P)
+ =(-1)^{t+1}S_P(R)S_R(Q)S_Q(P).
+\]
+Thus the \(q=11,k=7\) and \(q=13,k=8\) searches reduce to a signed
+three-point compatibility problem intrinsic to the conic, rather than a
+search over arcs.  A short spectral or two-graph bound for this compatibility
+relation would be an admissible human replacement.  The ordinary
+pair-association scheme cannot supply it: its \(q=13\) Delsarte bound permits
+size eight.  The arc condition first appears in the displayed three-point
+identity.
+
+For the unsaturated cases, a second exact identity exposes the missing
+mixed-type information.  If \(r_X\) is the number of chord lines through an
+off-conic point \(X\), then
+\[
+ 2\sum_{\substack{X\text{ external}\\\text{to }\mathcal C}}(r_X-1)
+   =(q+1)\left(\binom{k}{2}-q\right).
+\]
+Indeed, on each tangent to \(\mathcal C\), the \(m=\binom{k}{2}\) chord
+lines cover its \(q\) off-conic points, giving excess \(m-q\); summing over
+the \(q+1\) tangents counts every external point twice and every internal
+point zero times.  Combining this type-sensitive moment with Segre
+compatibility is the most plausible human route for
+\((7,13),(8,17),(8,19)\).  Neither identity alone excludes a terminal pair,
+so neither belongs in the manuscript yet.
+
+**Admission gate.**  Reintroduce a deleted strengthening only if one human
+proposition replaces its whole exhaustive route and its proof fits in about
+one manuscript page without a field-by-field matrix table.  Moving the same
+enumeration into association-scheme or code language does not meet the gate.
+
 ## Vibe check
 
 The geometry now has a clean human boundary theorem, but the desired human
