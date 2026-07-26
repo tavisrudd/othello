@@ -1277,8 +1277,17 @@
       "last": 635,
       "purpose": "remove redundant signed-row independence hypothesis and audit remaining Gale formalization degrees of freedom",
       "sequence": 142
+    },
+    {
+      "count": 1,
+      "first": 636,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 636,
+      "purpose": "formalize the uniform Veronese full-support and quadratic-hull criteria from C628",
+      "sequence": 143
     }
   ],
-  "next_id": 636,
+  "next_id": 637,
   "schema": "codex-task-id-allocations-v1"
 }
