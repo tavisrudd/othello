@@ -223,6 +223,25 @@ decomposition is unique up to one-site scalars, which do not change
 \(L_\psi\hookrightarrow\Gamma_\psi\) sends a label
 \(\ell\) to the projective Pauli \([W_\ell]\).
 
+\begin{lemma}[Pauli phase correction]\label{lem:pauli-phase-correction}
+Let \(\psi\) and \(\phi\) be stabilizer states with Lagrangian label groups
+\(L_\psi\) and \(L_\phi\).  If a product Clifford \(U\) induces a
+symplectic label map carrying \(L_\psi\) onto \(L_\phi\), then there is a
+product Pauli \(W_v\) such that
+\(W_vU\lvert\psi\rangle\in\mathbb C\lvert\phi\rangle\).
+\end{lemma}
+
+\begin{proof}
+The state \(U\lvert\psi\rangle\) is stabilized on the same Pauli axes as
+\(\lvert\phi\rangle\), possibly with a different stabilizer character.
+The trace-symplectic pairing identifies the ambient label space modulo
+\(L_\phi=L_\phi^\perp\) with the character dual of \(L_\phi\).  Choose
+\(v\) whose pairing character is the inverse of the discrepancy.
+Conjugation by the product Pauli \(W_v\) cancels it.  The corrected state
+and \(\lvert\phi\rangle\) therefore lie in the same one-dimensional joint
+stabilizer eigenspace.
+\end{proof}
+
 \begin{proof}[Proof of Theorem~\ref{thm:atlas-classification}]
 First fix the party labels.  A block symplectic map
 \(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
@@ -237,13 +256,10 @@ unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
 Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
 generate the full label groups, \(F L_\psi=L_\phi\).
 
-Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\).  Their
-product carries the
-stabilizer axes of \(\psi\) to those of \(\phi\), possibly with a
-different stabilizer character.  The trace-symplectic pairing identifies
-the ambient label space modulo \(L_\phi=L_\phi^\perp\) with
-\(L_\phi^*\), so a product Pauli cancels that character.  Hence an atlas
-equivalence lifts to an LC equivalence.  The reverse implication follows
+Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\), and
+Lemma~\ref{lem:pauli-phase-correction} supplies the product-Pauli
+correction.  Hence an atlas equivalence lifts to an LC equivalence.
+The reverse implication follows
 from the induced label action, and Theorem~\ref{thm:lu-lc-rigidity}
 replaces LC by LU.  A party permutation is absorbed by relabelling first.
 
@@ -522,23 +538,9 @@ and the product of the upper blocks sends
  (c,h)\longmapsto(c+\mu S^{-1}h,h).
 \]
 Thus both products preserve \(L_C\) and lift to product-Clifford tensor
-symmetries after product-Pauli corrections of their stabilizer phases.
-Over the prime field, the phase lift is explicit.  If a product Clifford
-\(U\) preserves the label Lagrangian \(L_C\), then \(U\lvert\Psi_C\rangle\)
-is stabilized by the same Pauli axes, but possibly with a character
-\(\chi:L_C\to\langle\omega\rangle\).  Write
-\(\chi(\ell)=\omega^{f(\ell)}\) for a linear functional
-\(f\in L_C^*\).  Since \(L_C=L_C^\perp\), the symplectic pairing induces
-an isomorphism
-\[
-  \F_q^{4m}/L_C \longrightarrow L_C^*,\qquad
-  [v]\longmapsto(\ell\mapsto\langle v,\ell\rangle).
-\]
-Choose \(v\) mapping to \(-f\).  Conjugation by the product Pauli
-\(W_v\) cancels \(\chi\), so \(W_vU\) fixes the one-dimensional joint
-\(+1\) eigenspace of \(L_C\), up to an overall scalar.  Thus label-space
-preservation is sufficient here; no unproved coherent choice of Clifford
-phases is being used.
+symmetries: Lemma~\ref{lem:pauli-phase-correction} supplies the required
+product-Pauli corrections.  Thus label-space preservation is sufficient
+here; no coherent choice of Clifford phases is being assumed.
 At any chosen input party \(j\), their blocks run through all lower and
 upper elementary unipotents because \(s_j\ne0\).  Together these generate
 \(\mathrm{SL}_2(q)\).  Under the Choi correspondence, an input block

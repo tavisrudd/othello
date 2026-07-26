@@ -1,241 +1,63 @@
-\section{Explicit local-unitary invariants}\label{sec:invariants}
+\section{Scalar invariants and generic blindness}\label{sec:invariants}
 
-The final application contrasts the operator-valued mechanism with scalar
-invariants.  Theorem~\ref{thm:lu-lc-rigidity} settles equivalence without
-them, but scalar witnesses remain useful as short, basis-free certificates;
-their failures also isolate the local-axis information retained by the
-marginal.
-
-\subsection{A marginal-moment separator}
-
-For a four-party set \(T\), let \(\rho_T\) be the reduced state and embed
-it into all six parties as
-\[
- A_T=\rho_T\otimes I_{T^c}.
-\]
-For an unordered triple \(\{T,U,V\}\) of distinct four-sets, the number
-\(\Tr(A_TA_UA_V)\) is invariant under arbitrary product unitaries; party
-permutation merely permutes the 455 triples.  By \((2.3)\),
-\[
- \Tr(A_TA_UA_V)=q^{-\rank(L_C(T)+L_C(U)+L_C(V))}.       \tag{6.1}
-\]
-Here and below, ranks of label spaces and matching systems are over
-\(\F_q\).
-Indeed, the three stabilizer sums have total normalization \(q^{-12}\).
-Only triples of labels with sum zero survive the full trace; isotropy of
-\(L_C\) removes multiplication phases, and the kernel of the addition map
-from the three two-planes has size \(q^{6-r}\), where \(r\) is the
-\(\F_q\)-rank in \((6.1)\).
-
-Index a four-set by its omitted pair, an edge of \(K_6\).  The rank in
-\((6.1)\) is four exactly when the three corresponding chord lines
-concur in both the six-arc \(\mathcal A\) and its Gale dual
-\(\mathcal A^*\), represented by any kernel basis of the arc matrix.
-To see this, split each shortened CSS plane into its one-dimensional
-\(X(C)\) and \(Z(C^\perp)\) parts.  For three omitted edges, the three
-shortened \(X\)-lines span dimension two precisely when the corresponding
-chords of \(\mathcal A^*\) concur; the \(Z\)-lines give the same criterion
-for \(\mathcal A\).  Each span has dimension at least two, so their sum
-has rank four exactly when both concurrences hold.
-
-Sixty triples are stars and concur universally.  Any other three-edge
-graph that contains two adjacent edges but is not a star has two chords
-meeting at their common arc point and a third chord missing it, since the
-columns form an arc.  The only remaining graph type is a perfect
-matching.  Hence
-\[
-\#\{q^{-4}\text{ moments}\}=60+b(\mathcal A,\mathcal A^*),     \tag{6.2}
-\]
-where \(b\) counts perfect matchings concurrent in both configurations.
-
-\begin{lemma}[Concurrent matchings on a conic]\label{lem:conic-matchings}
-Let \(S\) be six distinct points on a nonsingular conic over a finite
-field \(k\) of odd characteristic other than \(5\).  At most six perfect
-matchings of \(S\) have concurrent joining chords.
-\end{lemma}
-
-\begin{proof}
-Identify the conic with \(\mathbb P^1\).  Projection from a point off the
-conic pairs the points in every fiber and hence induces a projective
-involution; conversely, the chords joining the three two-element orbits
-of a projective involution meet at its center.  Thus the concurrent
-matchings are exactly the fixed-point-free involutions in
-\[
- H=\operatorname{Stab}_{\mathrm{PGL}_2(k)}(S).
-\]
-The correspondence is injective because an element of
-\(\mathrm{PGL}_2(k)\) is determined by its action on three points.
-Moreover, \(H\) acts freely on ordered triples of distinct points of
-\(S\), so \(\lvert H\rvert\mid6\cdot5\cdot4=120\).
-
-Dickson's classification, including the \(p\)-regular cases
-\cite[\S\S239--261]{Dickson1901}, and Faber's \(p\)-irregular
-classification \cite[Theorem~1.1]{Faber2023} now leave the following
-possibilities.  The last column bounds involutions having no fixed point
-on this six-set:
-\[
-\begin{array}{c|c}
-H&\text{fixed-point-free involutions}\\ \hline
-\text{cyclic}&\leq1\\
-\text{dihedral}&\leq6\\
-A_4&\leq3\\
-S_4&\leq6\\
-A_5\text{ in its faithful degree-six action}&0\\
-C_3\text{ or }S_3\quad(\operatorname{char}k=3)&\leq3.
-\end{array}
-\]
-For the \(A_5\) row, each involution fixes two of the six points.  In
-the dihedral row, if the rotation order exceeded six, every orbit away
-from the two rotation-fixed points would have size at least that order,
-so no invariant six-set could exist; for rotation order at most six the
-two reflection classes together contribute at most six fixed-point-free
-elements (and the possible central half-turn contributes only when one
-reflection class has fixed points).  In
-the characteristic-three semi-elementary case, the normal \(3\)-group
-has order \(3\), while its cyclic complement embeds in
-\(\operatorname{Aut}(C_3)\), giving only \(C_3\) or \(S_3\).
-The subfield groups whose order divides \(120\) are
-\(\mathrm{PSL}_2(3)\cong A_4\) and
-\(\mathrm{PGL}_2(3)\cong S_4\), already listed.  The remaining
-characteristic-five subfield possibilities are excluded by the
-hypothesis.  Every row is therefore bounded by six.
-\end{proof}
-
-\begin{theorem}[Uniform \(H_3\)/GRS separation]\label{thm:lu-h3-grs}
-Let \(\tau^2=\tau+1\), and let \(\mathfrak p\) be a prime ideal of
-\(\mathbb Z[\tau]\) of odd residue characteristic for which the reduction
-of the integral \(H_3\) (icosahedral) sextuple
-\[
-((0,1,1-\tau),(0,1,\tau-1),(1,1-\tau,0),(1,\tau-1,0),
- (1,0,-\tau),(1,0,\tau))
-\]
-is a six-arc.  Write \(k=\mathbb Z[\tau]/\mathfrak p\).  If the reduced
-arc is non-GRS, put \(q=\lvert k\rvert\).  Its
-equal-phase state is not LU-equivalent, even after party permutation, to
-any six-point GRS state over \(k\).  (The hypothesis is vacuous in
-characteristic five, where the reduction is itself GRS.)
-\end{theorem}
-
-\begin{proof}
-Exact integral chord determinants give ten common concurrent matchings
-for the \(H_3\) arc and its Gale dual.  The other five determinant norms are
-\(-64\) and \(-4\), so the count is exactly ten in every residue
-reduction covered by the theorem.  This is an exact fifteen-matching
-calculation in \(\mathbb Z[\tau]\), not a field sample.  The \(H_3\) moment
-multiset therefore contains \(70\) copies of \(q^{-4}\).
-
-Lemma~\ref{lem:conic-matchings} gives at most six concurrent matchings
-on a conic.  The bound is attained whenever \(\mathrm{PGL}_2(q)\) contains
-an octahedral \(S_4\), by the corresponding six-set: the six
-half-turns about axes through pairs of opposite edges act without fixed
-vertices.  Thus a GRS state has at most \(66\) copies of \(q^{-4}\), and
-the margin \(70>66\) is sharp for this argument.  In
-characteristic five no subgroup bound is needed:
-\(X^2-X-1=(X-3)^2\), so the residue of \(\tau\) is \(3\), and direct
-substitution gives \(G(\tau)=0\).  The \(H_3\) reduction is therefore GRS,
-contrary to the theorem's non-GRS hypothesis.  Equation~\((6.1)\) is
-LU-invariant, so the gap proves the claim.
-\end{proof}
-
-The five nonconcurrent \(H_3\) matchings form a one-factorization of \(K_6\).
-The marginal incidence recovers its \(S_5\) stabilizer but forgets the
-even \(A_5\) orientation.  This is necessary: full local Fourier
-transform sends \(\Psi_C\) to \(\Psi_{C^\perp}\), and an integral
-isoduality returns the \(H_3\) code through an odd pentad permutation in every
-odd reduction.  The orientation is an LC-forgettable CSS
-electric/magnetic marking, not a separate LU class.
-
-\subsection{The exact dimension-thirteen four-copy witness}
+The operator-valued marginal mechanism retains local Weyl axes.  Fixed-copy
+scalar contractions retain less: on algebraic families they are generically
+constant and can distinguish parameters only on rank-jump strata.  We make
+that limitation precise here; Appendix~\ref{sec:scalar-certificates}
+records two explicit separators on exceptional strata.
 
 For \(r\) ket copies and \(r\) bra copies, choose a permutation
 \(\sigma_i\in S_r\) at each party and contract ket copy \(a\) with bra
-copy \(\sigma_i(a)\).  If \(G\) generates a three-dimensional code, let
+copy \(\sigma_i(a)\).  If \(G\) generates a \(d\)-dimensional code, let
 \(M_{\boldsymbol\sigma}(G)\) be the homogeneous matching system
 \[
  (u_aG)_i=(v_{\sigma_i(a)}G)_i
- \quad(1\leq i\leq6,\ 1\leq a\leq r).
+ \quad(1\leq i\leq n,\ 1\leq a\leq r).
 \]
 Counting its solutions gives the normalized contraction
-\[
+\begin{equation}\label{eq:permutation-contraction}
  I_{\boldsymbol\sigma}(\Psi_C)
-   =q^{3r-\rank M_{\boldsymbol\sigma}(G)}.              \tag{6.3}
-\]
-
-\begin{theorem}[Exact four-copy separator at \(q=13\)]
-\label{thm:q13-lu}
-The two admitted \(q=13\) pencil classes with \(z=4\) and \(z=12\) are
-not local-unitary equivalent, even after arbitrary party permutation.
-\end{theorem}
-
-\begin{proof}
-At \(q=13\), the admitted pencil has two classes in the same complete
-three-copy and marginal-moment bucket, with \(z=4\) and \(z=12\).
-Use the explicit four-copy pattern
-\[
-\boldsymbol\sigma=(1,(03)(12),(23),(02)(13),(01)(23),(021)).
-\]
-For \(\pi\in S_6\), put
-\((\pi\boldsymbol\sigma)_i=\sigma_{\pi^{-1}(i)}\), and sum \((6.3)\)
-over all party permutations:
-\[
- J_{\boldsymbol\sigma}(\Psi)
-   =\sum_{\pi\in S_6}I_{\pi\boldsymbol\sigma}(\Psi).
-\]
-Over \(\F_{13}\), the \(z=4\) class has rank \(21\) for all \(720\)
-terms.  The \(z=12\) class has rank \(20\) for \(192\) terms and rank
-\(21\) for \(528\).
-Therefore
-\[
- J_{\boldsymbol\sigma}(z=4)=720\cdot13^{-9},\qquad
- J_{\boldsymbol\sigma}(z=12)=3024\cdot13^{-9}.          \tag{6.4}
-\]
-This proves arbitrary-LU inequivalence directly.  The complete two- and
-three-copy contraction sets do not separate this pair; \((6.4)\) makes no
-claim that four copies are globally minimal.
-\end{proof}
-
-\subsection{Why fixed-copy scalars cannot recover the pencil coordinate}
+   =q^{dr-\rank M_{\boldsymbol\sigma}(G)}.
+\end{equation}
 
 \begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
 Fix \(r\) and a field \(k\) of cardinality \(q\), which is also the local
 Hilbert-space dimension under the code--state dictionary.  Fix an
 irreducible reduced parameter variety \(X\) over \(k\), and a regular
-generator-matrix chart \(G(x)\) of constant
-code dimension.  Every degree-\((r,r)\) permutation contraction of the
-associated equal-phase states has one value at every \(k\)-point of some
-dense open subscheme \(U\subseteq X\) defined over \(k\).  The same holds
-for party-orbit sums and linear combinations.  After evaluating the
-states as vectors in \((\mathbb C^q)^{\otimes n}\), in the stable range
-\(q\geq r\), every scalar LU-invariant of bidegree \((r,r)\) is
-generically constant in this sense.  For a reducible family, the
-statement holds separately on each irreducible component.  The geometric
-generic-rank assertion is nonvacuous; over a finite field the assertion
-about \(k\)-points is conditional on \(U(k)\ne\varnothing\).
+generator-matrix chart \(G(x)\) of constant code dimension.  Every
+degree-\((r,r)\) permutation contraction of the associated equal-phase
+states has one value at every \(k\)-point of some dense open subscheme
+\(U\subseteq X\) defined over \(k\).  This asserts no existence of
+\(k\)-points in \(U\): if \(U(k)=\varnothing\), the finite-field
+pointwise conclusion is vacuous.  The same holds for party-orbit sums and
+linear combinations.  After evaluating the states as vectors in
+\((\mathbb C^q)^{\otimes n}\), in the stable range \(q\geq r\), every
+scalar LU-invariant of bidegree \((r,r)\) is generically constant in this
+sense.  For a reducible family, the statement holds separately on each
+irreducible component.
 \end{proposition}
 
 \begin{proof}
-Formula~\((6.3)\) depends only on the rank of a matrix whose entries are
-regular functions over \(k\).  A maximal nonzero minor shows that this
-rank is constant on a dense open subscheme defined over \(k\).  There are only
-finitely many diagrams at fixed \(r\), so their generic-rank opens have a
-common dense intersection because \(X\) is irreducible.  Over the complex
-vector space \((\mathbb C^q)^{\otimes n}\), applied pointwise to each
-code state, the first fundamental theorem for unitary invariants says
-that local copy-permutation diagrams span the bidegree-\((r,r)\)
-invariants; when the local Hilbert-space dimension \(q\) is at least
-\(r\), there are no additional dimension relations among these diagrams
+Formula~\eqref{eq:permutation-contraction} depends only on the rank of a
+matrix whose entries are regular functions over \(k\).  A maximal nonzero
+minor shows that this rank is constant on a dense open subscheme defined
+over \(k\).  There are only finitely many diagrams at fixed \(r\), so
+their generic-rank opens have a common dense intersection because \(X\)
+is irreducible.  This proves the geometric generic-rank assertion; the
+explicit caveat in the statement is necessary when passing to finite-field
+rational points.  Over the complex vector space
+\((\mathbb C^q)^{\otimes n}\), applied pointwise to each code state, the
+first fundamental theorem for unitary invariants says that local
+copy-permutation diagrams span the bidegree-\((r,r)\) invariants; when the
+local Hilbert-space dimension \(q\) is at least \(r\), there are no
+additional dimension relations among these diagrams
 \cite[Section~2]{CollinsSniady2006}.
-This proves the last statement.
 \end{proof}
 
-An application to a particular finite field must therefore exhibit a
-point of \(U(k)\).
-
-Over \(\mathbb Q(t)\), the matching matrices of every fixed four-copy
-diagram have generically constant rank.  Consequently, after finite-field
-specialization on the common generic-rank open, their contraction values
-are constant and do not recover \(z\) generically.  The witness
-\((6.4)\) detects a rank-jump stratum.  In contrast, the four-party
+Thus no fixed copy number can recover a nonconstant pencil coordinate on
+the generic locus.  A scalar witness can still detect a special
+rank-jump stratum, as the four-copy example in
+Appendix~\ref{sec:scalar-certificates} does.  In contrast, the four-party
 operator tensor \((3.2)\) retains the Weyl axes and forces Cliffordness.
 This is the precise distinction between scalar blindness and marginal
 covariant rigidity.

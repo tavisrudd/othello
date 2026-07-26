@@ -1,6 +1,6 @@
 \section{Transport calculation for the four-copy witness}\label{sec:transport}
 
-We now explain the rank jump behind \((6.4)\).  Fix the six copy
+We now explain the rank jump behind \eqref{eq:q13-values}.  Fix the six copy
 permutations
 \[
 \boldsymbol\sigma=(1,(03)(12),(23),(02)(13),(01)(23),(021)).
@@ -12,20 +12,20 @@ color-\(i\) edge from \(L_a\) to \(R_{\sigma_i(a)}\).  Put \(V\) at each
 vertex and \(k\) at each edge, using \(g_{p(i)}\) as both restriction
 maps for a party assignment \(p\in S_6\).  A global section is a tuple
 \((x_a,y_b)\in V^8\) satisfying
-\[
- g_{p(i)}(x_a-y_{\sigma_i(a)})=0                       \tag{A.1}
-\]
+\begin{equation}\label{eq:transport-section}
+ g_{p(i)}(x_a-y_{\sigma_i(a)})=0 .
+\end{equation}
 on all \(24\) edges.  The three-dimensional constant-section space is
 always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
-matrix in \((6.3)\).
+matrix in \eqref{eq:permutation-contraction}.
 
 Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
 \(\sigma_i\) on \(U\).  For each \(p\), the MDS property makes
 \(g_{p(3)},g_{p(4)},g_{p(5)}\) a basis of \(V^*\).  Define \(Q_p\) by
-\[
+\begin{equation}\label{eq:transport-systematic}
  g_{p(i)}=\sum_{k=0}^2(Q_p)_{ik}g_{p(3+k)}
- \qquad(0\leq i<3).                                   \tag{A.2}
-\]
+ \qquad(0\leq i<3).
+\end{equation}
 Thus \(Q_p\) is the left block obtained by systematizing the
 party-reordered generator matrix on its last three columns; no pivot can
 vanish because every three coordinate covectors are independent.  Put
@@ -40,18 +40,17 @@ c=-(t^2-3t+1),&d=-2(t-1).
 \end{array}
 \]
 If \(Y_k\in U\) are the three free copy vectors, then
-\((\mathrm{A}.1)\) reduces
+\eqref{eq:transport-section} reduces
 to the \(9\)-by-\(9\) block transport operator
-\[
+\begin{equation}\label{eq:transport-operator}
  \widetilde T_p
  =\bigl((\widetilde Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
-                                                               \tag{A.3}
-\]
+\end{equation}
 The dimension identity
-\[
+\begin{equation}\label{eq:transport-rank-bridge}
  21-\rank M_{\pi\boldsymbol\sigma}(G(t))
-   =9-\rank\widetilde T_p                              \tag{A.4}
-\]
+   =9-\rank\widetilde T_p
+\end{equation}
 holds over the field \(k\), where \(p=\pi\) in the convention of
 Section~\ref{sec:invariants}.  It follows by quotienting the
 three-dimensional constant-section kernel and then eliminating the three
@@ -62,15 +61,15 @@ on the admitted six-arc locus.
 \begin{theorem}[Transport divisor]\label{thm:transport-divisor}
 For a parameter on the admitted odd non-GRS pencil, there exists a party
 assignment \(p\in S_6\) for which the sheaf
-\((\mathrm{A}.1)\) has a nonconstant
+\eqref{eq:transport-section} has a nonconstant
 section if and only if
 \[
  (B^2-2A^2)(9B^2-4A^2)=0,
 \]
 or equivalently
-\[
- (z-2)(9z-4)=0.                                       \tag{A.5}
-\]
+\begin{equation}\label{eq:transport-divisor}
+ (z-2)(9z-4)=0.
+\end{equation}
 At a generic point above \(z=2\), exactly \(96\) party assignments have
 rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
 Every other assignment has rank \(21\).
@@ -126,7 +125,7 @@ The two signed types are distinguished by the sign of \(w\), while the
 axial cycle pattern differs from both; hence their support sets are
 disjoint.  Explicit representatives, stabilizer intersections, and
 complete support sets are in the certificate.
-Equation \((\mathrm{A}.4)\) turns
+Equation~\eqref{eq:transport-rank-bridge} turns
 the one-dimensional transport kernels into rank \(20\) of the matching
 matrix.
 \end{proof}

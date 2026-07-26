@@ -34,6 +34,8 @@ still depends on the claim, evidence, literature, and prose gates.
 - `thm:transport-divisor`: transport-sheaf divisor and multiplicities.
 - `thm:fixed-copy-boundary`: generic constancy of fixed-copy contractions.
 - `thm:lu-lc-rigidity`: arbitrary-additive stabilizer-AME LU-intertwiner rigidity.
+- `lem:pauli-phase-correction`: product-Pauli correction of a Clifford lift
+  that carries one stabilizer Lagrangian to another.
 - `prop:stabilizer-ame-support`: exact \(q^2\) supported-label group and bijective local projections on every half-plus-one marginal.
 - `prop:full-weyl-marginal` and `cor:full-weyl-cover`: reusable full-Weyl marginal and cover criteria forcing every local intertwiner to be Clifford.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
