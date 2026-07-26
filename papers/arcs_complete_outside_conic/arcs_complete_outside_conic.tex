@@ -1402,6 +1402,21 @@ second case, applying a spanning relation for $\operatorname{ev}_a$ to $f$
 gives $f(a)=0$, contrary to $A\cap Z(f)=\varnothing$.
 \end{proof}
 
+\begin{lemma}[Line--triangle obstruction]
+\label{lem:line-triangle-obstruction}
+Suppose that \(U\subseteq\PG(2,K)\) contains three distinct points on a
+line \(L\), together with three noncollinear points outside \(L\).  Then no
+nonzero homogeneous quadratic vanishes on \(U\).
+\end{lemma}
+
+\begin{proof}
+The restriction of such a quadratic to \(L\cong\PG(1,K)\) has degree two
+and three distinct zeros, so it vanishes identically.  Hence the equation
+of \(L\) divides the quadratic.  The residual linear factor must vanish at
+the three points outside \(L\), contradicting their noncollinearity unless
+that factor, and hence the quadratic, is zero.
+\end{proof}
+
 For the full system of degree-$d$ forms, the evaluation functionals are the
 degree-$d$ Veronese images of the points, up to nonzero scalar.  Thus the
 first alternative says that the uncovered Veronese images span the dual
@@ -1507,10 +1522,38 @@ with the independent class count of Al-Seraji--Al-Ogali
 \cite[Theorem~3.8.1]{AlSerajiAlOgali2018}, but that agreement is not used.
 
 \emph{Leaf obstruction.}
-For \(2630\) leaves, six uncovered points have an invertible quadratic
-evaluation matrix.  For each of the other three, evaluation at an arc
-point lies in the span of evaluations on the uncovered locus.  These are
-the two alternatives of Lemma~\ref{lem:evaluation-obstruction}.
+For \(2630\) leaves, the uncovered locus contains three collinear points
+and three noncollinear points outside their line.
+Lemma~\ref{lem:line-triangle-obstruction} replaces the separate quadratic
+matrix inversions on all these leaves.
+
+Only three leaves lack this pattern.  Using the polynomial-basis integer
+encoding of Appendix~\ref{app:witnesses}, their one-dimensional quadratic
+kernels are generated, up to scalar, by
+\[
+\begin{array}{c|c|c}
+\text{leaf}&Q& A\cap Z(Q)\\ \hline
+89&
+X^2+Y^2+Z^2+XY+XZ&
+\{(1,8,14),(1,11,12)\}\\
+90&
+5XY+4XZ+YZ&
+7\text{ of the }8\text{ selected points}\\
+2631&
+2X^2+Y^2+Z^2+5XY+5XZ+YZ&
+\{(1,6,12),(1,11,7)\}.
+\end{array}
+\]
+The first and third forms split respectively as
+\[
+ (X+6Y+6Z)(X+7Y+7Z)
+\quad\text{and}\quad
+ 2(X+4Y+15Z)(X+15Y+4Z);
+\]
+the middle form is nonsingular.  Direct substitution gives the displayed
+arc intersections.  Thus every quadratic containing the uncovered locus
+meets the arc on each exceptional leaf, which is the second alternative of
+Lemma~\ref{lem:evaluation-obstruction}.
 Projective transport preserves the assertion, so the checked leaf result
 holds for every eight-arc.
 \end{proof}
@@ -1658,21 +1701,23 @@ corresponding evidence and trust boundaries are summarized below.  In the
 source supplement, \path{lean/RelativeConicArcs/TRUST.md} records exact
 commands, toolchain versions, SHA-256 digests, theorem names, and frozen
 outputs.  Within \path{lean/RelativeConicArcs/}, the import-only gate
-\path{Gates/Relconic.lean} is the kernel-checking
+\path{Gates/ArcsCompleteOutsideConic.lean} is the kernel-checking
 entry point for precisely the results used here.
 The pinned versions are Lean \(4.32.0\)-rc1, Lake
-\texttt{5.0.0-src+b4812ae}, and Mathlib revision
+\texttt{5.0.0-src+\allowbreak b4812ae}, and Mathlib revision
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  From the supplement's
 \path{lean/} directory, the exact replay is:
 \begin{verbatim}
 nix develop --command lake exe cache get
 nix develop --command env LEAN_NUM_THREADS=1 \
-  lake build RelativeConicArcs.Gates.Relconic
+  lake build \
+  RelativeConicArcs.Gates.ArcsCompleteOutsideConic
 \end{verbatim}
 Success is exit status zero with a final Lake success report for the named
-gate; the gate itself has no runtime output.  With fetched dependencies, a
-direct single-thread elaboration took \(26\) seconds on the development
-host.  A fresh replay should allow \(30\) minutes, \(8\) GiB of RAM, and
+gate; the gate itself has no runtime output.  When its generated
+\(q=16\) dependencies are already built, direct gate elaboration takes
+seconds.  A cold single-thread rebuild of the generated certificate tree
+should instead be budgeted as a multi-hour job with \(8\) GiB of RAM and
 \(10\) GiB of free disk.  The largest generated \(q=16\) leaves have a
 measured peak of approximately \(1.3\) GiB each.
 
@@ -1703,14 +1748,16 @@ custom axiom declaration, or \texttt{native\_decide}.
 Claim & Certificate and checker & Remaining trust\\ \hline
 Defect, bounds, transfer, exact reconstruction, matching rigidity, and
 bad-concurrence edge/vertex stability&
-\texttt{Gates.Relconic}; the named reconstruction and matching terminals in
+\texttt{Gates.ArcsCompleteOutside\allowbreak Conic}; the named reconstruction and matching terminals in
 the trust manifest&
 Lean kernel, Mathlib, and
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}\\
 \(q=16\) exclusion&
-augmentation transitions, \(2630+3\) leaf records, and
+augmentation transitions, the line--triangle pattern certificate,
+\(2630+3\) Lean leaf records, and
 \texttt{Q16QuadraticTransport}, imported by the gate&
-Lean kernel and Mathlib; generator labels and deduplication are not trusted\\
+Lean kernel and Mathlib; exact Python arithmetic checks the pattern
+partition independently; generator labels and deduplication are not trusted\\
 Ten-point realization&
 \texttt{check\_match10\_\allowbreak rank\_three.py} and its JSON certificate&
 Mathon's external two-class classification; Python integer arithmetic and
@@ -1761,6 +1808,18 @@ quadratic evaluation conditions or an explicit linear combination forcing
 a containing quadratic to meet the arc.  Thus the theorem trusts the Lean
 kernel and the stated classical inputs, but neither the generator's
 canonical labels nor an external claim of exhaustive execution.
+
+The independent pattern checker recomputes every ordinary-uncovered locus
+from the frozen level-eight list and verifies the line--triangle pattern on
+exactly \(2630\) leaves.  Its canonical JSON output records one six-point
+witness per leaf and the three exceptional kernels.  Run
+\begin{verbatim}
+python3 check_q16_uncovered_patterns.py --check
+sha256sum -c check_q16_uncovered_patterns.sha256
+\end{verbatim}
+from the paper directory.  This checker supplies the geometric compression
+used in the proof; the independently shaped Lean inverse matrices remain a
+kernel-checked verification of the same \(2630+3\) partition.
 
 \section{Finite-field witnesses}\label{app:witnesses}
 

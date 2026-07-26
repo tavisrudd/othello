@@ -37,7 +37,9 @@ The Lean package proves the elementary theorem chain, exact uncovered-locus reco
 matching rigidity and secant-deletion stability, the conic/projective transport statements, and a
 semantic bridge from a generic rules-only coordinate checker to relative completeness. Its finite
 checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
-[`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md).
+[`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md), and the manuscript's
+exact import and axiom boundary is
+[`Gates/ArcsCompleteOutsideConic.lean`](../../lean/RelativeConicArcs/Gates/ArcsCompleteOutsideConic.lean).
 
 **Exact q=5 value (C188).** Clebsch C187's hardened checker verifies that the ordinary-uncovered
 locus of the standard four-frame in `PG(2,5)` is exactly the six points of the nonsingular conic
@@ -88,6 +90,8 @@ The source-by-source comparison is recorded in
 - `check_evaluation_dichotomy.py` — small-field sharp-threshold adversarial checker
 - `check_q11_structure.py` / `.cpp` — independent q11 structure, invariance, and mutation checks
 - `search_rhoc16.cpp` / `search_rhoc16_output.txt` — exact eight-arc classification generator + run
+- `check_q16_uncovered_patterns.py` / `.json` / `.sha256` — compact line--triangle witnesses for
+  the 2630 generic q=16 leaves and direct arithmetic for the three exceptional kernels
 - `analyze_c201_q16.py` — independent frozen-list quadratic-rank, defect, stabilizer, and orbit anatomy
 - `size_c201_q64.py` — corrected-bound arithmetic and rigorous frame-normalized `q=64` census rejection
 - `probe_c201_q64_baer.py` / `check_c201_q64_baer.cpp` — orbit-reduced and raw independent

@@ -76,13 +76,14 @@ paper-facing closure with:
 ```text
 nix develop --command lake exe cache get
 nix develop --command env LEAN_NUM_THREADS=1 \
-  lake build RelativeConicArcs.Gates.Relconic
+  lake build RelativeConicArcs.Gates.ArcsCompleteOutsideConic
 ```
 
 Success means exit status zero and a final Lake success report for
-`RelativeConicArcs.Gates.Relconic`; the import-only gate has no runtime output.  A direct
-single-thread elaboration of the gate against fetched dependencies took 26 seconds on the
-development host.  For a fresh replay, allow 30 minutes, 8 GiB of RAM, and 10 GiB of free disk.
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the import-only gate has no runtime output.
+When the generated q=16 dependencies are already built, direct gate elaboration takes seconds.
+A cold single-thread rebuild of the generated certificate tree should instead be budgeted as a
+multi-hour job with 8 GiB of RAM and 10 GiB of free disk.
 The largest generated q=16 leaves have a measured peak of approximately 1.3 GiB each; the
 single-thread command above prevents concurrent leaf peaks.  These resource figures are an
 execution envelope, not part of the mathematical claim.
@@ -231,6 +232,31 @@ factorizations, hit counts `(2,7,2)`, and middle nonsingular model.
 including projective invariance of ordinary uncoveredness and quadratic zero sets. The C++ program and report are reproducible
 provenance only; the theorem depends on the emitted data through kernel-checked local predicates.
 
+The generic leaf calculation also has a smaller incidence certificate:
+
+```text
+papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.py
+papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.json
+papers/arcs_complete_outside_conic/check_q16_uncovered_patterns.sha256
+```
+
+It reconstructs every ordinary-uncovered locus directly from the frozen
+level-eight list.  On exactly 2630 leaves it records three collinear
+uncovered points and three noncollinear uncovered points outside their line.
+The first triple forces that line to divide any containing quadratic, while
+the second triple excludes the residual linear factor.  The three remaining
+leaves are precisely the forced-hit records analyzed above.  Replay from the
+paper directory with:
+
+```text
+python3 check_q16_uncovered_patterns.py --check
+sha256sum -c check_q16_uncovered_patterns.sha256
+```
+
+This exact Python incidence check explains the generic obstruction; the
+independently shaped Lean inverse matrices remain the kernel-checked proof
+objects used by `Q16QuadraticTransport`.
+
 ## Ten-point matching-design realization provenance
 
 The manuscript's rank-three classification of the two
@@ -296,7 +322,9 @@ certificate.
 
 ## Axiom audit
 
-`#print axioms` for the cap-game localization and parametrized-value bridges, the ordinary
+`Gates.ArcsCompleteOutsideConic` runs `#print axioms` on the paper-facing terminals listed in its
+source.  The broader directory audit additionally covers the cap-game localization and
+parametrized-value bridges, the ordinary
 coverage checker, `Certificate.check_sound`,
 `rhoC_le_length_of_check`, the complete-affine specialization and equality criterion, all five
 `L2` theorems, all five final finite-example theorems, the

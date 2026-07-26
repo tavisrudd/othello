@@ -1,0 +1,88 @@
+import RelativeConicArcs.Affine
+import RelativeConicArcs.Asymptotic
+import RelativeConicArcs.Averaging
+import RelativeConicArcs.EvaluationObstruction
+import RelativeConicArcs.MatchingDesignRigidity
+import RelativeConicArcs.Q16ExceptionalArithmetic
+import RelativeConicArcs.Results
+import RelativeConicArcs.TangentPairFourGroup
+import RelativeConicArcs.UncoveredLocusReconstruction
+
+/-!
+# Verification boundary for arcs complete outside a prescribed conic
+
+This import-only module checks the formal results used by the manuscript on arcs complete outside
+a prescribed conic.  It covers the defect and capacity bounds, complete-affine specialization,
+projective averaging, additive asymptotics, uncovered-locus reconstruction, matching-design
+rigidity, characteristic-two equality exclusion, the elementary evaluation obstruction, the five
+small-field values, and the exhaustive quadratic-avoidance theorem over `GF(16)`.
+
+The rank-three realization classification for ten-point matching designs is not a Lean theorem and
+is therefore outside this gate.
+-/
+
+#print axioms RelativeConicArcs.completeOutside_bound_general
+#print axioms RelativeConicArcs.NonsingularConic.finite_lower_bound
+#print axioms RelativeConicArcs.pointIndex_le_half_card
+#print axioms RelativeConicArcs.first_secant_moment
+#print axioms RelativeConicArcs.second_secant_moment
+#print axioms RelativeConicArcs.scaledDefect_eq_remainders
+#print axioms RelativeConicArcs.scaledDefect_eq_zero_iff
+#print axioms RelativeConicArcs.coverage_bound
+#print axioms RelativeConicArcs.uncovered_bound
+#print axioms RelativeConicArcs.stability_bound
+#print axioms RelativeConicArcs.completeAffine_bound
+#print axioms RelativeConicArcs.completeAffine_bound_eq_iff
+#print axioms RelativeConicArcs.rhoC_explicit_additive_lower_bound
+#print axioms RelativeConicArcs.eventually_lt_centered
+#print axioms RelativeConicArcs.exists_completeOutside_of_completeArc
+#print axioms RelativeConicArcs.rhoC_le_t2
+#print axioms RelativeConicArcs.rhoC_le_of_kimVuBound
+
+#print axioms RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants
+#print axioms RelativeConicArcs.verticesOfLineFamily_secants_eq
+#print axioms RelativeConicArcs.canonical_reconstruction
+#print axioms RelativeConicArcs.eq_of_ordinaryUncovered_eq
+#print axioms RelativeConicArcs.stabilizes_iff_stabilizes_ordinaryUncovered
+
+#print axioms RelativeConicArcs.disjoint_arcPairs_existsUnique_concurrence
+#print axioms RelativeConicArcs.concurrence_matching_injective
+#print axioms RelativeConicArcs.concurrenceCenter_pointIndex_eq_half
+#print axioms RelativeConicArcs.concurrenceCenters_card_mul_choose_half
+#print axioms RelativeConicArcs.concurrenceCenters_card_eq_quotient
+#print axioms RelativeConicArcs.concurrenceCentersOnPair_card_mul_sub_one
+#print axioms RelativeConicArcs.concurrenceCentersOnPair_card_eq_quotient
+#print axioms RelativeConicArcs.two_mul_badConcurrenceEdgeCount_le
+#print axioms RelativeConicArcs.exists_secantDeletionSet
+
+#print axioms RelativeConicArcs.scaledDefect_eq_zero_or_half_sub_two_le
+#print axioms RelativeConicArcs.completeAffine_equality_order
+#print axioms RelativeConicArcs.even_completeOutside_zeroDefect_order_spectrum
+#print axioms RelativeConicArcs.odd_completeOutside_zeroDefect_order_spectrum
+#print axioms RelativeConicArcs.odd_standardConic_zeroDefect_charTwo_order
+#print axioms RelativeConicArcs.TangentPairFourGroup.no_upper_even_equality_branch
+#print axioms RelativeConicArcs.TangentPairFourGroup.even_standardConic_zeroDefect_charTwo_order
+
+#print axioms RelativeConicArcs.eq_zero_of_evaluationMap_injective
+#print axioms RelativeConicArcs.evaluation_eq_zero_of_eq_sum
+
+#print axioms RelativeConicArcs.Certificate.rawArc_iff_projectiveCap
+#print axioms RelativeConicArcs.Certificate.check_sound
+#print axioms RelativeConicArcs.Examples.rhoC_ZMod5
+#print axioms RelativeConicArcs.Examples.rho_points_ZMod5
+#print axioms RelativeConicArcs.Examples.rhoC_GF8
+#print axioms RelativeConicArcs.Examples.rhoC_GF9
+#print axioms RelativeConicArcs.Examples.rhoC_ZMod11
+#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelOne
+#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelTwo
+#print axioms RelativeConicArcs.Q16Classification.exceptionalKernelThree
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormOne_factorization
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormThree_factorization
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormOne_arc_hits
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwo_arc_hits
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormThree_arc_hits
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwoMatrix_isUnit
+#print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwo_conic_equation
+#print axioms RelativeConicArcs.arbitrary_eight_arc_projectiveQuadraticAvoidance
+#print axioms RelativeConicArcs.no_completeOutside_GF16_card_eight
+#print axioms RelativeConicArcs.rhoC_GF16

@@ -177,11 +177,17 @@ entries, while `StepBooksValid` proves that the books cover the current parent l
 `classifiedAt_level8_of_frame` composes the four layers, and frame reduction
 maps an arbitrary eight-arc to a listed leaf.  Thus closure and exhaustiveness
 of the lists are certified, not delegated to the generator.  At every leaf,
-kernel-checked ordinary-uncovered points either give a full-rank six-row
-quadratic evaluation matrix (2630 leaves), or force the unique kernel line
-to hit the arc (three leaves). The three latter matrices are separately
-proved to have exactly the displayed one-dimensional kernels. The semantic proof transports this
-rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
+the ordinary-uncovered locus gives one of two elementary obstructions.  On
+2630 leaves it contains three collinear points and three noncollinear points
+outside their line.  A quadratic through the first triple contains that
+line, so its residual linear factor cannot contain the second triple.  The
+independent pattern checker records one such six-point witness for every
+generic leaf.  On the other three leaves, the unique quadratic kernel line
+meets the arc; its generators and selected-point intersections are displayed
+in the manuscript.  Lean independently checks invertible six-row evaluation
+matrices on the 2630 generic leaves, proves that the three exceptional
+matrices have exactly the displayed one-dimensional kernels, and transports
+the rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
 
 The ten-point equality refinement is separately computer-assisted.  Abstract
 completeness is Mathon's two-class theorem, imported through
@@ -302,7 +308,9 @@ condition, and coverage on the (q^2+q+1) canonical projective representatives; `
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The focused modules and the top-level `RelativeConicArcs.Results` aggregate build successfully.
+The manuscript-facing modules are imported and audited by
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConic`; the broader
+`RelativeConicArcs.Results` aggregate remains the exact-small-results registry.
 No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
 exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
