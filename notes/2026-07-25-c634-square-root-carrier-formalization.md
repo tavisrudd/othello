@@ -163,6 +163,11 @@ terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
 
+- `fintypeProd_X_sub_C_dvd_of_injective_roots` proves that a polynomial
+  vanishing at finitely many distinctly indexed affine nodes is divisible by
+  the product of their monic linear factors, and
+  `fintypeProd_X_sub_C_dvd_sub_of_injective_eval_eq` applies this to the
+  difference of two polynomials agreeing at every node;
 - `exists_finset_extension_of_single_correction` proves the elementary
   interpolation induction: a correction which fits one new restriction and
   vanishes on those already fitted yields a simultaneous extension on every
@@ -209,7 +214,7 @@ terminals.
   and ambient nonsquareness into `Y.card ≤ degreeBound`.
 
 The import-only gate `RelativeConicArcs.Gates.CarrierArcBound` audits these
-eighteen terminals.
+twenty terminals.
 
 ## Formal boundary
 
@@ -226,8 +231,10 @@ Lean does not yet check:
   hypotheses for the restricted binary factors;
 - the local binary-form lemma that compatibility at the preceding nodes makes
   each new residual divisible by the restricted product of their linear
-  factors; the quotient-lift correction and its finite induction are
-  formalized, but homogeneous degree control is not yet attached to the lift;
+  factors; the distinct-affine-node factor theorem, quotient-lift correction,
+  and finite induction are formalized, but the passage between homogeneous
+  binary forms and an affine chart, including the point at infinity and
+  homogeneous degree control, is not yet attached;
 - the construction of a linear coordinate change for each concrete projective
   line and the facts that the resulting equations have degree one and are
   pairwise relatively prime;
@@ -246,7 +253,7 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
-| Do compatible linewise roots extend? | **Reduced to residual divisibility and degree control:** restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate over every finite family.  The remaining evidence gap is that node compatibility forces divisibility of the residual binary form by the preceding node factors, together with preservation of the required homogeneous degree. |
+| Do compatible linewise roots extend? | **Reduced to projective homogenization and degree control:** agreement at distinctly indexed affine nodes now formally gives product divisibility, restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate over every finite family.  The remaining evidence gap is transporting this affine factor theorem to homogeneous binary forms, handling a possible point at infinity, and preserving the required homogeneous degree. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 | What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
@@ -272,14 +279,14 @@ standing for them is introduced.
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
   **PASS**, warning-free.
-- The source-local audit of its eighteen terminals reports no axioms beyond
+- The source-local audit of its twenty terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`;
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
   `--no-build` confirmation, together with the nineteen-terminal polynomial gate
-  and eighteen-terminal carrier gate builds: pending release of the shared Lean
+  and twenty-terminal carrier gate builds: pending release of the shared Lean
   build-owner lock.  The latest exact two-gate attempt failed closed because
   the foreign `RelativeConicArcs.Gates.ClebschRigidityTrust` build owns that
   lock.

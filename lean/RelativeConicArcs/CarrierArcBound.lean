@@ -2,6 +2,7 @@ import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Algebra.Polynomial.RingDivision
 import Mathlib.Algebra.Squarefree.Basic
 import Mathlib.RingTheory.Coprime.Lemmas
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
@@ -29,6 +30,36 @@ module does not derive this residual divisibility from projective node compatibi
 namespace RelativeConicArcs
 
 open scoped BigOperators Function
+
+section DistinctPolynomialRoots
+
+variable {K ι : Type*} [Field K] [Fintype ι]
+
+/-- A polynomial which vanishes at a finite injectively indexed family of field elements is
+divisible by the product of the corresponding distinct monic linear factors. -/
+theorem fintypeProd_X_sub_C_dvd_of_injective_roots
+    (node : ι → K) (hnode : Function.Injective node)
+    (F : Polynomial K) (hroot : ∀ i, F.IsRoot (node i)) :
+    (∏ i, (Polynomial.X - Polynomial.C (node i))) ∣ F := by
+  apply Fintype.prod_dvd_of_isRelPrime
+  · intro i j hij
+    exact (Polynomial.pairwise_coprime_X_sub_C hnode hij).isRelPrime
+  · intro i
+    exact Polynomial.dvd_iff_isRoot.mpr (hroot i)
+
+/-- Agreement of two polynomials at distinct nodes makes their difference divisible by the product
+of the corresponding node factors. -/
+theorem fintypeProd_X_sub_C_dvd_sub_of_injective_eval_eq
+    (node : ι → K) (hnode : Function.Injective node)
+    (target current : Polynomial K)
+    (hagree : ∀ i, target.eval (node i) = current.eval (node i)) :
+    (∏ i, (Polynomial.X - Polynomial.C (node i))) ∣
+      target - current := by
+  apply fintypeProd_X_sub_C_dvd_of_injective_roots node hnode
+  intro i
+  rw [Polynomial.IsRoot, Polynomial.eval_sub, hagree i, sub_self]
+
+end DistinctPolynomialRoots
 
 section CoordinateHyperplaneRestriction
 
