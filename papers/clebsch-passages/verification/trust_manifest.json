@@ -19,9 +19,9 @@
       "clauses": [
         "rational incidence model and quadratic function field",
         "branch square class 5J0",
-        "conjugate Clebsch charts and the identity iota_t^*J0=16 sigma3^2"
+        "conjugate Clebsch charts, their one-point intersection and descended normalization model, and the identity iota_t^*J0=16 sigma3^2"
       ],
-      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, and pulls J0 back to 16 sigma3^2.",
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose normalization has fibre Spec Q(sqrt(5)) there, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "modes": [
         "conceptual",

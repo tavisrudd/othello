@@ -4,8 +4,8 @@
   "main_source_sha256": "d39ed829779beba8d3e0383452380c782acfa22f59d3b6952e78504e0bb9a4c7",
   "section_sha256": {
     "sections/01-introduction.tex": "829dbd75f6416f3a7c942d768a7bbb510fbb31a6aa69638736175b1a58eb0de5",
-    "sections/02-orientation-cover.tex": "53eb63abc327cb36212a6d403c76900bc6bab83310498d5197014e6a91a3e63d",
-    "sections/04-arithmetic-specialization.tex": "099f6a8cbb7d980a3b238f4196049485b21878dd3f14735e089438cd2c71ecc9",
+    "sections/02-orientation-cover.tex": "d4829f3be95335b31ed864677cbf82575b67bbcf3739fb2943e45c2673866739",
+    "sections/04-arithmetic-specialization.tex": "e1448050946e8c9d90f70ff7fcb9e7ecc5d90953b733491fd62d5ef924820e9b",
     "sections/05-harmonic-realization.tex": "f30b7d543544d2e9d19232d10bfb0678c072c9a8d427048ee6a2f9e86d861f47",
     "sections/08-verification.tex": "40149c005f3cdf4031f9e84bcc8c7852ce2d0d6d598fd63c9b2621f585051ada",
     "sections/09-conclusion.tex": "1848afc8cbda1859ee60406c6ddad394a7ad982b887468d12aa9df15ac7102d0",
@@ -50,7 +50,7 @@
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe spinor class of \\(R\\) is \\([2]\\in k^\\times/k^{\\times2}\\).  Under the\nstandard identifications\n\\[\n \\operatorname{SO}_3(k)/\\Omega_3(k)\n \\cong \\operatorname{PGL}_2(k)/\\operatorname{PSL}_2(k),\n\\]\nthe exchanger lies outside \\(\\operatorname{PSL}_2(k)\\) exactly when \\(2\\)\nis nonsquare.  In particular, over \\(\\F_{11}\\) it represents the\nnontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
     }
   ],
-  "trust_rows_sha256": "30c4eb95608c664a99d71941a9e3c30495e24a19eb7ea454446b3974e0eada05",
+  "trust_rows_sha256": "a745a309d07eeedd614dde121202b1a8f35f26f6e3798341d1978384465ac44d",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -60,9 +60,9 @@
       "clauses": [
         "rational incidence model and quadratic function field",
         "branch square class 5J0",
-        "conjugate Clebsch charts and the identity iota_t^*J0=16 sigma3^2"
+        "conjugate Clebsch charts, their one-point intersection and descended normalization model, and the identity iota_t^*J0=16 sigma3^2"
       ],
-      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, and pulls J0 back to 16 sigma3^2.",
+      "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)); each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose normalization has fibre Spec Q(sqrt(5)) there, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "modes": [
         "conceptual",

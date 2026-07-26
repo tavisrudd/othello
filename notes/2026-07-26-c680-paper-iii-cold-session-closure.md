@@ -364,6 +364,29 @@ independent arithmetic controls; Dye's Clebsch-hexagon existence theorem
 shares the first boundary.  This replaces an isolated numerical
 specialization by a structural consequence without changing the trust
 surface.
+The `tt2` pass then closes the natural geometry question rather than
+leaving it for a later version.  The two conjugate golden icosahedra share
+no axis, so Hitchin's Proposition 7 gives
+\[
+ V_t\cap V_{1-t}=E\cdot xyz.
+\]
+Their reduced union is therefore a \(\mathbf Q\)-descended pair of
+conjugate projective three-spaces meeting only at the rational point
+\([xyz]\).  This supplies the exact rational geometric object that replaces
+the false rational single-chart claim; it is a human consequence of the
+primary source and adds no computational dependency.
+The `tt3` pass extracts the normalization concealed in this union.  If
+\(Z\) denotes its \(\mathbf Q\)-descent, then the normalization of \(Z\)
+is \(\mathbf P(V_t)\) viewed over \(\mathbf Q\) through
+\(\Spec E\to\Spec\mathbf Q\); after base change it separates the two
+conjugate branches, and
+\[
+ \nu^{-1}([xyz])=\Spec E.
+\]
+Thus the golden residue algebra is already visible in a nonsplit
+two-branch \(\mathbf Q\)-model.  The manuscript states explicitly that this
+model explains the descent geometry but does not replace the independent
+local comparison with Hitchin's incidence scheme.
 
 The release artifact is now paper-local.  The arithmetic certificate was
 reduced to the displayed golden configurations, all twenty three-point
@@ -409,7 +432,7 @@ those remain human arguments from the cited primary source.
 
 The ordinary aggregate and a copy of the paper directory under a fresh
 temporary root both pass all thirteen checks, including the warning-free
-eight-page build.  Visual inspection of the title and first four pages
+nine-page build.  Visual inspection of the title and first five pages
 found no layout defect; PDF text contains no workflow identifier,
 repository-note reference, stale paper name, or archive placeholder.
 
@@ -418,7 +441,7 @@ repository-note reference, stale paper name, or archive placeholder.
 | feature | status | closure gate |
 |---|---|---|
 | factor-\(13\) Gram normalization | settled | preserve \(G=K/13\) and exact replay |
-| Clebsch chart inside \(H\) | settled by correction | exact \(E\)-defined conjugate charts; no false rational inclusion |
+| Clebsch chart inside \(H\) | settled by correction, `tt2`, and `tt3` | exact \(E\)-defined conjugate charts, intersection \(E\cdot xyz\), and a \(\mathbf Q\)-descended normalization model with fibre \(\Spec E\); no false rational inclusion |
 | extraction of \(c=5\) from one fibre | settled | finite-etale local normalization and complete reduced fibre |
 | artifact self-containment | settled | ordinary and isolated-package replay green |
 | statement-to-ledger identity | settled | label/clause map and frozen row digest |
