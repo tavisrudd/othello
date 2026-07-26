@@ -1331,8 +1331,17 @@
       "last": 642,
       "purpose": "repair referee and eight-commit copy-review findings, including torus-normalizer correction and proof/trust clarifications",
       "sequence": 148
+    },
+    {
+      "count": 1,
+      "first": 643,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 643,
+      "purpose": "mine compressed secant-Veronese obstruction signatures in the q=13,17,19 rejected classes",
+      "sequence": 149
     }
   ],
-  "next_id": 643,
+  "next_id": 644,
   "schema": "codex-task-id-allocations-v1"
 }
