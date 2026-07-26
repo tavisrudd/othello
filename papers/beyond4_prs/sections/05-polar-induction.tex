@@ -28,10 +28,11 @@ At redundancy \(j\), put \(n=j-1\).  The \emph{persistent scheme}
 \]
 cut out by the maximal minors of the three-row catalecticant
 \(C_f^{(2)}:\Sym^{n-2}E^\vee\to\Gamma^2E\).
-For every positive-characteristic nucleus
-\(\mathcal N\subset\PP(\Gamma^{n-1}E)\) occurring at the lower level,
-with affine cone \(\widetilde{\mathcal N}\), its coherent lift is the
-linear scheme
+For every positive-characteristic normal-rational-curve nucleus
+\(\mathcal N\subset\PP(\Gamma^{n-1}E)\), that is, an intersection of
+the relevant osculating subspaces, let
+\(\widetilde{\mathcal N}\) be its affine cone.  Its coherent lift is
+the linear scheme
 \[
  \mathcal M_n(\mathcal N)=
  \PP\ker\left(
@@ -39,8 +40,9 @@ linear scheme
  \operatorname{Hom}(E^\vee,\Gamma^{n-1}E/\widetilde{\mathcal N})
  \right).
 \]
-The \emph{modular scheme} \(\mathcal M_j\subset S_n\) is the
-scheme-theoretic union of these coherent lifts.  A
+The \emph{modular locus} \(\mathcal M_j\subset S_n\) is the reduced
+union of these coherent lifts; Lucas' binomial criterion determines
+the nucleus coordinate spans at each level.  A
 \emph{collision divisor} records marker parameters at which the
 marked factor becomes a repeated root.
 \end{definition}
@@ -286,17 +288,17 @@ its geometric points are exactly the \(f\) for which the whole polar
 line lies scheme-theoretically in \(B\).  This coefficient ideal is
 independent of the chosen generators of \(I_B\).
 
-Let \(\mathcal B_5\subset S_4\) be the scheme-theoretic union of the
-rank-two, fixed-factor, cyclic, wild, and collision component schemes
-in the redundancy-five cubic-pencil ledger of
-Section~\ref{sec:r5}.  Inductively, \(\mathcal B_{j+1}\subset S_j\)
-is the scheme-theoretic union of the closure of
-\(\operatorname{Cont}_j(\mathcal B_j)\), the noninjective-contraction
-locus, and the locus on which the universal marker-collision divisor
-is the whole parameter line.  Equivalently, its ideal is the
-intersection of the three coefficient ideals just described.
-We call \(\mathcal B_j\) the \emph{recursively pointed contained bad
-scheme} at redundancy \(j\).
+Let \(\mathcal B_5^{\mathrm{red}}\subset S_4\) be the reduced union of
+the closures of the rank-two, fixed-factor, cyclic, wild, and
+collision strata in the redundancy-five cubic-pencil classification
+of Section~\ref{sec:r5}.  Inductively, let
+\(\mathcal B_{j+1}^{\mathrm{red}}\subset S_j\) be the reduced union of
+the closure of
+\(\operatorname{Cont}_j(\mathcal B_j^{\mathrm{red}})\), the
+noninjective-contraction locus, and the locus on which the universal
+marker-collision divisor is the whole parameter line.  We call this
+the \emph{reduced recursively pointed contained bad locus} at
+redundancy \(j+1\).
 \end{definition}
 
 \begin{definition}[One-step contained-component assertion]
@@ -313,12 +315,12 @@ When the list is clear we write
 \end{definition}
 
 \begin{definition}[Stable-component assertion]\label{def:stable-component}
-The assertion \(\mathrm{SC}(j)\) says that every associated point of
-\(\mathcal B_j\), including an embedded associated point, lies in
-\(\mathcal P_j\cup\mathcal M_j\).  Equivalently,
-\(\mathcal B_j\) has no irreducible or embedded component supported
-outside the persistent or modular schemes.  It is a scheme-theoretic
-geometric statement and contains no field-size threshold.
+The assertion \(\mathrm{SC}(j)\) says that every irreducible component
+of \(\mathcal B_j^{\mathrm{red}}\) is contained in
+\(\mathcal P_j\cup\mathcal M_j\).  It is a geometric
+irreducible-component statement and contains no field-size threshold;
+it makes no claim about embedded primary structure in a nonreduced
+recursive thickening.
 \end{definition}
 
 The indices follow two conventions.  The assertion
