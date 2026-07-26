@@ -1308,6 +1308,20 @@ obstruction. Next test the next canonical q23 P control and extract the first
 Report+script+cert:
 [`../2026-07-25-c80-q23-rank-zero-correspondence.md`](../2026-07-25-c80-q23-rank-zero-correspondence.md).
 
+**The rank-zero identity survives the immediate next canonical q23 P
+control exactly (C80, 2026-07-25).** The C54 ordering makes
+`S4(1,2,3,4)+(0,0)+(5,9)` the second control after the original `(5,2)`.
+Across all 116 opponent fibres and 7,700 legal replies, `R0` is
+opponent-complete and equals `F_d` edge-for-edge (`1,326=1,326`, zero
+disagreements). The first rejected candidate is
+`(6,3)->(7,5)`, independently C54-labelled N. After the exchange
+`(10,13)->(12,14)` it reaches an overload-zero, defect-rank-two state where
+the defect move `(14,11)` is terminal, giving the requested direct
+depth-two failure. This is a second finite positive, not a growing-depth
+theorem; C82 remains gated. Next test the third canonical q23 P control and
+stop at the first `F_d\R0` edge or uncovered `R0` fibre. Report+script+cert:
+[`../2026-07-25-c80-q23-next-control-depth-two.md`](../2026-07-25-c80-q23-next-control-depth-two.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
