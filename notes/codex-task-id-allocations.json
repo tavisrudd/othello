@@ -1574,8 +1574,17 @@
       "last": 681,
       "purpose": "Paper-facts area for the trust spine: title/citation/label drift detection",
       "sequence": 175
+    },
+    {
+      "count": 1,
+      "first": 682,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 682,
+      "purpose": "Determine the strongest Hitchin-facing structural theorem connecting the arithmetic incidence cover and harmonic Clebsch cubic without asserting an unsupported ambient identification",
+      "sequence": 176
     }
   ],
-  "next_id": 682,
+  "next_id": 683,
   "schema": "codex-task-id-allocations-v1"
 }
