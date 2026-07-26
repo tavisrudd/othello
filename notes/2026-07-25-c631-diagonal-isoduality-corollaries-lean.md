@@ -87,6 +87,78 @@ interface identifies a realized nondiagonal block with diagonal isoduality,
 Lean immediately gives the full affine special-linear carrier; there is no
 intermediate fixed-party phase.
 
+## Second-order extra juice: the Veronese circuit
+
+Let \(G=[g_1\ \cdots\ g_{2m}]\) be an \(m\)-by-\(2m\) generator matrix.
+The intrinsic multiplier condition has the matrix form
+\[
+ G\operatorname{diag}(s)G^{\mathsf T}
+   =\sum_{i=1}^{2m}s_i g_i g_i^{\mathsf T}=0.
+\]
+Thus \(\mathcal D(C,C^\perp)\) is the relation space among the quadratic
+Veronese images \(\nu_2(g_i)=g_i g_i^{\mathsf T}\).  The formal
+zero-or-one-dimensionality and full-support theorems have a sharp geometric
+translation: these \(2m\) Veronese points are either independent or form a
+circuit, meaning that their unique projective dependence uses every point.
+Diagonal isoduality is exactly the circuit case.
+
+This gives three distinct length regimes.
+
+- For \(m=2\), four Veronese points lie in the three-dimensional space of
+  symmetric \(2\)-by-\(2\) matrices.  Dependence is forced, so every exact
+  `[4,2,3]` MDS code is diagonally isodual.  Over odd prime fields its
+  associated fixed-party encoder is therefore always on the full
+  affine-special-linear branch.
+- For \(m=3\), both dimensions are six.  The circuit condition is one
+  determinant equation.  For a six-arc in the projective plane this is
+  exactly the condition that the six points lie on a conic, recovering the
+  paper's original phase boundary.
+- For \(m\geq4\), \(2m<m(m+1)/2\), so Veronese independence is possible and
+  diagonal isoduality is special.  The unconstrained determinantal model
+  predicts codimension
+  \[
+    \frac{m(m+1)}2-2m+1=\frac{(m-1)(m-2)}2,
+  \]
+  but transversality of the MDS-arc family to that determinantal locus has
+  not been proved.  The displayed codimension is therefore a route, not a
+  theorem.
+
+The same equation is the classical self-association equation for a
+\(2m\)-point configuration in \(\mathbf P^{m-1}\): the unique multiplier is
+the Gale self-association scaling.  This identifies the all-length logical
+phase with self-association of the projective MDS arc and explains why the
+six-party case is governed by conics.
+
+The nullity dichotomy also makes phase detection a single rank test.  The
+linear map
+\[
+  \mathbb F^{2m}\longrightarrow\operatorname{Sym}_m(\mathbb F),
+  \qquad s\longmapsto\sum_i s_i g_i g_i^{\mathsf T},
+\]
+has rank exactly \(2m\) or \(2m-1\); the latter case is precisely diagonal
+isoduality.  A full-rank minor certifies the first branch, while a nonzero
+kernel vector certifies the second and is automatically an invertible
+duality witness.  No separate support or code-equality check is needed.
+
+Once a reference coordinate \(j\) is chosen, the projective multiplier also
+produces canonical propagation ratios \(r_{ij}=s_i/s_j\).  They obey
+\(r_{ij}r_{jk}=r_{ik}\), so fixed-party propagation has zero holonomy: all
+of its relative scalings come from one global projective vector.  Any
+remaining projective ambiguity must therefore enter through party-moving
+symmetries or lift phases, not through the diagonal witness.
+
+Finally, the multiplier line is a monomial covariant.  If a monomial map
+\(M\) carries \(C\) to \(C'\), then its projective multiplier transforms as
+\[
+ [S]\longmapsto[M^{-\mathsf T}SM^{-1}].
+\]
+For a monomial automorphism this transformed multiplier must be a scalar
+multiple of \(S\).  Hence the party-moving automorphism group lies in the
+conformal stabilizer of the canonical multiplier line.  For pure coordinate
+permutations, the entries of \(s\) must be permuted up to one common scalar.
+This supplies a structural pre-filter for future party-extension
+classifications without computing a factor set.
+
 ## Degrees of freedom
 
 | Degree of freedom | Status |
@@ -112,6 +184,10 @@ intermediate fixed-party phase.
 | Is the report's matrix test \(G\operatorname{diag}(s)G^{\mathsf T}=0\) formalized as a kernel computation? | **Open only as an API bridge.** | A generator-matrix presentation of the existing submodule-valued multiplier space would be required; the intrinsic nullity theorem does not depend on it. |
 | Is the hyperbolic determinant square-class corollary formalized? | **Partially:** Lean proves total isotropy for the diagonal form. | An adapted-basis determinant theorem would be needed to derive \(\det S\in(-1)^m(\mathbb F^\times)^2\); no such result is claimed by the formal artifact. |
 | Are the five action-level carrier inputs unconditional? | **No:** the coding multiplier lemma is now unconditional, but special-linearity, propagation, the block-action bridge, and the complete translation fiber remain fields of `DiagonalIsodualityTransversalInputs`. | The manuscript proof remains the authority for those action-level steps. |
+| Why is the four-party phase never split-torus? | **Settled:** four quadratic Veronese images in dimension three must be dependent, and the MDS theorem makes the dependence a full-support circuit. | none |
+| Why does the six-party phase reduce to a conic? | **Settled structurally:** the square Veronese evaluation matrix is singular exactly on the conic locus. | The matrix-presentation bridge is not yet encoded in Lean. |
+| How rare is diagonal isoduality for \(m\geq4\)? | **Open quantitatively:** the ambient determinantal model predicts codimension \((m-1)(m-2)/2\). | Prove transversality, or determine the actual components, inside the MDS-arc moduli space before adopting the count. |
+| Does the multiplier line constrain party symmetries before factor-set computation? | **Settled:** every monomial automorphism conformally stabilizes the line; pure permutations preserve its entries projectively. | Turning this into a generated group pre-filter is an optional implementation step. |
 
 No genuine mathematical mystery remains in the multiplier-space and witness
 uniqueness results.  The open entries are exact formal-interface depth
