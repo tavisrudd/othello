@@ -1,0 +1,841 @@
+{
+  "direct_invariant_records": [
+    {
+      "candidate": null,
+      "extension_degree": 1,
+      "p": 5,
+      "subgroup": "A4"
+    },
+    {
+      "candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "extension_degree": 2,
+      "p": 5,
+      "subgroup": "A4"
+    },
+    {
+      "candidate": null,
+      "extension_degree": 1,
+      "p": 7,
+      "subgroup": "A4"
+    },
+    {
+      "candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "extension_degree": 2,
+      "p": 7,
+      "subgroup": "A4"
+    },
+    {
+      "candidate": {
+        "dimension": 7,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          6
+        ]
+      },
+      "extension_degree": 1,
+      "p": 11,
+      "subgroup": "A4"
+    },
+    {
+      "candidate": {
+        "dimension": 9,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          2,
+          2
+        ]
+      },
+      "extension_degree": 2,
+      "p": 5,
+      "subgroup": "S4"
+    },
+    {
+      "candidate": null,
+      "extension_degree": 1,
+      "p": 7,
+      "subgroup": "S4"
+    },
+    {
+      "candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "extension_degree": 2,
+      "p": 7,
+      "subgroup": "S4"
+    },
+    {
+      "candidate": {
+        "dimension": 9,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          8
+        ]
+      },
+      "extension_degree": 1,
+      "p": 11,
+      "subgroup": "S4"
+    },
+    {
+      "candidate": {
+        "dimension": 16,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          3,
+          3
+        ]
+      },
+      "extension_degree": 2,
+      "p": 7,
+      "subgroup": "A5"
+    },
+    {
+      "candidate": null,
+      "extension_degree": 1,
+      "p": 11,
+      "subgroup": "A5"
+    },
+    {
+      "candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "extension_degree": 2,
+      "p": 11,
+      "subgroup": "A5"
+    },
+    {
+      "candidate": {
+        "dimension": 16,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          7
+        ]
+      },
+      "extension_degree": 2,
+      "p": 13,
+      "subgroup": "A5"
+    },
+    {
+      "candidate": {
+        "dimension": 13,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          12
+        ]
+      },
+      "extension_degree": 1,
+      "p": 17,
+      "subgroup": "A5"
+    }
+  ],
+  "head_records": [
+    {
+      "direct_invariant_candidate": null,
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 1,
+      "nonnegligible_nonprincipal_heads": [],
+      "p": 5,
+      "q": 5,
+      "sheet_size": 5,
+      "subgroup": "A4",
+      "subgroup_order": 12
+    },
+    {
+      "direct_invariant_candidate": null,
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 7,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 2,
+      "nonnegligible_nonprincipal_heads": [],
+      "p": 7,
+      "q": 7,
+      "sheet_size": 14,
+      "subgroup": "A4",
+      "subgroup_order": 12
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 7,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          6
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 7,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 5,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 7,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        }
+      ],
+      "p": 11,
+      "q": 11,
+      "sheet_size": 55,
+      "subgroup": "A4",
+      "subgroup_order": 12
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 3
+        }
+      ],
+      "lambda": 26,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 2
+        }
+      ],
+      "p": 5,
+      "q": 25,
+      "sheet_size": 650,
+      "subgroup": "A4",
+      "subgroup_order": 12
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 7,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 7,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 12,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 12,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 3
+        },
+        {
+          "dimension": 35,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 35,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 3
+        },
+        {
+          "dimension": 49,
+          "multiplicity": 5
+        }
+      ],
+      "lambda": 100,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 12,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 12,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 15,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 3
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 3
+        }
+      ],
+      "p": 7,
+      "q": 49,
+      "sheet_size": 4900,
+      "subgroup": "A4",
+      "subgroup_order": 12
+    },
+    {
+      "direct_invariant_candidate": null,
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 1,
+      "nonnegligible_nonprincipal_heads": [],
+      "p": 7,
+      "q": 7,
+      "sheet_size": 7,
+      "subgroup": "S4",
+      "subgroup_order": 24
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 9,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          8
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 17,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 6,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        }
+      ],
+      "p": 17,
+      "q": 17,
+      "sheet_size": 102,
+      "subgroup": "S4",
+      "subgroup_order": 24
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 9,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          2,
+          2
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 2
+        }
+      ],
+      "lambda": 13,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        }
+      ],
+      "p": 5,
+      "q": 25,
+      "sheet_size": 325,
+      "subgroup": "S4",
+      "subgroup_order": 24
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 4,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          1,
+          1
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 35,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 35,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 49,
+          "multiplicity": 3
+        }
+      ],
+      "lambda": 50,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 4,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 9,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 24,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 2
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 2
+        }
+      ],
+      "p": 7,
+      "q": 49,
+      "sheet_size": 2450,
+      "subgroup": "S4",
+      "subgroup_order": 24
+    },
+    {
+      "direct_invariant_candidate": null,
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 1,
+      "nonnegligible_nonprincipal_heads": [],
+      "p": 11,
+      "q": 11,
+      "sheet_size": 11,
+      "subgroup": "A5",
+      "subgroup_order": 60
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 13,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          12
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 3,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        }
+      ],
+      "p": 19,
+      "q": 19,
+      "sheet_size": 57,
+      "subgroup": "A5",
+      "subgroup_order": 60
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 13,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          12
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 7,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        }
+      ],
+      "p": 29,
+      "q": 29,
+      "sheet_size": 203,
+      "subgroup": "A5",
+      "subgroup_order": 60
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 13,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          12
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 31,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 8,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 13,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        }
+      ],
+      "p": 31,
+      "q": 31,
+      "sheet_size": 248,
+      "subgroup": "A5",
+      "subgroup_order": 60
+    },
+    {
+      "direct_invariant_candidate": {
+        "dimension": 16,
+        "fixed_dimension": 1,
+        "steinberg_digits": [
+          3,
+          3
+        ]
+      },
+      "heads": [
+        {
+          "dimension": 1,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 21,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 49,
+          "multiplicity": 1
+        }
+      ],
+      "lambda": 20,
+      "nonnegligible_nonprincipal_heads": [
+        {
+          "dimension": 16,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 25,
+          "multiplicity": 1
+        },
+        {
+          "dimension": 36,
+          "multiplicity": 1
+        }
+      ],
+      "p": 7,
+      "q": 49,
+      "sheet_size": 980,
+      "subgroup": "A5",
+      "subgroup_order": 60
+    }
+  ],
+  "schema": 1
+}

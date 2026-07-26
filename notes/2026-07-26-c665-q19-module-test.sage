@@ -14,6 +14,7 @@ contain two copies of the 38-dimensional nonprincipal projective summand.
 
 import argparse
 import importlib.util
+import json
 from pathlib import Path
 
 from sage.all import GF, PolynomialRing, identity_matrix, matrix, vector
@@ -23,6 +24,7 @@ from sage.libs.gap.libgap import libgap
 Q = 19
 F = GF(Q)
 HERE = Path(__file__).resolve().parent
+PULLBACK_CERTIFICATE = HERE / "2026-07-26-c665-q19-quadratic-pullback.json"
 
 
 def load(name, path):
@@ -199,6 +201,9 @@ def main():
     parser.add_argument("--affine-pgl-hom", action="store_true")
     parser.add_argument("--affine-fixed-line", action="store_true")
     parser.add_argument("--outer-check", action="store_true")
+    parser.add_argument("--pullback", action="store_true")
+    parser.add_argument("--pullback-write", action="store_true")
+    parser.add_argument("--pullback-check", action="store_true")
     args = parser.parse_args()
 
     degrees, multiplicities, decomposition = sheet_character_record()
@@ -298,6 +303,109 @@ def main():
             (induced - identity).right_kernel().dimension(),
             (induced + identity).right_kernel().dimension(),
         )
+        return
+
+    if args.pullback or args.pullback_write or args.pullback_check:
+        dilation = (2, 0, 0, 1)
+        affine_dilation = conic_action(dilation)
+        simple_dilation = F(2) ** (-6) * binary_symmetric_power(dilation, 12)
+        quadratic_dilation = symmetric_square(affine_dilation)
+
+        # In the point-vector convention epsilon is the first coordinate.
+        # The polarized contraction sends e0^2 to 2e0, e0*f to f, and
+        # Sym^2(F) to zero.
+        affine_dimension = affine_dilation.nrows()
+        pairs = tuple(
+            (i, j)
+            for i in range(affine_dimension)
+            for j in range(i, affine_dimension)
+        )
+        contraction = matrix(F, affine_dimension, len(pairs))
+        for column, pair in enumerate(pairs):
+            if pair == (0, 0):
+                contraction[0, column] = 2
+            elif pair[0] == 0:
+                contraction[pair[1], column] = 1
+        for affine_action, quadratic_action in zip(
+            affine_actions + [affine_dilation],
+            quadratic_actions + [quadratic_dilation],
+        ):
+            assert contraction * quadratic_action == affine_action * contraction
+
+        simple = gap_module(simple_actions)
+        affine = gap_module(affine_actions)
+        quadratic = gap_module(quadratic_actions)
+
+        def hom_basis(source, target):
+            homomorphisms = libgap.MTX["BasisModuleHomomorphisms"](
+                source, target
+            )
+            rows = [list(matrix(F, hom).list()) for hom in homomorphisms]
+            basis = matrix(F, rows).echelon_form()
+            return matrix(F, [row for row in basis.rows() if row])
+
+        source_basis = hom_basis(simple, quadratic)
+        target_basis = hom_basis(simple, affine)
+        assert source_basis.nrows() == 10
+        assert target_basis.nrows() == 1
+
+        pullback_rows = []
+        for row in source_basis.rows():
+            hom = matrix(
+                F, simple_dilation.nrows(), quadratic_dilation.nrows(), row
+            )
+            contracted = hom * contraction.transpose()
+            flat = vector(F, contracted.list())
+            coordinates = target_basis.solve_left(flat)
+            assert coordinates * target_basis == flat
+            pullback_rows.append(coordinates)
+        pullback_map = matrix(F, pullback_rows)
+
+        def outer_on_hom(basis, target_dilation):
+            source_outer = simple_dilation.transpose()
+            target_outer = target_dilation.transpose()
+            rows = []
+            for row in basis.rows():
+                hom = matrix(
+                    F, simple_dilation.nrows(), target_dilation.nrows(), row
+                )
+                transformed = source_outer.inverse() * hom * target_outer
+                flat = vector(F, transformed.list())
+                coordinates = basis.solve_left(flat)
+                assert coordinates * basis == flat
+                rows.append(coordinates)
+            return matrix(F, rows)
+
+        source_outer = outer_on_hom(source_basis, quadratic_dilation)
+        target_outer = outer_on_hom(target_basis, affine_dilation)
+        source_identity = identity_matrix(F, source_outer.nrows())
+        target_identity = identity_matrix(F, target_outer.nrows())
+        source_plus = (source_outer - source_identity).right_kernel().dimension()
+        source_minus = (source_outer + source_identity).right_kernel().dimension()
+        target_plus = (target_outer - target_identity).right_kernel().dimension()
+        target_minus = (target_outer + target_identity).right_kernel().dimension()
+        assert (source_plus, source_minus) == (10, 0)
+        assert (target_plus, target_minus) == (0, 1)
+        assert pullback_map.rank() == 0
+        record = {
+                "q": Q,
+                "simple_dimension": simple_dilation.nrows(),
+                "hom_to_quadratic_dimension": source_basis.nrows(),
+                "hom_to_quadratic_outer": [source_plus, source_minus],
+                "hom_to_affine_dimension": target_basis.nrows(),
+                "hom_to_affine_outer": [target_plus, target_minus],
+                "contraction_map_rank": pullback_map.rank(),
+                "quadratic_pullback_split": False,
+            }
+        encoded = json.dumps(record, default=int, indent=2, sort_keys=True) + "\n"
+        if args.pullback_write:
+            PULLBACK_CERTIFICATE.write_text(encoded)
+            print(f"wrote {PULLBACK_CERTIFICATE.name}")
+        elif args.pullback_check:
+            assert PULLBACK_CERTIFICATE.read_text() == encoded
+            print(f"checked {PULLBACK_CERTIFICATE.name}")
+        else:
+            print(encoded, end="")
         return
 
     if args.pgl_hom:

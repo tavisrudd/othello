@@ -9,8 +9,10 @@ strength-two trade space whose two fibers are one-factorizations forces the
 balanced setup, and the only resulting orbits are \(B_3/\mathbb F_7\) and
 \(H_3/\mathbb F_{11}\).  The one-factorization condition uses endpoint
 incidence rather than the abstract quotient alone.  The stronger
-trade-only “Platinum” statement is an open strengthening, not part of C665
-and not claimed here.
+trade-only “Platinum” continuation is active under C665 but is not yet a
+manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
+and its \(q=19,A_5\) quadratic pullback is nonsplit; uniform C1,
+characteristic-three tori, and the \(q=5\) dihedral endpoint remain.
 
 ## Result
 
@@ -381,6 +383,37 @@ nix shell nixpkgs#sage -c sage \
   notes/2026-07-26-c665-q19-trade-module.sage
 ```
 
+The exceptional-head and quadratic-pullback continuation is replayed from
+`/home/tavis/src/othello` by
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-exceptional-head-pullback.sage --check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q19-module-test.sage --pullback-check
+sha256sum -c notes/2026-07-26-c665-exceptional-head-pullback.sha256
+```
+
+The head checker has two routes.  It extracts PIM-head multiplicities from
+the defining-characteristic decomposition matrix of the coset permutation
+character, and independently averages the Steinberg-digit character over
+the binary-polyhedral lift classes.  The direct candidate occurs in every
+finite PIM table row where it is predicted.  The uniform conclusion uses
+the displayed class average, not extrapolation from those rows.
+
+The pullback checker constructs the point-vector affine module, its
+symmetric square, the contraction, and all relevant intertwiner spaces over
+\(\mathbb F_{19}\).  It verifies contraction equivariance directly and
+computes both the zero matrix of \(\partial_*\) and the independent outer
+eigenspace mismatch \(10+0\to0+1\).  There is no second implementation of
+the full 1081-dimensional module; the cross-check is the incompatible outer
+parity, using the pre-existing independently normalized projective action.
+The certificate proves the \(q=19\) pullback only, not C1-uniform.
+The hashed bundle contains the exceptional checker (9,454 bytes), its JSON
+certificate (15,813 bytes), the extended q=19 checker (21,425 bytes), and
+its pullback certificate (268 bytes).  Their SHA-256 values are pinned in
+`2026-07-26-c665-exceptional-head-pullback.sha256`.
+
 The sheet permutation character is
 \[
 P(\mathbf1)+P(S_{13}),
@@ -648,7 +681,7 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
-| Does a unique two-valued quadratic trade alone force the one-factorization property? | open; not a C665 claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  Lean proves that the trade dimension equals the dimension of the common quotient \(R/(\ker e_++\ker e_-)\).  It remains to show that \(\lambda>1\) forces a nontrivial simple factor beyond the trade line; q=19 gives \(\mathbf1\oplus S_{13}\). |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional \(A_4,S_4,A_5\) head table now supplies a nonnegligible head in every non-endpoint case, and the \(q=19,A_5\) quadratic pullback is exactly nonsplit.  The remaining uniform gates are C1 for the other selected heads, characteristic-three tori, and the isolated \(q=5\) dihedral endpoint. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -954,14 +987,92 @@ reciprocity then places each displayed simple in the head of \(k[H/K]\).
 Thus H1 is already reduced, for torus subgroups, to characteristic \(3\)
 and the isolated \(q=5\) dihedral endpoint.
 
-The exceptional \(A_4,S_4,A_5\) rows require more care.  The classical
-binary-polyhedral invariant degrees provide vectors in Weyl modules, but
-in small characteristic such a vector can die on passage to the simple
-quotient.  The \(q=11,A_5\) principal-projective sheet is the warning:
-the classical degree-twelve invariant does not imply a nonprincipal simple
-head there.  The correct exceptional-row test is therefore
-\(\dim L(a)^K\), not merely the existence of an invariant in
-\(\operatorname{Sym}^a(k^2)\).
+The exceptional \(A_4,S_4,A_5\) head calculation is now complete.  For
+Steinberg digits \(a=(a_0,\ldots,a_{e-1})\), the direct binary-polyhedral
+character average is
+\[
+ \dim L(a)^K=\frac1{|K|}\sum_C |C|
+ \prod_i\left(\sum_{j=0}^{a_i}
+ \zeta_C^{\,p^i(a_i-2j)}\right).
+\]
+The lift orders \((|C|,\operatorname{ord}\zeta_C)\) are
+\[
+\begin{array}{c|l}
+A_4&(1,1),(3,4),(8,6)\\
+S_4&(1,1),(9,4),(8,6),(6,8)\\
+A_5&(1,1),(15,4),(20,6),(12,10),(12,5).
+\end{array}
+\]
+This computes the invariant in the simple module itself, not merely in a
+Weyl module.  Frobenius reciprocity therefore gives the following
+nonnegligible heads; omitted trailing digits are zero.
+
+| \(K\) | characteristic/range | simple head | dimension | fixed-space dimension |
+|---|---|---|---:|---:|
+| \(A_4\) | \(p\ge11\) | \(L(6)\) | \(7\) | \(1\) |
+| \(A_4\) | \(p=5,7,\ e\ge2\) | \(L(1)\otimes L(1)^{(1)}\) | \(4\) | \(1\) |
+| \(S_4\) | \(p\ge11\) | \(L(8)\) | \(9\) | \(1\) |
+| \(S_4\) | \(p=5,\ e\ge2\) | \(L(2)\otimes L(2)^{(1)}\) | \(9\) | \(1\) |
+| \(S_4\) | \(p=7,\ e\ge2\) | \(L(1)\otimes L(1)^{(1)}\) | \(4\) | \(1\) |
+| \(A_5\) | \(p\ge17\) | \(L(12)\) | \(13\) | \(1\) |
+| \(A_5\) | \(p=7,\ e\ge2\) | \(L(3)\otimes L(3)^{(1)}\) | \(16\) | \(1\) |
+| \(A_5\) | \(p=11,\ e\ge2\) | \(L(1)\otimes L(1)^{(1)}\) | \(4\) | \(1\) |
+| \(A_5\) | \(p=13,\ e\ge2\) | \(L(1)\otimes L(7)^{(1)}\) | \(16\) | \(1\) |
+
+The only prime-field failures allowed by the exceptional-subgroup
+congruences are exactly the Platonic endpoints and one enlargement row:
+\[
+\begin{array}{c|c|c}
+(q,K)&\text{head dimensions of }k[H/K]&\text{disposition}\\ \hline
+(5,A_4)&1&\lambda=1;\ \text{the matching stabilizer enlarges to }S_4\\
+(7,A_4)&1,7&\text{only the Steinberg head is nonprincipal}\\
+(7,S_4)&1&\lambda=1\\
+(11,A_5)&1&\lambda=1.
+\end{array}
+\]
+The complete \(q=7\) matching census has no matching with full stabilizer
+\(A_4\): its \(A_4\)-fixed candidate enlarges to the \(S_4\) stabilizer of
+the \(B_3\) sheet.  Thus the Steinberg-only \((7,A_4)\) module is not an
+additional matching-stabilizer case.  As exact cross-checks, the
+decomposition-matrix calculation gives heads
+\[
+\begin{array}{c|l}
+(11,A_4)&1,7,9\\
+(17,S_4)&1,9,13,17\\
+(19,A_5)&1,13,
+\end{array}
+\]
+and the direct candidates above occur in the checked \(q=25,49\) extension
+fields.  This settles H1 for every exceptional Dickson type.
+
+### Exact quadratic pullback at the \(q=19\) model
+
+The point-vector convention makes the contraction completely explicit:
+\[
+ \partial(e_0^2)=2e_0,\qquad
+ \partial(e_0f)=f,\qquad
+ \partial(\operatorname{Sym}^2F)=0.
+\]
+For \(S=L(12)\), of dimension thirteen, exact intertwiner calculations give
+\[
+\begin{array}{c|c|c}
+&\dim\operatorname{Hom}_H&(+,-)\text{ outer dimensions}\\ \hline
+\operatorname{Hom}_H(S,\operatorname{Sym}^2E)&10&(10,0)\\
+\operatorname{Hom}_H(S,E)&1&(0,1).
+\end{array}
+\]
+The displayed contraction is checked equivariant for the two \(H\)
+generators and a nonsquare dilation.  Its induced map \(\partial_*\) has
+rank zero.  Consequently the unique \(\chi\)-parity embedding
+\(S^\chi\hookrightarrow E\) has no quadratic preimage, so the pullback
+\[
+0\longrightarrow\operatorname{Sym}^2F\longrightarrow
+S^\chi\times_E\operatorname{Sym}^2E\longrightarrow S^\chi
+\longrightarrow0
+\]
+is nonsplit.  This closes C1 in the \(q=19,A_5\) model and fixes the exact
+extension convention; a uniform C1 calculation for every candidate head
+is still required.
 
 This is the first genuine residual family, not a cosmetic defect of the
 method.  Its first field can nevertheless be excluded exactly.  Over
@@ -980,29 +1091,27 @@ quadratic trade dimension is \(27\).  The replay is
 matchings at \(q=27\), but it is evidence for, not a proof of, the uniform
 characteristic-three torus exclusion.
 
-Accordingly the proposed proof of L2 has three exact remaining inputs:
+Accordingly the proposed proof of L2 now has two uniform inputs and one
+isolated endpoint:
 
-**C1. Quadratic pullback nonsplitting.**  In the point-vector convention,
-compute the pullback of
+**C1-uniform. Quadratic pullback nonsplitting.**  In the point-vector
+convention, compute the pullback of
 \(\operatorname{Sym}^2E\mathrel{\mathop{\to}^{\partial}}E\) along the
-relevant \(S^\chi\hookrightarrow E\), and prove it is nonsplit.  Equivalently,
-prove that \(\partial_*\) has no linear-parity preimage.  Only after this
-identification may categorical trace or an \(\operatorname{Ext}^1\)
-calculation be invoked.
+relevant \(S^\chi\hookrightarrow E\), and prove it is nonsplit for the
+candidate supplied by H1.  The \(q=19,A_5,S=L(12)\) row now passes exactly;
+the other subgroup and Fischer selections remain.
 
-**H1. Nonnegligible head, away from the torus exception.**  For each
-relevant \(p'\)-subgroup \(K\), produce a nonprincipal simple head of
-\(k[H/K]\) whose dimension is nonzero in \(k\), or list the exact additional
-Dickson-type exceptions.
+**H1-torus. Nonnegligible torus head.**  The exceptional \(A_4,S_4,A_5\)
+rows are settled by the table above.  The only remaining H1 rows are the
+characteristic-three torus family and the isolated \(q=5\) dihedral
+endpoint already identified in the torus table.
 
 **T3. Characteristic-three torus exclusion.**  If
 \(q=3^e\) and a split or nonsplit torus normalizer stabilizes a matching
 whose \(G\)-orbit splits into two \(H\)-sheets with \(\lambda>1\), then its
 quadratic trade space has dimension at least two.
 
-For the non-torus Dickson types, either H1 supplies a \(3'\)-dimensional
-head or the finitely many exceptional modular restrictions must be checked
-separately.  No prime-power-wide proof of H1 or T3 is claimed here.
+No prime-power-wide proof of C1-uniform, H1-torus, or T3 is claimed here.
 
 There is a second route if L2 fails:
 
@@ -1023,6 +1132,30 @@ N1 passes every certified \(q=13,17,19\) test.  It is not yet proved and
 does not follow from the universal conic module, whose outer norm
 difference is large.
 
+### Platinum-continuation `ej` + `tt` closeout
+
+The cheap upgrade is stronger than the requested finite head table.  The
+binary-polyhedral class average is a uniform simple-module calculation, so
+the exceptional Dickson types no longer belong to the Platinum mystery:
+every non-endpoint family has an explicit nonnegligible head, and the sole
+Steinberg-only row is removed by full-stabilizer enlargement.
+
+The q=19 pullback also changes the shape of C1.  Its zero contraction map
+does not require a separate recursive \(\operatorname{Ext}^1\) calculation:
+equivariance plus the outer decomposition \(10+0\to0+1\) already forces
+zero.  The highest-EV uniform continuation is therefore an outer-parity
+table for
+\[
+\operatorname{Hom}_H(S,\operatorname{Sym}^2E)
+\quad\text{and}\quad
+\operatorname{Hom}_H(S,E)
+\]
+for the H1 candidates, with an explicit contraction check only when both
+parities occur.  What remains genuinely unexplained is whether every
+matching-selected Fischer span has the same parity separation; the present
+calculation proves it only for the \(q=19,A_5\) model.  Characteristic-three
+tori and the \(q=5\) dihedral endpoint remain separate geometric gates.
+
 ### Facts that must not be assumed
 
 - A two-valued trade does not by itself say that either sheet is a
@@ -1033,5 +1166,6 @@ difference is large.
   do not determine how many full projective covers or which outer parities
   occur.
 - The \(q=59\) quadratic samples do not determine the full square rank.
-- No computation presently covers all cyclic, dihedral, and exceptional
-  subgroup realizations over all odd prime powers.
+- The exceptional-head theorem comes from the uniform binary-polyhedral
+  character average; the finite decomposition-matrix table is a
+  cross-check, not a census of subgroup realizations over all fields.

@@ -1,0 +1,16 @@
+{
+  "contraction_map_rank": 0,
+  "hom_to_affine_dimension": 1,
+  "hom_to_affine_outer": [
+    0,
+    1
+  ],
+  "hom_to_quadratic_dimension": 10,
+  "hom_to_quadratic_outer": [
+    10,
+    0
+  ],
+  "q": 19,
+  "quadratic_pullback_split": false,
+  "simple_dimension": 13
+}

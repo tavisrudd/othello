@@ -288,8 +288,15 @@ exception.  The first persona pass fixes the q=19 convention: the unique
 does not split the trivial quotient; C1 is now the nonsplitting of the
 quadratic pullback along \(S^\chi\hookrightarrow E\).  H1 is settled for
 cyclic tori outside characteristic three and for generic dihedral
-normalizers; the remaining subgroup rows are characteristic three, the q=5
-endpoint, and the exceptional \(A_4,S_4,A_5\) simple-quotient calculation.
+normalizers.  The exact \(q=19,A_5\) contraction map has rank zero from the
+ten-dimensional plus-parity quadratic Hom space to the one-dimensional
+minus-parity affine Hom space, so its quadratic pullback is nonsplit.  The
+binary-polyhedral simple-quotient calculation supplies nonnegligible heads
+for every exceptional \(A_4,S_4,A_5\) family outside the principal Platonic
+endpoints; the lone \(q=7,A_4\) Steinberg-only row cannot be a full matching
+stabilizer because it enlarges to \(S_4\).  The remaining Platinum inputs
+are uniform C1 for the other heads, characteristic-three tori, and the q=5
+dihedral endpoint.
 
 The active order is strict:
 
