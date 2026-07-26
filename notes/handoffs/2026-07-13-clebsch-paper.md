@@ -393,13 +393,15 @@ over the rational \(5J_0\) incidence torsor, complete golden fibre,
 conjugate Clebsch charts, Petersen module, and Steinhardt/Gaunt realization,
 looking for any interesting structural consequence, connection, question,
 example, or viewpoint.  It must label proved deductions and conjectural
-leads honestly, but it has no preset output shape, negative-close test, or
-automatic stopping condition.  If the first proposed bridge is tautological
-or fails, the task continues: rotate through deeper Hitchin-style geometric,
+leads honestly.  Its target is Gold/Platinum-level structure; preserve
+genuine Silver results as interim gains, but do not treat Silver as
+completion.  It has no preset output shape, negative-close test, or automatic
+stopping condition.  If the first proposed bridge is tautological or fails,
+the task continues: rotate through deeper Hitchin-style geometric,
 invariant-theoretic, arithmetic, and representation-theoretic questions and
 look for the next interesting structure.  The user decides when C682 is
-done.  This exploration does not reopen or hold the pre-release-green
-Paper III bytes unless the user later chooses to promote a finding.
+done.  This exploration does not reopen or hold the pre-release-green Paper
+III bytes unless the user later chooses to promote a finding.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
