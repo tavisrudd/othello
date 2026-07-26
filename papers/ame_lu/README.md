@@ -58,7 +58,8 @@ core is:
 
 1. uniform LU-to-LC rigidity and factorwise rigidity of transversal encoder
    conversions;
-2. the exact diagonal-isodual/full-Clifford versus split-torus transversal
+2. the field-generic one-dimensional diagonal-multiplier/nullity test and
+   the resulting exact full-Clifford versus split-torus transversal
    dichotomy over odd prime fields;
 3. exact local-Clifford classification of the admitted non-GRS pencil by one
    bracket scalar `z`;

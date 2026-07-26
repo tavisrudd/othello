@@ -11,14 +11,14 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 198844,
+        "bytes": 204734,
         "path": "ame-lu.pdf",
-        "sha256": "403edd67dd1579c696070737527b083a2cf85e70c556667a3e09ae8f74423663"
+        "sha256": "8d618ebe7b4982fa64a14246343c59cd8239c176274947b648ed1827ebc04e1a"
       },
       {
-        "bytes": 16753,
+        "bytes": 16964,
         "path": "formal-statement-adequacy.md",
-        "sha256": "53b94bd9ef54355f8e2208d80b1ea947313424682d4b1a1dfa7dc10e84270a27"
+        "sha256": "95dbccbc663bf5a6ae4eed5666e312dd4fe34a7cdd0b780d5947d283d0bf1956"
       },
       {
         "bytes": 3124,
@@ -46,9 +46,9 @@
         "sha256": "8c790decce74cdc3c2861651c39a714a554699484e44cb2bbe30b191381f45e4"
       },
       {
-        "bytes": 10449,
+        "bytes": 10958,
         "path": "sections/01-introduction.tex",
-        "sha256": "f5532407385d0ba8eee61324d3b3e93d989b411c7571906f5dacae7cd6f23473"
+        "sha256": "7f7c20dee06729b82317a9ab5f1e5a069b15fcbe3a6656096e2b9157438695d7"
       },
       {
         "bytes": 4299,
@@ -56,9 +56,9 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 18264,
+        "bytes": 20419,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "49cbaeba82f463e316894f382a7ba7e0e657ad6843c225c6dc3faefc24485740"
+        "sha256": "ac1ff6f59c1dd229a39eff44336176e613c374047c2f9abf3efbea435c0844bb"
       },
       {
         "bytes": 6002,
@@ -191,7 +191,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "c279c7fb111ab838511171a0709b33bffd8ce764beb9904d00494713f43a83e2"
+    "tree_sha256": "beb5f43430dece10ad18331678b82c60abf1f744c70a9b234bb4cc899faed612"
   },
   "formal_companion": {
     "artifacts": [
@@ -256,9 +256,9 @@
         "sha256": "77670a18133d26f6e20060dae73586b08576fcd297f91f496613afb9e564f274"
       },
       {
-        "bytes": 9869,
+        "bytes": 11271,
         "path": "lean/RelativeConicArcs/AMELU/ExtensionFieldPencil.lean",
-        "sha256": "24047c974305371bea81f235eae03ef1ede176dfc9214988ff4704979e72ddc7"
+        "sha256": "ca4ceda48d67173fbee7d229c02e63885e9cf0624cf45a5b3e70b30fca54494a"
       },
       {
         "bytes": 12000,
@@ -486,9 +486,9 @@
         "sha256": "82b583015226a723b29f4577ba95c81131b2feff2ae437073e9e38a3bb167e3d"
       },
       {
-        "bytes": 834,
+        "bytes": 903,
         "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencilAxioms.lean",
-        "sha256": "0f46e0c8e7b63505542b028e652b0550598656ee7845ff3b8b433ab6094558da"
+        "sha256": "97657ff0bbd32981fb1253d78efac85458953c474dad0aba01ffd07ac52b325c"
       },
       {
         "bytes": 537,
@@ -596,6 +596,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "77153d4d9a37f163c804e62ebb0455adf7289eaa05dd4ab8d0e893f875d973b1"
+    "tree_sha256": "285f596dd0c02f3d3d5b60a519458583eb9f2de82e2eb85e8c7e2d4d299c114a"
   }
 }

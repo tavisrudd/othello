@@ -264,6 +264,22 @@ No genuine mathematical mystery remains in the multiplier-space and witness
 uniqueness results.  The open entries are exact formal-interface depth
 boundaries.
 
+## Manuscript adoption
+
+The intrinsic result is adopted as
+`prop:diagonal-multiplier-line`.  Section 3 proves full support,
+bijectivity, one-dimensionality, the scalar self-multiplier theorem, the
+code-to-dual nullity test, and projective witness uniqueness, then shortens
+the proof of the diagonal-isodual transversal dichotomy by citing the
+proposition.  `rem:veronese-phase-test` gives the generator-matrix equation,
+the uniform-matroid circuit interpretation, the forced \(m=2\) isodual
+branch, and the \(m=3\) conic determinant.  The introduction records the
+single rank test.
+
+The speculative \(m\ge4\) codimension, Plücker square-class refinement,
+permutation-character filters, and qualitative stability observation remain
+outside the manuscript theorem package.
+
 ## Validation
 
 - Warning-free direct guarded elaboration of
@@ -273,15 +289,16 @@ boundaries.
   checks and trace-only aggregate gate passed.
 - Every audited declaration reports only `propext`, `Classical.choice`, and
   `Quot.sound`.
-- `make -C papers/ame_lu check`: warning-free, 21 pages, 195,549 bytes;
+- `make -C papers/ame_lu check`: warning-free, 23 pages, 204,734 bytes;
   PDF SHA-256
-  `7a81b9703f24a36516f82f12af088f67e0787daa43e681b9228e6b8fa7fe344c`.
-- The revised verification-boundary page was rendered and visually inspected.
-- The release manifest verifies 35 public artifacts and 78 formal companion
+  `8d618ebe7b4982fa64a14246343c59cd8239c176274947b648ed1827ebc04e1a`.
+- The revised introduction and Section 3 pages 2, 8, and 9 were rendered and
+  visually inspected.
+- The release manifest verifies 37 public artifacts and 80 formal companion
   artifacts, with tree hashes
-  `35f4dac109b353fef65e42fcd18b4d2aef0b5cfecbfa983df1350c453ee1b208`
+  `beb5f43430dece10ad18331678b82c60abf1f744c70a9b234bb4cc899faed612`
   and
-  `91a8bb7870059f59e58ae403d073512f7544d034e1291a412f85cb10c6ba089d`.
+  `285f596dd0c02f3d3d5b60a519458583eb9f2de82e2eb85e8c7e2d4d299c114a`.
 - The entire new module passed the referee-prose and workflow-reference
   review; it contains no generated data, native evaluation, axioms, admitted
   declarations, or private workflow references.
