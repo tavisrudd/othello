@@ -1,0 +1,20 @@
+import RelativeConicArcs.NinePointHeisenbergPair
+
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.g_cube
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.h_cube
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.heisenberg_commutator
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.cubeRoot_relation
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.cubeRoot_ne_one
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.g_maps_selected
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.h_maps_selected
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.g_maps_uncovered
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.h_maps_uncovered
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.selected_is_heisenbergOrbit
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.uncovered_is_heisenbergOrbit
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.selected_on_selectedCubic
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.uncovered_on_uncoveredCubic
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.selectedCubic_g
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.uncoveredCubic_g
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.selectedCubic_h
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.uncoveredCubic_h
+#print axioms RelativeConicArcs.NinePointHeisenbergPair.sixPointConic_values
