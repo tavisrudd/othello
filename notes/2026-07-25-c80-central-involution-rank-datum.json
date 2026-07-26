@@ -1,0 +1,2205 @@
+{
+  "candidate": {
+    "datum": "the central involution J=(iota_o iota_p)^(ord/2) of the even opponent-reply product",
+    "proposed_update": "answer a future opponent x by J(x), retaining J while strictly lowering overload",
+    "rank": "lexicographic overload plus half the selected-set symmetric difference under J"
+  },
+  "cases": [
+    {
+      "central_involution_matrix": [
+        1,
+        10,
+        9,
+        16
+      ],
+      "fixed_selected_points": 2,
+      "legal_opponents": 32,
+      "obligation_rank_half_symmetric_difference": 4,
+      "product_order": 18,
+      "q": 17,
+      "repair_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "reply": [
+          7,
+          1
+        ]
+      },
+      "response_histogram": {
+        "fixed_legal_move": 0,
+        "illegal_reply": 30,
+        "image_on_opening_line": 2,
+        "nonstrict_reply": 0,
+        "usable_strict_reply": 0
+      },
+      "responses": [
+        {
+          "central_image": [
+            2,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            2
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            1,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            2
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            2,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            2,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            2,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            10
+          ]
+        }
+      ],
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_overlap_with_image": 4,
+      "selected_points": 8,
+      "usable_target_value_histogram": {
+        "N": 0,
+        "P": 0
+      }
+    },
+    {
+      "central_involution_matrix": [
+        1,
+        2,
+        14,
+        16
+      ],
+      "fixed_selected_points": 2,
+      "legal_opponents": 32,
+      "obligation_rank_half_symmetric_difference": 4,
+      "product_order": 18,
+      "q": 17,
+      "repair_edge": {
+        "opponent": [
+          5,
+          0
+        ],
+        "reply": [
+          4,
+          10
+        ]
+      },
+      "response_histogram": {
+        "fixed_legal_move": 0,
+        "illegal_reply": 28,
+        "image_on_opening_line": 4,
+        "nonstrict_reply": 0,
+        "usable_strict_reply": 0
+      },
+      "responses": [
+        {
+          "central_image": [
+            1,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            1
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            0,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            7,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            7,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            12
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            6,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            5
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            10,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            6
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            11,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            13
+          ]
+        }
+      ],
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_overlap_with_image": 4,
+      "selected_points": 8,
+      "usable_target_value_histogram": {
+        "N": 0,
+        "P": 0
+      }
+    },
+    {
+      "central_involution_matrix": [
+        1,
+        11,
+        11,
+        16
+      ],
+      "fixed_selected_points": 2,
+      "legal_opponents": 32,
+      "obligation_rank_half_symmetric_difference": 4,
+      "product_order": 18,
+      "q": 17,
+      "repair_edge": {
+        "opponent": [
+          8,
+          14
+        ],
+        "reply": [
+          4,
+          10
+        ]
+      },
+      "response_histogram": {
+        "fixed_legal_move": 0,
+        "illegal_reply": 30,
+        "image_on_opening_line": 2,
+        "nonstrict_reply": 0,
+        "usable_strict_reply": 0
+      },
+      "responses": [
+        {
+          "central_image": [
+            5,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            12,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            2,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            9
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            3
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            10,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            5
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            12,
+            9
+          ]
+        }
+      ],
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_overlap_with_image": 4,
+      "selected_points": 8,
+      "usable_target_value_histogram": {
+        "N": 0,
+        "P": 0
+      }
+    },
+    {
+      "central_involution_matrix": [
+        1,
+        8,
+        16,
+        16
+      ],
+      "fixed_selected_points": 2,
+      "legal_opponents": 32,
+      "obligation_rank_half_symmetric_difference": 4,
+      "product_order": 18,
+      "q": 17,
+      "repair_edge": {
+        "opponent": [
+          11,
+          9
+        ],
+        "reply": [
+          7,
+          1
+        ]
+      },
+      "response_histogram": {
+        "fixed_legal_move": 0,
+        "illegal_reply": 30,
+        "image_on_opening_line": 2,
+        "nonstrict_reply": 0,
+        "usable_strict_reply": 0
+      },
+      "responses": [
+        {
+          "central_image": [
+            2,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            0,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            2
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            2,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            3
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            3,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            4,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            4,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            4,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            14
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            2
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            0
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            6
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            10
+          ]
+        }
+      ],
+      "root_t4": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "selected_overlap_with_image": 4,
+      "selected_points": 8,
+      "usable_target_value_histogram": {
+        "N": 0,
+        "P": 0
+      }
+    },
+    {
+      "central_involution_matrix": [
+        1,
+        18,
+        10,
+        18
+      ],
+      "fixed_selected_points": 2,
+      "legal_opponents": 51,
+      "obligation_rank_half_symmetric_difference": 6,
+      "product_order": 10,
+      "q": 19,
+      "repair_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "reply": [
+          0,
+          2
+        ]
+      },
+      "response_histogram": {
+        "fixed_legal_move": 0,
+        "illegal_reply": 44,
+        "image_on_opening_line": 3,
+        "nonstrict_reply": 0,
+        "usable_strict_reply": 4
+      },
+      "responses": [
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            1,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            4
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            1,
+            14
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            1,
+            16
+          ]
+        },
+        {
+          "central_image": [
+            18,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            5
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            2,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            9,
+            1
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            2,
+            16
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            12
+          ],
+          "classification": "usable_strict_reply",
+          "opponent": [
+            3,
+            3
+          ],
+          "target_exact_grid_value": "N"
+        },
+        {
+          "central_image": [
+            12,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            17
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            8
+          ]
+        },
+        {
+          "central_image": [
+            4,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            3,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            5,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            7,
+            13
+          ],
+          "classification": "usable_strict_reply",
+          "opponent": [
+            5,
+            12
+          ],
+          "target_exact_grid_value": "P"
+        },
+        {
+          "central_image": [
+            17,
+            6
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            4
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            11
+          ]
+        },
+        {
+          "central_image": [
+            4,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            15,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            6,
+            17
+          ]
+        },
+        {
+          "central_image": [
+            2,
+            18
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            13
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            7
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            7,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            12
+          ],
+          "classification": "usable_strict_reply",
+          "opponent": [
+            7,
+            13
+          ],
+          "target_exact_grid_value": "P"
+        },
+        {
+          "central_image": [
+            4,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            5
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            9
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            8
+          ]
+        },
+        {
+          "central_image": [
+            18,
+            10
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            8,
+            10
+          ]
+        },
+        {
+          "central_image": [
+            8,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            10,
+            3
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            8
+          ]
+        },
+        {
+          "central_image": [
+            4,
+            8
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            11
+          ]
+        },
+        {
+          "central_image": null,
+          "classification": "image_on_opening_line",
+          "opponent": [
+            9,
+            16
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            4
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            9,
+            17
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            2
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            4
+          ]
+        },
+        {
+          "central_image": [
+            0,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            11
+          ]
+        },
+        {
+          "central_image": [
+            16,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            10,
+            15
+          ]
+        },
+        {
+          "central_image": [
+            2,
+            11
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            1
+          ]
+        },
+        {
+          "central_image": [
+            18,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            4,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            4
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            11,
+            17
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            7
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            3
+          ]
+        },
+        {
+          "central_image": [
+            6,
+            16
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            8
+          ]
+        },
+        {
+          "central_image": [
+            13,
+            18
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            11
+          ]
+        },
+        {
+          "central_image": [
+            11,
+            12
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            12,
+            16
+          ]
+        },
+        {
+          "central_image": [
+            17,
+            0
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            13,
+            12
+          ]
+        },
+        {
+          "central_image": [
+            14,
+            18
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            13,
+            13
+          ]
+        },
+        {
+          "central_image": [
+            5,
+            5
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            14,
+            8
+          ]
+        },
+        {
+          "central_image": [
+            3,
+            3
+          ],
+          "classification": "usable_strict_reply",
+          "opponent": [
+            14,
+            12
+          ],
+          "target_exact_grid_value": "N"
+        },
+        {
+          "central_image": [
+            15,
+            15
+          ],
+          "classification": "illegal_reply",
+          "opponent": [
+            14,
+            16
+          ]
+        }
+      ],
+      "root_t4": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "selected_overlap_with_image": 2,
+      "selected_points": 8,
+      "usable_target_value_histogram": {
+        "N": 2,
+        "P": 2
+      }
+    }
+  ],
+  "cross_checks": {
+    "central_matrix_squares_projectively_to_identity": true,
+    "datum_commutes_with_stabilizer_transport": true,
+    "engine_reply_legality_equals_direct_determinant_cap_test": true,
+    "response_classification_commutes_with_transport": true
+  },
+  "input_sha256": {
+    "rust/scripts/c80_adaptive_copycat_survivor.py": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "rust/scripts/c80_coupled_overload_tutte_bank.py": "62061beb810d48a35fbe31ce8391b430267623c48656d8618c40028ca1719551",
+    "rust/scripts/c80_equivariant_live_secant_correspondence.py": "5c8a200983f50a97a6034b8706dc3b3c2117eb71c376e37e2f4764b7115d8783",
+    "rust/scripts/c80_marked_secant_profile_persistence.py": "76b6982a9e534db18b27a01711ffc11407c8516b8e2458096b351c05ed9551aa",
+    "rust/scripts/c80_marked_secant_spoiler_repair_compare.py": "c7f8c71030951dbd669750044abf81cd1d7de2aa97c5c2f0c848782e6d7342eb",
+    "rust/scripts/c80_positive_pairing_shell.py": "3f4dacaa20a8894f8bea2c40bd91d10183b43bf81b95cb375a81135dbbf72bf5",
+    "rust/scripts/c80_spoiling_fibre_canonicalization.py": "569b06a9376c9121a5a0f2a1693d60c19d5ad96c2528c95f62552abe90639092",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
+    "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
+  },
+  "schema": "c80-central-involution-rank-datum-v1",
+  "source": "rust/scripts/c80_central_involution_rank_datum.py",
+  "transport": {
+    "q17_representative": {
+      "all_checks_pass": true,
+      "central_involution_conjugacy_checks": 4,
+      "stabilizer_order": 4,
+      "transported_response_class_checks": 128
+    },
+    "q19_control": {
+      "all_checks_pass": true,
+      "central_involution_conjugacy_checks": 4,
+      "stabilizer_order": 4,
+      "transported_response_class_checks": 204
+    }
+  },
+  "verdict": {
+    "contains_all_five_repairs": true,
+    "opponent_complete_rank_update": "FAIL",
+    "q17_usable_replies": "0/32 in each marked target",
+    "q19_usable_replies": "4/51",
+    "q19_usable_target_values": "2 P + 2 N",
+    "transport_naturality": "PASS",
+    "uniform_c80_candidate": false
+  }
+}

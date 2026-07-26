@@ -1127,6 +1127,21 @@ subcorrespondence that cuts out the q17 repair and excludes the eight q19 N
 edges without querying minimax or `F_cc`; C82 remains gated. Report+cert:
 [`../2026-07-25-c80-equivariant-live-secant-correspondence.md`](../2026-07-25-c80-equivariant-live-secant-correspondence.md).
 
+**The canonical central-involution rank datum is also closed-negative
+(C80, 2026-07-25).** For a repair edge `(o,p)`, take the unique central
+involution `J=(ι_oι_p)^(ord/2)` of its even conic-product torus and propose
+the direct response `x↦J(x)`, carrying selected-set mismatch as an obligation
+rank while `Ω` decreases. This datum is formula-defined, anti-gauge, and
+commutes exactly with the full stabilizer, but the selected state is not
+`J`-invariant. Every q17 repair target has `0/32` usable strict replies
+(`0/128` over the orbit); the q19 control has only `4/51`, and those four
+targets split `2 P + 2 N`. Direct projective determinant replay agrees with
+grid legality on every response. Thus the central torus element cannot be
+the proof datum even locally; the successor needs a state-dependent algebraic
+obligation rewrite before copycat, not another edge-only involution. C82
+remains gated. Report+cert:
+[`../2026-07-25-c80-central-involution-rank-datum.md`](../2026-07-25-c80-central-involution-rank-datum.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
