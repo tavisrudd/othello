@@ -86,94 +86,21 @@ the isoduality fixes its input leg.
 \end{theorem}
 
 \begin{proof}
-Every four-party support carries the two-dimensional shortened label
-plane \((3.7)\), and projection to the Pauli plane of any retained party
-is an isomorphism.  If \(F_i\) is fixed at one party, requiring
-\(\bigoplus_iF_i\) to carry each shortened plane to itself therefore
-determines the other five blocks through overlapping four-sets.  These
-conditions are also sufficient: the shortened planes span \(L_C\) by
-the general minimum-support generation identity \((3.5)\).
-
-The common diagonal anchor \(\diag(a,a^{-1})\) preserves
-\(C_X\oplus C^\perp_Z\), so \(T\) is always present.  Write a propagated
-collection as
-\[
- F_i=\begin{pmatrix}\alpha_i&\beta_i\\
-                     \gamma_i&\delta_i\end{pmatrix},
- \qquad
- D_\alpha=\diag(\alpha_1,\ldots,\alpha_6),
- \quad\text{and similarly for }D_\beta,D_\gamma,D_\delta .
-\]
-Preservation of \(L_C=C_X\oplus C^\perp_Z\) is equivalent to
-\[
-\begin{array}{ll}
-D_\alpha C\subseteq C,&D_\gamma C\subseteq C^\perp,\\
-D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
-\end{array}                                             \tag{5.2}
-\]
-Apply Proposition~\ref{prop:diagonal-multiplier-line} to
-\(D_\gamma C\subseteq C^\perp\) and
-\(D_\beta C^\perp\subseteq C\).  A nondiagonal input block has a nonzero
-off-diagonal entry, hence the corresponding diagonal matrix is nonzero,
-nonsingular, and gives
-\[
- D_\gamma C=C^\perp\qquad\text{or}\qquad
- D_\beta C^\perp=C.                                   \tag{5.3}
-\]
-Conversely, if a nonsingular diagonal \(S\) satisfies \(SC=C^\perp\),
-then \(S^{-1}C^\perp=C\).  Taking \(D_\gamma=S\), respectively
-\(D_\beta=S^{-1}\), with identity diagonal blocks in \((5.2)\) realizes
-the lower and upper elementary unipotent input anchors.  Together with
-\(T\), these generate \(\mathrm{SL}_2(q)\).
-
-Lemma~\ref{lem:six-arc-self-association} identifies the diagonal
-equivalence \(C\sim C^\perp\) with the conic locus.  On it, the standard
-GRS dual multipliers realize the
-code--dual equivalence and hence every anchor in
-\(\mathrm{SL}_2(q)\); off it, the preceding implication excludes every
-nondiagonal anchor.
-
-Finally, an isoduality interchanges the two summands \(C_X\) and
-\(C^\perp_Z\), so its input block swaps the two Weyl axes.  It conjugates
-\(a\) to \(a^{-1}\) in \(T\), giving \(N(T)\) whenever such a
-party-moving symmetry is present.
+Corollary~\ref{cor:diagonal-isodual-transversal-group} gives
+\(\mathrm{SL}_2(q)\) exactly on the diagonally isodual branch and \(T\)
+otherwise.  Lemma~\ref{lem:six-arc-self-association} identifies diagonal
+isoduality with the conic locus.  At a chosen anchor leg, a party-moving
+isoduality exchanges the CSS \(X\)- and \(Z\)-axes and hence represents
+the nontrivial Weyl-group element normalizing \(T\).  It acts on one fixed
+encoder only when the party motion fixes that encoder's input.
 \end{proof}
 
-\begin{corollary}[Exact fixed-party transversal group]
-\label{cor:six-arc-fixed-party-group}
-For the associated \([[5,1,3]]_q\) encoder, the projective logical
-Clifford group realized without moving parties is
-\[
-\begin{cases}
-\F_q^2\rtimes\mathrm{SL}_2(q),&\text{if the six-arc is conic/GRS},\\
-\F_q^2\rtimes T,&\text{if the six-arc is nonconic}.
-\end{cases}
-\]
-\end{corollary}
-
-\begin{proof}
-Every logical Pauli has a physical Pauli representative, giving the
-normal translation subgroup \(\F_q^2\).  Theorem~\ref{thm:logical-phase}
-identifies the exact linear factor realized by fixed-party tensor
-symmetries.  Modulo scalar phases, the one-qudit Clifford group is the
-affine semidirect product
-\(\F_q^2\rtimes\mathrm{SL}_2(q)\), so these two ingredients give the
-displayed equalities.
-\end{proof}
+Adding logical Paulis recovers the exact fixed-party projective logical
+groups in Corollary~\ref{cor:diagonal-isodual-transversal-group}.
 
 This is an operational distinction, not a classical automorphism count.
 The fixed-party non-GRS group has order \(q^2(q-1)\), while the GRS
 group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
-Corollary~\ref{cor:computed-party-splitting} makes the party-moving
-comparison exact at \(q=11\): the two non-GRS pencil classes have party
-images \(S_5\) and \(S_4\), their extensions split, and odd party motion
-inverts \(T\).  After choosing an anchor leg, the possible one-qudit
-affine carriers across the transported encoder views therefore form
-\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
-only for the subgroup that fixes its input leg; general party motion
-compares different encoder views.  At \(q=11\), the GRS fixed-party
-logical group and this anchored non-GRS carrier have orders \(159720\)
-and \(2420\), respectively.
 
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
@@ -183,13 +110,3 @@ input Pauli has exactly ten minimum-support pushes, although the symmetry
 orbits of those pushes can distinguish finer projective classes.  This
 uses only the projection isomorphism for the shortened planes, not the
 finite group calculation.
-
-Arithmetic symmetry jumps do not change the phase.  The
-characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
-and therefore retains the full \(\mathrm{SL}_2(17)\) fixed-party image; its
-party image is \(S_4\), and the computed extension splits.  The
-characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
-fixed-party image is the split torus; its \(S_5\) party image also splits,
-and odd motion enlarges the transported anchor-block carrier to \(N(T)\).
-These are symmetry enhancements inside the two phases, not exceptions
-to \((5.1)\).

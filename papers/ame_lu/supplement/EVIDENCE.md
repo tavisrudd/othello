@@ -46,3 +46,34 @@ standard Pauli/stabilizer and copy-contraction dictionaries used in the paper.
 The conceptual all-field arguments and the correspondence between these
 computations and the manuscript statements remain mathematical proof
 obligations in the text.
+
+## Lean claim crosswalk
+
+The Lean 4 companion uses toolchain `v4.32.0-rc1`.  The aggregate terminals
+are `RelativeConicArcs.Gates.AMELUAggregate` and
+`RelativeConicArcs.Gates.AMELUAggregateAxioms`.
+
+- `StabilizerAMESupport`, `StabilizerAMERigidity`, and the generic marginal
+  and diagonal-tensor modules prove the arbitrary-additive support squeeze,
+  minimum-support generation, full-Weyl marginal and axis-recovery cores, and
+  the LU-to-LC composition.  The physics-facing realization input is the
+  stabilizer-projector partial-trace expansion.
+- The generic transition and holonomy modules prove atlas equivalence and the
+  abstract centralizer mechanism.  The extension-field form retains the
+  propagated `Sp_{2e}(F_p)` membership conditions; the prime-field normal
+  subgroup specialization gives the pure `SL_2(q)` centralizer.
+- `EncoderTransversal`, `DiagonalIsoduality`, `StabilizerDictionary`, and the
+  automorphism/extension modules prove the Choi inverse-transpose bridge,
+  Clifford closure, the arbitrary-length multiplier and nullity theorems,
+  stabilizer-character phase correction, scalar-torus quotients, the
+  section-free outer action, and abstract splitting consequences.
+- The pencil geometry, exact logical propagation, marginal trace/incidence
+  bridges, finite contraction ranks, twelve concrete complements, and
+  transport determinant/double-coset inputs occur as named hypotheses of
+  formalized implications.  They are supplied by manuscript proofs or the
+  exact certificates listed above, not by unconditional Lean declarations.
+
+No aggregate module uses `sorry` or unsafe declarations.  Ordinary
+kernel-checked declarations use only `propext`, `Classical.choice`, and
+`Quot.sound`; three finite graph cardinalities use `native_decide` and are
+reported separately by the axiom terminal.

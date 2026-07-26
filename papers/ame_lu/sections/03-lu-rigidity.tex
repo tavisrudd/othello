@@ -144,6 +144,8 @@ party \(i\), choose such a set containing it and apply
 Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
 \end{proof}
 
+\subsection{Minimum-support atlases and symmetry groups}
+
 The same support calculation recovers standard quantum-MDS structure.
 If \(|A|\leq m\), the AME condition gives \(L(A)=\{0\}\).  If
 \(|A|>m\), then \(\rho^\psi_{A^c}\) is maximally mixed, so purity of the
@@ -271,6 +273,8 @@ Evaluation at the base therefore identifies
 holonomy subgroup; changing the base conjugates that subgroup, and hence
 its centralizer, by a chosen transport.
 \end{proof}
+
+\subsection{Encoder and projective-symmetry consequences}
 
 Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
 \(S\) of size \(m+1\).  Shortening \(C\) on the \(m-1\) coordinates
@@ -408,62 +412,7 @@ precisely when the section preserves multiplication, which proves the
 splitting characterization.
 \end{proof}
 
-\begin{corollary}[Computed party-extension splittings]
-\label{cor:computed-party-splitting}
-This finite application is not used in the uniform results below.
-The realized projective party-permutation extension in
-Corollary~\ref{cor:discrete-lu-symmetry} splits for both non-GRS
-\(q=11\) pencil classes, the \(q=11\) GRS evaluation-set representatives
-\[
-\{0,1,2,3,4,5\},\ \{0,1,2,3,4,6\},\
-\{0,1,2,3,5,6\},\ \{0,1,2,3,5,9\},
-\]
-the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
-and the \(H_3\) representatives
-\((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
-For every listed non-GRS or \(H_3\) row, party parity acts on the fixed
-split torus \(T\) by inversion.  Thus, after choosing an anchor leg and
-allowing party motion to transport the corresponding encoder view, a
-realized odd party permutation enlarges the possible local linear
-carrier exactly from \(T\) to
-\[
- N(T)=\langle T,J\rangle,\qquad
- J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
- J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
-\]
-Hence \(N(T)/T\cong C_2\).  The linear extension does not split in odd
-characteristic, although its projectivization does.  If the party
-permutation fixes the input leg of a chosen encoder, this carrier acts
-as an actual logical enlargement; otherwise it compares two encoder
-views of the same six-leg tensor.
-\end{corollary}
-
-\begin{proof}
-For each row, an exact finite computation reconstructs the fifteen
-four-support shortened planes, exhausts all \(720\) party permutations,
-and checks the propagated local symplectic blocks against the full CSS
-Lagrangian.  After quotienting by the fixed-party group identified in
-Theorem~\ref{thm:logical-phase}, it is enough to test anchor block \(I\)
-on the GRS locus and anchor blocks \(I,J\) off it; this discards no
-candidate.  In the order in which the six \(q=11\) rows are listed above,
-their party images are
-\[
- S_5,\quad S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
-\]
-where \(D_{12}\) has order \(12\).  The \(q=17\) and \(q=31\)
-enhanced rows have party images \(S_4\) and \(S_5\), respectively, and
-each listed \(H_3\) image is \(S_5\).
-
-The certificate records the complete normalized factor set for each
-section.  It also closes a complement of order \(\lvert\Pi\rvert\) whose
-projection to \(\Pi\) is bijective, and verifies that the associated
-normalized cochain changes the factor set to the identity.  Hence every
-listed extension splits.  Conjugating the fixed torus by the stored lifts
-gives the sign action; any odd lift therefore induces the nontrivial
-class of \(N(T)/T\).  The complement is an involution in the projective
-party-extension group; its determinant-one anchor block is \(J\), whose
-square is \(-I\).
-\end{proof}
+\subsection{Exact MDS--CSS logical images and lifts}
 
 \begin{proposition}[The diagonal-multiplier line]
 \label{prop:diagonal-multiplier-line}
@@ -592,7 +541,8 @@ logical action outside that group.  Hence the displayed group is exact.
 
 For a generalized or extended generalized Reed--Solomon code, the
 standard dual formula supplies \((3.9)\), including the extended
-evaluation point at length \(q+1\).  Thus the GRS tower lies on the
+evaluation point at length \(q+1\)
+\cite[Sections~5.2--5.3]{HuffmanPless2003}.  Thus the GRS tower lies on the
 diagonally isodual branch, but the proof used no evaluation structure.
 
 There are two different lift questions behind this projective statement.

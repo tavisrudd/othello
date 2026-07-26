@@ -6,9 +6,10 @@ every subsystem no larger than half the parties.  Fix a prime power
 whether a stabilizer \(\AME(2m,q)\) state retains its local Weyl frames
 under arbitrary single-party changes of basis.
 
-The assertion that LU equivalence implies LC equivalence fails for general
-stabilizer states \cite{JiChenWeiYing2008}.  Maximal entanglement supplies
-the missing rigidity.
+The assertion that local-unitary (LU) equivalence implies local-Clifford
+(LC) equivalence fails for general stabilizer states
+\cite{JiChenWeiYing2008}.  Maximal entanglement supplies the missing
+rigidity.
 
 Throughout, \emph{transversal} means a tensor product of one-site physical
 operators with the party labels fixed.  A \emph{fixed-party} symmetry has
@@ -66,6 +67,13 @@ Their collection over all \(A,i,j\) is the
 compatible precisely when they intertwine every \(M_A(i,j)\).  Here a
 projective product-unitary group means the image of the product-unitary
 symmetries in the projective unitary group of the full tensor product.
+Schematically, overlapping supports turn operator pushing into a loop,
+\[
+ P_i\xrightarrow{\,M_A(i,j)\,}P_j
+ \xrightarrow{\,M_B(j,k)\,}P_k
+ \xrightarrow{\,M_C(k,i)\,}P_i ,
+\]
+whose composite is an atlas holonomy.
 
 \begin{theorem}[Minimum-support atlas classification]
 \label{thm:atlas-classification}
@@ -123,7 +131,8 @@ The boundary \(m\geq2\) is sharp: a Bell pair has non-Clifford
 \(U\otimes\overline U\) symmetries.
 
 Rigidity determines which product operations are possible; the
-MDS--CSS model determines which Clifford operations actually occur.  If
+maximum-distance-separable (MDS) Calderbank--Shor--Steane (CSS) model
+determines which Clifford operations actually occur.  If
 \(C\leq\F_q^{2m}\) is a linear \([2m,m,m+1]_q\) MDS code, then
 \[
   \lvert\Psi_C\rangle
@@ -132,8 +141,8 @@ MDS--CSS model determines which Clifford operations actually occur.  If
 is a stabilizer \(\AME(2m,q)\) state.  Conversely, an equal-phase state
 of a linear \([2m,m]_q\) code is AME only if the code is MDS
 \cite{RaissiGogolinRieraAcin2018}.  Here the MDS--CSS geometry is no
-longer needed for rigidity; it makes the exact transversal group
-computable.
+longer needed for rigidity; it makes the exact fixed-party projective
+logical image computable.
 
 \begin{corollary}[Diagonal-isodual transversal logical group]
 \label{cor:diagonal-isodual-transversal-group}
@@ -158,25 +167,19 @@ Put
  \mathcal D(C,C^\perp)
  =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
 \]
-The phase condition is the nullity test
+The branch condition is the nullity test
 \(\dim\mathcal D(C,C^\perp)=1\).
 Proposition~\ref{prop:diagonal-multiplier-line} proves that this dimension
 is zero or one and that every nonzero vector in the space has full support
 and is unique up to scalar.
 
-The nullity-one condition is the diagonal-isoduality test governing the
-two branches above.  A separate issue is the passage from the projective
-logical group to unitary lifts.  Over an odd field the
-\(\mathrm{SL}_2(q)\) factor on the diagonally isodual branch has coherent
-Weil lifts, so no metaplectic obstruction remains there.  The full affine
-group does not lift through the one-qudit scalar quotient: its translation
-subgroup is the projective Weyl group, whose two coordinate generators have
-a nontrivial scalar commutator.  This Heisenberg obstruction is independent
-of the factor set for party-moving symmetries in
-Corollary~\ref{cor:discrete-lu-symmetry}.  Generalized and extended
-generalized Reed--Solomon codes are diagonally isodual, but the condition is
-not confined to that family: self-dual non-GRS MDS constructions are known
-\cite{ZhuLiao2024}.
+The nullity-one condition governs the two branches above.  In odd
+characteristic the \(\mathrm{SL}_2(q)\) factor has coherent Weil lifts,
+while the affine projective group retains the usual Heisenberg central
+extension; Section~\ref{sec:rigidity} separates these lift questions.
+Generalized and extended generalized Reed--Solomon codes are diagonally
+isodual, but the condition is not confined to that family: self-dual
+non-GRS MDS constructions are known \cite{ZhuLiao2024}.
 
 For example, an extended \([8,4,5]_7\) Reed--Solomon code gives an
 \(\AME(8,7)\) tensor and a \([[7,1,4]]_7\) quantum MDS code whose
@@ -215,8 +218,10 @@ local-Clifford classification to the following complete local result.
 
 \begin{corollary}[Classification of the admitted pencil]
 \label{cor:lu-lc-pencil}
-For admitted parameters \(t,u\) over a prime field \(\F_q\) with \(q\)
-odd, the following are equivalent:
+Let \(t,u\) lie in the nondegenerate locus \((4.1)\) over an odd prime
+field \(\F_q\).  Write \(\sim_{\mathrm{proj}}\) for projective equivalence
+of the ordered six-arcs up to a party permutation and
+\(\sim_{\mathrm{mon}}\) for monomial equivalence of their codes.  Then
 \[
  H_t\sim_{\mathrm{proj}}H_u
  \Longleftrightarrow
@@ -242,69 +247,36 @@ parties.  Including logical Paulis, the exact fixed-party projective
 logical group is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) on the GRS locus and
 \(\F_q^2\rtimes T\) off it.
 
-Quantum Reed--Solomon codes and their encoding circuits were developed
-by Grassl, Geiselmann, and Beth
-\cite{GrasslGeiselmannBeth1999}.  Aharonov and Ben-Or constructed
-fault-tolerant coordinatewise gates for polynomial codes, with degree
-reduction when a gate changes the polynomial degree
-\cite[Section~5]{AharonovBenOr2008}; Gottesman constructed the full
-logical Clifford group for any prime-dimensional stabilizer code using
-ancillas and Pauli measurements \cite{Gottesman1999}.  These results
-establish that GRS and polynomial encoders support fault-tolerant
-logical gates, but they do not identify the fixed-party product-Clifford
-kernel.  Corollary~\ref{cor:diagonal-isodual-transversal-group} combines
-diagonal code--dual equivalence with LU rigidity to identify the exact
-transversal logical group for every half-dimensional MDS code.  In coding
-theory, diagonal code--dual equivalence is the fixed-coordinate form of
-isometry duality; it occurs in algebraic-geometry MDS families as well as
-GRS codes \cite{ZhuZhao2026}.  For binary self-dual CSS codes,
-Tansuwannont, Takada, and Fujii give criteria for transversal Hadamard and
-phase operations relative to a compatible logical basis
-\cite{TansuwannontTakadaFujii2025}.  Their setting and conclusion differ
-from the odd-prime, one-logical-qudit exact fixed-party group here.
-Anderson and Jochym-O'Connor constrain diagonal transversal gates, including
-maps between two qubit stabilizer codes, to Clifford-hierarchy angles
-\cite[Propositions~3 and~4]{AndersonJochymOConnor2014}.  Sayginel
-et al.\ derive SWAP-transversal logical Cliffords from code automorphisms,
-including Pauli phase correction and logical-action recovery
-\cite{SayginelEtAl2025}.  Our conversion theorem instead proves that every
-factor of an arbitrary product-unitary conversion between stabilizer
-quantum-MDS encoders in Corollary~\ref{cor:transversal-clifford} is
-Clifford; the MDS--CSS specialization then determines exact extensions and
-factor sets rather than an automorphism-search procedure.
-For qubit stabilizer codes, Dasu and Burton classify diagonal transversal
-Clifford gates on any number of identical code blocks by the code's
-\(\F_2\)-endomorphism algebra \cite[Theorems~5.5 and~6.1]{DasuBurton2025}.
-Their classification permits gates coupling corresponding qubits across
-several blocks but applies the same local tableau at every physical
-coordinate.  We instead allow an independent one-qudit factor at each
-coordinate, work over odd prime fields, and determine the exact one-block
-logical image for the half-dimensional MDS/CSS family.  The transition
-atlas gives the two settings a common algebraic form: compatible local
-blocks centralize loop transports, while Dasu--Burton's gates are selected
-by a code endomorphism algebra.  The locality and block hypotheses remain
-complementary.
-Recent high-rate constructions obtain the full logical Clifford group by
-allowing fold-transversal or \(2\)-local transversal layers
-\cite{TansuwannontChanTakagi2026,Holmes2026}.  Those architectures encode
-many logical qubits and deliberately use interactions beyond a single
-fixed-party product layer.  Conversely, Chakraborty and Gottesman prove
-that a stabilizer code encoding more than one logical qubit cannot realize
-its full logical Clifford group by fully transversal gates
-\cite{ChakrabortyGottesman2026}.  The exact positive result here concerns
-one logical qudit, so it lies on the permitted side of that obstruction
-and determines which half-dimensional MDS encoders attain the full
-one-qudit group.
-Theorem~\ref{thm:logical-phase} identifies the geometric condition among
-six-arcs: self-association is exactly the condition for the fixed-party
-logical symplectic image to exceed the split torus.  The comparison is with
-isometry-dual MDS constructions, quantum Reed--Solomon and polynomial-code
-gate constructions, self-dual CSS transversal Clifford gates, general
-prime-dimensional stabilizer Clifford synthesis, and restrictions on
-transversal gate sets.  We claim the exact group statements, not priority
-for the underlying code or gate constructions.  Eastin and Knill's
-restriction on universal transversal sets gives the general boundary
-\cite{EastinKnill2009}.
+Quantum Reed--Solomon encoders, polynomial-code gates, and general
+prime-dimensional stabilizer Clifford synthesis supply established
+fault-tolerant constructions
+\cite{GrasslGeiselmannBeth1999,AharonovBenOr2008,Gottesman1999}.
+Automorphism methods recover SWAP-transversal logical Cliffords with
+their Pauli corrections \cite{SayginelEtAl2025}, while fold-transversal
+and \(2\)-local layers realize larger logical groups in high-rate codes
+\cite{TansuwannontChanTakagi2026,Holmes2026}.  Those constructions do not
+identify the kernel of one fixed-party product layer.
+
+Complementary restrictions describe diagonal gates between qubit codes
+\cite[Propositions~3 and~4]{AndersonJochymOConnor2014}, transversal
+Hadamard and phase gates for binary self-dual CSS codes
+\cite{TansuwannontTakadaFujii2025}, and multiblock diagonal Clifford gates
+through an \(\F_2\)-endomorphism algebra
+\cite[Theorems~5.5 and~6.1]{DasuBurton2025}.  A code encoding more than
+one logical qubit cannot realize its full logical Clifford group by fully
+transversal gates \cite{ChakrabortyGottesman2026}; universal transversal
+sets face the broader Eastin--Knill obstruction \cite{EastinKnill2009}.
+
+Here each coordinate may carry an independent one-qudit factor, and
+Corollary~\ref{cor:transversal-clifford} treats conversions between
+different one-logical-qudit quantum-MDS encoders.  The MDS--CSS
+specialization then identifies the exact fixed-party projective logical
+image for every half-dimensional MDS code over an odd prime field.
+Diagonal code--dual equivalence is the fixed-coordinate form of isometry
+duality and occurs in algebraic-geometry MDS families as well as GRS codes
+\cite{ZhuZhao2026}.  The transition-atlas centralizer and the multiblock
+endomorphism-algebra classification above are parallel algebraic
+descriptions under complementary locality assumptions.
 
 Classically, we use Coble's
 association theory \cite{Coble1922} through the modern treatment of
@@ -333,9 +305,12 @@ Section~\ref{sec:logical} proves the logical-Clifford phase theorem:
 Section~\ref{sec:invariants} gives a uniform \(H_3\) (icosahedral)/GRS
 marginal separator, an
 exact four-copy \(q=13\) witness, and the generic-constancy obstruction for
-fixed-copy scalars.  Appendix~\ref{sec:transport} calculates the
+fixed-copy scalars.  Section~\ref{sec:conclusion} returns to the
+covariant-versus-scalar distinction and the extension-field boundary.
+Section~\ref{sec:verification} records the computational trust boundary
+and the precise scope of all results.
+Appendix~\ref{sec:transport} calculates the
 exceptional divisor of that witness, redundant given
 Corollary~\ref{cor:lu-lc-pencil}; it is not part of the
-classification.
-Section~\ref{sec:verification} records the computational trust
-boundary and the precise scope of all results.
+classification.  Appendix~\ref{sec:party-extensions} records the finite
+party-permutation splitting examples.

@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-26",
-  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes",
+  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Logical Clifford Groups of MDS--CSS Codes",
   "public_export": {
     "artifacts": [
       {
@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 247012,
+        "bytes": 236735,
         "path": "ame-lu.pdf",
-        "sha256": "c23eda1448cfa77036723ebdfc79eb40ac4e0e0832078d96f0aeadc6be3361d4"
+        "sha256": "285405cb6781e48a504d7d10b4b5c44ae5ddfaa06ff9e05244907535383099a9"
       },
       {
         "bytes": 18767,
@@ -21,14 +21,14 @@
         "sha256": "0f1d63402a1ffcb828534f000e88dbd93874355057ad534392d324a54c525393"
       },
       {
-        "bytes": 3953,
+        "bytes": 3500,
         "path": "main.tex",
-        "sha256": "a0fef0d184f755b397b3fcd1d3fcd76d4b6c2c690e35ded6e772b9464c3838d8"
+        "sha256": "2bc5c7a72449ef4caba8f09a9cb78e876b53d13a388861c5ebadc2c62fd1d5a3"
       },
       {
-        "bytes": 11699,
+        "bytes": 12373,
         "path": "refs.bib",
-        "sha256": "a675d9680e02708b151495140c5aca709a034df3328bb2d6a10b350561773d88"
+        "sha256": "e929c31c02ce667ad129de588d15fd1555ccaeb08658650f40a4ea4302562b70"
       },
       {
         "bytes": 2282,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 7592,
+        "bytes": 7600,
         "path": "release/verify_release.py",
-        "sha256": "b6fc797b48e0ce9b4fa753ad75b4b596d6fda99cb377de079650e8cd37bf85c0"
+        "sha256": "f97f0093ab5e86c598305c5954cea538ac8e77030f24f321779b737c51d0038d"
       },
       {
-        "bytes": 17772,
+        "bytes": 15711,
         "path": "sections/01-introduction.tex",
-        "sha256": "3f73857484c53d9943b36d4855af43e7bcf6e1145a0bc27ae0b4af8bb3257ae4"
+        "sha256": "d5bbcda3a5f603b58bbb5d46c85b2d71edf568f4fc0a5696cea458f4e70a73a8"
       },
       {
         "bytes": 6200,
@@ -56,9 +56,9 @@
         "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
       },
       {
-        "bytes": 28374,
+        "bytes": 25869,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "7fe974e9818daccd0bfb7c975aaaf94d39b2f6a65a4c7ce0d8e5e730128ed517"
+        "sha256": "42cc656d06e9890bd854fad2e83f8d30d1e593c94f69300cbc5c2135c20df3db"
       },
       {
         "bytes": 8736,
@@ -66,14 +66,19 @@
         "sha256": "a15f5639e38c6ee3eaeb7feaa8bb40bd649895117ebb9ba659a74190ad319b7f"
       },
       {
-        "bytes": 9160,
+        "bytes": 5427,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "7e665eae64811eeafd6958b2b2ea86fa34efe76b3cd32422b7aa759582c9fda5"
+        "sha256": "4d704c89304db03c8da437f60e6df0882867d48ffcbd860250f56dd4e1d77358"
       },
       {
-        "bytes": 11116,
+        "bytes": 11257,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "c75c6fc0f5fc2c32e1809320f9fe310d8a4b2d5270555f656ee708fcff54e4a4"
+        "sha256": "0f28cd06961f28027ac71ff08b50d04e45577e0d9e792582b84e7bf2de080012"
+      },
+      {
+        "bytes": 1167,
+        "path": "sections/07-conclusion.tex",
+        "sha256": "c1df5073e07c6e3e7ba65eea4ac66e1e9eaae29267f861abbaa6e086c19201c0"
       },
       {
         "bytes": 6151,
@@ -81,9 +86,14 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 15002,
+        "bytes": 8018,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "1d8ddbef0c7c4e53ca2eb47ec0bd5162c4512d357e00589cc65ae787272a737a"
+        "sha256": "36e1acfcdd073c32f5e271d9f4119135c5803881256296091fc1de91d3cbc83e"
+      },
+      {
+        "bytes": 3904,
+        "path": "sections/09-party-extensions.tex",
+        "sha256": "da0577d9f5dfde539e95309277a6469d1c3d60efdcf0be8bf6db8d0f0abbe319"
       },
       {
         "bytes": 3946,
@@ -91,9 +101,9 @@
         "sha256": "81eb0a82a4aa828afef2df3b2e16f3e08bd2c56dce2d99a9b0ec538c3779deda"
       },
       {
-        "bytes": 5641,
+        "bytes": 7466,
         "path": "supplement/EVIDENCE.md",
-        "sha256": "64bdc6e09d6d45b8e2fb3835e3c205e343522790325ef874a703bf0de9f5304c"
+        "sha256": "b439d065b4d31cb27eedec985b0349b4b46ce3e5abbeb327d35f54cf52033f4b"
       },
       {
         "bytes": 1061,
@@ -191,7 +201,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "e6aef3abaa68667905836c8f33b5aa90f80c16b6815190bf728caf17de2879af"
+    "tree_sha256": "4ab18b9f2f68f009de7761780f10dcfd691bec165f02f40fd3ba4df5d7e5f129"
   },
   "formal_companion": {
     "artifacts": [

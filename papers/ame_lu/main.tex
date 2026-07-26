@@ -40,7 +40,7 @@
 \newcommand{\diag}{\operatorname{diag}}
 
 \title{Local-Unitary Rigidity of Stabilizer AME States and
-Transversal Clifford Groups of MDS--CSS Codes}
+Transversal Logical Clifford Groups of MDS--CSS Codes}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -57,32 +57,24 @@ its local Weyl axes intrinsically.  Consequently, every tensor-product
 conversion between the associated \([[2m-1,1,m]]_q\) stabilizer
 quantum-MDS encoders is Clifford on every physical factor and on the
 logical factor.
-Moreover, the transition maps obtained by pushing a Weyl label between
-parties on every minimum support form a complete LU invariant: two such
-states are LU equivalent exactly when these atlases agree up to local
-trace-symplectic \(\F_p\)-linear changes of frame.  The fixed-party
-projective symmetry group is an extension of the compatible atlas-gauge
-group by the projective Pauli stabilizer; in prime dimension the gauge
-group is a holonomy centralizer in \(\mathrm{SL}_2(q)\).
+The transition maps obtained by pushing Weyl labels between parties on
+minimum supports form a complete LU invariant, up to local
+trace-symplectic \(\F_p\)-linear changes of frame.
 
-For equal-phase CSS states of linear \([2m,m,m+1]_q\) MDS codes, the code
-geometry further determines the exact transversal group.
-For odd prime \(q\), the exact fixed-party projective transversal logical
-group is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) precisely when \(C\) is
-diagonally isodual, and \(\F_q^2\rtimes T\) otherwise, where \(T\) is the
-split torus; generalized Reed--Solomon codes lie on the first branch.
+For equal-phase CSS states of linear \([2m,m,m+1]_q\) MDS codes over an
+odd prime field, the exact fixed-party projective transversal logical group
+is \(\F_q^2\rtimes\mathrm{SL}_2(q)\) precisely when \(C\) is diagonally
+isodual, and \(\F_q^2\rtimes T\) otherwise, where \(T\) is the split
+torus; generalized Reed--Solomon codes lie on the first branch.
 
 For \(m=3\), on an explicitly defined non-GRS pencil of six-point arcs
 over odd fields, a degree-eight quotient \(z\) classifies projective and
 monomial-code equivalence; over odd prime fields it also classifies
-local-Clifford and local-unitary equivalence.  In that prime-field scope,
-with any party
-taken as the input of a \([[5,1,3]]_q\) encoder, the fixed-party logical
-symplectic image is
-\(\mathrm{SL}_2(q)\) on the conic/GRS locus and the split torus off it.
+local-Clifford and local-unitary equivalence.
 Operator-valued marginals recover the local Weyl frame and force rigidity,
-whereas every fixed-copy scalar contraction is generically constant; exact
-marginal and four-copy witnesses still detect special strata.
+whereas on irreducible equal-phase code families every fixed-copy
+contraction is generically constant; in the stable range this covers every
+scalar LU invariant of that bidegree.
 \end{abstract}
 
 \input{sections/01-introduction}
@@ -91,9 +83,11 @@ marginal and four-copy witnesses still detect special strata.
 \input{sections/04-pencil-classification}
 \input{sections/05-logical-clifford-phase}
 \input{sections/06-lu-invariants}
+\input{sections/07-conclusion}
 \input{sections/08-verification-boundary}
 \appendix
 \input{sections/07-transport-sheaf}
+\input{sections/09-party-extensions}
 
 \bibliographystyle{alpha}
 \bibliography{refs}

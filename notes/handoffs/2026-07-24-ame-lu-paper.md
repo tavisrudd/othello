@@ -3,7 +3,8 @@
 **Lane:** `ame-lu`
 
 **Purpose:** complete the paper titled *Local-Unitary Rigidity of
-Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes*.
+Stabilizer AME States and Transversal Logical Clifford Groups of
+MDS--CSS Codes*.
 
 Discovery companion:
 [`2026-07-24-ame-lu-discovery-track.md`](../2026-07-24-ame-lu-discovery-track.md).

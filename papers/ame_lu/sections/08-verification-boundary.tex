@@ -1,4 +1,4 @@
-\section{Verification, literature, and scope}\label{sec:verification}
+\section{Verification and scope}\label{sec:verification}
 
 The rigidity theorem, the arc--AME dictionary, and generic constancy are
 conceptual proofs in the text.  The projective quotient uses displayed
@@ -60,8 +60,7 @@ The release identifier is content based:
 public byte and every file in the recursive formal dependency closure,
 including the Lean toolchain and build definitions.  The manifest, rather
 than a mutable working-tree name, is the immutable identity of the
-refereed local release; a public DOI or archive URL must be assigned by
-the author at deposit.
+companion release.
 
 \begin{center}
 \small
@@ -107,107 +106,22 @@ paper definitions; that correspondence is supplied in the preceding
 sections.
 
 The accompanying Lean~4 artifact uses toolchain
-\texttt{v4.32.0-rc1}.  Its aggregate terminal
-\texttt{RelativeConicArcs.Gates.AMELUAggregate} checks the complete
-arc--MDS--CSS--AME dictionary, the algebraic pencil quotient, the finite
-marginal graph counts, the contraction normalization and party-orbit
-identities, the length-generic MDS--CSS LU-to-LC chain, the
-arbitrary-additive support squeeze, minimum-support generation, realized
-full-Weyl marginal chain, LU-to-LC terminal, linear minimum-support
-transitions, and atlas-equivalence relation, the abstract
-holonomy-centralizer mechanism for both normal and arbitrary local-block
-subgroups, the
-extension-field pencil-sector algebra, and the transport polynomial and
-characteristic-seven identities in one environment.
-The arbitrary-additive layer defines coordinate restriction of a
-prime-field label space, identifies its kernel with supported labels, and
-proves that absence of a nonzero label on at most \(m\) parties makes the
-one-site kernel projection injective.  The exact \(2m\) versus \(m-1\)
-dimension balance then makes that projection bijective and gives a unique
-supported label over every local Weyl label.  A separate support-profile
-interface proves
-\(L(A)=L(A\setminus\{i\})+L(A\setminus\{j\})\) and the resulting
-generation by \((m+1)\)-supported subspaces.  The diagonal-tensor modules
-prove the arity-independent axis lemma for arbitrary bijective local
-reindexings and nonzero coefficients.  The abstract holonomy module proves
-that compatible local gauges are the centralizer of loop transports.  Its
-arbitrary-subgroup form retains the exact propagated-membership conditions
-needed for \(\mathrm{Sp}_{2e}(\F_p)\); its normal-subgroup specialization
-gives the pure \(\mathrm{SL}_2(q)\) centralizer in prime dimension.
+\texttt{v4.32.0-rc1}.  Its aggregate contains unconditional formal proofs
+of the support squeeze, minimum-support generation, marginal and
+axis-recovery cores, atlas equivalence, abstract holonomy centralizers,
+the Choi/transversal bridge, the diagonal-multiplier theorem, and the
+abstract projective-extension algebra.  The ordinary kernel-checked
+declarations use only \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}; three finite graph cardinalities use
+\texttt{native\_decide} and are reported separately.
 
-The \texttt{StabilizerAMERigidity} module composes the
-arbitrary-additive support profile, unique local-label recovery, phased
-full-Weyl marginal, marginal covariance, and axis recovery into fixed-party
-and party-relabeled LU-to-LC terminals.  Its sole physics-facing realization
-field is the standard partial-trace stabilizer-projector expansion
-\((2.2)\); the party-relabeled terminal also takes an explicit realization
-of the permuted source state.  Constructing those fields from a lower-level
-Pauli representation remains outside this module, but no further rigidity
-step is assumed.  The earlier MDS--CSS specialization remains unconditional
-in the generic Lean chain, including marginal covariance, retained-set
-coverage, and party relabeling.  Composition with the admitted-pencil
-interface gives the formal conditional statement
-\(\mathrm{LU}\Longleftrightarrow z(t)=z(u)\) in that specialization.
-The same artifact constructs the one-site Clifford quotient by nonzero
-scalars, proves the scalar subgroup closed, and proves the quotient
-Hausdorff, discrete, and finite by recording exact Weyl conjugates and
-constraining their scalar factors through determinant polynomials.  It
-embeds the product-automorphism quotient into a finite product of these
-one-site quotients.  The exact adjoint-signature map is continuous into a
-finite Hausdorff space, while its identity fiber is the connected product
-of one-site unit circles.  This proves the scalar-phase identity-component
-statement, both with fixed party labels and after adjoining the discrete
-party-permutation factor.  The scalar inclusions are continuous
-homomorphisms, every connected component is a scalar-torus translate, and
-finitely many such components cover either automorphism group.  The
-party-permutation extension has a section-free outer action and a normalized
-nonabelian factor set.  Its ordered change-of-section law makes
-trivializability independent of the chosen lifts, and trivializability is
-equivalent to a homomorphic splitting.  The companion
-\texttt{PartyExtensionSplitting} module proves that a complement supplies
-the trivializing cochain, semidirect-product equivalence, unique
-kernel--quotient coordinates, cardinality product, and the involutive
-party-extension lift whose conjugation action on \(T\) is inversion.
-This projective involution is distinct from the determinant-one matrix
-\(J\), which satisfies \(J^2=-I\).  The twelve concrete
-complements in Corollary~\ref{cor:computed-party-splitting} are exact
-certificate computations rather than kernel-checked finite tables.
-
-The geometric classification,
-marginal-trace, logical propagation, finite contraction,
-diagonal-isodual group, and transport
-orbit steps enter separate hypothesis structures; the paper constructs
-or certificate-supports them as specified above, but the Lean modules do
-not.  Importing the terminal therefore does not make them unconditional
-formal theorems.  The Choi inverse-transpose bridge, Clifford transpose
-closure, and factorwise transversal no-go are kernel checked in
-\texttt{EncoderTransversal}.  The companion
-\texttt{DiagonalIsoduality} module proves the arbitrary-length MDS
-diagonal-multiplier lemma, the zero-or-one-dimensional multiplier space,
-the exact nullity test, and projective uniqueness of the witness ratios.
-The \texttt{StabilizerDictionary} module proves that the Pauli symplectic
-pairing identifies the ambient label space with its dual and that every
-linear stabilizer-character exponent is induced by an ambient Pauli label;
-this is the phase-correction step used in Section~\ref{sec:rigidity}.
-The exact diagonal-isodual transversal-group dichotomy remains conditional:
-special-linearity, torus
-propagation, diagonal-duality propagation, the off-diagonal
-block-to-multiplier bridge, and the complete translation fiber remain named
-fields.  Section~\ref{sec:rigidity} proves these action-level inputs for arbitrary
-\([2m,m,m+1]\) MDS codes.  The fixed-copy generic-constancy proposition,
-the party-moving anchor-block normalizer, and the determinant and
-double-coset inputs of the complete transport theorem are not formalized.
-The companion \texttt{AMELUAggregateAxioms} terminal separates the three
-native finite graph counts from the ordinary kernel-checked declarations.
-For each conditional structure, the statement-adequacy ledger records
-its fields individually.  Some fields are constructed in the displayed
-paper proof, such as the four deck projectivities and the marginal
-trace/rank reduction; some are mathematical implications supported by a
-paper-local certificate, such as the \(H_3\) determinant count and the
-four-copy rank evaluations; and some combine a prose construction with a
-certificate replay, such as the transport determinant and double-coset
-inputs.  These are hypotheses of formalized implications, not additional
-Lean theorems.
+The geometric classification, exact logical propagation, finite
+contractions, concrete party complements, and transport-orbit inputs enter
+conditional interfaces.  The manuscript proves or the supplement
+certificate-checks those inputs as recorded in the table; importing the
+aggregate does not turn them into unconditional Lean theorems.  The exact
+module-to-claim crosswalk and each named hypothesis are recorded in
+\texttt{supplement/EVIDENCE.md}.
 
 The extension-field scalar statements in
 Proposition~\ref{prop:frobenius-sector-divisors} are unconditional in
@@ -218,19 +132,6 @@ of \(G,A,B,z\) and the admitted locus.  Its separate Galois-\(z\) orbit
 terminal is conditional on two named bridges: extraction of a projective
 Frobenius sector from an additive Clifford equivalence, and construction of
 a Clifford from a Galois match.  Neither bridge is used as a paper theorem.
-
-The LU-to-LC mechanism has direct qubit ancestry.  Rains recovered the
-three Pauli axes of distance-two code projectors
-\cite{Rains1999}; Van den Nest, Dehaene, and De Moor used minimal
-stabilizer supports to force every local factor of an LU equivalence to
-be Clifford \cite{VanDenNestDehaeneDeMoor2005}.  Nonstabilizer
-minimal-support AME states permit different behavior
-\cite{BurchardtRaissi2020,RamadasLakshminarayan2025}.
-The principal contribution here is the arbitrary-additive,
-all-prime-power stabilizer-AME theorem.  Its MDS--CSS specialization makes
-the exact odd-prime fixed-party dichotomy computable:
-\(\F_q^2\rtimes\mathrm{SL}_2(q)\) on the diagonally isodual branch and
-\(\F_q^2\rtimes T\) otherwise, with the GRS tower on the first branch.
 
 Finally, none of the results classifies nonlinear orthogonal arrays,
 arbitrary nonstabilizer AME tensors, or stabilizer states that are not AME.
@@ -252,12 +153,3 @@ Theorem~\ref{thm:lu-h3-grs} is restricted to the stated
 odd residue-field reductions, and the detector exceptions described in
 Appendix~\ref{sec:transport} do not alter the
 characteristic-uniform rigidity theorem.
-
-The central distinction is therefore between covariant and scalar data.
-A four-party marginal retains the full configuration of local Weyl axes,
-and that configuration rigidifies every product-unitary intertwiner.
-Fixed-copy scalar contractions discard those axes and are generically
-constant, although their rank-jump strata still reveal exact divisors.
-For the admitted pencil over odd prime fields, the covariant rigidity
-returns the classical degree-eight quotient \(z\) as the complete LU
-coordinate.
