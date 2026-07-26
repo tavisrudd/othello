@@ -4,10 +4,11 @@
 
 **Date:** 2026-07-25
 
-**Status:** implementation complete; dedicated gate build pending the shared
-Lean build window.  The stable local and combinatorial core of C626's
+**Status:** implementation extended through the first polynomial restriction
+and Frobenius-descent interface; dedicated gate builds remain pending the
+shared Lean build window.  The stable local and combinatorial core of C626's
 square-root carrier theorem is formalized without enlarging the manuscript or
-claiming that Lean checks the global Chow-product gluing argument.
+claiming that Lean checks the geometric pairing and interpolation inputs.
 
 ## Mathematical scope
 
@@ -20,10 +21,16 @@ The formal target has three layers.
 3. If every arc in a finite carrier set has size at most `k`, any deletion
    which leaves an arc removes at least `|X|-k` points.
 
-The global statement that square restrictions of the dual Chow product glue
-over a general-position line arrangement remains an analytic theorem unless a
-short axiom-free implementation is supported by the pinned polynomial and
-projectivization APIs.
+The formalization now also constructs homogeneous linear substitution
+\[
+ K[X_0,X_1,X_2]\longrightarrow K[U,V]
+\]
+and the finite product of homogeneous plane-linear factors.  A pairing of
+equal restricted factors produces an explicit square root.  Compatible
+linewise roots descend once they extend to one ambient polynomial and the
+restriction family jointly detects ambient polynomials.  Producing those
+hypotheses from projective secants and a general-position carrier arrangement
+remains geometric.
 
 ## `ej`, degrees of freedom, and Tao stress pass
 
@@ -97,6 +104,27 @@ The dedicated gate
 `RelativeConicArcs.Gates.SquareRootCarrier` imports the module and audits all
 ten public terminals.
 
+`RelativeConicArcs.ChowRestrictionDescent` adds the polynomial bridge:
+
+- `homogeneousLinearPolynomial` and `planeLineRestriction` define the actual
+  three-variable to two-variable homogeneous substitution;
+- `dualLinearFactorProduct` constructs the finite product of dual linear
+  factors, and `planeLineRestriction_dualLinearFactorProduct` commutes its
+  restriction with that product;
+- `prod_eq_sq_of_equiv_sum` proves the abstract paired-product square identity;
+- `planeLineRestriction_dualLinearFactorProduct_eq_sq_of_pairing` supplies an
+  explicit restricted root from paired equal factors;
+- `RestrictionFamily.JointlyDetects` states injectivity of the combined
+  restriction map;
+- `exists_globalSquareRoot_of_jointlyDetected_extendedRoots` proves descent
+  when the linewise roots extend to one ambient polynomial; and
+- `isInSquareFrobeniusImage_of_jointlyDetected_extendedRoots` specializes the
+  conclusion to the image of Frobenius in exponent characteristic two.
+
+The import-only gate
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its seven public
+terminals.
+
 ## Formal boundary
 
 Lean checks the local conductor algebra, its representative and
@@ -105,15 +133,17 @@ deletion implication, and the finite-cover counting kernel.
 
 Lean does not yet check:
 
-- the construction of the dual Chow product from an even projective arc;
-- the equivalence between maximum secant index and square restriction;
-- polynomial interpolation of the linewise roots in general position;
+- the passage from projective arc points to a representative-independent
+  dual-factor product;
+- the secant pairing which makes the restricted factors equal;
+- bounded-degree joint detection for the chosen family of carrier lines;
+- interpolation of compatible linewise roots in general position;
 - the deduction that the maximum-centre set has arc number at most `k`; or
 - the specialization of the finite-cover kernel to all `(k+1)`-subsets and
   their collinear triples.
 
-Those remain the analytic inputs proved in the C626 report.  No axiom standing
-for them is introduced.
+Those remain the geometric inputs proved in the C626 report.  No axiom
+standing for them is introduced.
 
 ## Validation
 
@@ -129,7 +159,12 @@ for them is introduced.
 - Whole-module prose and naming audit: **PASS**.  The source and gate contain
   no workflow identifiers, internal-record references, status language, or
   unqualified formalization claims.
+- `lean/scripts/guarded-lean
+  RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
+- The source-local audit of its seven terminals reports no axioms beyond
+  `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
+  uses none.
 - Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation: pending release of
-  the shared Lean build-owner lock.  The first aggregate attempt correctly
-  failed closed because the new gate itself had not yet been built.
+  `--no-build` confirmation, together with the new seven-terminal polynomial
+  gate build: pending release of the shared Lean build-owner lock.  Submitted
+  attempts correctly fail closed while the foreign aggregate owns that lock.
