@@ -796,162 +796,19 @@ theorem no_upper_even_equality_branch
       hzero hinc
 
 /-- No zero-defect relative-complete `92`-arc exists outside the standard conic over a field of
-order `4096`.  The proof extracts a tangent secant, restricts its two secant involutions to the
-`91` maximum-index conic parameters, and applies the sign obstruction for a four-group. -/
+order `4096`.  This is the `n = 46` specialization of the uniform upper-branch exclusion. -/
 theorem no_exceptional_candidate_standardConic
     {A : Finset (Point K)}
     (hcomplete : CompleteOutside (L := Point K) A (standardConic (K := K)))
     (hq : Fintype.card K = 4096) (hcard : A.card = 92)
     (hzero : scaledDefect (L := Point K) A (standardConic (K := K)) = 0) :
     False := by
-  classical
-  have h2 : (2 : K) = 0 := CharP.cast_eq_zero K 2
-  have htangentCard :=
-    (exceptional_candidate_secant_type_cards h2 hcomplete hq hcard hzero).1
-  have htangentNonempty :
-      (tangentSecants (L := Point K) A (standardConic (K := K))).Nonempty := by
-    rw [Finset.nonempty_iff_ne_empty]
-    intro hempty
-    rw [hempty] at htangentCard
-    simp at htangentCard
-  obtain ⟨l, hl⟩ := htangentNonempty
-  obtain ⟨hsecant, hsliceCard⟩ := mem_tangentSecants.mp hl
-  obtain ⟨P, hPA, Q, hQA, hPQ, hPl, hQl⟩ := hsecant
-  obtain ⟨Y, hslice⟩ := Finset.card_eq_one.mp hsliceCard
-  have hYslice : Y ∈ lineSlice (standardConic (K := K)) l := by
-    simp [hslice]
-  have hYl : Y ∈ l := (mem_lineSlice.mp hYslice).1
-  have hYC : Y ∈ standardConic (K := K) := (mem_lineSlice.mp hYslice).2
-  obtain ⟨t, rfl⟩ := mem_standardConic.mp hYC
-  let Y := ProjectiveCap.Sym2Bridge.veronesePoint t
-  have hPoff : P ∉ standardConic (K := K) :=
-    fun hPC => Finset.disjoint_left.mp hcomplete.2.1 hPA hPC
-  have hQoff : Q ∉ standardConic (K := K) :=
-    fun hQC => Finset.disjoint_left.mp hcomplete.2.1 hQA hQC
-  have hPt : ConicSecantInvolution.equiv P hPoff t = t :=
-    equiv_fixed_of_tangent_line P hPoff l hPl hYl hsliceCard
-  have hQt : ConicSecantInvolution.equiv Q hQoff t = t :=
-    equiv_fixed_of_tangent_line Q hQoff l hQl hYl hsliceCard
-  have hnuc :=
-    exceptional_candidate_standardNucleus_not_mem hcomplete hq hcard hzero
-  have hPnuc : P ≠ standardNucleus (K := K) := by
-    intro h
-    exact hnuc (h ▸ hPA)
-  have hQnuc : Q ≠ standardNucleus (K := K) := by
-    intro h
-    exact hnuc (h ▸ hQA)
-  have heven : Even A.card := by
-    rw [hcard]
-    norm_num
-  have hYcovered : Covered (L := Point K) A Y :=
-    covered_of_collinear_pair hPA hQA hPQ
-      ⟨l, hYl, hPl, hQl⟩
-  have hYhalf :
-      pointIndex (L := Point K) A Y = A.card / 2 := by
-    have hpatterns :=
-      (scaledDefect_eq_zero_iff (L := Point K)
-        hcomplete.1 hcomplete.2.1).mp hzero
-    rcases hpatterns.2 Y
-      (mem_standardConic.mpr ⟨t, rfl⟩) with hzeroIndex | hhalf
-    · exact absurd hzeroIndex (by
-        have : 0 < pointIndex (L := Point K) A Y := hYcovered
-        omega)
-    · exact hhalf
-  have htmem :
-      t ∈ ZeroDefectConicInvariance.maximumIndexParameters A :=
-    ZeroDefectConicInvariance.mem_maximumIndexParameters.mpr hYhalf
-  let X := {u // u ∈ ZeroDefectConicInvariance.maximumIndexParameters A}
-  let tX : X := ⟨t, htmem⟩
-  let s : Equiv.Perm X :=
-    ZeroDefectConicInvariance.restrictedEquiv
-      hcomplete hzero heven P hPA
-  let r : Equiv.Perm X :=
-    ZeroDefectConicInvariance.restrictedEquiv
-      hcomplete hzero heven Q hQA
-  have hXcard : Fintype.card X = 91 := by
-    rw [show Fintype.card X =
-      (ZeroDefectConicInvariance.maximumIndexParameters A).card by
-        exact Fintype.card_coe _]
-    exact ZeroDefectConicInvariance.maximumIndexParameters_card_eq_ninety_one
-      hcomplete hq hcard hzero
-  have hsval (x : X) :
-      (s x).1 = ConicSecantInvolution.equiv P hPoff x.1 := rfl
-  have hrval (x : X) :
-      (r x).1 = ConicSecantInvolution.equiv Q hQoff x.1 := rfl
-  have hs2 : s ^ 2 = 1 := by
-    ext x
-    simp only [pow_two, Equiv.Perm.mul_apply]
-    rw [hsval, hsval, ConicSecantInvolution.equiv_apply_apply]
-    simp
-  have hr2 : r ^ 2 = 1 := by
-    ext x
-    simp only [pow_two, Equiv.Perm.mul_apply]
-    rw [hrval, hrval, ConicSecantInvolution.equiv_apply_apply]
-    simp
-  have hsrcomm : s * r = r * s := by
-    ext x
-    simp only [Equiv.Perm.mul_apply]
-    calc
-      (s (r x)).1 =
-          ConicSecantInvolution.equiv P hPoff (r x).1 := hsval (r x)
-      _ = ConicSecantInvolution.equiv P hPoff
-          (ConicSecantInvolution.equiv Q hQoff x.1) := by rw [hrval]
-      _ = ConicSecantInvolution.equiv Q hQoff
-          (ConicSecantInvolution.equiv P hPoff x.1) :=
-        equiv_commute_of_common_fixed P Q hPoff hQoff hPt hQt x.1
-      _ = ConicSecantInvolution.equiv Q hQoff (s x).1 := by rw [hsval]
-      _ = (r (s x)).1 := (hrval (s x)).symm
-  have hsr2 : (s * r) ^ 2 = 1 := by
-    calc
-      (s * r) ^ 2 = s * (r * s) * r := by simp [pow_two, mul_assoc]
-      _ = s * (s * r) * r := by rw [hsrcomm]
-      _ = (s ^ 2) * (r ^ 2) := by simp [pow_two, mul_assoc]
-      _ = 1 := by rw [hs2, hr2, one_mul]
-  have hfixeds : Function.fixedPoints s = {tX} := by
-    ext x
-    simp only [Function.mem_fixedPoints, Set.mem_singleton_iff]
-    constructor
-    · intro hx
-      apply Subtype.ext
-      apply fixed_unique P hPoff hPnuc
-      · have := congrArg Subtype.val hx
-        simpa [hsval] using this
-      · exact hPt
-    · intro hx
-      subst x
-      apply Subtype.ext
-      simpa [hsval] using hPt
-  have hfixedr : Function.fixedPoints r = {tX} := by
-    ext x
-    simp only [Function.mem_fixedPoints, Set.mem_singleton_iff]
-    constructor
-    · intro hx
-      apply Subtype.ext
-      apply fixed_unique Q hQoff hQnuc
-      · have := congrArg Subtype.val hx
-        simpa [hrval] using this
-      · exact hQt
-    · intro hx
-      subst x
-      apply Subtype.ext
-      simpa [hrval] using hQt
-  have hfixedsr : Function.fixedPoints (s * r) = {tX} := by
-    ext x
-    simp only [Function.mem_fixedPoints, Set.mem_singleton_iff]
-    constructor
-    · intro hx
-      apply Subtype.ext
-      apply product_fixed_unique P Q hPoff hQoff hPQ hPt hQt
-      have := congrArg Subtype.val hx
-      simpa [hsval, hrval] using this
-    · intro hx
-      subst x
-      apply Subtype.ext
-      change ConicSecantInvolution.equiv P hPoff
-        (ConicSecantInvolution.equiv Q hQoff t) = t
-      rw [hQt, hPt]
-  exact no_card_ninety_one_of_two_commuting_unique_fixed_involutions
-    s r tX hXcard hs2 hr2 hsr2 hfixeds hfixedr hfixedsr
+  apply no_upper_even_equality_branch (n := 46) hcomplete
+  · simpa using hcard
+  · norm_num
+  · norm_num [Nat.choose] at hq ⊢
+    exact hq
+  · exact hzero
 
 end TangentPairFourGroup
 end RelativeConicArcs
