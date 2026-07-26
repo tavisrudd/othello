@@ -8,10 +8,10 @@ This module treats ternary cubics over `ZMod 19` in the ordered monomial basis
 `X³, Y³, Z³, X²Y, X²Z, Y²X, Y²Z, Z²X, Z²Y, XYZ`.
 
 For each of the two explicit nine-point orbits, a nonzero `9 × 9` evaluation minor proves
-symbolically that the space of cubics through the orbit is one-dimensional.  Kernel reduction
-then checks every one of the 381 projective points on all twenty rational members of the resulting
-pencil.  No cubic coefficients, point counts, or base-locus decisions are supplied by an external
-oracle.
+symbolically that the space of cubics through the orbit is one-dimensional.  The separate
+`NinePointHeisenbergCubicPencilCounts` module checks every one of the 381 projective points on all
+twenty rational members of the resulting pencil.  The explicit inverse matrices in this module
+are checked as left inverses by kernel reduction; no rank verdict is imported.
 -/
 
 namespace RelativeConicArcs

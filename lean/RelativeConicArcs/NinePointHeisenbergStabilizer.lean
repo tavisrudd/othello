@@ -81,7 +81,8 @@ private def framePoint (points : List V) (indices : List (Fin 9)) (i : Fin 4) : 
 private def coordinateMatrix (points : List V) (indices : List (Fin 9)) : M :=
   fun i j => framePoint points indices ⟨j.val, by omega⟩ i
 
-private def determinantThree (matrix : M) : K :=
+/-- The Leibniz determinant formula specialized to a three-by-three matrix. -/
+def determinantThree (matrix : M) : K :=
   matrix 0 0 * (matrix 1 1 * matrix 2 2 - matrix 1 2 * matrix 2 1) -
   matrix 0 1 * (matrix 1 0 * matrix 2 2 - matrix 1 2 * matrix 2 0) +
   matrix 0 2 * (matrix 1 0 * matrix 2 1 - matrix 1 1 * matrix 2 0)
@@ -234,6 +235,13 @@ theorem matrix_eq_smul_of_coordinate_frame_rays
   · simp [hb' i, hbd]
   · simp [hc' i, hcd]
 
+/-- The reducible three-by-three determinant evaluator agrees with `Matrix.det`. -/
+theorem determinantThree_eq_det (matrix : M) :
+    determinantThree matrix = Matrix.det matrix := by
+  rw [Matrix.det_fin_three]
+  unfold determinantThree
+  ring
+
 /-- Frame-normalized projectivities stabilizing the selected orbit. -/
 def selectedStabilizers : List M :=
   (frameCandidates selectedPoints selectedPoints).filter fun matrix =>
@@ -329,7 +337,7 @@ theorem ordered_frame_count : orderedIndexFrames.length = 3024 := by decide
 The displayed Heisenberg matrices give nine distinct projectivities preserving both members of
 the ordered pair.
 -/
-theorem displayed_heisenberg_matrices_form_pair_stabilizers :
+theorem displayed_heisenberg_matrices_are_distinct_pair_stabilizers :
     displayedHeisenbergMatrices.length = 9 ∧
     displayedHeisenbergMatrices.all (fun matrix =>
       decide (Matrix.det matrix ≠ 0) &&
@@ -350,6 +358,10 @@ private def uncoveredExpectedSecond : Fin 9 → Fin 9 :=
 private def expectedMultiplicity (actual expected : Fin 9) : Nat :=
   if actual = expected then 1 else 0
 
+private def belongsToDisplayedHeisenbergSubgroup (matrix : M) : Bool :=
+  displayedHeisenbergMatrices.any fun heisenbergMatrix =>
+    matrixScalarEquivalent matrix heisenbergMatrix
+
 /--
 The complete transporter count for one ordered prefix of the target frame.  Fixing the first two
 images leaves 42 ordered target frames.  The two displayed expected-second tables specify the
@@ -368,14 +380,14 @@ def stabilizerPrefixProfile (first second : Fin 9) : Bool :=
       expectedMultiplicity second (uncoveredExpectedSecond first) &&
   (pairStabilizersAtPrefix first second).length ==
       expectedMultiplicity second (selectedExpectedSecond first) &&
-  (pairStabilizersAtPrefix first second).all (fun matrix =>
-    displayedHeisenbergMatrices.any fun heisenbergMatrix =>
-      matrixScalarEquivalent matrix heisenbergMatrix) &&
+  (selectedStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
+  (uncoveredStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
+  (pairStabilizersAtPrefix first second).all belongsToDisplayedHeisenbergSubgroup &&
   selectedToUncoveredAtPrefix first second == [] &&
   uncoveredToSelectedAtPrefix first second == []
 
 attribute [reducible] selectedExpectedSecond uncoveredExpectedSecond expectedMultiplicity
-  stabilizerPrefixProfile
+  belongsToDisplayedHeisenbergSubgroup stabilizerPrefixProfile
 
 end NinePointHeisenbergStabilizer
 end RelativeConicArcs

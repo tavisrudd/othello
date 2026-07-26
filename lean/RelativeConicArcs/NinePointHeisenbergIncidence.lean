@@ -81,6 +81,7 @@ def offSetSecantMultiplicityCount (points : List V) (multiplicity : Nat) : Nat :
 
 abbrev Label := Fin 3 × Fin 3
 
+/-- The nine labels of the regular `C₃ × C₃` action. -/
 def labels : List Label :=
   (List.ofFn fun i : Fin 3 => i).flatMap fun i =>
     (List.ofFn fun j : Fin 3 => j).map fun j => (i, j)
