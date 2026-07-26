@@ -6,6 +6,22 @@
 
 **Status:** `LOCAL GO; PUBLIC ARCHIVE LOCATOR REQUIRED BEFORE RELEASE`
 
+## Queued structural follow-ons
+
+Two unprimed post-draft question reads independently exposed the graded
+evaluation algebra, a possible self-associated/arithmetic-Gorenstein
+structure, and the \(SL_2/A_5\) route to a uniform rank theorem. The full
+ranked question and connection ledger, exact direct corollary, falsifier
+gates, and execution order are recorded in
+`notes/2026-07-25-c620-clebsch-factorization-next-questions.md`.
+
+- C620 owns the immediate theorem \(L^{\circ3}=k^\Omega\) and the Hilbert
+  function/\(h\)-vector.
+- C621 owns the falsifier-first ideal, Betti, Cayley--Bacharach, type, and
+  inverse-system experiment.
+- Existing C616 owns the modularly valid \(SL_2/A_5\) containment and
+  equivariant-nonvanishing proof; no duplicate uniformity task is opened.
+
 ## Current result
 
 Paper II now has its own verification architecture and mathematical

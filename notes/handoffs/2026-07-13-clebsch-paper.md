@@ -135,6 +135,11 @@ public immutable archive locator. The full local replay and warning-free
 nineteen-page build are green. The current theorem,
 evidence boundary, and mystery ledger are in
 `notes/2026-07-25-c577-clebsch-factorization-memory.md`.
+The two unprimed next-question reads are consolidated in
+`notes/2026-07-25-c620-clebsch-factorization-next-questions.md`: C620 owns
+the immediate \(L^{\circ3}=k^\Omega\) and Hilbert-function corollary, C621
+owns the falsifier-first self-associated/Gorenstein gate, and C616 absorbs
+the \(SL_2/A_5\) uniform-rank proof rather than spawning a duplicate task.
 
 The active order is strict:
 
