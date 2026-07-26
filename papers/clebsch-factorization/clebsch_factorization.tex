@@ -356,13 +356,21 @@ We prove the \(H_3\) row equivariantly.  Put
 \(\chi(g)=\det(g)^5\) be the square-class character.  On the conic, the
 common restriction of the matching products is the Dickson form
 \(s^{11}t-st^{11}\), of contragredient weight \(\det^{-1}\).
-After making this section invariant, division by the conic form gives the
-linearized quotient module
+Let \(V=\F_{11}^2\), with binary forms carrying the contragredient
+\(\operatorname{GL}_2(11)\)-action.  The equivariant Fischer decomposition
+obtained from the Clebsch identification
+\(\operatorname{Sym}^2V\simeq\F_{11}^3\), together with the Dickson
+weight in the quotient transformation (2.2), gives the linearized module
 \[
  \widetilde R_4=R_4\otimes\det^{-1}
   =M_8\oplus M_4\oplus M_0,                       \tag{4.5}
 \]
-where
+Explicitly, \(g\in\operatorname{GL}_2(11)\) acts on the first expression
+by
+\[
+ g\cdot f=\det(g)^{-1}\bigl(f\circ\rho(g)^{-1}\bigr).
+\]
+The three summands are
 \[
 \begin{split}
  M_8&=\mathcal H_4\otimes\det^{-1}
@@ -373,15 +381,20 @@ where
       \simeq\det^{-5}=\chi .
 \end{split}                                         \tag{4.6}
 \]
-The twist is part of the linearization; it does not alter the underlying
-subspaces of \(R_4\).
-
-We need two elementary cohomology facts.  For
+Equivalently, all three summands have the uniform form
 \[
- M_r=\operatorname{Sym}^r(V^\vee)\otimes\det^{r/2}\otimes\chi,
- \qquad r=8,4,0,
+ M_r=\operatorname{Sym}^r(V^\vee)\otimes
+       \det^{r/2}\otimes\chi,\qquad r=8,4,0.
 \]
-let \(U=\langle u\rangle\) be the upper-unipotent Sylow \(11\)-subgroup
+A scalar \(\lambda I\) acts here as
+\(\lambda^{-r}\lambda^r(\lambda^2)^5=1\), so these modules and their
+direct sum descend from \(\operatorname{GL}_2(11)\) to \(G\).  This is
+the \(G\)-action used below.  The determinant twist changes only the
+linearization, not the underlying Fischer subspaces
+\(\mathcal H_4,Q\mathcal H_2,\F_{11}Q^2\) of \(R_4\).
+
+We need two elementary cohomology facts.  Let
+\(U=\langle u\rangle\) be the upper-unipotent Sylow \(11\)-subgroup
 and let \(a\) generate the diagonal torus of order \(10\).
 Since \(r<10\), the cyclic norm
 \(1+u+\cdots+u^{10}=(u-1)^{10}\) vanishes on \(M_r\), while
@@ -427,8 +440,12 @@ of \(M_{H_3}\).  Its quotient is nonzero: equality of the two secant
 products would identify their irreducible line factors and hence the
 matchings.  Its \(M_4\)- and \(M_0\)-components vanish, so it gives a
 nonzero vector in \(M_8\).  The degree-eight restricted
-\(\operatorname{SL}_2(\F_{11})\)-module is irreducible; therefore the quotient span
-contains all of \(M_8\).
+\(\operatorname{SL}_2(\F_{11})\)-module is irreducible.  Moreover the
+span of the cocycle values is \(G\)-stable, since
+\[
+ b\,c(g)=c(bg)-c(b)\qquad(b,g\in G).
+\]
+Therefore the quotient span contains all of \(M_8\).
 
 It remains only to see the radial line.  With \(\infty\) indexed by \(11\),
 take
@@ -436,7 +453,14 @@ take
  M_-=\{\{0,1\},\{2,\infty\},\{3,8\},\{4,6\},
           \{5,9\},\{7,10\}\}.
 \]
-Exact division and differentiation give
+The nonsquare-determinant projectivity represented on \(V\) by
+\[
+ \begin{pmatrix}0&1\\1&1\end{pmatrix}
+\]
+sends \(M_{H_3}\) to \(M_-\); hence \(M_-\) belongs to the outer sheet
+of \(\Omega_{H_3}\).  The primary certificate and independent replay
+also reconstruct this orbit membership.  Exact division and
+differentiation give
 \[
  \Delta_Q^2\Phi_{M_{H_3}}(M_-)=10
    =\Delta_Q^2(Q^2)\ne0.                            \tag{4.11}
@@ -1365,10 +1389,11 @@ The limits are equally explicit.  Balanced moments do not choose the
 \(A_4\)-refinement; nonsingleton profiles recover orbits rather than
 individual matchings; and the relative-cubic Tate plane does not
 canonically identify with the depth plane.  The theorem is uniform in
-its mechanism but its three Coxeter instances still use exact finite
-spanning and incidence calculations.  Extending those calculations to
-a representation-theoretic nonvanishing argument is the remaining
-step toward a uniform rank-three theorem.
+its mechanism, but the \(A_3\) and \(B_3\) spanning assertions still use
+exact row reductions.  Replacing those two remaining rank calculations
+by parallel representation-theoretic nonvanishing arguments is the
+remaining step toward a fully uniform rank-three theorem; the incidence
+refinements remain finite exact inputs by design.
 
 \appendix
 
@@ -1566,15 +1591,20 @@ no group name is inferred from an order.
 
 The other computations are load-bearing only at the points shown in
 Table~\ref{tab:verification}.  The matching-module bundle supplies the
-three finite quotient ranks and frozen moment data; the balanced-sheet
-bundle checks the finite hypotheses of the symbolic radical argument;
-the profile-incidence bundle computes one row per double coset; the
-decorated-parent bundle identifies a singleton matching with its
-parent; and the relative-cubic-depth bundle computes the modular and
-Tate rank patterns.  All use exact prime-field arithmetic.  The general
-divisibility theorem, radical--Hadamard lemma, three-ray cubic lemma,
-and mass-zero factorization are proved in the text and do not depend on
-those enumerations.
+three finite quotient ranks and frozen moment data.  The
+\(H_3\)-equivariant-rank bundle checks the Sylow-normalizer weights,
+\(A_5\)-fixed dimensions, sheet membership, and minimal top and radial
+witnesses.  The balanced-sheet bundle checks the finite hypotheses of
+the symbolic radical argument, while the Gorenstein bundle checks the
+ideals, deletion ranks, socles, and resolutions.  The profile-incidence
+bundle computes one row per double coset; the decorated-parent bundle
+identifies a singleton matching with its parent; the
+relative-cubic-depth bundle computes the modular and Tate rank patterns;
+and the arithmetic-gluing gate checks the normalized splitting data.
+All use exact prime-field arithmetic.  The general divisibility theorem,
+radical--Hadamard lemma, three-ray cubic lemma, and mass-zero
+factorization are proved in the text and do not depend on those
+enumerations.
 
 This verification surface proves only the three marked configurations
 defined here.  It does not supply an all-characteristic construction,
@@ -1695,7 +1725,8 @@ $\mathrm{PSL}(2,q)$,
 \bibitem{EisenbudPopescu1998}
 D.~Eisenbud and S.~Popescu,
 \newblock The projective geometry of the Gale transform,
-\newblock arXiv:math/9807127, 1998.
+\newblock \emph{Journal of Algebra} \textbf{230} (2000), 127--173.
+\newblock doi:10.1006/jabr.1999.7940.
 
 \bibitem{RodriguezPajaresEtAl2025}
 G.~Rodr\'iguez-Pajares, D.~Ruano, and F.~Salizzoni,

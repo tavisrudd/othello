@@ -23,6 +23,13 @@ gates, and execution order are recorded in
 - C616 is complete: Sylow-normalizer cohomology proves the \(H_3\)
   radial-trace containment, same-sheet irreducibility forces the top
   nine-space, and one exact scalar supplies the radial line.
+- A fresh PDF-only referee read of the post-C616 candidate returned a
+  local `NO-GO` on three proof-presentation gaps: the twisted action was
+  not defined explicitly, cocycle-span stability was omitted before
+  irreducibility, and the radial witness was not shown to lie in the outer
+  orbit.  All three are repaired, together with the evidence inventory,
+  conclusion boundary, and published Eisenbud--Popescu citation.  The
+  complete release replay is green; a fresh independent reread remains.
 
 ## Current result
 

@@ -103,6 +103,15 @@ C616 is complete: the radial-trace identity is coordinate-free, and the
 ten-space row reduction has been replaced by the cohomological argument plus
 one scalar radial witness. The proof, certificate, independent replay, and
 mystery ledger are in `notes/2026-07-25-c616-h3-uniform-rank-upgrade.md`.
+A fresh PDF-only referee read then found three local self-containedness gaps
+in that proof.  The manuscript now defines the twisted
+\(\operatorname{GL}_2/\operatorname{PGL}_2\) action and its scalar descent,
+proves the cocycle-value span is stable before invoking irreducibility, and
+exhibits a nonsquare-determinant projectivity carrying the base matching to
+the radial witness.  The evidence inventory, conclusion boundary, and
+Eisenbud--Popescu journal citation are synchronized; the full eighteen-row,
+eight-bundle release replay and warning-free build are green.  A fresh
+independent reread remains.
 Paper II now also proves the abstract radical--Hadamard recovery lemma,
 specializes it to the `B_3` `7+7` and `H_3` `11+11` sheets without subset
 enumeration, and proves that the first signed tensor orientation moment is
