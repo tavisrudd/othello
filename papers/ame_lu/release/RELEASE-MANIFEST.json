@@ -11,14 +11,14 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 195549,
+        "bytes": 198844,
         "path": "ame-lu.pdf",
-        "sha256": "7a81b9703f24a36516f82f12af088f67e0787daa43e681b9228e6b8fa7fe344c"
+        "sha256": "403edd67dd1579c696070737527b083a2cf85e70c556667a3e09ae8f74423663"
       },
       {
-        "bytes": 15917,
+        "bytes": 16753,
         "path": "formal-statement-adequacy.md",
-        "sha256": "606a2546638e2f14e87ee1debb4e931f151d2925f5e20193a445cf17557a9961"
+        "sha256": "53b94bd9ef54355f8e2208d80b1ea947313424682d4b1a1dfa7dc10e84270a27"
       },
       {
         "bytes": 3124,
@@ -56,9 +56,9 @@
         "sha256": "d1c331c40df6de65b8b9ebb518050095a712a93ed7b757a78e5a8f47d0a52245"
       },
       {
-        "bytes": 16419,
+        "bytes": 18264,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "de76d46548cef65d7b3daa02e77648939a65a6dca0337195f750d0b439fe18e7"
+        "sha256": "49cbaeba82f463e316894f382a7ba7e0e657ad6843c225c6dc3faefc24485740"
       },
       {
         "bytes": 6002,
@@ -66,9 +66,9 @@
         "sha256": "9109205c88f2640ee369f8a8c7402ec9e8667b89c87104001ffdd835100dede9"
       },
       {
-        "bytes": 7670,
+        "bytes": 8015,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "a18fe4c60716cb54b6e8732e267d9ff66460540678406470005f5fbb92bdc331"
+        "sha256": "eb3e5f5b3c7a0629b3ca76960849dd0f7836c2a701b1f578fc9c99a85d2185e1"
       },
       {
         "bytes": 9552,
@@ -81,24 +81,24 @@
         "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
       },
       {
-        "bytes": 9309,
+        "bytes": 9818,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "a7aa42bd641ee6014645ab45304138fdc880a3e80c6b7eb2ce2ae069f080903a"
+        "sha256": "7fe716f9fd905426d49428b499239a4d263cb5ad3ca2a00da703a4496f46ec40"
       },
       {
-        "bytes": 3473,
+        "bytes": 3946,
         "path": "supplement/EVIDENCE-MANIFEST.json",
-        "sha256": "71920b115b32e6f3e77bc026a9882a7cc63b2a7bf4a2bdbaa207317338fb3b1e"
+        "sha256": "81eb0a82a4aa828afef2df3b2e16f3e08bd2c56dce2d99a9b0ec538c3779deda"
       },
       {
-        "bytes": 5044,
+        "bytes": 5641,
         "path": "supplement/EVIDENCE.md",
-        "sha256": "32654958b9e37b8e354d2751a8708eb33c1f8bd27b6d5ad06c55e24eeeb15e44"
+        "sha256": "64bdc6e09d6d45b8e2fb3835e3c205e343522790325ef874a703bf0de9f5304c"
       },
       {
-        "bytes": 916,
+        "bytes": 1061,
         "path": "supplement/README.md",
-        "sha256": "951f5dcc96d7813f7df51afb898c1138477cd92eed529c8d703fe0160ef41bd8"
+        "sha256": "784b5f0c297c6c72a946ae9a0a572cd53cd876ff10de818de9dcafa0d42e764c"
       },
       {
         "bytes": 15469,
@@ -176,12 +176,22 @@
         "sha256": "3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7"
       },
       {
+        "bytes": 622347,
+        "path": "supplement/evidence/2026-07-25-c624-ame-lu-party-extension-examples.json",
+        "sha256": "94171665d436cccc2182fc81b4d0cdfaa714262c92f2a4917b6589c9a709d35d"
+      },
+      {
+        "bytes": 29460,
+        "path": "supplement/evidence/2026-07-25-c624-ame-lu-party-extension-examples.py",
+        "sha256": "6f74915274e6b142b42ea52dc0c46633693700f52378590121c220d1e51a7840"
+      },
+      {
         "bytes": 2476,
         "path": "supplement/verify.py",
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "35f4dac109b353fef65e42fcd18b4d2aef0b5cfecbfa983df1350c453ee1b208"
+    "tree_sha256": "c279c7fb111ab838511171a0709b33bffd8ce764beb9904d00494713f43a83e2"
   },
   "formal_companion": {
     "artifacts": [
@@ -246,9 +256,9 @@
         "sha256": "77670a18133d26f6e20060dae73586b08576fcd297f91f496613afb9e564f274"
       },
       {
-        "bytes": 9241,
+        "bytes": 9869,
         "path": "lean/RelativeConicArcs/AMELU/ExtensionFieldPencil.lean",
-        "sha256": "a028dce10ebb9de3a086393f06ce239b2a9dba87ea136ded0b2f79691da4ff5f"
+        "sha256": "24047c974305371bea81f235eae03ef1ede176dfc9214988ff4704979e72ddc7"
       },
       {
         "bytes": 12000,
@@ -471,6 +481,16 @@
         "sha256": "b6dd6be076429820d65219c9215ab3bbcc49bd8096ea4ab395324856d095701a"
       },
       {
+        "bytes": 588,
+        "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencil.lean",
+        "sha256": "82b583015226a723b29f4577ba95c81131b2feff2ae437073e9e38a3bb167e3d"
+      },
+      {
+        "bytes": 834,
+        "path": "lean/RelativeConicArcs/Gates/AMELUExtensionFieldPencilAxioms.lean",
+        "sha256": "0f46e0c8e7b63505542b028e652b0550598656ee7845ff3b8b433ab6094558da"
+      },
+      {
         "bytes": 537,
         "path": "lean/RelativeConicArcs/Gates/AMELULogicalPhaseFourCopy.lean",
         "sha256": "6bc4fa709f8d3b17f1999a38e69196ac40659cf8dc53de7055f59edf68524bad"
@@ -576,6 +596,6 @@
         "sha256": "72681913b978b3f7c2f48229836771f736f6e97d833917726b2263afbc6108ed"
       }
     ],
-    "tree_sha256": "91a8bb7870059f59e58ae403d073512f7544d034e1291a412f85cb10c6ba089d"
+    "tree_sha256": "77153d4d9a37f163c804e62ebb0455adf7289eaa05dd4ab8d0e893f875d973b1"
   }
 }

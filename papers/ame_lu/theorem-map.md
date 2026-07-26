@@ -18,6 +18,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | C614 | transversal conversions between any two associated encoders are Clifford factor by factor; product-unitary automorphisms are projectively finite; the odd-prime even-length GRS tower has exact projective transversal logical group `F_q^2 ⋊ SL_2(q)` | adopted higher-\(m\) application package | conversion and finiteness for every prime power and existing `[2m,m,m+1]` code; exact GRS group for odd prime `q` and `2m≤q+1` | Choi correspondence, finiteness of the projective Clifford group, and explicit GRS dual-multiplier unipotents |
 | C622 | the exact odd-prime fixed-party projective transversal group is `F_q^2 ⋊ SL_2(q)` exactly for diagonally isodual `[2m,m,m+1]_q` MDS codes and `F_q^2 ⋊ T` otherwise | adopted intrinsic phase boundary | every odd prime `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS code | arbitrary-length diagonal-multiplier lemma, block converse, complete logical-Pauli fiber, and duality-shear propagation |
 | C619 | the GRS propagation maps satisfy the `SL_2(q)` relations exactly; over odd fields the Weil lift splits the scalar extension on the linear factor, while the full affine one-qudit extension is non-split by the Weyl commutator | adopted lift-boundary audit | odd prime `q`, generalized and extended GRS tower; no claim about splitting the realized party-permutation extension | explicit conjugation formula, finite-field Heisenberg--Weil representation, and the nontrivial Pauli commutator |
+| C624/C629 | the realized party-permutation extensions split in twelve concrete pencil, GRS, enhanced-symmetry, and H3 rows; on every listed non-GRS/H3 row, odd party motion inverts `T` and gives `N(T)` | adopted as a computed structural corollary | exactly the twelve rows listed in `cor:computed-party-splitting`; no all-good-reduction or arbitrary-six-arc splitting claim | exhaustive exact local-symplectic enumeration, normalized factor sets, explicit complements and cochains; abstract splitting consequences kernel checked, concrete complements certificate checked |
 
 ## Stable source labels
 
@@ -33,6 +34,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
 - `cor:discrete-lu-symmetry`: continuous closed scalar-torus short exact sequences, a closed Hausdorff discrete intrinsic Clifford quotient, finite scalar-torus component covers, finite discrete fixed-party and party-permuted quotients, and the exact extension through the realized party-permutation subgroup.  `AutomorphismExactSequence` supplies the exact sequence.  `NonabelianExtensionInvariant` supplies its section-free outer action, normalized factor set, nonabelian associativity and change-of-section laws, and the equivalence between factor-set trivializability and a homomorphic splitting.  The principal new terminals are `genericPartyPermutationOuterAction`, `genericPartyPermutationFactorSet_associativity`, `genericPartyPermutationFactorSet_change`, and `genericPartyPermutationFactorSet_trivializable_iff_splits`.
 - `cor:diagonal-isodual-transversal-group`: exact `F_q^2 ⋊ SL_2(q)` versus `F_q^2 ⋊ T` fixed-party transversal dichotomy for odd-prime half-dimensional MDS codes, with a coherent Weil lift on the isodual branch's linear `SL_2(q)` factor and a Heisenberg obstruction to splitting its full affine one-qudit scalar extension.
+- `cor:computed-party-splitting`: exact splitting and parity action for the twelve C624 party-permutation examples; C629 formalizes the consequences of a supplied complement, while the concrete complements remain certificate checked.
 - `cor:six-arc-fixed-party-group`: exact projective fixed-party logical group `F_q^2 ⋊ SL_2(q)` on the GRS six-arc locus and `F_q^2 ⋊ T` off it.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 
@@ -55,11 +57,13 @@ still depends on the claim, evidence, literature, and prose gates.
    equivalence are all equivalent to equality of `z`. Over extension
    fields, Frobenius already identifies unequal `z` values.
 4. **Operational phase theorem (`thm:logical-phase`,
-   `cor:six-arc-fixed-party-group`).** The fixed-party symplectic kernel is
+   `cor:six-arc-fixed-party-group`,
+   `cor:computed-party-splitting`).** The fixed-party symplectic kernel is
    `SL_2(q)` on the GRS locus and the split torus off it, over odd prime
    fields.  Including logical Paulis, the exact projective groups are
-   `F_q^2 ⋊ SL_2(q)` and `F_q^2 ⋊ T`.  A party-moving isoduality, when
-   present, extends the torus to its normalizer.
+   `F_q^2 ⋊ SL_2(q)` and `F_q^2 ⋊ T`.  In the twelve computed
+   party-permutation examples the extension splits; odd motion on every
+   listed non-GRS/H3 row extends the torus to its normalizer.
 5. **Explicit LU witnesses.** C402's marginal moment uniformly separates
    good H3 reductions from GRS; C397's four-copy scalar resolves its q=13
    collision.
@@ -75,6 +79,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | Exact diagonal-isodual transversal logical group | odd prime `q`, `m≥2`, and a linear `[2m,m,m+1]_q` MDS code | `F_q^2 ⋊ SL_2(q)` iff `SC=C^\perp` for nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise; includes non-GRS diagonally isodual codes | extension-field full Clifford groups, party-moving enlargements, and non-product physical implementations |
 | Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
 | Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
+| Computed party-extension splitting | the twelve C624 prime-field pencil, GRS, enhanced-symmetry, and H3 rows | every listed extension splits; odd motion gives `N(T)` on the non-GRS/H3 rows | no uniform splitting theorem for arbitrary six-arcs, all H3 reductions, or extension fields |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |
 | q=13 four-copy separator | the two exact q=13 classes in C397's collision bucket | exact party orbit included | no completeness claim beyond the pair |
 | Four-copy divisor | C548's admitted pencil | characteristic seven merges the two reduced components; 11/13/41 are ramification phenomena | characteristics 3/5 are boundary coincidences |

@@ -4,7 +4,9 @@ This directory is the paper-local reproducibility package for every
 computational result retained by `theorem-map.md`.  `EVIDENCE.md` gives the
 claim, exact domain, certificate meaning, independent check, and trust boundary
 for each bundle.  The imported generators and canonical JSON certificates are
-under `evidence/`; they are byte-identical to the frozen source artifacts.
+under `evidence/`.  They are byte-identical to the frozen source artifacts
+except for dependency paths relocated to keep a generator self-contained
+inside the paper bundle; the manifest pins the exact paper-local bytes.
 
 From this directory, verify all sizes and SHA-256 hashes without changing the
 worktree:

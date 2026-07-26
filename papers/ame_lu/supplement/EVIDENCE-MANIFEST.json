@@ -75,6 +75,16 @@
       "bytes": 27591,
       "path": "evidence/2026-07-23-c550-four-copy-cover-holonomy.py",
       "sha256": "3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7"
+    },
+    {
+      "bytes": 622347,
+      "path": "evidence/2026-07-25-c624-ame-lu-party-extension-examples.json",
+      "sha256": "94171665d436cccc2182fc81b4d0cdfaa714262c92f2a4917b6589c9a709d35d"
+    },
+    {
+      "bytes": 29460,
+      "path": "evidence/2026-07-25-c624-ame-lu-party-extension-examples.py",
+      "sha256": "6f74915274e6b142b42ea52dc0c46633693700f52378590121c220d1e51a7840"
     }
   ],
   "replays": [
@@ -84,6 +94,7 @@
     ["evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py", "--check"],
     ["evidence/2026-07-23-c546-h3-pentad-orientation-lu.py", "--check"],
     ["evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py", "--check"],
-    ["evidence/2026-07-23-c550-four-copy-cover-holonomy.py", "--check"]
+    ["evidence/2026-07-23-c550-four-copy-cover-holonomy.py", "--check"],
+    ["evidence/2026-07-25-c624-ame-lu-party-extension-examples.py", "--check"]
   ]
 }

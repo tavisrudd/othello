@@ -241,6 +241,47 @@ precisely when the section preserves multiplication, which proves the
 splitting characterization.
 \end{proof}
 
+\begin{corollary}[Computed party-extension splittings]
+\label{cor:computed-party-splitting}
+The realized projective party-permutation extension in
+Corollary~\ref{cor:discrete-lu-symmetry} splits for both non-GRS
+\(q=11\) pencil classes, the \(q=11\) GRS evaluation-set representatives
+\[
+\{0,1,2,3,4,5\},\ \{0,1,2,3,4,6\},\
+\{0,1,2,3,5,6\},\ \{0,1,2,3,5,9\},
+\]
+the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
+and the H3 representatives
+\((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
+For every listed non-GRS or H3 row, party parity acts on the fixed split
+torus \(T\) by inversion.  Thus a realized odd party permutation enlarges
+the logical linear group exactly from \(T\) to
+\(N(T)=T\rtimes C_2\).
+\end{corollary}
+
+\begin{proof}
+For each row, an exact finite computation reconstructs the fifteen
+four-support shortened planes, exhausts all \(720\) party permutations,
+and checks the propagated local symplectic blocks against the full CSS
+Lagrangian.  The fixed-kernel theorem reduces the anchor blocks to
+\(I,J\) off the GRS locus and to \(I\) on it, without discarding any
+candidate.  The resulting \(q=11\) party images are
+\[
+ S_5,\quad S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
+\]
+where \(D_{12}\) has order \(12\).  The \(q=17\) and \(q=31\)
+enhanced rows have party images \(S_4\) and \(S_5\), respectively, and
+each listed H3 image is \(S_5\).
+
+The certificate records the complete normalized factor set for each
+section.  It also closes a complement of order \(\lvert\Pi\rvert\) whose
+projection to \(\Pi\) is bijective, and verifies that the associated
+normalized cochain changes the factor set to the identity.  Hence every
+listed extension splits.  Conjugating the fixed torus by the stored lifts
+gives the sign action; any odd lift is therefore the nontrivial Weyl-group
+element of \(N(T)\).
+\end{proof}
+
 \begin{proof}[Proof of
 Corollary~\ref{cor:diagonal-isodual-transversal-group}]
 Write a fixed-party product-Clifford action on Pauli labels as

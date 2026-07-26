@@ -5,9 +5,10 @@ conceptual proofs in the text.  The projective quotient uses displayed
 bracket identities and projectivities.  Its transition-map invariance and
 collision argument are proved in Section 4, while the 450 exact rational
 functions are certificate-supported.  Section 5 proves the MDS
-diagonal-multiplier and Gale-duality implications; its \(q=11,17,31\)
-group evaluations are
-certificate-supported examples, not inputs to the uniform theorem.
+diagonal-multiplier and Gale-duality implications.  The party groups,
+factor sets, complements, and torus actions in
+Corollary~\ref{cor:computed-party-splitting} are certificate-supported
+finite examples, not inputs to the uniform theorem.
 Section 6 proves the marginal trace/rank and incidence bridges; the H3
 determinants and \(q=13\) contractions are certificate-supported.
 Appendix~\ref{sec:transport} proves the systematic transport reduction; the cycle-cover
@@ -19,9 +20,9 @@ directory,
 \[
 \begin{array}{ll}
 \texttt{python3 verify.py}
- &\text{checks all fifteen byte counts and SHA-256 digests},\\
+ &\text{checks all seventeen byte counts and SHA-256 digests},\\
 \texttt{python3 verify.py --replay}
- &\text{regenerates all seven canonical JSON certificates in memory}.
+ &\text{regenerates all eight canonical JSON certificates in memory}.
 \end{array}
 \]
 The full replay uses only the Python standard library, deterministic
@@ -85,7 +86,13 @@ finitely many such components cover either automorphism group.  The
 party-permutation extension has a section-free outer action and a normalized
 nonabelian factor set.  Its ordered change-of-section law makes
 trivializability independent of the chosen lifts, and trivializability is
-equivalent to a homomorphic splitting.
+equivalent to a homomorphic splitting.  The companion
+\texttt{PartyExtensionSplitting} module proves that a complement supplies
+the trivializing cochain, semidirect-product equivalence, unique
+kernel--quotient coordinates, cardinality product, and the
+inverting-involution witness behind \(T\subset N(T)\).  The twelve concrete
+complements in Corollary~\ref{cor:computed-party-splitting} are exact
+certificate computations rather than kernel-checked finite tables.
 
 The geometric classification,
 marginal-trace, logical propagation, finite contraction,

@@ -14,10 +14,9 @@ the tracked certificate.  No randomness, floating point, network access, or
 external computer-algebra package is used.
 
 The integrity-only command ends with
-`verified 15 evidence artifact(s)`.  A successful full run additionally ends
-with `replayed 7 evidence bundle(s)`; every intervening generator line begins
-with `ok:` and names the matched certificate, its byte count, and SHA-256
-digest.
+`verified 17 evidence artifact(s)`.  A successful full run additionally ends
+with `replayed 8 evidence bundle(s)`; each generator reports a successful
+comparison with its tracked certificate.
 
 ## Imported bundles
 
@@ -30,6 +29,7 @@ digest.
 | C546: H3 orientation boundary | Every odd H3 reduction in C546's stated domain; this identifies the LC-forgettable pentad orientation and does not classify the fixed-permutation LU kernel | `2026-07-23-c546-h3-pentad-orientation-lu.{py,json}` | Integral isoduality and complete q=11/q=19 projective permutation lists are checked computationally; the finite-Fourier code-duality lift follows independently from character orthogonality. |
 | C548: four-copy rank-drop divisor | C548's admitted pencil, with characteristics 3/5 as boundary coincidences, 7 as component merger, and 11/13/41 as ramification phenomena | `2026-07-23-c548-c397-contraction-rank-drop-divisor.{py,json}` | Exact quotient-field row reduction and integral maximal-minor witnesses exclude extra components; direct finite-field Gaussian elimination independently replays every admitted parameter for q=7,11,13,17,19,23,29,31. |
 | C550: `thm:transport-divisor` | The C548 contraction and its two divisor components, double-coset multiplicities, and stated exceptional arithmetic | `2026-07-23-c550-four-copy-cover-holonomy.{py,json}` | A signed cycle-cover ledger and fraction-free determinant give independent determinant paths; a third replay compares the `24 x 21` section and `9 x 9` transport kernels for all 720 party assignments at six exact `(q,t)` pairs. |
+| C624: `cor:computed-party-splitting` | Exactly the twelve prime-field pencil, GRS, enhanced-symmetry, and split-prime H3 rows named in the corollary; no arbitrary-six-arc, all-good-reduction, or extension-field splitting claim | `2026-07-25-c624-ame-lu-party-extension-examples.{py,json}` | The checker exhausts all 720 party permutations per row after a complete fixed-kernel anchor normalization, checks the full CSS Lagrangian, records every normalized factor, and verifies explicit complements and parity actions.  The six q=11 fixed-kernel, party-image, and total-group orders are independently compared with C397's separate census. |
 
 ## Certificate and trust boundary
 

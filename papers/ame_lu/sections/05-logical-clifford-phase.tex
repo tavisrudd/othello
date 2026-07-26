@@ -137,10 +137,13 @@ displayed equalities.
 
 This is an operational distinction, not a classical automorphism count.
 The fixed-party non-GRS group has order \(q^2(q-1)\), while the GRS
-group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).  At \(q=11\), the
-two non-GRS pencil classes also have party-moving isodualities, so their
-party-moving logical group is \(q^2N(T)\); the GRS and party-moving
-non-GRS orders are \(159720\) and \(2420\), respectively.
+group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
+Corollary~\ref{cor:computed-party-splitting} makes the party-moving
+comparison exact at \(q=11\): the two non-GRS pencil classes have party
+images \(S_5\) and \(S_4\), their extensions split, and odd party motion
+inverts \(T\).  Their party-moving logical group is therefore
+\(\F_q^2\rtimes N(T)\).  The GRS and party-moving non-GRS logical-group
+orders are \(159720\) and \(2420\), respectively.
 
 The MDS property also makes minimum operator pushing uniform.  For any
 input party and nonidentity Pauli label, each of the ten four-sets
@@ -153,7 +156,9 @@ finite group calculation.
 
 Arithmetic symmetry jumps do not change the phase.  The
 characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
-and therefore retains the full \(\mathrm{SL}_2(17)\) kernel.  The
-characteristic-\(31\) \(A_5\) specialization is non-GRS and therefore
-retains only the split torus.  These are symmetry enhancements inside the
-two phases, not exceptions to \((5.1)\).
+and therefore retains the full \(\mathrm{SL}_2(17)\) kernel; its
+party image is \(S_4\), and the computed extension splits.  The
+characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
+fixed-party kernel is the split torus; its \(S_5\) party image also splits,
+and odd motion enlarges the logical linear group to \(N(T)\).  These are
+symmetry enhancements inside the two phases, not exceptions to \((5.1)\).

@@ -150,6 +150,33 @@ The H3 computation covers the four displayed split prime fields.  It does
 not claim an all-good-reduction splitting theorem, classify inert
 extension-field reductions, or classify arbitrary six-arcs.
 
+## Manuscript adoption
+
+The result is adopted as
+`cor:computed-party-splitting`.  Section 3 states the exact twelve-row
+finite domain, the party images, splitting conclusion, and parity action.
+Section 5 records the operational consequence: odd party motion on every
+listed non-GRS/H3 row enlarges the logical linear group from \(T\) exactly
+to \(N(T)\).  Section 8 separates the certificate-checked complements from
+C629's kernel-checked abstract consequences.
+
+The paper-local evidence copy is under
+`papers/ame_lu/supplement/evidence/`.  Its JSON is byte-identical to the
+source certificate.  The checker differs only by relocating the C397 input
+path inside the self-contained paper bundle; its paper-local byte count and
+SHA-256 are 29,460 and
+`6f74915274e6b142b42ea52dc0c46633693700f52378590121c220d1e51a7840`.
+The paper-local manifest pins both artifacts and replays the checker.
+The adopted manuscript passes its warning-free 22-page build; the PDF has
+198,844 bytes and SHA-256
+`403edd67dd1579c696070737527b083a2cf85e70c556667a3e09ae8f74423663`.
+Pages 8, 13--14, and 17--18 were rendered and inspected.  The release
+manifest verifies 37 public artifacts and 80 formal companion artifacts,
+with tree hashes
+`c279c7fb111ab838511171a0709b33bffd8ce764beb9904d00494713f43a83e2`
+and
+`77153d4d9a37f163c804e62ebb0455adf7289eaa05dd4ab8d0e893f875d973b1`.
+
 ## Reproduction
 
 Run from the repository root:

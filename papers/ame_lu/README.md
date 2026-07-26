@@ -10,8 +10,10 @@ between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is local
 Clifford, for every prime power and \(m\geq2\).  Transversal conversions
 between the associated `[[2m-1,1,m]]_q` quantum MDS codes are Clifford
 factor by factor; over odd prime fields the GRS tower has exact projective
-transversal logical group `F_q^2 ⋊ SL_2(q)`. The six-party pencil and
-logical-phase applications retain their existing scopes. Public identifiers,
+transversal logical group `F_q^2 ⋊ SL_2(q)`, and diagonal isoduality is the
+exact all-length condition for that group rather than the split-torus
+alternative. The six-party pencil and logical-phase applications retain
+their existing scopes. Public identifiers,
 author metadata, license choice, and submission authorization remain author
 gates.
 
@@ -56,16 +58,18 @@ core is:
 
 1. uniform LU-to-LC rigidity and factorwise rigidity of transversal encoder
    conversions;
-2. the exact full-Clifford transversal logical group for the odd-prime
-   even-length GRS quantum-MDS tower;
+2. the exact diagonal-isodual/full-Clifford versus split-torus transversal
+   dichotomy over odd prime fields;
 3. exact local-Clifford classification of the admitted non-GRS pencil by one
    bracket scalar `z`;
 4. the `SL_2(q)` versus split-torus logical-Clifford phase on and off the GRS
    locus;
-5. uniform arbitrary-LU separation of good H3 reductions from every GRS
+5. exact splitting of twelve concrete party-permutation extensions, with odd
+   motion enlarging `T` to `N(T)` on the listed non-GRS/H3 rows;
+6. uniform arbitrary-LU separation of good H3 reductions from every GRS
    class;
-6. an exact four-copy separator for the difficult `q=13` pair; and
-7. a transport-sheaf explanation of the exceptional contraction divisor and
+7. an exact four-copy separator for the difficult `q=13` pair; and
+8. a transport-sheaf explanation of the exceptional contraction divisor and
    its multiplicities.
 
 Fixed-copy permutation contractions cannot supply a generic pencil
