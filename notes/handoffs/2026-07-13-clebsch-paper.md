@@ -544,6 +544,19 @@ negative result kills only this Klein period-lattice lift. The audited
 statement and source depths are in
 `notes/2026-07-26-klein-cubic-multiplicity-hodge-carrier.md`.
 
+Paper III drafting is active. The old passage-catalogue skeleton has been
+replaced by the working manuscript *The Clebsch orientation cubic:
+arithmetic covers and icosahedral harmonics* under
+`papers/clebsch-passages/`. Its strong-form plan
+pursues both the core arithmetic specialization and the strongest positive
+Klein multiplicity/55-curve theorem. C655 adds the exact degree-six
+face-axis harmonic and Gaunt/Steinhardt restriction as a third theorem leg,
+while keeping all materials utility empirical. Nine section files, a
+dependency workplan, a fourteen-claim trust manifest, and a structural checker now keep
+proved, certified, literature-backed, gated, and conditional statements
+separate while C652--C655 run. C579 is therefore in progress, but the paper
+does not advance to cold review until all load-bearing rows are closed.
+
 The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
 and degree-23 coherence material is subordinate inventory. C579 admits an
 item only when it becomes a proved consequence or application of the

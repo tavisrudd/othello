@@ -6,6 +6,7 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
+\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -17,90 +18,55 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-\title{Finite passages and holonomy in Clebsch matching geometry}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\claimid}[1]{\textnormal{\texttt{#1}}}
+
+\title{The Clebsch orientation cubic:
+arithmetic covers and icosahedral harmonics}
 \author{Tavis Rudd}
-\date{Exploratory split draft --- July 2026}
+\date{Working manuscript --- July 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Several finite constructions attached to the Clebsch matching geometry
-retain different parts of the same orientation data.  We organize their
-survival and loss through carrier torsors and a four-sheet cover with
-explicit cycle holonomy.  The resulting comparison links finite
-passages with theta, Fourier, quantum, Mathieu, and
-characteristic-zero realizations.  The first purpose of this draft is
-to determine whether these comparisons form one theorem complex with a
-standalone mathematical question.
+The Clebsch matching geometry carries a two-valued orientation whose first
+odd observable is cubic.  We relate this finite orientation to Hitchin's
+ordered-icosahedron double cover.  The paper's central target identifies the
+golden Clebsch torsor with the fibre of the quadratic cover
+\(w^2=5J_0\), and identifies its reduction modulo \(11\) with the
+Clebsch sheet exchange.  An exact tensor calculation already shows that the
+signed matching cubic and the Clebsch cubic span the same invariant line
+over \(\F_{11}\).  The remaining arithmetic specialization and integral
+comparison are isolated as explicit certification gates.  In characteristic
+zero, the same cubic is expected to be the restriction of the standard
+\(\ell=6\) Gaunt cubic to the four-dimensional icosahedral face-axis
+channel.  A further target asks whether the same real quadratic field is recovered
+from the relative position of the two icosahedral multiplicity structures
+in the intermediate Jacobian of the Klein cubic.
 \end{abstract}
 
-\noindent\textbf{Keywords.} Clebsch configuration; finite cover;
-holonomy; torsor; Fourier transform; Mathieu group.
+\noindent\textbf{Keywords.} Clebsch configuration; Hitchin cover;
+icosahedral invariant; arithmetic double cover; Klein cubic; intermediate
+Jacobian.
 
 \smallskip
-\noindent\textbf{2020 Mathematics Subject Classification.} 05B25, 20B25,
-20C20, 81P45.
+\noindent\textbf{2020 Mathematics Subject Classification.} 14G25, 14J30,
+20C20, 51E20.
 
-\section{Introduction}
-
-The candidate paper asks when orientation data survives passage between
-the finite models attached to the Clebsch matching geometry.  Before
-the prose is expanded, C579 must identify one principal theorem and
-show that the remaining comparisons are consequences rather than
-coequal narratives.
-
-\begin{quote}
-\textbf{Standalone-value gate.}
-This skeleton inventories a possible theorem order.  It adopts no claim
-until C575 pins its source and C579 shows that the carrier and holonomy
-constructions answer one question without depending on the narrative of
-the rigidity or factorization papers.
-\end{quote}
-
-\section{Carriers, orientations, and passage maps}
-
-Define the common carrier data and the torsors transported by each
-passage.  State the determinant-sign transport mechanism before
-introducing the individual realizations.
-
-\section{Survival and loss}
-
-Turn the passage-survival tables into mathematical propositions:
-identify what is retained, what is erased, and which negative statements
-are strict.  Keep table entries subordinate to these propositions.
-
-\section{The four-sheet cover and cycle holonomy}
-
-Define the six-column pencil, its covectors, the linear sheaf, and the
-four-sheet cover before stating the holonomy theorem.  Derive the
-resonances and relative-frame counts from cycles, and keep the strict
-survival boundary separate from parent reconstruction.
-
-\section{Theta, Fourier, and quantum realizations}
-
-State the exact comparison functors and their hypotheses.  Separate
-finite monomial or fixed-party statements from any broader equivalence
-that is not proved.
-
-\section{Mathieu and characteristic-zero bridges}
-
-Explain which torsor is common to the finite Mathieu construction and
-the characteristic-zero realization.  Make every identification and
-normalizer computation visible at its actual proof mode.
-
-\section{Verification architecture}
-
-Map the carrier, holonomy, survival, and comparison statements to their
-conceptual proofs, Lean interfaces, and finite certificates.  Record
-the exceptional-prime boundary without turning the section into a
-workflow transcript.
-
-\section*{Conclusion}
-
-If the standalone-value gate passes, conclude with the exact invariant
-transported across all adopted passages and the first passage at which
-it is lost.  Otherwise this material returns to a results inventory
-rather than a paper.
+\input{sections/01-introduction}
+\input{sections/02-orientation-cover}
+\input{sections/03-clebsch-cubic}
+\input{sections/04-arithmetic-specialization}
+\input{sections/05-harmonic-realization}
+\input{sections/06-klein-multiplicity}
+\input{sections/07-consequences}
+\input{sections/08-verification}
+\input{sections/09-conclusion}
 
 \end{document}

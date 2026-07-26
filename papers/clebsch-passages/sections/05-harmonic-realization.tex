@@ -1,0 +1,81 @@
+\section{The degree-six harmonic realization}
+\label{sec:harmonic}
+
+Let \(u_e\in S^2\), \(1\le e\le10\), be the unoriented axes through pairs
+of opposite icosahedral faces.  The zonal degree-six harmonics define
+\[
+ L:\mathbb R^{10}\longrightarrow\mathcal H_6,\qquad
+ L(a)(\omega)=\sum_e a_eP_6(u_e\cdot\omega),
+\]
+where
+\[
+ P_6(s)=\frac1{16}
+ \left(231s^6-315s^4+105s^2-5\right).
+\]
+As \(A_5\)-modules,
+\[
+ \mathbb R^{10}\simeq\mathbf1\oplus V_4\oplus V_5,
+ \qquad
+ \mathcal H_6|_{A_5}\simeq\mathbf1\oplus V_3\oplus V_4\oplus V_5.
+\]
+
+The ten axes carry a Petersen adjacency relation.  If \(A\) is its
+adjacency matrix, the zonal Gram matrix is expected to be
+\[
+ K=\frac1{243}(196I+47J-112A).
+\]
+The Petersen eigenvalues \(3,1,-2\), with multiplicities \(1,5,4\), then
+give the positive Gram eigenvalues
+\[
+ \left(\frac{110}{81}\right)^{(1)},\qquad
+ \left(\frac{28}{81}\right)^{(5)},\qquad
+ \left(\frac{140}{81}\right)^{(4)}.
+\]
+Thus \(L\) is injective.  Labeling the axes by pairs
+\(\{i,j\}\subset\{1,\ldots,5\}\), the four-space is the Petersen
+\((-2)\)-eigenspace
+\[
+ a_{ij}=y_i+y_j,\qquad \sum_i y_i=0.
+\]
+These exact assertions form \claimid{PH-1}; C655 must certify them without
+floating-point choices and provide an independent replay.
+
+For \(y\in V_4\), put
+\[
+ F_y(\omega)=\sum_{i<j}(y_i+y_j)P_6(u_{ij}\cdot\omega).
+\]
+The standard degree-six Gaunt cubic restricts to an \(A_5\)-invariant cubic
+on \(V_4\), hence to a scalar multiple of \(\sigma_3\).  The imported exact
+calculation predicts
+\[
+ \frac1{4\pi}\int_{S^2}F_y(\omega)^3\,d\omega
+ =
+ -\frac{784000}{1247103}\,\sigma_3(y).
+\]
+The nonzero scalar, its normalization, and the uniqueness input are
+\claimid{PH-2}.  They remain gated until C655 supplies the task-owned exact
+certificate, independent replay, and primary-source audit.
+
+\paragraph{Order-parameter meaning.}
+The Gaunt cubic is the signed third-order invariant used in degree-six
+bond-orientational descriptions.  The statement above is narrower than an
+identification with the ordinary cubic of a uniform icosahedral neighbour
+cage.  The uniform cage lies in the trivial summand; the Clebsch cubic sees
+the \(V_4\) component of nonuniform weights on the ten opposite face pairs.
+This precise relationship is \claimid{PH-3}.
+
+For a face-axis weight vector \(a\), the projector
+\[
+ P_{V_4}=\frac{(A-3I)(A-I)}{15}
+\]
+extracts this component.  A scale-free signed descriptor is then
+\[
+ C_4(a)=
+ \frac{\int_{S^2}L(P_{V_4}a)^3}
+ {\left(\int_{S^2}L(P_{V_4}a)^2\right)^{3/2}}.
+\]
+Possible weights include opposed-face distortion, chemical decoration, or
+normal stress.  Whether \(C_4\) predicts rearrangement, yielding, or
+nucleation beyond standard quadratic and cubic descriptors is an empirical
+question, recorded as \claimid{PH-4}.  No applied performance claim is made
+in this paper.

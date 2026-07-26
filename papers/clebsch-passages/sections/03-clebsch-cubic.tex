@@ -1,0 +1,59 @@
+\section{The Clebsch cubic bridge}
+\label{sec:cubic}
+
+Let \(G\) be the order-\(60\) stabilizer of the \(H_3\)-invariant matching
+in \(\operatorname{PGL}_2(\F_{11})\), and let \(\Omega\) be its
+\(22\)-point matching orbit.  For a reference matching \(M_0\), put
+\[
+ W=\left\langle q_M-q_{M_0}:M\in\Omega\right\rangle .
+\]
+The two \(\PSL_2(\F_{11})\)-sheets define signs
+\(\epsilon(M)\in\{\pm1\}\) and the symmetric tensor
+\[
+ T=\sum_{M\in\Omega}\epsilon(M)[q_M-q_{M_0}]^{\otimes3}
+ \in\operatorname{Sym}^3(W).
+\]
+
+\begin{theorem}[Finite tensor bridge]
+\label{thm:finite-tensor-bridge}
+There is a \(G\)-equivariant isomorphism
+\[
+ S:\F_{11}^{\binom{[5]}2}\longrightarrow W
+\]
+such that, after using the standard pairing to identify the permutation
+module with its dual and restricting along
+\[
+ E(y)_{\{i,j\}}=y_i+y_j,\qquad \sum_i y_i=0,
+\]
+one has
+\[
+ E^*(S^{-1})^{\otimes3}T=4\sigma_3.
+\]
+In particular, the signed matching cubic and the Clebsch cubic span the
+same nonzero invariant line over \(\F_{11}\).
+\end{theorem}
+
+\begin{proof}
+Conjugation on the normalizers of the five Klein four subgroups identifies
+\(G\) with \(A_5\) in its degree-five action.  Hence it acts on the ten
+two-subsets.  The matching construction gives a second ten-dimensional
+representation on \(W\).  Solving
+\(\rho_W(g)S=S\rho_P(g)\) produces an invertible intertwiner, and the
+recorded matrix satisfies this identity for all \(60\) elements.
+
+Transporting the \(220\) symmetric coordinates of \(T\) through this
+intertwiner and contracting with \(E\) gives a polarized \(4^3\)-tensor
+whose entries are \(0\) when all indices agree and \(6\) otherwise.  The
+polarization of \(\sigma_3\) has entries \(0\) and
+\(-1/3=7\), respectively.  Since \(4\cdot7=6\) in \(\F_{11}\), the two
+tensors agree.  A primary exact calculation and an independent
+reconstruction verify the representation, intertwiner, and all \(64\)
+contracted entries.  The final contraction is also checked in Lean.
+\end{proof}
+
+\begin{remark}[Normalization]
+The characteristic-zero Gaunt scalar presently available has denominator
+divisible by \(11\).  The theorem therefore identifies a common integral
+cubic line; it is not obtained by reducing that rational scalar modulo
+\(11\).
+\end{remark}

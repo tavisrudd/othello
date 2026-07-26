@@ -190,7 +190,14 @@ Mukai--Umemura model and normalization comparison.
    invariant, and test whether its discriminant is \(5\). Treat the
    55-curve lattice as a second-stage integral route, not as assumed
    evidence.
-5. **C579 — Paper III synthesis.** After C651--C653, and with C654's
+5. **C655 — harmonic realization.** Certify the exact embedding of the ten
+   icosahedral face axes in \(\mathcal H_6\), identify the Clebsch
+   four-space as the Petersen \((-2)\)-eigenspace, and independently verify
+   that the standard Gaunt cubic restricts to
+   \(-784000/1247103\,\sigma_3\). Audit the physical order-parameter
+   normalization against primary sources and state materials utility only
+   as an untested benchmark.
+6. **C579 — Paper III synthesis.** After C651--C653, and with C654's
    positive or negative disposition recorded, replace the exploratory
    skeleton with the arithmetic orientation-cover paper, admit only
    consequences of its principal theorem, build a Paper III-specific trust
@@ -198,11 +205,27 @@ Mukai--Umemura model and normalization comparison.
 
 ## Acceptance boundary
 
-Paper III is not yet drafted or release-certified. The imported reports
-establish a high-value route and several exact candidate calculations. C579
-passes only when the three prerequisite gates support one theorem complex
-with a complete proof/evidence map and when nonconsequential inventory has
-been cut.
+Paper III now has a compilable strong-form manuscript scaffold under
+`papers/clebsch-passages/`. Its nine section files separate the core
+Hitchin--Clebsch theorem, the certified finite cubic bridge, the exact
+arithmetic specialization, the degree-six harmonic realization, and the
+Klein multiplicity elevation. The
+adjacent `WORKPLAN.md` records the dependency graph, and
+`verification/trust_manifest.json` is the initial fourteen-claim trust ledger.
+The structural checker deliberately reports a non-release surface while
+C652--C655 remain open.
+
+The final target is the strongest coherent theorem complex: a positive
+C654 result is to be integrated as a second structural theorem, a positive
+55-curve saturation test as its integral geometric realization, and C655's
+harmonic identity as the bridge to an established physical order parameter.
+The modular source layout is risk control during the calculation, not a
+decision to publish the weaker core first.
+
+Paper III is not release-certified. C579 passes only when the prerequisite
+gates support one theorem complex with a complete proof/evidence map, every
+load-bearing trust row is closed, and nonconsequential inventory has been
+cut.
 
 ## Mystery ledger
 
