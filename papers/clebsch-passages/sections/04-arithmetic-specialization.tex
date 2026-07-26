@@ -3,17 +3,19 @@
 
 The arithmetic exchange is already visible on the cubic \(xyz\).  Its two
 icosahedral six-axis configurations are Galois conjugate over
-\(\Q(\sqrt5)\).  Over a finite field where they become rational, their
-exchanger has spinor class \([2]\); modulo \(11\) this class is nontrivial.
+\(\Q(\sqrt5)\).  The exchanger is the projective orthogonal transformation
+carrying one configuration to the other.  Over a finite field where the
+configurations become rational, it has spinor class \([2]\); modulo \(11\)
+this class is nontrivial.
 
 \subsection{The golden fibre}
 
 Retain the field \(E\), parameter \(t\), and six-set \(I_t\) from
 Section~\ref{sec:cover}.
 These six projective points are its axes through opposite vertices.  Thus
-an icosahedral configuration here means the unordered six-set \(I_t\);
-the incidence cover remembers which of the two conjugate six-sets lies
-over the cubic.
+an icosahedral configuration here means the unordered six-set \(I_t\).
+A point of the incidence cover records one chosen six-set; its two points
+over \(xyz\) correspond to the two conjugate configurations.
 
 \begin{proposition}[Golden fibre]\label{prop:golden-fibre}
 Over a field of characteristic different from \(2\) and \(5\), the points
@@ -23,8 +25,9 @@ are conjugate geometric configurations defined over
 \[
  \Q[t]/(t^2-t-1)=\Q(\sqrt5)
 \]
-and are exchanged by its nontrivial automorphism.  In Hitchin's normalized
-cover of ordered icosahedra they are the complete fibre over \([xyz]\).
+and are exchanged by its nontrivial automorphism.  In Hitchin's incidence
+cover, whose point records the chosen six-set, they are the complete fibre
+over \([xyz]\).
 \end{proposition}
 
 \begin{proof}
@@ -58,7 +61,7 @@ The relation \(1-t=-1/t\) gives, by substitution,
  R^2=\operatorname{diag}(1,-1,-1),\qquad R^4=1.
 \]
 Moreover \(R(xyz)=-xyz\): it fixes the projective cubic and exchanges its
-two ordered icosahedra.
+two configurations.
 
 \subsection{Finite-field specialization}
 
@@ -106,7 +109,7 @@ roots modulo \(11\) are \(4\) and \(8\), and \(2\) is nonsquare modulo
 \end{proof}
 
 Thus two independent square classes govern the finite specialization:
-\([5]\) determines whether the two displayed parents are rational, while
+\([5]\) determines whether the two displayed configurations are rational, while
 \([2]\) determines whether their exchanger lies in the special projective
 subgroup.  Dye's existence criterion for Clebsch hexagons has the same
 \([5]\) boundary \cite[Theorem~1]{DyeClebsch}.

@@ -13,14 +13,11 @@ quadratic and cubic moments.  Its independent replay uses a separate dense
 polynomial representation and checks the Wigner \(3j\) conversion.  Neither
 calculation uses floating-point arithmetic.
 
-The claim/evidence map, exact programs, canonical certificates, checksums,
-toolchain requirements, and aggregate replay command are included in the
-\texttt{verification} directory distributed with the paper.  The aggregate
-runner also checks the four theorem-like statements against their frozen
-identity, verifies label-level correspondence with every trust row, checks a
-declared packaging allowlist, and requires a warning-free manuscript build.
-The manifest explicitly claims no Lean coverage: the incidence model,
-square class, local fibre comparison, spinor specialization, face-axis
-geometry, and spherical moments are not formal dependencies.  The proofs do
-not depend on availability of the exact-arithmetic audits.  The complete
-source and verification bundle accompanies this manuscript.
+The \texttt{verification} directory distributed with the paper contains
+the exact programs, canonical certificates, checksums, toolchain
+requirements, and aggregate replay command.  It also records the exact
+claim-to-evidence correspondence.  The manifest claims no Lean coverage:
+the incidence model, square class, local fibre comparison, spinor
+specialization, face-axis geometry, and spherical moments are not formal
+dependencies.  These exact-arithmetic audits are independent checks rather
+than steps in the proofs.

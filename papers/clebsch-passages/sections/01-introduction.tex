@@ -16,9 +16,9 @@ general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations:
 equivalently, two Mukai--Umemura isotropic three-planes \(U\subset H\) with
 \(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  The incidence
 variety of pairs \(([f],U)\) is therefore generically a degree-two cover of
-\(\mathbf P(H)\).  We determine its rational square class and then study a
-separate occurrence of the same Clebsch invariant in degree-six spherical
-harmonics.
+\(\mathbf P(H)\).  We determine its rational square class, which specifies
+the resulting quadratic function-field extension, and then study a separate
+occurrence of the same Clebsch invariant in degree-six spherical harmonics.
 
 Let \(J_0\) denote Hitchin's irreducible invariant sextic, with the
 normalization in his invariant calculation.  Write
@@ -29,6 +29,14 @@ normalization in his invariant calculation.  Write
 for the Clebsch four-space and its invariant cubic.
 Here and below, \(D(\sigma_3)\) is the principal open set
 \(\{\sigma_3\ne0\}\).
+Because \(J_0\) is a section of \(\mathcal O_{\mathbf P(H)}(6)\), we use
+\[
+ K\bigl(\sqrt{cJ_0}\bigr),\qquad K=\Q(\mathbf P(H)),
+\]
+as shorthand: choose a nonzero rational section \(s\) of
+\(\mathcal O_{\mathbf P(H)}(3)\), put \(j_s=J_0/s^2\in K^\times\), and take
+\(K(\sqrt{cj_s})\).  Replacing \(s\) changes \(j_s\) by a square, so the
+quadratic extension is unchanged.
 
 \begin{theorem}[Arithmetic incidence cover]
 \label{thm:arithmetic-main}
@@ -45,22 +53,13 @@ defined in Section~\ref{sec:cover},
 The chart is not defined over \(\Q\); Galois conjugation carries it to the
 chart of the conjugate icosahedron.  The fibre over the rational point
 \([xyz]\) is nevertheless a complete reduced fibre with residue algebra
-\(\Q(\sqrt5)\).  Over every finite field of odd characteristic other than
-\(5\) in which \(5\) is a square, the two displayed parents and their
-exchanger specialize, and the exchanger has spinor class \([2]\).  At
-\(q=11\) this is the nontrivial element of
-\[
-\operatorname{PGL}_2(11)/\operatorname{PSL}_2(11).
-\]
+\(\Q(\sqrt5)\).
 \end{theorem}
 
-The finite-field assertion concerns only the displayed golden fibre and its
-exchanger; it is not a good-reduction statement for the global geometric
-incidence cover.
 The factor \(5\) has a concrete descent meaning: the cubic \([xyz]\) and
 its unordered geometric fibre are rational, but choosing either
-icosahedral parent---equivalently, either conjugate Clebsch chart through
-that point---requires \(\Q(\sqrt5)\).
+icosahedral configuration---equivalently, either conjugate Clebsch chart
+through that point---requires \(\Q(\sqrt5)\).
 
 \begin{theorem}[Degree-six harmonic restriction]
 \label{thm:harmonic-main}
@@ -73,7 +72,8 @@ through opposite icosahedral faces in \eqref{eq:face-axis-labels}, and set
 \]
 The coefficient vectors \((y_i+y_j)_{i<j}\) form the Petersen
 \((-2)\)-eigenspace, and their zonal harmonics give an injective copy of
-\(V\) in \(\mathcal H_6\).  With
+\(V\) in the real degree-six spherical-harmonic space \(\mathcal H_6\).
+With
 \(\langle f,g\rangle=(4\pi)^{-1}\int_{S^2}fg\), the spherical cubic on this
 copy is
 \[
@@ -81,6 +81,15 @@ copy is
  =-\frac{784000}{1247103}\sigma_3(y).
 \]
 \end{theorem}
+
+The arithmetic proof has three steps.  Hitchin's degree and branch-sextic
+calculation reduces the generic extension to
+\(K(\sqrt{cJ_0})\); the complete etale fibre at \([xyz]\), with residue
+algebra \(\Q(\sqrt5)\), determines \(c=5\); and the explicit projective
+orthogonal transformation between the two configurations yields spinor
+class \([2]\).  Independently, the harmonic proof identifies the pair-sum
+coefficients with the Petersen \((-2)\)-eigenspace and determines the
+invariant cubic from one exact spherical-moment calculation.
 
 Hitchin proves the generic degree, identifies the branch sextic, constructs
 the Clebsch chart, computes its restriction, and classifies the fibre over
@@ -98,12 +107,11 @@ comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 
 The harmonic theorem is logically independent of the incidence cover.  It
-places the classical degree-six bond-order observable
+places the classical degree-six bond-order observable---the rotationally
+invariant cubic formed from degree-six harmonic coefficients---
 \cite{SNR1981,SNR1983} on the same four-space and computes its exact
 restriction.  The coefficient
 \(-784000/1247103\) has denominator divisible by \(11\), and this paper
-constructs no rational identification of the two displayed embeddings and
-no common integral lattice from which they could be obtained by base
-change.  Their relation is an isomorphism class of four-dimensional
-\(A_5\)-modules and the invariant polynomial \(\sigma_3\), not a
-specialization between them.
+relates the two constructions through their four-dimensional
+\(A_5\)-module and invariant polynomial \(\sigma_3\), rather than by a
+rational map between their ambient harmonic spaces.

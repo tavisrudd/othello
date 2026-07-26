@@ -170,16 +170,24 @@ Write \(K=\Q(\mathbf P(H))\).  In characteristic zero every quadratic
 extension of \(K\) has the form \(K(\sqrt d)\).  The prime divisors at
 which \(d\) has odd valuation are exactly the branch divisors.  Hitchin
 identifies the branch hypersurface with the irreducible invariant sextic
-\(J_0=0\) \cite[\S\S9--10]{HitchinIcosahedron}.  Consequently
+\(J_0=0\) \cite[\S\S9--10]{HitchinIcosahedron}.
+
+Choose a nonzero rational section \(s\) of
+\(\mathcal O_{\mathbf P(H)}(3)\) and set
 \[
- \operatorname{div}(d/J_0)=2D
+ j_s=\frac{J_0}{s^2}\in K^\times.
+\]
+Its odd valuations occur exactly along \(J_0=0\), because the divisor of
+\(s^2\) is even.  Consequently
+\[
+ \operatorname{div}(d/j_s)=2D
 \]
 for a divisor \(D\) on \(\mathbf P(H)\).  The class of \(D\) is
 two-torsion.  Since
 \(\operatorname{Pic}(\mathbf P(H))=\mathbf Z\), \(D\) is principal.
 Thus
 \[
- d=cJ_0g^2
+ d=cj_sg^2
 \]
 for some \(g\in K^\times\) and a unique
 \(c\in\Q^\times/\Q^{\times2}\).  The incidence extension is therefore
@@ -194,22 +202,27 @@ this point.  Because \(\pi\) is proper, there is a Zariski neighborhood
 \(\widetilde B\) be the normalization of \(B\) in the quadratic generic
 field \(K(\sqrt{cJ_0})\).  The normal finite scheme
 \(\pi^{-1}(B)\) is birational to \(\widetilde B\), hence is isomorphic to
-it.  Moreover \(J_0(xyz)\ne0\), so this normalization is etale after
-shrinking \(B\).  The two distinct geometric points therefore form the
-complete reduced scheme-theoretic fibre, whose residue algebra is
+it.  Hitchin's branch calculation identifies the branch locus with
+\(J_0=0\).  Since \(J_0(xyz)\ne0\), shrinking \(B\) away from this divisor
+makes the finite normalization etale.  The two distinct geometric points
+therefore form the complete reduced scheme-theoretic fibre, whose residue
+algebra is
 \[
  E=\Q[t]/(t^2-t-1)=\Q(\sqrt5).
 \]
 
-Choose a local generator of \(\mathcal O_{\mathbf P(H)}(3)\) at
-\([xyz]\).  The equation of the normalization is then
-\(w^2=cJ_0u^2\) for a rational unit \(u\); changing the generator multiplies
-the right side by a square unit.  Since
-\(J_0(xyz)=(16/25)^2\), specialization gives the residue algebra
-\(\Q(\sqrt c)\).  Comparison with the preceding fibre proves
+Choose a local generator \(e\) of
+\(\mathcal O_{\mathbf P(H)}(3)\) at \([xyz]\), and write
+\(j_e=J_0/e^2\).  The normalization is locally
+\(w^2=cj_e\).  Changing \(e\) multiplies \(j_e\) by a unit square.
+Moreover, \(j_e(xyz)\) differs from the displayed value
+\(J_0(xyz)=(16/25)^2\) by a rational square.  Specialization therefore
+gives the residue algebra \(\Q(\sqrt c)\).  Comparison with the preceding
+fibre proves
 \(c=5\) in \(\Q^\times/\Q^{\times2}\).  This also explains why evaluating
 the generic square class at the point is legitimate: the point lies in the
-finite etale locus and every omitted factor is a unit square there.
+finite etale locus and the change from \(j_s\) to \(j_e\) is a unit square
+there.
 
 \paragraph{Integral boundary.}
 Choose a full lattice \(\Lambda\subset H\) and an integer \(a\ne0\) such
