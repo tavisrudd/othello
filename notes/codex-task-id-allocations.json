@@ -1511,8 +1511,17 @@
       "last": 664,
       "purpose": "plan and execute a human-mechanism-first Lean formalization of the bounded Paper III theorem surface",
       "sequence": 168
+    },
+    {
+      "count": 1,
+      "first": 665,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 665,
+      "purpose": "Classify balanced projective matching orbits and extract the C661 cocycle, cubic-inevitability, and radial-trace consequences in EV order",
+      "sequence": 169
     }
   ],
-  "next_id": 665,
+  "next_id": 666,
   "schema": "codex-task-id-allocations-v1"
 }
