@@ -17,11 +17,17 @@ EXPECTED_SCHEMA = "clebsch-factorization-trust-manifest-v1"
 EXPECTED_IDENTITY = "verification/statement_identity.json"
 FINGERPRINT = "verification/evidence_fingerprint.json"
 ALLOWED_MODES = {"conceptual", "classical-input", "certificate", "lean"}
-LEAN_GATE_COMMAND = [
-    "lean/scripts/guarded-lean",
-    "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean",
+LEAN_GATE_COMMANDS = [
+    [
+        "lean/scripts/guarded-lean",
+        "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean",
+    ],
+    [
+        "lean/scripts/guarded-lean",
+        "RelativeConicArcs/Gates/ClebschHilbertSymmetry.lean",
+    ],
 ]
-LEAN_GATE_TERMINALS = 23
+LEAN_GATE_TERMINALS = 25
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
@@ -127,6 +133,11 @@ EXPECTED_EVIDENCE = {
             ],
         ],
     },
+    "hilbert-symmetry": {
+        "checksum_manifest":
+            "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
+        "commands": [],
+    },
 }
 EXPECTED_CLAIMS = {
     "thm:factorization-recovery": (
@@ -149,16 +160,17 @@ EXPECTED_CLAIMS = {
     ),
     "prop:radical-hadamard": ({"conceptual"}, set()),
     "thm:balanced-cubic": (
-        {"conceptual", "certificate"},
-        {"matching-module", "balanced-sheet"},
+        {"conceptual", "certificate", "lean"},
+        {"matching-module", "balanced-sheet", "hilbert-symmetry"},
     ),
     "cor:graded-evaluation": (
-        {"conceptual", "certificate"},
-        {"matching-module", "balanced-sheet"},
+        {"conceptual", "certificate", "lean"},
+        {"matching-module", "balanced-sheet", "hilbert-symmetry"},
     ),
     "cor:self-associated-gorenstein": (
-        {"conceptual", "classical-input", "certificate"},
-        {"matching-module", "balanced-sheet", "gorenstein-gate"},
+        {"conceptual", "classical-input", "certificate", "lean"},
+        {"matching-module", "balanced-sheet", "gorenstein-gate",
+         "hilbert-symmetry"},
     ),
     "cor:secant-product-syzygies": (
         {"conceptual", "certificate"},
@@ -307,7 +319,7 @@ def check_lean_axiom_audit(wrapper_output: str) -> None:
     unexpected = found_axioms - ALLOWED_LEAN_AXIOMS
     if unexpected:
         raise ValueError(f"Lean axiom audit found unexpected axioms: {sorted(unexpected)}")
-    print("clebsch arithmetic-gluing axiom allowlist: CHECK OK")
+    print("clebsch Lean-gate axiom allowlist: CHECK OK")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -416,24 +428,33 @@ def build_fingerprint(
             "evidence_manifest_tool": sha256(
                 paper_root / "verification" / "evidence" / "manifest.py"
             ),
-            "lean_gate": sha256(
-                repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                / "ClebschArithmeticGluing.lean"
-            ),
+            "lean_gates": {
+                path.name: sha256(path)
+                for path in (
+                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                    / "ClebschArithmeticGluing.lean",
+                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                    / "ClebschHilbertSymmetry.lean",
+                )
+            },
             "guarded_lean": sha256(repo_root / "lean" / "scripts" / "guarded-lean"),
         },
-        "project_lean_import_closure_sha256": lean_import_closure(
-            repo_root,
-            repo_root / "lean" / "RelativeConicArcs" / "Gates"
-            / "ClebschArithmeticGluing.lean",
-        ),
-        "lean_gate": {
-            "command": LEAN_GATE_COMMAND,
-            "cwd": ".",
+        "project_lean_import_closure_sha256": {
+            path.name: lean_import_closure(repo_root, path)
+            for path in (
+                repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                / "ClebschArithmeticGluing.lean",
+                repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                / "ClebschHilbertSymmetry.lean",
+            )
         },
+        "lean_gates": [
+            {"command": command, "cwd": "."}
+            for command in LEAN_GATE_COMMANDS
+        ],
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 21 statements, 8 evidence bundles: CHECK OK",
+            "metadata": "metadata: 21 statements, 9 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }
@@ -513,7 +534,9 @@ def main() -> int:
             raise ValueError(f"{claim['label']}: invalid proof modes")
         if "certificate" in modes and not claim["evidence"]:
             raise ValueError(f"{claim['label']}: certificate mode has no evidence")
-        if "lean" in modes and "arithmetic-gluing" not in claim["evidence"]:
+        if "lean" in modes and not (
+            {"arithmetic-gluing", "hilbert-symmetry"} & set(claim["evidence"])
+        ):
             raise ValueError(f"{claim['label']}: Lean mode has no Lean evidence")
         expected_modes, expected_bundles = EXPECTED_CLAIMS[claim["label"]]
         if modes != expected_modes or set(claim["evidence"]) != expected_bundles:
@@ -532,7 +555,7 @@ def main() -> int:
     for item in evidence.values():
         for command in item["commands"]:
             run(command, repo_root)
-    lean_output = run(LEAN_GATE_COMMAND, repo_root)
+    lean_output = "\n".join(run(command, repo_root) for command in LEAN_GATE_COMMANDS)
     check_lean_axiom_audit(lean_output)
     run(["make", "-B", "clebsch-factorization"], repo_root / "papers")
     check_latex_warnings(paper_root / "clebsch_factorization.log")

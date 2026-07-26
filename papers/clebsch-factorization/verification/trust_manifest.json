@@ -38,6 +38,11 @@
         ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"]
       ]
     },
+    "hilbert-symmetry": {
+      "role": "kernel-checked arithmetic forcing of socle degree three from Hilbert symmetry",
+      "checksum_manifest": "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
+      "commands": []
+    },
     "profile-incidence": {
       "role": "double cosets, six profiles, profile plane, weights, and cubic witness",
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
@@ -82,9 +87,9 @@
     {"label": "cor:h3-affine-origin", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
-    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
-    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "balanced-sheet"]},
-    {"label": "cor:self-associated-gorenstein", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate"]},
+    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry"]},
+    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry"]},
+    {"label": "cor:self-associated-gorenstein", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate", "hilbert-symmetry"]},
     {"label": "cor:secant-product-syzygies", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
     {"label": "thm:six-profile-reconstruction", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
     {"label": "cor:decorated-sheet-classifier", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},

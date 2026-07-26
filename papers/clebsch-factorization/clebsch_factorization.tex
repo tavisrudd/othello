@@ -87,12 +87,15 @@ type & linear quotient & sheets/cubic\\
 \noindent
 The proof has two layers.  Section~\ref{sec:matching-products} proves the
 quotient and switch identities symbolically for arbitrary matchings.
-Section~\ref{sec:rank-three} obtains the \(A_3/B_3\) ranks by exact row
-reduction; for \(H_3\), Sylow-normalizer cohomology proves the missing
-layer and top nonvanishing, and one exact scalar supplies the radial
-line.  In Section~\ref{sec:balanced}, the recovery argument is symbolic
-once finite rank and radical hypotheses are checked; a certified nonzero
-cubic then implies the Schur-power and Gorenstein conclusions.  Appendix
+Section~\ref{sec:rank-three} obtains all three ranks from the affine
+connecting cocycle and the defining-characteristic
+\(\operatorname{SL}_2\)-modules in the Fischer decomposition.  In type
+\(B_3\), one transparent outer-sheet quotient supplies the radial line;
+type \(H_3\) uses the analogous second-Laplacian scalar after cohomology
+excludes the middle layer.  In Section~\ref{sec:balanced}, the recovery argument is symbolic
+once finite rank and radical hypotheses are checked; signed Gale duality
+and Hilbert symmetry then force the nonzero cubic, Schur-power filtration,
+and Gorenstein conclusions.  Appendix
 F maps each finite input to its primary check and independent replay.
 
 \begin{theorem}[Quadratic recovery and cubic orientation]
@@ -300,31 +303,99 @@ subspace of the fifteen-dimensional space \(R_4\).
 \end{theorem}
 
 \noindent\emph{Proof mode.}
-The quotient construction and the harmonic-space dimensions are proved
-symbolically.  The \(A_3\) and \(B_3\) spanning assertions are
-certificate-checked exact calculations.  For \(H_3\), a Sylow-normalizer
-cohomology argument excludes the middle Fischer layer and forces the top
-harmonic summand; one displayed outer-sheet quotient certifies the remaining
-radial line.  A separate implementation reconstructs all three original row
-reductions and the smaller \(H_3\) witness from the data in (3.1).
+The quotient construction and all three spanning assertions are proved
+symbolically.  Irreducibility forces the \(A_3\) image and the top \(B_3\)
+summand; one displayed outer-sheet quotient supplies the \(B_3\) radial
+line.  For \(H_3\), a Sylow-normalizer cohomology argument excludes the
+middle Fischer layer and forces the top harmonic summand; one displayed
+outer-sheet quotient supplies the remaining radial line.  A separate
+implementation reconstructs the three full quotient matrices and the two
+smaller radial witnesses from the data in (3.1).
 
 \begin{proof}
 A matching in (3.1) has
 $m=3,4,6$ edges, respectively, so
 Proposition~\ref{prop:matching-secant-quotient} places its quotient in
-$R_{m-2}$, of degrees $1,2,4$.  Representing the quotients in the standard
-monomial bases gives matrices with respectively \(5,14,22\) rows.  Exact
-row reduction over \(\F_5\) and \(\F_7\) gives ranks \(3\) and \(6\).
-Direct differentiation gives
+$R_{m-2}$, of degrees $1,2,4$.  Direct differentiation gives
 \[
  \dim\mathcal H_1=3,\qquad
  \dim\mathcal H_2=5,\qquad
  \dim\mathcal H_4=9.
 \]
 The radial vector \(Q\in R_2\) is not harmonic in characteristic \(7\).
-The first two exact quotient matrices lie in
-\(\mathcal H_1\) and \(\mathcal H_2+\F_7Q\); their ranks equal the
-dimensions of these spaces, proving the first two rows.
+
+We first prove the \(A_3\) and \(B_3\) rows without quotient matrices.
+For \(q=5,7\), put
+\[
+ G=\operatorname{PGL}_2(q),\qquad
+ G^+=\operatorname{PSL}_2(q),\qquad
+ \chi(g)=\det(g)^{(q-1)/2}.
+\]
+The Dickson form \(s^qt-st^q\), which is the common conic restriction
+of the matching products, has contragredient weight \(\det^{-1}\).
+The Clebsch identification and Fischer decomposition therefore give
+\[
+\begin{array}{c@{\qquad}c}
+q=5&\widetilde R_1=R_1\otimes\det^{-1}=M_2,\\
+q=7&\widetilde R_2=R_2\otimes\det^{-1}=M_4\oplus M_0,
+\end{array}                                                \tag{3.4a}
+\]
+where, uniformly,
+\[
+ M_r=\operatorname{Sym}^r(V^\vee)\otimes
+       \det^{r/2}\otimes\chi,\qquad M_0=\chi.
+\]
+The scalar action is trivial, so these are \(G\)-modules.  On \(G^+\),
+\(M_2\) and \(M_4\) are the absolutely irreducible symmetric powers of
+highest weights \(2<5\) and \(4<7\), respectively
+\cite[Fact~3.1]{BraunNebe2025}.
+
+For either type let
+\[
+ c(g)=\Phi_{M_T}(gM_T).
+\]
+It is an affine cocycle, \(c(gh)=g c(h)+c(g)\), and its value span is
+\(G\)-stable because
+\[
+ b\,c(g)=c(bg)-c(b).                                      \tag{3.4b}
+\]
+Distinct matchings have distinct products: unique factorization recovers
+the normalized secant factors.  Hence every nonbase orbit point gives a
+nonzero cocycle value.  In type \(A_3\), irreducibility of \(M_2\) now
+forces the value span to be all of \(R_1\).
+
+In type \(B_3\), project the cocycle to \(M_0=\chi\).  Its restriction
+to \(G^+\) is a homomorphism from the simple group
+\(\operatorname{PSL}_2(7)\) to the additive group of \(\F_7\), and is
+therefore zero.  A nonbase point on the \(G^+\)-sheet consequently gives
+a nonzero vector in \(M_4\); irreducibility and (3.4b) force the whole
+five-space \(M_4=\mathcal H_2\).
+
+It remains to supply the radial line.  The nonsquare-determinant matrix
+\[
+ u=\begin{pmatrix}0&1\\1&2\end{pmatrix}
+\]
+sends the base matching to
+\[
+ M_*=\{\{0,2\},\{1,5\},\{3,4\},\{6,\infty\}\}.
+\]
+Using \(L_{ab}=abX-(a+b)Y+Z\) for finite \(a,b\), direct cancellation
+in the two products gives the two-line quotient
+\[
+ \Phi_{M_{B_3}}(M_*)=(Z-2Y)(3Z+Y)
+                    =3L_{02}^2.                            \tag{3.4c}
+\]
+Thus the outer quotient is the square of the secant common to the two
+matchings, up to a nonzero scalar.  The dual quadratic norm of a secant
+line is nonzero, whereas it vanishes for a tangent line.  Equivalently,
+in the displayed normalization,
+\[
+ \Delta_Q(3L_{02}^2)=4\ne0\quad\text{in }\F_7.              \tag{3.4d}
+\]
+Since \(\Delta_Q\) kills \(M_4=\mathcal H_2\), this outer-sheet value
+has nonzero \(M_0=\F_7Q\)-projection.  The span already contains \(M_4\),
+so it contains \(M_0\) as well.  Hence \(W_{B_3}=R_2\), proving the
+first two rows of (3.4).
 
 We prove the \(H_3\) row equivariantly.  Put
 \(G=\operatorname{PGL}_2(11)\),
@@ -531,13 +602,14 @@ therefore gives (3.14).
 
 The rank proof has two distinct boundaries.  The common restriction and
 quotient are general consequences of the conic ideal, and (3.3) describes
-the intrinsic target subspaces.  The \(A_3\) and \(B_3\) spanning steps
-remain full-orbit row reductions.  For \(H_3\), (3.7)--(3.10) prove the
-containment and top-summand nonvanishing equivariantly; only the single
-radial scalar (3.11) remains an exact coordinate witness.  The primary
-certificate still enumerates every orbit and recovers the original ranks,
-while an independent replay reconstructs both that calculation and the
-smaller witness from (3.1).
+the intrinsic target subspaces.  For \(A_3\), irreducibility alone forces
+the image.  For \(B_3\), irreducibility forces the top summand and the
+two-line calculation (3.4c)--(3.4d) detects the radial line.  For \(H_3\),
+(3.7)--(3.10) prove the containment and top-summand nonvanishing
+equivariantly; only the single radial scalar (3.11) remains an exact
+coordinate witness.  The primary certificate still enumerates every orbit
+and recovers the ranks, while an independent replay reconstructs both that
+calculation and the smaller witnesses from (3.1).
 
 This proof is uniform at the level of its mechanism---an affine connecting
 cocycle, its Sylow-normalizer weights, stabilizer fixed spaces, and
@@ -712,11 +784,12 @@ possible nonlinear statistic of the configuration.
 
 \noindent\emph{Proof mode.}
 Proposition~\ref{prop:radical-hadamard} is a symbolic proof.
-The ranks, radical separation, lower-moment cancellation, and nonzero
-cubic for the two displayed configurations are certificate-checked over
-\(\F_7\) and \(\F_{11}\) and independently replayed.  The transformation
-law and reference independence below are formal consequences of those
-finite inputs.
+The ranks, radical separation, and lower-moment cancellation for the two
+displayed configurations are certificate-checked over \(\F_7\) and
+\(\F_{11}\) and independently replayed.  Signed Gale duality and the
+self-association criterion force the nonzero cubic; its transformation
+law and reference independence are formal.  The final numerical
+Hilbert-symmetry forcing step is also kernel-checked in Lean.
 
 \begin{proof}
 Equality of first and second tensor moments for a complementary pair is
@@ -727,9 +800,43 @@ polarization through degree two is valid.  Proposition
 sheet-sign line.  A sign weight taking only the values \(\{\pm1\}\) is
 therefore \(\epsilon\) or \(-\epsilon\), proving (i).
 
-The same moment equalities give \(\mu_1=\mu_2=0\).  Exact tensor
-summation in the rank-six and rank-ten quotient coordinates gives
-\(\mu_3\ne0\).  If the reference matching changes, every point translates
+The same moment equalities give \(\mu_1=\mu_2=0\).  We derive
+\(\mu_3\ne0\) from the quadratic result rather than a tensor calculation.
+Let \(A\) be the \(q\)-by-\(2q\) matrix whose \(M\)-th column is
+\(\widehat x_M=(1,x_M)\), and put
+\(D=\operatorname{diag}(\epsilon(M))\).  Equal sheet sizes and the
+vanishing signed moments through degree two give
+\[
+ A D A^{\mathsf T}=0.
+\]
+The affine spanning statement gives \(\operatorname{rank}A=q\), so the
+rows of \(AD\) form the kernel of \(A\).  Thus \(AD\) is a Gale matrix,
+and its columns differ from those of \(A\) only by the nonzero scalars
+\(\epsilon(M)\).  The homogenized configuration is self-associated.
+
+Proposition~\ref{prop:radical-hadamard} also says that the \(2q\) points
+fail by exactly one to impose independent conditions on quadrics.  The
+unique dependence is \(\epsilon\), which has full support, so every
+one-point deletion imposes independent conditions.  Eisenbud--Popescu's
+self-association criterion \cite[Theorem~7.3]{EisenbudPopescu1998}
+therefore makes the coordinate ring arithmetically Gorenstein.
+
+Reduce by the homogenizing coordinate, which is regular because it is
+nonzero at every point.  The first three values of the \(h\)-vector are
+\[
+ 1,\quad q-1,\quad q-1,
+\]
+from \(\dim L=q\) and \(\dim L^{\circ2}=2q-1\).
+A Gorenstein \(h\)-vector is symmetric, and its entries sum to the length
+\(2q\).  These two facts force
+\[
+ h=(1,q-1,q-1,1).
+\]
+Hence \(L^{\circ3}=\F_q^{\Omega_T}\).  The unique quadratic annihilator
+\(\epsilon\) cannot annihilate all cubics, so degree-three polarization
+gives \(\mu_3\ne0\).
+
+If the reference matching changes, every point translates
 by one vector \(c\).  Expanding the signed third moment after
 \(x_M\mapsto x_M+c\) leaves \(\mu_3\) unchanged: the other terms contain
 \(\mu_2,\mu_1\), or
@@ -808,28 +915,11 @@ Artinian reduction by the homogenizing coordinate has Hilbert function
 \end{corollary}
 
 \begin{proof}
-Let \(A\) be the \(q\)-by-\(2q\) matrix whose \(M\)-th column is
-\(\widehat x_M=(1,x_M)\), and put
-\(D=\operatorname{diag}(\epsilon(M))\).  Equal sheet sizes and the
-vanishing first and second signed moments give
-\[
- A D A^{\mathsf T}=0.
-\]
-The affine spanning statement gives \(\operatorname{rank}A=q\).
-Consequently the rows of \(AD\) form the kernel of \(A\), so \(AD\) is
-a Gale matrix for \(\widehat X_T\).  Its columns differ from those of
-\(A\) only by the nonzero scalars \(\epsilon(M)\); hence the labeled
-configuration is its own Gale transform.
-
-Corollary~\ref{cor:graded-evaluation} says that the \(2q\) points fail
-by exactly one to impose independent conditions on quadrics.  The
-unique dependence is \(\epsilon\), which has full support, so deleting
-any coordinate removes that dependence and leaves rank \(2q-1\).
-After base change to an algebraic closure, the hypotheses of
-Eisenbud--Popescu's self-association criterion
-\cite[Theorem~7.3]{EisenbudPopescu1998} hold.  It follows that the
-homogeneous coordinate ring is Gorenstein after base change, and hence
-over \(\F_q\).
+The proof of Theorem~\ref{thm:balanced-cubic} already establishes signed
+Gale self-duality, the Cayley--Bacharach property in degree two, the
+Gorenstein coordinate ring, and the displayed \(h\)-vector.  These
+arguments commute with base change to an algebraic closure, so the
+Gorenstein conclusion descends to \(\F_q\).
 
 Let \(z\) be the homogenizing coordinate.  It is nonzero at every
 point and is therefore regular on the coordinate ring.  The degree
@@ -910,11 +1000,12 @@ information forgotten by conic restriction returns in two stages:
 quadratic data recover the unoriented factorization, and cubic data
 recover its orientation.
 
-The remaining structural question is how far this mechanism extends
-beyond the three exceptional matching configurations.  A uniform answer
-would replace the two small row-rank calculations and isolate intrinsic
-hypotheses under which a conic matching quotient has quadratic sheet
-recovery and cubic Gorenstein duality.
+The remaining structural question is how far the nonlinear mechanism
+extends beyond the three exceptional matching configurations.  The linear
+ranks now have one proof from representations: the affine connecting cocycle,
+its irreducible Fischer summands, and a radial trace.  A broader theorem would
+isolate intrinsic hypotheses under which a conic matching quotient has
+quadratic sheet recovery and cubic Gorenstein duality.
 
 The appendix refinements require a chosen \(A_4\)-structure and do not
 canonically identify the depth plane with the relative-cubic plane.
@@ -1751,12 +1842,14 @@ Matching-secant quotient
 & unique conic divisibility and the four-endpoint switch
 & none \\
 Ranks and the middle Fischer layer
-& harmonic decomposition; Edge--Dye configurations
-& quotient matrices; for \(H_3\), the equivariant cohomology reduction
-  and one normalized scalar; independent replay \\
+& affine cocycle, irreducible Fischer modules; Edge--Dye configurations
+& quotient matrices as cross-checks; one radial scalar for \(H_3\);
+  independent replay \\
 Balanced sheets and cubic orientation
-& Proposition~\ref{prop:radical-hadamard}; tensor identities
-& exact moments; radical hypotheses and independent replay \\
+& Proposition~\ref{prop:radical-hadamard}; signed Gale duality,
+  self-association, and Hilbert symmetry
+& lower moments and radical hypotheses; Lean Hilbert arithmetic;
+  full tensor replay as a cross-check \\
 Six-profile reconstruction
 & subgroup marks, orbit--stabilizer, and the three-ray lemmas
 & profile rows and replay; decorated-parent bijection \\
@@ -1781,8 +1874,8 @@ python3 papers/clebsch-factorization/verification/verify_release.py
 \end{verbatim}
 It checks the statement identity and all admitted checksum manifests, runs
 the admitted primary checks and independent replays, elaborates the
-arithmetic-gluing Lean gate, and rebuilds this manuscript through the
-repository Makefile.
+arithmetic-gluing and Hilbert-symmetry Lean gates, and rebuilds this
+manuscript through the repository Makefile.
 
 The enumerated review closure accompanying this candidate is pinned by
 \begin{center}
@@ -1795,7 +1888,7 @@ Its SHA-256 digest is
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, eight evidence
-manifests, command vectors, Lean gate, runner, trust manifest, and
+manifests, command vectors, Lean gates, runner, trust manifest, and
 environment: Python 3.13.12, Lean
 4.32.0-rc1, and Mathlib revision
 \begin{center}
@@ -1825,6 +1918,17 @@ Evaluation and completeness of the $660$-element coset and word
 certificates remain exact generator/replay obligations.  The classical
 names $S_4,A_4,A_5$, and $\operatorname{PSL}_2(11)$ are cited inputs:
 no group name is inferred from an order.
+
+The separate structural gate
+\begin{center}
+\small\texttt{RelativeConicArcs.Gates.}\\[-2pt]
+\texttt{ClebschHilbertSymmetry}
+\end{center}
+checks the arithmetic implication used after the classical Gorenstein
+criterion: a symmetric finite Hilbert function of total length \(2q\)
+whose first values are \(1,q-1,q-1\) has socle degree three and final
+value one.  It does not formalize the Eisenbud--Popescu criterion, the
+identification of the first Hilbert values, or Gorenstein symmetry.
 
 The other computations are load-bearing only at the points shown in
 Table~\ref{tab:verification}.  The matching-module bundle supplies the

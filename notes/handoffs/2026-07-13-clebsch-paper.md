@@ -216,8 +216,13 @@ cubic-to-Gorenstein dependency: radical--Hadamard recovery gives signed Gale
 self-duality and Cayley--Bacharach in degree two; the classical
 self-association criterion and Hilbert symmetry then force
 \(h=(1,q-1,q-1,1)\), \(L^{\circ3}=k^\Omega\), and the nonzero cubic.
-Exact matrices and cubic tensors remain cross-checks rather than the human
-proof.  The bounded family route found the abstract antipodal-simplex family
+The final Hilbert-symmetry arithmetic is kernel-checked by
+`RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three` and
+`RelativeConicArcs.HilbertSymmetry.value_three_eq_one`; source elaboration
+is green, while its import-only gate and the refreshed aggregate are waiting
+behind a foreign Lean build owner.  Exact matrices and cubic tensors remain
+cross-checks rather than the human proof.  The bounded family route found the
+abstract antipodal-simplex family
 but no new conic matching realization, so the remaining frontier is the
 structural derivation of radical--Hadamard hypotheses beyond \(B_3,H_3\).
 The proof and mystery ledger are in
