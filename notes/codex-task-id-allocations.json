@@ -1538,8 +1538,17 @@
       "last": 667,
       "purpose": "q16 multi-base conic-involution boundary expansion",
       "sequence": 171
+    },
+    {
+      "count": 3,
+      "first": 668,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 670,
+      "purpose": "Paper III focused-note revision, literature audit, and independent release review",
+      "sequence": 172
     }
   ],
-  "next_id": 668,
+  "next_id": 671,
   "schema": "codex-task-id-allocations-v1"
 }
