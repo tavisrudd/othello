@@ -1349,8 +1349,17 @@
       "last": 644,
       "purpose": "classify the unique q=19 uncovered-arc residue and seek a uniform secant-concurrency explanation",
       "sequence": 150
+    },
+    {
+      "count": 1,
+      "first": 645,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 645,
+      "purpose": "artifact-aware minor revisions and literature positioning",
+      "sequence": 151
     }
   ],
-  "next_id": 645,
+  "next_id": 646,
   "schema": "codex-task-id-allocations-v1"
 }
