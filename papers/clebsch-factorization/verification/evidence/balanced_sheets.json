@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "affine_evaluation_rank": 7,
+      "direct_degree_two_rank_crosscheck": 13,
+      "direct_trade_kernel_dimension_crosscheck": 1,
+      "direct_trade_kernel_is_sheet_sign_crosscheck": true,
+      "exhaustive_half_search_used": false,
+      "field_order": 7,
+      "nondegenerate_zero_sum_quotient_dimension": 5,
+      "orbit_size": 14,
+      "quotient_dimension": 6,
+      "radical_covector": [
+        0,
+        0,
+        1,
+        5,
+        0,
+        0
+      ],
+      "radical_separates_sheets": true,
+      "radical_sheet_values": [
+        [
+          0
+        ],
+        [
+          5
+        ]
+      ],
+      "second_moment_radical_dimension": 1,
+      "second_moment_rank": 5,
+      "sheet_first_moments_zero": true,
+      "sheet_restriction_ranks": [
+        6,
+        6
+      ],
+      "sheet_second_moments_equal": true,
+      "sheet_sizes": [
+        7,
+        7
+      ],
+      "socle_identification": null,
+      "symbolically_predicted_degree_two_rank": 13,
+      "type": "B3",
+      "zero_sum_space_dimension_per_sheet": 6
+    },
+    {
+      "affine_evaluation_rank": 11,
+      "direct_degree_two_rank_crosscheck": 21,
+      "direct_trade_kernel_dimension_crosscheck": 1,
+      "direct_trade_kernel_is_sheet_sign_crosscheck": true,
+      "exhaustive_half_search_used": false,
+      "field_order": 11,
+      "nondegenerate_zero_sum_quotient_dimension": 9,
+      "orbit_size": 22,
+      "quotient_dimension": 10,
+      "radical_covector": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      "radical_separates_sheets": true,
+      "radical_sheet_values": [
+        [
+          0
+        ],
+        [
+          9
+        ]
+      ],
+      "second_moment_radical_dimension": 1,
+      "second_moment_rank": 9,
+      "sheet_first_moments_zero": true,
+      "sheet_restriction_ranks": [
+        10,
+        10
+      ],
+      "sheet_second_moments_equal": true,
+      "sheet_sizes": [
+        11,
+        11
+      ],
+      "socle_identification": {
+        "a4_fixed_depth_socle_coordinates": [
+          1,
+          1,
+          1
+        ],
+        "affine_evaluation_pairing_radical_dimension": 2,
+        "affine_evaluation_pairing_rank": 9,
+        "affine_radical_evaluation_space_equals_two_sheet_indicator_span": true,
+        "balanced_trade_line_is_depth_outer_odd_socle_line": true,
+        "each_sheet_module": "P(1)",
+        "even_radical_line": "constant function",
+        "loewy_layer_dimensions": [
+          1,
+          9,
+          1
+        ],
+        "outer_element_swaps_sheet_socles_and_negates_trade_line": true,
+        "outer_odd_radical_line": "sheet sign"
+      },
+      "symbolically_predicted_degree_two_rank": 21,
+      "type": "H3",
+      "zero_sum_space_dimension_per_sheet": 10
+    }
+  ],
+  "inputs": {
+    "coxeter_conic_phase.py": {
+      "bytes": 26171,
+      "sha256": "943de37568b1546b06a8940f93a2b525abd69b6047f8ebb7c6c18704ac6e2c0a"
+    },
+    "matching_module.json": {
+      "bytes": 21919,
+      "sha256": "2d3f3a504199ac1da5a500eed6a8c373d5dea36683edda03b5b8430e37942135"
+    },
+    "matching_module.py": {
+      "bytes": 48643,
+      "sha256": "d2100485add18a92a148f0584d41b2108100baf545fd361e6cc08b7e61e92f40"
+    },
+    "matching_orbit_scout.json": {
+      "bytes": 25385,
+      "sha256": "d45512c9087874acdaf109367753f45151c2dd0c2cb745777f62ad26489e7394"
+    },
+    "relative_cubic_depth.json": {
+      "bytes": 81363,
+      "sha256": "754dc3cbc82b3c63671edc9a120ae760e3efaaf7ed80395ebdf8736f49d131a7"
+    }
+  },
+  "schema": "balanced-conceptual-balanced-half-rigidity-v2",
+  "summary": {
+    "all_degree_at_most_two_signed_trades_are_scalar_sheet_signs": true,
+    "b3_and_h3_inputs_satisfy_symbolic_hypotheses": true,
+    "equal_half_sign_trade_is_unique_up_to_complement": true,
+    "finite_subset_exhaustion_is_not_load_bearing": true,
+    "h3_affine_radical_is_the_sum_of_the_two_sheet_socles": true,
+    "h3_trade_line_is_the_outer_odd_depth_socle_line": true
+  },
+  "theorem": {
+    "degree_at_most_two_evaluation_space": "equal_sheet_sum_hyperplane",
+    "name": "radical_hadamard_trade_rigidity",
+    "orthogonal_trade_space": "sheet_sign_line",
+    "recovery_algorithm": "compute the second-moment radical covector and split its two evaluation levels",
+    "scope": "any two-sheet field configuration satisfying the certified first/second-moment, restriction-surjectivity, and radical-separation hypotheses"
+  },
+  "verdict": "SYMBOLIC_RADICAL_HADAMARD_RIGIDITY_REPLACES_HALF_EXHAUSTION"
+}

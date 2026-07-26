@@ -1,0 +1,3533 @@
+{
+  "common_symmetry_category": {
+    "every_2_by_3_matrix_is_covariant": true,
+    "group": "A4 semidirect <J> on the frozen source/target data",
+    "hom_dimension": 6,
+    "possible_kernel_lines": 133,
+    "rank_two_map_count": 1755600,
+    "rank_two_maps_with_any_fixed_kernel_line": 13200,
+    "signed_moment_line_is_not_selected_by_common_symmetry": true,
+    "source_character": "three copies of the outer-sign character",
+    "target_character": "two copies of the outer-sign character"
+  },
+  "covariant_boundary": {
+    "a_rank_two_fitted_matrix_can_have_any_of_133_kernel_lines": true,
+    "apolarity_requires_an_antecedent_map_to_a_binary_form_space": true,
+    "binary_catalecticant_is_target_internal": true,
+    "binary_hessian_is_target_internal": true,
+    "brauer_tree_identifies_depth_plane_as_a4_fixed_projective_cover_modulo_socle": true,
+    "canonical_modular_invariant_to_coinvariant_map_has_rank_two": true,
+    "divided_transfer_distinguishes_rather_than_identifies_source_and_depth_relations": true,
+    "hessian_flag_does_not_define_a_map_from_the_relative_source": true,
+    "ordered_rank_flag_still_allows_10_projective_target_identifications": true,
+    "paired_orbit_classes_do_not_obey_the_depth_profile_relation": true,
+    "rank_one_semi_invariant_contraction_realizes_the_same_quotient": true,
+    "relative_cubic_flattening_intrinsically_selects_the_common_kernel": true,
+    "tate_norm_completes_a_rank_two_rank_one_exact_cycle": true
+  },
+  "field": 11,
+  "full_group_obstruction": {
+    "profile_partition_is_not_psl_block_system": true,
+    "there_is_no_psl_action_on_six_profiles_making_depth_map_equivariant": true,
+    "witness": {
+      "distinct_image_fibres": [
+        2,
+        5
+      ],
+      "image_matching_indices": [
+        5,
+        19
+      ],
+      "psl_generator_index": 0,
+      "same_profile_matching_indices": [
+        2,
+        16
+      ],
+      "source_fibre": 2
+    }
+  },
+  "inputs": {
+    "matching_module.py": {
+      "bytes": 48643,
+      "sha256": "d2100485add18a92a148f0584d41b2108100baf545fd361e6cc08b7e61e92f40"
+    },
+    "matching_orbit_scout.json": {
+      "bytes": 25385,
+      "sha256": "d45512c9087874acdaf109367753f45151c2dd0c2cb745777f62ad26489e7394"
+    },
+    "profile_incidence.json": {
+      "bytes": 10459,
+      "sha256": "fe550e1b1e2a0a37a231044996e6cce7db06ff48b8f1b780503a55f1e6b1d693"
+    }
+  },
+  "schema": "depth-relative-cubic-depth-plane-v3",
+  "source": {
+    "ambient_W_dimension": 10,
+    "ambient_symmetric_cube_dimension": 220,
+    "canonical_homogeneous_sheet_lift_has_dimension_10_and_socle_kernel": true,
+    "combined_sheet_difference_span_rank": 9,
+    "depth_correlation_candidates": {
+      "bilinear_form_pencil_source_to_depth_compositions": [
+        {
+          "form_projective_parameters": [
+            1,
+            0
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              5,
+              10,
+              1
+            ],
+            [
+              7,
+              3,
+              8
+            ],
+            [
+              9,
+              7,
+              4
+            ],
+            [
+              9,
+              7,
+              4
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            1
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              3,
+              6,
+              5
+            ],
+            [
+              2,
+              4,
+              7
+            ],
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              1,
+              2,
+              9
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            2
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              3,
+              6,
+              5
+            ],
+            [
+              2,
+              4,
+              7
+            ],
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              1,
+              2,
+              9
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            3
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              5,
+              10,
+              1
+            ],
+            [
+              7,
+              3,
+              8
+            ],
+            [
+              9,
+              7,
+              4
+            ],
+            [
+              9,
+              7,
+              4
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            4
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              9,
+              7,
+              4
+            ],
+            [
+              6,
+              1,
+              10
+            ],
+            [
+              3,
+              6,
+              5
+            ],
+            [
+              3,
+              6,
+              5
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            5
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              4,
+              8,
+              3
+            ],
+            [
+              10,
+              9,
+              2
+            ],
+            [
+              5,
+              10,
+              1
+            ],
+            [
+              5,
+              10,
+              1
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            6
+          ],
+          "form_rank": 9,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              8,
+              5,
+              6
+            ],
+            [
+              4,
+              8,
+              3
+            ],
+            [
+              4,
+              8,
+              3
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            7
+          ],
+          "form_rank": 1,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 0,
+          "source_to_depth_matrix": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            8
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              8,
+              5,
+              6
+            ],
+            [
+              4,
+              8,
+              3
+            ],
+            [
+              4,
+              8,
+              3
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            9
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              4,
+              8,
+              3
+            ],
+            [
+              10,
+              9,
+              2
+            ],
+            [
+              5,
+              10,
+              1
+            ],
+            [
+              5,
+              10,
+              1
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            1,
+            10
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              9,
+              7,
+              4
+            ],
+            [
+              6,
+              1,
+              10
+            ],
+            [
+              3,
+              6,
+              5
+            ],
+            [
+              3,
+              6,
+              5
+            ]
+          ]
+        },
+        {
+          "form_projective_parameters": [
+            0,
+            1
+          ],
+          "form_rank": 10,
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "rank": 1,
+          "source_to_depth_matrix": [
+            [
+              1,
+              2,
+              9
+            ],
+            [
+              8,
+              5,
+              6
+            ],
+            [
+              4,
+              8,
+              3
+            ],
+            [
+              4,
+              8,
+              3
+            ]
+          ]
+        }
+      ],
+      "canonical_rank_nine_form_depth_map": {
+        "all_base_changes_equal_reference_projectively": false,
+        "base_change_rank_distribution": {
+          "0": 22,
+          "1": 0,
+          "2": 0
+        },
+        "base_matching_count_checked": 22,
+        "distinct_kernel_lines_across_base_changes": 0,
+        "distinct_projective_maps_across_base_changes": 0,
+        "distinct_projective_pullback_cubics": 0,
+        "distinct_projective_quotient_isomorphisms": 0,
+        "flag_weighted_base_symmetrizations": {
+          "hessian_cube": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "hessian_line": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "hessian_residual_square": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "hessian_square": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "hessian_square_residual": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "hessian_times_residual": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "residual_cube": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "residual_line": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          },
+          "residual_square": {
+            "kernel_basis_in_relative_coordinates": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_signed_moment_line": false,
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 0
+          }
+        },
+        "form_coordinate_sha256": "e0902a79f1cfa8d03d8f8c148114f7ae13b4ac42f2c97bbb72729b7c792abedc",
+        "map": {
+          "image_satisfies_depth_plane_equations": true,
+          "kernel_basis_in_relative_coordinates": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "matrix_in_relative_basis_to_four_depth_coordinates": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "rank": 0
+        },
+        "nonzero_base_change_map_count": 0,
+        "projective_pullback_cubics": [],
+        "signed_base_symmetrization_rank": 0,
+        "total_base_symmetrization_rank": 0,
+        "unique_rank_nine_projective_parameters": [
+          1,
+          6
+        ]
+      },
+      "depth_weighted_quadratic_moments": {
+        "sheet_signed": {
+          "all_bases_factor_through_depth_dual": true,
+          "all_bases_land_in_invariant_tensors": false,
+          "base_records": [
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "650e896c88b3fa9471e4394a7284c0765d515a77e6b6585371fef5578f87694a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  2,
+                  8,
+                  5
+                ],
+                [
+                  6,
+                  8,
+                  5,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 2
+            }
+          ],
+          "distinct_ambient_column_sets": 1,
+          "distinct_matrices": 1,
+          "rank_distribution": {
+            "0": 0,
+            "1": 0,
+            "2": 22
+          }
+        },
+        "unsigned": {
+          "all_bases_factor_through_depth_dual": true,
+          "all_bases_land_in_invariant_tensors": false,
+          "base_records": [
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "fa4b4c1b802bcc48857a4c726e3272aedbf579bb4ad989b17540c2a5c95f2e06",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ],
+                [
+                  4,
+                  4,
+                  6,
+                  9
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "78b28a20f61d43d899efd8899a94b59f3081fa2c341b90a780e4e3da9700f44a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ],
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "d67bda0b71bc2c241a1159afa715e79d9f5145a1bc6aa34a8318a88a8e52fb1d",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "5288509002747e7245cef7976bc426db8cb43216fd743b516b2c538c7f3225f6",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ],
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "915cabaa756e352118bb53c786ee6bf8b03038ee99e82acd00e73e1729a71632",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ],
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "652cbfce94eaa35d590bbf0e463e59166af12d5731b626780cffa8399821b9ce",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ],
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "f3ef6a20dfc7f4596f15298d69e19ae20284f127c357222e058dadd9f8751be6",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ],
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "ea31f39723f6b5d39d6f2b4d69c985e850013b4e4db9dc63985b2b519a8f9e24",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ],
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "ffb4106419ab64d5ee9cd7ccdbe5e16993698656bf7e4c08d747ce9c16d31c02",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ],
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "4c7d42a3f784c118b92e334ca4959b4158dd7472e943b4801b78786673256494",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ],
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "dc4cd70199139b47b20e181ddf09508cf5eda06998011e6448fc704c28fb93ca",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ],
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "b45694335014733fcef43c3a4f995b22b14ad109b0504be54948bab262241c14",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ],
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "6d456088127fd348023fee1495e2b004e15c385c4b37e0e2e35ad2d913eb34ef",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "be63ba3aad95dc0bcb3082db215a05d6f40ca4ba51e91d0e5c373c80f9e12cca",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ],
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "869e6294711b63e95e8137fb06e10fa2e6ab5c98dd0e3347a13041b224f629f9",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "3bf3a5f7addd51690fd7c198fd608c9cbb0fdebec043ae3ee386f7335d58b455",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ],
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "2ffab059b1e404bd1684adc676f30def4dbf8281fb4ceebce2b255974fc3ce97",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ],
+                [
+                  9,
+                  9,
+                  8,
+                  1
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "4d442b36b56ef54d3c7e636bb76057710281aff39bb17532ba3ff11854ab014f",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  2,
+                  2,
+                  3,
+                  10
+                ],
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "7fb592c9bfc8d163453332173986a8d7f28778f68bc3c659d74ef8271cfe0b18",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ],
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "ff63e215c8ee80bf97a17a99136e83351c968da39ab7101f98198fda679b111a",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ],
+                [
+                  7,
+                  7,
+                  5,
+                  2
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "ed232bcea7764a37e5a744972dde60daea141ead999eaebc66372e6e4ad76c69",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  5,
+                  5,
+                  2,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  7,
+                  5
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            },
+            {
+              "all_columns_are_invariant_tensors": false,
+              "ambient_columns_sha256": "b86655777cdeb828ffbeeb69a041e8c45eb8daab211dc55661a4c38b59c21810",
+              "matrix_from_four_depth_covectors_to_invariant_tensors": [
+                [
+                  6,
+                  6,
+                  9,
+                  8
+                ],
+                [
+                  10,
+                  10,
+                  4,
+                  6
+                ]
+              ],
+              "plane_annihilator_is_kernel": true,
+              "rank": 1
+            }
+          ],
+          "distinct_ambient_column_sets": 22,
+          "distinct_matrices": 14,
+          "rank_distribution": {
+            "0": 0,
+            "1": 22,
+            "2": 0
+          }
+        }
+      },
+      "full_group_invariant_form_pencil": [
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 8,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            0
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 9,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            1
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 6,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            2
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 7,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            3
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 5,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            4
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 1,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            5
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 0,
+          "determinant": 0,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            6
+          ],
+          "rank": 9
+        },
+        {
+          "correlation_kernel": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 0,
+          "determinant": 0,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            7
+          ],
+          "rank": 1
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 4,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            8
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 3,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            9
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 10,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            1,
+            10
+          ],
+          "rank": 10
+        },
+        {
+          "correlation_kernel": [
+            [
+              9,
+              1,
+              0
+            ],
+            [
+              2,
+              0,
+              1
+            ]
+          ],
+          "correlation_rank": 1,
+          "determinant": 2,
+          "kernel_equals_twisted_coinvariant_kernel": false,
+          "projective_parameters": [
+            0,
+            1
+          ],
+          "rank": 10
+        }
+      ],
+      "full_group_invariant_symmetric_form_dimension": 2,
+      "full_group_invariant_symmetric_forms": [
+        {
+          "coordinate_sha256": "2d35da03ec3f5e9726576dd7a9732e1b59deaaa5d38ddcf506685d2a8ebb1e67",
+          "depth_correlation": {
+            "image_satisfies_depth_plane_equations": true,
+            "kernel_basis_in_relative_coordinates": [
+              [
+                9,
+                1,
+                0
+              ],
+              [
+                2,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                4,
+                8,
+                3
+              ],
+              [
+                1,
+                2,
+                9
+              ],
+              [
+                1,
+                2,
+                9
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 1
+          },
+          "rank": 10
+        },
+        {
+          "coordinate_sha256": "b8338335ab5977bb59eaf51fa50a584965ecd752d4819e9391fdf5902e3f71d4",
+          "depth_correlation": {
+            "image_satisfies_depth_plane_equations": true,
+            "kernel_basis_in_relative_coordinates": [
+              [
+                9,
+                1,
+                0
+              ],
+              [
+                2,
+                0,
+                1
+              ]
+            ],
+            "kernel_equals_twisted_coinvariant_kernel": false,
+            "matrix_in_relative_basis_to_four_depth_coordinates": [
+              [
+                5,
+                10,
+                1
+              ],
+              [
+                4,
+                8,
+                3
+              ],
+              [
+                4,
+                8,
+                3
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "rank": 1
+          },
+          "rank": 10
+        }
+      ],
+      "full_group_invariant_symmetric_tensor_dimension": 2,
+      "full_group_invariant_symmetric_tensor_pencil": [
+        {
+          "determinant": 2,
+          "projective_parameters": [
+            1,
+            0
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 7,
+          "projective_parameters": [
+            1,
+            1
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 4,
+          "projective_parameters": [
+            1,
+            2
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 0,
+          "projective_parameters": [
+            1,
+            3
+          ],
+          "rank": 9
+        },
+        {
+          "determinant": 1,
+          "projective_parameters": [
+            1,
+            4
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 8,
+          "projective_parameters": [
+            1,
+            5
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 5,
+          "projective_parameters": [
+            1,
+            6
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 10,
+          "projective_parameters": [
+            1,
+            7
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 3,
+          "projective_parameters": [
+            1,
+            8
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 0,
+          "projective_parameters": [
+            1,
+            9
+          ],
+          "rank": 1
+        },
+        {
+          "determinant": 9,
+          "projective_parameters": [
+            1,
+            10
+          ],
+          "rank": 10
+        },
+        {
+          "determinant": 6,
+          "projective_parameters": [
+            0,
+            1
+          ],
+          "rank": 10
+        }
+      ],
+      "invariant_tensor_determinant_divisor": {
+        "homogeneous_factorization": "scale*(b-9a)^9*(b-3a)",
+        "ordered_linear_flag_maps_to_target_cubic_flag": 100,
+        "ordered_projective_flag_maps_to_target_cubic_flag": 10,
+        "rank_nine_root": [
+          1,
+          3
+        ],
+        "rank_one_root": [
+          1,
+          9
+        ],
+        "scale": 6
+      },
+      "rank_one_form_contraction": {
+        "all_contracted_forms_are_full_group_invariant": true,
+        "covector_characters_on_psl_generators_and_outer": [
+          1,
+          1,
+          1,
+          10
+        ],
+        "covector_projective_coordinates": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "kernel_basis_in_relative_coordinates": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "kernel_equals_twisted_coinvariant_kernel": true,
+        "matrix_from_relative_basis_to_invariant_form_pencil": [
+          [
+            8,
+            1,
+            0
+          ],
+          [
+            0,
+            8,
+            1
+          ]
+        ],
+        "rank": 2,
+        "rank_one_form_projective_parameters": [
+          1,
+          7
+        ],
+        "special_projective_images": {
+          "signed_moment": [
+            1,
+            3
+          ],
+          "twisted_coinvariant_kernel": [
+            0,
+            0
+          ]
+        }
+      },
+      "raw_coordinate_pairing": {
+        "image_satisfies_depth_plane_equations": true,
+        "kernel_basis_in_relative_coordinates": [
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "kernel_equals_twisted_coinvariant_kernel": false,
+        "matrix_in_relative_basis_to_four_depth_coordinates": [
+          [
+            0,
+            3,
+            10
+          ],
+          [
+            0,
+            6,
+            6
+          ],
+          [
+            0,
+            4,
+            1
+          ],
+          [
+            0,
+            2,
+            5
+          ]
+        ],
+        "rank": 2
+      },
+      "second_moment_form_is_invariant_under_psl_generators_and_outer": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "second_moment_form_rank": 9,
+      "second_moment_lowered_pairing": {
+        "image_satisfies_depth_plane_equations": true,
+        "kernel_basis_in_relative_coordinates": [
+          [
+            6,
+            5,
+            1
+          ]
+        ],
+        "kernel_equals_twisted_coinvariant_kernel": false,
+        "matrix_in_relative_basis_to_four_depth_coordinates": [
+          [
+            7,
+            2,
+            3
+          ],
+          [
+            6,
+            1,
+            3
+          ],
+          [
+            7,
+            5,
+            10
+          ],
+          [
+            10,
+            7,
+            4
+          ]
+        ],
+        "rank": 2
+      },
+      "symmetric_square_coinvariant_bridge": {
+        "ambient_dimension": 55,
+        "coinvariant_dimension": 2,
+        "commutator_submodule_dimension": 53,
+        "invariant_tensor_projection_matrix": [
+          [
+            1,
+            4
+          ],
+          [
+            4,
+            10
+          ]
+        ],
+        "invariant_tensor_projection_rank": 2,
+        "psl_only_coinvariant_dimension": 2,
+        "psl_only_invariant_tensor_projection_matrix": [
+          [
+            1,
+            4
+          ],
+          [
+            4,
+            10
+          ]
+        ],
+        "psl_only_invariant_tensor_projection_rank": 2,
+        "psl_only_signed_depth_matrix": [
+          [
+            7,
+            1,
+            6,
+            6
+          ],
+          [
+            9,
+            6,
+            3,
+            3
+          ]
+        ],
+        "psl_only_signed_depth_rank": 1,
+        "psl_only_unsigned_depth_matrix": [
+          [
+            10,
+            10,
+            4,
+            6
+          ],
+          [
+            5,
+            5,
+            2,
+            3
+          ]
+        ],
+        "psl_only_unsigned_depth_rank": 1,
+        "signed_depth_kernel": [
+          [
+            3,
+            1,
+            0,
+            0
+          ],
+          [
+            7,
+            0,
+            1,
+            0
+          ],
+          [
+            7,
+            0,
+            0,
+            1
+          ]
+        ],
+        "signed_depth_kernel_equals_depth_plane_annihilator": false,
+        "signed_depth_matrix_from_four_coordinates": [
+          [
+            7,
+            1,
+            6,
+            6
+          ],
+          [
+            9,
+            6,
+            3,
+            3
+          ]
+        ],
+        "signed_depth_rank": 1
+      }
+    },
+    "each_sheet_is_the_nine_dimensional_permutation_heart_affinely": true,
+    "non_descent_witness": {
+      "distinct_image_fibres": [
+        2,
+        5
+      ],
+      "image_matching_indices": [
+        5,
+        19
+      ],
+      "psl_generator_index": 0,
+      "same_profile_matching_indices": [
+        2,
+        16
+      ],
+      "source_fibre": 2
+    },
+    "profile_fibre_sizes": [
+      1,
+      1,
+      4,
+      4,
+      6,
+      6
+    ],
+    "profile_partition_is_psl_block_system": false,
+    "psl_generator_count": 3,
+    "relative_cubic_rank_locus": {
+      "first_flattening_rank_distribution": {
+        "1": 1,
+        "10": 131,
+        "9": 1
+      },
+      "minimal_rank_lines": [
+        [
+          1,
+          9,
+          4
+        ]
+      ],
+      "projective_line_count": 133,
+      "special_first_flattening_ranks": {
+        "signed_moment": 10,
+        "twisted_coinvariant_kernel": 9
+      },
+      "special_lines": {
+        "signed_moment": [
+          1,
+          1,
+          8
+        ],
+        "twisted_coinvariant_kernel": [
+          1,
+          3,
+          9
+        ]
+      },
+      "unique_rank_one_line_image_under_rank_one_covector_contraction": [
+        1,
+        9
+      ]
+    },
+    "relative_space_dimension": 3,
+    "restricted_outer_action": [
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        10
+      ]
+    ],
+    "restricted_psl_generator_actions": [
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    ],
+    "scalar_a4_order": 12,
+    "sheet_affine_dependencies": [
+      [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    ],
+    "sheet_affine_ranks": [
+      9,
+      9
+    ],
+    "sheet_difference_intersection_dimension": 9,
+    "sheet_heart_matrix_algebra_dimension": 81,
+    "sheet_vector_sums": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "signed_moment_coordinates_in_relative_basis": [
+      2,
+      2,
+      5
+    ],
+    "signed_moment_projective_line": [
+      1,
+      1,
+      8
+    ],
+    "twisted_coinvariants": {
+      "ambient_dimension": 220,
+      "brauer_tree_depth_identification": {
+        "a4_fixed_odd_orbit_sum_dimension": 3,
+        "a5_point_stabilizer_order": 60,
+        "depth_kernel_is_projective_cover_socle_line": true,
+        "full_kernel_is_even_half_plus_odd_socle": true,
+        "full_mixed_bihecke_dimension": 6,
+        "full_mixed_depth_kernel_dimension": 4,
+        "heart_is_absolutely_irreducible_by_density": true,
+        "heart_matrix_algebra_dimension": 81,
+        "j_odd_paired_slice_is_the_a4_fixed_projective_cover_slice_with_sign_attached": true,
+        "loewy_layer_dimensions": [
+          1,
+          9,
+          1
+        ],
+        "middle_simple_label": "L(8)=Sym^8(F_11^2), dimension 9",
+        "odd_orbit_sum_depth_kernel": [
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "odd_orbit_sum_depth_matrix": [
+          [
+            5,
+            10,
+            7
+          ],
+          [
+            0,
+            1,
+            10
+          ],
+          [
+            1,
+            0,
+            10
+          ],
+          [
+            10,
+            1,
+            0
+          ]
+        ],
+        "odd_orbit_sum_depth_rank": 2,
+        "orbital_algebra_is_local_in_characteristic_11": true,
+        "point_stabilizer_is_11_prime": true,
+        "positive_sheet_orbital_algebra_dimension": 2,
+        "positive_sheet_permutation_dimension": 11,
+        "psl_order": 660,
+        "psl_permutation_module_is_projective_indecomposable_cover_of_trivial": true,
+        "sylow_11_is_cyclic": true,
+        "sylow_11_order": 11
+      },
+      "canonical_invariant_to_coinvariant_matrix": [
+        [
+          5,
+          7,
+          2
+        ],
+        [
+          9,
+          8,
+          0
+        ],
+        [
+          7,
+          0,
+          9
+        ]
+      ],
+      "canonical_invariant_to_coinvariant_rank": 2,
+      "canonical_kernel_basis_in_relative_coordinates": [
+        [
+          3,
+          9,
+          5
+        ]
+      ],
+      "canonical_kernel_dimension": 1,
+      "canonical_kernel_equals_signed_moment_line": false,
+      "coinvariant_dimension": 3,
+      "commutator_submodule_dimension": 217,
+      "divided_transfer_gate": {
+        "bockstein_distinguishes_source_relations_from_depth_socle": true,
+        "depth_socle": [
+          1,
+          1,
+          1
+        ],
+        "divided_transfer_on_depth_socle": [
+          1,
+          1,
+          1
+        ],
+        "divided_transfer_on_source_relations": {
+          "delta_sigma_squared": [
+            0,
+            0,
+            0
+          ],
+          "j_difference_cube_sum": [
+            0,
+            0,
+            0
+          ],
+          "paired_orbit_sum": [
+            0,
+            0,
+            0
+          ]
+        },
+        "divided_transfer_supplies_source_to_depth_bridge": false,
+        "integral_identity": "B^2=11B",
+        "integral_orbit_sizes": [
+          1,
+          4,
+          6
+        ],
+        "integral_transfer_matrix": [
+          [
+            1,
+            4,
+            6
+          ],
+          [
+            1,
+            4,
+            6
+          ],
+          [
+            1,
+            4,
+            6
+          ]
+        ],
+        "integral_transfer_on_depth_socle": [
+          11,
+          11,
+          11
+        ],
+        "source_balanced_integral_relation_lifts": {
+          "delta_sigma_squared": [
+            -2,
+            -1,
+            1
+          ],
+          "j_difference_cube_sum": [
+            2,
+            -2,
+            1
+          ],
+          "paired_orbit_sum": [
+            -4,
+            1,
+            0
+          ]
+        },
+        "source_integral_weighted_sums": {
+          "delta_sigma_squared": 0,
+          "j_difference_cube_sum": 0,
+          "paired_orbit_sum": 0
+        }
+      },
+      "full_pgl_tate_norm_is_twice_psl_norm": true,
+      "full_pgl_tate_norm_matrix_from_coinvariants_to_invariants": [
+        [
+          1,
+          6,
+          1
+        ],
+        [
+          3,
+          7,
+          3
+        ],
+        [
+          9,
+          10,
+          9
+        ]
+      ],
+      "full_pgl_tate_norm_rank": 1,
+      "invariant_socle_intersection_with_commutator_dimension": 1,
+      "j_difference_cube_sum_norm_data": {
+        "norm_images_in_relative_coordinates": [
+          [
+            9,
+            5,
+            4
+          ],
+          [
+            3,
+            9,
+            5
+          ],
+          [
+            10,
+            8,
+            2
+          ]
+        ],
+        "norm_scalars_relative_to_first_image": [
+          1,
+          4,
+          6
+        ]
+      },
+      "j_difference_cube_sum_relations": [
+        [
+          2,
+          9,
+          1
+        ]
+      ],
+      "j_difference_cube_sum_span_dimension": 2,
+      "j_difference_cube_sums": [
+        {
+          "coinvariant_coordinates_of_j_difference_cube_sum": [
+            6,
+            4,
+            10
+          ],
+          "orbit_size": 1,
+          "positive_profile": [
+            -6,
+            0,
+            12,
+            -12
+          ]
+        },
+        {
+          "coinvariant_coordinates_of_j_difference_cube_sum": [
+            6,
+            9,
+            1
+          ],
+          "orbit_size": 4,
+          "positive_profile": [
+            -3,
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "coinvariant_coordinates_of_j_difference_cube_sum": [
+            0,
+            10,
+            4
+          ],
+          "orbit_size": 6,
+          "positive_profile": [
+            3,
+            -2,
+            -2,
+            0
+          ]
+        }
+      ],
+      "j_difference_relation_matches_target_relation": false,
+      "other_j_odd_polarization_families": {
+        "cube_of_orbit_sum": {
+          "norm_images_in_relative_coordinates": [
+            [
+              9,
+              5,
+              4
+            ],
+            [
+              3,
+              9,
+              5
+            ],
+            [
+              3,
+              9,
+              5
+            ]
+          ],
+          "norm_scalars_relative_to_first_image": [
+            1,
+            4,
+            4
+          ],
+          "records": [
+            {
+              "coinvariant_coordinates": [
+                6,
+                4,
+                10
+              ],
+              "orbit_size": 1
+            },
+            {
+              "coinvariant_coordinates": [
+                2,
+                0,
+                4
+              ],
+              "orbit_size": 4
+            },
+            {
+              "coinvariant_coordinates": [
+                8,
+                8,
+                5
+              ],
+              "orbit_size": 6
+            }
+          ],
+          "relation_matches_target": false,
+          "relations": [],
+          "span_dimension": 3
+        },
+        "sum_of_delta_sigma_squared": {
+          "norm_images_in_relative_coordinates": [
+            [
+              9,
+              5,
+              4
+            ],
+            [
+              3,
+              9,
+              5
+            ],
+            [
+              10,
+              8,
+              2
+            ]
+          ],
+          "norm_scalars_relative_to_first_image": [
+            1,
+            4,
+            6
+          ],
+          "records": [
+            {
+              "coinvariant_coordinates": [
+                6,
+                4,
+                10
+              ],
+              "orbit_size": 1
+            },
+            {
+              "coinvariant_coordinates": [
+                8,
+                0,
+                9
+              ],
+              "orbit_size": 4
+            },
+            {
+              "coinvariant_coordinates": [
+                9,
+                8,
+                7
+              ],
+              "orbit_size": 6
+            }
+          ],
+          "relation_matches_target": false,
+          "relations": [
+            [
+              9,
+              10,
+              1
+            ]
+          ],
+          "span_dimension": 2
+        }
+      },
+      "paired_a4_orbit_sums": [
+        {
+          "coinvariant_coordinates_of_signed_orbit_sum": [
+            6,
+            4,
+            10
+          ],
+          "orbit_size": 1,
+          "positive_profile": [
+            5,
+            0,
+            1,
+            10
+          ]
+        },
+        {
+          "coinvariant_coordinates_of_signed_orbit_sum": [
+            2,
+            5,
+            7
+          ],
+          "orbit_size": 4,
+          "positive_profile": [
+            8,
+            3,
+            0,
+            3
+          ]
+        },
+        {
+          "coinvariant_coordinates_of_signed_orbit_sum": [
+            4,
+            3,
+            9
+          ],
+          "orbit_size": 6,
+          "positive_profile": [
+            3,
+            9,
+            9,
+            0
+          ]
+        }
+      ],
+      "paired_orbit_relation_matches_target_relation": false,
+      "paired_orbit_sum_relations": [
+        [
+          7,
+          1,
+          0
+        ]
+      ],
+      "paired_orbit_sum_span_dimension": 2,
+      "positive_sheet_psl_orbital_operators": [
+        {
+          "matrix_on_a4_orbit_sums_in_size_order": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ],
+          "ordered_pair_orbit_size": 11,
+          "source_relation_images": {
+            "j_difference_cube_sum": {
+              "image": [
+                2,
+                9,
+                1
+              ],
+              "maps_to_target_orbit_sum_relation": false
+            },
+            "paired_orbit_sum": {
+              "image": [
+                7,
+                1,
+                0
+              ],
+              "maps_to_target_orbit_sum_relation": false
+            }
+          }
+        },
+        {
+          "matrix_on_a4_orbit_sums_in_size_order": [
+            [
+              0,
+              4,
+              6
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              4,
+              5
+            ]
+          ],
+          "ordered_pair_orbit_size": 110,
+          "source_relation_images": {
+            "j_difference_cube_sum": {
+              "image": [
+                9,
+                2,
+                10
+              ],
+              "maps_to_target_orbit_sum_relation": false
+            },
+            "paired_orbit_sum": {
+              "image": [
+                4,
+                10,
+                0
+              ],
+              "maps_to_target_orbit_sum_relation": false
+            }
+          }
+        }
+      ],
+      "psl_tate_norm_image_projective_line_in_relative_coordinates": [
+        1,
+        3,
+        9
+      ],
+      "psl_tate_norm_kernel_basis_in_coinvariant_coordinates": [
+        [
+          5,
+          1,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "psl_tate_norm_matrix_from_coinvariants_to_invariants": [
+        [
+          6,
+          3,
+          6
+        ],
+        [
+          7,
+          9,
+          7
+        ],
+        [
+          10,
+          5,
+          10
+        ]
+      ],
+      "psl_tate_norm_rank": 1,
+      "relation_rank": 217,
+      "target_profile_relations_in_same_size_order": [
+        [
+          2,
+          8,
+          1
+        ]
+      ],
+      "tate_exactness": {
+        "norm_after_invariant_projection_is_zero": true,
+        "norm_image_equals_projection_kernel": true,
+        "projection_image_equals_norm_kernel": true
+      }
+    }
+  },
+  "target": {
+    "basis": "e1=v2,e2=v3",
+    "compressed_binary_cubic_coefficients": [
+      1,
+      7,
+      5,
+      9
+    ],
+    "factorization_linear_factors": [
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        9
+      ]
+    ],
+    "first_catalecticant_matrix": [
+      [
+        3,
+        3,
+        5
+      ],
+      [
+        7,
+        10,
+        5
+      ]
+    ],
+    "first_catalecticant_rank": 2,
+    "hessian_coefficients": [
+      7,
+      8,
+      7
+    ],
+    "hessian_doubled_line": [
+      1,
+      10
+    ],
+    "outer_j_action": [
+      [
+        10,
+        0
+      ],
+      [
+        0,
+        10
+      ]
+    ],
+    "plane_equations_in_four_depth_coordinates": [
+      [
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        9,
+        8,
+        0,
+        1
+      ]
+    ],
+    "profile_plane_dimension": 2,
+    "residual_simple_line": [
+      1,
+      9
+    ],
+    "scalar_a4_action": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "verdict": "POSITIVE_TATE_AND_BRAUER_DEPTH_QUOTIENTS_BUT_BOUNDED_NEGATIVE_IDENTIFICATION"
+}

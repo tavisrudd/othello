@@ -45,7 +45,11 @@ arithmetically Gorenstein, with that signed cubic as the inverse system
 of an Artinian reduction.  The
 corresponding difference spans have dimensions \(3,6,10\) for
 \(A_3/\F_5\), \(B_3/\F_7\), and \(H_3/\F_{11}\); in type \(H_3\), the
-only missing Fischer layer is \(Q\mathcal H_2\).  After a chosen
+only missing Fischer layer is \(Q\mathcal H_2\).  The base-choice cocycle generates
+\(H^1(\operatorname{PGL}_2(11),M_8)\), so the \(H_3\) affine quotient
+has no equivariant origin; its harmonic nine-space is canonically the
+middle Loewy layer of the eleven-point sheet permutation module.
+After a chosen
 \(A_4\)-refinement, six incidence profiles recover the exact
 double-coset label in
 \(A_4\backslash\operatorname{PGL}_2(11)/A_5\), not in general an
@@ -1254,7 +1258,8 @@ sheet.
 
 \begin{corollary}[The canonical nine-space bridge]
 \label{cor:h3-nine-space-bridge}
-There is a canonical \(G^+\)-module isomorphism
+For the fixed marked conic and sheet \(X_+\), there is a canonical
+\(G^+\)-module isomorphism
 \[
  \operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)
  \ \xrightarrow{\ \sim\ }\ M_8\!\downarrow_{G^+}.             \tag{7.4}
@@ -1270,6 +1275,11 @@ independent of the reference matching.
 \end{corollary}
 
 \begin{proof}
+The unique trivial head map in Proposition~\ref{prop:modular-depth-quotient}
+is the augmentation map, so
+\[
+ \operatorname{rad}P(\mathbf1)=\ker(V\xrightarrow{\sum}k).
+\]
 Changing the reference matching translates every \(x_M\) by the same
 vector, so the augmentation condition makes (7.5) reference-independent.
 The affine cocycle term in \(x_{gM}\) cancels for the same reason, hence
@@ -1445,6 +1455,11 @@ four-endpoint switch produces an affine quotient configuration.  For
 the three rank-three systems its span has dimensions \(3,6,10\); the
 top harmonic part survives, as does the deepest radial line in even
 degree, while type \(H_3\) loses exactly \(Q\mathcal H_2\).
+For \(H_3\), the base-choice class generates
+\(H^1(\operatorname{PGL}_2(11),M_8)\) and defines the unique nonsplit
+homogeneous extension, while the canonical nine-space bridge identifies
+\(\operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)\) with
+\(M_8\downarrow_{\operatorname{PSL}_2(11)}\).
 
 The nonlinear record is sharper.  In the balanced \(B_3\) and \(H_3\)
 cases, quadratic products recover the unordered pair of sheets and a
@@ -1620,7 +1635,7 @@ of the archival source, the aggregate entry point is
 \begin{verbatim}
 python3 papers/clebsch-factorization/verification/verify_release.py
 \end{verbatim}
-It checks the statement identity and all eight checksum manifests, runs
+It checks the statement identity and all admitted checksum manifests, runs
 the admitted primary checks and independent replays, elaborates the
 arithmetic-gluing Lean gate, and rebuilds this manuscript through the
 repository Makefile.
@@ -1631,8 +1646,8 @@ The enumerated review closure accompanying this candidate is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{0a1db3adcf1754da413199cb0328e8cec143b7}\\[-2pt]
-\texttt{91f55382d58128d30f51990d56}.
+\small\texttt{c3645ef980ddc4a9c04a85ca5694b80fdfe811}\\[-2pt]
+\texttt{c10989544c17e285f71f7c4f8c}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Makefile, verification documentation, eight evidence

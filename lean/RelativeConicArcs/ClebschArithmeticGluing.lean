@@ -1,6 +1,6 @@
 import RelativeConicArcs.ClebschArithmeticGluingData
 import RelativeConicArcs.Gates.ClebschBalancedSheets
-import RelativeConicArcs.Gates.ClebschReplacementSpine
+import RelativeConicArcs.ClebschSchemeChirality
 import Mathlib.Tactic
 
 /-!

@@ -1,7 +1,8 @@
-# Verification of the factorization-memory paper
+# Verification of the conic-ideal quotient paper
 
-This directory is the aggregate verification surface for *Factorization
-memory in a conic ideal*. It separates four kinds of support:
+This directory is the aggregate verification surface for *Conic-ideal
+quotients for the A3, B3, and H3 secant configurations*. It separates four
+kinds of support:
 
 - proofs given in the manuscript;
 - classical inputs attributed to Edge, Dye, the *Atlas*, and Giudici;
@@ -17,12 +18,14 @@ unrecorded change to those statements.
 bundles. `verify_release.py` checks the statement identity, the manifest
 partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
-then elaborates the arithmetic-gluing Lean gate and builds the paper through
-the repository Makefile.
+then elaborates the arithmetic-gluing Lean gate, builds the paper through
+the repository Makefile, enforces the gate's axiom allowlist, and rejects
+manuscript warnings.
 
 `evidence_fingerprint.json` pins the normalized manuscript and statement
-identity, statement extractor, paper Makefile, this documentation, Lean gate,
-eight checksum manifests, exact command vectors, verification runner, trust
+identity, statement extractor, paper README and Makefile, this documentation,
+the guarded-Lean launcher and project-owned Lean import closure,
+the admitted checksum manifests, exact command vectors, verification runner, trust
 manifest, Python version, Lean toolchain, Mathlib revision, Nix lock, and
 expected success lines. The manuscript normalization replaces only its
 displayed fingerprint digest; the identity normalization replaces only its
@@ -44,4 +47,5 @@ python3 papers/clebsch-factorization/verification/verify_release.py
 Use `--metadata-only` to check the statement map, trust manifest, and evidence
 hashes without executing the finite replays or manuscript build. The aggregate
 runner does not turn executable checks into formal proofs: the residual trust
-boundaries remain those stated in the evidence reports named by the manifest.
+boundaries remain those stated in the manuscript, trust manifest, and
+certificate module headers.

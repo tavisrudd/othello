@@ -121,12 +121,50 @@ def main() -> None:
     assert act(transporter, base) == conjugate
 
     h3 = certificate["h3"]
-    assert len(h3["base_stabilizer"]) == len(base_stabilizer)
-    assert len(h3["conjugate_stabilizer"]) == len(conjugate_stabilizer)
-    assert len(h3["pgl_coset_representatives"]) == len(full_orbit)
-    assert len(h3["psl_base_coset_representatives"]) == len(base_sheet)
-    assert len(h3["psl_conjugate_coset_representatives"]) == len(conjugate_sheet)
-    assert len(h3["generation_words"]) == len(psl)
+    certified_base_stabilizer = {
+        permutation(norm(*matrix)) for matrix in h3["base_stabilizer"]
+    }
+    certified_conjugate_stabilizer = {
+        permutation(norm(*matrix)) for matrix in h3["conjugate_stabilizer"]
+    }
+    assert certified_base_stabilizer == base_stabilizer
+    assert certified_conjugate_stabilizer == conjugate_stabilizer
+
+    certified_pgl_representatives = [
+        permutation(norm(*matrix)) for matrix in h3["pgl_coset_representatives"]
+    ]
+    certified_base_representatives = [
+        permutation(norm(*matrix))
+        for matrix in h3["psl_base_coset_representatives"]
+    ]
+    certified_conjugate_representatives = [
+        permutation(norm(*matrix))
+        for matrix in h3["psl_conjugate_coset_representatives"]
+    ]
+    assert {
+        act(element, base) for element in certified_pgl_representatives
+    } == full_orbit
+    assert {
+        act(element, base) for element in certified_base_representatives
+    } == base_sheet
+    assert {
+        act(element, conjugate) for element in certified_conjugate_representatives
+    } == conjugate_sheet
+
+    certified_generators = [
+        permutation(norm(*matrix)) for matrix in h3["generation_generators"]
+    ]
+    assert set(certified_generators) == base_stabilizer | conjugate_stabilizer
+    certified_word_values = []
+    identity = tuple(range(P + 1))
+    for word in h3["generation_words"]:
+        value = identity
+        for index in word:
+            assert 0 <= index < len(certified_generators)
+            value = multiply(value, certified_generators[index])
+        certified_word_values.append(value)
+    assert len(certified_word_values) == len(set(certified_word_values))
+    assert set(certified_word_values) == psl
     print("clebsch arithmetic-gluing independent replay: CHECK OK")
 
 

@@ -1,0 +1,294 @@
+{
+  "a5_characters": {
+    "middle_L4_is_5": [
+      5,
+      1,
+      -1,
+      0,
+      0
+    ],
+    "radial_character_restricts_trivially": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "top_L8_restricts_as_4_plus_5": [
+      9,
+      1,
+      0,
+      -1,
+      -1
+    ]
+  },
+  "a5_class_sizes": [
+    1,
+    15,
+    20,
+    12,
+    12
+  ],
+  "a5_fixed_dimensions": {
+    "middle_L4_is_5": 0,
+    "radial_character_restricts_trivially": 1,
+    "top_L8_restricts_as_4_plus_5": 0
+  },
+  "cyclic_sylow_and_normalizer": {
+    "0": {
+      "cyclic_h1_dimension": 1,
+      "cyclic_norm_rank": 0,
+      "determinant_twist_exponent_mod_10": 5,
+      "dimension": 1,
+      "normalizer_character_exponent_mod_10": 4,
+      "normalizer_eigenvalue": 5,
+      "normalizer_fixed_h1_dimension": 0,
+      "normalizer_generator": 2,
+      "symmetric_degree": 0,
+      "unipotent_minus_identity_rank": 0
+    },
+    "4": {
+      "cyclic_h1_dimension": 1,
+      "cyclic_norm_rank": 0,
+      "determinant_twist_exponent_mod_10": 7,
+      "dimension": 5,
+      "normalizer_character_exponent_mod_10": 2,
+      "normalizer_eigenvalue": 4,
+      "normalizer_fixed_h1_dimension": 0,
+      "normalizer_generator": 2,
+      "symmetric_degree": 4,
+      "unipotent_minus_identity_rank": 4
+    },
+    "8": {
+      "cyclic_h1_dimension": 1,
+      "cyclic_norm_rank": 0,
+      "determinant_twist_exponent_mod_10": 9,
+      "dimension": 9,
+      "normalizer_character_exponent_mod_10": 0,
+      "normalizer_eigenvalue": 1,
+      "normalizer_fixed_h1_dimension": 1,
+      "normalizer_generator": 2,
+      "symmetric_degree": 8,
+      "unipotent_minus_identity_rank": 8
+    }
+  },
+  "field": 11,
+  "fischer_layers": {
+    "middle": "Q Sym^4(V^*) tensor det^(-3)",
+    "radial": "det^(-5)",
+    "top": "Sym^8(V^*) tensor det^(-1)"
+  },
+  "group": "PGL_2(11)",
+  "inner_group": "PSL_2(11)",
+  "inputs": {
+    "matching_module.py": {
+      "bytes": 48643,
+      "sha256": "d2100485add18a92a148f0584d41b2108100baf545fd361e6cc08b7e61e92f40"
+    },
+    "matching_orbit_scout.json": {
+      "bytes": 25385,
+      "sha256": "d45512c9087874acdaf109367753f45151c2dd0c2cb745777f62ad26489e7394"
+    }
+  },
+  "monomial_basis_degree_4": [
+    [
+      0,
+      0,
+      4
+    ],
+    [
+      0,
+      1,
+      3
+    ],
+    [
+      0,
+      2,
+      2
+    ],
+    [
+      0,
+      3,
+      1
+    ],
+    [
+      0,
+      4,
+      0
+    ],
+    [
+      1,
+      0,
+      3
+    ],
+    [
+      1,
+      1,
+      2
+    ],
+    [
+      1,
+      2,
+      1
+    ],
+    [
+      1,
+      3,
+      0
+    ],
+    [
+      2,
+      0,
+      2
+    ],
+    [
+      2,
+      1,
+      1
+    ],
+    [
+      2,
+      2,
+      0
+    ],
+    [
+      3,
+      0,
+      1
+    ],
+    [
+      3,
+      1,
+      0
+    ],
+    [
+      4,
+      0,
+      0
+    ]
+  ],
+  "orbit_size": 22,
+  "quotient_linearization": "Sym^4(Sym^2(V)^*) tensor det^(-1)",
+  "schema": "equivariant-h3-equivariant-rank-v1",
+  "sheet_size": 11,
+  "stabilizer": "A5",
+  "verdict": "MIDDLE_H1_AND_A5_FIXED_SPACE_ZERO_TOP_AND_RADIAL_NONZERO",
+  "witnesses": {
+    "base_matching": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        8
+      ],
+      [
+        10,
+        11
+      ]
+    ],
+    "outer_radial_coefficient": 1,
+    "outer_sheet_delta_squared": 10,
+    "outer_sheet_matching": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        11
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    "outer_sheet_quotient_vector": [
+      3,
+      10,
+      6,
+      1,
+      2,
+      1,
+      9,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "q_squared_delta_squared": 10,
+    "same_sheet_delta_squared": 0,
+    "same_sheet_matching": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        8
+      ],
+      [
+        3,
+        9
+      ],
+      [
+        4,
+        11
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    "same_sheet_quotient_vector": [
+      5,
+      6,
+      3,
+      6,
+      2,
+      6,
+      10,
+      6,
+      9,
+      9,
+      4,
+      7,
+      3,
+      8,
+      6
+    ]
+  }
+}

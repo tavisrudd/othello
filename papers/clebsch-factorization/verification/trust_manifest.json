@@ -4,58 +4,65 @@
   "evidence": {
     "matching-module": {
       "role": "quotient ranks, harmonic/radial images, sheet moments, cubic orientation",
-      "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-20-c406-matching-module.py", "--check"],
-        ["python3", "notes/2026-07-20-c406-matching-module-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/matching_module.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/matching_module_replay.py"]
       ]
     },
     "h3-equivariant-rank": {
       "role": "Sylow-normalizer weights, A5 fixed spaces, and minimal top/radial quotient witnesses",
-      "checksum_manifest": "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-25-c616-h3-equivariant-rank.py", "--check"],
-        ["python3", "notes/2026-07-25-c616-h3-equivariant-rank-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/equivariant_rank.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/equivariant_rank_replay.py"]
       ]
     },
     "balanced-sheet": {
       "role": "frozen hypotheses for radical--Hadamard recovery",
-      "checksum_manifest": "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.py", "--check"],
-        ["python3", "notes/2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py", "--check"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/balanced_sheets.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/balanced_sheets_replay.py", "--check"]
       ]
     },
     "gorenstein-gate": {
       "role": "saturated ideals, Betti tables, deletion ranks, signed Gale duality, socles, and inverse-system cubics",
-      "checksum_manifest": "notes/2026-07-25-c621-gorenstein-gate.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-25-c621-gorenstein-gate.py", "--check"],
-        ["python3", "notes/2026-07-25-c621-gorenstein-gate-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"]
       ]
     },
     "profile-incidence": {
       "role": "double cosets, six profiles, profile plane, weights, and cubic witness",
-      "checksum_manifest": "notes/2026-07-20-c411-double-coset-hecke.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-20-c411-double-coset-hecke.py", "--check"],
-        ["python3", "notes/2026-07-20-c411-double-coset-hecke-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence_replay.py"]
       ]
     },
     "decorated-parent": {
       "role": "matching-decorated parent bijection and exact A5 stabilizer",
-      "checksum_manifest": "notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-19-c379-clebsch-deep-hole-extension.py", "--check"],
-        ["python3", "notes/2026-07-19-c379-clebsch-deep-hole-extension-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent_replay.py"]
       ]
     },
     "relative-cubic-depth": {
       "role": "modular depth, Tate plane, contraction, obstruction, and cubic flag",
-      "checksum_manifest": "notes/2026-07-20-c412-relative-cubic-depth-plane.sha256",
+      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+      "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
-        ["python3", "notes/2026-07-20-c412-relative-cubic-depth-plane.py", "--check"],
-        ["python3", "notes/2026-07-20-c412-relative-cubic-depth-plane-replay.py"]
+        ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth.py", "--check"],
+        ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth_replay.py"]
       ]
     },
     "arithmetic-gluing": {
@@ -88,7 +95,7 @@
     {"label": "thm:rank-three-arithmetic-gluing", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["profile-incidence", "decorated-parent", "arithmetic-gluing"]},
     {"label": "lem:three-ray-cubic", "modes": ["conceptual"], "evidence": []},
     {"label": "cor:mass-zero-cubic", "modes": ["conceptual"], "evidence": []},
-    {"label": "prop:relative-cubic-tate-plane", "modes": ["certificate"], "evidence": ["relative-cubic-depth"]}
+    {"label": "prop:relative-cubic-tate-plane", "modes": ["conceptual", "certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [
     "The six profile rows and all frozen rank and orbit calculations use exact prime-field arithmetic.",

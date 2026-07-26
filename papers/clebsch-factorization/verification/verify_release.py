@@ -21,85 +21,94 @@ LEAN_GATE_COMMAND = [
     "lean/scripts/guarded-lean",
     "RelativeConicArcs/Gates/ClebschArithmeticGluing.lean",
 ]
+LEAN_GATE_TERMINALS = 23
+ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
-        "checksum_manifest": "notes/2026-07-20-c406-matching-module.sha256",
+        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
-            ["python3", "notes/2026-07-20-c406-matching-module.py", "--check"],
-            ["python3", "notes/2026-07-20-c406-matching-module-replay.py"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/matching_module.py", "--check"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/matching_module_replay.py"],
         ],
     },
     "h3-equivariant-rank": {
         "checksum_manifest":
-            "notes/2026-07-25-c616-h3-equivariant-rank.sha256",
+            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
             [
                 "python3",
-                "notes/2026-07-25-c616-h3-equivariant-rank.py",
+                "papers/clebsch-factorization/verification/evidence/equivariant_rank.py",
                 "--check",
             ],
             [
                 "python3",
-                "notes/2026-07-25-c616-h3-equivariant-rank-replay.py",
+                "papers/clebsch-factorization/verification/evidence/equivariant_rank_replay.py",
             ],
         ],
     },
     "balanced-sheet": {
         "checksum_manifest":
-            "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.sha256",
+            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
             [
                 "python3",
-                "notes/2026-07-20-c430-conceptual-balanced-half-rigidity.py",
+                "papers/clebsch-factorization/verification/evidence/balanced_sheets.py",
                 "--check",
             ],
             [
                 "python3",
-                "notes/2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py",
+                "papers/clebsch-factorization/verification/evidence/balanced_sheets_replay.py",
                 "--check",
             ],
         ],
     },
     "gorenstein-gate": {
-        "checksum_manifest": "notes/2026-07-25-c621-gorenstein-gate.sha256",
+        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
             [
                 "python3",
-                "notes/2026-07-25-c621-gorenstein-gate.py",
+                "papers/clebsch-factorization/verification/evidence/gorenstein.py",
                 "--check",
             ],
-            ["python3", "notes/2026-07-25-c621-gorenstein-gate-replay.py"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"],
         ],
     },
     "profile-incidence": {
-        "checksum_manifest": "notes/2026-07-20-c411-double-coset-hecke.sha256",
+        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
-            ["python3", "notes/2026-07-20-c411-double-coset-hecke.py", "--check"],
-            ["python3", "notes/2026-07-20-c411-double-coset-hecke-replay.py"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence.py", "--check"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence_replay.py"],
         ],
     },
     "decorated-parent": {
         "checksum_manifest":
-            "notes/2026-07-19-c379-clebsch-deep-hole-extension.sha256",
+            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
             [
                 "python3",
-                "notes/2026-07-19-c379-clebsch-deep-hole-extension.py",
+                "papers/clebsch-factorization/verification/evidence/decorated_parent.py",
                 "--check",
             ],
-            ["python3", "notes/2026-07-19-c379-clebsch-deep-hole-extension-replay.py"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent_replay.py"],
         ],
     },
     "relative-cubic-depth": {
         "checksum_manifest":
-            "notes/2026-07-20-c412-relative-cubic-depth-plane.sha256",
+            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
+        "checksum_root": "papers/clebsch-factorization/verification/evidence",
         "commands": [
             [
                 "python3",
-                "notes/2026-07-20-c412-relative-cubic-depth-plane.py",
+                "papers/clebsch-factorization/verification/evidence/relative_cubic_depth.py",
                 "--check",
             ],
-            ["python3", "notes/2026-07-20-c412-relative-cubic-depth-plane-replay.py"],
+            ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth_replay.py"],
         ],
     },
     "arithmetic-gluing": {
@@ -187,7 +196,7 @@ EXPECTED_CLAIMS = {
     "lem:three-ray-cubic": ({"conceptual"}, set()),
     "cor:mass-zero-cubic": ({"conceptual"}, set()),
     "prop:relative-cubic-tate-plane": (
-        {"certificate"},
+        {"conceptual", "certificate"},
         {"relative-cubic-depth"},
     ),
 }
@@ -239,7 +248,7 @@ def check_checksum_manifest(
             )
 
 
-def run(command: list[str], cwd: Path) -> None:
+def run(command: list[str], cwd: Path) -> str:
     completed = subprocess.run(
         command,
         cwd=cwd,
@@ -256,6 +265,44 @@ def run(command: list[str], cwd: Path) -> None:
     summary = completed.stdout.strip().splitlines()
     tail = summary[-1] if summary else "OK"
     print(f"{' '.join(command)}: {tail}")
+    return completed.stdout
+
+
+def check_latex_warnings(log_path: Path) -> None:
+    forbidden = re.compile(
+        r"(LaTeX Warning:|Package .* Warning:|undefined references|"
+        r"multiply defined|Overfull \\hbox|Underfull \\hbox)"
+    )
+    findings = [
+        line for line in log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        if forbidden.search(line)
+    ]
+    if findings:
+        raise ValueError("manuscript warning scan failed:\n" + "\n".join(findings))
+    print("clebsch factorization warnings: CHECK OK")
+
+
+def check_lean_axiom_audit(wrapper_output: str) -> None:
+    match = re.search(r"^stdout: \d+ lines -> (.+)$", wrapper_output, re.MULTILINE)
+    if match is None:
+        raise ValueError("guarded Lean output did not identify its stdout audit log")
+    audit_path = Path(match.group(1))
+    audit = audit_path.read_text(encoding="utf-8")
+    dependency_blocks = re.findall(
+        r"'[^']+' depends on axioms: \[(.*?)\]", audit, re.DOTALL
+    )
+    axiom_free = re.findall(r"'[^']+' does not depend on any axioms", audit)
+    if len(dependency_blocks) + len(axiom_free) != LEAN_GATE_TERMINALS:
+        raise ValueError("Lean axiom audit terminal count changed")
+    found_axioms = {
+        name
+        for block in dependency_blocks
+        for name in re.findall(r"[A-Za-z][A-Za-z0-9_.]*", block)
+    }
+    unexpected = found_axioms - ALLOWED_LEAN_AXIOMS
+    if unexpected:
+        raise ValueError(f"Lean axiom audit found unexpected axioms: {sorted(unexpected)}")
+    print("clebsch arithmetic-gluing axiom allowlist: CHECK OK")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -284,6 +331,29 @@ def normalized_identity_sha256(path: Path) -> str:
     return sha256_bytes(
         (json.dumps(identity, sort_keys=True, separators=(",", ":")) + "\n").encode()
     )
+
+
+def lean_import_closure(repo_root: Path, entry: Path) -> dict[str, str]:
+    lean_root = repo_root / "lean"
+    pending = [entry]
+    seen: set[Path] = set()
+    while pending:
+        path = pending.pop()
+        if path in seen:
+            continue
+        seen.add(path)
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.startswith("import RelativeConicArcs."):
+                continue
+            module = line.removeprefix("import ").strip()
+            imported = lean_root / (module.replace(".", "/") + ".lean")
+            if not imported.is_file():
+                raise ValueError(f"missing project-owned Lean import: {module}")
+            pending.append(imported)
+    return {
+        str(path.relative_to(repo_root)): sha256(path)
+        for path in sorted(seen)
+    }
 
 
 def build_fingerprint(
@@ -333,15 +403,25 @@ def build_fingerprint(
             "statement_extractor": sha256(
                 paper_root / "verification" / "extract_statement_identity.py"
             ),
+            "paper_readme": sha256(paper_root / "README.md"),
             "paper_makefile": sha256(paper_root.parent / "Makefile"),
             "verification_readme": sha256(
                 paper_root / "verification" / "README.md"
+            ),
+            "evidence_manifest_tool": sha256(
+                paper_root / "verification" / "evidence" / "manifest.py"
             ),
             "lean_gate": sha256(
                 repo_root / "lean" / "RelativeConicArcs" / "Gates"
                 / "ClebschArithmeticGluing.lean"
             ),
+            "guarded_lean": sha256(repo_root / "lean" / "scripts" / "guarded-lean"),
         },
+        "project_lean_import_closure_sha256": lean_import_closure(
+            repo_root,
+            repo_root / "lean" / "RelativeConicArcs" / "Gates"
+            / "ClebschArithmeticGluing.lean",
+        ),
         "lean_gate": {
             "command": LEAN_GATE_COMMAND,
             "cwd": ".",
@@ -355,6 +435,8 @@ def build_fingerprint(
 
 
 def main() -> int:
+    if sys.flags.optimize:
+        raise RuntimeError("release verification requires Python assertions enabled")
     paper_root = Path(__file__).resolve().parents[1]
     repo_root = paper_root.parents[1]
     parser = argparse.ArgumentParser()
@@ -445,8 +527,10 @@ def main() -> int:
     for item in evidence.values():
         for command in item["commands"]:
             run(command, repo_root)
-    run(LEAN_GATE_COMMAND, repo_root)
+    lean_output = run(LEAN_GATE_COMMAND, repo_root)
+    check_lean_axiom_audit(lean_output)
     run(["make", "-B", "clebsch-factorization"], repo_root / "papers")
+    check_latex_warnings(paper_root / "clebsch_factorization.log")
     print("clebsch factorization release: CHECK OK")
     return 0
 

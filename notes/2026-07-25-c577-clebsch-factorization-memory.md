@@ -36,8 +36,20 @@ gates, and execution order are recorded in
   not defined explicitly, cocycle-span stability was omitted before
   irreducibility, and the radial witness was not shown to lie in the outer
   orbit.  All three are repaired, together with the evidence inventory,
-  conclusion boundary, and published Eisenbud--Popescu citation.  The
-  complete release replay is green; a fresh independent reread remains.
+  conclusion boundary, and published Eisenbud--Popescu citation.
+- Two post-\(H^1\) PDF referees returned mathematical `GO`.  Their
+  artifact-aware addenda found internal task-path leakage, a replay
+  coverage overstatement, an unpinned Lean launcher/import closure,
+  optimized-Python risk, and unenforced warning/axiom audits.  These are
+  repaired: the finite evidence now has stable paper-owned semantic names,
+  the arithmetic replay checks every serialized word elementwise, the
+  direct Lean launcher and import closure are pinned, and the aggregate
+  rejects optimized Python, unexpected Lean axioms, and manuscript warnings.
+- The independent final grader raised the candidate from \(7.4\) to
+  \(8.3/10\), with `conditional GO / minor revision`.  Its remaining public
+  blocker is the immutable archive locator; its editorial request to surface
+  the \(H^1\) theorem and nine-space bridge in the abstract and conclusion is
+  implemented.
 
 ## Current result
 
@@ -45,9 +57,9 @@ Paper II now has its own verification architecture and mathematical
 conclusion. The twenty theorem-like statements are hash-identified and
 mapped claim by claim to conceptual proofs, classical inputs, seven exact
 certificate bundles, and the arithmetic-gluing Lean gate. The aggregate
-runner checks the statement map, all eight checksum manifests, fifteen primary
-or independent executable routes, and the manuscript build. Its clean replay
-is green.
+runner checks the statement map, the admitted checksum manifests, fifteen
+primary or independent executable routes, the Lean gate, manuscript build,
+and warning scan. Its clean replay is green.
 
 The conclusion records the exact reconstruction ladder: linear harmonic and
 radial memory, unordered balanced sheets, cubic orientation, and---after a
@@ -391,5 +403,5 @@ mathematical claim or enlarging the release surface.
 | Does the conclusion accidentally make relative row recovery intrinsic? | settled | It now says explicitly that exact label recovery occurs only after the \(A_4\) refinement is selected. |
 | Is every theorem-like statement assigned one exact trust route? | settled | The twenty-row statement identity and trust manifest form an exact partition; the aggregate checker rejects omissions, duplicates, altered proof-mode/evidence assignments, stale statements, and stale evidence hashes. |
 | Can the aggregate manifest silently redirect a checker or checksum target? | settled | The release runner now freezes the eight semantic bundles, exact command vectors, manifest paths, proof modes, and safe repository-relative checksum targets. |
-| Can Paper II's verification surface ship independently of the full repository? | open, release-facing | Seven semantic bundles still resolve through dated `notes/` paths; arithmetic gluing now uses its stable Lean-owned closure. The fingerprint defines and tests an explicit normalized review-source allowlist, but a standalone archive must still vendor the remaining closures. |
+| Can Paper II's verification surface ship independently of the full repository? | settled locally; public deposit remains | All seven finite evidence closures now live under stable paper-owned semantic paths, arithmetic gluing uses its stable Lean-owned closure, and the fingerprint pins the project-owned Lean import closure. An immutable public archive locator is still required. |
 | What is the next load-bearing Paper II frontier? | open by user direction | The local theorem and trust surface are complete through the \(H^1\) no-origin theorem and canonical nine-space bridge. Release still depends on the user-controlled immutable public archive locator. |
