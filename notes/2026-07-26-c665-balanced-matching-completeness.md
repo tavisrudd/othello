@@ -12,10 +12,10 @@ incidence rather than the abstract quotient alone.  The stronger
 trade-only “Platinum” continuation is active under C665 but is not yet a
 manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
 and the retracted-socle trace lemma closes the quadratic pullback for every
-prime-field exceptional head.  The first extension barrier \(q=25\) also
-closes because neither Frobenius-digit head embeds in the affine socle;
-extension-field C1 from \(q=49\), characteristic-three tori, and the \(q=5\)
-dihedral endpoint remain.
+prime-field exceptional head.  The first two extension barriers \(q=25,49\)
+also close because none of their Frobenius-digit heads embeds in the affine
+socle; uniform extension-field C1, characteristic-three tori, and the
+\(q=5\) dihedral endpoint remain.
 
 ## Result
 
@@ -438,6 +438,29 @@ The checker and certificate have respectively 10,530 and 1,552 bytes; their
 SHA-256 values are pinned in
 `2026-07-26-c665-q25-pullback.sha256`.
 
+The next affine-socle gate is replayed by
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q49-affine-socle.sage --check
+sha256sum -c notes/2026-07-26-c665-q49-affine-socle.sha256
+```
+
+The checker uses Sage's canonical model of \(\mathbb F_{49}\), two
+independent translation generators, inversion, and a primitive-element
+nonsquare dilation.  It constructs the 301-dimensional universal affine
+module.  GAP MeatAxe intertwiners give zero Hom for the shared
+\(A_4/S_4\) head \(L(1)\otimes L(1)^{(1)}\) and the \(A_5\) head
+\(L(3)\otimes L(3)^{(1)}\).  The independent Sage route first traps the
+image of any intertwiner in the primary kernel of the combined group-algebra
+element with coefficients \(1,a,a^2\), reducing the target dimensions to
+six and sixteen, and then solves all three generator equations there; both
+nullities are again zero.  No symmetric square is constructed.  The
+certificate covers only these \(q=49\) exceptional heads and makes no
+extension-field-wide claim.  The checker and certificate have respectively
+11,496 and 2,398 bytes; their SHA-256 values are pinned in
+`2026-07-26-c665-q49-affine-socle.sha256`.
+
 The sheet permutation character is
 \[
 P(\mathbf1)+P(S_{13}),
@@ -705,7 +728,7 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
-| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, and the affine-socle test closes \(q=25\).  The remaining gates begin at \(q=49\), followed by characteristic-three tori and the isolated \(q=5\) dihedral endpoint. |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, and affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback.  Uniform extension-field C1, characteristic-three tori, and the isolated \(q=5\) dihedral endpoint remain. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -1208,6 +1231,37 @@ computing \(\operatorname{Sym}^2E\) removes the entire 3160-dimensional
 quadratic calculation.  The next extension-field gate is \(q=49\), with
 the \(p=7\) \(A_4,S_4,A_5\) candidates.
 
+### The second extension barrier: \(q=49\)
+
+The affine-socle-first decision order closes this field too.  Over Sage's
+canonical model
+\(\mathbb F_{49}=\mathbb F_7[a]/(a^2+6a+3)\), the universal point-vector
+affine module has dimension
+\[
+1+\binom{25}{2}=301.
+\]
+The \(A_4\) and \(S_4\) rows share the four-dimensional head
+\(L(1)\otimes L(1)^{(1)}\); the \(A_5\) row has the sixteen-dimensional
+head \(L(3)\otimes L(3)^{(1)}\).  Exact calculations give
+\[
+\begin{array}{c|c|c}
+K&S&\dim\operatorname{Hom}_H(S,E)\\ \hline
+A_4,S_4&L(1)\otimes L(1)^{(1)}&0\\
+A_5&L(3)\otimes L(3)^{(1)}&0.
+\end{array}
+\]
+GAP MeatAxe intertwiners and the independent reduced block-linear solve
+agree.  In the latter route, one combined group-algebra element confines
+the possible images to dimensions six and sixteen before the full generator
+equations are imposed.
+
+Thus none of the three exceptional heads lies in the affine socle.  The
+linear-parity constant--\(F\) cross channel is absent in every row, so no
+quadratic module, retraction test, or pullback calculation is needed.
+Together with \(q=25\), this shows affine-socle absence at both first
+extension-field barriers; it is exact evidence, not a uniform
+extension-field theorem.
+
 This is the first genuine residual family, not a cosmetic defect of the
 method.  Its first field can nevertheless be excluded exactly.  Over
 \(\mathbb F_{27}\), all thirteen matchings invariant under the split torus
@@ -1233,7 +1287,7 @@ convention, compute the pullback of
 \(\operatorname{Sym}^2E\mathrel{\mathop{\to}^{\partial}}E\) along the
 relevant \(S^\chi\hookrightarrow E\) for the remaining \(q=p^e,\ e>1\).
 The retracted-socle lemma closes every prime-field exceptional row, and the
-affine-socle test closes \(q=25\).  Starting at \(q=49\), first decide
+affine-socle tests close \(q=25,49\).  In every further field, first decide
 whether each nonnegligible Frobenius-digit candidate embeds in \(E\); only
 an embedded nonretract requires an actual pullback-class calculation.
 
@@ -1293,7 +1347,10 @@ Fischer/tilting summand and its retraction, not merely its block.
 
 The q=25 test then supplies a sharper cheap upgrade: neither candidate is
 in the affine socle, despite occurring as a head of the corresponding sheet
-projective.  The 3160-dimensional quadratic module is irrelevant.  This
+projective.  The q=49 gate repeats the phenomenon for all three exceptional
+rows, including the new sixteen-dimensional \(A_5\) digit pattern; the
+3160-dimensional q=25 and 45,451-dimensional q=49 quadratic modules are
+irrelevant.  This
 separates two notions that the earlier plan risked conflating and gives a
 strict decision order for every remaining row:
 \[
@@ -1305,11 +1362,10 @@ S^K\ne0
 \;\longrightarrow\;
 \text{quadratic pullback only if necessary}.
 \]
-The highest-EV continuation is \(q=49\), where all three \(p=7\)
-exceptional candidates exercise the next Frobenius-digit pattern.  What
-remains genuinely unexplained is whether affine-socle absence persists or
-a first embedded nonretract appears.  Characteristic-three tori and the
-\(q=5\) dihedral endpoint remain separate geometric gates.
+The highest-EV continuation is now the characteristic-three torus gate,
+followed by the isolated \(q=5\) dihedral endpoint.  What remains genuinely
+unexplained on C1 is whether affine-socle absence persists uniformly or a
+later extension field contains the first embedded nonretract.
 
 ### Facts that must not be assumed
 

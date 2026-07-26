@@ -1,0 +1,191 @@
+{
+  "affine_dimension": 301,
+  "base_matching": [
+    [
+      0,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      18,
+      19
+    ],
+    [
+      20,
+      21
+    ],
+    [
+      22,
+      23
+    ],
+    [
+      24,
+      25
+    ],
+    [
+      26,
+      27
+    ],
+    [
+      28,
+      29
+    ],
+    [
+      30,
+      31
+    ],
+    [
+      32,
+      33
+    ],
+    [
+      34,
+      35
+    ],
+    [
+      36,
+      37
+    ],
+    [
+      38,
+      39
+    ],
+    [
+      40,
+      41
+    ],
+    [
+      42,
+      43
+    ],
+    [
+      44,
+      45
+    ],
+    [
+      46,
+      47
+    ],
+    [
+      48,
+      49
+    ]
+  ],
+  "conclusion": "quadratic pullback is required exactly for records whose exceptional head embeds in the universal affine socle",
+  "field_modulus": "x^2 + 6*x + 3",
+  "h_generators": [
+    [
+      "1",
+      "1",
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "a",
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "-1",
+      "1",
+      "0"
+    ]
+  ],
+  "outer_dilation": [
+    "a",
+    "0",
+    "0",
+    "1"
+  ],
+  "p": 7,
+  "q": 49,
+  "records": [
+    {
+      "hom_to_affine_dimension": 0,
+      "hom_to_affine_outer": [
+        0,
+        0
+      ],
+      "independent_reduced_linear_solve": {
+        "hom_dimension": 0,
+        "source_minpoly_degree": 4,
+        "target_primary_kernel_dimension": 6,
+        "weights": [
+          "1",
+          "a",
+          "a + 4"
+        ]
+      },
+      "quadratic_pullback_required": false,
+      "simple_dimension": 4,
+      "steinberg_digits": [
+        1,
+        1
+      ],
+      "subgroup_types": [
+        "A4",
+        "S4"
+      ]
+    },
+    {
+      "hom_to_affine_dimension": 0,
+      "hom_to_affine_outer": [
+        0,
+        0
+      ],
+      "independent_reduced_linear_solve": {
+        "hom_dimension": 0,
+        "source_minpoly_degree": 16,
+        "target_primary_kernel_dimension": 16,
+        "weights": [
+          "1",
+          "a",
+          "a + 4"
+        ]
+      },
+      "quadratic_pullback_required": false,
+      "simple_dimension": 16,
+      "steinberg_digits": [
+        3,
+        3
+      ],
+      "subgroup_types": [
+        "A5"
+      ]
+    }
+  ],
+  "schema": 1
+}

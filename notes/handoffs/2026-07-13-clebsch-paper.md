@@ -310,10 +310,13 @@ negative: defining-characteristic full-defect blocks do not separate the
 non-Steinberg candidates.  At q=25 both \(A_4/S_4\) heads have zero Hom into
 the 79-dimensional universal affine module, by MeatAxe and an independent
 block-linear solve; hence the linear-parity cross channel is absent and no
-quadratic pullback is needed.  The active test is q=49: check the three
-\(p=7\) exceptional heads against the affine socle, then test retraction or
-pullback only for an embedded head.  Characteristic-three tori and the q=5
-dihedral endpoint follow.
+quadratic pullback is needed.  The q=49 affine-socle gate closes the same
+way: the shared four-dimensional \(A_4/S_4\) head and the sixteen-dimensional
+\(A_5\) head both have zero Hom into the 301-dimensional universal affine
+module, by MeatAxe and an independent reduced block-linear solve.  Thus no
+q=49 quadratic module, retraction test, or pullback is needed.  Uniform
+extension-field C1 remains open; the active finite gates are now the
+characteristic-three tori and the q=5 dihedral endpoint.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
