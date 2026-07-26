@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-rc1",
   "date": "2026-07-26",
-  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Logical Clifford Groups of MDS--CSS Codes",
+  "title": "Local-Unitary Rigidity of Stabilizer AME States: Operator-Pushing Atlases and Transversal Logical Clifford Groups of MDS--CSS Codes",
   "public_export": {
     "artifacts": [
       {
@@ -11,9 +11,9 @@
         "sha256": "367a62916afbcdcb1c7dcdba348d3c1c2cf7766695d5cb6cebf73d268cbff52d"
       },
       {
-        "bytes": 238009,
+        "bytes": 239169,
         "path": "ame-lu.pdf",
-        "sha256": "64be745bfd43f7dea3484b5ee306c7f61a4be41b822c477e12640079dc0a9a8f"
+        "sha256": "068a6dd3b33b716a283d4b3dfc25e42ac476fa397c678e74e9f1d46a88548f31"
       },
       {
         "bytes": 18767,
@@ -21,14 +21,14 @@
         "sha256": "0f1d63402a1ffcb828534f000e88dbd93874355057ad534392d324a54c525393"
       },
       {
-        "bytes": 3685,
+        "bytes": 3495,
         "path": "main.tex",
-        "sha256": "f12c6d4dc62d50d642c44b29887d91e725e3171d992e221d72942dad3e817687"
+        "sha256": "aea4be30434a4a5bfd2b634b4e6176c3cd942c4aa101e3aa6a5129ae2acfb633"
       },
       {
         "bytes": 12611,
         "path": "refs.bib",
-        "sha256": "84d948f5dd214bf9c1a5a8fb694fc48cfc72806d673c52b3a197e0c492e86b07"
+        "sha256": "70090e5aa9e9d84335bb10bfc5cc2a0b7061410f8febb849d64fd983fe0fe0cb"
       },
       {
         "bytes": 2282,
@@ -41,14 +41,14 @@
         "sha256": "7b32bdcd19694d61991fab2062908759ffdfe87fac0d2826f72daf9ad93f93ab"
       },
       {
-        "bytes": 7600,
+        "bytes": 7641,
         "path": "release/verify_release.py",
-        "sha256": "f97f0093ab5e86c598305c5954cea538ac8e77030f24f321779b737c51d0038d"
+        "sha256": "e7dcfbf530835ec5fdc54b0580d20f2b74f826d3ff52baa3ce32dd9e4bcbb119"
       },
       {
-        "bytes": 15721,
+        "bytes": 15293,
         "path": "sections/01-introduction.tex",
-        "sha256": "af035a055642825339676038519b08dad6f01702aa6e45a8f29cf793ce353ce2"
+        "sha256": "a3d2bd9fc00edffab79a26e57dd64328eb8832739ce73a06644210ee7237414a"
       },
       {
         "bytes": 6200,
@@ -56,44 +56,44 @@
         "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
       },
       {
-        "bytes": 26238,
+        "bytes": 26296,
         "path": "sections/03-lu-rigidity.tex",
-        "sha256": "ee5a674bc4daee29e83b21270901bb79a42a472571034be5fef191a6b54e4f8e"
+        "sha256": "3e2bcbf38e92981524d1f6d914d2b9adeab8e9e3ae84292d3a0fdf17d0d05124"
       },
       {
-        "bytes": 8802,
+        "bytes": 8983,
         "path": "sections/04-pencil-classification.tex",
-        "sha256": "a5ca0f9f4e916287abcc7c6987c7152bf9cc6dcdfb683b66436491aeae079d06"
+        "sha256": "468d483de1b8f8a6d56c30baf4f3b2a90f9fcb5db4afe5de8c7802f36f15691d"
       },
       {
-        "bytes": 5427,
+        "bytes": 5557,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "4d704c89304db03c8da437f60e6df0882867d48ffcbd860250f56dd4e1d77358"
+        "sha256": "8135627a5d8ec3c6cf64742b62be06d85206e4bd9e4e1ca40a67cb0b3ddbaa82"
       },
       {
-        "bytes": 11257,
+        "bytes": 11324,
         "path": "sections/06-lu-invariants.tex",
-        "sha256": "0f28cd06961f28027ac71ff08b50d04e45577e0d9e792582b84e7bf2de080012"
+        "sha256": "9018a08a08747939aeb712d72ead3d6d555223a8ad8120c2d7717d5523cbf77f"
       },
       {
-        "bytes": 1167,
+        "bytes": 1396,
         "path": "sections/07-conclusion.tex",
-        "sha256": "c1df5073e07c6e3e7ba65eea4ac66e1e9eaae29267f861abbaa6e086c19201c0"
+        "sha256": "73ffcb45cd59e6fa4ee9c4c626f43dd5799d27e1cb00a4bc29d01f44fe041876"
       },
       {
-        "bytes": 6151,
+        "bytes": 6203,
         "path": "sections/07-transport-sheaf.tex",
-        "sha256": "cba28a365726929dff6ee2363a385f2d99026a1829150696bcc06598293e0da3"
+        "sha256": "5b5f93233a32568dc292b41299d611e4c63537bb23c99af1aa9334b499138a47"
       },
       {
-        "bytes": 8011,
+        "bytes": 8111,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "e68ca9aeaa1265898e17326c8fa7796fcf61b72b83de52172d574760280e7164"
+        "sha256": "14884b97d8f0e605833f1b5b9cbbb09e60ef2f33160e8c0ff72ce9325199698f"
       },
       {
-        "bytes": 3904,
+        "bytes": 3936,
         "path": "sections/09-party-extensions.tex",
-        "sha256": "da0577d9f5dfde539e95309277a6469d1c3d60efdcf0be8bf6db8d0f0abbe319"
+        "sha256": "67f6a60d0902bf2de19fdf1a4d6147917a7f5d77e06a2f38ba8083a387d3c344"
       },
       {
         "bytes": 3946,
@@ -201,7 +201,7 @@
         "sha256": "15b2a4498238d636ed32c5196b738fcaec677167f74801f30acf7e76d0e26511"
       }
     ],
-    "tree_sha256": "366b973f2c12fdedb42969c04af9956780ca55a6fd5ee58803882962b1b6238f"
+    "tree_sha256": "f3d5df7bad33be1683805447d94db3b776900b16ae70005ea6b0ffbb4c56e853"
   },
   "formal_companion": {
     "artifacts": [

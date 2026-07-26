@@ -1,7 +1,8 @@
 # Paper: Local-unitary rigidity of stabilizer AME states
 
-**Title:** *Local-Unitary Rigidity of Stabilizer AME States and Transversal
-Clifford Groups of MDS--CSS Codes.*
+**Title:** *Local-Unitary Rigidity of Stabilizer AME States:
+Operator-Pushing Atlases and Transversal Logical Clifford Groups of
+MDS--CSS Codes.*
 
 **Lane:** `ame-lu`
 
@@ -13,7 +14,7 @@ encoders are Clifford factor by factor; over odd prime fields the MDS--CSS
 specialization has exact projective
 transversal logical group `F_q^2 ⋊ SL_2(q)`, and diagonal isoduality is the
 exact all-length condition for that group rather than the split-torus
-alternative. The six-party pencil and logical-phase applications retain
+alternative.  The six-party pencil and logical-phase applications retain
 their existing scopes. Public identifiers,
 author metadata, license choice, and submission authorization remain author
 gates.
@@ -21,7 +22,8 @@ gates.
 The formal companion and trust maps distinguish the kernel-checked
 finite-coordinate, minimum-support, diagonal-axis, and Choi cores from the
 remaining stabilizer-state/reduced-density composition.  The previous
-byte-pinned release is superseded by this revision.
+release is superseded; the current content-addressed manifest pins this
+revision.
 
 ## Build
 
