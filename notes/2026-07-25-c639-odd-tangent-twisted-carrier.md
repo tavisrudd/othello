@@ -384,6 +384,10 @@ which do not require a projective Chow-product API:
   `card_nonzeroOrderedConductorPairs` identify the ordered nonzero pair fiber
   with the field minus \(0\) and the conductor label, giving exact cardinality
   \(|K|-2\);
+- `tangentConductorMatching` and
+  `card_nonzeroUnorderedConductorPairs` quotient that fixed-point-free partner
+  involution by coordinate exchange and give the exact near-perfect-matching
+  cardinality \((|K|-2)/2\);
 - `tangentFiberCompatibilityGraph_isClique_iff_injOn`,
   `tangentFiberCompatibilityGraph_clique_card_le`, and
   `exists_tangentFiberCompatibilityGraph_clique_card_eq` identify the
@@ -401,10 +405,11 @@ triple count, or establish the carrier-extension hypotheses from projective
 geometry.  The last terminal checks their logical composition rather than
 asserting those analytic inputs.
 
-The import-only gate audits all fifteen public terminals.  Direct source
-elaboration is warning-free, and the source-local axiom audit reports only
-`propext`, `Classical.choice`, and `Quot.sound`.  The exact Lake build and
-no-build replay await the shared build-owner window.
+The import-only gate audits all sixteen public terminals.  Direct source
+elaboration is warning-free, and the source-local axiom audit of the new
+unordered-count terminal reports only `propext`, `Classical.choice`, and
+`Quot.sound`.  The exact Lake build and no-build replay await the shared
+build-owner window.
 
 ## Outcome and boundary
 

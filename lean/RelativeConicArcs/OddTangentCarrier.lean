@@ -1,5 +1,6 @@
 import RelativeConicArcs.SquareRootCarrier
 import Mathlib.Combinatorics.SimpleGraph.Clique
+import Mathlib.Combinatorics.SimpleGraph.DegreeSum
 import Mathlib.Data.Fintype.Sum
 
 /-!
@@ -11,7 +12,7 @@ formalizes the algebra that is independent of the ambient projective constructio
 
 * uniqueness and rescaling of a square root after a linear factor is chosen;
 * the nonzero zeroth conductor at two distinct parameters on one tangent fiber;
-* the fixed-point-free partner involution and its exact ordered-pair count;
+* the fixed-point-free partner involution and its exact ordered- and unordered-pair counts;
 * the complete multipartite compatibility graph determined by tangent-contact labels; and
 * invariance of first-conductor nonvanishing after multiplication by one common linear factor.
 
@@ -146,9 +147,20 @@ def excludedTangentParametersEquivOrderedPairs (δ : K) :
         p.1.1 + δ = p.1.1 + (p.1.1 + p.1.2) := by rw [hp]
         _ = p.1.2 := by rw [← add_assoc, hself, zero_add]
 
+omit [CharP K 2] in
+/-- Deleting zero and a nonzero conductor label leaves exactly `|K| - 2` tangent parameters. -/
+theorem card_excludedTangentParameters
+    [Fintype K] [DecidableEq K] {δ : K} (hδ : δ ≠ 0) :
+    Fintype.card (ExcludedTangentParameters δ) = Fintype.card K - 2 := by
+  have hcompl :=
+    Fintype.card_subtype_compl (fun κ : K => κ = 0 ∨ κ = δ)
+  have htwo :
+      Fintype.card {κ : K // κ = 0 ∨ κ = δ} = 2 :=
+    Fintype.card_subtype_eq_or_eq_of_ne hδ.symm
+  simpa only [ExcludedTangentParameters, not_or, htwo] using hcompl
+
 /-- For a nonzero label `δ`, the ordered nonzero pairs with normalized conductor `δ` have
-cardinality `|K| - 2`.  Passing from ordered pairs to unordered pairs gives the
-near-perfect-matching count `( |K| - 2 ) / 2`. -/
+cardinality `|K| - 2`. -/
 theorem card_nonzeroOrderedConductorPairs
     [Fintype K] [DecidableEq K] {δ : K} (hδ : δ ≠ 0) :
     Fintype.card (NonzeroOrderedConductorPairs δ) = Fintype.card K - 2 := by
@@ -156,13 +168,106 @@ theorem card_nonzeroOrderedConductorPairs
     Fintype.card (NonzeroOrderedConductorPairs δ) =
         Fintype.card (ExcludedTangentParameters δ) :=
       Fintype.card_congr (excludedTangentParametersEquivOrderedPairs δ).symm
-    _ = Fintype.card K - 2 := by
-      have hcompl :=
-        Fintype.card_subtype_compl (fun κ : K => κ = 0 ∨ κ = δ)
-      have htwo :
-          Fintype.card {κ : K // κ = 0 ∨ κ = δ} = 2 :=
-        Fintype.card_subtype_eq_or_eq_of_ne hδ.symm
-      simpa only [ExcludedTangentParameters, not_or, htwo] using hcompl
+    _ = Fintype.card K - 2 := card_excludedTangentParameters hδ
+
+/-- The partner map preserves the tangent parameters left after deleting zero and `δ`. -/
+def excludedTangentPartner (δ : K) :
+    ExcludedTangentParameters δ → ExcludedTangentParameters δ :=
+  fun κ =>
+    ⟨tangentConductorPartner δ κ.1,
+      tangentConductorPartner_ne_zero κ.property.2,
+      by
+        intro h
+        apply κ.property.1
+        apply add_right_cancel (b := δ)
+        simpa [tangentConductorPartner] using h⟩
+
+/-- The partner map on the reduced tangent-parameter set is an involution. -/
+theorem excludedTangentPartner_involutive (δ : K) :
+    Function.Involutive (excludedTangentPartner δ) := by
+  intro κ
+  apply Subtype.ext
+  exact tangentConductorPartner_involutive δ κ.1
+
+/-- For a nonzero label, the reduced partner involution has no fixed point. -/
+theorem excludedTangentPartner_ne_self
+    {δ : K} (hδ : δ ≠ 0) (κ : ExcludedTangentParameters δ) :
+    excludedTangentPartner δ κ ≠ κ := by
+  intro h
+  exact tangentConductorPartner_ne_self hδ (congrArg Subtype.val h)
+
+/-- The conductor matching joins each reduced tangent parameter to its unique partner.  Its edges
+are the unordered nonzero parameter pairs with sum `δ`. -/
+def tangentConductorMatching (δ : K) :
+    SimpleGraph (ExcludedTangentParameters δ) :=
+  SimpleGraph.fromRel fun κ μ => μ = excludedTangentPartner δ κ
+
+/-- Adjacency in the finite conductor matching is decidable when equality in the field is
+decidable. -/
+instance instDecidableRelTangentConductorMatching
+    [DecidableEq K] (δ : K) :
+    DecidableRel (tangentConductorMatching δ).Adj := by
+  unfold tangentConductorMatching
+  infer_instance
+
+/-- Adjacency in the conductor matching is equality with the partner parameter. -/
+theorem tangentConductorMatching_adj_iff
+    {δ : K} (hδ : δ ≠ 0) (κ μ : ExcludedTangentParameters δ) :
+    (tangentConductorMatching δ).Adj κ μ ↔
+      μ = excludedTangentPartner δ κ := by
+  rw [tangentConductorMatching, SimpleGraph.fromRel_adj]
+  constructor
+  · rintro ⟨_, h | h⟩
+    · exact h
+    · have hpartner := congrArg (excludedTangentPartner δ) h
+      have hreverse : excludedTangentPartner δ κ = μ := by
+        simpa only [excludedTangentPartner_involutive δ μ] using hpartner
+      exact hreverse.symm
+  · intro h
+    refine ⟨?_, Or.inl h⟩
+    intro hκμ
+    apply excludedTangentPartner_ne_self hδ κ
+    calc
+      excludedTangentPartner δ κ = μ := h.symm
+      _ = κ := hκμ.symm
+
+/-- Every reduced tangent parameter has degree one in the conductor matching. -/
+theorem tangentConductorMatching_degree_eq_one
+    [Fintype K] [DecidableEq K]
+    {δ : K} (hδ : δ ≠ 0) (κ : ExcludedTangentParameters δ) :
+    (tangentConductorMatching δ).degree κ = 1 := by
+  classical
+  apply Finset.card_eq_one.mpr
+  refine ⟨excludedTangentPartner δ κ, ?_⟩
+  ext μ
+  simp only [SimpleGraph.mem_neighborFinset, tangentConductorMatching_adj_iff hδ,
+    Finset.mem_singleton]
+
+/-- Unordered nonzero parameter pairs whose normalized squared conductor is `δ`. -/
+abbrev NonzeroUnorderedConductorPairs (δ : K) : Type _ :=
+  (tangentConductorMatching δ).edgeSet
+
+/-- For a nonzero label `δ`, the unordered nonzero pairs with normalized conductor `δ` have
+cardinality `(|K| - 2) / 2`.  They are the edges of a near-perfect matching on the nonzero
+tangent parameters. -/
+theorem card_nonzeroUnorderedConductorPairs
+    [Fintype K] [DecidableEq K] {δ : K} (hδ : δ ≠ 0) :
+    Fintype.card (NonzeroUnorderedConductorPairs δ) =
+      (Fintype.card K - 2) / 2 := by
+  classical
+  rw [(tangentConductorMatching δ).card_edgeSet]
+  have hdouble :
+      2 * (tangentConductorMatching δ).edgeFinset.card =
+        Fintype.card K - 2 := by
+    calc
+      2 * (tangentConductorMatching δ).edgeFinset.card =
+          ∑ κ, (tangentConductorMatching δ).degree κ :=
+        (tangentConductorMatching δ).sum_degrees_eq_twice_card_edges.symm
+      _ = Fintype.card (ExcludedTangentParameters δ) := by
+        simp only [tangentConductorMatching_degree_eq_one hδ, Finset.sum_const,
+          Finset.card_univ, smul_eq_mul, mul_one]
+      _ = Fintype.card K - 2 := card_excludedTangentParameters hδ
+  omega
 
 end CharacteristicTwoAlgebra
 
