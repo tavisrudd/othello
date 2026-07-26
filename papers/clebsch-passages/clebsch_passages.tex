@@ -24,8 +24,6 @@
 \newcommand{\PSL}{\operatorname{PSL}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\claimid}[1]{\textnormal{\texttt{#1}}}
-
 \title{Arithmetic and harmonic realizations of the Clebsch cubic}
 \author{Tavis Rudd}
 \date{July 2026}
@@ -34,24 +32,23 @@
 \maketitle
 
 \begin{abstract}
-The Clebsch matching geometry has two orientations, first separated by a
-cubic observable.  We determine the rational square class of Hitchin's
-ordered-icosahedron double cover: its function field is obtained by adjoining
+We determine the rational square class of Hitchin's degree-two incidence
+cover of harmonic cubics.  Its function field is obtained by adjoining
 \(\sqrt{5J_0}\), and on the Clebsch four-space
-\(J_0=16\sigma_3^2\).  The nonbranch Clebsch fibre is therefore the constant
-golden torsor \(\Spec\Q(\sqrt5)\).  Its explicit exchanger has good reduction
-at \(11\), where its nonsquare spinor class is the finite Clebsch sheet
-involution.  An equivariant argument places the signed matching cubic on
-the line \(\langle\sigma_3\rangle\) over \(\F_{11}\).  In characteristic
-zero, the same integral cubic line is realized by the degree-six Gaunt invariant on the
-four-dimensional summand of the ten icosahedral face-axis harmonics, with
-exact restriction
+\(J_0=16\sigma_3^2\); the nonbranch restriction is therefore the constant
+golden torsor \(\Spec\Q(\sqrt5)\).  The two configurations over the cubic
+\(xyz\) are conjugate over \(\Q(\sqrt5)\), and their exchanger has
+nonsquare spinor class after reduction modulo \(11\).  Independently, the
+degree-six zonal harmonics on the ten icosahedral face axes contain the
+Clebsch four-space as their Petersen eigenspace, and their normalized
+spherical cubic restricts exactly as
 \[
  \frac1{4\pi}\int_{S^2}F_y^3
  =-\frac{784000}{1247103}\sigma_3(y).
 \]
-Thus one cubic line links the arithmetic orientation fibre, its finite
-matching specialization, and a standard spherical-harmonic observable.
+Both results are expressed by the cubic \(\sigma_3\) on the same
+four-space; no integral comparison between the two constructions is
+asserted.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch configuration; Hitchin cover;
@@ -64,10 +61,8 @@ Gaunt invariant.
 
 \input{sections/01-introduction}
 \input{sections/02-orientation-cover}
-\input{sections/03-clebsch-cubic}
 \input{sections/04-arithmetic-specialization}
 \input{sections/05-harmonic-realization}
-\input{sections/07-consequences}
 \input{sections/08-verification}
 \input{sections/09-conclusion}
 \input{sections/10-references}

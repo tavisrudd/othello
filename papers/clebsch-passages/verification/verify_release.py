@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import subprocess
 from pathlib import Path
 
@@ -11,16 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 PAPER = ROOT / "papers" / "clebsch-passages"
 PAPERS = ROOT / "papers"
-
-C651_HASHES = {
-    "notes/2026-07-26-c651-hitchin-tensor-bridge.py":
-        "dfb2993b072bfd4eceab77aaad8cfe760771b654d8e4c0d05c065ef9f386e041",
-    "notes/2026-07-26-c651-hitchin-tensor-bridge-replay.py":
-        "0ee0d31d189cb69872b8996329fc289c829724de090fe1846073ea0a402311fb",
-    "notes/2026-07-26-c651-hitchin-tensor-bridge.json":
-        "9f93ccdc80c757eb78078e479c8107c0108980fb8b4daca5d1ba389072aa17e9",
-}
-
 
 def run(name: str, command: list[str], cwd: Path = ROOT) -> None:
     completed = subprocess.run(
@@ -35,16 +24,6 @@ def run(name: str, command: list[str], cwd: Path = ROOT) -> None:
         tail = "\n".join(completed.stdout.splitlines()[-12:])
         raise SystemExit(f"Paper III release: FAIL [{name}]\n{tail}")
     print(f"Paper III release: PASS [{name}]")
-
-
-def check_c651_hashes() -> None:
-    for relative, expected in C651_HASHES.items():
-        actual = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
-        if actual != expected:
-            raise SystemExit(
-                f"Paper III release: FAIL [C651 hashes] {relative}: {actual}"
-            )
-    print(f"Paper III release: PASS [C651 hashes: {len(C651_HASHES)} files]")
 
 
 def check_latex_log() -> None:
@@ -79,15 +58,6 @@ def main() -> int:
         PAPER,
     )
 
-    check_c651_hashes()
-    run(
-        "finite tensor primary",
-        ["python3", "notes/2026-07-26-c651-hitchin-tensor-bridge.py", "--check"],
-    )
-    run(
-        "finite tensor independent replay",
-        ["python3", "notes/2026-07-26-c651-hitchin-tensor-bridge-replay.py"],
-    )
     for stem, label in (
         ("arithmetic_cover", "arithmetic cover"),
         ("harmonic_clebsch", "harmonic bridge"),

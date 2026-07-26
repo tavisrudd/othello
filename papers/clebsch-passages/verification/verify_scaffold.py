@@ -24,7 +24,6 @@ ALLOWED_STATUSES = {
 CLAIM_RE = re.compile(r"^[A-Z]+-[0-9]+$")
 OWNER_RE = re.compile(r"^C[0-9]+$")
 INPUT_RE = re.compile(r"\\input\{([^}]+)\}")
-CLAIM_USE_RE = re.compile(r"\\claimid\{([^}]+)\}")
 
 
 def require(condition: bool, message: str) -> None:
@@ -62,10 +61,8 @@ def main() -> None:
         (PAPER / f"{relative}.tex").read_text(encoding="utf-8")
         for relative in inputs
     )
-    used = set(CLAIM_USE_RE.findall(section_text))
-    require(used == set(ids),
-            f"claim-ID mismatch: undeclared={sorted(used - set(ids))}, "
-            f"unused={sorted(set(ids) - used)}")
+    require("\\claimid" not in source + section_text,
+            "internal claim identifier appears in manuscript source")
 
     open_statuses = {"gated", "conditional"}
     has_open = any(claim["status"] in open_statuses for claim in claims)

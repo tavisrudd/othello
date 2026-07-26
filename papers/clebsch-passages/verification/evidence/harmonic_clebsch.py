@@ -175,17 +175,31 @@ def surd_data(value: Surd) -> list[str]:
 
 def generate() -> dict[str, object]:
     axes = dodecahedral_axes()
-    gram = [
+    axis_labels = [
+        [1, 2], [1, 3], [1, 4], [1, 5], [3, 4],
+        [2, 5], [4, 5], [2, 3], [3, 5], [2, 4],
+    ]
+    kernel = [
         [p6(s_scale(dot(left, right), Q(1, 3))) for right in axes]
         for left in axes
     ]
     allowed = {s(1), s(Q(47, 243)), s(Q(-65, 243))}
-    assert {value for row in gram for value in row} == allowed
+    assert {value for row in kernel for value in row} == allowed
     adjacency = [
-        [int(gram[i][j] == s(Q(-65, 243))) for j in range(10)]
+        [int(kernel[i][j] == s(Q(-65, 243))) for j in range(10)]
         for i in range(10)
     ]
     assert all(sum(row) == 3 for row in adjacency)
+    assert all(
+        adjacency[i][j]
+        == int(i != j and set(axis_labels[i]).isdisjoint(axis_labels[j]))
+        for i in range(10)
+        for j in range(10)
+    )
+    spherical_gram = [
+        [s_scale(value, Q(1, 13)) for value in row]
+        for row in kernel
+    ]
 
     weights = [3] * 4 + [-2] * 6
     assert [
@@ -204,14 +218,21 @@ def generate() -> dict[str, object]:
     assert scalar == s(Q(-784000, 1247103))
 
     return {
-        "schema": "clebsch-harmonic-certificate-v1",
+        "schema": "clebsch-harmonic-certificate-v2",
         "field": "Q(sqrt(5)) represented as [rational, sqrt(5)-coefficient]",
         "axis_count": len(axes),
+        "axis_labels": axis_labels,
         "axes": [[surd_data(coordinate) for coordinate in axis] for axis in axes],
-        "gram": [[surd_data(value) for value in row] for row in gram],
+        "kernel_matrix": [[surd_data(value) for value in row] for row in kernel],
+        "spherical_gram_matrix": [
+            [surd_data(value) for value in row] for row in spherical_gram
+        ],
         "petersen_adjacency": adjacency,
         "petersen_spectrum": {"3": 1, "1": 5, "-2": 4},
-        "gram_spectrum": {"110/81": 1, "28/81": 5, "140/81": 4},
+        "kernel_spectrum": {"110/81": 1, "28/81": 5, "140/81": 4},
+        "spherical_gram_spectrum": {
+            "110/1053": 1, "28/1053": 5, "140/1053": 4
+        },
         "clebsch_witness": weights,
         "sphere_average_F2": fraction_text(norm[0]),
         "sphere_average_F3": fraction_text(cubic[0]),

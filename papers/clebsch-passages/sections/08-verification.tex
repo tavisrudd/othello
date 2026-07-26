@@ -1,50 +1,20 @@
-\section{Verification and trust}
+\section{Reproducibility and data availability}
 \label{sec:verification}
 
-The proof surface distinguishes conceptual arguments, classical inputs,
-and exact audits.  Human proofs carry the theorem; certificates check only
-the displayed finite matrices, carrier data, and arithmetic constants.  The
-machine-readable ledger in
-\path{verification/trust_manifest.json}
-records the proof mode and evidence for every manuscript claim.
+The square-class argument and both specialization propositions are proved
+in the text from Hitchin's incidence calculation and the displayed
+equations.  A paper-local exact-arithmetic bundle independently checks the
+golden configurations, the exchanger, and its spinor decomposition.
 
-For the finite tensor bridge, invariant theory reduces the conclusion to
-one nonzero scalar on the unique cubic line.  The displayed intertwiner and
-one witness determine that scalar; two exact implementations audit the
-\(22\) orbit vectors, the sheet signs, all \(60\) equivariance equations,
-and the contraction.  A Lean terminal separately checks the final literal
-\(4^3\)-tensor equality over \(\F_{11}\), but it is not part of the release
-gate and does not formalize the geometric or representation-theoretic
-argument.
+A second paper-local bundle reconstructs the ten axes over
+\(\Q(\sqrt5)\), distinguishes the reproducing kernel from the normalized
+spherical Gram matrix, verifies the Petersen labeling, and evaluates the
+quadratic and cubic moments.  Its independent replay uses a separate dense
+polynomial representation and checks the Wigner \(3j\) conversion.  Neither
+calculation uses floating-point arithmetic.
 
-The harmonic bridge likewise has a primary exact generator, a canonical
-JSON certificate, and a separate replay.  Both reconstruct the ten
-face axes over \(\Q(\sqrt5)\), the full Gram and Petersen matrices, and
-the quadratic and cubic spherical moments.  The replay separately checks
-the Petersen minimal polynomial and the factorial formula for the Wigner
-\(3j\)-symbol.  Neither route uses floating-point arithmetic.
-
-The arithmetic specialization is proved in the text.  Its compact
-certificate checks only the six projective substitutions, the comparison
-and reflection matrices.  The evidence programs also audit additional
-finite carrier data that are not used by this paper.  Neither route is used
-to infer the golden field or the spinor formula.  The exact commands are
-\begin{verbatim}
-python3 verification/evidence/arithmetic_cover.py --check
-python3 verification/evidence/arithmetic_cover_replay.py
-sha256sum -c verification/evidence/arithmetic_cover.sha256
-\end{verbatim}
-run from the paper directory.  The integral model and novelty claims are
-established by the source audit and the scheme-theoretic argument in
-Section~\ref{sec:cover}, not by a certificate.  That argument proves the
-rational \(5\)-twist and the abstract integral quadratic algebra, while
-retaining an unspecified finite bad set for comparison with the geometric
-incidence model.
-
-The aggregate runner checks the frozen identity of all seven theorem-like
-statements, the claim-ledger correspondence, the primary and independent
-exact audits, and a warning-free manuscript build.  The command
-\begin{verbatim}
-python3 verification/verify_release.py
-\end{verbatim}
-is run from the paper directory.
+The claim/evidence map, exact programs, canonical certificates, checksums,
+toolchain requirements, and aggregate replay command are included in the
+\texttt{verification} directory distributed with the paper.  The aggregate
+runner also checks the four theorem-like statements against their frozen
+identity and requires a warning-free manuscript build.

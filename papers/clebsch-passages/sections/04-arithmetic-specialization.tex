@@ -2,9 +2,9 @@
 \label{sec:arithmetic}
 
 The arithmetic exchange is already visible on the cubic \(xyz\).  Its two
-ordered icosahedra are Galois conjugate over \(\Q(\sqrt5)\); modulo \(11\)
-they become two rational Clebsch parents, and the Galois exchange becomes
-the nontrivial spinor class.
+icosahedral six-axis configurations are Galois conjugate over
+\(\Q(\sqrt5)\); modulo \(11\) they are rational, and the Galois exchange
+has nontrivial spinor class.
 
 \subsection{The golden fibre}
 
@@ -16,15 +16,16 @@ Let \(t^2-t-1=0\), and put
  & [t:-1:0],[-t:-1:0]\}\subset\mathbf P^2.
 \end{aligned}
 \]
-These six points represent the six opposite vertex pairs of an
-icosahedron.
+These six projective points are its axes through opposite vertices.  Thus
+an icosahedral configuration here means the unordered six-set \(I_t\);
+the incidence cover remembers which of the two conjugate six-sets lies
+over the cubic.
 
 \begin{proposition}[Golden fibre]\label{prop:golden-fibre}
-\claimid{HC-2}.
 Over a field of characteristic different from \(2\) and \(5\), the points
 of \(I_t\) lie on \(xyz=0\), have a common nonzero norm, have normalized
 squared inner product \(1/5\), and form a six-arc.  The two configurations
-over \(\Q\) are therefore defined over
+are conjugate geometric configurations defined over
 \[
  \Q[t]/(t^2-t-1)=\Q(\sqrt5)
 \]
@@ -68,34 +69,10 @@ two ordered icosahedra.
 \subsection{Reduction modulo eleven}
 
 The roots of \(t^2-t-1\) in \(\F_{11}\) are \(4\) and \(8\).  For the
-working Clebsch arc
-\[
-\begin{aligned}
- A=\{&
- [1:10:0],[1:9:1],[1:4:7],\\
- & [1:8:5],[0:1:4],[1:1:7]\},
-\end{aligned}
-\]
-define
-\[
-M_4=\begin{pmatrix}1&4&7\\5&10&3\\1&8&1\end{pmatrix},
-\qquad
-M_8=\begin{pmatrix}4&5&5\\9&10&7\\4&7&10\end{pmatrix}.
-\]
-Six projective substitutions give
-\[
- M_4I_4=A,\qquad M_8I_8=A,
-\]
-and \(\det M_4=1,\ \det M_8=9\).  Furthermore,
-\[
- M_8^{-1}M_4=3R
-\]
-in \(\operatorname{GL}_3(\F_{11})\).  Thus forgetting the ordered parent identifies
-both configurations with the same unmarked Clebsch arc, while their
-relative projectivity is the reduction of the golden exchanger.
+displayed equations for \(I_t\) and \(R\) therefore reduce directly to two
+rational configurations \(I_4,I_8\) exchanged by \(R\).
 
 \begin{proposition}[Spinor specialization]\label{prop:spinor-specialization}
-\claimid{HC-4}.
 The reduction of \(R\) represents the nontrivial element of
 \[
  T_{11}=\operatorname{PGL}_2(11)/\PSL_2(11).

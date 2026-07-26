@@ -1,26 +1,23 @@
 \section{Introduction}
 
-The Clebsch matching configuration has two sheets.  Forgetting the sheet
-retains the unordered matching data; recovering it requires an odd
-observable.  Over \(\F_{11}\) that first observable is a signed cubic tensor
-on a ten-dimensional matching quotient.  We ask whether the orientation and
-its cubic have a characteristic-zero source.
+Hitchin associated to a general harmonic cubic two icosahedral
+six-axis configurations \cite{HitchinIcosahedron,HitchinBundles}.  Retaining
+one of the two configurations gives a degree-two incidence cover of the
+projective seven-space of harmonic cubics.  We determine its rational square
+class and then study a separate occurrence of the same Clebsch invariant in
+degree-six spherical harmonics.
 
-Hitchin's incidence between harmonic cubics and ordered icosahedra supplies
-the double cover.  Let \(H\) be the rational seven-space of harmonic cubics,
-let \(J_0\) denote Hitchin's invariant sextic, and write
+Let \(H\) be the rational seven-space of harmonic cubics, let \(J_0\) denote
+Hitchin's invariant sextic, and write
 \[
  V=\{(y_1,\ldots,y_5):\textstyle\sum_i y_i=0\},\qquad
  \sigma_3(y)=\frac13\sum_i y_i^3
 \]
-for the Clebsch four-space and its invariant cubic.  The following theorem
-gives the arithmetic and harmonic realizations of the same cubic line.
+for the Clebsch four-space and its invariant cubic.
 
-\begin{theorem}[Arithmetic orientation and harmonic realization]
-\label{thm:main}
-\claimid{MAIN-1}.
-\begin{enumerate}
-\item The function field of Hitchin's ordered-icosahedron incidence cover is
+\begin{theorem}[Arithmetic incidence cover]
+\label{thm:arithmetic-main}
+The function field of Hitchin's incidence cover is
 \[
  \Q(\mathbf P(H))\bigl(\sqrt{5J_0}\bigr),
 \qquad J_0|_V=16\sigma_3^2.
@@ -31,52 +28,44 @@ golden torsor
  D(\sigma_3)\times_{\Spec\Q}\Spec\Q(\sqrt5)
  \longrightarrow D(\sigma_3).
 \]
-The explicit fibre over \(xyz\) has good reduction at \(11\): its Galois
-exchanger reduces to the nontrivial class
+The fibre over \(xyz\) consists of two conjugate icosahedral configurations
+defined over \(\Q(\sqrt5)\).  Their Galois exchanger has good reduction at
+\(11\), where its spinor class is the nontrivial element of
 \[
- T_{11}=\operatorname{PGL}_2(11)/\operatorname{PSL}_2(11),
+\operatorname{PGL}_2(11)/\operatorname{PSL}_2(11).
 \]
-while an explicit \(A_5\)-equivariant identification places the signed
-matching cubic on the line \(\langle\sigma_3\rangle\).
-\item The zonal degree-six harmonics on the ten axes through opposite
-icosahedral faces contain \(V\) as their Petersen \((-2)\)-eigenspace.
-Label the unit face axes by pairs \(\{i,j\}\), and put
+\end{theorem}
+
+\begin{theorem}[Degree-six harmonic restriction]
+\label{thm:harmonic-main}
+Let \(u_{ij}\), \(1\leq i<j\leq5\), be the explicitly labelled unit axes
+through opposite icosahedral faces in \eqref{eq:face-axis-labels}, and set
 \[
  F_y(\omega)=\sum_{i<j}(y_i+y_j)P_6(u_{ij}\mathbin{\cdot}\omega),
  \qquad
  P_6(s)=\frac{231s^6-315s^4+105s^2-5}{16}.
 \]
-On this four-space the spherical Gaunt cubic is
+The coefficient vectors \((y_i+y_j)_{i<j}\) form the Petersen
+\((-2)\)-eigenspace, and their zonal harmonics give an injective copy of
+\(V\) in \(\mathcal H_6\).  With
+\(\langle f,g\rangle=(4\pi)^{-1}\int_{S^2}fg\), the spherical cubic on this
+copy is
 \[
  \frac1{4\pi}\int_{S^2}F_y(\omega)^3\,d\omega
  =-\frac{784000}{1247103}\sigma_3(y).
 \]
-Equivalently, the Clebsch cubic line is the four-channel restriction of the
-standard degree-six Steinhardt cubic.
-\end{enumerate}
 \end{theorem}
 
-The first assertion determines the rational square class of Hitchin's known
-degree-two cover by evaluating its golden fibre.  It does not claim an
-integral incidence model at every prime: the abstract equation
-\(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), while comparison
-with the geometric incidence variety is proved only after inverting an
-unspecified integer.  The statement at \(11\) concerns the explicitly
-integral golden fibre and exchanger, so it does not depend on a global
-good-reduction claim.
+The arithmetic theorem fixes the unknown constant in the square class of
+Hitchin's known cover by evaluating one golden fibre.  Its statement at
+\(11\) concerns only that explicit fibre and exchanger.  The abstract
+equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
+comparison with the geometric incidence variety is proved only after
+inverting an unspecified integer.
 
-The second assertion gives an exact analytic realization on the
-four-dimensional nontrivial summand of the face-axis module.  The displayed
-characteristic-zero scalar has denominator divisible by \(11\).  The
-cross-characteristic conclusion is therefore equality of the integral line
-\(\langle\sigma_3\rangle\), not reduction of one scalar.
-
-The proof has four steps.  Section~\ref{sec:cover} fixes the square class of
-the rational cover and separates its three integral boundaries.
-Section~\ref{sec:cubic} constructs the equivariant finite tensor bridge.
-Section~\ref{sec:arithmetic} computes the golden exchanger and its spinor
-class at \(11\).  Section~\ref{sec:harmonic} constructs the degree-six
-channel and evaluates its Gaunt cubic.  Section~\ref{sec:consequences}
-states the exact common-line conclusion, and
-Section~\ref{sec:verification} records which explicit data receive
-independent exact audits.
+The harmonic theorem uses the same polynomial \(\sigma_3\) on \(V\), but it
+is logically independent of the incidence cover.  The coefficient
+\(-784000/1247103\) has denominator divisible by \(11\), and this paper
+constructs no common integral lattice from which the two realizations could
+be obtained by base change.  The relation proved here is their common base
+four-space and invariant polynomial, not a specialization between them.

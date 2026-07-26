@@ -205,11 +205,21 @@ def main() -> None:
         [legendre6(inner(left, right).scale(Q(1, 3))) for right in face_axes]
         for left in face_axes
     ]
+    axis_labels = [
+        [1, 2], [1, 3], [1, 4], [1, 5], [3, 4],
+        [2, 5], [4, 5], [2, 3], [3, 5], [2, 4],
+    ]
     adjacency = [
         [int(gram[i][j] == Root5(Q(-65, 243))) for j in range(10)]
         for i in range(10)
     ]
     assert all(sum(row) == 3 for row in adjacency)
+    assert all(
+        adjacency[i][j]
+        == int(i != j and set(axis_labels[i]).isdisjoint(axis_labels[j]))
+        for i in range(10)
+        for j in range(10)
+    )
     minimal = matmul(
         matmul(matrix_add(adjacency, -3), matrix_add(adjacency, -1)),
         matrix_add(adjacency, 2),
@@ -244,7 +254,11 @@ def main() -> None:
     assert certificate["normalized_witness"] == "-120*sqrt(273)/3553"
     assert certificate["wigner_3j_6_6_6_0_0_0"] == "-20/sqrt(46189)"
     assert certificate["integral_to_standard_W6"] == "-130/sqrt(3553*pi)"
+    assert certificate["axis_labels"] == axis_labels
     assert certificate["petersen_adjacency"] == adjacency
+    assert certificate["spherical_gram_spectrum"] == {
+        "110/1053": 1, "28/1053": 5, "140/1053": 4
+    }
     print(
         "independent harmonic replay: OK "
         "(10 axes, Petersen spectrum 3^1 1^5 (-2)^4, "

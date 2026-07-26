@@ -17,13 +17,10 @@ BEGIN_RE = re.compile(
 LABEL_RE = re.compile(r"\\label\{([^}]+)\}")
 INPUT_RE = re.compile(r"\\input\{([^}]+)\}")
 EXPECTED_LABELS = (
-    "thm:main",
-    "lem:localized-odd",
-    "thm:rational-cover",
-    "thm:finite-tensor-bridge",
+    "thm:arithmetic-main",
+    "thm:harmonic-main",
     "prop:golden-fibre",
     "prop:spinor-specialization",
-    "thm:harmonic-clebsch",
 )
 
 
@@ -94,7 +91,7 @@ def extract(main: Path) -> dict[str, object]:
     if labels != EXPECTED_LABELS:
         raise ValueError(f"statement labels changed: {labels!r}")
     return {
-        "schema": "clebsch-orientation-statement-identity-v1",
+        "schema": "clebsch-orientation-statement-identity-v2",
         "main_source": main.name,
         "main_source_sha256": hashlib.sha256(main.read_bytes()).hexdigest(),
         "section_sha256": source_hashes,

@@ -1,49 +1,28 @@
 {
-  "schema": "clebsch-passages-trust-manifest-v1",
+  "schema": "clebsch-passages-trust-manifest-v2",
   "paper": "Arithmetic and harmonic realizations of the Clebsch cubic",
   "release_ready": true,
   "integral_boundary": {
     "abstract_quadratic_algebra": "finite etale on D(10 J_Z)",
     "classical_invariant_presentation": "over Z[1/30]",
     "geometric_incidence_comparison": "over Z[1/N] for an unspecified nonzero N divisible by 2, 3, and 5",
-    "mod_11_scope": "good reduction of the explicit golden fibre and exchanger, not a global integral incidence comparison"
+    "mod_11_scope": "good reduction of the explicit golden fibre and exchanger, with no matching-sheet identification and no global integral incidence comparison"
   },
   "claims": [
     {
-      "id": "MAIN-1",
-      "statement": "The arithmetic orientation cover and the degree-six harmonic realization meet on the integral Clebsch cubic line, with the explicit golden fibre specializing at 11 to the finite sheet bit.",
-      "status": "proven",
-      "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
-      "owner": "C668",
-      "evidence": [
-        "papers/clebsch-passages/sections/02-orientation-cover.tex",
-        "papers/clebsch-passages/sections/03-clebsch-cubic.tex",
-        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
-        "papers/clebsch-passages/sections/05-harmonic-realization.tex"
-      ]
-    },
-    {
-      "id": "ALG-1",
-      "statement": "Localization at the square of a nonzero odd element splits the involutive algebra into invariant and odd-generator summands.",
-      "status": "proven",
-      "modes": ["conceptual"],
-      "owner": "C579",
-      "evidence": ["papers/clebsch-passages/sections/02-orientation-cover.tex"]
-    },
-    {
-      "id": "HC-1",
-      "statement": "Over Q, the ordered-icosahedron incidence extension has equation w^2=5J0 and J0 restricts to 16 sigma3^2 on the Clebsch chart.",
+      "id": "ARITH-1",
+      "statement": "Over Q, Hitchin's icosahedral incidence extension has equation w^2=5J0, and J0 restricts to 16 sigma3^2 on the Clebsch chart.",
       "status": "proven",
       "modes": ["conceptual", "classical-input"],
       "owner": "C653",
       "evidence": [
-        "papers/clebsch-passages/sections/02-orientation-cover.tex",
-        "notes/2026-07-26-c653-hitchin-integral-novelty-gate.md"
+        "papers/clebsch-passages/sections/01-introduction.tex",
+        "papers/clebsch-passages/sections/02-orientation-cover.tex"
       ]
     },
     {
-      "id": "HC-2",
-      "statement": "The two displayed golden six-arcs form the complete fibre over xyz, and the nonbranch Clebsch cover is the constant golden torsor.",
+      "id": "ARITH-2",
+      "statement": "The fibre over xyz consists of two conjugate golden configurations, and their exchanger reduces modulo 11 with nontrivial spinor class.",
       "status": "certified",
       "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C652",
@@ -56,38 +35,13 @@
       ]
     },
     {
-      "id": "HC-3",
-      "statement": "The signed matching cubic restricts to 4 sigma3 over F_11 under an explicit A5-equivariant isomorphism.",
-      "status": "certified",
-      "modes": ["conceptual", "certificate", "independent-replay"],
-      "owner": "C651",
-      "evidence": [
-        "notes/2026-07-26-c651-hitchin-tensor-bridge.py",
-        "notes/2026-07-26-c651-hitchin-tensor-bridge-replay.py",
-        "notes/2026-07-26-c651-hitchin-tensor-bridge.json"
-      ]
-    },
-    {
-      "id": "HC-4",
-      "statement": "The explicit golden-fibre exchanger has good reduction modulo 11 and represents the finite sheet involution T11.",
-      "status": "certified",
-      "modes": ["conceptual", "certificate", "independent-replay"],
-      "owner": "C652",
-      "evidence": [
-        "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.py",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.json",
-        "papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256"
-      ]
-    },
-    {
-      "id": "PH-1",
-      "statement": "The ten face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with the Clebsch four-space equal to the Petersen minus-two eigenspace.",
+      "id": "HARM-1",
+      "statement": "The ten explicitly labelled face-axis zonal harmonics embed the 1+4+5 permutation module into H_6, with normalized spherical Gram matrix one thirteenth of the reproducing kernel and the Clebsch four-space equal to the Petersen minus-two eigenspace.",
       "status": "certified",
       "modes": ["conceptual", "certificate", "independent-replay"],
       "owner": "C655",
       "evidence": [
+        "papers/clebsch-passages/sections/05-harmonic-realization.tex",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
@@ -95,38 +49,25 @@
       ]
     },
     {
-      "id": "PH-2",
-      "statement": "The degree-six Gaunt cubic restricts to -784000/1247103 times sigma3 on the Clebsch four-channel.",
+      "id": "HARM-2",
+      "statement": "The normalized degree-six spherical cubic restricts to -784000/1247103 times sigma3 on the Clebsch four-space.",
       "status": "certified",
       "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
       "owner": "C655",
       "evidence": [
+        "papers/clebsch-passages/sections/05-harmonic-realization.tex",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
         "papers/clebsch-passages/verification/evidence/harmonic_clebsch.sha256"
-      ]
-    },
-    {
-      "id": "PH-3",
-      "statement": "The Clebsch cubic is the symmetry-resolved four-channel restriction of the standard signed degree-six bond-orientational cubic.",
-      "status": "certified",
-      "modes": ["conceptual", "classical-input", "certificate", "independent-replay"],
-      "owner": "C655",
-      "evidence": [
-        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.py",
-        "papers/clebsch-passages/verification/evidence/harmonic_clebsch_replay.py",
-        "papers/clebsch-passages/verification/evidence/harmonic_clebsch.json",
-        "notes/2026-07-26-c655-clebsch-harmonic-bridge.md"
       ]
     }
   ],
   "boundaries": [
-    "ALG-1, HC-3, and PH-1 through PH-3 are presently proved in manuscript-ready form.",
+    "The arithmetic and harmonic theorems share the Clebsch four-space and the polynomial sigma3; no canonical or integral comparison between the two constructions is claimed.",
     "The checker validates structure and ledger consistency; it does not certify mathematical truth.",
-    "The rational Gaunt scalar has denominator divisible by 11, so HC-3 identifies an integral cubic line rather than a reduced rational normalization.",
-    "The harmonic identity has a task-owned exact certificate, independent replay, and primary-source normalization audit.",
-    "The abstract quadratic algebra is finite etale over D(10J), but comparison with the geometric incidence model is proved only over Z[1/N] for an unspecified N; no claim that every p other than 2 and 5 is incidence-good is made.",
-    "The rational 5-twist is an arithmetic normalization of Hitchin's known degree-two incidence cover, not a new construction of that cover; Dye already proves the square-5 field criterion for Clebsch hexagons."
+    "The harmonic bundle distinguishes the reproducing kernel from the normalized spherical Gram matrix and independently replays the exact moments.",
+    "The abstract quadratic algebra is finite etale over D(10J), but comparison with the geometric incidence model is proved only over Z[1/N] for an unspecified N.",
+    "The rational 5-twist normalizes Hitchin's known degree-two incidence cover; Dye already proves the square-5 field criterion for Clebsch hexagons."
   ]
 }
