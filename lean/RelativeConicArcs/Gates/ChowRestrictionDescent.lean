@@ -10,7 +10,8 @@ factorization of an incident line family, derivation of restricted nonvanishing 
 for a nontrivially indexed family, representative rescaling, the proportional
 paired-factor identity and its square-scalar correction, automatic correction over perfect
 exponent-characteristic-two coefficient rings, and descent of extended linewise roots through a
-jointly detecting restriction family.
+jointly detecting restriction family.  It also checks that equality of squared root values forces
+equality of the root values over a characteristic-two field.
 
 It does not assert the projective incidence hypotheses that produce a factor pairing, an
 interpolation theorem for compatible linewise roots, or joint detection for a particular family
@@ -34,6 +35,8 @@ of projective lines and a particular degree bound.
 #print axioms RelativeConicArcs.dualLinearFactorProduct_rescale
 #print axioms RelativeConicArcs.exists_dualLinearFactorProduct_rescale_eq_sq_of_exists_eq_sq
 #print axioms RelativeConicArcs.exists_dualLinearFactorProduct_rescale_eq_sq_iff
+#print axioms RelativeConicArcs.eq_of_sq_eq_sq_expCharTwo
+#print axioms RelativeConicArcs.eval_eq_of_eval_sq_eq_expCharTwo
 #print axioms RelativeConicArcs.planeLineRestriction_homogeneousLinearPolynomial_scale
 #print axioms RelativeConicArcs.planeLineRestriction_dualLinearFactorProduct
 #print axioms RelativeConicArcs.prod_eq_sq_of_equiv_sum

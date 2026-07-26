@@ -1,6 +1,7 @@
 import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Algebra.Polynomial.Homogenize
 import Mathlib.Algebra.CharP.Lemmas
+import Mathlib.Algebra.CharP.Reduced
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.FieldTheory.Perfect
 
@@ -24,9 +25,10 @@ ambient polynomials.
 For a fixed line parametrization, the module computes restricted binary coefficients, identifies
 their evaluation at `[t : 1]` with incidence at the corresponding plane point, derives injectivity
 of assigned affine parameters from pairwise avoidance, and chooses the nonzero scalars relating an
-incident family of restricted equations to its homogenized affine-node factors.  When every index
-has a distinct companion, pairwise avoidance also proves that the restricted equations are
-nonzero.
+incident family of restricted equations to its homogenized affine-node factors.  For a
+nontrivially indexed family, pairwise avoidance also proves that the restricted equations are
+nonzero.  Equality of squared polynomial-root values forces equality of their values over a
+characteristic-two field.
 
 No projective incidence theorem is asserted here.  In particular, the module does not construct a
 pairing from secants, prove that a chosen family of line parametrizations jointly detects forms of
@@ -617,6 +619,31 @@ theorem exists_dualLinearFactorProduct_rescale_eq_sq_iff
         scale covector
 
 end ProjectiveRepresentativeSquareClass
+
+section CharacteristicTwoRootAgreement
+
+variable {K σ τ : Type*} [Field K] [ExpChar K 2]
+
+/-- In a characteristic-two field, equality of squares forces equality. -/
+theorem eq_of_sq_eq_sq_expCharTwo {x y : K} (h : x ^ 2 = y ^ 2) :
+    x = y := by
+  apply frobenius_inj K 2
+  exact h
+
+/-- If two polynomial roots have squares with the same value at possibly different coordinate
+representatives of one geometric point, then their values agree in characteristic two. -/
+theorem eval_eq_of_eval_sq_eq_expCharTwo
+    (leftRoot : MvPolynomial σ K) (rightRoot : MvPolynomial τ K)
+    (leftPoint : σ → K) (rightPoint : τ → K)
+    (hsquare :
+      MvPolynomial.eval leftPoint (leftRoot ^ 2) =
+        MvPolynomial.eval rightPoint (rightRoot ^ 2)) :
+    MvPolynomial.eval leftPoint leftRoot =
+      MvPolynomial.eval rightPoint rightRoot := by
+  apply eq_of_sq_eq_sq_expCharTwo
+  simpa only [map_pow] using hsquare
+
+end CharacteristicTwoRootAgreement
 
 section SquareRootDescent
 

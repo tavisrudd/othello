@@ -5,9 +5,10 @@ import RelativeConicArcs.CarrierArcBound
 
 This import-only module checks the kernel of coordinate-hyperplane restriction, exact degree growth
 for finite products, the affine degree bound obtained by dehomogenizing a homogeneous binary form,
-bounded-degree detection and exact-threshold classification by pairwise relatively prime degree-one
-divisors, nonsquareness of squarefree nonunits, and the composition of linewise roots with these
-statements into carrier-cardinality and threshold identities.
+coordinate-free projective-zero divisibility for homogeneous binary forms, bounded-degree detection
+and exact-threshold classification by pairwise relatively prime degree-one divisors, nonsquareness
+of squarefree nonunits, and the composition of linewise roots with these statements into
+carrier-cardinality and threshold identities.
 
 It does not assert the projective incidence hypotheses that produce the line divisors, the
 squarefree dual-factor product, or that compatibility at the nodes makes each linewise residual
@@ -18,6 +19,10 @@ divisible by the restricted product of the preceding line equations.
 #print axioms RelativeConicArcs.fintypeProd_X_sub_C_dvd_sub_of_injective_eval_eq
 #print axioms RelativeConicArcs.homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
 #print axioms RelativeConicArcs.natDegree_dehomogenize_le_of_isHomogeneous
+#print axioms RelativeConicArcs.homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero
+#print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZeros
+#print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_eq
+#print axioms RelativeConicArcs.fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_sq_eq
 #print axioms RelativeConicArcs.homogenize_fintypeProd_X_sub_C_dvd_sub_of_isHomogeneous_eval_eq
 #print axioms RelativeConicArcs.homogenize_fintypeProd_X_sub_C_eq_prod_homogenize
 #print axioms RelativeConicArcs.prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C

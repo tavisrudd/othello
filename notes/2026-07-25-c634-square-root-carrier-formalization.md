@@ -173,6 +173,9 @@ ten public terminals.
   proves that this scalar condition is automatic over a perfect coefficient
   ring of exponent characteristic two, hence in particular over every finite
   characteristic-two field;
+- `eq_of_sq_eq_sq_expCharTwo` proves injectivity of squaring over a
+  characteristic-two field, and `eval_eq_of_eval_sq_eq_expCharTwo` applies it
+  to values of two polynomial roots in possibly different line coordinates;
 - `RestrictionFamily.JointlyDetects` states injectivity of the combined
   restriction map;
 - `exists_globalSquareRoot_of_jointlyDetected_extendedRoots` proves descent
@@ -181,7 +184,7 @@ ten public terminals.
   conclusion to the image of Frobenius in exponent characteristic two.
 
 The import-only gate
-`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its twenty-nine public
+`RelativeConicArcs.Gates.ChowRestrictionDescent` audits its thirty-one public
 terminals.
 
 `RelativeConicArcs.CarrierArcBound` formalizes the surviving global algebra:
@@ -201,6 +204,17 @@ terminals.
 - `homogenize_fintypeProd_X_sub_C_eq_prod_homogenize` identifies the
   homogenized node product with the product of its degree-one homogenized
   factors;
+- `homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero`
+  proves coordinate-free divisibility by `a₀X+a₁Y` from homogeneous
+  vanishing at its canonical projective zero `[a₁:-a₀]`, including the point
+  at infinity;
+- `fintypeProd_homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZeros`
+  and
+  `fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_eq`
+  lift this to pairwise relatively prime finite families and to differences
+  of homogeneous forms; the `_sq_eq` variant derives the required root-value
+  agreement automatically from equality of squares in exponent
+  characteristic two;
 - `prod_eq_C_prod_mul_homogenize_fintypeProd_X_sub_C` computes the aggregate
   scalar for factorwise proportional restricted equations, while
   `prod_dvd_of_homogenize_fintypeProd_X_sub_C_dvd_of_proportional` removes
@@ -267,14 +281,14 @@ Lean does not yet check:
 - the passage from projective arc points to the dual-factor product (its
   square status is now representative-independent, although the product
   itself changes by the explicit aggregate scalar);
-- the concrete incidence and nonvanishing argument for the binary coefficient
-  vector of each restricted old line equation;
-- the chart choice which places all required intersections in the affine
-  patch and makes their parameters distinct.  Once these facts are supplied,
-  Lean identifies each restricted equation with its homogenized node factor,
-  absorbs all nonzero scalars, derives the affine degree bound from
-  homogeneity, proves residual product divisibility, constructs quotient-lift
-  corrections, and iterates them over the finite line family;
+- the concrete projective incidence statement identifying the canonical zero
+  of each restricted old line equation with the corresponding intersection,
+  together with nonvanishing and pairwise relative primality of those binary
+  linear forms;
+- the equality of the squared linewise-root values at each concrete
+  intersection.  Lean now converts this directly to root-value agreement by
+  Frobenius injectivity and proves product divisibility without choosing an
+  affine chart;
 - the construction of a linear coordinate change for each concrete projective
   line and the facts that the resulting equations have degree one and are
   pairwise relatively prime;
@@ -293,7 +307,7 @@ standing for them is introduced.
 | Must paired restricted factors be literally equal? | **Settled negatively by the `ej` pass:** projective representatives give proportional factors.  The formal interface now exposes their aggregate scalar. |
 | When do proportional pairs still give a square? | **Settled for the target fields:** the aggregate scalar has a Frobenius preimage over every perfect characteristic-two coefficient ring, including every finite characteristic-two field. |
 | Is the full dual-factor product representative-independent? | **Settled at the invariant strength actually used:** the product changes by the aggregate scalar, so literal equality is false; over a perfect characteristic-two field its square status is invariant under all nonzero representative changes. |
-| Do compatible linewise roots extend? | **Reduced to concrete incidence and chart choice:** agreement at distinctly indexed affine nodes gives homogeneous product divisibility.  Lean now identifies restricted binary evaluation with plane incidence; for a nontrivially indexed family, pairwise avoidance supplies both nonvanishing and injectivity of the node parameters.  Lean simultaneously chooses every nonzero factor scalar and absorbs those scalars at the product level.  Homogeneity supplies the affine-degree bound automatically; restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate.  The remaining gap is verifying incidence and pairwise avoidance for the concrete carrier arrangement and choosing a chart avoiding infinity. |
+| Do compatible linewise roots extend? | **Reduced to concrete projective incidence:** the coordinate-free theorem handles every projective zero, including infinity, and equality of squared root values forces equality of root values in characteristic two.  Pairwise relatively prime restricted line forms therefore divide the residual product without choosing a chart.  Restriction is surjective, the quotient-lift correction is kernel-checked, and the corrections iterate.  The remaining gap is identifying the concrete restricted factors and their projective zeros, proving pairwise relative primality, and verifying equality of the squared values from the ambient Chow restriction. |
 | Do the carrier restrictions detect that ambient form? | **Reduced to concrete projective linear algebra:** restriction-zero is equivalent to divisibility for `X₀ = 0` and every coordinate-transformed hypersurface; line-product detection and the cardinal contradiction are kernel-checked.  The remaining evidence gap is presenting each concrete line by a linear coordinate change, plus pairwise relative primality and the required degree statements. |
 | Why is the dual-factor product nonsquare? | **Reduced:** a pairwise relatively prime product of squarefree factors is formally nonsquare when it is a nonunit.  The remaining evidence gap is irreducibility or squarefreeness and nonunit status for the concrete projective linear factors. |
 | What survives at the exact threshold? | **Settled algebraically:** the difference from the extended ambient square is exactly `C(c)` times the product of the carrier-line equations.  The geometric consequences of this divisor identity remain unexplored. |
@@ -314,12 +328,12 @@ standing for them is introduced.
   unqualified formalization claims.
 - `lean/scripts/guarded-lean
   RelativeConicArcs/ChowRestrictionDescent.lean`: **PASS**, warning-free.
-- The source-local audit of its twenty-nine terminals reports no axioms beyond
+- The source-local audit of its thirty-one terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`; `globalSquareRoot_restricts`
   uses none.
 - `lean/scripts/guarded-lean RelativeConicArcs/CarrierArcBound.lean`:
   **PASS**, warning-free.
-- The source-local audit of its twenty-seven terminals reports no axioms beyond
+- The source-local audit of its thirty-one terminals reports no axioms beyond
   `propext`, `Classical.choice`, and `Quot.sound`;
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`, as does

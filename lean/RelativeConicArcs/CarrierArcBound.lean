@@ -1,12 +1,14 @@
 import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.Algebra.CharP.Reduced
 import Mathlib.Algebra.Polynomial.Div
 import Mathlib.Algebra.Polynomial.Homogenize
 import Mathlib.Algebra.Polynomial.RingDivision
 import Mathlib.Algebra.Squarefree.Basic
 import Mathlib.RingTheory.Coprime.Lemmas
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import RelativeConicArcs.ChowRestrictionDescent
 
 /-!
 # Detection and nonsquareness for square-root carrier bounds
@@ -25,9 +27,11 @@ The extension induction is also formalized: a correction that fixes one new rest
 vanishing on all restrictions already treated produces a simultaneous extension over any finite
 family.  Surjectivity of coordinate-hyperplane restriction constructs that correction whenever
 the new residual is divisible by the restricted product of the previous line equations.  The
-distinct-affine-node factor theorem and its homogenized binary-form version provide the polynomial
-divisibility mechanism; identifying their node factors with the restricted equations remains a
-geometric hypothesis.
+coordinate-free binary-factor theorem proves divisibility from vanishing at canonical projective
+zeros, including points at infinity, and its characteristic-two form derives root-value agreement
+from agreement of squares.  The distinct-affine-node theorem is retained as a normalized
+specialization.  Identifying the concrete restricted factors, their projective zeros, and their
+pairwise relative primality remains geometric.
 -/
 
 namespace RelativeConicArcs
@@ -144,6 +148,201 @@ theorem natDegree_dehomogenize_le_of_isHomogeneous
     _ = F.degreeOf 0 := MvPolynomial.natDegree_finSuccEquiv F
     _ ≤ F.totalDegree := MvPolynomial.degreeOf_le_totalDegree F 0
     _ ≤ degree := hF.totalDegree_le
+
+/-- The involution exchanging the two homogeneous coordinates of a binary form. -/
+private def binaryCoordinateSwap : Fin 2 ≃ Fin 2 :=
+  Equiv.swap 0 1
+
+@[simp]
+private theorem binaryCoordinateSwap_zero : binaryCoordinateSwap 0 = 1 := by
+  decide
+
+@[simp]
+private theorem binaryCoordinateSwap_one : binaryCoordinateSwap 1 = 0 := by
+  decide
+
+/-- If the first coefficient of a nonzero binary linear form is nonzero, vanishing of a
+homogeneous binary form at its projective zero makes the linear form a divisor. -/
+private theorem homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero_of_coeff_zero_ne
+    (a : Fin 2 → K) (F : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (ha0 : a 0 ≠ 0) (hF : F.IsHomogeneous degree)
+    (hvanish : MvPolynomial.eval ![a 1, -a 0] F = 0) :
+    homogeneousLinearPolynomial a ∣ F := by
+  let affine : Polynomial K :=
+    MvPolynomial.aeval ![Polynomial.X, (1 : Polynomial K)] F
+  let node : K := a 1 / (-a 0)
+  have ha0neg : -a 0 ≠ 0 := neg_ne_zero.mpr ha0
+  have haffineDegree : affine.natDegree ≤ degree := by
+    exact natDegree_dehomogenize_le_of_isHomogeneous F degree hF
+  have hhomogenize :
+      Polynomial.homogenize affine degree = F := by
+    apply Polynomial.homogenize_eq_of_isHomogeneous hF
+    simp [affine]
+  have hnodeRoot : affine.eval node = 0 := by
+    have heval :=
+      Polynomial.eval_homogenize haffineDegree ![a 1, -a 0] ha0neg
+    rw [hhomogenize] at heval
+    rw [hvanish] at heval
+    exact (mul_eq_zero.mp heval.symm).resolve_right (pow_ne_zero _ ha0neg)
+  by_cases haffine : affine = 0
+  · rw [← hhomogenize, haffine]
+    simp
+  have hdegreePos : 1 ≤ degree := by
+    have hnatDegreeNe : affine.natDegree ≠ 0 := by
+      intro hdegreeZero
+      have haffineC := Polynomial.eq_C_of_natDegree_eq_zero hdegreeZero
+      apply haffine
+      rw [haffineC] at hnodeRoot ⊢
+      simpa using hnodeRoot
+    omega
+  have hnodeInjective : Function.Injective (fun _ : Unit => node) := by
+    intro i j _
+    exact Subsingleton.elim i j
+  have hdvd :
+      Polynomial.homogenize (Polynomial.X - Polynomial.C node) 1 ∣ F := by
+    rw [← hhomogenize]
+    simpa using
+      homogenize_fintypeProd_X_sub_C_dvd_homogenize_sub_of_injective_eval_eq
+        (fun _ : Unit => node) hnodeInjective affine 0 degree hdegreePos
+        (by simpa using haffineDegree)
+        (fun _ => by simpa using hnodeRoot)
+  obtain ⟨c, hc, hfactor⟩ :=
+    exists_ne_zero_scale_homogeneousLinearPolynomial_eq_C_mul_homogenize_X_sub_C
+      a node
+      (by
+        intro ha
+        apply ha0
+        simpa using congrFun ha 0)
+      (by
+        dsimp [node]
+        field_simp [ha0]
+        ring)
+  rw [hfactor]
+  exact (hc.isUnit.map MvPolynomial.C).mul_left_dvd.mpr hdvd
+
+/-- A nonzero binary linear form divides a homogeneous binary form whenever the latter vanishes at
+the canonical projective zero `[a₁ : -a₀]` of the linear form `a₀X + a₁Y`. -/
+theorem homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero
+    (a : Fin 2 → K) (F : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (ha : a ≠ 0) (hF : F.IsHomogeneous degree)
+    (hvanish : MvPolynomial.eval ![a 1, -a 0] F = 0) :
+    homogeneousLinearPolynomial a ∣ F := by
+  by_cases ha0 : a 0 = 0
+  · have ha1 : a 1 ≠ 0 := by
+      intro ha1
+      apply ha
+      funext i
+      fin_cases i
+      · exact ha0
+      · exact ha1
+    let swappedCoefficient : Fin 2 → K := ![-a 1, -a 0]
+    let swappedForm : MvPolynomial (Fin 2) K :=
+      MvPolynomial.rename binaryCoordinateSwap F
+    have hswappedCoefficient0 : swappedCoefficient 0 ≠ 0 := by
+      simpa [swappedCoefficient] using neg_ne_zero.mpr ha1
+    have hswappedHomogeneous : swappedForm.IsHomogeneous degree := by
+      exact hF.rename_isHomogeneous
+    have hswappedVanish :
+        MvPolynomial.eval
+            ![swappedCoefficient 1, -swappedCoefficient 0] swappedForm = 0 := by
+      rw [show swappedForm = MvPolynomial.rename binaryCoordinateSwap F by rfl]
+      rw [MvPolynomial.eval_rename]
+      have hpoint :
+          (![swappedCoefficient 1, -swappedCoefficient 0] ∘
+              binaryCoordinateSwap) =
+            ![a 1, -a 0] := by
+        funext i
+        fin_cases i <;> simp [swappedCoefficient]
+      rw [hpoint]
+      exact hvanish
+    have hswappedDvd :
+        homogeneousLinearPolynomial swappedCoefficient ∣ swappedForm :=
+      homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero_of_coeff_zero_ne
+        swappedCoefficient swappedForm degree hswappedCoefficient0
+        hswappedHomogeneous hswappedVanish
+    obtain ⟨Q, hQ⟩ := hswappedDvd
+    refine ⟨-(MvPolynomial.rename binaryCoordinateSwap Q), ?_⟩
+    have hrenamed := congrArg (MvPolynomial.rename binaryCoordinateSwap) hQ
+    have hswap :
+        binaryCoordinateSwap ∘ binaryCoordinateSwap = id := by
+      funext i
+      fin_cases i <;> simp
+    have hleft :
+        MvPolynomial.rename binaryCoordinateSwap swappedForm = F := by
+      simp [swappedForm, MvPolynomial.rename_rename, hswap]
+    have hfactor :
+        MvPolynomial.rename binaryCoordinateSwap
+            (homogeneousLinearPolynomial swappedCoefficient) =
+          -homogeneousLinearPolynomial a := by
+      simp [swappedCoefficient, homogeneousLinearPolynomial, add_comm]
+    rw [hleft, map_mul, hfactor] at hrenamed
+    simpa [neg_mul, mul_neg] using hrenamed
+  · exact
+      homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero_of_coeff_zero_ne
+        a F degree ha0 hF hvanish
+
+/-- Vanishing of a homogeneous binary form at the canonical projective zeros of a pairwise
+relatively prime family of nonzero linear forms makes their product a divisor. -/
+theorem fintypeProd_homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZeros
+    (a : ι → Fin 2 → K)
+    (ha : ∀ i, a i ≠ 0)
+    (hcoprime : Pairwise (IsRelPrime on fun i => homogeneousLinearPolynomial (a i)))
+    (F : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (hF : F.IsHomogeneous degree)
+    (hvanish :
+      ∀ i, MvPolynomial.eval ![a i 1, -a i 0] F = 0) :
+    (∏ i, homogeneousLinearPolynomial (a i)) ∣ F := by
+  apply Fintype.prod_dvd_of_isRelPrime hcoprime
+  intro i
+  exact
+    homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZero
+      (a i) F degree (ha i) hF (hvanish i)
+
+/-- Agreement of two homogeneous binary forms at the canonical projective zeros of a pairwise
+relatively prime linear family makes the product of that family divide their difference. -/
+theorem fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_eq
+    (a : ι → Fin 2 → K)
+    (ha : ∀ i, a i ≠ 0)
+    (hcoprime : Pairwise (IsRelPrime on fun i => homogeneousLinearPolynomial (a i)))
+    (target current : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (htarget : target.IsHomogeneous degree)
+    (hcurrent : current.IsHomogeneous degree)
+    (hagree :
+      ∀ i,
+        MvPolynomial.eval ![a i 1, -a i 0] target =
+          MvPolynomial.eval ![a i 1, -a i 0] current) :
+    (∏ i, homogeneousLinearPolynomial (a i)) ∣ target - current := by
+  apply
+    fintypeProd_homogeneousLinearPolynomial_dvd_of_isHomogeneous_eval_projectiveZeros
+      a ha hcoprime (target - current) degree (htarget.sub hcurrent)
+  intro i
+  simp [hagree i]
+
+/-- In exponent characteristic two, agreement of the squares of two homogeneous binary forms at
+the projective zeros of a relatively prime linear family already makes the linear-factor product
+divide their difference. -/
+theorem fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_sq_eq
+    [ExpChar K 2]
+    (a : ι → Fin 2 → K)
+    (ha : ∀ i, a i ≠ 0)
+    (hcoprime : Pairwise (IsRelPrime on fun i => homogeneousLinearPolynomial (a i)))
+    (target current : MvPolynomial (Fin 2) K) (degree : ℕ)
+    (htarget : target.IsHomogeneous degree)
+    (hcurrent : current.IsHomogeneous degree)
+    (hsquareAgree :
+      ∀ i,
+        MvPolynomial.eval ![a i 1, -a i 0] (target ^ 2) =
+          MvPolynomial.eval ![a i 1, -a i 0] (current ^ 2)) :
+    (∏ i, homogeneousLinearPolynomial (a i)) ∣ target - current := by
+  apply
+    fintypeProd_homogeneousLinearPolynomial_dvd_sub_of_isHomogeneous_eval_projectiveZeros_eq
+      a ha hcoprime target current degree htarget hcurrent
+  intro i
+  apply frobenius_inj K 2
+  change
+    MvPolynomial.eval ![a i 1, -a i 0] target ^ 2 =
+      MvPolynomial.eval ![a i 1, -a i 0] current ^ 2
+  simpa only [map_pow] using hsquareAgree i
 
 /-- For homogeneous binary forms, affine-node agreement yields divisibility of their difference
 by the homogenized product of the corresponding node factors. -/
