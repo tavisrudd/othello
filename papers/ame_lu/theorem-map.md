@@ -16,7 +16,6 @@ still depends on the claim, evidence, literature, and prose gates.
 | C559 | every fixed-copy LU contraction is generically constant on each irreducible component of an algebraic equal-phase code family | adopted as a mechanism boundary | regular constant-dimension generator chart; every fixed copy degree; stable diagram basis when local dimension is at least the copy degree | direct contraction-rank and generic-minor proof |
 | C560/C609 | every LU intertwiner between equal-phase CSS states of linear `[2m,m,m+1]_q` MDS codes is LC; the associated `[[2m-1,1,m]]_q` code has no transversal non-Clifford logical unitary; hence `LU iff LC iff z` on the admitted six-party pencil | adopted version-1 headline package | every prime power and \(m\geq2\) whenever the MDS code exists; C396's odd admitted domain for the `z` classification | MDS shortening plus diagonal Weyl-correlation tensor rigidity; Choi correspondence for the transversal corollary |
 | C614 | transversal conversions between any two associated encoders are Clifford factor by factor; product-unitary automorphisms are projectively finite; the odd-prime even-length GRS tower has exact projective transversal logical group `F_q^2 ⋊ SL_2(q)` | adopted higher-\(m\) application package | conversion and finiteness for every prime power and existing `[2m,m,m+1]` code; exact GRS group for odd prime `q` and `2m≤q+1` | Choi correspondence, finiteness of the projective Clifford group, and explicit GRS dual-multiplier unipotents |
-| C622 | the exact odd-prime fixed-party projective transversal group is `F_q^2 ⋊ SL_2(q)` exactly for diagonally isodual `[2m,m,m+1]_q` MDS codes and `F_q^2 ⋊ T` otherwise | adopted intrinsic phase boundary | every odd prime `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS code | arbitrary-length diagonal-multiplier lemma, block converse, complete logical-Pauli fiber, and duality-shear propagation |
 | C619 | the GRS propagation maps satisfy the `SL_2(q)` relations exactly; over odd fields the Weil lift splits the scalar extension on the linear factor, while the full affine one-qudit extension is non-split by the Weyl commutator | adopted lift-boundary audit | odd prime `q`, generalized and extended GRS tower; no claim about splitting the realized party-permutation extension | explicit conjugation formula, finite-field Heisenberg--Weil representation, and the nontrivial Pauli commutator |
 
 ## Stable source labels
@@ -32,7 +31,7 @@ still depends on the claim, evidence, literature, and prose gates.
 - `prop:full-weyl-marginal` and `cor:full-weyl-cover`: reusable full-Weyl marginal and cover criteria forcing every local intertwiner to be Clifford.
 - `cor:transversal-clifford`: transversal non-Clifford no-go for the associated quantum MDS code.
 - `cor:discrete-lu-symmetry`: continuous closed scalar-torus short exact sequences, a closed Hausdorff discrete intrinsic Clifford quotient, finite scalar-torus component covers, finite discrete fixed-party and party-permuted quotients, and the exact extension through the realized party-permutation subgroup.  `AutomorphismExactSequence` supplies the exact sequence.  `NonabelianExtensionInvariant` supplies its section-free outer action, normalized factor set, nonabelian associativity and change-of-section laws, and the equivalence between factor-set trivializability and a homomorphic splitting.  The principal new terminals are `genericPartyPermutationOuterAction`, `genericPartyPermutationFactorSet_associativity`, `genericPartyPermutationFactorSet_change`, and `genericPartyPermutationFactorSet_trivializable_iff_splits`.
-- `cor:diagonal-isodual-transversal-group`: exact `F_q^2 ⋊ SL_2(q)` versus `F_q^2 ⋊ T` fixed-party transversal dichotomy for odd-prime half-dimensional MDS codes, with a coherent Weil lift on the isodual branch's linear `SL_2(q)` factor and a Heisenberg obstruction to splitting its full affine one-qudit scalar extension.
+- `cor:grs-transversal-group`: exact full-Clifford transversal group of the odd-prime GRS quantum-MDS tower, with a coherent Weil lift on its linear `SL_2(q)` factor and a Heisenberg obstruction to splitting the full affine one-qudit scalar extension.
 - `cor:six-arc-fixed-party-group`: exact projective fixed-party logical group `F_q^2 ⋊ SL_2(q)` on the GRS six-arc locus and `F_q^2 ⋊ T` off it.
 - `cor:lu-lc-pencil`: `LU iff LC iff z` on the admitted odd pencil.
 
@@ -45,11 +44,10 @@ still depends on the claim, evidence, literature, and prose gates.
    associated `[[2m-1,1,m]]_q` quantum MDS code therefore admits no
    transversal non-Clifford logical unitary.
 2. **Higher-\(m\) operational corollaries
-   (`cor:diagonal-isodual-transversal-group`, `cor:discrete-lu-symmetry`).**  Over odd
-   prime fields, diagonal isoduality is exactly the condition for the
-   projective transversal group to be `F_q^2 ⋊ SL_2(q)`; otherwise it is
-   `F_q^2 ⋊ T`.  Every state in the general family has finite projective
-   product-unitary automorphism group.
+   (`cor:grs-transversal-group`, `cor:discrete-lu-symmetry`).**  Over odd
+   prime fields, the even-length GRS quantum-MDS tower has exact projective
+   transversal group `F_q^2 ⋊ SL_2(q)`.  Every state in the general family
+   has finite projective product-unitary automorphism group.
 3. **Classification corollary (`cor:lu-lc-pencil`).** On C396's admitted
    odd-prime-field non-GRS pencil, projective, monomial-code, LC, and LU
    equivalence are all equivalent to equality of `z`. Over extension
@@ -72,7 +70,7 @@ still depends on the claim, evidence, literature, and prose gates.
 | Result | Field/domain | Included exceptions | Excluded boundary |
 |---|---|---|---|
 | LU-intertwiner rigidity and transversal no-go | every prime power `q`, every `m≥2`, and every existing linear `[2m,m,m+1]_q` MDS/CSS state; associated `[[2m-1,1,m]]_q` encoder for the corollary | none | nonlinear orthogonal arrays, non-MDS/non-CSS AME tensors, and transversal gates of other quantum-code families |
-| Exact diagonal-isodual transversal logical group | odd prime `q`, `m≥2`, and a linear `[2m,m,m+1]_q` MDS code | `F_q^2 ⋊ SL_2(q)` iff `SC=C^\perp` for nonsingular diagonal `S`, and `F_q^2 ⋊ T` otherwise; includes non-GRS diagonally isodual codes | extension-field full Clifford groups, party-moving enlargements, and non-product physical implementations |
+| Exact GRS transversal logical group | odd prime `q`, `m≥2`, `2m≤q+1`, and a generalized or extended generalized Reed--Solomon `[2m,m,m+1]_q` code | includes the extended length `q+1` case and all logical Paulis | extension-field full Clifford groups, non-GRS MDS codes, and non-product physical implementations |
 | Pencil classification by `z` | projective/monomial over odd finite fields; LC/LU only over odd prime fields on the admitted non-GRS locus | Frobenius covariance over extension fields is explicit but not classified | zeros of `2t(t-1)BG`, the GRS boundary, and full extension-field Clifford classification |
 | Logical-Clifford phase | odd-prime-field six-arcs | characteristic-17/31 symmetry jumps retain the phase | characteristic two, extension-field full Clifford kernels, and non-stabilizer AME tensors |
 | Uniform H3/GRS LU separator | odd good non-GRS H3 reductions | characteristic five is the proved GRS transition | bad or GRS reductions |

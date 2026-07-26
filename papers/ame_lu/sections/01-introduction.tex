@@ -62,35 +62,28 @@ Since conjugation fixes the identity axis, this is precisely the
 Clifford condition.  The corollary follows by applying the theorem to
 the Choi state of a transversal logical action.
 
-\begin{corollary}[Diagonal-isodual transversal logical group]
-\label{cor:diagonal-isodual-transversal-group}
-Let \(q\) be an odd prime, let \(m\geq2\), and let
-\(C\leq\F_q^{2m}\) be a linear \([2m,m,m+1]_q\) MDS code.  The
-projective group of logical unitaries of the associated
-\([[2m-1,1,m]]_q\) quantum MDS code that admit tensor-product physical
-implementations is
+\begin{corollary}[GRS transversal logical group]
+\label{cor:grs-transversal-group}
+Let \(q\) be an odd prime, let \(m\geq2\), and suppose \(2m\leq q+1\).
+For a length-\(2m\)
+generalized or extended generalized Reed--Solomon code \(C\), the group
+of logical unitaries of the associated \([[2m-1,1,m]]_q\) quantum MDS
+code that admit tensor-product physical implementations, modulo phase,
+is exactly
 \[
-\begin{cases}
  \F_q^2\rtimes\mathrm{SL}_2(q),
-  &\text{if \(SC=C^\perp\) for a nonsingular diagonal \(S\),}\\
- \F_q^2\rtimes T,
-  &\text{otherwise,}
-\end{cases}
 \]
-where \(T=\{\diag(a,a^{-1}):a\in\F_q^\times\}\).
+the full one-qudit projective Clifford group.
 \end{corollary}
 
 The phrase ``modulo phase'' is essential.  Over an odd field the
-\(\mathrm{SL}_2(q)\) factor on the diagonally isodual branch has coherent
-Weil lifts, so no metaplectic obstruction remains there.  The full affine
-group does not lift through the one-qudit scalar quotient: its translation
-subgroup is the projective Weyl group, whose two coordinate generators have
-a nontrivial scalar commutator.  This Heisenberg obstruction is independent
-of the factor set for party-moving symmetries in
-Corollary~\ref{cor:discrete-lu-symmetry}.  Generalized and extended
-generalized Reed--Solomon codes are diagonally isodual, but the condition is
-not confined to that family: self-dual non-GRS MDS constructions are known
-\cite{ZhuLiao2024}.
+\(\mathrm{SL}_2(q)\) factor has coherent Weil lifts, so no metaplectic
+obstruction remains there.  The full affine group does not lift through
+the one-qudit scalar quotient: its translation subgroup is the
+projective Weyl group, whose two coordinate generators have a nontrivial
+scalar commutator.  This Heisenberg obstruction is independent of the
+factor set for party-moving symmetries in
+Corollary~\ref{cor:discrete-lu-symmetry}.
 
 For example, an extended \([8,4,5]_7\) Reed--Solomon code gives an
 \(\AME(8,7)\) tensor and a \([[7,1,4]]_7\) quantum MDS code whose
@@ -168,24 +161,17 @@ logical Clifford group for any prime-dimensional stabilizer code using
 ancillas and Pauli measurements \cite{Gottesman1999}.  These results
 establish that GRS and polynomial encoders support fault-tolerant
 logical gates, but they do not identify the fixed-party product-Clifford
-kernel.  Corollary~\ref{cor:diagonal-isodual-transversal-group} combines
-diagonal code--dual equivalence with LU rigidity to identify the exact
-transversal logical group for every half-dimensional MDS code.  In coding
-theory, diagonal code--dual equivalence is the fixed-coordinate form of
-isometry duality; it occurs in algebraic-geometry MDS families as well as
-GRS codes \cite{ZhuZhao2026}.  For binary self-dual CSS codes,
-Tansuwannont, Takada, and Fujii give criteria for transversal Hadamard and
-phase operations relative to a compatible logical basis
-\cite{TansuwannontTakadaFujii2025}.  Their setting and conclusion differ
-from the odd-prime, one-logical-qudit exact fixed-party group here.
-Theorem~\ref{thm:logical-phase} identifies the geometric condition among
-six-arcs: self-association is exactly the condition for the kernel to
-exceed the split torus.  Our literature search for this comparison covered
-isometry-dual MDS constructions, quantum Reed--Solomon and polynomial-code
-gate constructions, self-dual CSS transversal Clifford gates, general
+kernel.  Corollary~\ref{cor:grs-transversal-group} combines standard GRS
+dual multipliers with LU rigidity to identify the exact transversal
+logical group throughout the even-length GRS tower.  The converse in
+Theorem~\ref{thm:logical-phase} then classifies the obstruction among
+six-arcs:
+self-association is exactly the condition for the kernel to exceed the
+split torus.  Our literature search for this comparison covered quantum
+Reed--Solomon and polynomial-code gate constructions, general
 prime-dimensional stabilizer Clifford synthesis, and restrictions on
 transversal gate sets.  We claim the exact group statements, not priority
-for the underlying code or gate constructions.  Eastin and Knill's
+for the GRS gate constructions themselves.  Eastin and Knill's
 restriction on universal transversal sets gives the general boundary
 \cite{EastinKnill2009}.
 

@@ -6,8 +6,8 @@ dependency order:
 1. object, question, and adopted theorem package;
 2. six-arcs, MDS kernels, CSS states, and AME tensors;
 3. shortened diagonal Weyl tensors, uniform LU-intertwiner rigidity,
-   factorwise transversal conversion rigidity, and the exact
-   diagonal-isodual transversal logical phase;
+   factorwise transversal conversion rigidity, and the exact GRS
+   transversal logical group;
 4. the scalar `z` and complete LU/LC classification of the pencil;
 5. the logical-Clifford phase and operational consequences;
 6. marginal and copy-contraction local-unitary invariants;
