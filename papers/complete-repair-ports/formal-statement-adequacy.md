@@ -5,9 +5,9 @@ field.  `PENDING` means the result is not admitted to the main proof spine.
 
 | Paper label | Domain and quantifiers | Hypotheses | Conclusion | Trust boundary | Status |
 |---|---|---|---|---|---|
-| `def:complete-port` | Finite field, linear code, target coordinate, radius | Actual dual witnesses; target coefficient nonzero for coefficient normalization | Exact support set, coefficient fiber, and survival event | Standard logical axioms | `PENDING` intrinsic transport package |
-| `def:reconstruction-radius` | Pointed linear code over a finite field | Reconstruction equivalence fixed explicitly | Least coefficient radius determining the pointed code | Standard logical axioms | `PENDING` C672 |
-| `thm:mds-reconstruction` | General admissible MDS parameters and a fixed target | Nondegenerate MDS code; precise pointed equivalence convention | Minimum coefficient port reconstructs; support clutter is generic uniform MDS data | Standard logical axioms | `PENDING` C672 |
+| `def:complete-port` | Finite field, finite coordinate type, linear code, target, radius | Actual dual witnesses; target coefficient normalized to one | Exact support/coefficient bridge and recovery of the original code from the coefficient span | `propext`, `Classical.choice`, `Quot.sound` | `PASS` support/coefficient; survival event awaits C675 |
+| `def:reconstruction-radius` | Pointed linear code over a finite field | Intrinsic isomorphism is an ambient linear equivalence carrying the dual space and every bounded normalized fiber exactly | Least coefficient radius determining the code; invariance at every radius and at the infimum | `propext`, `Classical.choice`, `Quot.sound` | `PASS` C672 |
+| `thm:mds-reconstruction` | Finite field, finite coordinate type, \(k>0\), fixed target | Explicit dual MDS parameters: nonzero dual, \(\dim C^\perp+k=n\), \(d(C^\perp)\ge k+1\) | Every \(k\)-helper support occurs; the minimum coefficient port spans \(C^\perp\); it recovers \(C\); reconstruction holds iff \(k\le r\); radius equals \(k\) | `propext`, `Classical.choice`, `Quot.sound` | `PASS` C672 |
 | `thm:transfer` | Finite inner/outer alphabets, at least two outer blocks, target and radius | Nontrivial inner dual; exact zero/nonzero pointed-cost gate; surjectivity only for the reduced numeric form | Exact coordinatewise equality of complete bounded ports | Standard logical axioms | `PENDING` paper-facing terminal C673 |
 | `cor:strict-transfer` | Completed \(q=9\) inner seed and five-block generalized SPC outer code | Cited Singer regularity and the displayed multiplier choice | Weighted threshold six and exact radius-four transfer | Standard axioms plus one named Singer input | `PENDING` C673 |
 | `thm:prescribed` | Every represented finite radius-\(r\) pointed coefficient port | \(r+1<z_x(I)\); exact outer-family existence hypothesis | Fixed alphabet, positive rate/distance, density \(1/m\), exact port occurrence | Named GV or AG/TVZ input only | `PENDING` C674 |
@@ -23,4 +23,3 @@ field.  `PENDING` means the result is not admitted to the main proof spine.
 No `PENDING` row may be described as formally verified in the manuscript.
 Finite scripts and certificates are excluded from this table because they
 cannot establish statement adequacy for a body theorem.
-

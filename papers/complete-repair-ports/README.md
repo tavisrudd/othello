@@ -2,8 +2,9 @@
 
 **Title:** *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*<br>
 **Author:** Tavis Rudd<br>
-**Status:** private corrected manuscript with a revised human-proof/Lean theorem hierarchy frozen
-for the next draft; the modular rewrite has not begun and publication export remains gated.
+**Status:** private corrected manuscript with the revised theorem hierarchy frozen and the page-2
+MDS local-reconstruction package human-proved and Lean-checked; the modular rewrite has not begun
+and publication export remains gated.
 
 ## Paper spine
 

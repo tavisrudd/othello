@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C671 CONTROL SURFACE COMPLETE; C672 NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672 MDS RECONSTRUCTION COMPLETE; C673 NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -70,6 +70,7 @@ Completed preparation:
 - [C285 submission-preflight citation and claim audit](../2026-07-17-c285-complete-ports-citation-preflight.md).
 - [C286 private-source correction and independent cold-read pass](../2026-07-17-c286-complete-ports-correction-and-cold-read.md).
 - [C671 revised theorem hierarchy and paper-control surface](../2026-07-26-c671-complete-ports-theorem-hierarchy.md).
+- [C672 MDS minimum coefficient-port reconstruction](../2026-07-26-c672-mds-local-reconstruction.md).
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -98,11 +99,9 @@ terminal.
 
 ## Next step
 
-Run C672 next: prove and formalize reconstruction radius, intrinsic pointed-port isomorphisms, and
-the general MDS local-reconstruction theorem before any TeX restructuring. The remaining
-proof/formalization work then branches:
+Run C673 next: package the exact pointed confinement and weighted-functional transfer proof into
+paper-facing human and Lean terminals. The remaining proof/formalization work then branches:
 
-- C673 reconciles exact confinement and transfer;
 - C675 establishes the noncomputational reliability/EXIT calculus;
 - C674 follows C672+C673 for positive-density realization;
 - C676 follows C675 for pointed Tutte and the filtration boundary; and

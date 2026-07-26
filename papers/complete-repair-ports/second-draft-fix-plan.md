@@ -9,7 +9,7 @@ appendix-only and cannot discharge a body theorem.
 ## Work order
 
 1. C671 freezes the hierarchy and installs the control documents.
-2. C672 proves and formalizes MDS reconstruction and reconstruction radius.
+2. C672 is closed: MDS reconstruction, exact radius, code recovery, and intrinsic invariance pass the paper-facing Lean gate.
 3. C673 reconciles exact confinement/transfer into paper-facing Lean terminals.
 4. C675 proves and formalizes reliability and bounded EXIT.
 5. C674 follows C672+C673 for positive-density fingerprints.
@@ -66,4 +66,3 @@ C679 may declare the private manuscript draft-ready.  It does not authorize a
 fresh-history export, public repository initialization, archive creation, push,
 or release.  Those actions retain the handoff's external-review, C287, identity,
 and author gates.
-

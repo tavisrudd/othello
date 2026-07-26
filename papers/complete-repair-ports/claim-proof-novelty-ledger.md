@@ -19,8 +19,8 @@ editorial disposition are independent fields.
 
 | Claim family | Human proof | Lean status | Computation | Literature/novelty boundary | Manuscript action |
 |---|---|---|---|---|---|
-| Complete support/coefficient/probability port | Existing definitions and basic-invariants proof | `KERNEL-CORE`; intrinsic coefficient-port isomorphism remains absent | Existing coefficient replay is corroborative only | Repair tolerance and all-low-weight-dual-support machinery are prior or adjacent art | Retain; close the intrinsic reconstruction interface in C672 |
-| MDS local reconstruction | Present only as the Clebsch/MDS argument | None | None permitted | MDS support clutter is generic; value lies in the coefficient reconstruction statement | `BLOCKED-BODY`; C672 |
+| Complete support/coefficient/probability port | Existing definitions and basic-invariants proof; C672 supplies the coefficient-span mechanism | `KERNEL` for support/coefficient bridge, code recovery, and intrinsic reconstruction; probability remains C675 | Existing coefficient replay is corroborative only | Repair tolerance and all-low-weight-dual-support machinery are prior or adjacent art | Support/coefficient layers admitted; probability layer remains gated |
+| MDS local reconstruction | Complete common-core star-basis proof in C672 | `KERNEL`: prescribed minimum word, complete support clutter, spanning, exact radius, and double-dual recovery | None | MDS support clutter is generic; value lies in the coefficient reconstruction statement | Admitted page-2 headline |
 | Exact pointed confinement and weighted transfer | Complete proof in current Section 3 | Extensive `KERNEL` chain | None required | Concatenated-dual decomposition and fiber enumerator are prior art; complete-port equality is none-found candidate contribution | Retain after C673 terminal/adequacy reconciliation |
 | Strict weighted example | Conceptual Singer averaging and code deduction | `KERNEL` conditional on cited Singer regularity | None required | Natural strict example, not a new MDS construction | Secondary corollary after C673 |
 | Prescribed positive-density realization | Manuscript proof | `KERNEL-CORE` for finite cost and transfer | None required | Random GV, trace duality, AG/TVZ, and locality-preserving concatenation are classical; represented-port consequence is none-found | `BLOCKED-BODY`; C674 |
@@ -37,4 +37,3 @@ editorial disposition are independent fields.
 A row leaves `BLOCKED-BODY` only when its human proof, exact Lean terminal,
 adequacy comparison, and axiom audit all pass.  Replaying a certificate cannot
 promote a row.
-
