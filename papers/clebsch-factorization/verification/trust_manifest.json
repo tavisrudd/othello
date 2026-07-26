@@ -43,6 +43,11 @@
       "checksum_manifest": "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
       "commands": []
     },
+    "hyperplane-square": {
+      "role": "kernel-checked dual mechanism forcing trivial cubic annihilator from a full-support quadratic relation",
+      "checksum_manifest": "papers/clebsch-factorization/verification/hyperplane_square.sha256",
+      "commands": []
+    },
     "profile-incidence": {
       "role": "double cosets, six profiles, profile plane, weights, and cubic witness",
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
@@ -83,12 +88,15 @@
   "claims": [
     {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
+    {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input"], "evidence": []},
     {"label": "thm:rank-three-quotients", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "cor:h3-affine-origin", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "cor:h3-middle-layer", "modes": ["conceptual", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank"]},
     {"label": "prop:radical-hadamard", "modes": ["conceptual"], "evidence": []},
-    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry"]},
-    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry"]},
+    {"label": "prop:modular-sheet-mechanism", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet"]},
+    {"label": "lem:hyperplane-square", "modes": ["conceptual", "lean"], "evidence": ["hyperplane-square"]},
+    {"label": "thm:balanced-cubic", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry", "hyperplane-square"]},
+    {"label": "cor:graded-evaluation", "modes": ["conceptual", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "hilbert-symmetry", "hyperplane-square"]},
     {"label": "cor:self-associated-gorenstein", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["matching-module", "balanced-sheet", "gorenstein-gate", "hilbert-symmetry"]},
     {"label": "cor:secant-product-syzygies", "modes": ["conceptual", "certificate"], "evidence": ["matching-module"]},
     {"label": "thm:six-profile-reconstruction", "modes": ["conceptual", "certificate"], "evidence": ["profile-incidence", "decorated-parent"]},
@@ -104,7 +112,7 @@
     {"label": "prop:relative-cubic-tate-plane", "modes": ["conceptual", "certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [
-    "The six profile rows and all frozen rank and orbit calculations use exact prime-field arithmetic.",
+    "The six profile rows and all frozen rank and orbit calculations use exact prime-field arithmetic; the all-q balanced-orbit classification is instead the cited maximal-subgroup and block-system argument in the text.",
     "Lean checks the arithmetic-gluing implication and its small finite leaves; H3 coset completeness and bounded-word evaluation remain generator/replay obligations.",
     "The names A4, S4, A5, and PSL_2(11) are classical cited inputs, not consequences of group orders alone.",
     "No all-characteristic construction, canonical source-to-depth map, passage theorem, holonomy theorem, or priority claim is certified here."

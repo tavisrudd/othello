@@ -216,11 +216,14 @@ C661 is complete.  Paper II's \(A_3,B_3\) row reductions are replaced by
 one affine-cocycle/Fischer-module proof: defining-characteristic
 \(\operatorname{SL}_2\) irreducibility forces the top summands, while the
 \(B_3\) outer quotient is \(3L_{02}^2\), so its radial trace is the dual
-norm of a secant.  The `tt` closeout also reverses the former
+norm of a secant.  The `tt` closeout first reversed the former
 cubic-to-Gorenstein dependency: radical--Hadamard recovery gives signed Gale
-self-duality and Cayley--Bacharach in degree two; the classical
-self-association criterion and Hilbert symmetry then force
-\(h=(1,q-1,q-1,1)\), \(L^{\circ3}=k^\Omega\), and the nonzero cubic.
+self-duality and Cayley--Bacharach in degree two, after which the classical
+self-association criterion and Hilbert symmetry recover
+\(h=(1,q-1,q-1,1)\).  C665's later full-support hyperplane-square lemma now
+forces \(L^{\circ3}=k^\Omega\) and the nonzero cubic directly, so Gorenstein
+symmetry is a geometric consequence and independent check rather than the
+logical source of cubic nonvanishing.
 The final Hilbert-symmetry arithmetic is kernel-checked by
 `RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three` and
 `RelativeConicArcs.HilbertSymmetry.value_three_eq_one`; source elaboration
@@ -233,26 +236,31 @@ structural derivation of radical--Hadamard hypotheses beyond \(B_3,H_3\).
 The proof and mystery ledger are in
 `notes/2026-07-26-c661-uniform-factorization-upgrade.md`.
 
-C665 is queued after the C661 formal synchronization. Its EV order is fixed:
-first classify \(2q\)-point full-projective matching orbits that split into
-two \(q\)-point sheets and resolve the \(q=5\) ten-matching kill test; then
-package the reusable cocycle-span criterion, cubic inevitability theorem, and
-uniform radial-trace question. The target crown is nonlinear completeness for
-the \(B_3,H_3\) recovery phenomenon, not a broader finite census, and it must
-not hold Paper II v1.
+C665's limited Gold is complete and integrated; its Platinum continuation is
+in progress and is not yet a manuscript claim.  For any full-projective
+matching orbit, a unique quadratic-trade line whose two intrinsic level sets
+are one-factorizations is \(G\)-stable; transitivity forces a nontrivial
+two-block action with kernel \(\operatorname{PSL}_2(q)\), and edge counting
+derives the \(q+q\) split rather than assuming it.  Orbit--stabilizer and Dickson then
+reduce to \(q=5,7,11\); the \(q=5\) ten-orbit stays one special-projective
+orbit with full Schur square, while the unique \(q=7,11\) recovering orbits
+are \(B_3,H_3\).  The field-independent hyperplane-square lemma proves
+\(L^{\circ2}=\ker\epsilon\) with full-support \(\epsilon\) forces
+\(L^{\circ3}=k^\Omega\).  Its dual mechanism is kernel-checked by
+`RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero`; source
+elaboration is green, while the import-only gate waits behind the same
+foreign Lean build owner as the Hilbert-symmetry gate.  The report, exact
+certificate, independent replay, and mystery ledger are in
+`notes/2026-07-26-c665-balanced-matching-completeness.md`; these are Paper II
+v2 upgrades and do not hold v1.
 
 The active order is strict:
 
 1. **C182:** make the immutable public deposit and insert its identifier.
 2. **C611:** pursue the broader exterior-set mechanism for v2 or its actual
    owning paper without holding v1.
-3. **C662:** prove a uniform human bound or reconstruction theorem from the
-   exterior-set/passant frontier; do not accept computational evidence as
-   the crown or bloat Paper I for a merely local improvement.
-4. **C577:** build and referee-test standalone Paper II after Paper I is
+3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
-5. **C665:** pursue balanced-orbit completeness and the cheap C661
-   consequences after the current formal synchronization, without holding v1.
 
 C579 is complete and no longer an open-order item.
 

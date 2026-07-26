@@ -1,0 +1,1726 @@
+{
+  "fields": [
+    {
+      "orbit_count": 2,
+      "orbits": [
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 24,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 9,
+            "3": 8,
+            "4": 6
+          },
+          "psl_orbit_sizes": [
+            5
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 8
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "size": 5
+        },
+        {
+          "balanced_2q_split": false,
+          "evaluation": {
+            "affine_linear_rank": 4,
+            "quadratic_trade_dimension": 0,
+            "quotient_degree": 1,
+            "schur_cube_rank": 10,
+            "schur_square_rank": 10
+          },
+          "full_stabilizer_order": 12,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            10
+          ],
+          "psl_stabilizer_order": 6,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "size": 10
+        }
+      ],
+      "perfect_matching_count": 15,
+      "pgl_order": 120,
+      "psl_order": 60,
+      "q": 5
+    },
+    {
+      "orbit_count": 4,
+      "orbits": [
+        {
+          "balanced_2q_split": true,
+          "evaluation": {
+            "affine_linear_rank": 7,
+            "quadratic_trade_dimension": 1,
+            "quadratic_trade_full_support": true,
+            "quadratic_trade_values": [
+              1,
+              6
+            ],
+            "quotient_degree": 2,
+            "recovered_edge_multiplicities": [
+              [
+                1
+              ],
+              [
+                1
+              ]
+            ],
+            "recovered_level_sizes": [
+              7,
+              7
+            ],
+            "recovered_levels_are_one_factorizations": true,
+            "recovered_partition_equals_psl_orbits": true,
+            "schur_cube_rank": 14,
+            "schur_square_rank": 13
+          },
+          "full_stabilizer_order": 24,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 9,
+            "3": 8,
+            "4": 6
+          },
+          "psl_orbit_sizes": [
+            7,
+            7
+          ],
+          "psl_stabilizer_order": 24,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 9,
+            "3": 8,
+            "4": 6
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          "size": 14
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 16,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 9,
+            "4": 2,
+            "8": 4
+          },
+          "psl_orbit_sizes": [
+            21
+          ],
+          "psl_stabilizer_order": 8,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          "size": 21
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 12,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            28
+          ],
+          "psl_stabilizer_order": 6,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "size": 28
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 8,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "psl_orbit_sizes": [
+            21,
+            21
+          ],
+          "psl_stabilizer_order": 8,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "size": 42
+        }
+      ],
+      "perfect_matching_count": 105,
+      "pgl_order": 336,
+      "psl_order": 168,
+      "q": 7
+    },
+    {
+      "orbit_count": 31,
+      "orbits": [
+        {
+          "balanced_2q_split": true,
+          "evaluation": {
+            "affine_linear_rank": 11,
+            "quadratic_trade_dimension": 1,
+            "quadratic_trade_full_support": true,
+            "quadratic_trade_values": [
+              1,
+              10
+            ],
+            "quotient_degree": 4,
+            "recovered_edge_multiplicities": [
+              [
+                1
+              ],
+              [
+                1
+              ]
+            ],
+            "recovered_level_sizes": [
+              11,
+              11
+            ],
+            "recovered_levels_are_one_factorizations": true,
+            "recovered_partition_equals_psl_orbits": true,
+            "schur_cube_rank": 22,
+            "schur_square_rank": 21
+          },
+          "full_stabilizer_order": 60,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 15,
+            "3": 20,
+            "5": 24
+          },
+          "psl_orbit_sizes": [
+            11,
+            11
+          ],
+          "psl_stabilizer_order": 60,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 15,
+            "3": 20,
+            "5": 24
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 22
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 24,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 9,
+            "3": 8,
+            "4": 6
+          },
+          "psl_orbit_sizes": [
+            55
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 8
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 55
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 24,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "12": 4,
+            "2": 13,
+            "3": 2,
+            "4": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            55
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "size": 55
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 20,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "10": 4,
+            "2": 11,
+            "5": 4
+          },
+          "psl_orbit_sizes": [
+            66
+          ],
+          "psl_stabilizer_order": 10,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "5": 4
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              11
+            ]
+          ],
+          "size": 66
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 12,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            55,
+            55
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 110
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 12,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            55,
+            55
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 110
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 12,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "psl_orbit_sizes": [
+            55,
+            55
+          ],
+          "psl_stabilizer_order": 12,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 7,
+            "3": 2,
+            "6": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              9
+            ]
+          ],
+          "size": 110
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 10,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "5": 4
+          },
+          "psl_orbit_sizes": [
+            66,
+            66
+          ],
+          "psl_stabilizer_order": 10,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "5": 4
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "size": 132
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 8,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "psl_orbit_sizes": [
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "size": 165
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 8,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "psl_orbit_sizes": [
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "size": 165
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 8,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 5,
+            "4": 2
+          },
+          "psl_orbit_sizes": [
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              7,
+              11
+            ]
+          ],
+          "size": 165
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 6,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "psl_orbit_sizes": [
+            110,
+            110
+          ],
+          "psl_stabilizer_order": 6,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 220
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 6,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "psl_orbit_sizes": [
+            110,
+            110
+          ],
+          "psl_stabilizer_order": 6,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 220
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 6,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "psl_orbit_sizes": [
+            110,
+            110
+          ],
+          "psl_stabilizer_order": 6,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3,
+            "3": 2
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          "size": 220
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            165,
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              10
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            165,
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            165,
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            165,
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              9
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 4,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "psl_orbit_sizes": [
+            165,
+            165
+          ],
+          "psl_stabilizer_order": 4,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 3
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          "size": 330
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            660
+          ],
+          "psl_stabilizer_order": 1,
+          "psl_stabilizer_order_histogram": {
+            "1": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            660
+          ],
+          "psl_stabilizer_order": 1,
+          "psl_stabilizer_order_histogram": {
+            "1": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              10
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              9
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              9
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              9
+            ]
+          ],
+          "size": 660
+        },
+        {
+          "balanced_2q_split": false,
+          "full_stabilizer_order": 2,
+          "full_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "psl_orbit_sizes": [
+            330,
+            330
+          ],
+          "psl_stabilizer_order": 2,
+          "psl_stabilizer_order_histogram": {
+            "1": 1,
+            "2": 1
+          },
+          "representative": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              7,
+              10
+            ],
+            [
+              8,
+              9
+            ]
+          ],
+          "size": 660
+        }
+      ],
+      "perfect_matching_count": 10395,
+      "pgl_order": 1320,
+      "psl_order": 660,
+      "q": 11
+    }
+  ],
+  "schema": "c665-balanced-matching-completeness-v1",
+  "scope": {
+    "fields_checked": [
+      5,
+      7,
+      11
+    ],
+    "objects": "all perfect matchings of P1(F_q), partitioned by full PGL2(q)",
+    "stop_condition": "the three fields surviving the human index-q subgroup reduction"
+  },
+  "verdict": {
+    "balanced_fields": [
+      7,
+      11
+    ],
+    "q5_ten_orbit_psl_split": [
+      10
+    ],
+    "q5_ten_orbit_schur_square_rank": 10,
+    "recovering_balanced_fields": [
+      7,
+      11
+    ]
+  }
+}

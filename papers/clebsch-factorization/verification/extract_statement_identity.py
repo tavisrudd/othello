@@ -18,10 +18,13 @@ LABEL_RE = re.compile(r"^\s*\\label\{([^}]+)\}\s*$")
 EXPECTED_LABELS = (
     "thm:factorization-recovery",
     "prop:matching-secant-quotient",
+    "thm:balanced-orbit-completeness",
     "thm:rank-three-quotients",
     "cor:h3-affine-origin",
     "cor:h3-middle-layer",
     "prop:radical-hadamard",
+    "prop:modular-sheet-mechanism",
+    "lem:hyperplane-square",
     "thm:balanced-cubic",
     "cor:graded-evaluation",
     "cor:self-associated-gorenstein",

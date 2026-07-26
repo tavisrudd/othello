@@ -10,7 +10,7 @@ separates four kinds of support:
 - the kernel-checked arithmetic-gluing theorem, whose largest `H_3` leaves
   are certificate-backed.
 
-`statement_identity.json` contains the exact twenty-one theorem-like statements
+`statement_identity.json` contains the exact twenty-four theorem-like statements
 in the manuscript. `extract_statement_identity.py --check` rejects any
 unrecorded change to those statements.
 
@@ -18,7 +18,8 @@ unrecorded change to those statements.
 bundles. `verify_release.py` checks the statement identity, the manifest
 partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
-then elaborates the arithmetic-gluing and Hilbert-symmetry Lean gates, builds the paper through
+then elaborates the arithmetic-gluing, Hilbert-symmetry, and
+hyperplane-square Lean gates, builds the paper through
 the repository Makefile, enforces the gate's axiom allowlist, and rejects
 manuscript warnings.
 

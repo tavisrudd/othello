@@ -26,8 +26,12 @@ LEAN_GATE_COMMANDS = [
         "lean/scripts/guarded-lean",
         "RelativeConicArcs/Gates/ClebschHilbertSymmetry.lean",
     ],
+    [
+        "lean/scripts/guarded-lean",
+        "RelativeConicArcs/Gates/ClebschHyperplaneSquare.lean",
+    ],
 ]
-LEAN_GATE_TERMINALS = 25
+LEAN_GATE_TERMINALS = 26
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
@@ -138,6 +142,11 @@ EXPECTED_EVIDENCE = {
             "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
         "commands": [],
     },
+    "hyperplane-square": {
+        "checksum_manifest":
+            "papers/clebsch-factorization/verification/hyperplane_square.sha256",
+        "commands": [],
+    },
 }
 EXPECTED_CLAIMS = {
     "thm:factorization-recovery": (
@@ -146,6 +155,10 @@ EXPECTED_CLAIMS = {
          "gorenstein-gate", "profile-incidence", "decorated-parent"},
     ),
     "prop:matching-secant-quotient": ({"conceptual"}, set()),
+    "thm:balanced-orbit-completeness": (
+        {"conceptual", "classical-input"},
+        set(),
+    ),
     "thm:rank-three-quotients": (
         {"conceptual", "classical-input", "certificate"},
         {"matching-module", "h3-equivariant-rank"},
@@ -159,13 +172,23 @@ EXPECTED_CLAIMS = {
         {"matching-module", "h3-equivariant-rank"},
     ),
     "prop:radical-hadamard": ({"conceptual"}, set()),
+    "prop:modular-sheet-mechanism": (
+        {"conceptual", "classical-input", "certificate"},
+        {"matching-module", "h3-equivariant-rank", "balanced-sheet"},
+    ),
+    "lem:hyperplane-square": (
+        {"conceptual", "lean"},
+        {"hyperplane-square"},
+    ),
     "thm:balanced-cubic": (
         {"conceptual", "certificate", "lean"},
-        {"matching-module", "balanced-sheet", "hilbert-symmetry"},
+        {"matching-module", "balanced-sheet", "hilbert-symmetry",
+         "hyperplane-square"},
     ),
     "cor:graded-evaluation": (
         {"conceptual", "certificate", "lean"},
-        {"matching-module", "balanced-sheet", "hilbert-symmetry"},
+        {"matching-module", "balanced-sheet", "hilbert-symmetry",
+         "hyperplane-square"},
     ),
     "cor:self-associated-gorenstein": (
         {"conceptual", "classical-input", "certificate", "lean"},
@@ -454,7 +477,7 @@ def build_fingerprint(
         ],
         "evidence": bundle_fingerprints,
         "expected_success": {
-            "metadata": "metadata: 21 statements, 9 evidence bundles: CHECK OK",
+            "metadata": "metadata: 24 statements, 10 evidence bundles: CHECK OK",
             "release": "clebsch factorization release: CHECK OK",
         },
     }
@@ -535,7 +558,8 @@ def main() -> int:
         if "certificate" in modes and not claim["evidence"]:
             raise ValueError(f"{claim['label']}: certificate mode has no evidence")
         if "lean" in modes and not (
-            {"arithmetic-gluing", "hilbert-symmetry"} & set(claim["evidence"])
+            {"arithmetic-gluing", "hilbert-symmetry", "hyperplane-square"}
+            & set(claim["evidence"])
         ):
             raise ValueError(f"{claim['label']}: Lean mode has no Lean evidence")
         expected_modes, expected_bundles = EXPECTED_CLAIMS[claim["label"]]

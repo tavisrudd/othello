@@ -24,10 +24,13 @@ have one mechanism:
 
 No orbit row reduction remains load-bearing for the \(3,6,10\) theorem.
 The existing exact quotient matrices remain independent cross-checks.
-The `tt` closeout also removes the nonzero cubic computation from the
+The `tt` closeout also removed the nonzero cubic computation from the
 logical spine: quadratic recovery gives signed Gale self-duality and
 Cayley--Bacharach in degree two; Eisenbud--Popescu then gives a Gorenstein
-coordinate ring, whose Hilbert symmetry forces the cubic.
+coordinate ring, whose Hilbert symmetry forces the cubic.  C665 subsequently
+shortened this dependency further: its full-support hyperplane-square lemma
+forces the Schur cube directly, leaving the Gorenstein argument as a geometric
+consequence and independent check.
 
 ## Human proof
 
@@ -220,7 +223,7 @@ broader Paper II theorem would have to derive the radical--Hadamard inputs
 structurally for new conic matching orbits; the cubic then follows.
 Assuming those ranks or checking more examples would not do so.
 
-The `tt` pass reverses the former cubic-to-Gorenstein implication.  Once
+The `tt` pass first reversed the former cubic-to-Gorenstein implication.  Once
 \(L^{\circ2}=\ker\epsilon\), the full-support relation and
 \(ADA^{\mathsf T}=0\) make the configuration self-associated with
 Cayley--Bacharach in degree two.  The classical self-association criterion
@@ -229,9 +232,11 @@ makes its coordinate ring Gorenstein.  The known values
 \[
 h=(1,q-1,q-1,1).
 \]
-Therefore \(L^{\circ3}=k^\Omega\) and \(\mu_3\ne0\) without tensor
-enumeration.  The real nonlinear frontier is only the structural derivation
-of the radical--Hadamard hypotheses for new conic matching orbits.
+This recovers \(L^{\circ3}=k^\Omega\) and \(\mu_3\ne0\) without tensor
+enumeration.  C665's later hyperplane-square lemma now proves those two
+conclusions directly from the full-support relation; the real nonlinear
+frontier is only the structural derivation of the radical--Hadamard
+hypotheses for new conic matching orbits.
 
 ## Mystery ledger
 
@@ -239,9 +244,9 @@ of the radical--Hadamard hypotheses for new conic matching orbits.
 |---|---|---|
 | Why do the \(A_3,B_3,H_3\) ranks follow the same pattern? | settled | The affine cocycle, irreducible Fischer summands, and radial trace give one proof. |
 | Is there one invariant formula forcing the \(B_3,H_3\) radial scalars? | \(B_3\) settled geometrically; uniform question open | The \(B_3\) scalar is the dual norm of the common secant square; no type-free formula also explaining the \(H_3\) second trace was proved. |
-| Why is the first signed moment cubic and nonzero? | settled conceptually | Quadratic recovery gives self-association and CB(2); Gorenstein Hilbert symmetry forces the final cubic socle line. |
+| Why is the first signed moment cubic and nonzero? | settled conceptually | C665's full-support hyperplane-square lemma forces \(L^{\circ3}=k^\Omega\) directly; Gorenstein Hilbert symmetry independently recovers the final cubic socle line. |
 | Does radical--Hadamard recovery occur in an infinite family? | settled abstractly, open for conic quotients | Antipodal simplices give an abstract family; no new matching-quotient realization passed the gate. |
-| Are \(B_3,H_3\) the only balanced \(2q\)-point full-\(\operatorname{PGL}_2(q)\) matching orbits? | open, not promoted | Requires a subgroup-index classification plus matching realization analysis. |
+| Are \(B_3,H_3\) the only balanced \(2q\)-point full-\(\operatorname{PGL}_2(q)\) matching orbits? | settled by C665 | Dickson reduction and exact matching realization leave only \(B_3/\mathbb F_7\) and \(H_3/\mathbb F_{11}\); the stronger intrinsic-recovery formulation remains open. |
 
 No remaining mystery affects the \(3,6,10\) theorem or the current Paper II
 release.
