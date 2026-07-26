@@ -1,0 +1,477 @@
+{
+  "claim_scope": "Exact finite recursive gate. At positive overload every accepted state has positive minimum legal-mate count and every opponent has a strict-overload reply to a lower accepted state. Overload-zero states use the structural B_cc boundary. No uniform odd-q claim.",
+  "orders": [
+    {
+      "accepted_root_labels": [
+        [
+          1,
+          9,
+          10,
+          11
+        ],
+        [
+          3,
+          9,
+          10,
+          11
+        ],
+        [
+          4,
+          5,
+          6,
+          10
+        ],
+        [
+          7,
+          9,
+          10,
+          11
+        ],
+        [
+          9,
+          10,
+          11,
+          12
+        ]
+      ],
+      "certified_response_edges": 355,
+      "chosen_response_target_histogram": {
+        "1": 22,
+        "2": 4,
+        "3": 5,
+        "B_cc": 324
+      },
+      "copycat_boundary_mask_sha256": "ad607c21f375631164269eb79d04cf3349f2c3fa60beb0cceead92ed7dd7cbd7",
+      "copycat_boundary_states": 241,
+      "domain": "frozen escape-root domain",
+      "exact_p_roots": 5,
+      "failed_marked_fibres": 0,
+      "mate_count_self_checks": [
+        {
+          "independent_determinant_count": 1,
+          "legal_mask_count": 1,
+          "move": [
+            4,
+            10
+          ],
+          "omega": 1,
+          "selected_size": 6,
+          "state_mask": 713645625753690876375720513603711736614225920
+        }
+      ],
+      "positive_mu_histogram": {
+        "1": 19,
+        "2": 4,
+        "3": 4,
+        "14": 2,
+        "15": 1,
+        "16": 1,
+        "17": 1
+      },
+      "positive_state_mask_sha256": "26f3181d0fddf5b066c5b12783a3d26ab3404abc1888a8a28d93d9554a73becc",
+      "positive_states": 32,
+      "q": 13,
+      "records": [
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 16,
+          "omega": 108,
+          "t4": [
+            1,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 14,
+          "omega": 102,
+          "t4": [
+            3,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 17,
+          "omega": 72,
+          "t4": [
+            4,
+            5,
+            6,
+            10
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 15,
+          "omega": 90,
+          "t4": [
+            7,
+            9,
+            10,
+            11
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 14,
+          "omega": 92,
+          "t4": [
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "rejection_histogram": {
+        "boundary_not_B_cc": 397,
+        "positive_state_mu_zero": 25
+      },
+      "response_map_sha256": "b6d579c9981a264db5b0f90b80d58cbef3828b9b135b6176d2da670455594a05",
+      "roots": 5,
+      "survivor_iff_exact_p_on_domain": true,
+      "survivor_roots": 5
+    },
+    {
+      "accepted_root_labels": [
+        [
+          3,
+          4,
+          5,
+          8
+        ],
+        [
+          4,
+          5,
+          7,
+          15
+        ],
+        [
+          6,
+          7,
+          8,
+          14
+        ],
+        [
+          11,
+          13,
+          14,
+          15
+        ],
+        [
+          13,
+          14,
+          15,
+          16
+        ]
+      ],
+      "certified_response_edges": 23284,
+      "chosen_response_target_histogram": {
+        "1": 620,
+        "10": 53,
+        "11": 18,
+        "13": 4,
+        "2": 264,
+        "3": 53,
+        "4": 2,
+        "5": 11,
+        "6": 63,
+        "7": 100,
+        "8": 147,
+        "9": 115,
+        "B_cc": 21834
+      },
+      "copycat_boundary_mask_sha256": "0e6bbe6f3bbd7e155e744189817c958259d58e38434ef7787a465395ff617c5f",
+      "copycat_boundary_states": 29903,
+      "domain": "frozen escape-root domain",
+      "exact_p_roots": 5,
+      "failed_marked_fibres": 5799,
+      "mate_count_self_checks": [
+        {
+          "independent_determinant_count": 1,
+          "legal_mask_count": 1,
+          "move": [
+            7,
+            4
+          ],
+          "omega": 1,
+          "selected_size": 8,
+          "state_mask": 2854495385411940049480353599494279800666718209
+        }
+      ],
+      "positive_mu_histogram": {
+        "1": 935,
+        "2": 308,
+        "3": 60,
+        "4": 1,
+        "5": 10,
+        "6": 64,
+        "7": 109,
+        "8": 159,
+        "9": 116,
+        "10": 53,
+        "11": 15,
+        "13": 4,
+        "56": 1,
+        "57": 3,
+        "58": 1
+      },
+      "positive_state_mask_sha256": "85768ad99f5bcb48f46949f69a95cc4a2d5a8a20146540333c923acb496c7901",
+      "positive_states": 1839,
+      "q": 17,
+      "records": [
+        {
+          "exact_cap_value": "N",
+          "first_obstruction": null,
+          "mate_surplus_survivor": false,
+          "mu": 57,
+          "omega": 832,
+          "t4": [
+            1,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "first_obstruction": null,
+          "mate_surplus_survivor": false,
+          "mu": 57,
+          "omega": 832,
+          "t4": [
+            2,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 57,
+          "omega": 772,
+          "t4": [
+            3,
+            4,
+            5,
+            8
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "first_obstruction": null,
+          "mate_surplus_survivor": false,
+          "mu": 58,
+          "omega": 832,
+          "t4": [
+            3,
+            4,
+            5,
+            9
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 56,
+          "omega": 808,
+          "t4": [
+            4,
+            5,
+            7,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "first_obstruction": null,
+          "mate_surplus_survivor": false,
+          "mu": 57,
+          "omega": 832,
+          "t4": [
+            4,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 57,
+          "omega": 820,
+          "t4": [
+            6,
+            7,
+            8,
+            14
+          ]
+        },
+        {
+          "exact_cap_value": "N",
+          "first_obstruction": null,
+          "mate_surplus_survivor": false,
+          "mu": 57,
+          "omega": 844,
+          "t4": [
+            6,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 58,
+          "omega": 796,
+          "t4": [
+            11,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 57,
+          "omega": 820,
+          "t4": [
+            13,
+            14,
+            15,
+            16
+          ]
+        }
+      ],
+      "rejection_histogram": {
+        "boundary_not_B_cc": 98210,
+        "positive_state_mu_zero": 1223,
+        "uncovered_marked_opponent": 5799
+      },
+      "response_map_sha256": "3921919bd5cd673b9982ec3ca761069d142c109e7c29fda696bc6ed20f2b2427",
+      "roots": 10,
+      "survivor_iff_exact_p_on_domain": true,
+      "survivor_roots": 5
+    },
+    {
+      "accepted_root_labels": [
+        [
+          15,
+          16,
+          17,
+          18
+        ]
+      ],
+      "certified_response_edges": 31210,
+      "chosen_response_target_histogram": {
+        "1": 2106,
+        "14": 2,
+        "15": 5,
+        "16": 6,
+        "17": 24,
+        "18": 41,
+        "19": 37,
+        "2": 1052,
+        "20": 21,
+        "21": 8,
+        "22": 4,
+        "3": 145,
+        "4": 5,
+        "5": 2,
+        "B_cc": 27752
+      },
+      "copycat_boundary_mask_sha256": "3d9954bfc392b8990494548337e593cca6df7ec6abab698e96530520fa4c6652",
+      "copycat_boundary_states": 22895,
+      "domain": "single previously certified q19 control root",
+      "exact_p_roots": 1,
+      "failed_marked_fibres": 5993,
+      "mate_count_self_checks": [
+        {
+          "independent_determinant_count": 1,
+          "legal_mask_count": 1,
+          "move": [
+            6,
+            1
+          ],
+          "omega": 1,
+          "selected_size": 8,
+          "state_mask": 2348542591522838213964886048960341317868775785728923591509510027986980227480310803824844298970399283412468736
+        }
+      ],
+      "positive_mu_histogram": {
+        "1": 1509,
+        "2": 744,
+        "3": 98,
+        "4": 3,
+        "5": 1,
+        "14": 2,
+        "15": 5,
+        "16": 6,
+        "17": 24,
+        "18": 41,
+        "19": 35,
+        "20": 20,
+        "21": 8,
+        "22": 4,
+        "90": 1
+      },
+      "positive_state_mask_sha256": "17b63becb91a0ceb69c7370565e60e6c4ec9ec1805f8c7f9ef8d1368ed31ba41",
+      "positive_states": 2501,
+      "q": 19,
+      "records": [
+        {
+          "exact_cap_value": "P",
+          "first_obstruction": null,
+          "mate_surplus_survivor": true,
+          "mu": 90,
+          "omega": 1520,
+          "t4": [
+            15,
+            16,
+            17,
+            18
+          ]
+        }
+      ],
+      "rejection_histogram": {
+        "boundary_not_B_cc": 26299,
+        "positive_state_mu_zero": 1738,
+        "uncovered_marked_opponent": 5993
+      },
+      "response_map_sha256": "be121e72f2557b8838195e15d236569d600ea527402629b7ef07edea29724879",
+      "roots": 1,
+      "survivor_iff_exact_p_on_domain": true,
+      "survivor_roots": 1
+    }
+  ],
+  "schema": "c80-positive-mate-surplus-closure-v1",
+  "source": {
+    "copycat_survivor_script": "rust/scripts/c80_adaptive_copycat_survivor.py",
+    "copycat_survivor_script_sha256": "8948a9651b0928955ebd09041c6395cbc4f2287ba274748ce5cebf45a4dc56fd",
+    "frozen_rows": "notes/data/c20-q13-q17-states.jsonl.gz",
+    "frozen_rows_sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+  }
+}

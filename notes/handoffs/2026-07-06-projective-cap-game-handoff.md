@@ -1067,6 +1067,22 @@ canonical isolate-creation obstruction; on success seek the field-uniform
 incidence proof. C82 remains gated. Report+certificate:
 [`../2026-07-25-c80-marked-secant-spoiler-repair-compare.md`](../2026-07-25-c80-marked-secant-spoiler-repair-compare.md).
 
+**Strict-overload positive-mate-surplus closure passes all certified gates
+but is globally redundant (C80, 2026-07-25).** The recursively filtered
+survivor contains all five q13 P roots, exactly the five q17 P roots, and the
+marked q19 control; accepted positive-state counts are 32, 1,839, and 2,501.
+However, if `μ(S)` is the minimum legal-mate count, then every positive
+`F_cc` state already has `μ(S)≥1` because its defining `∀ opponent ∃ legal
+strict reply` clause supplies a mate after every move. Induction on `Ω`
+therefore proves the proposed `F_μ` equals `F_cc` at every order. The finite
+certificates genuinely hit the floor `μ=1`, so there is no hidden
+quantitative margin. This closes `μ` as a new recursive compression: it
+diagnoses the repair/spoiler split but cannot serve as the missing
+nonrecursive marked-edge predicate. Next construct a direct secant/orbital
+edge certificate whose soundness does not call lower-survivor membership,
+then prove opponent-complete coverage. C82 remains gated. Report+script+cert:
+[`../2026-07-25-c80-positive-mate-surplus-closure.md`](../2026-07-25-c80-positive-mate-surplus-closure.md).
+
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
 The stable crown-independent thesis is global fixed-point-free incidence symmetry versus residual
 capacity degradation. The package now contains the exact theorem/trust ledger, normalized fixed-q
@@ -1142,15 +1158,17 @@ Priority order and why:
    does not compress to a low-dimensional monotone rule: no conjunction
    through three predeclared scalar thresholds is P-pure, and the first
    four-coordinate fits are interpolation. The sparse-complement proof
-   identifies the exact structural coordinate
+   identifies the diagnostic coordinate
    `μ(S)=min_x |{y:S+x+y legal}|`: repairs have `μ=8` at q17 and `μ=17` at
-   q19, while every spoiler has `μ=0`. Next test opponent-complete
-   strict-`Ω`, positive-`μ` closure on the complete certified q13/q17 DAGs
-   and marked q19 control; failure means canonicalize the first
-   isolate-creation obstruction, while success advances to the field-uniform
-   incidence proof. No quotient or arbitrary Grundy oracle is required, and
-   the five-state q17 thread is not a depth-two law. A value-only factor is
-   also not excluded.
+   q19, while every spoiler has `μ=0`. Its proposed recursive closure passes
+   the q13/q17 DAGs and marked q19 control but is globally redundant:
+   `F_μ=F_cc`, since the defining `∀ opponent ∃ legal reply` clause already
+   forces `μ≥1` at every positive survivor state. The next target is a
+   nonrecursive marked secant/orbital edge predicate whose soundness does not
+   call lower-survivor membership, followed by opponent-complete incidence
+   coverage. No quotient or arbitrary Grundy oracle is required, and the
+   five-state q17 thread is not a depth-two law. A value-only factor is also
+   not excluded.
    Do not mine another bounded-depth selector, stabilizer signature, bounded-gadget patch,
    terminal guard, unmarked load potential, or feature-only refinement.  Only a uniform
    growing-depth membership proof releases C82.
