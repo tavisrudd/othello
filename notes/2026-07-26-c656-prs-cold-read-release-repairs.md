@@ -67,13 +67,27 @@ Certificate R7's original replay independently checks representatives,
 five-secant tests, group orbits, stabilizers, and Frobenius fusion, but it
 imports the generator's orbit list and aggregate absence claims.
 `notes/2026-07-26-c656-r7-independent-arithmetic-replay.py` now supplies a
-second end-to-end route.  It imports no stored classification or orbit
-partition, replaces C509's field layer by the R5 replay's separately
-implemented arithmetic, and reruns the pointed complement, marker transport,
+second reconstruction route.  It imports no stored orbit partition, replaces
+C509's field layer by the R5 replay's separately implemented arithmetic, and
+reruns the primary quotient enumerator, pointed complement, marker transport,
 complete sextic split-free set, projective-orbit, stabilizer, flag, and
-Frobenius aggregation.  The existing replay independently checks the
-syndrome test and orbit semantics.  The complete fourteen-field
-cross-arithmetic run remains to be completed.
+Frobenius aggregation before comparison with the public record.  The existing
+replay independently checks the syndrome test and orbit semantics.  Both
+routes reuse the primary quotient enumerator, so bounded-field completeness
+remains a trusted exact execution rather than an independently rederived
+claim.
+
+The cross-arithmetic replay passes at all fourteen fields
+\(7,8,9,11,13,16,17,19,23,25,27,29,31,32\).  The first serial run printed
+PASS through \(q=31\) before deliberate interruption to release memory for
+the Lean gate; the remaining shard
+
+```text
+python3 notes/2026-07-26-c656-r7-independent-arithmetic-replay.py --fields 32
+```
+
+exited zero with
+`q=32: pointed=18450 deep=17425 PGL=5: PASS`.
 
 ## Literature delta gate
 
@@ -93,22 +107,39 @@ make -C papers/beyond4_prs check
 ```
 
 passes on the narrowed 31-page canonical manuscript.  `make -C
-papers/beyond4_prs tit-check` passes on the 23-page IEEE build.  The local
-supplement consistency gate also passes before addition of the C656 replay.
-Complete replay closure, refreshed hashes, the Lean gate, fresh-history
-export, and two blind final readers remain open.
+papers/beyond4_prs tit-check` passes on the 23-page IEEE build.
+`python3 papers/beyond4_prs/supplement/package_evidence_bundle.py --check`
+and `python3 papers/beyond4_prs/supplement/verify.py` pass on the refreshed
+44-artifact bundle.
 
-The deterministic exporter produced separate paper and Lean histories at
-source commit `7db291a1325fd922c15ccb5dd414ddbfd82a496c`.  In the clean candidate,
-the supplement consistency gate passes, the canonical PDF rebuilds
-byte-for-byte with SHA-256
-`81eeae9fdfec14b4518892074390fe252fa02ed8df596974bb3d53e333d31a7b`,
-and the 23-page TIT build passes.
+Two mutually blind specialist cold reads found and closed four release-facing
+trust defects: an active reference to the excluded stable-component theorem,
+Certificate SC presented as Version 1 evidence, R7 replay language that
+overstated independent completeness, and one residual Lean-map label.  Both
+readers independently confirmed the final paper commit
+`b410777db313aebe378257c3bf6c04ded7422d03`, canonical PDF SHA-256
+`5eb6d0c2c420cfc7cd4317e3d1ea80447288ee7666029d660410069bf29aef9b`,
+and returned GREEN.  Their stable reports are
+`notes/2026-07-26-c656-finite-geometry-blind-signoff.md` and
+`notes/2026-07-26-c656-coding-computation-blind-signoff.md`.  These are
+internal AI cold reads and do not fill the publication-independent reader
+fields in `supplement/FINAL-READER-SIGNOFF.md`.
+
+The deterministic exporter produced separate paper and Lean histories from
+source commit `11cd64d72f937de745d1316ec394431042cfbf6a`.
+The fresh paper commit is
+`f4a714a62bff70521f48a4ce1e9ac1e68ac807d0`; the fresh Lean commit is
+`1385f19d6d7c6c748bc3b779f9c5388af6e51e04`.  In the clean paper candidate,
+the supplement consistency gate passes, both builds pass, and the canonical
+and TIT PDFs rebuild byte-for-byte with SHA-256 values
+`5eb6d0c2c420cfc7cd4317e3d1ea80447288ee7666029d660410069bf29aef9b`
+and `48943b96949604cb25133c53403b4cf24ea87ec8c30ab78f4172931f1770d652`.
 
 `lean/scripts/guarded-lean
 RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean` passes against the
-narrowed paper-facing map.  The matching axiom-audit elaboration is still
-running.
+narrowed paper-facing map.  Rebuilding the matching axiom-audit closure is
+queued behind the active C646 Lean owner after the first overlapping attempt
+was killed with exit 137 while the R7 census was still live.
 
 ## Mystery ledger
 
@@ -122,10 +153,16 @@ Settled:
   not formalize the missing concrete geometry.
 - Version 1 can preserve the R5--R7 results without consuming any of those
   claims.
+- The R7 reconstruction supplies independent field arithmetic and
+  representative/orbit checks, not an independent completeness derivation;
+  the paper and supplement now state that boundary.
+- Both blind readers' scope and trust objections are closed on one byte-exact
+  candidate.
 
 Open:
 
-- The complete fourteen-field R7 cross-arithmetic run remains open.
-- Final replay, build, export, and cold-reader gates.
+- The serialized Lean axiom-audit rebuild remains queued.
+- Publication-independent human readers remain a C545 external release gate;
+  the internal blind reviews do not substitute for them.
 - The exact all-level component ledger and modular-union degree belong to
   successor work, not Version 1.
