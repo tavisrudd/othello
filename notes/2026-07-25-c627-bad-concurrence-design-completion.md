@@ -19,10 +19,13 @@ automatically nonzero on every triple above an arc secant, including genuine
 zero-defect hyperovals; carrier nonvanishing alone therefore cannot improve
 the defect bound.
 
-The paper-facing finite-graph and defect-transfer spine is now formalized in
-`lean/RelativeConicArcs/MatchingPackingDefect.lean` and
-`lean/RelativeConicArcs/MatchingPackingDefectBridge.lean`.  No manuscript file
-is changed.
+The finite-graph, clique-packing, projective concurrence, and defect-transfer
+spine is formalized in
+`lean/RelativeConicArcs/MatchingPackingDefect.lean`,
+`lean/RelativeConicArcs/CliquePackingCompletion.lean`,
+`lean/RelativeConicArcs/MatchingPackingDefectBridge.lean`, and
+`lean/RelativeConicArcs/MatchingPackingCompletionBridge.lean`.  No manuscript
+file is changed.
 
 ## Matching-packing setup
 
@@ -279,12 +282,23 @@ the robust abundance forced above, cannot imply positive defect.
 ## Lean formalization
 
 The focused gate
-`RelativeConicArcs.Gates.MatchingPackingDefect` exports six terminals:
+`RelativeConicArcs.Gates.MatchingPackingDefect` now exports the complete
+formal chain:
 
 - `RelativeConicArcs.MatchingPacking.oneBlockShort_leave_isClique` proves that
   a finite simple graph with \(\binom m2\) edges and all positive degrees
   divisible by \(m-1\) has exactly \(m\) support vertices and is complete on
   its support;
+- `RelativeConicArcs.CliquePacking.exists_decomposition_of_card_leave_eq_choose`
+  defines finite clique packings and their leaves, proves the covered-edge and
+  degree congruences, and adjoins the leave support as a new block to produce
+  an actual edge decomposition;
+- `RelativeConicArcs.concurrenceCliquePacking` packages the maximum
+  concurrence matchings of an arc as a clique packing in the disjointness
+  graph on `ArcPair A`;
+- `RelativeConicArcs.card_edgeFinset_arcPairDisjointnessGraph` and
+  `RelativeConicArcs.sub_one_dvd_degree_arcPairDisjointnessGraph` prove the
+  exact Kneser edge count and the required degree divisibility;
 - `RelativeConicArcs.badConcurrenceEdgeCount_add_maximumBlocks` proves the
   exact identity
   \[
@@ -295,7 +309,13 @@ The focused gate
   derives \(m(v-b)\le S\), including \(b\le v\), from the full block-count
   identity; and
 - `RelativeConicArcs.two_mul_half_le_scaledDefect_of_two_le_maximumConcurrenceBlockDeficiency`
-  derives \(2m\le S\) whenever at least two maximum blocks are missing.
+  derives \(2m\le S\) whenever at least two maximum blocks are missing; and
+- `RelativeConicArcs.two_le_maximumConcurrenceBlockDeficiency_of_no_decomposition`
+  proves that abstract nonexistence excludes both zero and one missing block,
+  while
+  `RelativeConicArcs.two_mul_half_le_scaledDefect_of_no_disjointness_decomposition`
+  composes this result with the defect transfer to obtain \(2m\le S\)
+  directly.
 
 The gate build and its exact-target `--no-build` replay are green.  Every
 exported terminal reports exactly

@@ -30,7 +30,8 @@ instance instDecidableArcPairDisjointnessAdj (A : Finset P) :
   unfold arcPairDisjointnessGraph
   infer_instance
 
-omit [Fintype P] [Fintype L] in
+omit [Fintype P] [Fintype L] [DecidableEq P]
+  [Configuration.ProjectivePlane P L] in
 @[simp] theorem arcPairDisjointnessGraph_adj
     {A : Finset P} {e f : ArcPair A} :
     (arcPairDisjointnessGraph A).Adj e f ↔ Disjoint e.1 f.1 := by
@@ -48,6 +49,7 @@ omit [Fintype P] [Fintype L] in
     rw [hempty] at hcard
     simp at hcard
 
+omit [Fintype P] in
 /-- Every vertex of the endpoint-pair disjointness graph has
 `choose (|A| - 2) 2` neighbors. -/
 theorem degree_arcPairDisjointnessGraph
@@ -61,6 +63,7 @@ theorem degree_arcPairDisjointnessGraph
     simp [SimpleGraph.mem_neighborFinset, mem_disjointPartners]
   rw [hneighbors, card_disjointPartners]
 
+omit [Fintype P] in
 /-- The endpoint-pair disjointness graph has `3 * choose |A| 4` edges. -/
 theorem card_edgeFinset_arcPairDisjointnessGraph (A : Finset P) :
     (arcPairDisjointnessGraph A).edgeFinset.card =
@@ -119,6 +122,7 @@ private theorem half_sub_one_dvd_choose_sub_two
     have := Nat.eq_of_mul_eq_mul_left (by omega : 0 < 2) hdouble
     simpa [q, Nat.mul_comm] using this
 
+omit [Fintype P] in
 /-- Degrees in the endpoint-pair disjointness graph are divisible by one less than the maximum
 matching size. -/
 theorem sub_one_dvd_degree_arcPairDisjointnessGraph
@@ -167,6 +171,7 @@ noncomputable def concurrenceCliquePacking
         _ = y := (huniq y ⟨hexternal y hy, heY, hfY⟩).symm
     exact hBC (congrArg (pairsThrough (L := L) A) hxy)
 
+omit [Fintype P] in
 /-- The number of blocks in the concurrence clique packing is the number of indexing centres,
 provided the common matching size is at least two. -/
 theorem card_blocks_concurrenceCliquePacking
@@ -185,6 +190,7 @@ theorem card_blocks_concurrenceCliquePacking
     exact hhalf
   · exact hxy
 
+omit [Fintype P] in
 /-- If a family of maximum concurrence matchings is one block short in the edge count, then it
 extends to a full clique decomposition of the endpoint-pair disjointness graph. -/
 theorem exists_disjointness_decomposition_of_concurrence_count_add_one
@@ -222,6 +228,7 @@ noncomputable def maximumConcurrenceCenters
   maximumRequiredConcurrenceCenters (L := L) A H ∪
     maximumHoleConcurrenceCenters (L := L) A H
 
+omit [Configuration.ProjectivePlane P L] in
 private theorem maximumConcurrenceCenters_external
     {A H : Finset P} (hdisj : Disjoint A H)
     {x : P} (hx : x ∈ maximumConcurrenceCenters (L := L) A H) :
@@ -238,6 +245,7 @@ private theorem maximumConcurrenceCenters_external
   · have hxH := (Finset.mem_filter.mp hx).1
     exact fun hxA => Finset.disjoint_left.mp hdisj hxA hxH
 
+omit [Configuration.ProjectivePlane P L] in
 private theorem maximumConcurrenceCenters_index
     {A H : Finset P} {x : P}
     (hx : x ∈ maximumConcurrenceCenters (L := L) A H) :
@@ -248,6 +256,7 @@ private theorem maximumConcurrenceCenters_index
   · exact (Finset.mem_filter.mp hx).2
   · exact (Finset.mem_filter.mp hx).2
 
+omit [Configuration.ProjectivePlane P L] in
 private theorem card_maximumConcurrenceCenters
     {A H : Finset P} :
     (maximumConcurrenceCenters (L := L) A H).card =
