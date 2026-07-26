@@ -519,6 +519,19 @@ scalar. C652 now owns the exact golden-fibre, order-four, spinor, and
 novelty gate. C579 then rebuilds Paper III around the arithmetic orientation
 theorem and creates its independent trust surface.
 
+The imported targets-4/5/7/8 report adds the conceptual interpretation of
+C651: after localizing at the square of a nonzero odd element, an involutive
+integral algebra is the direct sum of its invariant algebra and one odd
+generator times that algebra. On the sign-twisted Clebsch four-space the
+first odd invariant is \(e_3=\sigma_3\), so orientation forgetting is
+generically quadratic and cubic recovery reads the missing sign. C653 must
+verify the classical \(A_5\)-invariant-ring citation and characteristic
+scope before manuscript integration. The report's marked
+Hitchin--Mathieu torsor remains conditional on the carrier identifications
+now added to C652. Its continuation-rigidity and repair-port targets remain
+outside the clebsch lane. Provenance and exact disposition are recorded in
+`notes/2026-07-26-c579-hitchin-clebsch-paper-iii-plan.md`.
+
 The previous carrier, four-sheet holonomy, theta, Fourier, quantum, Mathieu,
 and degree-23 coherence material is subordinate inventory. C579 admits an
 item only when it becomes a proved consequence or application of the

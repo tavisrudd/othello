@@ -6,15 +6,16 @@
 
 ## Provenance
 
-The user supplied two reports and one reproducibility archive from a prior
-ChatGPT conversation. They are preserved byte-for-byte as:
+The user supplied three reports and two reproducibility archives from prior
+ChatGPT conversations. They are preserved byte-for-byte as:
 
 - `notes/2026-07-26-clebsch-top3-execution-report.md`;
 - `notes/2026-07-26-hitchin-clebsch-bridge-report.md`;
-- `notes/artifacts/2026-07-26-clebsch-top3-reproducibility-bundle.tar.gz`.
+- `notes/artifacts/2026-07-26-clebsch-top3-reproducibility-bundle.tar.gz`;
+- `notes/2026-07-26-clebsch-targets-4-5-7-8-report.md`;
+- `notes/artifacts/2026-07-26-clebsch-targets-4-5-7-8-bundle.tar.gz`.
 
-Their hashes are frozen in
-`notes/artifacts/2026-07-26-clebsch-top3-SHA256SUMS`. Import records
+Their hashes are frozen in the adjacent `SHA256SUMS` files. Import records
 provenance; it does not promote every claim in the reports to a verified
 repository result.
 
@@ -52,6 +53,24 @@ The atomistic pilot is a bounded negative result and is not Paper II or
 Paper III content. It may be retained as research inventory, but its
 area/chemical descriptor must not be presented as predictive.
 
+The new targets report supplies the missing conceptual algebra around the
+first two clauses. For an integral algebra with a nontrivial involution and a
+nonzero odd element \(C\), localization at \(C^2\) splits the algebra into
+its invariant summand and \(C\) times that summand. Applied to the
+sign-twisted \(A_5\)-action on the Clebsch four-space, the first odd
+invariant is \(e_3=\sigma_3\). Thus C651's tensor identity is the concrete
+finite-field realization of a general statement: forgetting orientation is
+generically quadratic and the first recovering observable is cubic.
+
+The general localization proof is complete elementary algebra. The exact
+Clebsch specialization still needs C653 to verify the classical
+\(A_5\)-invariant-ring citation and characteristic hypotheses before it
+becomes manuscript prose. The report's Hitchin--Mathieu statement is a
+marked-torsor theorem conditional on four banked identifications; it is not
+yet evidence for those identifications. Its continuation-rigidity reduction
+and repair-port compiler belong to other owning lanes and are not Paper III
+claims.
+
 ## Imported evidence status
 
 The archive is a valid gzip/tar stream. The exact standard-library replay
@@ -86,6 +105,17 @@ The archive contains no checker for the arithmetic Hitchin clauses:
 its spinor norm, or its image in \(T_{11}\). Those claims require a compact
 exact certificate and an independent replay.
 
+The second imported archive is also a valid gzip/tar stream. Its seven
+members contain the report, repair-port compiler and tests, Clebsch repair
+certificates, and a Hitchin--Mathieu arithmetic script. From a fresh
+extraction, all seven repair-port unit tests pass, and the torsor script
+reproduces the roots \(4,8\), the order calculation, and the count of two
+unmarked equivariant bijections. The script explicitly does not recompute
+the four load-bearing inputs: the two \(M_{11}\) embeddings, their
+\(\operatorname{PSL}_2(11)\) intersection, Hadamard row--column exchange, or
+the identification of reduced Hitchin exchange with \(T_{11}\). Therefore
+it sharpens C652's acceptance statement but does not discharge C652.
+
 The finite-field formula
 
 \[
@@ -113,8 +143,11 @@ Mukai--Umemura model and normalization comparison.
 2. **C652 — arithmetic-cover certificate.** Check the two golden fibres,
    \(I_4=A_-\), \(I_8=A_+\), the comparison matrices, the order-four
    exchanger, the \(A_4\) intersection, the spinor square class, and the
-   \(T_{11}\) specialization. Package exact scripts, canonical output,
-   hashes, and an independent implementation.
+   \(T_{11}\) specialization. Also certify the two \(M_{11}\) parents,
+   their \(\operatorname{PSL}_2(11)\) intersection, and the compatibility
+   of Hadamard row--column exchange with the reduced Hitchin exchange before
+   using the marked-torsor corollary. Package exact scripts, canonical
+   output, hashes, and an independent implementation.
 3. **C653 — integral and novelty gate.** Audit rational forms of the
    Mukai--Umemura incidence cover, Dye, binary-sextic invariant theory, and
    finite-field reductions. Prove the largest justified integral base and
@@ -142,8 +175,14 @@ been cut.
   \(\mathbf F_{11}\). The characteristic-zero Gaunt scalar has
   \(11\)-divisible denominator, so the common statement across
   characteristics is equality of the integral Clebsch line.
+- **Conceptually settled, citation-gated under C653:** localization at the
+  square of a nonzero odd element makes any involutive integral algebra a
+  rank-two invariant algebra, and the Clebsch chart's first odd generator is
+  the cubic \(e_3=\sigma_3\).
 - **Open under C652:** an independently replayed exact arithmetic
-  specialization from the golden fibre to \(T_{11}\).
+  specialization from the golden fibre to \(T_{11}\), together with the
+  carrier-level identifications needed for the marked Hitchin--Mathieu
+  torsor.
 - **Open under C653:** the minimal bad-prime set and prior-art status of the
   \(5\)-twist and finite-field incidence interpretation.
 - **Deferred:** theta, Fourier, quantum, Mathieu, and four-sheet holonomy
