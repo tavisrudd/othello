@@ -1403,8 +1403,17 @@
       "last": 650,
       "purpose": "kernel-check the complete fixed q=19 Heisenberg-pair incidence, stabilizer, cubic-pencil, and conic profile while leaving only exhaustive parent-class uniqueness external",
       "sequence": 156
+    },
+    {
+      "count": 3,
+      "first": 651,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 653,
+      "purpose": "Paper III Hitchin-Clebsch tensor, arithmetic-certificate, and integral-novelty gates",
+      "sequence": 157
     }
   ],
-  "next_id": 651,
+  "next_id": 654,
   "schema": "codex-task-id-allocations-v1"
 }
