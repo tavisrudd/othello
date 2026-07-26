@@ -9,10 +9,9 @@ Frobenius descent, binary-factor proportionality, projective-representative
 invariance of square status, quotient-lift corrections and their finite
 interpolation, line-product detection, product nonsquareness, and the conditional
 carrier-cardinality theorem, together with the exact-threshold residue
-identity.  Dedicated gate builds remain
-pending the shared Lean build window.  The manuscript is unchanged, and the
-formal boundary below isolates the projective inputs which Lean does not yet
-check.
+identity.  All three dedicated gates and their aggregate confirmations pass.
+The manuscript is unchanged, and the formal boundary below isolates the
+projective inputs which Lean does not yet check.
 
 ## Mathematical scope
 
@@ -325,9 +324,10 @@ standing for them is introduced.
   `exists_finset_extension_of_single_correction` uses only `propext` and
   `Quot.sound`, as does
   `exists_single_correction_of_surjective_of_residual_dvd`.
-- Re-elaboration of the ten-terminal gate, exact-target gate build, and
-  `--no-build` confirmation, together with the twenty-nine-terminal polynomial gate
-  and twenty-seven-terminal carrier gate builds: pending release of the shared Lean
-  build-owner lock.  The latest exact two-gate attempt failed closed because
-  the foreign `RelativeConicArcs.Gates.ClebschArithmeticGluing` build owns that
-  lock.
+- `RelativeConicArcs.Gates.SquareRootCarrier`: exact build and aggregate
+  confirmation **PASS**, `23.40s`, maximum resident set size `1,386,012 KiB`.
+- `RelativeConicArcs.Gates.ChowRestrictionDescent`: exact build **PASS**,
+  `6.86s`, maximum resident set size `1,375,248 KiB`; the subsequent
+  trace-current aggregate confirmation **PASS**.
+- `RelativeConicArcs.Gates.CarrierArcBound`: exact build and aggregate
+  confirmation **PASS**, `5.18s`, maximum resident set size `1,278,312 KiB`.
