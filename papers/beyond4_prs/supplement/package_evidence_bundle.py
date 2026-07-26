@@ -58,7 +58,7 @@ BUNDLES = (
         ),
     ),
     (
-        "Certificate SC",
+        "Companion Certificate SC",
         "stable-components",
         (
             ("generator-checker", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "rederive"),

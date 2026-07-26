@@ -23,6 +23,9 @@ replay imports no stored orbit partition: it reruns the quotient enumerator
 after replacing C509's field implementation by the independently written R5
 replay field, and compares the reconstructed pointed complements, sextic
 split-free set, projective orbits, stabilizers, flags, and Frobenius links.
+Both routes reuse the primary quotient enumerator, so bounded-field
+completeness remains a trusted exact execution of that enumerator rather than
+an independent derivation.
 
 ## Classification record
 

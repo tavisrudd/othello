@@ -10,7 +10,7 @@ paper directory:
 python3 supplement/verify.py
 ```
 
-The quick check also verifies that the local PDF and the four
+The quick check also verifies that the local PDF and the five
 supplement-artifact rows printed in `RELEASE-MANIFEST.md` match the
 current files.  It deliberately does not fill or validate the external
 repository, archive, DOI, or immutable-release fields.
@@ -86,8 +86,8 @@ described as an independent derivation.
 | Certificate R5 | nineteen recorded fields; pointwise and orbitwise exhaustion | independent Python replay |
 | Certificate R6 | direct scan through \(q=16\); structural bridge thereafter | independent replay plus radius gate |
 | Certificate R6-NF | recorded small exceptional normal forms | same-file deterministic checker |
-| Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | independent five-secant and orbit checks |
-| Certificate SC | integral factorization and bridge identities in every characteristic; saturation over \(\mathbf Z[1/6]\); fibres \(2,3\) | dependency-free identity/factorization replay plus trusted Singular primary decomposition |
+| Certificate R7 | \(q=7,8,9,11\) census and the finite coherent-polar bridge below 37 | primary quotient enumeration, representative/orbit replay, and independent-arithmetic reconstruction; completeness trusts the primary enumerator |
+| Companion Certificate SC | non-adopted integral factorization and bridge identities in every characteristic; saturation over \(\mathbf Z[1/6]\); fibres \(2,3\) | companion-only dependency-free identity/factorization replay plus trusted Singular primary decomposition |
 
 ## Exact replay commands
 

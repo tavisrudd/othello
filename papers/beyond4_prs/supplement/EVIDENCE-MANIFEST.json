@@ -155,7 +155,7 @@
     {
       "bytes": 5468,
       "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.json",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "compare",
       "role": "fano-certificate",
       "sha256": "ddfd860084a822aeae362a40fbac02d8053ae92546cd8214bc432dc681f5981c"
@@ -163,7 +163,7 @@
     {
       "bytes": 14319,
       "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.py",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "rederive",
       "role": "fano-generator-checker",
       "sha256": "059cf24d1ba925505c2bc82fd735bacc3d7e4ef49c6b49fb8e56ef9bc765bcd9"
@@ -171,7 +171,7 @@
     {
       "bytes": 380,
       "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.sha256",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "compare",
       "role": "fano-checksum",
       "sha256": "434034f78a578db01a22e77de1129d991fbe20354ceeb05c483a0002a3cdeaa7"
@@ -179,7 +179,7 @@
     {
       "bytes": 4921,
       "path": "evidence/stable-components/2026-07-24-c595-stable-component-fano-elimination.sing",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "rederive",
       "role": "fano-scheme-checker",
       "sha256": "fa1a525170759ee44d41d13373a98a488fc6feee365a8d315d8771f9bef82b78"
@@ -187,7 +187,7 @@
     {
       "bytes": 3474,
       "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.json",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "compare",
       "role": "certificate",
       "sha256": "738e329379de554c78ace01868c714af87a8713538f8c914b8f7d3594846af02"
@@ -195,7 +195,7 @@
     {
       "bytes": 24726,
       "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.py",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "rederive",
       "role": "generator-checker",
       "sha256": "bc8a339a5a8f8317a61d942d0c943f550e42311ef1f093e01fcf6b422ad6a508"
@@ -203,7 +203,7 @@
     {
       "bytes": 365,
       "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "compare",
       "role": "checksum",
       "sha256": "cc0997ddcbe14b0e328499176e82dd1c16ebc09d1b92657b3b1e78940bf210fd"
@@ -211,18 +211,18 @@
     {
       "bytes": 4516,
       "path": "evidence/stable-components/2026-07-24-c597-r10-integral-bad-scheme-sc11.sing",
-      "public_label": "Certificate SC",
+      "public_label": "Companion Certificate SC",
       "replay_class": "rederive",
       "role": "scheme-checker",
       "sha256": "3fbb98c10798e5fc28b14585f0e27a8292a7594b0ed05cc27fa1ed1ce4fde2f6"
     },
     {
-      "bytes": 4457,
+      "bytes": 4630,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "e433680a943720bbad187ef9667b549bf6667461e059dd69b41b97c8ed101d67"
+      "sha256": "9e1c0782d4948d387078ca23aeafdc1394a4c3cd7015c10a506dafe955458cbe"
     },
     {
       "bytes": 545912,
@@ -265,12 +265,12 @@
       "sha256": "e24670d4561e21441bc424eb9671c2b01ba969da47e80973cf5b853e9dac4160"
     },
     {
-      "bytes": 6225,
+      "bytes": 6366,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "b4dde5e193865d87af52f303df588ae3dc28a6ff1f888d8b714d38dfc6376ea1"
+      "sha256": "513cf401664d6020b8e1b201df7612907c6d1f4eedd4f4f83eea5e5cabb7f383"
     },
     {
       "bytes": 12059,
@@ -289,12 +289,12 @@
       "sha256": "b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98"
     },
     {
-      "bytes": 12417,
+      "bytes": 12427,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "9600f2b454ec6b6a28c7cc21b39d3da9b8c4deca27b25d626550b53d5b111efe"
+      "sha256": "19145d2d4d885d97615280ec58154cca0427f462a9ff5c793a5371f6a8fff2e4"
     },
     {
       "bytes": 6316,
