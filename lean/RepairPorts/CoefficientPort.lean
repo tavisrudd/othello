@@ -62,6 +62,55 @@ theorem reconstructsAt_mono {C : Submodule 𝔽 (ι → 𝔽)} {x : ι} {r s : �
   rw [← hr]
   exact coefficientPortSpan_mono hrs
 
+private theorem erased_wordSupport_card_le_univ (y : ι → 𝔽) (x : ι) :
+    ((FiniteGeom.wordSupport y).erase x).card ≤ Fintype.card ι := by
+  calc
+    ((FiniteGeom.wordSupport y).erase x).card ≤ (Finset.univ : Finset ι).card :=
+      Finset.card_le_card (Finset.subset_univ _)
+    _ = Fintype.card ι := Finset.card_univ
+
+/-- If some parity check uses the target coordinate, then the coefficient port at the trivial
+full-coordinate radius spans the entire dual code.  Hence the reconstruction radius is finite at
+every genuinely repairable coordinate. -/
+theorem reconstructsAt_card_of_exists_dual_not_zero
+    {C : Submodule 𝔽 (ι → 𝔽)} {x : ι}
+    (hx : ∃ y ∈ FiniteGeom.dualCode C, y x ≠ 0) :
+    ReconstructsAt C x (Fintype.card ι) := by
+  apply le_antisymm (coefficientPortSpan_le_dualCode C x _)
+  rintro y hy
+  obtain ⟨y₀, hy₀, hy₀x⟩ := hx
+  let w : ι → 𝔽 := (y₀ x)⁻¹ • y₀
+  have hwdual : w ∈ FiniteGeom.dualCode C :=
+    (FiniteGeom.dualCode C).smul_mem _ hy₀
+  have hwx : w x = 1 := by
+    simp [w, hy₀x]
+  have hwport : w ∈ coefficientPort C x (Fintype.card ι) :=
+    ⟨hwdual, hwx, erased_wordSupport_card_le_univ w x⟩
+  have hwspan : w ∈ coefficientPortSpan C x (Fintype.card ι) :=
+    Submodule.subset_span hwport
+  let z : ι → 𝔽 := y - y x • w
+  have hzdual : z ∈ FiniteGeom.dualCode C :=
+    (FiniteGeom.dualCode C).sub_mem hy ((FiniteGeom.dualCode C).smul_mem _ hwdual)
+  have hzx : z x = 0 := by
+    simp [z, hwx]
+  let u : ι → 𝔽 := w + z
+  have hudual : u ∈ FiniteGeom.dualCode C :=
+    (FiniteGeom.dualCode C).add_mem hwdual hzdual
+  have hux : u x = 1 := by
+    simp [u, hwx, hzx]
+  have huport : u ∈ coefficientPort C x (Fintype.card ι) :=
+    ⟨hudual, hux, erased_wordSupport_card_le_univ u x⟩
+  have huspan : u ∈ coefficientPortSpan C x (Fintype.card ι) :=
+    Submodule.subset_span huport
+  have hzspan : z ∈ coefficientPortSpan C x (Fintype.card ι) := by
+    convert (coefficientPortSpan C x (Fintype.card ι)).sub_mem huspan hwspan using 1
+    simp [u]
+  have hydecomp : y = z + y x • w := by
+    simp [z]
+  rw [hydecomp]
+  exact (coefficientPortSpan C x (Fintype.card ι)).add_mem hzspan
+    ((coefficientPortSpan C x (Fintype.card ι)).smul_mem _ hwspan)
+
 /-- A support belongs to the complete support port exactly when it is the support of a normalized
 coefficient-port word.  Normalization changes coefficients but not support. -/
 theorem mem_repairHypergraph_iff_exists_mem_coefficientPort
