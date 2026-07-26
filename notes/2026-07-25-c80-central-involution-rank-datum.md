@@ -183,8 +183,8 @@ python3 rust/scripts/c80_central_involution_rank_datum.py --check
 
 | artifact | bytes | SHA-256 |
 | --- | ---: | --- |
-| `rust/scripts/c80_central_involution_rank_datum.py` | 16,032 | `a34e54e0ec7122e0394b245ee67c746916b3f1821eebbdbf7ede040e3707c3ee` |
-| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 44,232 | `99eb57a960b5e974db5fd298bad9214b6e054690d6b3d97e8fc15f7af558437b` |
+| `rust/scripts/c80_central_involution_rank_datum.py` | 22,217 | `41a452797a23c5f2cfbcd92e3724f135f0c812ceb66f2e1f0fddab95f9fa459f` |
+| `notes/2026-07-25-c80-central-involution-rank-datum.json` | 48,559 | `a0a3a3d3aa41a98e8bc0aaf701f380878c059e0d85b0ad1dc0d4a8ba10a019c0` |
 
 The JSON is canonical sorted data. `--check` regenerates it in a temporary
 directory and requires byte equality. Load-bearing source hashes are embedded
@@ -219,6 +219,55 @@ alone.
 No incidental discovery-track item arose. The canonical-datum falsifier and
 the q19 P/N split are direct C80 deliverables.
 
+## `ej2` — direct terminal shell behind the good q19 orbit
+
+The second-order pass removes the remaining game-value oracle from the good
+q19 exchange target. Its seven legal moves have no terminal move, but the
+complete graph of pairs whose exchange is terminal has six edges and covers
+all seven vertices. Therefore:
+
+```text
+for every opponent move x
+there is a reply y
+such that the continuation is terminal.
+```
+
+This is a direct two-ply normal-play proof that the target is P. The terminal
+reply graph has
+
+```text
+degree sequence 1,1,1,2,2,2,3
+component orders 2,5
+component edge counts 1,5.
+```
+
+Intrinsically it is `K2` disjoint from a triangle with a length-two tail.
+The degree-three articulation is the one ramified opponent fibre; the other
+six vertices can be paired. This is exactly the correspondence language the
+previous `ej4` specification anticipated—degree-one bulk plus one bounded
+exceptional obligation—but only at this finite q19 target.
+
+The bad q19 orbit gives the opposite one-ply certificate: its four legal
+moves include two terminal moves, proving it N directly. Hence the `P/N`
+split between the two central-involution orbits is now rules-certified
+without recursive value evaluation:
+
+```text
+bad orbit:  exists a terminal move                         => N;
+good orbit: no terminal move and every move has a terminal reply => P.
+```
+
+The q17 control blocks a uniform promotion. Every q17 repair target has no
+terminal move and eight terminal-reply edges, but those edges cover only
+`10/32` legal moves. The q19 shell is therefore a genuine direct base-case
+upgrade, not the missing q17 or odd-q obligation rewrite.
+
+The extra opening is narrow but real: search for an algebraic presentation
+of the q19 six-edge terminal correspondence as `K2 ⊔` lollipop, then ask
+whether the q17 `4→2→0` thread replaces terminality by the same
+pairing-plus-one-obligation schema at the next structural boundary. Do not
+promote terminal distance two itself as uniform.
+
 ## Mystery ledger
 
 - **[SETTLED] Is the central involution canonical and transport-natural?**
@@ -233,6 +282,13 @@ the q19 P/N split are direct C80 deliverables.
 - **[SETTLED `ej`] Can the P exchange rewrite the datum to its own central
   involution?** Not as a copycat recursion: the rewritten datum has `0/7`
   usable replies.
+- **[SETTLED `ej2`] Can the good q19 target be proved P without minimax or
+  `F_cc`?** Yes. It has no terminal move and every move has a terminal reply;
+  the reply graph is `K2` disjoint from a triangle with a length-two tail.
+- **[SETTLED `ej2`] Can the bad q19 target be proved N equally directly?**
+  Yes. Two of its four legal moves are terminal.
+- **[SETTLED negative `ej2`] Does the same terminal shell cover q17?** No.
+  Each repair target has eight terminal edges covering only `10/32` moves.
 - **[SETTLED `ej`] Is the failure caused by the normalized grid legality
   implementation?** No. Direct projective determinant replay agrees on every
   response.

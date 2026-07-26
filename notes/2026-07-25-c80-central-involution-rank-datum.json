@@ -2177,6 +2177,272 @@
     "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206",
     "rust/scripts/c80_tutte_defect_contraction.py": "822e87e390cd9f25cdda5d030a49c8cf455c208125c70e50ec2202228b5898ef"
   },
+  "q17_terminal_edge_controls": [
+    {
+      "legal_moves": 32,
+      "moves_covered_by_terminal_reply_edges": 10,
+      "opponent_complete_terminal_shell": false,
+      "repair_edge": {
+        "opponent": [
+          4,
+          0
+        ],
+        "reply": [
+          7,
+          1
+        ]
+      },
+      "terminal_moves": 0,
+      "terminal_reply_edges": 8
+    },
+    {
+      "legal_moves": 32,
+      "moves_covered_by_terminal_reply_edges": 10,
+      "opponent_complete_terminal_shell": false,
+      "repair_edge": {
+        "opponent": [
+          5,
+          0
+        ],
+        "reply": [
+          4,
+          10
+        ]
+      },
+      "terminal_moves": 0,
+      "terminal_reply_edges": 8
+    },
+    {
+      "legal_moves": 32,
+      "moves_covered_by_terminal_reply_edges": 10,
+      "opponent_complete_terminal_shell": false,
+      "repair_edge": {
+        "opponent": [
+          8,
+          14
+        ],
+        "reply": [
+          4,
+          10
+        ]
+      },
+      "terminal_moves": 0,
+      "terminal_reply_edges": 8
+    },
+    {
+      "legal_moves": 32,
+      "moves_covered_by_terminal_reply_edges": 10,
+      "opponent_complete_terminal_shell": false,
+      "repair_edge": {
+        "opponent": [
+          11,
+          9
+        ],
+        "reply": [
+          7,
+          1
+        ]
+      },
+      "terminal_moves": 0,
+      "terminal_reply_edges": 8
+    }
+  ],
+  "q19_terminal_shells": [
+    {
+      "every_move_has_terminal_reply": false,
+      "exchange": [
+        [
+          3,
+          3
+        ],
+        [
+          14,
+          12
+        ]
+      ],
+      "legal_moves": [
+        [
+          1,
+          16
+        ],
+        [
+          9,
+          16
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          12,
+          11
+        ]
+      ],
+      "target_exact_grid_value": "N",
+      "terminal_moves": [
+        [
+          9,
+          16
+        ],
+        [
+          12,
+          11
+        ]
+      ],
+      "terminal_reply_component_edge_counts": [
+        0,
+        0,
+        1
+      ],
+      "terminal_reply_component_orders": [
+        1,
+        1,
+        2
+      ],
+      "terminal_reply_degree_sequence": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "terminal_reply_edges": [
+        [
+          [
+            1,
+            16
+          ],
+          [
+            10,
+            15
+          ]
+        ]
+      ]
+    },
+    {
+      "every_move_has_terminal_reply": true,
+      "exchange": [
+        [
+          5,
+          12
+        ],
+        [
+          7,
+          13
+        ]
+      ],
+      "legal_moves": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          17
+        ],
+        [
+          9,
+          17
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          14,
+          8
+        ]
+      ],
+      "target_exact_grid_value": "P",
+      "terminal_moves": [],
+      "terminal_reply_component_edge_counts": [
+        1,
+        5
+      ],
+      "terminal_reply_component_orders": [
+        2,
+        5
+      ],
+      "terminal_reply_degree_sequence": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3
+      ],
+      "terminal_reply_edges": [
+        [
+          [
+            1,
+            1
+          ],
+          [
+            6,
+            17
+          ]
+        ],
+        [
+          [
+            1,
+            3
+          ],
+          [
+            9,
+            17
+          ]
+        ],
+        [
+          [
+            1,
+            3
+          ],
+          [
+            12,
+            8
+          ]
+        ],
+        [
+          [
+            1,
+            3
+          ],
+          [
+            14,
+            8
+          ]
+        ],
+        [
+          [
+            6,
+            4
+          ],
+          [
+            14,
+            8
+          ]
+        ],
+        [
+          [
+            9,
+            17
+          ],
+          [
+            12,
+            8
+          ]
+        ]
+      ]
+    }
+  ],
   "q19_usable_exchange_orbits": [
     {
       "exchange": [
@@ -2243,7 +2509,9 @@
     "central_datum_rewrite_on_q19_P_target": "0/7 usable",
     "contains_all_five_repairs": true,
     "opponent_complete_rank_update": "FAIL",
+    "q17_terminal_shell_uniform_lift": "FAIL: 8 edges cover only 10/32 moves per repair target",
     "q17_usable_replies": "0/32 in each marked target",
+    "q19_P_target_direct_certificate": "no terminal move; every move has a terminal reply",
     "q19_unoriented_exchange_targets": "one P + one N",
     "q19_usable_replies": "4/51",
     "q19_usable_target_values": "2 P + 2 N",

@@ -1138,11 +1138,16 @@ commutes exactly with the full stabilizer, but the selected state is not
 oriented edges collapse to two external exchange orbits: an order-two
 `Ω=0` N absorber and an order-ten `Ω=1` P target retaining three live conic
 points. Rewriting to the P exchange's own central involution still gives
-`0/7` usable replies. Direct projective determinant replay agrees with grid
-legality on every response. Thus the central torus element cannot be the
-proof datum even locally; the successor needs a state-dependent algebraic
-obligation rewrite before copycat, not another edge-only involution. C82
-remains gated. Report+cert:
+`0/7` usable replies. The `ej2` upgrade nevertheless gives a direct P-proof
+of that q19 target: no move is terminal, every move has a terminal reply, and
+the six-edge reply graph is `K2` disjoint from a triangle with a length-two
+tail. The bad orbit has two terminal moves and is directly N. This terminal
+shell does not lift to q17: eight terminal edges cover only `10/32` moves per
+repair target. Direct projective determinant replay agrees with grid legality
+on every response. Thus the central torus element cannot be the proof datum
+even locally; the successor needs a state-dependent algebraic obligation
+rewrite before copycat, not another edge-only involution. C82 remains gated.
+Report+cert:
 [`../2026-07-25-c80-central-involution-rank-datum.md`](../2026-07-25-c80-central-involution-rank-datum.md).
 
 **C551 is complete (2026-07-23): flagship paper packaging is fixed without freezing C528.**
