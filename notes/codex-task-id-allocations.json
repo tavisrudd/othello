@@ -1457,8 +1457,17 @@
       "last": 658,
       "purpose": "concrete carrier determinant and shared-representative geometry",
       "sequence": 162
+    },
+    {
+      "count": 1,
+      "first": 659,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 659,
+      "purpose": "projectivized arc to charted dual-Chow carrier bridge",
+      "sequence": 163
     }
   ],
-  "next_id": 659,
+  "next_id": 660,
   "schema": "codex-task-id-allocations-v1"
 }
