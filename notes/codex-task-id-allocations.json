@@ -1286,8 +1286,17 @@
       "last": 636,
       "purpose": "formalize the uniform Veronese full-support and quadratic-hull criteria from C628",
       "sequence": 143
+    },
+    {
+      "count": 1,
+      "first": 637,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 637,
+      "purpose": "analyze the secant-arrangement coupling to the quadratic hull of the ordinary-uncovered locus",
+      "sequence": 144
     }
   ],
-  "next_id": 637,
+  "next_id": 638,
   "schema": "codex-task-id-allocations-v1"
 }
