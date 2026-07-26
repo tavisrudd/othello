@@ -223,6 +223,14 @@ structural derivation of radical--Hadamard hypotheses beyond \(B_3,H_3\).
 The proof and mystery ledger are in
 `notes/2026-07-26-c661-uniform-factorization-upgrade.md`.
 
+C665 is queued after the C661 formal synchronization. Its EV order is fixed:
+first classify \(2q\)-point full-projective matching orbits that split into
+two \(q\)-point sheets and resolve the \(q=5\) ten-matching kill test; then
+package the reusable cocycle-span criterion, cubic inevitability theorem, and
+uniform radial-trace question. The target crown is nonlinear completeness for
+the \(B_3,H_3\) recovery phenomenon, not a broader finite census, and it must
+not hold Paper II v1.
+
 The active order is strict:
 
 1. **C182:** make the immutable public deposit and insert its identifier.
@@ -233,6 +241,8 @@ The active order is strict:
    the crown or bloat Paper I for a merely local improvement.
 4. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
+5. **C665:** pursue balanced-orbit completeness and the cheap C661
+   consequences after the current formal synchronization, without holding v1.
 
 C579 is complete and no longer an open-order item.
 
