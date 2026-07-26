@@ -155,6 +155,14 @@ trust disposition, and mystery ledger are in
 `notes/2026-07-25-c620-graded-evaluation-algebra.md`.
 The C621 proof, audit, exact certificate, and mystery ledger are in
 `notes/2026-07-25-c621-gorenstein-gate.md`.
+C632 formalizes the reusable signed Gale-kernel hinge: weighted
+orthogonality is the matrix identity \(A(AD)^{\mathsf T}=0\), its signed
+rows lie in \(\ker A\), and full row rank plus the \(q\)-by-\(2q\)
+dimension count identifies their span with the entire kernel. The dedicated
+Lean gate and exact noncoverage boundary are recorded in
+`notes/2026-07-25-c632-signed-gale-duality-lean.md`; the frozen
+\(B_3/H_3\) coordinate hypotheses and the Gorenstein criterion remain on
+C621's non-Lean evidence routes.
 
 The active order is strict:
 
