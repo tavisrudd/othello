@@ -1232,8 +1232,17 @@
       "last": 630,
       "purpose": "formalize newly added defect-gap, affine/odd equality-spectrum, and exceptional secant consequences",
       "sequence": 137
+    },
+    {
+      "count": 1,
+      "first": 631,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 631,
+      "purpose": "formalize diagonal-isodual witness uniqueness and corollaries",
+      "sequence": 138
     }
   ],
-  "next_id": 631,
+  "next_id": 632,
   "schema": "codex-task-id-allocations-v1"
 }
