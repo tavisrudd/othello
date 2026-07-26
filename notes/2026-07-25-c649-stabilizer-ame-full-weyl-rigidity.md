@@ -269,6 +269,47 @@ MDS--CSS specialization.  Keeping these statements separate prevents the
 larger extension-field local Clifford group from leaking into the exact
 logical-group claim.
 
+### Proposed front matter
+
+Working abstract:
+
+> Let \(q=p^e\).  For \(m\geq2\), every product-unitary equivalence
+> between stabilizer \(\operatorname{AME}(2m,q)\) states is Clifford
+> factor by factor.  On any \(m+1\) parties, the supported stabilizer
+> labels form a \(q^2\)-element group and project bijectively onto the
+> complete local Weyl basis at every retained party.  The reduced
+> operator therefore determines its local Weyl axes intrinsically.
+> This applies to arbitrary additive prime-power stabilizers and is
+> sharp at \(m=1\).  As a Choi consequence, tensor-product conversions
+> between the associated \([[2m-1,1,m]]_q\) stabilizer quantum-MDS
+> encoders are Clifford on every physical factor and on the logical
+> factor.
+>
+> For equal-phase states from linear MDS--CSS codes, the code geometry
+> further determines the exact transversal group.  Over odd prime
+> fields it is
+> \(\mathbb F_q^2\rtimes\operatorname{SL}_2(q)\) exactly on the
+> diagonally isodual branch and
+> \(\mathbb F_q^2\rtimes T\) otherwise.  For six-party states, a
+> degree-eight quotient classifies the admitted non-GRS pencil, while
+> fixed-copy scalar contractions are generically blind to its parameter.
+
+The introduction should then use five paragraphs before the first
+specialized corollary:
+
+1. define stabilizer AME states and ask whether their local Pauli frame
+   survives arbitrary product changes of basis;
+2. state the general rigidity theorem;
+3. explain the supported-subgroup squeeze and axis recovery;
+4. state the stabilizer quantum-MDS Choi corollary and the sharp Bell-pair
+   boundary;
+5. position the qubit minimal-support ancestry and the audited scope of
+   the prime-power/additive extension.
+
+Only then introduce linear MDS--CSS states and state diagonal isoduality.
+This prevents the exact group calculation and the pencil from obscuring
+the theorem that now carries the widest scope.
+
 ## Mystery ledger
 
 | Mystery | Status | Evidence / next gate |
