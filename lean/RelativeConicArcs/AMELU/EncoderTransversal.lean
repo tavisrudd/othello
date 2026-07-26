@@ -11,11 +11,12 @@ module fixes the corresponding parameter, action, and transpose conventions.
 It then transfers length-generic local-unitary rigidity to conversions between
 two such encoders.
 
-The exact generalized Reed--Solomon conclusion is stated for the affine
-special-linear carrier `𝔽² × SL₂(𝔽)`.  `GRSTransversalInputs` separates the
-constructive containment, obtained from dual multipliers and the two elementary
-unipotent families, from the converse supplied by the encoder rigidity
-theorem.  No existence or propagation assertion is introduced as an axiom.
+The exact fixed-party conclusion is stated intrinsically in terms of diagonal
+isoduality.  `DiagonalIsodualityTransversalInputs` separates the two propagation
+directions, the off-diagonal converse, and the complete translation fiber.
+`GRSTransversalInputs` retains the concrete generalized Reed--Solomon
+specialization.  No existence or propagation assertion is introduced as an
+axiom.
 
 All arguments are symbolic and kernel checked.  This module contains no
 generated data, native evaluation, axioms, or admitted declarations.
@@ -659,6 +660,75 @@ structure FixedPartyProjectiveTransversalInputs
   kernel. -/
   transversal_iff_linear_mem :
     ∀ g, g ∈ transversal ↔ g.linear ∈ kernel
+
+/-- A half-dimensional code is diagonally isodual when coordinatewise
+multiplication by nonzero scalars identifies it with its Euclidean dual. -/
+def IsDiagonallyIsodual
+    (C : Submodule 𝔽 (GenericBasisLabel m 𝔽)) : Prop :=
+  Nonempty (GenericDiagonalDuality C)
+
+/-- The exact fixed-party inputs with diagonal isoduality, rather than a
+presentation as a generalized Reed--Solomon code, as the phase condition.
+The four linear-kernel fields are the arbitrary-length propagation and
+converse statements; the last field says that every logical Weyl translation
+occurs over every realized linear block. -/
+structure DiagonalIsodualityTransversalInputs
+    (C : Submodule 𝔽 (GenericBasisLabel m 𝔽))
+    (transversal : Set (ProjectiveLogicalAction 𝔽)) where
+  /-- The realized linear fixed-party kernel. -/
+  kernel : Set (LogicalBlock 𝔽)
+  /-- Every realized block has determinant one. -/
+  kernel_specialLinear :
+    ∀ ⦃A⦄, A ∈ kernel → IsSpecialLinearBlock A
+  /-- The diagonal split torus always propagates. -/
+  splitTorus_subset_kernel :
+    ∀ A, IsSplitTorusBlock A → A ∈ kernel
+  /-- A diagonal duality propagates every determinant-one block. -/
+  isodual_specialLinear_subset_kernel :
+    IsDiagonallyIsodual C →
+      ∀ A, IsSpecialLinearBlock A → A ∈ kernel
+  /-- A realized nondiagonal block forces a diagonal duality. -/
+  offDiagonal_kernel_implies_isodual :
+    ∀ ⦃A⦄, A ∈ kernel →
+      (A 0 1 ≠ 0 ∨ A 1 0 ≠ 0) → IsDiagonallyIsodual C
+  /-- The projective carrier is the complete affine fiber over the linear
+  kernel. -/
+  transversal_iff_linear_mem :
+    ∀ g, g ∈ transversal ↔ g.linear ∈ kernel
+
+omit [Fintype 𝔽] [DecidableEq 𝔽] in
+/-- The exact projective fixed-party carrier is the full affine
+special-linear group precisely on the diagonally isodual branch, and the
+affine split torus otherwise.  No evaluation-code presentation is assumed. -/
+theorem diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy
+    {C : Submodule 𝔽 (GenericBasisLabel m 𝔽)}
+    {transversal : Set (ProjectiveLogicalAction 𝔽)}
+    (inputs : DiagonalIsodualityTransversalInputs C transversal) :
+    (IsDiagonallyIsodual C →
+      transversal = affineSpecialLinearSet) ∧
+    (¬ IsDiagonallyIsodual C →
+      transversal = affineSplitTorusSet) := by
+  let phase : LogicalPhaseInputs 𝔽 inputs.kernel
+      (IsDiagonallyIsodual C) :=
+    { kernel_specialLinear := inputs.kernel_specialLinear
+      splitTorus_subset_kernel := inputs.splitTorus_subset_kernel
+      conic_specialLinear_subset_kernel :=
+        inputs.isodual_specialLinear_subset_kernel
+      offDiagonal_kernel_implies_conic :=
+        inputs.offDiagonal_kernel_implies_isodual }
+  obtain ⟨hisodual, hnonisodual⟩ :=
+    fixedPartyKernel_eq_specialLinear_or_splitTorus phase
+  constructor
+  · intro hC
+    have hk := hisodual hC
+    ext g
+    rw [inputs.transversal_iff_linear_mem, hk]
+    rfl
+  · intro hC
+    have hk := hnonisodual hC
+    ext g
+    rw [inputs.transversal_iff_linear_mem, hk]
+    rfl
 
 omit [Fintype 𝔽] [DecidableEq 𝔽] in
 /-- The exact fixed-party projective logical carrier is `𝔽² ⋊ SL₂(𝔽)` on

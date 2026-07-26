@@ -82,21 +82,24 @@ statement, both with fixed party labels and after adjoining the discrete
 party-permutation factor.  The scalar inclusions are continuous
 homomorphisms, every connected component is a scalar-torus translate, and
 finitely many such components cover either automorphism group.  The
-party-permutation splitting theorem is only a homomorphic-right-inverse
-criterion; it does not construct an extension class or a cohomological
-obstruction.
+party-permutation extension has a section-free outer action and a normalized
+nonabelian factor set.  Its ordered change-of-section law makes
+trivializability independent of the chosen lifts, and trivializability is
+equivalent to a homomorphic splitting.
 
 The geometric classification,
-marginal-trace, logical propagation, finite contraction, GRS group, and transport
+marginal-trace, logical propagation, finite contraction,
+diagonal-isodual group, and transport
 orbit steps enter separate hypothesis structures; the paper constructs
 or certificate-supports them as specified above, but the Lean modules do
 not.  Importing the terminal therefore does not make them unconditional
 formal theorems.  The Choi inverse-transpose bridge, Clifford transpose
 closure, and factorwise transversal no-go are kernel checked in
-\texttt{EncoderTransversal}.  Its exact GRS carrier equality is conditional:
-the diagonal GRS construction, phase-corrected lifts, logical Pauli
-representatives, elementary generation, and no-go converse remain named
-fields.  The fixed-copy generic-constancy proposition,
+\texttt{EncoderTransversal}.  Its exact diagonal-isodual carrier dichotomy
+is conditional: special-linearity, torus propagation, diagonal-duality
+propagation, the off-diagonal converse, and the complete translation fiber
+remain named fields.  Section~3 proves these inputs for arbitrary
+\([2m,m,m+1]\) MDS codes.  The fixed-copy generic-constancy proposition,
 the party-moving logical normalizer, and the determinant and double-coset
 inputs of the complete transport theorem are not formalized.
 The companion \texttt{AMELUAggregateAxioms} terminal separates the three

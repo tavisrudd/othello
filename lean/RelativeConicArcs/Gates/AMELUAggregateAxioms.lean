@@ -87,6 +87,7 @@ open RelativeConicArcs.AMELU
 #print axioms genericCSSLabel_lowerDualityShear
 #print axioms genericCSSLabel_upperDualityShear
 #print axioms fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus
+#print axioms diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy
 #print axioms grs_projectiveTransversal_eq_affineSpecialLinear
 #print axioms affineSpecialLinearOrder_seven
 
