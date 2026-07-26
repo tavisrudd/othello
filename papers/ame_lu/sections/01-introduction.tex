@@ -6,7 +6,7 @@ every subsystem no larger than half the parties.  Fix a prime power
 whether a stabilizer \(\AME(2m,q)\) state retains its local Weyl frames
 under arbitrary single-party changes of basis.
 
-The local-unitary versus local-Clifford problem is false for general
+The assertion that LU equivalence implies LC equivalence fails for general
 stabilizer states \cite{JiChenWeiYing2008}.  Maximal entanglement supplies
 the missing rigidity.
 
@@ -57,6 +57,16 @@ Clifford factor by factor.  Taking \(V_\psi=V_\phi\), no such code admits a
 transversal non-Clifford logical unitary.
 \end{corollary}
 
+The support bijections also retain how local Weyl frames on different
+parties fit together.  On an \((m+1)\)-party support \(A\), let
+\(p_i:L_\psi(A)\to\F_q^2\) be the bijective projection at party \(i\).
+The maps \(M_A(i,j)=p_jp_i^{-1}\) push a Weyl label from \(i\) to \(j\).
+Their collection over all \(A,i,j\) is the
+\emph{minimum-support atlas}.  Local trace-symplectic frame changes are
+compatible precisely when they intertwine every \(M_A(i,j)\).  Here a
+projective product-unitary group means the image of the product-unitary
+symmetries in the projective unitary group of the full tensor product.
+
 \begin{theorem}[Minimum-support atlas classification]
 \label{thm:atlas-classification}
 After a fixed party relabelling, two stabilizer \(\AME(2m,q)\) states are
@@ -64,7 +74,8 @@ LU equivalent exactly when their minimum-support operator-pushing atlases
 are equivalent by local symplectic changes of Weyl frame.  For one state,
 let \(\mathcal G_\psi\) be its group of compatible local symplectic gauges,
 let \(\Gamma_\psi\) be its fixed-party projective product-unitary symmetry
-group, and let \(L_\psi\) be its projective stabilizer.  Then
+group, and identify its projective Pauli stabilizer with the label group
+\(L_\psi\).  Then
 \[
  1\longrightarrow L_\psi\longrightarrow\Gamma_\psi
    \longrightarrow\mathcal G_\psi\longrightarrow1
@@ -153,7 +164,9 @@ Proposition~\ref{prop:diagonal-multiplier-line} proves that this dimension
 is zero or one and that every nonzero vector in the space has full support
 and is unique up to scalar.
 
-The phrase ``modulo phase'' is essential.  Over an odd field the
+The nullity-one condition is the diagonal-isoduality test governing the
+two branches above.  A separate issue is the passage from the projective
+logical group to unitary lifts.  Over an odd field the
 \(\mathrm{SL}_2(q)\) factor on the diagonally isodual branch has coherent
 Weil lifts, so no metaplectic obstruction remains there.  The full affine
 group does not lift through the one-qudit scalar quotient: its translation

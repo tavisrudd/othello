@@ -109,7 +109,7 @@ of the integral \(H_3\) (icosahedral) sextuple
  (1,0,-\tau),(1,0,\tau))
 \]
 is a six-arc.  Write \(k=\mathbb Z[\tau]/\mathfrak p\).  If the reduced
-arc is non-GRS, its
+arc is non-GRS, put \(q=\lvert k\rvert\).  Its
 equal-phase state is not LU-equivalent, even after party permutation, to
 any six-point GRS state over \(k\).  (The hypothesis is vacuous in
 characteristic five, where the reduction is itself GRS.)
@@ -207,7 +207,9 @@ for party-orbit sums and linear combinations.  After evaluating the
 states as vectors in \((\mathbb C^q)^{\otimes n}\), in the stable range
 \(q\geq r\), every scalar LU-invariant of bidegree \((r,r)\) is
 generically constant in this sense.  For a reducible family, the
-statement holds separately on each irreducible component.
+statement holds separately on each irreducible component.  The geometric
+generic-rank assertion is nonvacuous; over a finite field the assertion
+about \(k\)-points is conditional on \(U(k)\ne\varnothing\).
 \end{proposition}
 
 \begin{proof}
@@ -224,10 +226,8 @@ invariants; when the local Hilbert-space dimension \(q\) is at least
 This proves the last statement.
 \end{proof}
 
-The dense open here may have no \(k\)-point over a small finite field; in
-that event its assertion about \(k\)-points is vacuous.  The rank statement
-over the geometric generic point remains nonvacuous, while an application
-to a particular finite field must separately exhibit a point of \(U(k)\).
+An application to a particular finite field must therefore exhibit a
+point of \(U(k)\).
 
 For the pencil viewed over its rational-function field, the generic
 four-copy contraction values therefore generate only the constant field,

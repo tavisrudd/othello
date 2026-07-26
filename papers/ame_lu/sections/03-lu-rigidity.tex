@@ -18,16 +18,17 @@ the form \((3.1)\) to another is monomial in the displayed bases.
 \end{lemma}
 
 \begin{proof}
-Contract the first factor against
-\(x=\sum_jx_je_{1j}^*\).  The result is
+For nonzero \(x=\sum_jx_je_{1j}^*\), contract the first factor against
+\(x\).  The result is
 \[
  T_x=\sum_j\lambda_jx_j e_{2j}\otimes\cdots\otimes e_{rj}.
 \]
 Flattening from \(E_2\) to \(E_3\otimes\cdots\otimes E_r\) gives a matrix
 of rank \(\#\{j:x_j\ne0\}\).  Thus \(T_x\) has rank one exactly when
-\(x\) lies on a coordinate axis.  Product equivalence preserves this
-rank-one contraction locus, and hence permutes the axes in the first
-factor.  Apply the same argument in every factor.
+the ray of \(x\) is a dual coordinate axis.  Product equivalence preserves
+this projective rank-one contraction locus.  The inner products identify
+the recovered dual axes with the coordinate axes in the first factor.
+Apply the same argument in every factor.
 \end{proof}
 
 Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if there
@@ -56,7 +57,9 @@ then every \(U_i\) is Clifford.
 
 \begin{proof}
 View \(R\) and \(R'\) as tensors in the local Hilbert--Schmidt spaces.
-Both have the form in Lemma~\ref{lem:diagonal-axes}, with \(N=q^2\).
+After replacing \(W_v\) by the orthonormal basis \(q^{-1/2}W_v\) and
+absorbing the common normalization into the coefficients, both have the
+form in Lemma~\ref{lem:diagonal-axes}, with \(N=q^2\).
 Local conjugation acts invertibly on each factor, so it must permute the
 Weyl axes.  It fixes the identity operator and hence the identity axis.
 It therefore permutes the nonidentity projective Weyl operators, which
@@ -194,6 +197,30 @@ Here
 induced by the standard
 additive local Clifford group.
 
+For one state, define
+\[
+\begin{split}
+ \Gamma_\psi
+  &=\{[U]\in\operatorname{PU}(q^{2m}):
+       U=U_1\otimes\cdots\otimes U_{2m},\
+       U\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\},\\
+ \mathcal G_\psi
+  &=\{(F_i)\in\prod_i\operatorname{Sp}(P_i):
+       F_jM_A(i,j)=M_A(i,j)F_i\ \text{for all }A,i,j\in A\}.
+\end{split}
+\]
+Theorem~\ref{thm:lu-lc-rigidity} and the Clifford sequence \((2.0)\)
+give a well-defined homomorphism
+\[
+ \lambda_\psi:\Gamma_\psi\longrightarrow\mathcal G_\psi,\qquad
+ [U_1\otimes\cdots\otimes U_{2m}]\longmapsto(\overline U_i)_i,
+\]
+where \(\overline U_i\) is the induced symplectic label map.  A product
+decomposition is unique up to one-site scalars, which do not change
+\(\overline U_i\).  The injection
+\(L_\psi\hookrightarrow\Gamma_\psi\) sends a label
+\(\ell\) to the projective Pauli \([W_\ell]\).
+
 \begin{proof}[Proof of Theorem~\ref{thm:atlas-classification}]
 First fix the party labels.  A block symplectic map
 \(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
@@ -208,7 +235,8 @@ unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
 Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
 generate the full label groups, \(F L_\psi=L_\phi\).
 
-Choose local Clifford lifts of the \(F_i\).  Their product carries the
+Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\).  Their
+product carries the
 stabilizer axes of \(\psi\) to those of \(\phi\), possibly with a
 different stabilizer character.  The trace-symplectic pairing identifies
 the ambient label space modulo \(L_\phi=L_\phi^\perp\) with
@@ -217,23 +245,30 @@ equivalence lifts to an LC equivalence.  The reverse implication follows
 from the induced label action, and Theorem~\ref{thm:lu-lc-rigidity}
 replaces LC by LU.  A party permutation is absorbed by relabelling first.
 
-For automorphisms, the induced-label map
-\(\Gamma_\psi\to\mathcal G_\psi\) is surjective by the same lifting and
+For automorphisms, \(\lambda_\psi\) is surjective by the same lifting and
 phase-correction argument.  Its kernel consists of projective product
-Paulis that fix the state, namely the labels in
-\(L_\psi^\perp=L_\psi\).  This proves the exact sequence.
+Paulis by \((2.0)\).  Such a Pauli fixes the state ray exactly when its
+label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
+\(L_\psi\) identifies it with \(\ker\lambda_\psi\), proving exactness.
 
-Finally suppose \(q=p\).  Choose a base party and, for every other party,
-one atlas transition from the base as transport.  Compatibility propagates
-every local block from its base value.  Each remaining transition is
-equivalent to commutation of that base block with the corresponding loop
-holonomy.  Since
+Finally suppose \(q=p\).  Form the directed multigraph with vertices the
+parties and an edge \((A,i,j)\) carrying \(M_A(i,j)\).  Every pair of
+parties belongs to an \((m+1)\)-set, so the graph is connected.  Choose a
+base \(b\), a spanning tree, and tree transports
+\(T_i:P_b\to P_i\), with \(T_b=I\).  For every edge define its based
+holonomy
+\[
+ H_A(i,j)=T_j^{-1}M_A(i,j)T_i\in\operatorname{GL}_2(q).
+\]
+Compatibility propagates a base block \(F_b\) uniquely as
+\(F_i=T_iF_bT_i^{-1}\); the edge \((A,i,j)\) is then compatible exactly
+when \(F_b\) commutes with \(H_A(i,j)\).  Since
 \(\operatorname{Sp}_2(\F_q)=\mathrm{SL}_2(q)\) is normal in
-\(\mathrm{GL}_2(q)\), all
-propagated blocks
-remain symplectic.  Evaluation at the base therefore identifies
+\(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
+Evaluation at the base therefore identifies
 \(\mathcal G_\psi\) with the holonomy centralizer inside
-\(\mathrm{SL}_2(q)\).
+\(\mathrm{SL}_2(q)\).  Changing the tree transports conjugates all
+holonomies and the displayed centralizer simultaneously.
 \end{proof}
 
 Let \(C\leq\F_q^{2m}\) be \([2m,m,m+1]_q\) MDS, and fix a party set
