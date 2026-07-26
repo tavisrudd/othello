@@ -17,10 +17,11 @@ and their game and coding-theory applications.  It includes exact uncovered-locu
 equivariant stabilizer recovery, secant concurrence decomposition, zero-defect maximum-matching
 rigidity, exact centre-count identities, bad-edge stability, secant-deletion stability, and the
 finite-group unique-fixed-point congruence with its order-four specialization.  It also checks the
-standard-conic exclusion of the exceptional characteristic-two candidate via the tangent-pair
-involutions, the discrete defect gap, affine and odd equality spectra, the characteristic-two odd-order reduction,
-and the exceptional `(4096,92)` secant-type split.  The separate order-twenty-five certificate,
-repair, and other developments are not dependencies of these results.
+standard-conic exclusion of the entire upper even characteristic-two equality branch via
+tangent-pair involutions, the discrete defect gap, affine and odd equality spectra, the
+characteristic-two odd-order reduction, and the specialized `(4096,92)` secant-type split.  The
+separate order-twenty-five certificate, repair, and other developments are not dependencies of
+these results.
 -/
 
 #print axioms RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants
