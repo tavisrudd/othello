@@ -2569,16 +2569,18 @@ The main audit enumerates all \(11^5\) codewords, all subsets needed for
 the generalized weights and four-circuits, and all \(1320\) elements of
 \(PGL_2(\mathbf F_{11})\).  The independent replay enumerates projective
 coefficient classes, uses direct determinants for the circuit matroid,
-and checks the deleted-coordinate duality separately.  Its evidence
-boundary is the explicit reduction of (19.7); it does not construct a
-functor from the Sarkisov graph or identify the circuits with flopping
-curves.
+checks the deleted-coordinate duality separately, and independently
+verifies the CSS quotients, hull, marginal defects, relative generalized
+weights, and the \(q=13\) resonance.  Its evidence boundary is the
+explicit reduction of (19.7); it does not construct a functor from the
+Sarkisov graph, a physical quantum operation realizing the flop, or a
+transversal logical gate.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-26-c682-conic-link-code.py` | 9903 | `55bea06b24e0a7069f77ace87fb304e072655dc0e6b59ca8a1373c97c572692e` |
-| `2026-07-26-c682-conic-link-code-replay.py` | 5479 | `1dd6f93ff27929dc7f50248325bf3338044b0035ce2564e3cb36d4edf612a94c` |
-| `2026-07-26-c682-conic-link-code.json` | 6687 | `3cd5ed4bfb9fb2aa211ef085965c8f8f1e8cb8b08337e54df31e4fe56ae0e372` |
+| `2026-07-26-c682-conic-link-code.py` | 18924 | `5819aa5af19e44560721d695cc7d5ebb8a0c3a9ccd45b7f3eb93500a828680d5` |
+| `2026-07-26-c682-conic-link-code-replay.py` | 13410 | `c53e8c4f80306672ece81d15cc15f0ab83c77235cabcf614a120bdf69f040f9a` |
+| `2026-07-26-c682-conic-link-code.json` | 9568 | `2cc92162cd1167a92afb246ed2361810d0c93dd44df0342efeb3b2e8f3d8735b` |
 
 ### `ej`+`tt` closeout for the conic code
 
@@ -2785,6 +2787,236 @@ dimension match: it is a base-change-compatible Rees construction whose
 special fibers reproduce the scheme-theoretic pointed graph and both
 pagoda components.
 
+## 21. Quantum consequences beyond MDS and AME
+
+The defect-two exact sequences have a direct CSS quantization that does
+not pass through an MDS or AME claim.  Use \(C_\Gamma\) as the \(X\)-check
+space and \(R_4\) as the \(Z\)-check space.  Since
+\[
+ C_\Gamma\subset R_6=R_4^\perp,
+ \tag{21.1}
+\]
+the checks commute.  Their dimensions are both five, so the resulting
+code encodes
+\[
+ 12-5-5=2
+ \tag{21.2}
+\]
+logical \(11\)-level systems.
+
+The logical Pauli label spaces are not inferred from dimensions.  They
+are the two annihilator quotients
+\[
+\mathcal L_X=R_4^\perp/C_\Gamma
+ =R_6/C_\Gamma
+ \simeq J^{(2)}_{0,\infty},
+\qquad
+\mathcal L_Z=C_\Gamma^\perp/R_4
+ \simeq (J^{(2)}_{0,\infty})^\vee.
+\tag{21.3}
+\]
+The residue pairing descends to a perfect pairing
+\(\mathcal L_X\times\mathcal L_Z\to\mathbf F_{11}\), exactly the
+commutator pairing of the logical \(X\)- and \(Z\)-Pauli groups.  Under
+the torus splitting
+\[
+J^{(2)}_{0,\infty}
+=\operatorname{gr}^2_0J(\mathcal O(6))
+ \oplus\operatorname{gr}^2_\infty J(\mathcal O(6)),
+\tag{21.4}
+\]
+the two missing jet lines give the two logical qudits.  Thus the two code
+defects, jet gaps, pagoda components, and logical degrees of freedom are
+the same pair at object level.
+
+The two logical-operator distances are exact.  In the \(X\) sector they
+are measured by \(R_6\setminus C_\Gamma\).  The ambient MDS code \(R_6\)
+has distance six, and
+\[
+\prod_{a=0}^{5}(t-a)
+=t^6+7t^5+8t^4+6t^3+10t^2+t
+\quad\text{over }\mathbf F_{11}
+\tag{21.5}
+\]
+has six projective nonzeros and lies outside \(C_\Gamma\) because its
+\(t^2,t^4\) coefficients are nonzero.  Hence that distance is six.  In
+the \(Z\) sector, \(C_\Gamma^\perp\) has distance four whereas \(R_4\)
+has distance eight, so the distance is four.  In ordered notation the
+code is
+\[
+ [[12,2,(d_X,d_Z)=(6,4)]]_{11}.
+\tag{21.6}
+\]
+Its asymmetric quantum Singleton bound has defect
+\[
+ \bigl(12-6-4+2\bigr)-2=2.
+\tag{21.7}
+\]
+The two relative generalized Hamming-weight hierarchies are
+\[
+ M_\bullet(R_6,C_\Gamma)=(6,7),
+\qquad
+ M_\bullet(C_\Gamma^\perp,R_4)=(4,5).
+\tag{21.8}
+\]
+They say that supporting both independent logical directions costs only
+one more physical coordinate than supporting the first.  Equation
+(21.8), including explicit support witnesses, is checked independently
+in the certificate replay.
+
+### A selectively non-perfect stabilizer state
+
+The code also defines the pure CSS stabilizer state
+\[
+ |C_\Gamma\rangle
+ =11^{-5/2}\sum_{c\in C_\Gamma}|c\rangle,
+\tag{21.9}
+\]
+with \(X\)-stabilizers labelled by \(C_\Gamma\) and \(Z\)-stabilizers by
+\(C_\Gamma^\perp\).  Since their minimum weights are six and four, every
+marginal on at most three qudits is maximally mixed: the state is
+3-uniform, but not AME.
+
+The first failure is completely resolved rather than summarized by one
+distance.  Exactly the fifteen projective weight-four words of
+\(C_\Gamma^\perp\) support a nonidentity stabilizer on four qudits.
+For those fifteen supports the reduced state is the normalized projector
+onto one Pauli eigenspace, has rank \(11^3\), and has entropy
+\(3\log 11\).  The other
+\[
+ \binom{12}{4}-15=480
+\]
+four-qudit marginals are maximally mixed of rank \(11^4\).  The
+exceptional supports split into the three \(D_{20}\)-orbits \(5+5+5\)
+described after (19.20).  More generally, the ordinary weight
+hierarchies (19.11) are the subsystem sizes at which successive
+independent \(X\)- and \(Z\)-constraints can first occur.  They give an
+exact stabilizer-entanglement stratification and the raw data for a
+non-threshold ramp secret-sharing access structure.
+
+The local Fourier transform exchanges the two opposite code states:
+\[
+ F^{\otimes12}|C_\Gamma\rangle
+ =|C_\Gamma^\perp\rangle
+\tag{21.10}
+\]
+up to the fixed sign and coordinate conventions.  Hence the sparse code
+and its dual have the same multipartite entanglement profile while
+exchanging their \(X\)- and \(Z\)-constraint spectra.  This is a
+non-AME realization of the Gale/Fourier opposite operation.
+
+### Hull and entanglement assistance
+
+For the raw homogeneous coordinates of (19.7), order the rows by
+\((1,t,t^3,t^5,t^6)\).  The Euclidean Gram form is
+\[
+ GG^{\mathsf T}
+ =\operatorname{diag}(0,0,0,-1,1),
+\tag{21.11}
+\]
+so
+\[
+ \operatorname{Hull}(C_\Gamma)
+ =\langle1,t,t^3\rangle,\qquad
+ \dim\operatorname{Hull}(C_\Gamma)=3.
+\tag{21.12}
+\]
+The standard hull construction applied to the classical dual
+\([12,7,4]_{11}\), with \(G\) as its parity-check matrix, consequently
+gives the entanglement-assisted code
+\[
+ [[12,4,4;2]]_{11}.
+\tag{21.13}
+\]
+The required two ebits are the rank of (21.11).  This equality with the
+two geometric defect directions is exact numerically, but unlike the
+ordinary CSS quotients (21.3), no canonical identification of the two
+Gram directions with the two individual flop curves has been proved.
+The general entanglement-assisted construction is due to
+Brun--Devetak--Hsieh (arXiv:quant-ph/0610092); the hull formulation is
+recorded by Guenda--Jitman--Gulliver (arXiv:1606.00134).
+
+### The uniform quantum family and the \(q=13\) resonance
+
+The construction is not sporadic.  From (19.17), for every odd prime
+power \(q\ge7\),
+\[
+ C_\Gamma(q)\subset R_6(q)=R_{q-7}(q)^\perp.
+\tag{21.14}
+\]
+Taking these as \(X\)- and \(Z\)-check spaces gives two logical qudits.
+The two sectors are
+\[
+ R_6(q)/C_\Gamma(q),
+\qquad
+ C_\Gamma(q)^\perp/R_{q-7}(q),
+\tag{21.15}
+\]
+and have distances \(q-5\) and \(4\).  For the first assertion, minimum
+words span the MDS code \(R_6(q)\), so some minimum word lies outside the
+proper codimension-two subcode \(C_\Gamma(q)\); for the second,
+\(C_\Gamma(q)^\perp\) has distance four while \(R_{q-7}(q)\) has distance
+eight.  Thus there is a uniform family
+\[
+ [[q+1,2,(q-5,4)]]_q
+\tag{21.16}
+\]
+whose asymmetric quantum Singleton defect is always two.  No novelty
+claim against the asymmetric quantum GRS literature is made here; the
+new point in this report is the canonical jet/Sarkisov interpretation of
+its two logical spaces.
+
+There is a second exceptional field balance.  At \(q=13\),
+\[
+ q-1=12=2\deg\Gamma.
+\]
+For the complete degree-six evaluation matrix, every finite power sum
+vanishes except in degree twelve, where the value \(-1\) cancels the
+homogeneous coordinate at infinity.  Hence
+\[
+ R_6(13)=[14,7,8]_{13}=R_6(13)^\perp.
+\tag{21.17}
+\]
+It follows both that \(C_\Gamma(13)\) is self-orthogonal and that the
+checks \(C_\Gamma(13),R_6(13)\) give
+\[
+ [[14,4,4]]_{13},
+\qquad
+ [[14,2,(8,4)]]_{13},
+\tag{21.18}
+\]
+respectively.  The distance-eight sector in the second code is attained
+by \(\prod_{a=0}^{5}(t-a)\), whose low-to-high coefficients are
+\((0,10,1,9,7,11,1)\), again outside the sparse subsystem.  Thus
+\(q=11\) is the dual-endpoint resonance \(R_4^\perp=R_6\), whereas
+\(q=13\) is the self-dual cubic-parent resonance.
+
+### Significance and next quantum tests
+
+This is stronger than a code-parameter coincidence: the geometric
+quotient and its dual are the two logical Pauli spaces, and the residue
+pairing is their commutator.  It gives an object-level quantization of the
+scheme-theoretic defect without passing through the AME dictionary.  It
+does not yet give a physical code deformation realizing the Sarkisov
+flop or a non-Clifford logical gate.
+
+The uniform family (21.16) and the relative hierarchies (21.8) are two
+further exact consequences.  Three higher-value tests remain.
+
+1. The identities \(E^{\star2}=R_4\) and \(E^{\star3}=R_6\) are precisely
+   the multilinear input used in tests for transversal higher-Clifford
+   phase gates.  The finite next calculation is whether a cubic phase
+   descends to a non-Clifford gate on the two jet qudits, with the two
+   deleted jets as its only correction terms.
+2. The \(5+5+5\) four-marginal defects and the relative weights
+   \((6,7)/(4,5)\) should be converted into the complete pointed
+   two-secret access structure.  This would give a quantum-operational
+   meaning to the circuit orbits rather than only an entropy count.
+3. A Rees-algebra lift of (21.3) should be interpreted as gauge fixing or
+   code deformation between two Lagrangian polarizations of the logical
+   jet space.  That is the precise gate for saying that the flop itself,
+   rather than merely its exceptional quotient, is a quantum operation.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -2874,6 +3106,20 @@ pagoda components.
   coefficient-port/Rees bridge and test whether the \(R_5\) midpoint
   realizes the geometric duality by a product-local, hence necessarily
   local-Clifford, operation.
+- **Settled quantumly without AME:** the two jet quotients are the paired
+  logical Pauli spaces of an exact
+  \([[12,2,(6,4)]]_{11}\) CSS code.  Uniformly they give
+  \([[q+1,2,(q-5,4)]]_q\), always of asymmetric Singleton defect two.
+- **Settled for quantum marginals:** \(|C_\Gamma\rangle\) is 3-uniform;
+  exactly fifteen four-party marginals have rank \(11^3\), the other 480
+  have rank \(11^4\), and the relative logical hierarchies are
+  \((6,7)\) and \((4,5)\).
+- **Settled at the next field resonance:** \(R_6(13)\) is self-dual and
+  supplies \([[14,4,4]]_{13}\) and
+  \([[14,2,(8,4)]]_{13}\) codes.
+- **Open quantumly at highest value:** test the cubic Schur data for a
+  transversal non-Clifford logical phase, and construct a Rees/gauge
+  deformation realizing the flop on the two logical jet qudits.
 - **Open functorially on the conic edge:** express the complete local Rees
   algebra of the inverse link in terms of the two second-jet quotient
   lines and prove arbitrary base-change compatibility.

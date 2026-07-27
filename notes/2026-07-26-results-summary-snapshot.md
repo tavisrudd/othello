@@ -1588,6 +1588,83 @@ duality, exact jet sequences, and identification of the two exceptional
 components.  A base-change-compatible Rees construction and a master
 correspondence among \(Q^3,V_5,U_{22}\) remain conjectural.
 
+### Quantum consequences beyond AME
+
+The jet exact sequences themselves define a quantum code.  Take
+\(C_\Gamma\) as the \(X\)-check space and \(R_4\) as the \(Z\)-check
+space.  The inclusion \(C_\Gamma\subset R_6=R_4^\perp\) makes the checks
+commute, and their dimensions give two logical qudits.  More strongly,
+their logical Pauli spaces are exactly
+\[
+ \mathcal L_X=R_6/C_\Gamma\simeq J^{(2)}_{0,\infty},
+ \qquad
+ \mathcal L_Z=C_\Gamma^\perp/R_4
+ \simeq(J^{(2)}_{0,\infty})^\vee.
+\]
+The residue pairing becomes their Pauli commutator pairing.  The two
+second-jet lines therefore label the two logical \(11\)-level systems.
+The two logical-operator distances are six and four, giving
+\[
+ [[12,2,(6,4)]]_{11}.
+\]
+Its asymmetric quantum Singleton defect is two.  Its relative generalized
+weight hierarchies are \((6,7)\) and \((4,5)\), so the minimum support for
+both logical directions is only one coordinate larger than for the first.
+
+The same construction works over every odd prime power \(q\ge7\):
+\[
+ [[q+1,2,(q-5,4)]]_q.
+\]
+Indeed the two check spaces are \(C_\Gamma(q)\) and \(R_{q-7}(q)\);
+their logical quotients are precisely the two sequences dual to (19.17).
+Minimum words span the MDS parent \(R_6(q)\), so the first quotient attains
+distance \(q-5\), while the second attains distance four because
+\(R_{q-7}(q)\) has distance eight.  The entire family has asymmetric
+Singleton defect two.  No novelty claim against the asymmetric quantum
+GRS literature is made; the geometric jet/Sarkisov interpretation is the
+new content here.
+
+The pure CSS state
+\[
+ |C_\Gamma\rangle
+ =11^{-5/2}\sum_{c\in C_\Gamma}|c\rangle
+\]
+is 3-uniform but not AME.  Exactly fifteen four-party marginals, on the
+three \(5+5+5\) orbits of dual minimum supports, have rank \(11^3\);
+the other \(480\) have full rank \(11^4\).  Thus the first failure of
+perfect-tensor behavior is completely localized by the conic circuit
+geometry.  Global local Fourier transform exchanges this state with
+\(|C_\Gamma^\perp\rangle\), preserving its entanglement profile while
+exchanging the \(X/Z\) constraints.
+
+In the raw homogeneous coordinates,
+\[
+ GG^{\mathsf T}=\operatorname{diag}(0,0,0,-1,1),
+\qquad
+\operatorname{Hull}(C_\Gamma)=\langle1,t,t^3\rangle.
+\]
+The associated entanglement-assisted construction is
+\([[12,4,4;2]]_{11}\).  The two-ebit count equals the geometric defect
+numerically; unlike the ordinary CSS quotient above, a canonical
+componentwise identification has not been proved.
+
+At \(q=13\), the degree-twelve finite power sum cancels the coordinate at
+infinity, making
+\[
+ R_6(13)=[14,7,8]_{13}=R_6(13)^\perp.
+\]
+This second field resonance yields both
+\[
+ [[14,4,4]]_{13},
+ \qquad
+ [[14,2,(8,4)]]_{13}.
+\]
+The highest-value open quantum test is whether the exact square/cube
+Schur algebra produces a transversal non-Clifford phase on the two jet
+qudits.  A Rees-algebra lift would then be the gate for interpreting the
+flop itself as gauge fixing or code deformation, rather than merely
+quantizing its exceptional quotient.
+
 This bridge does not remove the separate boundary in *Arithmetic and
 harmonic realizations of the Clebsch cubic*: no canonical specialization
 from those real/rational realizations to the finite matching tensor has been
@@ -1735,7 +1812,9 @@ are vacuous because a natural number can encode the whole residual.
   reconstruction literature.
 - ***The Clebsch Schur--Sarkisov spine:*** exact at the level of conic
   evaluation codes, Schur products, residue duality, jet quotients, and the
-  two Reid-pagoda components; the Rees-algebra functor and master Fano
-  correspondence remain open.
+  two Reid-pagoda components.  Its jet quotients give an exact
+  \([[q+1,2,(q-5,4)]]_q\) asymmetric CSS family and a fully resolved
+  \(q=11\) four-marginal defect pattern; the transversal-gate test,
+  Rees-algebra functor, and master Fano correspondence remain open.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim.

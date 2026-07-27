@@ -6,6 +6,7 @@ from __future__ import annotations
 import itertools
 import json
 from collections import Counter
+from math import comb
 from pathlib import Path
 
 
@@ -37,7 +38,7 @@ def values(coefficients: tuple[int, ...]) -> tuple[int, ...]:
     return tuple(answer)
 
 
-def determinant(matrix: list[list[int]]) -> int:
+def determinant(matrix: list[list[int]], modulus: int = Q) -> int:
     size = len(matrix)
     if size == 0:
         return 1
@@ -47,8 +48,12 @@ def determinant(matrix: list[list[int]]) -> int:
             [entry for index, entry in enumerate(row) if index != column]
             for row in matrix[1:]
         ]
-        total += (-1) ** column * matrix[0][column] * determinant(minor)
-    return total % Q
+        total += (
+            (-1) ** column
+            * matrix[0][column]
+            * determinant(minor, modulus)
+        )
+    return total % modulus
 
 
 def column(point: int | str) -> list[int]:
@@ -68,6 +73,129 @@ def dependent(block: tuple[int | str, ...]) -> bool:
         if determinant(square):
             return False
     return True
+
+
+def homogeneous_rows(
+    modulus: int, exponents: tuple[int, ...], degree: int
+) -> list[list[int]]:
+    return [
+        [pow(parameter, exponent, modulus) for parameter in range(modulus)]
+        + [int(exponent == degree)]
+        for exponent in exponents
+    ]
+
+
+def polynomial_with_roots(modulus: int) -> list[int]:
+    coefficients = [1]
+    for root in range(6):
+        product = [0] * (len(coefficients) + 1)
+        for degree, coefficient in enumerate(coefficients):
+            product[degree] = (product[degree] - root * coefficient) % modulus
+            product[degree + 1] = (
+                product[degree + 1] + coefficient
+            ) % modulus
+        coefficients = product
+    return coefficients
+
+
+def homogeneous_weight(coefficients: list[int], modulus: int) -> int:
+    finite = [
+        sum(
+            coefficient * pow(parameter, degree, modulus)
+            for degree, coefficient in enumerate(coefficients)
+        )
+        % modulus
+        for parameter in range(modulus)
+    ]
+    return sum(value != 0 for value in finite) + int(coefficients[6] != 0)
+
+
+def column_rank_at_least(
+    rows: list[list[int]], columns: tuple[int, ...], modulus: int
+) -> bool:
+    size = len(columns)
+    return any(
+        determinant(
+            [[rows[row][column] for column in columns] for row in row_set],
+            modulus,
+        )
+        for row_set in itertools.combinations(range(len(rows)), size)
+    )
+
+
+def row_rank(matrix: list[list[int]], modulus: int) -> int:
+    work = [[entry % modulus for entry in row] for row in matrix]
+    row = 0
+    for column in range(len(work[0]) if work else 0):
+        pivot = next(
+            (index for index in range(row, len(work)) if work[index][column]),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[row], work[pivot] = work[pivot], work[row]
+        inverse = pow(work[row][column], -1, modulus)
+        work[row] = [(inverse * entry) % modulus for entry in work[row]]
+        for other in range(row + 1, len(work)):
+            factor = work[other][column]
+            if factor:
+                work[other] = [
+                    (left - factor * right) % modulus
+                    for left, right in zip(work[other], work[row])
+                ]
+        row += 1
+    return row
+
+
+def shortened_dimension(
+    rows: list[list[int]], support: tuple[int, ...], modulus: int
+) -> int:
+    complement = [column for column in range(len(rows[0])) if column not in support]
+    return len(rows) - row_rank(
+        [[row[column] for column in complement] for row in rows], modulus
+    )
+
+
+def nullspace(rows: list[list[int]], modulus: int) -> list[list[int]]:
+    work = [[entry % modulus for entry in row] for row in rows]
+    pivot_columns = []
+    pivot_row = 0
+    for column in range(len(work[0])):
+        pivot = next(
+            (
+                index
+                for index in range(pivot_row, len(work))
+                if work[index][column]
+            ),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        inverse = pow(work[pivot_row][column], -1, modulus)
+        work[pivot_row] = [
+            inverse * entry % modulus for entry in work[pivot_row]
+        ]
+        for index in range(len(work)):
+            if index != pivot_row and work[index][column]:
+                factor = work[index][column]
+                work[index] = [
+                    (left - factor * right) % modulus
+                    for left, right in zip(work[index], work[pivot_row])
+                ]
+        pivot_columns.append(column)
+        pivot_row += 1
+    free_columns = [
+        column for column in range(len(work[0])) if column not in pivot_columns
+    ]
+    answer = []
+    for free_column in free_columns:
+        vector = [0] * len(work[0])
+        vector[free_column] = 1
+        for index, pivot_column in enumerate(pivot_columns):
+            vector[pivot_column] = -work[index][free_column] % modulus
+        answer.append(vector)
+    return answer
 
 
 def fractional_linear(
@@ -166,8 +294,115 @@ def main() -> None:
             infinity = int(left == 4 and right == 6)
             assert (finite_sum + infinity) % Q == 0
 
+    # Independent quantum replay: compute the Euclidean Gram form directly,
+    # recover the hull, and verify the two CSS logical quotients.
+    sparse_rows = homogeneous_rows(Q, EXPONENTS, 6)
+    code_gram = [
+        [sum(a * b for a, b in zip(row, other)) % Q for other in sparse_rows]
+        for row in sparse_rows
+    ]
+    assert code_gram == expected["quantum"]["euclidean_hull"]["gram_matrix"]
+    assert code_gram == [
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 10, 0],
+        [0, 0, 0, 0, 1],
+    ]
+    assert expected["quantum"]["euclidean_hull"]["dimension"] == 3
+    assert expected["quantum"]["euclidean_hull"]["basis_exponents"] == [0, 1, 3]
+
+    r4_rows = homogeneous_rows(Q, tuple(range(5)), 4)
+    assert all(
+        sum(a * b for a, b in zip(left, right)) % Q == 0
+        for left in sparse_rows
+        for right in r4_rows
+    )
+    q11_witness = polynomial_with_roots(Q)
+    assert q11_witness[2] and q11_witness[4]
+    assert homogeneous_weight(q11_witness, Q) == 6
+    assert expected["quantum"]["css_code"]["parameters"] == {
+        "physical_qudits": 12,
+        "logical_qudits": 2,
+        "logical_X_operator_distance": 6,
+        "logical_Z_operator_distance": 4,
+    }
+    assert expected["quantum"]["css_code"][
+        "logical_X_relative_generalized_weights"
+    ] == [6, 7]
+    assert expected["quantum"]["css_code"][
+        "logical_Z_relative_generalized_weights"
+    ] == [4, 5]
+    x_witness_support = tuple(range(7))
+    assert (
+        shortened_dimension(
+            homogeneous_rows(Q, tuple(range(7)), 6),
+            x_witness_support,
+            Q,
+        )
+        - shortened_dimension(sparse_rows, x_witness_support, Q)
+        == 2
+    )
+    dual_rows = nullspace(sparse_rows, Q)
+    z_witness_support = (1, 3, 4, 5, 9)
+    assert (
+        shortened_dimension(dual_rows, z_witness_support, Q)
+        - shortened_dimension(r4_rows, z_witness_support, Q)
+        == 2
+    )
+    assert expected["quantum"]["css_code"][
+        "asymmetric_quantum_singleton_defect"
+    ] == 2
+
+    marginal_data = expected["quantum"]["css_stabilizer_state"][
+        "four_qudit_marginals"
+    ]
+    assert marginal_data == {
+        "exceptional_support_orbits": [5, 5, 5],
+        "maximally_mixed_count": comb(12, 4) - 15,
+        "rank_11^3_count": 15,
+    }
+    assert expected["quantum"]["entanglement_assisted_from_dual"][
+        "parameters"
+    ] == {
+        "physical_qudits": 12,
+        "logical_qudits": 4,
+        "distance": 4,
+        "ebits": 2,
+    }
+
+    # The q=13 check is independent of the q=11 enumeration.  Direct power
+    # sums make the complete degree-six Gram matrix zero, while minors give
+    # dual distance four for the sparse subsystem.
+    q13 = 13
+    r6_q13 = homogeneous_rows(q13, tuple(range(7)), 6)
+    assert all(
+        sum(a * b for a, b in zip(left, right)) % q13 == 0
+        for left in r6_q13
+        for right in r6_q13
+    )
+    sparse_q13 = homogeneous_rows(q13, EXPONENTS, 6)
+    assert all(
+        column_rank_at_least(sparse_q13, columns, q13)
+        for columns in itertools.combinations(range(q13 + 1), 3)
+    )
+    q13_circuit = (0, 1, 12, 13)
+    assert not column_rank_at_least(sparse_q13, q13_circuit, q13)
+    q13_witness = polynomial_with_roots(q13)
+    assert q13_witness[2] and q13_witness[4]
+    assert homogeneous_weight(q13_witness, q13) == 8
+    assert expected["quantum"]["q13_resonance"][
+        "asymmetric_css_parameters"
+    ] == {
+        "physical_qudits": 14,
+        "logical_qudits": 2,
+        "logical_X_operator_distance": 8,
+        "logical_Z_operator_distance": 4,
+    }
+
     print("PASS: independent projective-word, determinant, and PGL2 replay")
     print("PASS: deleted weights {2,4} give the dual codimension-two sequences")
+    print("PASS: CSS quotients, hull, marginal defects, and q=13 resonance")
 
 
 if __name__ == "__main__":
