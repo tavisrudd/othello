@@ -922,26 +922,317 @@ Segre--Igusa package: for example a genuinely new arithmetic algorithm
 with a proved complexity or robustness advantage, a new moduli
 consequence, or a nontrivial generalization beyond six points.
 
+## Big-picture reframing: Clebsch as an exceptional junction
+
+The right programme is not to accumulate further statements that the
+Clebsch object is special.  It is to find a general functor, rank bound,
+or variational problem for which Clebsch is an equality object, an
+exceptional fibre, or a bridge between categories that are otherwise
+unrelated.
+
+Three standards distinguish such a theorem from a catalogue:
+
+1. a variational principle explains why an extremum occurs;
+2. extremality in two different categories is proved equivalent; or
+3. a general bound is proved and Clebsch is classified as its equality
+   case.
+
+The portfolio suggests the following partial categorical square:
+\[
+\begin{array}{ccccc}
+\text{coefficient repair port}
+ &\longrightarrow& [2m,m]\text{ MDS code}
+ &\dashrightarrow& \text{deep-hole/extension configuration}\\
+ &&\downarrow\text{\scriptsize Gale/code duality}
+ &&\downarrow\text{\scriptsize exceptional minimal-degree output}\\
+ &&[2m,m]\text{ dual MDS code}
+ &&\text{GRS or minimal-degree variety}\\
+ &&\downarrow\text{\scriptsize equal-phase CSS}
+ &&\\
+ &&\text{stabilizer AME state.}&&
+\end{array}
+\]
+Code duality is implemented on the equal-phase state by local Fourier
+transform.  The complete coefficient port reconstructs an MDS code at
+the critical radius, whereas its support projection remembers only the
+uniform matroid.  Deep-hole directions of the dual classify legal
+one-coordinate MDS extensions.  These individual arrows are standard or
+already proved in the portfolio; the possible new result is a theorem
+about the square's fibres, equality cases, or naturality.
+
+### A. The deep-hole transform as an exceptional partial functor
+
+For a projective arc \(A\), define its one-step extension port
+\[
+ \mathcal E(A)=\mathcal U(A).
+\]
+Its points are exactly the legal one-point extensions of \(A\).  Under
+the code dictionary they are projective deep-hole syndrome directions,
+and the standard dual formulation identifies them with MDS extensions.
+Usually \(\mathcal E(A)\) is a relatively unstructured finite set.
+
+The Clebsch row is simultaneously extremal in four different
+coordinates of the complete \(q=11\) six-arc moduli set:
+\[
+\begin{array}{c|cc}
+\text{invariant}&\text{Clebsch}&\text{every other class}\\ \hline
+|\mathcal E(A)|&12&\ge16\\
+|\operatorname{PStab}(A)|&60&\le12\\
+\min\deg I(\mathcal E(A))&2&\ge4\\
+\text{nearest-conic discrepancy}&0&\ge12.
+\end{array}
+\]
+Moreover, the minimum extension port is not merely small: its twelve
+points are the complete rational conic, hence a maximal
+\([12,3,10]_{11}\) GRS configuration.  Thus Clebsch is a minimal
+extension port with maximal internal MDS structure.
+
+This motivates a general inverse problem:
+
+> **Minimal-degree deep-hole transform problem.**  Classify MDS codes
+> whose projective deep-hole/extension configuration is a rational
+> normal curve, a variety of minimal degree, or another MDS
+> configuration.
+
+Paper I solves the full-conic problem through eight points in redundancy
+three: only the \(q=5\) frame and \(q=11\) Clebsch hexagon occur.  The PRS
+work describes higher-redundancy deep-hole strata by catalecticants,
+apolarity, and splitting avoidance.  The arcs paper supplies the
+prescribed-hole defect and equality machinery.  A classification beyond
+the through-eight range would therefore connect three current paper
+families through a single nonlinear transform rather than through the
+name “Clebsch.”
+
+The first scalable target is:
+
+> **Conjecture E3.**  If an arc in \(\operatorname{PG}(2,q)\), for odd
+> \(q\), has a complete rational conic as its one-step extension port,
+> then it is the
+> four-frame over \(\mathbf F_5\) or the Clebsch hexagon over
+> \(\mathbf F_{11}\).
+
+The existing theorem proves E3 only for \(4\le |A|\le8\).  A larger
+example is a decisive falsifier.  A proof for all sizes is a strong
+specialist/general crossover result; an arbitrary-redundancy
+minimal-variety theorem would have Platinum shape.
+
+### B. Extension--repair duality and the MDS-to-AME quotient
+
+Let \(\mathcal M_m\) be the moduli groupoid of linear
+\([2m,m,m+1]\) MDS codes with monomial equivalences, with
+\(\mathcal M_{m,q}\) its \(\mathbf F_q\)-points.  Let
+\(\mathcal A_m\) be the corresponding groupoid of equal-phase stabilizer
+AME states with local-Clifford maps and party permutations.  There is a
+functor
+\[
+ Q:\mathcal M_m\longrightarrow\mathcal A_m.
+\]
+Gale association is code duality
+\[
+ D:C\longmapsto C^\perp,
+\]
+and finite-field Fourier orthogonality gives a natural local-Clifford
+identification
+\[
+ Q(C)\simeq Q(C^\perp).
+\]
+Thus \(Q\) factors through Gale orbits.  The general LU-rigidity theorem
+shows that replacing local Clifford by local unitary does not create a
+larger equivalence relation on stabilizer AME states.
+
+The substantive target is not the Fourier identity but the converse:
+
+> **Conjecture QG.**  On a dense open substack of
+> \(\mathcal M_m\), the fibre of \(Q\) is exactly one monomial/Gale
+> orbit.
+
+For \(m=3\), the six-point pencil, its degree-eight invariant quotient,
+the exact fixed-party local-Clifford classifications, and the residual
+Gale cubic make QG testable.  The golden point has the especially sharp
+identity
+\[
+\text{Gale duality}
+=\text{golden Galois conjugation}
+=\text{local Fourier equivalence}.
+\]
+It is therefore an arithmetic specialization of a possible general
+moduli quotient, rather than merely a quantum coincidence.
+
+The first attack on QG is to prove that, for a generic six-point MDS
+code, every compatible tuple of local symplectic blocks is either
+monomial or Fourier followed by monomial.  Equivalently, compare the
+function field of the local-Clifford quotient with the Gale-invariant
+subfield of the six-point moduli function field.  A generic
+local-Clifford pair that is neither monomially nor Gale related kills the
+conjecture.  QG for \(m=3\) would be Gold-to-Platinum depending on the
+moduli and literature strength; a uniform theorem in \(m\) has clear
+Platinum shape.
+
+The repair-port side belongs in the same framework.  The coefficient
+port functor at radius \(m\) is faithful because its affine span recovers
+\(C^\perp\).  Its support-only projection factors through the uniform
+matroid and loses all MDS moduli.  A useful categorical theorem should
+therefore express extension and coefficient-repair data as dual links
+in an MDS extension complex, not merely place two arrows in one diagram.
+
+### C. The stable minimum-rank transvectant locus
+
+For a nonzero binary dodecic \(I\), put
+\[
+ T_I:\operatorname{Sym}^6\longrightarrow\operatorname{Sym}^{12},
+ \qquad p\longmapsto(p,I)_3.
+\]
+The rank-\(\le3\) locus is a closed \(PSL_2\)-stable projective subset.
+If nonempty, the Borel fixed-point theorem forces it to contain the
+highest-weight point \([X^{12}]\), but the certified boundary
+calculation gives \(\operatorname{rank}T_{X^{12}}=4\).  Hence every
+nonzero dodecic satisfies
+\[
+ \operatorname{rank}T_I\ge4.
+\]
+The Klein dodecic is therefore not just low-rank: it is a stable form
+attaining the representation-theoretic absolute minimum.  Its entire
+open \(PSL_2/A_5\) orbit, both compactification boundary types, and the
+threefold tangent space at the Klein point lie in the rank-four locus.
+
+The high-ceiling target is:
+
+> **Conjecture TR.**  The stable rank-four locus is the icosahedral
+> \(PSL_2/A_5\) orbit.  Scheme-theoretically, rank four together with
+> fifth-transvectant isotropy of the kernel cuts out the
+> Mukai--Umemura compactification.
+
+TR says that the icosahedral object is the unique stable minimizer of a
+natural covariant rank, while the Mukai--Umemura threefold is its
+extremal compactification.  It would connect determinantal geometry,
+binary invariant theory, Fano threefolds, and exact symmetry-recognition
+algorithms.  The recognition algorithm is concrete: construct a
+\(13\times7\) matrix, test minimum rank and kernel isotropy, and recover
+the parent three-plane as its kernel.
+
+The attack has four gates:
+
+1. express kernel isotropy polynomially in maximal-minor/Plücker
+   coordinates on the rank-four locus;
+2. saturate the rank-plus-isotropy ideal and compute its dimension,
+   degree, Hilbert polynomial, and irreducible components;
+3. compare those invariants and boundary local rings with the known
+   Mukai--Umemura compactification; and
+4. perform a precise literature audit for this transvectant
+   degeneracy-locus presentation.
+
+Any stable rank-four form outside the icosahedral orbit, any remote
+component surviving isotropy, or a Hilbert-polynomial mismatch kills the
+strong statement.  The extra rank-only tangent direction at
+\([X^{12}]\) already warns that minors alone are insufficient; it is
+evidence for the role of isotropy, not evidence that TR is automatically
+true.
+
+### D. Orientation index and Gorenstein extremality
+
+For a signed two-sheet configuration \((X,\epsilon)\), define its
+orientation index
+\[
+ \operatorname{ori}(X,\epsilon)
+ =\min\{d:\sum_{x\in X}\epsilon_x\,x^{\otimes d}\ne0\}.
+\]
+Papers I and II both have orientation index three: first and second
+moments recover only the unordered sheets, while the cubic is the first
+signed detector.  In Paper II, self-association, Cayley--Bacharach, and
+the arithmetically Gorenstein Hilbert function explain why the cubic
+must survive.
+
+The general target is to identify the orientation index with a
+canonical-module or socle-degree invariant and prove a sharp upper bound
+in terms of the Hilbert function.  Equality cases would classify
+configurations whose hidden bit survives the maximum number of low-order
+moments.  This would connect the Clebsch examples to design trades,
+higher-order correlation recovery, and bispectral algorithms.  It is a
+Gold direction now; it becomes Platinum only with a sharp general bound
+and a meaningful equality classification.
+
+### E. A correspondence object rather than a shared representation
+
+The six points, ten complementary triple pairs/face axes, and fifteen
+synthemes form finite \(A_5\)-sets and correspondences.  On the ten-set,
+the Petersen adjacency algebra has the canonical projector
+\[
+ e_4=\frac{(A-3I)(A-I)}{15}
+\]
+onto the Clebsch four-space \(V_4\).  Paper I, Paper II, and Paper III
+give finite-code, matching-tensor, and harmonic/transvectant
+realizations of this summand.
+
+This becomes a genuine categorical bridge only after constructing:
+
+1. a correspondence object over an explicit integral localization;
+2. realization functors into the finite-code, matching, and harmonic
+   categories;
+3. a normalized natural transformation, plausibly the primitive
+   transvectant, between two realizations; and
+4. preservation of the cubic line.
+
+Without those four items, “Clebsch motive” or “Morita bridge” would be
+decorative language for a shared irreducible representation.  This track
+should follow rather than precede TR or QG, because either successful
+theorem would supply the required natural map and normalization.
+
+### Literature-adjusted priority
+
+1. **TR, stable minimum-rank transvectant classification:** clearest
+   single Platinum target.
+2. **QG, the MDS-to-AME generic Gale quotient:** broadest categorical
+   Platinum target.
+3. **E3 and its higher-redundancy analogue:** strongest connection among
+   Paper I, PRS, arcs, and code extensions.
+4. **Orientation-index theorem:** reusable Gold mechanism with a possible
+   higher ceiling.
+5. **The \(q=11\) multi-extremal equivalence:** strong specialist theorem
+   and finite laboratory for the preceding conjectures.
+6. **Integral correspondence category:** synthesis only after a
+   canonical natural transformation is earned.
+
+The red-team boundary is strict.  Deep holes versus MDS extensions,
+Fourier versus code duality, outer \(S_6\), and Segre--Igusa duality are
+already classical or standard.  New content must be a fibre theorem, a
+sharp extremal classification, a global degeneracy-locus theorem, or a
+commuting categorical square with a universal property.
+
 ### Highest-EV cross-paper actions
 
-1. Compare the expanded five-syntheme/Clebsch formula term-by-term with
-   the explicit \(W_T\) formulas in Howard--Millson--Snowden--Vakil,
-   Joubert, and Coble; this is now a formula-priority audit, not a search
-   for the outer covariant itself.
-2. Seek one consequence of the compact formula that is not already a
-   reformulation of Segre--Igusa duality or Joubert's resolvent.
-3. Test whether the symmetric correction is a named discriminant,
-   code-moment, or six-point moduli invariant.
-4. Contract the C651 tensor through the primitive mod-\(11\) transvectant
-   and determine its scalar on \(V_4\).
-5. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
-   equivalence conventions.
-6. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
-   defect.
-7. Test the two \(q=11\) PRS exceptional nets against the transvectant
-   kernel orbit.
-8. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
-   before touching the full replacement graph.
+1. **TR structural gate:** formulate the rank-four kernel-isotropy ideal
+   in invariant/Plücker coordinates and compare its saturated Hilbert data
+   with the Mukai--Umemura model.
+2. **TR cheap falsifier:** search exact small-height and finite-field
+   stable rank-four forms for a nonicosahedral orbit before undertaking
+   heavy elimination.
+3. **QG \(m=3\) gate:** derive the generic local-symplectic compatibility
+   equations and test whether their only components are monomial and
+   Fourier--monomial.
+4. **QG quotient gate:** compare the six-point local-Clifford quotient
+   function field with the Gale-invariant moduli function field.
+5. **E3 extension gate:** turn the existing conic-cover inequalities,
+   passant-code constraints, and matching-design defect into an
+   all-\(k\) sieve; search the remaining parameter window before claiming
+   a proof route.
+6. **Orientation gate:** state and prove the precise
+   canonical-module/signed-moment lemma for a general self-associated
+   arithmetically Gorenstein configuration.
+7. **Finite multi-extremal theorem:** add legal-extension minimality and
+   maximal party-permutation symmetry to the existing \(q=11\)
+   equivalence, while keeping the computational gaps explicit.
+8. **Supporting normalization:** contract the C651 tensor through the
+   primitive mod-\(11\) transvectant only if TR or the correspondence
+   track needs the scalar.
+9. **Deferred formula work:** compare the compact
+   five-syntheme/Clebsch formula with classical \(W_T\) expansions, but do
+   not let this displace the general theorem tracks.
+
+The attack order is deliberately falsifier-first: run Tasks 2 and 3
+before expensive global ideal or quotient calculations, then promote at
+most one of TR and QG to the main Platinum programme.  E3 and the
+orientation-index theorem remain independent Gold routes if both
+Platinum conjectures fail.
 
 ## Source-depth boundary
 
@@ -992,6 +1283,31 @@ map`, `"synthematic total" "Igusa quartic" covariant`, and
 the first result page for each exact query produced no direct occurrence
 of the compact identity.  This supports only “not located in this
 bounded audit,” not novelty or absence.
+
+The big-picture extension/quantum scout additionally used title and
+abstract depth only:
+
+- Yansheng Wu, Cunsheng Ding, and Tingfang Chen, *Extended codes and deep
+  holes of MDS codes*, arXiv:2312.05534.  Its main theorem explicitly
+  relates deep holes of a dual MDS code to one-coordinate MDS extensions.
+- Yang Li, Zhenliang Lu, San Ling, and Kwok-Yan Lam, *A framework for
+  constructing non-GRS MDS-NMDS codes from deep holes and its
+  application*, arXiv:2605.12133.  This confirms that construction of
+  non-GRS MDS objects from deep holes is an active direction; it was not
+  read deeply enough to compare the inverse/minimal-degree problem.
+- David Joyner, Amy Ksir, and Will Traves, *Automorphism groups of
+  generalized Reed--Solomon codes*, arXiv:0801.4007.  This supplies an
+  initial source boundary for large automorphism groups on the GRS side,
+  not a classification of the non-GRS Clebsch extremum.
+
+Queries included `Gale duality stabilizer states Fourier transform MDS
+code AME`, `deep hole syndrome locus MDS code rational normal curve
+reconstruction`, `automorphism groups six arcs PG(2,q) MDS codes A5`,
+and `moduli MDS codes Gale duality stabilizer AME states`.  The returned
+results did not locate the proposed generic-fibre theorem QG or the
+minimal-degree transform problem E3, but this was a first-page scout, not
+an absence audit.  TR requires its own primary-source search before any
+novelty assessment.
 
 ## Cheap structural corollary: the descended chart is a Ferrand pinch
 
@@ -1092,6 +1408,10 @@ paper-specific content is the alternate five-syntheme/Clebsch formula.
 - **Settled on boundary representatives:** both lower-dimensional orbit
   types retain rank four and have exactly Hitchin's isotropic weight-space
   kernels; rank alone has one extra tangent direction at the closed orbit.
+- **Settled conceptually:** every nonzero binary dodecic has third-
+  transvectant rank at least four.  Otherwise the nonempty closed
+  \(PSL_2\)-stable rank-\(\le3\) locus would contain the Borel-fixed
+  highest-weight point \([X^{12}]\), whose certified rank is four.
 - **Settled arithmetically:** the primitive integral transvectant retains
   rank four modulo \(11\) and drops to rank two modulo \(5\), separating
   the module bridge from the nonreducible Gaunt scalar.
@@ -1139,6 +1459,18 @@ paper-specific content is the alternate five-syntheme/Clebsch formula.
 - **Open:** decide whether rank four plus isotropic kernel cuts out the
   entire Mukai--Umemura compactification, and analyze every boundary rank
   stratum.
+- **Open Platinum track TR:** decide whether the icosahedral orbit is the
+  entire stable minimum-rank locus and whether rank plus kernel isotropy
+  cuts out its compactification scheme-theoretically.
+- **Open Platinum track QG:** determine whether the generic fibre of the
+  rate-half MDS-to-stabilizer-AME functor is exactly a monomial/Gale
+  orbit.
+- **Open Gold-to-Platinum track E3:** extend the frame/Clebsch
+  classification of full-conic extension ports beyond eight points, then
+  formulate the higher-redundancy minimal-degree transform problem.
+- **Open Gold track:** bound the orientation index of a self-associated
+  arithmetically Gorenstein configuration by its Hilbert/canonical-module
+  data and classify equality.
 - **Open:** compare the binary and Euclidean normalizations and compute the
   scalar of \(T_{I_t}|_{V_t}\) in the paper's conventions.
 - **Open:** verify that the two invariant harmonic lines are distinct and

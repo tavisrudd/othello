@@ -532,6 +532,34 @@ term-by-term with the classical explicit \(W_T\) formulas before
 promotion, and require a consequence beyond Segre--Igusa duality for any
 general-journal claim.
 
+C682 is therefore reframed around general extremal and categorical
+theorems rather than the preempted sextic crown.  The two Platinum tracks
+are:
+
+1. **TR:** classify the stable minimum-rank locus of
+   \(p\mapsto(p,I)_3:\operatorname{Sym}^6\to\operatorname{Sym}^{12}\)
+   and test whether rank four plus fifth-transvectant kernel isotropy cuts
+   out the Mukai--Umemura compactification.  A Borel fixed-point argument
+   already proves rank four is the absolute minimum for every nonzero
+   binary dodecic.
+2. **QG:** prove that the generic fibre of the rate-half MDS-code to
+   stabilizer-AME functor is exactly a monomial/Gale orbit.  Code duality
+   is Gale association and local Fourier transform identifies the two
+   equal-phase states; the new content must be the converse fibre theorem.
+
+The independent Gold-to-Platinum fallback E3 classifies codes whose
+deep-hole/legal-extension transform is a rational normal curve or
+minimal-degree variety.  At \(q=11\), Clebsch simultaneously has the
+smallest legal extension port \(12\) (next \(16\)), largest projective
+stabilizer \(60\) (next \(12\)), least containing degree \(2\) (next
+\(4\)), and discrepancy zero (next \(12\)); its minimum port is itself
+the complete conic/GRS object.  The all-size full-conic conjecture says
+only the \(\mathbf F_5\) frame and \(\mathbf F_{11}\) Clebsch hexagon
+occur.  The report records exact gates and falsifiers.  Run the cheap
+finite-field TR counterexample search and generic \(m=3\) QG
+local-symplectic component test before expensive elimination, and promote
+at most one Platinum track at a time.
+
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
 that external wait as a Paper I defect.
