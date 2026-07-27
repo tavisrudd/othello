@@ -24,6 +24,7 @@ libraries = [
   "Queens",
   "RelativeConicArcs",
   "RepairCodes",
+  "RepairPorts",
   "Sumfree",
 ]
 
@@ -41,6 +42,10 @@ spine = "areas/relconic.toml"
 [[area]]
 name = "finitegeom_first_tag"
 spine = "areas/finitegeom_first_tag.toml"
+
+[[area]]
+name = "complete_ports"
+spine = "areas/complete_ports.toml"
 
 # ---------------------------------------------------------------------------------------------
 # Libraries that are built but have no trust spine yet.
@@ -111,6 +116,16 @@ section = "gates"
 [[generated_doc]]
 path = "trust/PORTFOLIO.md"
 area = "finitegeom_first_tag"
+section = "terminal-axioms"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "complete_ports"
+section = "gates"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "complete_ports"
 section = "terminal-axioms"
 
 [[generated_doc]]

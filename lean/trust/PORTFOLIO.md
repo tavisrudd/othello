@@ -31,6 +31,12 @@ Read [`../TRUST.md`](../TRUST.md) for the trust model itself and the per-paper m
 | `ProjectiveCap.PlaneOutcome`   | 3                  | **not extracted** |
 <!-- trust-spine:end area=finitegeom_first_tag section=gates -->
 
+<!-- trust-spine:begin area=complete_ports section=gates version=1 -->
+| Gate                              | Terminals declared | Facts             |
+|-----------------------------------|--------------------|-------------------|
+| `RepairPorts.Gates.CompletePorts` | 36                 | **not extracted** |
+<!-- trust-spine:end area=complete_ports section=gates -->
+
 ## Terminal axiom sets
 
 The declared column is what a reviewer asserts in the corresponding per-area TOML file. The
@@ -55,6 +61,47 @@ failure; a row where observed is empty means nobody has extracted that gate yet.
 | `ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_five_finrank`                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
 | `ProjectiveCap.ConicLocalization.initialPStatement_of_card_eq_seven_finrank`                      | `Classical.choice`, `Quot.sound`, `propext` | —        |
 <!-- trust-spine:end area=finitegeom_first_tag section=terminal-axioms -->
+
+<!-- trust-spine:begin area=complete_ports section=terminal-axioms version=1 -->
+| Terminal                                                                                       | Declared axioms                             | Observed |
+|------------------------------------------------------------------------------------------------|---------------------------------------------|----------|
+| `FiniteGeom.dualCode_dualCode`                                                                 | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `FiniteGeom.dualCode_injective`                                                                | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.reconstructedCode_eq`                                                             | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.PointedCoefficientPortIso.reconstructsAt_iff`                                     | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.PointedCoefficientPortIso.reconstructionRadius_eq`                                | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.exists_normalized_word`                                      | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard`                            | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.reconstructsAt`                                              | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.reconstructsAt_iff`                                          | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.reconstructionRadius_eq`                                     | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.exactFunctionalStrata`                                                            | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed`                                   | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.pointedFunctionalTupleRealizationCost_eq`                                         | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost`                                  | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed`                                | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.exactPointedConfinementAndTransfer`                                               | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.representedTargets_density`                                                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.concatenatedRestrictedCode_parameters`                                            | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance`                             | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.prescribedPorts_of_outerDualDistance`                                             | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.eventually_pointedConfinement_iff_zeroCost`                                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.eventually_prescribedPorts`                                                       | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq`                                | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.eventually_mdsMinimumCoefficientFingerprints`                                     | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.portReliability_delete_contract`                                                  | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.hasDerivAt_portReliability_update`                                                | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.hasDerivAt_homogeneous_portReliability`                                           | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.erasureFailureProbability_delete_contract`                                        | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.noRepairProbability_eq_erasureFailure`                                            | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.cheapestRepairRadiusProbability`                                                  | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub`                                   | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum`                                   | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.coeff_blockerFailurePolynomial_at_minimum`                                        | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum`                             | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder`                           | `Classical.choice`, `Quot.sound`, `propext` | —        |
+| `RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action` | `Classical.choice`, `Quot.sound`, `propext` | —        |
+<!-- trust-spine:end area=complete_ports section=terminal-axioms -->
 
 ## Generated data trees
 

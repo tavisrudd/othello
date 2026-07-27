@@ -16,7 +16,7 @@ appendix-only and cannot discharge a body theorem.
 4. C674 is closed: trace duality, eventual exact confinement, coefficient-port
    copies, density, scaled parameters, and general MDS fingerprints pass the
    paper-facing gate; outer-family existence is the named classical input.
-5. C675 proves and formalizes reliability and bounded EXIT.
+5. C675 proved and formalized reliability and bounded EXIT.
 6. C676 follows C675 for pointed Tutte and the filtration boundary.
 7. C677 follows C672 for harmonic geometry.
 8. C678 assembles the modular draft after C672--C677 pass.

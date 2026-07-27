@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C674 PROOF GATES COMPLETE; C675 NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672--C675 PROOF GATES COMPLETE; C676 NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -73,6 +73,7 @@ Completed preparation:
 - [C672 MDS minimum coefficient-port reconstruction](../2026-07-26-c672-mds-local-reconstruction.md).
 - [C673 exact pointed confinement and weighted transfer](../2026-07-26-c673-exact-confinement-transfer.md).
 - [C674 positive-density coefficient fingerprints](../2026-07-26-c674-positive-density-fingerprints.md).
+- [C675 reliability and bounded EXIT](../2026-07-26-c675-reliability-bounded-exit.md).
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
@@ -108,12 +109,12 @@ It routes C675 to the Janson--O'Donnell reliability lens, C676 to the Britz--Rav
 code/matroid lens, and C677 to the Lavrauw--Ball/Bartoli finite-geometry lens; final assembly also
 requires the Yaakobi/Tamo operational-storage read.
 
-Run C675 next: replace the reliability and bounded-EXIT certificate dependence by complete
-finite-sum proofs and paper-facing Lean terminals.  C674 closed exact support and normalized
-coefficient transfer, eventual necessity and sufficiency, density, scaled parameters, and general
-MDS fingerprints.  The remaining proof/formalization work then branches:
+Run C676 next: complete the pointed Tutte specialization and radius-filtration boundary with human
+proofs and matching Lean statements.  C675 closed finite-sum deletion--contraction, pivotal
+derivatives, homogeneous Russo--Margulis, blocker asymptotics, radius truncation, cheapest-radius
+transforms, and the complete-ports trust closure.  The remaining proof/formalization work branches:
 
-- C676 follows C675 for pointed Tutte and the filtration boundary; and
+- C676 now owns pointed Tutte and the filtration boundary; and
 - C677 follows C672 for the harmonic geometric application.
 
 C678 assembles the revised modular draft only after C672--C677 pass their gates. C325 then builds

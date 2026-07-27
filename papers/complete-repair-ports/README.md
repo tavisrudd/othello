@@ -2,9 +2,10 @@
 
 **Title:** *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*<br>
 **Author:** Tavis Rudd<br>
-**Status:** private corrected manuscript with the revised theorem hierarchy frozen and the page-2
-MDS local-reconstruction package human-proved and Lean-checked; the modular rewrite has not begun
-and publication export remains gated.
+**Status:** private corrected manuscript with the revised theorem hierarchy frozen; MDS
+reconstruction, pointed transfer, positive-density fingerprints, and reliability/bounded EXIT have
+complete human proofs and Lean terminals. The modular rewrite has not begun and publication export
+remains gated.
 
 ## Paper spine
 
@@ -21,10 +22,10 @@ The theorem-led order is:
 5. the standard pointed-Tutte/perspective identification and its radius-filtration boundary; and
 6. cubic--axis versus quartic--nucleus/harmonic flagships.
 
-The field-nine harmonic profiles give exact reliability and EXIT deficits. The all-field harmonic
-Steiner system has a sparse Poisson repair window at the nucleus and a compulsory-helper series
-bottleneck at curve targets. The cubic family supplies exact matching/transversal rows and the
-natural strict weighted-transfer example.
+The harmonic Steiner system gives parallel repairs at the nucleus, while every curve-target repair
+has the nucleus as a compulsory series helper. Exact field-nine reliability/EXIT profiles and
+Poisson approximations are computational refinements outside the body theorem chain. The cubic
+family supplies exact matching/transversal rows and the natural strict weighted-transfer example.
 
 The prescribed-port theorem is also instantiated on the Clebsch
 `[6,3,4]_11` code. Its full coefficient-valued radius-five port has
@@ -36,21 +37,21 @@ locality as Clebsch-specific.
 
 The C286 correction pass repaired the exact transfer statement's zero-functional branch,
 normalized the coefficient fibers correctly, completed the random/AG and Poisson proof chain,
-and reconciled three context-light paragraph-by-paragraph cold reads. The private PDF remains an
+and reconciled three context-light paragraph-by-paragraph cold reads. The private PDF remains a
 12-page draft.
 
 ## Evidence boundary
 
-The finite transfer and cubic theorem chain is Lean-checked under the existing `RepairCodes` and
-`RepairPorts` namespaces. The prescribed-port asymptotics, reliability calculus, pointed-Tutte
-specialization, and all-field harmonic proofs are manuscript arguments. Exact finite harmonic,
-reliability, EXIT, and pointed-Tutte profiles are backed by the committed C218, C219, C226, C227,
-C243, and C244 script/JSON bundles recorded in the proof ledger.
+The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT theorem chains are
+Lean-checked under the existing `RepairCodes` and `RepairPorts` namespaces. Outer-family existence,
+the pointed-Tutte specialization, and the retained harmonic geometry use the explicit manuscript
+or literature boundaries recorded in the ledgers. Exact finite harmonic, reliability, EXIT, and
+pointed-Tutte profiles are backed by the committed C218, C219, C226, C227, C243, and C244
+script/JSON bundles and remain appendix material.
 
 Classical ingredients remain labeled as such: concatenated-dual decomposition, Singer regularity,
 random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner systems,
-deletion--contraction reliability, BEC EXIT, Chen--Stein approximation, and the Las Vergnas
-perspective polynomial. A none-found search is not a priority certificate.
+and the Las Vergnas perspective polynomial. A none-found search is not a priority certificate.
 The Clebsch specialization is a manuscript corollary of the MDS dual
 parameters and the prescribed-port theorem; it is not represented as a
 separate Lean terminal.

@@ -1,0 +1,235 @@
+# Trust spine for Complete Bounded Repair Ports.
+#
+# The area owns the RepairPorts library and admits the paper-facing declarations through one
+# import-only gate.  Shared FiniteGeom and RepairCodes dependencies retain their own ownership
+# boundaries; this spine records every terminal exported for the complete-ports manuscript.
+
+schema_version = 1
+area = "complete_ports"
+manifest = "RepairPorts/TRUST.md"
+
+owns = ["RepairPorts.**"]
+
+permitted_axioms = []
+
+[[gate]]
+module = "RepairPorts.Gates.CompletePorts"
+terminals = [
+  "FiniteGeom.dualCode_dualCode",
+  "FiniteGeom.dualCode_injective",
+  "RepairPorts.reconstructedCode_eq",
+  "RepairPorts.PointedCoefficientPortIso.reconstructsAt_iff",
+  "RepairPorts.PointedCoefficientPortIso.reconstructionRadius_eq",
+  "RepairPorts.HasMDSDualParameters.exists_normalized_word",
+  "RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard",
+  "RepairPorts.HasMDSDualParameters.reconstructsAt",
+  "RepairPorts.HasMDSDualParameters.reconstructsAt_iff",
+  "RepairPorts.HasMDSDualParameters.reconstructionRadius_eq",
+  "RepairPorts.exactFunctionalStrata",
+  "RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed",
+  "RepairPorts.pointedFunctionalTupleRealizationCost_eq",
+  "RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost",
+  "RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed",
+  "RepairPorts.exactPointedConfinementAndTransfer",
+  "RepairPorts.representedTargets_density",
+  "RepairPorts.concatenatedRestrictedCode_parameters",
+  "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance",
+  "RepairPorts.prescribedPorts_of_outerDualDistance",
+  "RepairPorts.eventually_pointedConfinement_iff_zeroCost",
+  "RepairPorts.eventually_prescribedPorts",
+  "RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq",
+  "RepairPorts.eventually_mdsMinimumCoefficientFingerprints",
+  "RepairPorts.portReliability_delete_contract",
+  "RepairPorts.hasDerivAt_portReliability_update",
+  "RepairPorts.hasDerivAt_homogeneous_portReliability",
+  "RepairPorts.erasureFailureProbability_delete_contract",
+  "RepairPorts.noRepairProbability_eq_erasureFailure",
+  "RepairPorts.cheapestRepairRadiusProbability",
+  "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub",
+  "RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum",
+  "RepairPorts.coeff_blockerFailurePolynomial_at_minimum",
+  "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
+  "RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder",
+  "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
+]
+coverage_rule = "closure"
+
+[[terminal]]
+declaration = "FiniteGeom.dualCode_dualCode"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "FiniteGeom.dualCode_injective"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.reconstructedCode_eq"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.PointedCoefficientPortIso.reconstructsAt_iff"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.PointedCoefficientPortIso.reconstructionRadius_eq"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.exists_normalized_word"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.reconstructsAt"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.reconstructsAt_iff"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.reconstructionRadius_eq"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.exactFunctionalStrata"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.pointedFunctionalTupleRealizationCost_eq"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.exactPointedConfinementAndTransfer"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.representedTargets_density"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.concatenatedRestrictedCode_parameters"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.prescribedPorts_of_outerDualDistance"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.eventually_pointedConfinement_iff_zeroCost"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.eventually_prescribedPorts"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.eventually_mdsMinimumCoefficientFingerprints"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.portReliability_delete_contract"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.hasDerivAt_portReliability_update"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.hasDerivAt_homogeneous_portReliability"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.erasureFailureProbability_delete_contract"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.noRepairProbability_eq_erasureFailure"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.cheapestRepairRadiusProbability"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.coeff_blockerFailurePolynomial_at_minimum"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]

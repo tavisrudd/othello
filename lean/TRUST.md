@@ -39,12 +39,13 @@ shape its data has.
 | Equivariant robust completion (Q25) | [`RelativeConicArcs/TRUST.md`](RelativeConicArcs/TRUST.md) | `RelativeConicArcs.Gates.AlternateOrbitRepair*` |
 | Baer completion | [`FiniteGeom/BaerCompletion/TRUST.md`](FiniteGeom/BaerCompletion/TRUST.md) | `RelativeConicArcs.Gates.Baer` |
 | Repair codes / ports | [`RepairCodes/TRUST.md`](RepairCodes/TRUST.md) | see manifest |
+| Complete bounded repair ports | [`RepairPorts/TRUST.md`](RepairPorts/TRUST.md) | `RepairPorts.Gates.CompletePorts` |
 | Dihedral Schreier | [`DihedralSchreier/README.md`](DihedralSchreier/README.md) | see README |
 | NodeKayles / queens `getK` | [`TRUST.md`](TRUST.md) | see `README.md` |
 
-Areas without a manifest do not yet have a stated trust boundary. Complete-ports and crowns are in
-that state. The Clebsch manifest currently covers only the reflection-arrangement decoding slice,
-not the complete manuscript.
+Areas without a manifest do not yet have a stated trust boundary. Crowns is in that state. The
+Clebsch manifest currently covers only the reflection-arrangement decoding slice, not the complete
+manuscript.
 
 ## Named classical inputs
 

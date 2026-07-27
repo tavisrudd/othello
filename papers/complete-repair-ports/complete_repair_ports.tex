@@ -55,9 +55,10 @@ Two characteristic-three families illustrate the distinction.  A
 twisted-cubic--axis code has exact coordinatewise matching and transversal
 rows and transfers strictly beyond the ordinary support-distance gate.  A
 quartic normal rational curve with its nucleus has harmonic-quadruple circuits,
-a Steiner $S(3,4,q+1)$ nucleus port, a sparse Poisson repair window, and a
-series bottleneck at curve targets.  Exact field-nine profiles make the
-support, reliability, EXIT, and pointed-Tutte boundaries explicit.
+a Steiner $S(3,4,q+1)$ nucleus port, and parallel repairs at the nucleus,
+whereas every curve-target repair has the nucleus as a compulsory helper.
+These parallel and series geometries separate bounded-radius from full-port
+information.
 \end{abstract}
 
 \section{Introduction}
@@ -88,8 +89,8 @@ full-port polynomial as standard pointed-Tutte structure and isolates what the
 radius filtration adds.  Section~\ref{sec:flagships} compares cubic--axis and
 quartic--nucleus flagships.
 
-The asymptotic coding ingredients, reliability identities, Chen--Stein
-approximation, and pointed-Tutte polynomial are classical.  We develop their
+The asymptotic coding ingredients, reliability identities, and pointed-Tutte
+polynomial are classical.  We develop their
 exact organization around the complete bounded pointed object,
 together with the transfer boundary, prescribed-port consequence, and the
 two exact geometric port inventories.  We make no minimum-bandwidth claim,
@@ -570,10 +571,37 @@ blockers, then for helper failure probability $p$,
 \end{theorem}
 
 \begin{proof}
-Condition on whether $v$ survives.  Differentiation gives pivotality and the
-homogeneous identity.  Failure occurs exactly when the failed helper set
-contains a minimal blocker; inclusion--exclusion begins with the minimum
-blockers and all intersections contribute only at higher order.
+Write \(f_\cH(A)=1\) when \(A\) contains an edge of \(\cH\), and write it as
+zero otherwise.  The reliability is the finite multilinear sum
+\[
+ R_\cH(s)=\sum_{A\subseteq V}f_\cH(A)
+ \prod_{y\in A}s_y\prod_{y\notin A}(1-s_y).
+\]
+Partition the subsets according to whether they contain \(v\).  Erasing \(v\)
+from those that do contain it identifies the two parts with the Boolean
+systems \(\cH-v\) and \(\cH/v\), respectively.  This gives
+\[
+ R_\cH=(1-s_v)R_{\cH-v}+s_vR_{\cH/v}.
+\]
+The two conditional reliabilities do not involve \(s_v\), so differentiation
+gives \(R_{\cH/v}-R_{\cH-v}\).  Monotonicity makes this difference the
+conditional probability that adjoining \(v\) changes failure into success,
+which is precisely pivotality.  On the diagonal \(s_v=s\), the chain rule
+sums these coordinate derivatives and gives the Russo--Margulis identity.
+
+Now expose the failed set \(F\).  Repair fails exactly when \(F\) is a
+transversal of \(\cH\), equivalently when it contains a minimal blocker.
+Thus
+\[
+ 1-R_\cH(1-p)=
+ \sum_{\substack{F\subseteq V\\F\ {\rm is\ a\ transversal}}}
+ p^{|F|}(1-p)^{|V|-|F|}.
+\]
+There are no summands below degree \(\tau\), and the transversals of size
+\(\tau\) are exactly the \(b_\tau\) minimum blockers.  Their contribution is
+\(b_\tau p^\tau(1-p)^{|V|-\tau}
+=b_\tau p^\tau+O(p^{\tau+1})\).  Every remaining term contains at least
+\(p^{\tau+1}\); the sum is finite, proving the expansion.
 \end{proof}
 
 These are the standard deletion--contraction and pivotality identities for a
@@ -606,7 +634,26 @@ survivor set, with $L_x=\infty$ when none exists, then
  \qquad
  \Pr(L_x=\infty)=h_x^{\rm MAP}.
 \]
+The first identity is for \(r\geq1\).
 \end{proposition}
+
+\begin{proof}
+Conditioning on whether \(v\) is erased gives the displayed recurrence:
+when it is erased, only repairs avoiding \(v\) remain; when it survives, it
+may be contracted from every repair.  Equivalently, substitute
+\(s_y=1-p_y\) in the reliability recurrence and take complements.
+Differentiation reverses both signs, so the derivative is again the pivotal
+probability.
+
+Let \(\cH_x^{(\leq r)}\) be the full port filtered by edge size at most \(r\).
+The event \(L_x\leq r\) is exactly success for this truncated port.  Hence
+\[
+ \{L_x=r\}=\{L_x>r-1\}\setminus\{L_x>r\},
+\]
+and taking probabilities gives the difference of failure curves.  At full
+radius, the complementary event is that no repair exists, which is
+\(L_x=\infty\).
+\end{proof}
 
 Minimal transversals of $\cH_x^{(\leq r)}$ are exact target-specific,
 one-shot bounded-repair failure certificates.  They are not automatically
@@ -835,68 +882,13 @@ fixed-$\F_q$ families.
 
 \subsection{Reliability, EXIT, and the geometric contrast}
 
-At $q=9$, write the homogeneous reliability in Bernstein form
-\[
- R(s)=\sum_{k=0}^{10}a_ks^k(1-s)^{10-k}.
-\]
-The harmonic nucleus and curve profiles are
-\[
- (a_0,\ldots,a_{10})_N=(0,0,0,0,30,180,210,120,45,10,1),
-\]
-\[
- (a_0,\ldots,a_{10})_{\rm curve}
- =(0,0,0,0,12,72,126,84,36,9,1).
-\]
-The nucleus has 72 minimum blockers of size five; the nucleus singleton is
-the unique minimum blocker at every curve target.  The exact radius-four
-EXIT deficits are
-\[
- L_4(N)=\frac{2}{77},
- \qquad
- L_4(\text{curve})=\frac{23}{154},
-\]
-and the total radius-four area is
-\[
- 5+\frac{2}{77}+10\frac{23}{154}=\frac{502}{77}.
-\]
-
-The full pointed-Tutte success enumerators add repairs coming from larger
-circuits:
-\[
- S_N(u)=30u^4+252u^5+210u^6+120u^7+45u^8+10u^9+u^{10},
-\]
-\[
- S_{\rm curve}(u)=12u^4+234u^5+210u^6+120u^7+45u^8+10u^9+u^{10}.
-\]
-Their difference from the truncated profiles is the concrete
-radius-filtration boundary promised in Section~\ref{sec:tutte}.
-
-There is also an asymptotic reliability contrast.  Along any sequence of
-Steiner systems $S(3,4,n)$ with $n\to\infty$, retain each point independently
-with probability $s=cn^{-3/4}$.  If $X$ counts retained blocks, dependency-graph
-Chen--Stein approximation gives
-\[
- X\ \Longrightarrow\ \operatorname{Poisson}(c^4/24),
- \qquad
- \Pr(X>0)\longrightarrow1-e^{-c^4/24},
-\]
-with total-variation error $O(n^{-1/4})$
-\cite{ArratiaGoldsteinGordon1989}.  This is the repair window at the nucleus.
-Indeed, there are $b=n(n-1)(n-2)/24$ blocks; each block meets
-$3(n-4)$ others in two points and $2(n-4)(n-8)/3$ others in one point.
-The dependency bound has joint terms $O(n^4s^6)$ and $O(n^5s^7)$, giving
-$O(n^{-1/4})$ at the displayed scale.
-At a curve target the blocks through it induce an $S(2,3,n-1)$, but every
-repair also uses $N$.  If $N$ survives with probability $\rho$ and curve
-helpers survive with probability $c(n-1)^{-2/3}$, repairability tends to
-\[
- \rho\bigl(1-e^{-c^3/6}\bigr),
-\]
-with conditional Poisson error $O(n^{-1/3})$.  Thus the nucleus target has a
-sparse parallel window, while every curve target has a series bottleneck.
-For $m=n-1$, the derived design has $m(m-1)/6$ triples and
-$m(m-1)(m-3)/8$ unordered pairs meeting in one point, which gives the stated
-conditional error rate from the same bound.
+The nucleus repairs are the blocks of the Steiner system
+\(S(3,4,q+1)\).  At a curve target, every radius-four repair contains the
+nucleus.  Thus the nucleus port is a parallel family of four-helper repairs,
+whereas the curve port has a compulsory series helper.  The reliability and
+bounded-EXIT theorem applies to both ports without an exact finite profile.
+Exact field-nine Bernstein rows, EXIT deficits, and Poisson approximations
+are computational refinements and are not used in the body theorem chain.
 
 Finally, the harmonic small-circuit closure has a deterministic nucleus gate.
 Let $D(S)$ close curve set $S$ under ``three points of a harmonic block add
@@ -949,21 +941,26 @@ They report only \texttt{propext}, \texttt{Classical.choice}, and
 explicit classical input; no such existence theorem occurs in the Lean
 dependency closure.
 
-The harmonic and probability statements have deterministic independent
-replays.  The load-bearing private evidence bundle consists of the scripts
-and JSON certificates for C218 (quartic circuits), C219 (reliability), C226
-(bounded EXIT transforms), C227 (pointed-Tutte profiles), C243 (nucleus gate),
-and C244 (pointed distances, EXIT deficits, and Poisson rates).  Each report
-records its command, conventions, checked counts, hashes, and finite boundary.
-The field-nine checks do not imply unproved all-field classifications; the
-all-field statements above have symbolic proofs.
+The finite reliability and bounded-EXIT calculus is audited through
+\begin{quote}\small\raggedright
+\path{RepairPorts.portReliability_delete_contract},\\
+\path{RepairPorts.hasDerivAt_portReliability_update},\\
+\path{RepairPorts.hasDerivAt_homogeneous_portReliability},\\
+\path{RepairPorts.erasureFailureProbability_delete_contract},\\
+\path{RepairPorts.noRepairProbability_eq_erasureFailure},\\
+\path{RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub},\\
+\path{RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder}.
+\end{quote}
+These declarations use finite sums and polynomial algebra only.  Exact finite
+profiles and Poisson approximations remain computational refinements outside
+the body proof chain.
 
 For the concrete completed field-nine family, the external existence input is
 Stichtenoth's self-dual TVZ-family theorem over \(\F_{6561}\)
 \cite[Theorem~1.6(ii)]{Stichtenoth2005}.  Classical inputs are labeled as
 such: outer-family existence, concatenated-dual decomposition, Singer
-regularity, normal-rational-curve nuclei, reliability/EXIT calculus,
-Chen--Stein approximation, and the Las Vergnas perspective polynomial.
+regularity, normal-rational-curve nuclei, and the Las Vergnas perspective
+polynomial.
 
 \section{Conclusion}
 
@@ -976,11 +973,10 @@ pointed obstruction precisely controls positive-density realization.
 
 The cubic--axis family shows rich overlapping ports and strict weighted
 transfer beyond a support-only gate.  The quartic--nucleus family replaces
-that overlap pattern by a harmonic Steiner design: the nucleus has a sparse
-parallel repair window while curve targets share a compulsory series helper.
-Pointed-Tutte theory explains the full-radius structure, while the explicit
-field-nine profiles isolate what the bounded-radius truncation retains and
-what the full-radius invariant adds.
+that overlap pattern by a harmonic Steiner design: nucleus repairs form a
+parallel block family while curve targets share a compulsory series helper.
+Pointed-Tutte theory explains the full-radius structure; the radius filtration
+records when each repair first becomes available.
 
 A sharper cubic blocker-stability statement is not needed for the present
 results.  Sequential composition,
