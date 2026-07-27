@@ -1815,6 +1815,20 @@ are vacuous because a natural number can encode the whole residual.
   two Reid-pagoda components.  Its jet quotients give an exact
   \([[q+1,2,(q-5,4)]]_q\) asymmetric CSS family and a fully resolved
   \(q=11\) four-marginal defect pattern; the transversal-gate test,
-  Rees-algebra functor, and master Fano correspondence remain open.
+  Rees-algebra functor, and master Fano correspondence remain open.  A
+  full-document cross-area audit adds two exact non-code consequences:
+  the sparse sextic is the unique reduced point of the self-dual
+  two-pole Schubert problem
+  \(\sigma_{(2,2,1)}^2=1\), with Wronskian \(x^5y^5\); and the projected
+  rational sextic is arithmetically Buchsbaum with Hartshorne--Rao module
+  \(k^2(-1)\), identifying its defect-two jet quotient with its complete
+  projective-normality deficiency.  The next independent bridges are the
+  contraction algebra of the width-three pagoda, a specific
+  \(E_8\)-McKay-module realization of the Klein transvectant, and
+  globalization of the pointed Rees filtration to a K-stability test
+  configuration.  The \(E_8\) item is a refinement of the substantial
+  C381--C390 line, not a new area: it must be formulated directly for
+  \(2.A_5\) modules and cannot reuse the equivariant marked-lattice
+  comparison ruled out by C382.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim.

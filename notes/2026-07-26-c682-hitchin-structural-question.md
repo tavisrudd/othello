@@ -3017,6 +3017,279 @@ further exact consequences.  Three higher-value tests remain.
    jet space.  That is the precise gate for saying that the flop itself,
    rather than merely its exceptional quotient, is a quantum operation.
 
+## 22. Bridges outside the code/AME lens
+
+The two attached Clebsch reports were checked in full before making this
+list.  The directions below are not restatements of their MDS, AME,
+repair-port, outer-\(S_6\), or continuation consequences.  Two are already
+exact consequences of the sparse sextic; the others are concrete research
+ports with explicit first computations.  The \(E_8\) item is an exception
+to the claim of a new *area*: the workspace already contains an extensive
+\(E_8\) line.  Only the specific transvectant-to-McKay-module port appears
+to be new.
+
+### A. A self-dual two-point Schubert problem
+
+Put
+\[
+W=\langle 1,t,t^3,t^5,t^6\rangle
+ \subset H^0(\mathbf P^1,\mathcal O(6)).
+\]
+This is a point of
+\[
+\operatorname{Gr}(5,H^0(\mathcal O(6)))=\operatorname{Gr}(5,7),
+\qquad \dim \operatorname{Gr}(5,7)=10.
+\]
+At both \(0\) and \(\infty\), its vanishing sequence is
+\[
+(0,1,3,5,6).
+\]
+The ramification sequence is therefore
+\[
+(0,0,1,2,2),
+\]
+or, in Schubert notation, the partition
+\[
+\lambda=(2,2,1,0,0)
+\]
+in the \(5\times2\) rectangle.  It has size five and is its own
+Poincare dual:
+\[
+\lambda^\vee_i=2-\lambda_{6-i}=\lambda_i.
+\]
+
+The osculating flags at \(0\) and \(\infty\) are opposite.  Hence the two
+vanishing requirements cut the zero-dimensional Richardson intersection
+\[
+\Omega_\lambda(F_\bullet(0))
+\cap
+\Omega_\lambda(F_\bullet(\infty)).
+\]
+Its intersection number is
+\(\int_{\operatorname{Gr}(5,7)}\sigma_\lambda^2=1\).  Since \(W\) is a
+point of the intersection, the intersection scheme is exactly one reduced
+point.  Thus:
+
+> **Two-pole Schubert uniqueness.**  The sparse sextic \(W\) is the unique
+> \(g^4_6\) whose vanishing sequence is
+> \((0,1,3,5,6)\) at each of two fixed points.
+
+The Wronskian makes the same statement in one line.  For the exponent set
+\(\{0,1,3,5,6\}\),
+\[
+\operatorname{Wr}(W)\doteq
+t^{(0+1+3+5+6)-(0+1+2+3+4)}=t^5;
+\]
+homogeneously it is \(x^5y^5\), of total degree ten.  The two weight-five
+ramification packets are therefore the complete Plucker ramification, not
+just two observed special contacts.
+
+This gives a new interpretation of the two missing jets and two flop
+components: they are the two halves of a self-dual Schubert condition in a
+maximally collided Wronski fibre.  It also opens a precise Gaudin/Bethe
+port, since inverse Wronski problems are Schubert problems and their
+coordinate algebras are Gaudin/Bethe algebras.  In the present collision
+the solution space is also the kernel of the Euler differential operator
+\[
+\theta(\theta-1)(\theta-3)(\theta-5)(\theta-6),
+\qquad \theta=t\frac d{dt}.
+\]
+The safe next question is whether this two-singularity degeneration is a
+rigid oper limit carrying the Sarkisov involution; that oper statement is
+not yet proved.
+
+Primary entry points are Scherbak,
+[*Gaudin's model and the generating function of the Wronski
+map*](https://arxiv.org/abs/math/0309002), and Karp--Purbhoo,
+[*Universal Plucker coordinates for the Wronski map and positivity in
+real Schubert calculus*](https://arxiv.org/abs/2309.04645).
+
+### B. The defect-two quotient is a Hartshorne--Rao module
+
+Let \(\Gamma\subset\mathbf P^4\) be the projected rational sextic defined
+by \(W\), and let \(S\) be the homogeneous coordinate ring of
+\(\mathbf P^4\).  The linear restriction sequence gives
+\[
+H^1(\mathcal I_\Gamma(1))
+\cong H^0(\mathbf P^1,\mathcal O(6))/W
+\cong \langle t^2,t^4\rangle.
+\]
+Thus the two second-jet lines are not only an evaluation-code quotient:
+they are exactly the degree-one Hartshorne--Rao deficiency of \(\Gamma\).
+
+This deficiency vanishes in every other degree.  Indeed, for
+\[
+E=\{0,1,3,5,6\}
+\]
+one checks \(2E=\{0,1,\ldots,12\}\); induction using the translates by
+\(0\) and \(6\) gives
+\[
+nE=\{0,1,\ldots,6n\}\qquad(n\ge2).
+\]
+Consequently
+\[
+\operatorname{Sym}^nW\longrightarrow
+H^0(\mathbf P^1,\mathcal O(6n))
+\]
+is surjective for every \(n\ge2\), while the degree-one cokernel has
+dimension two.  Therefore
+\[
+M_\Gamma=\bigoplus_nH^1(\mathcal I_\Gamma(n))
+\cong k^2(-1),
+\]
+and the irrelevant ideal kills \(M_\Gamma\).  In particular \(\Gamma\)
+is an arithmetically Buchsbaum, non-ACM rational curve.  Its Hilbert
+series is
+\[
+H_{S/I_\Gamma}(z)
+=\frac{1+3z+4z^2-2z^3}{(1-z)^2},
+\]
+and \(h^0(\mathcal I_\Gamma(2))=2\).
+
+This is an exact four-way identification:
+\[
+\boxed{
+\text{code defect }2
+=\text{ two jet lines}
+=\operatorname{length}M_\Gamma
+=\text{ two pagoda components}.}
+\]
+The first three equalities are now proved intrinsically; the final equality
+is the published geometry identified earlier in this note.  The next
+high-value calculation is the minimal graded free resolution of
+\(I_\Gamma\), followed by its Gorenstein-liaison class.  That resolution
+may make the inverse Sarkisov graph visible as a syzygy operation rather
+than only through blowups.
+
+### C. The width-three pagoda has a noncommutative shadow
+
+The local chart
+\[
+rb=v^3
+\]
+is an \(A_2\) surface singularity times a smooth direction, and the
+three section blowups give the width-three Reid pagoda.  This is exactly
+the input format for the contraction algebra: the finite-dimensional
+noncommutative deformation algebra of the flopping curve.  That algebra
+controls the flop--flop derived autoequivalence and refines the numerical
+width.
+
+The new bridge is therefore
+\[
+(u^2,uv,v^5)
+\longrightarrow
+\text{contraction algebra}
+\longrightarrow
+\text{derived autoequivalence / stability wall crossing}.
+\]
+Nothing in the current reports computes this algebra.  The first honest
+test is to derive a quiver with relations from the explicit three-blowup
+resolution and calculate:
+
+1. the contraction algebra and its abelianization;
+2. the associated genus-zero Gopakumar--Vafa package;
+3. the action of the flop--flop twist on the two jet/Rao generators.
+
+No identification with \(k[\epsilon]/(\epsilon^3)\), an \(A_2\) cluster
+category, or a braid generator is claimed before that calculation.
+Donovan--Wemyss,
+[*Noncommutative deformations and
+flops*](https://arxiv.org/abs/1309.0698), is the primary framework.
+
+### D. A new McKay-module port inside the established \(E_8\) line
+
+This is not the first Clebsch--\(E_8\) bridge in the workspace.
+C381 classified the marked integral root systems of the weak degree-one
+blowups as
+\[
+(D_8,A_2),\qquad(3A_1,2A_1),\qquad(4A_1,2A_1),
+\]
+and showed that this root data recovers both the matching obstruction and
+MDS status.  C390 developed the norm-four \(E_8\) normal form and its
+Lagrangian consequences.  Most importantly, C382 proved that the marked
+Picard family and the natural icosian \(E_8\) do **not** admit the desired
+equivariant comparison: the categories and characters already disagree,
+even after restriction to the \(D_{10}\) stabilizer.  An abstract
+\(E_8\)-lattice isomorphism cannot repair that failure.
+
+The global symmetry is \(A_5\subset PSL_2\).  Lifting it to the binary
+icosahedral group \(2.A_5\subset SL_2\) places the Klein invariants of
+degrees \(12,20,30\) in the classical Kleinian \(E_8\) invariant ring.
+In particular, the same \(\Phi_{12}\) used by the third-transvectant
+reconstruction is the first generator on the \(E_8\) side.
+
+This suggests a representation-theoretic upgrade:
+\[
+p\longmapsto(p,\Phi_{12})_3
+\]
+should be expressed as a morphism among the maximal
+Cohen--Macaulay modules attached to vertices of the affine \(E_8\) McKay
+graph.  If successful, the generic rank four and its kernel module would
+follow from an \(E_8\) path calculation, and matrix factorizations would
+supply a categorical form of the transvectant inverse.
+
+The bounded notes search found no earlier occurrence of a
+transvectant--McKay/MCM or transvectant--matrix-factorization map.  That
+specific port is therefore untried, but it is not authorized to resurrect
+the comparison killed by C382.  It must be built directly in the
+representation category of \(2.A_5\), with the central action recorded,
+rather than by identifying the Picard and icosian lattices.  The relevant
+McKay vertices, the module map, and the characteristic-five rank drop
+still have to be identified.  It is especially interesting that the
+construction would then contain global \(E_8\) McKay data and local
+\(A_2\) pagoda data at once.  One must keep the Kleinian quotient
+\(\mathbf C^2/(2.A_5)\) distinct from other modular
+parametrizations of the same \(E_8\) hypersurface.
+
+### E. Rees valuations meet K-stability
+
+The pointed link already supplies a normalized Rees algebra, not merely
+an abstract degeneration.  The Newton inequalities
+\[
+a+b\ge2,\qquad 4a+b\ge5
+\]
+give its divisorial valuations.  On the other hand the Mukai--Umemura
+threefold is a basic Kahler--Einstein Fano, and the neighbouring
+\(\mathbf G_m\)-family has a genuine metric/moduli story.
+
+The new question is whether the pointed kernel Rees degeneration is a
+test configuration, or a local model of one, whose beta/Futaki data can
+be calculated from these two valuations.  This could connect the special
+pencil parameter and its symmetry jump to a K-moduli wall.  The first
+gate is elementary and falsifiable: globalize the Rees filtration to the
+anticanonical ring and compute its Donaldson--Futaki invariant.  Without
+that globalization, the similarity is only formal.  Donaldson's
+[*A note on the alpha-invariant of the Mukai--Umemura
+3-fold*](https://arxiv.org/abs/0711.4357) and
+Dinew--Kapustka--Kapustka,
+[*Remarks on Mukai threefolds admitting \(C^*\)
+action*](https://arxiv.org/abs/1506.03286), are the immediate metric
+entry points.
+
+### Priority after the full-document audit
+
+1. **Schubert--Wronski:** already an exact uniqueness theorem; highest
+   immediate theorem value and the cleanest bridge to integrable
+   systems.
+2. **Rao--liaison:** already an exact defect theorem; compute the Betti
+   table and test whether the Sarkisov inverse is functorial on syzygies.
+3. **Contraction algebra:** strongest next invariant of the width-three
+   graph; a finite explicit computation can either open the categorical
+   story or kill it.
+4. **\(E_8\)-McKay refinement:** potentially deep, but not a new
+   Clebsch--\(E_8\) area.  It needs an explicit module-map identification
+   in the \(2.A_5\) category and must remain disjoint from C382's failed
+   marked-lattice comparison.
+5. **K-stability:** high external reach, gated by globalizing the local
+   Rees filtration.
+
+Lower-priority but legitimate later ports are the tropical/secondary fan
+of the monomial Rees ideal and the code matroid, genus-two
+theta/Richelot geometry behind the outer-\(S_6\) six-point data, and
+normalization--conductor descent in \(K\)-theory for the Ferrand pinch.
+They are not promoted yet because no new exact consequence has been
+extracted from them.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
