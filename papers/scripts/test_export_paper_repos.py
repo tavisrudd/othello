@@ -204,6 +204,20 @@ class ExportPlannerTests(unittest.TestCase):
         with self.assertRaisesRegex(exporter.Refused, "private-reference"):
             exporter.materialize_repository(commit, "demo-paper", self.fx.root / "blocked")
 
+    def test_verify_detects_tamper_and_extra_file(self) -> None:
+        candidate = self.fx.root / "candidate"
+        exporter.materialize_repository(self.fx.commit, "demo-paper", candidate)
+        exporter.verify_materialized_tree(candidate)
+        (candidate / "main.tex").write_text("tampered\n")
+        with self.assertRaisesRegex(exporter.Refused, "hash/size mismatch"):
+            exporter.verify_materialized_tree(candidate)
+
+        candidate = self.fx.root / "second-candidate"
+        exporter.materialize_repository(self.fx.commit, "demo-paper", candidate)
+        (candidate / "extra.txt").write_text("extra\n")
+        with self.assertRaisesRegex(exporter.Refused, "candidate tree mismatch"):
+            exporter.verify_materialized_tree(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

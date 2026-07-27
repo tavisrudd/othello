@@ -512,6 +512,68 @@ def command_materialize(args: argparse.Namespace) -> int:
     return 0
 
 
+def verify_materialized_tree(root: Path) -> dict[str, Any]:
+    root = root.expanduser().resolve()
+    manifest_path = root / "export-manifest.json"
+    if not manifest_path.is_file():
+        raise Refused(f"missing export manifest: {manifest_path}")
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise Refused(f"invalid export manifest {manifest_path}: {error}") from error
+    if manifest.get("schema_version") != 1 or manifest.get("manifest_self_excluded") is not True:
+        raise Refused("unsupported or malformed export manifest")
+
+    expected = {"export-manifest.json"}
+    for item in manifest.get("files", []):
+        rel = item.get("path")
+        safe_relative(rel, "manifest file path")
+        if rel in expected:
+            raise Refused(f"duplicate manifest path {rel!r}")
+        expected.add(rel)
+        path = root / rel
+        if not path.is_file() or path.is_symlink():
+            raise Refused(f"manifest file is missing, non-regular, or a symlink: {rel}")
+        data = path.read_bytes()
+        if len(data) != item.get("bytes") or sha256(data) != item.get("sha256"):
+            raise Refused(f"manifest hash/size mismatch: {rel}")
+        expected_mode = 0o755 if item.get("mode") == "100755" else 0o644
+        if path.stat().st_mode & 0o777 != expected_mode:
+            raise Refused(f"manifest mode mismatch: {rel}")
+
+    if (root / ".git").exists():
+        proc = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=root,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        if proc.returncode:
+            raise Refused(f"cannot list tracked candidate files: {proc.stderr.decode().strip()}")
+        observed = {path.decode("utf-8") for path in proc.stdout.split(b"\0") if path}
+    else:
+        observed = {
+            str(path.relative_to(root))
+            for path in root.rglob("*")
+            if path.is_file() and ".git" not in path.relative_to(root).parts
+        }
+    missing = sorted(expected - observed)
+    extra = sorted(observed - expected)
+    if missing or extra:
+        raise Refused(f"candidate tree mismatch: missing={missing}, extra={extra}")
+    return manifest
+
+
+def command_verify(args: argparse.Namespace) -> int:
+    manifest = verify_materialized_tree(args.root)
+    print(
+        f"verified={args.root.expanduser()} repository={manifest['repository']} "
+        f"source_commit={manifest['source_commit']} tracked_files={len(manifest['files']) + 1}"
+    )
+    return 0
+
+
 def add_common_arguments(command: argparse.ArgumentParser) -> None:
     command.add_argument("--source-ref", default="HEAD")
     command.add_argument("--repository")
@@ -536,6 +598,11 @@ def parser() -> argparse.ArgumentParser:
     materialize.add_argument("--repository", required=True)
     materialize.add_argument("--out", required=True, type=Path)
     materialize.set_defaults(function=command_materialize)
+    verify = subparsers.add_parser(
+        "verify", help="verify one candidate's tracked tree against its canonical export manifest"
+    )
+    verify.add_argument("--root", required=True, type=Path)
+    verify.set_defaults(function=command_verify)
     return result
 
 
