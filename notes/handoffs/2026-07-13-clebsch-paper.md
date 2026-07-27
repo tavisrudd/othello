@@ -424,14 +424,66 @@ pairwise isotropic for the fifth transvectant, so the kernel construction
 identifies the binary-dodecic and Grassmannian \(PSL_2/A_5\) models on
 their open orbit.  The rank-four locus has projective tangent dimension
 three at the Klein point, so the Mukai--Umemura closure is its local
-component there.  The exact matrix, proof, reproducibility boundary,
-algorithm landscape, conjectural \([5]\)-descent refinement, and mystery
-ledger are in
+component there.  Both boundary-orbit representatives retain rank four
+with exactly Hitchin's isotropic weight-space kernels; the closed orbit has
+one extra rank-locus tangent direction, so isotropy remains essential.
+After primitive normalization the integral map has rank four modulo \(11\)
+and rank two modulo \(5\), opening a genuine bridge to C651's finite
+matching cubic while respecting the Gaunt-scalar obstruction.  The `ej2`
+portfolio pass also isolates exact or actionable compositions with
+complete-port reconstruction, AME--LU reduction, Kneser defect spectra,
+PRS catalecticant flags, and Frobenius replacement graphs.  The exact
+matrix, proof, reproducibility boundary, algorithm landscape, cross-paper
+disposition, conjectural \([5]\)-descent refinement, and mystery ledger are in
 `notes/2026-07-26-c682-hitchin-structural-question.md`.  C682 remains open.
-The highest-EV gate is whether rank four plus isotropic kernel
-characterizes the full Mukai--Umemura compactification; the exact
+The highest-EV cheap gate is the C651 contraction through the primitive
+mod-\(11\) map; globally, determine whether rank four plus isotropic kernel
+characterizes the full Mukai--Umemura compactification.  Exact
 Euclidean/binary normalization, conjugate-map descent, and targeted
 primary-source audit precede any manuscript promotion.
+
+C682's portfolio `ej` pass finds a Platinum three-paper candidate.  With
+the frozen Paper II normalization
+\(c_{\mathrm{match}}=4\sigma_3\) over \(\mathbf F_{11}\) and Paper III's
+\(J_0|_V=16\sigma_3^2\),
+\[
+c_{\mathrm{match}}^2=J_0|_V,\qquad
+w=\pm4c_{\mathrm{match}}\quad(w^2=5J_0).
+\]
+These are exact identities in C651's selected coordinates, not yet an
+intrinsic equality: its \(V_4\) scalar was chosen inside a
+three-dimensional Hom-space, and no morphism yet identifies the matching
+sheet torsor with the incidence torsor.  Paper I supplies a potential
+inverse-problem front end by reconstructing the Clebsch class and \(A_5\),
+but not the required five-point marking or characteristic-zero lift.  The
+resulting \(2\)-\(3\)-\(6\) target is quadratic reconstruction, cubic
+orientation, and sextic forgetting by squaring, with the odd transvectant
+as the proposed degree-three-to-degree-six map.  Promotion needs one
+marked Paper I--II--III diagram, one C651/transvectant scalar comparison,
+equivariance of the two \(C_2\)-actions, and wording restricted to the
+abstract mod-\(11\) orientation algebra rather than global geometric good
+reduction.  The full red-team verdict is in the C682 report.
+
+C682's next `ej` pass closes one of C373's old common-duality kill tests.
+For the ordered golden \(3\times6\) axis matrix \(A_t\), an exact Gale
+kernel \(K_t\) and invertible \(H\) satisfy
+\[
+A_tK_t^{\mathsf T}=0,\qquad HK_t=-tA_{1-t}.
+\]
+Thus six-point Gale association is exactly Paper III golden Galois
+conjugation on this marked fibre, and the two golden codes are dual:
+\(\operatorname{row}(A_t)^\perp=\operatorname{row}(A_{1-t})\).
+This does not yet identify Paper II's global factorization-sheet
+involution with that operation.
+The exact characteristic-zero certificate and an independent mod-\(11\)
+replay are in the C682 evidence bundle.  A further Gold composition puts
+Paper I's twenty oriented support triples over the same ten-vertex
+Petersen carrier as Paper III's face axes.  The classical outer-\(S_6\)
+\(6\to5\to10\to15\) fixed-total ladder is now the preferred way to align
+the three concrete markings.  It remains open whether support
+complementation, the Paper II orientation involution, Gale association,
+and incidence/Galois exchange are the same \(C_2\)-operation over that
+carrier.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating

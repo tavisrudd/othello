@@ -1,4 +1,104 @@
 {
+  "boundary_models": [
+    {
+      "dodecic_terms": [
+        [
+          1,
+          11,
+          1
+        ]
+      ],
+      "fifth_transvectant_isotropic": true,
+      "kernel_basis": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "name": "two_dimensional_orbit",
+      "rank_locus_tangent": {
+        "affine_tangent_dimension": 4,
+        "kernel_dimension": 3,
+        "left_kernel_dimension": 9,
+        "linearized_constraint_count": 27,
+        "linearized_constraint_rank": 9,
+        "matrix_rank": 4,
+        "projective_tangent_dimension": 3
+      }
+    },
+    {
+      "dodecic_terms": [
+        [
+          1,
+          12,
+          0
+        ]
+      ],
+      "fifth_transvectant_isotropic": true,
+      "kernel_basis": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "name": "one_dimensional_closed_orbit",
+      "rank_locus_tangent": {
+        "affine_tangent_dimension": 5,
+        "kernel_dimension": 3,
+        "left_kernel_dimension": 9,
+        "linearized_constraint_count": 27,
+        "linearized_constraint_rank": 8,
+        "matrix_rank": 4,
+        "projective_tangent_dimension": 4
+      }
+    }
+  ],
   "codomain_basis": [
     "x^12 y^0",
     "x^11 y^1",
@@ -24,6 +124,235 @@
     "x^1 y^5",
     "x^0 y^6"
   ],
+  "golden_gale_self_association": {
+    "common_column_scalar": [
+      0,
+      -1
+    ],
+    "field": "Q[t]/(t^2-t-1)",
+    "gale_kernel_rows": [
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ]
+    ],
+    "ordered_axis_columns": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ],
+    "permutation_zero_based": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "projectivity_determinant": [
+      0,
+      2
+    ],
+    "projectivity_to_galois_conjugate": [
+      [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ]
+  },
   "ground_ring": "Z",
   "kernel_basis": [
     [
@@ -245,15 +574,33 @@
     2,
     4
   ],
+  "primitive_reduction_ranks": {
+    "11": 4,
+    "13": 4,
+    "17": 4,
+    "19": 4,
+    "2": 4,
+    "3": 4,
+    "5": 2,
+    "7": 4
+  },
   "rank": 4,
   "rank_locus_tangent": {
     "affine_tangent_dimension": 4,
     "ambient_affine_dimension": 13,
+    "kernel_dimension": 3,
     "left_kernel_dimension": 9,
     "linearized_constraint_count": 27,
     "linearized_constraint_rank": 9,
+    "matrix_rank": 4,
     "projective_tangent_dimension": 3
   },
   "schema": "c682-transvectant-bridge-v1",
+  "three_paper_normalization_mod_11": {
+    "hitchin_restriction_scalar_on_sigma3_squared": 5,
+    "matching_cubic_scalar_on_sigma3": 4,
+    "orientation_cover_scalar_on_sigma3_squared": 3,
+    "square_root_of_five": 4
+  },
   "transvectant_order": 3
 }

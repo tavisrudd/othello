@@ -143,8 +143,23 @@ dodecic it carries the standard \(PSL_2/A_5\) orbit in
 the two open orbits.  This is the sought representation-geometric diagram:
 the degree-six invariant determines the degree-three parent plane by a
 kernel construction, and its rank-four image is the Petersen channel.
-Whether this rational kernel map extends without modification across the
-boundary of the two compactifications remains open.
+
+The two boundary-orbit tests are also positive.  At the two-dimensional
+boundary representative \(I=X^{11}Y\), the map still has rank four and
+\[
+ \ker T_I=\langle X^6,X^5Y,X^3Y^3\rangle,
+\]
+the weight-\(\{3,2,0\}\) plane in Hitchin's first boundary orbit.  At the
+one-dimensional closed-orbit representative \(I=X^{12}\), it has rank four
+and
+\[
+ \ker T_I=\langle X^6,X^5Y,X^4Y^2\rangle,
+\]
+the weight-\(\{3,2,1\}\) plane in Hitchin's second boundary orbit.  Both
+kernels satisfy all fifth-transvectant isotropy equations.  Thus the
+kernel formula reaches every orbit type in the compactification.  A
+source-level identification of the precise binary orbit compactification
+and a regularity argument remain before calling this a global isomorphism.
 
 The determinantal recognition proposal passes its first local gate.
 Linearizing the \(13\)-by-\(7\) rank-at-most-four condition at
@@ -155,7 +170,20 @@ already has dimension three, the rank locus is smooth of the expected
 orbit dimension at the Klein point.  In particular, the
 Mukai--Umemura orbit closure is the local irreducible component of the
 rank locus through that point.  This does not rule out remote components
-or prove the boundary extension.
+or by itself prove the boundary extension.  The divisor-orbit
+representative again has projective rank-locus tangent dimension three.
+At the closed orbit it rises to four, so rank alone acquires one extra
+infinitesimal direction there; the isotropy equations are plausibly
+essential for the global scheme structure.
+
+The primitive integral matrix gives a second cross-characteristic dividend.
+The conventional third transvectant has common content
+\(2640=2^4\cdot3\cdot5\cdot11\).  After dividing by that content, its matrix
+has rank four modulo \(2,3,7,11,13,17,19\) and rank two modulo \(5\).
+In particular, the module map survives at \(11\) despite the pole in the
+Gaunt normalization.  The existing denominator obstruction is therefore
+an obstruction to reducing that spherical cubic scalar, not to reducing a
+primitive degree-three-to-degree-six module bridge.
 
 The deterministic certificate
 `notes/2026-07-26-c682-transvectant-bridge.json` is generated and checked
@@ -167,22 +195,24 @@ python3 notes/2026-07-26-c682-transvectant-bridge.py --check
 python3 notes/2026-07-26-c682-transvectant-bridge-replay.py
 ```
 
-The computation certifies the displayed transvectant matrix, rank, kernel,
-all six fifth-transvectant isotropy identities, and the
-nine-dimensional linearized constraint rank over \(\mathbf Q\).  It does
-not identify the paper's Euclidean rational form, the normalization scalar,
-global boundary components, boundary extension, or a global incidence
+The computation certifies the displayed transvectant matrix, open and
+boundary ranks and kernels, fifth-transvectant isotropy, all three
+rank-locus tangent dimensions, primitive reduction ranks, and the exact
+golden Gale--Galois identity.  It does not
+identify the paper's Euclidean rational form, the normalization scalar,
+global boundary components, boundary regularity, or a global incidence
 morphism.
 The representation-theoretic proof is independent of the matrix
 calculation.  A separate implementation replays the rank, isotropy, and
-tangent calculation modulo \(101\); its nonzero minors independently
-confirm the lower rank bounds used by the exact rational calculation.
+tangent calculation modulo \(101\), and the Gale identity modulo \(11\);
+its nonzero minors independently confirm the lower rank bounds used by the
+exact rational calculation.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-26-c682-transvectant-bridge.py` | 8983 | `a63a362769f871ace4b60b0b6ce0f9a85a00d906b12a5f3e8af2e1fe8b554972` |
-| `2026-07-26-c682-transvectant-bridge-replay.py` | 4560 | `7c965c6ec530c641497c48ac476acc1cb8137200aaf22ed356364a477b9428ca` |
-| `2026-07-26-c682-transvectant-bridge.json` | 3029 | `cdd2b97ec45afe731fdd667d86f1c3f302fe0c58760009524cedf29080ffbf9c` |
+| `2026-07-26-c682-transvectant-bridge.py` | 16289 | `515028214745687b451319de90205e3992afb28c49b04ce38ad1426f9ecc01c3` |
+| `2026-07-26-c682-transvectant-bridge-replay.py` | 8261 | `249dbb099352ecd1dfe540d5a97529fc66963f5c78a0b5cc09a0e92c9771b008` |
+| `2026-07-26-c682-transvectant-bridge.json` | 7837 | `4c71267f67505afe62f1307599fe0a31e13ea2362a28ae3d70d1ec68f72663d4` |
 
 No novelty claim is made.  A promotion to manuscript theorem would require
 a targeted primary-source audit for this precise covariant, an explicit
@@ -253,6 +283,414 @@ The highest-EV mathematical question is the first one.  If the
 rank-plus-isotropy conditions characterize the orbit closure, the same
 matrix simultaneously becomes a moduli map, an exact recognizer, a
 reconstruction algorithm, and a source of defining equations.
+
+## Platinum candidate: the Clebsch \(2\)-\(3\)-\(6\) reconstruction ladder
+
+The three Clebsch papers suggest a single inverse problem with a stronger
+conclusion than any paper states separately.  The displayed coordinate
+identities below are exact; the red-team audit later in this section explains
+why they do not yet constitute an intrinsic three-paper theorem.
+
+Let \(A\subset\operatorname{PG}(2,11)\) be a six-arc satisfying any of
+Paper I's equivalent coarse conditions: its uncovered locus lies on a
+conic, has at most fifteen points, or is the full rational conic.  Then:
+
+1. **Quadratic recognition (Paper I).**  The deepest syndrome locus
+   reconstructs the Clebsch class, its conic, and its hidden \(A_5\).
+2. **Quadratic sheet recovery and cubic orientation (Paper II).**  On the
+   associated \(H_3\) conic-matching quotient, second moments recover the
+   two factorization sheets up to interchange.  The first signed moment is
+   the cubic
+   \[
+   c_{\mathrm{match}}=4\sigma_3\quad\text{over }\mathbf F_{11}.
+   \]
+3. **Sextic discriminant and harmonic realization (Paper III).**  On the
+   Clebsch chart,
+   \[
+   J_0=16\sigma_3^2,
+   \]
+   while the degree-six Gaunt/Steinhardt cubic is a nonzero scalar multiple
+   of the same \(\sigma_3\).  The primitive third transvectant now gives the
+   geometric degree-three-to-degree-six module map.
+
+With C651's selected intertwiner, the recorded coordinates fit exactly:
+\[
+ \boxed{c_{\mathrm{match}}^2=J_0|_V\quad\text{in }\mathbf F_{11}.}
+\]
+Moreover Paper III's abstract orientation algebra is
+\[
+ w^2=5J_0.
+\]
+Since \(4^2=5\) in \(\mathbf F_{11}\),
+\[
+ \boxed{w=\pm4c_{\mathrm{match}}.}
+\]
+Thus the selected coordinate representative of Paper II's signed cubic is a
+square root of Hitchin's restricted sextic, and its scalar multiple solves
+the reduced abstract orientation equation.  This statement is
+basis-dependent until the primitive transvectant or another universal
+construction fixes C651's \(V_4\) scalar.  The sign has the desired formal
+shape of a deck involution, but equality of the Paper II sheet torsor with
+the Paper III incidence torsor must still be constructed.
+
+This motivates the conceptual degree ladder
+\[
+ \boxed{\text{degree \(2\): reconstruct the unordered object}
+ \ \longrightarrow\
+ \text{degree \(3\): orient it}
+ \ \longrightarrow\
+ \text{degree \(6\): forget orientation by squaring}.}
+\]
+The odd third transvectant explains why this is an orientation phenomenon:
+it is \(SO_3\)-equivariant but acquires the determinant character when
+extended to \(O_3\).  The sextic discriminant is therefore the even shadow
+of the cubic orientation coordinate.
+
+### End-to-end theorem shape
+
+After freezing compatible markings, the combined theorem should say:
+
+> Coarse deepest-syndrome data of a six-coordinate Clebsch MDS seed
+> reconstruct an unordered arithmetic orientation torsor, its cubic sheet
+> coordinate, its Mukai--Umemura parent plane, and its degree-six Petersen
+> harmonic channel.  Choosing a sheet turns the cubic into a square root of
+> Hitchin's branch invariant; forgetting the sheet squares it back to the
+> sextic.
+
+Equivalently, the three papers form one reconstruction pipeline:
+\[
+\begin{array}{c}
+\text{deep-hole syndrome locus}\\
+\downarrow\ \text{Paper I}\\
+\text{Clebsch arc, conic, and \(A_5\)}\\
+\downarrow\ \text{Paper II}\\
+\text{unordered sheets plus }c_{\mathrm{match}}\\
+\downarrow\ c_{\mathrm{match}}^2=J_0,\ w=\pm4c_{\mathrm{match}}\\
+\text{Hitchin orientation torsor}\\
+\downarrow\ \text{primitive transvectant / Paper III}\\
+\text{Petersen harmonic channel and exact \(W_6\) cubic line}.
+\end{array}
+\]
+
+This diagram is a theorem target, not a current theorem.  Its individual
+arrows are proved in their owning papers, but the three interfaces are not
+yet one functorial commutative diagram.  In particular it does not license
+a global good-reduction theorem for the geometric incidence variety.
+
+### Minimal closure gates
+
+1. Freeze one \(A_5\) marking from Paper I's reconstructed hexagon through
+   C651's pair module to Paper III's Clebsch coordinates.
+2. Compare the primitive mod-\(11\) transvectant with C651's \(V_4\)
+   intertwiner on one vector; multiplicity one then fixes the map.
+3. State the result for the abstract reduced orientation algebra and the
+   certified golden fibre, without claiming global geometric good
+   reduction at \(11\).
+4. Decide whether this belongs as a synthesis theorem in a fourth overview
+   paper, or as coordinated corollaries in the three existing papers.
+
+The first two gates are finite exact calculations.  If they pass and the
+torsor comparison is constructed, the programme could have a
+decoder-to-bond-order theorem: an object reconstructed from
+coarse error-correction data canonically determines an arithmetic
+orientation coordinate and a spherical harmonic order-parameter line.
+
+### Red-team verdict
+
+The candidate survives as a high-value direction, but the strongest wording
+fails five present tests.
+
+1. **Normalization is not intrinsic.**  C651 chose one invertible
+   intertwiner from a three-dimensional Hom-space.  Rescaling its \(V_4\)
+   component rescales the pulled-back cubic cubically.  Therefore
+   \(c_{\mathrm{match}}^2=J_0\) is currently an exact coordinate identity,
+   not a canonical equality.  The primitive transvectant must fix and match
+   this scalar.
+2. **The two cubics live on different constructions.**  A signed moment
+   tensor on a finite matching quotient and a section defining an incidence
+   double cover are not the same kind of object.  Equality after both are
+   written as multiples of \(\sigma_3\) does not construct a morphism between
+   their bases or torsors.
+3. **Paper I reconstructs only up to projective and marking ambiguity.**
+   Its deep-hole data recover the Clebsch class and \(A_5\), but not yet the
+   specific five-point marking, factorization sheet, or characteristic-zero
+   lift used by Papers II and III.
+4. **The finite geometric cover has a strict trust boundary.**  Paper III's
+   equation reduces abstractly modulo \(11\), and its displayed golden fibre
+   is certified there, but no global good-reduction theorem identifies the
+   entire reduced algebra with Hitchin's geometric incidence scheme.
+5. **“Quadratic” currently names two related but distinct mechanisms.**
+   Paper I uses a conic vanishing equation; Paper II uses second
+   moments/Schur squares.  Calling both one degree-two stage requires a
+   common reconstruction functor, not only a mnemonic.
+
+Two additional cautions constrain the transvectant leg.  The binary
+\(\operatorname{Sym}^6/\operatorname{Sym}^{12}\) lattices and Paper III's
+positive-definite Euclidean harmonic lattices have not been explicitly
+identified.  Also, checking the two boundary representatives does not yet
+prove that the projected binary orbit closure is the same scheme as the
+smooth Mukai--Umemura compactification; the extra tangent direction at the
+closed orbit shows why rank alone cannot prove this.
+
+The corrected crown target is therefore:
+
+> Construct one marked \(A_5\)-equivariant diagram that carries Paper I's
+> reconstructed Clebsch object to Paper II's signed cubic and Paper III's
+> primitive transvectant/orientation algebra, proves equivariance of the
+> two \(C_2\)-actions, and fixes the scalar by a universal normalization.
+
+If that diagram exists, the \(2\)-\(3\)-\(6\) formulation becomes structural
+rather than numerological.  Without it, the safe combined result is the
+common cubic line plus a compelling compatible set of coordinate identities.
+
+## `ej2`: portfolio-wide compositions
+
+The programme-wide results snapshot exposes six substantive compositions.
+They are ranked below by present evidential strength.
+
+### 1. Integral Clebsch bridge to Paper II — Gold candidate
+
+C651 proved that the signed \(H_3/\mathbf F_{11}\) matching tensor restricts
+to \(4\sigma_3\) on the abstract Petersen four-space, but its chosen
+ten-dimensional intertwiner was noncanonical and the rational Gaunt scalar
+could not be reduced modulo \(11\).  The primitive third transvectant changes
+that boundary:
+
+- it is an integral covariant, not a selected solution of a finite Hom-space;
+- its characteristic-zero image is the degree-six Petersen \(V_4\);
+- its reduction modulo \(11\) still has rank four; and
+- semisimplicity at \(11\) makes its image the unique \(A_5\) four-module.
+
+Thus it supplies a canonical projective module bridge across
+characteristics.  It does not yet identify the Paper II cubic's scalar with
+the spherical Gaunt scalar.  The next exact test is to transport the C651
+tensor through the primitive transvectant reduction and evaluate one
+polarized entry.  The characteristic-five rank drop from four to two is a
+second lead: it aligns with ramification of the golden torsor and the fused
+\(q=5\) orientation phase, but that alignment is not yet a theorem.
+
+### 2. Complete ports as local certificates of hidden geometry — proved chain
+
+For the Clebsch \([6,3,4]_{11}\) code, one pointed radius-five coefficient
+port spans \(C^\perp\), hence reconstructs the entire inner code.  Paper I
+then reconstructs the Clebsch six-arc, uncovered conic, and \(A_5\) geometry
+from that code.  The primitive transvectant supplies its finite Petersen
+four-module and cubic line.  Therefore a single coefficient-valued repair
+port determines
+\[
+ \text{port}\longrightarrow C^\perp\longrightarrow
+ \text{Clebsch arc/conic}\longrightarrow
+ \text{\(A_5\) Petersen module and cubic line}.
+\]
+The orientation sheet remains unordered; support-only repair data cannot do
+this because its clutter is the generic complete three-uniform clutter on
+five helpers.
+
+The positive-density transfer theorem now has a stronger interpretation.
+At density \(1/6\) in an asymptotically good fixed-\(\mathbf F_{11}\)
+family, bounded local coefficient data carry a reconstructible icosahedral
+inner geometry.  This suggests locally attestable geometric fingerprints,
+block discovery, and code auditing in large concatenated codes.  No new
+transfer theorem is needed; only this exact corollary and its equivalence
+conventions must be written carefully.
+
+### 3. AME--LU equivalence testing — exact reduction with a negative boundary
+
+The Clebsch code gives a stabilizer \(\operatorname{AME}(6,11)\) state.
+The AME rigidity theorem reduces its product-unitary equivalence problem
+from the continuous group \(U(11)^6\) to finite local Clifford data.  The
+Clebsch rigidity and Petersen/transvectant invariants can then serve as
+finite prefilters or canonical forms for the underlying MDS code.
+
+The combined algorithmic ladder is:
+
+1. recover local Weyl axes from an \(m+1\)-party marginal;
+2. restrict candidate intertwiners to local Cliffords;
+3. recover or compare the underlying MDS configurations;
+4. use the uncovered-conic and Petersen cubic-line fingerprints before any
+   full Clifford search.
+
+The known quantum passage erases the golden orientation: the two states are
+equivalent after party permutation and admit fixed-party Fourier transport.
+Accordingly, only sheet-even or unordered transvectant data can be quantum
+invariants.  Searching for a cubic-sign LU invariant is ruled out by the
+existing results.
+
+### 4. Kneser spectral coordinates for arc defect — structural bridge
+
+The Petersen space is the \(n=5\) case of the general negative eigenspace of
+\(KG(n,2)\):
+\[
+ y\longmapsto(y_i+y_j)_{i<j},\qquad \sum_i y_i=0.
+\]
+The prescribed-hole arc paper independently encodes secant concurrence by
+matching cliques in \(KG(k,2)\).  These are therefore two instances of the
+same pair-sum spectral mechanism.  For an edge-load vector, projection to
+the negative eigenspace is exactly its centered vertex-degree imbalance.
+Perfect matchings have zero imbalance; incomplete or defective matching
+packings create a visible component.
+
+This suggests a spectral strengthening of the defect stability theorem:
+bound \(\Delta\) below by the squared norm or support of the negative
+Kneser projection.  It could prune zero/near-zero-defect searches and may
+attack the remaining six-off-conic-hole stability problem.  The general
+pair-sum eigenspace is already formalized in the Clebsch lane; what remains
+is an inequality connecting its norm to the geometric defect ledger.
+
+### 5. PRS catalecticants and the Mukai kernel map — shared method
+
+The PRS classifications and C682 use the same algorithmic pattern:
+\[
+ \text{form or syndrome}
+ \longmapsto
+ \text{apolar/catalecticant operator}
+ \longmapsto
+ \text{kernel plane or flag}
+ \longmapsto
+ \text{orbit and branch data}.
+\]
+C682 contributes a compactification with only three orbit types and a
+rank-plus-isotropy recognizer.  PRS contributes coherent polar flags,
+contraction methods, splitting tests, and high-field exceptional-locus
+bounds.  The most concrete cross-test is the pair of exceptional
+redundancy-six nets at \(q=11\): reduce the primitive transvectant modulo
+\(11\) and test whether either Hankel-kernel net lies on its
+Mukai--Umemura kernel orbit.  A positive result could conceptually explain
+an otherwise isolated small-field exception; a negative result would close
+the tempting \(H_3\) interpretation cheaply.
+
+Longer term, the PRS coherent-flag machinery is a plausible way to prove
+that no remote rank-plus-isotropy components occur in the transvectant
+locus.  Conversely, tangent-space and boundary-orbit tests from C682 may
+replace some small-field PRS orbit enumeration by determinantal geometry.
+
+### 6. Frobenius pair repair and continuation complexes — algorithmic quotient
+
+After extending the Clebsch six-arc to \(\mathbf F_{121}\), there are exactly
+\(4180\) legal conjugate-pair extensions and \(4179\) alternate repairs.
+The recovered \(A_5\), Petersen module, and two square-class characters give
+natural labels with which to quotient the corresponding replacement graph
+before attempting connectivity or mixing computations.  Likewise, the
+continuation-complex reconstruction theorem can certify when such an
+abstract replacement structure still remembers its ambient plane and seed.
+
+This is currently a search-compression proposal, not a theorem: compute the
+\(A_5\)-orbit quotient, retain the \([5]\)/\([2]\) labels, and test whether
+connectivity of the quotient plus stabilizer-generated fibre moves lifts to
+connectivity of the full \(4180\)-vertex extension structure.
+
+## `ej3`: other surprising combinations
+
+### 7. Six-point Gale duality is Paper III golden conjugation — exact
+
+Let \(A_t\) be the \(3\times6\) matrix whose columns are the ordered golden
+axes
+\[
+ (0,t,1),(0,t,-1),(1,0,t),(-1,0,t),(t,-1,0),(-t,-1,0),
+ \qquad t^2-t-1=0.
+\]
+An exact Gale kernel and an invertible comparison matrix are
+\[
+ K_t=\begin{pmatrix}
+ -t&t&1&1&0&0\\
+ t&-1&-t&0&1&0\\
+ -1&t&t&0&0&1
+ \end{pmatrix},\qquad
+ H=\begin{pmatrix}t&1&-1\\0&t&t\\1&0&0\end{pmatrix}.
+\]
+Writing \(\bar t=1-t\), direct multiplication gives
+\[
+ A_tK_t^{\mathsf T}=0,\qquad HK_t=-tA_{\bar t}.
+\]
+Thus the Gale transform of the marked golden fibre is its Galois
+conjugate with the same six-column marking and one common scalar.  In code
+language,
+\[
+ \operatorname{row}(A_t)^\perp=\operatorname{row}(A_{\bar t}).
+\]
+
+This completes a kill test explicitly proposed but left unanswered in
+C373: compute the Gale transform of the marked six-arc and decide whether
+it canonically returns a golden fibre.  A bounded notes search found that
+proposal and the general six-point Gale results, but no prior record of
+this exact golden calculation.
+
+Consequences:
+
+- On this six-point locus Gale association is exactly Paper III's golden
+  Galois sheet exchanger.  This is a concrete model for the
+  Gale/self-association mechanism used elsewhere in the portfolio, not
+  yet an identification with Paper II's global sheet involution.
+- Code dualization swaps the two golden sheets: a generator matrix for
+  one is a parity-check matrix for the other.
+- In redundancy-three PRS reconstruction, the two-parent Gale ambiguity
+  becomes literal arithmetic conjugation on the golden locus.  Unoriented
+  search can use trace/norm data; choosing a parent chooses an embedding
+  of \(\mathbf Q(\sqrt5)\).
+- For AME/code applications this gives an exact semilinear isoduality
+  test, but not by itself local-unitary or local-Clifford equivalence.
+
+The primary certificate checks the identity over
+\(\mathbf Q[t]/(t^2-t-1)\).  The independent replay checks its reduction
+modulo \(11\): \(t=4\), \(\bar t=8\), and \(HK_4=7A_8\).
+
+### 8. One \(20\to10\) orientation carrier for Papers I and III — Gold
+
+Paper I's twenty weight-three repair supports split into two complementary
+\(A_5\)-orbits of ten.  Quotienting by support complementation gives the
+ten Petersen vertices.  Paper III's opposite-face axes are another
+ten-point \(A_5\)-set labelled by those vertices, and its Clebsch
+four-space is the Petersen \((-2)\)-eigenspace.
+
+After fixing the common \(A_5\) marking, Paper I's support-chirality cover
+therefore lies directly over the carrier on which Paper III's harmonic
+embedding is defined.  This is a cleaner I--III interface than comparing
+cubic scalars in unrelated coordinates: identify the Petersen carrier
+first, then compare involutions over it.
+
+The abstract \(A_5\)-set/Petersen identification is established on both
+sides.  It is not yet proved that Paper I's complement involution equals
+Paper III's arithmetic incidence involution.  The exact Gale identity
+supplies a natural candidate middle operation, but a marked commutative
+diagram remains necessary.
+
+### 9. The outer-\(S_6\) \(6\to5\to10\to15\) skeleton can close the marking gap
+
+The classical duad--syntheme--pentad geometry gives, once the degree-six
+\(A_5\) action is fixed,
+\[
+ 6\ \text{points}\longrightarrow
+ 5\ \text{synthemes in the \(A_5\)-fixed total}\longrightarrow
+ 10\ \text{pairs}\longrightarrow15\ \text{Petersen edges}.
+\]
+The five synthemes partition the fifteen duads of the original six labels.
+This simultaneously organizes Paper I's five triangle classes and
+support-pair graph, the five-label matching module used in the Paper II
+interface, and Paper III's ten face axes and fifteen adjacencies.
+
+The ingredients are classical and already occur separately in the notes.
+The new value is architectural: this is a candidate intrinsic marking
+functor, not an arbitrary bijection between three ten-element sets.  It
+would remove a main red-team objection to the \(2\)-\(3\)-\(6\) ladder.
+The remaining gate is one certificate showing that the manuscripts' three
+concrete labellings all equal this outer-\(S_6\) construction.
+
+### Highest-EV cross-paper actions
+
+1. Promote the exact golden Gale-conjugation identity and its code-duality
+   corollary as a six-point/PRS--Paper III interface.
+2. Build one marked outer-\(S_6\) diagram aligning Paper I support pairs,
+   Paper II matching labels, and Paper III face axes.
+3. Contract the C651 tensor through the primitive mod-\(11\) transvectant
+   and determine its scalar on \(V_4\).
+4. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
+   equivalence conventions.
+5. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
+   defect.
+6. Test the two \(q=11\) PRS exceptional nets against the transvectant
+   kernel orbit.
+7. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
+   before touching the full replacement graph.
 
 ## Source-depth boundary
 
@@ -355,6 +793,23 @@ only proposed experiments until a perturbation theorem supplies a gap.
 - **Settled locally at the Klein point:** the projective tangent space of
   the rank-four determinantal locus has dimension three, so the
   Mukai--Umemura closure is its local component there.
+- **Settled on boundary representatives:** both lower-dimensional orbit
+  types retain rank four and have exactly Hitchin's isotropic weight-space
+  kernels; rank alone has one extra tangent direction at the closed orbit.
+- **Settled arithmetically:** the primitive integral transvectant retains
+  rank four modulo \(11\) and drops to rank two modulo \(5\), separating
+  the module bridge from the nonreducible Gaunt scalar.
+- **Settled exactly:** the Gale transform of the marked golden six-axis
+  matrix is its Galois conjugate with the same column order:
+  \(HK_t=-tA_{1-t}\).  Golden-sheet exchange is code duality on this
+  locus, completing C373's previously open kill test.
+- **Settled abstractly:** Paper I complementary support pairs and Paper III
+  face axes carry the same ten-vertex \(A_5\)/Petersen geometry.
+- **Settled as a coordinate identity, not intrinsically:** with C651's
+  selected intertwiner,
+  \(c_{\mathrm{match}}^2=J_0|_V\) and
+  \(w=\pm4c_{\mathrm{match}}\) over \(\mathbf F_{11}\).  The scalar and
+  torsor comparison remain gates.
 - **Settled:** the completed two-branch model is the universal
   residue-field pinch \(\mathbf Q+\mathfrak m\), with depth-one defect
   exactly \(\mathbf Q(\sqrt5)/\mathbf Q\).
@@ -368,6 +823,19 @@ only proposed experiments until a perturbation theorem supplies a gap.
 - **Open:** determine whether the odd determinant character of the third
   transvectant is the same geometric orientation character as Hitchin's
   incidence involution, rather than merely an analogous sign.
+- **Open:** contract the C651 finite matching tensor through the primitive
+  mod-\(11\) map and fix the resulting cubic scalar.
+- **Open:** freeze the Paper I--II--III marking compatibility needed to
+  promote the \(2\)-\(3\)-\(6\) ladder to one end-to-end theorem; the
+  outer-\(S_6\) fixed-total construction is now the preferred candidate.
+- **Open:** prove or falsify equality of Paper I support complementation,
+  the relevant Paper II orientation involution, six-point Gale
+  association, and Paper III incidence/Galois exchange over the common
+  Petersen carrier; no global Paper II specialization is currently proved.
+- **Open:** formalize the exact pointed-port-to-unordered-Petersen-cubic
+  reconstruction corollary.
+- **Open:** turn the shared \(KG(k,2)\) negative eigenspace into a numerical
+  lower bound for prescribed-hole defect.
 - **Open:** audit classical and modern literature before any novelty or
   manuscript-disposition claim.
 
