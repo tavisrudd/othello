@@ -9,18 +9,19 @@
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
   "trust_manifest_sha256": "b1d47ee9db48c5e82a43bdadba2cf364cdda392a0e188bccc6038da7d2bc8f5c",
-  "runner_sha256": "5c0ea5bdcc4ccbbda779d494d02d8efd67940451be5c2d5e1177ee6dc8dd9ba9",
+  "runner_sha256": "5d23dd8658b711f43268fd9be247896812a53a0c428afb5ac2035ea2e7e81ec4",
   "review_sources_sha256": {
-    "normalized_manuscript": "65a1a4006e2fab6da6ec07ebb9501088fcbf99ba59fd408375f2c6626e62aef9",
+    "normalized_manuscript": "383767e56c0aad5b362aa8c3752c189e484a40db0f3a7275a1f89ef5e8793cb4",
     "normalized_statement_identity": "a6b0f6470d7019b14a6d55bb5091d8ccc04c73086b7bd64be2b7feb1cd947f29",
     "statement_extractor": "98f3a0b7a346160835c9bc500938f08ca52bd1713d57ccf9760aab22f650b8ce",
     "paper_readme": "25b4dfd4c070627ead9459e63e09c00c59cff5461d947dcf39d59746cbd9ee7c",
-    "paper_makefile": "26ec6e218e3c11e3913a36a9481277b1a4f63b68ac5dc21640d322b3da5bf681",
+    "paper_makefile": "a60670e531bb21fea4fdc1ebfba5fc1941c8cbfaca3867e310d1df2d1d0d0cb1",
     "verification_readme": "08815bf250f20d70ae6bcd375ba293768dc46021c4cb815cb89c7316272868f7",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
-      "ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620"
+      "ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620",
+      "ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450"
     },
     "guarded_lean": "d8e2a4642519aed0290aecf3ff39eab802be45da6323a18aa2bbc2ad07125189"
   },
@@ -55,6 +56,10 @@
     "ClebschHilbertSymmetry.lean": {
       "lean/RelativeConicArcs/ClebschHilbertSymmetry.lean": "5da049da27b3d74a7fb908ec2ae77938925b95c82f78568eb4ebbd9628759f56",
       "lean/RelativeConicArcs/Gates/ClebschHilbertSymmetry.lean": "0be6e0b36ede1ee9ebc7ade0abaa84694e8b45059a38b191d2074b943cedd620"
+    },
+    "ClebschHyperplaneSquare.lean": {
+      "lean/RelativeConicArcs/ClebschHyperplaneSquare.lean": "887f4e4f8fc32d44beacf1882fd73274563c5b02e474a9c5ce038e5e88a4c534",
+      "lean/RelativeConicArcs/Gates/ClebschHyperplaneSquare.lean": "8b76e121f657f454c1727fc2018e0b535ff7125a08e381de1cecd259018fe450"
     }
   },
   "lean_gates": [

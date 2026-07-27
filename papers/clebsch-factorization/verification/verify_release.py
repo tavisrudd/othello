@@ -458,6 +458,8 @@ def build_fingerprint(
                     / "ClebschArithmeticGluing.lean",
                     repo_root / "lean" / "RelativeConicArcs" / "Gates"
                     / "ClebschHilbertSymmetry.lean",
+                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                    / "ClebschHyperplaneSquare.lean",
                 )
             },
             "guarded_lean": sha256(repo_root / "lean" / "scripts" / "guarded-lean"),
@@ -469,6 +471,8 @@ def build_fingerprint(
                 / "ClebschArithmeticGluing.lean",
                 repo_root / "lean" / "RelativeConicArcs" / "Gates"
                 / "ClebschHilbertSymmetry.lean",
+                repo_root / "lean" / "RelativeConicArcs" / "Gates"
+                / "ClebschHyperplaneSquare.lean",
             )
         },
         "lean_gates": [
