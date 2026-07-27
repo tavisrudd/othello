@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate and independently check the compact C595 certificate.
+"""Generate and independently check the compact STABLE_COMPONENT_IDENTITIES certificate.
 
 The primary scheme computations live in the adjacent Singular script.  This
 file reconstructs the integral equations with a tiny sparse-polynomial engine,
@@ -287,7 +287,7 @@ def payload() -> dict[str, object]:
     minors = hankel_minors()
     verify_identities(coefficients, minors)
     return {
-        "schema": "c595-stable-component-fano-elimination-v1",
+        "schema": "stable_component_identities-stable-component-fano-elimination-v1",
         "integral_model": {
             "coordinate_order": list(NAMES),
             "carrier_generator_count": 7,
@@ -396,7 +396,7 @@ def check_bundle() -> None:
         for record in controls.values()
     )
     print(
-        "C595 Python certificate OK: 28 integral coefficients, "
+        "STABLE_COMPONENT_IDENTITIES Python certificate OK: 28 integral coefficients, "
         "N=6, F_2/F_3/F_5 point controls"
     )
 

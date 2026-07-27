@@ -1,5 +1,5 @@
 {
-  "field_implementation": "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
+  "field_implementation": "evidence/r5/2026-07-22-redundancy-five-deep-hole-replay.py",
   "fields": [
     {
       "matches_public_record": true,
@@ -171,5 +171,5 @@
     }
   ],
   "public_record": "CLASSIFICATION-RECORDS.json",
-  "schema": "c545-r7-direct-locus-replay-v2"
+  "schema": "direct_locus-r7-direct-locus-replay-v2"
 }

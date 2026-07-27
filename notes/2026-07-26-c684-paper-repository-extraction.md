@@ -347,6 +347,30 @@ Then:
   and replay files. Exact-count rules now rewrite them, and its selected audit passes with zero
   findings. Every other mapped root needs a repository-specific content disposition; broad allow
   rules are forbidden.
+- The exporter now supports exact, reason-bearing exclusions for regular tracked files. It refuses
+  absent paths, non-regular paths, duplicate dispositions, and attempts to exclude a manuscript
+  entry point. Seventeen hermetic tests cover this boundary together with case-insensitive task IDs
+  in content and paths.
+- The AME--LU sweep assigns nine private review, ledger, theorem-adoption, verification-lane, and
+  release-planning files explicit exclusions. Seventeen retained evidence artifacts have semantic
+  filenames, and every public command, manifest, certificate, generator, and README is free of
+  task IDs and private-note or monorepo-root dependencies.
+- The Beyond4 sweep assigns ten private review, ledger, cover-letter, checklist, and revision files
+  explicit exclusions. Thirty retained R5/R6/R7 and stable-component artifacts have semantic
+  filenames. Its public bundle tool no longer has a private-monorepo `--build` mode: `--write`
+  records the present standalone evidence tree and `--check` verifies it. The top-level verifier
+  checks the frozen Lean statement map when external Lean sources are not bundled and retains the
+  stronger source-closure checks when they are present.
+- The completed AME--LU source-tree validation passes `make check`, the 17-artifact aggregate
+  evidence replay (eight replay bundles), and the release-manifest verifier. Its rebuilt main PDF
+  is 30 pages.
+- The completed Beyond4 source-tree validation passes `make check tit-check`, the 47-artifact
+  package verifier, classification-record and manuscript-table checks, the full R5--R7 aggregate
+  replay (including independent arithmetic and direct-locus replays), and both stable-component
+  certificate checks. Its rebuilt preprint is 30 pages and its TIT variant is 22 pages.
+- The official immutable-tree exporter audit reports zero findings for both `ame-lu` and
+  `beyond4-prs`. The exporter regression suite passes all seventeen tests, including hermetic
+  temporary commits with inherited commit signing disabled.
 - The Node Kayles task-ID findings are rendered, because the manuscript sets
   `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
   polyhedral integration, not merely editorial reminders. The repository is therefore gated until

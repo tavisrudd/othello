@@ -38,8 +38,18 @@ TEXT_SUFFIXES = {
     ".yml",
 }
 TEXT_NAMES = {"Makefile", "README"}
+TASK_ID_RE = re.compile(
+    r"(?<![A-Za-z0-9])(?:"
+    r"C(?:[89]\d|[1-9]\d{2,})(?!\d)|"
+    r"c(?:[89]\d|[1-9]\d{2,})(?![0-9a-fA-F])"
+    r")"
+)
+TASK_PATH_RE = re.compile(r"\bC(?:[89]\d|[1-9]\d{2,})\b", re.IGNORECASE)
 REFERENCE_PATTERNS = (
-    ("private-notes", re.compile(r"(?:^|[(`/\"'])\.\./(?:\.\./)*notes/")),
+    (
+        "private-notes",
+        re.compile(r"(?:^|[(`/\"'])(?:\.\./)*notes/"),
+    ),
     ("paper-index", re.compile(r"\.\./papers-(?:index|planning)\.md")),
     ("local-home", re.compile(r"/home/tavis(?:/|$)")),
     ("file-uri", re.compile(r"file://")),
@@ -48,7 +58,7 @@ REFERENCE_PATTERNS = (
     # C01--C15 are public mathematical class labels in two Clebsch manuscripts.
     # Lane/task identifiers in this repository begin at C80 or have three or
     # more digits, and have no place in a standalone paper repository.
-    ("task-lane-id", re.compile(r"\bC(?:[89]\d|[1-9]\d{2,})\b")),
+    ("task-lane-id", TASK_ID_RE),
     (
         "internal-process",
         re.compile(
@@ -66,8 +76,12 @@ PROCESS_PATH_RE = re.compile(
     r"formalization-ledger|"
     r"literature-audit|"
     r"proof[_-]ledger|"
+    r"public-export|"
     r"release-checklist|"
-    r"second-draft-fix-plan"
+    r"second-draft-fix-plan|"
+    r"[^/]*submission-checklist|"
+    r"[^/]*quantum-checklist|"
+    r"[^/]*cover-letter"
     r")\.md$",
     re.IGNORECASE,
 )
@@ -234,6 +248,20 @@ def excluded_symlinks(row: dict[str, Any]) -> dict[str, str]:
     return result
 
 
+def excluded_paths(row: dict[str, Any]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for rule in row.get("exclude_path", []):
+        path = rule.get("path")
+        reason = rule.get("reason")
+        safe_relative(path, f"repository {row['name']} excluded path")
+        if path in result:
+            raise Refused(f"repository {row['name']} repeats path exclusion for {path!r}")
+        if not isinstance(reason, str) or not reason.strip():
+            raise Refused(f"repository {row['name']} path {path!r} needs a reason")
+        result[path] = reason
+    return result
+
+
 def excluded_release_outputs(
     row: dict[str, Any], papers: dict[str, dict[str, Any]]
 ) -> set[str]:
@@ -310,6 +338,8 @@ def scan_references(
         rel = relative_to_source(entry, source)
         if rel in excluded or entry.mode == "120000" or entry.kind != "blob":
             continue
+        if TASK_PATH_RE.search(rel):
+            findings.append({"code": "task-lane-path", "path": rel, "line": 0})
         if PROCESS_PATH_RE.search(rel):
             findings.append({"code": "internal-process-file", "path": rel, "line": 0})
         size = entry.size or 0
@@ -359,6 +389,7 @@ def plan_repository(
             raise Refused(f"repository {row['name']} main source {main!r} is absent or not regular")
 
     exclusions = excluded_symlinks(row)
+    path_exclusions = excluded_paths(row)
     release_outputs = excluded_release_outputs(row, papers)
     rewrites = rewrite_rules(row)
     symlinks = {path: entry for path, entry in by_relative.items() if entry.mode == "120000"}
@@ -372,6 +403,29 @@ def plan_repository(
         raise Refused(
             f"repository {row['name']} declares exclusions that are not symlinks: {', '.join(stale)}"
         )
+    overlap = sorted(set(exclusions) & set(path_exclusions))
+    if overlap:
+        raise Refused(
+            f"repository {row['name']} excludes paths as both symlinks and regular files: "
+            f"{', '.join(overlap)}"
+        )
+    invalid_path_exclusions = sorted(
+        path
+        for path in path_exclusions
+        if path not in by_relative
+        or by_relative[path].kind != "blob"
+        or by_relative[path].mode == "120000"
+    )
+    if invalid_path_exclusions:
+        raise Refused(
+            f"repository {row['name']} path exclusions are absent or not regular files: "
+            f"{', '.join(invalid_path_exclusions)}"
+        )
+    excluded_mains = sorted(set(main_sources) & set(path_exclusions))
+    if excluded_mains:
+        raise Refused(
+            f"repository {row['name']} cannot exclude main source(s): {', '.join(excluded_mains)}"
+        )
 
     regular = [
         entry
@@ -379,12 +433,19 @@ def plan_repository(
         if entry.kind == "blob"
         and entry.mode != "120000"
         and path not in exclusions
+        and path not in path_exclusions
         and path not in release_outputs
     ]
     stale_rewrites = sorted(set(rewrites) - set(by_relative))
     if stale_rewrites:
         raise Refused(f"repository {row['name']} rewrites absent paths: {', '.join(stale_rewrites)}")
-    references = scan_references(entries, source, set(exclusions), row["name"], rewrites)
+    references = scan_references(
+        entries,
+        source,
+        set(exclusions) | set(path_exclusions),
+        row["name"],
+        rewrites,
+    )
     return {
         "name": row["name"],
         "source": source,
@@ -394,6 +455,7 @@ def plan_repository(
         "files": len(regular),
         "bytes": sum(entry.size or 0 for entry in regular),
         "excluded_symlinks": len(exclusions),
+        "excluded_paths": len(path_exclusions),
         "excluded_release_outputs": sorted(release_outputs & set(by_relative)),
         "reference_findings": references,
         "local_path": f"~/src/math-papers/{row['name']}",
@@ -445,6 +507,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
 
     source = row["source"]
     exclusions = excluded_symlinks(row)
+    path_exclusions = excluded_paths(row)
     release_outputs = excluded_release_outputs(row, papers)
     rewrites = rewrite_rules(row)
     entries = tree_entries(commit, source)
@@ -452,7 +515,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     manifest_files: list[dict[str, Any]] = []
     for entry in entries:
         rel = relative_to_source(entry, source)
-        if rel in exclusions or rel in release_outputs:
+        if rel in exclusions or rel in path_exclusions or rel in release_outputs:
             continue
         if entry.kind != "blob" or entry.mode == "120000":
             raise Refused(f"repository {repository!r} contains unsupported tree entry {rel!r}")
@@ -531,6 +594,10 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         "source_root": source,
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
+        ],
+        "excluded_paths": [
+            {"path": path, "reason": reason}
+            for path, reason in sorted(path_exclusions.items())
         ],
         "excluded_release_outputs": sorted(release_outputs),
         "files": sorted(manifest_files, key=lambda item: item["path"]),

@@ -29,6 +29,7 @@ def main() -> None:
     artifacts = data.get("artifacts")
     if not isinstance(artifacts, list):
         raise SystemExit("artifacts must be a list")
+    write = "--write" in sys.argv[1:]
     for entry in artifacts:
         relative = entry.get("path")
         expected = entry.get("sha256")
@@ -44,11 +45,19 @@ def main() -> None:
             raise SystemExit(f"artifact escapes supplement root: {relative}")
         if not path.is_file():
             raise SystemExit(f"missing artifact: {relative}")
+        if write:
+            entry["bytes"] = path.stat().st_size
+            entry["sha256"] = sha256(path)
+            continue
         if path.stat().st_size != expected_bytes:
             raise SystemExit(f"byte-count mismatch: {relative}")
         actual = sha256(path)
         if actual != expected:
             raise SystemExit(f"hash mismatch: {relative}")
+    if write:
+        MANIFEST.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        print(f"updated {MANIFEST.name} for {len(artifacts)} evidence artifact(s)")
+        return
     print(f"verified {len(artifacts)} evidence artifact(s)")
     if "--replay" in sys.argv[1:]:
         for replay in data.get("replays", []):

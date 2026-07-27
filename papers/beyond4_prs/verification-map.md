@@ -16,11 +16,11 @@ from the cited standard and companion theorems.
 
 | Claim group | Generator | Certificate | Independent replay | Checksum |
 |---|---|---|---|---|
-| C491 redundancy-five census | `2026-07-22-c491-prs-deep-hole-census.py` | `2026-07-22-c491-prs-deep-hole-census.json` | `2026-07-22-c491-prs-deep-hole-replay.py` | `2026-07-22-c491-prs-redundancy-five.sha256` |
-| C498 redundancy-six census | `2026-07-22-c498-prs-deep-hole-census.rs` | `2026-07-22-c498-prs-deep-hole-census.json` | `2026-07-22-c498-prs-deep-hole-replay.py` | `2026-07-22-c498-prs-redundancy-six.sha256` |
-| C498 small semilinear normal forms | `2026-07-23-c498-small-exceptional-normal-forms.py` | `2026-07-23-c498-small-exceptional-normal-forms.json` | the generator is also the deterministic checker; no second implementation is claimed | `2026-07-23-c498-small-exceptional-normal-forms.sha256` |
-| C509 redundancy-seven calibration | `2026-07-23-c509-prs-deep-hole-calibration.py` | `2026-07-23-c509-prs-deep-hole-calibration.json` | `2026-07-23-c509-prs-deep-hole-calibration-replay.py` | `2026-07-23-c509-prs-redundancy-seven.sha256` |
-| C595/C597 stable components | `2026-07-24-c595-stable-component-fano-elimination.py`; `2026-07-24-c597-r10-integral-bad-scheme-sc11.py`; `RelativeConicArcs.PRSStableComponents` | corresponding JSON records | both generators are dependency-free identity/factorization checkers; corresponding Singular scripts check saturation and vertical primary decompositions; Lean independently checks the Plücker factorizations, coherent-Fano identities, modular-kernel criterion, and binary block-coverage termination | corresponding SHA-256 manifests and `RelativeConicArcs.Gates.PRSStableComponentsAxiomAudit` |
+| C491 redundancy-five census | `2026-07-22-prs-deep-hole-census.py` | `2026-07-22-prs-deep-hole-census.json` | `2026-07-22-redundancy-five-deep-hole-replay.py` | `2026-07-22-prs-redundancy-five.sha256` |
+| C498 redundancy-six census | `2026-07-22-prs-deep-hole-census.rs` | `2026-07-22-prs-deep-hole-census.json` | `2026-07-22-redundancy-six-deep-hole-replay.py` | `2026-07-22-prs-redundancy-six.sha256` |
+| C498 small semilinear normal forms | `2026-07-23-small-exceptional-normal-forms.py` | `2026-07-23-small-exceptional-normal-forms.json` | the generator is also the deterministic checker; no second implementation is claimed | `2026-07-23-small-exceptional-normal-forms.sha256` |
+| C509 redundancy-seven calibration | `2026-07-23-prs-deep-hole-calibration.py` | `2026-07-23-prs-deep-hole-calibration.json` | `2026-07-23-prs-deep-hole-calibration-replay.py` | `2026-07-23-prs-redundancy-seven.sha256` |
+| C595/C597 stable components | `2026-07-24-stable-component-fano-elimination.py`; `2026-07-24-r10-integral-bad-scheme-sc11.py`; `RelativeConicArcs.PRSStableComponents` | corresponding JSON records | both generators are dependency-free identity/factorization checkers; corresponding Singular scripts check saturation and vertical primary decompositions; Lean independently checks the Plücker factorizations, coherent-Fano identities, modular-kernel criterion, and binary block-coverage termination | corresponding SHA-256 manifests and `RelativeConicArcs.Gates.PRSStableComponentsAxiomAudit` |
 
 ## Trusted boundaries
 
@@ -53,18 +53,18 @@ from the cited standard and companion theorems.
 From the repository root:
 
 ```text
-python3 notes/2026-07-22-c491-prs-deep-hole-census.py
-python3 notes/2026-07-22-c491-prs-deep-hole-replay.py
-rustc -O notes/2026-07-22-c498-prs-deep-hole-census.rs -o /tmp/c498-census
+python3 notes/2026-07-22-prs-deep-hole-census.py
+python3 notes/2026-07-22-redundancy-five-deep-hole-replay.py
+rustc -O notes/2026-07-22-prs-deep-hole-census.rs -o /tmp/c498-census
 C498_JSON_OUT=/tmp/c498-census.json /tmp/c498-census
-cmp /tmp/c498-census.json notes/2026-07-22-c498-prs-deep-hole-census.json
-python3 notes/2026-07-22-c498-prs-deep-hole-replay.py
-python3 notes/2026-07-23-c498-small-exceptional-normal-forms.py --summary
-python3 notes/2026-07-23-c509-prs-deep-hole-calibration.py --jobs 3 \
-  --output notes/2026-07-23-c509-prs-deep-hole-calibration.json --check
-python3 notes/2026-07-23-c509-prs-deep-hole-calibration-replay.py
-python3 notes/2026-07-24-c595-stable-component-fano-elimination.py --check
-python3 notes/2026-07-24-c597-r10-integral-bad-scheme-sc11.py --check
+cmp /tmp/c498-census.json notes/2026-07-22-prs-deep-hole-census.json
+python3 notes/2026-07-22-redundancy-six-deep-hole-replay.py
+python3 notes/2026-07-23-small-exceptional-normal-forms.py --summary
+python3 notes/2026-07-23-prs-deep-hole-calibration.py --jobs 3 \
+  --output notes/2026-07-23-prs-deep-hole-calibration.json --check
+python3 notes/2026-07-23-prs-deep-hole-calibration-replay.py
+python3 notes/2026-07-24-stable-component-fano-elimination.py --check
+python3 notes/2026-07-24-r10-integral-bad-scheme-sc11.py --check
 ```
 
 The C491 and C498 manifests contain disclosed stale hashes only for living

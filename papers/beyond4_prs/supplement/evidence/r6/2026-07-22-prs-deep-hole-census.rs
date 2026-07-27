@@ -1,4 +1,4 @@
-// C498 PRS(q-5) deep-hole census generator (redundancy six).
+// REDUNDANCY_SIX PRS(q-5) deep-hole census generator (redundancy six).
 //
 // Ambient PG(5,q); quintic normal rational curve nu(t)=(1,t,t^2,t^3,t^4,t^5),
 // nu(inf)=(0,0,0,0,0,1) -- the q+1 columns of the parity check of PRS(q-5)
@@ -9,7 +9,7 @@
 //
 // Both characterisations are computed independently and cross-checked per field.
 //
-// Deterministic, no randomness, no timestamps. Compile: rustc -O c498_census.rs
+// Deterministic, no randomness, no timestamps. Compile: rustc -O redundancy_six_census.rs
 use std::io::Write;
 
 // ---------------------------------------------------------------------------
@@ -799,7 +799,7 @@ struct OrbitRec {
 
 fn census_field(q: u32) -> FieldRec {
     use std::time::Instant;
-    let prof = std::env::var("C498_PROF").is_ok();
+    let prof = std::env::var("REDUNDANCY_SIX_PROF").is_ok();
     let t0 = Instant::now();
     let f = GF::new(q);
     let n_points: i64 = {
@@ -1052,7 +1052,7 @@ fn json_escape(s: &str) -> String {
 fn write_json(recs: &[FieldRec]) -> String {
     let mut out = String::new();
     out.push_str("{\n");
-    out.push_str("  \"schema\": \"c498-prs-deep-hole-census-v1\",\n");
+    out.push_str("  \"schema\": \"redundancy_six-prs-deep-hole-census-v1\",\n");
     out.push_str("  \"fields\": {\n");
     for (fi, r) in recs.iter().enumerate() {
         out.push_str(&format!("    \"{}\": {{\n", r.q));
@@ -1102,10 +1102,10 @@ fn main() {
     } else {
         vec![7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27]
     };
-    let out_path = if let Ok(p) = std::env::var("C498_JSON_OUT") {
+    let out_path = if let Ok(p) = std::env::var("REDUNDANCY_SIX_JSON_OUT") {
         p
     } else {
-        "c498-census.json".to_string()
+        "redundancy_six-census.json".to_string()
     };
 
     println!(

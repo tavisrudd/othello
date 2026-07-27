@@ -634,7 +634,7 @@
     "map": null
   },
   "pauli_convention": "X(a)|x>=|x+a>; Z(b)|x>=omega^(b*x)|x>",
-  "schema": "c374-clebsch-ame-equivalence-v1",
+  "schema": "clebsch_ame-clebsch-ame-equivalence-v1",
   "standard_extended_rs": {
     "code_rref": [
       [

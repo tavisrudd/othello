@@ -36485,8 +36485,8 @@
     }
   ],
   "input": {
-    "path": "2026-07-20-c395-clebsch-ame-pencil-arithmetic.py",
-    "sha256": "a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52"
+    "path": "2026-07-20-clebsch-ame-pencil-arithmetic.py",
+    "sha256": "29475cf066640668d04a6ebd0f5bbc247670a5803256ec735de8a8acd2569fe5"
   },
   "mandatory_q13_result": {
     "holonomy_bucket_count": 2,
@@ -36503,7 +36503,7 @@
     ],
     "projective_class_count": 2
   },
-  "schema": "c396-holonomy-completeness-v1",
+  "schema": "holonomy_completeness-holonomy-completeness-v1",
   "symbolic": {
     "degree_eight_cover": {
       "branch_values": [

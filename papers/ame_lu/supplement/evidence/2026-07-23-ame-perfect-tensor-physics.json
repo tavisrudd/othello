@@ -4387,8 +4387,8 @@
   ],
   "field_order": 11,
   "inputs": {
-    "2026-07-19-c374-clebsch-ame-equivalence.py": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694",
-    "2026-07-23-c396-holonomy-completeness.py": "b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49"
+    "2026-07-19-clebsch-ame-equivalence.py": "3cc76e380be2447fbf49a779320e8a2ceb2d55b92f62d834c36c3b83dbf38a79",
+    "2026-07-23-holonomy-completeness.py": "3d7dcc5a98bafca6c215dc66b024795a9dc024c21fb15d2f5f2063d7a6446f10"
   },
   "q13_arbitrary_lu_contractions": {
     "classes": {
@@ -12990,7 +12990,7 @@
     "invariant_value_from_rank": "I=q^(3m-rank)",
     "normalization": "sigma_0=id after common bra-copy relabelling"
   },
-  "schema": "c397-ame-perfect-tensor-physics-v1",
+  "schema": "perfect_tensor-ame-perfect-tensor-physics-v1",
   "signed_sheet": {
     "five_coordinate_basis_indices": [
       0,

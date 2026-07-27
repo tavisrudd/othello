@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build or verify the paper-local computational evidence bundle.
+"""Record or verify the paper-local computational evidence bundle.
 
-``--build`` copies an explicit allowlist from the development repository into
-stable public paths and writes canonical machine-readable and Markdown
-manifests.  ``--check`` needs only the paper directory: it hashes every bundled
-artifact and verifies its byte count against the committed manifest.
+``--write`` refreshes the canonical manifests from the present public evidence
+tree. ``--check`` hashes every bundled artifact and verifies its byte count
+against the committed manifest. Both modes need only the standalone paper
+repository.
 """
 
 from __future__ import annotations
@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shutil
 from pathlib import Path
 
 
@@ -21,66 +20,66 @@ BUNDLES = (
         "Certificate R5",
         "r5",
         (
-            ("generator", "2026-07-22-c491-prs-deep-hole-census.py", "2026-07-22-c491-prs-deep-hole-census.py", "rederive"),
-            ("certificate", "2026-07-22-c491-prs-deep-hole-census.json", "2026-07-22-c491-prs-deep-hole-census.json", "compare"),
-            ("replay", "2026-07-22-c491-prs-deep-hole-replay.py", "2026-07-22-c491-prs-deep-hole-replay.py", "rederive"),
-            ("checksum", "2026-07-22-c491-prs-redundancy-five.sha256", "2026-07-22-c491-prs-redundancy-five.sha256", "compare"),
+            ("generator", "2026-07-22-prs-deep-hole-census.py", "2026-07-22-prs-deep-hole-census.py", "rederive"),
+            ("certificate", "2026-07-22-prs-deep-hole-census.json", "2026-07-22-prs-deep-hole-census.json", "compare"),
+            ("replay", "2026-07-22-redundancy-five-deep-hole-replay.py", "2026-07-22-redundancy-five-deep-hole-replay.py", "rederive"),
+            ("checksum", "2026-07-22-prs-redundancy-five.sha256", "2026-07-22-prs-redundancy-five.sha256", "compare"),
         ),
     ),
     (
         "Certificate R6",
         "r6",
         (
-            ("generator", "2026-07-22-c498-prs-deep-hole-census.rs", "2026-07-22-c498-prs-deep-hole-census.rs", "rederive"),
-            ("certificate", "2026-07-22-c498-prs-deep-hole-census.json", "2026-07-22-c498-prs-deep-hole-census.json", "compare"),
-            ("replay", "2026-07-22-c498-prs-deep-hole-replay.py", "2026-07-22-c498-prs-deep-hole-replay.py", "reconstruct"),
-            ("checksum", "2026-07-22-c498-prs-redundancy-six.sha256", "2026-07-22-c498-prs-redundancy-six.sha256", "compare"),
+            ("generator", "2026-07-22-prs-deep-hole-census.rs", "2026-07-22-prs-deep-hole-census.rs", "rederive"),
+            ("certificate", "2026-07-22-prs-deep-hole-census.json", "2026-07-22-prs-deep-hole-census.json", "compare"),
+            ("replay", "2026-07-22-redundancy-six-deep-hole-replay.py", "2026-07-22-redundancy-six-deep-hole-replay.py", "reconstruct"),
+            ("checksum", "2026-07-22-prs-redundancy-six.sha256", "2026-07-22-prs-redundancy-six.sha256", "compare"),
         ),
     ),
     (
         "Certificate R6-NF",
         "r6-normal-forms",
         (
-            ("generator-checker", "2026-07-23-c498-small-exceptional-normal-forms.py", "2026-07-23-c498-small-exceptional-normal-forms.py", "rederive"),
-            ("certificate", "2026-07-23-c498-small-exceptional-normal-forms.json", "2026-07-23-c498-small-exceptional-normal-forms.json", "compare"),
-            ("checksum", "2026-07-23-c498-small-exceptional-normal-forms.sha256", "2026-07-23-c498-small-exceptional-normal-forms.sha256", "compare"),
+            ("generator-checker", "2026-07-23-small-exceptional-normal-forms.py", "2026-07-23-small-exceptional-normal-forms.py", "rederive"),
+            ("certificate", "2026-07-23-small-exceptional-normal-forms.json", "2026-07-23-small-exceptional-normal-forms.json", "compare"),
+            ("checksum", "2026-07-23-small-exceptional-normal-forms.sha256", "2026-07-23-small-exceptional-normal-forms.sha256", "compare"),
         ),
     ),
     (
         "Certificate R7",
         "r7",
         (
-            ("generator", "2026-07-23-c509-prs-deep-hole-calibration.py", "2026-07-23-c509-prs-deep-hole-calibration.py", "rederive"),
-            ("certificate", "2026-07-23-c509-prs-deep-hole-calibration.json", "2026-07-23-c509-prs-deep-hole-calibration.json", "compare"),
-            ("replay", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "2026-07-23-c509-prs-deep-hole-calibration-replay.py", "rederive"),
-            ("independent-arithmetic-replay", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "2026-07-26-c656-r7-independent-arithmetic-replay.py", "reconstruct"),
-            ("independent-direct-locus-replay", "2026-07-26-c545-r7-direct-locus-replay.py", "2026-07-26-c545-r7-direct-locus-replay.py", "rederive"),
-            ("independent-direct-locus-certificate", "2026-07-26-c545-r7-direct-locus-replay.json", "2026-07-26-c545-r7-direct-locus-replay.json", "compare"),
-            ("checksum", "2026-07-23-c509-prs-redundancy-seven.sha256", "2026-07-23-c509-prs-redundancy-seven.sha256", "compare"),
+            ("generator", "2026-07-23-prs-deep-hole-calibration.py", "2026-07-23-prs-deep-hole-calibration.py", "rederive"),
+            ("certificate", "2026-07-23-prs-deep-hole-calibration.json", "2026-07-23-prs-deep-hole-calibration.json", "compare"),
+            ("replay", "2026-07-23-prs-deep-hole-calibration-replay.py", "2026-07-23-prs-deep-hole-calibration-replay.py", "rederive"),
+            ("independent-arithmetic-replay", "2026-07-26-r7-independent-arithmetic-replay.py", "2026-07-26-r7-independent-arithmetic-replay.py", "reconstruct"),
+            ("independent-direct-locus-replay", "2026-07-26-r7-direct-locus-replay.py", "2026-07-26-r7-direct-locus-replay.py", "rederive"),
+            ("independent-direct-locus-certificate", "2026-07-26-r7-direct-locus-replay.json", "2026-07-26-r7-direct-locus-replay.json", "compare"),
+            ("checksum", "2026-07-23-prs-redundancy-seven.sha256", "2026-07-23-prs-redundancy-seven.sha256", "compare"),
         ),
     ),
     (
         "Companion Certificate SC",
         "stable-components",
         (
-            ("generator-checker", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "rederive"),
-            ("certificate", "2026-07-24-c597-r10-integral-bad-scheme-sc11.json", "2026-07-24-c597-r10-integral-bad-scheme-sc11.json", "compare"),
-            ("scheme-checker", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sing", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sing", "rederive"),
-            ("checksum", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256", "compare"),
-            ("fano-generator-checker", "2026-07-24-c595-stable-component-fano-elimination.py", "2026-07-24-c595-stable-component-fano-elimination.py", "rederive"),
-            ("fano-certificate", "2026-07-24-c595-stable-component-fano-elimination.json", "2026-07-24-c595-stable-component-fano-elimination.json", "compare"),
-            ("fano-scheme-checker", "2026-07-24-c595-stable-component-fano-elimination.sing", "2026-07-24-c595-stable-component-fano-elimination.sing", "rederive"),
-            ("fano-checksum", "2026-07-24-c595-stable-component-fano-elimination.sha256", "2026-07-24-c595-stable-component-fano-elimination.sha256", "compare"),
+            ("generator-checker", "2026-07-24-r10-integral-bad-scheme-sc11.py", "2026-07-24-r10-integral-bad-scheme-sc11.py", "rederive"),
+            ("certificate", "2026-07-24-r10-integral-bad-scheme-sc11.json", "2026-07-24-r10-integral-bad-scheme-sc11.json", "compare"),
+            ("scheme-checker", "2026-07-24-r10-integral-bad-scheme-sc11.sing", "2026-07-24-r10-integral-bad-scheme-sc11.sing", "rederive"),
+            ("checksum", "2026-07-24-r10-integral-bad-scheme-sc11.sha256", "2026-07-24-r10-integral-bad-scheme-sc11.sha256", "compare"),
+            ("fano-generator-checker", "2026-07-24-stable-component-fano-elimination.py", "2026-07-24-stable-component-fano-elimination.py", "rederive"),
+            ("fano-certificate", "2026-07-24-stable-component-fano-elimination.json", "2026-07-24-stable-component-fano-elimination.json", "compare"),
+            ("fano-scheme-checker", "2026-07-24-stable-component-fano-elimination.sing", "2026-07-24-stable-component-fano-elimination.sing", "rederive"),
+            ("fano-checksum", "2026-07-24-stable-component-fano-elimination.sha256", "2026-07-24-stable-component-fano-elimination.sha256", "compare"),
         ),
     ),
 )
 
 TOOLCHAIN_LOCKS = (
-    ("Lean toolchain", "papers/beyond4_prs/lean-toolchain", "toolchain/lean-toolchain"),
-    ("Lake dependency lock", "lean/lake-manifest.json", "toolchain/lake-manifest.json"),
-    ("Nix dependency lock", "papers/beyond4_prs/flake.lock", "toolchain/export-flake.lock"),
-    ("Nix environment", "papers/beyond4_prs/flake.nix", "toolchain/export-flake.nix"),
-    ("Rust dependency lock", "rust/Cargo.lock", "toolchain/Cargo.lock"),
+    ("Lean toolchain", "toolchain/lean-toolchain"),
+    ("Lake dependency lock", "toolchain/lake-manifest.json"),
+    ("Nix dependency lock", "toolchain/export-flake.lock"),
+    ("Nix environment", "toolchain/export-flake.nix"),
+    ("Rust dependency lock", "toolchain/Cargo.lock"),
 )
 
 PUBLIC_SUPPLEMENT_FILES = (
@@ -102,29 +101,25 @@ AUXILIARY_COPIES = (
     (
         "Certificate R6-NF",
         "dependency-replay",
-        "notes/2026-07-22-c498-prs-deep-hole-replay.py",
-        "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-replay.py",
+        "evidence/r6-normal-forms/2026-07-22-redundancy-six-deep-hole-replay.py",
         "reconstruct",
     ),
     (
         "Certificate R6-NF",
         "dependency-certificate",
-        "notes/2026-07-22-c498-prs-deep-hole-census.json",
-        "evidence/r6-normal-forms/2026-07-22-c498-prs-deep-hole-census.json",
+        "evidence/r6-normal-forms/2026-07-22-prs-deep-hole-census.json",
         "compare",
     ),
     (
         "Certificate R7",
         "dependency-replay",
-        "notes/2026-07-22-c498-prs-deep-hole-replay.py",
-        "evidence/r7/2026-07-22-c498-prs-deep-hole-replay.py",
+        "evidence/r7/2026-07-22-redundancy-six-deep-hole-replay.py",
         "reconstruct",
     ),
     (
         "Certificate R7",
         "dependency-r5-field-replay",
-        "notes/2026-07-22-c491-prs-deep-hole-replay.py",
-        "evidence/r7/2026-07-22-c491-prs-deep-hole-replay.py",
+        "evidence/r7/2026-07-22-redundancy-five-deep-hole-replay.py",
         "reconstruct",
     ),
 )
@@ -151,7 +146,7 @@ def expected_entries(supplement: Path) -> list[dict[str, object]]:
                     "replay_class": replay_class,
                 }
             )
-    for role, _source, public_path in TOOLCHAIN_LOCKS:
+    for role, public_path in TOOLCHAIN_LOCKS:
         relative = Path(public_path)
         sha256, size = digest(supplement / relative)
         entries.append(
@@ -177,7 +172,7 @@ def expected_entries(supplement: Path) -> list[dict[str, object]]:
                 "replay_class": "compare",
             }
         )
-    for label, role, _source, public_path, replay_class in AUXILIARY_COPIES:
+    for label, role, public_path, replay_class in AUXILIARY_COPIES:
         relative = Path(public_path)
         sha256, size = digest(supplement / relative)
         entries.append(
@@ -208,7 +203,7 @@ def rows_text(entries: list[dict[str, object]]) -> str:
     lines = [
         "# Evidence artifact rows",
         "",
-        "Generated by `package_evidence_bundle.py --build`; verified by",
+        "Generated by `package_evidence_bundle.py --write`; verified by",
         "`package_evidence_bundle.py --check`.",
         "",
         "| Public label | Role | Stable archive path | SHA-256 | Bytes | Replay class |",
@@ -232,30 +227,6 @@ def write_manifests(supplement: Path, entries: list[dict[str, object]]) -> None:
     )
 
 
-def build(development_root: Path, supplement: Path) -> None:
-    source_dir = development_root / "notes"
-    evidence_root = supplement / "evidence"
-    if evidence_root.exists():
-        shutil.rmtree(evidence_root)
-    toolchain_root = supplement / "toolchain"
-    if toolchain_root.exists():
-        shutil.rmtree(toolchain_root)
-    for _label, slug, files in BUNDLES:
-        target_dir = supplement / "evidence" / slug
-        target_dir.mkdir(parents=True, exist_ok=True)
-        for _role, source_name, public_name, _replay_class in files:
-            shutil.copyfile(source_dir / source_name, target_dir / public_name)
-    for _role, source_name, public_path in TOOLCHAIN_LOCKS:
-        target = supplement / public_path
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(development_root / source_name, target)
-    for _label, _role, source_name, public_path, _replay_class in AUXILIARY_COPIES:
-        target = supplement / public_path
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(development_root / source_name, target)
-    write_manifests(supplement, expected_entries(supplement))
-
-
 def check(supplement: Path) -> None:
     manifest_path = supplement / "EVIDENCE-MANIFEST.json"
     recorded_text = manifest_path.read_text(encoding="utf-8")
@@ -276,18 +247,16 @@ def check(supplement: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--build", action="store_true")
     mode.add_argument("--check", action="store_true")
-    parser.add_argument(
-        "--development-root",
-        type=Path,
-        default=Path(__file__).resolve().parents[3],
-        help="development repository root used only by --build",
+    mode.add_argument(
+        "--write",
+        action="store_true",
+        help="refresh canonical manifests from the current public evidence tree",
     )
     args = parser.parse_args()
     supplement = Path(__file__).resolve().parent
-    if args.build:
-        build(args.development_root.resolve(), supplement)
+    if args.write:
+        write_manifests(supplement, expected_entries(supplement))
     else:
         check(supplement)
 

@@ -2,99 +2,123 @@
   "schema": "ame-lu-evidence-manifest-v2",
   "artifacts": [
     {
-      "bytes": 15469,
-      "path": "evidence/2026-07-19-c374-clebsch-ame-equivalence.json",
-      "sha256": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d"
+      "bytes": 15476,
+      "path": "evidence/2026-07-19-clebsch-ame-equivalence.json",
+      "sha256": "f2fb460c3c90324bee53cabbe3b495db634fcbb3426c39183685564c48367210"
     },
     {
-      "bytes": 24690,
-      "path": "evidence/2026-07-19-c374-clebsch-ame-equivalence.py",
-      "sha256": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694"
+      "bytes": 24692,
+      "path": "evidence/2026-07-19-clebsch-ame-equivalence.py",
+      "sha256": "3cc76e380be2447fbf49a779320e8a2ceb2d55b92f62d834c36c3b83dbf38a79"
     },
     {
-      "bytes": 24069,
-      "path": "evidence/2026-07-20-c395-clebsch-ame-pencil-arithmetic.py",
-      "sha256": "a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52"
+      "bytes": 24090,
+      "path": "evidence/2026-07-20-clebsch-ame-pencil-arithmetic.py",
+      "sha256": "29475cf066640668d04a6ebd0f5bbc247670a5803256ec735de8a8acd2569fe5"
     },
     {
-      "bytes": 749580,
-      "path": "evidence/2026-07-23-c396-holonomy-completeness.json",
-      "sha256": "04b791acae107d24c81c589059c8a310c01e6feaac9c4713bdb1e9d323e29031"
+      "bytes": 749592,
+      "path": "evidence/2026-07-23-holonomy-completeness.json",
+      "sha256": "0e8d608df0a8024b8dd7dc8f3e39bfad1fad2b222a3452a0da0b8bb09764eec1"
     },
     {
-      "bytes": 41305,
-      "path": "evidence/2026-07-23-c396-holonomy-completeness.py",
-      "sha256": "b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49"
+      "bytes": 41571,
+      "path": "evidence/2026-07-23-holonomy-completeness.py",
+      "sha256": "3d7dcc5a98bafca6c215dc66b024795a9dc024c21fb15d2f5f2063d7a6446f10"
     },
     {
       "bytes": 225468,
-      "path": "evidence/2026-07-23-c397-ame-perfect-tensor-physics.json",
-      "sha256": "c0a2df44ad991f59bb95182544bf4ac8d39d7a997c6bd1ea987e4020266c1dfd"
+      "path": "evidence/2026-07-23-ame-perfect-tensor-physics.json",
+      "sha256": "0fea19c906fd4ea546c822cf622c81d2721ba40c765ffa39a6badd852c29a7f3"
     },
     {
-      "bytes": 30099,
-      "path": "evidence/2026-07-23-c397-ame-perfect-tensor-physics.py",
-      "sha256": "360ded0f7e07fdac30e575474336645e05909ad15a1e0e6729a071e7a88cddf3"
+      "bytes": 30814,
+      "path": "evidence/2026-07-23-ame-perfect-tensor-physics.py",
+      "sha256": "075f8d6c36b252c66f82e549491d7afa460218d4f96840d0e6cf86a288ed25b7"
     },
     {
-      "bytes": 12677,
-      "path": "evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.json",
-      "sha256": "f324ea645f9ac10e8dee150b9d5e5c321547f23d3925dda78d556f31db521320"
+      "bytes": 12689,
+      "path": "evidence/2026-07-23-h3-ame-uniform-lu-separation.json",
+      "sha256": "9aa997194da8de379d0b5832a1953d63bd30971f1170d1176f1d000f981ec2cc"
     },
     {
-      "bytes": 28651,
-      "path": "evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py",
-      "sha256": "914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627"
+      "bytes": 28682,
+      "path": "evidence/2026-07-23-h3-ame-uniform-lu-separation.py",
+      "sha256": "a3f1ceeceb9d479e6290841e33c09df615756c7b9cf93ef1f0c3ca9d6a002fb3"
     },
     {
-      "bytes": 14294,
-      "path": "evidence/2026-07-23-c546-h3-pentad-orientation-lu.json",
-      "sha256": "c335a719a59c93e6ef4ce62812b142261f2c5d2724baf2d5a68348f25a64bf8c"
+      "bytes": 14303,
+      "path": "evidence/2026-07-23-h3-pentad-orientation-lu.json",
+      "sha256": "e45079d568b08597d514945c0e1ec0aad539d208e02e4da7ee110975eb6322b3"
     },
     {
-      "bytes": 9836,
-      "path": "evidence/2026-07-23-c546-h3-pentad-orientation-lu.py",
-      "sha256": "ef0b439b31c1f764247d8766474004d11211c6148a66ce702ffc373c5fe3aee6"
+      "bytes": 10062,
+      "path": "evidence/2026-07-23-h3-pentad-orientation-lu.py",
+      "sha256": "906c35a63308ab83d8169f508debe113945f94c85a5596443ffed7eb1921999b"
     },
     {
-      "bytes": 12178,
-      "path": "evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.json",
-      "sha256": "31f0ad316e1f8c199d502b3da050fd4371083330c89854790b693c262452c3ca"
+      "bytes": 12193,
+      "path": "evidence/2026-07-23-contraction-rank-drop-divisor.json",
+      "sha256": "9ca05a5ed99bb5342ecff817dc964c6f9424ca4cdd69684298b8cd938225525b"
     },
     {
-      "bytes": 31948,
-      "path": "evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py",
-      "sha256": "1ded3f75a2100c6f53b62498fa7a84c99d91b477b9f9ee3734d68a8c9b19d6f1"
+      "bytes": 31985,
+      "path": "evidence/2026-07-23-contraction-rank-drop-divisor.py",
+      "sha256": "abd4f23d1ac3b4c610eb3c0a5610866bd941dccdf3bcd59550fa5fd81bb4f1df"
     },
     {
-      "bytes": 12197,
-      "path": "evidence/2026-07-23-c550-four-copy-cover-holonomy.json",
-      "sha256": "9d3bcb92d97d8fc84d4459cde906894d40e9c542d8ab389b5cf0b4fe29e5bda3"
+      "bytes": 12228,
+      "path": "evidence/2026-07-23-four-copy-cover-holonomy.json",
+      "sha256": "d3ac33676b2816c46478b435d33d1bc99057eb8a8ac15e45203cbdd033715c85"
     },
     {
-      "bytes": 27591,
-      "path": "evidence/2026-07-23-c550-four-copy-cover-holonomy.py",
-      "sha256": "3709c9f0578c4868a838f67a56b5fa6cec41e1571c288d1a26eb2997005d52a7"
+      "bytes": 29015,
+      "path": "evidence/2026-07-23-four-copy-cover-holonomy.py",
+      "sha256": "f07863591a2ef87f6dd6ff22c339325b6ad67dacc4acaed0590f0921de051ae6"
     },
     {
-      "bytes": 622347,
-      "path": "evidence/2026-07-25-c624-ame-lu-party-extension-examples.json",
-      "sha256": "94171665d436cccc2182fc81b4d0cdfaa714262c92f2a4917b6589c9a709d35d"
+      "bytes": 622348,
+      "path": "evidence/2026-07-25-ame-lu-party-extension-examples.json",
+      "sha256": "fcc903793d9329e12c3739fe3e524d75b809f7290bc3197d9a59ffe26c428d05"
     },
     {
-      "bytes": 29460,
-      "path": "evidence/2026-07-25-c624-ame-lu-party-extension-examples.py",
-      "sha256": "6f74915274e6b142b42ea52dc0c46633693700f52378590121c220d1e51a7840"
+      "bytes": 29838,
+      "path": "evidence/2026-07-25-ame-lu-party-extension-examples.py",
+      "sha256": "0a43695889d863fdd34fb45cad3fee30c3f5e9d7ee9696ed27e1b13413eae00b"
     }
   ],
   "replays": [
-    ["evidence/2026-07-19-c374-clebsch-ame-equivalence.py", "--check"],
-    ["evidence/2026-07-23-c396-holonomy-completeness.py", "--check"],
-    ["evidence/2026-07-23-c397-ame-perfect-tensor-physics.py", "--check"],
-    ["evidence/2026-07-23-c402-h3-ame-uniform-lu-separation.py", "--check"],
-    ["evidence/2026-07-23-c546-h3-pentad-orientation-lu.py", "--check"],
-    ["evidence/2026-07-23-c548-c397-contraction-rank-drop-divisor.py", "--check"],
-    ["evidence/2026-07-23-c550-four-copy-cover-holonomy.py", "--check"],
-    ["evidence/2026-07-25-c624-ame-lu-party-extension-examples.py", "--check"]
+    [
+      "evidence/2026-07-19-clebsch-ame-equivalence.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-holonomy-completeness.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-ame-perfect-tensor-physics.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-h3-ame-uniform-lu-separation.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-h3-pentad-orientation-lu.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-contraction-rank-drop-divisor.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-23-four-copy-cover-holonomy.py",
+      "--check"
+    ],
+    [
+      "evidence/2026-07-25-ame-lu-party-extension-examples.py",
+      "--check"
+    ]
   ]
 }

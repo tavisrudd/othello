@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact C396 checker for the Clebsch AME pencil over finite fields."""
+"""Exact HOLONOMY_COMPLETENESS checker for the Clebsch AME pencil over finite fields."""
 
 from __future__ import annotations
 
@@ -15,26 +15,26 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 HERE = Path(__file__).resolve().parent
-INPUT = HERE / "2026-07-20-c395-clebsch-ame-pencil-arithmetic.py"
-INPUT_SHA256 = "a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52"
-CERTIFICATE = HERE / "2026-07-23-c396-holonomy-completeness.json"
+INPUT = HERE / "2026-07-20-clebsch-ame-pencil-arithmetic.py"
+INPUT_SHA256 = "29475cf066640668d04a6ebd0f5bbc247670a5803256ec735de8a8acd2569fe5"
+CERTIFICATE = HERE / "2026-07-23-holonomy-completeness.json"
 
 
 def load_input():
     digest = hashlib.sha256(INPUT.read_bytes()).hexdigest()
     if digest != INPUT_SHA256:
-        raise AssertionError(f"stale C395 input: {digest}")
-    spec = importlib.util.spec_from_file_location("c395_c396_input", INPUT)
+        raise AssertionError(f"stale PENCIL_ARITHMETIC input: {digest}")
+    spec = importlib.util.spec_from_file_location("pencil_arithmetic_holonomy_completeness_input", INPUT)
     if spec is None or spec.loader is None:
-        raise AssertionError("cannot load C395 input")
+        raise AssertionError("cannot load PENCIL_ARITHMETIC input")
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
 
-C395 = load_input()
-FiniteField = C395.FiniteField
+PENCIL_ARITHMETIC = load_input()
+FiniteField = PENCIL_ARITHMETIC.FiniteField
 Element = tuple[int, ...]
 Vector = tuple[Element, ...]
 Matrix = tuple[Vector, ...]
@@ -603,7 +603,7 @@ def symbolic_holonomy_certificate() -> dict[str, object]:
             qdet3(tuple(points[index] for index in first_triple)),
             qdet3(tuple(points[index] for index in second_triple)),
         )
-        if C395.permutation_sign(first_triple + second_triple) < 0:
+        if PENCIL_ARITHMETIC.permutation_sign(first_triple + second_triple) < 0:
             value = qneg(value)
         bracket_products[value] += 1
     if bracket_products != {
@@ -850,12 +850,12 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
     quartic = (1, -4, 7, -4, 1)
     parameters = []
     for parameter in field.elements():
-        points = C395.ff_points(field, parameter)
+        points = PENCIL_ARITHMETIC.ff_points(field, parameter)
         arc = all(
-            C395.ff_det3(field, tuple(points[index] for index in triple)) != field.zero
+            PENCIL_ARITHMETIC.ff_det3(field, tuple(points[index] for index in triple)) != field.zero
             for triple in itertools.combinations(range(N), 3)
         )
-        conic = C395.ff_determinant(
+        conic = PENCIL_ARITHMETIC.ff_determinant(
             field,
             tuple(
                 (
@@ -880,7 +880,7 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
     classes: dict[PointSet, list[Element]] = {}
     z_buckets: dict[Element, list[Element]] = {}
     for parameter in parameters:
-        points = C395.ff_points(field, parameter)
+        points = PENCIL_ARITHMETIC.ff_points(field, parameter)
         classes.setdefault(canonical_arc(field, points), []).append(parameter)
         z_buckets.setdefault(parameter_z(field, parameter), []).append(parameter)
     if sorted(sorted(values) for values in classes.values()) != sorted(
@@ -894,7 +894,7 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
     ] = {}
     for class_index, (canonical, class_parameters) in enumerate(sorted(classes.items())):
         representative = min(class_parameters)
-        points = C395.ff_points(field, representative)
+        points = PENCIL_ARITHMETIC.ff_points(field, representative)
         code = code_from_points(field, points)
         signature = cycle_signature(field, code)
         signature_buckets.setdefault(signature, []).append(class_index)
@@ -927,7 +927,7 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
             verify_projectivity(
                 field,
                 points,
-                C395.ff_points(field, parameter),
+                PENCIL_ARITHMETIC.ff_points(field, parameter),
                 matrix,
                 permutation,
             )
@@ -951,13 +951,13 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
                     {
                         "parameter": encode_element(parameter),
                         **normalizing_witness(
-                            field, C395.ff_points(field, parameter), canonical
+                            field, PENCIL_ARITHMETIC.ff_points(field, parameter), canonical
                         ),
                     }
                     for parameter in sorted(class_parameters)
                 ],
                 "conic_evaluation_determinant": encode_element(
-                    C395.ff_determinant(
+                    PENCIL_ARITHMETIC.ff_determinant(
                         field,
                         tuple(
                             (
@@ -989,13 +989,13 @@ def field_certificate(p: int, modulus: Sequence[int], full_replay: bool) -> dict
     if any(len(indices) != 1 for indices in signature_buckets.values()):
         raise AssertionError(f"holonomy collision over F_{field.order}")
     for left, right in itertools.combinations(class_rows, 2):
-        left_points = C395.ff_points(
+        left_points = PENCIL_ARITHMETIC.ff_points(
             field,
             tuple(left["representative"])
             if isinstance(left["representative"], list)
             else field.element(int(left["representative"])),
         )
-        right_points = C395.ff_points(
+        right_points = PENCIL_ARITHMETIC.ff_points(
             field,
             tuple(right["representative"])
             if isinstance(right["representative"], list)
@@ -1064,7 +1064,7 @@ def build_certificate() -> dict[str, object]:
     ):
         raise AssertionError("q=31 tetrahedral holonomy-bin collision missing")
     return {
-        "schema": "c396-holonomy-completeness-v1",
+        "schema": "holonomy_completeness-holonomy-completeness-v1",
         "input": {"path": INPUT.name, "sha256": INPUT_SHA256},
         "symbolic": symbolic,
         "fields": rows,
@@ -1102,7 +1102,7 @@ def main() -> None:
         return
     if CERTIFICATE.read_bytes() != generated:
         raise SystemExit("certificate is stale; rerun with --write")
-    print("C396 certificate OK: q=13 moment collision; no replay holonomy collisions")
+    print("HOLONOMY_COMPLETENESS certificate OK: q=13 moment collision; no replay holonomy collisions")
 
 
 if __name__ == "__main__":

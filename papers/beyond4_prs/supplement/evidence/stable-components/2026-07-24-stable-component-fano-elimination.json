@@ -167,7 +167,7 @@
       "residual": "none"
     }
   },
-  "schema": "c595-stable-component-fano-elimination-v1",
+  "schema": "stable_component_identities-stable-component-fano-elimination-v1",
   "small_characteristic_controls": {
     "2": {
       "cyclic_points_outside_persistent_or_modular": 0,

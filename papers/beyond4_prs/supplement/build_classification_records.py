@@ -14,23 +14,23 @@ OUT = SUPPLEMENT / "CLASSIFICATION-RECORDS.json"
 
 ARTIFACTS = {
     "R5": (
-        "evidence/r5/2026-07-22-c491-prs-deep-hole-census.py",
-        "evidence/r5/2026-07-22-c491-prs-deep-hole-census.json",
-        "evidence/r5/2026-07-22-c491-prs-deep-hole-replay.py",
+        "evidence/r5/2026-07-22-prs-deep-hole-census.py",
+        "evidence/r5/2026-07-22-prs-deep-hole-census.json",
+        "evidence/r5/2026-07-22-redundancy-five-deep-hole-replay.py",
     ),
     "R6": (
-        "evidence/r6/2026-07-22-c498-prs-deep-hole-census.rs",
-        "evidence/r6/2026-07-22-c498-prs-deep-hole-census.json",
-        "evidence/r6/2026-07-22-c498-prs-deep-hole-replay.py",
+        "evidence/r6/2026-07-22-prs-deep-hole-census.rs",
+        "evidence/r6/2026-07-22-prs-deep-hole-census.json",
+        "evidence/r6/2026-07-22-redundancy-six-deep-hole-replay.py",
     ),
     "R6-NF": (
-        "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.py",
-        "evidence/r6-normal-forms/2026-07-23-c498-small-exceptional-normal-forms.json",
+        "evidence/r6-normal-forms/2026-07-23-small-exceptional-normal-forms.py",
+        "evidence/r6-normal-forms/2026-07-23-small-exceptional-normal-forms.json",
     ),
     "R7": (
-        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.py",
-        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration.json",
-        "evidence/r7/2026-07-23-c509-prs-deep-hole-calibration-replay.py",
+        "evidence/r7/2026-07-23-prs-deep-hole-calibration.py",
+        "evidence/r7/2026-07-23-prs-deep-hole-calibration.json",
+        "evidence/r7/2026-07-23-prs-deep-hole-calibration-replay.py",
     ),
 }
 

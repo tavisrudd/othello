@@ -31,6 +31,7 @@ class Fixture:
         run(self.root, "git", "init", "-q")
         run(self.root, "git", "config", "user.name", "C684 Test")
         run(self.root, "git", "config", "user.email", "c684@example.invalid")
+        run(self.root, "git", "config", "commit.gpgsign", "false")
         (self.root / "lean/trust").mkdir(parents=True)
         (self.root / "papers/demo").mkdir(parents=True)
         (self.root / "papers/scripts").mkdir(parents=True)
@@ -186,13 +187,30 @@ class ExportPlannerTests(unittest.TestCase):
 
     def test_detects_task_ids_but_preserves_mathematical_class_labels(self) -> None:
         (self.fx.root / "papers/demo/main.tex").write_text(
-            "Classes C01 and C15 remain public; lane C684 does not.\n"
+            "Classes C01 and C15 remain public; lanes C684 and c685 do not.\n"
+            "A SHA-256 value beginning c216d8ba is not a task identifier.\n"
         )
         run(self.fx.root, "git", "add", "papers/demo/main.tex")
         run(self.fx.root, "git", "commit", "-qm", "task identifier")
         commit = self.fx.output("git", "rev-parse", "HEAD").strip()
         findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
-        self.assertEqual(findings, [{"code": "task-lane-id", "path": "main.tex", "line": 1}])
+        self.assertEqual(
+            findings,
+            [
+                {"code": "task-lane-id", "path": "main.tex", "line": 1},
+            ],
+        )
+
+    def test_detects_task_id_in_path(self) -> None:
+        (self.fx.root / "papers/demo/c684-check.py").write_text("print('public')\n")
+        run(self.fx.root, "git", "add", "papers/demo/c684-check.py")
+        run(self.fx.root, "git", "commit", "-qm", "task path")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
+        self.assertEqual(
+            findings,
+            [{"code": "task-lane-path", "path": "c684-check.py", "line": 0}],
+        )
 
     def test_detects_internal_process_file_by_path(self) -> None:
         (self.fx.root / "papers/demo/second-draft-fix-plan.md").write_text("private\n")
@@ -210,6 +228,46 @@ class ExportPlannerTests(unittest.TestCase):
                 }
             ],
         )
+
+    def test_explicit_regular_file_exclusion_is_recorded_and_validated(self) -> None:
+        (self.fx.root / "papers/demo/private-review.md").write_text("lane C684\n")
+        mapping = (self.fx.root / "papers/repositories.toml").read_text()
+        mapping += """\
+[[repository.exclude_path]]
+path = "private-review.md"
+reason = "private review record"
+"""
+        (self.fx.root / "papers/repositories.toml").write_text(mapping)
+        run(
+            self.fx.root,
+            "git",
+            "add",
+            "papers/demo/private-review.md",
+            "papers/repositories.toml",
+        )
+        run(self.fx.root, "git", "commit", "-qm", "regular exclusion")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        plan = exporter.build_plan(commit)["repositories"][0]
+        self.assertEqual(plan["excluded_paths"], 1)
+        self.assertEqual(plan["reference_findings"], [])
+        manifest = exporter.materialize_repository(
+            commit, "demo-paper", self.fx.root / "excluded"
+        )
+        self.assertFalse((self.fx.root / "excluded/private-review.md").exists())
+        self.assertEqual(
+            manifest["excluded_paths"],
+            [{"path": "private-review.md", "reason": "private review record"}],
+        )
+
+    def test_regular_file_exclusion_refuses_main_or_missing_path(self) -> None:
+        mapping, papers = self.mapping()
+        row = mapping["repository"][0]
+        row["exclude_path"] = [{"path": "main.tex", "reason": "fixture"}]
+        with self.assertRaisesRegex(exporter.Refused, "cannot exclude main"):
+            exporter.plan_repository(self.fx.commit, row, papers)
+        row["exclude_path"] = [{"path": "missing.md", "reason": "fixture"}]
+        with self.assertRaisesRegex(exporter.Refused, "absent or not regular"):
+            exporter.plan_repository(self.fx.commit, row, papers)
 
     def test_exact_rewrite_clears_reference_and_refuses_drift(self) -> None:
         data = b"python3 papers/demo/check.py\n"

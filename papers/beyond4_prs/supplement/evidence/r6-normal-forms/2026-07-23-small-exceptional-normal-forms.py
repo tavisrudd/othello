@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Derive intrinsic labels for C498's frozen small exceptional orbits.
+"""Derive intrinsic labels for REDUNDANCY_SIX's frozen small exceptional orbits.
 
-This is a read-only analysis of the canonical C498 census certificate.  It
+This is a read-only analysis of the canonical REDUNDANCY_SIX census certificate.  It
 reconstructs the unique apolar cubic of every trivial-gcd quintic syndrome,
 checks it by two independent kernel calculations, constructs the complete
 pointed first-polar quotient-pencil profile, and verifies that its shared-root
@@ -10,7 +10,7 @@ exactly the PGammaL2 orbits.
 
 Run from the repository root:
 
-  python3 notes/2026-07-23-c498-small-exceptional-normal-forms.py
+  python3 2026-07-23-small-exceptional-normal-forms.py
 """
 
 import argparse
@@ -24,14 +24,14 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-CENSUS = HERE / "2026-07-22-c498-prs-deep-hole-census.json"
-REPLAY = HERE / "2026-07-22-c498-prs-deep-hole-replay.py"
-OUTPUT = HERE / "2026-07-23-c498-small-exceptional-normal-forms.json"
+CENSUS = HERE / "2026-07-22-prs-deep-hole-census.json"
+REPLAY = HERE / "2026-07-22-redundancy-six-deep-hole-replay.py"
+OUTPUT = HERE / "2026-07-23-small-exceptional-normal-forms.json"
 FIELDS = (7, 8, 9, 11, 13)
 
 
 def load_replay():
-    spec = importlib.util.spec_from_file_location("c498_replay", REPLAY)
+    spec = importlib.util.spec_from_file_location("redundancy_six_replay", REPLAY)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -232,7 +232,7 @@ def cubic_pencil_profile(replay, F, quintic, marker):
                 else evaluate(F, cubic, marker)
             )
             marked_split += value == 0
-    # For a C498 deep net, every split quotient cubic must contain its
+    # For a REDUNDANCY_SIX deep net, every split quotient cubic must contain its
     # prescribed marker; otherwise it lifts to a split squarefree quartic.
     assert split == marked_split
     return histogram_key(histogram)
@@ -385,7 +385,7 @@ def build_certificate():
     data = json.loads(CENSUS.read_text())
     total = 0
     certificate = {
-        "schema": "c498-small-exceptional-normal-forms-v1",
+        "schema": "redundancy_six-small-exceptional-normal-forms-v1",
         "source": {
             "census": CENSUS.name,
             "census_sha256": sha256(CENSUS),

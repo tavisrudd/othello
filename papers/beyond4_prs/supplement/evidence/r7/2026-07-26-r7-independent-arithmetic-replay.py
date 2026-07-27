@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Recompute Certificate R7 with field arithmetic independent of C509.
+"""Recompute Certificate R7 with field arithmetic independent of REDUNDANCY_SEVEN_CALIBRATION.
 
-This imports C509's quotient enumerator but neither its JSON classification
+This imports REDUNDANCY_SEVEN_CALIBRATION's quotient enumerator but neither its JSON classification
 nor any stored orbit partition.  It replaces the generator's finite-field
 implementation by the separately written R5 replay field, reconstructs the
 pointed complements and complete sextic split-free set, and compares the
@@ -16,14 +16,14 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 if HERE.name == "r7" and HERE.parent.name == "evidence":
-    R5_PATH = HERE / "2026-07-22-c491-prs-deep-hole-replay.py"
-    C509_PATH = HERE / "2026-07-23-c509-prs-deep-hole-calibration.py"
-    DATA = HERE / "2026-07-23-c509-prs-deep-hole-calibration.json"
+    R5_PATH = HERE / "2026-07-22-redundancy-five-deep-hole-replay.py"
+    REDUNDANCY_SEVEN_CALIBRATION_PATH = HERE / "2026-07-23-prs-deep-hole-calibration.py"
+    DATA = HERE / "2026-07-23-prs-deep-hole-calibration.json"
 else:
     ROOT = HERE.parent
-    R5_PATH = ROOT / "notes/2026-07-22-c491-prs-deep-hole-replay.py"
-    C509_PATH = ROOT / "notes/2026-07-23-c509-prs-deep-hole-calibration.py"
-    DATA = ROOT / "notes/2026-07-23-c509-prs-deep-hole-calibration.json"
+    R5_PATH = ROOT / "2026-07-22-redundancy-five-deep-hole-replay.py"
+    REDUNDANCY_SEVEN_CALIBRATION_PATH = ROOT / "2026-07-23-prs-deep-hole-calibration.py"
+    DATA = ROOT / "2026-07-23-prs-deep-hole-calibration.json"
 
 
 def load(name, path):
@@ -34,8 +34,8 @@ def load(name, path):
     return module
 
 
-R5 = load("c656_r5_field", R5_PATH)
-C509 = load("c656_c509", C509_PATH)
+R5 = load("redundancy_seven_replay_r5_field", R5_PATH)
+REDUNDANCY_SEVEN_CALIBRATION = load("redundancy_seven_replay_redundancy_seven_calibration", REDUNDANCY_SEVEN_CALIBRATION_PATH)
 R5.MODULI.setdefault(32, (2, [1, 0, 1, 0, 0]))
 
 
@@ -86,11 +86,11 @@ def main():
         row["q"]: row
         for row in json.loads(DATA.read_text(encoding="utf-8"))["fields"]
     }
-    original = C509.C498.GF
-    C509.C498.GF = IndependentGF
+    original = REDUNDANCY_SEVEN_CALIBRATION.REDUNDANCY_SIX.GF
+    REDUNDANCY_SEVEN_CALIBRATION.REDUNDANCY_SIX.GF = IndependentGF
     try:
         for q in fields:
-            actual = C509.census_field(q, verify_pointed=())
+            actual = REDUNDANCY_SEVEN_CALIBRATION.census_field(q, verify_pointed=())
             assert {k: actual[k] for k in KEYS} == {k: expected[q][k] for k in KEYS}, q
             print(
                 f"q={q}: pointed={actual['pointed_bad_count']} "
@@ -98,7 +98,7 @@ def main():
                 flush=True,
             )
     finally:
-        C509.C498.GF = original
+        REDUNDANCY_SEVEN_CALIBRATION.REDUNDANCY_SIX.GF = original
 
 
 if __name__ == "__main__":

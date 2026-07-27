@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay of C509's bounded redundancy-seven calibration.
+"""Independent replay of REDUNDANCY_SEVEN_CALIBRATION's bounded redundancy-seven calibration.
 
 This checker does not use the generator's pointed-contraction test.  It checks
 every recorded orbit representative against the original geometric definition:
@@ -16,13 +16,13 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-C498_PATH = HERE / "2026-07-22-c498-prs-deep-hole-replay.py"
-DATA_PATH = HERE / "2026-07-23-c509-prs-deep-hole-calibration.json"
-SPEC = importlib.util.spec_from_file_location("c498_replay", C498_PATH)
-C498 = importlib.util.module_from_spec(SPEC)
+REDUNDANCY_SIX_PATH = HERE / "2026-07-22-redundancy-six-deep-hole-replay.py"
+DATA_PATH = HERE / "2026-07-23-prs-deep-hole-calibration.json"
+SPEC = importlib.util.spec_from_file_location("redundancy_six_replay", REDUNDANCY_SIX_PATH)
+REDUNDANCY_SIX = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
-SPEC.loader.exec_module(C498)
-C498.MODULI.setdefault(32, (2, [1, 0, 1, 0, 0]))
+SPEC.loader.exec_module(REDUNDANCY_SIX)
+REDUNDANCY_SIX.MODULI.setdefault(32, (2, [1, 0, 1, 0, 0]))
 
 
 FIELDS = (7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32)
@@ -84,14 +84,14 @@ def orbit(F, start):
         sym6_matrix(F, (1, 1, 0, 1)),
         sym6_matrix(F, (F.gen, 0, 0, 1)),
     )
-    start = C498.canon(F, start)
-    seen = {C498.encode(F, start)}
+    start = REDUNDANCY_SIX.canon(F, start)
+    seen = {REDUNDANCY_SIX.encode(F, start)}
     todo = [start]
     while todo:
         current = todo.pop()
         for matrix in generators:
-            image = C498.canon(F, matvec(F, matrix, current))
-            code = C498.encode(F, image)
+            image = REDUNDANCY_SIX.canon(F, matvec(F, matrix, current))
+            code = REDUNDANCY_SIX.encode(F, image)
             if code not in seen:
                 seen.add(code)
                 todo.append(image)
@@ -102,7 +102,7 @@ def deep_by_five_secants(F, vector):
     points = curve(F)
     for indices in itertools.combinations(range(F.q + 1), 5):
         rows = [points[i] for i in indices] + [vector]
-        if C498.matrix_rank(F, rows) <= 5:
+        if REDUNDANCY_SIX.matrix_rank(F, rows) <= 5:
             return False
     return True
 
@@ -116,7 +116,7 @@ def expected_persistent_orbits(F):
 
 def replay_field(record):
     q = record["q"]
-    F = C498.GF(q)
+    F = REDUNDANCY_SIX.GF(q)
     seen = set()
     reps = {row["representative_index"] for row in record["orbits"]}
     exceptional_profile = {}
@@ -125,14 +125,14 @@ def replay_field(record):
     frobenius = {}
     for row in record["orbits"]:
         representative = tuple(row["representative"])
-        assert C498.encode(F, representative) == row["representative_index"]
+        assert REDUNDANCY_SIX.encode(F, representative) == row["representative_index"]
         assert deep_by_five_secants(F, representative)
         component = orbit(F, representative)
         assert len(component) == row["size"]
         assert not (component & seen)
         seen |= component
         assert (q ** 3 - q) // len(component) == row["stabilizer_order"]
-        fv = C498.canon(F, tuple(F.pow(x, F.p) for x in representative))
+        fv = REDUNDANCY_SIX.canon(F, tuple(F.pow(x, F.p) for x in representative))
         target = min(orbit(F, fv))
         assert target == row["frobenius_to_representative_index"]
         assert target in reps
@@ -181,11 +181,11 @@ def replay_field(record):
 
 def main():
     payload = json.loads(DATA_PATH.read_text())
-    assert payload["schema"] == "c509-prs-redundancy-seven-calibration-v1"
+    assert payload["schema"] == "redundancy_seven_calibration-prs-redundancy-seven-calibration-v1"
     assert tuple(row["q"] for row in payload["fields"]) == FIELDS
     for record in payload["fields"]:
         replay_field(record)
-    print("C509 bounded-field independent replay: ALL CHECKS PASS")
+    print("REDUNDANCY_SEVEN_CALIBRATION bounded-field independent replay: ALL CHECKS PASS")
 
 
 if __name__ == "__main__":

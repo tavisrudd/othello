@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact certificate for C546's odd-pentad local-Clifford lift."""
+"""Exact certificate for PENTAD_ORIENTATION's odd-pentad local-Clifford lift."""
 
 from __future__ import annotations
 
@@ -13,29 +13,29 @@ from pathlib import Path
 from typing import Sequence
 
 HERE = Path(__file__).resolve().parent
-INPUT = HERE / "2026-07-23-c402-h3-ame-uniform-lu-separation.py"
-INPUT_SHA256 = "914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627"
-CERTIFICATE = HERE / "2026-07-23-c546-h3-pentad-orientation-lu.json"
+INPUT = HERE / "2026-07-23-h3-ame-uniform-lu-separation.py"
+INPUT_SHA256 = "a3f1ceeceb9d479e6290841e33c09df615756c7b9cf93ef1f0c3ca9d6a002fb3"
+CERTIFICATE = HERE / "2026-07-23-h3-pentad-orientation-lu.json"
 PERMUTATION = (0, 1, 4, 5, 3, 2)
 PENTAD = frozenset(
     ("01|23|45", "02|15|34", "03|14|25", "04|12|35", "05|13|24")
 )
 
 
-def load_c402():
+def load_h3_lu_separation():
     digest = hashlib.sha256(INPUT.read_bytes()).hexdigest()
     if digest != INPUT_SHA256:
-        raise AssertionError(f"stale C402 input: {digest}")
-    spec = importlib.util.spec_from_file_location("c402_c546_input", INPUT)
+        raise AssertionError(f"stale H3_LU_SEPARATION input: {digest}")
+    spec = importlib.util.spec_from_file_location("h3_lu_separation_pentad_orientation_input", INPUT)
     if spec is None or spec.loader is None:
-        raise AssertionError("cannot load C402 input")
+        raise AssertionError("cannot load H3_LU_SEPARATION input")
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
 
-C402 = load_c402()
+H3_LU_SEPARATION = load_h3_lu_separation()
 
 
 def determinant3(entries):
@@ -72,7 +72,7 @@ def preserves_pentad(permutation: Sequence[int]) -> bool:
 
 
 def exact_integral_identity() -> dict[str, object]:
-    z, o, tau = C402.GOLDEN_ZERO, C402.GOLDEN_ONE, C402.TAU
+    z, o, tau = H3_LU_SEPARATION.GOLDEN_ZERO, H3_LU_SEPARATION.GOLDEN_ONE, H3_LU_SEPARATION.TAU
     points = (
         (z, o, o - tau),
         (z, o, tau - o),
@@ -84,7 +84,7 @@ def exact_integral_identity() -> dict[str, object]:
     parity_check = tuple(
         tuple(points[column][row] for column in range(6)) for row in range(3)
     )
-    generator = C402.nullspace_generic(
+    generator = H3_LU_SEPARATION.nullspace_generic(
         parity_check, 6, z, o, lambda value: value.inverse()
     )
     generator_points = tuple(
@@ -113,7 +113,7 @@ def exact_integral_identity() -> dict[str, object]:
         raise AssertionError("unexpected projectivity determinant norm")
     if tuple(multiplier.norm() for multiplier in multipliers) != (1, 1, -1, -1, -1, -1):
         raise AssertionError("unexpected multiplier norms")
-    if C402.permutation_even(PERMUTATION) or not preserves_pentad(PERMUTATION):
+    if H3_LU_SEPARATION.permutation_even(PERMUTATION) or not preserves_pentad(PERMUTATION):
         raise AssertionError("representative must be in the odd pentad coset")
     return {
         "base_ring": "Z[tau], tau^2=tau+1",
@@ -146,7 +146,7 @@ def mod_det3(entries: Sequence[int], q: int) -> int:
 
 
 def projective_isodual_permutations(q: int, tau: int) -> tuple[tuple[int, ...], ...]:
-    C402.Q = q
+    H3_LU_SEPARATION.Q = q
     columns = (
         (0, 1, 1 - tau),
         (0, 1, tau - 1),
@@ -158,7 +158,7 @@ def projective_isodual_permutations(q: int, tau: int) -> tuple[tuple[int, ...], 
     parity_check = tuple(
         tuple(columns[column][row] % q for column in range(6)) for row in range(3)
     )
-    generator = C402.mod_nullspace(parity_check, 6)
+    generator = H3_LU_SEPARATION.mod_nullspace(parity_check, 6)
     generator_points = tuple(
         tuple(generator[row][column] for row in range(3)) for column in range(6)
     )
@@ -180,7 +180,7 @@ def projective_isodual_permutations(q: int, tau: int) -> tuple[tuple[int, ...], 
                         row[3 * second + index] - source[index] * target[first]
                     ) % q
                 equations.append(tuple(row))
-        solutions = C402.mod_nullspace(tuple(equations), 9)
+        solutions = H3_LU_SEPARATION.mod_nullspace(tuple(equations), 9)
         if len(solutions) == 1 and mod_det3(solutions[0], q):
             result.append(tuple(permutation))
     return tuple(result)
@@ -191,7 +191,7 @@ def field_replay(q: int, tau: int) -> dict[str, object]:
     odd = tuple(
         permutation
         for permutation in permutations
-        if not C402.permutation_even(permutation)
+        if not H3_LU_SEPARATION.permutation_even(permutation)
     )
     pentad = tuple(permutation for permutation in permutations if preserves_pentad(permutation))
     if len(permutations) != 60 or odd != permutations or pentad != permutations:
@@ -212,7 +212,7 @@ def field_replay(q: int, tau: int) -> dict[str, object]:
 
 def build_certificate() -> dict[str, object]:
     return {
-        "schema": "c546-h3-pentad-orientation-lu-v1",
+        "schema": "pentad_orientation-h3-pentad-orientation-lu-v1",
         "input": {
             "path": INPUT.name,
             "sha256": INPUT_SHA256,
@@ -265,7 +265,7 @@ def main() -> None:
     if tracked != generated:
         raise SystemExit("certificate is stale; rerun with --write")
     print(
-        "C546 certificate OK: integral odd pentad isoduality; "
+        "PENTAD_ORIENTATION certificate OK: integral odd pentad isoduality; "
         "60/60 odd projective isodualities at q=11 and q=19"
     )
 

@@ -1,4 +1,4 @@
-// Primary exact ideal checks for C597.  Tested with Singular 4.4.1.
+// Primary exact ideal checks for STABLE_COMPONENT_FIBRES.  Tested with Singular 4.4.1.
 LIB "primdec.lib";
 
 proc sameIdeal(ideal I, ideal J)
@@ -38,11 +38,11 @@ proc integerBridge()
 
   if (size(reduce(3*D*V,G))<>0)
   {
-    ERROR("C597: minimal integer bridge containment failed");
+    ERROR("STABLE_COMPONENT_FIBRES: minimal integer bridge containment failed");
   }
   if (size(reduce(D*V,G))==0)
   {
-    ERROR("C597: bridge unexpectedly lost its factor 3");
+    ERROR("STABLE_COMPONENT_FIBRES: bridge unexpectedly lost its factor 3");
   }
 }
 
@@ -75,21 +75,21 @@ proc genericBridge()
 
   if (size(reduce(J,std(V)))<>0)
   {
-    ERROR("C597: integral J subset V bridge failed");
+    ERROR("STABLE_COMPONENT_FIBRES: integral J subset V bridge failed");
   }
   if (size(reduce(3*D*V,std(J)))<>0)
   {
-    ERROR("C597: cleared-denominator bridge failed");
+    ERROR("STABLE_COMPONENT_FIBRES: cleared-denominator bridge failed");
   }
   list saturated=sat(J,ideal(D));
   if (!sameIdeal(saturated[1],V))
   {
-    ERROR("C597: generic persistent saturation is not cyclic V");
+    ERROR("STABLE_COMPONENT_FIBRES: generic persistent saturation is not cyclic V");
   }
   list associated=minAssGTZ(std(J));
   if (size(associated)<>2)
   {
-    ERROR("C597: generic bridge component count changed");
+    ERROR("STABLE_COMPONENT_FIBRES: generic bridge component count changed");
   }
   int found_cyclic=0;
   int found_persistent=0;
@@ -104,7 +104,7 @@ proc genericBridge()
   }
   if (!found_cyclic || !found_persistent)
   {
-    ERROR("C597: generic bridge components changed");
+    ERROR("STABLE_COMPONENT_FIBRES: generic bridge components changed");
   }
 }
 
@@ -135,7 +135,7 @@ proc characteristicTwo()
   list associated=minAssGTZ(std(J));
   if (size(associated)<>2)
   {
-    ERROR("C597: binary bridge component count changed");
+    ERROR("STABLE_COMPONENT_FIBRES: binary bridge component count changed");
   }
   int found_plane=0;
   int found_persistent=0;
@@ -150,11 +150,11 @@ proc characteristicTwo()
   }
   if (!found_plane || !found_persistent)
   {
-    ERROR("C597: binary bridge components changed");
+    ERROR("STABLE_COMPONENT_FIBRES: binary bridge components changed");
   }
   if (size(reduce(ideal(D),std(persistent_vertical)))<>0)
   {
-    ERROR("C597: binary vertical component escaped persistence");
+    ERROR("STABLE_COMPONENT_FIBRES: binary vertical component escaped persistence");
   }
 }
 
@@ -177,7 +177,7 @@ proc genericPrimeControl()
   list associated=minAssGTZ(std(J));
   if (size(associated)<>2)
   {
-    ERROR("C597: characteristic-five bridge control changed");
+    ERROR("STABLE_COMPONENT_FIBRES: characteristic-five bridge control changed");
   }
 }
 
@@ -185,4 +185,4 @@ integerBridge();
 genericBridge();
 characteristicTwo();
 genericPrimeControl();
-print("C597 Singular certificate OK: minimal integer bridge and F2/F5 fibres");
+print("STABLE_COMPONENT_FIBRES Singular certificate OK: minimal integer bridge and F2/F5 fibres");

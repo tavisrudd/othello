@@ -180,8 +180,8 @@
     }
   },
   "frozen_inputs": {
-    "certificate": "31f0ad316e1f8c199d502b3da050fd4371083330c89854790b693c262452c3ca",
-    "script": "1ded3f75a2100c6f53b62498fa7a84c99d91b477b9f9ee3734d68a8c9b19d6f1"
+    "certificate": "9ca05a5ed99bb5342ecff817dc964c6f9424ca4cdd69684298b8cd938225525b",
+    "script": "abd4f23d1ac3b4c610eb3c0a5610866bd941dccdf3bcd59550fa5fd81bb4f1df"
   },
   "polyhedral_classification": {
     "axis_cell_resonance_tests": [
@@ -641,7 +641,9 @@
       "1",
       "-1"
     ],
-    "c396_bridge": {
+    "characteristic_7_scheme_identity": "(3B-2A)(3B+2A)-2(B^2-2A^2)=7B^2",
+    "coordinate": "r=b/c",
+    "holonomy_completeness_bridge": {
       "cayley_transform": "r=(y+1)/(y-1), y=(r+1)/(r-1)",
       "deck_dictionary": {
         "y->-1/y": "r->-1/r",
@@ -650,8 +652,6 @@
       },
       "y": "(t-1)^2/t"
     },
-    "characteristic_7_scheme_identity": "(3B-2A)(3B+2A)-2(B^2-2A^2)=7B^2",
-    "coordinate": "r=b/c",
     "map": "w=r/(1-r^2), z=r^2/(1-r^2)^2",
     "ramification_collision": {
       "axial_factor_values": [
@@ -691,5 +691,5 @@
       "w": "-2/3"
     }
   },
-  "schema": "c550-four-copy-cover-holonomy-v1"
+  "schema": "four_copy_holonomy-four-copy-cover-holonomy-v1"
 }

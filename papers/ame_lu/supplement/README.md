@@ -22,6 +22,7 @@ python3 verify.py --replay
 ```
 
 Both commands use only Python 3's standard library.  The full replay is
-deterministic and may take several minutes.  The manifest also includes C395's
-hash-pinned arithmetic module because it is a load-bearing input to C396, though
-C395 is not itself an adopted paper result.
+deterministic and may take several minutes.  The manifest also includes the
+hash-pinned pencil-arithmetic module because it is a load-bearing input to the
+holonomy-completeness certificate, though it is not itself an adopted paper
+result.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""C491 PRS(q-4) deep-hole census generator.
+"""REDUNDANCY_FIVE PRS(q-4) deep-hole census generator.
 
 Ambient PG(4,q); curve nu(t)=(1,t,t^2,t^3,t^4), nu(inf)=(0,0,0,0,1) -- the q+1
 columns of the parity check of the projective Reed-Solomon code PRS(q-4)
@@ -1037,7 +1037,7 @@ def main():
         fields = FIELDS
 
     out = {
-        "schema": "c491-prs-deep-hole-census-v1",
+        "schema": "redundancy_five-prs-deep-hole-census-v1",
         "moduli": {str(q): FIELD_SPEC[q][3] for q in FIELDS},
         "fields": {},
     }
@@ -1068,7 +1068,7 @@ def main():
 
 import os
 _HERE = os.path.dirname(os.path.abspath(__file__))
-JSON_OUT = os.path.join(_HERE, "2026-07-22-c491-prs-deep-hole-census.json")
+JSON_OUT = os.path.join(_HERE, "2026-07-22-prs-deep-hole-census.json")
 
 if __name__ == "__main__":
     main()

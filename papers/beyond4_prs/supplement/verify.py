@@ -14,6 +14,13 @@ from pathlib import Path
 SUPPLEMENT = Path(__file__).resolve().parent
 PAPER = SUPPLEMENT.parent
 REPOSITORY = PAPER.parents[1]
+LOCAL_MANIFEST_ARTIFACTS = (
+    "EVIDENCE-MANIFEST.json",
+    "EVIDENCE-ROWS.md",
+    "package_evidence_bundle.py",
+    "verify.py",
+    "build_r6_paper_table.py",
+)
 AGGREGATE = (
     REPOSITORY
     / "lean/RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean"
@@ -96,13 +103,7 @@ def check_release_manifest() -> None:
     if int(field("Local built PDF bytes")) != pdf_bytes:
         raise SystemExit("release manifest has stale local PDF byte count")
 
-    for relative in (
-        "EVIDENCE-MANIFEST.json",
-        "EVIDENCE-ROWS.md",
-        "package_evidence_bundle.py",
-        "verify.py",
-        "build_r6_paper_table.py",
-    ):
+    for relative in LOCAL_MANIFEST_ARTIFACTS:
         match = re.search(
             rf"^\| `{re.escape(relative)}` \| `([0-9a-f]{{64}})` \| ([0-9]+) \|$",
             manifest,
@@ -114,6 +115,38 @@ def check_release_manifest() -> None:
         if match.group(1) != actual_hash or int(match.group(2)) != actual_bytes:
             raise SystemExit(f"stale release-manifest artifact row: {relative}")
     print("verified release-manifest local artifact rows")
+
+
+def write_local_release_manifest() -> None:
+    path = SUPPLEMENT / "RELEASE-MANIFEST.md"
+    text = path.read_text(encoding="utf-8")
+    pdf_match = re.search(r"^\| PDF artifact \| `([^`]+)` \|$", text, re.MULTILINE)
+    if pdf_match is None:
+        raise SystemExit("missing release-manifest PDF artifact")
+    pdf_hash, pdf_bytes = digest(PAPER / pdf_match.group(1))
+    text = re.sub(
+        r"^\| Local built PDF SHA-256 \| `[^`]+` \|$",
+        f"| Local built PDF SHA-256 | `{pdf_hash}` |",
+        text,
+        flags=re.MULTILINE,
+    )
+    text = re.sub(
+        r"^\| Local built PDF bytes \| `[0-9]+` \|$",
+        f"| Local built PDF bytes | `{pdf_bytes}` |",
+        text,
+        flags=re.MULTILINE,
+    )
+    for relative in LOCAL_MANIFEST_ARTIFACTS:
+        actual_hash, actual_bytes = digest(SUPPLEMENT / relative)
+        pattern = (
+            rf"^\| `{re.escape(relative)}` \| `[0-9a-f]{{64}}` \| [0-9]+ \|$"
+        )
+        replacement = f"| `{relative}` | `{actual_hash}` | {actual_bytes} |"
+        text, count = re.subn(pattern, replacement, text, flags=re.MULTILINE)
+        if count != 1:
+            raise SystemExit(f"cannot update release-manifest artifact row: {relative}")
+    path.write_text(text, encoding="utf-8")
+    print(f"updated {path.relative_to(PAPER)}")
 
 
 def active_tex(text: str, source: Path) -> str:
@@ -192,6 +225,16 @@ def check_formal_scope() -> None:
         )
     if len(labels) != 37:
         raise SystemExit(f"expected 37 adopted manuscript labels, found {len(labels)}")
+
+    formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
+    if formal_sources == (False, False):
+        print(
+            "verified manuscript labels against the frozen Lean statement map; "
+            "external Lean sources are not bundled"
+        )
+        return
+    if formal_sources != (True, True):
+        raise SystemExit("external Lean verification sources are incomplete")
 
     aggregate_text = AGGREGATE.read_text(encoding="utf-8")
     imports = tuple(
@@ -299,40 +342,40 @@ def replay() -> None:
         (
             "r5",
             [
-                "2026-07-22-c491-prs-deep-hole-replay.py",
+                "2026-07-22-redundancy-five-deep-hole-replay.py",
                 "--json",
-                "2026-07-22-c491-prs-deep-hole-census.json",
+                "2026-07-22-prs-deep-hole-census.json",
             ],
         ),
         (
             "r6",
             [
-                "2026-07-22-c498-prs-deep-hole-replay.py",
+                "2026-07-22-redundancy-six-deep-hole-replay.py",
                 "--json",
-                "2026-07-22-c498-prs-deep-hole-census.json",
+                "2026-07-22-prs-deep-hole-census.json",
             ],
         ),
         (
             "r6-normal-forms",
-            ["2026-07-23-c498-small-exceptional-normal-forms.py", "--summary"],
+            ["2026-07-23-small-exceptional-normal-forms.py", "--summary"],
         ),
-        ("r7", ["2026-07-23-c509-prs-deep-hole-calibration-replay.py"]),
-        ("r7", ["2026-07-26-c656-r7-independent-arithmetic-replay.py"]),
+        ("r7", ["2026-07-23-prs-deep-hole-calibration-replay.py"]),
+        ("r7", ["2026-07-26-r7-independent-arithmetic-replay.py"]),
         (
             "r7",
             [
-                "2026-07-26-c545-r7-direct-locus-replay.py",
+                "2026-07-26-r7-direct-locus-replay.py",
                 "--check",
-                "2026-07-26-c545-r7-direct-locus-replay.json",
+                "2026-07-26-r7-direct-locus-replay.json",
             ],
         ),
         (
             "stable-components",
-            ["2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "--check"],
+            ["2026-07-24-r10-integral-bad-scheme-sc11.py", "--check"],
         ),
         (
             "stable-components",
-            ["2026-07-24-c595-stable-component-fano-elimination.py", "--check"],
+            ["2026-07-24-stable-component-fano-elimination.py", "--check"],
         ),
     )
     for directory, arguments in python_jobs:
@@ -355,7 +398,14 @@ def main() -> None:
         action="store_true",
         help="require immutable public metadata and two independent reader signoffs",
     )
+    parser.add_argument(
+        "--write-local-manifest",
+        action="store_true",
+        help="refresh local PDF and supplement artifact hashes",
+    )
     args = parser.parse_args()
+    if args.write_local_manifest:
+        write_local_release_manifest()
     check_bundle()
     if args.replay:
         replay()

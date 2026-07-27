@@ -10,20 +10,20 @@ and replay.
 
 | Public label | Paper claim | Internal provenance |
 |---|---|---|
-| Certificate R5 | redundancy-five finite classification | C491 |
-| Certificate R6 | redundancy-six census and radius bridge | C498 |
-| Certificate R6-NF | small exceptional normal forms | C498 small-normal-form bundle |
-| Certificate R7 | redundancy-seven split-free finite bridge | C509 |
-| Companion Certificate SC | proposed stable-component identities, saturation, and vertical fibres; not an adopted Version 1 claim | C595/C597 |
+| Certificate R5 | redundancy-five finite classification | redundancy-five census and replay |
+| Certificate R6 | redundancy-six census and radius bridge | redundancy-six census and replay |
+| Certificate R6-NF | small exceptional normal forms | small-normal-form bundle |
+| Certificate R7 | redundancy-seven split-free finite bridge | redundancy-seven calibration and replay |
+| Companion Certificate SC | stable-component identities, saturation, and vertical fibres outside the Version 1 claim set | exploratory stable-component bundle |
 
 Certificate R7 has two replay routes.  The original replay checks every
 recorded representative directly by the five-secant criterion and rebuilds
-its projective orbit, stabilizer, and Frobenius link.  The C656 arithmetic
+its projective orbit, stabilizer, and Frobenius link.  The independent arithmetic
 replay imports no stored orbit partition: it reruns the quotient enumerator
-after replacing C509's field implementation by the independently written R5
+after replacing the original calibration's field implementation by the independently written R5
 replay field, and compares the reconstructed pointed complements, sextic
 split-free set, projective orbits, stabilizers, flags, and Frobenius links.
-The C545 direct-locus replay is independent of the quotient enumerator.  It
+The direct-locus replay is independent of the quotient enumerator.  It
 imports only the separately written R5 replay's finite-field implementation.
 For \(q<16\) it constructs the literal complement of all four-finite-secant
 spans in \(\operatorname{PG}(5,q)\); for \(q\geq16\) it constructs the

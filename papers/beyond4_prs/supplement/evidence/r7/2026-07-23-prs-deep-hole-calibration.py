@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Orbit-reduced bounded-field calibration for C509 (redundancy seven).
+"""Orbit-reduced bounded-field calibration for REDUNDANCY_SEVEN_CALIBRATION (redundancy seven).
 
 A sextic f=(a0,...,a6) can only be deep when its infinity contraction
-(a0,...,a5) is pointed-bad for C498.  We enumerate that five-dimensional
+(a0,...,a5) is pointed-bad for REDUNDANCY_SIX.  We enumerate that five-dimensional
 pointed locus, append a6, and test all q+1 contractions.  Thus the program
 never scans PG(6,q).
 
@@ -26,13 +26,13 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-C498_PATH = HERE / "2026-07-22-c498-prs-deep-hole-replay.py"
-SPEC = importlib.util.spec_from_file_location("c498_replay", C498_PATH)
-C498 = importlib.util.module_from_spec(SPEC)
+REDUNDANCY_SIX_PATH = HERE / "2026-07-22-redundancy-six-deep-hole-replay.py"
+SPEC = importlib.util.spec_from_file_location("redundancy_six_replay", REDUNDANCY_SIX_PATH)
+REDUNDANCY_SIX = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
-SPEC.loader.exec_module(C498)
-C498.MODULI.setdefault(4, (2, [1, 1]))
-C498.MODULI.setdefault(32, (2, [1, 0, 1, 0, 0]))  # x^5=x^2+1
+SPEC.loader.exec_module(REDUNDANCY_SIX)
+REDUNDANCY_SIX.MODULI.setdefault(4, (2, [1, 1]))
+REDUNDANCY_SIX.MODULI.setdefault(32, (2, [1, 0, 1, 0, 0]))  # x^5=x^2+1
 
 
 def curve(F, degree):
@@ -62,10 +62,10 @@ def sym_matrix(F, g, degree):
         left = [1]
         right = [1]
         for _ in range(i):
-            left = C498.poly_mul(F, left, [beta, alpha])
+            left = REDUNDANCY_SIX.poly_mul(F, left, [beta, alpha])
         for _ in range(degree - i):
-            right = C498.poly_mul(F, right, [delta, gamma])
-        for j, value in enumerate(C498.poly_mul(F, left, right)):
+            right = REDUNDANCY_SIX.poly_mul(F, right, [delta, gamma])
+        for j, value in enumerate(REDUNDANCY_SIX.poly_mul(F, left, right)):
             out[i][j] = value
     return out
 
@@ -79,11 +79,11 @@ def decode(F, code, length):
 
 
 def catalecticant_rank5(F, v):
-    return C498.matrix_rank(F, [v[0:4], v[1:5], v[2:6]])
+    return REDUNDANCY_SIX.matrix_rank(F, [v[0:4], v[1:5], v[2:6]])
 
 
 def persistent5(F):
-    """C498 tangent and conjugate-sigma points via their quadratic recurrence."""
+    """REDUNDANCY_SIX tangent and conjugate-sigma points via their quadratic recurrence."""
     quadratics = []
     # Repeated finite roots and the repeated root at infinity.
     for r in range(F.q):
@@ -108,12 +108,12 @@ def persistent5(F):
             row = [0] * 6
             row[shift : shift + 3] = [q0, q1, q2]
             rows.append(row)
-        basis = C498.nullspace(F, rows, 6)
+        basis = REDUNDANCY_SIX.nullspace(F, rows, 6)
         assert len(basis) == 2
-        for coefficients in C498.pg_points(F.q, 2):
-            v = C498.canon(F, lincomb(F, coefficients, basis))
+        for coefficients in REDUNDANCY_SIX.pg_points(F.q, 2):
+            v = REDUNDANCY_SIX.canon(F, lincomb(F, coefficients, basis))
             if catalecticant_rank5(F, v) == 2:
-                out.add(C498.encode(F, v))
+                out.add(REDUNDANCY_SIX.encode(F, v))
     assert len(out) == F.q * (F.q + 1) ** 2 // 2
     return out
 
@@ -121,14 +121,14 @@ def persistent5(F):
 def marked_secant_star(F):
     points = curve(F, 5)
     infinity = points[-1]
-    out = {C498.encode(F, infinity)}
+    out = {REDUNDANCY_SIX.encode(F, infinity)}
     for finite in points[:-1]:
         for coefficient in range(1, F.q):
             v = tuple(
                 F.add(x, F.mul(coefficient, y))
                 for x, y in zip(infinity, finite)
             )
-            out.add(C498.encode(F, C498.canon(F, v)))
+            out.add(REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, v)))
     assert len(out) == F.q * F.q - F.q + 1
     return out
 
@@ -137,8 +137,8 @@ def nucleus5(F):
     if F.p != 2 or F.m % 2 == 0:
         return set()
     return {
-        C498.encode(F, v)
-        for v in C498.pg_points(F.q, 6)
+        REDUNDANCY_SIX.encode(F, v)
+        for v in REDUNDANCY_SIX.pg_points(F.q, 6)
         if all(v[j] == 0 for j in (0, 1, 4, 5))
         and any(v[j] != 0 for j in (2, 3))
     }
@@ -149,11 +149,11 @@ def pointed_bad_formula(F):
 
 
 def pointed_bad_by_net(F, v, net_coefficients):
-    basis = C498.hankel_net(F, v)
+    basis = REDUNDANCY_SIX.hankel_net(F, v)
     for coefficients in net_coefficients[len(basis)]:
         member = lincomb(F, coefficients, basis)
         # Avoiding infinity means a genuine degree-four affine polynomial.
-        if member[0] != 0 and C498.split_squarefree(F, member):
+        if member[0] != 0 and REDUNDANCY_SIX.split_squarefree(F, member):
             return False
     return True
 
@@ -191,7 +191,7 @@ def affine_orbit_representatives(F):
 
     def translate_min(v, first_index):
         return min(
-            C498.encode(F, translate(v, first_index, b))
+            REDUNDANCY_SIX.encode(F, translate(v, first_index, b))
             for b in range(F.q)
         )
 
@@ -199,7 +199,7 @@ def affine_orbit_representatives(F):
         if first_index == 0:
             # The unique translation slice v1=0 is preserved by scaling.
             return min(
-                C498.encode(F, scale(v, first_index, a))
+                REDUNDANCY_SIX.encode(F, scale(v, first_index, a))
                 for a in range(1, F.q)
             )
         return min(
@@ -211,7 +211,7 @@ def affine_orbit_representatives(F):
     # When v0 != 0, translation uniquely produces the slice v=(1,0,*,*,*,*).
     for tail in itertools.product(range(F.q), repeat=4):
         v = (1, 0) + tail
-        code = C498.encode(F, v)
+        code = REDUNDANCY_SIX.encode(F, v)
         if code == affine_min(v, 0):
             representatives.append(v)
     # Lower triangular strata.  When k+1 is invertible, translation uniquely
@@ -224,9 +224,9 @@ def affine_orbit_representatives(F):
             sliced_prefix = prefix + (0,)
             for tail in itertools.product(range(F.q), repeat=4 - first_index):
                 v = sliced_prefix + tail
-                code = C498.encode(F, v)
+                code = REDUNDANCY_SIX.encode(F, v)
                 scale_min = min(
-                    C498.encode(F, scale(v, first_index, a))
+                    REDUNDANCY_SIX.encode(F, scale(v, first_index, a))
                     for a in range(1, F.q)
                 )
                 if code == scale_min:
@@ -248,7 +248,7 @@ def affine_orbit_representatives(F):
                 for v3 in coset_representatives:
                     for tail in itertools.product(range(F.q), repeat=2):
                         v = prefix + (v2, v3) + tail
-                        code = C498.encode(F, v)
+                        code = REDUNDANCY_SIX.encode(F, v)
                         if code != translate_min(v, first_index):
                             continue
                         if code == affine_min(v, first_index):
@@ -256,7 +256,7 @@ def affine_orbit_representatives(F):
             continue
         for tail in itertools.product(range(F.q), repeat=5 - first_index):
             v = prefix + tail
-            code = C498.encode(F, v)
+            code = REDUNDANCY_SIX.encode(F, v)
             if code != translate_min(v, first_index):
                 continue
             if code == affine_min(v, first_index):
@@ -265,7 +265,7 @@ def affine_orbit_representatives(F):
 
 
 def pointed_bad_affine_orbits(F):
-    profile = os.environ.get("C509_PROF")
+    profile = os.environ.get("REDUNDANCY_SEVEN_CALIBRATION_PROF")
     started = time.monotonic()
     representatives = affine_orbit_representatives(F)
     if profile:
@@ -306,17 +306,17 @@ def pointed_bad_affine_orbits(F):
         return tuple(out)
 
     def canonical_affine_code(v):
-        v = C498.canon(F, v)
+        v = REDUNDANCY_SIX.canon(F, v)
         first_index = next(i for i, x in enumerate(v) if x)
         if first_index == 0:
             # Translation has the unique slice v1=0.
             v = translate(v, 0, F.neg(v[1]))
             return min(
-                C498.encode(F, scale(v, 0, a))
+                REDUNDANCY_SIX.encode(F, scale(v, 0, a))
                 for a in range(1, F.q)
             )
         return min(
-            C498.encode(F, translate(scale(v, first_index, a), first_index, b))
+            REDUNDANCY_SIX.encode(F, translate(scale(v, first_index, a), first_index, b))
             for a in range(1, F.q)
             for b in range(F.q)
         )
@@ -345,7 +345,7 @@ def pointed_bad_affine_orbits(F):
 
     finite_curve = curve(F, 5)[:-1]
     shallow_representatives = set()
-    coefficients = list(C498.pg_points(F.q, 4))
+    coefficients = list(REDUNDANCY_SIX.pg_points(F.q, 4))
     for roots in sorted(root_orbits):
         rows = [finite_curve[root] for root in roots]
         for cs in coefficients:
@@ -361,7 +361,7 @@ def pointed_bad_affine_orbits(F):
     bad_representatives = [
         v
         for v in representatives
-        if C498.encode(F, v) not in shallow_representatives
+        if REDUNDANCY_SIX.encode(F, v) not in shallow_representatives
     ]
     matrices = [
         sym_matrix(F, (a, b, 0, 1), 5)
@@ -371,8 +371,8 @@ def pointed_bad_affine_orbits(F):
     out = set()
     for v in bad_representatives:
         for matrix in matrices:
-            image = C498.canon(F, C498.matvec(F, matrix, v))
-            out.add(C498.encode(F, image))
+            image = REDUNDANCY_SIX.canon(F, REDUNDANCY_SIX.matvec(F, matrix, v))
+            out.add(REDUNDANCY_SIX.encode(F, image))
     if profile:
         print(
             f"q={F.q} pointed-bad affine orbits={len(bad_representatives)} "
@@ -383,23 +383,23 @@ def pointed_bad_affine_orbits(F):
         out,
         len(representatives),
         len(bad_representatives),
-        sorted(C498.encode(F, v) for v in bad_representatives),
+        sorted(REDUNDANCY_SIX.encode(F, v) for v in bad_representatives),
     )
 
 
 def pointed_bad_exhaustive(F):
     """No split squarefree quartic supported on the q finite marked points."""
     finite = curve(F, 5)[:-1]
-    coefficients = list(C498.pg_points(F.q, 4))
+    coefficients = list(REDUNDANCY_SIX.pg_points(F.q, 4))
     marked = set()
     for indices in itertools.combinations(range(F.q), 4):
         rows = [finite[i] for i in indices]
         for cs in coefficients:
-            marked.add(C498.encode(F, C498.canon(F, lincomb(F, cs, rows))))
+            marked.add(REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, lincomb(F, cs, rows))))
     return {
-        C498.encode(F, v)
-        for v in C498.pg_points(F.q, 6)
-        if C498.encode(F, v) not in marked
+        REDUNDANCY_SIX.encode(F, v)
+        for v in REDUNDANCY_SIX.pg_points(F.q, 6)
+        if REDUNDANCY_SIX.encode(F, v) not in marked
     }
 
 
@@ -410,7 +410,7 @@ def pointed_sets(F, base):
         matrix = sym_matrix(F, (r, 1, 1, 0), 5)
         sets.append(
             {
-                C498.encode(F, C498.canon(F, C498.matvec(F, matrix, decode(F, x, 6))))
+                REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, REDUNDANCY_SIX.matvec(F, matrix, decode(F, x, 6))))
                 for x in base
             }
         )
@@ -433,13 +433,13 @@ def orbit6(F, start):
         sym_matrix(F, (1, 1, 0, 1), 6),
         sym_matrix(F, (F.gen, 0, 0, 1), 6),
     ]
-    seen = {C498.encode(F, C498.canon(F, start))}
-    todo = [C498.canon(F, start)]
+    seen = {REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, start))}
+    todo = [REDUNDANCY_SIX.canon(F, start)]
     while todo:
         v = todo.pop()
         for matrix in generators:
-            w = C498.canon(F, C498.matvec(F, matrix, v))
-            iw = C498.encode(F, w)
+            w = REDUNDANCY_SIX.canon(F, REDUNDANCY_SIX.matvec(F, matrix, v))
+            iw = REDUNDANCY_SIX.encode(F, w)
             if iw not in seen:
                 seen.add(iw)
                 todo.append(w)
@@ -447,22 +447,22 @@ def orbit6(F, start):
 
 
 def persistent6(F, v):
-    rank = C498.matrix_rank(F, [v[0:5], v[1:6], v[2:7]])
+    rank = REDUNDANCY_SIX.matrix_rank(F, [v[0:5], v[1:6], v[2:7]])
     if rank != 2:
         return False
     # Rank-two rational split secants and rank-one points are shallow.
     points = curve(F, 6)
     for i in range(len(points)):
         for j in range(i + 1, len(points)):
-            if C498.matrix_rank(F, [points[i], points[j], v]) <= 2:
+            if REDUNDANCY_SIX.matrix_rank(F, [points[i], points[j], v]) <= 2:
                 return False
     return True
 
 
 def deep_by_quintic_web(F, v):
-    basis_low = C498.nullspace(F, [v[:6], v[1:]], 6)
+    basis_low = REDUNDANCY_SIX.nullspace(F, [v[:6], v[1:]], 6)
     basis = [tuple(reversed(row)) for row in basis_low]
-    for coefficients in C498.pg_points(F.q, len(basis)):
+    for coefficients in REDUNDANCY_SIX.pg_points(F.q, len(basis)):
         member = lincomb(F, coefficients, basis)
         leading_zeros = next((i for i, x in enumerate(member) if x), 6)
         if leading_zeros >= 2:
@@ -480,7 +480,7 @@ def deep_by_quintic_web(F, v):
 
 
 def census_field(q, verify_pointed):
-    F = C498.GF(q)
+    F = REDUNDANCY_SIX.GF(q)
     if q < 16:
         base = pointed_bad_exhaustive(F)
         method = "full pointed complement"
@@ -506,17 +506,17 @@ def census_field(q, verify_pointed):
         for last in range(q):
             sextic = tuple(x) + (last,)
             if all(
-                C498.encode(F, C498.canon(F, contraction(F, sextic, r))) in bad[r]
+                REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, contraction(F, sextic, r))) in bad[r]
                 for r in range(q + 1)
             ):
-                deep.add(C498.encode(F, C498.canon(F, sextic)))
+                deep.add(REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, sextic)))
     # The one point whose infinity contraction vanishes.
     e6 = tuple([0] * 6 + [1])
     if all(
-        C498.encode(F, C498.canon(F, contraction(F, e6, r))) in bad[r]
+        REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, contraction(F, e6, r))) in bad[r]
         for r in range(q)
     ):
-        deep.add(C498.encode(F, e6))
+        deep.add(REDUNDANCY_SIX.encode(F, e6))
 
     unseen = set(deep)
     records = []
@@ -546,7 +546,7 @@ def census_field(q, verify_pointed):
         v = decode(F, row["representative_index"], 7)
         fv = tuple(F.pow(x, F.p) for x in v)
         row["frobenius_to_representative_index"] = point_to_rep[
-            C498.encode(F, C498.canon(F, fv))
+            REDUNDANCY_SIX.encode(F, REDUNDANCY_SIX.canon(F, fv))
         ]
     records.sort(key=lambda row: (row["size"], row["representative_index"]))
     frobenius = {
@@ -625,7 +625,7 @@ def main():
             flush=True,
         )
     payload = {
-        "schema": "c509-prs-redundancy-seven-calibration-v1",
+        "schema": "redundancy_seven_calibration-prs-redundancy-seven-calibration-v1",
         "fields": records,
     }
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent direct-locus replay for the bounded R7 classification.
 
-This checker does not import the C509 generator or its affine-orbit quotient.
+This checker does not import the REDUNDANCY_SEVEN_CALIBRATION generator or its affine-orbit quotient.
 For q < 16 it constructs the infinity-pointed bad locus as the literal
 complement of all four-finite-secant spans in PG(5,q).  For q >= 16 it
 constructs the proved R6 pointed locus directly from the persistent
@@ -33,14 +33,14 @@ else:
     SUPPLEMENT = HERE.parent / "papers" / "beyond4_prs" / "supplement"
 R5_REPLAY = (
     SUPPLEMENT / "evidence" / "r5" /
-    "2026-07-22-c491-prs-deep-hole-replay.py"
+    "2026-07-22-redundancy-five-deep-hole-replay.py"
 )
 PUBLIC_RECORD = SUPPLEMENT / "CLASSIFICATION-RECORDS.json"
 DEFAULT_CERTIFICATE = Path(__file__).with_suffix(".json")
 
 
 def load_field_module():
-    spec = importlib.util.spec_from_file_location("c545_r5_field", R5_REPLAY)
+    spec = importlib.util.spec_from_file_location("direct_locus_r5_field", R5_REPLAY)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -510,7 +510,7 @@ def canonical_document(fields):
             flush=True,
         )
     return {
-        "schema": "c545-r7-direct-locus-replay-v2",
+        "schema": "direct_locus-r7-direct-locus-replay-v2",
         "field_implementation": str(R5_REPLAY.relative_to(SUPPLEMENT)),
         "public_record": str(PUBLIC_RECORD.relative_to(SUPPLEMENT)),
         "fields": rows,

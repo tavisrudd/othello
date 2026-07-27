@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact certificate for C402's uniform H3/GRS AME separation theorem."""
+"""Exact certificate for H3_LU_SEPARATION's uniform H3/GRS AME separation theorem."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from typing import Iterable, Sequence, TypeVar
 N = 6
 Q = 19
 HERE = Path(__file__).resolve().parent
-CERTIFICATE = HERE / "2026-07-23-c402-h3-ame-uniform-lu-separation.json"
+CERTIFICATE = HERE / "2026-07-23-h3-ame-uniform-lu-separation.json"
 T = TypeVar("T")
 
 
@@ -690,7 +690,7 @@ def q19_pilot_certificate() -> dict[str, object]:
 
 def build_certificate() -> dict[str, object]:
     return {
-        "schema": "c402-h3-ame-uniform-lu-separation-v1",
+        "schema": "h3_lu_separation-h3-ame-uniform-lu-separation-v1",
         "invariant": (
             "The multiset of Tr(A_T A_U A_V), with A_T=rho_T tensor I_(T^c), "
             "over unordered triples of four-party subsets."
@@ -739,7 +739,7 @@ def main() -> None:
     if tracked != generated:
         raise SystemExit("certificate is stale; rerun with --write")
     print(
-        "C402 certificate OK: H3=70, GRS<=66 outside characteristic 5; "
+        "H3_LU_SEPARATION certificate OK: H3=70, GRS<=66 outside characteristic 5; "
         "q=19 has 13 PGL2 orbits and zero collisions"
     )
 

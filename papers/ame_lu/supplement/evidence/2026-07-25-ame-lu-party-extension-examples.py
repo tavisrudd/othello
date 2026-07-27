@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact party-permutation extensions for the C624 AME--LU examples."""
+"""Exact party-permutation extensions for the PARTY_EXTENSION AME--LU examples."""
 
 from __future__ import annotations
 
@@ -15,11 +15,11 @@ from typing import Iterable, Sequence
 
 
 HERE = Path(__file__).resolve().parent
-C374_PATH = HERE / "2026-07-19-c374-clebsch-ame-equivalence.py"
-C374_SHA256 = "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694"
-C397_PATH = HERE / "2026-07-23-c397-ame-perfect-tensor-physics.json"
-C397_SHA256 = "c0a2df44ad991f59bb95182544bf4ac8d39d7a997c6bd1ea987e4020266c1dfd"
-OUTPUT = HERE / "2026-07-25-c624-ame-lu-party-extension-examples.json"
+CLEBSCH_AME_PATH = HERE / "2026-07-19-clebsch-ame-equivalence.py"
+CLEBSCH_AME_SHA256 = "3cc76e380be2447fbf49a779320e8a2ceb2d55b92f62d834c36c3b83dbf38a79"
+PERFECT_TENSOR_PATH = HERE / "2026-07-23-ame-perfect-tensor-physics.json"
+PERFECT_TENSOR_SHA256 = "0fea19c906fd4ea546c822cf622c81d2721ba40c765ffa39a6badd852c29a7f3"
+OUTPUT = HERE / "2026-07-25-ame-lu-party-extension-examples.json"
 N = 6
 
 Vector = tuple[int, ...]
@@ -29,23 +29,23 @@ Permutation = tuple[int, ...]
 GroupElement = tuple[Permutation, tuple[Matrix2, ...]]
 
 
-def load_c374():
-    actual = hashlib.sha256(C374_PATH.read_bytes()).hexdigest()
-    if actual != C374_SHA256:
-        raise AssertionError(f"stale C374 input: {actual}")
-    spec = importlib.util.spec_from_file_location("c624_c374", C374_PATH)
+def load_clebsch_ame():
+    actual = hashlib.sha256(CLEBSCH_AME_PATH.read_bytes()).hexdigest()
+    if actual != CLEBSCH_AME_SHA256:
+        raise AssertionError(f"stale CLEBSCH_AME input: {actual}")
+    spec = importlib.util.spec_from_file_location("party_extension_clebsch_ame", CLEBSCH_AME_PATH)
     if spec is None or spec.loader is None:
-        raise AssertionError("cannot import C374")
+        raise AssertionError("cannot import CLEBSCH_AME")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
-C374 = load_c374()
+CLEBSCH_AME = load_clebsch_ame()
 
 
 def set_field(q: int) -> None:
-    C374.Q = q
+    CLEBSCH_AME.Q = q
 
 
 def m2_mul(left: Matrix2, right: Matrix2, q: int) -> Matrix2:
@@ -206,12 +206,12 @@ def pencil_code(q: int, t: int) -> Matrix:
         (1, 0, t),
     )
     parity = tuple(tuple(columns[j][i] % q for j in range(N)) for i in range(3))
-    return C374.nullspace(parity)
+    return CLEBSCH_AME.nullspace(parity)
 
 
 def grs_code(q: int, evaluation_set: Sequence[int]) -> Matrix:
     set_field(q)
-    return C374.rowspace(
+    return CLEBSCH_AME.rowspace(
         (
             tuple(1 for _ in evaluation_set),
             tuple(x % q for x in evaluation_set),
@@ -224,8 +224,8 @@ def valid_lift(
     code: Matrix, permutation: Permutation, anchor: Matrix2, q: int
 ) -> GroupElement | None:
     set_field(q)
-    data = C374.minimal_support_data(code)
-    space = C374.stabilizer_space(code)
+    data = CLEBSCH_AME.minimal_support_data(code)
+    space = CLEBSCH_AME.stabilizer_space(code)
     supports_by_pair = {
         (a, b): next(s for s in sorted(data) if a in s and b in s)
         for a in range(N)
@@ -236,22 +236,22 @@ def valid_lift(
     for b in range(1, N):
         support = supports_by_pair[(0, b)]
         target_support = tuple(sorted(permutation[i] for i in support))
-        source_relation = C374.relation(data, support, 0, b)
-        target_relation = C374.relation(
+        source_relation = CLEBSCH_AME.relation(data, support, 0, b)
+        target_relation = CLEBSCH_AME.relation(
             data, target_support, permutation[0], permutation[b]
         )
         local[b] = m2_mul(
             m2_mul(target_relation, anchor, q), m2_inv(source_relation, q), q
         )
-        if C374.m2_det(local[b]) != 1:
+        if CLEBSCH_AME.m2_det(local[b]) != 1:
             return None
     for support in sorted(data):
         a = support[0]
         target_support = tuple(sorted(permutation[i] for i in support))
         for b in support[1:]:
-            lhs = m2_mul(local[b], C374.relation(data, support, a, b), q)
+            lhs = m2_mul(local[b], CLEBSCH_AME.relation(data, support, a, b), q)
             rhs = m2_mul(
-                C374.relation(
+                CLEBSCH_AME.relation(
                     data, target_support, permutation[a], permutation[b]
                 ),
                 local[a],
@@ -260,7 +260,7 @@ def valid_lift(
             if lhs != rhs:
                 return None
     element = permutation, tuple(local)
-    if C374.transform_stabilizer(space, *element) != space:
+    if CLEBSCH_AME.transform_stabilizer(space, *element) != space:
         raise AssertionError("support propagation admitted a false lift")
     return element
 
@@ -384,11 +384,11 @@ def find_complement(
 
 def action_on_stabilizer(code: Matrix, element: GroupElement, q: int) -> Matrix:
     set_field(q)
-    space = C374.stabilizer_space(code)
-    pivots = C374.rref(space)[1]
+    space = CLEBSCH_AME.stabilizer_space(code)
+    pivots = CLEBSCH_AME.rref(space)[1]
     transformed_rows = []
     for row in space:
-        transformed = C374.transform_stabilizer((row,), *element)
+        transformed = CLEBSCH_AME.transform_stabilizer((row,), *element)
         if len(transformed) != 1:
             raise AssertionError("nonzero stabilizer row vanished")
         transformed_rows.append(tuple(transformed[0][pivot] for pivot in pivots))
@@ -759,10 +759,10 @@ def build_certificate() -> dict[str, object]:
             )
         )
     analyses = [analyze(*case) for case in cases]
-    actual_c397_hash = hashlib.sha256(C397_PATH.read_bytes()).hexdigest()
-    if actual_c397_hash != C397_SHA256:
-        raise AssertionError(f"stale C397 input: {actual_c397_hash}")
-    c397 = json.loads(C397_PATH.read_text())
+    actual_perfect_tensor_hash = hashlib.sha256(PERFECT_TENSOR_PATH.read_bytes()).hexdigest()
+    if actual_perfect_tensor_hash != PERFECT_TENSOR_SHA256:
+        raise AssertionError(f"stale PERFECT_TENSOR input: {actual_perfect_tensor_hash}")
+    perfect_tensor = json.loads(PERFECT_TENSOR_PATH.read_text())
     q11_names = [
         "q11_pencil_t2_z1_h3_class",
         "q11_pencil_t10_z9",
@@ -773,20 +773,20 @@ def build_certificate() -> dict[str, object]:
     ]
     for analysis, old in zip(
         (next(item for item in analyses if item["name"] == name) for name in q11_names),
-        c397["clifford_and_operator_pushing"],
+        perfect_tensor["clifford_and_operator_pushing"],
         strict=True,
     ):
         if analysis["gamma"]["linear_kernel_order"] != old["fixed_party_symplectic_kernel_order"]:
-            raise AssertionError("C397 fixed-kernel cross-check failed")
+            raise AssertionError("PERFECT_TENSOR fixed-kernel cross-check failed")
         if analysis["pi"]["order"] != old["party_permutation_image_order"]:
-            raise AssertionError("C397 party-image cross-check failed")
+            raise AssertionError("PERFECT_TENSOR party-image cross-check failed")
         if analysis["gamma_tilde"]["linear_group_order"] != old["symplectic_automorphism_order"]:
-            raise AssertionError("C397 symplectic-order cross-check failed")
+            raise AssertionError("PERFECT_TENSOR symplectic-order cross-check failed")
     return {
-        "schema": "c624-ame-lu-party-extension-examples-v1",
+        "schema": "party_extension-ame-lu-party-extension-examples-v1",
         "input": {
-            C374_PATH.name: C374_SHA256,
-            C397_PATH.name: C397_SHA256,
+            CLEBSCH_AME_PATH.name: CLEBSCH_AME_SHA256,
+            PERFECT_TENSOR_PATH.name: PERFECT_TENSOR_SHA256,
         },
         "conventions": {
             "party_permutations": "source_to_target",
@@ -817,7 +817,7 @@ def main() -> None:
         if not OUTPUT.exists():
             raise SystemExit(f"missing certificate: {OUTPUT}")
         if OUTPUT.read_bytes() != generated:
-            with tempfile.NamedTemporaryFile(prefix="c624-", suffix=".json", delete=False) as handle:
+            with tempfile.NamedTemporaryFile(prefix="party_extension-", suffix=".json", delete=False) as handle:
                 handle.write(generated)
                 temporary = handle.name
             raise SystemExit(f"certificate mismatch; regenerated copy: {temporary}")

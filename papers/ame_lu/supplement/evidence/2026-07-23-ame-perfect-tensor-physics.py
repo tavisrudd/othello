@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact C397 Clifford, operator-pushing, and signed-sheet certificate."""
+"""Exact PERFECT_TENSOR Clifford, operator-pushing, and signed-sheet certificate."""
 
 from __future__ import annotations
 
@@ -17,11 +17,11 @@ from typing import Iterable, Sequence
 
 
 HERE = Path(__file__).resolve().parent
-INPUT_C374 = HERE / "2026-07-19-c374-clebsch-ame-equivalence.py"
-INPUT_C374_SHA256 = "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694"
-INPUT_C396 = HERE / "2026-07-23-c396-holonomy-completeness.py"
-INPUT_C396_SHA256 = "b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49"
-OUTPUT = HERE / "2026-07-23-c397-ame-perfect-tensor-physics.json"
+INPUT_CLEBSCH_AME = HERE / "2026-07-19-clebsch-ame-equivalence.py"
+INPUT_CLEBSCH_AME_SHA256 = "3cc76e380be2447fbf49a779320e8a2ceb2d55b92f62d834c36c3b83dbf38a79"
+INPUT_HOLONOMY_COMPLETENESS = HERE / "2026-07-23-holonomy-completeness.py"
+INPUT_HOLONOMY_COMPLETENESS_SHA256 = "3d7dcc5a98bafca6c215dc66b024795a9dc024c21fb15d2f5f2063d7a6446f10"
+OUTPUT = HERE / "2026-07-23-ame-perfect-tensor-physics.json"
 Q = 11
 N = 6
 
@@ -45,9 +45,9 @@ def load_input(name: str, path: Path, digest: str):
     return module
 
 
-C374 = load_input("c397_c374", INPUT_C374, INPUT_C374_SHA256)
-C396 = load_input("c397_c396", INPUT_C396, INPUT_C396_SHA256)
-C395 = C396.C395
+CLEBSCH_AME = load_input("perfect_tensor_clebsch_ame", INPUT_CLEBSCH_AME, INPUT_CLEBSCH_AME_SHA256)
+HOLONOMY_COMPLETENESS = load_input("perfect_tensor_holonomy_completeness", INPUT_HOLONOMY_COMPLETENESS, INPUT_HOLONOMY_COMPLETENESS_SHA256)
+PENCIL_ARITHMETIC = HOLONOMY_COMPLETENESS.PENCIL_ARITHMETIC
 
 
 def pencil_code(t: int) -> Matrix:
@@ -60,7 +60,7 @@ def pencil_code(t: int) -> Matrix:
         (1, 0, t),
     )
     parity = tuple(tuple(columns[j][i] % Q for j in range(N)) for i in range(3))
-    return C374.nullspace(parity)
+    return CLEBSCH_AME.nullspace(parity)
 
 
 def flat_block(block: Matrix2) -> tuple[int, int, int, int]:
@@ -83,14 +83,14 @@ def compose(first: GroupElement, second: GroupElement) -> GroupElement:
     q, b = second
     return (
         tuple(q[p[i]] for i in range(N)),
-        tuple(C374.m2_mul(b[p[i]], a[i]) for i in range(N)),
+        tuple(CLEBSCH_AME.m2_mul(b[p[i]], a[i]) for i in range(N)),
     )
 
 
 def inverse_element(element: GroupElement) -> GroupElement:
     p, blocks = element
     pinv = tuple(p.index(i) for i in range(N))
-    return pinv, tuple(C374.m2_inv(blocks[pinv[i]]) for i in range(N))
+    return pinv, tuple(CLEBSCH_AME.m2_inv(blocks[pinv[i]]) for i in range(N))
 
 
 def closure(generators: Sequence[GroupElement]) -> tuple[GroupElement, ...]:
@@ -110,9 +110,9 @@ def closure(generators: Sequence[GroupElement]) -> tuple[GroupElement, ...]:
 
 
 def enumerate_symplectic_automorphisms(code: Matrix) -> tuple[GroupElement, ...]:
-    data = C374.minimal_support_data(code)
-    space = C374.stabilizer_space(code)
-    all_sl2 = C374.sl2()
+    data = CLEBSCH_AME.minimal_support_data(code)
+    space = CLEBSCH_AME.stabilizer_space(code)
+    all_sl2 = CLEBSCH_AME.sl2()
     supports_by_pair = {
         (a, b): next(s for s in sorted(data) if a in s and b in s)
         for a in range(N)
@@ -127,14 +127,14 @@ def enumerate_symplectic_automorphisms(code: Matrix) -> tuple[GroupElement, ...]
             for b in range(1, N):
                 support = supports_by_pair[(0, b)]
                 target_support = tuple(sorted(permutation[i] for i in support))
-                source_rel = C374.relation(data, support, 0, b)
-                target_rel = C374.relation(
+                source_rel = CLEBSCH_AME.relation(data, support, 0, b)
+                target_rel = CLEBSCH_AME.relation(
                     data, target_support, permutation[0], permutation[b]
                 )
-                local[b] = C374.m2_mul(
-                    C374.m2_mul(target_rel, anchor), C374.m2_inv(source_rel)
+                local[b] = CLEBSCH_AME.m2_mul(
+                    CLEBSCH_AME.m2_mul(target_rel, anchor), CLEBSCH_AME.m2_inv(source_rel)
                 )
-                if C374.m2_det(local[b]) != 1:
+                if CLEBSCH_AME.m2_det(local[b]) != 1:
                     valid = False
                     break
             if not valid:
@@ -143,11 +143,11 @@ def enumerate_symplectic_automorphisms(code: Matrix) -> tuple[GroupElement, ...]
                 a = support[0]
                 target_support = tuple(sorted(permutation[i] for i in support))
                 for b in support[1:]:
-                    lhs = C374.m2_mul(
-                        local[b], C374.relation(data, support, a, b)
+                    lhs = CLEBSCH_AME.m2_mul(
+                        local[b], CLEBSCH_AME.relation(data, support, a, b)
                     )
-                    rhs = C374.m2_mul(
-                        C374.relation(
+                    rhs = CLEBSCH_AME.m2_mul(
+                        CLEBSCH_AME.relation(
                             data, target_support, permutation[a], permutation[b]
                         ),
                         local[a],
@@ -159,7 +159,7 @@ def enumerate_symplectic_automorphisms(code: Matrix) -> tuple[GroupElement, ...]
                     break
             if valid:
                 element = permutation, tuple(local)
-                if C374.transform_stabilizer(space, *element) != space:
+                if CLEBSCH_AME.transform_stabilizer(space, *element) != space:
                     raise AssertionError("support propagation admitted a false automorphism")
                 result.append(element)
     encoded = [encode_element(element) for element in result]
@@ -234,11 +234,11 @@ def matrix2_closure(generators: Sequence[Matrix2]) -> set[Matrix2]:
     identity = ((1, 0), (0, 1))
     known = {identity}
     queue = collections.deque([identity])
-    moves = tuple(generators) + tuple(C374.m2_inv(value) for value in generators)
+    moves = tuple(generators) + tuple(CLEBSCH_AME.m2_inv(value) for value in generators)
     while queue:
         current = queue.popleft()
         for move in moves:
-            value = C374.m2_mul(move, current)
+            value = CLEBSCH_AME.m2_mul(move, current)
             if value not in known:
                 known.add(value)
                 queue.append(value)
@@ -333,7 +333,7 @@ def poly_json(poly: Sequence[Fraction]) -> list[int | str]:
 
 
 def symbolic_sheet_certificate() -> dict[str, object]:
-    qtrim, qadd, qneg, qmul = C396.qtrim, C396.qadd, C396.qneg, C396.qmul
+    qtrim, qadd, qneg, qmul = HOLONOMY_COMPLETENESS.qtrim, HOLONOMY_COMPLETENESS.qadd, HOLONOMY_COMPLETENESS.qneg, HOLONOMY_COMPLETENESS.qmul
     zero, one, t = qtrim((0,)), qtrim((1,)), qtrim((0, 1))
     sub = lambda a, b: qadd(a, qneg(b))
     points = (
@@ -348,12 +348,12 @@ def symbolic_sheet_certificate() -> dict[str, object]:
     for pair in itertools.combinations(range(1, N), 2):
         first = (0,) + pair
         second = tuple(index for index in range(N) if index not in first)
-        value = C396.qmul(
-            C396.qdet3(tuple(points[index] for index in first)),
-            C396.qdet3(tuple(points[index] for index in second)),
+        value = HOLONOMY_COMPLETENESS.qmul(
+            HOLONOMY_COMPLETENESS.qdet3(tuple(points[index] for index in first)),
+            HOLONOMY_COMPLETENESS.qdet3(tuple(points[index] for index in second)),
         )
-        if C395.permutation_sign(first + second) < 0:
-            value = C396.qneg(value)
+        if PENCIL_ARITHMETIC.permutation_sign(first + second) < 0:
+            value = HOLONOMY_COMPLETENESS.qneg(value)
         bracket_rows.append(
             {
                 "partition": [
@@ -381,11 +381,11 @@ def symbolic_sheet_certificate() -> dict[str, object]:
     # A symbolic Gale generator and exact isoduality.  The columns below use
     # free kernel coordinates x_4,x_5,x_6.
     rat, radd, rneg, rmul, rdiv = (
-        C396.rat,
-        C396.radd,
-        C396.rneg,
-        C396.rmul,
-        C396.rdiv,
+        HOLONOMY_COMPLETENESS.rat,
+        HOLONOMY_COMPLETENESS.radd,
+        HOLONOMY_COMPLETENESS.rneg,
+        HOLONOMY_COMPLETENESS.rmul,
+        HOLONOMY_COMPLETENESS.rdiv,
     )
     two_t_minus_two = qtrim((-2, 2))
     dpoly = qtrim((1, -1, 1))
@@ -433,7 +433,7 @@ def symbolic_sheet_certificate() -> dict[str, object]:
     # normalization.
     gale_checks = []
     for prime in (11, 13, 101):
-        field = C396.FiniteField(prime, (0, 1))
+        field = HOLONOMY_COMPLETENESS.FiniteField(prime, (0, 1))
         checked = 0
         for integer in range(2, prime):
             value = field.element(integer)
@@ -448,14 +448,14 @@ def symbolic_sheet_certificate() -> dict[str, object]:
                 )
             ):
                 continue
-            parent = C395.ff_points(field, value)
-            gale_matrix = C396.code_from_points(field, parent)
+            parent = PENCIL_ARITHMETIC.ff_points(field, value)
+            gale_matrix = HOLONOMY_COMPLETENESS.code_from_points(field, parent)
             gale_points = tuple(
                 tuple(gale_matrix[row][column] for row in range(3))
                 for column in range(N)
             )
             target = tuple(parent[gale_permutation[index]] for index in range(N))
-            if not C396.pairwise_projectively_equivalent(field, gale_points, target):
+            if not HOLONOMY_COMPLETENESS.pairwise_projectively_equivalent(field, gale_points, target):
                 raise AssertionError("fixed Gale permutation failed")
             checked += 1
         gale_checks.append({"prime": prime, "admitted_parameters_checked": checked})
@@ -766,15 +766,15 @@ def build_certificate() -> dict[str, object]:
         ("non_grs_t2_z1", pencil_code(2)),
         ("non_grs_t10_z9", pencil_code(10)),
     ]
-    for representative, orbit_size in C374.grs_evaluation_orbits():
+    for representative, orbit_size in CLEBSCH_AME.grs_evaluation_orbits():
         label = "grs_" + "_".join("infinity" if x == Q else str(x) for x in representative)
-        codes.append((f"{label}_orbit_{orbit_size}", C374.grs_code(representative)))
+        codes.append((f"{label}_orbit_{orbit_size}", CLEBSCH_AME.grs_code(representative)))
     return {
-        "schema": "c397-ame-perfect-tensor-physics-v1",
+        "schema": "perfect_tensor-ame-perfect-tensor-physics-v1",
         "field_order": Q,
         "inputs": {
-            INPUT_C374.name: INPUT_C374_SHA256,
-            INPUT_C396.name: INPUT_C396_SHA256,
+            INPUT_CLEBSCH_AME.name: INPUT_CLEBSCH_AME_SHA256,
+            INPUT_HOLONOMY_COMPLETENESS.name: INPUT_HOLONOMY_COMPLETENESS_SHA256,
         },
         "clifford_and_operator_pushing": [
             code_certificate(name, code) for name, code in codes
@@ -805,7 +805,7 @@ def main() -> None:
             raise AssertionError(f"missing tracked certificate {OUTPUT}")
         if replay.read_bytes() != OUTPUT.read_bytes():
             raise AssertionError("certificate replay differs")
-    print("C397 exact certificate replay: PASS")
+    print("PERFECT_TENSOR exact certificate replay: PASS")
 
 
 if __name__ == "__main__":

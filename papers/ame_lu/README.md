@@ -81,18 +81,14 @@ coordinate: on an equal-phase linear-code state each is a power of `q`
 determined by a linear-system rank.  Their maximal minors detect special
 rank-jump divisors, but their values are generically constant.
 
-For the admitted odd non-GRS pencil, C609/C560 and C396 give
-`LU iff LC iff z equality`.  C649 is stronger: every LU intertwiner between
+For the admitted odd non-GRS pencil, equal-phase MDS stabilizer rigidity and
+the pencil-classification theorem give `LU iff LC iff z equality`.  The
+additive-stabilizer theorem is stronger: every LU intertwiner between
 stabilizer AME states is factorwise Clifford.  This is a theorem for the
 stabilizer-AME class, not a revival of the false global LU--LC conjecture
 for arbitrary stabilizer states.
 
-## Initial source set
+## Evidence
 
-- `notes/2026-07-19-c374-clebsch-ame-equivalence.md`
-- `notes/2026-07-23-c396-holonomy-completeness.md`
-- `notes/2026-07-23-c397-ame-perfect-tensor-physics.md`
-- `notes/2026-07-23-c402-h3-ame-uniform-lu-separation.md`
-- `notes/2026-07-23-c546-h3-pentad-orientation-lu.md`
-- `notes/2026-07-23-c548-c397-contraction-rank-drop-divisor.md`
-- `notes/2026-07-23-c550-four-copy-cover-holonomy.md`
+The claim-level artifact map, exact replay commands, and trust boundaries are
+recorded in `supplement/EVIDENCE.md`.

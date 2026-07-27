@@ -1,5 +1,5 @@
 {
-  "schema": "c498-prs-deep-hole-census-v1",
+  "schema": "redundancy_six-prs-deep-hole-census-v1",
   "fields": {
     "7": {
       "pg5_points": 19608,

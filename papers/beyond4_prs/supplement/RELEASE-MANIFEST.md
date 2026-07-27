@@ -12,15 +12,15 @@ claimed by this local bundle.
 | Paper-export repository URL | external publication step |
 | Release tag | external publication step |
 | Release commit | set from the final paper-export commit |
-| Public Lean repository / export path | `https://github.com/tavisrudd/finitegeom` / `../lean` |
+| Public Lean repository | `https://github.com/tavisrudd/finitegeom` |
 | Public Lean revision | set from the immutable public verification commit |
 | Archive identifier | external publication step |
 | DOI | external publication step |
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `cb59721088deedabb140e16c101d3b84856ad757872f8be1a3921fba8603881d` |
-| Local built PDF bytes | `238755` |
+| Local built PDF SHA-256 | `43315c95e51c95992a09ce133862824264f23611fa8090923fc469e5aad56bec` |
+| Local built PDF bytes | `238922` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -35,10 +35,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `f32388fe39fc3016ea0a815f4e4c8328758661c00d14becee2ea5789e2a4cedb` | 13925 |
-| `EVIDENCE-ROWS.md` | `c0933a21192fcb223b8f0125e6bf5fef224ba65c96b7c8270e4d6a46da95845d` | 9242 |
-| `package_evidence_bundle.py` | `13c79f4be5dee424035690116e83894dc3a9ec5bbc5c12ed3f79b8e9316d6b7d` | 12957 |
-| `verify.py` | `ca526a8b1b53189794d1dc6a5d02bae3ff2ecf50f29f6a29a38d28c56d91edf1` | 13170 |
+| `EVIDENCE-MANIFEST.json` | `1c9c9b97ae21158192d93d91f2ab208a9d92d3638151b446f4e1a1008b436a65` | 13832 |
+| `EVIDENCE-ROWS.md` | `80703040919abd3ffbf76cd521674423710f5f1eec9f731ef7b17f6e446a3380` | 9149 |
+| `package_evidence_bundle.py` | `a0cf6ed7ffa4d071077e61fa64276798cadb62ff28f065c3f419aed6554336ca` | 11043 |
+| `verify.py` | `93989119e6cafbed56a728deb98215d0392290b2f5cfd7c172798ca47a66ed63` | 15100 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 
 Verify the complete local bundle from the paper directory:

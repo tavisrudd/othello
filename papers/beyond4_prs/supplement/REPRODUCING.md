@@ -97,16 +97,16 @@ paper-local directory containing the named certificate.  The top-level
 separate checks in the same evidence bundle.
 
 ```text
-(cd supplement/evidence/r5 && python3 2026-07-22-c491-prs-deep-hole-replay.py --json 2026-07-22-c491-prs-deep-hole-census.json)
-(cd supplement/evidence/r6 && python3 2026-07-22-c498-prs-deep-hole-replay.py --json 2026-07-22-c498-prs-deep-hole-census.json)
-(cd supplement/evidence/r6-normal-forms && python3 2026-07-23-c498-small-exceptional-normal-forms.py --summary)
-(cd supplement/evidence/r7 && python3 2026-07-23-c509-prs-deep-hole-calibration-replay.py)
-(cd supplement/evidence/r7 && python3 2026-07-26-c656-r7-independent-arithmetic-replay.py)
-(cd supplement/evidence/r7 && python3 2026-07-26-c545-r7-direct-locus-replay.py --check 2026-07-26-c545-r7-direct-locus-replay.json)
-(cd supplement/evidence/stable-components && python3 2026-07-24-c597-r10-integral-bad-scheme-sc11.py --check)
-(cd supplement/evidence/stable-components && python3 2026-07-24-c595-stable-component-fano-elimination.py --check)
-(cd supplement/evidence/stable-components && Singular -q 2026-07-24-c597-r10-integral-bad-scheme-sc11.sing)
-(cd supplement/evidence/stable-components && Singular -q 2026-07-24-c595-stable-component-fano-elimination.sing)
+(cd supplement/evidence/r5 && python3 2026-07-22-redundancy-five-deep-hole-replay.py --json 2026-07-22-prs-deep-hole-census.json)
+(cd supplement/evidence/r6 && python3 2026-07-22-redundancy-six-deep-hole-replay.py --json 2026-07-22-prs-deep-hole-census.json)
+(cd supplement/evidence/r6-normal-forms && python3 2026-07-23-small-exceptional-normal-forms.py --summary)
+(cd supplement/evidence/r7 && python3 2026-07-23-prs-deep-hole-calibration-replay.py)
+(cd supplement/evidence/r7 && python3 2026-07-26-r7-independent-arithmetic-replay.py)
+(cd supplement/evidence/r7 && python3 2026-07-26-r7-direct-locus-replay.py --check 2026-07-26-r7-direct-locus-replay.json)
+(cd supplement/evidence/stable-components && python3 2026-07-24-r10-integral-bad-scheme-sc11.py --check)
+(cd supplement/evidence/stable-components && python3 2026-07-24-stable-component-fano-elimination.py --check)
+(cd supplement/evidence/stable-components && Singular -q 2026-07-24-r10-integral-bad-scheme-sc11.sing)
+(cd supplement/evidence/stable-components && Singular -q 2026-07-24-stable-component-fano-elimination.sing)
 ```
 
 The public R5--R7 orbit tables are a deterministic projection of the

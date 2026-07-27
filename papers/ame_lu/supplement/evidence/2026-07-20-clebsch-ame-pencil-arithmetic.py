@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact symbolic and finite-field certificate for the C395 AME pencil theorem."""
+"""Exact symbolic and finite-field certificate for the PENCIL_ARITHMETIC AME pencil theorem."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from typing import Callable, Iterable, Sequence
 
 
 HERE = Path(__file__).resolve().parent
-OUTPUT = HERE / "2026-07-20-c395-clebsch-ame-pencil-arithmetic.json"
+OUTPUT = HERE / "2026-07-20-clebsch-ame-pencil-arithmetic.json"
 Poly = tuple[int, ...]  # coefficients in ascending order
 RatMatrix = tuple[tuple[Fraction, ...], ...]
 Permutation = tuple[int, ...]
@@ -588,7 +588,7 @@ def build_certificate() -> dict[str, object]:
         (19, (0, 1)), (23, (0, 1)), (29, (0, 1)), (31, (0, 1)), (37, (0, 1)),
     )
     return {
-        "schema": "c395-clebsch-ame-pencil-arithmetic-v2",
+        "schema": "pencil_arithmetic-clebsch-ame-pencil-arithmetic-v2",
         "symbolic": symbolic_certificate(),
         "finite_field_replays": [finite_field_replay(p, modulus) for p, modulus in field_specs],
         "tetrahedral_stabilizer": stabilizer_certificate(),

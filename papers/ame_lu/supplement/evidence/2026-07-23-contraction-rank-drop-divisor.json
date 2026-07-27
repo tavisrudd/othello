@@ -684,5 +684,5 @@
     "[3, -4, -1, -4, 3]": 192
   },
   "maximal_minors_computed": 720,
-  "schema": "c548-rank-drop-v1"
+  "schema": "contraction_divisor-rank-drop-v1"
 }

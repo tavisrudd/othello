@@ -989,8 +989,8 @@
     "proof": "The coefficient at y is q^(-9/2) sum_(c in C) chi(c dot y), which is q^(-3/2) exactly for y in C^perp and zero otherwise."
   },
   "input": {
-    "path": "2026-07-23-c402-h3-ame-uniform-lu-separation.py",
-    "sha256": "914fc8b57af5a14035fd5d2cc4cf7902388c7d15bcdd831e834518aecf2b2627"
+    "path": "2026-07-23-h3-ame-uniform-lu-separation.py",
+    "sha256": "a3f1ceeceb9d479e6290841e33c09df615756c7b9cf93ef1f0c3ca9d6a002fb3"
   },
   "integral_isoduality": {
     "base_ring": "Z[tau], tau^2=tau+1",
@@ -1043,7 +1043,7 @@
       ]
     ]
   },
-  "schema": "c546-h3-pentad-orientation-lu-v1",
+  "schema": "pentad_orientation-h3-pentad-orientation-lu-v1",
   "verdict": {
     "characteristic_two": "projectivity determinant norm -4 vanishes; not claimed",
     "odd_characteristic_exceptions": [],

@@ -2426,12 +2426,12 @@
     "formula": "1_(three_cycle)=(chi_triv+chi_sign-chi_std)/3",
     "verified_on_all_conjugacy_classes": true
   },
-  "schema": "c498-small-exceptional-normal-forms-v1",
+  "schema": "redundancy_six-small-exceptional-normal-forms-v1",
   "source": {
-    "census": "2026-07-22-c498-prs-deep-hole-census.json",
-    "census_sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3",
-    "replay": "2026-07-22-c498-prs-deep-hole-replay.py",
-    "replay_sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
+    "census": "2026-07-22-prs-deep-hole-census.json",
+    "census_sha256": "df74a3f2905e4cb75a0b4b544ef4039fe67320d1af5d076c9c203da7e83163ff",
+    "replay": "2026-07-22-redundancy-six-deep-hole-replay.py",
+    "replay_sha256": "00f6ac2faa8984c96a4bb805c45df90f6e122781298fa69d4e7a79083d8fed81"
   },
   "zero_1_plus_3_mass_small_exceptional_orbits": [
     {

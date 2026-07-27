@@ -1,4 +1,4 @@
-// Primary exact ideal checks for C595.  Tested with Singular 4.4.1.
+// Primary exact ideal checks for STABLE_COMPONENT_IDENTITIES.  Tested with Singular 4.4.1.
 LIB "primdec.lib";
 
 proc coefficientIdeal()
@@ -58,15 +58,15 @@ proc characteristicZero()
   ideal F=coefficientIdeal();
   ideal H=persistentIdeal();
   ideal R1=rankOneIdeal();
-  if (size(F)<>28) { ERROR("C595: wrong coefficient count over Q"); }
+  if (size(F)<>28) { ERROR("STABLE_COMPONENT_IDENTITIES: wrong coefficient count over Q"); }
   if (size(reduce(H,std(F)))<>0)
   {
-    ERROR("C595: cleared generic containment failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: cleared generic containment failed");
   }
   list associated=minAssGTZ(std(F));
   if (size(associated)<>1 || !sameIdeal(associated[1],R1))
   {
-    ERROR("C595: generic cyclic Fano prime is not rank one");
+    ERROR("STABLE_COMPONENT_IDENTITIES: generic cyclic Fano prime is not rank one");
   }
 }
 
@@ -86,7 +86,7 @@ proc characteristicTwo()
   list associated=minAssGTZ(std(F));
   if (size(associated)<>2)
   {
-    ERROR("C595: wrong number of characteristic-two components");
+    ERROR("STABLE_COMPONENT_IDENTITIES: wrong number of characteristic-two components");
   }
   int found_modular=0;
   int found_vertical=0;
@@ -98,22 +98,22 @@ proc characteristicTwo()
   }
   if (!found_modular || !found_vertical)
   {
-    ERROR("C595: characteristic-two components changed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: characteristic-two components changed");
   }
   if (size(reduce(H,std(vertical)))<>0)
   {
-    ERROR("C595: vertical component escaped the persistent ideal");
+    ERROR("STABLE_COMPONENT_IDENTITIES: vertical component escaped the persistent ideal");
   }
   if (size(reduce(ideal(H[1]),std(F)))==0)
   {
-    ERROR("C595: the factor 2 is not detected by the first minor");
+    ERROR("STABLE_COMPONENT_IDENTITIES: the factor 2 is not detected by the first minor");
   }
 
   // Direct Fano pullback of the true binary cyclic plane c0=c4=0.
   ideal binary_plane=d0,d1,d4,d5;
   if (!sameIdeal(binary_plane,modular))
   {
-    ERROR("C595: binary plane regression failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: binary plane regression failed");
   }
 }
 
@@ -126,11 +126,11 @@ proc characteristicThree()
   list associated=minAssGTZ(std(F));
   if (size(associated)<>1 || !sameIdeal(associated[1],R1))
   {
-    ERROR("C595: characteristic-three wild regression failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: characteristic-three wild regression failed");
   }
   if (size(reduce(ideal(H[1]),std(F)))==0)
   {
-    ERROR("C595: the factor 3 is not detected by the first minor");
+    ERROR("STABLE_COMPONENT_IDENTITIES: the factor 3 is not detected by the first minor");
   }
 }
 
@@ -142,7 +142,7 @@ proc characteristicFive()
   list associated=minAssGTZ(std(F));
   if (size(associated)<>1 || !sameIdeal(associated[1],R1))
   {
-    ERROR("C595: generic-prime control failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: generic-prime control failed");
   }
 }
 
@@ -175,7 +175,7 @@ proc rSevenPersistent()
   ideal I=minor(upper,3);
   if (!sameIdeal(I,J))
   {
-    ERROR("C595: R7 persistent regression J_6=I_6 failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: R7 persistent regression J_6=I_6 failed");
   }
 }
 
@@ -187,7 +187,7 @@ proc rSevenBinary()
   ideal central=a0,a1,a2,a4,a5,a6;
   if (!sameIdeal(pullback,central))
   {
-    ERROR("C595: R7 central-point regression failed");
+    ERROR("STABLE_COMPONENT_IDENTITIES: R7 central-point regression failed");
   }
 }
 
@@ -197,4 +197,4 @@ characteristicThree();
 characteristicFive();
 rSevenPersistent();
 rSevenBinary();
-print("C595 Singular certificate OK: Q/F2/F3/F5 and R6/R7 regressions");
+print("STABLE_COMPONENT_IDENTITIES Singular certificate OK: Q/F2/F3/F5 and R6/R7 regressions");

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact certificate for C550's four-copy cover-holonomy theorem."""
+"""Exact certificate for FOUR_COPY_HOLONOMY's four-copy cover-holonomy theorem."""
 
 from __future__ import annotations
 
@@ -16,15 +16,15 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 
-STEM = "2026-07-23-c550-four-copy-cover-holonomy"
+STEM = "2026-07-23-four-copy-cover-holonomy"
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / f"{STEM}.json"
-C548_STEM = "2026-07-23-c548-c397-contraction-rank-drop-divisor"
-C548_SCRIPT = HERE / f"{C548_STEM}.py"
-C548_CERTIFICATE = HERE / f"{C548_STEM}.json"
-C548_HASHES = {
-    "script": "1ded3f75a2100c6f53b62498fa7a84c99d91b477b9f9ee3734d68a8c9b19d6f1",
-    "certificate": "31f0ad316e1f8c199d502b3da050fd4371083330c89854790b693c262452c3ca",
+CONTRACTION_DIVISOR_STEM = "2026-07-23-contraction-rank-drop-divisor"
+CONTRACTION_DIVISOR_SCRIPT = HERE / f"{CONTRACTION_DIVISOR_STEM}.py"
+CONTRACTION_DIVISOR_CERTIFICATE = HERE / f"{CONTRACTION_DIVISOR_STEM}.json"
+CONTRACTION_DIVISOR_HASHES = {
+    "script": "abd4f23d1ac3b4c610eb3c0a5610866bd941dccdf3bcd59550fa5fd81bb4f1df",
+    "certificate": "9ca05a5ed99bb5342ecff817dc964c6f9424ca4cdd69684298b8cd938225525b",
 }
 
 
@@ -32,22 +32,22 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def load_c548():
+def load_contraction_divisor():
     observed = {
-        "script": sha256(C548_SCRIPT),
-        "certificate": sha256(C548_CERTIFICATE),
+        "script": sha256(CONTRACTION_DIVISOR_SCRIPT),
+        "certificate": sha256(CONTRACTION_DIVISOR_CERTIFICATE),
     }
-    if observed != C548_HASHES:
-        raise AssertionError(f"C548 input drift: {observed}")
-    spec = importlib.util.spec_from_file_location("c548_frozen", C548_SCRIPT)
+    if observed != CONTRACTION_DIVISOR_HASHES:
+        raise AssertionError(f"CONTRACTION_DIVISOR input drift: {observed}")
+    spec = importlib.util.spec_from_file_location("contraction_divisor_frozen", CONTRACTION_DIVISOR_SCRIPT)
     if spec is None or spec.loader is None:
-        raise AssertionError("cannot load frozen C548 checker")
+        raise AssertionError("cannot load frozen CONTRACTION_DIVISOR checker")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    return module, json.loads(C548_CERTIFICATE.read_text())
+    return module, json.loads(CONTRACTION_DIVISOR_CERTIFICATE.read_text())
 
 
-C548, C548_DATA = load_c548()
+CONTRACTION_DIVISOR, CONTRACTION_DIVISOR_DATA = load_contraction_divisor()
 Poly = tuple[int, ...]
 Perm = tuple[int, ...]
 S6 = tuple(itertools.permutations(range(6)))
@@ -155,10 +155,10 @@ def quotient_copy_matrix(sigma: tuple[int, ...]) -> list[list[int]]:
 
 def transport_matrix(party_permutation: Perm) -> list[list[Poly]]:
     """The 9x9 systematic two-matching transport operator."""
-    sigmas = C548.permuted_sigmas(party_permutation)
+    sigmas = CONTRACTION_DIVISOR.permuted_sigmas(party_permutation)
     transports = [quotient_copy_matrix(sigma) for sigma in sigmas]
-    code_columns = C548.code_columns()
-    output = [[C548.ZERO] * 9 for _ in range(9)]
+    code_columns = CONTRACTION_DIVISOR.code_columns()
+    output = [[CONTRACTION_DIVISOR.ZERO] * 9 for _ in range(9)]
     for constrained_party in range(3):
         for free_party in range(3):
             coefficient = code_columns[constrained_party][free_party]
@@ -168,7 +168,7 @@ def transport_matrix(party_permutation: Perm) -> list[list[Poly]]:
                 for copy_column in range(3):
                     output[3 * constrained_party + copy_row][
                         3 * free_party + copy_column
-                    ] = C548.pscale(
+                    ] = CONTRACTION_DIVISOR.pscale(
                         coefficient,
                         left[copy_row][copy_column] - right[copy_row][copy_column],
                     )
@@ -177,7 +177,7 @@ def transport_matrix(party_permutation: Perm) -> list[list[Poly]]:
 
 def raw_transport_blocks(party_permutation: Perm) -> list[list[int]]:
     """The 9x9 integer matrix before inserting the nine code coefficients."""
-    sigmas = C548.permuted_sigmas(party_permutation)
+    sigmas = CONTRACTION_DIVISOR.permuted_sigmas(party_permutation)
     transports = [quotient_copy_matrix(sigma) for sigma in sigmas]
     output = [[0] * 9 for _ in range(9)]
     for block_row in range(3):
@@ -255,24 +255,24 @@ EXPECTED_LEDGERS = {
 
 
 def determinant_identities() -> dict[str, object]:
-    invariants = C548.invariant_polynomials()
+    invariants = CONTRACTION_DIVISOR.invariant_polynomials()
     a_value = (0, -4, 8, -4)
     b_value = invariants["B"]
     d_value = (2, -2)
-    signed_minus = C548.psub(
-        C548.pscale(b_value, 3), C548.pscale(a_value, 2)
+    signed_minus = CONTRACTION_DIVISOR.psub(
+        CONTRACTION_DIVISOR.pscale(b_value, 3), CONTRACTION_DIVISOR.pscale(a_value, 2)
     )
-    signed_plus = C548.padd(
-        C548.pscale(b_value, 3), C548.pscale(a_value, 2)
+    signed_plus = CONTRACTION_DIVISOR.padd(
+        CONTRACTION_DIVISOR.pscale(b_value, 3), CONTRACTION_DIVISOR.pscale(a_value, 2)
     )
-    z2_value = C548.psub(
-        C548.pmul(b_value, b_value),
-        C548.pscale(C548.pmul(a_value, a_value), 2),
+    z2_value = CONTRACTION_DIVISOR.psub(
+        CONTRACTION_DIVISOR.pmul(b_value, b_value),
+        CONTRACTION_DIVISOR.pscale(CONTRACTION_DIVISOR.pmul(a_value, a_value), 2),
     )
     resonances = {
         "minus": (signed_minus, b_value),
         "plus": (signed_plus, b_value),
-        "z2": (z2_value, C548.ONE),
+        "z2": (z2_value, CONTRACTION_DIVISOR.ONE),
     }
     output = {}
     for name, representative in REPRESENTATIVES.items():
@@ -280,11 +280,11 @@ def determinant_identities() -> dict[str, object]:
         if ledger != EXPECTED_LEDGERS[name]:
             raise AssertionError(f"{name} cycle-ledger drift")
         resonance, extra_unit = resonances[name]
-        expected = C548.pscale(
-            C548.pmul(
-                C548.pmul(
-                    C548.pmul(
-                        C548.pmul(d_value, C548.pmul(d_value, d_value)),
+        expected = CONTRACTION_DIVISOR.pscale(
+            CONTRACTION_DIVISOR.pmul(
+                CONTRACTION_DIVISOR.pmul(
+                    CONTRACTION_DIVISOR.pmul(
+                        CONTRACTION_DIVISOR.pmul(d_value, CONTRACTION_DIVISOR.pmul(d_value, d_value)),
                         a_value,
                     ),
                     extra_unit,
@@ -293,7 +293,7 @@ def determinant_identities() -> dict[str, object]:
             ),
             64,
         )
-        observed = C548.det_bareiss(transport_matrix(representative))
+        observed = CONTRACTION_DIVISOR.det_bareiss(transport_matrix(representative))
         if observed != expected:
             raise AssertionError(f"{name} transport determinant identity failed")
         output[name] = {
@@ -327,24 +327,24 @@ def resonance_root_spectrum() -> dict[str, object]:
         value / (1 - value) ** 2 for value in axial_squares
     } != {Fraction(2, 1)}:
         raise AssertionError("axial root orbit drift")
-    # C396's y=(t-1)^2/t satisfies y+1=-b/t and y-1=-c/t.
+    # HOLONOMY_COMPLETENESS's y=(t-1)^2/t satisfies y+1=-b/t and y-1=-c/t.
     y_numerator = (1, -2, 1)
-    if C548.padd(y_numerator, C548.T) != (1, -1, 1):
+    if CONTRACTION_DIVISOR.padd(y_numerator, CONTRACTION_DIVISOR.T) != (1, -1, 1):
         raise AssertionError("y+1 numerator drift")
-    if C548.psub(y_numerator, C548.T) != (1, -3, 1):
+    if CONTRACTION_DIVISOR.psub(y_numerator, CONTRACTION_DIVISOR.T) != (1, -3, 1):
         raise AssertionError("y-1 numerator drift")
     a_value = (0, -4, 8, -4)
-    b_value = C548.invariant_polynomials()["B"]
-    signed_product = C548.pmul(
-        C548.psub(C548.pscale(b_value, 3), C548.pscale(a_value, 2)),
-        C548.padd(C548.pscale(b_value, 3), C548.pscale(a_value, 2)),
+    b_value = CONTRACTION_DIVISOR.invariant_polynomials()["B"]
+    signed_product = CONTRACTION_DIVISOR.pmul(
+        CONTRACTION_DIVISOR.psub(CONTRACTION_DIVISOR.pscale(b_value, 3), CONTRACTION_DIVISOR.pscale(a_value, 2)),
+        CONTRACTION_DIVISOR.padd(CONTRACTION_DIVISOR.pscale(b_value, 3), CONTRACTION_DIVISOR.pscale(a_value, 2)),
     )
-    axial_factor = C548.psub(
-        C548.pmul(b_value, b_value),
-        C548.pscale(C548.pmul(a_value, a_value), 2),
+    axial_factor = CONTRACTION_DIVISOR.psub(
+        CONTRACTION_DIVISOR.pmul(b_value, b_value),
+        CONTRACTION_DIVISOR.pscale(CONTRACTION_DIVISOR.pmul(a_value, a_value), 2),
     )
-    if C548.psub(signed_product, C548.pscale(axial_factor, 2)) != C548.pscale(
-        C548.pmul(b_value, b_value), 7
+    if CONTRACTION_DIVISOR.psub(signed_product, CONTRACTION_DIVISOR.pscale(axial_factor, 2)) != CONTRACTION_DIVISOR.pscale(
+        CONTRACTION_DIVISOR.pmul(b_value, b_value), 7
     ):
         raise AssertionError("characteristic-seven scheme identity drift")
     ramification_root = Fraction(3, 5)
@@ -369,7 +369,7 @@ def resonance_root_spectrum() -> dict[str, object]:
     return {
         "coordinate": "r=b/c",
         "map": "w=r/(1-r^2), z=r^2/(1-r^2)^2",
-        "c396_bridge": {
+        "holonomy_completeness_bridge": {
             "y": "(t-1)^2/t",
             "cayley_transform": "r=(y+1)/(y-1), y=(r+1)/(r-1)",
             "deck_dictionary": {
@@ -450,7 +450,7 @@ def matching_image(matching: set[frozenset[int]], value: Perm) -> set[frozenset[
 def bare_cover_automorphisms() -> dict[str, object]:
     """Automorphisms of the unweighted colored cover, before linear reduction."""
     symmetric4 = tuple(itertools.permutations(range(4)))
-    seed = (C548.IDENTITY4,) + C548.SEED_TAIL
+    seed = (CONTRACTION_DIVISOR.IDENTITY4,) + CONTRACTION_DIVISOR.SEED_TAIL
     seed_index = {value: index for index, value in enumerate(seed)}
     images = {"bipartition_preserving": set(), "bipartition_swapping": set()}
     lift_counts = Counter()
@@ -493,8 +493,8 @@ def bare_cover_automorphisms() -> dict[str, object]:
     }
 
 
-def support_from_c548(bit: int) -> set[Perm]:
-    word = C548_DATA["component_mask_word_in_lexicographic_S6_order"]
+def support_from_contraction_divisor(bit: int) -> set[Perm]:
+    word = CONTRACTION_DIVISOR_DATA["component_mask_word_in_lexicographic_S6_order"]
     masks = [int(word[2 * index : 2 * index + 2], 16) for index in range(720)]
     return {
         permutation
@@ -545,14 +545,14 @@ def polyhedral_classification() -> dict[str, object]:
         if cell["representative"] == REPRESENTATIVES["plus"]
     )
     for bit in (0, 1):
-        if support_from_c548(bit) != axis_support:
-            raise AssertionError("C548 z=2 mask is not the axial double coset")
+        if support_from_contraction_divisor(bit) != axis_support:
+            raise AssertionError("CONTRACTION_DIVISOR z=2 mask is not the axial double coset")
     for bit in (2, 3):
-        if support_from_c548(bit) != minus_support:
-            raise AssertionError("C548 minus mask is not the negative chiral cell")
+        if support_from_contraction_divisor(bit) != minus_support:
+            raise AssertionError("CONTRACTION_DIVISOR minus mask is not the negative chiral cell")
     for bit in (4, 5):
-        if support_from_c548(bit) != plus_support:
-            raise AssertionError("C548 plus mask is not the positive chiral cell")
+        if support_from_contraction_divisor(bit) != plus_support:
+            raise AssertionError("CONTRACTION_DIVISOR plus mask is not the positive chiral cell")
 
     def describe_cells(
         cells: list[dict[str, object]], marked: bool
@@ -601,18 +601,18 @@ def polyhedral_classification() -> dict[str, object]:
     ] != {1: 1, 2: 1, 4: 2}:
         raise AssertionError("rotational degree-six action does not have C4 stabilizer")
 
-    invariants = C548.invariant_polynomials()
+    invariants = CONTRACTION_DIVISOR.invariant_polynomials()
     a_value = (0, -4, 8, -4)
     resonance_factors = {
-        "B^2-2A^2": C548.psub(
-            C548.pmul(invariants["B"], invariants["B"]),
-            C548.pscale(C548.pmul(a_value, a_value), 2),
+        "B^2-2A^2": CONTRACTION_DIVISOR.psub(
+            CONTRACTION_DIVISOR.pmul(invariants["B"], invariants["B"]),
+            CONTRACTION_DIVISOR.pscale(CONTRACTION_DIVISOR.pmul(a_value, a_value), 2),
         ),
-        "3B-2A": C548.psub(
-            C548.pscale(invariants["B"], 3), C548.pscale(a_value, 2)
+        "3B-2A": CONTRACTION_DIVISOR.psub(
+            CONTRACTION_DIVISOR.pscale(invariants["B"], 3), CONTRACTION_DIVISOR.pscale(a_value, 2)
         ),
-        "3B+2A": C548.padd(
-            C548.pscale(invariants["B"], 3), C548.pscale(a_value, 2)
+        "3B+2A": CONTRACTION_DIVISOR.padd(
+            CONTRACTION_DIVISOR.pscale(invariants["B"], 3), CONTRACTION_DIVISOR.pscale(a_value, 2)
         ),
     }
 
@@ -620,11 +620,11 @@ def polyhedral_classification() -> dict[str, object]:
         output = []
         for cell in cells:
             representative = cell["representative"]
-            determinant = C548.det_bareiss(transport_matrix(representative))
+            determinant = CONTRACTION_DIVISOR.det_bareiss(transport_matrix(representative))
             hits = [
                 name
                 for name, factor in resonance_factors.items()
-                if not C548.pdivmod_q(determinant, factor)[1]
+                if not CONTRACTION_DIVISOR.pdivmod_q(determinant, factor)[1]
             ]
             output.append(
                 {
@@ -677,7 +677,7 @@ def polyhedral_classification() -> dict[str, object]:
 
 
 def finite_rank(matrix: Sequence[Sequence[Poly]], point: int, prime: int) -> int:
-    return C548.rank_numeric(matrix, point, prime)
+    return CONTRACTION_DIVISOR.rank_numeric(matrix, point, prime)
 
 
 def finite_bridge() -> dict[str, object]:
@@ -688,8 +688,8 @@ def finite_bridge() -> dict[str, object]:
         quotient_histogram: Counter[int] = Counter()
         for party_permutation in S6:
             quotient_rank = finite_rank(
-                C548.contraction_matrix(
-                    C548.permuted_sigmas(party_permutation)
+                CONTRACTION_DIVISOR.contraction_matrix(
+                    CONTRACTION_DIVISOR.permuted_sigmas(party_permutation)
                 ),
                 point,
                 prime,
@@ -714,8 +714,8 @@ def finite_bridge() -> dict[str, object]:
 
 def analyze() -> dict[str, object]:
     return {
-        "schema": "c550-four-copy-cover-holonomy-v1",
-        "frozen_inputs": C548_HASHES,
+        "schema": "four_copy_holonomy-four-copy-cover-holonomy-v1",
+        "frozen_inputs": CONTRACTION_DIVISOR_HASHES,
         "conventions": {
             "copy_quotient_basis": "classes of e1,e2,e3 in k^4/k(1,1,1,1)",
             "party_permutations": "zero-based images in lexicographic S6 order",
@@ -746,14 +746,14 @@ def main() -> None:
     payload = analyze()
     encoded = canonical_bytes(payload)
     if args.check:
-        with tempfile.TemporaryDirectory(prefix="c550-check-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="four_copy_holonomy-check-") as temporary:
             candidate = Path(temporary) / OUTPUT.name
             candidate.write_bytes(encoded)
             if not OUTPUT.exists():
                 raise AssertionError(f"missing canonical output {OUTPUT}")
             if candidate.read_bytes() != OUTPUT.read_bytes():
-                raise AssertionError("canonical C550 certificate is stale")
-        print("C550 cover-holonomy certificate: PASS")
+                raise AssertionError("canonical FOUR_COPY_HOLONOMY certificate is stale")
+        print("FOUR_COPY_HOLONOMY cover-holonomy certificate: PASS")
     else:
         OUTPUT.write_bytes(encoded)
         print(f"wrote {OUTPUT}")

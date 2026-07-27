@@ -15,5 +15,5 @@ dependency order:
 8. proof, computation, literature, and formalization boundaries.
 
 The all-MDS/CSS intertwiner theorem precedes the pencil classification:
-the former is characteristic-uniform, while the latter uses C396's odd
+the former is characteristic-uniform, while the latter uses the odd-prime
 admitted parameter domain.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay for the C498 PRS(q-5) census.
+"""Independent replay for the REDUNDANCY_SIX PRS(q-5) census.
 
 The Rust generator uses both four-secant marking and the Hankel-net criterion.
 This stdlib-only replay rebuilds the finite fields independently and checks:
@@ -21,7 +21,7 @@ deep-set certificate.
 
 Run from the repository root:
 
-  python3 notes/2026-07-22-c498-prs-deep-hole-replay.py
+  python3 2026-07-22-redundancy-five-deep-hole-replay.py
 
 Deterministic; no third-party dependencies, randomness, or timestamps.
 """
@@ -534,7 +534,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--json",
-        default="notes/2026-07-22-c498-prs-deep-hole-census.json",
+        default="2026-07-22-prs-deep-hole-census.json",
     )
     parser.add_argument("--fields", default="7,8,9,11,13,16")
     parser.add_argument(
@@ -545,10 +545,10 @@ def main():
     args = parser.parse_args()
     with open(args.json, encoding="utf-8") as src:
         cert = json.load(src)
-    assert cert["schema"] == "c498-prs-deep-hole-census-v1"
+    assert cert["schema"] == "redundancy_six-prs-deep-hole-census-v1"
     for q in map(int, args.fields.split(",")):
         replay_field(q, cert["fields"][str(q)], not args.skip_direct)
-    print("C498 independent replay: ALL CHECKS PASS")
+    print("REDUNDANCY_SIX independent replay: ALL CHECKS PASS")
 
 
 if __name__ == "__main__":

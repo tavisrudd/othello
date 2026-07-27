@@ -26,8 +26,8 @@
     }
   },
   "inputs": {
-    "c595_integer_N": 6,
-    "c595_json_sha256": "ddfd860084a822aeae362a40fbac02d8053ae92546cd8214bc432dc681f5981c"
+    "fano_integer_N": 6,
+    "fano_json_sha256": "f21d072783407e1493c2b3b119a76902d1d23cc30c1cb708e619e8937267439d"
   },
   "integral_bridge": {
     "certificate": [
@@ -37,7 +37,7 @@
       "J[D^-1]=V[D^-1] over Z[1/3]",
       "(J:D^infinity)=V over Z[1/6]"
     ],
-    "combined_with_c595_integer": 6,
+    "combined_with_fano_integer": 6,
     "explicit_matrix_multiplier": 3,
     "minimal_cleared_denominator": 3,
     "minimality_scope": "minimal for this elimination presentation, not asserted as an intrinsic invariant",
@@ -57,7 +57,7 @@
     "reason": "distinct marker products are dense in the full binary-form parameter space, so attainable bottom syndromes close to the projectivized catalecticant rowspace; irreducibility and the componentwise line calculations close transport",
     "status": "proved"
   },
-  "schema": "c597-r10-integral-bad-scheme-sc11-v1",
+  "schema": "stable_component_fibres-r10-integral-bad-scheme-sc11-v1",
   "transport_gate": {
     "attainable_bottom_closure": "P(rowspace Cat_{j-5,4}(f)); proved by density of distinct split marker products and projective linearity",
     "binary_affine_F4_regression_j_6_to_9": [
@@ -84,7 +84,7 @@
     "pluecker_relation": "z0*z5-z1*z4+z2*z3"
   },
   "vertical_fibres": {
-    "2": "Pl\u00fccker pullback has the binary cyclic plane c0=c4=0 plus a component contained in the persistent determinant; C525 closes the remaining ordered-Hessian inseparable locus.",
-    "3": "Use the true wild cone rather than the non-flat primitive specialization; C595 confines its coherent-Fano pullback to the rank/fixed-factor boundary."
+    "2": "Pl\u00fccker pullback has the binary cyclic plane c0=c4=0 plus a component contained in the persistent determinant; The ordered-Hessian calculation closes the remaining inseparable locus.",
+    "3": "Use the true wild cone rather than the non-flat primitive specialization; the coherent-Fano calculation confines its pullback to the rank/fixed-factor boundary."
   }
 }

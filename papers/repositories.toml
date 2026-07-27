@@ -16,6 +16,42 @@ source = "papers/ame_lu"
 paper_ids = ["ame_lu"]
 disposition = "active"
 
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger, superseded by the public theorem and verification maps"
+
+[[repository.exclude_path]]
+path = "formal-statement-adequacy.md"
+reason = "internal formalization review record, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims and boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
+
+[[repository.exclude_path]]
+path = "release/PUBLIC-EXPORT.md"
+reason = "private monorepo-to-public export plan, superseded by the standalone repository manifest"
+
+[[repository.exclude_path]]
+path = "release/QUANTUM-CHECKLIST.md"
+reason = "internal submission checklist, not part of the public manuscript repository"
+
 [[repository]]
 name = "arcs-complete-outside-conic"
 source = "papers/arcs_complete_outside_conic"
@@ -28,6 +64,46 @@ name = "beyond4-prs"
 source = "papers/beyond4_prs"
 paper_ids = ["beyond4_prs", "beyond4_prs_submission"]
 disposition = "active"
+
+[[repository.exclude_path]]
+path = "RELEASE-CHECKLIST.md"
+reason = "internal release workflow, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger, superseded by the public theorem and verification maps"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "private literature-audit work record; cited public sources remain in the bibliography"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims and boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
+
+[[repository.exclude_path]]
+path = "submission/tit-cover-letter.md"
+reason = "private editor correspondence, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "submission/tit-submission-checklist.md"
+reason = "internal submission checklist, not part of the public manuscript repository"
 
 [[repository]]
 name = "clebsch-factorization"

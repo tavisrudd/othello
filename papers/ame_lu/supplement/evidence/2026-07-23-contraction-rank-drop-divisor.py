@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact certificate for C548's four-copy contraction rank-drop divisor."""
+"""Exact certificate for CONTRACTION_DIVISOR's four-copy contraction rank-drop divisor."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 
-STEM = "2026-07-23-c548-c397-contraction-rank-drop-divisor"
+STEM = "2026-07-23-contraction-rank-drop-divisor"
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / f"{STEM}.json"
 COPIES = 4
@@ -269,7 +269,7 @@ def independent_rows(
 
 def saturate_boundary(value: Poly) -> Poly:
     result = primitive(value)
-    # The admitted non-GRS pencil in C396 inverts t, t-1, B, and the
+    # The admitted non-GRS pencil in HOLONOMY_COMPLETENESS inverts t, t-1, B, and the
     # conic/GRS quartic.
     boundary_factors = (
         T,
@@ -870,7 +870,7 @@ def analyze() -> dict[str, object]:
         for factor in ((1, 3, 1), (1, 0, 1))
     }
     return {
-        "schema": "c548-rank-drop-v1",
+        "schema": "contraction_divisor-rank-drop-v1",
         "conventions": {
             "party_permutations": "zero-based images",
             "copy_permutations": "zero-based images",

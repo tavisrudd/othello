@@ -480,7 +480,7 @@
     "pgl2_order": 6840
   },
   "rank_four_reduction": "For a six-arc and its Gale dual, rank four occurs for the 60 triples of omitted pairs forming a three-edge star, plus perfect matchings whose three chords concur in both arcs.",
-  "schema": "c402-h3-ame-uniform-lu-separation-v1",
+  "schema": "h3_lu_separation-h3-ame-uniform-lu-separation-v1",
   "six_point_permutation_lemma": {
     "characteristic_stop": "A point stabilizer in the sharply three-transitive order-120 action is the sharply two-transitive Frobenius group C5 semidirect C4. If the characteristic is not 5, C5 is semisimple in PGL2 and its torus normalizer induces at most inversion, contradicting the faithful C4 action. Hence the characteristic is 5.",
     "exceptional_action": "sharply three-transitive on six points",

@@ -2741,5 +2741,5 @@
     "8": "t^3 = t + 1  (t^3+t+1)",
     "9": "t^2 = -1  (t^2+1)"
   },
-  "schema": "c491-prs-deep-hole-census-v1"
+  "schema": "redundancy_five-prs-deep-hole-census-v1"
 }

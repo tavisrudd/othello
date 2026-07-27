@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""C491 independent replay: deep holes of PRS(q-4) via the Hankel-pencil criterion.
+"""REDUNDANCY_FIVE independent replay: deep holes of PRS(q-4) via the Hankel-pencil criterion.
 
-Independent of 2026-07-22-c491-prs-deep-hole-census.py (which marks spans of column
+Independent of 2026-07-22-prs-deep-hole-census.py (which marks spans of column
 triples): here a point f=(a0..a4) of PG(4,q) is classified via the kernel of the 2x4
 Hankel matrix H(f) = [[a0,a1,a2,a3],[a1,a2,a3,a4]]: f lies in the span of 3 distinct
 columns nu(t1),nu(t2),nu(t3) of the parity check iff the cubic prod(T - t_i U) (factor U
-for t_i = inf) lies in ker H(f) (Lemma 1 of the C491 report); f (off the curve) is a
+for t_i = inf) lies in ker H(f) (Lemma 1 of the REDUNDANCY_FIVE report); f (off the curve) is a
 deep hole iff no member of the kernel pencil is a totally split squarefree cubic.
 
 The replay independently constructs each classified family:
@@ -31,8 +31,8 @@ Checks per field q against the census JSON:
      q in {7,8,9,11,13,17,19} in the census range).
 
 Run (from repo root):
-  python3 notes/2026-07-22-c491-prs-deep-hole-replay.py \
-      [--json notes/2026-07-22-c491-prs-deep-hole-census.json] [--fields 7,8,...]
+  python3 2026-07-22-redundancy-five-deep-hole-replay.py \
+      [--json 2026-07-22-prs-deep-hole-census.json] [--fields 7,8,...]
 Exit code 0 iff every check passes.  Deterministic; stdlib only; no timestamps.
 """
 import argparse
@@ -565,7 +565,7 @@ def w_family(F):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--json', default='notes/2026-07-22-c491-prs-deep-hole-census.json')
+    ap.add_argument('--json', default='2026-07-22-prs-deep-hole-census.json')
     ap.add_argument('--fields', default=None)
     args = ap.parse_args()
     with open(args.json) as fh:

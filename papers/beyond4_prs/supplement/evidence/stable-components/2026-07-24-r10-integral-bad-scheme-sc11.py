@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate and independently check the compact C597 certificate."""
+"""Generate and independently check the compact STABLE_COMPONENT_FIBRES certificate."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from pathlib import Path
 STEM = Path(__file__).with_suffix("")
 JSON_PATH = STEM.with_suffix(".json")
 MANIFEST_PATH = STEM.with_suffix(".sha256")
-C595_JSON = STEM.with_name("2026-07-24-c595-stable-component-fano-elimination.json")
+FANO_JSON = STEM.with_name("2026-07-24-stable-component-fano-elimination.json")
 Poly = dict[tuple[int, ...], int]
 
 
@@ -593,10 +593,10 @@ def digest(path: Path) -> str:
 def payload() -> dict[str, object]:
     verify_factor_branches()
     verify_bridge_certificate()
-    c595 = json.loads(C595_JSON.read_text())
-    assert c595["cleared_denominator_certificate"]["integer_N"] == 6
+    fano_certificate = json.loads(FANO_JSON.read_text())
+    assert fano_certificate["cleared_denominator_certificate"]["integer_N"] == 6
     return {
-        "schema": "c597-r10-integral-bad-scheme-sc11-v1",
+        "schema": "stable_component_fibres-r10-integral-bad-scheme-sc11-v1",
         "universal_ordered_root_model": {
             "base": "Gr(2,Gamma^3 E)_Z",
             "pluecker_relation": "z0*z5-z1*z4+z2*z3",
@@ -631,7 +631,7 @@ def payload() -> dict[str, object]:
             ),
             "necessity_witness_mod_3": [1, 0, 0, 1, 0],
             "explicit_matrix_multiplier": 3,
-            "combined_with_c595_integer": 6,
+            "combined_with_fano_integer": 6,
         },
         "finite_factor_controls": {
             str(prime): finite_factor_control(prime) for prime in (2, 3, 5)
@@ -640,11 +640,11 @@ def payload() -> dict[str, object]:
             "2": (
                 "Plücker pullback has the binary cyclic plane c0=c4=0 "
                 "plus a component contained in the persistent determinant; "
-                "C525 closes the remaining ordered-Hessian inseparable locus."
+                "The ordered-Hessian calculation closes the remaining inseparable locus."
             ),
             "3": (
                 "Use the true wild cone rather than the non-flat primitive "
-                "specialization; C595 confines its coherent-Fano pullback to "
+                "specialization; the coherent-Fano calculation confines its pullback to "
                 "the rank/fixed-factor boundary."
             ),
         },
@@ -678,8 +678,8 @@ def payload() -> dict[str, object]:
             ),
         },
         "inputs": {
-            "c595_json_sha256": digest(C595_JSON),
-            "c595_integer_N": 6,
+            "fano_json_sha256": digest(FANO_JSON),
+            "fano_integer_N": 6,
         },
     }
 
@@ -706,7 +706,7 @@ def check_bundle() -> None:
     if MANIFEST_PATH.read_bytes() != manifest_bytes():
         raise SystemExit(f"stale manifest: {MANIFEST_PATH}")
     print(
-        "C597 Python certificate OK: bottom factor trichotomy, "
+        "STABLE_COMPONENT_FIBRES Python certificate OK: bottom factor trichotomy, "
         "bridge saturation, F_2/F_3/F_5 controls; rowspace transport recorded"
     )
 

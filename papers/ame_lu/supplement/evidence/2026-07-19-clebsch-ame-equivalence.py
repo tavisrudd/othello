@@ -15,7 +15,7 @@ from typing import Iterable, Sequence
 Q = 11
 N = 6
 HERE = Path(__file__).resolve().parent
-OUTPUT = HERE / "2026-07-19-c374-clebsch-ame-equivalence.json"
+OUTPUT = HERE / "2026-07-19-clebsch-ame-equivalence.json"
 
 Vector = tuple[int, ...]
 Matrix = tuple[Vector, ...]
@@ -469,7 +469,7 @@ def build_certificate() -> dict[str, object]:
         distribution = marginal_triple_moment_distribution(rowspace(grs_code(evaluation_set)))
         direct_moment_census[distribution] += 1
     return {
-        "schema": "c374-clebsch-ame-equivalence-v1",
+        "schema": "clebsch_ame-clebsch-ame-equivalence-v1",
         "field": "F_11",
         "pauli_convention": "X(a)|x>=|x+a>; Z(b)|x>=omega^(b*x)|x>",
         "state_convention": "|Psi_C>=11^(-3/2) sum_{c in C}|c>; labels ordered (x_0,...,x_5|z_0,...,z_5)",
