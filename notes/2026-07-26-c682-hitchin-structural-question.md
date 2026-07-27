@@ -318,6 +318,30 @@ shows that this operator pair carries the same quadratic descent class as
 the parent torsor.  This would package the arithmetic and harmonic halves
 in one covariant without asserting a parent-independent ambient map.
 
+## `ej` + `tt` interim closeout
+
+The free upgrade was to linearize the determinantal condition.  It converts
+the rank-four observation from a pointwise coincidence into a local
+geometric statement: the projective rank locus is smooth of dimension
+three at the Klein point, and the Mukai--Umemura closure is its local
+component there.
+
+The Tao-style audit separates three assertions that could otherwise be
+blurred:
+
+1. the third-transvectant kernel identifies the two open
+   \(PSL_2/A_5\) orbits;
+2. the rank locus and the Mukai--Umemura closure agree locally at the
+   Klein point; but
+3. neither fact proves global equality, excludes remote determinantal
+   components, or extends the kernel map across every boundary point.
+
+The next decisive calculation should therefore analyze boundary orbit
+representatives and the saturated ideal of the rank-plus-isotropy locus,
+not collect more generic examples.  On the algorithmic side, exact rank
+and isotropy are certificates; singular-value heuristics under noise are
+only proposed experiments until a perturbation theorem supplies a gap.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
