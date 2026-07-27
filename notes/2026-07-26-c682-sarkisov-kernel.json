@@ -1,0 +1,68 @@
+{
+  "artifact": "C682 pointed Mukai-Umemura to V5 kernel mechanism",
+  "basis_convention": "Sym^d uses x^(d-i)y^i, 0<=i<=d",
+  "field": "Q",
+  "map": {
+    "formula_normalized": "F_lambda([I:z])=[<I,lambda^6>_6-11*z*lambda^6]",
+    "normalization": "<x^6*y^6,x^6>_6=x^6",
+    "quadratic_target_equation": "(F_lambda,F_lambda)_4=0",
+    "unnormalized_cancellation": 5702400
+  },
+  "source": {
+    "klein_dodecic": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      11,
+      0,
+      0,
+      0,
+      0,
+      -1,
+      0
+    ],
+    "line": "L_lambda=P(lambda^11*U)",
+    "transverse_family": "[x^11*y+11*u*x^6*y^6-u^2*x*y^11:u]"
+  },
+  "target_center": {
+    "apolar_hyperplane_normal": "[lambda^6]",
+    "curve": "Gamma_lambda={[lambda*m^5]:[m] in P(U)}",
+    "kernel_basis_at_lambda_x": [
+      "x^2*(s*x+t*y)^2",
+      "2*s^3*x^3*y+5*s^2*t*x^2*y^2+4*s*t^2*x*y^3+t^3*y^4"
+    ],
+    "operator_rank": 3,
+    "pluecker_cover": [
+      "2*s^5",
+      "t^5"
+    ],
+    "rank_minor_cover": [
+      "3888000*s^15",
+      "-648000*t^15"
+    ],
+    "quotient_splitting": "O_P1(1)+O_P1(2)+O_P1(2)",
+    "tautological_splitting": "O_P1(-2)+O_P1(-3)",
+    "unique_bisecant": "P(lambda^5*U)"
+  },
+  "prime_replay": {
+    "chart_domain": "1<=a<=5, 0<=b,c<=4, d=(1+bc)/a",
+    "chart_points": 125,
+    "p1_points": 102,
+    "prime": 101
+  },
+  "status": {
+    "proved_exactly": [
+      "dense-orbit image satisfies the five V5 quadrics",
+      "the map is dominant",
+      "the stabilizer surface maps to Gamma_lambda",
+      "the projection center contains L_lambda",
+      "a transverse degeneration has exact order two",
+      "the center kernel bundle splits as O(-2)+O(-3)",
+      "the center quotient bundle splits as O(1)+O(2)+O(2)"
+    ],
+    "remaining_gate": "identify the resolved graph scheme-theoretically with the Sarkisov blow-up-flop-blow-down"
+  }
+}

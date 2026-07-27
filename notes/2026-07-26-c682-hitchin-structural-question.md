@@ -1783,6 +1783,287 @@ classification of constant-rank kernel inverses or a concrete consequence
 for the \(V_{22}\)--\(V_5\) Sarkisov/Hilbert-scheme correspondence.  No
 novelty claim is made for the ladder in the present bounded pass.
 
+## 17. A pointed kernel formula for the \(V_{22}\dashrightarrow V_5\) link
+
+The high target is now precise.  It is not merely another description of
+the two Fano threefolds, and it is not the already known abstract
+functoriality of double projection.  It is a base-change-compatible
+formula for the *pointed* rational map
+\[
+ (X^{\rm MU},L_\lambda)\dashrightarrow
+ (V_5,\Gamma_\lambda)
+ \tag{17.1}
+\]
+directly in the dodecic and sextic kernel coordinates, followed by an
+explicit lift to their tautological bundles and rational-curve spaces.
+
+### What the primary sources already give
+
+Kuznetsov--Prokhorov--Shramov, arXiv:1605.02010,
+Theorem 5.2.2, Remark 5.2.4, Lemma 5.2.5, and Remark 5.2.6, prove that
+double projection from a line \(L\subset V_{22}\) is a Sarkisov link to
+\(V_5\), centered on a normal rational quintic \(\Gamma\), and that the
+construction is functorial for isomorphisms of pairs.  In their
+binary-sextic model they also identify the Mukai--Umemura center as
+\[
+ \Gamma_x=\{[\,x(sx+ty)^5\,]:(s:t)\in\mathbf P^1\}\subset V_5,
+ \tag{17.2}
+\]
+with unique bisecant \(L_{x^2}=\mathbf P(x^5U)\).  Equivariance therefore
+gives, for every \([\lambda]\in\mathbf P(U)\),
+\[
+ \Gamma_\lambda
+ =\{[\lambda m^5]:[m]\in\mathbf P(U)\},\qquad
+ \langle\Gamma_\lambda\rangle
+ =\mathbf P(\lambda\operatorname{Sym}^5U),\qquad
+ B_\lambda=\mathbf P(\lambda^5U).
+ \tag{17.3}
+\]
+The apolar normal of the hyperplane in (17.3) is
+\([\lambda^6]\in\mathbf P(\operatorname{Sym}^6U)^*\).
+
+Chung--Kim, arXiv:2606.18102, Sections 2.2--3, then use this link to
+construct the generically two-to-one rational map
+\(\mathcal H_4(V_{22})\dashrightarrow\operatorname{Sym}^4\Gamma\).
+Neither source, in the portions checked, writes the pointwise link as a
+transvectant between the two kernel models.  Thus (17.2)--(17.3) and the
+abstract word “functorial” are prior art; the candidate contribution is
+the explicit natural transformation below and what it does to bundles
+and the quartic double cover.
+
+### The linear covariant
+
+Use ordinary-derivative transvectants and normalize the sixth
+transvectant by
+\[
+ \langle x^6y^6,x^6\rangle_6=x^6.
+\]
+Write the anticanonical Mukai--Umemura model as
+\[
+ X^{\rm MU}
+ =\overline{\operatorname{SL}_2\cdot[\Phi_{12}:1]}
+ \subset\mathbf P(U_{12}\oplus U_0),
+ \qquad
+ \Phi_{12}=xy(x^{10}+11x^5y^5-y^{10}).
+\]
+For a line parameter \([\lambda]\in\mathbf P(U)\), define
+\[
+ F_\lambda([I:z])
+ =
+ \big[
+   \langle I,\lambda^6\rangle_6-11z\lambda^6
+ \big]\in\mathbf P(U_6).
+ \tag{17.4}
+\]
+Before the invariant coordinate was included, the sole covariant
+\(\langle I,\lambda^6\rangle_6\) failed the \(V_5\) rank test.  The
+coefficient \(-11\) is forced by cancellation of the middle term of the
+Klein dodecic.  In the unnormalized derivative convention of the exact
+audit, (17.4) is
+\[
+ (I,\lambda^6)_6-5\,702\,400\,z\lambda^6.
+\]
+Moreover, this is the entire lowest-bidegree pencil:
+\(U_6\) occurs with multiplicity one in \(U_{12}\otimes U_6\), and the
+identity is the unique map \(U_0\otimes U_6\to U_6\).  Thus every
+\(\operatorname{SL}_2\)-covariant map linear in \((I,z)\) and sextic in
+\(\lambda\) is a linear combination of the two terms in (17.4); the
+Klein cancellation fixes their ratio.  The formula is therefore
+canonical at its first possible bidegree, not the output of a broad
+coefficient search.
+
+The following statements are now exact:
+
+1. \(F_\lambda(X^{\rm MU})\subset V_5\).  On the dense determinant-one
+   chart
+   \[
+   g=\begin{pmatrix}a&b\\c&(1+bc)/a\end{pmatrix}
+   \]
+   a symbolic Laurent-polynomial calculation gives
+   \[
+   (F_x(g\Phi_{12},1),F_x(g\Phi_{12},1))_4=0.
+   \tag{17.5}
+   \]
+   These are exactly the five \(U_4\)-valued quadratic equations of the
+   sextic \(V_5\) model.
+
+2. The image is three-dimensional.  At \(a=b=c=1\), the value of (17.4)
+   together with its three parameter derivatives has rank four in
+   \(U_6\).  Hence (17.4) is dominant onto \(V_5\).
+
+3. The projection center contains the selected source line
+   \[
+   L_\lambda=\mathbf P(\lambda^{11}U)\subset X^{\rm MU}.
+   \tag{17.6}
+   \]
+   At \(\lambda=x\), both \(x^{12}\) and \(x^{11}y\) are killed by
+   contraction with \(x^6\).
+   More precisely, its ambient projective center is the explicit
+   six-plane
+   \[
+   \Pi_x=
+   \mathbf P\!\left(
+     \langle(x^{12-i}y^i,0):0\leq i\leq5\rangle
+     \oplus\langle(11x^6y^6,1)\rangle
+   \right).
+   \tag{17.6a}
+   \]
+
+4. The vanishing has the correct transverse order two.  The
+   one-parameter degeneration
+   \[
+   [I_u:z_u]
+   =
+   [x^{11}y+11u\,x^6y^6-u^2xy^{11}:u]
+   \longrightarrow[x^{11}y:0]\in L_x
+   \]
+   satisfies
+   \[
+   F_x(I_u,z_u)=-462u^2xy^5
+   \tag{17.7}
+   \]
+   in the normalized convention.  Varying the other boundary-normal
+   parameter in \(y(x+vy)^{11}\) starts only in order \(v^5\).
+
+5. On the lower-Borel orbit the map contracts the expected surface to
+   the expected quintic:
+   \[
+   F_x(g[\Phi_{12}:1])
+   \sim x(acx+y)^5\in\Gamma_x
+   \qquad(b=0).
+   \tag{17.8}
+   \]
+
+Together, (17.5)--(17.8) identify (17.4) very tightly with double
+projection from \(L_\lambda\): it is a dominant seven-coordinate linear
+system, has the correct double base line, and contracts the correct
+stabilizer divisor to the correct quintic center.  The remaining
+scheme-theoretic gate is to prove that its Rees-algebra resolution is
+exactly the blow-up--flop--blow-down diagram, rather than using these
+properties as a characterization.  Until that gate is closed, (17.4)
+is called the **pointed kernel Sarkisov formula candidate**, not a
+priority claim.
+
+### Lift through the \(V_5\) kernel transform
+
+The center itself has an unexpectedly clean universal-bundle lift.
+Fix \(\lambda=x\), write \(m=sx+ty\), and let
+\[
+ J_{s,t}=x(sx+ty)^5.
+\]
+For the second-transvectant operator
+\[
+ T^{(2)}_{J_{s,t}}\colon U_4\longrightarrow U_6
+\]
+a saturated global kernel basis is
+\[
+ \begin{aligned}
+ e_2(s,t)&=x^2(sx+ty)^2,\\
+ e_3(s,t)&=
+ 2s^3x^3y+5s^2t\,x^2y^2+4st^2\,xy^3+t^3y^4.
+ \end{aligned}
+ \tag{17.9}
+\]
+Both vectors are killed by \(T^{(2)}_{J_{s,t}}\), their third
+transvectant is zero, and two Plücker coordinates are
+\[
+ p_{01}=2s^5,\qquad p_{24}=t^5.
+ \tag{17.10}
+\]
+Thus they are independent at every point of \(\mathbf P^1\), including
+the closed-orbit limit \(m=x\).  Consequently
+\[
+ \boxed{\quad
+ \mathcal U_{V_5}|_{\Gamma_\lambda}
+ \cong\mathcal O_{\mathbf P^1}(-2)
+       \oplus\mathcal O_{\mathbf P^1}(-3).
+ \quad}
+ \tag{17.11}
+\]
+Dualizing the universal sequence and computing the graded syzygies of
+the two rows in (17.9) gives dimensions \(0,1,4,7\) in twists
+\(0,1,2,3\).  Since the dual quotient bundle has rank three and degree
+\(-5\), this forces
+\[
+ \mathcal Q_{V_5}|_{\Gamma_\lambda}
+ \cong
+ \mathcal O_{\mathbf P^1}(1)
+ \oplus\mathcal O_{\mathbf P^1}(2)^{\oplus2}.
+ \tag{17.12}
+\]
+Two complementary \(3\times3\) minors of \(T^{(2)}_{J_{s,t}}\) are
+\[
+ 3\,888\,000\,s^{15},\qquad-648\,000\,t^{15},
+ \]
+so the operator has rank exactly three over the entire quintic.  Formula
+(17.11), unlike the bare orbit formula (17.2), is already phrased at the
+universal-bundle level and is the first concrete evidence for the
+desired kernel-to-kernel functor.
+
+The exact generator/audit, compact certificate, and independent
+finite-field replay are
+
+- `notes/2026-07-26-c682-sarkisov-kernel.py`, 16813 bytes, SHA-256
+  `a47e9b7318a8ba716f06424a1f992a4c4f2addad75e8aa2c3ec8e80e9230fd10`;
+- `notes/2026-07-26-c682-sarkisov-kernel.json`, 1867 bytes, SHA-256
+  `3d67ddc448d51b870789e480d204b2bc9355ba8af14f07a0394386cdcaeb7f0e`;
+- `notes/2026-07-26-c682-sarkisov-kernel-replay.py`, 5920 bytes, SHA-256
+  `b515e2a254ddc0c0c29d433fb3cbedccdd0906eb9dbe30515adc294b6e75f31d`.
+
+Run
+
+```text
+python3 notes/2026-07-26-c682-sarkisov-kernel.py
+python3 notes/2026-07-26-c682-sarkisov-kernel-replay.py
+```
+
+The replay uses a separately implemented transvectant over
+\(\mathbf F_{101}\), checks 125 points of the determinant-one chart, and
+exhausts all 102 points of the center normalization
+\(\mathbf P^1(\mathbf F_{101})\).  It is an independent regression and
+normalization check; the characteristic-zero proof is the symbolic
+Laurent identity in the main audit.
+
+### Research plan and kill gates
+
+The work now has six ordered gates.
+
+1. **Resolve (17.4) scheme-theoretically.**  Compute the base ideal on
+   dodecic-kernel charts, prove that its integral closure is
+   \(\mathcal I_{L_\lambda}^2\), identify the unique flopping curve, and
+   recover the divisor relations \(H^*=H-2E_L\) and
+   \(H=3H^*-2E_\Gamma\).
+2. **Construct the inverse kernel formula.**  Starting from the
+   two-plane \(\ker T^{(2)}_J\) and the marked hyperplane normal
+   \(\lambda^6\), recover the three-plane
+   \(\ker T^{(3)}_I\) and the invariant coordinate \(z\) away from the
+   exceptional loci.
+3. **Upgrade to families.**  For a rank-two bundle \(U/S\) and a line
+   subbundle \(\Lambda\subset U\), formulate (17.3), (17.4), and (17.9)
+   as bundle morphisms and prove arbitrary base-change compatibility on
+   the resolved graph.
+4. **Transport quartics.**  Express the residual map
+   \(\rho:\operatorname{Sym}^4\Gamma_\lambda\dashrightarrow V_5\) in
+   sextic/kernel coordinates and pull back the ramification divisor of
+   the universal-line evaluation map.
+5. **Compute the branch equation.**  Chung--Kim show only that the
+   branch hypersurface is contained in \(\rho^{-1}(B)\), where
+   \(B\in|\mathcal O_{V_5}(2)|\).  Equality, degree, and an invariant
+   equation on \(\operatorname{Sym}^4\mathbf P^1\cong\mathbf P^4\) would
+   be the first high-impact geometric consequence.
+6. **Run a term-level priority audit.**  Search the classical invariant
+   literature for (17.4), not merely for “double projection,” and audit
+   universal-bundle restrictions and branch-divisor formulas
+   separately.
+
+The principal kill criterion is clear: if (17.4) or an equivalent
+seventh-polar formula already appears in Mukai, Iskovskikh--Prokhorov,
+or later explicit \(V_{22}\) literature, the formula becomes
+expository.  Even then, a new scheme-valued inverse or explicit quartic
+branch equation can still support a strong paper.  Without one of those
+two upgrades, this remains an elegant note rather than the
+Compositio/JAG-level mechanism being targeted.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -1809,6 +2090,17 @@ novelty claim is made for the ladder in the present bounded pass.
   single-transvectant positive-index threefold balance has only the four
   numerical rows \(Q^3,V_5\), the nontransverse genus-eight near-miss,
   and \(U_{22}\).
+- **Settled exactly for the pointed link:** the unique lowest-bidegree
+  covariant (17.4) maps the dense Mukai--Umemura orbit dominantly into
+  \(V_5\), has the expected double base line, and contracts the
+  stabilizer surface to \(\Gamma_\lambda\).  Along that quintic the
+  universal bundles split as
+  \(\mathcal U=\mathcal O(-2)\oplus\mathcal O(-3)\) and
+  \(\mathcal Q=\mathcal O(1)\oplus\mathcal O(2)^{\oplus2}\).
+- **Open scheme gate for the pointed link:** prove that the Rees graph of
+  (17.4) is the published blow-up--flop--blow-down diagram; dominance,
+  base-line order, and exceptional-image agreement do not by themselves
+  identify the graph scheme-theoretically.
 - **Settled in higher dimension:** the rank-two isotropic loci
   \(X_{r,r}=\operatorname{IGr}(2,r+1)\) and \(X_{r+1,r}\) are smooth Fano
   varieties of dimension \(2r-3\), while all later positive-index rows
@@ -1889,9 +2181,11 @@ novelty claim is made for the ladder in the present bounded pass.
   transvectant is the same geometric orientation character as Hitchin's
   incidence involution, rather than merely an analogous sign.
 - **Open:** write the Sarkisov link \(V_{22}\dashrightarrow V_5\)
-  directly between the dodecic and sextic kernel transforms and test
-  whether it exposes the branch divisor of the rational-quartic
-  Hilbert-scheme double cover.
+  as a resolved natural transformation.  The pointed linear formula
+  (17.4), its dominant \(V_5\) image, its double base-line degeneration,
+  and the center-bundle splitting (17.11) are exact; equality of its
+  resolved graph with the Sarkisov diagram and the quartic branch
+  equation remain open.
 - **Open:** contract the C651 finite matching tensor through the primitive
   mod-\(11\) map and fix the resulting cubic scalar.
 - **Open:** identify the relevant Paper II orientation cover over the now
