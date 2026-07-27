@@ -2587,13 +2587,107 @@ both Singleton defects and put the code and its dual on opposite sides of
 the exact Reed--Solomon pair \(R_4^\perp=R_6\).  This is a more faithful
 code shadow of the conic edge than forcing another MDS midpoint.
 
-The next geometric question is whether the two-dimensional quotient in
-(19.12) is merely the projection center of the monomial curve or also
-controls the two exceptional directions in the conic Sarkisov flop.  The
-finite computation does not decide this.  The clean test is to express the
-inverse system \(|5H_Q-2E_\Gamma|\) in the two missing-coordinate
-syndromes and check whether its local Rees algebra splits along those two
-directions.  A mismatch kills the proposed interpretation.
+The Tao pass makes this field-independent.  For every odd prime power
+\(q\ge7\), let \(C_\Gamma(q)\) be the evaluation of the same five-space
+\[
+ W=\langle1,t,t^3,t^5,t^6\rangle
+ \subset H^0(\mathbf P^1,\mathcal O(6))
+ \tag{19.15}
+\]
+on \(\mathbf P^1(\mathbf F_q)\).  Then
+\[
+ C_\Gamma(q)=[q+1,5,q-5]_q,\qquad
+ C_\Gamma(q)^\perp=[q+1,q-4,4]_q.
+ \tag{19.16}
+\]
+Indeed, a nonzero sextic has at most six projective roots, while
+\[
+ t(t^2-a^2)(t^2-b^2)
+ \]
+has the six distinct roots
+\(\{0,\infty,\pm a,\pm b\}\) for \(a\ne\pm b\).  This proves the first
+distance.  Any three columns of (19.7) are independent: for three finite
+parameters the minors with exponent rows \(0,1,3\), then \(0,1,5\), and
+finally \(0,1,6\) handle respectively nonzero sum, zero sum with nonzero
+product, and the residual triple \(\{0,a,-a\}\); a triple containing
+\(\infty\) is separated by rows \(0,1,6\).  On the other hand,
+\(\{0,\infty,a,-a\}\) is a four-column circuit.  Hence the dual distance
+is four.  Both Singleton defects are therefore identically two, not a
+sporadic \(q=11\) count.
+
+For general \(q\), after the standard residue-coordinate normalization,
+duality gives
+\[
+ 0\to C_\Gamma(q)\to R_6(q)\to\mathbf F_q^2\to0,
+ \qquad
+ 0\to R_{q-7}(q)\to C_\Gamma(q)^\perp\to\mathbf F_q^2\to0.
+ \tag{19.17}
+\]
+The Clebsch-field resonance is the unique balance
+\[
+ q-7=4\quad\Longleftrightarrow\quad q=11.
+ \tag{19.18}
+\]
+Equivalently, the residue/Serre duality
+\(R_d(q)^\perp\simeq R_{q-1-d}(q)\) sends degree \(4\) to degree \(6\)
+and fixes degree \(5\) exactly at \(q=11\).  This is the invariant reason
+that the \(U_4,U_5,U_6\) Sarkisov modules become a
+dual-pair/self-dual-midpoint code diagram only in the Clebsch field.
+
+The same pass resolves the geometric mystery.  In centered
+\(SL_2\)-weights, \(W\) retains
+\[
+ 6,4,0,-4,-6
+\]
+and deletes the pair \(2,-2\), exchanged by the Weyl involution.  With
+the torus linearization, the quotient is precisely the sum of the second
+jet lines at the two fixed points:
+\[
+ H^0(\mathcal O(6))/W
+ \simeq \operatorname{gr}^2_0 J(\mathcal O(6))
+ \oplus\operatorname{gr}^2_\infty J(\mathcal O(6)).
+ \tag{19.19}
+\]
+The induced \(g^4_6\) has vanishing sequence
+\[
+ (0,1,3,5,6)
+ \tag{19.20}
+\]
+at both fixed points.  Each has ramification weight \(5\); in
+characteristic zero, or characteristic greater than \(6\), the two points
+therefore exhaust the Plücker total
+\((4+1)(6-4)=10\).
+
+This jet gap is exactly the flop geometry.  Near \(0\),
+\[
+ \Gamma(t)=(1:t:t^3:t^5:t^6),
+ \]
+so the tangent line
+\(\ell_{0,1}=\langle P_0,P_1\rangle\) has transverse ideal restricting
+to \((t^3,t^5,t^6)=(t^3)\).  Near \(\infty\), the identical calculation
+with \(s=1/t\) gives contact order three for
+\(\ell_{6,5}=\langle P_6,P_5\rangle\).  Had the deleted second-jet
+coordinates \(t^2,t^4\) been retained, both contacts would have order
+two.  Kuznetsov--Prokhorov, Proposition 5.1 and Remark 5.3, identify the
+strict transforms of precisely these two 3-tangent lines as the complete
+flopping locus and show that the flop is Reid's pagoda.  Thus the two
+code-defect directions, the two missing torus weights, the two second-jet
+gaps, and the two pagoda components are the same pair of objects.
+
+The \(15=5+5+5\) dual minimum supports at \(q=11\) are now equally
+transparent.  Five are the universal circuits
+\(\{0,\infty,a,-a\}\).  On the square pentad \(t^5=1\), the coordinate
+relations \(y_5=y_0,\ y_6=y_1\) put all five points in a plane; on the
+nonsquare pentad \(t^5=-1\), the relations become
+\(y_5=-y_0,\ y_6=-y_1\).  The ten four-subsets of these two planes give
+the other ten circuits.  No unidentified Clebsch-code coincidence remains
+in the count.
+
+What is still open is one categorical level higher.  The jet calculation
+identifies the exceptional components but does not yet write the complete
+local Rees algebra of \(|5H_Q-2E_\Gamma|\) as a functor of the two jet
+lines.  Doing so would turn the present object-level identification into
+a base-change-compatible Sarkisov/code transformation.
 
 ## Mystery ledger
 
@@ -2661,10 +2755,19 @@ directions.  A mismatch kills the proposed interpretation.
   the two exact sequences (19.12); the dual has fifteen projective
   minimum words and the parameter stabilizer is the expected dihedral
   group of order \(20\).
-- **Open geometrically on the conic edge:** decide whether the
-  two-dimensional missing-weight quotient controls the two exceptional
-  directions of the conic Sarkisov flop, rather than being only the
-  projection center of the sextic curve.
+- **Settled uniformly in the code lens:** for every odd prime power
+  \(q\ge7\), the sextic-center code and dual have parameters
+  \([q+1,5,q-5]\) and \([q+1,q-4,4]\), so both defects are always two.
+  Residue duality aligns \(U_4,U_5,U_6\) as dual/midpoint degrees uniquely
+  at \(q=11\).
+- **Settled geometrically on the conic edge:** the quotient by the missing
+  weights \(2,-2\) is the pair of second-jet lines at \(0,\infty\).
+  Their omission raises both tangent contacts to order three, and the
+  resulting two 3-tangent lines are exactly the two components of the
+  published Reid-pagoda flop.
+- **Open functorially on the conic edge:** express the complete local Rees
+  algebra of the inverse link in terms of the two second-jet quotient
+  lines and prove arbitrary base-change compatibility.
 - **Open categorically:** construct, or falsify, a natural transformation
   identifying the pointed kernel link with the
   dual-pair/self-dual-midpoint code diagram.  Object-level dimensions and

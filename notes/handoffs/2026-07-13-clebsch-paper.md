@@ -654,9 +654,27 @@ orbits.  Its \(PGL_2(\mathbf F_{11})\) parameter stabilizer is exactly the
 dihedral group of order \(20\), matching \(G_m\rtimes C_2\).  The
 certificate exhausts all \(11^5\) codewords and \(1320\) projectivities,
 and a separately implemented replay agrees.  This code is fixed throughout
-the \(G_m\)-pencil and does not isolate the Mukai--Umemura parameter.  The
-next conic-edge gate is to determine whether the two missing-weight
-syndromes control the two exceptional flop directions.
+the \(G_m\)-pencil and does not isolate the Mukai--Umemura parameter.
+
+The `tt` pass makes the code statement uniform.  For every odd prime power
+\(q\ge7\),
+\[
+C_\Gamma(q)=[q+1,5,q-5]_q,\qquad
+C_\Gamma(q)^\perp=[q+1,q-4,4]_q;
+\]
+both Singleton defects are always two.  The dual RS endpoint is
+\(R_{q-7}\), so it equals the lower Sarkisov module \(R_4\) uniquely when
+\(q=11\); residue duality then exchanges degrees \(4,6\) and fixes degree
+\(5\).  Geometrically, the omitted \(t^2,t^4\) coordinates are the
+second-jet lines at the two torus-fixed points, with centered weights
+\(2,-2\).  Their omission gives vanishing sequence
+\((0,1,3,5,6)\) at both points and raises the two tangent contacts from
+order two to order three.  Kuznetsov--Prokhorov identify precisely those
+two 3-tangent lines as the complete Reid-pagoda flopping locus.  Thus the
+two code defects, missing weights, jet gaps, and flop components are one
+pair of objects.  The remaining categorical gate is a
+base-change-compatible Rees-algebra construction from the two jet quotient
+lines.
 
 C682's remaining Platinum track is:
 
