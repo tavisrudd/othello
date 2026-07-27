@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import subprocess
 import sys
 import tempfile
@@ -62,6 +63,7 @@ disposition = "active"
             "\\\\documentclass{article}\n\\\\begin{document}Demo\\\\end{document}\n",
             encoding="utf-8",
         )
+        (self.root / "papers/scripts/export-paper-repos.py").write_bytes(SCRIPT.read_bytes())
         run(self.root, "git", "add", "lean/trust/papers.toml", "papers")
         run(self.root, "git", "commit", "-qm", "fixture")
         self.commit = self.output("git", "rev-parse", "HEAD").strip()
@@ -171,6 +173,36 @@ class ExportPlannerTests(unittest.TestCase):
         commit = self.fx.output("git", "rev-parse", "HEAD").strip()
         findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
         self.assertEqual(findings, [{"code": "private-notes", "path": "main.tex", "line": 1}])
+
+    def test_materialization_is_deterministic_and_refuses_overwrite(self) -> None:
+        first = self.fx.root / "first"
+        second = self.fx.root / "second"
+        exporter.materialize_repository(self.fx.commit, "demo-paper", first)
+        exporter.materialize_repository(self.fx.commit, "demo-paper", second)
+
+        def snapshot(root: Path) -> list[tuple[str, str]]:
+            return [
+                (
+                    str(path.relative_to(root)),
+                    hashlib.sha256(path.read_bytes()).hexdigest(),
+                )
+                for path in sorted(root.rglob("*"))
+                if path.is_file()
+            ]
+
+        self.assertEqual(snapshot(first), snapshot(second))
+        self.assertTrue((first / "export-manifest.json").is_file())
+        self.assertTrue((first / "PROVENANCE.md").is_file())
+        with self.assertRaisesRegex(exporter.Refused, "already exists"):
+            exporter.materialize_repository(self.fx.commit, "demo-paper", first)
+
+    def test_materialization_refuses_private_reference(self) -> None:
+        (self.fx.root / "papers/demo/main.tex").write_text("../../notes/private.md\n")
+        run(self.fx.root, "git", "add", "papers/demo/main.tex")
+        run(self.fx.root, "git", "commit", "-qm", "private reference")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        with self.assertRaisesRegex(exporter.Refused, "private-reference"):
+            exporter.materialize_repository(commit, "demo-paper", self.fx.root / "blocked")
 
 
 if __name__ == "__main__":

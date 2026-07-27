@@ -10,6 +10,7 @@ working tree and never writes under ~/src/math-papers.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -232,6 +233,23 @@ def scan_references(entries: list[TreeEntry], source: str, excluded: set[str]) -
     return findings
 
 
+def content_role(path: str) -> str:
+    pure = PurePosixPath(path)
+    if pure.suffix.lower() == ".pdf":
+        return "release-output"
+    if pure.suffix.lower() in {".tex", ".bib", ".sty", ".cls"}:
+        return "manuscript-source"
+    if pure.suffix.lower() in {".png", ".jpg", ".jpeg", ".pdf", ".svg", ".eps"}:
+        return "figure"
+    if "verification" in pure.parts or pure.suffix.lower() in {".py", ".sh", ".json", ".sha256"}:
+        return "verification"
+    return "support"
+
+
+def sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
 def plan_repository(
     commit: str, row: dict[str, Any], papers: dict[str, dict[str, Any]]
 ) -> dict[str, Any]:
@@ -280,6 +298,17 @@ def plan_repository(
     }
 
 
+def selected_repository(
+    commit: str, repository: str
+) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    papers = registry_index(load_toml(commit, PAPER_REGISTRY))
+    repositories = validate_map(load_toml(commit, REPOSITORY_MAP), papers)
+    matches = [row for row in repositories if row["name"] == repository]
+    if not matches:
+        raise Refused(f"no mapped repository named {repository!r}")
+    return matches[0], papers
+
+
 def build_plan(source_ref: str, repository: str | None = None) -> dict[str, Any]:
     commit = resolve_commit(source_ref)
     papers = registry_index(load_toml(commit, PAPER_REGISTRY))
@@ -290,6 +319,124 @@ def build_plan(source_ref: str, repository: str | None = None) -> dict[str, Any]
             raise Refused(f"no mapped repository named {repository!r}")
     plans = [plan_repository(commit, row, papers) for row in repositories]
     return {"schema_version": 1, "source_commit": commit, "repositories": plans}
+
+
+def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[str, Any]:
+    commit = resolve_commit(source_ref)
+    row, papers = selected_repository(commit, repository)
+    if row["disposition"] != "active":
+        raise Refused(
+            f"repository {repository!r} is {row['disposition']!r}, not active; materialization refused"
+        )
+    plan = plan_repository(commit, row, papers)
+    if plan["reference_findings"]:
+        raise Refused(
+            f"repository {repository!r} has {len(plan['reference_findings'])} unresolved "
+            "private-reference finding(s)"
+        )
+    out = out.expanduser()
+    if out.exists():
+        raise Refused(f"destination already exists: {out}")
+    if not out.parent.is_dir():
+        raise Refused(f"destination parent does not exist: {out.parent}")
+
+    source = row["source"]
+    exclusions = excluded_symlinks(row)
+    entries = tree_entries(commit, source)
+    payloads: list[tuple[str, bytes, str, str]] = []
+    manifest_files: list[dict[str, Any]] = []
+    for entry in entries:
+        rel = relative_to_source(entry, source)
+        if rel in exclusions:
+            continue
+        if entry.kind != "blob" or entry.mode == "120000":
+            raise Refused(f"repository {repository!r} contains unsupported tree entry {rel!r}")
+        data = git_blob(entry.oid)
+        payloads.append((rel, data, entry.mode, entry.oid))
+        manifest_files.append(
+            {
+                "bytes": len(data),
+                "mode": entry.mode,
+                "path": rel,
+                "role": content_role(rel),
+                "sha256": sha256(data),
+                "source_blob": entry.oid,
+                "source_path": entry.path,
+            }
+        )
+
+    reserved = {"PROVENANCE.md", "export-manifest.json"}
+    collisions = sorted(reserved & {path for path, _, _, _ in payloads})
+    if collisions:
+        raise Refused(f"repository {repository!r} source collides with generated files: {collisions}")
+    provenance = (
+        "# Export provenance\n\n"
+        f"- Source repository commit: `{commit}`\n"
+        f"- Source root: `{source}`\n"
+        f"- Repository identity: `tavisrudd/{repository}`\n"
+        "- Exporter: `papers/scripts/export-paper-repos.py materialize`\n"
+        "- This repository is a deterministic release mirror; the private research monorepo "
+        "remains the development source.\n"
+    ).encode()
+    payloads.append(("PROVENANCE.md", provenance, "100644", "generated"))
+    manifest_files.append(
+        {
+            "bytes": len(provenance),
+            "mode": "100644",
+            "path": "PROVENANCE.md",
+            "role": "provenance",
+            "sha256": sha256(provenance),
+            "source_blob": None,
+            "source_path": None,
+        }
+    )
+    if ".gitignore" not in {path for path, _, _, _ in payloads}:
+        ignore = (
+            "__pycache__/\n*.py[cod]\n*.aux\n*.bbl\n*.bcf\n*.blg\n*.fdb_latexmk\n"
+            "*.fls\n*.log\n*.out\n*.run.xml\n*.synctex.gz\n*.xdv\n"
+        ).encode()
+        payloads.append((".gitignore", ignore, "100644", "generated"))
+        manifest_files.append(
+            {
+                "bytes": len(ignore),
+                "mode": "100644",
+                "path": ".gitignore",
+                "role": "export-support",
+                "sha256": sha256(ignore),
+                "source_blob": None,
+                "source_path": None,
+            }
+        )
+
+    manifest = {
+        "schema_version": 1,
+        "exporter_blob": git(
+            "rev-parse", f"{commit}:papers/scripts/export-paper-repos.py"
+        ).decode().strip(),
+        "github": f"tavisrudd/{repository}",
+        "main_sources": plan["main_sources"],
+        "manifest_self_excluded": True,
+        "paper_ids": row["paper_ids"],
+        "paper_registry_sha256": sha256(git("show", f"{commit}:{PAPER_REGISTRY}")),
+        "repository": repository,
+        "repository_map_sha256": sha256(git("show", f"{commit}:{REPOSITORY_MAP}")),
+        "source_commit": commit,
+        "source_root": source,
+        "excluded_symlinks": [
+            {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
+        ],
+        "files": sorted(manifest_files, key=lambda item: item["path"]),
+    }
+    manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
+    payloads.append(("export-manifest.json", manifest_bytes, "100644", "generated"))
+
+    out.mkdir()
+    for rel, data, mode, _ in sorted(payloads):
+        destination = out / rel
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(data)
+        destination.chmod(0o755 if mode == "100755" else 0o644)
+    return manifest
 
 
 def command_plan(args: argparse.Namespace) -> int:
@@ -337,6 +484,15 @@ def command_audit(args: argparse.Namespace) -> int:
     return 1 if findings else 0
 
 
+def command_materialize(args: argparse.Namespace) -> int:
+    manifest = materialize_repository(args.source_ref, args.repository, args.out)
+    print(
+        f"materialized={args.out.expanduser()} repository={manifest['repository']} "
+        f"source_commit={manifest['source_commit']} files={len(manifest['files']) + 1}"
+    )
+    return 0
+
+
 def add_common_arguments(command: argparse.ArgumentParser) -> None:
     command.add_argument("--source-ref", default="HEAD")
     command.add_argument("--repository")
@@ -354,6 +510,13 @@ def parser() -> argparse.ArgumentParser:
     )
     add_common_arguments(audit)
     audit.set_defaults(function=command_audit)
+    materialize = subparsers.add_parser(
+        "materialize", help="write one clean active candidate to a new empty path"
+    )
+    materialize.add_argument("--source-ref", default="HEAD")
+    materialize.add_argument("--repository", required=True)
+    materialize.add_argument("--out", required=True, type=Path)
+    materialize.set_defaults(function=command_materialize)
     return result
 
 
