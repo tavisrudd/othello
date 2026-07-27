@@ -18,11 +18,8 @@ MANIFEST_PATH = PAPER_ROOT / "release" / "RELEASE-MANIFEST.json"
 PAPER_FILES = (
     "Makefile",
     "ame-lu.pdf",
-    "formal-statement-adequacy.md",
     "main.tex",
     "refs.bib",
-    "release/PUBLIC-EXPORT.md",
-    "release/QUANTUM-CHECKLIST.md",
     "release/verify_release.py",
     "supplement/EVIDENCE-MANIFEST.json",
     "supplement/EVIDENCE.md",

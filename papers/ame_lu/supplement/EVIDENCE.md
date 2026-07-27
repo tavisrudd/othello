@@ -35,7 +35,7 @@ comparison with its tracked certificate.
 
 The JSON files certify the exact bounded enumerations, identities, ranks,
 histograms, group closures, and finite-field replays described in the table.
-They do not enlarge the theorem domains in `theorem-map.md`, prove a global
+They do not enlarge the theorem domains stated in the manuscript, prove a global
 LU--LC conjecture, classify arbitrary minimal-support AME tensors, or show that
 four copies are globally minimal.
 
