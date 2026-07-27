@@ -1,6 +1,6 @@
 # Complete bounded repair ports
 
-**Title:** *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*<br>
+**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
 **Author:** Tavis Rudd<br>
 **Status:** private corrected manuscript with the revised theorem hierarchy frozen; MDS
 reconstruction, pointed transfer, positive-density fingerprints, and reliability/bounded EXIT have
