@@ -92,6 +92,14 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    Remaining: step 4 (generated regions in `papers/papers-index.md` and `papers-planning.md`, gated
    on the registry writer's agreement) and step 5 (adequacy-appendix rendering, gated on Lean
    extraction having run).
+8. **C684 standalone paper repositories:** export adopted physical manuscript roots into
+   deterministic release-mirror repositories under `~/src/math-papers/`, with a one-to-one
+   `tavisrudd/<paper-reponame>` naming contract, tracked-file allowlists, explicit external-symlink
+   dispositions, provenance manifests, and clean-room paper/checker validation. C684 consumes
+   C287's released package identities but does not copy or build Lean, and it performs no GitHub
+   action without explicit user authorization. Arcs/Q16 gates only the final arcs materialization;
+   exporter development and other paper pilots proceed now. Plan:
+   [`../2026-07-26-c684-paper-repository-extraction.md`](../2026-07-26-c684-paper-repository-extraction.md).
 
 ## Gates and non-goals
 
@@ -111,6 +119,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
 - C326 exporter: [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
 - C287 current paper intake: [`../2026-07-26-c287-paper-intake-refresh.md`](../2026-07-26-c287-paper-intake-refresh.md).
+- C684 paper-repository extraction: [`../2026-07-26-c684-paper-repository-extraction.md`](../2026-07-26-c684-paper-repository-extraction.md).
 - C365 literature-audit conventions (reported): [`../literature-audit-conventions.md`](../literature-audit-conventions.md),
   reviewed in [`../2026-07-19-c365-literature-audit-conventions-fable-review.md`](../2026-07-19-c365-literature-audit-conventions-fable-review.md).
   Repo-wide recording standard for novelty/priority work, pointed to from `CLAUDE.md`. Its read-depth
