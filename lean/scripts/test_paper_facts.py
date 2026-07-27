@@ -253,6 +253,43 @@ class PaperFactsTest(unittest.TestCase):
         self.fx.track("notes/somewhere.md", "A dead title\n")
         self.assertIn("title-drift", self.fx.codes())
 
+    def test_a_readme_claiming_a_stale_title_is_reported_without_any_declaration(self):
+        self.fx.track(
+            "papers/alpha/README.md",
+            "# Alpha\n\n**Title:** *Exact prescribed-hole defect and matching-design rigidity*\n",
+        )
+        subjects = {f["subject"] for f in self.fx.findings_for("title-drift")}
+        self.assertIn("papers/alpha/README.md", subjects)
+
+    def test_a_readme_that_never_claims_a_title_is_not_drifting(self):
+        self.fx.track("papers/alpha/README.md", "# Alpha\n\nReproducibility sources live here.\n")
+        self.assertNotIn("title-drift", self.fx.codes())
+
+    def test_a_readme_giving_the_current_title_is_accepted(self):
+        self.fx.track(
+            "papers/alpha/README.md",
+            "# Alpha\n\nThe manuscript is titled *Arcs complete outside a conic:\n"
+            "a prescribed-hole defect identity*.\n",
+        )
+        self.assertNotIn("title-drift", self.fx.codes())
+
+    def test_a_shared_readme_may_name_any_manuscript_of_its_directory(self):
+        self.fx.write(
+            "papers/alpha/companion.tex",
+            "\\title{A computational companion}\n\\begin{document}\\end{document}\n",
+        )
+        self.fx.write(
+            "papers/alpha/README.md",
+            "**Title:** *A computational companion*\n",
+        )
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[paper]]\nid = "alpha_companion"\ndir = "papers/alpha"\n'
+            'main = "companion.tex"\nlane = "alpha-lane"\n',
+        )
+        self.assertNotIn("title-drift", self.fx.codes())
+
     # -- 2026-07-26 defect 3: self-citations naming companion papers by dead titles -----------
 
     def test_self_citation_with_a_dead_title_is_reported(self):

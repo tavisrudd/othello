@@ -5,7 +5,7 @@
 **Date:** 2026-07-26
 
 **Status:** REPORTED — extractor, checker, registry, and hermetic fixture landed; the checker is red
-on the live tree with thirteen real cross-artifact defects
+on the live tree with fifteen real cross-artifact defects
 
 Brief and global intent: `2026-07-26-c681-trust-spine-paper-facts.md`.
 
@@ -43,7 +43,7 @@ check.
 | finding | fires when |
 |---|---|
 | `paper-unregistered`     | a tracked top-level source states a title and no row names it |
-| `title-drift`            | a tracked file under a scan root states a declared superseded title, or a declared superseded title is the current one |
+| `title-drift`            | a paper directory's README claims a title that is not the manuscript's, a tracked file under a scan root states a declared superseded title, or a declared superseded title is the current one |
 | `citation-title-drift`   | a self-authored bibliography entry quotes no registered manuscript's current title |
 | `stale-bbl`              | a generated bibliography carries such an entry into the PDF, or disagrees with the `.bib` it was built from |
 | `label-unmapped`         | an adopted or manifest claim label has no counterpart on the other side |
@@ -60,9 +60,9 @@ extraction, so a stale artifact never weakens a verdict — it means a lane edit
 which is the normal state of a live paper. As an error it would put this lane's gate at the mercy of
 every other lane's edits and train everyone to ignore it.
 
-## Live-tree result: thirteen errors, all real
+## Live-tree result: fifteen errors, all real
 
-`lean/scripts/paper-facts.py audit` reports 13 errors and 5 warnings against the current tree. Every
+`lean/scripts/paper-facts.py audit` reports 15 errors and 5 warnings against the current tree. Every
 error was checked by hand against the cited bytes.
 
 **Eight self-citations name a companion paper by a title it no longer has**, across four
@@ -86,6 +86,14 @@ The last two are inline `\bibitem` lists rather than BibTeX, and neither was in 
 `prs-beyond-redundancy-four-tit-submission.bbl` for `RuddPrescribedHoles2026`), one of which is also
 a straight disagreement between the `.bbl` and the `refs.bib` it was built from.
 
+**Two paper READMEs claim a title the manuscript no longer has**, found with no declaration of any
+kind:
+
+| README | title claimed | manuscript's `\title{}` |
+|---|---|---|
+| `papers/clebsch-rigidity/README.md`      | A conic deep-hole syndrome locus characterizes the Clebsch code | Reconstructing the Clebsch code from its deep-hole syndrome locus |
+| `papers/complete-repair-ports/README.md` | Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure |
+
 **Five warnings** record `.bbl` files read as build output: they reach the compiled PDF but are
 absent from every reproducibility claim made from tracked bytes.
 
@@ -107,7 +115,7 @@ its own row.
 
 ## The fixture
 
-`python3 lean/scripts/test_paper_facts.py` — 39 tests, green, hermetic: throwaway git repositories
+`python3 lean/scripts/test_paper_facts.py` — 43 tests, green, hermetic: throwaway git repositories
 with a few tiny manuscripts, no TeX run, no Lean, no network.
 
 The four defects found by hand on 2026-07-26 are each rebuilt in miniature and asserted to be
@@ -167,6 +175,26 @@ The paper layer adds two more, both reported and not repaired:
   the lane owning the *citing* artifact, using the cited paper's current `\title{}` as the source.
 - **`reed-solomon`:** four `.bbl` files under `papers/beyond4_prs/` are untracked build output that
   reaches the submitted PDFs.
+- **`clebsch` and `complete-ports`:** the two README title claims tabulated above.
+
+## Closeout pass
+
+The README check is the one upgrade the closeout pass exposed and took. `superseded_titles` can only
+catch a retitle somebody remembered to declare; a README that claims a title is a document asserting
+something checkable against the manuscript, with no declaration needed at all. The trigger is narrow
+— only a file carrying an explicit title claim (`**Title:**` or "titled") is read, and a directory
+holding several manuscripts satisfies the check by naming any one of them — which is what keeps it
+at zero false positives on the current tree while finding two real defects.
+
+Two further things are now in reach and are deliberately not taken here:
+
+- **Per-paper statement counts are already extracted**, so "how many theorems does this paper have"
+  is a query over `lean/trust/paper-facts/*.json` rather than a session of greps. Putting those
+  numbers in prose would immediately go stale, which is exactly the argument for step 3 rendering
+  them from facts instead. Left for step 3.
+- **The same README rule generalizes to `papers/papers-index.md`**, which states a title for every
+  paper in one file. That is step 4 territory and needs the registry writer's agreement, so it is
+  not switched on here.
 
 ## Mystery ledger
 
@@ -186,11 +214,13 @@ The paper layer adds two more, both reported and not repaired:
   the staleness finding is `warn` and no verdict depends on the artifact, but if the artifacts become
   an input to step 2's rendering, the churn becomes a diff-noise problem the spine already solved
   once with a compact manifest. Gate: the first generated region that reads these artifacts.
-- **Open: `superseded_titles` is the one declaration that restates a string.** It has to, since the
-  manuscript no longer contains the dead title, but it means a retitle that nobody declares is
-  invisible to `title-drift`. Deriving the previous title from git history instead would close that,
-  at the cost of making a fact depend on history rather than tracked bytes. No gate yet; it needs a
-  real retitle to judge against.
+- **`superseded_titles` is the one declaration that restates a string.** Largely settled by the
+  closeout pass: a retitle nobody declares is still caught wherever a document *claims* to give the
+  paper's title, which is where the damage is, and both live README defects were found that way with
+  no declaration at all. What remains open is prose that names a paper by its old title without
+  claiming to be quoting a title — an introduction sentence, say. `superseded_titles` is the only
+  handle on that, and deriving the previous title from git history instead would trade a fact about
+  tracked bytes for a fact about history. No gate yet; it needs a real retitle to judge against.
 
 ## Acceptance
 
@@ -205,8 +235,8 @@ The paper layer adds two more, both reported and not repaired:
 ## Replay
 
 ```sh
-python3 lean/scripts/test_paper_facts.py          # 39 tests, hermetic
-lean/scripts/paper-facts.py audit                 # 13 errors, 5 warnings on the current tree
+python3 lean/scripts/test_paper_facts.py          # 43 tests, hermetic
+lean/scripts/paper-facts.py audit                 # 15 errors, 5 warnings on the current tree
 lean/scripts/paper-facts.py check                 # audit plus facts-artifact staleness
 lean/scripts/paper-facts.py extract               # rewrite lean/trust/paper-facts/*.json
 ```

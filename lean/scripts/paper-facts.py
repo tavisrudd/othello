@@ -87,6 +87,9 @@ PDF_PAGE_RE = re.compile(rb"/Type\s*/Page[^s]")
 # format requires after it so the body starts where the next byte does.
 PDF_STREAM_RE = re.compile(rb"(?<!end)stream(?:\r\n|\r|\n)")
 
+# A document claims to give a paper's title when it labels one or says the paper is titled it.
+TITLE_CLAIM_RE = re.compile(r"\*\*title:\*\*|\btitled\b", re.IGNORECASE)
+
 TEXT_SUFFIXES = (".md", ".tex", ".bib", ".bbl", ".toml", ".json", ".lean", ".txt", ".yaml", ".yml")
 
 
@@ -765,7 +768,7 @@ def check_titles(
     paper by name restates the old string.  The scan is over normalized bytes, so a title broken
     across lines or wrapped in `\\\\` is still found.
     """
-    findings = []
+    findings = check_readme_titles(tree, registry, facts, Finding)
     dead: list[tuple[str, str, str]] = []  # (paper id, raw superseded title, normalized)
     for row in registry.papers:
         paper = facts.get(row.ident)
@@ -802,6 +805,46 @@ def check_titles(
                         f"states a superseded title of {ident}: {old!r}",
                     )
                 )
+    return findings
+
+
+def check_readme_titles(
+    tree: Tree, registry: PaperRegistry, facts: dict[str, PaperFacts], Finding: Any
+) -> list[Any]:
+    """A paper directory's README, where it states a title, must state the manuscript's.
+
+    This catches a retitle that nobody declared, which `superseded_titles` cannot: the dead string
+    is gone from the manuscript, so the only way to notice is that a document claiming to name the
+    paper names something else.  The trigger is narrow on purpose — a README that never claims to
+    give a title is not drifting by staying silent — so the check reads only files carrying an
+    explicit title claim, and a directory holding several manuscripts satisfies it by naming any
+    one of them.
+    """
+    findings = []
+    by_directory: dict[str, list[str]] = {}
+    for row in registry.papers:
+        by_directory.setdefault(row.directory, []).append(row.ident)
+    tracked = tree.tracked_set()
+    for directory, idents in sorted(by_directory.items()):
+        readme = f"{directory}/README.md"
+        if readme not in tracked:
+            continue
+        text = tree.read(readme)
+        if not TITLE_CLAIM_RE.search(text):
+            continue
+        body = normalize_prose(text)
+        titles = [facts[ident].title_normalized for ident in idents if ident in facts]
+        if any(title and title in body for title in titles):
+            continue
+        findings.append(
+            Finding(
+                "title-drift",
+                readme,
+                "states a title for "
+                + ", ".join(sorted(idents))
+                + " that is not the manuscript's own \\title{}",
+            )
+        )
     return findings
 
 
