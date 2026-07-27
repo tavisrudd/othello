@@ -34,6 +34,66 @@ terminals = ["RelativeConicArcs.Certificate.check_sound"]
 coverage_rule = "closure"
 
 [[gate]]
+module = "RelativeConicArcs.Gates.ArcsCompleteOutsideConic"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.C637Witnesses"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.CarrierArcBound"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.ChowRestrictionDescent"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.MatchingPackingDefect"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.NinePointHeisenbergFixedProfile"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.NinePointHeisenbergPair"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.OddTangentCarrier"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.OrdinaryUncoveredObstruction"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.ProjectiveCarrierGeometry"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.QuadraticHull"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.SquareRootCarrier"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
 module = "RelativeConicArcs.Gates.Baer"
 terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
 coverage_rule = "closure"
@@ -44,6 +104,11 @@ terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
 coverage_rule = "closure"
 
 [[gate]]
+module = "RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
 module = "RelativeConicArcs.Gates.AlternateOrbitRepairParameterized"
 terminals = []
 coverage_rule = "closure"
@@ -51,6 +116,62 @@ coverage_rule = "closure"
 [[gate]]
 module = "RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope"
 terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.ClebschOrientationMechanisms"
+terminals = [
+  "RelativeConicArcs.InvolutiveOddUnit.map_evenPart",
+  "RelativeConicArcs.InvolutiveOddUnit.map_oddPart",
+  "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
+  "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant",
+  "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv",
+  "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant",
+  "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant",
+  "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero",
+  "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero",
+  "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen",
+  "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo",
+  "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"
+terminals = [
+  "RelativeConicArcs.Examples.ReflectionArrangements.tau11_relation",
+  "RelativeConicArcs.Examples.ReflectionArrangements.tau5_relation",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_two_boundary",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_arc",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_joins_are_root_directions",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_join_directions_injective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_root_directions_injective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det_ne_zero",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_inverse_apply",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_apply_inverse",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_dot",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_projective_index_bijective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_normalized_rawPointIndex",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_join_directions_injective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_root_directions_injective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_bijective",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_card",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_nearestLeaderCount",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_disjoint_of_ne",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_card",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_sound",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_eq_ambiguityOne",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_mobius_sum",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_polynomial",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial",
+  "RelativeConicArcs.Examples.ReflectionArrangements.h3_conic_size_factorization",
+  "RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization",
+]
 coverage_rule = "closure"
 
 [[gate]]
@@ -136,6 +257,226 @@ gates = [
   "RelativeConicArcs.Gates.AlternateOrbitRepairQ25",
 ]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.map_evenPart"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.map_oddPart"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.invariant_eq_zero_of_antiInvariant"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.oddMulEquiv"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.existsUnique_invariant_add_mul_invariant"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.InvolutiveOddUnit.localized_existsUnique_invariant_add_mul_invariant"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.adjacency_pairSum_of_sum_eq_zero"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.pairSum_injective_on_sumZero"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.existsUnique_pairSum_of_petersenEigen"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.standardEquivPetersenNegTwo"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.KneserPairEigenspace.finrank_petersenNegTwoEigenspace"
+gates = ["RelativeConicArcs.Gates.ClebschOrientationMechanisms"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.tau11_relation"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.tau5_relation"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_two_boundary"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_arc"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_joins_are_root_directions"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_join_directions_injective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_root_directions_injective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det_ne_zero"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_inverse_apply"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_apply_inverse"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_dot"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_projective_index_bijective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_normalized_rawPointIndex"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_join_directions_injective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_root_directions_injective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_bijective"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_card"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_nearestLeaderCount"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_disjoint_of_ne"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_card"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_sound"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_syndromes_eq_ambiguityOne"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_mobius_sum"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_polynomial"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.h3_conic_size_factorization"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization"
+gates = ["RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding"]
+expected_axioms = ["Quot.sound", "propext"]
 
 # ---------------------------------------------------------------------------------------------
 # Owned modules that no declared extraction unit reaches.
