@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from itertools import combinations, product
-from math import comb, factorial
+from math import comb, factorial, prod
 
 
 PRIME = 101
@@ -223,6 +223,37 @@ def replay_icosahedral_marking() -> None:
     assert square_ratio((-2, -2, -2, -1, -1, 8)) == (10, 8720)
     assert square_ratio((-2, -2, -2, -1, 0, 7)) == (18, 58480)
     assert 8720 * 18**2 != 58480 * 10**2
+    for leading in product(range(7), repeat=5):
+        vector = tuple(leading) + (-sum(leading),)
+        support_cubic, clebsch_cubic = square_ratio(vector)
+        power_sums = {
+            degree: sum(value**degree for value in vector)
+            for degree in [2, 3, 4, 6]
+        }
+        symmetric_correction = (
+            6000 * power_sums[6]
+            - 4350 * power_sums[4] * power_sums[2]
+            - 2125 * power_sums[3] ** 2
+            + 705 * power_sums[2] ** 3
+        )
+        assert 375 * support_cubic**2 - 12 * clebsch_cubic == symmetric_correction
+        elementary = {
+            degree: sum(
+                prod(vector[index] for index in subset)
+                for subset in combinations(range(6), degree)
+            )
+            for degree in [2, 3, 4, 6]
+        }
+        assert symmetric_correction == -15 * (
+            16 * elementary[2] ** 3
+            - 80 * elementary[2] * elementary[4]
+            + 75 * elementary[3] ** 2
+            + 2400 * elementary[6]
+        )
+    witness = (-2, -2, -1, -1, 0, 6)
+    swapped = (-1, -2, -2, -1, 0, 6)
+    assert square_ratio(witness)[0] ** 2 == 484
+    assert square_ratio(swapped)[0] ** 2 == 36
 
     inv_root = root - 1
     face_axes = {
@@ -413,7 +444,8 @@ def main() -> None:
     print(
         "independent C682 replay: OK "
         "(boundary ranks 4, primitive mod-11 rank 4, "
-        "c_match^2 = J0, golden Gale witness, marked face-support bridge)"
+        "c_match^2 = J0, golden Gale witness, marked face-support bridge, "
+        "corrected sextic identity)"
     )
 
 

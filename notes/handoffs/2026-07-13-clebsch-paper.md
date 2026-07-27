@@ -341,15 +341,16 @@ The strengthened q=27 replay falsifies both the former
 sheet norm ranks \(14,14\), joint rank \(19\), defect increment five, and
 nine invariant trades.  Endpoint incidence yields only the sign trade, and
 the naive \(L(2)\otimes L(2)^{(1)}\) axis difference yields none.  The
-active split gate is the sharp replacement
-\(\dim(V+dV)\le\lambda+5\), plausibly by factoring the fixed-correction
-polarization through the five-dimensional Weyl layer \(\Delta(4)\).  In
-all six q=27 split orbits, the defect quotient has square-torus eigenvalue
-exponents \(6,10,14,18,22\); after removing the common exponent fourteen,
-this is exactly the \(-8,-4,0,4,8\) weight pattern of a twisted
-\(\Delta(4)\).  This fingerprint is not yet a uniform \(H\)-factorization.
-The exact fallback is merely a second common norm direction.  The nonsplit
-analogue still needs careful quadratic descent.
+q=27 five-dimensional replacement is also nonuniform.  At q=243 a
+deterministic 153-row moment projection has one-sheet rank
+\(122=\lambda\) and joint rank \(136=\lambda+14\), so no full joint rank
+bounded by \(\lambda+5=127\) can map onto it.  Thus the q=27 square-torus
+weights \(6,10,14,18,22\) are a field-specific twisted-\(\Delta(4)\)
+fingerprint, not a uniform defect factorization.  The exact split fallback
+is now active: prove a second common norm direction, equivalently a second
+translation-invariant trade, without any field-independent constant-defect
+bound.  Do not descend the failed \(\Delta(4)\) statement; the nonsplit
+analogue waits for the replacement intersection mechanism.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
@@ -490,9 +491,21 @@ picture, not one \(C_2\).  The Paper I support sheets also have equal
 moments through degree two and first differ cubically, exactly paralleling
 Paper II's recovery/orientation mechanism.  However, the obvious
 syntheme-quadratic followed by the Clebsch cubic is not the square of that
-support cubic; two exact witnesses falsify the scalar identity.  Paper
-II's outer sheet action and the resulting degree-six invariant relation
-remain open.
+support cubic; two exact witnesses falsify the scalar identity.  The
+`ej` invariant-span pass finds the corrected theorem on the augmentation
+module:
+\[
+375C^2-12\sigma_3(q)
+=6000p_6-4350p_4p_2-2125p_3^2+705p_2^3.
+\]
+The \(A_5\), outer-even \(S_5\), and fully symmetric \(S_6\) sextic spaces
+have dimensions \(7,5,4\).  Hence the exotic outer-even quotient is
+one-dimensional, and \(C^2\) and \(\sigma_3(q)\) have projective ratio
+\(4:125\) there.  This is the surviving quadratic--cubic--sextic
+composition: the Paper I orientation square and the common Paper II/III
+Clebsch cubic agree after the syntheme quadratic map modulo universal
+symmetric information.  Paper II's outer sheet placement and an intrinsic
+interpretation of the four symmetric correction terms remain open.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating

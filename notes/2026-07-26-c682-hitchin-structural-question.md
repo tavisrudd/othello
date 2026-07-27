@@ -201,22 +201,26 @@ rank-locus tangent dimensions, primitive reduction ranks, and the exact
 golden Gale--Galois identity.  It also certifies the marked
 support-to-face-axis dictionary, both complementary signed-sum
 decompositions, the support trade's first nonzero cubic moment, and the
-two-witness failure of the naive quadratic--cubic square identity.  It does not
+two-witness failure of the naive quadratic--cubic square identity.  It
+then checks the corrected sextic identity on the exact \(7^5\)
+interpolation grid and records the Molien dimensions and non-symmetric
+witness.  It does not
 identify the paper's Euclidean rational form, the normalization scalar,
 global boundary components, boundary regularity, or a global incidence
 morphism.
 The representation-theoretic proof is independent of the matrix
 calculation.  A separate implementation replays the rank, isotropy, and
 tangent calculation modulo \(101\), and the Gale identity modulo \(11\);
-it separately replays the marked face-support bridge modulo \(101\).
+it separately replays the marked face-support bridge modulo \(101\) and
+the corrected identity on a second exact \(7^5\) grid.
 Its nonzero minors independently confirm the lower rank bounds used by
 the exact rational calculation.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-26-c682-transvectant-bridge.py` | 26205 | `7f2bf789aa5876f440afb433af665382c9a90706abd0075ff1a5f3ea0c24c38f` |
-| `2026-07-26-c682-transvectant-bridge-replay.py` | 14041 | `c361fd1c254e087f9d252f1fdd990a4932090919b305b9cc3fba1a713d6c8bd2` |
-| `2026-07-26-c682-transvectant-bridge.json` | 18386 | `4e0a0ac6a476e0806075af1536a7bcd8652f5fffee54e6888a706fa54df61fc9` |
+| `2026-07-26-c682-transvectant-bridge.py` | 29729 | `a8fcb633dceef68be207a376c26277e661094b026620fdba1f9e6d0ed95a8fc3` |
+| `2026-07-26-c682-transvectant-bridge-replay.py` | 15276 | `85f64401ec0cfd5ad6339e7381d1da9a8a6ec361ead61d758bb1823cb757723e` |
+| `2026-07-26-c682-transvectant-bridge.json` | 19322 | `78a6767dad35df8e4cf12d5c0e16f06b6506ed59e597bca8c108d803c3266639` |
 
 No novelty claim is made.  A promotion to manuscript theorem would require
 a targeted primary-source audit for this precise covariant, an explicit
@@ -755,11 +759,80 @@ So the simplest literal \(2\)-\(3\)-\(6\) factorization is false.  Any
 surviving theorem must either use a different quadratic covariant or state
 a relation in the larger degree-six invariant space.
 
+### 11. Corrected \(2\)-\(3\)-\(6\) theorem modulo symmetric background
+
+The invariant-space calculation produces a strong replacement.  On the
+six-point augmentation module \(p_1=\sum_ax_a=0\), put
+\[
+ C(x)=\sum_{|S|=3}\epsilon(S)\prod_{a\in S}x_a,\qquad
+ p_r(x)=\sum_{a=0}^5x_a^r,
+\]
+where \(\epsilon=+1\) on the face-support orbit and \(-1\) on its
+complement.  For the synthematic-total quadratic coordinates
+\[
+ q_i(x)=\sum_{\{a,b\}\in T_i}x_ax_b,\qquad
+ y_i=5q_i-\sum_jq_j,
+\]
+write \(\sigma_3(y)=\frac13\sum_i y_i^3\).  Exact interpolation gives
+\[
+\boxed{
+375C(x)^2-12\sigma_3(y)
+=6000p_6-4350p_4p_2-2125p_3^2+705p_2^3.
+}
+\]
+Equivalently, by Newton identities,
+\[
+375C^2-12\sigma_3(y)
+=-15\bigl(16e_2^3-80e_2e_4+75e_3^2+2400e_6\bigr),
+\]
+where \(e_r\) are the elementary symmetric functions of the six
+coordinates.  This form isolates the remaining interpretation problem as
+one explicit universal six-point invariant, rather than four unrelated
+moment terms.
+
+Both sides have degree six.  The right side is fully \(S_6\)-symmetric,
+whereas each term on the left remembers the chosen outer-\(S_6\)
+synthematic total.
+
+Molien coefficients explain why this relation is forced but nontrivial:
+\[
+\dim\operatorname{Sym}^6(V_5)^{A_5}=7,\qquad
+\dim\operatorname{Sym}^6(V_5)^{S_5}=5,
+\]
+and the ordinary \(S_6\)-symmetric sextics on \(p_1=0\) form the
+four-space
+\[
+\langle p_6,\ p_4p_2,\ p_3^2,\ p_2^3\rangle.
+\]
+Thus the outer-even quotient by universal symmetric information is
+one-dimensional, and its two nonzero classes have projective ratio
+\[
+[C^2]_{\rm exotic}:[\sigma_3(y)]_{\rm exotic}=4:125.
+\]
+The class is genuinely exotic: at
+\((-2,-2,-1,-1,0,6)\), \(C^2=484\), while swapping coordinates \(0\)
+and \(2\) gives \(C^2=36\).
+
+This is the precise \(2\)-\(3\)-\(6\) composition that survived the
+red-team:
+
+1. the invariant synthematic total gives the quadratic map
+   \(V_5\to V_4\);
+2. the Clebsch cubic \(\sigma_3\), shared by the Paper II tensor line and
+   Paper III harmonic restriction, turns it into a sextic; and
+3. modulo the four universal symmetric sextics, that sextic is the square
+   of Paper I's cubic support orientation.
+
+The theorem is exact in the abstract marked characteristic-zero modules.
+It does not identify the Paper II and Paper III covers, remove C651's
+selected-coordinate normalization, or make the symmetric correction
+vanish.  No novelty claim is made.
+
 ### Highest-EV cross-paper actions
 
-1. Compute the \(A_5\)-invariant degree-six span on \(V_5\) and locate both
-   \(C_{\rm support}^2\) and \(\sigma_3(q)\); this is the controlled
-   replacement for the falsified scalar identity.
+1. Recast the boxed identity as an intrinsic quotient theorem and test
+   whether the four symmetric correction terms have a direct code,
+   discriminant, or moment interpretation.
 2. Contract the C651 tensor through the primitive mod-\(11\) transvectant
    and determine its scalar on \(V_4\).
 3. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
@@ -859,6 +932,19 @@ not collect more generic examples.  On the algorithmic side, exact rank
 and isotropy are certificates; singular-value heuristics under noise are
 only proposed experiments until a perturbation theorem supplies a gap.
 
+The latest `ej` pass closes the degree-six mystery rather than merely
+cataloguing two invariants.  Character theory gives dimensions
+\(7\supset5\supset4\) for \(A_5\)-invariants, outer-\(S_5\)-even
+invariants, and ordinary \(S_6\)-symmetric invariants.  The one-dimensional
+outer-even/symmetric quotient forces the corrected relation in
+Section 11 once the exact projective ratio \(4:125\) is known.
+
+The Tao-style caution is equally sharp: equality in a one-dimensional
+quotient is the intrinsic result.  It does not make the four symmetric
+correction terms disappear, identify the arithmetic covers, or remove the
+chosen synthematic total.  The next conceptual gain would be to interpret
+that symmetric correction, not to rescale it away.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -896,6 +982,14 @@ only proposed experiments until a perturbation theorem supplies a gap.
 - **Settled negatively:** the canonical syntheme quadratic followed by
   \(\sigma_3\) is not a scalar multiple of the squared support cubic; two
   exact augmentation-space witnesses give distinct ratios.
+- **Settled exactly:** the two sextics have exotic quotient ratio
+  \(4:125\), and
+  \[
+  375C^2-12\sigma_3(q)
+  =6000p_6-4350p_4p_2-2125p_3^2+705p_2^3
+  \]
+  on \(p_1=0\).  This is the corrected \(2\)-\(3\)-\(6\) theorem modulo
+  universal symmetric information.
 - **Settled as a coordinate identity, not intrinsically:** with C651's
   selected intertwiner,
   \(c_{\mathrm{match}}^2=J_0|_V\) and
@@ -919,9 +1013,8 @@ only proposed experiments until a perturbation theorem supplies a gap.
 - **Open:** identify the relevant Paper II orientation cover over the now
   fixed ten-point carrier; C651 fixes the \(A_5\)-module but not an outer
   sheet action or its normalization.
-- **Open:** compute the degree-six \(A_5\)-invariant space on \(V_5\) and
-  locate the two distinct sextics \(C_{\rm support}^2\) and
-  \(\sigma_3(q)\).
+- **Open:** find an intrinsic code, discriminant, or moment interpretation
+  of the four-term symmetric correction in the corrected sextic identity.
 - **Open:** formalize the exact pointed-port-to-unordered-Petersen-cubic
   reconstruction corollary.
 - **Open:** turn the shared \(KG(k,2)\) negative eigenspace into a numerical

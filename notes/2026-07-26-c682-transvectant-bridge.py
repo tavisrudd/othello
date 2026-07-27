@@ -308,7 +308,7 @@ def icosahedral_marking_certificate() -> dict[str, object]:
         [(0, 5), (1, 2), (3, 4)],
     ]
 
-    def square_test(vector: tuple[int, ...]) -> tuple[int, int, Fraction]:
+    def sextic_values(vector: tuple[int, ...]) -> tuple[int, int]:
         assert sum(vector) == 0
         support_cubic = sum(
             sign * math.prod(vector[index] for index in support)
@@ -324,6 +324,10 @@ def icosahedral_marking_certificate() -> dict[str, object]:
         cubic_numerator = sum(value**3 for value in clebsch_coordinates)
         assert cubic_numerator % 3 == 0
         clebsch_cubic = cubic_numerator // 3
+        return support_cubic, clebsch_cubic
+
+    def square_test(vector: tuple[int, ...]) -> tuple[int, int, Fraction]:
+        support_cubic, clebsch_cubic = sextic_values(vector)
         return (
             support_cubic,
             clebsch_cubic,
@@ -335,6 +339,60 @@ def icosahedral_marking_certificate() -> dict[str, object]:
     assert square_test_a == (10, 8720, Fraction(436, 5))
     assert square_test_b == (18, 58480, Fraction(14620, 81))
     assert square_test_a[2] != square_test_b[2]
+
+    # Both nonsymmetric sextics have the same one-dimensional exotic
+    # component after quotienting the outer-S5-even invariant space by
+    # the ordinary S6-symmetric sextics.  The corrected relation is an
+    # exact polynomial identity on the augmentation hyperplane p_1=0.
+    interpolation_grid = range(7)
+    for leading in product(interpolation_grid, repeat=5):
+        vector = tuple(leading) + (-sum(leading),)
+        support_cubic, clebsch_cubic = sextic_values(vector)
+        power_sums = {
+            degree: sum(value**degree for value in vector)
+            for degree in [2, 3, 4, 6]
+        }
+        symmetric_correction = (
+            6000 * power_sums[6]
+            - 4350 * power_sums[4] * power_sums[2]
+            - 2125 * power_sums[3] ** 2
+            + 705 * power_sums[2] ** 3
+        )
+        assert 375 * support_cubic**2 - 12 * clebsch_cubic == symmetric_correction
+        elementary = {
+            degree: sum(
+                math.prod(vector[index] for index in subset)
+                for subset in combinations(range(6), degree)
+            )
+            for degree in [2, 3, 4, 6]
+        }
+        assert symmetric_correction == -15 * (
+            16 * elementary[2] ** 3
+            - 80 * elementary[2] * elementary[4]
+            + 75 * elementary[3] ** 2
+            + 2400 * elementary[6]
+        )
+
+    nonsymmetric_witness = (-2, -2, -1, -1, 0, 6)
+    permuted_witness = list(nonsymmetric_witness)
+    permuted_witness[0], permuted_witness[2] = (
+        permuted_witness[2],
+        permuted_witness[0],
+    )
+    assert sextic_values(nonsymmetric_witness)[0] ** 2 == 484
+    assert sextic_values(tuple(permuted_witness))[0] ** 2 == 36
+
+    # Molien coefficients in degree six.  On V_5 the A5 class traces on
+    # Sym^6 are 210,10,3,0 for orders 1,2,3,5.  The three outer S5
+    # classes have degree-six traces 10,2,1 and sizes 10,30,20.
+    a5_sextic_dimension = (210 + 15 * 10 + 20 * 3 + 24 * 0) // 60
+    outer_even_sextic_dimension = (
+        210 + 15 * 10 + 20 * 3 + 24 * 0 + 10 * 10 + 30 * 2 + 20 * 1
+    ) // 120
+    symmetric_sextic_dimension = 4  # p6, p4*p2, p3^2, p2^3 on p1=0
+    assert a5_sextic_dimension == 7
+    assert outer_even_sextic_dimension == 5
+    assert symmetric_sextic_dimension == 4
 
     return {
         "field": "Q[t]/(t^2-t-1)",
@@ -370,6 +428,32 @@ def icosahedral_marking_certificate() -> dict[str, object]:
         "naive_syntheme_quadratic_clebsch_square_identity": {
             "holds": False,
             "witness_ratios": [str(square_test_a[2]), str(square_test_b[2])],
+        },
+        "corrected_sextic_identity_on_p1_zero": {
+            "left": "375*C_support^2 - 12*sigma3(q)",
+            "right": "6000*p6 - 4350*p4*p2 - 2125*p3^2 + 705*p2^3",
+            "right_elementary": (
+                "-15*(16*e2^3 - 80*e2*e4 + 75*e3^2 + 2400*e6)"
+            ),
+            "exact_interpolation_grid": [0, 1, 2, 3, 4, 5, 6],
+            "grid_dimension": 5,
+            "degree_bound_per_variable": 6,
+        },
+        "degree_six_invariant_dimensions": {
+            "A5": a5_sextic_dimension,
+            "outer_S5_even": outer_even_sextic_dimension,
+            "outer_S5_odd": (
+                a5_sextic_dimension - outer_even_sextic_dimension
+            ),
+            "S6_symmetric": symmetric_sextic_dimension,
+        },
+        "exotic_even_quotient_projective_ratio": {
+            "C_support_squared": 4,
+            "sigma3_of_syntheme_quadratic": 125,
+            "C_support_squared_is_not_S6_symmetric_witness": {
+                "vector": nonsymmetric_witness,
+                "swap_zero_two_values": [484, 36],
+            },
         },
     }
 

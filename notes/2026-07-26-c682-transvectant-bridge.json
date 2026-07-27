@@ -537,6 +537,46 @@
         ]
       }
     ],
+    "corrected_sextic_identity_on_p1_zero": {
+      "degree_bound_per_variable": 6,
+      "exact_interpolation_grid": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "grid_dimension": 5,
+      "left": "375*C_support^2 - 12*sigma3(q)",
+      "right": "6000*p6 - 4350*p4*p2 - 2125*p3^2 + 705*p2^3",
+      "right_elementary": "-15*(16*e2^3 - 80*e2*e4 + 75*e3^2 + 2400*e6)"
+    },
+    "degree_six_invariant_dimensions": {
+      "A5": 7,
+      "S6_symmetric": 4,
+      "outer_S5_even": 5,
+      "outer_S5_odd": 2
+    },
+    "exotic_even_quotient_projective_ratio": {
+      "C_support_squared": 4,
+      "C_support_squared_is_not_S6_symmetric_witness": {
+        "swap_zero_two_values": [
+          484,
+          36
+        ],
+        "vector": [
+          -2,
+          -2,
+          -1,
+          -1,
+          0,
+          6
+        ]
+      },
+      "sigma3_of_syntheme_quadratic": 125
+    },
     "field": "Q[t]/(t^2-t-1)",
     "galois_conjugation_preserves_face_chirality_supports": true,
     "naive_syntheme_quadratic_clebsch_square_identity": {
