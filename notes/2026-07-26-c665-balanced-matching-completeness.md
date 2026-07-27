@@ -1541,3 +1541,97 @@ nonretract.
 - The exceptional-head theorem comes from the uniform binary-polyhedral
   character average; the finite decomposition-matrix table is a
   cross-check, not a census of subgroup realizations over all fields.
+
+### The \(\Delta(4)\) promotion gate fails at \(q=243\)
+
+The q=27 five-weight fingerprint does not extend to a uniform
+five-dimensional defect factorization.  Put \(q=243\),
+\(n=(q-1)/2=121\), and \(\lambda=n+1=122\).  Take a primitive nonsquare
+\(c\).  Dilation by \(c\) carries the split-torus matching \(M_c\) to
+\(M_{c^{-1}}\), so these are the two \(H\)-sheets paired by the outer
+identity
+\[
+ P_c+P_{c^{-1}}=Y(X^n-Z^n).
+\]
+The new checker applies sixteen fixed off-conic evaluation functionals,
+forms their 153 symmetric quadratic products, and then computes every
+Sylow-translation norm on all 122 axis orbits: 121 finite squared
+separations and the orbit containing infinity.  If \(A_\pi\) and \(B_\pi\)
+are the resulting projected one-sheet moment matrices, exact arithmetic
+gives
+\[
+ \operatorname{rank}A_\pi=122,\qquad
+ \operatorname{rank}[A_\pi\ B_\pi]=136.
+\]
+
+This is a decisive lower bound, not a sampled estimate.  A linear projection
+cannot increase rank.  Any uniform factorization of the second sheet modulo
+the first through a five-space would force the full joint rank, and hence
+every projected joint rank, to be at most
+\(\lambda+5=127\).  The displayed rank 136 contradicts that consequence.
+Thus \(N_5\) and the proposed uniform twisted-\(\Delta(4)\) factorization
+are false.  The same projection at q=27 gives ranks \(14,19\), exactly the
+full ranks in the primary certificate, so it independently calibrates the
+construction at the field that produced the fingerprint.
+
+The raw fixed-correction matrix also changes character support.  At q=27
+its finite-axis interpolation has rank six and support
+\[
+ \{0,1,9,10,11,12\}\subset\mathbb Z/13,
+\]
+where one direction is absorbed by the first sheet.  At q=243 the same
+projection has raw correction rank 51 and 51 nonzero square-axis
+characters.  This is not by itself the quotient obstruction; the
+projected joint rank 136 is the load-bearing falsification.
+
+The exact replay from `/home/tavis/src/othello` is
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-delta4-defect-falsifier.sage --check
+sha256sum -c notes/2026-07-26-c665-delta4-defect-falsifier.sha256
+```
+
+The checker uses Sage's canonical fields, a primitive-element nonsquare,
+all translation and axis parameters, and no random choices.  Matching
+products are evaluated by the homogeneous Dickson recurrence; direct
+secant-factor multiplication cross-checks both base parameters in each
+field.  The q=27 primary full coefficient-space checker is an independent
+replay of the calibration field.  There is no second full q=243
+coefficient-space implementation: the 153-row evaluation projection is
+already an exact rank certificate whose inequality alone falsifies
+\(N_5\).  The checker and JSON certificate have respectively 9,230 and
+2,430 bytes.  Their hashes are pinned in
+`2026-07-26-c665-delta4-defect-falsifier.sha256`.
+
+### Post-falsification `ej` + `tt` closeout
+
+The cheap upgrade was to test the first extension field beyond q=27 before
+building a modular plethysm proof around its five weights.  That test
+removes the proposed crown: \(\Delta(4)\) is a q=27 quotient fingerprint,
+not a uniform characteristic-three layer.  The useful residue is sharper
+than a bare negative.  It identifies the exact failure scale
+\[
+ \operatorname{rank}[A_\pi\ B_\pi]-\lambda=14
+\]
+already in a small deterministic moment quotient, while the first sheet is
+injective on all axis norms.  Any replacement bound must therefore allow at
+least fourteen new directions at q=243.
+
+The highest-EV route is now the declared intersection-two fallback.  It
+should not attempt another field-independent constant defect.  Instead,
+construct a second common norm direction, or equivalently one additional
+translation-invariant trade, from a Hecke intertwiner between the two sheet
+modules.  The q=243 result says that most fixed-correction characters are
+real; the proof must isolate a common direction rather than bound all of
+them away.
+
+### Mystery ledger refresh
+
+| feature | status after the promotion gate | exact remaining gap |
+|---|---|---|
+| Five q=27 defect weights | settled as field-specific | They come from a genuine five-dimensional q=27 quotient, but q=243 has projected defect increment fourteen. |
+| Uniform \(N_5\) / twisted \(\Delta(4)\) | closed negatively | The exact q=243 rank \(136>127\) falsifies every such factorization. |
+| Characteristic-three split T3 | open | Prove intersection at least two, or construct a second invariant trade, without a constant defect bound. |
+| Nonsplit descent | open and downstream | Do not descend the failed \(\Delta(4)\) statement; first find the split intersection mechanism. |
+| Extension-field C1 | unchanged | The first embedded nonretract remains unknown beyond the q=25 and q=49 affine-socle exclusions. |
