@@ -354,6 +354,755 @@
     ]
   },
   "ground_ring": "Z",
+  "icosahedral_marking": {
+    "complementary_signed_sum_decompositions": [
+      {
+        "common_axis_label": "23",
+        "complement_signs": [
+          1,
+          -1,
+          1
+        ],
+        "complement_support": [
+          2,
+          3,
+          5
+        ],
+        "face_support": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "common_axis_label": "45",
+        "complement_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "complement_support": [
+          2,
+          3,
+          4
+        ],
+        "face_support": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "common_axis_label": "34",
+        "complement_signs": [
+          1,
+          1,
+          1
+        ],
+        "complement_support": [
+          1,
+          4,
+          5
+        ],
+        "face_support": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "common_axis_label": "12",
+        "complement_signs": [
+          1,
+          1,
+          1
+        ],
+        "complement_support": [
+          1,
+          3,
+          4
+        ],
+        "face_support": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "common_axis_label": "15",
+        "complement_signs": [
+          1,
+          1,
+          1
+        ],
+        "complement_support": [
+          1,
+          2,
+          5
+        ],
+        "face_support": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "common_axis_label": "25",
+        "complement_signs": [
+          1,
+          1,
+          1
+        ],
+        "complement_support": [
+          0,
+          4,
+          5
+        ],
+        "face_support": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "common_axis_label": "14",
+        "complement_signs": [
+          1,
+          -1,
+          1
+        ],
+        "complement_support": [
+          0,
+          3,
+          5
+        ],
+        "face_support": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "common_axis_label": "13",
+        "complement_signs": [
+          1,
+          -1,
+          1
+        ],
+        "complement_support": [
+          0,
+          2,
+          4
+        ],
+        "face_support": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "common_axis_label": "35",
+        "complement_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "complement_support": [
+          0,
+          1,
+          3
+        ],
+        "face_support": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "common_axis_label": "24",
+        "complement_signs": [
+          1,
+          -1,
+          -1
+        ],
+        "complement_support": [
+          0,
+          1,
+          2
+        ],
+        "face_support": [
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "field": "Q[t]/(t^2-t-1)",
+    "galois_conjugation_preserves_face_chirality_supports": true,
+    "naive_syntheme_quadratic_clebsch_square_identity": {
+      "holds": false,
+      "witness_ratios": [
+        "436/5",
+        "14620/81"
+      ]
+    },
+    "paper_i_complement_chirality_supports": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        0,
+        3,
+        5
+      ],
+      [
+        0,
+        4,
+        5
+      ],
+      [
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        2,
+        3,
+        4
+      ],
+      [
+        2,
+        3,
+        5
+      ]
+    ],
+    "paper_i_face_chirality_supports": [
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        5
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        4
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        2,
+        4,
+        5
+      ],
+      [
+        3,
+        4,
+        5
+      ]
+    ],
+    "support_complementation_swaps_chirality_supports": true,
+    "support_first_nonzero_signed_moment_degree": 3,
+    "support_orientation_cubic_terms": [
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          0,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficient": -1,
+        "support": [
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficient": 1,
+        "support": [
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "support_signed_moments_vanish_through_degree": 2,
+    "support_to_paper_iii_face_axis": [
+      {
+        "axis_label": "23",
+        "support": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "axis_label": "45",
+        "support": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "axis_label": "34",
+        "support": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "axis_label": "12",
+        "support": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "axis_label": "15",
+        "support": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "axis_label": "25",
+        "support": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "axis_label": "14",
+        "support": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "axis_label": "13",
+        "support": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "axis_label": "35",
+        "support": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "axis_label": "24",
+        "support": [
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "support_to_syntheme_pair": [
+      {
+        "support": [
+          0,
+          1,
+          4
+        ],
+        "syntheme_pair": [
+          2,
+          4
+        ]
+      },
+      {
+        "support": [
+          0,
+          1,
+          5
+        ],
+        "syntheme_pair": [
+          1,
+          3
+        ]
+      },
+      {
+        "support": [
+          0,
+          2,
+          3
+        ],
+        "syntheme_pair": [
+          3,
+          4
+        ]
+      },
+      {
+        "support": [
+          0,
+          2,
+          5
+        ],
+        "syntheme_pair": [
+          0,
+          2
+        ]
+      },
+      {
+        "support": [
+          0,
+          3,
+          4
+        ],
+        "syntheme_pair": [
+          0,
+          1
+        ]
+      },
+      {
+        "support": [
+          1,
+          2,
+          3
+        ],
+        "syntheme_pair": [
+          1,
+          2
+        ]
+      },
+      {
+        "support": [
+          1,
+          2,
+          4
+        ],
+        "syntheme_pair": [
+          0,
+          3
+        ]
+      },
+      {
+        "support": [
+          1,
+          3,
+          5
+        ],
+        "syntheme_pair": [
+          0,
+          4
+        ]
+      },
+      {
+        "support": [
+          2,
+          4,
+          5
+        ],
+        "syntheme_pair": [
+          1,
+          4
+        ]
+      },
+      {
+        "support": [
+          3,
+          4,
+          5
+        ],
+        "syntheme_pair": [
+          2,
+          3
+        ]
+      }
+    ],
+    "syntheme_to_paper_iii_label": {
+      "0": 1,
+      "1": 5,
+      "2": 2,
+      "3": 4,
+      "4": 3
+    },
+    "vertex_axis_columns": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ]
+  },
   "kernel_basis": [
     [
       0,

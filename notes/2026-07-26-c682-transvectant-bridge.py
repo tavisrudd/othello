@@ -7,6 +7,7 @@ import argparse
 import json
 import math
 from fractions import Fraction
+from itertools import combinations, product
 from pathlib import Path
 
 
@@ -113,6 +114,263 @@ def golden_gale_certificate() -> dict[str, object]:
         "projectivity_determinant": gdet(projectivity),
         "common_column_scalar": common_scalar,
         "permutation_zero_based": list(range(6)),
+    }
+
+
+def gprojectively_equal(left: list[Golden], right: list[Golden]) -> bool:
+    return [
+        gadd(gmul(left[1], right[2]), gneg(gmul(left[2], right[1]))),
+        gadd(gmul(left[2], right[0]), gneg(gmul(left[0], right[2]))),
+        gadd(gmul(left[0], right[1]), gneg(gmul(left[1], right[0]))),
+    ] == [GZERO, GZERO, GZERO]
+
+
+def face_supports(
+    axes: list[list[Golden]],
+    edge_inner_product: Golden,
+) -> dict[tuple[int, int, int], list[list[Golden]]]:
+    signed_vertices = [
+        (axis_index, sign, [entry if sign == 1 else gneg(entry) for entry in axis])
+        for axis_index, axis in enumerate(axes)
+        for sign in [1, -1]
+    ]
+    faces: dict[tuple[int, int, int], list[list[Golden]]] = {}
+    for triple in combinations(signed_vertices, 3):
+        if not all(
+            gdot(triple[left][2], triple[right][2]) == edge_inner_product
+            for left, right in [(0, 1), (0, 2), (1, 2)]
+        ):
+            continue
+        support = tuple(sorted(vertex[0] for vertex in triple))
+        assert len(set(support)) == 3
+        center = [
+            gadd(gadd(triple[0][2][coordinate], triple[1][2][coordinate]),
+                 triple[2][2][coordinate])
+            for coordinate in range(3)
+        ]
+        faces.setdefault(support, []).append(center)
+    assert sum(len(centers) for centers in faces.values()) == 20
+    assert all(
+        len(centers) == 2 and centers[1] == [gneg(entry) for entry in centers[0]]
+        for centers in faces.values()
+    )
+    return faces
+
+
+def icosahedral_marking_certificate() -> dict[str, object]:
+    vertex_axes = [
+        [GZERO, GT, GONE],
+        [GZERO, GT, gneg(GONE)],
+        [GONE, GZERO, GT],
+        [gneg(GONE), GZERO, GT],
+        [GT, gneg(GONE), GZERO],
+        [gneg(GT), gneg(GONE), GZERO],
+    ]
+    faces = face_supports(vertex_axes, GT)
+    face_chirality = {
+        (0, 1, 4), (0, 1, 5), (0, 2, 3), (0, 2, 5), (0, 3, 4),
+        (1, 2, 3), (1, 2, 4), (1, 3, 5), (2, 4, 5), (3, 4, 5),
+    }
+    complement_chirality = {
+        tuple(index for index in range(6) if index not in support)
+        for support in face_chirality
+    }
+    # These are exactly the two Paper I support orbits in its existing
+    # six-coordinate marking.
+    assert set(faces) == face_chirality
+    assert complement_chirality == {
+        (0, 1, 2), (0, 1, 3), (0, 2, 4), (0, 3, 5), (0, 4, 5),
+        (1, 2, 5), (1, 3, 4), (1, 4, 5), (2, 3, 4), (2, 3, 5),
+    }
+
+    inv_t = gadd(GT, gneg(GONE))
+    paper_three_face_axes = {
+        "12": [gneg(GONE), gneg(GONE), gneg(GONE)],
+        "13": [gneg(GONE), gneg(GONE), GONE],
+        "14": [gneg(GONE), GONE, gneg(GONE)],
+        "15": [gneg(GONE), GONE, GONE],
+        "34": [GZERO, gneg(inv_t), gneg(GT)],
+        "25": [GZERO, gneg(inv_t), GT],
+        "45": [gneg(inv_t), gneg(GT), GZERO],
+        "23": [gneg(inv_t), GT, GZERO],
+        "35": [gneg(GT), GZERO, gneg(inv_t)],
+        "24": [GT, GZERO, gneg(inv_t)],
+    }
+    support_to_axis_label: dict[tuple[int, int, int], str] = {}
+    complementary_decompositions: dict[
+        tuple[int, int, int], tuple[tuple[int, int, int], tuple[int, int, int]]
+    ] = {}
+    for support, centers in faces.items():
+        labels = [
+            label
+            for label, axis in paper_three_face_axes.items()
+            if gprojectively_equal(centers[0], axis)
+        ]
+        assert len(labels) == 1
+        support_to_axis_label[support] = labels[0]
+        complement_support = tuple(
+            index for index in range(6) if index not in support
+        )
+        signed_sums = []
+        for signs in product([1, -1], repeat=3):
+            candidate = [
+                sum(
+                    (
+                        vertex_axes[axis_index][coordinate][component]
+                        if signs[index] == 1
+                        else -vertex_axes[axis_index][coordinate][component]
+                    )
+                    for index, axis_index in enumerate(complement_support)
+                )
+                for coordinate in range(3)
+                for component in range(2)
+            ]
+            candidate_vector = [
+                (candidate[2 * coordinate], candidate[2 * coordinate + 1])
+                for coordinate in range(3)
+            ]
+            if (
+                candidate_vector != [GZERO, GZERO, GZERO]
+                and gprojectively_equal(centers[0], candidate_vector)
+            ):
+                signed_sums.append(signs)
+        assert len(signed_sums) == 2
+        assert signed_sums[1] == tuple(-sign for sign in signed_sums[0])
+        canonical_signs = next(signs for signs in signed_sums if signs[0] == 1)
+        complementary_decompositions[support] = (
+            complement_support,
+            canonical_signs,
+        )
+    assert len(set(support_to_axis_label.values())) == 10
+
+    # C176's triangle-pair/support dictionary, restricted to the face
+    # chirality representative in each complementary pair.
+    support_to_syntheme_pair = {
+        (0, 1, 4): (2, 4),
+        (0, 1, 5): (1, 3),
+        (0, 2, 3): (3, 4),
+        (0, 2, 5): (0, 2),
+        (0, 3, 4): (0, 1),
+        (1, 2, 3): (1, 2),
+        (1, 2, 4): (0, 3),
+        (1, 3, 5): (0, 4),
+        (2, 4, 5): (1, 4),
+        (3, 4, 5): (2, 3),
+    }
+    syntheme_to_face_label = {0: 1, 1: 5, 2: 2, 3: 4, 4: 3}
+    for support, pair in support_to_syntheme_pair.items():
+        expected_label = "".join(
+            str(label)
+            for label in sorted(syntheme_to_face_label[index] for index in pair)
+        )
+        assert support_to_axis_label[support] == expected_label
+
+    conjugate_axes = [[gconj(entry) for entry in axis] for axis in vertex_axes]
+    conjugate_faces = face_supports(conjugate_axes, gconj(GT))
+    assert set(conjugate_faces) == face_chirality
+
+    signed_supports = {
+        support: (1 if support in face_chirality else -1)
+        for support in face_chirality | complement_chirality
+    }
+    for order in range(3):
+        assert all(
+            sum(
+                sign
+                for support, sign in signed_supports.items()
+                if all(index in support for index in indices)
+            ) == 0
+            for indices in product(range(6), repeat=order)
+        )
+    signed_third_moment = {
+        indices: sum(
+            sign
+            for support, sign in signed_supports.items()
+            if all(index in support for index in indices)
+        )
+        for indices in product(range(6), repeat=3)
+    }
+    assert any(signed_third_moment.values())
+    assert all(
+        value == (
+            signed_supports[tuple(sorted(indices))]
+            if len(set(indices)) == 3
+            else 0
+        )
+        for indices, value in signed_third_moment.items()
+    )
+
+    synthematic_total = [
+        [(0, 1), (2, 3), (4, 5)],
+        [(0, 2), (1, 4), (3, 5)],
+        [(0, 3), (1, 5), (2, 4)],
+        [(0, 4), (1, 3), (2, 5)],
+        [(0, 5), (1, 2), (3, 4)],
+    ]
+
+    def square_test(vector: tuple[int, ...]) -> tuple[int, int, Fraction]:
+        assert sum(vector) == 0
+        support_cubic = sum(
+            sign * math.prod(vector[index] for index in support)
+            for support, sign in signed_supports.items()
+        )
+        quadratics = [
+            sum(vector[left] * vector[right] for left, right in matching)
+            for matching in synthematic_total
+        ]
+        total = sum(quadratics)
+        clebsch_coordinates = [5 * value - total for value in quadratics]
+        assert sum(clebsch_coordinates) == 0
+        cubic_numerator = sum(value**3 for value in clebsch_coordinates)
+        assert cubic_numerator % 3 == 0
+        clebsch_cubic = cubic_numerator // 3
+        return (
+            support_cubic,
+            clebsch_cubic,
+            Fraction(clebsch_cubic, support_cubic**2),
+        )
+
+    square_test_a = square_test((-2, -2, -2, -1, -1, 8))
+    square_test_b = square_test((-2, -2, -2, -1, 0, 7))
+    assert square_test_a == (10, 8720, Fraction(436, 5))
+    assert square_test_b == (18, 58480, Fraction(14620, 81))
+    assert square_test_a[2] != square_test_b[2]
+
+    return {
+        "field": "Q[t]/(t^2-t-1)",
+        "vertex_axis_columns": vertex_axes,
+        "paper_i_face_chirality_supports": sorted(face_chirality),
+        "paper_i_complement_chirality_supports": sorted(complement_chirality),
+        "support_to_syntheme_pair": [
+            {"support": support, "syntheme_pair": support_to_syntheme_pair[support]}
+            for support in sorted(face_chirality)
+        ],
+        "syntheme_to_paper_iii_label": syntheme_to_face_label,
+        "support_to_paper_iii_face_axis": [
+            {"support": support, "axis_label": support_to_axis_label[support]}
+            for support in sorted(face_chirality)
+        ],
+        "complementary_signed_sum_decompositions": [
+            {
+                "face_support": support,
+                "complement_support": complementary_decompositions[support][0],
+                "complement_signs": complementary_decompositions[support][1],
+                "common_axis_label": support_to_axis_label[support],
+            }
+            for support in sorted(face_chirality)
+        ],
+        "galois_conjugation_preserves_face_chirality_supports": True,
+        "support_complementation_swaps_chirality_supports": True,
+        "support_signed_moments_vanish_through_degree": 2,
+        "support_first_nonzero_signed_moment_degree": 3,
+        "support_orientation_cubic_terms": [
+            {"support": support, "coefficient": signed_supports[support]}
+            for support in sorted(signed_supports)
+        ],
+        "naive_syntheme_quadratic_clebsch_square_identity": {
+            "holds": False,
+            "witness_ratios": [str(square_test_a[2]), str(square_test_b[2])],
+        },
     }
 
 
@@ -460,6 +718,7 @@ def certificate() -> dict[str, object]:
         "primitive_reduction_ranks": primitive_reduction_ranks,
         "three_paper_normalization_mod_11": three_paper_mod_11,
         "golden_gale_self_association": golden_gale_certificate(),
+        "icosahedral_marking": icosahedral_marking_certificate(),
     }
 
 

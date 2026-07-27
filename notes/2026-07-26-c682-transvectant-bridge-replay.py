@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from itertools import combinations, product
 from math import comb, factorial
 
 
@@ -124,6 +125,158 @@ def replay_golden_gale_witness() -> None:
         image = mat_vec_mod_11(projectivity, list(source))
         assert image == [(7 * entry) % 11 for entry in target]
         assert cross_mod_11(image, target) == [0, 0, 0]
+
+
+def replay_icosahedral_marking() -> None:
+    modulus = 101
+
+    def axes(root: int) -> list[list[int]]:
+        return [
+            [0, root, 1], [0, root, -1], [1, 0, root],
+            [-1, 0, root], [root, -1, 0], [-root, -1, 0],
+        ]
+
+    def supports_and_centers(root: int) -> dict[tuple[int, int, int], list[int]]:
+        vertices = [
+            (index, [(sign * entry) % modulus for entry in axis])
+            for index, axis in enumerate(axes(root))
+            for sign in [1, -1]
+        ]
+        output: dict[tuple[int, int, int], list[int]] = {}
+        for triple in combinations(vertices, 3):
+            if not all(
+                sum(
+                    triple[left][1][coordinate] * triple[right][1][coordinate]
+                    for coordinate in range(3)
+                ) % modulus == root
+                for left, right in [(0, 1), (0, 2), (1, 2)]
+            ):
+                continue
+            support = tuple(sorted(vertex[0] for vertex in triple))
+            center = [
+                sum(vertex[1][coordinate] for vertex in triple) % modulus
+                for coordinate in range(3)
+            ]
+            output.setdefault(support, center)
+        return output
+
+    root = 23
+    conjugate_root = 79
+    assert (root * root - root - 1) % modulus == 0
+    assert conjugate_root == (1 - root) % modulus
+    centers = supports_and_centers(root)
+    face_chirality = {
+        (0, 1, 4), (0, 1, 5), (0, 2, 3), (0, 2, 5), (0, 3, 4),
+        (1, 2, 3), (1, 2, 4), (1, 3, 5), (2, 4, 5), (3, 4, 5),
+    }
+    assert set(centers) == face_chirality
+    assert set(supports_and_centers(conjugate_root)) == face_chirality
+    complement_chirality = {
+        tuple(index for index in range(6) if index not in support)
+        for support in face_chirality
+    }
+    signed_supports = {
+        support: (1 if support in face_chirality else -1)
+        for support in face_chirality | complement_chirality
+    }
+    for order in range(3):
+        assert all(
+            sum(
+                sign
+                for support, sign in signed_supports.items()
+                if all(index in support for index in indices)
+            ) == 0
+            for indices in product(range(6), repeat=order)
+        )
+    assert any(
+        sum(
+            sign
+            for support, sign in signed_supports.items()
+            if all(index in support for index in indices)
+        )
+        for indices in product(range(6), repeat=3)
+    )
+    synthematic_total = [
+        [(0, 1), (2, 3), (4, 5)],
+        [(0, 2), (1, 4), (3, 5)],
+        [(0, 3), (1, 5), (2, 4)],
+        [(0, 4), (1, 3), (2, 5)],
+        [(0, 5), (1, 2), (3, 4)],
+    ]
+
+    def square_ratio(vector: tuple[int, ...]) -> tuple[int, int]:
+        support_cubic = sum(
+            sign
+            * vector[support[0]]
+            * vector[support[1]]
+            * vector[support[2]]
+            for support, sign in signed_supports.items()
+        )
+        quadratics = [
+            sum(vector[left] * vector[right] for left, right in matching)
+            for matching in synthematic_total
+        ]
+        total = sum(quadratics)
+        clebsch_coordinates = [5 * value - total for value in quadratics]
+        return support_cubic, sum(value**3 for value in clebsch_coordinates) // 3
+
+    assert square_ratio((-2, -2, -2, -1, -1, 8)) == (10, 8720)
+    assert square_ratio((-2, -2, -2, -1, 0, 7)) == (18, 58480)
+    assert 8720 * 18**2 != 58480 * 10**2
+
+    inv_root = root - 1
+    face_axes = {
+        "12": [-1, -1, -1], "13": [-1, -1, 1],
+        "14": [-1, 1, -1], "15": [-1, 1, 1],
+        "34": [0, -inv_root, -root], "25": [0, -inv_root, root],
+        "45": [-inv_root, -root, 0], "23": [-inv_root, root, 0],
+        "35": [-root, 0, -inv_root], "24": [root, 0, -inv_root],
+    }
+    support_to_pair = {
+        (0, 1, 4): (2, 4), (0, 1, 5): (1, 3),
+        (0, 2, 3): (3, 4), (0, 2, 5): (0, 2),
+        (0, 3, 4): (0, 1), (1, 2, 3): (1, 2),
+        (1, 2, 4): (0, 3), (1, 3, 5): (0, 4),
+        (2, 4, 5): (1, 4), (3, 4, 5): (2, 3),
+    }
+    relabel = {0: 1, 1: 5, 2: 2, 3: 4, 4: 3}
+    for support, center in centers.items():
+        labels = [
+            label
+            for label, axis in face_axes.items()
+            if [
+                (center[1] * axis[2] - center[2] * axis[1]) % modulus,
+                (center[2] * axis[0] - center[0] * axis[2]) % modulus,
+                (center[0] * axis[1] - center[1] * axis[0]) % modulus,
+            ] == [0, 0, 0]
+        ]
+        assert len(labels) == 1
+        expected = "".join(
+            str(value)
+            for value in sorted(relabel[index] for index in support_to_pair[support])
+        )
+        assert labels[0] == expected
+        complement_support = tuple(
+            index for index in range(6) if index not in support
+        )
+        complement_sums = []
+        root_axes = axes(root)
+        for signs in product([1, -1], repeat=3):
+            candidate = [
+                sum(
+                    signs[index] * root_axes[axis_index][coordinate]
+                    for index, axis_index in enumerate(complement_support)
+                ) % modulus
+                for coordinate in range(3)
+            ]
+            if [
+                (center[1] * candidate[2] - center[2] * candidate[1]) % modulus,
+                (center[2] * candidate[0] - center[0] * candidate[2]) % modulus,
+                (center[0] * candidate[1] - center[1] * candidate[0]) % modulus,
+            ] == [0, 0, 0]:
+                complement_sums.append(signs)
+        assert len(complement_sums) == 2
+        assert complement_sums[1] == tuple(-sign for sign in complement_sums[0])
 
 
 def fifth(
@@ -256,10 +409,11 @@ def main() -> None:
     assert matching_cubic_scalar**2 % 11 == hitchin_restriction_scalar
     assert (4 * matching_cubic_scalar) ** 2 % 11 == orientation_cover_scalar
     replay_golden_gale_witness()
+    replay_icosahedral_marking()
     print(
         "independent C682 replay: OK "
         "(boundary ranks 4, primitive mod-11 rank 4, "
-        "c_match^2 = J0, golden Gale witness)"
+        "c_match^2 = J0, golden Gale witness, marked face-support bridge)"
     )
 
 

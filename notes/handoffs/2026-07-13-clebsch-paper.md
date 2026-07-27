@@ -478,12 +478,21 @@ involution with that operation.
 The exact characteristic-zero certificate and an independent mod-\(11\)
 replay are in the C682 evidence bundle.  A further Gold composition puts
 Paper I's twenty oriented support triples over the same ten-vertex
-Petersen carrier as Paper III's face axes.  The classical outer-\(S_6\)
-\(6\to5\to10\to15\) fixed-total ladder is now the preferred way to align
-the three concrete markings.  It remains open whether support
-complementation, the Paper II orientation involution, Gale association,
-and incidence/Galois exchange are the same \(C_2\)-operation over that
-carrier.
+Petersen carrier as Paper III's face axes.  The exact marked test is now
+complete: one Paper I support orbit is precisely the ten supports of
+icosahedron face pairs, the complementary orbit gives a second signed-sum
+decomposition of the same ten face axes, and
+\((T_0,\ldots,T_4)\mapsto(1,5,2,4,3)\) matches the displayed Paper III
+labels.  Support complementation and Galois/Gale exchange are provably
+different: the first swaps face and non-face support orbits, while the
+second preserves the face orbit.  They form a transverse commuting-square
+picture, not one \(C_2\).  The Paper I support sheets also have equal
+moments through degree two and first differ cubically, exactly paralleling
+Paper II's recovery/orientation mechanism.  However, the obvious
+syntheme-quadratic followed by the Clebsch cubic is not the square of that
+support cubic; two exact witnesses falsify the scalar identity.  Paper
+II's outer sheet action and the resulting degree-six invariant relation
+remain open.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating

@@ -198,21 +198,25 @@ python3 notes/2026-07-26-c682-transvectant-bridge-replay.py
 The computation certifies the displayed transvectant matrix, open and
 boundary ranks and kernels, fifth-transvectant isotropy, all three
 rank-locus tangent dimensions, primitive reduction ranks, and the exact
-golden Gale--Galois identity.  It does not
+golden Gale--Galois identity.  It also certifies the marked
+support-to-face-axis dictionary, both complementary signed-sum
+decompositions, the support trade's first nonzero cubic moment, and the
+two-witness failure of the naive quadratic--cubic square identity.  It does not
 identify the paper's Euclidean rational form, the normalization scalar,
 global boundary components, boundary regularity, or a global incidence
 morphism.
 The representation-theoretic proof is independent of the matrix
 calculation.  A separate implementation replays the rank, isotropy, and
 tangent calculation modulo \(101\), and the Gale identity modulo \(11\);
-its nonzero minors independently confirm the lower rank bounds used by the
-exact rational calculation.
+it separately replays the marked face-support bridge modulo \(101\).
+Its nonzero minors independently confirm the lower rank bounds used by
+the exact rational calculation.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-26-c682-transvectant-bridge.py` | 16289 | `515028214745687b451319de90205e3992afb28c49b04ce38ad1426f9ecc01c3` |
-| `2026-07-26-c682-transvectant-bridge-replay.py` | 8261 | `249dbb099352ecd1dfe540d5a97529fc66963f5c78a0b5cc09a0e92c9771b008` |
-| `2026-07-26-c682-transvectant-bridge.json` | 7837 | `4c71267f67505afe62f1307599fe0a31e13ea2362a28ae3d70d1ec68f72663d4` |
+| `2026-07-26-c682-transvectant-bridge.py` | 26205 | `7f2bf789aa5876f440afb433af665382c9a90706abd0075ff1a5f3ea0c24c38f` |
+| `2026-07-26-c682-transvectant-bridge-replay.py` | 14041 | `c361fd1c254e087f9d252f1fdd990a4932090919b305b9cc3fba1a713d6c8bd2` |
+| `2026-07-26-c682-transvectant-bridge.json` | 18386 | `4e0a0ac6a476e0806075af1536a7bcd8652f5fffee54e6888a706fa54df61fc9` |
 
 No novelty claim is made.  A promotion to manuscript theorem would require
 a targeted primary-source audit for this precise covariant, an explicit
@@ -284,7 +288,14 @@ rank-plus-isotropy conditions characterize the orbit closure, the same
 matrix simultaneously becomes a moduli map, an exact recognizer, a
 reconstruction algorithm, and a source of defining equations.
 
-## Platinum candidate: the Clebsch \(2\)-\(3\)-\(6\) reconstruction ladder
+## Original Platinum candidate: the Clebsch \(2\)-\(3\)-\(6\) ladder
+
+The later marked-incidence test below preserves the common carrier and
+two-decomposition square but falsifies the proposed equality of the
+support and Galois \(C_2\)-operations.  The naive quadratic--cubic square
+factorization also fails.  This section records the surviving target and
+its original gates; it is no longer a theorem candidate in this literal
+form.
 
 The three Clebsch papers suggest a single inverse problem with a stronger
 conclusion than any paper states separately.  The displayed coordinate
@@ -642,17 +653,47 @@ ten Petersen vertices.  Paper III's opposite-face axes are another
 ten-point \(A_5\)-set labelled by those vertices, and its Clebsch
 four-space is the Petersen \((-2)\)-eigenspace.
 
-After fixing the common \(A_5\) marking, Paper I's support-chirality cover
-therefore lies directly over the carrier on which Paper III's harmonic
-embedding is defined.  This is a cleaner I--III interface than comparing
-cubic scalars in unrelated coordinates: identify the Petersen carrier
-first, then compare involutions over it.
+The exact marking test is stronger.  In the existing six-column golden
+axis order, one Paper I chirality orbit is exactly the set of supports of
+the twenty icosahedron faces, with opposite faces giving the same support:
+\[
+\begin{split}
+\mathcal F=\{&014,015,023,025,034,123,124,135,245,345\}.
+\end{split}
+\]
+The other Paper I orbit is \(\{S^c:S\in\mathcal F\}\).  If the five
+synthemes \(T_0,\ldots,T_4\) are relabelled
+\[
+ (T_0,T_1,T_2,T_3,T_4)\longmapsto(1,5,2,4,3),
+\]
+the exact face-center calculation gives the Paper III labels
+\[
+\begin{array}{c|cccccccccc}
+S&014&015&023&025&034&123&124&135&245&345\\
+\hline
+v(S)&v_{23}&v_{45}&v_{34}&v_{12}&v_{15}&v_{25}&v_{14}&v_{13}&v_{35}&v_{24}.
+\end{array}
+\]
+Thus the common Petersen marking is literal icosahedral incidence, not
+only an abstract \(A_5\)-set isomorphism.
 
-The abstract \(A_5\)-set/Petersen identification is established on both
-sides.  It is not yet proved that Paper I's complement involution equals
-Paper III's arithmetic incidence involution.  The exact Gale identity
-supplies a natural candidate middle operation, but a marked commutative
-diagram remains necessary.
+There is a further exact surprise.  For each \(S\in\mathcal F\), suitable
+signs on the three vertex axes in \(S\) sum to the face center \(v(S)\);
+suitable signs on the three axes in \(S^c\) also sum projectively to that
+same \(v(S)\).  Hence Paper I's
+\[
+20\ \text{supports}\longrightarrow10\ \text{complementary pairs}
+\]
+is exactly a two-decomposition cover of Paper III's ten face axes.
+
+The involution comparison has a decisive negative answer.  Golden
+conjugation \(t\mapsto1-t\), equivalently the marked Gale transform,
+preserves \(\mathcal F\), whereas support complementation exchanges
+\(\mathcal F\) and \(\mathcal F^c\).  These two \(C_2\)-operations are not
+the same.  They are transverse commuting operations: complementation
+switches the two decompositions over a fixed face-axis label, while Galois
+conjugation changes the golden realization and preserves the
+decomposition side.
 
 ### 9. The outer-\(S_6\) \(6\to5\to10\to15\) skeleton can close the marking gap
 
@@ -668,28 +709,66 @@ This simultaneously organizes Paper I's five triangle classes and
 support-pair graph, the five-label matching module used in the Paper II
 interface, and Paper III's ten face axes and fifteen adjacencies.
 
-The ingredients are classical and already occur separately in the notes.
-The new value is architectural: this is a candidate intrinsic marking
-functor, not an arbitrary bijection between three ten-element sets.  It
-would remove a main red-team objection to the \(2\)-\(3\)-\(6\) ladder.
-The remaining gate is one certificate showing that the manuscripts' three
-concrete labellings all equal this outer-\(S_6\) construction.
+The ingredients are classical and already occur separately in the notes,
+but the new exact certificate verifies that the Paper I and Paper III
+concrete labels equal this construction.  C651 already identifies Paper
+II's ten-pair permutation module with the same abstract five-label module.
+What remains noncanonical is its three-scalar module intertwiner and the
+comparison of orientation covers, not the ten-point carrier.
+
+### 10. Paper I is a small quadratic-recovery/cubic-orientation model
+
+Give the face-support orbit sign \(+1\) and its complementary orbit sign
+\(-1\).  For the \(0/1\) incidence vectors \(x_S\in\mathbf Q^6\), exact
+enumeration gives
+\[
+ \sum_S\epsilon(S)x_S^{\otimes d}=0\quad(d=0,1,2),
+ \qquad
+ \sum_S\epsilon(S)x_S^{\otimes3}\ne0.
+\]
+The third tensor has entry \(\epsilon(\{i,j,k\})\) when its three indices
+are distinct and zero otherwise.  Thus the two Paper I support sheets are
+a strength-two trade whose first orientation detector is cubic—precisely
+the quadratic-recovery/cubic-orientation pattern of Paper II, in a
+twenty-block \(2\)-\((6,3,2)\) model.
+
+This is an exact shared mechanism, not yet an equality of the two cubic
+tensors: Paper I's tensor lives on the six-coordinate module, while
+Paper II's signed matching tensor lives on its ten-dimensional quotient
+and restricts to the Clebsch four-space.  In fact there is no nonzero
+linear \(A_5\)-map from the six-point augmentation module \(V_5\) to
+\(V_4\).
+
+The obvious quadratic substitute also fails a sharp test.  Put
+\[
+ q_i(x)=\sum_{\{a,b\}\in T_i}x_ax_b,\qquad
+ y_i=5q_i-\sum_jq_j.
+\]
+Then \(\sum_i y_i=0\), but on \(\sum_ax_a=0\) the tempting identity
+\(\sigma_3(y)=\lambda C_{\rm support}(x)^2\) has ratios
+\[
+ \frac{436}{5}\quad\text{at }(-2,-2,-2,-1,-1,8),
+ \qquad
+ \frac{14620}{81}\quad\text{at }(-2,-2,-2,-1,0,7).
+\]
+So the simplest literal \(2\)-\(3\)-\(6\) factorization is false.  Any
+surviving theorem must either use a different quadratic covariant or state
+a relation in the larger degree-six invariant space.
 
 ### Highest-EV cross-paper actions
 
-1. Promote the exact golden Gale-conjugation identity and its code-duality
-   corollary as a six-point/PRS--Paper III interface.
-2. Build one marked outer-\(S_6\) diagram aligning Paper I support pairs,
-   Paper II matching labels, and Paper III face axes.
-3. Contract the C651 tensor through the primitive mod-\(11\) transvectant
+1. Compute the \(A_5\)-invariant degree-six span on \(V_5\) and locate both
+   \(C_{\rm support}^2\) and \(\sigma_3(q)\); this is the controlled
+   replacement for the falsified scalar identity.
+2. Contract the C651 tensor through the primitive mod-\(11\) transvectant
    and determine its scalar on \(V_4\).
-4. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
+3. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
    equivalence conventions.
-5. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
+4. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
    defect.
-6. Test the two \(q=11\) PRS exceptional nets against the transvectant
+5. Test the two \(q=11\) PRS exceptional nets against the transvectant
    kernel orbit.
-7. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
+6. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
    before touching the full replacement graph.
 
 ## Source-depth boundary
@@ -803,8 +882,20 @@ only proposed experiments until a perturbation theorem supplies a gap.
   matrix is its Galois conjugate with the same column order:
   \(HK_t=-tA_{1-t}\).  Golden-sheet exchange is code duality on this
   locus, completing C373's previously open kill test.
-- **Settled abstractly:** Paper I complementary support pairs and Paper III
-  face axes carry the same ten-vertex \(A_5\)/Petersen geometry.
+- **Settled exactly:** in the manuscripts' concrete six-column marking,
+  one Paper I support orbit is the icosahedral face-support orbit, and
+  complementary support pairs are the two signed-sum decompositions of
+  the corresponding Paper III face axes.  The relabeling of synthemes is
+  \((T_0,\ldots,T_4)\mapsto(1,5,2,4,3)\).
+- **Settled negatively:** support complementation swaps face and non-face
+  support orbits, while Galois/Gale conjugation preserves the face orbit.
+  They are transverse commuting \(C_2\)-operations, not one involution.
+- **Settled:** the Paper I support sheets have equal signed moments through
+  degree two and first differ cubically, giving the same
+  quadratic-recovery/cubic-orientation pattern as Paper II.
+- **Settled negatively:** the canonical syntheme quadratic followed by
+  \(\sigma_3\) is not a scalar multiple of the squared support cubic; two
+  exact augmentation-space witnesses give distinct ratios.
 - **Settled as a coordinate identity, not intrinsically:** with C651's
   selected intertwiner,
   \(c_{\mathrm{match}}^2=J_0|_V\) and
@@ -825,13 +916,12 @@ only proposed experiments until a perturbation theorem supplies a gap.
   incidence involution, rather than merely an analogous sign.
 - **Open:** contract the C651 finite matching tensor through the primitive
   mod-\(11\) map and fix the resulting cubic scalar.
-- **Open:** freeze the Paper I--II--III marking compatibility needed to
-  promote the \(2\)-\(3\)-\(6\) ladder to one end-to-end theorem; the
-  outer-\(S_6\) fixed-total construction is now the preferred candidate.
-- **Open:** prove or falsify equality of Paper I support complementation,
-  the relevant Paper II orientation involution, six-point Gale
-  association, and Paper III incidence/Galois exchange over the common
-  Petersen carrier; no global Paper II specialization is currently proved.
+- **Open:** identify the relevant Paper II orientation cover over the now
+  fixed ten-point carrier; C651 fixes the \(A_5\)-module but not an outer
+  sheet action or its normalization.
+- **Open:** compute the degree-six \(A_5\)-invariant space on \(V_5\) and
+  locate the two distinct sextics \(C_{\rm support}^2\) and
+  \(\sigma_3(q)\).
 - **Open:** formalize the exact pointed-port-to-unordered-Petersen-cubic
   reconstruction corollary.
 - **Open:** turn the shared \(KG(k,2)\) negative eigenspace into a numerical
