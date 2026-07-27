@@ -88,13 +88,41 @@ demand.
 
 ## The fixture
 
-`python3 lean/scripts/test_paper_facts.py` — 56 tests, green, hermetic. The thirteen added here
+`python3 lean/scripts/test_paper_facts.py` — 59 tests, green, hermetic. The sixteen added here
 cover the title gate (drift reported, correct document accepted, declared coverage subset respected,
 unregistered paper in a coverage list refused, untracked document reported) and the region machinery
 (empty region stale until generated, generation idempotent, hand edit inside a region reported,
 prose outside a region preserved, declared-but-absent region reported, unknown section refused, the
 rendered title carrying the manuscript's own string, and font switches dropped from a rendered title
-without dropping a word).
+without dropping a word), plus per-lane routing: a finding goes to the lane owning the file, an
+unknown lane selects nothing rather than everything, and the longest matching directory wins.
+
+## Addendum — per-lane routing, and what the gate saw during the repairs
+
+While the owning lanes repaired the C681 findings, the audit was rerun. Errors fell from fifteen to
+eight, and the remaining ones are informative rather than leftover:
+
+- **The checker caught repair-induced staleness.** `papers/beyond4_prs/refs.bib` was repaired for
+  `RuddRigidity2026` and `RuddFactorization2026`, and
+  `prs-beyond-redundancy-four-tit-submission.bbl` immediately reported `stale-bbl` for both keys —
+  the generated bibliography now disagrees with the source it was built from. That is the second
+  sense of `stale-bbl`, and it had never fired before: the repair created it, and the gate saw it
+  the same day.
+- **A README outlived its bibliography fix.** `papers/complete-repair-ports/refs.bib` was repaired
+  while `papers/complete-repair-ports/README.md` still claims the old title.
+
+`audit` and `check` now take `--lane`, which selects only findings in artifacts that lane owns.
+Attribution follows the artifact, not the paper the drift is about: a bibliography in one lane's
+manuscript quoting another lane's dead title is repaired by the lane whose file it is, using the
+other lane's manuscript as the source. Routing it to the cited paper's owner would send it to
+someone with nothing to edit.
+
+This is the programme's stated intent applied to its own output — a lane asks a command what it owns
+instead of reading a portfolio-wide list and filtering by hand.
+
+```sh
+lean/scripts/paper-facts.py audit --lane clebsch
+```
 
 ## Mystery ledger
 
@@ -129,7 +157,8 @@ uncommitted.
 ## Replay
 
 ```sh
-python3 lean/scripts/test_paper_facts.py     # 56 tests, hermetic
+python3 lean/scripts/test_paper_facts.py     # 59 tests, hermetic
 lean/scripts/paper-facts.py generate         # rewrite the work summary's manuscript inventory
 lean/scripts/paper-facts.py check            # audit plus region and facts-artifact staleness
+lean/scripts/paper-facts.py audit --lane <alias>  # only what that lane owns
 ```

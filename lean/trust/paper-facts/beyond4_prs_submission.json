@@ -379,7 +379,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Factorization memory in a conic ideal: The \\(a_3\\), \\(b_3\\), and \\(h_3\\) configurations. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Quadratic recovery and cubic orientation in conic matching quotients. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "RuddPrescribedHoles2026",
@@ -393,7 +393,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Deep-hole rigidity of the clebsch hexagon code. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code from its deep-hole syndrome locus. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "SeroussiRoth1986",
@@ -540,7 +540,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Factorization Memory in a Conic Ideal: The \\(A_3\\), \\(B_3\\), and \\(H_3\\) Configurations"
+      "title": "Quadratic recovery and cubic orientation in conic matching quotients"
     },
     {
       "key": "RuddPrescribedHoles2026",
@@ -554,7 +554,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Deep-Hole Rigidity of the Clebsch Hexagon Code"
+      "title": "Reconstructing the {Clebsch} code from its deep-hole syndrome locus"
     },
     {
       "key": "SeroussiRoth1986",
@@ -883,10 +883,10 @@
       "sha256": "f4881b8f4e2860d15b8a02001579a574132483d3d06ea979a977a985a82d9437"
     },
     {
-      "bytes": 238755,
+      "bytes": 238821,
       "pages": 30,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four.pdf",
-      "sha256": "cb59721088deedabb140e16c101d3b84856ad757872f8be1a3921fba8603881d"
+      "sha256": "6928f096a24b1f8c135e2532af91d2efa65a0fbbb3d64464f1566b3e71d22ab6"
     }
   ],
   "schema_version": 1,

@@ -11,7 +11,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
-      "text": "T.~Rudd, \\newblock Arcs complete outside a prescribed conic: An exact defect identity and $\\rho_{\\mathcal C}(16)=9$, \\newblock working paper, 2026."
+      "text": "T.~Rudd, \\newblock Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity, \\newblock working paper, 2026."
     },
     {
       "key": "Athanasiadis1996",
@@ -440,17 +440,17 @@
   "paper": "clebsch_hexagon_code",
   "pdfs": [
     {
-      "bytes": 272586,
+      "bytes": 271949,
       "pages": 37,
       "path": "papers/clebsch-hexagon-code/clebsch_hexagon_code.pdf",
-      "sha256": "c05cf657231de4e057159014247bf4b39dfc97adfacb677d7c2a775d6f98f72f"
+      "sha256": "f70e70f49a8a33c1a71d72e7f992ff5e95ec475e545f00ab11cfe41ea52ebe6e"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
-      "sha256": "5cfe7362b4cdbc4b4ffee6e8b3ab2e683c3fc40e78d8c6815e96e7a2a6408ad2"
+      "sha256": "226eeee01d78b7a28f356cc362b1a4d5ca9c2c667bba58f0abda7ce33cb270c0"
     }
   ],
   "title": "Deep-hole rigidity and factorization memory\\\\ in the Clebsch hexagon code",

@@ -611,6 +611,33 @@ class PaperFactsTest(unittest.TestCase):
         }
         self.assertEqual(before, after)
 
+    # -- routing a finding to the lane that can repair it ---------------------------------------
+
+    def test_a_finding_routes_to_the_lane_owning_the_artifact_not_the_cited_paper(self):
+        # beta's bibliography quotes a dead title of alpha.  beta-lane holds the file to edit.
+        self.fx.track(
+            "papers/beta/beta.tex",
+            BETA.replace(
+                "Arcs complete outside a conic: a prescribed-hole defect identity",
+                "Arcs complete outside a prescribed conic",
+            ),
+        )
+        code, doc = self.fx.run("audit", "--lane", "beta-lane")
+        self.assertEqual({f["code"] for f in doc["findings"]}, {"citation-title-drift"})
+        code, doc = self.fx.run("audit", "--lane", "alpha-lane")
+        self.assertEqual(doc["findings"], [])
+
+    def test_an_unknown_lane_selects_nothing_rather_than_everything(self):
+        self.fx.track("papers/gamma/gamma.tex", "\\title{Unregistered}\n")
+        code, doc = self.fx.run("audit", "--lane", "no-such-lane")
+        self.assertEqual(doc["findings"], [])
+
+    def test_lane_routing_prefers_the_longest_matching_directory(self):
+        registry = pf.load_registry(self.fx.lean_root / "trust" / "papers.toml")
+        self.assertEqual(pf.owning_lane("papers/beta/refs.bib:Key", registry), "beta-lane")
+        self.assertEqual(pf.owning_lane("alpha:thm:missing", registry), "alpha-lane")
+        self.assertIsNone(pf.owning_lane("notes/somewhere.md", registry))
+
     # -- documents that restate titles ---------------------------------------------------------
 
     def test_a_document_that_stops_naming_a_paper_by_its_current_title_is_reported(self):

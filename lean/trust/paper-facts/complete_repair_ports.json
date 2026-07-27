@@ -1,6 +1,121 @@
 {
   "bibliography": [
     {
+      "key": "AshikhminKramerTenBrink2004",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "ChenLingXing2001",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "ChenLingXing2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "Colbourn1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "DavydovEtAl2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "GopalanEtAl2012",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "GruicaEtAl2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "LasVergnas1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "LavrauwVanDeVoorde2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "LiuEtAl2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "MacWilliamsSloane1977",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "Mazumdar2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "PamiesEtAl2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "RuddClebschRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl",
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code from its deep-hole syndrome locus. \\newblock Working paper, 2026."
+    },
+    {
+      "key": "Singer1938",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "Stichtenoth2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "Stichtenoth2009",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "Tricot2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
       "key": "ArratiaGoldsteinGordon1989",
       "kind": "bibtex",
       "self_authored": false,
@@ -145,7 +260,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/complete-repair-ports/refs.bib",
-      "title": "Deep-hole rigidity of the {Clebsch} hexagon code"
+      "title": "Reconstructing the {Clebsch} code from its deep-hole syndrome locus"
     },
     {
       "key": "ShahEtAl2010",
@@ -276,10 +391,10 @@
   "paper": "complete_repair_ports",
   "pdfs": [
     {
-      "bytes": 146049,
+      "bytes": 143550,
       "pages": 14,
       "path": "papers/complete-repair-ports/complete_repair_ports.pdf",
-      "sha256": "76407a9407403df5e760352c06b5be0e3a111067899d976a6d179536569bccb9"
+      "sha256": "df79abb931f9cd87904533cdffc8f7c1d20591d1a04cfed24ac666c9c787ed69"
     }
   ],
   "schema_version": 1,
@@ -291,5 +406,7 @@
   ],
   "title": "Complete Bounded Repair Ports:\\\\ \\large Transfer, Reliability, and Geometric Structure",
   "title_normalized": "complete bounded repair ports: transfer, reliability, and geometric structure",
-  "untracked_bibliography": []
+  "untracked_bibliography": [
+    "papers/complete-repair-ports/complete_repair_ports.bbl"
+  ]
 }

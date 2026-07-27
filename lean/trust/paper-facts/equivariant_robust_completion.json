@@ -2,6 +2,121 @@
   "bibliography": [
     {
       "key": "Alderson2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Alderson2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "AldersonBruenSilverman2007",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "BakerWantz2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "BlokhuisSeressWilbrink1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "CoolsaetSticker2009",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Dye1991",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Jungnickel1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Lean2015",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "LopezMaisnerNartXarles2002",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "LunelliSce1964",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "MarcuginiMilaniPambianco2007",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Martin1967",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Mathlib2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "NgWild2001",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "RuddClebschRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl",
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code from its deep-hole syndrome locus. \\newblock Working paper, 2026."
+    },
+    {
+      "key": "Ueberberg1997",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+    },
+    {
+      "key": "Alderson2005",
       "kind": "bibtex",
       "self_authored": false,
       "source": "papers/equivariant-robust-completion/refs.bib",
@@ -124,7 +239,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/equivariant-robust-completion/refs.bib",
-      "title": "Deep-hole rigidity of the {Clebsch} hexagon code"
+      "title": "Reconstructing the {Clebsch} code from its deep-hole syndrome locus"
     },
     {
       "key": "Ueberberg1997",
@@ -282,10 +397,10 @@
   "paper": "equivariant_robust_completion",
   "pdfs": [
     {
-      "bytes": 116075,
+      "bytes": 113299,
       "pages": 14,
       "path": "papers/equivariant-robust-completion/frobenius_pair_extension.pdf",
-      "sha256": "7fd84ee932c507311c860655c006eb6a16445244f11c6606d31205380cdb1ce5"
+      "sha256": "ed59b0407295529e5fe6373d261b954952c4f0cb2d761842cb0ee341ec831235"
     }
   ],
   "schema_version": 1,
@@ -297,5 +412,7 @@
   ],
   "title": "Frobenius-equivariant pair extension and robust repair of eight-arcs",
   "title_normalized": "frobenius-equivariant pair extension and robust repair of eight-arcs",
-  "untracked_bibliography": []
+  "untracked_bibliography": [
+    "papers/equivariant-robust-completion/frobenius_pair_extension.bbl"
+  ]
 }

@@ -47,7 +47,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "text": "T.~Rudd, \\newblock \\emph{A conic deep-hole syndrome locus characterizes the Clebsch code}, \\newblock working paper, 2026."
+      "text": "T.~Rudd, \\newblock \\emph{Reconstructing the Clebsch code from its deep-hole syndrome locus}, \\newblock working paper, 2026."
     }
   ],
   "dir": "papers/clebsch-factorization",
@@ -217,17 +217,17 @@
   "paper": "clebsch_factorization",
   "pdfs": [
     {
-      "bytes": 200114,
+      "bytes": 200125,
       "pages": 28,
       "path": "papers/clebsch-factorization/clebsch_factorization.pdf",
-      "sha256": "f3c0013cecd01eb5c59071b07e8b853aa2c6c55ac323660264df00308de9402c"
+      "sha256": "2d6d1e63cf2cb2ce6c7fb5bf4dbdd2a466e2597028bc9f99e8fae13ca83c6826"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "sha256": "79997bc43eecb2ce22af5dc00747bfa920c9dab5080628c02cfa7225f5faefe1"
+      "sha256": "3d0bb608321a0231218e22cd0146823b4a4cf9e40d6b21faeb6b46bad9bf6584"
     }
   ],
   "title": "Quadratic recovery and cubic orientation\\\\ in conic matching quotients",

@@ -1256,6 +1256,29 @@ def build_context(lean_root: Path, registry_path: Path | None) -> Context:
     )
 
 
+def owning_lane(subject: str, registry: PaperRegistry) -> str | None:
+    """The lane that repairs a finding: the one owning the artifact the finding is in.
+
+    Attribution follows the artifact, not the paper the drift is *about*.  A bibliography in one
+    lane's manuscript quoting another lane's dead title is repaired by the lane whose file it is,
+    using the other lane's manuscript as the source, so routing it to the cited paper's owner would
+    send it to someone with nothing to edit.
+    """
+    path = subject.split(":", 1)[0]
+    by_directory = sorted(
+        ((row.directory, row.lane) for row in registry.papers), key=lambda item: -len(item[0])
+    )
+    for directory, lane in by_directory:
+        if path == directory or path.startswith(directory + "/"):
+            return lane
+    row = registry.by_id().get(path)
+    return row.lane if row else None
+
+
+def filter_findings(findings: list[Any], registry: PaperRegistry, lane: str) -> list[Any]:
+    return [f for f in findings if owning_lane(f.subject, registry) == lane]
+
+
 def facts_text(paper: PaperFacts, spine: Any) -> str:
     return spine.canonical_json(paper.as_json())
 
@@ -1283,6 +1306,8 @@ def cmd_audit(args: argparse.Namespace) -> int:
     findings = audit(ctx.tree, ctx.registry, ctx.facts, ctx.lean_facts, ctx.spine.Finding)
     if args.paper:
         findings = [f for f in findings if args.paper in f.subject or args.paper in f.detail]
+    if args.lane:
+        findings = filter_findings(findings, ctx.registry, args.lane)
     return ctx.spine.report(findings, args.json)
 
 
@@ -1343,7 +1368,12 @@ def cmd_check(args: argparse.Namespace) -> int:
                         "a facts artifact exists for a paper the registry does not declare",
                     )
                 )
-    return ctx.spine.report(sorted(findings, key=lambda f: f.sort_key), args.json)
+    findings = sorted(findings, key=lambda f: f.sort_key)
+    if args.paper:
+        findings = [f for f in findings if args.paper in f.subject or args.paper in f.detail]
+    if args.lane:
+        findings = filter_findings(findings, ctx.registry, args.lane)
+    return ctx.spine.report(findings, args.json)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -1362,6 +1392,7 @@ def main(argv: list[str] | None = None) -> int:
 
     audit_cmd = sub.add_parser("audit", help="read-only comparison of declarations with facts")
     audit_cmd.add_argument("--paper")
+    audit_cmd.add_argument("--lane", help="only findings in artifacts this lane owns")
     audit_cmd.add_argument("--json", action="store_true")
     audit_cmd.set_defaults(func=cmd_audit)
 
@@ -1370,6 +1401,7 @@ def main(argv: list[str] | None = None) -> int:
 
     check = sub.add_parser("check", help="audit plus generated-region and facts-artifact staleness")
     check.add_argument("--paper")
+    check.add_argument("--lane", help="only findings in artifacts this lane owns")
     check.add_argument("--json", action="store_true")
     check.set_defaults(func=cmd_check)
 
