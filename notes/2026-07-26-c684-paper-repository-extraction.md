@@ -289,11 +289,11 @@ Then:
   repositories, undeclared symlinks, generated-name collisions, and missing destination parents.
   It writes source blobs by Git object ID, canonical provenance and export manifests, fixed modes,
   and a paper-specific build-output ignore list.
-- Ten hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
+- Twelve hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
   deterministic selection and materialization, missing mappings, destination collisions, unsafe
   paths, undeclared and stale symlink dispositions, private-reference detection, overwrite refusal,
   private-reference materialization refusal, and manifest verification against tampering and extra
-  files.
+  files, plus monorepo-root command detection and exact-count rewrite drift.
 - The first plan at source commit `c12727722a325f6d8a93b0bb5b17001b63da229f` found exactly seven
   explicitly excluded external symlinks: two in continuation and five in dihedral. It found no
   undeclared symlink.
@@ -324,7 +324,19 @@ Then:
 - A separate clone of that exact local commit passed manifest verification, `make -B`, all aggregate
   release checks, and the warning-free build gate. The source repository remains clean because the
   rebuilt PDF and LaTeX products are exact-path ignored release outputs.
-- Next implementation step: resolve the sixteen explicit reference findings repository by
-  repository rather than adding a broad exception, then pilot the next zero-finding ordinary
-  repository. No GitHub remote has been created.
+- A stronger audit added after that promotion detects flattened-repository commands of the form
+  `papers/<name>/...`. It found eight such references in Clebsch Passages'
+  `verification/README.md`; the first local commit therefore remains a superseded candidate rather
+  than the release-ready state.
+- Exact-count, path-specific rewrites now transform those eight commands and refuse source drift.
+  Corrected source commit `777a32a2255a0e010cf43b6755f99d6c049eb000` produces audit-clean
+  disposable candidate `895a43ce3c7d0709cb9fd8ca4d02c3af36734428`, with export-manifest SHA-256
+  `404e53306b95da33e6a065dccccc9661e84b9cea6d241f12ae33636ae70c26b9`. A separate clean clone
+  again passed `make -B`, every aggregate release check, and the warning-free gate.
+- Replacing `~/src/math-papers/clebsch-passages` with that fresh-history corrected candidate is
+  intentionally paused for explicit history-replacement approval. No remote exists, and the
+  validated corrected candidate is preserved under the disk-backed C684 cache.
+- Next implementation step after that approval: replace the superseded local candidate, verify its
+  exact commit, then resolve the expanded scoped reference findings repository by repository rather
+  than adding a broad exception. No GitHub remote has been created.
 - Arcs/Q16 readiness gates only Phase D, not Phases A–C.
