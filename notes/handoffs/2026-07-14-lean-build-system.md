@@ -100,6 +100,10 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    action without explicit user authorization. Arcs/Q16 gates only the final arcs materialization;
    exporter development and other paper pilots proceed now. Plan:
    [`../2026-07-26-c684-paper-repository-extraction.md`](../2026-07-26-c684-paper-repository-extraction.md).
+   The immutable planner/audit/materializer and ten adversarial tests have landed. Clebsch Passages
+   is the first clean-room-validated local repository at `~/src/math-papers/clebsch-passages`; it
+   has no remote. Next resolve the sixteen scoped private-reference findings, then export the next
+   zero-finding ordinary repository.
 
 ## Gates and non-goals
 

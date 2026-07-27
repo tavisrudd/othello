@@ -289,10 +289,11 @@ Then:
   repositories, undeclared symlinks, generated-name collisions, and missing destination parents.
   It writes source blobs by Git object ID, canonical provenance and export manifests, fixed modes,
   and a paper-specific build-output ignore list.
-- Nine hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
+- Ten hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
   deterministic selection and materialization, missing mappings, destination collisions, unsafe
   paths, undeclared and stale symlink dispositions, private-reference detection, overwrite refusal,
-  and private-reference materialization refusal.
+  private-reference materialization refusal, and manifest verification against tampering and extra
+  files.
 - The first plan at source commit `c12727722a325f6d8a93b0bb5b17001b63da229f` found exactly seven
   explicitly excluded external symlinks: two in continuation and five in dihedral. It found no
   undeclared symlink.
@@ -313,9 +314,17 @@ Then:
   release outputs; page/warning/release gates still passed.
 - The pilot export manifest SHA-256 is
   `634dc6b8ddb12f9cd4b183fde591510a4d7147e62b0f9ca8f0f2b64658be2ab7`.
-- Next implementation step: add manifest/tree verification and commit-identity policy, then promote
-  the validated Clebsch Passages candidate to `~/src/math-papers/clebsch-passages`. Afterward,
-  resolve the sixteen explicit reference findings repository by repository rather than adding a
-  broad exception.
-- No destination repository or GitHub remote has been created.
+- Manifest/tree verification now checks every declared file's path, size, SHA-256, and mode, plus
+  the exact uncommitted tree or Git-tracked file set. It refuses missing, tampered, duplicate, or
+  extra tracked paths.
+- Clebsch Passages is promoted to `~/src/math-papers/clebsch-passages` from exact Othello source
+  commit `773366a5492dfc6ca7a94a45fed4563da168519f`. Its clean local `main` commit is
+  `6c927fab9685a4ed8994323a002dbeaa9343b90f`; it has no remote. The final export-manifest SHA-256 is
+  `eddf04e365252c1790b56b94d80e395a9dd6b44ff98f2d23135ba1099ddadfcd`.
+- A separate clone of that exact local commit passed manifest verification, `make -B`, all aggregate
+  release checks, and the warning-free build gate. The source repository remains clean because the
+  rebuilt PDF and LaTeX products are exact-path ignored release outputs.
+- Next implementation step: resolve the sixteen explicit reference findings repository by
+  repository rather than adding a broad exception, then pilot the next zero-finding ordinary
+  repository. No GitHub remote has been created.
 - Arcs/Q16 readiness gates only Phase D, not Phases A–C.
