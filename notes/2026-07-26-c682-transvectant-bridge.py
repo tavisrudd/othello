@@ -7,7 +7,7 @@ import argparse
 import json
 import math
 from fractions import Fraction
-from itertools import combinations, product
+from itertools import combinations, permutations, product
 from pathlib import Path
 
 
@@ -266,8 +266,8 @@ def icosahedral_marking_certificate() -> dict[str, object]:
         assert support_to_axis_label[support] == expected_label
 
     conjugate_axes = [[gconj(entry) for entry in axis] for axis in vertex_axes]
-    conjugate_faces = face_supports(conjugate_axes, gconj(GT))
-    assert set(conjugate_faces) == face_chirality
+    conjugate_faces = face_supports(conjugate_axes, gneg(gconj(GT)))
+    assert set(conjugate_faces) == complement_chirality
 
     signed_supports = {
         support: (1 if support in face_chirality else -1)
@@ -417,7 +417,7 @@ def icosahedral_marking_certificate() -> dict[str, object]:
             }
             for support in sorted(face_chirality)
         ],
-        "galois_conjugation_preserves_face_chirality_supports": True,
+        "galois_conjugation_swaps_chirality_supports": True,
         "support_complementation_swaps_chirality_supports": True,
         "support_signed_moments_vanish_through_degree": 2,
         "support_first_nonzero_signed_moment_degree": 3,
@@ -455,6 +455,170 @@ def icosahedral_marking_certificate() -> dict[str, object]:
                 "swap_zero_two_values": [484, 36],
             },
         },
+    }
+
+
+def outer_s6_covariant_certificate() -> dict[str, object]:
+    vertices = tuple(range(6))
+    edges = tuple(combinations(vertices, 2))
+    edge_set = frozenset(edges)
+    matchings = tuple(
+        tuple(sorted(candidate))
+        for candidate in combinations(edges, 3)
+        if len({vertex for edge in candidate for vertex in edge}) == 6
+    )
+    totals = tuple(
+        tuple(sorted(candidate))
+        for candidate in combinations(matchings, 5)
+        if frozenset(edge for matching in candidate for edge in matching) == edge_set
+    )
+    assert len(matchings) == 15
+    assert len(totals) == 6
+
+    symmetric_group = tuple(permutations(vertices))
+
+    def act_edge(
+        permutation: tuple[int, ...],
+        edge: tuple[int, int],
+    ) -> tuple[int, int]:
+        return tuple(sorted((permutation[edge[0]], permutation[edge[1]])))
+
+    def act_matching(
+        permutation: tuple[int, ...],
+        matching: tuple[tuple[int, int], ...],
+    ) -> tuple[tuple[int, int], ...]:
+        return tuple(sorted(act_edge(permutation, edge) for edge in matching))
+
+    def act_total(
+        permutation: tuple[int, ...],
+        total: tuple[tuple[tuple[int, int], ...], ...],
+    ) -> tuple[tuple[tuple[int, int], ...], ...]:
+        return tuple(
+            sorted(act_matching(permutation, matching) for matching in total)
+        )
+
+    def even(permutation: tuple[int, ...]) -> bool:
+        return (
+            sum(
+                permutation[left] > permutation[right]
+                for left in range(6)
+                for right in range(left + 1, 6)
+            )
+            % 2
+            == 0
+        )
+
+    triples = tuple(combinations(vertices, 3))
+    triple_orbits: dict[
+        tuple[tuple[tuple[int, int], ...], ...],
+        frozenset[tuple[int, int, int]],
+    ] = {}
+    for total in totals:
+        stabilizer = [
+            permutation
+            for permutation in symmetric_group
+            if act_total(permutation, total) == total
+        ]
+        alternating_stabilizer = [
+            permutation for permutation in stabilizer if even(permutation)
+        ]
+        assert len(stabilizer) == 120
+        assert len(alternating_stabilizer) == 60
+        seed = triples[0]
+        orbit = frozenset(
+            tuple(sorted(permutation[index] for index in seed))
+            for permutation in alternating_stabilizer
+        )
+        assert len(orbit) == 10
+        assert {
+            tuple(index for index in vertices if index not in support)
+            for support in orbit
+        } == set(triples) - set(orbit)
+        triple_orbits[total] = orbit
+
+    base_total = tuple(
+        sorted(
+            [
+                ((0, 1), (2, 3), (4, 5)),
+                ((0, 2), (1, 4), (3, 5)),
+                ((0, 3), (1, 5), (2, 4)),
+                ((0, 4), (1, 3), (2, 5)),
+                ((0, 5), (1, 2), (3, 4)),
+            ]
+        )
+    )
+    assert base_total in totals
+    face_chirality = {
+        (0, 1, 4), (0, 1, 5), (0, 2, 3), (0, 2, 5), (0, 3, 4),
+        (1, 2, 3), (1, 2, 4), (1, 3, 5), (2, 4, 5), (3, 4, 5),
+    }
+    assert set(triple_orbits[base_total]) in [
+        face_chirality,
+        set(triples) - face_chirality,
+    ]
+    assert {
+        act_total(permutation, base_total)
+        for permutation in symmetric_group
+    } == set(totals)
+
+    def cycles(permutation: tuple[int, ...]) -> list[int]:
+        seen: set[int] = set()
+        output = []
+        for start in vertices:
+            if start in seen:
+                continue
+            current = start
+            length = 0
+            while current not in seen:
+                seen.add(current)
+                length += 1
+                current = permutation[current]
+            output.append(length)
+        return output
+
+    def symmetric_sixth_trace(permutation: tuple[int, ...]) -> int:
+        # Symmetric powers of the six-point permutation representation
+        # have generating series product_c (1-t^|c|)^-1.  Multiplication
+        # by (1-t) removes its trivial summand.
+        coefficients = [0] * 7
+        coefficients[0] = 1
+        for length in cycles(permutation):
+            for degree in range(length, 7):
+                coefficients[degree] += coefficients[degree - length]
+        return coefficients[6] - coefficients[5]
+
+    multiplicity_numerator = 0
+    for permutation in symmetric_group:
+        fixed_totals = sum(
+            act_total(permutation, total) == total for total in totals
+        )
+        outer_standard_character = fixed_totals - 1
+        multiplicity_numerator += (
+            symmetric_sixth_trace(permutation) * outer_standard_character
+        )
+    assert multiplicity_numerator == 720
+    outer_covariant_multiplicity = multiplicity_numerator // 720
+    assert outer_covariant_multiplicity == 1
+
+    # The fixed-total polynomial identity transports to all six totals,
+    # because the right side is S6-symmetric.  Removing the constant
+    # coordinate gives the canonical outer-standard covariant identity.
+    return {
+        "natural_six_set_size": 6,
+        "synthematic_total_six_set_size": len(totals),
+        "ordinary_module": "augmentation of Q^{six natural labels}",
+        "outer_module": "augmentation of Q^{six synthematic totals}",
+        "degree": 6,
+        "outer_standard_multiplicity_in_Sym6": outer_covariant_multiplicity,
+        "centered_covariant_identity": "125*center(C_T^2)=4*center(sigma3(q_T))",
+        "coordinate_identity": (
+            "375*C_T^2-12*sigma3(q_T)="
+            "6000*p6-4350*p4*p2-2125*p3^2+705*p2^3"
+        ),
+        "proof_transport": (
+            "one fixed-total identity plus transitivity on six totals "
+            "and S6-symmetry of the correction"
+        ),
     }
 
 
@@ -803,6 +967,7 @@ def certificate() -> dict[str, object]:
         "three_paper_normalization_mod_11": three_paper_mod_11,
         "golden_gale_self_association": golden_gale_certificate(),
         "icosahedral_marking": icosahedral_marking_certificate(),
+        "outer_s6_sextic_covariant": outer_s6_covariant_certificate(),
     }
 
 

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from itertools import combinations, product
+from itertools import combinations, permutations, product
 from math import comb, factorial, prod
 
 
@@ -136,7 +136,13 @@ def replay_icosahedral_marking() -> None:
             [-1, 0, root], [root, -1, 0], [-root, -1, 0],
         ]
 
-    def supports_and_centers(root: int) -> dict[tuple[int, int, int], list[int]]:
+    def supports_and_centers(
+        root: int,
+        edge_inner_product: int | None = None,
+    ) -> dict[tuple[int, int, int], list[int]]:
+        edge_inner_product = (
+            root if edge_inner_product is None else edge_inner_product
+        )
         vertices = [
             (index, [(sign * entry) % modulus for entry in axis])
             for index, axis in enumerate(axes(root))
@@ -148,7 +154,7 @@ def replay_icosahedral_marking() -> None:
                 sum(
                     triple[left][1][coordinate] * triple[right][1][coordinate]
                     for coordinate in range(3)
-                ) % modulus == root
+                ) % modulus == edge_inner_product
                 for left, right in [(0, 1), (0, 2), (1, 2)]
             ):
                 continue
@@ -170,11 +176,13 @@ def replay_icosahedral_marking() -> None:
         (1, 2, 3), (1, 2, 4), (1, 3, 5), (2, 4, 5), (3, 4, 5),
     }
     assert set(centers) == face_chirality
-    assert set(supports_and_centers(conjugate_root)) == face_chirality
     complement_chirality = {
         tuple(index for index in range(6) if index not in support)
         for support in face_chirality
     }
+    assert set(
+        supports_and_centers(conjugate_root, -conjugate_root % modulus)
+    ) == complement_chirality
     signed_supports = {
         support: (1 if support in face_chirality else -1)
         for support in face_chirality | complement_chirality
@@ -310,6 +318,73 @@ def replay_icosahedral_marking() -> None:
         assert complement_sums[1] == tuple(-sign for sign in complement_sums[0])
 
 
+def replay_outer_s6_multiplicity() -> None:
+    vertices = tuple(range(6))
+    edges = tuple(combinations(vertices, 2))
+    matchings = tuple(
+        tuple(sorted(candidate))
+        for candidate in combinations(edges, 3)
+        if len({vertex for edge in candidate for vertex in edge}) == 6
+    )
+    totals = tuple(
+        tuple(sorted(candidate))
+        for candidate in combinations(matchings, 5)
+        if len({edge for matching in candidate for edge in matching}) == 15
+    )
+    assert len(matchings) == 15
+    assert len(totals) == 6
+
+    def act_total(
+        permutation: tuple[int, ...],
+        total: tuple[tuple[tuple[int, int], ...], ...],
+    ) -> tuple[tuple[tuple[int, int], ...], ...]:
+        return tuple(
+            sorted(
+                tuple(
+                    sorted(
+                        tuple(
+                            sorted((permutation[left], permutation[right]))
+                        )
+                        for left, right in matching
+                    )
+                )
+                for matching in total
+            )
+        )
+
+    def cycle_lengths(permutation: tuple[int, ...]) -> list[int]:
+        seen: set[int] = set()
+        output = []
+        for start in vertices:
+            if start in seen:
+                continue
+            current = start
+            length = 0
+            while current not in seen:
+                seen.add(current)
+                length += 1
+                current = permutation[current]
+            output.append(length)
+        return output
+
+    def trace_on_symmetric_sixth(permutation: tuple[int, ...]) -> int:
+        coefficients = [0] * 7
+        coefficients[0] = 1
+        for length in cycle_lengths(permutation):
+            for degree in range(length, 7):
+                coefficients[degree] += coefficients[degree - length]
+        return coefficients[6] - coefficients[5]
+
+    numerator = 0
+    for permutation in permutations(vertices):
+        outer_character = (
+            sum(act_total(permutation, total) == total for total in totals) - 1
+        )
+        numerator += trace_on_symmetric_sixth(permutation) * outer_character
+    assert numerator == 720
+    assert numerator // factorial(6) == 1
+
+
 def fifth(
     left: list[int],
     right: list[int],
@@ -441,11 +516,12 @@ def main() -> None:
     assert (4 * matching_cubic_scalar) ** 2 % 11 == orientation_cover_scalar
     replay_golden_gale_witness()
     replay_icosahedral_marking()
+    replay_outer_s6_multiplicity()
     print(
         "independent C682 replay: OK "
         "(boundary ranks 4, primitive mod-11 rank 4, "
         "c_match^2 = J0, golden Gale witness, marked face-support bridge, "
-        "corrected sextic identity)"
+        "corrected sextic identity, unique outer-S6 covariant)"
     )
 
 

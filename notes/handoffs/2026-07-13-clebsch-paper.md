@@ -484,10 +484,13 @@ complete: one Paper I support orbit is precisely the ten supports of
 icosahedron face pairs, the complementary orbit gives a second signed-sum
 decomposition of the same ten face axes, and
 \((T_0,\ldots,T_4)\mapsto(1,5,2,4,3)\) matches the displayed Paper III
-labels.  Support complementation and Galois/Gale exchange are provably
-different: the first swaps face and non-face support orbits, while the
-second preserves the face orbit.  They form a transverse commuting-square
-picture, not one \(C_2\).  The Paper I support sheets also have equal
+labels.  A literature-triggered correction fixes the conjugate edge
+branch: the conjugate icosahedron has edge inner product
+\(-\bar t=t-1\), so its face supports are the complementary Paper I
+orbit.  Support complementation, Gale association, and golden Galois
+exchange are therefore the same marked \(C_2\), as the classical
+opposite-icosahedron description predicts.  The Paper I support sheets
+also have equal
 moments through degree two and first differ cubically, exactly paralleling
 Paper II's recovery/orientation mechanism.  However, the obvious
 syntheme-quadratic followed by the Clebsch cubic is not the square of that
@@ -506,6 +509,28 @@ composition: the Paper I orientation square and the common Paper II/III
 Clebsch cubic agree after the syntheme quadratic map modulo universal
 symmetric information.  Paper II's outer sheet placement and an intrinsic
 interpretation of the four symmetric correction terms remain open.
+
+The focused literature audit removes the proposed Platinum crown.
+Howard--Millson--Snowden--Vakil's Joubert/Segre coordinates \(Z_T\) are
+the support cubics \(C_T\), and their classical Segre--Igusa dual
+coordinates are
+\[
+W_T=Z_T^2-\frac16\sum_U Z_U^2
+   =\operatorname{center}(C_T^2).
+\]
+Kraft likewise treats the lowest-degree outer-\(S_6\) Joubert covariant
+and its sextic Tschirnhaus application.  Hence uniqueness, outer
+covariance, and the generic resolvent application are preempted.  The
+surviving formula-level Gold candidate is the compact identity
+\[
+125W_T=4\,\operatorname{center}\bigl(\sigma_3(q_T)\bigr),
+\]
+which computes the classical dual coordinate from the five syntheme
+quadratics using one Clebsch cubic.  A bounded exact-phrase audit did not
+locate this presentation, but that is not an absence claim; compare it
+term-by-term with the classical explicit \(W_T\) formulas before
+promotion, and require a consequence beyond Segre--Igusa duality for any
+general-journal claim.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating

@@ -578,7 +578,7 @@
       "sigma3_of_syntheme_quadratic": 125
     },
     "field": "Q[t]/(t^2-t-1)",
-    "galois_conjugation_preserves_face_chirality_supports": true,
+    "galois_conjugation_swaps_chirality_supports": true,
     "naive_syntheme_quadratic_clebsch_square_identity": {
       "holds": false,
       "witness_ratios": [
@@ -1357,6 +1357,17 @@
       0
     ]
   ],
+  "outer_s6_sextic_covariant": {
+    "centered_covariant_identity": "125*center(C_T^2)=4*center(sigma3(q_T))",
+    "coordinate_identity": "375*C_T^2-12*sigma3(q_T)=6000*p6-4350*p4*p2-2125*p3^2+705*p2^3",
+    "degree": 6,
+    "natural_six_set_size": 6,
+    "ordinary_module": "augmentation of Q^{six natural labels}",
+    "outer_module": "augmentation of Q^{six synthematic totals}",
+    "outer_standard_multiplicity_in_Sym6": 1,
+    "proof_transport": "one fixed-total identity plus transitivity on six totals and S6-symmetry of the correction",
+    "synthematic_total_six_set_size": 6
+  },
   "pivot_columns_zero_based": [
     0,
     1,

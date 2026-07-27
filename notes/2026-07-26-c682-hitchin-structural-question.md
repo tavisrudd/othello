@@ -690,14 +690,14 @@ same \(v(S)\).  Hence Paper I's
 \]
 is exactly a two-decomposition cover of Paper III's ten face axes.
 
-The involution comparison has a decisive negative answer.  Golden
-conjugation \(t\mapsto1-t\), equivalently the marked Gale transform,
-preserves \(\mathcal F\), whereas support complementation exchanges
-\(\mathcal F\) and \(\mathcal F^c\).  These two \(C_2\)-operations are not
-the same.  They are transverse commuting operations: complementation
-switches the two decompositions over a fixed face-axis label, while Galois
-conjugation changes the golden realization and preserves the
-decomposition side.
+The corrected involution comparison is positive.  Golden conjugation
+\(t\mapsto1-t\), equivalently the marked Gale transform, changes the
+edge inner product from \(t\) to \(-\bar t=t-1\).  Its convex face-support
+class is therefore \(\mathcal F^c\), not \(\mathcal F\).  Thus conjugation
+sends the labeled icosahedron to its opposite and exchanges the two Paper
+I support sheets under their established complement pairing.  Support
+complementation, six-point Gale association, and golden Galois exchange
+are the same \(C_2\)-operation on this marked support cover.
 
 ### 9. The outer-\(S_6\) \(6\to5\to10\to15\) skeleton can close the marking gap
 
@@ -828,20 +828,119 @@ It does not identify the Paper II and Paper III covers, remove C651's
 selected-coordinate normalization, or make the symmetric correction
 vanish.  No novelty claim is made.
 
+### 12. Outer-\(S_6\) upgrade: the unique sextic covariant
+
+The fixed-total formula globalizes.  Let \(X\) be the natural six-set and
+let \(\mathcal T\) be the six-set of synthematic totals.  The \(S_6\)
+action on \(\mathcal T\) is the exceptional outer action.  Put
+\[
+ V=\mathbf Q^X/\mathbf Q\mathbf1,\qquad
+ V^{\rm out}=\mathbf Q^{\mathcal T}/\mathbf Q\mathbf1.
+\]
+For each total \(T\), its stabilizer \(S_5\) has an alternating subgroup
+\(A_5\), whose two orbits on three-subsets define a cubic \(C_T\) up to
+sign; \(C_T^2\) is canonical.  The five synthemes in \(T\) also define
+the quadratic coordinates \(q_T\) and hence the sextic
+\(\Sigma_T=\sigma_3(q_T)\).
+
+Centering the six values over \(\mathcal T\) gives two homogeneous
+\(S_6\)-equivariant degree-six maps \(V\to V^{\rm out}\).  The corrected
+identity is precisely
+\[
+\boxed{
+125\,\operatorname{center}_{T\in\mathcal T}(C_T^2)
+=4\,\operatorname{center}_{T\in\mathcal T}(\Sigma_T).
+}
+\]
+Moreover, an exact character calculation gives
+\[
+\dim\operatorname{Hom}_{S_6}
+\bigl(V^{\rm out},\operatorname{Sym}^6(V)^*\bigr)=1.
+\]
+Thus both constructions realize the unique outer-twisted sextic
+covariant, up to scalar.  The proof averages the symmetric-sixth trace
+against the outer-standard character over all \(720\) elements; the
+inner product is one.  This removes the chosen \(A_5\) parent from the
+statement and explains the identity representation-theoretically.
+
+There is also an arithmetic resolvent corollary.  For six roots
+\(x_0,\ldots,x_5\), the six values \(C_T(x)^2\), or equivalently the six
+affinely related values \(\Sigma_T(x)\), define a degree-six resolvent
+whose Galois action is the outer action on synthematic totals.  The two
+apparently different constructions therefore give the same centered
+outer resolvent.  Potential uses include:
+
+- computing the outer twist of a sextic Galois action;
+- testing subgroup containment through the factorization of the outer
+  resolvent;
+- replacing a sum over twenty oriented triples by five matching
+  quadratics and one Clebsch cubic; and
+- transporting arithmetic information between a sextic and its
+  outer-associated resolvent.
+
+Before literature audit this had a plausible strict Platinum shape: it is
+an intrinsic \(S_6\) theorem, not a frozen icosahedral identity, and it has
+an arithmetic application surface.  The audit changes that verdict
+decisively.  Howard--Millson--Snowden--Vakil's six coordinates \(Z_T\)
+are precisely the signed support cubics \(C_T\): they are the classical
+Joubert/Segre coordinates.  Their dual coordinates are
+\[
+ W_T=Z_T^2-\frac16\sum_U Z_U^2,
+\]
+which is exactly \(\operatorname{center}(C_T^2)\), the classical
+Segre-cubic--Igusa-quartic dual map.  Kraft also explains that the
+outer-\(S_6\) degree-three Joubert covariant is of the lowest possible
+degree and uses it for the classical sextic Tschirnhaus transformation.
+Thus the unique-covariant crown and its generic resolvent interpretation
+are preempted, not Platinum discoveries.
+
+What survives is narrower but exact:
+\[
+125W_T=4\,\operatorname{center}_{T\in\mathcal T}
+ \bigl(\sigma_3(q_T)\bigr).
+\]
+This expresses the classical Segre--Igusa dual coordinate by five
+syntheme quadratics followed by the Clebsch cubic.  The bounded searches
+below did not locate this compact formula verbatim.  That is not an
+absence claim: Howard--Millson--Snowden--Vakil already give other explicit
+syntheme formulas for the same \(W_T\), so conceptual novelty is limited
+even if this presentation is new.
+
+Under the user's rubric the current literature-adjusted assessment is:
+
+- **not Platinum:** the outer-\(S_6\), Joubert-resolvent, and
+  Segre--Igusa theorem is classical;
+- **Gold candidate:** the compact five-syntheme/Clebsch formula, if a
+  deeper formula-level audit confirms it is unpublished and if it yields
+  a useful consequence; and
+- **Silver-to-Gold as a bridge:** the exact identification of the three
+  paper coordinate systems and the corrected marked \(C_2\).
+
+The present identity cannot carry a strong general-journal paper by
+itself.  Platinum now requires a theorem not implied by the classical
+Segre--Igusa package: for example a genuinely new arithmetic algorithm
+with a proved complexity or robustness advantage, a new moduli
+consequence, or a nontrivial generalization beyond six points.
+
 ### Highest-EV cross-paper actions
 
-1. Recast the boxed identity as an intrinsic quotient theorem and test
-   whether the four symmetric correction terms have a direct code,
-   discriminant, or moment interpretation.
-2. Contract the C651 tensor through the primitive mod-\(11\) transvectant
+1. Compare the expanded five-syntheme/Clebsch formula term-by-term with
+   the explicit \(W_T\) formulas in Howard--Millson--Snowden--Vakil,
+   Joubert, and Coble; this is now a formula-priority audit, not a search
+   for the outer covariant itself.
+2. Seek one consequence of the compact formula that is not already a
+   reformulation of Segre--Igusa duality or Joubert's resolvent.
+3. Test whether the symmetric correction is a named discriminant,
+   code-moment, or six-point moduli invariant.
+4. Contract the C651 tensor through the primitive mod-\(11\) transvectant
    and determine its scalar on \(V_4\).
-3. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
+5. Prove the pointed-port-to-unordered-Petersen-cubic corollary with exact
    equivalence conventions.
-4. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
+6. Derive a Kneser negative-eigenspace lower bound for prescribed-hole
    defect.
-5. Test the two \(q=11\) PRS exceptional nets against the transvectant
+7. Test the two \(q=11\) PRS exceptional nets against the transvectant
    kernel orbit.
-6. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
+8. Build the \(A_5\)-quotient of the \(4180\) Clebsch pair-extension set
    before touching the full replacement graph.
 
 ## Source-depth boundary
@@ -863,6 +962,36 @@ These sources justify the Grassmannian model and the parent-plane
 interpretation.  A manuscript-promotion audit must still locate the
 standard Klein-dodecic orbit model and search specifically for the
 third-transvectant kernel map.
+
+The degree-six priority audit additionally used:
+
+- Benjamin Howard, John Millson, Andrew Snowden, and Ravi Vakil,
+  *A description of the outer automorphism of \(S_6\), and the invariants
+  of six points in projective space*, arXiv:0710.5916, all eight pages
+  read from the cached primary PDF, especially Sections 1.2--1.5 and
+  2.1--2.3; cached SHA-256
+  `d2da0953c0b08206613719bca4f45a90aeb52c474339f18ac51f04408ae9387b`.
+  This source identifies the six colorings/pentads, opposite
+  icosahedra, the Joubert/Segre coordinates \(Z_T\), their cubic
+  relation, and the centered-square dual coordinates \(W_T\).
+- Hanspeter Kraft, *A Result of Hermite and Equations of Degree 5 and
+  6*, arXiv:math/0403323, abstract, Sections 1--3, and all of Section 5
+  read in the primary arXiv HTML rendering.  Theorem B, Remark 3, and
+  the two proofs in Section 5 establish the classical outer-\(S_6\)
+  covariant and its minimal degree.
+- Howard--Millson--Snowden--Vakil, *The relations among invariants of
+  points on the projective line*, primary author-hosted PDF, introduction
+  and the Segre/Igusa/Gale discussion at partial full-text depth.  It
+  records the Joubert--Coble provenance of the coordinates and the
+  classical outer action.
+
+The bounded formula search used the queries `"sigma_3" synthemes Igusa
+quartic`, `"Clebsch cubic" "Igusa quartic"`, `"five synthemes" quadratic
+map`, `"synthematic total" "Igusa quartic" covariant`, and
+`"Z_T^2" "Igusa" syntheme`, stopping after the primary sources above and
+the first result page for each exact query produced no direct occurrence
+of the compact identity.  This supports only “not located in this
+bounded audit,” not novelty or absence.
 
 ## Cheap structural corollary: the descended chart is a Ferrand pinch
 
@@ -932,18 +1061,20 @@ not collect more generic examples.  On the algorithmic side, exact rank
 and isotropy are certificates; singular-value heuristics under noise are
 only proposed experiments until a perturbation theorem supplies a gap.
 
-The latest `ej` pass closes the degree-six mystery rather than merely
-cataloguing two invariants.  Character theory gives dimensions
+The latest `ej` pass closes the algebraic degree-six mystery rather than
+merely cataloguing two invariants.  Character theory gives dimensions
 \(7\supset5\supset4\) for \(A_5\)-invariants, outer-\(S_5\)-even
 invariants, and ordinary \(S_6\)-symmetric invariants.  The one-dimensional
 outer-even/symmetric quotient forces the corrected relation in
 Section 11 once the exact projective ratio \(4:125\) is known.
 
-The Tao-style caution is equally sharp: equality in a one-dimensional
-quotient is the intrinsic result.  It does not make the four symmetric
-correction terms disappear, identify the arithmetic covers, or remove the
-chosen synthematic total.  The next conceptual gain would be to interpret
-that symmetric correction, not to rescale it away.
+The literature audit supplies the missing interpretation: centering is
+the passage from affine squared Joubert coordinates to the outer
+augmentation representation, and the resulting coordinate is the
+classical Segre--Igusa dual coordinate \(W_T\).  Thus the four symmetric
+correction terms are the ordinary-coordinate expression of a universal
+translation term, not evidence for a new cover.  The genuinely
+paper-specific content is the alternate five-syntheme/Clebsch formula.
 
 ## Mystery ledger
 
@@ -973,9 +1104,10 @@ that symmetric correction, not to rescale it away.
   complementary support pairs are the two signed-sum decompositions of
   the corresponding Paper III face axes.  The relabeling of synthemes is
   \((T_0,\ldots,T_4)\mapsto(1,5,2,4,3)\).
-- **Settled negatively:** support complementation swaps face and non-face
-  support orbits, while Galois/Gale conjugation preserves the face orbit.
-  They are transverse commuting \(C_2\)-operations, not one involution.
+- **Settled exactly, after correcting the edge branch:** support
+  complementation, six-point Gale association, and golden Galois
+  conjugation all exchange the face and opposite-face support orbits.
+  The common \(C_2\) survives the marked test.
 - **Settled:** the Paper I support sheets have equal signed moments through
   degree two and first differ cubically, giving the same
   quadratic-recovery/cubic-orientation pattern as Paper II.
@@ -990,6 +1122,12 @@ that symmetric correction, not to rescale it away.
   \]
   on \(p_1=0\).  This is the corrected \(2\)-\(3\)-\(6\) theorem modulo
   universal symmetric information.
+- **Settled by literature audit:** \(C_T\) is the classical
+  Joubert/Segre coordinate and \(\operatorname{center}(C_T^2)=W_T\) is
+  the classical Segre--Igusa dual map.  The outer-covariant and resolvent
+  crown is therefore preempted; only the compact
+  five-syntheme/Clebsch expression for \(W_T\) remains a formula-level
+  Gold candidate.
 - **Settled as a coordinate identity, not intrinsically:** with C651's
   selected intertwiner,
   \(c_{\mathrm{match}}^2=J_0|_V\) and
@@ -1013,13 +1151,14 @@ that symmetric correction, not to rescale it away.
 - **Open:** identify the relevant Paper II orientation cover over the now
   fixed ten-point carrier; C651 fixes the \(A_5\)-module but not an outer
   sheet action or its normalization.
-- **Open:** find an intrinsic code, discriminant, or moment interpretation
-  of the four-term symmetric correction in the corrected sextic identity.
+- **Open:** compare the compact five-syntheme/Clebsch expression directly
+  with the classical explicit \(W_T\) formulas and find a consequence not
+  already contained in Segre--Igusa duality.
 - **Open:** formalize the exact pointed-port-to-unordered-Petersen-cubic
   reconstruction corollary.
 - **Open:** turn the shared \(KG(k,2)\) negative eigenspace into a numerical
   lower bound for prescribed-hole defect.
-- **Open:** audit classical and modern literature before any novelty or
-  manuscript-disposition claim.
+- **Open:** audit the compact formula at term level before any novelty
+  claim; the broad outer-\(S_6\) construction is already classical.
 
 C682 remains open.  The user retains stopping authority.
