@@ -462,6 +462,28 @@ extension-field-wide claim.  The checker and certificate have respectively
 11,496 and 2,398 bytes; their SHA-256 values are pinned in
 `2026-07-26-c665-q49-affine-socle.sha256`.
 
+The strengthened characteristic-three falsification gate is replayed by
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q27-torus-test.sage --check
+sha256sum -c notes/2026-07-26-c665-q27-torus-test.sha256
+```
+
+It uses Sage's canonical \(\mathbb F_{27}\), independently generated
+projective generators, all thirteen split-torus-invariant matchings, and
+exact conic-quotient arithmetic.  It partitions them into all seven
+full-projective orbits, recomputes the affine and full quadratic ranks, and
+then computes the two one-sheet and joint Sylow-translation norm ranks.
+It also checks the fixed-correction identity for all thirteen parameters
+and tests two explicit substitute coefficient families.  The human
+torus-torsor classification and Dickson-resultant derivation are independent
+of this enumeration; there is no second implementation of the full
+756-column quadratic rank.  The certificate covers exactly q=27 and does
+not extrapolate \(N_5\) to another field.  The checker and certificate have
+respectively 14,894 and 7,460 bytes; their SHA-256 values are pinned in
+`2026-07-26-c665-q27-torus-test.sha256`.
+
 The sheet permutation character is
 \[
 P(\mathbf1)+P(S_{13}),
@@ -548,30 +570,7 @@ The sharper route is the Sylow-translation norm on the *actual orbit
 evaluation*.  Let \(U\) be the translation subgroup and let a sheet contain
 \(\lambda\) regular \(U\)-orbits.  Pair the two sheets by a nonsquare
 dilation \(d\), and write \(N_i\) for the quadratic moment sum over the
-\(i\)-th \(U\)-orbit in one sheet.  The tested ranks point to the exact
-statement
-\[
- \dim\bigl(\langle N_1,\ldots,N_\lambda\rangle+
- d\langle N_1,\ldots,N_\lambda\rangle\bigr)\leq\lambda+1.   \tag{*}
-\]
-Equivalently, the nonsquare dilation adds at most one direction to the norm
-image of one sheet.  If \((*)\) holds, the \(2\lambda\)-dimensional
-translation-fixed subspace of the two sheet permutation modules contains at
-least \(\lambda-1\) independent trades.  Thus a unique trade forces
-\(\lambda\leq2\); Dickson's \(p'\)-subgroup list and the small matching
-realizations can then dispose of the residual \(\lambda=2\) cases.
-
-This is more precise than either earlier projective-capacity target.  The
-universal conic module does not satisfy the corresponding rank-one outer
-difference: at \(q=19\) that difference has rank \(39\).  Hence the proof of
-\((*)\), if true, must use the matching-product cocycle, namely that every
-secant product has the same restriction to the conic.  The next acceptance
-test is to compute the one-sheet norm ranks and the rank of the dilation
-difference on their images in the certified \(q=13,17,19\) cases.  Only if
-those ranks support \((*)\) should the cocycle coefficient identity be
-developed.
-
-That acceptance test is positive:
+\(i\)-th \(U\)-orbit in one sheet.  The pre-characteristic-three tests were:
 
 | \(q\) | \(\lambda\) | one-sheet norm ranks | joint norm rank |
 |---:|---:|---:|---:|
@@ -579,11 +578,16 @@ That acceptance test is positive:
 | \(17\) | \(6,12,18\) | \(6,11,17\) on both sheets | \(7,12,18\) |
 | \(19\) | \(3\) | \(3\) on both sheets | \(4\) |
 
-Thus every certified joint rank is at most \(\lambda+1\).  In the cases
-where a sheet norm map is injective, the nonsquare sheet adds exactly one
-direction; otherwise one sheet already has a translation-invariant kernel.
-The remaining proof obligation is the uniform rank bound \((*)\), not a
-further finite test.
+These rows motivated the provisional bound \(\lambda+1\), but q=27
+falsifies it: both sheet ranks are fourteen and the joint rank is nineteen.
+The exact acceptance condition was always only joint rank at most
+\(2\lambda-2\).  In the characteristic-three torus family the replacement
+target is the sharp observed bound \(\lambda+5\), whose five-dimensional
+defect has the torus-weight fingerprint of a twisted \(\Delta(4)\).  The
+universal conic module still does not supply this bound formally: at q=19
+its unrestricted outer norm difference has rank \(39\).  Any proof must use
+the matching-product cocycle and the fixed correction
+\(Y(X^n-Z^n)\).
 
 A second falsification pass targets the first large regular exceptional
 action.  Over \(\mathbb F_{59}\), an \(A_5\) acts regularly on the sixty
@@ -730,7 +734,7 @@ completeness.
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
 | Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback, and the complete matching census closes the isolated \(q=5\) dihedral endpoint.  Uniform extension-field C1 and characteristic-three tori remain. |
-| Which degrees of freedom remain in characteristic-three torus cases? | settled as a parameter reduction; T3 remains open | After fixing split versus nonsplit type, a torus-invariant matching is an equivariant cross-orbit bijection parametrized by one element of the cyclic torus, plus one antipodal type when the torus order is even.  Normalizer and outer actions give only affine-inversion identifications.  For a full normalizer stabilizer, \(\lambda=(q+1)/2\) or \((q-1)/2\).  In the residual split family, \(P_c+P_{c^{-1}}=Y(X^n-Z^n)\), so the only uncontrolled datum is whether the fixed correction's translation norms add at most one direction modulo the first-sheet image; quadratic descent of the nonsplit analogue is also open. |
+| Which degrees of freedom remain in characteristic-three torus cases? | settled as a parameter reduction; T3 remains open | After fixing split versus nonsplit type, a torus-invariant matching is an equivariant cross-orbit bijection parametrized by one element of the cyclic torus, plus one antipodal type when the torus order is even.  Normalizer and outer actions give only affine-inversion identifications.  For a full normalizer stabilizer, \(\lambda=(q+1)/2\) or \((q-1)/2\).  In the residual split family, \(P_c+P_{c^{-1}}=Y(X^n-Z^n)\).  The rank-one consequence is false: q=27 has defect increment five.  The open gate is to factor that defect through \(\Delta(4)\), proving \(\dim(V+dV)\le\lambda+5\), and then descend the nonsplit analogue. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -1278,7 +1282,18 @@ orbits of size \(756\), with sheets
   378=27\cdot14,
 \]
 affine rank \(80\), quadratic rank \(609\), and therefore trade dimension
-\(756-609=147\).  The seventh orbit has size \(378\), is already one
+\(756-609=147\).  On every one of these six orbits, each sheet's fourteen
+translation norms are independent, their joint rank is nineteen, and the
+translation-invariant trade dimension is therefore
+\(28-19=9\).  The five-dimensional defect quotient has the same square-torus
+eigenvalue exponents
+\[
+6,10,14,18,22
+\]
+in all six cases.  After subtracting the common exponent fourteen, these
+are \(-8,-4,0,4,8\), the square-torus weight pattern of a twisted
+\(\Delta(4)\).  This is a torus fingerprint, not yet an \(H\)-module
+factorization.  The seventh orbit has size \(378\), is already one
 \(H\)-orbit, and hence cannot support the required sheet sign; its
 quadratic trade dimension is \(27\).  The replay is
 `2026-07-26-c665-q27-torus-test.sage`.  This exhausts the torus-invariant
@@ -1326,14 +1341,14 @@ This locks the degrees of freedom before T3.  After choosing torus type and
 the one matching parameter, the sheet permutation module and \(\lambda\)
 are fixed.  The only unexplained quantity is how that explicit
 matching-product vector sits in the affine Fischer filtration, equivalently
-the rank of the joint translation-norm image of its two outer sheets.  A
-proof of
+the rank of the joint translation-norm image of its two outer sheets.  The
+exact necessary bound for two invariant trades is only
 \[
-\dim(V+dV)\le\lambda+1
+\dim(V+dV)\le2\lambda-2. \tag{N\(_{\min}\)}
 \]
-would give at least \(\lambda-1\) invariant trades and close every genuine
-characteristic-three normalizer case at once.  No field census can remove
-this last functional degree of freedom.
+The earlier target \(\dim(V+dV)\le\lambda+1\) was much stronger than needed
+and is false in the first characteristic-three field.  No field census can
+remove the remaining functional degree of freedom.
 
 For the split cross-orbit type, that functional datum has a closed
 one-parameter formula.  Put \(n=(q-1)/2\), let \(Q\) be the subgroup of
@@ -1376,12 +1391,53 @@ Consequently the two outer parameters obey the parameter-free identity
 \]
 Thus the second sheet is not an independent affine vector family: it is
 the negative of the first sheet plus the \(H\)-orbit of one fixed Frobenius
-binomial \(R=Y(X^n-Z^n)\).  The remaining split-T3 statement is now exactly
-that the translation norms contributed by this fixed correction add at
-most one direction modulo the first-sheet norm image.  This is sharper than
-the original rank bound and explains why the observed joint rank exceeds a
-one-sheet rank by at most one.  Proving that last quotient-rank-one claim,
-and deriving the descended nonsplit counterpart, remain open.
+binomial \(R=Y(X^n-Z^n)\).  This identity does not linearize quadratic
+norms: polarization contributes both the norm of \(R\) and its cross term
+with the first sheet.  At \(q=27\) those terms add exactly five directions,
+not one.  The correct split-T3 target is therefore to control this
+fixed-correction defect by five dimensions.  The observed sharp bound
+\[
+\dim(V+dV)\le\lambda+5 \tag{N\(_5\)}
+\]
+would leave at least \(\lambda-5\) invariant trades.  Since the first
+genuine split case has \(\lambda=14\), and the first uncatalogued nonsplit
+case has still larger \(\lambda\), \(N_5\) is already more than sufficient.
+Its five-dimensional shape points to the characteristic-three Weyl layer
+\(\Delta(4)\); at q=27 its square-torus weights are exactly a common twist
+of the five \(\Delta(4)\) weights.  Proving that this fingerprint comes from
+a uniform defect factorization, and deriving the descended nonsplit
+counterpart, remain open.
+
+### Substitute proof obligations
+
+The q=27 gate shows that the earlier route was overly constrained.  The
+following implications are now separated:
+
+1. T3 needs only \(N_{\min}\), or any explicit second trade.
+2. Under a hypothetical unique trade, both one-sheet norm maps are
+   injective and the two norm images meet only in the total sheet moment.
+   Thus it suffices instead to prove either a one-sheet rank defect or a
+   two-dimensional intersection.
+3. The fixed-correction route need only prove \(N_5\), not a rank-one
+   quotient.  At q=27 this is sharp: the sheet ranks are \(14,14\), the
+   joint rank is \(19\), and the intersection has dimension nine.
+4. A representation-theoretic substitute is to show that any nontrivial
+   simple head of the torus sheet module survives in the common quotient.
+   This avoids categorical trace entirely; divisibility of the head
+   dimension by three is then harmless.
+5. A geometric substitute is to construct one additional coefficient
+   family directly.  The two first guesses fail cleanly at q=27: endpoint
+   incidence yields only the known sign trade, while the naive
+   nine-dimensional \(L(2)\otimes L(2)^{(1)}\) axis-coordinate difference
+   yields no trade.  Any successful covariant must include a nontrivial
+   Hecke/intertwiner between the sheet copies rather than identify their
+   axis coordinates termwise.
+
+The highest-EV obligation is \(N_5\): promote the exact five-weight torus
+fingerprint to a uniform factorization of the fixed-correction polarization
+through a twisted \(\Delta(4)\) quotient.  If that factorization fails, the
+exact fallback is the weaker intersection-two statement, not the abandoned
+\(N_1\) bound.
 
 Accordingly the proposed proof of L2 now has two uniform inputs and one
 isolated endpoint:
@@ -1408,24 +1464,12 @@ quadratic trade space has dimension at least two.
 No extension-field-wide proof of C1-extension, H1-torus, or T3 is claimed
 here.
 
-There is a second route if L2 fails:
-
-**N1. Translation-norm bound.**  For one sheet's \(U\)-orbit quadratic
-moments \(V\) and a nonsquare dilation \(d\),
-\[
-  \dim(V+dV)\le\lambda+1.
-\]
-Then the translation-fixed trade space has dimension at least
-\(\lambda-1\), so uniqueness gives \(\lambda\le2\).
-
-**N2. Residual subgroup realization.**  Dickson's list and the matching
-normalizers exclude the residual \(\lambda=2\) actions, leaving precisely
-the \(q=7,S_4\) and \(q=11,A_5\) principal-projective sheets at
-\(\lambda=1\).
-
-N1 passes every certified \(q=13,17,19\) test.  It is not yet proved and
-does not follow from the universal conic module, whose outer norm
-difference is large.
+The former \(N_1\) bound \(\dim(V+dV)\le\lambda+1\) passes the certified
+\(q=13,17,19\) tests but fails uniformly as a proposed obligation:
+at q=27 the joint rank is nineteen while \(\lambda+1=15\).  It is retired,
+not weakened by an unstated exception.  The replacement \(N_5\) is sharp in
+all six q=27 split torus orbits and is sufficient for T3 throughout the
+remaining characteristic-three normalizer range.
 
 ### Platinum-continuation `ej` + `tt` closeout
 
@@ -1472,9 +1516,11 @@ For characteristic-three tori it reduces every invariant matching to one
 cyclic parameter, modulo affine inversion, plus a possible antipodal type;
 the sheet module and \(\lambda\) are then forced.  The `tt` coefficient pass
 then removes even that parameter from the outer-sheet defect:
-\(P_c+P_{c^{-1}}=Y(X^n-Z^n)\).  The highest-EV continuation is to prove
-that this fixed correction adds at most one translation-norm direction and
-to descend its nonsplit analogue.
+\(P_c+P_{c^{-1}}=Y(X^n-Z^n)\).  The q=27 falsification pass then rejects
+both the old \(\lambda+1\) bound and the rank-one defect inference while
+leaving nine invariant trades in every split orbit.  The `ej` replacement
+is the sharp five-dimensional defect: factor the fixed-correction
+polarization through \(\Delta(4)\), then descend its nonsplit analogue.
 What remains genuinely unexplained on C1 is whether affine-socle absence
 persists uniformly or a later extension field contains the first embedded
 nonretract.
@@ -1489,6 +1535,9 @@ nonretract.
   do not determine how many full projective covers or which outer parities
   occur.
 - The \(q=59\) quadratic samples do not determine the full square rank.
+- The fixed outer identity does not imply a rank-one norm defect; q=27 has
+  defect increment five.  Nor may the former \(\lambda+1\) norm bound be
+  used in characteristic three.
 - The exceptional-head theorem comes from the uniform binary-polyhedral
   character average; the finite decomposition-matrix table is a
   cross-check, not a census of subgroup realizations over all fields.

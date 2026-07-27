@@ -343,7 +343,11 @@ nine invariant trades.  Endpoint incidence yields only the sign trade, and
 the naive \(L(2)\otimes L(2)^{(1)}\) axis difference yields none.  The
 active split gate is the sharp replacement
 \(\dim(V+dV)\le\lambda+5\), plausibly by factoring the fixed-correction
-polarization through the five-dimensional Weyl layer \(\Delta(4)\).
+polarization through the five-dimensional Weyl layer \(\Delta(4)\).  In
+all six q=27 split orbits, the defect quotient has square-torus eigenvalue
+exponents \(6,10,14,18,22\); after removing the common exponent fourteen,
+this is exactly the \(-8,-4,0,4,8\) weight pattern of a twisted
+\(\Delta(4)\).  This fingerprint is not yet a uniform \(H\)-factorization.
 The exact fallback is merely a second common norm direction.  The nonsplit
 analogue still needs careful quadratic descent.
 

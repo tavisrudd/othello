@@ -1,0 +1,280 @@
+{
+  "field_modulus": "x^3 + 2*x + 1",
+  "fixed_correction_identity": {
+    "correction": "Y*(X^13-Z^13)",
+    "parameters_checked": 13,
+    "passed": true
+  },
+  "q": 27,
+  "records": [
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 1,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 2,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 3,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 4,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 5,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 80,
+      "axis_incidence_difference": {
+        "coefficient_family_rank": 28,
+        "trade_family_rank": 1,
+        "trade_parameter_dimension": 1
+      },
+      "axis_l2_tensor_frobenius_difference": {
+        "coefficient_family_rank": 9,
+        "moment_rank": 9,
+        "trade_family_rank": 0,
+        "trade_parameter_dimension": 0
+      },
+      "defect_quotient": {
+        "dimension": 5,
+        "square_torus_charpoly": "x^5 + (a + 2)*x^4 + 2*a^2*x^3 + (2*a + 1)*x^2 + (a^2 + a + 1)*x + 2*a^2 + a + 2",
+        "square_torus_eigenvalue_exponents": [
+          6,
+          10,
+          14,
+          18,
+          22
+        ]
+      },
+      "g_orbit_size": 756,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 9,
+      "joint_norm_rank": 19,
+      "lambda": 14,
+      "norm_rank_increment": 5,
+      "orbit_number": 6,
+      "sheet_norm_ranks": [
+        14,
+        14
+      ],
+      "split": true,
+      "square_rank": 609,
+      "square_rows": 3240,
+      "trade_dimension": 147,
+      "translation_orbit_count": 28
+    },
+    {
+      "affine_rank": 26,
+      "axis_incidence_difference": null,
+      "axis_l2_tensor_frobenius_difference": null,
+      "defect_quotient": null,
+      "g_orbit_size": 378,
+      "h_orbit_size": 378,
+      "invariant_trade_dimension": 1,
+      "joint_norm_rank": 13,
+      "lambda": null,
+      "norm_rank_increment": null,
+      "orbit_number": 7,
+      "sheet_norm_ranks": null,
+      "split": false,
+      "square_rank": 351,
+      "square_rows": 351,
+      "trade_dimension": 27,
+      "translation_orbit_count": 14
+    }
+  ],
+  "replacement_gate": "the former lambda+1 and rank-one defect bounds fail; all split orbits have defect increment 5 and nine translation-invariant trades",
+  "schema": 1,
+  "torus_g_orbit_count": 7,
+  "torus_matching_count": 13
+}
