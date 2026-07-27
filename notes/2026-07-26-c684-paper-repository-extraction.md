@@ -278,9 +278,21 @@ Then:
 
 - C684 allocated and pegged to `build-sys`.
 - The repository boundary and validation contract are frozen in this report.
-- Next implementation step: add the machine-readable mapping and a read-only exporter `plan`
-  command with registry-agreement, destination-collision, tracked-file, symlink, and internal-link
-  inventory.
+- `papers/repositories.toml` now maps all thirteen registered manuscript rows into eleven physical
+  repository boundaries. The two dual-main roots remain intact, arcs is marked gated, and the
+  integrated Clebsch paper is marked archive.
+- `papers/scripts/export-paper-repos.py plan` reads the registry, mapping, and manuscript blobs from
+  one immutable Git commit. It validates IDs, roots, main sources, destination identities, and
+  symlink dispositions without reading live manuscript bytes or writing destinations.
+- The first plan at source commit `c12727722a325f6d8a93b0bb5b17001b63da229f` found exactly seven
+  explicitly excluded external symlinks: two in continuation and five in dihedral. It found no
+  undeclared symlink.
+- The same plan reported sixteen monorepo-coupled text-reference hits: AME--LU 1, arcs 4,
+  continuation 2, dihedral 4, and equivariant robust completion 5. These are inventory findings,
+  not silently rewritten content.
+- Next implementation step: add hermetic/adversarial fixtures for mapping collisions, registry
+  drift, unsafe paths, symlink escape/staleness, dirty-worktree independence, and deterministic
+  output; then add a read-only `audit` command that turns unresolved reference findings into scoped
+  failures.
 - No destination repository or GitHub remote has been created.
 - Arcs/Q16 readiness gates only Phase D, not Phases A–C.
-
