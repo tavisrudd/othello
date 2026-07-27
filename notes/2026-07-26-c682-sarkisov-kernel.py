@@ -283,6 +283,44 @@ def transform_binary_form(
     return result
 
 
+def transform_polynomial_form(
+    form: list[Polynomial],
+    matrix: tuple[Polynomial, Polynomial, Polynomial, Polynomial],
+) -> list[Polynomial]:
+    """Substitute in a binary form whose coefficients are polynomials."""
+    result = [{} for _ in form]
+    for index, coefficient in enumerate(form):
+        if not coefficient:
+            continue
+        basis = [0] * len(form)
+        basis[index] = 1
+        transformed = transform_binary_form(basis, matrix)
+        result = [
+            add(entry, multiply(coefficient, transformed_entry))
+            for entry, transformed_entry in zip(result, transformed)
+        ]
+    return result
+
+
+def divide_exact(value: Polynomial, divisor: int) -> Polynomial:
+    assert divisor
+    assert all(coefficient % divisor == 0 for coefficient in value.values())
+    return {
+        exponent: coefficient // divisor
+        for exponent, coefficient in value.items()
+    }
+
+
+def in_pointed_base_ideal(exponent: Exponent) -> bool:
+    """Membership in (u^2, u*v, v^5) inside Z[u,v]."""
+    u_degree, v_degree = exponent
+    return (
+        u_degree >= 2
+        or (u_degree >= 1 and v_degree >= 1)
+        or v_degree >= 5
+    )
+
+
 def main() -> None:
     zero: Polynomial = {}
 
@@ -478,6 +516,108 @@ def main() -> None:
         {},
     ]
 
+    # Resolve the graph on the transverse surface at the open Borel orbit
+    # of L_x.  Apply x -> x+v*y to the transverse family above.  After
+    # division by the common scalar -239500800, the seven coordinates are
+    # the following exact polynomials in Z[u,v].
+    u_two = variable(0, 2)
+    v_two = variable(1, 2)
+    one_two = {(0, 0): 1}
+    transverse_two = [{} for _ in range(13)]
+    transverse_two[1] = one_two
+    transverse_two[6] = scale(11, u_two)
+    transverse_two[11] = scale(-1, power(u_two, 2, 2))
+    transformed_two = transform_polynomial_form(
+        transverse_two,
+        (one_two, v_two, {}, one_two),
+    )
+    image_two = transvectant(
+        transformed_two,
+        [one_two] + [{} for _ in range(6)],
+        6,
+    )
+    image_two[0] = add(
+        image_two[0], scale(-5_702_400, u_two)
+    )
+    normalized_two = [
+        divide_exact(entry, -239_500_800) for entry in image_two
+    ]
+    expected_two = [
+        {(0, 5): -1},
+        {(0, 6): -7, (1, 1): -1},
+        {(0, 7): -20, (1, 2): -10},
+        {(0, 8): -30, (1, 3): -40},
+        {(0, 9): -25, (1, 4): -75},
+        {(0, 10): -11, (1, 5): -66, (2, 0): 1},
+        {(0, 11): -2, (1, 6): -22, (2, 1): 2},
+    ]
+    assert normalized_two == expected_two
+    assert all(
+        in_pointed_base_ideal(exponent)
+        for entry in normalized_two
+        for exponent in entry
+    )
+
+    # Conversely the first, second, and sixth coordinates recover the
+    # monomial generators:
+    #   v^5 = -f_0,
+    #   u*v = -f_1 + 7*v*f_0,
+    #   u^2 = f_5 + 66*v^4*(u*v) + 11*v^5*v^5.
+    recovered_v_five = scale(-1, normalized_two[0])
+    recovered_u_v = add(
+        scale(-1, normalized_two[1]),
+        scale(7, multiply(v_two, normalized_two[0])),
+    )
+    recovered_u_two = add(
+        normalized_two[5],
+        add(
+            scale(
+                66,
+                multiply(power(v_two, 4, 2), recovered_u_v),
+            ),
+            scale(11, multiply(recovered_v_five, recovered_v_five)),
+        ),
+    )
+    assert recovered_v_five == {(0, 5): 1}
+    assert recovered_u_v == {(1, 1): 1}
+    assert recovered_u_two == {(2, 0): 1}
+
+    # Thus the base ideal is the complete monomial ideal
+    # b=(u^2,u*v,v^5), not (u,v)^2.  Its Newton inequalities are
+    # a+b>=2 and 4a+b>=5; the lattice points satisfying both are exactly
+    # the monomials in b.  This proves integral closure combinatorially.
+    for u_degree in range(12):
+        for v_degree in range(24):
+            exponent = (u_degree, v_degree)
+            newton_member = (
+                u_degree + v_degree >= 2
+                and 4 * u_degree + v_degree >= 5
+            )
+            assert newton_member == in_pointed_base_ideal(exponent)
+
+    # Blow up (u,v).  On the u-chart the weak transform is the unit
+    # ideal.  On the v-chart, u=r*v and
+    #
+    #   b O_Bl = v^2 (r^2,r,v^3) = v^2 (r,v^3).
+    #
+    # The residual Rees graph is r*B=v^3*A.  Its A-chart is the A_2
+    # surface singularity r*b=v^3 (times the line parameter).  Three
+    # successive ordinary section blowups principalize the residual
+    # ideals (r,v^3), (s,v^2), and (t,v).
+    u_chart_weak_generators = [(0, 0), (0, 1), (3, 5)]
+    v_chart_weak_generators = [(2, 0), (1, 0), (0, 3)]
+    assert (0, 0) in u_chart_weak_generators
+    assert (1, 0) in v_chart_weak_generators
+    assert (0, 3) in v_chart_weak_generators
+    pagoda_residual_exponents = [3, 2, 1, 0]
+    assert all(
+        left - right == 1
+        for left, right in zip(
+            pagoda_residual_exponents,
+            pagoda_residual_exponents[1:],
+        )
+    )
+
     print("PASS: Gamma_lambda lies in the V5 kernel model with rank 3")
     print(
         "PASS: pulled-back tautological bundle splits as "
@@ -504,6 +644,8 @@ def main() -> None:
     )
     print("PASS: the projection center contains L_lambda=P(lambda^11*U)")
     print("PASS: F_lambda has transverse order two along L_lambda")
+    print("PASS: transverse base ideal is (u^2,u*v,v^5), integrally closed")
+    print("PASS: residual Rees chart is r*B=v^3*A (width-three pagoda)")
     print("rank-cover minors:", rank_minor_s, rank_minor_t)
     print("Pluecker cover:", pluecker_s, pluecker_t)
 

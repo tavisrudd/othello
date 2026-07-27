@@ -158,14 +158,57 @@ def main() -> None:
         assert rank([kernel_two, kernel_three]) == 2
         center_points += 1
 
+    # Independently replay the transverse Rees chart by exhaustive
+    # evaluation over F_101.  Degrees are below 101, so this also detects
+    # any coefficient drift in the characteristic-zero identity.
+    graph_points = 0
+    common_scalar_inverse = pow(-239_500_800 % PRIME, -1, PRIME)
+    for u in range(PRIME):
+        for v in range(PRIME):
+            transverse = [0] * 13
+            transverse[1] = 1
+            transverse[6] = 11 * u % PRIME
+            transverse[11] = -u * u % PRIME
+            moved = transform(transverse, (1, v, 0, 1))
+            image = transvectant(moved, sixth_power, 6)
+            image[0] = (image[0] - cancellation * u) % PRIME
+            normalized = [
+                entry * common_scalar_inverse % PRIME for entry in image
+            ]
+            expected = [
+                -pow(v, 5, PRIME),
+                -(u * v + 7 * pow(v, 6, PRIME)),
+                -(10 * u * v * v + 20 * pow(v, 7, PRIME)),
+                -(40 * u * pow(v, 3, PRIME) + 30 * pow(v, 8, PRIME)),
+                -(75 * u * pow(v, 4, PRIME) + 25 * pow(v, 9, PRIME)),
+                (
+                    u * u
+                    - 66 * u * pow(v, 5, PRIME)
+                    - 11 * pow(v, 10, PRIME)
+                ),
+                (
+                    2 * u * u * v
+                    - 22 * u * pow(v, 6, PRIME)
+                    - 2 * pow(v, 11, PRIME)
+                ),
+            ]
+            assert normalized == [entry % PRIME for entry in expected]
+            assert (all(entry == 0 for entry in normalized)) == (
+                u == 0 and v == 0
+            )
+            graph_points += 1
+
     assert chart_points == certificate["prime_replay"]["chart_points"]
     assert center_points == certificate["prime_replay"]["p1_points"]
+    assert graph_points == certificate["prime_replay"]["graph_points"]
     print(
         "PASS: independent mod-101 replay;",
         chart_points,
         "SL2-chart points and",
         center_points,
-        "center points",
+        "center points and",
+        graph_points,
+        "transverse graph points",
     )
 
 

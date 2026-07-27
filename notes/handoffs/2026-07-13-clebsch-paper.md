@@ -577,6 +577,29 @@ genuinely beyond-variety continuation is to write the Sarkisov link
 whether it exposes the branch divisor of the rational-quartic
 Hilbert-scheme double cover.
 
+C682 now resolves that pointed Sarkisov graph scheme-theoretically.
+The seventh-polar formula is the complete system
+\(|H-2L_\lambda|\): its ambient center is exactly the span of the first
+infinitesimal neighborhood of \(L_\lambda\).  Hence its graph is the KPS
+double-projection graph as a closed subscheme, not only a rational map
+with the same reduced exceptional image.  The entering integral-closure
+guess was false.  On the open pointed-line chart the exact base ideal is
+the integrally closed ideal
+\[
+ (u^2,uv,v^5)\subsetneq(u,v)^2.
+\]
+After blowing up \(L_\lambda\), the residual ideal is \((r,v^3)\), its
+Rees equation is \(rB=v^3A\), and three ordinary section blowups give
+the width-three Reid-pagoda resolution of the unique flop.  KPS
+Proposition 5.4.3 supplies the global special-line facts:
+\(N_{L/X}=\mathcal O(1)\oplus\mathcal O(-2)\), no other line meets
+\(L\), and the target flopping curve is the strict transform of the
+unique tangent bisecant \(B_\lambda\).  The exact audit and independent
+10,201-point mod-\(101\) replay are folded into the existing C682
+Sarkisov-kernel bundle.  The next geometric gate is the inverse pointed
+kernel formula, followed by the quartic branch equation; C682 remains
+open until the user closes it.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to

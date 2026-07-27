@@ -50,8 +50,28 @@
   "prime_replay": {
     "chart_domain": "1<=a<=5, 0<=b,c<=4, d=(1+bc)/a",
     "chart_points": 125,
+    "graph_domain": "(u,v) in F_101^2",
+    "graph_points": 10201,
     "p1_points": 102,
     "prime": 101
+  },
+  "scheme_graph": {
+    "base_ideal_on_open_line_chart": "(u^2,u*v,v^5)",
+    "base_ideal_integrally_closed": true,
+    "blowup_u_chart": "principal after removing u^2",
+    "blowup_v_chart": "v^2*(r,v^3), where u=r*v",
+    "correction": "the base ideal is strictly smaller than I_L^2; the earlier proposed integral-closure equality with I_L^2 is false",
+    "newton_inequalities": [
+      "a+b>=2",
+      "4*a+b>=5"
+    ],
+    "pagoda_residual_exponents": [
+      3,
+      2,
+      1
+    ],
+    "rees_equation": "r*B=v^3*A",
+    "transverse_family": "apply x->x+v*y to [x^11*y+11*u*x^6*y^6-u^2*x*y^11:u]"
   },
   "status": {
     "proved_exactly": [
@@ -60,9 +80,11 @@
       "the stabilizer surface maps to Gamma_lambda",
       "the projection center contains L_lambda",
       "a transverse degeneration has exact order two",
+      "the transverse base ideal is the integrally closed ideal (u^2,u*v,v^5)",
+      "after blowing up L the residual Rees ideal is (r,v^3), giving the width-three Reid pagoda chart",
       "the center kernel bundle splits as O(-2)+O(-3)",
       "the center quotient bundle splits as O(1)+O(2)+O(2)"
     ],
-    "remaining_gate": "identify the resolved graph scheme-theoretically with the Sarkisov blow-up-flop-blow-down"
+    "remaining_gate": "construct the inverse pointed kernel formula and transport the quartic branch divisor"
   }
 }
