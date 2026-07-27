@@ -184,6 +184,33 @@ class ExportPlannerTests(unittest.TestCase):
         findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
         self.assertEqual(findings, [{"code": "paper-root", "path": "main.tex", "line": 1}])
 
+    def test_detects_task_ids_but_preserves_mathematical_class_labels(self) -> None:
+        (self.fx.root / "papers/demo/main.tex").write_text(
+            "Classes C01 and C15 remain public; lane C684 does not.\n"
+        )
+        run(self.fx.root, "git", "add", "papers/demo/main.tex")
+        run(self.fx.root, "git", "commit", "-qm", "task identifier")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
+        self.assertEqual(findings, [{"code": "task-lane-id", "path": "main.tex", "line": 1}])
+
+    def test_detects_internal_process_file_by_path(self) -> None:
+        (self.fx.root / "papers/demo/second-draft-fix-plan.md").write_text("private\n")
+        run(self.fx.root, "git", "add", "papers/demo/second-draft-fix-plan.md")
+        run(self.fx.root, "git", "commit", "-qm", "process file")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
+        self.assertEqual(
+            findings,
+            [
+                {
+                    "code": "internal-process-file",
+                    "path": "second-draft-fix-plan.md",
+                    "line": 0,
+                }
+            ],
+        )
+
     def test_exact_rewrite_clears_reference_and_refuses_drift(self) -> None:
         data = b"python3 papers/demo/check.py\n"
         rules = {

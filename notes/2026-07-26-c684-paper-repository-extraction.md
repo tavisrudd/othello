@@ -289,11 +289,13 @@ Then:
   repositories, undeclared symlinks, generated-name collisions, and missing destination parents.
   It writes source blobs by Git object ID, canonical provenance and export manifests, fixed modes,
   and a paper-specific build-output ignore list.
-- Twelve hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
+- Fourteen hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
   deterministic selection and materialization, missing mappings, destination collisions, unsafe
   paths, undeclared and stale symlink dispositions, private-reference detection, overwrite refusal,
   private-reference materialization refusal, and manifest verification against tampering and extra
-  files, plus monorepo-root command detection and exact-count rewrite drift.
+  files, plus monorepo-root command detection, exact-count rewrite drift, internal task-ID
+  detection, preservation of the public Clebsch class labels `C01`--`C15`, and process-file
+  detection by path.
 - The first plan at source commit `c12727722a325f6d8a93b0bb5b17001b63da229f` found exactly seven
   explicitly excluded external symlinks: two in continuation and five in dihedral. It found no
   undeclared symlink.
@@ -333,6 +335,17 @@ Then:
   disposable candidate `895a43ce3c7d0709cb9fd8ca4d02c3af36734428`, with export-manifest SHA-256
   `404e53306b95da33e6a065dccccc9661e84b9cea6d241f12ae33636ae70c26b9`. A separate clean clone
   again passed `make -B`, every aggregate release check, and the warning-free gate.
+- The strengthened portfolio audit now treats task-like identifiers (`C80` and above), private
+  process phrases, and named review/ledger/plan files as export blockers. At source snapshot
+  `cb9408a1`, it reports 760 findings: 624 task-ID references, 102 monorepo-root commands, 17
+  internal process files, 10 private-note links, 4 paper-index links, 2 private-handoff references,
+  and 1 internal-process phrase. The live TeX contamination is confined to 39 task-ID occurrences
+  in `dihedral_schreier_node_kayles.tex`; `C01`--`C15` in the Clebsch manuscripts are mathematical
+  class labels and are deliberately not findings.
+- At that snapshot, `clebsch-hexagon-code` and `clebsch-passages` have zero findings.
+  `clebsch-factorization` has only 94 flattening rewrites to make in paper-root replay commands.
+  Every other mapped root needs a repository-specific content disposition; broad allow rules are
+  forbidden.
 - Replacing `~/src/math-papers/clebsch-passages` with that fresh-history corrected candidate is
   intentionally paused for explicit history-replacement approval. No remote exists, and the
   validated corrected candidate is preserved under the disk-backed C684 cache.

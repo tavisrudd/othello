@@ -45,6 +45,31 @@ REFERENCE_PATTERNS = (
     ("file-uri", re.compile(r"file://")),
     ("private-handoff", re.compile(r"notes/handoffs/")),
     ("paper-root", re.compile(r"(?<![A-Za-z0-9_./-])papers/[A-Za-z0-9_.-]+/")),
+    # C01--C15 are public mathematical class labels in two Clebsch manuscripts.
+    # Lane/task identifiers in this repository begin at C80 or have three or
+    # more digits, and have no place in a standalone paper repository.
+    ("task-lane-id", re.compile(r"\bC(?:[89]\d|[1-9]\d{2,})\b")),
+    (
+        "internal-process",
+        re.compile(
+            r"\b(?:build-sys lane|owning lane|lane owner|fresh PDF-only review|"
+            r"review round|queued for work|closure status|pre-release)\b",
+            re.IGNORECASE,
+        ),
+    ),
+)
+PROCESS_PATH_RE = re.compile(
+    r"(?:^|/)(?:"
+    r"adversarial[^/]*(?:audit|review)|"
+    r"claim-proof-novelty-ledger|"
+    r"formal-statement-adequacy|"
+    r"formalization-ledger|"
+    r"literature-audit|"
+    r"proof[_-]ledger|"
+    r"release-checklist|"
+    r"second-draft-fix-plan"
+    r")\.md$",
+    re.IGNORECASE,
 )
 
 
@@ -285,6 +310,8 @@ def scan_references(
         rel = relative_to_source(entry, source)
         if rel in excluded or entry.mode == "120000" or entry.kind != "blob":
             continue
+        if PROCESS_PATH_RE.search(rel):
+            findings.append({"code": "internal-process-file", "path": rel, "line": 0})
         size = entry.size or 0
         if not is_scannable(rel, size):
             continue
