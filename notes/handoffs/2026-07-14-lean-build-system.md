@@ -82,7 +82,16 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    intent and steps 2–5:
    [`../2026-07-26-c681-trust-spine-paper-facts.md`](../2026-07-26-c681-trust-spine-paper-facts.md).
    Step 2's gate — a drift defect caught that was not one of the four the checker was built
-   against — is met by the two inline-`\bibitem` self-citations no hand pass had found.
+   against — was met by the two inline-`\bibitem` self-citations and the two README title claims no
+   hand pass had found, and step 2 then landed: the work summary, the shared paper index, and the
+   cross-paper results snapshot are under a read-only title-drift gate, and the work summary's §8
+   carries a generated manuscript inventory whose judgement columns stay hand-written. Step 3's
+   gate was met in passing — the statement-count extractor agrees exactly with an independent hand
+   count on three papers — so its counts ship inside that inventory. Report:
+   [`../2026-07-26-c683-summary-document-drift-gate.md`](../2026-07-26-c683-summary-document-drift-gate.md).
+   Remaining: step 4 (generated regions in `papers/papers-index.md` and `papers-planning.md`, gated
+   on the registry writer's agreement) and step 5 (adequacy-appendix rendering, gated on Lean
+   extraction having run).
 
 ## Gates and non-goals
 

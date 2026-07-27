@@ -1602,6 +1602,30 @@ gateway sequel, while the projective Reed–Solomon theorem programme has become
 track of its own. The table below remains the original release-order backbone, not a current count
 of every candidate manuscript.
 
+The manuscript inventory below is generated from the manuscript sources themselves — titles from
+each `\title{}`, page counts from the compiled PDF, statement counts and label counts from the TeX.
+Do not edit it by hand; run `lean/scripts/paper-facts.py generate`. Its counts are what the sources
+contain, not a judgement about what is ready: the ship-order table after it carries that, and stays
+hand-written.
+
+<!-- trust-spine:begin area=papers section=manuscripts version=1 -->
+| Manuscript                      | Title                                                                                                                         | Lane             | Pages | Thm | Lem | Prop | Cor | Labels |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------------|-------|-----|-----|------|-----|--------|
+| `ame_lu`                        | Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes                             | `ame-lu`         | 29    | 7   | 4   | 7    | 6   | 44     |
+| `arcs_complete_outside_conic`   | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity                                 | `relconic`       | 24    | 8   | 4   | 5    | 21  | 77     |
+| `beyond4_prs`                   | Deep holes of projective Reed--Solomon codes beyond redundancy four: exact classifications at redundancies five through seven | `reed-solomon`   | 30    | 6   | 10  | 18   | 3   | 60     |
+| `beyond4_prs_submission`        | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Exact Classifications at Redundancies Five Through Seven | `reed-solomon`   | 30    | 6   | 10  | 18   | 3   | 60     |
+| `clebsch_factorization`         | Quadratic recovery and cubic orientation in conic matching quotients                                                          | `clebsch`        | 28    | 6   | 3   | 5    | 10  | 38     |
+| `clebsch_hexagon_code`          | Deep-hole rigidity and factorization memory in the Clebsch hexagon code                                                       | `clebsch`        | 37    | 9   | 4   | 13   | 3   | 59     |
+| `clebsch_passages`              | Arithmetic and harmonic realizations of the Clebsch cubic                                                                     | `clebsch`        | 10    | 2   | 0   | 2    | 0   | 9      |
+| `clebsch_rigidity`              | Reconstructing the Clebsch code from its deep-hole syndrome locus                                                             | `clebsch`        | 14    | 3   | 1   | 7    | 2   | 25     |
+| `clebsch_rigidity_companion`    | Computational strengthenings of Clebsch syndrome rigidity                                                                     | `clebsch`        | 14    | 6   | 1   | 1    | 1   | 13     |
+| `complete_repair_ports`         | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure                                                 | `complete-ports` | 14    | 6   | 0   | 3    | 2   | 16     |
+| `continuation_graph_rigidity`   | Semilinear rigidity of four-point-frame continuation graphs                                                                   | `continuation`   | —     | 5   | 3   | 3    | 0   | 18     |
+| `dihedral_schreier_node_kayles` | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                       | `dihedral`       | 19    | 15  | 4   | 4    | 5   | 90     |
+| `equivariant_robust_completion` | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                          | `paper-frob-eq`  | 14    | 4   | 2   | 3    | 7   | 33     |
+<!-- trust-spine:end area=papers section=manuscripts -->
+
 | # | Paper                                                | Lead                                                            | State                                                |
 |---|------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------|
 | 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten   |

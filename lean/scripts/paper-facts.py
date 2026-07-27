@@ -16,7 +16,8 @@ title itself.
 
     lean/scripts/paper-facts.py extract          # write lean/trust/paper-facts/<id>.json
     lean/scripts/paper-facts.py audit            # read-only declared-versus-observed comparison
-    lean/scripts/paper-facts.py check            # audit plus tracked-artifact staleness
+    lean/scripts/paper-facts.py generate         # rewrite declared generated Markdown regions
+    lean/scripts/paper-facts.py check            # audit plus generated-region and artifact staleness
 
 No mode runs Lake, LaTeX, BibTeX, or any build.  Every fact comes from bytes already on disk, so
 this tool is independent of the Lean extraction window.  It reports drift in another lane's
@@ -37,7 +38,7 @@ import tomllib
 import zlib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 LEAN_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 TRUST_DIR_NAME = "trust"
@@ -136,6 +137,11 @@ BRACE_TRANSPARENT = re.compile(r"[{}$]")
 CONTROL_WORD = re.compile(r"\\[A-Za-z]+\s*")
 DASHES = re.compile(r"[\u2010-\u2015]|---|--")
 PUNCT_EDGE = re.compile(r"^[\s.,:;]+|[\s.,:;]+$")
+# Size and style switches carry no words, so a rendered title drops them.  Nothing else is removed.
+FONT_SWITCH_RE = re.compile(
+    r"\\(?:tiny|scriptsize|footnotesize|small|normalsize|large|Large|LARGE|huge|Huge"
+    r"|bf|it|sl|sc|rm|sf|tt|em|boldmath|mdseries|bfseries|itshape|upshape|normalfont)\b\s*"
+)
 
 
 def strip_tex_comments(text: str) -> str:
@@ -173,6 +179,17 @@ def normalize_prose(text: str) -> str:
 def normalize_title(raw: str) -> str:
     """A title normalized for equality: the prose form without surrounding punctuation."""
     return PUNCT_EDGE.sub("", normalize_prose(raw))
+
+
+def display_title(raw: str) -> str:
+    """The title as a reader should see it in a Markdown table.
+
+    Only line breaks and font switches are removed.  Everything else — capitalization, punctuation,
+    math — is left exactly as the manuscript sets it, because the point of rendering the title from
+    the source is that it is the source's string and not an editor's paraphrase of it.
+    """
+    text = FONT_SWITCH_RE.sub(" ", raw.replace("\\\\", " "))
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def match_brace(text: str, open_index: int) -> tuple[str, int]:
@@ -213,12 +230,32 @@ class ExternalCitation:
 
 
 @dataclass(frozen=True)
+class RestatingDoc:
+    """A document that names manuscripts by title.
+
+    `papers` declares which manuscripts the document undertakes to name — an editorial fact about
+    coverage, not a copy of any title.  Omitting it means the document covers the whole portfolio.
+    """
+
+    path: str
+    papers: tuple[str, ...] | None
+
+
+@dataclass(frozen=True)
+class GeneratedDoc:
+    path: str
+    section: str
+
+
+@dataclass(frozen=True)
 class PaperRegistry:
     self_authors: tuple[str, ...]
     paper_roots: tuple[str, ...]
     drift_scan_roots: tuple[str, ...]
     papers: tuple[PaperRow, ...]
     external_citations: tuple[ExternalCitation, ...]
+    restating_docs: tuple[RestatingDoc, ...] = ()
+    generated_docs: tuple[GeneratedDoc, ...] = ()
 
     def by_id(self) -> dict[str, PaperRow]:
         return {row.ident: row for row in self.papers}
@@ -257,7 +294,7 @@ def load_registry(path: Path) -> PaperRegistry:
     if len(set(mains)) != len(mains):
         raise Refused(f"{path.name}: two rows claim the same main source")
 
-    return PaperRegistry(
+    registry = PaperRegistry(
         self_authors=_str_tuple(
             _require(repository, "self_authors", "[repository]"), "[repository].self_authors"
         ),
@@ -275,7 +312,37 @@ def load_registry(path: Path) -> PaperRegistry:
             )
             for entry in doc.get("external_citation", [])
         ),
+        restating_docs=tuple(
+            RestatingDoc(
+                path=_require(entry, "path", "[[title_restating_doc]]"),
+                papers=(
+                    None
+                    if "papers" not in entry
+                    else _str_tuple(entry["papers"], "[[title_restating_doc]].papers")
+                ),
+            )
+            for entry in doc.get("title_restating_doc", [])
+        ),
+        generated_docs=tuple(
+            GeneratedDoc(
+                path=_require(entry, "path", "[[generated_doc]]"),
+                section=_require(entry, "section", "[[generated_doc]]"),
+            )
+            for entry in doc.get("generated_doc", [])
+        ),
     )
+    known = set(registry.by_id())
+    for restating in registry.restating_docs:
+        unknown = sorted(set(restating.papers or ()) - known)
+        if unknown:
+            raise Refused(f"{path.name}: {restating.path} names unregistered paper(s) {unknown}")
+    for generated in registry.generated_docs:
+        if generated.section not in RENDERED_SECTIONS:
+            raise Refused(
+                f"{path.name}: {generated.path} asks for unknown section "
+                f"{generated.section!r}; known sections are {sorted(RENDERED_SECTIONS)}"
+            )
+    return registry
 
 
 def _load_paper(entry: dict[str, Any], where: str) -> PaperRow:
@@ -700,6 +767,7 @@ def audit(
     findings += check_citations(registry, facts, Finding)
     findings += check_labels(registry, facts, Finding)
     findings += check_terminals(registry, facts, lean_facts, Finding)
+    findings += check_restating_docs(tree, registry, facts, Finding)
     # One directory can hold several manuscripts — a preprint and a journal variant share a
     # bibliography — so the same shared artifact is examined once per row.  The finding is about
     # the artifact, not about which manuscript led the checker to it, so identical findings
@@ -1020,6 +1088,143 @@ def check_terminals(
 
 
 # --------------------------------------------------------------------------------------------
+# generated regions
+#
+# Only tabular facts go inside a region.  Every document that carries one also carries judgement —
+# what is ready, what is blocked, what is worth publishing — and that judgement stays hand-written
+# outside the markers.  A generated argument is worse than a drifting one, because drift is visible
+# and generated argument is not.
+
+
+RENDERED_SECTIONS = ("manuscripts",)
+
+STATEMENT_COLUMNS = ("theorem", "lemma", "proposition", "corollary")
+
+
+def render_region(section: str, registry: PaperRegistry, facts: dict[str, PaperFacts], spine: Any) -> str:
+    if section == "manuscripts":
+        rows = [
+            ("Manuscript", "Title", "Lane", "Pages", "Thm", "Lem", "Prop", "Cor", "Labels")
+        ]
+        for row in sorted(registry.papers, key=lambda r: r.ident):
+            paper = facts.get(row.ident)
+            if paper is None:
+                continue
+            counts = dict(paper.environment_counts)
+            pages = [pages for _, _, _, pages in paper.pdfs if pages]
+            rows.append(
+                (
+                    f"`{row.ident}`",
+                    display_title(paper.title).replace("|", "\\|"),
+                    f"`{row.lane}`",
+                    str(max(pages)) if pages else "—",
+                    *(
+                        str(counts.get(name, 0) + counts.get(name + "*", 0))
+                        for name in STATEMENT_COLUMNS
+                    ),
+                    str(len(paper.labels)),
+                )
+            )
+        return spine.markdown_table(rows)
+    raise Refused(f"unknown generated section {section!r}")
+
+
+def check_restating_docs(
+    tree: Tree, registry: PaperRegistry, facts: dict[str, PaperFacts], Finding: Any
+) -> list[Any]:
+    """A document declared to name manuscripts must name them by their current titles."""
+    findings = []
+    tracked = tree.tracked_set()
+    for restating in registry.restating_docs:
+        if restating.path not in tracked:
+            findings.append(
+                Finding(
+                    "restating-doc-missing",
+                    restating.path,
+                    "declared as naming manuscripts by title but not tracked",
+                )
+            )
+            continue
+        body = normalize_prose(tree.read(restating.path))
+        idents = restating.papers if restating.papers is not None else tuple(sorted(facts))
+        for ident in idents:
+            paper = facts.get(ident)
+            if paper is None or not paper.title_normalized:
+                continue
+            if paper.title_normalized not in body:
+                findings.append(
+                    Finding(
+                        "title-drift",
+                        f"{restating.path}:{ident}",
+                        f"the document names this manuscript but not by its current \\title{{}}: "
+                        f"{paper.title!r}",
+                    )
+                )
+    return findings
+
+
+def check_generated_regions(
+    tree: Tree, registry: PaperRegistry, facts: dict[str, PaperFacts], spine: Any
+) -> list[Any]:
+    """Read-only: rerender every declared region and compare it with the tracked bytes."""
+    Finding = spine.Finding
+    findings: list[Any] = []
+    for path, sections in sorted(_regions_by_file(registry).items()):
+        target = tree.root / path
+        if not target.is_file():
+            findings.append(
+                Finding("region-file-missing", path, "declared generated doc not found")
+            )
+            continue
+        original = target.read_text(encoding="utf-8")
+        present = {(region.area, region.section) for region in spine.find_regions(original)[0]}
+        declared = {(REGION_AREA, section) for section in sections}
+        for _, section in sorted(declared - present):
+            findings.append(
+                Finding("region-missing", f"{path}:{section}", "declared but not present")
+            )
+        for _, section in sorted(present - declared):
+            findings.append(
+                Finding("region-undeclared", f"{path}:{section}", "present but not declared")
+            )
+        try:
+            updated = spine.rewrite_regions(original, _rendered(registry, facts, sections, spine))
+        except Exception as exc:  # noqa: BLE001 - the spine refuses on a malformed region
+            if type(exc).__name__ != "Refused":
+                raise
+            findings.append(Finding("region-malformed", path, str(exc)))
+            continue
+        if updated != original:
+            findings.append(
+                Finding(
+                    "generated-region-stale",
+                    path,
+                    "tracked bytes differ from a fresh rendering; run generate",
+                )
+            )
+    return findings
+
+
+REGION_AREA = "papers"
+
+
+def _regions_by_file(registry: PaperRegistry) -> dict[str, list[str]]:
+    by_file: dict[str, list[str]] = {}
+    for entry in registry.generated_docs:
+        by_file.setdefault(entry.path, []).append(entry.section)
+    return by_file
+
+
+def _rendered(
+    registry: PaperRegistry, facts: dict[str, PaperFacts], sections: Iterable[str], spine: Any
+) -> dict[tuple[str, str], str]:
+    return {
+        (REGION_AREA, section): render_region(section, registry, facts, spine)
+        for section in sections
+    }
+
+
+# --------------------------------------------------------------------------------------------
 # CLI
 
 
@@ -1081,11 +1286,31 @@ def cmd_audit(args: argparse.Namespace) -> int:
     return ctx.spine.report(findings, args.json)
 
 
+def cmd_generate(args: argparse.Namespace) -> int:
+    ctx = build_context(args.lean_root, args.registry)
+    changed = []
+    for path, sections in sorted(_regions_by_file(ctx.registry).items()):
+        target = ctx.repo_root / path
+        original = target.read_text(encoding="utf-8")
+        updated = ctx.spine.rewrite_regions(
+            original, _rendered(ctx.registry, ctx.facts, sections, ctx.spine)
+        )
+        if updated != original:
+            target.write_text(updated, encoding="utf-8")
+            changed.append(path)
+    for path in changed:
+        print(f"rewrote {path}")
+    if not changed:
+        print("no generated region changed")
+    return EXIT_OK
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     """Read-only: audit, plus a comparison of the tracked facts artifacts with a fresh extraction."""
     ctx = build_context(args.lean_root, args.registry)
     Finding = ctx.spine.Finding
     findings = audit(ctx.tree, ctx.registry, ctx.facts, ctx.lean_facts, Finding)
+    findings += check_generated_regions(ctx.tree, ctx.registry, ctx.facts, ctx.spine)
     facts_dir = ctx.trust_dir / FACTS_DIR_NAME
     expected = {f"{ident}.json" for ident in ctx.facts}
     for ident, paper in sorted(ctx.facts.items()):
@@ -1140,7 +1365,10 @@ def main(argv: list[str] | None = None) -> int:
     audit_cmd.add_argument("--json", action="store_true")
     audit_cmd.set_defaults(func=cmd_audit)
 
-    check = sub.add_parser("check", help="audit plus tracked facts-artifact staleness")
+    generate = sub.add_parser("generate", help="rewrite declared generated Markdown regions")
+    generate.set_defaults(func=cmd_generate)
+
+    check = sub.add_parser("check", help="audit plus generated-region and facts-artifact staleness")
     check.add_argument("--paper")
     check.add_argument("--json", action="store_true")
     check.set_defaults(func=cmd_check)

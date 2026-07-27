@@ -1583,8 +1583,17 @@
       "last": 682,
       "purpose": "Determine the strongest Hitchin-facing structural theorem connecting the arithmetic incidence cover and harmonic Clebsch cubic without asserting an unsupported ambient identification",
       "sequence": 176
+    },
+    {
+      "count": 1,
+      "first": 683,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 683,
+      "purpose": "render the two summary documents publication/status tables from paper facts in trust-spine regions",
+      "sequence": 177
     }
   ],
-  "next_id": 683,
+  "next_id": 684,
   "schema": "codex-task-id-allocations-v1"
 }

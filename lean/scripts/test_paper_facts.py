@@ -99,6 +99,19 @@ T.~Rudd,
 """
 
 
+REGION_DOC = """\
+# Summary
+
+Judgement that stays hand-written.
+
+<!-- trust-spine:begin area=papers section=manuscripts version=1 -->
+BODY
+<!-- trust-spine:end area=papers section=manuscripts -->
+
+More judgement.
+"""
+
+
 class Fixture:
     """A throwaway repository with `lean/` beside `papers/`, exactly like the real layout."""
 
@@ -597,6 +610,139 @@ class PaperFactsTest(unittest.TestCase):
             if path.is_file() and ".git/" not in str(path)
         }
         self.assertEqual(before, after)
+
+    # -- documents that restate titles ---------------------------------------------------------
+
+    def test_a_document_that_stops_naming_a_paper_by_its_current_title_is_reported(self):
+        self.fx.write("notes/summary.md", "# Summary\n\nWe have a paper about arcs.\n")
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY + '\n[[title_restating_doc]]\npath = "notes/summary.md"\n',
+        )
+        subjects = {f["subject"] for f in self.fx.findings_for("title-drift")}
+        self.assertEqual(subjects, {"notes/summary.md:alpha", "notes/summary.md:beta"})
+
+    def test_a_document_naming_every_current_title_is_accepted(self):
+        self.fx.write(
+            "notes/summary.md",
+            "# Summary\n\n1. *Arcs complete outside a conic: a prescribed-hole defect\n"
+            "   identity*.\n2. *Deep-hole rigidity and factorization memory*.\n",
+        )
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY + '\n[[title_restating_doc]]\npath = "notes/summary.md"\n',
+        )
+        self.assertNotIn("title-drift", self.fx.codes())
+
+    def test_a_declared_coverage_subset_is_respected(self):
+        self.fx.write("notes/summary.md", "*Deep-hole rigidity and factorization memory*\n")
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[title_restating_doc]]\npath = "notes/summary.md"\npapers = ["beta"]\n',
+        )
+        self.assertNotIn("title-drift", self.fx.codes())
+
+    def test_a_coverage_list_naming_an_unregistered_paper_is_refused(self):
+        self.fx.write("notes/summary.md", "x\n")
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[title_restating_doc]]\npath = "notes/summary.md"\npapers = ["ghost"]\n',
+        )
+        code, doc = self.fx.run("audit")
+        self.assertEqual(code, pf.EXIT_REFUSED)
+        self.assertIn("ghost", doc["refused"])
+
+    def test_an_untracked_restating_document_is_reported(self):
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY + '\n[[title_restating_doc]]\npath = "notes/absent.md"\n',
+        )
+        self.assertIn("restating-doc-missing", self.fx.codes())
+
+    # -- generated regions ---------------------------------------------------------------------
+
+    def _with_region(self, body: str = "") -> None:
+        self.fx.write("notes/summary.md", REGION_DOC.replace("BODY", body))
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[generated_doc]]\npath = "notes/summary.md"\nsection = "manuscripts"\n',
+        )
+
+    def _generate(self) -> None:
+        subprocess.run(
+            [sys.executable, str(SCRIPT), "--lean-root", str(self.fx.lean_root), "generate"],
+            check=True,
+            capture_output=True,
+        )
+
+    def test_an_empty_region_is_stale_until_generated(self):
+        self._with_region()
+        code, doc = self.fx.run("check")
+        self.assertIn("generated-region-stale", {f["code"] for f in doc["findings"]})
+        self._generate()
+        code, doc = self.fx.run("check")
+        self.assertNotIn("generated-region-stale", {f["code"] for f in doc["findings"]})
+
+    def test_the_generated_table_carries_the_manuscripts_own_title(self):
+        self._with_region()
+        self._generate()
+        rendered = (self.fx.root / "notes/summary.md").read_text()
+        self.assertIn(
+            "Arcs complete outside a conic: a prescribed-hole defect identity", rendered
+        )
+        self.assertIn("`alpha-lane`", rendered)
+
+    def test_a_hand_edit_inside_a_region_is_reported(self):
+        self._with_region()
+        self._generate()
+        path = self.fx.root / "notes/summary.md"
+        path.write_text(path.read_text().replace("`alpha-lane`", "`someone-elses-lane`"))
+        self.fx.commit()
+        code, doc = self.fx.run("check")
+        self.assertIn("generated-region-stale", {f["code"] for f in doc["findings"]})
+
+    def test_prose_outside_the_region_survives_generation(self):
+        self._with_region()
+        self._generate()
+        rendered = (self.fx.root / "notes/summary.md").read_text()
+        self.assertIn("Judgement that stays hand-written.", rendered)
+
+    def test_two_generate_runs_are_byte_identical(self):
+        self._with_region()
+        self._generate()
+        first = (self.fx.root / "notes/summary.md").read_bytes()
+        self._generate()
+        self.assertEqual(first, (self.fx.root / "notes/summary.md").read_bytes())
+
+    def test_a_declared_region_that_is_absent_is_reported(self):
+        self.fx.write("notes/summary.md", "# Summary\n\nNo markers here.\n")
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[generated_doc]]\npath = "notes/summary.md"\nsection = "manuscripts"\n',
+        )
+        code, doc = self.fx.run("check")
+        self.assertIn("region-missing", {f["code"] for f in doc["findings"]})
+
+    def test_an_unknown_section_is_refused(self):
+        self.fx.track(
+            "lean/trust/papers.toml",
+            REGISTRY
+            + '\n[[generated_doc]]\npath = "notes/summary.md"\nsection = "opinions"\n',
+        )
+        code, doc = self.fx.run("audit")
+        self.assertEqual(code, pf.EXIT_REFUSED)
+        self.assertIn("opinions", doc["refused"])
+
+    def test_a_font_switch_is_dropped_from_a_rendered_title_but_not_a_word(self):
+        self.assertEqual(
+            pf.display_title("Complete Bounded Repair Ports:\\\\\n\\large Transfer and Structure"),
+            "Complete Bounded Repair Ports: Transfer and Structure",
+        )
+        self.assertEqual(pf.display_title("The $\\rho$ invariant"), "The $\\rho$ invariant")
 
     # -- parsing units -----------------------------------------------------------------------
 

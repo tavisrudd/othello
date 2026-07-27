@@ -56,6 +56,55 @@ drift_scan_roots = ["papers", "notes", "lean"]
 # (none declared)
 
 # ---------------------------------------------------------------------------------------------
+# Documents that name manuscripts by title.
+#
+# `papers` declares which manuscripts a document undertakes to name. That is an editorial fact
+# about coverage, and it is the only thing declared: the titles themselves stay in the manuscripts,
+# and each listed paper's current `\title{}` must appear in the document or it is drift. Omitting
+# `papers` means the document covers the whole portfolio.
+#
+# These entries are read-only checks. Inserting generated regions into a file another lane owns is
+# a separate step needing that lane's owner, exactly as `portfolio.toml` records for the per-area
+# manifests; checking that a file states current titles edits nothing and needs no such agreement.
+
+[[title_restating_doc]]
+path = "notes/2026-07-09-work-summary.md"
+
+[[title_restating_doc]]
+path = "papers/papers-index.md"
+
+# The results snapshot is a self-contained editorial document that deliberately covers a subset:
+# the integrated Clebsch manuscript is preserved only as a fallback and the Node Kayles paper sits
+# outside its scope, so neither is named there.
+[[title_restating_doc]]
+path = "notes/2026-07-26-results-summary-snapshot.md"
+papers = [
+  "ame_lu",
+  "arcs_complete_outside_conic",
+  "beyond4_prs",
+  "beyond4_prs_submission",
+  "clebsch_factorization",
+  "clebsch_passages",
+  "clebsch_rigidity",
+  "clebsch_rigidity_companion",
+  "complete_repair_ports",
+  "continuation_graph_rigidity",
+  "equivariant_robust_completion",
+]
+
+# ---------------------------------------------------------------------------------------------
+# Generated Markdown regions.
+#
+# Only tabular facts belong inside a region. Every document carrying one also carries judgement —
+# what is ready, what is blocked, what is worth publishing — and that judgement stays hand-written
+# outside the markers. A document whose argument is generated is worse than one that drifts,
+# because drift is visible and generated argument is not.
+
+[[generated_doc]]
+path = "notes/2026-07-09-work-summary.md"
+section = "manuscripts"
+
+# ---------------------------------------------------------------------------------------------
 # Manuscripts.
 
 [[paper]]
