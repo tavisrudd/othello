@@ -10,6 +10,7 @@ working tree and never writes under ~/src/math-papers.
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import hashlib
 import json
 import re
@@ -84,6 +85,21 @@ PROCESS_PATH_RE = re.compile(
     r"[^/]*cover-letter"
     r")\.md$",
     re.IGNORECASE,
+)
+GENERATED_DIRECTORY_NAMES = ("__pycache__",)
+GENERATED_FILENAME_GLOBS = (
+    "*.py[cod]",
+    "*.aux",
+    "*.bbl",
+    "*.bcf",
+    "*.blg",
+    "*.fdb_latexmk",
+    "*.fls",
+    "*.log",
+    "*.out",
+    "*.run.xml",
+    "*.synctex.gz",
+    "*.xdv",
 )
 
 
@@ -561,8 +577,8 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     )
     if ".gitignore" not in {path for path, _, _, _ in payloads}:
         ignore = (
-            "__pycache__/\n*.py[cod]\n*.aux\n*.bbl\n*.bcf\n*.blg\n*.fdb_latexmk\n"
-            "*.fls\n*.log\n*.out\n*.run.xml\n*.synctex.gz\n*.xdv\n"
+            "".join(f"{name}/\n" for name in GENERATED_DIRECTORY_NAMES)
+            + "".join(f"{pattern}\n" for pattern in GENERATED_FILENAME_GLOBS)
             + "".join(f"/{path}\n" for path in sorted(release_outputs))
         ).encode()
         payloads.append((".gitignore", ignore, "100644", "generated"))
@@ -709,10 +725,25 @@ def verify_materialized_tree(root: Path) -> dict[str, Any]:
             raise Refused(f"cannot list tracked candidate files: {proc.stderr.decode().strip()}")
         observed = {path.decode("utf-8") for path in proc.stdout.split(b"\0") if path}
     else:
+        ignored_paths = set(manifest.get("excluded_release_outputs", []))
+
+        def ignored_generated(rel: str) -> bool:
+            pure = PurePosixPath(rel)
+            return (
+                rel in ignored_paths
+                or any(part in GENERATED_DIRECTORY_NAMES for part in pure.parts[:-1])
+                or any(
+                    fnmatch.fnmatchcase(pure.name, pattern)
+                    for pattern in GENERATED_FILENAME_GLOBS
+                )
+            )
+
         observed = {
             str(path.relative_to(root))
             for path in root.rglob("*")
-            if path.is_file() and ".git" not in path.relative_to(root).parts
+            if path.is_file()
+            and ".git" not in path.relative_to(root).parts
+            and not ignored_generated(str(path.relative_to(root)))
         }
     missing = sorted(expected - observed)
     extra = sorted(observed - expected)

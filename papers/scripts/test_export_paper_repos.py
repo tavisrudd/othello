@@ -330,6 +330,10 @@ reason = "private review record"
 
         candidate = self.fx.root / "second-candidate"
         exporter.materialize_repository(self.fx.commit, "demo-paper", candidate)
+        (candidate / "main.aux").write_text("generated\n")
+        (candidate / "nested/__pycache__").mkdir(parents=True)
+        (candidate / "nested/__pycache__/module.cpython-313.pyc").write_bytes(b"generated")
+        exporter.verify_materialized_tree(candidate)
         (candidate / "extra.txt").write_text("extra\n")
         with self.assertRaisesRegex(exporter.Refused, "candidate tree mismatch"):
             exporter.verify_materialized_tree(candidate)
