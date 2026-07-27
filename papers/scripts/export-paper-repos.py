@@ -44,6 +44,7 @@ REFERENCE_PATTERNS = (
     ("local-home", re.compile(r"/home/tavis(?:/|$)")),
     ("file-uri", re.compile(r"file://")),
     ("private-handoff", re.compile(r"notes/handoffs/")),
+    ("paper-root", re.compile(r"(?<![A-Za-z0-9_./-])papers/[A-Za-z0-9_.-]+/")),
 )
 
 
@@ -219,12 +220,66 @@ def excluded_release_outputs(
     return {str(PurePosixPath(papers[paper_id]["main"]).with_suffix(".pdf")) for paper_id in row["paper_ids"]}
 
 
+def rewrite_rules(row: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    result: dict[str, list[dict[str, Any]]] = {}
+    for rule in row.get("rewrite", []):
+        path = rule.get("path")
+        old = rule.get("old")
+        new = rule.get("new")
+        count = rule.get("expected_count")
+        reason = rule.get("reason")
+        safe_relative(path, f"repository {row['name']} rewrite path")
+        if not isinstance(old, str) or not old or not isinstance(new, str):
+            raise Refused(f"repository {row['name']} rewrite {path!r} needs nonempty old/string new")
+        if not isinstance(count, int) or count < 1:
+            raise Refused(f"repository {row['name']} rewrite {path!r} needs positive expected_count")
+        if not isinstance(reason, str) or not reason.strip():
+            raise Refused(f"repository {row['name']} rewrite {path!r} needs a reason")
+        result.setdefault(path, []).append(rule)
+    return result
+
+
+def apply_rewrites(
+    repository: str, path: str, data: bytes, rules: dict[str, list[dict[str, Any]]]
+) -> tuple[bytes, list[dict[str, Any]]]:
+    applied: list[dict[str, Any]] = []
+    if path not in rules:
+        return data, applied
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise Refused(f"repository {repository} cannot rewrite non-UTF-8 file {path!r}") from error
+    for rule in rules[path]:
+        observed = text.count(rule["old"])
+        if observed != rule["expected_count"]:
+            raise Refused(
+                f"repository {repository} rewrite drift in {path!r}: expected "
+                f"{rule['expected_count']} occurrence(s), observed {observed}"
+            )
+        text = text.replace(rule["old"], rule["new"])
+        applied.append(
+            {
+                "expected_count": rule["expected_count"],
+                "new": rule["new"],
+                "old": rule["old"],
+                "reason": rule["reason"],
+            }
+        )
+    return text.encode(), applied
+
+
 def is_scannable(path: str, size: int) -> bool:
     pure = PurePosixPath(path)
     return size <= 2_000_000 and (pure.suffix.lower() in TEXT_SUFFIXES or pure.name in TEXT_NAMES)
 
 
-def scan_references(entries: list[TreeEntry], source: str, excluded: set[str]) -> list[dict[str, Any]]:
+def scan_references(
+    entries: list[TreeEntry],
+    source: str,
+    excluded: set[str],
+    repository: str,
+    rewrites: dict[str, list[dict[str, Any]]],
+) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     for entry in entries:
         rel = relative_to_source(entry, source)
@@ -234,7 +289,8 @@ def scan_references(entries: list[TreeEntry], source: str, excluded: set[str]) -
         if not is_scannable(rel, size):
             continue
         try:
-            text = git_blob(entry.oid).decode("utf-8")
+            data, _ = apply_rewrites(repository, rel, git_blob(entry.oid), rewrites)
+            text = data.decode("utf-8")
         except UnicodeDecodeError:
             continue
         for line_number, line in enumerate(text.splitlines(), 1):
@@ -277,6 +333,7 @@ def plan_repository(
 
     exclusions = excluded_symlinks(row)
     release_outputs = excluded_release_outputs(row, papers)
+    rewrites = rewrite_rules(row)
     symlinks = {path: entry for path, entry in by_relative.items() if entry.mode == "120000"}
     undeclared = sorted(set(symlinks) - set(exclusions))
     stale = sorted(set(exclusions) - set(symlinks))
@@ -297,7 +354,10 @@ def plan_repository(
         and path not in exclusions
         and path not in release_outputs
     ]
-    references = scan_references(entries, source, set(exclusions))
+    stale_rewrites = sorted(set(rewrites) - set(by_relative))
+    if stale_rewrites:
+        raise Refused(f"repository {row['name']} rewrites absent paths: {', '.join(stale_rewrites)}")
+    references = scan_references(entries, source, set(exclusions), row["name"], rewrites)
     return {
         "name": row["name"],
         "source": source,
@@ -359,6 +419,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     source = row["source"]
     exclusions = excluded_symlinks(row)
     release_outputs = excluded_release_outputs(row, papers)
+    rewrites = rewrite_rules(row)
     entries = tree_entries(commit, source)
     payloads: list[tuple[str, bytes, str, str]] = []
     manifest_files: list[dict[str, Any]] = []
@@ -368,7 +429,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
             continue
         if entry.kind != "blob" or entry.mode == "120000":
             raise Refused(f"repository {repository!r} contains unsupported tree entry {rel!r}")
-        data = git_blob(entry.oid)
+        data, applied_rewrites = apply_rewrites(repository, rel, git_blob(entry.oid), rewrites)
         payloads.append((rel, data, entry.mode, entry.oid))
         manifest_files.append(
             {
@@ -379,6 +440,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
                 "sha256": sha256(data),
                 "source_blob": entry.oid,
                 "source_path": entry.path,
+                "rewrites": applied_rewrites,
             }
         )
 

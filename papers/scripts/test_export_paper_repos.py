@@ -174,6 +174,37 @@ class ExportPlannerTests(unittest.TestCase):
         findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
         self.assertEqual(findings, [{"code": "private-notes", "path": "main.tex", "line": 1}])
 
+    def test_detects_monorepo_paper_root_command(self) -> None:
+        (self.fx.root / "papers/demo/main.tex").write_text(
+            "python3 papers/demo/verification/check.py\n"
+        )
+        run(self.fx.root, "git", "add", "papers/demo/main.tex")
+        run(self.fx.root, "git", "commit", "-qm", "monorepo-root command")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
+        self.assertEqual(findings, [{"code": "paper-root", "path": "main.tex", "line": 1}])
+
+    def test_exact_rewrite_clears_reference_and_refuses_drift(self) -> None:
+        data = b"python3 papers/demo/check.py\n"
+        rules = {
+            "README.md": [
+                {
+                    "old": "papers/demo/",
+                    "new": "",
+                    "expected_count": 1,
+                    "reason": "fixture",
+                }
+            ]
+        }
+        transformed, applied = exporter.apply_rewrites(
+            "demo-paper", "README.md", data, rules
+        )
+        self.assertEqual(transformed, b"python3 check.py\n")
+        self.assertEqual(len(applied), 1)
+        rules["README.md"][0]["expected_count"] = 2
+        with self.assertRaisesRegex(exporter.Refused, "rewrite drift"):
+            exporter.apply_rewrites("demo-paper", "README.md", data, rules)
+
     def test_materialization_is_deterministic_and_refuses_overwrite(self) -> None:
         first = self.fx.root / "first"
         second = self.fx.root / "second"

@@ -47,6 +47,13 @@ source = "papers/clebsch-passages"
 paper_ids = ["clebsch_passages"]
 disposition = "active"
 
+[[repository.rewrite]]
+path = "verification/README.md"
+old = "papers/clebsch-passages/"
+new = ""
+expected_count = 8
+reason = "commands are executed from the standalone repository root after flattening"
+
 [[repository]]
 name = "clebsch-rigidity"
 source = "papers/clebsch-rigidity"
