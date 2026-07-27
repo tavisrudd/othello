@@ -371,6 +371,19 @@ Then:
 - The official immutable-tree exporter audit reports zero findings for both `ame-lu` and
   `beyond4-prs`. The exporter regression suite passes all seventeen tests, including hermetic
   temporary commits with inherited commit signing disabled.
+- Clean-room validation exposed and repaired two boundary defects that source-tree checks could
+  not see: AME's release verifier still named three deliberately excluded process files, and the
+  export verifier rejected declared LaTeX/Python build products in a non-Git candidate. The AME
+  release verifier now validates 37 actually exported public artifacts without requiring the
+  external formal companion, while still validating all 83 formal artifacts when present. The
+  export verifier ignores only its declared generated filename/directory classes and continues to
+  reject arbitrary extra files.
+- Exact final source checkpoint `040801bea1ebb1984e07deee2af2bfba1fa8aa01` materializes 43-file
+  AME--LU and 85-file Beyond4 candidates with zero audit findings. Their export-manifest SHA-256
+  values are respectively `e5c3c920e20123aa6e7f0107c77f00a6062faaf8eb3d1d5c2ce40f15ee8911e3`
+  and `714fd5598339adb1a53a242860967e033a21f19690c3fcfc29f044665897bef8`.
+  Excluding generated provenance, all 41 AME--LU and 83 Beyond4 retained payload files are
+  byte-identical to the clean-room candidates that passed the builds and full aggregate replays.
 - The Node Kayles task-ID findings are rendered, because the manuscript sets
   `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
   polyhedral integration, not merely editorial reminders. The repository is therefore gated until
