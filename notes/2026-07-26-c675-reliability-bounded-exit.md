@@ -67,7 +67,9 @@ record, or mathematical axiom in these closures.
 The closure is registered as the `complete_ports` trust area in
 `lean/trust/areas/complete_ports.toml`, with its human boundary in `lean/RepairPorts/TRUST.md`.
 The registry enumerates every terminal printed by the aggregate gate, including the shared
-`FiniteGeom` and `RepairCodes` conclusions used by the paper.
+`FiniteGeom` and `RepairCodes` conclusions used by the paper.  A clean detached replay produced
+`lean/trust/facts/RepairPorts.Gates.CompletePorts.json`, so the registry records observed rather
+than merely expected closures and axiom sets.
 
 ## Validation
 
@@ -85,7 +87,7 @@ git diff --check -- <C675-owned paths>
 The single-file elaboration is warning-free.  The private PDF rebuilt without TeX warnings.  The
 aggregate `RepairPorts.Gates.CompletePorts` queue run passed, and its immediate exact-current replay
 skipped the current target before passing the trace-only aggregate gate.  The trust spine accounts
-for all 36 printed terminals.
+for all 36 printed terminals; `audit --area complete_ports` reports zero findings.
 
 ## Closeout: extra value and expert-pressure pass
 
