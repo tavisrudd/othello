@@ -1,0 +1,246 @@
+{
+  "distinguished_column": 0,
+  "field_order": 7,
+  "matrices_are_rows": true,
+  "records": {
+    "disjoint": {
+      "dependent_four_subsets": [
+        [
+          0,
+          1,
+          4,
+          5
+        ],
+        [
+          0,
+          2,
+          3,
+          6
+        ],
+        [
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "dependent_triples": [],
+      "minimal_radius_three_repairs": [
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          2,
+          3,
+          6
+        ]
+      ],
+      "pointed_profile": [
+        {
+          "count": 14,
+          "exponents": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "count": 18,
+          "exponents": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 6,
+          "exponents": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "count": 2,
+          "exponents": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "count": 15,
+          "exponents": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 6,
+          "exponents": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            3,
+            0,
+            1
+          ]
+        }
+      ],
+      "radius_three_success_counts_by_survivor_size": [
+        0,
+        0,
+        0,
+        2,
+        6,
+        6,
+        1
+      ],
+      "rank": 4
+    },
+    "overlapping": {
+      "dependent_four_subsets": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          5,
+          6
+        ],
+        [
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "dependent_triples": [],
+      "minimal_radius_three_repairs": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          5,
+          6
+        ]
+      ],
+      "pointed_profile": [
+        {
+          "count": 14,
+          "exponents": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "count": 18,
+          "exponents": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 6,
+          "exponents": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "count": 2,
+          "exponents": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "count": 15,
+          "exponents": [
+            1,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 6,
+          "exponents": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "count": 1,
+          "exponents": [
+            3,
+            0,
+            1
+          ]
+        }
+      ],
+      "radius_three_success_counts_by_survivor_size": [
+        0,
+        0,
+        0,
+        2,
+        6,
+        5,
+        1
+      ],
+      "rank": 4
+    }
+  },
+  "schema": "pointed-tutte-filtration-witness-v1"
+}

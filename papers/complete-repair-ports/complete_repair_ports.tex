@@ -718,22 +718,27 @@ Writing $U_K(u,y)=\sum_Au^{|A|}y^{r_K(A)}$, one also has
 Contraction gives
 $r_D(A)=r_M(A)$ and $r_Q(A)=r_M(A\cup\{x\})-1$, so
 $r_D(A)-r_Q(A)=1-\epsilon_x(A)$.  Substitution in the rank-one
-perspective expansion gives the displayed polynomial.  The $Z^0$ terms are
-exactly the successful sets; more explicitly,
+perspective expansion gives the displayed polynomial term by term.  The
+$Z^0$ terms are exactly the successful sets; more explicitly,
 \[
  S_x(u)=u^{r(M)}[Z^0]T_{D\to Q}(1+u^{-1},1+u,Z),
 \]
-which yields the reliability formula.
+because a term with exponents $a,b,0$ has
+$|A|=r(M)-a+b$.  Multiplying the coefficient of $u^{|A|}$ by
+$s^{|A|}(1-s)^{n-|A|}$ and summing gives the reliability formula.
 Finally,
 \[
  \left.\partial_y(y^{r_D(A)}-y^{r_Q(A)})\right|_{y=1}
  =r_D(A)-r_Q(A),
 \]
-which is the zero--one success indicator.
+which is one when $\epsilon_x(A)=0$ and zero when
+$\epsilon_x(A)=1$.  Summing the differentiated terms proves the last
+identity.
 \end{proof}
 
 This identification is the singleton specialization of standard set-pointed
 Tutte theory \cite[equation~(3.1)]{LasVergnas1999}; it is not a new polynomial.
+\begin{corollary}[Pointed repair--failure duality]
 Pointed duality gives
 \[
  R_{(M,x)}(s)+R_{(M^*,x)}(1-s)=1,
@@ -748,11 +753,126 @@ In particular,
  \qquad
  d_x(C)=\min\{\wt(c):c\in C,\ c_x\neq0\}.
 \]
+\end{corollary}
 
-The full pointed polynomial forgets the repair radius.  Six-element circuits
-in a rank-five code create five-helper repairs that are absent from a
-radius-four port.  Thus the hierarchy in Section~\ref{sec:reliability} is a
-genuine filtered refinement of the standard perspective invariant.
+\begin{proof}
+For $F\subseteq V$, put $A=V\setminus F$.  The dual rank formula, applied
+once to $F$ and once to $F\cup\{x\}$, gives
+\[
+ r_{M^*}(F\cup\{x\})-r_{M^*}(F)=1-\epsilon_x(A).
+\]
+Thus $F$ repairs $x$ in $M^*$ exactly when its complement fails to repair
+$x$ in $M$.  Complementation preserves the product measure after replacing
+$s$ by $1-s$, which proves the reliability identity.  It also exchanges
+minimal dual repairs with minimal primal failure blockers.  Circuits of
+$M^*$ are cocircuits of $M$, so the blockers are $Q'\setminus\{x\}$ for
+cocircuits $Q'$ through $x$.  In a represented matroid, cocircuits are the
+inclusion-minimal nonzero row-code supports.  Taking the smallest support
+through $x$ proves the distance formula.
+\end{proof}
+
+\begin{proposition}[The radius filtration is not a pointed-Tutte specialization]
+\label{prop:filtration-boundary}
+The complete pointed polynomial does not determine the bounded-radius
+reliability filtration, even among rank-four systems represented over
+$\F_7$.
+\end{proposition}
+
+\begin{proof}
+The mechanism is sparse paving.  In a rank-$r$ sparse paving matroid, every
+set of size below $r$ is independent, every set of size above $r$ has full
+rank, and an $r$-set has rank $r-1$ exactly when it is a
+circuit-hyperplane.  For a distinguished element $x$, the pointed subset
+profile therefore depends only on the ground-set size, the rank, the number
+of circuit-hyperplanes through $x$, and the number avoiding $x$.  It does
+not record how the circuit-hyperplanes through $x$ meet after $x$ is
+removed.  The radius-$r-1$ reliability does record those intersections,
+because it is the probability of the union of their containment events.
+
+Distinguish column $0$ in each of the following matrices; columns $1,\ldots,6$
+are the helpers:
+\[
+ G_{\rm dis}=
+ \begin{pmatrix}
+ 1&1&1&1&0&1&1\\
+ 0&3&1&4&0&6&1\\
+ 0&2&3&2&1&5&0\\
+ 0&1&4&1&2&4&3
+ \end{pmatrix},
+ \qquad
+ G_{\rm ov}=
+ \begin{pmatrix}
+ 1&1&1&1&1&1&1\\
+ 0&1&2&5&4&0&6\\
+ 0&4&2&0&2&1&2\\
+ 0&4&1&6&4&5&4
+ \end{pmatrix}.
+\]
+All entries and determinants below are in $\F_7$.  Every three-column set
+is independent.  The dependent four-column sets are, respectively,
+\[
+ \{0145,0236,2345\},
+ \qquad
+ \{0123,0256,3456\}.
+\]
+Here, for example, $0145$ denotes $\{0,1,4,5\}$.  For a compact complete
+minor check, order the four-subsets lexicographically as
+\[
+\begin{split}
+&0123,0124,0125,0126,0134,0135,0136,0145,0146,0156,\\
+&0234,0235,0236,0245,0246,0256,0345,0346,0356,0456,\\
+&1234,1235,1236,1245,1246,1256,1345,1346,1356,1456,\\
+&2345,2346,2356,2456,3456.
+\end{split}
+\]
+The corresponding determinants are
+\[
+\begin{split}
+G_{\rm dis}:{}&
+5,3,3,5,4,4,1,0,5,5,2,5,0,6,5,2,1,1,6,4,\\
+&1,6,6,3,4,6,4,6,5,2,0,1,6,3,4,\\
+G_{\rm ov}:{}&
+0,2,5,1,2,5,1,5,2,6,1,6,4,4,5,0,5,4,4,5,\\
+&1,6,4,2,2,4,3,1,1,3,6,2,2,6,0.
+\end{split}
+\]
+Each triple extends to a displayed nonzero minor, and each set of at least
+five columns contains one.  Hence this list determines every subset rank.
+
+Both matroids are rank-four sparse paving matroids with three
+circuit-hyperplanes, two through the distinguished column and one avoiding
+it.  The preceding sparse-paving count therefore gives, for both systems,
+\[
+\begin{split}
+T(X,Y,Z)={}&(X-1)^3Z+6(X-1)^2Z+15(X-1)Z+2(X-1)\\
+&+18Z+(Y-1)Z+14+6(Y-1)+(Y-1)^2.
+\end{split}
+\]
+Equivalently, their complete successful-set enumerators are both
+\[
+ 2u^3+14u^4+6u^5+u^6.
+\]
+
+At radius three, however, the minimal repairs are
+\[
+ \{145,236\}\quad\hbox{for }G_{\rm dis},
+ \qquad
+ \{123,256\}\quad\hbox{for }G_{\rm ov}.
+\]
+The first pair is disjoint and the second pair meets in helper $2$.
+Inclusion--exclusion under homogeneous survival consequently gives
+\[
+ R_{\rm dis}^{(\leq3)}(s)=2s^3-s^6,
+ \qquad
+ R_{\rm ov}^{(\leq3)}(s)=2s^3-s^5.
+\]
+The pointed polynomials agree while the filtered curves do not.
+\end{proof}
+
+The retained field-nine harmonic computation gives a geometric instance of
+the same boundary: six-element circuits in a rank-five code add five-helper
+repairs beyond the classified radius-four port.  It illustrates the effect
+but is not evidence for Proposition~\ref{prop:filtration-boundary}.
 
 \section{Geometric flagships}
 \label{sec:flagships}
