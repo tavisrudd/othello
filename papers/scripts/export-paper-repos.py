@@ -112,6 +112,8 @@ def normalized_identity(value: str) -> str:
 
 
 def safe_relative(value: str, where: str) -> PurePosixPath:
+    if not isinstance(value, str):
+        raise Refused(f"{where} must be a string, got {value!r}")
     path = PurePosixPath(value)
     if path.is_absolute() or not path.parts or any(part in ("", ".", "..") for part in path.parts):
         raise Refused(f"{where} must be a nonempty normalized relative path: {value!r}")
@@ -278,17 +280,25 @@ def plan_repository(
     }
 
 
-def command_plan(args: argparse.Namespace) -> int:
-    commit = resolve_commit(args.source_ref)
+def build_plan(source_ref: str, repository: str | None = None) -> dict[str, Any]:
+    commit = resolve_commit(source_ref)
     papers = registry_index(load_toml(commit, PAPER_REGISTRY))
     repositories = validate_map(load_toml(commit, REPOSITORY_MAP), papers)
+    if repository is not None:
+        repositories = [row for row in repositories if row["name"] == repository]
+        if not repositories:
+            raise Refused(f"no mapped repository named {repository!r}")
     plans = [plan_repository(commit, row, papers) for row in repositories]
-    document = {"schema_version": 1, "source_commit": commit, "repositories": plans}
+    return {"schema_version": 1, "source_commit": commit, "repositories": plans}
+
+
+def command_plan(args: argparse.Namespace) -> int:
+    document = build_plan(args.source_ref, args.repository)
     if args.json:
         print(json.dumps(document, indent=2, sort_keys=True))
     else:
-        print(f"source_commit={commit}")
-        for item in plans:
+        print(f"source_commit={document['source_commit']}")
+        for item in document["repositories"]:
             print(
                 f"{item['name']}: {item['disposition']} mains={len(item['main_sources'])} "
                 f"files={item['files']} bytes={item['bytes']} "
@@ -298,13 +308,52 @@ def command_plan(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_audit(args: argparse.Namespace) -> int:
+    document = build_plan(args.source_ref, args.repository)
+    findings = [
+        {"repository": item["name"], **finding}
+        for item in document["repositories"]
+        for finding in item["reference_findings"]
+    ]
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "source_commit": document["source_commit"],
+                    "findings": findings,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+    else:
+        for finding in findings:
+            print(
+                f"{finding['repository']}: {finding['code']} "
+                f"{finding['path']}:{finding['line']}"
+            )
+        print(f"findings={len(findings)}")
+    return 1 if findings else 0
+
+
+def add_common_arguments(command: argparse.ArgumentParser) -> None:
+    command.add_argument("--source-ref", default="HEAD")
+    command.add_argument("--repository")
+    command.add_argument("--json", action="store_true")
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     subparsers = result.add_subparsers(dest="command", required=True)
     plan = subparsers.add_parser("plan", help="read-only inventory from an immutable Git tree")
-    plan.add_argument("--source-ref", default="HEAD")
-    plan.add_argument("--json", action="store_true")
+    add_common_arguments(plan)
     plan.set_defaults(function=command_plan)
+    audit = subparsers.add_parser(
+        "audit", help="fail when selected immutable source blobs contain private-repository coupling"
+    )
+    add_common_arguments(audit)
+    audit.set_defaults(function=command_audit)
     return result
 
 
