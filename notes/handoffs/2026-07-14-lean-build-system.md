@@ -208,7 +208,7 @@ counts, package splits, and blockers are in `../2026-07-26-c287-paper-intake-ref
 snapshot, deduplicates public-prose review across the full source union by path and hash, then
 constructs and validates resumable incremental candidate commits.
 The independent C684 paper-extraction lane has clean-room validated the AME--LU and Beyond4 paper
-payloads at source checkpoint `040801bea1ebb1984e07deee2af2bfba1fa8aa01`; their paper-only
+payloads at source checkpoint `e4cc0b0b6ea20840718edac62873806091fc703a`; their paper-only
 verifiers deliberately tolerate an absent external Lean companion while preserving stronger
 source-closure checks whenever that companion is present.
 Commit-scoped trust, axiom, and clean-replay evidence is never reused by file hash; `main` and each

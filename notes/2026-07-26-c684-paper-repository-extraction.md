@@ -355,7 +355,8 @@ Then:
   release-planning files explicit exclusions. Seventeen retained evidence artifacts have semantic
   filenames, and every public command, manifest, certificate, generator, and README is free of
   task IDs and private-note or monorepo-root dependencies.
-- The Beyond4 sweep assigns ten private review, ledger, cover-letter, checklist, and revision files
+- The Beyond4 sweep assigns twelve private review, ledger, signoff, obsolete extraction-tool,
+  cover-letter, checklist, and revision files
   explicit exclusions. Thirty retained R5/R6/R7 and stable-component artifacts have semantic
   filenames. Its public bundle tool no longer has a private-monorepo `--build` mode: `--write`
   records the present standalone evidence tree and `--check` verifies it. The top-level verifier
@@ -364,7 +365,7 @@ Then:
 - The completed AME--LU source-tree validation passes `make check`, the 17-artifact aggregate
   evidence replay (eight replay bundles), and the release-manifest verifier. Its rebuilt main PDF
   is 30 pages.
-- The completed Beyond4 source-tree validation passes `make check tit-check`, the 47-artifact
+- The completed Beyond4 source-tree validation passes `make check tit-check`, the 45-artifact
   package verifier, classification-record and manuscript-table checks, the full R5--R7 aggregate
   replay (including independent arithmetic and direct-locus replays), and both stable-component
   certificate checks. Its rebuilt preprint is 30 pages and its TIT variant is 22 pages.
@@ -378,12 +379,16 @@ Then:
   external formal companion, while still validating all 83 formal artifacts when present. The
   export verifier ignores only its declared generated filename/directory classes and continues to
   reject arbitrary extra files.
-- Exact final source checkpoint `040801bea1ebb1984e07deee2af2bfba1fa8aa01` materializes 43-file
-  AME--LU and 85-file Beyond4 candidates with zero audit findings. Their export-manifest SHA-256
-  values are respectively `e5c3c920e20123aa6e7f0107c77f00a6062faaf8eb3d1d5c2ce40f15ee8911e3`
-  and `714fd5598339adb1a53a242860967e033a21f19690c3fcfc29f044665897bef8`.
-  Excluding generated provenance, all 41 AME--LU and 83 Beyond4 retained payload files are
-  byte-identical to the clean-room candidates that passed the builds and full aggregate replays.
+- Exact final source checkpoint `e4cc0b0b6ea20840718edac62873806091fc703a` materializes 43-file
+  AME--LU and 83-file Beyond4 candidates with zero audit findings. Their export-manifest SHA-256
+  values are respectively `14d9cb04aa4c831ec8a40cd2846e2d187b0c19d4b328ba8e5bf5d964bc1197eb`
+  and `a88e1c3707158e40c6a7807acf9f0c3d7fbda09254b67906360316e19477b39b`.
+  Excluding generated provenance, all 41 AME--LU payload files are byte-identical to its
+  clean-room full-replay candidate. All thirty Beyond4 computational evidence files are
+  byte-identical to its clean-room full-aggregate-replay candidate; the final candidate also
+  passes the reduced 45-artifact package check, both builds, and post-build manifest verification.
+  A targeted scan of both final candidates finds no task IDs, private-note paths, excluded process
+  filenames, local-home paths, or private monorepo paper paths, including in generated provenance.
 - The Node Kayles task-ID findings are rendered, because the manuscript sets
   `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
   polyhedral integration, not merely editorial reminders. The repository is therefore gated until
