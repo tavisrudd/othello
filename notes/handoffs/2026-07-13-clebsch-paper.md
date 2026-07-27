@@ -552,6 +552,31 @@ paper remains available here only through the user's page images, and the
 broader databases remain uncovered, so novelty and manuscript promotion
 are not yet claimed.
 
+C682's beyond-threefold `ej` pass now places TR in a precise
+transvectant-isotropic ladder.  For odd \(r\), the rank-two locus
+\[
+X_{m,r}=\{E\in Gr(2,\operatorname{Sym}^m):(E,E)_r=0\}
+\]
+has expected dimension \(2r-3\) and anticanonical index \(2r-m\).
+The two uniform smooth Fano rows are
+\(X_{r,r}=IGr(2,r+1)\) and the codimension-three invariant section
+\(X_{r+1,r}\); all later positive-index rows lose transversality at the
+unique Borel-fixed plane.  Solving the corresponding positive-index
+threefold balance leaves exactly \(Q^3\), \(V_5\), a nontransverse
+genus-eight near-miss, and \(U_{22}\).  Moreover \(V_5\) has the exact
+lower kernel inverse
+\[
+I_6\longmapsto
+\ker((\,\cdot\,,I_6)_2:\operatorname{Sym}^4\to\operatorname{Sym}^6),
+\]
+with rank three, third-transvectant-isotropic kernel of dimension two,
+and annihilator line on all three orbits.  The exact audit is
+`notes/2026-07-26-c682-transvectant-ladder.py`.  The highest-EV
+genuinely beyond-variety continuation is to write the Sarkisov link
+\(V_{22}\dashrightarrow V_5\) between the two kernel transforms and test
+whether it exposes the branch divisor of the rational-quartic
+Hilbert-scheme double cover.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to

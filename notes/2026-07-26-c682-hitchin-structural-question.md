@@ -1604,6 +1604,185 @@ Further elimination would merely rederive the image equations.  The
 highest-value continuations are now a source-deep priority audit and a
 divided-power arithmetic model; QG remains the independent Platinum track.
 
+## Beyond the threefold: the transvectant-isotropic ladder
+
+The global inverse is not merely a second equation for one exceptional
+threefold.  It exposes a small representation-theoretic mechanism that both
+recovers the quintic del Pezzo threefold and continues to higher-dimensional
+Fano varieties.
+
+Let \(U_m=\operatorname{Sym}^m(k^2)\), let \(r\leq m\) be odd, and let
+\[
+ \beta_{m,r}\colon\bigwedge^2U_m\longrightarrow U_{2m-2r},
+ \qquad(p\wedge q)\longmapsto(p,q)_r
+\]
+be the odd transvectant projection.  Define
+\[
+ X_{m,r}=\{E\in\operatorname{Gr}(2,U_m):
+                \beta_{m,r}(\bigwedge^2E)=0\}.
+\]
+This is the linear section of \(\operatorname{Gr}(2,m+1)\) by the
+\(2m-2r+1\) Plücker hyperplanes belonging to
+\(U_{2m-2r}^{\vee}\).  Whenever the section has the expected dimension,
+\[
+ \dim X_{m,r}=2r-3,\qquad
+ -K_{X_{m,r}}=(2r-m)H.                 \tag{16.1}
+\]
+Thus \(r\leq m<2r\) is the positive-index range.
+
+There are two uniform smooth rows.  If \(m=r\), the top transvectant is a
+nondegenerate alternating scalar pairing and
+\[
+ X_{r,r}=\operatorname{IGr}(2,r+1),
+\]
+of dimension \(2r-3\) and index \(r\).  If \(m=r+1\), then
+\(X_{r+1,r}\) is the codimension-three
+\(\operatorname{SL}_2\)-invariant linear section of
+\(\operatorname{Gr}(2,r+2)\), of the same dimension and index \(r-1\).
+It is smooth: the unique Borel-fixed plane
+\(\langle x^m,x^{m-1}y\rangle\) has the expected tangent dimension, and
+any nonempty closed invariant singular locus would contain that point.
+This gives an infinite higher-dimensional Fano series.  Its first two
+members at \(r=3\) are
+\[
+ X_{3,3}=Q^3,\qquad X_{4,3}=V_5.
+\]
+
+The other positive-index members of the rank-two series fail already at
+the Borel point.  Exact linearization gives
+\[
+ \dim T_{[\,\langle x^m,x^{m-1}y\rangle\,]}X_{m,r}
+ =2r-3+\max(0,m-r-1).                 \tag{16.2}
+\]
+In particular, the tempting next member
+\(X_{5,3}\), a five-hyperplane section of
+\(\operatorname{Gr}(2,6)\) with the numerical invariants of a genus-eight
+Fano threefold, has tangent dimension \(4\), not \(3\), at its Borel
+point.  The ladder therefore predicts its own nontransverse near-miss
+instead of manufacturing a spurious smooth \(V_{14}\).
+
+More generally, for a \(k\)-plane annihilated by one alternating
+transvectant with output dimension \(a=2m-2r+1\), the expected dimension
+and index are
+\[
+ k(m+1-k)-\binom{k}{2}a,\qquad
+ m+1-(k-1)a.                          \tag{16.3}
+\]
+Solving “expected dimension \(3\), positive index” in characteristic zero
+leaves exactly
+\[
+ (m,k,r)=(3,2,3),(4,2,3),(5,2,3),(6,3,5).
+\]
+The first two are \(Q^3\) and \(V_5\), the third is the nontransverse
+genus-eight near-miss above, and the fourth is the Mukai--Umemura
+threefold.  Hence, within this single-transvectant ansatz, the smooth
+threefold outputs are exactly
+\[
+ Q^3,\quad V_5,\quad U_{22}.
+\]
+This is the cleanest mathematical sense in which the Mukai--Umemura
+construction belongs to a structure larger than their classification.
+
+### The lower kernel inverse on \(V_5\)
+
+The \(V_5\) row carries a literal lower-degree analogue of the dodecic
+inverse.  Put
+\[
+ I_6=xy(x^4-y^4)\in U_6,\qquad
+ T^{(2)}_I\colon U_4\longrightarrow U_6,\quad
+ p\longmapsto(p,I)_2.
+\]
+At the octahedral sextic,
+\[
+ \operatorname{rank}T^{(2)}_{I_6}=3,\qquad
+ \ker T^{(2)}_{I_6}
+ =\langle x^2y^2,\ x^4+y^4\rangle,
+\]
+and the two kernel generators have zero third transvectant.  On the open,
+surface, and closed-curve orbit representatives \(I_6\),
+\(x^5y\), and \(x^6\), respectively, the operator rank is uniformly
+\(3\), while the common-annihilator map from \(U_6\) has rank uniformly
+\(6\).  Thus its annihilator is a line on every orbit.
+
+The standard representation decomposition
+\[
+ \bigwedge^2U_4=U_6\oplus U_2
+\]
+identifies the third-isotropic Grassmannian section with
+\[
+ V_5=\operatorname{Gr}(2,U_4)\cap\mathbf P(U_6)
+    =\overline{\operatorname{SL}_2\cdot[I_6]}
+       \subset\mathbf P(U_6).
+\]
+Consequently the second-transvectant kernel and common-annihilator-line
+constructions are inverse on \(V_5\), including its boundary.  This is
+the \(V_5\) version of the \(U_{22}\) theorem, with the sequence
+\[
+ (\deg I,\dim\ker,r_{\rm operator},r_{\rm isotropy})
+ =(6,2,2,3)\quad\leadsto\quad(12,3,3,5).
+\]
+The recent explicit comparison of the Plücker and sextic orbit
+coordinates in Chung--Kim--Kim makes the ambient linear identification
+primary-source visible; the compact transvectant formulation above is
+an exact reformulation and should not yet be advertised as new.
+
+The exact audit is
+`notes/2026-07-26-c682-transvectant-ladder.py`.  It independently checks
+the three \(V_5\) operator/annihilator rows, the four positive-index
+threefold balances, and formulas (16.1)--(16.2) through order \(11\).
+The artifact has 10138 bytes and SHA-256
+`fdbd6a0016f49c9d88a77c696a6b39771a37763e4f895d169e15280032f425b4`.
+Replay with
+
+```text
+python3 notes/2026-07-26-c682-transvectant-ladder.py
+```
+
+The strongest beyond-threefold research directions are now:
+
+1. classify all transvectant-isotropic Grassmannians with a
+   constant-rank annihilator-line inverse, rather than merely all their
+   dimension balances;
+2. study the smooth higher-dimensional series \(X_{r,r}\) and
+   \(X_{r+1,r}\), especially their derived categories and rational-curve
+   spaces;
+3. express the Sarkisov link \(V_{22}\dashrightarrow V_5\) directly
+   between the two kernel transforms.  This is timely because
+   Chung--Kim's 2026 construction sends the Hilbert scheme of rational
+   quartics on \(V_{22}\) generically two-to-one to
+   \(\operatorname{Sym}^4\mathbf P^1\cong\mathbf P^4\), while the
+   corresponding \(V_5\) Hilbert scheme is already a
+   \(\operatorname{Gr}(3,5)\)-bundle over \(\mathbf P^2\).
+
+The last item is the highest-EV route genuinely beyond the varieties
+themselves: the kernel coordinates may make the double cover and its
+branch divisor invariant-theoretic.
+
+Source depth for this continuation is partial primary full text, not a
+priority audit.  Chung--Kim--Kim, *Quartic curves in the quintic del Pezzo
+threefold*, arXiv:2505.09130v2, Introduction and Section 2.1 were read
+from the TeX source and cached PDF; PDF SHA-256
+`1468a90a5ef4d39f7fa90ce5d216e761124b3d6561c637b9afe493a57cb8ee87`.
+That section explicitly gives both
+\(V_5=\operatorname{Gr}(2,U_4)\cap\mathbf P(U_6)\) and
+\(\overline{SL_2\cdot[xy(x^4-y^4)]}\), together with their coordinate
+change.  Chung--Kim, *A remark on rational quartic curves in prime Fano
+threefolds of degree 22*, arXiv:2606.18102, Introduction, Theorem 1.1,
+and Sections 2.1--2.2 were read from the primary HTML/PDF; PDF SHA-256
+`b0741c142c4f6613350817fb81df12916f4ff1e79b54cdc4c52d6a562859472f`.
+It supplies the \(V_{22}\dashrightarrow V_5\) Sarkisov/Hilbert-scheme
+context, not a transvectant comparison.
+
+The `tt` stress test is deliberately restrictive.  The dimension/index
+ladder is a useful organizing theorem, but by itself is Gold exposition,
+not a Platinum paper: the \(V_5\) coordinate correspondence is classical,
+and the higher-dimensional rows are special linear sections whose basic
+geometry may already be implicit in representation-theoretic
+Grassmannian literature.  A genuinely new theorem must add either a
+classification of constant-rank kernel inverses or a concrete consequence
+for the \(V_{22}\)--\(V_5\) Sarkisov/Hilbert-scheme correspondence.  No
+novelty claim is made for the ladder in the present bounded pass.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -1625,6 +1804,15 @@ divided-power arithmetic model; QG remains the independent Platinum track.
 - **Settled geometrically:** this inverse is the regular projection of the
   anticanonical \([1+\Phi_{12}]\)-orbit model from its invariant
   coordinate; the image has degree \(22\).
+- **Settled beyond \(U_{22}\):** \(V_5\) has the parallel
+  second-transvectant rank-three/kernel-two inverse, and the
+  single-transvectant positive-index threefold balance has only the four
+  numerical rows \(Q^3,V_5\), the nontransverse genus-eight near-miss,
+  and \(U_{22}\).
+- **Settled in higher dimension:** the rank-two isotropic loci
+  \(X_{r,r}=\operatorname{IGr}(2,r+1)\) and \(X_{r+1,r}\) are smooth Fano
+  varieties of dimension \(2r-3\), while all later positive-index rows
+  already lose transversality at the Borel-fixed plane.
 - **Settled on boundary representatives:** both lower-dimensional orbit
   types retain rank four and have exactly Hitchin's isotropic weight-space
   kernels; rank alone has one extra tangent direction at the closed orbit.
@@ -1700,6 +1888,10 @@ divided-power arithmetic model; QG remains the independent Platinum track.
 - **Open:** determine whether the odd determinant character of the third
   transvectant is the same geometric orientation character as Hitchin's
   incidence involution, rather than merely an analogous sign.
+- **Open:** write the Sarkisov link \(V_{22}\dashrightarrow V_5\)
+  directly between the dodecic and sextic kernel transforms and test
+  whether it exposes the branch divisor of the rational-quartic
+  Hilbert-scheme double cover.
 - **Open:** contract the C651 finite matching tensor through the primitive
   mod-\(11\) map and fix the resulting cubic scalar.
 - **Open:** identify the relevant Paper II orientation cover over the now
