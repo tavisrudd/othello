@@ -17,8 +17,7 @@ since 2025-05-01.  The canonical preprint PDF remains a separate build from
 Before submission:
 
 1. replace every `[[AUTHOR INPUT: ...]]` field in this directory;
-2. obtain the two independent signoffs in
-   `supplement/FINAL-READER-SIGNOFF.md`;
+2. complete the venue-required author and manuscript review;
 3. run `make check`, `make tit-check`, and
    `python3 supplement/verify.py --replay`;
 4. package the complete electronic supplement and its

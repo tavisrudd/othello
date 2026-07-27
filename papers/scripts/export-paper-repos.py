@@ -75,6 +75,7 @@ PROCESS_PATH_RE = re.compile(
     r"claim-proof-novelty-ledger|"
     r"formal-statement-adequacy|"
     r"formalization-ledger|"
+    r"final-reader-signoff|"
     r"literature-audit|"
     r"proof[_-]ledger|"
     r"public-export|"
@@ -611,10 +612,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
         ],
-        "excluded_paths": [
-            {"path": path, "reason": reason}
-            for path, reason in sorted(path_exclusions.items())
-        ],
+        "excluded_path_count": len(path_exclusions),
         "excluded_release_outputs": sorted(release_outputs),
         "files": sorted(manifest_files, key=lambda item: item["path"]),
     }

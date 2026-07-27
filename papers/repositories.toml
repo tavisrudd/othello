@@ -98,6 +98,14 @@ path = "verification-map.md"
 reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
 
 [[repository.exclude_path]]
+path = "supplement/FINAL-READER-SIGNOFF.md"
+reason = "private pre-release reader workflow, not part of the public reproducibility supplement"
+
+[[repository.exclude_path]]
+path = "supplement/prepare_release_export.py"
+reason = "superseded private-monorepo extraction tool; standalone exports are produced by the portfolio exporter"
+
+[[repository.exclude_path]]
 path = "submission/tit-cover-letter.md"
 reason = "private editor correspondence, not part of the public manuscript repository"
 

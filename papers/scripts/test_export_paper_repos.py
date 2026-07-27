@@ -213,8 +213,8 @@ class ExportPlannerTests(unittest.TestCase):
         )
 
     def test_detects_internal_process_file_by_path(self) -> None:
-        (self.fx.root / "papers/demo/second-draft-fix-plan.md").write_text("private\n")
-        run(self.fx.root, "git", "add", "papers/demo/second-draft-fix-plan.md")
+        (self.fx.root / "papers/demo/FINAL-READER-SIGNOFF.md").write_text("private\n")
+        run(self.fx.root, "git", "add", "papers/demo/FINAL-READER-SIGNOFF.md")
         run(self.fx.root, "git", "commit", "-qm", "process file")
         commit = self.fx.output("git", "rev-parse", "HEAD").strip()
         findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
@@ -223,7 +223,7 @@ class ExportPlannerTests(unittest.TestCase):
             [
                 {
                     "code": "internal-process-file",
-                    "path": "second-draft-fix-plan.md",
+                    "path": "FINAL-READER-SIGNOFF.md",
                     "line": 0,
                 }
             ],
@@ -254,10 +254,8 @@ reason = "private review record"
             commit, "demo-paper", self.fx.root / "excluded"
         )
         self.assertFalse((self.fx.root / "excluded/private-review.md").exists())
-        self.assertEqual(
-            manifest["excluded_paths"],
-            [{"path": "private-review.md", "reason": "private review record"}],
-        )
+        self.assertEqual(manifest["excluded_path_count"], 1)
+        self.assertNotIn("excluded_paths", manifest)
 
     def test_regular_file_exclusion_refuses_main_or_missing_path(self) -> None:
         mapping, papers = self.mapping()

@@ -85,7 +85,6 @@ TOOLCHAIN_LOCKS = (
 PUBLIC_SUPPLEMENT_FILES = (
     ("Bundle verifier", "package_evidence_bundle.py"),
     ("Top-level verifier", "verify.py"),
-    ("Release-export builder", "prepare_release_export.py"),
     ("Classification-record builder", "build_classification_records.py"),
     ("R6 paper-table builder", "build_r6_paper_table.py"),
     ("Classification records", "CLASSIFICATION-RECORDS.json"),
@@ -94,7 +93,6 @@ PUBLIC_SUPPLEMENT_FILES = (
     ("Certificate schema", "CERTIFICATE-SCHEMA.md"),
     ("Reproduction guide", "REPRODUCING.md"),
     ("Lean statement-adequacy source", "LEAN-STATEMENTS.md"),
-    ("Independent final-reader signoff", "FINAL-READER-SIGNOFF.md"),
 )
 
 AUXILIARY_COPIES = (

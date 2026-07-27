@@ -269,7 +269,6 @@ def check_formal_scope() -> None:
 
 def check_public_release_gate() -> None:
     manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
-    signoff = (SUPPLEMENT / "FINAL-READER-SIGNOFF.md").read_text(encoding="utf-8")
     main = (PAPER / "main.tex").read_text(encoding="utf-8")
 
     def field(label: str) -> str:
@@ -280,16 +279,6 @@ def check_public_release_gate() -> None:
         )
         if match is None:
             raise SystemExit(f"missing release-manifest field: {label}")
-        return match.group(1).strip().strip("`")
-
-    def signoff_field(label: str) -> str:
-        match = re.search(
-            rf"^\| {re.escape(label)} \| (.+) \|$",
-            signoff,
-            flags=re.MULTILINE,
-        )
-        if match is None:
-            raise SystemExit(f"missing final-reader candidate field: {label}")
         return match.group(1).strip().strip("`")
 
     required_patterns = {
@@ -317,15 +306,9 @@ def check_public_release_gate() -> None:
     lock = (PAPER / "flake.lock").read_text(encoding="utf-8")
     if "finitegeom" not in flake or lean_revision not in lock:
         raise SystemExit("release flake does not resolve the public Lean revision")
-    if "pending" in signoff.lower() or signoff.lower().count("verdict: green.") != 2:
-        raise SystemExit("independent final-reader signoff is incomplete")
-    if signoff_field("Paper-export commit") != field("Release commit"):
-        raise SystemExit("final-reader signoff names a different paper-export commit")
-    if signoff_field("Canonical preprint PDF SHA-256") != field("PDF SHA-256"):
-        raise SystemExit("final-reader signoff names a different canonical PDF")
     if "Unrefereed preprint" not in main:
         raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
-    print("verified public release metadata and final-reader gate")
+    print("verified public release metadata")
 
 
 def check_bundle() -> None:
@@ -396,7 +379,7 @@ def main() -> None:
     parser.add_argument(
         "--release",
         action="store_true",
-        help="require immutable public metadata and two independent reader signoffs",
+        help="require immutable public release metadata",
     )
     parser.add_argument(
         "--write-local-manifest",

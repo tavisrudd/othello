@@ -28,7 +28,6 @@ paper-local checks.  See `supplement/REPRODUCING.md` and
   replays.
 - `LEAN-STATEMENTS.md` identifies the exact formal declarations and every
   nonformal hypothesis.
-- `FINAL-READER-SIGNOFF.md` records the two independent release reviews.
 
 ## Setup and execution
 
