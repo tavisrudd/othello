@@ -2228,6 +2228,247 @@ branch equation can still support a strong paper.  Without one of those
 two upgrades, this remains an elegant note rather than the
 Compositio/JAG-level mechanism being targeted.
 
+## 18. Which other instances matter?
+
+The first distinction is essential.  The *global* form is general, but the
+local monomial ideal is not.  For every smooth prime Fano threefold
+\(X\) of genus \(12\) and every line \(L\subset X\), double projection is
+the complete system
+\[
+ |H_X-2L|
+ \tag{18.1}
+\]
+and gives the Kuznetsov--Prokhorov--Shramov link to \(V_5\).  By contrast,
+\[
+ (u^2,uv,v^5),\qquad rB=v^3A
+ \tag{18.2}
+\]
+was computed in the pointed Mukai--Umemura chart.  It records the
+special normal bundle
+\(\mathcal O(1)\oplus\mathcal O(-2)\), the exceptional
+\(\mathbb F_3\), and the unique width-three pagoda.  It must not be
+advertised as the generic local form of (18.1).
+
+This leaves the following exact instance landscape.
+
+| instance | theorem-level structure | what is special |
+|---|---|---|
+| an arbitrary \((V_{22},L)\) | the line-centered link (18.1) lands on \(V_5\) | control family; no Clebsch symmetry or forced chart (18.2) |
+| \((X^{\rm MU},L)\) | every line is special; no two lines meet; the reduced line family is one \(PGL_2\)-orbit | the Hilbert scheme of lines is a double conic, and every pointed link is transported from the single formula (17.4) |
+| the additive \(X^{\rm a}\) and multiplicative \(X^{\rm m}(u)\) cases | KPS give distinguished special-line links with the same unique-flop geometry | the center quintic carries respectively unipotent or toric symmetry, so these are the nearest non-\(PGL_2\) tests of the polar formula |
+| \((V_{22},C)\) for a smooth conic | Kuznetsov--Prokhorov give a second link \(V_{22}\dashrightarrow Q^3\), with a rational sextic center on the quadric | for \(X^{\rm MU}\), all smooth conics are \(PGL_2\)-equivalent; for a non-MU \(G_m\)-threefold there is a unique invariant smooth conic |
+| \(Q^3,V_5,U_{22}\) | these are exactly the three smooth positive-index threefolds in the single-transvectant isotropic balance | the known line and conic links make \(U_{22}\) the top vertex of a two-edge \(V_5\leftarrow U_{22}\to Q^3\) diagram |
+
+Here the conic-centered link is given on the blown-up source by
+\(|H-2E_C|\); its inverse on the quadric is
+\(|5H_Q-2E_\Gamma|\), with \(\Gamma\subset Q^3\) a quadratically normal
+rational sextic.  In the \(G_m\)-family the Mukai--Umemura member occurs
+at the enhanced-symmetry parameter \(u=-1/4\).  These statements are
+published geometry, not consequences inferred from (17.4): see
+Kuznetsov--Prokhorov, arXiv:1711.08504, Theorem 2.2 and Sections 3--4,
+and KPS, arXiv:1605.02010, Section 5.4.
+
+### What the Clebsch point opens
+
+The special value of the Clebsch/Mukai--Umemura instance is not merely
+that its equations are pretty.  Four degeneracies coincide there:
+
+1. the automorphism group jumps to \(PGL_2\);
+2. the line scheme becomes a nonreduced double conic;
+3. all reduced lines and all smooth conics become single homogeneous
+   families; and
+4. the pointed line link acquires the explicit width-three chart (18.2).
+
+That coincidence makes five continuations concrete.
+
+1. **A kernel/Sarkisov three-vertex correspondence.**  Write the
+   conic-centered \(U_{22}\dashrightarrow Q^3\) link in binary-form
+   covariants, alongside the proved
+   \(U_{22}\dashrightarrow V_5\) seventh polar and the lower
+   \(V_5\) kernel inverse.  The theorem target is a commuting diagram of
+   tautological bundles on the three smooth nodes
+   \(Q^3,V_5,U_{22}\), not an unsupported direct birational edge
+   \(Q^3\dashrightarrow V_5\).
+2. **Unfold the width-three pagoda.**  Follow the local Rees equation
+   \(rB=v^3A\) through the \(G_m\)-pencil approaching
+   \(u=-1/4\).  The natural conjecture is that the Clebsch pagoda is a
+   collision of ordinary flop data.  The kill test is an explicit
+   relative Rees algebra: if its nearby fibres do not recover the
+   published ordinary-line link, the collision interpretation is false.
+3. **Exploit the quartic branch symmetry.**  Chung--Kim's generically
+   two-to-one map
+   \(\mathcal H_4(V_{22})\dashrightarrow
+   \operatorname{Sym}^4\Gamma\cong\mathbf P^4\) becomes a binary-quartic
+   invariant problem at the Clebsch point.  The \(PGL_2\)-action sharply
+   limits the possible branch equation; (18.2) supplies boundary
+   multiplicities that the abstract link does not see.  This remains
+   the highest-payoff concrete calculation.
+4. **Differentiate the double line conic.**  Apply (17.4) not only to a
+   reduced moving line but to the nilpotent normal direction in its
+   Hilbert double structure.  A successful calculation should recover
+   the first-order motion of the center quintic and explain
+   representation-theoretically why the transverse \(v^2\) term is
+   missing and contact is delayed to \(v^5\).
+5. **Build the correct arithmetic form.**  The recent classification of
+   large-automorphism genus-\(12\) Fanos shows that the \(PGL_2\) and
+   \(G_a\) types exist precisely away from characteristics \(2,5\), while
+   the present ordinary-derivative tensor has extra bad primes.  A
+   divided-power/Weyl transvectant over \(\mathbf Z[1/10]\) should remove
+   those normalization artifacts.  It cannot be phrased as one smooth
+   \(PGL_2\)-symmetric model over all of \(\mathbf Z\): the same source
+   proves that no such positive-dimensional-automorphism model exists.
+
+The arithmetic boundary in item 5 is from
+Ito--Kanemitsu--Takamatsu--Tanaka, arXiv:2601.10106.  Their finite-field
+classification also supplies a testing population of \(PGL_2\), \(G_a\),
+and \(G_m\) forms rather than a single characteristic-zero example.
+
+### `ej`+`tt` closeout for the instance landscape
+
+The cheapest decisive experiment is item 2, because the \(G_m\)-pencil
+already supplies the parameter and (18.2) supplies the special fibre.
+The most valuable theorem if successful is item 3, because it converts
+the explicit pointed graph into a new equation on a moduli/Hilbert
+space.  Item 1 is the cleanest conceptual synthesis: the transvectant
+ladder has exactly the three smooth threefold nodes, and published
+Sarkisov links already connect the top node to both lower nodes.
+
+The strongest organizing conjecture is therefore that the
+Mukai--Umemura point is a maximally symmetric collision at which the
+three-node kernel ladder, the line and conic Sarkisov links, the
+nonreduced line conic, and the width-three pagoda are different shadows
+of one equivariant correspondence.  Only the individual nodes, the two
+links, and the pointed line chart are currently proved.  The
+``one correspondence'' assertion is a research target, not a theorem or
+a novelty claim.
+
+## 19. The opposite code objects
+
+There is an exact code-theoretic shadow of the
+\(V_5\leftarrow U_{22}\) edge.  It is stronger than the loose analogy
+``kernel equals parity check.''
+
+For \(0\le d\le10\), evaluate
+\[
+ U_d=H^0(\mathbf P^1,\mathcal O(d))
+\]
+on all twelve points of \(\mathbf P^1(\mathbf F_{11})\), using the usual
+homogeneous normalization at infinity.  The resulting projective
+Reed--Solomon code is
+\[
+ R_d=[12,d+1,12-d]_{11}.
+ \tag{19.1}
+\]
+Root counting proves the distance, and the residue pairing on
+\(\mathbf P^1\) gives, up to the standard coordinate multipliers,
+\[
+ R_d^\perp\simeq R_{10-d}.
+ \tag{19.2}
+\]
+With compatible homogeneous coordinates the relevant three terms may be
+normalized so that
+\[
+\begin{array}{ccl}
+ U_4 &\rightsquigarrow& R_4=[12,5,8]_{11},\\
+ U_5 &\rightsquigarrow& R_5=[12,6,7]_{11},\\
+ U_6 &\rightsquigarrow& R_6=[12,7,6]_{11},
+\end{array}
+\qquad
+ R_4^\perp=R_6,\quad R_5^\perp=R_5.
+\tag{19.3}
+\]
+
+This is exactly the representation sequence visible in the line link:
+
+- the lower kernel model \(V_5\subset\operatorname{Gr}(2,U_4)\) uses
+  \(U_4\);
+- its exceptional center is the normal rational quintic
+  \(\Gamma_\lambda=\{[\lambda m^5]\}\), whose span
+  \(\lambda U_5\) gives \(R_5\); and
+- the upper kernel model
+  \(U_{22}\subset\operatorname{Gr}(3,U_6)\) uses \(U_6\).
+
+Thus, specifically at \(q=11\), the two ambient modules on opposite sides
+of the pointed kernel link give dual MDS codes, while the center gives the
+self-dual rate-half MDS code between them.  The equality is
+field-specific: only \(q+1=12\) makes dimensions \(5\) and \(7\) dual and
+dimension \(6\) fixed.  It is therefore a real explanation for the
+arithmetic prominence of \(11\), not a general slogan about rational
+normal curves.
+
+The original Clebsch code fits one level lower.  Its legal-extension/deep-
+hole port is the complete conic
+\[
+ R_2=[12,3,10]_{11},
+ \tag{19.4}
+\]
+whereas the six-coordinate seed is
+\([6,3,4]_{11}\).  Its two golden forms satisfy
+\[
+ C_t^\perp=C_{1-t}
+ \tag{19.5}
+\]
+up to the fixed marked equivalence.  Hence duality exchanges the two
+golden sheets on the seed, but becomes internal self-duality on the
+quintic-center code \(R_5\).  In the AME dictionary these give,
+respectively, a stabilizer \(\operatorname{AME}(6,11)\) state and the
+extended-GRS \(\operatorname{AME}(12,11)\) state.  No canonical map
+between those two states has yet been constructed.
+
+This also clarifies which apparent code translations are false.  A point
+of \(\operatorname{Gr}(2,U_4)\) or
+\(\operatorname{Gr}(3,U_6)\) is not intrinsically an MDS code merely by
+reading binary-form coefficients as coordinate positions.  MDS enters
+through evaluation on the twelve rational points of \(\mathbf P^1\), or
+through a separately specified arc.  The Fano isotropy equations and the
+MDS minor conditions live on different spaces until that evaluation
+functor is supplied.
+
+### What the code lens predicts
+
+1. **The center should be the fixed object of the duality.**  A
+   base-change-compatible version of (17.4) ought to carry the
+   \(U_4/U_6\) dual pairing to the self-dual \(U_5\) center.  Proving this
+   with the residue pairing would turn (19.3) from an object-level
+   coincidence into a natural transformation.
+2. **Scheme structure should correspond to coefficient data, not
+   support data.**  On the code side, the complete coefficient repair
+   port spans \(C^\perp\), while its support-only projection is just the
+   uniform matroid and forgets the Clebsch moduli.  On the geometric side,
+   the reduced base line likewise misses the information retained by
+   \((u^2,uv,v^5)\).  The parallel is exact at the two endpoints, but no
+   functor identifying the coefficient port with the Rees algebra is yet
+   proved.
+3. **The conic link has a decisive MDS test.**  The rational sextic center
+   of \(U_{22}\dashrightarrow Q^3\) is defined by a five-dimensional
+   subsystem of \(U_6\).  Its twelve rational values therefore give a
+   \([12,5,d]_{11}\) subcode of \(R_6\), with \(6\le d\le8\).
+   Computing whether \(d=8,7\), or \(6\), and locating its minimum words,
+   will say whether the second Sarkisov edge produces an MDS, NMDS, or
+   defect-two opposite object.  This is now the cheapest finite
+   experiment in the three-vertex programme.
+4. **Gale/Fourier is the genuine opposite operation.**  On the Clebsch
+   seed, code duality is simultaneously six-point Gale association,
+   golden Galois conjugation, and local Fourier equivalence of the
+   equal-phase AME states.  The open QG problem asks whether, generically,
+   these are the only extra identifications made by the
+   MDS-to-AME functor.
+
+The resulting exact code diagram is
+\[
+\begin{array}{ccccc}
+R_4=[12,5,8] &\xleftrightarrow{\ \perp\ }&
+R_6=[12,7,6],\\[2mm]
+&R_5=[12,6,7]=R_5^\perp&
+\end{array}
+\tag{19.6}
+\]
+with \(R_5\) supplied geometrically by the Sarkisov center.  The strongest
+new theorem target is that the pointed kernel link *categorifies* this
+three-code duality pattern.  At present (19.1)--(19.5) and the geometric
+identification of the three modules are exact; the categorification claim
+is conjectural.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -2270,6 +2511,31 @@ Compositio/JAG-level mechanism being targeted.
   \(\mathcal I_L^2\); after blowing up \(L\), the residual Rees chart is
   \(rB=v^3A\), and the three residual section blowups give the
   width-three Reid pagoda.
+- **Settled at the instance level:** \(|H-2L|\) is the general
+  line-centered construction, whereas \((u^2,uv,v^5)\) is the special
+  Mukai--Umemura local chart.  The additive and multiplicative
+  automorphism strata are the nearest special-line comparisons, and the
+  conic-centered link supplies a second exact edge
+  \(U_{22}\dashrightarrow Q^3\).
+- **Open, with a falsifiable next test:** determine the relative Rees
+  algebra in the \(G_m\)-pencil and decide whether the width-three
+  Mukai--Umemura pagoda is a collision of ordinary flop data.
+- **Open at highest geometric value:** use the \(PGL_2\)-equivariant
+  pointed graph to compute the branch equation of the rational-quartic
+  Hilbert double cover.  The proposed single master correspondence among
+  \(Q^3,V_5,U_{22}\) remains conjectural.
+- **Settled over \(\mathbf F_{11}\) in the code lens:** evaluation of
+  \(U_4,U_5,U_6\) on \(\mathbf P^1(\mathbf F_{11})\) gives
+  \([12,5,8]\), \([12,6,7]\), and \([12,7,6]\) extended GRS codes.  The
+  outer two are dual and the middle one is self-dual; the middle code is
+  exactly the normal-quintic Sarkisov center.
+- **Open on the opposite conic edge:** determine the distance and weight
+  geometry of the \([12,5,d]\) code obtained from the quadratically
+  normal rational sextic center on \(Q^3\).
+- **Open categorically:** construct, or falsify, a natural transformation
+  identifying the pointed kernel link with the
+  dual-pair/self-dual-midpoint code diagram.  Object-level dimensions and
+  dualities alone do not prove such a functor.
 - **Settled in higher dimension:** the rank-two isotropic loci
   \(X_{r,r}=\operatorname{IGr}(2,r+1)\) and \(X_{r+1,r}\) are smooth Fano
   varieties of dimension \(2r-3\), while all later positive-index rows

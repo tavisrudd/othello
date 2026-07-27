@@ -600,6 +600,45 @@ Sarkisov-kernel bundle.  The next geometric gate is the inverse pointed
 kernel formula, followed by the quartic branch equation; C682 remains
 open until the user closes it.
 
+C682's instance audit separates the universal construction from the
+Clebsch special fibre.  The complete system \(|H-2L|\) is general for a
+line on any smooth \(V_{22}\), but the local ideal
+\((u^2,uv,v^5)\) and width-three pagoda belong to the special
+Mukai--Umemura pointed chart.  The nearest comparisons are the
+distinguished special-line links on the additive and multiplicative
+large-automorphism \(V_{22}\)'s.  A second published link, centered on a
+smooth conic, gives \(V_{22}\dashrightarrow Q^3\); together with the
+line link and the transvectant classification, this places
+\(Q^3,V_5,U_{22}\) in one exact two-edge diagram.  The next cheap
+falsifiable experiment is the relative Rees algebra in the \(G_m\)-pencil
+at its Mukai--Umemura parameter \(u=-1/4\), testing whether the
+width-three pagoda is a collision of ordinary flop data.  The
+highest-payoff calculation remains the \(PGL_2\)-constrained branch
+equation of the rational-quartic Hilbert double cover.  A single
+equivariant master correspondence explaining the three kernel nodes, both
+links, the double conic of lines, and the pagoda is an explicit conjectural
+target, not a proved conclusion.
+
+C682's opposite-code audit finds an exact \(q=11\) midpoint pattern.
+Evaluating the binary-form modules \(U_4,U_5,U_6\) on all twelve points
+of \(\mathbf P^1(\mathbf F_{11})\) gives extended GRS codes
+\[
+ [12,5,8],\qquad[12,6,7],\qquad[12,7,6].
+\]
+The outer codes are dual and the middle code is self-dual.  These are
+precisely the modules of the \(V_5\) kernel model, the normal-quintic
+Sarkisov center \(\lambda U_5\), and the \(U_{22}\) kernel model.  Thus the
+line link has an exact object-level code shadow: a dual MDS pair with a
+rate-half self-dual MDS center, and hence an
+\(\operatorname{AME}(12,11)\) midpoint.  The original Clebsch
+\([6,3,4]_{11}\) seed instead has duality exchanging its two golden
+forms, while its complete legal-extension port is the conic
+\([12,3,10]_{11}\).  No functor from the Sarkisov graph to these code
+objects is yet proved.  The cheapest new finite test is the
+\([12,5,d]\), \(6\le d\le8\), code cut out by the five-dimensional
+sextic system of the conic-centered link; its distance distinguishes MDS,
+NMDS, and defect-two behavior.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
