@@ -1,0 +1,106 @@
+# Standalone release-repository map for C684.
+#
+# This file maps physical manuscript roots to local/GitHub repository identities. It does not
+# authorize remote creation or publication. `papers/scripts/export-paper-repos.py` cross-checks
+# paper IDs, source roots, and entry points against `lean/trust/papers.toml`.
+
+schema_version = 1
+
+[destinations]
+local_root = "~/src/math-papers"
+github_owner = "tavisrudd"
+
+[[repository]]
+name = "ame-lu"
+source = "papers/ame_lu"
+paper_ids = ["ame_lu"]
+disposition = "active"
+
+[[repository]]
+name = "arcs-complete-outside-conic"
+source = "papers/arcs_complete_outside_conic"
+paper_ids = ["arcs_complete_outside_conic"]
+disposition = "gated"
+gate = "wait for the arcs manuscript boundary and Q16 build-sys package identity"
+
+[[repository]]
+name = "beyond4-prs"
+source = "papers/beyond4_prs"
+paper_ids = ["beyond4_prs", "beyond4_prs_submission"]
+disposition = "active"
+
+[[repository]]
+name = "clebsch-factorization"
+source = "papers/clebsch-factorization"
+paper_ids = ["clebsch_factorization"]
+disposition = "active"
+
+[[repository]]
+name = "clebsch-hexagon-code"
+source = "papers/clebsch-hexagon-code"
+paper_ids = ["clebsch_hexagon_code"]
+disposition = "archive"
+
+[[repository]]
+name = "clebsch-passages"
+source = "papers/clebsch-passages"
+paper_ids = ["clebsch_passages"]
+disposition = "active"
+
+[[repository]]
+name = "clebsch-rigidity"
+source = "papers/clebsch-rigidity"
+paper_ids = ["clebsch_rigidity", "clebsch_rigidity_companion"]
+disposition = "active"
+
+[[repository]]
+name = "complete-repair-ports"
+source = "papers/complete-repair-ports"
+paper_ids = ["complete_repair_ports"]
+disposition = "active"
+
+[[repository]]
+name = "continuation-graph-rigidity"
+source = "papers/continuation-graph-rigidity"
+paper_ids = ["continuation_graph_rigidity"]
+disposition = "active"
+
+[[repository.exclude_symlink]]
+path = "2026-07-10-continuation-graph-rigidity-upgrades.md"
+reason = "private research-planning note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-11-continuation-rigidity-audit-scope.md"
+reason = "private audit-scope note, not part of the public manuscript repository"
+
+[[repository]]
+name = "dihedral-schreier-node-kayles"
+source = "papers/dihedral-schreier-node-kayles"
+paper_ids = ["dihedral_schreier_node_kayles"]
+disposition = "active"
+
+[[repository.exclude_symlink]]
+path = "2026-07-04-cayley-nodekayles-outcome-law.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-conic-involution-residual-graphs.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-conic-involution-schreier-graphs.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-dihedral-schreier-node-kayles-submission.md"
+reason = "private submission-planning note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-polyhedral-nk-templates.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository]]
+name = "equivariant-robust-completion"
+source = "papers/equivariant-robust-completion"
+paper_ids = ["equivariant_robust_completion"]
+disposition = "active"
