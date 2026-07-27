@@ -346,6 +346,10 @@ Then:
   `clebsch-factorization` has only 94 flattening rewrites to make in paper-root replay commands.
   Every other mapped root needs a repository-specific content disposition; broad allow rules are
   forbidden.
+- The Node Kayles task-ID findings are rendered, because the manuscript sets
+  `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
+  polyhedral integration, not merely editorial reminders. The repository is therefore gated until
+  those mathematical issues are repaired and the phase-note mechanism can be removed honestly.
 - Replacing `~/src/math-papers/clebsch-passages` with that fresh-history corrected candidate is
   intentionally paused for explicit history-replacement approval. No remote exists, and the
   validated corrected candidate is preserved under the disk-backed C684 cache.

@@ -84,7 +84,8 @@ reason = "private audit-scope note, not part of the public manuscript repository
 name = "dihedral-schreier-node-kayles"
 source = "papers/dihedral-schreier-node-kayles"
 paper_ids = ["dihedral_schreier_node_kayles"]
-disposition = "active"
+disposition = "gated"
+gate = "repair the documented even-h classification error and complete the polyhedral integration before removing rendered phase notes"
 
 [[repository.exclude_symlink]]
 path = "2026-07-04-cayley-nodekayles-outcome-law.md"
