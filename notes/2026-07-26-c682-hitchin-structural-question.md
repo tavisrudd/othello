@@ -2439,14 +2439,11 @@ functor is supplied.
    \((u^2,uv,v^5)\).  The parallel is exact at the two endpoints, but no
    functor identifying the coefficient port with the Rees algebra is yet
    proved.
-3. **The conic link has a decisive MDS test.**  The rational sextic center
-   of \(U_{22}\dashrightarrow Q^3\) is defined by a five-dimensional
-   subsystem of \(U_6\).  Its twelve rational values therefore give a
-   \([12,5,d]_{11}\) subcode of \(R_6\), with \(6\le d\le8\).
-   Computing whether \(d=8,7\), or \(6\), and locating its minimum words,
-   will say whether the second Sarkisov edge produces an MDS, NMDS, or
-   defect-two opposite object.  This is now the cheapest finite
-   experiment in the three-vertex programme.
+3. **The conic link has a defect-two opposite object.**  The rational
+   sextic center of \(U_{22}\dashrightarrow Q^3\) is defined by a
+   five-dimensional subsystem of \(U_6\).  The exact \(q=11\) audit below
+   gives a \([12,5,6]_{11}\) code whose dual is
+   \([12,7,4]_{11}\).  Both Singleton defects are two.
 4. **Gale/Fourier is the genuine opposite operation.**  On the Clebsch
    seed, code duality is simultaneously six-point Gale association,
    golden Galois conjugation, and local Fourier equivalence of the
@@ -2468,6 +2465,135 @@ new theorem target is that the pointed kernel link *categorifies* this
 three-code duality pattern.  At present (19.1)--(19.5) and the geometric
 identification of the three modules are exact; the categorification claim
 is conjectural.
+
+### The conic-edge code is exactly defect two
+
+Kuznetsov--Prokhorov's parametrization of the fixed sextic center is
+\[
+ (t_0:t_1)\longmapsto
+ (t_0^6:t_0^5t_1:t_0^3t_1^3:t_0t_1^5:t_1^6).
+ \tag{19.7}
+\]
+The primary input is arXiv:1711.08504, cached from the version-3 PDF with
+SHA-256
+`94bf426f34dc90ca68ab1d581d7a37a2dbebf1a8e3f184188825a025524c664a`.
+Thus its twelve \(\mathbf F_{11}\)-points generate the sparse evaluation
+code
+\[
+ C_\Gamma
+ =\operatorname{ev}_{\mathbf P^1(\mathbf F_{11})}
+   \langle1,t,t^3,t^5,t^6\rangle.
+ \tag{19.8}
+\]
+Complete canonical enumeration gives
+\[
+ C_\Gamma=[12,5,6]_{11},\qquad
+ C_\Gamma^\perp=[12,7,4]_{11}.
+ \tag{19.9}
+\]
+Their weight enumerators are
+\[
+\begin{aligned}
+ W_{C_\Gamma}(z)
+ ={}&1+240z^6+100z^7+2500z^8+10600z^9\\
+    &+36380z^{10}+59180z^{11}+52050z^{12},\\
+ W_{C_\Gamma^\perp}(z)
+ ={}&1+150z^4+340z^5+5300z^6+47700z^7\\
+    &+317950z^8+1345700z^9+4116660z^{10}\\
+    &+7442620z^{11}+6210750z^{12}.
+\end{aligned}
+\tag{19.10}
+\]
+The generalized Hamming-weight hierarchies are respectively
+\[
+ (6,7,10,11,12),\qquad(4,5,8,9,10,11,12).
+ \tag{19.11}
+\]
+
+The defect has a direct geometric source.  Equation (19.7) is the degree-six
+rational normal curve with exactly the \(t^2\) and \(t^4\) coordinates
+deleted.  Therefore
+\[
+ 0\longrightarrow C_\Gamma\longrightarrow R_6
+ \longrightarrow\mathbf F_{11}^2\longrightarrow0,
+ \qquad
+ 0\longrightarrow R_4\longrightarrow C_\Gamma^\perp
+ \longrightarrow\mathbf F_{11}^2\longrightarrow0.
+ \tag{19.12}
+\]
+The two missing weights, not an unexplained finite-field accident, account
+for the two-dimensional departure from the MDS dual pair.
+
+There are \(24\) projective minimum words of \(C_\Gamma\), equivalently
+\(24\) rational six-secant hyperplanes.  The dual has exactly \(15\)
+projective minimum words, supported on the \(15\) rational four-point
+circuits, or four-secant planes.  With parameter points
+\(\{0,1,\ldots,10,\infty\}\), the circuits split as
+\[
+\begin{array}{ll}
+5 &: \{0,\infty,a,-a\},\\
+5 &: \text{the four-subsets of the five nonzero squares},\\
+5 &: \text{the four-subsets of the five nonsquares}.
+\end{array}
+\tag{19.13}
+\]
+The stabilizer inside \(PGL_2(\mathbf F_{11})\) has order \(20\) and is
+exactly
+\[
+ t\longmapsto at,\qquad t\longmapsto a/t
+ \quad(a\in\mathbf F_{11}^{\times}),
+ \tag{19.14}
+\]
+the finite reduction of the published \(G_m\rtimes C_2\) symmetry.
+
+This result corrects two possible overreads.  First, the conic edge does
+not produce another MDS or NMDS object: both it and its dual have defect
+two.  Second, \(\Gamma\) is fixed throughout the \(G_m\)-pencil of
+quadrics, so this code does not by itself distinguish the
+Mukai--Umemura parameter \(u=-1/4\).  Its \(15\) projective dual-minimum
+words happen to equal the number for a \([6,3,4]\) MDS code, but their
+twelve-coordinate support design is different; no Clebsch-code
+identification follows from the count.
+
+The exact generator and certificate are
+`notes/2026-07-26-c682-conic-link-code.py` and
+`notes/2026-07-26-c682-conic-link-code.json`.  Replay from the repository
+root with
+
+```text
+python3 notes/2026-07-26-c682-conic-link-code.py --check
+python3 notes/2026-07-26-c682-conic-link-code-replay.py
+```
+
+The main audit enumerates all \(11^5\) codewords, all subsets needed for
+the generalized weights and four-circuits, and all \(1320\) elements of
+\(PGL_2(\mathbf F_{11})\).  The independent replay enumerates projective
+coefficient classes, uses direct determinants for the circuit matroid,
+and checks the deleted-coordinate duality separately.  Its evidence
+boundary is the explicit reduction of (19.7); it does not construct a
+functor from the Sarkisov graph or identify the circuits with flopping
+curves.
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| `2026-07-26-c682-conic-link-code.py` | 9903 | `55bea06b24e0a7069f77ace87fb304e072655dc0e6b59ca8a1373c97c572692e` |
+| `2026-07-26-c682-conic-link-code-replay.py` | 5479 | `1dd6f93ff27929dc7f50248325bf3338044b0035ce2564e3cb36d4edf612a94c` |
+| `2026-07-26-c682-conic-link-code.json` | 6687 | `3cd5ed4bfb9fb2aa211ef085965c8f8f1e8cb8b08337e54df31e4fe56ae0e372` |
+
+### `ej`+`tt` closeout for the conic code
+
+The cheap extra conclusion is (19.12): the same two omitted weights explain
+both Singleton defects and put the code and its dual on opposite sides of
+the exact Reed--Solomon pair \(R_4^\perp=R_6\).  This is a more faithful
+code shadow of the conic edge than forcing another MDS midpoint.
+
+The next geometric question is whether the two-dimensional quotient in
+(19.12) is merely the projection center of the monomial curve or also
+controls the two exceptional directions in the conic Sarkisov flop.  The
+finite computation does not decide this.  The clean test is to express the
+inverse system \(|5H_Q-2E_\Gamma|\) in the two missing-coordinate
+syndromes and check whether its local Rees algebra splits along those two
+directions.  A mismatch kills the proposed interpretation.
 
 ## Mystery ledger
 
@@ -2529,9 +2655,16 @@ is conjectural.
   \([12,5,8]\), \([12,6,7]\), and \([12,7,6]\) extended GRS codes.  The
   outer two are dual and the middle one is self-dual; the middle code is
   exactly the normal-quintic Sarkisov center.
-- **Open on the opposite conic edge:** determine the distance and weight
-  geometry of the \([12,5,d]\) code obtained from the quadratically
-  normal rational sextic center on \(Q^3\).
+- **Settled on the opposite conic edge over \(\mathbf F_{11}\):** the
+  sextic-center code is \([12,5,6]\), its dual is \([12,7,4]\), and both
+  Singleton defects are two.  Deleting the \(t^2,t^4\) coordinates gives
+  the two exact sequences (19.12); the dual has fifteen projective
+  minimum words and the parameter stabilizer is the expected dihedral
+  group of order \(20\).
+- **Open geometrically on the conic edge:** decide whether the
+  two-dimensional missing-weight quotient controls the two exceptional
+  directions of the conic Sarkisov flop, rather than being only the
+  projection center of the sextic curve.
 - **Open categorically:** construct, or falsify, a natural transformation
   identifying the pointed kernel link with the
   dual-pair/self-dual-midpoint code diagram.  Object-level dimensions and

@@ -634,10 +634,29 @@ rate-half self-dual MDS center, and hence an
 \([6,3,4]_{11}\) seed instead has duality exchanging its two golden
 forms, while its complete legal-extension port is the conic
 \([12,3,10]_{11}\).  No functor from the Sarkisov graph to these code
-objects is yet proved.  The cheapest new finite test is the
-\([12,5,d]\), \(6\le d\le8\), code cut out by the five-dimensional
-sextic system of the conic-centered link; its distance distinguishes MDS,
-NMDS, and defect-two behavior.
+objects is yet proved.
+
+The conic-edge finite test is now exact.  Kuznetsov--Prokhorov's sextic
+\((t_0^6:t_0^5t_1:t_0^3t_1^3:t_0t_1^5:t_1^6)\) gives
+\[
+ C_\Gamma=[12,5,6]_{11},\qquad
+ C_\Gamma^\perp=[12,7,4]_{11};
+\]
+both Singleton defects are two.  It is the degree-six extended RS code
+with precisely the \(t^2,t^4\) rows deleted, so
+\[
+0\to C_\Gamma\to R_6\to\mathbf F_{11}^2\to0,\qquad
+0\to R_4\to C_\Gamma^\perp\to\mathbf F_{11}^2\to0.
+\]
+The code has \(24\) projective minimum words; the dual has \(15\), supported
+on exactly fifteen rational four-secant planes in three five-element
+orbits.  Its \(PGL_2(\mathbf F_{11})\) parameter stabilizer is exactly the
+dihedral group of order \(20\), matching \(G_m\rtimes C_2\).  The
+certificate exhausts all \(11^5\) codewords and \(1320\) projectivities,
+and a separately implemented replay agrees.  This code is fixed throughout
+the \(G_m\)-pencil and does not isolate the Mukai--Umemura parameter.  The
+next conic-edge gate is to determine whether the two missing-weight
+syndromes control the two exceptional flop directions.
 
 C682's remaining Platinum track is:
 
