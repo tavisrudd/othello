@@ -284,15 +284,38 @@ Then:
 - `papers/scripts/export-paper-repos.py plan` reads the registry, mapping, and manuscript blobs from
   one immutable Git commit. It validates IDs, roots, main sources, destination identities, and
   symlink dispositions without reading live manuscript bytes or writing destinations.
+- The exporter now also has a read-only `audit` command and an active-only `materialize` command.
+  Materialization refuses existing destinations, unresolved private references, gated/archive
+  repositories, undeclared symlinks, generated-name collisions, and missing destination parents.
+  It writes source blobs by Git object ID, canonical provenance and export manifests, fixed modes,
+  and a paper-specific build-output ignore list.
+- Nine hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
+  deterministic selection and materialization, missing mappings, destination collisions, unsafe
+  paths, undeclared and stale symlink dispositions, private-reference detection, overwrite refusal,
+  and private-reference materialization refusal.
 - The first plan at source commit `c12727722a325f6d8a93b0bb5b17001b63da229f` found exactly seven
   explicitly excluded external symlinks: two in continuation and five in dihedral. It found no
   undeclared symlink.
 - The same plan reported sixteen monorepo-coupled text-reference hits: AME--LU 1, arcs 4,
   continuation 2, dihedral 4, and equivariant robust completion 5. These are inventory findings,
   not silently rewritten content.
-- Next implementation step: add hermetic/adversarial fixtures for mapping collisions, registry
-  drift, unsafe paths, symlink escape/staleness, dirty-worktree independence, and deterministic
-  output; then add a read-only `audit` command that turns unresolved reference findings into scoped
-  failures.
+- The portfolio audit fails on those sixteen findings, while a selected
+  `audit --repository clebsch-passages` passes with zero findings.
+- The Clebsch Passages pilot was materialized twice from source commit
+  `ee5fd51be81e66b36f7ba417d67528b56b2649ae` into separate disk-backed disposable directories;
+  both 29-file trees were byte-identical. A pristine candidate was committed as disposable commit
+  `0f575510f6a5e26bf8b52d4e4c4aef6b6e199327`, cloned separately, and validated without access to
+  Othello. `make -B` and `python3 verification/verify_release.py` passed all release checks; the
+  clean checkout remained Git-clean after the build.
+- Main PDFs are excluded from source exports by default and ignored at their exact derived paths.
+  Two successful XeLaTeX builds from the same source produced 111073-byte and 111072-byte PDFs, so
+  a built PDF cannot yet serve as a byte-reproducible tracked source artifact. PDFs remain separate
+  release outputs; page/warning/release gates still passed.
+- The pilot export manifest SHA-256 is
+  `634dc6b8ddb12f9cd4b183fde591510a4d7147e62b0f9ca8f0f2b64658be2ab7`.
+- Next implementation step: add manifest/tree verification and commit-identity policy, then promote
+  the validated Clebsch Passages candidate to `~/src/math-papers/clebsch-passages`. Afterward,
+  resolve the sixteen explicit reference findings repository by repository rather than adding a
+  broad exception.
 - No destination repository or GitHub remote has been created.
 - Arcs/Q16 readiness gates only Phase D, not Phases A–C.
