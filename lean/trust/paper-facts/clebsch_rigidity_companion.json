@@ -1,0 +1,130 @@
+{
+  "bibliography": [
+    {
+      "key": "AbiadJabalAmeliReijnders2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
+    },
+    {
+      "key": "BSW1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
+    },
+    {
+      "key": "BrouwerCohenNeumaier1989",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
+    },
+    {
+      "key": "Dye1991",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
+    },
+    {
+      "key": "JurisicVidali2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
+      "text": "T.~Rudd, \\newblock Reconstructing the Clebsch code from its deep-hole syndrome locus, \\newblock companion manuscript, 2026."
+    }
+  ],
+  "dir": "papers/clebsch-rigidity",
+  "environment_counts": {
+    "corollary": 1,
+    "lemma": 1,
+    "proposition": 1,
+    "remark": 1,
+    "theorem": 6
+  },
+  "labels": [
+    {
+      "environment": "theorem",
+      "label": "cor:conic-filling-window"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:monomial-characterization"
+    },
+    {
+      "environment": "theorem",
+      "label": "lem:chord-defect"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:q9-polarity"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:low-degree-rigidity"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:degree-threshold"
+    },
+    {
+      "environment": "document",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "table",
+      "label": "tab:fifteen-classes"
+    },
+    {
+      "environment": "table",
+      "label": "tab:replays"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:gap"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:rigidity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:small-k-conic-filling"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:why11"
+    }
+  ],
+  "main": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
+  "manifest_labels": null,
+  "paper": "clebsch_rigidity_companion",
+  "pdfs": [
+    {
+      "bytes": 134439,
+      "pages": 14,
+      "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
+      "sha256": "3997a460a855d5ea0be8046bbb5d01982569d3239657331438b1b1a6cadfa694"
+    },
+    {
+      "bytes": 91688,
+      "pages": 7,
+      "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.pdf",
+      "sha256": "13b6d0247eabded6e5ef87a61078f52079d3f0b67c9c7b3379cc8b40f9c88376"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
+      "sha256": "d71e8840ac936b1160ddbdf4fa54c22370fa4320071a110cdb5aeef9ac79db8e"
+    }
+  ],
+  "title": "Computational strengthenings of Clebsch syndrome rigidity",
+  "title_normalized": "computational strengthenings of clebsch syndrome rigidity",
+  "untracked_bibliography": []
+}

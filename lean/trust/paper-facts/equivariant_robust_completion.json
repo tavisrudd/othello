@@ -1,0 +1,301 @@
+{
+  "bibliography": [
+    {
+      "key": "Alderson2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Extending {MDS} codes"
+    },
+    {
+      "key": "Alderson2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "When arcs extend uniquely: A higher-dimensional generalization of {Barlotti}'s result"
+    },
+    {
+      "key": "AldersonBruenSilverman2007",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Maximum distance separable codes and arcs in projective spaces"
+    },
+    {
+      "key": "BakerWantz2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "An arc partition of the {Hughes} plane using a field-theoretic model"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Arcs in finite projective spaces"
+    },
+    {
+      "key": "BlokhuisSeressWilbrink1992",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Characterization of complete exterior sets of conics"
+    },
+    {
+      "key": "CoolsaetSticker2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "A full classification of the complete $k$-arcs of $\\mathrm{PG}(2,23)$ and $\\mathrm{PG}(2,25)$"
+    },
+    {
+      "key": "Dye1991",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Hexagons, conics, ${A}_5$ and ${PSL}_2(K)$"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Projective Geometries over Finite Fields"
+    },
+    {
+      "key": "Jungnickel1987",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Divisible semiplanes, arcs, and relative difference sets"
+    },
+    {
+      "key": "Lean2015",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "The {Lean} theorem prover (system description)"
+    },
+    {
+      "key": "LopezMaisnerNartXarles2002",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Orbits of {Galois} invariant $n$-sets of $\\mathbf{P}^1$ under the action of $\\mathrm{PGL}_2$"
+    },
+    {
+      "key": "LunelliSce1964",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Considerazioni aritmetiche e risultati sperimentali sui $\\{K;n\\}_q$-archi"
+    },
+    {
+      "key": "MarcuginiMilaniPambianco2007",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Complete arcs in $\\mathrm{PG}(2,25)$: The spectrum of the sizes and the classification of the smallest complete arcs"
+    },
+    {
+      "key": "Martin1967",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "On arcs in a finite projective plane"
+    },
+    {
+      "key": "Mathlib2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "The {Lean} mathematical library"
+    },
+    {
+      "key": "NgWild2001",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "On $k$-arcs covering a line in finite projective planes"
+    },
+    {
+      "key": "RuddClebschRigidity2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Deep-hole rigidity of the {Clebsch} hexagon code"
+    },
+    {
+      "key": "Ueberberg1997",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/equivariant-robust-completion/refs.bib",
+      "title": "Frobenius collineations in finite projective planes"
+    }
+  ],
+  "dir": "papers/equivariant-robust-completion",
+  "environment_counts": {
+    "corollary": 7,
+    "definition": 2,
+    "lemma": 2,
+    "proposition": 3,
+    "remark": 2,
+    "theorem": 4
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:aggregate"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:all-orders"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:alternate-repair"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:clebsch-pair-extension"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:q25-nonexceptional-repair"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:q25-uniform-repair"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:saturation"
+    },
+    {
+      "environment": "definition",
+      "label": "def:alternate-repair"
+    },
+    {
+      "environment": "definition",
+      "label": "def:legal-pair"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:E"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:M"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:aggregate"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cross-invisible"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:heterogeneous"
+    },
+    {
+      "environment": "align",
+      "label": "eq:linewise-balance"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:repair-phase"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:saturation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:second-moment"
+    },
+    {
+      "environment": "align",
+      "label": "eq:support"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:uniform-lower"
+    },
+    {
+      "environment": "align",
+      "label": "eq:visible-mass"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:empty-lines"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:pair-test"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:f2"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:four-profiles"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:linewise"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:census"
+    },
+    {
+      "environment": "document",
+      "label": "sec:formalization"
+    },
+    {
+      "environment": "table",
+      "label": "tab:q25-profiles"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:pair-criterion"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:parameterized-repair"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:profile-envelope"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:q25"
+    }
+  ],
+  "main": "papers/equivariant-robust-completion/frobenius_pair_extension.tex",
+  "manifest_labels": null,
+  "paper": "equivariant_robust_completion",
+  "pdfs": [
+    {
+      "bytes": 116075,
+      "pages": 14,
+      "path": "papers/equivariant-robust-completion/frobenius_pair_extension.pdf",
+      "sha256": "7fd84ee932c507311c860655c006eb6a16445244f11c6606d31205380cdb1ce5"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/equivariant-robust-completion/frobenius_pair_extension.tex",
+      "sha256": "b4f7d7853822c0c67d028a888f86c521549698f3a772c2ffaeaf335b3f17d1f0"
+    }
+  ],
+  "title": "Frobenius-equivariant pair extension and robust repair of eight-arcs",
+  "title_normalized": "frobenius-equivariant pair extension and robust repair of eight-arcs",
+  "untracked_bibliography": []
+}

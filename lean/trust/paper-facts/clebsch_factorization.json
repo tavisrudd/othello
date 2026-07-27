@@ -1,0 +1,236 @@
+{
+  "bibliography": [
+    {
+      "key": "Atlas1985",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "BraunNebe2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "Dye1991",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "Edge1956",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "EisenbudPopescu1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "Giudici2007",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "RodriguezPajaresEtAl2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex",
+      "text": "T.~Rudd, \\newblock \\emph{A conic deep-hole syndrome locus characterizes the Clebsch code}, \\newblock working paper, 2026."
+    }
+  ],
+  "dir": "papers/clebsch-factorization",
+  "environment_counts": {
+    "corollary": 10,
+    "lemma": 3,
+    "proposition": 5,
+    "remark": 4,
+    "theorem": 6
+  },
+  "labels": [
+    {
+      "environment": "document",
+      "label": "app:profile-cubic"
+    },
+    {
+      "environment": "document",
+      "label": "app:tate-plane"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:decorated-sheet-classifier"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:graded-evaluation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:h3-affine-origin"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:h3-homogeneous-projective-cover"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:h3-middle-layer"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:h3-nine-space-bridge"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:mass-zero-cubic"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:profile-ray-weights"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:secant-product-syzygies"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:self-associated-gorenstein"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:hyperplane-square"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:split-inert-frames"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:three-ray-cubic"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:matching-secant-quotient"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:modular-depth-quotient"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:modular-sheet-mechanism"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:radical-hadamard"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:relative-cubic-tate-plane"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:bad-profile-primes"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:cubic-target-flag"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:tate-depth-boundary"
+    },
+    {
+      "environment": "document",
+      "label": "sec:arithmetic-splitting"
+    },
+    {
+      "environment": "document",
+      "label": "sec:balanced"
+    },
+    {
+      "environment": "document",
+      "label": "sec:matching-products"
+    },
+    {
+      "environment": "document",
+      "label": "sec:modular-depth"
+    },
+    {
+      "environment": "document",
+      "label": "sec:rank-three"
+    },
+    {
+      "environment": "document",
+      "label": "sec:six-profiles"
+    },
+    {
+      "environment": "document",
+      "label": "sec:switches"
+    },
+    {
+      "environment": "document",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "table",
+      "label": "tab:verification"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:balanced-cubic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:balanced-orbit-completeness"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:factorization-recovery"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:rank-three-arithmetic-gluing"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:rank-three-quotients"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:six-profile-reconstruction"
+    }
+  ],
+  "main": "papers/clebsch-factorization/clebsch_factorization.tex",
+  "manifest_labels": null,
+  "paper": "clebsch_factorization",
+  "pdfs": [
+    {
+      "bytes": 200114,
+      "pages": 28,
+      "path": "papers/clebsch-factorization/clebsch_factorization.pdf",
+      "sha256": "f3c0013cecd01eb5c59071b07e8b853aa2c6c55ac323660264df00308de9402c"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/clebsch-factorization/clebsch_factorization.tex",
+      "sha256": "79997bc43eecb2ce22af5dc00747bfa920c9dab5080628c02cfa7225f5faefe1"
+    }
+  ],
+  "title": "Quadratic recovery and cubic orientation\\\\ in conic matching quotients",
+  "title_normalized": "quadratic recovery and cubic orientation in conic matching quotients",
+  "untracked_bibliography": []
+}

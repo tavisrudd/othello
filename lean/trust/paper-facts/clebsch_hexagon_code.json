@@ -1,0 +1,459 @@
+{
+  "bibliography": [
+    {
+      "key": "AbiadJabalAmeliReijnders2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "ArcsCompleteOutsideConic",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
+      "text": "T.~Rudd, \\newblock Arcs complete outside a prescribed conic: An exact defect identity and $\\rho_{\\mathcal C}(16)=9$, \\newblock working paper, 2026."
+    },
+    {
+      "key": "Athanasiadis1996",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Atlas1985",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "BSW1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "BicharaKorchmaros1982",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "BrouwerCohenNeumaier1989",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Calvo2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "ChengMurray2007",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Clebsch1871",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "ConwaySloane1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "DMP2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "DrakeKeating2004",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Dye1991",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Edge1956",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Giudici2007",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "GuruswamiVardy2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "JurisicVidali2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "JurriusPellikaan2015",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "MumfordThetaII",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "NebeRainsSloane2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "NgWild2001",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "SVM1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "SadehThesis1984",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "StormeThas1991",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Taylor1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Weil1964",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "Witt1938",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex"
+    }
+  ],
+  "dir": "papers/clebsch-hexagon-code",
+  "environment_counts": {
+    "corollary": 3,
+    "definition": 1,
+    "lemma": 4,
+    "proposition": 13,
+    "remark": 5,
+    "theorem": 9
+  },
+  "labels": [
+    {
+      "environment": "document",
+      "label": "app:statement-identity"
+    },
+    {
+      "environment": "document",
+      "label": "app:tate-plane"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:decoder-brianchon"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:named-variety"
+    },
+    {
+      "environment": "definition",
+      "label": "def:hexagon"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:gap-histograms"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:reconstruction-arc"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:synthematic-petersen"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:chord-defect"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:rank-three-splitting"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:sign-torsor-no-section"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:six-arc-line-bound"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:a5-point-orbits"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:brianchon-support"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:chirality"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:clebsch-family-uncovered"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:decoding-oracle"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:deep-hole-orbit"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:deep-holes-conic"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:general-matching-quotient"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:h3-arrangement"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:lattice-good"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:low-degree-rigidity"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:mod40-reciprocity"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:modular-depth-plane"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:degree-threshold"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:not-the-usual-condition"
+    },
+    {
+      "environment": "document",
+      "label": "sec:automorphisms"
+    },
+    {
+      "environment": "document",
+      "label": "sec:balanced"
+    },
+    {
+      "environment": "document",
+      "label": "sec:chirality"
+    },
+    {
+      "environment": "document",
+      "label": "sec:code"
+    },
+    {
+      "environment": "document",
+      "label": "sec:coxeter-number-phase"
+    },
+    {
+      "environment": "document",
+      "label": "sec:depth"
+    },
+    {
+      "environment": "document",
+      "label": "sec:factorization"
+    },
+    {
+      "environment": "document",
+      "label": "sec:gluing"
+    },
+    {
+      "environment": "document",
+      "label": "sec:hexagon"
+    },
+    {
+      "environment": "document",
+      "label": "sec:intro"
+    },
+    {
+      "environment": "document",
+      "label": "sec:reflection-exceptions"
+    },
+    {
+      "environment": "document",
+      "label": "sec:rigidity"
+    },
+    {
+      "environment": "document",
+      "label": "sec:structural"
+    },
+    {
+      "environment": "document",
+      "label": "sec:survival"
+    },
+    {
+      "environment": "document",
+      "label": "sec:tour"
+    },
+    {
+      "environment": "document",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "document",
+      "label": "sec:why11"
+    },
+    {
+      "environment": "table",
+      "label": "tab:factorization-verification"
+    },
+    {
+      "environment": "table",
+      "label": "tab:fifteen-classes"
+    },
+    {
+      "environment": "table",
+      "label": "tab:replays"
+    },
+    {
+      "environment": "table",
+      "label": "tab:small-field-census"
+    },
+    {
+      "environment": "table",
+      "label": "tab:torsor-carriers"
+    },
+    {
+      "environment": "table",
+      "label": "tab:verification"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:four-sheet-holonomy"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:gap"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:headline-factorization"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:headline-gluing"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:headline-rigidity-phase"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:rigidity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:small-k-conic-filling"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:torsor-rosetta-close"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:why11"
+    }
+  ],
+  "main": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
+  "manifest_labels": null,
+  "paper": "clebsch_hexagon_code",
+  "pdfs": [
+    {
+      "bytes": 272586,
+      "pages": 37,
+      "path": "papers/clebsch-hexagon-code/clebsch_hexagon_code.pdf",
+      "sha256": "c05cf657231de4e057159014247bf4b39dfc97adfacb677d7c2a775d6f98f72f"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/clebsch-hexagon-code/clebsch_hexagon_code.tex",
+      "sha256": "5cfe7362b4cdbc4b4ffee6e8b3ab2e683c3fc40e78d8c6815e96e7a2a6408ad2"
+    }
+  ],
+  "title": "Deep-hole rigidity and factorization memory\\\\ in the Clebsch hexagon code",
+  "title_normalized": "deep-hole rigidity and factorization memory in the clebsch hexagon code",
+  "untracked_bibliography": []
+}

@@ -37,6 +37,10 @@ another lane's running build.
   `wrapper`, and `canonicalize` run none; `selftest` exercises the whole path against core Lean with
   no project import; `run` extracts declared units through `guarded-lean` and refuses a tree
   carrying foreign work. Metaprogram: `lean/scripts/trust-spine-export.lean`.
+- `lean/scripts/paper-facts.py`: the paper half of the spine. `extract` writes one facts artifact
+  per registered manuscript from tracked TeX/BibTeX/bibliography/manifest bytes; `audit` and `check`
+  compare declarations in `lean/trust/papers.toml` against them. Runs no Lake, LaTeX, or BibTeX, so
+  it is independent of the extraction window.
 - `lean/scripts/lean-blast-radius.py`: read-only `hubs`/`radius`/`targets`/`cost-model` over the
   project-local import DAG. Blast radius is exact; cost columns are unvalidated size proxies.
 - Resource profiles: `lean/scripts/lean-build-profiles.json`.
@@ -68,11 +72,17 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    theorems downstream of generated leaves.
 6. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
    discipline with disk-backed per-lane build directories.
-7. **C681 paper-facts area:** extend the spine with a `paper` area type whose facts come from tracked
-   TeX/BibTeX/verification JSON, catching title, self-citation, stale-bbl, label-mapping, and
-   unknown-terminal drift. Independent of the extraction window — it runs no Lake command — and it
-   reports other lanes' drift rather than repairing it. Brief:
+7. **Paper-facts area:** step 1 landed. The extractor, checker, registry, and a hermetic fixture
+   suite are in place, and the checker is red on the live tree with eight self-citation drifts and
+   five generated-bibliography findings, all reported to the lanes owning the citing artifacts and
+   none repaired here. Every registry row is registration only; adopted labels, verification
+   manifests, superseded titles, and cited Lean terminals are the owning lane's to add, and each
+   turns on a further check. Report:
+   [`../2026-07-26-c681-paper-facts-area.md`](../2026-07-26-c681-paper-facts-area.md); programme
+   intent and steps 2–5:
    [`../2026-07-26-c681-trust-spine-paper-facts.md`](../2026-07-26-c681-trust-spine-paper-facts.md).
+   Step 2's gate — a drift defect caught that was not one of the four the checker was built
+   against — is met by the two inline-`\bibitem` self-citations no hand pass had found.
 
 ## Gates and non-goals
 

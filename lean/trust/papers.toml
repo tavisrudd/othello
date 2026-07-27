@@ -1,0 +1,139 @@
+# Paper registry for the trust spine.
+#
+# Everything here is a DECLARATION.  Nothing in this file is evidence, and — with one deliberate
+# exception noted below — nothing here restates a fact that lives in a manuscript.
+#
+# In particular there is no `title` field.  A paper's title exists in exactly one place, the
+# `\title{}` argument of its main source, and every other artifact that names the paper is checked
+# against that string rather than against a copy of it kept here.  Adding a title to this file
+# would create the very drift the paper layer exists to catch.
+#
+# A row therefore declares only pointers and adoption:
+#
+#   id                  stable identifier for the manuscript, used to name its facts artifact
+#   dir                 repository-relative directory
+#   main                the source inside `dir` carrying `\title{}`; one row per manuscript, so a
+#                       directory holding a journal variant beside the preprint gets two rows
+#   lane                the lane that owns the manuscript and repairs drift reported against it
+#
+# and, written by that owning lane rather than by the paper layer:
+#
+#   superseded_titles   titles this paper used to have.  Any tracked file under a drift scan root
+#                       that still states one is reported.  This is the exception mentioned above:
+#                       a dead title has no other home, because the manuscript no longer contains
+#                       it.  Remove an entry once the tree is clean, not before.
+#   adopted_labels      statement labels the paper advertises as its headline claims
+#   manifest            per-paper verification manifest, relative to `dir`
+#   manifest_labels     where that manifest's claim labels live, as `<key>[].<key>`
+#   lean_terminals      fully qualified Lean declarations the paper cites
+#
+# The optional fields are empty for every row below.  The paper layer registers manuscripts, which
+# is a mechanical pointer; it does not decide which of another lane's claims are headline claims,
+# which labels its manifest adopts, or which Lean terminals it leans on.  Those are the owning
+# lane's to add, and each one turns on a further check.
+
+schema_version = 1
+
+[repository]
+# A bibliography entry naming one of these authors is a self-citation: it must quote a registered
+# manuscript's current title, or be declared an external publication below.
+self_authors = ["Rudd"]
+
+# Directories whose immediate subdirectories are candidate manuscripts.  A subdirectory holding a
+# top-level source with a `\title{}` and no row below is reported as unregistered.
+paper_roots = ["papers"]
+
+# Roots scanned for superseded titles.  Bounded on purpose: the scan reads every tracked text file
+# underneath, so widening it to the repository root would read generated data trees for no benefit.
+drift_scan_roots = ["papers", "notes", "lean"]
+
+# ---------------------------------------------------------------------------------------------
+# Self-authored bibliography entries that are not repository manuscripts.
+#
+# Each entry here suppresses a citation check, so each needs a reason a reviewer can act on.  An
+# entry whose companion paper simply has not been registered yet does not belong here.
+
+# (none declared)
+
+# ---------------------------------------------------------------------------------------------
+# Manuscripts.
+
+[[paper]]
+id = "ame_lu"
+dir = "papers/ame_lu"
+main = "main.tex"
+lane = "ame-lu"
+
+[[paper]]
+id = "arcs_complete_outside_conic"
+dir = "papers/arcs_complete_outside_conic"
+main = "arcs_complete_outside_conic.tex"
+lane = "relconic"
+
+[[paper]]
+id = "beyond4_prs"
+dir = "papers/beyond4_prs"
+main = "main.tex"
+lane = "reed-solomon"
+
+# The journal-submission variant is a separate manuscript with its own title casing and its own
+# generated bibliography, so it is registered separately rather than folded into the preprint.
+[[paper]]
+id = "beyond4_prs_submission"
+dir = "papers/beyond4_prs"
+main = "main-tit.tex"
+lane = "reed-solomon"
+
+[[paper]]
+id = "clebsch_factorization"
+dir = "papers/clebsch-factorization"
+main = "clebsch_factorization.tex"
+lane = "clebsch"
+
+[[paper]]
+id = "clebsch_hexagon_code"
+dir = "papers/clebsch-hexagon-code"
+main = "clebsch_hexagon_code.tex"
+lane = "clebsch"
+
+[[paper]]
+id = "clebsch_passages"
+dir = "papers/clebsch-passages"
+main = "clebsch_passages.tex"
+lane = "clebsch"
+
+[[paper]]
+id = "clebsch_rigidity"
+dir = "papers/clebsch-rigidity"
+main = "clebsch_rigidity.tex"
+lane = "clebsch"
+
+[[paper]]
+id = "clebsch_rigidity_companion"
+dir = "papers/clebsch-rigidity"
+main = "clebsch_rigidity_computational_companion.tex"
+lane = "clebsch"
+
+[[paper]]
+id = "complete_repair_ports"
+dir = "papers/complete-repair-ports"
+main = "complete_repair_ports.tex"
+lane = "complete-ports"
+
+[[paper]]
+id = "continuation_graph_rigidity"
+dir = "papers/continuation-graph-rigidity"
+main = "continuation_graph_rigidity.tex"
+lane = "continuation"
+
+[[paper]]
+id = "dihedral_schreier_node_kayles"
+dir = "papers/dihedral-schreier-node-kayles"
+main = "dihedral_schreier_node_kayles.tex"
+lane = "dihedral"
+
+[[paper]]
+id = "equivariant_robust_completion"
+dir = "papers/equivariant-robust-completion"
+main = "frobenius_pair_extension.tex"
+lane = "paper-frob-eq"

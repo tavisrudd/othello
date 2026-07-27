@@ -1,0 +1,145 @@
+{
+  "bibliography": [
+    {
+      "key": "BinaryForms",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "DLMF",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "DyeClebsch",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "HitchinBundles",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "HitchinIcosahedron",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "MukaiUmemura",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "SNR1981",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "SNR1983",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    }
+  ],
+  "dir": "papers/clebsch-passages",
+  "environment_counts": {
+    "proposition": 2,
+    "remark": 1,
+    "theorem": 2
+  },
+  "labels": [
+    {
+      "environment": "equation",
+      "label": "eq:face-axis-labels"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:golden-fibre"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:spinor-specialization"
+    },
+    {
+      "environment": "",
+      "label": "sec:arithmetic"
+    },
+    {
+      "environment": "",
+      "label": "sec:cover"
+    },
+    {
+      "environment": "",
+      "label": "sec:harmonic"
+    },
+    {
+      "environment": "",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:arithmetic-main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:harmonic-main"
+    }
+  ],
+  "main": "papers/clebsch-passages/clebsch_passages.tex",
+  "manifest_labels": null,
+  "paper": "clebsch_passages",
+  "pdfs": [
+    {
+      "bytes": 111079,
+      "pages": 10,
+      "path": "papers/clebsch-passages/clebsch_passages.pdf",
+      "sha256": "79a8a6aaee1b488d7195459f90baca41755c7c026226357adb6c013b181e33c5"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/clebsch-passages/clebsch_passages.tex",
+      "sha256": "72de14be6e645c30b4da8030dd92414c1aa7a600a479f8468e2f7913a68677a0"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/01-introduction.tex",
+      "sha256": "8930da0f48142f1d3ec9146ef274d3a325680782f44b48ceb7cfab3c78d08a8b"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/02-orientation-cover.tex",
+      "sha256": "9cdf9341e605d047f3c98c11064cb53867d5c21844f768b7d99610e6f84fb172"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
+      "sha256": "6fe0b87257239de230393862cf2ec91adb4cd859eb74a8cb3ee4ba384c75d177"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/05-harmonic-realization.tex",
+      "sha256": "f6c7fea92a5f3a26d7deeb88234036902547caaa6653527151adfa105264ac1f"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/08-verification.tex",
+      "sha256": "8b0f511a006d74c0cfac4d51763c39bcbba6c2202ba18923ca5f1e2c1411b52b"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/09-conclusion.tex",
+      "sha256": "0609d028066f9dda772f162475b9f4f6958c43e15a1a765457296a9213d32782"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/10-references.tex",
+      "sha256": "3b2b4c3d9cab7b2e461a3d1e89bb449f1608075cb5b3ce694e6816fd8cdc9a13"
+    }
+  ],
+  "title": "Arithmetic and harmonic realizations of the Clebsch cubic",
+  "title_normalized": "arithmetic and harmonic realizations of the clebsch cubic",
+  "untracked_bibliography": []
+}

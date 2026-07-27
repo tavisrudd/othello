@@ -1,0 +1,955 @@
+{
+  "bibliography": [
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "LidlNiederreiter1996",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "Stichtenoth2009",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/main.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "LidlNiederreiter1996",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "Stichtenoth2009",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "RuddAMELU2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "RuddFactorization2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "RuddPrescribedHoles2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl",
+      "text": "T.~Rudd, ``Arcs complete outside a prescribed conic: An exact defect identity and {$\\rho_{\\mathcal C}(16)=9$},'' 2026, companion paper in this bundle."
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "Xu2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "ZhangWan2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "RuddAMELU2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
+      "text": "Tavis Rudd. \\newblock Local-unitary rigidity and transversal clifford groups for mds--css ame states. \\newblock Companion paper in this bundle, 2026."
+    },
+    {
+      "key": "RuddFactorization2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
+      "text": "Tavis Rudd. \\newblock Factorization memory in a conic ideal: The \\(a_3\\), \\(b_3\\), and \\(h_3\\) configurations. \\newblock Companion paper in this bundle, 2026."
+    },
+    {
+      "key": "RuddPrescribedHoles2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
+      "text": "Tavis Rudd. \\newblock Arcs complete outside a prescribed conic: An exact defect identity and {$\\rho_{\\mathcal C}(16)=9$}. \\newblock Companion paper in this bundle, 2026."
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
+      "text": "Tavis Rudd. \\newblock Deep-hole rigidity of the clebsch hexagon code. \\newblock Companion paper in this bundle, 2026."
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "Xu2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "ZhangWan2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Coverings of singular curves over finite fields"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Arcs in Finite Projective Spaces"
+    },
+    {
+      "key": "BenSassonEtAl2016",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Subspace Polynomials and Cyclic Subspace Codes"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "The distribution of factorization patterns on linear families of polynomials over a finite field"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On the Rank of a Binary Form"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "The Automorphism Groups of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On the Covering Radius of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Nuclei of Normal Rational Curves"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Power Sums, Gorenstein Algebras, and Determinantal Loci"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On the {$PGL_2(q)$}-orbits of lines of {$PG(3,q)$} and binary quartic forms"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Deep Holes and {MDS} Extensions of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "LidlNiederreiter1996",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Finite Fields"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Optimal Quantum Error Correcting Codes from Absolutely Maximally Entangled States"
+    },
+    {
+      "key": "RuddAMELU2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Local-Unitary Rigidity and Transversal Clifford Groups for MDS--CSS AME States"
+    },
+    {
+      "key": "RuddFactorization2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Factorization Memory in a Conic Ideal: The \\(A_3\\), \\(B_3\\), and \\(H_3\\) Configurations"
+    },
+    {
+      "key": "RuddPrescribedHoles2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Arcs Complete Outside a Prescribed Conic: An Exact Defect Identity and {$\\rho_{\\mathcal C}(16)=9$}"
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Deep-Hole Rigidity of the Clebsch Hexagon Code"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On {MDS} Extensions of Generalized {Reed--Solomon} Codes"
+    },
+    {
+      "key": "Stichtenoth2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Algebraic Function Fields and Codes"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Splitting of Polynomial Families via Galois Theory"
+    },
+    {
+      "key": "WangWuHu2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "{$3$-Designs from $\\mathrm{GL}_2(\\mathbb F_q)$-Invariant Subspaces of $\\mathbb F_q[X,Y]_k$}"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Extended Codes and Deep Holes of {MDS} Codes"
+    },
+    {
+      "key": "Xu2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On Deep Holes of Projective {Reed--Solomon} Codes over Finite Fields with Even Characteristic"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "On Deep Holes of Generalized Projective {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Deep Holes of Projective {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZhangWan2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/beyond4_prs/refs.bib",
+      "title": "Explicit Deep Holes of {Reed--Solomon} Codes"
+    }
+  ],
+  "dir": "papers/beyond4_prs",
+  "environment_counts": {
+    "corollary": 3,
+    "definition": 5,
+    "example": 1,
+    "lemma": 10,
+    "proposition": 18,
+    "remark": 1,
+    "theorem": 6
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:q8-quantum-extension"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r7-contained"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:splitfree"
+    },
+    {
+      "environment": "definition",
+      "label": "def:carriers"
+    },
+    {
+      "environment": "definition",
+      "label": "def:contained"
+    },
+    {
+      "environment": "definition",
+      "label": "def:lower-package"
+    },
+    {
+      "environment": "definition",
+      "label": "def:polar-spaces"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:lift"
+    },
+    {
+      "environment": "example",
+      "label": "ex:q29-r6"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:polar-flow"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:cyclic"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:exact-linear-gcd-transport"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:hankel"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:identically-colliding"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:linear-modular-pullback"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:marker-collision"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:old-marker-fixed-factor"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r6-gcd1"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:s3"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:uniform-collision"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:contained-rank-two"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-bridge"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-gcd1"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-gcd2"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-incidence"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-radius"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-contained"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-degrees"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-lower-carrier"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-modular"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-nucleus"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-one-step"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-persistent"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-secant"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-central"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-collision"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-gcd1"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-pointed"
+    },
+    {
+      "environment": "",
+      "label": "sec:boundary"
+    },
+    {
+      "environment": "",
+      "label": "sec:dictionary"
+    },
+    {
+      "environment": "",
+      "label": "sec:overview"
+    },
+    {
+      "environment": "",
+      "label": "sec:polar"
+    },
+    {
+      "environment": "",
+      "label": "sec:provenance"
+    },
+    {
+      "environment": "",
+      "label": "sec:r5"
+    },
+    {
+      "environment": "",
+      "label": "sec:r67"
+    },
+    {
+      "environment": "",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "table",
+      "label": "tab:classification-status"
+    },
+    {
+      "environment": "table",
+      "label": "tab:dependency-map"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:evidence"
+    },
+    {
+      "environment": "table",
+      "label": "tab:field-ranges"
+    },
+    {
+      "environment": "table",
+      "label": "tab:notation"
+    },
+    {
+      "environment": "table",
+      "label": "tab:r5-sanity"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:r5sporadic"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:r6-exceptional"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:induction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:polar-construction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r5"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r6"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r7"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:spine"
+    }
+  ],
+  "main": "papers/beyond4_prs/main.tex",
+  "manifest_labels": null,
+  "paper": "beyond4_prs",
+  "pdfs": [
+    {
+      "bytes": 397166,
+      "pages": 22,
+      "path": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.pdf",
+      "sha256": "f4881b8f4e2860d15b8a02001579a574132483d3d06ea979a977a985a82d9437"
+    },
+    {
+      "bytes": 238755,
+      "pages": 30,
+      "path": "papers/beyond4_prs/prs-beyond-redundancy-four.pdf",
+      "sha256": "cb59721088deedabb140e16c101d3b84856ad757872f8be1a3921fba8603881d"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/beyond4_prs/main.tex",
+      "sha256": "ecdce310e025700232078ada7ac8f2693e704fc048b4667231e69de85b5ba466"
+    },
+    {
+      "path": "papers/beyond4_prs/frontmatter/abstract.tex",
+      "sha256": "dadac3646dcd0f749c299f5fc1debdb433e117a950e5ed8ba03ae357e6500002"
+    },
+    {
+      "path": "papers/beyond4_prs/frontmatter/index-terms.tex",
+      "sha256": "a494b4e1555ec3f1a812c90b64991a421848935fc556a84728dd2b3f4cf1028d"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/01-introduction.tex",
+      "sha256": "829ef6bc6ea12174d5a68897686deeb51d1ab06ed9b692734344bbff6399b3eb"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/02-overview.tex",
+      "sha256": "b69b0b0974e3641b0e8255eb901346fd82cb47fbd10977820048d2fdcbd64cd6"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/03-dictionary.tex",
+      "sha256": "7d70d4ee495e67ca28b4dfeb535d450f175959770a988de1db5eb5c08f8ef103"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/04-redundancy-five.tex",
+      "sha256": "9ffdc12fb0a22ba2bacd3d07bcb57b8b15cfbcc798745f29782554569d9cb091"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/05-polar-induction.tex",
+      "sha256": "908bf48f0d9fc07a1ea50ad7eb1907112f1e6f3e3dde964f8893936c13d7e865"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/06-redundancies-six-seven.tex",
+      "sha256": "1dfe162e7ffb1385f64a6299cdaf3da49700b4e131db0b29f81560616f890f74"
+    },
+    {
+      "path": "papers/beyond4_prs/frontmatter/r6-exceptional-table.tex",
+      "sha256": "984070b502841313b5e28d35f0b1d4bfab6dd0de49dcdf435e4d81dac38ec4ab"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/10-verification.tex",
+      "sha256": "2b8205ae506330f991fe91147d24c87f76136d88226bfad68959de24fb330e6f"
+    },
+    {
+      "path": "papers/beyond4_prs/sections/11-provenance-boundary.tex",
+      "sha256": "28c6e80f7e8436b31434de3c6c53e889d6e37500d41e25e54d5b43fd8397a36a"
+    },
+    {
+      "path": "papers/beyond4_prs/frontmatter/acknowledgment.tex",
+      "sha256": "51768801765993648fa02229e810fcc55feb5b711bdba2d2a0da118992d86236"
+    }
+  ],
+  "title": "Deep holes of projective Reed--Solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
+  "title_normalized": "deep holes of projective reed-solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
+  "untracked_bibliography": [
+    "papers/beyond4_prs/main.bbl",
+    "papers/beyond4_prs/projective-reed-solomon-syndromes-beyond-redundancy-four-deep-holes-coherent-polar-flags-and-modular-carriers.bbl",
+    "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl",
+    "papers/beyond4_prs/prs-beyond-redundancy-four.bbl"
+  ]
+}

@@ -1,0 +1,435 @@
+{
+  "bibliography": [
+    {
+      "key": "AlSerajiAlOgali2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "AlabdullahHirschfeld2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "AlspachHeinrich1990",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Ball1997",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Ball2017Quadrics",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "BartoliEtAl2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "BlokhuisSeressWilbrink1992",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "GiuliettiMontanucci2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Glynn1994",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "KimVu2003",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "KorchmarosSzonyi2008",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "Nagy2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "NgWild2001",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
+      "key": "ReichardWoldar2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    }
+  ],
+  "dir": "papers/arcs_complete_outside_conic",
+  "environment_counts": {
+    "corollary": 21,
+    "definition": 2,
+    "lemma": 4,
+    "problem": 2,
+    "proposition": 5,
+    "remark": 3,
+    "theorem": 8
+  },
+  "labels": [
+    {
+      "environment": "document",
+      "label": "app:q16-certificates"
+    },
+    {
+      "environment": "document",
+      "label": "app:rank-three-certificates"
+    },
+    {
+      "environment": "document",
+      "label": "app:verification"
+    },
+    {
+      "environment": "document",
+      "label": "app:witnesses"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:affine"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:arbitrary-holes"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:arc-reconstruction-algorithm"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:bad-concurrence-stability"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:characteristic-two-equality-spectrum"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:conic-bound"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:conic-transfer"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:coverage"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:even-equality-spectrum"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:even-loss"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:exact-integer-bound"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:intro-rigidity"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:kim-vu"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:odd-characteristic-two-equality"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:odd-equality-spectrum"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:q-plus-one-holes"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:q16-exact"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:six-seven-rigidity"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:small-even-equality"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:stability"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:star-matching-realization"
+    },
+    {
+      "environment": "definition",
+      "label": "def:rank-three-realization"
+    },
+    {
+      "environment": "definition",
+      "label": "def:relative"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:L2"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:affine-complete"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:arbitrary-holes"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:asymptotic-lower"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:conic-complete"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:conic-uncovered"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:coverage"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:defect"
+    },
+    {
+      "environment": "align",
+      "label": "eq:first-moment"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:liminf"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nucleus-in"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nucleus-out"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:parity-capacity"
+    },
+    {
+      "environment": "align",
+      "label": "eq:second-moment"
+    },
+    {
+      "environment": "align",
+      "label": "eq:split-first"
+    },
+    {
+      "environment": "align",
+      "label": "eq:split-second"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stability"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transfer"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transfer-general"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:uncovered"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:evaluation-obstruction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:line-triangle-obstruction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:max-index"
+    },
+    {
+      "environment": "estimate",
+      "label": "lem:polynomial-estimate"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:q16-contract"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:arc-reconstruction"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:moments"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:nucleus-in"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:nucleus-out"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:small-values"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:arc-reconstruction-sharp"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:deletion-slack"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:scale"
+    },
+    {
+      "environment": "document",
+      "label": "sec:classical"
+    },
+    {
+      "environment": "document",
+      "label": "sec:conic"
+    },
+    {
+      "environment": "document",
+      "label": "sec:defect"
+    },
+    {
+      "environment": "document",
+      "label": "sec:equality-classifications"
+    },
+    {
+      "environment": "document",
+      "label": "sec:examples"
+    },
+    {
+      "environment": "document",
+      "label": "sec:nucleus"
+    },
+    {
+      "environment": "document",
+      "label": "sec:reconstruction"
+    },
+    {
+      "environment": "document",
+      "label": "sec:transfer"
+    },
+    {
+      "environment": "document",
+      "label": "subsec:matching-design"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:asymptotic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:defect"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main-conic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:match-ten-realization"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:matching-design"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:q16-quadratic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:transfer"
+    }
+  ],
+  "main": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
+  "manifest_labels": null,
+  "paper": "arcs_complete_outside_conic",
+  "pdfs": [
+    {
+      "bytes": 178106,
+      "pages": 24,
+      "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.pdf",
+      "sha256": "befa6a0594f9ac77be7fbf95110275fdcf8939de93eadef5f426e582aa0d8b9f"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
+      "sha256": "b1857546b7c0c0df99243f8f5174fc76d7e5215f6afbf35d2bb79f4ad801d72d"
+    }
+  ],
+  "title": "Arcs complete outside a conic:\\\\ a prescribed-hole defect identity and matching-design rigidity",
+  "title_normalized": "arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity",
+  "untracked_bibliography": []
+}

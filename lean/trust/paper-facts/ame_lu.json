@@ -1,0 +1,738 @@
+{
+  "bibliography": [
+    {
+      "key": "AharonovBenOr2008",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "AndersonJochymOConnor2014",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "ChakrabortyGottesman2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Coble1922",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "CollinsSniady2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "DasuBurton2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "DehaeneDeMoor2003",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Dickson1901",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "DolgachevOrtland1988",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "EastinKnill2009",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Faber2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Gerardin1976",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Gottesman1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "GrasslGeiselmannBeth1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Holmes2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "HostensDehaeneDeMoor2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "HowardMillsonSnowdenVakil2008",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "HuberGrassl2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "HuffmanPless2003",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "JiChenWeiYing2008",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "KetkarKlappeneckerKumarSarvepalli2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "PastawskiYoshidaHarlowPreskill2015",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Rains1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "RamadasLakshminarayan2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "SayginelEtAl2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Segre1955",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Tan2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "TansuwannontChanTakagi2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005Invariants",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "Wirthmuller2011",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "ZhuLiao2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "ZhuZhao2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "AharonovBenOr2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Fault-Tolerant Quantum Computation With Constant Error Rate"
+    },
+    {
+      "key": "AndersonJochymOConnor2014",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Classification of Transversal Gates in Qubit Stabilizer Codes"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Arcs in Finite Projective Spaces"
+    },
+    {
+      "key": "BurchardtRaissi2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Stochastic Local Operations with Classical Communication of Absolutely Maximally Entangled States"
+    },
+    {
+      "key": "ChakrabortyGottesman2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "No-Go Theorem on Fault Tolerant Gadgets for Multiple Logical Qubits"
+    },
+    {
+      "key": "Coble1922",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Associated Sets of Points"
+    },
+    {
+      "key": "CollinsSniady2006",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Integration with Respect to the {Haar} Measure on Unitary, Orthogonal and Symplectic Group"
+    },
+    {
+      "key": "DasuBurton2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "A Classification of Transversal {Clifford} Gates for Qubit Stabilizer Codes"
+    },
+    {
+      "key": "DehaeneDeMoor2003",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "The {Clifford} Group, Stabilizer States, and Linear and Quadratic Operations over {GF}(2)"
+    },
+    {
+      "key": "Dickson1901",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Linear Groups: With an Exposition of the Galois Field Theory"
+    },
+    {
+      "key": "DolgachevOrtland1988",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Point Sets in Projective Spaces and Theta Functions"
+    },
+    {
+      "key": "EastinKnill2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Restrictions on Transversal Encoded Quantum Gate Sets"
+    },
+    {
+      "key": "Faber2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Finite \\(p\\)-Irregular Subgroups of \\(\\operatorname{PGL}_2(k)\\)"
+    },
+    {
+      "key": "Gerardin1976",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Three {Weil} Representations Associated to Finite Fields"
+    },
+    {
+      "key": "Gottesman1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Fault-Tolerant Quantum Computation with Higher-Dimensional Systems"
+    },
+    {
+      "key": "GrasslGeiselmannBeth1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Quantum {Reed--Solomon} Codes"
+    },
+    {
+      "key": "Hirschfeld1998",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Projective Geometries over Finite Fields"
+    },
+    {
+      "key": "Holmes2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Quantum Logic Codes: Complete Transversal Logical {Clifford} Instruction Sets for High-Rate Stabilizer Quantum Error Correcting Codes"
+    },
+    {
+      "key": "HostensDehaeneDeMoor2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Stabilizer States and {Clifford} Operations for Systems of Arbitrary Dimensions, and Modular Arithmetic"
+    },
+    {
+      "key": "HowardMillsonSnowdenVakil2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "A Description of the Outer Automorphism of {{$S_6$}}, and the Invariants of Six Points in Projective Space"
+    },
+    {
+      "key": "HuberGrassl2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Quantum Codes of Maximal Distance and Highly Entangled Subspaces"
+    },
+    {
+      "key": "HuffmanPless2003",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Fundamentals of Error-Correcting Codes"
+    },
+    {
+      "key": "JiChenWeiYing2008",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "The {LU--LC} Conjecture Is False"
+    },
+    {
+      "key": "KetkarKlappeneckerKumarSarvepalli2006",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Nonbinary Stabilizer Codes over Finite Fields"
+    },
+    {
+      "key": "PastawskiYoshidaHarlowPreskill2015",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Holographic Quantum Error-Correcting Codes: Toy Models for the Bulk/Boundary Correspondence"
+    },
+    {
+      "key": "Rains1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Quantum Codes of Minimum Distance Two"
+    },
+    {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Optimal Quantum Error Correcting Codes from Absolutely Maximally Entangled States"
+    },
+    {
+      "key": "RamadasLakshminarayan2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Local Unitary Equivalence of Absolutely Maximally Entangled States Constructed from Orthogonal Arrays"
+    },
+    {
+      "key": "SayginelEtAl2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Fault-Tolerant Logical {Clifford} Gates from Code Automorphisms"
+    },
+    {
+      "key": "Segre1955",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Ovals in a Finite Projective Plane"
+    },
+    {
+      "key": "Tan2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Transversal Gates of the \\(((3,3,2))\\) Qutrit Code and Local Symmetries of the Absolutely Maximally Entangled State of Four Qutrits"
+    },
+    {
+      "key": "TansuwannontChanTakagi2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Construction of the Full Logical {Clifford} Group for High-Rate Quantum {Reed--Muller} Codes Using Only Transversal and Fold-Transversal Gates"
+    },
+    {
+      "key": "TansuwannontTakadaFujii2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Clifford Gates with Logical Transversality for Self-Dual {CSS} Codes"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Local Unitary versus Local {Clifford} Equivalence of Stabilizer States"
+    },
+    {
+      "key": "VanDenNestDehaeneDeMoor2005Invariants",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Finite Set of Invariants to Characterize Local {Clifford} Equivalence of Stabilizer States"
+    },
+    {
+      "key": "Wirthmuller2011",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Automorphisms of Stabilizer Codes"
+    },
+    {
+      "key": "ZhuLiao2024",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "A Class of Double-Twisted Generalized {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZhuZhao2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "On Iso-Dual {MDS} Codes From Elliptic Curves"
+    }
+  ],
+  "dir": "papers/ame_lu",
+  "environment_counts": {
+    "corollary": 6,
+    "lemma": 4,
+    "proposition": 7,
+    "theorem": 7
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:computed-party-splitting"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:diagonal-isodual-transversal-group"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:discrete-lu-symmetry"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:full-weyl-cover"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:lu-lc-pencil"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:transversal-clifford"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:marginal-moment-count"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:marginal-moment-rank"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:permutation-contraction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:q13-values"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-divisor"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-operator"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-rank-bridge"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-section"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:transport-systematic"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:conic-matchings"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:diagonal-axes"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:pauli-phase-correction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:six-arc-self-association"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:diagonal-multiplier-line"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:frobenius-sector-divisors"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:full-weyl-marginal"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:marginal-axes"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:stabilizer-ame-support"
+    },
+    {
+      "environment": "",
+      "label": "sec:conclusion"
+    },
+    {
+      "environment": "",
+      "label": "sec:dictionary"
+    },
+    {
+      "environment": "",
+      "label": "sec:invariants"
+    },
+    {
+      "environment": "",
+      "label": "sec:logical"
+    },
+    {
+      "environment": "",
+      "label": "sec:party-extensions"
+    },
+    {
+      "environment": "",
+      "label": "sec:pencil"
+    },
+    {
+      "environment": "",
+      "label": "sec:rigidity"
+    },
+    {
+      "environment": "",
+      "label": "sec:scalar-certificates"
+    },
+    {
+      "environment": "",
+      "label": "sec:transport"
+    },
+    {
+      "environment": "",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "table",
+      "label": "tab:result-scopes"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:atlas-classification"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:dictionary"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:fixed-copy-boundary"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lc-pencil"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:logical-phase"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lu-h3-grs"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:lu-lc-rigidity"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:q13-lu"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:transport-divisor"
+    }
+  ],
+  "main": "papers/ame_lu/main.tex",
+  "manifest_labels": null,
+  "paper": "ame_lu",
+  "pdfs": [
+    {
+      "bytes": 241424,
+      "pages": 29,
+      "path": "papers/ame_lu/ame-lu.pdf",
+      "sha256": "2e98f920aa3a8b1d1c1a624cd539f17c504e66947024625c80a4902cc12fec4d"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/ame_lu/main.tex",
+      "sha256": "264f0efe13d22d00ccf032e4cdd1f2798fb7a979267f190f5d1e20f57c18b1d2"
+    },
+    {
+      "path": "papers/ame_lu/sections/01-introduction.tex",
+      "sha256": "f9029877b09d2038eadb2fac8f91bc66fe8661cc796a1da420c18cddd2fe55e5"
+    },
+    {
+      "path": "papers/ame_lu/sections/02-geometry-ame-dictionary.tex",
+      "sha256": "9bd45727fd2aa46f56787ac729895b443fe9aa9fc35670ca21789bf0ce92db34"
+    },
+    {
+      "path": "papers/ame_lu/sections/03-lu-rigidity.tex",
+      "sha256": "d1ae8467c791f811b8dfae919390efadd46f0c803d6ba9253a28a791af2d4a40"
+    },
+    {
+      "path": "papers/ame_lu/sections/04-pencil-classification.tex",
+      "sha256": "468d483de1b8f8a6d56c30baf4f3b2a90f9fcb5db4afe5de8c7802f36f15691d"
+    },
+    {
+      "path": "papers/ame_lu/sections/05-logical-clifford-phase.tex",
+      "sha256": "8135627a5d8ec3c6cf64742b62be06d85206e4bd9e4e1ca40a67cb0b3ddbaa82"
+    },
+    {
+      "path": "papers/ame_lu/sections/06-lu-invariants.tex",
+      "sha256": "3bbfd022d9135b990679263a17859ea6a69a81e1158d1b499529568f5087f7ed"
+    },
+    {
+      "path": "papers/ame_lu/sections/08-verification-boundary.tex",
+      "sha256": "a851e8f1a238d45f47b2e10c880df1795af3f611d21dadc8caf41bfc24c24bdb"
+    },
+    {
+      "path": "papers/ame_lu/sections/07-conclusion.tex",
+      "sha256": "73ffcb45cd59e6fa4ee9c4c626f43dd5799d27e1cb00a4bc29d01f44fe041876"
+    },
+    {
+      "path": "papers/ame_lu/sections/10-scalar-certificates.tex",
+      "sha256": "9cd5e55f41fec6d5703e92735b5546f0f4fed50b40bd5052a335ed1dc735db4d"
+    },
+    {
+      "path": "papers/ame_lu/sections/07-transport-sheaf.tex",
+      "sha256": "273f370f80635ce0628851931982d0cbda697bdb26ca8dd8eadfe4aa5add7b0d"
+    },
+    {
+      "path": "papers/ame_lu/sections/09-party-extensions.tex",
+      "sha256": "67f6a60d0902bf2de19fdf1a4d6147917a7f5d77e06a2f38ba8083a387d3c344"
+    }
+  ],
+  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS--CSS Codes",
+  "title_normalized": "local-unitary rigidity of stabilizer ame states and transversal clifford groups of mds-css codes",
+  "untracked_bibliography": [
+    "papers/ame_lu/ame-lu.bbl"
+  ]
+}

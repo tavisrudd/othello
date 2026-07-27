@@ -1,0 +1,450 @@
+{
+  "bibliography": [
+    {
+      "key": "Beauville2010",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "BrownEtAl2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "Davenport2000",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "Dickson1901",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "HugganHuntemannStevens2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "Kobayashi2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "OEIS-A002187",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "Tranchida2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    },
+    {
+      "key": "WinningWays",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
+    }
+  ],
+  "dir": "papers/dihedral-schreier-node-kayles",
+  "environment_counts": {
+    "corollary": 5,
+    "example": 1,
+    "lemma": 4,
+    "proposition": 4,
+    "remark": 2,
+    "theorem": 15
+  },
+  "labels": [
+    {
+      "environment": "document",
+      "label": "app:evidence"
+    },
+    {
+      "environment": "document",
+      "label": "app:regular-computation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:bulk"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:pair-P"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:pair-density"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:period34"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:pn-congruences"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:DS"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:DT"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:RT"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:Td"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:bulk"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cycle-mex"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:dawson"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:dead"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:deleted"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:free-template"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:general-orbit-equation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:geometric-P"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:involution"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ladder-value"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:multiplicities"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nonsplit-even"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nonsplit-odd"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nonsplit-orbits"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:orbit-equation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:orbit-template"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-P"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-closed"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-coset-action"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-density"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-orbit"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-templates"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:phi"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pn-table"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:realized-even"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:realized-odd"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:refl-even"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:refl-odd"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:refl-value"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:split-even"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:split-odd"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:split-orbits"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stabilizers"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:template"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:triple-coset-action"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:triple-even"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:triple-odd"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:v4-graph"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:v4-split"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:v4-value"
+    },
+    {
+      "environment": "example",
+      "label": "ex:d12"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:collinear"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:cycle-zero"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:dead"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:double-cover"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:Td-generates"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:burnside"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:rotation-empty"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:stabilizers"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:a5-commuting"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:burnside-scope"
+    },
+    {
+      "environment": "document",
+      "label": "sec:arithmetic"
+    },
+    {
+      "environment": "document",
+      "label": "sec:boundaries"
+    },
+    {
+      "environment": "document",
+      "label": "sec:intro"
+    },
+    {
+      "environment": "document",
+      "label": "sec:pairs"
+    },
+    {
+      "environment": "document",
+      "label": "sec:polyhedral"
+    },
+    {
+      "environment": "document",
+      "label": "sec:reduction"
+    },
+    {
+      "environment": "document",
+      "label": "sec:templates"
+    },
+    {
+      "environment": "document",
+      "label": "sec:triples"
+    },
+    {
+      "environment": "document",
+      "label": "subsec:legal"
+    },
+    {
+      "environment": "document",
+      "label": "subsec:wild"
+    },
+    {
+      "environment": "table",
+      "label": "tab:legal"
+    },
+    {
+      "environment": "table",
+      "label": "tab:polyhedral-regular"
+    },
+    {
+      "environment": "table",
+      "label": "tab:templates"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:density"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:free-template"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:mobius-value"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:orbit-template"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:pair-closed"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:pair-orbit"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:pair-templates"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:prism-value"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:realization-pair"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:realization-triple"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:reflection-template"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:residual"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:triple-orbit"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:v4"
+    }
+  ],
+  "main": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex",
+  "manifest_labels": null,
+  "paper": "dihedral_schreier_node_kayles",
+  "pdfs": [
+    {
+      "bytes": 177926,
+      "pages": 19,
+      "path": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.pdf",
+      "sha256": "81fd9f6394b7166c86d5018759c23a5a1ecb423c175c38947e83fa0b07a72316"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex",
+      "sha256": "4bbc09ab0fd6af91e93c061396e73cf1bd49e33c66c0e25358e77cff5e1db45e"
+    }
+  ],
+  "title": "Node Kayles on Conic Schreier Graphs:\\\\ Dihedral and Polyhedral Templates",
+  "title_normalized": "node kayles on conic schreier graphs: dihedral and polyhedral templates",
+  "untracked_bibliography": []
+}

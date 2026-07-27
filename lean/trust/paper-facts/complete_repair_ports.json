@@ -1,0 +1,295 @@
+{
+  "bibliography": [
+    {
+      "key": "ArratiaGoldsteinGordon1989",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Two Moments Suffice for {Poisson} Approximations: The {Chen--Stein} Method"
+    },
+    {
+      "key": "AshikhminKramerTenBrink2004",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Extrinsic Information Transfer Functions: Model and Erasure Channel Properties"
+    },
+    {
+      "key": "BartoliEtAl2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "On Planes through Points off the Twisted Cubic in $\\mathrm{PG}(3,q)$ and Multiple Covering Codes"
+    },
+    {
+      "key": "ChenLingXing2001",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Asymptotically Good Quantum Codes Exceeding the {Ashikhmin--Litsyn--Tsfasman} Bound"
+    },
+    {
+      "key": "ChenLingXing2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Quantum Codes from Concatenated Algebraic-Geometric Codes"
+    },
+    {
+      "key": "Colbourn1987",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "The Combinatorics of Network Reliability"
+    },
+    {
+      "key": "DavydovEtAl2021",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Twisted Cubic and Orbits of Lines in $\\mathrm{PG}(3,q)$"
+    },
+    {
+      "key": "Dinitz1984",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Room $n$-Cubes of Low Order"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Nuclei of Normal Rational Curves"
+    },
+    {
+      "key": "GopalanEtAl2012",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "On the Locality of Codeword Symbols"
+    },
+    {
+      "key": "GruicaEtAl2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "{LRCs}: Duality, {LP} Bounds, and Field Size"
+    },
+    {
+      "key": "GuruswamiWootters2016",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Repairing {Reed--Solomon} Codes"
+    },
+    {
+      "key": "JinFu2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Constructions of Locally Repairable Codes via Concatenated Codes"
+    },
+    {
+      "key": "KurzYaakobi2021",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "{PIR} Codes with Short Block Length"
+    },
+    {
+      "key": "LasVergnas1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "The {Tutte} Polynomial of a Morphism of Matroids {I}: Set-Pointed Matroids and Matroid Perspectives"
+    },
+    {
+      "key": "LavrauwVanDeVoorde2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Locally Repairable Codes with High Availability Based on Generalised Quadrangles"
+    },
+    {
+      "key": "LiuEtAl2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Good Locally Repairable Codes via Propagation Rules"
+    },
+    {
+      "key": "MacWilliamsSloane1977",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "The Theory of Error-Correcting Codes"
+    },
+    {
+      "key": "Mazumdar2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Capacity of Locally Recoverable Codes"
+    },
+    {
+      "key": "PamiesEtAl2013",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Locally Repairable Codes with Multiple Repair Alternatives"
+    },
+    {
+      "key": "RuddClebschRigidity2026",
+      "kind": "bibtex",
+      "self_authored": true,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Deep-hole rigidity of the {Clebsch} hexagon code"
+    },
+    {
+      "key": "ShahEtAl2010",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Distributed Storage Codes with Repair-by-Transfer and Non-achievability of Interior Points on the Storage--Bandwidth Tradeoff"
+    },
+    {
+      "key": "Singer1938",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "A Theorem in Finite Projective Geometry and Some Applications to Number Theory"
+    },
+    {
+      "key": "Stichtenoth2005",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Transitive and Self-dual Codes Attaining the Tsfasman--Vladut--Zink Bound"
+    },
+    {
+      "key": "Stichtenoth2009",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Algebraic Function Fields and Codes"
+    },
+    {
+      "key": "Tricot2024",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "On $3$-Designs from {$\\operatorname{PGL}(2,q)$}"
+    },
+    {
+      "key": "WangZhang2014",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Repair Locality from a Combinatorial Perspective"
+    },
+    {
+      "key": "YeBarg2016",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/refs.bib",
+      "title": "Explicit Constructions of High-Rate {MDS} Array Codes with Optimal Repair Bandwidth"
+    }
+  ],
+  "dir": "papers/complete-repair-ports",
+  "environment_counts": {
+    "corollary": 2,
+    "definition": 3,
+    "proposition": 3,
+    "remark": 2,
+    "theorem": 6
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:clebsch-port"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:mds-fingerprints"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:concat-parameters"
+    },
+    {
+      "environment": "document",
+      "label": "sec:flagships"
+    },
+    {
+      "environment": "document",
+      "label": "sec:ports"
+    },
+    {
+      "environment": "document",
+      "label": "sec:realization"
+    },
+    {
+      "environment": "document",
+      "label": "sec:reliability"
+    },
+    {
+      "environment": "document",
+      "label": "sec:transfer"
+    },
+    {
+      "environment": "document",
+      "label": "sec:tutte"
+    },
+    {
+      "environment": "document",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:cubic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:harmonic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:prescribed"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:reliability"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:transfer"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:tutte"
+    }
+  ],
+  "main": "papers/complete-repair-ports/complete_repair_ports.tex",
+  "manifest_labels": null,
+  "paper": "complete_repair_ports",
+  "pdfs": [
+    {
+      "bytes": 146049,
+      "pages": 14,
+      "path": "papers/complete-repair-ports/complete_repair_ports.pdf",
+      "sha256": "76407a9407403df5e760352c06b5be0e3a111067899d976a6d179536569bccb9"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/complete-repair-ports/complete_repair_ports.tex",
+      "sha256": "88d59047da5791775690f3e6c4d25af03b660da5777a8f9c7388317f035ec239"
+    }
+  ],
+  "title": "Complete Bounded Repair Ports:\\\\ \\large Transfer, Reliability, and Geometric Structure",
+  "title_normalized": "complete bounded repair ports: transfer, reliability, and geometric structure",
+  "untracked_bibliography": []
+}

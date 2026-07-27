@@ -1,0 +1,148 @@
+{
+  "bibliography": [
+    {
+      "key": "BM1",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "BM2",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "Batten",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "Bruck",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "BrunoMella",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "Deza",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "Dyshko",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    },
+    {
+      "key": "GPZ",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex"
+    }
+  ],
+  "dir": "papers/continuation-graph-rigidity",
+  "environment_counts": {
+    "lemma": 3,
+    "problem": 3,
+    "proposition": 3,
+    "remark": 1,
+    "theorem": 5
+  },
+  "labels": [
+    {
+      "environment": "align",
+      "label": "eq:mult"
+    },
+    {
+      "environment": "align",
+      "label": "eq:shift"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:clique"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:frobenius"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:isotopy"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:intersection"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:normal"
+    },
+    {
+      "environment": "document",
+      "label": "sec:centres"
+    },
+    {
+      "environment": "document",
+      "label": "sec:def"
+    },
+    {
+      "environment": "document",
+      "label": "sec:frame"
+    },
+    {
+      "environment": "document",
+      "label": "sec:obstructions"
+    },
+    {
+      "environment": "document",
+      "label": "sec:remarks"
+    },
+    {
+      "environment": "document",
+      "label": "sec:traces"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:centres"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:rook"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:traces"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:triangle"
+    }
+  ],
+  "main": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex",
+  "manifest_labels": null,
+  "paper": "continuation_graph_rigidity",
+  "pdfs": [],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/continuation-graph-rigidity/continuation_graph_rigidity.tex",
+      "sha256": "cc9459d3a1ff1450583fc88bfc12327c4fecbe8d83b5759ce3e441fcb5468b64"
+    }
+  ],
+  "title": "Semilinear rigidity of four-point-frame continuation graphs",
+  "title_normalized": "semilinear rigidity of four-point-frame continuation graphs",
+  "untracked_bibliography": []
+}
