@@ -4,6 +4,7 @@ import RelativeConicArcs.Averaging
 import RelativeConicArcs.EvaluationObstruction
 import RelativeConicArcs.MatchingDesignRigidity
 import RelativeConicArcs.Q16ExceptionalArithmetic
+import RelativeConicArcs.QuadraticLineTriangleObstruction
 import RelativeConicArcs.Results
 import RelativeConicArcs.TangentPairFourGroup
 import RelativeConicArcs.UncoveredLocusReconstruction
@@ -21,8 +22,8 @@ The rank-three realization classification for ten-point matching designs is not 
 is therefore outside this gate.
 -/
 
-#print axioms RelativeConicArcs.completeOutside_bound_general
-#print axioms RelativeConicArcs.NonsingularConic.finite_lower_bound
+#print axioms RelativeConicArcs.Conic.completeOutside_bound_general
+#print axioms RelativeConicArcs.Conic.NonsingularConic.finite_lower_bound
 #print axioms RelativeConicArcs.pointIndex_le_half_card
 #print axioms RelativeConicArcs.first_secant_moment
 #print axioms RelativeConicArcs.second_secant_moment
@@ -33,11 +34,11 @@ is therefore outside this gate.
 #print axioms RelativeConicArcs.stability_bound
 #print axioms RelativeConicArcs.completeAffine_bound
 #print axioms RelativeConicArcs.completeAffine_bound_eq_iff
-#print axioms RelativeConicArcs.rhoC_explicit_additive_lower_bound
-#print axioms RelativeConicArcs.eventually_lt_centered
-#print axioms RelativeConicArcs.exists_completeOutside_of_completeArc
-#print axioms RelativeConicArcs.rhoC_le_t2
-#print axioms RelativeConicArcs.rhoC_le_of_kimVuBound
+#print axioms RelativeConicArcs.Conic.rhoC_explicit_additive_lower_bound
+#print axioms RelativeConicArcs.Conic.eventually_lt_centered
+#print axioms RelativeConicArcs.Averaging.exists_completeOutside_of_completeArc
+#print axioms RelativeConicArcs.Averaging.rhoC_le_t2
+#print axioms RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound
 
 #print axioms RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants
 #print axioms RelativeConicArcs.verticesOfLineFamily_secants_eq
@@ -65,6 +66,7 @@ is therefore outside this gate.
 
 #print axioms RelativeConicArcs.eq_zero_of_evaluationMap_injective
 #print axioms RelativeConicArcs.evaluation_eq_zero_of_eq_sum
+#print axioms RelativeConicArcs.ternaryQuadratic_eq_zero_of_standardLine_and_offLineTriangle
 
 #print axioms RelativeConicArcs.Certificate.rawArc_iff_projectiveCap
 #print axioms RelativeConicArcs.Certificate.check_sound
@@ -83,6 +85,6 @@ is therefore outside this gate.
 #print axioms RelativeConicArcs.Q16Classification.exceptionalFormThree_arc_hits
 #print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwoMatrix_isUnit
 #print axioms RelativeConicArcs.Q16Classification.exceptionalFormTwo_conic_equation
-#print axioms RelativeConicArcs.arbitrary_eight_arc_projectiveQuadraticAvoidance
+#print axioms RelativeConicArcs.Q16Classification.arbitrary_eight_arc_projectiveQuadraticAvoidance
 #print axioms RelativeConicArcs.no_completeOutside_GF16_card_eight
 #print axioms RelativeConicArcs.rhoC_GF16

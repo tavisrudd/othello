@@ -9,6 +9,13 @@
    \sum_{x\in X_H(A)}(r(x)-1)(m-r(x))+
    \sum_{y\in H}r(y)(m-r(y)).
    \]
+   On required points, its first sum is exactly \(m\) times the slack in
+   \[
+   \mathbf 1_{\{r>0\}}\le r-\frac2m\binom r2,\qquad 0\le r\le m,
+   \]
+   whose positive-index equality cases are \(r=1,m\). Thus “sharp two-moment
+   certificate” in the manuscript refers to this pointwise equality structure,
+   not to an unproved global optimality theorem.
 3. Coverage, uncovered-locus, equality, and quantitative stability statements are immediate corollaries of the exact identity.
    The stability weights also give the discrete alternative
    \(m\Delta_H(A)=0\) or \(m\Delta_H(A)\ge m-2\).
@@ -44,7 +51,10 @@
    Alspach--Heinrich, Theorem 3.1.
 4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
    inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
-   \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
+   \(|C|=q+1\). In particular, every prescribed hole set \(H\) of cardinality \(q+1\) gives
+   \(q^2-k\le\binom{k}{2}(q-1)-6\binom{k}{4}/\lfloor k/2\rfloor\), and hence the same
+   scalar \(L_2(q)\) lower bound, without any conic geometry. For a line at infinity, every
+   secant contributes exactly one hole incidence,
    so `I_L(A)=choose(k,2)` and the general theorem gives the displayed complete-affine-arc bound
    and its equality pattern.
    The even-size equality-spectrum corollary combines conic equality with the matching-design
@@ -95,6 +105,12 @@
    \(I_C(A)=\binom{k}{2}\) and \(k-1\) maximum-index conic points. Nucleus parity forces a tangent
    arc secant. Its two commuting conic involutions preserve that \(3\bmod4\) set and have, together
    with their product, the tangent contact as unique fixed point; permutation sign is contradictory.
+   The manuscript now supplies both bridges explicitly. If \(Y\) has maximum conic index, the
+   secants through \(Y\) perfectly match the arc; pairing an arc point \(R\) with \(R'\) shows that
+   the other conic point on \(RR'\), namely \(\sigma_R(Y)\), has positive index and therefore
+   maximum index at zero defect. In standard conic coordinates, two distinct secant involutions
+   with the same tangent fixed point are commuting characteristic-two translations, and their
+   product is a third nonidentity involution with that same unique fixed point.
    Lean checks the incidence identity in
    `RelativeConicArcs.upper_even_equality_branch_holeIncidence`, the invariant-set bridge in
    `ZeroDefectConicInvariance`, and the general terminal
@@ -158,6 +174,23 @@
 
 ## Computer-assisted claims
 
+The defect identity, equality criterion, matching rigidity, deletion stability,
+and reconstruction theorem have ordinary proofs in the manuscript and
+independent Lean formalizations.  The averaging and asymptotic arguments are
+ordinary paper proofs.  The two essential finite arguments have different trust
+boundaries.  The q=16 exclusion is a Lean-kernel-checked exhaustive certificate
+theorem; its separate Python pattern certificate explains the generic leaves
+geometrically but is not a premise of the Lean theorem.  The ten-point
+realization classification imports Mathon's published abstract classification
+and trusts exact Singular executions; it is not consumed by Lean.
+
+The manuscript now reflects that division of labor explicitly.  The main body
+ends after the defect mechanism, equality consequences, and conic lower bound.
+The equality realizations, upper transfer, nucleus lemmas, finite classifications,
+reconstruction theorem, witnesses, and verification contracts are appendices.
+Generators, raw certificates, hashes, and replay scripts remain in the
+electronic companion, so implementation detail does not interrupt the main proof.
+
 The supplementary verifier checks explicit upper-bound witnesses for
 \(q=8,9,11,16\). The C187 small-\(k\) checker independently verifies the
 four-frame conic-filling identity at \(q=5\), and the C188 Lean leaf transports
@@ -190,6 +223,10 @@ and the middle form's invertible standard-conic coordinate change on all
 matrices on the 2630 generic leaves, proves that the three exceptional
 matrices have exactly the displayed one-dimensional kernels, and transports
 the rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
+The field-uniform normalized mechanism is also kernel-checked by
+`RelativeConicArcs.ternaryQuadratic_eq_zero_of_standardLine_and_offLineTriangle`;
+the manuscript supplies the elementary projective normalization to its
+standard line coordinates.
 
 The ten-point equality refinement is separately computer-assisted.  Abstract
 completeness is Mathon's two-class theorem, imported through

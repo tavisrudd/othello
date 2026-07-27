@@ -87,7 +87,14 @@ The consumed level list has digest
 The existing, independently shaped Lean certificates verify invertibility of
 six-by-six evaluation matrices on precisely 2,630 leaves and the forced-hit
 relations on the other three.  They are an independent cross-check of the
-new incidence-pattern partition.  The new script does not certify
+new incidence-pattern partition.
+`RelativeConicArcs.ternaryQuadratic_eq_zero_of_standardLine_and_offLineTriangle`
+in `RelativeConicArcs.QuadraticLineTriangleObstruction` kernel-checks the
+field-uniform normalized line--triangle argument: three standard points on
+`Z=0` kill the line restriction, while a nonzero determinant for three
+off-line coordinate rows kills the residual linear factor.  Projective
+normalization from an arbitrary line and its three distinct points remains
+the elementary geometric bridge used in the manuscript.  The new script does not certify
 exhaustiveness of the augmentation list; that remains the job of the Lean
 `StepBook.coverage` chain.
 

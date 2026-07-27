@@ -33,9 +33,8 @@
 \newcommand{\rhoC}{\rho_{\cC}}
 \newcommand{\tmin}{t_2(2,q)}
 
-\title{Exact prescribed-hole defect and matching-design rigidity\\
-for projective arcs\\
-\large with applications to arcs complete outside a conic}
+\title{Arcs complete outside a conic:\\
+a prescribed-hole defect identity and matching-design rigidity}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -43,44 +42,27 @@ for projective arcs\\
 \maketitle
 
 \begin{abstract}
-For a projective arc $A$ and any prescribed set $\cH$ disjoint from it,
-splitting the classical first two secant-index equations between $\cH$ and
-its complement gives an exact identity with a pointwise nonnegative
-remainder.  The concurrency cliques of the secants canonically decompose
-the edges of the Kneser graph $KG(k,2)$.  At zero defect they are maximum
-matchings; after projective duality, the star and matching lines give a
-realization in the dual plane of the full star--matching pairwise-balanced
-design on the edges of $K_k$; in a Desarguesian plane this is a
-rank-three realization over the underlying field.  The remainder also
-controls both the edge count and the secant vertex-cover number of the
-graph formed by the nonmaximum concurrency cliques.  In particular,
-deleting at most \(m\Delta_{\cH}(A)\) secants destroys every edge of that
-graph.
-Using the known two-class classification of abstract
-$\operatorname{MATCH}(10,5,1)$ designs and exact realization-ideal
-computations, we prove that one class has no rank-three realization over
-any field, while the regular-hyperoval class is realizable exactly over
-characteristic-two fields containing $\F_8$.
-
-We apply this theory when $\cH$ is a nonsingular conic $\cC$ in
-$\PG(2,q)$.  If $\rhoC(q)$ is the minimum size of an arc outside $\cC$
-whose secants cover every point outside the arc and conic, the identity
-gives an integer lower bound \(L_2(q)\), hence
+For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) be the
+least size of an arc disjoint from \(\cC\) whose secants cover every
+remaining point outside \(\cC\).  We prove
 \[
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-For zero-defect \(\cC\)-complete arcs we determine the three possible
-orders \(q\) for each parity of \(k\).  Over fields of order a power of
-two, odd \(k\) gives exactly an oval whose nucleus lies on \(\cC\), while
-even \(k\) forces the hyperoval scale \(k=q+2\).  The latter conclusion
-comes from the involutions induced on \(\cC\) by a tangent arc secant.
-Projective averaging
-transfers upper bounds from sufficiently small ordinary complete arcs.
-Finally, an exhaustive augmentation certificate together with exact
-quadratic-evaluation certificates shows that no quadratic disjoint from
-an eight-arc over \(\F_{16}\) contains its uncovered locus.  A checked
-nine-point witness then gives \(\rhoC(16)=9\).
+We determine the possible zero-defect orders and classify zero defect in
+characteristic two: odd \(k\) gives an oval whose nucleus lies on \(\cC\),
+while even \(k\) forces \(k=q+2\).  A kernel-checked finite classification
+proves \(\rhoC(16)=9\).
+
+The mechanism is a theorem for every finite projective plane and every
+prescribed hole set \(\cH\): the first two secant moments combine into an
+exact identity with a pointwise nonnegative remainder.  Its vanishing
+turns the canonical secant-concurrency decomposition of \(KG(k,2)\) into
+a simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; in a
+Desarguesian plane this design has a rank-three projective realization.
+Its total gives an explicit deletion bound away from equality.  The defect
+identity, equality criterion, and deletion stability are independently
+formalized in Lean.
 \end{abstract}
 
 \section{Introduction}
@@ -124,10 +106,7 @@ In a Desarguesian plane, projective representatives of the points of \(A\)
 form a parity-check matrix of a \([k,k-3,4]_q\) MDS code.  If
 \(U(A)\ne\varnothing\), then \(U(A)\) is exactly its projective deep-hole
 syndrome locus: points of \(A\), points on secants, and points of \(U(A)\)
-have coset weight one, two, and three, respectively.  The conic-filling
-redundancy-three case is studied in~\cite{RuddClebsch2026}; the
-normal-rational-curve correspondence at higher redundancies underlies the
-projective Reed--Solomon classifications in~\cite{RuddBeyondFour2026}.
+have coset weight one, two, and three, respectively.
 
 The minimum is attained because the finite point set
 $\PG(2,q)\setminus\cC$ contains an inclusion-maximal arc \(A\).  For every
@@ -158,6 +137,10 @@ Then
  \sum_{x\in\cX_{\cH}(A)}(r(x)-1)(m-r(x))
  +\sum_{y\in\cH}r(y)(m-r(y)).
 \]
+\end{theorem}
+
+\begin{corollary}[Equality rigidity and deletion stability]
+\label{cor:intro-rigidity}
 The concurrency cliques of the secants canonically decompose
 \(KG(k,2)\).  For \(k\ge4\), if \(\Delta_{\cH}(A)=0\), these cliques are
 maximum matchings and form a simple
@@ -169,9 +152,9 @@ and the vertex-cover number of the graph formed by the nonmaximum
 concurrency cliques; after deleting at most \(m\Delta_{\cH}(A)\)
 secants, every surviving Kneser edge lies in a maximum concurrency
 clique.
-\end{theorem}
+\end{corollary}
 
-\begin{theorem}[Conic lower bound and \(q=16\)]
+\begin{theorem}[\(q+1\)-hole lower bound and \(q=16\)]
 \label{thm:main-conic}
 If
 \[
@@ -179,7 +162,8 @@ If
  q^2-k\le\binom{k}{2}(q-1)
  -\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}\right\},
 \]
-then every nonsingular conic satisfies
+then every \(k\)-arc complete outside a prescribed set of \(q+1\) points
+satisfies \(k\ge L_2(q)\).  In particular, every nonsingular conic satisfies
 \[
  \rhoC(q)\ge L_2(q)
  \ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
@@ -199,9 +183,8 @@ even branch leaves only the hyperoval scale, by a tangent-involution
 congruence on the maximum-index points of the prescribed conic.
 
 The last assertion of Theorem~\ref{thm:main-conic} has a separate finite
-input: a checked augmentation certificate reduces all eight-arcs over
-\(\F_{16}\) to \(2633\) leaves, and checked quadratic-evaluation records
-reject every leaf.
+input: a checked augmentation certificate enumerates the eight-arc leaves,
+and checked quadratic-evaluation records reject every leaf.
 
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
@@ -225,6 +208,10 @@ The equality structure belongs to the established theory of matching
 designs.  Alspach and Heinrich~\cite{AlspachHeinrich1990} call a family of
 $s$-edge matchings in $K_n$ a $\operatorname{MATCH}(n,s,\lambda)$ design
 when every pair of independent edges occurs in exactly $\lambda$ members.
+Their framework generalizes hyperfactorizations, which were introduced in
+connection with higher block designs.  Here the prescribed-hole equality
+condition selects the much narrower class whose matching blocks arise as
+secant concurrences in one projective plane.
 Our contribution at this interface is the geometric implication: vanishing
 of the prescribed-hole defect canonically produces a simple
 $\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)$ design, represented by
@@ -236,26 +223,14 @@ Corollary~\ref{cor:star-matching-realization} upgrades the matching design
 to an incidence realization of the full star--matching pairwise-balanced
 design.  In a Desarguesian plane it is a rank-three realization over the
 underlying field, providing the bridge to the field and characteristic
-restrictions in Section~\ref{sec:equality-classifications}.
-A complementary conic-side construction begins with maximum matchings of
-marked conic points and studies their secant products modulo the conic
-equation.  For the \(A_3\), \(B_3\), and \(H_3\) configurations, the
-resulting quotients recover factorization sheets and a cubic orientation
-\cite{RuddFactorization2026}.
+restrictions recorded in Appendix~\ref{sec:equality-classifications}.
 
-Sections~\ref{sec:classical}--\ref{sec:examples} give the main route:
-exact accounting, equality rigidity, lower and upper bounds, the
-characteristic-two refinement, and the finite obstruction.  The short
-final section records an elementary inverse consequence: above a sharp
-incidence threshold, the complete uncovered locus determines its parent
-arc and automorphism group.
-
-The secant-index equations and the Lunelli--Sce \(\sqrt{2q}\) scale are
-classical.  The new ingredient is the exact prescribed-hole remainder.  It
-yields the lower bound, identifies equality with a geometrically realized
-matching design, and measures stability.  We then specialize it to a conic,
-develop the uncovered-locus evaluation obstruction, certify the exact value
-at \(q=16\), and prove the inverse reconstruction theorem.
+Sections~\ref{sec:classical}--\ref{sec:conic} give the main route:
+exact accounting, equality rigidity, and the conic lower bound.  The
+appendices contain the finite proof of the \(q=16\) result together with
+the secondary realization classification, upper-bound transfer,
+characteristic-two incidence lemmas, reconstruction theorem, and
+verification contracts.
 
 \section{The classical secant equations}
 \label{sec:classical}
@@ -396,6 +371,16 @@ now give~\eqref{eq:defect}.  Every term is nonnegative by
 Lemma~\ref{lem:max-index}.
 \end{proof}
 
+For required points, the identity records the total slack in the
+pointwise quadratic inequality
+\[
+ \mathbf 1_{\{r>0\}}\le r-\frac2m\binom r2
+ \qquad(0\le r\le m),
+\]
+whose positive-index equality cases are exactly \(r=1\) and \(r=m\).
+Thus the factored remainder is a sharp two-moment certificate, rather than
+only a rearrangement of the global counts.
+
 \begin{corollary}[Coverage and uncovered-locus bounds]
 \label{cor:coverage}
 Under the hypotheses of Theorem~\ref{thm:defect},
@@ -445,6 +430,22 @@ $\cH$, then
 Completeness gives
 $|\cX_{\cH}(A)|=|V_{\cH}(A)|=q^2+q+1-k-h$.
 Substitute this equality into~\eqref{eq:coverage}.
+\end{proof}
+
+\begin{corollary}[Any \(q+1\) prescribed holes]
+\label{cor:q-plus-one-holes}
+Let \(|\cH|=q+1\).  If a \(k\)-arc \(A\) is disjoint from \(\cH\) and
+complete outside \(\cH\), then
+\[
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac6m\binom{k}{4}.
+\]
+Consequently \(k\ge L_2(q)\).  No geometric property of \(\cH\) is used.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:arbitrary-holes} gives the stronger inequality with the
+additional nonpositive term \(-\IH(A)/m\).  Drop that term.
 \end{proof}
 
 The exact remainder also quantifies near equality.
@@ -704,7 +705,9 @@ rearranges to~\eqref{eq:conic-complete}.
 
 The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
 concurrence among secants; the last accounts for secant incidence spent on
-the exempt conic.
+the exempt conic.  Dropping the last term recovers
+Corollary~\ref{cor:q-plus-one-holes}; conic geometry enters the equality
+theory and finite applications, not this scalar lower bound.
 
 \begin{corollary}[Even-size equality spectrum]
 \label{cor:even-equality-spectrum}
@@ -822,19 +825,31 @@ of index \(m\), and hence
  \IC(A)=ms=\binom{k}{2}.
 \]
 Let \(\nu\) be the nucleus of \(\cC\).  If \(\nu\in A\), then
-Proposition~\ref{prop:nucleus-in} gives
-\(\IC(A)\equiv k-1\pmod2\), impossible because \(m\) is even.
-Thus \(\nu\notin A\).  Zero defect gives
-\(r(\nu)\in\{1,m\}\), while Proposition~\ref{prop:nucleus-out} gives
-\(\IC(A)\equiv r(\nu)\pmod2\).  Hence \(r(\nu)=m\), so an arc secant
+the \(k-1\) lines from \(\nu\) to the other arc points are exactly the
+tangent \(A\)-secants: any further tangent secant would contain \(\nu\)
+and two other arc points.  All nontangent secants meet \(\cC\) in zero or
+two points, so \(\IC(A)\equiv k-1\pmod2\), impossible because \(m\) is
+even.  Thus \(\nu\notin A\).  Now the tangent \(A\)-secants are exactly
+the secants through \(\nu\), and therefore
+\(\IC(A)\equiv r(\nu)\pmod2\).  Zero defect gives
+\(r(\nu)\in\{1,m\}\), so \(r(\nu)=m\).  Hence an arc secant
 \(PQ\) is tangent to \(\cC\), say at \(T\).
 
 After a projective change of coordinates, assume that \(\cC\) is the
 standard conic.  Each point \(R\notin\cC\) induces an involution
 \(\sigma_R\) on \(\cC\) by taking the other point on the chord through
-\(R\).  Since \(P,Q\ne\nu\), the involutions \(\sigma_P,\sigma_Q\) and
-their product have the common unique fixed point \(T\).  They preserve
-the set \(S\) of maximum-index conic points, which has
+\(R\).  Let \(S\) be the set of maximum-index conic points.  This set is
+invariant under every \(\sigma_R\) with \(R\in A\).  Indeed, if \(Y\in S\),
+the secants through \(Y\) form a perfect matching of \(A\), so \(R\) has a
+partner \(R'\in A\).  The other conic point on \(RR'\) is
+\(\sigma_R(Y)\); it lies on an \(A\)-secant, and zero defect forces its
+positive conic index to be \(m\).
+
+The involutions \(\sigma_P\) and \(\sigma_Q\) fix \(T\).  In the standard
+conic parameter they are distinct nonidentity characteristic-two
+translations with this common fixed point.  Hence they commute, and their
+product is a third nonidentity involution whose unique fixed point is also
+\(T\).  All three preserve \(S\), and
 \[
  |S|=k-1\equiv3\pmod4.
 \]
@@ -1064,11 +1079,44 @@ Theorem~\ref{thm:asymptotic}.  Any stronger asymptotic result needs an
 additional mechanism, not merely a spectral estimate for $\IC(A)$.
 \end{remark}
 
+\section{Conclusion and further questions}
+
+The prescribed-hole identity retains the local equality and stability data
+discarded by the usual scalar secant count.  At zero defect those local
+conditions assemble into a matching design.  For any \(q+1\) prescribed
+holes they sharpen the scalar lower bound; for a conic, the same mechanism
+also restricts equality and isolates the finite obstruction at \(q=16\).
+The appendices record secondary consequences and the exact formal and
+computational trust boundaries.
+
+\begin{problem}
+Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
+impossible for an infinite family.  The upper-bound transfer in
+Appendix~\ref{sec:transfer} currently supplies only
+$O(\sqrt q(\log q)^c)$.  On the lower-bound side,
+Remark~\ref{rem:scale} shows that improving the additive constant \(3/2\)
+requires a mechanism coupling rank-three realization to the matching
+structure, rather than a sharper estimate of the conic-incidence term.
+\end{problem}
+
+\begin{problem}
+Develop the higher-dimensional analogue for caps complete outside a
+prescribed quadric in $\PG(n,q)$.  The evaluation lemma already applies to
+arbitrary feature maps and Veronese degrees; the missing ingredient is an
+appropriate exact secant-moment remainder for caps.
+\end{problem}
+
+\appendix
+
 \section{Equality classifications}
 \label{sec:equality-classifications}
 
 The first two nontrivial orders illustrate the distinction between an
 abstract matching design and its rank-three projective realization.
+This secondary classification is not needed for the defect identity, the
+conic lower bound, or the \(q=16\) exclusion.  Its role is to show that
+abstract matching-design existence is weaker than projective
+realizability, which can impose field and characteristic restrictions.
 
 \begin{definition}\label{def:rank-three-realization}
 A \emph{rank-three projective realization} of a
@@ -1186,16 +1234,16 @@ than shrinks, the locus that must be excluded: a unit saturated ideal
 therefore rules out every arc realization without claiming that this one
 product encodes all arc inequations.
 
-Exact rational module identities make both saturated ideals the unit ideal
-after inverting \(2\); because their only denominator prime is \(2\), the
-same identities exclude both designs in every odd characteristic.  In
+The remaining elimination is computer-assisted.  The exact certificate
+summarized in Appendix~\ref{app:rank-three-certificates} gives the following
+mathematical output.  After inverting \(2\), rational module identities make
+both saturated ideals the unit ideal, and their only denominator prime is
+\(2\); hence both designs are excluded in every odd characteristic.  In
 characteristic two the second design again has unit saturated ideal.  For
-the regular-hyperoval design, the surviving triangular basis instead forces
-a parameter \(t\) with \(t^3+t+1=0\); the arc inequations force
-\(t\notin\F_2\), so \(\F_8\subseteq K\).  The regular hyperoval over
+the regular-hyperoval design, the surviving triangular basis forces a
+parameter \(t\) with \(t^3+t+1=0\), while the arc inequations force
+\(t\notin\F_2\).  Thus \(\F_8\subseteq K\).  The regular hyperoval over
 \(\F_8\) and scalar extension prove the converse.
-Appendix~\ref{app:verification} records the certificate, independent
-checks, and replay boundary.
 \end{proof}
 
 \section{An upper-bound transfer from complete arcs}
@@ -1463,10 +1511,6 @@ The appendix also lists $\cC$-complete arcs of size six for $q=8,9,11$.
 Their verification is described below.
 \end{proof}
 
-For context, the companion treatment classifies all conic-filling loci for
-$4\le k\le7$~\cite[the conic-filling classification]{RuddClebsch2026}.
-That broader classification is not used in Proposition~\ref{prop:small-values}.
-
 The ordinary classification of eight-arcs over $\F_{16}$ records arc
 counts, stabilizers, secant-index distributions, and conic-contained
 classes.  The theorem below adds the datum needed here: the ordinary
@@ -1574,7 +1618,7 @@ set.  This contradicts Theorem~\ref{thm:q16-quadratic}.  The nine-point
 witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \end{proof}
 
-\section{Uncovered-locus reconstruction}
+\section{An inverse coda: uncovered-locus reconstruction}
 \label{sec:reconstruction}
 
 This coda does not apply to the \(\cC\)-complete arcs studied above:
@@ -1665,79 +1709,37 @@ $A$ through at least five distinct four-frames, all with the same literal
 uncovered locus $\cC(\F_5)$.
 \end{remark}
 
-\section{Conclusion and further questions}
-
-The prescribed-hole identity retains the local equality and stability data
-discarded by the usual scalar secant count.  At zero defect those local
-conditions assemble into a matching design, while for a conic they sharpen
-the integer lower bound and isolate the finite obstruction at \(q=16\).
-Projective averaging supplies the complementary upper transfer.  The
-reconstruction coda shows that, above the sharp incidence threshold, the
-complete uncovered locus also remembers the secant arrangement and its
-vertices.
-
-\begin{problem}
-Construct $\cC$-complete arcs of size $O(\sqrt q)$, or prove that this is
-impossible for an infinite family.  Theorem~\ref{thm:transfer} currently
-supplies only $O(\sqrt q(\log q)^c)$.  On the lower-bound side,
-Remark~\ref{rem:scale} shows that improving the additive constant \(3/2\)
-requires a mechanism coupling rank-three realization to the matching
-structure, rather than a sharper estimate of the conic-incidence term.
-\end{problem}
-
-\begin{problem}
-Develop the higher-dimensional analogue for caps complete outside a
-prescribed quadric in $\PG(n,q)$.  The evaluation lemma already applies to
-arbitrary feature maps and Veronese degrees; the missing ingredient is an
-appropriate exact secant-moment remainder for caps.
-\end{problem}
-
-\appendix
 \section{Computational and formal verification}
 \label{app:verification}
 
-The body separates mathematical reductions from finite exclusion.  The
-corresponding evidence and trust boundaries are summarized below.  In the
-source supplement, \path{lean/RelativeConicArcs/TRUST.md} records exact
-commands, toolchain versions, SHA-256 digests, theorem names, and frozen
-outputs.  Within \path{lean/RelativeConicArcs/}, the import-only gate
-\path{Gates/ArcsCompleteOutsideConic.lean} is the kernel-checking
-entry point for precisely the results used here.
-The pinned versions are Lean \(4.32.0\)-rc1, Lake
-\texttt{5.0.0-src+\allowbreak b4812ae}, and Mathlib revision
-\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  From the supplement's
-\path{lean/} directory, the exact replay is:
-\begin{verbatim}
-nix develop --command lake exe cache get
-nix develop --command env LEAN_NUM_THREADS=1 \
-  lake build \
-  RelativeConicArcs.Gates.ArcsCompleteOutsideConic
-\end{verbatim}
-Success is exit status zero with a final Lake success report for the named
-gate; the gate itself has no runtime output.  When its generated
-\(q=16\) dependencies are already built, direct gate elaboration takes
-seconds.  A cold single-thread rebuild of the generated certificate tree
-should instead be budgeted as a multi-hour job with \(8\) GiB of RAM and
-\(10\) GiB of free disk.  The largest generated \(q=16\) leaves have a
-measured peak of approximately \(1.3\) GiB each.
+\subsection{Formal gate and evidence roles}
 
-The gate also checks the discrete zero-or-gap alternative, the two
-complete-affine equality orders, and both three-value equality spectra for
-arbitrary hole sets of cardinality \(q+1\).  In characteristic two it checks
-the odd power-of-two collapse and, for the standard conic, the even conclusion
-\(q=k-2\).  The latter terminal combines the elementary exclusion of the
-middle root with the upper-branch conic argument: the exact conic-incidence
-identity, parity of the half-size parameter, standard-conic secant
-involutions, their invariance on the maximum-index set of cardinality three
-modulo four, and the resulting sign contradiction.  The
-identification of an arbitrary equality oval with a prescribed conic through
-its nucleus, and the parallel hyperoval converse, remain paper proofs rather
-than claims of the formal artifact.
+The main body develops the mathematical mechanism; the appendices separate
+secondary deductions from finite exclusion.  The corresponding evidence and
+trust boundaries are summarized below.  In the electronic companion,
+\path{TRUST.md} records exact commands, toolchain versions, SHA-256 digests,
+theorem names, and frozen outputs.  The import-only gate
+\path{ArcsCompleteOutsideConic.lean} is the kernel-checking entry point for
+precisely the results used here; both files lie under
+\path{lean/RelativeConicArcs/}, with the gate in its \path{Gates/}
+subdirectory.
+This appendix states the mathematical certificate contracts and the trust
+boundary; raw generated certificates, generators, and replay scripts remain
+in the companion.
+
+The gate also checks the discrete gap, complete-affine equality orders,
+three-value equality spectra, and the standard-conic characteristic-two
+conclusions.  The identification of an arbitrary equality oval or hyperoval
+with its prescribed-conic configuration remains a paper proof.
 
 The complete \texttt{\#print axioms} output for the gate theorems consists
 only of \texttt{propext}, \texttt{Classical.choice}, and
 \texttt{Quot.sound}.  The checked sources contain no \texttt{sorry},
 custom axiom declaration, or \texttt{native\_decide}.
+
+The table distinguishes the three evidence roles: ordinary proofs with
+independent formalization, kernel-checked finite certificates, and exact
+computer algebra outside Lean.
 
 \begin{center}
 \small
@@ -1756,27 +1758,27 @@ Lean kernel, Mathlib, and
 augmentation transitions, the line--triangle pattern certificate,
 \(2630+3\) Lean leaf records, and
 \texttt{Q16QuadraticTransport}, imported by the gate&
-Lean kernel and Mathlib; exact Python arithmetic checks the pattern
-partition independently; generator labels and deduplication are not trusted\\
+The theorem trusts the Lean kernel and Mathlib.  Exact Python arithmetic
+certifies the geometric compression independently but is not a premise of the
+Lean theorem; generator labels and deduplication are not trusted\\
 Ten-point realization&
 \texttt{check\_match10\_\allowbreak rank\_three.py} and its JSON certificate&
 Mathon's external two-class classification; Python integer arithmetic and
-Singular exact arithmetic\\
+Singular exact arithmetic; this claim is outside the Lean gate\\
 Small-field witnesses&
 \texttt{ExampleChecks/\allowbreak Q5.lean} through \texttt{Q16.lean}&
-Lean kernel and the explicit finite-field implementations\\ \hline
+Lean kernel and the explicit finite-field implementations; no witness-search
+execution is trusted\\ \hline
 \end{tabular}
 \end{center}
+
+\subsection{Rank-three realization certificates}
+\label{app:rank-three-certificates}
 
 The ten-point bundle consists of
 \texttt{check\_match10\_rank\_three.py}, its JSON certificate, and
 \texttt{check\_match10\_rank\_three.sha256} in the paper directory.
-Running
-\begin{verbatim}
-nix shell nixpkgs#singular --command \
-  python3 check_match10_rank_three.py --check
-\end{verbatim}
-regenerates and checks the certificate.  Singular Gr\"obner bases and
+The companion gives the exact replay command.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
 direct \(\F_8\) incidence construction provide independent checks; the
 same record checks the regular hyperoval, the disjoint prescribed conic
@@ -1788,12 +1790,8 @@ displayed in the proof of Theorem~\ref{thm:match-ten-realization}, and the check
 rational module lifts have no denominator prime other than \(2\); hence
 their unit relations survive in every odd characteristic.
 
-Lean also proves, without an extra hypothesis, the operational asymptotic
-statement along unbounded orders: every constant below \(3/2\) is eventually
-a lower bound for \(\rhoC(q)-\sqrt{2q}\).  The separate real-valued
-\texttt{liminf} wrapper assumes coboundedness only because its codomain
-\(\mathbb R\) has no value \(+\infty\); this assumption is not used in the
-paper's elementary passage to~\eqref{eq:liminf}.
+\subsection{The \texorpdfstring{\(q=16\)}{q=16} augmentation and leaf certificates}
+\label{app:q16-certificates}
 
 For the \(q=16\) exclusion, the supplement contains the source generator
 \path{papers/arcs_complete_outside_conic/search_rhoc16.cpp}, its frozen
@@ -1812,16 +1810,16 @@ canonical labels nor an external claim of exhaustive execution.
 The independent pattern checker recomputes every ordinary-uncovered locus
 from the frozen level-eight list and verifies the line--triangle pattern on
 exactly \(2630\) leaves.  Its canonical JSON output records one six-point
-witness per leaf and the three exceptional kernels.  Run
-\begin{verbatim}
-python3 check_q16_uncovered_patterns.py --check
-sha256sum -c check_q16_uncovered_patterns.sha256
-\end{verbatim}
-from the paper directory.  This checker supplies the geometric compression
-used in the proof.  It also checks the two displayed factorizations and the
+witness per leaf and the three exceptional kernels.  This checker supplies
+the geometric compression used in the proof and checks the two displayed
+factorizations and the
 middle form's invertible standard-conic coordinate change on all \(16^3\)
 coordinate vectors.  The independently shaped Lean inverse matrices remain
-a kernel-checked verification of the same \(2630+3\) partition.
+a kernel-checked verification of the same \(2630+3\) partition.  The
+field-uniform normalized line--triangle argument is separately kernel-checked
+in \path{QuadraticLineTriangleObstruction}; the terminal theorem's determinant
+hypothesis is the coordinate form of noncollinearity for the three off-line
+points.
 
 \section{Finite-field witnesses}\label{app:witnesses}
 
@@ -1872,24 +1870,6 @@ computations, code, and cited sources, reviewed and edited all AI-assisted
 material, and assumes responsibility for all content.
 
 \begin{thebibliography}{99}
-
-\bibitem{RuddClebsch2026}
-T.~Rudd,
-\newblock Deep-hole rigidity of the Clebsch hexagon code,
-\newblock companion manuscript, 2026.
-
-\bibitem{RuddFactorization2026}
-T.~Rudd,
-\newblock Conic-ideal quotients for the \(A_3\), \(B_3\), and \(H_3\)
-secant configurations: quadratic sheet recovery and cubic orientation
-in types \(B_3\) and \(H_3\),
-\newblock companion manuscript, 2026.
-
-\bibitem{RuddBeyondFour2026}
-T.~Rudd,
-\newblock Deep holes of projective Reed--Solomon codes beyond redundancy
-four: exact classifications and stable polar components,
-\newblock companion manuscript, 2026.
 
 \bibitem{AlabdullahHirschfeld2019}
 S.~Alabdullah and J.~W.~P.~Hirschfeld,

@@ -258,6 +258,11 @@ sha256sum -c check_q16_uncovered_patterns.sha256
 This exact Python incidence check explains the generic obstruction; the
 independently shaped Lean inverse matrices remain the kernel-checked proof
 objects used by `Q16QuadraticTransport`.
+`RelativeConicArcs.QuadraticLineTriangleObstruction` independently
+kernel-checks the field-uniform normalized mechanism in
+`ternaryQuadratic_eq_zero_of_standardLine_and_offLineTriangle`; its determinant
+hypothesis is the coordinate form of noncollinearity for the three off-line
+points.
 
 ## Ten-point matching-design realization provenance
 

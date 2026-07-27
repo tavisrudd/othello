@@ -1,7 +1,7 @@
-# Paper: Arcs complete outside a prescribed conic
+# Paper: Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity
 
-**Title:** *Exact defect and matching rigidity for arcs complete outside a
-prescribed conic — with ρ_C(16) = 9.* Author: Tavis Rudd.
+**Title:** *Arcs complete outside a conic: a prescribed-hole defect identity
+and matching-design rigidity.* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
 PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
@@ -54,10 +54,14 @@ four-frame and extended through checked exhaustive covering lists of lengths 4, 
 2633. The final list length matches the projective-class count of Al-Seraji--Al-Ogali (2018), so
 that count is prior art. Every
 transition carries an explicit invertible 3-by-3 matrix and pointwise scalar witnesses. For 2630
-listed leaves, six ordinarily uncovered points impose six independent quadratic conditions,
-so no nonzero conic equation can contain the uncovered locus. In the remaining three leaves,
-a checked span relation forces the quadratic equation to vanish at a selected arc point, contradicting
-disjointness. Lean checks all local arithmetic and proves the normalization, classification, and
+listed leaves, the ordinary-uncovered locus contains three collinear points
+and three noncollinear points off their line, so the line-component argument
+excludes every nonzero containing quadratic. A compact exact checker records
+these incidence witnesses. In the remaining three leaves, the unique
+quadratic kernel meets the arc explicitly. Lean independently checks
+invertible six-row evaluation matrices on the 2630 generic leaves, the three
+exceptional kernels and hits, and the field-uniform normalized line--triangle
+mechanism. It also proves the normalization, classification, and
 conic-transport semantics. In particular, each `StepBook.coverage` theorem proves that every legal
 extension of its parent occurs among certified entries, `StepBooksValid` proves that the books
 cover the current parent list exactly, `classifiedAt_level8_of_frame` composes the four layers,
@@ -71,6 +75,12 @@ report is the combined standard output/error
 stream from that run.
 
 **Companion material.** The coding, coset-spectrum, and Clebsch-hexagon consequences of the q=11 witness now belong to the separate Clebsch manuscript; this paper retains only the geometric witness and exact relative value.
+
+The manuscript body is limited to the defect mechanism, equality consequences,
+and conic lower bound.  Secondary realization results, the finite \(q=16\)
+classification, reconstruction, witnesses, and the formal/computational trust
+contracts are appendices.  Raw generated proof objects, generators, hashes, and
+replay scripts live here in the electronic companion.
 
 **Novelty posture (self-stated):** the ordinary `PG(2,16)` count of 2633 eight-arc classes is
 known. The general evaluation lemma is elementary linear algebra, and quadrics containing arcs
