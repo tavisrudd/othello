@@ -208,6 +208,17 @@ def excluded_symlinks(row: dict[str, Any]) -> dict[str, str]:
     return result
 
 
+def excluded_release_outputs(
+    row: dict[str, Any], papers: dict[str, dict[str, Any]]
+) -> set[str]:
+    include = row.get("include_release_pdfs", False)
+    if not isinstance(include, bool):
+        raise Refused(f"repository {row['name']} include_release_pdfs must be boolean")
+    if include:
+        return set()
+    return {str(PurePosixPath(papers[paper_id]["main"]).with_suffix(".pdf")) for paper_id in row["paper_ids"]}
+
+
 def is_scannable(path: str, size: int) -> bool:
     pure = PurePosixPath(path)
     return size <= 2_000_000 and (pure.suffix.lower() in TEXT_SUFFIXES or pure.name in TEXT_NAMES)
@@ -265,6 +276,7 @@ def plan_repository(
             raise Refused(f"repository {row['name']} main source {main!r} is absent or not regular")
 
     exclusions = excluded_symlinks(row)
+    release_outputs = excluded_release_outputs(row, papers)
     symlinks = {path: entry for path, entry in by_relative.items() if entry.mode == "120000"}
     undeclared = sorted(set(symlinks) - set(exclusions))
     stale = sorted(set(exclusions) - set(symlinks))
@@ -280,7 +292,10 @@ def plan_repository(
     regular = [
         entry
         for path, entry in by_relative.items()
-        if entry.kind == "blob" and entry.mode != "120000" and path not in exclusions
+        if entry.kind == "blob"
+        and entry.mode != "120000"
+        and path not in exclusions
+        and path not in release_outputs
     ]
     references = scan_references(entries, source, set(exclusions))
     return {
@@ -292,6 +307,7 @@ def plan_repository(
         "files": len(regular),
         "bytes": sum(entry.size or 0 for entry in regular),
         "excluded_symlinks": len(exclusions),
+        "excluded_release_outputs": sorted(release_outputs & set(by_relative)),
         "reference_findings": references,
         "local_path": f"~/src/math-papers/{row['name']}",
         "github": f"tavisrudd/{row['name']}",
@@ -342,12 +358,13 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
 
     source = row["source"]
     exclusions = excluded_symlinks(row)
+    release_outputs = excluded_release_outputs(row, papers)
     entries = tree_entries(commit, source)
     payloads: list[tuple[str, bytes, str, str]] = []
     manifest_files: list[dict[str, Any]] = []
     for entry in entries:
         rel = relative_to_source(entry, source)
-        if rel in exclusions:
+        if rel in exclusions or rel in release_outputs:
             continue
         if entry.kind != "blob" or entry.mode == "120000":
             raise Refused(f"repository {repository!r} contains unsupported tree entry {rel!r}")
@@ -394,6 +411,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         ignore = (
             "__pycache__/\n*.py[cod]\n*.aux\n*.bbl\n*.bcf\n*.blg\n*.fdb_latexmk\n"
             "*.fls\n*.log\n*.out\n*.run.xml\n*.synctex.gz\n*.xdv\n"
+            + "".join(f"/{path}\n" for path in sorted(release_outputs))
         ).encode()
         payloads.append((".gitignore", ignore, "100644", "generated"))
         manifest_files.append(
@@ -425,6 +443,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
         ],
+        "excluded_release_outputs": sorted(release_outputs),
         "files": sorted(manifest_files, key=lambda item: item["path"]),
     }
     manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
