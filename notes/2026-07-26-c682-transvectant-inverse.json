@@ -1,0 +1,435 @@
+{
+  "binary_form_basis": {
+    "Sym12": [
+      "X^(12-i)Y^i",
+      "0<=i<=12"
+    ],
+    "Sym6": [
+      "X^(6-i)Y^i",
+      "0<=i<=6"
+    ]
+  },
+  "field": "Q",
+  "kernel_isotropy_transvectant_order": 5,
+  "orbit_representatives": [
+    {
+      "annihilator_equation_rank": 12,
+      "annihilator_kernel": [
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          11,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ]
+      ],
+      "dodecic": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        11,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0
+      ],
+      "fifth_transvectant_isotropic": true,
+      "kernel_basis": [
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ]
+      ],
+      "name": "open_icosahedral_orbit",
+      "rank_locus_affine_tangent_dimension": 4,
+      "rank_plus_isotropy_incidence_tangent": {
+        "affine_tangent_dimension": 4,
+        "chart_columns": [
+          0,
+          1,
+          3
+        ],
+        "constraint_rank": 21,
+        "dodecic_projection_dimension": 4
+      },
+      "transvectant_rank": 4
+    },
+    {
+      "annihilator_equation_rank": 12,
+      "annihilator_kernel": [
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "dodecic": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fifth_transvectant_isotropic": true,
+      "kernel_basis": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "name": "two_dimensional_boundary_orbit",
+      "rank_locus_affine_tangent_dimension": 4,
+      "rank_plus_isotropy_incidence_tangent": {
+        "affine_tangent_dimension": 4,
+        "chart_columns": [
+          0,
+          1,
+          3
+        ],
+        "constraint_rank": 21,
+        "dodecic_projection_dimension": 4
+      },
+      "transvectant_rank": 4
+    },
+    {
+      "annihilator_equation_rank": 12,
+      "annihilator_kernel": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "dodecic": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "fifth_transvectant_isotropic": true,
+      "kernel_basis": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "name": "one_dimensional_closed_orbit",
+      "rank_locus_affine_tangent_dimension": 5,
+      "rank_plus_isotropy_incidence_tangent": {
+        "affine_tangent_dimension": 4,
+        "chart_columns": [
+          0,
+          1,
+          2
+        ],
+        "constraint_rank": 21,
+        "dodecic_projection_dimension": 4
+      },
+      "transvectant_rank": 4
+    }
+  ],
+  "primitive_universal_tensor": {
+    "bounded_prime_audit": {
+      "11": [
+        {
+          "annihilator_equation_rank": 9,
+          "transvectant_rank": 0
+        },
+        {
+          "annihilator_equation_rank": 9,
+          "transvectant_rank": 0
+        },
+        {
+          "annihilator_equation_rank": 9,
+          "transvectant_rank": 0
+        }
+      ],
+      "13": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "17": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "19": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "2": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 10,
+          "transvectant_rank": 2
+        },
+        {
+          "annihilator_equation_rank": 9,
+          "transvectant_rank": 1
+        }
+      ],
+      "23": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "29": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "3": [
+        {
+          "annihilator_equation_rank": 0,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 4,
+          "transvectant_rank": 2
+        },
+        {
+          "annihilator_equation_rank": 8,
+          "transvectant_rank": 0
+        }
+      ],
+      "31": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        }
+      ],
+      "5": [
+        {
+          "annihilator_equation_rank": 10,
+          "transvectant_rank": 2
+        },
+        {
+          "annihilator_equation_rank": 10,
+          "transvectant_rank": 2
+        },
+        {
+          "annihilator_equation_rank": 10,
+          "transvectant_rank": 2
+        }
+      ],
+      "7": [
+        {
+          "annihilator_equation_rank": 12,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 11,
+          "transvectant_rank": 4
+        },
+        {
+          "annihilator_equation_rank": 11,
+          "transvectant_rank": 4
+        }
+      ]
+    },
+    "ordinary_derivative_content": 240
+  },
+  "proved_by_orbit_reduction": {
+    "annihilator_kernel_dimension_on_each_orbit": [
+      1,
+      1,
+      1
+    ],
+    "mukai_umemura_orbit_dimensions": [
+      3,
+      2,
+      1
+    ],
+    "rank_plus_isotropy_projective_tangent_dimensions": [
+      3,
+      3,
+      3
+    ]
+  },
+  "schema": "c682-transvectant-inverse-v1",
+  "transvectant_order": 3,
+  "trust_boundary": [
+    "Exact rational arithmetic certifies the three orbit representatives.",
+    "Hitchin's orbit decomposition is a human primary-source input.",
+    "The bundle-theoretic global inverse is a human argument, not a finite enumeration.",
+    "The certificate does not establish novelty or an integral/positive-characteristic model.",
+    "The bounded prime table tests characteristic-zero representatives, not modular orbit classifications."
+  ]
+}

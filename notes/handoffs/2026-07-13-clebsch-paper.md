@@ -532,17 +532,29 @@ term-by-term with the classical explicit \(W_T\) formulas before
 promotion, and require a consequence beyond Segre--Igusa duality for any
 general-journal claim.
 
-C682 is therefore reframed around general extremal and categorical
-theorems rather than the preempted sextic crown.  The two Platinum tracks
-are:
+C682's TR Platinum track is now proved in characteristic zero.  On the
+Mukai--Umemura threefold, the dodecics annihilating a universal isotropic
+three-plane under the third transvectant form a line bundle: exact ranks
+on Hitchin's three orbits are uniformly \(12\).  The Borel lower bound then
+makes the dodecic-to-kernel and plane-to-annihilator constructions inverse
+scheme-valued functors.  Consequently the stable rank-four locus is exactly
+the icosahedral orbit, while rank four plus fifth-transvectant kernel
+isotropy cuts out its entire smooth compactification with no remote
+component.  The construction is the degree-\(22\) projection of the
+anticanonical \([1+\Phi_{12}]\) model from its invariant coordinate.
+Three exact rational orbit rows, all tangent spaces, and a separately
+written mod-\(101\) replay pass.  A bounded source audit did not locate the
+explicit inverse.  Mukai's 1992 *Fano 3-folds* triangulates the same
+compactification through polar six-sides/VSP, and his 1995/2002 Fano survey
+explicitly identifies its genus-\(12\) net-of-skew-forms model with
+\(SL_2/A_5\), but neither states a dodecic transvectant inverse.  The 1983
+paper remains available here only through the user's page images, and the
+broader databases remain uncovered, so novelty and manuscript promotion
+are not yet claimed.
 
-1. **TR:** classify the stable minimum-rank locus of
-   \(p\mapsto(p,I)_3:\operatorname{Sym}^6\to\operatorname{Sym}^{12}\)
-   and test whether rank four plus fifth-transvectant kernel isotropy cuts
-   out the Mukai--Umemura compactification.  A Borel fixed-point argument
-   already proves rank four is the absolute minimum for every nonzero
-   binary dodecic.
-2. **QG:** prove that the generic fibre of the rate-half MDS-code to
+C682's remaining Platinum track is:
+
+1. **QG:** prove that the generic fibre of the rate-half MDS-code to
    stabilizer-AME functor is exactly a monomial/Gale orbit.  Code duality
    is Gale association and local Fourier transform identifies the two
    equal-phase states; the new content must be the converse fibre theorem.
@@ -555,10 +567,12 @@ stabilizer \(60\) (next \(12\)), least containing degree \(2\) (next
 \(4\)), and discrepancy zero (next \(12\)); its minimum port is itself
 the complete conic/GRS object.  The all-size full-conic conjecture says
 only the \(\mathbf F_5\) frame and \(\mathbf F_{11}\) Clebsch hexagon
-occur.  The report records exact gates and falsifiers.  Run the cheap
-finite-field TR counterexample search and generic \(m=3\) QG
-local-symplectic component test before expensive elimination, and promote
-at most one Platinum track at a time.
+occur.  The report records exact gates and falsifiers.  The highest-EV TR
+follow-ups are a source-deep priority audit and a divided-power/Weyl
+integral model: naive reduction of the ordinary-derivative tensor has
+extra degeneracies at \(3,7,11\) and does not yet recover the sharp
+Mukai--Umemura bad-prime set \(2,5\).  Independently, the next QG gate is
+the generic \(m=3\) local-symplectic component test.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating

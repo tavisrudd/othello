@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-26  
 **Lane:** `clebsch`  
-**Status:** queued, open-ended  
+**Status:** in progress — transvectant reconstruction theorem proved; open-ended
 **Stopping authority:** the user decides when C682 is done
 
 ## Purpose
@@ -1128,6 +1128,184 @@ strong statement.  The extra rank-only tangent direction at
 evidence for the role of isotropy, not evidence that TR is automatically
 true.
 
+### C resolved: transvectant reconstruction of Mukai--Umemura
+
+The strong TR statement is true over an algebraically closed field of
+characteristic zero.  Put
+\[
+ V=\operatorname{Sym}^6(k^2),\qquad W=\operatorname{Sym}^{12}(k^2),
+\]
+let \(Z\subset\operatorname{Gr}(3,V)\) be the Mukai--Umemura threefold of
+three-planes isotropic for the fifth transvectant, and write
+\[
+ T_I:V\longrightarrow W,\qquad p\longmapsto(p,I)_3 .
+\]
+Then the two constructions
+\[
+ [I]\longmapsto\ker T_I,\qquad
+ U\longmapsto
+ \mathbf P\{I\in W:T_I(U)=0\}
+\]
+are mutually inverse isomorphisms between \(Z\) and
+\[
+ \mathcal R=
+ \{[I]\in\mathbf P(W):
+   \operatorname{rank}T_I=4,
+   \ker T_I\text{ is fifth-transvectant isotropic}\}.
+\]
+In particular, the stable minimum-rank locus is exactly the open
+icosahedral orbit, while rank four plus kernel isotropy cuts out its full
+Mukai--Umemura compactification.  There are no remote components.
+
+The proof avoids global elimination.  Over \(Z\), the universal
+three-plane \(\mathcal E\) gives the bundle map
+\[
+ W\otimes\mathcal O_Z\longrightarrow
+ \mathcal Hom(\mathcal E,W\otimes\mathcal O_Z),
+ \qquad I\longmapsto T_I|_{\mathcal E}.
+\]
+Hitchin's orbit decomposition has exactly the open three-dimensional
+orbit and boundary orbits of dimensions two and one.  On one
+representative of each orbit the displayed map has rank \(12\), so its
+kernel is globally a line bundle \(\mathcal L\).  Its projectivization
+defines \(Z\to\mathbf P(W)\).  The Borel fixed-point lower bound already
+proved above says that every nonzero \(I\) has
+\(\operatorname{rank}T_I\ge4\).  Since \(T_I\) annihilates the
+three-plane \(U\), it has rank at most four, hence exactly four and
+\(\ker T_I=U\).  Conversely, any point of \(\mathcal R\) lies in the
+one-dimensional annihilator of its kernel.  These constructions commute
+with base change on the constant-rank loci, so they are inverse as
+scheme-valued functors, not only on closed points.
+
+This also identifies the map geometrically.  The standard anticanonical
+orbit model is the closure of
+\([1+\Phi_{12}]\) in
+\(\mathbf P(\mathbf1\oplus\operatorname{Sym}^{12})\).  Projection away
+from the invariant coordinate sends the open orbit to
+\([\Phi_{12}]\), and the transvectant theorem supplies its regular inverse
+on the boundary.  Thus the rank--isotropy model is the degree-\(22\)
+non-linearly-normal projection of the anticanonical
+Mukai--Umemura threefold into \(\mathbf P^{12}\).  Its Hilbert polynomial
+with respect to \(-K_Z\) is
+\[
+ \chi(\mathcal O_Z(-nK_Z))
+ =\frac{11}{3}n^3+\frac{11}{2}n^2+\frac{23}{6}n+1.
+\]
+
+The exact certificate checks all three orbit representatives.  In each
+case \(T_I\) has rank four, its kernel is isotropic, and the common
+annihilator of that kernel in \(W\) has dimension one.  The rank-only
+affine tangent dimensions are \(4,4,5\); after adjoining the linearized
+kernel-isotropy equations, all three incidence tangent dimensions are
+\(4\), so the extra closed-orbit direction is removed exactly as
+predicted.  A separately written replay checks the ranks and incidence
+tangents modulo \(101\).
+
+From the repository root, replay with
+
+```text
+python3 notes/2026-07-26-c682-transvectant-inverse.py --check
+python3 notes/2026-07-26-c682-transvectant-inverse-replay.py
+```
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| `2026-07-26-c682-transvectant-inverse.py` | 17413 | `32b6edb88408cbebf992d98eb740194a9cff38f2fda1eb425b087a9f50b544a8` |
+| `2026-07-26-c682-transvectant-inverse-replay.py` | 9439 | `1ed5be9368b1a104c310dbffaf846cec68397e724b1c0d5b8589b3d92f3c5144` |
+| `2026-07-26-c682-transvectant-inverse.json` | 8289 | `6a4dd00c551c3d50af812b6ee479ada4ee2a12b2b931f401a446a82ecd825928` |
+
+The computation certifies the three exact fibre ranks and tangent
+calculations.  The primary-source orbit decomposition, the Borel
+fixed-point argument, the constant-rank bundle argument, and the
+scheme-functor inverse are human proof inputs.  The result is not yet a
+Paper III claim.
+
+#### Targeted source audit
+
+Two of the eight individually discussed sources below were read in full;
+the other six were read at the stated partial depth.  This is a targeted
+pre-emption check, not a priority or absence claim.
+
+- Mukai, *Fano 3-folds*, in *Complex Projective Geometry* (1992),
+  Sections 3, 6, and 7 read from the author-hosted primary PDF; cache
+  SHA-256
+  `92babf75e27914fab2caaebe89be6c5a56f5ae4cf5f88127bee7de9c1e48da91`.
+  Theorems 3 and 11 give the net-of-skew-forms Grassmannian model and the
+  polar-six-side/VSP model, while Theorem 14 identifies the double-conic
+  specialization with the smooth equivariant compactification
+  \(SO_3/A_5\).  This is a second classical inverse description, but it
+  does not state the binary-dodecic third-transvectant kernel inverse.
+- Mukai, *New developments in the theory of Fano threefolds: vector
+  bundle method and moduli problem*, Sugaku 47 (1995), English
+  translation in Sugaku Expositions 15 (2002), Section 5 and the
+  relevant later cross-references read from the author-hosted primary
+  PDF; cache SHA-256
+  `66cab0cef6046a29538582355906fbe5ab8301b2bb8cf27a2d68d709c91753a1`.
+  Theorem 5.4 gives the genus-\(12\) threefold \(G(3,V,N)\), and Remark
+  5.6 identifies the \(\operatorname{SL}_2\)-orbit of the icosahedral
+  three-space with the Mukai--Umemura compactification.  It explicitly
+  triangulates the Grassmannian and homogeneous-space models, but does
+  not introduce a dodecic or a transvectant reconstruction.
+- Mukai, handwritten notes *Uniruledness of \(M_{11}\), and prime Fano
+  3-folds \(V_{22}\) of genus 12* (February 2021), all eight pages read
+  from the author-hosted primary PDF; cache SHA-256
+  `0308167c39d61e6704128445018c79f9ffe4978c1847b6030492c3795023809b`.
+  The notes concern last linear sections, poristic neighbours, and four
+  one-nodal degeneration divisors; they do not discuss the
+  Mukai--Umemura dodecic or the transvectant map.
+- Mukai, *Moduli of abelian surfaces, and regular polyhedral groups*
+  (2003), all five pages read from the author-hosted primary PDF; cache
+  SHA-256
+  `9619d4bfa81b3b936ddcb69b564656f5eca1e5f5ebf18e51d3ebd400eb5c9096`.
+  It uses the icosahedral subgroup \(A_5\subset PGL_2\) and cites
+  *Minimal rational threefolds*, but its compactification is a blow-up
+  of \(\mathbf P^3\) for abelian-surface moduli, not the genus-\(12\)
+  transvectant model.
+
+- Hitchin, *Vector bundles and the icosahedron*, arXiv:0906.4208,
+  Sections 4--6 read from the cached primary PDF, especially the
+  Grassmannian definition and the three-orbit decomposition; cache
+  SHA-256
+  `7da4fb227846551a788821d2a6f8082aa4e75088d34633934ba34c4e7f59b722`.
+  It supplies the isotropic-plane model but does not state the
+  third-transvectant inverse.
+- Cheltsov--Shramov, *Extremal metrics on del Pezzo threefolds*,
+  arXiv:0810.1924v3, Section 5 read from the cached primary preprint;
+  cache SHA-256
+  `fb189cfd9236acb7e84f2a565e955e9d9ab64afad235c85852b12e9665112ad0`.
+  It records the anticanonical
+  \([1+\Phi_{12}]\) orbit model and the same three boundary types, but
+  not the kernel map.
+- Chung--Kim--Kim, *Rational quartic curves in the Mukai--Umemura
+  variety*, arXiv:2412.17721, Sections 3.1 and 3.3 read from the cached
+  primary preprint; cache SHA-256
+  `15acc2562ecda2ab6f1b2f1070d42245205985fc1f88d6ac6649e2918411881d`.
+  Its explicit \(\operatorname{SL}_2\)-equivariant Grassmannian model
+  contains no dodecic transvectant reconstruction.
+- Ito--Kanemitsu--Takamatsu--Tanaka, *Fano threefolds of genus 12 with
+  large automorphism group in positive and mixed characteristic*,
+  arXiv:2601.10106, Section 5.1 read from the cached primary preprint;
+  cache SHA-256
+  `0e2caea7c0eaf78f2105fc796a8d302443b1af337e9f7dbda24b4572f43af788`.
+  Its existence/classification theorem in characteristics other than
+  \(2,5\) is adjacent arithmetic context, not the characteristic-zero
+  transvectant inverse.
+
+The exact web queries were `"third transvectant" "Mukai-Umemura"`,
+`"Klein dodecic" transvectant kernel`,
+`"Mukai-Umemura" binary dodecic Grassmannian transvectant`,
+`site:arxiv.org Mukai Umemura transvectant binary form Symmetric 12`,
+`"(p,I)_3" binary forms`,
+`"kernel" "third transvectant" binary sextic dodecic`,
+`"rank four" transvectant dodecic`, and
+`"rank 4" "transvectant" "icosahedral"`.  The first result page for
+each and exact-text searches within the two recent primary preprints
+located no occurrence of the inverse formula.  Mukai--Umemura's 1983
+paper, DOI `10.1007/BFb0099976`, was not cached and its full text was not
+reachable in this pass; MathSciNet, zbMATH, and Google Scholar were not
+covered.  Therefore the audit licenses only “not located in this bounded
+pass,” not a novelty claim.
+
 ### D. Orientation index and Gorenstein extremality
 
 For a signed two-sheet configuration \((X,\epsilon)\), define its
@@ -1179,9 +1357,10 @@ theorem would supply the required natural map and normalization.
 
 ### Literature-adjusted priority
 
-1. **TR, stable minimum-rank transvectant classification:** clearest
-   single Platinum target.
-2. **QG, the MDS-to-AME generic Gale quotient:** broadest categorical
+1. **TR, stable minimum-rank transvectant classification:** proved over
+   characteristic zero; this is the present mathematical crown, pending
+   a deeper priority audit before manuscript promotion.
+2. **QG, the MDS-to-AME generic Gale quotient:** broadest remaining categorical
    Platinum target.
 3. **E3 and its higher-redundancy analogue:** strongest connection among
    Paper I, PRS, arcs, and code extensions.
@@ -1200,12 +1379,12 @@ commuting categorical square with a universal property.
 
 ### Highest-EV cross-paper actions
 
-1. **TR structural gate:** formulate the rank-four kernel-isotropy ideal
-   in invariant/Plücker coordinates and compare its saturated Hilbert data
-   with the Mukai--Umemura model.
-2. **TR cheap falsifier:** search exact small-height and finite-field
-   stable rank-four forms for a nonicosahedral orbit before undertaking
-   heavy elimination.
+1. **TR promotion gate:** deepen the priority audit, compare the
+   transvectant projection with Mukai--Umemura's original construction,
+   and decide the cleanest theorem owner.
+2. **TR arithmetic gate:** determine whether the inverse extends over
+   \(\mathbf Z[1/10]\), explaining the characteristic-\(5\) rank drop and
+   the separate characteristic-\(2\) obstruction.
 3. **QG \(m=3\) gate:** derive the generic local-symplectic compatibility
    equations and test whether their only components are monomial and
    Fourier--monomial.
@@ -1392,6 +1571,39 @@ correction terms are the ordinary-coordinate expression of a universal
 translation term, not evidence for a new cover.  The genuinely
 paper-specific content is the alternate five-syntheme/Clebsch formula.
 
+The post-TR `ej` + `tt` pass adds two cheap structural consequences and
+fixes one tempting overreach.
+
+First, the inverse theorem identifies the rank--isotropy construction with
+the linear projection of the standard anticanonical
+\([1+\Phi_{12}]\)-model from its invariant coordinate.  This gives the
+degree \(22\) and Hilbert polynomial without an elimination or a separate
+image calculation.  It also explains the earlier tangent data: the
+closed-orbit rank locus has one spurious infinitesimal direction, and the
+linearized isotropy equations remove exactly that direction.
+
+Second, the arithmetic continuation is not a free reduction of the
+characteristic-zero matrices.  After dividing the universal third-
+transvectant tensor by its integral content \(240\), the three
+characteristic-zero orbit representatives retain the uniform
+\((4,12)\) transvectant/annihilator ranks only from characteristic \(13\)
+on in the bounded prime test.  At \(5\) all three rows become \((2,10)\);
+at \(7\) the boundary annihilators have rank \(11\); and at \(11\) the
+displayed Klein form degenerates under ordinary derivatives.  The latter
+does not contradict the existing primitive mod-\(11\) bridge, which
+normalizes the individual Klein matrix rather than a universal bilinear
+tensor.  It shows that a genuine arithmetic theorem needs divided-power
+or Weyl-module transvectants and the correct modular orbit
+representatives.  The recent existence theorem for Mukai--Umemura
+varieties has bad characteristics exactly \(2,5\), but the present
+ordinary-derivative lattice does not yet recover that sharp boundary.
+
+The Tao-style conclusion is that the global characteristic-zero inverse,
+not a large determinantal ideal, is the conceptual endpoint of TR.
+Further elimination would merely rederive the image equations.  The
+highest-value continuations are now a source-deep priority audit and a
+divided-power arithmetic model; QG remains the independent Platinum track.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -1405,6 +1617,14 @@ paper-specific content is the alternate five-syntheme/Clebsch formula.
 - **Settled locally at the Klein point:** the projective tangent space of
   the rank-four determinantal locus has dimension three, so the
   Mukai--Umemura closure is its local component there.
+- **Settled globally in characteristic zero:** the common annihilator of
+  each isotropic three-plane is one-dimensional on all three
+  Mukai--Umemura orbits.  The resulting line bundle gives an inverse to
+  the transvectant-kernel map, so rank four plus isotropic kernel is
+  exactly the full compactification, scheme-theoretically.
+- **Settled geometrically:** this inverse is the regular projection of the
+  anticanonical \([1+\Phi_{12}]\)-orbit model from its invariant
+  coordinate; the image has degree \(22\).
 - **Settled on boundary representatives:** both lower-dimensional orbit
   types retain rank four and have exactly Hitchin's isotropic weight-space
   kernels; rank alone has one extra tangent direction at the closed orbit.
@@ -1456,12 +1676,14 @@ paper-specific content is the alternate five-syntheme/Clebsch formula.
 - **Settled:** the completed two-branch model is the universal
   residue-field pinch \(\mathbf Q+\mathfrak m\), with depth-one defect
   exactly \(\mathbf Q(\sqrt5)/\mathbf Q\).
-- **Open:** decide whether rank four plus isotropic kernel cuts out the
-  entire Mukai--Umemura compactification, and analyze every boundary rank
-  stratum.
-- **Open Platinum track TR:** decide whether the icosahedral orbit is the
-  entire stable minimum-rank locus and whether rank plus kernel isotropy
-  cuts out its compactification scheme-theoretically.
+- **Settled Platinum track TR, mathematically:** the stable rank-four
+  locus is the icosahedral orbit and rank plus kernel isotropy cuts out
+  its compactification.  A deeper priority audit still gates novelty and
+  manuscript promotion.
+- **Open arithmetic TR refinement:** construct the divided-power/Weyl
+  integral transvectant model and determine whether the inverse extends
+  over \(\mathbf Z[1/10]\).  Naive reduction of the ordinary-derivative
+  tensor has extra degeneracies at \(3,7,11\) and is not the right model.
 - **Open Platinum track QG:** determine whether the generic fibre of the
   rate-half MDS-to-stabilizer-AME functor is exactly a monomial/Gale
   orbit.
