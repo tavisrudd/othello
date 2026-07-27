@@ -2,10 +2,10 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-18
-**Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated; AME--LU C602 is
-complete, while C287 extraction waits for C553, three intake hygiene/fingerprint repairs, and a
-quiet Lean worktree; C162 blast radius and the restart-guard failure suite landed, and the
-remaining C162 streams need a quiet window
+**Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated; C287's current paper
+boundaries are synchronized and the Clebsch Factorization three-gate fingerprint is repaired;
+extraction waits for a commit-clean immutable input checkpoint, while C162's remaining real-build
+checks also need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -178,24 +178,19 @@ all units but refuses the current seven-foreign-path worktree. The global graph 
 generated regions remain unchanged until a coherent quiet-tree regeneration. Report:
 [`../2026-07-24-c287-first-tag-trust-spine.md`](../2026-07-24-c287-first-tag-trust-spine.md).
 
-**Next:** after C553 lands the approved source rewrite and semantic docstring pass, regenerate
-C287's source inventory and trust-spine module list, audit every changed hash and public
-declaration, and repeat the referee gate.
-The later-tag roadmap now records frozen Relconic, PRS geometric, Clebsch Rigidity, and AME--LU
-boundaries without enlarging the first tag. PRS is now a 17-file/74-target geometric closure; its
-balanced-quantum gate is a separate cross-paper state after AME--LU. C602 freezes AME--LU at 67
-project-owned Lean files plus five build-identity files. Clebsch Factorization adds three advertised
-Lean gates, but its current fingerprint maps closures for only two and must be regenerated.
-Clebsch Passages has a release-ready nine-claim trust manifest but no Lean root, so it creates no
-source state. C570 remains superseded and C581 remains excluded.
+**Next:** obtain one commit-clean immutable private-source checkpoint, then construct the first
+fresh-history candidate with the C553 API/prose transformation applied only in the target. The
+private monorepo remains unchanged: no source module is deleted, renamed, or rewritten there.
 
-Source export now waits for C553, removal of the exact foreign workflow references in
-`RelativeConicArcs/Plane.lean` and `FiniteGeom/Code.lean`, and reconciliation of the Clebsch
-Factorization three-gate fingerprint. Exact roots and exclusions are in
-`../2026-07-24-c287-new-paper-export-intake.md`. Follow
-`../2026-07-25-c287-token-efficient-execution.md`, which defers closure computation until C602,
-pins one immutable private-source snapshot, deduplicates public-prose review across the full source
-union by path and hash, then constructs and validates resumable incremental candidate commits.
+The synchronized intake covers arcs, AME--LU, geometric beyond-four PRS, Clebsch Rigidity,
+Clebsch Factorization, Clebsch Passages, and complete ports. Clebsch Passages has no Lean root and
+creates no source state. Arcs' Q16-generated family and Clebsch Rigidity's Q11-generated family
+remain opt-in certificate packages rather than entering the human-scale main repository.
+Clebsch Factorization's fingerprint now maps all three advertised gates. Exact current roots,
+counts, package splits, and blockers are in `../2026-07-26-c287-paper-intake-refresh.md`. Follow
+`../2026-07-25-c287-token-efficient-execution.md`, which pins one immutable private-source
+snapshot, deduplicates public-prose review across the full source union by path and hash, then
+constructs and validates resumable incremental candidate commits.
 Commit-scoped trust, axiom, and clean-replay evidence is never reused by file hash; `main` and each
 tag advance only after that exact candidate passes. A single quiet build-owner window is preferred
 but is no longer an atomicity assumption.

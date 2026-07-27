@@ -2,8 +2,8 @@
 
 **Lane:** `build-sys`
 
-**Status:** authoritative resumable execution route; AME--LU C602 is complete; extraction waits
-for C553 and the intake's public-prose/fingerprint blockers
+**Status:** authoritative resumable execution route; paper boundaries are synchronized; extraction
+waits for a commit-clean immutable input checkpoint
 
 ## Objective
 
@@ -24,7 +24,7 @@ roots, a 67-file project-owned Lean closure, and five separate build-identity fi
 report and the intake record; do not reload the AME--LU lane or rerun its builds. C581 remains
 outside the adopted boundary.
 
-### Session 2 — first-tag source rewrite
+### Session 2 — first-tag target rewrite
 
 Start with:
 
@@ -33,8 +33,10 @@ go C553
 ```
 
 Read the root guide, exact queue row, `cap` handoff, C553 rewrite packet, and nested Lean guide.
-Delete the two approved wrapper modules, migrate consumers, and complete the seventeen-module
-semantic documentation pass.
+Do not edit or delete private-monorepo Lean source. During construction of the fresh-history target
+candidate, delete the two approved wrapper modules, migrate consumers, and complete the
+seventeen-module semantic documentation pass. Record the transformation as a deterministic delta
+whose input hashes are checked against the immutable private-source commit.
 
 Review each unique module once. Use a compact triage index of module headers, imports, comments,
 docstrings, public declaration names, and declaration signatures to prevent repeated full-proof
@@ -44,17 +46,16 @@ the scoped consumer and four-root validation required by the packet.
 
 ### Session 3 — coordinated extraction
 
-After C553 and the intake's two foreign-prose defects and Clebsch Factorization fingerprint
-mismatch are complete, start with:
+After the immutable source checkpoint is clean, start with:
 
 ```text
 go build-sys
 ```
 
 Read the root guide, the `build-sys` handoff, this execution card, and
-`notes/2026-07-24-c287-new-paper-export-intake.md`. Do not preload the arcs, PRS, Clebsch, AME--LU,
-or cap handoffs. Their adopted roots and exclusions are already frozen in the intake record; open
-a source-owner report only to resolve an explicit mismatch.
+`notes/2026-07-26-c287-paper-intake-refresh.md`. Do not preload the arcs, PRS, Clebsch, AME--LU,
+complete-ports, or cap handoffs. Their adopted roots and exclusions are already frozen in the
+intake record; open a source-owner report only to resolve an explicit mismatch.
 
 ## Immutable input boundary
 
@@ -63,7 +64,7 @@ Before computing any closure, write a checkpoint that fixes:
 - the exact private source commit and requires every exported input path to match that commit;
 - the hashes of every adopted root/terminal contract, the toolchain and lockfiles, and the
   closure/import tool;
-- C553 and C602's completing commits; and
+- the private source commit and the target-only C553 transformation digest; and
 - the destination module-name policy, including canonical path spelling and case sensitivity.
 
 Any later mismatch invalidates the checkpoint and stops the wave before another candidate commit
@@ -73,8 +74,10 @@ is constructed. A frozen root name is not a frozen source snapshot.
 
 1. From the immutable snapshot, compute the exact transitive project-owned closure for the first
    tag and the adopted Lean contracts: Relconic; PRS R5--R7 geometric; Clebsch Rigidity; Clebsch
-   Factorization; the final C602 AME--LU aggregate; and the PRS balanced-quantum cross-paper gate.
-   Record Clebsch Passages as a no-Lean paper contract and do not add it to the source union.
+   Factorization; the current AME--LU release aggregate; complete ports; and the PRS
+   balanced-quantum cross-paper gate. Record Clebsch Passages as a no-Lean paper contract and do
+   not add it to the source union. Split the arcs Q16 and Clebsch Rigidity Q11 generated families
+   into their declared opt-in certificate packages.
 2. Form one content-addressed union. Each row records source path, destination path, canonical Lean
    module name, regular-file type and mode, byte count, and SHA-256. Reject symlinks, non-regular
    files, path traversal, duplicate destinations, module aliases, Unicode-normalization or
@@ -112,8 +115,8 @@ is constructed. A frozen root name is not a frozen source snapshot.
 
 ## Work deliberately deferred
 
-- Do not compute provisional source closures while C553 and the intake blockers remain open. The
-  adopted root ledger is sufficient and avoids a second manifest pass.
+- Do not compute export manifests from a dirty private-source tree. The
+   adopted root ledger is sufficient and avoids a second manifest pass.
 - Do not ingest C581, PRS companion levels, future Clebsch revisions, or Relconic quantitative
   successors. Clebsch Passages remains in the paper ledger but outside the source union unless a
   later manifest names an exact Lean root.

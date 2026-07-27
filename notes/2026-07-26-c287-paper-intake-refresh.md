@@ -1,49 +1,62 @@
-# C287 paper-boundary intake refresh
+# C287 paper-boundary intake registry
 
 **Lane:** `build-sys`
-**Status:** complete planning refresh; no source export or Lean action performed
-**Evidence snapshot:** monorepo commit
-`e4ccab889b34f6af3761ae2ab270a4d061da6d74`
+**Status:** ACTIVE; current paper contracts synchronized; immutable source checkpoint blocked by
+dirty arcs/Lean inputs
+**Last clean monorepo commit inspected:** `c09b390129bfb15cd14d37762de02b6ac2345516`
 
-## Result
+## Export rule
 
-C287's coordinated extraction plan now reflects the current paper-owned trust boundaries:
+The private monorepo is an immutable input to the extraction wave. No module is deleted, renamed,
+or rewritten here. Public-prose rewrites, API consolidation, and the approved removal of
+`ProjectiveCap.Almost.OddEscape` and `ProjectiveCap.StableFacts` occur only while constructing the
+fresh-history target candidate. The target transformation must be recorded as a deterministic
+source-to-source delta and validated with the complete target commit.
 
-- AME--LU C602 is complete at 67 project-owned Lean files plus five locked build-identity files.
-- The geometric PRS R5--R7 closure is 17 files with 74 ordered audit targets. Its balanced-quantum
-  gate is a separate cross-paper state that must follow AME--LU.
-- Clebsch Rigidity retains its nineteen-row/24-terminal single-gate boundary.
-- Clebsch Factorization advertises three Lean gates and six Lean-backed claim rows, but its evidence
-  fingerprint contains closure maps for only two of those gates. It remains blocked from source
-  intake.
-- Clebsch Passages has a release-ready nine-claim trust manifest and no Lean root. It is recorded
-  as a paper boundary but creates no `finitegeom` state.
+An input checkpoint is admissible only when every exported source and paper-contract path matches
+one private source commit. Stopped Lean processes do not make a dirty worktree immutable.
 
-The live plan, intake, execution card, and build-system handoff now agree that source export waits
-for C553, two foreign-owned public-prose repairs identified by C602, and the complete three-gate
-Clebsch Factorization fingerprint.
+## Adopted paper boundaries
 
-## Evidence hashes
+| Paper state | Adopted Lean root or boundary | Current source contract | Public-package split |
+|---|---|---|---|
+| Arcs complete outside a prescribed conic | `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` | 61 audited terminals; raw project import closure 1,392 files | 74-file human/core portion in `finitegeom`; 1,318 `Q16CertificateData`/`Q16CertificateRows`/`Q16LeafData` files in the opt-in Q16 certificate package |
+| AME--LU | `RelativeConicArcs.Gates.AMELUAggregate`, `RelativeConicArcs.Gates.AMELUAggregateAxioms` | current release manifest: 83 formal artifacts, comprising 78 Lean files and five build-identity files; tree SHA-256 `dd217eb47952cc9e31dd65cb2e4799dbf40828c77bed5c77cd17964991dfa2a1`; aggregate axiom gate prints 175 terminals | all human-scale Lean source in `finitegeom`; five non-Lean identity files remain environment inputs |
+| Beyond-four PRS R5--R7 | `PRSFoundation`, `PRSRedundancyFive`, `PRSPolarInductionRedundancySixSeven`, `PRSStableComponents`, `PRSBeyondRedundancyFour`, and `PRSBeyondRedundancyFourAxiomAudit` under `RelativeConicArcs.Gates` | exact 17-file union; 74 ordered audit terminals | geometric state in `finitegeom`; balanced-quantum gates remain a separate later state after AME--LU |
+| Clebsch Rigidity | `RelativeConicArcs.Gates.ClebschRigidityTrust` | 24 terminals; raw project import closure 157 files | 17-file human/core portion in `finitegeom`; 140 Q11-generated files in the opt-in Q11 certificate package |
+| Clebsch Factorization | `RelativeConicArcs.Gates.ClebschArithmeticGluing`, `ClebschHilbertSymmetry`, and `ClebschHyperplaneSquare` | three-gate fingerprint now complete; 29-file union; 26 printed terminals | human-scale state in `finitegeom` |
+| Clebsch Passages | no Lean root | four trust-manifest claim groups covering nine manuscript labels; the manifest explicitly claims no Lean dependency | paper boundary only; creates no `finitegeom` state |
+| Complete bounded repair ports | `RepairPorts.Gates.CompletePorts` | observed trust fact: exact 30-file closure and 36 terminals, all with only `propext`, `Classical.choice`, and `Quot.sound` | human-scale state in `finitegeom`; retained finite replay bundles stay paper-side unless separately packaged |
 
-- Clebsch Rigidity trust manifest:
-  `a05fbd075ea335350b9ffeeda33ed0314d2fc9a69c89e091fd871c00121e64e2`
-- Clebsch Factorization trust manifest:
-  `b1d47ee9db48c5e82a43bdadba2cf364cdda392a0e188bccc6038da7d2bc8f5c`
-- Clebsch Factorization evidence fingerprint:
-  `e741658f577dc8cbca05ef96ee505951d62d73b834e25e0160928d04957a2a89`
-- Clebsch Passages trust manifest:
-  `56fc3b841c42ed7ea915e05fa5af8bf96114bd19425aee9f81326beb9d8478d7`
-- PRS exact-closure statement map:
-  `cca570904b381358dff893b98a9016c68082ad4542f294eb634e8c8d54dc83eb`
-- AME--LU statement-adequacy map:
-  `07ba0643fc8599db03b701b097e45efb0456009390e671f3b10f65c8f9dab776`
-- C602 trust-audit report:
-  `150a7adeed757bb234f9a222a7c0ca717b4de1572819924d21f9e1a5263f87d7`
+The Clebsch Factorization fingerprint generator now content-addresses all three advertised gates,
+including `ClebschHyperplaneSquare`; the former two-gate mismatch is closed.
 
-## Open evidence gaps
+## Candidate-state order
 
-- `ClebschHyperplaneSquare` is advertised by the factorization runner but is absent as a key from
-  `project_lean_import_closure_sha256`; the source owner must regenerate the complete fingerprint.
-- Clebsch Passages has no missing Lean evidence because it currently makes no Lean-backed claim.
-  A later formal companion would require a new manifest delta rather than inferred reuse.
+1. first human-scale finite-geometry tag, with C553 transformations applied only in the target;
+2. arcs core plus its separately validated Q16 package dependency;
+3. Clebsch Rigidity core plus its separately validated Q11 package dependency;
+4. Clebsch Factorization;
+5. AME--LU;
+6. geometric PRS R5--R7;
+7. PRS balanced quantum, after AME--LU;
+8. complete ports.
 
+Clebsch Passages remains in the paper registry but does not create a source state. Shared hashes
+deduplicate review work; each paper retains its own gate, terminal ledger, package pins, and exact
+candidate commit.
+
+## Current checkpoint blockers
+
+- The Lean worktree has foreign modified and untracked paths. In particular,
+  `RelativeConicArcs/Gates/ArcsCompleteOutsideConic.lean` differs from `HEAD`, so the current arcs
+  paper contract cannot yet be tied to a commit.
+- The current arcs manuscript and proof-audit files are also modified outside this lane.
+- The two referee-prose defects reported by AME--LU remain in
+  `RelativeConicArcs/Plane.lean` and `FiniteGeom/Code.lean`. Their public rewrites belong in the
+  target transformation unless their source owners land clean private-source corrections first.
+- The first candidate still needs the deterministic C553 rewrite, the exact transformed
+  26-file manifest, and a whole-closure semantic review before it can become the first commit.
+
+No Lean/Lake command, source copy, target deletion, remote action, or public commit was performed
+while synchronizing this registry.
