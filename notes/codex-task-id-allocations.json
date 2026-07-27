@@ -1592,8 +1592,17 @@
       "last": 683,
       "purpose": "render the two summary documents publication/status tables from paper facts in trust-spine regions",
       "sequence": 177
+    },
+    {
+      "count": 1,
+      "first": 684,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 684,
+      "purpose": "extract standalone paper repositories under ~/src/math-papers with deterministic clean-room validation",
+      "sequence": 178
     }
   ],
-  "next_id": 684,
+  "next_id": 685,
   "schema": "codex-task-id-allocations-v1"
 }
