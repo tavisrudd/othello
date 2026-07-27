@@ -1,0 +1,259 @@
+{
+  "codomain_basis": [
+    "x^12 y^0",
+    "x^11 y^1",
+    "x^10 y^2",
+    "x^9 y^3",
+    "x^8 y^4",
+    "x^7 y^5",
+    "x^6 y^6",
+    "x^5 y^7",
+    "x^4 y^8",
+    "x^3 y^9",
+    "x^2 y^10",
+    "x^1 y^11",
+    "x^0 y^12"
+  ],
+  "common_matrix_divisor": 2640,
+  "domain_basis": [
+    "x^6 y^0",
+    "x^5 y^1",
+    "x^4 y^2",
+    "x^3 y^3",
+    "x^2 y^4",
+    "x^1 y^5",
+    "x^0 y^6"
+  ],
+  "ground_ring": "Z",
+  "kernel_basis": [
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      -1
+    ]
+  ],
+  "kernel_fifth_transvectant_isotropy": [
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        0,
+        0
+      ]
+    },
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        0,
+        1
+      ]
+    },
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        0,
+        2
+      ]
+    },
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        1,
+        1
+      ]
+    },
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        1,
+        2
+      ]
+    },
+    {
+      "fifth_transvectant": [],
+      "pair": [
+        2,
+        2
+      ]
+    }
+  ],
+  "kernel_polynomials": [
+    "x^3 y^3",
+    "x^6 + 3 x y^5",
+    "3 x^5 y - y^6"
+  ],
+  "klein_dodecic_terms": [
+    {
+      "coefficient": 1,
+      "x_degree": 11,
+      "y_degree": 1
+    },
+    {
+      "coefficient": 11,
+      "x_degree": 6,
+      "y_degree": 6
+    },
+    {
+      "coefficient": -1,
+      "x_degree": 1,
+      "y_degree": 11
+    }
+  ],
+  "normalized_matrix_rows": [
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      -6,
+      0,
+      0
+    ],
+    [
+      60,
+      0,
+      0,
+      0,
+      0,
+      -20,
+      0
+    ],
+    [
+      0,
+      -15,
+      0,
+      0,
+      0,
+      0,
+      -45
+    ],
+    [
+      0,
+      0,
+      -24,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0
+    ],
+    [
+      -45,
+      0,
+      0,
+      0,
+      0,
+      15,
+      0
+    ],
+    [
+      0,
+      -20,
+      0,
+      0,
+      0,
+      0,
+      -60
+    ],
+    [
+      0,
+      0,
+      -6,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  ],
+  "pivot_columns_zero_based": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "rank": 4,
+  "rank_locus_tangent": {
+    "affine_tangent_dimension": 4,
+    "ambient_affine_dimension": 13,
+    "left_kernel_dimension": 9,
+    "linearized_constraint_count": 27,
+    "linearized_constraint_rank": 9,
+    "projective_tangent_dimension": 3
+  },
+  "schema": "c682-transvectant-bridge-v1",
+  "transvectant_order": 3
+}

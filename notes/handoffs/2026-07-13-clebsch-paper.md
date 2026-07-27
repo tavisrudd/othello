@@ -322,9 +322,8 @@ modulo affine inversion, plus a possible antipodal type; for a full split
 or nonsplit normalizer the sheet module and
 \(\lambda=(q+1)/2\) or \((q-1)/2\) are forced.  The sole remaining torus
 freedom is the matching-product vector's joint translation-norm rank.  The
-active gate is the one-parameter identity
-\(\dim(V+dV)\le\lambda+1\), which would force at least
-\(\lambda-1\) invariant trades.  For the split cross-orbit type, the
+exact acceptance gate needs only
+\(\dim(V+dV)\le2\lambda-2\).  For the split cross-orbit type, the
 matching product is now the explicit Dickson resultant
 \[
 P_c=-Y\left[X^n+(cZ)^n-(cZ)^n
@@ -337,9 +336,16 @@ parameter-free outer identity
 \[
 P_c+P_{c^{-1}}=Y(X^n-Z^n).
 \]
-The active split gate is to prove that the fixed correction on the right
-adds at most one direction modulo the first-sheet translation-norm image.
-The nonsplit analogue still needs careful quadratic descent.
+The strengthened q=27 replay falsifies both the former
+\(\lambda+1\) bound and the rank-one inference: every split orbit has
+sheet norm ranks \(14,14\), joint rank \(19\), defect increment five, and
+nine invariant trades.  Endpoint incidence yields only the sign trade, and
+the naive \(L(2)\otimes L(2)^{(1)}\) axis difference yields none.  The
+active split gate is the sharp replacement
+\(\dim(V+dV)\le\lambda+5\), plausibly by factoring the fixed-correction
+polarization through the five-dimensional Weyl layer \(\Delta(4)\).
+The exact fallback is merely a second common norm direction.  The nonsplit
+analogue still needs careful quadratic descent.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
@@ -402,6 +408,26 @@ invariant-theoretic, arithmetic, and representation-theoretic questions and
 look for the next interesting structure.  The user decides when C682 is
 done.  This exploration does not reopen or hold the pre-release-green Paper
 III bytes unless the user later chooses to promote a finding.
+
+C682's first Gold result is proved and exactly cross-checked.  For an
+icosahedral invariant \(I\in\mathcal H_6^{A_5}\), the unique
+Clebsch--Gordan coupling
+\(\mathcal H_3\otimes\mathcal H_6\to\mathcal H_6\), equivalently the third
+binary transvectant, gives an \(A_5\)-map \(T_I\) of rank four.  Its kernel
+is the nonmatching \(V_{3'}\), and its image is the unique \(V_4\), hence
+the Petersen four-space.  At the Klein dodecic the kernel is also
+pairwise isotropic for the fifth transvectant, so the kernel construction
+identifies the binary-dodecic and Grassmannian \(PSL_2/A_5\) models on
+their open orbit.  The rank-four locus has projective tangent dimension
+three at the Klein point, so the Mukai--Umemura closure is its local
+component there.  The exact matrix, proof, reproducibility boundary,
+algorithm landscape, conjectural \([5]\)-descent refinement, and mystery
+ledger are in
+`notes/2026-07-26-c682-hitchin-structural-question.md`.  C682 remains open.
+The highest-EV gate is whether rank four plus isotropic kernel
+characterizes the full Mukai--Umemura compactification; the exact
+Euclidean/binary normalization, conjugate-map descent, and targeted
+primary-source audit precede any manuscript promotion.
 
 If C182 has passed every local gate and waits only for a user-controlled
 DOI, licence, or repository-release action, C577 may begin without treating
