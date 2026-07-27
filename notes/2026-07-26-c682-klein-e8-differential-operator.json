@@ -1,0 +1,383 @@
+{
+  "claim_boundary": [
+    "The ordinary Auslander-McKay lift is split and carries no extension data.",
+    "The internal transvectant is not R-linear, so it is not a morphism of MCM modules.",
+    "It is an exact order-three graded differential operator on the E8 invariant ring.",
+    "No novelty claim for invariant differential operators is certified."
+  ],
+  "field": "Q",
+  "finite_transvectant": {
+    "image_dimension": 4,
+    "kernel_dimension": 3,
+    "map": "Sym^6 -> Sym^12, p |-> (p,f)_3",
+    "rank": 4
+  },
+  "invariant_ring_operator": {
+    "ambient_order_upper_bound": 3,
+    "degree_shift": 6,
+    "delta_H": "0",
+    "delta_H3_over_f3T": "-185530752000",
+    "delta_T2_over_f3T": "2845827072000",
+    "delta_T_over_f3": "422427456000",
+    "delta_f": "0",
+    "delta_f2_over_T": "3",
+    "delta_f3_over_fT": "135/11",
+    "delta_f5_over_f3T": "690/11",
+    "exact_order_on_invariant_ring": 3,
+    "not_R_linear_witness": [
+      "+3611520*X^20Y^4",
+      "-15649920*X^15Y^9",
+      "-10834560*X^10Y^14",
+      "-63360*X^5Y^19"
+    ],
+    "third_commutator_f_f_f_over_fT": "36/11"
+  },
+  "klein_generators": {
+    "H_definition": "(f,f)_2",
+    "H_degree": 20,
+    "T_definition": "(f,H)_1",
+    "T_degree": 30,
+    "f_degree": 12,
+    "relation": "T^2 = -200/121 H^3 + 40479436800 f^5"
+  },
+  "mckay": {
+    "affine_E8_edges": [
+      [
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "3"
+      ],
+      [
+        "3",
+        "4s"
+      ],
+      [
+        "4s",
+        "5"
+      ],
+      [
+        "5",
+        "6"
+      ],
+      [
+        "6",
+        "3p"
+      ],
+      [
+        "6",
+        "4"
+      ],
+      [
+        "4",
+        "2p"
+      ]
+    ],
+    "common_vertex": "4",
+    "common_vertex_dimension": 4,
+    "covariant_numerator_3p": [
+      6,
+      10,
+      14,
+      16,
+      20,
+      24
+    ],
+    "covariant_numerator_4": [
+      6,
+      8,
+      12,
+      14,
+      16,
+      18,
+      22,
+      24
+    ],
+    "natural_representation": "2",
+    "symmetric_power_12": [
+      "1",
+      "3",
+      "5",
+      "4"
+    ],
+    "symmetric_power_6": [
+      "3p",
+      "4"
+    ]
+  },
+  "ordinary_mcm_lift": {
+    "map": "zero on M_3p and a scalar split identity on M_4",
+    "source": "M_3p direct_sum M_4",
+    "target": "R direct_sum M_3 direct_sum M_5 direct_sum M_4"
+  },
+  "schema": "c682-klein-e8-differential-operator-v1",
+  "standard_coordinate_operator": {
+    "coordinates": "h=-H/242, t=T/4840",
+    "derivative_multiindex_order": [
+      "f",
+      "h",
+      "t"
+    ],
+    "normal_ordered_terms": [
+      {
+        "coefficient": [
+          {
+            "coefficient": "1",
+            "monomial": [
+              3,
+              0,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "45/19",
+            "monomial": [
+              3,
+              0,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "30/19",
+            "monomial": [
+              3,
+              1,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "720/551",
+            "monomial": [
+              4,
+              0,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "11/132240",
+            "monomial": [
+              0,
+              0,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "777600/551",
+            "monomial": [
+              8,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "225/551",
+            "monomial": [
+              3,
+              3,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          0,
+          3
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "450/551",
+            "monomial": [
+              3,
+              1,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "300/551",
+            "monomial": [
+              3,
+              2,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          2,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "200/1653",
+            "monomial": [
+              3,
+              0,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          0,
+          3,
+          0
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "540/551",
+            "monomial": [
+              4,
+              0,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          1,
+          0,
+          2
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "360/551",
+            "monomial": [
+              4,
+              1,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "216/551",
+            "monomial": [
+              5,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/8816",
+            "monomial": [
+              0,
+              3,
+              0
+            ]
+          }
+        ],
+        "derivatives": [
+          2,
+          0,
+          1
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "1/13224",
+            "monomial": [
+              0,
+              1,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": [
+          {
+            "coefficient": "1/33060",
+            "monomial": [
+              1,
+              0,
+              1
+            ]
+          }
+        ],
+        "derivatives": [
+          3,
+          0,
+          0
+        ]
+      }
+    ],
+    "operator_normalization": "Delta=delta/87278400, so Delta(t)=f^3",
+    "relation": "t^2 = h^3 + 1728 f^5"
+  },
+  "transvectant_convention": "sum_i (-1)^i binom(r,i) dX^(r-i)dY^i(a) dX^i dY^(r-i)(b)"
+}

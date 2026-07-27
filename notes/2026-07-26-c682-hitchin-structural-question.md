@@ -3196,7 +3196,7 @@ Donovan--Wemyss,
 [*Noncommutative deformations and
 flops*](https://arxiv.org/abs/1309.0698), is the primary framework.
 
-### D. A new McKay-module port inside the established \(E_8\) line
+### D. Resolved: McKay selection rule, MCM no-go, and an \(E_8\) differential operator
 
 This is not the first Clebsch--\(E_8\) bridge in the workspace.
 C381 classified the marked integral root systems of the weak degree-one
@@ -3218,28 +3218,184 @@ degrees \(12,20,30\) in the classical Kleinian \(E_8\) invariant ring.
 In particular, the same \(\Phi_{12}\) used by the third-transvectant
 reconstruction is the first generator on the \(E_8\) side.
 
-This suggests a representation-theoretic upgrade:
+Put
 \[
-p\longmapsto(p,\Phi_{12})_3
+G=2.A_5,\qquad S=\mathbf C[X,Y],\qquad R=S^G,
 \]
-should be expressed as a morphism among the maximal
-Cohen--Macaulay modules attached to vertices of the affine \(E_8\) McKay
-graph.  If successful, the generic rank four and its kernel module would
-follow from an \(E_8\) path calculation, and matrix factorizations would
-supply a categorical form of the transvectant inverse.
+and let \(2\) denote the natural two-dimensional \(G\)-module.  Label the
+affine \(E_8\) McKay graph by representation dimensions and distinguish
+the two representations of a repeated dimension by primes.  The
+Clebsch--Gordan recurrence on that graph gives
+\[
+\operatorname{Sym}^6(2)=3'\oplus4,\qquad
+\operatorname{Sym}^{12}(2)=1\oplus3\oplus4\oplus5.
+\]
+Thus the source and target of
+\[
+\delta_6:p\longmapsto(p,\Phi_{12})_3
+\]
+have exactly one common McKay vertex, the dimension-four vertex.  Schur's
+lemma now reads directly on affine \(E_8\):
+\[
+\ker\delta_6=3',\qquad
+\operatorname{im}\delta_6=4,\qquad
+\operatorname{rank}\delta_6=4.
+\]
+The covariant Hilbert numerators make the degree selection equally
+visible:
+\[
+\begin{aligned}
+z_{3'}(t)&=t^6+t^{10}+t^{14}+t^{16}+t^{20}+t^{24},\\
+z_4(t)&=t^6+t^8+t^{12}+t^{14}+t^{16}+t^{18}+t^{22}+t^{24}.
+\end{aligned}
+\]
+There is a \(4\) in both degrees six and twelve, but there is no \(3'\)
+in degree twelve.  This is a genuine \(E_8\) explanation of the
+rank-four selection rule, although it repackages rather than strengthens
+the earlier \(A_5\)-module proof.
 
-The bounded notes search found no earlier occurrence of a
-transvectant--McKay/MCM or transvectant--matrix-factorization map.  That
-specific port is therefore untried, but it is not authorized to resurrect
-the comparison killed by C382.  It must be built directly in the
-representation category of \(2.A_5\), with the central action recorded,
-rather than by identifying the Picard and icosian lattices.  The relevant
-McKay vertices, the module map, and the characteristic-five rank drop
-still have to be identified.  It is especially interesting that the
-construction would then contain global \(E_8\) McKay data and local
-\(A_2\) pagoda data at once.  One must keep the Kleinian quotient
-\(\mathbf C^2/(2.A_5)\) distinct from other modular
-parametrizations of the same \(E_8\) hypersurface.
+The proposed MCM/matrix-factorization upgrade fails in its naive form.
+For a \(G\)-module \(\rho\), put
+\[
+M_\rho=(S\otimes\rho)^G.
+\]
+Applying this Auslander--McKay construction to the finite-dimensional
+intertwiner gives only
+\[
+M_{3'}\oplus M_4
+\longrightarrow
+R\oplus M_3\oplus M_4\oplus M_5,
+\]
+zero on \(M_{3'}\) and a scalar split identity on \(M_4\).  It contains
+no extension, quiver path, or matrix-factorization data beyond the common
+vertex.  In particular it cannot, by itself, encode the moving
+Mukai--Umemura kernel.
+
+There is nevertheless a nontrivial \(E_8\) object.  Extend the same
+formula to all binary forms:
+\[
+\delta:S\longrightarrow S,\qquad
+\delta(a)=(a,\Phi_{12})_3.
+\]
+It is a \(G\)-invariant differential operator of order at most three and
+graded degree \(+6\).  Equivariance implies \(\delta(R)\subset R\), so it
+restricts to an element of \(D^3(R)\), the ring of differential operators
+on the Kleinian \(E_8\) surface.  It is not \(R\)-linear; for example
+\[
+\delta(\Phi_{12}X^6)-\Phi_{12}\delta(X^6)\ne0.
+\]
+Thus this internal polynomial realization is not a morphism of MCM
+modules, and it must not be described as one.
+
+Write
+\[
+f=\Phi_{12},\qquad H=(f,f)_2,\qquad T=(f,H)_1.
+\]
+These have degrees \(12,20,30\) and generate \(R\), subject to the
+weighted \(E_8\) relation of degree \(60\).  In the transvectant convention
+used throughout this report, exact calculation gives
+\[
+\delta(f)=0,\qquad
+\delta(H)=0,\qquad
+\delta(T)=422427456000\,f^3,
+\]
+and
+\[
+\delta(f^2)=3T,\qquad
+\delta(f^3)=\frac{135}{11}fT.
+\]
+The third commutator with multiplication by \(f\) is nonzero:
+\[
+[[[\delta,m_f],m_f],m_f](1)
+=\delta(f^3)-3f\delta(f^2)
+=\frac{36}{11}fT.
+\]
+Therefore the restriction to \(R\) has **exactly** order three, not merely
+ambient order three.  This is the correct categorical boundary:
+
+> The Klein transvectant is a McKay-graded vertex selector on finite
+> representations and a genuine third-order differential operator on the
+> \(E_8\) invariant ring, but not a nontrivial MCM-module morphism.
+
+The operator can in fact be written completely in the weighted \(E_8\)
+coordinates.  Normalize
+\[
+h=-H/242,\qquad t=T/4840,\qquad
+\Delta=\delta/87278400.
+\]
+Then
+\[
+t^2=h^3+1728f^5,\qquad \Delta(t)=f^3.
+\]
+Put
+\[
+Q=h^3+3456f^5=t^2+1728f^5.
+\]
+The exact normal-ordered expression on
+\(\mathbf Q[f,h,t]/(t^2-h^3-1728f^5)\) is
+\[
+\begin{aligned}
+\Delta={}&f^3\partial_t
+{11\over132240}t\,\partial_f^2
+{45\over19}f^3t\,\partial_t^2
+{30\over19}f^3h\,\partial_h\partial_t
+{720\over551}f^4\,\partial_f\partial_t\\
+&+{225\over551}f^3Q\,\partial_t^3
+{450\over551}f^3ht\,\partial_h\partial_t^2
+{300\over551}f^3h^2\,\partial_h^2\partial_t
+{200\over1653}f^3t\,\partial_h^3\\
+&+{540\over551}f^4t\,\partial_f\partial_t^2
+{360\over551}f^4h\,\partial_f\partial_h\partial_t
+{Q\over8816}\,\partial_f^2\partial_t\\
+&+{ht\over13224}\,\partial_f^2\partial_h
+{ft\over33060}\,\partial_f^3.
+\end{aligned}
+\]
+This is more than an existence statement: it is an explicit positive-
+weight differential equation intrinsic to the \(E_8\) hypersurface.
+The independent replay checks this formula on every coordinate monomial
+\(f^ah^bt^c\) with \(a+b+c\le4\), while the generator derives all fourteen
+coefficients from iterated commutators and the Klein relation.
+
+Suter's
+[*Quantum affine Cartan matrices, Poincare series of binary polyhedral
+groups, and reflection
+representations*](https://arxiv.org/abs/math/0503542)
+supplies the affine-\(E_8\) Poincare-series framework.  Kramer constructs
+a different Klein-derived invariant operator by symmetrizing the
+degree-six harmonic in \(SU_2\) generators in
+[*Invariant operator due to F. Klein quantizes H. Poincare's
+dodecahedral 3-manifold*](https://arxiv.org/abs/gr-qc/0410094).
+That is adjacent prior art, not an identification with the third-order
+operator above.
+
+The highest-value next gate is now precise: determine the algebra
+generated by \(\Delta\), its formal adjoint, and the Euler operator, and
+compare its spectrum with the rank stratification of the Mukai--Umemura
+kernel map.  Only after that should one test differential operators on
+the individual McKay modules.  The characteristic-five rank drop is a
+separate integral-model question.
+
+The exact evidence is generated by
+`2026-07-26-c682-klein-e8-differential-operator.py`; the independent
+replay uses a different homogeneous coefficient-list implementation.
+From `rust/`, run
+
+```text
+python3 ../notes/2026-07-26-c682-klein-e8-differential-operator.py --check
+python3 ../notes/2026-07-26-c682-klein-e8-differential-operator-replay.py
+(cd ../notes && sha256sum -c 2026-07-26-c682-klein-e8-differential-operator.sha256)
+```
+
+The byte counts are \(20770\) for the generator, \(7032\) for the
+independent replay, and \(6973\) for the JSON certificate; their SHA-256
+hashes are recorded in the adjacent `.sha256` manifest.
+
+The certificate records the affine-\(E_8\) recurrence, covariant
+numerators, transvectant rank, Klein relation, exact-order witness, full
+fourteen-term normal form, and the four-term failure of \(R\)-linearity.
+It does not certify a novelty claim about invariant differential
+operators or an identification with Kramer's operator.
 
 ### E. Rees valuations meet K-stability
 
@@ -3276,10 +3432,11 @@ entry points.
 3. **Contraction algebra:** strongest next invariant of the width-three
    graph; a finite explicit computation can either open the categorical
    story or kill it.
-4. **\(E_8\)-McKay refinement:** potentially deep, but not a new
-   Clebsch--\(E_8\) area.  It needs an explicit module-map identification
-   in the \(2.A_5\) category and must remain disjoint from C382's failed
-   marked-lattice comparison.
+4. **\(E_8\) differential operator:** the McKay/MCM test is now resolved:
+   affine \(E_8\) explains the selection rule, while the MCM lift is
+   split.  The surviving exact order-three \(\delta\in D(R)\) now has a
+   complete fourteen-term expression in weighted \(E_8\) coordinates;
+   identify its operator algebra and spectrum.
 5. **K-stability:** high external reach, gated by globalizing the local
    Rees filtration.
 
@@ -3297,6 +3454,28 @@ extracted from them.
 - **Settled:** its kernel and image are forced representation-theoretically,
   explaining why the bridge appears only on the Clebsch/Petersen
   four-space.
+- **Settled in the McKay lens:** the affine-\(E_8\) recurrence gives
+  \(\operatorname{Sym}^6=3'\oplus4\) and
+  \(\operatorname{Sym}^{12}=1\oplus3\oplus4\oplus5\).  The rank-four map
+  is the unique common-vertex selector, and the covariant Hilbert
+  numerators force the \(3'\) kernel by absence in degree twelve.
+- **Settled negatively for ordinary MCM modules:** the
+  Auslander--McKay lift is zero on \(M_{3'}\) and a split scalar identity
+  on \(M_4\).  It supplies no extension or matrix-factorization mechanism
+  for the moving Mukai--Umemura kernel.
+- **Settled as the surviving \(E_8\) object:** the internal operator
+  \(\delta(a)=(a,\Phi_{12})_3\) restricts to a degree-\(+6\)
+  differential operator of exact order three on the Kleinian invariant
+  ring.  Its complete fourteen-term normal form on
+  \(t^2=h^3+1728f^5\) is derived exactly and independently replayed.
+- **Open operator-algebra mystery:** determine whether \(\Delta\), its
+  formal adjoint, and the Euler operator close to a small recognizable
+  algebra, and whether their spectrum contains information beyond the
+  already settled \(A_5\) isotypic decomposition.
+- **Open integral mystery:** construct the correct integral
+  differential-operator model and decide whether the characteristic-five
+  rank drop is a degeneration of that model rather than only of the
+  ordinary-derivative transvectant matrix.
 - **Settled on the open orbit:** the kernel is fifth-transvectant
   isotropic, so the construction identifies the binary-dodecic and
   Grassmannian \(PSL_2/A_5\) models.

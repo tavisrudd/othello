@@ -1823,12 +1823,21 @@ are vacuous because a natural number can encode the whole residual.
   rational sextic is arithmetically Buchsbaum with Hartshorne--Rao module
   \(k^2(-1)\), identifying its defect-two jet quotient with its complete
   projective-normality deficiency.  The next independent bridges are the
-  contraction algebra of the width-three pagoda, a specific
-  \(E_8\)-McKay-module realization of the Klein transvectant, and
-  globalization of the pointed Rees filtration to a K-stability test
-  configuration.  The \(E_8\) item is a refinement of the substantial
-  C381--C390 line, not a new area: it must be formulated directly for
-  \(2.A_5\) modules and cannot reuse the equivariant marked-lattice
-  comparison ruled out by C382.
+  contraction algebra of the width-three pagoda and globalization of the
+  pointed Rees filtration to a K-stability test configuration.  The
+  \(E_8\)-McKay test is now resolved: affine \(E_8\) gives
+  \(\operatorname{Sym}^6=3'\oplus4\) and
+  \(\operatorname{Sym}^{12}=1\oplus3\oplus4\oplus5\), so the transvectant
+  is the unique common-vertex selector and rank four is forced.  The
+  ordinary MCM lift is only a split identity on \(M_4\), not a new
+  matrix-factorization bridge.  Internally, however,
+  \(\delta(a)=(a,\Phi_{12})_3\) restricts to a non-\(R\)-linear
+  differential operator of exact order three and degree \(+6\) on the
+  Kleinian \(E_8\) invariant ring \(R\).  After normalizing
+  \(R=\mathbf Q[f,h,t]/(t^2-h^3-1728f^5)\), its complete fourteen-term
+  normal-ordered expression is now known and independently replayed.
+  Identifying its operator algebra and spectrum is the surviving
+  frontier; it remains separate from the marked-lattice comparison ruled
+  out by C382.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim.
