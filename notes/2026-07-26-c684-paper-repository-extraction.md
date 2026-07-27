@@ -343,9 +343,10 @@ Then:
   in `dihedral_schreier_node_kayles.tex`; `C01`--`C15` in the Clebsch manuscripts are mathematical
   class labels and are deliberately not findings.
 - At that snapshot, `clebsch-hexagon-code` and `clebsch-passages` have zero findings.
-  `clebsch-factorization` has only 94 flattening rewrites to make in paper-root replay commands.
-  Every other mapped root needs a repository-specific content disposition; broad allow rules are
-  forbidden.
+  Clebsch Factorization's 94 findings were all flattening rewrites in six public source, manifest,
+  and replay files. Exact-count rules now rewrite them, and its selected audit passes with zero
+  findings. Every other mapped root needs a repository-specific content disposition; broad allow
+  rules are forbidden.
 - The Node Kayles task-ID findings are rendered, because the manuscript sets
   `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
   polyhedral integration, not merely editorial reminders. The repository is therefore gated until

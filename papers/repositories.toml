@@ -35,6 +35,48 @@ source = "papers/clebsch-factorization"
 paper_ids = ["clebsch_factorization"]
 disposition = "active"
 
+[[repository.rewrite]]
+path = "README.md"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 1
+reason = "command paths are relative to the standalone repository root"
+
+[[repository.rewrite]]
+path = "clebsch_factorization.tex"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 1
+reason = "artifact paths are relative to the standalone repository root"
+
+[[repository.rewrite]]
+path = "verification/README.md"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 2
+reason = "command paths are relative to the standalone repository root"
+
+[[repository.rewrite]]
+path = "verification/evidence_fingerprint.json"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 30
+reason = "manifest paths are relative to the standalone repository root"
+
+[[repository.rewrite]]
+path = "verification/trust_manifest.json"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 30
+reason = "manifest paths are relative to the standalone repository root"
+
+[[repository.rewrite]]
+path = "verification/verify_release.py"
+old = "papers/clebsch-factorization/"
+new = ""
+expected_count = 30
+reason = "verifier paths are relative to the standalone repository root"
+
 [[repository]]
 name = "clebsch-hexagon-code"
 source = "papers/clebsch-hexagon-code"
