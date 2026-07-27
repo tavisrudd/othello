@@ -1,7 +1,7 @@
 # Clebsch rigidity paper
 
 Working root for the focused rigidity/decoder manuscript titled
-*A conic deep-hole syndrome locus characterizes the Clebsch code*.
+*Reconstructing the Clebsch code from its deep-hole syndrome locus*.
 
 - Scope owner: the focused Clebsch rigidity paper and its release surface.
 - Base: the focused manuscript snapshot at
