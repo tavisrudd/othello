@@ -546,7 +546,6 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
                 "role": content_role(rel),
                 "sha256": sha256(data),
                 "source_blob": entry.oid,
-                "source_path": entry.path,
                 "rewrites": applied_rewrites,
             }
         )
@@ -557,12 +556,10 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         raise Refused(f"repository {repository!r} source collides with generated files: {collisions}")
     provenance = (
         "# Export provenance\n\n"
-        f"- Source repository commit: `{commit}`\n"
-        f"- Source root: `{source}`\n"
+        f"- Source snapshot commit: `{commit}`\n"
         f"- Repository identity: `tavisrudd/{repository}`\n"
-        "- Exporter: `papers/scripts/export-paper-repos.py materialize`\n"
-        "- This repository is a deterministic release mirror; the private research monorepo "
-        "remains the development source.\n"
+        "- Export method: deterministic, content-addressed source materialization.\n"
+        "- File hashes and source blob identities are recorded in `export-manifest.json`.\n"
     ).encode()
     payloads.append(("PROVENANCE.md", provenance, "100644", "generated"))
     manifest_files.append(
@@ -570,12 +567,11 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
             "bytes": len(provenance),
             "mode": "100644",
             "path": "PROVENANCE.md",
-            "role": "provenance",
-            "sha256": sha256(provenance),
-            "source_blob": None,
-            "source_path": None,
-        }
-    )
+                "role": "provenance",
+                "sha256": sha256(provenance),
+                "source_blob": None,
+            }
+        )
     if ".gitignore" not in {path for path, _, _, _ in payloads}:
         ignore = (
             "".join(f"{name}/\n" for name in GENERATED_DIRECTORY_NAMES)
@@ -591,7 +587,6 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
                 "role": "export-support",
                 "sha256": sha256(ignore),
                 "source_blob": None,
-                "source_path": None,
             }
         )
 
@@ -608,7 +603,6 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         "repository": repository,
         "repository_map_sha256": sha256(git("show", f"{commit}:{REPOSITORY_MAP}")),
         "source_commit": commit,
-        "source_root": source,
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
         ],
