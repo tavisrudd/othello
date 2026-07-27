@@ -36,7 +36,10 @@ The results are grouped as follows.
    extending Frobenius-invariant arcs by conjugate point pairs.
 9. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
    graph that remembers its ambient plane.
-10. Two open programmes with substantial partial results: complete arcs of
+10. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
+    Schur-generates the two outer Fano modules, while the conic-link code is
+    their defect-two jet modification.
+11. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
 
@@ -1481,6 +1484,115 @@ but their exact values and asymptotics remain open.
 The manuscript exists with full written proofs. Its planned formalization has
 not yet been built, and that is its largest remaining gate.
 
+## *The Clebsch Schur--Sarkisov spine*
+
+This result is not yet assigned to a manuscript.  It joins the Clebsch
+deep-hole construction to the pointed Sarkisov links of the
+Mukai--Umemura threefold through the multiplication algebra of the complete
+rational conic.
+
+Let
+\[
+ R_d=\operatorname{ev}_{\mathbf P^1(\mathbf F_{11})}
+ H^0(\mathbf P^1,\mathcal O(d))
+\]
+with the standard residue-coordinate normalization, and let
+\[
+ E=R_2=[12,3,10]_{11}.
+\]
+The code \(E\) is exactly the complete conic extension port that occurs in
+the Clebsch deep-hole reconstruction.  Multiplication of binary forms gives,
+for \(a+b\le10\),
+\[
+ R_a\star R_b=R_{a+b},
+\]
+where \(\star\) denotes coordinatewise Schur product and span.  Consequently
+\[
+ E^{\star2}=R_4=[12,5,8]_{11},
+ \qquad
+ E^{\star3}=R_6=[12,7,6]_{11}.
+\]
+These are precisely the two outer \(SL_2\)-modules \(U_4,U_6\) in the
+\(V_5\) and Mukai--Umemura kernel descriptions.  At \(q=11\), residue/Serre
+duality gives the exceptional balance
+\[
+ (E^{\star2})^\perp=E^{\star3},
+ \qquad
+ R_5=[12,6,7]_{11}=R_5^\perp.
+\]
+Thus the normal-quintic Sarkisov center is the self-dual degree-five
+midpoint between the Schur-square and Schur-cube pieces.
+
+The fixed rational sextic center of the conic link is evaluated from
+\[
+ W=\langle1,t,t^3,t^5,t^6\rangle
+ \subset H^0(\mathbf P^1,\mathcal O(6)).
+\]
+Its code
+\[
+ C_\Gamma=[12,5,6]_{11}
+\]
+is therefore an elementary modification of the cubic Schur power:
+\[
+ 0\longrightarrow C_\Gamma
+ \longrightarrow E^{\star3}=R_6
+ \longrightarrow J^{(2)}_{0,\infty}
+ \longrightarrow0,
+\]
+where \(J^{(2)}_{0,\infty}\cong\mathbf F_{11}^2\) is the sum of the second-jet
+lines at \(0\) and \(\infty\).  Dually,
+\[
+ 0\longrightarrow E^{\star2}=R_4
+ \longrightarrow C_\Gamma^\perp
+ \longrightarrow (J^{(2)}_{0,\infty})^\vee
+ \longrightarrow0.
+\]
+Here \(C_\Gamma^\perp=[12,7,4]_{11}\).  The two omitted jet lines are the
+centered torus weights \(2,-2\); their omission raises the two tangent
+contacts from order two to order three.  The strict transforms of those two
+3-tangent lines are exactly the two components of the published Reid-pagoda
+flop.  Hence the two Singleton-defect directions, missing weights,
+second-jet gaps, and flop components are one pair of objects.
+
+This supplies an exact cross-programme spine:
+\[
+\begin{array}{c}
+\text{Clebsch deep-hole port }E=R_2\\
+\downarrow\ \star2\hspace{32mm}\downarrow\ \star3\\
+R_4\quad\xleftrightarrow{\ \perp\ }\quad R_6\\
+\hspace{13mm}R_5=R_5^\perp\text{ at the midpoint},\\
+\hspace{13mm}C_\Gamma=\ker(R_6\to J^{(2)}_{0,\infty}).
+\end{array}
+\]
+It also sharpens three bridges without yet proving them.  The quadratic and
+cubic pieces in the conic matching quotient now have a literal ambient
+source in the square/cube filtration of the conic evaluation algebra, but
+no natural transformation to that quotient has been constructed.  The
+coefficient-enriched repair port and the scheme-theoretic jet quotient both
+recover information erased by support reduction, but no coefficient-port
+to Rees-algebra functor is known.  Finally \(R_5\) supplies the
+extended-GRS stabilizer \(\operatorname{AME}(12,11)\) state; local-unitary
+rigidity makes any proposed product-local realization of the geometric
+duality a discrete local-Clifford question, but no such realization is
+currently defined.
+
+The next categorical target is a **Conic Schur--Sarkisov correspondence**:
+construct the graded evaluation algebra
+\[
+ \mathcal A=\bigoplus_d R_d
+\]
+together with its residue/Frobenius pairing and jet modifications, and
+recover the three Fano objects and their Sarkisov centers functorially from
+that data.  What is proved above is the object-level multiplication,
+duality, exact jet sequences, and identification of the two exceptional
+components.  A base-change-compatible Rees construction and a master
+correspondence among \(Q^3,V_5,U_{22}\) remain conjectural.
+
+This bridge does not remove the separate boundary in *Arithmetic and
+harmonic realizations of the Clebsch cubic*: no canonical specialization
+from those real/rational realizations to the finite matching tensor has been
+proved.
+
 ## Two open programmes
 
 ### Complete arcs of square-root size relative to a conic
@@ -1621,5 +1733,9 @@ are vacuous because a natural number can encode the whole residual.
   and written proofs complete; the formalization has not been built, and the
   continuation-complex package is publication-softened against existing
   reconstruction literature.
+- ***The Clebsch Schur--Sarkisov spine:*** exact at the level of conic
+  evaluation codes, Schur products, residue duality, jet quotients, and the
+  two Reid-pagoda components; the Rees-algebra functor and master Fano
+  correspondence remain open.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim.

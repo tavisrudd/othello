@@ -2689,6 +2689,102 @@ local Rees algebra of \(|5H_Q-2E_\Gamma|\) as a functor of the two jet
 lines.  Doing so would turn the present object-level identification into
 a base-change-compatible Sarkisov/code transformation.
 
+## 20. The Clebsch Schur--Sarkisov spine
+
+The portfolio summary exposes a stronger organizing statement than the
+three-code diagram (19.6).  Let
+\[
+ E=R_2=[12,3,10]_{11},
+ \tag{20.1}
+\]
+the complete conic evaluation code that is the Clebsch deep-hole extension
+port.  Multiplication of binary forms is surjective
+\[
+ H^0(\mathcal O(a))\otimes H^0(\mathcal O(b))
+ \longrightarrow H^0(\mathcal O(a+b)),
+\]
+and evaluation is injective through degree \(10\).  Hence, for
+\(a+b\le10\),
+\[
+ R_a\star R_b=R_{a+b}.
+ \tag{20.2}
+\]
+In particular,
+\[
+ E^{\star2}=R_4,\qquad E^{\star3}=R_6.
+ \tag{20.3}
+\]
+Thus the \(U_4/U_6\) modules on the two outer Fano nodes are not merely
+Reed--Solomon codes on the same point set: they are the square and cube of
+the original Clebsch extension port in the conic evaluation algebra.
+
+At \(q=11\), (19.18) becomes the exact Frobenius pairing
+\[
+ (E^{\star2})^\perp=E^{\star3},
+ \qquad
+ R_5^\perp=R_5.
+ \tag{20.4}
+\]
+The normal-quintic Sarkisov center is therefore the self-dual degree-five
+piece between the Schur-square and Schur-cube endpoints.  Combining
+(19.12), (19.19), and (20.3) gives the sharper conic-edge diagram
+\[
+\begin{array}{ccccccccc}
+0&\to&C_\Gamma&\to&E^{\star3}=R_6
+ &\to&J^{(2)}_{0,\infty}&\to&0,\\
+&&&&\rotatebox{90}{\(\perp\)}&&\rotatebox{90}{\(\vee\)}\\[-1mm]
+0&\to&E^{\star2}=R_4&\to&C_\Gamma^\perp
+ &\to&(J^{(2)}_{0,\infty})^\vee&\to&0.
+\end{array}
+\tag{20.5}
+\]
+Here \(J^{(2)}_{0,\infty}\) is the sum of the two second-jet lines.
+Consequently the conic Sarkisov center is a defect-two elementary
+modification of the cubic Schur power of the Clebsch port.  The two pagoda
+curves are the geometric exceptional locus of precisely that modification.
+
+This yields the exact object-level spine
+\[
+\text{Clebsch port }R_2
+\xrightarrow{\ \star2,\star3\ }
+(R_4,R_6)
+\xrightarrow{\ \text{jet modification}\ }
+(C_\Gamma,C_\Gamma^\perp),
+\tag{20.6}
+\]
+with \(R_5\) the self-dual midpoint.  It bridges the previously separate
+deep-hole, Fano-kernel, conic-link, and MDS/AME objects without identifying
+their moduli functors.
+
+Three further consequences are targets rather than theorems.
+
+1. Paper II's quadratic recovery and cubic orientation should be compared
+   to the degree-\(4\) and degree-\(6\) pieces of the same conic evaluation
+   algebra.  The common square/cube mechanism is exact in the ambient
+   algebra, but no natural map from the matching quotient to (20.6) is yet
+   constructed.
+2. The complete coefficient repair port and the scheme-theoretic jet/Rees
+   object both retain linear data erased by support reduction.  Turning this
+   parallel into a graded repair-port/Rees functor would categorify (20.5).
+3. The midpoint \(R_5\) gives the extended-GRS
+   \(\operatorname{AME}(12,11)\) stabilizer state.  The LU-to-LC theorem
+   makes any product-local realization of the Sarkisov/Serre symmetry a
+   local-Clifford classification problem, but it does not supply such a
+   realization.
+
+The next-level theorem target is therefore a **Conic
+Schur--Sarkisov correspondence**.  One should construct
+\[
+ \mathcal A=\bigoplus_d R_d
+ \tag{20.7}
+\]
+with its multiplication, residue/Frobenius pairing, and filtered jet
+quotients, then recover the \(Q^3,V_5,U_{22}\) nodes and their line- and
+conic-centered links functorially.  The acceptance gate is not another
+dimension match: it is a base-change-compatible Rees construction whose
+special fibers reproduce the scheme-theoretic pointed graph and both
+pagoda components.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -2765,6 +2861,19 @@ a base-change-compatible Sarkisov/code transformation.
   Their omission raises both tangent contacts to order three, and the
   resulting two 3-tangent lines are exactly the two components of the
   published Reid-pagoda flop.
+- **Settled multiplicatively:** the Clebsch conic extension port
+  \(E=R_2\) satisfies \(E^{\star2}=R_4\) and \(E^{\star3}=R_6\).
+  At \(q=11\) these pieces are dual, \(R_5\) is the self-dual midpoint,
+  and the conic-link code is the kernel of the two-second-jet quotient
+  of \(E^{\star3}\).
+- **Open across Paper II:** determine whether its quadratic recovery and
+  cubic orientation arise functorially from the square/cube filtration of
+  the complete conic evaluation algebra; the shared ambient multiplication
+  alone is not an identification.
+- **Open across repair ports and AME:** construct the graded
+  coefficient-port/Rees bridge and test whether the \(R_5\) midpoint
+  realizes the geometric duality by a product-local, hence necessarily
+  local-Clifford, operation.
 - **Open functorially on the conic edge:** express the complete local Rees
   algebra of the inverse link in terms of the two second-jet quotient
   lines and prove arbitrary base-change compatibility.
