@@ -112,7 +112,10 @@ released papers also have standalone Git mirrors under `~/src/math-papers/`:
 Synchronization is one-way from this repository to those mirrors. Make manuscript edits here
 first, then propagate and validate every intended public change in the matching standalone
 repository. Do not treat edits made only in `~/src/math-papers/` as authoritative or merge them
-back without an explicit user instruction.
+back without an explicit user instruction. Preserve each standalone repository's existing history:
+apply synchronized changes there as ordinary forward commits. Do not replace, reinitialize, or
+re-export over an existing standalone repository unless the user explicitly requests that
+destructive history replacement.
 
 ## Literature cache: load on demand
 
