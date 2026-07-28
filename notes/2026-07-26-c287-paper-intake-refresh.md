@@ -25,7 +25,7 @@ one private source commit. Stopped Lean processes do not make a dirty worktree i
 | Beyond-four PRS R5--R7 | `PRSFoundation`, `PRSRedundancyFive`, `PRSPolarInductionRedundancySixSeven`, `PRSStableComponents`, `PRSBeyondRedundancyFour`, and `PRSBeyondRedundancyFourAxiomAudit` under `RelativeConicArcs.Gates` | exact 17-file union; 74 ordered audit terminals | geometric state in `finitegeom`; balanced-quantum gates remain a separate later state after AME--LU |
 | Clebsch Rigidity | `RelativeConicArcs.Gates.ClebschRigidityTrust` | 24 terminals; raw project import closure 157 files | 17-file human/core portion in `finitegeom`; 140 Q11-generated files in the opt-in Q11 certificate package |
 | Clebsch Factorization | `RelativeConicArcs.Gates.ClebschArithmeticGluing`, `ClebschHilbertSymmetry`, and `ClebschHyperplaneSquare` | three-gate fingerprint now complete; 29-file union; 26 printed terminals | human-scale state in `finitegeom` |
-| Clebsch Passages | no Lean root | four trust-manifest claim groups covering nine manuscript labels; the manifest explicitly claims no Lean dependency | paper boundary only; creates no `finitegeom` state |
+| Clebsch Passages | candidate companion roots `RelativeConicArcs.Gates.ClebschPassageInterfaces` and `RelativeConicArcs.Gates.ClebschHarmonicQuotient`; C685 decides the adjacent `Q11BrianchonPetersen` disposition | four trust-manifest claim groups cover nine manuscript labels and explicitly claim no Lean dependency; this does not imply that no related Lean artifact exists | reviewed human-scale formal-companion state in `finitegeom`, labelled non-load-bearing unless the paper verification manifest is separately revised |
 | Complete bounded repair ports | `RepairPorts.Gates.CompletePorts` | observed trust fact: exact 30-file closure and 36 terminals, all with only `propext`, `Classical.choice`, and `Quot.sound` | human-scale state in `finitegeom`; retained finite replay bundles stay paper-side unless separately packaged |
 
 The Clebsch Factorization fingerprint generator now content-addresses all three advertised gates,
@@ -37,12 +37,14 @@ including `ClebschHyperplaneSquare`; the former two-gate mismatch is closed.
 2. arcs core plus its separately validated Q16 package dependency;
 3. Clebsch Rigidity core plus its separately validated Q11 package dependency;
 4. Clebsch Factorization;
-5. AME--LU;
-6. geometric PRS R5--R7;
-7. PRS balanced quantum, after AME--LU;
-8. complete ports.
+5. Clebsch Passages formal companion;
+6. AME--LU;
+7. geometric PRS R5--R7;
+8. PRS balanced quantum, after AME--LU;
+9. complete ports.
 
-Clebsch Passages remains in the paper registry but does not create a source state. Shared hashes
+Clebsch Passages creates a reviewed formal-companion state without changing the manuscript's
+current no-formal-dependency claim. Shared hashes
 deduplicate review work; each paper retains its own gate, terminal ledger, package pins, and exact
 candidate commit.
 

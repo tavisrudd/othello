@@ -75,9 +75,10 @@ is constructed. A frozen root name is not a frozen source snapshot.
 1. From the immutable snapshot, compute the exact transitive project-owned closure for the first
    tag and the adopted Lean contracts: Relconic; PRS R5--R7 geometric; Clebsch Rigidity; Clebsch
    Factorization; the current AME--LU release aggregate; complete ports; and the PRS
-   balanced-quantum cross-paper gate. Record Clebsch Passages as a no-Lean paper contract and do
-   not add it to the source union. Split the arcs Q16 and Clebsch Rigidity Q11 generated families
-   into their declared opt-in certificate packages.
+   balanced-quantum cross-paper gate. Include C685's reviewed Clebsch Passages formal-companion
+   roots in the human source union while preserving the paper manifest's no-formal-dependency
+   boundary. Split the arcs Q16 and Clebsch Rigidity Q11 generated families into their declared
+   opt-in certificate packages.
 2. Form one content-addressed union. Each row records source path, destination path, canonical Lean
    module name, regular-file type and mode, byte count, and SHA-256. Reject symlinks, non-regular
    files, path traversal, duplicate destinations, module aliases, Unicode-normalization or
@@ -118,8 +119,8 @@ is constructed. A frozen root name is not a frozen source snapshot.
 - Do not compute export manifests from a dirty private-source tree. The
    adopted root ledger is sufficient and avoids a second manifest pass.
 - Do not ingest C581, PRS companion levels, future Clebsch revisions, or Relconic quantitative
-  successors. Clebsch Passages remains in the paper ledger but outside the source union unless a
-  later manifest names an exact Lean root.
+  successors. Clebsch Passages enters only through the exact C685 companion manifest; do not widen
+  that closure by thematic filename matching.
 - Do not copy Q11, Q13, Q16, or Q25 certificate families into the main source union. Handle a
   certificate package only when an adopted paper manifest explicitly requires it, through its
   existing one-way package boundary.

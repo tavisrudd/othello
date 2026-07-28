@@ -3,9 +3,9 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated; C287's current paper
-boundaries are synchronized and the Clebsch Factorization three-gate fingerprint is repaired;
-extraction waits for a commit-clean immutable input checkpoint, while C162's remaining real-build
-checks also need a quiet window
+boundaries are synchronized; C685 corrects the Passages formal-companion omission and C686--C687
+own the complete field-certificate split; extraction waits for a commit-clean immutable input
+checkpoint, while C162's remaining real-build checks also need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -108,6 +108,12 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    refresh remains in the Lean lane. Clebsch Passages' corrected candidate is still preserved
    separately because replacing its superseded local history requires explicit approval. Exact
    source/local commits and manifest hashes are in the C684 report.
+9. **C685--C687 extraction corrections:** C685 replaces the false “Passages has no Lean” intake
+   inference with reviewed formal-companion roots while retaining the paper's honest
+   no-formal-dependency boundary. C686 materializes the downstream q16 certificate repository and
+   moves its final aggregate out of the human Arcs gate. C687 completes the same exact,
+   content-addressed, one-way split for the remaining declared q11/q13/q25 generated families.
+   Contracts: [`../2026-07-28-c685-c687-extraction-corrections.md`](../2026-07-28-c685-c687-extraction-corrections.md).
 
 ## Gates and non-goals
 
@@ -200,9 +206,11 @@ fresh-history candidate with the C553 API/prose transformation applied only in t
 private monorepo remains unchanged: no source module is deleted, renamed, or rewritten there.
 
 The synchronized intake covers arcs, AME--LU, geometric beyond-four PRS, Clebsch Rigidity,
-Clebsch Factorization, Clebsch Passages, and complete ports. Clebsch Passages has no Lean root and
-creates no source state. Arcs' Q16-generated family and Clebsch Rigidity's Q11-generated family
-remain opt-in certificate packages rather than entering the human-scale main repository.
+Clebsch Factorization, Clebsch Passages, and complete ports. C685 now owns the reviewed Passages
+formal-companion state; the paper's current manifest still claims no Lean dependency. Arcs' Q16
+generated family and Clebsch Rigidity's Q11 generated family remain opt-in certificate packages
+rather than entering the human-scale main repository, with C686--C687 owning their complete
+materialization and the other declared field-specific packages.
 Clebsch Factorization's fingerprint now maps all three advertised gates. Exact current roots,
 counts, package splits, and blockers are in `../2026-07-26-c287-paper-intake-refresh.md`. Follow
 `../2026-07-25-c287-token-efficient-execution.md`, which pins one immutable private-source
