@@ -98,6 +98,22 @@ literature comparison, or ordinary read-only review.
 Before any task that works directly on a manuscript under `papers/`, read
 `papers/style-guide.md` completely. This is a routed read, not startup context.
 
+## Standalone paper mirrors
+
+The authoritative manuscript sources remain under this repository's `papers/`. The following
+released papers also have standalone Git mirrors under `~/src/math-papers/`:
+
+- `papers/ame_lu` → `~/src/math-papers/ame-lu`
+- `papers/beyond4_prs` → `~/src/math-papers/beyond4-prs`
+- `papers/clebsch-factorization` → `~/src/math-papers/clebsch-factorization`
+- `papers/clebsch-rigidity` → `~/src/math-papers/clebsch-rigidity`
+- `papers/arcs_complete_outside_conic` → `~/src/math-papers/arcs-complete-outside-conic`
+
+Synchronization is one-way from this repository to those mirrors. Make manuscript edits here
+first, then propagate and validate every intended public change in the matching standalone
+repository. Do not treat edits made only in `~/src/math-papers/` as authoritative or merge them
+back without an explicit user instruction.
+
 ## Literature cache: load on demand
 
 Before re-fetching a paper for a literature task, read `/tmp/persistent/tavis/lit-search/README.md`
