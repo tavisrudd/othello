@@ -1,5 +1,5 @@
-// Exact discovery enumerator for C101.  This is not itself a proof object: its output is intended
-// to be frozen and consumed by the independent/Lean checker described in the handoff.
+// Exact discovery enumerator.  This is not itself a proof object: its output is intended
+// to be frozen and consumed by the independent Lean checker.
 #include <algorithm>
 #include <array>
 #include <cstdint>
