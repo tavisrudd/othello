@@ -125,9 +125,10 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    state. C685 does not wait for a certificate package. The statement map is now settled:
    `ClebschOrientationMechanisms` is the exact three-module current-paper companion;
    `ClebschPassageInterfaces`, `ClebschHarmonicQuotient`, and `Q11BrianchonPetersen` are excluded.
-   Candidate commit `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` has a green working-tree
-   gate and is undergoing clean replay. The paper's immutable remote lock waits for an authorized
-   push of the validated commit. Current report:
+   Commit `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` passed both the working-tree
+   gate and an exact-commit clean-clone replay and now heads local `finitegeom/main`, two commits
+   ahead of `origin/main`. No push was performed. The paper's immutable remote lock waits for an
+   authorized push of the validated commit. Current report:
    [`../2026-07-28-c685-clebsch-passages-formal-companion.md`](../2026-07-28-c685-clebsch-passages-formal-companion.md).
 2. **Run C686 second, after the human Arcs core has an immutable `finitegeom` commit.** Use that
    commit as the sole upstream library pin; materialize and validate the q16 package and its

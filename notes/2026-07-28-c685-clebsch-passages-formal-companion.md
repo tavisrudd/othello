@@ -1,8 +1,8 @@
 # C685 Clebsch Passages formal companion
 
 **Lane:** `build-sys`
-**Status:** ACTIVE; exact formal surface corrected, `finitegeom` candidate constructed, clean replay
-running, paper lock waits for a publicly reachable immutable commit
+**Status:** ACTIVE; exact formal surface corrected and clean-replay-valid on local
+`finitegeom/main`; no push; paper lock waits for a publicly reachable immutable commit
 
 ## Corrected statement boundary
 
@@ -30,7 +30,7 @@ separate Clebsch-hexagon dictionary. None enters the C685 export.
   `4493afe499109531bf5dcb489f79a2edc1ae8ed5`.
 - Exact companion closure: 3 Lean modules, 34,834 bytes, 939 lines, one external import (`Mathlib`).
 - Public `finitegeom` candidate branch: `candidate/c685-clebsch-passages`.
-- Current candidate commit:
+- Validated local `main` and candidate commit:
   `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed`.
 - Standalone paper candidate:
   `~/src/math-papers/clebsch-passages-c685`; the existing superseded
@@ -52,21 +52,23 @@ match `trust/areas/clebsch_passages.toml` exactly: each is a subset of `propext`
 `Classical.choice`, and `Quot.sound`, with no project-local axiom, generated certificate,
 `native_decide`, or admitted declaration.
 
-A separate clone of candidate commit `8fe749cce6d8a2deff3060d5c15393a9d5c11d94` is running the cold Lean replay.
-The current candidate differs only by the tracked provenance document; after the cold replay
-finishes, the clean clone must advance to `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` and pass an
-exact trace-current aggregate before local `main` may fast-forward.
+A separate clean clone of candidate commit `8fe749cce6d8a2deff3060d5c15393a9d5c11d94`
+passed the serialized build and trace-only aggregate in 52.40 seconds after restoring Mathlib's
+pinned binary cache, with a 3,427,516 kB peak. The current candidate changes only the tracked
+provenance document. The clean clone then advanced to
+`d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed`; Lake reported the target current and replayed the
+exact trace-only aggregate successfully. Local `finitegeom/main` was fast-forwarded to that commit
+and is two commits ahead of `origin/main`. No push was performed.
 
 The paper flake parses and its companion metadata is internally consistent. `flake.lock` cannot be
 generated against the immutable GitHub revision until that `finitegeom` commit is publicly
 reachable. No push is authorized or performed. The paper candidate therefore remains uncommitted
 and its release/clean-room aggregate is intentionally not run with a fabricated local-path lock.
+Generated LaTeX build outputs were removed with the paper's declared `make clean` target.
 
 ## Next
 
-1. finish the clean `finitegeom` replay and exact-current confirmation;
-2. fast-forward local `finitegeom/main` only after that candidate passes;
-3. obtain explicit authority to push the validated `finitegeom` commit;
-4. generate the paper's remote-revision `flake.lock`, refresh its content manifest, run the paper
+1. obtain explicit authority to push the validated `finitegeom` commit;
+2. generate the paper's remote-revision `flake.lock`, refresh its content manifest, run the paper
    and clean-room gates, and construct its fresh final history; and
-5. replace the superseded local paper directory only with explicit history-replacement authority.
+3. replace the superseded local paper directory only with explicit history-replacement authority.
