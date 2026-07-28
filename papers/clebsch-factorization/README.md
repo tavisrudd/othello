@@ -26,7 +26,7 @@ and further `H_3` cubic structure.
 From the repository root, run:
 
 ```text
-python3 papers/clebsch-factorization/verification/verify_release.py
+python3 verification/verify_release.py
 ```
 
 The aggregate checks statement identity, exact trust-ledger coverage,

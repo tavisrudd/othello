@@ -119,7 +119,7 @@
     },
     "matching_module.json": {
       "bytes": 21919,
-      "sha256": "2d3f3a504199ac1da5a500eed6a8c373d5dea36683edda03b5b8430e37942135"
+      "sha256": "c8ff14c1d2e389b5ca3a0407795373a117d16a1cce7d547701b57ac5d884f17b"
     },
     "matching_module.py": {
       "bytes": 48643,
@@ -131,7 +131,7 @@
     },
     "relative_cubic_depth.json": {
       "bytes": 81363,
-      "sha256": "754dc3cbc82b3c63671edc9a120ae760e3efaaf7ed80395ebdf8736f49d131a7"
+      "sha256": "363d0afa39fb789fea9de8361a710980eb48a51851aed49adbc1ef52e1bee30f"
     }
   },
   "schema": "balanced-conceptual-balanced-half-rigidity-v2",

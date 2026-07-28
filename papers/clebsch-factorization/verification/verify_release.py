@@ -17,6 +17,11 @@ EXPECTED_SCHEMA = "clebsch-factorization-trust-manifest-v1"
 EXPECTED_IDENTITY = "verification/statement_identity.json"
 FINGERPRINT = "verification/evidence_fingerprint.json"
 ALLOWED_MODES = {"conceptual", "classical-input", "certificate", "lean"}
+EXTERNAL_FORMAL_EVIDENCE = {
+    "arithmetic-gluing",
+    "hilbert-symmetry",
+    "hyperplane-square",
+}
 LEAN_GATE_COMMANDS = [
     [
         "lean/scripts/guarded-lean",
@@ -35,90 +40,90 @@ LEAN_GATE_TERMINALS = 26
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
-        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+        "checksum_manifest": "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
-            ["python3", "papers/clebsch-factorization/verification/evidence/matching_module.py", "--check"],
-            ["python3", "papers/clebsch-factorization/verification/evidence/matching_module_replay.py"],
+            ["python3", "verification/evidence/matching_module.py", "--check"],
+            ["python3", "verification/evidence/matching_module_replay.py"],
         ],
     },
     "h3-equivariant-rank": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/equivariant_rank.py",
+                "verification/evidence/equivariant_rank.py",
                 "--check",
             ],
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/equivariant_rank_replay.py",
+                "verification/evidence/equivariant_rank_replay.py",
             ],
         ],
     },
     "balanced-sheet": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/balanced_sheets.py",
+                "verification/evidence/balanced_sheets.py",
                 "--check",
             ],
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/balanced_sheets_replay.py",
+                "verification/evidence/balanced_sheets_replay.py",
                 "--check",
             ],
         ],
     },
     "gorenstein-gate": {
-        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+        "checksum_manifest": "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/gorenstein.py",
+                "verification/evidence/gorenstein.py",
                 "--check",
             ],
-            ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"],
+            ["python3", "verification/evidence/gorenstein_replay.py"],
         ],
     },
     "profile-incidence": {
-        "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+        "checksum_manifest": "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
-            ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence.py", "--check"],
-            ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence_replay.py"],
+            ["python3", "verification/evidence/profile_incidence.py", "--check"],
+            ["python3", "verification/evidence/profile_incidence_replay.py"],
         ],
     },
     "decorated-parent": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/decorated_parent.py",
+                "verification/evidence/decorated_parent.py",
                 "--check",
             ],
-            ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent_replay.py"],
+            ["python3", "verification/evidence/decorated_parent_replay.py"],
         ],
     },
     "relative-cubic-depth": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-        "checksum_root": "papers/clebsch-factorization/verification/evidence",
+            "verification/evidence/source_manifest.sha256",
+        "checksum_root": "verification/evidence",
         "commands": [
             [
                 "python3",
-                "papers/clebsch-factorization/verification/evidence/relative_cubic_depth.py",
+                "verification/evidence/relative_cubic_depth.py",
                 "--check",
             ],
-            ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth_replay.py"],
+            ["python3", "verification/evidence/relative_cubic_depth_replay.py"],
         ],
     },
     "arithmetic-gluing": {
@@ -139,12 +144,12 @@ EXPECTED_EVIDENCE = {
     },
     "hilbert-symmetry": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
+            "verification/hilbert_symmetry.sha256",
         "commands": [],
     },
     "hyperplane-square": {
         "checksum_manifest":
-            "papers/clebsch-factorization/verification/hyperplane_square.sha256",
+            "verification/hyperplane_square.sha256",
         "commands": [],
     },
 }
@@ -251,7 +256,11 @@ def sha256(path: Path) -> str:
 
 
 def check_checksum_manifest(
-    repo_root: Path, relative: str, checksum_root: str = "."
+    manifest_root: Path,
+    relative: str,
+    checksum_root: str = ".",
+    *,
+    artifact_base: Path | None = None,
 ) -> None:
     relative_path = PurePosixPath(relative)
     if relative_path.is_absolute() or ".." in relative_path.parts:
@@ -259,8 +268,8 @@ def check_checksum_manifest(
     root_path = PurePosixPath(checksum_root)
     if root_path.is_absolute() or ".." in root_path.parts:
         raise ValueError(f"unsafe checksum root: {checksum_root}")
-    manifest = repo_root / relative
-    artifact_root = repo_root / root_path
+    manifest = manifest_root / relative
+    artifact_root = (artifact_base or manifest_root) / root_path
     seen: set[str] = set()
     for line_number, line in enumerate(
         manifest.read_text(encoding="utf-8").splitlines(), start=1
@@ -401,7 +410,12 @@ def build_fingerprint(
 ) -> dict[str, object]:
     bundle_fingerprints = {}
     for name, item in manifest["evidence"].items():
-        checksum_manifest = repo_root / item["checksum_manifest"]
+        artifact_root = (
+            repo_root
+            if PurePosixPath(item["checksum_manifest"]).parts[0] == "lean"
+            else paper_root
+        )
+        checksum_manifest = artifact_root / item["checksum_manifest"]
         bundle_fingerprints[name] = {
             "checksum_manifest": item["checksum_manifest"],
             "checksum_manifest_sha256": sha256(checksum_manifest),
@@ -444,7 +458,6 @@ def build_fingerprint(
                 paper_root / "verification" / "extract_statement_identity.py"
             ),
             "paper_readme": sha256(paper_root / "README.md"),
-            "paper_makefile": sha256(paper_root.parent / "Makefile"),
             "verification_readme": sha256(
                 paper_root / "verification" / "README.md"
             ),
@@ -487,11 +500,68 @@ def build_fingerprint(
     }
 
 
+def check_standalone_fingerprint(
+    fingerprint: dict[str, object],
+    paper_root: Path,
+    manifest: dict[str, object],
+) -> None:
+    expected_review_sources = {
+        "normalized_manuscript": normalized_manuscript_sha256(
+            paper_root / "clebsch_factorization.tex"
+        ),
+        "normalized_statement_identity": normalized_identity_sha256(
+            paper_root / "verification" / "statement_identity.json"
+        ),
+        "statement_extractor": sha256(
+            paper_root / "verification" / "extract_statement_identity.py"
+        ),
+        "paper_readme": sha256(paper_root / "README.md"),
+        "verification_readme": sha256(paper_root / "verification" / "README.md"),
+        "evidence_manifest_tool": sha256(
+            paper_root / "verification" / "evidence" / "manifest.py"
+        ),
+    }
+    recorded_sources = fingerprint.get("review_sources_sha256", {})
+    for name, expected in expected_review_sources.items():
+        if recorded_sources.get(name) != expected:
+            raise ValueError(f"standalone fingerprint is stale: {name}")
+    if fingerprint.get("trust_manifest_sha256") != sha256(
+        paper_root / "verification" / "trust_manifest.json"
+    ):
+        raise ValueError("standalone fingerprint is stale: trust manifest")
+    if fingerprint.get("runner_sha256") != sha256(Path(__file__).resolve()):
+        raise ValueError("standalone fingerprint is stale: verification runner")
+    recorded_evidence = fingerprint.get("evidence", {})
+    for name, item in manifest["evidence"].items():
+        recorded = recorded_evidence.get(name, {})
+        is_external = PurePosixPath(item["checksum_manifest"]).parts[0] == "lean"
+        checksum_matches = (
+            isinstance(recorded.get("checksum_manifest_sha256"), str)
+            and len(recorded["checksum_manifest_sha256"]) == 64
+            if is_external
+            else recorded.get("checksum_manifest_sha256")
+            == sha256(paper_root / item["checksum_manifest"])
+        )
+        if (
+            recorded.get("checksum_manifest") != item["checksum_manifest"]
+            or recorded.get("checksum_root") != item.get("checksum_root", ".")
+            or recorded.get("commands") != item["commands"]
+            or not checksum_matches
+        ):
+            raise ValueError(f"standalone fingerprint is stale: {name}")
+    print("standalone fingerprint: CHECK OK; external Lean environment is not bundled")
+
+
 def main() -> int:
     if sys.flags.optimize:
         raise RuntimeError("release verification requires Python assertions enabled")
     paper_root = Path(__file__).resolve().parents[1]
-    repo_root = paper_root.parents[1]
+    monorepo_root = paper_root.parents[1]
+    formal_available = (
+        paper_root.parent.name == "papers"
+        and (monorepo_root / "lean" / "lakefile.toml").is_file()
+    )
+    repo_root = monorepo_root if formal_available else paper_root
     parser = argparse.ArgumentParser()
     parser.add_argument("--metadata-only", action="store_true")
     parser.add_argument("--update-fingerprint", action="store_true")
@@ -503,7 +573,7 @@ def main() -> int:
             str(paper_root / "verification" / "extract_statement_identity.py"),
             "--check",
         ],
-        repo_root,
+        paper_root,
     )
     identity = json.loads(
         (paper_root / "verification" / "statement_identity.json").read_text(
@@ -516,16 +586,22 @@ def main() -> int:
         )
     )
     fingerprint_path = paper_root / FINGERPRINT
-    fingerprint = build_fingerprint(repo_root, paper_root, manifest)
-    fingerprint_rendered = json.dumps(fingerprint, indent=2) + "\n"
-    if args.update_fingerprint:
-        fingerprint_path.write_text(fingerprint_rendered, encoding="utf-8")
-        print(f"wrote {fingerprint_path}")
-    elif (
-        not fingerprint_path.exists()
-        or fingerprint_path.read_text(encoding="utf-8") != fingerprint_rendered
-    ):
-        raise ValueError("evidence fingerprint is stale")
+    if formal_available:
+        fingerprint = build_fingerprint(repo_root, paper_root, manifest)
+        fingerprint_rendered = json.dumps(fingerprint, indent=2) + "\n"
+        if args.update_fingerprint:
+            fingerprint_path.write_text(fingerprint_rendered, encoding="utf-8")
+            print(f"wrote {fingerprint_path}")
+        elif (
+            not fingerprint_path.exists()
+            or fingerprint_path.read_text(encoding="utf-8") != fingerprint_rendered
+        ):
+            raise ValueError("evidence fingerprint is stale")
+    else:
+        if args.update_fingerprint:
+            raise ValueError("cannot refresh the formal fingerprint without its Lean companion")
+        fingerprint = json.loads(fingerprint_path.read_text(encoding="utf-8"))
+        check_standalone_fingerprint(fingerprint, paper_root, manifest)
     if manifest.get("schema") != EXPECTED_SCHEMA:
         raise ValueError("unexpected trust-manifest schema")
     if manifest.get("statement_identity") != EXPECTED_IDENTITY:
@@ -569,9 +645,20 @@ def main() -> int:
         expected_modes, expected_bundles = EXPECTED_CLAIMS[claim["label"]]
         if modes != expected_modes or set(claim["evidence"]) != expected_bundles:
             raise ValueError(f"{claim['label']}: proof-mode/evidence coverage changed")
-    for item in evidence.values():
+    for name, item in evidence.items():
+        is_external = name in EXTERNAL_FORMAL_EVIDENCE
+        if is_external and not formal_available:
+            continue
+        manifest_root = (
+            repo_root
+            if PurePosixPath(item["checksum_manifest"]).parts[0] == "lean"
+            else paper_root
+        )
         check_checksum_manifest(
-            repo_root, item["checksum_manifest"], item.get("checksum_root", ".")
+            manifest_root,
+            item["checksum_manifest"],
+            item.get("checksum_root", "."),
+            artifact_base=repo_root if is_external else paper_root,
         )
     print(
         f"metadata: {len(statement_labels)} statements, "
@@ -580,12 +667,33 @@ def main() -> int:
 
     if args.metadata_only:
         return 0
-    for item in evidence.values():
+    for name, item in evidence.items():
+        if name in EXTERNAL_FORMAL_EVIDENCE and not formal_available:
+            continue
         for command in item["commands"]:
-            run(command, repo_root)
-    lean_output = "\n".join(run(command, repo_root) for command in LEAN_GATE_COMMANDS)
-    check_lean_axiom_audit(lean_output)
-    run(["make", "-B", "clebsch-factorization"], repo_root / "papers")
+            run(command, paper_root)
+    if formal_available:
+        lean_output = "\n".join(
+            run(command, repo_root) for command in LEAN_GATE_COMMANDS
+        )
+        check_lean_axiom_audit(lean_output)
+        run(["make", "-B", "clebsch-factorization"], repo_root / "papers")
+    else:
+        run(
+            [
+                "nix",
+                "shell",
+                "nixpkgs#texlive.combined.scheme-full",
+                "-c",
+                "latexmk",
+                "-xelatex",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                "-jobname=clebsch_factorization",
+                "clebsch_factorization.tex",
+            ],
+            paper_root,
+        )
     check_latex_warnings(paper_root / "clebsch_factorization.log")
     print("clebsch factorization release: CHECK OK")
     return 0

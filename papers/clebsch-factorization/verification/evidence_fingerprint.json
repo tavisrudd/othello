@@ -8,15 +8,14 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "b1d47ee9db48c5e82a43bdadba2cf364cdda392a0e188bccc6038da7d2bc8f5c",
-  "runner_sha256": "5d23dd8658b711f43268fd9be247896812a53a0c428afb5ac2035ea2e7e81ec4",
+  "trust_manifest_sha256": "6c99f5c02419d4caf3536b88464327c780d6776f6a32ff398d5a758fb1c6e8b1",
+  "runner_sha256": "98f1ed27a9b53bc02c0cc08a5afb654a1373b14126d7b800bb249a5684a12521",
   "review_sources_sha256": {
-    "normalized_manuscript": "d78a269919f6b3fb36c253bffbc8d9f4e88361a48c140ac6265bbcb358e771d0",
+    "normalized_manuscript": "3a9da9ed68503c1b12e0294224235f2633c7985a2c8e029491723081484ddfc1",
     "normalized_statement_identity": "a6b0f6470d7019b14a6d55bb5091d8ccc04c73086b7bd64be2b7feb1cd947f29",
     "statement_extractor": "98f3a0b7a346160835c9bc500938f08ca52bd1713d57ccf9760aab22f650b8ce",
-    "paper_readme": "25b4dfd4c070627ead9459e63e09c00c59cff5461d947dcf39d59746cbd9ee7c",
-    "paper_makefile": "a60670e531bb21fea4fdc1ebfba5fc1941c8cbfaca3867e310d1df2d1d0d0cb1",
-    "verification_readme": "08815bf250f20d70ae6bcd375ba293768dc46021c4cb815cb89c7316272868f7",
+    "paper_readme": "1db8c865f91731fc7e2ef83a2cd139d2371580aecbc46072951ff7521c87e106",
+    "verification_readme": "5ec85bbb9f6dd0a359a8e5b505144f0c28063db99c6640f187a1290410ea0e01",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
@@ -87,127 +86,127 @@
   ],
   "evidence": {
     "matching-module": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/matching_module.py",
+          "verification/evidence/matching_module.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/matching_module_replay.py"
+          "verification/evidence/matching_module_replay.py"
         ]
       ]
     },
     "h3-equivariant-rank": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/equivariant_rank.py",
+          "verification/evidence/equivariant_rank.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/equivariant_rank_replay.py"
+          "verification/evidence/equivariant_rank_replay.py"
         ]
       ]
     },
     "balanced-sheet": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/balanced_sheets.py",
+          "verification/evidence/balanced_sheets.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/balanced_sheets_replay.py",
+          "verification/evidence/balanced_sheets_replay.py",
           "--check"
         ]
       ]
     },
     "gorenstein-gate": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/gorenstein.py",
+          "verification/evidence/gorenstein.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"
+          "verification/evidence/gorenstein_replay.py"
         ]
       ]
     },
     "hilbert-symmetry": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
+      "checksum_manifest": "verification/hilbert_symmetry.sha256",
       "checksum_manifest_sha256": "9e0eea36098dc7bda5607dd6132474481b8306665b138a8e40ba6799b563c193",
       "checksum_root": ".",
       "commands": []
     },
     "hyperplane-square": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/hyperplane_square.sha256",
+      "checksum_manifest": "verification/hyperplane_square.sha256",
       "checksum_manifest_sha256": "f706caad68f8ad0e83309f07e5ceeb303c3a155a259cf2c0a73f014c32c74adf",
       "checksum_root": ".",
       "commands": []
     },
     "profile-incidence": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/profile_incidence.py",
+          "verification/evidence/profile_incidence.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/profile_incidence_replay.py"
+          "verification/evidence/profile_incidence_replay.py"
         ]
       ]
     },
     "decorated-parent": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/decorated_parent.py",
+          "verification/evidence/decorated_parent.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/decorated_parent_replay.py"
+          "verification/evidence/decorated_parent_replay.py"
         ]
       ]
     },
     "relative-cubic-depth": {
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_manifest_sha256": "edcd9bf9be162e624835ec5c1314d76c90427c303153eb362efb1254afe296f8",
+      "checksum_root": "verification/evidence",
       "commands": [
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/relative_cubic_depth.py",
+          "verification/evidence/relative_cubic_depth.py",
           "--check"
         ],
         [
           "python3",
-          "papers/clebsch-factorization/verification/evidence/relative_cubic_depth_replay.py"
+          "verification/evidence/relative_cubic_depth_replay.py"
         ]
       ]
     },

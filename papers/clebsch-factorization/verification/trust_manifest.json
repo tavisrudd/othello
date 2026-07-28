@@ -4,75 +4,75 @@
   "evidence": {
     "matching-module": {
       "role": "quotient ranks, harmonic/radial images, sheet moments, cubic orientation",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/matching_module.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/matching_module_replay.py"]
+        ["python3", "verification/evidence/matching_module.py", "--check"],
+        ["python3", "verification/evidence/matching_module_replay.py"]
       ]
     },
     "h3-equivariant-rank": {
       "role": "Sylow-normalizer weights, A5 fixed spaces, and minimal top/radial quotient witnesses",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/equivariant_rank.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/equivariant_rank_replay.py"]
+        ["python3", "verification/evidence/equivariant_rank.py", "--check"],
+        ["python3", "verification/evidence/equivariant_rank_replay.py"]
       ]
     },
     "balanced-sheet": {
       "role": "frozen hypotheses for radical--Hadamard recovery",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/balanced_sheets.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/balanced_sheets_replay.py", "--check"]
+        ["python3", "verification/evidence/balanced_sheets.py", "--check"],
+        ["python3", "verification/evidence/balanced_sheets_replay.py", "--check"]
       ]
     },
     "gorenstein-gate": {
       "role": "saturated ideals, Betti tables, deletion ranks, signed Gale duality, socles, and inverse-system cubics",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/gorenstein_replay.py"]
+        ["python3", "verification/evidence/gorenstein.py", "--check"],
+        ["python3", "verification/evidence/gorenstein_replay.py"]
       ]
     },
     "hilbert-symmetry": {
       "role": "kernel-checked arithmetic forcing of socle degree three from Hilbert symmetry",
-      "checksum_manifest": "papers/clebsch-factorization/verification/hilbert_symmetry.sha256",
+      "checksum_manifest": "verification/hilbert_symmetry.sha256",
       "commands": []
     },
     "hyperplane-square": {
       "role": "kernel-checked dual mechanism forcing trivial cubic annihilator from a full-support quadratic relation",
-      "checksum_manifest": "papers/clebsch-factorization/verification/hyperplane_square.sha256",
+      "checksum_manifest": "verification/hyperplane_square.sha256",
       "commands": []
     },
     "profile-incidence": {
       "role": "double cosets, six profiles, profile plane, weights, and cubic witness",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/profile_incidence_replay.py"]
+        ["python3", "verification/evidence/profile_incidence.py", "--check"],
+        ["python3", "verification/evidence/profile_incidence_replay.py"]
       ]
     },
     "decorated-parent": {
       "role": "matching-decorated parent bijection and exact A5 stabilizer",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/decorated_parent_replay.py"]
+        ["python3", "verification/evidence/decorated_parent.py", "--check"],
+        ["python3", "verification/evidence/decorated_parent_replay.py"]
       ]
     },
     "relative-cubic-depth": {
       "role": "modular depth, Tate plane, contraction, obstruction, and cubic flag",
-      "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_root": "papers/clebsch-factorization/verification/evidence",
+      "checksum_manifest": "verification/evidence/source_manifest.sha256",
+      "checksum_root": "verification/evidence",
       "commands": [
-        ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth.py", "--check"],
-        ["python3", "papers/clebsch-factorization/verification/evidence/relative_cubic_depth_replay.py"]
+        ["python3", "verification/evidence/relative_cubic_depth.py", "--check"],
+        ["python3", "verification/evidence/relative_cubic_depth_replay.py"]
       ]
     },
     "arithmetic-gluing": {

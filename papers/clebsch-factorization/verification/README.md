@@ -35,14 +35,14 @@ hash of the entire repository or every transitive dependency. Refresh it only
 after an intentional verification-surface change:
 
 ```text
-python3 papers/clebsch-factorization/verification/verify_release.py \
+python3 verification/verify_release.py \
   --update-fingerprint --metadata-only
 ```
 
 From the repository root, run:
 
 ```text
-python3 papers/clebsch-factorization/verification/verify_release.py
+python3 verification/verify_release.py
 ```
 
 Use `--metadata-only` to check the statement map, trust manifest, and evidence
