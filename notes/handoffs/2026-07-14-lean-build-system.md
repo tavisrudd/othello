@@ -115,6 +115,27 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    content-addressed, one-way split for the remaining declared q11/q13/q25 generated families.
    Contracts: [`../2026-07-28-c685-c687-extraction-corrections.md`](../2026-07-28-c685-c687-extraction-corrections.md).
 
+### C685--C687 operator progression
+
+1. **Run C685 first.** Freeze the two Passages candidate-gate closures, decide the adjacent
+   `Q11BrianchonPetersen` disposition from the statement map, add the reviewed human-scale
+   `finitegeom` state, and update the preserved standalone Passages candidate to pin that exact
+   state. C685 does not wait for a certificate package.
+2. **Run C686 second, after the human Arcs core has an immutable `finitegeom` commit.** Use that
+   commit as the sole upstream library pin; materialize and validate the q16 package and its
+   downstream aggregate; then update the Arcs paper repository to pin both exact commits. Starting
+   the real q16 cold build remains an explicit user gate.
+3. **Run C687 third and reuse C686's validated repository/manifests/gate shape.** The Clebsch
+   Rigidity q11 and ProjectiveCap q11/q13 packages may proceed once their own source/trust inputs
+   are frozen. Only the q25 subpackage waits for C318 and C319; every package waits for its
+   applicable C324 regeneration check. C687 closes only when all adopted field packages have an
+   explicit validated or explicitly deferred disposition.
+
+The handoff from each task is an immutable upstream identity, not copied files: C685 yields the
+Passages `finitegeom` state; C686 yields the reusable certificate-package pattern plus q16 commit;
+C687 applies that pattern to the remaining families. C684 consumes those identities to finalize
+paper-local pins and never becomes an upstream dependency of a Lean repository.
+
 ## Gates and non-goals
 
 - Never start a real build while ownership of the shared tree is uncertain.
@@ -223,6 +244,7 @@ source-closure checks whenever that companion is present.
 Commit-scoped trust, axiom, and clean-replay evidence is never reused by file hash; `main` and each
 tag advance only after that exact candidate passes. A single quiet build-owner window is preferred
 but is no longer an atomicity assumption.
-Do not export certificate payloads before C318/C319/C324 and the recorded Q16/Q11/Q13 trust gates;
-do not elaborate or build until a confirmed quiet build-owner window. The first commits must
-include reviewed source manifests and public rewrites, not scaffold-only history.
+Do not export any certificate payload before its recorded family-specific trust gate and applicable
+C324 regeneration check. Q25 additionally waits for C318 and C319; those two tasks do not block
+q16 or q11/q13. Do not elaborate or build until a confirmed quiet build-owner window. The first
+commits must include reviewed source manifests and public rewrites, not scaffold-only history.

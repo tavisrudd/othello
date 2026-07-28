@@ -13,6 +13,20 @@
 - A paper may publish a formal companion without claiming that the Lean result is a premise of the
   manuscript. That distinction applies to Clebsch Passages.
 
+## Execution progression
+
+1. C685 produces the reviewed Passages `finitegeom` state and paper pin. It is human-scale and has
+   no certificate-package prerequisite.
+2. C686 starts only after the human Arcs core has an immutable `finitegeom` commit. It produces the
+   validated q16 certificate-package pattern, exact q16 commit, and Arcs paper pins. The real q16
+   cold build remains user-gated.
+3. C687 reuses C686's package pattern. Its q11 and q13 work may proceed when their own inputs are
+   frozen; only its q25 part waits for C318/C319. Each family separately waits for the applicable
+   C324 regeneration check.
+
+C684 consumes the released identities from these tasks when finalizing standalone paper
+repositories; it neither supplies Lean source nor sits upstream of them.
+
 ## C685 — Clebsch Passages formal companion
 
 Correct the C287 intake error that inferred “no Lean to export” from the paper manifest's
