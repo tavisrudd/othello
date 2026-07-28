@@ -1,0 +1,1321 @@
+{
+  "action_on_free_generators_for_D": [
+    {
+      "source": [
+        "g2",
+        0,
+        0
+      ],
+      "target_degree": 8,
+      "terms": []
+    },
+    {
+      "source": [
+        "g10",
+        0,
+        0
+      ],
+      "target_degree": 16,
+      "terms": []
+    },
+    {
+      "source": [
+        "g12",
+        0,
+        0
+      ],
+      "target_degree": 18,
+      "terms": [
+        [
+          "g18",
+          0,
+          0,
+          "550"
+        ]
+      ]
+    },
+    {
+      "source": [
+        "g18",
+        0,
+        0
+      ],
+      "target_degree": 24,
+      "terms": [
+        [
+          "g12",
+          1,
+          0,
+          "2160"
+        ]
+      ]
+    },
+    {
+      "source": [
+        "g20",
+        0,
+        0
+      ],
+      "target_degree": 26,
+      "terms": [
+        [
+          "g2",
+          2,
+          0,
+          "17100"
+        ]
+      ]
+    },
+    {
+      "source": [
+        "g28",
+        0,
+        0
+      ],
+      "target_degree": 34,
+      "terms": [
+        [
+          "g2",
+          1,
+          1,
+          "-3960"
+        ],
+        [
+          "g10",
+          2,
+          0,
+          "444600"
+        ]
+      ]
+    }
+  ],
+  "basis_definitions_on_q_equals_X2": {
+    "g10": "F_YY/110",
+    "g12": "(X^2,F)_1/2",
+    "g18": "h_YY/380",
+    "g2": "X^2",
+    "g20": "(X^2,h)_1/40",
+    "g28": "t_YY/870"
+  },
+  "bipartite_structure": {
+    "conclusion": "Delta is an off-diagonal 3-by-3 block Weyl operator.",
+    "left": [
+      "g10",
+      "g18",
+      "g2"
+    ],
+    "nonzero_directed_pairs": [
+      [
+        "g10",
+        "g12"
+      ],
+      [
+        "g10",
+        "g20"
+      ],
+      [
+        "g10",
+        "g28"
+      ],
+      [
+        "g12",
+        "g10"
+      ],
+      [
+        "g12",
+        "g18"
+      ],
+      [
+        "g12",
+        "g2"
+      ],
+      [
+        "g18",
+        "g12"
+      ],
+      [
+        "g18",
+        "g20"
+      ],
+      [
+        "g18",
+        "g28"
+      ],
+      [
+        "g2",
+        "g12"
+      ],
+      [
+        "g2",
+        "g20"
+      ],
+      [
+        "g2",
+        "g28"
+      ],
+      [
+        "g20",
+        "g10"
+      ],
+      [
+        "g20",
+        "g18"
+      ],
+      [
+        "g20",
+        "g2"
+      ],
+      [
+        "g28",
+        "g10"
+      ],
+      [
+        "g28",
+        "g18"
+      ],
+      [
+        "g28",
+        "g2"
+      ]
+    ],
+    "right": [
+      "g12",
+      "g20",
+      "g28"
+    ]
+  },
+  "claim_boundary": [
+    "This is the complete Weyl-operator presentation on the 3-covariant block.",
+    "The other eight binary-icosahedral covariant blocks are not yet presented.",
+    "No later-weight saturation classification is inferred without corner analysis.",
+    "The presentation uses ordinary derivatives in characteristic zero."
+  ],
+  "degree_22_koszul_specialization": {
+    "D(F g10)": "100 g28",
+    "D(bright_line)": "200 g28",
+    "D(h g2)": "-100 g28",
+    "bright_line": "F g10 - h g2",
+    "dark_line": "h g2 + F g10",
+    "first_jet_row_to_g28": "100*(-d_h, d_F)"
+  },
+  "field": "Q",
+  "free_3_covariant_basis": [
+    {
+      "degree": 2,
+      "name": "g2",
+      "primitive_content": 1
+    },
+    {
+      "degree": 10,
+      "name": "g10",
+      "primitive_content": 110
+    },
+    {
+      "degree": 12,
+      "name": "g12",
+      "primitive_content": 2
+    },
+    {
+      "degree": 18,
+      "name": "g18",
+      "primitive_content": 380
+    },
+    {
+      "degree": 20,
+      "name": "g20",
+      "primitive_content": 40
+    },
+    {
+      "degree": 28,
+      "name": "g28",
+      "primitive_content": 870
+    }
+  ],
+  "invariants": {
+    "F": "Phi_12",
+    "coefficient_ring": "Q[F,h]",
+    "h": "(F,F)_2/242",
+    "t": "(F,(F,F)_2)_1/4840"
+  },
+  "operator": {
+    "coefficient_order": 3,
+    "normal_order": "coefficient * F^u h^v dF^r dh^s, with derivatives acting on the coefficient-ring input",
+    "primitive_D": "Delta/132",
+    "primitive_presentation_content": 1,
+    "raw_Delta": "(.,F)_3",
+    "raw_presentation_content": 132
+  },
+  "operator_term_count": 103,
+  "operator_terms": [
+    {
+      "F_multiplier": 0,
+      "coefficient": "-60",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g2",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-50",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g2",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-20",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g2",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "24000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "80000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g2",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "120",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "200",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "780",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "600",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "240",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "-960000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-100",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g2",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "-1800",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "16",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g10",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "10",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g10",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "4",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g10",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-24000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-16000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g10",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "100",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "100",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "126",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "60",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "24",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "-96000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g10",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "85",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "50",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 3,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "20",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-132000",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-144000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-80000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 2,
+      "source": "g12",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-5500",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-5000",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-6600",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-3000",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "-1200",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "1440000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "4800000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "550",
+      "dF_order": 0,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "1100",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "7920",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "7200",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "8280",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "3600",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "1440",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 5,
+      "coefficient": "-5760000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g12",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "2160",
+      "dF_order": 0,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "3600",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "5040",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "3600",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "3480",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "1200",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "480",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 6,
+      "coefficient": "-1920000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g12"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "18000",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g20"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "100",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "50",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g18",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "20",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-216000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g18",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-80000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g18",
+      "target": "g28"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "17100",
+      "dF_order": 0,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "34200",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "36000",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "24000",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "22320",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "7200",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 5,
+      "coefficient": "2880",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 7,
+      "coefficient": "-11520000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-525",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-250",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 3,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-100",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "228000",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "1200000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "400000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 2,
+      "source": "g20",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "150",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "100",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "660",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "300",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "120",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "-1296000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "-480000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g20",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-3960",
+      "dF_order": 0,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-3600",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "-6840",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "-3600",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-4080",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "-1200",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "-480",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 6,
+      "coefficient": "2880000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 6,
+      "coefficient": "1920000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g2"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "444600",
+      "dF_order": 0,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 2,
+      "coefficient": "486000",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "638400",
+      "dF_order": 1,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "336000",
+      "dF_order": 1,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "280800",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 4,
+      "coefficient": "72000",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 5,
+      "coefficient": "28800",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 7,
+      "coefficient": "-115200000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g10"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-125",
+      "dF_order": 2,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 0,
+      "coefficient": "-50",
+      "dF_order": 2,
+      "dh_order": 1,
+      "h_multiplier": 3,
+      "source": "g28",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 1,
+      "coefficient": "-20",
+      "dF_order": 3,
+      "dh_order": 0,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "324000",
+      "dF_order": 0,
+      "dh_order": 1,
+      "h_multiplier": 0,
+      "source": "g28",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "336000",
+      "dF_order": 0,
+      "dh_order": 2,
+      "h_multiplier": 1,
+      "source": "g28",
+      "target": "g18"
+    },
+    {
+      "F_multiplier": 3,
+      "coefficient": "80000",
+      "dF_order": 0,
+      "dh_order": 3,
+      "h_multiplier": 2,
+      "source": "g28",
+      "target": "g18"
+    }
+  ],
+  "principal_symbol": {
+    "characteristic_components": [
+      "p=0",
+      "t=0"
+    ],
+    "full_characteristic_determinant": "1000000*p^6*(h^3-1728 F^5)^3",
+    "intrinsic_characteristic_determinant": "-1000000*p^6*t^6",
+    "left_determinant": "-200*(h^3-1728 F^5)",
+    "multiplier_matrix_left_to_right": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-10",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "120",
+            "h_power": 0
+          }
+        ],
+        []
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "2",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "12",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 3,
+            "coefficient": "240",
+            "h_power": 0
+          }
+        ],
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "10",
+            "h_power": 1
+          }
+        ]
+      ]
+    ],
+    "multiplier_matrix_right_to_left": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "10",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "-600",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 2,
+            "coefficient": "720",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 4,
+            "coefficient": "1440",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-50",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "60",
+            "h_power": 1
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 3,
+            "coefficient": "-240",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 4,
+            "coefficient": "14400",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-10",
+            "h_power": 2
+          }
+        ]
+      ]
+    ],
+    "primitive_Klein_relation": "t^2=1728 F^5-h^3",
+    "right_determinant": "5000*(h^3-1728 F^5)^2",
+    "scalar_cubic": "p=2 F xi^3 + 5 h xi^2 eta - 8000 F^3 eta^3",
+    "third_order_term_count": 45
+  },
+  "proof": {
+    "reason_global": "The third transvectant differentiates the coefficient F^a h^b at most three times. Each fixed degree shift therefore has a polynomial coefficient of total degree at most three in the falling factorials (a)_r(b)_s. The exact grid determines these coefficients and the larger exact grid independently verifies them.",
+    "training_grid": "0<=a,b<=4",
+    "verification_grid": "0<=a,b<=6"
+  },
+  "schema": "c682-klein-e8-free-covariant-v1"
+}

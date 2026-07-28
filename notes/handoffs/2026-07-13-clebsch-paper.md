@@ -723,11 +723,25 @@ that weight \(22\) is the unique all-weight bottleneck of local type
 \(110=2\cdot5\cdot11\); ordinary second polars vanish modulo \(11\) while
 the primitive Hessian survives, isolating a concrete divided-power bridge
 question without yet identifying C651's finite map.  The next \(E_8\)
-frontier is to express \(\Delta\) on the finite
-free covariant generators over
-\(\mathbf Q[\Phi_{12},H_{20}]\), which should classify later failures from
-other multiplicity patterns and supply the standard invariant-Weyl-algebra
-presentation.
+frontier has now closed for the complete \(3\)-covariant block.  Over
+\(\mathbf Q[F,h]\) it is free on degrees \(2,10,12,18,20,28\), and
+\(\mathcal D=(\,\cdot\,,F)_3/132\) is a primitive integral
+\(6\)-by-\(6\), order-three Weyl operator with complete off-diagonal
+\(3+3\) support.  Its degree-\(22\) row is the Koszul map
+\(100(-\partial_h,\partial_F)\), so the dark line is \(hg_2+Fg_{10}\).
+All principal entries share
+\[
+p=2F\xi^3+5h\xi^2\eta-8000F^3\eta^3,
+\qquad
+\det\sigma_3(\mathcal D)=-10^6p^6t^6,
+\]
+where \(t^2=1728F^5-h^3\).  Thus the characteristic locus has exactly the
+cotangent cubic and Klein branch components.  The exact presentation,
+two-prime replay, proof, and mystery ledger are in
+`notes/2026-07-28-c682-klein-e8-free-covariant.md`.  The next \(E_8\)
+frontier is to identify \(p\) intrinsically and test whether the other eight
+McKay blocks share it, then use the finite matrices to classify all later
+corner failures.
 
 C682's remaining Platinum track is:
 
