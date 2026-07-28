@@ -676,6 +676,27 @@ pair of objects.  The remaining categorical gate is a
 base-change-compatible Rees-algebra construction from the two jet quotient
 lines.
 
+C682's Klein \(E_8\) operator-algebra gate is resolved through the first
+non-multiplicity-free McKay weight.  For the normalized third
+transvectant and its positive Fischer adjoint, the first two return words
+saturate the full binary-icosahedral commutants in degrees \(6,12,18\):
+\[
+\mathbf C^2,\qquad \mathbf C^4,\qquad
+\mathbf C^3\oplus M_2(\mathbf C).
+\]
+At degree eighteen their commutator has rank eight on the doubled
+four-vertex; the exact positive spectrum starts with singular value
+\(30\sqrt7/551\).  The separate \(SL_2\)-apolar adjoint refines the
+Mukai--Umemura orbit picture: transvectant rank stays four on all three
+orbits, but the apolar return is a nonzero scaled projector on the open
+orbit and vanishes on both boundary orbits.  Kramer's generalized Casimir
+has rank-eight commutator with the first return at degree eighteen, ruling
+out a polynomial identification.  The exact proof, primary certificate,
+independent replay, source-depth boundary, and mystery ledger are in
+`notes/2026-07-28-c682-klein-e8-operator-algebra.md`.  The next \(E_8\)
+gate is all-weight commutant saturation or its first failure, together with
+a standard invariant-Weyl-algebra presentation.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
