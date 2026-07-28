@@ -22,7 +22,7 @@ CHECKERS = (
     "check_small_q_uniqueness.py",
     "check_q19_nonexample.py",
     "check_small_k_conic_filling.py",
-    "verification/c605_verify.py",
+    "verification/conic_filling_verify.py",
 )
 
 

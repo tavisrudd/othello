@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -13,7 +14,9 @@ from pathlib import Path
 
 PAPER_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PAPER_ROOT.parents[1]
-LEAN_ROOT = REPOSITORY_ROOT / "lean"
+LEAN_ROOT = Path(
+    os.environ.get("CLEBSCH_LEAN_ROOT", REPOSITORY_ROOT / "lean")
+).resolve()
 IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
@@ -181,21 +184,21 @@ def replay(
     }
 
 
-def c605_replay() -> dict[str, object]:
+def conic_filling_replay() -> dict[str, object]:
     supporting_artifacts = [
-        "verification/c605_search.cpp",
-        "verification/c605_replay.py",
-        "verification/c605_q13.json",
-        "verification/c605_q17.json",
-        "verification/c605_q19.json",
-        "verification/c605_independent.json",
+        "verification/conic_filling_search.cpp",
+        "verification/conic_filling_replay.py",
+        "verification/conic_filling_q13.json",
+        "verification/conic_filling_q17.json",
+        "verification/conic_filling_q19.json",
+        "verification/conic_filling_independent.json",
     ]
     return {
         "route": "exact-replay",
         "subclaim": "terminal eight-point exclusions",
         "computation": {
             "checker_commands": [
-                {"argv": ["python3", "verification/c605_verify.py"]}
+                {"argv": ["python3", "verification/conic_filling_verify.py"]}
             ],
             "coverage": (
                 "For q=13,17,19 the primary search fixes XZ=Y^2, partitions "
@@ -221,7 +224,7 @@ def c605_replay() -> dict[str, object]:
                 "No Lean theorem covers this terminal finite exclusion."
             ),
             "artifacts": [
-                file_evidence("paper", "verification/c605_verify.py")
+                file_evidence("paper", "verification/conic_filling_verify.py")
             ],
             "supporting_artifacts": [
                 file_evidence("paper", path) for path in supporting_artifacts
@@ -462,7 +465,7 @@ def components_by_row(
                 conceptual("projective MDS translation", CLASSICAL_CODE, "The length-at-most-eight code classification is the preceding arc classification transported through the standard projective parity-check-column and distance-three syndrome dictionary."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
                 replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
-                c605_replay(),
+                conic_filling_replay(),
             ],
         ),
         58: (
@@ -544,21 +547,21 @@ def checks() -> list[dict[str, object]]:
                 "stdout_sha256": output["sha256"],
             }
         )
-    c605_output = output_checks.get("verification/c605_verify.py")
-    if not isinstance(c605_output, dict):
+    conic_filling_output = output_checks.get("verification/conic_filling_verify.py")
+    if not isinstance(conic_filling_output, dict):
         raise ValueError(
-            "checker-output certificate omits verification/c605_verify.py"
+            "checker-output certificate omits verification/conic_filling_verify.py"
         )
     result.append(
         {
-            "id": "check-c605-eight-point-exclusion",
+            "id": "check-conic_filling-eight-point-exclusion",
             "repository": "paper",
             "cwd": ".",
-            "argv": ["python3", "verification/c605_verify.py"],
+            "argv": ["python3", "verification/conic_filling_verify.py"],
             "timeout_seconds": 120,
-            "stdout_bytes": c605_output["bytes"],
-            "stdout_lines": c605_output["lines"],
-            "stdout_sha256": c605_output["sha256"],
+            "stdout_bytes": conic_filling_output["bytes"],
+            "stdout_lines": conic_filling_output["lines"],
+            "stdout_sha256": conic_filling_output["sha256"],
         }
     )
     result.append(

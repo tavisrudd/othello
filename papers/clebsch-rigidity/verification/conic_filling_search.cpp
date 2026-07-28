@@ -58,7 +58,7 @@ class Search {
 
   void run() {
     std::cout << "{\n";
-    std::cout << "  \"schema\": \"c605-eight-point-conic-filling-v1\",\n";
+    std::cout << "  \"schema\": \"conic_filling-eight-point-conic-filling-v1\",\n";
     std::cout << "  \"q\": " << q_ << ",\n";
     std::cout << "  \"pg2_points\": " << points_.size() << ",\n";
     std::cout << "  \"conic_points\": " << conic_.size() << ",\n";
@@ -493,7 +493,7 @@ class Search {
 
 int main(int argc, char **argv) {
   if (argc != 2) {
-    std::cerr << "usage: c605-search Q\n";
+    std::cerr << "usage: conic_filling-search Q\n";
     return 2;
   }
   try {

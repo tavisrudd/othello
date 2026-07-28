@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -140,6 +141,7 @@ def main() -> int:
         "paper": paper_root.resolve(),
         "lean": args.lean_root.resolve(),
     }
+    os.environ["CLEBSCH_LEAN_ROOT"] = str(repositories["lean"])
     manifest_path = args.manifest.resolve()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):
@@ -155,13 +157,11 @@ def main() -> int:
     }
     clean_initial = dict(initial)
     if args.update_output:
-        release_output_path = (
-            "papers/clebsch-rigidity/verification/verify-release-output.json"
-        )
+        release_output_path = "verification/verify-release-output.json"
         clean_initial["paper"] = "\n".join(
             line
             for line in initial["paper"].splitlines()
-            if line[3:] != release_output_path
+            if not line[3:].endswith(release_output_path)
         )
     require_clean(clean_initial)
 

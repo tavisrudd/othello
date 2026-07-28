@@ -430,6 +430,9 @@ def main() -> int:
     identity_payload = json.loads(identity_path.read_text(encoding="utf-8"))
     if identity_payload.get("source_sha256") != digest(manuscript):
         fail("statement identity source hash mismatch")
+    companion = paper_root / "clebsch_rigidity_computational_companion.tex"
+    if identity_payload.get("companion_source_sha256") != digest(companion):
+        fail("statement identity companion source hash mismatch")
     identity_claims = identity_payload.get("claims")
     if not isinstance(identity_claims, list):
         fail("statement identity claims must be an array")

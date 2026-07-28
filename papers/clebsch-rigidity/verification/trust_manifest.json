@@ -93,7 +93,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 77",
+      "paper_location": "source line 74",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -166,7 +166,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 364",
+      "paper_location": "source line 385",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -260,7 +260,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 431",
+      "paper_location": "source line 452",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -276,7 +276,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 448",
+      "paper_location": "source line 469",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -324,7 +324,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 487",
+      "paper_location": "source line 508",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -451,7 +451,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 538",
+      "paper_location": "source line 560",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -498,7 +498,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 616",
+      "paper_location": "source line 636",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -575,7 +575,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 120",
+      "paper_location": "source line 121",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -619,7 +619,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 758",
+      "paper_location": "source line 196",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -635,13 +635,13 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 783",
+      "paper_location": "source line 221",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
         "id": "cor:monomial-characterization",
         "kind": "theorem-environment",
-        "sha256": "0e372d3c2be48fc0f15e7e0eaa9a1c95f467f972daab8ebdcab7afe6da92730d"
+        "sha256": "fcb21f7559ca31605008b8b55ae418ff5b0e5d29fe92646e9ebe7947c3ccb6fb"
       },
       "trust_boundary": "This is a conceptual corollary of the code--arc dictionary and the preceding replay-backed proposition.",
       "unconditional_remainder": "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18."
@@ -669,13 +669,13 @@
         "soundness_bridge": "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values."
       },
       "id": "thm-gap",
-      "paper_location": "source line 815",
+      "paper_location": "source line 253",
       "route": "exact-replay",
       "row": 20,
       "source": {
         "id": "thm:gap",
         "kind": "theorem-environment",
-        "sha256": "fd158144259b06190d7b78de55ca0a4e3db06ede5b9eb82389db3b77cab9773d"
+        "sha256": "c11a7fa262929336dc9123b35a669cae91360dd3baa3b0a8cd8e72b1623962d5"
       },
       "trust_boundary": "The numerical gap is exact-replay-backed; the qualitative rigidity implication remains separately routed in row 17."
     },
@@ -685,7 +685,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 928",
+      "paper_location": "source line 795",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -766,7 +766,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 978",
+      "paper_location": "source line 845",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -825,13 +825,13 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 994",
+      "paper_location": "source line 861",
       "route": "mixed",
       "row": 23,
       "source": {
         "id": "prop:invariant-support-bipartition",
         "kind": "theorem-environment",
-        "sha256": "2feccb98e5bab7f5f1cd66f1aeb143ae13e09ba044f37229e930938aebfb4d77"
+        "sha256": "f534538de1f14366d6b1e78599ee85520590e9c17123f46e3dec2182e550a3c6"
       },
       "trust_boundary": "The unordered support bipartition is proved by incidence and independently replayed; no orientation or sign is claimed."
     },
@@ -943,13 +943,13 @@
         }
       ],
       "id": "lem-chord-defect+cor-conic-filling-window+lem-q9-polarity",
-      "paper_location": "source line 228",
+      "paper_location": "source line 78",
       "route": "mixed",
       "row": 24,
       "source": {
         "id": "lem:chord-defect+cor:conic-filling-window+lem:q9-polarity",
         "kind": "theorem-environment",
-        "sha256": "7f5949432da52fabf696eda177c46f459c1d6f265589706c7b2f6fec1f067717"
+        "sha256": "6eea9df631a67dd530f5965d9cbc2724d04cf7aae7144b54787c07f0da45bbdf"
       },
       "trust_boundary": "The manuscript proves the universal chord-defect identity, quadratic barrier, even-order oval obstruction, and passant window and applies the cited partial-cover theorem; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate."
     },
@@ -1031,7 +1031,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1084",
+      "paper_location": "source line 325",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1109,7 +1109,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1111",
+      "paper_location": "source line 911",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1221,16 +1221,16 @@
           "computation": {
             "artifacts": [
               {
-                "path": "verification/c605_verify.py",
+                "path": "verification/conic_filling_verify.py",
                 "repository": "paper",
-                "sha256": "42649017b9607ad8f8a07f1647817a2e3d929277013790cbc6c4e357d70f3ae4"
+                "sha256": "dd0f100223e7acea076a5a823ca57c0635f14ba400308a6c2f84f44df910d529"
               }
             ],
             "checker_commands": [
               {
                 "argv": [
                   "python3",
-                  "verification/c605_verify.py"
+                  "verification/conic_filling_verify.py"
                 ]
               }
             ],
@@ -1240,34 +1240,34 @@
             "soundness_bridge": "Every conic-filling arc is off the fixed conic and every one of its chords is passant. Every nontrivial candidate therefore contains an edge carried to a listed root.",
             "supporting_artifacts": [
               {
-                "path": "verification/c605_search.cpp",
+                "path": "verification/conic_filling_search.cpp",
                 "repository": "paper",
-                "sha256": "1981788662daf5317e219049b2f634cd75ef9c72099d13e0a8391f607006436d"
+                "sha256": "7f55e0dd57f6f0a2abd44154081190e2f210daf304c0f5ffde28d97033024961"
               },
               {
-                "path": "verification/c605_replay.py",
+                "path": "verification/conic_filling_replay.py",
                 "repository": "paper",
-                "sha256": "a589c89a3dd81e5ca1e7661fb85a6f6e18cf21da5d38eedc16260a4cea676a9a"
+                "sha256": "47376be420560b5fb70f3f90101296faf6766fb1a25dde2e3f1ca85efd3cebe2"
               },
               {
-                "path": "verification/c605_q13.json",
+                "path": "verification/conic_filling_q13.json",
                 "repository": "paper",
-                "sha256": "da42b60be2d6c47018c8d5975409eade9c4cea9f2084f2dd5b7e276fd09daf8c"
+                "sha256": "2758cb70b678cb9ac26cf9709c52b82ae1e2a35ed069da18e274e78980f00555"
               },
               {
-                "path": "verification/c605_q17.json",
+                "path": "verification/conic_filling_q17.json",
                 "repository": "paper",
-                "sha256": "378dbbfe987a66cb771607468f2d1e923f13c52a6426d201dad9ee1beeefae75"
+                "sha256": "8cabfef0bc2e33b221cb2ec5909993cc52398185277863c0f6be1c133cae077a"
               },
               {
-                "path": "verification/c605_q19.json",
+                "path": "verification/conic_filling_q19.json",
                 "repository": "paper",
-                "sha256": "739390f2e9e4c62155582ec0dee0c65bd5295a80ec380ba86f173eda492fa814"
+                "sha256": "f659ad5025816cb3a1b4886b21666d7b41e8fd9f3e6dc57a520ae101ab29ece2"
               },
               {
-                "path": "verification/c605_independent.json",
+                "path": "verification/conic_filling_independent.json",
                 "repository": "paper",
-                "sha256": "d725286565da0283c64a5eab064bb736fb143c9b662ebf2973c3b4f09d15a870"
+                "sha256": "9357543c9383f918f413099de835743d75577ff37e566733e66438d22e527e5c"
               }
             ]
           },
@@ -1276,7 +1276,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1183",
+      "paper_location": "source line 358",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1320,13 +1320,13 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 698",
+      "paper_location": "source line 136",
       "route": "exact-replay",
       "row": 58,
       "source": {
         "id": "fifteen-class-census-table",
         "kind": "verbatim",
-        "sha256": "eda701f0aa7e105263c2b892beee8cdafc49bf5ffb37d6a1539d08a2e05939ca"
+        "sha256": "4ba850c133bdb3d4cc052f32c8a4c56c020345b1d0ce66383a0e46eef2e6c7e6"
       },
       "trust_boundary": "Two exact replays share canonical class keys and regenerate every printed census field used by the proofs."
     }
@@ -1340,19 +1340,19 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "714faff417b49808d5fccfa8f358d0e4887f227723e9547b14976d9d9084e665"
+    "sha256": "e3a358e662d0fb82be888d7d9b199d967eb6b2171330c6bef321961f35015d12"
   },
-  "manuscript_sha256": "b99cc0ad0df90d30a2c04ff92df3643d6cd3ff1204c47c9e02d8e1d0246845f7",
+  "manuscript_sha256": "cdacc2ca215ddb13483c633636ce6d3cd1fc919e9a16fa380d91e8a40cb2ec5d",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "7462b7962b2f19abbc1c712b65caf790893b4ba09a2cd33f313d33dc1ebf3c81"
+      "sha256": "e2df7a3dba88e7199280ed3277f0cfe4066f92505f86692f357976f8bbdfa343"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "48dd86de0862c12bea1f8fdc16ed5cf25752b09adf9f468c224ca30afbb9425e"
+      "sha256": "ed4dd64862e7c8decc33276ae0c16345679a1c201c830dae90b98568d4d4de3d"
     }
   ],
   "reproducibility_environment": {
@@ -1382,19 +1382,19 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "ca1c6c2ae841f45fde46967d9046cd58df8d38183401e88574e42f126e722756"
+    "sha256": "8f975069fcadb0198f2dc0d87da928e4829d539560cfa08a69967585e028ac3a"
   },
   "verify_all": {
     "checker_output_certificate": {
       "generator": {
         "path": "verification/capture_checker_outputs.py",
         "repository": "paper",
-        "sha256": "6edbcb4794152304a7acd6206415ab2d91d065c27af052b3ec63c9591cdcf704"
+        "sha256": "bc9fa7f25d4dc9619a6a4caad284a2917e52d56e5644967ca0ef77b5e58b13cb"
       },
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "b5577fa19c35992950faf486cac33df5de523ff05162e6fa42ecd886302fdcbc"
+        "sha256": "1de288625f72f7cb6b32ecd6d60bf37e4a40d43c797157926dc75a5877eaca15"
       }
     },
     "checks": [
@@ -1575,10 +1575,10 @@
       {
         "argv": [
           "python3",
-          "verification/c605_verify.py"
+          "verification/conic_filling_verify.py"
         ],
         "cwd": ".",
-        "id": "check-c605-eight-point-exclusion",
+        "id": "check-conic_filling-eight-point-exclusion",
         "repository": "paper",
         "stdout_bytes": 228,
         "stdout_lines": 1,
@@ -1600,38 +1600,38 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "c212ef2c745f32d7ce1f621120077e40d16881284bf6f7615f02293ff3a27f7b"
+      "sha256": "bf1404444093433de6133c2d70fbacf3268385a482e828d449aac784718594b0"
     },
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "9e30010d4ad6c359bd12358345e2fa4c6b690aa7e60b2791d855860068600820"
+      "sha256": "a74b4f62f2afc0aedb715668f186b13b71be216a499d42f5caac3bb9606b1c26"
     },
     "verification_tools": [
       {
         "path": "verification/extract_statement_identity.py",
         "repository": "paper",
-        "sha256": "289f4bbca69451a745b6a487130a5b8d0de03eb1d88dc779e1811b1b48e42c5f"
+        "sha256": "7e0fff5c1c72f56ec0fac62c637f232d61cef1f4ad9ab19684aea452071a812f"
       },
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "1955533977892b78c71a658491efc739a5140a8c13e323ed73aea670b42ed909"
+        "sha256": "fc40be06b7b86ce278f6a6a30813c6882b1151385382d664ff2426fc865b34bc"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "445e06ad0818f18962dd72134d11d5a81c48c33c6b54000bbbe13d921e5aa1c8"
+        "sha256": "af9f4c9aed9879ab818bccb5d9241e9734c56372245f5863909109ca8b143d53"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "fe073a6d8f490869f63e2302ffc0ebb0157b0ec5a954a932dbc299daa93c2ff6"
+        "sha256": "fb6f638f1e7df13c695f1c6693a69e5540e76c82771dcbb8cf16fe8d83086d93"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "e91236cd2a1942393a9f460bfef4ba2431cf70f148c2db48052b8cd753e1d3c0"
+        "sha256": "bddce493896dac2c2c703e45071336b03ff36ec6f91d8cf57f4e77c1c1a99f26"
       }
     ]
   }

@@ -55,13 +55,13 @@ HEADLINE = (
     "action, or classical hexagon structure is assumed."
 )
 CENSUS = (
-    "Table~\\ref{tab:fifteen-classes} prints the complete census at the level\n"
-    "used by the rigidity and low-degree arguments."
+    "Table~\\ref{tab:fifteen-classes} records the complete census needed below."
 )
 
 
 @dataclass(frozen=True)
 class Statement:
+    source: Path
     environment: str
     title: str | None
     label: str
@@ -106,6 +106,7 @@ def extract_environments(source: Path) -> list[Statement]:
             )
         statements.append(
             Statement(
+                source=source,
                 environment=active_environment,
                 title=active_title,
                 label=labels[0],
@@ -133,7 +134,10 @@ def unique_snippet(text: str, snippet: str, name: str) -> int:
 
 def build_payload(source: Path) -> dict[str, object]:
     text = source.read_text(encoding="utf-8")
-    by_label = {statement.label: statement for statement in extract_environments(source)}
+    companion = source.with_name("clebsch_rigidity_computational_companion.tex")
+    companion_text = companion.read_text(encoding="utf-8")
+    statements = extract_environments(source) + extract_environments(companion)
+    by_label = {statement.label: statement for statement in statements}
     expected_labels = [
         label
         for labels in ROW_LABELS.values()
@@ -173,6 +177,7 @@ def build_payload(source: Path) -> dict[str, object]:
                     else "; ".join(item.title or item.label for item in statements)
                 ),
                 "source_line": statement.source_line,
+                "source": statement.source.name,
                 "sha256": digest(statement_tex),
                 "tex": statement_tex,
             }
@@ -182,7 +187,8 @@ def build_payload(source: Path) -> dict[str, object]:
             "row": 58,
             "id": "fifteen-class-census-table",
             "kind": "verbatim",
-            "source_line": unique_snippet(text, CENSUS, "census"),
+            "source_line": unique_snippet(companion_text, CENSUS, "census"),
+            "source": companion.name,
             "sha256": digest(CENSUS),
             "tex": CENSUS,
         }
@@ -191,6 +197,8 @@ def build_payload(source: Path) -> dict[str, object]:
         "schema": "clebsch-rigidity-statement-identity-v1",
         "source": source.name,
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "companion_source": companion.name,
+        "companion_source_sha256": hashlib.sha256(companion.read_bytes()).hexdigest(),
         "claim_count": len(claims),
         "claims": claims,
     }

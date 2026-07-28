@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate and independently replay the C605 exclusion certificates."""
+"""Regenerate and independently replay the terminal conic-filling exclusion certificates."""
 
 from __future__ import annotations
 
@@ -13,8 +13,8 @@ from pathlib import Path
 
 PAPER_ROOT = Path(__file__).resolve().parents[1]
 VERIFICATION_ROOT = PAPER_ROOT / "verification"
-SOURCE = VERIFICATION_ROOT / "c605_search.cpp"
-REPLAY = VERIFICATION_ROOT / "c605_replay.py"
+SOURCE = VERIFICATION_ROOT / "conic_filling_search.cpp"
+REPLAY = VERIFICATION_ROOT / "conic_filling_replay.py"
 FIELDS = (13, 17, 19)
 
 
@@ -42,9 +42,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.parse_args()
 
-    with tempfile.TemporaryDirectory(prefix="c605-") as directory:
+    with tempfile.TemporaryDirectory(prefix="conic_filling-") as directory:
         temporary = Path(directory)
-        executable = temporary / "c605-search"
+        executable = temporary / "conic_filling-search"
         run(
             [
                 "g++",
@@ -60,14 +60,14 @@ def main() -> None:
         )
         generated: list[Path] = []
         for q in FIELDS:
-            output = temporary / f"c605_q{q}.json"
+            output = temporary / f"conic_filling_q{q}.json"
             run([str(executable), str(q)], stdout=output)
             tracked = VERIFICATION_ROOT / output.name
             if output.read_bytes() != tracked.read_bytes():
                 raise SystemExit(f"certificate drift: {tracked}")
             generated.append(output)
 
-        independent = temporary / "c605_independent.json"
+        independent = temporary / "conic_filling_independent.json"
         run([sys.executable, str(REPLAY), *map(str, generated)], stdout=independent)
         tracked_independent = VERIFICATION_ROOT / independent.name
         if independent.read_bytes() != tracked_independent.read_bytes():

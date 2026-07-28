@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent replay for the C605 conic-filling exclusion certificates.
+"""Independent replay for the terminal conic-filling conic-filling exclusion certificates.
 
 The primary C++ search tests passancy by incidence with every conic point,
 forms edge orbits with a disjoint-set structure, and deduplicates partial arcs
@@ -9,10 +9,10 @@ and uses an ordered bitset backtracking search with no stabilizer quotient.
 
 Run from the repository root:
 
-    python3 verification/c605_replay.py \
-      verification/c605_q13.json \
-      verification/c605_q17.json \
-      verification/c605_q19.json
+    python3 verification/conic_filling_replay.py \
+      verification/conic_filling_q13.json \
+      verification/conic_filling_q17.json \
+      verification/conic_filling_q19.json
 """
 
 from __future__ import annotations
@@ -142,7 +142,7 @@ def independent_maximum(
 
 def replay(path: Path) -> dict[str, object]:
     certificate = json.loads(path.read_text())
-    if certificate["schema"] != "c605-eight-point-conic-filling-v1":
+    if certificate["schema"] != "conic_filling-eight-point-conic-filling-v1":
         raise ValueError(f"{path}: unexpected schema")
     q = certificate["q"]
     if q not in (13, 17, 19):
@@ -254,7 +254,7 @@ def main() -> None:
     parser.add_argument("certificates", nargs="+", type=Path)
     args = parser.parse_args()
     result = {
-        "schema": "c605-independent-replay-v1",
+        "schema": "conic_filling-independent-replay-v1",
         "fields": [replay(path) for path in args.certificates],
     }
     print(json.dumps(result, sort_keys=True, separators=(",", ":")))

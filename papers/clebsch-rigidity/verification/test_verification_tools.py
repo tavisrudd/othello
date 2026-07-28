@@ -50,6 +50,8 @@ class StatementIdentityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "duplicate.tex"
             path.write_text(source + "\n" + extractor.HEADLINE + "\n", encoding="utf-8")
+            companion = PAPER_ROOT / "clebsch_rigidity_computational_companion.tex"
+            path.with_name(companion.name).write_bytes(companion.read_bytes())
             with self.assertRaisesRegex(ValueError, "headline snippet"):
                 extractor.build_payload(path)
 
@@ -79,10 +81,10 @@ class ReleaseRunnerTests(unittest.TestCase):
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
         self.assertIsNotNone(manuscript.WARNING_RE.search("LaTeX Warning"))
         match = manuscript.PAGES_RE.search(
-            "Output written on clebsch_rigidity.xdv (19 pages, 1 byte)."
+            "Output written on clebsch_rigidity.xdv (15 pages, 1 byte)."
         )
         self.assertIsNotNone(match)
-        self.assertEqual(match.group(1), "19")
+        self.assertEqual(match.group(1), "15")
 
 
 class ManifestSemanticTests(unittest.TestCase):

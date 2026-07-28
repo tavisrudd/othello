@@ -44,13 +44,13 @@
       "id": "passant-arc-bound-q13-q17-q19",
       "mode": "exhaustive-orbit-search-with-independent-certificate-check",
       "checks": [
-        "verification/c605_verify.py"
+        "verification/conic_filling_verify.py"
       ],
       "certificates": [
-        "verification/c605_q13.json",
-        "verification/c605_q17.json",
-        "verification/c605_q19.json",
-        "verification/c605_independent.json"
+        "verification/conic_filling_q13.json",
+        "verification/conic_filling_q17.json",
+        "verification/conic_filling_q19.json",
+        "verification/conic_filling_independent.json"
       ]
     }
   ]
