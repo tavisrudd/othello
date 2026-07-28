@@ -251,7 +251,325 @@
       "two_return_dimension": 8
     }
   ],
-  "schema": "c682-klein-e8-first-failure-v1",
+  "schema": "c682-klein-e8-first-failure-v2",
+  "standard_covariant_identification": {
+    "H_20": "(Phi_12,Phi_12)_2",
+    "Molien_series_for_3_covariants": "(t^2+t^10+t^12+t^18+t^20+t^28)/((1-t^12)(1-t^20))",
+    "Pol_2_basis": [
+      "dX^2 Phi_12",
+      "dX dY Phi_12",
+      "dY^2 Phi_12"
+    ],
+    "all_weight_bottleneck_classification": {
+      "Molien_numerators_over_Q_Phi12_H20": {
+        "1": [
+          [
+            0,
+            1
+          ],
+          [
+            30,
+            1
+          ]
+        ],
+        "2": [
+          [
+            1,
+            1
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            29,
+            1
+          ]
+        ],
+        "2p": [
+          [
+            7,
+            1
+          ],
+          [
+            13,
+            1
+          ],
+          [
+            17,
+            1
+          ],
+          [
+            23,
+            1
+          ]
+        ],
+        "3": [
+          [
+            2,
+            1
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            18,
+            1
+          ],
+          [
+            20,
+            1
+          ],
+          [
+            28,
+            1
+          ]
+        ],
+        "3p": [
+          [
+            6,
+            1
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            20,
+            1
+          ],
+          [
+            24,
+            1
+          ]
+        ],
+        "4": [
+          [
+            6,
+            1
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            18,
+            1
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            24,
+            1
+          ]
+        ],
+        "4s": [
+          [
+            3,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            13,
+            1
+          ],
+          [
+            17,
+            1
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            21,
+            1
+          ],
+          [
+            27,
+            1
+          ]
+        ],
+        "5": [
+          [
+            4,
+            1
+          ],
+          [
+            8,
+            1
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            12,
+            1
+          ],
+          [
+            14,
+            1
+          ],
+          [
+            16,
+            1
+          ],
+          [
+            18,
+            1
+          ],
+          [
+            20,
+            1
+          ],
+          [
+            22,
+            1
+          ],
+          [
+            26,
+            1
+          ]
+        ],
+        "6": [
+          [
+            5,
+            1
+          ],
+          [
+            7,
+            1
+          ],
+          [
+            9,
+            1
+          ],
+          [
+            11,
+            1
+          ],
+          [
+            13,
+            1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            17,
+            1
+          ],
+          [
+            19,
+            1
+          ],
+          [
+            21,
+            1
+          ],
+          [
+            23,
+            1
+          ],
+          [
+            25,
+            1
+          ]
+        ]
+      },
+      "finite_scan": "0..67",
+      "forced_bottlenecks": [
+        [
+          22,
+          "3",
+          2
+        ]
+      ],
+      "lower_neighbor_positive_from_degree": 68,
+      "semigroup_fact": "every multiple of 4 at least 32 lies in <12,20>"
+    },
+    "bright_line": "Delta^dagger Pol_2(T_30)",
+    "dark_line": "ker Delta is spanned by Phi Phi_XX+(5/11)H Y^2, Phi Phi_XY-(5/11)H XY, Phi Phi_YY+(5/11)H X^2",
+    "degree_22_generators": [
+      "H_20 Sym^2",
+      "Phi_12 Pol_2(Phi_12)"
+    ],
+    "degree_28_target": "Pol_2(T_30), where T_30=(Phi_12,H_20)_1",
+    "integral_normalization": {
+      "H_20_content": 242,
+      "T_30_content": 4840,
+      "boundary": "This diagnoses the need for divided powers; it does not identify the earlier primitive mod-11 return map.",
+      "coupling_factor": "110=2*5*11",
+      "mod_11": "Pol_2(Phi_12) vanishes for ordinary derivatives, while primitive h_20 survives",
+      "primitive_dark_line": "Phi Phi_XX+110 h Y^2, Phi Phi_XY-110 h XY, Phi Phi_YY+110 h X^2, where H=242 h"
+    },
+    "kernel_basis_in_order_HX2_HXY_HY2_FFXX_FFXY_FFYY": [
+      [
+        "0",
+        "0",
+        "5/11",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-5/11",
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "5/11",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    ]
+  },
   "structural_obstruction": {
     "adjacent_affine_E8_decompositions": {
       "16": {

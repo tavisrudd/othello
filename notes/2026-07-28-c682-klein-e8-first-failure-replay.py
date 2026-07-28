@@ -4,7 +4,8 @@
 from __future__ import annotations
 
 import json
-from math import comb, factorial
+from functools import reduce
+from math import comb, factorial, gcd
 from pathlib import Path
 
 
@@ -12,6 +13,44 @@ HERE = Path(__file__).resolve().parent
 CERTIFICATE = HERE / "2026-07-28-c682-klein-e8-first-failure.json"
 PRIMES = (1_000_000_007, 1_000_000_009)
 KLEIN = {(11, 1): 1, (6, 6): 11, (1, 11): -1}
+
+
+def derivative_z(polynomial, dx, dy):
+    out = {}
+    for (x_degree, y_degree), coefficient in polynomial.items():
+        if x_degree < dx or y_degree < dy:
+            continue
+        multiplier = 1
+        for offset in range(dx):
+            multiplier *= x_degree - offset
+        for offset in range(dy):
+            multiplier *= y_degree - offset
+        out[(x_degree - dx, y_degree - dy)] = coefficient * multiplier
+    return out
+
+
+def multiply_z(left, right):
+    out = {}
+    for (lx, ly), left_coefficient in left.items():
+        for (rx, ry), right_coefficient in right.items():
+            monomial = (lx + rx, ly + ry)
+            out[monomial] = (
+                out.get(monomial, 0) + left_coefficient * right_coefficient
+            )
+    return {monomial: coefficient for monomial, coefficient in out.items() if coefficient}
+
+
+def transvectant_z(left, right, order):
+    out = {}
+    for index in range(order + 1):
+        term = multiply_z(
+            derivative_z(left, order - index, index),
+            derivative_z(right, index, order - index),
+        )
+        scale = (-1 if index % 2 else 1) * comb(order, index)
+        for monomial, coefficient in term.items():
+            out[monomial] = out.get(monomial, 0) + scale * coefficient
+    return {monomial: coefficient for monomial, coefficient in out.items() if coefficient}
 
 
 def derivative(polynomial, dx, dy, prime):
@@ -69,6 +108,13 @@ def delta_matrix(source_degree, prime):
             for column in columns
         ]
         for row in range(source_degree + 7)
+    ]
+
+
+def coefficient_vector(polynomial, degree):
+    return [
+        polynomial.get((degree - index, index), 0)
+        for index in range(degree + 1)
     ]
 
 
@@ -270,6 +316,115 @@ def replay(prime):
     return dimensions, commutator_rank
 
 
+def covariant_replay(prime):
+    hessian_z = transvectant_z(KLEIN, KLEIN, 2)
+    jacobian_z = transvectant_z(KLEIN, hessian_z, 1)
+    contents = (
+        reduce(gcd, (abs(value) for value in hessian_z.values())),
+        reduce(gcd, (abs(value) for value in jacobian_z.values())),
+    )
+    primitive_hessian_z = {
+        monomial: coefficient // contents[0]
+        for monomial, coefficient in hessian_z.items()
+    }
+    ordinary_polars_z = [
+        derivative_z(KLEIN, 2, 0),
+        derivative_z(KLEIN, 1, 1),
+        derivative_z(KLEIN, 0, 2),
+    ]
+    if (
+        contents != (242, 4840)
+        or any(
+            coefficient % 11
+            for polar in ordinary_polars_z
+            for coefficient in polar.values()
+        )
+        or not any(coefficient % 11 for coefficient in primitive_hessian_z.values())
+    ):
+        raise SystemExit("integral normalization replay failed")
+    hessian = transvectant(KLEIN, KLEIN, 2, prime)
+    jacobian = transvectant(KLEIN, hessian, 1, prime)
+    quadratics = [
+        {(2, 0): 1},
+        {(1, 1): 1},
+        {(0, 2): 1},
+    ]
+    polars = [
+        derivative(KLEIN, 2, 0, prime),
+        derivative(KLEIN, 1, 1, prime),
+        derivative(KLEIN, 0, 2, prime),
+    ]
+    domain = [
+        multiply(hessian, quadratic, prime)
+        for quadratic in quadratics
+    ] + [
+        multiply(KLEIN, polar, prime)
+        for polar in polars
+    ]
+    image_vectors = [
+        coefficient_vector(transvectant(polynomial, KLEIN, 3, prime), 28)
+        for polynomial in domain
+    ]
+    target_vectors = [
+        coefficient_vector(derivative(jacobian, 2, 0, prime), 28),
+        coefficient_vector(derivative(jacobian, 1, 1, prime), 28),
+        coefficient_vector(derivative(jacobian, 0, 2, prime), 28),
+    ]
+    if (
+        matrix_rank(image_vectors, prime) != 3
+        or matrix_rank(target_vectors, prime) != 3
+        or matrix_rank(image_vectors + target_vectors, prime) != 3
+    ):
+        raise SystemExit(f"covariant image replay failed modulo {prime}")
+    five_elevenths = 5 * pow(11, -1, prime) % prime
+    relations = [
+        [0, 0, five_elevenths, 1, 0, 0],
+        [0, -five_elevenths % prime, 0, 0, 1, 0],
+        [five_elevenths, 0, 0, 0, 0, 1],
+    ]
+    for relation in relations:
+        combined = [
+            sum(
+                relation[column] * image_vectors[column][row]
+                for column in range(6)
+            )
+            % prime
+            for row in range(29)
+        ]
+        if any(combined):
+            raise SystemExit(f"dark-line replay failed modulo {prime}")
+
+    nodes = ["1", "2", "3", "4s", "5", "6", "3p", "4", "2p"]
+    decompositions = [mckay_decomposition(degree) for degree in range(121)]
+    numerators = {}
+    for module in nodes:
+        numerator = []
+        for degree in range(121):
+            coefficient = decompositions[degree].get(module, 0)
+            if degree >= 12:
+                coefficient -= decompositions[degree - 12].get(module, 0)
+            if degree >= 20:
+                coefficient -= decompositions[degree - 20].get(module, 0)
+            if degree >= 32:
+                coefficient += decompositions[degree - 32].get(module, 0)
+            if coefficient:
+                numerator.append([degree, coefficient])
+        numerators[module] = numerator
+    forced = []
+    for degree in range(68):
+        current = mckay_decomposition(degree)
+        lower = mckay_decomposition(degree - 6) if degree >= 6 else {}
+        upper = mckay_decomposition(degree + 6)
+        for module, multiplicity in current.items():
+            if (
+                multiplicity >= 2
+                and lower.get(module, 0) == 0
+                and upper.get(module, 0) == 1
+            ):
+                forced.append([degree, module, multiplicity])
+    return numerators, forced
+
+
 def main():
     certificate = json.loads(CERTIFICATE.read_text(encoding="utf-8"))
     expected_dimensions = [
@@ -281,6 +436,15 @@ def main():
         dimensions, commutator_rank = replay(prime)
         if dimensions != expected_dimensions or commutator_rank != 10:
             raise SystemExit(f"independent replay failed modulo {prime}")
+        numerators, forced = covariant_replay(prime)
+        classification = certificate["standard_covariant_identification"][
+            "all_weight_bottleneck_classification"
+        ]
+        if (
+            numerators != classification["Molien_numerators_over_Q_Phi12_H20"]
+            or forced != [[22, "3", 2]]
+        ):
+            raise SystemExit(f"Molien replay failed modulo {prime}")
         summaries.append(
             {
                 "prime": prime,
@@ -288,6 +452,8 @@ def main():
                 "first_failure": 22,
                 "dimension_at_failure": "8<10",
                 "commutator_rank": commutator_rank,
+                "dark_line": "three exact relations",
+                "forced_bottlenecks_all_weights": forced,
             }
         )
     print(json.dumps({"independent_replay": "PASS", "runs": summaries}, sort_keys=True))

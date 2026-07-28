@@ -6,6 +6,9 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+from fractions import Fraction
+from functools import reduce
+from math import gcd
 from pathlib import Path
 
 
@@ -25,6 +28,255 @@ def load_base():
 
 def flattened(matrix):
     return [entry for row in matrix for entry in row]
+
+
+def coefficient_vector(polynomial, degree: int):
+    return [
+        polynomial.get((degree - index, index), 0)
+        for index in range(degree + 1)
+    ]
+
+
+def nullspace(matrix):
+    work = [[Fraction(entry) for entry in row] for row in matrix]
+    row_count = len(work)
+    column_count = len(work[0]) if work else 0
+    pivot_columns = []
+    pivot_row = 0
+    for column in range(column_count):
+        pivot = next(
+            (row for row in range(pivot_row, row_count) if work[row][column]),
+            None,
+        )
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        pivot_value = work[pivot_row][column]
+        work[pivot_row] = [entry / pivot_value for entry in work[pivot_row]]
+        for row in range(row_count):
+            if row == pivot_row or not work[row][column]:
+                continue
+            multiplier = work[row][column]
+            work[row] = [
+                entry - multiplier * pivot_entry
+                for entry, pivot_entry in zip(work[row], work[pivot_row])
+            ]
+        pivot_columns.append(column)
+        pivot_row += 1
+        if pivot_row == row_count:
+            break
+    free_columns = [
+        column for column in range(column_count) if column not in pivot_columns
+    ]
+    basis = []
+    for free in free_columns:
+        vector = [Fraction(0)] * column_count
+        vector[free] = Fraction(1)
+        for row, pivot in enumerate(pivot_columns):
+            vector[pivot] = -work[row][free]
+        basis.append(vector)
+    return basis
+
+
+def covariant_bottleneck(base):
+    klein = base.KLEIN_F
+    hessian = base.transvectant(klein, klein, 2)
+    jacobian = base.transvectant(klein, hessian, 1)
+    hessian_content = reduce(gcd, (abs(value) for value in hessian.values()))
+    jacobian_content = reduce(gcd, (abs(value) for value in jacobian.values()))
+    if (hessian_content, jacobian_content) != (242, 4840):
+        raise AssertionError("unexpected contents of the Klein invariants")
+    primitive_hessian = {
+        monomial: coefficient // hessian_content
+        for monomial, coefficient in hessian.items()
+    }
+    quadratic_basis = [
+        {(2, 0): 1},
+        {(1, 1): 1},
+        {(0, 2): 1},
+    ]
+    second_polars = [
+        base.derivative(klein, 2, 0),
+        base.derivative(klein, 1, 1),
+        base.derivative(klein, 0, 2),
+    ]
+    degree_twenty_two = [
+        base.multiply(hessian, quadratic)
+        for quadratic in quadratic_basis
+    ] + [
+        base.multiply(klein, polar)
+        for polar in second_polars
+    ]
+    images = [
+        base.transvectant(polynomial, klein, 3)
+        for polynomial in degree_twenty_two
+    ]
+    image_matrix = [
+        [coefficient_vector(image, 28)[row] for image in images]
+        for row in range(29)
+    ]
+    kernel = nullspace(image_matrix)
+    expected_kernel = [
+        [
+            Fraction(0),
+            Fraction(0),
+            Fraction(5, 11),
+            Fraction(1),
+            Fraction(0),
+            Fraction(0),
+        ],
+        [
+            Fraction(0),
+            Fraction(-5, 11),
+            Fraction(0),
+            Fraction(0),
+            Fraction(1),
+            Fraction(0),
+        ],
+        [
+            Fraction(5, 11),
+            Fraction(0),
+            Fraction(0),
+            Fraction(0),
+            Fraction(0),
+            Fraction(1),
+        ],
+    ]
+    if kernel != expected_kernel:
+        raise AssertionError("the degree-22 doubled 3 should map with rank three")
+    if any(
+        coefficient % 11
+        for polar in second_polars
+        for coefficient in polar.values()
+    ):
+        raise AssertionError("the ordinary second polars should vanish modulo 11")
+    if not any(coefficient % 11 for coefficient in primitive_hessian.values()):
+        raise AssertionError("the primitive Hessian should survive modulo 11")
+    target_three = [
+        base.derivative(jacobian, 2, 0),
+        base.derivative(jacobian, 1, 1),
+        base.derivative(jacobian, 0, 2),
+    ]
+    image_vectors = [coefficient_vector(image, 28) for image in images]
+    target_vectors = [coefficient_vector(polynomial, 28) for polynomial in target_three]
+    if (
+        base.matrix_rank(image_vectors) != 3
+        or base.matrix_rank(target_vectors) != 3
+        or base.matrix_rank(image_vectors + target_vectors) != 3
+    ):
+        raise AssertionError("the image should be Pol_2(T_30)")
+
+    nodes = ["1", "2", "3", "4s", "5", "6", "3p", "4", "2p"]
+    decompositions = [base.mckay_decomposition(degree) for degree in range(121)]
+    numerators = {}
+    for module in nodes:
+        numerator = []
+        for degree in range(121):
+            coefficient = decompositions[degree].get(module, 0)
+            if degree >= 12:
+                coefficient -= decompositions[degree - 12].get(module, 0)
+            if degree >= 20:
+                coefficient -= decompositions[degree - 20].get(module, 0)
+            if degree >= 32:
+                coefficient += decompositions[degree - 32].get(module, 0)
+            if coefficient:
+                numerator.append([degree, coefficient])
+        numerators[module] = numerator
+    if numerators["3"] != [
+        [2, 1],
+        [10, 1],
+        [12, 1],
+        [18, 1],
+        [20, 1],
+        [28, 1],
+    ]:
+        raise AssertionError("unexpected Molien numerator for the 3-covariants")
+    residue_starts = {
+        module: {
+            residue: min(
+                degree
+                for degree, _ in numerator
+                if degree % 4 == residue
+            )
+            for residue in {degree % 4 for degree, _ in numerator}
+        }
+        for module, numerator in numerators.items()
+    }
+    positivity_bound = max(
+        6 + 32 + max(starts.values())
+        for starts in residue_starts.values()
+    )
+    forced_bottlenecks = []
+    for degree in range(positivity_bound):
+        current = base.mckay_decomposition(degree)
+        lower = base.mckay_decomposition(degree - 6) if degree >= 6 else {}
+        upper = base.mckay_decomposition(degree + 6)
+        for module, multiplicity in current.items():
+            if (
+                multiplicity >= 2
+                and lower.get(module, 0) == 0
+                and upper.get(module, 0) == 1
+            ):
+                forced_bottlenecks.append([degree, module, multiplicity])
+    if forced_bottlenecks != [[22, "3", 2]]:
+        raise AssertionError("unexpected all-weight local bottleneck classification")
+    return {
+        "Molien_series_for_3_covariants": (
+            "(t^2+t^10+t^12+t^18+t^20+t^28)"
+            "/((1-t^12)(1-t^20))"
+        ),
+        "degree_22_generators": [
+            "H_20 Sym^2",
+            "Phi_12 Pol_2(Phi_12)",
+        ],
+        "H_20": "(Phi_12,Phi_12)_2",
+        "Pol_2_basis": [
+            "dX^2 Phi_12",
+            "dX dY Phi_12",
+            "dY^2 Phi_12",
+        ],
+        "kernel_basis_in_order_HX2_HXY_HY2_FFXX_FFXY_FFYY": [
+            [str(entry) for entry in vector]
+            for vector in kernel
+        ],
+        "dark_line": (
+            "ker Delta is spanned by "
+            "Phi Phi_XX+(5/11)H Y^2, "
+            "Phi Phi_XY-(5/11)H XY, "
+            "Phi Phi_YY+(5/11)H X^2"
+        ),
+        "degree_28_target": (
+            "Pol_2(T_30), where T_30=(Phi_12,H_20)_1"
+        ),
+        "bright_line": "Delta^dagger Pol_2(T_30)",
+        "integral_normalization": {
+            "H_20_content": hessian_content,
+            "T_30_content": jacobian_content,
+            "primitive_dark_line": (
+                "Phi Phi_XX+110 h Y^2, "
+                "Phi Phi_XY-110 h XY, "
+                "Phi Phi_YY+110 h X^2, where H=242 h"
+            ),
+            "coupling_factor": "110=2*5*11",
+            "mod_11": (
+                "Pol_2(Phi_12) vanishes for ordinary derivatives, "
+                "while primitive h_20 survives"
+            ),
+            "boundary": (
+                "This diagnoses the need for divided powers; it does not "
+                "identify the earlier primitive mod-11 return map."
+            ),
+        },
+        "all_weight_bottleneck_classification": {
+            "Molien_numerators_over_Q_Phi12_H20": numerators,
+            "semigroup_fact": (
+                "every multiple of 4 at least 32 lies in <12,20>"
+            ),
+            "lower_neighbor_positive_from_degree": positivity_bound,
+            "finite_scan": f"0..{positivity_bound - 1}",
+            "forced_bottlenecks": forced_bottlenecks,
+        },
+    }
 
 
 def balanced_loop_span(base, degree: int, maximum_length: int) -> tuple[int, int]:
@@ -162,7 +414,7 @@ def build_certificate() -> dict[str, object]:
         raise AssertionError("degree 22 should be the first local bottleneck")
 
     return {
-        "schema": "c682-klein-e8-first-failure-v1",
+        "schema": "c682-klein-e8-first-failure-v2",
         "field": "exact matrices over Q; commutant comparison after base change to C",
         "operator": "delta=(.,Phi_12)_3 with positive Fischer adjoint",
         "tested_degrees": [0, 22],
@@ -197,6 +449,7 @@ def build_certificate() -> dict[str, object]:
                 "full graded corner cannot contain Mat_2(Q)."
             ),
         },
+        "standard_covariant_identification": covariant_bottleneck(base),
         "bounded_word_cross_check": {
             "maximum_word_length": 8,
             "balanced_nonempty_words": loop_count,

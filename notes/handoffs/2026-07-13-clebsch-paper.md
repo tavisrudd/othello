@@ -713,9 +713,21 @@ generate \(M_2\).  Exact rational closure through weight \(22\), two
 independent modular replays, the general bottleneck lemma, and the mystery
 ledger are in
 `notes/2026-07-28-c682-klein-e8-first-failure.md`.  The next \(E_8\)
-frontier is to classify later bottlenecks from the affine-\(E_8\)
-multiplicity sequence and identify the two degree-\(22\) \(3\)-covariant
-lines in a standard invariant-Weyl-algebra presentation.
+`ej` pass identifies the two degree-\(22\) \(3\)-covariants as
+\(H_{20}\operatorname{Sym}^2\) and
+\(\Phi_{12}\operatorname{Pol}_2(\Phi_{12})\).  The dark line is the exact
+\(5/11\) graph killed by \(\Delta\), while the bright target is
+\(\operatorname{Pol}_2(T_{30})\).  The full Molien-numerator audit proves
+that weight \(22\) is the unique all-weight bottleneck of local type
+\(0,m,1\).  Primitive normalization turns the dark coupling into
+\(110=2\cdot5\cdot11\); ordinary second polars vanish modulo \(11\) while
+the primitive Hessian survives, isolating a concrete divided-power bridge
+question without yet identifying C651's finite map.  The next \(E_8\)
+frontier is to express \(\Delta\) on the finite
+free covariant generators over
+\(\mathbf Q[\Phi_{12},H_{20}]\), which should classify later failures from
+other multiplicity patterns and supply the standard invariant-Weyl-algebra
+presentation.
 
 C682's remaining Platinum track is:
 
