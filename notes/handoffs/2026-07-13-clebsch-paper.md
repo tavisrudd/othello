@@ -743,6 +743,26 @@ frontier is to identify \(p\) intrinsically and test whether the other eight
 McKay blocks share it, then use the finite matrices to classify all later
 corner failures.
 
+The bounded C682 literature audit subtracts two apparent novelty claims.
+Suter prints the exact \(3\)-node numerator
+\(t^2+t^{10}+t^{12}+t^{18}+t^{20}+t^{28}\), and the McKay module is a
+classical maximal-Cohen--Macaulay covariant module.  More decisively, direct
+multiplication of the principal blocks gives
+\[
+AB=BA=-100(h^3-1728F^5)I_3,
+\]
+so they lie in the classical \(E_8\) matrix-factorization classification.
+The surviving paper candidate is that the primitive third transvectant
+realizes this factorization as its principal symbol, with common scalar
+cubic \(p\), and that its return algebra first fails at the degree-\(22\)
+Koszul line.  No predecessor for that combined result was located in the
+quick pass, but source-deep priority closure remains open.  The exact
+claim disposition, read depths, cache hashes, and uncovered literature are
+in `notes/2026-07-28-c682-klein-e8-literature-audit.md`.  The next audit gate
+is an explicit graded gauge equivalence with the tabulated length-three
+\(E_8\) factorization, followed by the invariant-differential-operator
+literature.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
