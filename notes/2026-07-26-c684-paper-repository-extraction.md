@@ -391,22 +391,26 @@ Then:
   filenames, local-home paths, or private monorepo paper paths, including in generated provenance.
 - Five user-requested local repositories are now clean `main` histories under
   `~/src/math-papers/`, all with zero remotes and manifest/tree verification passing:
-  - `ame-lu`: source `3c7d73491a2593f91702f5c062f4bb612f4ac1db`, local commit
-    `af9d22f6ef935f10f1471123e5c5d6515f2fa3cf`, manifest
-    `cfce0a49c6be877b36f8f6ccdb9a6a165f325f0ce1edc4762e7138ad8faad863`;
+  - `ame-lu`: source `9d5c540e06b2acd4083c498fb6d0977db708af4e`, local commit
+    `87edce850d5d80e3aaa27378876612274e1edc50`, manifest
+    `99658a886eb84b06050f93cb3318f1481a5df8e30b9227773665c98d2c3fce7f`;
   - `beyond4-prs`: the same source checkpoint, local commit
-    `1f855e86d117a3da72f4433fad648d5f585b992c`, manifest
-    `44920e3187c44c77ea9588823ec5e6fa068d954253185924740b64b564b9a5b5`;
-  - `clebsch-factorization`: source `0cc9bfb5fe49f90b93397c93bada291a85228838`,
-    local commit `40586f1289ccfa07dcd3b797c21e441a0657a429`, manifest
-    `1491f4b9c83928a8ae15ffce96a4d7bdc84ae0b266f9a71fc3438768ae2b9239`;
-  - `clebsch-rigidity`: source `ed45065995a00aa365b850b571847e9b92c822fd`, local
-    commit `984edbbca48a06803999bbe28c119c2676eae945`, manifest
-    `319fe5308841337d225468f46695acd6f67709647a386e6afe51f2707ba1d3ac`;
-  - `arcs-complete-outside-conic`: source
-    `3080ee499bc70a30c31049d45381f796ad5678fa`, local commit
-    `ab3bcd6e51f59738acd1a6b04cff5f3867e2838d`, manifest
-    `cffc058010453dff8cb548cc6f18bf33c24d7b4bde80c959fc5065df02b86065`.
+    `4eb2c1a4bc198008a0533983abdf4fdee647caec`, manifest
+    `c9303fd8750b02cf8f8af8111aaab63037ae23e12b7e94d6544ef6b98ab165f4`;
+  - `clebsch-factorization`: the same source checkpoint, local commit
+    `b64dcdf39eafe1a3fc8cb845ebc1ab797da1dec0`, manifest
+    `d61fbab44a48b7c1c1ef6b51675877bac41d9681b4a7bb54873257d5ad0f3880`;
+  - `clebsch-rigidity`: the same source checkpoint, local commit
+    `c5412b998e0ed88c9d97ccbaa71cc178274c4c31`, manifest
+    `b48f246f6b6ee7d1736c9be1a3b9d838275bade97c0601d73aa2bf6eb1261a0f`;
+  - `arcs-complete-outside-conic`: the same source checkpoint, local commit
+    `8ae75b926cc5b798b0bc89d5ea6f363040f01a0c`, manifest
+    `2289c2ef35777aa5416bafaf2c2fa25b146dada7f9f43c9ee1a203ea244e57e7`.
+- All five paper repositories label
+  [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878)
+  explicitly as the version-independent concept DOI of the separately distributed formal
+  companion, never as a paper DOI. The paper-side content-addressed manifests and affected PDFs
+  were refreshed without modifying the independently owned `finitegeom` repository.
 - Factorization's seven bundled evidence suites replay and its standalone XeLaTeX release gate
   passes. Rigidity's eleven-checker identities, terminal conic-filling replay, split-manuscript
   statement map, trust-input validation, 15-page main build, and 7-page computational companion

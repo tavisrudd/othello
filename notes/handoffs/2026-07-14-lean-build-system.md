@@ -107,7 +107,9 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    separately supplied Q16 formal certificate levels. Rigidity's external formal release-output
    refresh remains in the Lean lane. Clebsch Passages' corrected candidate is still preserved
    separately because replacing its superseded local history requires explicit approval. Exact
-   source/local commits and manifest hashes are in the C684 report.
+   source/local commits and manifest hashes are in the C684 report. The five exported paper
+   repositories now cite `10.5281/zenodo.21650878` explicitly as the formal companion's concept
+   DOI; the independently owned `finitegeom` repository was not modified by the paper-side update.
 9. **C685--C687 extraction corrections:** C685 replaces the false “Passages has no Lean” intake
    inference with reviewed formal-companion roots while retaining the paper's honest
    no-formal-dependency boundary. C686 materializes the downstream q16 certificate repository and
