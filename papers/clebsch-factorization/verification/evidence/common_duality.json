@@ -39,24 +39,6 @@
   ],
   "a5_intersection_projective_order": 12,
   "a5_projective_order": 60,
-  "c372_rank_four_fusion_blocks": [
-    [
-      0
-    ],
-    [
-      3
-    ],
-    [
-      1,
-      5,
-      6
-    ],
-    [
-      2,
-      4,
-      7
-    ]
-  ],
   "common_coherent_refinement_rank": 16,
   "common_refinement_first_eigenmatrix": [
     [
@@ -539,7 +521,7 @@
     550,
     660
   ],
-  "golden_closure_equals_c372_rank_four_fusion": true,
+  "golden_closure_equals_rank_four_golden_fusion": true,
   "golden_closure_projective_orbit_sizes_including_zero": [
     1,
     12,
@@ -601,6 +583,24 @@
     5,
     7,
     6
+  ],
+  "rank_four_golden_fusion_blocks": [
+    [
+      0
+    ],
+    [
+      3
+    ],
+    [
+      1,
+      5,
+      6
+    ],
+    [
+      2,
+      4,
+      7
+    ]
   ],
   "schema": "duality-clebsch-common-duality-v1",
   "trusted_input": {

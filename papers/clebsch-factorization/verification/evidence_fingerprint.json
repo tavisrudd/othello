@@ -11,7 +11,7 @@
   "trust_manifest_sha256": "b1d47ee9db48c5e82a43bdadba2cf364cdda392a0e188bccc6038da7d2bc8f5c",
   "runner_sha256": "5d23dd8658b711f43268fd9be247896812a53a0c428afb5ac2035ea2e7e81ec4",
   "review_sources_sha256": {
-    "normalized_manuscript": "383767e56c0aad5b362aa8c3752c189e484a40db0f3a7275a1f89ef5e8793cb4",
+    "normalized_manuscript": "d78a269919f6b3fb36c253bffbc8d9f4e88361a48c140ac6265bbcb358e771d0",
     "normalized_statement_identity": "a6b0f6470d7019b14a6d55bb5091d8ccc04c73086b7bd64be2b7feb1cd947f29",
     "statement_extractor": "98f3a0b7a346160835c9bc500938f08ca52bd1713d57ccf9760aab22f650b8ce",
     "paper_readme": "25b4dfd4c070627ead9459e63e09c00c59cff5461d947dcf39d59746cbd9ee7c",
@@ -88,7 +88,7 @@
   "evidence": {
     "matching-module": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -104,7 +104,7 @@
     },
     "h3-equivariant-rank": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -120,7 +120,7 @@
     },
     "balanced-sheet": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -137,7 +137,7 @@
     },
     "gorenstein-gate": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -165,7 +165,7 @@
     },
     "profile-incidence": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -181,7 +181,7 @@
     },
     "decorated-parent": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
@@ -197,7 +197,7 @@
     },
     "relative-cubic-depth": {
       "checksum_manifest": "papers/clebsch-factorization/verification/evidence/source_manifest.sha256",
-      "checksum_manifest_sha256": "95b3ebdf0ecdfb367508423592924f70ff022fe2da1b774ce2649668b02bfe7b",
+      "checksum_manifest_sha256": "7e11f0b1428fbb2322d54d90a85fa2a713a3b7e108e04eeaeeb47f5bfda4185b",
       "checksum_root": "papers/clebsch-factorization/verification/evidence",
       "commands": [
         [
