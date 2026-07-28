@@ -1601,8 +1601,17 @@
       "last": 684,
       "purpose": "extract standalone paper repositories under ~/src/math-papers with deterministic clean-room validation",
       "sequence": 178
+    },
+    {
+      "count": 3,
+      "first": 685,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 687,
+      "purpose": "Correct Clebsch Passages formal extraction and complete one-way certificate-package splits for Q16 and remaining Q11/Q13/Q25 families",
+      "sequence": 179
     }
   ],
-  "next_id": 685,
+  "next_id": 688,
   "schema": "codex-task-id-allocations-v1"
 }
