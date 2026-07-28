@@ -12,6 +12,7 @@ github_owner = "tavisrudd"
 
 [[repository]]
 name = "ame-lu"
+include_release_pdfs = true
 source = "papers/ame_lu"
 paper_ids = ["ame_lu"]
 disposition = "active"
@@ -54,6 +55,7 @@ reason = "internal submission checklist, not part of the public manuscript repos
 
 [[repository]]
 name = "arcs-complete-outside-conic"
+include_release_pdfs = true
 source = "papers/arcs_complete_outside_conic"
 paper_ids = ["arcs_complete_outside_conic"]
 disposition = "active"
@@ -88,6 +90,7 @@ reason = "private proof-development audit, superseded by the manuscript verifica
 
 [[repository]]
 name = "beyond4-prs"
+include_release_pdfs = true
 source = "papers/beyond4_prs"
 paper_ids = ["beyond4_prs", "beyond4_prs_submission"]
 disposition = "active"
@@ -142,6 +145,7 @@ reason = "internal submission checklist, not part of the public manuscript repos
 
 [[repository]]
 name = "clebsch-factorization"
+include_release_pdfs = true
 source = "papers/clebsch-factorization"
 paper_ids = ["clebsch_factorization"]
 disposition = "active"
@@ -154,6 +158,7 @@ disposition = "archive"
 
 [[repository]]
 name = "clebsch-passages"
+include_release_pdfs = true
 source = "papers/clebsch-passages"
 paper_ids = ["clebsch_passages"]
 disposition = "active"
@@ -167,6 +172,7 @@ reason = "commands are executed from the standalone repository root after flatte
 
 [[repository]]
 name = "clebsch-rigidity"
+include_release_pdfs = true
 source = "papers/clebsch-rigidity"
 paper_ids = ["clebsch_rigidity", "clebsch_rigidity_companion"]
 disposition = "active"

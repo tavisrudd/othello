@@ -15,8 +15,8 @@ transversal logical group `F_q^2 ⋊ SL_2(q)`, and diagonal isoduality is the
 exact all-length condition for that group rather than the split-torus
 alternative.  The six-party pencil and logical-phase applications retain
 their existing scopes. Public identifiers,
-author metadata, license choice, and submission authorization remain author
-gates.
+public deposit, and submission authorization remain author gates. Repository
+metadata identifies Tavis Rudd, and the release is licensed under CC BY 4.0.
 
 The formal companion distinguishes the kernel-checked
 finite-coordinate, minimum-support, diagonal-axis, and Choi cores from the

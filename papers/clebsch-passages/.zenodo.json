@@ -1,0 +1,32 @@
+{
+  "title": "Arithmetic and harmonic realizations of the Clebsch cubic",
+  "description": "This preprint identifies arithmetic and harmonic passages between classical models of the Clebsch cubic. It determines the rational square class of the incidence orientation cover, analyzes its exact local golden fibre and mod-11 exchanger, and realizes the degree-six icosahedral Gaunt cubic on the Petersen four-space, with replayable exact computations and an optional formal companion.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "Clebsch cubic surface",
+    "incidence orientation cover",
+    "icosahedral harmonics",
+    "Petersen graph",
+    "Gaunt coefficients",
+    "arithmetic geometry",
+    "representation theory",
+    "formalized mathematics"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}
