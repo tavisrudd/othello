@@ -1,35 +1,46 @@
-# Othello
+# Finite geometry, coding theory, and formal verification
 
-An 8×8 Othello (Reversi) engine: a small, typed Python core with interchangeable
-minimax/alpha-beta AI engines, plus optional Cython extensions that move the hot
-path into native code. The same search is available as a readable pure-Python
-reference and as a compiled engine that is hundreds of times faster.
+This is the working research monorepo for a programme in finite geometry,
+coding theory, algebraic combinatorics, and machine-checked mathematics. Its
+main outputs are papers, Lean 4 formalizations, finite-classification
+certificates, and independent replay tools.
+
+Current paper families include:
+
+- Clebsch syndrome rigidity, matching quotients, and factorization;
+- arcs complete outside a prescribed conic;
+- projective Reed–Solomon deep holes beyond redundancy four;
+- local-unitary rigidity of stabilizer AME states and MDS–CSS codes;
+- complete bounded repair ports;
+- Frobenius-equivariant arc extension and continuation-graph rigidity; and
+- combinatorial-game results for Nofil, cap placement, Node-Kayles, and
+  non-attacking queens.
+
+## Repository map
+
+- **[`papers/`](papers/)** — manuscript sources, release manifests,
+  verification maps, and compact replay bundles.
+- **[`lean/`](lean/)** — the shared Lean 4 + Mathlib development, organized
+  around paper-facing gates and trust manifests.
+- **[`notes/`](notes/)** — research records, proof kernels, handoffs, and
+  reproducibility reports.
+- **[`rust/`](rust/)** — finite-classification and game-solving programs,
+  including the Queens and Othello engines.
+
+The public, fresh-history Lean extraction is maintained separately at
+[`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom).
+
+## Legacy Othello engine
+
+The repository began as an 8×8 Othello engine with interchangeable
+minimax/alpha-beta implementations and optional Cython extensions. It remains
+available as a readable search reference and performance case study.
 
 ```console
 $ python -m othello --engine cython-ordered --depth 8
 ```
 
-It plays itself, printing each position, the per-move scores, and the chosen
-move. The point of the project is as much the **journey** — a documented series
-of optimisation experiments, including the ones that didn't work — as the engine
-itself.
-
-## Also in this repo
-
-- **[`rust/`](rust/)** — a parallel **pure-Rust port** of this engine (identical rules and
-  black-centred values), plus a second binary: a solver for the adversarial **Non-Attacking
-  Queens** game (Node-Kayles on the queen graph). That solver produced the repo's headline
-  result — **18×18 is a first-player win**, a new result extending the sequence solved through
-  16×16 by Jenrich (2014) — and its dense leaf evaluator is **machine-checked in Lean 4**. See
-  [`rust/README.md`](rust/README.md).
-- **Write-ups of the Queens work** — a narrative account in
-  [`notes/queens-report.html`](notes/queens-report.html) (the result · the performance
-  engineering · how it was built with AI agents), and a specialist paper in
-  [`notes/queens-n18-paper.md`](notes/queens-n18-paper.md).
-- **[`lean/`](lean/)** — the self-contained Lean 4 + mathlib proof of the Queens leaf evaluator's
-  recurrence (kernel-complete, no `sorry`).
-
-## Quick start
+## Legacy Othello quick start
 
 ```console
 $ python -m othello --help                 # options

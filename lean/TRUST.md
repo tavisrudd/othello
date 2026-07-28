@@ -4,9 +4,9 @@ Start here if you are reviewing what these proofs establish. This file states th
 paper-facing closure in the tree follows, indexes the per-paper trust manifests, and says plainly
 what the generated certificate trees are and are not.
 
-Two documents in this directory have narrower scope than their names suggest: [`TRUST.md`](TRUST.md)
-and [`README.md`](README.md) cover the NodeKayles/queens `getK` evaluator only. They are not
-portfolio documents.
+The historical NodeKayles/queens `getK` trust boundary now lives with that
+development under [`NodeKayles/TRUST.md`](NodeKayles/TRUST.md). This document
+and [`README.md`](README.md) describe the full portfolio.
 
 ## The contract
 
