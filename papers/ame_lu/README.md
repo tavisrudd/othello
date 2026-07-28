@@ -23,6 +23,8 @@ finite-coordinate, minimum-support, diagonal-axis, and Choi cores from the
 remaining stabilizer-state/reduced-density composition.  The previous
 release is superseded; the current content-addressed manifest pins this
 revision.
+Its version-independent archival locator is the Zenodo concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
 
 ## Build
 

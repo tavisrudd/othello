@@ -20,8 +20,10 @@ For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
 
 The formal development is distributed separately in
 [`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). The
-manuscript identifies the exact gate, theorem names, trust boundary, and
-classical inputs. The formal sources are not bundled here.
+version-independent archival locator is the Zenodo concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
+The manuscript identifies the exact gate, theorem names, trust boundary,
+and classical inputs. The formal sources are not bundled here.
 
 ## Contents
 

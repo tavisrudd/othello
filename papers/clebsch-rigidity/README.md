@@ -30,7 +30,10 @@ repository.
 
 The formal source is distributed separately at
 `https://github.com/tavisrudd/finitegeom` and pinned to the commit recorded
-in the manuscript. From this directory, supply a checkout of that repository
+in the manuscript. Its version-independent archival locator is the Zenodo
+concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
+From this directory, supply a checkout of that repository
 as `--lean-root`:
 
 ```text

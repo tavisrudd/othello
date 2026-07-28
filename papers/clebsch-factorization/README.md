@@ -36,5 +36,6 @@ PDF build, and a manuscript-warning scan.
 The formal and computational trust boundaries are described in the manuscript
 and in `verification/README.md`.
 
-An immutable public source-and-evidence archive locator remains required
-before publication.
+The separately distributed formal companion has the version-independent
+Zenodo concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).

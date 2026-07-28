@@ -13,6 +13,7 @@ claimed by this local bundle.
 | Release tag | external publication step |
 | Release commit | set from the final paper-export commit |
 | Public Lean repository | `https://github.com/tavisrudd/finitegeom` |
+| Public Lean concept DOI | [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878) |
 | Public Lean revision | set from the immutable public verification commit |
 | Archive identifier | external publication step |
 | DOI | external publication step |
@@ -35,8 +36,8 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `d0cc9c43895f789386eebea7a8081a711b6f755b8b6a35ed7ca037b2d97abee7` | 13286 |
-| `EVIDENCE-ROWS.md` | `1f5a359804ca6830b5abd12edcd361c21ddb66f0a580467e87d03454da4156b5` | 8807 |
+| `EVIDENCE-MANIFEST.json` | `55585b80891dcf109bc2bd1c8a86d10d35041d57c41fd67606764ae28e9520eb` | 13286 |
+| `EVIDENCE-ROWS.md` | `176b4679fd4b80828534a898709fbb89f99eb8dfb324f2c94f2b55ae62eacac8` | 8807 |
 | `package_evidence_bundle.py` | `1fa62402c1d0152a68104f03fcfa34fcca6b6419bc4c1c0801210e730b51c7c8` | 10913 |
 | `verify.py` | `f6dfcbbf5e90724efa34cc65fcbdc9b7e146b90ff4634870019febb00b21fe0c` | 14147 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |

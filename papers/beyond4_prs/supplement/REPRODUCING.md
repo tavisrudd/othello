@@ -65,7 +65,10 @@ In the export layout, `../lean` is the repository root of the public
 formal-verification checkout
 `https://github.com/tavisrudd/finitegeom`.  Its immutable commit revision is
 release metadata in `RELEASE-MANIFEST.md` and must also be resolved by the
-release flake and lock.  It is not silently replaced by a path into the
+release flake and lock.  The version-independent archival locator for that
+repository is the Zenodo concept DOI
+[`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
+The checkout is not silently replaced by a path into the
 development monorepo.  Every certificate consumed by the adopted theorem set
 is already paper-local; no separate certificate-package input belongs in the
 release flake.  Until the public Lean repository and revision are published,
