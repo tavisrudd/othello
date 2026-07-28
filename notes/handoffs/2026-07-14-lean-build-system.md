@@ -97,16 +97,17 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    `tavisrudd/<paper-reponame>` naming contract, tracked-file allowlists, explicit external-symlink
    dispositions, provenance manifests, and clean-room paper/checker validation. C684 consumes
    C287's released package identities but does not copy or build Lean, and it performs no GitHub
-   action without explicit user authorization. Arcs/Q16 gates only the final arcs materialization;
-   exporter development and other paper pilots proceed now. Plan:
+   action without explicit user authorization. Plan:
    [`../2026-07-26-c684-paper-repository-extraction.md`](../2026-07-26-c684-paper-repository-extraction.md).
-   The immutable planner/audit/materializer and seventeen adversarial tests have landed. A stronger
-   flattened-command audit superseded the first Clebsch Passages local commit; its corrected
-   fresh-history candidate is clean-room-valid and preserved. Replacing the no-remote local path
-   awaits explicit history-replacement approval. Clebsch Factorization is audit-clean, and the
-   AME--LU and Beyond4 source sweeps now use explicit process-file exclusions, semantic evidence
-   names, standalone paths, and paper-local manifest refreshers; their replay and clean-room export
-   gates are the current step.
+   The immutable planner/audit/materializer and eighteen adversarial tests have landed. AME--LU,
+   Beyond4 PRS, Clebsch Factorization, Clebsch Rigidity, and Arcs Complete Outside a Conic now have
+   clean no-remote `main` histories under `~/src/math-papers/`; every export manifest verifies.
+   Factorization's bundled release gate and the paper-local AME/Beyond/rigidity/arcs replays and PDF
+   builds pass. Arcs uses an explicit 15-file public boundary and consumes, rather than copies, the
+   separately supplied Q16 formal certificate levels. Rigidity's external formal release-output
+   refresh remains in the Lean lane. Clebsch Passages' corrected candidate is still preserved
+   separately because replacing its superseded local history requires explicit approval. Exact
+   source/local commits and manifest hashes are in the C684 report.
 
 ## Gates and non-goals
 

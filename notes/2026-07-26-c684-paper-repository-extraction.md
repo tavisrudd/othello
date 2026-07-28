@@ -1,7 +1,7 @@
 # C684 — standalone paper-repository extraction
 
 **Lane:** `build-sys`
-**Status:** active; contract and inventory implementation started
+**Status:** active; five requested standalone repositories are locally exported and validated
 
 ## Objective
 
@@ -51,7 +51,7 @@ registry currently has thirteen manuscript rows but eleven adopted physical root
 | Source root | Repository name | Manuscript treatment |
 |---|---|---|
 | `papers/ame_lu` | `ame-lu` | active candidate |
-| `papers/arcs_complete_outside_conic` | `arcs-complete-outside-conic` | waits for the arcs/Q16 release boundary |
+| `papers/arcs_complete_outside_conic` | `arcs-complete-outside-conic` | active; explicit public evidence boundary |
 | `papers/beyond4_prs` | `beyond4-prs` | preprint and submission variant stay together |
 | `papers/clebsch-factorization` | `clebsch-factorization` | active Clebsch Paper II |
 | `papers/clebsch-hexagon-code` | `clebsch-hexagon-code` | preserved fallback; export only as an explicitly marked archive |
@@ -243,9 +243,9 @@ local repositories.
 
 ### Phase D — arcs and certificate-dependent release
 
-Do not materialize the final arcs repository until the arcs manuscript boundary and Q16
-certificate/build-sys package identities are frozen. C684 consumes those identities; it does not
-wait idly to develop the exporter or validate other repositories.
+The paper repository now exports the manuscript and compact public computational evidence only.
+The separate formal repository supplies the Q16 certificate levels and kernel-checked closure; C684
+does not copy or rebuild them.
 
 ### Phase E — fallback and remote readiness
 
@@ -278,9 +278,9 @@ Then:
 
 - C684 allocated and pegged to `build-sys`.
 - The repository boundary and validation contract are frozen in this report.
-- `papers/repositories.toml` now maps all thirteen registered manuscript rows into eleven physical
-  repository boundaries. The two dual-main roots remain intact, arcs is marked gated, and the
-  integrated Clebsch paper is marked archive.
+- `papers/repositories.toml` maps all thirteen registered manuscript rows into eleven physical
+  repository boundaries. The two dual-main roots remain intact, arcs has an explicit active public
+  boundary, and the integrated Clebsch paper is marked archive.
 - `papers/scripts/export-paper-repos.py plan` reads the registry, mapping, and manuscript blobs from
   one immutable Git commit. It validates IDs, roots, main sources, destination identities, and
   symlink dispositions without reading live manuscript bytes or writing destinations.
@@ -289,7 +289,7 @@ Then:
   repositories, undeclared symlinks, generated-name collisions, and missing destination parents.
   It writes source blobs by Git object ID, canonical provenance and export manifests, fixed modes,
   and a paper-specific build-output ignore list.
-- Fourteen hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
+- Eighteen hermetic adversarial tests pass. They cover immutable-commit/dirty-worktree separation,
   deterministic selection and materialization, missing mappings, destination collisions, unsafe
   paths, undeclared and stale symlink dispositions, private-reference detection, overwrite refusal,
   private-reference materialization refusal, and manifest verification against tampering and extra
@@ -349,7 +349,7 @@ Then:
   rules are forbidden.
 - The exporter now supports exact, reason-bearing exclusions for regular tracked files. It refuses
   absent paths, non-regular paths, duplicate dispositions, and attempts to exclude a manuscript
-  entry point. Seventeen hermetic tests cover this boundary together with case-insensitive task IDs
+  entry point. Eighteen hermetic tests cover this boundary together with case-insensitive task IDs
   in content and paths.
 - The AME--LU sweep assigns nine private review, ledger, theorem-adoption, verification-lane, and
   release-planning files explicit exclusions. Seventeen retained evidence artifacts have semantic
@@ -389,6 +389,32 @@ Then:
   passes the reduced 45-artifact package check, both builds, and post-build manifest verification.
   A targeted scan of both final candidates finds no task IDs, private-note paths, excluded process
   filenames, local-home paths, or private monorepo paper paths, including in generated provenance.
+- Five user-requested local repositories are now clean `main` histories under
+  `~/src/math-papers/`, all with zero remotes and manifest/tree verification passing:
+  - `ame-lu`: source `3c7d73491a2593f91702f5c062f4bb612f4ac1db`, local commit
+    `af9d22f6ef935f10f1471123e5c5d6515f2fa3cf`, manifest
+    `cfce0a49c6be877b36f8f6ccdb9a6a165f325f0ce1edc4762e7138ad8faad863`;
+  - `beyond4-prs`: the same source checkpoint, local commit
+    `1f855e86d117a3da72f4433fad648d5f585b992c`, manifest
+    `44920e3187c44c77ea9588823ec5e6fa068d954253185924740b64b564b9a5b5`;
+  - `clebsch-factorization`: source `0cc9bfb5fe49f90b93397c93bada291a85228838`,
+    local commit `40586f1289ccfa07dcd3b797c21e441a0657a429`, manifest
+    `1491f4b9c83928a8ae15ffce96a4d7bdc84ae0b266f9a71fc3438768ae2b9239`;
+  - `clebsch-rigidity`: source `ed45065995a00aa365b850b571847e9b92c822fd`, local
+    commit `984edbbca48a06803999bbe28c119c2676eae945`, manifest
+    `319fe5308841337d225468f46695acd6f67709647a386e6afe51f2707ba1d3ac`;
+  - `arcs-complete-outside-conic`: source
+    `3080ee499bc70a30c31049d45381f796ad5678fa`, local commit
+    `ab3bcd6e51f59738acd1a6b04cff5f3867e2838d`, manifest
+    `cffc058010453dff8cb548cc6f18bf33c24d7b4bde80c959fc5065df02b86065`.
+- Factorization's seven bundled evidence suites replay and its standalone XeLaTeX release gate
+  passes. Rigidity's eleven-checker identities, terminal conic-filling replay, split-manuscript
+  statement map, trust-input validation, 15-page main build, and 7-page computational companion
+  build pass; its final formal release-output refresh remains owned by the external Lean lane.
+- Arcs exports 15 source/evidence files plus generated provenance and manifest. Exactly 124
+  lane-named exploratory or private-audit files remain in the monorepo. The public witness,
+  evaluation, q11 structure, MATCH(10,5,1), and Q16 `2630+3` replays pass against the separately
+  supplied formal certificate levels; its warning-free manuscript build is 24 pages.
 - The Node Kayles task-ID findings are rendered, because the manuscript sets
   `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
   polyhedral integration, not merely editorial reminders. The repository is therefore gated until
@@ -396,7 +422,6 @@ Then:
 - Replacing `~/src/math-papers/clebsch-passages` with that fresh-history corrected candidate is
   intentionally paused for explicit history-replacement approval. No remote exists, and the
   validated corrected candidate is preserved under the disk-backed C684 cache.
-- Next implementation step after that approval: replace the superseded local candidate, verify its
-  exact commit, then resolve the expanded scoped reference findings repository by repository rather
-  than adding a broad exception. No GitHub remote has been created.
-- Arcs/Q16 readiness gates only Phase D, not Phases A–C.
+- Next: continue with the remaining mapped paper roots when requested. Clebsch Passages still has
+  the separately documented superseded local history and requires explicit replacement approval.
+  No GitHub remote has been created.
