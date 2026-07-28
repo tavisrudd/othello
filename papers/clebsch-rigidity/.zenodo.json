@@ -1,0 +1,32 @@
+{
+  "title": "Reconstructing the Clebsch code from its deep-hole syndrome locus",
+  "description": "This preprint proves that the projective deep-hole syndrome locus characterizes the Clebsch code and reconstructs its conic, polarity, and symmetry. The repository also contains a computational companion with exact finite-field censuses, decoding checks, and independently replayable terminal exclusions.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "Clebsch code",
+    "deep holes",
+    "syndrome geometry",
+    "projective arcs",
+    "finite geometry",
+    "coding theory",
+    "decoding",
+    "formalized mathematics"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}

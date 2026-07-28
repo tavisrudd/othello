@@ -1,0 +1,32 @@
+{
+  "title": "Local-Unitary Rigidity of Stabilizer AME States and Transversal Clifford Groups of MDS–CSS Codes",
+  "description": "This preprint proves local-unitary-to-local-Clifford rigidity for additive stabilizer absolutely maximally entangled states and determines transversal Clifford structure for the associated quantum MDS–CSS codes. It includes exact finite-field classifications, computational certificates, and an explicit formal-verification boundary.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "absolutely maximally entangled states",
+    "stabilizer states",
+    "local-unitary equivalence",
+    "local Clifford group",
+    "quantum MDS codes",
+    "CSS codes",
+    "finite geometry",
+    "formalized mathematics"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}

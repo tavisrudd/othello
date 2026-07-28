@@ -1,0 +1,32 @@
+{
+  "title": "Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven",
+  "description": "This preprint classifies deep holes of projective Reed–Solomon codes at redundancies five through seven. It combines geometric reductions with exact finite-field classifications, independently replayable certificates, and a separately archived formal-verification companion.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "Reed--Solomon codes",
+    "projective Reed--Solomon codes",
+    "deep holes",
+    "covering radius",
+    "normal rational curves",
+    "finite geometry",
+    "coding theory",
+    "formalized mathematics"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}

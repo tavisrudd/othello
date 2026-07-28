@@ -1,0 +1,32 @@
+{
+  "title": "Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity",
+  "description": "This preprint studies projective arcs whose secants cover every required point outside a prescribed conic. It proves a prescribed-hole defect identity, matching-design rigidity, general bounds and transfer results, and exact small-field values including the certified equality ρ_C(16)=9.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "projective arcs",
+    "finite geometry",
+    "complete arcs",
+    "conics",
+    "secant coverage",
+    "matching designs",
+    "finite-field computation",
+    "formalized mathematics"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}
