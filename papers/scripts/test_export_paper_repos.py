@@ -267,6 +267,29 @@ reason = "private review record"
         with self.assertRaisesRegex(exporter.Refused, "absent or not regular"):
             exporter.plan_repository(self.fx.commit, row, papers)
 
+    def test_glob_exclusion_is_explicit_and_refuses_stale_patterns(self) -> None:
+        for name in ("analyze_one.py", "analyze_two.txt"):
+            (self.fx.root / f"papers/demo/{name}").write_text("lane C684\n")
+        mapping = (self.fx.root / "papers/repositories.toml").read_text()
+        mapping += """\
+[[repository.exclude_glob]]
+pattern = "analyze_*"
+reason = "private analysis workspace"
+"""
+        (self.fx.root / "papers/repositories.toml").write_text(mapping)
+        run(self.fx.root, "git", "add", "papers/demo", "papers/repositories.toml")
+        run(self.fx.root, "git", "commit", "-qm", "glob exclusion")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        plan = exporter.build_plan(commit)["repositories"][0]
+        self.assertEqual(plan["excluded_paths"], 2)
+        self.assertEqual(plan["excluded_globs"], 1)
+        self.assertEqual(plan["reference_findings"], [])
+        mapping, papers = self.mapping()
+        row = mapping["repository"][0]
+        row["exclude_glob"] = [{"pattern": "missing_*", "reason": "fixture"}]
+        with self.assertRaisesRegex(exporter.Refused, "matches no paths"):
+            exporter.plan_repository(self.fx.commit, row, papers)
+
     def test_exact_rewrite_clears_reference_and_refuses_drift(self) -> None:
         data = b"python3 papers/demo/check.py\n"
         rules = {

@@ -279,6 +279,54 @@ def excluded_paths(row: dict[str, Any]) -> dict[str, str]:
     return result
 
 
+def excluded_globs(row: dict[str, Any]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for rule in row.get("exclude_glob", []):
+        pattern = rule.get("pattern")
+        reason = rule.get("reason")
+        if (
+            not isinstance(pattern, str)
+            or not pattern
+            or PurePosixPath(pattern).is_absolute()
+            or ".." in PurePosixPath(pattern).parts
+        ):
+            raise Refused(
+                f"repository {row['name']} excluded glob must be a safe relative pattern"
+            )
+        if pattern in result:
+            raise Refused(
+                f"repository {row['name']} repeats excluded glob {pattern!r}"
+            )
+        if not isinstance(reason, str) or not reason.strip():
+            raise Refused(
+                f"repository {row['name']} excluded glob {pattern!r} needs a reason"
+            )
+        result[pattern] = reason
+    return result
+
+
+def resolve_glob_exclusions(
+    repository: str,
+    patterns: dict[str, str],
+    paths: set[str],
+) -> set[str]:
+    result: set[str] = set()
+    for pattern in patterns:
+        matches = {path for path in paths if fnmatch.fnmatchcase(path, pattern)}
+        if not matches:
+            raise Refused(
+                f"repository {repository} excluded glob matches no paths: {pattern!r}"
+            )
+        overlap = result & matches
+        if overlap:
+            raise Refused(
+                f"repository {repository} excluded globs overlap at: "
+                f"{', '.join(sorted(overlap))}"
+            )
+        result.update(matches)
+    return result
+
+
 def excluded_release_outputs(
     row: dict[str, Any], papers: dict[str, dict[str, Any]]
 ) -> set[str]:
@@ -407,6 +455,10 @@ def plan_repository(
 
     exclusions = excluded_symlinks(row)
     path_exclusions = excluded_paths(row)
+    glob_rules = excluded_globs(row)
+    glob_exclusions = resolve_glob_exclusions(
+        row["name"], glob_rules, set(by_relative)
+    )
     release_outputs = excluded_release_outputs(row, papers)
     rewrites = rewrite_rules(row)
     symlinks = {path: entry for path, entry in by_relative.items() if entry.mode == "120000"}
@@ -420,7 +472,7 @@ def plan_repository(
         raise Refused(
             f"repository {row['name']} declares exclusions that are not symlinks: {', '.join(stale)}"
         )
-    overlap = sorted(set(exclusions) & set(path_exclusions))
+    overlap = sorted(set(exclusions) & (set(path_exclusions) | glob_exclusions))
     if overlap:
         raise Refused(
             f"repository {row['name']} excludes paths as both symlinks and regular files: "
@@ -438,7 +490,9 @@ def plan_repository(
             f"repository {row['name']} path exclusions are absent or not regular files: "
             f"{', '.join(invalid_path_exclusions)}"
         )
-    excluded_mains = sorted(set(main_sources) & set(path_exclusions))
+    excluded_mains = sorted(
+        set(main_sources) & (set(path_exclusions) | glob_exclusions)
+    )
     if excluded_mains:
         raise Refused(
             f"repository {row['name']} cannot exclude main source(s): {', '.join(excluded_mains)}"
@@ -451,6 +505,7 @@ def plan_repository(
         and entry.mode != "120000"
         and path not in exclusions
         and path not in path_exclusions
+        and path not in glob_exclusions
         and path not in release_outputs
     ]
     stale_rewrites = sorted(set(rewrites) - set(by_relative))
@@ -459,7 +514,7 @@ def plan_repository(
     references = scan_references(
         entries,
         source,
-        set(exclusions) | set(path_exclusions),
+        set(exclusions) | set(path_exclusions) | glob_exclusions,
         row["name"],
         rewrites,
     )
@@ -472,7 +527,8 @@ def plan_repository(
         "files": len(regular),
         "bytes": sum(entry.size or 0 for entry in regular),
         "excluded_symlinks": len(exclusions),
-        "excluded_paths": len(path_exclusions),
+        "excluded_paths": len(path_exclusions) + len(glob_exclusions),
+        "excluded_globs": len(glob_rules),
         "excluded_release_outputs": sorted(release_outputs & set(by_relative)),
         "reference_findings": references,
         "local_path": f"~/src/math-papers/{row['name']}",
@@ -525,6 +581,11 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     source = row["source"]
     exclusions = excluded_symlinks(row)
     path_exclusions = excluded_paths(row)
+    glob_exclusions = resolve_glob_exclusions(
+        row["name"],
+        excluded_globs(row),
+        {relative_to_source(entry, source) for entry in tree_entries(commit, source)},
+    )
     release_outputs = excluded_release_outputs(row, papers)
     rewrites = rewrite_rules(row)
     entries = tree_entries(commit, source)
@@ -532,7 +593,12 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     manifest_files: list[dict[str, Any]] = []
     for entry in entries:
         rel = relative_to_source(entry, source)
-        if rel in exclusions or rel in path_exclusions or rel in release_outputs:
+        if (
+            rel in exclusions
+            or rel in path_exclusions
+            or rel in glob_exclusions
+            or rel in release_outputs
+        ):
             continue
         if entry.kind != "blob" or entry.mode == "120000":
             raise Refused(f"repository {repository!r} contains unsupported tree entry {rel!r}")
@@ -606,7 +672,7 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
         ],
-        "excluded_path_count": len(path_exclusions),
+        "excluded_path_count": len(path_exclusions) + len(glob_exclusions),
         "excluded_release_outputs": sorted(release_outputs),
         "files": sorted(manifest_files, key=lambda item: item["path"]),
     }

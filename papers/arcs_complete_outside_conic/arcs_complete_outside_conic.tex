@@ -2,7 +2,6 @@
 
 \usepackage[a4paper,margin=29mm]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
@@ -1794,7 +1793,7 @@ their unit relations survive in every odd characteristic.
 \label{app:q16-certificates}
 
 For the \(q=16\) exclusion, the supplement contains the source generator
-\path{papers/arcs_complete_outside_conic/search_rhoc16.cpp}, its frozen
+\path{search_rhoc16.cpp}, its frozen
 report \path{search_rhoc16_output.txt}, and their SHA-256
 digests.  The nine-line report is only a generation summary, not the
 certificate: the proof objects are the emitted Lean transition and leaf
@@ -1855,7 +1854,7 @@ The files
 \path{lean/RelativeConicArcs/ExampleChecks/Q5.lean} through
 \path{Q16.lean} check disjointness from \(\cC\), the arc condition, and
 relative coverage.  The independent verifier
-\path{papers/arcs_complete_outside_conic/verify_relative_conic_arcs.py}
+\path{verify_relative_conic_arcs.py}
 regenerates the same coverage data; its digest and frozen output are
 recorded in the trust manifest.
 

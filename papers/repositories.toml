@@ -56,8 +56,35 @@ reason = "internal submission checklist, not part of the public manuscript repos
 name = "arcs-complete-outside-conic"
 source = "papers/arcs_complete_outside_conic"
 paper_ids = ["arcs_complete_outside_conic"]
-disposition = "gated"
-gate = "wait for the arcs manuscript boundary and Q16 build-sys package identity"
+disposition = "active"
+
+[[repository.exclude_glob]]
+pattern = "analyze_*"
+reason = "private exploratory analysis workspace; the public certificates and replay entry points are retained separately"
+
+[[repository.exclude_glob]]
+pattern = "probe_*"
+reason = "private exploratory search workspace, not part of the public proof surface"
+
+[[repository.exclude_glob]]
+pattern = "size_*"
+reason = "private exploratory sizing calculations outside the paper's public claim boundary"
+
+[[repository.exclude_glob]]
+pattern = "optimize_*"
+reason = "private exploratory optimization workspace, not part of the public proof surface"
+
+[[repository.exclude_glob]]
+pattern = "classify_*"
+reason = "private exploratory classification workspace, superseded by the public certificates"
+
+[[repository.exclude_glob]]
+pattern = "check_c*"
+reason = "lane-named development checks, superseded by the mathematically named public verification bundle"
+
+[[repository.exclude_path]]
+path = "arcs_complete_outside_conic_proof_audit.md"
+reason = "private proof-development audit, superseded by the manuscript verification appendix"
 
 [[repository]]
 name = "beyond4-prs"
