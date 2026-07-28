@@ -759,9 +759,22 @@ Koszul line.  No predecessor for that combined result was located in the
 quick pass, but source-deep priority closure remains open.  The exact
 claim disposition, read depths, cache hashes, and uncovered literature are
 in `notes/2026-07-28-c682-klein-e8-literature-audit.md`.  The next audit gate
-is an explicit graded gauge equivalence with the tabulated length-three
-\(E_8\) factorization, followed by the invariant-differential-operator
-literature.
+was an explicit graded gauge equivalence with the tabulated length-three
+\(E_8\) factorization.
+
+That gate is now closed.  Under the rational base change
+\(Y=-h/12,\ Z=F\), compatible degree-zero gauges identify C682's two
+principal blocks with the unprimed tabulated three-node pair
+\((\psi_3,-172800\phi_3)\).  The bases have degrees
+\((2,10,18)\) and \((12,20,28)\), both maps have degree \(30\), and the
+potential has degree \(60\).  The equivalence is defined over
+\(\mathbf Z[1/30]\), so it survives modulo \(11\); prime \(11\) remains an
+operator/lattice issue rather than a matrix-factorization obstruction.  The
+exact proof, symbolic certificate, independent two-field replay, and mystery
+ledger are in
+`notes/2026-07-28-c682-klein-e8-graded-gauge.md`.  The next \(E_8\) gate is
+the source-deep invariant-differential-operator audit, with the mod-\(11\)
+divided-power comparison to C651 as the arithmetic branch.
 
 C682's remaining Platinum track is:
 

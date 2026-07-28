@@ -1,0 +1,448 @@
+{
+  "c682_factorization": {
+    "A": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-10",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "120",
+            "h_power": 0
+          }
+        ],
+        []
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "2",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "12",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 3,
+            "coefficient": "240",
+            "h_power": 0
+          }
+        ],
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "10",
+            "h_power": 1
+          }
+        ]
+      ]
+    ],
+    "B": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "10",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "-600",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 2,
+            "coefficient": "720",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 4,
+            "coefficient": "1440",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-50",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "60",
+            "h_power": 1
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 3,
+            "coefficient": "-240",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 4,
+            "coefficient": "14400",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-10",
+            "h_power": 2
+          }
+        ]
+      ]
+    ],
+    "identities": [
+      "A*B=100*t^2*I_3",
+      "B*A=100*t^2*I_3"
+    ],
+    "potential": "100*t^2=172800*g"
+  },
+  "checks": {
+    "conclusion": "(A,B/172800) is graded-gauge equivalent over Q[F,h] to the sign-corrected standard unprimed E8 3-node factorization (psi_3,-phi_3) after Y=-h/12, Z=F.",
+    "graded_nonzero_entries": 30,
+    "rational_base_change_identities": 1,
+    "symbolic_matrix_product_identities": 6
+  },
+  "coefficient_ring": {
+    "degrees": {
+      "F": 12,
+      "h": 20
+    },
+    "klein_relation": "t^2=1728*F^5-h^3",
+    "ring": "Q[F,h]"
+  },
+  "field": "Q",
+  "gauge": {
+    "J": [
+      [
+        [],
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ],
+        []
+      ],
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ],
+        [],
+        []
+      ]
+    ],
+    "L": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ],
+        [],
+        []
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-10",
+            "h_power": 0
+          }
+        ],
+        []
+      ],
+      [
+        [],
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-2",
+            "h_power": 0
+          }
+        ]
+      ]
+    ],
+    "L_entries": [
+      "1",
+      "-10",
+      "-2"
+    ],
+    "P": "L*J",
+    "Q": "R^(-1)*J",
+    "R": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-1/120",
+            "h_power": 0
+          }
+        ],
+        [],
+        []
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-1/240",
+            "h_power": 0
+          }
+        ],
+        []
+      ],
+      [
+        [],
+        [],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1/240",
+            "h_power": 0
+          }
+        ]
+      ]
+    ],
+    "R_entries": [
+      "-1/120",
+      "-1/240",
+      "1/240"
+    ],
+    "identity_A": "P*A*Q^(-1)=psi_3",
+    "identity_B": "Q*(B/172800)*P^(-1)=-phi_3"
+  },
+  "graded_modules": {
+    "map_degree": 30,
+    "original_even_basis": [
+      {
+        "degree": 2,
+        "name": "g2"
+      },
+      {
+        "degree": 10,
+        "name": "g10"
+      },
+      {
+        "degree": 18,
+        "name": "g18"
+      }
+    ],
+    "original_odd_basis": [
+      {
+        "degree": 12,
+        "name": "g12"
+      },
+      {
+        "degree": 20,
+        "name": "g20"
+      },
+      {
+        "degree": 28,
+        "name": "g28"
+      }
+    ],
+    "potential_degree": 60,
+    "standard_even_basis_degrees": [
+      18,
+      10,
+      2
+    ],
+    "standard_odd_basis_degrees": [
+      28,
+      20,
+      12
+    ]
+  },
+  "schema": "c682-klein-e8-graded-gauge-v1",
+  "standard_factorization": {
+    "base_change": {
+      "Y": "-h/12",
+      "Z": "F",
+      "g": "t^2/1728"
+    },
+    "node": "unprimed 3-node",
+    "phi_3_after_base_change": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-1/144",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 4,
+            "coefficient": "-1",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 3,
+            "coefficient": "1/12",
+            "h_power": 1
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 1,
+            "coefficient": "1/12",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1/144",
+            "h_power": 2
+          }
+        ],
+        [
+          {
+            "F_power": 4,
+            "coefficient": "-1",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 2,
+            "coefficient": "-1",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "-1/12",
+            "h_power": 1
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1/144",
+            "h_power": 2
+          }
+        ]
+      ]
+    ],
+    "potential": "g=Y^3+Z^5",
+    "psi_3_after_base_change": [
+      [
+        [
+          {
+            "F_power": 0,
+            "coefficient": "-1/12",
+            "h_power": 1
+          }
+        ],
+        [],
+        [
+          {
+            "F_power": 3,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ]
+      ],
+      [
+        [
+          {
+            "F_power": 1,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1/12",
+            "h_power": 1
+          }
+        ],
+        []
+      ],
+      [
+        [],
+        [
+          {
+            "F_power": 1,
+            "coefficient": "1",
+            "h_power": 0
+          }
+        ],
+        [
+          {
+            "F_power": 0,
+            "coefficient": "1/12",
+            "h_power": 1
+          }
+        ]
+      ]
+    ],
+    "sign_convention": "phi_3*psi_3=psi_3*phi_3=-g*I_3",
+    "source": "Curto-Morrison, arXiv:math/0611014, Appendix p. 26",
+    "source_pdf_sha256": "83ff3bb97c3523f649a390f7391ec6e8df977846067453ddbf018196a5c05425"
+  }
+}

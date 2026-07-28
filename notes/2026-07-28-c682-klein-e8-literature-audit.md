@@ -45,9 +45,13 @@ The strongest surviving candidate is more conceptual:
 > missing line is the Koszul syzygy \(hg_2+Fg_{10}\).
 
 No predecessor for that combined statement was located in this quick pass.
-That sentence must retain “to our knowledge” until the explicit
-matrix-factorization equivalence and the invariant-differential-operator
-literature have received a source-deep audit.
+The explicit matrix-factorization comparison is now complete in
+`notes/2026-07-28-c682-klein-e8-graded-gauge.md`: after
+\(Y=-h/12,\ Z=F\), C682's blocks are graded-gauge equivalent over
+\(\mathbf Z[1/30]\) to the unprimed tabulated three-node.  The sentence
+must still retain “to our knowledge” until the
+invariant-differential-operator literature has received a source-deep
+audit.
 
 ## Claim-by-claim disposition
 
@@ -100,10 +104,16 @@ AB=BA=-100(h^3-1728F^5)I_3.
 \]
 Therefore C682 has not discovered the existence of a matrix factorization
 for the \(3\)-node; it has apparently found a particularly sparse,
-transvectant-selected gauge for one of the two three-dimensional McKay
-nodes.  An explicit graded gauge equivalence with the tabulated
-\((\phi_3,\psi_3)\) or \((\phi''_3,\psi''_3)\) remains to be constructed.
-That comparison is the highest-value next audit step.
+transvectant-selected gauge for the unprimed three-dimensional McKay node.
+The later exact comparison gives
+\[
+LJAJR=\psi_3,\qquad
+R^{-1}JBJL^{-1}=-172800\phi_3
+\]
+after \(Y=-h/12,\ Z=F\), with compatible degree-zero gauges on the
+\((2,10,18)\) and \((12,20,28)\) free summands.  This closes the
+identification step and leaves source-depth, rather than isomorphism class,
+as the next literature gate.
 
 Omer independently tabulates the eight indecomposable \(E_8\)
 factorizations in a different gauge.  This is corroboration and a useful
@@ -217,8 +227,6 @@ Not covered:
 - a source-deep search of invariant differential operators on quotient
   singularities, radial parts, symplectic reflection algebras, and
   preprojective algebras;
-- an explicit equivalence between C682's \((A,B)\) and the standard
-  \(3\)-node \(E_8\) matrix factorization.
 
 Accordingly, this report licenses subtraction of the clearly classical
 claims, but not an unqualified priority claim for the surviving theorem.
@@ -233,9 +241,9 @@ Lead with the realization, not the table:
 3. its scalar-symbol times \(E_8\)-matrix-factorization identity;
 4. the degree-\(22\) Koszul obstruction to commutant saturation.
 
-Before submission, construct the explicit gauge equivalence to the
-classical length-three factorization and complete the source-deep
-invariant-differential-operator audit.  If that comparison works cleanly,
-it improves rather than weakens the paper: the result becomes a natural
+The explicit graded gauge equivalence to the classical length-three
+factorization is complete.  Before submission, complete the source-deep
+invariant-differential-operator audit.  The comparison improves rather than
+weakens the candidate: the result is now a natural
 quantization/realization theorem instead of an isolated \(103\)-term
 calculation.
