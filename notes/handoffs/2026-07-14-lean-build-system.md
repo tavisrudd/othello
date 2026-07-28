@@ -122,7 +122,13 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 1. **Run C685 first.** Freeze the two Passages candidate-gate closures, decide the adjacent
    `Q11BrianchonPetersen` disposition from the statement map, add the reviewed human-scale
    `finitegeom` state, and update the preserved standalone Passages candidate to pin that exact
-   state. C685 does not wait for a certificate package.
+   state. C685 does not wait for a certificate package. The statement map is now settled:
+   `ClebschOrientationMechanisms` is the exact three-module current-paper companion;
+   `ClebschPassageInterfaces`, `ClebschHarmonicQuotient`, and `Q11BrianchonPetersen` are excluded.
+   Candidate commit `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` has a green working-tree
+   gate and is undergoing clean replay. The paper's immutable remote lock waits for an authorized
+   push of the validated commit. Current report:
+   [`../2026-07-28-c685-clebsch-passages-formal-companion.md`](../2026-07-28-c685-clebsch-passages-formal-companion.md).
 2. **Run C686 second, after the human Arcs core has an immutable `finitegeom` commit.** Use that
    commit as the sole upstream library pin; materialize and validate the q16 package and its
    downstream aggregate; then update the Arcs paper repository to pin both exact commits. Starting
