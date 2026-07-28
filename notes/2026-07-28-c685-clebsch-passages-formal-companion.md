@@ -1,8 +1,7 @@
 # C685 Clebsch Passages formal companion
 
 **Lane:** `build-sys`
-**Status:** ACTIVE; exact formal surface corrected and clean-replay-valid on local
-`finitegeom/main`; no push; paper lock waits for a publicly reachable immutable commit
+**Status:** COMPLETE; exact formal surface and standalone paper pin clean-replay-valid
 
 ## Corrected statement boundary
 
@@ -60,15 +59,41 @@ provenance document. The clean clone then advanced to
 exact trace-only aggregate successfully. Local `finitegeom/main` was fast-forwarded to that commit
 and is two commits ahead of `origin/main`. No push was performed.
 
-The paper flake parses and its companion metadata is internally consistent. `flake.lock` cannot be
-generated against the immutable GitHub revision until that `finitegeom` commit is publicly
-reachable. No push is authorized or performed. The paper candidate therefore remains uncommitted
-and its release/clean-room aggregate is intentionally not run with a fabricated local-path lock.
-Generated LaTeX build outputs were removed with the paper's declared `make clean` target.
+The public commit became reachable on GitHub through a user-owned push. The paper's `flake.lock`
+resolves that exact immutable revision and records its NAR hash. The formal-companion verifier,
+complete paper release gate, content-addressed export verifier, `nix flake check`, warning-free
+eleven-page build, and a separate exact-commit clean-clone replay all pass.
 
-## Next
+The fresh standalone paper history is now canonical at
+`~/src/math-papers/clebsch-passages`, root commit
+`db4fb67c78997d3c770677313e077b1341ee4654`. Its export-manifest SHA-256 is
+`1b69f29ac7233c0bbabd05d77403309200a9cc55f655944c44bb76c44b95b912`.
+The superseded history was moved recoverably to
+`~/src/math-papers/.backups/clebsch-passages-6c927fab`; it was not deleted.
+Local commit signing is disabled in the fresh repository.
 
-1. obtain explicit authority to push the validated `finitegeom` commit;
-2. generate the paper's remote-revision `flake.lock`, refresh its content manifest, run the paper
-   and clean-room gates, and construct its fresh final history; and
-3. replace the superseded local paper directory only with explicit history-replacement authority.
+The paper carries Zenodo preprint metadata with Tavis Rudd's ORCID, CC BY 4.0, no prematurely
+assigned paper version or publication date, and an `isSupplementedBy` relation to the separately
+distributed `finitegeom` concept DOI. This is consistent with `finitegeom` being software under
+Apache-2.0 and with the other standalone paper records.
+
+## Closeout: extra-juice and Tao pass
+
+The now-tested paper-to-formal-companion pin supplies the reusable one-way dependency pattern for
+C686 and C687: paper repositories consume immutable human-library and certificate-package commits,
+while no Lean repository imports a paper or a generated certificate family it does not use. The
+highest-value next move is therefore C686's q16 split rather than widening the Passages surface.
+
+## Mystery ledger
+
+- **Settled:** the apparent “Passages has no Lean” discrepancy was a statement-map error. The exact
+  adjacent symbolic mechanisms are identified, and the tempting but unrelated Clebsch gates are
+  explicitly excluded.
+- **Settled:** the paper can cite a version-independent software concept DOI before its own DOI and
+  lock a later `finitegeom` commit without conflating paper and software versions.
+- **Open, release-administrative only:** the user recalled another agent's Passages Zenodo JSON,
+  but no prior Passages record exists in the live source path, superseded repository, or its Git
+  history. The present record matches the five established paper-record conventions; reconcile any
+  later-arriving external copy before a paper push. This does not block the local v0.2.0 extraction.
+- **No mathematical mystery remains in C685.** Main arithmetic and harmonic claims intentionally
+  remain outside the optional Lean boundary.

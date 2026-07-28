@@ -105,30 +105,27 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    Factorization's bundled release gate and the paper-local AME/Beyond/rigidity/arcs replays and PDF
    builds pass. Arcs uses an explicit 15-file public boundary and consumes, rather than copies, the
    separately supplied Q16 formal certificate levels. Rigidity's external formal release-output
-   refresh remains in the Lean lane. Clebsch Passages' corrected candidate is still preserved
-   separately because replacing its superseded local history requires explicit approval. Exact
-   source/local commits and manifest hashes are in the C684 report. The five exported paper
+   refresh remains in the Lean lane. Clebsch Passages now also has a clean fresh history at its
+   canonical path; its superseded history remains in a recoverable backup. Exact source/local
+   commits and manifest hashes are in the C684 and C685 reports. The five earlier exported paper
    repositories now cite `10.5281/zenodo.21650878` explicitly as the formal companion's concept
    DOI; the independently owned `finitegeom` repository was not modified by the paper-side update.
-9. **C685--C687 extraction corrections:** C685 replaces the false “Passages has no Lean” intake
-   inference with reviewed formal-companion roots while retaining the paper's honest
-   no-formal-dependency boundary. C686 materializes the downstream q16 certificate repository and
+9. **C685--C687 extraction corrections:** C685 is complete: it replaced the false “Passages has no
+   Lean” intake inference with reviewed formal-companion roots while retaining the paper's honest
+   no-formal-dependency boundary, and the standalone paper now pins the exact public commit. C686
+   materializes the downstream q16 certificate repository and
    moves its final aggregate out of the human Arcs gate. C687 completes the same exact,
    content-addressed, one-way split for the remaining declared q11/q13/q25 generated families.
    Contracts: [`../2026-07-28-c685-c687-extraction-corrections.md`](../2026-07-28-c685-c687-extraction-corrections.md).
 
 ### C685--C687 operator progression
 
-1. **Run C685 first.** Freeze the two Passages candidate-gate closures, decide the adjacent
-   `Q11BrianchonPetersen` disposition from the statement map, add the reviewed human-scale
-   `finitegeom` state, and update the preserved standalone Passages candidate to pin that exact
-   state. C685 does not wait for a certificate package. The statement map is now settled:
+1. **C685 complete.** The statement map is settled:
    `ClebschOrientationMechanisms` is the exact three-module current-paper companion;
    `ClebschPassageInterfaces`, `ClebschHarmonicQuotient`, and `Q11BrianchonPetersen` are excluded.
-   Commit `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` passed both the working-tree
-   gate and an exact-commit clean-clone replay and now heads local `finitegeom/main`, two commits
-   ahead of `origin/main`. No push was performed. The paper's immutable remote lock waits for an
-   authorized push of the validated commit. Current report:
+   `finitegeom` commit `d8ea8326f09da54ffd50b77a3bf54f91a7fbb5ed` and standalone-paper commit
+   `db4fb67c78997d3c770677313e077b1341ee4654` passed their exact-commit clean-room gates. Current
+   report:
    [`../2026-07-28-c685-clebsch-passages-formal-companion.md`](../2026-07-28-c685-clebsch-passages-formal-companion.md).
 2. **Run C686 second, after the human Arcs core has an immutable `finitegeom` commit.** Use that
    commit as the sole upstream library pin; materialize and validate the q16 package and its
@@ -236,8 +233,9 @@ fresh-history candidate with the C553 API/prose transformation applied only in t
 private monorepo remains unchanged: no source module is deleted, renamed, or rewritten there.
 
 The synchronized intake covers arcs, AME--LU, geometric beyond-four PRS, Clebsch Rigidity,
-Clebsch Factorization, Clebsch Passages, and complete ports. C685 now owns the reviewed Passages
-formal-companion state; the paper's current manifest still claims no Lean dependency. Arcs' Q16
+Clebsch Factorization, Clebsch Passages, and complete ports. C685 delivered the reviewed Passages
+formal-companion state and immutable paper pin while preserving the paper's no-Lean-premise
+boundary. Arcs' Q16
 generated family and Clebsch Rigidity's Q11 generated family remain opt-in certificate packages
 rather than entering the human-scale main repository, with C686--C687 owning their complete
 materialization and the other declared field-specific packages.
