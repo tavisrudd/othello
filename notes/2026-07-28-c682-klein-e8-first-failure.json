@@ -1,0 +1,292 @@
+{
+  "bounded_word_cross_check": {
+    "balanced_nonempty_words": 97,
+    "maximum_word_length": 8,
+    "nonunital_span_dimension": 7,
+    "third_straight_return_algebra_dimension": 8,
+    "unital_span_dimension": 8
+  },
+  "claim_boundary": [
+    "Degree 22 is the first failure among every integer degree n >= 0.",
+    "Saturation through degree 21 is exact for the two shortest returns.",
+    "The affine-E8 neighbor obstruction proves failure of the full graded corner at degree 22.",
+    "No claim is made about the complete presentation or later failure pattern."
+  ],
+  "field": "exact matrices over Q; commutant comparison after base change to C",
+  "first_failure": {
+    "commutator_rank": 10,
+    "decomposition": "3^2 direct_sum 5^2 direct_sum 3p direct_sum 4",
+    "degree": 22,
+    "full_commutant_dimension": 10,
+    "full_commutant_over_C": "Mat_2(C) direct_sum Mat_2(C) direct_sum C direct_sum C",
+    "return_algebra_dimension": 8,
+    "return_algebra_over_C": "C^2 direct_sum Mat_2(C) direct_sum C direct_sum C",
+    "unresolved_block": "the doubled 3"
+  },
+  "operator": "delta=(.,Phi_12)_3 with positive Fischer adjoint",
+  "return_generators": [
+    "C_n=delta_n^dagger delta_n",
+    "D_n=(delta_n^dagger)^2 delta_n^2"
+  ],
+  "rows": [
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "1": 1
+      },
+      "degree": 0,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "2": 1
+      },
+      "degree": 1,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "3": 1
+      },
+      "degree": 2,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "4s": 1
+      },
+      "degree": 3,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "5": 1
+      },
+      "degree": 4,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 1,
+      "decomposition": {
+        "6": 1
+      },
+      "degree": 5,
+      "two_return_dimension": 1
+    },
+    {
+      "commutant_dimension": 2,
+      "decomposition": {
+        "3p": 1,
+        "4": 1
+      },
+      "degree": 6,
+      "two_return_dimension": 2
+    },
+    {
+      "commutant_dimension": 2,
+      "decomposition": {
+        "2p": 1,
+        "6": 1
+      },
+      "degree": 7,
+      "two_return_dimension": 2
+    },
+    {
+      "commutant_dimension": 2,
+      "decomposition": {
+        "4": 1,
+        "5": 1
+      },
+      "degree": 8,
+      "two_return_dimension": 2
+    },
+    {
+      "commutant_dimension": 2,
+      "decomposition": {
+        "4s": 1,
+        "6": 1
+      },
+      "degree": 9,
+      "two_return_dimension": 2
+    },
+    {
+      "commutant_dimension": 3,
+      "decomposition": {
+        "3": 1,
+        "3p": 1,
+        "5": 1
+      },
+      "degree": 10,
+      "two_return_dimension": 3
+    },
+    {
+      "commutant_dimension": 3,
+      "decomposition": {
+        "2": 1,
+        "4s": 1,
+        "6": 1
+      },
+      "degree": 11,
+      "two_return_dimension": 3
+    },
+    {
+      "commutant_dimension": 4,
+      "decomposition": {
+        "1": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1
+      },
+      "degree": 12,
+      "two_return_dimension": 4
+    },
+    {
+      "commutant_dimension": 4,
+      "decomposition": {
+        "2": 1,
+        "2p": 1,
+        "4s": 1,
+        "6": 1
+      },
+      "degree": 13,
+      "two_return_dimension": 4
+    },
+    {
+      "commutant_dimension": 4,
+      "decomposition": {
+        "3": 1,
+        "3p": 1,
+        "4": 1,
+        "5": 1
+      },
+      "degree": 14,
+      "two_return_dimension": 4
+    },
+    {
+      "commutant_dimension": 5,
+      "decomposition": {
+        "4s": 1,
+        "6": 2
+      },
+      "degree": 15,
+      "two_return_dimension": 5
+    },
+    {
+      "commutant_dimension": 6,
+      "decomposition": {
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "degree": 16,
+      "two_return_dimension": 6
+    },
+    {
+      "commutant_dimension": 6,
+      "decomposition": {
+        "2p": 1,
+        "4s": 1,
+        "6": 2
+      },
+      "degree": 17,
+      "two_return_dimension": 6
+    },
+    {
+      "commutant_dimension": 7,
+      "decomposition": {
+        "3": 1,
+        "3p": 1,
+        "4": 2,
+        "5": 1
+      },
+      "degree": 18,
+      "two_return_dimension": 7
+    },
+    {
+      "commutant_dimension": 7,
+      "decomposition": {
+        "2": 1,
+        "2p": 1,
+        "4s": 1,
+        "6": 2
+      },
+      "degree": 19,
+      "two_return_dimension": 7
+    },
+    {
+      "commutant_dimension": 8,
+      "decomposition": {
+        "1": 1,
+        "3": 1,
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "degree": 20,
+      "two_return_dimension": 8
+    },
+    {
+      "commutant_dimension": 9,
+      "decomposition": {
+        "2": 1,
+        "4s": 2,
+        "6": 2
+      },
+      "degree": 21,
+      "two_return_dimension": 9
+    },
+    {
+      "commutant_dimension": 10,
+      "decomposition": {
+        "3": 2,
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "degree": 22,
+      "two_return_dimension": 8
+    }
+  ],
+  "schema": "c682-klein-e8-first-failure-v1",
+  "structural_obstruction": {
+    "adjacent_affine_E8_decompositions": {
+      "16": {
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "22": {
+        "3": 2,
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "28": {
+        "3": 1,
+        "3p": 1,
+        "4": 2,
+        "5": 3
+      }
+    },
+    "bottlenecks_through_degree_22": [
+      {
+        "degree": 22,
+        "module": "3",
+        "multiplicity": 2
+      }
+    ],
+    "conclusion": "Every primitive downward excursion vanishes on the doubled 3. Every primitive upward excursion factors through the one-dimensional 3-multiplicity space in degree 28 and is a scalar multiple of A^dagger A. Hence every closed word in delta and delta^dagger is commutative on this block, so the full graded corner cannot contain Mat_2(Q).",
+    "corner_on_3_multiplicity_space": "span{I,A^dagger A}, dimension 2",
+    "current_3_multiplicity": 2,
+    "downward_3_multiplicity": 0,
+    "upward_3_multiplicity": 1
+  },
+  "tested_degrees": [
+    0,
+    22
+  ]
+}

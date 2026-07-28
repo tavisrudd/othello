@@ -694,8 +694,28 @@ has rank-eight commutator with the first return at degree eighteen, ruling
 out a polynomial identification.  The exact proof, primary certificate,
 independent replay, source-depth boundary, and mystery ledger are in
 `notes/2026-07-28-c682-klein-e8-operator-algebra.md`.  The next \(E_8\)
-gate is all-weight commutant saturation or its first failure, together with
-a standard invariant-Weyl-algebra presentation.
+gate was all-weight commutant saturation or its first failure.
+
+That gate now closes negatively at the first actual obstruction.  The two
+shortest returns saturate every integer weight through \(21\), but at weight
+\(22\)
+\[
+\operatorname{Sym}^{22}|_{2.A_5}
+\simeq3^{\oplus2}\oplus5^{\oplus2}\oplus3'\oplus4
+\]
+has commutant dimension ten and return-algebra dimension eight.  This is a
+failure of the full graded corner, not only the two-return generating set:
+the doubled \(3\) has adjacent multiplicities \(0,2,1\) in weights
+\(16,22,28\), so every downward excursion vanishes and every upward
+excursion factors through one multiplicity line.  Thus all closed words act
+through \(\operatorname{span}\{I,A^\dagger A\}\) on that block and cannot
+generate \(M_2\).  Exact rational closure through weight \(22\), two
+independent modular replays, the general bottleneck lemma, and the mystery
+ledger are in
+`notes/2026-07-28-c682-klein-e8-first-failure.md`.  The next \(E_8\)
+frontier is to classify later bottlenecks from the affine-\(E_8\)
+multiplicity sequence and identify the two degree-\(22\) \(3\)-covariant
+lines in a standard invariant-Weyl-algebra presentation.
 
 C682's remaining Platinum track is:
 
