@@ -47,6 +47,7 @@ The reusable terminals are:
 - `RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member`;
 - `RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card`;
 - `RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent`;
+- `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow`;
 - `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible`;
 - `RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent`.
 
@@ -90,11 +91,11 @@ The cheap structural upgrade was to provide both predicate-level and polynomial-
 interfaces.  Degree-specific modules that already package witness existence can reuse the former;
 new algebraic developments can use the latter without erasing the actual kernel polynomial.
 
-The strongest additional reusable conclusion is
-`deep_iff_mem_persistent`: it forces the Hankel dictionary, radius theorem, and orbit exhaustion to
-agree through explicit predicate equalities before producing a coding classification.  This blocks
-a subtle but common error in which a split-free syndrome table is silently reported as a
-deep-hole table outside the proved covering-radius range.
+The radius-based reusable conclusion
+`deep_iff_mem_persistent_of_compatible` forces the Hankel dictionary, radius theorem, and orbit
+exhaustion to agree pointwise before producing a coding classification.  This blocks a subtle but
+common error in which a split-free syndrome table is silently reported as a deep-hole table outside
+the proved covering-radius range.
 
 The requested extra-juice pass found the converse asymmetry that is easy to obscure in prose.
 Existence of a split squarefree kernel member already proves coding-theoretic shallowness: it uses
@@ -115,6 +116,22 @@ projective-quotient, and certificate models normally prove pointwise equivalence
 checked extensional terminals now accept exactly those pointwise `iff` hypotheses.  Equality-based
 theorems remain as compatibility wrappers, so the upgrade weakens hypotheses without breaking the
 established API.
+
+A deeper Tao pass separated two logically distinct classification routes.  The radius-based route
+promotes split-freeness and then uses orbit exhaustion.  The witness-based route needs neither:
+positive deepness on the persistent locus and explicit shallowness on its complement already give
+the exact classification.  The axiom-audited terminal
+`deep_iff_mem_persistent_of_exceptional_shallow` now records this minimal principle, and the
+redundancy-nine synthesis has been refactored to use it.  This is a strict hypothesis economy:
+covering radius remains necessary for classifications proved only from absence of witnesses, but
+not for high-field transverse arguments that construct a shallow witness everywhere off the
+persistent locus.
+
+The strategic stop rule is now sharp.  Further abstract interfaces would not close the remaining
+evidence gaps: projective descent, actual group actions, orbit quotients, stabilizers, and
+certificate coverage all require a concrete degree-specific model.  The next formalization should
+therefore instantiate this foundation on the redundancy-five cubic-pencil space rather than add
+another generic counting or invariance structure with no mathematical action behind it.
 
 No projective group action was fabricated merely to strengthen the interface.  The orbit structure
 records counts and exhaustion as visible inputs until the degree-specific developments construct
@@ -137,6 +154,9 @@ Settled:
 - **Must the geometric, Hankel, radius, and exhaustion predicates be definitionally identical?**
   No.  Pointwise logical equivalence suffices for both witness-to-shallow and complete synthesis;
   the formal interface now matches that weaker mathematical requirement.
+- **Is covering radius part of every exact coding classification?** No.  It is one route to
+  positive deepness from split-freeness.  When persistent deepness is proved directly and every
+  exceptional syndrome has a shallow witness, exact classification follows without it.
 - **Could geometric existence or orbit exhaustion enter as a hidden axiom?** No.  Each is a named
   structure field, and the audit contains no project-specific axioms.
 - **Can the established redundancy-nine package consume the common interface?** Yes.  Its adapter
