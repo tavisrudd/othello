@@ -354,7 +354,16 @@ same quadratic moment on both sheets.  Their weighted difference is
 therefore a second trade, independent of the full-support sign.  Translation
 power sums reduce the identity to the absent square-axis character \(s^2\);
 the bottom and complementary four-jets agree under \(c\leftrightarrow
-c^{-1}\).  Diagonalization over \(\mathbb F_{q^2}\) and Frobenius-fixed
+c^{-1}\).  The Möbius transformation law identifies the \(H\)-span of this
+trade with the simple nine-space
+\(L(8)=L(2)\otimes L(2)^{(1)}\), so the kernel contains
+\(\mathbf1\oplus L(8)\) and has dimension at least ten.
+The q=27 replay sharply separates two copies of that same simple type: the
+naive axis-digit nine-space has moment rank nine, while the
+inverse-discriminant nine-space has moment rank zero.  This is the concrete
+warning for C1 that composition factors do not identify the relevant copy.
+Diagonalization
+over \(\mathbb F_{q^2}\) and Frobenius-fixed
 discriminant weight descend the nonsplit case, while the antipodal type is
 outer-fixed and cannot split.  The q=27 full coefficient-space replay and
 the independent q=27/q=243 moment projection cross-check the identity.

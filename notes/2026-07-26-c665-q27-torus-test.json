@@ -23,7 +23,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -69,7 +70,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -115,7 +117,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -161,7 +164,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -207,7 +211,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -253,7 +258,8 @@
       "axis_weight_four_difference": {
         "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
         "common_moment_rank": 1,
-        "difference_moment_rank": 0
+        "difference_moment_rank": 0,
+        "h_span_dimension": 9
       },
       "defect_quotient": {
         "dimension": 5,
@@ -305,7 +311,7 @@
     }
   ],
   "replacement_gate": "the former lambda+1 and rank-one defect bounds fail; all split orbits have defect increment 5 and nine translation-invariant trades",
-  "schema": 2,
+  "schema": 3,
   "torus_g_orbit_count": 7,
   "torus_matching_count": 13
 }

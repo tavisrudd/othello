@@ -480,13 +480,14 @@ It also checks the fixed-correction identity for all thirteen parameters
 and tests three explicit substitute coefficient families.  The first two
 fail as recorded above; the discriminant-weight-four family is a nonzero
 common moment on every split orbit and its sheet difference has zero full
-quadratic moment.  The human torus-torsor classification and
+quadratic moment.  Its exact \(H\)-span has dimension nine and remains
+inside the full trade kernel.  The human torus-torsor classification and
 Dickson-resultant derivation are independent
 of this enumeration; there is no second implementation of the full
 756-column quadratic rank.  The certificate covers exactly q=27 and does
 not extrapolate \(N_5\) to another field.  The checker and certificate have
-respectively 16,477 and 8,595 bytes; their SHA-256 values are pinned in
-`2026-07-26-c665-q27-torus-test.sha256`, together with the 17,954-byte
+respectively 17,566 and 8,781 bytes; their SHA-256 values are pinned in
+`2026-07-26-c665-q27-torus-test.sha256`, together with the 19,080-byte
 Sage preparse mirror.
 
 The sheet permutation character is
@@ -1735,20 +1736,50 @@ has a nontrivial Borel character while the sign is \(H\)-fixed.  Therefore
 
 The exact q=27 full coefficient-space replay checks (B4) on all six split
 orbits.  In every row the common weight-four moment is nonzero and the
-two sheet moments agree.  The independent q=27/q=243
+two sheet moments agree; the \(H\)-span of the difference has dimension
+nine and is annihilated by the full quadratic moment matrix.  The
+independent q=27/q=243
 evaluation-functional route sees the same absent \(s^2\) character; unlike
 its former rank bound, that observation is now only a cross-check of the
 coefficient proof.
 
 ### Intersection closeout: `ej` + `tt`
 
-The cheap representation-theoretic upgrade is automatic.  The trade kernel
-is \(H\)-stable, so the \(H\)-span of \(\tau_4\) is a nontrivial trade
-submodule, not merely one accidental coefficient vector.  Because
-\(\tau_4\) has nontrivial Borel character, this submodule is not the
-trivial sign line.  Thus the geometric identity supplies exactly the
-nonprincipal survival that H1 could not obtain from a \(3'\)-dimensional
-simple head.
+The cheap representation-theoretic upgrade is stronger than one extra
+vector.  For
+\(g=\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)\),
+\[
+ g(x)-g(y)=\frac{\det(g)(x-y)}{(cx+d)(cy+d)}
+\]
+gives
+\[
+ w(gA)=\det(g)^{-4}(cx+d)^4(cy+d)^4w(A).         \tag{M4}
+\]
+Thus the \(H\)-span of \(w\) is the highest-weight-eight cyclic module.
+In characteristic three,
+\[
+ 8=2+2\cdot3,\qquad
+ L(8)=L(2)\otimes L(2)^{(1)},\qquad \dim L(8)=9.
+\]
+The Weyl module \(\Delta(8)\) also has dimension nine, so it is already
+this simple module.  Since \(8<q\), its restriction to the finite group
+remains simple, and the nonzero axis-evaluation map is injective.  Since
+the trade kernel is \(H\)-stable, (T4) therefore proves
+the uniform strengthening
+\[
+ \mathbf1\oplus L(8)\ \subseteq\ker\mu,\qquad
+ \dim\ker\mu\ge10.                               \tag{T10}
+\]
+This is exactly the nonprincipal survival that H1 could not obtain from a
+\(3'\)-dimensional simple head.  It also explains why the earlier naive
+\(L(2)\otimes L(2)^{(1)}\) axis-coordinate difference could fail: that
+map selected a different occurrence of the same isomorphism type, whereas
+the inverse-discriminant vector realizes the socle copy killed by the
+moment map.  The q=27 replay makes the distinction literal: the naive
+axis-digit nine-space has moment rank nine, while the inverse-discriminant
+nine-space has moment rank zero on every split orbit.  Composition factors
+alone cannot distinguish those two copies; the explicit Borel coefficient
+does.
 
 The `tt` audit checks the two fragile boundaries directly.  The proof uses
 only the \(s^2\) coefficient and makes no statement about the other 50
@@ -1756,8 +1787,8 @@ projected q=243 correction characters; hence it does not revive a
 constant-defect claim.  The nonsplit step descends the coefficient identity,
 not the failed \(\Delta(4)\) quotient, and the antipodal matching is removed
 before descent because its outer normalizer prevents a two-sheet orbit.
-No characteristic-three mystery remains.  Uniform extension-field C1 is
-still separate and is the sole live Platinum gap.
+No characteristic-three mystery remains for T3.  Uniform extension-field
+C1 is still separate and is the sole live Platinum gap.
 
 ### Mystery ledger refresh
 
@@ -1767,4 +1798,5 @@ still separate and is the sole live Platinum gap.
 | Uniform \(N_5\) / twisted \(\Delta(4)\) | closed negatively | The exact q=243 rank \(136>127\) falsifies every such factorization. |
 | Characteristic-three split T3 | settled | The discriminant-weight-four vector (T4) is a second invariant trade; it uses one absent Borel character and imposes no defect bound. |
 | Nonsplit descent | settled | Diagonalization over \(\mathbb F_{q^2}\), Frobenius-fixed discriminant weight, and exclusion of the outer-fixed antipodal type descend the same trade. |
+| q=27 invariant-trade excess | open but non-load-bearing | The sign plus \(L(8)\) explain two \(U\)-fixed trade directions, while the exact norm kernel has dimension nine.  The other seven are field-specific structure; no successor is allocated because T3 is already uniform. |
 | Extension-field C1 | unchanged | The first embedded nonretract remains unknown beyond the q=25 and q=49 affine-socle exclusions. |

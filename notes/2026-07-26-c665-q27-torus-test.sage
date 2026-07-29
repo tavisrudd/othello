@@ -10,7 +10,7 @@ import argparse
 import json
 from pathlib import Path
 
-from sage.all import GF, PolynomialRing, matrix
+from sage.all import GF, PolynomialRing, matrix, vector
 
 
 q = 27
@@ -252,10 +252,34 @@ def evaluate(representative, orbit, orbit_number):
         weight_four_moments = square * weight_four_difference.transpose()
         assert not weight_four_plus_moments.is_zero()
         assert weight_four_moments.is_zero()
+
+        def act_on_coefficients(coefficients, generator):
+            answer = vector(k, len(orbit))
+            for source, matching in enumerate(orbit):
+                target = orbit_index[image(generator, matching)]
+                answer[target] = coefficients[source]
+            return answer
+
+        weight_four_span = [weight_four_difference.row(0)]
+        while True:
+            candidates = weight_four_span + [
+                act_on_coefficients(coefficients, generator)
+                for coefficients in weight_four_span
+                for generator in h_generators
+            ]
+            enlarged = list(matrix(k, candidates).row_space().basis())
+            if len(enlarged) == len(weight_four_span):
+                break
+            weight_four_span = enlarged
+        assert len(weight_four_span) == 9
+        assert (
+            square * matrix(k, weight_four_span).transpose()
+        ).is_zero()
         weight_four_trade = {
             "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
             "common_moment_rank": weight_four_plus_moments.rank(),
             "difference_moment_rank": weight_four_moments.rank(),
+            "h_span_dimension": len(weight_four_span),
         }
     else:
         axis_incidence = None
@@ -425,10 +449,13 @@ def calculate():
         and record["axis_weight_four_difference"][
             "difference_moment_rank"
         ] == 0
+        and record["axis_weight_four_difference"][
+            "h_span_dimension"
+        ] == 9
         for record in split_records
     )
     return {
-        "schema": 2,
+        "schema": 3,
         "q": q,
         "field_modulus": str(k.modulus()),
         "torus_matching_count": len(torus_matchings),
