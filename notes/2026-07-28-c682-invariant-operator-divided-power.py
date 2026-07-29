@@ -553,6 +553,41 @@ def build_certificate() -> dict[str, object]:
                     * image.get((12 - row, row), 0)
                 ) % PRIME
         transvectant_corrections.append(correction)
+    right_slot_matrix = [
+        list(row)
+        for row in zip(
+            *[
+                [value for matrix_row in correction for value in matrix_row]
+                for correction in transvectant_corrections
+            ]
+        )
+    ]
+    right_slot_kernel = MM.nullspace(right_slot_matrix, PRIME)
+    expected_frobenius_kernel = [
+        [int(index == basis_index) for index in range(13)]
+        for basis_index in (0, 1, 11, 12)
+    ]
+    assert MM.rank(right_slot_matrix, PRIME) == 9
+    assert right_slot_kernel == expected_frobenius_kernel
+    f_bar = mod_poly(F)
+    tangent_polynomials = [
+        multiply({(1, 0): 1}, derivative(f_bar, 1, 0)),
+        multiply({(0, 1): 1}, derivative(f_bar, 1, 0)),
+        multiply({(1, 0): 1}, derivative(f_bar, 0, 1)),
+        multiply({(0, 1): 1}, derivative(f_bar, 0, 1)),
+    ]
+    tangent_matrix = [
+        [
+            tangent.get((12 - row, row), 0) % PRIME
+            for tangent in tangent_polynomials
+        ]
+        for row in range(13)
+    ]
+    assert MM.rank(tangent_matrix, PRIME) == 4
+    assert {
+        next(row for row, value in enumerate(column) if value)
+        for column in zip(*tangent_matrix)
+    } == {0, 1, 11, 12}
     correction_equations = []
     correction_rhs = []
     for source_action, target_action in zip(source_actions, target_actions):
@@ -752,6 +787,27 @@ def build_certificate() -> dict[str, object]:
             "span{x^12,x^11y,xy^11,y^12}; its ordinary third "
             "derivatives vanish modulo 11"
         ),
+        "right_slot_transvectant_rank_mod_11": MM.rank(
+            right_slot_matrix, PRIME
+        ),
+        "right_slot_transvectant_kernel": [
+            serialize_poly(
+                {
+                    (12 - row, row): value
+                    for row, value in enumerate(vector)
+                    if value
+                }
+            )
+            for vector in right_slot_kernel
+        ],
+        "frobenius_kernel_identification": (
+            "V^(1) tensor V inside Sym^12; over F_11 this is the raw "
+            "infinitesimal GL2 orbit of x^11 y-x y^11"
+        ),
+        "dickson_raw_gl2_tangent_basis": [
+            serialize_poly(mod_poly(tangent)) for tangent in tangent_polynomials
+        ],
+        "repair_class_quotient_dimension": 9,
         "tt_repaired_primitive_matrix": repaired_primitive,
         "tt_repaired_primitive_rank": MM.rank(repaired_primitive, PRIME),
         "tt_repaired_operator_is_a5_equivariant": True,

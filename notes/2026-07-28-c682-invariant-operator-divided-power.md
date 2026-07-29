@@ -234,6 +234,32 @@ After the displayed correction, each residual lift defect lies in
 the operator-visible quotient, which is the correct datum for the
 order-three bridge.
 
+The `ej` pass makes the quotient intrinsic.  The complete right-slot map
+\[
+ \Theta:\operatorname{Sym}^{12}\longrightarrow
+ \operatorname{Hom}(\operatorname{Sym}^6,\operatorname{Sym}^{12}),
+ \qquad K\longmapsto(\,\cdot\,,K)_3
+\]
+has rank \(9\) and kernel exactly \(W_{\mathrm{Fr}}\).  Moreover,
+\[
+ W_{\mathrm{Fr}}=V^{(1)}\otimes V
+\]
+inside degree \(12\): its four displayed monomials are the products of a
+degree-\(11\) Frobenius coordinate with a linear coordinate.  It is also
+the raw infinitesimal \(GL_2\)-orbit of the Dickson form
+\(\bar F=X^{11}Y-XY^{11}\), since
+\[
+ X\bar F_X,\quad Y\bar F_X,\quad X\bar F_Y,\quad Y\bar F_Y
+\]
+are nonzero scalar multiples of the four basis monomials.  Consequently,
+the bridge determines a canonical class
+\[
+ [K]\in\operatorname{Sym}^{12}/(V^{(1)}\otimes V),
+\]
+while changing its representative is exactly first-order
+coordinate/scalar gauge.  The previously unexplained four degrees of
+freedom are therefore fully accounted for.
+
 If \(J:P_{10}\to\operatorname{Sym}^6\) is the unique C651 source
 intertwiner and \(T:P_{10}\to\operatorname{Sym}^{12}\) is the unique
 target intertwiner with \(\ker T=\ker J\), the exact marked comparison is
@@ -444,8 +470,13 @@ the obstruction checks without importing the primary script.
   bridge.  The displayed \(K\) makes the full ambient operator equivariant,
   and \(P^{\mathrm{tt}}J=5T\).
 - **Explained:** the four remaining degrees of freedom are exactly the
-  Frobenius-invisible space \(W_{\mathrm{Fr}}\), not an uncontrolled
-  normalization.
+  Frobenius-invisible space \(W_{\mathrm{Fr}}=V^{(1)}\otimes V\), the
+  kernel of the right-slot third transvectant and the raw infinitesimal
+  \(GL_2\)-orbit of \(\bar F\), not an uncontrolled normalization.
+- **Open:** whether the canonical first-order class
+  \([K]\in\operatorname{Sym}^{12}/(V^{(1)}\otimes V)\) extends to a
+  compatible \(11\)-adic tower.  The next exact gate is the mod-\(11^3\)
+  lift equation modulo coordinate/scalar gauge.
 - **Open:** an intrinsic geometric interpretation of the scalar
   principal cubic \(p\).
 - **Open:** source-deep forward-citation closure strong enough to remove

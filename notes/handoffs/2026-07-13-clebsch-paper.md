@@ -808,13 +808,18 @@ the divided operator attached to \(F+11K\bmod121\) is fully
 \(A_5\)-equivariant and the marked source-to-target map is scalar \(5\).
 The correction is unique modulo
 \(\langle X^{12},X^{11}Y,XY^{11},Y^{12}\rangle\), whose ordinary third
-derivatives vanish modulo \(11\).
+derivatives vanish modulo \(11\).  The `ej` pass identifies this ambiguity
+intrinsically as \(V^{(1)}\otimes V\), simultaneously the complete
+right-slot kernel of \((\,\cdot\,,K)_3\) and the raw infinitesimal
+\(GL_2\)-orbit of the Dickson form.  Hence the repair is a canonical class
+in the nine-dimensional quotient
+\(\operatorname{Sym}^{12}/(V^{(1)}\otimes V)\).
 The source records, exact certificate, independent replay, and mystery
 ledger are in
 `notes/2026-07-28-c682-invariant-operator-divided-power.md`.  The next
 \(E_8\) mathematical frontier is the intrinsic meaning of \(p\) and the
 other McKay blocks; the arithmetic frontier is now a conceptual
-interpretation of the corrected lift and its Frobenius ambiguity.
+mod-\(11^3\) test for an \(11\)-adic tower of the corrected lift.
 
 C682's remaining Platinum track is:
 

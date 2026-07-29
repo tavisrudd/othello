@@ -476,6 +476,36 @@
     ]
   ],
   "c651_integral_cubic_line": "sigma_3=(sum_i y_i^3)/3 on sum_i y_i=0",
+  "dickson_raw_gl2_tangent_basis": [
+    [
+      {
+        "coefficient": 10,
+        "x": 1,
+        "y": 11
+      }
+    ],
+    [
+      {
+        "coefficient": 10,
+        "x": 0,
+        "y": 12
+      }
+    ],
+    [
+      {
+        "coefficient": 1,
+        "x": 12,
+        "y": 0
+      }
+    ],
+    [
+      {
+        "coefficient": 1,
+        "x": 11,
+        "y": 1
+      }
+    ]
+  ],
   "equivariant_pair_to_sym12_four_intertwiner": [
     [
       1,
@@ -635,6 +665,7 @@
     ]
   ],
   "field": "F_11",
+  "frobenius_kernel_identification": "V^(1) tensor V inside Sym^12; over F_11 this is the raw infinitesimal GL2 orbit of x^11 y-x y^11",
   "inputs": {
     "notes/2026-07-26-c651-hitchin-tensor-bridge.json": {
       "bytes": 4369,
@@ -1142,6 +1173,38 @@
     ]
   ],
   "primitive_transvectant_pair_to_sym12_rank": 4,
+  "repair_class_quotient_dimension": 9,
+  "right_slot_transvectant_kernel": [
+    [
+      {
+        "coefficient": 1,
+        "x": 12,
+        "y": 0
+      }
+    ],
+    [
+      {
+        "coefficient": 1,
+        "x": 11,
+        "y": 1
+      }
+    ],
+    [
+      {
+        "coefficient": 1,
+        "x": 1,
+        "y": 11
+      }
+    ],
+    [
+      {
+        "coefficient": 1,
+        "x": 0,
+        "y": 12
+      }
+    ]
+  ],
+  "right_slot_transvectant_rank_mod_11": 9,
   "schema": "clebsch-invariant-operator-divided-power-v1",
   "source_action": "det(g)^3 Sym^6(g^{-1})",
   "sym6_primitive_matrix": [

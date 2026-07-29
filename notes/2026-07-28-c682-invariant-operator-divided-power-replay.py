@@ -406,6 +406,52 @@ def main() -> int:
                     * image.get((12 - row, row), 0)
                 ) % PRIME
         transvectant_corrections.append(correction)
+    right_slot_matrix = [
+        list(row)
+        for row in zip(
+            *[
+                [value for matrix_row in correction for value in matrix_row]
+                for correction in transvectant_corrections
+            ]
+        )
+    ]
+    assert rank(right_slot_matrix) == certificate[
+        "right_slot_transvectant_rank_mod_11"
+    ] == 9
+    expected_kernel_records = [
+        [{"x": 12 - index, "y": index, "coefficient": 1}]
+        for index in (0, 1, 11, 12)
+    ]
+    assert certificate["right_slot_transvectant_kernel"] == expected_kernel_records
+    for kernel_records in expected_kernel_records:
+        kernel = poly(kernel_records)
+        vector = [kernel.get((12 - row, row), 0) for row in range(13)]
+        assert all(
+            sum(row[index] * vector[index] for index in range(13)) % PRIME == 0
+            for row in right_slot_matrix
+        )
+    f_bar = mod(klein)
+    tangent_polynomials = [
+        product({(1, 0): 1}, derivative(f_bar, 1, 0)),
+        product({(0, 1): 1}, derivative(f_bar, 1, 0)),
+        product({(1, 0): 1}, derivative(f_bar, 0, 1)),
+        product({(0, 1): 1}, derivative(f_bar, 0, 1)),
+    ]
+    tangent_records = [
+        [
+            {"x": x, "y": y, "coefficient": coefficient % PRIME}
+            for (x, y), coefficient in sorted(mod(tangent).items(), reverse=True)
+        ]
+        for tangent in tangent_polynomials
+    ]
+    assert tangent_records == certificate["dickson_raw_gl2_tangent_basis"]
+    tangent_matrix = [
+        [tangent.get((12 - row, row), 0) % PRIME for tangent in tangent_polynomials]
+        for row in range(13)
+    ]
+    assert rank(tangent_matrix) == 4
+    assert certificate["repair_class_quotient_dimension"] == 9
+
     equations = []
     right_sides = []
     for source_action, target_action in zip(source_actions, target_actions):
