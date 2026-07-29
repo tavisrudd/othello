@@ -1166,9 +1166,36 @@ intrinsically: a \(D_5\) kernel and an \(S_3\) kernel are incident exactly
 when their three-planes meet in dimension one.  The theorem, proof,
 certificate, independent replay, scope boundary, and mystery ledger are in
 `notes/2026-07-28-c682-maximal-subgroup-mates.md`.  The remaining geometric
-gate is a characteristic-zero transvectant/operator realization of this
-correspondence, including the kernel-rank incidence, or a natural source
+question from that report was an operator realization and a natural source
 for the complementary Schläfli six.
+
+That operator and complementary-six gate is now closed.  Pulling the
+ordinary rank-four third-transvectant map
+\(F\mapsto T_F=((\,\cdot\,,F)_3)\) along the maximal-subgroup mate
+correspondence realizes all four characteristic-zero components.  On the
+\(D_5\) component, a mate pair has
+\(U_F\cap U_{F_i}=\langle q_i^3\rangle\).  If
+\(\mathcal T_i=q_i^2\operatorname{Sym}^2\) is the tangent plane to the
+cubic Veronese there, then
+\[
+ E_i=V_F\cap\mathcal T_i=V_F\cap V_{F_i},
+ \qquad
+ E_i'=V_F\cap\mathcal T_i^\perp .
+\]
+The second cut is exactly Hitchin's pencil of cubics singular at the
+\(i\)-th axis.  Over \(\mathbf Q(\zeta_5)\), the six axes
+\(XY\) and \(X^2+bXY-b^2Y^2\), \(b^5=1\), give the full double-six
+intersection matrix: lines in either row are pairwise skew, while
+\(E_i\) meets \(E_j'\) exactly for \(i\ne j\).  Thus the complementary
+six is a functorial apolar-polar companion of the \(D_5\) operator branch,
+not a second mate component and not merely an externally imposed outer
+automorphism.  The exact characteristic-zero certificate and independent
+two-prime replay are in
+`notes/2026-07-28-c682-operator-schlafli.md`.
+The remaining operator-side frontier is the characteristic-zero
+\(D_5\)--\(S_3\) kernel-rank realization of the
+\((6_5,10_3)\) incidence; the broader mysteries are a global row-swap
+involution and the minimal integral base.
 
 C682's remaining Platinum track is:
 
