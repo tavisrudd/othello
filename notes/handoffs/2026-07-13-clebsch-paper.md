@@ -1128,9 +1128,24 @@ the reduction of the \(5J_0\) discriminant character; the frozen pencil
 normalization fixes the literal ratio \(5/1\).  The proof and scope
 boundary are in
 `notes/2026-07-28-c682-kernel-incidence-morphism.md`.  The remaining
-geometric frontier is a canonical flattening of the operator-side kernel
-map across non-constant-rank degenerations, or a classical moduli meaning
+geometric frontier was a canonical flattening of the operator-side kernel
+map across non-constant-rank degenerations or a classical moduli meaning
 for the \(D_5/S_3\) branches.
+
+The classical moduli frontier is now closed.  The six \(D_5\) kernels are
+the nonradial common-fivefold-axis mates of the marked icosahedron; their
+common-annihilator pencils are exactly the exceptional Schlaefli six on the
+Clebsch cubic surface.  The ten \(S_3\) kernels are the opposite-face-axis
+mates over the centered pentahedral edge points
+\(q_\alpha+q_\beta\), not the adjacent Eckardt differences
+\(q_\alpha-q_\beta\).  Thus the complete \(1+5+6+10\) section is the
+maximal-subgroup incidence star of a marked icosahedron.  Exact
+reconstruction and an independent apolar replay agree.  The proof, source
+boundary, and mystery ledger are in
+`notes/2026-07-28-c682-incidence-moduli.md`.  The remaining geometric
+frontier is the canonical flattening or a single characteristic-zero
+correspondence producing all three \(A_4,D_5,S_3\) mate components
+intrinsically.
 
 C682's remaining Platinum track is:
 
