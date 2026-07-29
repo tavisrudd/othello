@@ -46,6 +46,12 @@ terminals = [
   "RepairPorts.noRepairProbability_eq_erasureFailure",
   "RepairPorts.cheapestRepairRadiusProbability",
   "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub",
+  "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte",
+  "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator",
+  "RepairPorts.portReliability_pair_homogeneous",
+  "RepairPorts.disjointTripleRepairs_reliability",
+  "RepairPorts.overlappingTripleRepairs_reliability",
+  "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
   "RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum",
   "RepairPorts.coeff_blockerFailurePolynomial_at_minimum",
   "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
@@ -206,6 +212,36 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.portReliability_pair_homogeneous"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.disjointTripleRepairs_reliability"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.overlappingTripleRepairs_reliability"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping"
 gates = ["RepairPorts.Gates.CompletePorts"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 

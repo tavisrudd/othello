@@ -1,20 +1,27 @@
 # Complete bounded repair ports: trust manifest
 
-This manifest covers the Lean declarations supporting *Complete Bounded Repair Ports: Transfer,
-Reliability, and Geometric Structure*.  The paper-facing boundary is the import closure of
+This manifest covers the Lean declarations supporting *Complete Bounded Repair Ports: Local
+Memory, Transfer, and Reliability*.  The paper-facing boundary is the import closure of
 `RepairPorts.Gates.CompletePorts`.
 
 ## Terminal claims
 
 The gate exports the exact support/coefficient bridge, reconstruction radius, MDS reconstruction,
-pointed functional strata and transfer, positive-density fingerprints, and the finite reliability
-and bounded-EXIT calculus.  The complete terminal list and each declared axiom set live in
+pointed functional strata and transfer, positive-density fingerprints, finite reliability and
+bounded-EXIT calculus, and the pointed rank-sum specialization with its radius-filtration
+boundary.  The complete terminal list and each declared axiom set live in
 `trust/areas/complete_ports.toml`.
 
 The reliability terminals prove deletion--contraction, pivotal derivatives, the homogeneous
 Russo--Margulis identity, erasure-sign conditioning, the no-repair convention, radius truncation,
 cheapest-repair-radius transforms, and the minimum-blocker expansion by finite sums and polynomial
 algebra.  Exact finite profiles and Poisson approximations are not in these dependency closures.
+
+The pointed-Tutte terminals identify the distinguished-element rank-jump subset sum with the
+rank-one deletion--contraction perspective, identify the evaluated derivative difference with the
+successful-set enumerator, and prove the two-repair inclusion--exclusion formula that separates
+disjoint and overlapping radius-three repairs.  Matroid deletion, contraction, and duality enter
+the manuscript as the displayed classical rank identities, not as project axioms.
 
 ## Trust boundary
 

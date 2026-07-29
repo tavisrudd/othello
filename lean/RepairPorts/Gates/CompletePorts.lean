@@ -1,4 +1,5 @@
 import RepairPorts.MDSReconstruction
+import RepairPorts.PointedTutte
 import RepairPorts.PointedTransfer
 import RepairPorts.PositiveDensity
 import RepairPorts.Reliability
@@ -44,6 +45,12 @@ enumerator occurs in these dependency closures.
 #print axioms RepairPorts.noRepairProbability_eq_erasureFailure
 #print axioms RepairPorts.cheapestRepairRadiusProbability
 #print axioms RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub
+#print axioms RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte
+#print axioms RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator
+#print axioms RepairPorts.portReliability_pair_homogeneous
+#print axioms RepairPorts.disjointTripleRepairs_reliability
+#print axioms RepairPorts.overlappingTripleRepairs_reliability
+#print axioms RepairPorts.disjointTripleRepairs_reliability_ne_overlapping
 #print axioms RepairPorts.blockerCount_eq_minimalBlockerCount_at_minimum
 #print axioms RepairPorts.coeff_blockerFailurePolynomial_at_minimum
 #print axioms RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum
