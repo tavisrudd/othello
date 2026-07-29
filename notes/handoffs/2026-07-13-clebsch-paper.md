@@ -849,6 +849,27 @@ certificate, independent replay, and mystery ledger are in
 equation is closed; its intrinsic relation to the global incidence cover
 or golden-fibre integral model remains open.
 
+C682 now closes the marked special-fibre deformation map.  The ordinary
+nine-dimensional dodecic normal quotient is insufficient because the
+primitive Bockstein operator lies outside the ordinary third-transvectant
+image.  Adjoining that one direction gives a ten-dimensional extended
+normal space and a homogeneous kernel map to isotropic three-planes.  The
+selected line \((1,[K])\) and its exchanger-conjugate map to two distinct
+parents whose apolar four-planes meet in
+\[
+ \langle X^6+6X^4Y^2+6X^2Y^4+Y^6\rangle,
+\]
+exactly the binary line representing \(xyz\).  The known finite-etale
+degree-two theorem makes these the complete marked incidence fibre, with
+orientation scalars \(4,-4\).  Conversely, annihilating either parent in
+the extended operator space uniquely recovers its normal line.  Thus the
+correct bridge is a two-sided kernel--apolar--incidence diagram, not the
+ill-typed equality \([K]=d(5J_0)\).  The proof, exact certificate,
+independent replay, trust boundary, and mystery ledger are in
+`notes/2026-07-28-c682-transvectant-deformation-map.md`.  The remaining
+integral question is to globalize this Bockstein extension as a formal
+normal-cone or first-jet map over \(\mathbf Z_{11}\).
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to

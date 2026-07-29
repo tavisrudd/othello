@@ -1,0 +1,622 @@
+{
+  "bases": {
+    "H_equals_Sym6": "X^(6-i)Y^i, 0<=i<=6",
+    "dodecics_equals_Sym12": "X^(12-i)Y^i, 0<=i<=12"
+  },
+  "exchanger": {
+    "binary_PGL2_matrix": [
+      1,
+      3,
+      3,
+      6
+    ],
+    "cocycle_identity": "rho12(R) P_F rho6(R)^(-1)-P_F=5*(-,c_R)_3",
+    "determinant_mod_11": 8,
+    "euclidean_matrix": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "normalization_mod_121": 100,
+    "operator_cocycle": [
+      {
+        "coefficient": 3,
+        "x": 12,
+        "y": 0
+      },
+      {
+        "coefficient": 1,
+        "x": 11,
+        "y": 1
+      },
+      {
+        "coefficient": 3,
+        "x": 10,
+        "y": 2
+      },
+      {
+        "coefficient": 1,
+        "x": 9,
+        "y": 3
+      },
+      {
+        "coefficient": 9,
+        "x": 8,
+        "y": 4
+      },
+      {
+        "coefficient": 10,
+        "x": 7,
+        "y": 5
+      },
+      {
+        "coefficient": 7,
+        "x": 6,
+        "y": 6
+      },
+      {
+        "coefficient": 9,
+        "x": 5,
+        "y": 7
+      },
+      {
+        "coefficient": 3,
+        "x": 4,
+        "y": 8
+      },
+      {
+        "coefficient": 8,
+        "x": 3,
+        "y": 9
+      },
+      {
+        "coefficient": 4,
+        "x": 2,
+        "y": 10
+      },
+      {
+        "coefficient": 10,
+        "x": 0,
+        "y": 12
+      }
+    ],
+    "operator_cocycle_quotient_coordinates": [
+      3,
+      1,
+      9,
+      10,
+      7,
+      9,
+      3,
+      8,
+      4
+    ],
+    "parameter_permutation": [
+      3,
+      5,
+      10,
+      1,
+      8,
+      0,
+      9,
+      11,
+      6,
+      4,
+      7,
+      2
+    ]
+  },
+  "extended_normal_space": {
+    "P_F_is_outside_ordinary_transvectant_image": true,
+    "bockstein_direction": "P_F, the primitive divided operator of the fixed lift F",
+    "extended_normal_dimension": 10,
+    "homogenized_map": "widehatTheta(a,[L])=a*P_F+5*(-,L)_3; kappa([a,L])=ker(widehatTheta(a,[L])) on the rank-four locus",
+    "ordinary_normal_dimension": 9,
+    "ordinary_normal_quotient": "Sym^12/(V^(1) tensor V), with Frobenius indices 0,1,11,12 removed",
+    "ordinary_third_transvectant_kernel": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "ordinary_third_transvectant_rank": 9
+  },
+  "field": "F_11",
+  "incidence_map": {
+    "annihilator_intersection_dimension": 1,
+    "common_incidence_line": [
+      1,
+      0,
+      6,
+      0,
+      6,
+      0,
+      1
+    ],
+    "conclusion": "The two exchanged extended normal lines map to two distinct fifth-transvectant-isotropic parent planes whose annihilator four-planes meet in the binary sextic line representing xyz.",
+    "conic_quadratic_parameterization": [
+      [
+        7,
+        8,
+        4
+      ],
+      [
+        4,
+        8,
+        7
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "conjugate_annihilator_four_plane": [
+      [
+        1,
+        9,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        8,
+        0,
+        7,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        3,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        3,
+        8,
+        0,
+        2,
+        0,
+        0,
+        1
+      ]
+    ],
+    "definition": "([a,L],[f]) maps to ([f],ker widehatTheta(a,[L])) when f lies in the apolar annihilator of the kernel",
+    "exchanger_scalar_on_common_line": 10,
+    "orientation_scalars_mod_11": [
+      4,
+      7
+    ],
+    "selected_annihilator_four_plane": [
+      [
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        3,
+        0,
+        4,
+        1,
+        0,
+        0
+      ],
+      [
+        10,
+        3,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        3,
+        3,
+        0,
+        9,
+        0,
+        0,
+        1
+      ]
+    ],
+    "xyz_restriction_scalar_times_common_line": 6,
+    "xyz_restriction_to_parameter_conic": [
+      6,
+      0,
+      3,
+      0,
+      3,
+      0,
+      6
+    ]
+  },
+  "inputs": {
+    "notes/2026-07-28-c682-corrected-bridge-mod-1331.json": {
+      "bytes": 10288,
+      "sha256": "f56786b7ef147b647fdb7133f4896b06f20118b509a7e7ccd85b5cf07070c805"
+    },
+    "notes/2026-07-28-c682-invariant-operator-divided-power.json": {
+      "bytes": 19785,
+      "sha256": "dceecc551d122d5cd59ecbb5aabd440222fec5f61e5e6dbc1e6c3589762ce950"
+    },
+    "notes/2026-07-28-c682-invariant-operator-divided-power.py": {
+      "bytes": 31525,
+      "sha256": "b0a985fbc18666f04e682add427f836c8f0b2708cd2a246048fd946e5266b991"
+    },
+    "papers/clebsch-passages/verification/evidence/arithmetic_cover.json": {
+      "bytes": 1151,
+      "sha256": "c0e338960cd0a12a7eab85a7f000847349327564142178af97a03a54aef23c41"
+    }
+  },
+  "kernel_map": {
+    "conjugate_inverse_equation_rank": 9,
+    "conjugate_kernel": [
+      [
+        10,
+        3,
+        8,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        5,
+        8,
+        9,
+        0,
+        6,
+        1,
+        0
+      ],
+      [
+        8,
+        6,
+        9,
+        0,
+        7,
+        0,
+        1
+      ]
+    ],
+    "conjugate_operator_rank": 4,
+    "conjugate_recovered_extended_normal_line": [
+      1,
+      1,
+      5,
+      4,
+      8,
+      7,
+      3,
+      4,
+      6,
+      1
+    ],
+    "exchanger_covariance": true,
+    "fifth_transvectant_isotropy_conjugate": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "fifth_transvectant_isotropy_selected": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "inverse_annihilator_construction": "U maps to the projective kernel of (a,[L]) -> widehatTheta(a,[L]) restricted to U",
+    "kernel_and_extended_annihilator_are_inverse_on_golden_pair": true,
+    "kernels_are_distinct": true,
+    "selected_inverse_equation_rank": 9,
+    "selected_kernel": [
+      [
+        1,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        8,
+        2,
+        0,
+        5,
+        1,
+        0
+      ],
+      [
+        8,
+        5,
+        9,
+        0,
+        7,
+        0,
+        1
+      ]
+    ],
+    "selected_operator_rank": 4,
+    "selected_recovered_extended_normal_line": [
+      1,
+      10,
+      5,
+      7,
+      8,
+      2,
+      3,
+      7,
+      6,
+      10
+    ],
+    "sum_dimension": 6
+  },
+  "normal_lines": {
+    "conjugate_K": [
+      {
+        "coefficient": 4,
+        "x": 12,
+        "y": 0
+      },
+      {
+        "coefficient": 1,
+        "x": 10,
+        "y": 2
+      },
+      {
+        "coefficient": 5,
+        "x": 9,
+        "y": 3
+      },
+      {
+        "coefficient": 4,
+        "x": 8,
+        "y": 4
+      },
+      {
+        "coefficient": 8,
+        "x": 7,
+        "y": 5
+      },
+      {
+        "coefficient": 7,
+        "x": 6,
+        "y": 6
+      },
+      {
+        "coefficient": 3,
+        "x": 5,
+        "y": 7
+      },
+      {
+        "coefficient": 4,
+        "x": 4,
+        "y": 8
+      },
+      {
+        "coefficient": 6,
+        "x": 3,
+        "y": 9
+      },
+      {
+        "coefficient": 1,
+        "x": 2,
+        "y": 10
+      },
+      {
+        "coefficient": 8,
+        "x": 1,
+        "y": 11
+      },
+      {
+        "coefficient": 3,
+        "x": 0,
+        "y": 12
+      }
+    ],
+    "conjugate_line": "(1,[K_R])=R*(1,[K])",
+    "lines_are_distinct": true,
+    "quotient_coordinate_indices": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "quotient_coordinate_pair": [
+      [
+        10,
+        5,
+        7,
+        8,
+        2,
+        3,
+        7,
+        6,
+        10
+      ],
+      [
+        1,
+        5,
+        4,
+        8,
+        7,
+        3,
+        4,
+        6,
+        1
+      ]
+    ],
+    "selected_K": [
+      {
+        "coefficient": 10,
+        "x": 10,
+        "y": 2
+      },
+      {
+        "coefficient": 5,
+        "x": 9,
+        "y": 3
+      },
+      {
+        "coefficient": 7,
+        "x": 8,
+        "y": 4
+      },
+      {
+        "coefficient": 8,
+        "x": 7,
+        "y": 5
+      },
+      {
+        "coefficient": 2,
+        "x": 6,
+        "y": 6
+      },
+      {
+        "coefficient": 3,
+        "x": 5,
+        "y": 7
+      },
+      {
+        "coefficient": 7,
+        "x": 4,
+        "y": 8
+      },
+      {
+        "coefficient": 6,
+        "x": 3,
+        "y": 9
+      },
+      {
+        "coefficient": 10,
+        "x": 2,
+        "y": 10
+      },
+      {
+        "coefficient": 4,
+        "x": 1,
+        "y": 11
+      }
+    ],
+    "selected_line": "(1,[K]) in P(F_11 direct_sum N)"
+  },
+  "schema": "c682-transvectant-deformation-map-v1",
+  "trust_boundary": [
+    "Exact F_11 linear algebra constructs and checks the extended normal and incidence maps.",
+    "The identification of the isotropic-plane scheme with the Mukai-Umemura threefold is a human theorem imported from Hitchin.",
+    "The known finite-etale degree-two incidence theorem at xyz makes the two constructed points the complete fibre; the script does not reprove global degree two.",
+    "The calculation is for the marked mod-11 fibre and does not assert good reduction of the global incidence comparison.",
+    "No novelty claim or Paper III manuscript change is made."
+  ]
+}
