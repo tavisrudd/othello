@@ -1,0 +1,170 @@
+{
+  "claim_boundary": "The exceptional degrees are exact over Q, and absence elsewhere in 0..300 is certified over two finite fields. This is finite evidence, not a proof of absence above degree 300.",
+  "conclusion": "In degrees 0..300, degree 22 is the unique two-sided defect whose dimension can occupy a repeated isotypic summand; it is the standard 3 in Sym^22.",
+  "exact_exception_rows": [
+    {
+      "degree": 0,
+      "exact_nullity": 1,
+      "exact_rank": 0,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "043f347c2cdc0d8ce70c38775d24e556c0290acf6d0c87a3a52aa85471cb8d02",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 1,
+      "exact_nullity": 2,
+      "exact_rank": 0,
+      "isotypic_candidates_by_dimension": [
+        "2"
+      ],
+      "primitive_integer_kernel_basis_sha256": "be555edbfc39d6a4327eb8ec81b88dbceedfec1812445ad8f0b7dfb80ea39d11",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 2,
+      "exact_nullity": 3,
+      "exact_rank": 0,
+      "isotypic_candidates_by_dimension": [
+        "3"
+      ],
+      "primitive_integer_kernel_basis_sha256": "109bbb0d098bdafc39cf6a1bd168f764524693e0397d50d120c246ac1ea69b38",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 6,
+      "exact_nullity": 3,
+      "exact_rank": 4,
+      "isotypic_candidates_by_dimension": [
+        "3p"
+      ],
+      "primitive_integer_kernel_basis_sha256": "e76d8479a33e00bd26669a7cab57cbd4ff1e1505f65261b1846ebb679512a3b7",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 10,
+      "exact_nullity": 3,
+      "exact_rank": 8,
+      "isotypic_candidates_by_dimension": [
+        "3",
+        "3p"
+      ],
+      "primitive_integer_kernel_basis_sha256": "b877a4570e35cad63ea20e4e91122d419c85703d19e061e564a178efddfbe5de",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 11,
+      "exact_nullity": 2,
+      "exact_rank": 10,
+      "isotypic_candidates_by_dimension": [
+        "2"
+      ],
+      "primitive_integer_kernel_basis_sha256": "24b0c62a0f30a3d383487c52ef40dc9b687103658314d201deffdd9d3af1d12e",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 12,
+      "exact_nullity": 1,
+      "exact_rank": 12,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "a38506de4b98d3f80e8447f0106e566f1a383960191f7de6950d77328ed2f688",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 20,
+      "exact_nullity": 1,
+      "exact_rank": 20,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "7e232bdc4ba50cf1f06f1bbc8250c82728ed4741b67e8788e2efb58d96c49970",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 21,
+      "exact_nullity": 2,
+      "exact_rank": 20,
+      "isotypic_candidates_by_dimension": [
+        "2"
+      ],
+      "primitive_integer_kernel_basis_sha256": "5d26e4c4c9e3929fd186b61256b071b8f30b72bcc1ba5491fe6c17d5d79bfde7",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 22,
+      "exact_nullity": 3,
+      "exact_rank": 20,
+      "isotypic_candidates_by_dimension": [
+        "3",
+        "3p"
+      ],
+      "primitive_integer_kernel_basis_sha256": "52be1f16cdf712d580fcf4a9add87c646d2c292046c8d83c593a13c37673514e",
+      "repeated_isotypic_candidates": [
+        "3"
+      ]
+    },
+    {
+      "degree": 32,
+      "exact_nullity": 1,
+      "exact_rank": 32,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "41002caf34039eb703ae1e1aa1c5e3079d59b9416b4110b7d9c2783a8f0ccff2",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 40,
+      "exact_nullity": 1,
+      "exact_rank": 40,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "115867670e9853a910d639de5897b5d59d51d1aedd9f3fddc8d6b18113c2e234",
+      "repeated_isotypic_candidates": []
+    },
+    {
+      "degree": 52,
+      "exact_nullity": 1,
+      "exact_rank": 52,
+      "isotypic_candidates_by_dimension": [
+        "1"
+      ],
+      "primitive_integer_kernel_basis_sha256": "880f87186c632e85c1ca1082e99a3e2d18c3e8839329ba18b7a16bbf88b56522",
+      "repeated_isotypic_candidates": []
+    }
+  ],
+  "modular_fields": [
+    "F_1000000007",
+    "F_1000000009"
+  ],
+  "operator": "Q_n=(Delta_n,Delta_{n-6}^dagger), Delta=(.,Phi_12)_3",
+  "relevant_repeated_defects": [
+    [
+      22,
+      [
+        "3"
+      ]
+    ]
+  ],
+  "schema": "c682-two-sided-defect-spectrum-v1",
+  "searched_domain": "all integer degrees 0..300",
+  "two_prime_spectrum": {
+    "0": 1,
+    "1": 2,
+    "10": 3,
+    "11": 2,
+    "12": 1,
+    "2": 3,
+    "20": 1,
+    "21": 2,
+    "22": 3,
+    "32": 1,
+    "40": 1,
+    "52": 1,
+    "6": 3
+  }
+}
