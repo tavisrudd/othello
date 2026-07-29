@@ -148,11 +148,75 @@ At degree \(22\), the first degeneracy occurs: the standard
 lower image. The supported lower algebra therefore cannot reach that line,
 and the full corner loses exactly the observed two dimensions.
 
+## Exact five-chain reduction
+
+There is a second structural reduction that does not require constructing
+the other eight free covariant matrices. Write
+
+\[
+ P=\sum_{j=0}^n v_jX^{n-j}Y^j,\qquad
+ F=X^{11}Y+11X^6Y^6-XY^{11}.
+\]
+
+The coefficient contributed by the three monomials of \(F\) to
+\(\Delta P=(P,F)_3\) is
+
+\[
+\begin{aligned}
+d_1(n,j)
+ &=330(j)_2(n-4j+6),\\
+d_{11}(n,j)
+ &=-330(n-j)_2(3n-4j-6),\\
+d_6(n,j)
+ &=1320\left(
+ (n-j)_3-\frac92(n-j)_2j
+ +\frac92(n-j)(j)_2-(j)_3
+ \right).
+\end{aligned}
+\]
+
+Here \(d_b(n,j)\) sends source index \(j\) to target index
+\(j+b-3\). All three shifts
+
+\[
+-2,\quad3,\quad8
+\]
+
+are congruent modulo \(5\). Consequently \(\Delta_n\), its Fischer adjoint,
+and the stacked operator \(Q_n\) split exactly into five coefficient chains
+indexed by \(j\bmod5\). On a chain, the upper equation centered at \(j\) is
+the tridiagonal recurrence
+
+\[
+ d_1(n,j+5)v_{j+5}
+ +d_6(n,j)v_j
+ +d_{11}(n,j-5)v_{j-5}=0.
+\]
+
+The lower-adjoint equation is the weighted transpose recurrence with
+degree \(n-6\). Thus the global common-kernel theorem is equivalent to five
+finite continuant problems with explicit cubic coefficients. This is a
+strict improvement over factoring 21 unrelated generated-algebra minors:
+it acts before McKay decomposition and can prove the absence of *all*
+two-sided defects at once.
+
+The first-pass computation also shows why this does not yet finish the
+corner theorem. On the free \(\mathbf3\)-block there are two peak
+geometries. For \(n\equiv10\pmod{20}\), the lower image is a hyperplane and
+the local lemma applies directly. For \(n\equiv2\pmod{20}\), the lower image
+has codimension two while the upper image is a hyperplane; one must first
+show that the two upward returns generate the full algebra supported on
+that upper hyperplane. The five-chain continuants address the defect
+condition, while this upper-support mixing remains a separate finite-module
+factor.
+
 ## Structural status
 
 What is now proved:
 
 - the local hyperplane propagation lemma;
+- the exact decomposition of \(Q_n\) into five tridiagonal coefficient
+  chains;
 - the exact exceptional kernel list over \(\mathbf Q\) at every modularly
   detected degree through \(300\);
 - degree \(22\) is the sole repeated-isotypic defect in that range.
@@ -163,12 +227,60 @@ What remains finite evidence:
 - maximal one-step and two-step rank in every eventual residue family.
 
 The next symbolic target is consequently sharper than the original global
-module proposal: construct the four eventual peak covariant blocks
-\(\mathbf1,\mathbf2,\mathbf3,\mathbf3'\) over
-\(\mathbf Q[\Phi_{12},h_{20}]\), and prove that the one-step, two-step, and
-two-sided transversality factors have no nonnegative integral zeros along
-the 21 period-\(60\) peak families. If these factors share a common
-structural product, the defect-module route wins. If not, the calculation
-has rigorously reduced back to the 21-family minor fallback.
+module proposal:
+
+1. solve the five explicit upper/lower continuants and prove that their
+   common boundary determinant has no roots for \(n>52\);
+2. construct the \(1,2,3'\) finite Weyl matrices, reusing the existing
+   \(\mathbf3\) matrix;
+3. prove the remaining upper-support mixing factors nonzero on the
+   codimension-two peak geometry.
+
+If those factors share a common structural product, the defect route wins.
+If not, the calculation has rigorously reduced back to the 21-family minor
+fallback.
+
+## `ej` + `tt` closeout
+
+The `ej` upgrade is the distinction between ordinary defects and
+*repeated-isotypic* defects. The naïve “only degree 22” kernel claim is
+false, but the exact spectrum shows that degree \(22\) is uniquely relevant
+to corner failure through degree \(300\). The five-chain recurrence is the
+cheapest next proof object: it is global, scalar, and precedes all nine
+McKay blocks.
+
+The `tt` object is not a single defect module. It is a pair of
+transversality conditions at each multiplicity peak:
+
+\[
+\ker\Delta_n\not=L^\perp,\qquad
+\ker\Delta_n\not\subset L,
+\quad L=\operatorname{im}\Delta_{n-6},
+\]
+
+together with enough upward-return mixing when \(\operatorname{codim}L=2\).
+The first condition is controlled by \(Q_n\), the second by
+\(\Delta_n\Delta_{n-6}\), and the last by the compressed pair
+\(U_1,U_2\). This is the structural content hidden inside the original
+corner minors.
+
+## Mystery ledger
+
+- **Settled:** the full two-sided defect spectrum in degrees \(0\) through
+  \(300\) over two large finite fields.
+- **Settled exactly:** all thirteen exceptional kernels over
+  \(\mathbf Q\).
+- **Settled:** degree \(22\) is the unique repeated-isotypic defect in that
+  range, in the doubled standard \(\mathbf3\).
+- **Settled:** the noncircular hyperplane propagation lemma.
+- **Settled:** the global stacked operator splits into five explicit
+  tridiagonal coefficient chains.
+- **Open:** prove the five common-boundary continuants nonzero for
+  \(n>52\).
+- **Open:** prove one-step and two-step maximal rank in all weights.
+- **Open:** generate the upper hyperplane algebra at codimension-two peaks
+  from \(U_1,U_2\).
+- **Open:** combine these statements into the all-weight uniqueness theorem
+  and cover off-peak corners.
 
 No all-weight uniqueness or novelty claim is made here.

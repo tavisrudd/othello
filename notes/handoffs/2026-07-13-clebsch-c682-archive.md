@@ -898,3 +898,26 @@ remaining gate is nonvanishing of twenty-one mixing-minor families along
 \(n=n_0+60q\), together with an off-peak exclusion.  The report,
 certificate, replay, and mystery ledger are in
 `notes/2026-07-29-c682-all-weight-corner-frontier.md`.
+
+The global two-sided defect route is now reduced to its exact structural
+core.  For
+\[
+ K_n=\ker(\Delta_n,\Delta_{n-6}^\dagger),
+\]
+the only nonzero degrees through \(300\) are
+\[
+0,1,2,6,10,11,12,20,21,22,32,40,52.
+\]
+Two large primes agree on the complete range, every exception is checked
+exactly over \(\mathbf Q\), and degree \(22\) is the unique defect whose
+dimension can occupy a repeated isotypic summand: the doubled standard
+\(\mathbf3\).  A noncircular propagation lemma proves that a full lower
+hyperplane plus a nonzero self-adjoint cross block generates the next full
+corner.  At the ambient coefficient level, all three Klein shifts are
+congruent modulo \(5\), so \(Q_n\) splits into five explicit tridiagonal
+chains.  The all-weight gate is therefore the common-boundary continuant
+for those chains, together with upper-support mixing at the
+codimension-two peak geometry.  The plan, exact certificate, independent
+replay, proof, `ej`/`tt` closeout, and mystery ledger are in
+`notes/2026-07-29-c682-global-defect-module-plan.md` and
+`notes/2026-07-29-c682-global-defect-first-pass.md`.

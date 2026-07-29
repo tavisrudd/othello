@@ -52,6 +52,15 @@ explicitly separated.
   representative of every eventual \(60\)-periodic peak family.  Only the
   \(1,2,3,3'\) Kostant modules occur; all-weight saturation is now a
   symbolic nonvanishing problem along those four finite free modules.
+- The global two-sided defect
+  \(K_n=\ker(\Delta_n,\Delta_{n-6}^\dagger)\) has thirteen exceptional
+  degrees through \(300\), checked at two primes and exactly over
+  \(\mathbf Q\) at every exception.  Degree \(22\) is the unique exception
+  that can occupy a repeated isotypic summand.  A noncircular hyperplane
+  propagation lemma is proved, and the stacked operator splits into five
+  explicit tridiagonal coefficient chains.  The remaining all-weight gate
+  is the common-boundary continuant plus upper-support mixing at
+  codimension-two peaks.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -67,10 +76,12 @@ explicitly separated.
 
 ## Active order
 
-The later McKay-corner classification is active.  Its next gate is to build
-the \(1,2,3'\) finite Weyl matrices and prove the twenty-one peak-family
-mixing minors nonzero for every \(n=n_0+60q\), while separately disposing of
-off-peak corners.  C682 remains open.
+The later McKay-corner classification is active.  Its next gate is to solve
+the five explicit upper/lower coefficient-chain continuants and prove that
+their common boundary determinant has no roots for \(n>52\).  In parallel,
+the \(1,2,3'\) finite Weyl matrices must close upper-support mixing at the
+codimension-two peak geometry and dispose of off-peak corners.  The former
+twenty-one family minors remain the fallback.  C682 remains open.
 
 ## Parked branches
 
@@ -85,4 +96,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-all-weight-corner-frontier.md`.
+`notes/2026-07-29-c682-global-defect-first-pass.md`.

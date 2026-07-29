@@ -118,7 +118,14 @@ full-corner failure in that bounded range.  The all-weight gate remains
 open.  The fourteen strict peaks through degree \(112\) also saturate,
 completing one base representative of every eventual \(60\)-periodic peak
 family; only the \(1,2,3,3'\) free modules remain in the symbolic
-nonvanishing gate.
+nonvanishing gate.  The global two-sided defect has now been swept through
+degree \(300\): thirteen degrees have common kernels, but degree \(22\) is
+the unique one compatible with a repeated isotypic summand.  Every
+exception is exact over \(\mathbf Q\), absence elsewhere is checked at two
+large primes, and the stacked operator splits into five explicit
+tridiagonal coefficient chains.  A noncircular lower-hyperplane
+propagation lemma reduces the remaining proof to those common-boundary
+continuants plus upper-support mixing at codimension-two peaks.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
