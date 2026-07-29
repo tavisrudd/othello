@@ -14,7 +14,10 @@ manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
 and the retracted-socle trace lemma closes the quadratic pullback for every
 prime-field exceptional head.  The first two extension barriers \(q=25,49\)
 also close because none of their Frobenius-digit heads embeds in the affine
-socle.  The complete \(q=5\) matching census closes the isolated dihedral
+socle.  At \(q=121\), \(L(6)\) is the first embedded nonretract; the scalar
+top-contraction image of its pullback class is nonzero, so C1 closes there
+without constructing the symmetric square.  The complete \(q=5\) matching
+census closes the isolated dihedral
 endpoint geometrically.  The characteristic-three torus family is now
 closed by the discriminant-weight-four trade below, with no
 field-independent defect bound.  Uniform extension-field C1 remains.
@@ -1280,8 +1283,106 @@ Together with \(q=25\), this shows affine-socle absence at both first
 extension-field barriers; it is exact evidence, not a uniform
 extension-field theorem.
 
-This is the first genuine residual family, not a cosmetic defect of the
-method.  Its first field can nevertheless be excluded exactly.  Over
+### The first embedded nonretract and its scalar pullback: \(q=121\)
+
+Affine-socle absence does not persist.  Put
+\[
+q=121,\qquad p=11,\qquad
+F=\operatorname{Sym}^{59}L(2),\qquad \dim E=1831.
+\]
+The exceptional probes are \(L(6)\) for \(A_4\), \(L(8)\) for \(S_4\),
+and \(L(1)\otimes L(1)^{(1)}=L(12)\) for \(A_5\).  Exact finite-torus
+weight-block systems for two independent translations and inversion
+eliminate the latter two.  For \(S=L(6)\), the same systems give
+\[
+\dim\operatorname{Hom}_H(S,F)=
+\dim\operatorname{Hom}_H(F,S)=1.                 \tag{Q121-Hom}
+\]
+If \(i:S\hookrightarrow F\) and \(\pi:F\to S\) generate these two lines,
+then exact composition gives
+\[
+\pi i=0.                                         \tag{Q121-rad}
+\]
+Thus \(S\) occurs simultaneously in the socle and head but is not a direct
+summand.  In particular it cannot retract from \(E\): the restriction of
+any retraction \(E\to S\) would be a scalar multiple of \(\pi\), whose
+composition with \(i\) is zero.  This is the first embedded nonretract
+predicted by the C1 decision tree.
+
+The quadratic pullback is nevertheless nonsplit.  Choose a split-torus
+fixed lift \(e\in E\) of \(1\), and write
+\[
+c_g=ge-e\in F.
+\]
+Every putative lift of \(i\) through
+\(\partial:\operatorname{Sym}^2E\to E\) has the form
+\[
+\sigma(s)=e\mathbin{\odot}i(s)+t(s),
+\qquad t:S\longrightarrow\operatorname{Sym}^2F.
+\]
+Apply the top divided contraction
+\[
+\beta:\operatorname{Sym}^2(\operatorname{Sym}^{59}L(2))
+\longrightarrow k.
+\]
+In the monomial normalization used by the checker it is the symmetric
+apolar pairing
+\[
+\beta(X^iY^jZ^k,X^uY^vZ^w)
+=
+\begin{cases}
+(-1/2)^j,&(u,v,w)=(k,j,i),\\
+0,&\text{otherwise},
+\end{cases}                                      \tag{AP59}
+\]
+equivalently
+\(\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j\).
+The image of the pullback cocycle is
+\[
+\gamma_g(s)=\beta(c_g,i(gs))\in S^*.
+\]
+A correcting scalar cochain is forced by the torus weights onto the unique
+zero-weight coordinate of \(S^*\).  For the two translations and inversion,
+the resulting exact inhomogeneous system has fifteen nonzero rows and
+fourteen nonzero defect entries, with
+\[
+\operatorname{rank}A=1,\qquad
+\operatorname{rank}[A\mid\gamma]=2.              \tag{AP-rank}
+\]
+Hence \(\gamma\) is not a coboundary.  Since it is the image of the
+quadratic pullback class, the original pullback is nonsplit.  This closes
+C1 at \(q=121\) without constructing the
+\(\binom{1832}{2}\)-dimensional symmetric square.
+
+The primary checker obtains (Q121-Hom), (Q121-rad), and the full
+divided-contraction system.  The replay independently uses the closed
+monomial formula (AP59) and rebuilds only the \(15\times2\) augmented
+system:
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-affine-socle.sage --check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-contraction-detector.sage --check \
+  --max-remaining-degree 0
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-contraction-replay.sage
+sha256sum -c notes/2026-07-28-c665-q121-pullback.sha256
+```
+
+The affine checker and certificate have 13,820 and 1,433 bytes; the shared
+pullback support, contraction checker, certificate, and scalar replay have
+6,307, 12,738, 509, and 3,853 bytes.  The adjacent manifest pins all six
+hashes.
+
+This is an exact field closure, not a uniform extension-field theorem.  Its
+uniform lesson is sharper than affine-socle absence: first use the torus
+weight gate, then distinguish absent, retracted, and radical occurrences;
+for the radical branch, test the scalar apolar image of the pullback class.
+
+The characteristic-three torus case is a separate genuine residual family,
+not a cosmetic defect of the method.  Its first field can nevertheless be
+excluded exactly.  Over
 \(\mathbb F_{27}\), all thirteen matchings invariant under the split torus
 pair \(0\) with \(\infty\) and pair the two regular torus orbits by a
 torus-equivariant bijection.  They form seven \(G\)-orbits.  Six are split
@@ -1527,9 +1628,13 @@ both the old \(\lambda+1\) bound and the rank-one defect inference while
 leaving nine invariant trades in every split orbit.  The `ej` replacement
 is the sharp five-dimensional defect: factor the fixed-correction
 polarization through \(\Delta(4)\), then descend its nonsplit analogue.
-What remains genuinely unexplained on C1 is whether affine-socle absence
-persists uniformly or a later extension field contains the first embedded
-nonretract.
+The q=121 gate now answers the former C1 mystery: affine-socle absence does
+not persist, and the first embedded occurrence is a nonretract.  Its `ej`
+upgrade is the zero composition scalar between the two one-dimensional Hom
+lines; its `tt` detector is the top divided contraction, whose scalar
+coboundary system has rank jump \(1\to2\).  The new uniform problem is to
+express the torus weight gate, the radical composition scalar, and the
+apolar cocycle rank in Frobenius-digit form for every candidate family.
 
 ### Facts that must not be assumed
 
@@ -1855,4 +1960,4 @@ C1 is still separate and is the sole live Platinum gap.
 | Characteristic-three split T3 | settled | The discriminant-weight-four vector (T4) is a second invariant trade; it uses one absent Borel character and imposes no defect bound. |
 | Nonsplit descent | settled | Diagonalization over \(\mathbb F_{q^2}\), Frobenius-fixed discriminant weight, and exclusion of the outer-fixed antipodal type descend the same trade. |
 | q=27 invariant-trade excess | settled exactly, non-load-bearing | Equation (U9) gives seven finite-axis Fourier lines and two trivial cross lines.  Beyond the sign and \(\tau_2\), the former seven are six listed Fourier lines and the complementary cross line. |
-| Extension-field C1 | unchanged | The first embedded nonretract remains unknown beyond the q=25 and q=49 affine-socle exclusions. |
+| Extension-field C1 | q=121 closed; uniform family open | \(L(6)\subset\operatorname{Sym}^{59}L(2)\) is the first embedded nonretract; its scalar apolar pullback image has rank jump \(1\to2\).  Uniformize the weight/radical/apolar decision tree across all Frobenius-digit candidates. |

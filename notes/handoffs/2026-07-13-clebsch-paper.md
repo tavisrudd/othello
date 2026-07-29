@@ -442,28 +442,48 @@ q&\text{candidate heads}&\dim\operatorname{Hom}_H(S,E)\\ \hline
    L(3)\otimes L(3)^{(1)}&0,\ 0.
 \end{array}
 \]
-These are exact evidence, not a uniform theorem.  The unresolved statement
-is whether affine-socle absence persists for all relevant Frobenius-digit
-heads, or whether some later field contains the first embedded nonretract.
-The complete candidate-family table and subgroup congruence conditions are
-in the C665 report; do not replace it by a guessed short list.
+These are exact evidence, not a uniform theorem.  The next gate q=121 is
+also closed, but it falsifies uniform affine-socle absence.  Its \(A_4\)
+head \(L(6)\) satisfies
+\[
+\dim\operatorname{Hom}_H(L(6),F)
+=\dim\operatorname{Hom}_H(F,L(6))=1,
+\]
+and generators of the two Hom lines compose to zero.  It is the first
+embedded nonretract.  Exact finite-torus weight-block intertwiner systems
+eliminate the \(L(8)\) and \(L(12)\) probes.
+
+The q=121 pullback itself is nonsplit.  After choosing a torus-fixed affine
+lift, apply the scalar top divided contraction
+\[
+\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j.
+\]
+The image cocycle in \(L(6)^*\) has a one-variable coboundary system with
+coefficient rank one and augmented rank two.  Thus q=121 closes without
+constructing \(\operatorname{Sym}^2E\).  The complete candidate-family
+table and subgroup congruence conditions remain in the C665 report; do not
+replace them by a guessed short list.
 
 The preferred theorem-level attack is a recursive
 \(\mathrm{SL}_2\)-tilting/socle description of
 \(\operatorname{Sym}^{(p^e-3)/2}L(2)\) that can answer both embedding and
 retractability for those candidate digits.  Ordinary block support cannot
 do this: all relevant non-Steinberg simples lie in the same full-defect
-block.  If a finite falsifier is needed before that proof, q=121 is the
-next useful gate.  Its affine module has dimension
-\[
-1+\binom{61}{2}=1831
-\]
-and the three relevant probes are \(L(6)\), \(L(8)\), and
-\(L(1)\otimes L(1)^{(1)}\).  Reuse the q=49 strategy: first confine possible
-images with a small number of group-algebra elements, then solve the full
-generator intertwiner equations by an independent route.  A zero result at
-q=121 is evidence only.  A nonzero result must immediately branch to the
-retraction test before any symmetric-square construction.
+block.  Do not launch another field-sized falsifier by default; q=121 is a
+settled model, not an open gate.  The theorem-level target has sharpened:
+express three occurrence-level scalars in Frobenius-digit form for every
+candidate family:
+
+1. the finite-torus weight gate deciding whether \(S\) can embed;
+2. the composition scalar
+   \(\operatorname{Hom}(S,F)\otimes\operatorname{Hom}(F,S)\to k\),
+   separating retracts from radical occurrences;
+3. on the radical branch, the top-apolar image of the quadratic pullback
+   cocycle.
+
+The q=121 \(1\to2\) apolar rank jump is the first positive model for the
+third step.  Seek its uniform coefficient formula before another
+field-sized symmetric computation.
 
 The exact replay baselines are:
 
@@ -474,9 +494,17 @@ nix shell nixpkgs#sage -c sage \
   notes/2026-07-26-c665-q25-pullback.sage --check
 nix shell nixpkgs#sage -c sage \
   notes/2026-07-26-c665-q49-affine-socle.sage --check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-affine-socle.sage --check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-contraction-detector.sage --check \
+  --max-remaining-degree 0
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-28-c665-q121-contraction-replay.sage
 sha256sum -c notes/2026-07-26-c665-exceptional-head-pullback.sha256
 sha256sum -c notes/2026-07-26-c665-q25-pullback.sha256
 sha256sum -c notes/2026-07-26-c665-q49-affine-socle.sha256
+sha256sum -c notes/2026-07-28-c665-q121-pullback.sha256
 ```
 
 Do not use composition factors to identify the relevant copy, extrapolate

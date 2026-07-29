@@ -1,0 +1,57 @@
+{
+  "L6_embedding_hom": {
+    "dimension": 1,
+    "equations": 13096,
+    "rank": 213,
+    "torus_block_variables": 214
+  },
+  "L6_is_direct_summand_of_F": false,
+  "L6_is_retract_of_E": false,
+  "L6_projection_embedding_composition_scalar": "0",
+  "L6_projection_hom": {
+    "dimension": 1,
+    "equations": 18116,
+    "rank": 213,
+    "torus_block_variables": 214
+  },
+  "absent_candidate_hom_checks": [
+    {
+      "equations": 16888,
+      "highest_weight": 8,
+      "hom_to_F_dimension": 0,
+      "rank": 274,
+      "simple_dimension": 9,
+      "steinberg_digits": [
+        8
+      ],
+      "subgroup_type": "S4",
+      "torus_block_variables": 274
+    },
+    {
+      "equations": 8256,
+      "highest_weight": 12,
+      "hom_to_F_dimension": 0,
+      "rank": 122,
+      "simple_dimension": 4,
+      "steinberg_digits": [
+        1,
+        1
+      ],
+      "subgroup_type": "A5",
+      "torus_block_variables": 122
+    }
+  ],
+  "affine_dimension": 1831,
+  "conclusion": "L(6) is the first checked embedded extension-field head; both directional Hom spaces are one-dimensional but their composition is zero, so the occurrence is a nonretract in F and E and the quadratic pullback class is required",
+  "field_modulus": "x^2 + 7*x + 2",
+  "finite_torus_modulus": 120,
+  "generators": [
+    "translation_1",
+    "translation_a",
+    "inversion"
+  ],
+  "nonconstant_module": "Sym^59(L(2))",
+  "p": 11,
+  "q": 121,
+  "schema": 1
+}

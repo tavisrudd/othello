@@ -1,0 +1,21 @@
+{
+  "channels": [
+    {
+      "augmented_rank": 2,
+      "coefficient_rank": 1,
+      "contraction_order": 59,
+      "equations": 15,
+      "nonzero_defect_columns": 14,
+      "solvable": false,
+      "target_degree": 0,
+      "target_dimension": 1,
+      "torus_block_variables": 1
+    }
+  ],
+  "conclusion": "the first inconsistent divided-contraction channel detects the q=121 pullback class",
+  "detecting_contraction_order": 59,
+  "field_modulus": "x^2 + 7*x + 2",
+  "p": 11,
+  "q": 121,
+  "schema": 1
+}
