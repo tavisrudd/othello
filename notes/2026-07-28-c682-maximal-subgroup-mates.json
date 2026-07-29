@@ -1,0 +1,1154 @@
+{
+  "characteristic_zero_boundary": "The certificate checks the F_11 specialization only. The characteristic-zero correspondence and the normalizer classifications are proved group-theoretically in the report.",
+  "checked_statement": "For H=A4,D5,S3, the unique nonidentity coset in N_PGL2(F11)(H)/H sends the A5-fixed kernel to the existing rank-four point in the A5/H orbit, independently of the coset representative, and swaps the two H-fixed kernels. The intrinsic kernel-intersection rank condition recovers the (6_5,10_3) D5-S3 incidence.",
+  "field": "F_11",
+  "groups": {
+    "ambient": "PGL_2(F_11)",
+    "ambient_order": 1320,
+    "base_kernel_rref": [
+      [
+        1,
+        0,
+        7,
+        0,
+        9,
+        6,
+        8
+      ],
+      [
+        0,
+        1,
+        6,
+        0,
+        9,
+        8,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        8,
+        3,
+        10
+      ]
+    ],
+    "base_rank_four_point_index": 21,
+    "icosahedral_subgroup": "A5",
+    "icosahedral_subgroup_order": 60
+  },
+  "inputs": {
+    "notes/2026-07-28-c682-incidence-moduli.json": {
+      "bytes": 11719,
+      "sha256": "9585e3d47fcbed1eea91c8259cb22c5e5928390f6f4a97b67490d682e572b15c"
+    },
+    "notes/2026-07-28-c682-rank-four-resolvent.json": {
+      "bytes": 111899,
+      "sha256": "92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c"
+    },
+    "notes/2026-07-28-c682-transvectant-deformation-map.json": {
+      "bytes": 21501,
+      "sha256": "45d799a413c6632b32dc61975c82a946f913a47386bb3f673a24752743d8acca"
+    },
+    "notes/2026-07-28-c682-transvectant-deformation-map.py": {
+      "bytes": 30900,
+      "sha256": "3822d2d269d3fa708d8b09fbc657a3743575c6b2304c6e25584b4710cd09d148"
+    }
+  },
+  "intrinsic_D5_S3_incidence": {
+    "D5_points": [
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "point_index": 1
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            6,
+            0,
+            1,
+            0,
+            8
+          ],
+          [
+            0,
+            1,
+            10,
+            0,
+            5,
+            7,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            6,
+            1,
+            8
+          ]
+        ],
+        "point_index": 4
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            8,
+            0,
+            3,
+            5,
+            2
+          ],
+          [
+            0,
+            1,
+            4,
+            0,
+            10,
+            10,
+            6
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            9,
+            5,
+            5
+          ]
+        ],
+        "point_index": 6
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            2,
+            0,
+            5,
+            5,
+            10
+          ],
+          [
+            0,
+            1,
+            9,
+            0,
+            7,
+            2,
+            6
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            4,
+            9
+          ]
+        ],
+        "point_index": 8
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            8,
+            0,
+            3,
+            0,
+            10
+          ],
+          [
+            0,
+            1,
+            7,
+            0,
+            1,
+            10,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            5,
+            6
+          ]
+        ],
+        "point_index": 16
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            7,
+            0,
+            9,
+            0,
+            7
+          ],
+          [
+            0,
+            1,
+            6,
+            0,
+            9,
+            8,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            8,
+            3,
+            10
+          ]
+        ],
+        "point_index": 20
+      }
+    ],
+    "D5_row_degrees": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "S3_column_degrees": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "S3_points": [
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            7
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "point_index": 0
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            7,
+            0,
+            9,
+            0,
+            7
+          ],
+          [
+            0,
+            1,
+            5,
+            0,
+            2,
+            8,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            3,
+            3,
+            1
+          ]
+        ],
+        "point_index": 3
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            6,
+            0,
+            1,
+            6,
+            6
+          ],
+          [
+            0,
+            1,
+            10,
+            0,
+            5,
+            7,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            6,
+            1,
+            8
+          ]
+        ],
+        "point_index": 5
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            8,
+            0,
+            3,
+            0,
+            10
+          ],
+          [
+            0,
+            1,
+            4,
+            0,
+            10,
+            10,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            9,
+            5,
+            5
+          ]
+        ],
+        "point_index": 7
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            2,
+            0,
+            5,
+            0,
+            6
+          ],
+          [
+            0,
+            1,
+            9,
+            0,
+            7,
+            2,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            4,
+            9
+          ]
+        ],
+        "point_index": 9
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            10,
+            0,
+            4,
+            0,
+            2
+          ],
+          [
+            0,
+            1,
+            3,
+            0,
+            8,
+            6,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            4,
+            9,
+            4
+          ]
+        ],
+        "point_index": 11
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            10,
+            0,
+            4,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            8,
+            0,
+            3,
+            6,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            7,
+            9,
+            7
+          ]
+        ],
+        "point_index": 13
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            2,
+            0,
+            5,
+            6,
+            10
+          ],
+          [
+            0,
+            1,
+            2,
+            0,
+            4,
+            2,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            10,
+            4,
+            2
+          ]
+        ],
+        "point_index": 15
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            8,
+            0,
+            3,
+            6,
+            2
+          ],
+          [
+            0,
+            1,
+            7,
+            0,
+            1,
+            10,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            5,
+            6
+          ]
+        ],
+        "point_index": 17
+      },
+      {
+        "kernel_rref": [
+          [
+            1,
+            0,
+            6,
+            0,
+            1,
+            0,
+            8
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            6,
+            7,
+            9
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            5,
+            1,
+            3
+          ]
+        ],
+        "point_index": 19
+      }
+    ],
+    "criterion": "A D5 mate and an S3 mate are incident exactly when their three-dimensional kernel planes meet in dimension one; equivalently their apolar four-planes meet in dimension two.",
+    "incident_point_index_pairs": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        1,
+        13
+      ],
+      [
+        1,
+        15
+      ],
+      [
+        1,
+        17
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        4,
+        17
+      ],
+      [
+        4,
+        19
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        6,
+        19
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        8,
+        7
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        8,
+        13
+      ],
+      [
+        16,
+        7
+      ],
+      [
+        16,
+        9
+      ],
+      [
+        16,
+        11
+      ],
+      [
+        16,
+        15
+      ],
+      [
+        16,
+        17
+      ],
+      [
+        20,
+        3
+      ],
+      [
+        20,
+        11
+      ],
+      [
+        20,
+        13
+      ],
+      [
+        20,
+        15
+      ],
+      [
+        20,
+        19
+      ]
+    ],
+    "kernel_intersection_dimension_matrix": [
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    ]
+  },
+  "normalizer_mates": [
+    {
+      "ambient_normalizer_order": 24,
+      "coset_choice_independent": true,
+      "index": 5,
+      "mate_kernel_rref": [
+        [
+          1,
+          0,
+          2,
+          0,
+          5,
+          0,
+          6
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          4,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          10,
+          4,
+          2
+        ]
+      ],
+      "mate_orbit_indices": [
+        2,
+        10,
+        12,
+        14,
+        18
+      ],
+      "mate_parameter": {
+        "s": 10,
+        "t": 7
+      },
+      "mate_point_index": 14,
+      "normalizer_coset_representative": [
+        0,
+        1,
+        5,
+        1
+      ],
+      "normalizer_coset_size": 12,
+      "normalizer_involution_swaps_base_and_mate": true,
+      "normalizer_quotient_order": 2,
+      "stabilizer_equals_selected_subgroup": true,
+      "subgroup_matrices": [
+        [
+          0,
+          1,
+          6,
+          4
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          7,
+          10
+        ],
+        [
+          1,
+          2,
+          2,
+          2
+        ],
+        [
+          1,
+          3,
+          8,
+          5
+        ],
+        [
+          1,
+          4,
+          3,
+          10
+        ],
+        [
+          1,
+          5,
+          9,
+          4
+        ],
+        [
+          1,
+          6,
+          5,
+          9
+        ],
+        [
+          1,
+          7,
+          6,
+          3
+        ],
+        [
+          1,
+          8,
+          4,
+          0
+        ],
+        [
+          1,
+          9,
+          1,
+          10
+        ],
+        [
+          1,
+          10,
+          10,
+          6
+        ]
+      ],
+      "subgroup_order": 12,
+      "type": "A4"
+    },
+    {
+      "ambient_normalizer_order": 20,
+      "coset_choice_independent": true,
+      "index": 6,
+      "mate_kernel_rref": [
+        [
+          1,
+          0,
+          7,
+          0,
+          9,
+          0,
+          7
+        ],
+        [
+          0,
+          1,
+          6,
+          0,
+          9,
+          8,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          8,
+          3,
+          10
+        ]
+      ],
+      "mate_orbit_indices": [
+        1,
+        4,
+        6,
+        8,
+        16,
+        20
+      ],
+      "mate_parameter": {
+        "s": 10,
+        "t": 10
+      },
+      "mate_point_index": 20,
+      "normalizer_coset_representative": [
+        1,
+        0,
+        1,
+        10
+      ],
+      "normalizer_coset_size": 10,
+      "normalizer_involution_swaps_base_and_mate": true,
+      "normalizer_quotient_order": 2,
+      "stabilizer_equals_selected_subgroup": true,
+      "subgroup_matrices": [
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          10
+        ],
+        [
+          1,
+          2,
+          0,
+          3
+        ],
+        [
+          1,
+          3,
+          0,
+          4
+        ],
+        [
+          1,
+          4,
+          0,
+          5
+        ],
+        [
+          1,
+          5,
+          1,
+          10
+        ],
+        [
+          1,
+          6,
+          1,
+          10
+        ],
+        [
+          1,
+          7,
+          1,
+          10
+        ],
+        [
+          1,
+          8,
+          0,
+          9
+        ],
+        [
+          1,
+          9,
+          1,
+          10
+        ]
+      ],
+      "subgroup_order": 10,
+      "type": "D5"
+    },
+    {
+      "ambient_normalizer_order": 12,
+      "coset_choice_independent": true,
+      "index": 10,
+      "mate_kernel_rref": [
+        [
+          1,
+          0,
+          6,
+          0,
+          1,
+          6,
+          6
+        ],
+        [
+          0,
+          1,
+          10,
+          0,
+          5,
+          7,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          6,
+          1,
+          8
+        ]
+      ],
+      "mate_orbit_indices": [
+        0,
+        3,
+        5,
+        7,
+        9,
+        11,
+        13,
+        15,
+        17,
+        19
+      ],
+      "mate_parameter": {
+        "s": 1,
+        "t": 2
+      },
+      "mate_point_index": 5,
+      "normalizer_coset_representative": [
+        0,
+        1,
+        6,
+        0
+      ],
+      "normalizer_coset_size": 6,
+      "normalizer_involution_swaps_base_and_mate": true,
+      "normalizer_quotient_order": 2,
+      "stabilizer_equals_selected_subgroup": true,
+      "subgroup_matrices": [
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          5,
+          10
+        ],
+        [
+          1,
+          3,
+          4,
+          10
+        ],
+        [
+          1,
+          4,
+          2,
+          1
+        ],
+        [
+          1,
+          7,
+          9,
+          1
+        ],
+        [
+          1,
+          9,
+          1,
+          10
+        ]
+      ],
+      "subgroup_order": 6,
+      "type": "S3"
+    }
+  ],
+  "schema": "c682-maximal-subgroup-mates-v1",
+  "toolchain": {
+    "python": "3.x standard library"
+  }
+}

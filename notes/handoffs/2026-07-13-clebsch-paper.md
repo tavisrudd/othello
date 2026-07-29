@@ -1147,6 +1147,29 @@ frontier is the canonical flattening or a single characteristic-zero
 correspondence producing all three \(A_4,D_5,S_3\) mate components
 intrinsically.
 
+C682 now supplies that characteristic-zero correspondence.  For
+\(G=\operatorname{PGL}_2\), a marked \(A_5=A<G\), and
+\(H=A_4,D_5,S_3\), the ambient normalizer doubles \(H\):
+\[
+ N_G(H)=S_4,D_{10},D_6,\qquad N_G(H)/H=C_2.
+\]
+The unique nontrivial coset therefore defines the symmetric correspondence
+\(G/H\rightrightarrows G/A\), and the diagonal plus its three components
+has degree \(1+5+6+10=22\).  Equivalently, every maximal subgroup
+\(H<A\) lies in exactly two icosahedral subgroups: the marked one and its
+unique mate.  This selects the distinguished \(D_5\) point from the
+common-axis curve without Bockstein input and descends with the rational
+icosahedral homogeneous space.  Exact \(\mathbf F_{11}\) enumeration
+proves that its finite shadow is precisely the existing reduced four-orbit
+section.  An `ej` upgrade cuts out the finite \((6_5,10_3)\) incidence
+intrinsically: a \(D_5\) kernel and an \(S_3\) kernel are incident exactly
+when their three-planes meet in dimension one.  The theorem, proof,
+certificate, independent replay, scope boundary, and mystery ledger are in
+`notes/2026-07-28-c682-maximal-subgroup-mates.md`.  The remaining geometric
+gate is a characteristic-zero transvectant/operator realization of this
+correspondence, including the kernel-rank incidence, or a natural source
+for the complementary Schläfli six.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
