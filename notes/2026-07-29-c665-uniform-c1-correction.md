@@ -111,6 +111,14 @@ The current highest-EV order is (1), then (2).  Route (3) is the preferred
 uniform theorem architecture once the first positive or negative
 \(q=121\) model is sound.
 
+The exact source for route (3) is McDowell--Wildon, *Modular plethystic
+isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
+441--483, Corollary 1.5, DOI
+`10.1016/j.jalgebra.2022.02.025`.  The present pass read the statement and
+the symmetric-invariant/coinvariant conventions on pp. 1--4 of
+arXiv:2105.00538v3.  It is used only as a proof architecture here, not as
+evidence that the C1 pullback is nonsplit.
+
 ## Mystery ledger
 
 | feature | status | exact remaining gate |
