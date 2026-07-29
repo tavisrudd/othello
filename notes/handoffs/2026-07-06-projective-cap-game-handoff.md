@@ -1461,6 +1461,25 @@ first branch, collision, unlabelled creator, or genuinely new bounded flag;
 C82 remains gated. Report+script+certificate:
 [`../2026-07-26-c80-q23-next-marked-replacement-orbit.md`](../2026-07-26-c80-q23-next-marked-replacement-orbit.md).
 
+**The three marked orbits exhaust the canonical q23 replacement corpus
+(C80, 2026-07-28).** After quotienting their pairwise-disjoint
+12,144-element marked `PGL_2(23)` orbits, the bounded-memory sweep
+exhausts the remaining 75 canonical P controls (indices 88--162),
+8,703 opponent fibres, and 579,404 outer reply candidates. All ten
+necessary replacement witnesses lie in the known union (Type II: 4;
+Type III: 6), and independent Python witness plus affine-determinant
+replay agrees. Thus there is no fourth orbit, late branching,
+collision, unlabelled creator, or third local mechanism anywhere later
+in this q23 corpus. This closes the finite q23 census, not the uniform
+odd-q theorem. The live crown is now to prove directly from the unique
+former `B_small` certificate that endpoint degradation and
+certificate-reply deletion exhaust replacement creation, and that the
+new-defect-to-causal-half-move old-label map is injective. More q23
+orbit enumeration has no present decision value; C82 stays gated until
+the charged survivor also has opponent-complete uniform entry.
+Report+script+certificate:
+[`../2026-07-28-c80-q23-after-three-replacement-orbits.md`](../2026-07-28-c80-q23-after-three-replacement-orbits.md).
+
 **Canonical C80 truth ledger (2026-07-25).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
