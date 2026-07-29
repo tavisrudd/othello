@@ -163,6 +163,32 @@ def digit_simple_actions(parameters, digits):
     return actions, tuple(weights)
 
 
+def outer_hom_eigenvalue(
+    hom_vector, variables, source_dilation, target_dilation
+):
+    """Eigenvalue of target_dilation * hom * source_dilation^-1."""
+    transformed = {}
+    for (target, source), variable in variables.items():
+        value = hom_vector[variable]
+        if value:
+            transformed[variable] = (
+                target_dilation[target]
+                * value
+                / source_dilation[source]
+            )
+    eigenvalue = next(
+        transformed[variable] / hom_vector[variable]
+        for variable in transformed
+    )
+    assert all(
+        transformed.get(variable, FIELD.zero())
+        == eigenvalue * hom_vector[variable]
+        for variable in range(len(hom_vector))
+    )
+    assert eigenvalue in (FIELD.one(), -FIELD.one())
+    return int(eigenvalue)
+
+
 def same_torus_character(left, right):
     return (left - right) % TORUS_MODULUS == 0
 
@@ -319,6 +345,27 @@ def calculate():
         * identity_matrix(FIELD, len(simple_weights))
     )
     composition_scalar = composition[0, 0]
+    nonsquare = FIELD.multiplicative_generator()
+    f_dilation = tuple(
+        nonsquare ** ((weight // 2) % TORUS_MODULUS)
+        for weight in F_WEIGHTS
+    )
+    simple_dilation = tuple(
+        nonsquare ** ((weight // 2) % TORUS_MODULUS)
+        for weight in simple_weights
+    )
+    embedding_outer = outer_hom_eigenvalue(
+        embedding_vector,
+        embedding_variables,
+        simple_dilation,
+        f_dilation,
+    )
+    projection_outer = outer_hom_eigenvalue(
+        projection_vector,
+        projection_variables,
+        f_dilation,
+        simple_dilation,
+    )
     absent_records = []
     for subgroup, digits in (("S4", (8,)), ("A5", (1, 1))):
         absent_actions, absent_weights = digit_simple_actions(
@@ -346,7 +393,7 @@ def calculate():
             }
         )
     return {
-        "schema": 1,
+        "schema": 2,
         "q": Q,
         "p": P,
         "field_modulus": str(FIELD.modulus()),
@@ -356,7 +403,9 @@ def calculate():
         "absent_candidate_hom_checks": absent_records,
         "finite_torus_modulus": TORUS_MODULUS,
         "L6_embedding_hom": embedding,
+        "L6_embedding_outer_eigenvalue": embedding_outer,
         "L6_projection_hom": projection,
+        "L6_projection_outer_eigenvalue": projection_outer,
         "L6_projection_embedding_composition_scalar": str(
             composition_scalar
         ),

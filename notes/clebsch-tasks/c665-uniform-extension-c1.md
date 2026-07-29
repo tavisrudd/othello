@@ -58,9 +58,13 @@ T_+\oplus T_-=
 \bigl(L(9)\otimes L(1)^{(1)}\bigr)\oplus
 \bigl(L(1)\otimes L(9)^{(1)}\bigr)
 \]
-channel.  Determine its outer parity and prove that multiplication by the
-bottom \(L(6)\), followed by graded trace \(7\ne0\), survives the
-filtration transgression.  The full direct Borel pullback is the fallback.
+channel.  Exact nonsquare dilation gives outer signs \(+1,-1\) on
+\(H^1(B,T_+),H^1(B,T_-)\), respectively.  PGL-equivariance therefore
+forces the affine class into \(T_+\); both unique \(L(6)\) Hom directions
+are also outer-even.  Outer parity isolates but does not exclude the
+channel.  Prove that multiplication by the bottom \(L(6)\), followed by
+graded trace \(7\ne0\), survives the filtered connecting map.  The full
+direct Borel pullback is the fallback.
 
 ## Guardrails
 

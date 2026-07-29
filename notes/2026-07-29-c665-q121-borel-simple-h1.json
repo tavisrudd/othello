@@ -240,6 +240,7 @@
       "highest_weight": 20,
       "normalized_coboundary_dimension": 0,
       "normalized_cocycle_dimension": 1,
+      "outer_eigenvalue": 1,
       "simple_dimension": 20,
       "torus_fixed_dimension": 0
     },
@@ -432,6 +433,7 @@
       "highest_weight": 100,
       "normalized_coboundary_dimension": 0,
       "normalized_cocycle_dimension": 1,
+      "outer_eigenvalue": 10,
       "simple_dimension": 20,
       "torus_fixed_dimension": 0
     },
@@ -486,7 +488,7 @@
   ],
   "p": 11,
   "q": 121,
-  "schema": 2,
+  "schema": 3,
   "top_candidates": [
     {
       "borel_h1_dimension": 0,

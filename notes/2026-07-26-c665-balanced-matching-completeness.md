@@ -1348,16 +1348,20 @@ cohomology-weight head replaces it.  Hence the next gate is the original
 pullback's secondary Borel class inside the radical filtration.  Modular
 Hermite reciprocity and the dual-Weyl sequence give a semisimple
 \(15+25+15\) graded decomposition; exact Borel cohomology vanishes on both
-outer layers and on twenty-three middle factors.  The affine class is
-therefore forced into the Frobenius-paired middle channel
+outer layers and on twenty-three middle factors.  The only two nonzero
+middle cohomology rows have nonsquare-dilation signs \(+1,-1\),
+respectively:
 \[
-\bigl(L(9)\otimes L(1)^{(1)}\bigr)\oplus
+\bigl(L(9)\otimes L(1)^{(1)}\bigr),\qquad
 \bigl(L(1)\otimes L(9)^{(1)}\bigr).
 \]
-The next gate is whether the resulting graded trace by the bottom \(L(6)\),
-whose scalar is \(7\ne0\), survives higher filtration transgression and
-outer parity.  This remains an open field gate and not a uniform
-extension-field theorem.
+Since the affine extension is PGL-equivariant, its class is forced into
+the first, outer-even channel.  The unique \(L(6)\) embedding and
+projection are also outer-even.  The next gate is whether the resulting
+graded trace by the bottom \(L(6)\), whose scalar is \(7\ne0\), survives
+the higher filtered connecting map.  Outer parity isolates the channel
+but does not exclude the transgression.  This remains an open field gate
+and not a uniform extension-field theorem.
 
 The characteristic-three torus case is a separate genuine residual family,
 not a cosmetic defect of the method.  Its first field can nevertheless be

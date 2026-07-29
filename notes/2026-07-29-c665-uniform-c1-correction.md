@@ -224,17 +224,28 @@ of the nonsplit affine class injects into
 \[
 H^1(B,T_+)\oplus H^1(B,T_-).
 \]
+The normalized nonsquare dilation acts by \(+1\) on \(H^1(B,T_+)\) and
+by \(-1\) on \(H^1(B,T_-)\).  The affine extension and the
+modular-Hermite filtration are PGL-equivariant, so its outer-invariant
+class has zero \(T_-\)-component and a nonzero \(T_+\)-component.  The
+unique \(L(6)\) embedding and projection both have outer eigenvalue
+\(+1\).
+
 Thus q=121 is not an unexplained finite exception: the affine class is
-forced into the Frobenius-paired middle channel.  The \(L(6)\) socle and
+forced into the single outer-even Frobenius-asymmetric channel \(T_+\).
+The \(L(6)\) socle and
 head lie in the two outer square/exterior layers, explaining the observed
 radical occurrence and why every primary head or ordinary-contraction
 trace is blind.
 
 This does not yet prove C1.  In the associated graded of the quadratic
 kernel, multiplication by the bottom \(L(6)\) gives a trace back to
-\(T_\pm\) with scalar \(\dim L(6)=7\ne0\).  A complete proof must still
+\(T_+\) with scalar \(\dim L(6)=7\ne0\).  A complete proof must still
 show that this graded trace is not killed by a higher filtration
-transgression; outer parity is the preferred gate.
+transgression.  Outer parity isolates the component but does not itself
+close the gate: the affine class, embedding, and projection are all
+outer-even.  The direct Borel pullback or an exact filtered connecting-map
+calculation is now required.
 
 The exact finite Borel presentation uses generators
 \(u(1),u(a)\), the split torus, their order and commutation relations, and
@@ -251,8 +262,10 @@ sha256sum -c notes/2026-07-29-c665-q121-borel-simple-h1.sha256
 The script, canonical certificate, and input manifest share the stem
 `notes/2026-07-29-c665-q121-borel-simple-h1`.  The invariant checks are the
 presentation relations, containment of every coboundary in the cocycle
-kernel, the \(15+25+15\) complete graded-factor count, and Frobenius exchange
-of the only two nonzero rows.
+kernel, the \(15+25+15\) complete graded-factor count, normalized dilation
+conjugation, and the \(+1,-1\) outer eigenvalues on the only two nonzero
+rows.  The adjacent affine-socle certificate independently checks outer
+eigenvalue \(+1\) on both unique \(L(6)\) Hom directions.
 
 McDowell--Wildon, arXiv:2105.00538v3, Corollary 1.5 and Section 5 supplies
 the characteristic-independent Hermite isomorphism (cached PDF SHA-256
@@ -284,10 +297,11 @@ routes remain.
 3. Search for an explicit \(q=121\) splitting.  A positive result would
    falsify C1 rather than merely another proposed detector.
 
-The current highest-EV order is the outer-parity/transgression test on the
-graded trace above.  The full direct Borel system is now a fallback, and
-the modular-Hermite filtration is the preferred uniform theorem
-architecture.
+The outer-parity half of the preferred test is now closed but compatible,
+not exclusive.  The current highest-EV order is therefore the exact
+filtered connecting map on the graded trace above, followed by the full
+direct Borel system if needed.  The modular-Hermite filtration remains the
+preferred uniform theorem architecture.
 
 The exact source for route (3) is McDowell--Wildon, *Modular plethystic
 isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
@@ -306,7 +320,7 @@ evidence that the C1 pullback is nonsplit.
 | all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
 | affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
 | \(L(8)\) and \(L(8)^{(1)}\) head probes | settled absent | none; do not infer a prime-field cohomology head |
-| affine-class support | settled in the \(T_+\oplus T_-\) middle channel | determine outer parity and the nonzero component |
+| affine-class support | settled in the outer-even \(T_+\) middle channel | none |
 | actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 

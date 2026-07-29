@@ -13,7 +13,7 @@ import importlib.machinery
 import importlib.util
 from pathlib import Path
 
-from sage.all import block_matrix, identity_matrix, matrix
+from sage.all import block_matrix, diagonal_matrix, identity_matrix, matrix, vector
 
 
 HERE = Path(__file__).resolve().parent
@@ -59,6 +59,29 @@ def additive_cocycle_coefficients(parameter, u1, ua):
     return first, second
 
 
+def digit_simple_dilation(nonsquare, digits):
+    """PGL-normalized action of diag(nonsquare,1) on a digit simple."""
+    factors = []
+    for digit_index, digit in enumerate(digits):
+        factor = diagonal_matrix(
+            FIELD,
+            [
+                nonsquare ** ((digit - index) * P**digit_index)
+                for index in range(digit + 1)
+            ],
+        )
+        factors.append(factor)
+    action = factors[0]
+    for factor in factors[1:]:
+        action = action.tensor_product(factor)
+    highest_weight = sum(
+        digit * P**position
+        for position, digit in enumerate(digits)
+    )
+    assert highest_weight % 2 == 0
+    return nonsquare ** (-highest_weight // 2) * action
+
+
 def calculate_one(digits, torus_multiplier):
     actions, weights = base.digit_simple_actions((FIELD.one(), A), digits)
     u1, ua = actions[:2]
@@ -99,7 +122,8 @@ def calculate_one(digits, torus_multiplier):
         ],
         subdivide=False,
     )
-    cocycle_dimension = 2 * dimension - relations.rank()
+    cocycles = relations.right_kernel()
+    cocycle_dimension = cocycles.dimension()
     fixed_columns = [
         index
         for index, weight in enumerate(weights)
@@ -112,7 +136,7 @@ def calculate_one(digits, torus_multiplier):
     )[:, fixed_columns]
     assert relations * coboundary == 0
     coboundary_dimension = coboundary.rank()
-    return {
+    result = {
         "digits": list(digits),
         "highest_weight": sum(
             digit * P**position
@@ -124,6 +148,32 @@ def calculate_one(digits, torus_multiplier):
         "normalized_coboundary_dimension": coboundary_dimension,
         "borel_h1_dimension": cocycle_dimension - coboundary_dimension,
     }
+    if result["borel_h1_dimension"] == 1:
+        assert coboundary_dimension == 0
+        nonsquare = primitive
+        dilation = digit_simple_dilation(nonsquare, digits)
+        assert dilation * u1 * dilation**-1 == base.digit_simple_actions(
+            (nonsquare,), digits
+        )[0][0]
+        cocycle = cocycles.basis()[0]
+        v1 = vector(FIELD, cocycle[:dimension])
+        va = vector(FIELD, cocycle[dimension:])
+        transported = []
+        for parameter in (FIELD.one(), A):
+            left, right = additive_cocycle_coefficients(
+                parameter / nonsquare, u1, ua
+            )
+            transported.extend(dilation * (left * v1 + right * va))
+        transported = vector(FIELD, transported)
+        eigenvalue = next(
+            transported[index] / cocycle[index]
+            for index in range(2 * dimension)
+            if cocycle[index]
+        )
+        assert transported == eigenvalue * cocycle
+        assert eigenvalue in (FIELD.one(), -FIELD.one())
+        result["outer_eigenvalue"] = int(eigenvalue)
+    return result
 
 
 def main():
@@ -194,7 +244,7 @@ def main():
         (2, 0),
     )
     result = {
-        "schema": 2,
+        "schema": 3,
         "q": base.Q,
         "p": P,
         "field_modulus": str(FIELD.modulus()),

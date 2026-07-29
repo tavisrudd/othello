@@ -5,6 +5,7 @@
     "rank": 213,
     "torus_block_variables": 214
   },
+  "L6_embedding_outer_eigenvalue": 1,
   "L6_is_direct_summand_of_F": false,
   "L6_is_retract_of_E": false,
   "L6_projection_embedding_composition_scalar": "0",
@@ -14,6 +15,7 @@
     "rank": 213,
     "torus_block_variables": 214
   },
+  "L6_projection_outer_eigenvalue": 1,
   "absent_candidate_hom_checks": [
     {
       "equations": 16888,
@@ -53,5 +55,5 @@
   "nonconstant_module": "Sym^59(L(2))",
   "p": 11,
   "q": 121,
-  "schema": 1
+  "schema": 2
 }
