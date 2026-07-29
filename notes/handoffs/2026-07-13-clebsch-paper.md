@@ -1111,9 +1111,26 @@ giving the four orbit values \(100,43,54,45\) on orbit sizes
 their ratio \(5\) survives congruent pencil-coordinate changes, whereas
 the golden-pair midpoint \(11\) does not.  The exact proof, quotient
 certificate, normalization boundary, and mystery ledger are in
-`notes/2026-07-28-c682-zariski-bockstein-orbits.md`.  The remaining global
-gate is a coordinate-free kernel--incidence morphism explaining why that
-tangent ratio is the discriminant of the \(5J_0\) torsor.
+`notes/2026-07-28-c682-zariski-bockstein-orbits.md`.
+
+The coordinate-free global gate is now closed.  Pulling the universal
+rank-three kernel to the finite-etale \(22\)-section and projectivizing its
+apolar rank-four annihilator gives exactly the base change of Hitchin's
+incidence bundle.  On the radial/\(A_4\) golden pair, the common annihilator
+line descends and identifies the quadratic sheet cover with the pullback of
+the incidence Stein cover.  Relative trace sends the centered Bockstein
+separator \(b=5e_1+e_6\) to \(5s\) in its deck-odd line:
+the orbit degrees force
+\(1\cdot5+6\cdot1=11=0\).  Equivalently the two split values of
+\(\delta=3+2s\) are \(5,1\) and
+\(\operatorname{Nm}(\delta)=5\).  This identifies the tangent factor with
+the reduction of the \(5J_0\) discriminant character; the frozen pencil
+normalization fixes the literal ratio \(5/1\).  The proof and scope
+boundary are in
+`notes/2026-07-28-c682-kernel-incidence-morphism.md`.  The remaining
+geometric frontier is a canonical flattening of the operator-side kernel
+map across non-constant-rank degenerations, or a classical moduli meaning
+for the \(D_5/S_3\) branches.
 
 C682's remaining Platinum track is:
 
