@@ -1,0 +1,1471 @@
+{
+  "A5_module": {
+    "anticanonical_decomposition": "2*1 + V3 + V4 + V5",
+    "character_rows_mod_11": [
+      {
+        "anticanonical_trace": 2,
+        "binary_PGL2_matrix": [
+          1,
+          9,
+          1,
+          10
+        ],
+        "order": 2,
+        "quotient_trace": 10,
+        "section_trace": 3
+      },
+      {
+        "anticanonical_trace": 2,
+        "binary_PGL2_matrix": [
+          1,
+          8,
+          3,
+          5
+        ],
+        "order": 3,
+        "quotient_trace": 0,
+        "section_trace": 2
+      },
+      {
+        "anticanonical_trace": 5,
+        "binary_PGL2_matrix": [
+          6,
+          9,
+          9,
+          3
+        ],
+        "order": 5,
+        "quotient_trace": 4,
+        "section_trace": 1
+      }
+    ],
+    "quotient": "V3",
+    "section_decomposition": "2*1 + V4 + V5",
+    "selected_order_five_V3_trace": 4
+  },
+  "degree_close": {
+    "anticanonical_degree": 22,
+    "conclusion": "The complementary P10 section is proper and equals the 22 reduced target kernel planes scheme-theoretically.",
+    "contained_distinct_transverse_points": 22
+  },
+  "field": "F_11",
+  "inputs": {
+    "notes/2026-07-28-c682-rank-four-resolvent.json": "92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c",
+    "notes/2026-07-28-c682-rank-four-resolvent.py": "d53e11f44f7aac3ff5940fcb8e04780c7410af41425d7b759c6cf2de065499dc",
+    "notes/2026-07-28-c682-transvectant-deformation-map.json": "45d799a413c6632b32dc61975c82a946f913a47386bb3f673a24752743d8acca"
+  },
+  "linear_section": {
+    "codimension_inside_anticanonical_space": 3,
+    "display_equations": [
+      "p_012=0",
+      "p_013+p_356=0",
+      "p_456=0"
+    ],
+    "equations_modulo_the_21_isotropy_contraction_relations": [
+      [
+        {
+          "coefficient": 1,
+          "plucker": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      [
+        {
+          "coefficient": 1,
+          "plucker": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "coefficient": 1,
+          "plucker": [
+            3,
+            5,
+            6
+          ]
+        }
+      ],
+      [
+        {
+          "coefficient": 1,
+          "plucker": [
+            4,
+            5,
+            6
+          ]
+        }
+      ]
+    ],
+    "target_plucker_rank": 11,
+    "target_point_count": 22,
+    "target_points": [
+      {
+        "plucker": [
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 0
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          8,
+          8,
+          10,
+          6,
+          7,
+          7,
+          6,
+          2,
+          8,
+          9,
+          7,
+          3,
+          8,
+          7,
+          10,
+          10,
+          7,
+          2,
+          0,
+          4,
+          5,
+          10,
+          1,
+          2,
+          1,
+          6,
+          8,
+          5,
+          6,
+          5,
+          10,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 1
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          5,
+          10,
+          3,
+          1,
+          6,
+          1,
+          8,
+          5,
+          7,
+          5,
+          4,
+          1,
+          4,
+          6,
+          3,
+          6,
+          4,
+          10,
+          5,
+          5,
+          9,
+          5,
+          9,
+          9,
+          4,
+          3,
+          4,
+          1,
+          4,
+          1,
+          3,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 2
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          2,
+          6,
+          6,
+          7,
+          8,
+          2,
+          2,
+          10,
+          10,
+          9,
+          7,
+          9,
+          6,
+          8,
+          6,
+          7,
+          7,
+          8,
+          0,
+          1,
+          4,
+          2,
+          5,
+          2,
+          3,
+          10,
+          6,
+          3,
+          2,
+          3,
+          7,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 3
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          10,
+          7,
+          2,
+          2,
+          2,
+          8,
+          7,
+          7,
+          2,
+          9,
+          7,
+          1,
+          7,
+          2,
+          2,
+          8,
+          7,
+          6,
+          0,
+          5,
+          9,
+          6,
+          9,
+          2,
+          4,
+          8,
+          7,
+          1,
+          7,
+          1,
+          8,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 4
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          7,
+          2,
+          7,
+          8,
+          10,
+          6,
+          10,
+          8,
+          6,
+          9,
+          7,
+          4,
+          2,
+          10,
+          7,
+          2,
+          7,
+          7,
+          0,
+          9,
+          3,
+          8,
+          4,
+          2,
+          5,
+          7,
+          2,
+          9,
+          10,
+          9,
+          2,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 5
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          4,
+          2,
+          4,
+          3,
+          10,
+          5,
+          10,
+          3,
+          6,
+          5,
+          4,
+          3,
+          3,
+          10,
+          4,
+          2,
+          4,
+          7,
+          5,
+          4,
+          5,
+          1,
+          1,
+          9,
+          1,
+          5,
+          3,
+          5,
+          5,
+          5,
+          1,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 6
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          1,
+          7,
+          9,
+          9,
+          2,
+          3,
+          7,
+          4,
+          2,
+          5,
+          4,
+          9,
+          5,
+          2,
+          9,
+          8,
+          4,
+          6,
+          5,
+          1,
+          4,
+          9,
+          5,
+          9,
+          3,
+          1,
+          5,
+          3,
+          9,
+          3,
+          4,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 7
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          9,
+          6,
+          5,
+          4,
+          8,
+          9,
+          2,
+          1,
+          10,
+          5,
+          4,
+          4,
+          9,
+          8,
+          5,
+          7,
+          4,
+          8,
+          5,
+          9,
+          3,
+          3,
+          4,
+          9,
+          5,
+          4,
+          9,
+          9,
+          1,
+          9,
+          9,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 8
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          6,
+          10,
+          8,
+          10,
+          6,
+          10,
+          8,
+          6,
+          7,
+          9,
+          7,
+          5,
+          10,
+          6,
+          8,
+          6,
+          7,
+          10,
+          0,
+          3,
+          1,
+          7,
+          3,
+          2,
+          9,
+          2,
+          10,
+          4,
+          8,
+          4,
+          6,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 9
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          3,
+          8,
+          1,
+          5,
+          7,
+          4,
+          6,
+          9,
+          8,
+          5,
+          4,
+          5,
+          1,
+          7,
+          1,
+          10,
+          4,
+          2,
+          5,
+          3,
+          1,
+          4,
+          3,
+          9,
+          9,
+          9,
+          1,
+          4,
+          3,
+          4,
+          5,
+          1,
+          0
+        ],
+        "s": 1,
+        "t": 10
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 0
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          8,
+          8,
+          10,
+          6,
+          7,
+          7,
+          6,
+          2,
+          8,
+          6,
+          7,
+          5,
+          10,
+          7,
+          10,
+          10,
+          7,
+          2,
+          6,
+          3,
+          1,
+          7,
+          3,
+          2,
+          9,
+          2,
+          10,
+          4,
+          8,
+          4,
+          6,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 1
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          5,
+          10,
+          3,
+          1,
+          6,
+          1,
+          8,
+          5,
+          7,
+          2,
+          4,
+          5,
+          1,
+          6,
+          3,
+          6,
+          4,
+          10,
+          0,
+          3,
+          1,
+          4,
+          3,
+          9,
+          9,
+          9,
+          1,
+          4,
+          3,
+          4,
+          5,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 2
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          2,
+          6,
+          6,
+          7,
+          8,
+          2,
+          2,
+          10,
+          10,
+          6,
+          7,
+          4,
+          2,
+          8,
+          6,
+          7,
+          7,
+          8,
+          6,
+          9,
+          3,
+          8,
+          4,
+          2,
+          5,
+          7,
+          2,
+          9,
+          10,
+          9,
+          2,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 3
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          10,
+          7,
+          2,
+          2,
+          2,
+          8,
+          7,
+          7,
+          2,
+          6,
+          7,
+          9,
+          6,
+          2,
+          2,
+          8,
+          7,
+          6,
+          6,
+          1,
+          4,
+          2,
+          5,
+          2,
+          3,
+          10,
+          6,
+          3,
+          2,
+          3,
+          7,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 4
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          7,
+          2,
+          7,
+          8,
+          10,
+          6,
+          10,
+          8,
+          6,
+          6,
+          7,
+          3,
+          8,
+          10,
+          7,
+          2,
+          7,
+          7,
+          6,
+          4,
+          5,
+          10,
+          1,
+          2,
+          1,
+          6,
+          8,
+          5,
+          6,
+          5,
+          10,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 5
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          4,
+          2,
+          4,
+          3,
+          10,
+          5,
+          10,
+          3,
+          6,
+          2,
+          4,
+          4,
+          9,
+          10,
+          4,
+          2,
+          4,
+          7,
+          0,
+          9,
+          3,
+          3,
+          4,
+          9,
+          5,
+          4,
+          9,
+          9,
+          1,
+          9,
+          9,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 6
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          1,
+          7,
+          9,
+          9,
+          2,
+          3,
+          7,
+          4,
+          2,
+          2,
+          4,
+          1,
+          4,
+          2,
+          9,
+          8,
+          4,
+          6,
+          0,
+          5,
+          9,
+          5,
+          9,
+          9,
+          4,
+          3,
+          4,
+          1,
+          4,
+          1,
+          3,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 7
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          9,
+          6,
+          5,
+          4,
+          8,
+          9,
+          2,
+          1,
+          10,
+          2,
+          4,
+          9,
+          5,
+          8,
+          5,
+          7,
+          4,
+          8,
+          0,
+          1,
+          4,
+          9,
+          5,
+          9,
+          3,
+          1,
+          5,
+          3,
+          9,
+          3,
+          4,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 8
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          6,
+          10,
+          8,
+          10,
+          6,
+          10,
+          8,
+          6,
+          7,
+          6,
+          7,
+          1,
+          7,
+          6,
+          8,
+          6,
+          7,
+          10,
+          6,
+          5,
+          9,
+          6,
+          9,
+          2,
+          4,
+          8,
+          7,
+          1,
+          7,
+          1,
+          8,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 9
+      },
+      {
+        "plucker": [
+          0,
+          10,
+          3,
+          8,
+          1,
+          5,
+          7,
+          4,
+          6,
+          9,
+          8,
+          2,
+          4,
+          3,
+          3,
+          7,
+          1,
+          10,
+          4,
+          2,
+          0,
+          4,
+          5,
+          1,
+          1,
+          9,
+          1,
+          5,
+          3,
+          5,
+          5,
+          5,
+          1,
+          1,
+          0
+        ],
+        "s": 10,
+        "t": 10
+      }
+    ],
+    "target_projective_span_dimension": 10
+  },
+  "quadratic_target_resolvent": {
+    "display_coordinates": [
+      "u=5*p_036+8*p_045",
+      "v=10*p_013+p_356"
+    ],
+    "equation_on_the_22_point_section": "u^2-v^2=0",
+    "evaluations": [
+      {
+        "source_s": 1,
+        "t": 0,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 1,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 2,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 3,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 4,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 5,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 6,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 7,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 8,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 9,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 1,
+        "t": 10,
+        "u": 2,
+        "u_over_v": 1,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 0,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 1,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 2,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 3,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 4,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 5,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 6,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 7,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 8,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 9,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      },
+      {
+        "source_s": 10,
+        "t": 10,
+        "u": 9,
+        "u_over_v": 10,
+        "v": 2
+      }
+    ],
+    "interpretation": "The two trivial A5 summands of the anticanonical carrier supply the target invariant pencil; its two hyperplanes are the two sheets of the quadratic resolvent.",
+    "invariant_linear_form_dimension": 2,
+    "sheet_minus": "u+v=0, length 11",
+    "sheet_plus": "u-v=0, length 11",
+    "source_sheet_recovery": "s=u/v",
+    "u": [
+      {
+        "coefficient": 5,
+        "plucker": [
+          0,
+          3,
+          6
+        ]
+      },
+      {
+        "coefficient": 8,
+        "plucker": [
+          0,
+          4,
+          5
+        ]
+      }
+    ],
+    "v": [
+      {
+        "coefficient": 10,
+        "plucker": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "coefficient": 1,
+        "plucker": [
+          3,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "schema": "c682-u22-linear-section-v1",
+  "target_anticanonical_model": {
+    "ambient_projective_dimension": 13,
+    "ambient_vector_dimension": 14,
+    "carrier": "E=Sym^6(F_11^2)",
+    "contraction_equation_count": 21,
+    "contraction_rank": 21,
+    "identification": "P(ker c_omega)=P(1+Sym^12), the anticanonical P^13",
+    "isotropy_map": "c_omega(u wedge v wedge w)=omega(u,v)w-omega(u,w)v+omega(v,w)u",
+    "plucker_coordinate_order": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        1,
+        5
+      ],
+      [
+        0,
+        1,
+        6
+      ],
+      [
+        0,
+        2,
+        3
+      ],
+      [
+        0,
+        2,
+        4
+      ],
+      [
+        0,
+        2,
+        5
+      ],
+      [
+        0,
+        2,
+        6
+      ],
+      [
+        0,
+        3,
+        4
+      ],
+      [
+        0,
+        3,
+        5
+      ],
+      [
+        0,
+        3,
+        6
+      ],
+      [
+        0,
+        4,
+        5
+      ],
+      [
+        0,
+        4,
+        6
+      ],
+      [
+        0,
+        5,
+        6
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        1,
+        2,
+        4
+      ],
+      [
+        1,
+        2,
+        5
+      ],
+      [
+        1,
+        2,
+        6
+      ],
+      [
+        1,
+        3,
+        4
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        6
+      ],
+      [
+        1,
+        4,
+        5
+      ],
+      [
+        1,
+        4,
+        6
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        2,
+        3,
+        4
+      ],
+      [
+        2,
+        3,
+        5
+      ],
+      [
+        2,
+        3,
+        6
+      ],
+      [
+        2,
+        4,
+        5
+      ],
+      [
+        2,
+        4,
+        6
+      ],
+      [
+        2,
+        5,
+        6
+      ],
+      [
+        3,
+        4,
+        5
+      ],
+      [
+        3,
+        4,
+        6
+      ],
+      [
+        3,
+        5,
+        6
+      ],
+      [
+        4,
+        5,
+        6
+      ]
+    ]
+  },
+  "target_macaulay": {
+    "conclusion": "S_4=I_4+v*S_3, so multiplication and induction bound all later Hilbert values by 22; the 22 reduced points force equality and exclude every excess component.",
+    "degree_four": {
+      "ideal_rank": 979,
+      "monomial_count": 1001,
+      "quotient_dimension": 22
+    },
+    "degree_three": {
+      "ideal_rank": 264,
+      "monomial_count": 286,
+      "quotient_dimension": 22
+    },
+    "degree_two": {
+      "ideal_rank": 45,
+      "monomial_count": 66,
+      "quotient_dimension": 21
+    },
+    "restricted_nonzero_plucker_relation_rows": 516,
+    "v_coefficients_on_section_basis": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "v_multiplication_degree_3_to_4": {
+      "rank": 22,
+      "source_dimension": 22,
+      "target_dimension": 22
+    }
+  },
+  "transversality": {
+    "all_22_rows_equal": true,
+    "common_tangent_data": {
+      "affine_plucker_tangent_rank": 4,
+      "linearized_isotropy_rank": 9,
+      "projective_tangent_dimension": 3,
+      "section_plus_affine_tangent_rank": 14
+    },
+    "point_count": 22,
+    "projective_tangent_meets_P10_in_dimension": 0
+  },
+  "trust_boundary": {
+    "certifies": [
+      "the 14-dimensional target anticanonical Plucker carrier",
+      "the explicit A5-stable codimension-three target section",
+      "the 22 target points, their P10 span, and transversality",
+      "the target Plucker-ideal Hilbert bound and v-isomorphism",
+      "the quotient character identifying the omitted V3",
+      "the invariant target pencil and its u^2-v^2 sheet split"
+    ],
+    "does_not_claim": [
+      "an integral or characteristic-zero lift of this section",
+      "a new manuscript theorem or novelty verdict",
+      "that the source quadratic sheet coordinate is linear on U22"
+    ],
+    "uses_classically": [
+      "the fifth-transvectant Grassmannian model of U22",
+      "the anticanonical degree (-K_U22)^3=22",
+      "the complementary-linear-section degree lemma"
+    ]
+  }
+}

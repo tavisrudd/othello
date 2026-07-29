@@ -899,10 +899,36 @@ its idempotents split the scheme into the two stable length-eleven sheets
 Bockstein multiplication, the explicit \(22\)-point parameterization, and
 an independent invariant replay prove exhaustiveness and reducedness.  The
 proof and mystery ledger are in
-`notes/2026-07-28-c682-rank-four-resolvent.md`.  The highest-value new
-question is whether the length \(22=\deg U_{22}\) and universal kernel
-isotropy come from a target-side anticanonical linear section; equality of
-degrees alone is not promoted as that theorem.
+`notes/2026-07-28-c682-rank-four-resolvent.md`.
+
+The target-side question is now closed scheme-theoretically.  In the
+anticanonical Plücker carrier
+\[
+\ker(c_{(\,\cdot\,,\,\cdot\,)_5})
+\simeq\mathbf1\oplus\operatorname{Sym}^{12}
+\simeq2\mathbf1\oplus V_3\oplus V_4\oplus V_5,
+\]
+the \(22\) kernel planes are exactly the complementary \(\mathbf P^{10}\)
+section obtained by killing the multiplicity-one \(V_3\).  In the frozen
+binary basis it is
+\[
+p_{012}=p_{013}+p_{356}=p_{456}=0.
+\]
+All \(22\) intersections are transverse.  The restricted Plücker ideal has
+Hilbert values \(21,22,22\) in degrees \(2,3,4\), and invariant-coordinate
+multiplication is an isomorphism from degree three to four, so the Hilbert
+function stays \(22\) and proves scheme-theoretic exhaustiveness directly;
+this realizes \((-K_{U_{22}})^3=22\).  The two invariant target coordinates
+\(u=5p_{036}+8p_{045}\) and
+\(v=10p_{013}+p_{356}\) satisfy \(u^2=v^2\), recover the source sheet by
+\(s=u/v\), and split the section into the length-eleven hyperplane halves
+\((1+10)\) and \((5+6)\).  The exact certificate, independent replay,
+proof boundary, and mystery ledger are in
+`notes/2026-07-28-c682-u22-linear-section.md`.  The remaining target-side
+gate is to globalize this marked \(\mathbf F_{11}\) section and invariant
+pencil over the corrected \(11\)-adic tower or a characteristic-zero
+family, then compare \(u/v\) with the local incidence orientation
+coordinate.
 
 C682's remaining Platinum track is:
 
