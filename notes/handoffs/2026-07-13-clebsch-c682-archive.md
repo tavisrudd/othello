@@ -861,3 +861,24 @@ one radial cubic selects all nine classical \(E_8\) factorizations.  Its
 binary-cubic discriminant is \(-4\,000\,000F^3t^2\).  The exact proof,
 certificate, two-prime independent replay, and mystery ledger are in
 `notes/2026-07-29-c682-intrinsic-e8-symbol.md`.
+
+The later McKay-corner sweep is closed through degree \(72\), with an
+explicit all-weight boundary.  Put
+\[
+ U_1=\Delta^\dagger\Delta,\qquad
+ U_2=(\Delta^2)^\dagger\Delta^2,\qquad
+ L_1=\Delta_{n-6}\Delta_{n-6}^\dagger.
+\]
+For every \(0\le n\le72\), \(n\ne22\), these three local returns generate
+the full \(2.A_5\)-commutant.  The upward pair alone has fifteen later
+deficits, at
+\[
+ 26,30,31,41,42,46,50,51,60,61,62,66,70,71,72,
+\]
+and every one is repaired by \(L_1\).  At degree \(22\), \(L_1\) has no
+\(3\)-component because the lower multiplicity is zero, so the exact
+\(8<10\) bottleneck persists.  Modular rank at two large primes and exact
+rational checks at the first three repairs certify the result.  No
+all-weight uniqueness claim is made.  The report, generator, replay, and
+mystery ledger are in
+`notes/2026-07-29-c682-later-mckay-corners.md`.

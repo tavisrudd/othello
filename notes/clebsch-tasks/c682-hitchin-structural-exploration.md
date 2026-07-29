@@ -42,6 +42,11 @@ explicitly separated.
   \(\sigma_3(\mathcal D)=10p\,m_t\), with \(m_t\) multiplication by the odd
   Klein invariant and hence the corresponding classical \(E_8\)
   factorization.
+- In every degree \(0\le n\le72\) except \(22\), the two shortest upward
+  returns together with the nearest downward return generate the full
+  binary-icosahedral commutant.  Fifteen apparent later deficits of the
+  upward pair are all repaired by that one downward word; degree \(22\)
+  remains the unique certified full-corner failure in this bounded range.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -57,14 +62,14 @@ explicitly separated.
 
 ## Active order
 
-The intrinsic \(E_8\) symbol frontier is closed.  No successor frontier is
-selected; C682 remains open until the user chooses among the later
-McKay-failure classification, QG, and E3 branches.
+The later McKay-corner classification is active.  Its next gate is an
+all-weight proof that the three local returns saturate above degree \(72\),
+or the first certified counterexample.  C682 remains open.
 
 ## Parked branches
 
-Later McKay-block corner failures; QG's converse monomial/Gale fibre
-theorem; E3's all-size full-conic classification.
+QG's converse monomial/Gale fibre theorem; E3's all-size full-conic
+classification.
 
 ## Boundaries and records
 
@@ -74,4 +79,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-intrinsic-e8-symbol.md`.
+`notes/2026-07-29-c682-later-mckay-corners.md`.

@@ -1,0 +1,254 @@
+{
+  "claim_boundary": "The exhaustive degree domain stops at 72. No assertion that degree 22 is the unique failure in all weights is made.",
+  "classification": {
+    "all_other_degrees_saturated_by_U1_U2_L1": "0..72 except 22",
+    "later_repairs": [
+      26,
+      30,
+      31,
+      41,
+      42,
+      46,
+      50,
+      51,
+      60,
+      61,
+      62,
+      66,
+      70,
+      71,
+      72
+    ],
+    "persistent_full_corner_failures": [
+      22
+    ]
+  },
+  "degree_domain": "0..72",
+  "field": "F_1000000007",
+  "generators": {
+    "L1": "Delta_(n-6) Delta_(n-6)^dagger",
+    "U1": "Delta^dagger Delta",
+    "U2": "(Delta^dagger)^2 Delta^2"
+  },
+  "operator": "Delta=(.,Phi_12)_3 with Fischer adjoint",
+  "rank_transfer": "A modular word-span rank equal to the characteristic-zero commutant upper bound proves characteristic-zero saturation.",
+  "schema": "c682-later-mckay-corners-v1",
+  "two_up_deficits": [
+    {
+      "commutant_dimension": 10,
+      "decomposition": {
+        "3": 2,
+        "3p": 1,
+        "4": 1,
+        "5": 2
+      },
+      "degree": 22,
+      "repair": "persistent",
+      "two_up_dimension": 8,
+      "with_down_dimension": 8
+    },
+    {
+      "commutant_dimension": 13,
+      "decomposition": {
+        "3": 1,
+        "3p": 2,
+        "4": 2,
+        "5": 2
+      },
+      "degree": 26,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 11,
+      "with_down_dimension": 13
+    },
+    {
+      "commutant_dimension": 17,
+      "decomposition": {
+        "1": 1,
+        "3": 2,
+        "3p": 2,
+        "4": 2,
+        "5": 2
+      },
+      "degree": 30,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 15,
+      "with_down_dimension": 17
+    },
+    {
+      "commutant_dimension": 18,
+      "decomposition": {
+        "2": 2,
+        "2p": 1,
+        "4s": 2,
+        "6": 3
+      },
+      "degree": 31,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 16,
+      "with_down_dimension": 18
+    },
+    {
+      "commutant_dimension": 30,
+      "decomposition": {
+        "2": 2,
+        "2p": 1,
+        "4s": 3,
+        "6": 4
+      },
+      "degree": 41,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 28,
+      "with_down_dimension": 30
+    },
+    {
+      "commutant_dimension": 32,
+      "decomposition": {
+        "1": 1,
+        "3": 3,
+        "3p": 2,
+        "4": 3,
+        "5": 3
+      },
+      "degree": 42,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 28,
+      "with_down_dimension": 32
+    },
+    {
+      "commutant_dimension": 38,
+      "decomposition": {
+        "3": 2,
+        "3p": 3,
+        "4": 3,
+        "5": 4
+      },
+      "degree": 46,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 34,
+      "with_down_dimension": 38
+    },
+    {
+      "commutant_dimension": 44,
+      "decomposition": {
+        "1": 1,
+        "3": 3,
+        "3p": 3,
+        "4": 3,
+        "5": 4
+      },
+      "degree": 50,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 40,
+      "with_down_dimension": 44
+    },
+    {
+      "commutant_dimension": 46,
+      "decomposition": {
+        "2": 2,
+        "2p": 1,
+        "4s": 4,
+        "6": 5
+      },
+      "degree": 51,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 44,
+      "with_down_dimension": 46
+    },
+    {
+      "commutant_dimension": 63,
+      "decomposition": {
+        "1": 2,
+        "3": 3,
+        "3p": 3,
+        "4": 4,
+        "5": 5
+      },
+      "degree": 60,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 61,
+      "with_down_dimension": 63
+    },
+    {
+      "commutant_dimension": 65,
+      "decomposition": {
+        "2": 3,
+        "2p": 2,
+        "4s": 4,
+        "6": 6
+      },
+      "degree": 61,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 61,
+      "with_down_dimension": 65
+    },
+    {
+      "commutant_dimension": 67,
+      "decomposition": {
+        "1": 1,
+        "3": 4,
+        "3p": 3,
+        "4": 4,
+        "5": 5
+      },
+      "degree": 62,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 61,
+      "with_down_dimension": 67
+    },
+    {
+      "commutant_dimension": 76,
+      "decomposition": {
+        "1": 1,
+        "3": 3,
+        "3p": 4,
+        "4": 5,
+        "5": 5
+      },
+      "degree": 66,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 70,
+      "with_down_dimension": 76
+    },
+    {
+      "commutant_dimension": 85,
+      "decomposition": {
+        "1": 1,
+        "3": 4,
+        "3p": 4,
+        "4": 4,
+        "5": 6
+      },
+      "degree": 70,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 79,
+      "with_down_dimension": 85
+    },
+    {
+      "commutant_dimension": 87,
+      "decomposition": {
+        "2": 3,
+        "2p": 2,
+        "4s": 5,
+        "6": 7
+      },
+      "degree": 71,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 83,
+      "with_down_dimension": 87
+    },
+    {
+      "commutant_dimension": 90,
+      "decomposition": {
+        "1": 2,
+        "3": 4,
+        "3p": 3,
+        "4": 5,
+        "5": 6
+      },
+      "degree": 72,
+      "repair": "repaired_by_nearest_down_return",
+      "two_up_dimension": 88,
+      "with_down_dimension": 90
+    }
+  ]
+}

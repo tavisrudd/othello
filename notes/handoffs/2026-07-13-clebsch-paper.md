@@ -112,6 +112,10 @@ Independently, the Klein \(E_8\) cubic is now intrinsic: it is the radial
 third-transvectant symbol, and on every McKay covariant block the full
 principal symbol is \(10p\) times multiplication by the odd invariant
 \(t\), uniformly selecting the classical \(E_8\) matrix factorizations.
+Through degree \(72\), every later apparent short-return deficit is repaired
+by the nearest downward return; degree \(22\) is the sole certified
+full-corner failure in that bounded range.  The all-weight gate remains
+open.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
