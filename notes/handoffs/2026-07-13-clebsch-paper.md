@@ -362,6 +362,16 @@ The q=27 replay sharply separates two copies of that same simple type: the
 naive axis-digit nine-space has moment rank nine, while the
 inverse-discriminant nine-space has moment rank zero.  This is the concrete
 warning for C1 that composition factors do not identify the relevant copy.
+It now also resolves the full nine-dimensional \(U\)-fixed norm kernel.
+Writing \(\Delta(A)=(x-y)^2\), the seven finite-axis Fourier differences
+\(\tau_r=\pm\Delta(A)^{-r}\), \(1\le r\le7\), are trades; \(\tau_2\) is the
+uniform inverse-discriminant line.  The remaining two dimensions are the
+trivial-character cross relations “plus infinity = minus finite sum” and
+“plus finite sum = minus infinity”; their sum is the sheet sign.  Thus the
+former seven unexplained directions beyond sign and \(\tau_2\) are the six
+other Fourier lines and one complementary cross line.  C682's degree-22
+Koszul row suggested this operator-syzygy viewpoint, but there is no literal
+\(E_8\) or mod-\(3\) module transfer.
 Diagonalization
 over \(\mathbb F_{q^2}\) and Frobenius-fixed
 discriminant weight descend the nonsplit case, while the antipodal type is

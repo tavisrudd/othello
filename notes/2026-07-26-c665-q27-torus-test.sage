@@ -3,7 +3,9 @@
 
 Besides the full quadratic ranks, this checks the fixed-correction identity,
 the one-sheet/joint Sylow-translation norm ranks, and the
-discriminant-weight-four trade on every split torus orbit.
+discriminant-weight-four trade on every split torus orbit.  It also resolves
+the nine-dimensional translation-fixed trade space into seven finite-axis
+Fourier trades and a two-dimensional trivial-character corner.
 """
 
 import argparse
@@ -377,6 +379,107 @@ def evaluate(representative, orbit, orbit_number):
                 ]
             ),
         }
+
+        part_axes = []
+        for part, sheet in zip(translation_orbits, orbit_sheet):
+            labels = plus_labels if sheet == 0 else minus_labels
+            axis = labels[part[0]]
+            if infinity in axis:
+                part_axes.append(None)
+            else:
+                left, right = axis
+                part_axes.append((points[left] - points[right])**2)
+        axis_columns = {
+            (sheet, axis): column
+            for column, (sheet, axis) in enumerate(
+                zip(orbit_sheet, part_axes)
+            )
+        }
+        assert len(axis_columns) == 2 * (len(squares) + 1)
+        assert all(
+            (sheet, axis) in axis_columns
+            for sheet in range(2)
+            for axis in tuple(squares) + (None,)
+        )
+
+        correction_fourier_moments = []
+        finite_axis_trade_exponents = []
+        for exponent in range(len(squares)):
+            coefficients = vector(k, len(translation_orbits))
+            for axis in squares:
+                weight = axis**(-exponent)
+                coefficients[axis_columns[(0, axis)]] = weight
+                coefficients[axis_columns[(1, axis)]] = -weight
+            moment = norm_images * coefficients
+            correction_fourier_moments.append(moment)
+            if moment.is_zero():
+                finite_axis_trade_exponents.append(exponent)
+        correction_fourier_support = [
+            exponent
+            for exponent, moment in enumerate(correction_fourier_moments)
+            if not moment.is_zero()
+        ]
+        assert correction_fourier_support == [0, 8, 9, 10, 11, 12], (
+            correction_fourier_support
+        )
+        assert finite_axis_trade_exponents == [1, 2, 3, 4, 5, 6, 7], (
+            finite_axis_trade_exponents
+        )
+
+        trivial_columns = [
+            sum(
+                (
+                    norm_images.column(axis_columns[(sheet, axis)])
+                    for axis in squares
+                ),
+                vector(k, norm_images.nrows()),
+            )
+            for sheet in range(2)
+        ]
+        trivial_columns = [
+            trivial_columns[0],
+            norm_images.column(axis_columns[(0, None)]),
+            trivial_columns[1],
+            norm_images.column(axis_columns[(1, None)]),
+        ]
+        trivial_moment_matrix = matrix(k, trivial_columns).transpose()
+        trivial_kernel = trivial_moment_matrix.right_kernel()
+        assert trivial_kernel.dimension() == 2
+        sign_relation = vector(k, [1, 1, -1, -1])
+        assert sign_relation in trivial_kernel
+        other_relation = next(
+            relation
+            for relation in trivial_kernel.basis()
+            if matrix(k, [sign_relation, relation]).rank() == 2
+        )
+        other_relation -= other_relation[0] * sign_relation
+        pivot = next(entry for entry in other_relation if entry)
+        other_relation /= pivot
+        assert other_relation == vector(k, [0, 1, -1, 0])
+        trivial_corner = {
+            "basis_order": [
+                "plus_finite_sum",
+                "plus_infinity",
+                "minus_finite_sum",
+                "minus_infinity",
+            ],
+            "dimension": trivial_kernel.dimension(),
+            "sign_relation": [str(entry) for entry in sign_relation],
+            "mixed_relation": [str(entry) for entry in other_relation],
+        }
+        invariant_trade_decomposition = {
+            "finite_axis_fourier_trade_exponents": (
+                finite_axis_trade_exponents
+            ),
+            "correction_fourier_support_exponents": (
+                correction_fourier_support
+            ),
+            "trivial_character_corner": trivial_corner,
+            "dimension_check": (
+                len(finite_axis_trade_exponents)
+                + trivial_kernel.dimension()
+            ),
+        }
     else:
         sheet_norm_ranks = None
         joint_norm_rank = norm_images.rank()
@@ -385,6 +488,7 @@ def evaluate(representative, orbit, orbit_number):
             len(translation_orbits) - joint_norm_rank
         )
         defect_quotient = None
+        invariant_trade_decomposition = None
     return {
         "orbit_number": orbit_number,
         "g_orbit_size": len(orbit),
@@ -401,6 +505,7 @@ def evaluate(representative, orbit, orbit_number):
         "norm_rank_increment": norm_rank_increment,
         "invariant_trade_dimension": invariant_trade_dimension,
         "defect_quotient": defect_quotient,
+        "invariant_trade_decomposition": invariant_trade_decomposition,
         "axis_incidence_difference": axis_incidence,
         "axis_l2_tensor_frobenius_difference": axis_digit,
         "axis_weight_four_difference": weight_four_trade,
@@ -455,7 +560,7 @@ def calculate():
         for record in split_records
     )
     return {
-        "schema": 3,
+        "schema": 4,
         "q": q,
         "field_modulus": str(k.modulus()),
         "torus_matching_count": len(torus_matchings),

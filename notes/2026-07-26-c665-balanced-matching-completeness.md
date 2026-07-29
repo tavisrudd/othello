@@ -481,13 +481,15 @@ and tests three explicit substitute coefficient families.  The first two
 fail as recorded above; the discriminant-weight-four family is a nonzero
 common moment on every split orbit and its sheet difference has zero full
 quadratic moment.  Its exact \(H\)-span has dimension nine and remains
-inside the full trade kernel.  The human torus-torsor classification and
-Dickson-resultant derivation are independent
+inside the full trade kernel.  The checker also diagonalizes the entire
+\(U\)-fixed norm kernel into the seven finite Fourier lines and the
+two-dimensional trivial cross corner of (U9).  The human torus-torsor
+classification and Dickson-resultant derivation are independent
 of this enumeration; there is no second implementation of the full
 756-column quadratic rank.  The certificate covers exactly q=27 and does
 not extrapolate \(N_5\) to another field.  The checker and certificate have
-respectively 17,566 and 8,781 bytes; their SHA-256 values are pinned in
-`2026-07-26-c665-q27-torus-test.sha256`, together with the 19,080-byte
+respectively 21,691 and 13,770 bytes; their SHA-256 values are pinned in
+`2026-07-26-c665-q27-torus-test.sha256`, together with the 23,830-byte
 Sage preparse mirror.
 
 The sheet permutation character is
@@ -1743,6 +1745,60 @@ evaluation-functional route sees the same absent \(s^2\) character; unlike
 its former rank bound, that observation is now only a cross-check of the
 coefficient proof.
 
+The same full q=27 replay also resolves the formerly unexplained
+nine-dimensional \(U\)-fixed kernel.  For \(1\le r\le7\), put
+\[
+ \tau_r(M_{+,A})=\Delta(A)^{-r},\qquad
+ \tau_r(M_{-,A})=-\Delta(A)^{-r}
+                                                        \tag{Fr}
+\]
+on finite axes and put \(\tau_r=0\) on the infinity-axis orbits.  Thus the
+trade (T4) is \(\tau_2\).  In square-torus Fourier coordinates the exact
+correction has support
+\[
+ \{0,8,9,10,11,12\}\subset\mathbf Z/13,
+\]
+so the seven complementary characters give the seven trades
+\(\tau_1,\ldots,\tau_7\).
+
+There are two further, trivial-character relations.  If
+\(\epsilon_{\pm,\infty}\) is the indicator of the infinity-axis
+translation orbit in the indicated sheet and
+\(\epsilon_{\pm,\mathrm{fin}}\) is the sum of the thirteen finite-axis
+orbit indicators, then
+\[
+ \chi_1=\epsilon_{+,\infty}-\epsilon_{-,\mathrm{fin}},
+ \qquad
+ \chi_2=\epsilon_{+,\mathrm{fin}}-\epsilon_{-,\infty}     \tag{X0}
+\]
+are trades.  Their sum is the sheet sign.  Exact row reduction gives, on
+each of the six split orbits,
+\[
+ (\ker\mu)^U
+ =\langle\chi_1,\chi_2\rangle
+   \oplus\bigoplus_{r=1}^{7}\langle\tau_r\rangle.          \tag{U9}
+\]
+This accounts for all nine dimensions, not just their number.  Relative
+to the sign and the uniform \(L(8)\)-line \(\tau_2\), the former seven
+unexplained directions are
+\[
+ \tau_1,\tau_3,\tau_4,\tau_5,\tau_6,\tau_7
+ \quad\text{and one complementary line in }
+ \langle\chi_1,\chi_2\rangle.
+\]
+They remain q=27 structure rather than ingredients of the uniform T3
+proof.
+
+C682's free-covariant report supplied the right diagnostic analogy, but
+not a literal module transfer.  There a repeated McKay isotype is separated
+by the actual differential-operator row, whose dark line is a Koszul
+syzygy.  Here the actual Borel--Hecke norm row, rather than composition
+factors, separates seven dark Fourier characters and the rank-two
+trivial-character cross kernel (X0).  The groups and characteristics are
+different, and C682 explicitly leaves divided-power reduction at \(3\)
+open, so its \(E_8\) Weyl operator is not being reduced or identified with
+the present map.
+
 ### Intersection closeout: `ej` + `tt`
 
 The cheap representation-theoretic upgrade is stronger than one extra
@@ -1798,5 +1854,5 @@ C1 is still separate and is the sole live Platinum gap.
 | Uniform \(N_5\) / twisted \(\Delta(4)\) | closed negatively | The exact q=243 rank \(136>127\) falsifies every such factorization. |
 | Characteristic-three split T3 | settled | The discriminant-weight-four vector (T4) is a second invariant trade; it uses one absent Borel character and imposes no defect bound. |
 | Nonsplit descent | settled | Diagonalization over \(\mathbb F_{q^2}\), Frobenius-fixed discriminant weight, and exclusion of the outer-fixed antipodal type descend the same trade. |
-| q=27 invariant-trade excess | open but non-load-bearing | The sign plus \(L(8)\) explain two \(U\)-fixed trade directions, while the exact norm kernel has dimension nine.  The other seven are field-specific structure; no successor is allocated because T3 is already uniform. |
+| q=27 invariant-trade excess | settled exactly, non-load-bearing | Equation (U9) gives seven finite-axis Fourier lines and two trivial cross lines.  Beyond the sign and \(\tau_2\), the former seven are six listed Fourier lines and the complementary cross line. |
 | Extension-field C1 | unchanged | The first embedded nonretract remains unknown beyond the q=25 and q=49 affine-socle exclusions. |
