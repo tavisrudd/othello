@@ -1,0 +1,1189 @@
+{
+  "a5_equivariance_defects": [
+    {
+      "first_nonzero_entry": {
+        "column": 0,
+        "row": 0,
+        "value": 6
+      },
+      "generator": 0,
+      "image_closure_rank": 8,
+      "rank": 4
+    },
+    {
+      "first_nonzero_entry": {
+        "column": 1,
+        "row": 0,
+        "value": 4
+      },
+      "generator": 1,
+      "image_closure_rank": 8,
+      "rank": 4
+    },
+    {
+      "first_nonzero_entry": {
+        "column": 0,
+        "row": 0,
+        "value": 5
+      },
+      "generator": 2,
+      "image_closure_rank": 8,
+      "rank": 4
+    }
+  ],
+  "a5_generator_count": 3,
+  "a5_order": 60,
+  "a5_pair_permutations": [
+    [
+      2,
+      9,
+      7,
+      5,
+      3,
+      1,
+      0,
+      8,
+      6,
+      4
+    ],
+    [
+      2,
+      3,
+      0,
+      1,
+      9,
+      5,
+      7,
+      6,
+      8,
+      4
+    ],
+    [
+      4,
+      1,
+      8,
+      7,
+      0,
+      6,
+      5,
+      3,
+      2,
+      9
+    ]
+  ],
+  "a5_pgl2_generators": [
+    [
+      1,
+      8,
+      0,
+      9
+    ],
+    [
+      1,
+      9,
+      1,
+      10
+    ],
+    [
+      1,
+      8,
+      2,
+      10
+    ]
+  ],
+  "bockstein_hasse_terms": [
+    {
+      "B_polynomial": [
+        {
+          "coefficient": 9,
+          "x": 6,
+          "y": 3
+        },
+        {
+          "coefficient": 7,
+          "x": 1,
+          "y": 8
+        }
+      ],
+      "F_hasse_orders": [
+        0,
+        3
+      ],
+      "coefficient_mod_11": 3,
+      "f_hasse_orders": [
+        3,
+        0
+      ],
+      "index": 0
+    },
+    {
+      "B_polynomial": [
+        {
+          "coefficient": 2,
+          "x": 5,
+          "y": 4
+        },
+        {
+          "coefficient": 6,
+          "x": 0,
+          "y": 9
+        }
+      ],
+      "F_hasse_orders": [
+        1,
+        2
+      ],
+      "coefficient_mod_11": 10,
+      "f_hasse_orders": [
+        2,
+        1
+      ],
+      "index": 1
+    },
+    {
+      "B_polynomial": [
+        {
+          "coefficient": 5,
+          "x": 9,
+          "y": 0
+        },
+        {
+          "coefficient": 2,
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "F_hasse_orders": [
+        2,
+        1
+      ],
+      "coefficient_mod_11": 1,
+      "f_hasse_orders": [
+        1,
+        2
+      ],
+      "index": 2
+    },
+    {
+      "B_polynomial": [
+        {
+          "coefficient": 4,
+          "x": 8,
+          "y": 1
+        },
+        {
+          "coefficient": 9,
+          "x": 3,
+          "y": 6
+        }
+      ],
+      "F_hasse_orders": [
+        3,
+        0
+      ],
+      "coefficient_mod_11": 8,
+      "f_hasse_orders": [
+        0,
+        3
+      ],
+      "index": 3
+    }
+  ],
+  "bockstein_identity": "Dbar(f)=sum_i (-1)^i i!(3-i)!/2 Hasse_(3-i,i)(f) * ((Hasse_(i,3-i)(F)/11) mod 11)",
+  "c651_clebsch_restriction_scalar": 4,
+  "c651_equivariant_target_four_chart": [
+    [
+      10,
+      1,
+      6,
+      3
+    ],
+    [
+      1,
+      10,
+      5,
+      8
+    ],
+    [
+      9,
+      7,
+      3,
+      8
+    ],
+    [
+      5,
+      6,
+      7,
+      6
+    ],
+    [
+      7,
+      4,
+      3,
+      5
+    ],
+    [
+      6,
+      10,
+      1,
+      10
+    ],
+    [
+      4,
+      0,
+      0,
+      4
+    ],
+    [
+      0,
+      10,
+      9,
+      4
+    ],
+    [
+      1,
+      7,
+      10,
+      3
+    ],
+    [
+      0,
+      6,
+      10,
+      1
+    ],
+    [
+      1,
+      4,
+      7,
+      2
+    ],
+    [
+      2,
+      10,
+      5,
+      9
+    ],
+    [
+      2,
+      10,
+      5,
+      9
+    ]
+  ],
+  "c651_four_chart_after_primitive_transvectant": [
+    [
+      7,
+      10,
+      2,
+      5
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      8,
+      5,
+      4,
+      7
+    ],
+    [
+      7,
+      3,
+      8,
+      8
+    ],
+    [
+      10,
+      5,
+      10,
+      8
+    ],
+    [
+      8,
+      2,
+      7,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      6,
+      5
+    ],
+    [
+      3,
+      6,
+      5,
+      5
+    ],
+    [
+      6,
+      3,
+      6,
+      7
+    ],
+    [
+      2,
+      6,
+      10,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      1,
+      3,
+      8
+    ]
+  ],
+  "c651_four_chart_in_sym6": [
+    [
+      2,
+      6,
+      9,
+      1
+    ],
+    [
+      7,
+      3,
+      5,
+      10
+    ],
+    [
+      7,
+      10,
+      2,
+      5
+    ],
+    [
+      5,
+      8,
+      4,
+      3
+    ],
+    [
+      6,
+      1,
+      3,
+      8
+    ],
+    [
+      4,
+      3,
+      9,
+      7
+    ],
+    [
+      6,
+      5,
+      3,
+      7
+    ]
+  ],
+  "c651_integral_cubic_line": "sigma_3=(sum_i y_i^3)/3 on sum_i y_i=0",
+  "equivariant_pair_to_sym12_four_intertwiner": [
+    [
+      1,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    [
+      10,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      1,
+      7,
+      5,
+      6,
+      10,
+      8,
+      9,
+      3,
+      4,
+      2
+    ],
+    [
+      10,
+      3,
+      10,
+      8,
+      7,
+      3,
+      1,
+      7,
+      5,
+      1
+    ],
+    [
+      7,
+      3,
+      0,
+      2,
+      2,
+      10,
+      1,
+      6,
+      8,
+      5
+    ],
+    [
+      1,
+      9,
+      1,
+      5,
+      3,
+      6,
+      10,
+      3,
+      7,
+      10
+    ],
+    [
+      1,
+      1,
+      6,
+      1,
+      7,
+      1,
+      7,
+      1,
+      7,
+      1
+    ],
+    [
+      1,
+      8,
+      10,
+      5,
+      4,
+      6,
+      1,
+      2,
+      8,
+      10
+    ],
+    [
+      5,
+      6,
+      0,
+      10,
+      8,
+      2,
+      1,
+      3,
+      2,
+      7
+    ],
+    [
+      10,
+      4,
+      1,
+      8,
+      6,
+      3,
+      10,
+      8,
+      4,
+      1
+    ],
+    [
+      2,
+      3,
+      5,
+      8,
+      4,
+      6,
+      9,
+      7,
+      10,
+      1
+    ],
+    [
+      2,
+      4,
+      9,
+      6,
+      3,
+      8,
+      5,
+      10,
+      7,
+      1
+    ],
+    [
+      2,
+      4,
+      9,
+      6,
+      3,
+      8,
+      5,
+      10,
+      7,
+      1
+    ]
+  ],
+  "field": "F_11",
+  "inputs": {
+    "notes/2026-07-26-c651-hitchin-tensor-bridge.json": {
+      "bytes": 4369,
+      "sha256": "9f93ccdc80c757eb78078e479c8107c0108980fb8b4daca5d1ba389072aa17e9"
+    },
+    "notes/2026-07-26-c651-hitchin-tensor-bridge.py": {
+      "bytes": 14761,
+      "sha256": "dfb2993b072bfd4eceab77aaad8cfe760771b654d8e4c0d05c065ef9f386e041"
+    },
+    "papers/clebsch-factorization/verification/evidence/matching_module.py": {
+      "bytes": 48643,
+      "sha256": "d2100485add18a92a148f0584d41b2108100baf545fd361e6cc08b7e61e92f40"
+    },
+    "papers/clebsch-factorization/verification/evidence/matching_orbit_scout.json": {
+      "bytes": 25385,
+      "sha256": "d45512c9087874acdaf109367753f45151c2dd0c2cb745777f62ad26489e7394"
+    }
+  },
+  "interpretation": "The primitive Sym^6-to-Sym^12 transvectant is rank four and is canonically recovered as an 11-adic Bockstein/Hasse operator, but it does not carry the standard C651 A5-marked four-space to the A5-equivariant target four-space.  The recorded generator defects are an exact obstruction to the stronger marked bridge.",
+  "klein_dodecic": [
+    {
+      "coefficient": 1,
+      "x": 11,
+      "y": 1
+    },
+    {
+      "coefficient": 11,
+      "x": 6,
+      "y": 6
+    },
+    {
+      "coefficient": -1,
+      "x": 1,
+      "y": 11
+    }
+  ],
+  "lift_obstruction_identity": "For L_g=(det(g)F(g^-1 z)-F)/11 mod 11, rho12(g)P-P rho6(g)=5 det(g)^3/12 * (rho6_unweighted(g)(-),L_g)_3.",
+  "marked_nonzero_entry": {
+    "column": 0,
+    "row": 0,
+    "value": 7
+  },
+  "mod_121_lift_obstructions": [
+    {
+      "F_lift_defect": [
+        {
+          "coefficient": 4,
+          "x": 10,
+          "y": 2
+        },
+        {
+          "coefficient": 3,
+          "x": 9,
+          "y": 3
+        },
+        {
+          "coefficient": 3,
+          "x": 8,
+          "y": 4
+        },
+        {
+          "coefficient": 2,
+          "x": 7,
+          "y": 5
+        },
+        {
+          "coefficient": 9,
+          "x": 6,
+          "y": 6
+        },
+        {
+          "coefficient": 5,
+          "x": 5,
+          "y": 7
+        },
+        {
+          "coefficient": 5,
+          "x": 4,
+          "y": 8
+        },
+        {
+          "coefficient": 7,
+          "x": 3,
+          "y": 9
+        },
+        {
+          "coefficient": 5,
+          "x": 2,
+          "y": 10
+        },
+        {
+          "coefficient": 7,
+          "x": 1,
+          "y": 11
+        },
+        {
+          "coefficient": 9,
+          "x": 0,
+          "y": 12
+        }
+      ],
+      "F_lift_defect_rank_contribution": 7,
+      "defect_identity_verified": true,
+      "generator": 0
+    },
+    {
+      "F_lift_defect": [
+        {
+          "coefficient": 2,
+          "x": 12,
+          "y": 0
+        },
+        {
+          "coefficient": 2,
+          "x": 11,
+          "y": 1
+        },
+        {
+          "coefficient": 8,
+          "x": 10,
+          "y": 2
+        },
+        {
+          "coefficient": 1,
+          "x": 9,
+          "y": 3
+        },
+        {
+          "coefficient": 2,
+          "x": 8,
+          "y": 4
+        },
+        {
+          "coefficient": 10,
+          "x": 7,
+          "y": 5
+        },
+        {
+          "coefficient": 2,
+          "x": 6,
+          "y": 6
+        },
+        {
+          "coefficient": 9,
+          "x": 5,
+          "y": 7
+        },
+        {
+          "coefficient": 8,
+          "x": 4,
+          "y": 8
+        },
+        {
+          "coefficient": 8,
+          "x": 3,
+          "y": 9
+        },
+        {
+          "coefficient": 7,
+          "x": 2,
+          "y": 10
+        },
+        {
+          "coefficient": 8,
+          "x": 1,
+          "y": 11
+        },
+        {
+          "coefficient": 9,
+          "x": 0,
+          "y": 12
+        }
+      ],
+      "F_lift_defect_rank_contribution": 7,
+      "defect_identity_verified": true,
+      "generator": 1
+    },
+    {
+      "F_lift_defect": [
+        {
+          "coefficient": 9,
+          "x": 12,
+          "y": 0
+        },
+        {
+          "coefficient": 6,
+          "x": 11,
+          "y": 1
+        },
+        {
+          "coefficient": 2,
+          "x": 10,
+          "y": 2
+        },
+        {
+          "coefficient": 9,
+          "x": 9,
+          "y": 3
+        },
+        {
+          "coefficient": 10,
+          "x": 8,
+          "y": 4
+        },
+        {
+          "coefficient": 7,
+          "x": 7,
+          "y": 5
+        },
+        {
+          "coefficient": 2,
+          "x": 6,
+          "y": 6
+        },
+        {
+          "coefficient": 5,
+          "x": 5,
+          "y": 7
+        },
+        {
+          "coefficient": 6,
+          "x": 4,
+          "y": 8
+        },
+        {
+          "coefficient": 7,
+          "x": 3,
+          "y": 9
+        },
+        {
+          "coefficient": 6,
+          "x": 2,
+          "y": 10
+        },
+        {
+          "coefficient": 6,
+          "x": 1,
+          "y": 11
+        },
+        {
+          "coefficient": 3,
+          "x": 0,
+          "y": 12
+        }
+      ],
+      "F_lift_defect_rank_contribution": 7,
+      "defect_identity_verified": true,
+      "generator": 2
+    }
+  ],
+  "monomial_identity_test_count": 435,
+  "monomial_identity_test_max_degree": 28,
+  "operator_content": 132,
+  "operator_to_primitive_scalar_mod_11": 9,
+  "ordinary_third_derivatives_reduce_to_zero": true,
+  "pair_to_sym12_hom_dimension": 3,
+  "pair_to_sym6_hom_dimension": 1,
+  "pair_to_sym6_intertwiner": [
+    [
+      1,
+      2,
+      3,
+      10,
+      7,
+      8,
+      4,
+      9,
+      5,
+      6
+    ],
+    [
+      0,
+      8,
+      6,
+      10,
+      3,
+      1,
+      5,
+      9,
+      2,
+      0
+    ],
+    [
+      1,
+      2,
+      3,
+      5,
+      3,
+      4,
+      6,
+      5,
+      7,
+      8
+    ],
+    [
+      9,
+      4,
+      0,
+      10,
+      5,
+      1,
+      0,
+      7,
+      6,
+      2
+    ],
+    [
+      8,
+      5,
+      3,
+      4,
+      7,
+      5,
+      6,
+      2,
+      3,
+      1
+    ],
+    [
+      0,
+      2,
+      5,
+      10,
+      9,
+      1,
+      6,
+      3,
+      8,
+      0
+    ],
+    [
+      6,
+      9,
+      3,
+      8,
+      5,
+      10,
+      4,
+      2,
+      7,
+      1
+    ]
+  ],
+  "pair_to_sym6_intertwiner_rank": 4,
+  "primitive_image_vs_equivariant_image_intersection_dimension": 0,
+  "primitive_image_vs_equivariant_image_union_rank": 8,
+  "primitive_to_operator_scalar_mod_11": 5,
+  "primitive_transvectant_is_a5_equivariant_on_c651_four_space": false,
+  "primitive_transvectant_pair_to_sym12": [
+    [
+      1,
+      2,
+      3,
+      5,
+      3,
+      4,
+      6,
+      5,
+      7,
+      8
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      7,
+      3,
+      4,
+      9,
+      2,
+      3,
+      8,
+      10,
+      4,
+      5
+    ],
+    [
+      5,
+      3,
+      3,
+      4,
+      9,
+      9,
+      10,
+      7,
+      8,
+      8
+    ],
+    [
+      5,
+      3,
+      6,
+      7,
+      5,
+      8,
+      9,
+      6,
+      7,
+      10
+    ],
+    [
+      9,
+      7,
+      5,
+      1,
+      5,
+      3,
+      10,
+      1,
+      8,
+      6
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      5,
+      10,
+      6,
+      8,
+      3,
+      10,
+      1,
+      4,
+      6,
+      2
+    ],
+    [
+      10,
+      6,
+      6,
+      8,
+      7,
+      7,
+      9,
+      3,
+      5,
+      5
+    ],
+    [
+      3,
+      4,
+      8,
+      2,
+      3,
+      7,
+      1,
+      8,
+      2,
+      6
+    ],
+    [
+      5,
+      10,
+      4,
+      3,
+      4,
+      9,
+      8,
+      3,
+      2,
+      7
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      8,
+      5,
+      3,
+      4,
+      7,
+      5,
+      6,
+      2,
+      3,
+      1
+    ]
+  ],
+  "primitive_transvectant_pair_to_sym12_rank": 4,
+  "schema": "clebsch-invariant-operator-divided-power-v1",
+  "source_action": "det(g)^3 Sym^6(g^{-1})",
+  "sym6_primitive_matrix": [
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      -6,
+      0,
+      0
+    ],
+    [
+      60,
+      0,
+      0,
+      0,
+      0,
+      -20,
+      0
+    ],
+    [
+      0,
+      -15,
+      0,
+      0,
+      0,
+      0,
+      -45
+    ],
+    [
+      0,
+      0,
+      -24,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0
+    ],
+    [
+      -45,
+      0,
+      0,
+      0,
+      0,
+      15,
+      0
+    ],
+    [
+      0,
+      -20,
+      0,
+      0,
+      0,
+      0,
+      -60
+    ],
+    [
+      0,
+      0,
+      -6,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  ],
+  "sym6_primitive_matrix_rank_mod_11": 4,
+  "sym6_raw_transvectant_content": 2640,
+  "target_action": "det(g) Sym^12(g^{-1})"
+}

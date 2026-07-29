@@ -776,6 +776,36 @@ ledger are in
 the source-deep invariant-differential-operator audit, with the mod-\(11\)
 divided-power comparison to C651 as the arithmetic branch.
 
+That audit and arithmetic branch are now closed.  Dixmier's 1992
+full-text paper is the direct predecessor for binary-polyhedral
+transvectants, including the exact Klein dodecic and isotypic vanishing;
+Olver--Sanders supplies the full omega-process/operator background.
+Neither source contains C682's finite Weyl realization, scalar-symbol
+\(E_8\) factorization, or degree-\(22\) Koszul failure, so the combined
+claim survives with “to our knowledge.”  At \(11\), the primitive operator
+is exactly the Bockstein/Hasse transvectant
+\[
+\overline{\mathcal D}(f)=
+\sum_{i=0}^3(-1)^i\frac{i!(3-i)!}{2}
+\partial_X^{[3-i]}\partial_Y^{[i]}f
+\left(\frac{\partial_X^{[i]}\partial_Y^{[3-i]}F}{11}\bmod11\right).
+\]
+On \(\operatorname{Sym}^6\) it is \(9\) times the primitive rank-four
+matrix.  The proposed marked C651 bridge closes negatively: for the
+standard order-\(60\) subgroup, all three generator defects have rank four,
+and the primitive image is disjoint from the unique equivariant target
+four-space.  Multiplicity one therefore cannot fix a nonexistent scalar.
+The closeout computes the cause: each defect is exactly the third
+transvectant with
+\((\det(g)F(g^{-1}z)-F)/11\bmod11\), the mod-\(121\) lift cocycle of the
+stored C651 generator.
+The source records, exact certificate, independent replay, and mystery
+ledger are in
+`notes/2026-07-28-c682-invariant-operator-divided-power.md`.  The next
+\(E_8\) mathematical frontier is the intrinsic meaning of \(p\) and the
+other McKay blocks; the arithmetic frontier would require an integral
+lift of the C651 \(A_5\)-marking, not another mod-\(11\) basis change.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
