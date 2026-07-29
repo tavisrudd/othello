@@ -1,0 +1,629 @@
+{
+  "all_order_hensel_gate": {
+    "binary_group_order": 120,
+    "interpretation": "The presentation point is smooth and the normalized invariant line has a unit minor.  Together with exact Reynolds averaging (11 does not divide 120), this extends the compatible branch to all 11-adic orders.",
+    "normalized_invariant_rank_mod_11": 13,
+    "normalized_invariant_unknown_count": 13,
+    "presentation_constraint_count": 5,
+    "presentation_jacobian_rank_mod_11": 5,
+    "prime_is_coprime_to_group_order": true
+  },
+  "conclusion": "The corrected mod-121 dodecic class extends to a normalized A5-invariant dodecic modulo 1331.  Its divided third transvectant is equivariant modulo 121, and the marked bridge lifts with the recorded unit scalar.",
+  "corrected_operator_mod_121": [
+    [
+      114,
+      82,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      95,
+      28,
+      21,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      75,
+      39,
+      107,
+      92,
+      115,
+      0,
+      0
+    ],
+    [
+      59,
+      71,
+      49,
+      65,
+      86,
+      101,
+      0
+    ],
+    [
+      51,
+      76,
+      23,
+      15,
+      100,
+      36,
+      76
+    ],
+    [
+      65,
+      0,
+      49,
+      30,
+      69,
+      47,
+      96
+    ],
+    [
+      93,
+      31,
+      59,
+      0,
+      70,
+      101,
+      104
+    ],
+    [
+      113,
+      113,
+      8,
+      8,
+      72,
+      0,
+      1
+    ],
+    [
+      120,
+      118,
+      1,
+      7,
+      111,
+      45,
+      40
+    ],
+    [
+      0,
+      13,
+      13,
+      43,
+      39,
+      27,
+      62
+    ],
+    [
+      0,
+      0,
+      16,
+      73,
+      41,
+      115,
+      20
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      89,
+      39,
+      4
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      78,
+      94,
+      81
+    ]
+  ],
+  "dodecic_modulus": 1331,
+  "first_correction_digit_from_F": [
+    {
+      "coefficient": 10,
+      "x": 10,
+      "y": 2
+    },
+    {
+      "coefficient": 5,
+      "x": 9,
+      "y": 3
+    },
+    {
+      "coefficient": 7,
+      "x": 8,
+      "y": 4
+    },
+    {
+      "coefficient": 8,
+      "x": 7,
+      "y": 5
+    },
+    {
+      "coefficient": 2,
+      "x": 6,
+      "y": 6
+    },
+    {
+      "coefficient": 3,
+      "x": 5,
+      "y": 7
+    },
+    {
+      "coefficient": 7,
+      "x": 4,
+      "y": 8
+    },
+    {
+      "coefficient": 6,
+      "x": 3,
+      "y": 9
+    },
+    {
+      "coefficient": 10,
+      "x": 2,
+      "y": 10
+    },
+    {
+      "coefficient": 4,
+      "x": 1,
+      "y": 11
+    }
+  ],
+  "first_digit_matches_prior_class_modulo": "span{X^12,X^11Y,XY^11,Y^12}=V^(1) tensor V",
+  "first_digit_minus_prior_K": [
+    {
+      "coefficient": 4,
+      "x": 1,
+      "y": 11
+    }
+  ],
+  "inputs": {
+    "notes/2026-07-26-c651-hitchin-tensor-bridge.json": {
+      "bytes": 4369,
+      "sha256": "9f93ccdc80c757eb78078e479c8107c0108980fb8b4daca5d1ba389072aa17e9"
+    },
+    "notes/2026-07-26-c651-hitchin-tensor-bridge.py": {
+      "bytes": 14761,
+      "sha256": "dfb2993b072bfd4eceab77aaad8cfe760771b654d8e4c0d05c065ef9f386e041"
+    },
+    "notes/2026-07-28-c682-invariant-operator-divided-power.json": {
+      "bytes": 19785,
+      "sha256": "dceecc551d122d5cd59ecbb5aabd440222fec5f61e5e6dbc1e6c3589762ce950"
+    },
+    "notes/2026-07-28-c682-invariant-operator-divided-power.py": {
+      "bytes": 31525,
+      "sha256": "b0a985fbc18666f04e682add427f836c8f0b2708cd2a246048fd946e5266b991"
+    },
+    "papers/clebsch-factorization/verification/evidence/matching_module.py": {
+      "bytes": 48643,
+      "sha256": "d2100485add18a92a148f0584d41b2108100baf545fd361e6cc08b7e61e92f40"
+    }
+  },
+  "invariant_hensel_linear_ranks": [
+    13,
+    13
+  ],
+  "marked_bridge_identity": "corrected_operator * source_chart = scalar * target_chart mod 121",
+  "marked_bridge_scalar_mod_121": 115,
+  "marked_four_actions_mod_121": [
+    [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        120,
+        120,
+        120,
+        120
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    [
+      [
+        120,
+        120,
+        120,
+        120
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  ],
+  "normalization": "coefficient of X^11 Y is exactly 1",
+  "normalized_invariant_dodecic_mod_1331": [
+    {
+      "coefficient": 726,
+      "x": 12,
+      "y": 0
+    },
+    {
+      "coefficient": 1,
+      "x": 11,
+      "y": 1
+    },
+    {
+      "coefficient": 352,
+      "x": 10,
+      "y": 2
+    },
+    {
+      "coefficient": 418,
+      "x": 9,
+      "y": 3
+    },
+    {
+      "coefficient": 198,
+      "x": 8,
+      "y": 4
+    },
+    {
+      "coefficient": 693,
+      "x": 7,
+      "y": 5
+    },
+    {
+      "coefficient": 33,
+      "x": 6,
+      "y": 6
+    },
+    {
+      "coefficient": 880,
+      "x": 5,
+      "y": 7
+    },
+    {
+      "coefficient": 440,
+      "x": 4,
+      "y": 8
+    },
+    {
+      "coefficient": 1034,
+      "x": 3,
+      "y": 9
+    },
+    {
+      "coefficient": 473,
+      "x": 2,
+      "y": 10
+    },
+    {
+      "coefficient": 648,
+      "x": 1,
+      "y": 11
+    },
+    {
+      "coefficient": 847,
+      "x": 0,
+      "y": 12
+    }
+  ],
+  "operator_formula": "P_F + 240^(-1) * ((-,(I-F)/11)_3) modulo 121",
+  "operator_is_A5_equivariant_mod_121": true,
+  "operator_modulus": 121,
+  "presentation": {
+    "S_mod_1331": [
+      1321,
+      1032,
+      628,
+      10
+    ],
+    "S_permutation": [
+      1,
+      0,
+      4,
+      7,
+      2,
+      9,
+      11,
+      3,
+      10,
+      5,
+      8,
+      6
+    ],
+    "T_mod_1331": [
+      1322,
+      1094,
+      6,
+      10
+    ],
+    "T_permutation": [
+      3,
+      7,
+      4,
+      6,
+      11,
+      9,
+      0,
+      8,
+      1,
+      10,
+      5,
+      2
+    ],
+    "hensel_linear_ranks": [
+      5,
+      5
+    ],
+    "relations": "S^2=T^3=-I, (ST)^5=I",
+    "trace_ST_mod_1331": 1294,
+    "trace_polynomial": "u^2+u-1"
+  },
+  "prime": 11,
+  "prior_K_representative": [
+    {
+      "coefficient": 10,
+      "x": 10,
+      "y": 2
+    },
+    {
+      "coefficient": 5,
+      "x": 9,
+      "y": 3
+    },
+    {
+      "coefficient": 7,
+      "x": 8,
+      "y": 4
+    },
+    {
+      "coefficient": 8,
+      "x": 7,
+      "y": 5
+    },
+    {
+      "coefficient": 2,
+      "x": 6,
+      "y": 6
+    },
+    {
+      "coefficient": 3,
+      "x": 5,
+      "y": 7
+    },
+    {
+      "coefficient": 7,
+      "x": 4,
+      "y": 8
+    },
+    {
+      "coefficient": 6,
+      "x": 3,
+      "y": 9
+    },
+    {
+      "coefficient": 10,
+      "x": 2,
+      "y": 10
+    }
+  ],
+  "schema": "c682-corrected-bridge-mod-1331-v1",
+  "second_correction_digit_from_F": [
+    {
+      "coefficient": 6,
+      "x": 12,
+      "y": 0
+    },
+    {
+      "coefficient": 2,
+      "x": 10,
+      "y": 2
+    },
+    {
+      "coefficient": 3,
+      "x": 9,
+      "y": 3
+    },
+    {
+      "coefficient": 1,
+      "x": 8,
+      "y": 4
+    },
+    {
+      "coefficient": 5,
+      "x": 7,
+      "y": 5
+    },
+    {
+      "coefficient": 7,
+      "x": 5,
+      "y": 7
+    },
+    {
+      "coefficient": 3,
+      "x": 4,
+      "y": 8
+    },
+    {
+      "coefficient": 8,
+      "x": 3,
+      "y": 9
+    },
+    {
+      "coefficient": 3,
+      "x": 2,
+      "y": 10
+    },
+    {
+      "coefficient": 5,
+      "x": 1,
+      "y": 11
+    },
+    {
+      "coefficient": 7,
+      "x": 0,
+      "y": 12
+    }
+  ],
+  "source_chart_lift_rank_with_normalization": 28,
+  "source_chart_normalization_index": 0,
+  "source_four_chart_mod_121": [
+    [
+      2,
+      61,
+      20,
+      67
+    ],
+    [
+      51,
+      58,
+      82,
+      10
+    ],
+    [
+      7,
+      21,
+      112,
+      71
+    ],
+    [
+      93,
+      107,
+      114,
+      14
+    ],
+    [
+      94,
+      67,
+      113,
+      85
+    ],
+    [
+      26,
+      102,
+      108,
+      29
+    ],
+    [
+      17,
+      49,
+      25,
+      95
+    ]
+  ],
+  "target_chart_lift_rank_with_normalization": 52,
+  "target_chart_normalization_index": 0,
+  "target_chart_rescaling_to_keep_scalar_5": 23,
+  "target_four_chart_mod_121": [
+    [
+      10,
+      1,
+      94,
+      91
+    ],
+    [
+      89,
+      21,
+      38,
+      96
+    ],
+    [
+      42,
+      18,
+      102,
+      41
+    ],
+    [
+      16,
+      50,
+      62,
+      72
+    ],
+    [
+      84,
+      103,
+      69,
+      115
+    ],
+    [
+      17,
+      10,
+      89,
+      54
+    ],
+    [
+      26,
+      0,
+      0,
+      26
+    ],
+    [
+      77,
+      43,
+      108,
+      103
+    ],
+    [
+      67,
+      40,
+      32,
+      25
+    ],
+    [
+      99,
+      61,
+      87,
+      56
+    ],
+    [
+      12,
+      59,
+      7,
+      2
+    ],
+    [
+      79,
+      65,
+      5,
+      20
+    ],
+    [
+      57,
+      76,
+      71,
+      42
+    ]
+  ]
+}

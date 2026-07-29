@@ -821,6 +821,21 @@ ledger are in
 other McKay blocks; the arithmetic frontier is now a conceptual
 mod-\(11^3\) test for an \(11\)-adic tower of the corrected lift.
 
+That arithmetic frontier is now positive.  A determinant-one Hensel lift
+of the marked binary \(A_5\), normalized invariant dodecic modulo
+\(11^3\), and independently replayed divided transvectant give an
+equivariant operator modulo \(11^2\).  The first correction is the
+previous \(K\)-class, differing only by \(4XY^{11}\) in the declared
+Frobenius gauge; the second digit is explicit.  The marked scalar is
+\(115\bmod121\), and a target-line rescaling congruent to one restores
+the scalar \(5\).  The rank-five smooth presentation gate and exact
+Reynolds averaging for \(11\nmid120\) upgrade the finite test to existence
+of the full compatible \(\mathbf Z_{11}\)-tower.  The report, primary
+certificate, independent replay, and mystery ledger are in
+`notes/2026-07-28-c682-corrected-bridge-mod-1331.md`.  The local lift
+equation is closed; its intrinsic relation to the global incidence cover
+or golden-fibre integral model remains open.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
