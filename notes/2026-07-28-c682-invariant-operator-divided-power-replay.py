@@ -392,6 +392,119 @@ def main() -> int:
         )
     assert defects == certificate["a5_equivariance_defects"]
     assert lift_obstructions == certificate["mod_121_lift_obstructions"]
+
+    transvectant_corrections = []
+    for k_index in range(13):
+        correction = [[0] * 7 for _ in range(13)]
+        right = {(12 - k_index, k_index): 1}
+        for column in range(7):
+            image = transvectant({(6 - column, column): 1}, right)
+            for row in range(13):
+                correction[row][column] = (
+                    5
+                    * pow(12, -1, PRIME)
+                    * image.get((12 - row, row), 0)
+                ) % PRIME
+        transvectant_corrections.append(correction)
+    equations = []
+    right_sides = []
+    for source_action, target_action in zip(source_actions, target_actions):
+        primitive_defect = difference(
+            matrix_product(target_action, primitive_mod),
+            matrix_product(primitive_mod, source_action),
+        )
+        basis_defects = [
+            difference(
+                matrix_product(target_action, correction),
+                matrix_product(correction, source_action),
+            )
+            for correction in transvectant_corrections
+        ]
+        for row in range(13):
+            for column in range(7):
+                equations.append(
+                    [basis[row][column] for basis in basis_defects]
+                )
+                right_sides.append(-primitive_defect[row][column] % PRIME)
+    augmented = [
+        equation + [right_side]
+        for equation, right_side in zip(equations, right_sides)
+    ]
+    assert rank(equations) == rank(augmented) == 9
+    reduced, pivots = rref(augmented)
+    k_vector = [0] * 13
+    for row, pivot in enumerate(pivots):
+        if pivot < 13:
+            k_vector[pivot] = reduced[row][13]
+    k_records = [
+        {"x": 12 - row, "y": row, "coefficient": value}
+        for row, value in enumerate(k_vector)
+        if value
+    ]
+    assert k_records == certificate["tt_repair_polynomial_K"]
+    assert 13 - rank(equations) == certificate["tt_repair_solution_dimension"] == 4
+    repaired = [
+        [
+            (
+                primitive_mod[row][column]
+                + sum(
+                    k_vector[index] * transvectant_corrections[index][row][column]
+                    for index in range(13)
+                )
+            )
+            % PRIME
+            for column in range(7)
+        ]
+        for row in range(13)
+    ]
+    assert repaired == certificate["tt_repaired_primitive_matrix"]
+    assert rank(repaired) == certificate["tt_repaired_primitive_rank"] == 4
+    assert all(
+        matrix_product(target_action, repaired)
+        == matrix_product(repaired, source_action)
+        for source_action, target_action in zip(source_actions, target_actions)
+    )
+    repaired_target = matrix_product(repaired, source)
+    scalar = certificate["tt_repaired_pair_to_target_scalar"]
+    assert scalar == 5
+    assert repaired_target == [
+        [scalar * value % PRIME for value in row]
+        for row in equivariant_target
+    ]
+    residuals = []
+    for generator, (target_action, obstruction) in enumerate(
+        zip(target_actions, lift_obstructions)
+    ):
+        lift_form = poly(obstruction["F_lift_defect"])
+        lift_vector = [lift_form.get((12 - row, row), 0) for row in range(13)]
+        residual = [
+            (
+                lift_vector[row]
+                + sum(
+                    (target_action[row][column] - int(row == column))
+                    * k_vector[column]
+                    for column in range(13)
+                )
+            )
+            % PRIME
+            for row in range(13)
+        ]
+        assert all(
+            not value or row in (0, 1, 11, 12)
+            for row, value in enumerate(residual)
+        )
+        residuals.append(
+            {
+                "generator": generator,
+                "residual_frobenius_polynomial": [
+                    {"x": 12 - row, "y": row, "coefficient": value}
+                    for row, value in enumerate(residual)
+                    if value
+                ],
+            }
+        )
+    assert residuals == certificate["tt_residual_lift_defects"]
+
     union_rank = rank(horizontal_join(transported, equivariant_target))
     assert union_rank == certificate["primitive_image_vs_equivariant_image_union_rank"]
     assert 8 - union_rank == certificate[

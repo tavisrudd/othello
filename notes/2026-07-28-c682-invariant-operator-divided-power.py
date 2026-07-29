@@ -537,13 +537,143 @@ def build_certificate() -> dict[str, object]:
         horizontal_join(target_intertwiner, equivariant_target_intertwiner), PRIME
     )
     image_intersection_dimension = 8 - image_union_rank
+
+    transvectant_corrections = []
+    for k_index in range(13):
+        correction = [[0] * 7 for _ in range(13)]
+        right = {(12 - k_index, k_index): 1}
+        for column in range(7):
+            image = raw_third_transvectant_with_right(
+                {(6 - column, column): 1}, right
+            )
+            for row in range(13):
+                correction[row][column] = (
+                    5
+                    * pow(12, -1, PRIME)
+                    * image.get((12 - row, row), 0)
+                ) % PRIME
+        transvectant_corrections.append(correction)
+    correction_equations = []
+    correction_rhs = []
+    for source_action, target_action in zip(source_actions, target_actions):
+        primitive_defect = difference_matrices(
+            matrix_product(target_action, primitive_mod),
+            matrix_product(primitive_mod, source_action),
+        )
+        basis_defects = [
+            difference_matrices(
+                matrix_product(target_action, correction),
+                matrix_product(correction, source_action),
+            )
+            for correction in transvectant_corrections
+        ]
+        for row in range(13):
+            for column in range(7):
+                correction_equations.append(
+                    [basis[row][column] for basis in basis_defects]
+                )
+                correction_rhs.append(-primitive_defect[row][column] % PRIME)
+    augmented = [
+        equation + [rhs]
+        for equation, rhs in zip(correction_equations, correction_rhs)
+    ]
+    correction_rank = MM.rank(correction_equations, PRIME)
+    assert correction_rank == MM.rank(augmented, PRIME) == 9
+    reduced, pivots = MM.rref(augmented, PRIME)
+    k_vector = [0] * 13
+    for row, pivot in enumerate(pivots):
+        if pivot < 13:
+            k_vector[pivot] = reduced[row][13]
+    assert all(
+        sum(value * coefficient for value, coefficient in zip(equation, k_vector))
+        % PRIME
+        == rhs
+        for equation, rhs in zip(correction_equations, correction_rhs)
+    )
+    repaired_primitive = [
+        [
+            (
+                primitive_mod[row][column]
+                + sum(
+                    k_vector[index] * transvectant_corrections[index][row][column]
+                    for index in range(13)
+                )
+            )
+            % PRIME
+            for column in range(7)
+        ]
+        for row in range(13)
+    ]
+    assert all(
+        matrix_product(target_action, repaired_primitive)
+        == matrix_product(repaired_primitive, source_action)
+        for source_action, target_action in zip(source_actions, target_actions)
+    )
+    repaired_target_intertwiner = matrix_product(
+        repaired_primitive, source_intertwiner
+    )
+    comparison_scalar = next(
+        repaired_target_intertwiner[row][column]
+        * pow(equivariant_target_intertwiner[row][column], -1, PRIME)
+        % PRIME
+        for row in range(13)
+        for column in range(10)
+        if equivariant_target_intertwiner[row][column]
+    )
+    assert comparison_scalar == 5
+    assert repaired_target_intertwiner == [
+        [comparison_scalar * value % PRIME for value in row]
+        for row in equivariant_target_intertwiner
+    ]
+    residual_lift_defects = []
+    for generator_index, (target_action, obstruction) in enumerate(
+        zip(target_actions, lift_obstructions)
+    ):
+        lift_vector = [
+            deserialize_poly(obstruction["F_lift_defect"]).get((12 - row, row), 0)
+            for row in range(13)
+        ]
+        residual = [
+            (
+                lift_vector[row]
+                + sum(
+                    (
+                        target_action[row][column] - int(row == column)
+                    )
+                    * k_vector[column]
+                    for column in range(13)
+                )
+            )
+            % PRIME
+            for row in range(13)
+        ]
+        assert all(
+            not value or row in (0, 1, 11, 12)
+            for row, value in enumerate(residual)
+        )
+        residual_lift_defects.append(
+            {
+                "generator": generator_index,
+                "residual_frobenius_polynomial": serialize_poly(
+                    clean(
+                        {
+                            (12 - row, row): value
+                            for row, value in enumerate(residual)
+                        }
+                    )
+                ),
+            }
+        )
+
     c651_chart = matrix_product(source_intertwiner, pair_embedding())
     transported_chart = matrix_product(primitive_mod, c651_chart)
+    repaired_chart = matrix_product(repaired_primitive, c651_chart)
     equivariant_target_chart = matrix_product(
         equivariant_target_intertwiner, pair_embedding()
     )
     assert MM.rank(c651_chart, PRIME) == 4
     assert MM.rank(transported_chart, PRIME) == 4
+    assert MM.rank(repaired_chart, PRIME) == 4
     assert MM.rank(equivariant_target_chart, PRIME) == 4
     first_nonzero = next(
         {
@@ -609,18 +739,38 @@ def build_certificate() -> dict[str, object]:
         "primitive_image_vs_equivariant_image_intersection_dimension": (
             image_intersection_dimension
         ),
+        "tt_repair_polynomial_K": serialize_poly(
+            clean(
+                {
+                    (12 - row, row): value
+                    for row, value in enumerate(k_vector)
+                }
+            )
+        ),
+        "tt_repair_solution_dimension": 13 - correction_rank,
+        "tt_repair_ambiguity": (
+            "span{x^12,x^11y,xy^11,y^12}; its ordinary third "
+            "derivatives vanish modulo 11"
+        ),
+        "tt_repaired_primitive_matrix": repaired_primitive,
+        "tt_repaired_primitive_rank": MM.rank(repaired_primitive, PRIME),
+        "tt_repaired_operator_is_a5_equivariant": True,
+        "tt_repaired_pair_to_target_scalar": comparison_scalar,
+        "tt_residual_lift_defects": residual_lift_defects,
         "c651_four_chart_in_sym6": c651_chart,
         "c651_four_chart_after_primitive_transvectant": transported_chart,
+        "c651_four_chart_after_tt_repair": repaired_chart,
         "c651_equivariant_target_four_chart": equivariant_target_chart,
         "marked_nonzero_entry": first_nonzero,
         "c651_clebsch_restriction_scalar": 4,
         "c651_integral_cubic_line": c651_certificate["integral_clebsch_line"],
         "interpretation": (
             "The primitive Sym^6-to-Sym^12 transvectant is rank four and is "
-            "canonically recovered as an 11-adic Bockstein/Hasse operator, but "
-            "it does not carry the standard C651 A5-marked four-space to the "
-            "A5-equivariant target four-space.  The recorded generator defects "
-            "are an exact obstruction to the stronger marked bridge."
+            "canonically recovered as an 11-adic Bockstein/Hasse operator.  "
+            "The original Klein lift is incompatible with the standard C651 "
+            "marking, but the unique visible correction F -> F+11K makes the "
+            "operator A5-equivariant and identifies the marked target map with "
+            "scalar 5.  The four-dimensional ambiguity is Frobenius-invisible."
         ),
         "inputs": {
             str(path.relative_to(REPOSITORY)): {

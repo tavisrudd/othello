@@ -798,13 +798,23 @@ four-space.  Multiplicity one therefore cannot fix a nonexistent scalar.
 The closeout computes the cause: each defect is exactly the third
 transvectant with
 \((\det(g)F(g^{-1}z)-F)/11\bmod11\), the mod-\(121\) lift cocycle of the
-stored C651 generator.
+stored C651 generator.  The subsequent `tt` pass repairs the incompatibility:
+for
+\[
+K=10X^{10}Y^2+5X^9Y^3+7X^8Y^4+8X^7Y^5+2X^6Y^6+
+3X^5Y^7+7X^4Y^8+6X^3Y^9+10X^2Y^{10},
+\]
+the divided operator attached to \(F+11K\bmod121\) is fully
+\(A_5\)-equivariant and the marked source-to-target map is scalar \(5\).
+The correction is unique modulo
+\(\langle X^{12},X^{11}Y,XY^{11},Y^{12}\rangle\), whose ordinary third
+derivatives vanish modulo \(11\).
 The source records, exact certificate, independent replay, and mystery
 ledger are in
 `notes/2026-07-28-c682-invariant-operator-divided-power.md`.  The next
 \(E_8\) mathematical frontier is the intrinsic meaning of \(p\) and the
-other McKay blocks; the arithmetic frontier would require an integral
-lift of the C651 \(A_5\)-marking, not another mod-\(11\) basis change.
+other McKay blocks; the arithmetic frontier is now a conceptual
+interpretation of the corrected lift and its Frobenius ambiguity.
 
 C682's remaining Platinum track is:
 

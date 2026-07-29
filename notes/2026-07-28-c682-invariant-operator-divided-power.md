@@ -35,13 +35,14 @@ transvectant of \(\Phi_{12}\bmod 11\).  On \(\operatorname{Sym}^6\) it is
 the nonzero scalar \(9\) times the already certified primitive
 transvectant matrix.
 
-The stronger proposed bridge to C651 fails in the standard marking.  The
-primitive map sends the unique C651 pair-module four-space to a rank-four
-subspace of \(\operatorname{Sym}^{12}\), but that subspace is not
-\(A_5\)-stable.  It meets the standard \(A_5\)-equivariant target
-four-space trivially.  Thus multiplicity one cannot be invoked to identify
-the two maps, and a single-entry comparison cannot fix a scalar that does
-not exist.
+The original Klein lift does not give the stronger proposed bridge to
+C651 in the standard marking.  Its primitive image is disjoint from the
+standard \(A_5\)-equivariant target four-space.  The `tt` pass, however,
+finds the missing first-order correction: replacing \(F\) by \(F+11K\)
+modulo \(121\), for an explicit degree-\(12\) polynomial \(K\), makes the
+divided operator \(A_5\)-equivariant.  The repaired marked map is exactly
+scalar \(5\) times the canonical target map.  The correction is unique
+modulo the four-dimensional Frobenius-invisible kernel.
 
 ## Exact divided-power formula
 
@@ -195,6 +196,55 @@ rank-\(4\) defect.  The failure is therefore the first-order
 mod-\(121\) failure of the chosen C651 matrices to preserve the integral
 Klein lift.  It is not a basis artifact.
 
+## `tt` repair: the compatible divided lift
+
+The defect equation is linear in a first-order change of lift.  Solving
+the full ambient equivariance equations, not merely their restriction to
+the C651 four-space, gives
+\[
+\begin{aligned}
+K={}&10X^{10}Y^2+5X^9Y^3+7X^8Y^4+8X^7Y^5+2X^6Y^6\\
+   &+3X^5Y^7+7X^4Y^8+6X^3Y^9+10X^2Y^{10}
+   \quad\in\mathbf F_{11}[X,Y].
+\end{aligned}
+\]
+For the adjusted mod-\(121\) lift \(F^{\mathrm{tt}}=F+11K\), define
+\[
+ P^{\mathrm{tt}}
+ =\bar P+\frac5{12}(\,\cdot\,,K)_3.
+\]
+Then
+\[
+ \rho_{12}(g)P^{\mathrm{tt}}
+ =P^{\mathrm{tt}}\rho_6(g)
+\]
+for all three generators, hence for the whole \(A_5\).  The repaired map
+still has rank \(4\).
+
+The linear system has rank \(9\) in \(13\) unknowns.  Its four-dimensional
+ambiguity is exactly
+\[
+ W_{\mathrm{Fr}}
+ =\langle X^{12},X^{11}Y,XY^{11},Y^{12}\rangle.
+\]
+Every element of \(W_{\mathrm{Fr}}\) has zero ordinary third derivatives
+modulo \(11\), so the divided transvectant cannot see this ambiguity.
+After the displayed correction, each residual lift defect lies in
+\(W_{\mathrm{Fr}}\).  Thus \(F^{\mathrm{tt}}\) is invariant in precisely
+the operator-visible quotient, which is the correct datum for the
+order-three bridge.
+
+If \(J:P_{10}\to\operatorname{Sym}^6\) is the unique C651 source
+intertwiner and \(T:P_{10}\to\operatorname{Sym}^{12}\) is the unique
+target intertwiner with \(\ker T=\ker J\), the exact marked comparison is
+\[
+\boxed{P^{\mathrm{tt}}J=5T.}
+\]
+This restores the hoped-for multiplicity-one bridge after making the
+integral lift compatible.  It does not reduce the rational Gaunt scalar,
+whose denominator remains divisible by \(11\); the cross-characteristic
+claim remains the common integral Clebsch cubic line.
+
 ## Source-deep literature audit
 
 ### Direct predecessor: Dixmier
@@ -278,7 +328,8 @@ C651 marking.
 | Scalar principal cubic realizing the \(E_8\) three-node factorization | strongest surviving realization claim |
 | Degree-\(22\) first return-algebra defect and Koszul dark line | surviving new candidate |
 | Content \(132\) and mod-\(11\) survival | now explained by the Bockstein/Hasse formula |
-| \(A_5\)-equivariant bridge from C651 through \(\bar P\) | false in the standard marking |
+| \(A_5\)-equivariant bridge from C651 through the original \(\bar P\) | false; its image is disjoint from the target four-space |
+| Corrected divided-power bridge from \(F+11K\) | true; unique modulo \(W_{\mathrm{Fr}}\), with marked scalar \(5\) |
 
 Recommended paper wording:
 
@@ -389,9 +440,12 @@ the obstruction checks without importing the primary script.
 - **Closed:** what causes the equivariance failure.  The three defects are
   exactly transvectants with the nonzero mod-\(121\) lift cocycles \(L_g\);
   the ambient correction operators all have rank \(7\).
-- **Open:** whether a different integral lift of the C651 \(A_5\)-marking
-  can make a Bockstein transvectant equivariant.  This requires genuinely
-  new lift data and is not a change of scalar.
+- **Closed by `tt`:** whether a compatible divided lift repairs the
+  bridge.  The displayed \(K\) makes the full ambient operator equivariant,
+  and \(P^{\mathrm{tt}}J=5T\).
+- **Explained:** the four remaining degrees of freedom are exactly the
+  Frobenius-invisible space \(W_{\mathrm{Fr}}\), not an uncontrolled
+  normalization.
 - **Open:** an intrinsic geometric interpretation of the scalar
   principal cubic \(p\).
 - **Open:** source-deep forward-citation closure strong enough to remove
