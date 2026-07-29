@@ -1,0 +1,106 @@
+{
+  "boundary_planes": {
+    "all_three_boundary_gram_determinants_vanish": true,
+    "closed_orbit": [
+      "X^6",
+      "X^5Y",
+      "X^4Y^2"
+    ],
+    "divisor_orbit": [
+      "X^6",
+      "X^5Y",
+      "X^3Y^3"
+    ]
+  },
+  "extension": {
+    "component_values": "(54781 +/- 24288*sqrt(5))/820125",
+    "conclusion": "The ratio extends regularly on the normalization (or saturated graph) of each mate-correspondence component, but it does not descend to a regular scalar on the coarse boundary pair of kernel planes.",
+    "graph_coordinate": "[c^2:g_D*g_S]",
+    "homogeneous_relation": "(820125*c^2-54781*g_D*g_S)^2=5*24288^2*(g_D*g_S)^2"
+  },
+  "inputs": {
+    "2026-07-29-c682-d5-s3-kernel-incidence.json": "332d94d8e4c58fb719b73e563d9738a4cf9c7dd7c6bb1e37d46abd79e92135af",
+    "2026-07-29-c682-d5-s3-kernel-incidence.py": "5ccd7f18339b6df317fbf7409e21f793c3eca6dfb2aba16d85ed06003f282370"
+  },
+  "no_coarse_descent_witness": {
+    "boundary_pair": [
+      "divisor_orbit",
+      "closed_orbit"
+    ],
+    "explanation": "All ten S3 kernels have the same closed-orbit limit, while the unique divisor D5 row contains five pairs of each golden value.",
+    "lambda_minus_columns": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "lambda_plus_columns": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "one_parameter_degeneration": {
+    "D5_form_minimum_indices": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "D5_kernel_plucker_orders": [
+      4,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "S3_form_minimum_indices": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "S3_kernel_plucker_orders": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "form_weight": "the coefficient of X^(12-i)Y^i has t-order i",
+    "matrix": "diag(1,t)",
+    "unique_divisor_D5_row": 0
+  },
+  "orders_after_projective_kernel_normalization": {
+    "closed_closed": {
+      "D5_self_gram": 12,
+      "S3_self_gram": 12,
+      "cross_gram": 12
+    },
+    "divisor_closed": {
+      "D5_self_gram": 10,
+      "S3_self_gram": 12,
+      "cross_gram": 11
+    },
+    "ratio_order_closed_closed": 0,
+    "ratio_order_divisor_closed": 0
+  },
+  "schema": "c682-boundary-cross-gram-v1"
+}
