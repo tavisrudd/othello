@@ -882,3 +882,19 @@ rational checks at the first three repairs certify the result.  No
 all-weight uniqueness claim is made.  The report, generator, replay, and
 mystery ledger are in
 `notes/2026-07-29-c682-later-mckay-corners.md`.
+
+The all-weight corner frontier is now reduced to finite symbolic families.
+All fourteen strict multiplicity peaks in degrees \(73\) through \(112\)
+saturate at two large primes, hence in characteristic zero.  Combined with
+the preceding certificate, this checks all twenty-one representatives in
+\(60\le n<120\).  The Kostant numerators prove that the eventual strict
+peaks are \(60\)-periodic and occur only in the \(1,2,3,3'\) modules, at
+residues modulo \(20\)
+\[
+ \{0,12\},\quad\{1,11\},\quad\{2,10\},\quad\{6\},
+\]
+respectively.  This does not make the return matrices periodic: the exact
+remaining gate is nonvanishing of twenty-one mixing-minor families along
+\(n=n_0+60q\), together with an off-peak exclusion.  The report,
+certificate, replay, and mystery ledger are in
+`notes/2026-07-29-c682-all-weight-corner-frontier.md`.

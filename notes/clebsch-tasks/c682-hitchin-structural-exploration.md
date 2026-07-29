@@ -47,6 +47,11 @@ explicitly separated.
   binary-icosahedral commutant.  Fifteen apparent later deficits of the
   upward pair are all repaired by that one downward word; degree \(22\)
   remains the unique certified full-corner failure in this bounded range.
+- All fourteen strict multiplicity peaks in degrees \(73\) through \(112\)
+  also saturate.  Together with the preceding range, this tests one base
+  representative of every eventual \(60\)-periodic peak family.  Only the
+  \(1,2,3,3'\) Kostant modules occur; all-weight saturation is now a
+  symbolic nonvanishing problem along those four finite free modules.
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -62,9 +67,10 @@ explicitly separated.
 
 ## Active order
 
-The later McKay-corner classification is active.  Its next gate is an
-all-weight proof that the three local returns saturate above degree \(72\),
-or the first certified counterexample.  C682 remains open.
+The later McKay-corner classification is active.  Its next gate is to build
+the \(1,2,3'\) finite Weyl matrices and prove the twenty-one peak-family
+mixing minors nonzero for every \(n=n_0+60q\), while separately disposing of
+off-peak corners.  C682 remains open.
 
 ## Parked branches
 
@@ -79,4 +85,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-later-mckay-corners.md`.
+`notes/2026-07-29-c682-all-weight-corner-frontier.md`.

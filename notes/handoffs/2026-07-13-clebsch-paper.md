@@ -115,7 +115,10 @@ principal symbol is \(10p\) times multiplication by the odd invariant
 Through degree \(72\), every later apparent short-return deficit is repaired
 by the nearest downward return; degree \(22\) is the sole certified
 full-corner failure in that bounded range.  The all-weight gate remains
-open.
+open.  The fourteen strict peaks through degree \(112\) also saturate,
+completing one base representative of every eventual \(60\)-periodic peak
+family; only the \(1,2,3,3'\) free modules remain in the symbolic
+nonvanishing gate.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

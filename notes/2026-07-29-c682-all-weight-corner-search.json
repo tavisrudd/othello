@@ -1,0 +1,131 @@
+{
+  "claim_boundary": "Only strict multiplicity peaks in degrees 73..112 are searched. No all-weight saturation claim is made.",
+  "conclusion": "Every strict-peak family has a saturated base representative; all-weight saturation still requires nonvanishing along the 60-step parameter.",
+  "eventual_peak_families": {
+    "base_representatives": "60..112, combining the preceding degree-72 certificate with this search",
+    "owning_modules_by_residue_mod_20": {
+      "0,12": "1",
+      "1,11": "2",
+      "2,10": "3",
+      "6": "3p"
+    },
+    "period": 60,
+    "residues": [
+      0,
+      1,
+      2,
+      6,
+      10,
+      11,
+      12,
+      20,
+      21,
+      22,
+      26,
+      30,
+      31,
+      32,
+      40,
+      41,
+      42,
+      46,
+      50,
+      51,
+      52
+    ],
+    "valid_from_degree": 60
+  },
+  "field": "F_1000000007",
+  "rows": [
+    {
+      "commutant_dimension": 110,
+      "degree": 80,
+      "state": "saturated",
+      "three_return_dimension": 110
+    },
+    {
+      "commutant_dimension": 113,
+      "degree": 81,
+      "state": "saturated",
+      "three_return_dimension": 113
+    },
+    {
+      "commutant_dimension": 116,
+      "degree": 82,
+      "state": "saturated",
+      "three_return_dimension": 116
+    },
+    {
+      "commutant_dimension": 127,
+      "degree": 86,
+      "state": "saturated",
+      "three_return_dimension": 127
+    },
+    {
+      "commutant_dimension": 139,
+      "degree": 90,
+      "state": "saturated",
+      "three_return_dimension": 139
+    },
+    {
+      "commutant_dimension": 142,
+      "degree": 91,
+      "state": "saturated",
+      "three_return_dimension": 142
+    },
+    {
+      "commutant_dimension": 145,
+      "degree": 92,
+      "state": "saturated",
+      "three_return_dimension": 145
+    },
+    {
+      "commutant_dimension": 171,
+      "degree": 100,
+      "state": "saturated",
+      "three_return_dimension": 171
+    },
+    {
+      "commutant_dimension": 174,
+      "degree": 101,
+      "state": "saturated",
+      "three_return_dimension": 174
+    },
+    {
+      "commutant_dimension": 178,
+      "degree": 102,
+      "state": "saturated",
+      "three_return_dimension": 178
+    },
+    {
+      "commutant_dimension": 192,
+      "degree": 106,
+      "state": "saturated",
+      "three_return_dimension": 192
+    },
+    {
+      "commutant_dimension": 206,
+      "degree": 110,
+      "state": "saturated",
+      "three_return_dimension": 206
+    },
+    {
+      "commutant_dimension": 210,
+      "degree": 111,
+      "state": "saturated",
+      "three_return_dimension": 210
+    },
+    {
+      "commutant_dimension": 214,
+      "degree": 112,
+      "state": "saturated",
+      "three_return_dimension": 214
+    }
+  ],
+  "schema": "c682-all-weight-corner-frontier-v1",
+  "searched_domain": {
+    "candidate_count": 14,
+    "degrees": "73..112",
+    "selection": "strict local multiplicity peaks m(n)>=2 and m(n)>max(m(n-6),m(n+6))"
+  }
+}
