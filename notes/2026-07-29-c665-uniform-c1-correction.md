@@ -297,11 +297,11 @@ routes remain.
 3. Search for an explicit \(q=121\) splitting.  A positive result would
    falsify C1 rather than merely another proposed detector.
 
-The outer-parity half of the preferred test is now closed but compatible,
-not exclusive.  The current highest-EV order is therefore the exact
-filtered connecting map on the graded trace above, followed by the full
-direct Borel system if needed.  The modular-Hermite filtration remains the
-preferred uniform theorem architecture.
+Outer parity is compatible rather than exclusive, and the exact filtered
+connecting calculation below kills the associated-graded trace.  The
+current q=121 gate is therefore the full direct Borel pullback or an
+explicit splitting.  The modular-Hermite filtration remains useful for
+locating the radical channels, but no longer supplies a C1 detector here.
 
 The degree-two source of that connecting map is also reduced exactly.
 Writing the three graded layers as \(C_0,M,C_2\), its only possible source
@@ -334,6 +334,41 @@ realizations.  Its three simultaneous streaming eliminations compute the
 unrestricted, outer-even, and outer-odd Hom dimensions with memory bounded
 by the torus-block variable count.
 
+The connecting functional itself is now exact, and it closes this attack
+negatively.  Projection \(C_0\to L(6)\), categorical trace, and projection
+\(M\to T_+\) can see only six of the sixty rows: the three
+\[
+L(6)\otimes L(e,0),\qquad e=10,6,2,
+\]
+rows in \(C_0\otimes C_2\), and the three
+\[
+L(e,1)\otimes T_+,\qquad e=7,5,3,
+\]
+cross rows in \(\operatorname{Sym}^2M\).  Five connecting scalars vanish.
+The \(L(3,1)\otimes T_+\) row has scalar \(3\ne0\) in the canonical
+one-dimensional normalized \(H^1(B,T_+)\) coordinate.  Hence the
+degree-one traced affine class lies in the image of the filtered
+connecting map.  The associated-graded trace does not survive and cannot
+prove q=121 C1.
+
+The calculation uses the explicit Lucas basis
+\[
+L(4)\otimes L(5)^{(1)}\hookrightarrow\operatorname{Sym}^{59}V,
+\qquad (i,j)\longmapsto i+11j,
+\]
+the complementary monomials as the unique torus-fixed section, and exact
+adjacent cochains for
+\(\operatorname{Sym}^2B_0\), \(B_0\otimes A\), and
+\(\operatorname{Sym}^2A\).  It verifies the simple-factor embeddings and
+retractions in both directions and checks every resulting pair against
+the full normalized Borel cocycle relations.  Replay with
+
+```text
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-connecting-functional.sage --check
+sha256sum -c notes/2026-07-29-c665-q121-connecting-functional.sha256
+```
+
 The exact source for route (3) is McDowell--Wildon, *Modular plethystic
 isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
 441--483, Corollary 1.5, DOI
@@ -346,13 +381,13 @@ evidence that the C1 pullback is nonsplit.
 
 | feature | status | exact remaining gate |
 |---|---|---|
-| \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence and outer-layer location | prove the middle-to-bottom graded trace survives transgression |
+| \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence and outer-layer location | graded trace is killed by the \(L(3,1)\otimes T_+\) connecting row; use the direct pullback |
 | retired top Hasse channel gives a \(1\to2\) rank jump | settled as an artifact of a non-equivariant operator | none; do not reuse the rank jump |
 | all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
 | affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
 | \(L(8)\) and \(L(8)^{(1)}\) head probes | settled absent | none; do not infer a prime-field cohomology head |
 | affine-class support | settled in the outer-even \(T_+\) middle channel | none |
-| actual \(q=121\) quadratic pullback | open; transgression domain reduced to \(60+0\) outer dimensions | evaluate the filtered connecting functional, or use the direct Borel fallback |
+| actual \(q=121\) quadratic pullback | open; outer and filtered-trace detectors exhausted | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
 Vibe check: the prior positive model failed at a load-bearing seam, but the

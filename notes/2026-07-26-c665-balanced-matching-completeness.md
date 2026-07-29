@@ -1371,6 +1371,15 @@ one-dimensional rows in \(C_0\otimes C_2\), forty cross-factor rows in
 remaining q=121 decision is therefore one connecting functional on these
 sixty explicit rows.
 
+That connecting functional is nonzero.  Only six rows can survive the
+final \(C_0\to L(6)\) trace and \(M\to T_+\) projection.  Five have scalar
+zero, while the \(L(3,1)\otimes T_+\) cross row has scalar
+\(3\in\mathbb F_{11}^{\times}\).  Since the target
+\(H^1(B,T_+)\) is one-dimensional, the traced affine class lies in the
+connecting image.  Thus the modular-Hermite associated-graded trace is
+killed; q=121 C1 still requires the original direct Borel pullback or an
+explicit splitting.
+
 The characteristic-three torus case is a separate genuine residual family,
 not a cosmetic defect of the method.  Its first field can nevertheless be
 excluded exactly.  Over

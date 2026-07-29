@@ -1,0 +1,262 @@
+{
+  "architecture": {
+    "A_section_monomial_indices": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "A_standard_isomorphism": {
+      "dimension": 1,
+      "equations": 600,
+      "rank": 29,
+      "torus_block_variables": 30
+    },
+    "B_monomial_indices": [
+      0,
+      11,
+      22,
+      33,
+      44,
+      55,
+      1,
+      12,
+      23,
+      34,
+      45,
+      56,
+      2,
+      13,
+      24,
+      35,
+      46,
+      57,
+      3,
+      14,
+      25,
+      36,
+      47,
+      58,
+      4,
+      15,
+      26,
+      37,
+      48,
+      59
+    ]
+  },
+  "factor_hom_checks": {
+    "C0_L6": {
+      "embedding": {
+        "dimension": 1,
+        "equations": 4358,
+        "rank": 76,
+        "torus_block_variables": 77
+      },
+      "projection": {
+        "dimension": 1,
+        "equations": 4358,
+        "rank": 76,
+        "torus_block_variables": 77
+      }
+    },
+    "M_T_plus": {
+      "embedding": {
+        "dimension": 1,
+        "equations": 18560,
+        "rank": 329,
+        "torus_block_variables": 330
+      },
+      "projection": {
+        "dimension": 1,
+        "equations": 18560,
+        "rank": 329,
+        "torus_block_variables": 330
+      }
+    }
+  },
+  "field_modulus": "x^2 + 7*x + 2",
+  "layer_dimensions": {
+    "A": 30,
+    "B": 30,
+    "C0": 465,
+    "C2": 465,
+    "M": 900
+  },
+  "nonzero_connecting_rows": 1,
+  "p": 11,
+  "q": 121,
+  "schema": 1,
+  "trace_visible_rows": [
+    {
+      "connecting_scalar": [
+        0,
+        0
+      ],
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          10,
+          0
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 539,
+        "rank": 46,
+        "torus_block_variables": 47
+      },
+      "kind": "C0_tensor_C2"
+    },
+    {
+      "connecting_scalar": [
+        0,
+        0
+      ],
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          0
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 343,
+        "rank": 36,
+        "torus_block_variables": 37
+      },
+      "kind": "C0_tensor_C2"
+    },
+    {
+      "connecting_scalar": [
+        0,
+        0
+      ],
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 147,
+        "rank": 18,
+        "torus_block_variables": 19
+      },
+      "kind": "C0_tensor_C2"
+    },
+    {
+      "connecting_scalar": [
+        0,
+        0
+      ],
+      "factors": [
+        [
+          7,
+          1
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 1860,
+        "rank": 101,
+        "torus_block_variables": 102
+      },
+      "kind": "M_factor_tensor"
+    },
+    {
+      "connecting_scalar": [
+        0,
+        0
+      ],
+      "factors": [
+        [
+          5,
+          1
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 1300,
+        "rank": 79,
+        "torus_block_variables": 80
+      },
+      "kind": "M_factor_tensor"
+    },
+    {
+      "connecting_scalar": [
+        3,
+        0
+      ],
+      "factors": [
+        [
+          3,
+          1
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "hom": {
+        "dimension": 1,
+        "equations": 868,
+        "rank": 55,
+        "torus_block_variables": 56
+      },
+      "kind": "M_factor_tensor"
+    }
+  ],
+  "trace_visible_selection": {
+    "C0_tensor_C2_rows": 3,
+    "M_factor_tensor_rows": 3,
+    "degree_two_domain_dimension": 60,
+    "total_rows": 6
+  }
+}
