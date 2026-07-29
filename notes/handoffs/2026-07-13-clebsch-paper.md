@@ -830,7 +830,12 @@ Frobenius gauge; the second digit is explicit.  The marked scalar is
 \(115\bmod121\), and a target-line rescaling congruent to one restores
 the scalar \(5\).  The rank-five smooth presentation gate and exact
 Reynolds averaging for \(11\nmid120\) upgrade the finite test to existence
-of the full compatible \(\mathbf Z_{11}\)-tower.  The report, primary
+of the full compatible \(\mathbf Z_{11}\)-tower.  The operator
+kernel-to-cokernel Bockstein is zero, so no hidden \(11\)-torsion channel
+appears: the \(V_4/V_{3'}\) rank-four splitting is flat through modulus
+\(121\).  Intrinsically, \([K]\) is the normal direction of the
+\(A_5\)-invariant line away from the maximally symmetric Dickson fibre,
+modulo its full coordinate-and-scalar tangent space.  The report, primary
 certificate, independent replay, and mystery ledger are in
 `notes/2026-07-28-c682-corrected-bridge-mod-1331.md`.  The local lift
 equation is closed; its intrinsic relation to the global incidence cover

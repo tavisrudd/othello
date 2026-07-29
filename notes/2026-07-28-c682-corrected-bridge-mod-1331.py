@@ -462,6 +462,65 @@ def build_certificate():
         == matmul(operator, source, OPERATOR_MODULUS)
         for source, target in zip(source_actions, target_actions)
     )
+    operator_mod_11 = [
+        [value % PRIME for value in row] for row in operator
+    ]
+    operator_kernel_mod_11 = MM.nullspace(operator_mod_11, PRIME)
+    operator_cokernel_mod_11 = MM.nullspace(
+        [list(column) for column in zip(*operator_mod_11)], PRIME
+    )
+    assert len(operator_kernel_mod_11) == 3
+    assert len(operator_cokernel_mod_11) == 9
+    operator_bockstein = []
+    lifted_operator_kernel = []
+    for kernel_vector in operator_kernel_mod_11:
+        image = [
+            sum(
+                operator[row][column] * kernel_vector[column]
+                for column in range(7)
+            )
+            % OPERATOR_MODULUS
+            for row in range(13)
+        ]
+        assert all(value % PRIME == 0 for value in image)
+        divided_image = [value // PRIME for value in image]
+        operator_bockstein.append(
+            [
+                sum(
+                    cokernel_vector[row] * divided_image[row]
+                    for row in range(13)
+                )
+                % PRIME
+                for cokernel_vector in operator_cokernel_mod_11
+            ]
+        )
+        correction, _rank = solve_mod_prime(
+            operator_mod_11,
+            [-value % PRIME for value in divided_image],
+        )
+        lifted_vector = [
+            (
+                kernel_vector[column]
+                + PRIME * correction[column]
+            )
+            % OPERATOR_MODULUS
+            for column in range(7)
+        ]
+        assert all(
+            sum(
+                operator[row][column] * lifted_vector[column]
+                for column in range(7)
+            )
+            % OPERATOR_MODULUS
+            == 0
+            for row in range(13)
+        )
+        lifted_operator_kernel.append(lifted_vector)
+    operator_bockstein = [
+        list(column) for column in zip(*operator_bockstein)
+    ]
+    assert MM.rank(operator_bockstein, PRIME) == 0
+    assert MM.rank(lifted_operator_kernel, PRIME) == 3
 
     four_actions = [
         four_action(five_actions[element], OPERATOR_MODULUS)
@@ -529,6 +588,15 @@ def build_certificate():
             "P_F + 240^(-1) * ((-,(I-F)/11)_3) modulo 121"
         ),
         "operator_is_A5_equivariant_mod_121": True,
+        "operator_rank_mod_11": MM.rank(operator_mod_11, PRIME),
+        "operator_kernel_dimension_mod_11": len(operator_kernel_mod_11),
+        "operator_cokernel_dimension_mod_11": len(operator_cokernel_mod_11),
+        "operator_kernel_bockstein_matrix": operator_bockstein,
+        "operator_kernel_bockstein_rank": MM.rank(
+            operator_bockstein, PRIME
+        ),
+        "operator_kernel_mod_121": lifted_operator_kernel,
+        "operator_flat_rank_through_mod_121": 4,
         "marked_four_actions_mod_121": four_actions,
         "source_four_chart_mod_121": source_chart,
         "target_four_chart_mod_121": target_chart,

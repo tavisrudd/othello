@@ -277,6 +277,26 @@ def replay():
         == matmul(operator, source, OPERATOR_MODULUS)
         for source, target in zip(source_actions, target_actions)
     )
+    assert certificate["operator_rank_mod_11"] == 4
+    assert certificate["operator_kernel_dimension_mod_11"] == 3
+    assert certificate["operator_cokernel_dimension_mod_11"] == 9
+    bockstein = certificate["operator_kernel_bockstein_matrix"]
+    assert len(bockstein) == 9 and all(len(row) == 3 for row in bockstein)
+    assert all(not value for row in bockstein for value in row)
+    assert certificate["operator_kernel_bockstein_rank"] == 0
+    lifted_kernel = certificate["operator_kernel_mod_121"]
+    assert len(lifted_kernel) == 3
+    assert rank_mod_prime(lifted_kernel) == 3
+    assert all(
+        all(
+            sum(operator[row][column] * vector[column] for column in range(7))
+            % OPERATOR_MODULUS
+            == 0
+            for row in range(13)
+        )
+        for vector in lifted_kernel
+    )
+    assert certificate["operator_flat_rank_through_mod_121"] == 4
 
     four_actions = certificate["marked_four_actions_mod_121"]
     identity_four = [

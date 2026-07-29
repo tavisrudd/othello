@@ -339,9 +339,90 @@
       "y": 12
     }
   ],
+  "operator_cokernel_dimension_mod_11": 9,
+  "operator_flat_rank_through_mod_121": 4,
   "operator_formula": "P_F + 240^(-1) * ((-,(I-F)/11)_3) modulo 121",
   "operator_is_A5_equivariant_mod_121": true,
+  "operator_kernel_bockstein_matrix": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "operator_kernel_bockstein_rank": 0,
+  "operator_kernel_dimension_mod_11": 3,
+  "operator_kernel_mod_121": [
+    [
+      1,
+      3,
+      3,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      50,
+      96,
+      101,
+      0,
+      5,
+      1,
+      0
+    ],
+    [
+      118,
+      49,
+      75,
+      0,
+      106,
+      0,
+      1
+    ]
+  ],
   "operator_modulus": 121,
+  "operator_rank_mod_11": 4,
   "presentation": {
     "S_mod_1331": [
       1321,

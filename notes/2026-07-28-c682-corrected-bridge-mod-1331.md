@@ -94,6 +94,50 @@ ordinary derivatives, the third transvectant, the operator, all
 equivariance equations, chart reductions, and the marked scalar.  It does
 not import the primary generator.
 
+## `ej` upgrade: no hidden \(11\)-torsion channel
+
+The rank-four reduction could in principle have concealed additional
+operator channels whose invariant factors were divisible by \(11\).
+The cheap Bockstein test rules this out at the next digit.  For
+\(\bar P:\mathbf F_{11}^7\to\mathbf F_{11}^{13}\), form
+\[
+ \beta:\ker\bar P\longrightarrow\operatorname{coker}\bar P,\qquad
+ x\longmapsto P_{121}\widetilde x/11\bmod11.
+\]
+Here
+\[
+ \dim\ker\bar P=3,\qquad \dim\operatorname{coker}\bar P=9,
+\]
+and the complete \(9\)-by-\(3\) Bockstein matrix is zero.  The certificate
+then constructs three independent kernel vectors modulo \(121\), reducing
+to a basis of \(\ker\bar P\).  Thus the corrected operator has flat rank
+four through this gate: no fifth, sixth, or seventh channel is present
+only at order \(11\).
+
+This fits the characteristic-zero picture rather than merely agreeing
+numerically with it.  The lifted \(A_5\)-invariant dodecic lies on the
+classical Klein orbit after characteristic-zero base change, so its third
+transvectant retains the \(V_4\) image and \(V_{3'}\) kernel.  The local
+calculation verifies that this splitting is integral through modulus
+\(121\).
+
+There is also an intrinsic interpretation of the former “repair
+polynomial.”  The special-fibre Dickson form
+\(\bar F=X^{11}Y-XY^{11}\) has the enlarged
+\(\operatorname{PGL}_2(\mathbf F_{11})\) symmetry, and
+\[
+ W_{\mathrm{Fr}}=V^{(1)}\otimes V
+\]
+is its complete infinitesimal coordinate-and-scalar orbit.  Therefore
+\[
+ [K]\in\operatorname{Sym}^{12}/W_{\mathrm{Fr}}
+\]
+is the normal, or Kodaira--Spencer, direction in which the
+characteristic-zero \(A_5\)-invariant line leaves the maximally symmetric
+Dickson special fibre.  The positive tower integrates this normal class.
+This makes \(K\) an intrinsic first-order degeneration datum, not an ad
+hoc equivariance patch.
+
 ## `ej` + `tt` closeout: the whole \(11\)-adic tower
 
 The finite test exposes a general consequence rather than a new
@@ -151,9 +195,9 @@ The deterministic evidence bundle is:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331.py` | 20080 | `4f73e3d0e1da312563f9be63305dd8ab63f240b14611ec7630846872c9256c3f` |
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331.json` | 8891 | `8ae61efa00f6e414cc7a8b3b2d718608a2c61ffd927be5072b5ff64605d45a55` |
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331-replay.py` | 11867 | `50cb4e4057668e8419ce389f75d64cf53aa608bfaddbf54c1b44eb52297da420` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331.py` | 22534 | `794dfe03e11c6a2b41468a8330e2b4dd5ef3e880439677cf70ad9da55f5512d2` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331.json` | 9751 | `a07132da65a45f82b36f76baa32a276edfe0bfffd586f8547f776b92371ecb1a` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331-replay.py` | 12761 | `b59b9f8329d52f4e4fb4135bbada7ca9becd1b330aac6efcd31e5ef659864e6c` |
 
 The JSON records byte counts and hashes for every imported load-bearing
 input.  Its output is canonical and has no timestamps, random seeds, or
@@ -170,6 +214,12 @@ host-specific paths.
 - **Explained:** the scalar \(115\) is caused by independent chart
   normalizations; the congruent-to-one rescaling \(T_{121}\mapsto23T_{121}\)
   restores scalar \(5\).
+- **Closed by `ej`:** the kernel-to-cokernel Bockstein is zero and three
+  independent kernel vectors lift modulo \(121\), so no hidden
+  \(11\)-torsion operator channel appears.
+- **Explained by `ej`:** \([K]\) is the normal/Kodaira--Spencer direction
+  of the \(A_5\)-invariant lift away from the maximally symmetric Dickson
+  fibre, modulo the complete coordinate-and-scalar tangent space.
 - **Closed by `ej` + `tt`:** smoothness and Reynolds averaging upgrade the
   one-step success to existence of the entire compatible
   \(\mathbf Z_{11}\)-tower.
