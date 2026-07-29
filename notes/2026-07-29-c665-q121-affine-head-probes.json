@@ -1,0 +1,29 @@
+{
+  "field_modulus": "x^2 + 7*x + 2",
+  "p": 11,
+  "probes": [
+    {
+      "digits": [
+        8
+      ],
+      "highest_weight": 8,
+      "projection_hom_dimension": 0,
+      "projection_records": [],
+      "simple_dimension": 9,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "digits": [
+        0,
+        8
+      ],
+      "highest_weight": 88,
+      "projection_hom_dimension": 0,
+      "projection_records": [],
+      "simple_dimension": 9,
+      "torus_fixed_dimension": 1
+    }
+  ],
+  "q": 121,
+  "schema": 1
+}

@@ -1341,11 +1341,14 @@ Borel-blind: their torus-compatible systems have \(828-21r\) variables,
 rank \(825-21r\), and explicit verified coboundaries for
 \(1\le r\le10\).  This closes only the contraction family, not q=121 C1.
 The affine class also dies after projection to the \(L(6)\) head: its
-unique torus-fixed correction has scalar \(4\).  Hence the next gate is the
-original pullback's secondary Borel class inside the radical filtration,
-with the two-layer binary degree-59 Weyl/dual-Weyl model under modular
-Hermite reciprocity as the uniform structural route.  This remains an open
-field gate and not a uniform extension-field theorem.
+unique torus-fixed correction has scalar \(4\).  Both
+\(\operatorname{Hom}_H(F,L(8))\) and
+\(\operatorname{Hom}_H(F,L(8)^{(1)})\) vanish, so no prime-field
+cohomology-weight head replaces it.  Hence the next gate is the original
+pullback's secondary Borel class inside the radical filtration, with the
+two-layer binary degree-59 Weyl/dual-Weyl model under modular Hermite
+reciprocity as the uniform structural route.  This remains an open field
+gate and not a uniform extension-field theorem.
 
 The characteristic-three torus case is a separate genuine residual family,
 not a cosmetic defect of the method.  Its first field can nevertheless be

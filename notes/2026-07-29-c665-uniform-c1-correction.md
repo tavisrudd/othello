@@ -153,20 +153,36 @@ socle because \(\pi i=0\).  The primary head trace therefore cannot replace
 the retracted-socle trace; any q=121 obstruction is secondary in the
 radical filtration.
 
+The two prime-field cohomology-weight probes do not provide a deeper
+quotient: exact systems give
+\[
+\operatorname{Hom}_H(F,L(8))=
+\operatorname{Hom}_H(F,L(8)^{(1)})=0.
+\]
+Together with the earlier embedding exclusions, neither digit placement of
+\(L(8)\) occurs in the head or socle of \(F\).  This is an
+occurrence-level statement, not an inference from the associated-graded
+binary Weyl factors.
+
 From the repository root, replay this gate with
 
 ```text
 nix shell nixpkgs#sage -c sage -python \
   notes/2026-07-29-c665-q121-affine-head.sage --check
 sha256sum -c notes/2026-07-29-c665-q121-affine-head.sha256
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-affine-head-probes.sage --check
+sha256sum -c notes/2026-07-29-c665-q121-affine-head-probes.sha256
 ```
 
 The exact script, canonical certificate, and load-bearing-input manifest
 are `notes/2026-07-29-c665-q121-affine-head.sage`,
 `notes/2026-07-29-c665-q121-affine-head.json`, and
-`notes/2026-07-29-c665-q121-affine-head.sha256`.  Direct substitution of
-the scalar \(4\) in every generator coordinate is the independent invariant
-check.  This result does not decide the quadratic pullback.
+`notes/2026-07-29-c665-q121-affine-head.sha256`, together with the
+parallel `affine-head-probes` `.sage`, `.json`, and `.sha256` files.
+Direct substitution of the scalar \(4\) in every generator coordinate and
+the two zero-dimensional Hom kernels are the independent invariant checks.
+These results do not decide the quadratic pullback.
 
 ## Replacement attacks
 
@@ -221,6 +237,7 @@ evidence that the C1 pullback is nonsplit.
 | retired top Hasse channel gives a \(1\to2\) rank jump | settled as an artifact of a non-equivariant operator | none; do not reuse the rank jump |
 | all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
 | affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
+| \(L(8)\) and \(L(8)^{(1)}\) head probes | settled absent | none; do not infer a prime-field cohomology head |
 | actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
