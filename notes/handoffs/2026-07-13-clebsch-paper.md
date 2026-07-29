@@ -27,7 +27,7 @@
 | [C182 — Paper I release](../clebsch-tasks/c182-paper-i-release.md) | queued on external publication authority | publish and independently replay one immutable approved package |
 | [C577 — Paper II](../clebsch-tasks/c577-factorization-paper.md) | active under the C182 external-wait exception | obtain immutable locator, isolate replay, run release pass |
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
-| [C665 — uniform extension-field C1](../clebsch-tasks/c665-uniform-extension-c1.md) | active Paper II v2 research | test genuine contractions on the q=121 embedded nonretract, then Borel restriction if blind |
+| [C665 — uniform extension-field C1](../clebsch-tasks/c665-uniform-extension-c1.md) | active Paper II v2 research; q=121 closed | extract the q=121 two-component Borel spill as a uniform Frobenius-digit criterion |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
 | [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration; integral frontier closed | user selects the next frontier |
 
@@ -63,11 +63,13 @@ quadratic balanced-sheet recovery, cubic-first orientation,
 self-association/Schur/Gorenstein structure, and the paper-owned trust
 surface. C577 owns packaging and release.
 
-C665 is a strictly v2 frontier. Its current gate is the q=121
-`L(6) in Sym^59 L(2)` embedded nonretract; the retired non-equivariant Hasse
-pairing is not evidence. No C665 result enters v1 before a uniform theorem
-exists. C682 characteristic-zero work is inventory unless explicitly
-promoted.
+C665 is a strictly v2 frontier. The q=121
+`L(6) in Sym^59 L(2)` embedded nonretract now has a direct nonsplit Borel
+pullback with a two-component rank-\(1\)-to-\(2\) witness; the retired
+non-equivariant Hasse pairing is not evidence. The remaining gate is a
+uniform Frobenius-digit spill criterion. No C665 result enters v1 before a
+uniform theorem exists. C682 characteristic-zero work is inventory unless
+explicitly promoted.
 
 Local aggregate replay:
 

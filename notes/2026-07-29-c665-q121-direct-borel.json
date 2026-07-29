@@ -1,0 +1,153 @@
+{
+  "architecture": {
+    "A_section_monomial_indices": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "A_standard_isomorphism": {
+      "dimension": 1,
+      "equations": 600,
+      "rank": 29,
+      "torus_block_variables": 30
+    },
+    "B_monomial_indices": [
+      0,
+      11,
+      22,
+      33,
+      44,
+      55,
+      1,
+      12,
+      23,
+      34,
+      45,
+      56,
+      2,
+      13,
+      24,
+      35,
+      46,
+      57,
+      3,
+      14,
+      25,
+      36,
+      47,
+      58,
+      4,
+      15,
+      26,
+      37,
+      48,
+      59
+    ]
+  },
+  "augmented_rank": 2,
+  "coefficient_rank": 1,
+  "conclusion": "the q=121 quadratic pullback is nonsplit on the split Borel",
+  "degree_two_domain_dimension": 60,
+  "field_modulus": "x^2 + 7*x + 2",
+  "generators": [
+    "u(1)",
+    "u(a)",
+    "split_torus"
+  ],
+  "hermite_intertwiner": {
+    "intertwining": [
+      true,
+      true,
+      true
+    ],
+    "map_nonzero_entries": 12282,
+    "map_rank": 1830,
+    "mode": "Hermite map check",
+    "q": 121,
+    "schema": 1
+  },
+  "p": 11,
+  "pullback_splits_on_borel": false,
+  "q": 121,
+  "restriction_index": 122,
+  "restriction_index_mod_p": 1,
+  "schema": 1,
+  "witness_components": [
+    {
+      "cumulative_augmented_rank": 1,
+      "cumulative_coefficient_rank": 1,
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          9,
+          1
+        ]
+      ],
+      "filtered_row_indices": [
+        14,
+        15,
+        16,
+        32,
+        33,
+        34
+      ],
+      "pullback_quotient_support": 392,
+      "quotient_equations": 392,
+      "quotient_support_coordinates": 392,
+      "target_dimension": 140,
+      "torus_fixed_cochains": 42
+    },
+    {
+      "cumulative_augmented_rank": 2,
+      "cumulative_coefficient_rank": 1,
+      "factors": [
+        [
+          0,
+          2
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "filtered_row_indices": [
+        34
+      ],
+      "pullback_quotient_support": 0,
+      "quotient_equations": 112,
+      "quotient_support_coordinates": 112,
+      "target_dimension": 24,
+      "torus_fixed_cochains": 0
+    }
+  ]
+}

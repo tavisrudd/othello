@@ -4,6 +4,17 @@
 
 **Date**: 2026-07-29
 
+## Subsequent q=121 closure
+
+The reopened gate is now closed positively.  The full sixty-row direct
+Borel calculation has coefficient rank \(40\) and augmented rank \(41\);
+its canonical two-component witness has ranks \(1\) and \(2\).
+The decisive spill is from the trace-visible row \(34\) into
+\(L(0,2)\otimes L(3,1)\), where there is no torus-fixed coboundary.
+See `notes/2026-07-29-c665-q121-direct-borel.md`.  The correction below
+remains the record of why the former Hasse detector and the six-row trace
+alone were insufficient.
+
 ## Corrected verdict
 
 The \(q=121\) affine-socle calculation remains valid:
