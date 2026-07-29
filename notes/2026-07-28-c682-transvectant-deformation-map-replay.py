@@ -354,6 +354,165 @@ def main():
         assert len(recovered) == 1
         scale = pow(recovered[0][0], -1, P)
         assert [scale * value % P for value in recovered[0]] == [1] + expected
+
+    operator_basis = [primitive] + [
+        [[5 * value % P for value in row] for row in direction]
+        for direction in quotient_directions
+    ]
+    coordinate_matrix = [
+        [
+            operator_basis[basis][row][column]
+            for basis in range(len(operator_basis))
+        ]
+        for row in range(13)
+        for column in range(7)
+    ]
+
+    def solve_coordinates(vector):
+        augmented = [
+            row + [vector[index]] for index, row in enumerate(coordinate_matrix)
+        ]
+        reduced, pivots = rref(augmented)
+        assert len(pivots) == 10 and 10 not in pivots
+        solution = [0] * 10
+        for row, column in enumerate(pivots):
+            solution[column] = reduced[row][-1]
+        return solution
+
+    ten_pair = result["ej_ten_pair_carrier"]
+    intertwiner = ten_pair["intertwiner_pair_to_extended_normal"]
+    assert rank(intertwiner) == 10
+    assert [sum(row) % P for row in intertwiner] == [1] + quotient_pair[0]
+    generator_actions = []
+    for generator in ten_pair["generators"]:
+        binary = tuple(generator["binary_PGL2_matrix"])
+        left_action = symmetric_action(binary, 12, 1, P)
+        inverse_right_action = symmetric_action(
+            inverse_matrix2(binary, P), 6, 3, P
+        )
+        columns = []
+        for basis in operator_basis:
+            transformed = matmul(matmul(left_action, basis), inverse_right_action)
+            columns.append(
+                solve_coordinates(
+                    [value for row in transformed for value in row]
+                )
+            )
+        extended_action = [list(row) for row in zip(*columns)]
+        assert extended_action == generator["extended_normal_action"]
+        generator_actions.append(extended_action)
+        permutation = generator["pair_permutation"]
+        pair_action = [
+            [int(row == permutation[column]) for column in range(10)]
+            for row in range(10)
+        ]
+        assert matmul(extended_action, intertwiner) == matmul(
+            intertwiner, pair_action
+        )
+
+    def normalize_line(vector):
+        pivot = next(value for value in vector if value)
+        inverse = pow(pivot, -1, P)
+        return tuple(inverse * value % P for value in vector)
+
+    selected_line = tuple(
+        result["kernel_map"]["selected_recovered_extended_normal_line"]
+    )
+    conjugate_line = tuple(
+        result["kernel_map"]["conjugate_recovered_extended_normal_line"]
+    )
+    assert all(
+        normalize_line(matvec(action, selected_line, P)) == selected_line
+        for action in generator_actions
+    )
+    orbit = {conjugate_line}
+    frontier = list(orbit)
+    while frontier:
+        line = frontier.pop()
+        for action in generator_actions:
+            image = normalize_line(matvec(action, line, P))
+            if image not in orbit:
+                orbit.add(image)
+                frontier.append(image)
+    assert len(orbit) == 5
+
+    def line_operator(line):
+        return [
+            [
+                sum(
+                    line[index] * operator_basis[index][row][column]
+                    for index in range(10)
+                )
+                % P
+                for column in range(7)
+            ]
+            for row in range(13)
+        ]
+
+    def tangent_equation_rank(matrix):
+        right_kernel = nullspace(matrix)
+        left_kernel = nullspace([list(column) for column in zip(*matrix)])
+        equations = []
+        for left in left_kernel:
+            for right in right_kernel:
+                equations.append(
+                    [
+                        sum(
+                            left[row]
+                            * sum(
+                                basis[row][column] * right[column]
+                                for column in range(7)
+                            )
+                            for row in range(13)
+                        )
+                        % P
+                        for basis in operator_basis
+                    ]
+                )
+        return rank(equations)
+
+    rows = []
+    for line in sorted(orbit):
+        matrix = line_operator(line)
+        assert rank(matrix) == 4
+        line_kernel = nullspace(matrix)
+        intersection = apolar_annihilator(selected_kernel + line_kernel)
+        assert len(intersection) == 1
+        rows.append(
+            {
+                "extended_normal_line": list(line),
+                "operator_rank": 4,
+                "rank_locus_tangent_equation_rank": tangent_equation_rank(matrix),
+                "intersection_with_selected_annihilator": list(
+                    normalize_line(intersection[0])
+                ),
+            }
+        )
+    incidence_line = result["incidence_map"]["common_incidence_line"]
+    base = next(
+        row
+        for row in rows
+        if row["intersection_with_selected_annihilator"] == incidence_line
+    )
+    rows = [base] + [row for row in rows if row is not base]
+    rank_drop = result["ej_rank_drop_clebsch_frame"]
+    assert rows == rank_drop["conjugate_orbit_rows"]
+    intersection_lines = [
+        row["intersection_with_selected_annihilator"] for row in rows
+    ]
+    assert rank(intersection_lines) == 4
+    relation = nullspace([list(column) for column in zip(*intersection_lines)])
+    assert relation == [rank_drop["raw_intersection_relation"]]
+    global_scale = pow(relation[0][0], -1, P)
+    frame = [
+        [
+            global_scale * relation[0][index] * value % P
+            for value in line
+        ]
+        for index, line in enumerate(intersection_lines)
+    ]
+    assert frame == rank_drop["clebsch_frame_with_first_vector_xyz_and_sum_zero"]
+    assert tangent_equation_rank(selected_operator) == 9
     print("PASS: independent transvectant deformation-map replay")
 
 

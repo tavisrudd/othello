@@ -869,6 +869,18 @@ independent replay, trust boundary, and mystery ledger are in
 `notes/2026-07-28-c682-transvectant-deformation-map.md`.  The remaining
 integral question is to globalize this Bockstein extension as a formal
 normal-cone or first-jet map over \(\mathbf Z_{11}\).
+The subsequent `ej` pass identifies the entire extended normal space with
+C651's ten-pair module
+\(P_{10}=\mathbf1\oplus V_4\oplus V_5\): the Bockstein coordinate is the
+missing radial summand and its all-ones vector is the corrected \(K\)-line.
+The exchanger line has a five-point \(A_5/A_4\) orbit of reduced isolated
+rank drops.  Intersecting their five parent-annihilator four-spaces with
+the fixed one recovers a complete Clebsch frame
+\(q_1+\cdots+q_5=0\), with \(q_1=xyz\).  The highest-EV cheap frontier is
+whether the resulting reduced \(1+5\) configuration exhausts the
+projective rank-four degeneracy scheme of this ten-pair operator pencil;
+the certificate currently proves the six points and their reducedness,
+not global exhaustiveness.
 
 C682's remaining Platinum track is:
 

@@ -185,6 +185,86 @@ Bockstein line maps to an isotropic parent plane; adjoining its apolar
 annihilator maps it into the actual incidence scheme, and the two
 exchanged images meet over the binary line representing \(xyz\).
 
+## `ej` upgrade: the ten-pair operator pencil
+
+The extra Bockstein coordinate does more than homogenize an affine
+formula.  Conjugation on operators gives an \(A_5\)-action on
+\(\widehat N\).  Its character on the four element orders is
+\[
+\begin{array}{c|rrrr}
+\text{order}&1&2&3&5\\ \hline
+\text{class size}&1&15&20&24\\
+\operatorname{tr}_{\widehat N}&10&2&1&0.
+\end{array}
+\]
+These are exactly the fixed-pair counts for the action of \(A_5\) on the
+ten two-subsets of its natural five-set.  Since \(11\nmid60\), the module
+is semisimple, and the exact character identity gives
+\[
+ \boxed{\widehat N\simeq P_{10}\simeq\mathbf1\oplus V_4\oplus V_5.}
+\]
+The certificate checks all sixty elements and constructs an invertible
+intertwiner.  The Hom-space has dimension three, as expected from the
+three multiplicity-one summands.  After normalizing its trivial summand,
+the all-ones pair vector maps exactly to
+\[
+ (1,[K])\in\widehat N.
+\]
+Thus the Bockstein coordinate is precisely the missing radial line that
+completes the ordinary nine-space to C651's ten-pair carrier.
+
+Composing the intertwiner with \(\widehat\Theta\) gives an exact
+ten-pair operator pencil
+\[
+ P_{10}\longrightarrow
+ \operatorname{Hom}(H,\operatorname{Sym}^{12}).
+\]
+Its radial pair vector is the corrected rank-four operator.  The
+exchanger-conjugate normal line has an \(A_5\)-orbit of size five and
+stabilizer order twelve, the expected \(A_4\) hinge.  Every one of these
+five lines also gives a rank-four operator.  The fixed line and all five
+orbit points are reduced isolated points of the projective rank-at-most-
+four locus inside this pencil: the linearized determinantal equations
+have rank nine in the projective nine-space at each point.
+
+The five orbit points recover more than the single cubic \(xyz\).  Let
+\(U_0\) be the parent selected by the radial line and let \(U_i\) be the
+five parents selected by the size-five orbit.  Then
+\[
+ q_i=U_0^\perp\cap U_i^\perp
+\]
+is one-dimensional for every \(i\).  The five lines span
+\(U_0^\perp\), have one relation, and admit unique relative scalars such
+that
+\[
+ q_1=xyz,\qquad q_1+\cdots+q_5=0.
+\]
+They are therefore the full Clebsch five-line coordinate frame in the
+selected four-space, not merely another copy of its abstract
+\(V_4\)-module.  The first line is the binary sextic displayed above.
+
+This opens four concrete doors.
+
+1. **A rank-drop resolvent.**  The operator pencil contains a reduced
+   \(1+5\) configuration whose five moving points reconstruct the Clebsch
+   frame.  If these six points exhaust the rank-four degeneracy scheme,
+   that scheme is a new degree-six operator resolvent for the marked
+   Clebsch geometry.  Exhaustiveness is not proved here.
+2. **C651's cubic on deformation space.**  The C651 signed matching
+   cubic now pulls back to the \(V_4\)-summand of the same normal operator
+   pencil.  Fixing the remaining \(V_4\)-scalar by C651's
+   \(4\sigma_3\) normalization is the shortest route to an intrinsic
+   cubic orientation coordinate on the deformation space.
+3. **An integral permutation lattice.**  The full compatible
+   \(\mathbf Z_{11}\)-tower can now be sought on the canonical
+   ten-pair lattice rather than on an anonymous corrected dodecic
+   quotient.  The three summand scalars remain the exact descent data to
+   control.
+4. **Reconstruction from coarse pair data.**  A ten-pair vector produces
+   an operator; its rank-drop kernel produces a parent; five conjugate
+   parents recover the \(q_i\).  This is the first direct route from
+   C651's combinatorial carrier to the complete Clebsch chart.
+
 ## Proof boundary
 
 The following parts are exact finite-field deductions:
@@ -195,7 +275,10 @@ The following parts are exact finite-field deductions:
 - both rank-four kernels and all fifth-transvectant isotropy equations;
 - both apolar four-planes and their one-dimensional intersection;
 - the binary identification of that intersection with \(xyz\); and
-- the inverse extended-annihilator lines.
+- the inverse extended-annihilator lines;
+- the full sixty-element character and explicit ten-pair intertwiner;
+- the reduced isolated \(1+5\) rank-drop configuration; and
+- the five-line Clebsch frame and its unique sum-zero normalization.
 
 The identification of the isotropic-plane scheme with the
 Mukai--Umemura threefold and the finite-etale degree-two incidence theorem
@@ -223,9 +306,9 @@ generator.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-28-c682-transvectant-deformation-map.py` | 18734 | `1a434682bf199f5eef82f52bed7c0dc49099832afe461ced9e90c740cbb4fd0a` |
-| `2026-07-28-c682-transvectant-deformation-map.json` | 10168 | `69586092c1061b103fd544311068968b3e08603b1f0cc8eae10caba0073c45d9` |
-| `2026-07-28-c682-transvectant-deformation-map-replay.py` | 12787 | `0295c4eb606cee5f749eda7a00f36750993231d82ae0c22fb2958cc406c8afd2` |
+| `2026-07-28-c682-transvectant-deformation-map.py` | 30900 | `3822d2d269d3fa708d8b09fbc657a3743575c6b2304c6e25584b4710cd09d148` |
+| `2026-07-28-c682-transvectant-deformation-map.json` | 21501 | `45d799a413c6632b32dc61975c82a946f913a47386bb3f673a24752743d8acca` |
+| `2026-07-28-c682-transvectant-deformation-map-replay.py` | 18496 | `de2258ae576cd9831997ac964af0864594f1d6d637ba129e81d07ac75b166c09` |
 
 The JSON records byte counts and SHA-256 hashes for every imported
 load-bearing input.
@@ -244,9 +327,24 @@ load-bearing input.
 - **Closed by `ej`:** the inverse equations recover each extended normal
   line uniquely from its parent plane.  The comparison is therefore not
   a one-way numerical coincidence.
+- **Closed by the portfolio `ej`:** the extended normal space is exactly
+  C651's ten-pair module \(P_{10}=\mathbf1\oplus V_4\oplus V_5\), with
+  the corrected \(K\)-line equal to the radial all-ones line.
+- **Closed by the portfolio `ej`:** the exchanger line has a five-point
+  \(A_5/A_4\) orbit of reduced isolated rank drops, and its five
+  annihilator intersections recover the full Clebsch frame
+  \(q_1+\cdots+q_5=0\), with \(q_1=xyz\).
 - **Explained:** the former proposed equality \([K]=d(5J_0)\) was
   ill-typed.  The correct bridge is the kernel--apolar-incidence diagram
   above.
+- **Open at highest immediate value:** decide whether the displayed
+  reduced \(1+5\) configuration is the complete projective rank-four
+  degeneracy scheme of the ten-pair operator pencil.  The current
+  certificate proves six reduced points, not global exhaustiveness.
+- **Open across C651:** normalize the \(V_4\)-component of the explicit
+  intertwiner by the signed matching cubic and test whether its pullback
+  is the incidence orientation coordinate rather than only the same
+  cubic line.
 - **Open:** globalize \(\widehat N\) as the first-jet or normal-cone
   object of the divided transvectant over \(\mathbf Z_{11}\), and decide
   whether its rank-four isotropic locus maps isomorphically to a formal

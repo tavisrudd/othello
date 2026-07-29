@@ -220,6 +220,65 @@ def flatten(matrix):
     return [value for row in matrix for value in row]
 
 
+def solve_coordinates(basis_matrix, vector):
+    reduced, pivots = MM.rref(
+        [row + [vector[index]] for index, row in enumerate(basis_matrix)],
+        PRIME,
+    )
+    assert len(pivots) == len(basis_matrix[0])
+    assert len(basis_matrix[0]) not in pivots
+    solution = [0] * len(basis_matrix[0])
+    for row, column in enumerate(pivots):
+        solution[column] = reduced[row][-1]
+    assert all(
+        sum(row[column] * solution[column] for column in range(len(solution)))
+        % PRIME
+        == vector[index] % PRIME
+        for index, row in enumerate(basis_matrix)
+    )
+    return solution
+
+
+def permutation_product(left, right):
+    return tuple(left[right[index]] for index in range(len(left)))
+
+
+def permutation_power(element, exponent):
+    answer = tuple(range(len(element)))
+    for _ in range(exponent):
+        answer = permutation_product(answer, element)
+    return answer
+
+
+def permutation_order(element):
+    identity = tuple(range(len(element)))
+    for exponent in range(1, 61):
+        if permutation_power(element, exponent) == identity:
+            return exponent
+    raise AssertionError("permutation order exceeds 60")
+
+
+def presentation_pair(parent_group):
+    ordered = sorted(parent_group)
+    involution = next(
+        left
+        for left in ordered
+        if permutation_order(left) == 2
+        and any(
+            permutation_order(right) == 3
+            and permutation_order(permutation_product(left, right)) == 5
+            for right in ordered
+        )
+    )
+    cubic = next(
+        right
+        for right in ordered
+        if permutation_order(right) == 3
+        and permutation_order(permutation_product(involution, right)) == 5
+    )
+    return involution, cubic
+
+
 def certificate():
     divided = json.loads(DIVIDED_CERTIFICATE.read_text(encoding="utf-8"))
     corrected = json.loads(CORRECTED_CERTIFICATE.read_text(encoding="utf-8"))
@@ -361,11 +420,205 @@ def certificate():
     assert selected_recovered_line == [1] + quotient_pair[0]
     assert conjugate_recovered_line == [1] + quotient_pair[1]
 
+    operator_basis = [primitive] + [
+        [[5 * value % PRIME for value in row] for row in direction]
+        for direction in quotient_directions
+    ]
+    operator_coordinate_matrix = [
+        [flatten(operator_basis[column])[row] for column in range(10)]
+        for row in range(13 * 7)
+    ]
+    workspace = DIVIDED.C651.h3_workspace()
+    parent_group = tuple(workspace["parent_group"])
+    _subgroups, five_actions = DIVIDED.C651.natural_five_action(parent_group)
+    conic_parameters = tuple(MM.COXETER.conic_parameterization(PRIME)[1])
+    extended_actions = {}
+    pair_actions = {}
+    character_rows = []
+    for element in parent_group:
+        pgl_matrix = DIVIDED.recover_pgl_matrix(element, conic_parameters)
+        left_action = DIVIDED.symmetric_action(pgl_matrix, 12, 1)
+        inverse_right_action = DIVIDED.symmetric_action(
+            DIVIDED.inverse_2x2_mod(pgl_matrix, PRIME), 6, 3
+        )
+        columns = [
+            solve_coordinates(
+                operator_coordinate_matrix,
+                flatten(matmul(matmul(left_action, basis), inverse_right_action)),
+            )
+            for basis in operator_basis
+        ]
+        extended_action = [list(row) for row in zip(*columns)]
+        pair_permutation = DIVIDED.C651.pair_action(five_actions[element])
+        pair_action = DIVIDED.permutation_matrix(pair_permutation)
+        extended_actions[element] = extended_action
+        pair_actions[element] = pair_action
+        fixed_pairs = sum(
+            index == pair_permutation[index] for index in range(len(pair_permutation))
+        )
+        trace = sum(extended_action[index][index] for index in range(10)) % PRIME
+        assert trace == fixed_pairs % PRIME
+        character_rows.append((permutation_order(element), fixed_pairs, trace))
+
+    involution, cubic = presentation_pair(parent_group)
+    generator_extended_actions = [
+        extended_actions[element] for element in (involution, cubic)
+    ]
+    generator_pair_actions = [
+        pair_actions[element] for element in (involution, cubic)
+    ]
+    hom_basis = DIVIDED.rectangular_hom_basis(
+        generator_extended_actions, generator_pair_actions
+    )
+    hom_matrices = [DIVIDED.reshape(vector, 10, 10) for vector in hom_basis]
+    hom_ranks = [MM.rank(matrix, PRIME) for matrix in hom_matrices]
+    intertwiner = next(
+        matrix for matrix in hom_matrices if MM.rank(matrix, PRIME) == 10
+    )
+    radial_image = [sum(row) % PRIME for row in intertwiner]
+    scale = pow(radial_image[0], -1, PRIME)
+    intertwiner = [
+        [scale * value % PRIME for value in row] for row in intertwiner
+    ]
+    radial_image = [sum(row) % PRIME for row in intertwiner]
+    assert radial_image == selected_recovered_line
+    assert all(
+        matmul(extended_action, intertwiner)
+        == matmul(intertwiner, pair_action)
+        for extended_action, pair_action in zip(
+            generator_extended_actions, generator_pair_actions
+        )
+    )
+    character_distribution = {}
+    for order, fixed_pairs, trace in character_rows:
+        key = f"order_{order}"
+        row = character_distribution.setdefault(
+            key,
+            {
+                "class_size": 0,
+                "fixed_pair_character": fixed_pairs,
+                "extended_trace_mod_11": trace,
+            },
+        )
+        assert row["fixed_pair_character"] == fixed_pairs
+        assert row["extended_trace_mod_11"] == trace
+        row["class_size"] += 1
+
+    def operator_from_extended_line(line):
+        return [
+            [
+                sum(
+                    line[index] * operator_basis[index][row][column]
+                    for index in range(10)
+                )
+                % PRIME
+                for column in range(7)
+            ]
+            for row in range(13)
+        ]
+
+    def rank_locus_tangent_rank(matrix):
+        right_kernel = MM.nullspace(matrix, PRIME)
+        left_kernel = MM.nullspace(
+            [list(column) for column in zip(*matrix)], PRIME
+        )
+        equations = []
+        for left in left_kernel:
+            for right in right_kernel:
+                equations.append(
+                    [
+                        sum(
+                            left[row]
+                            * sum(
+                                basis[row][column] * right[column]
+                                for column in range(7)
+                            )
+                            for row in range(13)
+                        )
+                        % PRIME
+                        for basis in operator_basis
+                    ]
+                )
+        return MM.rank(equations, PRIME)
+
+    assert all(
+        normalize_projective(matvec(action, selected_recovered_line, PRIME))
+        == selected_recovered_line
+        for action in extended_actions.values()
+    )
+    conjugate_orbit = {tuple(conjugate_recovered_line)}
+    frontier = list(conjugate_orbit)
+    for action in generator_extended_actions:
+        assert len(action) == 10
+    while frontier:
+        line = frontier.pop()
+        for action in generator_extended_actions:
+            image = tuple(normalize_projective(matvec(action, line, PRIME)))
+            if image not in conjugate_orbit:
+                conjugate_orbit.add(image)
+                frontier.append(image)
+    assert len(conjugate_orbit) == 5
+
+    orbit_rows = []
+    for line in sorted(conjugate_orbit):
+        line_operator = operator_from_extended_line(line)
+        assert MM.rank(line_operator, PRIME) == 4
+        line_kernel = MM.nullspace(line_operator, PRIME)
+        intersection_line = apolar_annihilator(kernel + line_kernel)
+        assert len(intersection_line) == 1
+        orbit_rows.append(
+            {
+                "extended_normal_line": list(line),
+                "operator_rank": 4,
+                "rank_locus_tangent_equation_rank": rank_locus_tangent_rank(
+                    line_operator
+                ),
+                "intersection_with_selected_annihilator": normalize_projective(
+                    intersection_line[0]
+                ),
+            }
+        )
+    base_row = next(
+        row
+        for row in orbit_rows
+        if row["intersection_with_selected_annihilator"] == incidence_vector
+    )
+    orbit_rows = [base_row] + [row for row in orbit_rows if row is not base_row]
+    intersection_lines = [
+        row["intersection_with_selected_annihilator"] for row in orbit_rows
+    ]
+    assert MM.rank(intersection_lines, PRIME) == 4
+    relation = MM.nullspace(
+        [list(column) for column in zip(*intersection_lines)], PRIME
+    )
+    assert len(relation) == 1 and all(relation[0])
+    global_scale = pow(relation[0][0], -1, PRIME)
+    clebsch_frame = [
+        [
+            global_scale * relation[0][index] * value % PRIME
+            for value in line
+        ]
+        for index, line in enumerate(intersection_lines)
+    ]
+    assert clebsch_frame[0] == incidence_vector
+    assert [
+        sum(line[column] for line in clebsch_frame) % PRIME
+        for column in range(7)
+    ] == [0] * 7
+    selected_tangent_rank = rank_locus_tangent_rank(operator)
+    assert selected_tangent_rank == 9
+    assert all(
+        row["rank_locus_tangent_equation_rank"] == 9 for row in orbit_rows
+    )
+
     inputs = (
         DIVIDED_SCRIPT,
         DIVIDED_CERTIFICATE,
         CORRECTED_CERTIFICATE,
         ARITHMETIC_CERTIFICATE,
+        DIVIDED.MATCHING_MODULE_PATH,
+        DIVIDED.C651_SCRIPT_PATH,
+        DIVIDED.C651_CERTIFICATE_PATH,
     )
     return {
         "schema": "c682-transvectant-deformation-map-v1",
@@ -453,6 +706,66 @@ def certificate():
                 "The two exchanged extended normal lines map to two distinct "
                 "fifth-transvectant-isotropic parent planes whose annihilator "
                 "four-planes meet in the binary sextic line representing xyz."
+            ),
+        },
+        "ej_ten_pair_carrier": {
+            "result": (
+                "The extended Bockstein normal space is A5-isomorphic to "
+                "the ten-pair permutation module P10=1+4+5."
+            ),
+            "group_order": len(parent_group),
+            "character_distribution": character_distribution,
+            "all_60_character_values_match_fixed_pair_counts": True,
+            "hom_space_dimension": len(hom_basis),
+            "hom_basis_ranks": hom_ranks,
+            "intertwiner_pair_to_extended_normal": intertwiner,
+            "intertwiner_rank": MM.rank(intertwiner, PRIME),
+            "radial_pair_vector_image": radial_image,
+            "radial_pair_vector_maps_to_selected_K_line": True,
+            "generators": [
+                {
+                    "order": permutation_order(element),
+                    "P1_permutation": list(element),
+                    "pair_permutation": list(
+                        DIVIDED.C651.pair_action(five_actions[element])
+                    ),
+                    "binary_PGL2_matrix": list(
+                        DIVIDED.recover_pgl_matrix(element, conic_parameters)
+                    ),
+                    "extended_normal_action": extended_actions[element],
+                }
+                for element in (involution, cubic)
+            ],
+            "interpretation": (
+                "The Bockstein coordinate supplies exactly the missing "
+                "trivial summand.  Under the recorded marking the corrected "
+                "normal line is the image of the all-ones pair vector."
+            ),
+        },
+        "ej_rank_drop_clebsch_frame": {
+            "selected_line_is_A5_fixed": True,
+            "selected_rank_four_point_tangent_equation_rank": selected_tangent_rank,
+            "selected_rank_four_point_is_projectively_reduced_isolated": True,
+            "conjugate_line_A5_orbit_size": len(conjugate_orbit),
+            "conjugate_orbit_stabilizer_order": len(parent_group)
+            // len(conjugate_orbit),
+            "conjugate_orbit_rows": orbit_rows,
+            "all_five_rank_four_points_are_projectively_reduced_isolated": True,
+            "five_intersection_lines_span_dimension": MM.rank(
+                intersection_lines, PRIME
+            ),
+            "raw_intersection_relation": relation[0],
+            "clebsch_frame_with_first_vector_xyz_and_sum_zero": clebsch_frame,
+            "conclusion": (
+                "The fixed rank-drop line and the five-point orbit of the "
+                "exchanged line give a 1+5 reduced rank-drop configuration. "
+                "Intersecting the five exchanged annihilator four-planes "
+                "with the fixed one recovers the standard five-line Clebsch "
+                "frame in its four-space, with first line xyz and total sum zero."
+            ),
+            "noncoverage": (
+                "The certificate does not prove that these six points exhaust "
+                "the global projective rank-four degeneracy scheme."
             ),
         },
         "trust_boundary": [
