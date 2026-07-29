@@ -5,6 +5,14 @@ Canonical status: `2026-07-25-c80-status-ledger.md`.
 
 ## Verdict
 
+**Correction (later 2026-07-29):** the proposed uniform exchange-nonpacking
+hypothesis is false at `q=11`. A causal reply can itself be the shared old
+`B_small` certificate for two fibres, and selecting it can leave both
+uncompensated. Accordingly, the secant-carrier lemma below needs a third
+failure alternative: the old certificate reply equals the causal move and is
+already selected. The conditional injectivity theorem remains correct.
+See `2026-07-29-c80-causal-one-to-many.md`.
+
 Causal-label injectivity is now proved under an intrinsic nonpacked
 certificate-exchange condition.
 

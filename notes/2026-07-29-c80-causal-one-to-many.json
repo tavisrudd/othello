@@ -1,0 +1,270 @@
+{
+  "conclusion": {
+    "certificate_exchange_nonpacking": false,
+    "intermediate_defect_locus_is_empty": true,
+    "opponent_and_reply_carry_distinct_old_defect_labels": true,
+    "single_causal_label_update_is_injective": false,
+    "uncompensated_new_defect_count": 2,
+    "uniform_certificate_exchange_repair_lemma": false
+  },
+  "discovery": {
+    "legal_path": [
+      [
+        5,
+        2
+      ],
+      [
+        9,
+        6
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        10,
+        1
+      ]
+    ],
+    "method": "deterministic seeded legal-path scout; first path, first state eligible at residual selected size four",
+    "seed": 80011
+  },
+  "field": {
+    "model": "prime field F_11",
+    "order": 11
+  },
+  "independent_affine_determinant_replay": {
+    "defects_after_causal_reply": [
+      [
+        0,
+        5
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "defects_after_opponent": [],
+    "genuinely_new_defects": [
+      [
+        0,
+        5
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "old_defects": [
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        9
+      ]
+    ],
+    "uncompensated_fibres": [
+      {
+        "attacks": [
+          {
+            "mode": "certificate_reply_secant_deletion",
+            "pivots": [
+              [
+                9,
+                6
+              ]
+            ],
+            "reply": [
+              2,
+              9
+            ]
+          },
+          {
+            "mode": "causal_reply_already_selected",
+            "reply": [
+              7,
+              10
+            ]
+          }
+        ],
+        "defect": [
+          0,
+          5
+        ],
+        "new_B_small_certificate_replies": [],
+        "old_B_small_certificate_replies": [
+          [
+            2,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ]
+      },
+      {
+        "attacks": [
+          {
+            "mode": "causal_reply_already_selected",
+            "reply": [
+              7,
+              10
+            ]
+          }
+        ],
+        "defect": [
+          6,
+          5
+        ],
+        "new_B_small_certificate_replies": [],
+        "old_B_small_certificate_replies": [
+          [
+            7,
+            10
+          ]
+        ]
+      }
+    ]
+  },
+  "input_sha256": {
+    "rust/scripts/c80_causal_nonpacking.py": "268b8a839aa8308c1e3b48aa82c6c8bcc7b74d4b6778216830bcfd43ff00bffe"
+  },
+  "primary_bitmask_replay": {
+    "defects_after_causal_reply": [
+      [
+        0,
+        5
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "defects_after_opponent": [],
+    "genuinely_new_defects": [
+      [
+        0,
+        5
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "old_defects": [
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        9
+      ]
+    ],
+    "uncompensated_fibres": [
+      {
+        "defect": [
+          0,
+          5
+        ],
+        "new_B_small_certificate_replies": [],
+        "old_B_small_certificate_replies": [
+          [
+            2,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ]
+      },
+      {
+        "defect": [
+          6,
+          5
+        ],
+        "new_B_small_certificate_replies": [],
+        "old_B_small_certificate_replies": [
+          [
+            7,
+            10
+          ]
+        ]
+      }
+    ]
+  },
+  "schema": "c80-causal-one-to-many-v1",
+  "source": "rust/scripts/c80_causal_one_to_many.py",
+  "witness": {
+    "causal_reply": [
+      7,
+      10
+    ],
+    "opponent": [
+      4,
+      4
+    ],
+    "state": [
+      [
+        1,
+        3
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        9,
+        6
+      ],
+      [
+        10,
+        1
+      ]
+    ]
+  }
+}

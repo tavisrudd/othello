@@ -1520,6 +1520,23 @@ surplus, not secant uniqueness. C82 remains gated.
 Report+script+certificate:
 [`../2026-07-29-c80-causal-nonpacking.md`](../2026-07-29-c80-causal-nonpacking.md).
 
+**Uniform certificate-exchange nonpacking is false at q11 (C80,
+2026-07-29).** For
+`A={(1,3),(5,2),(9,6),(10,1)}`, opponent `(4,4)`, and old-labelled
+causal reply `(7,10)`, both played moves lie in `Def(A)`,
+`Def(A+o)=empty`, but
+`Def(A+o+h)={(0,5),(6,5)}`. Both new fibres are uncompensated.
+The causal move itself was a shared old `B_small` certificate reply,
+so selecting it consumes two certificate copies; this is a missing
+self-consumption alternative in the prior secant-carrier lemma.
+Primary bitmask and independent determinant replay agree. The witness
+still has global cardinality surplus (seven old defects, two new), so
+the live crown is now a projectively natural Hall rematching of new
+defects to all consumed ancestral labels with strict support descent,
+or the first support-deficit set—not a per-causal-move nonpacking
+bound. C82 remains gated. Report+script+certificate:
+[`../2026-07-29-c80-causal-one-to-many.md`](../2026-07-29-c80-causal-one-to-many.md).
+
 **Canonical C80 truth ledger (refreshed 2026-07-29).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
