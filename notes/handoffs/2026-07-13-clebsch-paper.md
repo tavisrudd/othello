@@ -29,7 +29,7 @@
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
 | [C665 — uniform extension-field C1](../clebsch-tasks/c665-uniform-extension-c1.md) | active Paper II v2 research | test genuine contractions on the q=121 embedded nonretract, then Borel restriction if blind |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration | test the normalized-graph Schläfli swap, then determine the integral base |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration | determine the minimal integral base and actual bad primes |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -93,6 +93,10 @@ lambda-plus fibre.
 The cross-Gram separator extends over both Mukai--Umemura boundary orbits
 on the normalized saturated graph, but provably not as a scalar on the
 coarse kernel-pair boundary.
+The normalized-graph deck exchange is exactly the global extension of the
+Schläfli apolar-polar row swap: inside each \(D_5\), the two five-cycle
+classes give complementary pentagon-side and pentagram-diagonal relations
+on the ten \(S_3\) labels.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

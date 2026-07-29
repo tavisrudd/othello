@@ -22,14 +22,13 @@ and may be reorganized as C682 evolves.
 | Classical mate geometry | The \(A_4,D_5,S_3\) maximal subgroups have unique nontrivial icosahedral mates. The \(D_5\) branch gives the exceptional Schläfli six and its functorial polar companion. | `notes/2026-07-28-c682-incidence-moduli.md`; `notes/2026-07-28-c682-maximal-subgroup-mates.md`; `notes/2026-07-28-c682-operator-schlafli.md` |
 | Golden \(D_5\)--\(S_3\) incidence | Direct characteristic-zero kernel intersection is empty. The normalized apolar cross-Gram scalar has two \(\mathbf Q(\sqrt5)\)-conjugate values whose fibres are complementary \((6_5,10_3)\) designs; their first-order collision at \(11\) explains the Bockstein shadow. The frozen common marking identifies the stored matrix with \(\lambda_+\), \(\sqrt5=4\). | `notes/2026-07-29-c682-d5-s3-kernel-incidence.md`; `notes/2026-07-29-c682-common-marking-sign.md` |
 | Boundary separator | The determinant-line ratio extends as \([c^2:g_Dg_S]\) on the normalized mate correspondence. Both golden values collapse to the same divisor--closed and closed--closed kernel pairs, so no coarse scalar extension exists. | `notes/2026-07-29-c682-boundary-cross-gram.md` |
+| Global row swap | The normalized-graph deck exchange is the Schläfli apolar-polar row swap. In each \(D_5\), the two \(A_5\) five-cycle classes give complementary pentagon-side and pentagram-diagonal relations on the ten \(S_3\) labels. | `notes/2026-07-29-c682-normalized-graph-row-swap.md` |
 
 ## Active and parked frontiers
 
 ### Active order
 
-1. **Row swap:** decide whether the normalized-graph deck exchange is the
-   Schläfli apolar-polar companion globally.
-2. **Integral model:** determine the minimal base and exact bad primes of the
+1. **Integral model:** determine the minimal base and exact bad primes of the
    combined operator/incidence package.
 
 ### Parked independent branches
@@ -765,9 +764,22 @@ all ten closed \(S_3\) kernels have the same limiting pair
 value. The projectively normalized determinant orders are \(10,12,11\),
 so the ratio has valuation zero while all three Gram determinants vanish.
 The exact proof, certificate, independent two-field replay, and mystery
-ledger are in `notes/2026-07-29-c682-boundary-cross-gram.md`. The next gate
-is whether the normalized-graph deck exchange is the global Schläfli
-apolar-polar row swap; the minimal integral base remains open.
+ledger are in `notes/2026-07-29-c682-boundary-cross-gram.md`.
+
+The normalized-graph row-swap gate is now closed. A \(D_5\) row contains one
+Sylow-five subgroup; its two pairs of nonidentity generators
+\(\{g,g^{-1}\}\) and \(\{g^2,g^{-2}\}\) belong to the two \(A_5\)
+five-cycle classes and trace complementary pentagon-side and
+pentagram-diagonal sets on the ten \(S_3\) edge labels. In the pentahedral
+Clebsch marking these are exactly the five Eckardt points on \(E_D\) and the
+complementary five on its polar companion \(E_D'\). Thus the apolar-polar
+row swap exchanges the same two size-thirty diagonal \(A_5\)-orbits as the
+golden deck involution. Equality on the dense homogeneous locus extends
+uniquely over the normalized saturated graph; no coarse kernel-pair
+involution is asserted. The proof, exact certificate, independent group
+replay, and mystery ledger are in
+`notes/2026-07-29-c682-normalized-graph-row-swap.md`. The minimal integral
+base remains open.
 
 C682's remaining Platinum track is:
 

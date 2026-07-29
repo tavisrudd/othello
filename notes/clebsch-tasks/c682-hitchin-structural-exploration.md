@@ -28,6 +28,9 @@ explicitly separated.
   saturated graph coordinate \([c^2:g_Dg_S]\) on the normalized mate
   correspondence. It cannot descend to the coarse kernel-pair boundary,
   where both golden values have the same limiting pair.
+- The normalized-graph deck exchange is the global Schläfli apolar-polar
+  row swap: the two five-cycle classes in each \(D_5\) give complementary
+  pentagon-side and pentagram-diagonal relations on the ten \(S_3\) labels.
 - In the frozen common \(A_5\)-marking, the stored mod-\(11\) matrix is the
   \(\lambda_+\) fibre with \(\sqrt5=4\); the outer order-five-class swap
   gives the complementary \(\lambda_-\) fibre.
@@ -36,9 +39,7 @@ explicitly separated.
 
 ## Active order
 
-1. Test whether the normalized-graph deck exchange is the global Schläfli
-   apolar-polar row swap.
-2. Determine the minimal integral base and actual bad primes.
+1. Determine the minimal integral base and actual bad primes.
 
 ## Parked branches
 
@@ -53,4 +54,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-boundary-cross-gram.md`.
+`notes/2026-07-29-c682-normalized-graph-row-swap.md`.

@@ -1,0 +1,54 @@
+{
+  "comparison": {
+    "deck_exchange_equals_row_swap": true,
+    "frozen_marking_plus_sign_imported": true,
+    "lambda_minus_is_the_polar_row_relation": true,
+    "lambda_plus_is_one_schlafli_row_relation": true,
+    "marking_independent_bipartite_signature": "000111|001011|010101|011010|011100|100110|101001|101100|110001|110010"
+  },
+  "counts": {
+    "A5_order": 60,
+    "D5_row_count": 6,
+    "S3_edge_count": 10,
+    "five_cycle_class_size": 12,
+    "five_cycle_count": 24
+  },
+  "golden_fibres": {
+    "column_degrees": [
+      3,
+      3
+    ],
+    "complementary": true,
+    "edge_counts": [
+      30,
+      30
+    ],
+    "row_degrees": [
+      5,
+      5
+    ],
+    "shape": [
+      6,
+      10
+    ]
+  },
+  "inputs": [
+    {
+      "bytes": 102857,
+      "path": "2026-07-29-c682-d5-s3-kernel-incidence.json",
+      "sha256": "332d94d8e4c58fb719b73e563d9738a4cf9c7dd7c6bb1e37d46abd79e92135af"
+    },
+    {
+      "bytes": 5378,
+      "path": "2026-07-29-c682-common-marking-sign.json",
+      "sha256": "158d9b06b393fee605c7acaf7e8153a3e980d235eeb0af1d5a151ba825e20bfb"
+    }
+  ],
+  "schema": "c682-normalized-graph-row-swap-v1",
+  "schlafli_marking": {
+    "first_row": "pentagon sides from one A5 five-cycle class",
+    "odd_label_permutation_exchanges_rows": true,
+    "polar_row": "pentagram diagonals from the other A5 five-cycle class",
+    "relations_are_complementary": true
+  }
+}
