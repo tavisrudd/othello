@@ -371,14 +371,122 @@ trivial-character cross relations “plus infinity = minus finite sum” and
 former seven unexplained directions beyond sign and \(\tau_2\) are the six
 other Fourier lines and one complementary cross line.  C682's degree-22
 Koszul row suggested this operator-syzygy viewpoint, but there is no literal
-\(E_8\) or mod-\(3\) module transfer.
-Diagonalization
-over \(\mathbb F_{q^2}\) and Frobenius-fixed
+\(E_8\) or mod-\(3\) module transfer.  Diagonalization over
+\(\mathbb F_{q^2}\) and Frobenius-fixed
 discriminant weight descend the nonsplit case, while the antipodal type is
 outer-fixed and cannot split.  The q=27 full coefficient-space replay and
 the independent q=27/q=243 moment projection cross-check the identity.
 Characteristic-three T3 is closed; uniform extension-field C1 is the
 remaining Platinum frontier.
+
+### C665 cold-session protocol: uniform extension-field C1
+
+Route a fresh session with
+
+```text
+go C665 clebsch uniform extension-field C1
+```
+
+The exact objective is **not** another torus calculation.  T3, including
+the q=27 invariant-trade excess, is closed.  C1 asks for the quadratic
+pullback nonsplitting attached to every remaining exceptional
+\(K=A_4,S_4,A_5\) head over \(q=p^e,\ e>1\).  This is a Paper II v2
+Platinum continuation and must not hold v1 or enter a manuscript before the
+uniform theorem exists.
+
+Before proving anything nontrivial, read
+`notes/expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`
+and the C1 sections of
+`notes/2026-07-26-c665-balanced-matching-completeness.md`, especially
+“Exact quadratic pullback,” “Retracted-socle pullback lemma,” the q=25 and
+q=49 gates, and “C1-extension.”  Keep the point-vector convention fixed:
+\[
+0\longrightarrow F\longrightarrow E
+ \mathrel{\mathop{\longrightarrow}^{\epsilon}}k\longrightarrow0,
+\qquad
+F=\operatorname{Sym}^{(q-3)/2}L(2),
+\]
+and
+\[
+\partial:\operatorname{Sym}^2E\longrightarrow E,\qquad
+\partial(xy)=\epsilon(x)y+\epsilon(y)x.
+\]
+For a selected outer-parity embedding \(i:S^\chi\hookrightarrow E\), C1
+is the assertion that the pullback of \(\partial\) along \(i\) is nonsplit,
+equivalently that \(i\) is not in the image of the appropriate
+outer-eigenspace of
+\[
+\partial_*:\operatorname{Hom}_H(S,\operatorname{Sym}^2E)
+\longrightarrow\operatorname{Hom}_H(S,E).
+\]
+
+The decision order is strict:
+
+1. Compute or prove \(\operatorname{Hom}_H(S,E)=0\).  If it is zero, that
+   row closes without constructing \(\operatorname{Sym}^2E\).
+2. If \(S\) embeds, determine the **actual occurrence**, not just its
+   composition factor: does some \(H\)-map \(r:E\to S\) satisfy \(ri=1\)?
+3. If the occurrence retracts and \(p\nmid\dim S\), apply the
+   retracted-socle trace lemma; the pullback is nonsplit.
+4. Only for an embedded nonretract compute the pullback class or
+   \(\partial_*\), with the nonsquare-dilation outer parity included.
+
+Prime fields are closed conceptually.  The first two extension barriers are
+also closed:
+\[
+\begin{array}{c|c|c}
+q&\text{candidate heads}&\dim\operatorname{Hom}_H(S,E)\\ \hline
+25&L(1)\otimes L(1)^{(1)},\
+   L(2)\otimes L(2)^{(1)}&0,\ 0\\
+49&L(1)\otimes L(1)^{(1)},\
+   L(3)\otimes L(3)^{(1)}&0,\ 0.
+\end{array}
+\]
+These are exact evidence, not a uniform theorem.  The unresolved statement
+is whether affine-socle absence persists for all relevant Frobenius-digit
+heads, or whether some later field contains the first embedded nonretract.
+The complete candidate-family table and subgroup congruence conditions are
+in the C665 report; do not replace it by a guessed short list.
+
+The preferred theorem-level attack is a recursive
+\(\mathrm{SL}_2\)-tilting/socle description of
+\(\operatorname{Sym}^{(p^e-3)/2}L(2)\) that can answer both embedding and
+retractability for those candidate digits.  Ordinary block support cannot
+do this: all relevant non-Steinberg simples lie in the same full-defect
+block.  If a finite falsifier is needed before that proof, q=121 is the
+next useful gate.  Its affine module has dimension
+\[
+1+\binom{61}{2}=1831
+\]
+and the three relevant probes are \(L(6)\), \(L(8)\), and
+\(L(1)\otimes L(1)^{(1)}\).  Reuse the q=49 strategy: first confine possible
+images with a small number of group-algebra elements, then solve the full
+generator intertwiner equations by an independent route.  A zero result at
+q=121 is evidence only.  A nonzero result must immediately branch to the
+retraction test before any symmetric-square construction.
+
+The exact replay baselines are:
+
+```bash
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q19-module-test.sage --pullback-check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q25-pullback.sage --check
+nix shell nixpkgs#sage -c sage \
+  notes/2026-07-26-c665-q49-affine-socle.sage --check
+sha256sum -c notes/2026-07-26-c665-exceptional-head-pullback.sha256
+sha256sum -c notes/2026-07-26-c665-q25-pullback.sha256
+sha256sum -c notes/2026-07-26-c665-q49-affine-socle.sha256
+```
+
+Do not use composition factors to identify the relevant copy, extrapolate
+q=25/49 affine-socle absence, invoke the retracted-socle lemma without an
+actual retraction, or build a huge symmetric square before the affine Hom
+gate.  The q=27 Fourier decomposition and C682's characteristic-zero
+\(E_8\) Koszul row are useful warnings about occurrence-level operator
+structure, but neither is evidence for C1.  A valid C1 closeout must prove
+the decision tree uniformly for every candidate family, with any finite
+calculation retained only as a discovery/certification gate.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,
