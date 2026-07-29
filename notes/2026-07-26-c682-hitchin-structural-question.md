@@ -3462,6 +3462,29 @@ normalization--conductor descent in \(K\)-theory for the Ferrand pinch.
 They are not promoted yet because no new exact consequence has been
 extracted from them.
 
+## Mod-\(11\) transvectant--matching closure
+
+The C651 contraction gate is now closed at the intrinsic level appropriate
+to the bad prime.  The content-divided third-transvectant matrix has rank
+four modulo \(11\), projective \(A_5\) stabilizer, and a 22-point
+\(\operatorname{PGL}_2(11)\)-orbit.  After conjugating its stabilizer to the
+frozen C651 marking, this orbit is equivariantly identical to Paper II's
+22 matching points; the two \(\operatorname{PSL}_2(11)\)-orbits agree with
+the two factorization sheets.  The marked image has a one-dimensional Hom
+space from the Clebsch four-space, so C651's \(4\sigma_3\) is the nonzero
+invariant cubic line on the transvectant image.  The signed matching cubic
+transforms by the quadratic determinant character on all 1,320 projective
+elements, and every outer element exchanges both transvectant and matching
+sheets.
+
+The fixed primitive matrix is not itself a global determinant-twisted
+\(\operatorname{PGL}_2(11)\)-intertwiner.  Its 22-point conjugacy orbit is
+essential; this is the precise divided-power correction at the prime
+dividing the ordinary transvectant's content.  The theorem, primary
+certificate, independent replay, Paper II cliffhanger disposition, and
+trust boundary are in
+`notes/2026-07-28-c682-mod11-transvectant-matching-bridge.md`.
+
 ## Mystery ledger
 
 - **Settled:** a natural ambient bridge exists after choosing an
@@ -3679,11 +3702,17 @@ extracted from them.
   unique flop.
 - **Open:** construct the inverse kernel formula on that resolved graph
   and compute the quartic branch equation.
-- **Open:** contract the C651 finite matching tensor through the primitive
-  mod-\(11\) map and fix the resulting cubic scalar.
-- **Open:** identify the relevant Paper II orientation cover over the now
-  fixed ten-point carrier; C651 fixes the \(A_5\)-module but not an outer
-  sheet action or its normalization.
+- **Settled at the intrinsic bad-prime level:** the primitive
+  transvectant orbit and the matching orbit are the same marked
+  22-point \(\operatorname{PGL}_2(11)\)-set, their
+  \(\operatorname{PSL}_2(11)\) sheets agree, and C651's \(4\sigma_3\)
+  spans the invariant cubic line on the marked transvectant image.
+- **Settled negatively:** one fixed primitive matrix is not a global
+  determinant-twisted \(\operatorname{PGL}_2(11)\)-intertwiner; its
+  22-point orbit is the correct object.
+- **Open normalization refinement:** compare the binary and Euclidean
+  integral lattices if an exact cross-characteristic scalar beyond the
+  common cubic line is required.
 - **Open:** compare the compact five-syntheme/Clebsch expression directly
   with the classical explicit \(W_T\) formulas and find a consequence not
   already contained in Segre--Igusa duality.
