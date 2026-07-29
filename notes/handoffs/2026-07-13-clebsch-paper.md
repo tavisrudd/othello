@@ -129,6 +129,14 @@ four-by-four determinants prove unique continuation on the five
 coefficient chains.  A noncircular lower-hyperplane propagation lemma
 reduces the remaining full-corner proof to upper-support mixing at
 codimension-two peaks plus off-peak propagation.
+The attempted maximal-rank/multiplicity induction is now sharply audited.
+Every McKay block is maximal-rank through degree \(300\) at two primary and
+one replay prime, and full supported algebras on spanning nonorthogonal
+subspaces generate the full matrix corner.  However the trivial module has
+a recurring unanchored plateau \(1\to2^6\to3\), first in degrees
+\(118,\ldots,160\); equal-rank edges only transport the unknown corner, so
+bare induction is circular.  The first exact remaining family is
+trivial-module plateau-entry mixing at \(n=64+60q\).
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

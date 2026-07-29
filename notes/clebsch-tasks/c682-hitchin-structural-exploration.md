@@ -60,6 +60,13 @@ explicitly separated.
   coefficient chains.  Degree \(22\) is the unique exception that can
   occupy a repeated isotypic summand.  The remaining corner gate is
   upper-support mixing at codimension-two peaks plus off-peak propagation.
+- The proposed maximal-rank/multiplicity induction has been audited rather
+  than assumed.  Every McKay block is maximal-rank through degree \(300\)
+  at two primary and one replay prime, and the supported-two-subspace lemma
+  is proved.  But the trivial module has a recurring unanchored plateau
+  \(1\to2^6\to3\), first in degrees \(118,\ldots,160\), so bare
+  multiplicity induction is circular.  The first exact remaining family is
+  plateau-entry mixing at \(n=64+60q\).
 - The combined normalized operator, apolar-polar, and golden-incidence
   package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
@@ -76,11 +83,12 @@ explicitly separated.
 ## Active order
 
 The later McKay-corner classification is active.  The all-weight
-two-sided-defect gate is closed.  Its next gate is to use the \(1,2,3,3'\)
-finite Weyl matrices to prove that \(U_1,U_2\) generate the upper-supported
-full algebra at every codimension-two peak, then place all off-peak corners
-in a well-founded propagation order.  The former twenty-one family minors
-remain the fallback.  C682 remains open.
+two-sided-defect gate is closed, and bare multiplicity induction is
+retired.  Its next gate is the trivial-module plateau-entry family
+\(n=64+60q\): prove that the local returns mix the incoming hyperplane with
+its missing direction.  Then extend that controllability lemma to the
+\(2,3,3'\) modules.  The former twenty-one family minors remain the
+fallback.  C682 remains open.
 
 ## Parked branches
 
@@ -95,4 +103,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-all-weight-defect-theorem.md`.
+`notes/2026-07-29-c682-full-corner-induction-audit.md`.

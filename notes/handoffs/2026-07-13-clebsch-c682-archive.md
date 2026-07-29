@@ -942,3 +942,26 @@ replay, proof, `ej`/`tt` closeout, and mystery ledger are in
 `notes/2026-07-29-c682-all-weight-defect-theorem.md`.  The remaining
 full-corner gate is upper-support mixing at codimension-two peaks plus
 off-peak propagation.
+
+The maximal-rank/multiplicity-induction route has now been executed to its
+first exact obstruction.  A two-prime sweep through degree \(300\), with an
+alternate-prime replay, finds that every McKay block of \(\Delta_n\) has
+maximal rank throughout the frontier.  The finite-dimensional lemma is
+also proved: full supported algebras on two spanning nonorthogonal
+subspaces generate the full matrix algebra.  Nevertheless the proposed
+outer induction is circular.  In the trivial module, degrees
+\[
+118,124,130,136,142,148,154,160
+\]
+have multiplicities
+\[
+1,2,2,2,2,2,2,3.
+\]
+Square maximal-rank edges transport fullness within the multiplicity-two
+plateau but do not anchor it; its left boundary supplies only a line and
+its right boundary has larger multiplicity.  This pattern repeats after
+degree \(60\).  The revised highest-EV gate is therefore plateau-entry
+mixing in the trivial family \(n=64+60q\), followed by the \(2,3,3'\)
+families.  The exact frontier certificate, independent replay, proof,
+`ej`/`tt` closeout, and Mystery ledger are in
+`notes/2026-07-29-c682-full-corner-induction-audit.md`.
