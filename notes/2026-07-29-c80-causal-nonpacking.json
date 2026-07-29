@@ -1,0 +1,1166 @@
+{
+  "conclusion": {
+    "all_three_representatives_certificate_exchange_nonpacked": true,
+    "all_three_representatives_nonpacked": false,
+    "no_one_to_many_replacement_in_certified_q23_corpus": true,
+    "type_ii_and_type_iii_same_sequential_local_update": true,
+    "uniform_odd_q_nonpacking": false
+  },
+  "definition": {
+    "certificate_exchange_nonpacked": "after allowing newly emergent B_small certificates, at most one fully attacked old fibre remains uncompensated",
+    "full_certificate_attack": "a causal half-move destroys every old B_small certificate of a compatible old nondefect",
+    "nonpacked": "at most one compatible old nondefect has its full certificate fibre attacked"
+  },
+  "domain": {
+    "exhaustion_scope": "necessary F_d replacement witnesses in the complete canonical q23 P-control corpus",
+    "orbit_union_size": 36432,
+    "q": 23,
+    "representatives": [
+      "one representative of each of the three complete marked replacement PGL2 orbits"
+    ]
+  },
+  "input_sha256": {
+    "notes/2026-07-26-c80-q23-first-new-replacement-orbit.json": "276103c81c898e32699089636459035944ed95f1ea881815417092aed8cfcc2a",
+    "notes/2026-07-26-c80-q23-next-marked-replacement-orbit.json": "cb2d4ebcd2105bd9c0e71285f5203785b2cfa20e963325d6f241b3be0f2cd836",
+    "notes/2026-07-28-c80-q23-after-three-replacement-orbits.json": "1f4f2d54dd35c796655d3c18087d1af4750cd32355012eb8da9779be1408d5f9",
+    "rust/scripts/c80_q23_replacement_lineage.py": "dbf2d7aa497cea113f0c02391170fd1832fef371e2f4c87466955acbc1081e60",
+    "rust/scripts/c80_strict_overload_kernel.py": "444ee995dd84cd6c8702a16688e133cea46c0ae10e65511c9f2fc1db68a5e206"
+  },
+  "raw_exchange_probe": {
+    "domain": "every reachable q3, q5, and q7 residual state after the fixed opening pair; lexicographic old-defect half-moves, both unrestricted and from residual selected size at least four",
+    "orders": [
+      {
+        "independent_direct_search": {
+          "q": 3,
+          "search_counts": {
+            "eligible_states": 28,
+            "old_label_opponent_half_moves": 36,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 28
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 0,
+        "primary_search": {
+          "q": 3,
+          "search_counts": {
+            "eligible_states": 28,
+            "old_label_opponent_half_moves": 36,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 28
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 3
+      },
+      {
+        "independent_direct_search": {
+          "q": 3,
+          "search_counts": {
+            "eligible_states": 0,
+            "old_label_opponent_half_moves": 0,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 28
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 4,
+        "primary_search": {
+          "q": 3,
+          "search_counts": {
+            "eligible_states": 0,
+            "old_label_opponent_half_moves": 0,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 28
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 3
+      },
+      {
+        "independent_direct_search": {
+          "q": 5,
+          "search_counts": {
+            "eligible_states": 726,
+            "old_label_opponent_half_moves": 825,
+            "old_label_reply_half_moves": 2800,
+            "reachable_states": 726
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 0,
+        "primary_search": {
+          "q": 5,
+          "search_counts": {
+            "eligible_states": 726,
+            "old_label_opponent_half_moves": 825,
+            "old_label_reply_half_moves": 2800,
+            "reachable_states": 726
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 5
+      },
+      {
+        "independent_direct_search": {
+          "q": 5,
+          "search_counts": {
+            "eligible_states": 100,
+            "old_label_opponent_half_moves": 0,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 726
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 4,
+        "primary_search": {
+          "q": 5,
+          "search_counts": {
+            "eligible_states": 100,
+            "old_label_opponent_half_moves": 0,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 726
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 5
+      },
+      {
+        "independent_direct_search": {
+          "q": 7,
+          "search_counts": {
+            "eligible_states": 19160,
+            "old_label_opponent_half_moves": 44737,
+            "old_label_reply_half_moves": 72324,
+            "reachable_states": 19160
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 0,
+        "primary_search": {
+          "q": 7,
+          "search_counts": {
+            "eligible_states": 19160,
+            "old_label_opponent_half_moves": 44737,
+            "old_label_reply_half_moves": 72324,
+            "reachable_states": 19160
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 7
+      },
+      {
+        "independent_direct_search": {
+          "q": 7,
+          "search_counts": {
+            "eligible_states": 12348,
+            "old_label_opponent_half_moves": 1764,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 19160
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "minimum_selected": 4,
+        "primary_search": {
+          "q": 7,
+          "search_counts": {
+            "eligible_states": 12348,
+            "old_label_opponent_half_moves": 1764,
+            "old_label_reply_half_moves": 0,
+            "reachable_states": 19160
+          },
+          "status": "EXHAUSTED_NO_ONE_TO_MANY",
+          "witness": null
+        },
+        "q": 7
+      }
+    ],
+    "primary_and_direct_searches_agree": true
+  },
+  "representatives": [
+    {
+      "after_half_move_defect_rank": 7,
+      "causal_half_move": [
+        12,
+        15
+      ],
+      "certificate_exchange_nonpacked": true,
+      "false_positive_carriers": 2,
+      "full_carrier_packing_number": 3,
+      "fully_attacked_certificate_fibres": [
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  13,
+                  7
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                13
+              ]
+            }
+          ],
+          "candidate": [
+            14,
+            20
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  11,
+                  9
+                ],
+                [
+                  16,
+                  17
+                ]
+              ],
+              "reply": [
+                9,
+                10
+              ]
+            },
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  16,
+                  22
+                ],
+                [
+                  17,
+                  19
+                ]
+              ],
+              "reply": [
+                11,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  8,
+                  4
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                5,
+                13
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                15,
+                13
+              ]
+            }
+          ],
+          "candidate": [
+            16,
+            10
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 2,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                14,
+                16
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  8,
+                  4
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                5,
+                13
+              ]
+            }
+          ],
+          "candidate": [
+            21,
+            17
+          ],
+          "is_new_defect": true,
+          "old_certificate_count": 1,
+          "replacement_certificates": []
+        }
+      ],
+      "name": "type_i",
+      "new_defects": [
+        [
+          21,
+          17
+        ]
+      ],
+      "nonpacked": false,
+      "old_defect_rank": 27,
+      "state": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          13,
+          7
+        ]
+      ],
+      "uncompensated_carrier_count": 1
+    },
+    {
+      "after_half_move_defect_rank": 1,
+      "causal_half_move": [
+        20,
+        17
+      ],
+      "certificate_exchange_nonpacked": true,
+      "false_positive_carriers": 6,
+      "full_carrier_packing_number": 7,
+      "fully_attacked_certificate_fibres": [
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  7,
+                  10
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                7
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            }
+          ],
+          "candidate": [
+            6,
+            14
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 2,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                13,
+                7
+              ]
+            },
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                17,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  16,
+                  18
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                20
+              ]
+            }
+          ],
+          "candidate": [
+            9,
+            16
+          ],
+          "is_new_defect": true,
+          "old_certificate_count": 1,
+          "replacement_certificates": []
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  7,
+                  10
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                7
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            11,
+            9
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 3,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                13,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            12,
+            11
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                21,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                12,
+                16
+              ]
+            }
+          ],
+          "candidate": [
+            13,
+            7
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                6,
+                14
+              ]
+            },
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                11,
+                9
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            17,
+            5
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                6,
+                14
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            }
+          ],
+          "candidate": [
+            21,
+            3
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                12,
+                11
+              ]
+            },
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                22,
+                20
+              ]
+            }
+          ]
+        }
+      ],
+      "name": "type_ii",
+      "new_defects": [
+        [
+          9,
+          16
+        ]
+      ],
+      "nonpacked": false,
+      "old_defect_rank": 2,
+      "state": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          16,
+          18
+        ]
+      ],
+      "uncompensated_carrier_count": 1
+    },
+    {
+      "after_half_move_defect_rank": 1,
+      "causal_half_move": [
+        20,
+        17
+      ],
+      "certificate_exchange_nonpacked": true,
+      "false_positive_carriers": 6,
+      "full_carrier_packing_number": 7,
+      "fully_attacked_certificate_fibres": [
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  7,
+                  10
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                7
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            }
+          ],
+          "candidate": [
+            6,
+            14
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 2,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                13,
+                7
+              ]
+            },
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                17,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  16,
+                  18
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                20
+              ]
+            }
+          ],
+          "candidate": [
+            9,
+            16
+          ],
+          "is_new_defect": true,
+          "old_certificate_count": 1,
+          "replacement_certificates": []
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  7,
+                  10
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                8,
+                7
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            },
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            11,
+            9
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 3,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                13,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            12,
+            11
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                21,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                12,
+                16
+              ]
+            }
+          ],
+          "candidate": [
+            13,
+            7
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                6,
+                14
+              ]
+            },
+            {
+              "kind": "two_nonconflicting_moves",
+              "remaining_legal": [
+                [
+                  9,
+                  16
+                ],
+                [
+                  22,
+                  20
+                ]
+              ],
+              "reply": [
+                11,
+                9
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  14,
+                  13
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                22,
+                3
+              ]
+            }
+          ],
+          "candidate": [
+            17,
+            5
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                6,
+                14
+              ]
+            }
+          ]
+        },
+        {
+          "attacks": [
+            {
+              "affine_pivots": [
+                [
+                  15,
+                  2
+                ]
+              ],
+              "direction_pivots": [],
+              "mode": "certificate_reply_secant_deletion",
+              "reply": [
+                18,
+                11
+              ]
+            }
+          ],
+          "candidate": [
+            21,
+            3
+          ],
+          "is_new_defect": false,
+          "old_certificate_count": 1,
+          "replacement_certificates": [
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                12,
+                11
+              ]
+            },
+            {
+              "kind": "terminal",
+              "remaining_legal": [],
+              "reply": [
+                22,
+                20
+              ]
+            }
+          ]
+        }
+      ],
+      "name": "type_iii",
+      "new_defects": [
+        [
+          9,
+          16
+        ]
+      ],
+      "nonpacked": false,
+      "old_defect_rank": 2,
+      "state": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          15,
+          2
+        ],
+        [
+          16,
+          18
+        ]
+      ],
+      "uncompensated_carrier_count": 1
+    }
+  ],
+  "schema": "c80-causal-nonpacking-v1",
+  "source": "rust/scripts/c80_causal_nonpacking.py"
+}

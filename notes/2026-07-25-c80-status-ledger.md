@@ -1,6 +1,6 @@
 # C80 canonical status ledger
 
-**Lane:** `cap`. **Task:** C80. **As of:** 2026-07-28.
+**Lane:** `cap`. **Task:** C80. **As of:** 2026-07-29.
 
 This is the single current truth ledger for C80. The projective-cap handoff
 remains the program-level routing map; individual reports remain the evidence
@@ -46,6 +46,7 @@ is an input bank, not C80 status authority.
 | Next marked replacement orbit | **PROVED sound for a third marked projective orbit; FINITE-CERTIFIED** | After quotienting the first two 12,144-element marked orbits, the next new orbit occurs only at canonical control 88. It is reply-created certificate-reply deletion: support drops `23→1`, with no branching, collision, or unlabelled creator, and 22 deletion fibres plus one lineage fibre close the root. The selected secant pivot may be an earlier outer-exchange point rather than the current opponent. Under the corrected taxonomy this is the same reply-deletion class as the other two orbits, with both endpoints surviving here. A Rust line-load backend and independent Python determinant replay check the witness and terminal shell. [Report](2026-07-26-c80-q23-next-marked-replacement-orbit.md) |
 | Three-orbit q23 replacement exhaustion | **FINITE-CERTIFIED COMPLETE on the canonical q23 P-control corpus; mechanism prose corrected** | After quotienting all three pairwise-disjoint 12,144-element marked orbits, the sweep exhausts the remaining 75 controls (indices 88--162), 8,703 opponent fibres, and 579,404 outer reply candidates. All ten necessary replacement witnesses lie in the known union (Type II: 4; Type III: 6), with independent Python witness and determinant replay. Hence no fourth orbit, branching, collision, or unlabelled creator occurs later in this q23 corpus. The former “no third mechanism” conclusion is withdrawn because Type I already has simultaneous reply and endpoint deletion. This is finite q23 closure, not a uniform odd-q ancestry theorem. [Census](2026-07-28-c80-q23-after-three-replacement-orbits.md), [correction](2026-07-28-c80-two-mechanism-falsifier.md) |
 | Two-mechanism causal classification | **SETTLED NEGATIVE; corrected local lemma PROVED** | The original Type-I representative does not preserve its unique `B_small` certificate reply: the causal opponent kills that reply and one boundary endpoint on two selected secants. Hence the reported exclusive endpoint-degradation/certificate-reply-deletion taxonomy is false already at q23. Uniformly, a former certificate can fail because its reply is deleted, possibly with endpoint side effects, or—if the reply survives—because the causal move literally consumes one of the two boundary endpoints. Types I--III all realize reply deletion. The finite one-to-one ancestral charge remains valid, but injectivity does not follow from certificate uniqueness. [Report](2026-07-28-c80-two-mechanism-falsifier.md) |
+| Causal certificate-exchange nonpacking | **PROVED conditional injectivity; FINITE-CERTIFIED q23 carrier; strong form SETTLED NEGATIVE** | If at most one fully attacked old `B_small` certificate fibre remains uncompensated after newly emergent certificates are allowed, the new-defect set has size at most one. Giving that defect the selected causal move's old label and retaining old labels is injective; strict support descent is the separate deletion-surplus inequality. The stronger “one attacked fibre” condition is false on all three q23 replacement types: full carrier packing is `3,7,7`, repaired by `2,6,6` new-certificate fibres, leaving uncompensated counts `1,1,1`. Types II/III are the same sequential state and causal move, differing only in marked ancestry, so local repair is memoryless while label surplus is history-aware. Exact primary/direct exhaustive scans find no genuinely ancestral-new one-to-many half-move on every reachable q3/q5/q7 residual state. Uniform exchange nonpacking and deletion surplus remain open. [Report](2026-07-29-c80-causal-nonpacking.md) |
 
 These results provide a sound boundary, a well-founded rank, and an exact
 continuation object. They do **not** yet provide the uniform
@@ -89,7 +90,7 @@ is impossible.
 | `B_cc` reach from escape roots | Boundary itself is sound and finite probes pass. | Uniform growing-depth routing into `B_cc`. |
 | Ranked survivor `F_q` | Required interface is clear: direct, nonrecursive, strict-`Omega`, and P-sound. | An opponent-complete reply theorem independent of lower-survivor/minimax queries. |
 | Equivariant bounded-formula reply correspondence | `R_small` is projective, fixed-arity, and sound, but q23 disproves coverage. | A growing-rank update, not another fixed shell. |
-| q23 ancestral-label survivor | The complete canonical q23 replacement corpus has exactly three marked projective orbits and finite one-to-one ancestral support drops. Its former two-mechanism interpretation is corrected: Type I deletes both the certificate reply and one endpoint, while Types II/III delete the reply and preserve both endpoints. No certified orbit exhibits literal endpoint consumption. The remaining controls 88--162 contain ten replacement witnesses, all in Types II/III and all independently replayed; no fourth orbit, branching, collision, or unlabelled creator occurs. | Prove a structural nonpacking condition that prevents one half-move from deleting several unique certificate replies, or extract the first one-to-many creation; then prove opponent-complete entry into the charged survivor without an explicit growing label table. |
+| q23 ancestral-label survivor | The complete canonical q23 replacement corpus has exactly three marked projective orbits and finite one-to-one ancestral support drops. The exact label theorem is now proved under certificate-exchange nonpacking. Old-certificate secants themselves are packed, not sparse: the three orbit representatives have `3,7,7` fully attacked fibres, but immediate new certificates repair `2,6,6`, leaving exactly one uncompensated fibre each. No certified orbit exhibits literal endpoint consumption or one-to-many uncompensated replacement. | Prove a field-uniform certificate-exchange lemma repairing every attacked fibre except at most one, together with the strict-support deletion surplus; or extract the first uncompensated one-to-many replacement. Then prove opponent-complete entry without an explicit growing label table. |
 | C82 abundance | No counting problem is released yet. | First obtain C80's sound opponent-complete geometric fibres; only then count projected replies. |
 
 ## Current frontier
@@ -101,14 +102,16 @@ Prove the two-mechanism injective causal-charge update uniformly, or
 extract the first field/order falsifier.
 ```
 
-is settled by the q23 Type-I falsifier. The corrected live statement is:
+is settled by the q23 Type-I falsifier. Causal-label injectivity is now
+proved under certificate-exchange nonpacking, while the stronger
+old-certificate-secant nonpacking premise is false (`3,7,7` attacked
+fibres on the q23 representatives). The corrected live statement is:
 
 ```text
-Certificate loss is now classified uniformly, but certificate uniqueness
-does not imply causal-label injectivity. Find a projectively natural
-nonpacking condition under which one half-move deletes at most one relevant
-certificate reply and cannot collide with a retained label, or extract the
-first field/order one-to-many replacement. Then prove opponent-complete
+Prove projectively and uniformly that all but at most one fully attacked
+B_small certificate fibre acquires a replacement certificate, and prove
+the separate strict ancestral-support deletion surplus; or extract the
+first uncompensated one-to-many replacement. Then prove opponent-complete
 entry into the corrected charged survivor.
 ```
 
@@ -122,4 +125,4 @@ Update this file whenever a C80 experiment changes a label, closes an open
 row, or introduces a genuinely new live route. Detailed reports should link
 back here; the program handoff should carry only a concise delta and a link.
 
-go C80 cap prove causal-label injectivity under a nonpacked secant condition or extract the first one-to-many replacement
+go C80 cap prove the uniform certificate-exchange repair lemma and strict-support surplus, or extract the first uncompensated one-to-many replacement

@@ -1495,7 +1495,32 @@ the first field/order one-to-many falsifier; then opponent-complete
 entry. Report+script+certificate:
 [`../2026-07-28-c80-two-mechanism-falsifier.md`](../2026-07-28-c80-two-mechanism-falsifier.md).
 
-**Canonical C80 truth ledger (refreshed 2026-07-28).** The handoff remains the
+**Causal-label injectivity is proved under certificate-exchange
+nonpacking, while naive old-secant nonpacking is false (C80,
+2026-07-29).** For a causal half-move `h`, let a compatible old
+nondefect fibre be fully attacked when none of its old `B_small`
+certificate replies survives, and uncompensated when no newly
+emergent certificate replaces them. The exact identity
+`Def(A+h)\Def(A)=U_A(h)` makes `|U_A(h)|≤1` the intrinsic nonpacking
+condition. If `h` carries a unique old label, retaining old labels and
+giving the sole new defect `h`'s label is injective; strict support
+descent is the separate condition that consumed old labels outnumber
+uncompensated fibres. The stronger guess `|K_A(h)|≤1` is false on all
+three q23 marked replacement types: the full old-certificate packing
+numbers are `3,7,7`. Immediate new certificates repair `2,6,6`
+fibres, leaving uncompensated counts `1,1,1`; the certified q23 corpus
+still has no one-to-many replacement. Types II and III are the exact
+same sequential state and causal move, differing only in marked
+ancestry history, so the repair lemma should be memoryless and the
+label-surplus corollary history-aware. Independent primary/direct
+exhaustive scans likewise find none on all reachable q3/q5/q7
+residual states. The live crown is a field-uniform
+certificate-exchange repair lemma plus the strict-support deletion
+surplus, not secant uniqueness. C82 remains gated.
+Report+script+certificate:
+[`../2026-07-29-c80-causal-nonpacking.md`](../2026-07-29-c80-causal-nonpacking.md).
+
+**Canonical C80 truth ledger (refreshed 2026-07-29).** The handoff remains the
 program-level routing map, while the compact ledger now distinguishes
 field-uniform proofs, finite certificates, settled negatives, superseded
 routes, and genuinely open claims. Use it to prevent finite passes or
