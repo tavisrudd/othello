@@ -889,7 +889,13 @@ and the kernel map is injective.  It has the explicit split presentation
 and \(A_5\)-orbit decomposition \(1+5+6+10\).  The original six points
 remain canonical: they are scheme-theoretically exactly the linear section
 by \(\mathbf P(\mathbf1\oplus V_4)\), the star-sum subspace of the ten-pair
-module.  Exact Macaulay ranks \(1980/2002\) and \(4983/5005\), invertible
+module.  A further `ej` pass proves that the split coordinate \(s\) is the
+canonical invariant quadratic
+\[
+ 7(\sum p_e)^2+9\sum p_e^2+10\sum_{e\sim f}p_ep_f;
+\]
+its idempotents split the scheme into the two stable length-eleven sheets
+\((1+10)\) and \((5+6)\).  Exact Macaulay ranks \(1980/2002\) and \(4983/5005\), invertible
 Bockstein multiplication, the explicit \(22\)-point parameterization, and
 an independent invariant replay prove exhaustiveness and reducedness.  The
 proof and mystery ledger are in

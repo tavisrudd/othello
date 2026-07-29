@@ -1584,8 +1584,8 @@
       "sha256": "a1b64a089bc44242e6454209d61fda6d11880fcde3fd9ae16bfaee04fbdfa718"
     },
     "rust/../notes/2026-07-28-c682-rank-four-resolvent.py": {
-      "bytes": 18428,
-      "sha256": "88392afdbeafee706f4860d90c79dc9f5dd4d970ec3fff382177eb87ba86a942"
+      "bytes": 20578,
+      "sha256": "d53e11f44f7aac3ff5940fcb8e04780c7410af41425d7b759c6cf2de065499dc"
     }
   },
   "macaulay_certificate": {
@@ -8162,6 +8162,71 @@
     "projective_ambient_dimension": 9,
     "rank_condition": "all 5-by-5 minors vanish",
     "source": "P(P10)=P(1+V4+V5)"
+  },
+  "quadratic_sheet_separator": {
+    "centralizer_basis_coefficients": [
+      7,
+      9,
+      10
+    ],
+    "conclusion": "The 1+5+6+10 partition is organized by a canonical A5-invariant quadratic: the plus sheet is 1+10 and the minus sheet is 5+6.",
+    "formula": "s=7*(sum_e p_e)^2+9*sum_e p_e^2+10*sum_{e~f}p_e*p_f, where e~f means that the two K5 edges share a vertex",
+    "idempotents": "e_+=(1+s)/2 and e_-=(1-s)/2 split the rank-four coordinate algebra into two A5-stable length-11 factors",
+    "invariant_quadratic_evaluation_rank": 3,
+    "pair_coordinate_order": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "sheet_minus_orbit_sizes": [
+      5,
+      6
+    ],
+    "sheet_plus_orbit_sizes": [
+      1,
+      10
+    ],
+    "sheet_values": [
+      1,
+      10
+    ]
   },
   "schema": "c682-rank-four-resolvent-v1",
   "toolchain": {

@@ -157,6 +157,43 @@ Platonic stabilizers.  They are genuine rank-four points, not embedded
 or non-isotropic debris: all sixteen have rank four, reduced tangent
 space, and isotropic kernel.
 
+## `ej` upgrade: the invariant quadratic sheets
+
+The split parameter \(s\) is not merely a convenient interpolation
+coordinate.  It is a canonical \(A_5\)-invariant quadratic on the ten-pair
+module.
+
+Write \(p_e\) for the ten pair coordinates indexed by the edges of \(K_5\),
+and write \(e\sim f\) when two distinct edges share a vertex.  On the
+rank-four scheme,
+\[
+ \boxed{
+ s=
+ 7\left(\sum_e p_e\right)^2
+ +9\sum_e p_e^2
+ +10\sum_{e\sim f}p_ep_f.
+ }
+\]
+The three displayed forms are the natural basis of invariant quadratics
+coming from the three centralizer channels of
+\(P_{10}=\mathbf1\oplus V_4\oplus V_5\).  Their evaluation rank on \(Z\)
+is three, so the coefficient triple \((7,9,10)\) is unique in this basis.
+
+Since \(s^2=1\), the idempotents
+\[
+ e_+=\frac{1+s}{2},\qquad e_-=\frac{1-s}{2}
+\]
+split the coordinate algebra into two \(A_5\)-stable factors of length
+eleven.  They organize the four orbits exactly as
+\[
+ Z_+=Z_1\sqcup Z_{10},\qquad
+ Z_-=Z_5\sqcup Z_6.
+\]
+Thus \(1+5+6+10\) is not an accidental partition of a finite computation:
+the full resolvent has a canonical quadratic two-sheet structure, with the
+original Clebsch five-orbit and the six-axis orbit on one sheet and the
+radial point and ten-pair orbit on the other.
+
 ## Meaning and boundary
 
 The total length \(22\), the isotropy of every kernel, and injectivity of
@@ -198,9 +235,9 @@ the separately compiled C++ core.
 | file | bytes | SHA-256 |
 |---|---:|---|
 | `2026-07-28-c682-rank-four-resolvent.cpp` | 13872 | `a1b64a089bc44242e6454209d61fda6d11880fcde3fd9ae16bfaee04fbdfa718` |
-| `2026-07-28-c682-rank-four-resolvent.py` | 18428 | `88392afdbeafee706f4860d90c79dc9f5dd4d970ec3fff382177eb87ba86a942` |
-| `2026-07-28-c682-rank-four-resolvent.json` | 110767 | `a6b1b642e7e99bbe343943ac5c5d710618dd2f94789a5358f41e59e664e85bd7` |
-| `2026-07-28-c682-rank-four-resolvent-replay.py` | 10855 | `f36cb5b42abf76e5fb770aa44416982b2ef51d9f6bbc9a95231b4129e055f292` |
+| `2026-07-28-c682-rank-four-resolvent.py` | 20578 | `d53e11f44f7aac3ff5940fcb8e04780c7410af41425d7b759c6cf2de065499dc` |
+| `2026-07-28-c682-rank-four-resolvent.json` | 111899 | `92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c` |
+| `2026-07-28-c682-rank-four-resolvent-replay.py` | 11755 | `3755a49188292accbeae3b458cd0ab26699684156e032718f13d0cbd0ad86df1` |
 
 ## `ej` + `tt` closeout and mystery ledger
 
@@ -211,6 +248,10 @@ the separately compiled C++ core.
 - **Closed by `ej`:** the extra sixteen split into the two natural Platonic
   orbits of sizes six and ten, giving the complete
   \(1+5+6+10\) resolvent.
+- **Closed by the next `ej`:** the parameter \(s\) is the unique quadratic
+  \(7(\sum p_e)^2+9\sum p_e^2+10\sum_{e\sim f}p_ep_f\) in the natural
+  invariant basis.  Its idempotents split the four orbits into the two
+  length-eleven sheets \((1+10)\) and \((5+6)\).
 - **Closed by `tt`:** isotropy does not remove the extra points.  Every one
   of the \(22\) kernels is fifth-transvectant-isotropic, and the kernel map
   is injective on the finite scheme.
@@ -218,11 +259,10 @@ the separately compiled C++ core.
   ten-pair pencil cuts out \(22=\deg U_{22}\) isotropic planes.  Promotion
   requires a target-side linear-section or bundle construction; equality
   of degrees is not enough.
-- **Open:** interpret the split algebra
-  \(\mathbf F_{11}[t,s]/(t^{11}-t,s^2-1)\) and the orbit partition
-  \(1+5+6+10\) without the marked coordinates.  The exact evidence gap is
-  an \(A_5\)-equivariant intrinsic definition of \(t\) and the sheet
-  coordinate \(s\).
+- **Narrowed:** the sheet coordinate \(s\) is now intrinsic on the ten-pair
+  carrier through the invariant quadratic above.  The remaining coordinate
+  mystery is \(t\): give it an \(A_5\)-equivariant moduli meaning, rather
+  than its present marked interpolation definition \(t=x_1\).
 - **Open:** decide whether the \(6\)- and \(10\)-orbits have an incidence
   meaning alongside the five Clebsch parents that reconstructs more than
   the selected Clebsch frame.

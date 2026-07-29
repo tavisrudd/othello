@@ -349,6 +349,9 @@ def certificate():
         for right in range(10)
     )
 
+    intertwiner = deformation["ej_ten_pair_carrier"][
+        "intertwiner_pair_to_extended_normal"
+    ]
     point_rows = []
     kernel_signatures = set()
     for point in points:
@@ -380,9 +383,27 @@ def certificate():
         )
     assert len(kernel_signatures) == 22
 
-    intertwiner = deformation["ej_ten_pair_carrier"][
-        "intertwiner_pair_to_extended_normal"
+    pair_edges = list(itertools.combinations(range(5), 2))
+    pair_points = [
+        DEFORMATION.solve_coordinates(intertwiner, point) for point in points
     ]
+    quadratic_rows = []
+    for point, pair_point in zip(points, pair_points):
+        total_square = sum(pair_point) ** 2 % PRIME
+        diagonal = sum(value**2 for value in pair_point) % PRIME
+        adjacent = sum(
+            pair_point[left] * pair_point[right]
+            for left in range(10)
+            for right in range(left + 1, 10)
+            if set(pair_edges[left]) & set(pair_edges[right])
+        ) % PRIME
+        sheet = (point[5] - 10 - 9 * point[1] ** 5) % PRIME
+        assert (
+            7 * total_square + 9 * diagonal + 10 * adjacent
+        ) % PRIME == sheet
+        quadratic_rows.append([total_square, diagonal, adjacent])
+    assert MM.rank(quadratic_rows, PRIME) == 3
+
     star_indices = [
         index
         for index, point in enumerate(points)
@@ -410,6 +431,19 @@ def certificate():
     orbits = orbit_partition(points, generators)
     assert [len(orbit) for orbit in orbits] == [1, 5, 6, 10]
     assert sorted(star_indices) == sorted(orbits[0] + orbits[1])
+    orbit_sheets = [
+        {
+            (
+                points[index][5]
+                - 10
+                - 9 * points[index][1] ** 5
+            )
+            % PRIME
+            for index in orbit
+        }
+        for orbit in orbits
+    ]
+    assert orbit_sheets == [{1}, {10}, {10}, {1}]
 
     inputs = {
         Path(__file__),
@@ -499,6 +533,28 @@ def certificate():
                 "1+5+6+10 Platonic resolvent."
             ),
             "generator_actions": generators,
+        },
+        "quadratic_sheet_separator": {
+            "pair_coordinate_order": [list(pair) for pair in pair_edges],
+            "formula": (
+                "s=7*(sum_e p_e)^2+9*sum_e p_e^2+"
+                "10*sum_{e~f}p_e*p_f, where e~f means that the two "
+                "K5 edges share a vertex"
+            ),
+            "centralizer_basis_coefficients": [7, 9, 10],
+            "invariant_quadratic_evaluation_rank": 3,
+            "sheet_values": [1, 10],
+            "sheet_plus_orbit_sizes": [1, 10],
+            "sheet_minus_orbit_sizes": [5, 6],
+            "idempotents": (
+                "e_+=(1+s)/2 and e_-=(1-s)/2 split the rank-four "
+                "coordinate algebra into two A5-stable length-11 factors"
+            ),
+            "conclusion": (
+                "The 1+5+6+10 partition is organized by a canonical "
+                "A5-invariant quadratic: the plus sheet is 1+10 and "
+                "the minus sheet is 5+6."
+            ),
         },
         "corrected_1_plus_5_theorem": {
             "linear_subspace": "P(1+V4), the star-sum subspace of P10",

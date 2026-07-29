@@ -323,17 +323,33 @@ def main():
         [int(vertex in pair) for vertex in range(5)]
         for pair in itertools.combinations(range(5), 2)
     ]
+    pair_edges = list(itertools.combinations(range(5), 2))
     star_indices = []
+    point_sheets = {}
     for index, point in enumerate(points):
         pair_point = matrix_vector(inverse_intertwiner, point)
         if rank([star[row] + [pair_point[row]] for row in range(10)]) == 5:
             star_indices.append(index)
+        total_square = sum(pair_point) ** 2 % PRIME
+        diagonal = sum(value**2 for value in pair_point) % PRIME
+        adjacent = sum(
+            pair_point[left] * pair_point[right]
+            for left in range(10)
+            for right in range(left + 1, 10)
+            if set(pair_edges[left]) & set(pair_edges[right])
+        ) % PRIME
+        sheet = (point[5] - 10 - 9 * point[1] ** 5) % PRIME
+        assert (
+            7 * total_square + 9 * diagonal + 10 * adjacent
+        ) % PRIME == sheet
+        point_sheets[point] = sheet
     assert star_indices == corrected["point_indices"]
     assert len(star_indices) == 6
 
     generators = certificate["A5_orbits"]["generator_actions"]
     unseen = set(points)
     orbit_sizes = []
+    orbit_sheets = []
     while unseen:
         orbit = {min(unseen)}
         frontier = list(orbit)
@@ -348,10 +364,16 @@ def main():
                     frontier.append(image)
         unseen -= orbit
         orbit_sizes.append(len(orbit))
+        orbit_sheets.append({point_sheets[point] for point in orbit})
     assert sorted(orbit_sizes) == [1, 5, 6, 10]
+    assert sorted(
+        (next(iter(sheet)), size)
+        for sheet, size in zip(orbit_sheets, orbit_sizes)
+    ) == [(1, 1), (1, 10), (10, 5), (10, 6)]
     print(
         "PASS independent C682 replay: 22 explicit reduced rank-four "
-        "isotropic points, A5 orbits 1+5+6+10, and star-sum section 1+5"
+        "isotropic points, quadratic sheets (1+10)/(5+6), "
+        "and star-sum section 1+5"
     )
 
 
