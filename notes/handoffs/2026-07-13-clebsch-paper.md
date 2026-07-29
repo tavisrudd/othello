@@ -876,11 +876,27 @@ missing radial summand and its all-ones vector is the corrected \(K\)-line.
 The exchanger line has a five-point \(A_5/A_4\) orbit of reduced isolated
 rank drops.  Intersecting their five parent-annihilator four-spaces with
 the fixed one recovers a complete Clebsch frame
-\(q_1+\cdots+q_5=0\), with \(q_1=xyz\).  The highest-EV cheap frontier is
-whether the resulting reduced \(1+5\) configuration exhausts the
-projective rank-four degeneracy scheme of this ten-pair operator pencil;
-the certificate currently proves the six points and their reducedness,
-not global exhaustiveness.
+\(q_1+\cdots+q_5=0\), with \(q_1=xyz\).
+
+The proposed six-point exhaustiveness statement is now closed negatively,
+with a stronger exact replacement.  The full projective rank-four scheme
+of the ten-pair pencil is reduced of length \(22\), all of its points are
+\(\mathbf F_{11}\)-rational, all kernels are fifth-transvectant-isotropic,
+and the kernel map is injective.  It has the explicit split presentation
+\[
+ \mathbf F_{11}[t,s]/(t^{11}-t,s^2-1)
+\]
+and \(A_5\)-orbit decomposition \(1+5+6+10\).  The original six points
+remain canonical: they are scheme-theoretically exactly the linear section
+by \(\mathbf P(\mathbf1\oplus V_4)\), the star-sum subspace of the ten-pair
+module.  Exact Macaulay ranks \(1980/2002\) and \(4983/5005\), invertible
+Bockstein multiplication, the explicit \(22\)-point parameterization, and
+an independent invariant replay prove exhaustiveness and reducedness.  The
+proof and mystery ledger are in
+`notes/2026-07-28-c682-rank-four-resolvent.md`.  The highest-value new
+question is whether the length \(22=\deg U_{22}\) and universal kernel
+isotropy come from a target-side anticanonical linear section; equality of
+degrees alone is not promoted as that theorem.
 
 C682's remaining Platinum track is:
 
