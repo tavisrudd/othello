@@ -6,8 +6,13 @@ work is dormant unless explicitly resumed.
 
 ## Short commands
 
-- **Intent-based mode:** `mi` enter it · `yc` your call · `vb` vibe check, not Visual Basic ·
-  `ej` extra juice: what more to squeeze · `aa` alt-attacks: unstick a stuck proof
+- **Intent-based mode:** `mi` enter it
+  `yc` your call · `vb` vibe check, not Visual Basic
+  `ej` extra juice: what more to squeeze, `ej<N>`: Nth order extra juice.
+  `dof` what degrees of freedom are unexplained which we might be able to lock down
+  `aa` alt-attacks: unstick a stuck proof, same I/O different method, or same objective diff I/O shapes
+  `tt` terence-tao: what would Tao see or ask which we missed (*opportunities*, defects, other methods). This is more than just his expert profile mentioned later.
+  `ev` what is your choice for the highest EV next move in this C task or in the lane if we're done this task
 - **Lane routing:** `go <alias>` / bare alias select lane · `go` / `next?` next step, else ask
 - **Startup context:** `go C<id>` select task + lane
 
@@ -164,14 +169,17 @@ a handoff may persist it with `Mode: intent-based` under its date.
 progress assessment (good/bad, disappointing/great, etc.) — momentum, risks, and likely route
 viability, not a recitation of implementation status.
 
-`ej` means “extra juice”: from where we've landed, surface the extra value now in reach — free or
-cheap upgrades, implications of incidental findings, and doors the result opens — not a restatement
-of the plan.
+`ej` means “extra juice”: from where we've landed, surface the extra
+unexpected value now in reach — free or cheap upgrades on current
+task, surprise implications of incidental findings, and doors the
+result opens — not a restatement of the plan. If it's cheap now, do
+it. Propose what to queue or discovery-track log. Also, what is
+surprising and unexplained such as constrained or overly loose values.
 
 Before the final report for every substantial math-research or proof C-item, run at least one
-explicit `ej` closeout pass after the main acceptance gate has passed. Do the free or cheap
+explicit `ej`+`tt` closeout pass after the main acceptance gate has passed. Do the free or cheap
 task-owned upgrades it exposes, then add or refresh a **Mystery ledger** in the dated task report:
-list each surprising or unexplained feature, mark what the `ej` pass settled, and state the exact
+list each surprising or unexplained feature, mark what the `ej`+`tt` pass settled, and state the exact
 evidence gap, gate, or owning successor for everything still open. Say explicitly when no genuine
 mystery remains; do not manufacture one. Apply the discovery-track discriminator as usual, and
 revalidate and commit any closeout changes before sending the final task report.
@@ -179,12 +187,20 @@ revalidate and commit any closeout changes before sending the final task report.
 `aa` means “alt-attacks”: when a proof is stuck, lay out distinct alternative attack routes instead
 of pushing harder on the current one.
 
-When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
-the user-facing work report even when `vb` was not requested. End the same report with a standalone,
-copy-pasteable `go C<id>` line naming the next allocated C item. If the next item is still behind a
-pre-allocation gate, say so and use `go <lane>` instead; never fabricate an unallocated concrete ID.
-Do not add routine vibe checks or resume commands to intermediate commentary, minor status updates,
-or administrative/edit-only reports.
+When stopping after a substantial full or partial C-item chunk:
+- include a one-line vibe check in the user-facing work report even when
+`vb` was not requested.
+
+- Finally end the same report with a standalone, copy-pasteable `go
+C<id> <lane> <short description>` line naming the next `ev` C item
+that logically follows the completed, or the next allocated C item if
+EV isn't clear. If the next item is still behind a pre-allocation
+gate, say so and use `go <lane>` instead; never fabricate an
+unallocated concrete ID.  If you think there is a higher EV next move
+(queued or not) suggest it!!
+
+Do not add routine vibe checks or resume commands to intermediate
+commentary, minor status updates, or administrative/edit-only reports.
 
 In intent-based mode, state and take a decision only when it is reversible, already permitted,
 strongly lopsided (at least 80/20 from visible evidence), and does not change downstream shape.
@@ -195,9 +211,11 @@ history rewrites, non-fast-forward changes, `git push`, or a real n=16 run.
 
 ## Command-output and source hygiene
 
-Token waste is a correctness failure. Tool output caps only truncate context; they do **not** make
-broad commands safe. Every producer must read only needed sources and emit a small, predictable
-result.
+Token waste is a correctness failure. Tool output caps only truncate
+context; they do **not** make broad commands safe. Every producer must
+read only needed sources and emit a small, predictable result. Don't
+narrate what you don't need to. Do not use [name](file) style md links
+for filenames just use the plain name.
 
 **Current-task handoff exception:** The line-count and display-token caps below do not apply to the
 selected lane's live handoff or files it directs the agent to read. Read them in full, chunking only
