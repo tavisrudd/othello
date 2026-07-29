@@ -1,7 +1,7 @@
 # C684 — standalone paper-repository extraction
 
 **Lane:** `build-sys`
-**Status:** active; five requested standalone repositories are locally exported and validated
+**Status:** complete; six requested standalone repositories are exported and forward-synchronized
 
 ## Objective
 
@@ -389,28 +389,29 @@ Then:
   passes the reduced 45-artifact package check, both builds, and post-build manifest verification.
   A targeted scan of both final candidates finds no task IDs, private-note paths, excluded process
   filenames, local-home paths, or private monorepo paper paths, including in generated provenance.
-- Five user-requested local repositories are now clean `main` histories under
-  `~/src/math-papers/`, all with zero remotes and manifest/tree verification passing:
-  - `ame-lu`: source `9d5c540e06b2acd4083c498fb6d0977db708af4e`, local commit
-    `87edce850d5d80e3aaa27378876612274e1edc50`, manifest
-    `99658a886eb84b06050f93cb3318f1481a5df8e30b9227773665c98d2c3fce7f`;
-  - `beyond4-prs`: the same source checkpoint, local commit
-    `4eb2c1a4bc198008a0533983abdf4fdee647caec`, manifest
-    `c9303fd8750b02cf8f8af8111aaab63037ae23e12b7e94d6544ef6b98ab165f4`;
-  - `clebsch-factorization`: the same source checkpoint, local commit
-    `b64dcdf39eafe1a3fc8cb845ebc1ab797da1dec0`, manifest
-    `d61fbab44a48b7c1c1ef6b51675877bac41d9681b4a7bb54873257d5ad0f3880`;
-  - `clebsch-rigidity`: the same source checkpoint, local commit
-    `c5412b998e0ed88c9d97ccbaa71cc178274c4c31`, manifest
-    `b48f246f6b6ee7d1736c9be1a3b9d838275bade97c0601d73aa2bf6eb1261a0f`;
-  - `arcs-complete-outside-conic`: the same source checkpoint, local commit
-    `8ae75b926cc5b798b0bc89d5ea6f363040f01a0c`, manifest
-    `2289c2ef35777aa5416bafaf2c2fa25b146dada7f9f43c9ee1a203ea244e57e7`.
-- All five paper repositories label
+- Six user-requested standalone histories now live under `~/src/math-papers/`:
+  `ame-lu`, `arcs-complete-outside-conic`, `beyond4-prs`,
+  `clebsch-factorization`, `clebsch-passages`, and `clebsch-rigidity`.
+  Their release manifests derive from source checkpoint
+  `e134b0fe8a5329472940c5e8ecaabfbee2c9e4e8`; the Arcs manifest advances to
+  `50c85c8f651199cf01eae7a3cc1a71d1e4a8a14b` to remove one internal lane
+  reference from a public source comment.
+- Each standalone repository has an explicit CC BY 4.0 license, its canonical built PDF or PDFs,
+  schema-validated `.zenodo.json` metadata, generated provenance, and a content-addressed export
+  manifest. The standalone repositories preserve their existing histories: subsequent
+  synchronization is one-way from `papers/` and lands as ordinary forward commits. Never replace,
+  reinitialize, force-push, or reconstruct one of these repositories from a fresh export.
+- All six paper repositories label
   [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878)
   explicitly as the version-independent concept DOI of the separately distributed formal
   companion, never as a paper DOI. The paper-side content-addressed manifests and affected PDFs
   were refreshed without modifying the independently owned `finitegeom` repository.
+- Each paper repository's own Zenodo metadata describes an open `publication`/`preprint`, CC BY
+  4.0, Tavis Rudd with ORCID
+  `0009-0003-6405-3275`, correspondence at `tavis@damnsimple.com`, paper-specific title,
+  description and keywords, and an `isSupplementedBy` relation to the `finitegeom` concept DOI.
+  Paper DOI, publication date and version remain unset so Zenodo and the eventual release tag can
+  assign them correctly.
 - Factorization's seven bundled evidence suites replay and its standalone XeLaTeX release gate
   passes. Rigidity's eleven-checker identities, terminal conic-filling replay, split-manuscript
   statement map, trust-input validation, 15-page main build, and 7-page computational companion
@@ -419,13 +420,13 @@ Then:
   lane-named exploratory or private-audit files remain in the monorepo. The public witness,
   evaluation, q11 structure, MATCH(10,5,1), and Q16 `2630+3` replays pass against the separately
   supplied formal certificate levels; its warning-free manuscript build is 24 pages.
-- The Node Kayles task-ID findings are rendered, because the manuscript sets
-  `\draftnotestrue`. They include a documented incomplete even-\(h\) classification and missing
-  polyhedral integration, not merely editorial reminders. The repository is therefore gated until
-  those mathematical issues are repaired and the phase-note mechanism can be removed honestly.
-- Replacing `~/src/math-papers/clebsch-passages` with that fresh-history corrected candidate is
-  intentionally paused for explicit history-replacement approval. No remote exists, and the
-  validated corrected candidate is preserved under the disk-backed C684 cache.
-- Next: continue with the remaining mapped paper roots when requested. Clebsch Passages still has
-  the separately documented superseded local history and requires explicit replacement approval.
-  No GitHub remote has been created.
+- Clebsch Passages retains its C685 formal-companion files and established repository history; the
+  exporter adds the public PDF and license without deleting those files. Its paper-local and
+  formal-companion verifiers pass.
+- The remaining external gates are not extraction defects: Arcs awaits the Q16 certificate
+  closure, Rigidity's cross-repository release verifier awaits a clean committed Lean companion,
+  and AME's strict formal mode requires the separately distributed formal repository while its
+  paper-only verifier passes.
+- At the 2026-07-28 handoff, GitHub remotes exist for `ame-lu`, `beyond4-prs`, and
+  `clebsch-rigidity`; remote creation for the other standalone repositories is a separate release
+  action. Release coordination may add forward metadata commits after this extraction checkpoint.
