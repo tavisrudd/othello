@@ -2,6 +2,12 @@
 
 Date: 2026-07-29
 
+**Outcome:** The two-sided-defect part of this plan is complete. The
+five-chain local determinant proves
+\(\ker(\Delta_n,\Delta_{n-6}^\dagger)=0\) for every \(n>52\); see
+`2026-07-29-c682-all-weight-defect-theorem.md`. The full-corner theorem
+remains open at upper-support mixing and off-peak propagation.
+
 ## Objective
 
 Replace degree-by-degree corner-minor checks by a structural argument that

@@ -2,6 +2,10 @@
 
 Date: 2026-07-29
 
+**Superseded boundary:** The finite absence statement in this first pass is
+now an all-weight theorem: \(K_n=0\) for every \(n>52\). See
+`2026-07-29-c682-all-weight-defect-theorem.md`.
+
 ## Result
 
 The global defect route survives its first falsification, but in a more

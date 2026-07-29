@@ -1,0 +1,181 @@
+{
+  "chain_split": "The three source-to-target shifts -2,3,8 are congruent modulo 5.",
+  "claim_boundary": "This proves the all-weight two-sided-defect theorem, not the all-weight full-corner theorem; codimension-two upper-return mixing and off-peak propagation remain.",
+  "determinant_rows": [
+    {
+      "content": -224139069000000,
+      "degree": 20,
+      "first_center": 5,
+      "linear_roots": [
+        -1,
+        -1,
+        0,
+        1,
+        2,
+        5,
+        6,
+        10,
+        11,
+        20,
+        21,
+        22,
+        40
+      ],
+      "nonlinear_coefficients_descending": [
+        1,
+        -212,
+        15223,
+        -488904,
+        7808148,
+        -66741312,
+        297475776,
+        -549918720
+      ],
+      "nonlinear_roots_mod_prime": [],
+      "root_exclusion_prime": 19,
+      "source_residue_mod_5": 0
+    },
+    {
+      "content": -313083144000000,
+      "degree": 20,
+      "first_center": 6,
+      "linear_roots": [
+        -1,
+        -1,
+        1,
+        2,
+        6,
+        7,
+        10,
+        11,
+        12,
+        21,
+        22,
+        32,
+        52
+      ],
+      "nonlinear_coefficients_descending": [
+        1,
+        -222,
+        16093,
+        -522804,
+        8516428,
+        -72644832,
+        304415136,
+        -465004800
+      ],
+      "nonlinear_roots_mod_prime": [],
+      "root_exclusion_prime": 37,
+      "source_residue_mod_5": 1
+    },
+    {
+      "content": -425793075840000,
+      "degree": 20,
+      "first_center": 7,
+      "linear_roots": [
+        -1,
+        -1,
+        2,
+        3,
+        7,
+        8,
+        14,
+        22,
+        24
+      ],
+      "nonlinear_coefficients_descending": [
+        1,
+        -366,
+        54046,
+        -4333948,
+        211782253,
+        -6665676310,
+        138723826572,
+        -1920916253560,
+        17436078244704,
+        -99121205538432,
+        317523863255040,
+        -431617455360000
+      ],
+      "nonlinear_roots_mod_prime": [],
+      "root_exclusion_prime": 31,
+      "source_residue_mod_5": 2
+    },
+    {
+      "content": -566111248560000,
+      "degree": 20,
+      "first_center": 8,
+      "linear_roots": [
+        -1,
+        -1,
+        3,
+        4,
+        6,
+        8,
+        9,
+        16,
+        26
+      ],
+      "nonlinear_coefficients_descending": [
+        1,
+        -422,
+        73196,
+        -7030994,
+        420297995,
+        -16540077656,
+        439827993736,
+        -7944771857568,
+        96010933196016,
+        -742769807731584,
+        3325327086977280,
+        -6553069205760000
+      ],
+      "nonlinear_roots_mod_prime": [],
+      "root_exclusion_prime": 37,
+      "source_residue_mod_5": 3
+    },
+    {
+      "content": -738164667240000,
+      "degree": 20,
+      "first_center": 9,
+      "linear_roots": [
+        -1,
+        -1,
+        4,
+        5,
+        9,
+        10,
+        18,
+        28
+      ],
+      "nonlinear_coefficients_descending": [
+        1,
+        -468,
+        90698,
+        -9823740,
+        669662709,
+        -30478355136,
+        954494459312,
+        -20809117566864,
+        314503451849584,
+        -3222432487323840,
+        21288623589033984,
+        -81499619083530240,
+        136681560981504000
+      ],
+      "nonlinear_roots_mod_prime": [],
+      "root_exclusion_prime": 29,
+      "source_residue_mod_5": 4
+    }
+  ],
+  "local_block": "For each residue r, the upper and lower equations at centers j=r+5 and j+5 form a four-by-four block on (v_r,v_{r+5},v_{r+10},v_{r+15}).",
+  "operator": "Q_n=(Delta_n,Delta_{n-6}^dagger)",
+  "propagation": {
+    "bezout_combination": "3(n-4c-14)-(3n-4c-12)=-8c-30, nonzero for c>=5",
+    "right_lower_factor": "3n-4c-12",
+    "right_upper_factor": "n-4c-14"
+  },
+  "repeated_isotypic_consequence": "Degree 22 is the unique two-sided defect in all weights that can occupy a repeated isotypic summand.",
+  "schema": "c682-all-weight-two-sided-defect-v1",
+  "theorem": "ker Q_n=0 for every integer n>52. Combined with the exact bounded spectrum, the complete exceptional degrees are 0,1,2,6,10,11,12,20,21,22,32,40,52."
+}

@@ -921,3 +921,24 @@ codimension-two peak geometry.  The plan, exact certificate, independent
 replay, proof, `ej`/`tt` closeout, and mystery ledger are in
 `notes/2026-07-29-c682-global-defect-module-plan.md` and
 `notes/2026-07-29-c682-global-defect-first-pass.md`.
+
+The finite defect boundary is now replaced by an all-weight theorem.  On
+each of the five coefficient chains, the upper and Fischer-adjoint lower
+recurrences at centers \(j\) and \(j+5\) give a local four-by-four
+determinant.  At \(j=5,6,7,8,9\), each determinant factors into linear
+roots at degrees at most \(52\) and one nonlinear integer polynomial with
+no root modulo a small prime.  Hence all five determinants are nonzero for
+every integer \(n>52\), force four initial coefficients to vanish, and
+propagate zero to the right boundary.  Therefore
+\[
+\ker(\Delta_n,\Delta_{n-6}^\dagger)=0
+\quad\text{for every }n>52.
+\]
+The complete exceptional list is
+\(0,1,2,6,10,11,12,20,21,22,32,40,52\); degree \(22\) is the unique
+repeated-isotypic defect in all weights.  The exact standard-library
+factorization certificate, separately implemented transvectant/Fischer
+replay, proof, `ej`/`tt` closeout, and mystery ledger are in
+`notes/2026-07-29-c682-all-weight-defect-theorem.md`.  The remaining
+full-corner gate is upper-support mixing at codimension-two peaks plus
+off-peak propagation.
