@@ -102,6 +102,12 @@ The combined normalized operator/polar/incidence package has minimal base
 An \(11\)-elementary dodecic lattice removes the apparent operator failures
 at \(7,11\); the cross-Gram scalar image, but not the normalized golden
 cover, has collision primes \(11,23\).
+At \(23\) that scalar image is the conductor-\(23\) suborder of the inert
+golden algebra: its special fibre is a dual-number point, and the divided
+separator is the Frobenius-odd normalization generator over
+\(\mathbf F_{529}\), not a new rational incidence sheet.  Globally the
+scalar image is the conductor-\(253\) order over \(\mathbf Z[1/30]\), whose
+only normalization defects are the split prime \(11\) and inert prime \(23\).
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.

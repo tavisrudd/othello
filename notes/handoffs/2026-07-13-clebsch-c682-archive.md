@@ -822,3 +822,24 @@ integral model: naive reduction of the ordinary-derivative tensor has
 extra degeneracies at \(3,7,11\) and does not yet recover the sharp
 Mukai--Umemura bad-prime set \(2,5\).  Independently, the next QG gate is
 the generic \(m=3\) local-symplectic component test.
+
+The characteristic-\(23\) divided-separator mystery is now closed.  If
+\(\chi=(54781+24288\sqrt5)/820125\), then locally
+\[
+ \mathbf Z_{23}[\chi]
+ =\mathbf Z_{23}+23\mathbf Z_{23}\sqrt5
+ \subset\mathbf Z_{23}[\sqrt5].
+\]
+This index-\(23\) order has conductor \(23\), dual-number special fibre,
+and inert étale normalization \(\mathbf F_{529}\).  The divided trace-zero
+coordinate \((820125\chi-54781)/23\) reduces to
+\(-2\sqrt5\), satisfies \(T^2+3=0\), and is exchanged with its negative by
+Frobenius.  It is exactly the missing normalization generator.  Thus the
+primes \(11\) and \(23\) express one conductor phenomenon with split and
+inert special fibres respectively; only at \(11\) does the divided
+coordinate select a rational incidence sheet.  Globally over
+\(\mathbf Z[1/30]\), the scalar image is the conductor-\(253\) order
+\(R+253R\sqrt5\), so these are exactly its two normalization defects.
+The exact proof, compact
+certificate, independent finite-algebra replay, and mystery ledger are in
+`notes/2026-07-29-c682-characteristic-23-divided-separator.md`.

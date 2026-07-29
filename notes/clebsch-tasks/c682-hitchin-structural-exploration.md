@@ -41,11 +41,19 @@ explicitly separated.
   exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
   apparent operator failures at \(7,11\); the cross-Gram scalar alone has
   nonstructural collision primes \(11,23\).
+- At \(23\), the cross-Gram scalar generates the conductor-\(23\) suborder
+  \(\mathbf Z_{23}+23\mathbf Z_{23}\sqrt5\).  Its coarse special fibre is a
+  dual-number point, while normalization gives the inert étale algebra
+  \(\mathbf F_{529}\); the divided separator is exactly the missing
+  Frobenius-odd normalization generator.  Globally over
+  \(\mathbf Z[1/30]\), the scalar image is the conductor-\(253\) order, with
+  local defects exactly at the split prime \(11\) and inert prime \(23\).
 
 ## Active order
 
-No successor frontier is selected.  C682 remains open until the user chooses
-between the characteristic-\(23\) divided separator and the parked branches.
+The characteristic-\(23\) divided-separator frontier is closed.  No
+successor frontier is selected; C682 remains open until the user chooses
+among the parked branches.
 
 ## Parked branches
 
@@ -60,4 +68,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-minimal-integral-base.md`.
+`notes/2026-07-29-c682-characteristic-23-divided-separator.md`.

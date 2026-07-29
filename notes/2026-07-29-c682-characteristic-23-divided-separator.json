@@ -1,0 +1,90 @@
+{
+  "characteristic_23_conclusion": [
+    "The normalized golden cover is the inert etale algebra F_529.",
+    "The coarse cross-Gram image is the nonreduced doubled point F_23[epsilon]/(epsilon^2).",
+    "The divided separator eta_23=-2 sqrt(5) has eta_23^2=-3, trace 0, norm 3, and Frobenius eta_23^23=-eta_23.",
+    "Adjoining eta_23 normalizes the scalar-image order and recovers the full golden cover.",
+    "There is no F_23-rational choice of incidence sheet; the two complementary sheets appear over F_529 and Frobenius exchanges them."
+  ],
+  "collision_primes": [
+    {
+      "conductor": "11 O_11",
+      "cross_gram_collision_value": 5,
+      "divided_trace_zero_coefficient": 8,
+      "divided_trace_zero_norm": 10,
+      "divided_trace_zero_square": 1,
+      "divided_values_on_sheets": [
+        1,
+        10
+      ],
+      "golden_character": 1,
+      "golden_fibre": "split",
+      "golden_roots": [
+        4,
+        7
+      ],
+      "normalization_index_exponent": 1,
+      "normalized_special_fibre": "F_11 x F_11",
+      "prime": 11,
+      "scalar_image_special_fibre": "F_11[epsilon]/(epsilon^2)",
+      "v_p_cross_gram_odd_coefficient": 1
+    },
+    {
+      "conductor": "23 O_23",
+      "cross_gram_collision_value": 21,
+      "divided_minimal_polynomial": "T^2 + 3",
+      "divided_trace_zero_coefficient": 21,
+      "divided_trace_zero_norm": 3,
+      "divided_trace_zero_square": 20,
+      "frobenius_on_divided_separator": [
+        0,
+        2
+      ],
+      "golden_character": -1,
+      "golden_fibre": "inert",
+      "negative_divided_separator": [
+        0,
+        2
+      ],
+      "normalization_index_exponent": 1,
+      "normalized_special_fibre": "F_529",
+      "prime": 23,
+      "scalar_image_special_fibre": "F_23[epsilon]/(epsilon^2)",
+      "v_p_cross_gram_odd_coefficient": 1
+    }
+  ],
+  "cross_gram": {
+    "A": 54781,
+    "B": 24288,
+    "D": 820125,
+    "factor_B": {
+      "11": 1,
+      "2": 5,
+      "23": 1,
+      "3": 1
+    },
+    "factor_D": {
+      "3": 8,
+      "5": 3
+    },
+    "lambda": "(A +/- B sqrt(5))/D"
+  },
+  "global_scalar_image_order": {
+    "base": "R = Z[1/30]",
+    "conductor": "253 O",
+    "index_ideal": "(253) = (11*23)",
+    "normalization": "O = R[s]/(s^2-5)",
+    "normalization_quotient": "O/R[chi] = R/(253) as an R-module",
+    "scalar_image": "R[chi] = R + 253 R s"
+  },
+  "local_order_theorem": {
+    "conductor": "p O_p",
+    "divided_separator": "eta_p=(D chi-A)/p=(B/p)s",
+    "index": "p",
+    "normalization": "O_p = Z_p[s]/(s^2-5)",
+    "normalization_quotient": "O_p/B_p = F_p",
+    "scalar_image_order": "B_p = Z_p + p Z_p s",
+    "special_fibre_map": "F_p[epsilon]/(epsilon^2) -> O_p/pO_p sends epsilon to 0"
+  },
+  "schema": "c682-characteristic-23-divided-separator-v1"
+}
