@@ -23,13 +23,15 @@ and may be reorganized as C682 evolves.
 | Golden \(D_5\)--\(S_3\) incidence | Direct characteristic-zero kernel intersection is empty. The normalized apolar cross-Gram scalar has two \(\mathbf Q(\sqrt5)\)-conjugate values whose fibres are complementary \((6_5,10_3)\) designs; their first-order collision at \(11\) explains the Bockstein shadow. The frozen common marking identifies the stored matrix with \(\lambda_+\), \(\sqrt5=4\). | `notes/2026-07-29-c682-d5-s3-kernel-incidence.md`; `notes/2026-07-29-c682-common-marking-sign.md` |
 | Boundary separator | The determinant-line ratio extends as \([c^2:g_Dg_S]\) on the normalized mate correspondence. Both golden values collapse to the same divisor--closed and closed--closed kernel pairs, so no coarse scalar extension exists. | `notes/2026-07-29-c682-boundary-cross-gram.md` |
 | Global row swap | The normalized-graph deck exchange is the Schläfli apolar-polar row swap. In each \(D_5\), the two \(A_5\) five-cycle classes give complementary pentagon-side and pentagram-diagonal relations on the ten \(S_3\) labels. | `notes/2026-07-29-c682-normalized-graph-row-swap.md` |
+| Integral base | The normalized operator/polar/incidence package has minimal base \(\mathbf Z[1/30]\) and structural bad primes \(2,3,5\). The \(11\)-elementary dodecic lattice removes the apparent \(7,11\) operator failures; only the scalar separator collides at \(11,23\). | `notes/2026-07-29-c682-minimal-integral-base.md` |
 
 ## Active and parked frontiers
 
 ### Active order
 
-1. **Integral model:** determine the minimal base and exact bad primes of the
-   combined operator/incidence package.
+No successor frontier is selected. The integral-model frontier is closed;
+C682 remains open until the user selects a parked branch or the new
+characteristic-\(23\) divided-separator question.
 
 ### Parked independent branches
 
@@ -778,8 +780,26 @@ golden deck involution. Equality on the dense homogeneous locus extends
 uniquely over the normalized saturated graph; no coarse kernel-pair
 involution is asserted. The proof, exact certificate, independent group
 replay, and mystery ledger are in
-`notes/2026-07-29-c682-normalized-graph-row-swap.md`. The minimal integral
-base remains open.
+`notes/2026-07-29-c682-normalized-graph-row-swap.md`.
+
+The integral frontier is now closed. The correct dodecic lattice is the
+\(11\)-elementary \(SL_2\)-stable neighbor
+\[
+ \langle e_0,e_1,11e_2,\ldots,11e_{10},e_{11},e_{12}\rangle .
+\]
+Its primitive third-transvectant tensor has rank four at the open,
+divisor-boundary, and closed-boundary representatives in every
+characteristic outside \(2,3,5\), including \(7\) and \(11\). Combining
+the \(\mathbf Z[1/10]\) Mukai--Umemura model with the perfect apolar
+polarity gives the minimal base \(\mathbf Z[1/30]\); \(2,5\) are
+geometrically forced and \(3\) is forced by the radical of the degree-six
+apolar form. The raw inverse annihilator equations gain one torsion
+direction at the two characteristic-\(7\) boundary orbits, but the flat
+graph retains the unique integral line. The normalized golden cover
+remains good at \(11,23\), although its cross-Gram scalar values coalesce
+at both primes because \(24288=2^5\cdot3\cdot11\cdot23\). The exact proof,
+certificate, independent replay, and mystery ledger are in
+`notes/2026-07-29-c682-minimal-integral-base.md`.
 
 C682's remaining Platinum track is:
 

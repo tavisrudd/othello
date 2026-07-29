@@ -36,10 +36,16 @@ explicitly separated.
   gives the complementary \(\lambda_-\) fibre.
 - The independent Klein \(E_8\) branch realizes the classical three-node
   matrix factorization and its first degree-\(22\) corner failure.
+- The combined normalized operator, apolar-polar, and golden-incidence
+  package has minimal base \(\mathbf Z[1/30]\) and structural bad primes
+  exactly \(2,3,5\).  An \(11\)-elementary dodecic lattice removes the
+  apparent operator failures at \(7,11\); the cross-Gram scalar alone has
+  nonstructural collision primes \(11,23\).
 
 ## Active order
 
-1. Determine the minimal integral base and actual bad primes.
+No successor frontier is selected.  C682 remains open until the user chooses
+between the characteristic-\(23\) divided separator and the parked branches.
 
 ## Parked branches
 
@@ -54,4 +60,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-normalized-graph-row-swap.md`.
+`notes/2026-07-29-c682-minimal-integral-base.md`.
