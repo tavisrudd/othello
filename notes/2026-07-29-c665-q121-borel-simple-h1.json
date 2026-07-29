@@ -1,0 +1,673 @@
+{
+  "bottom_candidates": [
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        8,
+        10
+      ],
+      "highest_weight": 118,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 99,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        8,
+        6
+      ],
+      "highest_weight": 74,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 63,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        8,
+        2
+      ],
+      "highest_weight": 30,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 27,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        4,
+        10
+      ],
+      "highest_weight": 114,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 55,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        4,
+        6
+      ],
+      "highest_weight": 70,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 35,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        4,
+        2
+      ],
+      "highest_weight": 26,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 15,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        0,
+        10
+      ],
+      "highest_weight": 110,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 11,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        0,
+        6
+      ],
+      "highest_weight": 66,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 7,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        0,
+        2
+      ],
+      "highest_weight": 22,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 3,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        8
+      ],
+      "highest_weight": 94,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 63,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        4
+      ],
+      "highest_weight": 50,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 35,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        0
+      ],
+      "highest_weight": 6,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 7,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        8
+      ],
+      "highest_weight": 90,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 27,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        4
+      ],
+      "highest_weight": 46,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 15,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        0
+      ],
+      "highest_weight": 2,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 3,
+      "torus_fixed_dimension": 1
+    }
+  ],
+  "field_modulus": "x^2 + 7*x + 2",
+  "middle_candidates": [
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        9,
+        9
+      ],
+      "highest_weight": 108,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 100,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        9,
+        7
+      ],
+      "highest_weight": 86,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 80,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        9,
+        5
+      ],
+      "highest_weight": 64,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 60,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        9,
+        3
+      ],
+      "highest_weight": 42,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 40,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 1,
+      "digits": [
+        9,
+        1
+      ],
+      "highest_weight": 20,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 20,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        7,
+        9
+      ],
+      "highest_weight": 106,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 80,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        7,
+        7
+      ],
+      "highest_weight": 84,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 64,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        7,
+        5
+      ],
+      "highest_weight": 62,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 48,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        7,
+        3
+      ],
+      "highest_weight": 40,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 32,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        7,
+        1
+      ],
+      "highest_weight": 18,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 16,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        5,
+        9
+      ],
+      "highest_weight": 104,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 60,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        5,
+        7
+      ],
+      "highest_weight": 82,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 48,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        5,
+        5
+      ],
+      "highest_weight": 60,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 36,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        5,
+        3
+      ],
+      "highest_weight": 38,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 24,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        5,
+        1
+      ],
+      "highest_weight": 16,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 12,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        3,
+        9
+      ],
+      "highest_weight": 102,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 40,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        3,
+        7
+      ],
+      "highest_weight": 80,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 32,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        3,
+        5
+      ],
+      "highest_weight": 58,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 24,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        3,
+        3
+      ],
+      "highest_weight": 36,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 16,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        3,
+        1
+      ],
+      "highest_weight": 14,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 8,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 1,
+      "digits": [
+        1,
+        9
+      ],
+      "highest_weight": 100,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 20,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        1,
+        7
+      ],
+      "highest_weight": 78,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 16,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        1,
+        5
+      ],
+      "highest_weight": 56,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 12,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        1,
+        3
+      ],
+      "highest_weight": 34,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 8,
+      "torus_fixed_dimension": 0
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        1,
+        1
+      ],
+      "highest_weight": 12,
+      "normalized_coboundary_dimension": 0,
+      "normalized_cocycle_dimension": 0,
+      "simple_dimension": 4,
+      "torus_fixed_dimension": 0
+    }
+  ],
+  "p": 11,
+  "q": 121,
+  "schema": 2,
+  "top_candidates": [
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        10,
+        8
+      ],
+      "highest_weight": 98,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 99,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        10,
+        4
+      ],
+      "highest_weight": 54,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 55,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        10,
+        0
+      ],
+      "highest_weight": 10,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 11,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        8
+      ],
+      "highest_weight": 94,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 63,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        4
+      ],
+      "highest_weight": 50,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 35,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        6,
+        0
+      ],
+      "highest_weight": 6,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 7,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        8
+      ],
+      "highest_weight": 90,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 27,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        4
+      ],
+      "highest_weight": 46,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 15,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        2,
+        0
+      ],
+      "highest_weight": 2,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 3,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        8,
+        6
+      ],
+      "highest_weight": 74,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 63,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        8,
+        2
+      ],
+      "highest_weight": 30,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 27,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        4,
+        6
+      ],
+      "highest_weight": 70,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 35,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        4,
+        2
+      ],
+      "highest_weight": 26,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 15,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        0,
+        6
+      ],
+      "highest_weight": 66,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 7,
+      "torus_fixed_dimension": 1
+    },
+    {
+      "borel_h1_dimension": 0,
+      "digits": [
+        0,
+        2
+      ],
+      "highest_weight": 22,
+      "normalized_coboundary_dimension": 1,
+      "normalized_cocycle_dimension": 1,
+      "simple_dimension": 3,
+      "torus_fixed_dimension": 1
+    }
+  ],
+  "torus_translation_multiplier": "4*a + 9"
+}

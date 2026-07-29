@@ -51,11 +51,16 @@ For \(L(6)\subset\operatorname{Sym}^{59}L(2)\) at \(q=121\), all genuine
 ordinary contractions of orders \(1,\ldots,10\) are now certified
 Borel-blind.  The affine class also dies in the \(L(6)\) head, with exact
 torus-fixed correction scalar \(4\), while both \(L(8)\) digit placements
-are absent from the head.  Test the original pullback class by a secondary
-torus-weighted unipotent Borel obstruction inside the radical filtration.
-In parallel, use the two-layer binary degree-59 Weyl/dual-Weyl model under
-modular Hermite reciprocity to derive the occurrence and extension scalars
-in Frobenius digits.
+are absent from the head.  Modular Hermite reciprocity forces the affine
+class into the middle
+\[
+T_+\oplus T_-=
+\bigl(L(9)\otimes L(1)^{(1)}\bigr)\oplus
+\bigl(L(1)\otimes L(9)^{(1)}\bigr)
+\]
+channel.  Determine its outer parity and prove that multiplication by the
+bottom \(L(6)\), followed by graded trace \(7\ne0\), survives the
+filtration transgression.  The full direct Borel pullback is the fallback.
 
 ## Guardrails
 

@@ -184,6 +184,84 @@ Direct substitution of the scalar \(4\) in every generator coordinate and
 the two zero-dimensional Hom kernels are the independent invariant checks.
 These results do not decide the quadratic pullback.
 
+## Modular-Hermite filtration locates the affine class
+
+The occurrence-level architecture is now explicit.  In the point-vector
+convention, put \(W=\nabla(59)=\operatorname{Sym}^{59}V\).  The standard
+\(\mathrm{SL}_2\) dual-Weyl sequence at \(59=4+5\cdot11\) is
+\[
+0\to B_0:=L(4)\otimes L(5)^{(1)}
+\to W\to A:=L(5)\otimes L(4)^{(1)}\to0.
+\]
+Modular Hermite reciprocity gives
+\[
+F=\operatorname{Sym}^{59}(L(2))
+\simeq\operatorname{Sym}^2W.
+\]
+Since the characteristic is odd, \(F\) has the three-step filtration
+\[
+\operatorname{gr}F=
+\operatorname{Sym}^2B_0\ \oplus\
+(B_0\otimes A)\ \oplus\
+\operatorname{Sym}^2A.
+\]
+All three graded pieces are semisimple: every digitwise tensor product
+stays in the bottom alcove.
+
+The split-Borel cohomology of every simple graded factor is now exact.
+The fifteen top and fifteen bottom factors have zero \(H^1\).  Among the
+twenty-five middle factors, exactly
+\[
+T_+=L(9)\otimes L(1)^{(1)},\qquad
+T_-=L(1)\otimes L(9)^{(1)}
+\]
+have one-dimensional \(H^1\); the other twenty-three vanish.  Neither
+\(T_+\) nor \(T_-\) has a torus-fixed vector.  No graded factor has a
+Borel-fixed vector.
+
+It follows from the two filtration long exact sequences that restriction
+of the nonsplit affine class injects into
+\[
+H^1(B,T_+)\oplus H^1(B,T_-).
+\]
+Thus q=121 is not an unexplained finite exception: the affine class is
+forced into the Frobenius-paired middle channel.  The \(L(6)\) socle and
+head lie in the two outer square/exterior layers, explaining the observed
+radical occurrence and why every primary head or ordinary-contraction
+trace is blind.
+
+This does not yet prove C1.  In the associated graded of the quadratic
+kernel, multiplication by the bottom \(L(6)\) gives a trace back to
+\(T_\pm\) with scalar \(\dim L(6)=7\ne0\).  A complete proof must still
+show that this graded trace is not killed by a higher filtration
+transgression; outer parity is the preferred gate.
+
+The exact finite Borel presentation uses generators
+\(u(1),u(a)\), the split torus, their order and commutation relations, and
+the two torus-conjugation relations.  For each simple it computes normalized
+cocycles and torus-fixed coboundaries directly.  Replay from the repository
+root with
+
+```text
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-borel-simple-h1.sage --check
+sha256sum -c notes/2026-07-29-c665-q121-borel-simple-h1.sha256
+```
+
+The script, canonical certificate, and input manifest share the stem
+`notes/2026-07-29-c665-q121-borel-simple-h1`.  The invariant checks are the
+presentation relations, containment of every coboundary in the cocycle
+kernel, the \(15+25+15\) complete graded-factor count, and Frobenius exchange
+of the only two nonzero rows.
+
+McDowell--Wildon, arXiv:2105.00538v3, Corollary 1.5 and Section 5 supplies
+the characteristic-independent Hermite isomorphism (cached PDF SHA-256
+`8e9012cea77b2eca5aecf03238fd0565155a6941c89c98c422533d94aa94a890`).
+Martin, arXiv:1705.06980, Lemma 2.3 records the dual-Weyl short exact
+sequence (cached PDF SHA-256
+`235d7b2f26ca808c6ddfad8d738b744aca23a06a623b3f27108a3c85dbc5f1f2`).
+These sources provide the architecture, not the q=121 C1 conclusion.
+
 ## Replacement attacks
 
 The contraction route is now closed negatively.  Three genuinely different
@@ -206,20 +284,10 @@ routes remain.
 3. Search for an explicit \(q=121\) splitting.  A positive result would
    falsify C1 rather than merely another proposed detector.
 
-The current highest-EV order is (1), with (2) developed in parallel as the
-preferred uniform theorem architecture.  If \(W\) denotes the binary
-degree-59 Weyl/dual-Weyl module in the fixed point-vector convention, its
-two associated-graded layers are
-\[
-\operatorname{gr}W=
-\bigl(L(5)\otimes L(4)^{(1)}\bigr)
-\oplus\bigl(L(4)\otimes L(5)^{(1)}\bigr).
-\]
-Under modular Hermite reciprocity
-\(F\simeq\operatorname{Sym}^2W\), the two associated-graded
-square/exterior channels each contain an \(L(6)\).  This cleanly explains
-why q=121 is the first plausible socle/head radical occurrence, but it does
-not yet determine the pullback class.
+The current highest-EV order is the outer-parity/transgression test on the
+graded trace above.  The full direct Borel system is now a fallback, and
+the modular-Hermite filtration is the preferred uniform theorem
+architecture.
 
 The exact source for route (3) is McDowell--Wildon, *Modular plethystic
 isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
@@ -233,11 +301,12 @@ evidence that the C1 pullback is nonsplit.
 
 | feature | status | exact remaining gate |
 |---|---|---|
-| \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence; structural cause open | identify its Frobenius-digit Weyl/dual-Weyl layer under modular Hermite reciprocity |
+| \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence and outer-layer location | prove the middle-to-bottom graded trace survives transgression |
 | retired top Hasse channel gives a \(1\to2\) rank jump | settled as an artifact of a non-equivariant operator | none; do not reuse the rank jump |
 | all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
 | affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
 | \(L(8)\) and \(L(8)^{(1)}\) head probes | settled absent | none; do not infer a prime-field cohomology head |
+| affine-class support | settled in the \(T_+\oplus T_-\) middle channel | determine outer parity and the nonzero component |
 | actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
