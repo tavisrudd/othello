@@ -442,8 +442,8 @@ q&\text{candidate heads}&\dim\operatorname{Hom}_H(S,E)\\ \hline
    L(3)\otimes L(3)^{(1)}&0,\ 0.
 \end{array}
 \]
-These are exact evidence, not a uniform theorem.  The next gate q=121 is
-also closed, but it falsifies uniform affine-socle absence.  Its \(A_4\)
+These are exact evidence, not a uniform theorem.  The next gate q=121
+falsifies uniform affine-socle absence.  Its \(A_4\)
 head \(L(6)\) satisfies
 \[
 \dim\operatorname{Hom}_H(L(6),F)
@@ -453,24 +453,28 @@ and generators of the two Hom lines compose to zero.  It is the first
 embedded nonretract.  Exact finite-torus weight-block intertwiner systems
 eliminate the \(L(8)\) and \(L(12)\) probes.
 
-The q=121 pullback itself is nonsplit.  After choosing a torus-fixed affine
-lift, apply the scalar top divided contraction
+The former q=121 pullback certificate is invalid.  Its scalar Hasse pairing
 \[
 \beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j.
 \]
-The image cocycle in \(L(6)^*\) has a one-variable coboundary system with
-coefficient rank one and augmented rank two.  Thus q=121 closes without
-constructing \(\operatorname{Sym}^2E\).  The complete candidate-family
-table and subgroup congruence conditions remain in the C665 report; do not
-replace them by a guessed short list.
+is not translation-equivariant on ordinary symmetric powers: in degree 59,
+\(X^2Z^{57}\) and \(X^{57}YZ\) have pairing zero before the standard
+translation and pairing one afterward.  The genuine order-59 ordinary
+contraction is zero in characteristic eleven.  Thus the Hom and nonretract
+statements survive, but q=121 C1 is reopened.  The correction, independent
+replay, and replacement attacks are in
+`notes/2026-07-29-c665-uniform-c1-correction.md`.  The complete
+candidate-family table and subgroup congruence conditions remain in the
+C665 report; do not replace them by a guessed short list.
 
 The preferred theorem-level attack is a recursive
 \(\mathrm{SL}_2\)-tilting/socle description of
 \(\operatorname{Sym}^{(p^e-3)/2}L(2)\) that can answer both embedding and
 retractability for those candidate digits.  Ordinary block support cannot
 do this: all relevant non-Steinberg simples lie in the same full-defect
-block.  Do not launch another field-sized falsifier by default; q=121 is a
-settled model, not an open gate.  The theorem-level target has sharpened:
+block.  Do not launch another field-sized symmetric-square calculation by
+default; q=121 is again the first open gate.  The theorem-level target has
+sharpened:
 express three occurrence-level scalars in Frobenius-digit form for every
 candidate family:
 
@@ -478,12 +482,14 @@ candidate family:
 2. the composition scalar
    \(\operatorname{Hom}(S,F)\otimes\operatorname{Hom}(F,S)\to k\),
    separating retracts from radical occurrences;
-3. on the radical branch, the top-apolar image of the quadratic pullback
-   cocycle.
+3. on the radical branch, a genuinely equivariant image of the quadratic
+   pullback cocycle or a direct Borel obstruction.
 
-The q=121 \(1\to2\) apolar rank jump is the first positive model for the
-third step.  Seek its uniform coefficient formula before another
-field-sized symmetric computation.
+The former q=121 \(1\to2\) apolar rank jump is an artifact of the retired
+non-equivariant Hasse pairing.  Test the nonzero ordinary contractions of
+orders \(1,\ldots,10\), then use the injective Borel restriction if they are
+blind.  Modular Hermite reciprocity is the preferred recursive route to the
+uniform Frobenius-digit theorem.
 
 The exact replay baselines are:
 
@@ -496,15 +502,10 @@ nix shell nixpkgs#sage -c sage \
   notes/2026-07-26-c665-q49-affine-socle.sage --check
 nix shell nixpkgs#sage -c sage \
   notes/2026-07-28-c665-q121-affine-socle.sage --check
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-28-c665-q121-contraction-detector.sage --check \
-  --max-remaining-degree 0
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-28-c665-q121-contraction-replay.sage
+python3 notes/2026-07-29-c665-q121-contraction-audit.py --check
 sha256sum -c notes/2026-07-26-c665-exceptional-head-pullback.sha256
 sha256sum -c notes/2026-07-26-c665-q25-pullback.sha256
 sha256sum -c notes/2026-07-26-c665-q49-affine-socle.sha256
-sha256sum -c notes/2026-07-28-c665-q121-pullback.sha256
 ```
 
 Do not use composition factors to identify the relevant copy, extrapolate

@@ -14,9 +14,9 @@ manuscript claim.  Its exceptional \(A_4,S_4,A_5\) head table is complete
 and the retracted-socle trace lemma closes the quadratic pullback for every
 prime-field exceptional head.  The first two extension barriers \(q=25,49\)
 also close because none of their Frobenius-digit heads embeds in the affine
-socle.  At \(q=121\), \(L(6)\) is the first embedded nonretract; the scalar
-top-contraction image of its pullback class is nonzero, so C1 closes there
-without constructing the symmetric square.  The complete \(q=5\) matching
+socle.  At \(q=121\), \(L(6)\) is the first embedded nonretract.  The former
+scalar top-Hasse detector is not equivariant, so its pullback conclusion is
+retired and q=121 C1 is open again.  The complete \(q=5\) matching
 census closes the isolated dihedral
 endpoint geometrically.  The characteristic-three torus family is now
 closed by the discriminant-weight-four trade below, with no
@@ -1283,7 +1283,7 @@ Together with \(q=25\), this shows affine-socle absence at both first
 extension-field barriers; it is exact evidence, not a uniform
 extension-field theorem.
 
-### The first embedded nonretract and its scalar pullback: \(q=121\)
+### The first embedded nonretract and the reopened pullback: \(q=121\)
 
 Affine-socle absence does not persist.  Put
 \[
@@ -1309,76 +1309,36 @@ any retraction \(E\to S\) would be a scalar multiple of \(\pi\), whose
 composition with \(i\) is zero.  This is the first embedded nonretract
 predicted by the C1 decision tree.
 
-The quadratic pullback is nevertheless nonsplit.  Choose a split-torus
-fixed lift \(e\in E\) of \(1\), and write
+The former quadratic-pullback detector does not survive equivariance audit.
+Its scalar Hasse pairing
 \[
-c_g=ge-e\in F.
+\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j
 \]
-Every putative lift of \(i\) through
-\(\partial:\operatorname{Sym}^2E\to E\) has the form
-\[
-\sigma(s)=e\mathbin{\odot}i(s)+t(s),
-\qquad t:S\longrightarrow\operatorname{Sym}^2F.
-\]
-Apply the top divided contraction
-\[
-\beta:\operatorname{Sym}^2(\operatorname{Sym}^{59}L(2))
-\longrightarrow k.
-\]
-In the monomial normalization used by the checker it is the symmetric
-apolar pairing
-\[
-\beta(X^iY^jZ^k,X^uY^vZ^w)
-=
-\begin{cases}
-(-1/2)^j,&(u,v,w)=(k,j,i),\\
-0,&\text{otherwise},
-\end{cases}                                      \tag{AP59}
-\]
-equivalently
-\(\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j\).
-The image of the pullback cocycle is
-\[
-\gamma_g(s)=\beta(c_g,i(gs))\in S^*.
-\]
-A correcting scalar cochain is forced by the torus weights onto the unique
-zero-weight coordinate of \(S^*\).  For the two translations and inversion,
-the resulting exact inhomogeneous system has fifteen nonzero rows and
-fourteen nonzero defect entries, with
-\[
-\operatorname{rank}A=1,\qquad
-\operatorname{rank}[A\mid\gamma]=2.              \tag{AP-rank}
-\]
-Hence \(\gamma\) is not a coboundary.  Since it is the image of the
-quadratic pullback class, the original pullback is nonsplit.  This closes
-C1 at \(q=121\) without constructing the
-\(\binom{1832}{2}\)-dimensional symmetric square.
+changes from zero to one on the pair
+\((X^2Z^{57},X^{57}YZ)\) under the standard determinant-one translation
+\(X\mapsto X-2Y+Z,\ Y\mapsto Y-Z,\ Z\mapsto Z\).
+The genuine order-59 ordinary contraction contains the missing factorial
+coefficients and is zero in characteristic eleven.  Therefore the former
+\(1\to2\) coboundary rank jump is not the image of the pullback class and
+does not close C1.
 
-The primary checker obtains (Q121-Hom), (Q121-rad), and the full
-divided-contraction system.  The replay independently uses the closed
-monomial formula (AP59) and rebuilds only the \(15\times2\) augmented
-system:
+The exact surviving and corrective checks are:
 
 ```bash
 nix shell nixpkgs#sage -c sage \
   notes/2026-07-28-c665-q121-affine-socle.sage --check
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-28-c665-q121-contraction-detector.sage --check \
-  --max-remaining-degree 0
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-28-c665-q121-contraction-replay.sage
-sha256sum -c notes/2026-07-28-c665-q121-pullback.sha256
+python3 notes/2026-07-29-c665-q121-contraction-audit.py --check
 ```
 
-The affine checker and certificate have 13,820 and 1,433 bytes; the shared
-pullback support, contraction checker, certificate, and scalar replay have
-6,307, 12,738, 509, and 3,853 bytes.  The adjacent manifest pins all six
-hashes.
-
-This is an exact field closure, not a uniform extension-field theorem.  Its
-uniform lesson is sharper than affine-socle absence: first use the torus
-weight gate, then distinguish absent, retracted, and radical occurrences;
-for the radical branch, test the scalar apolar image of the pullback class.
+The correction, independent replay, exact evidence boundary, and
+replacement attacks are in
+`notes/2026-07-29-c665-uniform-c1-correction.md`.  The old contraction
+files remain historical failed evidence and must not be replayed as a C1
+gate.  The correct next order is: test the ordinary contraction channels
+of orders \(1,\ldots,10\); if they are blind, compute a direct Borel
+obstruction; then express the occurrence and extension scalars recursively
+through modular Hermite reciprocity.  This is an open field gate and not a
+uniform extension-field theorem.
 
 The characteristic-three torus case is a separate genuine residual family,
 not a cosmetic defect of the method.  Its first field can nevertheless be
@@ -1628,13 +1588,13 @@ both the old \(\lambda+1\) bound and the rank-one defect inference while
 leaving nine invariant trades in every split orbit.  The `ej` replacement
 is the sharp five-dimensional defect: factor the fixed-correction
 polarization through \(\Delta(4)\), then descend its nonsplit analogue.
-The q=121 gate now answers the former C1 mystery: affine-socle absence does
-not persist, and the first embedded occurrence is a nonretract.  Its `ej`
-upgrade is the zero composition scalar between the two one-dimensional Hom
-lines; its `tt` detector is the top divided contraction, whose scalar
-coboundary system has rank jump \(1\to2\).  The new uniform problem is to
-express the torus weight gate, the radical composition scalar, and the
-apolar cocycle rank in Frobenius-digit form for every candidate family.
+The q=121 gate answers only the occurrence half of the former C1 mystery:
+affine-socle absence does not persist, and the first embedded occurrence is
+a nonretract.  Its zero composition scalar between the two one-dimensional
+Hom lines survives.  The former top-Hasse `tt` detector fails equivariance,
+so q=121 pullback nonsplitting and the uniform problem are both open.  The
+new route is a valid ordinary-contraction or Borel obstruction at q=121,
+followed by a modular-Hermite Frobenius-digit recursion.
 
 ### Facts that must not be assumed
 
@@ -1960,4 +1920,4 @@ C1 is still separate and is the sole live Platinum gap.
 | Characteristic-three split T3 | settled | The discriminant-weight-four vector (T4) is a second invariant trade; it uses one absent Borel character and imposes no defect bound. |
 | Nonsplit descent | settled | Diagonalization over \(\mathbb F_{q^2}\), Frobenius-fixed discriminant weight, and exclusion of the outer-fixed antipodal type descend the same trade. |
 | q=27 invariant-trade excess | settled exactly, non-load-bearing | Equation (U9) gives seven finite-axis Fourier lines and two trivial cross lines.  Beyond the sign and \(\tau_2\), the former seven are six listed Fourier lines and the complementary cross line. |
-| Extension-field C1 | q=121 closed; uniform family open | \(L(6)\subset\operatorname{Sym}^{59}L(2)\) is the first embedded nonretract; its scalar apolar pullback image has rank jump \(1\to2\).  Uniformize the weight/radical/apolar decision tree across all Frobenius-digit candidates. |
+| Extension-field C1 | q=121 and uniform family open | \(L(6)\subset\operatorname{Sym}^{59}L(2)\) is the first embedded nonretract, but the former scalar Hasse detector is not equivariant.  Decide q=121 by a valid ordinary-contraction or Borel obstruction, then uniformize through modular Hermite reciprocity and Frobenius digits. |

@@ -1,0 +1,25 @@
+{
+  "conclusion": "the retired Hasse top pairing is not translation-equivariant; the genuine order-59 ordinary contraction is zero",
+  "degree": 59,
+  "degree_factorial_mod_p": 0,
+  "left_exponent": [
+    2,
+    0,
+    57
+  ],
+  "p": 11,
+  "pairing_after": 1,
+  "pairing_before": 0,
+  "right_exponent": [
+    57,
+    1,
+    1
+  ],
+  "schema": 1,
+  "translation": [
+    "X -> X - 2Y + Z",
+    "Y -> Y - Z",
+    "Z -> Z"
+  ],
+  "translation_defect": 1
+}
