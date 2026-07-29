@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Date**: 2026-07-28
+**Date**: 2026-07-29
 
 > **LIVE MAP ONLY.** The three-paper program below is the active publication
 > path. The 37-page mega-paper and its evidence surface are preserved
@@ -263,121 +263,37 @@ structural derivation of radical--Hadamard hypotheses beyond \(B_3,H_3\).
 The proof and mystery ledger are in
 `notes/2026-07-26-c661-uniform-factorization-upgrade.md`.
 
-C665's limited Gold is complete and integrated; its Platinum continuation is
-in progress and is not yet a manuscript claim.  For any full-projective
-matching orbit, a one-dimensional strength-two trade space whose two fibers
-are one-factorizations is \(G\)-stable; transitivity forces a nontrivial
-two-block action with kernel \(\operatorname{PSL}_2(q)\), and edge counting
-derives the \(q+q\) split rather than assuming it.  The one-factorization
-condition still uses endpoint incidence rather than the abstract quotient
-alone.  Orbit--stabilizer and Dickson then
-reduce to \(q=5,7,11\); the \(q=5\) ten-orbit stays one special-projective
-orbit with full Schur square, while the unique \(q=7,11\) recovering orbits
-are \(B_3,H_3\).  The field-independent hyperplane-square lemma proves
-\(L^{\circ2}=\ker\epsilon\) with full-support \(\epsilon\) forces
-\(L^{\circ3}=k^\Omega\).  Its dual mechanism is kernel-checked by
-`RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero`; source
-elaboration is green, while the import-only gate waits behind the same
-foreign Lean build owner as the Hilbert-symmetry gate.  The report, exact
-certificate, independent replay, and mystery ledger are in
-`notes/2026-07-26-c665-balanced-matching-completeness.md`; these are Paper II
-v2 upgrades and do not hold v1.  Resume the Platinum proof under
-`notes/expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`;
-its first gate is the point-vector/evaluation-dual extension diagram, followed
-by the Dickson-type \(S^K\) table and the characteristic-three torus
-exception.  The first persona pass fixes the q=19 convention: the unique
-\(H\)-fixed affine line lies in the nonconstant fibre, has outer sign, and
-does not split the trivial quotient; C1 is now the nonsplitting of the
-quadratic pullback along \(S^\chi\hookrightarrow E\).  H1 is settled for
-cyclic tori outside characteristic three and for generic dihedral
-normalizers.  The exact \(q=19,A_5\) contraction map has rank zero from the
-ten-dimensional plus-parity quadratic Hom space to the one-dimensional
-minus-parity affine Hom space, so its quadratic pullback is nonsplit.  The
-binary-polyhedral simple-quotient calculation supplies nonnegligible heads
-for every exceptional \(A_4,S_4,A_5\) family outside the principal Platonic
-endpoints; the lone \(q=7,A_4\) Steinberg-only row cannot be a full matching
-stabilizer because it enlarges to \(S_4\).  The remaining Platinum inputs
-were uniform C1 for the other heads, characteristic-three tori, and the q=5
-dihedral endpoint.  The retracted-socle trace lemma now turns any quadratic
-lift into a splitting of the original affine extension whenever the simple
-head is a retract and has nonzero categorical dimension.  Bottom-alcove
-Fischer decomposition plus a Borel-restriction calculation confines the
-prime-field affine class to \(L(p-3)\), so every prime-field exceptional C1
-row is closed conceptually; the q=19 matrix is now a cross-check.  The
-remaining C1 frontier is the extension-field tilting structure of the
-affine cocycle versus the Frobenius-digit heads.  The first `tt` block test is
-negative: defining-characteristic full-defect blocks do not separate the
-non-Steinberg candidates.  At q=25 both \(A_4/S_4\) heads have zero Hom into
-the 79-dimensional universal affine module, by MeatAxe and an independent
-block-linear solve; hence the linear-parity cross channel is absent and no
-quadratic pullback is needed.  The q=49 affine-socle gate closes the same
-way: the shared four-dimensional \(A_4/S_4\) head and the sixteen-dimensional
-\(A_5\) head both have zero Hom into the 301-dimensional universal affine
-module, by MeatAxe and an independent reduced block-linear solve.  Thus no
-q=49 quadratic module, retraction test, or pullback is needed.  Uniform
-extension-field C1 remains open.  The complete q=5 matching census closes
-the isolated dihedral endpoint geometrically.  A `dof` pass reduces every
-characteristic-three torus-invariant matching to one cyclic parameter
-modulo affine inversion, plus a possible antipodal type; for a full split
-or nonsplit normalizer the sheet module and
-\(\lambda=(q+1)/2\) or \((q-1)/2\) are forced.  The sole remaining torus
-freedom is the matching-product vector's joint translation-norm rank.  The
-exact acceptance gate needs only
-\(\dim(V+dV)\le2\lambda-2\).  For the split cross-orbit type, the
-matching product is now the explicit Dickson resultant
+C665's limited Gold theorem is complete and integrated as a Paper II v2
+upgrade; it does not hold v1.  A one-dimensional strength-two trade with
+one-factorization fibres forces the balanced \(q+q\) split and reduces the
+full-projective recovering orbits to \(B_3\) and \(H_3\), with the \(q=5\)
+orbit excluded by its full Schur square.  The field-independent
+hyperplane-square lemma also gives
 \[
-P_c=-Y\left[X^n+(cZ)^n-(cZ)^n
-D_n\left(\frac{(1+c)Y}{cZ},\frac{X}{cZ}\right)\right],
-\qquad n=(q-1)/2,
+L^{\circ2}=\ker\epsilon,\quad \epsilon\text{ full support}
+\quad\Longrightarrow\quad L^{\circ3}=k^\Omega.
 \]
-so the remaining split norm bound is a one-scalar coefficient identity.
-For \(q=3^e\), \(e\) odd, coefficient inversion further gives the
-parameter-free outer identity
-\[
-P_c+P_{c^{-1}}=Y(X^n-Z^n).
-\]
-The strengthened q=27 replay falsifies both the former
-\(\lambda+1\) bound and the rank-one inference: every split orbit has
-sheet norm ranks \(14,14\), joint rank \(19\), defect increment five, and
-nine invariant trades.  Endpoint incidence yields only the sign trade, and
-the naive \(L(2)\otimes L(2)^{(1)}\) axis difference yields none.  The
-q=27 five-dimensional replacement is also nonuniform.  At q=243 a
-deterministic 153-row moment projection has one-sheet rank
-\(122=\lambda\) and joint rank \(136=\lambda+14\), so no full joint rank
-bounded by \(\lambda+5=127\) can map onto it.  Thus the q=27 square-torus
-weights \(6,10,14,18,22\) are a field-specific twisted-\(\Delta(4)\)
-fingerprint, not a uniform defect factorization.  The exact fallback is now
-proved without bounding that defect.  On a finite torus axis
-\(A=\{x,y\}\), the discriminant weight
-\(w(A)=(x-y)^{-4}\), extended by zero on the infinity-axis orbit, gives the
-same quadratic moment on both sheets.  Their weighted difference is
-therefore a second trade, independent of the full-support sign.  Translation
-power sums reduce the identity to the absent square-axis character \(s^2\);
-the bottom and complementary four-jets agree under \(c\leftrightarrow
-c^{-1}\).  The Möbius transformation law identifies the \(H\)-span of this
-trade with the simple nine-space
-\(L(8)=L(2)\otimes L(2)^{(1)}\), so the kernel contains
-\(\mathbf1\oplus L(8)\) and has dimension at least ten.
-The q=27 replay sharply separates two copies of that same simple type: the
-naive axis-digit nine-space has moment rank nine, while the
-inverse-discriminant nine-space has moment rank zero.  This is the concrete
-warning for C1 that composition factors do not identify the relevant copy.
-It now also resolves the full nine-dimensional \(U\)-fixed norm kernel.
-Writing \(\Delta(A)=(x-y)^2\), the seven finite-axis Fourier differences
-\(\tau_r=\pm\Delta(A)^{-r}\), \(1\le r\le7\), are trades; \(\tau_2\) is the
-uniform inverse-discriminant line.  The remaining two dimensions are the
-trivial-character cross relations “plus infinity = minus finite sum” and
-“plus finite sum = minus infinity”; their sum is the sheet sign.  Thus the
-former seven unexplained directions beyond sign and \(\tau_2\) are the six
-other Fourier lines and one complementary cross line.  C682's degree-22
-Koszul row suggested this operator-syzygy viewpoint, but there is no literal
-\(E_8\) or mod-\(3\) module transfer.  Diagonalization over
-\(\mathbb F_{q^2}\) and Frobenius-fixed
-discriminant weight descend the nonsplit case, while the antipodal type is
-outer-fixed and cannot split.  The q=27 full coefficient-space replay and
-the independent q=27/q=243 moment projection cross-check the identity.
-Characteristic-three T3 is closed; uniform extension-field C1 is the
-remaining Platinum frontier.
+The report, exact certificate, independent replay, Lean boundary, and
+mystery ledger are in
+`notes/2026-07-26-c665-balanced-matching-completeness.md`.
+
+The Platinum characteristic-three torus gate T3 is closed.  The
+inverse-discriminant weight \(w(\{x,y\})=(x-y)^{-4}\) supplies the missing
+sheet trade uniformly; its \(H\)-span is
+\(L(8)=L(2)\otimes L(2)^{(1)}\).  The split, nonsplit, and antipodal cases
+are settled.  The q=27 Fourier excess is a warning that the actual module
+occurrence, not its composition-factor label, controls the operator.
+
+The only open C665 frontier is **uniform extension-field C1** for the
+remaining exceptional \(A_4,S_4,A_5\) heads.  Prime fields are closed.
+The q=25 and q=49 heads have zero affine Hom and need no pullback; q=121 is
+the first open gate.  There \(L(6)\) embeds in
+\(F=\operatorname{Sym}^{59}L(2)\) but is nonretracting, while the
+\(L(8)\) and \(L(12)\) probes are eliminated.  The former q=121 scalar
+Hasse-pairing certificate was non-equivariant and is retired, so the
+quadratic pullback for \(L(6)\) remains undecided.  Its correction and
+replacement attacks are in
+`notes/2026-07-29-c665-uniform-c1-correction.md`.
 
 ### C665 cold-session protocol: uniform extension-field C1
 
@@ -387,150 +303,44 @@ Route a fresh session with
 go C665 clebsch uniform extension-field C1
 ```
 
-The exact objective is **not** another torus calculation.  T3, including
-the q=27 invariant-trade excess, is closed.  C1 asks for the quadratic
-pullback nonsplitting attached to every remaining exceptional
-\(K=A_4,S_4,A_5\) head over \(q=p^e,\ e>1\).  This is a Paper II v2
-Platinum continuation and must not hold v1 or enter a manuscript before the
-uniform theorem exists.
+This is a Paper II v2 Platinum continuation and must not hold v1 or enter the
+manuscript before the uniform theorem exists.  T3 is closed; do not resume
+torus calculations.
 
-Before proving anything nontrivial, read
-`notes/expert-personas/doty-henke-parker-malle-robinson-rank-one-modular.md`
-and the C1 sections of
-`notes/2026-07-26-c665-balanced-matching-completeness.md`, especially
-“Exact quadratic pullback,” “Retracted-socle pullback lemma,” the q=25 and
-q=49 gates, and “C1-extension.”  Keep the point-vector convention fixed:
+Before proof work, read the rank-one modular persona and the C1 sections of
+the C665 report and correction note.  Keep
 \[
-0\longrightarrow F\longrightarrow E
- \mathrel{\mathop{\longrightarrow}^{\epsilon}}k\longrightarrow0,
-\qquad
+0\to F\to E\xrightarrow{\epsilon}k\to0,\qquad
 F=\operatorname{Sym}^{(q-3)/2}L(2),
 \]
 and
 \[
-\partial:\operatorname{Sym}^2E\longrightarrow E,\qquad
-\partial(xy)=\epsilon(x)y+\epsilon(y)x.
+\partial:\operatorname{Sym}^2E\to E,\qquad
+\partial(xy)=\epsilon(x)y+\epsilon(y)x
 \]
-For a selected outer-parity embedding \(i:S^\chi\hookrightarrow E\), C1
-is the assertion that the pullback of \(\partial\) along \(i\) is nonsplit,
-equivalently that \(i\) is not in the image of the appropriate
-outer-eigenspace of
-\[
-\partial_*:\operatorname{Hom}_H(S,\operatorname{Sym}^2E)
-\longrightarrow\operatorname{Hom}_H(S,E).
-\]
+as the fixed point-vector convention.
 
-The decision order is strict:
+For each outer-parity head \(i:S^\chi\hookrightarrow E\), use this order:
 
-1. Compute or prove \(\operatorname{Hom}_H(S,E)=0\).  If it is zero, that
-   row closes without constructing \(\operatorname{Sym}^2E\).
-2. If \(S\) embeds, determine the **actual occurrence**, not just its
-   composition factor: does some \(H\)-map \(r:E\to S\) satisfy \(ri=1\)?
-3. If the occurrence retracts and \(p\nmid\dim S\), apply the
-   retracted-socle trace lemma; the pullback is nonsplit.
-4. Only for an embedded nonretract compute the pullback class or
-   \(\partial_*\), with the nonsquare-dilation outer parity included.
+1. close the row immediately if \(\operatorname{Hom}_H(S,E)=0\);
+2. if \(S\) embeds, decide whether its actual occurrence retracts;
+3. use the retracted-socle trace lemma only for a proved retraction with
+   \(p\nmid\dim S\);
+4. only for an embedded nonretract compute the outer-parity pullback class
+   or give an injective Borel obstruction.
 
-Prime fields are closed conceptually.  The first two extension barriers are
-also closed:
-\[
-\begin{array}{c|c|c}
-q&\text{candidate heads}&\dim\operatorname{Hom}_H(S,E)\\ \hline
-25&L(1)\otimes L(1)^{(1)},\
-   L(2)\otimes L(2)^{(1)}&0,\ 0\\
-49&L(1)\otimes L(1)^{(1)},\
-   L(3)\otimes L(3)^{(1)}&0,\ 0.
-\end{array}
-\]
-These are exact evidence, not a uniform theorem.  The next gate q=121
-falsifies uniform affine-socle absence.  Its \(A_4\)
-head \(L(6)\) satisfies
-\[
-\dim\operatorname{Hom}_H(L(6),F)
-=\dim\operatorname{Hom}_H(F,L(6))=1,
-\]
-and generators of the two Hom lines compose to zero.  It is the first
-embedded nonretract.  Exact finite-torus weight-block intertwiner systems
-eliminate the \(L(8)\) and \(L(12)\) probes.
+The immediate gate is the embedded nonretract \(L(6)\subset
+\operatorname{Sym}^{59}L(2)\) at q=121.  Test the genuine ordinary
+contractions of orders \(1,\ldots,10\); if they are blind, pass to Borel
+restriction.  The uniform target is a modular-Hermite/tilting description
+that expresses the embedding gate, retraction scalar, and radical-branch
+pullback obstruction in Frobenius digits for every candidate family.
 
-The former q=121 pullback certificate is invalid.  Its scalar Hasse pairing
-\[
-\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j.
-\]
-is not translation-equivariant on ordinary symmetric powers: in degree 59,
-\(X^2Z^{57}\) and \(X^{57}YZ\) have pairing zero before the standard
-translation and pairing one afterward.  The genuine order-59 ordinary
-contraction is zero in characteristic eleven.  Thus the Hom and nonretract
-statements survive, but q=121 C1 is reopened.  The correction, independent
-replay, and replacement attacks are in
-`notes/2026-07-29-c665-uniform-c1-correction.md`.  The complete
-candidate-family table and subgroup congruence conditions remain in the
-C665 report; do not replace them by a guessed short list.
-
-The preferred theorem-level attack is a recursive
-\(\mathrm{SL}_2\)-tilting/socle description of
-\(\operatorname{Sym}^{(p^e-3)/2}L(2)\) that can answer both embedding and
-retractability for those candidate digits.  Ordinary block support cannot
-do this: all relevant non-Steinberg simples lie in the same full-defect
-block.  Do not launch another field-sized symmetric-square calculation by
-default; q=121 is again the first open gate.  The theorem-level target has
-sharpened:
-express three occurrence-level scalars in Frobenius-digit form for every
-candidate family:
-
-1. the finite-torus weight gate deciding whether \(S\) can embed;
-2. the composition scalar
-   \(\operatorname{Hom}(S,F)\otimes\operatorname{Hom}(F,S)\to k\),
-   separating retracts from radical occurrences;
-3. on the radical branch, a genuinely equivariant image of the quadratic
-   pullback cocycle or a direct Borel obstruction.
-
-The former q=121 \(1\to2\) apolar rank jump is an artifact of the retired
-non-equivariant Hasse pairing.  Test the nonzero ordinary contractions of
-orders \(1,\ldots,10\), then use the injective Borel restriction if they are
-blind.  Modular Hermite reciprocity is the preferred recursive route to the
-uniform Frobenius-digit theorem.
-
-The exact replay baselines are:
-
-```bash
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-26-c665-q19-module-test.sage --pullback-check
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-26-c665-q25-pullback.sage --check
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-26-c665-q49-affine-socle.sage --check
-nix shell nixpkgs#sage -c sage \
-  notes/2026-07-28-c665-q121-affine-socle.sage --check
-python3 notes/2026-07-29-c665-q121-contraction-audit.py --check
-sha256sum -c notes/2026-07-26-c665-exceptional-head-pullback.sha256
-sha256sum -c notes/2026-07-26-c665-q25-pullback.sha256
-sha256sum -c notes/2026-07-26-c665-q49-affine-socle.sha256
-```
-
-Do not use composition factors to identify the relevant copy, extrapolate
-q=25/49 affine-socle absence, invoke the retracted-socle lemma without an
-actual retraction, or build a huge symmetric square before the affine Hom
-gate.  The q=27 Fourier decomposition and C682's characteristic-zero
-\(E_8\) Koszul row are useful warnings about occurrence-level operator
-structure, but neither is evidence for C1.  A valid C1 closeout must prove
-the decision tree uniformly for every candidate family, with any finite
-calculation retained only as a discovery/certification gate.
-
-**Local Paper II persona — the “tears in their eyes” test.**  The result
-this composite expert would cherish is not a longer exceptional-case table,
-but a proof in which the weak quadratic memory makes the hidden Platonic
-geometry inevitable: point/evaluation duality is explicit, a
-Frobenius-digit \(K\)-fixed head is forced, outer parity makes the quadratic
-pullback nonsplit, and the characteristic-three torus obstruction is
-explained by one closed geometric identity.  Balance and the \(B_3/H_3\)
-alternatives should then emerge as conclusions rather than hypotheses.
-The proof should make modular nonsemisimplicity do visible work, reduce
-computation to discovery and certification, and leave one diagram or formula
-that explains both the generic mechanism and every genuine small-field
-exception.  That combination—hidden geometry reconstructed from coarse
-data, with no miraculous row reduction left unexplained—is the local
-emotional and mathematical north star.
+Do not infer occurrences from composition factors, extrapolate q=25/49,
+reuse the retired Hasse pairing, or build a field-sized symmetric square
+before the affine Hom gate.  The full candidate table, exact replay commands,
+and historical finite-field evidence remain in the report, correction note,
+and companion handoff archive.
 
 The active order is strict:
 

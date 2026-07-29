@@ -1123,3 +1123,72 @@ these imports implication by implication, removes the stale Sadeh/ILL TODO, and 
 claim conditional on the unread BSW 1991 adjacent-context paper. C153 and C161 left the live queue;
 C168 subsequently closed the clean-source executable, guarded Lean, and PDF/citation gates. C182,
 the immutable archive/DOI release, is the remaining reproducibility step.
+
+## 2026-07-29 — C665 handoff chronology compacted
+
+The live handoff formerly carried the full C665 Gold-to-Platinum development
+trail.  Its durable task record remains
+`notes/2026-07-26-c665-balanced-matching-completeness.md`; the q=121
+correction and replacement attacks remain
+`notes/2026-07-29-c665-uniform-c1-correction.md`.  This archive entry
+preserves the routing-relevant history removed from the live map.
+
+The limited Gold theorem derived the balanced \(q+q\) split from a
+one-dimensional strength-two trade whose fibres are one-factorizations.
+Orbit--stabilizer and Dickson reduced the recovering full-projective
+matching orbits to the \(B_3\) and \(H_3\) cases; the q=5 orbit has full
+Schur square.  The field-independent hyperplane-square lemma proved
+\(L^{\circ2}=\ker\epsilon\) with full-support \(\epsilon\) implies
+\(L^{\circ3}=k^\Omega\).  These are integrated Paper II v2 upgrades and do
+not hold v1.
+
+The Platinum exceptional-head route fixed the point-vector extension
+\[
+0\to F\to E\to k\to0,\qquad
+F=\operatorname{Sym}^{(q-3)/2}L(2),
+\]
+and the quadratic boundary
+\(\partial(xy)=\epsilon(x)y+\epsilon(y)x\).  Prime-field C1 closed by
+bottom-alcove Fischer decomposition and Borel restriction; the exact
+q=19 \(A_5\) contraction became a cross-check.  The q=5 dihedral endpoint
+closed by complete matching census.  The q=25 and q=49 exceptional heads
+have zero affine Hom by independent MeatAxe and block-linear calculations,
+so neither field needs a quadratic pullback.  Full-defect block membership
+was found too coarse to distinguish the relevant non-Steinberg heads.
+
+The characteristic-three torus route passed through several falsified
+uniform rank guesses.  At q=27 the split orbits have sheet ranks \(14,14\),
+joint rank \(19\), and nine invariant trades; a q=243 projection ruled out
+the proposed bounded-defect extrapolation.  The replacement theorem uses
+the discriminant weight
+\(w(\{x,y\})=(x-y)^{-4}\), extended by zero at infinity, to give equal
+quadratic moments on both sheets.  Its weighted sheet difference is an
+independent trade whose \(H\)-span is
+\(L(8)=L(2)\otimes L(2)^{(1)}\).  The q=27 \(U\)-fixed kernel decomposes
+into seven finite-axis Fourier lines and two trivial-character cross
+relations.  Nonsplit descent follows over \(\mathbb F_{q^2}\), while the
+antipodal type is outer-fixed.  Thus T3 closed without a uniform defect
+bound.  The q=27 comparison between a nontrading axis-digit copy and the
+trading inverse-discriminant copy is the standing warning that a
+composition-factor label does not identify the actual operator occurrence.
+
+Extension-field C1 then became the sole Platinum frontier.  At q=121 the
+\(A_4\) head \(L(6)\) has one-dimensional Hom in both directions with
+composite zero, so it is the first embedded nonretract; finite-torus
+weight-block systems eliminate the \(L(8)\) and \(L(12)\) probes.  A former
+certificate claimed a q=121 pullback obstruction from the scalar Hasse
+pairing
+\(\beta(X^iY^jZ^k,X^kY^jZ^i)=(-1/2)^j\).  Translation testing showed that
+pairing is not equivariant on ordinary symmetric powers, and the genuine
+order-59 ordinary contraction vanishes in characteristic eleven.  The Hom
+and nonretraction conclusions survive, but q=121 C1 reopened.
+
+The retired working sequence was: test q=19, q=25, q=49, and q=121 exact
+modules; audit the q=121 contraction; then compare their certificate hashes.
+The replay commands and hashes live in the two task notes above rather than
+the live handoff.  The surviving decision tree is affine Hom, actual
+retraction, retracted-socle trace when applicable, and only then an
+outer-parity pullback or Borel obstruction.  The preferred uniform route is
+modular Hermite reciprocity or a recursive \(\mathrm{SL}_2\)
+tilting/socle theorem expressing the embedding, composition, and radical
+pullback scalars in Frobenius digits.
