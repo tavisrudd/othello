@@ -1,0 +1,74 @@
+{
+  "intrinsic_symbol": {
+    "discriminant": "4000000 F^3(h^3-1728F^5)=-4000000 F^3 t^2",
+    "interpretation": "one tenth of the principal symbol of the radial third transvectant after its odd output is divided by t",
+    "p": "2 F xi^3 + 5 h xi^2 eta - 8000 F^3 eta^3",
+    "weighted_degree": -24
+  },
+  "invariants": {
+    "F_degree": 12,
+    "even_parameter_ring": "R=Q[F,h]",
+    "h_degree": 20,
+    "relation": "t^2=1728 F^5-h^3",
+    "t_degree": 30
+  },
+  "module_symbol": {
+    "D": "(.,F)_3/132",
+    "identity_on_every_covariant_block": "sigma_3(D)=10 p m_t",
+    "m_t": "multiplication by t on the rank-six 3-covariant module",
+    "multiplication_rows": {
+      "g10": {
+        "g20:F^0:h^1": "1/5",
+        "g28:F^1:h^0": "6/5"
+      },
+      "g12": {
+        "g10:F^1:h^1": "-60",
+        "g18:F^2:h^0": "72",
+        "g2:F^0:h^2": "1"
+      },
+      "g18": {
+        "g12:F^3:h^0": "24",
+        "g28:F^0:h^1": "1"
+      },
+      "g2": {
+        "g12:F^0:h^1": "-1",
+        "g20:F^1:h^0": "12"
+      },
+      "g20": {
+        "g10:F^0:h^2": "-5",
+        "g18:F^1:h^1": "6",
+        "g2:F^4:h^0": "144"
+      },
+      "g28": {
+        "g10:F^4:h^0": "1440",
+        "g18:F^0:h^2": "-1",
+        "g2:F^3:h^1": "-24"
+      }
+    }
+  },
+  "proof_boundary": [
+    "Weighted order at most three leaves exactly the four displayed radial Weyl monomials.",
+    "Direct exact transvection fixes their coefficients and verifies 49 monomial inputs.",
+    "Exact free-basis decomposition identifies A/10 and B/10 with multiplication by t on all six generators.",
+    "The universal all-block statement is a formal principal-symbol consequence of the third-transvectant Leibniz rule.",
+    "The result identifies the cubic intrinsically but makes no novelty or priority claim."
+  ],
+  "radial_operator": {
+    "definition": "R(a)=((a,F)_3)/(132 t)",
+    "exact_grid": {
+      "a": "0..6",
+      "b": "0..6",
+      "checks": 49
+    },
+    "normal_ordered_formula": "20 F dF^3 + 50 h dF^2 dh - 80000 F^3 dh^3 + 55 dF^2",
+    "order": 3,
+    "principal_symbol": "10 p = 20 F xi^3 + 50 h xi^2 eta - 80000 F^3 eta^3",
+    "weighted_degree": -24
+  },
+  "schema": "c682-intrinsic-e8-symbol-v1",
+  "universal_consequence": {
+    "matrix_factorizations": "The finite factors m_t are the McKay-node E8 matrix factorizations of t^2=1728F^5-h^3.",
+    "reason": "The top Leibniz term differentiates only the invariant coefficient; its odd radial output is 10 t p, leaving multiplication by t on the covariant generator.",
+    "statement": "On every binary-icosahedral covariant module free over Q[F,h], sigma_3(D)=10 p times multiplication by t."
+  }
+}

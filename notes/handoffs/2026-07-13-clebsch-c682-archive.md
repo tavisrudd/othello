@@ -843,3 +843,21 @@ coordinate select a rational incidence sheet.  Globally over
 The exact proof, compact
 certificate, independent finite-algebra replay, and mystery ledger are in
 `notes/2026-07-29-c682-characteristic-23-divided-separator.md`.
+
+The intrinsic Klein \(E_8\) symbol gate is now closed.  On
+\(R=\mathbf Q[F,h]\), the odd output of the primitive third transvectant
+defines the scalar radial operator
+\[
+ \frac{((\,\cdot\,,F)_3/132)}t
+ =20F\partial_F^3+50h\partial_F^2\partial_h
+  -80000F^3\partial_h^3+55\partial_F^2.
+\]
+Its principal symbol is \(10p\).  On the primitive three-node basis,
+\(A/10,B/10\) are exactly multiplication by \(t\), not merely
+gauge-equivalent factorization matrices.  The top Leibniz term therefore
+gives the uniform theorem
+\(\sigma_3(\mathcal D|_{M_\rho})=10p\,m_t\) on every McKay covariant block:
+one radial cubic selects all nine classical \(E_8\) factorizations.  Its
+binary-cubic discriminant is \(-4\,000\,000F^3t^2\).  The exact proof,
+certificate, two-prime independent replay, and mystery ledger are in
+`notes/2026-07-29-c682-intrinsic-e8-symbol.md`.

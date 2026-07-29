@@ -108,6 +108,10 @@ separator is the Frobenius-odd normalization generator over
 \(\mathbf F_{529}\), not a new rational incidence sheet.  Globally the
 scalar image is the conductor-\(253\) order over \(\mathbf Z[1/30]\), whose
 only normalization defects are the split prime \(11\) and inert prime \(23\).
+Independently, the Klein \(E_8\) cubic is now intrinsic: it is the radial
+third-transvectant symbol, and on every McKay covariant block the full
+principal symbol is \(10p\) times multiplication by the odd invariant
+\(t\), uniformly selecting the classical \(E_8\) matrix factorizations.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
