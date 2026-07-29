@@ -1320,7 +1320,9 @@ changes from zero to one on the pair
 The genuine order-59 ordinary contraction contains the missing factorial
 coefficients and is zero in characteristic eleven.  Therefore the former
 \(1\to2\) coboundary rank jump is not the image of the pullback class and
-does not close C1.
+does not close C1.  In fact every ordinary contraction of order at least
+eleven vanishes, so the full retired high-contraction scan is unavailable;
+the only nonzero orders still to test are \(1,\ldots,10\).
 
 The exact surviving and corrective checks are:
 

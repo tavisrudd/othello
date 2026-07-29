@@ -62,6 +62,13 @@ r!\,a!\,b!\,c!.
 \]
 At \(r=59\) this operator is zero in characteristic eleven.  Omitting those
 factorials produced the non-equivariant map used by the retired detector.
+More generally, every ordinary contraction of order \(r\ge p\) vanishes:
+the commuting invariant differential operator satisfies the
+characteristic-\(p\) freshman's-power identity, and every resulting
+\(p\)-th ordinary partial derivative is zero.  Thus all of the retired
+high-contraction orders \(54,\ldots,59\) are unavailable.  The complete
+nonzero ordinary-contraction range is \(0\le r\le10\), with \(r=0\) the
+already-blind multiplication channel.
 
 ## Reproducibility
 
