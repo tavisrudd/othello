@@ -3,6 +3,12 @@
 **Lane:** `cap`. **Task:** C80. **Date:** 2026-07-28.
 Canonical status: `2026-07-25-c80-status-ledger.md`.
 
+**Correction (2026-07-28):** the finite three-orbit exhaustion remains
+valid, but its two-mechanism interpretation does not. The original
+Type-I representative deletes both its unique certificate reply and
+one boundary endpoint. See
+`2026-07-28-c80-two-mechanism-falsifier.md`.
+
 ## Verdict
 
 There is no fourth marked replacement orbit in the remaining canonical
@@ -36,31 +42,25 @@ label collides with a retained label.
 
 Together with the cumulative predecessor sweeps, this closes the finite
 q23 orbit census for necessary replacement witnesses: exactly three
-marked projective orbits occur, governed by two local boundary-failure
-mechanisms. It does not prove the same classification for another
-field or a uniform odd-q charged-survivor theorem.
+marked projective orbits occur. The correction above withdraws the
+claimed two-mechanism interpretation. The census does not prove a
+uniform odd-q charged-survivor theorem.
 
 ## Structural consequence
 
-The q23 data no longer support searching for another local replacement
-type. The finite mechanism dictionary is complete:
+The q23 data no longer support searching for another marked orbit, but
+they do not supply the claimed mechanism dictionary. Type I deletes
+both its certificate reply and one endpoint; Types II and III delete
+the reply while preserving both endpoints. The finite causal labels
+remain one-to-one.
 
-1. **endpoint degradation:** the opponent-created replacement inherits
-   the opponent's old label after one endpoint of its former
-   `B_small` certificate is killed;
-2. **certificate-reply deletion:** the reply-created replacement
-   inherits the reply's old label after the certificate reply is killed
-   on a secant through a selected pivot. The pivot may be the current
-   opponent or an earlier outer-exchange point.
-
-The next theorem-shaped target should therefore forget the three orbit
-representatives and prove this causal dichotomy directly from the
-unique former `B_small` certificate. It must show that the causal
-half-move carries an old defect label, creates at most one replacement,
-and does not reuse a retained label. Combined with ordinary strict
-deletion, that would make ancestral support a genuine well-founded
-charge. Opponent-complete entry into the charged family is still
-required before C82 can count reply fibres.
+The next theorem-shaped target must prove a structural nonpacking
+condition under which one half-move cannot delete several relevant
+certificate replies and cannot reuse a retained label, or find the
+first one-to-many replacement. Combined with ordinary strict deletion,
+that would make ancestral support a genuine well-founded charge.
+Opponent-complete entry into the charged family is still required
+before C82 can count reply fibres.
 
 ## Exact searched domain
 
@@ -137,23 +137,22 @@ No incidental discovery-track item arose.
 - **[SETTLED] Does delayed branching, collision, or an unlabelled
   creator occur at q23?** No. Every remaining witness belongs to a
   previously certified injective orbit.
-- **[SETTLED] Is a third local boundary-failure mechanism needed at
-  q23?** No. The complete three-orbit corpus uses endpoint degradation
-  or certificate-reply deletion.
+- **[SETTLED negative] Do the two reported pure boundary-failure
+  mechanisms classify q23?** No. Type I simultaneously deletes its
+  certificate reply and one endpoint.
 - **[OPEN — C80] Why must certificate destruction create at most one
   replacement and inherit a consumed old label over arbitrary odd
-  q?** The finite incidence flags suggest the causal dichotomy, but no
-  uniform proof exists.
+  q?** The finite charge remains injective, but certificate uniqueness
+  alone does not prevent several reply-secant deletions.
 - **[OPEN — C80/C82 gate] Does the charged survivor have
   opponent-complete entry and update fibres uniformly?** The q23
   census certifies the local replacements, not global coverage.
 
 ## Vibe
 
-Excellent finite closure: the anticipated fourth-orbit falsifier never
-appears, and the entire remaining q23 corpus compresses to the two
-known causal mechanisms. The route is now cleaner but also at its real
-proof boundary—more q23 enumeration has essentially no value unless it
-is used to prove the incidence-level charge lemma.
+Excellent finite closure, but the subsequent semantic audit correctly
+blocks its overinterpretation. The route is now at the real proof
+boundary: causal-label nonpacking, not orbit enumeration or the false
+two-case dictionary.
 
-go C80 cap prove the two-mechanism injective causal-charge update uniformly
+go C80 cap prove causal-label injectivity under a nonpacked secant condition or extract the first one-to-many replacement

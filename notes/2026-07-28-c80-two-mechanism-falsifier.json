@@ -1,0 +1,128 @@
+{
+  "causal_compatibility": {
+    "certificate_reply": {
+      "compatible_with_causal_move": false,
+      "point": [
+        5,
+        13
+      ],
+      "selected_secant_blockers": [
+        [
+          8,
+          4
+        ]
+      ]
+    },
+    "killed_endpoint": {
+      "compatible_with_causal_move": false,
+      "point": [
+        22,
+        9
+      ],
+      "selected_secant_blockers": [
+        [
+          4,
+          6
+        ]
+      ]
+    },
+    "retained_endpoint": {
+      "compatible_with_causal_move": true,
+      "point": [
+        17,
+        19
+      ],
+      "selected_secant_blockers": []
+    }
+  },
+  "domain": {
+    "causal_opponent": [
+      12,
+      15
+    ],
+    "marked_type": "reported Type I / endpoint degradation",
+    "new_defect": [
+      21,
+      17
+    ],
+    "q": 23,
+    "state": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        12
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        7,
+        5
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        13,
+        7
+      ]
+    ]
+  },
+  "former_unique_B_small_certificate": {
+    "kind": "two_nonconflicting_moves",
+    "remaining_legal": [
+      [
+        17,
+        19
+      ],
+      [
+        22,
+        9
+      ]
+    ],
+    "reply": [
+      5,
+      13
+    ]
+  },
+  "independent_replay": {
+    "causal_move_is_old_defect": true,
+    "certificate_reply_legal_after_causal_move": false,
+    "certificate_reply_legal_before_causal_move": true,
+    "killed_endpoint_legal_after_causal_move": false,
+    "new_defects_created_by_causal_move": [
+      [
+        21,
+        17
+      ]
+    ],
+    "primary_and_reference_legal_loci_agree": true,
+    "retained_endpoint_legal_after_causal_move": true
+  },
+  "input_sha256": {
+    "notes/2026-07-26-c80-q23-replacement-lineage.json": "64fbc15786300e1d6e378863a55111134ef2678d30b1bfd261a03e8f22881fce",
+    "rust/scripts/c80_q23_replacement_lineage.py": "dbf2d7aa497cea113f0c02391170fd1832fef371e2f4c87466955acbc1081e60"
+  },
+  "schema": "c80-q23-two-mechanism-falsifier-v1",
+  "source": "rust/scripts/c80_q23_two_mechanism_falsifier.py",
+  "verdict": {
+    "injective_ancestral_charge_on_this_edge": true,
+    "observed_failure_pattern": "simultaneous certificate-reply and boundary-endpoint deletion",
+    "reported_certificate_reply_only_mechanism": false,
+    "reported_endpoint_only_mechanism": false,
+    "uniform_two-mechanism_update": false
+  }
+}

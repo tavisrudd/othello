@@ -4,6 +4,12 @@
 Canonical status:
 [`2026-07-25-c80-status-ledger.md`](2026-07-25-c80-status-ledger.md).
 
+**Correction (2026-07-28):** the advertised two-mechanism taxonomy is
+superseded. This orbit remains a valid certificate-reply-deletion
+instance with both endpoints surviving; the original Type I deletes
+both its reply and one endpoint. See
+[`2026-07-28-c80-two-mechanism-falsifier.md`](2026-07-28-c80-two-mechanism-falsifier.md).
+
 ## Verdict
 
 The next q23 replacement edge outside the first two marked

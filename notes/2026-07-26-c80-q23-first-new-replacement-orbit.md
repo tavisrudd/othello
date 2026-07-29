@@ -4,6 +4,13 @@
 Canonical status:
 [`2026-07-25-c80-status-ledger.md`](2026-07-25-c80-status-ledger.md).
 
+**Correction (2026-07-28):** the first marked orbit used for contrast
+below also deletes its certificate reply; it additionally deletes one
+boundary endpoint. Thus this orbit is a pure reply-deletion instance,
+while the first orbit is simultaneous reply and endpoint deletion.
+The charge and terminal-shell certificates here remain valid. See
+[`2026-07-28-c80-two-mechanism-falsifier.md`](2026-07-28-c80-two-mechanism-falsifier.md).
+
 ## Verdict
 
 The first q23 replacement edge outside the known marked

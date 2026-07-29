@@ -4,6 +4,14 @@
 Canonical status:
 [`2026-07-25-c80-status-ledger.md`](2026-07-25-c80-status-ledger.md).
 
+**Correction (2026-07-28):** the causal opponent also kills the
+purportedly surviving old boundary reply on a second selected secant.
+The mask used below to describe its stranded legal locus is therefore
+not a valid cap. The one-to-one ancestral support drop remains
+finite-certified, but the pure endpoint-degradation interpretation and
+the claimed surviving certificate do not. See
+[`2026-07-28-c80-two-mechanism-falsifier.md`](2026-07-28-c80-two-mechanism-falsifier.md).
+
 ## Verdict
 
 The first exact q23 replacement edge has a projectively natural lineage and
