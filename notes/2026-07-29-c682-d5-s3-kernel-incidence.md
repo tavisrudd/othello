@@ -105,10 +105,12 @@ separation is deck-odd.  The Bockstein operator recovers precisely the kind
 of first-order datum that ordinary reduction loses.
 
 The existing mod-\(11\) kernel graph is an \(A_5\)-stable thirty-edge
-relation, hence one of the same two abstract diagonal orbits.  The present
-bundle does not identify its stored point labels with the
-\(\lambda_+\) rather than the \(\lambda_-\) fibre; that final sign is a
-marking convention, exchanged by the golden involution.
+relation, hence one of the same two abstract diagonal orbits. The common
+marking is fixed in the follow-up
+`notes/2026-07-29-c682-common-marking-sign.md`: for its frozen
+\((5,2,3)\)-generator convention, the stored matrix is the
+\(\lambda_+\) fibre, with \(\sqrt5=4\) modulo \(11\). The golden involution
+exchanges it with the complementary \(\lambda_-\) fibre.
 
 ## Reproducibility
 
@@ -162,10 +164,10 @@ novelty or priority claim is made, and Paper III remains closed.
   categorical shape.  The finite rank drop is first-order information at a
   collision of two characteristic-zero scalar levels.  Treating it as an
   ordinary flat rank incidence would erase the arithmetic mechanism.
-- **Still open:** a common stored marking has not fixed whether the earlier
-  mod-\(11\) thirty-edge matrix is the displayed \(\lambda_+\) or
-  \(\lambda_-\) matrix.  Golden conjugation exchanges them, so this is a
-  sign/marking gate rather than a missing abstract incidence theorem.
+- **Closed in the common-marking follow-up:** the stored mod-\(11\)
+  thirty-edge matrix is the displayed \(\lambda_+\) matrix for the frozen
+  generator marking. The outer order-five-class swap gives
+  \(\lambda_-\), exactly as golden conjugation requires.
 - **Still open:** whether \(\chi\), or its divided degeneration, has a
   direct vector-bundle or intersection-theoretic construction on the whole
   Mukai--Umemura compactification.  The present theorem lives on the open

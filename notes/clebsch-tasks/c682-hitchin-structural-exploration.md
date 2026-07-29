@@ -24,16 +24,17 @@ explicitly separated.
 - The \(D_5\)--\(S_3\) cross-Gram scalar has two golden-conjugate values
   whose fibres are complementary \((6_5,10_3)\) designs; their first-order
   collision at \(11\) explains the Bockstein shadow.
+- In the frozen common \(A_5\)-marking, the stored mod-\(11\) matrix is the
+  \(\lambda_+\) fibre with \(\sqrt5=4\); the outer order-five-class swap
+  gives the complementary \(\lambda_-\) fibre.
 - The independent Klein \(E_8\) branch realizes the classical three-node
   matrix factorization and its first degree-\(22\) corner failure.
 
 ## Active order
 
-1. Fix the common-marking sign between the stored mod-\(11\) incidence
-   matrix and the two golden fibres.
-2. Extend the cross-Gram separator over the Mukai--Umemura boundary and test
+1. Extend the cross-Gram separator over the Mukai--Umemura boundary and test
    for a global Schläfli row swap.
-3. Determine the minimal integral base and actual bad primes.
+2. Determine the minimal integral base and actual bad primes.
 
 ## Parked branches
 
@@ -48,4 +49,4 @@ not automatically close it.
 Working archive and thematic report index:
 `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
 Latest proof bundle:
-`notes/2026-07-29-c682-d5-s3-kernel-incidence.md`.
+`notes/2026-07-29-c682-common-marking-sign.md`.

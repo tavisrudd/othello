@@ -1,0 +1,309 @@
+{
+  "frozen_marking": {
+    "characteristic_zero": {
+      "a": "diag(zeta_5^2,1)",
+      "b": "[[zeta_5^2-zeta_5^3, zeta_5-zeta_5^4], [zeta_5-zeta_5^4, -(zeta_5^2-zeta_5^3)]]",
+      "orders": {
+        "a": 5,
+        "a_times_b": 3,
+        "b": 2
+      },
+      "sqrt5": "2*(zeta_30^2+zeta_30^3-zeta_30^7)-1"
+    },
+    "convention_sensitivity": {
+      "a_11": {
+        "compatible_involution_count": 5,
+        "stored_matrix_fibre_for_every_choice": "lambda_plus"
+      },
+      "a_11_squared": {
+        "compatible_involution_count": 5,
+        "stored_matrix_fibre_for_every_choice": "lambda_minus"
+      }
+    },
+    "finite": {
+      "a_11_permutation": [
+        0,
+        1,
+        3,
+        9,
+        11,
+        7,
+        2,
+        4,
+        5,
+        10,
+        6,
+        8
+      ],
+      "a_11_pgl_matrix": [
+        1,
+        8,
+        0,
+        9
+      ],
+      "b_11_permutation": [
+        4,
+        9,
+        5,
+        10,
+        0,
+        2,
+        8,
+        11,
+        6,
+        1,
+        3,
+        7
+      ],
+      "b_11_pgl_matrix": [
+        1,
+        3,
+        4,
+        10
+      ],
+      "orders": {
+        "a_11": 5,
+        "a_11_times_b_11": 3,
+        "b_11": 2
+      },
+      "selection": "a_11 is the lexicographically least order-5 element of the stored parent permutation group; b_11 is the least involution for which a_11*b_11 has order 3"
+    },
+    "sqrt5_mod_11": 4,
+    "transport": "the unique right-word homomorphism a->a_11, b->b_11",
+    "transported_group_order": 60
+  },
+  "inputs": {
+    "notes/2026-07-28-c682-maximal-subgroup-mates.json": {
+      "bytes": 17043,
+      "sha256": "c62915c4fb9f1c947618779a1841e166ccd42972a12ae0936d672f0af7afaccc"
+    },
+    "notes/2026-07-28-c682-maximal-subgroup-mates.py": {
+      "bytes": 13003,
+      "sha256": "7d8a5cf6cb6a9c1e612bc8b5231c09a17a976dfd63e153f2d52ddebe308813d5"
+    },
+    "notes/2026-07-28-c682-rank-four-resolvent.json": {
+      "bytes": 111899,
+      "sha256": "92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c"
+    },
+    "notes/2026-07-28-c682-transvectant-deformation-map.json": {
+      "bytes": 21501,
+      "sha256": "45d799a413c6632b32dc61975c82a946f913a47386bb3f673a24752743d8acca"
+    },
+    "notes/2026-07-28-c682-transvectant-deformation-map.py": {
+      "bytes": 30900,
+      "sha256": "3822d2d269d3fa708d8b09fbc657a3743575c6b2304c6e25584b4710cd09d148"
+    },
+    "notes/2026-07-29-c682-d5-s3-kernel-incidence.json": {
+      "bytes": 102857,
+      "sha256": "332d94d8e4c58fb719b73e563d9738a4cf9c7dd7c6bb1e37d46abd79e92135af"
+    },
+    "notes/2026-07-29-c682-d5-s3-kernel-incidence.py": {
+      "bytes": 24604,
+      "sha256": "5ccd7f18339b6df317fbf7409e21f793c3eca6dfb2aba16d85ed06003f282370"
+    }
+  },
+  "schema": "c682-common-marking-sign-v1",
+  "sign_conclusion": {
+    "complement_divided_cross_gram_digit_mod_11": 5,
+    "digit_note": "6=-5 mod 11 and 5=+5 mod 11",
+    "stored_matrix_centered_theta": "+sqrt(5)",
+    "stored_matrix_divided_cross_gram_digit_mod_11": 6,
+    "stored_matrix_fibre": "lambda_plus",
+    "stored_matrix_sqrt5_mod_11": 4
+  },
+  "stabilizer_matching": {
+    "D5_golden_index_to_stored_point_index": [
+      20,
+      1,
+      6,
+      16,
+      4,
+      8
+    ],
+    "S3_golden_index_to_stored_point_index": [
+      13,
+      19,
+      3,
+      15,
+      11,
+      17,
+      5,
+      0,
+      7,
+      9
+    ],
+    "lambda_minus_equals_stored": false,
+    "lambda_plus_equals_stored": true,
+    "lambda_plus_in_stored_order": [
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    ],
+    "stored_D5_point_order": [
+      1,
+      4,
+      6,
+      8,
+      16,
+      20
+    ],
+    "stored_S3_point_order": [
+      0,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19
+    ],
+    "stored_kernel_incidence_matrix": [
+      [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    ]
+  },
+  "toolchain": {
+    "python": "3.x standard library"
+  }
+}

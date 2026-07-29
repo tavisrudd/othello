@@ -20,19 +20,17 @@ and may be reorganized as C682 evolves.
 | Corrected arithmetic bridge | The corrected dodecic class gives an equivariant primitive operator and compatible \(\mathbf Z_{11}\)-tower. The extended normal space maps two-sidedly to the golden incidence parents. | `notes/2026-07-28-c682-invariant-operator-divided-power.md`; `notes/2026-07-28-c682-mod11-transvectant-matching-bridge.md`; `notes/2026-07-28-c682-corrected-bridge-mod-1331.md`; `notes/2026-07-28-c682-transvectant-deformation-map.md` |
 | Degree-22 section | The rank-four scheme is reduced of length \(22\), with \(1+5+6+10\) orbits; its target is a transverse anticanonical linear section. The invariant pencil lifts formally and Zariski-locally. | `notes/2026-07-28-c682-rank-four-resolvent.md`; `notes/2026-07-28-c682-u22-linear-section.md`; `notes/2026-07-28-c682-u22-bockstein-pencil.md`; `notes/2026-07-28-c682-zariski-bockstein-orbits.md`; `notes/2026-07-28-c682-kernel-incidence-morphism.md` |
 | Classical mate geometry | The \(A_4,D_5,S_3\) maximal subgroups have unique nontrivial icosahedral mates. The \(D_5\) branch gives the exceptional Schläfli six and its functorial polar companion. | `notes/2026-07-28-c682-incidence-moduli.md`; `notes/2026-07-28-c682-maximal-subgroup-mates.md`; `notes/2026-07-28-c682-operator-schlafli.md` |
-| Golden \(D_5\)--\(S_3\) incidence | Direct characteristic-zero kernel intersection is empty. The normalized apolar cross-Gram scalar has two \(\mathbf Q(\sqrt5)\)-conjugate values whose fibres are complementary \((6_5,10_3)\) designs; their first-order collision at \(11\) explains the Bockstein shadow. | `notes/2026-07-29-c682-d5-s3-kernel-incidence.md` |
+| Golden \(D_5\)--\(S_3\) incidence | Direct characteristic-zero kernel intersection is empty. The normalized apolar cross-Gram scalar has two \(\mathbf Q(\sqrt5)\)-conjugate values whose fibres are complementary \((6_5,10_3)\) designs; their first-order collision at \(11\) explains the Bockstein shadow. The frozen common marking identifies the stored matrix with \(\lambda_+\), \(\sqrt5=4\). | `notes/2026-07-29-c682-d5-s3-kernel-incidence.md`; `notes/2026-07-29-c682-common-marking-sign.md` |
 
 ## Active and parked frontiers
 
 ### Active order
 
-1. **Common-marking sign:** identify the stored mod-\(11\) thirty-edge matrix
-   with the plus or minus golden cross-Gram fibre in one frozen marking.
-2. **Global separator:** extend the cross-Gram scalar/kernel correspondence
+1. **Global separator:** extend the cross-Gram scalar/kernel correspondence
    over boundary degenerations of the Mukai--Umemura compactification.
-3. **Row swap:** decide whether the Schläfli polar companion extends to a
+2. **Row swap:** decide whether the Schläfli polar companion extends to a
    distinguished global birational or categorical involution.
-4. **Integral model:** determine the minimal base and exact bad primes of the
+3. **Integral model:** determine the minimal base and exact bad primes of the
    combined operator/incidence package.
 
 ### Parked independent branches
@@ -738,11 +736,18 @@ Bockstein operator rather than ordinary reduction.  The exact
 characteristic-zero certificate, two-prime independent replay, proof, and
 mystery ledger are in
 `notes/2026-07-29-c682-d5-s3-kernel-incidence.md`.
-The remaining local gate is only the common-marking sign that identifies the
-stored mod-\(11\) matrix with the displayed plus rather than minus fibre.
-The broader mysteries remain a vector-bundle extension of the cross-Gram
-separator over the compactification, a global row-swap involution, and the
-minimal integral base.
+The common-marking sign is now fixed. Map
+\(a=\operatorname{diag}(\zeta_5^2,1)\) and its displayed compatible
+involution to the frozen stored \((5,2,3)\)-generator pair. Transporting all
+six \(D_5\) and ten \(S_3\) stabilizers then identifies the stored
+mod-\(11\) matrix exactly with the \(\lambda_+\) fibre, with
+\(\sqrt5=4\). All five compatible involutions give the same sign, while
+the outer order-five-class swap gives the complementary \(\lambda_-\)
+fibre. The exact certificate, compact replay, convention audit, and mystery
+ledger are in `notes/2026-07-29-c682-common-marking-sign.md`. The remaining
+mysteries are a vector-bundle extension of the cross-Gram separator over the
+compactification, a global row-swap involution, and the minimal integral
+base.
 
 C682's remaining Platinum track is:
 

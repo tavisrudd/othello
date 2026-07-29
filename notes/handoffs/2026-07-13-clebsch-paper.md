@@ -29,7 +29,7 @@
 | [C611 — exterior-set mechanism](../clebsch-tasks/c611-exterior-set-v2.md) | queued after C182; v2 only | conceptual terminal-field theorem or sharp negative disposition |
 | [C665 — uniform extension-field C1](../clebsch-tasks/c665-uniform-extension-c1.md) | active Paper II v2 research | test genuine contractions on the q=121 embedded nonretract, then Borel restriction if blind |
 | [C680 — Paper III release](../clebsch-tasks/c680-paper-iii-release.md) | pre-release `GO` | add immutable locator and author metadata, rebuild, replay |
-| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration | fix the common-marking sign, extend the boundary separator, determine the integral base |
+| [C682 — Hitchin--Clebsch exploration](../clebsch-tasks/c682-hitchin-structural-exploration.md) | active open exploration | extend the boundary separator and determine the integral base |
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation. C552 remains fallback-only and must not displace
@@ -88,6 +88,8 @@ C682 is independent exploration. Its current crown includes the
 third-transvectant inverse descriptions, the corrected mod-11 operator and
 1+5+6+10 kernel section, the characteristic-zero maximal-subgroup mates and
 Schlaefli double-six, and the golden D5--S3 complementary incidence fibres.
+The frozen common marking identifies the stored mod-11 matrix with the
+lambda-plus fibre.
 Its detailed, reorganizable lookup surface is the
 [C682 working archive](2026-07-13-clebsch-c682-archive.md); none of it reopens
 Paper III automatically.
