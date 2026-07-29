@@ -1221,10 +1221,29 @@ not a second mate component and not merely an externally imposed outer
 automorphism.  The exact characteristic-zero certificate and independent
 two-prime replay are in
 `notes/2026-07-28-c682-operator-schlafli.md`.
-The remaining operator-side frontier is the characteristic-zero
-\(D_5\)--\(S_3\) kernel-rank realization of the
-\((6_5,10_3)\) incidence; the broader mysteries are a global row-swap
-involution and the minimal integral base.
+C682 now closes the characteristic-zero \(D_5\)--\(S_3\) incidence
+frontier with a necessary correction.  The literal finite kernel-rank
+equation does not lift: all sixty ordinary characteristic-zero kernel pairs
+are transverse.  Instead their normalized apolar cross-Gram invariant takes
+exactly
+\[
+ \lambda_\pm=(54781\pm24288\sqrt5)/820125.
+\]
+Each golden level is one thirty-edge \((6_5,10_3)\) design, and Galois
+conjugation exchanges it with the complementary design.  Equivalently the
+centered invariant is exactly \(\pm\sqrt5\), so the incidence choice is the
+golden torsor itself.  Since \(24288=11\cdot2208\), the levels coalesce at
+\(5\) modulo \(11\) and their divided centered first digits are
+\(\pm5\); this explains why the finite shadow is recovered by the
+Bockstein operator rather than ordinary reduction.  The exact
+characteristic-zero certificate, two-prime independent replay, proof, and
+mystery ledger are in
+`notes/2026-07-29-c682-d5-s3-kernel-incidence.md`.
+The remaining local gate is only the common-marking sign that identifies the
+stored mod-\(11\) matrix with the displayed plus rather than minus fibre.
+The broader mysteries remain a vector-bundle extension of the cross-Gram
+separator over the compactification, a global row-swap involution, and the
+minimal integral base.
 
 C682's remaining Platinum track is:
 
