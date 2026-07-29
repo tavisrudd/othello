@@ -1,0 +1,399 @@
+{
+  "base": {
+    "interpretation": "the first two levels of the compatible Z_11 tower",
+    "invariant_modulus_before_division": 1331,
+    "prime": 11,
+    "section_modulus": 121
+  },
+  "global_invariant_pencil": {
+    "all_22_denominators_are_units": true,
+    "epsilon": {
+      "definition": "primitive SL2-invariant alternating trilinear form on Sym^6",
+      "reduction_mod_contraction": "epsilon=7*u",
+      "terms": [
+        {
+          "coefficient": -30,
+          "plucker": [
+            0,
+            3,
+            6
+          ]
+        },
+        {
+          "coefficient": 20,
+          "plucker": [
+            0,
+            4,
+            5
+          ]
+        },
+        {
+          "coefficient": 20,
+          "plucker": [
+            1,
+            2,
+            6
+          ]
+        },
+        {
+          "coefficient": -5,
+          "plucker": [
+            1,
+            3,
+            5
+          ]
+        },
+        {
+          "coefficient": 2,
+          "plucker": [
+            2,
+            3,
+            4
+          ]
+        }
+      ]
+    },
+    "eta": {
+      "definition": "(pi_12(-),I)_12/11",
+      "reduction_mod_contraction": "eta=8*v"
+    },
+    "lifted_normalization": {
+      "raw_ratio": "r=u_tilde/v_tilde",
+      "reduction": "(u_tilde,v_tilde)=(u,v) mod 11",
+      "u_tilde": "8*epsilon",
+      "v_tilde": "7*eta"
+    },
+    "multiplication_characteristic_polynomial_mod_121": "(T-100)^1*(T-43)^5*(T-45)^10*(T-54)^6",
+    "point_values": [
+      {
+        "epsilon": 41,
+        "eta": 94,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 0,
+        "u_tilde": 86,
+        "v_tilde": 53
+      },
+      {
+        "epsilon": 41,
+        "eta": 94,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 1,
+        "u_tilde": 86,
+        "v_tilde": 53
+      },
+      {
+        "epsilon": 19,
+        "eta": 17,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 2,
+        "u_tilde": 31,
+        "v_tilde": 119
+      },
+      {
+        "epsilon": 107,
+        "eta": 83,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 3,
+        "u_tilde": 9,
+        "v_tilde": 97
+      },
+      {
+        "epsilon": 63,
+        "eta": 50,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 4,
+        "u_tilde": 20,
+        "v_tilde": 108
+      },
+      {
+        "epsilon": 30,
+        "eta": 116,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 5,
+        "u_tilde": 119,
+        "v_tilde": 86
+      },
+      {
+        "epsilon": 107,
+        "eta": 83,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 6,
+        "u_tilde": 9,
+        "v_tilde": 97
+      },
+      {
+        "epsilon": 74,
+        "eta": 28,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 7,
+        "u_tilde": 108,
+        "v_tilde": 75
+      },
+      {
+        "epsilon": 52,
+        "eta": 72,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 8,
+        "u_tilde": 53,
+        "v_tilde": 20
+      },
+      {
+        "epsilon": 52,
+        "eta": 72,
+        "raw_ratio": 45,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 9,
+        "u_tilde": 53,
+        "v_tilde": 20
+      },
+      {
+        "epsilon": 63,
+        "eta": 83,
+        "raw_ratio": 100,
+        "source_sheet_mod_11": 1,
+        "source_t_mod_11": 10,
+        "u_tilde": 20,
+        "v_tilde": 97
+      },
+      {
+        "epsilon": 80,
+        "eta": 83,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 0,
+        "u_tilde": 35,
+        "v_tilde": 97
+      },
+      {
+        "epsilon": 58,
+        "eta": 94,
+        "raw_ratio": 43,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 1,
+        "u_tilde": 101,
+        "v_tilde": 53
+      },
+      {
+        "epsilon": 91,
+        "eta": 105,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 2,
+        "u_tilde": 2,
+        "v_tilde": 9
+      },
+      {
+        "epsilon": 47,
+        "eta": 17,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 3,
+        "u_tilde": 13,
+        "v_tilde": 119
+      },
+      {
+        "epsilon": 69,
+        "eta": 61,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 4,
+        "u_tilde": 68,
+        "v_tilde": 64
+      },
+      {
+        "epsilon": 14,
+        "eta": 6,
+        "raw_ratio": 43,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 5,
+        "u_tilde": 112,
+        "v_tilde": 42
+      },
+      {
+        "epsilon": 80,
+        "eta": 17,
+        "raw_ratio": 43,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 6,
+        "u_tilde": 35,
+        "v_tilde": 119
+      },
+      {
+        "epsilon": 69,
+        "eta": 116,
+        "raw_ratio": 43,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 7,
+        "u_tilde": 68,
+        "v_tilde": 86
+      },
+      {
+        "epsilon": 14,
+        "eta": 72,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 8,
+        "u_tilde": 112,
+        "v_tilde": 20
+      },
+      {
+        "epsilon": 102,
+        "eta": 61,
+        "raw_ratio": 43,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 9,
+        "u_tilde": 90,
+        "v_tilde": 64
+      },
+      {
+        "epsilon": 58,
+        "eta": 39,
+        "raw_ratio": 54,
+        "source_sheet_mod_11": 10,
+        "source_t_mod_11": 10,
+        "u_tilde": 101,
+        "v_tilde": 31
+      }
+    ],
+    "ratio_histogram_mod_121": {
+      "100": 1,
+      "43": 5,
+      "45": 10,
+      "54": 6
+    },
+    "special_fibre_characteristic_polynomial": "(T-1)^11*(T+1)^11=(T^2-1)^11"
+  },
+  "global_section": {
+    "combined_rank": 24,
+    "definition": "Lambda_I=P(ker(c_omega) intersect ker((pi_12(-),I)_11/11))",
+    "divided_order_11_map_shape": [
+      3,
+      35
+    ],
+    "divided_order_11_rank_mod_11": 3,
+    "fifth_transvectant_scale_against_prior_mod_11": 8,
+    "old_sparse_section_plus_contraction_rank": 24,
+    "reduction_is_the_previous_P10_section": true,
+    "reduction_plus_contraction_rank": 24
+  },
+  "golden_incidence_comparison": {
+    "conclusion": "u/v separates the incidence sheets, but its exact orientation normalization is the centered affine coordinate, not an uncorrected scalar multiple",
+    "conjugate_point_index": 12,
+    "conjugate_raw_ratio_mod_121": 43,
+    "conjugate_special_orbit_size": 5,
+    "exact_centered_formula": "w=sqrt5*(2*r-r_plus-r_minus)/(r_plus-r_minus)",
+    "golden_half_difference_mod_121": 89,
+    "golden_midpoint_mod_121": 11,
+    "intercept_mod_121": 77,
+    "orientation_coordinate": "w=slope*r+intercept on the two-point incidence fibre",
+    "raw_ratio_is_not_odd_mod_121": true,
+    "selected_point_index": 10,
+    "selected_raw_ratio_mod_121": 100,
+    "selected_special_orbit_size": 1,
+    "selected_sqrt5_mod_121": 48,
+    "slope_mod_121": 59,
+    "special_fibre_formula": "w=4*(u/v) mod 11"
+  },
+  "hensel_section": {
+    "all_chart_jacobian_ranks_mod_11": 12,
+    "all_lifts_are_distinct": true,
+    "all_points_lift_uniquely_mod_121": true,
+    "conclusion": "the transverse reduced special section lifts to a finite-etale degree-22 section over Z_11",
+    "point_count": 22
+  },
+  "inputs": {
+    "notes/2026-07-28-c682-corrected-bridge-mod-1331.json": {
+      "bytes": 10288,
+      "sha256": "f56786b7ef147b647fdb7133f4896b06f20118b509a7e7ccd85b5cf07070c805"
+    },
+    "notes/2026-07-28-c682-rank-four-resolvent.json": {
+      "bytes": 111899,
+      "sha256": "92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c"
+    },
+    "notes/2026-07-28-c682-transvectant-deformation-map.json": {
+      "bytes": 21501,
+      "sha256": "45d799a413c6632b32dc61975c82a946f913a47386bb3f673a24752743d8acca"
+    },
+    "notes/2026-07-28-c682-u22-linear-section.json": {
+      "bytes": 21991,
+      "sha256": "63f516612e7e7f660126502d76bc36dd65dd4a8a5106c77b153ce213311a5f1b"
+    },
+    "notes/2026-07-28-c682-u22-linear-section.py": {
+      "bytes": 27151,
+      "sha256": "15a369bc3fef5a3b8966b533c38f524d575bde5fe5fe0a3734c873cc93ac77cc"
+    }
+  },
+  "primitive_clebsch_gordan_maps": {
+    "order_11_raw_derivative_gcd": 9656672256000,
+    "order_12_raw_derivative_gcd": 8277147648000,
+    "order_5_raw_derivative_gcd": 5760,
+    "projection": "Lambda^3 Sym^6 -> Sym^12",
+    "projection_coefficients_lexicographic_plucker_order": [
+      1,
+      3,
+      6,
+      10,
+      15,
+      3,
+      8,
+      15,
+      24,
+      6,
+      15,
+      27,
+      10,
+      24,
+      15,
+      1,
+      3,
+      6,
+      10,
+      3,
+      8,
+      15,
+      6,
+      15,
+      10,
+      1,
+      3,
+      6,
+      3,
+      8,
+      6,
+      1,
+      3,
+      3,
+      1
+    ],
+    "projection_is_sl2_equivariant_over_Z": true
+  },
+  "schema": "c682-u22-bockstein-pencil-v1",
+  "trust_boundary": {
+    "certifies": [
+      "the primitive integral projection and divided contractions",
+      "recovery of the prior F_11 section and invariant pencil",
+      "unique Hensel lifts of all 22 transverse points mod 11^2",
+      "the raw pencil values on the two golden incidence lifts",
+      "the exact affine comparison with the orientation coordinate"
+    ],
+    "does_not_claim": [
+      "global good reduction of Hitchin's comparison",
+      "a characteristic-zero equality of uncentered u/v and w",
+      "manuscript novelty or promotion"
+    ],
+    "uses_classically": [
+      "the U_22 fifth-transvectant Grassmannian model",
+      "the degree-two local incidence theorem at the golden point",
+      "Hensel's lemma and finite-etale lifting over Z_11"
+    ]
+  }
+}

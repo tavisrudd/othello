@@ -939,6 +939,33 @@ pencil over the corrected \(11\)-adic tower or a characteristic-zero
 family, then compare \(u/v\) with the local incidence orientation
 coordinate.
 
+The formal \(11\)-adic gate is now closed.  The complementary
+\(\mathbf P^{10}\) is the kernel of the integral Bockstein contraction
+\[
+ Q_I=\frac1{11}B_{11}(\pi_{12}(-),I),
+ \qquad
+ \pi_{12}:\Lambda^3\operatorname{Sym}^6\to\operatorname{Sym}^{12},
+\]
+and the invariant pencil globalizes as the alternating scalar
+\(\epsilon\) together with
+\(\eta_I=B_{12}(\pi_{12}(-),I)/11\).  All \(22\) transverse points lift
+finite-etale over \(\mathbf Z_{11}\).  Modulo \(121\), the ratio
+\(r=(8\epsilon)/(7\eta_I)\) takes four values of multiplicities
+\(1,5,10,6\), so the generic pencil separates the four \(A_5\)-orbits
+whose reductions collide into the two length-eleven sheets.  On the two
+golden incidence parents \(r_+=100,r_-=43\), while
+\(\sqrt5=48\bmod121\); the exact orientation coordinate is
+\[
+ w=\sqrt5\,\frac{2r-r_+-r_-}{r_+-r_-},
+ \qquad w=4u/v\bmod11.
+\]
+The nonzero midpoint \(11\bmod121\) falsifies an uncentered all-order
+scalar identity.  The proof, primary certificate, independent reverse-chart
+replay, scope boundary, and mystery ledger are in
+`notes/2026-07-28-c682-u22-bockstein-pencil.md`.  The remaining
+globalization gate is characteristic-zero and Zariski-local; the local
+formal comparison is complete.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
