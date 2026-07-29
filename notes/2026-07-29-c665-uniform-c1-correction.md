@@ -303,6 +303,37 @@ filtered connecting map on the graded trace above, followed by the full
 direct Borel system if needed.  The modular-Hermite filtration remains the
 preferred uniform theorem architecture.
 
+The degree-two source of that connecting map is also reduced exactly.
+Writing the three graded layers as \(C_0,M,C_2\), its only possible source
+is
+\[
+\operatorname{Hom}_H\!\left(
+L(6),(C_0\otimes C_2)\oplus\operatorname{Sym}^2M
+\right).
+\]
+Across all \(225+25+300=550\) small summands this space has dimension
+\(60\), all outer-even: twenty one-dimensional
+\(C_0\otimes C_2\) channels and forty one-dimensional cross terms between
+distinct simple factors of \(M\).  None of the twenty-five diagonal
+symmetric squares contributes.  Thus the remaining computation is a
+single filtered connecting functional on sixty explicit rows, rather than
+a Hom calculation in the full \(1{,}675{,}365\)-dimensional
+\(\operatorname{Sym}^2F\).
+
+Replay the streaming reduction with
+
+```text
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-transgression-domain.sage --check
+sha256sum -c notes/2026-07-29-c665-q121-transgression-domain.sha256
+```
+
+The checker uses tensor adjunction on cross summands and directly verifies
+one nonzero and one zero summand in both the direct and adjoint
+realizations.  Its three simultaneous streaming eliminations compute the
+unrestricted, outer-even, and outer-odd Hom dimensions with memory bounded
+by the torus-block variable count.
+
 The exact source for route (3) is McDowell--Wildon, *Modular plethystic
 isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
 441--483, Corollary 1.5, DOI
@@ -321,7 +352,7 @@ evidence that the C1 pullback is nonsplit.
 | affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
 | \(L(8)\) and \(L(8)^{(1)}\) head probes | settled absent | none; do not infer a prime-field cohomology head |
 | affine-class support | settled in the outer-even \(T_+\) middle channel | none |
-| actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
+| actual \(q=121\) quadratic pullback | open; transgression domain reduced to \(60+0\) outer dimensions | evaluate the filtered connecting functional, or use the direct Borel fallback |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
 Vibe check: the prior positive model failed at a load-bearing seam, but the

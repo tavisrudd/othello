@@ -1,0 +1,1278 @@
+{
+  "adjunction_cross_checks": [
+    {
+      "adjoint": {
+        "equations": 343,
+        "hom_dimension": 1,
+        "outer_minus_dimension": 0,
+        "outer_plus_dimension": 1,
+        "rank": 36,
+        "target_dimension": 7,
+        "torus_block_variables": 37
+      },
+      "direct": {
+        "equations": 343,
+        "hom_dimension": 1,
+        "outer_minus_dimension": 0,
+        "outer_plus_dimension": 1,
+        "rank": 36,
+        "target_dimension": 49,
+        "torus_block_variables": 37
+      },
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          0
+        ]
+      ]
+    },
+    {
+      "adjoint": {
+        "equations": 45,
+        "hom_dimension": 0,
+        "outer_minus_dimension": 0,
+        "outer_plus_dimension": 0,
+        "rank": 3,
+        "target_dimension": 3,
+        "torus_block_variables": 3
+      },
+      "direct": {
+        "equations": 27,
+        "hom_dimension": 0,
+        "outer_minus_dimension": 0,
+        "outer_plus_dimension": 0,
+        "rank": 3,
+        "target_dimension": 9,
+        "torus_block_variables": 3
+      },
+      "factors": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  ],
+  "degree_two_graded_piece": "(C0 tensor C2) + Sym^2(M)",
+  "field_modulus": "x^2 + 7*x + 2",
+  "nonzero_summands": [
+    {
+      "equations": 33717,
+      "factors": [
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 522,
+      "target_dimension": 63,
+      "torus_block_variables": 523
+    },
+    {
+      "equations": 17803,
+      "factors": [
+        [
+          8,
+          6
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 310,
+      "target_dimension": 35,
+      "torus_block_variables": 311
+    },
+    {
+      "equations": 3921,
+      "factors": [
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          2
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 156,
+      "target_dimension": 27,
+      "torus_block_variables": 157
+    },
+    {
+      "equations": 1989,
+      "factors": [
+        [
+          8,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 98,
+      "target_dimension": 15,
+      "torus_block_variables": 99
+    },
+    {
+      "equations": 16443,
+      "factors": [
+        [
+          4,
+          6
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 310,
+      "target_dimension": 63,
+      "torus_block_variables": 311
+    },
+    {
+      "equations": 8575,
+      "factors": [
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 190,
+      "target_dimension": 35,
+      "torus_block_variables": 191
+    },
+    {
+      "equations": 1989,
+      "factors": [
+        [
+          4,
+          2
+        ],
+        [
+          8,
+          2
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 98,
+      "target_dimension": 27,
+      "torus_block_variables": 99
+    },
+    {
+      "equations": 1119,
+      "factors": [
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 68,
+      "target_dimension": 15,
+      "torus_block_variables": 69
+    },
+    {
+      "equations": 60183,
+      "factors": [
+        [
+          6,
+          8
+        ],
+        [
+          10,
+          8
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 788,
+      "target_dimension": 99,
+      "torus_block_variables": 789
+    },
+    {
+      "equations": 34775,
+      "factors": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 512,
+      "target_dimension": 63,
+      "torus_block_variables": 513
+    },
+    {
+      "equations": 15621,
+      "factors": [
+        [
+          6,
+          8
+        ],
+        [
+          2,
+          8
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 236,
+      "target_dimension": 27,
+      "torus_block_variables": 237
+    },
+    {
+      "equations": 9675,
+      "factors": [
+        [
+          6,
+          4
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 242,
+      "target_dimension": 55,
+      "torus_block_variables": 243
+    },
+    {
+      "equations": 5515,
+      "factors": [
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 184,
+      "target_dimension": 35,
+      "torus_block_variables": 185
+    },
+    {
+      "equations": 2395,
+      "factors": [
+        [
+          6,
+          4
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 94,
+      "target_dimension": 15,
+      "torus_block_variables": 95
+    },
+    {
+      "equations": 539,
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          10,
+          0
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 46,
+      "target_dimension": 11,
+      "torus_block_variables": 47
+    },
+    {
+      "equations": 343,
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          0
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 36,
+      "target_dimension": 7,
+      "torus_block_variables": 37
+    },
+    {
+      "equations": 147,
+      "factors": [
+        [
+          6,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 18,
+      "target_dimension": 3,
+      "torus_block_variables": 19
+    },
+    {
+      "equations": 13185,
+      "factors": [
+        [
+          2,
+          8
+        ],
+        [
+          6,
+          8
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 236,
+      "target_dimension": 63,
+      "torus_block_variables": 237
+    },
+    {
+      "equations": 2395,
+      "factors": [
+        [
+          2,
+          4
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 94,
+      "target_dimension": 35,
+      "torus_block_variables": 95
+    },
+    {
+      "equations": 147,
+      "factors": [
+        [
+          2,
+          0
+        ],
+        [
+          6,
+          0
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "C0_tensor_C2",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 18,
+      "target_dimension": 7,
+      "torus_block_variables": 19
+    },
+    {
+      "equations": 79854,
+      "factors": [
+        [
+          9,
+          9
+        ],
+        [
+          7,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 965,
+      "target_dimension": 80,
+      "torus_block_variables": 966
+    },
+    {
+      "equations": 57890,
+      "factors": [
+        [
+          9,
+          9
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 729,
+      "target_dimension": 60,
+      "torus_block_variables": 730
+    },
+    {
+      "equations": 37920,
+      "factors": [
+        [
+          9,
+          9
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 499,
+      "target_dimension": 40,
+      "torus_block_variables": 500
+    },
+    {
+      "equations": 47872,
+      "factors": [
+        [
+          9,
+          7
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 665,
+      "target_dimension": 64,
+      "torus_block_variables": 666
+    },
+    {
+      "equations": 34174,
+      "factors": [
+        [
+          9,
+          7
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 505,
+      "target_dimension": 48,
+      "torus_block_variables": 506
+    },
+    {
+      "equations": 22320,
+      "factors": [
+        [
+          9,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 347,
+      "target_dimension": 32,
+      "torus_block_variables": 348
+    },
+    {
+      "equations": 20874,
+      "factors": [
+        [
+          9,
+          5
+        ],
+        [
+          7,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 365,
+      "target_dimension": 48,
+      "torus_block_variables": 366
+    },
+    {
+      "equations": 14570,
+      "factors": [
+        [
+          9,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 281,
+      "target_dimension": 36,
+      "torus_block_variables": 282
+    },
+    {
+      "equations": 9568,
+      "factors": [
+        [
+          9,
+          5
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 195,
+      "target_dimension": 24,
+      "torus_block_variables": 196
+    },
+    {
+      "equations": 6644,
+      "factors": [
+        [
+          9,
+          3
+        ],
+        [
+          7,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 205,
+      "target_dimension": 32,
+      "torus_block_variables": 206
+    },
+    {
+      "equations": 4440,
+      "factors": [
+        [
+          9,
+          3
+        ],
+        [
+          5,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 159,
+      "target_dimension": 24,
+      "torus_block_variables": 160
+    },
+    {
+      "equations": 2968,
+      "factors": [
+        [
+          9,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 111,
+      "target_dimension": 16,
+      "torus_block_variables": 112
+    },
+    {
+      "equations": 1854,
+      "factors": [
+        [
+          9,
+          1
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 101,
+      "target_dimension": 16,
+      "torus_block_variables": 102
+    },
+    {
+      "equations": 1300,
+      "factors": [
+        [
+          9,
+          1
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 79,
+      "target_dimension": 12,
+      "torus_block_variables": 80
+    },
+    {
+      "equations": 868,
+      "factors": [
+        [
+          9,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 55,
+      "target_dimension": 8,
+      "torus_block_variables": 56
+    },
+    {
+      "equations": 44520,
+      "factors": [
+        [
+          7,
+          9
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 589,
+      "target_dimension": 60,
+      "torus_block_variables": 590
+    },
+    {
+      "equations": 30572,
+      "factors": [
+        [
+          7,
+          9
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 407,
+      "target_dimension": 40,
+      "torus_block_variables": 408
+    },
+    {
+      "equations": 15128,
+      "factors": [
+        [
+          7,
+          9
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 213,
+      "target_dimension": 20,
+      "torus_block_variables": 214
+    },
+    {
+      "equations": 26150,
+      "factors": [
+        [
+          7,
+          7
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 417,
+      "target_dimension": 48,
+      "torus_block_variables": 418
+    },
+    {
+      "equations": 18008,
+      "factors": [
+        [
+          7,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 291,
+      "target_dimension": 32,
+      "torus_block_variables": 292
+    },
+    {
+      "equations": 8876,
+      "factors": [
+        [
+          7,
+          7
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 153,
+      "target_dimension": 16,
+      "torus_block_variables": 154
+    },
+    {
+      "equations": 11228,
+      "factors": [
+        [
+          7,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 245,
+      "target_dimension": 36,
+      "torus_block_variables": 246
+    },
+    {
+      "equations": 7764,
+      "factors": [
+        [
+          7,
+          5
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 175,
+      "target_dimension": 24,
+      "torus_block_variables": 176
+    },
+    {
+      "equations": 3840,
+      "factors": [
+        [
+          7,
+          5
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 93,
+      "target_dimension": 12,
+      "torus_block_variables": 94
+    },
+    {
+      "equations": 3576,
+      "factors": [
+        [
+          7,
+          3
+        ],
+        [
+          5,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 143,
+      "target_dimension": 24,
+      "torus_block_variables": 144
+    },
+    {
+      "equations": 2396,
+      "factors": [
+        [
+          7,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 103,
+      "target_dimension": 16,
+      "torus_block_variables": 104
+    },
+    {
+      "equations": 1204,
+      "factors": [
+        [
+          7,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 55,
+      "target_dimension": 8,
+      "torus_block_variables": 56
+    },
+    {
+      "equations": 1044,
+      "factors": [
+        [
+          7,
+          1
+        ],
+        [
+          5,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 71,
+      "target_dimension": 12,
+      "torus_block_variables": 72
+    },
+    {
+      "equations": 698,
+      "factors": [
+        [
+          7,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 51,
+      "target_dimension": 8,
+      "torus_block_variables": 52
+    },
+    {
+      "equations": 350,
+      "factors": [
+        [
+          7,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 27,
+      "target_dimension": 4,
+      "torus_block_variables": 28
+    },
+    {
+      "equations": 20742,
+      "factors": [
+        [
+          5,
+          9
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 303,
+      "target_dimension": 40,
+      "torus_block_variables": 304
+    },
+    {
+      "equations": 11190,
+      "factors": [
+        [
+          5,
+          9
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 157,
+      "target_dimension": 20,
+      "torus_block_variables": 158
+    },
+    {
+      "equations": 12256,
+      "factors": [
+        [
+          5,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 223,
+      "target_dimension": 32,
+      "torus_block_variables": 224
+    },
+    {
+      "equations": 6638,
+      "factors": [
+        [
+          5,
+          7
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 117,
+      "target_dimension": 16,
+      "torus_block_variables": 118
+    },
+    {
+      "equations": 5442,
+      "factors": [
+        [
+          5,
+          5
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 143,
+      "target_dimension": 24,
+      "torus_block_variables": 144
+    },
+    {
+      "equations": 2918,
+      "factors": [
+        [
+          5,
+          5
+        ],
+        [
+          1,
+          5
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 77,
+      "target_dimension": 12,
+      "torus_block_variables": 78
+    },
+    {
+      "equations": 1812,
+      "factors": [
+        [
+          5,
+          3
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 87,
+      "target_dimension": 16,
+      "torus_block_variables": 88
+    },
+    {
+      "equations": 912,
+      "factors": [
+        [
+          5,
+          3
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 47,
+      "target_dimension": 8,
+      "torus_block_variables": 48
+    },
+    {
+      "equations": 526,
+      "factors": [
+        [
+          5,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 43,
+      "target_dimension": 8,
+      "torus_block_variables": 44
+    },
+    {
+      "equations": 264,
+      "factors": [
+        [
+          5,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "hom_dimension": 1,
+      "kind": "M_factor_tensor",
+      "outer_minus_dimension": 0,
+      "outer_plus_dimension": 1,
+      "rank": 23,
+      "target_dimension": 4,
+      "torus_block_variables": 24
+    }
+  ],
+  "p": 11,
+  "q": 121,
+  "schema": 1,
+  "source": "L(6)",
+  "totals": {
+    "hom_dimension": 60,
+    "outer_minus_dimension": 0,
+    "outer_plus_dimension": 60,
+    "summands": 550
+  }
+}

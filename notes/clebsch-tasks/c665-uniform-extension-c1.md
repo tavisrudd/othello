@@ -63,7 +63,11 @@ channel.  Exact nonsquare dilation gives outer signs \(+1,-1\) on
 forces the affine class into \(T_+\); both unique \(L(6)\) Hom directions
 are also outer-even.  Outer parity isolates but does not exclude the
 channel.  Prove that multiplication by the bottom \(L(6)\), followed by
-graded trace \(7\ne0\), survives the filtered connecting map.  The full
+graded trace \(7\ne0\), survives the filtered connecting map.  Its
+degree-two source is now exactly \(60\)-dimensional and entirely
+outer-even: twenty \(C_0\otimes C_2\) rows, forty cross-factor
+\(\operatorname{Sym}^2M\) rows, and no diagonal-square rows.  Evaluate
+that one connecting functional on the sixty explicit channels.  The full
 direct Borel pullback is the fallback.
 
 ## Guardrails

@@ -1363,6 +1363,14 @@ the higher filtered connecting map.  Outer parity isolates the channel
 but does not exclude the transgression.  This remains an open field gate
 and not a uniform extension-field theorem.
 
+The degree-two source of the filtered connecting map has now been reduced
+without constructing \(\operatorname{Sym}^2F\).  Exact Hom calculations
+on all 550 small graded summands give outer dimensions \(60+0\): twenty
+one-dimensional rows in \(C_0\otimes C_2\), forty cross-factor rows in
+\(\operatorname{Sym}^2M\), and no diagonal symmetric-square rows.  The
+remaining q=121 decision is therefore one connecting functional on these
+sixty explicit rows.
+
 The characteristic-three torus case is a separate genuine residual family,
 not a cosmetic defect of the method.  Its first field can nevertheless be
 excluded exactly.  Over
