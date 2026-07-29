@@ -1,0 +1,19 @@
+{
+  "candidate_scalar": "4",
+  "coboundary": true,
+  "conclusion": "the affine class dies in the L(6) head",
+  "field_modulus": "x^2 + 7*x + 2",
+  "nonzero_residuals": 0,
+  "p": 11,
+  "projected_cocycle_nonzero_entries": [
+    3,
+    3,
+    1
+  ],
+  "projection_hom_dimension": 1,
+  "q": 121,
+  "schema": 1,
+  "simple": "L(6)",
+  "simple_dimension": 7,
+  "torus_fixed_dimension": 1
+}

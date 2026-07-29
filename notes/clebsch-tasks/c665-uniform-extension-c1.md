@@ -49,10 +49,12 @@ For each outer-parity head \(i:S^\chi\hookrightarrow E\):
 
 For \(L(6)\subset\operatorname{Sym}^{59}L(2)\) at \(q=121\), all genuine
 ordinary contractions of orders \(1,\ldots,10\) are now certified
-Borel-blind.  Test the original pullback class by a torus-weighted
-unipotent Borel obstruction.  In parallel, use the two-layer binary
-degree-59 Weyl/dual-Weyl model under modular Hermite reciprocity to derive
-the occurrence and extension scalars in Frobenius digits.
+Borel-blind.  The affine class also dies in the \(L(6)\) head, with exact
+torus-fixed correction scalar \(4\).  Test the original pullback class by a
+secondary torus-weighted unipotent Borel obstruction inside the radical
+filtration.  In parallel, use the two-layer binary degree-59
+Weyl/dual-Weyl model under modular Hermite reciprocity to derive the
+occurrence and extension scalars in Frobenius digits.
 
 ## Guardrails
 

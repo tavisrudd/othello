@@ -137,6 +137,37 @@ The evidence bundle is
 The exact solution-residual pass is the independent invariant check; no
 second implementation of the large Borel systems is claimed.
 
+## The affine class dies in the \(L(6)\) head
+
+The next occurrence-level gate is also closed negatively.  Let
+\(\pi:F\to L(6)\) generate the certified one-dimensional projection Hom
+space.  Pushing the torus-normalized affine cocycle through \(\pi\) gives
+nonzero vectors on all three standard generators, with support sizes
+\(3,3,1\).  Nevertheless this projected cocycle is a coboundary: the
+unique torus-fixed line in \(L(6)\) supplies correction scalar \(4\), and
+all twenty-one generator-coordinate residuals vanish.
+
+Thus the affine class does not survive in the \(L(6)\) head.  Equivalently,
+\(\pi\) extends across \(E\), but its extension still kills the embedded
+socle because \(\pi i=0\).  The primary head trace therefore cannot replace
+the retracted-socle trace; any q=121 obstruction is secondary in the
+radical filtration.
+
+From the repository root, replay this gate with
+
+```text
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-affine-head.sage --check
+sha256sum -c notes/2026-07-29-c665-q121-affine-head.sha256
+```
+
+The exact script, canonical certificate, and load-bearing-input manifest
+are `notes/2026-07-29-c665-q121-affine-head.sage`,
+`notes/2026-07-29-c665-q121-affine-head.json`, and
+`notes/2026-07-29-c665-q121-affine-head.sha256`.  Direct substitution of
+the scalar \(4\) in every generator coordinate is the independent invariant
+check.  This result does not decide the quadratic pullback.
+
 ## Replacement attacks
 
 The contraction route is now closed negatively.  Three genuinely different
@@ -189,6 +220,7 @@ evidence that the C1 pullback is nonsplit.
 | \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence; structural cause open | identify its Frobenius-digit Weyl/dual-Weyl layer under modular Hermite reciprocity |
 | retired top Hasse channel gives a \(1\to2\) rank jump | settled as an artifact of a non-equivariant operator | none; do not reuse the rank jump |
 | all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
+| affine class in the \(L(6)\) head | settled zero; correction scalar \(4\) | identify the secondary radical layer carrying the affine class |
 | actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
