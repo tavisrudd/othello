@@ -15,8 +15,9 @@ and the retracted-socle trace lemma closes the quadratic pullback for every
 prime-field exceptional head.  The first two extension barriers \(q=25,49\)
 also close because none of their Frobenius-digit heads embeds in the affine
 socle.  The complete \(q=5\) matching census closes the isolated dihedral
-endpoint geometrically.  Uniform extension-field C1 and the
-characteristic-three torus family remain.
+endpoint geometrically.  The characteristic-three torus family is now
+closed by the discriminant-weight-four trade below, with no
+field-independent defect bound.  Uniform extension-field C1 remains.
 
 ## Result
 
@@ -476,13 +477,17 @@ exact conic-quotient arithmetic.  It partitions them into all seven
 full-projective orbits, recomputes the affine and full quadratic ranks, and
 then computes the two one-sheet and joint Sylow-translation norm ranks.
 It also checks the fixed-correction identity for all thirteen parameters
-and tests two explicit substitute coefficient families.  The human
-torus-torsor classification and Dickson-resultant derivation are independent
+and tests three explicit substitute coefficient families.  The first two
+fail as recorded above; the discriminant-weight-four family is a nonzero
+common moment on every split orbit and its sheet difference has zero full
+quadratic moment.  The human torus-torsor classification and
+Dickson-resultant derivation are independent
 of this enumeration; there is no second implementation of the full
 756-column quadratic rank.  The certificate covers exactly q=27 and does
 not extrapolate \(N_5\) to another field.  The checker and certificate have
-respectively 14,894 and 7,460 bytes; their SHA-256 values are pinned in
-`2026-07-26-c665-q27-torus-test.sha256`.
+respectively 16,477 and 8,595 bytes; their SHA-256 values are pinned in
+`2026-07-26-c665-q27-torus-test.sha256`, together with the 17,954-byte
+Sage preparse mirror.
 
 The sheet permutation character is
 \[
@@ -733,8 +738,8 @@ completeness.
 | Feature | Status | Exact remaining gap |
 |---|---|---|
 | Does intrinsic quadratic recovery force the balanced setup? | settled | Stability of the unique trade line gives the \(G^+\) block system; the recovered one-factorization property gives \(q\) matchings per block. |
-| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback, and the complete matching census closes the isolated \(q=5\) dihedral endpoint.  Uniform extension-field C1 and characteristic-three tori remain. |
-| Which degrees of freedom remain in characteristic-three torus cases? | settled as a parameter reduction; T3 remains open | After fixing split versus nonsplit type, a torus-invariant matching is an equivariant cross-orbit bijection parametrized by one element of the cyclic torus, plus one antipodal type when the torus order is even.  Normalizer and outer actions give only affine-inversion identifications.  For a full normalizer stabilizer, \(\lambda=(q+1)/2\) or \((q-1)/2\).  In the residual split family, \(P_c+P_{c^{-1}}=Y(X^n-Z^n)\).  The rank-one consequence is false: q=27 has defect increment five.  The open gate is to factor that defect through \(\Delta(4)\), proving \(\dim(V+dV)\le\lambda+5\), and then descend the nonsplit analogue. |
+| Does a unique two-valued quadratic trade alone force the one-factorization property? | open C665 Platinum continuation; not a manuscript claim | The action yields only a \(\lambda\)-fold one-factorization on each level.  The exceptional head table supplies a nonnegligible head in every non-endpoint case; the retracted-socle trace lemma closes prime-field C1, affine-socle absence closes the \(q=25,49\) gates before any quadratic pullback, the complete matching census closes the isolated \(q=5\) dihedral endpoint, and the discriminant-weight-four trade closes characteristic-three tori.  Uniform extension-field C1 remains. |
+| Which degrees of freedom remain in characteristic-three torus cases? | settled | The torus parameter and the large fixed-correction image are irrelevant to the fallback.  The single discriminant character \(\Delta^{-2}\) gives a second trade on the split sheets; diagonalization and Frobenius descent give the nonsplit trade, while the internal-antipodal type is outer-fixed and cannot split. |
 | Are there balanced \(2q\)-matching orbits beyond \(B_3,H_3\)? | settled | Dickson reduction plus the three exact matching realizations proves there are none. |
 | Does the \(q=5\) ten-matching orbit split \(5+5\)? | settled negatively | It is one \(G^+\)-orbit and its Schur square has rank ten. |
 | Why must quadratic recovery have a nonzero cubic? | settled | The hyperplane-square lemma gives \(L^{\circ3}=k^\Omega\) directly. |
@@ -1429,15 +1434,12 @@ following implications are now separated:
    family directly.  The two first guesses fail cleanly at q=27: endpoint
    incidence yields only the known sign trade, while the naive
    nine-dimensional \(L(2)\otimes L(2)^{(1)}\) axis-coordinate difference
-   yields no trade.  Any successful covariant must include a nontrivial
-   Hecke/intertwiner between the sheet copies rather than identify their
-   axis coordinates termwise.
+   yields no trade.  The successful replacement is the
+   discriminant-weight-four Borel coefficient proved below.
 
-The highest-EV obligation is \(N_5\): promote the exact five-weight torus
-fingerprint to a uniform factorization of the fixed-correction polarization
-through a twisted \(\Delta(4)\) quotient.  If that factorization fails, the
-exact fallback is the weaker intersection-two statement, not the abandoned
-\(N_1\) bound.
+The attempted \(N_5\) promotion later fails at q=243.  The exact fallback,
+the weaker intersection-two statement, is proved below without replacing
+\(N_5\) by another constant-defect bound.
 
 Accordingly the proposed proof of L2 now has two uniform inputs and one
 isolated endpoint:
@@ -1454,15 +1456,16 @@ an embedded nonretract requires an actual pullback-class calculation.
 **H1-torus. Nonnegligible torus head.**  The exceptional \(A_4,S_4,A_5\)
 rows are settled by the table above, and the q=5 dihedral endpoint is empty
 by the complete matching census.  The only remaining H1 rows are the
-characteristic-three torus family.
+characteristic-three torus family; the weight-four trade bypasses H1 there.
 
 **T3. Characteristic-three torus exclusion.**  If
 \(q=3^e\) and a split or nonsplit torus normalizer stabilizes a matching
 whose \(G\)-orbit splits into two \(H\)-sheets with \(\lambda>1\), then its
 quadratic trade space has dimension at least two.
 
-No extension-field-wide proof of C1-extension, H1-torus, or T3 is claimed
-here.
+The discriminant-weight-four intersection below proves T3 for the remaining
+split and nonsplit rows.  No extension-field-wide proof of C1-extension is
+claimed here.
 
 The former \(N_1\) bound \(\dim(V+dV)\le\lambda+1\) passes the certified
 \(q=13,17,19\) tests but fails uniformly as a proposed obligation:
@@ -1600,9 +1603,10 @@ field.  The q=27 primary full coefficient-space checker is an independent
 replay of the calibration field.  There is no second full q=243
 coefficient-space implementation: the 153-row evaluation projection is
 already an exact rank certificate whose inequality alone falsifies
-\(N_5\).  The checker and JSON certificate have respectively 9,230 and
-2,430 bytes.  Their hashes are pinned in
-`2026-07-26-c665-delta4-defect-falsifier.sha256`.
+\(N_5\).  The checker and JSON certificate have respectively 9,316 and
+2,518 bytes.  Their hashes are pinned in
+`2026-07-26-c665-delta4-defect-falsifier.sha256`, together with the
+10,897-byte Sage preparse mirror.
 
 ### Post-falsification `ej` + `tt` closeout
 
@@ -1618,13 +1622,142 @@ already in a small deterministic moment quotient, while the first sheet is
 injective on all axis norms.  Any replacement bound must therefore allow at
 least fourteen new directions at q=243.
 
-The highest-EV route is now the declared intersection-two fallback.  It
-should not attempt another field-independent constant defect.  Instead,
-construct a second common norm direction, or equivalently one additional
-translation-invariant trade, from a Hecke intertwiner between the two sheet
-modules.  The q=243 result says that most fixed-correction characters are
-real; the proof must isolate a common direction rather than bound all of
-them away.
+The highest-EV route after that falsification was the declared
+intersection-two fallback: isolate a common direction rather than attempt
+another field-independent constant defect.  The next section completes
+that route.
+
+### The discriminant-weight-four intersection
+
+The fallback is now proved.  It is a single Borel--Hecke coefficient, not a
+bound on the full fixed-correction image.
+
+Let \(q=3^e\), let a torus-normalizer matching orbit split into two
+\(H\)-sheets, and label a matching in either sheet by the unordered
+eigenpoint pair \(A\) of its stabilizing torus.  On the affine chart write
+\[
+ A=\{x,y\},\qquad \Delta(A)=(x-y)^2.
+\]
+For an axis through infinity put \(w(A)=0\); on every finite axis put
+\[
+ w(A)=\Delta(A)^{-2}=(x-y)^{-4}.                 \tag{W4}
+\]
+The definition is independent of the order of \(x,y\).  Give the two
+sheets opposite coefficients:
+\[
+ \tau_4(M_{+,A})=w(A),\qquad
+ \tau_4(M_{-,A})=-w(A).                          \tag{T4}
+\]
+
+**Weight-four moment lemma.**  If \(q\ge27\), then
+\[
+ \sum_A w(A)\widehat Q_{+,A}= \sum_A w(A)\widehat Q_{-,A},
+ \qquad
+ \sum_A w(A)\widehat Q_{+,A}^{\odot2}
+   =\sum_A w(A)\widehat Q_{-,A}^{\odot2}.        \tag{B4}
+\]
+The first equality includes the constant--linear coordinates of the
+homogenized vectors.  Hence \(\tau_4\in\ker\mu\).
+
+Here is the coefficient proof.  It is useful to retain it because it
+explains why the identity survives the failure of every constant-defect
+guess.  Put \(n=(q-1)/2\), write the split matching in the normal form
+\[
+ P_c=-Y\prod_{z\in Q}
+ \bigl(X-(1+c)zY+cz^2Z\bigr),
+\]
+and move its axis by
+\[
+ g_{t,\delta}
+ =\begin{pmatrix}1&t\\0&1\end{pmatrix}
+  \begin{pmatrix}\delta&0\\0&1\end{pmatrix}
+  \begin{pmatrix}1&0\\1&1\end{pmatrix}.
+\]
+Projective scalar normalization changes both sheets by the same Laurent
+monomial and is retained in the following coefficient count.  For any
+linear coefficient functional \(\ell\), the function
+\(\ell(\widehat Q_{c,t,\delta})\) has translation degree at most
+\(q-3\).  Thus
+\[
+ \sum_{t\in\mathbb F_q}t^j=
+ \begin{cases}
+ -1,&j=q-1,\\
+ 0,&0\le j<2(q-1),\ j\ne q-1
+ \end{cases}                                      \tag{PS}
+\]
+shows that every first moment vanishes and that a quadratic moment is
+exactly minus its \(t^{q-1}\)-coefficient.
+
+The remaining square-axis Fourier coefficient selected by (W4) is the
+coefficient of square character \(s^2\), where
+\(s=\Delta(A)\).  Expanding the displayed secant product, the possible
+terms in this coefficient are precisely the bottom four-jet and the
+complementary top four-jet of the edge product.  A term of edge weight
+\(r\) is a homogeneous orbit sum in the cyclic torus coordinates \(z\).
+More explicitly, if \(Q_{\ne}^j\) denotes ordered \(j\)-tuples of distinct
+elements of \(Q\), every such term is a scalar multiple of
+\[
+ \sum_{(z_1,\ldots,z_j)\in Q_{\ne}^j}
+ z_1^{a_1}\cdots z_j^{a_j}=0,\qquad
+ 0<a_1+\cdots+a_j=r\le8<n,                       \tag{CJ}
+\]
+because scaling all \(z_i\) by an element of \(Q\) multiplies the sum by
+a nontrivial character.  The weight-zero terms are independent of \(c\).
+Complementing the chosen secant factors reduces the top four-jet to the
+same calculation, since \(c^n=-1\).  Consequently the \(s^2\)-coefficient
+is unchanged by \(c\mapsto c^{-1}\), both for a single affine coordinate
+and for every polarized pair of coordinates.  Equations (PS) and (CJ)
+give (B4).  This is the promised one-scalar Dickson-coefficient identity;
+it uses no restriction on the other square-axis characters.
+
+The same proof covers the nonsplit normalizer.  Over
+\(\mathbb F_{q^2}\) diagonalize the torus and use its conjugate eigenpoint
+pair as \(A\).  The rational endpoint set becomes the norm-one cyclic
+torsor, Frobenius acts by \(z\mapsto z^{-1}\), and the two matching
+parameters are again \(c,c^{-1}\).  Formula (CJ) uses only cyclic scaling
+and is therefore unchanged, with the nonsplit torus order in place of
+\(|Q|\).  The discriminant
+\(\Delta(A)\) and the two sums in (B4) are Frobenius-fixed, so (B4)
+descends to \(\mathbb F_q\).  The possible internal-antipodal matching
+does not create a split orbit: it is defined by the unique involution of
+the torus and is therefore fixed by the full projective normalizer,
+including an outer element.
+
+For \(q=9\) the exhaustive matching census had already removed the torus
+case.  Thus every remaining characteristic-three split or nonsplit
+normalizer case has the trade \(\tau_4\).  It is independent of the sheet
+sign: the sign has full support, whereas \(\tau_4\) vanishes on the
+infinity-axis orbit in the split model; in the nonsplit model \(\tau_4\)
+has a nontrivial Borel character while the sign is \(H\)-fixed.  Therefore
+\[
+ \dim (L^{\circ2})^\perp\ge2.
+\]
+
+The exact q=27 full coefficient-space replay checks (B4) on all six split
+orbits.  In every row the common weight-four moment is nonzero and the
+two sheet moments agree.  The independent q=27/q=243
+evaluation-functional route sees the same absent \(s^2\) character; unlike
+its former rank bound, that observation is now only a cross-check of the
+coefficient proof.
+
+### Intersection closeout: `ej` + `tt`
+
+The cheap representation-theoretic upgrade is automatic.  The trade kernel
+is \(H\)-stable, so the \(H\)-span of \(\tau_4\) is a nontrivial trade
+submodule, not merely one accidental coefficient vector.  Because
+\(\tau_4\) has nontrivial Borel character, this submodule is not the
+trivial sign line.  Thus the geometric identity supplies exactly the
+nonprincipal survival that H1 could not obtain from a \(3'\)-dimensional
+simple head.
+
+The `tt` audit checks the two fragile boundaries directly.  The proof uses
+only the \(s^2\) coefficient and makes no statement about the other 50
+projected q=243 correction characters; hence it does not revive a
+constant-defect claim.  The nonsplit step descends the coefficient identity,
+not the failed \(\Delta(4)\) quotient, and the antipodal matching is removed
+before descent because its outer normalizer prevents a two-sheet orbit.
+No characteristic-three mystery remains.  Uniform extension-field C1 is
+still separate and is the sole live Platinum gap.
 
 ### Mystery ledger refresh
 
@@ -1632,6 +1765,6 @@ them away.
 |---|---|---|
 | Five q=27 defect weights | settled as field-specific | They come from a genuine five-dimensional q=27 quotient, but q=243 has projected defect increment fourteen. |
 | Uniform \(N_5\) / twisted \(\Delta(4)\) | closed negatively | The exact q=243 rank \(136>127\) falsifies every such factorization. |
-| Characteristic-three split T3 | open | Prove intersection at least two, or construct a second invariant trade, without a constant defect bound. |
-| Nonsplit descent | open and downstream | Do not descend the failed \(\Delta(4)\) statement; first find the split intersection mechanism. |
+| Characteristic-three split T3 | settled | The discriminant-weight-four vector (T4) is a second invariant trade; it uses one absent Borel character and imposes no defect bound. |
+| Nonsplit descent | settled | Diagonalization over \(\mathbb F_{q^2}\), Frobenius-fixed discriminant weight, and exclusion of the outer-fixed antipodal type descend the same trade. |
 | Extension-field C1 | unchanged | The first embedded nonretract remains unknown beyond the q=25 and q=49 affine-socle exclusions. |

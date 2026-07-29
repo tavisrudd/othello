@@ -201,6 +201,7 @@ def calculate(q):
         for degree in range(n)
         if not coefficients.row(degree).is_zero()
     ]
+    assert 2 not in support
     expected_support = [0, 1] + list(range(n - 4, n))
     if q == 27:
         assert support == expected_support, support
@@ -223,6 +224,7 @@ def calculate(q):
         ),
         "correction_rank": int(correction.rank()),
         "interpolation_support": support,
+        "weight_four_character_absent": 2 not in support,
         "q27_reference_support": [0, 1] + list(range(n - 4, n)),
         "matches_q27_six_character_pattern": (
             support == [0, 1] + list(range(n - 4, n))
@@ -253,7 +255,7 @@ def main():
         assert records[1]["projected_joint_norm_rank"] == 136
         assert records[1]["projected_defect_increment"] == 14
         result = {
-            "schema": 1,
+            "schema": 2,
             "verdict": (
                 "the q=27 five-dimensional defect does not extend "
                 "uniformly: a q=243 moment projection already has "

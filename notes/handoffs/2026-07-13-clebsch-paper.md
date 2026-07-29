@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Date**: 2026-07-26
+**Date**: 2026-07-28
 
 > **LIVE MAP ONLY.** The three-paper program below is the active publication
 > path. The 37-page mega-paper and its evidence surface are preserved
@@ -346,11 +346,20 @@ deterministic 153-row moment projection has one-sheet rank
 \(122=\lambda\) and joint rank \(136=\lambda+14\), so no full joint rank
 bounded by \(\lambda+5=127\) can map onto it.  Thus the q=27 square-torus
 weights \(6,10,14,18,22\) are a field-specific twisted-\(\Delta(4)\)
-fingerprint, not a uniform defect factorization.  The exact split fallback
-is now active: prove a second common norm direction, equivalently a second
-translation-invariant trade, without any field-independent constant-defect
-bound.  Do not descend the failed \(\Delta(4)\) statement; the nonsplit
-analogue waits for the replacement intersection mechanism.
+fingerprint, not a uniform defect factorization.  The exact fallback is now
+proved without bounding that defect.  On a finite torus axis
+\(A=\{x,y\}\), the discriminant weight
+\(w(A)=(x-y)^{-4}\), extended by zero on the infinity-axis orbit, gives the
+same quadratic moment on both sheets.  Their weighted difference is
+therefore a second trade, independent of the full-support sign.  Translation
+power sums reduce the identity to the absent square-axis character \(s^2\);
+the bottom and complementary four-jets agree under \(c\leftrightarrow
+c^{-1}\).  Diagonalization over \(\mathbb F_{q^2}\) and Frobenius-fixed
+discriminant weight descend the nonsplit case, while the antipodal type is
+outer-fixed and cannot split.  The q=27 full coefficient-space replay and
+the independent q=27/q=243 moment projection cross-check the identity.
+Characteristic-three T3 is closed; uniform extension-field C1 is the
+remaining Platinum frontier.
 
 **Local Paper II persona — the “tears in their eyes” test.**  The result
 this composite expert would cherish is not a longer exceptional-case table,

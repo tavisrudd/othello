@@ -27,7 +27,7 @@ def calculate(q):
     assert q in (_sage_const_27 , _sage_const_243 )
     k = GF(q, name="a")
     primitive = k.multiplicative_generator()
-    n = (q - _sage_const_1 ) // _sage_const_2 
+    n = (q - _sage_const_1 ) // _sage_const_2
     squares = sorted({value**_sage_const_2  for value in k if value})
     assert len(squares) == n
     c = primitive
@@ -109,7 +109,7 @@ def calculate(q):
     assert product_values(c**-_sage_const_1 , identity) == direct_product_values(
         minus_edges, identity
     )
-    functional_count = len(evaluation_points) + _sage_const_1 
+    functional_count = len(evaluation_points) + _sage_const_1
     pair_indices = [
         (left, right)
         for left in range(functional_count)
@@ -206,10 +206,11 @@ def calculate(q):
         for degree in range(n)
         if not coefficients.row(degree).is_zero()
     ]
+    assert _sage_const_2  not in support
     expected_support = [_sage_const_0 , _sage_const_1 ] + list(range(n - _sage_const_4 , n))
     if q == _sage_const_27 :
         assert support == expected_support, support
-        assert correction.rank() == _sage_const_6 
+        assert correction.rank() == _sage_const_6
     return {
         "q": q,
         "field_modulus": str(k.modulus()),
@@ -224,10 +225,11 @@ def calculate(q):
             int(joint_norms.rank() - plus_norms.rank())
         ),
         "projection_disproves_lambda_plus_five": (
-            joint_norms.rank() > n + _sage_const_1  + _sage_const_5 
+            joint_norms.rank() > n + _sage_const_1  + _sage_const_5
         ),
         "correction_rank": int(correction.rank()),
         "interpolation_support": support,
+        "weight_four_character_absent": _sage_const_2  not in support,
         "q27_reference_support": [_sage_const_0 , _sage_const_1 ] + list(range(n - _sage_const_4 , n)),
         "matches_q27_six_character_pattern": (
             support == [_sage_const_0 , _sage_const_1 ] + list(range(n - _sage_const_4 , n))
@@ -251,14 +253,14 @@ def main():
         result = calculate(args.q)
     else:
         records = [calculate(q) for q in (_sage_const_27 , _sage_const_243 )]
-        assert records[_sage_const_0 ]["projected_plus_norm_rank"] == _sage_const_14 
-        assert records[_sage_const_0 ]["projected_joint_norm_rank"] == _sage_const_19 
-        assert records[_sage_const_0 ]["projected_defect_increment"] == _sage_const_5 
-        assert records[_sage_const_1 ]["projected_plus_norm_rank"] == _sage_const_122 
-        assert records[_sage_const_1 ]["projected_joint_norm_rank"] == _sage_const_136 
-        assert records[_sage_const_1 ]["projected_defect_increment"] == _sage_const_14 
+        assert records[_sage_const_0 ]["projected_plus_norm_rank"] == _sage_const_14
+        assert records[_sage_const_0 ]["projected_joint_norm_rank"] == _sage_const_19
+        assert records[_sage_const_0 ]["projected_defect_increment"] == _sage_const_5
+        assert records[_sage_const_1 ]["projected_plus_norm_rank"] == _sage_const_122
+        assert records[_sage_const_1 ]["projected_joint_norm_rank"] == _sage_const_136
+        assert records[_sage_const_1 ]["projected_defect_increment"] == _sage_const_14
         result = {
-            "schema": _sage_const_1 ,
+            "schema": _sage_const_2 ,
             "verdict": (
                 "the q=27 five-dimensional defect does not extend "
                 "uniformly: a q=243 moment projection already has "

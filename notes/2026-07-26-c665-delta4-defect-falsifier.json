@@ -30,7 +30,8 @@
         10,
         11,
         12
-      ]
+      ],
+      "weight_four_character_absent": true
     },
     {
       "axis_orbit_count": 122,
@@ -107,9 +108,10 @@
         118,
         119,
         120
-      ]
+      ],
+      "weight_four_character_absent": true
     }
   ],
-  "schema": 1,
+  "schema": 2,
   "verdict": "the q=27 five-dimensional defect does not extend uniformly: a q=243 moment projection already has defect increment 14"
 }

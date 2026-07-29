@@ -1,8 +1,9 @@
 #!/usr/bin/env sage
 """Exact first characteristic-three torus test for the C665 Platinum gap.
 
-Besides the full quadratic ranks, this checks the fixed-correction identity
-and the one-sheet/joint Sylow-translation norm ranks on every torus orbit.
+Besides the full quadratic ranks, this checks the fixed-correction identity,
+the one-sheet/joint Sylow-translation norm ranks, and the
+discriminant-weight-four trade on every split torus orbit.
 """
 
 import argparse
@@ -192,17 +193,34 @@ def evaluate(representative, orbit, orbit_number):
     if split:
         incidence_difference = matrix(k, q + 1, len(orbit), sparse=True)
         axis_digit_difference = matrix(k, 9, len(orbit), sparse=True)
+        weight_four_plus = matrix(k, 1, len(orbit), sparse=True)
+        weight_four_difference = matrix(k, 1, len(orbit), sparse=True)
         orbit_index = {matching: i for i, matching in enumerate(orbit)}
         for matching, axis in plus_labels.items():
             for endpoint in axis:
                 incidence_difference[endpoint, orbit_index[matching]] += 1
             for row, value in enumerate(axis_digit_values(axis)):
                 axis_digit_difference[row, orbit_index[matching]] += value
+            if infinity not in axis:
+                left, right = axis
+                separation = points[left] - points[right]
+                weight_four_plus[0, orbit_index[matching]] += (
+                    separation**-4
+                )
+                weight_four_difference[0, orbit_index[matching]] += (
+                    separation**-4
+                )
         for matching, axis in minus_labels.items():
             for endpoint in axis:
                 incidence_difference[endpoint, orbit_index[matching]] -= 1
             for row, value in enumerate(axis_digit_values(axis)):
                 axis_digit_difference[row, orbit_index[matching]] -= value
+            if infinity not in axis:
+                left, right = axis
+                separation = points[left] - points[right]
+                weight_four_difference[0, orbit_index[matching]] -= (
+                    separation**-4
+                )
         incidence_moments = square * incidence_difference.transpose()
         incidence_parameter_kernel = incidence_moments.right_kernel()
         incidence_trade_coefficients = (
@@ -230,9 +248,19 @@ def evaluate(representative, orbit, orbit_number):
             ),
             "trade_family_rank": axis_digit_trade_coefficients.rank(),
         }
+        weight_four_plus_moments = square * weight_four_plus.transpose()
+        weight_four_moments = square * weight_four_difference.transpose()
+        assert not weight_four_plus_moments.is_zero()
+        assert weight_four_moments.is_zero()
+        weight_four_trade = {
+            "axis_weight": "(x-y)^-4 on finite axes; 0 at infinity",
+            "common_moment_rank": weight_four_plus_moments.rank(),
+            "difference_moment_rank": weight_four_moments.rank(),
+        }
     else:
         axis_incidence = None
         axis_digit = None
+        weight_four_trade = None
     translation_orbits = []
     unseen = set(orbit)
     while unseen:
@@ -351,6 +379,7 @@ def evaluate(representative, orbit, orbit_number):
         "defect_quotient": defect_quotient,
         "axis_incidence_difference": axis_incidence,
         "axis_l2_tensor_frobenius_difference": axis_digit,
+        "axis_weight_four_difference": weight_four_trade,
     }
 
 
@@ -390,10 +419,16 @@ def calculate():
         and record["axis_l2_tensor_frobenius_difference"][
             "trade_family_rank"
         ] == 0
+        and record["axis_weight_four_difference"][
+            "common_moment_rank"
+        ] == 1
+        and record["axis_weight_four_difference"][
+            "difference_moment_rank"
+        ] == 0
         for record in split_records
     )
     return {
-        "schema": 1,
+        "schema": 2,
         "q": q,
         "field_modulus": str(k.modulus()),
         "torus_matching_count": len(torus_matchings),
