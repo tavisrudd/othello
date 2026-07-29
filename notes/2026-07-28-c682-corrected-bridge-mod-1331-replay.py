@@ -204,6 +204,16 @@ def replay():
     assert matrix_power(matmul(left, right, MODULUS), 5, MODULUS) == identity
     trace_five = presentation["trace_ST_mod_1331"]
     assert (trace_five * trace_five + trace_five - 1) % MODULUS == 0
+    golden = certificate["golden_character_field"]
+    assert golden["selected_trace_root_mod_1331"] == trace_five == 1294
+    assert golden["conjugate_trace_root_mod_1331"] == 36
+    assert golden["selected_sqrt5_mod_1331"] == (2 * trace_five + 1) % MODULUS == 1258
+    assert golden["conjugate_sqrt5_mod_1331"] == 73
+    assert golden["selected_sqrt5_mod_1331"] ** 2 % MODULUS == 5
+    assert golden["conjugate_sqrt5_mod_1331"] ** 2 % MODULUS == 5
+    assert golden["selected_sqrt5_mod_11"] == 4
+    assert golden["conjugate_sqrt5_mod_11"] == 7
+    assert golden["one_incidence_orientation_scalar_mod_11"] == 4
 
     invariant = vector_from_terms(
         certificate["normalized_invariant_dodecic_mod_1331"]

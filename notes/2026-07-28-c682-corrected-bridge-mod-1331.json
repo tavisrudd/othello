@@ -189,6 +189,17 @@
       "y": 11
     }
   ],
+  "golden_character_field": {
+    "conjugate_sqrt5_mod_11": 7,
+    "conjugate_sqrt5_mod_1331": 73,
+    "conjugate_trace_root_mod_1331": 36,
+    "identity": "sqrt5=2*trace(ST)+1",
+    "interpretation": "The two Hensel branches are the two embeddings of the golden character field.  They reduce to the unordered pair of scalars +/-4 in w=+/-4*c_match on the mod-11 fibre.",
+    "one_incidence_orientation_scalar_mod_11": 4,
+    "selected_sqrt5_mod_11": 4,
+    "selected_sqrt5_mod_1331": 1258,
+    "selected_trace_root_mod_1331": 1294
+  },
   "inputs": {
     "notes/2026-07-26-c651-hitchin-tensor-bridge.json": {
       "bytes": 4369,

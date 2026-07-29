@@ -835,7 +835,15 @@ kernel-to-cokernel Bockstein is zero, so no hidden \(11\)-torsion channel
 appears: the \(V_4/V_{3'}\) rank-four splitting is flat through modulus
 \(121\).  Intrinsically, \([K]\) is the normal direction of the
 \(A_5\)-invariant line away from the maximally symmetric Dickson fibre,
-modulo its full coordinate-and-scalar tangent space.  The report, primary
+modulo its full coordinate-and-scalar tangent space.  A further `ej2`
+composition identifies the presentation root itself with the golden
+sheet:
+\(s=2\operatorname{tr}(ST)+1\) satisfies \(s^2=5\), and its two
+mod-\(1331\) values \(1258,73\) reduce to the marked incidence scalars
+\(\pm4\).  Thus the corrected tower and incidence cover have the same
+quadratic character algebra and \(C_2\)-exchange.  A direct equality of
+their tangent classes is ill-typed until the third-transvectant
+kernel/annihilator morphism is constructed.  The report, primary
 certificate, independent replay, and mystery ledger are in
 `notes/2026-07-28-c682-corrected-bridge-mod-1331.md`.  The local lift
 equation is closed; its intrinsic relation to the global incidence cover

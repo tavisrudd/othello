@@ -138,6 +138,65 @@ Dickson special fibre.  The positive tower integrates this normal class.
 This makes \(K\) an intrinsic first-order degeneration datum, not an ad
 hoc equivariance patch.
 
+## `ej2` upgrade: the lift parameter is the golden sheet
+
+The presentation Hensel variable is not an unrelated \(11\)-adic
+coordinate.  Put
+\[
+ \tau=\operatorname{tr}(ST).
+\]
+The order-five relation gives
+\[
+ \tau^2+\tau-1=0,
+\]
+and therefore
+\[
+ s=2\tau+1,\qquad s^2=5.
+\]
+For the selected marked branch,
+\[
+ \tau=1294,\qquad s=1258\pmod{1331}.
+\]
+The conjugate branch is
+\[
+ \tau^\sigma=-1-\tau=36,\qquad s^\sigma=-s=73\pmod{1331}.
+\]
+Their reductions are
+\[
+ s\equiv4,\qquad s^\sigma\equiv7=-4\pmod{11}.
+\]
+
+This is exactly the golden character field of the binary icosahedral
+representation.  Conjugation swaps the two order-five character classes,
+the two roots of \(\tau^2+\tau-1\), and the two square roots of \(5\).
+Equivalently,
+\[
+ \mathbf Q(\sqrt5)\otimes\mathbf Q_{11}
+ \simeq\mathbf Q_{11}\times\mathbf Q_{11},
+\]
+and the corrected tower chooses one of its two components.
+
+The same pair of roots appears on the incidence side.  On the marked
+modulo-\(11\) fibre,
+\[
+ w=\pm4c_{\mathrm{match}},\qquad w^2=5J_0,\qquad
+ c_{\mathrm{match}}^2=J_0.
+\]
+Thus the two Hensel values \(s\bmod11=4,7=-4\) are precisely the unordered
+pair of incidence-orientation scalars.  The corrected
+operator tower and the golden incidence cover therefore carry the same
+quadratic algebra and the same \(C_2\)-exchange, not merely the same
+square class.
+
+This also supplies a useful negative typing result.  The normal class
+\([K]\) lives in the binary-dodecic deformation space, whereas the
+differential of \(5J_0\) lives on Hitchin's harmonic-cubic base.  They
+cannot be equated directly.  A comparison requires the
+third-transvectant kernel/annihilator morphism between those moduli
+problems.  What is now proved is the common golden character algebra and
+sheet choice; equality of tangent classes remains a separate geometric
+diagram.
+
 ## `ej` + `tt` closeout: the whole \(11\)-adic tower
 
 The finite test exposes a general consequence rather than a new
@@ -195,9 +254,9 @@ The deterministic evidence bundle is:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331.py` | 22534 | `794dfe03e11c6a2b41468a8330e2b4dd5ef3e880439677cf70ad9da55f5512d2` |
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331.json` | 9751 | `a07132da65a45f82b36f76baa32a276edfe0bfffd586f8547f776b92371ecb1a` |
-| `notes/2026-07-28-c682-corrected-bridge-mod-1331-replay.py` | 12761 | `b59b9f8329d52f4e4fb4135bbada7ca9becd1b330aac6efcd31e5ef659864e6c` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331.py` | 23792 | `c51140224c8e59c37fd7385370a1c8e15cd5faa23bc552c2d0b0a685b685190f` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331.json` | 10288 | `f56786b7ef147b647fdb7133f4896b06f20118b509a7e7ccd85b5cf07070c805` |
+| `notes/2026-07-28-c682-corrected-bridge-mod-1331-replay.py` | 13374 | `c0b9e2ef98fe06e9f4cd1daa332cd2e52ccbfd8671eaaedc4c37261510a520a3` |
 
 The JSON records byte counts and hashes for every imported load-bearing
 input.  Its output is canonical and has no timestamps, random seeds, or
@@ -220,12 +279,20 @@ host-specific paths.
 - **Explained by `ej`:** \([K]\) is the normal/Kodaira--Spencer direction
   of the \(A_5\)-invariant lift away from the maximally symmetric Dickson
   fibre, modulo the complete coordinate-and-scalar tangent space.
+- **Closed by `ej2`:** the presentation parameter satisfies
+  \(s=2\operatorname{tr}(ST)+1\), \(s^2=5\); its two Hensel branches are
+  the two golden character-field embeddings and reduce to the two marked
+  incidence-sheet scalars \(\pm4\).
+- **Corrected by `ej2`:** a direct equality between \([K]\) and a
+  differential of \(5J_0\) is ill-typed.  The missing object is the
+  kernel/annihilator morphism between the binary-dodecic and
+  harmonic-cubic deformation spaces.
 - **Closed by `ej` + `tt`:** smoothness and Reynolds averaging upgrade the
   one-step success to existence of the entire compatible
   \(\mathbf Z_{11}\)-tower.
-- **Open outside this local gate:** find an intrinsic geometric
-  interpretation of the tower inside the Hitchin incidence cover or the
-  global golden-fibre integral model.  No genuine mystery remains in the
-  local lift equation itself.
+- **Open outside this local gate:** construct that deformation-space
+  morphism and test whether it carries the normal line \([K]\) to the
+  orientation-cover normal line.  No genuine mystery remains in the local
+  lift equation or its quadratic character algebra.
 
 C682 remains open; completion is the user's decision.

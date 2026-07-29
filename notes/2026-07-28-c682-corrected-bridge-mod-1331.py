@@ -382,6 +382,16 @@ def build_certificate():
     assert matrix_power(left, 2, MODULUS) == minus_identity
     assert matrix_power(right, 3, MODULUS) == minus_identity
     assert matrix_power(matmul(left, right, MODULUS), 5, MODULUS) == identity
+    golden_sqrt = (2 * trace_five + 1) % MODULUS
+    conjugate_trace = (-1 - trace_five) % MODULUS
+    conjugate_golden_sqrt = (-golden_sqrt) % MODULUS
+    assert golden_sqrt * golden_sqrt % MODULUS == 5
+    assert (
+        conjugate_trace * conjugate_trace + conjugate_trace - 1
+    ) % MODULUS == 0
+    assert conjugate_golden_sqrt * conjugate_golden_sqrt % MODULUS == 5
+    assert golden_sqrt % PRIME == 4
+    assert conjugate_golden_sqrt % PRIME == 7
 
     invariant = [value % PRIME for value in F_VECTOR]
     invariant_lift_ranks = []
@@ -572,6 +582,22 @@ def build_certificate():
             "trace_ST_mod_1331": trace_five,
             "trace_polynomial": "u^2+u-1",
             "hensel_linear_ranks": presentation_ranks,
+        },
+        "golden_character_field": {
+            "identity": "sqrt5=2*trace(ST)+1",
+            "selected_trace_root_mod_1331": trace_five,
+            "conjugate_trace_root_mod_1331": conjugate_trace,
+            "selected_sqrt5_mod_1331": golden_sqrt,
+            "conjugate_sqrt5_mod_1331": conjugate_golden_sqrt,
+            "selected_sqrt5_mod_11": golden_sqrt % PRIME,
+            "conjugate_sqrt5_mod_11": conjugate_golden_sqrt % PRIME,
+            "one_incidence_orientation_scalar_mod_11": 4,
+            "interpretation": (
+                "The two Hensel branches are the two embeddings of the "
+                "golden character field.  They reduce to the unordered "
+                "pair of scalars +/-4 in w=+/-4*c_match on the mod-11 "
+                "fibre."
+            ),
         },
         "normalized_invariant_dodecic_mod_1331": serialize_vector(invariant),
         "normalization": "coefficient of X^11 Y is exactly 1",
