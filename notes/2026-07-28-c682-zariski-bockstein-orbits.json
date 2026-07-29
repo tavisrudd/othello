@@ -1,0 +1,134 @@
+{
+  "base": {
+    "binary_group_order": 120,
+    "first_order_modulus": 121,
+    "marked_presentation_is_smooth_at_special_point": true,
+    "prime": 11,
+    "reynolds_denominator_is_a_unit": true
+  },
+  "four_orbit_quotient": {
+    "centered_digit_function": "b=a-4=5*e_1+e_6",
+    "first_digit_function": "a=(r-s)/11=4+5*e_1+e_6",
+    "normal_cone_presentation": "F_11[s,b]/(s^2-1, b*(b-(3+2*s)))",
+    "ratio_reconstruction_mod_121": "r=s+11*(4+b)",
+    "rows": [
+      {
+        "centered_digit": 5,
+        "first_bockstein_digit": 9,
+        "name": "radial",
+        "orbit_size": 1,
+        "quotient_point": [
+          1,
+          5
+        ],
+        "ratio_mod_121": 100,
+        "sheet_sign": 1,
+        "stabilizer": "A5",
+        "stabilizer_order": 60
+      },
+      {
+        "centered_digit": 0,
+        "first_bockstein_digit": 4,
+        "name": "Clebsch-parent",
+        "orbit_size": 5,
+        "quotient_point": [
+          10,
+          0
+        ],
+        "ratio_mod_121": 43,
+        "sheet_sign": -1,
+        "stabilizer": "A4",
+        "stabilizer_order": 12
+      },
+      {
+        "centered_digit": 1,
+        "first_bockstein_digit": 5,
+        "name": "fivefold-axis",
+        "orbit_size": 6,
+        "quotient_point": [
+          10,
+          1
+        ],
+        "ratio_mod_121": 54,
+        "sheet_sign": -1,
+        "stabilizer": "D5",
+        "stabilizer_order": 10
+      },
+      {
+        "centered_digit": 0,
+        "first_bockstein_digit": 4,
+        "name": "pair",
+        "orbit_size": 10,
+        "quotient_point": [
+          1,
+          0
+        ],
+        "ratio_mod_121": 45,
+        "sheet_sign": 1,
+        "stabilizer": "S3",
+        "stabilizer_order": 6
+      }
+    ],
+    "special_sheet_function": "s=e_1+e_10-e_5-e_6",
+    "within_sheet_splitting_speeds": {
+      "negative_D5_over_A4": 1,
+      "positive_radial_over_pair": 5,
+      "ratio": 5
+    }
+  },
+  "inputs": {
+    "notes/2026-07-28-c682-corrected-bridge-mod-1331.json": {
+      "bytes": 10288,
+      "sha256": "f56786b7ef147b647fdb7133f4896b06f20118b509a7e7ccd85b5cf07070c805"
+    },
+    "notes/2026-07-28-c682-rank-four-resolvent.json": {
+      "bytes": 111899,
+      "sha256": "92ee24f654b4a9bce58a9f12f16ed19614c70d4b81ae5e0e099c76d91b243d6c"
+    },
+    "notes/2026-07-28-c682-u22-bockstein-pencil.json": {
+      "bytes": 9899,
+      "sha256": "c1bbc4fd62219274598c8ece334fff4c366c6c59d581334c50b06e5d2e173f77"
+    }
+  },
+  "normalization_boundary": {
+    "depends_on_the_normalized_pencil": [
+      "the common first digit 4",
+      "the representatives 100,43,54,45",
+      "the golden-pair midpoint 11 mod 121"
+    ],
+    "intrinsic": [
+      "the four stabilizer-labelled quotient branches",
+      "the two sheet collisions",
+      "the two nonzero within-sheet first-order separations"
+    ],
+    "warning": "Orbit sizes alone force multiplicities, not numerical pencil values; the latter use the fixed (8*epsilon,7*eta) normalization."
+  },
+  "quotient_polynomial_mod_121": {
+    "coefficients": [
+      1,
+      0,
+      75,
+      0,
+      45
+    ],
+    "discriminant_11_adic_valuation": 4,
+    "discriminant_unit_mod_11": 9,
+    "factorization": "(T^2-23)^2 mod 121",
+    "interpretation": "The quotient has two double special-fibre sheets; their four branches separate transversely only in the first Bockstein digit.",
+    "root_order_by_orbit_size": [
+      1,
+      5,
+      6,
+      10
+    ]
+  },
+  "schema": "c682-zariski-bockstein-orbits-v1",
+  "zariski_globalization_gates": {
+    "interpretation": "Flatness divides the two covariants by 11 on an actual marked-presentation open; transversality then gives a finite-etale degree-22 relative section, and its A5 quotient is finite etale of degree four.",
+    "pencil_denominator_is_a_unit_at_every_special_point": true,
+    "presentation_constraint_count": 5,
+    "presentation_jacobian_rank": 5,
+    "section_chart_jacobian_rank": 12,
+    "section_point_count": 22
+  }
+}

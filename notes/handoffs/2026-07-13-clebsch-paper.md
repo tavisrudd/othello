@@ -975,6 +975,28 @@ replay, scope boundary, and mystery ledger are in
 globalization gate is characteristic-zero and Zariski-local; the local
 formal comparison is complete.
 
+C682 now closes that Zariski globalization gate.  On an actual smooth
+marked-presentation neighborhood over \(\mathbf Z_{(11)}\), Reynolds
+averaging gives the invariant dodecic line and covariance makes the
+order-\(11\) and order-\(12\) contractions vanish along the entire Dickson
+special orbit.  Flatness therefore divides them algebraically by \(11\),
+not merely in the completion.  The transverse \(22\)-section spreads to a
+finite-etale degree-\(22\) family, and its tame \(A_5\)-quotient is
+finite etale of degree four with stabilizers
+\(A_5,A_4,D_5,S_3\).  In the split completion its complete first-order
+normal form is
+\[
+ s^2=1,\qquad b(b-(3+2s))=0,\qquad r=s+11(4+b),
+\]
+giving the four orbit values \(100,43,54,45\) on orbit sizes
+\(1,5,6,10\).  The within-sheet splitting speeds are \(5\) and \(1\);
+their ratio \(5\) survives congruent pencil-coordinate changes, whereas
+the golden-pair midpoint \(11\) does not.  The exact proof, quotient
+certificate, normalization boundary, and mystery ledger are in
+`notes/2026-07-28-c682-zariski-bockstein-orbits.md`.  The remaining global
+gate is a coordinate-free kernel--incidence morphism explaining why that
+tangent ratio is the discriminant of the \(5J_0\) torsor.
+
 C682's remaining Platinum track is:
 
 1. **QG:** prove that the generic fibre of the rate-half MDS-code to
