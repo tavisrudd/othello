@@ -92,17 +92,62 @@ certificate proves only the non-equivariance of the retired scalar channel
 and the vanishing of the genuine order-59 ordinary contraction.  It does
 not decide whether the \(q=121\) pullback splits.
 
+## Valid ordinary contractions are blind
+
+The complete nonzero ordinary-contraction range \(1\le r\le10\) has now
+been tested exactly after restriction to the split Borel.  The affine
+cocycle is first normalized to vanish on the split torus.  For each
+\[
+C_r:\operatorname{Sym}^2F\longrightarrow
+\operatorname{Sym}^{118-2r}L(2),
+\]
+the checker solves the two translation coboundary equations inside the
+torus-compatible Hom space.  Every system is consistent.  Their numbers of
+variables are \(828-21r\), their coefficient ranks are \(825-21r\), and
+the rank defect is exactly three in all ten orders.  Thus every valid
+ordinary contraction is Borel-blind.
+
+This is a bounded negative result about the ten invariant contraction
+images.  It does not show that the original pullback class restricts to
+zero on the Borel and does not decide C1.
+
+The streaming checker uses exact arithmetic over
+\(\mathbb F_{121}=\mathbb F_{11}[x]/(x^2+7x+2)\).  It performs sparse
+elimination without materializing the former large matrices, then
+back-substitutes a canonical coboundary and re-evaluates every original
+equation.  The ten channels verify between \(60{,}450\) and \(78{,}886\)
+equations each.  The compact certificate records the exact ranks, counts,
+and SHA-256 hash of each canonical solution.
+
+From the repository root, with SageMath 10.7, regenerate or check the
+certificate by
+
+```text
+nix shell nixpkgs#sage -c sage -python \
+  notes/2026-07-29-c665-q121-borel-stream-replay.py \
+  --jobs 5 --check
+sha256sum -c notes/2026-07-29-c665-q121-borel-stream.sha256
+```
+
+The evidence bundle is
+`notes/2026-07-29-c665-q121-borel-stream.sage`,
+`notes/2026-07-29-c665-q121-borel-stream-replay.py`,
+`notes/2026-07-29-c665-q121-borel-stream.json`, and
+`notes/2026-07-29-c665-q121-borel-stream.sha256`.
+The exact solution-residual pass is the independent invariant check; no
+second implementation of the large Borel systems is claimed.
+
 ## Replacement attacks
 
-The proof search now has four genuinely different routes.
+The contraction route is now closed negatively.  Three genuinely different
+routes remain.
 
-1. Test the ten nonzero ordinary contraction channels
-   \(1\le r<11\).  Any inconsistent image cocycle is a valid certificate.
-2. Restrict to the Borel.  Since \([H:B]=q+1\) is invertible in
+1. Restrict the original pullback to the Borel.  Since
+   \([H:B]=q+1\) is invertible in
    characteristic \(p\), restriction on first cohomology is injective.  A
    torus-weighted unipotent left-kernel certificate therefore decides the
    pullback without constructing the full symmetric square.
-3. Use modular Hermite reciprocity
+2. Use modular Hermite reciprocity
    \[
    \operatorname{Sym}_{d}(\operatorname{Sym}^{2}V)
    \simeq
@@ -111,12 +156,23 @@ The proof search now has four genuinely different routes.
    to replace ternary plethysm by a symmetric square of a binary
    Weyl/dual-Weyl module, then compute embedding, retraction, and extension
    scalars recursively in Frobenius digits.
-4. Search for an explicit \(q=121\) splitting.  A positive result would
+3. Search for an explicit \(q=121\) splitting.  A positive result would
    falsify C1 rather than merely another proposed detector.
 
-The current highest-EV order is (1), then (2).  Route (3) is the preferred
-uniform theorem architecture once the first positive or negative
-\(q=121\) model is sound.
+The current highest-EV order is (1), with (2) developed in parallel as the
+preferred uniform theorem architecture.  If \(W\) denotes the binary
+degree-59 Weyl/dual-Weyl module in the fixed point-vector convention, its
+two associated-graded layers are
+\[
+\operatorname{gr}W=
+\bigl(L(5)\otimes L(4)^{(1)}\bigr)
+\oplus\bigl(L(4)\otimes L(5)^{(1)}\bigr).
+\]
+Under modular Hermite reciprocity
+\(F\simeq\operatorname{Sym}^2W\), the two associated-graded
+square/exterior channels each contain an \(L(6)\).  This cleanly explains
+why q=121 is the first plausible socle/head radical occurrence, but it does
+not yet determine the pullback class.
 
 The exact source for route (3) is McDowell--Wildon, *Modular plethystic
 isomorphisms for two-dimensional linear groups*, J. Algebra 602 (2022),
@@ -132,7 +188,8 @@ evidence that the C1 pullback is nonsplit.
 |---|---|---|
 | \(L(6)\) embeds and co-occurs in the head, but \(\pi i=0\) | settled exact occurrence; structural cause open | identify its Frobenius-digit Weyl/dual-Weyl layer under modular Hermite reciprocity |
 | retired top Hasse channel gives a \(1\to2\) rank jump | settled as an artifact of a non-equivariant operator | none; do not reuse the rank jump |
-| actual \(q=121\) quadratic pullback | open | valid ordinary-contraction obstruction, Borel certificate, or explicit splitting |
+| all ten valid ordinary contractions | settled Borel-blind with exact coboundaries | none; move to the original Borel class |
+| actual \(q=121\) quadratic pullback | open | direct Borel certificate or explicit splitting |
 | uniform extension-field C1 | open | occurrence-level recursive theorem covering every exceptional candidate family |
 
 Vibe check: the prior positive model failed at a load-bearing seam, but the

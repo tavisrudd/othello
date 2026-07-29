@@ -47,10 +47,12 @@ For each outer-parity head \(i:S^\chi\hookrightarrow E\):
 
 ## Immediate gate
 
-For \(L(6)\subset\operatorname{Sym}^{59}L(2)\) at \(q=121\), test the genuine
-ordinary contractions of orders \(1,\ldots,10\).  If they are blind, pass to
-Borel restriction.  The uniform target is a modular-Hermite/tilting rule in
-Frobenius digits.
+For \(L(6)\subset\operatorname{Sym}^{59}L(2)\) at \(q=121\), all genuine
+ordinary contractions of orders \(1,\ldots,10\) are now certified
+Borel-blind.  Test the original pullback class by a torus-weighted
+unipotent Borel obstruction.  In parallel, use the two-layer binary
+degree-59 Weyl/dual-Weyl model under modular Hermite reciprocity to derive
+the occurrence and extension scalars in Frobenius digits.
 
 ## Guardrails
 

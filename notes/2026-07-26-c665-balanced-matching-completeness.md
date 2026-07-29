@@ -1336,10 +1336,13 @@ The correction, independent replay, exact evidence boundary, and
 replacement attacks are in
 `notes/2026-07-29-c665-uniform-c1-correction.md`.  The old contraction
 files remain historical failed evidence and must not be replayed as a C1
-gate.  The correct next order is: test the ordinary contraction channels
-of orders \(1,\ldots,10\); if they are blind, compute a direct Borel
-obstruction; then express the occurrence and extension scalars recursively
-through modular Hermite reciprocity.  This is an open field gate and not a
+gate.  All ten genuine ordinary contraction channels are now certified
+Borel-blind: their torus-compatible systems have \(828-21r\) variables,
+rank \(825-21r\), and explicit verified coboundaries for
+\(1\le r\le10\).  This closes only the contraction family, not q=121 C1.
+The next gate is the original pullback's Borel class, with the two-layer
+binary degree-59 Weyl/dual-Weyl model under modular Hermite reciprocity as
+the uniform structural route.  This remains an open field gate and not a
 uniform extension-field theorem.
 
 The characteristic-three torus case is a separate genuine residual family,
