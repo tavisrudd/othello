@@ -378,6 +378,8 @@ allocates work nor adds it to a paper.
 
 ## Working and historical indexes
 
+- Trilogy venue strategy:
+  [`../2026-07-30-clebsch-trilogy-venue-strategy.md`](../2026-07-30-clebsch-trilogy-venue-strategy.md).
 - Live task detail: `notes/clebsch-tasks/`.
 - C682 thematic lookup and chronology:
   `notes/handoffs/2026-07-13-clebsch-c682-archive.md`.
