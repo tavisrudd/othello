@@ -1,5 +1,5 @@
 {
-  "check_count": 16,
+  "check_count": 18,
   "checks": [
     {
       "id": "verification-tool-tests",
@@ -58,6 +58,14 @@
       "status": "passed"
     },
     {
+      "id": "check-q13-tangent-code",
+      "status": "passed"
+    },
+    {
+      "id": "check-orientation-two-graph",
+      "status": "passed"
+    },
+    {
       "id": "check-conic_filling-eight-point-exclusion",
       "status": "passed"
     },
@@ -67,11 +75,11 @@
     }
   ],
   "inputs": {
-    "checker_outputs_sha256": "b5577fa19c35992950faf486cac33df5de523ff05162e6fa42ecd886302fdcbc",
-    "manuscript_pdf_sha256": "b3af5a3dba9815878422efd20df2c809a23ffa8593ec1226080ffbd3d760cf1b",
-    "manuscript_sha256": "d7e08a065243a1b63bf5a3cac66b7805d7e4206b0b7e9eff9b3feb4e7fe32dfc",
-    "release_surface_sha256": "2332c6bbb7061c09e6605f53d6f560874825d97809efa934262ab0d5661d6ff0",
-    "statement_identity_sha256": "9246d5f0f5cf267990b7260fa40d3f40ec984ef96a2535d45f6c0bbd34828854"
+    "checker_outputs_sha256": "a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3",
+    "manuscript_pdf_sha256": "1c6be513610de80be8e41ab2575d711b1432a5ef714a1fb2fa780482f65c6a52",
+    "manuscript_sha256": "4f9602894b754bde83a7287d9431456be9fecf3cca815bdea9134c8a55c89f41",
+    "release_surface_sha256": "c4e47dd3e429e8e604770678d61a4b2901ebbdd3528a0c0e41bce28e2c82be3a",
+    "statement_identity_sha256": "965e1b23328fb405f2fcd7e294718ff7ec324b405da607e175a56980ee9d5445"
   },
   "lean_commit": "6d4766d1ea5e9a36f1a507e549c223416a6b506f",
   "status": "passed"
