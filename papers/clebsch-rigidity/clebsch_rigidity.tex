@@ -1109,16 +1109,32 @@ At $p_a$, pair balance gives
  \end{cases}
 \]
 The nonzero block is switching-equivalent to a five-by-five principal
-minor of $B$, with characteristic polynomial
-$\lambda(\lambda^2-5)^2$.  The Hessian has rank four, with precisely the
-translation and radial directions as its kernels.  Its induced form on the
-four-dimensional projective tangent space is therefore nondegenerate, so
-every singularity is an ordinary double point.  The six points form a
-projective frame.  Every
-projective automorphism of the cubic permutes this complete frame, and
-each frame permutation has a unique projective extension.  The signed
-permutation calculation gives stabilizers of orders $120$ for the cubic
-line and $60$ for its orientation, proving the automorphism statement.
+minor $M$ of $B$.  If $u$ is the deleted row, the corresponding block
+decomposition of $B^2=5I$ gives
+\[
+ Mu=0,\qquad M^2=5I-uu^{\mathsf T}.
+\]
+Since $u^{\mathsf T}u=5$, the second identity restricts to $M^2=5I$ on
+$u^\perp$.  Thus $\ker M=\mathbf Q u$ and $\operatorname{rank}M=4$.
+Moreover $\operatorname{tr}M=0$, so the two square roots of $5$ occur
+twice each and
+\[
+ \chi_M(\lambda)=\lambda(\lambda^2-5)^2.
+\]
+The Hessian therefore has precisely the translation and radial directions
+as its kernels.  Its induced form on the four-dimensional projective tangent
+space is nondegenerate, so every singularity is an ordinary double point.
+
+The six points form a projective frame.  Every projective automorphism of
+the cubic permutes this complete frame, and each frame permutation has a
+unique projective extension.  The recovered switching class is the
+six-point regular two-graph.  In the gauge $B_{0i}=1$ it is equivalently a
+pentagon on the other five vertices, so its permutation group is the
+degree-six action of $S_5$, of order $120$.  The sign on the two
+complementary triple orbits is its nontrivial quotient character; its
+kernel is the already constructed $A_5$.  Hence the cubic line has
+stabilizer $S_5$ and the oriented cubic has stabilizer $A_5$, without a
+separate signed-permutation enumeration.
 
 For a triple $S=\{i,j,k\}$, its principal minor is
 \[
@@ -1258,21 +1274,28 @@ its reconstruction from syndrome data are given in
 Section~\ref{sec:orientation-two-graph}.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
-reconstruction, support bipartition, and the conceptual part of the
-orientation two-graph theorem are proved in the text.  Singular-locus
-completeness, Hessian ranks, and the signed-permutation stabilizers are
-load-bearing exact finite-algebra steps.  The paper-owned replay constructs the
-$A_5/C_5$ and $A_5/D_5$ actions, the signed operator, its triangle products
-and diagonal pencil, the balanced switching class, the five gradient
-ideals, and the six Hessian ranks.  It reads no
+reconstruction, support bipartition, and the orientation two-graph
+reconstruction are proved in the text.  In particular, the conference
+identity gives pair balance and the Hessian ranks, while the pentagon model
+gives the $S_5/A_5$ stabilizer distinction.  Singular-locus completeness is
+the remaining load-bearing exact finite-algebra step.  The paper-owned
+replay constructs the $A_5/C_5$ and $A_5/D_5$ actions, the signed operator,
+its triangle products and diagonal pencil, the balanced switching class,
+the five gradient ideals, and the six Hessian blocks; except for the
+gradient-ideal exhaustion, these are cross-checks of arguments in the text.
+It reads no
 later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
 \end{center}
-The formal
-cross-check is conditional: it treats Dye's Brianchon bound and equality
-classification as explicit axioms. It does not certify the exhaustive
-searches in the computational companion. The Lean development is
+The human-scale formal gate additionally checks switching invariance,
+$B^2=5I$, pair balance, the two principal-block identities used in the
+rank-four argument, translation descent of the cubic, its triangle-product
+formula, and vanishing of all six displayed node gradients.  The formal
+cross-check is deliberately partial: Dye's Brianchon bound and equality
+classification remain cited mathematical inputs, not declarations in this
+human-scale gate.  It does not certify the exhaustive searches in the
+computational companion. The Lean development is
 distributed in the
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}
 repository}; its version-independent archival locator is the Zenodo concept
@@ -1282,9 +1305,9 @@ Its pinned artifacts are
 \begin{center}
 \small
 source commit:
-\path{6d4766d1ea5e9a36f1a507e549c223416a6b506f}\\
-aggregate gate:
-\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
+\path{d3cee9167e14b714c0e2a59db1fdeebe25180fb7}\\
+human-scale gate:
+\path{RelativeConicArcs/Gates/ClebschRigidityHuman.lean}\\
 Mathlib commit:
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
 \end{center}
@@ -1293,15 +1316,14 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 \small\path{a9ff62ca02ff94d38760cbde395d25cbc30bb080ff4fc25a403a5b8b682674f3}.
 \end{center}
 The SHA-256 digest of
-\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean} is
+\path{RelativeConicArcs/Gates/ClebschRigidityHuman.lean} is
 \begin{center}
-\small\path{dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69}.
+\small\path{6f72d1c3d7ff502210766d3d6d1f2af91fb3cf166c13b6b70c67e2a87dc64648}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
-recorded axiom audit lists the standard logical axioms and exactly the two
-Dye axioms above for the rigidity implication; the gate uses neither
-admitted declarations nor native execution.
+recorded axiom audit lists only standard logical axioms; the gate uses
+neither admitted declarations nor native execution.
 
 \section{Conclusion}
 
