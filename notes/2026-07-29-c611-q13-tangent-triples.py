@@ -197,7 +197,7 @@ def incidence_distance_certificate() -> dict[str, object]:
     ]
     assert len(secant_neighbors) == 35
 
-    def xor_columns(indices: tuple[int, ...] | list[int]) -> int:
+    def xor_columns(indices: tuple[int, ...] | list[int] | frozenset[int]) -> int:
         value = 0
         for index in indices:
             value ^= columns[index]
@@ -227,6 +227,105 @@ def incidence_distance_certificate() -> dict[str, object]:
         target = columns[base] ^ xor_columns(choice)
         for pair in itertools.combinations(secant_neighbors, 2):
             assert target ^ xor_columns(pair) not in left
+
+    # Exhaust all weight-twelve pencil profiles through the base.
+    solutions: set[frozenset[int]] = set()
+    solution_profiles: Counter[str] = Counter()
+
+    def add_solution(indices: tuple[int, ...], profile: str) -> None:
+        support = frozenset((base,) + indices)
+        assert len(support) == 12 and xor_columns(support) == 0
+        if support not in solutions:
+            solutions.add(support)
+            solution_profiles[profile] += 1
+
+    # No secant-join points: either 5+1+...+1 or 3+3+1+...+1.
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left_choices: dict[int, list[tuple[int, ...]]] = {}
+        for choice in itertools.product(
+            *(fibres[index] for index in remaining[:3])
+        ):
+            left_choices.setdefault(xor_columns(choice), []).append(choice)
+        for five in itertools.combinations(fibres[special], 5):
+            target = columns[base] ^ xor_columns(five)
+            for tail in itertools.product(
+                *(fibres[index] for index in remaining[3:])
+            ):
+                for head in left_choices.get(target ^ xor_columns(tail), []):
+                    add_solution(five + head + tail, "five_plus_singles")
+
+    for first, second in itertools.combinations(range(7), 2):
+        remaining = [
+            index for index in range(7) if index not in (first, second)
+        ]
+        left_choices = {}
+        for choice in itertools.product(
+            *(fibres[index] for index in remaining[:2])
+        ):
+            left_choices.setdefault(xor_columns(choice), []).append(choice)
+        for first_triple in itertools.combinations(fibres[first], 3):
+            for second_triple in itertools.combinations(fibres[second], 3):
+                target = (
+                    columns[base]
+                    ^ xor_columns(first_triple)
+                    ^ xor_columns(second_triple)
+                )
+                for tail in itertools.product(
+                    *(fibres[index] for index in remaining[2:])
+                ):
+                    for head in left_choices.get(target ^ xor_columns(tail), []):
+                        add_solution(
+                            first_triple + second_triple + head + tail,
+                            "two_triples_plus_singles",
+                        )
+
+    secant_pairs = list(itertools.combinations(secant_neighbors, 2))
+
+    # Two secant-join points: one passant triple and six passant singles.
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left_choices = {}
+        for triple in itertools.combinations(fibres[special], 3):
+            for head in itertools.product(
+                *(fibres[index] for index in remaining[:3])
+            ):
+                choice = triple + head
+                left_choices.setdefault(xor_columns(choice), []).append(choice)
+        for tail in itertools.product(
+            *(fibres[index] for index in remaining[3:])
+        ):
+            target = columns[base] ^ xor_columns(tail)
+            for pair in secant_pairs:
+                for head in left_choices.get(
+                    target ^ xor_columns(pair), []
+                ):
+                    add_solution(
+                        head + tail + pair,
+                        "one_triple_singles_two_secants",
+                    )
+
+    # Four secant-join points: one point in each passant fibre.
+    left_choices = {}
+    for head in itertools.product(*(fibres[index] for index in range(3))):
+        for first_pair in secant_pairs:
+            left_choices.setdefault(
+                xor_columns(head) ^ xor_columns(first_pair), []
+            ).append((head, first_pair))
+    for tail in itertools.product(*(fibres[index] for index in range(3, 7))):
+        target = columns[base] ^ xor_columns(tail)
+        for second_pair in secant_pairs:
+            for head, first_pair in left_choices.get(
+                target ^ xor_columns(second_pair), []
+            ):
+                if set(first_pair).isdisjoint(second_pair):
+                    add_solution(
+                        head + tail + first_pair + second_pair,
+                        "passant_singles_four_secants",
+                    )
+
+    assert len(solutions) == 56
+    assert solution_profiles == Counter({"passant_singles_four_secants": 56})
 
     witness_points = [
         (1, 0, 2),
@@ -258,6 +357,126 @@ def incidence_distance_certificate() -> dict[str, object]:
         for matrix in projective_vectors(4)
         if (matrix[0] * matrix[3] - matrix[1] * matrix[2]) % Q
     ]
+
+    minimum_word_orbits = []
+    all_minimum_words: set[frozenset[int]] = set()
+    unclassified = set(solutions)
+    while unclassified:
+        representative = min(unclassified, key=lambda support: sorted(support))
+        representative_points = [INTERNAL[index] for index in representative]
+
+        def image(matrix: tuple[int, int, int, int]) -> frozenset[int]:
+            return frozenset(
+                INTERNAL.index(symmetric_square_action(matrix, point))
+                for point in representative_points
+            )
+
+        global_orbit = {image(matrix) for matrix in projective_linear_group}
+        all_minimum_words |= global_orbit
+        base_slice = {support for support in global_orbit if base in support}
+        stabilizer = [
+            matrix for matrix in projective_linear_group if image(matrix) == representative
+        ]
+        assert len(global_orbit) == 91
+        assert len(base_slice) == 14
+        assert len(stabilizer) == 24
+        stabilizer_orders = Counter(
+            permutation_order(matrix, representative_points) for matrix in stabilizer
+        )
+
+        secant_triangles = sum(
+            1
+            for first, second, third in itertools.combinations(representative, 3)
+            if not is_passant_join(INTERNAL[first], INTERNAL[second])
+            and not is_passant_join(INTERNAL[first], INTERNAL[third])
+            and not is_passant_join(INTERNAL[second], INTERNAL[third])
+        )
+        entry: dict[str, object] = {
+            "representative_points": [
+                list(INTERNAL[index]) for index in sorted(representative)
+            ],
+            "global_orbit_size": len(global_orbit),
+            "words_through_fixed_base": len(base_slice),
+            "stabilizer_order": len(stabilizer),
+            "secant_graph_triangles": secant_triangles,
+        }
+        if stabilizer_orders == Counter({1: 1, 2: 9, 3: 8, 4: 6}):
+            entry["stabilizer_type"] = "S4"
+            point_involution = next(
+                matrix
+                for matrix in stabilizer
+                if matrix != (1, 0, 0, 1)
+                and symmetric_square_action(matrix, representative_points[0])
+                == representative_points[0]
+            )
+            fixed_points = sum(
+                symmetric_square_action(point_involution, point) == point
+                for point in representative_points
+            )
+            assert fixed_points == 2
+            entry["action"] = "S4/C2_transposition"
+        else:
+            assert stabilizer_orders == Counter(
+                {1: 1, 2: 13, 3: 2, 4: 2, 6: 2, 12: 4}
+            )
+            entry["stabilizer_type"] = "D24"
+            rotation_matrix = next(
+                matrix
+                for matrix in stabilizer
+                if permutation_order(matrix, representative_points) == 12
+            )
+            cyclic_points = []
+            point = representative_points[0]
+            while point not in cyclic_points:
+                cyclic_points.append(point)
+                point = symmetric_square_action(rotation_matrix, point)
+            differences = [
+                index
+                for index in range(1, 12)
+                if not is_passant_join(cyclic_points[0], cyclic_points[index])
+            ]
+            normalized_differences = min(
+                tuple(sorted(unit * index % 12 for index in differences))
+                for unit in (1, 5, 7, 11)
+            )
+            entry["secant_differences_mod_12"] = list(normalized_differences)
+        minimum_word_orbits.append(entry)
+        unclassified -= base_slice
+
+    assert len(minimum_word_orbits) == 4
+    assert Counter(
+        entry["stabilizer_type"] for entry in minimum_word_orbits
+    ) == Counter({"D24": 3, "S4": 1})
+    assert sorted(
+        tuple(entry["secant_differences_mod_12"])
+        for entry in minimum_word_orbits
+        if entry["stabilizer_type"] == "D24"
+    ) == [
+        (1, 3, 9, 11),
+        (1, 4, 8, 11),
+        (2, 3, 9, 10),
+    ]
+    assert sum(entry["global_orbit_size"] for entry in minimum_word_orbits) == 364
+    assert len(all_minimum_words) == 364
+
+    point_replications = Counter(
+        sum(index in support for support in all_minimum_words)
+        for index in range(len(INTERNAL))
+    )
+    assert point_replications == Counter({56: 78})
+    pair_concurrences: Counter[tuple[int, int]] = Counter()
+    for support in all_minimum_words:
+        for first, second in itertools.combinations(sorted(support), 2):
+            pair_concurrences[first, second] += 1
+    concurrence_spectrum = Counter(pair_concurrences.values())
+    assert concurrence_spectrum == Counter({6: 1092, 7: 546, 8: 273, 9: 546, 12: 546})
+    assert len(pair_concurrences) == len(INTERNAL) * (len(INTERNAL) - 1) // 2
+    assert all(
+        is_passant_join(INTERNAL[first], INTERNAL[second])
+        == (concurrence in {7, 9, 12})
+        for (first, second), concurrence in pair_concurrences.items()
+    )
+
     witness_set = set(witness_points)
     stabilizer = [
         matrix
@@ -309,6 +528,22 @@ def incidence_distance_certificate() -> dict[str, object]:
         "weight_12_witness_indices": list(witness),
         "weight_12_witness_points": [list(point) for point in witness_points],
         "weight_12_passant_intersection_sizes": intersection_spectrum,
+        "weight_12_classification": {
+            "words_through_fixed_base": len(solutions),
+            "fixed_base_profile_counts": dict(sorted(solution_profiles.items())),
+            "global_words": 364,
+            "projective_orbits": minimum_word_orbits,
+            "minimum_word_incidence": {
+                "point_replication": 56,
+                "pair_concurrence_spectrum": {
+                    str(value): count
+                    for value, count in sorted(concurrence_spectrum.items())
+                },
+                "passant_pair_concurrences": [7, 9, 12],
+                "secant_pair_concurrences": [6, 8],
+                "join_type_reconstructed": True,
+            },
+        },
         "weight_12_stabilizer": {
             "order": len(stabilizer),
             "element_order_distribution": {

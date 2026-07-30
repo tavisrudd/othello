@@ -57,7 +57,9 @@ compatibility graph has clique number five,
 while a weight-eight word would require a seven-clique. The proof is a
 six-difference-set, five-row unique-closure lemma, not a support search. It
 then excludes the two forced weight-ten pencil profiles and constructs a
-dihedral weight-twelve word. It
+dihedral weight-twelve word. All \(364\) minimum words split into one
+\(S_4\) and three \(D_{24}\) projective orbits, and their pair concurrence
+reconstructs passant versus secant join type. It
 does not prove the unsaturated \((7,13)\) case or the stronger maximum-six
 claim, and it is not reached by C665's defining-characteristic trade
 machinery. The

@@ -30,7 +30,10 @@ actual owning paper.
   weight-eight nullword, which would require a local seven-clique, cannot
   exist. The extra-juice follow-up exhausts the two forced weight-ten
   passant-pencil profiles and constructs a dihedral weight-twelve word, so
-  the exact distance is \(d=12\).
+  the exact distance is \(d=12\). The `ej2` pass classifies all \(364\)
+  minimum words into one \(S_4\) and three \(D_{24}\) projective orbits.
+  Pair concurrence in the minimum supports intrinsically reconstructs join
+  type: \(7,9,12\) means passant and \(6,8\) means secant.
 
 ## Work package
 

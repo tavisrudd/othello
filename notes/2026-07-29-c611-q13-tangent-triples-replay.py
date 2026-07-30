@@ -105,6 +105,86 @@ def verify_distance() -> None:
         for pair in itertools.combinations(secant_neighbors, 2)
     )
 
+    solutions: set[frozenset[int]] = set()
+
+    def add(indices: tuple[int, ...]) -> None:
+        support = frozenset((base,) + indices)
+        assert len(support) == 12 and xor_columns(tuple(support)) == 0
+        solutions.add(support)
+
+    # Exhaust the three possible numbers 0, 2, 4 of secant-join neighbors.
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left_choices: dict[int, list[tuple[int, ...]]] = {}
+        for head in itertools.product(*(fibres[index] for index in remaining[:3])):
+            left_choices.setdefault(xor_columns(head), []).append(head)
+        for five in itertools.combinations(fibres[special], 5):
+            target = columns[base] ^ xor_columns(five)
+            for tail in itertools.product(
+                *(fibres[index] for index in remaining[3:])
+            ):
+                for head in left_choices.get(target ^ xor_columns(tail), []):
+                    add(five + head + tail)
+
+    for first, second in itertools.combinations(range(7), 2):
+        remaining = [
+            index for index in range(7) if index not in (first, second)
+        ]
+        left_choices = {}
+        for head in itertools.product(*(fibres[index] for index in remaining[:2])):
+            left_choices.setdefault(xor_columns(head), []).append(head)
+        for first_triple in itertools.combinations(fibres[first], 3):
+            for second_triple in itertools.combinations(fibres[second], 3):
+                target = (
+                    columns[base]
+                    ^ xor_columns(first_triple)
+                    ^ xor_columns(second_triple)
+                )
+                for tail in itertools.product(
+                    *(fibres[index] for index in remaining[2:])
+                ):
+                    for head in left_choices.get(target ^ xor_columns(tail), []):
+                        add(first_triple + second_triple + head + tail)
+
+    secant_pairs = list(itertools.combinations(secant_neighbors, 2))
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left_choices = {}
+        for triple in itertools.combinations(fibres[special], 3):
+            for head in itertools.product(
+                *(fibres[index] for index in remaining[:3])
+            ):
+                choice = triple + head
+                left_choices.setdefault(xor_columns(choice), []).append(choice)
+        for tail in itertools.product(
+            *(fibres[index] for index in remaining[3:])
+        ):
+            target = columns[base] ^ xor_columns(tail)
+            for pair in secant_pairs:
+                for head in left_choices.get(target ^ xor_columns(pair), []):
+                    add(head + tail + pair)
+
+    left_choices = {}
+    for head in itertools.product(*(fibres[index] for index in range(3))):
+        for first_pair in secant_pairs:
+            left_choices.setdefault(
+                xor_columns(head) ^ xor_columns(first_pair), []
+            ).append((head, first_pair))
+    for tail in itertools.product(*(fibres[index] for index in range(3, 7))):
+        target = columns[base] ^ xor_columns(tail)
+        for second_pair in secant_pairs:
+            for head, first_pair in left_choices.get(
+                target ^ xor_columns(second_pair), []
+            ):
+                if set(first_pair).isdisjoint(second_pair):
+                    add(head + tail + first_pair + second_pair)
+
+    assert len(solutions) == 56
+    assert all(
+        sum(index in secant_neighbors for index in support) == 4
+        for support in solutions
+    )
+
     witness_points = (
         (1, 0, 2), (1, 3, 2), (1, 4, 5), (1, 1, 8),
         (1, 4, 8), (1, 1, 7), (1, 7, 12), (1, 3, 3),
@@ -112,6 +192,101 @@ def verify_distance() -> None:
     )
     witness = tuple(internal.index(point) for point in witness_points)
     assert xor_columns(witness) == 0
+
+    representatives = [
+        (
+            (1, 0, 2), (1, 0, 5), (1, 1, 3), (1, 1, 6),
+            (1, 2, 9), (1, 3, 4), (1, 3, 7), (1, 6, 5),
+            (1, 8, 7), (1, 11, 2), (1, 11, 12), (1, 12, 6),
+        ),
+        (
+            (1, 0, 2), (1, 0, 5), (1, 1, 3), (1, 1, 6),
+            (1, 2, 12), (1, 5, 5), (1, 6, 2), (1, 6, 4),
+            (1, 8, 4), (1, 8, 6), (1, 9, 9), (1, 12, 9),
+        ),
+        witness_points,
+        (
+            (1, 0, 2), (1, 0, 7), (1, 1, 6), (1, 2, 11),
+            (1, 3, 7), (1, 3, 11), (1, 5, 1), (1, 5, 10),
+            (1, 6, 4), (1, 7, 2), (1, 8, 1), (1, 8, 6),
+        ),
+    ]
+
+    def canonical(vector: tuple[int, ...]) -> tuple[int, ...]:
+        first = next(value for value in vector if value)
+        inverse = pow(first, -1, q)
+        return tuple(value * inverse % q for value in vector)
+
+    matrices = (
+        [(1, b, c, d) for b in range(q) for c in range(q) for d in range(q)]
+        + [(0, 1, c, d) for c in range(q) for d in range(q)]
+        + [(0, 0, 1, d) for d in range(q)]
+        + [(0, 0, 0, 1)]
+    )
+    matrices = [
+        matrix
+        for matrix in matrices
+        if (matrix[0] * matrix[3] - matrix[1] * matrix[2]) % q
+    ]
+
+    def act(
+        matrix: tuple[int, int, int, int], point: tuple[int, int, int]
+    ) -> tuple[int, int, int]:
+        a, b, c, d = matrix
+        x, y, z = point
+        return canonical(
+            (
+                (a * a * x + 2 * a * b * y + b * b * z) % q,
+                (a * c * x + (a * d + b * c) * y + b * d * z) % q,
+                (c * c * x + 2 * c * d * y + d * d * z) % q,
+            )
+        )
+
+    covered = set()
+    all_words = set()
+    stabilizer_sizes = []
+    for representative in representatives:
+        orbit = {
+            frozenset(internal.index(act(matrix, point)) for point in representative)
+            for matrix in matrices
+        }
+        stabilizer_sizes.append(
+            sum(
+                {
+                    act(matrix, point) for point in representative
+                }
+                == set(representative)
+                for matrix in matrices
+            )
+        )
+        assert len(orbit) == 91
+        all_words |= orbit
+        base_slice = {support for support in orbit if base in support}
+        assert len(base_slice) == 14
+        assert covered.isdisjoint(base_slice)
+        covered |= base_slice
+    assert stabilizer_sizes == [24, 24, 24, 24]
+    assert covered == solutions
+    assert len(all_words) == 364
+
+    pair_concurrences: Counter[tuple[int, int]] = Counter()
+    for support in all_words:
+        for first, second in itertools.combinations(sorted(support), 2):
+            pair_concurrences[first, second] += 1
+    assert Counter(pair_concurrences.values()) == Counter(
+        {6: 1092, 7: 546, 8: 273, 9: 546, 12: 546}
+    )
+
+    def passant_join(first: int, second: int) -> bool:
+        return any(
+            incident(line, internal[first]) and incident(line, internal[second])
+            for line in passants
+        )
+
+    assert all(
+        passant_join(first, second) == (concurrence in {7, 9, 12})
+        for (first, second), concurrence in pair_concurrences.items()
+    )
 
 
 def main() -> None:
@@ -150,7 +325,7 @@ def main() -> None:
         for clique in five_cliques
     )
     verify_distance()
-    print("C611 independent replay: PASS (omega = 5, d = 12)")
+    print("C611 independent replay: PASS (omega = 5, d = 12, 364 minimum words)")
 
 
 if __name__ == "__main__":

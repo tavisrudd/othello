@@ -24,6 +24,330 @@
         "three_on_one_passant_then_singles": 6531840
       },
       "weight_10_word_exists": false,
+      "weight_12_classification": {
+        "fixed_base_profile_counts": {
+          "passant_singles_four_secants": 56
+        },
+        "global_words": 364,
+        "minimum_word_incidence": {
+          "join_type_reconstructed": true,
+          "pair_concurrence_spectrum": {
+            "12": 546,
+            "6": 1092,
+            "7": 546,
+            "8": 273,
+            "9": 546
+          },
+          "passant_pair_concurrences": [
+            7,
+            9,
+            12
+          ],
+          "point_replication": 56,
+          "secant_pair_concurrences": [
+            6,
+            8
+          ]
+        },
+        "projective_orbits": [
+          {
+            "action": "S4/C2_transposition",
+            "global_orbit_size": 91,
+            "representative_points": [
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                0,
+                5
+              ],
+              [
+                1,
+                1,
+                3
+              ],
+              [
+                1,
+                1,
+                6
+              ],
+              [
+                1,
+                2,
+                9
+              ],
+              [
+                1,
+                3,
+                4
+              ],
+              [
+                1,
+                3,
+                7
+              ],
+              [
+                1,
+                6,
+                5
+              ],
+              [
+                1,
+                8,
+                7
+              ],
+              [
+                1,
+                11,
+                2
+              ],
+              [
+                1,
+                11,
+                12
+              ],
+              [
+                1,
+                12,
+                6
+              ]
+            ],
+            "secant_graph_triangles": 4,
+            "stabilizer_order": 24,
+            "stabilizer_type": "S4",
+            "words_through_fixed_base": 14
+          },
+          {
+            "global_orbit_size": 91,
+            "representative_points": [
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                0,
+                5
+              ],
+              [
+                1,
+                1,
+                3
+              ],
+              [
+                1,
+                1,
+                6
+              ],
+              [
+                1,
+                2,
+                12
+              ],
+              [
+                1,
+                5,
+                5
+              ],
+              [
+                1,
+                6,
+                2
+              ],
+              [
+                1,
+                6,
+                4
+              ],
+              [
+                1,
+                8,
+                4
+              ],
+              [
+                1,
+                8,
+                6
+              ],
+              [
+                1,
+                9,
+                9
+              ],
+              [
+                1,
+                12,
+                9
+              ]
+            ],
+            "secant_differences_mod_12": [
+              2,
+              3,
+              9,
+              10
+            ],
+            "secant_graph_triangles": 0,
+            "stabilizer_order": 24,
+            "stabilizer_type": "D24",
+            "words_through_fixed_base": 14
+          },
+          {
+            "global_orbit_size": 91,
+            "representative_points": [
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                0,
+                5
+              ],
+              [
+                1,
+                1,
+                7
+              ],
+              [
+                1,
+                1,
+                8
+              ],
+              [
+                1,
+                3,
+                2
+              ],
+              [
+                1,
+                3,
+                3
+              ],
+              [
+                1,
+                4,
+                5
+              ],
+              [
+                1,
+                4,
+                8
+              ],
+              [
+                1,
+                7,
+                12
+              ],
+              [
+                1,
+                8,
+                7
+              ],
+              [
+                1,
+                9,
+                11
+              ],
+              [
+                1,
+                10,
+                11
+              ]
+            ],
+            "secant_differences_mod_12": [
+              1,
+              4,
+              8,
+              11
+            ],
+            "secant_graph_triangles": 4,
+            "stabilizer_order": 24,
+            "stabilizer_type": "D24",
+            "words_through_fixed_base": 14
+          },
+          {
+            "global_orbit_size": 91,
+            "representative_points": [
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                0,
+                7
+              ],
+              [
+                1,
+                1,
+                6
+              ],
+              [
+                1,
+                2,
+                11
+              ],
+              [
+                1,
+                3,
+                7
+              ],
+              [
+                1,
+                3,
+                11
+              ],
+              [
+                1,
+                5,
+                1
+              ],
+              [
+                1,
+                5,
+                10
+              ],
+              [
+                1,
+                6,
+                4
+              ],
+              [
+                1,
+                7,
+                2
+              ],
+              [
+                1,
+                8,
+                1
+              ],
+              [
+                1,
+                8,
+                6
+              ]
+            ],
+            "secant_differences_mod_12": [
+              1,
+              3,
+              9,
+              11
+            ],
+            "secant_graph_triangles": 0,
+            "stabilizer_order": 24,
+            "stabilizer_type": "D24",
+            "words_through_fixed_base": 14
+          }
+        ],
+        "words_through_fixed_base": 56
+      },
       "weight_12_passant_intersection_sizes": [
         0,
         2

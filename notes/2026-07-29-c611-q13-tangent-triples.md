@@ -27,6 +27,10 @@ The tangent argument excludes weight eight.  A forced passant-pencil
 meet-in-the-middle argument then excludes weight ten, and an explicit
 dihedral twelve-point orbit supplies a weight-twelve word.
 
+The full minimum layer is also classified.  There are exactly \(364\)
+weight-twelve words in four projective orbits.  Their support-incidence
+numbers recover whether the join of two coordinates is passant or secant.
+
 This is a conceptual reduction followed by a five-row finite-field lemma,
 not a uniform all-\(q\) theorem.  It removes the binary-code mystery at
 \(q=13\), but it does not prove the stronger maximum-six assertion for
@@ -183,6 +187,65 @@ compact structural construction rather than being an unlabelled list.
 Together with parity, the Tanner lower bound, and the tangent exclusion of
 weight eight, this proves \(d(\ker M)=12\).
 
+### All minimum words
+
+The same pencil split classifies every weight-twelve word.  For a support
+through \(P\), let \(s\) be the number of its other points whose join with
+\(P\) is secant.  The seven passant fibres must have positive odd
+occupancies, so the only profiles are
+\[
+\begin{array}{c|c}
+s&\text{passant-fibre occupancies}\\ \hline
+0&5+1+1+1+1+1+1\ \text{or}\ 3+3+1+1+1+1+1\\
+2&3+1+1+1+1+1+1\\
+4&1+1+1+1+1+1+1.
+\end{array}
+\]
+Exact syndrome matching finds no word in the first three rows and exactly
+\(56\) words in the last row.  Thus every minimum word through \(P\) has
+four secant-join neighbors and one point in each passant fibre.
+
+Double counting point--word incidences gives
+\[
+ \frac{78\cdot56}{12}=364
+\]
+minimum words globally.  The full \(\operatorname{PGL}(2,13)\) action
+splits them into four orbits of size \(91\):
+\[
+\begin{array}{c|c|c|c}
+\text{stabilizer/action}&\text{orbit size}&
+\text{normalized cyclic secant differences}&
+\text{secant triangles}\\ \hline
+S_4/C_2\text{ (transposition)}&91&--&4\\
+D_{24}&91&\{2,3,9,10\}&0\\
+D_{24}&91&\{1,4,8,11\}&4\\
+D_{24}&91&\{1,3,9,11\}&0.
+\end{array}
+\]
+The displayed witness belongs to the middle dihedral row.
+
+This minimum layer remembers more than the distance.  Every coordinate
+lies in \(56\) minimum supports.  For a pair of coordinates, let
+\(\lambda(P,Q)\) be the number of minimum supports containing it.  The
+complete concurrence spectrum is
+\[
+\begin{array}{c|rrrrr}
+\lambda&6&7&8&9&12\\ \hline
+\#\{P,Q\}&1092&546&273&546&546.
+\end{array}
+\]
+Most importantly,
+\[
+ PQ\text{ is passant}
+ \quad\Longleftrightarrow\quad
+ \lambda(P,Q)\in\{7,9,12\},
+\]
+while secant pairs have concurrence \(6\) or \(8\).  Hence the family of
+minimum-weight supports intrinsically reconstructs the passant graph, and
+therefore recovers the exact geometric relation used to define the parity
+checks.  It does not yet separate the two elliptic-scheme secant orbitals
+which both have concurrence six.
+
 ## Evidence and trust boundary
 
 From the repository root:
@@ -199,7 +262,8 @@ six difference sets, and verifies the four-clique closure table.  It finds
 \(238\) local edges, \(70\) four-cliques, \(14\) five-cliques, and clique
 number five.  Across all pairwise-passant triples of internal points the
 holonomy counts are \(6188\) with value \(1\) and \(5642\) with value
-\(-1\).
+\(-1\).  It also exhausts all weight-twelve pencil profiles, constructs the
+four projective orbits, and verifies the complete pair-concurrence ledger.
 
 The independent replay starts from the six displayed difference sets for
 the tangent graph and independently reconstructs the projective incidence
@@ -210,7 +274,9 @@ four-clique profiles
  (0,2,2)^{14},\quad(1,1,2)^{28},\quad(1,2,1)^{28},
 \]
 checks unique closure, independently excludes both forced weight-ten
-profiles, verifies the dihedral weight-twelve witness, and obtains
+profiles, independently enumerates the \(56\) minimum words through the
+base, verifies that four explicit projective orbits partition them, and
+replays the join-type reconstruction from all \(364\) words.  It obtains
 \(\omega=5\) and \(d=12\).
 The pre-existing C605 C++/Python bundle is an independent end-to-end
 cross-check: its larger domain finds no seven-point passant-join arc over
@@ -225,9 +291,9 @@ does not supply a uniform conic-code distance theorem.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-07-29-c611-q13-tangent-triples.py` | 16,839 | `f064e020dada882f6328427275bdbcff6cea753157b824099745ac3229911860` |
-| `2026-07-29-c611-q13-tangent-triples-replay.py` | 4,777 | `e72693778890a9d3a9881cf7de4058fa5af1a62091aa0ad382f9cdeb3dceadd0` |
-| `2026-07-29-c611-q13-tangent-triples.json` | 5,258 | `299319802a3c497dc7274934be2ddb0da85c613e35b6657b4b57ea5055af38b7` |
+| `2026-07-29-c611-q13-tangent-triples.py` | 26,926 | `22f6a03a4c398a5afd340feb8fed55f4fbb14453c784bfa377c0b402d7a4d047` |
+| `2026-07-29-c611-q13-tangent-triples-replay.py` | 11,606 | `2d334a47805e1a3ea5bae8898819c72e5caa693209fc308ffef5b93e096af73c` |
+| `2026-07-29-c611-q13-tangent-triples.json` | 11,776 | `8113512a8411aa4253abe109a98569c92aefc1cdfcb8a972ae013e5ad62102ee` |
 
 ## Disposition
 
@@ -235,7 +301,7 @@ does not supply a uniform conic-code distance theorem.
 |---|---|
 | Paper I v1 | closed; no change and no release delay |
 | Paper I human core v2 | candidate one-field proposition only if the five-row cyclic lemma fits the eventual v2 narrative |
-| computational companion v2 | natural immediate owner for the exact \(d=12\) theorem; it replaces the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
+| computational companion v2 | natural immediate owner for the exact \(d=12\), four-orbit minimum-word classification, and join-reconstruction theorem; these replace the \(q=13,k=8\) support exclusion, but not the stronger maximum-six claim or \((7,13)\) |
 | Papers II and III | no logical ownership |
 | C611 | \(q=13\) binary gate closed; \(q=17,19\) coherent/rational mechanisms remain |
 
@@ -261,6 +327,14 @@ second structural surprise: its full projective stabilizer is \(D_{24}\),
 and its secant relation is the cyclic difference set
 \(\{\pm4,\pm5\}\).
 
+The `ej2` pass classified the entire minimum layer rather than assuming
+the witness orbit was unique.  That assumption fails productively: there
+are four orbits, one \(S_4\) and three \(D_{24}\), totaling \(364\)
+minimum words.  Their pair-concurrence spectrum then yields a genuinely
+intrinsic upgrade: minimum supports alone recover the passant/secant join
+type.  The only information loss visible at this level is that two secant
+orbitals share concurrence six.
+
 The `tt` pass asked whether the cyclic table concealed a uniform theorem.
 The answer is not yet justified.  The order-\(14\) torus and unique closure
 are structural, but the six difference sets still use \(q=13\) arithmetic.
@@ -276,12 +350,14 @@ rational dual certificates.
 | weight-eight nullword at \(q=13\) | settled negatively | none |
 | local clique number five | settled with unique closure | six difference sets and five representatives are the exact proof boundary |
 | actual code distance | settled exactly | \(d(\ker M)=12\); both weight-ten profiles fail and a dihedral weight-twelve word exists |
-| classification of minimum words | open beyond the task-owned witness | determine whether every weight-twelve word lies in the projective orbit of the \(D_{24}\) support |
+| classification of minimum words | settled | \(364\) words in four size-\(91\) orbits: one \(S_4\), three \(D_{24}\) |
+| geometry from minimum words | passant/secant type settled | pair concurrence is \(7,9,12\) exactly for passant joins and \(6,8\) for secant joins |
+| full elliptic scheme from minimum words | not settled | separate the two secant orbitals which both have pair concurrence six, perhaps by triple concurrence |
 | uniform source of unique closure | unexplained | derive the local graph from a general torus/two-graph identity rather than \(q=13\) substitution |
 | \((7,13)\) unsaturated terminal case | untouched | its tangent polynomial has one additional factor at each vertex |
 | \(q=17,19\) terminal exclusions | untouched by this certificate | C611 coherent-configuration or rational-dual step |
 
-Vibe check: the pass overdelivered—the gate is closed and the exact code
-distance is now known with a structured minimum word.  The limitation is
-still honest: this is a sharp one-field theorem, not yet the uniform
-exterior-set explanation C611 ultimately wants.
+Vibe check: `ej2` found a second theorem, not just a refinement—the minimum
+layer reconstructs the geometric join type.  The limitation is still
+honest: this is a sharp one-field theorem, not yet the uniform exterior-set
+explanation C611 ultimately wants.
